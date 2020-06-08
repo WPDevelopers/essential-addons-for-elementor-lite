@@ -5,6 +5,7 @@ namespace Essential_Addons_Elementor\Elements;
 use Elementor\Controls_Manager;
 use Elementor\Core\Schemes\Color;
 use Elementor\Plugin;
+use Elementor\Repeater;
 use Elementor\Widget_Base;
 use Essential_Addons_Elementor\Classes\Login_Registration;
 
@@ -52,9 +53,7 @@ class Login_Register extends Widget_Base {
 
 	/**
 	 * Login_Register constructor.
-	 *
 	 * Initializing the Login_Register widget class.
-	 *
 	 * @inheritDoc
 	 */
 	public function __construct( $data = [], $args = null ) {
@@ -116,13 +115,36 @@ class Login_Register extends Widget_Base {
 	}
 
 	/**
+	 * Get an array of form field types.
+	 * @return array
+	 */
+	protected function get_form_field_types() {
+
+		return apply_filters( 'eael/registration-form-fields', [
+			'user_name'    => __( 'Username', EAEL_TEXTDOMAIN ),
+			'email'        => __( 'Email', EAEL_TEXTDOMAIN ),
+			'password'     => __( 'Password', EAEL_TEXTDOMAIN ),
+			'confirm_pass' => __( 'Confirm Password', EAEL_TEXTDOMAIN ),
+			'first_name'   => __( 'First Name', EAEL_TEXTDOMAIN ),
+			'last_name'    => __( 'Last Name', EAEL_TEXTDOMAIN ),
+			'website'      => __( 'Website', EAEL_TEXTDOMAIN ),
+		] );
+
+
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	protected function _register_controls() {
 		/*----Content Tab----*/
 		$this->init_content_general_controls();
+		// Login Form Related---
 		$this->init_content_login_fields_controls();
 		$this->init_content_login_options_controls();
+		// Registration For Related---
+		$this->init_content_register_fields_controls();
+		$this->init_content_register_options_controls();
 
 
 		/*----Style Tab----*/
@@ -149,13 +171,22 @@ class Login_Register extends Widget_Base {
 			'default'     => 'login',
 		] );
 
+		$this->add_control( 'hide_for_logged_in_user', [
+			'label'        => __( 'Hide Form from Logged in Users', EAEL_TEXTDOMAIN ),
+			'description'  => __( 'You can hide the form for already logged in user.', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', EAEL_TEXTDOMAIN ),
+			'label_off'    => __( 'No', EAEL_TEXTDOMAIN ),
+			'return_value' => 'yes',
+		] );
+
 		$this->add_control( 'show_login_button', [
 			'label'     => __( 'Login Button', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::SWITCHER,
 			'default'   => 'yes',
 			'label_off' => __( 'Hide', EAEL_TEXTDOMAIN ),
 			'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
-			'condition'       => [
+			'condition' => [
 				'default_form_type' => 'registration',
 			],
 		] );
@@ -181,7 +212,7 @@ class Login_Register extends Widget_Base {
 				'default'   => 'yes',
 				'label_off' => __( 'Hide', EAEL_TEXTDOMAIN ),
 				'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
-				'condition'       => [
+				'condition' => [
 					'default_form_type' => 'login',
 				],
 			] );
@@ -195,7 +226,7 @@ class Login_Register extends Widget_Base {
 				'default'   => __( 'Register', EAEL_TEXTDOMAIN ),
 				'condition' => [
 					'show_registration_button' => 'yes',
-					'default_form_type' => 'login',
+					'default_form_type'        => 'login',
 				],
 			] );
 
@@ -209,55 +240,115 @@ class Login_Register extends Widget_Base {
 				'default'   => 'default',
 				'condition' => [
 					'show_registration_button' => 'yes',
-					'default_form_type' => 'login',
+					'default_form_type'        => 'login',
 				],
 			] );
 		}
 
+
+		$this->add_control( 'show_log_out_message', [
+			'label'       => __( 'Show Logout Link', EAEL_TEXTDOMAIN ),
+			'description' => __( 'This option will show a message with logout link instead of a login form for the logged in user', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::SWITCHER,
+			'default'     => 'yes',
+			'label_off'   => __( 'Hide', EAEL_TEXTDOMAIN ),
+			'label_on'    => __( 'Show', EAEL_TEXTDOMAIN ),
+			'condition'   => [
+				'default_form_type' => 'login',
+			],
+		] );
+
+
+		$this->add_control( 'show_lost_password', [
+			'label'     => __( 'Show Lost your password?', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SWITCHER,
+			'default'   => 'yes',
+			'label_off' => __( 'No', EAEL_TEXTDOMAIN ),
+			'label_on'  => __( 'Yes', EAEL_TEXTDOMAIN ),
+		] );
+
+
+		$this->add_control( 'show_lost_password_text', [
+			'label'     => __( 'Lost Password Text', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::TEXT,
+			'dynamic'   => [
+				'active' => true,
+			],
+			'default'   => __( 'Lost your password?', EAEL_TEXTDOMAIN ),
+			'condition' => [
+				'show_lost_password' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'lost_password_link_type', [
+			'label'     => __( 'Lost Password Link to', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SELECT,
+			'options'   => [
+				'default' => __( 'Default WordPress Page', EAEL_TEXTDOMAIN ),
+				'custom'  => __( 'Custom URL', EAEL_TEXTDOMAIN ),
+			],
+			'default'   => 'default',
+			'condition' => [
+				'show_lost_password' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'lost_password_url', [
+			'label'     => __( 'Enter URL', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::URL,
+			'dynamic'   => [
+				'active' => true,
+			],
+			'condition' => [
+				'lost_password_link_type' => 'custom',
+				'show_lost_password'      => 'yes',
+			],
+		] );
+
 		$this->add_control( 'footer_divider', [
-			'label'      => __( 'Divider', EAEL_TEXTDOMAIN ),
+			'label'      => __( 'Link Divider', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::TEXT,
 			'default'    => '|',
 			'selectors'  => [
 				'{{WRAPPER}} .eael-login-form-footer a.eael-login-form-footer-link:not(:last-child) span:after' => 'content: "{{VALUE}}"; margin: 0 0.4em;',
 			],
-			'separator'  => 'after',
+			'separator'  => 'before',
 			'conditions' => [
-				'relation' => 'and',
-				'terms'    => [
+				'terms' => [
 					[
 						'name'     => 'show_lost_password',
-						'operator' => '==',
 						'value'    => 'yes',
-                        'relation' => 'or',
-                        'terms' => [
-	                        [
-		                        'name'     => 'show_login_button',
-		                        'operator' => '==',
-		                        'value'    => 'yes',
-	                        ],
-	                        [
-		                        'name'     => 'show_registration_button',
-		                        'operator' => '==',
-		                        'value'    => 'yes',
-	                        ],
-                        ]
+						'relation' => 'or',
+						'terms'    => [
+							[
+								'name'  => 'show_login_button',
+								'value' => 'yes',
+								'terms' => [
+									[
+										'name'  => 'default_form_type',
+										'value' => 'registration',
+									],
+								],
+							],
+							[
+								'name'  => 'show_registration_button',
+								'value' => 'yes',
+								'terms' => [
+									[
+										'name'  => 'default_form_type',
+										'value' => 'login',
+									],
+								],
+							],
+						],
 					],
 
 				],
 			],
 		] );
 
-		$this->add_control( 'show_logged_in_message', [
-			'label'     => __( 'Logged in Message', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::SWITCHER,
-			'default'   => 'yes',
-			'label_off' => __( 'Hide', EAEL_TEXTDOMAIN ),
-			'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
-		] );
-
 		$this->add_responsive_control( 'footer_text_align', [
-			'label'      => __( 'Alignment', EAEL_TEXTDOMAIN ),
+			'label'      => __( 'Link Alignment', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::CHOOSE,
 			'options'    => [
 				'flex-start' => [
@@ -280,23 +371,12 @@ class Login_Register extends Widget_Base {
 			],
 			'conditions' => [
 				'relation' => 'or',
-				'terms'    => [
-					[
-						'name'     => 'show_lost_password',
-						'operator' => '==',
-						'value'    => 'yes',
-					],
-					[
-						'name'     => 'show_registration_button',
-						'operator' => '==',
-						'value'    => 'yes',
-					],
-				],
+				'terms'    => $this->get_login_footer_controls_display_condition(),
 			],
 		] );
 
 		$this->add_control( 'footer_text_color', [
-			'label'      => __( 'Text Color', EAEL_TEXTDOMAIN ),
+			'label'      => __( 'Link Text Color', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::COLOR,
 			'scheme'     => [
 				'type'  => Color::get_type(),
@@ -307,67 +387,9 @@ class Login_Register extends Widget_Base {
 			],
 			'conditions' => [
 				'relation' => 'or',
-				'terms'    => [
-					[
-						'name'     => 'show_lost_password',
-						'operator' => '==',
-						'value'    => 'yes',
-					],
-					[
-						'name'     => 'show_registration_button',
-						'operator' => '==',
-						'value'    => 'yes',
-					],
-				],
+				'terms'    => $this->get_login_footer_controls_display_condition(),
 			],
 		] );
-
-		$this->add_control( 'show_lost_password', [
-			'label'     => __( 'Lost your password?', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::SWITCHER,
-			'default'   => 'yes',
-			'label_off' => __( 'Hide', EAEL_TEXTDOMAIN ),
-			'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
-		] );
-
-
-		$this->add_control( 'show_lost_password_text', [
-			'label'     => __( 'Text', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::TEXT,
-			'dynamic'   => [
-				'active' => true,
-			],
-			'default'   => __( 'Lost your password?', EAEL_TEXTDOMAIN ),
-			'condition' => [
-				'show_lost_password' => 'yes',
-			],
-		] );
-
-		$this->add_control( 'lost_password_select', [
-			'label'     => __( 'Link to', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::SELECT,
-			'options'   => [
-				'default' => __( 'Default WordPress Page', EAEL_TEXTDOMAIN ),
-				'custom'  => __( 'Custom URL', EAEL_TEXTDOMAIN ),
-			],
-			'default'   => 'default',
-			'condition' => [
-				'show_lost_password' => 'yes',
-			],
-		] );
-
-		$this->add_control( 'lost_password_url', [
-			'label'     => __( 'Enter URL', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::URL,
-			'dynamic'   => [
-				'active' => true,
-			],
-			'condition' => [
-				'lost_password_select' => 'custom',
-				'show_lost_password'   => 'yes',
-			],
-		] );
-
 
 
 		$this->end_controls_section();
@@ -378,10 +400,8 @@ class Login_Register extends Widget_Base {
 	 */
 	protected function init_content_login_fields_controls() {
 		$this->start_controls_section( 'section_content_login_fields', [
-			'label'     => __( 'Login Form Fields', EAEL_TEXTDOMAIN ),
-			'condition' => [
-				'default_form_type' => 'login',
-			],
+			'label'      => __( 'Login Form Fields', EAEL_TEXTDOMAIN ),
+			'conditions' => $this->get_login_controls_display_condition(),
 		] );
 
 		$this->add_control( 'login_label_types', [
@@ -556,10 +576,8 @@ class Login_Register extends Widget_Base {
 	protected function init_content_login_options_controls() {
 
 		$this->start_controls_section( 'section_content_login_actions', [
-			'label'     => __( 'Login Form Actions', EAEL_TEXTDOMAIN ),
-			'condition' => [
-				'default_form_type' => 'login',
-			],
+			'label'      => __( 'Login Form Actions', EAEL_TEXTDOMAIN ),
+			'conditions' => $this->get_login_controls_display_condition(),
 		] );
 
 		$this->add_control( 'redirect_after_login', [
@@ -605,12 +623,221 @@ class Login_Register extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	protected function init_content_register_fields_controls() {
+
+		$this->start_controls_section( 'section_content_register_fields', [
+			'label'      => __( 'Register Form Fields', EAEL_TEXTDOMAIN ),
+			'conditions' => $this->get_register_controls_display_condition(),
+		] );
+		$this->add_control( 'register_form_field_note', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( 'Select the type of fields you want to show in the registration form', EAEL_TEXTDOMAIN ),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+		] );
+		$repeater = new Repeater();
+
+		$repeater->add_control( 'field_type', [
+			'label'   => __( 'Type', EAEL_TEXTDOMAIN ),
+			'type'    => Controls_Manager::SELECT,
+			'options' => $this->get_form_field_types(),
+			'default' => 'first_name',
+		] );
+
+		$repeater->add_control( 'field_label', [
+			'label'   => __( 'Label', EAEL_TEXTDOMAIN ),
+			'type'    => Controls_Manager::TEXT,
+			'default' => '',
+			'dynamic' => [
+				'active' => true,
+			],
+		] );
+
+		$repeater->add_control( 'placeholder', [
+			'label'   => __( 'Placeholder', EAEL_TEXTDOMAIN ),
+			'type'    => Controls_Manager::TEXT,
+			'default' => '',
+			'dynamic' => [
+				'active' => true,
+			],
+		] );
+
+		$repeater->add_control( 'required', [
+			'label'        => __( 'Required', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::SWITCHER,
+			'return_value' => 'yes',
+			'default'      => '',
+			'condition'    => [
+				'field_type!' => [
+					'email',
+					'password',
+				],
+			],
+		] );
+
+		$repeater->add_control( 'required_note', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( 'Note: This field is required by default.', EAEL_TEXTDOMAIN ),
+			'condition'       => [
+				'field_type' => [
+					'email',
+					'password',
+				],
+			],
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+		] );
+
+		$repeater->add_responsive_control( 'width', [
+			'label'   => __( 'Field Width', EAEL_TEXTDOMAIN ),
+			'type'    => Controls_Manager::SELECT,
+			'options' => [
+				''    => __( 'Default', EAEL_TEXTDOMAIN ),
+				'100' => '100%',
+				'80'  => '80%',
+				'75'  => '75%',
+				'66'  => '66%',
+				'60'  => '60%',
+				'50'  => '50%',
+				'40'  => '40%',
+				'33'  => '33%',
+				'25'  => '25%',
+				'20'  => '20%',
+			],
+			'default' => '100',
+		] );
+
+		$this->add_control( 'register_fields', [
+			'type'        => Controls_Manager::REPEATER,
+			'fields'      => array_values( $repeater->get_controls() ),
+			'default'     => [
+				[
+					'field_type'  => 'user_name',
+					'field_label' => __( 'Username', EAEL_TEXTDOMAIN ),
+					'placeholder' => __( 'Username', EAEL_TEXTDOMAIN ),
+					'width'       => '100',
+				],
+				[
+					'field_type'  => 'email',
+					'field_label' => __( 'Email', EAEL_TEXTDOMAIN ),
+					'placeholder' => __( 'Email', EAEL_TEXTDOMAIN ),
+					'required'    => 'yes',
+					'width'       => '100',
+				],
+				[
+					'field_type'  => 'password',
+					'field_label' => __( 'Password', EAEL_TEXTDOMAIN ),
+					'placeholder' => __( 'Password', EAEL_TEXTDOMAIN ),
+					'required'    => 'yes',
+					'width'       => '100',
+				],
+			],
+			'title_field' => '{{{ field_label }}}',
+		] );
+
+
+		$this->end_controls_section();
+	}
+
+	protected function init_content_register_options_controls() {
+
+		$this->start_controls_section( 'section_content_register_actions', [
+			'label'      => __( 'Register Form Actions', EAEL_TEXTDOMAIN ),
+			'conditions' => $this->get_register_controls_display_condition(),
+		] );
+
+		$this->add_control( 'redirect_after_register', [
+			'label'     => __( 'Redirect After Register', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SWITCHER,
+			'default'   => '',
+			'label_off' => __( 'No', EAEL_TEXTDOMAIN ),
+			'label_on'  => __( 'Yes', EAEL_TEXTDOMAIN ),
+		] );
+
+		$this->add_control( 'register_redirect_url', [
+			'type'          => Controls_Manager::URL,
+			'show_label'    => false,
+			'show_external' => false,
+			'placeholder'   => __( 'https://your-link.com', EAEL_TEXTDOMAIN ),
+			'description'   => __( 'Please note that only your current domain is allowed here to keep your site secure.', EAEL_TEXTDOMAIN ),
+			'condition'     => [
+				'redirect_after_register' => 'yes',
+			],
+		] );
+
+
+		$this->end_controls_section();
+	}
+
+	/**
+	 * Get conditions for displaying login form related controls
+	 * @return array
+	 */
+	protected function get_login_controls_display_condition() {
+		return [
+			'relation' => 'or',
+			'terms'    => [
+				[
+					'name'  => 'show_login_button',
+					'value' => 'yes',
+				],
+				[
+					'name'  => 'default_form_type',
+					'value' => 'login',
+				],
+			],
+		];
+	}
+
+	/**
+	 * Get conditions for displaying login form footer related controls
+	 * @return array
+	 */
+	protected function get_login_footer_controls_display_condition() {
+		return [
+			[
+				'name'     => 'show_lost_password',
+				'operator' => '==',
+				'value'    => 'yes',
+			],
+			[
+				'name'     => 'show_registration_button',
+				'operator' => '==',
+				'value'    => 'yes',
+			],
+			[
+				'name'     => 'show_login_button',
+				'operator' => '==',
+				'value'    => 'yes',
+			],
+		];
+	}
+
+	/**
+	 * Get conditions for displaying registration form related controls
+	 * @return array
+	 */
+	protected function get_register_controls_display_condition() {
+		return [
+			'relation' => 'or',
+			'terms'    => [
+				[
+					'name'  => 'show_registration_button',
+					'value' => 'yes',
+				],
+				[
+					'name'  => 'default_form_type',
+					'value' => 'registration',
+				],
+			],
+		];
+	}
 
 	protected function render() {
 		//Note. forms are handled in Login_Registration Trait used in the Bootstrap class.
-		$settings                         = $this->get_settings_for_display();
-		$this->should_print_login_form    = ( ! empty( $settings['default_form_type'] ) && 'login' === $settings['default_form_type'] );
-		$this->should_print_register_form = ( $this->user_can_register && ( ! empty( $settings['default_form_type'] ) && 'registration' === $settings['default_form_type'] ) );
+		$settings = $this->get_settings_for_display();
+
+		$this->should_print_login_form = ( 'login' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_login_button' ) );
+
+		$this->should_print_register_form = ( $this->user_can_register && ( 'registration' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_registration_button' ) ) );
 
 		?>
         <div class="eael-login-registration-wrapper">
@@ -619,7 +846,6 @@ class Login_Register extends Widget_Base {
 			$this->print_register_form();
 			?>
         </div>
-
 		<?php
 	}
 
@@ -627,8 +853,8 @@ class Login_Register extends Widget_Base {
 		if ( $this->should_print_login_form ) {
 			$this->check_login_validation_errors();
 			?>
-            <div class="login ">
-                <form name="loginform" id="loginform" method="post">
+            <div class="eaal-login-form-wrapper ">
+                <form name="eael-loginform" id="eael-loginform" method="post">
 					<?php
 					// add login security nonce
 					wp_nonce_field( 'eael-login-action', 'eael-login-nonce' );
@@ -679,26 +905,26 @@ class Login_Register extends Widget_Base {
 
 	protected function print_register_form() {
 		if ( $this->should_print_register_form ) { ?>
-            <div class="register">
-                <form name="registerform" id="registerform" method="post" novalidate="novalidate">
+            <div class="eael-register-form-wrapper">
+                <form name="eael-registerform" id="eael-registerform" method="post">
 					<?php
 					// add security nonce
 					wp_nonce_field( 'eael-register-action', 'eael-register-nonce' );
 					?>
                     <p>
                         <label for="user_login">Username</label>
-                        <input type="text" name="user_login" id="user_login" class="input" value="" size="20" autocapitalize="off">
+                        <input type="text" name="user_login" id="user_login" class="input" value="" size="20" autocapitalize="off" required>
                     </p>
                     <p>
                         <label for="user_email">Email</label>
-                        <input type="email" name="user_email" id="user_email" class="input" value="" size="25">
+                        <input type="email" name="user_email" id="user_email" class="input" value="" size="25" required>
                     </p>
                     <p id="reg_passmail">
                         Registration confirmation will be emailed to you. </p>
                     <br class="clear">
                     <input type="hidden" name="redirect_to" value="">
                     <p class="submit">
-                        <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="Register">
+                        <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="Register" required>
                     </p>
                 </form>
             </div>
