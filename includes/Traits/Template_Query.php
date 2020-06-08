@@ -83,7 +83,9 @@ trait Template_Query
 
                     $template_name = $this->get_meta_data($path, $this->template_headers);
 
-                    $files[str_replace('.php', '', $handler)] = $template_name;
+                    if($template_name) {
+                        $files[str_replace('.php', '', $handler)] = $template_name;
+                    }
                 }
             }
 
@@ -100,11 +102,11 @@ trait Template_Query
     private function theme_templates()
     {
         $current_theme = wp_get_theme();
-
+        
         $dir = sprintf(
             '%s/%s/Template/%s',
             $current_theme->theme_root,
-            $current_theme->template,
+            $current_theme->stylesheet,
             $this->process_directory_name()
         );
 
