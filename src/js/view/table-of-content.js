@@ -224,7 +224,7 @@
 
             var contentSelectro = '.site-content';
             if ($(".site-content")[0]) {
-                contentSelectro = ".elementor-inner";
+                contentSelectro = ".site-content";
             } else if ($(".elementor-inner")[0]) {
                 contentSelectro = ".elementor-inner";
             } else if ($("#site-content")[0]) {
