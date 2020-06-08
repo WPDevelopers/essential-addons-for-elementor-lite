@@ -24,7 +24,7 @@ trait Login_Registration {
 	/**
 	 * It logs the user in when the login form is submitted normally without AJAX.
 	 */
-	protected function log_user_in() {
+	public function log_user_in() {
 		// before even thinking about login, check security and exit early if something is not right.
 		if ( empty( $_POST['eael-login-nonce'] ) ) {
 			return;
@@ -37,7 +37,7 @@ trait Login_Registration {
 		if ( ! session_id() && ! headers_sent() ) {
 			session_start();
 		}
-		do_action( 'eael/login-register/before-login');
+		do_action( 'eael/login-register/before-login' );
 
 		$user_login = ! empty( $_POST['eael-user-login'] ) ? sanitize_text_field( $_POST['eael-user-login'] ) : '';
 		if ( false !== strpos( '@', $user_login ) ) {
@@ -75,7 +75,7 @@ trait Login_Registration {
 			do_action( 'wp_login', $user_data->user_login, $user_data );
 			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data );
 
-			if ( !empty(  $_POST['redirect_to'] ) ) {
+			if ( ! empty( $_POST['redirect_to'] ) ) {
 				wp_safe_redirect( $_POST['redirect_to'] );
 				exit();
 			}
@@ -85,7 +85,21 @@ trait Login_Registration {
 	/**
 	 * It register the user in when the registration form is submitted normally without AJAX.
 	 */
-	protected function register_user() {
+	public function register_user() {
 		// perform registration....
+	}
+
+	public function get_user_roles() {
+		$wp_roles              = get_editable_roles();
+		$roles                 = $wp_roles ? $wp_roles : [];
+		$user_roles            = [];
+		$user_roles['default'] = __( 'Default', EAEL_TEXTDOMAIN );
+		if ( ! empty( $roles ) && is_array( $roles ) ) {
+			foreach ( $wp_roles as $role_key => $role ) {
+				$user_roles[ $role_key ] = $role['name'];
+			}
+		}
+
+		return apply_filters( 'eael/login-register/new-user-roles', $user_roles );
 	}
 }
