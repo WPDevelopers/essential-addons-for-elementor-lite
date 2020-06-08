@@ -120,15 +120,13 @@ class Betterdocs_Category_Grid extends Widget_Base
                 ]
             );
 
-            $templates = $this->template_list();
-
             $this->add_control(
                 'layout_template',
                 [
                     'label' => __('Select Layout', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT2,
-                    'options'   => $templates,
-                    // 'default' => array_pop(array_reverse(array_keys($templates))),
+                    'options'   => $this->template_list(),
+                    'default' => $this->get_default(),
                     'label_block' => true
                 ]
             );
@@ -833,10 +831,6 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'condition' => [
                         'show_button_icon'  => 'true'
                     ]
-                    // 'default'   => [
-                    //     'value' => 'fas fa-angle-right',
-
-                    // ]
                 ]
             );
 
