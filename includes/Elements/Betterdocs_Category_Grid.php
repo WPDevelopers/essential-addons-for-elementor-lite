@@ -17,6 +17,7 @@ class Betterdocs_Category_Grid extends Widget_Base
 {
 
     use \Essential_Addons_Elementor\Traits\Helper;
+    use \Essential_Addons_Elementor\Traits\Template_Query;
 
     public function get_name()
     {
@@ -119,16 +120,16 @@ class Betterdocs_Category_Grid extends Widget_Base
                 ]
             );
 
+            $templates = $this->template_list();
+
             $this->add_control(
                 'layout_template',
                 [
                     'label' => __('Select Layout', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT2,
-                    'options' => [
-                        'Category_Grid_Layout_Default' => __('Default', 'essential-addons-for-elementor-lite'),
-                    ],
-                    'default' => 'Category_Grid_Layout_Default',
-                    'label_block' => true,
+                    'options'   => $templates,
+                    // 'default' => array_pop(array_reverse(array_keys($templates))),
+                    'label_block' => true
                 ]
             );
 
@@ -812,6 +813,49 @@ class Betterdocs_Category_Grid extends Widget_Base
                 ]
             );
 
+            $this->add_control(
+                'show_button_icon',
+                [
+                    'label' => __('Show Icon', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                    'return_value' => 'true',
+                    'default' => ''
+                ]
+            );
+
+            $this->add_control(
+                'button_icon',
+                [
+                    'label' => __( 'Icon', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::ICONS,
+                    'condition' => [
+                        'show_button_icon'  => 'true'
+                    ]
+                    // 'default'   => [
+                    //     'value' => 'fas fa-angle-right',
+
+                    // ]
+                ]
+            );
+
+            $this->add_control(
+                'icon_position',
+                [
+                    'label' => __('Icon Position', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'default' => 'after',
+                    'options' => [
+                        'before' => __( 'Before', 'essential-addons-for-elementor-lite' ),
+                        'after' => __( 'After', 'essential-addons-for-elementor-lite' )
+                    ],
+                    'condition' => [
+                        'show_button_icon'  => 'true'
+                    ]
+                ]
+            );
+
             $this->start_controls_tabs('button_settings_tabs');
 
             // Normal State Tab
@@ -998,11 +1042,53 @@ class Betterdocs_Category_Grid extends Widget_Base
             ]
         );
 
-        $file = sprintf('%sincludes/Template/BetterDocs/Category_Grid/%s.php', EAEL_PLUGIN_PATH, $settings['layout_template']);
+
+        $terms_object = array(
+            'parent' => 0,
+            'taxonomy' => 'doc_category',
+            'order' => $settings['order'],
+            'orderby' => $settings['orderby'],
+            'offset'    => $settings['offset'],
+            'number'    => $settings['grid_per_page']
+        );
+
+        if ( $settings['include'] ) {
+            unset($terms_object['parent']);
+            $terms_object['include'] = array_diff($settings['include'], $settings['exclude']);
+            $terms_object['orderby'] = 'include';
+        }
+
+        if($settings['exclude']) {
+            unset($terms_object['parent']);
+            $terms_object['exclude'] =  $settings['exclude'];
+            $terms_object['orderby'] = 'exclude';
+        }
+
+        $taxonomy_objects = get_terms($terms_object);
+
 
         $html = '<div ' . $this->get_render_attribute_string('bd_category_grid_wrapper') . '>';
             $html .= '<div '.$this->get_render_attribute_string('bd_category_grid_inner').'>';
-            $html .= include($file);
+
+            
+
+            if(file_exists($this->get_template($settings['layout_template']))) {
+
+                if($taxonomy_objects && ! is_wp_error( $taxonomy_objects )) {
+                    foreach($taxonomy_objects as $term) {
+                        ob_start();
+                            include($this->get_template($settings['layout_template']));
+                        $html .= ob_get_clean(); 
+                    }
+                }else {
+                    _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                }
+
+                wp_reset_postdata();
+
+            }else {
+                $html .= '<h4>'.__( 'File Not Found', 'essential-addons-for-elementor-lite' ).'</h4>';
+            }
             $html .= '</div>';
             $html .= '<div class="clearfix"></div>';
 
@@ -1012,6 +1098,7 @@ class Betterdocs_Category_Grid extends Widget_Base
         $html .= '</div>';
 
         echo $html;
+    
     }
 
     protected function render_editor_script()
