@@ -16,14 +16,10 @@
             var allSupportTag = [];
             var mainSelector = document.querySelectorAll(selector),
                 listIndex = 0;
-            var a = [];
             for (var j = 0; j < mainSelector.length; j++) {
-                var featchTag = mainSelector[j].querySelectorAll(supportTag);
-                allSupportTag = [...allSupportTag,...featchTag];
-                allSupportTag = Array.from(new Set([...allSupportTag]));
+                allSupportTag = [...allSupportTag,...(mainSelector[j].querySelectorAll(supportTag))];
             }
-
-            allSupportTag = Array.prototype.slice.call(allSupportTag);
+            allSupportTag = Array.from(new Set(allSupportTag));
 
             allSupportTag.forEach(function (el) {
                 if (eaelTocExclude(excludeArr, el)) {
@@ -52,13 +48,12 @@
 		 */
         function eael_list_hierarchy(selector, supportTag, allSupportTagList) {
             var tagList = supportTag;
-            var parentLevel = '';
             var allHeadings = allSupportTagList;
             var eaelToc = document.getElementById("eael-toc");
             var titleUrl = typeof (eaelToc.dataset.titleurl) !== 'undefined' ? eaelToc.dataset.titleurl : 'false';
             var listId = document.getElementById("eael-toc-list");
             var excludeArr = typeof (eaelToc.dataset.excludeselector) !== 'undefined' ? eaelToc.dataset.excludeselector.replace(/^,|,$/g, '') : '';
-            var mainContent = '',
+            var parentLevel = '',
                 baseTag = parentLevel = tagList
                     .trim()
                     .split(",")[0]
@@ -229,7 +224,7 @@
 
             var contentSelectro = '.site-content';
             if ($(".site-content")[0]) {
-                contentSelectro = ".site-content";
+                contentSelectro = ".elementor-inner";
             } else if ($(".elementor-inner")[0]) {
                 contentSelectro = ".elementor-inner";
             } else if ($("#site-content")[0]) {
@@ -282,10 +277,8 @@
 
 
         var intSupportTag = $("#eael-toc").data("eaeltoctag");
-        if (intSupportTag !== "") {
-            if(!isEditMode){
-                eael_toc_content(eael_toc_check_content(), intSupportTag);
-            }
+        if (intSupportTag !== "" && !isEditMode) {
+            eael_toc_content(eael_toc_check_content(), intSupportTag);
         }
 
 
