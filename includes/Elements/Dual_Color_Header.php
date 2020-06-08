@@ -274,7 +274,7 @@ class Dual_Color_Header extends Widget_Base {
                     'library' => 'solid',
                 ],
                 'condition' => [
-                    'eael_section_dch_separator_type' => 'icon',
+                    'eael_dch_separator_type' => 'icon',
                 ],
             ]
         );
@@ -501,16 +501,288 @@ class Dual_Color_Header extends Widget_Base {
 
         $this->end_controls_section();
 
+        /**
+         * -------------------------------------------
+         * Tab Style (Separator)
+         * -------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_section_dch_separator_style_settings',
+            [
+                'label'     => esc_html__( 'Separator', 'essential-addons-for-elementor-lite' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_show_dch_separator' => 'yes',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_section_dch_separator_alignment',
+            [
+                'label'     => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
+                'type'      => \Elementor\Controls_Manager::CHOOSE,
+                'options'   => [
+                    'flex-start' => [
+                        'title' => __( 'Flex Start', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'fa fa-align-left',
+                    ],
+                    'center'     => [
+                        'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'fa fa-align-center',
+                    ],
+                    'flex-end'   => [
+                        'title' => __( 'Flex End', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'fa fa-align-right',
+                    ],
+                ],
+                'default'   => 'center',
+                'toggle'    => true,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-dch-separator-wrap' => 'justify-content: {{VALUE}}',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_section_dch_separator_distance',
+            [
+                'label'      => __( 'Distance Between Them', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range'      => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 1000,
+                        'step' => 5,
+                    ],
+                    '%'  => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-dch-separator-wrap .separator-one' => 'margin-right: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-dch-separator-wrap .separator-two' => 'margin-left: {{SIZE}}{{UNIT}};',
+                ],
+                'condition'  => [
+                    'eael_dch_separator_type' => 'line',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_section_dch_separator_margin',
+            [
+                'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-dch-separator-wrap' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'title_color',
+            [
+                'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'scheme'    => [
+                    'type'  => \Elementor\Scheme_Color::get_type(),
+                    'value' => \Elementor\Scheme_Color::COLOR_1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-dch-separator-wrap i' => 'color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_dch_separator_type' => 'icon',
+                ],
+            ]
+        );
+
+        // line left & right Tabs
+        $this->start_controls_tabs(
+            'eael_dch_separator_tabs',
+            [
+                'condition' => [
+                    'eael_dch_separator_type' => 'line',
+                ],
+            ]
+        );
+
+        $this->start_controls_tab(
+            'eael_dch_separator_left_tab',
+            [
+                'label' => __( 'Left Line', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
+
+        // line left style
+        $this->add_control(
+            'eael_dch_separator_left_width',
+            [
+                'label'      => __( 'Width', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range'      => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 1000,
+                        'step' => 5,
+                    ],
+                    '%'  => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default'    => [
+                    'unit' => '%',
+                    'size' => 15,
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-dch-separator-wrap .separator-one' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_dch_separator_left_height',
+            [
+                'label'      => __( 'Height', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range'      => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 1000,
+                        'step' => 5,
+                    ],
+                    '%'  => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default'    => [
+                    'unit' => 'px',
+                    'size' => 5,
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-dch-separator-wrap .separator-one' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_dch_separator_left_radius',
+            [
+                'label'      => __( 'Radius', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-dch-separator-wrap .separator-one' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name'     => 'eael_dch_separator_left_bg',
+                'label'    => __( 'Background', 'essential-addons-for-elementor-lite' ),
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .eael-dch-separator-wrap .separator-one',
+            ]
+        );
+        $this->end_controls_tab();
+        // line right style
+        $this->start_controls_tab(
+            'eael_dch_separator_right_tab',
+            [
+                'label' => __( 'Right Line', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
+        $this->add_control(
+            'eael_dch_separator_right_width',
+            [
+                'label'      => __( 'Width', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range'      => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 1000,
+                        'step' => 5,
+                    ],
+                    '%'  => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default'    => [
+                    'unit' => '%',
+                    'size' => 15,
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-dch-separator-wrap .separator-two' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_dch_separator_right_height',
+            [
+                'label'      => __( 'Height', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range'      => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 1000,
+                        'step' => 5,
+                    ],
+                    '%'  => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default'    => [
+                    'unit' => 'px',
+                    'size' => 5,
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-dch-separator-wrap .separator-two' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_dch_separator_right_radius',
+            [
+                'label'      => __( 'Radius', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-dch-separator-wrap .separator-two' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name'     => 'eael_dch_separator_right_bg',
+                'label'    => __( 'Background', 'essential-addons-for-elementor-lite' ),
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .eael-dch-separator-wrap .separator-two',
+            ]
+        );
+
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
+
+        $this->end_controls_section();
+
     }
 
     protected function render() {
         $settings = $this->get_settings_for_display();
         $icon_migrated = isset( $settings['__fa4_migrated']['eael_dch_icon_new'] );
         $icon_is_new = empty( $settings['eael_dch_icon'] );
-
+        // separator
         $separator_markup = '<div class="eael-dch-separator-wrap">';
         if ( $settings['eael_dch_separator_type'] == 'icon' ) {
-            $separator_markup .= '<i class=' . esc_attr( $settings['eael_dch_separator_icon'] ) . '></i>';
+            $separator_markup .= '<i class="' . esc_attr( $settings['eael_dch_separator_icon']['value'] ) . '"></i>';
         } else {
             $separator_markup .= '<span class="separator-one"></span>
 			<span class="separator-two"></span>';
