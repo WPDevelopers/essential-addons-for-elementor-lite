@@ -122,4 +122,12 @@ trait Template_Query
     {
         return sprintf('%s/%s.php', $this->get_template_dir(), $filename);
     }
+
+    public function get_default()
+    {
+        $dt = array_keys($this->template_list());
+        $dt = array_reverse($dt);
+        return array_pop($dt);
+    }
+
 }
