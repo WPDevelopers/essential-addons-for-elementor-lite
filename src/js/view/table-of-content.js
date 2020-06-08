@@ -16,10 +16,11 @@
             var allSupportTag = [];
             var mainSelector = document.querySelectorAll(selector),
                 listIndex = 0;
-
+            var a = [];
             for (var j = 0; j < mainSelector.length; j++) {
                 var featchTag = mainSelector[j].querySelectorAll(supportTag);
-                Array.prototype.push.apply(allSupportTag, featchTag);
+                allSupportTag = [...allSupportTag,...featchTag];
+                allSupportTag = Array.from(new Set([...allSupportTag]));
             }
 
             allSupportTag = Array.prototype.slice.call(allSupportTag);
@@ -33,7 +34,7 @@
                 listIndex++;
             });
             //build toc list hierarchy
-            eael_list_hierarchy(selector, supportTag);
+            eael_list_hierarchy(selector, supportTag, allSupportTag);
 
             var firstChild = $("ul.eael-toc-list > li");
             if (firstChild.length < 1) {
@@ -49,15 +50,15 @@
 		 * @param selector
 		 * @param supportTag
 		 */
-        function eael_list_hierarchy(selector, supportTag) {
+        function eael_list_hierarchy(selector, supportTag, allSupportTagList) {
             var tagList = supportTag;
             var parentLevel = '';
-            var allHeadings = [];
+            var allHeadings = allSupportTagList;
             var eaelToc = document.getElementById("eael-toc");
             var titleUrl = typeof (eaelToc.dataset.titleurl) !== 'undefined' ? eaelToc.dataset.titleurl : 'false';
             var listId = document.getElementById("eael-toc-list");
             var excludeArr = typeof (eaelToc.dataset.excludeselector) !== 'undefined' ? eaelToc.dataset.excludeselector.replace(/^,|,$/g, '') : '';
-            var mainContent = document.querySelectorAll(selector),
+            var mainContent = '',
                 baseTag = parentLevel = tagList
                     .trim()
                     .split(",")[0]
@@ -66,10 +67,7 @@
 
             listId.innerHTML = "";
 
-            for (var j = 0; j < mainContent.length; j++) {
-                var featchTag = mainContent[j].querySelectorAll(tagList);
-                Array.prototype.push.apply(allHeadings, featchTag);
-            }
+
 
             if (allHeadings.length > 0) {
                 document.getElementById("eael-toc").classList.remove("eael-toc-disable");
@@ -285,7 +283,9 @@
 
         var intSupportTag = $("#eael-toc").data("eaeltoctag");
         if (intSupportTag !== "") {
-            eael_toc_content(eael_toc_check_content(), intSupportTag);
+            if(!isEditMode){
+                eael_toc_content(eael_toc_check_content(), intSupportTag);
+            }
         }
 
 
