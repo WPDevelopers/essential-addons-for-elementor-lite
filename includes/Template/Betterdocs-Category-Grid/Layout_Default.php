@@ -24,7 +24,7 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="'.get_the_ID
                     echo '<'.$settings['title_tag'].' class="eael-docs-cat-title">'.$term->name.'</'.$settings['title_tag'].'>';
                 }
                 if($settings['show_count']) {
-                    echo '<div class="eael-docs-item-count"><span>'.self::get_doc_post_count($term->count, $term->term_id).'</span></div>';
+                    echo '<div class="eael-docs-item-count">'.$this->get_doc_post_count($term->count, $term->term_id).'</div>';
                 }
                 echo '</div>';
             echo '</div>';
