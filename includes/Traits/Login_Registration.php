@@ -90,6 +90,7 @@ trait Login_Registration {
 	}
 
 	public function get_user_roles() {
+		if ( !function_exists( 'get_editable_roles') ) return;
 		$wp_roles              = get_editable_roles();
 		$roles                 = $wp_roles ? $wp_roles : [];
 		$user_roles            = [];
