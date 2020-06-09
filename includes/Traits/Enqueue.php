@@ -10,7 +10,6 @@ trait Enqueue
 {
     public function enqueue_scripts()
     {
-
         // Register our styles
         wp_register_style(
             'eael-lib-view',
@@ -164,10 +163,6 @@ trait Enqueue
                     false,
                     EAEL_PLUGIN_VERSION
                 );
-
-                if ($this->get_settings('advanced-data-table')) {
-                    wp_enqueue_script('eael-tinymce');
-                }
 
                 wp_enqueue_script(
                     'eael-cache-edit',

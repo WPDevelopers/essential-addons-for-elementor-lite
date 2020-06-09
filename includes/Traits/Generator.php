@@ -22,6 +22,8 @@ trait Generator
 
         $uid = null;
 
+        // print_r(Plugin::$instance->documents->get(9)->get_elements_data());
+
         if ($wp_query->is_home) {
             $uid = 'home';
         } else if ($wp_query->is_search) {
