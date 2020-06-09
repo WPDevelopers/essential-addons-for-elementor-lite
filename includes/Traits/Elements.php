@@ -309,9 +309,15 @@ trait Elements
             $table_of_content_html = '';
 
             // Custom JS
-            if ($page_settings_model->get_settings('eael_custom_js')) {
-                if ($page_settings_model->get_settings('eael_custom_js_print_method') == 'internal' || ($page_settings_model->get_settings('eael_custom_js_print_method') == 'external' && !$this->has_cache_files($this->request_uid)) || EAEL_DEV_MODE) {
-                    $html .= '<script type="text/javascript">' . $page_settings_model->get_settings('eael_custom_js') . '</script>';
+            if(!empty($this->loaded_templates)) {
+                foreach($this->loaded_templates as $post_id) {
+                    $post_settings_model   = $page_settings_manager->get_model($post_id);
+
+                    if ($post_settings_model->get_settings('eael_custom_js')) {
+                        if ($post_settings_model->get_settings('eael_custom_js_print_method') == 'internal' || ($post_settings_model->get_settings('eael_custom_js_print_method') == 'external' && !$this->has_cache_files($this->request_uid)) || EAEL_DEV_MODE) {
+                            $html .= '<script type="text/javascript">' . $post_settings_model->get_settings('eael_custom_js') . '</script>';
+                        }
+                    }
                 }
             }
 

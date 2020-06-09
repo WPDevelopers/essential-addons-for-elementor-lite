@@ -263,8 +263,7 @@ trait Core
         update_option('eael_global_settings', $global_settings);
 
         // update page elements
-        if ($this->request_uid) {
-            set_transient('eael_transient_elements_' . $this->request_uid, [], MONTH_IN_SECONDS);
-        }
+        $uid = substr(md5('post-' . $post_id), 0, 16);
+        set_transient('eael_transient_elements_' . $uid, [], MONTH_IN_SECONDS);
     }
 }
