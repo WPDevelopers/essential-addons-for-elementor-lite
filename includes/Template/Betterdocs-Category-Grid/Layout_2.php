@@ -5,30 +5,19 @@
  * 
  */
 
-echo '<article class="eael-better-docs-category-grid-post" data-id="'.get_the_ID().'">
+echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="'.get_the_ID().'">
     <div class="eael-bd-cg-inner">';
 
     
         if($settings['show_header'] === 'true') {
-            // $cat_icon_id = get_term_meta( $term->term_id, 'doc_category_image-id', true);
-            // if($cat_icon_id){
-            //     $cat_icon = wp_get_attachment_image( $cat_icon_id, 'thumbnail', [ 'alt' => esc_attr(get_post_meta($cat_icon_id, '_wp_attachment_image_alt', true)) ] );
-            // } else {
-            //     $cat_icon = '<img class="docs-cat-icon" src="'.BETTERDOCS_ADMIN_URL.'assets/img/betterdocs-cat-icon.svg" alt="">';
-            // }
-            // echo '<div class="eael-bd-cg-header">
-            //     <div class="eael-bd-cg-header-inner">';
-            //     if($settings['show_icon']) {
-            //         echo '<div class="eael-docs-cat-icon">'.$cat_icon.'</div>';
-            //     }
-            //     if($settings['show_title']) {
-            //         echo '<'.$settings['title_tag'].' class="eael-docs-cat-title">'.$term->name.'</'.$settings['title_tag'].'>';
-            //     }
-            //     if($settings['show_count']) {
-            //         echo '<div class="eael-docs-item-count"><span>'.self::get_doc_post_count($term->count, $term->term_id).'</span></div>';
-            //     }
-            //     echo '</div>';
-            // echo '</div>';
+            echo '<div class="eael-bd-cg-header">';
+                if($settings['show_count']) {
+                    echo '<div class="eael-docs-item-count" data-content="'.$this->get_doc_post_count($term->count, $term->term_id).'"></div>';
+                }
+                if($settings['show_title']) {
+                    echo '<'.$settings['title_tag'].' class="eael-docs-cat-title">'.$term->name.'</'.$settings['title_tag'].'>';
+                }
+            echo '</div>';
         }
         
         if($settings['show_list'] === 'true') {
@@ -139,7 +128,27 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="'.get_the_ID
         }
 
         if($settings['show_button']) {
-            echo '<a class="eael-bd-cg-button" href="'.get_term_link( $term->slug, 'doc_category' ).'">'.$settings['button_text'].'</a>';
+            echo '<a class="eael-bd-cg-button" href="'.get_term_link( $term->slug, 'doc_category' ).'">';
+
+            if($settings['icon_position'] === 'before') {
+                if(isset($settings['button_icon']['value']['url']) && !empty($settings['button_icon']['value']['url'])) {
+                    echo '<img class="eael-bd-cg-button-icon" src="' . $settings['button_icon']['value']['url'] . '" />';
+                }else {
+                    echo '<i class="' .$settings['button_icon']['value'].' eael-bd-cg-button-icon"></i>';
+                }
+            }
+
+            echo $settings['button_text'];
+
+            if($settings['icon_position'] === 'after') {
+                if(isset($settings['button_icon']['value']['url']) && !empty($settings['button_icon']['value']['url'])) {
+                    echo '<img class="eael-bd-cg-button-icon" src="' . $settings['button_icon']['value']['url'] . '" />';
+                }else {
+                    echo '<i class="' .$settings['button_icon']['value'].' eael-bd-cg-button-icon"></i>';
+                }
+            }
+
+            echo '</a>';
         }
     echo '</div>';
 echo '</article>';

@@ -302,36 +302,90 @@ class Betterdocs_Category_Grid extends Widget_Base
                 ]
             );
 
-            $this->add_group_control(
-                Group_Control_Box_Shadow::get_type(),
-                [
-                    'name' => 'grid_box_shadow',
-                    'label' => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
-                    'selector' => '{{WRAPPER}} .eael-better-docs-category-grid-wrapper .eael-bd-cg-inner',
-                ]
-            );
 
+            $this->start_controls_tabs('grid_style_tab');
 
-            $this->add_group_control(
-                Group_Control_Border::get_type(),
-                [
-                    'name' => 'grid_border',
-                    'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
-                    'selector' => '{{WRAPPER}} .eael-better-docs-category-grid-wrapper .eael-bd-cg-inner',
-                ]
-            );
+                // Normal State Tab
+                $this->start_controls_tab(
+                    'grid_normal',
+                    ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]
+                );
 
-            $this->add_responsive_control(
-                'grid_border_radius',
-                [
-                    'label' => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-                    'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => [ 'px', '%', 'em' ],
-                    'selectors' => [
-                        '{{WRAPPER}} .eael-better-docs-category-grid-wrapper .eael-bd-cg-inner' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                $this->add_group_control(
+                    Group_Control_Box_Shadow::get_type(),
+                    [
+                        'name' => 'grid_box_shadow',
+                        'label' => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
+                        'selector' => '{{WRAPPER}} .eael-better-docs-category-grid-wrapper .eael-bd-cg-inner',
                     ]
-                ]
-            );
+                );
+
+
+                $this->add_group_control(
+                    Group_Control_Border::get_type(),
+                    [
+                        'name' => 'grid_border',
+                        'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
+                        'selector' => '{{WRAPPER}} .eael-better-docs-category-grid-wrapper .eael-bd-cg-inner',
+                    ]
+                );
+
+                $this->add_responsive_control(
+                    'grid_border_radius',
+                    [
+                        'label' => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                        'type' => Controls_Manager::DIMENSIONS,
+                        'size_units' => [ 'px', '%', 'em' ],
+                        'selectors' => [
+                            '{{WRAPPER}} .eael-better-docs-category-grid-wrapper .eael-bd-cg-inner' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        ]
+                    ]
+                );
+
+                $this->end_controls_tab();
+
+                // Hover State Tab
+                $this->start_controls_tab(
+                    'grid_hover',
+                    ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]
+                );
+
+                $this->add_group_control(
+                    Group_Control_Box_Shadow::get_type(),
+                    [
+                        'name' => 'grid_hover_box_shadow',
+                        'label' => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
+                        'selector' => '{{WRAPPER}} .eael-better-docs-category-grid-wrapper .eael-bd-cg-inner:hover',
+                    ]
+                );
+
+
+                $this->add_group_control(
+                    Group_Control_Border::get_type(),
+                    [
+                        'name' => 'grid_hover_border',
+                        'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
+                        'selector' => '{{WRAPPER}} .eael-better-docs-category-grid-wrapper .eael-bd-cg-inner:hover',
+                    ]
+                );
+
+                $this->add_responsive_control(
+                    'grid_hover_border_radius',
+                    [
+                        'label' => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                        'type' => Controls_Manager::DIMENSIONS,
+                        'size_units' => [ 'px', '%', 'em' ],
+                        'selectors' => [
+                            '{{WRAPPER}} .eael-better-docs-category-grid-wrapper .eael-bd-cg-inner:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        ]
+                    ]
+                );
+
+                $this->end_controls_tab();
+
+            $this->end_controls_tabs(); # end of $this->start_controls_tabs('grid_style_tab');
+
+
 
             $this->add_responsive_control(
                 'column_padding', // Legacy control id
@@ -439,10 +493,24 @@ class Betterdocs_Category_Grid extends Widget_Base
                 [
                     'name' => 'count_bg',
                     'types' => ['classic', 'gradient'],
-                    'selector' => '{{WRAPPER}} .eael-docs-item-count',
+                    'selector' => '{{WRAPPER}} .eael-docs-item-count, {{WRAPPER}} .layout-2 .eael-docs-item-count:before',
                     'exclude' => [
                         'image',
                     ],
+                ]
+            );
+
+            $this->add_control(
+                'count_ticker_color',
+                [
+                    'label' => esc_html__('Ticker Background', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::COLOR,
+                    'selectors' => [
+                        '{{WRAPPER}} .layout-2 .eael-docs-item-count:after' => 'border-top-color: {{VALUE}};',
+                    ],
+                    'condition' => [
+                        'layout_template' => 'Layout_2'
+                    ]
                 ]
             );
 
@@ -477,8 +545,11 @@ class Betterdocs_Category_Grid extends Widget_Base
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .eael-docs-item-count' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .eael-docs-item-count' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};'
                     ],
+                    'condition' => [
+                        'layout_template!' => 'Layout_2'
+                    ]
                 ]
             );
 
@@ -488,6 +559,9 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'name' => 'count_border', // Legacy control name change it with 'border_size' if anything happens.
                     'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
                     'selector' => '{{WRAPPER}} .eael-docs-item-count',
+                    'condition' => [
+                        'layout_template!' => 'Layout_2'
+                    ]
                 ]
             );
 
@@ -500,6 +574,9 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'selectors' => [
                         '{{WRAPPER}} .eael-docs-item-count' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
+                    'condition' => [
+                        'layout_template!' => 'Layout_2'
+                    ]
                 ]
             );
 
@@ -704,6 +781,27 @@ class Betterdocs_Category_Grid extends Widget_Base
                 ]
             );
 
+            $this->add_group_control(
+                Group_Control_Background::get_type(),
+                [
+                    'name' => 'nested_list_title_background',
+                    'types' => ['classic', 'gradient'],
+                    'selector' => '{{WRAPPER}} .eael-bd-grid-sub-cat-title',
+                    'exclude' => [
+                        'image',
+                    ],
+                ]
+            );
+
+            $this->add_group_control(
+                Group_Control_Border::get_type(),
+                [
+                    'name' => 'nested_list_title_border',
+                    'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
+                    'selector' => '{{WRAPPER}} .eael-bd-grid-sub-cat-title'
+                ]
+            );
+
             $this->add_responsive_control(
                 'nested_list_title_spacing',
                 [
@@ -828,6 +926,10 @@ class Betterdocs_Category_Grid extends Widget_Base
                 [
                     'label' => __( 'Icon', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::ICONS,
+                    'default'   => [
+                        'value' => 'fas fa-angle-right',
+                        'library'   => 'fa-solid'
+                    ],
                     'condition' => [
                         'show_button_icon'  => 'true'
                     ]
@@ -996,7 +1098,7 @@ class Betterdocs_Category_Grid extends Widget_Base
 
     }
 
-    protected static function get_doc_post_count($term_count = 0, $term_id) {
+    protected function get_doc_post_count($term_count = 0, $term_id) {
         $tax_terms = get_terms( 'doc_category', ['child_of' => $term_id]);
 
         foreach ($tax_terms as $tax_term) {

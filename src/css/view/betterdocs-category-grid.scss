@@ -1,37 +1,38 @@
+/* ===================================== */
+/* Default Style and for Default Layout
+/* ===================================== */
 .eael-better-docs-category-grid-wrapper {
   margin: 0 -7.5px;
 
   .eael-better-docs-category-grid {
-    .eael-better-docs-category-grid-post {
-      .eael-bd-cg-inner {
-        background: #ffffff;
-        box-shadow: 0 10px 100px 0 rgba(40, 47, 98, 0.08);
-        margin: 0 7.5px 15px 7.5px;
-
-        .eael-bd-cg-body {
-          ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-          }
-        }
-      }
-    }
-
     &.fit-to-screen {
       display: flex;
       flex-wrap: wrap;
 
       .eael-better-docs-category-grid-post {
         display: flex;
+        .eael-bd-cg-inner {
+          width: 100%;
+        }
       }
     }
+  }
+}
+
+.eael-better-docs-category-grid-post {
+  .eael-bd-cg-inner {
+    background: #ffffff;
+    box-shadow: 0 10px 100px 0 rgba(40, 47, 98, 0.08);
+    margin: 0 7.5px 15px 7.5px;
   }
 }
 
 .eael-bd-cg-body {
   padding: 20px;
   ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
     li {
       margin: 10px;
       display: flex;
@@ -84,10 +85,15 @@
 }
 
 .eael-bd-grid-sub-cat-title {
-	display: inline-block;
+  display: block;
+  cursor: pointer;
+  .toggle-arrow {
+    margin-right: 5px;
+  }
 }
 
-.docs-sub-cat-list, .eael-bd-grid-sub-cat-title .arrow-down {
+.docs-sub-cat-list,
+.eael-bd-grid-sub-cat-title .arrow-down {
   display: none;
 }
 
@@ -100,11 +106,94 @@
   border-radius: 50px;
   padding: 8px 20px;
   margin: 0px 0px 20px 20px;
+  .eael-bd-cg-button-icon {
+    margin-left: 5px;
+    position: relative;
+    top: 1px;
+  }
 }
 
-/* ---------------------------- */
+/* ============================================= */
+/* Only Layout 2 modification from Default Layout
+/* ============================================= */
+.eael-better-docs-category-grid-post {
+  &.layout-2 {
+    .eael-bd-cg-header {
+      padding: 0px 20px;
+    }
+
+    .eael-docs-item-count {
+      margin: 0;
+      border-radius: 0;
+      position: relative;
+      display: block;
+      width: auto;
+      background: none;
+      height: 45px;
+      width: 40px;
+
+      &:before {
+        content: attr(data-content);
+        position: absolute;
+        left: 0;
+        top: -1px;
+        height: 45px;
+        width: 40px;
+        background: #fc8c91;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+      }
+
+      &:after {
+        position: absolute;
+        left: 40px;
+        top: -1px;
+        content: "";
+        border-top: 6px solid #ad5e62;
+        border-right: 6px solid transparent;
+        opacity: 0.9;
+      }
+    }
+
+    .eael-docs-cat-title {
+      margin-top: 30px;
+      color: #000000;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .eael-bd-cg-body ul li {
+      font-size: 15px;
+      a {
+        color: #707070;
+      }
+    }
+    .eael-bd-cg-inner {
+      transition: 300ms;
+      box-shadow: 0px 1px 5px 0px rgba(0, 9, 78, 0.1);
+      border-radius: 5px;
+
+      &:hover {
+        box-shadow: 0px 15px 40px 0px rgba(0, 9, 78, 0.1);
+      }
+    }
+
+    .eael-bd-cg-button {
+      font-size: 15px;
+      border: 0px solid;
+      border-radius: 0;
+      color: #333333;
+      transition: 300ms;
+      &:hover {
+        color: #fc8c91;
+      }
+    }
+  }
+}
+
+/* ===================================== */
 /* Column CSS
-/* ---------------------------- */
+/* ===================================== */
 
 // For Desktop
 @media only screen and (min-width: 1025px) {
