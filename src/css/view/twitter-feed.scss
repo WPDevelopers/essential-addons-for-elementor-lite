@@ -41,6 +41,9 @@
 	.eael-twitter-feed-item-inner {
 		background: #fff;
 		border: 1px solid rgba(0, 0, 0, 0.1);
+		-webkit-transition: all .3s ease;
+		-moz-transition: all .3s ease;
+		transition: all .3s ease;
 	}
 
 	a {
@@ -67,7 +70,7 @@
 			margin-right: 10px;
 
 			img {
-				max-width: 100%;
+				max-width: initial;
 				height: auto;
 				object-fit: cover;
 			}
@@ -111,6 +114,22 @@
 			text-overflow: ellipsis;
 			-webkit-line-clamp: 5;
 			-webkit-box-orient: vertical;
+		}
+	}
+	&-style-three {
+		.eael-twitter-feed-item-inner {
+			display: flex;
+			padding: 20px 15px;
+			.eael-twitter-feed-item-content,
+			.eael-twitter-feed-item-header {
+				padding: 0;
+			}
+		}
+	}
+	&-style-two {
+		.eael-twitter-feed-item-icon {
+			float: right;
+			margin-top: 5px;
 		}
 	}
 }

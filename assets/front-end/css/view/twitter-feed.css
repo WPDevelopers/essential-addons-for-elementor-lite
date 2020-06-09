@@ -28,6 +28,9 @@
 .eael-twitter-feed-item .eael-twitter-feed-item-inner {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .eael-twitter-feed-item a {
@@ -56,7 +59,7 @@
 }
 
 .eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-avatar img {
-  max-width: 100%;
+  max-width: initial;
   height: auto;
   -o-object-fit: cover;
      object-fit: cover;
@@ -101,6 +104,24 @@
      text-overflow: ellipsis;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
+}
+
+.eael-twitter-feed-item-style-three .eael-twitter-feed-item-inner {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 20px 15px;
+}
+
+.eael-twitter-feed-item-style-three .eael-twitter-feed-item-inner .eael-twitter-feed-item-content,
+.eael-twitter-feed-item-style-three .eael-twitter-feed-item-inner .eael-twitter-feed-item-header {
+  padding: 0;
+}
+
+.eael-twitter-feed-item-style-two .eael-twitter-feed-item-icon {
+  float: right;
+  margin-top: 5px;
 }
 
 .eael-twitter-feed.swiper-container .swiper-button-next,

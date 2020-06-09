@@ -1969,35 +1969,100 @@ trait Helper {
         $items = array_splice( $items, 0, $settings['eael_twitter_feed_post_limit'] );
 
         foreach ( $items as $item ) {
-            $html .= '<div class="eael-twitter-feed-item ' . $class . '">
+            if ( $settings['eael_twitter_feed_card_choose_style'] == 'three' ) {
+                $html .= '<div class="eael-twitter-feed-item eael-twitter-feed-item-style-three ' . $class . '">
+                <div class="eael-twitter-feed-item-inner">';
+                // left icon bar
+                $html .= '<div class="eael-twitter-feed-entry-iconwrap">';
+                if ( $settings['eael_twitter_feed_show_avatar'] == 'true' ) {
+                    $html .= '<a class="eael-twitter-feed-item-avatar avatar-' . $settings['eael_twitter_feed_avatar_style'] . '" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">
+                                 <img src="' . $item['user']['profile_image_url_https'] . '">
+                             </a>';
+                }
+                if ( $settings['eael_twitter_feed_show_icon'] == 'true' ) {
+                    $html .= '<i class="fab fa-twitter eael-twitter-feed-item-icon"></i>';
+                }
+                $html .= '</div>';
+                // content
+                $html .= '<div class="eael-twitter-feed-entry-contentwrap">
+                    <div class="eael-twitter-feed-item-header clearfix">';
+
+                $html .= '<a class="eael-twitter-feed-item-meta" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">';
+                $html .= '<span class="eael-twitter-feed-item-author">' . $item['user']['name'] . '</span>
+                            </a>';
+                if ( $settings['eael_twitter_feed_show_date'] == 'true' ) {
+                    $html .= '<span class="eael-twitter-feed-item-date">' . sprintf( __( '%s ago', 'essential-addons-for-elementor-lite' ), human_time_diff( strtotime( $item['created_at'] ) ) ) . '</span>';
+                }
+                $html .= '</div>
+                        <div class="eael-twitter-feed-item-content">
+                            <p>' . substr( str_replace( @$item['entities']['urls'][0]['url'], '', $item['full_text'] ), 0, $settings['eael_twitter_feed_content_length'] ) . '...</p>';
+
+                if ( $settings['eael_twitter_feed_show_read_more'] == 'true' ) {
+                    $html .= '<a href="//twitter.com/' . @$item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">Read More <i class="fas fa-angle-double-right"></i></a>';
+                }
+                $html .= '</div>
+                        ' . ( isset( $item['extended_entities']['media'][0] ) && $settings['eael_twitter_feed_media'] == 'true' ? ( $item['extended_entities']['media'][0]['type'] == 'photo' ? '<img src="' . $item['extended_entities']['media'][0]['media_url_https'] . '">' : '' ) : '' ) . '
+                </div>
+                </div>
+			</div>';
+
+            } else if ( $settings['eael_twitter_feed_card_choose_style'] == 'two' ) {
+                $html .= '<div class="eael-twitter-feed-item eael-twitter-feed-item-style-two ' . $class . '">
 				<div class="eael-twitter-feed-item-inner">
 				    <div class="eael-twitter-feed-item-header clearfix">';
-            if ( $settings['eael_twitter_feed_show_avatar'] == 'true' ) {
-                $html .= '<a class="eael-twitter-feed-item-avatar avatar-' . $settings['eael_twitter_feed_avatar_style'] . '" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">
+                if ( $settings['eael_twitter_feed_show_avatar'] == 'true' ) {
+                    $html .= '<a class="eael-twitter-feed-item-avatar avatar-' . $settings['eael_twitter_feed_avatar_style'] . '" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">
                                 <img src="' . $item['user']['profile_image_url_https'] . '">
                             </a>';
-            }
-            $html .= '<a class="eael-twitter-feed-item-meta" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">';
-            if ( $settings['eael_twitter_feed_show_icon'] == 'true' ) {
-                $html .= '<i class="fab fa-twitter eael-twitter-feed-item-icon"></i>';
-            }
-
-            $html .= '<span class="eael-twitter-feed-item-author">' . $item['user']['name'] . '</span>
+                }
+                $html .= '<a class="eael-twitter-feed-item-meta" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">';
+                $html .= '<span class="eael-twitter-feed-item-author">' . $item['user']['name'] . '</span>
                         </a>';
-            if ( $settings['eael_twitter_feed_show_date'] == 'true' ) {
-                $html .= '<span class="eael-twitter-feed-item-date">' . sprintf( __( '%s ago', 'essential-addons-for-elementor-lite' ), human_time_diff( strtotime( $item['created_at'] ) ) ) . '</span>';
-            }
-            $html .= '</div>
+                if ( $settings['eael_twitter_feed_show_icon'] == 'true' ) {
+                    $html .= '<i class="fab fa-twitter eael-twitter-feed-item-icon"></i>';
+                }
+                $html .= '</div>
                     <div class="eael-twitter-feed-item-content">
                         <p>' . substr( str_replace( @$item['entities']['urls'][0]['url'], '', $item['full_text'] ), 0, $settings['eael_twitter_feed_content_length'] ) . '...</p>';
 
-            if ( $settings['eael_twitter_feed_show_read_more'] == 'true' ) {
-                $html .= '<a href="//twitter.com/' . @$item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">Read More <i class="fas fa-angle-double-right"></i></a>';
-            }
-            $html .= '</div>
+                if ( $settings['eael_twitter_feed_show_read_more'] == 'true' ) {
+                    $html .= '<a href="//twitter.com/' . @$item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">Read More <i class="fas fa-angle-double-right"></i></a>';
+                }
+                $html .= '</div>
                     ' . ( isset( $item['extended_entities']['media'][0] ) && $settings['eael_twitter_feed_media'] == 'true' ? ( $item['extended_entities']['media'][0]['type'] == 'photo' ? '<img src="' . $item['extended_entities']['media'][0]['media_url_https'] . '">' : '' ) : '' ) . '
                 </div>
 			</div>';
+            } else {
+                $html .= '<div class="eael-twitter-feed-item ' . $class . '">
+				<div class="eael-twitter-feed-item-inner">
+				    <div class="eael-twitter-feed-item-header clearfix">';
+                if ( $settings['eael_twitter_feed_show_avatar'] == 'true' ) {
+                    $html .= '<a class="eael-twitter-feed-item-avatar avatar-' . $settings['eael_twitter_feed_avatar_style'] . '" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">
+                                <img src="' . $item['user']['profile_image_url_https'] . '">
+                            </a>';
+                }
+                $html .= '<a class="eael-twitter-feed-item-meta" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">';
+                if ( $settings['eael_twitter_feed_show_icon'] == 'true' ) {
+                    $html .= '<i class="fab fa-twitter eael-twitter-feed-item-icon"></i>';
+                }
+
+                $html .= '<span class="eael-twitter-feed-item-author">' . $item['user']['name'] . '</span>
+                        </a>';
+                if ( $settings['eael_twitter_feed_show_date'] == 'true' ) {
+                    $html .= '<span class="eael-twitter-feed-item-date">' . sprintf( __( '%s ago', 'essential-addons-for-elementor-lite' ), human_time_diff( strtotime( $item['created_at'] ) ) ) . '</span>';
+                }
+                $html .= '</div>
+                    <div class="eael-twitter-feed-item-content">
+                        <p>' . substr( str_replace( @$item['entities']['urls'][0]['url'], '', $item['full_text'] ), 0, $settings['eael_twitter_feed_content_length'] ) . '...</p>';
+
+                if ( $settings['eael_twitter_feed_show_read_more'] == 'true' ) {
+                    $html .= '<a href="//twitter.com/' . @$item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">Read More <i class="fas fa-angle-double-right"></i></a>';
+                }
+                $html .= '</div>
+                    ' . ( isset( $item['extended_entities']['media'][0] ) && $settings['eael_twitter_feed_media'] == 'true' ? ( $item['extended_entities']['media'][0]['type'] == 'photo' ? '<img src="' . $item['extended_entities']['media'][0]['media_url_https'] . '">' : '' ) : '' ) . '
+                </div>
+			</div>';
+            }
         }
 
         return $html;
