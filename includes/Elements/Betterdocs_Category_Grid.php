@@ -149,7 +149,7 @@ class Betterdocs_Category_Grid extends Widget_Base
             $this->add_responsive_control(
                 'grid',
                 [
-                    'label' => __('Grid', 'essential-addons-for-elementor-lite'),
+                    'label' => __('Grid Column', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'default' => '3',
                     'tablet_default' => '2',

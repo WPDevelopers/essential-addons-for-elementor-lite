@@ -37,9 +37,14 @@
       margin: 10px;
       display: flex;
       align-items: flex-start;
+      color: #566E8B;
+      line-height: 1.5em;
+      a {
+        color: #566E8B;
+      }
 
       .eael-bd-cg-post-list-icon {
-        margin-top: 6px;
+        line-height: 1.5em;
         margin-right: 10px;
         width: 22px;
       }
@@ -104,7 +109,8 @@
   color: #528ffe;
   border: 1px solid #528ffe;
   border-radius: 50px;
-  padding: 8px 20px;
+  line-height: 1;
+  padding: 15px 20px;
   margin: 0px 0px 20px 20px;
   .eael-bd-cg-button-icon {
     margin-left: 5px;
