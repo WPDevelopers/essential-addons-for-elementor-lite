@@ -965,6 +965,7 @@ class Login_Register extends Widget_Base {
 
 	protected function print_register_form() {
 		if ( $this->should_print_register_form ) {
+			$page_id           = '';
 			$is_pass_valid     = false; // Does the form has a password field?
 			$is_pass_confirmed = false;
 			// placeholders to flag if user use one type of field more than once.
@@ -985,6 +986,9 @@ class Login_Register extends Widget_Base {
 				'website'      => 'Website',
 			];
 			$repeated_f_labels   = [];
+			if ( Plugin::$instance->documents->get_current() ) {
+				$page_id = Plugin::$instance->documents->get_current()->get_main_id();
+			}
 			ob_start();
 			?>
             <div class="eael-register-form-wrapper">
@@ -1096,19 +1100,25 @@ class Login_Register extends Widget_Base {
 					?>
 
                     <input type="hidden" name="redirect_to" value="">
+                    <input type="hidden" name="page_id" value="<?php echo esc_attr( $page_id ); ?>">
+                    <input type="hidden" name="widget_id" value="<?php echo esc_attr( $this->get_id() ); ?>">
                     <p class="submit">
                         <input type="submit" name="eael-register-submit" id="eael-register-submit" class="button button-primary button-large" value="Register" required>
                     </p>
                 </form>
+
+				<?php
+				$this->print_registration_validation_errors();
+                ?>
             </div>
 			<?php
 			$form_markup = ob_get_clean();
 			// if we are in the editor then show error related to repeater field.
 			if ( $this->in_editor ) {
-				if ( $this->print_error_for_reapeated_fields( $repeated_f_labels ) ) {
-					return false; // exit, dont show form.
+				if ( $this->print_error_for_repeated_fields( $repeated_f_labels ) ) {
+					return false; // error found, exit, dont show form.
 				}
-				echo $form_markup;
+				echo $form_markup; //XSS OK, data sanitized already.
 			} else {
 				echo $form_markup; //XSS OK, data sanitized already.
 			}
@@ -1141,20 +1151,46 @@ class Login_Register extends Widget_Base {
 		}
 	}
 
-	protected function print_error_for_reapeated_fields( $repeated_fields ) {
+	protected function print_error_for_repeated_fields( $repeated_fields ) {
 		if ( ! empty( $repeated_fields ) ) {
 			$error_fields = '<strong>' . implode( "</strong>, <strong>", $repeated_fields ) . '</strong>';
 			?>
             <p class='eael-register-form-error elementor-alert elementor-alert-warning'>
-			<?php
-			/* translators: %s: Error String */
-			printf( __( 'Error! It seems like you have added %s field in the form more than once.', EAEL_TEXTDOMAIN ), $error_fields );
-			?>
+				<?php
+				/* translators: %s: Error String */
+				printf( __( 'Error! It seems like you have added %s field in the form more than once.', EAEL_TEXTDOMAIN ), $error_fields );
+				?>
             </p>
 			<?php
 			return true;
 		}
 
+		return false;
+	}
+
+	protected function print_registration_validation_errors() {
+        //error_log( 'reached it???');
+        //if (isset( $_SESSION)){
+	    //    error_log( print_r( $_SESSION, 1));
+        //
+        //}
+		if ( ! empty( $_SESSION['eael_register_errors'] ) && is_array( $_SESSION['eael_register_errors'] ) ) {
+		    error_log( 'inisde');
+		    error_log( print_r( $_SESSION, 1));
+			?>
+            <div class="eael-registration-errors-container">
+                <ul class="eael-registration-errors errors">
+					<?php
+					foreach ( $_SESSION['eael_register_errors'] as $register_error ) {
+						echo '<li class="error-message">' . esc_html( $register_error ) . '</li>';
+					}
+					?>
+                </ul>
+            </div>
+			<?php
+			unset( $_SESSION['eael_register_errors'] );
+			return true; // it will help in case we wanna if error is printed.
+		}
 		return false;
 	}
 
