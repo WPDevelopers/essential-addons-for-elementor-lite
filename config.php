@@ -691,6 +691,15 @@ $config = [
         ],
         'betterdocs-category-box'  => [
             'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Category_Box',
+            'dependency'    => [
+                'css'   => [
+                    [
+                        'file'  => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/betterdocs-category-box.min.css',
+                        'type'  => 'self',
+                        'context'   => 'view'
+                    ]
+                ],
+            ]
         ],
         'betterdocs-search-form'   => [
             'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Search_Form',

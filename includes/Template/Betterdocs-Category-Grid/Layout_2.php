@@ -12,7 +12,7 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="'.g
         if($settings['show_header'] === 'true') {
             echo '<div class="eael-bd-cg-header">';
                 if($settings['show_count']) {
-                    echo '<div class="eael-docs-item-count" data-content="'.$this->get_doc_post_count($term->count, $term->term_id).'"></div>';
+                    echo '<div class="eael-docs-item-count" data-content="'.$this->eael_get_doc_post_count($term->count, $term->term_id).'"></div>';
                 }
                 if($settings['show_title']) {
                     echo '<'.$settings['title_tag'].' class="eael-docs-cat-title">'.$term->name.'</'.$settings['title_tag'].'>';
