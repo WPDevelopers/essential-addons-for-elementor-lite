@@ -467,7 +467,8 @@ class Feature_List extends Widget_Base {
                 'label'     => esc_html__( 'Connector Width', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::SLIDER,
                 'default'   => [
-                    'size' => 1,
+                    'unit' => 'px',
+					'size' => 5,
                 ],
                 'range'     => [
                     'px' => [
