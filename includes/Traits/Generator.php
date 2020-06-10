@@ -58,7 +58,7 @@ trait Generator
     {
         if ($widget->get_name() === 'global') {
             $reflection = new ReflectionClass(get_class($widget));
-            $protected  = $reflection->getProperty('template_data');
+            $protected = $reflection->getProperty('template_data');
             $protected->setAccessible(true);
 
             if ($global_data = $protected->getValue($widget)) {
@@ -87,6 +87,28 @@ trait Generator
         return $collections;
     }
 
+    public function collect_recursive_elements_new($elements)
+    {
+        $collections = [];
+
+        foreach ($elements as $element) {
+            if (isset($element['elType']) && $element['elType'] == 'widget') {
+                if ($element['widgetType'] === 'global') {
+                    $document = Plugin::$instance->documents->get($element['templateID']);
+                    $collections = array_merge($collections, $this->collect_recursive_elements_new($document->get_elements_data()));
+                } else {
+                    $collections[] = $element['widgetType'];
+                }
+            }
+
+            if (!empty($element['elements'])) {
+                $collections = array_merge($collections, $this->collect_recursive_elements_new($element['elements']));
+            }
+        }
+
+        return $collections;
+    }
+
     /**
      * Combine files into one
      *
@@ -94,9 +116,9 @@ trait Generator
      */
     public function combine_files($paths = array(), $file = 'eael.min.css')
     {
-        $output                = '';
+        $output = '';
         $page_settings_manager = Settings_Manager::get_settings_managers('page');
-        $page_settings_model   = $page_settings_manager->get_model(get_the_ID());
+        $page_settings_model = $page_settings_manager->get_model(get_the_ID());
 
         if (!empty($paths)) {
             foreach ($paths as $path) {
@@ -118,12 +140,12 @@ trait Generator
      */
     public function generate_dependency(array $elements, $type, $context)
     {
-        $lib  = ['view' => [], 'edit' => []];
+        $lib = ['view' => [], 'edit' => []];
         $self = ['general' => [], 'view' => [], 'edit' => []];
 
         if ($type == 'js') {
             $self['general'][] = EAEL_PLUGIN_PATH . 'assets/front-end/js/view/general.min.js';
-            $self['edit'][]    = EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/promotion.min.js';
+            $self['edit'][] = EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/promotion.min.js';
         } else if ($type == 'css') {
             $self['view'][] = EAEL_PLUGIN_PATH . "assets/front-end/css/view/general.min.css";
         }
@@ -168,7 +190,7 @@ trait Generator
         }
 
         // collect library scripts & styles
-        $js_paths  = $this->generate_dependency($elements, 'js', $context);
+        $js_paths = $this->generate_dependency($elements, 'js', $context);
         $css_paths = $this->generate_dependency($elements, 'css', $context);
 
         // combine files
@@ -184,7 +206,7 @@ trait Generator
     public function has_cache_files($uid = null)
     {
         $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.css';
-        $js_path  = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.js';
+        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.js';
 
         if (is_readable($this->safe_path($css_path)) && is_readable($this->safe_path($js_path))) {
             return true;
@@ -209,22 +231,22 @@ trait Generator
         }
 
         $replace = [
-            'eicon-woocommerce'               => 'eael-product-grid',
-            'eael-countdown'                  => 'eael-count-down',
-            'eael-creative-button'            => 'eael-creative-btn',
-            'eael-team-member'                => 'eael-team-members',
-            'eael-testimonial'                => 'eael-testimonials',
-            'eael-weform'                     => 'eael-weforms',
-            'eael-cta-box'                    => 'eael-call-to-action',
-            'eael-dual-color-header'          => 'eael-dual-header',
-            'eael-pricing-table'              => 'eael-price-table',
-            'eael-filterable-gallery'         => 'eael-filter-gallery',
-            'eael-one-page-nav'               => 'eael-one-page-navigation',
-            'eael-interactive-card'           => 'eael-interactive-cards',
-            'eael-image-comparison'           => 'eael-img-comparison',
+            'eicon-woocommerce' => 'eael-product-grid',
+            'eael-countdown' => 'eael-count-down',
+            'eael-creative-button' => 'eael-creative-btn',
+            'eael-team-member' => 'eael-team-members',
+            'eael-testimonial' => 'eael-testimonials',
+            'eael-weform' => 'eael-weforms',
+            'eael-cta-box' => 'eael-call-to-action',
+            'eael-dual-color-header' => 'eael-dual-header',
+            'eael-pricing-table' => 'eael-price-table',
+            'eael-filterable-gallery' => 'eael-filter-gallery',
+            'eael-one-page-nav' => 'eael-one-page-navigation',
+            'eael-interactive-card' => 'eael-interactive-cards',
+            'eael-image-comparison' => 'eael-img-comparison',
             'eael-dynamic-filterable-gallery' => 'eael-dynamic-filter-gallery',
-            'eael-google-map'                 => 'eael-adv-google-map',
-            'eael-instafeed'                  => 'eael-instagram-gallery',
+            'eael-google-map' => 'eael-adv-google-map',
+            'eael-instafeed' => 'eael-instagram-gallery',
         ];
         $elements = array_map(function ($val) use ($replace) {
             if (array_key_exists($val, $replace)) {
@@ -232,8 +254,8 @@ trait Generator
             }
             return (strpos($val, 'eael-') !== false ? str_replace(['eael-'], [''], $val) : null);
         }, $this->transient_elements);
-        $extensions   = apply_filters('eael/section/after_render', $this->transient_extensions);
-        $elements     = array_filter(array_unique(array_merge($elements, $extensions)));
+        $extensions = apply_filters('eael/section/after_render', $this->transient_extensions);
+        $elements = array_filter(array_unique(array_merge($elements, $extensions)));
         $old_elements = get_transient('eael_transient_elements_' . $this->request_uid);
 
         if ($old_elements === false) {

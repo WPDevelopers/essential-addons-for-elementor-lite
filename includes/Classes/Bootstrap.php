@@ -121,17 +121,7 @@ class Bootstrap
         add_action('elementor/frontend/before_enqueue_scripts', array($this, 'generate_frontend_scripts'));
 
         // Enqueue
-        add_action('elementor/css-file/post/enqueue', function ($css_file) {
-            $this->loaded_templates[] = $css_file->get_post_id();
-            
-            // print_r($css_file->get_post_id());
-            // $document = Plugin::$instance->documents->get( $css_file->get_post_id() );
-            // $this->hello = 'hello';
-        });
-        // add_action('wp_footer', function() {
-            // ->get(9)->get_elements_data()
-            // print_r(\Elementor\Plugin::$instance->documents);
-        // });
+        add_action('elementor/css-file/post/enqueue', [$this, 'enqueue_scripts_new']);
 
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
         add_action('elementor/editor/before_enqueue_scripts', array($this, 'editor_enqueue_scripts'));

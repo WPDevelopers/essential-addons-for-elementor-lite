@@ -6,8 +6,24 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+
+use \Elementor\Plugin;
+
+
 trait Enqueue
 {
+
+    public function enqueue_scripts_new($css_file)
+    {
+        $document = Plugin::$instance->documents->get($css_file->get_post_id());
+        $document_elements = $document->get_elements_data();
+        $document_settings = $document->get_settings('eael_custom_js');
+
+        $widgets = $this->collect_recursive_elements_new($document_elements);
+
+        error_log(print_r($widgets, 1));
+    }
+
     public function enqueue_scripts()
     {
         // Register our styles
@@ -194,7 +210,7 @@ trait Enqueue
             // localize script
             $this->localize_objects = apply_filters('eael/localize_objects', [
                 'ajaxurl' => admin_url('admin-ajax.php'),
-                'nonce'   => wp_create_nonce('essential-addons-elementor'),
+                'nonce' => wp_create_nonce('essential-addons-elementor'),
             ]);
 
             wp_localize_script('eael-cache-edit', 'localize', $this->localize_objects);
@@ -254,7 +270,7 @@ trait Enqueue
             // enqueue
             wp_enqueue_style('eael-lib-view');
             wp_enqueue_style('eael-view');
-            
+
             wp_enqueue_script('eael-lib-view');
             wp_enqueue_script('eael-view');
         }
@@ -265,7 +281,7 @@ trait Enqueue
         // localize script
         $this->localize_objects = apply_filters('eael/localize_objects', [
             'ajaxurl' => admin_url('admin-ajax.php'),
-            'nonce'   => wp_create_nonce('essential-addons-elementor'),
+            'nonce' => wp_create_nonce('essential-addons-elementor'),
         ]);
 
         wp_localize_script('eael-cache-view', 'localize', $this->localize_objects);
