@@ -468,7 +468,7 @@ class Feature_List extends Widget_Base {
                 'type'      => Controls_Manager::SLIDER,
                 'default'   => [
                     'unit' => 'px',
-					'size' => 5,
+					'size' => 1,
                 ],
                 'range'     => [
                     'px' => [
