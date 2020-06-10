@@ -9,22 +9,24 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="'.get_the_ID
     <div class="eael-bd-cg-inner">';
 
         if($settings['show_header'] === 'true') {
-            $cat_icon_id = get_term_meta( $term->term_id, 'doc_category_image-id', true);
-            if($cat_icon_id){
-                $cat_icon = wp_get_attachment_image( $cat_icon_id, 'thumbnail', [ 'alt' => esc_attr(get_post_meta($cat_icon_id, '_wp_attachment_image_alt', true)) ] );
-            } else {
-                $cat_icon = '<img class="docs-cat-icon" src="'.BETTERDOCS_ADMIN_URL.'assets/img/betterdocs-cat-icon.svg" alt="">';
-            }
             echo '<div class="eael-bd-cg-header">
                 <div class="eael-bd-cg-header-inner">';
                 if($settings['show_icon']) {
+
+                    $cat_icon_id = get_term_meta( $term->term_id, 'doc_category_image-id', true);
+                    if($cat_icon_id){
+                        $cat_icon = wp_get_attachment_image( $cat_icon_id, 'thumbnail', [ 'alt' => esc_attr(get_post_meta($cat_icon_id, '_wp_attachment_image_alt', true)) ] );
+                    } else {
+                        $cat_icon = '<img src="'.BETTERDOCS_ADMIN_URL.'assets/img/betterdocs-cat-icon.svg" alt="betterdocs-category-grid-icon">';
+                    }
+                    
                     echo '<div class="eael-docs-cat-icon">'.$cat_icon.'</div>';
                 }
                 if($settings['show_title']) {
                     echo '<'.$settings['title_tag'].' class="eael-docs-cat-title">'.$term->name.'</'.$settings['title_tag'].'>';
                 }
                 if($settings['show_count']) {
-                    echo '<div class="eael-docs-item-count">'.$this->get_doc_post_count($term->count, $term->term_id).'</div>';
+                    echo '<div class="eael-docs-item-count">'.$this->eael_get_doc_post_count($term->count, $term->term_id).'</div>';
                 }
                 echo '</div>';
             echo '</div>';

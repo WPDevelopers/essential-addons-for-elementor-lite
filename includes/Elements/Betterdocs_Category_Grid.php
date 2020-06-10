@@ -147,7 +147,7 @@ class Betterdocs_Category_Grid extends Widget_Base
             );
 
             $this->add_responsive_control(
-                'grid',
+                'grid_column',
                 [
                     'label' => __('Grid Column', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
@@ -238,7 +238,7 @@ class Betterdocs_Category_Grid extends Widget_Base
             $this->add_control(
                 'show_count',
                 [
-                    'label' => __('Show Counter', 'essential-addons-for-elementor-lite'),
+                    'label' => __('Show Count', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SWITCHER,
                     'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
                     'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
@@ -1098,15 +1098,6 @@ class Betterdocs_Category_Grid extends Widget_Base
 
     }
 
-    protected function get_doc_post_count($term_count = 0, $term_id) {
-        $tax_terms = get_terms( 'doc_category', ['child_of' => $term_id]);
-
-        foreach ($tax_terms as $tax_term) {
-            $term_count += $tax_term->count;
-        }
-        return $term_count;
-    }
-
     protected function render()
     {
 
@@ -1115,7 +1106,6 @@ class Betterdocs_Category_Grid extends Widget_Base
         }
 
         $settings = $this->get_settings_for_display();
-        $args = $this->eael_get_query_args($settings, 'docs');
 
         $this->add_render_attribute(
             'bd_category_grid_wrapper',
@@ -1165,9 +1155,6 @@ class Betterdocs_Category_Grid extends Widget_Base
 
         $html = '<div ' . $this->get_render_attribute_string('bd_category_grid_wrapper') . '>';
             $html .= '<div '.$this->get_render_attribute_string('bd_category_grid_inner').'>';
-
-            
-
             if(file_exists($this->get_template($settings['layout_template']))) {
 
                 if($taxonomy_objects && ! is_wp_error( $taxonomy_objects )) {
