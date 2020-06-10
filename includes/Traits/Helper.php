@@ -2120,7 +2120,6 @@ trait Helper {
         }
 
         $items = array_splice( $facebook_data, ( $page * $settings['eael_facebook_feed_image_count']['size'] ), $settings['eael_facebook_feed_image_count']['size'] );
-
         foreach ( $items as $item ) {
             $message = wp_trim_words(  ( isset( $item['message'] ) ? $item['message'] : ( isset( $item['story'] ) ? $item['story'] : '' ) ), $settings['eael_facebook_feed_message_max_length']['size'], '...' );
             $photo = ( isset( $item['full_picture'] ) ? $item['full_picture'] : '' );
@@ -2128,42 +2127,68 @@ trait Helper {
             $comments = ( isset( $item['comments'] ) ? $item['comments']['summary']['total_count'] : 0 );
 
             if ( $settings['eael_facebook_feed_layout'] == 'card' ) {
-                $html .= '<div class="eael-facebook-feed-item">
-                    <div class="eael-facebook-feed-item-inner">
-                        <header class="eael-facebook-feed-item-header clearfix">
-                            <div class="eael-facebook-feed-item-user clearfix">
-                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v4.0/' . $page_id . '/picture" alt="' . $item['from']['name'] . '" class="eael-facebook-feed-avatar"></a>
-                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><p class="eael-facebook-feed-username">' . $item['from']['name'] . '</p></a>
-                            </div>';
+                $html .= '<div class="eael-facebook-feed-item eael-facebook-feed-item-style-' . $settings['eael_facebook_feed_choose_style'] . '">
+                    <div class="eael-facebook-feed-item-inner">';
+                // card header
+                if ( $settings['eael_facebook_feed_choose_style'] == 'two' ) {
+                    $html .= '<header class="eael-facebook-feed-item-header clearfix">
+                    <div class="eael-facebook-feed-item-user clearfix">
+                        <a href="https://www.facebook.com/' . $page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v4.0/' . $page_id . '/picture" alt="' . $item['from']['name'] . '" class="eael-facebook-feed-avatar"></a>';
+                    $html .= '<div class="eael-facebook-feed-header-content">';
+                    $html .= '<a class="eael-facebook-feed-username" href="https://www.facebook.com/' . $page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '">' . $item['from']['name'] . '</a>';
+                    if ( $settings['eael_facebook_feed_date'] ) {
+                        $html .= '<a href="' . $item['permalink_url'] . '" target="' . ( $settings['eael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date( "d M Y", strtotime( $item['created_time'] ) ) . '</a>';
+                    }
+                    $html .= '</div>';
 
-                if ( $settings['eael_facebook_feed_date'] ) {
-                    $html .= '<a href="' . $item['permalink_url'] . '" target="' . ( $settings['eael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date( "d M Y", strtotime( $item['created_time'] ) ) . '</a>';
+                    $html .= '</div></header>';
+                } else {
+                    $html .= '<header class="eael-facebook-feed-item-header clearfix">
+                    <div class="eael-facebook-feed-item-user clearfix">
+                        <a href="https://www.facebook.com/' . $page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v4.0/' . $page_id . '/picture" alt="' . $item['from']['name'] . '" class="eael-facebook-feed-avatar"></a>
+                        <a href="https://www.facebook.com/' . $page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><p class="eael-facebook-feed-username">' . $item['from']['name'] . '</p></a>
+                    </div>';
+
+                    if ( $settings['eael_facebook_feed_date'] ) {
+                        $html .= '<a href="' . $item['permalink_url'] . '" target="' . ( $settings['eael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date( "d M Y", strtotime( $item['created_time'] ) ) . '</a>';
+                    }
+                    $html .= '</header>';
                 }
-                $html .= '</header>';
 
+                // normal message
                 if ( $settings['eael_facebook_feed_message'] && !empty( $message ) ) {
                     $html .= '<div class="eael-facebook-feed-item-content">
                                         <p class="eael-facebook-feed-message">' . esc_html( $message ) . '</p>
                                     </div>';
                 }
 
+                // preview content
                 if ( !empty( $photo ) || isset( $item['attachments']['data'] ) ) {
                     $html .= '<div class="eael-facebook-feed-preview-wrap">';
                     if ( $item['status_type'] == 'shared_story' ) {
-                        $html .= '<a href="' . $item['permalink_url'] . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">';
-                        if ( $item['attachments']['data'][0]['media_type'] == 'video' ) {
-                            $html .= '<img class="eael-facebook-feed-img" src="' . $photo . '">
+                        if ( $settings['eael_facebook_feed_is_show_preview_content'] == 'yes' && $settings['eael_facebook_feed_is_show_preview_thumbnail'] == 'yes' ) {
+                            $html .= '<a href="' . $item['permalink_url'] . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">';
+                            if ( $item['attachments']['data'][0]['media_type'] == 'video' ) {
+                                $html .= '<img class="eael-facebook-feed-img" src="' . $photo . '">
                                                     <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>';
-                        } else {
-                            $html .= '<img class="eael-facebook-feed-img" src="' . $photo . '">';
+                            } else {
+                                $html .= '<img class="eael-facebook-feed-img" src="' . $photo . '">';
+                            }
+                            $html .= '</a>';
                         }
-                        $html .= '</a>';
-
-                        $html .= '<div class="eael-facebook-feed-url-preview">
-                                                <p class="eael-facebook-feed-url-host">' . parse_url( $item['attachments']['data'][0]['unshimmed_url'] )['host'] . '</p>
-                                                <h2 class="eael-facebook-feed-url-title">' . $item['attachments']['data'][0]['title'] . '</h2>
-                                                <p class="eael-facebook-feed-url-description">' . @$item['attachments']['data'][0]['description'] . '</p>
-                                            </div>';
+                        if ( $settings['eael_facebook_feed_is_show_preview_content'] == 'yes' ) {
+                            $html .= '<div class="eael-facebook-feed-url-preview">';
+                            if ( $settings['eael_facebook_feed_is_show_preview_host'] == 'yes' ) {
+                                $html .= '<p class="eael-facebook-feed-url-host">' . parse_url( $item['attachments']['data'][0]['unshimmed_url'] )['host'] . '</p>';
+                            }
+                            if ( $settings['eael_facebook_feed_is_show_preview_title'] == 'yes' ) {
+                                $html .= '<h2 class="eael-facebook-feed-url-title">' . $item['attachments']['data'][0]['title'] . '</h2>';
+                            }
+                            if ( $settings['eael_facebook_feed_is_show_preview_description'] == 'yes' ) {
+                                $html .= '<p class="eael-facebook-feed-url-description">' . @$item['attachments']['data'][0]['description'] . '</p>';
+                            }
+                            $html .= '</div>';
+                        }
                     } else if ( $item['status_type'] == 'added_video' ) {
                         $html .= '<a href="' . $item['permalink_url'] . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">
                                                 <img class="eael-facebook-feed-img" src="' . $photo . '">
@@ -2177,6 +2202,7 @@ trait Helper {
                     $html .= '</div>';
                 }
 
+                // card footer
                 if ( $settings['eael_facebook_feed_likes'] || $settings['eael_facebook_feed_comments'] ) {
                     $html .= '<footer class="eael-facebook-feed-item-footer">
                                 <div class="clearfix">';
@@ -2189,6 +2215,7 @@ trait Helper {
                     $html .= '</div>
                             </footer>';
                 }
+
                 $html .= '</div>
                 </div>';
             } else {
