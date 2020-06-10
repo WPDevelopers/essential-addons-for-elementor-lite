@@ -337,6 +337,10 @@ class Feature_List extends Widget_Base {
                         'max' => 100,
                     ],
                 ],
+                'default' => [
+					'unit' => 'px',
+					'size' => 35,
+				],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after' => 'top: {{SIZE}}{{UNIT}} !important;',
                 ],
