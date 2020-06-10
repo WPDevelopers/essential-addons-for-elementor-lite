@@ -142,6 +142,9 @@
 .eael-facebook-feed-card {
     .eael-facebook-feed-item {
         .eael-facebook-feed-item-inner {
+            -webkit-transition: all .3s ease;
+            -moz-transition: all .3s ease;
+            transition: all .3s ease;
             margin: 10px;
 
             .eael-facebook-feed-item-header {
@@ -266,6 +269,29 @@
 
         &.no-pagination {
             display: none;
+        }
+    }
+}
+// style two
+.eael-facebook-feed-card {
+    .eael-facebook-feed-item-style-two {
+        .eael-facebook-feed-item-inner {
+            .eael-facebook-feed-item-header {
+                .eael-facebook-feed-item-user {
+                    display: flex;
+                    align-items: center;
+                    .eael-facebook-feed-header-content {
+                        .eael-facebook-feed-username {
+                            display: block !important;
+                            float: none !important;
+                            line-height: 20px !important;
+                        }
+                        .eael-facebook-feed-post-time {
+                            line-height: 20px !important;
+                        }
+                    }
+                }
+            }
         }
     }
 }
