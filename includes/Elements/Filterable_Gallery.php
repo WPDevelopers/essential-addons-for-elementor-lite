@@ -3104,7 +3104,7 @@ class Filterable_Gallery extends Widget_Base
 
                 }
                     $html .= '<div class="gallery-item-thumbnail-wrap">';
-                        $html .= '<img src="' . $item['image'] . '" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '" class="gallery-item-thumbnail">';
+                        $html .= '<img src="' . $item['image'] . '" data-lazy-src="'.$item['image'].'" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '" class="gallery-item-thumbnail">';
                         
                         if ( empty($settings['eael_section_fg_full_image_clickable']) ) {
                             
