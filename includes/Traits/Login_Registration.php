@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package Essential_Addons_Elementor\Traits
  */
 trait Login_Registration {
-
+	public static $register_actions = [];
 	public function login_or_register_user() {
 		// login or register form?
 		if ( isset( $_POST['eael-login-submit'] ) ) {
@@ -38,7 +38,7 @@ trait Login_Registration {
 		do_action( 'eael/login-register/before-login' );
 
 		$user_login = ! empty( $_POST['eael-user-login'] ) ? sanitize_text_field( $_POST['eael-user-login'] ) : '';
-		if ( is_email( $user_login )  ) {
+		if ( is_email( $user_login ) ) {
 			$user_login = sanitize_email( $user_login );
 		}
 
@@ -56,14 +56,14 @@ trait Login_Registration {
 		if ( is_wp_error( $user_data ) ) {
 
 			if ( isset( $user_data->errors['invalid_email'][0] ) ) {
-				$this->set_transient( 'eael_login_error', __( 'Invalid Email. Please check your email or try again with your username.', EAEL_TEXTDOMAIN ));
+				$this->set_transient( 'eael_login_error', __( 'Invalid Email. Please check your email or try again with your username.', EAEL_TEXTDOMAIN ) );
 
 			} elseif ( isset( $user_data->errors['invalid_username'][0] ) ) {
-				$this->set_transient( 'eael_login_error', __( 'Invalid Username. Please check your username or try again with your email.', EAEL_TEXTDOMAIN ));
+				$this->set_transient( 'eael_login_error', __( 'Invalid Username. Please check your username or try again with your email.', EAEL_TEXTDOMAIN ) );
 
 			} elseif ( isset( $user_data->errors['incorrect_password'][0] ) ) {
 
-				$this->set_transient( 'eael_login_error', __( 'Invalid Password. Please check your password and try again', EAEL_TEXTDOMAIN ));
+				$this->set_transient( 'eael_login_error', __( 'Invalid Password. Please check your password and try again', EAEL_TEXTDOMAIN ) );
 
 			}
 		} else {
@@ -100,8 +100,8 @@ trait Login_Registration {
 
 		// vail early if reg is closed.
 		if ( ! $registration_allowed ) {
-			$errors['registration']           = __( 'Registration is closed on this site', EAEL_TEXTDOMAIN );
-			$this->set_transient( 'eael_register_errors', $errors);
+			$errors['registration'] = __( 'Registration is closed on this site', EAEL_TEXTDOMAIN );
+			$this->set_transient( 'eael_register_errors', $errors );
 			wp_safe_redirect( site_url( 'wp-login.php?registration=disabled' ) );
 			exit();
 		}
@@ -155,7 +155,7 @@ trait Login_Registration {
 
 		// if any error found, abort
 		if ( ! empty( $errors ) ) {
-			$this->set_transient( 'eael_register_errors', $errors);
+			$this->set_transient( 'eael_register_errors', $errors );
 			wp_safe_redirect( esc_url( $url ) );
 			exit();
 		}
@@ -171,8 +171,10 @@ trait Login_Registration {
 
 			$settings = $widget->get_settings_for_display();
 			//error_log( 'settings' );
-
-			//error_log( print_r( $settings, 1 ) );
+			if (!empty( $settings['register_action'])){
+				self::$register_actions = $settings['register_action'];
+			}
+			// error_log( print_r( $settings, 1 ) );
 		}
 
 		$user_data = [
@@ -193,21 +195,46 @@ trait Login_Registration {
 
 		$user_data = apply_filters( 'eael/login-register/new-user-data', $user_data );
 
-
+		do_action( 'eael/login-register/before-insert-user', $user_data );
 		$user_id = wp_insert_user( $user_data );
+		do_action( 'eael/login-register/after-insert-user', $user_id, $user_data );
+
 		if ( is_wp_error( $user_id ) ) {
 			// error happened during user creation
-			$errors['user_create']            = __( 'Sorry, something went wrong. User could not be registered.', EAEL_TEXTDOMAIN );
-			$this->set_transient( 'eael_register_errors', $errors);
+			$errors['user_create'] = __( 'Sorry, something went wrong. User could not be registered.', EAEL_TEXTDOMAIN );
+			$this->set_transient( 'eael_register_errors', $errors );
 			wp_safe_redirect( esc_url( $url ) );
 			exit();
 		}
+		$admin_or_both = in_array( 'send_email', self::$register_actions ) ? 'both' : 'admin';
+		/**
+		 * Fires after a new user has been created.
+		 *
+		 * @param int    $user_id ID of the newly created user.
+		 * @param string $notify  Type of notification that should happen. See wp_send_new_user_notifications()
+		 *                        for more information on possible values.
+		 *
+		 * @since 1.18.0
+		 */
+		do_action( 'edit_user_created_user', $user_id, $admin_or_both );
 		// success & handle after registration action as defined by user in the widget
-		$this->set_transient( 'eael_register_success', __( 'Registration completed successfully, Check your inbox for password if you did not provided while registering.', EAEL_TEXTDOMAIN ));
+		$this->set_transient( 'eael_register_success', __( 'Registration completed successfully, Check your inbox for password if you did not provided while registering.', EAEL_TEXTDOMAIN ) );
 
 
-		// perform registration....
-		//error_log( print_r( $_POST, 1 ) );
+		// Handle after registration action
+		// should use be auto logged in?
+		if ( in_array( 'auto_login', self::$register_actions ) && ! is_user_logged_in() ) {
+			$logged_in_user = wp_signon( [
+				'user_login'    => $username,
+				'user_password' => $password,
+				'remember'      => true,
+			] );
+
+			if ( ! is_wp_error( $logged_in_user ) ) {
+				wp_set_current_user( $logged_in_user->ID, $username );
+				do_action( 'wp_login', $user_data->user_login, $user_data );
+			}
+		}
 
 	}
 
@@ -279,8 +306,8 @@ trait Login_Registration {
 	public function get_user_roles() {
 		$user_roles['default'] = __( 'Default', EAEL_TEXTDOMAIN );
 		if ( function_exists( 'get_editable_roles' ) ) {
-			$wp_roles   = get_editable_roles();
-			$roles      = $wp_roles ? $wp_roles : [];
+			$wp_roles = get_editable_roles();
+			$roles    = $wp_roles ? $wp_roles : [];
 			if ( ! empty( $roles ) && is_array( $roles ) ) {
 				foreach ( $wp_roles as $role_key => $role ) {
 					$user_roles[ $role_key ] = $role['name'];
@@ -300,8 +327,32 @@ trait Login_Registration {
 	 *
 	 * @return bool it returns true if the data saved, otherwise, false returned.
 	 */
-	public function set_transient($name, $data, $time = 300) {
-			$time = empty( $time ) ? (int) $time : (5 * MINUTE_IN_SECONDS);
-			return set_transient( $name, $data, time() + $time);
+	public function set_transient( $name, $data, $time = 300 ) {
+		$time = empty( $time ) ? (int) $time : ( 5 * MINUTE_IN_SECONDS );
+
+		return set_transient( $name, $data, time() + $time );
+	}
+
+	/**
+	 * Filters the contents of the new user notification email sent to the new user.
+	 *
+	 * @param array    $email_data
+	 * @param \WP_User $user     User object for new user.
+	 * @param string   $blogname The site title.
+	 *
+	 * @return array
+	 * @since 4.9.0
+	 */
+	public function new_user_notification_email( $email_data, $user, $blogname ) {
+		//@TODO; handle custom email template here.
+		//error_log( print_r( self::$register_actions, 1));
+		/*
+		 * Array
+(
+    [0] => redirect
+    [1] => auto_login
+    [2] => send_email
+)*/
+		return $email_data;
 	}
 }
