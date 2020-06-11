@@ -6,9 +6,7 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-
 use \Elementor\Plugin;
-
 
 trait Enqueue
 {
@@ -21,7 +19,92 @@ trait Enqueue
 
         $widgets = $this->collect_recursive_elements_new($document_elements);
 
-        error_log(print_r($widgets, 1));
+        $replace = [
+            'eicon-woocommerce' => 'eael-product-grid',
+            'eael-countdown' => 'eael-count-down',
+            'eael-creative-button' => 'eael-creative-btn',
+            'eael-team-member' => 'eael-team-members',
+            'eael-testimonial' => 'eael-testimonials',
+            'eael-weform' => 'eael-weforms',
+            'eael-cta-box' => 'eael-call-to-action',
+            'eael-dual-color-header' => 'eael-dual-header',
+            'eael-pricing-table' => 'eael-price-table',
+            'eael-filterable-gallery' => 'eael-filter-gallery',
+            'eael-one-page-nav' => 'eael-one-page-navigation',
+            'eael-interactive-card' => 'eael-interactive-cards',
+            'eael-image-comparison' => 'eael-img-comparison',
+            'eael-dynamic-filterable-gallery' => 'eael-dynamic-filter-gallery',
+            'eael-google-map' => 'eael-adv-google-map',
+            'eael-instafeed' => 'eael-instagram-gallery',
+        ];
+        $widgets = array_map(function ($val) use ($replace) {
+            if (array_key_exists($val, $replace)) {
+                $val = $replace[$val];
+            }
+            return (strpos($val, 'eael-') !== false ? str_replace(['eael-'], [''], $val) : null);
+        }, $widgets);
+
+        $widgets = array_filter(array_unique($widgets));
+
+        $old_widgets = get_post_meta($css_file->get_post_id(), 'eael_transient_elements', true);
+
+        if ($old_widgets === '') {
+            $old_widgets = [];
+        }
+
+        // print_r($old_widgets);
+
+        // sort two arr for compare
+        sort($widgets);
+        sort($old_widgets);
+
+        if ($old_widgets != $widgets) {
+            update_post_meta($css_file->get_post_id(), 'eael_transient_elements', $widgets);
+
+            if (!empty($widgets)) {
+                // generate cache files
+                $this->generate_scripts($widgets, $css_file->get_post_id(), 'view');
+            }
+        }
+
+        // if no elements, remove cache files
+        if (empty($widgets)) {
+            $this->remove_files($css_file->get_post_id());
+
+            return;
+        }
+
+        // if no cache files, generate new
+        if (!$this->has_cache_files($css_file->get_post_id())) {
+            $this->generate_scripts($widgets, $css_file->get_post_id(), 'view');
+        }
+
+        // if (!EAEL_DEV_MODE) {
+            // enqueue
+            wp_enqueue_style(
+                'eael-cache-view',
+                $this->safe_protocol(EAEL_ASSET_URL . '/' . $css_file->get_post_id() . '.min.css'),
+                false,
+                time()
+            );
+
+            wp_enqueue_script(
+                'eael-cache-view',
+                $this->safe_protocol(EAEL_ASSET_URL . '/' . $css_file->get_post_id() . '.min.js'),
+                ['jquery'],
+                time(),
+                true
+            );
+        // }
+
+        // localize script
+        // $this->localize_objects = apply_filters('eael/localize_objects', [
+        //     'ajaxurl' => admin_url('admin-ajax.php'),
+        //     'nonce' => wp_create_nonce('essential-addons-elementor'),
+        // ]);
+
+        // wp_localize_script('eael-cache-view', 'localize', $this->localize_objects);
+
     }
 
     public function enqueue_scripts()
