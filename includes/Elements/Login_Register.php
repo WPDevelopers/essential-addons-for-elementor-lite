@@ -38,21 +38,13 @@ class Login_Register extends Widget_Base {
 	 * @var bool
 	 */
 	protected $should_print_login_form;
+
 	/**
 	 * Should registration form be printed?
 	 * @var bool
 	 */
 	protected $should_print_register_form;
-	/**
-	 * It contains the message if user provides invalid username or email for login
-	 * @var string|void
-	 */
-	protected $invalid_login;
-	/**
-	 * It contains the message if user provides invalid password for login
-	 * @var string|void
-	 */
-	protected $invalid_password;
+
 	/**
 	 * It contains an array of settings for the display
 	 * @var array
@@ -911,7 +903,6 @@ class Login_Register extends Widget_Base {
 
 	protected function print_login_form() {
 		if ( $this->should_print_login_form ) {
-			$this->check_login_validation_errors();
 			?>
             <div class="eaal-login-form-wrapper ">
                 <form name="eael-loginform" id="eael-loginform" method="post">
@@ -922,11 +913,6 @@ class Login_Register extends Widget_Base {
                     <p>
                         <label for="eael-user-login">Username or Email Address</label>
                         <input type="text" name="eael-user-login" id="eael-user-login" class="input" value="" size="20" autocapitalize="off" autocomplete="off" placeholder="Username or Email Address" required>
-						<?php if ( $this->invalid_login ) { ?>
-                            <span class="eael-input-error">
-			                <?php echo esc_html( $this->invalid_login ); ?>
-                            </span>
-						<?php } ?>
                     </p>
 
                     <div class="user-pass-wrap">
@@ -940,11 +926,6 @@ class Login_Register extends Widget_Base {
                                 <!-- <span class="dashicons dashicons-hidden"
 									aria-hidden="true"></span> -->
                             </button>
-							<?php if ( $this->invalid_password ) { ?>
-                                <span class="eael-input-error">
-                                    <?php echo esc_html( $this->invalid_password ); ?>
-                                </span>
-							<?php } ?>
                         </div>
                     </div>
 
@@ -956,6 +937,9 @@ class Login_Register extends Widget_Base {
                         <input type="submit" name="eael-login-submit" id="eael-login-submit" class="button button-primary button-large" value="Log In">
                         <input type="hidden" name="redirect_to" value="/wp-admin/">
                         <input type="hidden" name="testcookie" value="1">
+                    </p>
+                    <p>
+						<?php $this->print_login_validation_errors(); ?>
                     </p>
                 </form>
             </div>
@@ -1109,7 +1093,7 @@ class Login_Register extends Widget_Base {
 
 				<?php
 				$this->print_registration_validation_errors();
-                ?>
+				?>
             </div>
 			<?php
 			$form_markup = ob_get_clean();
@@ -1125,30 +1109,15 @@ class Login_Register extends Widget_Base {
 		}
 	}
 
-	protected function check_login_validation_errors() {
-		// handle error message.
-		if ( session_id() && isset( $_SESSION['eael_login_error'] ) ) {
-
-			$login_error = isset( $_SESSION['eael_login_error'] ) ? $_SESSION['eael_login_error'] : '';
-
-			if ( $login_error ) {
-				switch ( $login_error ) {
-					//@TODO; in future, maybe let site-owner customize error messages.
-					case 'invalid_username':
-						$this->invalid_login = __( 'Invalid Username. Please check your username or try again with your email.', EAEL_TEXTDOMAIN );
-						break;
-					case 'invalid_email':
-						$this->invalid_login = __( 'Invalid Email. Please check your email or try again with your username.', EAEL_TEXTDOMAIN );
-						break;
-					case 'incorrect_password':
-						$this->invalid_password = __( 'Invalid Password. Please check your password and try again', EAEL_TEXTDOMAIN );
-						break;
-
-				}
-				unset( $_SESSION['eael_login_error'] );
-			}
-
+	protected function print_login_validation_errors() {
+		if ( $login_error = get_transient( 'eael_login_error' ) ) { ?>
+            <p class="eael-input-error">
+				<?php echo esc_html( $login_error ); ?>
+            </p>
+			<?php
+			delete_transient( 'eael_login_error' );
 		}
+
 	}
 
 	protected function print_error_for_repeated_fields( $repeated_fields ) {
@@ -1169,28 +1138,23 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_registration_validation_errors() {
-        //error_log( 'reached it???');
-        //if (isset( $_SESSION)){
-	    //    error_log( print_r( $_SESSION, 1));
-        //
-        //}
-		if ( ! empty( $_SESSION['eael_register_errors'] ) && is_array( $_SESSION['eael_register_errors'] ) ) {
-		    error_log( 'inisde');
-		    error_log( print_r( $_SESSION, 1));
-			?>
+		$errors = get_transient( 'eael_register_errors' );
+		if ( ! empty( $errors ) && is_array( $errors ) ) { ?>
             <div class="eael-registration-errors-container">
                 <ul class="eael-registration-errors errors">
 					<?php
-					foreach ( $_SESSION['eael_register_errors'] as $register_error ) {
+					foreach ( $errors as $register_error ) {
 						echo '<li class="error-message">' . esc_html( $register_error ) . '</li>';
 					}
 					?>
                 </ul>
             </div>
 			<?php
-			unset( $_SESSION['eael_register_errors'] );
+			delete_transient( 'eael_register_errors' );
+
 			return true; // it will help in case we wanna if error is printed.
 		}
+
 		return false;
 	}
 

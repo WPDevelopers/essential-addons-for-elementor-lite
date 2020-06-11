@@ -35,14 +35,10 @@ trait Login_Registration {
 			return;
 		}
 
-
-		if ( ! session_id() && ! headers_sent() ) {
-			session_start();
-		}
 		do_action( 'eael/login-register/before-login' );
 
 		$user_login = ! empty( $_POST['eael-user-login'] ) ? sanitize_text_field( $_POST['eael-user-login'] ) : '';
-		if ( false !== strpos( '@', $user_login ) ) {
+		if ( is_email( $user_login )  ) {
 			$user_login = sanitize_email( $user_login );
 		}
 
@@ -60,16 +56,15 @@ trait Login_Registration {
 		if ( is_wp_error( $user_data ) ) {
 
 			if ( isset( $user_data->errors['invalid_email'][0] ) ) {
-
-				$_SESSION['eael_login_error'] = 'invalid_email';
+				$this->set_transient( 'eael_login_error', __( 'Invalid Email. Please check your email or try again with your username.', EAEL_TEXTDOMAIN ));
 
 			} elseif ( isset( $user_data->errors['invalid_username'][0] ) ) {
-
-				$_SESSION['eael_login_error'] = 'invalid_username';
+				$this->set_transient( 'eael_login_error', __( 'Invalid Username. Please check your username or try again with your email.', EAEL_TEXTDOMAIN ));
 
 			} elseif ( isset( $user_data->errors['incorrect_password'][0] ) ) {
 
-				$_SESSION['eael_login_error'] = 'incorrect_password';
+				$this->set_transient( 'eael_login_error', __( 'Invalid Password. Please check your password and try again', EAEL_TEXTDOMAIN ));
+
 			}
 		} else {
 
@@ -88,7 +83,6 @@ trait Login_Registration {
 	 * It register the user in when the registration form is submitted normally without AJAX.
 	 */
 	public function register_user() {
-		//error_log( 'did we got hit');
 		// validate & sanitize the request data
 		if ( empty( $_POST['eael-register-nonce'] ) ) {
 			return;
@@ -97,10 +91,6 @@ trait Login_Registration {
 			return;
 		}
 
-
-		if ( ! session_id() && ! headers_sent() ) {
-			session_start();
-		}
 		do_action( 'eael/login-register/before-register' );
 		// prepare the data
 		$errors               = [];
@@ -111,7 +101,7 @@ trait Login_Registration {
 		// vail early if reg is closed.
 		if ( ! $registration_allowed ) {
 			$errors['registration']           = __( 'Registration is closed on this site', EAEL_TEXTDOMAIN );
-			$_SESSION['eael_register_errors'] = $errors;
+			$this->set_transient( 'eael_register_errors', $errors);
 			wp_safe_redirect( site_url( 'wp-login.php?registration=disabled' ) );
 			exit();
 		}
@@ -135,7 +125,7 @@ trait Login_Registration {
 			}
 		} else {
 			$errors['email'] = __( 'Email is missing or Invalid', EAEL_TEXTDOMAIN );
-			//@todo; maybe it is good to abort here?? as email is most improtant. or continue to collect all other errors.
+			//@todo; maybe it is good to abort here?? as email is most important. or continue to collect all other errors.
 		}
 
 
@@ -156,7 +146,7 @@ trait Login_Registration {
 
 		// Dynamic Password Generation
 		$is_pass_auto_generated = false; // emailing is must for autogen pass
-		if ( !empty( $_POST['password'] ) ) {
+		if ( ! empty( $_POST['password'] ) ) {
 			$password = wp_unslash( sanitize_text_field( $_POST['password'] ) );
 		} else {
 			$password               = wp_generate_password();
@@ -165,8 +155,7 @@ trait Login_Registration {
 
 		// if any error found, abort
 		if ( ! empty( $errors ) ) {
-			error_log( print_r( $errors, 1));
-			$_SESSION['eael_register_errors'] = $errors;
+			$this->set_transient( 'eael_register_errors', $errors);
 			wp_safe_redirect( esc_url( $url ) );
 			exit();
 		}
@@ -186,37 +175,35 @@ trait Login_Registration {
 			//error_log( print_r( $settings, 1 ) );
 		}
 
-		$user_data =  [
+		$user_data = [
 			'user_login' => $username,
-			'user_pass' => $password,
+			'user_pass'  => $password,
 			'user_email' => $email,
 		];
 
-		if (!empty( $_POST['first_name'] )){
-			$user_data['first_name'] = sanitize_text_field( $_POST['first_name']);
+		if ( ! empty( $_POST['first_name'] ) ) {
+			$user_data['first_name'] = sanitize_text_field( $_POST['first_name'] );
 		}
-		if (!empty( $_POST['last_name'] )){
-			$user_data['last_name'] = sanitize_text_field( $_POST['last_name']);
+		if ( ! empty( $_POST['last_name'] ) ) {
+			$user_data['last_name'] = sanitize_text_field( $_POST['last_name'] );
 		}
-		if (!empty( $_POST['user_role'] )){
-			$user_data['role'] = sanitize_text_field( $_POST['user_role']);
+		if ( ! empty( $_POST['user_role'] ) ) {
+			$user_data['role'] = sanitize_text_field( $_POST['user_role'] );
 		}
 
-		$user_data = apply_filters('eael/login-register/new-user-data', $user_data);
+		$user_data = apply_filters( 'eael/login-register/new-user-data', $user_data );
 
 
 		$user_id = wp_insert_user( $user_data );
 		if ( is_wp_error( $user_id ) ) {
 			// error happened during user creation
-			$errors['user_create'] = __('Sorry, something went wrong. User could not be registered.', EAEL_TEXTDOMAIN);
-			$_SESSION['eael_register_errors'] = $errors;
+			$errors['user_create']            = __( 'Sorry, something went wrong. User could not be registered.', EAEL_TEXTDOMAIN );
+			$this->set_transient( 'eael_register_errors', $errors);
 			wp_safe_redirect( esc_url( $url ) );
 			exit();
 		}
 		// success & handle after registration action as defined by user in the widget
-		$_SESSION['eael_register_success'] = [
-			'message' => __('Registration completed successfully, Check your inbox for password if you did not provided while registering.', EAEL_TEXTDOMAIN)
-		];
+		$this->set_transient( 'eael_register_success', __( 'Registration completed successfully, Check your inbox for password if you did not provided while registering.', EAEL_TEXTDOMAIN ));
 
 
 		// perform registration....
@@ -294,7 +281,6 @@ trait Login_Registration {
 		if ( function_exists( 'get_editable_roles' ) ) {
 			$wp_roles   = get_editable_roles();
 			$roles      = $wp_roles ? $wp_roles : [];
-			$user_roles = [];
 			if ( ! empty( $roles ) && is_array( $roles ) ) {
 				foreach ( $wp_roles as $role_key => $role ) {
 					$user_roles[ $role_key ] = $role['name'];
@@ -303,5 +289,19 @@ trait Login_Registration {
 		}
 
 		return apply_filters( 'eael/login-register/new-user-roles', $user_roles );
+	}
+
+	/**
+	 * It store data temporarily
+	 *
+	 * @param     $name
+	 * @param     $data
+	 * @param int $time time in seconds. Default is 300s = 5 minutes
+	 *
+	 * @return bool it returns true if the data saved, otherwise, false returned.
+	 */
+	public function set_transient($name, $data, $time = 300) {
+			$time = empty( $time ) ? (int) $time : (5 * MINUTE_IN_SECONDS);
+			return set_transient( $name, $data, time() + $time);
 	}
 }
