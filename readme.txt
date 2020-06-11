@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.4
 Requires PHP: 5.4
-Stable tag: 4.0.2
+Stable tag: 4.0.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -223,6 +223,15 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.0.3 - 11/06/2020 =
+- Fixed: EA Filterable Gallery Image Overlapping issue with Lazyload- WP Rocket
+- Fixed: EA Feature List Default Arrow Indicator Position issue 
+- Fixed: EA Table of Content appearing at the bottom for Gutenberg posts
+- Fixed: EA Post Grid issue with Load More 'Grid' layout becoming Masonry
+- Fixed: EA Post Grid issue with PressForward plugin
+- Fixed: EA Sticky Video Icon overlapping issue
+- Few minor bugfix and improvements
 
 = 4.0.2 - 04/06/2020 =
 - Improvement : EA Post Grid | Added margin & padding controls for Thumbnail & Content, and 2 more preset layouts
