@@ -117,13 +117,13 @@ class Bootstrap
 
         // Generator
         add_action('wp', [$this, 'generate_request_uid']);
-        add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
-        add_action('elementor/frontend/before_enqueue_scripts', array($this, 'generate_frontend_scripts'));
+        // add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
+        // add_action('elementor/frontend/before_enqueue_scripts', array($this, 'generate_frontend_scripts'));
 
         // Enqueue
         add_action('elementor/css-file/post/enqueue', [$this, 'enqueue_scripts_new']);
 
-        add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
+        // add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
         add_action('elementor/editor/before_enqueue_scripts', array($this, 'editor_enqueue_scripts'));
 
         // Ajax
