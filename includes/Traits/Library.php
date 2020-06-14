@@ -101,15 +101,17 @@ trait Library
         if (isset($_REQUEST['doing_wp_cron'])) {
             return true;
         }
+        
         if (wp_doing_ajax()) {
             return true;
         }
-        if (isset($_GET['elementor-preview'])) {
-            return true;
-        }
-        if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'elementor') {
-            return true;
-        }
+        
+        // if (isset($_GET['elementor-preview'])) {
+        //     return true;
+        // }
+        // if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'elementor') {
+        //     return true;
+        // }
 
         return false;
     }

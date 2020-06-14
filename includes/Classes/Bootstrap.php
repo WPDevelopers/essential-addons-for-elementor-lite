@@ -33,10 +33,10 @@ class Bootstrap
     public $registered_extensions;
 
     // transient elements container
-    public $transient_elements;
+    // public $transient_elements;
 
     // transient elements container
-    public $transient_extensions;
+    // public $transient_extensions;
 
     // additional settings
     public $additional_settings;
@@ -91,8 +91,8 @@ class Bootstrap
         ]);
 
         // initialize transient container
-        $this->transient_elements = [];
-        $this->transient_extensions = [];
+        // $this->transient_elements = [];
+        // $this->transient_extensions = [];
         $this->loaded_templates = [];
 
         // start plugin tracking
@@ -115,15 +115,9 @@ class Bootstrap
         add_filter('wpml_elementor_widgets_to_translate', [$this, 'eael_translatable_widgets']);
         add_action('elementor/editor/after_save', array($this, 'save_global_values'), 10, 2);
 
-        // Generator
-        add_action('wp', [$this, 'generate_request_uid']);
-        // add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
-        // add_action('elementor/frontend/before_enqueue_scripts', array($this, 'generate_frontend_scripts'));
-
         // Enqueue
-        add_action('elementor/css-file/post/enqueue', [$this, 'enqueue_scripts_new']);
-
-        // add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
+        add_action('elementor/css-file/post/enqueue', [$this, 'enqueue_template_scripts']);
         add_action('elementor/editor/before_enqueue_scripts', array($this, 'editor_enqueue_scripts'));
 
         // Ajax
