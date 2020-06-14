@@ -232,7 +232,7 @@ trait Login_Registration {
 
 			if ( ! is_wp_error( $logged_in_user ) ) {
 				wp_set_current_user( $logged_in_user->ID, $username );
-				do_action( 'wp_login', $user_data->user_login, $user_data );
+				do_action( 'wp_login', $username, $user_data );
 			}
 		}
 

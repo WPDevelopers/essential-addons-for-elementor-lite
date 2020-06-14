@@ -142,6 +142,8 @@ class Login_Register extends Widget_Base {
 		// Registration For Related---
 		$this->init_content_register_fields_controls();
 		$this->init_content_register_options_controls();
+		$this->init_content_register_email_controls();
+		$this->init_register_validation_message_controls();
 
 
 		/*----Style Tab----*/
@@ -795,7 +797,7 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'register_redirect_url', [
 			'type'          => Controls_Manager::URL,
-			'show_label'    => false,
+			'label'         => __( 'Custom Redirect URL', EAEL_TEXTDOMAIN ),
 			'show_external' => false,
 			'placeholder'   => __( 'eg. https://your-link.com/wp-admin/', EAEL_TEXTDOMAIN ),
 			'description'   => __( 'Please note that only your current domain is allowed here to keep your site secure.', EAEL_TEXTDOMAIN ),
@@ -817,7 +819,143 @@ class Login_Register extends Widget_Base {
 			'separator' => 'before',
 		] );
 
+
 		$this->end_controls_section();
+	}
+
+	protected function init_content_register_email_controls() {
+
+		$default_subject = sprintf( __( 'Thank you for registering on "%s"!', EAEL_TEXTDOMAIN ), get_option( 'blogname' ) );
+		/* translators: %s: User login. */
+		$default_message = $default_subject . "\r\n\r\n";
+		$default_message .= __( 'Username: [username]' ) . "\r\n\r\n";
+		$default_message .= __( 'Password: [password]' ) . "\r\n\r\n";
+		$default_message .= __( 'Please sit the following address to login to your account:' ) . "\r\n\r\n";
+		$default_message .= wp_login_url() . "\r\n";
+
+		$this->start_controls_section( 'section_content_reg_email', [
+			'label'      => __( 'Register Email Options', EAEL_TEXTDOMAIN ),
+			'conditions' => [
+				'relation' => 'or',
+				'terms'    => [
+					[
+						'name'  => 'show_registration_link',
+						'value' => 'yes',
+						//@TODO; debug why multi-level condition is not working.
+						//'relation' => 'and',
+						//'terms'    => [
+						//	[
+						//		'name'     => 'register_action',
+						//		'value'    => 'send_email',
+						//		'operator' => '===',
+						//	],
+						//],
+					],
+					[
+						'name'  => 'default_form_type',
+						'value' => 'registration',
+						//'relation' => 'and',
+						//'terms'    => [
+						//	[
+						//		'name'     => 'register_action',
+						//		'value'    => 'send_email',
+						//		'operator' => '===',
+						//	],
+						//],
+					],
+				],
+			],
+		] );
+
+		$this->add_control( 'reg_email_template_type', [
+			'label'       => __( 'Email Template Type', EAEL_TEXTDOMAIN ),
+			'description' => __( 'Default template uses WordPress Default email template. So, please select the Custom Option to send user proper information to user if you did you use any username field.', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::SELECT,
+			'default'     => 'default',
+			'options'     => [
+				'default' => __( 'WordPres Default', EAEL_TEXTDOMAIN ),
+				'custom'  => __( 'Custom', EAEL_TEXTDOMAIN ),
+			],
+		] );
+
+		$this->add_control( 'reg_email_subject', [
+			'label'       => __( 'Email Subject', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			/* translators: %s: Site Title */
+			'placeholder' => $default_subject,
+			/* translators: %s: Site Title. */
+			'default'     => $default_subject,
+			'label_block' => true,
+			'render_type' => 'none',
+			'condition'   => [
+				'reg_email_template_type' => 'custom',
+			],
+		] );
+
+
+		$this->add_control( 'reg_email_body', [
+			'label'       => __( 'Email Body', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::WYSIWYG,
+			'placeholder' => __( 'Enter Your Custom Email Body..', EAEL_TEXTDOMAIN ),
+			'default'     => $default_message,
+			'label_block' => true,
+			'render_type' => 'none',
+			'condition'   => [
+				'reg_email_template_type' => 'custom',
+			],
+		] );
+		$this->add_control( 'reg_email_content_note', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( '<strong>Note:</strong> You can use dynamic content in the email body like [fieldname]. For example [username], [password] will be replaced by user-typed username and password.', EAEL_TEXTDOMAIN ),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+			'condition'       => [
+				'reg_email_template_type' => 'custom',
+			],
+		] );
+
+		$this->add_control( 'reg_email_content_type', [
+			'label'       => __( 'Email Content Type', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::SELECT,
+			'default'     => 'html',
+			'render_type' => 'none',
+			'options'     => [
+				'html'  => __( 'HTML', EAEL_TEXTDOMAIN ),
+				'plain' => __( 'Plain', EAEL_TEXTDOMAIN ),
+			],
+			'condition'   => [
+				'reg_email_template_type' => 'custom',
+			],
+		] );
+
+		$this->end_controls_section();
+	}
+
+	protected function init_register_validation_message_controls() {
+		$this->start_controls_section( 'section_content_reg_validation', [
+			'label'      => __( 'Register Validation Messages', EAEL_TEXTDOMAIN ),
+			'tab'        => Controls_Manager::TAB_CONTENT,
+			'conditions' => $this->get_register_controls_display_condition(),
+		] );
+
+		$this->add_control( 'reg_success_message', [
+			'label'       => __( 'Success Message', EAEL_TEXTDOMAIN ),
+			'description' => __( 'Specify what you want to show when registration succeeds', EAEL_TEXTDOMAIN ),
+			'label_block' => true,
+			'type'        => Controls_Manager::TEXTAREA,
+			'default'     => __( 'Thank you for registering with us! Please check your mail for your account info', EAEL_TEXTDOMAIN ),
+		] );
+
+		$this->add_control( 'reg_error_message', [
+			'label'       => __( 'Error Message', EAEL_TEXTDOMAIN ),
+			'description' => __( 'Specify what you want to show when registration fails', EAEL_TEXTDOMAIN ),
+
+			'label_block' => true,
+			'type'        => Controls_Manager::TEXTAREA,
+			'default'     => __( 'Error: Something went wrong! Registration failed..', EAEL_TEXTDOMAIN ),
+		] );
+
+		$this->end_controls_section();
+
 	}
 
 	/**
@@ -886,7 +1024,8 @@ class Login_Register extends Widget_Base {
 
 	protected function render() {
 		//Note. forms are handled in Login_Registration Trait used in the Bootstrap class.
-		$this->d_settings              = $this->get_settings_for_display();
+		$this->d_settings = $this->get_settings_for_display();
+		//error_log( print_r( $this->d_settings, 1));
 		$this->should_print_login_form = ( 'login' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_login_link' ) );
 
 		$this->should_print_register_form = ( $this->user_can_register && ( 'registration' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_registration_link' ) ) );
@@ -1099,7 +1238,9 @@ class Login_Register extends Widget_Base {
 			$form_markup = ob_get_clean();
 			// if we are in the editor then show error related to repeater field.
 			if ( $this->in_editor ) {
-				if ( $this->print_error_for_repeated_fields( $repeated_f_labels ) ) {
+				$repeated            = $this->print_error_for_repeated_fields( $repeated_f_labels );
+				$email_field_missing = $this->print_error_for_missing_email_field( $email_exists );
+				if ( $repeated || $email_field_missing ) {
 					return false; // error found, exit, dont show form.
 				}
 				echo $form_markup; //XSS OK, data sanitized already.
@@ -1126,8 +1267,24 @@ class Login_Register extends Widget_Base {
 			?>
             <p class='eael-register-form-error elementor-alert elementor-alert-warning'>
 				<?php
+				/* translators: %s: Error fields */
+				printf( __( 'Error! you seem to have added %s field in the form more than once.', EAEL_TEXTDOMAIN ), $error_fields );
+				?>
+            </p>
+			<?php
+			return true;
+		}
+
+		return false;
+	}
+
+	protected function print_error_for_missing_email_field( $email_exist ) {
+		if ( empty( $email_exist ) ) {
+			?>
+            <p class='eael-register-form-error elementor-alert elementor-alert-warning'>
+				<?php
 				/* translators: %s: Error String */
-				printf( __( 'Error! It seems like you have added %s field in the form more than once.', EAEL_TEXTDOMAIN ), $error_fields );
+				printf( __( 'Error! It is required to use %s field.', EAEL_TEXTDOMAIN ), '<strong>Email</strong>' );
 				?>
             </p>
 			<?php
