@@ -894,7 +894,7 @@ trait Helper {
                 ]
             );
 
-            if ( 'eael-post-grid' === $this->get_name() ) {
+            if ( 'eael-post-grid' === $this->get_name() || 'eael-post-carousel' === $this->get_name() ) {
                 $this->add_control(
                     'eael_post_read_more_btn_alignment',
                     [
@@ -914,7 +914,7 @@ trait Helper {
                                 'icon'  => 'fa fa-align-right',
                             ],
                         ],
-                        'default'   => 'left',
+                        'default'   => ( 'eael-post-grid' === $this->get_name() ? 'left' : 'center' ),
                         'selectors' => [
                             '{{WRAPPER}} .eael-post-elements-readmore-wrap' => 'text-align: {{VALUE}};',
                         ],
