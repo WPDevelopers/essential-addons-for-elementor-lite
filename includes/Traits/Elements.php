@@ -324,10 +324,10 @@ trait Elements
             // Reading Progress Bar
             if ($this->get_settings('eael-reading-progress') == true) {
                 if ($page_settings_model->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {
-                    add_filter('eael/section/after_render', function ($extensions) {
-                        $extensions[] = 'eael-reading-progress';
-                        return $extensions;
-                    });
+                    // add_filter('eael/section/after_render', function ($extensions) {
+                    //     $extensions[] = 'eael-reading-progress';
+                    //     return $extensions;
+                    // });
 
                     $reading_progress_html = '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-' . ($page_settings_model->get_settings('eael_ext_reading_progress') == 'yes' ? 'local' : 'global') . '">
                         <div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . $page_settings_model->get_settings('eael_ext_reading_progress_position') . '">
@@ -358,10 +358,10 @@ trait Elements
             $elementor_page = \Elementor\Plugin::$instance->db->is_built_with_elementor( get_the_ID() );
             if ($this->get_settings('eael-table-of-content') == true && $elementor_page === true) {
                 if ($page_settings_model->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['eael_ext_table_of_content']['enabled'])) {
-                    add_filter('eael/section/after_render', function ($extensions) {
-                        $extensions[] = 'eael-table-of-content';
-                        return $extensions;
-                    });
+                    // add_filter('eael/section/after_render', function ($extensions) {
+                    //     $extensions[] = 'eael-table-of-content';
+                    //     return $extensions;
+                    // });
 
                     $el_class = 'eael-toc eael-toc-disable';
 
