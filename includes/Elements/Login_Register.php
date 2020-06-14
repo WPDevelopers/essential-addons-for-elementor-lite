@@ -872,6 +872,7 @@ class Login_Register extends Widget_Base {
 			'description' => __( 'Default template uses WordPress Default email template. So, please select the Custom Option to send user proper information to user if you did you use any username field.', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::SELECT,
 			'default'     => 'default',
+			'render_type' => 'none',
 			'options'     => [
 				'default' => __( 'WordPres Default', EAEL_TEXTDOMAIN ),
 				'custom'  => __( 'Custom', EAEL_TEXTDOMAIN ),
@@ -892,11 +893,10 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
-
-		$this->add_control( 'reg_email_body', [
-			'label'       => __( 'Email Body', EAEL_TEXTDOMAIN ),
+		$this->add_control( 'reg_email_message', [
+			'label'       => __( 'Email Message', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::WYSIWYG,
-			'placeholder' => __( 'Enter Your Custom Email Body..', EAEL_TEXTDOMAIN ),
+			'placeholder' => __( 'Enter Your Custom Email Message..', EAEL_TEXTDOMAIN ),
 			'default'     => $default_message,
 			'label_block' => true,
 			'render_type' => 'none',
@@ -904,13 +904,15 @@ class Login_Register extends Widget_Base {
 				'reg_email_template_type' => 'custom',
 			],
 		] );
+
 		$this->add_control( 'reg_email_content_note', [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => __( '<strong>Note:</strong> You can use dynamic content in the email body like [fieldname]. For example [username], [password] will be replaced by user-typed username and password.', EAEL_TEXTDOMAIN ),
+			'raw'             => __( '<strong>Note:</strong> You can use dynamic content in the email body like [fieldname]. For example [username] will be replaced by user-typed username. Available tags are: [password], [username], [email], [firstname],[lastname], [website], [loginurl] and [sitetitle] ', EAEL_TEXTDOMAIN ),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 			'condition'       => [
 				'reg_email_template_type' => 'custom',
 			],
+			'render_type' => 'none',
 		] );
 
 		$this->add_control( 'reg_email_content_type', [
