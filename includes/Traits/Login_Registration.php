@@ -13,7 +13,22 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package Essential_Addons_Elementor\Traits
  */
 trait Login_Registration {
-	public static $register_actions = [];
+	/**
+	 * @var bool
+	 */
+	public static $send_custom_email = false;
+	/**
+	 * It will contain all email related options like email subject, content, email content type etc.
+	 * @var array   $email_options {
+	 *      Used to build wp_mail().
+	 * @type string $template_type The type of the email template; custom | default.
+	 * @type string $subject       The subject of the email.
+	 * @type string $message       The body of the email.
+	 * @type string $content_type  The type of the email body; plain | html
+	 * }
+	 */
+	public static $email_options = [];
+
 	public function login_or_register_user() {
 		// login or register form?
 		if ( isset( $_POST['eael-login-submit'] ) ) {
@@ -161,7 +176,8 @@ trait Login_Registration {
 		}
 
 		// handle registration...
-		$document = Plugin::$instance->documents->get( $page_id );
+		$document         = Plugin::$instance->documents->get( $page_id );
+		$register_actions = [];
 		if ( $document ) {
 			$elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
 			$widget_data = $this->find_element_recursive( $elements, $widget_id );
@@ -169,11 +185,27 @@ trait Login_Registration {
 
 			$widget = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
 
-			$settings = $widget->get_settings_for_display();
-			//error_log( 'settings' );
-			if (!empty( $settings['register_action'])){
-				self::$register_actions = $settings['register_action'];
+			$settings         = $widget->get_settings_for_display();
+			$register_actions = ! empty( $settings['register_action'] ) ? $settings['register_action'] : [];
+			// set email related stuff
+			if ( ( ! empty( $settings['register_action'] ) && in_array( 'send_email', $settings['register_action'] ) ) && 'custom' === $settings['reg_email_template_type'] ) {
+				self::$send_custom_email = true;
 			}
+			if ( isset( $settings['reg_email_subject'] ) ) {
+				self::$email_options['subject'] = $settings['reg_email_subject'];
+			}
+			if ( isset( $settings['reg_email_message'] ) ) {
+				self::$email_options['message'] = $settings['reg_email_message'];
+			}
+			if ( isset( $settings['reg_email_content_type'] ) ) {
+				self::$email_options['headers'] = 'Content-Type: text/' . $settings['reg_email_content_type'] . '; charset=UTF-8' . "\r\n";
+			}
+			self::$email_options['username']  = $username;
+			self::$email_options['password']  = $password;
+			self::$email_options['email']     = $email;
+			self::$email_options['firstname'] = '';
+			self::$email_options['lastname']  = '';
+			self::$email_options['website']   = '';
 			// error_log( print_r( $settings, 1 ) );
 		}
 
@@ -184,13 +216,17 @@ trait Login_Registration {
 		];
 
 		if ( ! empty( $_POST['first_name'] ) ) {
-			$user_data['first_name'] = sanitize_text_field( $_POST['first_name'] );
+			$user_data['first_name'] = self::$email_options['firstname'] = sanitize_text_field( $_POST['first_name'] );
 		}
 		if ( ! empty( $_POST['last_name'] ) ) {
-			$user_data['last_name'] = sanitize_text_field( $_POST['last_name'] );
+			$user_data['last_name'] = self::$email_options['lastname'] = sanitize_text_field( $_POST['last_name'] );
 		}
 		if ( ! empty( $_POST['user_role'] ) ) {
 			$user_data['role'] = sanitize_text_field( $_POST['user_role'] );
+		}
+		if ( ! empty( $_POST['website'] ) ) {
+			$user_data['user_url'] = self::$email_options['website'] = esc_url_raw( $_POST['website'] );
+
 		}
 
 		$user_data = apply_filters( 'eael/login-register/new-user-data', $user_data );
@@ -206,7 +242,7 @@ trait Login_Registration {
 			wp_safe_redirect( esc_url( $url ) );
 			exit();
 		}
-		$admin_or_both = in_array( 'send_email', self::$register_actions ) ? 'both' : 'admin';
+		$admin_or_both = in_array( 'send_email', $register_actions ) ? 'both' : 'admin';
 		/**
 		 * Fires after a new user has been created.
 		 *
@@ -215,15 +251,26 @@ trait Login_Registration {
 		 *                        for more information on possible values.
 		 *
 		 * @since 1.18.0
+		 */ //do_action( 'edit_user_created_user', $user_id, $admin_or_both );
+		/**
+		 * Fires after a new user registration has been recorded.
+		 *
+		 * @param int $user_id ID of the newly registered user.
+		 *
+		 * @since 4.4.0
 		 */
-		do_action( 'edit_user_created_user', $user_id, $admin_or_both );
+		remove_action( 'register_new_user', 'wp_send_new_user_notifications' );
+		do_action( 'register_new_user', $user_id );
+
+		wp_new_user_notification( $user_id, null, $admin_or_both );
+
 		// success & handle after registration action as defined by user in the widget
 		$this->set_transient( 'eael_register_success', __( 'Registration completed successfully, Check your inbox for password if you did not provided while registering.', EAEL_TEXTDOMAIN ) );
 
 
 		// Handle after registration action
 		// should use be auto logged in?
-		if ( in_array( 'auto_login', self::$register_actions ) && ! is_user_logged_in() ) {
+		if ( in_array( 'auto_login', $register_actions ) && ! is_user_logged_in() ) {
 			$logged_in_user = wp_signon( [
 				'user_login'    => $username,
 				'user_password' => $password,
@@ -344,15 +391,42 @@ trait Login_Registration {
 	 * @since 4.9.0
 	 */
 	public function new_user_notification_email( $email_data, $user, $blogname ) {
-		//@TODO; handle custom email template here.
-		//error_log( print_r( self::$register_actions, 1));
-		/*
-		 * Array
-(
-    [0] => redirect
-    [1] => auto_login
-    [2] => send_email
-)*/
+		if ( ! self::$send_custom_email ) {
+			return $email_data;
+		}
+		if ( ! empty( self::$email_options['subject'] ) ) {
+			$email_data['subject'] = self::$email_options['subject'];
+		}
+
+		if ( ! empty( self::$email_options['message'] ) ) {
+			$placeholders = [
+				'/\[password\]/',
+				'/\[username\]/',
+				'/\[email\]/',
+				'/\[firstname\]/',
+				'/\[lastname\]/',
+				'/\[website\]/',
+				'/\[loginurl\]/',
+				'/\[sitetitle\]/',
+			];
+			$replacement  = [
+				self::$email_options['password'],
+				self::$email_options['username'],
+				self::$email_options['email'],
+				self::$email_options['firstname'],
+				self::$email_options['lastname'],
+				self::$email_options['website'],
+				wp_login_url(),
+				get_option( 'blogname' ),
+			];
+
+			$email_data['message'] = preg_replace( $placeholders, $replacement, self::$email_options['message'] );
+		}
+		if ( ! empty( self::$email_options['headers'] ) ) {
+			$email_data['headers'] = self::$email_options['headers'];
+		}
+
 		return $email_data;
+
 	}
 }
