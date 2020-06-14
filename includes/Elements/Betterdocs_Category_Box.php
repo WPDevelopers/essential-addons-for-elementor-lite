@@ -139,9 +139,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                         '1' => '1',
                         '2' => '2',
                         '3' => '3',
-                        '4' => '4',
-                        '5' => '5',
-                        '6' => '6',
+                        '4' => '4'
                     ],
                     'prefix_class'       => 'elementor-grid%s-',
                     'frontend_available' => true,
@@ -214,7 +212,8 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'label'     => __('Prefix', 'essential-addons-for-elementor-lite'),
                     'type'      => Controls_Manager::TEXT,
                     'condition' => [
-                        'show_count' => 'true'
+                        'show_count' => 'true',
+                        'layout_template' => 'Layout_Default'
                     ]
                 ]
             );
@@ -226,7 +225,8 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'type'      => Controls_Manager::TEXT,
                     'default'   => __('articles', 'essential-addons-for-elementor-lite'),
                     'condition' => [
-                        'show_count' => 'true'
+                        'show_count' => 'true',
+                        'layout_template' => 'Layout_Default'
                     ]
                 ]
             );
@@ -419,18 +419,18 @@ class Betterdocs_Category_Box extends Widget_Base {
                 ]
             );
 
-            $this->start_controls_tabs('box_icon_styles_tab');
-
-            // Normal State Tab
-            $this->start_controls_tab(
-                'icon_normal',
-                ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]
+            $this->add_control(
+                'category_settings_area',
+                [
+                    'label' => __( 'Area', 'essential-addons-for-elementor-lite' ),
+                    'type' =>   Controls_Manager::HEADING
+                ]
             );
 
             $this->add_responsive_control(
                 'category_settings_icon_area_size_normal',
                 [
-                    'label'      => esc_html__('Area Size', 'essential-addons-for-elementor-lite'),
+                    'label'      => esc_html__('Size', 'essential-addons-for-elementor-lite'),
                     'type'       => Controls_Manager::SLIDER,
                     'size_units' => ['px', '%', 'em'],
                     'range'      => [
@@ -440,8 +440,26 @@ class Betterdocs_Category_Box extends Widget_Base {
                     ],
                     'selectors'  => [
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon__layout-2'    => 'flex-basis: {{SIZE}}{{UNIT}};'
                     ],
                 ]
+            );
+
+            $this->add_control(
+                'category_settings_icon',
+                [
+                    'label' => __( 'Icon', 'essential-addons-for-elementor-lite' ),
+                    'type' =>   Controls_Manager::HEADING,
+                    'separator' => 'before',
+                ]
+            );
+
+            $this->start_controls_tabs('box_icon_styles_tab');
+
+            // Normal State Tab
+            $this->start_controls_tab(
+                'icon_normal',
+                ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]
             );
 
             $this->add_responsive_control(
@@ -457,6 +475,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                     ],
                     'selectors'  => [
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon img' => 'width: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon__layout-2 img'    => 'width: {{SIZE}}{{UNIT}};'
                     ],
                 ]
             );
@@ -466,7 +485,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                 [
                     'name'     => 'icon_background_normal',
                     'types'    => ['classic', 'gradient'],
-                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon',
+                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon, {{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon__layout-2',
                     'exclude'  => [
                         'image'
                     ]
@@ -478,7 +497,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                 [
                     'name'     => 'icon_border_normal',
                     'label'    => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon'
+                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon, {{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon__layout-2'
                 ]
             );
 
@@ -491,13 +510,16 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'selectors'  => [
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                     ],
+                    'condition' => [
+                        'layout_template' => 'Layout_Default'
+                    ]
                 ]
             );
 
             $this->add_responsive_control(
                 'icon_spacing',
                 [
-                    'label'              => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                    'label'              => esc_html__('Icon Spacing', 'essential-addons-for-elementor-lite'),
                     'type'               => Controls_Manager::DIMENSIONS,
                     'size_units'         => ['px', 'em', '%'],
                     'allowed_dimensions' => [
@@ -507,6 +529,9 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'selectors'          => [
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon' => 'margin: {{TOP}}{{UNIT}} auto {{BOTTOM}}{{UNIT}} auto;'
                     ],
+                    'condition' => [
+                        'layout_template' => 'Layout_Default'
+                    ]
                 ]
             );
 
@@ -523,7 +548,8 @@ class Betterdocs_Category_Box extends Widget_Base {
                 [
                     'name'     => 'icon_background_hover',
                     'types'    => ['classic', 'gradient'],
-                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner:hover .eael-bd-cb-cat-icon'
+                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner:hover .eael-bd-cb-cat-icon,
+                    {{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner:hover .eael-bd-cb-cat-icon__layout-2'
                 ]
             );
 
@@ -532,7 +558,8 @@ class Betterdocs_Category_Box extends Widget_Base {
                 [
                     'name'     => 'icon_border_hover',
                     'label'    => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner:hover .eael-bd-cb-cat-icon'
+                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner:hover .eael-bd-cb-cat-icon,
+                    {{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner:hover .eael-bd-cb-cat-icon__layout-2'
                 ]
             );
 
@@ -545,6 +572,9 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'selectors'  => [
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner:hover .eael-bd-cb-cat-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                     ],
+                    'condition' => [
+                        'layout_template' => 'Layout_Default'
+                    ]
                 ]
             );
 
@@ -567,6 +597,8 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'selectors'  => [
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .eael-bd-cb-cat-icon'     => 'transition: {{SIZE}}ms;',
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .eael-bd-cb-cat-icon img' => 'transition: {{SIZE}}ms;',
+                        '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon__layout-2'    => 'transition: {{SIZE}}ms;',
+                        '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon__layout-2 img'    => 'transition: {{SIZE}}ms;'
                     ],
                 ]
             );
@@ -592,6 +624,43 @@ class Betterdocs_Category_Box extends Widget_Base {
                 ]
             );
 
+            $this->add_control(
+                'title_styles_area_heading',
+                [
+                    'label' => __( 'Area', 'essential-addons-for-elementor-lite' ),
+                    'type' =>   Controls_Manager::HEADING
+                ]
+            );
+
+            $this->add_responsive_control(
+                'title_area_size',
+                [
+                    'label'      => esc_html__('Area Size', 'essential-addons-for-elementor-lite'),
+                    'type'       => Controls_Manager::SLIDER,
+                    'size_units' => ['px', '%', 'em'],
+                    'range'      => [
+                        'px' => [
+                            'max' => 500,
+                        ],
+                    ],
+                    'selectors'  => [
+                        '{{WRAPPER}} .layout__2 .eael-bd-cb-cat-title__layout-2'    => 'flex-basis: {{SIZE}}{{UNIT}};'
+                    ],
+                    'condition' => [
+                        'layout_template'   => 'Layout_2'
+                    ]
+                ]
+            );
+
+            $this->add_control(
+                'title_styles_heading',
+                [
+                    'label' => __( 'Title', 'essential-addons-for-elementor-lite' ),
+                    'type' =>   Controls_Manager::HEADING,
+                    'separator' => 'before'
+                ]
+            );
+
             $this->start_controls_tabs('box_title_styles_tab');
 
             // Normal State Tab
@@ -607,6 +676,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'type'      => Controls_Manager::COLOR,
                     'selectors' => [
                         '{{WRAPPER}} .eael-bd-cb-inner .eael-bd-cb-cat-title' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .layout__2 .eael-bd-cb-cat-title__layout-2' => 'color: {{VALUE}};'
                     ],
                 ]
             );
@@ -615,7 +685,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                 Group_Control_Typography::get_type(),
                 [
                     'name'     => 'cat_title_typography_normal',
-                    'selector' => '{{WRAPPER}} .eael-bd-cb-inner .eael-bd-cb-cat-title'
+                    'selector' => '{{WRAPPER}} .eael-bd-cb-inner .eael-bd-cb-cat-title, {{WRAPPER}} .layout__2 .eael-bd-cb-cat-title__layout-2'
                 ]
             );
 
@@ -627,6 +697,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'size_units' => ['px', '%', 'em'],
                     'selectors'  => [
                         '{{WRAPPER}} .eael-bd-cb-inner .eael-bd-cb-cat-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .layout__2 .eael-bd-cb-cat-title__layout-2 span'    => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                     ]
                 ]
             );
@@ -646,6 +717,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'type'      => Controls_Manager::COLOR,
                     'selectors' => [
                         '{{WRAPPER}} .eael-bd-cb-inner:hover .eael-bd-cb-cat-title' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .eael-bd-cb-inner:hover .eael-bd-cb-cat-title__layout-2' => 'color: {{VALUE}};'
                     ],
                 ]
             );
@@ -668,6 +740,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                     ],
                     'selectors'  => [
                         '{{WRAPPER}} .eael-bd-cb-inner .eael-bd-cb-cat-title' => 'transition: {{SIZE}}ms;',
+                        '{{WRAPPER}} .eael-bd-cb-inner:hover .eael-bd-cb-cat-title__layout-2'   => 'transition: {{SIZE}}ms;',
                     ],
                 ]
             );
@@ -691,6 +764,43 @@ class Betterdocs_Category_Box extends Widget_Base {
                 ]
             );
 
+            $this->add_control(
+                'count_styles_area_heading',
+                [
+                    'label' => __( 'Area', 'essential-addons-for-elementor-lite' ),
+                    'type' =>   Controls_Manager::HEADING
+                ]
+            );
+
+            $this->add_responsive_control(
+                'count_area_size',
+                [
+                    'label'      => esc_html__('Size', 'essential-addons-for-elementor-lite'),
+                    'type'       => Controls_Manager::SLIDER,
+                    'size_units' => ['px', '%', 'em'],
+                    'range'      => [
+                        'px' => [
+                            'max' => 500,
+                        ],
+                    ],
+                    'selectors'  => [
+                        '{{WRAPPER}} .layout__2 .eael-bd-cb-cat-count__layout-2'    => 'flex-basis: {{SIZE}}{{UNIT}};'
+                    ],
+                    'condition' => [
+                        'layout_template'   => 'Layout_2'
+                    ]
+                ]
+            );
+
+            $this->add_control(
+                'count_styles_heading',
+                [
+                    'label' => __( 'Count', 'essential-addons-for-elementor-lite' ),
+                    'type' =>   Controls_Manager::HEADING,
+                    'separator' => 'before'
+                ]
+            );
+
             $this->start_controls_tabs('box_count_styles_tab');
 
             // Normal State Tab
@@ -706,6 +816,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'type'      => Controls_Manager::COLOR,
                     'selectors' => [
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .eael-bd-cb-cat-count' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .count-inner__layout-2' => 'color: {{VALUE}};'
                     ],
                 ]
             );
@@ -714,7 +825,77 @@ class Betterdocs_Category_Box extends Widget_Base {
                 Group_Control_Typography::get_type(),
                 [
                     'name'     => 'count_typography_normal',
-                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .eael-bd-cb-cat-count'
+                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .eael-bd-cb-cat-count, {{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .count-inner__layout-2'
+                ]
+            );
+
+            $this->add_group_control(
+                Group_Control_Background::get_type(),
+                [
+                    'name'     => 'count_box_bg',
+                    'types'    => ['classic', 'gradient'],
+                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .count-inner__layout-2',
+                    'condition' => [
+                        'layout_template'   => 'Layout_2'
+                    ]
+                ]
+            );
+
+            $this->add_group_control(
+                Group_Control_Border::get_type(),
+                [
+                    'name'     => 'count_box_border',
+                    'label'    => esc_html__('Border', 'essential-addons-for-elementor-lite'),
+                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .count-inner__layout-2',
+                    'condition' => [
+                        'layout_template'   => 'Layout_2'
+                    ]
+                ]
+            );
+
+            $this->add_responsive_control(
+                'count_box_border_radius',
+                [
+                    'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                    'type'       => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px', 'em', '%'],
+                    'selectors'  => [
+                        '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .count-inner__layout-2' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    ],
+                    'condition' => [
+                        'layout_template'   => 'Layout_2'
+                    ]
+                ]
+            );
+
+            $this->add_group_control(
+                Group_Control_Box_Shadow::get_type(),
+                [
+                    'name'     => 'count_box_box_shadow',
+                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .count-inner__layout-2',
+                    'condition' => [
+                        'layout_template'   => 'Layout_2'
+                    ]
+                ]
+            );
+
+            $this->add_responsive_control(
+                'count_box_size',
+                [
+                    'label'      => esc_html__('Size', 'essential-addons-for-elementor-lite'),
+                    'type'       => Controls_Manager::SLIDER,
+                    'size_units' => ['px', '%', 'em'],
+                    'range'      => [
+                        'px' => [
+                            'max' => 500,
+                        ],
+                    ],
+                    'selectors'  => [
+                        '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .count-inner__layout-2'    => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
+                    ],
+                    'condition' => [
+                        'layout_template'   => 'Layout_2'
+                    ]
                 ]
             );
 
@@ -726,6 +907,9 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'size_units' => ['px', '%', 'em'],
                     'selectors'  => [
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .eael-bd-cb-cat-count' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                    'condition' => [
+                        'layout_template!'   => 'Layout_2'
                     ]
                 ]
             );
@@ -745,7 +929,58 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'type'      => Controls_Manager::COLOR,
                     'selectors' => [
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner:hover .eael-bd-cb-cat-count' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner:hover .count-inner__layout-2'    => 'color: {{VALUE}};'
                     ],
+                ]
+            );
+
+            $this->add_group_control(
+                Group_Control_Background::get_type(),
+                [
+                    'name'     => 'count_box_bg_hover',
+                    'types'    => ['classic', 'gradient'],
+                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner:hover .count-inner__layout-2',
+                    'condition' => [
+                        'layout_template'   => 'Layout_2'
+                    ]
+                ]
+            );
+
+            $this->add_group_control(
+                Group_Control_Border::get_type(),
+                [
+                    'name'     => 'count_box_border_hover',
+                    'label'    => esc_html__('Border', 'essential-addons-for-elementor-lite'),
+                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner:hover .count-inner__layout-2',
+                    'condition' => [
+                        'layout_template'   => 'Layout_2'
+                    ]
+                ]
+            );
+
+            $this->add_responsive_control(
+                'count_box_border_radius_hover',
+                [
+                    'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                    'type'       => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px', 'em', '%'],
+                    'selectors'  => [
+                        '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner:hover .count-inner__layout-2' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    ],
+                    'condition' => [
+                        'layout_template'   => 'Layout_2'
+                    ]
+                ]
+            );
+
+            $this->add_group_control(
+                Group_Control_Box_Shadow::get_type(),
+                [
+                    'name'     => 'count_box_box_shadow_hover',
+                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner:hover .count-inner__layout-2',
+                    'condition' => [
+                        'layout_template'   => 'Layout_2'
+                    ]
                 ]
             );
 
