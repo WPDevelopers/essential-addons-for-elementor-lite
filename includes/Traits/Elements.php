@@ -355,7 +355,8 @@ trait Elements
             }
 
             // Table of Contents
-            if ($this->get_settings('eael-table-of-content') == true) {
+            $elementor_page = \Elementor\Plugin::$instance->db->is_built_with_elementor( get_the_ID() );
+            if ($this->get_settings('eael-table-of-content') == true && $elementor_page === true) {
                 if ($page_settings_model->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['eael_ext_table_of_content']['enabled'])) {
                     add_filter('eael/section/after_render', function ($extensions) {
                         $extensions[] = 'eael-table-of-content';
