@@ -19,8 +19,9 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    > span {
+    > .eael-accordion-tab-title {
         flex-grow: 1;
+        margin: 0;
     }
     > i {
         margin-right: 10px;

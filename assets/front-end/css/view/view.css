@@ -175,11 +175,12 @@
           align-items: center;
   cursor: pointer;
 }
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header > span {
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header > .eael-accordion-tab-title {
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
+  margin: 0;
 }
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header > i {
   margin-right: 10px;
