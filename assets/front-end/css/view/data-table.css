@@ -13,7 +13,7 @@ table.eael-data-table thead .sorting:after {
   position: absolute;
   top: 50%;
   right: 10px;
-  font-family: "FontAwesome";
+  font-family: "Font Awesome 5 Free";
   color: #fff;
   z-index: 1;
   -webkit-transform: translateY(-50%);
