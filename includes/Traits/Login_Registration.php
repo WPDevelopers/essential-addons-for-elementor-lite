@@ -188,7 +188,7 @@ trait Login_Registration {
 			$settings         = $widget->get_settings_for_display();
 			$register_actions = ! empty( $settings['register_action'] ) ? $settings['register_action'] : [];
 			// set email related stuff
-			if ( ( ! empty( $settings['register_action'] ) && in_array( 'send_email', $settings['register_action'] ) ) && 'custom' === $settings['reg_email_template_type'] ) {
+			if ( $is_pass_auto_generated || (  in_array( 'send_email', $register_actions ) && 'custom' === $settings['reg_email_template_type'] ) ) {
 				self::$send_custom_email = true;
 			}
 			if ( isset( $settings['reg_email_subject'] ) ) {
@@ -242,7 +242,8 @@ trait Login_Registration {
 			wp_safe_redirect( esc_url( $url ) );
 			exit();
 		}
-		$admin_or_both = in_array( 'send_email', $register_actions ) ? 'both' : 'admin';
+		$admin_or_both = $is_pass_auto_generated || in_array( 'send_email', $register_actions ) ? 'both' : 'admin';
+
 		/**
 		 * Fires after a new user has been created.
 		 *
