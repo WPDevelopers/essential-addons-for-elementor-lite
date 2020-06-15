@@ -830,7 +830,9 @@ class Login_Register extends Widget_Base {
 		$default_message = $default_subject . "\r\n\r\n";
 		$default_message .= __( 'Username: [username]' ) . "\r\n\r\n";
 		$default_message .= __( 'Password: [password]' ) . "\r\n\r\n";
-		$default_message .= __( 'Please sit the following address to login to your account:' ) . "\r\n\r\n";
+		$default_message .= __( 'To reset your password, visit the following address:' ) . "\r\n\r\n";
+		$default_message .= "[password_reset_link]\r\n\r\n";
+		$default_message .= __( 'Please click the following address to login to your account:' ) . "\r\n\r\n";
 		$default_message .= wp_login_url() . "\r\n";
 
 		$this->start_controls_section( 'section_content_reg_email', [
@@ -907,7 +909,7 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'reg_email_content_note', [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => __( '<strong>Note:</strong> You can use dynamic content in the email body like [fieldname]. For example [username] will be replaced by user-typed username. Available tags are: [password], [username], [email], [firstname],[lastname], [website], [loginurl] and [sitetitle] ', EAEL_TEXTDOMAIN ),
+			'raw'             => __( '<strong>Note:</strong> You can use dynamic content in the email body like [fieldname]. For example [username] will be replaced by user-typed username. Available tags are: [password], [username], [email], [firstname],[lastname], [website], [loginurl], [password_reset_link] and [sitetitle] ', EAEL_TEXTDOMAIN ),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 			'condition'       => [
 				'reg_email_template_type' => 'custom',
