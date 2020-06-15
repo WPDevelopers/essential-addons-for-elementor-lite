@@ -8,15 +8,12 @@
   margin: 0px;
   list-style-type: none;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
       -ms-flex-pack: start;
           justify-content: flex-start;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   z-index: 1;
@@ -26,20 +23,16 @@
   position: relative;
   padding: 1em 1.5em;
   -webkit-box-flex: 1;
-  -webkit-flex: 1 1 auto;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   cursor: pointer;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   text-align: center;
@@ -81,11 +74,9 @@
 
 .eael-tabs-content {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-flex: 1;
-  -webkit-flex: 1 1 auto;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   overflow: hidden;
@@ -115,30 +106,25 @@
 
 .eael-tab-top-icon li {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   text-align: center;
 }
 
 .eael-tab-top-icon li a {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   text-align: center;
 }
 
 .eael-tab-top-icon li .fa,
 .eael-tab-top-icon li .eael-tab-title {
   -webkit-box-flex: 1;
-  -webkit-flex: 1 1 100%;
       -ms-flex: 1 1 100%;
           flex: 1 1 100%;
   line-height: 1;
@@ -152,14 +138,12 @@
 
 .eael-advance-tabs.eael-tabs-vertical {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
 .eael-advance-tabs.eael-tabs-vertical .eael-tabs-nav {
   -webkit-box-flex: 0;
-  -webkit-flex: 0 0 auto;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
 }
@@ -167,7 +151,6 @@
 .eael-advance-tabs.eael-tabs-vertical .eael-tabs-nav > ul {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -webkit-flex-flow: column wrap;
       -ms-flex-flow: column wrap;
           flex-flow: column wrap;
 }
@@ -175,7 +158,6 @@
 .eael-advance-tabs.eael-tabs-vertical .eael-tabs-nav > ul > li {
   width: 100%;
   -webkit-box-pack: start;
-  -webkit-justify-content: start;
       -ms-flex-pack: start;
           justify-content: start;
 }
@@ -183,7 +165,6 @@
 .eael-advance-tabs.eael-tabs-vertical .eael-tabs-nav > ul li::after {
   bottom: auto !important;
   right: -10px;
-  top: -webkit-calc(50% - 10px);
   top: calc(50% - 10px);
   left: auto !important;
   border-left: 10px solid #444;
@@ -194,53 +175,45 @@
 
 @media only screen and (max-width: 767px) {
   .eael-advance-tabs .eael-tabs-nav > ul {
-    -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -webkit-flex-flow: row wrap;
         -ms-flex-flow: row wrap;
             flex-flow: row wrap;
   }
 
   .eael-advance-tabs .eael-tabs-nav > ul li {
     -webkit-box-flex: 1;
-    -webkit-flex: 1 1 auto;
         -ms-flex: 1 1 auto;
             flex: 1 1 auto;
   }
 
   .responsive-vertical-layout.eael-advance-tabs .eael-tabs-nav > ul li {
     -webkit-box-flex: 1;
-    -webkit-flex: 1 1 100%;
         -ms-flex: 1 1 100%;
             flex: 1 1 100%;
   }
 
   .eael-advance-tabs.eael-tabs-vertical {
-    -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
   }
 
   .eael-advance-tabs.eael-tabs-vertical div.eael-tabs-nav {
     -webkit-box-flex: 1;
-    -webkit-flex: 1 100%;
         -ms-flex: 1 100%;
             flex: 1 100%;
   }
 
   .eael-advance-tabs.eael-tabs-vertical ul {
     -webkit-box-flex: 1;
-    -webkit-flex: 1 100%;
         -ms-flex: 1 100%;
             flex: 1 100%;
   }
 
   .eael-advance-tabs.eael-tabs-vertical ul li {
     -webkit-box-flex: 1;
-    -webkit-flex: 1 100%;
         -ms-flex: 1 100%;
             flex: 1 100%;
   }
