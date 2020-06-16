@@ -1116,6 +1116,7 @@
   font-weight: normal;
 }
 .eael-ticker-wrap {
+  position: relative;
   overflow: hidden;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1206,6 +1207,9 @@
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 /*--- General ---*/
 .eael-countdown-items {
