@@ -37,7 +37,7 @@ trait Generator
         ];
         $global_settings = get_option('eael_global_settings');
         $document = Plugin::$instance->documents->get($post_id);
-        $widgets = $this->collect_recursive_elements_new($document->get_elements_data());
+        $widgets = $this->collect_recursive_elements($document->get_elements_data());
         $widgets = array_map(function ($val) use ($replace) {
             if (array_key_exists($val, $replace)) {
                 $val = $replace[$val];
@@ -57,7 +57,7 @@ trait Generator
         return array_filter(array_unique($widgets));
     }
 
-    public function collect_recursive_elements_new($elements)
+    public function collect_recursive_elements($elements)
     {
         $collections = [];
 
@@ -65,14 +65,14 @@ trait Generator
             if (isset($element['elType']) && $element['elType'] == 'widget') {
                 if ($element['widgetType'] === 'global') {
                     $document = Plugin::$instance->documents->get($element['templateID']);
-                    $collections = array_merge($collections, $this->collect_recursive_elements_new($document->get_elements_data()));
+                    $collections = array_merge($collections, $this->collect_recursive_elements($document->get_elements_data()));
                 } else {
                     $collections[] = $element['widgetType'];
                 }
             }
 
             if (!empty($element['elements'])) {
-                $collections = array_merge($collections, $this->collect_recursive_elements_new($element['elements']));
+                $collections = array_merge($collections, $this->collect_recursive_elements($element['elements']));
             }
         }
 
@@ -223,78 +223,4 @@ trait Generator
 
         return false;
     }
-
-    /**
-     * Generate single post scripts
-     *
-     * @since 3.0.0
-     */
-    // public function generate_frontend_scripts()
-    // {
-    //     if ($this->is_preview_mode()) {
-    //         return;
-    //     }
-
-    //     if (!Plugin::$instance->frontend->has_elementor_in_page()) {
-    //         return;
-    //     }
-
-    //     $replace = [
-    //         'eicon-woocommerce' => 'eael-product-grid',
-    //         'eael-countdown' => 'eael-count-down',
-    //         'eael-creative-button' => 'eael-creative-btn',
-    //         'eael-team-member' => 'eael-team-members',
-    //         'eael-testimonial' => 'eael-testimonials',
-    //         'eael-weform' => 'eael-weforms',
-    //         'eael-cta-box' => 'eael-call-to-action',
-    //         'eael-dual-color-header' => 'eael-dual-header',
-    //         'eael-pricing-table' => 'eael-price-table',
-    //         'eael-filterable-gallery' => 'eael-filter-gallery',
-    //         'eael-one-page-nav' => 'eael-one-page-navigation',
-    //         'eael-interactive-card' => 'eael-interactive-cards',
-    //         'eael-image-comparison' => 'eael-img-comparison',
-    //         'eael-dynamic-filterable-gallery' => 'eael-dynamic-filter-gallery',
-    //         'eael-google-map' => 'eael-adv-google-map',
-    //         'eael-instafeed' => 'eael-instagram-gallery',
-    //     ];
-    //     $elements = array_map(function ($val) use ($replace) {
-    //         if (array_key_exists($val, $replace)) {
-    //             $val = $replace[$val];
-    //         }
-    //         return (strpos($val, 'eael-') !== false ? str_replace(['eael-'], [''], $val) : null);
-    //     }, $this->transient_elements);
-    //     $extensions = apply_filters('eael/section/after_render', $this->transient_extensions);
-    //     $elements = array_filter(array_unique(array_merge($elements, $extensions)));
-    //     $old_elements = get_transient('eael_transient_elements_' . $this->request_uid);
-
-    //     if ($old_elements === false) {
-    //         $old_elements = [];
-    //     }
-
-    //     // sort two arr for compare
-    //     sort($elements);
-    //     sort($old_elements);
-
-    //     if ($old_elements != $elements) {
-    //         set_transient('eael_transient_elements_' . $this->request_uid, $elements, MONTH_IN_SECONDS);
-
-    //         if (!empty($elements)) {
-    //             // load fallback assets
-    //             $this->enqueue_protocols($this->request_uid);
-
-    //             // generate cache files
-    //             $this->generate_scripts($elements, $this->request_uid, 'view');
-    //         }
-    //     }
-
-    //     // if no cache files, generate new
-    //     if (!$this->has_cache_files($this->request_uid)) {
-    //         $this->generate_scripts($elements, $this->request_uid, 'view');
-    //     }
-
-    //     // if no elements, remove cache files
-    //     if (empty($elements)) {
-    //         $this->remove_files($this->request_uid);
-    //     }
-    // }
 }
