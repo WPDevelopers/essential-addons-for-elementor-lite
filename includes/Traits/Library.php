@@ -96,7 +96,7 @@ trait Library
      *
      * @since 3.0.0
      */
-    public function is_preview_mode()
+    public function is_running_background()
     {
         if (isset($_REQUEST['doing_wp_cron'])) {
             return true;
@@ -105,13 +105,6 @@ trait Library
         if (wp_doing_ajax()) {
             return true;
         }
-        
-        // if (isset($_GET['elementor-preview'])) {
-        //     return true;
-        // }
-        // if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'elementor') {
-        //     return true;
-        // }
 
         return false;
     }
