@@ -142,7 +142,8 @@ class Login_Register extends Widget_Base {
 		// Registration For Related---
 		$this->init_content_register_fields_controls();
 		$this->init_content_register_options_controls();
-		$this->init_content_register_email_controls();
+		$this->init_content_register_user_email_controls();
+		$this->init_content_register_admin_email_controls();
 		$this->init_register_validation_message_controls();
 
 
@@ -791,7 +792,7 @@ class Login_Register extends Widget_Base {
 			'options'     => [
 				'redirect'   => __( 'Redirect', EAEL_TEXTDOMAIN ),
 				'auto_login' => __( 'Auto Login', EAEL_TEXTDOMAIN ),
-				'send_email' => __( 'Send Email', EAEL_TEXTDOMAIN ),
+				'send_email' => __( 'Notify User By Email', EAEL_TEXTDOMAIN ),
 			],
 		] );
 
@@ -823,20 +824,19 @@ class Login_Register extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	protected function init_content_register_email_controls() {
-
+	protected function init_content_register_user_email_controls() {
+		/* translators: %s: Site Name */
 		$default_subject = sprintf( __( 'Thank you for registering on "%s"!', EAEL_TEXTDOMAIN ), get_option( 'blogname' ) );
-		/* translators: %s: User login. */
 		$default_message = $default_subject . "\r\n\r\n";
-		$default_message .= __( 'Username: [username]' ) . "\r\n\r\n";
-		$default_message .= __( 'Password: [password]' ) . "\r\n\r\n";
-		$default_message .= __( 'To reset your password, visit the following address:' ) . "\r\n\r\n";
+		$default_message .= __( 'Username: [username]', EAEL_TEXTDOMAIN ) . "\r\n\r\n";
+		$default_message .= __( 'Password: [password]', EAEL_TEXTDOMAIN ) . "\r\n\r\n";
+		$default_message .= __( 'To reset your password, visit the following address:', EAEL_TEXTDOMAIN ) . "\r\n\r\n";
 		$default_message .= "[password_reset_link]\r\n\r\n";
-		$default_message .= __( 'Please click the following address to login to your account:' ) . "\r\n\r\n";
+		$default_message .= __( 'Please click the following address to login to your account:', EAEL_TEXTDOMAIN ) . "\r\n\r\n";
 		$default_message .= wp_login_url() . "\r\n";
 
 		$this->start_controls_section( 'section_content_reg_email', [
-			'label'      => __( 'Register Email Options', EAEL_TEXTDOMAIN ),
+			'label'      => __( 'Register User Email Options', EAEL_TEXTDOMAIN ),
 			'conditions' => [
 				'relation' => 'or',
 				'terms'    => [
@@ -884,9 +884,7 @@ class Login_Register extends Widget_Base {
 		$this->add_control( 'reg_email_subject', [
 			'label'       => __( 'Email Subject', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::TEXT,
-			/* translators: %s: Site Title */
 			'placeholder' => $default_subject,
-			/* translators: %s: Site Title. */
 			'default'     => $default_subject,
 			'label_block' => true,
 			'render_type' => 'none',
@@ -914,7 +912,7 @@ class Login_Register extends Widget_Base {
 			'condition'       => [
 				'reg_email_template_type' => 'custom',
 			],
-			'render_type' => 'none',
+			'render_type'     => 'none',
 		] );
 
 		$this->add_control( 'reg_email_content_type', [
@@ -928,6 +926,112 @@ class Login_Register extends Widget_Base {
 			],
 			'condition'   => [
 				'reg_email_template_type' => 'custom',
+			],
+		] );
+
+		$this->end_controls_section();
+	}
+
+	protected function init_content_register_admin_email_controls() {
+		/* translators: %s: Site Name */
+		$default_subject = sprintf( __( '["%s"] New User Registration', EAEL_TEXTDOMAIN ), get_option( 'blogname' ) );
+		/* translators: %s: Site Name */
+		$default_message = sprintf( __( "New user registration on your site %s", EAEL_TEXTDOMAIN ), get_option( 'blogname' ) ) . "\r\n\r\n";
+		$default_message .= __( 'Username: [username]', EAEL_TEXTDOMAIN ) . "\r\n\r\n";
+		$default_message .= __( 'Email: [email]', EAEL_TEXTDOMAIN ) . "\r\n\r\n";
+
+
+		$this->start_controls_section( 'section_content_reg_admin_email', [
+			'label'      => __( 'Register Admin Email Options', EAEL_TEXTDOMAIN ),
+			'conditions' => [
+				'relation' => 'or',
+				'terms'    => [
+					[
+						'name'  => 'show_registration_link',
+						'value' => 'yes',
+						//@TODO; debug why multi-level condition is not working.
+						//'relation' => 'and',
+						//'terms'    => [
+						//	[
+						//		'name'     => 'register_action',
+						//		'value'    => 'send_email',
+						//		'operator' => '===',
+						//	],
+						//],
+					],
+					[
+						'name'  => 'default_form_type',
+						'value' => 'registration',
+						//'relation' => 'and',
+						//'terms'    => [
+						//	[
+						//		'name'     => 'register_action',
+						//		'value'    => 'send_email',
+						//		'operator' => '===',
+						//	],
+						//],
+					],
+				],
+			],
+		] );
+
+		$this->add_control( 'reg_admin_email_template_type', [
+			'label'       => __( 'Email Template Type', EAEL_TEXTDOMAIN ),
+			'description' => __( 'Default template uses WordPress Default Admin email template. You can customize it by choosing the custom option.', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::SELECT,
+			'default'     => 'default',
+			'render_type' => 'none',
+			'options'     => [
+				'default' => __( 'WordPres Default', EAEL_TEXTDOMAIN ),
+				'custom'  => __( 'Custom', EAEL_TEXTDOMAIN ),
+			],
+		] );
+
+		$this->add_control( 'reg_admin_email_subject', [
+			'label'       => __( 'Email Subject', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'placeholder' => $default_subject,
+			'default'     => $default_subject,
+			'label_block' => true,
+			'render_type' => 'none',
+			'condition'   => [
+				'reg_admin_email_template_type' => 'custom',
+			],
+		] );
+
+		$this->add_control( 'reg_admin_email_message', [
+			'label'       => __( 'Email Message', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::WYSIWYG,
+			'placeholder' => __( 'Enter Your Custom Email Message..', EAEL_TEXTDOMAIN ),
+			'default'     => $default_message,
+			'label_block' => true,
+			'render_type' => 'none',
+			'condition'   => [
+				'reg_admin_email_template_type' => 'custom',
+			],
+		] );
+
+		$this->add_control( 'reg_admin_email_content_note', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( '<strong>Note:</strong> You can use dynamic content in the email body like [fieldname]. For example [username] will be replaced by user-typed username. Available tags are: [username], [email], [firstname],[lastname], [website], [loginurl] and [sitetitle] ', EAEL_TEXTDOMAIN ),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+			'condition'       => [
+				'reg_admin_email_template_type' => 'custom',
+			],
+			'render_type'     => 'none',
+		] );
+
+		$this->add_control( 'reg_admin_email_content_type', [
+			'label'       => __( 'Email Content Type', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::SELECT,
+			'default'     => 'html',
+			'render_type' => 'none',
+			'options'     => [
+				'html'  => __( 'HTML', EAEL_TEXTDOMAIN ),
+				'plain' => __( 'Plain', EAEL_TEXTDOMAIN ),
+			],
+			'condition'   => [
+				'reg_admin_email_template_type' => 'custom',
 			],
 		] );
 
