@@ -49,7 +49,7 @@ const removeEntry = () => {
 module.exports = (env, argv) => {
 	return {
 		stats: "minimal",
-		entry: outputEntry(argv),
+		entry: outputEntry(),
 		output: {
 			path: path.resolve(__dirname, "assets/front-end/"),
 			filename: argv.mode === "production" ? "[name].min.js" : "[name].js",

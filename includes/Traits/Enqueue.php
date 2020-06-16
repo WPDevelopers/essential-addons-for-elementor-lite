@@ -33,8 +33,6 @@ trait Enqueue
             return;
         }
 
-        error_log(print_r($widgets, 1));
-
         // Compatibility: Gravity forms
         if (isset($widgets['gravity-form']) && class_exists('GFCommon')) {
             foreach ($this->eael_select_gravity_form() as $form_id => $form_name) {
@@ -81,6 +79,9 @@ trait Enqueue
                 wp_add_inline_script('nf-front-end', 'var nfForms = nfForms || [];');
             });
         }
+
+        // run hook before enqueue script
+        do_action('eael/before_single_enqueue_scripts', $widgets);
 
         // enqueue
         wp_enqueue_style(
