@@ -5,7 +5,6 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \Elementor\Core\Settings\Manager as Settings_Manager;
 use \Elementor\Plugin;
 
 trait Generator
@@ -84,13 +83,9 @@ trait Generator
      *
      * @since 3.0.1
      */
-    public function combine_files($paths = array(), $file = 'eael.min.css')
+    public function combine_files($paths = [], $post_id, $ext)
     {
         $output = '';
-        $page_settings_manager = Settings_Manager::get_settings_managers('page');
-        $page_settings_model = $page_settings_manager->get_model(get_the_ID());
-
-        // $custom_js = $document->get_settings('eael_custom_js');
 
         if (!empty($paths)) {
             foreach ($paths as $path) {
@@ -98,11 +93,17 @@ trait Generator
             }
         }
 
-        if (pathinfo($file, PATHINFO_EXTENSION) === 'js' && $page_settings_model->get_settings('eael_custom_js_print_method') == 'external') {
-            $output .= $page_settings_model->get_settings('eael_custom_js');
+        if ($post_id && $ext == 'js') {
+            $document = Plugin::$instance->documents->get($post_id);
+
+            if ($document->get_settings('eael_custom_js_print_method') == 'external') {
+                $output .= $document->get_settings('eael_custom_js');
+            }
         }
 
-        return file_put_contents($this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file), $output);
+        $file_name = ($post_id ? 'eael-post-' . $post_id . '.min.' : 'eael.min.') . $ext;
+
+        return file_put_contents($this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file_name), $output);
     }
 
     /**
@@ -169,7 +170,7 @@ trait Generator
 
             // generate cache files
             if (!empty($widgets)) {
-                $this->generate_scripts($widgets, 'eael-post-' . $post_id, 'view');
+                $this->generate_scripts($widgets, $post_id, 'view');
             }
         }
 
@@ -179,7 +180,29 @@ trait Generator
         } else {
             // if no cache files, generate new
             if (!$this->has_cache_files($post_id)) {
-                $this->generate_scripts($widgets, 'eael-post-' . $post_id, 'view');
+                $this->generate_scripts($widgets, $post_id, 'view');
+            }
+        }
+
+        return $widgets;
+    }
+    
+    /**
+     * Generate editor script.
+     *
+     * @since 3.0.0
+     */
+    public function generate_editor_scripts()
+    {
+        $widgets = $this->get_settings();
+
+        // if no elements, remove cache files
+        if (empty($widgets)) {
+            $this->remove_files();
+        } else {
+            // if no cache files, generate new
+            if (!$this->has_cache_files()) {
+                $this->generate_scripts($widgets, null, 'edit');
             }
         }
 
@@ -191,7 +214,7 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_scripts($widgets, $file_name, $context)
+    public function generate_scripts($widgets, $post_id, $context)
     {
         // if folder not exists, create new folder
         if (!file_exists(EAEL_ASSET_PATH)) {
@@ -203,8 +226,8 @@ trait Generator
         $css_paths = $this->generate_dependency($widgets, 'css', $context);
 
         // combine files
-        $this->combine_files($css_paths, ($file_name ? $file_name : 'eael') . '.min.css');
-        $this->combine_files($js_paths, ($file_name ? $file_name : 'eael') . '.min.js');
+        $this->combine_files($css_paths, $post_id, 'css');
+        $this->combine_files($js_paths, $post_id, 'js');
     }
 
     /**
