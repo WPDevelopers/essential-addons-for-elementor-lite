@@ -40,7 +40,7 @@ trait Library
     public function remove_files($uid = null)
     {
         $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.css';
-        $js_path  = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.js';
+        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.js';
 
         if (file_exists($css_path)) {
             unlink($css_path);
@@ -80,8 +80,12 @@ trait Library
     {
         check_ajax_referer('essential-addons-elementor', 'security');
 
-        if (isset($_POST['pageID']) && 'post' === $_POST['actionType']) {
-            $this->remove_files('post-' . $_POST['pageID']);
+        if (isset($_REQUEST['posts'])) {
+            if (!empty($_POST['posts'])) {
+                foreach ($_POST['posts'] as $post) {
+                    $this->remove_files('post-' . $post);
+                }
+            }
         } else {
             // clear cache files
             $this->empty_dir(EAEL_ASSET_PATH);
@@ -100,7 +104,7 @@ trait Library
         if (isset($_REQUEST['doing_wp_cron'])) {
             return true;
         }
-        
+
         if (wp_doing_ajax()) {
             return true;
         }
