@@ -37,7 +37,7 @@ trait Post_Grid {
         if ( $settings['eael_show_meta'] ) {
             echo '<div class="eael-entry-meta">';
             if ( $settings['eael_show_author'] === 'yes' ) {
-                echo '<span class="eael-posted-by">' . get_the_author_meta( 'display_name' ) . '</span>';
+                echo '<span class="eael-posted-by">' . get_the_author_posts_link() . '</span>';
             }
             if ( $settings['eael_show_date'] === 'yes' ) {
                 echo '<span class="eael-posted-on"><time datetime="' . get_the_date() . '">' . get_the_date() . '</time></span>';
