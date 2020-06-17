@@ -301,7 +301,7 @@ trait Helper
                     'asc' => 'Ascending',
                     'desc' => 'Descending',
                 ],
-                'default' => 'desc',
+                'default' => 'asc',
 
             ]
         );
