@@ -45,9 +45,9 @@ class Bootstrap
     public $pro_enabled;
 
     // localize objects
-    public $localize_objects;
+    public $localize_objects = [];
 
-    public $loaded_templates;
+    public $loaded_templates = [];
 
     /**
      * Singleton instance
@@ -93,7 +93,7 @@ class Bootstrap
         // initialize transient container
         // $this->transient_elements = [];
         // $this->transient_extensions = [];
-        $this->loaded_templates = [];
+        // $this->loaded_templates = [];
 
         // start plugin tracking
         if (!$this->pro_enabled) {

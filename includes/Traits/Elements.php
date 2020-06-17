@@ -300,27 +300,32 @@ trait Elements
      */
     public function render_global_html()
     {
-        if (is_singular() && did_action('elementor/loaded')) {
-            $page_settings_manager = Settings_Manager::get_settings_managers('page');
-            $page_settings_model   = $page_settings_manager->get_model(get_the_ID());
-            $global_settings       = get_option('eael_global_settings');
-            $html                  = '';
-            $reading_progress_html = '';
-            $table_of_content_html = '';
 
-            // Custom JS
-            if(!empty($this->loaded_templates)) {
-                foreach($this->loaded_templates as $post_id) {
-                    $post_settings_model   = $page_settings_manager->get_model($post_id);
+        if(!did_action('elementor/loaded')) {
+            return;
+        }
 
-                    if ($post_settings_model->get_settings('eael_custom_js')) {
-                        if ($post_settings_model->get_settings('eael_custom_js_print_method') == 'internal' || ($post_settings_model->get_settings('eael_custom_js_print_method') == 'external' && !$this->has_cache_files($this->request_uid)) || EAEL_DEV_MODE) {
-                            $html .= '<script type="text/javascript">' . $post_settings_model->get_settings('eael_custom_js') . '</script>';
-                        }
-                    }
-                }
-            }
+        // $page_settings_manager = Settings_Manager::get_settings_managers('page');
+        //     $page_settings_model   = $page_settings_manager->get_model(get_the_ID());
+        //     $global_settings       = get_option('eael_global_settings');
+        //     $html                  = '';
+        //     $reading_progress_html = '';
+        //     $table_of_content_html = '';
 
+        //     // Custom JS
+        //     if(!empty($this->loaded_templates)) {
+        //         foreach($this->loaded_templates as $post_id) {
+        //             $post_settings_model   = $page_settings_manager->get_model($post_id);
+
+        //             if ($post_settings_model->get_settings('eael_custom_js')) {
+        //                 if ($post_settings_model->get_settings('eael_custom_js_print_method') == 'internal' || ($post_settings_model->get_settings('eael_custom_js_print_method') == 'external' && !$this->has_cache_files($this->request_uid)) || EAEL_DEV_MODE) {
+        //                     $html .= '<script type="text/javascript">' . $post_settings_model->get_settings('eael_custom_js') . '</script>';
+        //                 }
+        //             }
+        //         }
+        //     }
+
+        if (is_singular()) {
             // Reading Progress Bar
             if ($this->get_settings('eael-reading-progress') == true) {
                 if ($page_settings_model->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {

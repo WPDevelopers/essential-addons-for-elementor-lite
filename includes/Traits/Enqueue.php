@@ -29,6 +29,9 @@ trait Enqueue
             return;
         }
 
+        // loaded template stack
+        $this->loaded_templates[] = $css_file->get_post_id();
+
         // generate post script
         $widgets = $this->generate_post_scripts($css_file->get_post_id());
 
