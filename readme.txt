@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.4
 Requires PHP: 5.4
-Stable tag: 4.0.1
+Stable tag: 4.0.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -223,6 +223,29 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.0.3 - 11/06/2020 =
+- Fixed: EA Filterable Gallery Image Overlapping issue with Lazyload- WP Rocket
+- Fixed: EA Feature List Default Arrow Indicator Position issue 
+- Fixed: EA Table of Content appearing at the bottom for Gutenberg posts
+- Fixed: EA Post Grid issue with Load More 'Grid' layout becoming Masonry
+- Fixed: EA Post Grid issue with PressForward plugin
+- Fixed: EA Sticky Video Icon overlapping issue
+- Few minor bugfix and improvements
+
+= 4.0.2 - 04/06/2020 =
+- Improvement : EA Post Grid | Added margin & padding controls for Thumbnail & Content, and 2 more preset layouts
+- Improvement : EA Creative Buttons | Added Gradient background color option, and border radius option
+- Improvement : EA Advanced Accordion | Added options to style the icons, and Spacing option between each accordion
+- Improvement : EA Countdown | Added background gradient option, separator styles, and List View option
+- Improvement : EA Pricing Table | Added Gradient background color for buttons
+- Improvement : EA Call to Action | Added Gradient Background, Multiple Buttons, and Sub-heading options
+- Improvement : EA Feature List | Added Radius corner for Icon Box, Individual Icon & List Styling, and Icon padding options
+- Improvement : EA Testimonials | Added spacing options for content, and more Styling layouts
+- Improvement : EA Image Accordion | Added content alignment, and image styling options
+- Fixed : Responsive issue for EA Feature List when connector is enabled
+- Few minor bug fix and improvements 
+
 
 = 4.0.1 - 28/05/2020 =
 - Fixed: PHP 7.4 compatibility
