@@ -361,21 +361,21 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
 
         $wp_admin_bar->add_node([
             'parent' => 'ea-wp-admin-bar',
-            'id'     => 'ea-all-cache-clear',
+            'id'     => 'ea-tools-clear-cache',
             'href'   => '#',
             'meta'   => [
-                'class' => 'ea-all-cache-clear',
+                'class' => 'ea-tools-clear-cache',
             ],
             'title'  => 'Regenerate All Assets',
         ]);
 
         $wp_admin_bar->add_node([
             'parent' => 'ea-wp-admin-bar',
-            'id'     => 'ea-clear-cache-' . get_queried_object_id(),
+            'id'     => 'ea-tools-clear-cache-single',
             'href'   => '#',
             'meta'   => [
-                'class' => 'ea-clear-cache',
-                'html'  => '<div class="ea-clear-cache-id" data-pageid="' . get_queried_object_id() . '"></div>',
+                'class' => 'ea-tools-clear-cache-single',
+                'html'  => '<div class="ea-tools-clear-cache-single-ids" data-posts="' . json_encode($this->loaded_templates) . '"></div>',
             ],
             'title'  => 'Regenerate Page Assets',
         ]);
