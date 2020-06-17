@@ -81,8 +81,7 @@ trait Library
         check_ajax_referer('essential-addons-elementor', 'security');
 
         if (isset($_POST['pageID']) && 'post' === $_POST['actionType']) {
-            $uid = md5('post-' . $_POST['pageID']);
-            $this->remove_files($uid);
+            $this->remove_files('post-' . $_POST['pageID']);
         } else {
             // clear cache files
             $this->empty_dir(EAEL_ASSET_PATH);
