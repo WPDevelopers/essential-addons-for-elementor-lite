@@ -17,6 +17,10 @@ trait Enqueue
             return;
         }
 
+        if (Plugin::$instance->preview->is_preview_mode()) {
+            return;
+        }
+        
         if (Plugin::$instance->editor->is_edit_mode()) {
             return;
         }
@@ -159,9 +163,9 @@ trait Enqueue
         ]);
 
         // enqueue
-        if (Plugin::$instance->editor->is_edit_mode()) {
+        if (Plugin::$instance->preview->is_preview_mode()) {
             // generate post script
-            $this->generate_scripts($this->get_settings(), null, 'edit');
+            $this->generate_editor_scripts();
 
             // enqueue
             wp_enqueue_style(
