@@ -92,22 +92,22 @@ trait Enqueue
 
         // enqueue
         wp_enqueue_style(
-            'eael-post-' . $css_file->get_post_id(),
-            $this->safe_protocol(EAEL_ASSET_URL . '/eael-post-' . $css_file->get_post_id() . '.min.css'),
+            'post-' . $css_file->get_post_id(),
+            $this->safe_protocol(EAEL_ASSET_URL . '/post-' . $css_file->get_post_id() . '.min.css'),
             false,
             time()
         );
 
         wp_enqueue_script(
-            'eael-post-' . $css_file->get_post_id(),
-            $this->safe_protocol(EAEL_ASSET_URL . '/eael-post-' . $css_file->get_post_id() . '.min.js'),
+            'post-' . $css_file->get_post_id(),
+            $this->safe_protocol(EAEL_ASSET_URL . '/post-' . $css_file->get_post_id() . '.min.js'),
             ['jquery'],
             time(),
             true
         );
 
         // localize script
-        wp_localize_script('eael-post-' . $css_file->get_post_id(), 'localize', $this->localize_objects);
+        wp_localize_script('post-' . $css_file->get_post_id(), 'localize', $this->localize_objects);
     }
 
     public function enqueue_scripts()

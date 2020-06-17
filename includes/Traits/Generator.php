@@ -101,7 +101,7 @@ trait Generator
             }
         }
 
-        $file_name = ($post_id ? 'eael-post-' . $post_id . '.min.' : 'eael.min.') . $ext;
+        $file_name = ($post_id ? 'post-' . $post_id . '.min.' : 'eael.min.') . $ext;
 
         return file_put_contents($this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file_name), $output);
     }
@@ -179,14 +179,14 @@ trait Generator
             $this->remove_files($post_id);
         } else {
             // if no cache files, generate new
-            if (!$this->has_cache_files($post_id)) {
+            if (!$this->has_cache_files('post-' . $post_id)) {
                 $this->generate_scripts($widgets, $post_id, 'view');
             }
         }
 
         return $widgets;
     }
-    
+
     /**
      * Generate editor script.
      *
