@@ -83,7 +83,7 @@ trait Generator
      *
      * @since 3.0.1
      */
-    public function combine_files($paths = [], $post_id, $ext)
+    public function combine_files($paths = [], $post_id, $ext, $context)
     {
         $output = '';
 
@@ -93,7 +93,7 @@ trait Generator
             }
         }
 
-        if ($post_id && $ext == 'js') {
+        if ($post_id && $ext == 'js' && $context == 'view') {
             $document = Plugin::$instance->documents->get($post_id);
 
             if ($document->get_settings('eael_custom_js_print_method') == 'external') {
@@ -226,8 +226,8 @@ trait Generator
         $css_paths = $this->generate_dependency($widgets, 'css', $context);
 
         // combine files
-        $this->combine_files($css_paths, $post_id, 'css');
-        $this->combine_files($js_paths, $post_id, 'js');
+        $this->combine_files($css_paths, $post_id, 'css', $context);
+        $this->combine_files($js_paths, $post_id, 'js', $context);
     }
 
     /**
