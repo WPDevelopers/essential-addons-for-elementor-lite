@@ -77,6 +77,7 @@ jQuery(window).on('elementor/frontend/init', function () {
             var ovrlyElmnt = element.prev();
             videoIsActive = 'off';
             $(ovrlyElmnt).on('click', function () {
+                $('.eael-sticky-video-wrapper > i').hide();
                 $(this).css('display', 'none');
 
                 if ($(this).next().data('autoplay') === 'yes') {

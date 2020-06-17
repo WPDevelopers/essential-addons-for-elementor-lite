@@ -337,6 +337,10 @@ class Feature_List extends Widget_Base {
                         'max' => 100,
                     ],
                 ],
+                'default' => [
+					'unit' => 'px',
+					'size' => 35,
+				],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after' => 'top: {{SIZE}}{{UNIT}} !important;',
                 ],
@@ -463,7 +467,8 @@ class Feature_List extends Widget_Base {
                 'label'     => esc_html__( 'Connector Width', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::SLIDER,
                 'default'   => [
-                    'size' => 1,
+                    'unit' => 'px',
+					'size' => 1,
                 ],
                 'range'     => [
                     'px' => [
