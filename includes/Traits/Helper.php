@@ -2774,6 +2774,242 @@ trait Helper
         );
     }
 
+    public function eael_controls_custom_positioning( $prefix, $section_name, $css_selector, $condition = [] ) {
+        $selectors = '{{WRAPPER}} ' . $css_selector;
+        $this->start_controls_section(
+            $prefix . '_section_position',
+            [
+                'label'     => $section_name,
+                'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => $condition,
+            ]
+        );
+
+        $this->add_control(
+            $prefix . '_position',
+            [
+                'label'     => __( 'Position', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::SELECT,
+                'default'   => '',
+                'options'   => [
+                    ''         => __( 'Default', 'essential-addons-for-elementor-lite' ),
+                    'absolute' => __( 'Absolute', 'essential-addons-for-elementor-lite' ),
+                ],
+                'selectors' => [
+                    $selectors => 'position: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $start = is_rtl() ? __( 'Right', 'essential-addons-for-elementor-lite' ) : __( 'Left', 'essential-addons-for-elementor-lite' );
+        $end = !is_rtl() ? __( 'Right', 'essential-addons-for-elementor-lite' ) : __( 'Left', 'essential-addons-for-elementor-lite' );
+
+        $this->add_control(
+            $prefix . '_offset_orientation_h',
+            [
+                'label'       => __( 'Horizontal Orientation', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::CHOOSE,
+                'toggle'      => false,
+                'default'     => 'start',
+                'options'     => [
+                    'start' => [
+                        'title' => $start,
+                        'icon'  => 'eicon-h-align-left',
+                    ],
+                    'end'   => [
+                        'title' => $end,
+                        'icon'  => 'eicon-h-align-right',
+                    ],
+                ],
+                'classes'     => 'elementor-control-start-end',
+                'render_type' => 'ui',
+                'condition'   => [
+                    $prefix . '_position!' => '',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            $prefix . '_offset_x',
+            [
+                'label'      => __( 'Offset', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => [
+                        'min'  => -1000,
+                        'max'  => 1000,
+                        'step' => 1,
+                    ],
+                    '%'  => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vw' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vh' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                ],
+                'default'    => [
+                    'size' => '0',
+                ],
+                'size_units' => ['px', '%', 'vw', 'vh'],
+                'selectors'  => [
+                    'body:not(.rtl) ' . $selectors => 'left: {{SIZE}}{{UNIT}}',
+                    'body.rtl ' . $selectors       => 'right: {{SIZE}}{{UNIT}}',
+                ],
+                'condition'  => [
+                    $prefix . '_offset_orientation_h!' => 'end',
+                    $prefix . '_position!'             => '',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            $prefix . '_offset_x_end',
+            [
+                'label'      => __( 'Offset', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => [
+                        'min'  => -1000,
+                        'max'  => 1000,
+                        'step' => 0.1,
+                    ],
+                    '%'  => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vw' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vh' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                ],
+                'default'    => [
+                    'size' => '0',
+                ],
+                'size_units' => ['px', '%', 'vw', 'vh'],
+                'selectors'  => [
+                    'body:not(.rtl) ' . $selectors => 'right: {{SIZE}}{{UNIT}}',
+                    'body.rtl ' . $selectors       => 'left: {{SIZE}}{{UNIT}}',
+                ],
+                'condition'  => [
+                    $prefix . '_offset_orientation_h' => 'end',
+                    $prefix . '_position!'            => '',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            $prefix . '_offset_orientation_v',
+            [
+                'label'       => __( 'Vertical Orientation', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::CHOOSE,
+                'toggle'      => false,
+                'default'     => 'start',
+                'options'     => [
+                    'start' => [
+                        'title' => __( 'Top', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-v-align-top',
+                    ],
+                    'end'   => [
+                        'title' => __( 'Bottom', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-v-align-bottom',
+                    ],
+                ],
+                'render_type' => 'ui',
+                'condition'   => [
+                    $prefix . '_position!' => '',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            $prefix . '_offset_y',
+            [
+                'label'      => __( 'Offset', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => [
+                        'min'  => -1000,
+                        'max'  => 1000,
+                        'step' => 1,
+                    ],
+                    '%'  => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vh' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vw' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                ],
+                'size_units' => ['px', '%', 'vh', 'vw'],
+                'default'    => [
+                    'size' => '0',
+                ],
+                'selectors'  => [
+                    $selectors => 'top: {{SIZE}}{{UNIT}}',
+                ],
+                'condition'  => [
+                    $prefix . '_offset_orientation_v!' => 'end',
+                    $prefix . '_position!'             => '',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            $prefix . '_offset_y_end',
+            [
+                'label'      => __( 'Offset', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => [
+                        'min'  => -1000,
+                        'max'  => 1000,
+                        'step' => 1,
+                    ],
+                    '%'  => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vh' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vw' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                ],
+                'size_units' => ['px', '%', 'vh', 'vw'],
+                'default'    => [
+                    'size' => '0',
+                ],
+                'selectors'  => [
+                    $selectors => 'bottom: {{SIZE}}{{UNIT}}',
+                ],
+                'condition'  => [
+                    $prefix . '_offset_orientation_v' => 'end',
+                    $prefix . '_position!'            => '',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
     /** Filter to add plugins to the TOC list.
      *
      * @since  3.9.3
