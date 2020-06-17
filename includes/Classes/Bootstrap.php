@@ -23,20 +23,11 @@ class Bootstrap
     // instance container
     private static $instance = null;
 
-    // request unique identifier
-    protected $request_uid = null;
-
     // registered elements container
     public $registered_elements;
 
     // registered extensions container
     public $registered_extensions;
-
-    // transient elements container
-    // public $transient_elements;
-
-    // transient elements container
-    // public $transient_extensions;
 
     // additional settings
     public $additional_settings;
@@ -47,6 +38,7 @@ class Bootstrap
     // localize objects
     public $localize_objects = [];
 
+    // loaded templates in a request
     public $loaded_templates = [];
 
     /**
@@ -70,9 +62,6 @@ class Bootstrap
      */
     private function __construct()
     {
-        // dev mode
-        add_filter('eael/dev_mode', [$this, 'dev_mode']);
-
         // before init hook
         do_action('eael/before_init');
 
@@ -89,11 +78,6 @@ class Bootstrap
         $this->additional_settings = apply_filters('eael/additional_settings', [
             'quick_tools' => true,
         ]);
-
-        // initialize transient container
-        // $this->transient_elements = [];
-        // $this->transient_extensions = [];
-        // $this->loaded_templates = [];
 
         // start plugin tracking
         if (!$this->pro_enabled) {
@@ -143,6 +127,11 @@ class Bootstrap
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'eael_toc_rank_math_support']);
 
+        // quick tools
+        if (current_user_can('manage_options')) {
+            add_action('admin_bar_menu', [$this, 'admin_bar'], 900);
+        }
+
         // Admin
         if (is_admin()) {
             // Admin
@@ -170,16 +159,11 @@ class Bootstrap
                 add_action('admin_notices', array($this, 'elementor_not_loaded'));
             }
 
-        }
-
-        if (current_user_can('manage_options')) {
-            add_action('admin_bar_menu', [$this, 'admin_bar'], 900);
-        }
-
-        // On Editor - Register WooCommerce frontend hooks before the Editor init.
-        // Priority = 5, in order to allow plugins remove/add their wc hooks on init.
-        if (!empty($_REQUEST['action']) && 'elementor' === $_REQUEST['action'] && is_admin()) {
-            add_action('init', [$this, 'register_wc_hooks'], 5);
+            // On Editor - Register WooCommerce frontend hooks before the Editor init.
+            // Priority = 5, in order to allow plugins remove/add their wc hooks on init.
+            if (!empty($_REQUEST['action']) && 'elementor' === $_REQUEST['action']) {
+                add_action('init', [$this, 'register_wc_hooks'], 5);
+            }
         }
     }
 }
