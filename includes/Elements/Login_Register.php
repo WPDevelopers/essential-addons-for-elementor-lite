@@ -4,6 +4,9 @@ namespace Essential_Addons_Elementor\Elements;
 
 use Elementor\Controls_Manager;
 use Elementor\Core\Schemes\Color;
+use Elementor\Group_Control_Background;
+use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Typography;
 use Elementor\Plugin;
 use Elementor\Repeater;
 use Elementor\Widget_Base;
@@ -144,11 +147,15 @@ class Login_Register extends Widget_Base {
 		$this->init_content_register_options_controls();
 		$this->init_content_register_user_email_controls();
 		$this->init_content_register_admin_email_controls();
-		$this->init_register_validation_message_controls();
+		$this->init_content_register_validation_message_controls();
 
 
 		/*----Style Tab----*/
-
+		$this->init_style_general_controls();
+		$this->init_style_input_fields_controls();
+		$this->init_style_input_labels_controls();
+		$this->init_style_login_button_controls();
+		$this->init_style_register_button_controls();
 
 	}
 
@@ -451,6 +458,7 @@ class Login_Register extends Widget_Base {
 			'label'     => esc_html__( 'Labels', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
+			'condition' => [ 'login_label_types' => 'custom', ],
 		] );
 
 
@@ -550,56 +558,6 @@ class Login_Register extends Widget_Base {
 			'type'    => Controls_Manager::TEXT,
 			'dynamic' => [ 'active' => true, ],
 			'default' => __( 'Log In', EAEL_TEXTDOMAIN ),
-		] );
-
-		$this->add_responsive_control( 'login_align', [
-			'label'        => __( 'Alignment', EAEL_TEXTDOMAIN ),
-			'type'         => Controls_Manager::CHOOSE,
-			'options'      => [
-				'start'   => [
-					'title' => __( 'Left', EAEL_TEXTDOMAIN ),
-					'icon'  => 'eicon-text-align-left',
-				],
-				'center'  => [
-					'title' => __( 'Center', EAEL_TEXTDOMAIN ),
-					'icon'  => 'eicon-text-align-center',
-				],
-				'end'     => [
-					'title' => __( 'Right', EAEL_TEXTDOMAIN ),
-					'icon'  => 'eicon-text-align-right',
-				],
-				'stretch' => [
-					'title' => __( 'Justified', EAEL_TEXTDOMAIN ),
-					'icon'  => 'eicon-text-align-justify',
-				],
-			],
-			'prefix_class' => 'elementor%s-button-align-',
-			'default'      => '',
-		] );
-
-		$this->add_responsive_control( 'login_button_width', [
-			'label'      => esc_html__( 'Login Button width', EAEL_TEXTDOMAIN ),
-			'type'       => Controls_Manager::SLIDER,
-			'size_units' => [
-				'px',
-				'%',
-			],
-			'range'      => [
-				'px' => [
-					'min'  => 0,
-					'max'  => 500,
-					'step' => 5,
-				],
-				'%'  => [
-					'min' => 0,
-					'max' => 100,
-				],
-			],
-
-			'selectors' => [
-				'{{WRAPPER}} .eael-login-form button' => 'width: {{SIZE}}{{UNIT}};',
-			],
-			'separator' => 'before',
 		] );
 
 		$this->end_controls_section();
@@ -1038,7 +996,7 @@ class Login_Register extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	protected function init_register_validation_message_controls() {
+	protected function init_content_register_validation_message_controls() {
 		$this->start_controls_section( 'section_content_reg_validation', [
 			'label'      => __( 'Register Validation Messages', EAEL_TEXTDOMAIN ),
 			'tab'        => Controls_Manager::TAB_CONTENT,
@@ -1064,6 +1022,398 @@ class Login_Register extends Widget_Base {
 
 		$this->end_controls_section();
 
+	}
+
+	/**
+	 * It prints controls for managing general style of both login and registration form
+	 */
+	protected function init_style_general_controls() {
+		$this->start_controls_section( 'section_style_general', [
+			'label' => __( 'General', EAEL_TEXTDOMAIN ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+		$this->add_control( "eael_form_margin", [
+			'label'      => __( 'Form Margin', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-form" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+		$this->add_control( "eael_form_padding", [
+			'label'      => __( 'Form Padding', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-form" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+		$this->end_controls_section();
+	}
+
+	protected function init_style_input_fields_controls() {
+		$this->start_controls_section( 'section_style_form_fields', [
+			'label' => __( 'Form Fields', EAEL_TEXTDOMAIN ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+		$this->add_control( "eael_form_field_margin", [
+			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-form .input-field" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_control( "eael_form_field_padding", [
+			'label'      => __( 'Padding', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-form .input-field" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => "eael_fields_typography",
+			'selector' => "{{WRAPPER}} .eael-form .input-field",
+		] );
+		$this->start_controls_tabs( "tabs_form_fields_style" );
+
+		/*-----Form Input Fields NORMAL state------ */
+		$this->start_controls_tab( "tab_form_field_style_normal", [
+			'label' => __( 'Normal', EAEL_TEXTDOMAIN ),
+		] );
+		$this->add_control( 'eael_field_color', [
+				'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					"{{WRAPPER}} .eael-form .input-field" => 'color: {{VALUE}};',
+				],
+			] );
+		$this->add_control( 'eael_field_placeholder_color', [
+			'label'     => __( 'Placeholder Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-form .input-field" => 'color: {{VALUE}};',
+			],
+		] );
+		$this->add_control(
+			'eael_field_bg_color',
+			array(
+				'label'     => __( 'Background Color', EAEL_TEXTDOMAIN ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ffffff',
+				'selectors' => array(
+					"{{WRAPPER}} .eael-form .input-field" => 'background-color: {{VALUE}};',
+				),
+			)
+		);
+        $this->end_controls_tab();
+
+		$this->start_controls_tab( "tab_form_field_style_active", [
+			'label' => __( 'Active', EAEL_TEXTDOMAIN ),
+		] );
+		$this->add_control( 'eael_field_color_active', [
+			'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-form .input-field" => 'color: {{VALUE}};',
+			],
+		] );
+		$this->add_control( 'eael_field_placeholder_color_active', [
+			'label'     => __( 'Placeholder Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-form .input-field" => 'color: {{VALUE}};',
+			],
+		] );
+		$this->add_control(
+			'eael_field_bg_color_active',
+			array(
+				'label'     => __( 'Background Color', EAEL_TEXTDOMAIN ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ffffff',
+				'selectors' => array(
+					"{{WRAPPER}} .eael-form .input-field" => 'background-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+		$this->end_controls_section();
+	}
+
+	protected function init_style_input_labels_controls() {
+		$this->start_controls_section( 'section_style_form_labels', [
+			'label' => __( 'Form Labels', EAEL_TEXTDOMAIN ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+		$this->add_control( "eael_form_label_padding", [
+			'label'      => __( 'Spacing', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-form .input-lable" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => "eael_label_typography",
+			'selector' => "{{WRAPPER}} .eael-form .input-label",
+		] );
+
+		$this->add_control( 'eael_label_color', [
+			'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-form .input-label" => 'color: {{VALUE}};',
+			],
+		] );
+		$this->add_control(
+			'eael_label_bg_color',
+			array(
+				'label'     => __( 'Background Color', EAEL_TEXTDOMAIN ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ffffff',
+				'selectors' => array(
+					"{{WRAPPER}} .eael-form .input-label" => 'background-color: {{VALUE}};',
+				),
+			)
+		);
+		$this->end_controls_section();
+	}
+
+	protected function init_style_login_button_controls() {
+		$this->_init_button_style( 'login' );
+	}
+
+	protected function init_style_register_button_controls() {
+		$this->_init_button_style( 'register' );
+	}
+
+	protected function init_style_validation_message_controls() {
+		$this->start_controls_section( 'section_style_validation_message', [
+			'label' => __( 'Validation Message', EAEL_TEXTDOMAIN ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+		$this->end_controls_section();
+	}
+
+	/**
+	 * Print style controls for a specific type of button.
+	 *
+	 * @param string $button_type the type of the button. accepts login or register.
+	 */
+	protected function _init_button_style( $button_type = 'login' ) {
+		$this->start_controls_section( "section_style_{$button_type}_btn", [
+			'label' => sprintf( __( '%s Button', EAEL_TEXTDOMAIN ), ucfirst( $button_type ) ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+		$this->add_control( "{$button_type}_btn_margin", [
+			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-{$button_type}-form button" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+		$this->add_control( "{$button_type}_btn_padding", [
+			'label'      => __( 'Padding', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-{$button_type}-form button" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+
+
+		$this->start_controls_tabs( "tabs_{$button_type}_btn_style" );
+		/*-----Login Button NORMAL state------ */
+		$this->start_controls_tab( "tab_{$button_type}_btn_normal", [
+			'label' => __( 'Normal', EAEL_TEXTDOMAIN ),
+		] );
+		$this->add_control( "{$button_type}_btn_color", [
+			'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-{$button_type}-form button" => 'color: {{VALUE}};',
+			],
+		] );
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'     => "{$button_type}_btn_bg_color",
+			'label'    => __( 'Background Color', EAEL_TEXTDOMAIN ),
+			'types'    => [
+				'classic',
+				'gradient',
+			],
+			'selector' => "{{WRAPPER}} .eael-{$button_type}-form button",
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "{$button_type}_btn_border",
+			'selector' => "{{WRAPPER}} .eael-{$button_type}-form button",
+		] );
+		$this->add_control( "{$button_type}_btn_border_radius", [
+			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-{$button_type}-form button" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+		$this->end_controls_tab();
+
+		/*-----Login Button HOVER state------ */
+		$this->start_controls_tab( "tab_{$button_type}_button_hover", [
+			'label' => __( 'Hover', EAEL_TEXTDOMAIN ),
+		] );
+		$this->add_control( "{$button_type}_button_color_hover", [
+			'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-{$button_type}-form button:hover" => 'color: {{VALUE}};',
+			],
+		] );
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'     => "{$button_type}_btn_bg_color_hover",
+			'label'    => __( 'Background Color', EAEL_TEXTDOMAIN ),
+			'types'    => [
+				'classic',
+				'gradient',
+			],
+			'selector' => "{{WRAPPER}} .eael-{$button_type}-form button",
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "{$button_type}_btn_border_hover",
+			'selector' => "{{WRAPPER}} .eael-{$button_type}-form button:hover",
+		] );
+		$this->add_control( "{$button_type}_btn_border_radius_hover", [
+			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-{$button_type}-form:hover button" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+		$this->add_control( "{$button_type}_btn_hover_animation", [
+			'label' => __( 'Animation', EAEL_TEXTDOMAIN ),
+			'type'  => Controls_Manager::HOVER_ANIMATION,
+		] );
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+		/*-----ends button tabs--------*/
+
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => "{$button_type}_btn_typography",
+			'selector' => "{{WRAPPER}} .eael-{$button_type}-form button",
+		] );
+		$this->add_responsive_control( "{$button_type}_btn_align", [
+			'label'        => __( 'Alignment', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::CHOOSE,
+			'options'      => [
+				'start'   => [
+					'title' => __( 'Left', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-text-align-left',
+				],
+				'center'  => [
+					'title' => __( 'Center', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-text-align-center',
+				],
+				'end'     => [
+					'title' => __( 'Right', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-text-align-right',
+				],
+				'stretch' => [
+					'title' => __( 'Justified', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-text-align-justify',
+				],
+			],
+			'prefix_class' => 'elementor%s-button-align-',
+			'default'      => '',
+			'separator'    => 'before',
+		] );
+
+		$this->add_responsive_control( "{$button_type}_btn_width", [
+			'label'      => esc_html__( 'Button width', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 500,
+					'step' => 5,
+				],
+				'%'  => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-{$button_type}-form button" => 'width: {{SIZE}}{{UNIT}};',
+			],
+		] );
+		$this->add_responsive_control( "{$button_type}_btn_height", [
+			'label'      => esc_html__( 'Button Height', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 500,
+					'step' => 5,
+				],
+				'%'  => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-{$button_type}-form button" => 'height: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->end_controls_section();
 	}
 
 	/**
