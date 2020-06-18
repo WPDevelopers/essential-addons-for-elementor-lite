@@ -1,0 +1,72 @@
+/*------------------------------*/
+/* Login Register
+/*------------------------------*/
+
+.eael-login-form-wrapper{
+    width: 370px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0 0 37.5px 14px rgba(2,8,53,.06);
+
+    .eael-lr-form-group {
+        margin-bottom: 1rem;
+
+        label {
+            display: inline-block;
+            margin-bottom: .5rem;
+        }
+
+        .eael-lr-form-control {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #cfcfe8;
+            border-radius: 3px;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+    }
+
+    .eael-lr-password-wrapper {
+        position: relative;
+
+        button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            background: transparent;
+            border: none;
+            color: red;
+        }
+    }
+
+    .eael-lr-btn {
+        background-color: #744ffb;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        vertical-align: top;
+        text-decoration: none;
+        border: none;
+        transition: all .2s;
+        padding: 15px;
+
+        &.eael-lr-btn-block {
+            display: block;
+            width: 100%;
+        }
+    }
+
+    .eael-sign-up {
+        text-align: center;
+        padding: 20px 0 0;
+    }
+}
