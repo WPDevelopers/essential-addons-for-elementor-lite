@@ -176,14 +176,35 @@ trait Login_Registration {
 		}
 
 		// handle registration...
+		$user_data = [
+			'user_login' => $username,
+			'user_pass'  => $password,
+			'user_email' => $email,
+		];
+
+		if ( ! empty( $_POST['first_name'] ) ) {
+			$user_data['first_name'] = self::$email_options['firstname'] = sanitize_text_field( $_POST['first_name'] );
+		}
+		if ( ! empty( $_POST['last_name'] ) ) {
+			$user_data['last_name'] = self::$email_options['lastname'] = sanitize_text_field( $_POST['last_name'] );
+		}
+		if ( ! empty( $_POST['website'] ) ) {
+			$user_data['user_url'] = self::$email_options['website'] = esc_url_raw( $_POST['website'] );
+		}
 		$document         = Plugin::$instance->documents->get( $page_id );
 		$register_actions = [];
 		if ( $document ) {
-			$elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
-			$widget_data = $this->find_element_recursive( $elements, $widget_id );
-			$widget = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
+			$elements         = Plugin::instance()->documents->get( $page_id )->get_elements_data();
+			$widget_data      = $this->find_element_recursive( $elements, $widget_id );
+			$widget           = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
 			$settings         = $widget->get_settings_for_display();
 			$register_actions = ! empty( $settings['register_action'] ) ? (array) $settings['register_action'] : [];
+			//error_log( print_r( $settings, 1 ) );
+			//return;
+			if ( ! empty( $settings['register_user_role'] ) ) {
+				$user_data['role'] = sanitize_text_field( $settings['register_user_role'] );
+			}
+
 
 			// set email related stuff
 			/*------User Mail Related Stuff------*/
@@ -224,24 +245,6 @@ trait Login_Registration {
 			self::$email_options['password_reset_link'] = '';
 		}
 
-		$user_data = [
-			'user_login' => $username,
-			'user_pass'  => $password,
-			'user_email' => $email,
-		];
-
-		if ( ! empty( $_POST['first_name'] ) ) {
-			$user_data['first_name'] = self::$email_options['firstname'] = sanitize_text_field( $_POST['first_name'] );
-		}
-		if ( ! empty( $_POST['last_name'] ) ) {
-			$user_data['last_name'] = self::$email_options['lastname'] = sanitize_text_field( $_POST['last_name'] );
-		}
-		if ( ! empty( $_POST['user_role'] ) ) {
-			$user_data['role'] = sanitize_text_field( $_POST['user_role'] );
-		}
-		if ( ! empty( $_POST['website'] ) ) {
-			$user_data['user_url'] = self::$email_options['website'] = esc_url_raw( $_POST['website'] );
-		}
 
 		$user_data = apply_filters( 'eael/login-register/new-user-data', $user_data );
 
