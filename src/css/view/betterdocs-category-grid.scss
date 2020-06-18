@@ -28,7 +28,7 @@
 }
 
 .eael-bd-cg-body {
-  padding: 0px 20px 20px;
+  padding: 0px 20px 0px 20px;
   ul {
     margin: 0;
     padding: 0;
@@ -112,11 +112,19 @@
   line-height: 1;
   padding: 15px 20px;
   margin: 0px 0px 20px 20px;
+
   .eael-bd-cg-button-icon {
-    margin-left: 5px;
     position: relative;
     top: 1px;
+    &.eael-bd-cg-button-icon-left {
+      margin-right: 5px;
+    }
+
+    &.eael-bd-cg-button-icon-right {
+      margin-left: 5px;
+    }
   }
+
 }
 
 /* ============================================= */

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: Layout Default
+ * Template Name: Default
  * 
  */
 

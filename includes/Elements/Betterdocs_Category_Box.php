@@ -809,6 +809,14 @@ class Betterdocs_Category_Box extends Widget_Base {
                 ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]
             );
 
+            $this->add_group_control(
+                Group_Control_Typography::get_type(),
+                [
+                    'name'     => 'count_typography_normal',
+                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .eael-bd-cb-cat-count, {{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .count-inner__layout-2'
+                ]
+            );
+
             $this->add_control(
                 'count_color_normal',
                 [
@@ -818,14 +826,6 @@ class Betterdocs_Category_Box extends Widget_Base {
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .eael-bd-cb-cat-count' => 'color: {{VALUE}};',
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .count-inner__layout-2' => 'color: {{VALUE}};'
                     ],
-                ]
-            );
-
-            $this->add_group_control(
-                Group_Control_Typography::get_type(),
-                [
-                    'name'     => 'count_typography_normal',
-                    'selector' => '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .eael-bd-cb-cat-count, {{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner .count-inner__layout-2'
                 ]
             );
 
@@ -1002,6 +1002,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                     ],
                     'selectors'  => [
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-count' => 'transition: {{SIZE}}ms;',
+                        '{{WRAPPER}} .layout__2 .eael-bd-cb-cat-count__layout-2 .count-inner__layout-2' => 'transition: {{SIZE}}ms;',
                     ],
                 ]
             );
