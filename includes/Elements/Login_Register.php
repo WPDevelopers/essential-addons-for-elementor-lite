@@ -1532,8 +1532,8 @@ class Login_Register extends Widget_Base {
                 </form>
             </div>
 
-            <div class="eael-login-form-wrapper ">
-                <form name="eael-login-form" id="eael-login-form" method="post">
+            <div class="eael-login-form-wrapper eael-lr-form-wrapper">
+                <form name="eael-login-form eael-lr-form" id="eael-login-form" method="post">
 	                <?php
 	                // add login security nonce
 	                wp_nonce_field( 'eael-login-action', 'eael-login-nonce' );
@@ -1593,8 +1593,8 @@ class Login_Register extends Widget_Base {
 			}
 			ob_start();
 			?>
-            <div class="eael-register-form-wrapper">
-                <form name="eael-registerform" id="eael-registerform" method="post">
+            <div class="eael-register-form-wrapper eael-lr-form-wrapper">
+                <form name="eael-register-form eael-lr-form" id="eael-register-form" method="post">
 					<?php wp_nonce_field( 'eael-register-action', 'eael-register-nonce' );
 
 					// Print all dynamic fields
@@ -1639,6 +1639,7 @@ class Login_Register extends Widget_Base {
 								'type'        => $field_input_type,
 								'placeholder' => $field['placeholder'],
 								'class'       => [
+									'eael-lr-form-control',
 									'form-field-' . $field_type,
 								],
 							],
@@ -1672,7 +1673,7 @@ class Login_Register extends Widget_Base {
 						$this->add_render_attribute( [
 							$field_group_key => [
 								'class' => [
-									'eael-field-group',
+									'eael-lr-form-group',
 									'elementor-field-type-' . $field_type,
 									'elementor-col-' . $field['width'],
 									$rf_class,
@@ -1705,7 +1706,7 @@ class Login_Register extends Widget_Base {
                     <input type="hidden" name="page_id" value="<?php echo esc_attr( $page_id ); ?>">
                     <input type="hidden" name="widget_id" value="<?php echo esc_attr( $this->get_id() ); ?>">
                     <p class="submit">
-                        <input type="submit" name="eael-register-submit" id="eael-register-submit" class="button button-primary button-large" value="Register" required>
+                        <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn eael-lr-btn-block" value="Register" required>
                     </p>
                 </form>
 
