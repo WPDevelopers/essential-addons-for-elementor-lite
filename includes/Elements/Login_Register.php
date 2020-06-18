@@ -180,13 +180,13 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'hide_for_logged_in_user', [
 			'label'       => __( 'Hide from Logged in Users', EAEL_TEXTDOMAIN ),
-			'description' => __( 'You can hide the form for already logged in user.', EAEL_TEXTDOMAIN ),
+			//'description' => __( 'You can hide the form for already logged in user.', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::SWITCHER,
 		] );
 
 		$this->add_control( 'show_login_link', [
 			'label'       => __( 'Show Login Link', EAEL_TEXTDOMAIN ),
-			'description' => __( 'You can add a "Login" Link below the registration form', EAEL_TEXTDOMAIN ),
+			//'description' => __( 'You can add a "Login" Link below the registration form', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::SWITCHER,
 			'default'     => 'yes',
 			'condition'   => [
@@ -196,7 +196,7 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'login_link_action', [
 			'label'       => __( 'Login Link Action', EAEL_TEXTDOMAIN ),
-			'description' => __( 'Select what should happen when the login link is clicked', EAEL_TEXTDOMAIN ),
+			//'description' => __( 'Select what should happen when the login link is clicked', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::SELECT,
 			'options'     => [
 				'default' => __( 'Default WordPress Page', EAEL_TEXTDOMAIN ),
@@ -238,7 +238,7 @@ class Login_Register extends Widget_Base {
 		if ( $this->user_can_register ) {
 			$this->add_control( 'show_registration_link', [
 				'label'       => __( 'Show Register Link', EAEL_TEXTDOMAIN ),
-				'description' => __( 'You can add a "Register" Link below the login form', EAEL_TEXTDOMAIN ),
+				//'description' => __( 'You can add a "Register" Link below the login form', EAEL_TEXTDOMAIN ),
 				'type'        => Controls_Manager::SWITCHER,
 				'default'     => 'yes',
 				'condition'   => [
@@ -290,7 +290,7 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'show_log_out_message', [
 			'label'       => __( 'Show Logout Link', EAEL_TEXTDOMAIN ),
-			'description' => __( 'This option will show a message with logout link instead of a login form for the logged in user', EAEL_TEXTDOMAIN ),
+			//'description' => __( 'This option will show a message with logout link instead of a login form for the logged in user', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::SWITCHER,
 			'default'     => 'yes',
 			'condition'   => [
@@ -301,7 +301,7 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'show_lost_password', [
 			'label'       => __( 'Show Lost your password?', EAEL_TEXTDOMAIN ),
-			'description' => __( 'You can add a "Forgot Password" Link below the the form', EAEL_TEXTDOMAIN ),
+			//'description' => __( 'You can add a "Forgot Password" Link below the the form', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::SWITCHER,
 			'default'     => 'yes',
 		] );
@@ -1100,12 +1100,12 @@ class Login_Register extends Widget_Base {
 			'label' => __( 'Normal', EAEL_TEXTDOMAIN ),
 		] );
 		$this->add_control( 'eael_field_color', [
-				'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					"{{WRAPPER}} .eael-form .input-field" => 'color: {{VALUE}};',
-				],
-			] );
+			'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-form .input-field" => 'color: {{VALUE}};',
+			],
+		] );
 		$this->add_control( 'eael_field_placeholder_color', [
 			'label'     => __( 'Placeholder Color', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::COLOR,
@@ -1113,18 +1113,15 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .eael-form .input-field" => 'color: {{VALUE}};',
 			],
 		] );
-		$this->add_control(
-			'eael_field_bg_color',
-			array(
+		$this->add_control( 'eael_field_bg_color', [
 				'label'     => __( 'Background Color', EAEL_TEXTDOMAIN ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ffffff',
-				'selectors' => array(
+				'selectors' => [
 					"{{WRAPPER}} .eael-form .input-field" => 'background-color: {{VALUE}};',
-				),
-			)
-		);
-        $this->end_controls_tab();
+				],
+			] );
+		$this->end_controls_tab();
 
 		$this->start_controls_tab( "tab_form_field_style_active", [
 			'label' => __( 'Active', EAEL_TEXTDOMAIN ),
@@ -1143,17 +1140,14 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .eael-form .input-field" => 'color: {{VALUE}};',
 			],
 		] );
-		$this->add_control(
-			'eael_field_bg_color_active',
-			array(
+		$this->add_control( 'eael_field_bg_color_active', [
 				'label'     => __( 'Background Color', EAEL_TEXTDOMAIN ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ffffff',
-				'selectors' => array(
+				'selectors' => [
 					"{{WRAPPER}} .eael-form .input-field" => 'background-color: {{VALUE}};',
-				),
-			)
-		);
+				],
+			] );
 
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
@@ -1189,17 +1183,14 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .eael-form .input-label" => 'color: {{VALUE}};',
 			],
 		] );
-		$this->add_control(
-			'eael_label_bg_color',
-			array(
+		$this->add_control( 'eael_label_bg_color', [
 				'label'     => __( 'Background Color', EAEL_TEXTDOMAIN ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ffffff',
-				'selectors' => array(
+				'selectors' => [
 					"{{WRAPPER}} .eael-form .input-label" => 'background-color: {{VALUE}};',
-				),
-			)
-		);
+				],
+			] );
 		$this->end_controls_section();
 	}
 
