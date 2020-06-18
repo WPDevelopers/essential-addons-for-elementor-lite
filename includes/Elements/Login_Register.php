@@ -1540,6 +1540,36 @@ class Login_Register extends Widget_Base {
                     </p>
                 </form>
             </div>
+
+            <div class="eael-login-form-wrapper ">
+                <form name="eael-login-form" id="eael-login-form" method="post">
+	                <?php
+	                // add login security nonce
+	                wp_nonce_field( 'eael-login-action', 'eael-login-nonce' );
+	                ?>
+                    <div class="eael-lr-form-group">
+                        <label for="eael-user-login">Username or Email Address</label>
+                        <input type="text" name="eael-user-login" id="eael-user-login" class="eael-lr-form-control"
+                               aria-describedby="emailHelp" placeholder="email@domain.com">
+                    </div>
+                    <div class="eael-lr-form-group">
+                        <label for="eael-user-password">Password</label>
+                        <a href="#" style="float:right;font-size:12px;margin-top: 10px;">Forgot password?</a>
+
+                        <div class="eael-lr-password-wrapper">
+                            <input type="password" class="eael-lr-form-control" id=""
+                                   placeholder="Password">
+                            <button type="button" class="wp-hide-pw hide-if-no-js" aria-label="Show password">
+                                <span class="dashicons dashicons-visibility" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="submit" class="eael-lr-btn eael-lr-btn-block">Sign in</button>
+                    <div class="eael-sign-up">
+                        Don't have an account? <a href="#">Register Now</a>
+                    </div>
+                </form>
+            </div>
 			<?php
 		}
 	}
