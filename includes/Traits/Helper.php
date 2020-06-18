@@ -1555,6 +1555,8 @@ trait Helper
             'hide_empty' => true,
         ));
 
+        $options = [];
+
         if (!empty($terms) && !is_wp_error($terms)) {
             foreach ($terms as $term) {
                 $options[$term->{$type}] = $term->name;
