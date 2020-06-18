@@ -132,9 +132,9 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="'.g
 
             if($settings['icon_position'] === 'before') {
                 if(isset($settings['button_icon']['value']['url']) && !empty($settings['button_icon']['value']['url'])) {
-                    echo '<img class="eael-bd-cg-button-icon" src="' . $settings['button_icon']['value']['url'] . '" />';
+                    echo '<img class="eael-bd-cg-button-icon eael-bd-cg-button-icon-left" src="' . $settings['button_icon']['value']['url'] . '" />';
                 }else {
-                    echo '<i class="' .$settings['button_icon']['value'].' eael-bd-cg-button-icon"></i>';
+                    echo '<i class="' .$settings['button_icon']['value'].' eael-bd-cg-button-icon eael-bd-cg-button-icon-left"></i>';
                 }
             }
 
@@ -142,9 +142,9 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="'.g
 
             if($settings['icon_position'] === 'after') {
                 if(isset($settings['button_icon']['value']['url']) && !empty($settings['button_icon']['value']['url'])) {
-                    echo '<img class="eael-bd-cg-button-icon" src="' . $settings['button_icon']['value']['url'] . '" />';
+                    echo '<img class="eael-bd-cg-button-icon eael-bd-cg-button-icon-right" src="' . $settings['button_icon']['value']['url'] . '" />';
                 }else {
-                    echo '<i class="' .$settings['button_icon']['value'].' eael-bd-cg-button-icon"></i>';
+                    echo '<i class="' .$settings['button_icon']['value'].' eael-bd-cg-button-icon eael-bd-cg-button-icon-right"></i>';
                 }
             }
 

@@ -917,7 +917,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
                     'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
                     'return_value' => 'true',
-                    'default' => ''
+                    'default' => 'true'
                 ]
             );
 
@@ -1193,6 +1193,8 @@ class Betterdocs_Category_Grid extends Widget_Base
                     var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>"),
                         $gallery = $(this);
                         $layout_mode = $gallery.data('layout-mode');
+
+                    console.log($layout_mode);
 
 
                     if($layout_mode === 'masonry') {
