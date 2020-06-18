@@ -1559,6 +1559,9 @@ class Login_Register extends Widget_Base {
                     <div class="eael-sign-up">
                         Don't have an account? <a href="#">Register Now</a>
                     </div>
+                    <p>
+		                <?php $this->print_login_validation_errors(); ?>
+                    </p>
                 </form>
             </div>
 			<?php
@@ -1702,6 +1705,7 @@ class Login_Register extends Widget_Base {
 					endforeach;
 					?>
 
+                    <input type="hidden" name="user_role" value="">
                     <input type="hidden" name="redirect_to" value="">
                     <input type="hidden" name="page_id" value="<?php echo esc_attr( $page_id ); ?>">
                     <input type="hidden" name="widget_id" value="<?php echo esc_attr( $this->get_id() ); ?>">
