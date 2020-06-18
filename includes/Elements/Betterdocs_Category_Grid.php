@@ -826,7 +826,7 @@ class Betterdocs_Category_Grid extends Widget_Base
             $this->add_control(
                 'nested_list_title_closed_icon',
                 [
-                    'label' => __( 'Closed Icon', 'essential-addons-for-elementor-lite' ),
+                    'label' => __( 'Collapse Icon', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::ICONS,
                     'default'   => [
                         'value'     => 'fas fa-angle-right',
