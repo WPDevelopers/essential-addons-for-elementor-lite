@@ -73,6 +73,11 @@
     height: 32px;
     width: 32px;
     margin-right: 30px;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
   }
 
   .eael-docs-item-count {
@@ -134,6 +139,10 @@
   &.layout-2 {
     .eael-bd-cg-header {
       padding: 0px 20px;
+    }
+
+    .eael-docs-cat-title {
+      transition: 300ms;
     }
 
     .eael-docs-item-count {

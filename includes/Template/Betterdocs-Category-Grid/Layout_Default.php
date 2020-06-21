@@ -139,6 +139,7 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="'.get_the_ID
             echo '</div>';
         }
 
+        echo '<div class="eael-bd-cg-footer">';
         if($settings['show_button']) {
             echo '<a class="eael-bd-cg-button" href="'.get_term_link( $term->slug, 'doc_category' ).'">';
 
@@ -162,5 +163,6 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="'.get_the_ID
 
             echo '</a>';
         }
+        echo '</div>';
     echo '</div>';
 echo '</article>';
