@@ -450,6 +450,30 @@ class Betterdocs_Category_Grid extends Widget_Base
                 ]
             );
 
+            $this->add_responsive_control(
+                'header_icon_padding',
+                [
+                    'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px', 'em', '%'],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-bd-cg-header .eael-docs-cat-icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    ]
+                ]
+            );
+
+            $this->add_responsive_control(
+                'header_icon_margin',
+                [
+                    'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px', 'em', '%'],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-bd-cg-header .eael-docs-cat-icon' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    ],
+                ]
+            );
+
             $this->end_controls_section(); # end of 'Column Settings'
 
             /**
