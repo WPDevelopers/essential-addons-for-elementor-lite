@@ -26,7 +26,7 @@ var EventCalendar = function ($scope, $) {
 		header: {
 			left: "prev,next today",
 			center: "title",
-			right: "timeGridDay,timeGridWeek,dayGridMonth,listWeek"
+			right: "timeGridDay,timeGridWeek,dayGridMonth,listMonth"
 		},
 		events: eventAll,
 		selectHelper: true,

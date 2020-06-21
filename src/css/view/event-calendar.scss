@@ -221,6 +221,7 @@
 	button.fc-timeGridWeek-button,
 	button.fc-timeGridDay-button,
 	button.fc-listWeek-button,
+	button.fc-listMonth-button,
 	button.fc-dayGridMonth-button {
 		position: relative;
 
@@ -249,7 +250,8 @@
 		content: "\f00a";
 	}
 
-	button.fc-listWeek-button:before {
+	button.fc-listWeek-button:before ,
+	button.fc-listMonth-button:before {
 		content: "\f00b";
 	}
 
@@ -360,7 +362,8 @@ span.fc-day-number {
 			display: inherit;
 		}
 	}
-	.fc-listWeek-view {
+	.fc-listWeek-view ,
+	.fc-listMonth-view {
 		.fc-list-table {
 			tr.fc-list-item {
 				cursor: pointer;
