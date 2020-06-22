@@ -20,7 +20,7 @@ trait Enqueue
         if (Plugin::$instance->preview->is_preview_mode()) {
             return;
         }
-        
+
         if (Plugin::$instance->editor->is_edit_mode()) {
             return;
         }
@@ -29,11 +29,13 @@ trait Enqueue
             return;
         }
 
+        $post_id = (int) $css_file->get_post_id();
+
         // loaded template stack
-        $this->loaded_templates[] = $css_file->get_post_id();
+        $this->loaded_templates[] = $post_id;
 
         // generate post script
-        $widgets = $this->generate_post_scripts($css_file->get_post_id());
+        $widgets = $this->generate_post_scripts($post_id);
 
         // if no widget in page, return
         if (empty($widgets)) {
@@ -90,24 +92,29 @@ trait Enqueue
         // run hook before enqueue script
         do_action('eael/before_single_enqueue_scripts', $widgets);
 
-        // enqueue
-        wp_enqueue_style(
-            'post-' . $css_file->get_post_id(),
-            $this->safe_protocol(EAEL_ASSET_URL . '/post-' . $css_file->get_post_id() . '.min.css'),
-            false,
-            time()
-        );
+        // avoid enqueue if internal css embed method enabled
+        if (get_option('elementor_css_print_method') == 'internal') {
+            echo '<style id="eael-post-' . $post_id . '">' . $this->css_strings[$post_id] . '</style>';
+        } else {
+            // enqueue
+            wp_enqueue_style(
+                'eael-post-' . $post_id,
+                $this->safe_protocol(EAEL_ASSET_URL . '/post-' . $post_id . '.min.css'),
+                false,
+                time()
+            );
 
-        wp_enqueue_script(
-            'post-' . $css_file->get_post_id(),
-            $this->safe_protocol(EAEL_ASSET_URL . '/post-' . $css_file->get_post_id() . '.min.js'),
-            ['jquery'],
-            time(),
-            true
-        );
+            wp_enqueue_script(
+                'eael-post-' . $post_id,
+                $this->safe_protocol(EAEL_ASSET_URL . '/post-' . $post_id . '.min.js'),
+                ['jquery'],
+                time(),
+                true
+            );
 
-        // localize script
-        wp_localize_script('post-' . $css_file->get_post_id(), 'localize', $this->localize_objects);
+            // localize script
+            wp_localize_script('eael-post-' . $post_id, 'localize', $this->localize_objects);
+        }
     }
 
     public function enqueue_scripts()
@@ -206,5 +213,11 @@ trait Enqueue
             $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/css/eaicon.css'),
             false
         );
+    }
+
+    // inline enqueue styles
+    public function enqueue_inline_scripts()
+    {
+        error_log(print_r($this->css_strings, 1));
     }
 }

@@ -375,7 +375,6 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
             'href'   => '#',
             'meta'   => [
                 'class' => 'ea-tools-clear-cache-single',
-                'html'  => '<div class="ea-tools-clear-cache-single-ids" data-posts="' . json_encode($this->loaded_templates) . '"></div>',
             ],
             'title'  => 'Regenerate Page Assets',
         ]);

@@ -96,14 +96,22 @@ trait Generator
         if ($post_id && $ext == 'js' && $context == 'view') {
             $document = Plugin::$instance->documents->get($post_id);
 
-            if ($document->get_settings('eael_custom_js_print_method') == 'external') {
-                $output .= $document->get_settings('eael_custom_js');
+            if ($custom_js = $document->get_settings('eael_custom_js')) {
+                $output .= $custom_js;
             }
         }
 
-        $file_name = ($post_id ? 'post-' . $post_id . '.min.' : 'eael.min.') . $ext;
+        if (get_option('elementor_css_print_method') == 'internal') {
+            if ($ext == 'js') {
+                $this->js_strings[$post_id] = $output;
+            } else {
+                $this->css_strings[$post_id] = $output;
+            }
+        } else {
+            $file_name = ($post_id ? 'post-' . $post_id . '.min.' : 'eael.min.') . $ext;
 
-        return file_put_contents($this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file_name), $output);
+            file_put_contents($this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file_name), $output);
+        }
     }
 
     /**

@@ -41,6 +41,12 @@ class Bootstrap
     // loaded templates in a request
     public $loaded_templates = [];
 
+    // css strings, used for inline embed
+    protected $css_strings = [];
+
+    // js strings, used for inline embed
+    protected $js_strings = [];
+
     /**
      * Singleton instance
      *
@@ -103,6 +109,7 @@ class Bootstrap
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
         add_action('elementor/css-file/post/enqueue', [$this, 'enqueue_template_scripts']);
         add_action('elementor/editor/before_enqueue_scripts', array($this, 'editor_enqueue_scripts'));
+        add_action('wp_footer', [$this, 'enqueue_inline_scripts']);
 
         // Ajax
         add_action('wp_ajax_load_more', array($this, 'eael_load_more_ajax'));
