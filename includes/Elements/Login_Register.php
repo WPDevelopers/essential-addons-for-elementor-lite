@@ -1535,44 +1535,45 @@ class Login_Register extends Widget_Base {
             <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2">
                 <div class="lr-form-illustration" style="background-image: url('https://images.pexels.com/photos/3280211/pexels-photo-3280211.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');">
                 </div>
-                <form class="eael-login-form eael-lr-form" id="eael-login-form" method="post">
-
-                    <div class="eael-lr-form-group">
-                        <label for="eael-user-login">Username or Email Address</label>
-                        <input type="text" name="eael-user-login" id="eael-user-login" class="eael-lr-form-control"
-                               aria-describedby="emailHelp" placeholder="email@domain.com">
-                    </div>
-                    <div class="eael-lr-form-group">
-                        <label for="eael-user-password">Password</label>
-                        <a href="<?php echo esc_attr( esc_url( wp_lostpassword_url() ) ); ?>" style="float:right;font-size:12px;margin-top: 10px;">Forgot password?</a>
-                        <div class="eael-lr-password-wrapper">
-                            <input type="password" name="eael-user-password" class="eael-lr-form-control" id=""
-                                   placeholder="Password">
-                            <button type="button" class="wp-hide-pw hide-if-no-js" aria-label="Show password">
-                                <span class="dashicons dashicons-visibility" aria-hidden="true"></span>
-                            </button>
+                <div class="lr-form-wrapper">
+                    <form class="eael-login-form eael-lr-form" id="eael-login-form" method="post">
+                        <div class="eael-lr-form-group">
+                            <label for="eael-user-login">Username or Email Address</label>
+                            <input type="text" name="eael-user-login" id="eael-user-login" class="eael-lr-form-control"
+                                   aria-describedby="emailHelp" placeholder="email@domain.com">
                         </div>
-                    </div>
-                    <div class="eael-forever-forget eael-lr-form-group">
-                        <p class="forget-menot">
-                            <input name="rememberme" type="checkbox" id="rememberme" value="forever">
-                            <label for="rememberme">Remember Me</label>
-                        </p>
-                        <p class="forget-pass">
-                            <a href="#">Forgot password?</a>
-                        </p>
-                    </div>
+                        <div class="eael-lr-form-group">
+                            <label for="eael-user-password">Password</label>
+                            <a href="<?php echo esc_attr( esc_url( wp_lostpassword_url() ) ); ?>" style="float:right;font-size:12px;margin-top: 10px;">Forgot password?</a>
+                            <div class="eael-lr-password-wrapper">
+                                <input type="password" name="eael-user-password" class="eael-lr-form-control" id=""
+                                       placeholder="Password">
+                                <button type="button" class="wp-hide-pw hide-if-no-js" aria-label="Show password">
+                                    <span class="dashicons dashicons-visibility" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="eael-forever-forget eael-lr-form-group">
+                            <p class="forget-menot">
+                                <input name="rememberme" type="checkbox" id="rememberme" value="forever">
+                                <label for="rememberme">Remember Me</label>
+                            </p>
+                            <p class="forget-pass">
+                                <a href="#">Forgot password?</a>
+                            </p>
+                        </div>
 
-                    <input type="submit" name="eael-login-submit" id="eael-login-submit" class="eael-lr-btn eael-lr-btn-block" value="Sign in" />
-                    <div class="eael-sign-wrapper">
-                        Don't have an account?
-                        <a href="#" id="eael-lr-toggle">Register Now</a>
-                    </div>
+                        <input type="submit" name="eael-login-submit" id="eael-login-submit" class="eael-lr-btn eael-lr-btn-block" value="Sign in" />
+                        <div class="eael-sign-wrapper">
+                            Don't have an account?
+                            <a href="#" id="eael-lr-toggle">Register Now</a>
+                        </div>
 
-					<?php
-					$this->print_necessary_hidden_fields( 'login' );
-                    $this->print_login_validation_errors(); ?>
-                </form>
+                        <?php
+                        $this->print_necessary_hidden_fields( 'login' );
+                        $this->print_login_validation_errors(); ?>
+                    </form>
+                </div>
                 </div>
 			<?php
 		}
