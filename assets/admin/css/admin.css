@@ -158,8 +158,9 @@ textarea.eael-form-control {
     height: auto;
 }
 .col-half {
-    width: 49%;
+    flex-basis: 49%;
     height: auto;
+    display: flex;
 }
 .col-one-third {
     width: 32%;
@@ -585,6 +586,7 @@ textarea.eael-form-control {
     flex-flow: row wrap;
     justify-content: space-between;
     margin: -10px;
+    width: 100%;
 }
 
 .eael-admin-block-wrapper .eael-admin-block {
@@ -929,3 +931,28 @@ button.eael-btn.eael-global-control-disable:hover {
           transform: translate(-50%, 100%);
 }
 
+.eael-admin-inside-select-block {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.eael-admin-select-block-label {
+    flex-basis: 20%;
+    max-width: 20%;
+}
+
+.eael-admin-select-block-select {
+    flex-basis: 70%;
+    max-width: 70%;
+}
+
+.eael-admin-select-block-label h4 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+#eael-js-print-method-options {
+    margin: 0 0 8px 0;
+}
