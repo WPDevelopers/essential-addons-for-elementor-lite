@@ -24,7 +24,7 @@
         }
 
         @media (min-width: 768px) {
-            .lr-form-illustration, .eael-lr-form {
+            .lr-form-illustration, .lr-form-wrapper {
                 flex: 1;
                 max-width: 50%;
             }
@@ -44,7 +44,7 @@
             }
         }
 
-        .eael-lr-form {
+        .lr-form-wrapper {
             padding: 35px;
         }
     }
@@ -139,10 +139,43 @@
             display: block;
             width: 100%;
         }
+
+        &.eael-lr-btn-inline {
+
+        }
     }
 
-    .eael-sign-up {
+    .eael-sign-wrapper {
         text-align: center;
         padding: 20px 0 0;
+    }
+
+    .lr-form-header {
+        &.header-inline {
+            display: flex;
+
+            .form-logo {
+                flex: 0 0 30%;
+            }
+            .form-dsc {
+                flex: 0 0 70%;
+                padding-left: 15px;
+            }
+
+        }
+
+        img {
+            width: 100px;
+        }
+
+        h4 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-top: 0;
+        }
+
+        p {
+            font-size: 14px;
+        }
     }
 }
