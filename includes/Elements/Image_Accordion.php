@@ -506,12 +506,13 @@ class Image_Accordion extends Widget_Base {
                     ' . ( $active === 'yes' ? ' class="overlay-active"' : '' ) . '
                 >
 		            <div class="overlay">
-		              <div class="overlay-inner">
-		                <'.$settings['title_tag'].'>' . $img_accordion['eael_accordion_tittle'] . '</'.$settings['title_tag'].'>
-		              <div class="overlay-inner' . ( $active === 'yes' ? ' overlay-inner-show' : '' ) . '">
-		                <h2>' . $img_accordion['eael_accordion_tittle'] . '</h2>
-		                <p>' . $img_accordion['eael_accordion_content'] . '</p>
-		              </div>
+		                <div class="overlay-inner">
+		                    <'.$settings['title_tag'].'>' . $img_accordion['eael_accordion_tittle'] . '</'.$settings['title_tag'].'>
+                            <div class="overlay-inner' . ( $active === 'yes' ? ' overlay-inner-show' : '' ) . '">
+                                <h2>' . $img_accordion['eael_accordion_tittle'] . '</h2>
+                                <p>' . $img_accordion['eael_accordion_content'] . '</p>
+                            </div>
+                        </div>
 		            </div>
 		          </a>';
             }
