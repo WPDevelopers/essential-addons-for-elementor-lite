@@ -53,6 +53,10 @@ class Login_Register extends Widget_Base {
 	 * @var array
 	 */
 	protected $d_settings;
+	/**
+	 * @var bool|false|int
+	 */
+	protected $page_id;
 
 	/**
 	 * Login_Register constructor.
@@ -1478,7 +1482,9 @@ class Login_Register extends Widget_Base {
 		$this->should_print_login_form = ( 'login' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_login_link' ) );
 
 		$this->should_print_register_form = ( $this->user_can_register && ( 'registration' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_registration_link' ) ) );
-
+		if ( Plugin::$instance->documents->get_current() ) {
+			$this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
+		}
 		?>
         <div class="eael-login-registration-wrapper">
 			<?php
@@ -1491,53 +1497,22 @@ class Login_Register extends Widget_Base {
 
 	protected function print_login_form() {
 		if ( $this->should_print_login_form ) {
+
 			?>
-            <div class="eaal-login-form-wrapper ">
-                <form name="eael-loginform" id="eael-loginform" method="post">
-					<?php
-					// add login security nonce
-					wp_nonce_field( 'eael-login-action', 'eael-login-nonce' );
-					?>
-                    <p>
-                        <label for="eael-user-login">Username or Email Address</label>
-                        <input type="text" name="eael-user-login" id="eael-user-login" class="input" value="" size="20" autocapitalize="off" autocomplete="off" placeholder="Username or Email Address" required>
-                    </p>
-
-                    <div class="user-pass-wrap">
-                        <label for="eael-user-password">Password</label>
-                        <div class="wp-pwd">
-                            <input type="password" name="eael-user-password" id="eael-user-password" class="input password-input" value="" size="20" autocomplete="off" placeholder="Password" required>
-                            <button type="button" class="button button-secondary wp-hide-pw hide-if-no-js" aria-label="Show password">
-                        <span class="dashicons dashicons-visibility"
-                              aria-hidden="true"></span>
-                                <!-- will be used to toggle visibility -->
-                                <!-- <span class="dashicons dashicons-hidden"
-									aria-hidden="true"></span> -->
-                            </button>
-                        </div>
-                    </div>
-
-                    <p class="forgetmenot">
-                        <input name="eael-rememberme" type="checkbox" id="eael-rememberme" value="forever">
-                        <label for="eael-rememberme">Remember Me</label>
-                    </p>
-                    <p class="submit">
-                        <input type="submit" name="eael-login-submit" id="eael-login-submit" class="button button-primary button-large" value="Log In">
-                        <input type="hidden" name="redirect_to" value="/wp-admin/">
-                        <input type="hidden" name="testcookie" value="1">
-                    </p>
-                    <p>
-						<?php $this->print_login_validation_errors(); ?>
-                    </p>
-                </form>
-            </div>
-
             <div class="eael-login-form-wrapper eael-lr-form-wrapper">
                 <form name="eael-login-form eael-lr-form" id="eael-login-form" method="post">
 	                <?php
 	                // add login security nonce
 	                wp_nonce_field( 'eael-login-action', 'eael-login-nonce' );
 	                ?>
+                    <!--
+                    <p class="forgetmenot">
+                        <input name="eael-rememberme" type="checkbox" id="eael-rememberme" value="forever">
+                        <label for="eael-rememberme">Remember Me</label>
+                    </p>
+                    -->
+
+
                     <div class="eael-lr-form-group">
                         <label for="eael-user-login">Username or Email Address</label>
                         <input type="text" name="eael-user-login" id="eael-user-login" class="eael-lr-form-control"
@@ -1559,6 +1534,10 @@ class Login_Register extends Widget_Base {
                     <div class="eael-sign-up">
                         Don't have an account? <a href="#">Register Now</a>
                     </div>
+                    <input type="hidden" name="redirect_to" value="/wp-admin/">
+                    <input type="hidden" name="testcookie" value="1">
+                    <input type="hidden" name="page_id" value="<?php echo esc_attr( $this->page_id ); ?>">
+                    <input type="hidden" name="widget_id" value="<?php echo esc_attr( $this->get_id() ); ?>">
                     <p>
 		                <?php $this->print_login_validation_errors(); ?>
                     </p>
@@ -1705,8 +1684,6 @@ class Login_Register extends Widget_Base {
 					endforeach;
 					?>
 
-                    <input type="hidden" name="user_role" value="">
-                    <input type="hidden" name="redirect_to" value="">
                     <input type="hidden" name="page_id" value="<?php echo esc_attr( $page_id ); ?>">
                     <input type="hidden" name="widget_id" value="<?php echo esc_attr( $this->get_id() ); ?>">
                     <p class="submit">
