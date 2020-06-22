@@ -44,6 +44,7 @@ trait Login_Registration {
 	 */
 	public function log_user_in() {
 		// before even thinking about login, check security and exit early if something is not right.
+
 		if ( empty( $_POST['eael-login-nonce'] ) ) {
 			return;
 		}
@@ -70,7 +71,9 @@ trait Login_Registration {
 		$user_data = wp_signon( $credentials );
 
 		if ( is_wp_error( $user_data ) ) {
-
+			error_log( 'caught error');
+			error_log( print_r( $user_data, 1));
+	
 			if ( isset( $user_data->errors['invalid_email'][0] ) ) {
 				$this->set_transient( 'eael_login_error', __( 'Invalid Email. Please check your email or try again with your username.', EAEL_TEXTDOMAIN ) );
 
@@ -81,9 +84,13 @@ trait Login_Registration {
 
 				$this->set_transient( 'eael_login_error', __( 'Invalid Password. Please check your password and try again', EAEL_TEXTDOMAIN ) );
 
+			}elseif ( isset( $user_data->errors['empty_password'][0] ) ) {
+
+				$this->set_transient( 'eael_login_error', __( 'Empty Password. Please check your password and try again', EAEL_TEXTDOMAIN ) );
+
 			}
 		} else {
-
+			error_log( 'success');
 			wp_set_current_user( $user_data->ID, $user_login );
 			do_action( 'wp_login', $user_data->user_login, $user_data );
 			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data );
