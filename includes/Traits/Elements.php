@@ -308,18 +308,6 @@ trait Elements
 
         $html = '';
 
-        if (!empty($this->loaded_templates)) {
-            foreach ($this->loaded_templates as $post_id) {
-                $document = Plugin::$instance->documents->get($post_id);
-
-                if ($document->get_settings('eael_custom_js')) {
-                    if ($document->get_settings('eael_custom_js_print_method') == 'internal') {
-                        $html .= '<script type="text/javascript">' . $document->get_settings('eael_custom_js') . '</script>';
-                    }
-                }
-            }
-        }
-
         if (is_singular()) {
             $is_elementor = Plugin::$instance->db->is_built_with_elementor(get_the_ID());
 

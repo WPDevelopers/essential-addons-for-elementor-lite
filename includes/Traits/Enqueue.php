@@ -35,7 +35,7 @@ trait Enqueue
         $this->loaded_templates[] = $post_id;
 
         // generate post script
-        $widgets = $this->generate_post_scripts($post_id);
+        $widgets = $this->parse_widgets($post_id);
 
         // if no widget in page, return
         if (empty($widgets)) {
@@ -92,10 +92,15 @@ trait Enqueue
         // run hook before enqueue script
         do_action('eael/before_single_enqueue_scripts', $widgets);
 
-        // avoid enqueue if internal css embed method enabled
+        // css
         if (get_option('elementor_css_print_method') == 'internal') {
-            echo '<style id="eael-post-' . $post_id . '">' . $this->css_strings[$post_id] . '</style>';
+            $css_strings = $this->generate_strings($post_id, $widgets, 'view', 'css');
+
+            echo '<style id="eael-post-' . $post_id . '">' . $css_strings . '</style>';
         } else {
+            // generate post style
+            $this->generate_post_script($post_id, $widgets, 'css');
+
             // enqueue
             wp_enqueue_style(
                 'eael-post-' . $post_id,
@@ -103,6 +108,16 @@ trait Enqueue
                 false,
                 time()
             );
+        }
+
+        // js
+        if (get_option('eael_js_print_method') == 'internal') {
+            $js_strings = $this->generate_strings($post_id, $widgets, 'view', 'js');
+
+            $this->js_strings[$post_id] = $js_strings;
+        } else {
+            // generate post script
+            $this->generate_post_script($post_id, $widgets, 'js');
 
             wp_enqueue_script(
                 'eael-post-' . $post_id,
@@ -174,27 +189,43 @@ trait Enqueue
 
         // enqueue
         if (Plugin::$instance->preview->is_preview_mode()) {
-            // generate post script
-            $this->generate_editor_scripts();
+            $widgets = $this->get_settings();
 
-            // enqueue
-            wp_enqueue_style(
-                'eael-edit',
-                $this->safe_protocol(EAEL_ASSET_URL . '/eael.min.css'),
-                false,
-                time()
-            );
+            // css
+            if (get_option('elementor_css_print_method') == 'internal') {
+                $css = $this->generate_strings(null, $widgets, 'edit', 'css');
+            } else {
+                // generate editor style
+                $this->generate_editor_script($widgets, 'css');
 
-            wp_enqueue_script(
-                'eael-edit',
-                $this->safe_protocol(EAEL_ASSET_URL . '/eael.min.js'),
-                ['jquery'],
-                time(),
-                true
-            );
+                // enqueue
+                wp_enqueue_style(
+                    'eael-edit',
+                    $this->safe_protocol(EAEL_ASSET_URL . '/eael.min.css'),
+                    false,
+                    time()
+                );
+            }
 
-            // localize
-            wp_localize_script('eael-edit', 'localize', $this->localize_objects);
+            // js
+            if (get_option('eael_js_print_method') == 'internal') {
+                $js = $this->generate_strings(null, $widgets, 'edit', 'js');
+            } else {
+                // generate editor script
+                $this->generate_editor_script($widgets, 'js');
+
+                // enqueue
+                wp_enqueue_script(
+                    'eael-edit',
+                    $this->safe_protocol(EAEL_ASSET_URL . '/eael.min.js'),
+                    ['jquery'],
+                    time(),
+                    true
+                );
+
+                // localize
+                wp_localize_script('eael-edit', 'localize', $this->localize_objects);
+            }
         }
     }
 
@@ -218,6 +249,10 @@ trait Enqueue
     // inline enqueue styles
     public function enqueue_inline_scripts()
     {
-        error_log(print_r($this->css_strings, 1));
+        if ($this->js_strings) {
+            foreach ($this->js_strings as $js_string) {
+                echo '<script>' . $js_string . '</script>';
+            }
+        }
     }
 }
