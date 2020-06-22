@@ -1531,12 +1531,12 @@ class Login_Register extends Widget_Base {
 	protected function print_login_form() {
 		if ( $this->should_print_login_form ) {
 		    $image_id = !empty( $this->d_settings['login_image']['id']) ? $this->d_settings['login_image']['id'] : '';
-
 			?>
             <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2">
                 <div class="lr-form-illustration" style="background-image: url('https://images.pexels.com/photos/3280211/pexels-photo-3280211.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');">
                 </div>
                 <form class="eael-login-form eael-lr-form" id="eael-login-form" method="post">
+
                     <div class="eael-lr-form-group">
                         <label for="eael-user-login">Username or Email Address</label>
                         <input type="text" name="eael-user-login" id="eael-user-login" class="eael-lr-form-control"
@@ -1562,18 +1562,18 @@ class Login_Register extends Widget_Base {
                             <a href="#">Forgot password?</a>
                         </p>
                     </div>
-                    <input type="submit" name="eael-login-submit" id="eael-login-submit" class="eael-lr-btn eael-lr-btn-block" value="Sign in"/>
-                    <div class="eael-sign-up">
+
+                    <input type="submit" name="eael-login-submit" id="eael-login-submit" class="eael-lr-btn eael-lr-btn-block" value="Sign in" />
+                    <div class="eael-sign-wrapper">
                         Don't have an account?
                         <a href="#" id="eael-lr-toggle">Register Now</a>
                     </div>
 
-					<?php $this->print_necessary_hidden_fields( 'login' ); ?>
-                    <p>
-						<?php $this->print_login_validation_errors(); ?>
-                    </p>
+					<?php
+					$this->print_necessary_hidden_fields( 'login' );
+                    $this->print_login_validation_errors(); ?>
                 </form>
-            </div>
+                </div>
 			<?php
 		}
 	}
@@ -1603,123 +1603,141 @@ class Login_Register extends Widget_Base {
 
 			ob_start();
 			?>
-            <div class="eael-register-form-wrapper eael-lr-form-wrapper">
-                <form name="eael-register-form eael-lr-form" id="eael-register-form" method="post">
-					<?php
-					// Print all dynamic fields
-					foreach ( $this->d_settings['register_fields'] as $f_index => $field ) :
-						$field_type = $field['field_type'];
-						$dynamic_field_name = "{$field_type}_exists";
-						$$dynamic_field_name ++; //NOTE, double $$ intentional. Dynamically update the var check eg. $username_exists++ to prevent user from using the same field twice
-						// is same field repeated?
-						if ( $$dynamic_field_name > 1 ) {
-							$repeated_f_labels[] = $f_labels[ $field_type ];
-						}
-						if ( 'password' === $field_type ) {
-							$is_pass_valid = true;
-						}
 
-						//keys for attribute binding
-						$input_key       = "input{$f_index}";
-						$label_key       = "label{$f_index}";
-						$field_group_key = "field-group{$f_index}";
-
-						// determine proper input tag type
-						switch ( $field_type ) {
-							case 'user_name':
-							case 'first_name':
-							case 'last_name':
-								$field_input_type = 'text';
-								$this->add_render_attribute( $input_key, 'class', 'elementor-field-textual' );
-								break;
-							case 'confirm_pass':
-								$field_input_type = 'password';
-								break;
-							case 'website':
-								$field_input_type = 'url';
-								break;
-							default:
-								$field_input_type = $field_type;
-						}
-
-						$this->add_render_attribute( [
-							$input_key => [
-								'name'        => $field_type,
-								'type'        => $field_input_type,
-								'placeholder' => $field['placeholder'],
-								'class'       => [
-									'eael-lr-form-control',
-									'form-field-' . $field_type,
-								],
-							],
-							$label_key => [
-								'for'   => 'form-field-' . $field_type,
-								'class' => 'eael-field-label',
-							],
-						] );
-
-
-						// print require field attributes
-						$rf_class = '';
-						if ( ! empty( $field['required'] ) || in_array( $field_type, [
-								'password',
-								'confirm_pass',
-								'email',
-							] ) ) {
-							$this->add_render_attribute( $input_key, [
-								'required'      => 'required',
-								'aria-required' => 'true',
-							] );
-
-							$rf_class = "elementor-field-required";
-							if ( 'yes' === $this->d_settings['mark_required'] ) {
-								$rf_class = ' elementor-mark-required';
-							}
-						}
-
-
-						// add css classes to the main input field wrapper. @TODO; we can update class name according to frontend dev later here.
-						$this->add_render_attribute( [
-							$field_group_key => [
-								'class' => [
-									'eael-lr-form-group',
-									'elementor-field-type-' . $field_type,
-									'elementor-col-' . $field['width'],
-									$rf_class,
-								],
-							],
-						] );
-
-						if ( ! empty( $field['width_tablet'] ) ) {
-							$this->add_render_attribute( $field_group_key, 'class', 'elementor-md-' . $field['width_tablet'] );
-						}
-
-						if ( ! empty( $field['width_mobile'] ) ) {
-							$this->add_render_attribute( $field_group_key, 'class', 'elementor-sm-' . $field['width_mobile'] );
-						}
-
-						?>
-                        <div <?php $this->print_render_attribute_string( $field_group_key ) ?>>
-							<?php
-							if ( 'yes' === $this->d_settings['show_labels'] && ! empty( $field['field_label'] ) ) {
-								echo '<label ' . $this->get_render_attribute_string( $label_key ) . '>' . esc_attr( $field['field_label'] ) . '</label>';
-							}
-							echo '<input ' . $this->get_render_attribute_string( $input_key ) . '>';
-							?>
+            <div class="eael-register-form-wrapper eael-lr-form-wrapper style-2">
+                <div class="lr-form-illustration" style="background-image: url('https://images.pexels.com/photos/3280211/pexels-photo-3280211.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');">
+                </div>
+                <div class="lr-form-wrapper">
+                    <div class="lr-form-header header-inline">
+                        <div class="form-logo">
+                            <img src="https://essential-addons.com/elementor/wp-content/uploads/2018/07/ea-logo.svg" alt="">
                         </div>
-					<?php
-					endforeach;
-					$this->print_necessary_hidden_fields( 'register' );
-					?>
 
-                    <p class="submit">
-                        <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn eael-lr-btn-block" value="Register" required>
-                    </p>
-                </form>
+                        <div class="form-dsc">
+                            <h4>Create a new account</h4>
+                            <p>Add powers to your page builder using our easy-to-use</p>
+                        </div>
+                    </div>
+                    <form class="eael-register-form eael-lr-form" id="eael-register-form" method="post">
+		                <?php
+		                // Print all dynamic fields
+		                foreach ( $this->d_settings['register_fields'] as $f_index => $field ) :
+			                $field_type = $field['field_type'];
+			                $dynamic_field_name = "{$field_type}_exists";
+			                $$dynamic_field_name ++; //NOTE, double $$ intentional. Dynamically update the var check eg. $username_exists++ to prevent user from using the same field twice
+			                // is same field repeated?
+			                if ( $$dynamic_field_name > 1 ) {
+				                $repeated_f_labels[] = $f_labels[ $field_type ];
+			                }
+			                if ( 'password' === $field_type ) {
+				                $is_pass_valid = true;
+			                }
 
-				<?php
-				$this->print_registration_validation_errors();
-				?>
+			                //keys for attribute binding
+			                $input_key       = "input{$f_index}";
+			                $label_key       = "label{$f_index}";
+			                $field_group_key = "field-group{$f_index}";
+
+			                // determine proper input tag type
+			                switch ( $field_type ) {
+				                case 'user_name':
+				                case 'first_name':
+				                case 'last_name':
+					                $field_input_type = 'text';
+					                $this->add_render_attribute( $input_key, 'class', 'elementor-field-textual' );
+					                break;
+				                case 'confirm_pass':
+					                $field_input_type = 'password';
+					                break;
+				                case 'website':
+					                $field_input_type = 'url';
+					                break;
+				                default:
+					                $field_input_type = $field_type;
+			                }
+
+			                $this->add_render_attribute( [
+				                $input_key => [
+					                'name'        => $field_type,
+					                'type'        => $field_input_type,
+					                'placeholder' => $field['placeholder'],
+					                'class'       => [
+						                'eael-lr-form-control',
+						                'form-field-' . $field_type,
+					                ],
+				                ],
+				                $label_key => [
+					                'for'   => 'form-field-' . $field_type,
+					                'class' => 'eael-field-label',
+				                ],
+			                ] );
+
+
+			                // print require field attributes
+			                $rf_class = '';
+			                if ( ! empty( $field['required'] ) || in_array( $field_type, [
+					                'password',
+					                'confirm_pass',
+					                'email',
+				                ] ) ) {
+				                $this->add_render_attribute( $input_key, [
+					                'required'      => 'required',
+					                'aria-required' => 'true',
+				                ] );
+
+				                $rf_class = "elementor-field-required";
+				                if ( 'yes' === $this->d_settings['mark_required'] ) {
+					                $rf_class = ' elementor-mark-required';
+				                }
+			                }
+
+
+			                // add css classes to the main input field wrapper. @TODO; we can update class name according to frontend dev later here.
+			                $this->add_render_attribute( [
+				                $field_group_key => [
+					                'class' => [
+						                'eael-lr-form-group',
+						                'elementor-field-type-' . $field_type,
+						                'elementor-col-' . $field['width'],
+						                $rf_class,
+					                ],
+				                ],
+			                ] );
+
+			                if ( ! empty( $field['width_tablet'] ) ) {
+				                $this->add_render_attribute( $field_group_key, 'class', 'elementor-md-' . $field['width_tablet'] );
+			                }
+
+			                if ( ! empty( $field['width_mobile'] ) ) {
+				                $this->add_render_attribute( $field_group_key, 'class', 'elementor-sm-' . $field['width_mobile'] );
+			                }
+
+			                ?>
+                            <div <?php $this->print_render_attribute_string( $field_group_key ) ?>>
+				                <?php
+				                if ( 'yes' === $this->d_settings['show_labels'] && ! empty( $field['field_label'] ) ) {
+					                echo '<label ' . $this->get_render_attribute_string( $label_key ) . '>' . esc_attr( $field['field_label'] ) . '</label>';
+				                }
+				                echo '<input ' . $this->get_render_attribute_string( $input_key ) . '>';
+				                ?>
+                            </div>
+		                <?php
+		                endforeach;
+		                $this->print_necessary_hidden_fields( 'register' );
+
+		                ?>
+                        <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn
+                    eael-lr-btn-inline" value="Register" />
+
+                        <div class="eael-sign-wrapper">
+                            Already have an account?
+                            <a href="#" id="eael-lr-toggle">Sign In</a>
+                        </div>
+	                    <?php
+	                    $this->print_registration_validation_errors();
+	                    ?>
+                    </form>
+                </div>
             </div>
 			<?php
 			$form_markup = ob_get_clean();
