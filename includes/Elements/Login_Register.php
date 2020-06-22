@@ -6,9 +6,11 @@ use Elementor\Controls_Manager;
 use Elementor\Core\Schemes\Color;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
 use Elementor\Plugin;
 use Elementor\Repeater;
+use Elementor\Utils;
 use Elementor\Widget_Base;
 use Essential_Addons_Elementor\Traits\Login_Registration;
 
@@ -564,13 +566,41 @@ class Login_Register extends Widget_Base {
 			'default' => __( 'Log In', EAEL_TEXTDOMAIN ),
 		] );
 
+		$this->add_control( 'login_image_heading', [
+			'label'     => esc_html__( 'Login Form Image', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+		$this->add_control(
+			'login_image',
+			[
+				'label' => __( 'Choose Image', EAEL_TEXTDOMAIN ),
+				'type' => Controls_Manager::MEDIA,
+				'dynamic' => [
+					'active' => true,
+				],
+				'default' => [
+					'url' => Utils::get_placeholder_image_src(),
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Image_Size::get_type(),
+			[
+				'name' => 'login_image', // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `image_size` and `image_custom_dimension`.
+				'default' => 'full',
+				'separator' => 'none',
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
 	protected function init_content_login_options_controls() {
 
-		$this->start_controls_section( 'section_content_login_actions', [
-			'label'      => __( 'Login Form Actions', EAEL_TEXTDOMAIN ),
+		$this->start_controls_section( 'section_content_login_options', [
+			'label'      => __( 'Login Form Options', EAEL_TEXTDOMAIN ),
 			'conditions' => $this->get_login_controls_display_condition(),
 		] );
 
@@ -588,10 +618,10 @@ class Login_Register extends Widget_Base {
 			'condition'     => [
 				'redirect_after_login' => 'yes',
 			],
-			'default' => [
-				'url' => admin_url(),
+			'default'       => [
+				'url'         => admin_url(),
 				'is_external' => false,
-				'nofollow' => true,
+				'nofollow'    => true,
 			],
 			'separator'     => 'after',
 		] );
@@ -1500,19 +1530,13 @@ class Login_Register extends Widget_Base {
 
 	protected function print_login_form() {
 		if ( $this->should_print_login_form ) {
+		    $image_id = !empty( $this->d_settings['login_image']['id']) ? $this->d_settings['login_image']['id'] : '';
 
 			?>
             <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2">
                 <div class="lr-form-illustration" style="background-image: url('https://images.pexels.com/photos/3280211/pexels-photo-3280211.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');">
                 </div>
-
                 <form class="eael-login-form eael-lr-form" id="eael-login-form" method="post">
-	                <?php
-	                // add login security nonce
-	                wp_nonce_field( 'eael-login-action', 'eael-login-nonce' );
-	                ?>
-
-
                     <div class="eael-lr-form-group">
                         <label for="eael-user-login">Username or Email Address</label>
                         <input type="text" name="eael-user-login" id="eael-user-login" class="eael-lr-form-control"
@@ -1538,20 +1562,13 @@ class Login_Register extends Widget_Base {
                             <a href="#">Forgot password?</a>
                         </p>
                     </div>
-                    <input type="submit" name="eael-login-submit" id="eael-login-submit" class="eael-lr-btn eael-lr-btn-block" value="Sign in" />
+                    <input type="submit" name="eael-login-submit" id="eael-login-submit" class="eael-lr-btn eael-lr-btn-block" value="Sign in"/>
                     <div class="eael-sign-up">
                         Don't have an account?
                         <a href="#" id="eael-lr-toggle">Register Now</a>
                     </div>
 
-					<?php if ( ! empty( $this->d_settings['redirect_after_login'] ) && 'yes' === $this->d_settings['redirect_after_login'] ) {
-						$login_redirect_url = ! empty( $this->d_settings['redirect_url'] ) ? sanitize_text_field( $this->d_settings['redirect_url'] ) : '';
-						?>
-                        <input type="hidden" name="redirect_to" value="<?php echo esc_attr( $login_redirect_url ); ?>">
-					<?php } ?>
-                    <input type="hidden" name="testcookie" value="1">
-                    <input type="hidden" name="page_id" value="<?php echo esc_attr( $this->page_id ); ?>">
-                    <input type="hidden" name="widget_id" value="<?php echo esc_attr( $this->get_id() ); ?>">
+					<?php $this->print_necessary_hidden_fields( 'login' ); ?>
                     <p>
 						<?php $this->print_login_validation_errors(); ?>
                     </p>
@@ -1563,7 +1580,6 @@ class Login_Register extends Widget_Base {
 
 	protected function print_register_form() {
 		if ( $this->should_print_register_form ) {
-			$page_id           = '';
 			$is_pass_valid     = false; // Does the form has a password field?
 			$is_pass_confirmed = false;
 			// placeholders to flag if user use one type of field more than once.
@@ -1584,15 +1600,12 @@ class Login_Register extends Widget_Base {
 				'website'      => 'Website',
 			];
 			$repeated_f_labels   = [];
-			if ( Plugin::$instance->documents->get_current() ) {
-				$page_id = Plugin::$instance->documents->get_current()->get_main_id();
-			}
+
 			ob_start();
 			?>
             <div class="eael-register-form-wrapper eael-lr-form-wrapper">
                 <form name="eael-register-form eael-lr-form" id="eael-register-form" method="post">
-					<?php wp_nonce_field( 'eael-register-action', 'eael-register-nonce' );
-
+					<?php
 					// Print all dynamic fields
 					foreach ( $this->d_settings['register_fields'] as $f_index => $field ) :
 						$field_type = $field['field_type'];
@@ -1696,10 +1709,9 @@ class Login_Register extends Widget_Base {
                         </div>
 					<?php
 					endforeach;
+					$this->print_necessary_hidden_fields( 'register' );
 					?>
 
-                    <input type="hidden" name="page_id" value="<?php echo esc_attr( $page_id ); ?>">
-                    <input type="hidden" name="widget_id" value="<?php echo esc_attr( $this->get_id() ); ?>">
                     <p class="submit">
                         <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn eael-lr-btn-block" value="Register" required>
                     </p>
@@ -1711,7 +1723,7 @@ class Login_Register extends Widget_Base {
             </div>
 			<?php
 			$form_markup = ob_get_clean();
-			// if we are in the editor then show error related to repeater field.
+			// if we are in the editor then show error related to different input field.
 			if ( $this->in_editor ) {
 				$repeated            = $this->print_error_for_repeated_fields( $repeated_f_labels );
 				$email_field_missing = $this->print_error_for_missing_email_field( $email_exists );
@@ -1724,6 +1736,22 @@ class Login_Register extends Widget_Base {
 				echo $form_markup; //XSS OK, data sanitized already.
 			}
 		}
+	}
+
+	protected function print_necessary_hidden_fields( $form_type = 'login' ) {
+		if ( 'login' === $form_type ) {
+			if ( ! empty( $this->d_settings['redirect_after_login'] ) && 'yes' === $this->d_settings['redirect_after_login'] ) {
+				$login_redirect_url = ! empty( $this->d_settings['redirect_url'] ) ? sanitize_text_field( $this->d_settings['redirect_url'] ) : '';
+				?>
+                <input type="hidden" name="redirect_to" value="<?php echo esc_attr( $login_redirect_url ); ?>">
+			<?php }
+		}
+		// add login security nonce
+		wp_nonce_field( "eael-{$form_type}-action", "eael-{$form_type}-nonce" );
+		?>
+        <input type="hidden" name="page_id" value="<?php echo esc_attr( $this->page_id ); ?>">
+        <input type="hidden" name="widget_id" value="<?php echo esc_attr( $this->get_id() ); ?>">
+		<?php
 	}
 
 	protected function print_login_validation_errors() {
