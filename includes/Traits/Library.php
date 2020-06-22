@@ -82,7 +82,7 @@ trait Library
 
         if (isset($_REQUEST['posts'])) {
             if (!empty($_POST['posts'])) {
-                foreach ($_POST['posts'] as $post) {
+                foreach (json_decode($_POST['posts']) as $post) {
                     $this->remove_files('post-' . $post);
                 }
             }

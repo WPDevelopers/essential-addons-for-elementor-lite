@@ -5,10 +5,7 @@
 		e.preventDefault();
 
 		if (typeof localize != "undefined" && localize) {
-			var posts = $(this)
-					.parent()
-					.find(".ea-tools-clear-cache-single-ids")
-					.data("posts"),
+			var posts = $("#eael-loaded-templates").html(),
 				text = $(this).find(".ab-item");
 
 			$.ajax({
