@@ -517,9 +517,24 @@ class Betterdocs_Category_Box extends Widget_Base {
             );
 
             $this->add_responsive_control(
+                'icon_padding',
+                [
+                    'label'              => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                    'type'               => Controls_Manager::DIMENSIONS,
+                    'size_units'         => ['px', 'em', '%'],
+                    'selectors'          => [
+                        '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    ],
+                    'condition' => [
+                        'layout_template' => 'Layout_Default'
+                    ]
+                ]
+            );
+
+            $this->add_responsive_control(
                 'icon_spacing',
                 [
-                    'label'              => esc_html__('Icon Spacing', 'essential-addons-for-elementor-lite'),
+                    'label'              => esc_html__('Spacing', 'essential-addons-for-elementor-lite'),
                     'type'               => Controls_Manager::DIMENSIONS,
                     'size_units'         => ['px', 'em', '%'],
                     'allowed_dimensions' => [
