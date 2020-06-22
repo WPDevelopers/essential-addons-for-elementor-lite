@@ -432,6 +432,92 @@ class Betterdocs_Category_Grid extends Widget_Base
                 ]
             );
 
+            $this->start_controls_tabs('icon_settings_tabs');
+
+            // Normal State Tab
+            $this->start_controls_tab(
+                'icon_normal',
+                ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]
+            );
+
+            $this->add_group_control(
+                Group_Control_Background::get_type(),
+                [
+                    'name' => 'header_icon_bg',
+                    'types' => ['classic', 'gradient'],
+                    'selector' => '{{WRAPPER}} .eael-bd-cg-header .eael-docs-cat-icon',
+                    'exclude'   => [
+                        'image'
+                    ]
+                ]
+            );
+
+            $this->add_group_control(
+                Group_Control_Border::get_type(),
+                [
+                    'name' => 'header_icon_border', // Legacy control name change it with 'border_size' if anything happens.
+                    'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
+                    'selector' => '{{WRAPPER}} .eael-bd-cg-header .eael-docs-cat-icon',
+                ]
+            );
+
+            $this->add_control(
+                'header_icon_border_radius',
+                [
+                    'label' => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', '%', 'em' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-bd-cg-header .eael-docs-cat-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    ]
+                ]
+            );
+
+            $this->end_controls_tab();
+
+             // Hover State Tab
+             $this->start_controls_tab(
+                'icon_hover',
+                ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]
+            );
+
+            $this->add_group_control(
+                Group_Control_Background::get_type(),
+                [
+                    'name' => 'header_icon_bg_hover',
+                    'types' => ['classic', 'gradient'],
+                    'selector' => '{{WRAPPER}} .eael-bd-cg-header .eael-docs-cat-icon:hover',
+                    'exclude'   => [
+                        'image'
+                    ]
+                ]
+            );
+
+            $this->add_group_control(
+                Group_Control_Border::get_type(),
+                [
+                    'name' => 'header_icon_border_hover', // Legacy control name change it with 'border_size' if anything happens.
+                    'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
+                    'selector' => '{{WRAPPER}} .eael-bd-cg-header .eael-docs-cat-icon:hover',
+                ]
+            );
+
+            $this->add_control(
+                'header_icon_border_radius_hover',
+                [
+                    'label' => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', '%', 'em' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-bd-cg-header .eael-docs-cat-icon:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    ]
+                ]
+            );
+
+            $this->end_controls_tab();
+
+            $this->end_controls_tabs();
+
             $this->add_responsive_control(
                 'header_icon_size',
                 [
@@ -447,6 +533,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'selectors' => [
                         '{{WRAPPER}} .eael-bd-cg-header .eael-docs-cat-icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
                     ],
+                    'separator' => 'before'
                 ]
             );
 
@@ -548,9 +635,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'size_units' => [ 'px', '%', 'em' ],
                     'selectors' => [
                         '{{WRAPPER}} .layout-2 .eael-docs-cat-title' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    ],
-                    'condition' => [
-                        'layout_template' => 'Layout_2'
+                        '{{WRAPPER}} .eael-bd-cg-header'   => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                     ]
                 ]
             );
