@@ -83,9 +83,10 @@ trait Generator
      *
      * @since 3.0.1
      */
-    public function combine_files($paths = [], $post_id, $ext, $context)
+    public function combine_files($post_id, $paths = [], $context, $ext)
     {
         $output = '';
+        $file_name = ($post_id ? 'post-' . $post_id . '.min.' : 'eael.min.') . $ext;
 
         if (!empty($paths)) {
             foreach ($paths as $path) {
@@ -101,17 +102,7 @@ trait Generator
             }
         }
 
-        if (get_option('elementor_css_print_method') == 'internal') {
-            if ($ext == 'js') {
-                $this->js_strings[$post_id] = $output;
-            } else {
-                $this->css_strings[$post_id] = $output;
-            }
-        } else {
-            $file_name = ($post_id ? 'post-' . $post_id . '.min.' : 'eael.min.') . $ext;
-
-            file_put_contents($this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file_name), $output);
-        }
+        file_put_contents($this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file_name), $output);
     }
 
     /**
@@ -119,7 +110,7 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_dependency(array $elements, $type, $context)
+    public function generate_dependency(array $elements, $context, $type)
     {
         $lib = ['view' => [], 'edit' => []];
         $self = ['general' => [], 'view' => [], 'edit' => []];
@@ -159,9 +150,8 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_post_scripts($post_id)
+    public function generate_post_script($post_id, $widgets, $ext)
     {
-        $widgets = $this->parse_widgets($post_id);
         $old_widgets = get_post_meta($post_id, 'eael_transient_elements', true);
 
         if ($old_widgets === '') {
@@ -178,21 +168,19 @@ trait Generator
 
             // generate cache files
             if (!empty($widgets)) {
-                $this->generate_scripts($widgets, $post_id, 'view');
+                $this->generate_scripts($post_id, $widgets, 'view', $ext);
             }
         }
 
         // if no elements, remove cache files
         if (empty($widgets)) {
-            $this->remove_files($post_id);
+            $this->remove_files($post_id, $ext);
         } else {
             // if no cache files, generate new
-            if (!$this->has_cache_files('post-' . $post_id)) {
-                $this->generate_scripts($widgets, $post_id, 'view');
+            if (!$this->has_cache_files('post-' . $post_id, $ext)) {
+                $this->generate_scripts($post_id, $widgets, 'view', $ext);
             }
         }
-
-        return $widgets;
     }
 
     /**
@@ -200,21 +188,17 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_editor_scripts()
+    public function generate_editor_script($widgets, $ext)
     {
-        $widgets = $this->get_settings();
-
         // if no elements, remove cache files
         if (empty($widgets)) {
-            $this->remove_files();
+            $this->remove_files(null, $ext);
         } else {
             // if no cache files, generate new
-            if (!$this->has_cache_files()) {
-                $this->generate_scripts($widgets, null, 'edit');
+            if (!$this->has_cache_files(null, $ext)) {
+                $this->generate_scripts(null, $widgets, 'edit', $ext);
             }
         }
-
-        return $widgets;
     }
 
     /**
@@ -222,7 +206,7 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_scripts($widgets, $post_id, $context)
+    public function generate_scripts($post_id, $widgets, $context, $ext)
     {
         // if folder not exists, create new folder
         if (!file_exists(EAEL_ASSET_PATH)) {
@@ -230,12 +214,10 @@ trait Generator
         }
 
         // collect library scripts & styles
-        $js_paths = $this->generate_dependency($widgets, 'js', $context);
-        $css_paths = $this->generate_dependency($widgets, 'css', $context);
+        $paths = $this->generate_dependency($widgets, $context, $ext);
 
         // combine files
-        $this->combine_files($css_paths, $post_id, 'css', $context);
-        $this->combine_files($js_paths, $post_id, 'js', $context);
+        $this->combine_files($post_id, $paths, $context, $ext);
     }
 
     /**
@@ -243,15 +225,47 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function has_cache_files($uid = null)
+    public function has_cache_files($uid = null, $ext = ['css', 'js'])
     {
-        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.css';
-        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.js';
-
-        if (is_readable($this->safe_path($css_path)) && is_readable($this->safe_path($js_path))) {
-            return true;
+        if (!is_array($ext)) {
+            $ext = (array) $ext;
         }
 
-        return false;
+        foreach ($ext as $e) {
+            $path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.' . $e;
+
+            if (!is_readable($this->safe_path($path))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Generate scripts strings.
+     *
+     * @since 3.0.0
+     */
+    public function generate_strings($post_id = null, $widgets, $context, $ext)
+    {
+        $output = '';
+        $paths = $this->generate_dependency($widgets, $context, $ext);
+
+        if (!empty($paths)) {
+            foreach ($paths as $path) {
+                $output .= file_get_contents($this->safe_path($path));
+            }
+        }
+
+        if ($post_id && $ext == 'js' && $context == 'view') {
+            $document = Plugin::$instance->documents->get($post_id);
+
+            if ($custom_js = $document->get_settings('eael_custom_js')) {
+                $output .= $custom_js;
+            }
+        }
+
+        return $output;
     }
 }

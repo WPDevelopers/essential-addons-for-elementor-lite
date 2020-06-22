@@ -30,6 +30,8 @@ define('EAEL_PLUGIN_VERSION', '4.0.3');
 define('EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . '/essential-addons-elementor');
 define('EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-elementor');
 
+// update_option('eael_js_print_method', 'external');
+
 /**
  * Including composer autoloader globally.
  *
