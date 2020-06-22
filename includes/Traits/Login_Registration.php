@@ -90,7 +90,6 @@ trait Login_Registration {
 
 			}
 		} else {
-			error_log( 'success');
 			wp_set_current_user( $user_data->ID, $user_login );
 			do_action( 'wp_login', $user_data->user_login, $user_data );
 			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data );
