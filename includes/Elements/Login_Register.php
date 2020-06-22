@@ -1499,19 +1499,15 @@ class Login_Register extends Widget_Base {
 		if ( $this->should_print_login_form ) {
 
 			?>
-            <div class="eael-login-form-wrapper eael-lr-form-wrapper">
-                <form name="eael-login-form eael-lr-form" id="eael-login-form" method="post">
+            <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2">
+                <div class="lr-form-illustration" style="background-image: url('https://images.pexels.com/photos/3280211/pexels-photo-3280211.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');">
+                </div>
+
+                <form class="eael-login-form eael-lr-form" id="eael-login-form" method="post">
 	                <?php
 	                // add login security nonce
 	                wp_nonce_field( 'eael-login-action', 'eael-login-nonce' );
 	                ?>
-                    <!--
-                    <p class="forgetmenot">
-                        <input name="eael-rememberme" type="checkbox" id="eael-rememberme" value="forever">
-                        <label for="eael-rememberme">Remember Me</label>
-                    </p>
-                    -->
-
 
                     <div class="eael-lr-form-group">
                         <label for="eael-user-login">Username or Email Address</label>
@@ -1520,8 +1516,6 @@ class Login_Register extends Widget_Base {
                     </div>
                     <div class="eael-lr-form-group">
                         <label for="eael-user-password">Password</label>
-                        <a href="#" style="float:right;font-size:12px;margin-top: 10px;">Forgot password?</a>
-
                         <div class="eael-lr-password-wrapper">
                             <input type="password" class="eael-lr-form-control" id=""
                                    placeholder="Password">
@@ -1530,7 +1524,16 @@ class Login_Register extends Widget_Base {
                             </button>
                         </div>
                     </div>
-                    <button type="submit" class="eael-lr-btn eael-lr-btn-block">Sign in</button>
+                    <div class="eael-forever-forget eael-lr-form-group">
+                        <p class="forget-menot">
+                            <input name="rememberme" type="checkbox" id="rememberme" value="forever">
+                            <label for="rememberme">Remember Me</label>
+                        </p>
+                        <p class="forget-pass">
+                            <a href="#">Forgot password?</a>
+                        </p>
+                    </div>
+                    <input type="submit" class="eael-lr-btn eael-lr-btn-block" value="Sign in" />
                     <div class="eael-sign-up">
                         Don't have an account? <a href="#">Register Now</a>
                     </div>
