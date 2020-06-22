@@ -403,7 +403,18 @@ class Betterdocs_Category_Grid extends Widget_Base
 
             $this->end_controls_tabs(); # end of $this->start_controls_tabs('grid_style_tab');
 
-
+            $this->add_responsive_control(
+                'grid_padding',
+                [
+                    'label' => __( 'Grid Padding', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', '%', 'em' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-better-docs-category-grid-wrapper .eael-bd-cg-inner' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                    'separator' => 'before'
+                ]
+            );
 
             $this->add_responsive_control(
                 'column_padding', // Legacy control id

@@ -56,10 +56,12 @@
   padding: 20px;
 
   .eael-bd-cg-header-inner {
-    border-bottom: 2px solid #528ffe;
+    border-bottom: 2px solid;
     display: flex;
     flex-direction: row;
+    align-items: center;
     padding-bottom: 20px;
+    border-color: #528ffe;
   }
 
   .eael-docs-cat-title {
