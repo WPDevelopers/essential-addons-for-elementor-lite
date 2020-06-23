@@ -250,7 +250,7 @@ trait Helper
                 [
                     'label' => __('Grid Per Page', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::NUMBER,
-                    'default' => '8'
+                    'default' => '6'
                 ]
             );
         }else {
