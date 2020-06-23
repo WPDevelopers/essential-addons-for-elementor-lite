@@ -258,6 +258,9 @@ trait Enqueue
     public function enqueue_inline_scripts()
     {
         if ($this->js_strings) {
+            // localize scripts for once
+            echo '<script>var localize =' . json_encode($this->localize_objects) . '</script>';
+
             foreach ($this->js_strings as $js_string) {
                 echo '<script>' . $js_string . '</script>';
             }
