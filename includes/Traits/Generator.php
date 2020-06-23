@@ -258,7 +258,7 @@ trait Generator
             }
         }
 
-        if ($post_id && $ext == 'js' && $context == 'view') {
+        if ($post_id && $ext == 'js') {
             $document = Plugin::$instance->documents->get($post_id);
 
             if ($custom_js = $document->get_settings('eael_custom_js')) {

@@ -109,6 +109,7 @@ class Bootstrap
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
         add_action('elementor/css-file/post/enqueue', [$this, 'enqueue_template_scripts']);
         add_action('elementor/editor/before_enqueue_scripts', array($this, 'editor_enqueue_scripts'));
+        add_action('wp_head', [$this, 'enqueue_inline_styles']);
         add_action('wp_footer', [$this, 'enqueue_inline_scripts']);
 
         // Ajax

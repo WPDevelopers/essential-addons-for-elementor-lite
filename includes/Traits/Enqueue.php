@@ -112,9 +112,7 @@ trait Enqueue
 
         // js
         if (get_option('eael_js_print_method') == 'internal') {
-            $js_strings = $this->generate_strings($post_id, $widgets, 'view', 'js');
-
-            $this->js_strings[$post_id] = $js_strings;
+            $this->js_strings[$post_id] = $this->generate_strings($post_id, $widgets, 'view', 'js');
         } else {
             // generate post script
             $this->generate_post_script($post_id, $widgets, 'js');
@@ -193,7 +191,7 @@ trait Enqueue
 
             // css
             if (get_option('elementor_css_print_method') == 'internal') {
-                $css = $this->generate_strings(null, $widgets, 'edit', 'css');
+                $this->css_strings['all'] = $this->generate_strings(null, $widgets, 'edit', 'css');
             } else {
                 // generate editor style
                 $this->generate_editor_script($widgets, 'css');
@@ -209,7 +207,7 @@ trait Enqueue
 
             // js
             if (get_option('eael_js_print_method') == 'internal') {
-                $js = $this->generate_strings(null, $widgets, 'edit', 'js');
+                $this->js_strings['all'] = $this->generate_strings(null, $widgets, 'edit', 'js');
             } else {
                 // generate editor script
                 $this->generate_editor_script($widgets, 'js');
@@ -233,7 +231,7 @@ trait Enqueue
     public function editor_enqueue_scripts()
     {
         wp_enqueue_style(
-            'eael-editor-css',
+            'eael-editor',
             $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/css/editor.css'),
             false
         );
@@ -246,6 +244,16 @@ trait Enqueue
         );
     }
 
+    // inline enqueue styles
+    public function enqueue_inline_styles()
+    {
+        if ($this->css_strings) {
+            foreach ($this->css_strings as $css_string) {
+                echo '<style>' . $css_string . '</style>';
+            }
+        }
+    }
+    
     // inline enqueue styles
     public function enqueue_inline_scripts()
     {
