@@ -54,7 +54,7 @@ class Login_Register extends Widget_Base {
 	 * It contains an array of settings for the display
 	 * @var array
 	 */
-	protected $d_settings;
+	protected $ds;
 	/**
 	 * @var bool|false|int
 	 */
@@ -268,7 +268,7 @@ class Login_Register extends Widget_Base {
 				'dynamic'   => [
 					'active' => true,
 				],
-				'default'   => __( 'Register', EAEL_TEXTDOMAIN ),
+				'default'   => __( 'Register Now', EAEL_TEXTDOMAIN ),
 				'condition' => [
 					'show_registration_link' => 'yes',
 					'default_form_type'      => 'login',
@@ -297,8 +297,8 @@ class Login_Register extends Widget_Base {
 					'active' => true,
 				],
 				'condition' => [
-					'login_link_action' => 'custom',
-					'show_login_link'   => 'yes',
+					'login_link_action'      => 'custom',
+					'show_registration_link' => 'yes',
 				],
 			] );
 		}
@@ -1564,19 +1564,25 @@ class Login_Register extends Widget_Base {
 
 	protected function render() {
 		//Note. forms are handled in Login_Registration Trait used in the Bootstrap class.
-		$this->d_settings = $this->get_settings_for_display();
-		//error_log( print_r( $this->d_settings, 1));
+		if ( !$this->in_editor && 'yes' === $this->get_settings_for_display('hide_for_logged_in_user') && is_user_logged_in() ) {
+           return; // do not show any form for already logged in user. but let edit on editor
+		}
+
+		$this->ds = $this->get_settings_for_display();
+		//error_log( print_r( $this->ds, 1));
 		$this->should_print_login_form = ( 'login' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_login_link' ) );
 
 		$this->should_print_register_form = ( $this->user_can_register && ( 'registration' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_registration_link' ) ) );
 		if ( Plugin::$instance->documents->get_current() ) {
 			$this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
 		}
-		//form illustration
-		$form_image_id               = ! empty( $this->d_settings['lr_form_image']['id'] ) ? $this->d_settings['lr_form_image']['id'] : '';
-		$this->form_illustration_url = Group_Control_Image_Size::get_attachment_image_src( $form_image_id, 'lr_form_image', $this->d_settings );
-		$form_logo_id                = ! empty( $this->d_settings['lr_form_logo']['id'] ) ? $this->d_settings['lr_form_logo']['id'] : '';
-		$this->form_logo             = Group_Control_Image_Size::get_attachment_image_src( $form_logo_id, 'lr_form_logo', $this->d_settings );
+
+
+		//handle form illustration
+		$form_image_id               = ! empty( $this->ds['lr_form_image']['id'] ) ? $this->ds['lr_form_image']['id'] : '';
+		$this->form_illustration_url = Group_Control_Image_Size::get_attachment_image_src( $form_image_id, 'lr_form_image', $this->ds );
+		$form_logo_id                = ! empty( $this->ds['lr_form_logo']['id'] ) ? $this->ds['lr_form_logo']['id'] : '';
+		$this->form_logo             = Group_Control_Image_Size::get_attachment_image_src( $form_logo_id, 'lr_form_logo', $this->ds );
 		?>
         <div class="eael-login-registration-wrapper">
 			<?php
@@ -1589,49 +1595,68 @@ class Login_Register extends Widget_Base {
 
 	protected function print_login_form() {
 		if ( $this->should_print_login_form ) {
+			// prepare all login form related vars
+			$show_reg_link    = ( $this->user_can_register && ( ! empty( $this->ds['show_registration_link'] ) && 'yes' === $this->ds['show_registration_link'] ) );
+			$reg_link_text    = ! empty( $this->ds['registration_link_text'] ) ? $this->ds['registration_link_text'] : __( 'Register', EAEL_TEXTDOMAIN );
+			$reg_link_action  = ! empty( $this->ds['registration_link_action'] ) ? $this->ds['registration_link_action'] : 'form';
+			$show_logout_link = ( ! empty( $this->ds['show_log_out_message'] ) && 'yes' === $this->ds['show_log_out_message'] );
 			?>
             <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2">
-				<?php $this->print_form_illustration(); ?>
-                <div class="lr-form-wrapper">
-					<?php $this->print_form_header( 'login' ); ?>
-                    <form class="eael-login-form eael-lr-form" id="eael-login-form" method="post">
-                        <div class="eael-lr-form-group">
-                            <label for="eael-user-login">Username or Email Address</label>
-                            <input type="text" name="eael-user-login" id="eael-user-login" class="eael-lr-form-control"
-                                   aria-describedby="emailHelp" placeholder="email@domain.com">
-                        </div>
-                        <div class="eael-lr-form-group">
-                            <label for="eael-user-password">Password</label>
-                            <a href="<?php echo esc_attr( esc_url( wp_lostpassword_url() ) ); ?>" style="float:right;font-size:12px;margin-top: 10px;">Forgot password?</a>
-                            <div class="eael-lr-password-wrapper">
-                                <input type="password" name="eael-user-password" class="eael-lr-form-control" id=""
-                                       placeholder="Password">
-                                <button type="button" class="wp-hide-pw hide-if-no-js" aria-label="Show password">
-                                    <span class="dashicons dashicons-visibility" aria-hidden="true"></span>
-                                </button>
+				<?php
+				if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor ) {
+					/* translators: %s user display name */
+					$logged_in_msg = sprintf( __( 'You are already logged in as %s. ', EAEL_TEXTDOMAIN ), wp_get_current_user()->display_name );
+
+					printf( '%1$s   [<a href="%2$s">%3$s</a>]', $logged_in_msg, esc_url( wp_logout_url() ), __( 'Logout', EAEL_TEXTDOMAIN ) );
+
+				} else {
+					?>
+					<?php $this->print_form_illustration(); ?>
+                    <div class="lr-form-wrapper">
+						<?php $this->print_form_header( 'login' ); ?>
+                        <form class="eael-login-form eael-lr-form" id="eael-login-form" method="post">
+                            <div class="eael-lr-form-group">
+                                <label for="eael-user-login">Username or Email Address</label>
+                                <input type="text" name="eael-user-login" id="eael-user-login" class="eael-lr-form-control"
+                                       aria-describedby="emailHelp" placeholder="email@domain.com">
                             </div>
-                        </div>
-                        <div class="eael-forever-forget eael-lr-form-group">
-                            <p class="forget-menot">
-                                <input name="rememberme" type="checkbox" id="rememberme" value="forever">
-                                <label for="rememberme">Remember Me</label>
-                            </p>
-                            <p class="forget-pass">
-                                <a href="#">Forgot password?</a>
-                            </p>
-                        </div>
+                            <div class="eael-lr-form-group">
+                                <label for="eael-user-password">Password</label>
+                                <a href="<?php echo esc_attr( esc_url( wp_lostpassword_url() ) ); ?>" style="float:right;font-size:12px;margin-top: 10px;">Forgot password?</a>
+                                <div class="eael-lr-password-wrapper">
+                                    <input type="password" name="eael-user-password" class="eael-lr-form-control" id=""
+                                           placeholder="Password">
+                                    <button type="button" class="wp-hide-pw hide-if-no-js" aria-label="Show password">
+                                        <span class="dashicons dashicons-visibility" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="eael-forever-forget eael-lr-form-group">
+                                <p class="forget-menot">
+                                    <input name="rememberme" type="checkbox" id="rememberme" value="forever">
+                                    <label for="rememberme">Remember Me</label>
+                                </p>
+                                <p class="forget-pass">
+                                    <a href="#">Forgot password?</a>
+                                </p>
+                            </div>
 
-                        <input type="submit" name="eael-login-submit" id="eael-login-submit" class="eael-lr-btn eael-lr-btn-block" value="Sign in"/>
-                        <div class="eael-sign-wrapper">
-                            Don't have an account?
-                            <a href="#" id="eael-lr-toggle">Register Now</a>
-                        </div>
+                            <input type="submit" name="eael-login-submit" id="eael-login-submit" class="eael-lr-btn eael-lr-btn-block" value="Sign in"/>
 
-						<?php
-						$this->print_necessary_hidden_fields( 'login' );
-						$this->print_login_validation_errors(); ?>
-                    </form>
-                </div>
+							<?php if ( $show_reg_link ) { ?>
+                                <div class="eael-sign-wrapper">
+                                    Don't have an account?
+                                    <a href="#" id="eael-lr-toggle" data-action="<?php echo esc_attr( $reg_link_action ); ?>"><?php echo esc_html( $reg_link_text ); ?></a>
+                                </div>
+							<?php }
+
+							$this->print_necessary_hidden_fields( 'login' );
+							$this->print_login_validation_errors(); ?>
+                        </form>
+                    </div>
+					<?php
+				}
+				?>
             </div>
 			<?php
 		}
@@ -1669,7 +1694,7 @@ class Login_Register extends Widget_Base {
 					<?php $this->print_form_header( 'register' ); ?>
                     <form class="eael-register-form eael-lr-form" id="eael-register-form" method="post">
 						<?php // Print all dynamic fields
-						foreach ( $this->d_settings['register_fields'] as $f_index => $field ) :
+						foreach ( $this->ds['register_fields'] as $f_index => $field ) :
 							$field_type = $field['field_type'];
 							$dynamic_field_name = "{$field_type}_exists";
 							$$dynamic_field_name ++; //NOTE, double $$ intentional. Dynamically update the var check eg. $username_exists++ to prevent user from using the same field twice
@@ -1734,7 +1759,7 @@ class Login_Register extends Widget_Base {
 								] );
 
 								$rf_class = "elementor-field-required";
-								if ( 'yes' === $this->d_settings['mark_required'] ) {
+								if ( 'yes' === $this->ds['mark_required'] ) {
 									$rf_class = ' elementor-mark-required';
 								}
 							}
@@ -1763,7 +1788,7 @@ class Login_Register extends Widget_Base {
 							?>
                             <div <?php $this->print_render_attribute_string( $field_group_key ) ?>>
 								<?php
-								if ( 'yes' === $this->d_settings['show_labels'] && ! empty( $field['field_label'] ) ) {
+								if ( 'yes' === $this->ds['show_labels'] && ! empty( $field['field_label'] ) ) {
 									echo '<label ' . $this->get_render_attribute_string( $label_key ) . '>' . esc_attr( $field['field_label'] ) . '</label>';
 								}
 								echo '<input ' . $this->get_render_attribute_string( $input_key ) . '>';
@@ -1814,8 +1839,8 @@ class Login_Register extends Widget_Base {
 	 * @param string $form_type the type of form. Available values: login and register
 	 */
 	protected function print_form_header( $form_type = 'login' ) {
-		$title    = ! empty( $this->d_settings["{$form_type}_form_title"] ) ? esc_html( $this->d_settings["{$form_type}_form_title"] ) : '';
-		$subtitle = ! empty( $this->d_settings["{$form_type}_form_subtitle"] ) ? esc_html( $this->d_settings["{$form_type}_form_subtitle"] ) : '';
+		$title    = ! empty( $this->ds["{$form_type}_form_title"] ) ? esc_html( $this->ds["{$form_type}_form_title"] ) : '';
+		$subtitle = ! empty( $this->ds["{$form_type}_form_subtitle"] ) ? esc_html( $this->ds["{$form_type}_form_subtitle"] ) : '';
 		if ( empty( $this->form_logo ) && empty( $title ) && empty( $subtitle ) ) {
 			return;
 		}
@@ -1823,7 +1848,7 @@ class Login_Register extends Widget_Base {
         <div class="lr-form-header header-inline">
 			<?php if ( ! empty( $this->form_logo ) ) { ?>
                 <div class="form-logo">
-                    <img src="<?php echo esc_attr( esc_url( $this->form_logo ) ); ?>" alt="<?php esc_attr_e( 'Form Logo Image', EAEL_TEXTDOMAIN); ?>">
+                    <img src="<?php echo esc_attr( esc_url( $this->form_logo ) ); ?>" alt="<?php esc_attr_e( 'Form Logo Image', EAEL_TEXTDOMAIN ); ?>">
                 </div>
 			<?php } ?>
 
@@ -1845,8 +1870,8 @@ class Login_Register extends Widget_Base {
 
 	protected function print_necessary_hidden_fields( $form_type = 'login' ) {
 		if ( 'login' === $form_type ) {
-			if ( ! empty( $this->d_settings['redirect_after_login'] ) && 'yes' === $this->d_settings['redirect_after_login'] ) {
-				$login_redirect_url = ! empty( $this->d_settings['redirect_url'] ) ? sanitize_text_field( $this->d_settings['redirect_url'] ) : '';
+			if ( ! empty( $this->ds['redirect_after_login'] ) && 'yes' === $this->ds['redirect_after_login'] ) {
+				$login_redirect_url = ! empty( $this->ds['redirect_url'] ) ? sanitize_text_field( $this->ds['redirect_url'] ) : '';
 				?>
                 <input type="hidden" name="redirect_to" value="<?php echo esc_attr( $login_redirect_url ); ?>">
 			<?php }
