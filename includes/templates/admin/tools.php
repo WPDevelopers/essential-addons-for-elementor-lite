@@ -55,9 +55,9 @@
                                 <h4><?php _e('JS Print Method', 'essential-addons-for-elementor-lite');?></h4>
                             </div>
                             <div class="eael-admin-select-block-select">
-                                <select name="eael-js-print-method" id="eael-js-print-method-options">
-                                    <option value="external-file"><?php _e('External File', 'essential-addons-for-elementor-lite');?></option>
-                                    <option value="internal-embedding"><?php _e('Internal Embedding', 'essential-addons-for-elementor-lite');?></option>
+                                <select name="eael-js-print-method" id="eael-js-print-method">
+                                    <option value="external" <?php echo get_option('eael_js_print_method') == 'external' ? 'selected' : '' ?>><?php _e('External File', 'essential-addons-for-elementor-lite');?></option>
+                                    <option value="internal" <?php echo get_option('eael_js_print_method') == 'internal' ? 'selected' : '' ?>><?php _e('Internal Embedding', 'essential-addons-for-elementor-lite');?></option>
                                 </select>
 
                                 <p class="quick-tools-description"><?php _e('Use external CSS files for all generated stylesheets. Choose this setting for better performance (recommended).', 'essential-addons-for-elementor-lite');?></p>
