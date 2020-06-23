@@ -236,13 +236,13 @@ class Betterdocs_Category_Box extends Widget_Base {
 
             /**
              * ----------------------------------------------------------
-             * Section: Column Settings
+             * Section: Box Styles
              * ----------------------------------------------------------
              */
             $this->start_controls_section(
-                'section_column_settings',
+                'section_card_settings',
                 [
-                    'label' => __('Column', 'essential-addons-for-elementor-lite'),
+                    'label' => __('Box', 'essential-addons-for-elementor-lite'),
                     'tab'   => Controls_Manager::TAB_STYLE,
                 ]
             );
@@ -267,22 +267,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'size_units' => ['px', 'em', '%'],
                     'selectors'  => [
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    ],
-                ]
-            );
-
-            $this->end_controls_section(); # end of 'Column Settings'
-
-            /**
-             * ----------------------------------------------------------
-             * Section: Box Styles
-             * ----------------------------------------------------------
-             */
-            $this->start_controls_section(
-                'section_card_settings',
-                [
-                    'label' => __('Box', 'essential-addons-for-elementor-lite'),
-                    'tab'   => Controls_Manager::TAB_STYLE,
+                    ]
                 ]
             );
 
@@ -643,7 +628,10 @@ class Betterdocs_Category_Box extends Widget_Base {
                 'title_styles_area_heading',
                 [
                     'label' => __( 'Area', 'essential-addons-for-elementor-lite' ),
-                    'type' =>   Controls_Manager::HEADING
+                    'type' =>   Controls_Manager::HEADING,
+                    'condition' => [
+                        'layout_template'   => 'Layout_2'
+                    ]
                 ]
             );
 
@@ -693,14 +681,6 @@ class Betterdocs_Category_Box extends Widget_Base {
                         '{{WRAPPER}} .eael-bd-cb-inner .eael-bd-cb-cat-title' => 'color: {{VALUE}};',
                         '{{WRAPPER}} .layout__2 .eael-bd-cb-cat-title__layout-2' => 'color: {{VALUE}};'
                     ],
-                ]
-            );
-
-            $this->add_group_control(
-                Group_Control_Typography::get_type(),
-                [
-                    'name'     => 'cat_title_typography_normal',
-                    'selector' => '{{WRAPPER}} .eael-bd-cb-inner .eael-bd-cb-cat-title, {{WRAPPER}} .layout__2 .eael-bd-cb-cat-title__layout-2'
                 ]
             );
 
@@ -763,6 +743,43 @@ class Betterdocs_Category_Box extends Widget_Base {
             $this->end_controls_tab();
 
             $this->end_controls_tabs();
+
+            $this->add_group_control(
+                Group_Control_Typography::get_type(),
+                [
+                    'name'     => 'cat_title_typography_normal',
+                    'selector' => '{{WRAPPER}} .eael-bd-cb-inner .eael-bd-cb-cat-title, {{WRAPPER}} .layout__2 .eael-bd-cb-cat-title__layout-2'
+                ]
+            );
+
+            $this->add_responsive_control(
+                'title_alignment',
+                [
+                    'label' => __('Text Alignment', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::CHOOSE,
+                    'options' => [
+                        'flex-start' => [
+                            'title' => __('Left', 'essential-addons-for-elementor-lite'),
+                            'icon' => 'fa fa-align-left',
+                        ],
+                        'center' => [
+                            'title' => __('Center', 'essential-addons-for-elementor-lite'),
+                            'icon' => 'fa fa-align-center',
+                        ],
+                        'flex-end' => [
+                            'title' => __('Right', 'essential-addons-for-elementor-lite'),
+                            'icon' => 'fa fa-align-right',
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .layout__2 .eael-bd-cb-cat-title__layout-2' => 'justify-content: {{VALUE}};',
+                    ],
+                    'condition' => [
+                        'layout_template'   => 'Layout_2'
+                    ],
+                    'separator' => 'before'
+                ]
+            );
 
             $this->end_controls_section(); # end of 'Icon Styles'
 
