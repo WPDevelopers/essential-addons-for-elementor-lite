@@ -64,11 +64,11 @@ trait Eael_WPML {
             ],
         ];
 
-        // Doesn't work properly
-        // $widgets['eael-data-table'] = [
-        //     'conditions' => ['widgetType' => 'eael-data-table'],
-        //     'integration-class' => '\Essential_Addons_Elementor\Classes\WPML\Widgets\Data_Table'
-        // ];
+        //Doesn't work properly
+        $widgets['eael-data-table'] = [
+            'conditions' => ['widgetType' => 'eael-data-table'],
+            'integration-class' => ['\Essential_Addons_Elementor\Classes\WPML\Widgets\Data_Table', '\Essential_Addons_Elementor\Classes\WPML\Widgets\Data_Table_Body']
+        ];
 
         $widgets['eicon-animated-headline'] = [
             'conditions' => ['widgetType' => 'eael-dual-color-header'],
@@ -421,6 +421,54 @@ trait Eael_WPML {
                     'field'       => 'form_description_custom',
                     'type'        => __('NinjaForm: Description', 'essential-addons-for-elementor-lite'),
                     'editor_type' => 'AREA',
+                ]
+            ],
+        ];
+
+        $widgets['eael-event-calendar'] = [
+            'conditions' => ['widgetType' => 'eael-event-calendar'],
+            'integration-class' => '\Essential_Addons_Elementor\Classes\WPML\Widgets\Event_Calendar'
+        ];
+
+        $widgets['eael-advanced-data-table'] = [
+            'conditions' => ['widgetType' => 'eael-advanced-data-table'],
+            'fields' => [
+                [
+                    'field'       => 'ea_adv_data_table_search_placeholder',
+                    'type'        => __('Adv Data Table: Search Placeholder', 'essential-addons-for-elementor-lite'),
+                    'editor_type' => 'LINE'
+                ]
+            ],
+        ];
+
+        $widgets['eael-formstack'] = [
+            'conditions' => ['widgetType' => 'eael-formstack'],
+            'fields' => [
+                [
+                    'field'       => 'eael_formstack_form_title_custom',
+                    'type'        => __('Formstack: Custom Title', 'essential-addons-for-elementor-lite'),
+                    'editor_type' => 'LINE'
+                ],
+                [
+                    'field'       => 'eael_formstack_form_description_custom',
+                    'type'        => __('Formstack: Custom Description', 'essential-addons-for-elementor-lite'),
+                    'editor_type' => 'VISUAL'
+                ]
+            ],
+        ];
+
+        $widgets['eael-fluentform'] = [
+            'conditions' => ['widgetType' => 'eael-fluentform'],
+            'fields' => [
+                [
+                    'field'       => 'form_title_custom',
+                    'type'        => __('Fluent Form: Title', 'essential-addons-for-elementor-lite'),
+                    'editor_type' => 'LINE'
+                ],
+                [
+                    'field'       => 'form_description_custom',
+                    'type'        => __('Fluent Form: Description', 'essential-addons-for-elementor-lite'),
+                    'editor_type' => 'VISUAL'
                 ]
             ],
         ];
