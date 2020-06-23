@@ -224,17 +224,9 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         // update new settings
         $updated = update_option('eael_save_settings', $elements);
 
-        // Build assets files
-        error_log(print_r('hah', 1));
-
-        if (get_option('elementor_css_print_method') == 'external') {
-            error_log(print_r('hah', 1));
-            $this->generate_editor_script(array_keys($elements), 'css');
-        }
-
-        if (get_option('eael_js_print_method') == 'external') {
-            error_log(print_r('hah', 1));
-            $this->generate_editor_script(array_keys($elements), 'js');
+        // clear assets files
+        if (get_option('elementor_css_print_method') == 'external' || get_option('eael_js_print_method') == 'external') {
+            $this->empty_dir(EAEL_ASSET_PATH);
         }
 
         wp_send_json($updated);
