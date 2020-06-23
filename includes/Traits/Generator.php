@@ -168,7 +168,7 @@ trait Generator
 
             // generate cache files
             if (!empty($widgets)) {
-                $this->generate_scripts($post_id, $widgets, 'view', $ext);
+                $this->generate_script($post_id, $widgets, 'view', $ext);
             }
         }
 
@@ -178,7 +178,7 @@ trait Generator
         } else {
             // if no cache files, generate new
             if (!$this->has_cache_files('post-' . $post_id, $ext)) {
-                $this->generate_scripts($post_id, $widgets, 'view', $ext);
+                $this->generate_script($post_id, $widgets, 'view', $ext);
             }
         }
     }
@@ -196,7 +196,7 @@ trait Generator
         } else {
             // if no cache files, generate new
             if (!$this->has_cache_files(null, $ext)) {
-                $this->generate_scripts(null, $widgets, 'edit', $ext);
+                $this->generate_script(null, $widgets, 'edit', $ext);
             }
         }
     }
@@ -206,7 +206,7 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_scripts($post_id, $widgets, $context, $ext)
+    public function generate_script($post_id, $widgets, $context, $ext)
     {
         // if folder not exists, create new folder
         if (!file_exists(EAEL_ASSET_PATH)) {

@@ -50,10 +50,10 @@ trait Admin
         if (!function_exists('get_plugins')) {
             include ABSPATH . '/wp-admin/includes/plugin.php';
         }
-        $plugins   = \get_plugins();
+        $plugins = \get_plugins();
         $installed = false;
         if (isset($plugins['templately/templately.php'])) {
-            $installed   = true;
+            $installed = true;
             $button_text = __('Activate Templately', 'essential-addons-for-elementor-lite');
         }
 
@@ -139,7 +139,7 @@ trait Admin
 
             wp_localize_script('essential_addons_elementor-admin-js', 'localize', array(
                 'ajaxurl' => admin_url('admin-ajax.php'),
-                'nonce'   => wp_create_nonce('essential-addons-elementor'),
+                'nonce' => wp_create_nonce('essential-addons-elementor'),
             ));
         }
     }
@@ -225,7 +225,17 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         $updated = update_option('eael_save_settings', $elements);
 
         // Build assets files
-        $this->generate_scripts(array_keys($elements), null, 'edit');
+        error_log(print_r('hah', 1));
+
+        if (get_option('elementor_css_print_method') == 'external') {
+            error_log(print_r('hah', 1));
+            $this->generate_editor_script(array_keys($elements), 'css');
+        }
+
+        if (get_option('eael_js_print_method') == 'external') {
+            error_log(print_r('hah', 1));
+            $this->generate_editor_script(array_keys($elements), 'js');
+        }
 
         wp_send_json($updated);
     }
@@ -244,42 +254,42 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
          */
         $notice->maybe_later_time = '21 Day';
 
-        $scheme        = (parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)) ? '&' : '?';
-        $url           = $_SERVER['REQUEST_URI'] . $scheme;
+        $scheme = (parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)) ? '&' : '?';
+        $url = $_SERVER['REQUEST_URI'] . $scheme;
         $notice->links = [
             'review' => array(
-                'later'            => array(
-                    'link'       => 'https://wpdeveloper.net/review-essential-addons-elementor',
-                    'target'     => '_blank',
-                    'label'      => __('Ok, you deserve it!', 'essential-addons-for-elementor-lite'),
+                'later' => array(
+                    'link' => 'https://wpdeveloper.net/review-essential-addons-elementor',
+                    'target' => '_blank',
+                    'label' => __('Ok, you deserve it!', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-external',
                 ),
-                'allready'         => array(
-                    'link'       => $url,
-                    'label'      => __('I already did', 'essential-addons-for-elementor-lite'),
+                'allready' => array(
+                    'link' => $url,
+                    'label' => __('I already did', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-smiley',
-                    'data_args'  => [
+                    'data_args' => [
                         'dismiss' => true,
                     ],
                 ),
-                'maybe_later'      => array(
-                    'link'       => $url,
-                    'label'      => __('Maybe Later', 'essential-addons-for-elementor-lite'),
+                'maybe_later' => array(
+                    'link' => $url,
+                    'label' => __('Maybe Later', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-calendar-alt',
-                    'data_args'  => [
+                    'data_args' => [
                         'later' => true,
                     ],
                 ),
-                'support'          => array(
-                    'link'       => 'https://wpdeveloper.net/support',
-                    'label'      => __('I need help', 'essential-addons-for-elementor-lite'),
+                'support' => array(
+                    'link' => 'https://wpdeveloper.net/support',
+                    'label' => __('I need help', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-sos',
                 ),
                 'never_show_again' => array(
-                    'link'       => $url,
-                    'label'      => __('Never show again', 'essential-addons-for-elementor-lite'),
+                    'link' => $url,
+                    'label' => __('Never show again', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-dismiss',
-                    'data_args'  => [
+                    'data_args' => [
                         'dismiss' => true,
                     ],
                 ),
@@ -314,12 +324,12 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         // }
 
         $notice->upsale_args = array(
-            'slug'      => 'betterdocs',
+            'slug' => 'betterdocs',
             'page_slug' => 'betterdocs-setup',
-            'file'      => 'betterdocs.php',
-            'btn_text'  => __('Install Free', 'essential-addons-for-elementor-lite'),
+            'file' => 'betterdocs.php',
+            'btn_text' => __('Install Free', 'essential-addons-for-elementor-lite'),
             'condition' => [
-                'by'    => 'class',
+                'by' => 'class',
                 'class' => 'BetterDocs',
             ],
         );
@@ -352,8 +362,8 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         }
 
         $wp_admin_bar->add_node([
-            'id'    => 'ea-wp-admin-bar',
-            'meta'  => [
+            'id' => 'ea-wp-admin-bar',
+            'meta' => [
                 'class' => 'ea-wp-admin-bar',
             ],
             'title' => 'EA Tools',
@@ -361,22 +371,22 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
 
         $wp_admin_bar->add_node([
             'parent' => 'ea-wp-admin-bar',
-            'id'     => 'ea-tools-clear-cache',
-            'href'   => '#',
-            'meta'   => [
+            'id' => 'ea-tools-clear-cache',
+            'href' => '#',
+            'meta' => [
                 'class' => 'ea-tools-clear-cache',
             ],
-            'title'  => 'Regenerate All Assets',
+            'title' => 'Regenerate All Assets',
         ]);
 
         $wp_admin_bar->add_node([
             'parent' => 'ea-wp-admin-bar',
-            'id'     => 'ea-tools-clear-cache-single',
-            'href'   => '#',
-            'meta'   => [
+            'id' => 'ea-tools-clear-cache-single',
+            'href' => '#',
+            'meta' => [
                 'class' => 'ea-tools-clear-cache-single',
             ],
-            'title'  => 'Regenerate Page Assets',
+            'title' => 'Regenerate Page Assets',
         ]);
 
     }
