@@ -134,6 +134,26 @@ class Image_Accordion extends Widget_Base {
         );
 
         $this->add_control(
+            'title_tag',
+            [
+                'label' => __('Select Tag', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'h2',
+                'options' => [
+                    'h1' => __('H1', 'essential-addons-for-elementor-lite'),
+                    'h2' => __('H2', 'essential-addons-for-elementor-lite'),
+                    'h3' => __('H3', 'essential-addons-for-elementor-lite'),
+                    'h4' => __('H4', 'essential-addons-for-elementor-lite'),
+                    'h5' => __('H5', 'essential-addons-for-elementor-lite'),
+                    'h6' => __('H6', 'essential-addons-for-elementor-lite'),
+                    'span' => __('Span', 'essential-addons-for-elementor-lite'),
+                    'p' => __('P', 'essential-addons-for-elementor-lite'),
+                    'div' => __('Div', 'essential-addons-for-elementor-lite'),
+                ],
+            ]
+        );
+
+        $this->add_control(
             'eael_img_accordions',
             [
                 'type'        => Controls_Manager::REPEATER,
@@ -486,10 +506,12 @@ class Image_Accordion extends Widget_Base {
                     ' . ( $active === 'yes' ? ' class="overlay-active"' : '' ) . '
                 >
 		            <div class="overlay">
-		              <div class="overlay-inner' . ( $active === 'yes' ? ' overlay-inner-show' : '' ) . '">
-		                <h2>' . $img_accordion['eael_accordion_tittle'] . '</h2>
-		                <p>' . $img_accordion['eael_accordion_content'] . '</p>
-		              </div>
+		                <div class="overlay-inner">
+                            <div class="overlay-inner' . ( $active === 'yes' ? ' overlay-inner-show' : '' ) . '">
+                                <'.$settings['title_tag'].'>' . $img_accordion['eael_accordion_tittle'] . '</'.$settings['title_tag'].'>
+                                <p>' . $img_accordion['eael_accordion_content'] . '</p>
+                            </div>
+                        </div>
 		            </div>
 		          </a>';
             }
