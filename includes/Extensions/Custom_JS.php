@@ -33,20 +33,6 @@ class Custom_JS
             ]
         );
 
-        $controls->add_control(
-            'eael_custom_js_print_method',
-            [
-                'type'        => Controls_Manager::SELECT,
-                'label'       => __('Print Method', 'essential-addons-for-elementor-lite'),
-                'description' => 'Use external JS files for all generated scripts. Choose this setting for better performance (recommended).<br>Use internal JS that is embedded in the footer of the page for troubleshooting server configuration conflicts and managing development environments.',
-                'default'     => 'internal',
-                'options'     => [
-                    'internal' => __('Internal Embedding', 'essential-addons-for-elementor-lite'),
-                    'external' => __('External File', 'essential-addons-for-elementor-lite'),
-                ],
-            ]
-        );
-
         $controls->end_controls_section();
     }
 }
