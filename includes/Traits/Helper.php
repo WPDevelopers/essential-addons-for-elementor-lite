@@ -21,10 +21,10 @@ trait Helper
      * Get all types of post.
      * @return array
      */
-    public function eael_get_all_types_post()
+    public function eael_get_all_types_post($post_type = 'any')
     {
         $posts = get_posts([
-            'post_type' => 'any',
+            'post_type' => $post_type,
             'post_style' => 'all_types',
             'post_status' => 'publish',
             'posts_per_page' => '-1',
@@ -196,86 +196,170 @@ trait Helper
         $this->end_controls_section();
     }
 
-    protected function eael_betterdocs_content_controls()
+    /**
+     * Query Controls
+     *
+     */
+    protected function eael_betterdocs_query_controls()
     {
-        /**
-         * ----------------------------------------------------------
-         * Section: Content Area
-         * ----------------------------------------------------------
-         */
         $this->start_controls_section(
-            'section_content_area',
+            'eael_section_post__filters',
             [
-                'label' => __('Content Area', 'essential-addons-for-elementor-lite'),
+                'label' => __('Query', 'essential-addons-for-elementor-lite'),
             ]
         );
 
-        $this->add_group_control(
-            Group_Control_Background::get_type(),
+        if ($this->get_name() === 'eael-betterdocs-category-grid') {
+            $this->add_control(
+                'grid_query_heading',
+                [
+                    'label' => __('Category Grid', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::HEADING,
+                ]
+            );
+        }
+
+        $this->add_control(
+            'include',
             [
-                'name' => 'content_area_bg',
-                'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .betterdocs-categories-wrap',
+                'label' => __('Include', 'essential-addons-for-elementor-lite'),
+                'label_block' => true,
+                'type' => Controls_Manager::SELECT2,
+                'options' => $this->eael_post_type_categories('term_id', 'doc_category'),
+                'multiple' => true,
+                'default' => [],
             ]
         );
 
-        $this->add_responsive_control(
-            'content_area_padding',
+        $this->add_control(
+            'exclude',
             [
-                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em', '%'],
-                'selectors' => [
-                    '{{WRAPPER}} .betterdocs-categories-wrap' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                'label' => __('Exclude', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT2,
+                'options' => $this->eael_post_type_categories('term_id', 'doc_category'),
+                'label_block' => true,
+                'post_type' => '',
+                'multiple' => true,
+            ]
+        );
+
+        if ($this->get_name() === 'eael-betterdocs-category-grid') {
+            $this->add_control(
+                'grid_per_page',
+                [
+                    'label' => __('Grid Per Page', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::NUMBER,
+                    'default' => '8',
+                ]
+            );
+        } else {
+            $this->add_control(
+                'box_per_page',
+                [
+                    'label' => __('Box Per Page', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::NUMBER,
+                    'default' => '8',
+                ]
+            );
+        }
+
+        $this->add_control(
+            'offset',
+            [
+                'label' => __('Offset', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::NUMBER,
+                'default' => '0',
+            ]
+        );
+
+        $this->add_control(
+            'orderby',
+            [
+                'label' => __('Order By', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'name' => __('Name', 'essential-addons-for-elementor-lite'),
+                    'slug' => __('Slug', 'essential-addons-for-elementor-lite'),
+                    'term_group' => __('Term Group', 'essential-addons-for-elementor-lite'),
+                    'term_id' => __('Term ID', 'essential-addons-for-elementor-lite'),
+                    'id' => __('ID', 'essential-addons-for-elementor-lite'),
+                    'description' => __('Description', 'essential-addons-for-elementor-lite'),
+                    'parent' => __('Parent', 'essential-addons-for-elementor-lite'),
                 ],
+                'default' => 'name',
             ]
         );
 
-        $this->add_responsive_control(
-            'content_area_width',
+        $this->add_control(
+            'order',
             [
-                'label' => __('Width', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SLIDER,
-                'default' => [
-                    'size' => 100,
-                    'unit' => '%',
+                'label' => __('Order', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'asc' => 'Ascending',
+                    'desc' => 'Descending',
                 ],
-                'size_units' => ['%', 'px', 'em'],
-                'range' => [
-                    '%' => [
-                        'max' => 100,
-                        'step' => 1,
+                'default' => 'asc',
+
+            ]
+        );
+
+        if ($this->get_name() === 'eael-betterdocs-category-grid') {
+            $this->add_control(
+                'grid_posts_query_heading',
+                [
+                    'label' => __('Grid List Posts', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::HEADING,
+                    'separator' => 'before',
+                ]
+            );
+
+            $this->add_control(
+                'post_per_page',
+                [
+                    'label' => __('Post Per Page', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::NUMBER,
+                    'default' => '6',
+                ]
+            );
+
+            $this->add_control(
+                'post_orderby',
+                [
+                    'label' => __('Order By', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'options' => $this->eael_get_post_orderby_options(),
+                    'default' => 'date',
+                ]
+            );
+
+            $this->add_control(
+                'post_order',
+                [
+                    'label' => __('Order', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'options' => [
+                        'asc' => 'Ascending',
+                        'desc' => 'Descending',
                     ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .betterdocs-categories-wrap' => 'width: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
+                    'default' => 'desc',
+                ]
+            );
 
-        $this->add_responsive_control(
-            'content_area_max_width',
-            [
-                'label' => __('Max Width', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SLIDER,
-                'default' => [
-                    'size' => 1600,
-                    'unit' => 'px',
-                ],
-                'size_units' => ['px', 'em'],
-                'range' => [
-                    'px' => [
-                        'max' => 1600,
-                        'step' => 1,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .betterdocs-categories-wrap' => 'max-width: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
+            $this->add_control(
+                'nested_subcategory',
+                [
+                    'label' => __('Enable Nested Subcategory', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                    'return_value' => 'true',
+                    'default' => '',
+                ]
+            );
+        }
 
-        $this->end_controls_section(); # end of 'Content Area'
+        $this->end_controls_section();
     }
 
     /**
@@ -530,6 +614,29 @@ trait Helper
                 'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default' => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'title_tag',
+            [
+                'label' => __('Select Tag', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'h2',
+                'options' => [
+                    'h1' => __('H1', 'essential-addons-for-elementor-lite'),
+                    'h2' => __('H2', 'essential-addons-for-elementor-lite'),
+                    'h3' => __('H3', 'essential-addons-for-elementor-lite'),
+                    'h4' => __('H4', 'essential-addons-for-elementor-lite'),
+                    'h5' => __('H5', 'essential-addons-for-elementor-lite'),
+                    'h6' => __('H6', 'essential-addons-for-elementor-lite'),
+                    'span' => __('Span', 'essential-addons-for-elementor-lite'),
+                    'p' => __('P', 'essential-addons-for-elementor-lite'),
+                    'div' => __('Div', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+                    'eael_show_title' => 'yes',
+                ],
             ]
         );
 
@@ -1306,10 +1413,10 @@ trait Helper
         return $settings;
     }
 
-    public function eael_get_query_args($settings = [])
+    public function eael_get_query_args($settings = [], $requested_post_type = 'post')
     {
         $settings = wp_parse_args($settings, [
-            'post_type' => 'post',
+            'post_type' => $requested_post_type,
             'posts_ids' => [],
             'orderby' => 'date',
             'order' => 'desc',
@@ -1335,6 +1442,7 @@ trait Helper
 
             if ($args['post_type'] !== 'page') {
                 $args['tax_query'] = [];
+
                 $taxonomies = get_object_taxonomies($settings['post_type'], 'objects');
 
                 foreach ($taxonomies as $object) {
@@ -1416,16 +1524,35 @@ trait Helper
     }
 
     /**
+     * This function is responsible for counting doc post under a category.
+     *
+     * @param int $term_count
+     * @param int $term_id
+     * @return int $term_count;
+     */
+    protected function eael_get_doc_post_count($term_count = 0, $term_id)
+    {
+        $tax_terms = get_terms('doc_category', ['child_of' => $term_id]);
+
+        foreach ($tax_terms as $tax_term) {
+            $term_count += $tax_term->count;
+        }
+        return $term_count;
+    }
+
+    /**
      * Get Post Categories
      *
      * @return array
      */
-    public function eael_post_type_categories($type = 'term_id')
+    public function eael_post_type_categories($type = 'term_id', $term_key = 'category')
     {
         $terms = get_terms(array(
-            'taxonomy' => 'category',
+            'taxonomy' => $term_key,
             'hide_empty' => true,
         ));
+
+        $options = [];
 
         if (!empty($terms) && !is_wp_error($terms)) {
             foreach ($terms as $term) {
@@ -2883,6 +3010,7 @@ trait Helper
 
         $this->end_controls_section();
     }
+
     /** Filter to add plugins to the TOC list.
      *
      * @since  3.9.3

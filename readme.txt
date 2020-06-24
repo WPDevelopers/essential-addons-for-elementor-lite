@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.4
 Requires PHP: 5.4
-Stable tag: 4.0.3
+Stable tag: 4.0.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -223,6 +223,16 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.0.4 - 22/06/2020 =
+- Improved: EA BetterDocs Category Grid & EA BetterDocs Category Box
+- Added: Single Click play option with EA Stick Video when image overlay is enabled
+- Added: HTML Heading Tags for EA Image Accordion
+- Fixed: EA Post Grid not showing in Elementor panel
+- Fixed: EA Event Calendar not showing Full month in 'List' view
+- Fixed: EA Event Calendar translation issue with 'All-day' and 'Today' texts
+- Fixed: EA Sticky Video play icon not disappearing
+- Few minor bug fix and improvements
 
 = 4.0.3 - 11/06/2020 =
 - Fixed: EA Filterable Gallery Image Overlapping issue with Lazyload- WP Rocket
