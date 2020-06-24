@@ -1,0 +1,492 @@
+/* ===================================== */
+/* Default Style and for Default Layout
+/* ===================================== */
+.eael-better-docs-category-grid-wrapper {
+  margin: 0 -7.5px;
+
+  .eael-better-docs-category-grid {
+    &.fit-to-screen {
+      display: flex;
+      flex-wrap: wrap;
+
+      .eael-better-docs-category-grid-post {
+        display: flex;
+        .eael-bd-cg-inner {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.eael-better-docs-category-grid-post {
+  .eael-bd-cg-inner {
+    background: #ffffff;
+    box-shadow: 0 10px 100px 0 rgba(40, 47, 98, 0.08);
+    margin: 0 7.5px 15px 7.5px;
+  }
+}
+
+.eael-bd-cg-body {
+  padding: 0px 20px 0px 20px;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      margin: 10px;
+      display: flex;
+      align-items: flex-start;
+      color: #566E8B;
+      a {
+        color: #566E8B;
+        line-height: 1.8;
+      }
+
+      .eael-bd-cg-post-list-icon {
+        line-height: 1.8;
+        margin-right: 10px;
+        width: 22px;
+      }
+    }
+  }
+}
+
+.eael-bd-cg-header {
+  padding: 20px;
+
+  .eael-bd-cg-header-inner {
+    border-bottom: 2px solid;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 20px;
+    border-color: #528ffe;
+  }
+
+  .eael-docs-cat-title {
+    color: #528ffe;
+    font-size: 20px;
+    position: relative;
+    margin: 0;
+  }
+
+  .eael-docs-cat-icon {
+    height: 32px;
+    width: 32px;
+    margin-right: 30px;
+    transition: 300ms;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+
+  .eael-docs-item-count {
+    height: 35px;
+    width: 35px;
+    background: #528ffe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-left: auto;
+    color: #ffffff;
+    font-size: 15px;
+  }
+}
+
+.eael-bd-grid-sub-cat-title {
+  display: block;
+  cursor: pointer;
+  .toggle-arrow {
+    margin-right: 5px;
+  }
+}
+
+.docs-sub-cat-list,
+.eael-bd-grid-sub-cat-title .arrow-down {
+  display: none;
+}
+
+.eael-bd-cg-button {
+  display: inline-block;
+  background-color: #ffffff;
+  font-size: 16px;
+  color: #528ffe;
+  border: 1px solid #528ffe;
+  border-radius: 50px;
+  line-height: 1;
+  padding: 15px 20px;
+  margin: 0px 0px 20px 20px;
+
+  .eael-bd-cg-button-icon {
+    position: relative;
+    top: 1px;
+    &.eael-bd-cg-button-icon-left {
+      margin-right: 5px;
+    }
+
+    &.eael-bd-cg-button-icon-right {
+      margin-left: 5px;
+    }
+  }
+
+}
+
+/* ============================================= */
+/* Only Layout 2 modification from Default Layout
+/* ============================================= */
+.eael-better-docs-category-grid-post {
+  &.layout-2 {
+    .eael-bd-cg-header {
+      padding: 0px 20px;
+    }
+
+    .eael-docs-cat-title {
+      transition: 300ms;
+    }
+
+    .eael-docs-item-count {
+      margin: 0;
+      border-radius: 0;
+      position: relative;
+      display: block;
+      width: auto;
+      background: none;
+      height: 45px;
+      width: 40px;
+
+      &:before {
+        content: attr(data-content);
+        position: absolute;
+        left: 0;
+        top: -1px;
+        height: 45px;
+        width: 40px;
+        background: #fc8c91;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+      }
+
+      &:after {
+        position: absolute;
+        left: 40px;
+        top: -1px;
+        content: "";
+        border-top: 6px solid #ad5e62;
+        border-right: 6px solid transparent;
+        opacity: 0.9;
+      }
+    }
+
+    .eael-docs-cat-title {
+      margin-top: 30px;
+      color: #000000;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .eael-bd-cg-body ul li {
+      font-size: 15px;
+      a {
+        color: #707070;
+      }
+    }
+    .eael-bd-cg-inner {
+      transition: 300ms;
+      box-shadow: 0px 1px 5px 0px rgba(0, 9, 78, 0.1);
+      border-radius: 5px;
+
+      &:hover {
+        box-shadow: 0px 15px 40px 0px rgba(0, 9, 78, 0.1);
+      }
+    }
+
+    .eael-bd-cg-button {
+      font-size: 15px;
+      border: 0px solid;
+      border-radius: 0;
+      color: #333333;
+      transition: 300ms;
+      &:hover {
+        color: #fc8c91;
+      }
+    }
+  }
+}
+
+/* ===================================== */
+/* Column CSS
+/* ===================================== */
+
+// For Desktop
+@media only screen and (min-width: 1025px) {
+  .elementor-element.elementor-grid-1 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-1 .eael-better-docs-category-grid-post {
+    width: 100%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-2 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-2 .eael-better-docs-category-grid-post {
+    width: 50%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-2
+    .eael-better-docs-category-grid-post:nth-of-type(2n) {
+    margin-right: 0 !important;
+  }
+  .elementor-element.elementor-grid-2
+    .eael-better-docs-category-grid-post:nth-of-type(2n + 1) {
+    clear: left;
+  }
+  .elementor-element.elementor-grid-3 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-3 .eael-better-docs-category-grid-post {
+    width: 33.3333%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-3
+    .eael-better-docs-category-grid-post:nth-of-type(3n) {
+    margin-right: 0 !important;
+  }
+  .elementor-element.elementor-grid-3
+    .eael-better-docs-category-grid-post:nth-of-type(3n + 1) {
+    clear: left;
+  }
+  .elementor-element.elementor-grid-4 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-4 .eael-better-docs-category-grid-post {
+    width: 25%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-4
+    .eael-better-docs-category-grid-post:nth-of-type(4n) {
+    margin-right: 0 !important;
+  }
+  .elementor-element.elementor-grid-4
+    .eael-better-docs-category-grid-post:nth-of-type(4n + 1) {
+    clear: left;
+  }
+  .elementor-element.elementor-grid-5 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-5 .eael-better-docs-category-grid-post {
+    width: 20%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-5
+    .eael-better-docs-category-grid-post:nth-of-type(5n) {
+    margin-right: 0 !important;
+  }
+  .elementor-element.elementor-grid-5
+    .eael-better-docs-category-grid-post:nth-of-type(5n + 1) {
+    clear: left;
+  }
+  .elementor-element.elementor-grid-6 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-6 .eael-better-docs-category-grid-post {
+    width: 16%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-6
+    .eael-better-docs-category-grid-post:nth-of-type(6n) {
+    margin-right: 0 !important;
+  }
+  .elementor-element.elementor-grid-6
+    .eael-better-docs-category-grid-post:nth-of-type(6n + 1) {
+    clear: left;
+  }
+}
+
+// For Tablets
+@media only screen and (max-width: 1024px) and (min-width: 766px) {
+  .elementor-element.elementor-grid-tablet-1 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-tablet-1
+    .eael-better-docs-category-grid-post {
+    width: 100%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-tablet-2 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-tablet-2
+    .eael-better-docs-category-grid-post {
+    width: 50%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-tablet-2
+    .eael-better-docs-category-grid-post:nth-of-type(2n) {
+    margin-right: 0 !important;
+  }
+  .elementor-element.elementor-grid-tablet-2
+    .eael-better-docs-category-grid-post:nth-of-type(2n + 1) {
+    clear: left;
+  }
+  .elementor-element.elementor-grid-tablet-3 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-tablet-3
+    .eael-better-docs-category-grid-post {
+    width: 33.3333%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-tablet-3
+    .eael-better-docs-category-grid-post:nth-of-type(3n) {
+    margin-right: 0 !important;
+  }
+  .elementor-element.elementor-grid-tablet-3
+    .eael-better-docs-category-grid-post:nth-of-type(3n + 1) {
+    clear: left;
+  }
+  .elementor-element.elementor-grid-tablet-4 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-tablet-4
+    .eael-better-docs-category-grid-post {
+    width: 25%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-tablet-4
+    .eael-better-docs-category-grid-post:nth-of-type(4n) {
+    margin-right: 0 !important;
+  }
+  .elementor-element.elementor-grid-tablet-4
+    .eael-better-docs-category-grid-post:nth-of-type(4n + 1) {
+    clear: left;
+  }
+  .elementor-element.elementor-grid-tablet-5 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-tablet-5
+    .eael-better-docs-category-grid-post {
+    width: 20%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-tablet-5
+    .eael-better-docs-category-grid-post:nth-of-type(5n) {
+    margin-right: 0 !important;
+  }
+  .elementor-element.elementor-grid-tablet-5
+    .eael-better-docs-category-grid-post:nth-of-type(5n + 1) {
+    clear: left;
+  }
+  .elementor-element.elementor-grid-tablet-6 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-tablet-6
+    .eael-better-docs-category-grid-post {
+    width: 16%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-tablet-6
+    .eael-better-docs-category-grid-post:nth-of-type(6n) {
+    margin-right: 0 !important;
+  }
+  .elementor-element.elementor-grid-tablet-6
+    .eael-better-docs-category-grid-post:nth-of-type(6n + 1) {
+    clear: left;
+  }
+}
+
+// For Mobiles
+@media only screen and (max-width: 767px) {
+  .elementor-element.elementor-grid-mobile-1 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-mobile-1
+    .eael-better-docs-category-grid-post {
+    width: 100%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-mobile-2 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-mobile-2
+    .eael-better-docs-category-grid-post {
+    width: 50%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-mobile-2
+    .eael-better-docs-category-grid-post:nth-of-type(2n) {
+    margin-right: 0 !important;
+  }
+  .elementor-element.elementor-grid-mobile-2
+    .eael-better-docs-category-grid-post:nth-of-type(2n + 1) {
+    clear: left;
+  }
+  .elementor-element.elementor-grid-mobile-3 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-mobile-3
+    .eael-better-docs-category-grid-post {
+    width: 33.3333%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-mobile-3
+    .eael-better-docs-category-grid-post:nth-of-type(3n) {
+    margin-right: 0 !important;
+  }
+  .elementor-element.elementor-grid-mobile-3
+    .eael-better-docs-category-grid-post:nth-of-type(3n + 1) {
+    clear: left;
+  }
+  .elementor-element.elementor-grid-mobile-4 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-mobile-4
+    .eael-better-docs-category-grid-post {
+    width: 25%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-mobile-4
+    .eael-better-docs-category-grid-post:nth-of-type(4n) {
+    margin-right: 0 !important;
+  }
+  .elementor-element.elementor-grid-mobile-4
+    .eael-better-docs-category-grid-post:nth-of-type(4n + 1) {
+    clear: left;
+  }
+  .elementor-element.elementor-grid-mobile-5 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-mobile-5
+    .eael-better-docs-category-grid-post {
+    width: 20%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-mobile-5
+    .eael-better-docs-category-grid-post:nth-of-type(5n) {
+    margin-right: 0 !important;
+  }
+  .elementor-element.elementor-grid-mobile-5
+    .eael-better-docs-category-grid-post:nth-of-type(5n + 1) {
+    clear: left;
+  }
+  .elementor-element.elementor-grid-mobile-6 {
+    position: relative;
+  }
+  .elementor-element.elementor-grid-mobile-6
+    .eael-better-docs-category-grid-post {
+    width: 16%;
+    float: left;
+  }
+  .elementor-element.elementor-grid-mobile-6
+    .eael-better-docs-category-grid-post:nth-of-type(6n) {
+    margin-right: 0 !important;
+  }
+  .elementor-element.elementor-grid-mobile-6
+    .eael-better-docs-category-grid-post:nth-of-type(6n + 1) {
+    clear: left;
+  }
+}
