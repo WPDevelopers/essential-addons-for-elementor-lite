@@ -1086,16 +1086,12 @@ class Betterdocs_Category_Box extends Widget_Base {
 
         if ($settings['include'])
         {
-            unset($terms_object['parent']);
             $terms_object['include'] = array_diff($settings['include'], (array) $settings['exclude']);
-            $terms_object['orderby'] = 'include';
         }
 
         if ($settings['exclude'])
         {
-            unset($terms_object['parent']);
             $terms_object['exclude'] = $settings['exclude'];
-            $terms_object['orderby'] = 'exclude';
         }
 
         $taxonomy_objects = get_terms($terms_object);
