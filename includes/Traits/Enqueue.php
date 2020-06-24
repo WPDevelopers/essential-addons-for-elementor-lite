@@ -111,7 +111,7 @@ trait Enqueue
         }
 
         // js
-        if (get_option('eael_js_print_method') == 'internal') {
+        if (get_option('eael_js_print_method', 'external') == 'internal') {
             $this->js_strings[$post_id] = $this->generate_strings($post_id, $widgets, 'view', 'js');
         } else {
             // generate post script
@@ -162,23 +162,6 @@ trait Enqueue
             time()
         );
 
-        // admin bar
-        if (is_admin_bar_showing()) {
-            wp_enqueue_style(
-                'ea-admin-bar',
-                EAEL_PLUGIN_URL . 'assets/admin/css/admin-bar.css',
-                false,
-                time()
-            );
-
-            wp_enqueue_script(
-                'ea-admin-bar',
-                EAEL_PLUGIN_URL . 'assets/admin/js/admin-bar.js',
-                ['jquery'],
-                time()
-            );
-        }
-
         // localize object
         $this->localize_objects = apply_filters('eael/localize_objects', [
             'ajaxurl' => admin_url('admin-ajax.php'),
@@ -206,7 +189,7 @@ trait Enqueue
             }
 
             // js
-            if (get_option('eael_js_print_method') == 'internal') {
+            if (get_option('eael_js_print_method', 'external') == 'internal') {
                 $this->js_strings['all'] = $this->generate_strings(null, $widgets, 'edit', 'js');
             } else {
                 // generate editor script

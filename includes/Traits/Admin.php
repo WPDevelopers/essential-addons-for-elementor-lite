@@ -221,14 +221,14 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         // save js print method
         update_option('eael_js_print_method', @$settings['eael-js-print-method']);
 
-        $defaults = array_fill_keys(array_keys(array_merge($this->registered_elements, $this->registered_extensions, $this->additional_settings)), false);
+        $defaults = array_fill_keys(array_keys(array_merge($this->registered_elements, $this->registered_extensions)), false);
         $elements = array_merge($defaults, array_fill_keys(array_keys(array_intersect_key($settings, $defaults)), true));
 
         // update new settings
         $updated = update_option('eael_save_settings', $elements);
 
         // clear assets files
-        if (get_option('elementor_css_print_method') == 'external' || get_option('eael_js_print_method') == 'external') {
+        if (get_option('elementor_css_print_method') == 'external' || get_option('eael_js_print_method', 'external') == 'external') {
             $this->empty_dir(EAEL_ASSET_PATH);
         }
 
@@ -344,45 +344,5 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         // }
 
         $notice->init();
-    }
-
-    public function admin_bar($wp_admin_bar)
-    {
-        if (is_admin()) {
-            return;
-        }
-
-        if (!$this->get_settings('quick_tools')) {
-            return;
-        }
-
-        $wp_admin_bar->add_node([
-            'id' => 'ea-wp-admin-bar',
-            'meta' => [
-                'class' => 'ea-wp-admin-bar',
-            ],
-            'title' => 'EA Tools',
-        ]);
-
-        $wp_admin_bar->add_node([
-            'parent' => 'ea-wp-admin-bar',
-            'id' => 'ea-tools-clear-cache',
-            'href' => '#',
-            'meta' => [
-                'class' => 'ea-tools-clear-cache',
-            ],
-            'title' => 'Regenerate All Assets',
-        ]);
-
-        $wp_admin_bar->add_node([
-            'parent' => 'ea-wp-admin-bar',
-            'id' => 'ea-tools-clear-cache-single',
-            'href' => '#',
-            'meta' => [
-                'class' => 'ea-tools-clear-cache-single',
-            ],
-            'title' => 'Regenerate Page Assets',
-        ]);
-
     }
 }

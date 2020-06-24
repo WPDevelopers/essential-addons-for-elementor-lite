@@ -29,9 +29,6 @@ class Bootstrap
     // registered extensions container
     public $registered_extensions;
 
-    // additional settings
-    public $additional_settings;
-
     // identify whether pro is enabled
     public $pro_enabled;
 
@@ -79,11 +76,6 @@ class Bootstrap
 
         // extensions classmap
         $this->registered_extensions = apply_filters('eael/registered_extensions', $GLOBALS['eael_config']['extensions']);
-
-        // additional settings
-        $this->additional_settings = apply_filters('eael/additional_settings', [
-            'quick_tools' => true,
-        ]);
 
         // start plugin tracking
         if (!$this->pro_enabled) {
@@ -134,11 +126,6 @@ class Bootstrap
 
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'eael_toc_rank_math_support']);
-
-        // quick tools
-        if (current_user_can('manage_options')) {
-            add_action('admin_bar_menu', [$this, 'admin_bar'], 900);
-        }
 
         // Admin
         if (is_admin()) {

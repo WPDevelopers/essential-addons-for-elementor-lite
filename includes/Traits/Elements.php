@@ -418,9 +418,6 @@ trait Elements
             }
         }
 
-        // loaded template
-        $html .= '<script type="text/template" id="eael-loaded-templates">' . json_encode($this->loaded_templates) . '</script>';
-
         echo $html;
     }
 

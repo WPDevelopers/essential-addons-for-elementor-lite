@@ -13,19 +13,10 @@
                     <div class="eael-admin-block-content">
                         <p><?php _e('Essential Addons styles & scripts are saved in Uploads folder. This option will clear all those generated files.', 'essential-addons-for-elementor-lite');?></p>
                         <a href="#" id="eael-regenerate-files" class="button eael-btn" target="_blank"><?php _e('Regenerate Assets', 'essential-addons-for-elementor-lite');?></a>
-
-                        <div class="eael-checkbox eael-checkbox-quick-tools">
-                            <p class="eael-el-title"><?php _e('Show Quick Tools in Admin Bar?', 'essential-addons-for-elementor-lite');?></p>
-
-                            <input type="checkbox" id="<?php echo esc_attr('quick_tools'); ?>" name="<?php echo esc_attr('quick_tools'); ?>" <?php echo checked(1, $this->get_settings('quick_tools'), false); ?>>
-                            <label for="<?php echo esc_attr('quick_tools'); ?>"></label>
-                        </div>
-                        <p class="quick-tools-description"><?php _e('Display quick assets generating tools in admin bar from where you can regenerate global assets or page assets.', 'essential-addons-for-elementor-lite');?></p>
                     </div>
                 </div>
             </div>
         </div><!-- /.col-half -->
-
 
         <div class="col-half">
             <div class="eael-admin-block-wrapper">
@@ -56,8 +47,8 @@
                             </div>
                             <div class="eael-admin-select-block-select">
                                 <select name="eael-js-print-method" id="eael-js-print-method">
-                                    <option value="external" <?php echo get_option('eael_js_print_method') == 'external' ? 'selected' : '' ?>><?php _e('External File', 'essential-addons-for-elementor-lite');?></option>
-                                    <option value="internal" <?php echo get_option('eael_js_print_method') == 'internal' ? 'selected' : '' ?>><?php _e('Internal Embedding', 'essential-addons-for-elementor-lite');?></option>
+                                    <option value="external" <?php echo get_option('eael_js_print_method', 'external') == 'external' ? 'selected' : '' ?>><?php _e('External File', 'essential-addons-for-elementor-lite');?></option>
+                                    <option value="internal" <?php echo get_option('eael_js_print_method', 'external') == 'internal' ? 'selected' : '' ?>><?php _e('Internal Embedding', 'essential-addons-for-elementor-lite');?></option>
                                 </select>
 
                                 <p class="quick-tools-description"><?php _e('Use external CSS files for all generated stylesheets. Choose this setting for better performance (recommended).', 'essential-addons-for-elementor-lite');?></p>
