@@ -816,8 +816,8 @@ class Adv_Tabs extends Widget_Base
 			[
 				'label'     => __( 'Vertical Layout', 'essential-addons-elementor' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => __( 'Yes', 'your-plugin' ),
-				'label_off' => __( 'No', 'your-plugin' ),
+				'label_on'  => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default' => 'yes',
 			]
