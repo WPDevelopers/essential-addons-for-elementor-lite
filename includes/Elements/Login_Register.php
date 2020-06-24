@@ -317,19 +317,18 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'show_lost_password', [
 			'label'   => __( 'Show Lost your password?', EAEL_TEXTDOMAIN ),
-			//'description' => __( 'You can add a "Forgot Password" Link below the the form', EAEL_TEXTDOMAIN ),
 			'type'    => Controls_Manager::SWITCHER,
 			'default' => 'yes',
 		] );
 
 
-		$this->add_control( 'show_lost_password_text', [
+		$this->add_control( 'lost_password_text', [
 			'label'     => __( 'Lost Password Text', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::TEXT,
 			'dynamic'   => [
 				'active' => true,
 			],
-			'default'   => __( 'Lost your password?', EAEL_TEXTDOMAIN ),
+			'default'   => __( 'Forgot password?', EAEL_TEXTDOMAIN ),
 			'condition' => [
 				'show_lost_password' => 'yes',
 			],
@@ -359,93 +358,6 @@ class Login_Register extends Widget_Base {
 				'show_lost_password'      => 'yes',
 			],
 		] );
-
-		$this->add_control( 'footer_divider', [
-			'label'      => __( 'Link Divider', EAEL_TEXTDOMAIN ),
-			'type'       => Controls_Manager::TEXT,
-			'default'    => '|',
-			'selectors'  => [
-				'{{WRAPPER}} .eael-login-form-footer a.eael-login-form-footer-link:not(:last-child) span:after' => 'content: "{{VALUE}}"; margin: 0 0.4em;',
-			],
-			'separator'  => 'before',
-			'conditions' => [
-				'terms' => [
-					[
-						'name'     => 'show_lost_password',
-						'value'    => 'yes',
-						'relation' => 'or',
-						'terms'    => [
-							[
-								'name'  => 'show_login_link',
-								'value' => 'yes',
-								'terms' => [
-									[
-										'name'  => 'default_form_type',
-										'value' => 'registration',
-									],
-								],
-							],
-							[
-								'name'  => 'show_registration_link',
-								'value' => 'yes',
-								'terms' => [
-									[
-										'name'  => 'default_form_type',
-										'value' => 'login',
-									],
-								],
-							],
-						],
-					],
-
-				],
-			],
-		] );
-
-		$this->add_responsive_control( 'footer_text_align', [
-			'label'      => __( 'Link Alignment', EAEL_TEXTDOMAIN ),
-			'type'       => Controls_Manager::CHOOSE,
-			'options'    => [
-				'flex-start' => [
-					'title' => __( 'Left', EAEL_TEXTDOMAIN ),
-					'icon'  => 'eicon-text-align-left',
-				],
-				'center'     => [
-					'title' => __( 'Center', EAEL_TEXTDOMAIN ),
-					'icon'  => 'eicon-text-align-center',
-				],
-				'flex-end'   => [
-					'title' => __( 'Right', EAEL_TEXTDOMAIN ),
-					'icon'  => 'eicon-text-align-right',
-				],
-			],
-			'separator'  => 'before',
-			'default'    => 'flex-start',
-			'selectors'  => [
-				'{{WRAPPER}} .eael-login-form-footer' => 'justify-content: {{VALUE}};',
-			],
-			'conditions' => [
-				'relation' => 'or',
-				'terms'    => $this->get_login_footer_controls_display_condition(),
-			],
-		] );
-
-		$this->add_control( 'footer_text_color', [
-			'label'      => __( 'Link Text Color', EAEL_TEXTDOMAIN ),
-			'type'       => Controls_Manager::COLOR,
-			'scheme'     => [
-				'type'  => Color::get_type(),
-				'value' => Color::COLOR_4,
-			],
-			'selectors'  => [
-				'{{WRAPPER}} .eael-login-form-footer, {{WRAPPER}} .eael-login-form-footer a' => 'color: {{VALUE}};',
-			],
-			'conditions' => [
-				'relation' => 'or',
-				'terms'    => $this->get_login_footer_controls_display_condition(),
-			],
-		] );
-
 
 		$this->end_controls_section();
 	}
@@ -1564,8 +1476,8 @@ class Login_Register extends Widget_Base {
 
 	protected function render() {
 		//Note. forms are handled in Login_Registration Trait used in the Bootstrap class.
-		if ( !$this->in_editor && 'yes' === $this->get_settings_for_display('hide_for_logged_in_user') && is_user_logged_in() ) {
-           return; // do not show any form for already logged in user. but let edit on editor
+		if ( ! $this->in_editor && 'yes' === $this->get_settings_for_display( 'hide_for_logged_in_user' ) && is_user_logged_in() ) {
+			return; // do not show any form for already logged in user. but let edit on editor
 		}
 
 		$this->ds = $this->get_settings_for_display();
@@ -1596,52 +1508,78 @@ class Login_Register extends Widget_Base {
 	protected function print_login_form() {
 		if ( $this->should_print_login_form ) {
 			// prepare all login form related vars
-			$show_reg_link    = ( $this->user_can_register && ( ! empty( $this->ds['show_registration_link'] ) && 'yes' === $this->ds['show_registration_link'] ) );
-			$reg_link_text    = ! empty( $this->ds['registration_link_text'] ) ? $this->ds['registration_link_text'] : __( 'Register', EAEL_TEXTDOMAIN );
-			$reg_link_action  = ! empty( $this->ds['registration_link_action'] ) ? $this->ds['registration_link_action'] : 'form';
+			$show_reg_link   = ( $this->user_can_register && ( ! empty( $this->ds['show_registration_link'] ) && 'yes' === $this->ds['show_registration_link'] ) );
+			$reg_link_text   = ! empty( $this->ds['registration_link_text'] ) ? $this->ds['registration_link_text'] : __( 'Register', EAEL_TEXTDOMAIN );
+			$reg_link_action = ! empty( $this->ds['registration_link_action'] ) ? $this->ds['registration_link_action'] : 'form';
+			$label_type      = ! empty( $this->ds['login_label_types'] ) ? $this->ds['login_label_types'] : 'default';
+			$is_custom_label = ( 'custom' === $label_type );
+			$display_label   = ( 'none' !== $label_type );
+			$u_label         = $is_custom_label && ! empty( $this->ds['login_user_label'] ) ? $this->ds['login_user_label'] : __( 'Username or Email Address', EAEL_TEXTDOMAIN );
+			$p_label         = $is_custom_label && ! empty( $this->ds['login_password_label'] ) ? $this->ds['login_password_label'] : __( 'Password', EAEL_TEXTDOMAIN );
+			$u_ph            = $is_custom_label && isset( $this->ds['login_user_placeholder'] ) ? $this->ds['login_user_placeholder'] : 'email@domain.com';
+			$p_ph            = $is_custom_label && isset( $this->ds['login_password_placeholder'] ) ? $this->ds['login_password_placeholder'] : __( 'Password', EAEL_TEXTDOMAIN );
+			$btn_text        = ! empty( $this->ds['login_button_text'] ) ? $this->ds['login_button_text'] : __( 'Sign In', EAEL_TEXTDOMAIN );
+
+
 			$show_logout_link = ( ! empty( $this->ds['show_log_out_message'] ) && 'yes' === $this->ds['show_log_out_message'] );
+			$show_rememberme  = ( ! empty( $this->ds['login_show_remember_me'] ) && 'yes' === $this->ds['login_show_remember_me'] );
+
+			//Loss password
+			$show_lp = ( ! empty( $this->ds['show_lost_password'] ) && 'yes' === $this->ds['show_lost_password'] );
+			$lp_text = ! empty( $this->ds['lost_password_text'] ) ? $this->ds['lost_password_text'] : __( 'Forgot password?', EAEL_TEXTDOMAIN );
+			$lp_link = sprintf( '<a href="%s">%s</a>', esc_attr( wp_lostpassword_url() ), $lp_text );
+			if ( ! empty( $this->ds['lost_password_link_type'] ) && 'custom' === $this->ds['lost_password_link_type'] ) {
+				$lp_url  = ! empty( $this->ds['lost_password_url']['url'] ) ? $this->ds['lost_password_url']['url'] : wp_lostpassword_url();
+				$lp_atts = ! empty( $this->ds['lost_password_url']['is_external'] ) ? ' target="_blank"' : '';
+				$lp_atts .= ! empty( $this->ds['lost_password_url']['nofollow'] ) ? ' rel="nofollow"' : '';
+				$lp_link = sprintf( '<a href="%s" %s >%s</a>', esc_attr( $lp_url ), $lp_atts, $lp_text );
+			}
 			?>
             <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2">
 				<?php
 				if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor ) {
 					/* translators: %s user display name */
 					$logged_in_msg = sprintf( __( 'You are already logged in as %s. ', EAEL_TEXTDOMAIN ), wp_get_current_user()->display_name );
-
-					printf( '%1$s   [<a href="%2$s">%3$s</a>]', $logged_in_msg, esc_url( wp_logout_url() ), __( 'Logout', EAEL_TEXTDOMAIN ) );
-
+					printf( '%1$s   (<a href="%2$s">%3$s</a>)', $logged_in_msg, esc_url( wp_logout_url() ), __( 'Logout', EAEL_TEXTDOMAIN ) );
 				} else {
-					?>
-					<?php $this->print_form_illustration(); ?>
+					$this->print_form_illustration(); ?>
                     <div class="lr-form-wrapper">
 						<?php $this->print_form_header( 'login' ); ?>
                         <form class="eael-login-form eael-lr-form" id="eael-login-form" method="post">
                             <div class="eael-lr-form-group">
-                                <label for="eael-user-login">Username or Email Address</label>
+								<?php if ( $display_label ) {
+									printf( '<label for="eael-user-login">%s</label>', $u_label );
+								} ?>
                                 <input type="text" name="eael-user-login" id="eael-user-login" class="eael-lr-form-control"
-                                       aria-describedby="emailHelp" placeholder="email@domain.com">
+                                       aria-describedby="emailHelp" placeholder="<?php echo esc_attr( $u_ph ); ?>">
                             </div>
                             <div class="eael-lr-form-group">
                                 <label for="eael-user-password">Password</label>
-                                <a href="<?php echo esc_attr( esc_url( wp_lostpassword_url() ) ); ?>" style="float:right;font-size:12px;margin-top: 10px;">Forgot password?</a>
+								<?php if ( $display_label ) {
+									printf( '<label for="eael-user-password">%s</label>', $p_label );
+								} ?>
                                 <div class="eael-lr-password-wrapper">
                                     <input type="password" name="eael-user-password" class="eael-lr-form-control" id=""
-                                           placeholder="Password">
+                                           placeholder="<?php echo esc_attr( $p_ph ); ?>">
                                     <button type="button" class="wp-hide-pw hide-if-no-js" aria-label="Show password">
                                         <span class="dashicons dashicons-visibility" aria-hidden="true"></span>
                                     </button>
                                 </div>
                             </div>
                             <div class="eael-forever-forget eael-lr-form-group">
-                                <p class="forget-menot">
-                                    <input name="rememberme" type="checkbox" id="rememberme" value="forever">
-                                    <label for="rememberme">Remember Me</label>
-                                </p>
-                                <p class="forget-pass">
-                                    <a href="#">Forgot password?</a>
-                                </p>
+								<?php if ( $show_rememberme ) { ?>
+                                    <p class="forget-menot">
+                                        <input name="eael-rememberme" type="checkbox" id="rememberme" value="forever">
+                                        <label for="rememberme">Remember Me</label>
+                                    </p>
+								<?php }
+								if ( $show_lp ) {
+									echo '<p class="forget-pass">' . $lp_link . '</p>';//XSS ok. already escaped
+								} ?>
+
                             </div>
 
-                            <input type="submit" name="eael-login-submit" id="eael-login-submit" class="eael-lr-btn eael-lr-btn-block" value="Sign in"/>
+                            <input type="submit" name="eael-login-submit" id="eael-login-submit" class="eael-lr-btn eael-lr-btn-block" value="<?php echo esc_attr( $btn_text ); ?>"/>
 
 							<?php if ( $show_reg_link ) { ?>
                                 <div class="eael-sign-wrapper">

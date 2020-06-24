@@ -67,13 +67,9 @@ trait Login_Registration {
 			'user_password' => $password,
 			'remember'      => ( 'forever' === $rememberme ),
 		];
-
 		$user_data = wp_signon( $credentials );
 
 		if ( is_wp_error( $user_data ) ) {
-			error_log( 'caught error');
-			error_log( print_r( $user_data, 1));
-	
 			if ( isset( $user_data->errors['invalid_email'][0] ) ) {
 				$this->set_transient( 'eael_login_error', __( 'Invalid Email. Please check your email or try again with your username.', EAEL_TEXTDOMAIN ) );
 
