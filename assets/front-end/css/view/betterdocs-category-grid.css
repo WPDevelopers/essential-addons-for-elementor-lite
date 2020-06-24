@@ -6,16 +6,13 @@
 }
 .eael-better-docs-category-grid-wrapper .eael-better-docs-category-grid.fit-to-screen {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 .eael-better-docs-category-grid-wrapper .eael-better-docs-category-grid.fit-to-screen .eael-better-docs-category-grid-post {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
@@ -39,11 +36,9 @@
 .eael-bd-cg-body ul li {
   margin: 10px;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: start;
-  -webkit-align-items: flex-start;
       -ms-flex-align: start;
           align-items: flex-start;
   color: #566E8B;
@@ -61,17 +56,19 @@
   padding: 20px;
 }
 .eael-bd-cg-header .eael-bd-cg-header-inner {
-  border-bottom: 2px solid #528ffe;
+  border-bottom: 2px solid;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding-bottom: 20px;
+  border-color: #528ffe;
 }
 .eael-bd-cg-header .eael-docs-cat-title {
   color: #528ffe;
@@ -83,25 +80,28 @@
   height: 32px;
   width: 32px;
   margin-right: 30px;
+  -webkit-transition: 300ms;
+  -o-transition: 300ms;
+  transition: 300ms;
+}
+.eael-bd-cg-header .eael-docs-cat-icon img {
+  max-width: 100%;
+  max-height: 100%;
 }
 .eael-bd-cg-header .eael-docs-item-count {
   height: 35px;
   width: 35px;
   background: #528ffe;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   margin-left: auto;
   color: #ffffff;
   font-size: 15px;
@@ -123,8 +123,7 @@
   font-size: 16px;
   color: #528ffe;
   border: 1px solid #528ffe;
-  -webkit-border-radius: 50px;
-          border-radius: 50px;
+  border-radius: 50px;
   line-height: 1;
   padding: 15px 20px;
   margin: 0px 0px 20px 20px;
@@ -145,10 +144,14 @@
 .eael-better-docs-category-grid-post.layout-2 .eael-bd-cg-header {
   padding: 0px 20px;
 }
+.eael-better-docs-category-grid-post.layout-2 .eael-docs-cat-title {
+  -webkit-transition: 300ms;
+  -o-transition: 300ms;
+  transition: 300ms;
+}
 .eael-better-docs-category-grid-post.layout-2 .eael-docs-item-count {
   margin: 0;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
   position: relative;
   display: block;
   width: auto;
@@ -165,15 +168,12 @@
   width: 40px;
   background: #fc8c91;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
@@ -204,8 +204,7 @@
   transition: 300ms;
   -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 9, 78, 0.1);
           box-shadow: 0px 1px 5px 0px rgba(0, 9, 78, 0.1);
-  -webkit-border-radius: 5px;
-          border-radius: 5px;
+  border-radius: 5px;
 }
 .eael-better-docs-category-grid-post.layout-2 .eael-bd-cg-inner:hover {
   -webkit-box-shadow: 0px 15px 40px 0px rgba(0, 9, 78, 0.1);
@@ -214,8 +213,7 @@
 .eael-better-docs-category-grid-post.layout-2 .eael-bd-cg-button {
   font-size: 15px;
   border: 0px solid;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
   color: #333333;
   -webkit-transition: 300ms;
   -o-transition: 300ms;
