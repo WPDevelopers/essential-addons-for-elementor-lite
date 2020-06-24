@@ -599,7 +599,6 @@ textarea.eael-form-control {
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .eael-admin-block-large,
