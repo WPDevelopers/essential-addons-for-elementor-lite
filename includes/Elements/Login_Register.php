@@ -270,11 +270,13 @@ class Login_Register extends Widget_Base {
 
 			$this->add_control( 'registration_link_text', [
 				'label'     => __( 'Register Link Text', EAEL_TEXTDOMAIN ),
-				'type'      => Controls_Manager::TEXT,
+				'description'     => __( 'You can put text in two lines to make the last line linkable.', EAEL_TEXTDOMAIN ),
+				'type'      => Controls_Manager::TEXTAREA,
+				'rows'       => 2,
 				'dynamic'   => [
 					'active' => true,
 				],
-				'default'   => __( 'Register Now', EAEL_TEXTDOMAIN ),
+				'default'   => __( "Don't have an Account? \n Register Now", EAEL_TEXTDOMAIN ),
 				'condition' => [
 					'show_registration_link' => 'yes',
 					'default_form_type'      => 'login',
@@ -303,7 +305,7 @@ class Login_Register extends Widget_Base {
 					'active' => true,
 				],
 				'condition' => [
-					'login_link_action'      => 'custom',
+					'registration_link_action'      => 'custom',
 					'show_registration_link' => 'yes',
 				],
 			] );
@@ -1604,9 +1606,24 @@ class Login_Register extends Widget_Base {
 	protected function print_login_form() {
 		if ( $this->should_print_login_form ) {
 			// prepare all login form related vars
+			//Reg link related
+			$reg_link_action = ! empty( $this->ds['registration_link_action'] ) ? $this->ds['registration_link_action'] : 'form';
 			$show_reg_link   = ( $this->user_can_register && ( ! empty( $this->ds['show_registration_link'] ) && 'yes' === $this->ds['show_registration_link'] ) );
 			$reg_link_text   = ! empty( $this->ds['registration_link_text'] ) ? $this->ds['registration_link_text'] : __( 'Register', EAEL_TEXTDOMAIN );
-			$reg_link_action = ! empty( $this->ds['registration_link_action'] ) ? $this->ds['registration_link_action'] : 'form';
+			$parts = explode( "\n", $reg_link_text);
+			$reg_link_text = array_pop( $parts);
+			$reg_message = array_shift( $parts);
+			$reg_link = sprintf( '%1$s  <a href="%2$s" id="eael-lr-reg-toggle" data-action="%3$s">%4$s</a>',$reg_message, esc_attr( wp_registration_url() ), esc_attr($reg_link_action),  $reg_link_text );
+
+			if ( 'custom' === $reg_link_action ) {
+				$reg_url  = ! empty( $this->ds['custom_register_url']['url'] ) ? $this->ds['custom_register_url']['url'] : wp_registration_url();
+				$reg_atts = ! empty( $this->ds['custom_register_url']['is_external'] ) ? ' target="_blank"' : '';
+				$reg_atts .= ! empty( $this->ds['custom_register_url']['nofollow'] ) ? ' rel="nofollow"' : '';
+				$reg_link = sprintf( '%1$s <a href="%2$s" id="eael-lr-reg-toggle" data-action="%3$s" %4$s>%5$s</a>', $reg_message, esc_attr( $reg_url ), esc_attr($reg_link_action), $reg_atts, $reg_link_text );
+			}
+
+
+            // login form fields related
 			$label_type      = ! empty( $this->ds['login_label_types'] ) ? $this->ds['login_label_types'] : 'default';
 			$is_custom_label = ( 'custom' === $label_type );
 			$display_label   = ( 'none' !== $label_type );
@@ -1615,8 +1632,6 @@ class Login_Register extends Widget_Base {
 			$u_ph            = $is_custom_label && isset( $this->ds['login_user_placeholder'] ) ? $this->ds['login_user_placeholder'] : 'email@domain.com';
 			$p_ph            = $is_custom_label && isset( $this->ds['login_password_placeholder'] ) ? $this->ds['login_password_placeholder'] : __( 'Password', EAEL_TEXTDOMAIN );
 			$btn_text        = ! empty( $this->ds['login_button_text'] ) ? $this->ds['login_button_text'] : __( 'Sign In', EAEL_TEXTDOMAIN );
-
-
 			$show_logout_link = ( ! empty( $this->ds['show_log_out_message'] ) && 'yes' === $this->ds['show_log_out_message'] );
 			$show_rememberme  = ( ! empty( $this->ds['login_show_remember_me'] ) && 'yes' === $this->ds['login_show_remember_me'] );
 
@@ -1679,8 +1694,7 @@ class Login_Register extends Widget_Base {
 
 							<?php if ( $show_reg_link ) { ?>
                                 <div class="eael-sign-wrapper">
-                                    Don't have an account?
-                                    <a href="#" id="eael-lr-toggle" data-action="<?php echo esc_attr( $reg_link_action ); ?>"><?php echo esc_html( $reg_link_text ); ?></a>
+                                    <?php echo $reg_link; // XSS ok. already escaped ?>
                                 </div>
 							<?php }
 
