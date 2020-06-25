@@ -209,12 +209,14 @@
 .fc-toolbar.fc-header-toolbar button.fc-timeGridWeek-button,
 .fc-toolbar.fc-header-toolbar button.fc-timeGridDay-button,
 .fc-toolbar.fc-header-toolbar button.fc-listWeek-button,
+.fc-toolbar.fc-header-toolbar button.fc-listMonth-button,
 .fc-toolbar.fc-header-toolbar button.fc-dayGridMonth-button {
   position: relative;
 }
 .fc-toolbar.fc-header-toolbar button.fc-timeGridWeek-button:before,
 .fc-toolbar.fc-header-toolbar button.fc-timeGridDay-button:before,
 .fc-toolbar.fc-header-toolbar button.fc-listWeek-button:before,
+.fc-toolbar.fc-header-toolbar button.fc-listMonth-button:before,
 .fc-toolbar.fc-header-toolbar button.fc-dayGridMonth-button:before {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
@@ -235,7 +237,8 @@
 .fc-toolbar.fc-header-toolbar button.fc-dayGridMonth-button:before {
   content: "";
 }
-.fc-toolbar.fc-header-toolbar button.fc-listWeek-button:before {
+.fc-toolbar.fc-header-toolbar button.fc-listWeek-button:before,
+.fc-toolbar.fc-header-toolbar button.fc-listMonth-button:before {
   content: "";
 }
 .fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary {
@@ -311,10 +314,12 @@ span.fc-day-number {
 .fc-unthemed .fc-timeGridWeek-view .fc-time-grid .fc-event .fc-content {
   display: inherit;
 }
-.fc-unthemed .fc-listWeek-view .fc-list-table tr.fc-list-item {
+.fc-unthemed .fc-listWeek-view .fc-list-table tr.fc-list-item,
+.fc-unthemed .fc-listMonth-view .fc-list-table tr.fc-list-item {
   cursor: pointer;
 }
-.fc-unthemed .fc-listWeek-view .fc-list-table tr td {
+.fc-unthemed .fc-listWeek-view .fc-list-table tr td,
+.fc-unthemed .fc-listMonth-view .fc-list-table tr td {
   padding-bottom: 10px;
   padding-top: 10px;
 }
