@@ -215,6 +215,20 @@ class Login_Register extends Widget_Base {
 				'default_form_type' => 'registration',
 			],
 		] );
+		$this->add_control( 'login_link_text', [
+			'label'       => __( 'Login Link Text', EAEL_TEXTDOMAIN ),
+			'description' => __( 'You can put text in two lines to make the last line linkable.', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXTAREA,
+			'rows'        => 2,
+			'dynamic'     => [
+				'active' => true,
+			],
+			'default'     => __( "Already have an Account? \n Sign In", EAEL_TEXTDOMAIN ),
+			'condition'   => [
+				'show_login_link'   => 'yes',
+				'default_form_type' => 'registration',
+			],
+		] );
 
 		$this->add_control( 'login_link_action', [
 			'label'     => __( 'Login Link Action', EAEL_TEXTDOMAIN ),
@@ -269,15 +283,15 @@ class Login_Register extends Widget_Base {
 			] );
 
 			$this->add_control( 'registration_link_text', [
-				'label'     => __( 'Register Link Text', EAEL_TEXTDOMAIN ),
-				'description'     => __( 'You can put text in two lines to make the last line linkable.', EAEL_TEXTDOMAIN ),
-				'type'      => Controls_Manager::TEXTAREA,
-				'rows'       => 2,
-				'dynamic'   => [
+				'label'       => __( 'Register Link Text', EAEL_TEXTDOMAIN ),
+				'description' => __( 'You can put text in two lines to make the last line linkable.', EAEL_TEXTDOMAIN ),
+				'type'        => Controls_Manager::TEXTAREA,
+				'rows'        => 2,
+				'dynamic'     => [
 					'active' => true,
 				],
-				'default'   => __( "Don't have an Account? \n Register Now", EAEL_TEXTDOMAIN ),
-				'condition' => [
+				'default'     => __( "Don't have an Account? \n Register Now", EAEL_TEXTDOMAIN ),
+				'condition'   => [
 					'show_registration_link' => 'yes',
 					'default_form_type'      => 'login',
 				],
@@ -305,8 +319,8 @@ class Login_Register extends Widget_Base {
 					'active' => true,
 				],
 				'condition' => [
-					'registration_link_action'      => 'custom',
-					'show_registration_link' => 'yes',
+					'registration_link_action' => 'custom',
+					'show_registration_link'   => 'yes',
 				],
 			] );
 		}
@@ -327,6 +341,7 @@ class Login_Register extends Widget_Base {
 			'label'   => __( 'Show Lost your password?', EAEL_TEXTDOMAIN ),
 			'type'    => Controls_Manager::SWITCHER,
 			'default' => 'yes',
+			'conditions' => $this->get_login_controls_display_condition(),
 		] );
 
 
@@ -639,7 +654,7 @@ class Login_Register extends Widget_Base {
 			'label'       => __( 'Acceptance Label', EAEL_TEXTDOMAIN ),
 			'description' => __( 'For example: I agree to the Privacy Policy or I accept the terms & conditions.', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::TEXT,
-			'label_block'      => true,
+			'label_block' => true,
 			'placeholder' => __( 'I Accept the Terms and Conditions.', EAEL_TEXTDOMAIN ),
 			'default'     => __( 'I Accept', EAEL_TEXTDOMAIN ),
 			'condition'   => [
@@ -683,11 +698,11 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 		$this->add_control( 'modal_btn_text', [
-			'label'     => __( 'Modal Button Text', EAEL_TEXTDOMAIN ),
+			'label'       => __( 'Modal Button Text', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::TEXT,
-			'label_block'      => true,
-			'default'   => __( 'the Terms & Conditions', EAEL_TEXTDOMAIN ),
-			'condition' => [
+			'label_block' => true,
+			'default'     => __( 'the Terms & Conditions', EAEL_TEXTDOMAIN ),
+			'condition'   => [
 				'show_terms_conditions'  => 'yes',
 				'show_terms_in_modal'    => 'yes',
 				'acceptance_text_source' => 'editor',
@@ -1610,28 +1625,28 @@ class Login_Register extends Widget_Base {
 			$reg_link_action = ! empty( $this->ds['registration_link_action'] ) ? $this->ds['registration_link_action'] : 'form';
 			$show_reg_link   = ( $this->user_can_register && ( ! empty( $this->ds['show_registration_link'] ) && 'yes' === $this->ds['show_registration_link'] ) );
 			$reg_link_text   = ! empty( $this->ds['registration_link_text'] ) ? $this->ds['registration_link_text'] : __( 'Register', EAEL_TEXTDOMAIN );
-			$parts = explode( "\n", $reg_link_text);
-			$reg_link_text = array_pop( $parts);
-			$reg_message = array_shift( $parts);
-			$reg_link = sprintf( '%1$s  <a href="%2$s" id="eael-lr-reg-toggle" data-action="%3$s">%4$s</a>',$reg_message, esc_attr( wp_registration_url() ), esc_attr($reg_link_action),  $reg_link_text );
+			$parts           = explode( "\n", $reg_link_text );
+			$reg_link_text   = array_pop( $parts );
+			$reg_message     = array_shift( $parts );
+			$reg_link        = sprintf( '%1$s  <a href="%2$s" id="eael-lr-reg-toggle" data-action="%3$s">%4$s</a>', $reg_message, esc_attr( wp_registration_url() ), esc_attr( $reg_link_action ), $reg_link_text );
 
 			if ( 'custom' === $reg_link_action ) {
 				$reg_url  = ! empty( $this->ds['custom_register_url']['url'] ) ? $this->ds['custom_register_url']['url'] : wp_registration_url();
 				$reg_atts = ! empty( $this->ds['custom_register_url']['is_external'] ) ? ' target="_blank"' : '';
 				$reg_atts .= ! empty( $this->ds['custom_register_url']['nofollow'] ) ? ' rel="nofollow"' : '';
-				$reg_link = sprintf( '%1$s <a href="%2$s" id="eael-lr-reg-toggle" data-action="%3$s" %4$s>%5$s</a>', $reg_message, esc_attr( $reg_url ), esc_attr($reg_link_action), $reg_atts, $reg_link_text );
+				$reg_link = sprintf( '%1$s <a href="%2$s" id="eael-lr-reg-toggle" data-action="%3$s" %4$s>%5$s</a>', $reg_message, esc_attr( $reg_url ), esc_attr( $reg_link_action ), $reg_atts, $reg_link_text );
 			}
 
 
-            // login form fields related
-			$label_type      = ! empty( $this->ds['login_label_types'] ) ? $this->ds['login_label_types'] : 'default';
-			$is_custom_label = ( 'custom' === $label_type );
-			$display_label   = ( 'none' !== $label_type );
-			$u_label         = $is_custom_label && ! empty( $this->ds['login_user_label'] ) ? $this->ds['login_user_label'] : __( 'Username or Email Address', EAEL_TEXTDOMAIN );
-			$p_label         = $is_custom_label && ! empty( $this->ds['login_password_label'] ) ? $this->ds['login_password_label'] : __( 'Password', EAEL_TEXTDOMAIN );
-			$u_ph            = $is_custom_label && isset( $this->ds['login_user_placeholder'] ) ? $this->ds['login_user_placeholder'] : 'email@domain.com';
-			$p_ph            = $is_custom_label && isset( $this->ds['login_password_placeholder'] ) ? $this->ds['login_password_placeholder'] : __( 'Password', EAEL_TEXTDOMAIN );
-			$btn_text        = ! empty( $this->ds['login_button_text'] ) ? $this->ds['login_button_text'] : __( 'Sign In', EAEL_TEXTDOMAIN );
+			// login form fields related
+			$label_type       = ! empty( $this->ds['login_label_types'] ) ? $this->ds['login_label_types'] : 'default';
+			$is_custom_label  = ( 'custom' === $label_type );
+			$display_label    = ( 'none' !== $label_type );
+			$u_label          = $is_custom_label && ! empty( $this->ds['login_user_label'] ) ? $this->ds['login_user_label'] : __( 'Username or Email Address', EAEL_TEXTDOMAIN );
+			$p_label          = $is_custom_label && ! empty( $this->ds['login_password_label'] ) ? $this->ds['login_password_label'] : __( 'Password', EAEL_TEXTDOMAIN );
+			$u_ph             = $is_custom_label && isset( $this->ds['login_user_placeholder'] ) ? $this->ds['login_user_placeholder'] : 'email@domain.com';
+			$p_ph             = $is_custom_label && isset( $this->ds['login_password_placeholder'] ) ? $this->ds['login_password_placeholder'] : __( 'Password', EAEL_TEXTDOMAIN );
+			$btn_text         = ! empty( $this->ds['login_button_text'] ) ? $this->ds['login_button_text'] : __( 'Sign In', EAEL_TEXTDOMAIN );
 			$show_logout_link = ( ! empty( $this->ds['show_log_out_message'] ) && 'yes' === $this->ds['show_log_out_message'] );
 			$show_rememberme  = ( ! empty( $this->ds['login_show_remember_me'] ) && 'yes' === $this->ds['login_show_remember_me'] );
 
@@ -1694,7 +1709,7 @@ class Login_Register extends Widget_Base {
 
 							<?php if ( $show_reg_link ) { ?>
                                 <div class="eael-sign-wrapper">
-                                    <?php echo $reg_link; // XSS ok. already escaped ?>
+									<?php echo $reg_link; // XSS ok. already escaped ?>
                                 </div>
 							<?php }
 
@@ -1732,6 +1747,23 @@ class Login_Register extends Widget_Base {
 				'website'      => 'Website',
 			];
 			$repeated_f_labels   = [];
+
+
+			//Login link related
+			$lgn_link_action = ! empty( $this->ds['login_link_action'] ) ? $this->ds['login_link_action'] : 'form';
+			$show_lgn_link   = ( $this->user_can_register && ( ! empty( $this->ds['show_login_link'] ) && 'yes' === $this->ds['show_login_link'] ) );
+			$lgn_link_text   = ! empty( $this->ds['login_link_text'] ) ? $this->ds['login_link_text'] : __( 'Login', EAEL_TEXTDOMAIN );
+			$parts           = explode( "\n", $lgn_link_text );
+			$lgn_link_text   = array_pop( $parts );
+			$lgn_message     = array_shift( $parts );
+			$lgn_link        = sprintf( '%1$s  <a href="%2$s" id="eael-lr-login-toggle" data-action="%3$s">%4$s</a>', $lgn_message, esc_attr( wp_login_url() ), esc_attr( $lgn_link_action ), $lgn_link_text );
+
+			if ( 'custom' === $lgn_link_action ) {
+				$lgn_url  = ! empty( $this->ds['custom_login_url']['url'] ) ? $this->ds['custom_login_url']['url'] : wp_login_url();
+				$lgn_atts = ! empty( $this->ds['custom_login_url']['is_external'] ) ? ' target="_blank"' : '';
+				$lgn_atts .= ! empty( $this->ds['custom_login_url']['nofollow'] ) ? ' rel="nofollow"' : '';
+				$lgn_link = sprintf( '%1$s <a href="%2$s" id="eael-lr-reg-toggle" data-action="%3$s" %4$s>%5$s</a>', $lgn_message, esc_attr( $lgn_url ), esc_attr( $lgn_link_action ), $lgn_atts, $lgn_link_text );
+			}
 
 			ob_start();
 			?>
@@ -1850,11 +1882,12 @@ class Login_Register extends Widget_Base {
                         <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn
                     eael-lr-btn-inline" value="Register"/>
 
-                        <div class="eael-sign-wrapper">
-                            Already have an account?
-                            <a href="#" id="eael-lr-toggle">Sign In</a>
-                        </div>
-						<?php
+						<?php if ( $show_lgn_link ) { ?>
+                            <div class="eael-sign-wrapper">
+								<?php echo $lgn_link; ?>
+                            </div>
+							<?php
+						}
 						$this->print_registration_validation_errors();
 						?>
                     </form>
