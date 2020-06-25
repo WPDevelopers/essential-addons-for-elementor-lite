@@ -1,4 +1,7 @@
 @charset "UTF-8";
+/*--------------------------*/
+/* 09. Product Styles
+/*--------------------------*/
 .eael-product-grid .woocommerce ul.products,
 .eael-post-grid .woocommerce ul.products {
   display: grid;
@@ -95,6 +98,46 @@
       -ms-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
+.eael-product-grid.eael-product-simple .woocommerce ul.products li.product .outofstock-badge, .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product .outofstock-badge,
+.eael-post-grid.eael-product-simple .woocommerce ul.products li.product .outofstock-badge,
+.eael-post-grid.eael-product-reveal .woocommerce ul.products li.product .outofstock-badge {
+  line-height: 16px;
+  font-weight: 600;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  letter-spacing: 0;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #ff2a13;
+  -webkit-border-radius: 0;
+          border-radius: 0;
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  position: absolute;
+  height: 100px;
+  width: 200px;
+  z-index: 1;
+  left: -95px;
+  top: -45px;
+  right: auto;
+  margin: 0;
+  padding: 0;
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
 .eael-product-grid.eael-product-simple .woocommerce ul.products li.product .price, .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product .price,
 .eael-post-grid.eael-product-simple .woocommerce ul.products li.product .price,
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product .price {
@@ -137,6 +180,14 @@
   margin: 15px;
   -webkit-border-radius: 0;
           border-radius: 0;
+}
+.eael-product-grid.eael-product-simple .woocommerce ul.products li.product .button.add_to_cart_button::before, .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product .button.add_to_cart_button::before,
+.eael-post-grid.eael-product-simple .woocommerce ul.products li.product .button.add_to_cart_button::before,
+.eael-post-grid.eael-product-reveal .woocommerce ul.products li.product .button.add_to_cart_button::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  padding-right: 8px;
 }
 .eael-product-grid.eael-product-simple .woocommerce ul.products li.product .button.add_to_cart_button:focus, .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product .button.add_to_cart_button:focus,
 .eael-post-grid.eael-product-simple .woocommerce ul.products li.product .button.add_to_cart_button:focus,
@@ -296,7 +347,8 @@
 .eael-post-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_cart_button.loading:after {
   content: "";
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
+  font-weight: normal;
+  font-family: "Font Awesome 5 Free";
   font-size: 14px;
   line-height: 38px;
   color: #fff;
@@ -315,7 +367,8 @@
 .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:after,
 .eael-post-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:after {
   content: "";
-  font: normal normal normal 14px/1 FontAwesome;
+  font-weight: normal;
+  font-family: "Font Awesome 5 Free";
   font-size: 14px;
   line-height: 38px;
   color: #fff;
@@ -394,6 +447,13 @@
   -webkit-transform: translateY(0);
       -ms-transform: translateY(0);
           transform: translateY(0);
+}
+.eael-product-grid.eael-product-default .button.add_to_cart_button::before,
+.eael-post-grid.eael-product-default .button.add_to_cart_button::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  padding-right: 8px;
 }
 @media only screen and (min-width: 1025px) {
   .eael-product-grid-column-1 .eael-product-grid .woocommerce ul.products {

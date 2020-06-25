@@ -449,7 +449,7 @@ class Event_Calendar extends Widget_Base {
                     'timeGridDay'  => __('Day', 'essential-addons-for-elementor-lite'),
                     'timeGridWeek' => __('Week', 'essential-addons-for-elementor-lite'),
                     'dayGridMonth' => __('Month', 'essential-addons-for-elementor-lite'),
-                    'listWeek'     => __('List', 'essential-addons-for-elementor-lite'),
+                    'listMonth'    => __('List', 'essential-addons-for-elementor-lite'),
                 ],
                 'default' => 'dayGridMonth',
             ]
@@ -562,6 +562,7 @@ class Event_Calendar extends Widget_Base {
                     '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view  td.fc-today'                               => 'border-left-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view  table thead:first-child tr:first-child td' => 'border-top-color: {{VALUE}} !important;',
                     '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view'                           => 'border-color: {{VALUE}} !important;',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listMonth-view'                          => 'border-color: {{VALUE}} !important;',
                 ],
             ]
         );
@@ -857,7 +858,7 @@ class Event_Calendar extends Widget_Base {
             [
                 'name'     => 'days_typography',
                 'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th > span,{{WRAPPER}} .fc-listWeek-view .fc-list-table .fc-widget-header span',
+                'selector' => '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th > span,{{WRAPPER}} .fc-listWeek-view .fc-list-table .fc-widget-header span,{{WRAPPER}} .fc-listMonth-view .fc-list-table .fc-widget-header span',
             ]
         );
 
@@ -1131,6 +1132,7 @@ class Event_Calendar extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-event-calendar-wrapper .fc-listWeek-view .fc-list-table .fc-widget-header span' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-listMonth-view .fc-list-table .fc-widget-header span' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1143,6 +1145,7 @@ class Event_Calendar extends Widget_Base {
                 'default'   => '#f1edf8',
                 'selectors' => [
                     '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-heading td.fc-widget-header' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listMonth-view .fc-list-table tr.fc-list-heading td.fc-widget-header' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -1162,6 +1165,7 @@ class Event_Calendar extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-event-calendar-wrapper .fc-listWeek-view .fc-list-table .fc-list-item' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-listMonth-view .fc-list-table .fc-list-item' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1174,6 +1178,7 @@ class Event_Calendar extends Widget_Base {
                 'default'   => '#ffffff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-item:nth-child(even) td' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listMonth-view .fc-list-table tr.fc-list-item:nth-child(even) td' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -1185,6 +1190,7 @@ class Event_Calendar extends Widget_Base {
                 'default'   => '#ffffff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-item:nth-child(odd) td' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listMonth-view .fc-list-table tr.fc-list-item:nth-child(odd) td' => 'background-color: {{VALUE}};',
 
                 ],
             ]

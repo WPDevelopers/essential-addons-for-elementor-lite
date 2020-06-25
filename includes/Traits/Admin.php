@@ -297,13 +297,13 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
          * Message message for showing.
          */
         $notice->classes('upsale', 'notice is-dismissible ');
-        $notice->message('upsale', '<p>' . __('10,000+ People already using <a href="https://wpdeveloper.net/ea/notificationX" target="_blank">NotificationX</a> to increase their Sales & Engagement!', 'essential-addons-for-elementor-lite') . '</p>');
-        $notice->thumbnail('upsale', plugins_url('assets/admin/images/nx-icon.svg', EAEL_PLUGIN_BASENAME));
+        $notice->message('upsale', '<p>' . __('5,000+ People using <a href="https://betterdocs.co/wordpress-plugin" target="_blank">BetterDocs</a> to create better Documentation & Knowledge Base!', 'essential-addons-for-elementor-lite') . '</p>');
+        $notice->thumbnail('upsale', plugins_url('assets/admin/images/icon-documentation.svg', EAEL_PLUGIN_BASENAME));
 
         // Update Notice For PRO Version
-        if ($this->pro_enabled && \version_compare(EAEL_PRO_PLUGIN_VERSION, '3.6.0', '<')) {
+        if ($this->pro_enabled && \version_compare(EAEL_PRO_PLUGIN_VERSION, '4.0.0', '<')) {
             $notice->classes('update', 'notice is-dismissible ');
-            $notice->message('update', '<p>' . __('You are using an incompatible version of Essential Addons PRO. Please update to v3.6.0+. <a href="https://essential-addons.com/elementor/docs/manually-update-essential-addons-pro/" target="_blank">Follow manual update guide.</a>', 'essential-addons-for-elementor-lite') . '</p>');
+            $notice->message('update', '<p>' . __('You are using an incompatible version of Essential Addons PRO. Please update to v4.0.0+. If you do not see automatic update, <a href="https://essential-addons.com/elementor/docs/manually-update-essential-addons-pro/" target="_blank">Follow manual update guide.</a>', 'essential-addons-for-elementor-lite') . '</p>');
             $notice->thumbnail('update', plugins_url('assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME));
         }
 
@@ -314,13 +314,13 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         // }
 
         $notice->upsale_args = array(
-            'slug'      => 'notificationx',
-            'page_slug' => 'nx-builder',
-            'file'      => 'notificationx.php',
+            'slug'      => 'betterdocs',
+            'page_slug' => 'betterdocs-setup',
+            'file'      => 'betterdocs.php',
             'btn_text'  => __('Install Free', 'essential-addons-for-elementor-lite'),
             'condition' => [
                 'by'    => 'class',
-                'class' => 'NotificationX',
+                'class' => 'BetterDocs',
             ],
         );
 
@@ -331,7 +331,7 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
                 'review' => $notice->makeTime($notice->timestamp, '7 Day'), // after 3 days
             ],
         );
-        if ($this->pro_enabled && \version_compare(EAEL_PRO_PLUGIN_VERSION, '3.6.0', '<')) {
+        if ($this->pro_enabled && \version_compare(EAEL_PRO_PLUGIN_VERSION, '4.0.0', '<')) {
             $notice->options_args['notice_will_show']['update'] = $notice->timestamp;
         }
         // if( ! $this->pro_enabled ) {

@@ -77,8 +77,9 @@ jQuery(window).on('elementor/frontend/init', function () {
             var ovrlyElmnt = element.prev();
             videoIsActive = 'off';
             $(ovrlyElmnt).on('click', function () {
+                $('.eael-sticky-video-wrapper > i').hide();
                 $(this).css('display', 'none');
-
+                playerAbc.play();
                 if ($(this).next().data('autoplay') === 'yes') {
                     playerAbc.restart();
                     eaelsvDomHeight = GetDomElementHeight(this);
