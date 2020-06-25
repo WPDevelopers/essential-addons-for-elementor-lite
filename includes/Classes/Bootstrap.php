@@ -139,6 +139,9 @@ class Bootstrap
         add_action('wp_ajax_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
         add_action('wp_ajax_nopriv_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
 
+        //handle typeform auth token
+        add_action('admin_post_nopriv_typeform_token_data', [$this, 'eael_typeform_auth_handle']);
+
         // Elements
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
         add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
