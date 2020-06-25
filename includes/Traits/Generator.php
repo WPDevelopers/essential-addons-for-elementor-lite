@@ -41,10 +41,10 @@ trait Generator
             if (array_key_exists($val, $replace)) {
                 $val = $replace[$val];
             }
-            return (strpos($val, 'eael-') !== false ? str_replace(['eael-'], [''], $val) : null);
+            return (strpos($val, 'eael-') !== false ? preg_replace('/^eael-/', '', $val) : null);
         }, $widgets);
 
-        // collect extension
+        // collect page extensions
         if ($document->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {
             $widgets[] = 'eael-reading-progress';
         }
@@ -61,7 +61,26 @@ trait Generator
         $collections = [];
 
         foreach ($elements as $element) {
+            // collect extensions for section
+            if (isset($element['elType']) && $element['elType'] == 'section') {
+                if (isset($element['settings']['eael_particle_switch']) && $element['settings']['eael_particle_switch'] == 'yes') {
+                    $collections[] = 'eael-section-particles';
+                }
+                if (isset($element['settings']['eael_parallax_switcher']) && $element['settings']['eael_parallax_switcher'] == 'yes') {
+                    $collections[] = 'eael-section-parallax';
+                }
+            }
+
+            // collect widget
             if (isset($element['elType']) && $element['elType'] == 'widget') {
+                // collect extensions for widget
+                if (isset($element['settings']['eael_tooltip_section_enable']) && $element['settings']['eael_tooltip_section_enable'] == 'yes') {
+                    $collections[] = 'eael-eael-tooltip-section';
+                }
+                if (isset($element['settings']['eael_ext_content_protection']) && $element['settings']['eael_ext_content_protection'] == 'yes') {
+                    $collections[] = 'eael-eael-content-protection';
+                }
+
                 if ($element['widgetType'] === 'global') {
                     $document = Plugin::$instance->documents->get($element['templateID']);
                     $collections = array_merge($collections, $this->collect_recursive_elements($document->get_elements_data()));
