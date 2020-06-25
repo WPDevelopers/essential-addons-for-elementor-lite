@@ -164,6 +164,8 @@ class Login_Register extends Widget_Base {
 		$this->init_content_register_user_email_controls();
 		$this->init_content_register_admin_email_controls();
 		$this->init_content_register_validation_message_controls();
+		//Terms & Conditions
+		$this->init_content_terms_controls();
 
 
 		/*----Style Tab----*/
@@ -182,20 +184,24 @@ class Login_Register extends Widget_Base {
 		$this->start_controls_section( 'section_content_general', [
 			'label' => __( 'General', EAEL_TEXTDOMAIN ),
 		] );
-
+		$this->add_control( 'default_form_type_notice', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( 'Choose the type of form you want to show by default. Note: you can show both form in a single page even if you select only login or registration from below.', EAEL_TEXTDOMAIN ),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+		] );
 		$this->add_control( 'default_form_type', [
-			'label'       => __( 'Default Form Type', EAEL_TEXTDOMAIN ),
-			'description' => __( 'Choose the type of form you want to show by default. Note: you can show both form in a single page even if you select only login or registration from below.', EAEL_TEXTDOMAIN ),
-			'type'        => Controls_Manager::SELECT,
-			'options'     => [
+			'label'   => __( 'Default Form Type', EAEL_TEXTDOMAIN ),
+			//'description' => __( 'Choose the type of form you want to show by default. Note: you can show both form in a single page even if you select only login or registration from below.', EAEL_TEXTDOMAIN ),
+			'type'    => Controls_Manager::SELECT,
+			'options' => [
 				'login'        => __( 'Login', EAEL_TEXTDOMAIN ),
 				'registration' => __( 'Registration', EAEL_TEXTDOMAIN ),
 			],
-			'default'     => 'login',
+			'default' => 'login',
 		] );
 
 		$this->add_control( 'hide_for_logged_in_user', [
-			'label' => __( 'Hide from Logged in Users', EAEL_TEXTDOMAIN ),
+			'label' => __( 'Hide all Forms from Logged-in Users', EAEL_TEXTDOMAIN ),
 			//'description' => __( 'You can hide the form for already logged in user.', EAEL_TEXTDOMAIN ),
 			'type'  => Controls_Manager::SWITCHER,
 		] );
@@ -348,7 +354,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'lost_password_url', [
-			'label'     => __( 'Enter URL', EAEL_TEXTDOMAIN ),
+			'label'     => __( 'Custom Lost Password URL', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::URL,
 			'dynamic'   => [
 				'active' => true,
@@ -607,6 +613,96 @@ class Login_Register extends Widget_Base {
 				'redirect_after_logout' => 'yes',
 			],
 			'separator'     => 'after',
+		] );
+
+		$this->end_controls_section();
+	}
+
+	protected function init_content_terms_controls() {
+		$this->start_controls_section( 'section_content_terms_conditions', [
+			'label'      => __( 'Terms & Conditions', EAEL_TEXTDOMAIN ),
+			'conditions' => $this->get_register_controls_display_condition(),
+		] );
+
+		$this->add_control( 'show_terms_conditions', [
+			'label'        => __( 'Enforce Terms & Conditions', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', EAEL_TEXTDOMAIN ),
+			'label_off'    => __( 'No', EAEL_TEXTDOMAIN ),
+			'default'      => 'no',
+			'return_value' => 'yes',
+		] );
+
+		$this->add_control( 'acceptance_label', [
+			'label'       => __( 'Acceptance Label', EAEL_TEXTDOMAIN ),
+			'description' => __( 'For example: I agree to the Privacy Policy or I accept the terms & conditions.', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block'      => true,
+			'placeholder' => __( 'I Accept the Terms and Conditions.', EAEL_TEXTDOMAIN ),
+			'default'     => __( 'I Accept', EAEL_TEXTDOMAIN ),
+			'condition'   => [
+				'show_terms_conditions' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'acceptance_text_source', [
+			'label'     => __( 'Content Source', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SELECT,
+			'options'   => [
+				'editor' => __( 'Editor', EAEL_TEXTDOMAIN ),
+				'custom' => __( 'Custom', EAEL_TEXTDOMAIN ),
+			],
+			'default'   => 'editor',
+			'condition' => [
+				'show_terms_conditions' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'acceptance_text', [
+			'label'     => __( 'Terms and Conditions', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::WYSIWYG,
+			'rows'      => 3,
+			'default'   => __( 'Please go through the following terms and conditions carefully.', EAEL_TEXTDOMAIN ),
+			'condition' => [
+				'show_terms_conditions'  => 'yes',
+				'acceptance_text_source' => 'editor',
+			],
+		] );
+		$this->add_control( 'show_terms_in_modal', [
+			'label'        => __( 'Show Content in a Modal', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', EAEL_TEXTDOMAIN ),
+			'label_off'    => __( 'No', EAEL_TEXTDOMAIN ),
+			'default'      => 'yes',
+			'return_value' => 'yes',
+			'condition'    => [
+				'show_terms_conditions'  => 'yes',
+				'acceptance_text_source' => 'editor',
+			],
+		] );
+		$this->add_control( 'modal_btn_text', [
+			'label'     => __( 'Modal Button Text', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block'      => true,
+			'default'   => __( 'the Terms & Conditions', EAEL_TEXTDOMAIN ),
+			'condition' => [
+				'show_terms_conditions'  => 'yes',
+				'show_terms_in_modal'    => 'yes',
+				'acceptance_text_source' => 'editor',
+			],
+		] );
+
+		$this->add_control( 'acceptance_text_url', [
+			'label'       => __( 'Custom Acceptance URL', EAEL_TEXTDOMAIN ),
+			'description' => __( 'Enter the link where your terms & condition is found.', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::URL,
+			'dynamic'     => [
+				'active' => true,
+			],
+			'condition'   => [
+				'show_terms_conditions'  => 'yes',
+				'acceptance_text_source' => 'custom',
+			],
 		] );
 
 		$this->end_controls_section();
