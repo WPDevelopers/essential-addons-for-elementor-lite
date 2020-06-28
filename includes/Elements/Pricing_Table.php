@@ -851,10 +851,10 @@ class Pricing_Table extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#dbdbdb',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-pricing.style-1 .eael-pricing-item .header:after' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-pricing.style-1 .eael-pricing-item .header:after, {{WRAPPER}} .eael-pricing.style-3 .eael-pricing-item .header:after' => 'background: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_pricing_table_style' => ['style-1'],
+                    'eael_pricing_table_style' => ['style-1', 'style-3'],
                 ],
             ]
         );
