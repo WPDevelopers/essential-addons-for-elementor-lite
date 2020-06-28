@@ -338,9 +338,9 @@ class Login_Register extends Widget_Base {
 
 
 		$this->add_control( 'show_lost_password', [
-			'label'   => __( 'Show Lost your password?', EAEL_TEXTDOMAIN ),
-			'type'    => Controls_Manager::SWITCHER,
-			'default' => 'yes',
+			'label'      => __( 'Show Lost your password?', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::SWITCHER,
+			'default'    => 'yes',
 			'conditions' => $this->get_login_controls_display_condition(),
 		] );
 
@@ -769,6 +769,8 @@ class Login_Register extends Widget_Base {
 			'condition' => [
 				'field_type!' => [
 					'email',
+					'password',
+					'confirm_pass',
 				],
 			],
 		] );
@@ -779,6 +781,8 @@ class Login_Register extends Widget_Base {
 			'condition'       => [
 				'field_type' => [
 					'email',
+					'password',
+					'confirm_pass',
 				],
 			],
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
@@ -1738,13 +1742,13 @@ class Login_Register extends Widget_Base {
 			$last_name_exists    = 0;
 			$website_exists      = 0;
 			$f_labels            = [
-				'email'        => 'Email',
-				'password'     => 'Password',
-				'confirm_password' => 'Confirm Password',
-				'user_name'    => 'Username',
-				'first_name'   => 'First Name',
-				'last_name'    => 'Last Name',
-				'website'      => 'Website',
+				'email'            => __( 'Email', EAEL_TEXTDOMAIN ),
+				'password'         => __( 'Password', EAEL_TEXTDOMAIN ),
+				'confirm_password' => __( 'Confirm Password', EAEL_TEXTDOMAIN ),
+				'user_name'        => __( 'Username', EAEL_TEXTDOMAIN ),
+				'first_name'       => __( 'First Name', EAEL_TEXTDOMAIN ),
+				'last_name'        => __( 'Last Name', EAEL_TEXTDOMAIN ),
+				'website'          => __( 'Website', EAEL_TEXTDOMAIN ),
 			];
 			$repeated_f_labels   = [];
 
@@ -1785,6 +1789,12 @@ class Login_Register extends Widget_Base {
 							if ( 'password' === $field_type ) {
 								$is_pass_valid = true;
 							}
+
+							$current_field_required = ( ! empty( $field['required'] ) || in_array( $field_type, [
+									'password',
+									'confirm_pass',
+									'email',
+								] ) );
 
 							//keys for attribute binding
 							$input_key       = "input{$f_index}";
@@ -1828,20 +1838,14 @@ class Login_Register extends Widget_Base {
 
 							// print require field attributes
 							$rf_class = '';
-							if ( ! empty( $field['required'] ) || in_array( $field_type, [
-									'password',
-									'confirm_pass',
-									'email',
-								] ) ) {
+							if ( $current_field_required ) {
 								$this->add_render_attribute( $input_key, [
 									'required'      => 'required',
 									'aria-required' => 'true',
 								] );
 
 								$rf_class = "elementor-field-required";
-								if ( 'yes' === $this->ds['mark_required'] ) {
-									$rf_class = ' elementor-mark-required';
-								}
+
 							}
 
 
@@ -1870,6 +1874,11 @@ class Login_Register extends Widget_Base {
 								<?php
 								if ( 'yes' === $this->ds['show_labels'] && ! empty( $field['field_label'] ) ) {
 									echo '<label ' . $this->get_render_attribute_string( $label_key ) . '>' . esc_attr( $field['field_label'] ) . '</label>';
+
+									// show required field mark
+									if ( $current_field_required && 'yes' === $this->ds['mark_required'] ) {
+										echo '<abbr class="required" title="required">*</abbr>';// we can show this inside label if needed
+									}
 								}
 								echo '<input ' . $this->get_render_attribute_string( $input_key ) . '>';
 								?>
