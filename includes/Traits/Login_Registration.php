@@ -67,7 +67,7 @@ trait Login_Registration {
 			'user_password' => $password,
 			'remember'      => ( 'forever' === $rememberme ),
 		];
-		$user_data = wp_signon( $credentials );
+		$user_data   = wp_signon( $credentials );
 
 		if ( is_wp_error( $user_data ) ) {
 			if ( isset( $user_data->errors['invalid_email'][0] ) ) {
@@ -80,7 +80,7 @@ trait Login_Registration {
 
 				$this->set_transient( 'eael_login_error', __( 'Invalid Password. Please check your password and try again', EAEL_TEXTDOMAIN ) );
 
-			}elseif ( isset( $user_data->errors['empty_password'][0] ) ) {
+			} elseif ( isset( $user_data->errors['empty_password'][0] ) ) {
 
 				$this->set_transient( 'eael_login_error', __( 'Empty Password. Please check your password and try again', EAEL_TEXTDOMAIN ) );
 
@@ -168,6 +168,12 @@ trait Login_Registration {
 		} else {
 			$password               = wp_generate_password();
 			$is_pass_auto_generated = true;
+		}
+		if ( isset( $_POST['confirm_pass'] ) ) {
+			$confirm_pass = wp_unslash( sanitize_text_field( $_POST['confirm_pass'] ) );
+			if ( $confirm_pass !== $password ) {
+				$errors['confirm_pass'] = __( 'The confirm password did not match.', EAEL_TEXTDOMAIN );
+			}
 		}
 
 		// if any error found, abort

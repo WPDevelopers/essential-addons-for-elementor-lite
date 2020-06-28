@@ -1740,7 +1740,7 @@ class Login_Register extends Widget_Base {
 			$f_labels            = [
 				'email'        => 'Email',
 				'password'     => 'Password',
-				'confirm_pass' => 'Confirm Password',
+				'confirm_password' => 'Confirm Password',
 				'user_name'    => 'Username',
 				'first_name'   => 'First Name',
 				'last_name'    => 'Last Name',
