@@ -345,7 +345,7 @@ class Post_Timeline extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_timeline_title_typography',
-                'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
+                'label'    => __('Title Typography', 'essential-addons-for-elementor-lite'),
                 'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .eael-timeline-post-title h2',
             ]
