@@ -6643,6 +6643,7 @@ button.mfp-arrow:not(.toggle) {
   -webkit-transform: translate3d(0, 60px, 0);
           transform: translate3d(0, 60px, 0);
 }
+.eael-img-accordion a.overlay-active .overlay-inner *,
 .eael-img-accordion .overlay-inner-show * {
   opacity: 1;
   visibility: visible;
