@@ -652,11 +652,13 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'acceptance_label', [
 			'label'       => __( 'Acceptance Label', EAEL_TEXTDOMAIN ),
-			'description' => __( 'For example: I agree to the Privacy Policy or I accept the terms & conditions.', EAEL_TEXTDOMAIN ),
-			'type'        => Controls_Manager::TEXT,
+			'description' => __( 'Eg. I accept the terms & conditions. Note: First line is checkbox label & Last line will be used as link text.', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXTAREA,
+			'rows'        => 2,
 			'label_block' => true,
 			'placeholder' => __( 'I Accept the Terms and Conditions.', EAEL_TEXTDOMAIN ),
-			'default'     => __( 'I Accept', EAEL_TEXTDOMAIN ),
+			/* translators: \n means new line. So, Don't translate this*/
+			'default'     => __( "I Accept \n the Terms and Conditions.", EAEL_TEXTDOMAIN ),
 			'condition'   => [
 				'show_terms_conditions' => 'yes',
 			],
@@ -697,21 +699,19 @@ class Login_Register extends Widget_Base {
 				'acceptance_text_source' => 'editor',
 			],
 		] );
-		$this->add_control( 'modal_btn_text', [
-			'label'       => __( 'Modal Button Text', EAEL_TEXTDOMAIN ),
+		$this->add_control( 'term_btn_text', [
+			'label'       => __( 'T&C Button Text', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::TEXT,
 			'label_block' => true,
 			'default'     => __( 'the Terms & Conditions', EAEL_TEXTDOMAIN ),
 			'condition'   => [
-				'show_terms_conditions'  => 'yes',
-				'show_terms_in_modal'    => 'yes',
-				'acceptance_text_source' => 'editor',
+				'show_terms_conditions' => 'yes',
 			],
 		] );
 
 		$this->add_control( 'acceptance_text_url', [
-			'label'       => __( 'Custom Acceptance URL', EAEL_TEXTDOMAIN ),
-			'description' => __( 'Enter the link where your terms & condition is found.', EAEL_TEXTDOMAIN ),
+			'label'       => __( 'Custom T&C URL', EAEL_TEXTDOMAIN ),
+			'description' => __( 'Enter the link where your terms & condition or privacy policy is found.', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::URL,
 			'dynamic'     => [
 				'active' => true,
@@ -1835,7 +1835,6 @@ class Login_Register extends Widget_Base {
 								],
 							] );
 
-
 							// print require field attributes
 							$rf_class = '';
 							if ( $current_field_required ) {
@@ -1843,9 +1842,7 @@ class Login_Register extends Widget_Base {
 									'required'      => 'required',
 									'aria-required' => 'true',
 								] );
-
 								$rf_class = "elementor-field-required";
-
 							}
 
 
@@ -1886,7 +1883,7 @@ class Login_Register extends Widget_Base {
 						<?php
 						endforeach;
 						$this->print_necessary_hidden_fields( 'register' );
-
+						$this->print_terms_condition_notice();
 						?>
                         <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn
                     eael-lr-btn-inline" value="Register"/>
@@ -1972,6 +1969,42 @@ class Login_Register extends Widget_Base {
         <input type="hidden" name="page_id" value="<?php echo esc_attr( $this->page_id ); ?>">
         <input type="hidden" name="widget_id" value="<?php echo esc_attr( $this->get_id() ); ?>">
 		<?php
+	}
+
+	protected function print_terms_condition_notice() {
+		if ( empty( $this->ds['show_terms_conditions'] ) || 'yes' !== $this->ds['show_terms_conditions'] ) {
+			return;
+		}
+		$l             = isset( $this->ds['acceptance_label'] ) ? $this->ds['acceptance_label'] : '';
+		$parts         = explode( "\n", $l );
+		$label         = array_shift( $parts );
+		$link_text     = array_pop( $parts );
+		$source        = isset( $this->ds['acceptance_text_source'] ) ? $this->ds['acceptance_text_source'] : 'editor';
+		$tc_text       = isset( $this->ds['acceptance_text'] ) ? $this->ds['acceptance_text'] : '';
+		$show_in_modal = isset( $this->ds['show_terms_in_modal'] ) && 'yes' === $this->ds['show_terms_in_modal'];
+		$tc_link       = '<a href="#" id="eael-lr-tnc-link">' . esc_html( $link_text ) . '</a>';
+		if ( 'custom' === $source ) {
+			$tc_url  = ! empty( $this->ds['acceptance_text_url']['url'] ) ? esc_url( $this->ds['acceptance_text_url']['url'] ) : wp_login_url();
+			$tc_atts = ! empty( $this->ds['acceptance_text_url']['is_external'] ) ? ' target="_blank"' : '';
+			$tc_atts .= ! empty( $this->ds['acceptance_text_url']['nofollow'] ) ? ' rel="nofollow"' : '';
+			$tc_link = sprintf( '<a href="%1$s" id="eael-lr-tnc-link" %2$s>%3$s</a>', esc_attr( $tc_url ), $tc_atts, $link_text );
+		}
+
+		?>
+        <input type="checkbox" name="eael_accept_tnc" value="1" id="eael_accept_tnc">
+        <label for="eael_accept_tnc">
+			<?php
+			    echo esc_html( $label );
+			?>
+        </label>
+		<?php
+		echo $tc_link; // XSS ok. already sanitized.
+		$tc = '<div class="eael-lr-tnc-wrap">';
+		$tc .= $this->parse_text_editor( $tc_text );
+		$tc .= '</div>';
+		echo $tc;
+
+
 	}
 
 	protected function print_login_validation_errors() {
