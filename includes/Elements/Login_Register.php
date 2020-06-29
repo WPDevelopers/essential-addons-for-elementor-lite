@@ -1153,7 +1153,7 @@ class Login_Register extends Widget_Base {
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
 		$this->add_control( "eael_form_padding", [
-			'label'      => __( 'Form Padding', EAEL_TEXTDOMAIN ),
+			'label'      => __( 'Form Spacing', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1165,7 +1165,7 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 		$this->add_control( "eael_form_image_margin", [
-			'label'      => __( 'Form Illustration Padding', EAEL_TEXTDOMAIN ),
+			'label'      => __( 'Form Illustration spacing', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1173,7 +1173,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-illustration" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-illustration" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
 
@@ -1194,7 +1194,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .input-field" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
 
@@ -1207,12 +1207,12 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .input-field" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => "eael_fields_typography",
-			'selector' => "{{WRAPPER}} .lr-form-wrapper .input-field",
+			'selector' => "{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control",
 		] );
 		$this->start_controls_tabs( "tabs_form_fields_style" );
 
@@ -1224,14 +1224,14 @@ class Login_Register extends Widget_Base {
 			'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .lr-form-wrapper .input-field" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_control( 'eael_field_placeholder_color', [
 			'label'     => __( 'Placeholder Color', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .lr-form-wrapper .input-field" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper input.eael-lr-form-control::placeholder" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_control( 'eael_field_bg_color', [
@@ -1239,26 +1239,20 @@ class Login_Register extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'default'   => '#ffffff',
 			'selectors' => [
-				"{{WRAPPER}} .lr-form-wrapper .input-field" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => 'background-color: {{VALUE}};',
 			],
 		] );
 		$this->end_controls_tab();
 
 		$this->start_controls_tab( "tab_form_field_style_active", [
-			'label' => __( 'Active', EAEL_TEXTDOMAIN ),
+			'label' => __( 'Focus', EAEL_TEXTDOMAIN ),
 		] );
-		$this->add_control( 'eael_field_color_active', [
-			'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [
-				"{{WRAPPER}} .lr-form-wrapper .input-field" => 'color: {{VALUE}};',
-			],
-		] );
+
 		$this->add_control( 'eael_field_placeholder_color_active', [
 			'label'     => __( 'Placeholder Color', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .lr-form-wrapper .input-field" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper input.eael-lr-form-control:focus::placeholder" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_control( 'eael_field_bg_color_active', [
@@ -1266,7 +1260,7 @@ class Login_Register extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'default'   => '#ffffff',
 			'selectors' => [
-				"{{WRAPPER}} .lr-form-wrapper .input-field" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control:focus" => 'background-color: {{VALUE}};',
 			],
 		] );
 
@@ -1289,19 +1283,19 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .input-lable" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper label" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => "eael_label_typography",
-			'selector' => "{{WRAPPER}} .lr-form-wrapper .input-label",
+			'selector' => "{{WRAPPER}} .lr-form-wrapper label",
 		] );
 
 		$this->add_control( 'eael_label_color', [
 			'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .lr-form-wrapper .input-label" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper label" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_control( 'eael_label_bg_color', [
@@ -1309,7 +1303,7 @@ class Login_Register extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'default'   => '#ffffff',
 			'selectors' => [
-				"{{WRAPPER}} .lr-form-wrapper .input-label" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper label" => 'background-color: {{VALUE}};',
 			],
 		] );
 		$this->end_controls_section();
@@ -1808,7 +1802,6 @@ class Login_Register extends Widget_Base {
 								case 'first_name':
 								case 'last_name':
 									$field_input_type = 'text';
-									$this->add_render_attribute( $input_key, 'class', 'elementor-field-textual' );
 									break;
 								case 'confirm_pass':
 									$field_input_type = 'password';
@@ -1837,13 +1830,11 @@ class Login_Register extends Widget_Base {
 							] );
 
 							// print require field attributes
-							$rf_class = '';
 							if ( $current_field_required ) {
 								$this->add_render_attribute( $input_key, [
 									'required'      => 'required',
 									'aria-required' => 'true',
 								] );
-								$rf_class = "elementor-field-required";
 							}
 
 
@@ -1852,9 +1843,8 @@ class Login_Register extends Widget_Base {
 								$field_group_key => [
 									'class' => [
 										'eael-lr-form-group',
-										'elementor-field-type-' . $field_type,
-										'elementor-col-' . $field['width'],
-										$rf_class,
+										'eael-field-type-' . $field_type,
+										'eael-w-' . $field['width'],
 									],
 								],
 							] );
