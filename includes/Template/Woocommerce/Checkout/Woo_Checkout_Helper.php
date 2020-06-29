@@ -255,7 +255,27 @@ trait Woo_Checkout_Helper {
 			<div class="ea-coupon-icon">
 				<?php Icons_Manager::render_icon( $settings['ea_woo_checkout_coupon_icon'], [ 'aria-hidden' => 'true' ] ); ?>
 			</div>
-			<?php wc_get_template('checkout/form-coupon.php', array('checkout' => WC()->checkout(),)); ?>
+
+			<?php if( wc_coupons_enabled() ){ ?>
+                <div class="woocommerce-form-coupon-toggle">
+                    <?php wc_print_notice( apply_filters( 'woocommerce_checkout_coupon_message', $settings['ea_woo_checkout_coupon_title'] . ' <a href="#" class="showcoupon">' . $settings['ea_woo_checkout_coupon_link_text'] . '</a>' ), 'notice' ); ?>
+                </div>
+
+                <form class="checkout_coupon woocommerce-form-coupon" method="post" style="display:none">
+
+                    <p><?php esc_html_e( 'If you have a coupon code, please apply it below.', 'woocommerce' ); ?></p>
+
+                    <p class="form-row form-row-first">
+                        <input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" id="coupon_code" value="" />
+                    </p>
+
+                    <p class="form-row form-row-last">
+                        <button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"><?php esc_html_e( 'Apply coupon', 'woocommerce' ); ?></button>
+                    </p>
+
+                    <div class="clear"></div>
+                </form>
+            <?php } ?>
 		</div>
 	<?php }
 
@@ -282,7 +302,7 @@ trait Woo_Checkout_Helper {
 				<?php Icons_Manager::render_icon( $settings['ea_woo_checkout_login_icon'], [ 'aria-hidden' => 'true' ] ); ?>
             </div>
             <div class="woocommerce-form-login-toggle">
-				<?php wc_print_notice( apply_filters( 'woocommerce_checkout_login_message', esc_html__( 'Returning customer?', 'essential-addons-for-elementor-lite' ) ) . ' <a href="#" class="showlogin">' . esc_html__( 'Click here to login', 'essential-addons-for-elementor-lite' ) . '</a>', 'notice' ); ?>
+				<?php wc_print_notice( apply_filters( 'woocommerce_checkout_login_message', $settings['ea_woo_checkout_login_title'] ) . ' <a href="#" class="showlogin">' . $settings['ea_woo_checkout_login_link_text'] . '</a>', 'notice' ); ?>
             </div>
 
 			<?php
@@ -341,7 +361,9 @@ trait Woo_Checkout_Helper {
 		$settings = self::ea_get_woo_checkout_settings();
 		?>
 		<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
-		<h3 id="order_review_heading" class="woo-checkout-section-title"><?php esc_html_e( 'Your order', 'essential-addons-for-elementor-lite' ); ?></h3>
+		<h3 id="order_review_heading" class="woo-checkout-section-title">
+			<?php echo $settings['ea_woo_checkout_order_details_title']; ?>
+        </h3>
 
 		<?php do_action('woocommerce_checkout_before_order_review'); ?>
 
@@ -423,7 +445,7 @@ trait Woo_Checkout_Helper {
 
 				<div class="footer-content">
 					<div class="cart-subtotal">
-						<div><?php esc_html_e( 'Subtotal', 'essential-addons-for-elementor-lite' ); ?></div>
+						<div><?php echo $settings['ea_woo_checkout_table_subtotal_text']; ?></div>
 						<div><?php wc_cart_totals_subtotal_html(); ?></div>
 					</div>
 
@@ -471,7 +493,7 @@ trait Woo_Checkout_Helper {
 					<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
 
 					<div class="order-total">
-						<div><?php esc_html_e( 'Total', 'essential-addons-for-elementor-lite' ); ?></div>
+						<div><?php echo $settings['ea_woo_checkout_table_total_text']; ?></div>
 						<div><?php wc_cart_totals_order_total_html(); ?></div>
 					</div>
 				</div>
@@ -515,11 +537,7 @@ trait Woo_Checkout_Helper {
 
 			<?php endif; ?>
 
-			<div class="woo-checkout-payment">
-				<h3 id="payment-title" class="woo-checkout-section-title"><?php esc_html_e( 'Payment Methods', 'essential-addons-for-elementor-lite' ); ?></h3>
-
-				<?php woocommerce_checkout_payment(); ?>
-			</div>
+            <?php do_action( 'woocommerce_checkout_order_review' ); ?>
 
 		</form>
 
@@ -527,6 +545,160 @@ trait Woo_Checkout_Helper {
 		do_action('woocommerce_after_checkout_form', $checkout);
 
 	}
+
+	/**
+	 * Output the billing form.
+	 */
+	public function ea_checkout_form_billing() {
+		// Get checkout object.
+		$checkout = WC()->checkout();
+		$settings = self::ea_get_woo_checkout_settings();
+	    ?>
+		<div class="woocommerce-billing-fields">
+            <?php if ( wc_ship_to_billing_address_only() && WC()->cart->needs_shipping() ) : ?>
+
+                <h3><?php esc_html_e( 'Billing &amp; Shipping', 'woocommerce' ); ?></h3>
+
+            <?php else : ?>
+
+                <h3><?php echo $settings['ea_woo_checkout_billing_title']; ?></h3>
+
+            <?php endif; ?>
+
+            <?php do_action( 'woocommerce_before_checkout_billing_form', $checkout ); ?>
+
+            <div class="woocommerce-billing-fields__field-wrapper">
+                <?php
+                $fields = $checkout->get_checkout_fields( 'billing' );
+
+                foreach ( $fields as $key => $field ) {
+                    woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
+                }
+                ?>
+            </div>
+
+            <?php do_action( 'woocommerce_after_checkout_billing_form', $checkout ); ?>
+        </div>
+
+        <?php if ( ! is_user_logged_in() && $checkout->is_registration_enabled() ) : ?>
+            <div class="woocommerce-account-fields">
+                <?php if ( ! $checkout->is_registration_required() ) : ?>
+
+                    <p class="form-row form-row-wide create-account">
+                        <label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
+                            <input class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" id="createaccount" <?php checked( ( true === $checkout->get_value( 'createaccount' ) || ( true === apply_filters( 'woocommerce_create_account_default_checked', false ) ) ), true ); ?> type="checkbox" name="createaccount" value="1" /> <span><?php esc_html_e( 'Create an account?', 'woocommerce' ); ?></span>
+                        </label>
+                    </p>
+
+                <?php endif; ?>
+
+                <?php do_action( 'woocommerce_before_checkout_registration_form', $checkout ); ?>
+
+                <?php if ( $checkout->get_checkout_fields( 'account' ) ) : ?>
+
+                    <div class="create-account">
+                        <?php foreach ( $checkout->get_checkout_fields( 'account' ) as $key => $field ) : ?>
+                            <?php woocommerce_form_field( $key, $field, $checkout->get_value( $key ) ); ?>
+                        <?php endforeach; ?>
+                        <div class="clear"></div>
+                    </div>
+
+                <?php endif; ?>
+
+                <?php do_action( 'woocommerce_after_checkout_registration_form', $checkout ); ?>
+            </div>
+        <?php endif;
+	}
+
+	/**
+	 * Output the shipping form.
+	 */
+	public function ea_checkout_form_shipping() {
+        // Get checkout object.
+        $checkout = WC()->checkout();
+		$settings = self::ea_get_woo_checkout_settings();
+        ?>
+        <div class="woocommerce-shipping-fields">
+			<?php if ( true === WC()->cart->needs_shipping_address() ) : ?>
+
+                <h3 id="ship-to-different-address">
+                    <label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
+                        <input id="ship-to-different-address-checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" <?php checked( apply_filters( 'woocommerce_ship_to_different_address_checked', 'shipping' === get_option( 'woocommerce_ship_to_destination' ) ? 1 : 0 ), 1 ); ?> type="checkbox" name="ship_to_different_address" value="1" /> <span><?php echo $settings['ea_woo_checkout_billing_title']; ?></span>
+                    </label>
+                </h3>
+
+                <div class="shipping_address">
+
+					<?php do_action( 'woocommerce_before_checkout_shipping_form', $checkout ); ?>
+
+                    <div class="woocommerce-shipping-fields__field-wrapper">
+						<?php
+						$fields = $checkout->get_checkout_fields( 'shipping' );
+
+						foreach ( $fields as $key => $field ) {
+							woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
+						}
+						?>
+                    </div>
+
+					<?php do_action( 'woocommerce_after_checkout_shipping_form', $checkout ); ?>
+
+                </div>
+
+			<?php endif; ?>
+        </div>
+        <div class="woocommerce-additional-fields">
+			<?php do_action( 'woocommerce_before_order_notes', $checkout ); ?>
+
+			<?php if ( apply_filters( 'woocommerce_enable_order_notes_field', 'yes' === get_option( 'woocommerce_enable_order_comments', 'yes' ) ) ) : ?>
+
+				<?php if ( ! WC()->cart->needs_shipping() || wc_ship_to_billing_address_only() ) : ?>
+
+                    <h3><?php echo $settings['ea_woo_checkout_additional_info_title']; ?></h3>
+
+				<?php endif; ?>
+
+                <div class="woocommerce-additional-fields__field-wrapper">
+					<?php foreach ( $checkout->get_checkout_fields( 'order' ) as $key => $field ) : ?>
+						<?php woocommerce_form_field( $key, $field, $checkout->get_value( $key ) ); ?>
+					<?php endforeach; ?>
+                </div>
+
+			<?php endif; ?>
+
+			<?php do_action( 'woocommerce_after_order_notes', $checkout ); ?>
+        </div>
+	<?php }
+
+	/**
+	 * Output the payment.
+	 */
+	public function ea_checkout_payment() {
+		if ( WC()->cart->needs_payment() ) {
+			$available_gateways = WC()->payment_gateways()->get_available_payment_gateways();
+			WC()->payment_gateways()->set_current_gateway( $available_gateways );
+		} else {
+			$available_gateways = array();
+		}
+
+		$settings = self::ea_get_woo_checkout_settings();
+		?>
+
+        <div class="woo-checkout-payment">
+            <h3 id="payment-title" class="woo-checkout-section-title">
+				<?php echo $settings['ea_woo_checkout_payment_title']; ?>
+            </h3>
+
+			<?php wc_get_template(
+			'checkout/payment.php',
+			array(
+				'checkout'           => WC()->checkout(),
+				'available_gateways' => $available_gateways,
+				'order_button_text'  => apply_filters( 'woocommerce_order_button_text', $settings['ea_woo_checkout_place_order_text'] ),
+			)
+		); ?>
+        </div>
+	<?php }
 
 	/**
 	 * Added all actions
@@ -542,6 +714,17 @@ trait Woo_Checkout_Helper {
 		if( $settings['ea_woo_checkout_layout'] == 'default' ) {
 			add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_order_review_template' ], 9 );
         }
+
+		$wc_checkout_instance=WC()->checkout();
+		remove_action( 'woocommerce_checkout_billing', [ $wc_checkout_instance, 'checkout_form_billing' ] );
+		remove_action( 'woocommerce_checkout_shipping', [ $wc_checkout_instance, 'checkout_form_shipping' ] );
+
+		add_action( 'woocommerce_checkout_billing', [ $this, 'ea_checkout_form_billing' ], 10);
+		add_action( 'woocommerce_checkout_shipping', [ $this, 'ea_checkout_form_shipping' ], 10 );
+
+		remove_action( 'woocommerce_checkout_order_review', 'woocommerce_order_review', 10 );
+		remove_action( 'woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20 );
+		add_action( 'woocommerce_checkout_order_review', [ $this, 'ea_checkout_payment' ], 20 );
 	}
 
 }

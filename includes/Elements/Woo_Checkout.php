@@ -148,6 +148,15 @@ class Woo_Checkout extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'ea_woo_checkout_order_details_title',
+			[
+				'label' => __( 'Text', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Your Order', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
 		// Table Header
 		$this->add_control(
 			'ea_woo_checkout_table_header_text',
@@ -189,6 +198,30 @@ class Woo_Checkout extends Widget_Base {
 				'condition' => [
 					'ea_woo_checkout_table_header_text' => 'yes',
 				],
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_table_subtotal_text',
+			[
+				'label' => __( 'Subtotal Text', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Subtotal', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_table_shipping_text',
+			[
+				'label' => __( 'Shipping Text', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Shipping', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_table_total_text',
+			[
+				'label' => __( 'Total Text', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Total', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
@@ -238,6 +271,22 @@ class Woo_Checkout extends Widget_Base {
 				],
 			]
 		);
+		$this->add_control(
+			'ea_woo_checkout_coupon_title',
+			[
+				'label' => __( 'Title', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Have a coupon?', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_coupon_link_text',
+			[
+				'label' => __( 'Link Text', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Click here to enter your code', 'essential-addons-for-elementor-lite' ),
+			]
+		);
 		$this->end_controls_section();
 
 		/**
@@ -272,6 +321,88 @@ class Woo_Checkout extends Widget_Base {
 					'value' => 'fas fa-user',
 					'library' => 'fa-solid',
 				],
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_login_title',
+			[
+				'label' => __( 'Title', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Returning customer?', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_login_link_text',
+			[
+				'label' => __( 'Link Text', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Click here to login', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+		$this->end_controls_section();
+
+		/**
+		 * -------------------------------------------
+		 * Customer Details Settings
+		 * -------------------------------------------
+		 */
+		$this->start_controls_section(
+			'ea_section_woo_customer_details_settings',
+			[
+				'label' => esc_html__( 'Customer Details', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_billing_title',
+			[
+				'label' => __( 'Billing Title', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Billing Details', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_shipping_title',
+			[
+				'label' => __( 'Shipping Title', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Ship to a different address?', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_additional_info_title',
+			[
+				'label' => __( 'Additional Info Title', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Additional Information', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+		$this->end_controls_section();
+
+		/**
+		 * -------------------------------------------
+		 * Payment Settings
+		 * -------------------------------------------
+		 */
+		$this->start_controls_section(
+			'ea_section_woo_payment_settings',
+			[
+				'label' => esc_html__( 'Payment', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_payment_title',
+			[
+				'label' => __( 'Title', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Payment Methods', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_place_order_text',
+			[
+				'label' => __( 'Button text', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Place Order', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 		$this->end_controls_section();
