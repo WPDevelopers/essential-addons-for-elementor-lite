@@ -202,13 +202,12 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'hide_for_logged_in_user', [
 			'label' => __( 'Hide all Forms from Logged-in Users', EAEL_TEXTDOMAIN ),
-			//'description' => __( 'You can hide the form for already logged in user.', EAEL_TEXTDOMAIN ),
 			'type'  => Controls_Manager::SWITCHER,
+			'default'   => 'yes',
 		] );
 
 		$this->add_control( 'show_login_link', [
 			'label'     => __( 'Show Login Link', EAEL_TEXTDOMAIN ),
-			//'description' => __( 'You can add a "Login" Link below the registration form', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::SWITCHER,
 			'default'   => 'yes',
 			'condition' => [
@@ -223,7 +222,7 @@ class Login_Register extends Widget_Base {
 			'dynamic'     => [
 				'active' => true,
 			],
-			'default'     => __( "Already have an Account? \n Sign In", EAEL_TEXTDOMAIN ),
+			'default'     => __( "Already have an Account? \nign In", EAEL_TEXTDOMAIN ),
 			'condition'   => [
 				'show_login_link'   => 'yes',
 				'default_form_type' => 'register',
@@ -272,7 +271,7 @@ class Login_Register extends Widget_Base {
 
 		/*--show registration related control only if registration is enable on the site--*/
 		if ( $this->user_can_register ) {
-			$this->add_control( 'show_registration_link', [
+			$this->add_control( 'show_register_link', [
 				'label'     => __( 'Show Register Link', EAEL_TEXTDOMAIN ),
 				//'description' => __( 'You can add a "Register" Link below the login form', EAEL_TEXTDOMAIN ),
 				'type'      => Controls_Manager::SWITCHER,
@@ -290,9 +289,9 @@ class Login_Register extends Widget_Base {
 				'dynamic'     => [
 					'active' => true,
 				],
-				'default'     => __( "Don't have an Account? \n Register Now", EAEL_TEXTDOMAIN ),
+				'default'     => __( "Don't have an Account? \nRegister Now", EAEL_TEXTDOMAIN ),
 				'condition'   => [
-					'show_registration_link' => 'yes',
+					'show_register_link' => 'yes',
 					'default_form_type'      => 'login',
 				],
 			] );
@@ -307,7 +306,7 @@ class Login_Register extends Widget_Base {
 				],
 				'default'   => 'default',
 				'condition' => [
-					'show_registration_link' => 'yes',
+					'show_register_link' => 'yes',
 					'default_form_type'      => 'login',
 				],
 			] );
@@ -320,7 +319,7 @@ class Login_Register extends Widget_Base {
 				],
 				'condition' => [
 					'registration_link_action' => 'custom',
-					'show_registration_link'   => 'yes',
+					'show_register_link'   => 'yes',
 				],
 			] );
 		}
@@ -658,7 +657,7 @@ class Login_Register extends Widget_Base {
 			'label_block' => true,
 			'placeholder' => __( 'I Accept the Terms and Conditions.', EAEL_TEXTDOMAIN ),
 			/* translators: \n means new line. So, Don't translate this*/
-			'default'     => __( "I Accept \n the Terms and Conditions.", EAEL_TEXTDOMAIN ),
+			'default'     => __( "I Accept\n the Terms and Conditions.", EAEL_TEXTDOMAIN ),
 			'condition'   => [
 				'show_terms_conditions' => 'yes',
 			],
@@ -919,7 +918,7 @@ class Login_Register extends Widget_Base {
 				'relation' => 'or',
 				'terms'    => [
 					[
-						'name'  => 'show_registration_link',
+						'name'  => 'show_register_link',
 						'value' => 'yes',
 						//@TODO; debug why multi-level condition is not working.
 						//'relation' => 'and',
@@ -1025,7 +1024,7 @@ class Login_Register extends Widget_Base {
 				'relation' => 'or',
 				'terms'    => [
 					[
-						'name'  => 'show_registration_link',
+						'name'  => 'show_register_link',
 						'value' => 'yes',
 						//@TODO; debug why multi-level condition is not working.
 						//'relation' => 'and',
@@ -1346,7 +1345,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$button_type}-form button" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
 		$this->add_control( "{$button_type}_btn_padding", [
@@ -1358,7 +1357,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$button_type}-form button" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
 
@@ -1372,7 +1371,7 @@ class Login_Register extends Widget_Base {
 			'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .eael-{$button_type}-form button" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_group_control( Group_Control_Background::get_type(), [
@@ -1382,11 +1381,11 @@ class Login_Register extends Widget_Base {
 				'classic',
 				'gradient',
 			],
-			'selector' => "{{WRAPPER}} .eael-{$button_type}-form button",
+			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn",
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "{$button_type}_btn_border",
-			'selector' => "{{WRAPPER}} .eael-{$button_type}-form button",
+			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn",
 		] );
 		$this->add_control( "{$button_type}_btn_border_radius", [
 			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
@@ -1396,7 +1395,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$button_type}-form button" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
 		$this->end_controls_tab();
@@ -1409,7 +1408,7 @@ class Login_Register extends Widget_Base {
 			'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .eael-{$button_type}-form button:hover" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_group_control( Group_Control_Background::get_type(), [
@@ -1419,11 +1418,11 @@ class Login_Register extends Widget_Base {
 				'classic',
 				'gradient',
 			],
-			'selector' => "{{WRAPPER}} .eael-{$button_type}-form button",
+			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn",
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "{$button_type}_btn_border_hover",
-			'selector' => "{{WRAPPER}} .eael-{$button_type}-form button:hover",
+			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover",
 		] );
 		$this->add_control( "{$button_type}_btn_border_radius_hover", [
 			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
@@ -1433,7 +1432,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$button_type}-form:hover button" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$button_type}-form:hover .eael-lr-btn" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
 		$this->add_control( "{$button_type}_btn_hover_animation", [
@@ -1442,12 +1441,12 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
-		/*-----ends button tabs--------*/
+		/*-----ends Button tabs--------*/
 
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => "{$button_type}_btn_typography",
-			'selector' => "{{WRAPPER}} .eael-{$button_type}-form button",
+			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn",
 		] );
 		$this->add_responsive_control( "{$button_type}_btn_align", [
 			'label'        => __( 'Alignment', EAEL_TEXTDOMAIN ),
@@ -1494,7 +1493,7 @@ class Login_Register extends Widget_Base {
 				],
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$button_type}-form button" => 'width: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'width: {{SIZE}}{{UNIT}};',
 			],
 		] );
 		$this->add_responsive_control( "{$button_type}_btn_height", [
@@ -1516,7 +1515,7 @@ class Login_Register extends Widget_Base {
 				],
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$button_type}-form button" => 'height: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'height: {{SIZE}}{{UNIT}};',
 			],
 		] );
 
@@ -1562,7 +1561,7 @@ class Login_Register extends Widget_Base {
 		//error_log( print_r( $this->ds, 1));
 		$this->should_print_login_form = ( 'login' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_login_link' ) );
 
-		$this->should_print_register_form = ( $this->user_can_register && ( 'register' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_registration_link' ) ) );
+		$this->should_print_register_form = ( $this->user_can_register && ( 'register' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_register_link' ) ) );
 		if ( Plugin::$instance->documents->get_current() ) {
 			$this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
 		}
@@ -1588,7 +1587,7 @@ class Login_Register extends Widget_Base {
 			// prepare all login form related vars
 			//Reg link related
 			$reg_link_action = ! empty( $this->ds['registration_link_action'] ) ? $this->ds['registration_link_action'] : 'form';
-			$show_reg_link   = ( $this->user_can_register && ( ! empty( $this->ds['show_registration_link'] ) && 'yes' === $this->ds['show_registration_link'] ) );
+			$show_reg_link   = ( $this->user_can_register && ( ! empty( $this->ds['show_register_link'] ) && 'yes' === $this->ds['show_register_link'] ) );
 			$reg_link_text   = ! empty( $this->ds['registration_link_text'] ) ? $this->ds['registration_link_text'] : __( 'Register', EAEL_TEXTDOMAIN );
 			$parts           = explode( "\n", $reg_link_text );
 			$reg_link_text   = array_pop( $parts );
