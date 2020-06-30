@@ -222,7 +222,7 @@ class Login_Register extends Widget_Base {
 			'dynamic'     => [
 				'active' => true,
 			],
-			'default'     => __( "Already have an Account? \nign In", EAEL_TEXTDOMAIN ),
+			'default'     => __( "Already have an Account? \nSign In", EAEL_TEXTDOMAIN ),
 			'condition'   => [
 				'show_login_link'   => 'yes',
 				'default_form_type' => 'register',
@@ -1587,7 +1587,7 @@ class Login_Register extends Widget_Base {
 			// prepare all login form related vars
 			//Reg link related
 			$reg_link_action = ! empty( $this->ds['registration_link_action'] ) ? $this->ds['registration_link_action'] : 'form';
-			$show_reg_link   = ( $this->user_can_register && ( ! empty( $this->ds['show_register_link'] ) && 'yes' === $this->ds['show_register_link'] ) );
+			$show_reg_link   = ( $this->user_can_register && 'yes' === $this->get_settings('show_register_link') );
 			$reg_link_text   = ! empty( $this->ds['registration_link_text'] ) ? $this->ds['registration_link_text'] : __( 'Register', EAEL_TEXTDOMAIN );
 			$parts           = explode( "\n", $reg_link_text );
 			$reg_link_text   = array_pop( $parts );
@@ -1625,7 +1625,7 @@ class Login_Register extends Widget_Base {
 				$lp_link = sprintf( '<a href="%s" %s >%s</a>', esc_attr( $lp_url ), $lp_atts, $lp_text );
 			}
 			?>
-            <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2">
+            <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2" id="eael-login-form-wrapper">
 				<?php
 				if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor ) {
 					/* translators: %s user display name */
@@ -1715,7 +1715,7 @@ class Login_Register extends Widget_Base {
 
 			//Login link related
 			$lgn_link_action = ! empty( $this->ds['login_link_action'] ) ? $this->ds['login_link_action'] : 'form';
-			$show_lgn_link   = ( $this->user_can_register && ( ! empty( $this->ds['show_login_link'] ) && 'yes' === $this->ds['show_login_link'] ) );
+			$show_lgn_link   = 'yes' === $this->get_settings('show_login_link');
 			$lgn_link_text   = ! empty( $this->ds['login_link_text'] ) ? $this->ds['login_link_text'] : __( 'Login', EAEL_TEXTDOMAIN );
 			$parts           = explode( "\n", $lgn_link_text );
 			$lgn_link_text   = array_pop( $parts );
@@ -1732,7 +1732,7 @@ class Login_Register extends Widget_Base {
 			ob_start();
 			?>
 
-            <div class="eael-register-form-wrapper eael-lr-form-wrapper style-2">
+            <div class="eael-register-form-wrapper eael-lr-form-wrapper style-2" id="eael-register-form-wrapper">
 				<?php $this->print_form_illustration(); ?>
                 <div class="lr-form-wrapper">
 					<?php $this->print_form_header( 'register' ); ?>
