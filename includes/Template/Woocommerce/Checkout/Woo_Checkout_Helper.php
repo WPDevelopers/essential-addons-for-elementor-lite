@@ -496,6 +496,8 @@ trait Woo_Checkout_Helper {
 						<div><?php echo $settings['ea_woo_checkout_table_total_text']; ?></div>
 						<div><?php wc_cart_totals_order_total_html(); ?></div>
 					</div>
+
+					<?php do_action( 'woocommerce_review_order_after_order_total' ); ?>
 				</div>
 			</div>
 		</div>
