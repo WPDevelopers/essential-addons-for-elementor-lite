@@ -838,6 +838,13 @@ $config = [
 				        'type'    => 'self',
 				        'context' => 'view',
 			        ],
+			        'js'  => [
+				        [
+					        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/login-register.min.js',
+					        'type'    => 'self',
+					        'context' => 'view',
+				        ],
+			        ],
 		        ],
 	        ],
             //@TODO; add dependency later
