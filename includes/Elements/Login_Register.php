@@ -195,7 +195,7 @@ class Login_Register extends Widget_Base {
 			'type'    => Controls_Manager::SELECT,
 			'options' => [
 				'login'        => __( 'Login', EAEL_TEXTDOMAIN ),
-				'registration' => __( 'Registration', EAEL_TEXTDOMAIN ),
+				'register' => __( 'Registration', EAEL_TEXTDOMAIN ),
 			],
 			'default' => 'login',
 		] );
@@ -212,7 +212,7 @@ class Login_Register extends Widget_Base {
 			'type'      => Controls_Manager::SWITCHER,
 			'default'   => 'yes',
 			'condition' => [
-				'default_form_type' => 'registration',
+				'default_form_type' => 'register',
 			],
 		] );
 		$this->add_control( 'login_link_text', [
@@ -226,7 +226,7 @@ class Login_Register extends Widget_Base {
 			'default'     => __( "Already have an Account? \n Sign In", EAEL_TEXTDOMAIN ),
 			'condition'   => [
 				'show_login_link'   => 'yes',
-				'default_form_type' => 'registration',
+				'default_form_type' => 'register',
 			],
 		] );
 
@@ -264,7 +264,7 @@ class Login_Register extends Widget_Base {
 				'raw'             => sprintf( __( 'Registration is disabled on your site. Please enable it to use registration form. You can enable it from Dashboard » Settings » General » %1$sMembership%2$s.', EAEL_TEXTDOMAIN ), '<a href="' . esc_attr( esc_url( admin_url( 'options-general.php' ) ) ) . '" target="_blank">', '</a>' ),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
 				'condition'       => [
-					'default_form_type' => 'registration',
+					'default_form_type' => 'register',
 				],
 			] );
 		}
@@ -341,7 +341,7 @@ class Login_Register extends Widget_Base {
 			'label'      => __( 'Show Lost your password?', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::SWITCHER,
 			'default'    => 'yes',
-			'conditions' => $this->get_login_controls_display_condition(),
+			'conditions' => $this->get_form_controls_display_condition('login'),
 		] );
 
 
@@ -391,7 +391,7 @@ class Login_Register extends Widget_Base {
 	protected function init_content_login_fields_controls() {
 		$this->start_controls_section( 'section_content_login_fields', [
 			'label'      => __( 'Login Form Fields', EAEL_TEXTDOMAIN ),
-			'conditions' => $this->get_login_controls_display_condition(),
+			'conditions' => $this->get_form_controls_display_condition('login'),
 		] );
 
 		$this->add_control( 'login_label_types', [
@@ -590,7 +590,7 @@ class Login_Register extends Widget_Base {
 
 		$this->start_controls_section( 'section_content_login_options', [
 			'label'      => __( 'Login Form Options', EAEL_TEXTDOMAIN ),
-			'conditions' => $this->get_login_controls_display_condition(),
+			'conditions' => $this->get_form_controls_display_condition('login'),
 		] );
 
 		$this->add_control( 'redirect_after_login', [
@@ -638,7 +638,7 @@ class Login_Register extends Widget_Base {
 	protected function init_content_terms_controls() {
 		$this->start_controls_section( 'section_content_terms_conditions', [
 			'label'      => __( 'Terms & Conditions', EAEL_TEXTDOMAIN ),
-			'conditions' => $this->get_register_controls_display_condition(),
+			'conditions' => $this->get_form_controls_display_condition('register'),
 		] );
 
 		$this->add_control( 'show_terms_conditions', [
@@ -729,7 +729,7 @@ class Login_Register extends Widget_Base {
 
 		$this->start_controls_section( 'section_content_register_fields', [
 			'label'      => __( 'Register Form Fields', EAEL_TEXTDOMAIN ),
-			'conditions' => $this->get_register_controls_display_condition(),
+			'conditions' => $this->get_form_controls_display_condition('register'),
 		] );
 		$this->add_control( 'register_form_field_note', [
 			'type'            => Controls_Manager::RAW_HTML,
@@ -857,7 +857,7 @@ class Login_Register extends Widget_Base {
 
 		$this->start_controls_section( 'section_content_register_actions', [
 			'label'      => __( 'Register Form Options', EAEL_TEXTDOMAIN ),
-			'conditions' => $this->get_register_controls_display_condition(),
+			'conditions' => $this->get_form_controls_display_condition('register'),
 		] );
 
 		$this->add_control( 'register_action', [
@@ -933,7 +933,7 @@ class Login_Register extends Widget_Base {
 					],
 					[
 						'name'  => 'default_form_type',
-						'value' => 'registration',
+						'value' => 'register',
 						//'relation' => 'and',
 						//'terms'    => [
 						//	[
@@ -1039,7 +1039,7 @@ class Login_Register extends Widget_Base {
 					],
 					[
 						'name'  => 'default_form_type',
-						'value' => 'registration',
+						'value' => 'register',
 						//'relation' => 'and',
 						//'terms'    => [
 						//	[
@@ -1120,7 +1120,7 @@ class Login_Register extends Widget_Base {
 		$this->start_controls_section( 'section_content_reg_validation', [
 			'label'      => __( 'Register Validation Messages', EAEL_TEXTDOMAIN ),
 			'tab'        => Controls_Manager::TAB_CONTENT,
-			'conditions' => $this->get_register_controls_display_condition(),
+			'conditions' => $this->get_form_controls_display_condition('register'),
 		] );
 
 		$this->add_control( 'reg_success_message', [
@@ -1335,6 +1335,7 @@ class Login_Register extends Widget_Base {
 		$this->start_controls_section( "section_style_{$button_type}_btn", [
 			'label' => sprintf( __( '%s Button', EAEL_TEXTDOMAIN ), ucfirst( $button_type ) ),
 			'tab'   => Controls_Manager::TAB_STYLE,
+            'conditions' => $this->get_form_controls_display_condition($button_type),
 		] );
 		$this->add_control( "{$button_type}_btn_margin", [
 			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
@@ -1523,68 +1524,33 @@ class Login_Register extends Widget_Base {
 	}
 
 	/**
-	 * Get conditions for displaying login form related controls
+	 * Get conditions for displaying login form and registration
+	 *
+	 * @param string $type
+	 *
 	 * @return array
 	 */
-	protected function get_login_controls_display_condition() {
+	protected function get_form_controls_display_condition( $type = 'login' ) {
+		$form_type = in_array( $type, [
+			'login',
+			'register',
+		] ) ? $type : 'login';
+
 		return [
 			'relation' => 'or',
 			'terms'    => [
 				[
-					'name'  => 'show_login_link',
+					'name'  => "show_{$form_type}_link",
 					'value' => 'yes',
 				],
 				[
 					'name'  => 'default_form_type',
-					'value' => 'login',
+					'value' => $form_type,
 				],
 			],
 		];
 	}
 
-	/**
-	 * Get conditions for displaying login form footer related controls
-	 * @return array
-	 */
-	protected function get_login_footer_controls_display_condition() {
-		return [
-			[
-				'name'     => 'show_lost_password',
-				'operator' => '==',
-				'value'    => 'yes',
-			],
-			[
-				'name'     => 'show_registration_link',
-				'operator' => '==',
-				'value'    => 'yes',
-			],
-			[
-				'name'     => 'show_login_link',
-				'operator' => '==',
-				'value'    => 'yes',
-			],
-		];
-	}
-
-	/**
-	 * Get conditions for displaying registration form related controls
-	 * @return array
-	 */
-	protected function get_register_controls_display_condition() {
-		return [
-			'relation' => 'or',
-			'terms'    => [
-				[
-					'name'  => 'show_registration_link',
-					'value' => 'yes',
-				],
-				[
-					'name'  => 'default_form_type',
-					'value' => 'registration',
-				],
-			],
-		];
-	}
 
 	protected function render() {
 		//Note. forms are handled in Login_Registration Trait used in the Bootstrap class.
@@ -1596,7 +1562,7 @@ class Login_Register extends Widget_Base {
 		//error_log( print_r( $this->ds, 1));
 		$this->should_print_login_form = ( 'login' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_login_link' ) );
 
-		$this->should_print_register_form = ( $this->user_can_register && ( 'registration' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_registration_link' ) ) );
+		$this->should_print_register_form = ( $this->user_can_register && ( 'register' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_registration_link' ) ) );
 		if ( Plugin::$instance->documents->get_current() ) {
 			$this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
 		}
@@ -1876,8 +1842,7 @@ class Login_Register extends Widget_Base {
 						$this->print_necessary_hidden_fields( 'register' );
 						$this->print_terms_condition_notice();
 						?>
-                        <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn
-                    eael-lr-btn-inline" value="Register"/>
+                        <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn eael-lr-btn-inline" value="Register"/>
 
 						<?php if ( $show_lgn_link ) { ?>
                             <div class="eael-sign-wrapper">
@@ -1985,7 +1950,7 @@ class Login_Register extends Widget_Base {
         <input type="checkbox" name="eael_accept_tnc" value="1" id="eael_accept_tnc">
         <label for="eael_accept_tnc">
 			<?php
-			    echo esc_html( $label );
+			echo esc_html( $label );
 			?>
         </label>
 		<?php
@@ -2080,7 +2045,7 @@ class Login_Register extends Widget_Base {
 			<?php
 			delete_transient( 'eael_register_errors' );
 
-			return true; // it will help in case we wanna if error is printed.
+			return true; // it will help in case we wanna know if error is printed.
 		}
 
 		return false;
