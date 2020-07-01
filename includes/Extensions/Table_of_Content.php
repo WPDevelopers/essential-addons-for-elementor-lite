@@ -10,6 +10,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Scheme_Typography as Scheme_Typography;
+use Essential_Addons_Elementor\Traits\Shared;
 
 class Table_of_Content
 {
@@ -21,6 +22,10 @@ class Table_of_Content
 
     public function register_controls($element)
     {
+        if(Shared::is_prevent_load_extension(get_the_ID())){
+            return false;
+        }
+
         $global_settings = get_option('eael_global_settings');
 
         $element->start_controls_section(
