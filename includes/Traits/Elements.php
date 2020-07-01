@@ -300,10 +300,6 @@ trait Elements
      */
     public function render_global_html()
     {
-        if(Shared::is_prevent_load_extinsion(get_the_ID())){
-            return false;
-        }
-
         if (is_singular() && did_action('elementor/loaded')) {
             $page_settings_manager = Settings_Manager::get_settings_managers('page');
             $page_settings_model = $page_settings_manager->get_model(get_the_ID());
