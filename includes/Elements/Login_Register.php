@@ -686,27 +686,18 @@ class Login_Register extends Widget_Base {
 				'acceptance_text_source' => 'editor',
 			],
 		] );
-		$this->add_control( 'show_terms_in_modal', [
-			'label'        => __( 'Show Content in a Modal', EAEL_TEXTDOMAIN ),
-			'type'         => Controls_Manager::SWITCHER,
-			'label_on'     => __( 'Yes', EAEL_TEXTDOMAIN ),
-			'label_off'    => __( 'No', EAEL_TEXTDOMAIN ),
-			'default'      => 'yes',
-			'return_value' => 'yes',
-			'condition'    => [
-				'show_terms_conditions'  => 'yes',
-				'acceptance_text_source' => 'editor',
-			],
-		] );
-		$this->add_control( 'term_btn_text', [
-			'label'       => __( 'T&C Button Text', EAEL_TEXTDOMAIN ),
-			'type'        => Controls_Manager::TEXT,
-			'label_block' => true,
-			'default'     => __( 'the Terms & Conditions', EAEL_TEXTDOMAIN ),
-			'condition'   => [
-				'show_terms_conditions' => 'yes',
-			],
-		] );
+		//$this->add_control( 'show_terms_in_modal', [
+		//	'label'        => __( 'Show Content in a Modal', EAEL_TEXTDOMAIN ),
+		//	'type'         => Controls_Manager::SWITCHER,
+		//	'label_on'     => __( 'Yes', EAEL_TEXTDOMAIN ),
+		//	'label_off'    => __( 'No', EAEL_TEXTDOMAIN ),
+		//	'default'      => 'yes',
+		//	'return_value' => 'yes',
+		//	'condition'    => [
+		//		'show_terms_conditions'  => 'yes',
+		//		'acceptance_text_source' => 'editor',
+		//	],
+		//] );
 
 		$this->add_control( 'acceptance_text_url', [
 			'label'       => __( 'Custom T&C URL', EAEL_TEXTDOMAIN ),
@@ -1946,6 +1937,7 @@ class Login_Register extends Widget_Base {
 		}
 
 		?>
+        <input type="hidden" name="eael_tnc_active" value="1">
         <input type="checkbox" name="eael_accept_tnc" value="1" id="eael_accept_tnc">
         <label for="eael_accept_tnc">
 			<?php
