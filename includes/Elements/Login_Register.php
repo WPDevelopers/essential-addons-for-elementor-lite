@@ -194,16 +194,16 @@ class Login_Register extends Widget_Base {
 			//'description' => __( 'Choose the type of form you want to show by default. Note: you can show both form in a single page even if you select only login or registration from below.', EAEL_TEXTDOMAIN ),
 			'type'    => Controls_Manager::SELECT,
 			'options' => [
-				'login'        => __( 'Login', EAEL_TEXTDOMAIN ),
+				'login'    => __( 'Login', EAEL_TEXTDOMAIN ),
 				'register' => __( 'Registration', EAEL_TEXTDOMAIN ),
 			],
 			'default' => 'login',
 		] );
 
 		$this->add_control( 'hide_for_logged_in_user', [
-			'label' => __( 'Hide all Forms from Logged-in Users', EAEL_TEXTDOMAIN ),
-			'type'  => Controls_Manager::SWITCHER,
-			'default'   => 'yes',
+			'label'   => __( 'Hide all Forms from Logged-in Users', EAEL_TEXTDOMAIN ),
+			'type'    => Controls_Manager::SWITCHER,
+			'default' => 'yes',
 		] );
 
 		$this->add_control( 'show_login_link', [
@@ -292,7 +292,7 @@ class Login_Register extends Widget_Base {
 				'default'     => __( "Don't have an Account? \nRegister Now", EAEL_TEXTDOMAIN ),
 				'condition'   => [
 					'show_register_link' => 'yes',
-					'default_form_type'      => 'login',
+					'default_form_type'  => 'login',
 				],
 			] );
 
@@ -307,7 +307,7 @@ class Login_Register extends Widget_Base {
 				'default'   => 'default',
 				'condition' => [
 					'show_register_link' => 'yes',
-					'default_form_type'      => 'login',
+					'default_form_type'  => 'login',
 				],
 			] );
 
@@ -319,7 +319,7 @@ class Login_Register extends Widget_Base {
 				],
 				'condition' => [
 					'registration_link_action' => 'custom',
-					'show_register_link'   => 'yes',
+					'show_register_link'       => 'yes',
 				],
 			] );
 		}
@@ -340,7 +340,7 @@ class Login_Register extends Widget_Base {
 			'label'      => __( 'Show Lost your password?', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::SWITCHER,
 			'default'    => 'yes',
-			'conditions' => $this->get_form_controls_display_condition('login'),
+			'conditions' => $this->get_form_controls_display_condition( 'login' ),
 		] );
 
 
@@ -390,7 +390,7 @@ class Login_Register extends Widget_Base {
 	protected function init_content_login_fields_controls() {
 		$this->start_controls_section( 'section_content_login_fields', [
 			'label'      => __( 'Login Form Fields', EAEL_TEXTDOMAIN ),
-			'conditions' => $this->get_form_controls_display_condition('login'),
+			'conditions' => $this->get_form_controls_display_condition( 'login' ),
 		] );
 
 		$this->add_control( 'login_label_types', [
@@ -589,7 +589,7 @@ class Login_Register extends Widget_Base {
 
 		$this->start_controls_section( 'section_content_login_options', [
 			'label'      => __( 'Login Form Options', EAEL_TEXTDOMAIN ),
-			'conditions' => $this->get_form_controls_display_condition('login'),
+			'conditions' => $this->get_form_controls_display_condition( 'login' ),
 		] );
 
 		$this->add_control( 'redirect_after_login', [
@@ -637,7 +637,7 @@ class Login_Register extends Widget_Base {
 	protected function init_content_terms_controls() {
 		$this->start_controls_section( 'section_content_terms_conditions', [
 			'label'      => __( 'Terms & Conditions', EAEL_TEXTDOMAIN ),
-			'conditions' => $this->get_form_controls_display_condition('register'),
+			'conditions' => $this->get_form_controls_display_condition( 'register' ),
 		] );
 
 		$this->add_control( 'show_terms_conditions', [
@@ -670,7 +670,7 @@ class Login_Register extends Widget_Base {
 				'editor' => __( 'Editor', EAEL_TEXTDOMAIN ),
 				'custom' => __( 'Custom', EAEL_TEXTDOMAIN ),
 			],
-			'default'   => 'editor',
+			'default'   => 'custom',
 			'condition' => [
 				'show_terms_conditions' => 'yes',
 			],
@@ -700,11 +700,16 @@ class Login_Register extends Widget_Base {
 		//] );
 
 		$this->add_control( 'acceptance_text_url', [
-			'label'       => __( 'Custom T&C URL', EAEL_TEXTDOMAIN ),
+			'label'       => __( 'Terms & Conditions URL', EAEL_TEXTDOMAIN ),
 			'description' => __( 'Enter the link where your terms & condition or privacy policy is found.', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::URL,
 			'dynamic'     => [
 				'active' => true,
+			],
+			'default' => [
+				'url' => get_the_permalink(get_option('wp_page_for_privacy_policy')),
+				'is_external' => true,
+				'nofollow' => true,
 			],
 			'condition'   => [
 				'show_terms_conditions'  => 'yes',
@@ -719,7 +724,7 @@ class Login_Register extends Widget_Base {
 
 		$this->start_controls_section( 'section_content_register_fields', [
 			'label'      => __( 'Register Form Fields', EAEL_TEXTDOMAIN ),
-			'conditions' => $this->get_form_controls_display_condition('register'),
+			'conditions' => $this->get_form_controls_display_condition( 'register' ),
 		] );
 		$this->add_control( 'register_form_field_note', [
 			'type'            => Controls_Manager::RAW_HTML,
@@ -847,7 +852,7 @@ class Login_Register extends Widget_Base {
 
 		$this->start_controls_section( 'section_content_register_actions', [
 			'label'      => __( 'Register Form Options', EAEL_TEXTDOMAIN ),
-			'conditions' => $this->get_form_controls_display_condition('register'),
+			'conditions' => $this->get_form_controls_display_condition( 'register' ),
 		] );
 
 		$this->add_control( 'register_action', [
@@ -1110,7 +1115,7 @@ class Login_Register extends Widget_Base {
 		$this->start_controls_section( 'section_content_reg_validation', [
 			'label'      => __( 'Register Validation Messages', EAEL_TEXTDOMAIN ),
 			'tab'        => Controls_Manager::TAB_CONTENT,
-			'conditions' => $this->get_form_controls_display_condition('register'),
+			'conditions' => $this->get_form_controls_display_condition( 'register' ),
 		] );
 
 		$this->add_control( 'reg_success_message', [
@@ -1323,9 +1328,9 @@ class Login_Register extends Widget_Base {
 	 */
 	protected function _init_button_style( $button_type = 'login' ) {
 		$this->start_controls_section( "section_style_{$button_type}_btn", [
-			'label' => sprintf( __( '%s Button', EAEL_TEXTDOMAIN ), ucfirst( $button_type ) ),
-			'tab'   => Controls_Manager::TAB_STYLE,
-            'conditions' => $this->get_form_controls_display_condition($button_type),
+			'label'      => sprintf( __( '%s Button', EAEL_TEXTDOMAIN ), ucfirst( $button_type ) ),
+			'tab'        => Controls_Manager::TAB_STYLE,
+			'conditions' => $this->get_form_controls_display_condition( $button_type ),
 		] );
 		$this->add_control( "{$button_type}_btn_margin", [
 			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
@@ -1578,7 +1583,7 @@ class Login_Register extends Widget_Base {
 			// prepare all login form related vars
 			//Reg link related
 			$reg_link_action = ! empty( $this->ds['registration_link_action'] ) ? $this->ds['registration_link_action'] : 'form';
-			$show_reg_link   = ( $this->user_can_register && 'yes' === $this->get_settings('show_register_link') );
+			$show_reg_link   = ( $this->user_can_register && 'yes' === $this->get_settings( 'show_register_link' ) );
 			$reg_link_text   = ! empty( $this->ds['registration_link_text'] ) ? $this->ds['registration_link_text'] : __( 'Register', EAEL_TEXTDOMAIN );
 			$parts           = explode( "\n", $reg_link_text );
 			$reg_link_text   = array_pop( $parts );
@@ -1706,7 +1711,7 @@ class Login_Register extends Widget_Base {
 
 			//Login link related
 			$lgn_link_action = ! empty( $this->ds['login_link_action'] ) ? $this->ds['login_link_action'] : 'form';
-			$show_lgn_link   = 'yes' === $this->get_settings('show_login_link');
+			$show_lgn_link   = 'yes' === $this->get_settings( 'show_login_link' );
 			$lgn_link_text   = ! empty( $this->ds['login_link_text'] ) ? $this->ds['login_link_text'] : __( 'Login', EAEL_TEXTDOMAIN );
 			$parts           = explode( "\n", $lgn_link_text );
 			$lgn_link_text   = array_pop( $parts );
@@ -1930,7 +1935,7 @@ class Login_Register extends Widget_Base {
 		$show_in_modal = isset( $this->ds['show_terms_in_modal'] ) && 'yes' === $this->ds['show_terms_in_modal'];
 		$tc_link       = '<a href="#" id="eael-lr-tnc-link">' . esc_html( $link_text ) . '</a>';
 		if ( 'custom' === $source ) {
-			$tc_url  = ! empty( $this->ds['acceptance_text_url']['url'] ) ? esc_url( $this->ds['acceptance_text_url']['url'] ) : wp_login_url();
+			$tc_url  = ! empty( $this->ds['acceptance_text_url']['url'] ) ? esc_url( $this->ds['acceptance_text_url']['url'] ) : esc_url( get_the_permalink( get_option( 'wp_page_for_privacy_policy' ) ) );
 			$tc_atts = ! empty( $this->ds['acceptance_text_url']['is_external'] ) ? ' target="_blank"' : '';
 			$tc_atts .= ! empty( $this->ds['acceptance_text_url']['nofollow'] ) ? ' rel="nofollow"' : '';
 			$tc_link = sprintf( '<a href="%1$s" id="eael-lr-tnc-link" %2$s>%3$s</a>', esc_attr( $tc_url ), $tc_atts, $link_text );
