@@ -1211,7 +1211,7 @@ class Event_Calendar extends Widget_Base {
             [
                 'name'     => 'eael_event_typography',
                 'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .fc-content span.fc-title,{{WRAPPER}} .eael-event-calendar-wrapper .fc-list-table .fc-list-item td',
+                'selector' => '{{WRAPPER}} .fc-content .fc-title,{{WRAPPER}} .fc-content .fc-time,{{WRAPPER}} .eael-event-calendar-wrapper .fc-list-table .fc-list-item td',
             ]
         );
 
@@ -1315,6 +1315,44 @@ class Event_Calendar extends Widget_Base {
                 'selectors' => [
                     '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-start' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-end'   => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_date_icon',
+            [
+                'label'     => __('Date Icon', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_date_icon_size',
+            [
+                'label'      => __('Icon Size', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-start i' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_date_icon_color',
+            [
+                'label'     => __('Icon Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-start i' => 'color: {{VALUE}};',
                 ],
             ]
         );
