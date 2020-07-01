@@ -1584,7 +1584,7 @@ class Login_Register extends Widget_Base {
 			//Reg link related
 			$reg_link_action = ! empty( $this->ds['registration_link_action'] ) ? $this->ds['registration_link_action'] : 'form';
 			$show_reg_link   = ( $this->user_can_register && 'yes' === $this->get_settings( 'show_register_link' ) );
-			$reg_link_text   = ! empty( $this->ds['registration_link_text'] ) ? $this->ds['registration_link_text'] : __( 'Register', EAEL_TEXTDOMAIN );
+			$reg_link_text   = ! empty( $this->get_settings('registration_link_text') ) ? $this->get_settings('registration_link_text') : __( 'Register', EAEL_TEXTDOMAIN );
 			$parts           = explode( "\n", $reg_link_text );
 			$reg_link_text   = array_pop( $parts );
 			$reg_message     = array_shift( $parts );
@@ -1712,7 +1712,7 @@ class Login_Register extends Widget_Base {
 			//Login link related
 			$lgn_link_action = ! empty( $this->ds['login_link_action'] ) ? $this->ds['login_link_action'] : 'form';
 			$show_lgn_link   = 'yes' === $this->get_settings( 'show_login_link' );
-			$lgn_link_text   = ! empty( $this->ds['login_link_text'] ) ? $this->ds['login_link_text'] : __( 'Login', EAEL_TEXTDOMAIN );
+			$lgn_link_text   = ! empty( $this->get_settings('login_link_text') ) ? $this->get_settings('login_link_text') : __( 'Login', EAEL_TEXTDOMAIN );
 			$parts           = explode( "\n", $lgn_link_text );
 			$lgn_link_text   = array_pop( $parts );
 			$lgn_message     = array_shift( $parts );
