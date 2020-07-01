@@ -40,4 +40,23 @@ trait Shared
         return "$scheme$user$pass$host$port$path$query$fragment";
     }
 
+    /**
+     * check EAEL extinsion can load this page or post
+     *
+     * @param $id  page or post id
+     *
+     * @return bool
+     * @since  4.0.3
+     */
+    public static function is_prevent_load_extinsion( $id ){
+        $template_name = get_post_meta($id, '_elementor_template_type', true);
+        $template_list = [
+            'footer',
+            'header',
+            'section',
+            'popup'
+        ];
+        return in_array($template_name,$template_list);
+    }
+
 }

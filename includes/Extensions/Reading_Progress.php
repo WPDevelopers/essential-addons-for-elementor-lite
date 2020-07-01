@@ -6,17 +6,22 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
+use Essential_Addons_Elementor\Traits\Shared;
 
 class Reading_Progress
 {
 
     public function __construct()
     {
+
         add_action('elementor/documents/register_controls', [$this, 'register_controls'], 10);
     }
 
     public function register_controls($element)
     {
+        if(Shared::is_prevent_load_extinsion(get_the_ID())){
+            return false;
+        }
         $global_settings = get_option('eael_global_settings');
 
         $element->start_controls_section(
