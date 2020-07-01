@@ -137,6 +137,10 @@ trait Login_Registration {
 			$errors['widget_id'] = __( 'Widget ID is missing', EAEL_TEXTDOMAIN );
 		}
 
+		if ( isset( $_POST['eael_tnc_active'] ) && empty( $_POST['eael_accept_tnc']) ) {
+			$errors['terms_conditions'] = __( 'You did not accept the Terms and Conditions. Please accept it and try again.', EAEL_TEXTDOMAIN );
+		}
+
 		if ( ! empty( $_POST['email'] ) && is_email( $_POST['email'] ) ) {
 			$email = sanitize_email( $_POST['email'] );
 			if ( email_exists( $email ) ) {
