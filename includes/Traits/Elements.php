@@ -306,6 +306,10 @@ trait Elements
             return;
         }
 
+        if (Shared::is_prevent_load_extension(get_the_ID())) {
+            return false;
+        }
+
         $html = '';
 
         if (is_singular()) {
