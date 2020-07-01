@@ -69,7 +69,7 @@ class Login_Register extends Widget_Base {
 	 */
 	protected $form_logo;
 	/**
-     * What form to show by default on initial page load. login or register ?
+	 * What form to show by default on initial page load. login or register ?
 	 * @var string
 	 */
 	protected $default_form;
@@ -711,10 +711,10 @@ class Login_Register extends Widget_Base {
 			'dynamic'     => [
 				'active' => true,
 			],
-			'default' => [
-				'url' => get_the_permalink(get_option('wp_page_for_privacy_policy')),
+			'default'     => [
+				'url'         => get_the_permalink( get_option( 'wp_page_for_privacy_policy' ) ),
 				'is_external' => true,
-				'nofollow' => true,
+				'nofollow'    => true,
 			],
 			'condition'   => [
 				'show_terms_conditions'  => 'yes',
@@ -1560,7 +1560,7 @@ class Login_Register extends Widget_Base {
 
 		$this->ds = $this->get_settings_for_display();
 		//error_log( print_r( $this->ds, 1));
-        $this->default_form = $this->get_settings_for_display( 'default_form_type' );
+		$this->default_form            = $this->get_settings_for_display( 'default_form_type' );
 		$this->should_print_login_form = ( 'login' === $this->default_form || 'yes' === $this->get_settings_for_display( 'show_login_link' ) );
 
 		$this->should_print_register_form = ( $this->user_can_register && ( 'register' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_register_link' ) ) );
@@ -1587,11 +1587,11 @@ class Login_Register extends Widget_Base {
 	protected function print_login_form() {
 		if ( $this->should_print_login_form ) {
 			// prepare all login form related vars
-            $default_hide_class = 'register' === $this->default_form ? 'd-none' : '';
+			$default_hide_class = 'register' === $this->default_form ? 'd-none' : '';
 			//Reg link related
 			$reg_link_action = ! empty( $this->ds['registration_link_action'] ) ? $this->ds['registration_link_action'] : 'form';
 			$show_reg_link   = ( $this->user_can_register && 'yes' === $this->get_settings( 'show_register_link' ) );
-			$reg_link_text   = ! empty( $this->get_settings('registration_link_text') ) ? $this->get_settings('registration_link_text') : __( 'Register', EAEL_TEXTDOMAIN );
+			$reg_link_text   = ! empty( $this->get_settings( 'registration_link_text' ) ) ? $this->get_settings( 'registration_link_text' ) : __( 'Register', EAEL_TEXTDOMAIN );
 			$parts           = explode( "\n", $reg_link_text );
 			$reg_link_text   = array_pop( $parts );
 			$reg_message     = array_shift( $parts );
@@ -1628,66 +1628,68 @@ class Login_Register extends Widget_Base {
 				$lp_link = sprintf( '<a href="%s" %s >%s</a>', esc_attr( $lp_url ), $lp_atts, $lp_text );
 			}
 			?>
-            <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr($default_hide_class);?>" id="eael-login-form-wrapper">
-				<?php
-				if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor ) {
-					/* translators: %s user display name */
-					$logged_in_msg = sprintf( __( 'You are already logged in as %s. ', EAEL_TEXTDOMAIN ), wp_get_current_user()->display_name );
-					printf( '%1$s   (<a href="%2$s">%3$s</a>)', $logged_in_msg, esc_url( wp_logout_url() ), __( 'Logout', EAEL_TEXTDOMAIN ) );
-				} else {
-					$this->print_form_illustration(); ?>
-                    <div class="lr-form-wrapper">
-						<?php $this->print_form_header( 'login' ); ?>
-                        <form class="eael-login-form eael-lr-form" id="eael-login-form" method="post">
-                            <div class="eael-lr-form-group">
-								<?php if ( $display_label ) {
-									printf( '<label for="eael-user-login">%s</label>', $u_label );
-								} ?>
-                                <input type="text" name="eael-user-login" id="eael-user-login" class="eael-lr-form-control"
-                                       aria-describedby="emailHelp" placeholder="<?php echo esc_attr( $u_ph ); ?>">
-                            </div>
-                            <div class="eael-lr-form-group">
-                                <label for="eael-user-password">Password</label>
-								<?php if ( $display_label ) {
-									printf( '<label for="eael-user-password">%s</label>', $p_label );
-								} ?>
-                                <div class="eael-lr-password-wrapper">
-                                    <input type="password" name="eael-user-password" class="eael-lr-form-control" id=""
-                                           placeholder="<?php echo esc_attr( $p_ph ); ?>">
-                                    <button type="button" class="wp-hide-pw hide-if-no-js" aria-label="Show password">
-                                        <span class="dashicons dashicons-visibility" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="eael-forever-forget eael-lr-form-group">
-								<?php if ( $show_rememberme ) { ?>
-                                    <p class="forget-menot">
-                                        <input name="eael-rememberme" type="checkbox" id="rememberme" value="forever">
-                                        <label for="rememberme">Remember Me</label>
-                                    </p>
-								<?php }
-								if ( $show_lp ) {
-									echo '<p class="forget-pass">' . $lp_link . '</p>';//XSS ok. already escaped
-								} ?>
-
-                            </div>
-
-                            <input type="submit" name="eael-login-submit" id="eael-login-submit" class="eael-lr-btn eael-lr-btn-block" value="<?php echo esc_attr( $btn_text ); ?>"/>
-
-							<?php if ( $show_reg_link ) { ?>
-                                <div class="eael-sign-wrapper">
-									<?php echo $reg_link; // XSS ok. already escaped ?>
-                                </div>
-							<?php }
-
-							$this->print_necessary_hidden_fields( 'login' );
-							$this->print_login_validation_errors(); ?>
-                        </form>
-                    </div>
+            <section id="eael-login-form-wrapper" class="<?php echo esc_attr( $default_hide_class ); ?>">
+                <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2">
 					<?php
-				}
-				?>
-            </div>
+					if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor ) {
+						/* translators: %s user display name */
+						$logged_in_msg = sprintf( __( 'You are already logged in as %s. ', EAEL_TEXTDOMAIN ), wp_get_current_user()->display_name );
+						printf( '%1$s   (<a href="%2$s">%3$s</a>)', $logged_in_msg, esc_url( wp_logout_url() ), __( 'Logout', EAEL_TEXTDOMAIN ) );
+					} else {
+						$this->print_form_illustration(); ?>
+                        <div class="lr-form-wrapper">
+							<?php $this->print_form_header( 'login' ); ?>
+                            <form class="eael-login-form eael-lr-form" id="eael-login-form" method="post">
+                                <div class="eael-lr-form-group">
+									<?php if ( $display_label ) {
+										printf( '<label for="eael-user-login">%s</label>', $u_label );
+									} ?>
+                                    <input type="text" name="eael-user-login" id="eael-user-login" class="eael-lr-form-control"
+                                           aria-describedby="emailHelp" placeholder="<?php echo esc_attr( $u_ph ); ?>">
+                                </div>
+                                <div class="eael-lr-form-group">
+                                    <label for="eael-user-password">Password</label>
+									<?php if ( $display_label ) {
+										printf( '<label for="eael-user-password">%s</label>', $p_label );
+									} ?>
+                                    <div class="eael-lr-password-wrapper">
+                                        <input type="password" name="eael-user-password" class="eael-lr-form-control" id=""
+                                               placeholder="<?php echo esc_attr( $p_ph ); ?>">
+                                        <button type="button" class="wp-hide-pw hide-if-no-js" aria-label="Show password">
+                                            <span class="dashicons dashicons-visibility" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="eael-forever-forget eael-lr-form-group">
+									<?php if ( $show_rememberme ) { ?>
+                                        <p class="forget-menot">
+                                            <input name="eael-rememberme" type="checkbox" id="rememberme" value="forever">
+                                            <label for="rememberme">Remember Me</label>
+                                        </p>
+									<?php }
+									if ( $show_lp ) {
+										echo '<p class="forget-pass">' . $lp_link . '</p>';//XSS ok. already escaped
+									} ?>
+
+                                </div>
+
+                                <input type="submit" name="eael-login-submit" id="eael-login-submit" class="eael-lr-btn eael-lr-btn-block" value="<?php echo esc_attr( $btn_text ); ?>"/>
+
+								<?php if ( $show_reg_link ) { ?>
+                                    <div class="eael-sign-wrapper">
+										<?php echo $reg_link; // XSS ok. already escaped ?>
+                                    </div>
+								<?php }
+
+								$this->print_necessary_hidden_fields( 'login' );
+								$this->print_login_validation_errors(); ?>
+                            </form>
+                        </div>
+						<?php
+					}
+					?>
+                </div>
+            </section>
 			<?php
 		}
 	}
@@ -1695,8 +1697,8 @@ class Login_Register extends Widget_Base {
 	protected function print_register_form() {
 		if ( $this->should_print_register_form ) {
 			$default_hide_class = 'login' === $this->default_form ? 'd-none' : '';
-			$is_pass_valid     = false; // Does the form has a password field?
-			$is_pass_confirmed = false;
+			$is_pass_valid      = false; // Does the form has a password field?
+			$is_pass_confirmed  = false;
 			// placeholders to flag if user use one type of field more than once.
 			$email_exists        = 0;
 			$user_name_exists    = 0;
@@ -1720,7 +1722,7 @@ class Login_Register extends Widget_Base {
 			//Login link related
 			$lgn_link_action = ! empty( $this->ds['login_link_action'] ) ? $this->ds['login_link_action'] : 'form';
 			$show_lgn_link   = 'yes' === $this->get_settings( 'show_login_link' );
-			$lgn_link_text   = ! empty( $this->get_settings('login_link_text') ) ? $this->get_settings('login_link_text') : __( 'Login', EAEL_TEXTDOMAIN );
+			$lgn_link_text   = ! empty( $this->get_settings( 'login_link_text' ) ) ? $this->get_settings( 'login_link_text' ) : __( 'Login', EAEL_TEXTDOMAIN );
 			$parts           = explode( "\n", $lgn_link_text );
 			$lgn_link_text   = array_pop( $parts );
 			$lgn_message     = array_shift( $parts );
@@ -1735,129 +1737,130 @@ class Login_Register extends Widget_Base {
 
 			ob_start();
 			?>
-
-            <div class="eael-register-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr($default_hide_class); ?>" id="eael-register-form-wrapper">
-				<?php $this->print_form_illustration(); ?>
-                <div class="lr-form-wrapper">
-					<?php $this->print_form_header( 'register' ); ?>
-                    <form class="eael-register-form eael-lr-form" id="eael-register-form" method="post">
-						<?php // Print all dynamic fields
-						foreach ( $this->ds['register_fields'] as $f_index => $field ) :
-							$field_type = $field['field_type'];
-							$dynamic_field_name = "{$field_type}_exists";
-							$$dynamic_field_name ++; //NOTE, double $$ intentional. Dynamically update the var check eg. $username_exists++ to prevent user from using the same field twice
-							// is same field repeated?
-							if ( $$dynamic_field_name > 1 ) {
-								$repeated_f_labels[] = $f_labels[ $field_type ];
-							}
-							if ( 'password' === $field_type ) {
-								$is_pass_valid = true;
-							}
-
-							$current_field_required = ( ! empty( $field['required'] ) || in_array( $field_type, [
-									'password',
-									'confirm_pass',
-									'email',
-								] ) );
-
-							//keys for attribute binding
-							$input_key       = "input{$f_index}";
-							$label_key       = "label{$f_index}";
-							$field_group_key = "field-group{$f_index}";
-
-							// determine proper input tag type
-							switch ( $field_type ) {
-								case 'user_name':
-								case 'first_name':
-								case 'last_name':
-									$field_input_type = 'text';
-									break;
-								case 'confirm_pass':
-									$field_input_type = 'password';
-									break;
-								case 'website':
-									$field_input_type = 'url';
-									break;
-								default:
-									$field_input_type = $field_type;
-							}
-
-							$this->add_render_attribute( [
-								$input_key => [
-									'name'        => $field_type,
-									'type'        => $field_input_type,
-									'placeholder' => $field['placeholder'],
-									'class'       => [
-										'eael-lr-form-control',
-										'form-field-' . $field_type,
-									],
-								],
-								$label_key => [
-									'for'   => 'form-field-' . $field_type,
-									'class' => 'eael-field-label',
-								],
-							] );
-
-							// print require field attributes
-							if ( $current_field_required ) {
-								$this->add_render_attribute( $input_key, [
-									'required'      => 'required',
-									'aria-required' => 'true',
-								] );
-							}
-
-
-							// add css classes to the main input field wrapper.
-							$this->add_render_attribute( [
-								$field_group_key => [
-									'class' => [
-										'eael-lr-form-group',
-										'eael-field-type-' . $field_type,
-										'eael-w-' . $field['width'],
-									],
-								],
-							] );
-
-							if ( ! empty( $field['width_tablet'] ) ) {
-								$this->add_render_attribute( $field_group_key, 'class', 'elementor-md-' . $field['width_tablet'] );
-							}
-
-							if ( ! empty( $field['width_mobile'] ) ) {
-								$this->add_render_attribute( $field_group_key, 'class', 'elementor-sm-' . $field['width_mobile'] );
-							}
-
-							?>
-                            <div <?php $this->print_render_attribute_string( $field_group_key ) ?>>
-								<?php
-								if ( 'yes' === $this->ds['show_labels'] && ! empty( $field['field_label'] ) ) {
-									echo '<label ' . $this->get_render_attribute_string( $label_key ) . '>' . esc_attr( $field['field_label'] ) . '</label>';
-
-									// show required field mark
-									if ( $current_field_required && 'yes' === $this->ds['mark_required'] ) {
-										echo '<abbr class="required" title="required">*</abbr>';// we can show this inside label if needed
-									}
+            <section id="eael-register-form-wrapper" class="<?php echo esc_attr( $default_hide_class ); ?>">
+                <div class="eael-register-form-wrapper eael-lr-form-wrapper style-2">
+					<?php $this->print_form_illustration(); ?>
+                    <div class="lr-form-wrapper">
+						<?php $this->print_form_header( 'register' ); ?>
+                        <form class="eael-register-form eael-lr-form" id="eael-register-form" method="post">
+							<?php // Print all dynamic fields
+							foreach ( $this->ds['register_fields'] as $f_index => $field ) :
+								$field_type = $field['field_type'];
+								$dynamic_field_name = "{$field_type}_exists";
+								$$dynamic_field_name ++; //NOTE, double $$ intentional. Dynamically update the var check eg. $username_exists++ to prevent user from using the same field twice
+								// is same field repeated?
+								if ( $$dynamic_field_name > 1 ) {
+									$repeated_f_labels[] = $f_labels[ $field_type ];
 								}
-								echo '<input ' . $this->get_render_attribute_string( $input_key ) . '>';
-								?>
-                            </div>
-						<?php
-						endforeach;
-						$this->print_necessary_hidden_fields( 'register' );
-						$this->print_terms_condition_notice();
-						?>
-                        <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn eael-lr-btn-inline" value="Register"/>
+								if ( 'password' === $field_type ) {
+									$is_pass_valid = true;
+								}
 
-						<?php if ( $show_lgn_link ) { ?>
-                            <div class="eael-sign-wrapper">
-								<?php echo $lgn_link; ?>
-                            </div>
+								$current_field_required = ( ! empty( $field['required'] ) || in_array( $field_type, [
+										'password',
+										'confirm_pass',
+										'email',
+									] ) );
+
+								//keys for attribute binding
+								$input_key       = "input{$f_index}";
+								$label_key       = "label{$f_index}";
+								$field_group_key = "field-group{$f_index}";
+
+								// determine proper input tag type
+								switch ( $field_type ) {
+									case 'user_name':
+									case 'first_name':
+									case 'last_name':
+										$field_input_type = 'text';
+										break;
+									case 'confirm_pass':
+										$field_input_type = 'password';
+										break;
+									case 'website':
+										$field_input_type = 'url';
+										break;
+									default:
+										$field_input_type = $field_type;
+								}
+
+								$this->add_render_attribute( [
+									$input_key => [
+										'name'        => $field_type,
+										'type'        => $field_input_type,
+										'placeholder' => $field['placeholder'],
+										'class'       => [
+											'eael-lr-form-control',
+											'form-field-' . $field_type,
+										],
+									],
+									$label_key => [
+										'for'   => 'form-field-' . $field_type,
+										'class' => 'eael-field-label',
+									],
+								] );
+
+								// print require field attributes
+								if ( $current_field_required ) {
+									$this->add_render_attribute( $input_key, [
+										'required'      => 'required',
+										'aria-required' => 'true',
+									] );
+								}
+
+
+								// add css classes to the main input field wrapper.
+								$this->add_render_attribute( [
+									$field_group_key => [
+										'class' => [
+											'eael-lr-form-group',
+											'eael-field-type-' . $field_type,
+											'eael-w-' . $field['width'],
+										],
+									],
+								] );
+
+								if ( ! empty( $field['width_tablet'] ) ) {
+									$this->add_render_attribute( $field_group_key, 'class', 'elementor-md-' . $field['width_tablet'] );
+								}
+
+								if ( ! empty( $field['width_mobile'] ) ) {
+									$this->add_render_attribute( $field_group_key, 'class', 'elementor-sm-' . $field['width_mobile'] );
+								}
+
+								?>
+                                <div <?php $this->print_render_attribute_string( $field_group_key ) ?>>
+									<?php
+									if ( 'yes' === $this->ds['show_labels'] && ! empty( $field['field_label'] ) ) {
+										echo '<label ' . $this->get_render_attribute_string( $label_key ) . '>' . esc_attr( $field['field_label'] ) . '</label>';
+
+										// show required field mark
+										if ( $current_field_required && 'yes' === $this->ds['mark_required'] ) {
+											echo '<abbr class="required" title="required">*</abbr>';// we can show this inside label if needed
+										}
+									}
+									echo '<input ' . $this->get_render_attribute_string( $input_key ) . '>';
+									?>
+                                </div>
 							<?php
-						}
-						$this->print_registration_validation_errors();
-						?>
-                    </form>
+							endforeach;
+							$this->print_necessary_hidden_fields( 'register' );
+							$this->print_terms_condition_notice();
+							?>
+                            <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn eael-lr-btn-inline" value="Register"/>
+
+							<?php if ( $show_lgn_link ) { ?>
+                                <div class="eael-sign-wrapper">
+									<?php echo $lgn_link; ?>
+                                </div>
+								<?php
+							}
+							$this->print_validation_message();
+							?>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            </section>
 			<?php
 			$form_markup = ob_get_clean();
 			// if we are in the editor then show error related to different input field.
@@ -2034,20 +2037,44 @@ class Login_Register extends Widget_Base {
 		return false;
 	}
 
-	protected function print_registration_validation_errors() {
-		$errors = get_transient( 'eael_register_errors' );
-		if ( ! empty( $errors ) && is_array( $errors ) ) { ?>
-            <div class="eael-registration-errors-container">
-                <ul class="eael-registration-errors errors">
-					<?php
-					foreach ( $errors as $register_error ) {
-						echo '<li class="error-message">' . esc_html( $register_error ) . '</li>';
-					}
-					?>
-                </ul>
-            </div>
+	protected function print_validation_message() {
+		$errors  = get_transient( 'eael_register_errors' );
+		$success = get_transient( 'eael_register_success' );
+		if ( empty( $errors ) && empty( $success ) ) {
+			return;
+		}
+		?>
+        <div class="eael-registration-validation-container">
 			<?php
-			delete_transient( 'eael_register_errors' );
+            if ( !empty($errors) && is_array( $errors ) ) {
+			    $this->print_registration_errors_message( $errors);
+			} else {
+				$this->print_registration_success_message( $success );
+			}
+			?>
+        </div>
+		<?php
+	}
+
+	protected function print_registration_errors_message( $errors ) {
+		?>
+        <ul class="eael-registration-errors errors">
+			<?php
+			foreach ( $errors as $register_error ) {
+				printf( '<li class="error-message">%s</li>', esc_html( $register_error ) );
+			}
+			?>
+        </ul>
+		<?php
+		delete_transient( 'eael_register_errors' );
+	}
+
+	protected function print_registration_success_message( $success ) {
+
+		if ( $success ) {
+			$message = '<p class="eael-registration-success">' . esc_html( $success ) . '</p>';
+			echo apply_filters( 'eael/login-register/registration-success-msg', $message, $success );
+			delete_transient( 'eael_register_success' );
 
 			return true; // it will help in case we wanna know if error is printed.
 		}
