@@ -477,7 +477,7 @@ class WeForms extends Widget_Base
         );
 
         $this->add_control(
-            'eael_weform_label_heading',
+            'eael_weform_label_style_heading',
             [
                 'type' => Controls_Manager::HEADING,
                 'label' => esc_html__('Label Style', 'essential-addons-for-elementor-lite'),
