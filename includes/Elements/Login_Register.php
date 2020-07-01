@@ -68,6 +68,11 @@ class Login_Register extends Widget_Base {
 	 * @var bool|string
 	 */
 	protected $form_logo;
+	/**
+     * What form to show by default on initial page load. login or register ?
+	 * @var string
+	 */
+	protected $default_form;
 
 	/**
 	 * Login_Register constructor.
@@ -1555,7 +1560,8 @@ class Login_Register extends Widget_Base {
 
 		$this->ds = $this->get_settings_for_display();
 		//error_log( print_r( $this->ds, 1));
-		$this->should_print_login_form = ( 'login' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_login_link' ) );
+        $this->default_form = $this->get_settings_for_display( 'default_form_type' );
+		$this->should_print_login_form = ( 'login' === $this->default_form || 'yes' === $this->get_settings_for_display( 'show_login_link' ) );
 
 		$this->should_print_register_form = ( $this->user_can_register && ( 'register' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_register_link' ) ) );
 		if ( Plugin::$instance->documents->get_current() ) {
@@ -1581,6 +1587,7 @@ class Login_Register extends Widget_Base {
 	protected function print_login_form() {
 		if ( $this->should_print_login_form ) {
 			// prepare all login form related vars
+            $default_hide_class = 'register' === $this->default_form ? 'd-none' : '';
 			//Reg link related
 			$reg_link_action = ! empty( $this->ds['registration_link_action'] ) ? $this->ds['registration_link_action'] : 'form';
 			$show_reg_link   = ( $this->user_can_register && 'yes' === $this->get_settings( 'show_register_link' ) );
@@ -1621,7 +1628,7 @@ class Login_Register extends Widget_Base {
 				$lp_link = sprintf( '<a href="%s" %s >%s</a>', esc_attr( $lp_url ), $lp_atts, $lp_text );
 			}
 			?>
-            <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2" id="eael-login-form-wrapper">
+            <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr($default_hide_class);?>" id="eael-login-form-wrapper">
 				<?php
 				if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor ) {
 					/* translators: %s user display name */
@@ -1687,6 +1694,7 @@ class Login_Register extends Widget_Base {
 
 	protected function print_register_form() {
 		if ( $this->should_print_register_form ) {
+			$default_hide_class = 'login' === $this->default_form ? 'd-none' : '';
 			$is_pass_valid     = false; // Does the form has a password field?
 			$is_pass_confirmed = false;
 			// placeholders to flag if user use one type of field more than once.
@@ -1728,7 +1736,7 @@ class Login_Register extends Widget_Base {
 			ob_start();
 			?>
 
-            <div class="eael-register-form-wrapper eael-lr-form-wrapper style-2" id="eael-register-form-wrapper">
+            <div class="eael-register-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr($default_hide_class); ?>" id="eael-register-form-wrapper">
 				<?php $this->print_form_illustration(); ?>
                 <div class="lr-form-wrapper">
 					<?php $this->print_form_header( 'register' ); ?>
