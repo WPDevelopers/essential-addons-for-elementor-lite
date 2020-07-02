@@ -1547,6 +1547,27 @@ trait Helper
 
         return $orderby;
     }
+    /**
+     * POst Orderby Options
+     *
+     * @return array
+     */
+    public function eael_get_product_orderby_options()
+    {
+        $orderby = array(
+            'ID' => __('Product ID', 'essential-addons-for-elementor-lite'),
+            'title' => __('Product Title', 'essential-addons-for-elementor-lite'),
+            '_price' => __('Price', 'essential-addons-for-elementor-lite'),
+            '_sku' => __('SKU', 'essential-addons-for-elementor-lite'),
+            'date' => __('Date', 'essential-addons-for-elementor-lite'),
+            'modified' => __('Last Modified Date', 'essential-addons-for-elementor-lite'),
+            'parent' => __('Parent Id', 'essential-addons-for-elementor-lite'),
+            'rand' => __('Random', 'essential-addons-for-elementor-lite'),
+            'menu_order' => __('Menu Order', 'essential-addons-for-elementor-lite'),
+        );
+
+        return $orderby;
+    }
 
     /**
      * This function is responsible for counting doc post under a category.

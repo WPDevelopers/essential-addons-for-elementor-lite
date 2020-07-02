@@ -118,7 +118,7 @@ class Product_Grid extends Widget_Base
             [
                 'label' => __('Order By', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'options' => $this->eael_get_post_orderby_options(),
+                'options' => $this->eael_get_product_orderby_options(),
                 'default' => 'date',
 
             ]
@@ -622,9 +622,18 @@ class Product_Grid extends Widget_Base
             'post_type'      => 'product',
             'posts_per_page' => (isset($settings['eael_product_grid_products_count']) ? $settings['eael_product_grid_products_count'] : 4),
             'offset'         => $settings['product_offset'],
-            'orderby'        => (isset($settings['orderby']) ? $settings['orderby'] : 'date'),
             'order'          => (isset($settings['order']) ? $settings['order'] : 'desc'),
         ];
+        // price & sku filter
+        if ($settings['orderby'] == '_price') {
+            $args['orderby']  = 'meta_value_num';
+            $args['meta_key'] = '_price';
+        } else if ($settings['orderby'] == '_sku') {
+            $args['orderby']  = 'meta_value_num';
+            $args['meta_key'] = '_sku';
+        } else {
+            $args['orderby']  = (isset($settings['orderby']) ? $settings['orderby'] : 'date');
+        }
 
         if (!empty($settings['eael_product_grid_categories'])) {
             $args['tax_query'] = [
