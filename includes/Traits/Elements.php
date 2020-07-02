@@ -306,17 +306,19 @@ trait Elements
             return;
         }
 
-        if (Shared::is_prevent_load_extension(get_the_ID())) {
-            return false;
-        }
-
         $html = '';
 
-        if (is_singular()) {
-            $is_elementor = Plugin::$instance->db->is_built_with_elementor(get_the_ID());
+        if ($this->loaded_templates) {
+            foreach ($this->loaded_templates as $post_id) {
+                if (Shared::is_prevent_load_extension($post_id)) {
+                    continue;
+                }
 
-            if ($is_elementor) {
-                $document = Plugin::$instance->documents->get(get_the_ID());
+                if (!Plugin::$instance->db->is_built_with_elementor($post_id)) {
+                    continue;
+                }
+
+                $document = Plugin::$instance->documents->get($post_id);
                 $global_settings = get_option('eael_global_settings');
 
                 // Reading Progress Bar
