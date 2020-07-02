@@ -64,7 +64,7 @@ class TypeForm extends Widget_Base {
         $form_arr = get_transient($key);
         if (empty($form_arr)) {
             $response = wp_remote_get(
-                'https://api.typeform.com/forms',
+                'https://api.typeform.com/forms?page_size=200',
                 [
                     'headers' => [
                         'Authorization' => "Bearer $token",
