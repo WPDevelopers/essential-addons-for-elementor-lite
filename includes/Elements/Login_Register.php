@@ -168,7 +168,7 @@ class Login_Register extends Widget_Base {
 		$this->init_content_register_options_controls();
 		$this->init_content_register_user_email_controls();
 		$this->init_content_register_admin_email_controls();
-		$this->init_content_register_validation_message_controls();
+		//$this->init_content_register_validation_message_controls(); //@TODO; later
 		//Terms & Conditions
 		$this->init_content_terms_controls();
 
@@ -307,7 +307,7 @@ class Login_Register extends Widget_Base {
 				'options'   => [
 					'default' => __( 'WordPress Registration Page', EAEL_TEXTDOMAIN ),
 					'custom'  => __( 'Custom URL', EAEL_TEXTDOMAIN ),
-					'form'    => __( 'Display Form', EAEL_TEXTDOMAIN ),
+					'form'    => __( 'Show Register Form', EAEL_TEXTDOMAIN ),
 				],
 				'default'   => 'default',
 				'condition' => [
@@ -1595,14 +1595,21 @@ class Login_Register extends Widget_Base {
 			$parts           = explode( "\n", $reg_link_text );
 			$reg_link_text   = array_pop( $parts );
 			$reg_message     = array_shift( $parts );
-			$reg_link        = sprintf( '%1$s  <a href="%2$s" id="eael-lr-reg-toggle" data-action="%3$s">%4$s</a>', $reg_message, esc_attr( wp_registration_url() ), esc_attr( $reg_link_action ), $reg_link_text );
 
-			if ( 'custom' === $reg_link_action ) {
-				$reg_url  = ! empty( $this->ds['custom_register_url']['url'] ) ? $this->ds['custom_register_url']['url'] : wp_registration_url();
-				$reg_atts = ! empty( $this->ds['custom_register_url']['is_external'] ) ? ' target="_blank"' : '';
-				$reg_atts .= ! empty( $this->ds['custom_register_url']['nofollow'] ) ? ' rel="nofollow"' : '';
-				$reg_link = sprintf( '%1$s <a href="%2$s" id="eael-lr-reg-toggle" data-action="%3$s" %4$s>%5$s</a>', $reg_message, esc_attr( $reg_url ), esc_attr( $reg_link_action ), $reg_atts, $reg_link_text );
+			$reg_link_placeholder = '%1$s <a href="%2$s" id="eael-lr-reg-toggle" data-action="%3$s" %5$s>%4$s</a>';
+			$reg_atts             = $reg_url = '';
+			switch ( $reg_link_action ) {
+				case 'custom':
+					$reg_url  = ! empty( $this->ds['custom_register_url']['url'] ) ? $this->ds['custom_register_url']['url'] : '';
+					$reg_atts = ! empty( $this->ds['custom_register_url']['is_external'] ) ? ' target="_blank"' : '';
+					$reg_atts .= ! empty( $this->ds['custom_register_url']['nofollow'] ) ? ' rel="nofollow"' : '';
+					break;
+				case 'default':
+					$reg_url = wp_registration_url();
+					break;
 			}
+
+			$reg_link = sprintf( $reg_link_placeholder, $reg_message, esc_attr( $reg_url ), esc_attr( $reg_link_action ), $reg_link_text, $reg_atts );
 
 
 			// login form fields related
@@ -1720,20 +1727,27 @@ class Login_Register extends Widget_Base {
 
 
 			//Login link related
-			$lgn_link_action = ! empty( $this->ds['login_link_action'] ) ? $this->ds['login_link_action'] : 'form';
-			$show_lgn_link   = 'yes' === $this->get_settings( 'show_login_link' );
-			$lgn_link_text   = ! empty( $this->get_settings( 'login_link_text' ) ) ? $this->get_settings( 'login_link_text' ) : __( 'Login', EAEL_TEXTDOMAIN );
-			$parts           = explode( "\n", $lgn_link_text );
-			$lgn_link_text   = array_pop( $parts );
-			$lgn_message     = array_shift( $parts );
-			$lgn_link        = sprintf( '%1$s  <a href="%2$s" id="eael-lr-login-toggle" data-action="%3$s">%4$s</a>', $lgn_message, esc_attr( wp_login_url() ), esc_attr( $lgn_link_action ), $lgn_link_text );
+			$lgn_link_action      = ! empty( $this->ds['login_link_action'] ) ? $this->ds['login_link_action'] : 'form';
+			$show_lgn_link        = 'yes' === $this->get_settings( 'show_login_link' );
+			$lgn_link_text        = ! empty( $this->get_settings( 'login_link_text' ) ) ? $this->get_settings( 'login_link_text' ) : __( 'Login', EAEL_TEXTDOMAIN );
+			$parts                = explode( "\n", $lgn_link_text );
+			$lgn_link_text        = array_pop( $parts );
+			$lgn_message          = array_shift( $parts );
+			$lgn_link_placeholder = '%1$s <a href="%2$s" id="eael-lr-login-toggle" data-action="%3$s" %5$s>%4$s</a>';
+			$lgn_url              = $lgn_atts = '';
 
-			if ( 'custom' === $lgn_link_action ) {
-				$lgn_url  = ! empty( $this->ds['custom_login_url']['url'] ) ? $this->ds['custom_login_url']['url'] : wp_login_url();
-				$lgn_atts = ! empty( $this->ds['custom_login_url']['is_external'] ) ? ' target="_blank"' : '';
-				$lgn_atts .= ! empty( $this->ds['custom_login_url']['nofollow'] ) ? ' rel="nofollow"' : '';
-				$lgn_link = sprintf( '%1$s <a href="%2$s" id="eael-lr-reg-toggle" data-action="%3$s" %4$s>%5$s</a>', $lgn_message, esc_attr( $lgn_url ), esc_attr( $lgn_link_action ), $lgn_atts, $lgn_link_text );
+			switch ( $lgn_link_action ) {
+				case 'custom':
+					$lgn_url  = ! empty( $this->ds['custom_login_url']['url'] ) ? $this->ds['custom_login_url']['url'] : '';
+					$lgn_atts = ! empty( $this->ds['custom_login_url']['is_external'] ) ? ' target="_blank"' : '';
+					$lgn_atts .= ! empty( $this->ds['custom_login_url']['nofollow'] ) ? ' rel="nofollow"' : '';
+					break;
+				case 'default':
+					$lgn_url = wp_login_url();
+					break;
 			}
+			$lgn_link = sprintf( $lgn_link_placeholder, $lgn_message, esc_attr( $lgn_url ), esc_attr( $lgn_link_action ), $lgn_link_text, $lgn_atts );
+
 
 			ob_start();
 			?>
@@ -2046,8 +2060,8 @@ class Login_Register extends Widget_Base {
 		?>
         <div class="eael-registration-validation-container">
 			<?php
-            if ( !empty($errors) && is_array( $errors ) ) {
-			    $this->print_registration_errors_message( $errors);
+			if ( ! empty( $errors ) && is_array( $errors ) ) {
+				$this->print_registration_errors_message( $errors );
 			} else {
 				$this->print_registration_success_message( $success );
 			}
