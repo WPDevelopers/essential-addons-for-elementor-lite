@@ -37,7 +37,7 @@
                             </div>
 
                             <div class="eael-admin-select-block-select">
-                                <a href="<?php echo esc_url(admin_url('admin.php?page=elementor#tab-advanced')); ?>"><?php _e('#Go To', 'essential-addons-for-elementor-lite');?></a>
+                                <a href="<?php echo esc_url(admin_url('admin.php?page=elementor#tab-advanced')); ?>" target="_blank" class="button eael-btn"><?php _e('Configure Settings', 'essential-addons-for-elementor-lite');?></a>
                             </div>
                         </div>
 
