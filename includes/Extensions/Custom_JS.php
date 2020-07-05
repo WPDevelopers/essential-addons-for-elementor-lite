@@ -25,7 +25,7 @@ class Custom_JS
         );
 
         $controls->add_control(
-            'eael_custom_js_usage',
+            'eael_custom_js_label',
             [
                 'type' => Controls_Manager::RAW_HTML,
                 'raw' => __('Add your own custom JS here', 'essential-addons-for-elementor-lite'),
