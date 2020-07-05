@@ -17,6 +17,19 @@ class Product_Grid extends Widget_Base
     use \Essential_Addons_Elementor\Traits\Helper;
     use \Essential_Addons_Elementor\Template\Content\Product_Grid;
 
+    private $is_show_custom_add_to_cart = false;
+    private $simple_add_to_cart_button_text;
+    private $variable_add_to_cart_button_text;
+    private $grouped_add_to_cart_button_text;
+    private $external_add_to_cart_button_text;
+    private $default_add_to_cart_button_text;
+
+    public function __construct($data = [], $args = null)
+    {
+        parent::__construct($data, $args);
+        add_filter('woocommerce_product_add_to_cart_text', [$this, 'add_to_cart_button_custom_text']);
+    }
+
     public function get_name()
     {
         return 'eicon-woocommerce';
@@ -73,6 +86,31 @@ class Product_Grid extends Widget_Base
         return [
             'font-awesome-4-shim',
         ];
+    }
+
+    public function add_to_cart_button_custom_text($default)
+    {
+        if ($this->is_show_custom_add_to_cart) {
+            global $product;
+            $product_type = $product->product_type;
+            switch ($product_type) {
+                case 'external':
+                    return $this->external_add_to_cart_button_text;
+                    break;
+                case 'grouped':
+                    return $this->grouped_add_to_cart_button_text;
+                    break;
+                case 'simple':
+                    return $this->simple_add_to_cart_button_text;
+                    break;
+                case 'variable':
+                    return $this->variable_add_to_cart_button_text;
+                    break;
+                default:
+                    return $this->default_add_to_cart_button_text;
+            }
+        }
+        return $default;
     }
 
     protected function _register_controls()
@@ -216,6 +254,93 @@ class Product_Grid extends Widget_Base
         );
 
         $this->end_controls_section();
+
+        /**
+         * -------------------------------
+         *  Section => Add To Cart
+         * -------------------------------
+         */
+        $this->start_controls_section(
+            'eael_product_grid_add_to_cart_section',
+            [
+                'label' => esc_html__('Add To Cart', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $this->add_control(
+            'show_add_to_cart_custom_text',
+            [
+                'label'        => __('Show Add to cart custom text', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'true',
+                'default'      => '',
+            ]
+        );
+
+        $this->add_control(
+            'add_to_cart_simple_product_button_text',
+            [
+                'label'       => esc_html__('Simple Product Button Text', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'label_block' => false,
+                'default'     => esc_html__('Buy Now', 'essential-addons-for-elementor-lite'),
+                'condition'   => [
+                    'show_add_to_cart_custom_text' => 'true',
+                ],
+            ]
+        );
+        $this->add_control(
+            'add_to_cart_variable_product_button_text',
+            [
+                'label'       => esc_html__('Variable Product Button Text', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'label_block' => false,
+                'default'     => esc_html__('Select options', 'essential-addons-for-elementor-lite'),
+                'condition'   => [
+                    'show_add_to_cart_custom_text' => 'true',
+                ],
+            ]
+        );
+        $this->add_control(
+            'add_to_cart_grouped_product_button_text',
+            [
+                'label'       => esc_html__('Grouped Product Button Text', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'label_block' => false,
+                'default'     => esc_html__('View products', 'essential-addons-for-elementor-lite'),
+                'condition'   => [
+                    'show_add_to_cart_custom_text' => 'true',
+                ],
+            ]
+        );
+        $this->add_control(
+            'add_to_cart_external_product_button_text',
+            [
+                'label'       => esc_html__('External Product Button Text', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'label_block' => false,
+                'default'     => esc_html__('Buy Now', 'essential-addons-for-elementor-lite'),
+                'condition'   => [
+                    'show_add_to_cart_custom_text' => 'true',
+                ],
+            ]
+        );
+        $this->add_control(
+            'add_to_cart_default_product_button_text',
+            [
+                'label'       => esc_html__('Default Product Button Text', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'label_block' => false,
+                'default'     => esc_html__('Read More', 'essential-addons-for-elementor-lite'),
+                'condition'   => [
+                    'show_add_to_cart_custom_text' => 'true',
+                ],
+            ]
+        );
+
+        $this->end_controls_section(); # end of section 'add to cart'
 
         /**
          * -------------------------------
@@ -688,7 +813,7 @@ class Product_Grid extends Widget_Base
             $args['order'] = 'DESC';
         }
 
-        $settings = [
+        $render_settings = [
             'eael_product_grid_style_preset' => $settings['eael_product_grid_style_preset'],
             'eael_product_grid_rating'       => $settings['eael_product_grid_rating'],
             'eael_product_grid_column'       => $settings['eael_product_grid_column'],
@@ -696,11 +821,20 @@ class Product_Grid extends Widget_Base
             'show_load_more_text'            => $settings['show_load_more_text'],
         ];
 
+        // add to custom button text
+        $this->is_show_custom_add_to_cart = boolval($settings['show_add_to_cart_custom_text']);
+        $this->simple_add_to_cart_button_text = $settings['add_to_cart_simple_product_button_text'];
+        $this->variable_add_to_cart_button_text = $settings['add_to_cart_variable_product_button_text'];
+        $this->grouped_add_to_cart_button_text = $settings['add_to_cart_grouped_product_button_text'];
+        $this->external_add_to_cart_button_text = $settings['add_to_cart_external_product_button_text'];
+        $this->default_add_to_cart_button_text = $settings['add_to_cart_default_product_button_text'];
+
+        // render dom
         $html = '<div class="eael-product-grid ' . $settings['eael_product_grid_style_preset'] . '">';
         $html .= '<div class="woocommerce">';
 
         $html .= '<ul class="products">
-                    ' . self::render_template_($args, $settings) . '
+                    ' . self::render_template_($args, $render_settings) . '
                 </ul>';
 
         if ('true' == $settings['show_load_more']) {
