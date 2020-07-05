@@ -483,7 +483,7 @@ class Login_Register extends Widget_Base {
 				'size' => 100,
 			],
 			'selectors'  => [
-				'{{WRAPPER}} .eael-login-form input' => 'width: {{SIZE}}{{UNIT}};',
+				'{{WRAPPER}} .eael-login-form input:not(.eael-lr-btn)' => 'width: {{SIZE}}{{UNIT}};',
 			],
 			'separator'  => 'before',
 		] );
