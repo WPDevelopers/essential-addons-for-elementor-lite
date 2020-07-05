@@ -20,16 +20,25 @@ class Custom_JS
             'eael_ext_section_custom_js',
             [
                 'label' => sprintf('<i class="eaicon-logo"></i> %s', __('Custom JS', 'essential-addons-for-elementor-lite')),
-                'tab'   => Controls_Manager::TAB_ADVANCED,
+                'tab' => Controls_Manager::TAB_ADVANCED,
             ]
         );
 
         $controls->add_control(
             'eael_custom_js',
             [
-                'type'     => Controls_Manager::CODE,
-                'label'    => __('Add your own custom JS here', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CODE,
+                'label' => __('Add your own custom JS here', 'essential-addons-for-elementor-lite'),
                 'language' => 'javascript',
+            ]
+        );
+
+        $controls->add_control(
+            'eael_custom_js_usage',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => __('You may use both jQuery selector e.g. $(‘.selector’) or Vanilla JS selector e.g. document.queryselector(‘.selector’)', 'essential-addons-for-elementor-lite'),
+                'content_classes' => 'elementor-descriptor',
             ]
         );
 
