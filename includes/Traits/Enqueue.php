@@ -132,10 +132,6 @@ trait Enqueue
 
     public function enqueue_scripts()
     {
-        if (is_singular() && !Plugin::$instance->db->is_built_with_elementor(get_the_ID())) {
-            return;
-        }
-
         if ($this->is_running_background()) {
             return;
         }
