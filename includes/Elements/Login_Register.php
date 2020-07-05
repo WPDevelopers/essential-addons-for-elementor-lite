@@ -495,12 +495,12 @@ class Login_Register extends Widget_Base {
 			'label_off' => __( 'Hide', EAEL_TEXTDOMAIN ),
 			'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
 		] );
-
-		$this->add_control( 'login_enable_ajax', [
-			'label'   => __( 'Submit Login Form via AJAX', EAEL_TEXTDOMAIN ),
-			'type'    => Controls_Manager::SWITCHER,
-			'default' => 'yes',
-		] );
+		//@TODO: to be implemented later
+		//$this->add_control( 'login_enable_ajax', [
+		//	'label'   => __( 'Submit Login Form via AJAX', EAEL_TEXTDOMAIN ),
+		//	'type'    => Controls_Manager::SWITCHER,
+		//	'default' => 'yes',
+		//] );
 
 		/*--Login Fields Button--*/
 		$this->add_control( 'login_button_heading', [
@@ -1419,7 +1419,7 @@ class Login_Register extends Widget_Base {
 				'classic',
 				'gradient',
 			],
-			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn",
+			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover",
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "{$button_type}_btn_border_hover",
@@ -1433,13 +1433,13 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$button_type}-form:hover .eael-lr-btn" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
-		$this->add_control( "{$button_type}_btn_hover_animation", [
-			'label' => __( 'Animation', EAEL_TEXTDOMAIN ),
-			'type'  => Controls_Manager::HOVER_ANIMATION,
-		] );
+		//$this->add_control( "{$button_type}_btn_hover_animation", [
+		//	'label' => __( 'Animation', EAEL_TEXTDOMAIN ),
+		//	'type'  => Controls_Manager::HOVER_ANIMATION,
+		//] );
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
 		/*-----ends Button tabs--------*/
