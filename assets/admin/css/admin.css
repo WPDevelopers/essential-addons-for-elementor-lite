@@ -952,6 +952,7 @@ button.eael-btn.eael-global-control-disable:hover {
     font-weight: 700;
 }
 
-#eael-js-print-method-options {
+#eael-css-print-method,
+#eael-js-print-method {
     margin: 0 0 8px 0;
 }
