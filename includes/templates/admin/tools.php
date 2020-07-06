@@ -47,14 +47,17 @@
                             <div class="eael-admin-select-block-label">
                                 <h4><?php _e('JS Print Method', 'essential-addons-for-elementor-lite');?></h4>
                             </div>
+
+                            <?php
+                                $print_method = get_option('eael_js_print_method','external');
+                            ?>
                             <div class="eael-admin-select-block-select">
                                 <select name="eael-js-print-method" id="eael-js-print-method">
-                                    <option value="external" <?php echo get_option('eael_js_print_method', 'external') == 'external' ? 'selected' : '' ?>><?php _e('External File', 'essential-addons-for-elementor-lite');?></option>
-                                    <option value="internal" <?php echo get_option('eael_js_print_method', 'external') == 'internal' ? 'selected' : '' ?>><?php _e('Internal Embedding', 'essential-addons-for-elementor-lite');?></option>
+                                    <option value="external" <?php echo $print_method == 'external' ? 'selected' : '' ?>><?php _e('External File', 'essential-addons-for-elementor-lite');?></option>
+                                    <option value="internal" <?php echo $print_method == 'internal' ? 'selected' : '' ?>><?php _e('Internal Embedding', 'essential-addons-for-elementor-lite');?></option>
                                 </select>
-
-                                <p class="quick-tools-description"><?php _e('Use external JS files for all generated scripts. Choose this setting for better performance (recommended).', 'essential-addons-for-elementor-lite');?></p>
-                                <p class="quick-tools-description"><?php _e('Use internal JS that is embedded in the head of the page. For troubleshooting server configuration conflicts and managing development environments.', 'essential-addons-for-elementor-lite');?></p>
+                                <p style="display: <?php echo ($print_method==='external')?'block':'none'; ?>" class="quick-tools-description eael-external-printjs"><?php _e('Use external JS files for all generated scripts. Choose this setting for better performance (recommended).', 'essential-addons-for-elementor-lite');?></p>
+                                <p style="display: <?php echo ($print_method==='internal')?'block':'none'; ?>" class="quick-tools-description eael-internal-printjs"><?php _e('Use internal JS that is embedded in the head of the page. For troubleshooting server configuration conflicts and managing development environments.', 'essential-addons-for-elementor-lite');?></p>
                             </div>
                         </div>
 
