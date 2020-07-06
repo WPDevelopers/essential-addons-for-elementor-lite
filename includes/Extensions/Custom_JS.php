@@ -49,6 +49,15 @@ class Custom_JS
                 'content_classes' => 'elementor-descriptor',
             ]
         );
+        
+        $controls->add_control(
+            'eael_custom_js_docs',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => __('For more information, <a href="https://essential-addons.com/elementor/custom-js/" target="_blank">click here</a>', 'essential-addons-for-elementor-lite'),
+                'content_classes' => 'elementor-descriptor',
+            ]
+        );
 
         $controls->end_controls_section();
     }
