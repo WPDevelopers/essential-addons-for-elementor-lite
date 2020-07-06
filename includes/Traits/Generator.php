@@ -46,10 +46,14 @@ trait Generator
 
         // collect page extensions
         if (!Shared::is_prevent_load_extension($post_id)) {
+            if ($document->get_settings('eael_custom_js')) {
+                $widgets[] = 'eael-custom-js';
+            }
+
             if ($document->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {
                 $widgets[] = 'eael-reading-progress';
             }
-    
+
             if ($document->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['eael_ext_table_of_content']['enabled'])) {
                 $widgets[] = 'eael-table-of-content';
             }
