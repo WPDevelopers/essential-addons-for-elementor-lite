@@ -199,12 +199,13 @@
 			.addClass("save-now")
 			.removeAttr("disabled")
 			.css("cursor", "pointer");
-			if(printMethod==='internal'){
-				$('.eael-external-printjs').hide();
-				$('.eael-internal-printjs').show();
-			}else{
-				$('.eael-external-printjs').show();
-				$('.eael-internal-printjs').hide();
-			}
+			
+		if (printMethod === "internal") {
+			$(".eael-external-printjs").hide();
+			$(".eael-internal-printjs").show();
+		} else {
+			$(".eael-external-printjs").show();
+			$(".eael-internal-printjs").hide();
+		}
 	});
 })(jQuery);
