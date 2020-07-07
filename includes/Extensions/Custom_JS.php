@@ -54,7 +54,7 @@ class Custom_JS
             'eael_custom_js_docs',
             [
                 'type' => Controls_Manager::RAW_HTML,
-                'raw' => __('For more information, <a href="https://essential-addons.com/elementor/custom-js/" target="_blank">click here</a>', 'essential-addons-for-elementor-lite'),
+                'raw' => __('For more information, <a href="https://essential-addons.com/elementor/docs/custom-js/" target="_blank">click here</a>', 'essential-addons-for-elementor-lite'),
                 'content_classes' => 'elementor-descriptor',
             ]
         );
