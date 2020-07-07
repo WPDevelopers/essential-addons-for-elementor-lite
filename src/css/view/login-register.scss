@@ -190,4 +190,19 @@ $sizes: 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
             font-size: 14px;
         }
     }
+
+    .eael-form-msg {
+        display: block;
+        width: 100%;
+        margin-top: .25rem;
+        font-size: 80%;
+
+        &.invalid {
+            color: #dc3545;
+        }
+        &.valid {
+            color: #28a745;
+        }
+    }
+    
 }
