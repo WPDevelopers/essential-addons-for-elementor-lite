@@ -38,8 +38,7 @@
 }
 
 .eael_flip_box_icon_border_round {
-  -webkit-border-radius: 100px;
-          border-radius: 100px;
+  border-radius: 100px;
 }
 
 .eael_eleements_flip_front_icon_style_background,
@@ -70,7 +69,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -97,10 +95,8 @@
   background: #ff7e70;
   color: #ffffff;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -322,7 +318,6 @@
 
 .eael-flipbox-img-circle .eael-elements-flip-box-icon-image img,
 .eael-flipbox-img-circle .flipbox-back-image-icon img {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   overflow: hidden;
 }

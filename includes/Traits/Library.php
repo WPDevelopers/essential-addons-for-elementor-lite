@@ -25,7 +25,7 @@ trait Library
      */
     public function get_settings($element = null)
     {
-        $defaults = array_fill_keys(array_keys(array_merge($this->registered_elements, $this->registered_extensions, $this->additional_settings)), true);
+        $defaults = array_fill_keys(array_keys(array_merge($this->registered_elements, $this->registered_extensions)), true);
         $elements = get_option('eael_save_settings', $defaults);
         $elements = array_merge($defaults, $elements);
 
@@ -37,17 +37,14 @@ trait Library
      *
      * @since 3.0.0
      */
-    public function remove_files($uid = null)
+    public function remove_files($uid = null, $ext = ['css', 'js'])
     {
-        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.css';
-        $js_path  = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.js';
+        foreach ($ext as $e) {
+            $path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.' . $e;
 
-        if (file_exists($css_path)) {
-            unlink($css_path);
-        }
-
-        if (file_exists($js_path)) {
-            unlink($js_path);
+            if (file_exists($path)) {
+                unlink($path);
+            }
         }
     }
 
@@ -80,9 +77,12 @@ trait Library
     {
         check_ajax_referer('essential-addons-elementor', 'security');
 
-        if (isset($_POST['pageID']) && 'post' === $_POST['actionType']) {
-            $uid = md5('post-' . $_POST['pageID']);
-            $this->remove_files($uid);
+        if (isset($_REQUEST['posts'])) {
+            if (!empty($_POST['posts'])) {
+                foreach (json_decode($_POST['posts']) as $post) {
+                    $this->remove_files('post-' . $post);
+                }
+            }
         } else {
             // clear cache files
             $this->empty_dir(EAEL_ASSET_PATH);
@@ -96,18 +96,13 @@ trait Library
      *
      * @since 3.0.0
      */
-    public function is_preview_mode()
+    public function is_running_background()
     {
         if (isset($_REQUEST['doing_wp_cron'])) {
             return true;
         }
+
         if (wp_doing_ajax()) {
-            return true;
-        }
-        if (isset($_GET['elementor-preview'])) {
-            return true;
-        }
-        if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'elementor') {
             return true;
         }
 

@@ -6,7 +6,8 @@ if (!defined('ABSPATH')) {
     exit();
 } // Exit if accessed directly
 
-use \Elementor\Core\Settings\Manager as Settings_Manager;
+use \Elementor\Plugin;
+
 trait Elements
 {
     /**
@@ -47,7 +48,7 @@ trait Elements
             if (isset($this->registered_elements[$active_element]['condition'])) {
                 $check = false;
 
-                if(isset($this->registered_elements[$active_element]['condition'][2])) {
+                if (isset($this->registered_elements[$active_element]['condition'][2])) {
                     $check = $this->registered_elements[$active_element]['condition'][2];
                 }
 
@@ -300,140 +301,143 @@ trait Elements
      */
     public function render_global_html()
     {
-        if (is_singular() && did_action('elementor/loaded')) {
-            $page_settings_manager = Settings_Manager::get_settings_managers('page');
-            $page_settings_model = $page_settings_manager->get_model(get_the_ID());
-            $global_settings = get_option('eael_global_settings');
-            $html = '';
-            $reading_progress_html = '';
-            $table_of_content_html = '';
 
-            // Reading Progress Bar
-            if ($this->get_settings('eael-reading-progress') == true) {
-                if ($page_settings_model->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {
-                    add_filter('eael/section/after_render', function ($extensions) {
-                        $extensions[] = 'eael-reading-progress';
-                        return $extensions;
-                    });
-
-                    $reading_progress_html = '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-' . ($page_settings_model->get_settings('eael_ext_reading_progress') == 'yes' ? 'local' : 'global') . '">
-                        <div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . $page_settings_model->get_settings('eael_ext_reading_progress_position') . '">
-                            <div class="eael-reading-progress-fill"></div>
-                        </div>
-                        <div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' . @$global_settings['reading_progress']['position'] . '" style="height: ' . @$global_settings['reading_progress']['height']['size'] . 'px;background-color: ' . @$global_settings['reading_progress']['bg_color'] . ';">
-                            <div class="eael-reading-progress-fill" style="height: ' . @$global_settings['reading_progress']['height']['size'] . 'px;background-color: ' . @$global_settings['reading_progress']['fill_color'] . ';transition: width ' . @$global_settings['reading_progress']['animation_speed']['size'] . 'ms ease;"></div>
-                        </div>
-                    </div>';
-
-                    if ($page_settings_model->get_settings('eael_ext_reading_progress') != 'yes') {
-                        if (get_post_status($global_settings['reading_progress']['post_id']) != 'publish') {
-                            $reading_progress_html = '';
-                        } else if ($global_settings['reading_progress']['display_condition'] == 'pages' && !is_page()) {
-                            $reading_progress_html = '';
-                        } else if ($global_settings['reading_progress']['display_condition'] == 'posts' && !is_single()) {
-                            $reading_progress_html = '';
-                        } else if ($global_settings['reading_progress']['display_condition'] == 'all' && !is_singular()) {
-                            $reading_progress_html = '';
-                        }
-                    }
-                }
-
-                $html .= $reading_progress_html;
-            }
-
-            // Table of Contents
-            $elementor_page = \Elementor\Plugin::$instance->db->is_built_with_elementor( get_the_ID() );
-            if ($this->get_settings('eael-table-of-content') == true && $elementor_page === true) {
-                if ($page_settings_model->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['eael_ext_table_of_content']['enabled'])) {
-                    add_filter('eael/section/after_render', function ($extensions) {
-                        $extensions[] = 'eael-table-of-content';
-                        return $extensions;
-                    });
-
-                    $el_class = 'eael-toc eael-toc-disable';
-
-                    if ($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['eael_ext_table_of_content']['enabled'])) {
-                        $toc_settings = $page_settings_model;
-                        $el_class .= ' eael-toc-global';
-                        $this->eael_toc_global_css($page_settings_model, $global_settings);
-                    }
-                    $icon = 'fas fa-list';
-                    $support_tag = (array) $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_supported_heading_tag');
-
-                    $support_tag = implode(',', array_filter($support_tag));
-                    $position = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_position');
-                    $close_bt_text_style = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_close_button_text_style');
-                    $box_shadow = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_box_shadow');
-                    $auto_collapse = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_auto_collapse');
-                    $title_to_url = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_use_title_in_url');
-                    $toc_style = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_table_of_content_list_style');
-                    $toc_word_wrap = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_word_wrap');
-                    $toc_collapse = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_collapse_sub_heading');
-                    $list_icon = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_list_icon');
-                    $toc_title = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_title');
-                    $icon_check = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_table_of_content_header_icon');
-                    $sticky_scroll = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_sticky_scroll');
-                    $hide_mobile = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_hide_in_mobile');
-                    $content_selector = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_content_selector');
-                    $exclude_selector = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_toc_exclude_selector');
-
-                    $el_class .= ($position == 'right') ? ' eael-toc-right' : ' ';
-                    $el_class .= ($close_bt_text_style == 'bottom_to_top') ? ' eael-bottom-to-top' : ' ';
-                    $el_class .= ($auto_collapse == 'yes') ? ' eael-toc-auto-collapse' : ' ';
-                    $el_class .= ($box_shadow == 'yes') ? ' eael-box-shadow' : ' ';
-                    $el_class .= ($hide_mobile == 'yes') ? ' eael-toc-mobile-hide' : ' ';
-
-                    $toc_style_class = ' eael-toc-list-' . $toc_style;
-                    $toc_style_class .= ($toc_collapse == 'yes') ? ' eael-toc-collapse' : ' ';
-                    $toc_style_class .= ($list_icon == 'number') ? ' eael-toc-number' : ' eael-toc-bullet';
-                    $toc_style_class .= ($toc_word_wrap == 'yes') ? ' eael-toc-word-wrap' : ' ';
-                    $title_url        = ($title_to_url=='yes')?'true':'false';
-
-                    if (!empty($icon_check['value'])) {
-                        $icon = $icon_check['value'];
-                    }
-
-                    $table_of_content_html .= "<div data-eaelTocTag='{$support_tag}' data-contentSelector='{$content_selector}' data-excludeSelector='{$exclude_selector}' data-stickyScroll='{$sticky_scroll['size']}' data-titleUrl='{$title_url}' id='eael-toc' class='{$el_class} '>
-                        <div class='eael-toc-header'>
-                                <span class='eael-toc-close'>×</span>
-                                <h2 class='eael-toc-title'>{$toc_title}</h2>
-                        </div>
-                        <div class='eael-toc-body'>
-                            <ul id='eael-toc-list' class='eael-toc-list {$toc_style_class}'></ul>
-                        </div>
-                        <button class='eael-toc-button'><i class='{$icon}'></i><span>{$toc_title}</span></button>
-                    </div>";
-                }
-
-                if ($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['eael_ext_table_of_content']['post_id'])) {
-                    if (get_post_status($global_settings['eael_ext_table_of_content']['post_id']) != 'publish') {
-                        $table_of_content_html = '';
-                    } else if ($global_settings['eael_ext_table_of_content']['display_condition'] == 'pages' && !is_page()) {
-                        $table_of_content_html = '';
-                    } else if ($global_settings['eael_ext_table_of_content']['display_condition'] == 'posts' && !is_single()) {
-                        $table_of_content_html = '';
-                    } else if ($global_settings['eael_ext_table_of_content']['display_condition'] == 'all' && !is_singular()) {
-                        $table_of_content_html = '';
-                    }
-                }
-
-                $html .= $table_of_content_html;
-            }
-
-            echo $html;
+        if (!did_action('elementor/loaded')) {
+            return;
         }
+
+        $html = '';
+
+        if ($this->loaded_templates) {
+            foreach ($this->loaded_templates as $post_id) {
+                if (Shared::is_prevent_load_extension($post_id)) {
+                    continue;
+                }
+
+                if (!Plugin::$instance->db->is_built_with_elementor($post_id)) {
+                    continue;
+                }
+
+                $document = Plugin::$instance->documents->get($post_id);
+                $global_settings = get_option('eael_global_settings');
+
+                // Reading Progress Bar
+                if ($this->get_settings('eael-reading-progress') == true) {
+                    if ($document->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {
+                        $reading_progress_html = '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-' . ($document->get_settings('eael_ext_reading_progress') == 'yes' ? 'local' : 'global') . '">
+                            <div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . $document->get_settings('eael_ext_reading_progress_position') . '">
+                                <div class="eael-reading-progress-fill"></div>
+                            </div>
+                            <div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' . @$global_settings['reading_progress']['position'] . '" style="height: ' . @$global_settings['reading_progress']['height']['size'] . 'px;background-color: ' . @$global_settings['reading_progress']['bg_color'] . ';">
+                                <div class="eael-reading-progress-fill" style="height: ' . @$global_settings['reading_progress']['height']['size'] . 'px;background-color: ' . @$global_settings['reading_progress']['fill_color'] . ';transition: width ' . @$global_settings['reading_progress']['animation_speed']['size'] . 'ms ease;"></div>
+                            </div>
+                        </div>';
+
+                        if ($document->get_settings('eael_ext_reading_progress') != 'yes') {
+                            if (get_post_status($global_settings['reading_progress']['post_id']) != 'publish') {
+                                $reading_progress_html = '';
+                            } else if ($global_settings['reading_progress']['display_condition'] == 'pages' && !is_page()) {
+                                $reading_progress_html = '';
+                            } else if ($global_settings['reading_progress']['display_condition'] == 'posts' && !is_single()) {
+                                $reading_progress_html = '';
+                            } else if ($global_settings['reading_progress']['display_condition'] == 'all' && !is_singular()) {
+                                $reading_progress_html = '';
+                            }
+                        }
+
+                        $html .= $reading_progress_html;
+                    }
+                }
+
+                // Table of Contents
+                if ($this->get_settings('eael-table-of-content')) {
+                    if ($document->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['eael_ext_table_of_content']['enabled'])) {
+                        $el_class = 'eael-toc eael-toc-disable';
+
+                        if ($document->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['eael_ext_table_of_content']['enabled'])) {
+                            $toc_settings = $document;
+                            $el_class .= ' eael-toc-global';
+                            $this->eael_toc_global_css($document, $global_settings);
+                        }
+                        $icon = 'fas fa-list';
+                        $support_tag = (array) $this->eael_get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_supported_heading_tag');
+
+                        $support_tag = implode(',', array_filter($support_tag));
+                        $position = $this->eael_get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_position');
+                        $close_bt_text_style = $this->eael_get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_close_button_text_style');
+                        $box_shadow = $this->eael_get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_box_shadow');
+                        $auto_collapse = $this->eael_get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_auto_collapse');
+                        $title_to_url = $this->eael_get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_use_title_in_url');
+                        $toc_style = $this->eael_get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_table_of_content_list_style');
+                        $toc_word_wrap = $this->eael_get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_word_wrap');
+                        $toc_collapse = $this->eael_get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_collapse_sub_heading');
+                        $list_icon = $this->eael_get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_list_icon');
+                        $toc_title = $this->eael_get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_title');
+                        $icon_check = $this->eael_get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_table_of_content_header_icon');
+                        $sticky_scroll = $this->eael_get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_sticky_scroll');
+                        $hide_mobile = $this->eael_get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_hide_in_mobile');
+                        $content_selector = $this->eael_get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_content_selector');
+                        $exclude_selector = $this->eael_get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_toc_exclude_selector');
+
+                        $el_class .= ($position == 'right') ? ' eael-toc-right' : ' ';
+                        $el_class .= ($close_bt_text_style == 'bottom_to_top') ? ' eael-bottom-to-top' : ' ';
+                        $el_class .= ($auto_collapse == 'yes') ? ' eael-toc-auto-collapse' : ' ';
+                        $el_class .= ($box_shadow == 'yes') ? ' eael-box-shadow' : ' ';
+                        $el_class .= ($hide_mobile == 'yes') ? ' eael-toc-mobile-hide' : ' ';
+
+                        $toc_style_class = ' eael-toc-list-' . $toc_style;
+                        $toc_style_class .= ($toc_collapse == 'yes') ? ' eael-toc-collapse' : ' ';
+                        $toc_style_class .= ($list_icon == 'number') ? ' eael-toc-number' : ' eael-toc-bullet';
+                        $toc_style_class .= ($toc_word_wrap == 'yes') ? ' eael-toc-word-wrap' : ' ';
+                        $title_url = ($title_to_url == 'yes') ? 'true' : 'false';
+
+                        if (!empty($icon_check['value'])) {
+                            $icon = $icon_check['value'];
+                        }
+
+                        $table_of_content_html = "<div data-eaelTocTag='{$support_tag}' data-contentSelector='{$content_selector}' data-excludeSelector='{$exclude_selector}' data-stickyScroll='{$sticky_scroll['size']}' data-titleUrl='{$title_url}' id='eael-toc' class='{$el_class} '>
+                            <div class='eael-toc-header'>
+                                    <span class='eael-toc-close'>×</span>
+                                    <h2 class='eael-toc-title'>{$toc_title}</h2>
+                            </div>
+                            <div class='eael-toc-body'>
+                                <ul id='eael-toc-list' class='eael-toc-list {$toc_style_class}'></ul>
+                            </div>
+                            <button class='eael-toc-button'><i class='{$icon}'></i><span>{$toc_title}</span></button>
+                        </div>";
+
+                        if ($document->get_settings('eael_ext_table_of_content') != 'yes') {
+                            if (get_post_status($global_settings['eael_ext_table_of_content']['post_id']) != 'publish') {
+                                $table_of_content_html = '';
+                            } else if ($global_settings['eael_ext_table_of_content']['display_condition'] == 'pages' && !is_page()) {
+                                $table_of_content_html = '';
+                            } else if ($global_settings['eael_ext_table_of_content']['display_condition'] == 'posts' && !is_single()) {
+                                $table_of_content_html = '';
+                            } else if ($global_settings['eael_ext_table_of_content']['display_condition'] == 'all' && !is_singular()) {
+                                $table_of_content_html = '';
+                            }
+                        }
+
+                        $html .= $table_of_content_html;
+                    }
+                }
+            }
+        }
+
+        echo $html;
     }
 
     /**
      * Register WC Hooks
      */
 
-	public function register_wc_hooks() {
+    public function register_wc_hooks()
+    {
 
-		if (class_exists( 'WooCommerce' )){
-			wc()->frontend_includes();
-		}
+        if (class_exists('WooCommerce')) {
+            wc()->frontend_includes();
+        }
 
-	}
+    }
 
 }
