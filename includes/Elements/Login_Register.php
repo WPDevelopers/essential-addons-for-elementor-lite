@@ -1283,6 +1283,23 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => 'background-color: {{VALUE}};',
 			],
 		] );
+
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "eael_field_border",
+			'selector' => "{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control",
+		] );
+		$this->add_control( "eael_field_border_radius", [
+			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+
 		$this->end_controls_tab();
 
 		$this->start_controls_tab( "tab_form_field_style_active", [
@@ -1304,7 +1321,21 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control:focus" => 'background-color: {{VALUE}};',
 			],
 		] );
-
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "eael_field_border_focus",
+			'selector' => "{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control:focus",
+		] );
+		$this->add_control( "eael_field_border_radius_focus", [
+			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control:focus" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
 		$this->end_controls_section();
