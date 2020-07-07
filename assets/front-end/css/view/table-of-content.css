@@ -61,8 +61,7 @@ html {
   color: #fff;
   background: #ff7d50;
   padding: 10px 20px;
-  -webkit-border-radius: 3px;
-          border-radius: 3px;
+  border-radius: 3px;
   border: none;
   -webkit-transform: rotate(90deg);
       -ms-transform: rotate(90deg);
@@ -137,8 +136,7 @@ html {
           box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   right: -9px;
   top: -11px;
-  -webkit-border-radius: 20px;
-          border-radius: 20px;
+  border-radius: 20px;
   font-family: serif;
   font-size: 20px;
   font-weight: 700;
@@ -165,8 +163,7 @@ html {
 
 .eael-toc .eael-toc-body::-webkit-scrollbar-thumb {
   background: #aaa;
-  -webkit-border-radius: 10px;
-          border-radius: 10px;
+  border-radius: 10px;
 }
 
 .eael-toc .eael-toc-body ul.eael-toc-list {
@@ -192,8 +189,7 @@ html {
   display: inline-block;
   width: 8px;
   height: 8px;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   background-color: #ff7d50;
   margin-right: 8px;
   top: -2px;
@@ -253,7 +249,6 @@ html {
 
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-word-wrap li a {
   display: -webkit-inline-box;
-  display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
 }

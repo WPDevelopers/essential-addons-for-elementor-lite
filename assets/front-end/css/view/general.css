@@ -104,13 +104,11 @@
 }
 
 .eael-custom-radio-checkbox input[type=radio] {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 
 .eael-custom-radio-checkbox input[type=radio]:before {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 
 .eael-post-elements-readmore-btn {
