@@ -164,7 +164,10 @@ trait Generator
         }
 
         if ($context == 'view') {
-            return array_unique(array_merge($lib['view'], $self['general'], $self['view']));
+            if (count($this->loaded_templates) == 1) {
+                return array_unique(array_merge($lib['view'], $self['general'], $self['view']));
+            }
+            return array_unique(array_merge($lib['view'], $self['view']));
         }
 
         return array_unique(array_merge($lib['view'], $lib['edit'], $self['general'], $self['edit'], $self['view']));
