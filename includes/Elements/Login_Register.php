@@ -158,6 +158,7 @@ class Login_Register extends Widget_Base {
 	 */
 	protected function _register_controls() {
 		/*----Content Tab----*/
+		do_action( 'eael/login-register/before-content-controls', $this);
 		$this->init_content_general_controls();
 		$this->init_form_header_controls();
 		// Login Form Related---
@@ -171,14 +172,16 @@ class Login_Register extends Widget_Base {
 		//$this->init_content_register_validation_message_controls(); //@TODO; later
 		//Terms & Conditions
 		$this->init_content_terms_controls();
-
+		do_action( 'eael/login-register/after-content-controls', $this);
 
 		/*----Style Tab----*/
+		do_action( 'eael/login-register/before-style-controls', $this);
 		$this->init_style_general_controls();
 		$this->init_style_input_fields_controls();
 		$this->init_style_input_labels_controls();
 		$this->init_style_login_button_controls();
 		$this->init_style_register_button_controls();
+		do_action( 'eael/login-register/after-style-controls', $this);
 
 	}
 
@@ -1436,10 +1439,7 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
-		//$this->add_control( "{$button_type}_btn_hover_animation", [
-		//	'label' => __( 'Animation', EAEL_TEXTDOMAIN ),
-		//	'type'  => Controls_Manager::HOVER_ANIMATION,
-		//] );
+
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
 		/*-----ends Button tabs--------*/
