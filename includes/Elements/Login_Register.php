@@ -1655,7 +1655,6 @@ class Login_Register extends Widget_Base {
                                            aria-describedby="emailHelp" placeholder="<?php echo esc_attr( $u_ph ); ?>">
                                 </div>
                                 <div class="eael-lr-form-group">
-                                    <label for="eael-user-password">Password</label>
 									<?php if ( $display_label ) {
 										printf( '<label for="eael-user-password">%s</label>', $p_label );
 									} ?>
