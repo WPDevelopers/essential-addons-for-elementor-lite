@@ -10,6 +10,55 @@ use \Elementor\Plugin;
 
 trait Enqueue
 {
+    public function before_single_enqueue_scripts($widgets)
+    {
+        // Compatibility: Gravity forms
+        if (in_array('gravity-form', $widgets) &&  class_exists('GFCommon')) {
+            foreach ($this->eael_select_gravity_form() as $form_id => $form_name) {
+                if ($form_id != '0') {
+                    gravity_form_enqueue_scripts($form_id);
+                }
+            }
+        }
+
+        // Compatibility: WPforms
+        if (in_array('wpforms', $widgets) &&  function_exists('wpforms')) {
+            wpforms()->frontend->assets_css();
+        }
+
+        // Compatibility: Caldera forms
+        if (in_array('caldera-form', $widgets) &&  class_exists('Caldera_Forms')) {
+            add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
+        }
+
+        // Compatibility: Fluent forms
+        if (in_array('fluentform', $widgets) &&  defined('FLUENTFORM')) {
+            wp_register_style(
+                'fluent-form-styles',
+                WP_PLUGIN_URL . '/fluentform/public/css/fluent-forms-public.css',
+                false,
+                FLUENTFORM_VERSION
+            );
+
+            wp_register_style(
+                'fluentform-public-default',
+                WP_PLUGIN_URL . '/fluentform/public/css/fluentform-public-default.css',
+                false,
+                FLUENTFORM_VERSION
+            );
+        }
+
+        // Compatibility: Ninja forms
+        if (in_array('ninja-form', $widgets) &&  class_exists('\Ninja_Forms') && class_exists('\NF_Display_Render')) {
+            add_action('elementor/preview/enqueue_styles', function () {
+                ob_start();
+                \NF_Display_Render::localize(0);
+                ob_clean();
+
+                wp_add_inline_script('nf-front-end', 'var nfForms = nfForms || [];');
+            });
+        }
+    }
 
     public function enqueue_template_scripts($css_file)
     {
@@ -40,53 +89,6 @@ trait Enqueue
         // if no widget in page, return
         if (empty($widgets)) {
             return;
-        }
-
-        // Compatibility: Gravity forms
-        if (isset($widgets['gravity-form']) && class_exists('GFCommon')) {
-            foreach ($this->eael_select_gravity_form() as $form_id => $form_name) {
-                if ($form_id != '0') {
-                    gravity_form_enqueue_scripts($form_id);
-                }
-            }
-        }
-
-        // Compatibility: WPforms
-        if (isset($widgets['wpforms']) && function_exists('wpforms')) {
-            wpforms()->frontend->assets_css();
-        }
-
-        // Compatibility: Caldera forms
-        if (isset($widgets['caldera-form']) && class_exists('Caldera_Forms')) {
-            add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
-        }
-
-        // Compatibility: Fluent forms
-        if (isset($widgets['fluentform']) && defined('FLUENTFORM')) {
-            wp_register_style(
-                'fluent-form-styles',
-                WP_PLUGIN_URL . '/fluentform/public/css/fluent-forms-public.css',
-                false,
-                FLUENTFORM_VERSION
-            );
-
-            wp_register_style(
-                'fluentform-public-default',
-                WP_PLUGIN_URL . '/fluentform/public/css/fluentform-public-default.css',
-                false,
-                FLUENTFORM_VERSION
-            );
-        }
-
-        // Compatibility: Ninja forms
-        if (isset($widgets['ninja-form']) && class_exists('\Ninja_Forms') && class_exists('\NF_Display_Render')) {
-            add_action('elementor/preview/enqueue_styles', function () {
-                ob_start();
-                \NF_Display_Render::localize(0);
-                ob_clean();
-
-                wp_add_inline_script('nf-front-end', 'var nfForms = nfForms || [];');
-            });
         }
 
         // run hook before enqueue script
@@ -235,7 +237,7 @@ trait Enqueue
             }
         }
     }
-    
+
     // inline enqueue styles
     public function enqueue_inline_scripts()
     {
