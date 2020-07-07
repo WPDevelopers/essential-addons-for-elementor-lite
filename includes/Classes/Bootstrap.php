@@ -98,6 +98,7 @@ class Bootstrap
         add_action('elementor/editor/after_save', array($this, 'save_global_values'), 10, 2);
 
         // Enqueue
+        add_action('eael/before_single_enqueue_scripts', array($this, 'before_single_enqueue_scripts'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
         add_action('elementor/css-file/post/enqueue', [$this, 'enqueue_template_scripts']);
         add_action('elementor/editor/before_enqueue_scripts', array($this, 'editor_enqueue_scripts'));
