@@ -73,6 +73,11 @@ class Login_Register extends Widget_Base {
 	 * @var string
 	 */
 	protected $default_form;
+	/**
+     * Form illustration position
+	 * @var mixed|string
+	 */
+	protected $form_illustration_pos;
 
 	/**
 	 * Login_Register constructor.
@@ -389,6 +394,8 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
+		do_action( 'eael/login-register/after-general-controls', $this);
+
 		$this->end_controls_section();
 	}
 
@@ -502,12 +509,7 @@ class Login_Register extends Widget_Base {
 			'label_off' => __( 'Hide', EAEL_TEXTDOMAIN ),
 			'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
 		] );
-		//@TODO: to be implemented later
-		//$this->add_control( 'login_enable_ajax', [
-		//	'label'   => __( 'Submit Login Form via AJAX', EAEL_TEXTDOMAIN ),
-		//	'type'    => Controls_Manager::SWITCHER,
-		//	'default' => 'yes',
-		//] );
+
 
 		/*--Login Fields Button--*/
 		$this->add_control( 'login_button_heading', [
@@ -548,6 +550,23 @@ class Login_Register extends Widget_Base {
 			// Usage: `{name}_size` and `{name}_custom_dimension`, in this case `image_size` and `image_custom_dimension`.
 			'default'   => 'full',
 			'separator' => 'none',
+		] );
+
+		$this->add_control( "lr_form_image_position", [
+			'label'        => __( 'Header Image Position', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::CHOOSE,
+			'options'      => [
+				'left'   => [
+					'title' => __( 'Left', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-arrow-left',
+				],
+				'right'     => [
+					'title' => __( 'Right', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-arrow-right',
+				],
+			],
+			'default'      => 'left',
+			'separator'    => 'after',
 		] );
 
 		$this->add_control( 'lr_form_logo', [
@@ -1590,7 +1609,9 @@ class Login_Register extends Widget_Base {
 
 		//handle form illustration
 		$form_image_id               = ! empty( $this->ds['lr_form_image']['id'] ) ? $this->ds['lr_form_image']['id'] : '';
+		$this->form_illustration_pos              = ! empty( $this->ds['lr_form_image_position'] ) ? $this->ds['lr_form_image_position'] : 'left';
 		$this->form_illustration_url = Group_Control_Image_Size::get_attachment_image_src( $form_image_id, 'lr_form_image', $this->ds );
+
 		$form_logo_id                = ! empty( $this->ds['lr_form_logo']['id'] ) ? $this->ds['lr_form_logo']['id'] : '';
 		$this->form_logo             = Group_Control_Image_Size::get_attachment_image_src( $form_logo_id, 'lr_form_logo', $this->ds );
 		?>
@@ -1671,7 +1692,10 @@ class Login_Register extends Widget_Base {
 						$logged_in_msg = sprintf( __( 'You are already logged in as %s. ', EAEL_TEXTDOMAIN ), wp_get_current_user()->display_name );
 						printf( '%1$s   (<a href="%2$s">%3$s</a>)', $logged_in_msg, esc_url( wp_logout_url() ), __( 'Logout', EAEL_TEXTDOMAIN ) );
 					} else {
-						$this->print_form_illustration(); ?>
+					    if ('left' === $this->form_illustration_pos){
+						    $this->print_form_illustration();
+					    }
+					    ?>
                         <div class="lr-form-wrapper">
 							<?php $this->print_form_header( 'login' ); ?>
                             <form class="eael-login-form eael-lr-form" id="eael-login-form" method="post">
@@ -1724,6 +1748,9 @@ class Login_Register extends Widget_Base {
                             </form>
                         </div>
 						<?php
+						if ('right' === $this->form_illustration_pos){
+							$this->print_form_illustration();
+						}
 					}
 					?>
                 </div>
@@ -1786,7 +1813,9 @@ class Login_Register extends Widget_Base {
 			?>
             <section id="eael-register-form-wrapper" class="<?php echo esc_attr( $default_hide_class ); ?>">
                 <div class="eael-register-form-wrapper eael-lr-form-wrapper style-2">
-					<?php $this->print_form_illustration(); ?>
+					<?php if ('left' === $this->form_illustration_pos){
+						$this->print_form_illustration();
+					} ?>
                     <div class="lr-form-wrapper">
 						<?php $this->print_form_header( 'register' ); ?>
                         <form class="eael-register-form eael-lr-form" id="eael-register-form" method="post">
@@ -1906,6 +1935,9 @@ class Login_Register extends Widget_Base {
 							?>
                         </form>
                     </div>
+	                <?php if ('right' === $this->form_illustration_pos){
+		                $this->print_form_illustration();
+	                } ?>
                 </div>
             </section>
 			<?php
@@ -1927,7 +1959,7 @@ class Login_Register extends Widget_Base {
 
 	protected function print_form_illustration() {
 		if ( ! empty( $this->form_illustration_url ) ) { ?>
-            <div class="lr-form-illustration" style="background-image: url('<?php echo esc_attr( esc_url( $this->form_illustration_url ) ); ?>');"></div>
+            <div class="lr-form-illustration lr-img-pos-<?php echo esc_attr($this->form_illustration_pos);?>" style="background-image: url('<?php echo esc_attr( esc_url( $this->form_illustration_url ) ); ?>');"></div>
 		<?php }
 	}
 
