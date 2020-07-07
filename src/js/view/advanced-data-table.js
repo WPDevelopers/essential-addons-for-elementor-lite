@@ -1,14 +1,19 @@
 class advancedDataTable {
 	constructor() {
 		// register hooks
-		elementorFrontend.hooks.addAction("frontend/element_ready/eael-advanced-data-table.default", this.initFrontend.bind(this));
+		elementorFrontend.hooks.addAction(
+			"frontend/element_ready/eael-advanced-data-table.default",
+			this.initFrontend.bind(this)
+		);
 	}
 
 	// init frontend features
 	initFrontend($scope, $) {
 		let table = $scope.context.querySelector(".ea-advanced-data-table");
 		let search = $scope.context.querySelector(".ea-advanced-data-table-search");
-		let pagination = $scope.context.querySelector(".ea-advanced-data-table-pagination");
+		let pagination = $scope.context.querySelector(
+			".ea-advanced-data-table-pagination"
+		);
 		let classCollection = {};
 
 		if (!ea.isEditMode && table !== null) {
@@ -31,8 +36,11 @@ class advancedDataTable {
 		if (search) {
 			search.addEventListener("input", (e) => {
 				let input = e.target.value.toLowerCase();
-				let hasSort = table.classList.contains("ea-advanced-data-table-sortable");
-				let offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+				let hasSort = table.classList.contains(
+					"ea-advanced-data-table-sortable"
+				);
+				let offset =
+					table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
 
 				if (table.rows.length > 1) {
 					if (input.length > 0) {
@@ -49,7 +57,11 @@ class advancedDataTable {
 
 							if (table.rows[i].cells.length > 0) {
 								for (let j = 0; j < table.rows[i].cells.length; j++) {
-									if (table.rows[i].cells[j].textContent.toLowerCase().indexOf(input) > -1) {
+									if (
+										table.rows[i].cells[j].textContent
+											.toLowerCase()
+											.indexOf(input) > -1
+									) {
 										matchFound = true;
 										break;
 									}
@@ -70,8 +82,19 @@ class advancedDataTable {
 						if (pagination && pagination.innerHTML.length > 0) {
 							pagination.style.display = "";
 
-							let currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
-							let startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
+							let paginationType = pagination.classList.contains(
+								"ea-advanced-data-table-pagination-button"
+							)
+								? "button"
+								: "select";
+							let currentPage =
+								paginationType == "button"
+									? pagination.querySelector(
+											".ea-advanced-data-table-pagination-current"
+									  ).dataset.page
+									: pagination.querySelector("select").value;
+							let startIndex =
+								(currentPage - 1) * table.dataset.itemsPerPage + 1;
 							let endIndex = currentPage * table.dataset.itemsPerPage;
 
 							for (let i = 1; i <= table.rows.length - 1; i++) {
@@ -120,10 +143,15 @@ class advancedDataTable {
 					}
 
 					if (pagination && pagination.innerHTML.length > 0) {
-						currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
+						currentPage = pagination.querySelector(
+							".ea-advanced-data-table-pagination-current"
+						).dataset.page;
 						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
 						endIndex =
-							endIndex - (currentPage - 1) * table.dataset.itemsPerPage >= table.dataset.itemsPerPage ? currentPage * table.dataset.itemsPerPage : endIndex;
+							endIndex - (currentPage - 1) * table.dataset.itemsPerPage >=
+							table.dataset.itemsPerPage
+								? currentPage * table.dataset.itemsPerPage
+								: endIndex;
 					}
 
 					// collect header class
@@ -134,7 +162,13 @@ class advancedDataTable {
 							el.classList.remove("asc", "desc");
 						}
 
-						classCollection[currentPage].push(el.classList.contains("asc") ? "asc" : el.classList.contains("desc") ? "desc" : "");
+						classCollection[currentPage].push(
+							el.classList.contains("asc")
+								? "asc"
+								: el.classList.contains("desc")
+								? "desc"
+								: ""
+						);
 					});
 
 					// collect table cells value
@@ -164,7 +198,8 @@ class advancedDataTable {
 
 					// sort table
 					collection.forEach((row, index) => {
-						table.rows[startIndex + index].innerHTML = origTable.rows[row.index].innerHTML;
+						table.rows[startIndex + index].innerHTML =
+							origTable.rows[row.index].innerHTML;
 					});
 				}
 			});
@@ -175,26 +210,41 @@ class advancedDataTable {
 	initTablePagination(table, pagination, classCollection) {
 		if (table.classList.contains("ea-advanced-data-table-paginated")) {
 			let paginationHTML = "";
-			let paginationType = pagination.classList.contains("ea-advanced-data-table-pagination-button") ? "button" : "select";
+			let paginationType = pagination.classList.contains(
+				"ea-advanced-data-table-pagination-button"
+			)
+				? "button"
+				: "select";
 			let currentPage = 1;
-			let startIndex = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+			let startIndex =
+				table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
 			let endIndex = currentPage * table.dataset.itemsPerPage;
-			let maxPages = Math.ceil((table.rows.length - 1) / table.dataset.itemsPerPage);
+			let maxPages = Math.ceil(
+				(table.rows.length - 1) / table.dataset.itemsPerPage
+			);
 
 			// insert pagination
 			if (maxPages > 1) {
 				if (paginationType == "button") {
 					for (let i = 1; i <= maxPages; i++) {
-						paginationHTML += `<a href="#" data-page="${i}" class="${i == 1 ? "ea-advanced-data-table-pagination-current" : ""}">${i}</a>`;
+						paginationHTML += `<a href="#" data-page="${i}" class="${
+							i == 1 ? "ea-advanced-data-table-pagination-current" : ""
+						}">${i}</a>`;
 					}
 
-					pagination.insertAdjacentHTML("beforeend", `<a href="#" data-page="1">&laquo;</a>${paginationHTML}<a href="#" data-page="${maxPages}">&raquo;</a>`);
+					pagination.insertAdjacentHTML(
+						"beforeend",
+						`<a href="#" data-page="1">&laquo;</a>${paginationHTML}<a href="#" data-page="${maxPages}">&raquo;</a>`
+					);
 				} else {
 					for (let i = 1; i <= maxPages; i++) {
 						paginationHTML += `<option value="${i}">${i}</option>`;
 					}
 
-					pagination.insertAdjacentHTML("beforeend", `<select>${paginationHTML}</select>`);
+					pagination.insertAdjacentHTML(
+						"beforeend",
+						`<select>${paginationHTML}</select>`
+					);
 				}
 			}
 
@@ -214,17 +264,25 @@ class advancedDataTable {
 
 					if (e.target.tagName.toLowerCase() == "a") {
 						currentPage = e.target.dataset.page;
-						offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
-						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
+						offset =
+							table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+						startIndex =
+							(currentPage - 1) * table.dataset.itemsPerPage + offset;
 						endIndex = currentPage * table.dataset.itemsPerPage;
 
-						pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach((el) => {
-							el.classList.remove("ea-advanced-data-table-pagination-current");
-						});
+						pagination
+							.querySelectorAll(".ea-advanced-data-table-pagination-current")
+							.forEach((el) => {
+								el.classList.remove(
+									"ea-advanced-data-table-pagination-current"
+								);
+							});
 
-						pagination.querySelectorAll(`[data-page="${currentPage}"]`).forEach((el) => {
-							el.classList.add("ea-advanced-data-table-pagination-current");
-						});
+						pagination
+							.querySelectorAll(`[data-page="${currentPage}"]`)
+							.forEach((el) => {
+								el.classList.add("ea-advanced-data-table-pagination-current");
+							});
 
 						for (let i = offset; i <= table.rows.length - 1; i++) {
 							if (i >= startIndex && i <= endIndex) {
@@ -251,8 +309,10 @@ class advancedDataTable {
 						e.preventDefault();
 
 						currentPage = e.target.value;
-						offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
-						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
+						offset =
+							table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+						startIndex =
+							(currentPage - 1) * table.dataset.itemsPerPage + offset;
 						endIndex = currentPage * table.dataset.itemsPerPage;
 
 						for (let i = offset; i <= table.rows.length - 1; i++) {
