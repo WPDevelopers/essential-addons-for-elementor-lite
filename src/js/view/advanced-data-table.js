@@ -128,6 +128,11 @@ class advancedDataTable {
 					let classList = e.target.classList;
 					let collection = [];
 					let origTable = table.cloneNode(true);
+					let paginationType = pagination.classList.contains(
+						"ea-advanced-data-table-pagination-button"
+					)
+						? "button"
+						: "select";
 
 					if (classList.contains("asc")) {
 						e.target.classList.remove("asc");
@@ -143,9 +148,12 @@ class advancedDataTable {
 					}
 
 					if (pagination && pagination.innerHTML.length > 0) {
-						currentPage = pagination.querySelector(
-							".ea-advanced-data-table-pagination-current"
-						).dataset.page;
+						currentPage =
+							paginationType == "button"
+								? pagination.querySelector(
+										".ea-advanced-data-table-pagination-current"
+								  ).dataset.page
+								: pagination.querySelector("select").value;
 						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
 						endIndex =
 							endIndex - (currentPage - 1) * table.dataset.itemsPerPage >=
