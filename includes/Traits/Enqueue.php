@@ -168,6 +168,9 @@ trait Enqueue
         if (Plugin::$instance->preview->is_preview_mode()) {
             $widgets = $this->get_settings();
 
+            // run hook before enqueue script
+            do_action('eael/before_single_enqueue_scripts', $widgets);
+
             // css
             if (get_option('elementor_css_print_method') == 'internal') {
                 $this->css_strings['all'] = $this->generate_strings(null, $widgets, 'edit', 'css');
