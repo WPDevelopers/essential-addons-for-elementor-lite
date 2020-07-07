@@ -158,7 +158,7 @@ class Login_Register extends Widget_Base {
 	 */
 	protected function _register_controls() {
 		/*----Content Tab----*/
-		do_action( 'eael/login-register/before-content-controls', $this);
+		do_action( 'eael/login-register/before-content-controls', $this );
 		$this->init_content_general_controls();
 		$this->init_form_header_controls();
 		// Login Form Related---
@@ -172,16 +172,16 @@ class Login_Register extends Widget_Base {
 		//$this->init_content_register_validation_message_controls(); //@TODO; later
 		//Terms & Conditions
 		$this->init_content_terms_controls();
-		do_action( 'eael/login-register/after-content-controls', $this);
+		do_action( 'eael/login-register/after-content-controls', $this );
 
 		/*----Style Tab----*/
-		do_action( 'eael/login-register/before-style-controls', $this);
+		do_action( 'eael/login-register/before-style-controls', $this );
 		$this->init_style_general_controls();
 		$this->init_style_input_fields_controls();
 		$this->init_style_input_labels_controls();
 		$this->init_style_login_button_controls();
 		$this->init_style_register_button_controls();
-		do_action( 'eael/login-register/after-style-controls', $this);
+		do_action( 'eael/login-register/after-style-controls', $this );
 
 	}
 
@@ -402,7 +402,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'login_label_types', [
-			'label'   => __( 'Login Fields Label', EAEL_TEXTDOMAIN ),
+			'label'   => __( 'Labels & Placeholders', EAEL_TEXTDOMAIN ),
 			'type'    => Controls_Manager::SELECT,
 			'options' => [
 				'default' => __( 'Default', EAEL_TEXTDOMAIN ),
@@ -413,7 +413,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'login_labels_heading', [
-			'label'     => esc_html__( 'Labels', EAEL_TEXTDOMAIN ),
+			'label'     => __( 'Labels', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
 			'condition' => [ 'login_label_types' => 'custom', ],
@@ -422,6 +422,7 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'login_user_label', [
 			'label'       => __( 'Username Label', EAEL_TEXTDOMAIN ),
+			'placeholder'     => __( 'Username or Email Address', EAEL_TEXTDOMAIN ),
 			'default'     => __( 'Username or Email Address', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::TEXT,
 			'dynamic'     => [ 'active' => true, ],
@@ -431,6 +432,7 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'login_password_label', [
 			'label'       => __( 'Password Label', EAEL_TEXTDOMAIN ),
+			'placeholder'     => __( 'Password', EAEL_TEXTDOMAIN ),
 			'default'     => __( 'Password', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::TEXT,
 			'dynamic'     => [ 'active' => true, ],
@@ -447,6 +449,7 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'login_user_placeholder', [
 			'label'       => __( 'Username Placeholder', EAEL_TEXTDOMAIN ),
+			'placeholder'     => __( 'Username or Email Address', EAEL_TEXTDOMAIN ),
 			'default'     => __( 'Username or Email Address', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::TEXT,
 			'dynamic'     => [ 'active' => true, ],
@@ -456,6 +459,7 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'login_password_placeholder', [
 			'label'       => __( 'Password Placeholder', EAEL_TEXTDOMAIN ),
+			'placeholder'     => __( 'Password', EAEL_TEXTDOMAIN ),
 			'default'     => __( 'Password', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::TEXT,
 			'dynamic'     => [ 'active' => true, ],
@@ -517,6 +521,7 @@ class Login_Register extends Widget_Base {
 			'type'    => Controls_Manager::TEXT,
 			'dynamic' => [ 'active' => true, ],
 			'default' => __( 'Log In', EAEL_TEXTDOMAIN ),
+			'placeholder' => __( 'Log In', EAEL_TEXTDOMAIN ),
 		] );
 
 		$this->end_controls_section();
@@ -850,6 +855,20 @@ class Login_Register extends Widget_Base {
 			'condition' => [
 				'show_labels' => 'yes',
 			],
+		] );
+
+		/*--Register Fields Button--*/
+		$this->add_control( 'reg_button_heading', [
+			'label'     => esc_html__( 'Register Button', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+
+		$this->add_control( 'reg_button_text', [
+			'label'   => __( 'Button Text', EAEL_TEXTDOMAIN ),
+			'type'    => Controls_Manager::TEXT,
+			'dynamic' => [ 'active' => true, ],
+			'default' => __( 'Register', EAEL_TEXTDOMAIN ),
 		] );
 
 
@@ -1613,14 +1632,23 @@ class Login_Register extends Widget_Base {
 
 
 			// login form fields related
-			$label_type       = ! empty( $this->ds['login_label_types'] ) ? $this->ds['login_label_types'] : 'default';
-			$is_custom_label  = ( 'custom' === $label_type );
-			$display_label    = ( 'none' !== $label_type );
-			$u_label          = $is_custom_label && ! empty( $this->ds['login_user_label'] ) ? $this->ds['login_user_label'] : __( 'Username or Email Address', EAEL_TEXTDOMAIN );
-			$p_label          = $is_custom_label && ! empty( $this->ds['login_password_label'] ) ? $this->ds['login_password_label'] : __( 'Password', EAEL_TEXTDOMAIN );
-			$u_ph             = $is_custom_label && isset( $this->ds['login_user_placeholder'] ) ? $this->ds['login_user_placeholder'] : 'email@domain.com';
-			$p_ph             = $is_custom_label && isset( $this->ds['login_password_placeholder'] ) ? $this->ds['login_password_placeholder'] : __( 'Password', EAEL_TEXTDOMAIN );
-			$btn_text         = ! empty( $this->ds['login_button_text'] ) ? $this->ds['login_button_text'] : __( 'Sign In', EAEL_TEXTDOMAIN );
+			$label_type      = ! empty( $this->ds['login_label_types'] ) ? $this->ds['login_label_types'] : 'default';
+			$is_custom_label = ( 'custom' === $label_type );
+			$display_label   = ( 'none' !== $label_type );
+
+			//Default label n placeholder
+			$u_label = $u_ph = __( 'Username or Email Address', EAEL_TEXTDOMAIN );
+			$p_label = $p_ph = __( 'Password', EAEL_TEXTDOMAIN );
+			// custom label n placeholder
+			if ( $is_custom_label ) {
+				$u_label = isset( $this->ds['login_user_label'] ) ? $this->ds['login_user_label'] : '';
+				$p_label = isset( $this->ds['login_password_label'] ) ? $this->ds['login_password_label'] : '';
+				$u_ph    = isset( $this->ds['login_user_placeholder'] ) ? $this->ds['login_user_placeholder'] : '';
+				$p_ph    = isset( $this->ds['login_password_placeholder'] ) ? $this->ds['login_password_placeholder'] : '';
+			}
+
+
+			$btn_text         = ! empty( $this->ds['login_button_text'] ) ? $this->ds['login_button_text'] : '';
 			$show_logout_link = ( ! empty( $this->ds['show_log_out_message'] ) && 'yes' === $this->ds['show_log_out_message'] );
 			$show_rememberme  = ( ! empty( $this->ds['login_show_remember_me'] ) && 'yes' === $this->ds['login_show_remember_me'] );
 
@@ -1648,19 +1676,23 @@ class Login_Register extends Widget_Base {
 							<?php $this->print_form_header( 'login' ); ?>
                             <form class="eael-login-form eael-lr-form" id="eael-login-form" method="post">
                                 <div class="eael-lr-form-group">
-									<?php if ( $display_label ) {
+									<?php if ( $display_label && $u_label ) {
 										printf( '<label for="eael-user-login">%s</label>', $u_label );
 									} ?>
                                     <input type="text" name="eael-user-login" id="eael-user-login" class="eael-lr-form-control"
-                                           aria-describedby="emailHelp" placeholder="<?php echo esc_attr( $u_ph ); ?>">
+                                           aria-describedby="emailHelp" placeholder="<?php if ( $display_label && $u_ph ) {
+										echo esc_attr( $u_ph );
+									} ?>">
                                 </div>
                                 <div class="eael-lr-form-group">
-									<?php if ( $display_label ) {
+									<?php if ( $display_label && $p_label ) {
 										printf( '<label for="eael-user-password">%s</label>', $p_label );
 									} ?>
                                     <div class="eael-lr-password-wrapper">
                                         <input type="password" name="eael-user-password" class="eael-lr-form-control" id=""
-                                               placeholder="<?php echo esc_attr( $p_ph ); ?>">
+                                               placeholder="<?php if ( $display_label && $p_ph ) {
+	                                               echo esc_attr( $p_ph );
+                                               } ?>">
                                         <button type="button" class="wp-hide-pw hide-if-no-js" aria-label="Show password">
                                             <span class="dashicons dashicons-visibility" aria-hidden="true"></span>
                                         </button>
@@ -1670,7 +1702,7 @@ class Login_Register extends Widget_Base {
 									<?php if ( $show_rememberme ) { ?>
                                         <p class="forget-menot">
                                             <input name="eael-rememberme" type="checkbox" id="rememberme" value="forever">
-                                            <label for="rememberme">Remember Me</label>
+                                            <label for="rememberme"><?php esc_html_e( 'Remember Me', EAEL_TEXTDOMAIN ); ?></label>
                                         </p>
 									<?php }
 									if ( $show_lp ) {
@@ -1726,9 +1758,11 @@ class Login_Register extends Widget_Base {
 
 
 			//Login link related
-			$lgn_link_action      = ! empty( $this->ds['login_link_action'] ) ? $this->ds['login_link_action'] : 'form';
-			$show_lgn_link        = 'yes' === $this->get_settings( 'show_login_link' );
-			$lgn_link_text        = ! empty( $this->get_settings( 'login_link_text' ) ) ? $this->get_settings( 'login_link_text' ) : __( 'Login', EAEL_TEXTDOMAIN );
+			$lgn_link_action = ! empty( $this->ds['login_link_action'] ) ? $this->ds['login_link_action'] : 'form';
+			$show_lgn_link   = 'yes' === $this->get_settings( 'show_login_link' );
+			$lgn_link_text   = ! empty( $this->get_settings( 'login_link_text' ) ) ? $this->get_settings( 'login_link_text' ) : __( 'Login', EAEL_TEXTDOMAIN );
+			$btn_text        = ! empty( $this->ds['reg_button_text'] ) ? $this->ds['reg_button_text'] : '';
+
 			$parts                = explode( "\n", $lgn_link_text );
 			$lgn_link_text        = array_pop( $parts );
 			$lgn_message          = array_shift( $parts );
@@ -1860,7 +1894,7 @@ class Login_Register extends Widget_Base {
 							$this->print_necessary_hidden_fields( 'register' );
 							$this->print_terms_condition_notice();
 							?>
-                            <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn eael-lr-btn-inline" value="Register"/>
+                            <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn eael-lr-btn-inline" value="<?php echo esc_attr( $btn_text ); ?>"/>
 
 							<?php if ( $show_lgn_link ) { ?>
                                 <div class="eael-sign-wrapper">
