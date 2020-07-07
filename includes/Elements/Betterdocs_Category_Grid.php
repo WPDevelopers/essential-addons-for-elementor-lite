@@ -1233,12 +1233,7 @@ class Betterdocs_Category_Grid extends Widget_Base
             );
 
             $this->start_controls_tabs(
-                'button_settings_tabs',
-                [
-                    'condition' => [
-                        'show_button_icon'  => 'true'
-                    ]
-                ]
+                'button_settings_tabs'
             );
 
             // Normal State Tab
