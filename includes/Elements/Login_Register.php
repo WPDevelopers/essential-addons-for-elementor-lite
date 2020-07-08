@@ -182,6 +182,7 @@ class Login_Register extends Widget_Base {
 		/*----Style Tab----*/
 		do_action( 'eael/login-register/before-style-controls', $this );
 		$this->init_style_general_controls();
+		$this->init_style_header_content_controls();
 		$this->init_style_input_fields_controls();
 		$this->init_style_input_labels_controls();
 		$this->init_style_login_button_controls();
@@ -1215,6 +1216,34 @@ class Login_Register extends Widget_Base {
 			],
 			'selectors'  => [
 				"{{WRAPPER}} .lr-form-illustration" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+
+		$this->end_controls_section();
+	}
+
+	public function init_style_header_content_controls() {
+		$this->start_controls_section( 'section_style_header_content', [
+			'label' => __( 'Header Content', EAEL_TEXTDOMAIN ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+		$this->add_control( "form_img_heading", [
+			'label'      => __( 'Form Illustration', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::HEADING,
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "form_img_border",
+			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration",
+		] );
+		$this->add_control( "form_img_border_radius", [
+			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
 
