@@ -1247,8 +1247,8 @@ class Login_Register extends Widget_Base {
 
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
-		        'label' => __( 'Wrapper Box Shadow', EAEL_TEXTDOMAIN ),
-			'name' => 'eael_form_wrap_shadow',
+			'label'    => __( 'Wrapper Box Shadow', EAEL_TEXTDOMAIN ),
+			'name'     => 'eael_form_wrap_shadow',
 			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper",
 		] );
 
@@ -1259,7 +1259,7 @@ class Login_Register extends Widget_Base {
 			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
 			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
 			'return_value' => 'yes',
-			'separator' => 'before',
+			'separator'    => 'before',
 		] );
 
 		$this->start_popover();
@@ -1305,8 +1305,8 @@ class Login_Register extends Widget_Base {
 
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
-			'label'      => __( 'Form Shadow', EAEL_TEXTDOMAIN ),
-			'name' => 'eael_form_shadow',
+			'label'    => __( 'Form Shadow', EAEL_TEXTDOMAIN ),
+			'name'     => 'eael_form_shadow',
 			'selector' => "{{WRAPPER}} .lr-form-wrapper",
 		] );
 		$this->end_controls_section();
@@ -1319,12 +1319,12 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'form_img_po_toggle', [
-				'label'        => __( 'Form Illustration', EAEL_TEXTDOMAIN ),
-				'type'         => Controls_Manager::POPOVER_TOGGLE,
-				'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
-				'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
-				'return_value' => 'yes',
-			] );
+			'label'        => __( 'Form Illustration', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
+			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
+			'return_value' => 'yes',
+		] );
 
 		$this->start_popover();
 
@@ -1370,18 +1370,18 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
-			'name' => 'form_img_shadow',
+			'name'     => 'form_img_shadow',
 			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration",
 		] );
 		$this->end_popover();
 
 		$this->add_control( 'form_logo_po_toggle', [
-				'label'        => __( 'Form Logo', EAEL_TEXTDOMAIN ),
-				'type'         => Controls_Manager::POPOVER_TOGGLE,
-				'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
-				'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
-				'return_value' => 'yes',
-			] );
+			'label'        => __( 'Form Logo', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
+			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
+			'return_value' => 'yes',
+		] );
 
 		$this->start_popover();
 
@@ -1428,7 +1428,7 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
-			'name' => 'form_logo_shadow',
+			'name'     => 'form_logo_shadow',
 			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper .lr-form-header img",
 		] );
 		$this->end_popover();
@@ -1440,6 +1440,15 @@ class Login_Register extends Widget_Base {
 			'label' => __( 'Form Fields', EAEL_TEXTDOMAIN ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
+		$this->add_control( 'eael_form_field_po_toggle', [
+			'label'        => __( 'Spacing', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
+			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
+			'return_value' => 'yes',
+		] );
+
+		$this->start_popover();
 		$this->add_control( "eael_form_field_margin", [
 			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -1465,9 +1474,15 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
+		$this->end_popover();
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => "eael_fields_typography",
 			'selector' => "{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control",
+		] );
+		$this->add_control( 'eael_form_label_colors_heading', [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Colors & Border', EAEL_TEXTDOMAIN ),
+			'separator' => 'before',
 		] );
 		$this->start_controls_tabs( "tabs_form_fields_style" );
 
@@ -1560,6 +1575,15 @@ class Login_Register extends Widget_Base {
 			'label' => __( 'Form Labels', EAEL_TEXTDOMAIN ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
+		$this->add_control( 'eael_form_label_po_toggle', [
+			'label'        => __( 'Spacing', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
+			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
+			'return_value' => 'yes',
+		] );
+
+		$this->start_popover();
 		$this->add_control( "eael_form_label_margin", [
 			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -1584,11 +1608,21 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .lr-form-wrapper label" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
+		$this->end_popover();
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => "eael_label_typography",
 			'selector' => "{{WRAPPER}} .lr-form-wrapper label",
 		] );
 
+		$this->add_control( 'eael_form_label_c_po_toggle', [
+			'label'        => __( 'Colors', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
+			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
+			'return_value' => 'yes',
+		] );
+
+		$this->start_popover();
 		$this->add_control( 'eael_label_color', [
 			'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::COLOR,
@@ -1604,6 +1638,17 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .lr-form-wrapper label" => 'background-color: {{VALUE}};',
 			],
 		] );
+		$this->end_popover();
+
+		$this->add_control( 'eael_form_label_b_po_toggle', [
+			'label'        => __( 'Border', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
+			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
+			'return_value' => 'yes',
+		] );
+
+		$this->start_popover();
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "eael_label_border",
 			'selector' => "{{WRAPPER}} .lr-form-wrapper label",
@@ -1619,6 +1664,7 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .lr-form-wrapper label" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
+		$this->end_popover();
 		$this->end_controls_section();
 	}
 
@@ -1650,6 +1696,15 @@ class Login_Register extends Widget_Base {
 			'tab'        => Controls_Manager::TAB_STYLE,
 			'conditions' => $this->get_form_controls_display_condition( $button_type ),
 		] );
+		$this->add_control( "{$button_type}_btn_pot", [
+			'label'        => __( 'Spacing', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
+			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
+			'return_value' => 'yes',
+		] );
+
+		$this->start_popover();
 		$this->add_control( "{$button_type}_btn_margin", [
 			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -1674,8 +1729,13 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
+		$this->end_popover();
 
-
+		$this->add_control( "tabs_{$button_type}_btn_colors_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Colors & Border', EAEL_TEXTDOMAIN ),
+			'separator' => 'before',
+		] );
 		$this->start_controls_tabs( "tabs_{$button_type}_btn_style" );
 		/*-----Login Button NORMAL state------ */
 		$this->start_controls_tab( "tab_{$button_type}_btn_normal", [

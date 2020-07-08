@@ -7117,6 +7117,7 @@ button.mfp-arrow:not(.toggle) {
   -o-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  outline: none;
 }
 .eael-lr-form-wrapper .eael-forever-forget {
   display: -webkit-box;
@@ -7254,12 +7255,18 @@ button.mfp-arrow:not(.toggle) {
     transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
     transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s), -webkit-transform var(--d-t, 0.3s) var(--d-t-e, ease);
   }
+  .eael-lr-form-wrapper input[type=checkbox]:before {
+    content: none;
+  }
   .eael-lr-form-wrapper input[type=checkbox]:checked {
     --b: var(--active);
     --bc: var(--active);
     --d-o: .3s;
     --d-t: .6s;
     --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+  }
+  .eael-lr-form-wrapper input[type=checkbox]:checked:before {
+    content: none;
   }
   .eael-lr-form-wrapper input[type=checkbox]:disabled {
     --b: var(--disabled);
