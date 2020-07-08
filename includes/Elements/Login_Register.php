@@ -719,18 +719,7 @@ class Login_Register extends Widget_Base {
 				'acceptance_text_source' => 'editor',
 			],
 		] );
-		//$this->add_control( 'show_terms_in_modal', [
-		//	'label'        => __( 'Show Content in a Modal', EAEL_TEXTDOMAIN ),
-		//	'type'         => Controls_Manager::SWITCHER,
-		//	'label_on'     => __( 'Yes', EAEL_TEXTDOMAIN ),
-		//	'label_off'    => __( 'No', EAEL_TEXTDOMAIN ),
-		//	'default'      => 'yes',
-		//	'return_value' => 'yes',
-		//	'condition'    => [
-		//		'show_terms_conditions'  => 'yes',
-		//		'acceptance_text_source' => 'editor',
-		//	],
-		//] );
+
 
 		$this->add_control( 'acceptance_text_url', [
 			'label'       => __( 'Terms & Conditions URL', EAEL_TEXTDOMAIN ),
@@ -2200,6 +2189,7 @@ class Login_Register extends Widget_Base {
 											'eael-lr-form-control',
 											'form-field-' . $field_type,
 										],
+										'id'          => 'form-field-' . $field_type,
 									],
 									$label_key => [
 										'for'   => 'form-field-' . $field_type,
@@ -2347,14 +2337,13 @@ class Login_Register extends Widget_Base {
 		if ( empty( $this->ds['show_terms_conditions'] ) || 'yes' !== $this->ds['show_terms_conditions'] ) {
 			return;
 		}
-		$l             = isset( $this->ds['acceptance_label'] ) ? $this->ds['acceptance_label'] : '';
-		$parts         = explode( "\n", $l );
-		$label         = array_shift( $parts );
-		$link_text     = array_pop( $parts );
-		$source        = isset( $this->ds['acceptance_text_source'] ) ? $this->ds['acceptance_text_source'] : 'editor';
-		$tc_text       = isset( $this->ds['acceptance_text'] ) ? $this->ds['acceptance_text'] : '';
-		$show_in_modal = isset( $this->ds['show_terms_in_modal'] ) && 'yes' === $this->ds['show_terms_in_modal'];
-		$tc_link       = '<a href="#" id="eael-lr-tnc-link">' . esc_html( $link_text ) . '</a>';
+		$l         = isset( $this->ds['acceptance_label'] ) ? $this->ds['acceptance_label'] : '';
+		$parts     = explode( "\n", $l );
+		$label     = array_shift( $parts );
+		$link_text = array_pop( $parts );
+		$source    = isset( $this->ds['acceptance_text_source'] ) ? $this->ds['acceptance_text_source'] : 'editor';
+		$tc_text   = isset( $this->ds['acceptance_text'] ) ? $this->ds['acceptance_text'] : '';
+		$tc_link   = '<a href="#" id="eael-lr-tnc-link">' . esc_html( $link_text ) . '</a>';
 		if ( 'custom' === $source ) {
 			$tc_url  = ! empty( $this->ds['acceptance_text_url']['url'] ) ? esc_url( $this->ds['acceptance_text_url']['url'] ) : esc_url( get_the_permalink( get_option( 'wp_page_for_privacy_policy' ) ) );
 			$tc_atts = ! empty( $this->ds['acceptance_text_url']['is_external'] ) ? ' target="_blank"' : '';
@@ -2365,7 +2354,7 @@ class Login_Register extends Widget_Base {
 		?>
         <input type="hidden" name="eael_tnc_active" value="1">
         <input type="checkbox" name="eael_accept_tnc" value="1" id="eael_accept_tnc">
-        <label for="eael_accept_tnc">
+        <label for="eael_accept_tnc" class="eael-accept-label">
 			<?php
 			echo esc_html( $label );
 			?>
