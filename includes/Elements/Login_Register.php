@@ -1197,7 +1197,7 @@ class Login_Register extends Widget_Base {
 		] );
 		//---Form Wrapper or Box
 		$this->add_control( 'form_form_wrap_po_toggle', [
-			'label'        => __( 'Box', EAEL_TEXTDOMAIN ),
+			'label'        => __( 'Wrapper Box', EAEL_TEXTDOMAIN ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
 			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
 			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
@@ -1244,11 +1244,13 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .eael-lr-form-wrapper" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
+
+		$this->end_popover();
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
+		        'label' => __( 'Wrapper Box Shadow', EAEL_TEXTDOMAIN ),
 			'name' => 'eael_form_wrap_shadow',
 			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper",
 		] );
-		$this->end_popover();
 
 		//----Form-----
 		$this->add_control( 'form_form_po_toggle', [
@@ -1257,6 +1259,7 @@ class Login_Register extends Widget_Base {
 			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
 			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
 			'return_value' => 'yes',
+			'separator' => 'before',
 		] );
 
 		$this->start_popover();
@@ -1299,13 +1302,13 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .lr-form-wrapper" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
-		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
-				'name' => 'eael_form_shadow',
-				'selector' => "{{WRAPPER}} .lr-form-wrapper",
-			] );
 
 		$this->end_popover();
-
+		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
+			'label'      => __( 'Form Shadow', EAEL_TEXTDOMAIN ),
+			'name' => 'eael_form_shadow',
+			'selector' => "{{WRAPPER}} .lr-form-wrapper",
+		] );
 		$this->end_controls_section();
 	}
 
@@ -1366,6 +1369,10 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
+		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
+			'name' => 'form_img_shadow',
+			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration",
+		] );
 		$this->end_popover();
 
 		$this->add_control( 'form_logo_po_toggle', [
@@ -1419,6 +1426,10 @@ class Login_Register extends Widget_Base {
 			'selectors'  => [
 				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-header img" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
+		] );
+		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
+			'name' => 'form_logo_shadow',
+			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper .lr-form-header img",
 		] );
 		$this->end_popover();
 		$this->end_controls_section();
