@@ -1604,6 +1604,21 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .lr-form-wrapper label" => 'background-color: {{VALUE}};',
 			],
 		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "eael_label_border",
+			'selector' => "{{WRAPPER}} .lr-form-wrapper label",
+		] );
+		$this->add_control( "eael_label_border_radius", [
+			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper label" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
 		$this->end_controls_section();
 	}
 
