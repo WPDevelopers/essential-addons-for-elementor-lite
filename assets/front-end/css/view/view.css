@@ -7100,6 +7100,10 @@ button.mfp-arrow:not(.toggle) {
   display: inline-block;
   margin-bottom: 0.5rem;
 }
+.eael-lr-form-wrapper .eael-lr-form-group label.mark-required::after {
+  content: " *";
+  color: #ff0000;
+}
 .eael-lr-form-wrapper .eael-lr-form-group .eael-lr-form-control {
   display: block;
   width: 100%;

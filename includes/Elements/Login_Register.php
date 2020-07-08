@@ -2203,6 +2203,9 @@ class Login_Register extends Widget_Base {
 										'required'      => 'required',
 										'aria-required' => 'true',
 									] );
+									$this->add_render_attribute( $label_key, [
+										'class'      => 'mark-required',
+									] );
 								}
 
 
@@ -2230,11 +2233,6 @@ class Login_Register extends Widget_Base {
 									<?php
 									if ( 'yes' === $this->ds['show_labels'] && ! empty( $field['field_label'] ) ) {
 										echo '<label ' . $this->get_render_attribute_string( $label_key ) . '>' . esc_attr( $field['field_label'] ) . '</label>';
-
-										// show required field mark
-										if ( $current_field_required && 'yes' === $this->ds['mark_required'] ) {
-											echo '<abbr class="required" title="required">*</abbr>';// we can show this inside label if needed
-										}
 									}
 									echo '<input ' . $this->get_render_attribute_string( $input_key ) . '>';
 									?>
