@@ -1581,7 +1581,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-field-label" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
 		$this->add_control( "eael_form_label_padding", [
@@ -1593,13 +1593,13 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper label" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-field-label" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => "eael_label_typography",
-			'selector' => "{{WRAPPER}} .lr-form-wrapper label",
+			'selector' => "{{WRAPPER}} .lr-form-wrapper .eael-field-label",
 		] );
 
 		$this->add_control( 'eael_form_label_c_po_toggle', [
@@ -1615,7 +1615,7 @@ class Login_Register extends Widget_Base {
 			'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .lr-form-wrapper label" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-field-label" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_control( 'eael_label_bg_color', [
@@ -1623,7 +1623,7 @@ class Login_Register extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'default'   => '#ffffff',
 			'selectors' => [
-				"{{WRAPPER}} .lr-form-wrapper label" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-field-label" => 'background-color: {{VALUE}};',
 			],
 		] );
 		$this->end_popover();
@@ -1639,7 +1639,7 @@ class Login_Register extends Widget_Base {
 		$this->start_popover();
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "eael_label_border",
-			'selector' => "{{WRAPPER}} .lr-form-wrapper label",
+			'selector' => "{{WRAPPER}} .lr-form-wrapper .eael-field-label",
 		] );
 		$this->add_control( "eael_label_border_radius", [
 			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
@@ -1649,7 +1649,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper label" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-field-label" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
 		$this->end_popover();
@@ -2021,7 +2021,7 @@ class Login_Register extends Widget_Base {
                             <form class="eael-login-form eael-lr-form" id="eael-login-form" method="post">
                                 <div class="eael-lr-form-group">
 									<?php if ( $display_label && $u_label ) {
-										printf( '<label for="eael-user-login">%s</label>', $u_label );
+										printf( '<label for="eael-user-login" class="eael-field-label">%s</label>', $u_label );
 									} ?>
                                     <input type="text" name="eael-user-login" id="eael-user-login" class="eael-lr-form-control"
                                            aria-describedby="emailHelp" placeholder="<?php if ( $display_label && $u_ph ) {
@@ -2030,10 +2030,10 @@ class Login_Register extends Widget_Base {
                                 </div>
                                 <div class="eael-lr-form-group">
 									<?php if ( $display_label && $p_label ) {
-										printf( '<label for="eael-user-password">%s</label>', $p_label );
+										printf( '<label for="eael-user-password" class="eael-field-label">%s</label>', $p_label );
 									} ?>
                                     <div class="eael-lr-password-wrapper">
-                                        <input type="password" name="eael-user-password" class="eael-lr-form-control" id=""
+                                        <input type="password" name="eael-user-password" class="eael-lr-form-control" id="eael-user-password"
                                                placeholder="<?php if ( $display_label && $p_ph ) {
 											       echo esc_attr( $p_ph );
 										       } ?>">
@@ -2046,7 +2046,7 @@ class Login_Register extends Widget_Base {
 									<?php if ( $show_rememberme ) { ?>
                                         <p class="forget-menot">
                                             <input name="eael-rememberme" type="checkbox" id="rememberme" value="forever">
-                                            <label for="rememberme"><?php esc_html_e( 'Remember Me', EAEL_TEXTDOMAIN ); ?></label>
+                                            <label for="rememberme" class="eael-checkbox-label check-rememberme"><?php esc_html_e( 'Remember Me', EAEL_TEXTDOMAIN ); ?></label>
                                         </p>
 									<?php }
 									if ( $show_lp ) {
@@ -2354,7 +2354,7 @@ class Login_Register extends Widget_Base {
 		?>
         <input type="hidden" name="eael_tnc_active" value="1">
         <input type="checkbox" name="eael_accept_tnc" value="1" id="eael_accept_tnc">
-        <label for="eael_accept_tnc" class="eael-accept-label">
+        <label for="eael_accept_tnc" class="eael-checkbox-label check-accept">
 			<?php
 			echo esc_html( $label );
 			?>
