@@ -201,12 +201,11 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->add_control( 'default_form_type_notice', [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => __( 'Choose the type of form you want to show by default. Note: you can show both form in a single page even if you select only login or registration from below.', EAEL_TEXTDOMAIN ),
+			'raw'             => __( 'Choose the type of form you want to show by default. Note: you can show both forms in a single page even if you select only login or registration from below.', EAEL_TEXTDOMAIN ),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 		] );
 		$this->add_control( 'default_form_type', [
 			'label'   => __( 'Default Form Type', EAEL_TEXTDOMAIN ),
-			//'description' => __( 'Choose the type of form you want to show by default. Note: you can show both form in a single page even if you select only login or registration from below.', EAEL_TEXTDOMAIN ),
 			'type'    => Controls_Manager::SELECT,
 			'options' => [
 				'login'    => __( 'Login', EAEL_TEXTDOMAIN ),
