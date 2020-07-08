@@ -1,6 +1,3 @@
-/*----------------------------*/
-/* 35. Feature List
-/*----------------------------*/
 .elementor-widget-eael-feature-list .-icon-position-left .connector-type-modern.rhombus .eael-feature-list-item:before,
 .elementor-widget-eael-feature-list .-icon-position-top .connector-type-modern.rhombus .eael-feature-list-item:before,
 .elementor-widget-eael-feature-list .-icon-position-right .connector-type-modern.rhombus .eael-feature-list-item:before {
@@ -14,7 +11,6 @@
 .elementor-widget-eael-feature-list .-icon-position-right .connector,
 .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right .connector {
   right: 0;
-  left: -webkit-calc(100% - 70px);
   left: calc(100% - 70px);
 }
 .elementor-widget-eael-feature-list .-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
@@ -56,7 +52,6 @@
   top: 0.5em;
   font-size: 60px;
   left: 0;
-  right: -webkit-calc(100% - 60px);
   right: calc(100% - 60px);
   border-right: none !important;
 }
@@ -82,7 +77,6 @@
   -o-transition: all 0.5s;
   transition: all 0.5s;
   display: -webkit-inline-box;
-  display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
 }
@@ -103,19 +97,15 @@
   color: #37368e;
   text-align: center;
   display: -webkit-inline-box;
-  display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
@@ -164,12 +154,10 @@
   background-color: #fff;
 }
 .elementor-widget-eael-feature-list .eael-feature-list-items.circle .eael-feature-list-icon-box .eael-feature-list-icon-inner {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 .elementor-widget-eael-feature-list .eael-feature-list-items.circle .eael-feature-list-icon-box .eael-feature-list-icon-inner .eael-feature-list-icon {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 .elementor-widget-eael-feature-list .eael-feature-list-items.rhombus .eael-feature-list-icon-box .eael-feature-list-icon-inner {
   -webkit-transform: rotate(45deg);
@@ -275,7 +263,6 @@
   .elementor-widget-eael-feature-list .-icon-position-left .eael-feature-list-item,
 .elementor-widget-eael-feature-list .-icon-position-right .eael-feature-list-item {
     display: -webkit-box;
-    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
   }
@@ -283,7 +270,6 @@
     text-align: left;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
   }
@@ -291,7 +277,6 @@
     text-align: right;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: reverse;
-    -webkit-flex-direction: row-reverse;
     -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
   }
@@ -300,7 +285,6 @@
   .elementor-widget-eael-feature-list .-tablet-icon-position-left .eael-feature-list-item,
 .elementor-widget-eael-feature-list .-tablet-icon-position-right .eael-feature-list-item {
     display: -webkit-box;
-    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
   }
@@ -308,7 +292,6 @@
     text-align: left;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
   }
@@ -316,7 +299,6 @@
     text-align: right;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: reverse;
-    -webkit-flex-direction: row-reverse;
     -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
   }
@@ -456,7 +438,6 @@
   .elementor-widget-eael-feature-list .-mobile-icon-position-left .eael-feature-list-item,
 .elementor-widget-eael-feature-list .-mobile-icon-position-right .eael-feature-list-item {
     display: -webkit-box;
-    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
   }
@@ -464,7 +445,6 @@
     text-align: left;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
   }
@@ -472,7 +452,6 @@
     text-align: right !important;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: reverse;
-    -webkit-flex-direction: row-reverse;
     -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
   }
