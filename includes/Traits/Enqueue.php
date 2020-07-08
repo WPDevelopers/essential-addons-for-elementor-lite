@@ -13,7 +13,7 @@ trait Enqueue
     public function before_single_enqueue_scripts($widgets)
     {
         // Compatibility: Gravity forms
-        if (in_array('gravity-form', $widgets) &&  class_exists('GFCommon')) {
+        if (in_array('gravity-form', $widgets) && class_exists('GFCommon')) {
             foreach ($this->eael_select_gravity_form() as $form_id => $form_name) {
                 if ($form_id != '0') {
                     gravity_form_enqueue_scripts($form_id);
@@ -22,17 +22,17 @@ trait Enqueue
         }
 
         // Compatibility: WPforms
-        if (in_array('wpforms', $widgets) &&  function_exists('wpforms')) {
+        if (in_array('wpforms', $widgets) && function_exists('wpforms')) {
             wpforms()->frontend->assets_css();
         }
 
         // Compatibility: Caldera forms
-        if (in_array('caldera-form', $widgets) &&  class_exists('Caldera_Forms')) {
+        if (in_array('caldera-form', $widgets) && class_exists('Caldera_Forms')) {
             add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
         }
 
         // Compatibility: Fluent forms
-        if (in_array('fluentform', $widgets) &&  defined('FLUENTFORM')) {
+        if (in_array('fluentform', $widgets) && defined('FLUENTFORM')) {
             wp_register_style(
                 'fluent-form-styles',
                 WP_PLUGIN_URL . '/fluentform/public/css/fluent-forms-public.css',
@@ -49,7 +49,7 @@ trait Enqueue
         }
 
         // Compatibility: Ninja forms
-        if (in_array('ninja-form', $widgets) &&  class_exists('\Ninja_Forms') && class_exists('\NF_Display_Render')) {
+        if (in_array('ninja-form', $widgets) && class_exists('\Ninja_Forms') && class_exists('\NF_Display_Render')) {
             add_action('elementor/preview/enqueue_styles', function () {
                 ob_start();
                 \NF_Display_Render::localize(0);
@@ -100,35 +100,23 @@ trait Enqueue
 
             echo '<style id="eael-post-' . $post_id . '">' . $css_strings . '</style>';
         } else {
-            // generate post style
-            $this->generate_post_script($post_id, $widgets, 'css');
+            // // generate post style
+            // $this->generate_post_script($post_id, $widgets, 'css');
 
-            // enqueue
-            wp_enqueue_style(
-                'eael-post-' . $post_id,
-                $this->safe_protocol(EAEL_ASSET_URL . '/post-' . $post_id . '.min.css'),
-                false,
-                time()
-            );
+            // // enqueue
+            // wp_enqueue_style(
+            //     'eael-post-' . $post_id,
+            //     $this->safe_protocol(EAEL_ASSET_URL . '/post-' . $post_id . '.min.css'),
+            //     false,
+            //     time()
+            // );
         }
 
         // js
         if (get_option('eael_js_print_method', 'external') == 'internal') {
             $this->js_strings[$post_id] = $this->generate_strings($post_id, $widgets, 'view', 'js');
         } else {
-            // generate post script
-            $this->generate_post_script($post_id, $widgets, 'js');
-
-            wp_enqueue_script(
-                'eael-post-' . $post_id,
-                $this->safe_protocol(EAEL_ASSET_URL . '/post-' . $post_id . '.min.js'),
-                ['jquery'],
-                time(),
-                true
-            );
-
-            // localize script
-            wp_localize_script('eael-post-' . $post_id, 'localize', $this->localize_objects);
+            $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $widgets)));
         }
     }
 
@@ -231,6 +219,17 @@ trait Enqueue
     // inline enqueue styles
     public function enqueue_inline_styles()
     {
+        // generate post style
+        $this->generate_post_script($this->loaded_templates[0], $this->loaded_widgets, 'css');
+
+        // enqueue
+        wp_enqueue_style(
+            'eael-post-' . $this->loaded_templates[0],
+            $this->safe_protocol(EAEL_ASSET_URL . '/post-' . $this->loaded_templates[0] . '.min.css'),
+            false,
+            time()
+        );
+        
         if ($this->css_strings) {
             foreach ($this->css_strings as $css_string) {
                 echo '<style>' . $css_string . '</style>';
@@ -241,13 +240,29 @@ trait Enqueue
     // inline enqueue styles
     public function enqueue_inline_scripts()
     {
-        if ($this->js_strings) {
-            // localize scripts for once
-            echo '<script>var localize =' . json_encode($this->localize_objects) . '</script>';
+        if (get_option('eael_js_print_method', 'external') == 'internal') {
+            if ($this->js_strings) {
+                // localize scripts for once
+                echo '<script>var localize =' . json_encode($this->localize_objects) . '</script>';
 
-            foreach ($this->js_strings as $js_string) {
-                echo '<script>' . $js_string . '</script>';
+                foreach ($this->js_strings as $js_string) {
+                    echo '<script>' . $js_string . '</script>';
+                }
             }
+        } else {
+            // generate post script
+            $this->generate_post_script($this->loaded_templates[0], $this->loaded_widgets, 'js');
+
+            wp_enqueue_script(
+                'eael-post-' . $this->loaded_templates[0],
+                $this->safe_protocol(EAEL_ASSET_URL . '/post-' . $this->loaded_templates[0] . '.min.js'),
+                ['jquery'],
+                time(),
+                true
+            );
+
+            // localize script
+            wp_localize_script('eael-post-' . $this->loaded_templates[0], 'localize', $this->localize_objects);
         }
     }
 }
