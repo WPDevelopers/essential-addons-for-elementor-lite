@@ -46,8 +46,7 @@
   margin: 0;
 }
 .testimonial-avatar-rounded figure img {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   height: auto;
 }
 .eael-testimonial-content {

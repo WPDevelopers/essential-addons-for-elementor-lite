@@ -14,7 +14,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 	ea.hooks.doAction("init");
 
 	// init edit mode hook
-	if(ea.isEditMode) {
+	if (ea.isEditMode) {
 		ea.hooks.doAction("editMode.init");
 	}
 });

@@ -815,7 +815,7 @@ class Advanced_Data_Table extends Widget_Base
                     'isLinked' => true,
                 ],
                 'selectors'       => [
-                    '{{WRAPPER}} .ea-advanced-data-table' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table td' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );

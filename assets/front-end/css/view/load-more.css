@@ -21,22 +21,18 @@
 .eael-button-wrap,
 .eael-load-more-button-wrap {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 .eael-button,
 .eael-load-more-button {
   display: -webkit-box !important;
-  display: -webkit-flex !important;
   display: -ms-flexbox !important;
   display: flex !important;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   padding: 1em 2em;
@@ -50,8 +46,7 @@
 }
 .eael-button .eael-btn-loader,
 .eael-load-more-button .eael-btn-loader {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   width: 20px;
   height: 20px;
   font-size: 10px;
@@ -74,8 +69,7 @@
 }
 .eael-button .eael-btn-loader:after,
 .eael-load-more-button .eael-btn-loader:after {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   width: 20px;
   height: 20px;
 }
