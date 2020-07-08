@@ -141,31 +141,6 @@
 .eael-lr-form-wrapper .eael-forever-forget .forget-pass {
   text-align: right;
 }
-.eael-lr-form-wrapper .eael-forever-forget .forget-menot input[type=checkbox] {
-  border: 1px solid #7e8993;
-  -webkit-border-radius: 4px;
-          border-radius: 4px;
-  background: #fff;
-  color: #555;
-  clear: none;
-  cursor: pointer;
-  display: inline-block;
-  line-height: 0;
-  height: 1rem;
-  margin: -0.25rem 0.25rem 0 0;
-  outline: 0;
-  padding: 0 !important;
-  text-align: center;
-  vertical-align: middle;
-  width: 1rem !important;
-  min-width: 1rem;
-  -webkit-appearance: none;
-  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-  -webkit-transition: 0.05s border-color ease-in-out;
-  -o-transition: 0.05s border-color ease-in-out;
-  transition: 0.05s border-color ease-in-out;
-}
 .eael-lr-form-wrapper .eael-lr-password-wrapper {
   position: relative;
 }
@@ -232,4 +207,144 @@
 }
 .eael-lr-form-wrapper .lr-form-header p {
   font-size: 14px;
+}
+.eael-lr-form-wrapper .eael-form-msg {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+}
+.eael-lr-form-wrapper .eael-form-msg.invalid {
+  color: #dc3545;
+}
+.eael-lr-form-wrapper .eael-form-msg.valid {
+  color: #28a745;
+}
+@supports (-webkit-appearance: none) or (-moz-appearance: none) {
+  .eael-lr-form-wrapper input[type=checkbox] {
+    --active: #275EFE;
+    --active-inner: #fff;
+    --focus: 0;
+    --border: #b7b7b7;
+    --border-hover: var(--active);
+    --background: #fff;
+    --disabled: #F6F8FF;
+    --disabled-inner: #E1E6F9;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 18px;
+    outline: none;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    top: 2px;
+    margin: 0;
+    cursor: pointer;
+    border: 2px solid var(--bc, var(--border));
+    background: var(--b, var(--background));
+    -webkit-transition: background 0.3s, border-color 0.3s, -webkit-box-shadow 0.2s;
+    transition: background 0.3s, border-color 0.3s, -webkit-box-shadow 0.2s;
+    -o-transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.2s, -webkit-box-shadow 0.2s;
+  }
+  .eael-lr-form-wrapper input[type=checkbox]:after {
+    content: "";
+    display: block;
+    left: 0;
+    top: 0;
+    position: absolute;
+    -webkit-transition: opacity var(--d-o, 0.2s), -webkit-transform var(--d-t, 0.3s) var(--d-t-e, ease);
+    transition: opacity var(--d-o, 0.2s), -webkit-transform var(--d-t, 0.3s) var(--d-t-e, ease);
+    -o-transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
+    transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
+    transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s), -webkit-transform var(--d-t, 0.3s) var(--d-t-e, ease);
+  }
+  .eael-lr-form-wrapper input[type=checkbox]:checked {
+    --b: var(--active);
+    --bc: var(--active);
+    --d-o: .3s;
+    --d-t: .6s;
+    --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+  }
+  .eael-lr-form-wrapper input[type=checkbox]:disabled {
+    --b: var(--disabled);
+    cursor: not-allowed;
+    opacity: 0.9;
+  }
+  .eael-lr-form-wrapper input[type=checkbox]:disabled:checked {
+    --b: var(--disabled-inner);
+    --bc: var(--border);
+  }
+  .eael-lr-form-wrapper input[type=checkbox]:disabled + label {
+    cursor: not-allowed;
+  }
+  .eael-lr-form-wrapper input[type=checkbox]:hover:not(:checked):not(:disabled) {
+    --bc: var(--border-hover);
+  }
+  .eael-lr-form-wrapper input[type=checkbox]:focus {
+    -webkit-box-shadow: 0 0 0 var(--focus);
+            box-shadow: 0 0 0 var(--focus);
+  }
+  .eael-lr-form-wrapper input[type=checkbox]:not(#eael_accept_tnc) {
+    width: 18px;
+  }
+  .eael-lr-form-wrapper input[type=checkbox]:not(#eael_accept_tnc):after {
+    opacity: var(--o, 0);
+  }
+  .eael-lr-form-wrapper input[type=checkbox]:not(#eael_accept_tnc):checked {
+    --o: 1;
+  }
+  .eael-lr-form-wrapper input[type=checkbox] + label {
+    font-size: 14px;
+    line-height: 21px;
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+    margin-left: 4px;
+  }
+  .eael-lr-form-wrapper input[type=checkbox]:not(#eael_accept_tnc) {
+    -webkit-border-radius: 3px;
+            border-radius: 3px;
+  }
+  .eael-lr-form-wrapper input[type=checkbox]:not(#eael_accept_tnc):after {
+    width: 5px;
+    height: 9px;
+    border: 2px solid var(--active-inner);
+    border-top: 0;
+    border-left: 0;
+    left: 5px;
+    top: 1px;
+    -webkit-transform: rotate(var(--r, 20deg));
+        -ms-transform: rotate(var(--r, 20deg));
+            transform: rotate(var(--r, 20deg));
+  }
+  .eael-lr-form-wrapper input[type=checkbox]:not(#eael_accept_tnc):checked {
+    --r: 43deg;
+  }
+  .eael-lr-form-wrapper input[type=checkbox]#eael_accept_tnc {
+    width: 31px;
+    -webkit-border-radius: 11px;
+            border-radius: 11px;
+    border-width: 1px;
+  }
+  .eael-lr-form-wrapper input[type=checkbox]#eael_accept_tnc:after {
+    left: 2px;
+    top: 2px;
+    -webkit-border-radius: 50%;
+            border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    background: var(--ab, var(--border));
+    -webkit-transform: translateX(var(--x, 0));
+        -ms-transform: translateX(var(--x, 0));
+            transform: translateX(var(--x, 0));
+  }
+  .eael-lr-form-wrapper input[type=checkbox]#eael_accept_tnc:checked {
+    --ab: var(--active-inner);
+    --x: 13px;
+  }
+  .eael-lr-form-wrapper input[type=checkbox]#eael_accept_tnc:disabled:not(:checked):after {
+    opacity: 0.6;
+  }
 }
