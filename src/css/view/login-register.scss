@@ -281,16 +281,15 @@ $sizes: 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
             &#eael_accept_tnc {
                 width: 31px;
                 border-radius: 11px;
-                border: none;
-                background: var(--active);
+                border-width: 1px;
 
                 &:after {
                     left: 2px;
                     top: 2px;
                     border-radius: 50%;
-                    width: 14px;
-                    height: 14px;
-                    background: var(--active-inner);
+                    width: 12px;
+                    height: 12px;
+                    background: var(--ab, var(--border));
                     transform: translateX(var(--x, 0));
                 }
                 &:checked {
