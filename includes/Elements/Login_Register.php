@@ -2168,10 +2168,10 @@ class Login_Register extends Widget_Base {
 
 	protected function print_registration_errors_message( $errors ) {
 		?>
-        <ul class="eael-registration-errors errors">
+        <ul class="eael-registration-errors">
 			<?php
 			foreach ( $errors as $register_error ) {
-				printf( '<li class="error-message">%s</li>', esc_html( $register_error ) );
+				printf( '<li class="eael-form-msg invalid">%s</li>', esc_html( $register_error ) );
 			}
 			?>
         </ul>
@@ -2182,7 +2182,7 @@ class Login_Register extends Widget_Base {
 	protected function print_registration_success_message( $success ) {
 
 		if ( $success ) {
-			$message = '<p class="eael-registration-success">' . esc_html( $success ) . '</p>';
+			$message = '<p class="eael-form-msg valid">' . esc_html( $success ) . '</p>';
 			echo apply_filters( 'eael/login-register/registration-success-msg', $message, $success );
 			delete_transient( 'eael_register_success' );
 
