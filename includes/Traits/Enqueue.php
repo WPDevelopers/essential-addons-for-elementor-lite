@@ -77,8 +77,6 @@ trait Enqueue
         }
 
         if ($this->is_preview_mode()) {
-            error_log(print_r('view', 1));
-
             // loaded template stack
             $this->loaded_templates[] = $post_id;
 
@@ -137,8 +135,6 @@ trait Enqueue
 
         // enqueue
         if ($this->is_edit_mode()) {
-            error_log(print_r('edit', 1));
-
             $widgets = $this->get_settings();
 
             // run hook before enqueue styles
