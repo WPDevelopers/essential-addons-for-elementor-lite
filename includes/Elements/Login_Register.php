@@ -6,6 +6,7 @@ use Elementor\Controls_Manager;
 use Elementor\Core\Schemes\Color;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
 use Elementor\Plugin;
@@ -1194,8 +1195,85 @@ class Login_Register extends Widget_Base {
 			'label' => __( 'General', EAEL_TEXTDOMAIN ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
+		//---Form Wrapper or Box
+		$this->add_control( 'form_form_wrap_po_toggle', [
+			'label'        => __( 'Box', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
+			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
+			'return_value' => 'yes',
+		] );
+
+		$this->start_popover();
+		$this->add_control( "eael_form_wrap_margin", [
+			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-lr-form-wrapper" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+		$this->add_control( "eael_form_wrap_padding", [
+			'label'      => __( 'Padding', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-lr-form-wrapper" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "eael_form_wrap_border",
+			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper",
+		] );
+		$this->add_control( "eael_form_wrap_border_radius", [
+			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-lr-form-wrapper" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
+			'name' => 'eael_form_wrap_shadow',
+			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper",
+		] );
+		$this->end_popover();
+
+		//----Form-----
+		$this->add_control( 'form_form_po_toggle', [
+			'label'        => __( 'Form', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
+			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
+			'return_value' => 'yes',
+		] );
+
+		$this->start_popover();
+		$this->add_control( "eael_form_margin", [
+			'label'      => __( 'Form Margin', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
 		$this->add_control( "eael_form_padding", [
-			'label'      => __( 'Form Spacing', EAEL_TEXTDOMAIN ),
+			'label'      => __( 'Form Padding', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1206,18 +1284,27 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .lr-form-wrapper" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
-		$this->add_control( "eael_form_image_margin", [
-			'label'      => __( 'Form Illustration spacing', EAEL_TEXTDOMAIN ),
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "eael_form_border",
+			'selector' => "{{WRAPPER}} .lr-form-wrapper",
+		] );
+		$this->add_control( "eael_form_border_radius", [
+			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
-				'em',
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-illustration" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
+		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
+				'name' => 'eael_form_shadow',
+				'selector' => "{{WRAPPER}} .lr-form-wrapper",
+			] );
+
+		$this->end_popover();
 
 		$this->end_controls_section();
 	}
@@ -1228,16 +1315,13 @@ class Login_Register extends Widget_Base {
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
 
-		$this->add_control(
-			'form_img_po_toggle',
-			[
-				'label' => __( 'Form Illustration', EAEL_TEXTDOMAIN ),
-				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => __( 'Default', EAEL_TEXTDOMAIN ),
-				'label_on' => __( 'Custom', EAEL_TEXTDOMAIN ),
+		$this->add_control( 'form_img_po_toggle', [
+				'label'        => __( 'Form Illustration', EAEL_TEXTDOMAIN ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
+				'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
 				'return_value' => 'yes',
-			]
-		);
+			] );
 
 		$this->start_popover();
 
@@ -1284,16 +1368,13 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->end_popover();
 
-		$this->add_control(
-			'form_logo_po_toggle',
-			[
-				'label' => __( 'Form Logo', EAEL_TEXTDOMAIN ),
-				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => __( 'Default', EAEL_TEXTDOMAIN ),
-				'label_on' => __( 'Custom', EAEL_TEXTDOMAIN ),
+		$this->add_control( 'form_logo_po_toggle', [
+				'label'        => __( 'Form Logo', EAEL_TEXTDOMAIN ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
+				'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
 				'return_value' => 'yes',
-			]
-		);
+			] );
 
 		$this->start_popover();
 
@@ -1327,6 +1408,7 @@ class Login_Register extends Widget_Base {
 			'name'     => "form_logo_border",
 			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper .lr-form-header img",
 		] );
+
 		$this->add_control( "form_logo_border_radius", [
 			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -1467,8 +1549,20 @@ class Login_Register extends Widget_Base {
 			'label' => __( 'Form Labels', EAEL_TEXTDOMAIN ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
+		$this->add_control( "eael_form_label_margin", [
+			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
 		$this->add_control( "eael_form_label_padding", [
-			'label'      => __( 'Spacing', EAEL_TEXTDOMAIN ),
+			'label'      => __( 'Padding', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
