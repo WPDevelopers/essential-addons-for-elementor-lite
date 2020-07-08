@@ -92,7 +92,7 @@ trait Library
     }
 
     /**
-     * Check if elementor preview mode or not
+     * Check if wp running in background
      *
      * @since 3.0.0
      */
@@ -107,6 +107,42 @@ trait Library
         }
 
         return false;
+    }
+
+    /**
+     * Check if elementor edit mode or not
+     *
+     * @since 3.0.0
+     */
+    public function is_edit_mode()
+    {
+        if (isset($_REQUEST['elementor-preview']) && isset($_REQUEST['ver'])) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if elementor edit mode or not
+     *
+     * @since 3.0.0
+     */
+    public function is_preview_mode()
+    {
+        if (isset($_REQUEST['elementor-preview'])) {
+            return false;
+        }
+
+        if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'elementor') {
+            return false;
+        }
+
+        if (isset($_REQUEST['ver'])) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
