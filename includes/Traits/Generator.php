@@ -119,11 +119,15 @@ trait Generator
             }
         }
 
-        if ($post_id && $ext == 'js' && $context == 'view') {
-            $document = Plugin::$instance->documents->get($post_id);
+        if ($ext == 'js' && $context == 'view') {
+            if ($this->loaded_templates) {
+                foreach ($this->loaded_templates as $post_id) {
+                    $document = Plugin::$instance->documents->get($post_id);
 
-            if ($custom_js = $document->get_settings('eael_custom_js')) {
-                $output .= $custom_js;
+                    if ($custom_js = $document->get_settings('eael_custom_js')) {
+                        $output .= $custom_js;
+                    }
+                }
             }
         }
 
@@ -164,10 +168,7 @@ trait Generator
         }
 
         if ($context == 'view') {
-            if (count($this->loaded_templates) == 1) {
-                return array_unique(array_merge($lib['view'], $self['general'], $self['view']));
-            }
-            return array_unique(array_merge($lib['view'], $self['view']));
+            return array_unique(array_merge($lib['view'], $self['general'], $self['view']));
         }
 
         return array_unique(array_merge($lib['view'], $lib['edit'], $self['general'], $self['edit'], $self['view']));

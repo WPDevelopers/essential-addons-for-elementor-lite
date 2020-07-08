@@ -37,6 +37,9 @@ class Bootstrap
 
     // loaded templates in a request
     public $loaded_templates = [];
+    
+    // loaded widgets in a request
+    public $loaded_widgets = [];
 
     // css strings, used for inline embed
     protected $css_strings = [];
