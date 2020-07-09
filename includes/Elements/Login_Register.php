@@ -2436,6 +2436,8 @@ class Login_Register extends Widget_Base {
 	protected function print_validation_message() {
 		$errors  = get_transient( 'eael_register_errors' );
 		$success = get_transient( 'eael_register_success' );
+		//@TODO; remove after test
+        $success = 'This is a success message test... remove it after test.';
 		if ( empty( $errors ) && empty( $success ) ) {
 			return;
 		}
@@ -2462,7 +2464,7 @@ class Login_Register extends Widget_Base {
 			?>
         </ol>
 		<?php
-		//delete_transient( 'eael_register_errors' );
+		delete_transient( 'eael_register_errors' );
 	}
 
 	protected function print_registration_success_message( $success ) {

@@ -236,6 +236,11 @@
   width: 100%;
   margin-top: 0.25rem;
   font-size: 1rem;
+  padding: 10px 15px;
+  -webkit-border-top-right-radius: 8px;
+          border-top-right-radius: 8px;
+  -webkit-border-bottom-right-radius: 8px;
+          border-bottom-right-radius: 8px;
 }
 .eael-lr-form-wrapper .eael-form-msg.invalid {
   color: #721c24;
@@ -247,11 +252,11 @@
   background-color: #d4edda;
   border-left: 3px solid green;
 }
-.eael-lr-form-wrapper ul, .eael-lr-form-wrapper ol {
+.eael-lr-form-wrapper ul, .eael-lr-form-wrapper ol, .eael-lr-form-wrapper ul.eael-form-msg, .eael-lr-form-wrapper ol.eael-form-msg {
   margin: 0;
-  padding: 10px 10px 10px 30px;
+  padding-left: 30px;
 }
-.eael-lr-form-wrapper ul li:not(:last-child), .eael-lr-form-wrapper ol li:not(:last-child) {
+.eael-lr-form-wrapper ul li:not(:last-child), .eael-lr-form-wrapper ol li:not(:last-child), .eael-lr-form-wrapper ul.eael-form-msg li:not(:last-child), .eael-lr-form-wrapper ol.eael-form-msg li:not(:last-child) {
   padding-bottom: 10px;
 }
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
