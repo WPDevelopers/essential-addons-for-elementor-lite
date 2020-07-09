@@ -188,14 +188,27 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
         display: block;
         width: 100%;
         margin-top: .25rem;
-        font-size: 80%;
+        font-size: 1rem;
 
         &.invalid {
-            color: #dc3545;
+            color: #721c24;
+            background-color: #f8d7da;
+            border-left: 3px solid red;
         }
 
         &.valid {
-            color: #28a745;
+            color: #155724;
+            background-color: #d4edda;
+            border-left: 3px solid green;
+        }
+    }
+    ul,ol{
+        margin: 0;
+        padding: 10px 10px 10px 30px;
+    }
+    ul, ol{
+        li:not(:last-child) {
+            padding-bottom: 10px;
         }
     }
 

@@ -2241,7 +2241,7 @@ class Login_Register extends Widget_Base {
 							$this->print_necessary_hidden_fields( 'register' );
 							$this->print_terms_condition_notice();
 							?>
-                            <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn eael-lr-btn-inline <?php echo esc_attr($btn_align);?>" value="<?php echo esc_attr( $btn_text ); ?>"/>
+                            <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn eael-lr-btn-block<?php echo esc_attr($btn_align);?>" value="<?php echo esc_attr( $btn_text ); ?>"/>
 
 							<?php if ( $show_lgn_link ) { ?>
                                 <div class="eael-sign-wrapper">
@@ -2368,7 +2368,7 @@ class Login_Register extends Widget_Base {
 
 	protected function print_login_validation_errors() {
 		if ( $login_error = get_transient( 'eael_login_error' ) ) { ?>
-            <p class="eael-input-error">
+            <p class="eael-form-msg invalid">
 				<?php echo esc_html( $login_error ); ?>
             </p>
 			<?php
@@ -2454,15 +2454,15 @@ class Login_Register extends Widget_Base {
 
 	protected function print_registration_errors_message( $errors ) {
 		?>
-        <ul class="eael-registration-errors">
+        <ol class="eael-form-msg invalid">
 			<?php
 			foreach ( $errors as $register_error ) {
-				printf( '<li class="eael-form-msg invalid">%s</li>', esc_html( $register_error ) );
+				printf( '<li>%s</li>', esc_html( $register_error ) );
 			}
 			?>
-        </ul>
+        </ol>
 		<?php
-		delete_transient( 'eael_register_errors' );
+		//delete_transient( 'eael_register_errors' );
 	}
 
 	protected function print_registration_success_message( $success ) {

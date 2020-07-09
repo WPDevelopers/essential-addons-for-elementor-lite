@@ -235,13 +235,24 @@
   display: block;
   width: 100%;
   margin-top: 0.25rem;
-  font-size: 80%;
+  font-size: 1rem;
 }
 .eael-lr-form-wrapper .eael-form-msg.invalid {
-  color: #dc3545;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-left: 3px solid red;
 }
 .eael-lr-form-wrapper .eael-form-msg.valid {
-  color: #28a745;
+  color: #155724;
+  background-color: #d4edda;
+  border-left: 3px solid green;
+}
+.eael-lr-form-wrapper ul, .eael-lr-form-wrapper ol {
+  margin: 0;
+  padding: 10px 10px 10px 30px;
+}
+.eael-lr-form-wrapper ul li:not(:last-child), .eael-lr-form-wrapper ol li:not(:last-child) {
+  padding-bottom: 10px;
 }
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
   .eael-lr-form-wrapper input[type=checkbox] {
