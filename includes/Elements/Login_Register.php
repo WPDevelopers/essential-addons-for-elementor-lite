@@ -79,6 +79,11 @@ class Login_Register extends Widget_Base {
 	 * @var mixed|string
 	 */
 	protected $form_illustration_pos;
+	/**
+     * Form logo position
+	 * @var mixed|string
+	 */
+	protected $form_logo_pos;
 
 	/**
 	 * Login_Register constructor.
@@ -585,6 +590,22 @@ class Login_Register extends Widget_Base {
 			'name'      => 'lr_form_logo',
 			'default'   => 'full',
 			'separator' => 'none',
+		] );
+		$this->add_control( "lr_form_logo_position", [
+			'label'     => __( 'Form Logo Position', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::CHOOSE,
+			'options'   => [
+				'inline'  => [
+					'title' => __( 'Left', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-arrow-left',
+				],
+				'block' => [
+					'title' => __( 'Top', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-arrow-up',
+				],
+			],
+			'default'   => 'left',
+			'separator' => 'after',
 		] );
 
 		$this->add_control( 'login_form_title', [
@@ -1929,6 +1950,7 @@ class Login_Register extends Widget_Base {
 
 		$form_logo_id    = ! empty( $this->ds['lr_form_logo']['id'] ) ? $this->ds['lr_form_logo']['id'] : '';
 		$this->form_logo = Group_Control_Image_Size::get_attachment_image_src( $form_logo_id, 'lr_form_logo', $this->ds );
+		$this->form_logo_pos = ! empty( $this->ds['lr_form_logo_position'] ) ? $this->ds['lr_form_logo_position'] : 'inline';
 		?>
         <div class="eael-login-registration-wrapper">
 			<?php
@@ -2290,8 +2312,9 @@ class Login_Register extends Widget_Base {
 		if ( empty( $this->form_logo ) && empty( $title ) && empty( $subtitle ) ) {
 			return;
 		}
+
 		?>
-        <div class="lr-form-header header-inline">
+        <div class="lr-form-header header-<?php echo esc_attr($this->form_logo_pos);?>">
 			<?php if ( ! empty( $this->form_logo ) ) { ?>
                 <div class="form-logo">
                     <img src="<?php echo esc_attr( esc_url( $this->form_logo ) ); ?>" alt="<?php esc_attr_e( 'Form Logo Image', EAEL_TEXTDOMAIN ); ?>">
