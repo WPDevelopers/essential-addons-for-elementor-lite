@@ -14,6 +14,14 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
     display: none;
 }
 
+.mr-auto {
+    margin-right: auto;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
 /*-----Form Specific---*/
 .eael-lr-form-wrapper {
     width: 370px;
@@ -68,6 +76,7 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
         label {
             display: inline-block;
             margin-bottom: .5rem;
+
             &.mark-required::after {
                 content: ' *';
                 color: #ff0000;

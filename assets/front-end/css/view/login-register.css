@@ -47,6 +47,12 @@
 .d-none {
   display: none;
 }
+.mr-auto {
+  margin-right: auto;
+}
+.ml-auto {
+  margin-left: auto;
+}
 /*-----Form Specific---*/
 .eael-lr-form-wrapper {
   width: 370px;

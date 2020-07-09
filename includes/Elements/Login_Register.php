@@ -1807,30 +1807,25 @@ class Login_Register extends Widget_Base {
 			'name'     => "{$button_type}_btn_typography",
 			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn",
 		] );
-		$this->add_responsive_control( "{$button_type}_btn_align", [
-			'label'        => __( 'Alignment', EAEL_TEXTDOMAIN ),
-			'type'         => Controls_Manager::CHOOSE,
-			'options'      => [
-				'start'   => [
+		$this->add_control( "{$button_type}_btn_align", [
+			'label'     => __( 'Alignment', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::CHOOSE,
+			'options'   => [
+				'mr-auto'         => [
 					'title' => __( 'Left', EAEL_TEXTDOMAIN ),
-					'icon'  => 'eicon-text-align-left',
+					'icon'  => 'eicon-h-align-left',
 				],
-				'center'  => [
+				'ml-auto mr-auto' => [
 					'title' => __( 'Center', EAEL_TEXTDOMAIN ),
-					'icon'  => 'eicon-text-align-center',
+					'icon'  => 'eicon-h-align-center',
 				],
-				'end'     => [
+				'ml-auto'         => [
 					'title' => __( 'Right', EAEL_TEXTDOMAIN ),
-					'icon'  => 'eicon-text-align-right',
-				],
-				'stretch' => [
-					'title' => __( 'Justified', EAEL_TEXTDOMAIN ),
-					'icon'  => 'eicon-text-align-justify',
+					'icon'  => 'eicon-h-align-right',
 				],
 			],
-			'prefix_class' => 'elementor%s-button-align-',
-			'default'      => '',
-			'separator'    => 'before',
+			'default'   => '',
+			'separator' => 'before',
 		] );
 
 		$this->add_responsive_control( "{$button_type}_btn_width", [
@@ -2003,6 +1998,9 @@ class Login_Register extends Widget_Base {
 				$lp_atts .= ! empty( $this->ds['lost_password_url']['nofollow'] ) ? ' rel="nofollow"' : '';
 				$lp_link = sprintf( '<a href="%s" %s >%s</a>', esc_attr( $lp_url ), $lp_atts, $lp_text );
 			}
+
+			// btn alignment
+			$btn_align = isset( $this->ds['login_btn_align'] ) ? $this->ds['login_btn_align'] : '';
 			?>
             <section id="eael-login-form-wrapper" class="<?php echo esc_attr( $default_hide_class ); ?>">
                 <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2">
@@ -2055,7 +2053,7 @@ class Login_Register extends Widget_Base {
 
                                 </div>
 
-                                <input type="submit" name="eael-login-submit" id="eael-login-submit" class="eael-lr-btn eael-lr-btn-block" value="<?php echo esc_attr( $btn_text ); ?>"/>
+                                <input type="submit" name="eael-login-submit" id="eael-login-submit" class="eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>" value="<?php echo esc_attr( $btn_text ); ?>"/>
 
 								<?php if ( $show_reg_link ) { ?>
                                     <div class="eael-sign-wrapper">
@@ -2128,7 +2126,8 @@ class Login_Register extends Widget_Base {
 			}
 			$lgn_link = sprintf( $lgn_link_placeholder, $lgn_message, esc_attr( $lgn_url ), esc_attr( $lgn_link_action ), $lgn_link_text, $lgn_atts );
 
-
+            // btn alignment
+			$btn_align = isset( $this->ds['login_btn_align'] ) ? $this->ds['login_btn_align'] : '';
 			ob_start();
 			?>
             <section id="eael-register-form-wrapper" class="<?php echo esc_attr( $default_hide_class ); ?>">
@@ -2204,7 +2203,7 @@ class Login_Register extends Widget_Base {
 										'aria-required' => 'true',
 									] );
 									$this->add_render_attribute( $label_key, [
-										'class'      => 'mark-required',
+										'class' => 'mark-required',
 									] );
 								}
 
@@ -2242,7 +2241,7 @@ class Login_Register extends Widget_Base {
 							$this->print_necessary_hidden_fields( 'register' );
 							$this->print_terms_condition_notice();
 							?>
-                            <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn eael-lr-btn-inline" value="<?php echo esc_attr( $btn_text ); ?>"/>
+                            <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn eael-lr-btn-inline <?php echo esc_attr($btn_align);?>" value="<?php echo esc_attr( $btn_text ); ?>"/>
 
 							<?php if ( $show_lgn_link ) { ?>
                                 <div class="eael-sign-wrapper">
