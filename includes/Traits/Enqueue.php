@@ -110,10 +110,28 @@ trait Enqueue
                     false,
                     time()
                 );
+
+                $this->modify_enqueue_sequence();
             }
 
             // run hook before enqueue scripts
             do_action('eael/before_enqueue_scripts', $widgets_to_load);
+        }
+    }
+
+    public function modify_enqueue_sequence()
+    {
+        global $wp_styles;
+
+        $queue = &$wp_styles->queue;
+        $key1 = count($queue) - 1;
+        $key2 = count($queue) - 2;
+
+        if (array_key_exists($key1, $queue) && array_key_exists($key2, $queue)) {
+            $value1 = $queue[$key1];
+            $value2 = $queue[$key2];
+            $queue[$key1] = $value2;
+            $queue[$key2] = $value1;
         }
     }
 
