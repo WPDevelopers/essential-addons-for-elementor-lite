@@ -903,6 +903,104 @@ class Login_Register extends Widget_Base {
 				'show_labels' => 'yes',
 			],
 		] );
+		$this->add_control( 'rmark_po_toggle', [
+			'label' => __( 'Required Mark Style', EAEL_TEXTDOMAIN ),
+			'type'  => Controls_Manager::POPOVER_TOGGLE,
+			'condition' => [
+				'show_labels' => 'yes',
+				'mark_required' => 'yes',
+			],
+		] );
+		$this->start_popover();
+		$this->add_control( 'rmark_sign', [
+			'label'     => __( 'Mark Sign', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::TEXT,
+			'default'   => '*',
+			'placeholder'   => 'Enter * or (required) etc.',
+			'selectors'  => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'content: "{{VALUE}}";',
+			],
+			'condition' => [
+				'rmark_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_control( "rmark_size", [
+			'label'      => esc_html__( 'Size', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'font-size: {{SIZE}}{{UNIT}};',
+			],
+			'condition' => [
+				'rmark_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_control( "rmakr_color", [
+			'label'     => __( 'Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'rmark_po_toggle' => 'yes',
+			],
+		] );
+
+		$this->add_control( "rmark_valign", [
+			'label'      => esc_html__( 'Vertical Alignment', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::SLIDER,
+			'range'      => [
+				'px' => [
+					'min'  => -50,
+					'max'  => 50,
+					'step' => 0,
+				],
+			],
+			'default' => [
+				'unit' => 'px',
+				'size' => 17,
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'top: {{SIZE}}px;',
+			],
+			'condition' => [
+				'rmark_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_control( "rmark_halign", [
+			'label'      => esc_html__( 'Horizontal Alignment', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::SLIDER,
+			'range'      => [
+				'px' => [
+					'min'  => -50,
+					'max'  => 50,
+					'step' => 0,
+				],
+			],
+			'default' => [
+				'unit' => 'px',
+				'size' => -10,
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'right: {{SIZE}}px;',
+			],
+			'condition' => [
+				'rmark_po_toggle' => 'yes',
+			],
+		] );
+
+		$this->end_popover();
 
 		/*--Register Fields Button--*/
 		$this->add_control( 'reg_button_heading', [
@@ -1427,14 +1525,14 @@ class Login_Register extends Widget_Base {
 			'selectors'  => [
 				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
-			'condition' => [
-				'form_img_po_toggle' => 'yes'
+			'condition'  => [
+				'form_img_po_toggle' => 'yes',
 			],
 		] );
 
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
-			'label'        => __( 'Illustration Shadow', EAEL_TEXTDOMAIN ),
+			'label'    => __( 'Illustration Shadow', EAEL_TEXTDOMAIN ),
 			'name'     => 'form_img_shadow',
 			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration",
 		] );
@@ -1445,7 +1543,7 @@ class Login_Register extends Widget_Base {
 			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
 			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
 			'return_value' => 'yes',
-			'separator' => 'before',
+			'separator'    => 'before',
 		] );
 
 		$this->start_popover();
@@ -1461,8 +1559,8 @@ class Login_Register extends Widget_Base {
 			'selectors'  => [
 				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-header img" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
-			'condition' => [
-				'form_logo_po_toggle' => 'yes'
+			'condition'  => [
+				'form_logo_po_toggle' => 'yes',
 			],
 		] );
 
@@ -1477,16 +1575,16 @@ class Login_Register extends Widget_Base {
 			'selectors'  => [
 				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-header img" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
-			'condition' => [
-				'form_logo_po_toggle' => 'yes'
+			'condition'  => [
+				'form_logo_po_toggle' => 'yes',
 			],
 		] );
 
 		$this->add_group_control( Group_Control_Border::get_type(), [
-			'name'     => "form_logo_border",
-			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper .lr-form-header img",
+			'name'      => "form_logo_border",
+			'selector'  => "{{WRAPPER}} .eael-lr-form-wrapper .lr-form-header img",
 			'condition' => [
-				'form_logo_po_toggle' => 'yes'
+				'form_logo_po_toggle' => 'yes',
 			],
 		] );
 
@@ -1500,14 +1598,14 @@ class Login_Register extends Widget_Base {
 			'selectors'  => [
 				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-header img" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
-			'condition' => [
-				'form_logo_po_toggle' => 'yes'
+			'condition'  => [
+				'form_logo_po_toggle' => 'yes',
 			],
 		] );
 
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
-			'label'      => __( 'Logo Shadow', EAEL_TEXTDOMAIN ),
+			'label'    => __( 'Logo Shadow', EAEL_TEXTDOMAIN ),
 			'name'     => 'form_logo_shadow',
 			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper .lr-form-header img",
 		] );
@@ -1539,8 +1637,8 @@ class Login_Register extends Widget_Base {
 			'selectors'  => [
 				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
-			'condition' => [
-				'eael_form_field_po_toggle' => 'yes'
+			'condition'  => [
+				'eael_form_field_po_toggle' => 'yes',
 			],
 		] );
 
@@ -1555,8 +1653,8 @@ class Login_Register extends Widget_Base {
 			'selectors'  => [
 				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
-			'condition' => [
-				'eael_form_field_po_toggle' => 'yes'
+			'condition'  => [
+				'eael_form_field_po_toggle' => 'yes',
 			],
 		] );
 		$this->end_popover();
@@ -1680,8 +1778,8 @@ class Login_Register extends Widget_Base {
 			'selectors'  => [
 				"{{WRAPPER}} .lr-form-wrapper .eael-field-label" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
-			'condition' => [
-				'eael_form_label_po_toggle' => 'yes'
+			'condition'  => [
+				'eael_form_label_po_toggle' => 'yes',
 			],
 		] );
 		$this->add_control( "eael_form_label_padding", [
@@ -1695,8 +1793,8 @@ class Login_Register extends Widget_Base {
 			'selectors'  => [
 				"{{WRAPPER}} .lr-form-wrapper .eael-field-label" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
-			'condition' => [
-				'eael_form_label_po_toggle' => 'yes'
+			'condition'  => [
+				'eael_form_label_po_toggle' => 'yes',
 			],
 		] );
 		$this->end_popover();
@@ -1721,7 +1819,7 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .lr-form-wrapper .eael-field-label" => 'color: {{VALUE}};',
 			],
 			'condition' => [
-				'eael_form_label_c_po_toggle' => 'yes'
+				'eael_form_label_c_po_toggle' => 'yes',
 			],
 		] );
 		$this->add_control( 'eael_label_bg_color', [
@@ -1732,7 +1830,7 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .lr-form-wrapper .eael-field-label" => 'background-color: {{VALUE}};',
 			],
 			'condition' => [
-				'eael_form_label_c_po_toggle' => 'yes'
+				'eael_form_label_c_po_toggle' => 'yes',
 			],
 		] );
 		$this->end_popover();
@@ -1747,10 +1845,10 @@ class Login_Register extends Widget_Base {
 
 		$this->start_popover();
 		$this->add_group_control( Group_Control_Border::get_type(), [
-			'name'     => "eael_label_border",
-			'selector' => "{{WRAPPER}} .lr-form-wrapper .eael-field-label",
+			'name'      => "eael_label_border",
+			'selector'  => "{{WRAPPER}} .lr-form-wrapper .eael-field-label",
 			'condition' => [
-				'eael_form_label_b_po_toggle' => 'yes'
+				'eael_form_label_b_po_toggle' => 'yes',
 			],
 		] );
 		$this->add_control( "eael_label_border_radius", [
@@ -1763,8 +1861,8 @@ class Login_Register extends Widget_Base {
 			'selectors'  => [
 				"{{WRAPPER}} .lr-form-wrapper .eael-field-label" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
-			'condition' => [
-				'eael_form_label_b_po_toggle' => 'yes'
+			'condition'  => [
+				'eael_form_label_b_po_toggle' => 'yes',
 			],
 		] );
 		$this->end_popover();
@@ -1819,8 +1917,8 @@ class Login_Register extends Widget_Base {
 			'selectors'  => [
 				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
-			'condition' => [
-				"{$button_type}_btn_pot" => 'yes'
+			'condition'  => [
+				"{$button_type}_btn_pot" => 'yes',
 			],
 		] );
 		$this->add_control( "{$button_type}_btn_padding", [
@@ -1834,8 +1932,8 @@ class Login_Register extends Widget_Base {
 			'selectors'  => [
 				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
-			'condition' => [
-				"{$button_type}_btn_pot" => 'yes'
+			'condition'  => [
+				"{$button_type}_btn_pot" => 'yes',
 			],
 		] );
 		$this->end_popover();
@@ -2007,6 +2105,7 @@ class Login_Register extends Widget_Base {
 			],
 			'separator'  => 'before',
 		] );
+
 		$this->add_responsive_control( "{$button_type}_btn_height", [
 			'label'      => esc_html__( 'Button Height', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::SLIDER,
@@ -2515,13 +2614,13 @@ class Login_Register extends Widget_Base {
             <input type="hidden" name="eael_tnc_active" value="1">
             <input type="checkbox" name="eael_accept_tnc" value="1" id="eael_accept_tnc">
             <label for="eael_accept_tnc" class="eael-checkbox-label check-accept">
-		        <?php
-		        echo esc_html( $label );
-		        ?>
+				<?php
+				echo esc_html( $label );
+				?>
             </label>
-            <?php
-            echo $tc_link; // XSS ok. already sanitized.
-            ?>
+			<?php
+			echo $tc_link; // XSS ok. already sanitized.
+			?>
         </div>
 
 		<?php
