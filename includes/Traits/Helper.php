@@ -781,7 +781,7 @@ trait Helper
             );
         }
 
-        if ('eael-post-carousel' === $this->get_name() || 'eael-post-grid' === $this->get_name()) {
+        if ('eael-post-carousel' === $this->get_name() || 'eael-post-grid' === $this->get_name() || 'eael-post-block' === $this->get_name()) {
             $this->add_control(
                 'eael_show_post_terms',
                 [
