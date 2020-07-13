@@ -273,6 +273,18 @@
 .eael-lr-form-wrapper ul li:not(:last-child), .eael-lr-form-wrapper ol li:not(:last-child), .eael-lr-form-wrapper ul.eael-form-msg li:not(:last-child), .eael-lr-form-wrapper ol.eael-form-msg li:not(:last-child) {
   padding-bottom: 10px;
 }
+.eael-lr-form-wrapper .eael_accept_tnc_wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 1rem;
+}
+.eael-lr-form-wrapper .eael_accept_tnc_wrap .eael-lr-tnc-link {
+  margin-top: -3px;
+  margin-left: 5px;
+  display: inline-block;
+}
 .eael-lr-form-wrapper .eael-lr-footer {
   display: -webkit-box;
   display: -webkit-flex;
