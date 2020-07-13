@@ -565,23 +565,24 @@
           margin-right: 7px;
         }
       }
-      .post-meta-categories {
-        list-style: none;
-        display: inline-flex;
-		flex-flow: wrap;
-		margin: 0;
-        li {
-          font-size: 12px;
-		  margin-right: 7px;
-		  color: #929292;
-          &:last-child {
-            margin-right: 0;
-		  }
-		  a {
-			  color: #929292;
-		  }
-        }
-      }
+	.post-meta-categories {
+	list-style: none;
+	display: inline-flex;
+	flex-flow: wrap;
+	margin: 0;
+	padding-left: 0;
+	li {
+		font-size: 12px;
+		margin-right: 7px;
+		color: #929292;
+		&:last-child {
+		margin-right: 0;
+		}
+		a {
+			color: #929292;
+		}
+	}
+	}
     }
   }
 }
