@@ -2502,24 +2502,29 @@ class Login_Register extends Widget_Base {
 		$link_text = array_pop( $parts );
 		$source    = isset( $this->ds['acceptance_text_source'] ) ? $this->ds['acceptance_text_source'] : 'editor';
 		$tc_text   = isset( $this->ds['acceptance_text'] ) ? $this->ds['acceptance_text'] : '';
-		$tc_link   = '<a href="#" id="eael-lr-tnc-link">' . esc_html( $link_text ) . '</a>';
+		$tc_link   = '<a href="#" id="eael-lr-tnc-link" class="eael-lr-tnc-link">' . esc_html( $link_text ) . '</a>';
 		if ( 'custom' === $source ) {
 			$tc_url  = ! empty( $this->ds['acceptance_text_url']['url'] ) ? esc_url( $this->ds['acceptance_text_url']['url'] ) : esc_url( get_the_permalink( get_option( 'wp_page_for_privacy_policy' ) ) );
 			$tc_atts = ! empty( $this->ds['acceptance_text_url']['is_external'] ) ? ' target="_blank"' : '';
 			$tc_atts .= ! empty( $this->ds['acceptance_text_url']['nofollow'] ) ? ' rel="nofollow"' : '';
-			$tc_link = sprintf( '<a href="%1$s" id="eael-lr-tnc-link" %2$s>%3$s</a>', esc_attr( $tc_url ), $tc_atts, $link_text );
+			$tc_link = sprintf( '<a href="%1$s" id="eael-lr-tnc-link" class="eael-lr-tnc-link" %2$s>%3$s</a>', esc_attr( $tc_url ), $tc_atts, $link_text );
 		}
 
 		?>
-        <input type="hidden" name="eael_tnc_active" value="1">
-        <input type="checkbox" name="eael_accept_tnc" value="1" id="eael_accept_tnc">
-        <label for="eael_accept_tnc" class="eael-checkbox-label check-accept">
-			<?php
-			echo esc_html( $label );
-			?>
-        </label>
+        <div class="eael_accept_tnc_wrap">
+            <input type="hidden" name="eael_tnc_active" value="1">
+            <input type="checkbox" name="eael_accept_tnc" value="1" id="eael_accept_tnc">
+            <label for="eael_accept_tnc" class="eael-checkbox-label check-accept">
+		        <?php
+		        echo esc_html( $label );
+		        ?>
+            </label>
+            <?php
+            echo $tc_link; // XSS ok. already sanitized.
+            ?>
+        </div>
+
 		<?php
-		echo $tc_link; // XSS ok. already sanitized.
 		$tc = '<div class="eael-lr-tnc-wrap">';
 		$tc .= $this->parse_text_editor( $tc_text );
 		$tc .= '</div>';
