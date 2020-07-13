@@ -53,6 +53,20 @@
 .ml-auto {
   margin-left: auto;
 }
+.fd-row {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+.fd-col {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
 /*-----Form Specific---*/
 .eael-lr-form-wrapper {
   width: 370px;
@@ -258,6 +272,12 @@
 }
 .eael-lr-form-wrapper ul li:not(:last-child), .eael-lr-form-wrapper ol li:not(:last-child), .eael-lr-form-wrapper ul.eael-form-msg li:not(:last-child), .eael-lr-form-wrapper ol.eael-form-msg li:not(:last-child) {
   padding-bottom: 10px;
+}
+.eael-lr-form-wrapper .eael-lr-footer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
   .eael-lr-form-wrapper input[type=checkbox] {

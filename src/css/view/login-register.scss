@@ -21,7 +21,12 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
 .ml-auto {
     margin-left: auto;
 }
-
+.fd-row{
+   flex-direction: row;
+}
+.fd-col{
+    flex-direction: column;
+}
 /*-----Form Specific---*/
 .eael-lr-form-wrapper {
     width: 370px;
@@ -213,6 +218,10 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
         li:not(:last-child) {
             padding-bottom: 10px;
         }
+    }
+
+    .eael-lr-footer{
+        display: flex;
     }
 
     @supports (-webkit-appearance: none) or (-moz-appearance: none) {
