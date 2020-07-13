@@ -2461,9 +2461,12 @@ class Login_Register extends Widget_Base {
 										'required'      => 'required',
 										'aria-required' => 'true',
 									] );
-									$this->add_render_attribute( $label_key, [
-										'class' => 'mark-required',
-									] );
+									if ( 'yes' === $this->ds['mark_required'] ) {
+										$this->add_render_attribute( $label_key, [
+											'class' => 'mark-required',
+										] );
+									}
+
 								}
 
 
