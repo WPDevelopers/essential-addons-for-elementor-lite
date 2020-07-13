@@ -1018,7 +1018,7 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'reg_email_template_type', [
 			'label'       => __( 'Email Template Type', EAEL_TEXTDOMAIN ),
-			'description' => __( 'Default template uses WordPress Default email template. So, please select the Custom Option to send user proper information to user if you did you use any username field.', EAEL_TEXTDOMAIN ),
+			'description' => __( 'Default template uses WordPress Default email template. So, please select the Custom Option to send the user proper information if you used any username field.', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::SELECT,
 			'default'     => 'default',
 			'render_type' => 'none',
