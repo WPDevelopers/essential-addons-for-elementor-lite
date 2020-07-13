@@ -9,6 +9,50 @@ use \Elementor\Plugin;
 
 trait Generator
 {
+
+    public function uid($uid = null)
+    {
+        if ($uid == null) {
+            if (is_front_page()) {
+                $uid = 'front-page';
+            } else if (is_home()) {
+                $uid = 'home';
+            } else if (is_post_type_archive()) {
+                $post_type = get_query_var('post_type');
+
+                if (is_array($post_type)) {
+                    $post_type = reset($post_type);
+                }
+
+                $uid = 'post-type-archive-' . $post_type;
+            } else if (is_category()) {
+                $uid = 'category-' . get_queried_object_id();
+            } else if (is_tag()) {
+                $uid = 'tag-' . get_queried_object_id();
+            } else if (is_tax()) {
+                $uid = 'tax-' . get_queried_object_id();
+            } else if (is_author()) {
+                $uid = 'author-' . get_queried_object_id();
+            } else if (is_date()) {
+                $uid = 'date';
+            } else if (is_archive()) {
+                $uid = 'archive';
+            } else if (is_search()) {
+                $uid = 'search';
+            } else if (is_404()) {
+                $uid = 'error-404';
+            } else if (is_single() || is_page() || is_singular()) {
+                $uid = 'singular-' . get_queried_object_id();
+            }
+        }
+
+        if ($uid) {
+            return substr(md5($uid), 0, 9);
+        }
+
+        return $uid;
+    }
+
     /**
      * Parse widgets from page data
      *
@@ -16,6 +60,11 @@ trait Generator
      */
     public function parse_widgets($post_id)
     {
+
+        if (!Plugin::$instance->db->is_built_with_elementor($post_id)) {
+            return;
+        }
+
         $replace = [
             'eicon-woocommerce' => 'eael-product-grid',
             'eael-countdown' => 'eael-count-down',
@@ -204,7 +253,7 @@ trait Generator
     public function combine_files($paths = [], $context, $ext)
     {
         $output = '';
-        $file_name = ($context == 'view' ? 'post-' . implode('-', $this->loaded_templates) . '.min.' : 'eael.min.') . $ext;
+        $file_name = ($context == 'view' ? $this->uid() : $this->uid('eael')) . '.min.' . $ext;
 
         if (!empty($paths)) {
             foreach ($paths as $path) {
