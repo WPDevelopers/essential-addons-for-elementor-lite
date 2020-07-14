@@ -159,9 +159,10 @@ trait Enqueue
 
         // view mode
         if ($this->is_preview_mode()) {
+            $update_requires = (bool) get_transient('eael_requires_update');
             $posts = get_transient($this->uid());
 
-            if ($posts === false) {
+            if ($posts === false || $update_requires) {
                 $this->loaded_widgets = $this->get_settings();
             } else {
                 if (empty($posts)) {
@@ -246,7 +247,18 @@ trait Enqueue
 
         // view mode
         if ($this->is_preview_mode()) {
-            if ($this->loaded_templates && $this->loaded_widgets) {
+            if ($this->loaded_templates) {
+                // empty loaded widget stack
+                $this->loaded_widgets = [];
+
+                // parse widgets from post
+                foreach ($this->loaded_templates as $post_id) {
+                    $widgets = $this->parse_widgets($post_id);
+
+                    // loaded widgets stack
+                    $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $widgets)));
+                }
+
                 // js
                 if (get_option('eael_js_print_method') == 'internal') {
                     // localize scripts for once
@@ -271,6 +283,7 @@ trait Enqueue
 
             // update transient
             set_transient($this->uid(), $this->loaded_templates);
+            set_transient('eael_requires_update', false);
         }
     }
 }
