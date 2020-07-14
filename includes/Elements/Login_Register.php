@@ -1066,6 +1066,20 @@ class Login_Register extends Widget_Base {
 		] );
 
 
+		$this->add_control( 'register_success_msg', [
+			'label'       => __( 'Success Message', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXTAREA,
+			'default'     => __( 'Registration completed successfully, Check your inbox for password if you did not provided while registering.', EAEL_TEXTDOMAIN ),
+			'placeholder' => __( 'eg. Registration completed successfully', EAEL_TEXTDOMAIN ),
+		] );
+
+		$this->add_control( 'register_error_msg', [
+			'label'       => __( 'Error Message', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXTAREA,
+			'default'     => __( 'Something went wrong, Please try again.', EAEL_TEXTDOMAIN ),
+			'placeholder' => __( 'eg. Something went wrong, Please try again.', EAEL_TEXTDOMAIN ),
+		] );
+
 		$this->end_controls_section();
 	}
 
@@ -2723,13 +2737,21 @@ class Login_Register extends Widget_Base {
 
 	protected function print_registration_errors_message( $errors ) {
 		?>
-        <ol class="eael-form-msg invalid">
-			<?php
-			foreach ( $errors as $register_error ) {
-				printf( '<li>%s</li>', esc_html( $register_error ) );
-			}
-			?>
-        </ol>
+        <div class="eael-form-msg invalid">
+            <?php
+            if (!empty( $this->ds['register_error_msg'])) {
+	            printf( '<p>%s</p>', esc_html( $this->ds['register_error_msg'] ) );
+
+            }
+            ?>
+            <ol>
+				<?php
+				foreach ( $errors as $register_error ) {
+					printf( '<li>%s</li>', esc_html( $register_error ) );
+				}
+				?>
+            </ol>
+        </div>
 		<?php
 		delete_transient( 'eael_register_errors' );
 	}
@@ -2737,7 +2759,7 @@ class Login_Register extends Widget_Base {
 	protected function print_registration_success_message( $success ) {
 
 		if ( $success ) {
-			$message = '<p class="eael-form-msg valid">' . esc_html( $success ) . '</p>';
+			$message = '<p class="eael-form-msg valid">' . esc_html( $this->get_settings_for_display( 'register_success_msg' ) ) . '</p>';
 			echo apply_filters( 'eael/login-register/registration-success-msg', $message, $success );
 			delete_transient( 'eael_register_success' );
 
