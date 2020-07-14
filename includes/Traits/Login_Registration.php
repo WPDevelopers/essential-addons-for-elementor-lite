@@ -298,7 +298,7 @@ trait Login_Registration {
 		wp_new_user_notification( $user_id, null, $admin_or_both );
 
 		// success & handle after registration action as defined by user in the widget
-		$this->set_transient( 'eael_register_success', __( 'Registration completed successfully, Check your inbox for password if you did not provided while registering.', EAEL_TEXTDOMAIN ) );
+		$this->set_transient( 'eael_register_success', 1 );
 
 
 		// Handle after registration action

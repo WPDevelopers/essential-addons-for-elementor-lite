@@ -197,7 +197,7 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
     .eael-form-msg {
         display: block;
         width: 100%;
-        margin-top: .25rem;
+        margin-top: 1rem;
         font-size: 1rem;
         padding: 10px 15px;
         border-top-right-radius: 8px;
@@ -215,11 +215,9 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
             border-left: 3px solid green;
         }
     }
-    ul,ol, ul.eael-form-msg, ol.eael-form-msg{
+    ul,ol, .eael-form-msg ul, .eael-form-msg ol{
         margin: 0;
         padding-left: 30px;
-    }
-    ul, ol, ul.eael-form-msg, ol.eael-form-msg{
         li:not(:last-child) {
             padding-bottom: 10px;
         }
