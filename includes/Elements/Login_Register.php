@@ -904,23 +904,23 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 		$this->add_control( 'rmark_po_toggle', [
-			'label' => __( 'Required Mark Style', EAEL_TEXTDOMAIN ),
-			'type'  => Controls_Manager::POPOVER_TOGGLE,
+			'label'     => __( 'Required Mark Style', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::POPOVER_TOGGLE,
 			'condition' => [
-				'show_labels' => 'yes',
+				'show_labels'   => 'yes',
 				'mark_required' => 'yes',
 			],
 		] );
 		$this->start_popover();
 		$this->add_control( 'rmark_sign', [
-			'label'     => __( 'Mark Sign', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::TEXT,
-			'default'   => '*',
-			'placeholder'   => 'Enter * or (required) etc.',
-			'selectors'  => [
+			'label'       => __( 'Mark Sign', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'default'     => '*',
+			'placeholder' => 'Enter * or (required) etc.',
+			'selectors'   => [
 				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'content: "{{VALUE}}";',
 			],
-			'condition' => [
+			'condition'   => [
 				'rmark_po_toggle' => 'yes',
 			],
 		] );
@@ -942,7 +942,7 @@ class Login_Register extends Widget_Base {
 			'selectors'  => [
 				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'font-size: {{SIZE}}{{UNIT}};',
 			],
-			'condition' => [
+			'condition'  => [
 				'rmark_po_toggle' => 'yes',
 			],
 		] );
@@ -958,20 +958,20 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( "rmark_valign", [
-			'label'      => esc_html__( 'Vertical Alignment', EAEL_TEXTDOMAIN ),
-			'type'       => Controls_Manager::SLIDER,
-			'range'      => [
+			'label'     => esc_html__( 'Vertical Alignment', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SLIDER,
+			'range'     => [
 				'px' => [
-					'min'  => -50,
+					'min'  => - 50,
 					'max'  => 50,
 					'step' => 0,
 				],
 			],
-			'default' => [
+			'default'   => [
 				'unit' => 'px',
 				'size' => 17,
 			],
-			'selectors'  => [
+			'selectors' => [
 				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'top: {{SIZE}}px;',
 			],
 			'condition' => [
@@ -979,20 +979,20 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 		$this->add_control( "rmark_halign", [
-			'label'      => esc_html__( 'Horizontal Alignment', EAEL_TEXTDOMAIN ),
-			'type'       => Controls_Manager::SLIDER,
-			'range'      => [
+			'label'     => esc_html__( 'Horizontal Alignment', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SLIDER,
+			'range'     => [
 				'px' => [
-					'min'  => -50,
+					'min'  => - 50,
 					'max'  => 50,
 					'step' => 0,
 				],
 			],
-			'default' => [
+			'default'   => [
 				'unit' => 'px',
-				'size' => -10,
+				'size' => - 10,
 			],
-			'selectors'  => [
+			'selectors' => [
 				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'right: {{SIZE}}px;',
 			],
 			'condition' => [
