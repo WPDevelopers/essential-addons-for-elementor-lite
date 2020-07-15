@@ -235,63 +235,144 @@ class Login_Register extends Widget_Base {
 			],
 			'default' => 'login',
 		] );
-
 		$this->add_control( 'hide_for_logged_in_user', [
 			'label'   => __( 'Hide all Forms from Logged-in Users', EAEL_TEXTDOMAIN ),
 			'type'    => Controls_Manager::SWITCHER,
 			'default' => 'yes',
 		] );
-
-		$this->add_control( 'show_login_link', [
-			'label'     => __( 'Show Login Link', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::SWITCHER,
-			'default'   => 'yes',
-			'condition' => [
-				'default_form_type' => 'register',
-			],
+		$this->add_control( 'gen_lgn_content_po_toggle', [
+			'label'        => __( 'Login Form General', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Controls', EAEL_TEXTDOMAIN ),
+			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
+			'return_value' => 'yes',
+			'default'      => 'yes',
 		] );
-		$this->add_control( 'login_link_text', [
-			'label'       => __( 'Login Link Text', EAEL_TEXTDOMAIN ),
-			'description' => __( 'You can put text in two lines to make the last line linkable.', EAEL_TEXTDOMAIN ),
-			'type'        => Controls_Manager::TEXTAREA,
-			'rows'        => 2,
+		$this->start_popover();
+		$this->add_control( 'show_log_out_message', [
+			'label'   => __( 'Show Logout Link', EAEL_TEXTDOMAIN ),
+			//'description' => __( 'This option will show a message with logout link instead of a login form for the logged in user', EAEL_TEXTDOMAIN ),
+			'type'    => Controls_Manager::SWITCHER,
+			'default' => 'yes',
+			//'condition' => [
+			//	'default_form_type' => 'login',
+			//],
+		] );
+		$this->add_control( 'show_lost_password', [
+			'label'   => __( 'Show Lost your password?', EAEL_TEXTDOMAIN ),
+			'type'    => Controls_Manager::SWITCHER,
+			'default' => 'yes',
+			//'conditions' => $this->get_form_controls_display_condition( 'login' ),
+		] );
+
+		$this->add_control( 'lost_password_text', [
+			'label'       => __( 'Lost Password Text', EAEL_TEXTDOMAIN ),
+			'label_block' => true,
+			'type'        => Controls_Manager::TEXT,
 			'dynamic'     => [
 				'active' => true,
 			],
-			'default'     => __( "Already have an Account? \nSign In", EAEL_TEXTDOMAIN ),
+			'default'     => __( 'Forgot password?', EAEL_TEXTDOMAIN ),
 			'condition'   => [
-				'show_login_link'   => 'yes',
-				'default_form_type' => 'register',
+				'show_lost_password' => 'yes',
 			],
 		] );
-
-		$this->add_control( 'login_link_action', [
-			'label'     => __( 'Login Link Action', EAEL_TEXTDOMAIN ),
-			//'description' => __( 'Select what should happen when the login link is clicked', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::SELECT,
-			'options'   => [
+		$this->add_control( 'lost_password_link_type', [
+			'label'       => __( 'Lost Password Link to', EAEL_TEXTDOMAIN ),
+			'label_block' => true,
+			'type'        => Controls_Manager::SELECT,
+			'options'     => [
 				'default' => __( 'Default WordPress Page', EAEL_TEXTDOMAIN ),
 				'custom'  => __( 'Custom URL', EAEL_TEXTDOMAIN ),
-				'form'    => __( 'Show Login Form', EAEL_TEXTDOMAIN ),
 			],
-			'default'   => 'default',
-			'condition' => [
-				'show_login_link' => 'yes',
+			'default'     => 'default',
+			'condition'   => [
+				'show_lost_password' => 'yes',
 			],
 		] );
-
-		$this->add_control( 'custom_login_url', [
-			'label'     => __( 'Custom Login URL', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::URL,
-			'dynamic'   => [
+		$this->add_control( 'lost_password_url', [
+			'label'         => __( 'Custom Lost Password URL', EAEL_TEXTDOMAIN ),
+			'label_block'   => true,
+			'type'          => Controls_Manager::URL,
+			'show_external' => false,
+			'dynamic'       => [
 				'active' => true,
 			],
-			'condition' => [
-				'login_link_action' => 'custom',
-				'show_login_link'   => 'yes',
+			'condition'     => [
+				'lost_password_link_type' => 'custom',
+				'show_lost_password'      => 'yes',
 			],
 		] );
 
+		if ( $this->user_can_register ) {
+			$this->add_control( 'reg_hr', [
+				'type' => Controls_Manager::DIVIDER,
+			] );
+			$this->add_control( 'show_register_link', [
+				'label'     => __( 'Show Register Link', EAEL_TEXTDOMAIN ),
+				//'description' => __( 'You can add a "Register" Link below the login form', EAEL_TEXTDOMAIN ),
+				'type'      => Controls_Manager::SWITCHER,
+				'default'   => 'yes',
+				'separator' => 'before',
+				//'condition' => [
+				//	'default_form_type' => 'login',
+				//],
+			] );
+			$this->add_control( 'registration_link_text', [
+				'label'       => __( 'Register Link Text', EAEL_TEXTDOMAIN ),
+				'label_block' => true,
+				'description' => __( 'You can put text in two lines to make the last line linkable.', EAEL_TEXTDOMAIN ),
+				'type'        => Controls_Manager::TEXTAREA,
+				'rows'        => 2,
+				'dynamic'     => [
+					'active' => true,
+				],
+				'default'     => __( "Don't have an Account? \nRegister Now", EAEL_TEXTDOMAIN ),
+				'condition'   => [
+					'show_register_link' => 'yes',
+					//'default_form_type'  => 'login',
+				],
+			] );
+			$this->add_control( 'registration_link_action', [
+				'label'       => __( 'Registration Link Action', EAEL_TEXTDOMAIN ),
+				'label_block' => true,
+				'type'        => Controls_Manager::SELECT,
+				'options'     => [
+					'default' => __( 'WordPress Registration Page', EAEL_TEXTDOMAIN ),
+					'custom'  => __( 'Custom URL', EAEL_TEXTDOMAIN ),
+					'form'    => __( 'Show Register Form', EAEL_TEXTDOMAIN ),
+				],
+				'default'     => 'form',
+				'condition'   => [
+					'show_register_link' => 'yes',
+					//'default_form_type'  => 'login',
+				],
+			] );
+			$this->add_control( 'custom_register_url', [
+				'label'         => __( 'Custom Register URL', EAEL_TEXTDOMAIN ),
+				'label_block'   => true,
+				'type'          => Controls_Manager::URL,
+				'show_external' => false,
+				'dynamic'       => [
+					'active' => true,
+				],
+				'condition'     => [
+					'registration_link_action' => 'custom',
+					'show_register_link'       => 'yes',
+				],
+			] );
+		}
+		$this->end_popover();
+
+		$this->add_control( 'gen_reg_content_po_toggle', [
+			'label'        => __( 'Register Form General', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
+			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
+			'return_value' => 'yes',
+			'default'      => 'yes',
+		] );
+		$this->start_popover();
 		if ( ! $this->user_can_register ) {
 			$this->add_control( 'registration_off_notice', [
 				'type'            => Controls_Manager::RAW_HTML,
@@ -303,122 +384,63 @@ class Login_Register extends Widget_Base {
 				],
 			] );
 		}
-
-
 		/*--show registration related control only if registration is enable on the site--*/
 		if ( $this->user_can_register ) {
-			$this->add_control( 'show_register_link', [
-				'label'     => __( 'Show Register Link', EAEL_TEXTDOMAIN ),
-				//'description' => __( 'You can add a "Register" Link below the login form', EAEL_TEXTDOMAIN ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'yes',
-				'condition' => [
-					'default_form_type' => 'login',
-				],
+			$this->add_control( 'show_login_link', [
+				'label'   => __( 'Show Login Link', EAEL_TEXTDOMAIN ),
+				'type'    => Controls_Manager::SWITCHER,
+				'default' => 'yes',
+				//'condition' => [
+				//	'default_form_type' => 'register',
+				//],
 			] );
-
-			$this->add_control( 'registration_link_text', [
-				'label'       => __( 'Register Link Text', EAEL_TEXTDOMAIN ),
+			$this->add_control( 'login_link_text', [
+				'label'       => __( 'Login Link Text', EAEL_TEXTDOMAIN ),
+				'label_block' => true,
 				'description' => __( 'You can put text in two lines to make the last line linkable.', EAEL_TEXTDOMAIN ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'rows'        => 2,
 				'dynamic'     => [
 					'active' => true,
 				],
-				'default'     => __( "Don't have an Account? \nRegister Now", EAEL_TEXTDOMAIN ),
+				'default'     => __( "Already have an Account? \nSign In", EAEL_TEXTDOMAIN ),
 				'condition'   => [
-					'show_register_link' => 'yes',
-					'default_form_type'  => 'login',
+					'show_login_link' => 'yes',
+					//'default_form_type' => 'register',
 				],
 			] );
-
-			$this->add_control( 'registration_link_action', [
-				'label'     => __( 'Registration Link Action', EAEL_TEXTDOMAIN ),
-				'type'      => Controls_Manager::SELECT,
-				'options'   => [
-					'default' => __( 'WordPress Registration Page', EAEL_TEXTDOMAIN ),
+			$this->add_control( 'login_link_action', [
+				'label'       => __( 'Login Link Action', EAEL_TEXTDOMAIN ),
+				'label_block' => true,
+				//'description' => __( 'Select what should happen when the login link is clicked', EAEL_TEXTDOMAIN ),
+				'type'        => Controls_Manager::SELECT,
+				'options'     => [
+					'default' => __( 'Default WordPress Page', EAEL_TEXTDOMAIN ),
 					'custom'  => __( 'Custom URL', EAEL_TEXTDOMAIN ),
-					'form'    => __( 'Show Register Form', EAEL_TEXTDOMAIN ),
+					'form'    => __( 'Show Login Form', EAEL_TEXTDOMAIN ),
 				],
-				'default'   => 'default',
-				'condition' => [
-					'show_register_link' => 'yes',
-					'default_form_type'  => 'login',
+				'default'     => 'form',
+				'condition'   => [
+					'show_login_link' => 'yes',
 				],
 			] );
-
-			$this->add_control( 'custom_register_url', [
-				'label'     => __( 'Custom Register URL', EAEL_TEXTDOMAIN ),
-				'type'      => Controls_Manager::URL,
-				'dynamic'   => [
+			$this->add_control( 'custom_login_url', [
+				'label'         => __( 'Custom Login URL', EAEL_TEXTDOMAIN ),
+				'label_block'   => true,
+				'show_external' => false,
+				'type'          => Controls_Manager::URL,
+				'dynamic'       => [
 					'active' => true,
 				],
-				'condition' => [
-					'registration_link_action' => 'custom',
-					'show_register_link'       => 'yes',
+				'condition'     => [
+					'login_link_action' => 'custom',
+					'show_login_link'   => 'yes',
 				],
 			] );
 		}
 
-
-		$this->add_control( 'show_log_out_message', [
-			'label'     => __( 'Show Logout Link', EAEL_TEXTDOMAIN ),
-			//'description' => __( 'This option will show a message with logout link instead of a login form for the logged in user', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::SWITCHER,
-			'default'   => 'yes',
-			'condition' => [
-				'default_form_type' => 'login',
-			],
-		] );
-
-
-		$this->add_control( 'show_lost_password', [
-			'label'      => __( 'Show Lost your password?', EAEL_TEXTDOMAIN ),
-			'type'       => Controls_Manager::SWITCHER,
-			'default'    => 'yes',
-			'conditions' => $this->get_form_controls_display_condition( 'login' ),
-		] );
-
-
-		$this->add_control( 'lost_password_text', [
-			'label'     => __( 'Lost Password Text', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::TEXT,
-			'dynamic'   => [
-				'active' => true,
-			],
-			'default'   => __( 'Forgot password?', EAEL_TEXTDOMAIN ),
-			'condition' => [
-				'show_lost_password' => 'yes',
-			],
-		] );
-
-		$this->add_control( 'lost_password_link_type', [
-			'label'     => __( 'Lost Password Link to', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::SELECT,
-			'options'   => [
-				'default' => __( 'Default WordPress Page', EAEL_TEXTDOMAIN ),
-				'custom'  => __( 'Custom URL', EAEL_TEXTDOMAIN ),
-			],
-			'default'   => 'default',
-			'condition' => [
-				'show_lost_password' => 'yes',
-			],
-		] );
-
-		$this->add_control( 'lost_password_url', [
-			'label'     => __( 'Custom Lost Password URL', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::URL,
-			'dynamic'   => [
-				'active' => true,
-			],
-			'condition' => [
-				'lost_password_link_type' => 'custom',
-				'show_lost_password'      => 'yes',
-			],
-		] );
-
+		$this->end_popover();
 		do_action( 'eael/login-register/after-general-controls', $this );
-
 		$this->end_controls_section();
 	}
 
@@ -1315,25 +1337,25 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->start_popover();
 		$this->add_responsive_control( "eael_form_wrap_width", [
-			'label'      => esc_html__( 'width', EAEL_TEXTDOMAIN ),
-			'type'       => Controls_Manager::SLIDER,
-			'size_units' => [
+			'label'           => esc_html__( 'width', EAEL_TEXTDOMAIN ),
+			'type'            => Controls_Manager::SLIDER,
+			'size_units'      => [
 				'px',
 				'rem',
 				'%',
 			],
-			'range'      => [
-				'px' => [
+			'range'           => [
+				'px'  => [
 					'min'  => 0,
 					'max'  => 1000,
 					'step' => 5,
 				],
-                'rem' => [
+				'rem' => [
 					'min'  => 0,
 					'max'  => 10,
 					'step' => .5,
 				],
-				'%'  => [
+				'%'   => [
 					'min' => 0,
 					'max' => 100,
 				],
@@ -1342,15 +1364,15 @@ class Login_Register extends Widget_Base {
 				'unit' => '%',
 				'size' => 65,
 			],
-			'tablet_default' => [
+			'tablet_default'  => [
 				'unit' => '%',
 				'size' => 75,
 			],
-			'mobile_default' => [
+			'mobile_default'  => [
 				'unit' => '%',
 				'size' => 100,
 			],
-			'selectors'  => [
+			'selectors'       => [
 				"{{WRAPPER}} .eael-lr-form-wrapper" => 'width: {{SIZE}}{{UNIT}};',
 			],
 		] );
@@ -1411,6 +1433,9 @@ class Login_Register extends Widget_Base {
 			'label'    => __( 'Wrapper Box Shadow', EAEL_TEXTDOMAIN ),
 			'name'     => 'eael_form_wrap_shadow',
 			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper",
+			'exclude'  => [
+				'box_shadow_position',
+			],
 		] );
 
 		//----Form-----
@@ -1424,15 +1449,15 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->start_popover();
 		$this->add_responsive_control( "eael_form_width", [
-			'label'      => esc_html__( 'width', EAEL_TEXTDOMAIN ),
-			'type'       => Controls_Manager::SLIDER,
-			'size_units' => [
+			'label'           => esc_html__( 'width', EAEL_TEXTDOMAIN ),
+			'type'            => Controls_Manager::SLIDER,
+			'size_units'      => [
 				'px',
 				'rem',
 				'%',
 			],
-			'range'      => [
-				'px' => [
+			'range'           => [
+				'px'  => [
 					'min'  => 0,
 					'max'  => 1000,
 					'step' => 5,
@@ -1442,7 +1467,7 @@ class Login_Register extends Widget_Base {
 					'max'  => 10,
 					'step' => .5,
 				],
-				'%'  => [
+				'%'   => [
 					'min' => 0,
 					'max' => 100,
 				],
@@ -1451,15 +1476,15 @@ class Login_Register extends Widget_Base {
 				'unit' => '%',
 				'size' => 50,
 			],
-            'tablet_default' => [
+			'tablet_default'  => [
 				'unit' => '%',
 				'size' => 75,
 			],
-			'mobile_default' => [
+			'mobile_default'  => [
 				'unit' => '%',
 				'size' => 100,
 			],
-			'selectors'  => [
+			'selectors'       => [
 				"{{WRAPPER}} .lr-form-wrapper" => 'width: {{SIZE}}{{UNIT}};',
 			],
 		] );
@@ -1520,6 +1545,9 @@ class Login_Register extends Widget_Base {
 			'label'    => __( 'Form Shadow', EAEL_TEXTDOMAIN ),
 			'name'     => 'eael_form_shadow',
 			'selector' => "{{WRAPPER}} .lr-form-wrapper",
+			'exclude'  => [
+				'box_shadow_position',
+			],
 		] );
 		$this->end_controls_section();
 	}
@@ -1538,15 +1566,15 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->start_popover();
 		$this->add_responsive_control( "form_img_width", [
-			'label'      => esc_html__( 'width', EAEL_TEXTDOMAIN ),
-			'type'       => Controls_Manager::SLIDER,
-			'size_units' => [
+			'label'           => esc_html__( 'width', EAEL_TEXTDOMAIN ),
+			'type'            => Controls_Manager::SLIDER,
+			'size_units'      => [
 				'px',
 				'rem',
 				'%',
 			],
-			'range'      => [
-				'px' => [
+			'range'           => [
+				'px'  => [
 					'min'  => 0,
 					'max'  => 1000,
 					'step' => 5,
@@ -1556,7 +1584,7 @@ class Login_Register extends Widget_Base {
 					'max'  => 10,
 					'step' => .5,
 				],
-				'%'  => [
+				'%'   => [
 					'min' => 0,
 					'max' => 100,
 				],
@@ -1565,15 +1593,15 @@ class Login_Register extends Widget_Base {
 				'unit' => '%',
 				'size' => 50,
 			],
-			'tablet_default' => [
+			'tablet_default'  => [
 				'unit' => '%',
 				'size' => 100,
 			],
-			'mobile_default' => [
+			'mobile_default'  => [
 				'unit' => '%',
 				'size' => 100,
 			],
-			'selectors'  => [
+			'selectors'       => [
 				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration" => 'width: {{SIZE}}{{UNIT}};',
 			],
 		] );
@@ -1634,6 +1662,9 @@ class Login_Register extends Widget_Base {
 			'label'    => __( 'Illustration Shadow', EAEL_TEXTDOMAIN ),
 			'name'     => 'form_img_shadow',
 			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration",
+			'exclude'  => [
+				'box_shadow_position',
+			],
 		] );
 		$this->add_control( 'form_logo_po_toggle', [
 			'label'        => __( 'Form Logo', EAEL_TEXTDOMAIN ),
@@ -1700,6 +1731,9 @@ class Login_Register extends Widget_Base {
 			'label'    => __( 'Logo Shadow', EAEL_TEXTDOMAIN ),
 			'name'     => 'form_logo_shadow',
 			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper .lr-form-header img",
+			'exclude'  => [
+				'box_shadow_position',
+			],
 		] );
 		$this->end_controls_section();
 	}
@@ -2799,11 +2833,11 @@ class Login_Register extends Widget_Base {
 	protected function print_registration_errors_message( $errors ) {
 		?>
         <div class="eael-form-msg invalid">
-            <?php
-            if (!empty( $this->ds['register_error_msg'])) {
-	            printf( '<p>%s</p>', esc_html( $this->ds['register_error_msg'] ) );
-            }
-            ?>
+			<?php
+			if ( ! empty( $this->ds['register_error_msg'] ) ) {
+				printf( '<p>%s</p>', esc_html( $this->ds['register_error_msg'] ) );
+			}
+			?>
             <ol>
 				<?php
 				foreach ( $errors as $register_error ) {
