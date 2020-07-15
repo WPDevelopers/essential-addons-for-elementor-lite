@@ -1297,34 +1297,6 @@ class Login_Register extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	protected function init_content_register_validation_message_controls() {
-		$this->start_controls_section( 'section_content_reg_validation', [
-			'label'      => __( 'Register Validation Messages', EAEL_TEXTDOMAIN ),
-			'tab'        => Controls_Manager::TAB_CONTENT,
-			'conditions' => $this->get_form_controls_display_condition( 'register' ),
-		] );
-
-		$this->add_control( 'reg_success_message', [
-			'label'       => __( 'Success Message', EAEL_TEXTDOMAIN ),
-			'description' => __( 'Specify what you want to show when registration succeeds', EAEL_TEXTDOMAIN ),
-			'label_block' => true,
-			'type'        => Controls_Manager::TEXTAREA,
-			'default'     => __( 'Thank you for registering with us! Please check your mail for your account info', EAEL_TEXTDOMAIN ),
-		] );
-
-		$this->add_control( 'reg_error_message', [
-			'label'       => __( 'Error Message', EAEL_TEXTDOMAIN ),
-			'description' => __( 'Specify what you want to show when registration fails', EAEL_TEXTDOMAIN ),
-
-			'label_block' => true,
-			'type'        => Controls_Manager::TEXTAREA,
-			'default'     => __( 'Error: Something went wrong! Registration failed..', EAEL_TEXTDOMAIN ),
-		] );
-
-		$this->end_controls_section();
-
-	}
-
 	/**
 	 * It prints controls for managing general style of both login and registration form
 	 */
@@ -1889,15 +1861,6 @@ class Login_Register extends Widget_Base {
 
 	protected function init_style_register_button_controls() {
 		$this->_init_button_style( 'register' );
-	}
-
-	protected function init_style_validation_message_controls() {
-		$this->start_controls_section( 'section_style_validation_message', [
-			'label' => __( 'Validation Message', EAEL_TEXTDOMAIN ),
-			'tab'   => Controls_Manager::TAB_STYLE,
-		] );
-
-		$this->end_controls_section();
 	}
 
 	/**
@@ -2741,7 +2704,6 @@ class Login_Register extends Widget_Base {
             <?php
             if (!empty( $this->ds['register_error_msg'])) {
 	            printf( '<p>%s</p>', esc_html( $this->ds['register_error_msg'] ) );
-
             }
             ?>
             <ol>
