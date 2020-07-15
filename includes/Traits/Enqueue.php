@@ -200,9 +200,6 @@ trait Enqueue
                     time()
                 );
             }
-
-            // run hook before enqueue scripts
-            do_action('eael/before_enqueue_scripts', $this->loaded_widgets);
         }
     }
 
@@ -258,6 +255,9 @@ trait Enqueue
                     // loaded widgets stack
                     $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $widgets)));
                 }
+
+                // run hook before enqueue scripts
+                do_action('eael/before_enqueue_scripts', $this->loaded_widgets);
 
                 // js
                 if (get_option('eael_js_print_method') == 'internal') {
