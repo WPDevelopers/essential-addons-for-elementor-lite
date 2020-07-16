@@ -209,7 +209,9 @@ class Login_Register extends Widget_Base {
 		$this->init_style_input_fields_controls();
 		$this->init_style_input_labels_controls();
 		$this->init_style_login_button_controls();
+		$this->init_style_login_link_controls();
 		$this->init_style_register_button_controls();
+		$this->init_style_register_link_controls();
 		do_action( 'eael/login-register/after-style-controls', $this );
 
 	}
@@ -1566,7 +1568,7 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->start_popover();
 		$this->add_responsive_control( "form_img_width", [
-			'label'           => esc_html__( 'width', EAEL_TEXTDOMAIN ),
+			'label'           => esc_html__( 'Width', EAEL_TEXTDOMAIN ),
 			'type'            => Controls_Manager::SLIDER,
 			'size_units'      => [
 				'px',
@@ -1605,7 +1607,41 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration" => 'width: {{SIZE}}{{UNIT}};',
 			],
 		] );
-
+		$this->add_responsive_control( "form_img_height", [
+			'label'           => esc_html__( 'Height', EAEL_TEXTDOMAIN ),
+			'type'            => Controls_Manager::SLIDER,
+			'size_units'      => [
+				'px',
+				'rem',
+			],
+			'range'           => [
+				'px'  => [
+					'min'  => 0,
+					'max'  => 1000,
+					'step' => 5,
+				],
+				'rem' => [
+					'min'  => 0,
+					'max'  => 10,
+					'step' => .5,
+				],
+			],
+			'desktop_default' => [
+				'unit' => 'px',
+				'size' => 375,
+			],
+			'tablet_default'  => [
+				'unit' => 'px',
+				'size' => 375,
+			],
+			'mobile_default'  => [
+				'unit' => 'px',
+				'size' => 375,
+			],
+			'selectors'       => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration" => 'height: {{SIZE}}{{UNIT}};',
+			],
+		] );
 		$this->add_control( "form_img_margin", [
 			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -2003,6 +2039,13 @@ class Login_Register extends Widget_Base {
 		$this->_init_button_style( 'register' );
 	}
 
+	protected function init_style_login_link_controls() {
+        $this->_init_link_style('login');
+	}
+	protected function init_style_register_link_controls() {
+		$this->_init_link_style('register');
+	}
+
 	/**
 	 * Print style controls for a specific type of button.
 	 *
@@ -2242,6 +2285,201 @@ class Login_Register extends Widget_Base {
 	}
 
 	/**
+	 * Print style controls for a specific type of link.
+	 *
+	 * @param string $link_type the type of the link. accepts login or register.
+	 */
+	protected function _init_link_style( $link_type = 'login' ) {
+	    $form_type = 'login' === $link_type ? __('Register Form', EAEL_TEXTDOMAIN) : __('Login Form', EAEL_TEXTDOMAIN);
+		$this->start_controls_section( "section_style_{$link_type}_link", [
+			'label'      => sprintf( __( '%s Link', EAEL_TEXTDOMAIN ), ucfirst( $link_type ) ),
+			'tab'        => Controls_Manager::TAB_STYLE,
+			'condition' => [
+				"show_{$link_type}_link" => 'yes',
+			],
+		] );
+		$this->add_control( "{$link_type}_link_style_notice", [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => sprintf( __( 'Here you can style the %s link displayed on the %s', EAEL_TEXTDOMAIN ), $link_type, $form_type),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+		] );
+		$this->add_control( "{$link_type}_link_pot", [
+			'label'        => __( 'Spacing', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
+			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
+			'return_value' => 'yes',
+		] );
+		$this->start_popover();
+		$this->add_control( "{$link_type}_link_margin", [
+			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+			'condition'  => [
+				"{$link_type}_link_pot" => 'yes',
+			],
+		] );
+		$this->add_control( "{$link_type}_link_padding", [
+			'label'      => __( 'Padding', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+			'condition'  => [
+				"{$link_type}_link_pot" => 'yes',
+			],
+		] );
+		$this->end_popover();
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => "{$link_type}_link_typography",
+			'selector' => "{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link",
+		] );
+
+		$this->add_control( "tabs_{$link_type}_link_colors_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Colors & Border', EAEL_TEXTDOMAIN ),
+			'separator' => 'before',
+		] );
+
+		$this->start_controls_tabs( "tabs_{$link_type}_link_style" );
+		/*-----Login Link NORMAL state------ */
+		$this->start_controls_tab( "tab_{$link_type}_link_normal", [
+			'label' => __( 'Normal', EAEL_TEXTDOMAIN ),
+		] );
+		$this->add_control( "{$link_type}_link_color", [
+			'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link" => 'color: {{VALUE}};',
+			],
+		] );
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'     => "{$link_type}_link_bg_color",
+			'label'    => __( 'Background Color', EAEL_TEXTDOMAIN ),
+			'types'    => [
+				'classic',
+				'gradient',
+			],
+			'selector' => "{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link",
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "{$link_type}_link_border",
+			'selector' => "{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link",
+		] );
+		$this->add_control( "{$link_type}_link_border_radius", [
+			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+		$this->end_controls_tab();
+
+		/*-----Login Link HOVER state------ */
+		$this->start_controls_tab( "tab_{$link_type}_link_hover", [
+			'label' => __( 'Hover', EAEL_TEXTDOMAIN ),
+		] );
+		$this->add_control( "{$link_type}_link_color_hover", [
+			'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link:hover" => 'color: {{VALUE}};',
+			],
+		] );
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'     => "{$link_type}_link_bg_color_hover",
+			'label'    => __( 'Background Color', EAEL_TEXTDOMAIN ),
+			'types'    => [
+				'classic',
+				'gradient',
+			],
+			'selector' => "{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link:hover",
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "{$link_type}_link_border_hover",
+			'selector' => "{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link:hover",
+		] );
+		$this->add_control( "{$link_type}_link_border_radius_hover", [
+			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link:hover" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+		/*-----ends Link tabs--------*/
+
+		$this->add_responsive_control( "{$link_type}_link_width", [
+			'label'      => esc_html__( 'Link width', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 500,
+					'step' => 5,
+				],
+				'%'  => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link" => 'width: {{SIZE}}{{UNIT}};',
+			],
+			'separator'  => 'before',
+		] );
+		$this->add_responsive_control( "{$link_type}_link_height", [
+			'label'      => esc_html__( 'Link Height', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 500,
+					'step' => 5,
+				],
+				'%'  => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link" => 'height: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->end_controls_section();
+	}
+
+	/**
 	 * Get conditions for displaying login form and registration
 	 *
 	 * @param string $type
@@ -2317,7 +2555,7 @@ class Login_Register extends Widget_Base {
 			$reg_link_text   = array_pop( $parts );
 			$reg_message     = array_shift( $parts );
 
-			$reg_link_placeholder = '%1$s <a href="%2$s" id="eael-lr-reg-toggle" data-action="%3$s" %5$s>%4$s</a>';
+			$reg_link_placeholder = '%1$s <a href="%2$s" id="eael-lr-reg-toggle" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
 			$reg_atts             = $reg_url = '';
 			switch ( $reg_link_action ) {
 				case 'custom':
@@ -2479,7 +2717,7 @@ class Login_Register extends Widget_Base {
 			$parts                = explode( "\n", $lgn_link_text );
 			$lgn_link_text        = array_pop( $parts );
 			$lgn_message          = array_shift( $parts );
-			$lgn_link_placeholder = '%1$s <a href="%2$s" id="eael-lr-login-toggle" data-action="%3$s" %5$s>%4$s</a>';
+			$lgn_link_placeholder = '%1$s <a href="%2$s" id="eael-lr-login-toggle" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
 			$lgn_url              = $lgn_atts = '';
 
 			switch ( $lgn_link_action ) {
