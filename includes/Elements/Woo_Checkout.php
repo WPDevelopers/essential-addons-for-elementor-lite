@@ -206,6 +206,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Subtotal Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Subtotal', 'essential-addons-for-elementor-lite' ),
+                'condition' => [
+                    'ea_woo_checkout_table_header_text' => 'yes',
+                ],
 			]
 		);
 		$this->add_control(
@@ -214,6 +217,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Shipping Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Shipping', 'essential-addons-for-elementor-lite' ),
+                'condition' => [
+                    'ea_woo_checkout_table_header_text' => 'yes',
+                ],
 			]
 		);
 		$this->add_control(
@@ -222,6 +228,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Total Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Total', 'essential-addons-for-elementor-lite' ),
+                'condition' => [
+                    'ea_woo_checkout_table_header_text' => 'yes',
+                ],
 			]
 		);
 
