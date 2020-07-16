@@ -2110,6 +2110,7 @@ class Login_Register extends Widget_Base {
 			'default'   => 'row',
 			'selectors' => [
 				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-footer" => 'flex-direction: {{VALUE}};',
+				"{{WRAPPER}} .eael-{$button_type}-form .eael-sign-wrapper" => 'padding-top: 0;',
 			],
 		] );
 		$this->add_responsive_control( "{$button_type}_btn_jc", [
