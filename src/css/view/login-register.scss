@@ -13,7 +13,9 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
 .d-none {
     display: none;
 }
-
+.d-ib {
+    display: inline-block;
+}
 .mr-auto {
     margin-right: auto;
 }
@@ -146,7 +148,7 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
         }
     }
 
-    .eael-lr-btn {
+    .eael-lr-btn{
         background-color: #744ffb;
         color: #fff;
         position: relative;
@@ -167,6 +169,10 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
             display: inline-block;
         }
     }
+    .eael-lr-link{
+        display: inline-block;
+    }
+
 
     .eael-sign-wrapper {
         text-align: center;
