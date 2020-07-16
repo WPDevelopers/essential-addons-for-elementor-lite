@@ -50,15 +50,16 @@ trait Shared
      * @return bool
      * @since  4.0.4
      */
-    public static function is_prevent_load_extension( $id ){
+    public static function is_prevent_load_extension($id)
+    {
         $template_name = get_post_meta($id, '_elementor_template_type', true);
         $template_list = [
             'footer',
             'header',
             'section',
-            'popup'
+            'popup',
         ];
-        return in_array($template_name,$template_list);
+        return in_array($template_name, $template_list);
     }
 
 }
