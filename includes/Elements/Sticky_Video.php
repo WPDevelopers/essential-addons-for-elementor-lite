@@ -710,7 +710,7 @@ class Sticky_Video extends Widget_Base
         echo '<div class="eael-sticky-video-wrapper">';
 			if ('yes' === $settings['eaelsv_overlay_options']) {
 				$autoplay = 'yes';
-
+                $icon = '';
 				if ('yes' === $settings['eaelsv_overlay_play_icon']) {
 					if ($iconNew['value'] != '') {
                         if (  is_array($iconNew['value']) ) {
@@ -742,8 +742,8 @@ class Sticky_Video extends Widget_Base
 					'class' => 'eael-sticky-video-player2',
 					'data-sticky' => $sticky,
 					'data-position' => $settings['eaelsv_sticky_position'],
-					'data-sheight' => $settings['eaelsv_sticky_height']['size'],
-                    'data-swidth' => $settings['eaelsv_sticky_width']['size'],
+					'data-sheight' => $settings['eaelsv_sticky_height'],
+                    'data-swidth' => $settings['eaelsv_sticky_width'],
                     'data-scroll_height' => $settings['eaelsv_scroll_height_display_sticky']['size'],
 					'data-autoplay' => $autoplay,
 					'data-overlay' => ($settings['eaelsv_overlay_options'] == 'yes') ? $settings['eaelsv_overlay_options'] : 'no',
