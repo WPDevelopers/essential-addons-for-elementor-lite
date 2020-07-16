@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
+use Essential_Addons_Elementor\Traits\Shared;
 
 class Reading_Progress
 {
@@ -17,6 +18,11 @@ class Reading_Progress
 
     public function register_controls($element)
     {
+
+        if(Shared::is_prevent_load_extension(get_the_ID())){
+            return false;
+        }
+
         $global_settings = get_option('eael_global_settings');
 
         $element->start_controls_section(

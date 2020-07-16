@@ -67,16 +67,14 @@
   position: fixed;
   z-index: 999;
   border: 0 !important;
-  -webkit-border-radius: 0px !important;
-          border-radius: 0px !important;
+  border-radius: 0px !important;
   height: 200px;
   width: 300px;
 }
 
 .eael-sticky-video-wrapper.out .eael-sticky-video-player2,
 .eael-sticky-video-wrapper.out .eael-sticky-video-player {
-  -webkit-border-radius: 0px !important;
-          border-radius: 0px !important;
+  border-radius: 0px !important;
 }
 
 .eael-sticky-video-player2.in {
