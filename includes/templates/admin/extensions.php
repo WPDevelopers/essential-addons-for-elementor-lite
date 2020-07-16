@@ -49,6 +49,12 @@ $extensions = [
                 'title'  => __( 'Duplicator', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/duplicator/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/duplicator/',
+            ],
+            [
+                'key'    => 'eael-custom-js',
+                'title'  => __( 'Custom JS', 'essential-addons-for-elementor-lite'),
+                'demo_link' => 'https://essential-addons.com/elementor/custom-js/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/custom-js/',
             ]
         ]
     ]

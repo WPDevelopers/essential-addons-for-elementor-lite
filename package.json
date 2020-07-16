@@ -3,9 +3,8 @@
 	"version": "1.0.0",
 	"description": "=== Essential Addons for Elementor ===\r Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, mahfuz01, nazsabuz\r Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form\r Requires at least: 4.0\r Tested up to: 5.2\r Requires PHP: 5.4\r Stable tag: 3.3.0\r License: GPLv3\r License URI: https://opensource.org/licenses/GPL-3.0",
 	"scripts": {
-		"dev": "webpack --mode production --single true --watch",
-		"build": "webpack --mode production && webpack --mode production --single true && webpack --mode development  && webpack --mode development --single true",
-		"build-lib": "node lib.config.js"
+		"dev": "webpack --mode production --watch",
+		"build": "webpack --mode production && webpack --mode development"
 	},
 	"repository": {
 		"type": "git",
@@ -24,9 +23,7 @@
 		"@babel/preset-env": "^7.8.6",
 		"autoprefixer": "^9.7.6",
 		"babel-loader": "^8.0.6",
-		"concat": "^1.0.3",
 		"css-loader": "^3.5.2",
-		"cssnano": "^4.1.10",
 		"glob": "^7.1.6",
 		"mini-css-extract-plugin": "^0.9.0",
 		"postcss-import": "^12.0.1",

@@ -56,8 +56,7 @@
   width: 50px;
 }
 .eael-entry-footer .eael-author-avatar .avatar {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 .eael-post-grid .eael-entry-footer .eael-entry-meta {
   padding-left: 8px;
@@ -65,12 +64,10 @@
 }
 .eael-grid-post .eael-entry-meta {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
       -ms-flex-direction: row;
           flex-direction: row;
   white-space: nowrap;
@@ -78,7 +75,6 @@
 .eael-grid-post .eael-entry-footer .eael-entry-meta {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
 }
@@ -116,15 +112,12 @@
 }
 .eael-entry-overlay {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
@@ -563,7 +556,6 @@
 .eael-entry-footer {
   overflow: hidden;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
@@ -611,19 +603,15 @@
   height: 50px;
   padding: 5px;
   display: -webkit-inline-box;
-  display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-border-radius: 4px;
-          border-radius: 4px;
+  border-radius: 4px;
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
           box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
   text-align: center;
@@ -637,7 +625,6 @@
 }
 .eael-post-grid-style-two .eael-entry-meta {
   -webkit-box-align: baseline;
-  -webkit-align-items: baseline;
       -ms-flex-align: baseline;
           align-items: baseline;
 }
@@ -653,12 +640,10 @@
 .eael-post-grid-style-two .eael-entry-meta .post-meta-categories {
   list-style: none;
   display: -webkit-inline-box;
-  display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-flex-flow: wrap;
-      -ms-flex-flow: wrap;
-          flex-flow: wrap;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
   margin: 0;
 }
 .eael-post-grid-style-two .eael-entry-meta .post-meta-categories li {
