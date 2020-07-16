@@ -63,8 +63,7 @@
 }
 
 .eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-avatar.avatar-circle img {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 
 .eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-meta {
