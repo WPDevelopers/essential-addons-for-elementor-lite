@@ -2639,7 +2639,7 @@ class Login_Register extends Widget_Base {
                                                placeholder="<?php if ( $display_label && $p_ph ) {
 											       echo esc_attr( $p_ph );
 										       } ?>" required>
-                                        <button type="button" class="wp-hide-pw hide-if-no-js" aria-label="Show password">
+                                        <button type="button" id="wp-hide-pw" class="wp-hide-pw hide-if-no-js" aria-label="Show password">
                                             <span class="dashicons dashicons-visibility" aria-hidden="true"></span>
                                         </button>
                                     </div>
