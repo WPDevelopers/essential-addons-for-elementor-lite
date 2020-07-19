@@ -708,23 +708,23 @@ class Login_Register extends Widget_Base {
 			],
 			'separator'     => 'after',
 		] );
-
-		$this->add_control( 'redirect_after_logout', [
-			'label' => __( 'Redirect After Logout', EAEL_TEXTDOMAIN ),
-			'type'  => Controls_Manager::SWITCHER,
-		] );
-
-		$this->add_control( 'redirect_logout_url', [
-			'type'          => Controls_Manager::URL,
-			'show_label'    => false,
-			'show_external' => false,
-			'placeholder'   => __( 'https://your-link.com', EAEL_TEXTDOMAIN ),
-			'description'   => __( 'Please note that only your current domain is allowed here to keep your site secure.', EAEL_TEXTDOMAIN ),
-			'condition'     => [
-				'redirect_after_logout' => 'yes',
-			],
-			'separator'     => 'after',
-		] );
+        // @todo; in future
+		//$this->add_control( 'redirect_after_logout', [
+		//	'label' => __( 'Redirect After Logout', EAEL_TEXTDOMAIN ),
+		//	'type'  => Controls_Manager::SWITCHER,
+		//] );
+        //
+		//$this->add_control( 'redirect_logout_url', [
+		//	'type'          => Controls_Manager::URL,
+		//	'show_label'    => false,
+		//	'show_external' => false,
+		//	'placeholder'   => __( 'https://your-link.com', EAEL_TEXTDOMAIN ),
+		//	'description'   => __( 'Please note that only your current domain is allowed here to keep your site secure.', EAEL_TEXTDOMAIN ),
+		//	'condition'     => [
+		//		'redirect_after_logout' => 'yes',
+		//	],
+		//	'separator'     => 'after',
+		//] );
 
 		$this->end_controls_section();
 	}
@@ -2516,7 +2516,6 @@ class Login_Register extends Widget_Base {
 		}
 
 		$this->ds = $this->get_settings_for_display();
-		//error_log( print_r( $this->ds, 1));
 		$this->default_form            = $this->get_settings_for_display( 'default_form_type' );
 		$this->should_print_login_form = ( 'login' === $this->default_form || 'yes' === $this->get_settings_for_display( 'show_login_link' ) );
 
@@ -2929,7 +2928,7 @@ class Login_Register extends Widget_Base {
 	protected function print_necessary_hidden_fields( $form_type = 'login' ) {
 		if ( 'login' === $form_type ) {
 			if ( ! empty( $this->ds['redirect_after_login'] ) && 'yes' === $this->ds['redirect_after_login'] ) {
-				$login_redirect_url = ! empty( $this->ds['redirect_url'] ) ? sanitize_text_field( $this->ds['redirect_url'] ) : '';
+				$login_redirect_url = ! empty( $this->ds['redirect_url']['url'] ) ? esc_url( $this->ds['redirect_url']['url'] ) : '';
 				?>
                 <input type="hidden" name="redirect_to" value="<?php echo esc_attr( $login_redirect_url ); ?>">
 			<?php }
