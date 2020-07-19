@@ -2629,7 +2629,7 @@ class Login_Register extends Widget_Base {
                                     <input type="text" name="eael-user-login" id="eael-user-login" class="eael-lr-form-control"
                                            aria-describedby="emailHelp" placeholder="<?php if ( $display_label && $u_ph ) {
 										echo esc_attr( $u_ph );
-									} ?>">
+									} ?>" required>
                                 </div>
                                 <div class="eael-lr-form-group">
 									<?php if ( $display_label && $p_label ) {
@@ -2639,7 +2639,7 @@ class Login_Register extends Widget_Base {
                                         <input type="password" name="eael-user-password" class="eael-lr-form-control" id="eael-user-password"
                                                placeholder="<?php if ( $display_label && $p_ph ) {
 											       echo esc_attr( $p_ph );
-										       } ?>">
+										       } ?>" required>
                                         <button type="button" class="wp-hide-pw hide-if-no-js" aria-label="Show password">
                                             <span class="dashicons dashicons-visibility" aria-hidden="true"></span>
                                         </button>
