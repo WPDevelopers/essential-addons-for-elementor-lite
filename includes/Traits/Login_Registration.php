@@ -303,14 +303,18 @@ trait Login_Registration {
 
 		// Handle after registration action
 
-		// should use be auto logged in?
+		// should user be auto logged in?
 		if ( in_array( 'auto_login', $register_actions ) && ! is_user_logged_in() ) {
 			wp_signon( [
 				'user_login'    => $username,
 				'user_password' => $password,
 				'remember'      => true,
 			] );
-
+			// if custom redirect not available then refresh the current page to show admin bar
+			if ( !in_array( 'redirect', $register_actions ) ) {
+				wp_safe_redirect( esc_url( $url ) );
+				exit();
+			}
 		}
 
 		// custom redirect?
