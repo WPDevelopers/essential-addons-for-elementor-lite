@@ -96,11 +96,9 @@
 }
 .eael-facebook-feed-overlay .eael-facebook-feed-item .eael-facebook-feed-item-overlay {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   text-align: center;
@@ -121,9 +119,8 @@
 }
 .eael-facebook-feed-overlay .eael-facebook-feed-item .eael-facebook-feed-item-overlay .eael-facebook-feed-item-overlay-inner {
   position: relative;
-  -webkit-align-self: center;
-      -ms-flex-item-align: center;
-          align-self: center;
+  -ms-flex-item-align: center;
+      align-self: center;
 }
 .eael-facebook-feed-overlay .eael-facebook-feed-item:hover .eael-facebook-feed-item-overlay {
   -webkit-transform: scale(1);
@@ -152,8 +149,7 @@
   display: inline-block;
   width: 32px;
   height: 32px;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   margin-right: 10px;
 }
 .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-header .eael-facebook-feed-item-user .eael-facebook-feed-username {
@@ -197,15 +193,12 @@
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
@@ -250,7 +243,6 @@
 }
 .elementor-widget-eael-facebook-feed .eael-load-more-button-wrap {
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   margin-top: 15px;

@@ -106,15 +106,12 @@
 .eael-call-to-action.cta-flex,
 .eael-call-to-action.cta-icon-flex {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between;
   -webkit-box-align: start;
-  -webkit-align-items: flex-start;
       -ms-flex-align: start;
           align-items: flex-start;
 }
@@ -123,7 +120,6 @@
 
 .eael-call-to-action.cta-icon-flex .icon {
   -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
   font-size: 80px;
@@ -133,19 +129,16 @@
 
 .eael-call-to-action.cta-icon-flex .action {
   -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
   text-align: right;
   padding-top: 22px;
-  -webkit-flex-basis: 22%;
-      -ms-flex-preferred-size: 22%;
-          flex-basis: 22%;
+  -ms-flex-preferred-size: 22%;
+      flex-basis: 22%;
 }
 
 .eael-call-to-action.cta-icon-flex .content {
   -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
   padding: 0px 30px;
@@ -156,21 +149,18 @@
 .eael-call-to-action.cta-flex .content {
   padding: 0px 15px;
   -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
 }
 
 .eael-call-to-action.cta-flex .action {
   -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
   text-align: right;
   padding-top: 25px;
-  -webkit-flex-basis: 23%;
-      -ms-flex-preferred-size: 23%;
-          flex-basis: 23%;
+  -ms-flex-preferred-size: 23%;
+      flex-basis: 23%;
 }
 
 /*--- Cta Button ---*/
@@ -270,9 +260,8 @@
 @media only screen and (max-width: 768px) {
   .eael-call-to-action.cta-flex,
 .eael-call-to-action.cta-icon-flex {
-    -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
   }
 
   .eael-call-to-action .title {
@@ -283,7 +272,6 @@
 
   .eael-call-to-action.cta-icon-flex .icon {
     -webkit-box-flex: 1;
-    -webkit-flex-grow: 1;
         -ms-flex-positive: 1;
             flex-grow: 1;
     font-size: 48px;
@@ -294,7 +282,6 @@
   .eael-call-to-action.cta-flex .content,
 .eael-call-to-action.cta-icon-flex .content {
     -webkit-box-flex: 1;
-    -webkit-flex-grow: 1;
         -ms-flex-positive: 1;
             flex-grow: 1;
     text-align: center;
