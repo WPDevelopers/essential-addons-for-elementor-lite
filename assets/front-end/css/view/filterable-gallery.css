@@ -15,25 +15,20 @@
 
 .eael-filter-gallery-control {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -webkit-flex-flow: 1 1 auto;
       -ms-flex-flow: 1 1 auto;
           flex-flow: 1 1 auto;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-flex-flow: row wrap;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
   padding: 0px;
   margin: 0px;
 }
@@ -73,20 +68,16 @@
 .eael-filter-gallery-container .item .caption {
   position: absolute;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -webkit-flex-flow: 1 1 100%;
       -ms-flex-flow: 1 1 100%;
           flex-flow: 1 1 100%;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   z-index: 1;
@@ -108,20 +99,16 @@
 .eael-filter-gallery-container.eael-cards .item .item-img .caption {
   position: absolute;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -webkit-flex-flow: 1 1 100%;
       -ms-flex-flow: 1 1 100%;
           flex-flow: 1 1 100%;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   z-index: 10;
@@ -223,8 +210,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   height: 50px;
   text-align: center;
   line-height: 50px;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   margin: 0 5px;
   font-size: 20px;
   cursor: pointer;
@@ -369,9 +355,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 }
 
 .eael-gallery-grid-item {
-  margin-left: -webkit-calc(20px/2);
   margin-left: calc(20px/2);
-  margin-right: -webkit-calc(20px/2);
   margin-right: calc(20px/2);
   margin-bottom: 20px;
   position: relative;
@@ -475,11 +459,9 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   -o-transition: 0.6s all ease;
   transition: 0.6s all ease;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
 }
@@ -528,19 +510,15 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 
 .gallery-item-caption-wrap .gallery-item-buttons > a span {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   outline: none;
   text-decoration: none;
   display: inline-block;
@@ -604,15 +582,12 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 
 .video-popup {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
@@ -643,15 +618,12 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   height: 100%;
   width: 100%;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
@@ -671,15 +643,12 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 
 .gallery-item-caption-wrap .gallery-item-buttons > a > i {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   height: 100%;
@@ -1022,9 +991,8 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 
 .fg-filter-wrap {
   position: relative;
-  -webkit-flex-basis: 30%;
-      -ms-flex-preferred-size: 30%;
-          flex-basis: 30%;
+  -ms-flex-preferred-size: 30%;
+      flex-basis: 30%;
 }
 
 .fg-layout-3-filter-controls {
@@ -1039,8 +1007,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   -o-transition: 300ms;
   transition: 300ms;
   width: 100%;
-  -webkit-border-radius: 5px;
-          border-radius: 5px;
+  border-radius: 5px;
   padding-top: 7px;
 }
 
@@ -1080,16 +1047,14 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .fg-filter-wrap button {
   width: 100%;
   border: 0px solid;
-  -webkit-border-radius: 0px;
-          border-radius: 0px;
+  border-radius: 0px;
   padding: 17px 13px;
   font-size: 14px;
   color: #2d425a;
   background: #f7f8ff;
   height: 55px;
   border-right: 1px solid #abb5ff;
-  -webkit-border-radius: 10px 0px 0 10px;
-          border-radius: 10px 0px 0 10px;
+  border-radius: 10px 0px 0 10px;
   outline: none;
   text-align: center;
   position: relative;
@@ -1106,9 +1071,8 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 }
 
 .fg-layout-3-search-box {
-  -webkit-flex-basis: 70%;
-      -ms-flex-preferred-size: 70%;
-          flex-basis: 70%;
+  -ms-flex-preferred-size: 70%;
+      flex-basis: 70%;
   height: 100%;
 }
 
@@ -1148,25 +1112,20 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 
 .fg-layout-3-filters-wrap {
   height: 55px;
-  -webkit-border-radius: 5px;
-          border-radius: 5px;
+  border-radius: 5px;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
 }
 
 .fg-layout-3-filters-wrap .fg-layout-3-search-box {
   background: #f7f8ff;
-  -webkit-border-radius: 0 10px 10px 0;
-          border-radius: 0 10px 10px 0;
+  border-radius: 0 10px 10px 0;
 }
 
 .fg-layout-3-item-thumb {
@@ -1182,15 +1141,12 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   height: 100%;
   width: 100%;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   z-index: 4;
@@ -1216,8 +1172,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .eael-filterable-gallery-item-wrap .fg-layout-3-item.eael-gallery-grid-item {
   -webkit-box-shadow: 0px 0px 30px 0px rgba(3, 29, 60, 0.05);
           box-shadow: 0px 0px 30px 0px rgba(3, 29, 60, 0.05);
-  -webkit-border-radius: 5px;
-          border-radius: 5px;
+  border-radius: 5px;
 }
 
 .fg-caption-head {
@@ -1226,11 +1181,9 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   top: 0;
   width: 100%;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 35px 35px;
@@ -1264,8 +1217,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 }
 
 .fg-item-category span {
-  -webkit-border-radius: 5px;
-          border-radius: 5px;
+  border-radius: 5px;
   line-height: 1;
   visibility: hidden;
   opacity: 0;

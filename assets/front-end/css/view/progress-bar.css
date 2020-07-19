@@ -55,7 +55,6 @@
 .eael-progressbar-line .eael-progressbar-count-wrap {
   position: absolute;
   right: 0;
-  bottom: -webkit-calc(100% + 5px);
   bottom: calc(100% + 5px);
   font-size: 16px;
   font-weight: 400;
@@ -94,8 +93,7 @@
   width: 220px;
   height: 220px;
   padding: 10px;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 .eael-progressbar-circle-pie {
   position: absolute;
@@ -112,8 +110,7 @@
   border-width: 12px;
   border-style: solid;
   border-color: #eeeeee;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 .eael-progressbar-circle-half {
   position: absolute;
@@ -124,8 +121,7 @@
   border-width: 12px;
   border-style: solid;
   border-color: #000000;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   -webkit-clip-path: inset(0 50% 0 0);
           clip-path: inset(0 50% 0 0);
 }
@@ -200,7 +196,6 @@
   position: absolute;
   top: 0;
   left: -35px;
-  width: -webkit-calc(100% + 70px);
   width: calc(100% + 70px);
   height: 100%;
   background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
