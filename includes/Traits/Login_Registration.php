@@ -44,7 +44,7 @@ trait Login_Registration {
 	 */
 	public function log_user_in() {
 		// before even thinking about login, check security and exit early if something is not right.
-
+		error_log( print_r( $_POST, 1));
 		if ( empty( $_POST['eael-login-nonce'] ) ) {
 			return;
 		}
