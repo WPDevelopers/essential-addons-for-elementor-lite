@@ -683,36 +683,6 @@ $base-font-size: 14px;
 		}
 	}
 
-	// astra
-	&.theme-astra:not(.elementor-editor-active) {
-		.woocommerce {
-			#customer_details.col2-set {
-				.col-1 {
-					width: 100% !important;
-					float: none!important;
-
-					@media (min-width: 1024px) {
-						.woocommerce-billing-fields {
-							float: left !important;
-							width: 48% !important;
-							padding-right: 2%;
-						}
-
-						.woocommerce-account-fields, .woocommerce-shipping-fields, .woocommerce-additional-fields {
-							float: left !important;
-							width: 48% !important;
-							padding-left: 2%;
-						}
-					}
-				}
-				.col-2 {
-					clear: both;
-				}
-			}
-
-        }
-    }
-
 	&.elementor-editor-active {
 		.woocommerce {
 			.woo-checkout-login {
