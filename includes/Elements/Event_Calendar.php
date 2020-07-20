@@ -1725,15 +1725,16 @@ class Event_Calendar extends Widget_Base {
         }
 
         $transient_key = 'eael_google_calendar_'.md5(implode('', $arg));
-        $calendar_data = get_transient($transient_key);
+        $data = get_transient($transient_key);
 
-        if (!empty($calendar_data)) {
-            return $calendar_data;
-        }
         if (isset($arg['calendar_id'])) {
             unset($arg['calendar_id']);
         }
-        $data = wp_remote_retrieve_body(wp_remote_get(add_query_arg($arg, $base_url)));
+
+        if(empty($data)){
+            $data = wp_remote_retrieve_body(wp_remote_get(add_query_arg($arg, $base_url)));
+            set_transient($transient_key, $data, 1 * HOUR_IN_SECONDS);
+        }
 
         if (is_wp_error($data)) {
             return [];
@@ -1763,7 +1764,7 @@ class Event_Calendar extends Widget_Base {
                     'description' => isset($item->description) ? $item->description : '',
                     'start'       => $ev_start_date,
                     'end'         => $ev_end_date,
-                    'borderColor' => !empty($event['eael_event_global_popup_ribbon_color']) ? $event['eael_event_global_popup_ribbon_color'] : '#10ecab',
+                    'borderColor' => !empty($settings['eael_event_global_popup_ribbon_color']) ? $settings['eael_event_global_popup_ribbon_color'] : '#10ecab',
                     'textColor'   => $settings['eael_event_global_text_color'],
                     'color'       => $settings['eael_event_global_bg_color'],
                     'url'         => ($settings['eael_event_details_link_hide']!=='yes')?$item->htmlLink:'',
@@ -1773,7 +1774,7 @@ class Event_Calendar extends Widget_Base {
                 ];
             }
 
-            set_transient($transient_key, $calendar_data, 1 * HOUR_IN_SECONDS);
+
         }
 
         return $calendar_data;
@@ -1824,7 +1825,7 @@ class Event_Calendar extends Widget_Base {
                 'description' => $event->post_content,
                 'start'       => tribe_get_start_date($event->ID, true, $date_format),
                 'end'         => tribe_get_end_date($event->ID, true, $date_format),
-                'borderColor' => !empty($event['eael_event_global_popup_ribbon_color']) ? $event['eael_event_global_popup_ribbon_color'] : '#10ecab',
+                'borderColor' => !empty($settings['eael_event_global_popup_ribbon_color']) ? $settings['eael_event_global_popup_ribbon_color'] : '#10ecab',
                 'textColor'   => $settings['eael_event_global_text_color'],
                 'color'       => $settings['eael_event_global_bg_color'],
                 'url'         => ($settings['eael_event_details_link_hide']!=='yes')?get_the_permalink($event->ID):'',
