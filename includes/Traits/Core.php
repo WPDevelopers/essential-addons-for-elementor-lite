@@ -258,6 +258,9 @@ trait Core
             }
         }
 
+        // update flag
+        set_transient('eael_requires_update', true);
+
         // update options
         update_option('eael_global_settings', $global_settings);
 

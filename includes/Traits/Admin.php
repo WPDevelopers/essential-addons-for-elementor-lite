@@ -235,9 +235,7 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         $updated = update_option('eael_save_settings', $elements);
 
         // clear assets files
-        if (get_option('elementor_css_print_method') == 'external' || get_option('eael_js_print_method', 'external') == 'external') {
-            $this->empty_dir(EAEL_ASSET_PATH);
-        }
+        $this->empty_dir(EAEL_ASSET_PATH);
 
         wp_send_json($updated);
     }
