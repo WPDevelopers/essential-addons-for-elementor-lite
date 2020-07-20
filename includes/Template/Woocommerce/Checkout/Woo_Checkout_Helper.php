@@ -727,6 +727,8 @@ trait Woo_Checkout_Helper {
 		remove_action( 'woocommerce_checkout_order_review', 'woocommerce_order_review', 10 );
 		remove_action( 'woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20 );
 		add_action( 'woocommerce_checkout_order_review', [ $this, 'ea_checkout_payment' ], 20 );
+
+		remove_action('woocommerce_checkout_billing', [ $wc_checkout_instance, 'checkout_form_shipping' ]);
 	}
 
 }
