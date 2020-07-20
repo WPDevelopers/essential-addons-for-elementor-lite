@@ -557,6 +557,109 @@ class Login_Register extends Widget_Base {
 			'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
 		] );
 
+		$this->add_control( 'password_toggle', [
+			'label'     => __( 'Password Visibility Icon', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SWITCHER,
+			'label_off' => __( 'Hide', EAEL_TEXTDOMAIN ),
+			'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
+		] );
+		$this->add_control( 'lpv_po_toggle', [
+			'label'     => __( 'Password Visibility Style', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::POPOVER_TOGGLE,
+			'condition' => [
+				'password_toggle' => 'yes',
+			],
+		] );
+		$this->start_popover();
+
+		$this->add_control( "lpv_size", [
+			'label'      => esc_html__( 'Icon Size', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .dashicons" => 'font-size: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
+			],
+			'condition'  => [
+				'lpv_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_control( "lvp_open_color", [
+			'label'     => __( 'Open Eye Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .dashicons-visibility" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'lpv_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_control( "lvp_close_color", [
+			'label'     => __( 'Close Eye Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .dashicons-hidden" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'lpv_po_toggle' => 'yes',
+			],
+		] );
+
+		$this->add_control( "lpv_valign", [
+			'label'     => esc_html__( 'Vertical Alignment', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SLIDER,
+			'range'     => [
+				'px' => [
+					'min'  => - 50,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'default'   => [
+				'unit' => 'px',
+				'size' => 0.73,
+			],
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'top: {{SIZE}}px;',
+			],
+			'condition' => [
+				'lpv_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_control( "lpv_halign", [
+			'label'     => esc_html__( 'Horizontal Alignment', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SLIDER,
+			'range'     => [
+				'px' => [
+					'min'  => - 50,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'default'   => [
+				'unit' => 'px',
+				'size' => - 27,
+			],
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'right: {{SIZE}}px;',
+			],
+			'condition' => [
+				'lpv_po_toggle' => 'yes',
+			],
+		] );
+
+		$this->end_popover();
+
 
 		/*--Login Fields Button--*/
 		$this->add_control( 'login_button_heading', [
