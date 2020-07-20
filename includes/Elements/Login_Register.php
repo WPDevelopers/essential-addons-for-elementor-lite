@@ -209,8 +209,8 @@ class Login_Register extends Widget_Base {
 		$this->init_style_input_fields_controls();
 		$this->init_style_input_labels_controls();
 		$this->init_style_login_button_controls();
-		$this->init_style_login_link_controls();
 		$this->init_style_register_button_controls();
+		$this->init_style_login_link_controls();
 		$this->init_style_register_link_controls();
 		do_action( 'eael/login-register/after-style-controls', $this );
 
@@ -2286,25 +2286,25 @@ class Login_Register extends Widget_Base {
 	}
 
 	/**
-	 * Print style controls for a specific type of link.
+	 * Print style controls for a specific type of link on register or login form.
 	 *
-	 * @param string $link_type the type of the link. accepts login or register.
+	 * @param string $form_type the type of form where the link is being shown. accepts login or register.
 	 */
-	protected function _init_link_style( $link_type = 'login' ) {
-	    $form_type = 'login' === $link_type ? __('Register Form', EAEL_TEXTDOMAIN) : __('Login Form', EAEL_TEXTDOMAIN);
-		$this->start_controls_section( "section_style_{$link_type}_link", [
-			'label'      => sprintf( __( '%s Link', EAEL_TEXTDOMAIN ), ucfirst( $link_type ) ),
+	protected function _init_link_style( $form_type = 'login' ) {
+	    $form_name = 'login' === $form_type ? __('Register', EAEL_TEXTDOMAIN) : __('Login', EAEL_TEXTDOMAIN);
+		$this->start_controls_section( "section_style_{$form_type}_link", [
+			'label'      => sprintf( __( '%s Link', EAEL_TEXTDOMAIN ), ucfirst( $form_name ) ),
 			'tab'        => Controls_Manager::TAB_STYLE,
 			'condition' => [
-				"show_{$link_type}_link" => 'yes',
+				"show_{$form_type}_link" => 'yes',
 			],
 		] );
-		$this->add_control( "{$link_type}_link_style_notice", [
+		$this->add_control( "{$form_type}_link_style_notice", [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => sprintf( __( 'Here you can style the %s link displayed on the %s', EAEL_TEXTDOMAIN ), $link_type, $form_type),
+			'raw'             => sprintf( __( 'Here you can style the %s link displayed on the %s Form', EAEL_TEXTDOMAIN ), $form_type, $form_name ),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 		] );
-		$this->add_control( "{$link_type}_link_pot", [
+		$this->add_control( "{$form_type}_link_pot", [
 			'label'        => __( 'Spacing', EAEL_TEXTDOMAIN ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
 			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
@@ -2312,7 +2312,7 @@ class Login_Register extends Widget_Base {
 			'return_value' => 'yes',
 		] );
 		$this->start_popover();
-		$this->add_control( "{$link_type}_link_margin", [
+		$this->add_control( "{$form_type}_link_margin", [
 			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -2321,13 +2321,13 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 			'condition'  => [
-				"{$link_type}_link_pot" => 'yes',
+				"{$form_type}_link_pot" => 'yes',
 			],
 		] );
-		$this->add_control( "{$link_type}_link_padding", [
+		$this->add_control( "{$form_type}_link_padding", [
 			'label'      => __( 'Padding', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -2336,50 +2336,50 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 			'condition'  => [
-				"{$link_type}_link_pot" => 'yes',
+				"{$form_type}_link_pot" => 'yes',
 			],
 		] );
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-			'name'     => "{$link_type}_link_typography",
-			'selector' => "{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link",
+			'name'     => "{$form_type}_link_typography",
+			'selector' => "{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link",
 		] );
 
-		$this->add_control( "tabs_{$link_type}_link_colors_heading", [
+		$this->add_control( "tabs_{$form_type}_link_colors_heading", [
 			'type'      => Controls_Manager::HEADING,
 			'label'     => __( 'Colors & Border', EAEL_TEXTDOMAIN ),
 			'separator' => 'before',
 		] );
 
-		$this->start_controls_tabs( "tabs_{$link_type}_link_style" );
+		$this->start_controls_tabs( "tabs_{$form_type}_link_style" );
 		/*-----Login Link NORMAL state------ */
-		$this->start_controls_tab( "tab_{$link_type}_link_normal", [
+		$this->start_controls_tab( "tab_{$form_type}_link_normal", [
 			'label' => __( 'Normal', EAEL_TEXTDOMAIN ),
 		] );
-		$this->add_control( "{$link_type}_link_color", [
+		$this->add_control( "{$form_type}_link_color", [
 			'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_group_control( Group_Control_Background::get_type(), [
-			'name'     => "{$link_type}_link_bg_color",
+			'name'     => "{$form_type}_link_bg_color",
 			'label'    => __( 'Background Color', EAEL_TEXTDOMAIN ),
 			'types'    => [
 				'classic',
 				'gradient',
 			],
-			'selector' => "{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link",
+			'selector' => "{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link",
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
-			'name'     => "{$link_type}_link_border",
-			'selector' => "{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link",
+			'name'     => "{$form_type}_link_border",
+			'selector' => "{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link",
 		] );
-		$this->add_control( "{$link_type}_link_border_radius", [
+		$this->add_control( "{$form_type}_link_border_radius", [
 			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -2387,36 +2387,36 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
 		$this->end_controls_tab();
 
 		/*-----Login Link HOVER state------ */
-		$this->start_controls_tab( "tab_{$link_type}_link_hover", [
+		$this->start_controls_tab( "tab_{$form_type}_link_hover", [
 			'label' => __( 'Hover', EAEL_TEXTDOMAIN ),
 		] );
-		$this->add_control( "{$link_type}_link_color_hover", [
+		$this->add_control( "{$form_type}_link_color_hover", [
 			'label'     => __( 'Text Color', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link:hover" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link:hover" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_group_control( Group_Control_Background::get_type(), [
-			'name'     => "{$link_type}_link_bg_color_hover",
+			'name'     => "{$form_type}_link_bg_color_hover",
 			'label'    => __( 'Background Color', EAEL_TEXTDOMAIN ),
 			'types'    => [
 				'classic',
 				'gradient',
 			],
-			'selector' => "{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link:hover",
+			'selector' => "{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link:hover",
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
-			'name'     => "{$link_type}_link_border_hover",
-			'selector' => "{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link:hover",
+			'name'     => "{$form_type}_link_border_hover",
+			'selector' => "{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link:hover",
 		] );
-		$this->add_control( "{$link_type}_link_border_radius_hover", [
+		$this->add_control( "{$form_type}_link_border_radius_hover", [
 			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -2424,14 +2424,14 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link:hover" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link:hover" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
 		/*-----ends Link tabs--------*/
 
-		$this->add_responsive_control( "{$link_type}_link_width", [
+		$this->add_responsive_control( "{$form_type}_link_width", [
 			'label'      => esc_html__( 'Link width', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [
@@ -2450,11 +2450,11 @@ class Login_Register extends Widget_Base {
 				],
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link" => 'width: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link" => 'width: {{SIZE}}{{UNIT}};',
 			],
 			'separator'  => 'before',
 		] );
-		$this->add_responsive_control( "{$link_type}_link_height", [
+		$this->add_responsive_control( "{$form_type}_link_height", [
 			'label'      => esc_html__( 'Link Height', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [
@@ -2473,7 +2473,7 @@ class Login_Register extends Widget_Base {
 				],
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$link_type}-form .eael-lr-link" => 'height: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link" => 'height: {{SIZE}}{{UNIT}};',
 			],
 		] );
 
