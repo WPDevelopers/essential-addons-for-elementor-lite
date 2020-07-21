@@ -776,7 +776,7 @@ class Content_Ticker extends Widget_Base
         if ($settings['arrows'] == 'yes') {
             $this->add_render_attribute('content-ticker', 'data-arrows', '1');
         }
-
+        
         echo '<div class="eael-ticker-wrap" id="eael-ticker-wrap-' . $this->get_id() . '">';
             if (!empty($settings['eael_ticker_tag_text'])) {
                 echo '<div class="ticker-badge">
