@@ -60,14 +60,32 @@ trait Template_Query
         return \sprintf('%sincludes/Template/%s', EAEL_PLUGIN_PATH, $this->process_directory_name());
     }
 
-    private function get_template_files()
+    private function get_pro_template_dir()
     {
-
-        if (is_dir($this->get_template_dir())) {
-            return scandir($this->get_template_dir(), 1);
+        if( ! is_plugin_active( 'essential-addons-elementor/essential_adons_elementor.php' ) ) {
+            return false;
+        }
+        
+        if($this->theme_templates()) {
+            return false;
         }
 
-        return false;
+        return \sprintf('%sincludes/Template/%s', EAEL_PRO_PLUGIN_PATH, $this->process_directory_name());
+    }
+
+    private function get_template_files()
+    {
+        $templates = $pro_templates = [];
+
+        if (is_dir($this->get_template_dir())) {
+            $templates['free'] = scandir($this->get_template_dir(), 1);
+        }
+
+        if(is_dir($this->get_pro_template_dir())) {
+            $pro_templates['pro'] = scandir($this->get_pro_template_dir(), 1);
+        }
+
+        return array_merge($templates, $pro_templates);
     }
 
     protected function template_list()
@@ -76,21 +94,46 @@ trait Template_Query
 
         if ($this->get_template_files()) {
 
-            foreach ($this->get_template_files() as $handler) {
-                if (strpos($handler, '.php') !== false) {
+            foreach ($this->get_template_files() as $key => $handler) {
 
-                    $path = sprintf('%s/%s', $this->get_template_dir(), $handler);
+                foreach($handler as $handle) {
+                    if (strpos($handle, '.php') !== false) {
 
-                    $template_name = $this->get_meta_data($path, $this->template_headers);
+                        if($key === 'free') {
+                            $path = sprintf('%s/%s', $this->get_template_dir(), $handle);
+                        }
 
-                    if($template_name) {
-                        $files[str_replace('.php', '', $handler)] = $template_name;
+                        else if($key === 'pro') {
+                            $path = sprintf('%s/%s', $this->get_pro_template_dir(), $handle);
+                        }
+
+                        $template_name = $this->get_meta_data($path, $this->template_headers);
+
+                        if($template_name) {
+                            $files[$template_name] = $path;
+                        }
                     }
                 }
             }
 
         }
 
+        return $files;
+    }
+
+    private function get_template_options()
+    {
+        $files = [];
+
+        if($this->template_list()) {
+
+            foreach($this->template_list() as $filename => $path) {
+
+                $files[strtolower($filename)] = $path;
+
+            }
+
+        }
         return $files;
     }
 
@@ -122,13 +165,23 @@ trait Template_Query
 
     public function get_template($filename)
     {
-        return sprintf('%s/%s.php', $this->get_template_dir(), $filename);
+        $file = '';
+
+        if(in_array($filename, array_keys($this->get_template_options()))) {
+
+            $file = $this->get_template_options()[$filename];
+
+        }
+
+        return $file;
     }
 
     public function get_default()
     {
-        $dt = array_keys($this->template_list());
+        $dt = array_keys($this->get_template_options());
+
         $dt = array_reverse($dt);
+        
         return array_pop($dt);
     }
 

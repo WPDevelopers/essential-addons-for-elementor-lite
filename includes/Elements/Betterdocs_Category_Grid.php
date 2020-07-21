@@ -125,7 +125,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                 [
                     'label' => __('Select Layout', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT2,
-                    'options'   => $this->template_list(),
+                    'options'   => $this->get_template_options(),
                     'default' => $this->get_default(),
                     'label_block' => true
                 ]
