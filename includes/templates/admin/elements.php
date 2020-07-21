@@ -541,9 +541,8 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                                                 'redirect_uri' => esc_url(admin_url('admin-post.php'))
                                             ];
                                             $url = esc_url( add_query_arg( $query_param, esc_url('https://app.essential-addons.com/typeform/index.php') ) );
-
                                             echo '<span style="font-size: 12px; font-style:italic;">
-                                            '.sprintf("<a href=\"javascript:window.open('%s','mywindowtitle','width=500,height=500')\">Get Access</a>", esc_url($url)).'
+                                            '.sprintf("<a id='eael-typeform-get-access' data-link='%s' href='#'>Get Access</a>", esc_url($url)).'
                                             </span>';
                                         }
 
