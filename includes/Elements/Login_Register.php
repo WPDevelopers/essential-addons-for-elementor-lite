@@ -2216,6 +2216,8 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .eael-{$button_type}-form .eael-sign-wrapper" => 'padding-top: 0;',
 			],
 		] );
+
+
 		$this->add_responsive_control( "{$button_type}_btn_jc", [
 			'label'     => __( 'Alignment', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::SELECT,
@@ -2451,6 +2453,83 @@ class Login_Register extends Widget_Base {
 			'selector' => "{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link",
 		] );
 
+		$this->add_control( "{$form_type}_link_d_type", [
+			'label'     => __( 'Display as', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SELECT,
+			'options'   => [
+				'row'    => __( 'Inline', EAEL_TEXTDOMAIN ),
+				'column' => __( 'Block', EAEL_TEXTDOMAIN ),
+			],
+			'default'   => 'row',
+			'selectors' => [
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-sign-wrapper" => 'display:flex; flex-direction: {{VALUE}};',
+			],
+		] );
+
+
+		$this->add_responsive_control( "{$form_type}_link_jc", [
+			'label'     => __( 'Justify Content', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SELECT,
+			'options'   => [
+				'flex-start'    => __( 'Start', EAEL_TEXTDOMAIN ),
+				'flex-end'      => __( 'End', EAEL_TEXTDOMAIN ),
+				'center'        => __( 'Center', EAEL_TEXTDOMAIN ),
+				'space-between' => __( 'Space Between', EAEL_TEXTDOMAIN ),
+				'space-around'  => __( 'Space Around', EAEL_TEXTDOMAIN ),
+				'space-evenly'  => __( 'Space Evenly', EAEL_TEXTDOMAIN ),
+			],
+			'default'   => 'center',
+			'condition' => [
+				"{$form_type}_link_d_type" => 'row',
+			],
+			'selectors' => [
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-sign-wrapper" => 'justify-content: {{VALUE}};',
+			],
+		] );
+
+		$this->add_responsive_control( "{$form_type}_link_ai", [
+			'label'     => __( 'Align Items', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SELECT,
+			'options'   => [
+				'flex-start'    => __( 'Start', EAEL_TEXTDOMAIN ),
+				'flex-end'      => __( 'End', EAEL_TEXTDOMAIN ),
+				'center'        => __( 'Center', EAEL_TEXTDOMAIN ),
+				'stretch' => __( 'Stretch', EAEL_TEXTDOMAIN ),
+				'baseline'  => __( 'Baseline', EAEL_TEXTDOMAIN ),
+				'space-evenly'  => __( 'Space Evenly', EAEL_TEXTDOMAIN ),
+			],
+			'default'   => 'center',
+			'condition' => [
+				"{$form_type}_link_d_type" => 'column',
+			],
+			'selectors' => [
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-sign-wrapper" => 'align-items: {{VALUE}};',
+			],
+		] );
+
+		$this->add_control( "{$form_type}_link_align", [
+			'label'     => __( 'Alignment', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::CHOOSE,
+			'options'   => [
+				'mr-auto'         => [
+					'title' => __( 'Left', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-h-align-left',
+				],
+				'ml-auto mr-auto' => [
+					'title' => __( 'Center', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-h-align-center',
+				],
+				'ml-auto'         => [
+					'title' => __( 'Right', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-h-align-right',
+				],
+			],
+			'default'   => '',
+			'condition' => [
+				"{$form_type}_link_d_type" => 'column',
+			],
+		] );
+
 		$this->add_control( "tabs_{$form_type}_link_colors_heading", [
 			'type'      => Controls_Manager::HEADING,
 			'label'     => __( 'Colors & Border', EAEL_TEXTDOMAIN ),
@@ -2658,7 +2737,7 @@ class Login_Register extends Widget_Base {
 			$reg_link_text   = array_pop( $parts );
 			$reg_message     = array_shift( $parts );
 
-			$reg_link_placeholder = '%1$s <a href="%2$s" id="eael-lr-reg-toggle" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
+			$reg_link_placeholder = '<span class="d-ib">%1$s</span> <a href="%2$s" id="eael-lr-reg-toggle" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
 			$reg_atts             = $reg_url = '';
 			switch ( $reg_link_action ) {
 				case 'custom':
@@ -2708,6 +2787,8 @@ class Login_Register extends Widget_Base {
 
 			// btn alignment
 			$btn_align = isset( $this->ds['login_btn_align'] ) ? $this->ds['login_btn_align'] : '';
+			// btn alignment
+			$link_align = isset( $this->ds['login_link_align'] ) ? $this->ds['login_link_align'] : '';
 			?>
             <section id="eael-login-form-wrapper" class="<?php echo esc_attr( $default_hide_class ); ?>">
                 <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2">
@@ -2762,7 +2843,7 @@ class Login_Register extends Widget_Base {
                                 <div class="eael-lr-footer">
                                     <input type="submit" name="eael-login-submit" id="eael-login-submit" class="eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>" value="<?php echo esc_attr( $btn_text ); ?>"/>
 									<?php if ( $show_reg_link ) { ?>
-                                        <div class="eael-sign-wrapper">
+                                        <div class="eael-sign-wrapper <?php echo esc_attr( $link_align ); ?>">
 											<?php echo $reg_link; // XSS ok. already escaped ?>
                                         </div>
 									<?php } ?>
@@ -2820,7 +2901,7 @@ class Login_Register extends Widget_Base {
 			$parts                = explode( "\n", $lgn_link_text );
 			$lgn_link_text        = array_pop( $parts );
 			$lgn_message          = array_shift( $parts );
-			$lgn_link_placeholder = '%1$s <a href="%2$s" id="eael-lr-login-toggle" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
+			$lgn_link_placeholder = '<span class="d-ib">%1$s</span> <a href="%2$s" id="eael-lr-login-toggle" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
 			$lgn_url              = $lgn_atts = '';
 
 			switch ( $lgn_link_action ) {
@@ -2836,7 +2917,8 @@ class Login_Register extends Widget_Base {
 			$lgn_link = sprintf( $lgn_link_placeholder, $lgn_message, esc_attr( $lgn_url ), esc_attr( $lgn_link_action ), $lgn_link_text, $lgn_atts );
 
 			// btn alignment
-			$btn_align = isset( $this->ds['login_btn_align'] ) ? $this->ds['login_btn_align'] : '';
+			$btn_align = isset( $this->ds['register_btn_align'] ) ? $this->ds['register_btn_align'] : '';
+			$link_align = isset( $this->ds['register_link_align'] ) ? $this->ds['register_link_align'] : '';
 			ob_start();
 			?>
             <section id="eael-register-form-wrapper" class="<?php echo esc_attr( $default_hide_class ); ?>">
@@ -2956,7 +3038,7 @@ class Login_Register extends Widget_Base {
                             <div class="eael-lr-footer">
                                 <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn eael-lr-btn-block<?php echo esc_attr( $btn_align ); ?>" value="<?php echo esc_attr( $btn_text ); ?>"/>
 								<?php if ( $show_lgn_link ) { ?>
-                                    <div class="eael-sign-wrapper">
+                                    <div class="eael-sign-wrapper  <?php echo esc_attr( $link_align ); ?>">
 										<?php echo $lgn_link; ?>
                                     </div>
 								<?php } ?>
