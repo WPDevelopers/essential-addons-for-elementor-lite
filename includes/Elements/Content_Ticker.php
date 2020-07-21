@@ -14,7 +14,7 @@ use \Elementor\Widget_Base;
 class Content_Ticker extends Widget_Base
 {
     use \Essential_Addons_Elementor\Traits\Helper;
-    use \Essential_Addons_Elementor\Template\Content\Content_Ticker;
+    use \Essential_Addons_Elementor\Traits\Template_Query;
 
     public function get_name()
     {
@@ -788,9 +788,21 @@ class Content_Ticker extends Widget_Base
                 <div ' . $this->get_render_attribute_string('content-ticker') . '>
                     <div class="swiper-wrapper">';
                         if ('dynamic' === $settings['eael_ticker_type']) {
-                            echo self::render_template_($args, null);
-                        }
+                            $query = new \WP_Query($args);
 
+                            if ($query->have_posts()) {
+                                while ($query->have_posts()) {
+                                    $query->the_post();
+                                    
+                                    include($this->get_template($settings['eael_ticker_type']));
+                                }
+                            } else {
+                                $html .= '<div class="swiper-slide"><a href="#" class="ticker-content">' . __('No content found!', 'essential-addons-for-elementor-lite') . '</a></div>';
+                            }
+                    
+                            wp_reset_postdata();
+                        }
+                        
                         do_action('render_content_ticker_custom_content', $settings);
                     echo '</div>
 				</div>
