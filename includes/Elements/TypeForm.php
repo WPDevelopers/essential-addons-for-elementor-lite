@@ -104,8 +104,7 @@ class TypeForm extends Widget_Base {
             'eael_global_warning_text',
             [
                 'type'            => Controls_Manager::RAW_HTML,
-                'raw'             => __('Whoops! It\' seems like you didn\'t have access TypeForm form list. You can get access from 
-                                    <strong>Essential Addons &gt; Elements &gt; TypeForm (Get Access)</strong>',
+                'raw'             => __('Whoops! It seems like you haven\'t connected your Typeform account. To do this, navigate to WordPress Dashboard -> Essential Addons -> Elements -> Typeform (<a target="_blank" href="http://essential.test/wp-admin/admin.php?page=eael-settings">Get Access</a>).',
                     'essential-addons-for-elementor-lite'),
                 'content_classes' => 'eael-warning',
             ]
