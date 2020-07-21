@@ -66,12 +66,8 @@ trait Enqueue
             return;
         }
 
-        if ($this->is_edit_mode()) {
-            return;
-        }
-
-        if ($this->is_preview_mode()) {
-            // loaded template stack
+        // loaded template stack
+        if ($this->is_edit_mode() || $this->is_preview_mode()) {
             $this->loaded_templates[] = $post_id;
         }
     }
