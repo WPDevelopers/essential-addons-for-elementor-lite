@@ -116,8 +116,12 @@ class Login_Register extends Widget_Base {
 	public function get_icon() {
 		return 'eaicon-login'; //@TODO; use better icon later
 	}
-
-
+	/**
+	 * @inheritDoc
+	 */
+	public function get_style_depends() {
+		return ['dashicons'];
+	}
 	/**
 	 * @inheritDoc
 	 */
