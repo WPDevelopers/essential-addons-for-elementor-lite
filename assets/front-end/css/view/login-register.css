@@ -290,12 +290,6 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.eael-lr-form-wrapper .eael-lr-footer > input,
-.eael-lr-form-wrapper .eael-lr-footer > div {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
-}
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
   .eael-lr-form-wrapper input[type=checkbox] {
     --active: #275EFE;
