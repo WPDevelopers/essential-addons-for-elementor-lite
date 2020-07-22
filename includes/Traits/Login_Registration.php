@@ -53,6 +53,9 @@ trait Login_Registration {
 
 		do_action( 'eael/login-register/before-login' );
 
+
+		$widget_id = ! empty( $_POST['widget_id']) ? sanitize_text_field( $_POST['widget_id'] ) :'';
+
 		$user_login = ! empty( $_POST['eael-user-login'] ) ? sanitize_text_field( $_POST['eael-user-login'] ) : '';
 		if ( is_email( $user_login ) ) {
 			$user_login = sanitize_email( $user_login );
@@ -70,18 +73,18 @@ trait Login_Registration {
 
 		if ( is_wp_error( $user_data ) ) {
 			if ( isset( $user_data->errors['invalid_email'][0] ) ) {
-				$this->set_transient( 'eael_login_error', __( 'Invalid Email. Please check your email or try again with your username.', EAEL_TEXTDOMAIN ) );
+				$this->set_transient( 'eael_login_error_'.$widget_id, __( 'Invalid Email. Please check your email or try again with your username.', EAEL_TEXTDOMAIN ) );
 
 			} elseif ( isset( $user_data->errors['invalid_username'][0] ) ) {
-				$this->set_transient( 'eael_login_error', __( 'Invalid Username. Please check your username or try again with your email.', EAEL_TEXTDOMAIN ) );
+				$this->set_transient( 'eael_login_error_'.$widget_id, __( 'Invalid Username. Please check your username or try again with your email.', EAEL_TEXTDOMAIN ) );
 
 			} elseif ( isset( $user_data->errors['incorrect_password'][0] ) ) {
 
-				$this->set_transient( 'eael_login_error', __( 'Invalid Password. Please check your password and try again', EAEL_TEXTDOMAIN ) );
+				$this->set_transient( 'eael_login_error_'.$widget_id, __( 'Invalid Password. Please check your password and try again', EAEL_TEXTDOMAIN ) );
 
 			} elseif ( isset( $user_data->errors['empty_password'][0] ) ) {
 
-				$this->set_transient( 'eael_login_error', __( 'Empty Password. Please check your password and try again', EAEL_TEXTDOMAIN ) );
+				$this->set_transient( 'eael_login_error_'.$widget_id, __( 'Empty Password. Please check your password and try again', EAEL_TEXTDOMAIN ) );
 
 			}
 		} else {
@@ -129,7 +132,7 @@ trait Login_Registration {
 		} else {
 			$errors['page_id'] = __( 'Page ID is missing', EAEL_TEXTDOMAIN );
 		}
-
+		$widget_id = '';
 		if ( ! empty( $_POST['widget_id'] ) ) {
 			$widget_id = sanitize_text_field( $_POST['widget_id'] );
 		} else {
@@ -181,7 +184,7 @@ trait Login_Registration {
 
 		// if any error found, abort
 		if ( ! empty( $errors ) ) {
-			$this->set_transient( 'eael_register_errors', $errors );
+			$this->set_transient( 'eael_register_errors_'.$widget_id, $errors );
 			wp_safe_redirect( esc_url( $url ) );
 			exit();
 		}
@@ -265,7 +268,7 @@ trait Login_Registration {
 		if ( is_wp_error( $user_id ) ) {
 			// error happened during user creation
 			$errors['user_create'] = __( 'Sorry, something went wrong. User could not be registered.', EAEL_TEXTDOMAIN );
-			$this->set_transient( 'eael_register_errors', $errors );
+			$this->set_transient( 'eael_register_errors_'.$widget_id, $errors );
 			wp_safe_redirect( esc_url( $url ) );
 			exit();
 		}
@@ -297,7 +300,7 @@ trait Login_Registration {
 		wp_new_user_notification( $user_id, null, $admin_or_both );
 
 		// success & handle after registration action as defined by user in the widget
-		$this->set_transient( 'eael_register_success', 1 );
+		$this->set_transient( 'eael_register_success_'.$widget_id, 1 );
 
 
 		// Handle after registration action
