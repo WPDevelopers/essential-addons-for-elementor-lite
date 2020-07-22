@@ -1481,6 +1481,9 @@ class Login_Register extends Widget_Base {
 			'selectors'       => [
 				"{{WRAPPER}} .eael-lr-form-wrapper" => 'width: {{SIZE}}{{UNIT}};',
 			],
+			'condition'  => [
+				'form_form_wrap_po_toggle' => 'yes',
+			],
 		] );
 
 		$this->add_control( "eael_form_wrap_margin", [
@@ -1592,6 +1595,9 @@ class Login_Register extends Widget_Base {
 			],
 			'selectors'       => [
 				"{{WRAPPER}} .lr-form-wrapper" => 'width: {{SIZE}}{{UNIT}};',
+			],
+			'condition'  => [
+				'form_form_po_toggle' => 'yes',
 			],
 		] );
 
@@ -1710,6 +1716,9 @@ class Login_Register extends Widget_Base {
 			'selectors'       => [
 				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration" => 'width: {{SIZE}}{{UNIT}};',
 			],
+			'condition'  => [
+				'form_img_po_toggle' => 'yes',
+			],
 		] );
 		$this->add_responsive_control( "form_img_height", [
 			'label'           => esc_html__( 'Height', EAEL_TEXTDOMAIN ),
@@ -1744,6 +1753,9 @@ class Login_Register extends Widget_Base {
 			],
 			'selectors'       => [
 				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration" => 'height: {{SIZE}}{{UNIT}};',
+			],
+			'condition'  => [
+				'form_img_po_toggle' => 'yes',
 			],
 		] );
 		$this->add_control( "form_img_margin", [
