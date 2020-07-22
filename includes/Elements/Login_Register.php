@@ -114,7 +114,7 @@ class Login_Register extends Widget_Base {
 	 * @inheritDoc
 	 */
 	public function get_icon() {
-		return 'eicon-lock-user'; //@TODO; use better icon later
+		return 'eaicon-login'; //@TODO; use better icon later
 	}
 	///**
 	// * @inheritDoc
