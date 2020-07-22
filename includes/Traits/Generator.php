@@ -261,7 +261,7 @@ trait Generator
             }
         }
 
-        if ($this->loaded_templates && $ext == 'js' && $context == 'view') {
+        if ($this->loaded_templates && $context == 'view' && $ext == 'js') {
             foreach ($this->loaded_templates as $post_id) {
                 $document = Plugin::$instance->documents->get($post_id);
 
