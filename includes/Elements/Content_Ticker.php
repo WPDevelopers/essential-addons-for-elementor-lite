@@ -787,6 +787,7 @@ class Content_Ticker extends Widget_Base
             echo '<div ' . $this->get_render_attribute_string('content-ticker-wrap') . '>
                 <div ' . $this->get_render_attribute_string('content-ticker') . '>
                     <div class="swiper-wrapper">';
+
                         if ('dynamic' === $settings['eael_ticker_type']) {
                             $query = new \WP_Query($args);
 
@@ -799,11 +800,17 @@ class Content_Ticker extends Widget_Base
                             } else {
                                 $html .= '<div class="swiper-slide"><a href="#" class="ticker-content">' . __('No content found!', 'essential-addons-for-elementor-lite') . '</a></div>';
                             }
-                    
                             wp_reset_postdata();
                         }
+
+                        if ( 'custom' === $settings['eael_ticker_type'] ) {
+                            foreach ( $settings['eael_ticker_custom_contents'] as $content ) {
+                                $target = $content['eael_ticker_custom_content_link']['is_external'] ? 'target="_blank"' : '';
+                                $nofollow = $content['eael_ticker_custom_content_link']['nofollow'] ? 'rel="nofollow"' : '';
+                                include($this->get_template($settings['eael_ticker_type']));
+                            }
+                        }
                         
-                        do_action('render_content_ticker_custom_content', $settings);
                     echo '</div>
 				</div>
 				' . $this->render_arrows() . '
