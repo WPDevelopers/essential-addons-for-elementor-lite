@@ -426,6 +426,11 @@ class Login_Register extends Widget_Base {
 		}
 
 		$this->end_popover();
+		$this->add_control( 'general_pop_notice', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( 'Note: the "Back to Default" button above wont reset the content. It is used here only for organizing related controls.', EAEL_TEXTDOMAIN ),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+		] );
 		do_action( 'eael/login-register/after-general-controls', $this );
 		$this->end_controls_section();
 	}
