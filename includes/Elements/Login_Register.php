@@ -197,7 +197,6 @@ class Login_Register extends Widget_Base {
 		$this->init_content_register_options_controls();
 		$this->init_content_register_user_email_controls();
 		$this->init_content_register_admin_email_controls();
-		//$this->init_content_register_validation_message_controls(); //@TODO; later
 		//Terms & Conditions
 		$this->init_content_terms_controls();
 		do_action( 'eael/login-register/after-content-controls', $this );
@@ -253,18 +252,13 @@ class Login_Register extends Widget_Base {
 		$this->start_popover();
 		$this->add_control( 'show_log_out_message', [
 			'label'   => __( 'Show Logout Link', EAEL_TEXTDOMAIN ),
-			//'description' => __( 'This option will show a message with logout link instead of a login form for the logged in user', EAEL_TEXTDOMAIN ),
 			'type'    => Controls_Manager::SWITCHER,
 			'default' => 'yes',
-			//'condition' => [
-			//	'default_form_type' => 'login',
-			//],
 		] );
 		$this->add_control( 'show_lost_password', [
 			'label'   => __( 'Show Lost your password?', EAEL_TEXTDOMAIN ),
 			'type'    => Controls_Manager::SWITCHER,
 			'default' => 'yes',
-			//'conditions' => $this->get_form_controls_display_condition( 'login' ),
 		] );
 
 		$this->add_control( 'lost_password_text', [
@@ -312,18 +306,15 @@ class Login_Register extends Widget_Base {
 			] );
 			$this->add_control( 'show_register_link', [
 				'label'     => __( 'Show Register Link', EAEL_TEXTDOMAIN ),
-				//'description' => __( 'You can add a "Register" Link below the login form', EAEL_TEXTDOMAIN ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'yes',
 				'separator' => 'before',
-				//'condition' => [
-				//	'default_form_type' => 'login',
-				//],
+
 			] );
 			$this->add_control( 'registration_link_text', [
 				'label'       => __( 'Register Link Text', EAEL_TEXTDOMAIN ),
 				'label_block' => true,
-				'description' => __( 'You can put text in two lines to make the last line linkable.', EAEL_TEXTDOMAIN ),
+				'description' => __( 'You can put text in two lines to make the last line linkable. Pro Tip: You can keep the first line empty and put the text only in the second line to get a link only.', EAEL_TEXTDOMAIN ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'rows'        => 2,
 				'dynamic'     => [
@@ -332,7 +323,6 @@ class Login_Register extends Widget_Base {
 				'default'     => __( "Don't have an Account? \nRegister Now", EAEL_TEXTDOMAIN ),
 				'condition'   => [
 					'show_register_link' => 'yes',
-					//'default_form_type'  => 'login',
 				],
 			] );
 			$this->add_control( 'registration_link_action', [
@@ -347,7 +337,6 @@ class Login_Register extends Widget_Base {
 				'default'     => 'form',
 				'condition'   => [
 					'show_register_link' => 'yes',
-					//'default_form_type'  => 'login',
 				],
 			] );
 			$this->add_control( 'custom_register_url', [
@@ -392,14 +381,11 @@ class Login_Register extends Widget_Base {
 				'label'   => __( 'Show Login Link', EAEL_TEXTDOMAIN ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
-				//'condition' => [
-				//	'default_form_type' => 'register',
-				//],
 			] );
 			$this->add_control( 'login_link_text', [
 				'label'       => __( 'Login Link Text', EAEL_TEXTDOMAIN ),
 				'label_block' => true,
-				'description' => __( 'You can put text in two lines to make the last line linkable.', EAEL_TEXTDOMAIN ),
+				'description' => __( 'You can put text in two lines to make the last line linkable. Pro Tip: You can keep the first line empty and put the text only in the second line to get a link only.', EAEL_TEXTDOMAIN ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'rows'        => 2,
 				'dynamic'     => [
@@ -408,13 +394,11 @@ class Login_Register extends Widget_Base {
 				'default'     => __( "Already have an Account? \nSign In", EAEL_TEXTDOMAIN ),
 				'condition'   => [
 					'show_login_link' => 'yes',
-					//'default_form_type' => 'register',
 				],
 			] );
 			$this->add_control( 'login_link_action', [
 				'label'       => __( 'Login Link Action', EAEL_TEXTDOMAIN ),
 				'label_block' => true,
-				//'description' => __( 'Select what should happen when the login link is clicked', EAEL_TEXTDOMAIN ),
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
 					'default' => __( 'Default WordPress Page', EAEL_TEXTDOMAIN ),
