@@ -1433,9 +1433,9 @@ class Login_Register extends Widget_Base {
 			'label' => __( 'General', EAEL_TEXTDOMAIN ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
-		//---Form Wrapper or Box
+		//---Form Container or Box
 		$this->add_control( 'form_form_wrap_po_toggle', [
-			'label'        => __( 'Wrapper Box', EAEL_TEXTDOMAIN ),
+			'label'        => __( 'Container Box', EAEL_TEXTDOMAIN ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
 			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
 			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
@@ -1536,7 +1536,7 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
-			'label'    => __( 'Wrapper Box Shadow', EAEL_TEXTDOMAIN ),
+			'label'    => __( 'Container Box Shadow', EAEL_TEXTDOMAIN ),
 			'name'     => 'eael_form_wrap_shadow',
 			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper",
 			'exclude'  => [
@@ -2221,7 +2221,7 @@ class Login_Register extends Widget_Base {
 
 
 		$this->add_responsive_control( "{$button_type}_btn_jc", [
-			'label'     => __( 'Alignment', EAEL_TEXTDOMAIN ),
+			'label'     => __( 'Justify Content', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::SELECT,
 			'options'   => [
 				'flex-start'    => __( 'Start', EAEL_TEXTDOMAIN ),
@@ -2614,7 +2614,30 @@ class Login_Register extends Widget_Base {
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
 		/*-----ends Link tabs--------*/
-
+//.eael-lr-footer
+		$this->add_responsive_control( "{$form_type}_link_wrap_width", [
+			'label'      => esc_html__( 'Link Container width', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 500,
+					'step' => 5,
+				],
+				'%'  => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-sign-wrapper" => 'width: {{SIZE}}{{UNIT}};',
+			],
+			'separator'  => 'before',
+		] );
 		$this->add_responsive_control( "{$form_type}_link_width", [
 			'label'      => esc_html__( 'Link width', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::SLIDER,
@@ -2636,8 +2659,8 @@ class Login_Register extends Widget_Base {
 			'selectors'  => [
 				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link" => 'width: {{SIZE}}{{UNIT}};',
 			],
-			'separator'  => 'before',
 		] );
+
 		$this->add_responsive_control( "{$form_type}_link_height", [
 			'label'      => esc_html__( 'Link Height', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::SLIDER,

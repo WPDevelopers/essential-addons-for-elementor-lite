@@ -252,10 +252,6 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
         display: flex;
         justify-content: center;
         align-items: center;
-        > input,
-        > div {
-            flex:1 1 auto;
-        }
     }
 
     @supports (-webkit-appearance: none) or (-moz-appearance: none) {
