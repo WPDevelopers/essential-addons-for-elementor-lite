@@ -2,19 +2,19 @@ jQuery(window).on("elementor/frontend/init", function () {
     const EALoginRegister = function ($scope, $) {
         const $loginFormWrapper = $scope.find("#eael-login-form-wrapper");
         const $regFormWrapper = $scope.find("#eael-register-form-wrapper");
-        const regLinkAction = $('#eael-lr-reg-toggle').data('action');
-        const loginLinkAction = $('#eael-lr-login-toggle').data('action');
+        const $regLinkAction = $scope.find('#eael-lr-reg-toggle');
+        const $loginLinkAction = $scope.find('#eael-lr-login-toggle');
         const $passField = $loginFormWrapper.find('#eael-user-password');
 
-        if ('form' === regLinkAction) {
-            $(document).on('click', '#eael-lr-reg-toggle', function (e) {
+        if ('form' === $regLinkAction.data('action')) {
+            $regLinkAction.on('click', function (e) {
                 e.preventDefault();
                 $loginFormWrapper.hide();
                 $regFormWrapper.fadeIn();
             });
         }
-        if ('form' === loginLinkAction) {
-            $(document).on('click', '#eael-lr-login-toggle', function (e) {
+        if ('form' === $loginLinkAction.data('action')) {
+            $loginLinkAction.on('click', function (e) {
                 e.preventDefault();
                 $regFormWrapper.hide();
                 $loginFormWrapper.fadeIn();
