@@ -116,23 +116,7 @@ class Login_Register extends Widget_Base {
 	public function get_icon() {
 		return 'eaicon-login'; //@TODO; use better icon later
 	}
-	///**
-	// * @inheritDoc
-	// */
-	//public function get_style_depends() {
-	//	return [
-	//		'font-awesome-5-all',
-	//		'font-awesome-4-shim',
-	//	];
-	//}
-	///**
-	// * @inheritDoc
-	// */
-	//public function get_script_depends() {
-	//	return [
-	//		'font-awesome-4-shim',
-	//	];
-	//}
+
 
 	/**
 	 * @inheritDoc
@@ -3264,8 +3248,8 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_validation_message() {
-		$errors  = get_transient( 'eael_register_errors' );
-		$success = get_transient( 'eael_register_success' );
+		$errors  = get_transient( 'eael_register_errors_'.$this->get_id() );
+		$success = get_transient( 'eael_register_success_'.$this->get_id() );
 		if ( empty( $errors ) && empty( $success ) ) {
 			return;
 		}
@@ -3299,7 +3283,7 @@ class Login_Register extends Widget_Base {
             </ol>
         </div>
 		<?php
-		delete_transient( 'eael_register_errors' );
+		delete_transient( 'eael_register_errors_'.$this->get_id() );
 	}
 
 	protected function print_registration_success_message( $success ) {
@@ -3307,7 +3291,8 @@ class Login_Register extends Widget_Base {
 		if ( $success ) {
 			$message = '<p class="eael-form-msg valid">' . esc_html( $this->get_settings_for_display( 'register_success_msg' ) ) . '</p>';
 			echo apply_filters( 'eael/login-register/registration-success-msg', $message, $success );
-			delete_transient( 'eael_register_success' );
+
+			delete_transient( 'eael_register_success_'.$this->get_id() );
 
 			return true; // it will help in case we wanna know if error is printed.
 		}
