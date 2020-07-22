@@ -562,6 +562,7 @@ class Login_Register extends Widget_Base {
 			'type'      => Controls_Manager::SWITCHER,
 			'label_off' => __( 'Hide', EAEL_TEXTDOMAIN ),
 			'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
+			'default'   => 'yes',
 		] );
 		$this->add_control( 'lpv_po_toggle', [
 			'label'     => __( 'Password Visibility Style', EAEL_TEXTDOMAIN ),
@@ -811,12 +812,12 @@ class Login_Register extends Widget_Base {
 			],
 			'separator'     => 'after',
 		] );
-        // @todo; in future
+		// @todo; in future
 		//$this->add_control( 'redirect_after_logout', [
 		//	'label' => __( 'Redirect After Logout', EAEL_TEXTDOMAIN ),
 		//	'type'  => Controls_Manager::SWITCHER,
 		//] );
-        //
+		//
 		//$this->add_control( 'redirect_logout_url', [
 		//	'type'          => Controls_Manager::URL,
 		//	'show_label'    => false,
@@ -2143,10 +2144,11 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function init_style_login_link_controls() {
-        $this->_init_link_style('login');
+		$this->_init_link_style( 'login' );
 	}
+
 	protected function init_style_register_link_controls() {
-		$this->_init_link_style('register');
+		$this->_init_link_style( 'register' );
 	}
 
 	/**
@@ -2212,7 +2214,7 @@ class Login_Register extends Widget_Base {
 			],
 			'default'   => 'row',
 			'selectors' => [
-				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-footer" => 'flex-direction: {{VALUE}};',
+				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-footer"    => 'flex-direction: {{VALUE}};',
 				"{{WRAPPER}} .eael-{$button_type}-form .eael-sign-wrapper" => 'padding-top: 0;',
 			],
 		] );
@@ -2396,10 +2398,10 @@ class Login_Register extends Widget_Base {
 	 * @param string $form_type the type of form where the link is being shown. accepts login or register.
 	 */
 	protected function _init_link_style( $form_type = 'login' ) {
-	    $form_name = 'login' === $form_type ? __('Register', EAEL_TEXTDOMAIN) : __('Login', EAEL_TEXTDOMAIN);
+		$form_name = 'login' === $form_type ? __( 'Register', EAEL_TEXTDOMAIN ) : __( 'Login', EAEL_TEXTDOMAIN );
 		$this->start_controls_section( "section_style_{$form_type}_link", [
-			'label'      => sprintf( __( '%s Link', EAEL_TEXTDOMAIN ), ucfirst( $form_name ) ),
-			'tab'        => Controls_Manager::TAB_STYLE,
+			'label'     => sprintf( __( '%s Link', EAEL_TEXTDOMAIN ), ucfirst( $form_name ) ),
+			'tab'       => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				"show_{$form_type}_link" => 'yes',
 			],
@@ -2491,12 +2493,12 @@ class Login_Register extends Widget_Base {
 			'label'     => __( 'Align Items', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::SELECT,
 			'options'   => [
-				'flex-start'    => __( 'Start', EAEL_TEXTDOMAIN ),
-				'flex-end'      => __( 'End', EAEL_TEXTDOMAIN ),
-				'center'        => __( 'Center', EAEL_TEXTDOMAIN ),
-				'stretch' => __( 'Stretch', EAEL_TEXTDOMAIN ),
-				'baseline'  => __( 'Baseline', EAEL_TEXTDOMAIN ),
-				'space-evenly'  => __( 'Space Evenly', EAEL_TEXTDOMAIN ),
+				'flex-start'   => __( 'Start', EAEL_TEXTDOMAIN ),
+				'flex-end'     => __( 'End', EAEL_TEXTDOMAIN ),
+				'center'       => __( 'Center', EAEL_TEXTDOMAIN ),
+				'stretch'      => __( 'Stretch', EAEL_TEXTDOMAIN ),
+				'baseline'     => __( 'Baseline', EAEL_TEXTDOMAIN ),
+				'space-evenly' => __( 'Space Evenly', EAEL_TEXTDOMAIN ),
 			],
 			'default'   => 'center',
 			'condition' => [
@@ -2697,7 +2699,7 @@ class Login_Register extends Widget_Base {
 			return; // do not show any form for already logged in user. but let edit on editor
 		}
 
-		$this->ds = $this->get_settings_for_display();
+		$this->ds                      = $this->get_settings_for_display();
 		$this->default_form            = $this->get_settings_for_display( 'default_form_type' );
 		$this->should_print_login_form = ( 'login' === $this->default_form || 'yes' === $this->get_settings_for_display( 'show_login_link' ) );
 
@@ -2773,6 +2775,7 @@ class Login_Register extends Widget_Base {
 			$btn_text         = ! empty( $this->ds['login_button_text'] ) ? $this->ds['login_button_text'] : '';
 			$show_logout_link = ( ! empty( $this->ds['show_log_out_message'] ) && 'yes' === $this->ds['show_log_out_message'] );
 			$show_rememberme  = ( ! empty( $this->ds['login_show_remember_me'] ) && 'yes' === $this->ds['login_show_remember_me'] );
+			$show_pv_icon     = ( ! empty( $this->ds['password_toggle'] ) && 'yes' === $this->ds['password_toggle'] );
 
 			//Loss password
 			$show_lp = ( ! empty( $this->ds['show_lost_password'] ) && 'yes' === $this->ds['show_lost_password'] );
@@ -2823,9 +2826,11 @@ class Login_Register extends Widget_Base {
                                                placeholder="<?php if ( $display_label && $p_ph ) {
 											       echo esc_attr( $p_ph );
 										       } ?>" required>
-                                        <button type="button" id="wp-hide-pw" class="wp-hide-pw hide-if-no-js" aria-label="Show password">
-                                            <span class="dashicons dashicons-visibility" aria-hidden="true"></span>
-                                        </button>
+										<?php if ( $show_pv_icon ) { ?>
+                                            <button type="button" id="wp-hide-pw" class="wp-hide-pw hide-if-no-js" aria-label="Show password">
+                                                <span class="dashicons dashicons-visibility" aria-hidden="true"></span>
+                                            </button>
+										<?php } ?>
                                     </div>
                                 </div>
                                 <div class="eael-forever-forget eael-lr-form-group">
@@ -2917,7 +2922,7 @@ class Login_Register extends Widget_Base {
 			$lgn_link = sprintf( $lgn_link_placeholder, $lgn_message, esc_attr( $lgn_url ), esc_attr( $lgn_link_action ), $lgn_link_text, $lgn_atts );
 
 			// btn alignment
-			$btn_align = isset( $this->ds['register_btn_align'] ) ? $this->ds['register_btn_align'] : '';
+			$btn_align  = isset( $this->ds['register_btn_align'] ) ? $this->ds['register_btn_align'] : '';
 			$link_align = isset( $this->ds['register_link_align'] ) ? $this->ds['register_link_align'] : '';
 			ob_start();
 			?>
