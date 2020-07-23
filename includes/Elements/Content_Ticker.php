@@ -795,7 +795,9 @@ class Content_Ticker extends Widget_Base
                                 while ($query->have_posts()) {
                                     $query->the_post();
                                     
-                                    include($this->get_template($settings['eael_ticker_type']));
+                                    if(\file_exists($this->get_template($settings['eael_ticker_type']))) {
+                                        include($this->get_template($settings['eael_ticker_type']));
+                                    }
                                 }
                             } else {
                                 $html .= '<div class="swiper-slide"><a href="#" class="ticker-content">' . __('No content found!', 'essential-addons-for-elementor-lite') . '</a></div>';
@@ -805,9 +807,12 @@ class Content_Ticker extends Widget_Base
 
                         if ( 'custom' === $settings['eael_ticker_type'] ) {
                             foreach ( $settings['eael_ticker_custom_contents'] as $content ) {
-                                $target = $content['eael_ticker_custom_content_link']['is_external'] ? 'target="_blank"' : '';
-                                $nofollow = $content['eael_ticker_custom_content_link']['nofollow'] ? 'rel="nofollow"' : '';
-                                include($this->get_template($settings['eael_ticker_type']));
+                                if(\file_exists($this->get_template($settings['eael_ticker_type']))) {
+                                    $target = $content['eael_ticker_custom_content_link']['is_external'] ? 'target="_blank"' : '';
+                                    $nofollow = $content['eael_ticker_custom_content_link']['nofollow'] ? 'rel="nofollow"' : '';
+
+                                    include($this->get_template($settings['eael_ticker_type']));
+                                }
                             }
                         }
                         
