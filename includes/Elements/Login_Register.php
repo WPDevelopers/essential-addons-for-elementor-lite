@@ -541,103 +541,6 @@ class Login_Register extends Widget_Base {
 			'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
 			'default'   => 'yes',
 		] );
-		$this->add_control( 'lpv_po_toggle', [
-			'label'     => __( 'Password Visibility Style', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::POPOVER_TOGGLE,
-			'condition' => [
-				'password_toggle' => 'yes',
-			],
-		] );
-		$this->start_popover();
-
-		$this->add_control( "lpv_size", [
-			'label'      => esc_html__( 'Icon Size', EAEL_TEXTDOMAIN ),
-			'type'       => Controls_Manager::SLIDER,
-			'size_units' => [
-				'px',
-				'rem',
-				'%',
-			],
-			'range'      => [
-				'px' => [
-					'min'  => 0,
-					'max'  => 50,
-					'step' => 1,
-				],
-			],
-			'selectors'  => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .dashicons" => 'font-size: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
-			],
-			'condition'  => [
-				'lpv_po_toggle' => 'yes',
-			],
-		] );
-		$this->add_control( "lvp_open_color", [
-			'label'     => __( 'Open Eye Color', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .dashicons-visibility" => 'color: {{VALUE}};',
-			],
-			'condition' => [
-				'lpv_po_toggle' => 'yes',
-			],
-		] );
-		$this->add_control( "lvp_close_color", [
-			'label'     => __( 'Close Eye Color', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .dashicons-hidden" => 'color: {{VALUE}};',
-			],
-			'condition' => [
-				'lpv_po_toggle' => 'yes',
-			],
-		] );
-
-		$this->add_control( "lpv_valign", [
-			'label'     => esc_html__( 'Vertical Alignment', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::SLIDER,
-			'range'     => [
-				'px' => [
-					'min'  => - 50,
-					'max'  => 50,
-					'step' => 1,
-				],
-			],
-			'default'   => [
-				'unit' => 'px',
-				'size' => 0.73,
-			],
-			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'top: {{SIZE}}px;',
-			],
-			'condition' => [
-				'lpv_po_toggle' => 'yes',
-			],
-		] );
-		$this->add_control( "lpv_halign", [
-			'label'     => esc_html__( 'Horizontal Alignment', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::SLIDER,
-			'range'     => [
-				'px' => [
-					'min'  => - 50,
-					'max'  => 50,
-					'step' => 1,
-				],
-			],
-			'default'   => [
-				'unit' => 'px',
-				'size' => - 27,
-			],
-			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'right: {{SIZE}}px;',
-			],
-			'condition' => [
-				'lpv_po_toggle' => 'yes',
-			],
-		] );
-
-		$this->end_popover();
-
 
 		/*--Login Fields Button--*/
 		$this->add_control( 'login_button_heading', [
@@ -1008,104 +911,7 @@ class Login_Register extends Widget_Base {
 				'show_labels' => 'yes',
 			],
 		] );
-		$this->add_control( 'rmark_po_toggle', [
-			'label'     => __( 'Required Mark Style', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::POPOVER_TOGGLE,
-			'condition' => [
-				'show_labels'   => 'yes',
-				'mark_required' => 'yes',
-			],
-		] );
-		$this->start_popover();
-		$this->add_control( 'rmark_sign', [
-			'label'       => __( 'Mark Sign', EAEL_TEXTDOMAIN ),
-			'type'        => Controls_Manager::TEXT,
-			'default'     => '*',
-			'placeholder' => 'Enter * or (required) etc.',
-			'selectors'   => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'content: "{{VALUE}}";',
-			],
-			'condition'   => [
-				'rmark_po_toggle' => 'yes',
-			],
-		] );
-		$this->add_control( "rmark_size", [
-			'label'      => esc_html__( 'Size', EAEL_TEXTDOMAIN ),
-			'type'       => Controls_Manager::SLIDER,
-			'size_units' => [
-				'px',
-				'rem',
-				'%',
-			],
-			'range'      => [
-				'px' => [
-					'min'  => 0,
-					'max'  => 50,
-					'step' => 1,
-				],
-			],
-			'selectors'  => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'font-size: {{SIZE}}{{UNIT}};',
-			],
-			'condition'  => [
-				'rmark_po_toggle' => 'yes',
-			],
-		] );
-		$this->add_control( "rmakr_color", [
-			'label'     => __( 'Color', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'color: {{VALUE}};',
-			],
-			'condition' => [
-				'rmark_po_toggle' => 'yes',
-			],
-		] );
 
-		$this->add_control( "rmark_valign", [
-			'label'     => esc_html__( 'Vertical Alignment', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::SLIDER,
-			'range'     => [
-				'px' => [
-					'min'  => - 50,
-					'max'  => 50,
-					'step' => 0,
-				],
-			],
-			'default'   => [
-				'unit' => 'px',
-				'size' => 17,
-			],
-			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'top: {{SIZE}}px;',
-			],
-			'condition' => [
-				'rmark_po_toggle' => 'yes',
-			],
-		] );
-		$this->add_control( "rmark_halign", [
-			'label'     => esc_html__( 'Horizontal Alignment', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::SLIDER,
-			'range'     => [
-				'px' => [
-					'min'  => - 50,
-					'max'  => 50,
-					'step' => 0,
-				],
-			],
-			'default'   => [
-				'unit' => 'px',
-				'size' => - 10,
-			],
-			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'right: {{SIZE}}px;',
-			],
-			'condition' => [
-				'rmark_po_toggle' => 'yes',
-			],
-		] );
-
-		$this->end_popover();
 
 		/*--Register Fields Button--*/
 		$this->add_control( 'reg_button_heading', [
@@ -2121,6 +1927,203 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 		$this->end_popover();
+
+		$this->add_control( 'rmark_po_toggle', [
+			'label'     => __( 'Required Mark Style', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::POPOVER_TOGGLE,
+			'condition' => [
+				'show_labels'   => 'yes',
+				'mark_required' => 'yes',
+			],
+		] );
+
+		$this->start_popover();
+		$this->add_control( 'rmark_sign', [
+			'label'       => __( 'Mark Sign', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'default'     => '*',
+			'placeholder' => 'Enter * or (required) etc.',
+			'selectors'   => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'content: "{{VALUE}}";',
+			],
+			'condition'   => [
+				'rmark_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_control( "rmark_size", [
+			'label'      => esc_html__( 'Size', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'font-size: {{SIZE}}{{UNIT}};',
+			],
+			'condition'  => [
+				'rmark_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_control( "rmakr_color", [
+			'label'     => __( 'Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'rmark_po_toggle' => 'yes',
+			],
+		] );
+
+		$this->add_control( "rmark_valign", [
+			'label'     => esc_html__( 'Vertical Alignment', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SLIDER,
+			'range'     => [
+				'px' => [
+					'min'  => - 50,
+					'max'  => 50,
+					'step' => 0,
+				],
+			],
+			'default'   => [
+				'unit' => 'px',
+				'size' => 17,
+			],
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'top: {{SIZE}}px;',
+			],
+			'condition' => [
+				'rmark_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_control( "rmark_halign", [
+			'label'     => esc_html__( 'Horizontal Alignment', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SLIDER,
+			'range'     => [
+				'px' => [
+					'min'  => - 50,
+					'max'  => 50,
+					'step' => 0,
+				],
+			],
+			'default'   => [
+				'unit' => 'px',
+				'size' => - 10,
+			],
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group label.mark-required:after" => 'right: {{SIZE}}px;',
+			],
+			'condition' => [
+				'rmark_po_toggle' => 'yes',
+			],
+		] );
+
+		$this->end_popover();
+		$this->add_control( 'lpv_po_toggle', [
+			'label'     => __( 'Password Visibility Style', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::POPOVER_TOGGLE,
+			'condition' => [
+				'password_toggle' => 'yes',
+			],
+		] );
+		$this->start_popover();
+
+		$this->add_control( "lpv_size", [
+			'label'      => esc_html__( 'Icon Size', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .dashicons" => 'font-size: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
+			],
+			'condition'  => [
+				'lpv_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_control( "lvp_open_color", [
+			'label'     => __( 'Open Eye Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .dashicons-visibility" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'lpv_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_control( "lvp_close_color", [
+			'label'     => __( 'Close Eye Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .dashicons-hidden" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'lpv_po_toggle' => 'yes',
+			],
+		] );
+
+		$this->add_control( "lpv_valign", [
+			'label'     => esc_html__( 'Vertical Alignment', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SLIDER,
+			'range'     => [
+				'px' => [
+					'min'  => - 50,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'default'   => [
+				'unit' => 'px',
+				'size' => 0.73,
+			],
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'top: {{SIZE}}px;',
+			],
+			'condition' => [
+				'lpv_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_control( "lpv_halign", [
+			'label'     => esc_html__( 'Horizontal Alignment', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SLIDER,
+			'range'     => [
+				'px' => [
+					'min'  => - 50,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'default'   => [
+				'unit' => 'px',
+				'size' => - 27,
+			],
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'right: {{SIZE}}px;',
+			],
+			'condition' => [
+				'lpv_po_toggle' => 'yes',
+			],
+		] );
+
+		$this->end_popover();
+
 		$this->end_controls_section();
 	}
 
