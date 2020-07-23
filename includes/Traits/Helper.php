@@ -1654,13 +1654,6 @@ trait Helper
 		return array_merge( array( 'full' => esc_html__( 'Full', 'essential-addons-for-elementor-lite' ), ), $result );
 	}
 
-	public function eael_avoid_redirect_to_single_page( $value ) {
-		if ( $this->yith_is_quick_view() ) {
-			return '';
-		}
-		return $value;
-	}
-
     /**
      * Get Contact Form 7 [ if exists ]
      */
