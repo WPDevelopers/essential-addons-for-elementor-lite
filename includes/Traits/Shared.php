@@ -17,7 +17,9 @@ trait Shared
     {
         if (is_ssl()) {
             $url = wp_parse_url($url);
-            $url['scheme'] = 'https';
+            if(!empty($parsed_url['host'])){
+                $url['scheme'] = 'https';
+            }
 
             return $this->unparse_url($url);
         }
