@@ -25,9 +25,8 @@ trait Helper
     {
         $posts = get_posts([
             'post_type' => $post_type,
-            'post_style' => 'all_types',
             'post_status' => 'publish',
-            'posts_per_page' => '-1',
+            'numberposts' => -1,
         ]);
 
         if (!empty($posts)) {
