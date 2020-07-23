@@ -284,15 +284,8 @@ trait Product_Grid
 		<div id="test<?php echo $product->get_id(); ?>" class="eael-product-popup mfp-hide">
                 <div class="eael-profuct-image-wrap"><?php echo $product->get_image('woocommerce_thumbnail'); ?></div>
                 <div class="eael-profuct-details-wrap">
-                    <h2 class="eael-product-modal-title"><?php echo $product->get_title();?></h2>
-                    <div class="price"><?php echo $product->get_price_html(); ?></div>
                     <?php
                     do_action( 'woocommerce_single_product_summary' ); ?>
-//
-//                    if(has_excerpt()){
-//                        the_excerpt();
-//                    }
-//                    wc_get_rating_html($product->get_average_rating(), $product->get_rating_count())?>
                 </div>
         </div>
 	<?php }
