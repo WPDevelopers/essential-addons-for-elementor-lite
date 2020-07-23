@@ -50,10 +50,10 @@ trait Admin
         if (!function_exists('get_plugins')) {
             include ABSPATH . '/wp-admin/includes/plugin.php';
         }
-        $plugins   = \get_plugins();
+        $plugins = \get_plugins();
         $installed = false;
         if (isset($plugins['templately/templately.php'])) {
-            $installed   = true;
+            $installed = true;
             $button_text = __('Activate Templately', 'essential-addons-for-elementor-lite');
         }
 
@@ -67,15 +67,22 @@ trait Admin
                     <div class="template-cloud-body">
                         <div class="template-cloud-install">
                             <div class="templately-left">
-                                <div class="templately-admin-title">
-                                    <h1><?php echo __('Explore 100+', 'essential-addons-for-elementor-lite'); ?><br><?php echo __('Free Templates', 'essential-addons-for-elementor-lite'); ?></h1>
-                                    <p><?php echo __('From multipurpose themes to niche templates, you’ll always find something that catches your eye.', 'essential-addons-for-elementor-lite'); ?></p>
+                                <div class="templately-cloud-title">
+                                    <h1><?php echo __( 'Explore 100+ Free Templates', 'essential-addons-for-elementor-lite' ); ?></h1>
+                                    <p><?php echo __( 'From multipurpose themes to niche templates, you’ll always find something that catches your eye.', 'essential-addons-for-elementor-lite' ); ?></p>
                                 </div>
                             </div>
-                            <div class="templately-right">
-                                <div class="templately-admin-install">
-                                    <p><?php echo __('Install Templately by Essential Addons to get access to the templates library and cloud.', 'essential-addons-for-elementor-lite'); ?></p>
-                                    <button class="eae-activate-templately"><?php echo $button_text; ?></button>
+                            <div class="templately-installer-wrapper">
+                                <div class="templately-left">
+                                    <div class="templately-admin-title">
+                                        <div class="templately-cloud-video-container"><iframe height="350" src="https://www.youtube.com/embed/coLxfjnrm3I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                                    </div>
+                                </div>
+                                <div class="templately-right">
+                                    <div class="templately-admin-install">
+                                        <p><?php echo __( 'Install Templately by Essential Addons to get access to the templates library and cloud.', 'essential-addons-for-elementor-lite' ); ?></p>
+                                        <button class="eae-activate-templately"><?php echo $button_text; ?></button>    
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -139,7 +146,7 @@ trait Admin
 
             wp_localize_script('essential_addons_elementor-admin-js', 'localize', array(
                 'ajaxurl' => admin_url('admin-ajax.php'),
-                'nonce'   => wp_create_nonce('essential-addons-elementor'),
+                'nonce' => wp_create_nonce('essential-addons-elementor'),
             ));
         }
     }
@@ -218,14 +225,17 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         // Saving Duplicator Settings
         update_option('eael_save_post_duplicator_post_type', @$settings['post-duplicator-post-type']);
 
-        $defaults = array_fill_keys(array_keys(array_merge($this->registered_elements, $this->registered_extensions, $this->additional_settings)), false);
+        // save js print method
+        update_option('eael_js_print_method', @$settings['eael-js-print-method']);
+
+        $defaults = array_fill_keys(array_keys(array_merge($this->registered_elements, $this->registered_extensions)), false);
         $elements = array_merge($defaults, array_fill_keys(array_keys(array_intersect_key($settings, $defaults)), true));
 
         // update new settings
         $updated = update_option('eael_save_settings', $elements);
 
-        // Build assets files
-        $this->generate_scripts(array_keys($elements), null, 'edit');
+        // clear assets files
+        $this->empty_dir(EAEL_ASSET_PATH);
 
         wp_send_json($updated);
     }
@@ -244,42 +254,42 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
          */
         $notice->maybe_later_time = '21 Day';
 
-        $scheme        = (parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)) ? '&' : '?';
-        $url           = $_SERVER['REQUEST_URI'] . $scheme;
+        $scheme = (parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)) ? '&' : '?';
+        $url = $_SERVER['REQUEST_URI'] . $scheme;
         $notice->links = [
             'review' => array(
-                'later'            => array(
-                    'link'       => 'https://wpdeveloper.net/review-essential-addons-elementor',
-                    'target'     => '_blank',
-                    'label'      => __('Ok, you deserve it!', 'essential-addons-for-elementor-lite'),
+                'later' => array(
+                    'link' => 'https://wpdeveloper.net/review-essential-addons-elementor',
+                    'target' => '_blank',
+                    'label' => __('Ok, you deserve it!', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-external',
                 ),
-                'allready'         => array(
-                    'link'       => $url,
-                    'label'      => __('I already did', 'essential-addons-for-elementor-lite'),
+                'allready' => array(
+                    'link' => $url,
+                    'label' => __('I already did', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-smiley',
-                    'data_args'  => [
+                    'data_args' => [
                         'dismiss' => true,
                     ],
                 ),
-                'maybe_later'      => array(
-                    'link'       => $url,
-                    'label'      => __('Maybe Later', 'essential-addons-for-elementor-lite'),
+                'maybe_later' => array(
+                    'link' => $url,
+                    'label' => __('Maybe Later', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-calendar-alt',
-                    'data_args'  => [
+                    'data_args' => [
                         'later' => true,
                     ],
                 ),
-                'support'          => array(
-                    'link'       => 'https://wpdeveloper.net/support',
-                    'label'      => __('I need help', 'essential-addons-for-elementor-lite'),
+                'support' => array(
+                    'link' => 'https://wpdeveloper.net/support',
+                    'label' => __('I need help', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-sos',
                 ),
                 'never_show_again' => array(
-                    'link'       => $url,
-                    'label'      => __('Never show again', 'essential-addons-for-elementor-lite'),
+                    'link' => $url,
+                    'label' => __('Never show again', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-dismiss',
-                    'data_args'  => [
+                    'data_args' => [
                         'dismiss' => true,
                     ],
                 ),
@@ -314,12 +324,12 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         // }
 
         $notice->upsale_args = array(
-            'slug'      => 'betterdocs',
+            'slug' => 'betterdocs',
             'page_slug' => 'betterdocs-setup',
-            'file'      => 'betterdocs.php',
-            'btn_text'  => __('Install Free', 'essential-addons-for-elementor-lite'),
+            'file' => 'betterdocs.php',
+            'btn_text' => __('Install Free', 'essential-addons-for-elementor-lite'),
             'condition' => [
-                'by'    => 'class',
+                'by' => 'class',
                 'class' => 'BetterDocs',
             ],
         );
@@ -339,46 +349,5 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         // }
 
         $notice->init();
-    }
-
-    public function admin_bar($wp_admin_bar)
-    {
-        if (is_admin()) {
-            return;
-        }
-
-        if (!$this->get_settings('quick_tools')) {
-            return;
-        }
-
-        $wp_admin_bar->add_node([
-            'id'    => 'ea-wp-admin-bar',
-            'meta'  => [
-                'class' => 'ea-wp-admin-bar',
-            ],
-            'title' => 'EA Tools',
-        ]);
-
-        $wp_admin_bar->add_node([
-            'parent' => 'ea-wp-admin-bar',
-            'id'     => 'ea-all-cache-clear',
-            'href'   => '#',
-            'meta'   => [
-                'class' => 'ea-all-cache-clear',
-            ],
-            'title'  => 'Regenerate All Assets',
-        ]);
-
-        $wp_admin_bar->add_node([
-            'parent' => 'ea-wp-admin-bar',
-            'id'     => 'ea-clear-cache-' . get_queried_object_id(),
-            'href'   => '#',
-            'meta'   => [
-                'class' => 'ea-clear-cache',
-                'html'  => '<div class="ea-clear-cache-id" data-pageid="' . get_queried_object_id() . '"></div>',
-            ],
-            'title'  => 'Regenerate Page Assets',
-        ]);
-
     }
 }

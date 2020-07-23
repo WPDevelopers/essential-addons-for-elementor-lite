@@ -1,7 +1,4 @@
 @charset "UTF-8";
-/*--------------------------*/
-/* 09. Product Styles
-/*--------------------------*/
 .eael-product-grid .woocommerce ul.products,
 .eael-post-grid .woocommerce ul.products {
   display: grid;
@@ -41,8 +38,7 @@
   overflow: hidden;
   text-align: center;
   padding: 0;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
   background-color: #fff;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -89,8 +85,7 @@
   text-transform: uppercase;
   color: #fff;
   background-color: #ff2a13;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
   border: none;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -113,15 +108,12 @@
   line-height: 16px;
   font-weight: 600;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: end;
-  -webkit-align-items: flex-end;
       -ms-flex-align: end;
           align-items: flex-end;
   letter-spacing: 0;
@@ -129,8 +121,7 @@
   text-transform: uppercase;
   color: #fff;
   background-color: #ff2a13;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
   border: none;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -187,8 +178,7 @@
   background-color: #333;
   padding: 0;
   padding: 5px 25px;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
 }
 .eael-product-grid.eael-product-simple .woocommerce ul.products li.product .button.add_to_cart_button::before, .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product .button.add_to_cart_button::before,
 .eael-post-grid.eael-product-simple .woocommerce ul.products li.product .button.add_to_cart_button::before,
@@ -249,8 +239,7 @@
   overflow: hidden;
   text-align: center;
   padding: 0 0 15px 0;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
   background-color: #fff;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -297,15 +286,12 @@
 .eael-post-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_cart_button,
 .eael-post-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart {
   display: -webkit-inline-box;
-  display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   font-size: 14px;
@@ -316,8 +302,7 @@
   width: 38px;
   height: 38px;
   border-style: none;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   vertical-align: middle;
   padding: 0;
   margin: 0 5px;
@@ -418,8 +403,7 @@
   text-transform: uppercase;
   color: #fff;
   background-color: #ff2a13;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
   border: none;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -476,15 +460,12 @@
 .eael-post-grid.eael-product-default .woocommerce ul.products li.product .onsale {
   line-height: inherit;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
 }
