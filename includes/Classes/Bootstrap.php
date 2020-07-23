@@ -133,6 +133,8 @@ class Bootstrap
 
 	    add_action( 'pre_get_posts', [ $this, 'fix_query_offset' ], 1 );
 	    add_filter( 'found_posts', [ $this, 'fix_query_found_posts' ], 1, 2 );
+	    add_filter( 'woocommerce_add_to_cart_form_action', array( $this, 'eael_avoid_redirect_to_single_page' ), 10,
+		    1 );
 
         // Admin
         if (is_admin()) {
