@@ -52,29 +52,28 @@ trait Template_Query
 
     private function get_template_dir()
     {
-
-        if($this->theme_templates()) {
-            return $this->theme_templates();
-        }
-
-        return \sprintf('%sincludes/Template/%s', EAEL_PLUGIN_PATH, $this->process_directory_name());
+        return \sprintf(
+            '%sincludes/Template/%s',
+            EAEL_PLUGIN_PATH, $this->process_directory_name()
+        );
     }
 
     private function get_pro_template_dir()
     {
-        if( ! is_plugin_active( 'essential-addons-elementor/essential_adons_elementor.php' ) ) {
-            return false;
-        }
-        
-        if($this->theme_templates()) {
-            return false;
-        }
+        if( ! is_plugin_active( 'essential-addons-elementor/essential_adons_elementor.php' ) ) return false;
 
-        return \sprintf('%sincludes/Template/%s', EAEL_PRO_PLUGIN_PATH, $this->process_directory_name());
+        return \sprintf(
+            '%sincludes/Template/%s',
+            EAEL_PRO_PLUGIN_PATH, $this->process_directory_name()
+        );
     }
 
     private function get_template_files()
     {
+        if($this->theme_templates()) {
+            return $this->theme_templates();
+        }
+
         $templates = $pro_templates = [];
 
         if (is_dir($this->get_template_dir())) {
@@ -88,7 +87,7 @@ trait Template_Query
         return array_merge($templates, $pro_templates);
     }
 
-    protected function template_list()
+    protected function get_template_list()
     {
         $files = [];
 
@@ -125,16 +124,26 @@ trait Template_Query
     {
         $files = [];
 
-        if($this->template_list()) {
+        if($this->get_template_list()) {
 
-            foreach($this->template_list() as $filename => $path) {
+            foreach($this->get_template_list() as $filename => $path) {
 
+                $filename = \str_replace(' ', '-', $filename);
                 $files[strtolower($filename)] = $path;
 
             }
 
         }
+
         return $files;
+    }
+
+    private function template_options()
+    {
+        $keys = array_keys($this->get_template_options());
+        $values = array_keys($this->get_template_list());
+
+        return array_combine($keys, $values);
     }
 
     /**
@@ -165,24 +174,20 @@ trait Template_Query
 
     public function get_template($filename)
     {
-        $file = '';
-
         if(in_array($filename, array_keys($this->get_template_options()))) {
 
-            $file = $this->get_template_options()[$filename];
+            return $this->get_template_options()[$filename];
 
         }
 
-        return $file;
+        return false;
     }
 
     public function get_default()
     {
-        $dt = array_keys($this->get_template_options());
-
-        $dt = array_reverse($dt);
+        $dt = array_reverse($this->template_options());
         
-        return array_pop($dt);
+        return strtolower(array_pop($dt));
     }
 
 }
