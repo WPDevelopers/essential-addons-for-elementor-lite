@@ -226,8 +226,6 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 4.1.1 - 23/07/2020 =
 - Improved: EA Typeform with auth2 authentication
-- Fixed: EA Instagram Feed not showing Videos
-- Fixed: EA Instagram Feed post limit issue
 - Fixed: EA Sticky Video PHP error with Image Overlay option
 - Fixed: EA Reading Progress Bar & EA TOC not working inside Elementor Editor
 - Fixed: EA Filterable Gallery- broken link issue
