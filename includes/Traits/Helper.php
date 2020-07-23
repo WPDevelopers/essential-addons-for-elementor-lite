@@ -14,7 +14,6 @@ use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
 use \Essential_Addons_Elementor\Elements\Woo_Checkout;
-use \Essential_Addons_Elementor\Classes\Bootstrap;
 
 trait Helper
 {
@@ -24,10 +23,6 @@ trait Helper
      */
     public function eael_get_all_types_post($post_type = 'any')
     {
-        if (Bootstrap::instance()->is_preview_mode()) {
-            return [];
-        }
-
         $posts = get_posts([
             'post_type' => $post_type,
             'post_status' => 'publish',
