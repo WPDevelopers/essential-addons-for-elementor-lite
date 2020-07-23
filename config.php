@@ -34,7 +34,7 @@ $config = [
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/load-more.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/post-load-more.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
