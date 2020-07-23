@@ -131,6 +131,11 @@ class Bootstrap
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'eael_toc_rank_math_support']);
 
+	    add_action( 'pre_get_posts', [ $this, 'fix_query_offset' ], 1 );
+	    add_filter( 'found_posts', [ $this, 'fix_query_found_posts' ], 1, 2 );
+	    add_filter( 'woocommerce_add_to_cart_form_action', array( $this, 'eael_avoid_redirect_to_single_page' ), 10,
+		    1 );
+
         // Admin
         if (is_admin()) {
             // Admin

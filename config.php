@@ -535,6 +535,16 @@ $config = [
                         'type'    => 'self',
                         'context' => 'view',
                     ],
+	                [
+		                'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/magnific-popup/magnific-popup.min.css',
+		                'type'    => 'lib',
+		                'context' => 'view',
+	                ],
+	                [
+		                'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/tooltipster/tooltipster.bundle.min.css',
+		                'type'    => 'lib',
+		                'context' => 'view',
+	                ],
                 ],
                 'js'  => [
                     [
@@ -542,6 +552,21 @@ $config = [
                         'type'    => 'self',
                         'context' => 'view',
                     ],
+	                [
+		                'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/tooltipster/tooltipster.bundle.min.js',
+		                'type'    => 'lib',
+		                'context' => 'view',
+	                ],
+	                [
+		                'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/magnific-popup/jquery.magnific-popup.min.js',
+		                'type'    => 'lib',
+		                'context' => 'view',
+	                ],
+//	                [
+//		                'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/product-grid.min.js',
+//		                'type'    => 'self',
+//		                'context' => 'view',
+//	                ],
                 ],
             ],
         ],
