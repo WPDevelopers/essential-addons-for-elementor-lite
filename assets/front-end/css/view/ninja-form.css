@@ -59,8 +59,7 @@
 
 .eael-ninja-form .submit-container input[type=button] {
   border: 0;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
 }
 
 .eael-ninja-form-button-full-width .submit-container input[type=button] {

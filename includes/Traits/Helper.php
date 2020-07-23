@@ -197,7 +197,6 @@ trait Helper
         $this->end_controls_section();
     }
 
-
     /**
      * Query Controls
      *
@@ -216,7 +215,7 @@ trait Helper
                 'grid_query_heading',
                 [
                     'label' => __('Category Grid', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::HEADING
+                    'type' => Controls_Manager::HEADING,
                 ]
             );
         }
@@ -225,11 +224,11 @@ trait Helper
             'include',
             [
                 'label' => __('Include', 'essential-addons-for-elementor-lite'),
-                'label_block'   => true,
-                'type'  => Controls_Manager::SELECT2,
-                'options'   => $this->eael_post_type_categories('term_id', 'doc_category'),
-                'multiple'  => true,
-                'default'   => []
+                'label_block' => true,
+                'type' => Controls_Manager::SELECT2,
+                'options' => $this->eael_post_type_categories('term_id', 'doc_category'),
+                'multiple' => true,
+                'default' => [],
             ]
         );
 
@@ -241,7 +240,7 @@ trait Helper
                 'options' => $this->eael_post_type_categories('term_id', 'doc_category'),
                 'label_block' => true,
                 'post_type' => '',
-                'multiple' => true
+                'multiple' => true,
             ]
         );
 
@@ -251,7 +250,7 @@ trait Helper
                 [
                     'label' => __('Grid Per Page', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::NUMBER,
-                    'default' => '8'
+                    'default' => '8',
                 ]
             );
         } else {
@@ -260,11 +259,10 @@ trait Helper
                 [
                     'label' => __('Box Per Page', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::NUMBER,
-                    'default' => '8'
+                    'default' => '8',
                 ]
             );
         }
-
 
         $this->add_control(
             'offset',
@@ -281,15 +279,15 @@ trait Helper
                 'label' => __('Order By', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'name'          => __('Name', 'essential-addons-for-elementor-lite'),
-                    'slug'          => __('Slug', 'essential-addons-for-elementor-lite'),
-                    'term_group'    => __('Term Group', 'essential-addons-for-elementor-lite'),
-                    'term_id'       => __('Term ID', 'essential-addons-for-elementor-lite'),
-                    'id'            => __('ID', 'essential-addons-for-elementor-lite'),
-                    'description'   => __('Description', 'essential-addons-for-elementor-lite'),
-                    'parent'        => __('Parent', 'essential-addons-for-elementor-lite')
+                    'name' => __('Name', 'essential-addons-for-elementor-lite'),
+                    'slug' => __('Slug', 'essential-addons-for-elementor-lite'),
+                    'term_group' => __('Term Group', 'essential-addons-for-elementor-lite'),
+                    'term_id' => __('Term ID', 'essential-addons-for-elementor-lite'),
+                    'id' => __('ID', 'essential-addons-for-elementor-lite'),
+                    'description' => __('Description', 'essential-addons-for-elementor-lite'),
+                    'parent' => __('Parent', 'essential-addons-for-elementor-lite'),
                 ],
-                'default' => 'name'
+                'default' => 'name',
             ]
         );
 
@@ -313,7 +311,7 @@ trait Helper
                 [
                     'label' => __('Grid List Posts', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::HEADING,
-                    'separator' => 'before'
+                    'separator' => 'before',
                 ]
             );
 
@@ -322,10 +320,9 @@ trait Helper
                 [
                     'label' => __('Post Per Page', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::NUMBER,
-                    'default' => '6'
+                    'default' => '6',
                 ]
             );
-
 
             $this->add_control(
                 'post_orderby',
@@ -333,7 +330,7 @@ trait Helper
                     'label' => __('Order By', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'options' => $this->eael_get_post_orderby_options(),
-                    'default'   => 'date'
+                    'default' => 'date',
                 ]
             );
 
@@ -358,7 +355,7 @@ trait Helper
                     'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
                     'label_off' => __('No', 'essential-addons-for-elementor-lite'),
                     'return_value' => 'true',
-                    'default' => ''
+                    'default' => '',
                 ]
             );
         }
@@ -634,8 +631,8 @@ trait Helper
                     'div' => __('Div', 'essential-addons-for-elementor-lite'),
                 ],
                 'condition' => [
-                    'eael_show_title'   => 'yes'
-                ]
+                    'eael_show_title' => 'yes',
+                ],
             ]
         );
 
@@ -646,7 +643,7 @@ trait Helper
                     'label' => __('Title Length', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::NUMBER,
                     'condition' => [
-                        'eael_show_title' => 'yes'
+                        'eael_show_title' => 'yes',
                     ],
                 ]
             );
@@ -670,7 +667,7 @@ trait Helper
                 [
                     'label' => __('Excerpt Words', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::NUMBER,
-                    'default'   => 10,
+                    'default' => 10,
                     'condition' => [
                         'eael_show_excerpt' => 'yes',
                         'eael_content_timeline_choose' => 'dynamic',
@@ -697,7 +694,7 @@ trait Helper
                 [
                     'label' => __('Excerpt Words', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::NUMBER,
-                    'default'   => 10,
+                    'default' => 10,
                     'condition' => [
                         'eael_show_excerpt' => 'yes',
                     ],
@@ -1571,7 +1568,7 @@ trait Helper
 
     /**
      * This function is responsible for counting doc post under a category.
-     * 
+     *
      * @param int $term_count
      * @param int $term_id
      * @return int $term_count;
@@ -2273,7 +2270,7 @@ trait Helper
         $key = 'eael_facebook_feed_' . substr(str_rot13(str_replace('.', '', $page_id . $token)), 32);
 
         if (get_transient($key) === false) {
-            $facebook_data = wp_remote_retrieve_body(wp_remote_get("https://graph.facebook.com/v4.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)&access_token={$token}"));
+            $facebook_data = wp_remote_retrieve_body(wp_remote_get("https://graph.facebook.com/v7.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)&access_token={$token}"));
             set_transient($key, $facebook_data, 1800);
         } else {
             $facebook_data = get_transient($key);
@@ -2903,7 +2900,7 @@ trait Helper
 
         wp_send_json(
             array(
-                'order_review' =>  $woo_checkout_update_order_review
+                'order_review' => $woo_checkout_update_order_review,
             )
         );
     }
@@ -2914,8 +2911,8 @@ trait Helper
         $this->start_controls_section(
             $prefix . '_section_position',
             [
-                'label'     => $section_name,
-                'tab'       => Controls_Manager::TAB_STYLE,
+                'label' => $section_name,
+                'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => $condition,
             ]
         );
@@ -2923,11 +2920,11 @@ trait Helper
         $this->add_control(
             $prefix . '_position',
             [
-                'label'     => __('Position', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::SELECT,
-                'default'   => '',
-                'options'   => [
-                    ''         => __('Default', 'essential-addons-for-elementor-lite'),
+                'label' => __('Position', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => '',
+                'options' => [
+                    '' => __('Default', 'essential-addons-for-elementor-lite'),
                     'absolute' => __('Absolute', 'essential-addons-for-elementor-lite'),
                 ],
                 'selectors' => [
@@ -2942,23 +2939,23 @@ trait Helper
         $this->add_control(
             $prefix . '_offset_orientation_h',
             [
-                'label'       => __('Horizontal Orientation', 'essential-addons-for-elementor-lite'),
-                'type'        => Controls_Manager::CHOOSE,
-                'toggle'      => false,
-                'default'     => 'start',
-                'options'     => [
+                'label' => __('Horizontal Orientation', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'toggle' => false,
+                'default' => 'start',
+                'options' => [
                     'start' => [
                         'title' => $start,
-                        'icon'  => 'eicon-h-align-left',
+                        'icon' => 'eicon-h-align-left',
                     ],
-                    'end'   => [
+                    'end' => [
                         'title' => $end,
-                        'icon'  => 'eicon-h-align-right',
+                        'icon' => 'eicon-h-align-right',
                     ],
                 ],
-                'classes'     => 'elementor-control-start-end',
+                'classes' => 'elementor-control-start-end',
                 'render_type' => 'ui',
-                'condition'   => [
+                'condition' => [
                     $prefix . '_position!' => '',
                 ],
             ]
@@ -2967,15 +2964,15 @@ trait Helper
         $this->add_responsive_control(
             $prefix . '_offset_x',
             [
-                'label'      => __('Offset', 'essential-addons-for-elementor-lite'),
-                'type'       => Controls_Manager::SLIDER,
-                'range'      => [
+                'label' => __('Offset', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
                     'px' => [
-                        'min'  => -1000,
-                        'max'  => 1000,
+                        'min' => -1000,
+                        'max' => 1000,
                         'step' => 1,
                     ],
-                    '%'  => [
+                    '%' => [
                         'min' => -200,
                         'max' => 200,
                     ],
@@ -2988,17 +2985,17 @@ trait Helper
                         'max' => 200,
                     ],
                 ],
-                'default'    => [
+                'default' => [
                     'size' => '0',
                 ],
                 'size_units' => ['px', '%', 'vw', 'vh'],
-                'selectors'  => [
+                'selectors' => [
                     'body:not(.rtl) ' . $selectors => 'left: {{SIZE}}{{UNIT}}',
-                    'body.rtl ' . $selectors       => 'right: {{SIZE}}{{UNIT}}',
+                    'body.rtl ' . $selectors => 'right: {{SIZE}}{{UNIT}}',
                 ],
-                'condition'  => [
+                'condition' => [
                     $prefix . '_offset_orientation_h!' => 'end',
-                    $prefix . '_position!'             => '',
+                    $prefix . '_position!' => '',
                 ],
             ]
         );
@@ -3006,15 +3003,15 @@ trait Helper
         $this->add_responsive_control(
             $prefix . '_offset_x_end',
             [
-                'label'      => __('Offset', 'essential-addons-for-elementor-lite'),
-                'type'       => Controls_Manager::SLIDER,
-                'range'      => [
+                'label' => __('Offset', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
                     'px' => [
-                        'min'  => -1000,
-                        'max'  => 1000,
+                        'min' => -1000,
+                        'max' => 1000,
                         'step' => 0.1,
                     ],
-                    '%'  => [
+                    '%' => [
                         'min' => -200,
                         'max' => 200,
                     ],
@@ -3027,17 +3024,17 @@ trait Helper
                         'max' => 200,
                     ],
                 ],
-                'default'    => [
+                'default' => [
                     'size' => '0',
                 ],
                 'size_units' => ['px', '%', 'vw', 'vh'],
-                'selectors'  => [
+                'selectors' => [
                     'body:not(.rtl) ' . $selectors => 'right: {{SIZE}}{{UNIT}}',
-                    'body.rtl ' . $selectors       => 'left: {{SIZE}}{{UNIT}}',
+                    'body.rtl ' . $selectors => 'left: {{SIZE}}{{UNIT}}',
                 ],
-                'condition'  => [
+                'condition' => [
                     $prefix . '_offset_orientation_h' => 'end',
-                    $prefix . '_position!'            => '',
+                    $prefix . '_position!' => '',
                 ],
             ]
         );
@@ -3045,22 +3042,22 @@ trait Helper
         $this->add_control(
             $prefix . '_offset_orientation_v',
             [
-                'label'       => __('Vertical Orientation', 'essential-addons-for-elementor-lite'),
-                'type'        => Controls_Manager::CHOOSE,
-                'toggle'      => false,
-                'default'     => 'start',
-                'options'     => [
+                'label' => __('Vertical Orientation', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'toggle' => false,
+                'default' => 'start',
+                'options' => [
                     'start' => [
                         'title' => __('Top', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'eicon-v-align-top',
+                        'icon' => 'eicon-v-align-top',
                     ],
-                    'end'   => [
+                    'end' => [
                         'title' => __('Bottom', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'eicon-v-align-bottom',
+                        'icon' => 'eicon-v-align-bottom',
                     ],
                 ],
                 'render_type' => 'ui',
-                'condition'   => [
+                'condition' => [
                     $prefix . '_position!' => '',
                 ],
             ]
@@ -3069,15 +3066,15 @@ trait Helper
         $this->add_responsive_control(
             $prefix . '_offset_y',
             [
-                'label'      => __('Offset', 'essential-addons-for-elementor-lite'),
-                'type'       => Controls_Manager::SLIDER,
-                'range'      => [
+                'label' => __('Offset', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
                     'px' => [
-                        'min'  => -1000,
-                        'max'  => 1000,
+                        'min' => -1000,
+                        'max' => 1000,
                         'step' => 1,
                     ],
-                    '%'  => [
+                    '%' => [
                         'min' => -200,
                         'max' => 200,
                     ],
@@ -3091,15 +3088,15 @@ trait Helper
                     ],
                 ],
                 'size_units' => ['px', '%', 'vh', 'vw'],
-                'default'    => [
+                'default' => [
                     'size' => '0',
                 ],
-                'selectors'  => [
+                'selectors' => [
                     $selectors => 'top: {{SIZE}}{{UNIT}}',
                 ],
-                'condition'  => [
+                'condition' => [
                     $prefix . '_offset_orientation_v!' => 'end',
-                    $prefix . '_position!'             => '',
+                    $prefix . '_position!' => '',
                 ],
             ]
         );
@@ -3107,15 +3104,15 @@ trait Helper
         $this->add_responsive_control(
             $prefix . '_offset_y_end',
             [
-                'label'      => __('Offset', 'essential-addons-for-elementor-lite'),
-                'type'       => Controls_Manager::SLIDER,
-                'range'      => [
+                'label' => __('Offset', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
                     'px' => [
-                        'min'  => -1000,
-                        'max'  => 1000,
+                        'min' => -1000,
+                        'max' => 1000,
                         'step' => 1,
                     ],
-                    '%'  => [
+                    '%' => [
                         'min' => -200,
                         'max' => 200,
                     ],
@@ -3129,15 +3126,15 @@ trait Helper
                     ],
                 ],
                 'size_units' => ['px', '%', 'vh', 'vw'],
-                'default'    => [
+                'default' => [
                     'size' => '0',
                 ],
-                'selectors'  => [
+                'selectors' => [
                     $selectors => 'bottom: {{SIZE}}{{UNIT}}',
                 ],
-                'condition'  => [
+                'condition' => [
                     $prefix . '_offset_orientation_v' => 'end',
-                    $prefix . '_position!'            => '',
+                    $prefix . '_position!' => '',
                 ],
             ]
         );

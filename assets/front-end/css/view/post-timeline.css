@@ -33,8 +33,7 @@
 .eael-timeline-bullet {
   background-color: #9fa9af;
   border: 5px solid #fff;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   -webkit-box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.1);
           box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.1);
   content: "";
@@ -50,8 +49,7 @@
 .eael-timeline-post:nth-child(2n) .eael-timeline-bullet {
   background-color: #9fa9af;
   border: 5px solid #fff;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   bottom: 36px;
   content: "";
   height: 20px;
@@ -72,7 +70,6 @@
   margin: 30px 40px 30px auto;
   position: relative;
   height: 320px;
-  width: -webkit-calc(100% - 40px);
   width: calc(100% - 40px);
 }
 
@@ -177,8 +174,7 @@
   background-color: rgba(0, 0, 0, 0.7);
   color: #fff;
   font-size: 10px;
-  -webkit-border-radius: 20px;
-          border-radius: 20px;
+  border-radius: 20px;
   position: absolute;
   right: -97px;
   width: 100px;
@@ -194,8 +190,7 @@
 
 .eael-timeline-post:nth-child(2n) time {
   background-color: rgba(0, 0, 0, 0.7);
-  -webkit-border-radius: 20px;
-          border-radius: 20px;
+  border-radius: 20px;
   color: #fff;
   font-size: 10px;
   height: 30px;
@@ -238,7 +233,6 @@
 
 .eael-load-more-button-wrap {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
@@ -315,8 +309,7 @@
   .eael-timeline-post time,
 .eael-timeline-post:nth-child(2n) time {
     background-color: #fff;
-    -webkit-border-radius: 0;
-            border-radius: 0;
+    border-radius: 0;
     color: #444;
     font-size: 12px;
     text-transform: uppercase;
