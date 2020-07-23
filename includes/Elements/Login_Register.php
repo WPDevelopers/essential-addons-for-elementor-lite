@@ -116,12 +116,14 @@ class Login_Register extends Widget_Base {
 	public function get_icon() {
 		return 'eaicon-login'; //@TODO; use better icon later
 	}
+
 	/**
 	 * @inheritDoc
 	 */
 	public function get_style_depends() {
-		return ['dashicons'];
+		return [ 'dashicons' ];
 	}
+
 	/**
 	 * @inheritDoc
 	 */
@@ -192,7 +194,8 @@ class Login_Register extends Widget_Base {
 		/*----Style Tab----*/
 		do_action( 'eael/login-register/before-style-controls', $this );
 		$this->init_style_general_controls();
-		$this->init_style_header_content_controls();
+		$this->init_style_header_content_controls( 'login' );
+		$this->init_style_header_content_controls( 'register' );
 		$this->init_style_input_fields_controls();
 		$this->init_style_input_labels_controls();
 		$this->init_style_login_button_controls();
@@ -1264,7 +1267,7 @@ class Login_Register extends Widget_Base {
 			'selectors'       => [
 				"{{WRAPPER}} .eael-lr-form-wrapper" => 'width: {{SIZE}}{{UNIT}};',
 			],
-			'condition'  => [
+			'condition'       => [
 				'form_form_wrap_po_toggle' => 'yes',
 			],
 		] );
@@ -1379,7 +1382,7 @@ class Login_Register extends Widget_Base {
 			'selectors'       => [
 				"{{WRAPPER}} .lr-form-wrapper" => 'width: {{SIZE}}{{UNIT}};',
 			],
-			'condition'  => [
+			'condition'       => [
 				'form_form_po_toggle' => 'yes',
 			],
 		] );
@@ -1447,12 +1450,13 @@ class Login_Register extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	public function init_style_header_content_controls() {
-		$this->start_controls_section( 'section_style_header_content', [
-			'label' => __( 'Header Content', EAEL_TEXTDOMAIN ),
-			'tab'   => Controls_Manager::TAB_STYLE,
+	protected function init_style_header_content_controls( $form_type = 'login' ) {
+		$this->start_controls_section( "section_style_{$form_type}_header_content", [
+			'label'      => sprintf( __( '%s Form Header', EAEL_TEXTDOMAIN ), ucfirst( $form_type ) ),
+			'tab'        => Controls_Manager::TAB_STYLE,
+			'conditions' => $this->get_form_controls_display_condition( $form_type ),
 		] );
-		$this->add_control( 'form_img_po_toggle', [
+		$this->add_control( "{$form_type}_form_img_po_toggle", [
 			'label'        => __( 'Form Illustration', EAEL_TEXTDOMAIN ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
 			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
@@ -1460,7 +1464,7 @@ class Login_Register extends Widget_Base {
 			'return_value' => 'yes',
 		] );
 		$this->start_popover();
-		$this->add_responsive_control( "form_img_width", [
+		$this->add_responsive_control( "{$form_type}_form_img_width", [
 			'label'           => esc_html__( 'Width', EAEL_TEXTDOMAIN ),
 			'type'            => Controls_Manager::SLIDER,
 			'size_units'      => [
@@ -1497,13 +1501,13 @@ class Login_Register extends Widget_Base {
 				'size' => 100,
 			],
 			'selectors'       => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration" => 'width: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-illustration" => 'width: {{SIZE}}{{UNIT}};',
 			],
-			'condition'  => [
-				'form_img_po_toggle' => 'yes',
+			'condition'       => [
+				"{$form_type}_form_img_po_toggle" => 'yes',
 			],
 		] );
-		$this->add_responsive_control( "form_img_height", [
+		$this->add_responsive_control( "{$form_type}_form_img_height", [
 			'label'           => esc_html__( 'Height', EAEL_TEXTDOMAIN ),
 			'type'            => Controls_Manager::SLIDER,
 			'size_units'      => [
@@ -1535,13 +1539,13 @@ class Login_Register extends Widget_Base {
 				'size' => 375,
 			],
 			'selectors'       => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration" => 'height: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-illustration" => 'height: {{SIZE}}{{UNIT}};',
 			],
-			'condition'  => [
-				'form_img_po_toggle' => 'yes',
+			'condition'       => [
+				"{$form_type}_form_img_po_toggle" => 'yes',
 			],
 		] );
-		$this->add_control( "form_img_margin", [
+		$this->add_control( "{$form_type}_form_img_margin", [
 			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -1550,13 +1554,13 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-illustration" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 			'condition'  => [
-				'form_img_po_toggle' => 'yes',
+				"{$form_type}_form_img_po_toggle" => 'yes',
 			],
 		] );
-		$this->add_control( "form_img_padding", [
+		$this->add_control( "{$form_type}_form_img_padding", [
 			'label'      => __( 'Padding', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -1565,20 +1569,20 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-illustration" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 			'condition'  => [
-				'form_img_po_toggle' => 'yes',
+				"{$form_type}_form_img_po_toggle" => 'yes',
 			],
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
-			'name'      => "form_img_border",
-			'selector'  => "{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration",
+			'name'      => "{$form_type}_form_img_border",
+			'selector'  => "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-illustration",
 			'condition' => [
-				'form_img_po_toggle' => 'yes',
+				"{$form_type}_form_img_po_toggle" => 'yes',
 			],
 		] );
-		$this->add_control( "form_img_border_radius", [
+		$this->add_control( "{$form_type}_form_img_border_radius", [
 			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -1586,22 +1590,22 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-illustration" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 			'condition'  => [
-				'form_img_po_toggle' => 'yes',
+				"{$form_type}_form_img_po_toggle" => 'yes',
 			],
 		] );
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
 			'label'    => __( 'Illustration Shadow', EAEL_TEXTDOMAIN ),
-			'name'     => 'form_img_shadow',
-			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper .lr-form-illustration",
+			'name'     => "{$form_type}_form_img_shadow",
+			'selector' => "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-illustration",
 			'exclude'  => [
 				'box_shadow_position',
 			],
 		] );
-		$this->add_control( 'form_logo_po_toggle', [
+		$this->add_control( "{$form_type}_form_logo_po_toggle", [
 			'label'        => __( 'Form Logo', EAEL_TEXTDOMAIN ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
 			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
@@ -1610,7 +1614,7 @@ class Login_Register extends Widget_Base {
 			'separator'    => 'before',
 		] );
 		$this->start_popover();
-		$this->add_control( "form_logo_margin", [
+		$this->add_control( "{$form_type}_form_logo_margin", [
 			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -1619,13 +1623,13 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-header img" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header img" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 			'condition'  => [
-				'form_logo_po_toggle' => 'yes',
+				"{$form_type}_form_logo_po_toggle" => 'yes',
 			],
 		] );
-		$this->add_control( "form_logo_padding", [
+		$this->add_control( "{$form_type}_form_logo_padding", [
 			'label'      => __( 'Padding', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -1634,20 +1638,20 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-header img" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header img" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 			'condition'  => [
-				'form_logo_po_toggle' => 'yes',
+				"{$form_type}_form_logo_po_toggle" => 'yes',
 			],
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
-			'name'      => "form_logo_border",
-			'selector'  => "{{WRAPPER}} .eael-lr-form-wrapper .lr-form-header img",
+			'name'      => "{$form_type}_form_logo_border",
+			'selector'  => "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header img",
 			'condition' => [
-				'form_logo_po_toggle' => 'yes',
+				"{$form_type}_form_logo_po_toggle" => 'yes',
 			],
 		] );
-		$this->add_control( "form_logo_border_radius", [
+		$this->add_control( "{$form_type}_form_logo_border_radius", [
 			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -1655,17 +1659,17 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .lr-form-header img" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header img" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 			'condition'  => [
-				'form_logo_po_toggle' => 'yes',
+				"{$form_type}_form_logo_po_toggle" => 'yes',
 			],
 		] );
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
 			'label'    => __( 'Logo Shadow', EAEL_TEXTDOMAIN ),
-			'name'     => 'form_logo_shadow',
-			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper .lr-form-header img",
+			'name'     => "{$form_type}_form_logo_shadow",
+			'selector' => "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header img",
 			'exclude'  => [
 				'box_shadow_position',
 			],
@@ -2400,7 +2404,7 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->add_control( "{$form_type}_link_style_notice", [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => sprintf( __( 'Here you can style the %s link displayed on the %s Form', EAEL_TEXTDOMAIN ), $form_name, ucfirst($form_type) ),
+			'raw'             => sprintf( __( 'Here you can style the %s link displayed on the %s Form', EAEL_TEXTDOMAIN ), $form_name, ucfirst( $form_type ) ),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 		] );
 		$this->add_control( "{$form_type}_link_pot", [
@@ -3254,8 +3258,8 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_validation_message() {
-		$errors  = get_transient( 'eael_register_errors_'.$this->get_id() );
-		$success = get_transient( 'eael_register_success_'.$this->get_id() );
+		$errors  = get_transient( 'eael_register_errors_' . $this->get_id() );
+		$success = get_transient( 'eael_register_success_' . $this->get_id() );
 		if ( empty( $errors ) && empty( $success ) ) {
 			return;
 		}
@@ -3289,7 +3293,7 @@ class Login_Register extends Widget_Base {
             </ol>
         </div>
 		<?php
-		delete_transient( 'eael_register_errors_'.$this->get_id() );
+		delete_transient( 'eael_register_errors_' . $this->get_id() );
 	}
 
 	protected function print_registration_success_message( $success ) {
@@ -3298,13 +3302,12 @@ class Login_Register extends Widget_Base {
 			$message = '<p class="eael-form-msg valid">' . esc_html( $this->get_settings_for_display( 'register_success_msg' ) ) . '</p>';
 			echo apply_filters( 'eael/login-register/registration-success-msg', $message, $success );
 
-			delete_transient( 'eael_register_success_'.$this->get_id() );
+			delete_transient( 'eael_register_success_' . $this->get_id() );
 
 			return true; // it will help in case we wanna know if error is printed.
 		}
 
 		return false;
 	}
-
 
 }
