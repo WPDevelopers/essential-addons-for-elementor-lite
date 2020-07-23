@@ -536,9 +536,14 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                                             echo '<span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-title="Google Map API Key" data-placeholder="Set API Key" data-target="#google-map-api">'.__('Settings', 'essential-addons-for-elementor-lite').'</a></span>
                                             <input type="hidden" name="google-map-api" id="google-map-api" class="google-map-api" value="' . get_option('eael_save_google_map_api') . '">';
                                         } elseif($item['key'] === 'typeform') {
-                                            echo '<span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-title="Typeform Personal Token" data-placeholder="Set Personal Token" data-doc="#typeform-doc" data-target="#typeform-personal-token">'.__('Settings', 'essential-addons-for-elementor-lite').'</a></span>
-                                            <a style="display: none" id="typeform-doc" target="_blank" href="https://developer.typeform.com/get-started/personal-access-token/">'.__('How to generate personal token', 'essential-addons-for-elementor-lite').'</a>
-                                            <input type="hidden" name="typeform-personal-token" id="typeform-personal-token" class="typeform-personal-token" value="' . get_option('eael_save_typeform_personal_token') . '">';
+                                            $query_param = [
+                                                'pr_code'      => wp_hash('eael_typeform'),
+                                                'redirect_uri' => esc_url(admin_url('admin-post.php'))
+                                            ];
+                                            $url = esc_url( add_query_arg( $query_param, esc_url('https://app.essential-addons.com/typeform/index.php') ) );
+                                            echo '<span style="font-size: 12px; font-style:italic;">
+                                            '.sprintf("<a id='eael-typeform-get-access' data-link='%s' href='#'>Get Access</a>", esc_url($url)).'
+                                            </span>';
                                         }
 
                                     ?>
