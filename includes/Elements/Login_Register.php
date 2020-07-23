@@ -2397,7 +2397,7 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->add_control( "{$form_type}_link_style_notice", [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => sprintf( __( 'Here you can style the %s link displayed on the %s Form', EAEL_TEXTDOMAIN ), $form_type, $form_name ),
+			'raw'             => sprintf( __( 'Here you can style the %s link displayed on the %s Form', EAEL_TEXTDOMAIN ), $form_name, ucfirst($form_type) ),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 		] );
 		$this->add_control( "{$form_type}_link_pot", [
@@ -2528,7 +2528,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->start_controls_tabs( "tabs_{$form_type}_link_style" );
-		/*-----Login Link NORMAL state------ */
+		/*----- Link NORMAL state------ */
 		$this->start_controls_tab( "tab_{$form_type}_link_normal", [
 			'label' => __( 'Normal', EAEL_TEXTDOMAIN ),
 		] );
@@ -2565,7 +2565,7 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->end_controls_tab();
 
-		/*-----Login Link HOVER state------ */
+		/*-----Link HOVER state------ */
 		$this->start_controls_tab( "tab_{$form_type}_link_hover", [
 			'label' => __( 'Hover', EAEL_TEXTDOMAIN ),
 		] );
@@ -2603,7 +2603,6 @@ class Login_Register extends Widget_Base {
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
 		/*-----ends Link tabs--------*/
-//.eael-lr-footer
 		$this->add_responsive_control( "{$form_type}_link_wrap_width", [
 			'label'      => esc_html__( 'Link Container width', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::SLIDER,
