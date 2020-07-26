@@ -3,7 +3,6 @@
 namespace Essential_Addons_Elementor\Elements;
 
 use Elementor\Controls_Manager;
-use Elementor\Core\Schemes\Color;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
@@ -1323,6 +1322,15 @@ class Login_Register extends Widget_Base {
 				'form_form_wrap_po_toggle' => 'yes',
 			],
 		] );
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'     => "eael_form_wrap_bg_color",
+			'label'    => __( 'Background Color', EAEL_TEXTDOMAIN ),
+			'types'    => [
+				'classic',
+				'gradient',
+			],
+			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper",
+		] );
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
 			'label'    => __( 'Container Box Shadow', EAEL_TEXTDOMAIN ),
@@ -1438,6 +1446,15 @@ class Login_Register extends Widget_Base {
 				'form_form_po_toggle' => 'yes',
 			],
 		] );
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'     => "eael_form_bg_color",
+			'label'    => __( 'Background Color', EAEL_TEXTDOMAIN ),
+			'types'    => [
+				'classic',
+				'gradient',
+			],
+			'selector' => "{{WRAPPER}} .lr-form-wrapper",
+		] );
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
 			'label'    => __( 'Form Shadow', EAEL_TEXTDOMAIN ),
@@ -1458,6 +1475,7 @@ class Login_Register extends Widget_Base {
 		] );
 		//Define all css selectors ahead for better management
 		$illustration_selector = "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-illustration";
+		$header_selector = "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header";
 		$logo_selector = "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header img";
 		$title_selector = "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header .form-dsc h4";
 		$subtitle_selector = "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header .form-dsc p";
@@ -1681,6 +1699,18 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'     => "{$form_type}_form_header_bg",
+			'label'    => __( 'Background Color', EAEL_TEXTDOMAIN ),
+			'types'    => [
+				'classic',
+				'gradient',
+			],
+			'selector' => $header_selector,
+		] );
+
+
+        /*-- Title Typography --*/
 		$this->add_control( "{$form_type}_form_title_po_toggle", [
 			'label'        => __( 'Title', EAEL_TEXTDOMAIN ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
@@ -1726,6 +1756,9 @@ class Login_Register extends Widget_Base {
 			'selectors' => [
 				$title_selector => 'color: {{VALUE}};',
 			],
+			'condition'  => [
+				"{$form_type}_form_title_po_toggle" => 'yes',
+			],
 		] );
 		$this->add_control( "{$form_type}_form_title_bg_color", [
 			'label'     => __( 'Background Color', EAEL_TEXTDOMAIN ),
@@ -1733,12 +1766,18 @@ class Login_Register extends Widget_Base {
 			'selectors' => [
 				$title_selector => 'background: {{VALUE}};',
 			],
+			'condition'  => [
+				"{$form_type}_form_title_po_toggle" => 'yes',
+			],
 		] );
 
 
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "{$form_type}_form_title_border",
 			'selector' => $title_selector,
+			'condition'  => [
+				"{$form_type}_form_title_po_toggle" => 'yes',
+			],
 		] );
 		$this->add_control( "{$form_type}_form_title_border_radius", [
 			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
@@ -1749,6 +1788,9 @@ class Login_Register extends Widget_Base {
 			],
 			'selectors'  => [
 				$title_selector => $this->apply_dim( 'border-radius'),
+			],
+			'condition'  => [
+				"{$form_type}_form_title_po_toggle" => 'yes',
 			],
 		] );
 
@@ -1805,6 +1847,9 @@ class Login_Register extends Widget_Base {
 			'selectors' => [
 				$subtitle_selector => 'color: {{VALUE}};',
 			],
+			'condition'  => [
+				"{$form_type}_form_subtitle_po_toggle" => 'yes',
+			],
 		] );
 		$this->add_control( "{$form_type}_form_subtitle_bg_color", [
 			'label'     => __( 'Background Color', EAEL_TEXTDOMAIN ),
@@ -1812,12 +1857,18 @@ class Login_Register extends Widget_Base {
 			'selectors' => [
 				$subtitle_selector => 'background: {{VALUE}};',
 			],
+			'condition'  => [
+				"{$form_type}_form_subtitle_po_toggle" => 'yes',
+			],
 		] );
 
 
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "{$form_type}_form_subtitle_border",
 			'selector' => $subtitle_selector,
+			'condition'  => [
+				"{$form_type}_form_subtitle_po_toggle" => 'yes',
+			],
 		] );
 		$this->add_control( "{$form_type}_form_subtitle_border_radius", [
 			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
@@ -1828,6 +1879,9 @@ class Login_Register extends Widget_Base {
 			],
 			'selectors'  => [
 				$subtitle_selector => $this->apply_dim( 'border-radius'),
+			],
+			'condition'  => [
+				"{$form_type}_form_subtitle_po_toggle" => 'yes',
 			],
 		] );
 
@@ -3355,12 +3409,17 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_login_validation_errors() {
-		if ( $login_error = get_transient( 'eael_login_error' ) ) { ?>
+	    $error_key ='eael_login_error_'.$this->get_id();
+		if ( $login_error = apply_filters('eael/login-register/login-error-message', get_transient( $error_key )) ) {
+		    do_action( 'eael/login-register/before-showing-login-error', $login_error, $this);
+		    ?>
             <p class="eael-form-msg invalid">
 				<?php echo esc_html( $login_error ); ?>
             </p>
 			<?php
-			delete_transient( 'eael_login_error' );
+			do_action( 'eael/login-register/after-showing-login-error', $login_error, $this);
+
+			delete_transient( $error_key );
 		}
 	}
 
