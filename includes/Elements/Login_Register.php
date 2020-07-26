@@ -1281,7 +1281,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-lr-form-wrapper" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-lr-form-wrapper" => $this->apply_dim( 'margin'),
 			],
 			'condition'  => [
 				'form_form_wrap_po_toggle' => 'yes',
@@ -1296,7 +1296,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-lr-form-wrapper" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-lr-form-wrapper" => $this->apply_dim( 'padding'),
 			],
 			'condition'  => [
 				'form_form_wrap_po_toggle' => 'yes',
@@ -1317,7 +1317,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-lr-form-wrapper" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-lr-form-wrapper" => $this->apply_dim( 'border-radius'),
 			],
 			'condition'  => [
 				'form_form_wrap_po_toggle' => 'yes',
@@ -1396,7 +1396,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper" => $this->apply_dim( 'margin'),
 			],
 			'condition'  => [
 				'form_form_po_toggle' => 'yes',
@@ -1411,7 +1411,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper" => $this->apply_dim( 'padding'),
 			],
 			'condition'  => [
 				'form_form_po_toggle' => 'yes',
@@ -1432,7 +1432,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper" => $this->apply_dim( 'border-radius'),
 			],
 			'condition'  => [
 				'form_form_po_toggle' => 'yes',
@@ -1456,6 +1456,12 @@ class Login_Register extends Widget_Base {
 			'tab'        => Controls_Manager::TAB_STYLE,
 			'conditions' => $this->get_form_controls_display_condition( $form_type ),
 		] );
+		//Define all css selectors ahead for better management
+		$illustration_selector = "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-illustration";
+		$logo_selector = "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header img";
+		$title_selector = "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header .form-dsc h4";
+		$subtitle_selector = "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header .form-dsc p";
+
 		$this->add_control( "{$form_type}_form_img_po_toggle", [
 			'label'        => __( 'Form Illustration', EAEL_TEXTDOMAIN ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
@@ -1501,7 +1507,7 @@ class Login_Register extends Widget_Base {
 				'size' => 100,
 			],
 			'selectors'       => [
-				"{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-illustration" => 'width: {{SIZE}}{{UNIT}};',
+				$illustration_selector => 'width: {{SIZE}}{{UNIT}};',
 			],
 			'condition'       => [
 				"{$form_type}_form_img_po_toggle" => 'yes',
@@ -1539,7 +1545,7 @@ class Login_Register extends Widget_Base {
 				'size' => 375,
 			],
 			'selectors'       => [
-				"{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-illustration" => 'height: {{SIZE}}{{UNIT}};',
+				$illustration_selector => 'height: {{SIZE}}{{UNIT}};',
 			],
 			'condition'       => [
 				"{$form_type}_form_img_po_toggle" => 'yes',
@@ -1554,7 +1560,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-illustration" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				$illustration_selector => $this->apply_dim( 'margin'),
 			],
 			'condition'  => [
 				"{$form_type}_form_img_po_toggle" => 'yes',
@@ -1569,7 +1575,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-illustration" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				$illustration_selector => $this->apply_dim( 'padding'),
 			],
 			'condition'  => [
 				"{$form_type}_form_img_po_toggle" => 'yes',
@@ -1577,7 +1583,7 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'      => "{$form_type}_form_img_border",
-			'selector'  => "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-illustration",
+			'selector'  => $illustration_selector,
 			'condition' => [
 				"{$form_type}_form_img_po_toggle" => 'yes',
 			],
@@ -1590,7 +1596,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-illustration" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				$illustration_selector => $this->apply_dim( 'border-radius'),
 			],
 			'condition'  => [
 				"{$form_type}_form_img_po_toggle" => 'yes',
@@ -1600,7 +1606,7 @@ class Login_Register extends Widget_Base {
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
 			'label'    => __( 'Illustration Shadow', EAEL_TEXTDOMAIN ),
 			'name'     => "{$form_type}_form_img_shadow",
-			'selector' => "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-illustration",
+			'selector' => $illustration_selector,
 			'exclude'  => [
 				'box_shadow_position',
 			],
@@ -1623,7 +1629,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header img" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				$logo_selector => $this->apply_dim( 'margin'),
 			],
 			'condition'  => [
 				"{$form_type}_form_logo_po_toggle" => 'yes',
@@ -1638,7 +1644,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header img" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				$logo_selector => $this->apply_dim( 'padding'),
 			],
 			'condition'  => [
 				"{$form_type}_form_logo_po_toggle" => 'yes',
@@ -1646,7 +1652,7 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'      => "{$form_type}_form_logo_border",
-			'selector'  => "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header img",
+			'selector'  => $logo_selector,
 			'condition' => [
 				"{$form_type}_form_logo_po_toggle" => 'yes',
 			],
@@ -1659,7 +1665,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header img" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				$logo_selector => $this->apply_dim( 'border-radius'),
 			],
 			'condition'  => [
 				"{$form_type}_form_logo_po_toggle" => 'yes',
@@ -1669,11 +1675,169 @@ class Login_Register extends Widget_Base {
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
 			'label'    => __( 'Logo Shadow', EAEL_TEXTDOMAIN ),
 			'name'     => "{$form_type}_form_logo_shadow",
-			'selector' => "{{WRAPPER}} .eael-{$form_type}-form-wrapper .lr-form-header img",
+			'selector' => $logo_selector,
 			'exclude'  => [
 				'box_shadow_position',
 			],
 		] );
+
+		$this->add_control( "{$form_type}_form_title_po_toggle", [
+			'label'        => __( 'Title', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
+			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
+			'return_value' => 'yes',
+			'separator' => 'before',
+		] );
+		$this->start_popover();
+		$this->add_control( "{$form_type}_form_title_margin", [
+			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				$title_selector => $this->apply_dim( 'margin'),
+			],
+			'condition'  => [
+				"{$form_type}_form_title_po_toggle" => 'yes',
+			],
+		] );
+		$this->add_control( "{$form_type}_form_title_padding",  [
+			'label'      => __( 'Padding', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				$title_selector => $this->apply_dim( 'padding'),
+			],
+			'condition'  => [
+				"{$form_type}_form_title_po_toggle" => 'yes',
+			],
+		] );
+		$this->add_control( "{$form_type}_form_title_color", [
+			'label'     => __( 'Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				$title_selector => 'color: {{VALUE}};',
+			],
+		] );
+		$this->add_control( "{$form_type}_form_title_bg_color", [
+			'label'     => __( 'Background Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				$title_selector => 'background: {{VALUE}};',
+			],
+		] );
+
+
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "{$form_type}_form_title_border",
+			'selector' => $title_selector,
+		] );
+		$this->add_control( "{$form_type}_form_title_border_radius", [
+			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				$title_selector => $this->apply_dim( 'border-radius'),
+			],
+		] );
+
+		$this->end_popover();
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => "{$form_type}_form_title_typo",
+			'label'      => __( 'Title Typography', EAEL_TEXTDOMAIN ),
+			'selector' => $title_selector,
+		] );
+
+		/*Subtitle----*/
+		$this->add_control( "{$form_type}_form_subtitle_po_toggle", [
+			'label'        => __( 'Subtitle', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
+			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
+			'return_value' => 'yes',
+			'separator' => 'before',
+		] );
+		$this->start_popover();
+		$this->add_control( "{$form_type}_form_subtitle_margin", [
+			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				$subtitle_selector => $this->apply_dim( 'margin'),
+			],
+			'condition'  => [
+				"{$form_type}_form_subtitle_po_toggle" => 'yes',
+			],
+		] );
+		$this->add_control( "{$form_type}_form_subtitle_padding",  [
+			'label'      => __( 'Padding', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				$subtitle_selector => $this->apply_dim( 'padding'),
+			],
+			'condition'  => [
+				"{$form_type}_form_subtitle_po_toggle" => 'yes',
+			],
+		] );
+		$this->add_control( "{$form_type}_form_subtitle_color", [
+			'label'     => __( 'Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				$subtitle_selector => 'color: {{VALUE}};',
+			],
+		] );
+		$this->add_control( "{$form_type}_form_subtitle_bg_color", [
+			'label'     => __( 'Background Color', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				$subtitle_selector => 'background: {{VALUE}};',
+			],
+		] );
+
+
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "{$form_type}_form_subtitle_border",
+			'selector' => $subtitle_selector,
+		] );
+		$this->add_control( "{$form_type}_form_subtitle_border_radius", [
+			'label'      => __( 'Border Radius', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				$subtitle_selector => $this->apply_dim( 'border-radius'),
+			],
+		] );
+
+		$this->end_popover();
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => "{$form_type}_form_subtitle_typo",
+			'label'      => __( 'Subtitle Typography', EAEL_TEXTDOMAIN ),
+			'selector' => $subtitle_selector,
+		] );
+
 		$this->end_controls_section();
 	}
 
@@ -1700,7 +1864,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => $this->apply_dim( 'margin'),
 			],
 			'condition'  => [
 				'eael_form_field_po_toggle' => 'yes',
@@ -1716,7 +1880,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => $this->apply_dim( 'padding'),
 			],
 			'condition'  => [
 				'eael_form_field_po_toggle' => 'yes',
@@ -1773,7 +1937,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => $this->apply_dim( 'border-radius'),
 			],
 		] );
 
@@ -1810,7 +1974,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control:focus" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control:focus" => $this->apply_dim( 'border-radius'),
 			],
 		] );
 		$this->end_controls_tab();
@@ -1841,7 +2005,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .eael-field-label" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-field-label" => $this->apply_dim( 'margin'),
 			],
 			'condition'  => [
 				'eael_form_label_po_toggle' => 'yes',
@@ -1856,7 +2020,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .eael-field-label" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-field-label" => $this->apply_dim( 'padding'),
 			],
 			'condition'  => [
 				'eael_form_label_po_toggle' => 'yes',
@@ -1924,7 +2088,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .eael-field-label" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael-field-label" => $this->apply_dim( 'border-radius'),
 			],
 			'condition'  => [
 				'eael_form_label_b_po_toggle' => 'yes',
@@ -2175,7 +2339,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => $this->apply_dim( 'margin'),
 			],
 			'condition'  => [
 				"{$button_type}_btn_pot" => 'yes',
@@ -2190,7 +2354,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => $this->apply_dim( 'padding'),
 			],
 			'condition'  => [
 				"{$button_type}_btn_pot" => 'yes',
@@ -2296,7 +2460,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => $this->apply_dim( 'border-radius'),
 			],
 		] );
 		$this->end_controls_tab();
@@ -2333,7 +2497,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover" => $this->apply_dim( 'border-radius'),
 			],
 		] );
 		$this->end_controls_tab();
@@ -2424,7 +2588,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link" => $this->apply_dim( 'margin'),
 			],
 			'condition'  => [
 				"{$form_type}_link_pot" => 'yes',
@@ -2439,7 +2603,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link" => $this->apply_dim( 'padding'),
 			],
 			'condition'  => [
 				"{$form_type}_link_pot" => 'yes',
@@ -2567,7 +2731,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link" => $this->apply_dim( 'border-radius'),
 			],
 		] );
 		$this->end_controls_tab();
@@ -2604,7 +2768,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link:hover" => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-lr-link:hover" => $this->apply_dim( 'border-radius'),
 			],
 		] );
 		$this->end_controls_tab();
@@ -3308,6 +3472,17 @@ class Login_Register extends Widget_Base {
 		}
 
 		return false;
+	}
+
+	/**
+	 * It will apply value like Elementor's dimension control to a property and return it.
+	 *
+	 * @param string $css_property CSS property name
+	 *
+	 * @return string
+	 */
+	protected function apply_dim($css_property) {
+        return "{$css_property}: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};";
 	}
 
 }
