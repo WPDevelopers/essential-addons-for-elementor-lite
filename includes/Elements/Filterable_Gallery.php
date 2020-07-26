@@ -3162,17 +3162,13 @@ class Filterable_Gallery extends Widget_Base
                     $html .= '</div>';
 
                     $html .= '</div>';
+                    if ($settings['eael_section_fg_full_image_clickable']) $html .= '</a>';
                 }
             }
 
-            // close lightbox anchor
-            if ($settings['eael_section_fg_full_image_clickable'] && $settings['eael_section_fg_full_image_action'] === 'lightbox') {
-                $html .= '</a>';
-            } else if ($settings['eael_fg_show_popup'] == 'media') {
-                $html .= '</a>';
-            }
+            if ($settings['eael_fg_show_popup'] == 'media') $html .= '</a>';
 
-            // close gallery item wrap
+
             $html .= '</div></div>';
 
             $gallery_markup[] = $html;

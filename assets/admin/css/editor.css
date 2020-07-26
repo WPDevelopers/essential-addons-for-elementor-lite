@@ -59,7 +59,7 @@
 
 .elementor-element-wrapper:not(.elementor-element--promotion) [class^="eaicon-"]:after,
 .elementor-element-wrapper:not(.elementor-element--promotion) [class*=" eaicon-"]:after {
-	content: "\e906";
+	content: "\e907";
 	font-family: "eaicon" !important;
 	speak: none;
 	font-size: 14px;
@@ -77,7 +77,7 @@
 }
 
 #elementor-panel__editor__help__link[href^="https://essential-addons.com/elementor/docs"]:before {
-	content: "\e92f";
+	content: "\e930";
 	font-family: "eaicon" !important;
 	font-size: 190%;
 	font-style: normal;

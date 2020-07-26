@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.4
 Requires PHP: 5.4
-Stable tag: 4.1.0
+Stable tag: 4.1.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -223,6 +223,15 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.1.1 - 23/07/2020 =
+- Improved: EA Typeform with auth2 authentication
+- Fixed: EA Instagram Feed not showing Videos
+- Fixed: EA Instagram Feed post limit issue
+- Fixed: EA Sticky Video PHP error with Image Overlay option
+- Fixed: EA Reading Progress Bar & EA TOC not working inside Elementor Editor
+- Fixed: EA Filterable Gallery- broken link issue
+- Few minor bugfix and improvements
 
 = 4.1.0 - 16/07/2020 =
 - Added EA Custom JS Extension
