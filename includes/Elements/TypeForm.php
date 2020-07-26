@@ -64,7 +64,7 @@ class TypeForm extends Widget_Base {
         $form_arr = get_transient($key);
         if (empty($form_arr)) {
             $response = wp_remote_get(
-                'https://api.typeform.com/forms',
+                'https://api.typeform.com/forms?page_size=200',
                 [
                     'headers' => [
                         'Authorization' => "Bearer $token",
@@ -104,8 +104,7 @@ class TypeForm extends Widget_Base {
             'eael_global_warning_text',
             [
                 'type'            => Controls_Manager::RAW_HTML,
-                'raw'             => __('Whoops! It\' seems like you didn\'t set TypeForm personal token. You can set from 
-                                    Essential Addons &gt; Elements &gt; TypeForm (Settings)',
+                'raw'             => __('Whoops! It seems like you haven\'t connected your Typeform account. To do this, navigate to <b>WordPress Dashboard -> Essential Addons -> Elements -> Typeform</b> (<a target="_blank" href="'.esc_url(admin_url( 'admin.php?page=eael-settings')).'">Get Access</a>).',
                     'essential-addons-for-elementor-lite'),
                 'content_classes' => 'eael-warning',
             ]

@@ -142,7 +142,7 @@
   color: #555555;
   height: 300px;
   overflow-y: auto;
-  word-break: break-all;
+  word-break: break-word;
 }
 .eael-event-calendar-wrapper .eaelec-modal-body::-webkit-scrollbar {
   width: 6px;
