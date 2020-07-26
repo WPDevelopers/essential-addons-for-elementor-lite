@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
+use Elementor\Modules\DynamicTags\Module as TagsModule;
 use \Elementor\Widget_Base;
 
 class Pricing_Table extends Widget_Base {
@@ -122,6 +123,9 @@ class Pricing_Table extends Widget_Base {
             [
                 'label'       => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'label_block' => false,
                 'default'     => esc_html__( 'Startup', 'essential-addons-for-elementor-lite' ),
             ]
@@ -136,6 +140,9 @@ class Pricing_Table extends Widget_Base {
             [
                 'label'       => esc_html__( 'Sub Title', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'label_block' => false,
                 'default'     => esc_html__( 'A tagline here.', 'essential-addons-for-elementor-lite' ),
                 'condition'   => [
@@ -182,6 +189,12 @@ class Pricing_Table extends Widget_Base {
             [
                 'label'       => esc_html__( 'Price', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'               => [
+                    'active'       => true,
+                    'categories'   => [
+                        TagsModule::NUMBER_CATEGORY,
+                    ],
+                ],
                 'label_block' => false,
                 'default'     => esc_html__( '99', 'essential-addons-for-elementor-lite' ),
             ]
@@ -202,6 +215,12 @@ class Pricing_Table extends Widget_Base {
             [
                 'label'       => esc_html__( 'Sale Price', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'               => [
+                    'active'       => true,
+                    'categories'   => [
+                        TagsModule::NUMBER_CATEGORY,
+                    ],
+                ],
                 'label_block' => false,
                 'default'     => esc_html__( '89', 'essential-addons-for-elementor-lite' ),
                 'condition'   => [
