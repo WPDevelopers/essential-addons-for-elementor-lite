@@ -317,6 +317,9 @@ class Flip_Box extends Widget_Base {
 				[
 					'label' => esc_html__( 'Front Title', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::TEXT,
+                    'dynamic' => [
+                        'active' => true,
+                    ],
 					'label_block' => true,
 					'default' => esc_html__( 'Front Title', 'essential-addons-for-elementor-lite'),
 				]
@@ -347,6 +350,9 @@ class Flip_Box extends Widget_Base {
 				[
 					'label' => esc_html__( 'Back Title', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::TEXT,
+                    'dynamic' => [
+                        'active' => true,
+                    ],
 					'label_block' => true,
 					'default' => esc_html__( 'Back Title', 'essential-addons-for-elementor-lite'),
 				]

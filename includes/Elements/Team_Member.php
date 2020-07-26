@@ -105,6 +105,9 @@ class Team_Member extends Widget_Base {
 			[
 				'label' => esc_html__( 'Name', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
 				'default' => esc_html__( 'John Doe', 'essential-addons-for-elementor-lite'),
 			]
 		);
@@ -114,6 +117,9 @@ class Team_Member extends Widget_Base {
 			[
 				'label' => esc_html__( 'Job Position', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
 				'default' => esc_html__( 'Software Engineer', 'essential-addons-for-elementor-lite'),
 			]
 		);
@@ -123,6 +129,9 @@ class Team_Member extends Widget_Base {
 			[
 				'label' => esc_html__( 'Description', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXTAREA,
+                'dynamic' => [
+                    'active' => true,
+                ],
 				'default' => esc_html__( 'Add team member description here. Remove the text if not necessary.', 'essential-addons-for-elementor-lite'),
 			]
 		);

@@ -9,6 +9,7 @@ if (!defined('ABSPATH')) {
 use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
+use Elementor\Modules\DynamicTags\Module as TagsModule;
 use \Elementor\Widget_Base;
 
 class Content_Ticker extends Widget_Base
@@ -110,6 +111,9 @@ class Content_Ticker extends Widget_Base
             [
                 'label' => esc_html__('Tag Text', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'label_block' => false,
                 'default' => esc_html__('Trending Today', 'essential-addons-for-elementor-lite'),
             ]
