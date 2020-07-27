@@ -13,7 +13,7 @@ use \Elementor\Widget_Base as Widget_Base;
 
 class Product_Grid extends Widget_Base {
     use \Essential_Addons_Elementor\Traits\Helper;
-    use \Essential_Addons_Elementor\Template\Content\Product_Grid;
+    use \Essential_Addons_Elementor\Traits\Template_Query;
 
     public function get_name() {
         return 'eicon-woocommerce';
@@ -650,16 +650,29 @@ class Product_Grid extends Widget_Base {
             'show_load_more_text'            => $settings['show_load_more_text'],
         ];
 
-        $html = '<div class="eael-product-grid ' . $settings['eael_product_grid_style_preset'] . '">';
-        $html .= '<div class="woocommerce">';
+        echo '<div class="eael-product-grid ' . $settings['eael_product_grid_style_preset'] . '">';
+        echo '<div class="woocommerce">';
 
-        $html .= '<ul class="products">
-                    ' . self::render_template_( $args, $settings ) . '
-                </ul>';
+        echo '<ul class="products">';
+        
+            $query = new \WP_Query($args);
+
+            if ($query->have_posts()) {
+                while ($query->have_posts()) {
+                    $query->the_post();
+
+                    include($this->get_template('default'));
+                }
+            } else {
+                _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+            }
+            wp_reset_postdata();
+
+        echo '</ul>';
 
         if ( 'true' == $settings['show_load_more'] ) {
             if ( $args['posts_per_page'] != '-1' ) {
-                $html .= '<div class="eael-load-more-button-wrap">
+                echo '<div class="eael-load-more-button-wrap">
                             <button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class( $this ) . '" data-args="' . http_build_query( $args ) . '" data-settings="' . http_build_query( $settings ) . '" data-layout="masonry" data-page="1">
                                 <div class="eael-btn-loader button__loader"></div>
                                 <span>' . esc_html__( $settings['show_load_more_text'], 'essential-addons-for-elementor-lite' ) . '</span>
@@ -668,10 +681,8 @@ class Product_Grid extends Widget_Base {
             }
         }
 
-        $html .= '</div>
+        echo '</div>
         </div>';
-
-        echo $html;
     }
 
 }
