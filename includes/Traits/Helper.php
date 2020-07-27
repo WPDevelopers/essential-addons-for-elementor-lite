@@ -25,9 +25,8 @@ trait Helper
     {
         $posts = get_posts([
             'post_type' => $post_type,
-            'post_style' => 'all_types',
             'post_status' => 'publish',
-            'posts_per_page' => '-1',
+            'numberposts' => -1,
         ]);
 
         if (!empty($posts)) {
@@ -3022,5 +3021,20 @@ trait Helper
     {
         $toc_plugins['essential-addons-for-elementor-lite/essential_adons_elementor.php'] = __('Essential Addons for Elementor', 'essential-addons-for-elementor-lite');
         return $toc_plugins;
+    }
+
+    /**
+     * Save typeform access token
+     *
+     * @since  4.0.2
+     */
+    public function eael_typeform_auth_handle () {
+        $post = $_POST;
+        if (isset($post['typeform_tk']) && isset($post['pr_code'])) {
+            if(wp_hash('eael_typeform')===$post['pr_code']){
+                update_option('eael_save_typeform_personal_token', sanitize_text_field($post['typeform_tk']));
+            }
+        }
+        wp_send_json_success(['status' => 'success']);
     }
 }
