@@ -14,7 +14,7 @@ use \Elementor\Widget_Base as Widget_Base;
 class Post_Timeline extends Widget_Base
 {
 	use \Essential_Addons_Elementor\Traits\Helper;
-	use \Essential_Addons_Elementor\Template\Content\Post_Timeline;
+    use \Essential_Addons_Elementor\Traits\Template_Query;
 
     public function get_name()
     {
@@ -356,9 +356,22 @@ class Post_Timeline extends Widget_Base
         );
 
         echo '<div ' . $this->get_render_attribute_string('eael_post_timeline_wrapper') . '>
-		    <div ' . $this->get_render_attribute_string('eael_post_timeline') . '>
-				' . self::render_template_($args, $settings) . '
-		    </div>
+            <div ' . $this->get_render_attribute_string('eael_post_timeline') . '>';
+                $query = new \WP_Query($args);
+
+                if ($query->have_posts()) {
+                    while ($query->have_posts()) {
+                        $query->the_post();
+
+                        include($this->get_template('default'));
+                    }
+                } else {
+                    $html .= __('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                }
+
+                wp_reset_postdata();
+
+		    echo '</div>
 		</div>';
 
         if ('yes' == $settings['show_load_more']) {
