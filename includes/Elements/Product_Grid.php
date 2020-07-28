@@ -172,20 +172,6 @@ class Product_Grid extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'eael_product_grid_buttons',
-			[
-				'label' => esc_html__( 'Buttons', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'none',
-				'options' => [
-					'none' => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
-					'pagination' => esc_html__( 'Pagination', 'essential-addons-for-elementor-lite' ),
-					'load-more' => esc_html__( 'Load More', 'essential-addons-for-elementor-lite' ),
-				],
-			]
-		);
-
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -336,7 +322,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'label' => esc_html__( 'Load More', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
-					'eael_product_grid_buttons' => 'load-more',
+					'eael_product_grid_layout' => 'masonry',
 				],
 			]
 		);
@@ -373,54 +359,9 @@ class Product_Grid extends Widget_Base {
 		 *  Section => Pagination
 		 * -------------------------------
 		 */
-		$this->start_controls_section(
-			'eael_product_grid_pagination_section',
-			[
-				'label'             => __( 'Pagination', 'essential-addons-for-elementor-lite' ),
-				'tab'               => Controls_Manager::TAB_CONTENT,
-				'condition'         => [
-					'eael_product_grid_buttons' => 'pagination',
-				],
-			]
-		);
+		$this->eael_product_pagination();
 
-		$this->add_control(
-			'pagination_type',
-			[
-				'label'             => __( 'Type', 'essential-addons-for-elementor-lite' ),
-				'type'              => Controls_Manager::SELECT,
-				'default'           => '',
-				'options'           => [
-					''              => __( 'None', 'essential-addons-for-elementor-lite' ),
-					'numbers'       => __( 'Numbers', 'essential-addons-for-elementor-lite' ),
-					'numbers_arrow' => __( 'Numbers + Pre/Next Arrow', 'essential-addons-for-elementor-lite' ),
-				],
-			]
-		);
-
-		$this->add_control(
-			'pagination_prev_label',
-			[
-				'label'             => __( 'Previous Label', 'essential-addons-for-elementor-lite' ),
-				'default'           => __( '←', 'essential-addons-for-elementor-lite' ),
-				'condition'         => [
-					'pagination_type'      => 'numbers_arrow',
-				],
-			]
-		);
-
-		$this->add_control(
-			'pagination_next_label',
-			[
-				'label'             => __( 'Next Label', 'essential-addons-for-elementor-lite' ),
-				'default'           => __( '→', 'essential-addons-for-elementor-lite' ),
-				'condition'         => [
-					'pagination_type'      => 'numbers_arrow',
-				],
-			]
-		);
-
-		$this->end_controls_section();
+		# end of section 'Pagination'
 
 		$this->start_controls_section(
 			'eael_product_grid_styles',
@@ -1380,6 +1321,73 @@ class Product_Grid extends Widget_Base {
 		$this->end_controls_section();
     }
 
+    protected function eael_product_pagination() {
+
+	    $this->start_controls_section(
+		    'eael_product_grid_pagination_section',
+		    [
+			    'label'             => __( 'Pagination', 'essential-addons-for-elementor-lite' ),
+			    'tab'               => Controls_Manager::TAB_CONTENT,
+			    'condition'         => [
+				    'eael_product_grid_layout' => ['grid', 'list'],
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'show_pagination',
+		    [
+			    'label' => __( 'Show pagination', 'essential-addons-for-elementor-lite' ),
+			    'type' => Controls_Manager::SWITCHER,
+			    'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+			    'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+			    'return_value' => 'true',
+			    'default' => '',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'pagination_type',
+		    [
+			    'label'             => __( 'Type', 'essential-addons-for-elementor-lite' ),
+			    'type'              => Controls_Manager::SELECT,
+			    'default'           => '',
+			    'options'           => [
+				    ''              => __( 'None', 'essential-addons-for-elementor-lite' ),
+				    'numbers'       => __( 'Numbers', 'essential-addons-for-elementor-lite' ),
+				    'numbers_arrow' => __( 'Numbers + Pre/Next Arrow', 'essential-addons-for-elementor-lite' ),
+			    ],
+			    'condition' =>[
+				    'show_pagination' => 'true',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'pagination_prev_label',
+		    [
+			    'label'             => __( 'Previous Label', 'essential-addons-for-elementor-lite' ),
+			    'default'           => __( '←', 'essential-addons-for-elementor-lite' ),
+			    'condition'         => [
+				    'pagination_type'      => 'numbers_arrow',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'pagination_next_label',
+		    [
+			    'label'             => __( 'Next Label', 'essential-addons-for-elementor-lite' ),
+			    'default'           => __( '→', 'essential-addons-for-elementor-lite' ),
+			    'condition'         => [
+				    'pagination_type'      => 'numbers_arrow',
+			    ],
+		    ]
+	    );
+
+	    $this->end_controls_section();
+    }
+
 	protected function eael_product_pagination_style()
 	{
 		$this->start_controls_section(
@@ -1388,7 +1396,7 @@ class Product_Grid extends Widget_Base {
 				'label' => __('Pagination Style', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
-					'eael_product_grid_buttons' => ['pagination'],
+					'show_pagination' => true,
 				],
 			]
 		);
@@ -1939,8 +1947,8 @@ class Product_Grid extends Widget_Base {
 			'eael_product_grid_rating' => $settings['eael_product_grid_rating'],
 			'eael_product_grid_column' => $settings['eael_product_grid_column'],
 			'show_load_more' => $settings['show_load_more'],
+			'show_pagination' => $settings['show_pagination'],
 			'show_load_more_text' => $settings['show_load_more_text'],
-			'eael_product_grid_buttons' => $settings['eael_product_grid_buttons'],
 			'eael_product_grid_products_count' => $settings['eael_product_grid_products_count'],
 			'eael_product_list_style_preset' => $settings['eael_product_list_style_preset'],
 			'eael_product_grid_excerpt' => $settings['eael_product_grid_excerpt'],
@@ -1959,7 +1967,7 @@ class Product_Grid extends Widget_Base {
                     ' . self::render_template_( $args, $settings ) . '
                 </ul>';
 
-		if ( $settings['eael_product_grid_buttons'] == 'pagination' ) {
+		if ( 'true' == $settings['show_pagination'] ) {
 			$html .= self::eael_pagination();
 		}
 
