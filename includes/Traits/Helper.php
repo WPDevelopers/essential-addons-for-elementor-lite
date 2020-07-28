@@ -2297,10 +2297,10 @@ trait Helper
             $comments = (isset($item['comments']) ? $item['comments']['summary']['total_count'] : 0);
 
             if ($settings['eael_facebook_feed_layout'] == 'card') {
-                $html .= '<div class="eael-facebook-feed-item eael-facebook-feed-item-style-' . $settings['eael_facebook_feed_choose_style'] . '">
+                $html .= '<div class="eael-facebook-feed-item eael-facebook-feed-item-style-' . $settings['eael_facebook_feed_header_layout'] . '">
                     <div class="eael-facebook-feed-item-inner">';
                 // card header
-                if ($settings['eael_facebook_feed_choose_style'] == 'two') {
+                if ($settings['eael_facebook_feed_header_layout'] == 'two') {
                     $html .= '<header class="eael-facebook-feed-item-header clearfix">
                     <div class="eael-facebook-feed-item-user clearfix">
                         <a href="https://www.facebook.com/' . $page_id . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '"><img src="https://graph.facebook.com/v4.0/' . $page_id . '/picture" alt="' . $item['from']['name'] . '" class="eael-facebook-feed-avatar"></a>';
@@ -3159,10 +3159,11 @@ trait Helper
      *
      * @since  4.0.2
      */
-    public function eael_typeform_auth_handle () {
+    public function eael_typeform_auth_handle()
+    {
         $post = $_POST;
         if (isset($post['typeform_tk']) && isset($post['pr_code'])) {
-            if(wp_hash('eael_typeform')===$post['pr_code']){
+            if (wp_hash('eael_typeform') === $post['pr_code']) {
                 update_option('eael_save_typeform_personal_token', sanitize_text_field($post['typeform_tk']));
             }
         }
