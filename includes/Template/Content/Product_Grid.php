@@ -8,6 +8,16 @@ if (!defined('ABSPATH')) {
 
 trait Product_Grid
 {
+	public static $setting_data = [];
+
+	public static function ea_get_woo_product_grid_settings(){
+		return self::$setting_data;
+	}
+
+	public static function ea_set_woo_product_grid_settings($setting){
+		self::$setting_data = $setting;
+	}
+
 	public static function render_template_($args, $settings)
 	{
 		$query = new \WP_Query($args);
@@ -255,7 +265,7 @@ trait Product_Grid
 		return ob_get_clean();
 	}
 
-	public static function eael_pagination () {
+	public static function eael_pagination ($settings) {
 		$total   = isset( $total ) ? $total : wc_get_loop_prop( 'total_pages' );
 		$current = isset( $current ) ? $current : wc_get_loop_prop( 'current_page' );
 		$base    = isset( $base ) ? $base : esc_url_raw( str_replace( 999999999, '%#%', remove_query_arg( 'add-to-cart', get_pagenum_link( 999999999, false ) ) ) );
@@ -265,22 +275,38 @@ trait Product_Grid
 			return;
 		}
 
+		$args = [
+			'base'      => $base,
+			'format'    => $format,
+			'add_args'  => false,
+			'current'   => max( 1, $current ),
+			'total'     => $total,
+			'prev_text' => '&larr;',
+			'next_text' => '&rarr;',
+			'type'      => 'list',
+			'end_size'  => 3,
+			'mid_size'  => 3,
+		];
+
+		$pagination_arrow = false;
+
+		if ( 'numbers_arrow' === $settings['pagination_type'] ) {
+			$pagination_arrow = true;
+		}
+
+		$args['prev_next'] = $pagination_arrow;
+
+		if ( '' !== $settings['pagination_prev_label'] ) {
+			$args['prev_text'] = $settings['pagination_prev_label'];
+		}
+
+		if ( '' !== $settings['pagination_next_label'] ) {
+			$args['next_text'] = $settings['pagination_next_label'];
+		}
+		
 		$html = '<nav class="eael-woo-pagination">';
 		$html .= paginate_links(
-			apply_filters(
-				'eael_woo_pagination_args', array( // WPCS: XSS ok.
-					'base'      => $base,
-					'format'    => $format,
-					'add_args'  => false,
-					'current'   => max( 1, $current ),
-					'total'     => $total,
-					'prev_text' => '&larr;',
-					'next_text' => '&rarr;',
-					'type'      => 'list',
-					'end_size'  => 3,
-					'mid_size'  => 3,
-				)
-			)
+			apply_filters( 'eael_woo_pagination_args', $args)
 		);
 		$html .= '</nav>';
 
@@ -308,7 +334,6 @@ trait Product_Grid
 	 * Added all actions
 	 */
 	public function ea_woo_checkout_add_actions() {
-
 		// Image.
 //		add_action( 'ea_woo_single_product_image', 'woocommerce_show_product_sale_flash', 10 );
 		add_action( 'ea_woo_single_product_image', 'woocommerce_show_product_images', 20 );
@@ -322,6 +347,5 @@ trait Product_Grid
 		add_action( 'ea_woo_single_product_summary', 'woocommerce_template_single_meta', 30 );
 
 		add_action( 'ea_woo_before_product_loop', 'woocommerce_output_all_notices', 30 );
-
 	}
 }
