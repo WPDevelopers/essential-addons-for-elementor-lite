@@ -113,6 +113,7 @@
 }
 .eael-lr-form-wrapper.style-2 .lr-form-wrapper {
   padding: 35px;
+  width: 370px;
 }
 .eael-lr-form-wrapper .eael-lr-form-group {
   margin-bottom: 1rem;
@@ -201,10 +202,10 @@
   -o-transition: all 0.2s;
   transition: all 0.2s;
   padding: 15px;
+  width: 130px;
 }
 .eael-lr-form-wrapper .eael-lr-btn.eael-lr-btn-block {
   display: block;
-  width: 100%;
 }
 .eael-lr-form-wrapper .eael-lr-btn.eael-lr-btn-inline {
   display: inline-block;

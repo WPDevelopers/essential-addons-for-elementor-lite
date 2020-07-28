@@ -226,6 +226,17 @@ class Login_Register extends Widget_Base {
 			],
 			'default' => 'login',
 		] );
+		if ( ! $this->user_can_register ) {
+			$this->add_control( 'registration_off_notice', [
+				'type'            => Controls_Manager::RAW_HTML,
+				/* translators: %1$s is settings page link open tag, %2$s is link closing tag */
+				'raw'             => sprintf( __( 'Registration is disabled on your site. Please enable it to use registration form. You can enable it from Dashboard » Settings » General » %1$sMembership%2$s.', EAEL_TEXTDOMAIN ), '<a href="' . esc_attr( esc_url( admin_url( 'options-general.php' ) ) ) . '" target="_blank">', '</a>' ),
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
+				'condition'       => [
+					'default_form_type' => 'register',
+				],
+			] );
+		}
 		$this->add_control( 'hide_for_logged_in_user', [
 			'label'   => __( 'Hide all Forms from Logged-in Users', EAEL_TEXTDOMAIN ),
 			'type'    => Controls_Manager::SWITCHER,
@@ -310,7 +321,7 @@ class Login_Register extends Widget_Base {
 				'dynamic'     => [
 					'active' => true,
 				],
-				'default'     => __( "Don't have an Account? \nRegister Now", EAEL_TEXTDOMAIN ),
+				'default'     => __( " \nRegister Now", EAEL_TEXTDOMAIN ),
 				'condition'   => [
 					'show_register_link' => 'yes',
 				],
@@ -342,31 +353,29 @@ class Login_Register extends Widget_Base {
 					'show_register_link'       => 'yes',
 				],
 			] );
-		}
+		}else{
+			$this->add_control( 'show_register_link', [
+				'label'     => __( 'Show Register Link', EAEL_TEXTDOMAIN ),
+				'type'      => Controls_Manager::HIDDEN,
+				'default'   => 'no',
+				'separator' => 'before',
+			] );
+        }
 		$this->end_popover();
 
-		$this->add_control( 'gen_reg_content_po_toggle', [
-			'label'        => __( 'Register Form General', EAEL_TEXTDOMAIN ),
-			'type'         => Controls_Manager::POPOVER_TOGGLE,
-			'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
-			'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
-			'return_value' => 'yes',
-			'default'      => 'yes',
-		] );
-		$this->start_popover();
-		if ( ! $this->user_can_register ) {
-			$this->add_control( 'registration_off_notice', [
-				'type'            => Controls_Manager::RAW_HTML,
-				/* translators: %1$s is settings page link open tag, %2$s is link closing tag */
-				'raw'             => sprintf( __( 'Registration is disabled on your site. Please enable it to use registration form. You can enable it from Dashboard » Settings » General » %1$sMembership%2$s.', EAEL_TEXTDOMAIN ), '<a href="' . esc_attr( esc_url( admin_url( 'options-general.php' ) ) ) . '" target="_blank">', '</a>' ),
-				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
-				'condition'       => [
-					'default_form_type' => 'register',
-				],
-			] );
-		}
+
+
 		/*--show registration related control only if registration is enable on the site--*/
 		if ( $this->user_can_register ) {
+			$this->add_control( 'gen_reg_content_po_toggle', [
+				'label'        => __( 'Register Form General', EAEL_TEXTDOMAIN ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => __( 'Default', EAEL_TEXTDOMAIN ),
+				'label_on'     => __( 'Custom', EAEL_TEXTDOMAIN ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			] );
+			$this->start_popover();
 			$this->add_control( 'show_login_link', [
 				'label'   => __( 'Show Login Link', EAEL_TEXTDOMAIN ),
 				'type'    => Controls_Manager::SWITCHER,
@@ -381,7 +390,7 @@ class Login_Register extends Widget_Base {
 				'dynamic'     => [
 					'active' => true,
 				],
-				'default'     => __( "Already have an Account? \nSign In", EAEL_TEXTDOMAIN ),
+				'default'     => __( " \nSign In", EAEL_TEXTDOMAIN ),
 				'condition'   => [
 					'show_login_link' => 'yes',
 				],
@@ -413,9 +422,16 @@ class Login_Register extends Widget_Base {
 					'show_login_link'   => 'yes',
 				],
 			] );
-		}
+			$this->end_popover();
+		}else{
+			$this->add_control( 'show_login_link', [
+				'label'   => __( 'Show Login Link', EAEL_TEXTDOMAIN ),
+				'type'    => Controls_Manager::HIDDEN,
+				'default' => 'no',
+			] );
+        }
 
-		$this->end_popover();
+
 		$this->add_control( 'general_pop_notice', [
 			'type'            => Controls_Manager::RAW_HTML,
 			'raw'             => __( 'Note: the "Back to Default" button above wont reset the content. It is used here only for organizing related controls.', EAEL_TEXTDOMAIN ),
@@ -2445,7 +2461,7 @@ class Login_Register extends Widget_Base {
 				'space-around'  => __( 'Space Around', EAEL_TEXTDOMAIN ),
 				'space-evenly'  => __( 'Space Evenly', EAEL_TEXTDOMAIN ),
 			],
-			'default'   => 'center',
+			'default'   => 'space-between',
 			'condition' => [
 				"{$button_type}_btn_d_type" => 'row',
 			],

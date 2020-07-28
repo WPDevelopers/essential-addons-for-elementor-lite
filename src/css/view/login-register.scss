@@ -70,6 +70,7 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
 
         .lr-form-wrapper {
             padding: 35px;
+            width: 370px;
         }
     }
 
@@ -156,10 +157,10 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
         border: none;
         transition: all .2s;
         padding: 15px;
-
+        width: 130px;
         &.eael-lr-btn-block {
             display: block;
-            width: 100%;
+            //width: 100%;
         }
 
         &.eael-lr-btn-inline {
