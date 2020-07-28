@@ -120,9 +120,9 @@ $elements = [
             ],
             [
                 'key'   => 'login-register',
-                'title' => __( 'Login | Register', 'essential-addons-elementor' ),
-                //'demo_link' => 'https://essential-addons.com/elementor/login-register/',
-                //'doc_link' => 'https://essential-addons.com/elementor/docs/login-register/',
+                'title' => __( 'Login | Register Form', 'essential-addons-elementor' ),
+                'demo_link' => 'https://essential-addons.com/elementor/login-register/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/login-register/',
             ],
         ]
     ],
@@ -550,10 +550,6 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                                             echo '<span style="font-size: 12px; font-style:italic;">
                                             '.sprintf("<a id='eael-typeform-get-access' data-link='%s' href='#'>Get Access</a>", esc_url($url)).'
                                             </span>';
-                                        }elseif($item['key'] === 'login-register' && $this->pro_enabled) {
-	                                        echo '<span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-title="Google Recaptcha Keys" data-placeholder="Set Site Key" data-target="#g_recaptcha_site_key">'.__('Settings', 'essential-addons-for-elementor-lite').'</a></span>
-                                            <input type="hidden" name="g_recaptcha_site_key" id="g_recaptcha_site_key" class="g_recaptcha_site_key" value="' . get_option('eael_g_recaptcha_site_key') . '">
-                                            <input type="hidden" name="g_recaptcha_secret_key" id="g_recaptcha_secret_key" class="g_recaptcha_secret_key" value="' . get_option('eael_g_recaptcha_secret_key') . '">';
                                         }
 
                                     ?>
