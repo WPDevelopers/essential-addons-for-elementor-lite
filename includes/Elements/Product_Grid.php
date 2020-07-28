@@ -1351,9 +1351,8 @@ class Product_Grid extends Widget_Base {
 		    [
 			    'label'             => __( 'Type', 'essential-addons-for-elementor-lite' ),
 			    'type'              => Controls_Manager::SELECT,
-			    'default'           => '',
+			    'default'           => 'numbers',
 			    'options'           => [
-				    ''              => __( 'None', 'essential-addons-for-elementor-lite' ),
 				    'numbers'       => __( 'Numbers', 'essential-addons-for-elementor-lite' ),
 				    'numbers_arrow' => __( 'Numbers + Pre/Next Arrow', 'essential-addons-for-elementor-lite' ),
 			    ],
@@ -1395,8 +1394,8 @@ class Product_Grid extends Widget_Base {
 			[
 				'label' => __('Pagination Style', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
-				'condition' => [
-					'show_pagination' => true,
+				'condition' =>[
+					'show_pagination' => 'true',
 				],
 			]
 		);
@@ -1860,7 +1859,7 @@ class Product_Grid extends Widget_Base {
 			return;
 		}
 
-		$this->ea_woo_checkout_add_actions();
+		$this->ea_woo_checkout_add_actions($settings);
 
 		$args = [
 			'post_type' => 'product',
@@ -1947,8 +1946,11 @@ class Product_Grid extends Widget_Base {
 			'eael_product_grid_rating' => $settings['eael_product_grid_rating'],
 			'eael_product_grid_column' => $settings['eael_product_grid_column'],
 			'show_load_more' => $settings['show_load_more'],
-			'show_pagination' => $settings['show_pagination'],
 			'show_load_more_text' => $settings['show_load_more_text'],
+			'show_pagination' => $settings['show_pagination'],
+			'pagination_type' => $settings['pagination_type'],
+			'pagination_prev_label' => $settings['pagination_prev_label'],
+			'pagination_next_label' => $settings['pagination_next_label'],
 			'eael_product_grid_products_count' => $settings['eael_product_grid_products_count'],
 			'eael_product_list_style_preset' => $settings['eael_product_list_style_preset'],
 			'eael_product_grid_excerpt' => $settings['eael_product_grid_excerpt'],
@@ -1968,7 +1970,7 @@ class Product_Grid extends Widget_Base {
                 </ul>';
 
 		if ( 'true' == $settings['show_pagination'] ) {
-			$html .= self::eael_pagination();
+			$html .= self::eael_pagination($settings);
 		}
 
 
