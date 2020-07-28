@@ -309,18 +309,10 @@ class Product_Grid extends Widget_Base {
 			]
 		);
 
-//		$this->add_group_control(
-//			Group_Control_Image_Size::get_type(),
-//			[
-//				'name' => 'eael_product_grid_image',
-//				'default' => 'woocommerce_thumbnail',
-//			]
-//		);
-
 		$this->add_control(
 			'eael_product_grid_image_size',
 			[
-				'label' => esc_html__( 'Product Categories', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Image Size', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::SELECT,
 				'label_block' => true,
 				'options' => $this->eael_woocommerce_get_image_sizes(),
@@ -446,11 +438,72 @@ class Product_Grid extends Widget_Base {
 				'default' => '#fff',
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product, {{WRAPPER}} .eael-product-grid .icons-wrap.block-box-style' => 'background-color: {{VALUE}};',
-					'{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product.eael-product-list-preset-3'
+					'{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product.eael-product-list-preset-4 .product-details-wrap' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product.eael-product-list-preset-3, {{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product.eael-product-list-preset-4'
                     => 'background-color: transparent;',
 				],
 			]
 		);
+
+		$this->add_control(
+			'eael_product_grid_border_color',
+			[
+				'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#ada8a8',
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-grid .price-wrap, {{WRAPPER}} .eael-product-grid .title-wrap' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-grid.list .eael-product-list-preset-4 .eael-product-wrap .product-details-wrap' => 'border-color: {{VALUE}};',
+				],
+				'conditions' => [
+					'relation' => 'and',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_layout',
+							'operator' => '!in',
+							'value' => [
+								'grid',
+								'masonry',
+							],
+						],
+						[
+							'name' => 'eael_product_list_style_preset',
+							'operator' => 'in',
+							'value' => [
+							        'eael-product-list-preset-3',
+							        'eael-product-list-preset-4',
+                                ]
+						],
+					],
+				],
+			]
+		);
+
+		$this->start_controls_tabs( 'eael_product_grid_tabs', [
+			'conditions' => [
+				'relation' => 'or',
+				'terms' => [
+					[
+						'name' => 'eael_product_grid_layout',
+						'operator' => 'in',
+						'value' => [
+							'grid',
+							'mesonry',
+						]
+					],
+					[
+						'name' => 'eael_product_list_style_preset',
+						'operator' => '!in',
+						'value' => [
+							'eael-product-list-preset-3',
+							'eael-product-list-preset-4',
+						]
+					]
+				]
+			],
+        ] );
+
+		$this->start_controls_tab( 'eael_product_grid_tabs_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ) ] );
 
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
@@ -475,17 +528,57 @@ class Product_Grid extends Widget_Base {
 				],
 				'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product',
 				'condition' => [
-					'eael_product_grid_style_preset' => [
-						'eael-product-default',
-						'eael-product-simple',
-						'eael-product-overlay',
-						'eael-product-preset-5',
-						'eael-product-preset-6',
-						'eael-product-preset-7',
-					],
+                    'eael_product_grid_style_preset' => [
+                        'eael-product-default',
+                        'eael-product-simple',
+                        'eael-product-overlay',
+                        'eael-product-preset-5',
+                        'eael-product-preset-6',
+                        'eael-product-preset-7',
+                    ]
 				],
 			]
 		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'eael_product_grid_box_shadow',
+				'label'    => __('Box Shadow', 'essential-addons-for-elementor-lite'),
+				'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab( 'eael_product_grid_hover_styles', [ 'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ) ] );
+
+		$this->add_control(
+			'eael_product_grid_hover_border_color',
+			[
+				'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+				        '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product:hover' => 'border-color: {{VALUE}};',
+                ],
+				'condition' => [
+					'eael_peoduct_grid_border_border!' => '',
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'eael_product_grid_box_shadow_hover',
+				'label'    => __('Box Shadow', 'essential-addons-for-elementor-lite'),
+				'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product:hover',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->add_control(
 			'eael_peoduct_grid_border_radius',
@@ -494,7 +587,51 @@ class Product_Grid extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
-					'{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .attachment-woocommerce_thumbnail' => 'border-radius: {{TOP}}px {{RIGHT}}px 0 0;',
+					'{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product woocommerce-loop-product__link img' => 'border-radius: {{TOP}}px {{RIGHT}}px 0 0;',
+					'{{WRAPPER}} .eael-product-grid.list .woocommerce ul.products li.product .woocommerce-loop-product__link img' => 'border-radius: {{TOP}}px 0 0 {{LEFT}}px;',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_product_grid_image_width',
+			[
+				'label' => esc_html__('Image Width(%)', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'%' => [
+						'max' => 50,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-grid.list .eael-product-wrap .product-image-wrap' => 'width: {{SIZE}}%;',
+					'{{WRAPPER}} .eael-product-grid.list .eael-product-wrap .product-details-wrap' => 'width: calc(100% - {{SIZE}}%);',
+				],
+				'condition' => [
+					'eael_product_grid_layout' => 'list',
+				],
+                'separator' => 'before',
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_product_list_padding',
+			[
+				'label' => esc_html__('Padding (PX)', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-grid.list .eael-product-list-preset-1 .eael-product-wrap .product-details-wrap, {{WRAPPER}} .eael-product-grid.list .eael-product-list-preset-4 .eael-product-wrap .product-details-wrap' => 'padding: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-product-grid.list .eael-product-list-preset-2 .eael-product-wrap' => 'padding: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-product-grid.list .eael-product-list-preset-2 .eael-product-wrap .product-details-wrap' => 'padding: 0 0 0 {{SIZE}}px;',
+					'{{WRAPPER}} .eael-product-grid.list .eael-product-list-preset-3 .eael-product-wrap .product-details-wrap' => 'padding: 0 0 0 {{SIZE}}px;',
+				],
+				'condition' => [
+					'eael_product_grid_layout' => 'list',
 				],
 			]
 		);
@@ -591,12 +728,24 @@ class Product_Grid extends Widget_Base {
 			[
 				'name' => 'eael_product_grid_product_rating_typography',
 				'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .star-rating',
-				'condition' => [
-					'eael_product_grid_style_preset!' => [
-						'eael-product-preset-5',
-						'eael-product-preset-6',
-						'eael-product-preset-7',
-						'eael-product-preset-8',
+				'conditions' => [
+					'relation' => 'or',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_style_preset',
+							'operator' => '!in',
+							'value' => [
+								'eael-product-preset-5',
+								'eael-product-preset-6',
+								'eael-product-preset-7',
+								'eael-product-preset-8',
+							],
+						],
+						[
+							'name' => 'eael_product_grid_layout',
+							'operator' => '!==',
+							'value' => 'list'
+						]
 					],
 				],
 			]
@@ -617,11 +766,23 @@ class Product_Grid extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .star-rating' => 'font-size: {{SIZE}}px;',
 				],
-				'condition' => [
-					'eael_product_grid_style_preset' => [
-						'eael-product-preset-5',
-						'eael-product-preset-6',
-						'eael-product-preset-7',
+				'conditions' => [
+					'relation' => 'or',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_style_preset',
+							'operator' => 'in',
+							'value' => [
+								'eael-product-preset-5',
+								'eael-product-preset-6',
+								'eael-product-preset-7',
+							],
+						],
+						[
+							'name' => 'eael_product_grid_layout',
+							'operator' => '==',
+							'value' => 'list'
+						]
 					],
 				],
 			]
@@ -721,6 +882,7 @@ class Product_Grid extends Widget_Base {
 						'eael-product-preset-6',
 						'eael-product-preset-7',
 					],
+                    'eael_product_grid_layout!' => 'list',
 				],
 			]
 		);
@@ -829,6 +991,11 @@ class Product_Grid extends Widget_Base {
 		$this->end_controls_section();
 
 		/**
+		 * Action Button Controls!
+		 */
+		$this->eael_product_action_buttons();
+
+		/**
 		 * Action Button Style Controls!
 		 */
 		$this->eael_product_action_buttons_style();
@@ -883,18 +1050,54 @@ class Product_Grid extends Widget_Base {
 						'title' => __('Left', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-left',
 					],
-					'center' => [
-						'title' => __('Center', 'essential-addons-for-elementor-lite'),
-						'icon' => 'fa fa-align-center',
-					],
 					'right' => [
 						'title' => __('Right', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-right',
 					],
 				],
-				'default' => 'center',
 				'selectors' => [
 					'{{WRAPPER}} .eael-woo-pagination' => 'text-align: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_product_grid_layout!' => 'list',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
+	protected function eael_product_action_buttons(){
+		$this->start_controls_section(
+			'eael_section_product_action_buttons',
+			[
+				'label' => esc_html__( 'Buttons', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'eael_product_grid_quick_view',
+			[
+				'label' => esc_html__( 'Show Quick view?', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default' => 'yes',
+				'separator' => 'after',
+			]
+		);
+
+		$this->add_control(
+			'eael_product_action_buttons_preset',
+			[
+				'label' => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'details-block-style',
+				'options' => [
+					'details-block-style' => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
+					'details-block-style-2' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
+				],
+				'condition' => [
+					'eael_product_grid_layout' => 'list',
 				],
 			]
 		);
@@ -908,11 +1111,23 @@ class Product_Grid extends Widget_Base {
 			[
 				'label' => esc_html__( 'Button Styles', 'essential-addons-for-elementor-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
-				'condition' => [
-					'eael_product_grid_style_preset' => [
-						'eael-product-preset-5',
-						'eael-product-preset-6',
-						'eael-product-preset-7',
+				'conditions' => [
+					'relation' => 'or',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_style_preset',
+							'operator' => 'in',
+							'value' => [
+                                'eael-product-preset-5',
+                                'eael-product-preset-6',
+                                'eael-product-preset-7',
+                            ],
+						],
+						[
+							'name' => 'eael_product_grid_layout',
+							'operator' => '==',
+							'value' => 'list'
+						]
 					],
 				],
 			]
@@ -927,8 +1142,23 @@ class Product_Grid extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-grid .eael-product-wrap .icons-wrap.block-style' => 'background: {{VALUE}};',
 				],
-				'condition' => [
-					'eael_product_grid_style_preset' => 'eael-product-preset-5',
+				'conditions' => [
+					'relation' => 'and',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_layout',
+							'operator' => 'in',
+							'value' => [
+							        'grid',
+                                'masonry',
+                            ],
+						],
+						[
+							'name' => 'eael_product_grid_style_preset',
+							'operator' => '==',
+							'value' => 'eael-product-preset-5',
+						],
+					],
 				],
 			]
 		);
@@ -950,8 +1180,33 @@ class Product_Grid extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-grid .icons-wrap.block-style li.add-to-cart' => 'border-color: {{VALUE}};',
 				],
-				'condition' => [
-					'eael_product_grid_style_preset' => 'eael-product-preset-5',
+				'conditions' => [
+					'relation' => 'or',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_layout',
+							'operator' => '!==',
+							'value' => 'list'
+						],
+						[
+							'relation' => 'and',
+							'terms' => [
+                                [
+                                    'name' => 'eael_product_grid_layout',
+                                    'operator' => 'in',
+                                    'value' => [
+                                        'grid',
+                                        'masonry',
+                                    ],
+                                ],
+                                [
+                                    'name' => 'eael_product_grid_style_preset',
+                                    'operator' => '==',
+                                    'value' => 'eael-product-preset-5'
+                                ]
+                            ],
+						],
+					],
 				],
 			]
 		);
@@ -975,14 +1230,26 @@ class Product_Grid extends Widget_Base {
 		$this->add_control(
 			'eael_product_grid_buttons_background',
 			[
-				'label' => esc_html__( 'Button Background Color', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#8040FF',
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-grid .eael-product-wrap .icons-wrap li a' => 'background-color: {{VALUE}};',
 				],
-				'condition' => [
-					'eael_product_grid_style_preset!' => 'eael-product-preset-5',
+				'conditions' => [
+					'relation' => 'or',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_style_preset',
+							'operator' => '!==',
+							'value' => 'eael-product-preset-5'
+						],
+						[
+							'name' => 'eael_product_grid_layout',
+							'operator' => '==',
+							'value' => 'list'
+						]
+					],
 				],
 			]
 		);
@@ -992,8 +1259,20 @@ class Product_Grid extends Widget_Base {
 			[
 				'name' => 'eael_product_grid_buttons_border',
 				'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button, {{WRAPPER}} .eael-product-grid .eael-product-wrap .icons-wrap li a',
-				'condition' => [
-					'eael_product_grid_style_preset!' => 'eael-product-preset-5',
+				'conditions' => [
+					'relation' => 'or',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_style_preset',
+							'operator' => '!==',
+							'value' => 'eael-product-preset-5'
+						],
+						[
+							'name' => 'eael_product_action_buttons_preset',
+							'operator' => '==',
+							'value' => 'details-block-style-2'
+						]
+					],
 				],
 			]
 		);
@@ -1008,8 +1287,30 @@ class Product_Grid extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-product-grid .eael-product-wrap .icons-wrap li a' => 'border-radius: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-product-grid .eael-product-wrap .icons-wrap:not(.details-block-style-2) li a' => 'border-radius: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-product-grid .eael-product-wrap .icons-wrap.details-block-style-2 li:only-child a' => 'border-radius: {{SIZE}}px!important;',
+					'{{WRAPPER}} .eael-product-grid .eael-product-wrap .icons-wrap.details-block-style-2 li:first-child a' => 'border-radius: {{SIZE}}px 0 0 {{SIZE}}px;',
+					'{{WRAPPER}} .eael-product-grid .eael-product-wrap .icons-wrap.details-block-style-2 li:last-child a' => 'border-radius: 0 {{SIZE}}px {{SIZE}}px 0;',
 				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_grid_buttons_top_spacing',
+			[
+				'label' => esc_html__('Top Spacing', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-grid .eael-product-wrap .icons-wrap' => 'margin-top: {{SIZE}}px;',
+                ],
+                'condition' => [
+                    'eael_product_grid_layout' => 'list',
+                ],
 			]
 		);
 
@@ -1038,8 +1339,20 @@ class Product_Grid extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-grid .eael-product-wrap .icons-wrap li a:hover' => 'background-color: {{VALUE}};',
 				],
-				'condition' => [
-					'eael_product_grid_style_preset!' => 'eael-product-preset-5',
+				'conditions' => [
+					'relation' => 'or',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_style_preset',
+							'operator' => '!==',
+							'value' => 'eael-product-preset-5'
+						],
+						[
+							'name' => 'eael_product_action_buttons_preset',
+							'operator' => '!==',
+							'value' => 'details-block-style-2'
+						]
+					]
 				],
 			]
 		);
@@ -1302,19 +1615,49 @@ class Product_Grid extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name'     => 'eael_product_popup_typography',
+				'name'     => 'eael_product_popup_title_typography',
 				'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-				'selector' => '{{WRAPPER}} .eaelec-modal-header .eael-ec-modal-title',
+				'selector' => '.eael-product-popup .product_title',
 			]
 		);
 
 		$this->add_control(
-			'eael_product_popup_color',
+			'eael_product_popup_title_color',
 			[
 				'label'     => __('Title Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
+				'default'   => '#252525',
 				'selectors' => [
-					'{{WRAPPER}} .eaelec-modal-header .eael-ec-modal-title' => 'color: {{VALUE}}',
+					'.eael-product-popup h1.product_title.entry-title' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_popup_price',
+			[
+				'label' => __('Price', 'essential-addons-for-elementor-lite'),
+				'type'  => Controls_Manager::HEADING,
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_product_popup_price_typography',
+				'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
+				'selector' => '.eael-product-popup .price',
+			]
+		);
+
+		$this->add_control(
+			'eael_product_popup_price_color',
+			[
+				'label'     => __('Price Color', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#0242e4',
+				'selectors' => [
+					'.eael-product-popup .price' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -1333,7 +1676,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'name'     => 'eael_product_popup_content_typography',
 				'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-				'selector' => '{{WRAPPER}} .eaelec-modal-body',
+				'selector' => '.eael-product-popup .woocommerce-product-details__short-description',
 			]
 		);
 
@@ -1342,8 +1685,9 @@ class Product_Grid extends Widget_Base {
 			[
 				'label'     => __('Content Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
+				'default'   => '#707070',
 				'selectors' => [
-					'{{WRAPPER}} .eaelec-modal-body' => 'color: {{VALUE}};',
+					'.eael-product-popup .woocommerce-product-details__short-description' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1378,7 +1722,7 @@ class Product_Grid extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .eaelec-modal-close > span' => 'font-size: {{SIZE}}{{UNIT}};',
+					'.eael-product-popup .mfp-close' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1404,7 +1748,7 @@ class Product_Grid extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .eaelec-modal-close' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'.eael-product-popup .mfp-close' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1415,7 +1759,7 @@ class Product_Grid extends Widget_Base {
 				'label'     => __('Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eaelec-modal-close > span' => 'color: {{VALUE}};',
+					'.eael-product-popup .mfp-close' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1426,7 +1770,7 @@ class Product_Grid extends Widget_Base {
 				'label'     => __('Background', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eaelec-modal-close > span' => 'color: {{VALUE}};',
+					'.eael-product-popup .mfp-close' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1449,7 +1793,7 @@ class Product_Grid extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .eael-event-calendar-wrapper .eaelec-modal-close' => 'border-radius: {{SIZE}}{{UNIT}};',
+					'.eael-product-popup .mfp-close' => 'border-radius: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1459,7 +1803,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'name'     => 'eael_product_popup_close_button_box_shadow',
 				'label'    => __('Box Shadow', 'essential-addons-for-elementor-lite'),
-				'selector' => '{{WRAPPER}} .eael-event-calendar-wrapper .eaelec-modal-close',
+				'selector' => '.eael-product-popup .mfp-close',
 			]
 		);
 
@@ -1470,7 +1814,7 @@ class Product_Grid extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
-					'{{WRAPPER}} .eaelec-modal .eaelec-modal-content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'.eael-product-popup' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'separator'  => 'after',
 			]
@@ -1482,7 +1826,7 @@ class Product_Grid extends Widget_Base {
 				'name'     => 'eael_product_popup_background',
 				'label'    => __('Background', 'essential-addons-for-elementor-lite'),
 				'types'    => ['classic', 'gradient'],
-				'selector' => '{{WRAPPER}} .eaelec-modal .eaelec-modal-content',
+				'selector' => '.eael-product-popup',
 				'exclude'  => [
 					'image',
 				],
@@ -1494,7 +1838,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'name'     => 'eael_product_popup_box_shadow',
 				'label'    => __('Box Shadow', 'essential-addons-for-elementor-lite'),
-				'selector' => '{{WRAPPER}} .eaelec-modal .eaelec-modal-content',
+				'selector' => '.eael-product-popup',
 			]
 		);
 
@@ -1507,6 +1851,8 @@ class Product_Grid extends Widget_Base {
 		if ( ! apply_filters( 'eael/active_plugins', 'woocommerce/woocommerce.php' ) ) {
 			return;
 		}
+
+		$this->ea_woo_checkout_add_actions();
 
 		$args = [
 			'post_type' => 'product',
@@ -1602,11 +1948,13 @@ class Product_Grid extends Widget_Base {
 			'eael_product_grid_excerpt_expanison_indicator' => $settings['eael_product_grid_excerpt_expanison_indicator'],
 			'eael_product_grid_image_size' => $settings['eael_product_grid_image_size'],
 			'eael_product_sale_badge_preset' => $settings['eael_product_sale_badge_preset'],
+			'eael_product_action_buttons_preset' => $settings['eael_product_action_buttons_preset'],
+			'eael_product_grid_quick_view' => $settings['eael_product_grid_quick_view'],
 		];
 
 		$html = '<div class="eael-product-grid ' . $settings['eael_product_grid_style_preset'] . ' ' . $settings['eael_product_grid_layout'] . '" data-layout-mode="' . $settings["eael_product_grid_layout"] . '">';
 		$html .= '<div class="woocommerce">';
-
+		$html .= do_action( 'ea_woo_before_product_loop' );
 		$html .= '<ul class="products">
                     ' . self::render_template_( $args, $settings ) . '
                 </ul>';
