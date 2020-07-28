@@ -135,3 +135,12 @@
 .elementor-control-ea_woo_checkout_notices_border_color {
     display: none;
 }
+/*hide popup reset button for login register general control as they are used only for grouping controls*/
+.elementor-control-gen_lgn_content_po_toggle .elementor-control-popover-toggle-reset-label,
+.elementor-control-gen_reg_content_po_toggle .elementor-control-popover-toggle-reset-label {
+    display: none !important;
+}
+.elementor-control-gen_lgn_content_po_toggle .elementor-control-popover-toggle-toggle:checked + .elementor-control-popover-toggle-toggle-label,
+.elementor-control-gen_reg_content_po_toggle .elementor-control-popover-toggle-toggle:checked + .elementor-control-popover-toggle-toggle-label {
+    color: inherit !important;
+}
