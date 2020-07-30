@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.4
 Requires PHP: 5.4
-Stable tag: 4.1.1
+Stable tag: 4.1.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -223,6 +223,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.1.2 - 30/07/2020 =
+- Fixed: EA Twitter Feed | Content length issue
+- Fixed: EA Woo Checkout Coupons showing despite disabling from Woo Settings
+- Few minor bugfix and improvements
 
 = 4.1.1 - 23/07/2020 =
 - Improved: EA Typeform with auth2 authentication
