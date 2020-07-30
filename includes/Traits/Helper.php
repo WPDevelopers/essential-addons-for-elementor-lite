@@ -1654,10 +1654,6 @@ trait Helper
 		return array_merge( array( 'full' => esc_html__( 'Full', 'essential-addons-for-elementor-lite' ), ), $result );
 	}
 
-	public function eael_avoid_redirect_to_single_page( $value ) {
-			return '';
-	}
-
     /**
      * Get Contact Form 7 [ if exists ]
      */
@@ -3055,30 +3051,4 @@ trait Helper
         $toc_plugins['essential-addons-for-elementor-lite/essential_adons_elementor.php'] = __('Essential Addons for Elementor', 'essential-addons-for-elementor-lite');
         return $toc_plugins;
     }
-
-	public function fix_query_offset( &$query ) {
-		if ( ! empty( $query->query_vars['offset_to_fix'] ) ) {
-			if ( $query->is_paged ) {
-				$query->query_vars['offset'] = $query->query_vars['offset_to_fix'] + ( ( $query->query_vars['paged'] - 1 ) * $query->query_vars['posts_per_page'] );
-			} else {
-				$query->query_vars['offset'] = $query->query_vars['offset_to_fix'];
-			}
-		}
-	}
-	/**
-	 * Query Found Posts Fix.
-	 *
-	 * @since 1.3.3
-	 * @access public
-	 * @param int    $found_posts found posts.
-	 * @param object $query query object.
-	 * @return int string
-	 */
-	public function fix_query_found_posts( $found_posts, $query ) {
-		$offset_to_fix = $query->get( 'offset_to_fix' );
-		if ( $offset_to_fix ) {
-			$found_posts -= $offset_to_fix;
-		}
-		return $found_posts;
-	}
 }

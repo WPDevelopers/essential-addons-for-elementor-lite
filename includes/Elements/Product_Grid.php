@@ -555,6 +555,74 @@ class Product_Grid extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_product_grid_details_heading',
+			[
+				'label' => __( 'Product Details', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_product_grid_details_alignment',
+			[
+				'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => __('Left', 'essential-addons-for-elementor-lite'),
+						'icon' => 'fa fa-align-left',
+					],
+					'center' => [
+						'title' => __('Right', 'essential-addons-for-elementor-lite'),
+						'icon' => 'fa fa-align-center',
+					],
+				],
+				'default' => 'center',
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-grid .product-details-wrap' => 'text-align: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_product_grid_layout!' => 'list',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_product_grid_inner_padding',
+			[
+				'label'      => __('Padding', 'essential-addons-for-elementor-lite'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', '%'],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					],
+					'%'  => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'top' => '15',
+					'right' => '15',
+					'bottom' => '15',
+					'left' => '15',
+					'unit' => 'px',
+					'isLinked' => true,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-grid.grid .eael-product-wrap .product-details-wrap, {{WRAPPER}} .eael-product-grid.masonry .eael-product-wrap .product-details-wrap' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'eael_product_grid_layout' => ['grid', 'masonry'],
+				],
+			]
+		);
+
 		$this->add_responsive_control(
 			'eael_product_list_padding',
 			[
@@ -758,6 +826,7 @@ class Product_Grid extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .woocommerce ul.products li.product .onsale, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale' => 'background-color: {{VALUE}};',
 					'{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .price ins, {{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .eael-product-price ins' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.sale-preset-4:after' => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
 				],
 			]
 		);
@@ -954,7 +1023,7 @@ class Product_Grid extends Widget_Base {
 		/**
 		 * Pagination Style Controls!
 		 */
-		$this->eael_product_view_popup();
+		$this->eael_product_view_popup_style();
 	}
 
 	protected function eael_product_badges(){
@@ -995,9 +1064,6 @@ class Product_Grid extends Widget_Base {
 						'title' => __('Right', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-right',
 					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-woo-pagination' => 'text-align: {{VALUE}};',
 				],
 				'condition' => [
 					'eael_product_grid_layout!' => 'list',
@@ -1119,7 +1185,7 @@ class Product_Grid extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#fff',
 				'selectors' => [
-					'{{WRAPPER}} .eael-product-grid .icons-wrap.block-style li.add-to-cart' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-grid .icons-wrap.block-style li' => 'border-color: {{VALUE}};',
 				],
 				'conditions' => [
 					'relation' => 'or',
@@ -1602,7 +1668,7 @@ class Product_Grid extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	protected function eael_product_view_popup(){
+	protected function eael_product_view_popup_style(){
 		$this->start_controls_section(
 			'eael_product_popup',
 			[
@@ -1859,7 +1925,7 @@ class Product_Grid extends Widget_Base {
 			return;
 		}
 
-		$this->ea_woo_checkout_add_actions($settings);
+		$this->eael_woo_checkout_add_actions($settings);
 
 		$args = [
 			'post_type' => 'product',
@@ -1958,14 +2024,15 @@ class Product_Grid extends Widget_Base {
 			'eael_product_grid_excerpt_expanison_indicator' => $settings['eael_product_grid_excerpt_expanison_indicator'],
 			'eael_product_grid_image_size' => $settings['eael_product_grid_image_size'],
 			'eael_product_sale_badge_preset' => $settings['eael_product_sale_badge_preset'],
+			'eael_product_sale_badge_alignment' => $settings['eael_product_sale_badge_alignment'],
 			'eael_product_action_buttons_preset' => $settings['eael_product_action_buttons_preset'],
 			'eael_product_grid_quick_view' => $settings['eael_product_grid_quick_view'],
 		];
 
-		$html = '<div class="eael-product-grid ' . $settings['eael_product_grid_style_preset'] . ' ' . $settings['eael_product_grid_layout'] . '" data-layout-mode="' . $settings["eael_product_grid_layout"] . '">';
+		$html = '<div class="eael-product-grid ' . $settings['eael_product_grid_style_preset'] . ' ' . $settings['eael_product_grid_layout'] . '">';
 		$html .= '<div class="woocommerce">';
-		$html .= do_action( 'ea_woo_before_product_loop' );
-		$html .= '<ul class="products">
+		$html .= do_action( 'eael_woo_before_product_loop' );
+		$html .= '<ul class="products" data-layout-mode="' . $settings["eael_product_grid_layout"] . '">
                     ' . self::render_template_( $args, $settings ) . '
                 </ul>';
 
@@ -1996,13 +2063,13 @@ class Product_Grid extends Widget_Base {
             jQuery(document).ready(function($) {
                 jQuery(".eael-product-grid").each(function() {
                     var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>"),
-                        $gallery = $(this);
+                        $gallery = $(this).find( '.products' );
                     $layout_mode = $gallery.data('layout-mode');
 
                     if($layout_mode === 'masonry') {
                         // init isotope
                         var $isotope_gallery = $gallery.isotope({
-                            itemSelector: ".eael-product-grid .product",
+                            itemSelector: ".product",
                             layoutMode: $layout_mode,
                             percentPosition: true
                         });
@@ -2012,22 +2079,11 @@ class Product_Grid extends Widget_Base {
                             $isotope_gallery.isotope("layout");
                         });
 
-                        $('.eael-product-grid .product', $gallery).resize(function() {
+                        $('.product', $gallery).resize(function() {
                             $isotope_gallery.isotope('layout');
                         });
                     }
 
-                    $('.open-popup-link').magnificPopup({
-                        type:'inline',
-                        midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
-                    });
-
-                    $('.eael-action-tooltip').tooltipster({
-                        theme: 'borderless',
-                        animation: 'fade',
-                        delay: 200,
-
-                    });
 
                 });
             });
