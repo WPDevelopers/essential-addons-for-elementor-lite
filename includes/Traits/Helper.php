@@ -2100,6 +2100,8 @@ trait Helper
         $items = array_splice($items, 0, $settings['eael_twitter_feed_post_limit']);
 
         foreach ($items as $item) {
+            $delimeter = strlen($item['full_text']) > $settings['eael_twitter_feed_content_length'] ? '...' : '';
+
             $html .= '<div class="eael-twitter-feed-item ' . $class . '">
 				<div class="eael-twitter-feed-item-inner">
 				    <div class="eael-twitter-feed-item-header clearfix">';
@@ -2121,7 +2123,7 @@ trait Helper
                     $html .= '</div>
                     
                     <div class="eael-twitter-feed-item-content">
-                        <p>' . substr(str_replace(@$item['entities']['urls'][0]['url'], '', $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . '...</p>';
+                        <p>' . substr(str_replace(@$item['entities']['urls'][0]['url'], '', $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . $delimeter . '</p>';
 
                         if ($settings['eael_twitter_feed_show_read_more'] == 'true') {
                             $html .= '<a href="//twitter.com/' . @$item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">Read More <i class="fas fa-angle-double-right"></i></a>';
