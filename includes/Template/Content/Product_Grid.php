@@ -8,16 +8,6 @@ if (!defined('ABSPATH')) {
 
 trait Product_Grid
 {
-	public static $setting_data = [];
-
-	public static function ea_get_woo_product_grid_settings(){
-		return self::$setting_data;
-	}
-
-	public static function ea_set_woo_product_grid_settings($setting){
-		self::$setting_data = $setting;
-	}
-
 	public static function render_template_($args, $settings)
 	{
 		$query = new \WP_Query($args);
@@ -68,15 +58,20 @@ trait Product_Grid
 						<div class="eael-product-wrap">
 							<div class="product-image-wrap">
 								<div class="image-wrap">
-									<?php echo ($product->is_on_sale() ? '<span class="eael-onsale">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '');
-									echo $product->get_image('woocommerce_thumbnail');
+									<?php echo ($product->is_on_sale() ? '<span class="eael-onsale '.$settings['eael_product_sale_badge_preset'].' '.$settings['eael_product_sale_badge_alignment'].'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '');
+									echo $product->get_image($settings['eael_product_grid_image_size']);
 									?>
 								</div>
 								<div class="image-hover-wrap">
 									<?php if($settings['eael_product_grid_style_preset'] == 'eael-product-preset-5'){?>
 										<ul class="icons-wrap block-style">
-											<li class="quick-view"><a href="#test<?php echo $product->get_id(); ?>"
-                                                    class="open-popup-link"><i class="fas fa-eye"></i></a></li>
+											<?php if( $settings['eael_product_grid_quick_view'] == true ){?>
+                                                <li class="quick-view">
+                                                    <a href="#test<?php echo $product->get_id(); ?>" class="open-popup-link">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                </li>
+											<?php } ?>
 											<li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart();
 												?></li>
 											<li class="view-details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
@@ -85,8 +80,13 @@ trait Product_Grid
 										<ul class="icons-wrap block-box-style">
 											<li class="add-to-cart"><?php
 												woocommerce_template_loop_add_to_cart(); ?></li>
-											<li class="quick-view"><a href="#test<?php echo
-												$product->get_id(); ?>" class="open-popup-link"><i class="fas fa-eye"></i></a></li>
+											<?php if( $settings['eael_product_grid_quick_view'] == true ){?>
+                                                <li class="quick-view">
+                                                    <a href="#test<?php echo $product->get_id(); ?>" class="open-popup-link">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                </li>
+											<?php } ?>
 											<li class="view-details"><?php echo '<a href="' . $product->get_permalink
 													() . '"><i class="fas fa-link"></i></a>'; ?></li>
 										</ul>
@@ -94,21 +94,34 @@ trait Product_Grid
 										<ul class="icons-wrap box-style">
 											<li class="add-to-cart"><?php
 												woocommerce_template_loop_add_to_cart(); ?></li>
-											<li class="quick-view"><a href="#test<?php echo
-												$product->get_id(); ?>" class="open-popup-link"><i class="fas fa-eye"></i></a></li>
+											<?php if( $settings['eael_product_grid_quick_view'] == true ){?>
+                                                <li class="quick-view">
+                                                    <a href="#test<?php echo $product->get_id(); ?>" class="open-popup-link">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                </li>
+											<?php } ?>
 											<li class="view-details" title="Details"><?php echo '<a href="' . $product->get_permalink
 													() . '"><i class="fas fa-link"></i></a>'; ?></li>
 										</ul>
 									<?php }
-									self::eael_product_quick_view( $product, $settings );
+									if( $settings['eael_product_grid_quick_view'] == true ){
+										self::eael_product_quick_view( $product, $settings );
+									}
 									?>
 								</div>
 							</div>
 							<div class="product-details-wrap">
-								<?php echo ($settings['eael_product_grid_rating'] != 'yes' ? '' : wc_get_rating_html
+								<?php
+                                if($settings['eael_product_grid_style_preset'] == 'eael-product-preset-7'){
+                                    echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+                                }
+                                echo ($settings['eael_product_grid_rating'] != 'yes' ? '' : wc_get_rating_html
 								($product->get_average_rating(), $product->get_rating_count())); ?>
 								<div class="eael-product-title"><h2><?php echo $product->get_title(); ?></h2></div>
-								<div class="eael-product-price"><?php echo $product->get_price_html(); ?></div>
+								<?php if($settings['eael_product_grid_style_preset'] != 'eael-product-preset-7'){
+									echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+								}?>
 							</div>
 						</div>
 					</li>
@@ -119,9 +132,9 @@ trait Product_Grid
                                 <div class="image-wrap">
 									<?php
                                     echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
-                                        echo ($product->is_on_sale() ? '<span class="eael-onsale style-5">' . __('Sale!',
+                                        echo ($product->is_on_sale() ? '<span class="eael-onsale '.$settings['eael_product_sale_badge_preset'].' '.$settings['eael_product_sale_badge_alignment'].'">' . __('Sale!',
                                                 'essential-addons-for-elementor-lite') . '</span>' : '');
-                                        echo $product->get_image('woocommerce_thumbnail');
+                                        echo $product->get_image($settings['eael_product_grid_image_size']);
                                     echo '</a>';
 									?>
                                 </div>
@@ -129,14 +142,23 @@ trait Product_Grid
                                     <ul class="icons-wrap over-box-style">
                                         <li class="add-to-cart"><?php
                                             woocommerce_template_loop_add_to_cart(); ?></li>
-                                        <li class="quick-view"><a href="#test<?php echo
-                                            $product->get_id(); ?>" class="open-popup-link"><i class="fas fa-eye"></i></a></li>
+	                                    <?php if( $settings['eael_product_grid_quick_view'] == true ){?>
+                                            <li class="quick-view">
+                                                <a href="#test<?php echo $product->get_id(); ?>" class="open-popup-link">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            </li>
+	                                    <?php } ?>
                                     </ul>
-									<?php self::eael_product_quick_view( $product, $settings ); ?>
+									<?php
+									if( $settings['eael_product_grid_quick_view'] == true ){
+										self::eael_product_quick_view( $product, $settings );
+									}
+                                    ?>
                                 </div>
                             </div>
                             <div class="product-details-wrap">
-                                <div class="eael-product-price"><?php echo $product->get_price_html(); ?></div>xaq
+                                <div class="eael-product-price"><?php echo $product->get_price_html(); ?></div>
                                 <div class="eael-product-title">
                                     <?php
                                     echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
@@ -303,7 +325,7 @@ trait Product_Grid
 		if ( '' !== $settings['pagination_next_label'] ) {
 			$args['next_text'] = $settings['pagination_next_label'];
 		}
-		
+
 		$html = '<nav class="eael-woo-pagination">';
 		$html .= paginate_links(
 			apply_filters( 'eael_woo_pagination_args', $args)
@@ -320,32 +342,62 @@ trait Product_Grid
                     <?php
                     echo ($product->is_on_sale() ? '<span class="eael-onsale '.$settings['eael_product_sale_badge_preset'].'">' . __('Sale!',
 		                    'essential-addons-for-elementor-lite') . '</span>' : '');
-                    do_action( 'ea_woo_single_product_image' );
+                    do_action( 'eael_woo_single_product_image' );
                     ?>
                 </div>
                 <div class="eael-product-details-wrap">
-                    <?php do_action( 'ea_woo_single_product_summary' ); ?>
+                    <?php do_action( 'eael_woo_single_product_summary' ); ?>
                 </div>
             </div>
         </div>
 	<?php }
 
+	public function eael_fix_query_offset( &$query ) {
+		if ( ! empty( $query->query_vars['offset_to_fix'] ) ) {
+			if ( $query->is_paged ) {
+				$query->query_vars['offset'] = $query->query_vars['offset_to_fix'] + ( ( $query->query_vars['paged'] - 1 ) * $query->query_vars['posts_per_page'] );
+			} else {
+				$query->query_vars['offset'] = $query->query_vars['offset_to_fix'];
+			}
+		}
+	}
+	/**
+	 * Query Found Posts Fix.
+	 */
+	public function eael_fix_query_found_posts( $found_posts, $query ) {
+		$offset_to_fix = $query->get( 'offset_to_fix' );
+		if ( $offset_to_fix ) {
+			$found_posts -= $offset_to_fix;
+		}
+		return $found_posts;
+	}
+
+	public function eael_avoid_redirect_to_single_page( $value ) {
+		return '';
+	}
+
 	/**
 	 * Added all actions
 	 */
-	public function ea_woo_checkout_add_actions() {
+	public function eael_woo_checkout_add_actions() {
+
+		add_action( 'pre_get_posts', [ $this, 'eael_fix_query_offset' ], 1 );
+		add_filter( 'found_posts', [ $this, 'eael_fix_query_found_posts' ], 1, 2 );
+		add_filter( 'woocommerce_add_to_cart_form_action', array( $this, 'eael_avoid_redirect_to_single_page' ), 10,
+			1 );
+
 		// Image.
-//		add_action( 'ea_woo_single_product_image', 'woocommerce_show_product_sale_flash', 10 );
-		add_action( 'ea_woo_single_product_image', 'woocommerce_show_product_images', 20 );
+//		add_action( 'eael_woo_single_product_image', 'woocommerce_show_product_sale_flash', 10 );
+		add_action( 'eael_woo_single_product_image', 'woocommerce_show_product_images', 20 );
 
 		// Summary.
-		add_action( 'ea_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
-		add_action( 'ea_woo_single_product_summary', 'woocommerce_template_single_rating', 10 );
-		add_action( 'ea_woo_single_product_summary', 'woocommerce_template_single_price', 15 );
-		add_action( 'ea_woo_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
-		add_action( 'ea_woo_single_product_summary', 'woocommerce_template_single_add_to_cart', 25 );
-		add_action( 'ea_woo_single_product_summary', 'woocommerce_template_single_meta', 30 );
+		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
+		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_rating', 10 );
+		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_price', 15 );
+		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_add_to_cart', 25 );
+		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_meta', 30 );
 
-		add_action( 'ea_woo_before_product_loop', 'woocommerce_output_all_notices', 30 );
+		add_action( 'eael_woo_before_product_loop', 'woocommerce_output_all_notices', 30 );
 	}
 }
