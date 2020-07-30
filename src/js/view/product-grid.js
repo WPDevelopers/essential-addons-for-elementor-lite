@@ -7,6 +7,7 @@ var ProductGrid = function($scope, $) {
     });
 
 };
+
 jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-product-grid.default",
