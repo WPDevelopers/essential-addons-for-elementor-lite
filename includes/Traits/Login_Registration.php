@@ -63,7 +63,6 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'You are already logged in', EAEL_TEXTDOMAIN ) );
 			}
-
 			return false;
 		}
 
