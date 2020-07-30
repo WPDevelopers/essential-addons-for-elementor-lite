@@ -2968,7 +2968,7 @@ class Login_Register extends Widget_Base {
 		$this->form_logo     = Group_Control_Image_Size::get_attachment_image_src( $form_logo_id, 'lr_form_logo', $this->ds );
 		$this->form_logo_pos = ! empty( $this->ds['lr_form_logo_position'] ) ? $this->ds['lr_form_logo_position'] : 'inline';
 		?>
-        <div class="eael-login-registration-wrapper">
+        <div class="eael-login-registration-wrapper" data-is-ajax="<?php echo esc_attr($this->get_settings_for_display('enable_ajax')); ?>">
 			<?php
 			$this->print_login_form();
 			$this->print_register_form();
@@ -3106,9 +3106,12 @@ class Login_Register extends Widget_Base {
 									<?php } ?>
 
                                 </div>
-
+                                <div class="eael-form-validation-container">
+		                            <?php $this->print_login_validation_errors(); ?>
+                                </div>
 								<?php
 								$this->print_necessary_hidden_fields( 'login' );
+
 								$this->print_login_validation_errors();
 
 								do_action( 'eael/login-register/before-login-form-close', $this );
@@ -3309,9 +3312,11 @@ class Login_Register extends Widget_Base {
 								<?php } ?>
                             </div>
 
-
+                            <div class="eael-form-validation-container">
+                                <?php $this->print_validation_message(); ?>
+                            </div>
 							<?php
-                            $this->print_validation_message();
+
 							do_action( 'eael/login-register/before-register-form-close', $this);
                             ?>
                         </form>
@@ -3514,17 +3519,11 @@ class Login_Register extends Widget_Base {
 		if ( empty( $errors ) && empty( $success ) ) {
 			return;
 		}
-		?>
-        <div class="eael-registration-validation-container">
-			<?php
-			if ( ! empty( $errors ) && is_array( $errors ) ) {
-				$this->print_registration_errors_message( $errors );
-			} else {
-				$this->print_registration_success_message( $success );
-			}
-			?>
-        </div>
-		<?php
+        if ( ! empty( $errors ) && is_array( $errors ) ) {
+            $this->print_registration_errors_message( $errors );
+        } else {
+            $this->print_registration_success_message( $success );
+        }
 	}
 
 	protected function print_registration_errors_message( $errors ) {
