@@ -20,7 +20,7 @@ class Product_Grid extends Widget_Base {
 	use \Essential_Addons_Elementor\Template\Content\Product_Grid;
 
 	public function get_name() {
-		return 'eael-product-grid';
+		return 'eicon-woocommerce';
 	}
 
 	public function get_title() {
