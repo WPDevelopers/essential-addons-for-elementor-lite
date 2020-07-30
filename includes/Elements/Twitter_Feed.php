@@ -169,9 +169,11 @@ class Twitter_Feed extends Widget_Base
             'eael_twitter_feed_content_length',
             [
                 'label' => esc_html__('Content Length', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
+                'type' => Controls_Manager::NUMBER,
                 'label_block' => false,
-                'default' => '400',
+                'min' => 1,
+                'max' => 400,
+                'default' => 400,
             ]
         );
 
