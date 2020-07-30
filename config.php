@@ -557,11 +557,6 @@ $config = [
 		                'type'    => 'lib',
 		                'context' => 'view',
 	                ],
-	                [
-		                'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/product-grid.min.js',
-		                'type'    => 'self',
-		                'context' => 'view',
-	                ],
                 ],
             ],
         ],
