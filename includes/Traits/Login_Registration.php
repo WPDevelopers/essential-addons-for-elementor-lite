@@ -43,18 +43,34 @@ trait Login_Registration {
 	 * It logs the user in when the login form is submitted normally without AJAX.
 	 */
 	public function log_user_in() {
+		$ajax = wp_doing_ajax();
 		// before even thinking about login, check security and exit early if something is not right.
 		if ( empty( $_POST['eael-login-nonce'] ) ) {
-			return;
+			if ( $ajax ) {
+				wp_send_json_error( __( 'Insecure form submitted without security token', EAEL_TEXTDOMAIN ) );
+			}
+
+			return false;
 		}
 		if ( ! wp_verify_nonce( $_POST['eael-login-nonce'], 'eael-login-action' ) ) {
-			return;
+			if ( $ajax ) {
+				wp_send_json_error( __( 'Security token did not match', EAEL_TEXTDOMAIN ) );
+			}
+
+			return false;
+		}
+		if ( is_user_logged_in() ) {
+			if ( $ajax ) {
+				wp_send_json_error( __( 'You are already logged in', EAEL_TEXTDOMAIN ) );
+			}
+
+			return false;
 		}
 
 		do_action( 'eael/login-register/before-login' );
 
 
-		$widget_id = ! empty( $_POST['widget_id']) ? sanitize_text_field( $_POST['widget_id'] ) :'';
+		$widget_id = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( $_POST['widget_id'] ) : '';
 
 		$user_login = ! empty( $_POST['eael-user-login'] ) ? sanitize_text_field( $_POST['eael-user-login'] ) : '';
 		if ( is_email( $user_login ) ) {
@@ -72,25 +88,39 @@ trait Login_Registration {
 		$user_data   = wp_signon( $credentials );
 
 		if ( is_wp_error( $user_data ) ) {
+			$err_msg = '';
 			if ( isset( $user_data->errors['invalid_email'][0] ) ) {
-				$this->set_transient( 'eael_login_error_'.$widget_id, __( 'Invalid Email. Please check your email or try again with your username.', EAEL_TEXTDOMAIN ) );
-
+				$err_msg = __( 'Invalid Email. Please check your email or try again with your username.', EAEL_TEXTDOMAIN );
 			} elseif ( isset( $user_data->errors['invalid_username'][0] ) ) {
-				$this->set_transient( 'eael_login_error_'.$widget_id, __( 'Invalid Username. Please check your username or try again with your email.', EAEL_TEXTDOMAIN ) );
+				$err_msg = __( 'Invalid Username. Please check your username or try again with your email.', EAEL_TEXTDOMAIN );
 
 			} elseif ( isset( $user_data->errors['incorrect_password'][0] ) ) {
 
-				$this->set_transient( 'eael_login_error_'.$widget_id, __( 'Invalid Password. Please check your password and try again', EAEL_TEXTDOMAIN ) );
+				$err_msg = __( 'Invalid Password. Please check your password and try again', EAEL_TEXTDOMAIN );
 
 			} elseif ( isset( $user_data->errors['empty_password'][0] ) ) {
 
-				$this->set_transient( 'eael_login_error_'.$widget_id, __( 'Empty Password. Please check your password and try again', EAEL_TEXTDOMAIN ) );
-
+				$err_msg = __( 'Empty Password. Please check your password and try again', EAEL_TEXTDOMAIN );
 			}
+
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+
+			$this->set_transient( 'eael_login_error_' . $widget_id, $err_msg );
 		} else {
 			wp_set_current_user( $user_data->ID, $user_login );
 			do_action( 'wp_login', $user_data->user_login, $user_data );
 			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data );
+			if ( $ajax ) {
+				$data = [
+					'message' => __('You are logged in successfully', EAEL_TEXTDOMAIN)
+				];
+				if ( ! empty( $_POST['redirect_to'] ) ) {
+					$data['redirect_to'] = esc_url( $_POST['redirect_to'] );
+				}
+				wp_send_json_success($data);
+			}
 
 			if ( ! empty( $_POST['redirect_to'] ) ) {
 				wp_safe_redirect( esc_url( $_POST['redirect_to'] ) );
@@ -184,7 +214,7 @@ trait Login_Registration {
 
 		// if any error found, abort
 		if ( ! empty( $errors ) ) {
-			$this->set_transient( 'eael_register_errors_'.$widget_id, $errors );
+			$this->set_transient( 'eael_register_errors_' . $widget_id, $errors );
 			wp_safe_redirect( esc_url( $url ) );
 			exit();
 		}
@@ -268,7 +298,7 @@ trait Login_Registration {
 		if ( is_wp_error( $user_id ) ) {
 			// error happened during user creation
 			$errors['user_create'] = __( 'Sorry, something went wrong. User could not be registered.', EAEL_TEXTDOMAIN );
-			$this->set_transient( 'eael_register_errors_'.$widget_id, $errors );
+			$this->set_transient( 'eael_register_errors_' . $widget_id, $errors );
 			wp_safe_redirect( esc_url( $url ) );
 			exit();
 		}
@@ -300,7 +330,7 @@ trait Login_Registration {
 		wp_new_user_notification( $user_id, null, $admin_or_both );
 
 		// success & handle after registration action as defined by user in the widget
-		$this->set_transient( 'eael_register_success_'.$widget_id, 1 );
+		$this->set_transient( 'eael_register_success_' . $widget_id, 1 );
 
 
 		// Handle after registration action
@@ -313,7 +343,7 @@ trait Login_Registration {
 				'remember'      => true,
 			] );
 			// if custom redirect not available then refresh the current page to show admin bar
-			if ( !in_array( 'redirect', $register_actions ) ) {
+			if ( ! in_array( 'redirect', $register_actions ) ) {
 				wp_safe_redirect( esc_url( $url ) );
 				exit();
 			}
