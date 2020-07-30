@@ -2063,28 +2063,31 @@ class Product_Grid extends Widget_Base {
             jQuery(document).ready(function($) {
                 jQuery(".eael-product-grid").each(function() {
                     var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>"),
-                        $gallery = $(this).find( '.products' );
-                    $layout_mode = $gallery.data('layout-mode');
+                        $products = $(this).find( '.products' );
+                    $layout_mode = $products.data('layout-mode');
 
                     if($layout_mode === 'masonry') {
                         // init isotope
-                        var $isotope_gallery = $gallery.isotope({
-                            itemSelector: ".product",
+                        var $isotope_products = $products.isotope({
+                            itemSelector: "li.product",
                             layoutMode: $layout_mode,
                             percentPosition: true
                         });
 
                         // layout gal, while images are loading
-                        $isotope_gallery.imagesLoaded().progress(function() {
-                            $isotope_gallery.isotope("layout");
+                        $isotope_products.imagesLoaded().progress(function() {
+                            $isotope_products.isotope("layout");
                         });
 
-                        $('.product', $gallery).resize(function() {
-                            $isotope_gallery.isotope('layout');
+                        $('li.product', $products).resize(function() {
+                            $isotope_products.isotope('layout');
                         });
                     }
 
-
+                    $('.open-popup-link').magnificPopup({
+                        type:'inline',
+                        midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+                    });
                 });
             });
 
