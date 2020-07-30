@@ -49,14 +49,12 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'Insecure form submitted without security token', EAEL_TEXTDOMAIN ) );
 			}
-
 			return false;
 		}
 		if ( ! wp_verify_nonce( $_POST['eael-login-nonce'], 'eael-login-action' ) ) {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'Security token did not match', EAEL_TEXTDOMAIN ) );
 			}
-
 			return false;
 		}
 		if ( is_user_logged_in() ) {
@@ -132,12 +130,27 @@ trait Login_Registration {
 	 * It register the user in when the registration form is submitted normally without AJAX.
 	 */
 	public function register_user() {
+		$ajax = wp_doing_ajax();
+
 		// validate & sanitize the request data
 		if ( empty( $_POST['eael-register-nonce'] ) ) {
-			return;
+			if ( $ajax ) {
+				wp_send_json_error( __( 'Insecure form submitted without security token', EAEL_TEXTDOMAIN ) );
+			}
+			return false;
 		}
 		if ( ! wp_verify_nonce( $_POST['eael-register-nonce'], 'eael-register-action' ) ) {
-			return;
+			if ( $ajax ) {
+				wp_send_json_error( __( 'Security token did not match', EAEL_TEXTDOMAIN ) );
+			}
+			return false;
+		}
+
+		if ( is_user_logged_in() ) {
+			if ( $ajax ) {
+				wp_send_json_error( __( 'You are already logged in. Logged out to register a new account', EAEL_TEXTDOMAIN ) );
+			}
+			return false;
 		}
 
 		do_action( 'eael/login-register/before-register' );
@@ -151,6 +164,10 @@ trait Login_Registration {
 		// vail early if reg is closed.
 		if ( ! $registration_allowed ) {
 			$errors['registration'] = __( 'Registration is closed on this site', EAEL_TEXTDOMAIN );
+			if ( $ajax ) {
+				wp_send_json_error( $errors['registration'] );
+			}
+
 			$this->set_transient( 'eael_register_errors', $errors );
 			wp_safe_redirect( site_url( 'wp-login.php?registration=disabled' ) );
 			exit();
@@ -213,6 +230,14 @@ trait Login_Registration {
 
 		// if any error found, abort
 		if ( ! empty( $errors ) ) {
+			if ( $ajax ) {
+				$err_msg = '<ol>';
+				foreach ( $errors as $error ) {
+					$err_msg .="<li>{$error}</li>";
+				}
+				$err_msg .='</ol>';
+				wp_send_json_error( $err_msg );
+			}
 			$this->set_transient( 'eael_register_errors_' . $widget_id, $errors );
 			wp_safe_redirect( esc_url( $url ) );
 			exit();
@@ -297,6 +322,9 @@ trait Login_Registration {
 		if ( is_wp_error( $user_id ) ) {
 			// error happened during user creation
 			$errors['user_create'] = __( 'Sorry, something went wrong. User could not be registered.', EAEL_TEXTDOMAIN );
+			if ( $ajax ) {
+				wp_send_json_error( $errors['user_create'] );
+			}
 			$this->set_transient( 'eael_register_errors_' . $widget_id, $errors );
 			wp_safe_redirect( esc_url( $url ) );
 			exit();
@@ -329,7 +357,9 @@ trait Login_Registration {
 		wp_new_user_notification( $user_id, null, $admin_or_both );
 
 		// success & handle after registration action as defined by user in the widget
-		$this->set_transient( 'eael_register_success_' . $widget_id, 1 );
+		if (!$ajax){
+			$this->set_transient( 'eael_register_success_' . $widget_id, 1 );
+		}
 
 
 		// Handle after registration action
@@ -341,6 +371,19 @@ trait Login_Registration {
 				'user_password' => $password,
 				'remember'      => true,
 			] );
+
+
+			if ( $ajax ) {
+				$data = [
+					'message' => __('Your registration completed successfully.', EAEL_TEXTDOMAIN)
+				];
+
+				if ( in_array( 'redirect', $register_actions ) ) {
+					$data['redirect_to'] = $custom_redirect_url;
+				}
+				wp_send_json_success($data);
+			}
+
 			// if custom redirect not available then refresh the current page to show admin bar
 			if ( ! in_array( 'redirect', $register_actions ) ) {
 				wp_safe_redirect( esc_url( $url ) );
@@ -349,6 +392,17 @@ trait Login_Registration {
 		}
 
 		// custom redirect?
+		if ( $ajax ) {
+			$data = [
+				'message' => __('Your registration completed successfully.', EAEL_TEXTDOMAIN)
+			];
+
+			if ( in_array( 'redirect', $register_actions ) ) {
+				$data['redirect_to'] = $custom_redirect_url;
+			}
+			wp_send_json_success($data);
+		}
+
 		if ( in_array( 'redirect', $register_actions ) ) {
 			wp_safe_redirect( $custom_redirect_url );
 			exit();
