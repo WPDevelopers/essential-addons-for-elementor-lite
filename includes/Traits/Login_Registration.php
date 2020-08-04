@@ -31,6 +31,7 @@ trait Login_Registration {
 	public static $email_options = [];
 
 	public function login_or_register_user() {
+
 		// login or register form?
 		if ( isset( $_POST['eael-login-submit'] ) ) {
 			$this->log_user_in();
@@ -65,7 +66,6 @@ trait Login_Registration {
 		}
 
 		do_action( 'eael/login-register/before-login' );
-
 
 		$widget_id = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( $_POST['widget_id'] ) : '';
 
