@@ -118,12 +118,6 @@ $elements = [
                 'demo_link' => 'https://essential-addons.com/elementor/event-calendar/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/event-calendar/',
             ],
-            [
-                'key'   => 'login-register',
-                'title' => __( 'Login | Register Form', 'essential-addons-elementor' ),
-                'demo_link' => 'https://essential-addons.com/elementor/login-register/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/login-register/',
-            ],
         ]
     ],
     'dynamic-content-elements'  => [
@@ -409,7 +403,13 @@ $elements = [
                 'demo_link' => 'https://essential-addons.com/elementor/mailchimp/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/mailchimp/',
                 'is_pro' => true
-            ]
+            ],
+	        [
+		        'key'   => 'login-register',
+		        'title' => __( 'Login | Register Form', 'essential-addons-elementor' ),
+		        'demo_link' => 'https://essential-addons.com/elementor/login-register/',
+		        'doc_link' => 'https://essential-addons.com/elementor/docs/login-register/',
+	        ],
         ]
     ],
     'social-feed-elements'  => [
