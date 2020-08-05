@@ -551,14 +551,6 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                                             '.sprintf("<a id='eael-typeform-get-access' data-link='%s' href='#'>Get Access</a>", esc_url($url)).'
                                             </span>';
                                         }
-                                        //elseif ($item['key'] === 'login-register' && $this->pro_enabled) {
-                                        //    $r_key = get_option('eael_recaptcha_sitekey');
-                                        //    $secret = get_option('eael_recaptcha_secret');
-                                        //    $r_old_val = !empty( $r_key) && !empty( $secret)? "{$r_key}:{$secret}" : ''; //6LdIKa4ZAAAAAMiECImZWsr1WPsUBeWa-B4j9BCx:6LdIKa4ZAAAAAASarePfXqLiB67c89evvUs1awrD
-	                                    //    echo '<span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-title="Recaptcha API keys" data-placeholder="Insert like SiteKey:SecretKey" data-target="#eael_recaptcha_keys">'.__('Settings', 'essential-addons-for-elementor-lite').'</a></span>
-                                        //    <input type="hidden" name="eael_recaptcha_keys" id="eael_recaptcha_keys" class="eael_recaptcha_keys" value="' . esc_attr( $r_old_val) . '">';
-                                        //}
-                                    //@TODO; implement in free later
 
                                     ?>
                                 </p>
