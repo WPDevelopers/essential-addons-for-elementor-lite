@@ -2968,7 +2968,7 @@ class Login_Register extends Widget_Base {
 		$this->form_logo     = Group_Control_Image_Size::get_attachment_image_src( $form_logo_id, 'lr_form_logo', $this->ds );
 		$this->form_logo_pos = ! empty( $this->ds['lr_form_logo_position'] ) ? $this->ds['lr_form_logo_position'] : 'inline';
 		?>
-        <div class="eael-login-registration-wrapper" data-is-ajax="<?php echo esc_attr($this->get_settings_for_display('enable_ajax')); ?>" data-is-recaptcha="<?php echo esc_attr($this->get_settings_for_display('enable_recaptcha')); ?>" data-recaptcha-sitekey="<?php echo esc_attr(get_option('eael_recaptcha_sitekey')); ?>" >
+        <div class="eael-login-registration-wrapper" data-is-ajax="<?php echo esc_attr($this->get_settings_for_display('enable_ajax')); ?>" >
 			<?php
 			$this->print_login_form();
 			$this->print_register_form();
