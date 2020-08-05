@@ -1,4 +1,4 @@
-jQuery(window).on("elementor/frontend/init", function () {
+ea.hooks.addAction("init", "ea", () => {
     const EALoginRegister = function ($scope, $) {
         const $loginFormWrapper = $scope.find("#eael-login-form-wrapper");
         const $regFormWrapper = $scope.find("#eael-register-form-wrapper");
