@@ -829,6 +829,25 @@ $config = [
                 ],
             ],
         ],
+        'login-register'             => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Login_Register',
+	        'dependency' => [
+		        'css' => [
+			        [
+				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/login-register.min.css',
+				        'type'    => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+		        'js'  => [
+			        [
+				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/login-register.min.js',
+				        'type'    => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+	        ],
+        ],
     ],
     'extensions' => [
         'eael-promotion'        => [

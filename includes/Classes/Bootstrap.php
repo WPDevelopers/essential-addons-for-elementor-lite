@@ -7,18 +7,29 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use Essential_Addons_Elementor\Classes\WPDeveloper_Dashboard_Widget;
+use Essential_Addons_Elementor\Classes\WPML\Eael_WPML;
+use Essential_Addons_Elementor\Traits\Admin;
+use Essential_Addons_Elementor\Traits\Core;
+use Essential_Addons_Elementor\Traits\Elements;
+use Essential_Addons_Elementor\Traits\Enqueue;
+use Essential_Addons_Elementor\Traits\Generator;
+use Essential_Addons_Elementor\Traits\Helper;
+use Essential_Addons_Elementor\Traits\Library;
+use Essential_Addons_Elementor\Traits\Login_Registration;
+use Essential_Addons_Elementor\Traits\Shared;
 
 class Bootstrap
 {
-    use \Essential_Addons_Elementor\Traits\Library;
-    use \Essential_Addons_Elementor\Traits\Shared;
-    use \Essential_Addons_Elementor\Traits\Core;
-    use \Essential_Addons_Elementor\Traits\Helper;
-    use \Essential_Addons_Elementor\Traits\Generator;
-    use \Essential_Addons_Elementor\Traits\Enqueue;
-    use \Essential_Addons_Elementor\Traits\Admin;
-    use \Essential_Addons_Elementor\Traits\Elements;
-    use \Essential_Addons_Elementor\Classes\WPML\Eael_WPML;
+    use Library;
+    use Shared;
+    use Core;
+    use Helper;
+    use Generator;
+    use Enqueue;
+    use Admin;
+    use Elements;
+    use Eael_WPML;
+    use Login_Registration;
 
     // instance container
     private static $instance = null;
@@ -130,6 +141,9 @@ class Bootstrap
         add_filter('eael/event-calendar/source', [$this, 'eael_event_calendar_source']);
         add_action('eael/advanced-data-table/source/control', [$this, 'advanced_data_table_source_control']);
         add_filter('eael/advanced-data-table/table_html/integration/ninja', [$this, 'advanced_data_table_ninja_integration'], 10, 1);
+        add_action( 'init', [ $this, 'login_or_register_user'] ); //@TODO; add AJAX later
+	    add_filter( 'wp_new_user_notification_email', array( $this, 'new_user_notification_email' ), 10, 3 );
+	    add_filter( 'wp_new_user_notification_email_admin', array( $this, 'new_user_notification_email_admin' ), 10, 3 );
 
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'eael_toc_rank_math_support']);

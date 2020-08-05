@@ -29,7 +29,7 @@ define('EAEL_PLUGIN_URL', trailingslashit(plugins_url('/', __FILE__)));
 define('EAEL_PLUGIN_VERSION', '4.1.2');
 define('EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . '/essential-addons-elementor');
 define('EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-elementor');
-
+define('EAEL_TEXTDOMAIN', 'essential-addons-for-elementor-lite');
 /**
  * Including composer autoloader globally.
  *

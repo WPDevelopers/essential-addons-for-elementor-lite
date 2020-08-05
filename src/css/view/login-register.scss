@@ -1,0 +1,406 @@
+/*------------------------------*/
+/* Login Register
+/*------------------------------*/
+/*-----General---*/
+$sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
+
+@each $size in $sizes {
+    .eael-w-#{$size} {
+        width: $size * 1%;
+    }
+}
+
+.d-none {
+    display: none;
+}
+.d-ib {
+    display: inline-block;
+}
+.mr-auto {
+    margin-right: auto;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.fd-row {
+    flex-direction: row;
+}
+
+.fd-col {
+    flex-direction: column;
+}
+
+/*-----Form Specific---*/
+.eael-lr-form-wrapper {
+    width: 370px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0 0 37.5px 14px rgba(2, 8, 53, .06);
+
+    &.style-2 {
+        //width: 65%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        padding: 0;
+        border-radius: 0;
+
+
+        @media (max-width: 767px) {
+            flex-direction: column;
+        }
+
+        .lr-form-illustration {
+            width: 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            z-index: 1;
+
+            @media (max-width: 767px) {
+                //width: 100%;
+                padding-bottom: 200px;
+            }
+        }
+
+        .lr-form-wrapper {
+            padding: 35px;
+            width: 370px;
+        }
+    }
+
+    .eael-lr-form-group {
+        margin-bottom: 1rem;
+
+        label {
+            display: inline-block;
+            margin-bottom: .5rem;
+
+            &.mark-required {
+                position: relative;
+            }
+
+            &.mark-required::after {
+                content: ' *';
+                color: #ff0000;
+                position: absolute;
+                line-height: 0;
+                top: 17px;
+                right: -10px;
+            }
+        }
+
+        .eael-lr-form-control {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #cfcfe8;
+            border-radius: 3px;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            outline: none;
+        }
+    }
+
+    .eael-forever-forget {
+        display: flex;
+        font-size: .9em;
+
+        .forget-menot {
+            display: flex;
+            align-items: center;
+            label {
+                margin: 0 0 0 10px;
+            }
+        }
+        .forget-menot, .forget-pass {
+            flex: 1;
+            margin: 0;
+        }
+
+        .forget-pass {
+            text-align: right;
+        }
+    }
+
+    .eael-lr-password-wrapper {
+        position: relative;
+
+        button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            background: transparent;
+            border: none;
+            color: red;
+        }
+    }
+
+    .eael-lr-btn{
+        background-color: #744ffb;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        vertical-align: top;
+        text-decoration: none;
+        border: none;
+        transition: all .2s;
+        padding: 15px;
+        width: 130px;
+        &.eael-lr-btn-block {
+            display: block;
+            //width: 100%;
+        }
+
+        &.eael-lr-btn-inline {
+            display: inline-block;
+        }
+    }
+    .eael-lr-link{
+        display: inline-block;
+    }
+
+
+    .eael-sign-wrapper {
+        text-align: center;
+        padding: 20px 0 0;
+    }
+
+    .lr-form-header {
+        &.header-inline {
+            display: flex;
+
+            .form-logo {
+                flex: 0 0 30%;
+            }
+
+            .form-dsc {
+                flex: 0 0 70%;
+                padding-left: 15px;
+            }
+
+        }
+
+        img {
+            width: 100px;
+        }
+
+        h4 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-top: 0;
+        }
+
+        p {
+            font-size: 14px;
+        }
+    }
+
+    .eael-form-msg {
+        display: block;
+        width: 100%;
+        margin-top: 1rem;
+        font-size: 1rem;
+        padding: 10px 15px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+
+        &.invalid {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-left: 3px solid red;
+        }
+
+        &.valid {
+            color: #155724;
+            background-color: #d4edda;
+            border-left: 3px solid green;
+        }
+    }
+
+    ul, ol, .eael-form-msg ul, .eael-form-msg ol {
+        margin: 0;
+        padding-left: 30px;
+
+        li:not(:last-child) {
+            padding-bottom: 10px;
+        }
+    }
+
+    .eael_accept_tnc_wrap {
+        display: flex;
+        margin-bottom: 1rem;
+
+        .eael-lr-tnc-link {
+            margin-top: -3px;
+            margin-left: 5px;
+            display: inline-block;
+        }
+    }
+
+    .eael-lr-footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @supports (-webkit-appearance: none) or (-moz-appearance: none) {
+        input[type='checkbox'] {
+            --active: #275EFE;
+            --active-inner: #fff;
+            --focus: 0;
+            //--focus: 2px rgba(39, 94, 254, .3);
+            --border: #b7b7b7;
+            --border-hover: var(--active);
+            --background: #fff;
+            --disabled: #F6F8FF;
+            --disabled-inner: #E1E6F9;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            height: 18px;
+            outline: none;
+            display: inline-block;
+            vertical-align: top;
+            position: relative;
+            top: 2px;
+            margin: 0;
+            cursor: pointer;
+            border: 2px solid var(--bc, var(--border));
+            background: var(--b, var(--background));
+            transition: background .3s, border-color .3s, box-shadow .2s;
+
+            &:after {
+                content: '';
+                display: block;
+                left: 0;
+                top: 0;
+                position: absolute;
+                transition: transform var(--d-t, .3s) var(--d-t-e, ease), opacity var(--d-o, .2s);
+            }
+
+            &:before {
+                content: none;
+            }
+
+            &:checked {
+                --b: var(--active);
+                --bc: var(--active);
+                --d-o: .3s;
+                --d-t: .6s;
+                --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+
+                &:before {
+                    content: none;
+                }
+            }
+
+            &:disabled {
+                --b: var(--disabled);
+                cursor: not-allowed;
+                opacity: .9;
+
+                &:checked {
+                    --b: var(--disabled-inner);
+                    --bc: var(--border);
+                }
+
+                & + label {
+                    cursor: not-allowed;
+                }
+            }
+
+            &:hover {
+                &:not(:checked) {
+                    &:not(:disabled) {
+                        --bc: var(--border-hover);
+                    }
+                }
+            }
+
+            &:focus {
+                box-shadow: 0 0 0 var(--focus);
+            }
+
+            &:not(#eael_accept_tnc) {
+                width: 18px;
+
+                &:after {
+                    opacity: var(--o, 0);
+                }
+
+                &:checked {
+                    --o: 1;
+                }
+            }
+
+            & + label {
+                font-size: 14px;
+                line-height: 21px;
+                display: inline-block;
+                vertical-align: top;
+                cursor: pointer;
+                margin-left: 4px;
+            }
+        }
+        input[type='checkbox'] {
+            &:not(#eael_accept_tnc) {
+                border-radius: 3px;
+
+                &:after {
+                    width: 5px;
+                    height: 9px;
+                    border: 2px solid var(--active-inner);
+                    border-top: 0;
+                    border-left: 0;
+                    left: 5px;
+                    top: 1px;
+                    transform: rotate(var(--r, 20deg));
+                }
+
+                &:checked {
+                    --r: 43deg;
+                }
+            }
+
+            &#eael_accept_tnc {
+                width: 31px;
+                border-radius: 11px;
+                border-width: 1px;
+
+                &:after {
+                    left: 2px;
+                    top: 2px;
+                    border-radius: 50%;
+                    width: 12px;
+                    height: 12px;
+                    background: var(--ab, var(--border));
+                    transform: translateX(var(--x, 0));
+                }
+
+                &:checked {
+                    --ab: var(--active-inner);
+                    --x: 13px;
+                }
+
+                &:disabled {
+                    &:not(:checked) {
+                        &:after {
+                            opacity: .6;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
