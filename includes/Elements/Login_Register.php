@@ -144,7 +144,7 @@ class Login_Register extends Widget_Base {
 
 	public function get_custom_help_url()
 	{
-		return 'https://essential-addons.com/elementor/docs/login-register/';
+		return 'https://essential-addons.com/elementor/docs/login-register-form/';
 	}
 
 	/**
