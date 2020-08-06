@@ -275,9 +275,11 @@
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .eael-lr-form-wrapper .eael_accept_tnc_wrap .eael-lr-tnc-link {
-  margin-top: -3px;
   margin-left: 5px;
   display: inline-block;
 }
