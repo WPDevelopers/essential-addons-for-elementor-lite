@@ -283,6 +283,9 @@
   margin-left: 5px;
   display: inline-block;
 }
+.eael-lr-form-wrapper .eael-recaptcha-wrapper {
+  margin-bottom: 1rem;
+}
 .eael-lr-form-wrapper .eael-lr-footer {
   display: -webkit-box;
   display: -ms-flexbox;
