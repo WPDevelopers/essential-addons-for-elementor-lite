@@ -406,9 +406,9 @@ $elements = [
             ],
 	        [
 		        'key'   => 'login-register',
-		        'title' => __( 'Login | Register Form', 'essential-addons-elementor' ),
-		        'demo_link' => 'https://essential-addons.com/elementor/login-register/',
-		        'doc_link' => 'https://essential-addons.com/elementor/docs/login-register/',
+		        'title' => __( 'Login Register Form', 'essential-addons-elementor' ),
+		        'demo_link' => 'https://essential-addons.com/elementor/login-register-form',
+		        'doc_link' => 'https://essential-addons.com/elementor/docs/login-register-form/',
 	        ],
         ]
     ],
@@ -578,6 +578,10 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                     <?php } ?>
                 </div>
             <?php endforeach; ?>
+
+            <!-- hidden input -->
+            <input type="hidden" name="embedpress" value="on">
+            <input type="hidden" name="woocommerce-review" value="on">
 
             <div class="eael-save-btn-wrap">
                 <button type="submit" class="button eael-btn js-eael-settings-save"><?php esc_html_e('Save settings', 'essential-addons-for-elementor-lite'); ?></button>
