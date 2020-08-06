@@ -19,7 +19,7 @@ class Woocommerce_Review extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eaicon-woocommerce-review';
+		return 'eaicon-reviewx';
 	}
 
    	public function get_categories() {
