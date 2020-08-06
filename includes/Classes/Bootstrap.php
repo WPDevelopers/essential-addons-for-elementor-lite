@@ -48,7 +48,7 @@ class Bootstrap
 
     // loaded templates in a request
     public $loaded_templates = [];
-    
+
     // loaded widgets in a request
     public $loaded_widgets = [];
 
@@ -141,10 +141,10 @@ class Bootstrap
         add_filter('eael/event-calendar/source', [$this, 'eael_event_calendar_source']);
         add_action('eael/advanced-data-table/source/control', [$this, 'advanced_data_table_source_control']);
         add_filter('eael/advanced-data-table/table_html/integration/ninja', [$this, 'advanced_data_table_ninja_integration'], 10, 1);
-        add_action( 'init', [ $this, 'login_or_register_user'] ); //@TODO; add AJAX later
+        // Login | Register
+        add_action( 'init', [ $this, 'login_or_register_user'] );
 	    add_filter( 'wp_new_user_notification_email', array( $this, 'new_user_notification_email' ), 10, 3 );
 	    add_filter( 'wp_new_user_notification_email_admin', array( $this, 'new_user_notification_email_admin' ), 10, 3 );
-
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'eael_toc_rank_math_support']);
 

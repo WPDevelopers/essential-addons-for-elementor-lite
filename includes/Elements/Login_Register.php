@@ -83,6 +83,11 @@ class Login_Register extends Widget_Base {
 	 * @var mixed|string
 	 */
 	protected $form_logo_pos;
+	/**
+	 * Google Recaptcha Site key
+	 * @var string|false
+	 */
+	protected $recaptcha_sitekey;
 
 	/**
 	 * Login_Register constructor.
@@ -92,8 +97,17 @@ class Login_Register extends Widget_Base {
 	public function __construct( $data = [], $args = null ) {
 		parent::__construct( $data, $args );
 		$this->user_can_register = get_option( 'users_can_register' );
+		$this->recaptcha_sitekey = get_option( 'eael_recaptcha_sitekey' );
 		$this->in_editor         = Plugin::instance()->editor->is_edit_mode();
+
 	}
+
+	//public function get_script_depends() {
+	//	$scripts = parent::get_script_depends();
+	//	//$scripts[] = 'eael-recaptcha'; //@TODO; debug later why this does not let recaptcha work on editor.
+	//	return $scripts;
+	//}
+
 
 	/**
 	 * @inheritDoc
@@ -147,8 +161,7 @@ class Login_Register extends Widget_Base {
 		];
 	}
 
-	public function get_custom_help_url()
-	{
+	public function get_custom_help_url() {
 		return 'https://essential-addons.com/elementor/docs/login-register/';
 	}
 
@@ -366,6 +379,24 @@ class Login_Register extends Widget_Base {
 				'separator' => 'before',
 			] );
 		}
+		$this->add_control( 'enable_login_recaptcha', [
+			'label'        => __( 'Enable Google Recaptcha', EAEL_TEXTDOMAIN ),
+			'description'  => __( 'Recaptcha will prevent spam login from bots.', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', EAEL_TEXTDOMAIN ),
+			'label_off'    => __( 'No', EAEL_TEXTDOMAIN ),
+			'return_value' => 'yes',
+		] );
+		if ( empty( $this->recaptcha_sitekey ) ) {
+			$this->add_control( 'eael_login_recaptcha_keys_missing', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => sprintf( __( 'Recaptcha API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', EAEL_TEXTDOMAIN ), '<strong>', '</strong>' ),
+				'content_classes' => 'eael-warning',
+				'condition'       => [
+					'enable_login_recaptcha' => 'yes',
+				],
+			] );
+		}
 		$this->end_popover();
 
 
@@ -426,7 +457,26 @@ class Login_Register extends Widget_Base {
 					'show_login_link'   => 'yes',
 				],
 			] );
+			$this->add_control( 'enable_register_recaptcha', [
+				'label'        => __( 'Enable Google Recaptcha', EAEL_TEXTDOMAIN ),
+				'description'  => __( 'Recaptcha will prevent spam registration from bots.', EAEL_TEXTDOMAIN ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', EAEL_TEXTDOMAIN ),
+				'label_off'    => __( 'No', EAEL_TEXTDOMAIN ),
+				'return_value' => 'yes',
+			] );
+			if ( empty( $this->recaptcha_sitekey ) ) {
+				$this->add_control( 'eael_recaptcha_keys_missing', [
+					'type'            => Controls_Manager::RAW_HTML,
+					'raw'             => sprintf( __( 'Recaptcha API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', EAEL_TEXTDOMAIN ), '<strong>', '</strong>' ),
+					'content_classes' => 'eael-warning',
+					'condition'       => [
+						'enable_register_recaptcha' => 'yes',
+					],
+				] );
+			}
 			$this->end_popover();
+
 		} else {
 			$this->add_control( 'show_login_link', [
 				'label'   => __( 'Show Login Link', EAEL_TEXTDOMAIN ),
@@ -2967,13 +3017,32 @@ class Login_Register extends Widget_Base {
 		$form_logo_id        = ! empty( $this->ds['lr_form_logo']['id'] ) ? $this->ds['lr_form_logo']['id'] : '';
 		$this->form_logo     = Group_Control_Image_Size::get_attachment_image_src( $form_logo_id, 'lr_form_logo', $this->ds );
 		$this->form_logo_pos = ! empty( $this->ds['lr_form_logo_position'] ) ? $this->ds['lr_form_logo_position'] : 'inline';
+		$is_recaptcha        = $this->get_settings_for_display( 'enable_recaptcha' );
 		?>
-        <div class="eael-login-registration-wrapper" data-is-ajax="<?php echo esc_attr($this->get_settings_for_display('enable_ajax')); ?>" >
+        <div class="eael-login-registration-wrapper" data-is-ajax="<?php echo esc_attr( $this->get_settings_for_display( 'enable_ajax' ) ); ?>" data-is-recaptcha="<?php echo esc_attr( $is_recaptcha ); ?>" data-recaptcha-sitekey="<?php echo esc_attr( get_option( 'eael_recaptcha_sitekey' ) ); ?>">
 			<?php
 			$this->print_login_form();
 			$this->print_register_form();
 			?>
         </div>
+        <script type="text/javascript">
+            function onloadLRcb() {
+                var loginRecaptchaNode = document.getElementById('login-recaptcha-node-<?php echo esc_attr( $this->get_id() ); ?>');
+                var registerRecaptchaNode = document.getElementById('register-recaptcha-node-<?php echo esc_attr( $this->get_id() ); ?>');
+
+                if (loginRecaptchaNode) {
+                    grecaptcha.render(loginRecaptchaNode, {
+                        'sitekey': '<?php echo esc_js( $this->recaptcha_sitekey ); ?>',
+                    });
+                }
+                if (registerRecaptchaNode) {
+                    grecaptcha.render(registerRecaptchaNode, {
+                        'sitekey': '<?php echo esc_js( $this->recaptcha_sitekey ); ?>',
+                    });
+                }
+            }
+        </script>
+        <script src="https://www.google.com/recaptcha/api.js?onload=onloadLRcb&render=explicit"></script>
 		<?php
 	}
 
@@ -3097,8 +3166,11 @@ class Login_Register extends Widget_Base {
 									} ?>
 
                                 </div>
+								<?php $this->print_recaptcha_node( 'login' ); ?>
+
+
                                 <div class="eael-lr-footer">
-                                    <input type="submit" name="eael-login-submit" id="eael-login-submit" class="eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>" value="<?php echo esc_attr( $btn_text ); ?>"/>
+                                    <input type="submit" name="eael-login-submit" id="eael-login-submit" class="g-recaptcha eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>" value="<?php echo esc_attr( $btn_text ); ?>"/>
 									<?php if ( $show_reg_link ) { ?>
                                         <div class="eael-sign-wrapper <?php echo esc_attr( $link_align ); ?>">
 											<?php echo $reg_link; // XSS ok. already escaped ?>
@@ -3107,7 +3179,7 @@ class Login_Register extends Widget_Base {
 
                                 </div>
                                 <div class="eael-form-validation-container">
-		                            <?php $this->print_login_validation_errors(); ?>
+									<?php $this->print_login_validation_errors(); ?>
                                 </div>
 								<?php
 								$this->print_necessary_hidden_fields( 'login' );
@@ -3126,6 +3198,7 @@ class Login_Register extends Widget_Base {
 					}
 					?>
                 </div>
+
             </section>
 			<?php
 		}
@@ -3196,7 +3269,7 @@ class Login_Register extends Widget_Base {
 						do_action( 'eael/login-register/before-register-form', $this );
 						?>
                         <form class="eael-register-form eael-lr-form" id="eael-register-form" method="post">
-	                        <?php do_action( 'eael/login-register/after-register-form-open', $this); ?>
+							<?php do_action( 'eael/login-register/after-register-form-open', $this ); ?>
 							<?php // Print all dynamic fields
 							foreach ( $this->ds['register_fields'] as $f_index => $field ) :
 								$field_type = $field['field_type'];
@@ -3302,6 +3375,7 @@ class Login_Register extends Widget_Base {
 							endforeach;
 							$this->print_necessary_hidden_fields( 'register' );
 							$this->print_terms_condition_notice();
+							$this->print_recaptcha_node( 'register' );
 							?>
                             <div class="eael-lr-footer">
                                 <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn eael-lr-btn-block<?php echo esc_attr( $btn_align ); ?>" value="<?php echo esc_attr( $btn_text ); ?>"/>
@@ -3313,14 +3387,14 @@ class Login_Register extends Widget_Base {
                             </div>
 
                             <div class="eael-form-validation-container">
-                                <?php $this->print_validation_message(); ?>
+								<?php $this->print_validation_message(); ?>
                             </div>
 							<?php
 
-							do_action( 'eael/login-register/before-register-form-close', $this);
-                            ?>
+							do_action( 'eael/login-register/before-register-form-close', $this );
+							?>
                         </form>
-	                    <?php do_action( 'eael/login-register/after-register-form', $this); ?>
+						<?php do_action( 'eael/login-register/after-register-form', $this ); ?>
                     </div>
 					<?php if ( 'right' === $this->form_illustration_pos ) {
 						$this->print_form_illustration();
@@ -3328,7 +3402,7 @@ class Login_Register extends Widget_Base {
                 </div>
             </section>
 			<?php
-			$form_markup = apply_filters('eael/login-register/register-form-markup', ob_get_clean());
+			$form_markup = apply_filters( 'eael/login-register/register-form-markup', ob_get_clean() );
 			// if we are in the editor then show error related to different input field.
 			if ( $this->in_editor ) {
 				$repeated            = $this->print_error_for_repeated_fields( $repeated_f_labels );
@@ -3456,6 +3530,13 @@ class Login_Register extends Widget_Base {
 		}
 	}
 
+	protected function print_recaptcha_node( $form_type = 'login' ) {
+		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) ) {
+			$id = "{$form_type}-recaptcha-node-" . $this->get_id();
+			echo "<input type='hidden' name='g-recaptcha-enabled' value='1'/><div id='{$id}'></div>";
+		}
+	}
+
 	protected function print_error_for_repeated_fields( $repeated_fields ) {
 		if ( ! empty( $repeated_fields ) ) {
 			$error_fields = '<strong>' . implode( "</strong>, <strong>", $repeated_fields ) . '</strong>';
@@ -3519,11 +3600,11 @@ class Login_Register extends Widget_Base {
 		if ( empty( $errors ) && empty( $success ) ) {
 			return;
 		}
-        if ( ! empty( $errors ) && is_array( $errors ) ) {
-            $this->print_registration_errors_message( $errors );
-        } else {
-            $this->print_registration_success_message( $success );
-        }
+		if ( ! empty( $errors ) && is_array( $errors ) ) {
+			$this->print_registration_errors_message( $errors );
+		} else {
+			$this->print_registration_success_message( $success );
+		}
 	}
 
 	protected function print_registration_errors_message( $errors ) {
