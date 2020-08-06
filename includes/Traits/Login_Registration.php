@@ -50,24 +50,36 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'Insecure form submitted without security token', EAEL_TEXTDOMAIN ) );
 			}
+
 			return false;
 		}
 		if ( ! wp_verify_nonce( $_POST['eael-login-nonce'], 'eael-login-action' ) ) {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'Security token did not match', EAEL_TEXTDOMAIN ) );
 			}
+
 			return false;
 		}
 		if ( is_user_logged_in() ) {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'You are already logged in', EAEL_TEXTDOMAIN ) );
 			}
+
 			return false;
 		}
 
 		do_action( 'eael/login-register/before-login' );
 
 		$widget_id = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( $_POST['widget_id'] ) : '';
+		if ( isset( $_POST['g-recaptcha-enabled'] ) && ! $this->lr_validate_recaptcha() ) {
+			$err_msg = __( 'You did not pass recaptcha challenge.', EAEL_TEXTDOMAIN );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			$this->set_transient( 'eael_login_error_' . $widget_id, $err_msg );
+
+			return false; // vail early if recaptcha failed
+		}
 
 		$user_login = ! empty( $_POST['eael-user-login'] ) ? sanitize_text_field( $_POST['eael-user-login'] ) : '';
 		if ( is_email( $user_login ) ) {
@@ -111,12 +123,12 @@ trait Login_Registration {
 			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data );
 			if ( $ajax ) {
 				$data = [
-					'message' => __('You are logged in successfully', EAEL_TEXTDOMAIN)
+					'message' => __( 'You are logged in successfully', EAEL_TEXTDOMAIN ),
 				];
 				if ( ! empty( $_POST['redirect_to'] ) ) {
 					$data['redirect_to'] = esc_url( $_POST['redirect_to'] );
 				}
-				wp_send_json_success($data);
+				wp_send_json_success( $data );
 			}
 
 			if ( ! empty( $_POST['redirect_to'] ) ) {
@@ -137,12 +149,14 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'Insecure form submitted without security token', EAEL_TEXTDOMAIN ) );
 			}
+
 			return false;
 		}
 		if ( ! wp_verify_nonce( $_POST['eael-register-nonce'], 'eael-register-action' ) ) {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'Security token did not match', EAEL_TEXTDOMAIN ) );
 			}
+
 			return false;
 		}
 
@@ -150,6 +164,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'You are already logged in. Logged out to register a new account', EAEL_TEXTDOMAIN ) );
 			}
+
 			return false;
 		}
 
@@ -187,6 +202,9 @@ trait Login_Registration {
 
 		if ( isset( $_POST['eael_tnc_active'] ) && empty( $_POST['eael_accept_tnc'] ) ) {
 			$errors['terms_conditions'] = __( 'You did not accept the Terms and Conditions. Please accept it and try again.', EAEL_TEXTDOMAIN );
+		}
+		if ( isset( $_POST['g-recaptcha-enabled'] ) && ! $this->lr_validate_recaptcha() ) {
+			$errors['recaptcha'] = __( 'You did not pass recaptcha challenge.', EAEL_TEXTDOMAIN );
 		}
 
 		if ( ! empty( $_POST['email'] ) && is_email( $_POST['email'] ) ) {
@@ -233,9 +251,9 @@ trait Login_Registration {
 			if ( $ajax ) {
 				$err_msg = '<ol>';
 				foreach ( $errors as $error ) {
-					$err_msg .="<li>{$error}</li>";
+					$err_msg .= "<li>{$error}</li>";
 				}
-				$err_msg .='</ol>';
+				$err_msg .= '</ol>';
 				wp_send_json_error( $err_msg );
 			}
 			$this->set_transient( 'eael_register_errors_' . $widget_id, $errors );
@@ -357,7 +375,7 @@ trait Login_Registration {
 		wp_new_user_notification( $user_id, null, $admin_or_both );
 
 		// success & handle after registration action as defined by user in the widget
-		if (!$ajax){
+		if ( ! $ajax ) {
 			$this->set_transient( 'eael_register_success_' . $widget_id, 1 );
 		}
 
@@ -375,13 +393,13 @@ trait Login_Registration {
 
 			if ( $ajax ) {
 				$data = [
-					'message' => __('Your registration completed successfully.', EAEL_TEXTDOMAIN)
+					'message' => __( 'Your registration completed successfully.', EAEL_TEXTDOMAIN ),
 				];
 
 				if ( in_array( 'redirect', $register_actions ) ) {
 					$data['redirect_to'] = $custom_redirect_url;
 				}
-				wp_send_json_success($data);
+				wp_send_json_success( $data );
 			}
 
 			// if custom redirect not available then refresh the current page to show admin bar
@@ -394,13 +412,13 @@ trait Login_Registration {
 		// custom redirect?
 		if ( $ajax ) {
 			$data = [
-				'message' => __('Your registration completed successfully.', EAEL_TEXTDOMAIN)
+				'message' => __( 'Your registration completed successfully.', EAEL_TEXTDOMAIN ),
 			];
 
 			if ( in_array( 'redirect', $register_actions ) ) {
 				$data['redirect_to'] = $custom_redirect_url;
 			}
-			wp_send_json_success($data);
+			wp_send_json_success( $data );
 		}
 
 		if ( in_array( 'redirect', $register_actions ) ) {
@@ -609,4 +627,32 @@ trait Login_Registration {
 
 		return preg_replace( $placeholders, $replacement, $message );
 	}
+
+	public function lr_validate_recaptcha() {
+		if ( ! isset( $_REQUEST['g-recaptcha-response'] ) ) {
+			return false;
+		}
+		$endpoint = 'https://www.google.com/recaptcha/api/siteverify';
+		$data     = [
+			'secret'   => get_option( 'eael_recaptcha_secret' ),
+			'response' => $_REQUEST['g-recaptcha-response'],
+			'ip'       => $_SERVER['REMOTE_ADDR'],
+		];
+
+		$res = json_decode( wp_remote_retrieve_body( wp_remote_post( $endpoint, [ 'body' => $data ] ) ), 1 );
+		if ( isset( $res['success'] ) ) {
+			return $res['success'];
+		}
+
+		return false;
+	}
+
+	public function lr_enqueue_scripts() {
+		$version = defined( 'WP_DEBUG' ) ? time() : EAEL_PLUGIN_VERSION; // stop cache on debug mode
+		if ( $site_key = get_option( 'eael_recaptcha_sitekey' ) ) {
+			wp_register_script( 'eael-recaptcha', "https://www.google.com/recaptcha/api.js?onload=onloadLRcb&render=explicit", false, // @TODO; load after our script handle, find that id later.
+				$version, true );
+		}
+	}
+
 }
