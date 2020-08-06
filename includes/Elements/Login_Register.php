@@ -3025,25 +3025,9 @@ class Login_Register extends Widget_Base {
 			$this->print_register_form();
 			?>
         </div>
-        <script type="text/javascript">
-            function onloadLRcb() {
-                var loginRecaptchaNode = document.getElementById('login-recaptcha-node-<?php echo esc_attr( $this->get_id() ); ?>');
-                var registerRecaptchaNode = document.getElementById('register-recaptcha-node-<?php echo esc_attr( $this->get_id() ); ?>');
 
-                if (loginRecaptchaNode) {
-                    grecaptcha.render(loginRecaptchaNode, {
-                        'sitekey': '<?php echo esc_js( $this->recaptcha_sitekey ); ?>',
-                    });
-                }
-                if (registerRecaptchaNode) {
-                    grecaptcha.render(registerRecaptchaNode, {
-                        'sitekey': '<?php echo esc_js( $this->recaptcha_sitekey ); ?>',
-                    });
-                }
-            }
-        </script>
-        <script src="https://www.google.com/recaptcha/api.js?onload=onloadLRcb&render=explicit"></script>
-		<?php
+        <?php
+        $this->print_recaptcha_script();
 	}
 
 	protected function print_login_form() {
@@ -3530,6 +3514,29 @@ class Login_Register extends Widget_Base {
 		}
 	}
 
+	protected function print_recaptcha_script() {
+		if ( !empty( $this->recaptcha_sitekey) ) { ?>
+            <script type="text/javascript">
+                function onloadLRcb() {
+                    var loginRecaptchaNode = document.getElementById('login-recaptcha-node-<?php echo  $this->get_id(); ?>');
+                    var registerRecaptchaNode = document.getElementById('register-recaptcha-node-<?php echo  $this->get_id(); ?>');
+
+                    if (loginRecaptchaNode) {
+                        grecaptcha.render(loginRecaptchaNode, {
+                            'sitekey': '<?php echo esc_js( $this->recaptcha_sitekey ); ?>',
+                        });
+                    }
+                    if (registerRecaptchaNode) {
+                        grecaptcha.render(registerRecaptchaNode, {
+                            'sitekey': '<?php echo esc_js( $this->recaptcha_sitekey ); ?>',
+                        });
+                    }
+                }
+            </script>
+            <script src="https://www.google.com/recaptcha/api.js?onload=onloadLRcb&render=explicit"></script>
+			<?php
+		}
+	}
 	protected function print_recaptcha_node( $form_type = 'login' ) {
 		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) ) {
 			$id = "{$form_type}-recaptcha-node-" . $this->get_id();
