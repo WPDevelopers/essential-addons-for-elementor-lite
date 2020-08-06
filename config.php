@@ -847,6 +847,13 @@ $config = [
 			        ],
 		        ],
 	        ],
+        'woocommerce-review' => [
+            'class'     => '\Essential_Addons_Elementor\Elements\Woocommerce_Review',
+            'condition' => [
+                'class_exists',
+                '\ReviewX\Elementor\Elements\Review',
+                true,
+            ],
         ],
     ],
     'extensions' => [
