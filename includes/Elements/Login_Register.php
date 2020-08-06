@@ -142,18 +142,13 @@ class Login_Register extends Widget_Base {
 	 */
 	public function get_keywords() {
 		return [
-			'login',
-			'ea login',
-			'register',
-			'ea register',
-			'registration',
-			'ea registration',
-			'sign in',
-			'sign out',
-			'logout',
-			'auth',
+			'ea login register',
+			'ea register login',
+			'signin form',
+			'signup form',
+			'sign in form',
+			'sign up form',
 			'authentication',
-			'user-registration',
 			'google',
 			'facebook',
 			'ea',
@@ -161,8 +156,10 @@ class Login_Register extends Widget_Base {
 		];
 	}
 
-	public function get_custom_help_url() {
-		return 'https://essential-addons.com/elementor/docs/login-register/';
+
+	public function get_custom_help_url()
+	{
+		return 'https://essential-addons.com/elementor/docs/login-register-form/';
 	}
 
 	/**

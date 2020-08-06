@@ -81,7 +81,7 @@ trait Admin
                                 <div class="templately-right">
                                     <div class="templately-admin-install">
                                         <p><?php echo __( 'Install Templately by Essential Addons to get access to the templates library and cloud.', 'essential-addons-for-elementor-lite' ); ?></p>
-                                        <button class="eae-activate-templately"><?php echo $button_text; ?></button>    
+                                        <button class="eae-activate-templately"><?php echo $button_text; ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -313,9 +313,9 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
          * classes for wrapper,
          * Message message for showing.
          */
-        $notice->classes('upsale', 'notice is-dismissible ');
-        $notice->message('upsale', '<p>' . __('5,000+ People using <a href="https://betterdocs.co/wordpress-plugin" target="_blank">BetterDocs</a> to create better Documentation & Knowledge Base!', 'essential-addons-for-elementor-lite') . '</p>');
-        $notice->thumbnail('upsale', plugins_url('assets/admin/images/icon-documentation.svg', EAEL_PLUGIN_BASENAME));
+        // $notice->classes('upsale', 'notice is-dismissible ');
+        // $notice->message('upsale', '<p>' . __('5,000+ People using <a href="https://betterdocs.co/wordpress-plugin" target="_blank">BetterDocs</a> to create better Documentation & Knowledge Base!', 'essential-addons-for-elementor-lite') . '</p>');
+        // $notice->thumbnail('upsale', plugins_url('assets/admin/images/icon-documentation.svg', EAEL_PLUGIN_BASENAME));
 
         // Update Notice For PRO Version
         if ($this->pro_enabled && \version_compare(EAEL_PRO_PLUGIN_VERSION, '4.0.0', '<')) {
@@ -324,36 +324,25 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
             $notice->thumbnail('update', plugins_url('assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME));
         }
 
-        // if( ! $this->pro_enabled ) {
-        //     $notice->classes( 'update_400k', 'notice is-dismissible ' );
-        //     $notice->message( 'update_400k', '<p>'. __( 'Time to celebrate! EA for Elementor 400K+ happy users 🎉 Spin The Wheel & Try Your Luck <a href="https://wpdeveloper.net/ea-400k-giveaway" target="_blank">WIN PRO License</a>', 'essential-addons-for-elementor-lite' ) .'</p>' );
-        //     $notice->thumbnail( 'update_400k', plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ) );
-        // }
-
-        $notice->upsale_args = array(
-            'slug' => 'betterdocs',
-            'page_slug' => 'betterdocs-setup',
-            'file' => 'betterdocs.php',
-            'btn_text' => __('Install Free', 'essential-addons-for-elementor-lite'),
-            'condition' => [
-                'by' => 'class',
-                'class' => 'BetterDocs',
-            ],
-        );
-
+        // $notice->upsale_args = array(
+        //     'slug' => 'betterdocs',
+        //     'page_slug' => 'betterdocs-setup',
+        //     'file' => 'betterdocs.php',
+        //     'btn_text' => __('Install Free', 'essential-addons-for-elementor-lite'),
+        //     'condition' => [
+        //         'by' => 'class',
+        //         'class' => 'BetterDocs',
+        //     ],
+        // );
         $notice->options_args = array(
             'notice_will_show' => [
                 'opt_in' => $notice->timestamp,
-                'upsale' => $notice->makeTime($notice->timestamp, '14 Day'),
                 'review' => $notice->makeTime($notice->timestamp, '7 Day'), // after 3 days
             ],
         );
         if ($this->pro_enabled && \version_compare(EAEL_PRO_PLUGIN_VERSION, '4.0.0', '<')) {
             $notice->options_args['notice_will_show']['update'] = $notice->timestamp;
         }
-        // if( ! $this->pro_enabled ) {
-        //     $notice->options_args['notice_will_show']['update_400k'] = $notice->makeTime($notice->timestamp, '1 Hour');
-        // }
 
         $notice->init();
     }
