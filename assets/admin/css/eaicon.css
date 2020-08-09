@@ -23,6 +23,9 @@
 	speak: none;
 }
 
+.eaicon-reviewx:before {
+	content: "\e951";
+}
 .eaicon-login:before {
 	content: "\e900";
 }
