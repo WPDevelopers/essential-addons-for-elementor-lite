@@ -157,8 +157,7 @@ class Login_Register extends Widget_Base {
 	}
 
 
-	public function get_custom_help_url()
-	{
+	public function get_custom_help_url() {
 		return 'https://essential-addons.com/elementor/docs/login-register-form/';
 	}
 
@@ -196,6 +195,7 @@ class Login_Register extends Widget_Base {
 		// Login Form Related---
 		$this->init_content_login_fields_controls();
 		$this->init_content_login_options_controls();
+        do_action( 'eael/login-register/after-login-controls-section', $this);
 		// Registration For Related---
 		$this->init_content_register_fields_controls();
 		$this->init_content_register_options_controls();
@@ -1270,6 +1270,7 @@ class Login_Register extends Widget_Base {
 
 		$this->end_controls_section();
 	}
+
 
 	/**
 	 * It prints controls for managing general style of both login and registration form
@@ -2968,7 +2969,7 @@ class Login_Register extends Widget_Base {
 	 *
 	 * @return array
 	 */
-	protected function get_form_controls_display_condition( $type = 'login' ) {
+	public function get_form_controls_display_condition( $type = 'login' ) {
 		$form_type = in_array( $type, [
 			'login',
 			'register',
@@ -3022,8 +3023,8 @@ class Login_Register extends Widget_Base {
 			?>
         </div>
 
-        <?php
-        $this->print_recaptcha_script();
+		<?php
+		$this->print_recaptcha_script();
 	}
 
 	protected function print_login_form() {
@@ -3511,11 +3512,11 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_recaptcha_script() {
-		if ( !empty( $this->recaptcha_sitekey) ) { ?>
+		if ( ! empty( $this->recaptcha_sitekey ) ) { ?>
             <script type="text/javascript">
                 function onloadLRcb() {
-                    var loginRecaptchaNode = document.getElementById('login-recaptcha-node-<?php echo  $this->get_id(); ?>');
-                    var registerRecaptchaNode = document.getElementById('register-recaptcha-node-<?php echo  $this->get_id(); ?>');
+                    var loginRecaptchaNode = document.getElementById('login-recaptcha-node-<?php echo $this->get_id(); ?>');
+                    var registerRecaptchaNode = document.getElementById('register-recaptcha-node-<?php echo $this->get_id(); ?>');
 
                     if (loginRecaptchaNode) {
                         grecaptcha.render(loginRecaptchaNode, {
@@ -3533,6 +3534,7 @@ class Login_Register extends Widget_Base {
 			<?php
 		}
 	}
+
 	protected function print_recaptcha_node( $form_type = 'login' ) {
 		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) ) {
 			$id = "{$form_type}-recaptcha-node-" . $this->get_id();
