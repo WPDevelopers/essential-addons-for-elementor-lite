@@ -56,7 +56,7 @@ trait Helper
                     ],
                 ]
             );
-        } else if ('eael-content-timeline' === $this->get_name()) {
+        } elseif ('eael-content-timeline' === $this->get_name()) {
             $this->start_controls_section(
                 'eael_section_timeline__filters',
                 [
@@ -175,7 +175,6 @@ trait Helper
                 'type' => Controls_Manager::SELECT,
                 'options' => $this->eael_get_post_orderby_options(),
                 'default' => 'date',
-
             ]
         );
 
@@ -189,7 +188,6 @@ trait Helper
                     'desc' => 'Descending',
                 ],
                 'default' => 'desc',
-
             ]
         );
 
@@ -300,7 +298,6 @@ trait Helper
                     'desc' => 'Descending',
                 ],
                 'default' => 'asc',
-
             ]
         );
 
@@ -427,13 +424,11 @@ trait Helper
         }
 
         if ('eael-post-carousel' !== $this->get_name()) {
-
             /**
              * Show Read More
              * @uses ContentTimeLine Elements - EAE
              */
             if ('eael-content-timeline' === $this->get_name()) {
-
                 $this->add_control(
                     'content_timeline_layout',
                     [
@@ -520,7 +515,6 @@ trait Helper
         }
 
         if ('eael-content-timeline' === $this->get_name()) {
-
             $this->add_control(
                 'eael_show_image_or_icon',
                 [
@@ -827,7 +821,6 @@ trait Helper
         }
 
         if ('eael-post-grid' === $this->get_name() || 'eael-post-block' === $this->get_name() || 'eael-post-carousel' === $this->get_name()) {
-
             $this->add_control(
                 'eael_show_meta',
                 [
@@ -1005,23 +998,23 @@ trait Helper
                 $this->add_control(
                     'eael_post_read_more_btn_alignment',
                     [
-                        'label'     => __('Alignment', 'essential-addons-for-elementor-lite'),
-                        'type'      => \Elementor\Controls_Manager::CHOOSE,
-                        'options'   => [
-                            'left'   => [
+                        'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
+                        'type' => \Elementor\Controls_Manager::CHOOSE,
+                        'options' => [
+                            'left' => [
                                 'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                                'icon'  => 'fa fa-align-left',
+                                'icon' => 'fa fa-align-left',
                             ],
                             'center' => [
                                 'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                                'icon'  => 'fa fa-align-center',
+                                'icon' => 'fa fa-align-center',
                             ],
-                            'right'  => [
+                            'right' => [
                                 'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                                'icon'  => 'fa fa-align-right',
+                                'icon' => 'fa fa-align-right',
                             ],
                         ],
-                        'default'   => ('eael-post-grid' === $this->get_name() ? 'left' : 'center'),
+                        'default' => ('eael-post-grid' === $this->get_name() ? 'left' : 'center'),
                         'selectors' => [
                             '{{WRAPPER}} .eael-post-elements-readmore-wrap' => 'text-align: {{VALUE}};',
                         ],
@@ -1327,7 +1320,6 @@ trait Helper
                     '{{WRAPPER}} .eael-load-more-button:hover' => 'border-color: {{VALUE}};',
                 ],
             ]
-
         );
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
@@ -1529,7 +1521,7 @@ trait Helper
      */
     public function eael_get_post_orderby_options()
     {
-        $orderby = array(
+        $orderby = [
             'ID' => 'Post ID',
             'author' => 'Post Author',
             'title' => 'Title',
@@ -1539,10 +1531,11 @@ trait Helper
             'rand' => 'Random',
             'comment_count' => 'Comment Count',
             'menu_order' => 'Menu Order',
-        );
+        ];
 
         return $orderby;
     }
+
     /**
      * POst Orderby Options
      *
@@ -1550,7 +1543,7 @@ trait Helper
      */
     public function eael_get_product_orderby_options()
     {
-        $orderby = array(
+        $orderby = [
             'ID' => __('Product ID', 'essential-addons-for-elementor-lite'),
             'title' => __('Product Title', 'essential-addons-for-elementor-lite'),
             '_price' => __('Price', 'essential-addons-for-elementor-lite'),
@@ -1560,7 +1553,7 @@ trait Helper
             'parent' => __('Parent Id', 'essential-addons-for-elementor-lite'),
             'rand' => __('Random', 'essential-addons-for-elementor-lite'),
             'menu_order' => __('Menu Order', 'essential-addons-for-elementor-lite'),
-        );
+        ];
 
         return $orderby;
     }
@@ -1589,10 +1582,10 @@ trait Helper
      */
     public function eael_post_type_categories($type = 'term_id', $term_key = 'category')
     {
-        $terms = get_terms(array(
+        $terms = get_terms([
             'taxonomy' => $term_key,
             'hide_empty' => true,
-        ));
+        ]);
 
         $options = [];
 
@@ -1612,10 +1605,10 @@ trait Helper
      */
     public function eael_woocommerce_product_categories()
     {
-        $terms = get_terms(array(
+        $terms = get_terms([
             'taxonomy' => 'product_cat',
             'hide_empty' => true,
-        ));
+        ]);
 
         if (!empty($terms) && !is_wp_error($terms)) {
             foreach ($terms as $term) {
@@ -1632,11 +1625,11 @@ trait Helper
      */
     public function eael_woocommerce_product_get_product_by_id()
     {
-        $postlist = get_posts(array(
+        $postlist = get_posts([
             'post_type' => 'product',
             'showposts' => 9999,
-        ));
-        $options = array();
+        ]);
+        $options = [];
 
         if (!empty($postlist) && !is_wp_error($postlist)) {
             foreach ($postlist as $post) {
@@ -1653,10 +1646,10 @@ trait Helper
      */
     public function eael_woocommerce_product_categories_by_id()
     {
-        $terms = get_terms(array(
+        $terms = get_terms([
             'taxonomy' => 'product_cat',
             'hide_empty' => true,
-        ));
+        ]);
 
         if (!empty($terms) && !is_wp_error($terms)) {
             foreach ($terms as $term) {
@@ -1671,13 +1664,13 @@ trait Helper
      */
     public function eael_select_contact_form()
     {
-        $options = array();
+        $options = [];
 
         if (function_exists('wpcf7')) {
-            $wpcf7_form_list = get_posts(array(
+            $wpcf7_form_list = get_posts([
                 'post_type' => 'wpcf7_contact_form',
                 'showposts' => 999,
-            ));
+            ]);
             $options[0] = esc_html__('Select a Contact Form', 'essential-addons-for-elementor-lite');
             if (!empty($wpcf7_form_list) && !is_wp_error($wpcf7_form_list)) {
                 foreach ($wpcf7_form_list as $post) {
@@ -1697,13 +1690,12 @@ trait Helper
      */
     public function eael_select_gravity_form()
     {
-        $options = array();
+        $options = [];
 
         if (class_exists('GFCommon')) {
             $gravity_forms = \RGFormsModel::get_forms(null, 'title');
 
             if (!empty($gravity_forms) && !is_wp_error($gravity_forms)) {
-
                 $options[0] = esc_html__('Select Gravity Form', 'essential-addons-for-elementor-lite');
                 foreach ($gravity_forms as $form) {
                     $options[$form->id] = $form->title;
@@ -1723,12 +1715,12 @@ trait Helper
      */
     public function eael_select_weform()
     {
-        $wpuf_form_list = get_posts(array(
+        $wpuf_form_list = get_posts([
             'post_type' => 'wpuf_contact_form',
             'showposts' => 999,
-        ));
+        ]);
 
-        $options = array();
+        $options = [];
 
         if (!empty($wpuf_form_list) && !is_wp_error($wpuf_form_list)) {
             $options[0] = esc_html__('Select weForm', 'essential-addons-for-elementor-lite');
@@ -1749,13 +1741,12 @@ trait Helper
      */
     public function eael_select_ninja_form()
     {
-        $options = array();
+        $options = [];
 
         if (class_exists('Ninja_Forms')) {
             $contact_forms = Ninja_Forms()->form()->get_forms();
 
             if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
-
                 $options[0] = esc_html__('Select Ninja Form', 'essential-addons-for-elementor-lite');
 
                 foreach ($contact_forms as $form) {
@@ -1776,7 +1767,7 @@ trait Helper
      */
     public function eael_select_caldera_form()
     {
-        $options = array();
+        $options = [];
 
         if (class_exists('Caldera_Forms')) {
             $contact_forms = \Caldera_Forms_Forms::get_forms(true, true);
@@ -1801,13 +1792,13 @@ trait Helper
      */
     public function eael_select_wpforms_forms()
     {
-        $options = array();
+        $options = [];
 
         if (class_exists('\WPForms\WPForms')) {
-            $args = array(
+            $args = [
                 'post_type' => 'wpforms',
                 'posts_per_page' => -1,
-            );
+            ];
 
             $contact_forms = get_posts($args);
 
@@ -1831,8 +1822,7 @@ trait Helper
      */
     public static function eael_select_fluent_forms()
     {
-
-        $options = array();
+        $options = [];
 
         if (defined('FLUENTFORM')) {
             global $wpdb;
@@ -1874,7 +1864,7 @@ trait Helper
         }
 
         $page_templates = get_posts($args);
-        $options = array();
+        $options = [];
 
         if (!empty($page_templates) && !is_wp_error($page_templates)) {
             foreach ($page_templates as $post) {
@@ -1914,7 +1904,7 @@ trait Helper
      *
      * @return array
      */
-    public function eael_get_tags($args = array())
+    public function eael_get_tags($args = [])
     {
         $options = [];
         $tags = get_tags($args);
@@ -1976,14 +1966,14 @@ trait Helper
      */
     public function eael_get_posts()
     {
-        $post_list = get_posts(array(
+        $post_list = get_posts([
             'post_type' => 'post',
             'orderby' => 'date',
             'order' => 'DESC',
             'posts_per_page' => -1,
-        ));
+        ]);
 
-        $posts = array();
+        $posts = [];
 
         if (!empty($post_list) && !is_wp_error($post_list)) {
             foreach ($post_list as $post) {
@@ -2001,14 +1991,14 @@ trait Helper
      */
     public function eael_get_pages()
     {
-        $page_list = get_posts(array(
+        $page_list = get_posts([
             'post_type' => 'page',
             'orderby' => 'date',
             'order' => 'DESC',
             'posts_per_page' => -1,
-        ));
+        ]);
 
-        $pages = array();
+        $pages = [];
 
         if (!empty($page_list) && !is_wp_error($page_list)) {
             foreach ($page_list as $page) {
@@ -2090,13 +2080,13 @@ trait Helper
                 }
             }
 
-            $args = array(
+            $args = [
                 'httpversion' => '1.1',
                 'blocking' => true,
-                'headers' => array(
+                'headers' => [
                     'Authorization' => "Bearer $token",
-                ),
-            );
+                ],
+            ];
 
             add_filter('https_ssl_verify', '__return_false');
 
@@ -2139,6 +2129,7 @@ trait Helper
         $items = array_splice($items, 0, $settings['eael_twitter_feed_post_limit']);
 
         foreach ($items as $item) {
+            $delimeter = strlen($item['full_text']) > $settings['eael_twitter_feed_content_length'] ? '...' : '';
             if ($settings['eael_twitter_feed_card_choose_style'] == 'three') {
                 $html .= '<div class="eael-twitter-feed-item eael-twitter-feed-item-style-three ' . $class . '">
                 <div class="eael-twitter-feed-item-inner">';
@@ -2165,7 +2156,7 @@ trait Helper
                 }
                 $html .= '</div>
                         <div class="eael-twitter-feed-item-content">
-                            <p>' . substr(str_replace(@$item['entities']['urls'][0]['url'], '', $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . '...</p>';
+                            <p>' . substr(str_replace(@$item['entities']['urls'][0]['url'], '', $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . $delimeter . '</p>';
 
                 if ($settings['eael_twitter_feed_show_read_more'] == 'true') {
                     $html .= '<a href="//twitter.com/' . @$item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">Read More <i class="fas fa-angle-double-right"></i></a>';
@@ -2175,7 +2166,7 @@ trait Helper
                 </div>
                 </div>
 			</div>';
-            } else if ($settings['eael_twitter_feed_card_choose_style'] == 'two') {
+            } elseif ($settings['eael_twitter_feed_card_choose_style'] == 'two') {
                 $html .= '<div class="eael-twitter-feed-item eael-twitter-feed-item-style-two ' . $class . '">
 				<div class="eael-twitter-feed-item-inner">
 				    <div class="eael-twitter-feed-item-header clearfix">';
@@ -2192,7 +2183,7 @@ trait Helper
                 }
                 $html .= '</div>
                     <div class="eael-twitter-feed-item-content">
-                        <p>' . substr(str_replace(@$item['entities']['urls'][0]['url'], '', $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . '...</p>';
+                        <p>' . substr(str_replace(@$item['entities']['urls'][0]['url'], '', $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . $delimeter . '</p>';
 
                 if ($settings['eael_twitter_feed_show_read_more'] == 'true') {
                     $html .= '<a href="//twitter.com/' . @$item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">Read More <i class="fas fa-angle-double-right"></i></a>';
@@ -2222,7 +2213,7 @@ trait Helper
                 }
                 $html .= '</div>
                     <div class="eael-twitter-feed-item-content">
-                        <p>' . substr(str_replace(@$item['entities']['urls'][0]['url'], '', $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . '...</p>';
+                        <p>' . substr(str_replace(@$item['entities']['urls'][0]['url'], '', $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . $delimeter . '</p>';
 
                 if ($settings['eael_twitter_feed_show_read_more'] == 'true') {
                     $html .= '<a href="//twitter.com/' . @$item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">Read More <i class="fas fa-angle-double-right"></i></a>';
@@ -2307,7 +2298,7 @@ trait Helper
                     $html .= '<div class="eael-facebook-feed-header-content">';
                     $html .= '<a class="eael-facebook-feed-username" href="https://www.facebook.com/' . $page_id . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '">' . $item['from']['name'] . '</a>';
                     if ($settings['eael_facebook_feed_date']) {
-                        $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date("d M Y", strtotime($item['created_time'])) . '</a>';
+                        $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date('d M Y', strtotime($item['created_time'])) . '</a>';
                     }
                     $html .= '</div>';
 
@@ -2320,7 +2311,7 @@ trait Helper
                     </div>';
 
                     if ($settings['eael_facebook_feed_date']) {
-                        $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date("d M Y", strtotime($item['created_time'])) . '</a>';
+                        $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date('d M Y', strtotime($item['created_time'])) . '</a>';
                     }
                     $html .= '</header>';
                 }
@@ -2359,7 +2350,7 @@ trait Helper
                             }
                             $html .= '</div>';
                         }
-                    } else if ($item['status_type'] == 'added_video') {
+                    } elseif ($item['status_type'] == 'added_video') {
                         $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '" class="eael-facebook-feed-preview-img">
                                                 <img class="eael-facebook-feed-img" src="' . $photo . '">
                                                 <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>
@@ -2431,7 +2422,7 @@ trait Helper
     {
         if (isset($page_settings_model) && $page_settings_model->get_settings($extension) == 'yes') {
             return $page_settings_model->get_settings($key);
-        } else if (isset($global_settings[$extension]['enabled'])) {
+        } elseif (isset($global_settings[$extension]['enabled'])) {
             return isset($global_settings[$extension][$key]) ? $global_settings[$extension][$key] : '';
         }
 
@@ -2445,7 +2436,6 @@ trait Helper
      */
     public function eael_toc_global_css($page_settings_model, $global_settings)
     {
-
         $eael_toc = $global_settings['eael_ext_table_of_content'];
         $eael_toc_width = isset($eael_toc['eael_ext_toc_width']['size']) ? $eael_toc['eael_ext_toc_width']['size'] : 300;
         $toc_list_color_active = $eael_toc['eael_ext_table_of_content_list_text_color_active'];
@@ -2855,7 +2845,6 @@ trait Helper
 
     protected static function get_terms_as_list($term_type = 'category', $length = 1)
     {
-
         if ($term_type === 'category') {
             $terms = get_the_category();
         }
@@ -2898,9 +2887,9 @@ trait Helper
         $woo_checkout_update_order_review = ob_get_clean();
 
         wp_send_json(
-            array(
+            [
                 'order_review' => $woo_checkout_update_order_review,
-            )
+            ]
         );
     }
 
