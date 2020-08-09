@@ -111,7 +111,7 @@ trait Helper
                 'default' => [],
                 'options' => $this->eael_get_authors(),
                 'condition' => [
-                    'post_type!' => 'by_id',
+                    'post_type!' => ['by_id', 'source_dynamic']
                 ],
             ]
         );
@@ -147,7 +147,7 @@ trait Helper
                 'post_type' => '',
                 'multiple' => true,
                 'condition' => [
-                    'post_type!' => 'by_id',
+                    'post_type!' => ['by_id', 'source_dynamic']
                 ],
             ]
         );

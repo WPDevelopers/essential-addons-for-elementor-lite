@@ -1159,6 +1159,10 @@ class Post_Grid extends Widget_Base {
                         'terms' => $data->term_id,
                     ];
                 }
+            }else {
+                global $wp_query;
+                
+                $args['post_type'] = $wp_query->query_vars['post_type'];
             }
 
             if( get_query_var( 'author' ) > 0 ) {
@@ -1172,9 +1176,6 @@ class Post_Grid extends Widget_Base {
                     'day'   => get_query_var('day')
                 ];
             }
-            
-            // echo '<pre><code>', print_r($data, 1), '</code></pre>';
-
             
             if (!empty($args['tax_query'])) {
                 $args['tax_query']['relation'] = 'AND';
