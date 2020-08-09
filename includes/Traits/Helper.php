@@ -45,6 +45,7 @@ trait Helper
     {
         $post_types = $this->eael_get_post_types();
         $post_types['by_id'] = __('Manual Selection', 'essential-addons-for-elementor-lite');
+        $post_types['source_dynamic'] = __( 'Dynamic', 'essential-addons-for-elementor-lite' );
         $taxonomies = get_taxonomies([], 'objects');
 
         if ('eael-content-ticker' === $this->get_name()) {
@@ -104,6 +105,7 @@ trait Helper
             'authors', [
                 'label' => __('Author', 'essential-addons-for-elementor-lite'),
                 'label_block' => true,
+                'dynamic'   => [ 'active' => true ],
                 'type' => Controls_Manager::SELECT2,
                 'multiple' => true,
                 'default' => [],

@@ -60,6 +60,13 @@ trait Template_Query
 
     private function get_pro_template_dir()
     {
+        // ensure is_plugin_active() exists (not on frontend)
+        if( !function_exists('is_plugin_active') ) {
+            
+            include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+            
+        }
+        
         if( ! is_plugin_active( 'essential-addons-elementor/essential_adons_elementor.php' ) ) return false;
 
         return \sprintf(
