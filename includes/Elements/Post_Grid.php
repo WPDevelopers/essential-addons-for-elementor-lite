@@ -1147,22 +1147,35 @@ class Post_Grid extends Widget_Base {
 
             $data = get_queried_object();
 
+            if($data) {
+                $args['post_type'] = $data->post_type;
+
+                $args['tax_query'] = [];
+
+                if($data->taxonomy) {
+                    $args['tax_query'][] = [
+                        'taxonomy' => $data->taxonomy,
+                        'field' => 'term_id',
+                        'terms' => $data->term_id,
+                    ];
+                }
+            }
+
             if( get_query_var( 'author' ) > 0 ) {
                 $args['author__in'] = get_query_var( 'author' );
             }
-            
-            $args['post_type'] = $data->post_type;
 
-            $args['tax_query'] = [];
-
-            if($data->taxonomy) {
-                $args['tax_query'][] = [
-                    'taxonomy' => $data->taxonomy,
-                    'field' => 'term_id',
-                    'terms' => $data->term_id,
+            if(get_query_var('year') || get_query_var('monthnum') || get_query_var('day')) {
+                $args['date_query'] = [
+                    'year'  => get_query_var('year'),
+                    'month' => get_query_var('monthnum'),
+                    'day'   => get_query_var('day')
                 ];
             }
+            
+            // echo '<pre><code>', print_r($data, 1), '</code></pre>';
 
+            
             if (!empty($args['tax_query'])) {
                 $args['tax_query']['relation'] = 'AND';
             }
