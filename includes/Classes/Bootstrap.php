@@ -16,12 +16,10 @@ use Essential_Addons_Elementor\Traits\Generator;
 use Essential_Addons_Elementor\Traits\Helper;
 use Essential_Addons_Elementor\Traits\Library;
 use Essential_Addons_Elementor\Traits\Login_Registration;
-use Essential_Addons_Elementor\Traits\Shared;
 
 class Bootstrap
 {
     use Library;
-    use Shared;
     use Core;
     use Helper;
     use Generator;
