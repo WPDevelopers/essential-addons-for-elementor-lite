@@ -1669,6 +1669,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->start_popover();
+
 		$this->add_responsive_control( "{$form_type}_fhc_width", [
 			'label'           => esc_html__( 'Header width', EAEL_TEXTDOMAIN ),
 			'type'            => Controls_Manager::SLIDER,
@@ -1735,7 +1736,6 @@ class Login_Register extends Widget_Base {
 				"{$form_type}_fhc_po_toggle" => 'yes',
 			],
 		] );
-
 		$this->add_responsive_control( "{$form_type}_fhc_margin", [
 			'label'      => __( 'Header Margin', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -1966,6 +1966,76 @@ class Login_Register extends Widget_Base {
 			'separator'    => 'before',
 		] );
 		$this->start_popover();
+		$this->add_responsive_control( "{$form_type}_form_logo_width", [
+			'label'           => esc_html__( 'width', EAEL_TEXTDOMAIN ),
+			'type'            => Controls_Manager::SLIDER,
+			'size_units'      => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'           => [
+				'px'  => [
+					'min'  => 0,
+					'max'  => 1000,
+					'step' => 5,
+				],
+				'rem' => [
+					'min'  => 0,
+					'max'  => 10,
+					'step' => .5,
+				],
+				'%'   => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'default'  => [
+				'unit' => 'px',
+				'size' => 100,
+			],
+			'selectors'       => [
+				$logo_selector => 'width: {{SIZE}}{{UNIT}};',
+			],
+			'condition' => [
+				"{$form_type}_form_logo_po_toggle" => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "{$form_type}_form_logo_height", [
+			'label'           => esc_html__( 'height', EAEL_TEXTDOMAIN ),
+			'type'            => Controls_Manager::SLIDER,
+			'size_units'      => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'           => [
+				'px'  => [
+					'min'  => 0,
+					'max'  => 1000,
+					'step' => 5,
+				],
+				'rem' => [
+					'min'  => 0,
+					'max'  => 10,
+					'step' => .5,
+				],
+				'%'   => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'default'  => [
+				'unit' => 'px',
+				'size' => 100,
+			],
+			'selectors'       => [
+				$logo_selector => 'height: {{SIZE}}{{UNIT}};',
+			],
+			'condition' => [
+				"{$form_type}_form_logo_po_toggle" => 'yes',
+			],
+		] );
 		$this->add_responsive_control( "{$form_type}_form_logo_margin", [
 			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,

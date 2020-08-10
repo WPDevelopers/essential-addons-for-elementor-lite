@@ -224,13 +224,13 @@
 }
 .eael-lr-form-wrapper .lr-form-header.header-inline .form-logo {
   -webkit-box-flex: 0;
-      -ms-flex: 0 0 30%;
-          flex: 0 0 30%;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
 }
 .eael-lr-form-wrapper .lr-form-header.header-inline .form-dsc {
   -webkit-box-flex: 0;
-      -ms-flex: 0 0 70%;
-          flex: 0 0 70%;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
   padding-left: 15px;
 }
 .eael-lr-form-wrapper .lr-form-header img {
