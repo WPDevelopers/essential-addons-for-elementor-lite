@@ -182,11 +182,11 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
             display: flex;
 
             .form-logo {
-                flex: 0 0 30%;
+                flex: 0 0 auto;
             }
 
             .form-dsc {
-                flex: 0 0 70%;
+                flex: 0 0 auto;
                 padding-left: 15px;
             }
 
