@@ -11,6 +11,8 @@ use \Elementor\Group_Control_Border as Group_Control_Border;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 
+use \Essential_Addons_Elementor\Classes\Helper;
+
 class Product_Grid extends Widget_Base {
     use \Essential_Addons_Elementor\Traits\Helper;
     use \Essential_Addons_Elementor\Template\Content\Product_Grid;
@@ -149,7 +151,7 @@ class Product_Grid extends Widget_Base {
                 'type'        => Controls_Manager::SELECT2,
                 'label_block' => true,
                 'multiple'    => true,
-                'options'     => $this->eael_woocommerce_product_categories(),
+                'options'     => Helper::eael_woocommerce_product_categories(),
             ]
         );
 

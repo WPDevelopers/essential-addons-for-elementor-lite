@@ -15,10 +15,10 @@ use \Elementor\Widget_Base as Widget_Base;
 use \Elementor\Group_Control_Background as Group_Control_Background;
 use \Elementor\Scheme_Color;
 
+use \Essential_Addons_Elementor\Traits\Helper;
+
 class FluentForm extends Widget_Base
 {
-
-    use \Essential_Addons_Elementor\Traits\Helper;
 
     public function get_name()
     {
@@ -110,7 +110,7 @@ class FluentForm extends Widget_Base
                     'label' => esc_html__('Fluent Form', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'label_block' => true,
-                    'options' => $this->eael_select_fluent_forms(),
+                    'options' => Helper::eael_select_fluent_forms(),
                     'default' => '0',
                 ]
             );

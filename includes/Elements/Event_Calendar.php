@@ -15,6 +15,8 @@ use \Elementor\Group_Control_Typography;
 use \Elementor\Repeater;
 use \Elementor\Widget_Base;
 
+use \Essential_Addons_Elementor\Classes\Helper;
+
 class Event_Calendar extends Widget_Base {
     use \Essential_Addons_Elementor\Traits\Helper;
 
@@ -402,7 +404,7 @@ class Event_Calendar extends Widget_Base {
                     'multiple'    => true,
                     'label_block' => true,
                     'default'     => [],
-                    'options'     => $this->eael_get_tags(['taxonomy' => 'tribe_events_cat', 'hide_empty' => false]),
+                    'options'     => Helper::eael_get_tags(['taxonomy' => 'tribe_events_cat', 'hide_empty' => false]),
                 ]
             );
 

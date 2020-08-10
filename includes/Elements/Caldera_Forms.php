@@ -13,10 +13,10 @@ use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 
+use \Essential_Addons_Elementor\Traits\Helper;
+
 class Caldera_Forms extends Widget_Base
 {
-
-    use \Essential_Addons_Elementor\Traits\Helper;
 
     public function get_name()
     {
@@ -97,7 +97,7 @@ class Caldera_Forms extends Widget_Base
                     'label' => esc_html__('Caldera Form', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'label_block' => true,
-                    'options' => $this->eael_select_caldera_form(),
+                    'options' => Helper::eael_select_caldera_form(),
                     'default' => '0',
                 ]
             );

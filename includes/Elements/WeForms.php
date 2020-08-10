@@ -13,10 +13,10 @@ use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 
+use \Essential_Addons_Elementor\Traits\Helper;
+
 class WeForms extends Widget_Base
 {
-
-    use \Essential_Addons_Elementor\Traits\Helper;
 
     public function get_name()
     {
@@ -94,7 +94,7 @@ class WeForms extends Widget_Base
                     'description' => esc_html__('Please save and refresh the page after selecting the form', 'essential-addons-for-elementor-lite'),
                     'label_block' => true,
                     'type' => Controls_Manager::SELECT,
-                    'options' => $this->eael_select_weform(),
+                    'options' => Helper::eael_select_weform(),
                     'default' => '0',
                 ]
             );
