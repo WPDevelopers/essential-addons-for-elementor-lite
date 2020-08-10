@@ -1980,7 +1980,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => $this->apply_dim( 'margin' ),
+				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-group" => $this->apply_dim( 'margin' ),
 			],
 			'condition'  => [
 				'eael_form_field_po_toggle' => 'yes',
