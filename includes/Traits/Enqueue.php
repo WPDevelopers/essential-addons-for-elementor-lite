@@ -125,7 +125,7 @@ trait Enqueue
                 // enqueue
                 wp_enqueue_style(
                     $this->uid('eael'),
-                    $this->safe_protocol(EAEL_ASSET_URL . '/' . $this->uid('eael') . '.min.css'),
+                    Helper::safe_protocol(EAEL_ASSET_URL . '/' . $this->uid('eael') . '.min.css'),
                     false,
                     time()
                 );
@@ -144,7 +144,7 @@ trait Enqueue
                 // enqueue
                 wp_enqueue_script(
                     $this->uid('eael'),
-                    $this->safe_protocol(EAEL_ASSET_URL . '/' . $this->uid('eael') . '.min.js'),
+                    Helper::safe_protocol(EAEL_ASSET_URL . '/' . $this->uid('eael') . '.min.js'),
                     ['jquery'],
                     time(),
                     true
@@ -193,7 +193,7 @@ trait Enqueue
                 // enqueue
                 wp_enqueue_style(
                     $this->uid(),
-                    $this->safe_protocol(EAEL_ASSET_URL . '/' . $this->uid() . '.min.css'),
+                    Helper::safe_protocol(EAEL_ASSET_URL . '/' . $this->uid() . '.min.css'),
                     false,
                     time()
                 );
@@ -207,14 +207,14 @@ trait Enqueue
         // ea icon font
         wp_enqueue_style(
             'ea-icon',
-            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/css/eaicon.css'),
+            Helper::safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/css/eaicon.css'),
             false
         );
 
         // editor style
         wp_enqueue_style(
             'eael-editor',
-            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/css/editor.css'),
+            Helper::safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/css/editor.css'),
             false
         );
     }
@@ -268,7 +268,7 @@ trait Enqueue
 
                     wp_enqueue_script(
                         $this->uid(),
-                        $this->safe_protocol(EAEL_ASSET_URL . '/' . $this->uid() . '.min.js'),
+                        Helper::safe_protocol(EAEL_ASSET_URL . '/' . $this->uid() . '.min.js'),
                         ['jquery'],
                         time(),
                         true

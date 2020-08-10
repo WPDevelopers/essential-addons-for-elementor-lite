@@ -8,6 +8,8 @@ if (!defined('ABSPATH')) {
 
 use \Elementor\Plugin;
 
+use \Essential_Addons_Elementor\Classes\Helper;
+
 trait Elements
 {
     /**
@@ -318,7 +320,7 @@ trait Elements
         $global_settings = get_option('eael_global_settings');
 
         foreach ($this->loaded_templates as $post_id) {
-            if (Shared::is_prevent_load_extension($post_id)) {
+            if (Helper::is_prevent_load_extension($post_id)) {
                 continue;
             }
 
