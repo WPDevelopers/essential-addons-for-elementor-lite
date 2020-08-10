@@ -2007,6 +2007,28 @@ class Login_Register extends Widget_Base {
 			'name'     => "eael_fields_typography",
 			'selector' => "{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control",
 		] );
+		$this->add_control( "ph_align", [
+			'label'     => __( 'Text Alignment', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::CHOOSE,
+			'options'   => [
+				'left'         => [
+					'title' => __( 'Left', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-h-align-left',
+				],
+				'center' => [
+					'title' => __( 'Center', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-h-align-center',
+				],
+				'right'         => [
+					'title' => __( 'Right', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-h-align-right',
+				],
+			],
+			'default'   => 'left',
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => 'text-align: {{VALUE}};',
+			],
+		] );
 		$this->add_control( 'eael_form_label_colors_heading', [
 			'type'      => Controls_Manager::HEADING,
 			'label'     => __( 'Colors & Border', EAEL_TEXTDOMAIN ),
