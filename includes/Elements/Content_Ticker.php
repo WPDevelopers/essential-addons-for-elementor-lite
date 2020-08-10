@@ -10,6 +10,7 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Content_Ticker extends Widget_Base
 {
@@ -49,7 +50,7 @@ class Content_Ticker extends Widget_Base
             'text swing',
             'text slide',
             'ea',
-            'essential addons'
+            'essential addons',
         ];
     }
 
@@ -519,7 +520,7 @@ class Content_Ticker extends Widget_Base
                 'default' => [
                     'value' => 'fas fa-angle-left',
                     'library' => 'fa-solid',
-                ]
+                ],
             ]
         );
 
@@ -533,7 +534,7 @@ class Content_Ticker extends Widget_Base
                 'default' => [
                     'value' => 'fas fa-angle-right',
                     'library' => 'fa-solid',
-                ]
+                ],
             ]
         );
 
@@ -720,8 +721,8 @@ class Content_Ticker extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $settings = $this->fix_old_query($settings);
-        $args = $this->eael_get_query_args($settings);
+        $settings = Helper::fix_old_query($settings);
+        $args = Helper::eael_get_query_args($settings);
 
         $this->add_render_attribute('content-ticker-wrap', 'class', 'swiper-container-wrap eael-ticker');
 
@@ -778,21 +779,21 @@ class Content_Ticker extends Widget_Base
         }
 
         echo '<div class="eael-ticker-wrap" id="eael-ticker-wrap-' . $this->get_id() . '">';
-            if (!empty($settings['eael_ticker_tag_text'])) {
-                echo '<div class="ticker-badge">
+        if (!empty($settings['eael_ticker_tag_text'])) {
+            echo '<div class="ticker-badge">
                     <span>' . $settings['eael_ticker_tag_text'] . '</span>
                 </div>';
-            }
+        }
 
-            echo '<div ' . $this->get_render_attribute_string('content-ticker-wrap') . '>
+        echo '<div ' . $this->get_render_attribute_string('content-ticker-wrap') . '>
                 <div ' . $this->get_render_attribute_string('content-ticker') . '>
                     <div class="swiper-wrapper">';
-                        if ('dynamic' === $settings['eael_ticker_type']) {
-                            echo self::render_template_($args, null);
-                        }
+        if ('dynamic' === $settings['eael_ticker_type']) {
+            echo self::render_template_($args, null);
+        }
 
-                        do_action('render_content_ticker_custom_content', $settings);
-                    echo '</div>
+        do_action('render_content_ticker_custom_content', $settings);
+        echo '</div>
 				</div>
 				' . $this->render_arrows() . '
 			</div>
@@ -819,24 +820,23 @@ class Content_Ticker extends Widget_Base
 
             $html = '<div class="content-ticker-pagination">';
 
-                $html .= '<div class="swiper-button-next swiper-button-next-' . $this->get_id() . '">';
-                    if( isset($arrow['url']) ) {
-                        $html .= '<img src="'.esc_url($arrow['url']).'" alt="'.esc_attr(get_post_meta($arrow['id'], '_wp_attachment_image_alt', true)).'" />';
-                    }else {
-                        $html .= '<i class="' . $arrow . '"></i>';
-                    }
-                $html .= '</div>';
-                
-                $html .='<div class="swiper-button-prev swiper-button-prev-' . $this->get_id() . '">';
-                    if( isset($settings['prev_arrow']['value']['url'])) {
-                        $html .= '<img src="'.esc_url($settings['prev_arrow']['value']['url']).'" alt="'.esc_attr(get_post_meta($settings['prev_arrow']['value']['id'], '_wp_attachment_image_alt', true)).'" />';
-                    }else {
-                        $html .= '<i class="' . esc_attr($settings['prev_arrow']['value']) . '"></i>';
-                    }
-                $html .= '</div>';
-                
+            $html .= '<div class="swiper-button-next swiper-button-next-' . $this->get_id() . '">';
+            if (isset($arrow['url'])) {
+                $html .= '<img src="' . esc_url($arrow['url']) . '" alt="' . esc_attr(get_post_meta($arrow['id'], '_wp_attachment_image_alt', true)) . '" />';
+            } else {
+                $html .= '<i class="' . $arrow . '"></i>';
+            }
             $html .= '</div>';
 
+            $html .= '<div class="swiper-button-prev swiper-button-prev-' . $this->get_id() . '">';
+            if (isset($settings['prev_arrow']['value']['url'])) {
+                $html .= '<img src="' . esc_url($settings['prev_arrow']['value']['url']) . '" alt="' . esc_attr(get_post_meta($settings['prev_arrow']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
+            } else {
+                $html .= '<i class="' . esc_attr($settings['prev_arrow']['value']) . '"></i>';
+            }
+            $html .= '</div>';
+
+            $html .= '</div>';
 
             return $html;
         }

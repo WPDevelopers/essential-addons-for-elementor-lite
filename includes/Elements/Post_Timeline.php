@@ -10,6 +10,7 @@ use \Elementor\Controls_Manager as Controls_Manager;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Post_Timeline extends Widget_Base
 {
@@ -68,7 +69,7 @@ class Post_Timeline extends Widget_Base
         $this->eael_layout_controls();
 
         if (!apply_filters('eael/pro_enabled', false)) {
-            $this->eael_go_premium();
+            Helper::eael_go_premium($this);
         }
 
         $this->start_controls_section(
@@ -327,8 +328,8 @@ class Post_Timeline extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $settings = $this->fix_old_query($settings);
-        $args = $this->eael_get_query_args($settings);
+        $settings = Helper::fix_old_query($settings);
+        $args = Helper::eael_get_query_args($settings);
         $settings = [
             'eael_show_image' => $settings['eael_show_image'],
             'image_size' => $settings['image_size'],

@@ -6,13 +6,15 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+use \Essential_Addons_Elementor\Classes\Helper;
+
 trait Enqueue
 {
     public function before_enqueue_styles($widgets)
     {
         // Compatibility: Gravity forms
         if (in_array('gravity-form', $widgets) && class_exists('GFCommon')) {
-            foreach ($this->eael_select_gravity_form() as $form_id => $form_name) {
+            foreach (Helper::eael_select_gravity_form() as $form_id => $form_name) {
                 if ($form_id != '0') {
                     gravity_form_enqueue_scripts($form_id);
                 }

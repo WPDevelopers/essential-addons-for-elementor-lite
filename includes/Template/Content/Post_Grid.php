@@ -6,6 +6,8 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 } // Exit if accessed directly
 
+use \Essential_Addons_Elementor\Classes\Helper;
+
 trait Post_Grid {
     private static function render_template__header( $settings, $style = null ) {
         if ( $style === 'two' && $settings['eael_show_meta'] && $settings['meta_position'] == 'meta-entry-header' ) {
@@ -122,7 +124,7 @@ trait Post_Grid {
 
             echo '<div class="eael-entry-media">';
             if ( $style == null && $settings['eael_show_post_terms'] === 'yes' ) {
-                echo self::get_terms_as_list( $settings['eael_post_terms'], $settings['eael_post_terms_max_length'] );
+                echo Helper::get_terms_as_list( $settings['eael_post_terms'], $settings['eael_post_terms_max_length'] );
             }
 
             echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">';
