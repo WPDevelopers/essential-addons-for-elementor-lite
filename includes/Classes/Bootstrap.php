@@ -37,7 +37,7 @@ class Bootstrap
 
     // loaded templates in a request
     public $loaded_templates = [];
-    
+
     // loaded widgets in a request
     public $loaded_widgets = [];
 
@@ -137,10 +137,9 @@ class Bootstrap
         // Admin
         if (is_admin()) {
             // Admin
-            if (!$this->pro_enabled) {
-                // TODO: you have to call admin_notice for pro also.
+            if ( ! $this->pro_enabled ) {
+                $this->admin_notice();
             }
-            $this->admin_notice(); // this line of code
 
             // dashboard feed
             WPDeveloper_Dashboard_Widget::instance();
