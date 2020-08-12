@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.4
 Requires PHP: 5.4
-Stable tag: 4.0.4
+Stable tag: 4.1.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -223,6 +223,26 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.1.2 - 30/07/2020 =
+- Fixed: EA Twitter Feed | Content length issue
+- Fixed: EA Woo Checkout Coupons showing despite disabling from Woo Settings
+- Few minor bugfix and improvements
+
+= 4.1.1 - 23/07/2020 =
+- Improved: EA Typeform with auth2 authentication
+- Fixed: EA Sticky Video PHP error with Image Overlay option
+- Fixed: EA Reading Progress Bar & EA TOC not working inside Elementor Editor
+- Fixed: EA Filterable Gallery- broken link issue
+- Few minor bugfix and improvements
+
+= 4.1.0 - 16/07/2020 =
+- Added EA Custom JS Extension
+- Added: New Asset Embed Method with External/Internal JS & CSS support
+- Removed: Quick Tools from admin bar
+- Removed: Fallback scripts
+- Removed: Unnecessary form scripts
+- Few minor bugfix and improvements
 
 = 4.0.4 - 22/06/2020 =
 - Improved: EA BetterDocs Category Grid & EA BetterDocs Category Box

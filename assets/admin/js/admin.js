@@ -208,4 +208,18 @@
 			$(".eael-internal-printjs").hide();
 		}
 	});
+
+
+	/**
+	 * Open a popup for typeform auth2 authentication
+	 */
+	$("#eael-typeform-get-access").on('click',function (e) {
+		e.preventDefault();
+		var link = $(this).data("link");
+		if(link!=''){
+			window.open(link,'mywindowtitle','width=500,height=500,left=500,top=200');
+		}
+	})
+
 })(jQuery);
+
