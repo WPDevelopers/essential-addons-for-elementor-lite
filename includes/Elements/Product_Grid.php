@@ -6,12 +6,13 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Widget_Base;
 
 use \Essential_Addons_Elementor\Classes\Helper;
+use \Essential_Addons_Elementor\Classes\Controls;
 
 class Product_Grid extends Widget_Base {
     use \Essential_Addons_Elementor\Traits\Helper;
@@ -572,7 +573,7 @@ class Product_Grid extends Widget_Base {
         /**
          * Load More Button Style Controls!
          */
-        $this->eael_load_more_button_style();
+        Controls::load_more_button_style($this);
 
     }
 

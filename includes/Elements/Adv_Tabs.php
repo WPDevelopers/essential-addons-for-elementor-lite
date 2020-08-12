@@ -19,8 +19,6 @@ use \Essential_Addons_Elementor\Classes\Helper;
 
 class Adv_Tabs extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
-
     public function get_name()
     {
         return 'eael-adv-tabs';
@@ -893,6 +891,4 @@ class Adv_Tabs extends Widget_Base
 	</div>
 	<?php
 }
-
-    protected function content_template(){}
 }

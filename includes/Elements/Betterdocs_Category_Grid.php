@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Border as Group_Control_Border;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 use \Elementor\Group_Control_Box_Shadow;
+use \Essential_Addons_Elementor\Classes\Controls;
 
 class Betterdocs_Category_Grid extends Widget_Base
 {
@@ -106,7 +107,7 @@ class Betterdocs_Category_Grid extends Widget_Base
              * Query  Controls!
              * @source includes/elementor-helper.php
              */
-            $this->eael_betterdocs_query_controls();
+            Controls::betterdocs_query($this);
 
             /**
              * ----------------------------------------------------------
