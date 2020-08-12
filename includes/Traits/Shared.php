@@ -17,7 +17,10 @@ trait Shared
     {
         if (is_ssl()) {
             $url = wp_parse_url($url);
-            $url['scheme'] = 'https';
+
+            if (!empty($url['host'])) {
+                $url['scheme'] = 'https';
+            }
 
             return $this->unparse_url($url);
         }
@@ -57,6 +60,7 @@ trait Shared
             'section',
             'popup',
         ];
+        
         return in_array($template_name, $template_list);
     }
 
