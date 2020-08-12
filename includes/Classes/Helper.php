@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
 
 use \Elementor\Controls_Manager;
 
-trait Helper
+class Helper
 {
     /**
      * Generate safe url

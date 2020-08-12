@@ -11,6 +11,7 @@ use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
+use \Essential_Addons_Elementor\Classes\Controls;
 
 class Post_Timeline extends Widget_Base
 {
@@ -65,8 +66,8 @@ class Post_Timeline extends Widget_Base
          * Query And Layout Controls!
          * @source includes/elementor-helper.php
          */
-        $this->eael_query_controls();
-        $this->eael_layout_controls();
+        Controls::query($this);
+        Controls::layout($this);
 
         if (!apply_filters('eael/pro_enabled', false)) {
             Helper::eael_go_premium($this);
@@ -321,7 +322,7 @@ class Post_Timeline extends Widget_Base
 
         $this->end_controls_section();
 
-        $this->eael_load_more_button_style();
+        Controls::load_more_button_style($this);
 
     }
 

@@ -13,6 +13,7 @@ use \Elementor\Group_Control_Typography;
 use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
+use \Essential_Addons_Elementor\Classes\Controls;
 
 class Post_Grid extends Widget_Base
 {
@@ -79,8 +80,8 @@ class Post_Grid extends Widget_Base
          * Query And Layout Controls!
          * @source includes/elementor-helper.php
          */
-        $this->eael_query_controls();
-        $this->eael_layout_controls();
+        Controls::query($this);
+        Controls::layout($this);
 
         /**
          * Grid Style Controls!
@@ -984,12 +985,12 @@ class Post_Grid extends Widget_Base
         /**
          * Read More Button Style Controls
          */
-        $this->eael_read_more_button_style();
+        Controls::read_more_button_style($this);
 
         /**
          * Load More Button Style Controls!
          */
-        $this->eael_load_more_button_style();
+        Controls::load_more_button_style($this);
     }
 
     protected function render()

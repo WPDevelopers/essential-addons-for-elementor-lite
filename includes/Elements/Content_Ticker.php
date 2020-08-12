@@ -11,6 +11,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
+use \Essential_Addons_Elementor\Classes\Controls;
 
 class Content_Ticker extends Widget_Base
 {
@@ -122,7 +123,7 @@ class Content_Ticker extends Widget_Base
          * Query Controls
          * @source includes/helper.php
          */
-        $this->eael_query_controls();
+        Controls::query($this);
 
         do_action('eael_ticker_custom_content_controls', $this);
 
