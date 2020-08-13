@@ -553,8 +553,9 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                                         } elseif ($item['key'] === 'login-register') {
                                             $r_key = get_option('eael_recaptcha_sitekey');
                                             $secret = get_option('eael_recaptcha_secret');
-                                            $r_old_val = !empty( $r_key) && !empty( $secret)? "{$r_key}:{$secret}" : ''; //6LcLKLsZAAAAAMjEg3YW7qautHFd6UhMoEauGbt8:6LcLKLsZAAAAAHBTQqdc8pLTjKWsPKzpqjraoMpQ
-	                                        echo '<span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-title="reCAPTCHA API keys" data-placeholder="Insert like Site Key:Secret Key" data-target="#eael_recaptcha_keys">'.__('Settings', 'essential-addons-for-elementor-lite').'</a></span>
+                                            $r_old_val = !empty( $r_key) && !empty( $secret)? "{$r_key}:{$secret}" : '';
+                                            echo '<span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-title="Google reCAPTCHA API Keys" data-placeholder="Insert like Site Key:Secret Key" data-doc="#google-recaptcha-doc" data-target="#eael_recaptcha_keys">'.__('Settings', 'essential-addons-for-elementor-lite').'</a></span>
+                                            <a style="display: none" id="google-recaptcha-doc" target="_blank" href="https://www.google.com/recaptcha/admin/create">'.__('To retrieve your API Keys, click here', 'essential-addons-for-elementor-lite').'</a>
                                             <input type="hidden" name="eael_recaptcha_keys" id="eael_recaptcha_keys" class="eael_recaptcha_keys" value="' . esc_attr( $r_old_val) . '">';
                                         }
                                     ?>
