@@ -455,8 +455,8 @@ class Login_Register extends Widget_Base {
 				],
 			] );
 			$this->add_control( 'enable_register_recaptcha', [
-				'label'        => __( 'Enable Google Recaptcha', EAEL_TEXTDOMAIN ),
-				'description'  => __( 'Recaptcha will prevent spam registration from bots.', EAEL_TEXTDOMAIN ),
+				'label'        => __( 'Enable Google reCAPTCHA', EAEL_TEXTDOMAIN ),
+				'description'  => __( 'reCAPTCHA will prevent spam registration from bots.', EAEL_TEXTDOMAIN ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => __( 'Yes', EAEL_TEXTDOMAIN ),
 				'label_off'    => __( 'No', EAEL_TEXTDOMAIN ),
