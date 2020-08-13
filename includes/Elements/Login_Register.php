@@ -377,8 +377,8 @@ class Login_Register extends Widget_Base {
 			] );
 		}
 		$this->add_control( 'enable_login_recaptcha', [
-			'label'        => __( 'Enable Google Recaptcha', EAEL_TEXTDOMAIN ),
-			'description'  => __( 'Recaptcha will prevent spam login from bots.', EAEL_TEXTDOMAIN ),
+			'label'        => __( 'Enable Google reCAPTCHA', EAEL_TEXTDOMAIN ),
+			'description'  => __( 'reCAPTCHA will prevent spam login from bots.', EAEL_TEXTDOMAIN ),
 			'type'         => Controls_Manager::SWITCHER,
 			'label_on'     => __( 'Yes', EAEL_TEXTDOMAIN ),
 			'label_off'    => __( 'No', EAEL_TEXTDOMAIN ),
@@ -387,7 +387,7 @@ class Login_Register extends Widget_Base {
 		if ( empty( $this->recaptcha_sitekey ) ) {
 			$this->add_control( 'eael_login_recaptcha_keys_missing', [
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => sprintf( __( 'Recaptcha API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', EAEL_TEXTDOMAIN ), '<strong>', '</strong>' ),
+				'raw'             => sprintf( __( 'reCAPTCHA API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', EAEL_TEXTDOMAIN ), '<strong>', '</strong>' ),
 				'content_classes' => 'eael-warning',
 				'condition'       => [
 					'enable_login_recaptcha' => 'yes',
