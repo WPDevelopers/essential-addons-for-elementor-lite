@@ -31,14 +31,14 @@ trait Login_Registration {
 	public static $email_options = [];
 
 	public function login_or_register_user() {
-		do_action( 'eael/login-register/before-processing-login-register', $_POST);
+		do_action( 'eael/login-register/before-processing-login-register', $_POST );
 		// login or register form?
 		if ( isset( $_POST['eael-login-submit'] ) ) {
 			$this->log_user_in();
 		} elseif ( isset( $_POST['eael-register-submit'] ) ) {
 			$this->register_user();
 		}
-		do_action( 'eael/login-register/after-processing-login-register', $_POST);
+		do_action( 'eael/login-register/after-processing-login-register', $_POST );
 
 	}
 
@@ -496,7 +496,7 @@ trait Login_Registration {
 	}
 
 	public function get_user_roles() {
-		$user_roles['default'] = __( 'Default', EAEL_TEXTDOMAIN );
+		$user_roles[''] = __( 'Default', EAEL_TEXTDOMAIN );
 		if ( function_exists( 'get_editable_roles' ) ) {
 			$wp_roles = get_editable_roles();
 			$roles    = $wp_roles ? $wp_roles : [];
@@ -656,5 +656,4 @@ trait Login_Registration {
 				$version, true );
 		}
 	}
-
 }
