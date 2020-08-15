@@ -1034,7 +1034,7 @@ class Login_Register extends Widget_Base {
 		$this->add_control( 'register_user_role', [
 			'label'     => __( 'New User Role', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::SELECT,
-			'default'   => 'default',
+			'default'   => '',
 			'options'   => $this->get_user_roles(),
 			'separator' => 'before',
 		] );
