@@ -58,12 +58,17 @@ ea.hooks.addAction("init", "ea", () => {
             }
         }
 
-
-        $(window).load(function () {
-            if (grecaptcha){
-                onloadLRcb();
-            }
-        });
+        if (grecaptcha){
+            // on elementor editor, window load event already fired, so run recaptcha
+            onloadLRcb();
+        }else{
+            // on frontend, load even is yet to fire, so wait and fire recaptcha
+            $(window).load(function () {
+                if (grecaptcha){
+                    onloadLRcb();
+                }
+            });
+        }
     };
     elementorFrontend.hooks.addAction("frontend/element_ready/eael-login-register.default", EALoginRegister);
 });
