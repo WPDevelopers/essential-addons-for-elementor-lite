@@ -702,37 +702,6 @@ class Helper
         return $pages;
     }
 
-    /**
-     * This function is responsible for get the post data.
-     * It will return HTML markup with AJAX call and with normal call.
-     *
-     * @return string of an html markup with AJAX call.
-     * @return array of content and found posts count without AJAX call.
-     */
-    public static function eael_load_more_ajax()
-    {
-        parse_str($_REQUEST['args'], $args);
-        parse_str($_REQUEST['settings'], $settings);
-
-        $class = '\\' . str_replace('\\\\', '\\', $_REQUEST['class']);
-        $args['offset'] = (int) $args['offset'] + (((int) $_REQUEST['page'] - 1) * (int) $args['posts_per_page']);
-
-        if (isset($_REQUEST['taxonomy']) && $_REQUEST['taxonomy']['taxonomy'] != 'all') {
-            $args['tax_query'] = [
-                $_REQUEST['taxonomy'],
-            ];
-        }
-
-        if ($class == '\Essential_Addons_Elementor\Elements\Post_Grid' && $settings['orderby'] === 'rand') {
-            $args['post__not_in'] = array_unique($_REQUEST['post__not_in']);
-        }
-
-        $html = $class::render_template_($args, $settings);
-
-        echo $html;
-        wp_die();
-    }
-
     public static function eael_list_ninja_tables()
     {
         $tables = get_posts([
@@ -779,5 +748,36 @@ class Helper
 
         return $html;
 
+    }
+
+    /**
+     * This function is responsible for get the post data.
+     * It will return HTML markup with AJAX call and with normal call.
+     *
+     * @return string of an html markup with AJAX call.
+     * @return array of content and found posts count without AJAX call.
+     */
+    public function eael_load_more_ajax()
+    {
+        parse_str($_REQUEST['args'], $args);
+        parse_str($_REQUEST['settings'], $settings);
+
+        $class = '\\' . str_replace('\\\\', '\\', $_REQUEST['class']);
+        $args['offset'] = (int) $args['offset'] + (((int) $_REQUEST['page'] - 1) * (int) $args['posts_per_page']);
+
+        if (isset($_REQUEST['taxonomy']) && $_REQUEST['taxonomy']['taxonomy'] != 'all') {
+            $args['tax_query'] = [
+                $_REQUEST['taxonomy'],
+            ];
+        }
+
+        if ($class == '\Essential_Addons_Elementor\Elements\Post_Grid' && $settings['orderby'] === 'rand') {
+            $args['post__not_in'] = array_unique($_REQUEST['post__not_in']);
+        }
+
+        $html = $class::render_template_($args, $settings);
+
+        echo $html;
+        wp_die();
     }
 }
