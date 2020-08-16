@@ -1,61 +1,86 @@
 .eael-dual-header {
-	display: block;
-	margin-bottom: 50px;
+    display: block;
+    margin-bottom: 50px;
 }
 
 .eael-dual-header .title,
 .eael-dual-header .title span {
-	font-size: 36px;
-	font-weight: 700;
-	text-transform: uppercase;
-	line-height: 48px;
-	margin: 10px 0px;
+    font-size: 36px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 48px;
+    margin: 10px 0px;
 }
 
 .eael-dual-header .subtext {
-	font-size: 16px;
-	display: block;
+    font-size: 16px;
+    display: block;
 }
 
 .eael-dual-header i {
-	display: block;
-	padding: 0px;
-	margin: 20px 0px 10px 0px;
-	font-size: 36px;
+    display: block;
+    padding: 0px;
+    margin: 20px 0px 10px 0px;
+    font-size: 36px;
 }
 
 .eael-dual-header .title span.lead {
-	color: #1abc9c;
+    color: #1abc9c;
 }
 
 /*--- Builder Related Css ---*/
 .eael-dual-header-content-align-center {
-	text-align: center;
+    text-align: center;
 }
 
 .eael-dual-header-content-align-left {
-	text-align: left;
+    text-align: left;
 }
 
 .eael-dual-header-content-align-right {
-	text-align: right;
+    text-align: right;
 }
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+    .eael-dual-header-content-tablet-align-center {
+        text-align: center;
+    }
 
+    .eael-dual-header-content-tablet-align-left {
+        text-align: left;
+    }
+
+    .eael-dual-header-content-tablet-align-right {
+        text-align: right;
+    }
+}
+@media screen and (max-width: 767px) {
+    .eael-dual-header-content-mobile-align-center {
+        text-align: center;
+    }
+
+    .eael-dual-header-content-mobile-align-left {
+        text-align: left;
+    }
+
+    .eael-dual-header-content-mobile-align-right {
+        text-align: right;
+    }
+}
 
 // separator
 .eael-dch-separator-wrap {
-	display: flex;
-	justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 .eael-dch-separator-wrap .separator-one,
 .eael-dch-separator-wrap .separator-two {
-	display: inline-block;
-	width: 15%;
-	height: 5px;
+    display: inline-block;
+    width: 15%;
+    height: 5px;
 }
 .eael-dch-separator-wrap .separator-one {
-	background: #207eff;
+    background: #207eff;
 }
 .eael-dch-separator-wrap .separator-two {
-	background: #4f6592;
+    background: #4f6592;
 }

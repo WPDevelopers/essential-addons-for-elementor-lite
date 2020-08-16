@@ -42,6 +42,34 @@
   text-align: right;
 }
 
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .eael-dual-header-content-tablet-align-center {
+    text-align: center;
+  }
+
+  .eael-dual-header-content-tablet-align-left {
+    text-align: left;
+  }
+
+  .eael-dual-header-content-tablet-align-right {
+    text-align: right;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .eael-dual-header-content-mobile-align-center {
+    text-align: center;
+  }
+
+  .eael-dual-header-content-mobile-align-left {
+    text-align: left;
+  }
+
+  .eael-dual-header-content-mobile-align-right {
+    text-align: right;
+  }
+}
+
 .eael-dch-separator-wrap {
   display: -webkit-box;
   display: -ms-flexbox;
