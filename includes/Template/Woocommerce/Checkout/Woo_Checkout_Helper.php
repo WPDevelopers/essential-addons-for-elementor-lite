@@ -85,7 +85,7 @@ trait Woo_Checkout_Helper {
 		// In case order is created from admin, but paid by the actual customer, store the ip address of the payer
 		// when they visit the payment confirmation page.
 		if ( $order && $order->is_created_via( 'admin' ) ) {
-			$order->set_customer_ip_address( WC_Geolocation::get_ip_address() );
+			$order->set_customer_ip_address( \WC_Geolocation::get_ip_address() );
 			$order->save();
 		}
 
@@ -250,6 +250,9 @@ trait Woo_Checkout_Helper {
 	 */
 	public static function ea_coupon_template() {
         $settings = self::ea_get_woo_checkout_settings();
+        if(get_option('woocommerce_enable_coupons')==='no'){
+            return ;
+        }
 		?>
 		<div class="woo-checkout-coupon">
 			<div class="ea-coupon-icon">

@@ -14,6 +14,8 @@ use \Elementor\Plugin;
 use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 
+use \Essential_Addons_Elementor\Classes\Helper;
+
 class Countdown extends Widget_Base {
     use \Essential_Addons_Elementor\Traits\Helper;
 
@@ -435,7 +437,7 @@ class Countdown extends Widget_Base {
             [
                 'label'     => __( 'Choose Template', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::SELECT,
-                'options'   => $this->eael_get_page_templates(),
+                'options'   => Helper::eael_get_page_templates(),
                 'condition' => [
                     'countdown_expire_type' => 'template',
                 ],
