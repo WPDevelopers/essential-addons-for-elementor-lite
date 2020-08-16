@@ -649,11 +649,11 @@ trait Login_Registration {
 		return false;
 	}
 
-	public function lr_enqueue_scripts() {
+	public function lr_enqueue_scripts(  ) {
 		$version = defined( 'WP_DEBUG' ) ? time() : EAEL_PLUGIN_VERSION; // stop cache on debug mode
 		if ( $site_key = get_option( 'eael_recaptcha_sitekey' ) ) {
-			wp_register_script( 'eael-recaptcha', "https://www.google.com/recaptcha/api.js?onload=onloadLRcb&render=explicit", false, // @TODO; load after our script handle, find that id later.
-				$version, true );
+			wp_register_script( 'eael-recaptcha', "https://www.google.com/recaptcha/api.js?render=explicit", false,
+				$version, false );
 		}
 	}
 }

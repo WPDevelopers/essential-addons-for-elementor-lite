@@ -102,11 +102,11 @@ class Login_Register extends Widget_Base {
 
 	}
 
-	//public function get_script_depends() {
-	//	$scripts = parent::get_script_depends();
-	//	//$scripts[] = 'eael-recaptcha'; //@TODO; debug later why this does not let recaptcha work on editor.
-	//	return $scripts;
-	//}
+	public function get_script_depends() {
+		$scripts = parent::get_script_depends();
+		$scripts[] = 'eael-recaptcha'; //@TODO; debug later why this does not let recaptcha work on editor.
+		return $scripts;
+	}
 
 
 	/**
@@ -3497,7 +3497,8 @@ class Login_Register extends Widget_Base {
 									} ?>
 
                                 </div>
-								<?php
+
+                                <?php
 								do_action( 'eael/login-register/before-recaptcha', $this );
                                 $this->print_recaptcha_node( 'login' );
 								do_action( 'eael/login-register/after-recaptcha', $this );
@@ -3715,6 +3716,7 @@ class Login_Register extends Widget_Base {
 							$this->print_terms_condition_notice();
 							$this->print_recaptcha_node( 'register' );
 							?>
+
                             <div class="eael-lr-footer">
                                 <input type="submit" name="eael-register-submit" id="eael-register-submit" class="eael-lr-btn eael-lr-btn-block<?php echo esc_attr( $btn_align ); ?>" value="<?php echo esc_attr( $btn_text ); ?>"/>
 								<?php if ( $show_lgn_link ) { ?>
@@ -3869,6 +3871,7 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_recaptcha_script() {
+	    return;
 		if ( ! empty( $this->recaptcha_sitekey ) ) { ?>
             <script type="text/javascript">
                 function onloadLRcb() {
@@ -3887,7 +3890,6 @@ class Login_Register extends Widget_Base {
                     }
                 }
             </script>
-            <script src="https://www.google.com/recaptcha/api.js?onload=onloadLRcb&render=explicit"></script>
 			<?php
 		}
 	}
