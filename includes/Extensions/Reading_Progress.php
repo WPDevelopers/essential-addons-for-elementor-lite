@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
-use Essential_Addons_Elementor\Traits\Shared;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Reading_Progress
 {
@@ -19,7 +19,7 @@ class Reading_Progress
     public function register_controls($element)
     {
 
-        if(Shared::is_prevent_load_extension(get_the_ID())){
+        if(Helper::is_prevent_load_extension(get_the_ID())){
             return false;
         }
 

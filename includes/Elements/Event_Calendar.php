@@ -15,6 +15,8 @@ use \Elementor\Group_Control_Typography;
 use \Elementor\Repeater;
 use \Elementor\Widget_Base;
 
+use \Essential_Addons_Elementor\Classes\Helper;
+
 class Event_Calendar extends Widget_Base {
     use \Essential_Addons_Elementor\Traits\Helper;
 
@@ -402,7 +404,7 @@ class Event_Calendar extends Widget_Base {
                     'multiple'    => true,
                     'label_block' => true,
                     'default'     => [],
-                    'options'     => $this->eael_get_tags(['taxonomy' => 'tribe_events_cat', 'hide_empty' => false]),
+                    'options'     => Helper::eael_get_tags(['taxonomy' => 'tribe_events_cat', 'hide_empty' => false]),
                 ]
             );
 
@@ -517,6 +519,17 @@ class Event_Calendar extends Widget_Base {
                 'label'     => __('Event Text Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#ffffff',
+                'condition' => [
+                    'eael_event_calendar_type!' => 'manual',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_event_global_popup_ribbon_color',
+            [
+                'label'     => __('Popup Ribbon Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#10ecab',
                 'condition' => [
                     'eael_event_calendar_type!' => 'manual',
                 ],
@@ -1211,7 +1224,7 @@ class Event_Calendar extends Widget_Base {
             [
                 'name'     => 'eael_event_typography',
                 'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .fc-content span.fc-title,{{WRAPPER}} .eael-event-calendar-wrapper .fc-list-table .fc-list-item td',
+                'selector' => '{{WRAPPER}} .fc-content .fc-title,{{WRAPPER}} .fc-content .fc-time,{{WRAPPER}} .eael-event-calendar-wrapper .fc-list-table .fc-list-item td',
             ]
         );
 
@@ -1315,6 +1328,44 @@ class Event_Calendar extends Widget_Base {
                 'selectors' => [
                     '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-start' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-end'   => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_date_icon',
+            [
+                'label'     => __('Date Icon', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_date_icon_size',
+            [
+                'label'      => __('Icon Size', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-start i' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_date_icon_color',
+            [
+                'label'     => __('Icon Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-start i' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1676,15 +1727,16 @@ class Event_Calendar extends Widget_Base {
         }
 
         $transient_key = 'eael_google_calendar_'.md5(implode('', $arg));
-        $calendar_data = get_transient($transient_key);
+        $data = get_transient($transient_key);
 
-        if (!empty($calendar_data)) {
-            return $calendar_data;
-        }
         if (isset($arg['calendar_id'])) {
             unset($arg['calendar_id']);
         }
-        $data = wp_remote_retrieve_body(wp_remote_get(add_query_arg($arg, $base_url)));
+
+        if(empty($data)){
+            $data = wp_remote_retrieve_body(wp_remote_get(add_query_arg($arg, $base_url)));
+            set_transient($transient_key, $data, 1 * HOUR_IN_SECONDS);
+        }
 
         if (is_wp_error($data)) {
             return [];
@@ -1714,7 +1766,7 @@ class Event_Calendar extends Widget_Base {
                     'description' => isset($item->description) ? $item->description : '',
                     'start'       => $ev_start_date,
                     'end'         => $ev_end_date,
-                    'borderColor' => '#6231FF',
+                    'borderColor' => !empty($settings['eael_event_global_popup_ribbon_color']) ? $settings['eael_event_global_popup_ribbon_color'] : '#10ecab',
                     'textColor'   => $settings['eael_event_global_text_color'],
                     'color'       => $settings['eael_event_global_bg_color'],
                     'url'         => ($settings['eael_event_details_link_hide']!=='yes')?$item->htmlLink:'',
@@ -1724,7 +1776,7 @@ class Event_Calendar extends Widget_Base {
                 ];
             }
 
-            set_transient($transient_key, $calendar_data, 1 * HOUR_IN_SECONDS);
+
         }
 
         return $calendar_data;
@@ -1775,7 +1827,7 @@ class Event_Calendar extends Widget_Base {
                 'description' => $event->post_content,
                 'start'       => tribe_get_start_date($event->ID, true, $date_format),
                 'end'         => tribe_get_end_date($event->ID, true, $date_format),
-                'borderColor' => '#6231FF',
+                'borderColor' => !empty($settings['eael_event_global_popup_ribbon_color']) ? $settings['eael_event_global_popup_ribbon_color'] : '#10ecab',
                 'textColor'   => $settings['eael_event_global_text_color'],
                 'color'       => $settings['eael_event_global_bg_color'],
                 'url'         => ($settings['eael_event_details_link_hide']!=='yes')?get_the_permalink($event->ID):'',

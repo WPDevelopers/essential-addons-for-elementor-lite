@@ -10,7 +10,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Scheme_Typography as Scheme_Typography;
-use Essential_Addons_Elementor\Traits\Shared;
+use Essential_Addons_Elementor\Classes\Helper;
 
 class Table_of_Content
 {
@@ -22,7 +22,7 @@ class Table_of_Content
 
     public function register_controls($element)
     {
-        if(Shared::is_prevent_load_extension(get_the_ID())){
+        if(Helper::is_prevent_load_extension(get_the_ID())){
             return false;
         }
 

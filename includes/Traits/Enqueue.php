@@ -6,13 +6,15 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+use \Essential_Addons_Elementor\Classes\Helper;
+
 trait Enqueue
 {
     public function before_enqueue_styles($widgets)
     {
         // Compatibility: Gravity forms
         if (in_array('gravity-form', $widgets) && class_exists('GFCommon')) {
-            foreach ($this->eael_select_gravity_form() as $form_id => $form_name) {
+            foreach (Helper::eael_select_gravity_form() as $form_id => $form_name) {
                 if ($form_id != '0') {
                     gravity_form_enqueue_scripts($form_id);
                 }
@@ -66,12 +68,8 @@ trait Enqueue
             return;
         }
 
-        if ($this->is_edit_mode()) {
-            return;
-        }
-
-        if ($this->is_preview_mode()) {
-            // loaded template stack
+        // loaded template stack
+        if ($this->is_edit_mode() || $this->is_preview_mode()) {
             $this->loaded_templates[] = $post_id;
         }
     }
@@ -127,7 +125,7 @@ trait Enqueue
                 // enqueue
                 wp_enqueue_style(
                     $this->uid('eael'),
-                    $this->safe_protocol(EAEL_ASSET_URL . '/' . $this->uid('eael') . '.min.css'),
+                    Helper::safe_protocol(EAEL_ASSET_URL . '/' . $this->uid('eael') . '.min.css'),
                     false,
                     time()
                 );
@@ -146,7 +144,7 @@ trait Enqueue
                 // enqueue
                 wp_enqueue_script(
                     $this->uid('eael'),
-                    $this->safe_protocol(EAEL_ASSET_URL . '/' . $this->uid('eael') . '.min.js'),
+                    Helper::safe_protocol(EAEL_ASSET_URL . '/' . $this->uid('eael') . '.min.js'),
                     ['jquery'],
                     time(),
                     true
@@ -195,7 +193,7 @@ trait Enqueue
                 // enqueue
                 wp_enqueue_style(
                     $this->uid(),
-                    $this->safe_protocol(EAEL_ASSET_URL . '/' . $this->uid() . '.min.css'),
+                    Helper::safe_protocol(EAEL_ASSET_URL . '/' . $this->uid() . '.min.css'),
                     false,
                     time()
                 );
@@ -209,14 +207,14 @@ trait Enqueue
         // ea icon font
         wp_enqueue_style(
             'ea-icon',
-            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/css/eaicon.css'),
+            Helper::safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/css/eaicon.css'),
             false
         );
 
         // editor style
         wp_enqueue_style(
             'eael-editor',
-            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/css/editor.css'),
+            Helper::safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/css/editor.css'),
             false
         );
     }
@@ -270,7 +268,7 @@ trait Enqueue
 
                     wp_enqueue_script(
                         $this->uid(),
-                        $this->safe_protocol(EAEL_ASSET_URL . '/' . $this->uid() . '.min.js'),
+                        Helper::safe_protocol(EAEL_ASSET_URL . '/' . $this->uid() . '.min.js'),
                         ['jquery'],
                         time(),
                         true

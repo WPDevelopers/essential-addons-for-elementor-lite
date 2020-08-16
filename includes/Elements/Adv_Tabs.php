@@ -15,10 +15,10 @@ use \Elementor\Utils;
 use \Elementor\Widget_Base;
 use \Elementor\Group_Control_Background;
 
+use \Essential_Addons_Elementor\Classes\Helper;
+
 class Adv_Tabs extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
-
     public function get_name()
     {
         return 'eael-adv-tabs';
@@ -205,7 +205,7 @@ class Adv_Tabs extends Widget_Base
                         'name' => 'eael_primary_templates',
                         'label' => __('Choose Template', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::SELECT,
-                        'options' => $this->eael_get_page_templates(),
+                        'options' => Helper::eael_get_page_templates(),
                         'condition' => [
                             'eael_adv_tabs_text_type' => 'template',
                         ],
@@ -891,6 +891,4 @@ class Adv_Tabs extends Widget_Base
 	</div>
 	<?php
 }
-
-    protected function content_template(){}
 }

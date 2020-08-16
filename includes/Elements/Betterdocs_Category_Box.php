@@ -15,6 +15,7 @@ use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Group_Control_Background;
 use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
+use \Essential_Addons_Elementor\Classes\Controls;
 
 class Betterdocs_Category_Box extends Widget_Base {
 
@@ -102,7 +103,7 @@ class Betterdocs_Category_Box extends Widget_Base {
              * Query  Controls!
              * @source includes/elementor-helper.php
              */
-            $this->eael_betterdocs_query_controls();
+            Controls::betterdocs_query($this);
 
             /**
              * ----------------------------------------------------------

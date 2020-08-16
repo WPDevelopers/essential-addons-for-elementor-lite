@@ -6,6 +6,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
+use \Essential_Addons_Elementor\Classes\Controls;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -811,7 +812,7 @@ class Facebook_Feed extends Widget_Base
 
         $this->end_controls_section();
 
-        $this->eael_load_more_button_style();
+        Controls::load_more_button_style($this);
     }
 
     protected function render()

@@ -7,6 +7,8 @@ if (!defined('ABSPATH')) {
 
 use \Elementor\Plugin;
 
+use \Essential_Addons_Elementor\Classes\Helper;
+
 trait Generator
 {
 
@@ -94,7 +96,7 @@ trait Generator
         }, $widgets);
 
         // collect page extensions
-        if (!Shared::is_prevent_load_extension($post_id)) {
+        if (!Helper::is_prevent_load_extension($post_id)) {
             if ($document->get_settings('eael_custom_js')) {
                 $widgets[] = 'eael-custom-js';
             }
@@ -261,7 +263,7 @@ trait Generator
             }
         }
 
-        if ($this->loaded_templates && $ext == 'js' && $context == 'view') {
+        if ($this->loaded_templates && $context == 'view' && $ext == 'js') {
             foreach ($this->loaded_templates as $post_id) {
                 $document = Plugin::$instance->documents->get($post_id);
 
