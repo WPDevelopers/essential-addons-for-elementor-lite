@@ -401,7 +401,8 @@ class Post_Grid extends Widget_Base
         /**
          * Style Tab: Meta Date Position
          */
-        $this->eael_controls_custom_positioning(
+        Controls::custom_positioning(
+            $this,
             'eael_meta_date_position_',
             __('Meta Date Position', 'essential-addons-for-elementor-lite'),
             '.eael-meta-posted-on',
@@ -522,7 +523,8 @@ class Post_Grid extends Widget_Base
         /**
          * Style Tab: Meta Position
          */
-        $this->eael_controls_custom_positioning(
+        Controls::custom_positioning(
+            $this,
             'eael_meta_footer_',
             __('Meta Position', 'essential-addons-for-elementor-lite'),
             '.eael-grid-post .eael-entry-footer',
@@ -533,7 +535,8 @@ class Post_Grid extends Widget_Base
             ]
         );
 
-        $this->eael_controls_custom_positioning(
+        Controls::custom_positioning(
+            $this,
             'eael_meta_header_',
             __('Meta Position', 'essential-addons-for-elementor-lite'),
             '.eael-grid-post .eael-entry-meta',
