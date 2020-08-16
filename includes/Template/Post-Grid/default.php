@@ -11,7 +11,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
     echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . get_the_ID() . '">
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
-            $this->render_template__thumbnail( $settings, 'two' );
+            // $this->render_template__thumbnail( $settings, 'two' );
 
             if ( $settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt'] ) {
                 echo '<div class="eael-entry-wrapper">';
@@ -29,7 +29,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
     echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . get_the_ID() . '">
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
-            $this->render_template__thumbnail( $settings, 'three' );
+            // $this->render_template__thumbnail( $settings, 'three' );
 
             if ( $settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt'] ) {
                 echo '<div class="eael-entry-wrapper">';
@@ -44,7 +44,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
     echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . get_the_ID() . '">
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
-            $this->render_template__thumbnail( $settings );
+            // $this->render_template__thumbnail( $settings );
 
             if ( $settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt'] ) {
                 echo '<div class="eael-entry-wrapper">';

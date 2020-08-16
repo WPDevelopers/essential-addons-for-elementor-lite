@@ -11,6 +11,42 @@ use \Essential_Addons_Elementor\Elements\Woo_Checkout;
 
 trait Helper
 {
+
+    /**
+     * This function is responsible for get the post data.
+     * It will return HTML markup with AJAX call and with normal call.
+     *
+     * @return string of an html markup with AJAX call.
+     * @return array of content and found posts count without AJAX call.
+     */
+    public function eael_load_more_ajax()
+    {
+        parse_str($_REQUEST['args'], $args);
+        parse_str($_REQUEST['settings'], $settings);
+
+        var_dump($_REQUEST['template_path']);
+
+        $class = '\\' . str_replace('\\\\', '\\', $_REQUEST['class']);
+        $args['offset'] = (int) $args['offset'] + (((int) $_REQUEST['page'] - 1) * (int) $args['posts_per_page']);
+
+        if (isset($_REQUEST['taxonomy']) && $_REQUEST['taxonomy']['taxonomy'] != 'all') {
+            $args['tax_query'] = [
+                $_REQUEST['taxonomy'],
+            ];
+        }
+
+        if ($class == '\Essential_Addons_Elementor\Elements\Post_Grid' && $settings['orderby'] === 'rand') {
+            $args['post__not_in'] = array_unique($_REQUEST['post__not_in']);
+        }
+
+        // $html = $class::render_template_($args, $settings);
+
+        $html = include($_REQUEST['template_path']);
+
+        echo $html;
+        wp_die();
+    }
+
     /**
      * This function is responsible for counting doc post under a category.
      *
