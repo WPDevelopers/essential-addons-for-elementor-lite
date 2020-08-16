@@ -1254,7 +1254,6 @@ class Post_Grid extends Widget_Base
             ]
         );
 
-<<<<<<< HEAD
         echo '<div ' . $this->get_render_attribute_string( 'post_grid_wrapper' ) . '>
             <div ' . $this->get_render_attribute_string( 'post_grid_container' ) . ' data-layout-mode="' . $settings["layout_mode"] . '">';
                 $query = new \WP_Query( $args );
@@ -1270,12 +1269,6 @@ class Post_Grid extends Widget_Base
                 }
                 wp_reset_postdata();
             echo '</div>
-=======
-        echo '<div ' . $this->get_render_attribute_string('post_grid_wrapper') . '>
-            <div ' . $this->get_render_attribute_string('post_grid_container') . ' data-layout-mode="' . $settings["layout_mode"] . '">
-                ' . self::render_template_($args, $settings_arry) . '
-            </div>
->>>>>>> sabuz-dev
             <div class="clearfix"></div>
         </div>';
 
