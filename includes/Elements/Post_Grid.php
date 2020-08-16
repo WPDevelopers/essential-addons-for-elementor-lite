@@ -1229,8 +1229,10 @@ class Post_Grid extends Widget_Base
             'image_link_nofollow' => $settings['image_link_nofollow'],
             'image_link_target_blank' => $settings['image_link_target_blank'],
             'eael_title_length' => $settings['eael_title_length'],
-            'eael_post_grid_preset_style' => $settings['eael_post_grid_preset_style'],
+            'eael_post_grid_preset_style' => $settings['eael_post_grid_preset_style']
         ];
+
+
 
         $this->add_render_attribute(
             'post_grid_wrapper',
@@ -1257,7 +1259,7 @@ class Post_Grid extends Widget_Base
         echo '<div ' . $this->get_render_attribute_string( 'post_grid_wrapper' ) . '>
             <div ' . $this->get_render_attribute_string( 'post_grid_container' ) . ' data-layout-mode="' . $settings["layout_mode"] . '">';
                 $query = new \WP_Query( $args );
-            
+
                 if ( $query->have_posts() ) {
                     while ( $query->have_posts() ) {
                         $query->the_post();
@@ -1275,7 +1277,7 @@ class Post_Grid extends Widget_Base
         if ('yes' == $settings['show_load_more']) {
             if ($args['posts_per_page'] != '-1') {
                 echo '<div class="eael-load-more-button-wrap">
-					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings_arry) . '" data-layout="' . $settings['layout_mode'] . '" data-page="1">
+					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-template-path="'.$this->get_template('default').'" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings_arry) . '" data-layout="' . $settings['layout_mode'] . '" data-page="1">
 						<div class="eael-btn-loader button__loader"></div>
 						<span>' . esc_html__($settings['show_load_more_text'], 'essential-addons-for-elementor-lite') . '</span>
 					</button>
