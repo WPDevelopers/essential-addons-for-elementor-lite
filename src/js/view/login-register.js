@@ -4,6 +4,7 @@ ea.hooks.addAction("init", "ea", () => {
         const $wrap = $scope.find('.eael-login-registration-wrapper');// cache wrapper
         //const recaptchaEnabled = $wrap.data('is-recaptcha');
         const widgetId = $wrap.data('widget-id');
+        const recaptchaSiteKey = $wrap.data('recaptcha-sitekey');
         const $loginFormWrapper = $scope.find("#eael-login-form-wrapper");
         const $regFormWrapper = $scope.find("#eael-register-form-wrapper");
         const $regLinkAction = $scope.find('#eael-lr-reg-toggle');
@@ -48,12 +49,12 @@ ea.hooks.addAction("init", "ea", () => {
 
             if (loginRecaptchaNode) {
                 grecaptcha.render(loginRecaptchaNode, {
-                    'sitekey': '6Le0KLsZAAAAAHjjwmR3xKsxzQ2toY35Z8ruhp3x',
+                    'sitekey': recaptchaSiteKey,
                 });
             }
             if (registerRecaptchaNode) {
                 grecaptcha.render(registerRecaptchaNode, {
-                    'sitekey': '6Le0KLsZAAAAAHjjwmR3xKsxzQ2toY35Z8ruhp3x',
+                    'sitekey': recaptchaSiteKey,
                 });
             }
         }
@@ -72,4 +73,3 @@ ea.hooks.addAction("init", "ea", () => {
     };
     elementorFrontend.hooks.addAction("frontend/element_ready/eael-login-register.default", EALoginRegister);
 });
-
