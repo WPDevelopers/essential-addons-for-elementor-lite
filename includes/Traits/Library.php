@@ -33,6 +33,22 @@ trait Library
     }
 
     /**
+     * @param $page_obj
+     * @param $key
+     * @return string
+     */
+    public function get_extension_settings($page_settings_model = [], $global_settings = [], $extension, $key)
+    {
+        if (isset($page_settings_model) && $page_settings_model->get_settings($extension) == 'yes') {
+            return $page_settings_model->get_settings($key);
+        } else if (isset($global_settings[$extension]['enabled'])) {
+            return isset($global_settings[$extension][$key]) ? $global_settings[$extension][$key] : '';
+        }
+
+        return '';
+    }
+
+    /**
      * Remove files
      *
      * @since 3.0.0

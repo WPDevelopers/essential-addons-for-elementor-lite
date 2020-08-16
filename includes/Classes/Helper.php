@@ -251,7 +251,7 @@ class Helper
      * @param int $term_id
      * @return int $term_count;
      */
-    protected static function eael_get_doc_post_count($term_count = 0, $term_id)
+    public static function eael_get_doc_post_count($term_count = 0, $term_id)
     {
         $tax_terms = get_terms('doc_category', ['child_of' => $term_id]);
 
