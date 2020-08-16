@@ -44,8 +44,6 @@ ea.hooks.addAction("init", "ea", () => {
 
         // Recaptcha
         function onloadLRcb() {
-            console.log('logging  google recaptcha');
-            console.log(grecaptcha);
             let loginRecaptchaNode = document.getElementById('login-recaptcha-node-' + widgetId);
             let registerRecaptchaNode = document.getElementById('register-recaptcha-node-' + widgetId);
 
