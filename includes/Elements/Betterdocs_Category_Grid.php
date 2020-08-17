@@ -17,7 +17,7 @@ use \Essential_Addons_Elementor\Classes\Controls;
 class Betterdocs_Category_Grid extends Widget_Base
 {
 
-    use \Essential_Addons_Elementor\Traits\Helper;
+    
     use \Essential_Addons_Elementor\Traits\Template_Query;
 
     public function get_name()
@@ -107,7 +107,7 @@ class Betterdocs_Category_Grid extends Widget_Base
              * Query  Controls!
              * @source includes/elementor-helper.php
              */
-            Controls::betterdocs_query($this);
+            do_action('eael/controls/betterdocs/query', $this);
 
             /**
              * ----------------------------------------------------------

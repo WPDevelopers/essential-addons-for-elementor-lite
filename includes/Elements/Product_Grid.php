@@ -15,7 +15,7 @@ use \Essential_Addons_Elementor\Classes\Helper;
 use \Essential_Addons_Elementor\Classes\Controls;
 
 class Product_Grid extends Widget_Base {
-    use \Essential_Addons_Elementor\Traits\Helper;
+    
     use \Essential_Addons_Elementor\Traits\Template_Query;
 
     public function get_name() {
@@ -573,7 +573,7 @@ class Product_Grid extends Widget_Base {
         /**
          * Load More Button Style Controls!
          */
-        Controls::load_more_button_style($this);
+        do_action('eael/controls/load_more_button_style', $this);
 
     }
 

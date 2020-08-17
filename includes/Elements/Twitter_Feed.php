@@ -14,7 +14,7 @@ use \Elementor\Widget_Base as Widget_Base;
 
 class Twitter_Feed extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
+    use \Essential_Addons_Elementor\Traits\Twitter_Feed;
 
     public function get_name()
     {
@@ -509,6 +509,7 @@ class Twitter_Feed extends Widget_Base
 
     protected function render()
     {
+        error_log(print_r(get_class_methods($this), 1));
         $settings = $this->get_settings();
 
         echo '<div class="eael-twitter-feed eael-twitter-feed-' . $this->get_id() . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type'] . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type_col_type'] . ' clearfix" data-gutter="' . $settings['eael_twitter_feed_column_spacing']['size'] . '">

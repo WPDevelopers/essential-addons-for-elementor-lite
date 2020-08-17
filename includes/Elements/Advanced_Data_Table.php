@@ -102,7 +102,7 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
-        do_action('eael/advanced-data-table/source/control', $this);
+        do_action('eael/controls/advanced-data-table/source', $this);
 
         $this->add_control(
             'ea_adv_data_table_static_html',

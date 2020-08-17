@@ -18,7 +18,7 @@ use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 
 class Info_Box extends Widget_Base {
-	use \Essential_Addons_Elementor\Traits\Helper;
+	
 
 	public function get_name() {
 		return 'eael-info-box';

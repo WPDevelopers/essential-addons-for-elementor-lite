@@ -17,7 +17,7 @@ use \Elementor\Widget_Base as Widget_Base;
 class Betterdocs_Search_Form extends Widget_Base
 {
 
-    use \Essential_Addons_Elementor\Traits\Helper;
+    
 
     public function get_name()
     {

@@ -18,7 +18,7 @@ use \Elementor\Scheme_Color;
 
 class Formstack extends Widget_Base {
 
-    // use \Essential_Addons_Elementor\Traits\Helper;
+    // 
 
     public function get_name () {
         return 'eael-formstack';

@@ -15,7 +15,7 @@ use \Essential_Addons_Elementor\Classes\Controls;
 
 class Content_Ticker extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
+    
     use \Essential_Addons_Elementor\Traits\Template_Query;
 
     public function get_name()
@@ -123,7 +123,7 @@ class Content_Ticker extends Widget_Base
          * Query Controls
          * @source includes/helper.php
          */
-        Controls::query($this);
+        do_action('eael/controls/query', $this);
 
         do_action('eael_ticker_custom_content_controls', $this);
 

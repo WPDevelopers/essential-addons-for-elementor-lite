@@ -15,7 +15,7 @@ use \Essential_Addons_Elementor\Classes\Controls;
 
 class Post_Timeline extends Widget_Base
 {
-	use \Essential_Addons_Elementor\Traits\Helper;
+	
     use \Essential_Addons_Elementor\Traits\Template_Query;
 
     public function get_name()
@@ -66,8 +66,8 @@ class Post_Timeline extends Widget_Base
          * Query And Layout Controls!
          * @source includes/elementor-helper.php
          */
-        Controls::query($this);
-        Controls::layout($this);
+        do_action('eael/controls/query', $this);
+        do_action('eael/controls/layout', $this);
 
         if (!apply_filters('eael/pro_enabled', false)) {
             Helper::eael_go_premium($this);
@@ -322,7 +322,7 @@ class Post_Timeline extends Widget_Base
 
         $this->end_controls_section();
 
-        Controls::load_more_button_style($this);
+        do_action('eael/controls/load_more_button_style', $this);
 
     }
 

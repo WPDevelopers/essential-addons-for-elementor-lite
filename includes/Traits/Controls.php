@@ -1,6 +1,6 @@
 <?php
 
-namespace Essential_Addons_Elementor\Classes;
+namespace Essential_Addons_Elementor\Traits;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -14,7 +14,7 @@ use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Essential_Addons_Elementor\Classes\Helper;
 
-class Controls
+trait Controls
 {
     /**
      * Query Controls
@@ -1331,7 +1331,7 @@ class Controls
     public static function custom_positioning($wb, $prefix, $section_name, $css_selector, $condition = [])
     {
         $selectors = '{{WRAPPER}} ' . $css_selector;
-        
+
         $wb->start_controls_section(
             $prefix . '_section_position',
             [
@@ -1564,5 +1564,51 @@ class Controls
         );
 
         $wb->end_controls_section();
+    }
+
+    public function advanced_data_table_source_control($wb)
+    {
+        if (apply_filters('eael/active_plugins', 'ninja-tables/ninja-tables.php')) {
+            $wb->add_control(
+                'ea_adv_data_table_source_ninja_table_id',
+                [
+                    'label' => esc_html__('Table ID', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'options' => Helper::eael_list_ninja_tables(),
+                    'condition' => [
+                        'ea_adv_data_table_source' => 'ninja',
+                    ],
+                ]
+            );
+        } else {
+            $wb->add_control(
+                'ea_adv_data_table_ninja_required',
+                [
+                    'type' => Controls_Manager::RAW_HTML,
+                    'raw' => __('<strong>Ninja Tables</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=Ninja+Tables&tab=search&type=term" target="_blank">Ninja Tables</a> first.', 'essential-addons-for-elementor-lite'),
+                    'content_classes' => 'eael-warning',
+                    'condition' => [
+                        'ea_adv_data_table_source' => 'ninja',
+                    ],
+                ]
+            );
+        }
+    }
+
+    /**
+     * @since  3.8.2
+     * @param $source
+     *
+     * @return array
+     */
+    public function eael_event_calendar_source($source)
+    {
+        if (apply_filters('eael/pro_enabled', false)) {
+            $source['eventon'] = __('EventON', 'essential-addons-for-elementor-lite');
+        } else {
+            $source['eventon'] = __('EventON (Pro) ', 'essential-addons-for-elementor-lite');
+        }
+
+        return $source;
     }
 }

@@ -17,7 +17,7 @@ use \Elementor\Repeater;
 use \Essential_Addons_Elementor\Classes\Helper;
 
 class Data_Table extends Widget_Base {
-	use \Essential_Addons_Elementor\Traits\Helper;
+	
 
 	public $unique_id = null;
 	public function get_name() {
