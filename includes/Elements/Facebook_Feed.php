@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 
 class Facebook_Feed extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
+    use \Essential_Addons_Elementor\Traits\Facebook_Feed;
 
     public function get_name()
     {
@@ -812,7 +812,7 @@ class Facebook_Feed extends Widget_Base
 
         $this->end_controls_section();
 
-        Controls::load_more_button_style($this);
+        do_action('eael/controls/load_more_button_style', $this);
     }
 
     protected function render()

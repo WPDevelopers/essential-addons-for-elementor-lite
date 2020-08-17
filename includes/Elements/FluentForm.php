@@ -15,7 +15,7 @@ use \Elementor\Widget_Base as Widget_Base;
 use \Elementor\Group_Control_Background as Group_Control_Background;
 use \Elementor\Scheme_Color;
 
-use \Essential_Addons_Elementor\Traits\Helper;
+
 
 class FluentForm extends Widget_Base
 {

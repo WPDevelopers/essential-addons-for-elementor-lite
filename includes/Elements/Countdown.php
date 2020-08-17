@@ -17,7 +17,7 @@ use \Elementor\Widget_Base as Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 
 class Countdown extends Widget_Base {
-    use \Essential_Addons_Elementor\Traits\Helper;
+    
 
     public function get_name() {
         return 'eael-countdown';

@@ -18,7 +18,7 @@ use \Essential_Addons_Elementor\Classes\Helper;
 
 class Event_Calendar extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
+    
 
     public function get_name()
     {
@@ -92,7 +92,7 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Source', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'options' => apply_filters('eael/event-calendar/source', [
+                'options' => apply_filters('eael/controls/event-calendar/source', [
                     'manual' => __('Manual', 'essential-addons-for-elementor-lite'),
                     'google' => __('Google', 'essential-addons-for-elementor-lite'),
                     'the_events_calendar' => __('The Events Calendar', 'essential-addons-for-elementor-lite'),

@@ -12,12 +12,12 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
-use \Essential_Addons_Elementor\Classes\Helper;
 use \Essential_Addons_Elementor\Classes\Controls;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Post_Grid extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
+    
     use \Essential_Addons_Elementor\Traits\Template_Query;
 
     public function get_name()
@@ -80,8 +80,8 @@ class Post_Grid extends Widget_Base
          * Query And Layout Controls!
          * @source includes/elementor-helper.php
          */
-        Controls::query($this);
-        Controls::layout($this);
+        do_action('eael/controls/query', $this);
+        do_action('eael/controls/layout', $this);
 
         /**
          * Grid Style Controls!
@@ -401,7 +401,7 @@ class Post_Grid extends Widget_Base
         /**
          * Style Tab: Meta Date Position
          */
-        Controls::custom_positioning(
+        do_action('eael/controls/custom_positioning',
             $this,
             'eael_meta_date_position_',
             __('Meta Date Position', 'essential-addons-for-elementor-lite'),
@@ -523,7 +523,7 @@ class Post_Grid extends Widget_Base
         /**
          * Style Tab: Meta Position
          */
-        Controls::custom_positioning(
+        do_action('eael/controls/custom_positioning',
             $this,
             'eael_meta_footer_',
             __('Meta Position', 'essential-addons-for-elementor-lite'),
@@ -535,7 +535,7 @@ class Post_Grid extends Widget_Base
             ]
         );
 
-        Controls::custom_positioning(
+        do_action('eael/controls/custom_positioning',
             $this,
             'eael_meta_header_',
             __('Meta Position', 'essential-addons-for-elementor-lite'),
@@ -988,85 +988,88 @@ class Post_Grid extends Widget_Base
         /**
          * Read More Button Style Controls
          */
-        Controls::read_more_button_style($this);
+        do_action('eael/controls/read_more_button_style', $this);
 
         /**
          * Load More Button Style Controls!
          */
-        Controls::load_more_button_style($this);
+        do_action('eael/controls/load_more_button_style', $this);
     }
 
-    private function render_template__header( $style = null ) {
+    private function render_template__header($style = null)
+    {
         $settings = $this->get_settings_for_display();
 
-        if ( $style === 'two' && $settings['eael_show_meta'] && $settings['meta_position'] == 'meta-entry-header' ) {
-            $this->render_template__meta_style_two( $settings );
+        if ($style === 'two' && $settings['eael_show_meta'] && $settings['meta_position'] == 'meta-entry-header') {
+            $this->render_template__meta_style_two($settings);
         }
-        if ( $settings['eael_show_title'] ) {
+        if ($settings['eael_show_title']) {
             echo '<header class="eael-entry-header"><h2 class="eael-entry-title">';
             echo '<a
                 class="eael-grid-post-link"
                 href="' . get_the_permalink() . '"
                 title="' . get_the_title() . '"
-                ' . ( $settings['title_link_nofollow'] ? 'rel="nofollow"' : '' ) . '
-                ' . ( $settings['title_link_target_blank'] ? 'target="_blank"' : '' ) . '
+                ' . ($settings['title_link_nofollow'] ? 'rel="nofollow"' : '') . '
+                ' . ($settings['title_link_target_blank'] ? 'target="_blank"' : '') . '
                 >';
 
-            if ( empty( $settings['eael_title_length'] ) ) {
+            if (empty($settings['eael_title_length'])) {
                 echo get_the_title();
             } else {
-                echo implode( " ", array_slice( explode( " ", get_the_title() ), 0, $settings['eael_title_length'] ) );
+                echo implode(" ", array_slice(explode(" ", get_the_title()), 0, $settings['eael_title_length']));
             }
             echo '</a>';
             echo '</h2></header>';
         }
-        if ( $style == '' && $settings['meta_position'] == 'meta-entry-header' ) {
-            $this->render_template__meta( $settings );
+        if ($style == '' && $settings['meta_position'] == 'meta-entry-header') {
+            $this->render_template__meta($settings);
         }
     }
 
-    private function render_template__meta() {
+    private function render_template__meta()
+    {
         $settings = $this->get_settings_for_display();
 
-        if ( $settings['eael_show_meta'] ) {
+        if ($settings['eael_show_meta']) {
             echo '<div class="eael-entry-meta">';
-            if ( $settings['eael_show_author'] === 'yes' ) {
+            if ($settings['eael_show_author'] === 'yes') {
                 echo '<span class="eael-posted-by">' . get_the_author_posts_link() . '</span>';
             }
-            if ( $settings['eael_show_date'] === 'yes' ) {
+            if ($settings['eael_show_date'] === 'yes') {
                 echo '<span class="eael-posted-on"><time datetime="' . get_the_date() . '">' . get_the_date() . '</time></span>';
             }
             echo '</div>';
         }
     }
 
-    private function render_template__meta_style_two() {
+    private function render_template__meta_style_two()
+    {
         $settings = $this->get_settings_for_display();
 
         echo '<div class="eael-entry-meta">';
-        if ( $settings['eael_show_date'] === 'yes' ) {
+        if ($settings['eael_show_date'] === 'yes') {
             echo '<span class="eael-meta-posted-on"><i class="far fa-clock"></i><time datetime="' . get_the_date() . '">' . get_the_date() . '</time></span>';
         }
-        if ( $settings['eael_show_post_terms'] === 'yes' ) {
-            if ( $settings['eael_post_terms'] === 'category' ) {
+        if ($settings['eael_show_post_terms'] === 'yes') {
+            if ($settings['eael_post_terms'] === 'category') {
                 $terms = get_the_category();
             }
-            if ( $settings['eael_post_terms'] === 'tags' ) {
+            if ($settings['eael_post_terms'] === 'tags') {
                 $terms = get_the_tags();
             }
-            if ( !empty( $terms ) ) {
+            if (!empty($terms)) {
                 $html = '<ul class="post-meta-categories">';
                 $count = 0;
-                foreach ( $terms as $term ) {
-                    if ( $count === intval( $settings['eael_post_terms_max_length'] ) ) {
+                foreach ($terms as $term) {
+                    if ($count === intval($settings['eael_post_terms_max_length'])) {
                         break;
                     }
-                    if ( $count === 0 ) {
+                    if ($count === 0) {
                         $html .= '<li class="meta-cat-icon"><i class="far fa-folder-open"></i></li>';
                     }
-                    $link = ( $settings['eael_post_terms'] === 'category' ) ? get_category_link( $term->term_id ) : get_tag_link( $term->term_id );
+                    $link = ($settings['eael_post_terms'] === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
                     $html .= '<li>';
-                    $html .= '<a href="' . esc_url( $link ) . '">';
+                    $html .= '<a href="' . esc_url($link) . '">';
                     $html .= $term->name;
                     $html .= '</a>';
                     $html .= '</li>';
@@ -1079,127 +1082,128 @@ class Post_Grid extends Widget_Base
         echo '</div>';
     }
 
-    private function render_template__footer_meta() {
+    private function render_template__footer_meta()
+    {
         $settings = $this->get_settings_for_display();
 
-        if ( $settings['eael_show_meta'] && $settings['meta_position'] == 'meta-entry-footer' ) {
+        if ($settings['eael_show_meta'] && $settings['meta_position'] == 'meta-entry-footer') {
             echo '<div class="eael-entry-footer">';
-            if ( $settings['eael_show_avatar'] === 'yes' ) {
-                echo '<div class="eael-author-avatar"><a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '">' . get_avatar( get_the_author_meta( 'ID' ), 96 ) . '</a></div>';
+            if ($settings['eael_show_avatar'] === 'yes') {
+                echo '<div class="eael-author-avatar"><a href="' . get_author_posts_url(get_the_author_meta('ID')) . '">' . get_avatar(get_the_author_meta('ID'), 96) . '</a></div>';
             }
-            $this->render_template__meta( $settings );
+            $this->render_template__meta($settings);
             echo '</div>';
         }
     }
 
-    private function render_template__excerpt() {
+    private function render_template__excerpt()
+    {
         $settings = $this->get_settings_for_display();
 
-        if ( $settings['eael_show_excerpt'] || $settings['eael_show_read_more_button'] ) {
+        if ($settings['eael_show_excerpt'] || $settings['eael_show_read_more_button']) {
             echo '<div class="eael-entry-content">
                 <div class="eael-grid-post-excerpt">';
-            if ( $settings['eael_show_excerpt'] ) {
-                if ( empty( $settings['eael_excerpt_length'] ) ) {
-                    echo '<p>' . strip_shortcodes( get_the_excerpt() ? get_the_excerpt() : get_the_content() ) . '</p>';
+            if ($settings['eael_show_excerpt']) {
+                if (empty($settings['eael_excerpt_length'])) {
+                    echo '<p>' . strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()) . '</p>';
                 } else {
-                    echo '<p>' . wp_trim_words( strip_shortcodes( get_the_excerpt() ? get_the_excerpt() : get_the_content() ), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator'] ) . '</p>';
+                    echo '<p>' . wp_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']) . '</p>';
                 }
             }
 
-            if ( $settings['eael_show_read_more_button'] ) {
+            if ($settings['eael_show_read_more_button']) {
                 echo '<a
                     href="' . get_the_permalink() . '"
                     class="eael-post-elements-readmore-btn"
-                    ' . ( $settings['read_more_link_nofollow'] ? 'rel="nofollow"' : '' ) . '
-                    ' . ( $settings['read_more_link_target_blank'] ? 'target="_blank"' : '' ) . '
-                    >' . esc_attr( $settings['read_more_button_text'] ) . '</a>';
+                    ' . ($settings['read_more_link_nofollow'] ? 'rel="nofollow"' : '') . '
+                    ' . ($settings['read_more_link_target_blank'] ? 'target="_blank"' : '') . '
+                    >' . esc_attr($settings['read_more_button_text']) . '</a>';
             }
             echo '</div>
             </div>';
         }
     }
-    private function render_template__thumbnail( $style = null ) {
+    private function render_template__thumbnail($style = null)
+    {
         $settings = $this->get_settings_for_display();
 
-        if ( has_post_thumbnail() && $settings['eael_show_image'] == 'yes' ) {
+        if (has_post_thumbnail() && $settings['eael_show_image'] == 'yes') {
 
             echo '<div class="eael-entry-media">';
-            if ( $style == null && $settings['eael_show_post_terms'] === 'yes' ) {
-                echo self::get_terms_as_list( $settings['eael_post_terms'], $settings['eael_post_terms_max_length'] );
+            if ($style == null && $settings['eael_show_post_terms'] === 'yes') {
+                echo self::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
             }
 
             echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">';
 
-                if ( isset( $settings['eael_post_grid_bg_hover_icon_new']['url'] ) ) {
-                    echo '<img src="' . esc_url( $settings['eael_post_grid_bg_hover_icon_new']['url'] ) . '" alt="' . esc_attr( get_post_meta( $settings['eael_post_grid_bg_hover_icon_new']['id'], '_wp_attachment_image_alt', true ) ) . '" />';
-                } else {
-                    echo '<i class="' . $settings['eael_post_grid_bg_hover_icon_new']['value'] . '" aria-hidden="true"></i>';
-                }
-                echo '<a
+            if (isset($settings['eael_post_grid_bg_hover_icon_new']['url'])) {
+                echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['id'], '_wp_attachment_image_alt', true)) . '" />';
+            } else {
+                echo '<i class="' . $settings['eael_post_grid_bg_hover_icon_new']['value'] . '" aria-hidden="true"></i>';
+            }
+            echo '<a
                         href="' . get_the_permalink() . '"
-                        ' . ( $settings['image_link_nofollow'] ? 'rel="nofollow"' : '' ) . '
-                        ' . ( $settings['image_link_target_blank'] ? 'target="_blank"' : '' ) . '
+                        ' . ($settings['image_link_nofollow'] ? 'rel="nofollow"' : '') . '
+                        ' . ($settings['image_link_target_blank'] ? 'target="_blank"' : '') . '
                     ></a>';
-                echo '</div>';
+            echo '</div>';
 
-                echo '<div class="eael-entry-thumbnail">
-                            <img src="' . esc_url( wp_get_attachment_image_url( get_post_thumbnail_id(), $settings['image_size'] ) ) . '" alt="' . esc_attr( get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) ) . '">
+            echo '<div class="eael-entry-thumbnail">
+                            <img src="' . esc_url(wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])) . '" alt="' . esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) . '">
                         </div>';
             echo '</div>';
-            if ( $style === 'three' && $settings['eael_show_date'] === 'yes' ) {
-                echo '<span class="eael-meta-posted-on"><time datetime="' . get_the_date() . '"><span>' . get_the_date( 'd' ) . '</span>' . get_the_date( 'F' ) . '</time></span>';
+            if ($style === 'three' && $settings['eael_show_date'] === 'yes') {
+                echo '<span class="eael-meta-posted-on"><time datetime="' . get_the_date() . '"><span>' . get_the_date('d') . '</span>' . get_the_date('F') . '</time></span>';
             }
         }
     }
 
-    protected function render() {
+    protected function render()
+    {
         $settings = $this->get_settings();
         $settings = Helper::fix_old_query($settings);
         $args = Helper::eael_get_query_args($settings);
 
-        if($settings['post_type'] === 'source_dynamic' && is_archive()) {
+        if ($settings['post_type'] === 'source_dynamic' && is_archive()) {
 
             $data = get_queried_object();
 
-            if($data) {
+            if ($data) {
                 $args['post_type'] = $data->post_type;
 
                 $args['tax_query'] = [];
 
-                if($data->taxonomy) {
+                if ($data->taxonomy) {
                     $args['tax_query'][] = [
                         'taxonomy' => $data->taxonomy,
                         'field' => 'term_id',
                         'terms' => $data->term_id,
                     ];
                 }
-            }else {
+            } else {
                 global $wp_query;
-                
+
                 $args['post_type'] = $wp_query->query_vars['post_type'];
             }
 
-            if( get_query_var( 'author' ) > 0 ) {
-                $args['author__in'] = get_query_var( 'author' );
+            if (get_query_var('author') > 0) {
+                $args['author__in'] = get_query_var('author');
             }
 
-            if(get_query_var('year') || get_query_var('monthnum') || get_query_var('day')) {
+            if (get_query_var('year') || get_query_var('monthnum') || get_query_var('day')) {
                 $args['date_query'] = [
-                    'year'  => get_query_var('year'),
+                    'year' => get_query_var('year'),
                     'month' => get_query_var('monthnum'),
-                    'day'   => get_query_var('day')
+                    'day' => get_query_var('day'),
                 ];
             }
-            
+
             if (!empty($args['tax_query'])) {
                 $args['tax_query']['relation'] = 'AND';
             }
         }
 
-    
         // echo '<pre><code>', print_r($args, 1), '</code></pre>';
-
-        
 
         $settings_arry = [
             'eael_show_image' => $settings['eael_show_image'],
@@ -1257,21 +1261,21 @@ class Post_Grid extends Widget_Base
             ]
         );
 
-        echo '<div ' . $this->get_render_attribute_string( 'post_grid_wrapper' ) . '>
-            <div ' . $this->get_render_attribute_string( 'post_grid_container' ) . ' data-layout-mode="' . $settings["layout_mode"] . '">';
-                $query = new \WP_Query( $args );
-            
-                if ( $query->have_posts() ) {
-                    while ( $query->have_posts() ) {
-                        $query->the_post();
+        echo '<div ' . $this->get_render_attribute_string('post_grid_wrapper') . '>
+            <div ' . $this->get_render_attribute_string('post_grid_container') . ' data-layout-mode="' . $settings["layout_mode"] . '">';
+        $query = new \WP_Query($args);
 
-                        include($this->get_template('default'));
-                    }
-                }else {
-                    _e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
-                }
-                wp_reset_postdata();
-            echo '</div>
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+
+                include $this->get_template('default');
+            }
+        } else {
+            _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+        }
+        wp_reset_postdata();
+        echo '</div>
             <div class="clearfix"></div>
         </div>';
 
@@ -1315,6 +1319,6 @@ class Post_Grid extends Widget_Base
                 });
             </script>
             <?php
-        }
+}
     }
 }
