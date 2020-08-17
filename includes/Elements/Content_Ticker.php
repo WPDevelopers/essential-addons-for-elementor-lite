@@ -16,7 +16,7 @@ use \Essential_Addons_Elementor\Classes\Controls;
 class Content_Ticker extends Widget_Base
 {
     use \Essential_Addons_Elementor\Traits\Helper;
-    use \Essential_Addons_Elementor\Template\Content\Content_Ticker;
+    use \Essential_Addons_Elementor\Traits\Template_Query;
 
     public function get_name()
     {
@@ -778,7 +778,7 @@ class Content_Ticker extends Widget_Base
         if ($settings['arrows'] == 'yes') {
             $this->add_render_attribute('content-ticker', 'data-arrows', '1');
         }
-
+        
         echo '<div class="eael-ticker-wrap" id="eael-ticker-wrap-' . $this->get_id() . '">';
         if (!empty($settings['eael_ticker_tag_text'])) {
             echo '<div class="ticker-badge">
@@ -789,12 +789,36 @@ class Content_Ticker extends Widget_Base
         echo '<div ' . $this->get_render_attribute_string('content-ticker-wrap') . '>
                 <div ' . $this->get_render_attribute_string('content-ticker') . '>
                     <div class="swiper-wrapper">';
-        if ('dynamic' === $settings['eael_ticker_type']) {
-            echo self::render_template_($args, null);
-        }
 
-        do_action('render_content_ticker_custom_content', $settings);
-        echo '</div>
+                        if ('dynamic' === $settings['eael_ticker_type']) {
+                            $query = new \WP_Query($args);
+
+                            if ($query->have_posts()) {
+                                while ($query->have_posts()) {
+                                    $query->the_post();
+                                    
+                                    if(\file_exists($this->get_template($settings['eael_ticker_type']))) {
+                                        include($this->get_template($settings['eael_ticker_type']));
+                                    }
+                                }
+                            } else {
+                                $html .= '<div class="swiper-slide"><a href="#" class="ticker-content">' . __('No content found!', 'essential-addons-for-elementor-lite') . '</a></div>';
+                            }
+                            wp_reset_postdata();
+                        }
+
+                        if ( 'custom' === $settings['eael_ticker_type'] ) {
+                            foreach ( $settings['eael_ticker_custom_contents'] as $content ) {
+                                if(\file_exists($this->get_template($settings['eael_ticker_type']))) {
+                                    $target = $content['eael_ticker_custom_content_link']['is_external'] ? 'target="_blank"' : '';
+                                    $nofollow = $content['eael_ticker_custom_content_link']['nofollow'] ? 'rel="nofollow"' : '';
+
+                                    include($this->get_template($settings['eael_ticker_type']));
+                                }
+                            }
+                        }
+                        
+                    echo '</div>
 				</div>
 				' . $this->render_arrows() . '
 			</div>
