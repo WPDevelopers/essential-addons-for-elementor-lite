@@ -113,6 +113,8 @@ class Bootstrap
 
         // Enqueue
         add_action('eael/before_enqueue_styles', array($this, 'before_enqueue_styles'));
+        add_action('elementor/editor/before_enqueue_scripts', array($this, 'lr_enqueue_scripts'));
+        add_action('wp_enqueue_scripts', array($this, 'lr_enqueue_scripts'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
         add_action('elementor/css-file/post/enqueue', [$this, 'enqueue_template_scripts']);
         add_action('elementor/editor/before_enqueue_scripts', array($this, 'editor_enqueue_scripts'));

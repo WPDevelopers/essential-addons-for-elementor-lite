@@ -56,6 +56,7 @@ trait Enqueue
                 wp_add_inline_script('nf-front-end', 'var nfForms = nfForms || [];');
             });
         }
+
     }
 
     public function enqueue_template_scripts($css_file)
