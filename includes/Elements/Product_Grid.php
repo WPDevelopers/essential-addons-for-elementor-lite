@@ -2292,10 +2292,25 @@ class Product_Grid extends Widget_Base {
                         });
                     }
 
-                    $('.open-popup-link').magnificPopup({
-                        type:'inline',
-                        midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
-                    });
+                    // $('.open-popup-link').magnificPopup({
+                    //     type:'inline',
+                    //     midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+                    // });
+
+                    $(document).on('click','.open-popup-link',function(e){
+                    	e.preventDefault();
+	                    e.stopPropagation();
+                    	const $this = $(this);
+                    	const id = $this.attr('href');
+                    	const popup = $(id);
+	                    popup.addClass("eael-product-popup-ready").removeClass("eael-product-modal-removing");
+                    })
+
+	                $(document).on('click', function (event) {
+		                if (event.target.closest(".eael-product-popup-details")) return;
+                        $('.eael-product-popup.eael-product-zoom-in.eael-product-popup-ready').addClass("eael-product-modal-removing").removeClass("eael-product-popup-ready");
+	                });
+
                 });
             });
 
