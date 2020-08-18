@@ -278,6 +278,7 @@ class Product_Grid extends Widget_Base {
 				'default' => '10',
 				'condition' => [
 					'eael_product_grid_excerpt' => 'yes',
+					'eael_product_grid_layout' => 'list',
 				],
 			]
 		);
@@ -291,6 +292,7 @@ class Product_Grid extends Widget_Base {
 				'default' => esc_html__('...', 'essential-addons-elementor'),
 				'condition' => [
 					'eael_product_grid_excerpt' => 'yes',
+					'eael_product_grid_layout' => 'list',
 				],
 			]
 		);
