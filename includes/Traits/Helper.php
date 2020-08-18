@@ -24,8 +24,6 @@ trait Helper
         parse_str($_REQUEST['args'], $args);
         parse_str($_REQUEST['settings'], $settings);
 
-        var_dump($_REQUEST['template_path']);
-
         $class = '\\' . str_replace('\\\\', '\\', $_REQUEST['class']);
         $args['offset'] = (int) $args['offset'] + (((int) $_REQUEST['page'] - 1) * (int) $args['posts_per_page']);
 
@@ -43,7 +41,7 @@ trait Helper
 
         $html = include($_REQUEST['template_path']);
 
-        echo $html;
+        // echo $html;
         wp_die();
     }
 
