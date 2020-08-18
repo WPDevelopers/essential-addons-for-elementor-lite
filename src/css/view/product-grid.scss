@@ -155,7 +155,7 @@
                         margin: 15px;
                         border-radius: 0;
                         &::before {
-                            content: "\f217";
+                            content: "\f07a";
                             font-family: "Font Awesome 5 Free";
                             font-weight: 900;
                             padding-right: 8px;
@@ -293,7 +293,7 @@
                             }
 
                             &:after {
-                                content: '\f217';
+                                content: '\f07a';
                                 font-size: 14px;
                                 line-height: 38px;
                                 text-rendering: auto;
@@ -301,7 +301,8 @@
                                 vertical-align: middle;
                                 margin: 0;
                                 padding: 0;
-                                font-family: 'Font Awesome 5 Free';
+                                font-family: "Font Awesome 5 Free";
+                                font-weight: 900;
                             }
 
                             &.loading {
@@ -312,7 +313,7 @@
                                     content: '\f110';
                                     display: inline-block;
                                     font-weight: normal;
-                                    font-family: 'Font Awesome 5 Free';
+                                    font-family: "Font Awesome 5 Free";
                                     font-size: 14px;
                                     line-height: 38px;
                                     color: #fff;
@@ -424,7 +425,7 @@
     &.eael-product-default {
         .button.add_to_cart_button {
             &::before {
-                content: "\f217";
+                content: "\f07a";
                 font-family: "Font Awesome 5 Free";
                 font-weight: 900;
                 padding-right: 8px;
@@ -958,6 +959,7 @@
                                     display: block;
                                     font-family: "Font Awesome 5 Free";
                                     font-size: 18px;
+                                    font-weight: 900;
                                     //color: #000;
                                     transform: translate(-50%, -50%);
                                     top: 50%;
@@ -1019,6 +1021,7 @@
                                     display: block;
                                     font-family: "Font Awesome 5 Free";
                                     font-size: 18px;
+                                    font-weight: 900;
                                     //color: #000;
                                     transform: translate(-50%, -50%);
                                     top: 50%;
@@ -1088,6 +1091,7 @@
                                     display: block;
                                     font-family: "Font Awesome 5 Free";
                                     font-size: 18px;
+                                    font-weight: 900;
                                     //color: #000;
                                     transform: translate(-50%, -50%);
                                     top: 50%;
@@ -1590,16 +1594,17 @@
     float: none;
     height: 15px;
     margin: 0;
-    width: 68px;
+    width: 98px;
 }
 .woocommerce .ratings .star-rating:before,
 .woocommerce .woocommerce-product-rating .star-rating:before,
 .woocommerce-page .ratings .star-rating:before,
 .woocommerce-page .woocommerce-product-rating .star-rating:before {
-    content: '\f006\f006\f006\f006\f006';
-    font-family: FontAwesome;
+    content: '\f005\f005\f005\f005\f005';
+    font-family: "Font Awesome 5 Free";
     font-size: 15px;
     letter-spacing: 3px;
+    font-weight: 400;
 }
 .woocommerce .ratings .star-rating span,
 .woocommerce .woocommerce-product-rating .star-rating span,
@@ -1610,12 +1615,14 @@
     width: 120px;
 }
 .woocommerce .ratings .star-rating span:before,
+.woocommerce .ratings .star-rating span:before,
 .woocommerce .woocommerce-product-rating .star-rating span:before,
 .woocommerce-page .ratings .star-rating span:before,
 .woocommerce-page .woocommerce-product-rating .star-rating span:before {
-    color: #a5a5a5;
+    //color: #a5a5a5;
     content: '\f005 \f005 \f005 \f005 \f005';
-    font-family: FontAwesome;
+    font-family: "Font Awesome 5 Free";
     font-size: 15px;
     letter-spacing: 3px;
+    font-weight: 900;
 }
