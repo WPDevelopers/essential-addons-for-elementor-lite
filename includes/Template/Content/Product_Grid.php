@@ -346,8 +346,9 @@ trait Product_Grid
 	}
 
 	protected static function eael_product_quick_view ($product, $settings) { ?>
-		<div id="eaproduct<?php echo $product->get_id(); ?>" class="eael-product-popup mfp-hide woocommerce">
-            <div id="product-<?php the_ID(); ?>" <?php post_class( 'product' ); ?>>
+		<div id="eaproduct<?php echo $product->get_id(); ?>" class="eael-product-popup eael-product-zoom-in woocommerce">
+            <div class="eael-product-modal-bg"></div>
+            <div id="product-<?php the_ID(); ?>" <?php post_class( 'product eael-product-popup-details' ); ?>>
                 <div class="eael-product-image-wrap">
                     <?php
                     echo ($product->is_on_sale() ? '<span class="eael-onsale '.$settings['eael_product_sale_badge_preset'].'">' . __('Sale!',
@@ -359,6 +360,7 @@ trait Product_Grid
                     <?php do_action( 'eael_woo_single_product_summary' ); ?>
                 </div>
             </div>
+            <button class="eael-product-popup-close">Close</button>
         </div>
 	<?php }
 
