@@ -2029,6 +2029,7 @@ class Product_Grid extends Widget_Base {
 			'eael_product_sale_badge_alignment' => $settings['eael_product_sale_badge_alignment'],
 			'eael_product_action_buttons_preset' => $settings['eael_product_action_buttons_preset'],
 			'eael_product_grid_quick_view' => $settings['eael_product_grid_quick_view'],
+			'eael_product_grid_price' => $settings['eael_product_grid_price'],
 		];
 
 		$html = '<div class="eael-product-grid ' . $settings['eael_product_grid_style_preset'] . ' ' . $settings['eael_product_grid_layout'] . '">';

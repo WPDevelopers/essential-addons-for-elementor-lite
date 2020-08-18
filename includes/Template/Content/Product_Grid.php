@@ -34,8 +34,8 @@ trait Product_Grid
                             ' . $product->get_image('woocommerce_thumbnail') . '
                             <h2 class="woocommerce-loop-product__title">' . $product->get_title() . '</h2>
                             ' . ($settings['eael_product_grid_rating'] != 'yes' ? '' : wc_get_rating_html($product->get_average_rating(), $product->get_rating_count())) . '
-                            '.( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="outofstock-badge">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="onsale">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') ).'
-                            <span class="price">' . $product->get_price_html() . '</span>
+                            '.( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="outofstock-badge">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="onsale">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') ).
+					     ($settings['eael_product_grid_price'] != 'yes' ? '' : '<span class="price">' . $product->get_price_html() . '</span>') .'
                         </a>';
 					woocommerce_template_loop_add_to_cart();
 					echo '</li>';
@@ -50,8 +50,8 @@ trait Product_Grid
                         </div>
                         <h2 class="woocommerce-loop-product__title">' . $product->get_title() . '</h2>
                         ' . ($settings['eael_product_grid_rating'] != 'yes' ? '' : wc_get_rating_html($product->get_average_rating(), $product->get_rating_count())) . '
-                        ' . ($product->is_on_sale() ? '<span class="onsale">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') . '
-                        <span class="price">' . $product->get_price_html() . '</span>
+                        ' . ($product->is_on_sale() ? '<span class="onsale">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') .
+					     ($settings['eael_product_grid_price'] != 'yes' ? '' : '<span class="price">' . $product->get_price_html() . '</span>') .'
                     </li>';
 				} else if (($settings['eael_product_grid_style_preset'] == 'eael-product-preset-5') || ($settings['eael_product_grid_style_preset'] == 'eael-product-preset-6') || ($settings['eael_product_grid_style_preset'] == 'eael-product-preset-7')) { ?>
 					<li class="product">
@@ -113,13 +113,13 @@ trait Product_Grid
 							</div>
 							<div class="product-details-wrap">
 								<?php
-                                if($settings['eael_product_grid_style_preset'] == 'eael-product-preset-7'){
+                                if(($settings['eael_product_grid_style_preset'] == 'eael-product-preset-7') && ( $settings['eael_product_grid_price'] == true)){
                                     echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
                                 }
                                 echo ($settings['eael_product_grid_rating'] != 'yes' ? '' : wc_get_rating_html
 								($product->get_average_rating(), $product->get_rating_count())); ?>
 								<div class="eael-product-title"><h2><?php echo $product->get_title(); ?></h2></div>
-								<?php if($settings['eael_product_grid_style_preset'] != 'eael-product-preset-7'){
+								<?php if(($settings['eael_product_grid_style_preset'] != 'eael-product-preset-7') && ( $settings['eael_product_grid_price'] == true)){
 									echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
 								}?>
 							</div>
@@ -158,7 +158,11 @@ trait Product_Grid
                                 </div>
                             </div>
                             <div class="product-details-wrap">
-                                <div class="eael-product-price"><?php echo $product->get_price_html(); ?></div>
+                                <?php
+                                if ( $settings['eael_product_grid_price'] == true) {
+	                                echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+                                }
+                                ?>
                                 <div class="eael-product-title">
                                     <?php
                                     echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
@@ -199,12 +203,15 @@ trait Product_Grid
 			                                         get_the_content()), $settings['eael_product_grid_excerpt_length'], $settings['eael_product_grid_excerpt_expanison_indicator']) . '</p>';
 	                                         echo '</div>';
                                          }
-                                    echo '<div class="eael-product-price">'.$product->get_price_html().'</div>'.
-	                                     ($settings['eael_product_grid_rating'] != 'yes' ? '' : wc_get_rating_html
+                                        if ( $settings['eael_product_grid_price'] == true) {
+                                            echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+                                        }
+                                    echo ($settings['eael_product_grid_rating'] != 'yes' ? '' : wc_get_rating_html
 	                                     ($product->get_average_rating(), $product->get_rating_count()));
                                 } elseif ($settings['eael_product_list_style_preset'] == 'eael-product-list-preset-3') {
-								    echo '<div class="price-wrap">
-									        <div class="eael-product-price">'.$product->get_price_html().'</div>'.
+								    echo '<div class="price-wrap">'.
+                                            ( $settings['eael_product_grid_price'] != 'yes' ? '' : '<div class="eael-product-price">'.$product->get_price_html().'</div>').
+
 									        ($settings['eael_product_grid_rating'] != 'yes' ? '' : wc_get_rating_html
 									        ($product->get_average_rating(), $product->get_rating_count())).
                                           '</div>
@@ -235,7 +242,10 @@ trait Product_Grid
 			                                         get_the_content()), $settings['eael_product_grid_excerpt_length'], $settings['eael_product_grid_excerpt_expanison_indicator']) . '</p>';
 	                                         echo '</div>';
                                          }
-                                    echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+                                        if ( $settings['eael_product_grid_price'] == true) {
+                                            echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+                                        }
+
 								} else {
 								    echo '<div class="eael-product-title">
                                             <a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
