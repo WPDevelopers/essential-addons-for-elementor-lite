@@ -1915,7 +1915,7 @@ class Product_Grid extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'.eael-product-popup .mfp-close' => 'font-size: {{SIZE}}{{UNIT}};',
+					'.eael-product-popup button.mfp-close' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1941,7 +1941,7 @@ class Product_Grid extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'.eael-product-popup .mfp-close' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'.eael-product-popup button.mfp-close' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1952,7 +1952,7 @@ class Product_Grid extends Widget_Base {
 				'label'     => __('Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'.eael-product-popup .mfp-close' => 'color: {{VALUE}};',
+					'.eael-product-popup button.mfp-close' => 'color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -1963,7 +1963,7 @@ class Product_Grid extends Widget_Base {
 				'label'     => __('Background', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'.eael-product-popup .mfp-close' => 'color: {{VALUE}};',
+					'.eael-product-popup button.mfp-close' => 'background-color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -1986,7 +1986,7 @@ class Product_Grid extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'.eael-product-popup .mfp-close' => 'border-radius: {{SIZE}}{{UNIT}};',
+					'.eael-product-popup button.mfp-close' => 'border-radius: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1996,7 +1996,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'name'     => 'eael_product_popup_close_button_box_shadow',
 				'label'    => __('Box Shadow', 'essential-addons-for-elementor-lite'),
-				'selector' => '.eael-product-popup .mfp-close',
+				'selector' => '.eael-product-popup button.mfp-close',
 			]
 		);
 
@@ -2009,7 +2009,7 @@ class Product_Grid extends Widget_Base {
 				'selectors'  => [
 					'.eael-product-popup' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'separator'  => 'after',
+				'separator'  => 'before',
 			]
 		);
 
