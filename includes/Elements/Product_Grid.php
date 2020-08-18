@@ -247,6 +247,9 @@ class Product_Grid extends Widget_Base {
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
+				'condition' => [
+					'eael_product_grid_style_preset!' => 'eael-product-default',
+				],
 			]
 		);
 		$this->add_control(
@@ -256,6 +259,9 @@ class Product_Grid extends Widget_Base {
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
+				'condition' => [
+					'eael_product_grid_style_preset!' => 'eael-product-default',
+				],
 			]
 		);
 		$this->add_control(
