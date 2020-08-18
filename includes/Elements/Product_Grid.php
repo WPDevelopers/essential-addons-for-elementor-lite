@@ -1767,6 +1767,124 @@ class Product_Grid extends Widget_Base {
 			]
 		);
 
+		// Cart Button
+		$this->add_control(
+			'eael_product_popup_cart_button',
+			[
+				'label'     => __('Cart Button', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_product_popup_cart_button_typo',
+				'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
+				'selector' => '.eael-product-popup.woocommerce .button, .eael-product-popup.woocommerce button.button.alt',
+			]
+		);
+
+		$this->start_controls_tabs( 'eael_product_popup_cart_button_style_tabs' );
+
+		$this->start_controls_tab( 'eael_product_popup_cart_button_style_tabs_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ) ] );
+
+		$this->add_control(
+			'eael_product_popup_cart_button_color',
+			[
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#fff',
+				'selectors' => [
+					'.eael-product-popup.woocommerce .button, .eael-product-popup.woocommerce button.button.alt' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_popup_cart_button_background',
+			[
+				'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#8040FF',
+				'selectors' => [
+					'.eael-product-popup.woocommerce .button, .eael-product-popup.woocommerce button.button.alt' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'eael_product_popup_cart_button_border',
+				'selector' => '.eael-product-popup.woocommerce .button, .eael-product-popup.woocommerce button.button.alt',
+			]
+		);
+		$this->add_control(
+			'eael_product_popup_cart_button_border_radius',
+			[
+				'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'.eael-product-popup.woocommerce .button, .eael-product-popup.woocommerce button.button.alt' => 'border-radius: {{SIZE}}px;',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab( 'eael_product_popup_cart_button_hover_styles', [ 'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ) ] );
+
+		$this->add_control(
+			'eael_product_popup_cart_button_hover_color',
+			[
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#F5EAFF',
+				'selectors' => [
+					'.eael-product-popup.woocommerce .button:hover, .eael-product-popup.woocommerce button.button.alt:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_popup_cart_button_hover_background',
+			[
+				'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#F12DE0',
+				'selectors' => [
+					'.eael-product-popup.woocommerce .button:hover, .eael-product-popup.woocommerce button.button.alt:hover' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_popup_cart_button_hover_border_color',
+			[
+				'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'.eael-product-popup.woocommerce .button:hover, .eael-product-popup.woocommerce button.button.alt:hover' => 'border-color: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_product_popup_cart_button_border_border!' => '',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+
 		$this->add_control(
 			'eael_product_popup_close_button_style',
 			[
