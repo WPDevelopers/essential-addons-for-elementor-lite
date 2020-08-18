@@ -1923,6 +1923,54 @@ class Product_Grid extends Widget_Base {
 
 		$this->end_controls_tabs();
 
+		// SKU
+		$this->add_control(
+			'eael_product_popup_sku_style',
+			[
+				'label'     => __('SKU', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_product_popup_sku_typo',
+				'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
+				'selector' => '.eael-product-popup.woocommerce .product_meta',
+			]
+		);
+		$this->add_control(
+			'eael_product_popup_sku_color',
+			[
+				'label'     => __('Color', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'.eael-product-popup.woocommerce .product_meta' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		$this->add_control(
+			'eael_product_popup_sku_link_color',
+			[
+				'label'     => __('Link Color', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'.eael-product-popup.woocommerce .product_meta .sku, .eael-product-popup.woocommerce .product_meta a' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		$this->add_control(
+			'eael_product_popup_sku_link_hover_color',
+			[
+				'label'     => __('Link Hover Color', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'.eael-product-popup.woocommerce .product_meta a:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
 
 		$this->add_control(
 			'eael_product_popup_close_button_style',
