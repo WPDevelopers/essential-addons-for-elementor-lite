@@ -1767,6 +1767,45 @@ class Product_Grid extends Widget_Base {
 			]
 		);
 
+		// Sale
+		$this->add_control(
+			'eael_product_popup_sale_style',
+			[
+				'label'     => __('Sale', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_product_popup_sale_typo',
+				'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
+				'selector' => '.eael-product-popup .eael-onsale',
+			]
+		);
+		$this->add_control(
+			'eael_product_popup_sale_color',
+			[
+				'label'     => __('Color', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'.eael-product-popup .eael-onsale' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		$this->add_control(
+			'eael_product_popup_sale_bg_color',
+			[
+				'label'     => __('Link Color', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'.eael-product-popup .eael-onsale' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
 		// Cart Button
 		$this->add_control(
 			'eael_product_popup_cart_button',
