@@ -67,7 +67,7 @@ trait Product_Grid
 										<ul class="icons-wrap block-style">
 											<?php if( $settings['eael_product_grid_quick_view'] == true ){?>
                                                 <li class="quick-view">
-                                                    <a href="#test<?php echo $product->get_id(); ?>" class="open-popup-link">
+                                                    <a href="#eaproduct<?php echo $product->get_id(); ?>" class="open-popup-link">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
                                                 </li>
@@ -82,7 +82,7 @@ trait Product_Grid
 												woocommerce_template_loop_add_to_cart(); ?></li>
 											<?php if( $settings['eael_product_grid_quick_view'] == true ){?>
                                                 <li class="quick-view">
-                                                    <a href="#test<?php echo $product->get_id(); ?>" class="open-popup-link">
+                                                    <a href="#eaproduct<?php echo $product->get_id(); ?>" class="open-popup-link">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
                                                 </li>
@@ -96,7 +96,7 @@ trait Product_Grid
 												woocommerce_template_loop_add_to_cart(); ?></li>
 											<?php if( $settings['eael_product_grid_quick_view'] == true ){?>
                                                 <li class="quick-view">
-                                                    <a href="#test<?php echo $product->get_id(); ?>" class="open-popup-link">
+                                                    <a href="#eaproduct<?php echo $product->get_id(); ?>" class="open-popup-link">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
                                                 </li>
@@ -144,7 +144,7 @@ trait Product_Grid
                                             woocommerce_template_loop_add_to_cart(); ?></li>
 	                                    <?php if( $settings['eael_product_grid_quick_view'] == true ){?>
                                             <li class="quick-view">
-                                                <a href="#test<?php echo $product->get_id(); ?>" class="open-popup-link">
+                                                <a href="#eaproduct<?php echo $product->get_id(); ?>" class="open-popup-link">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
                                             </li>
@@ -269,7 +269,7 @@ trait Product_Grid
 										woocommerce_template_loop_add_to_cart(); ?></li>
                                     <?php if( $settings['eael_product_grid_quick_view'] == true ){?>
 	                                    <li class="quick-view">
-                                            <a href="#test<?php echo $product->get_id(); ?>" class="open-popup-link">
+                                            <a href="#eaproduct<?php echo $product->get_id(); ?>" class="open-popup-link">
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                         </li>
@@ -346,7 +346,7 @@ trait Product_Grid
 	}
 
 	protected static function eael_product_quick_view ($product, $settings) { ?>
-		<div id="test<?php echo $product->get_id(); ?>" class="eael-product-popup mfp-hide woocommerce">
+		<div id="eaproduct<?php echo $product->get_id(); ?>" class="eael-product-popup mfp-hide woocommerce">
             <div id="product-<?php the_ID(); ?>" <?php post_class( 'product' ); ?>>
                 <div class="eael-product-image-wrap">
                     <?php
