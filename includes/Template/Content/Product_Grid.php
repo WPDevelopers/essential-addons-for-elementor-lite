@@ -348,19 +348,22 @@ trait Product_Grid
 	protected static function eael_product_quick_view ($product, $settings) { ?>
 		<div id="eaproduct<?php echo $product->get_id(); ?>" class="eael-product-popup eael-product-zoom-in woocommerce">
             <div class="eael-product-modal-bg"></div>
-            <div id="product-<?php the_ID(); ?>" <?php post_class( 'product eael-product-popup-details' ); ?>>
-                <div class="eael-product-image-wrap">
-                    <?php
-                    echo ($product->is_on_sale() ? '<span class="eael-onsale '.$settings['eael_product_sale_badge_preset'].'">' . __('Sale!',
-		                    'essential-addons-for-elementor-lite') . '</span>' : '');
-                    do_action( 'eael_woo_single_product_image' );
-                    ?>
+            <div class="eael-product-popup-details">
+                <div id="product-<?php the_ID(); ?>" <?php post_class( 'product' ); ?>>
+                    <div class="eael-product-image-wrap">
+			            <?php
+			            echo ($product->is_on_sale() ? '<span class="eael-onsale '.$settings['eael_product_sale_badge_preset'].'">' . __('Sale!',
+					            'essential-addons-for-elementor-lite') . '</span>' : '');
+			            do_action( 'eael_woo_single_product_image' );
+			            ?>
+                    </div>
+                    <div class="eael-product-details-wrap">
+			            <?php do_action( 'eael_woo_single_product_summary' ); ?>
+                    </div>
                 </div>
-                <div class="eael-product-details-wrap">
-                    <?php do_action( 'eael_woo_single_product_summary' ); ?>
-                </div>
+                <button class="eael-product-popup-close">x</button>
             </div>
-            <button class="eael-product-popup-close">Close</button>
+
         </div>
 	<?php }
 
@@ -393,6 +396,9 @@ trait Product_Grid
 			if ( current_theme_supports( 'wc-product-gallery-zoom' ) ) {
 				wp_enqueue_script( 'zoom' );
 			}
+			if ( current_theme_supports( 'wc-product-gallery-slider' ) ) {
+				wp_enqueue_script( 'flexslider' );
+			}
 			if ( current_theme_supports( 'wc-product-gallery-lightbox' ) ) {
 				wp_enqueue_script( 'photoswipe-ui-default' );
 				wp_enqueue_style( 'photoswipe-default-skin' );
@@ -400,6 +406,7 @@ trait Product_Grid
 					add_action( 'wp_footer', 'woocommerce_photoswipe', 15 );
 				}
 			}
+
 			wp_enqueue_script( 'wc-single-product' );
 		}
 	}

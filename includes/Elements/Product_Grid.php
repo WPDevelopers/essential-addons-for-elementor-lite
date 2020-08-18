@@ -1698,7 +1698,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'name'     => 'eael_product_popup_title_typography',
 				'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-				'selector' => '.eael-product-popup.woocommerce div.product .product_title',
+				'selector' => '{{WRAPPER}} .eael-product-popup.woocommerce div.product .product_title',
 			]
 		);
 
@@ -1709,7 +1709,7 @@ class Product_Grid extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#252525',
 				'selectors' => [
-					'.eael-product-popup h1.product_title.entry-title' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-popup h1.product_title.entry-title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1727,7 +1727,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'name'     => 'eael_product_popup_price_typography',
 				'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-				'selector' => '.eael-product-popup.woocommerce div.product .price',
+				'selector' => '{{WRAPPER}} .eael-product-popup.woocommerce div.product .price',
 			]
 		);
 
@@ -1738,7 +1738,7 @@ class Product_Grid extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#0242e4',
 				'selectors' => [
-					'.eael-product-popup.woocommerce div.product .price' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .eael-product-popup.woocommerce div.product .price' => 'color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -1757,7 +1757,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'name'     => 'eael_product_popup_content_typography',
 				'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-				'selector' => '.eael-product-popup.woocommerce div.product .woocommerce-product-details__short-description',
+				'selector' => '{{WRAPPER}} .eael-product-popup.woocommerce div.product .woocommerce-product-details__short-description',
 			]
 		);
 
@@ -1768,7 +1768,7 @@ class Product_Grid extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#707070',
 				'selectors' => [
-					'.eael-product-popup .woocommerce-product-details__short-description' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-popup .woocommerce-product-details__short-description' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1788,7 +1788,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'name'     => 'eael_product_popup_sale_typo',
 				'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-				'selector' => '.eael-product-popup .eael-onsale',
+				'selector' => '{{WRAPPER}} .eael-product-popup .eael-onsale',
 			]
 		);
 		$this->add_control(
@@ -1797,7 +1797,7 @@ class Product_Grid extends Widget_Base {
 				'label'     => __('Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'.eael-product-popup .eael-onsale' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-popup .eael-onsale' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1807,7 +1807,7 @@ class Product_Grid extends Widget_Base {
 				'label'     => __('Link Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'.eael-product-popup .eael-onsale' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-popup .eael-onsale' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1827,7 +1827,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'name'     => 'eael_product_popup_cart_button_typo',
 				'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-				'selector' => '.eael-product-popup.woocommerce .button, .eael-product-popup.woocommerce button.button.alt',
+				'selector' => '{{WRAPPER}} .eael-product-popup.woocommerce .button, .eael-product-popup.woocommerce button.button.alt',
 			]
 		);
 
@@ -1842,7 +1842,7 @@ class Product_Grid extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#fff',
 				'selectors' => [
-					'.eael-product-popup.woocommerce .button, .eael-product-popup.woocommerce button.button.alt' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-popup.woocommerce .button, .eael-product-popup.woocommerce button.button.alt' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1854,7 +1854,7 @@ class Product_Grid extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#8040FF',
 				'selectors' => [
-					'.eael-product-popup.woocommerce .button, .eael-product-popup.woocommerce button.button.alt' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-popup.woocommerce .button, .eael-product-popup.woocommerce button.button.alt' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1863,7 +1863,7 @@ class Product_Grid extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'eael_product_popup_cart_button_border',
-				'selector' => '.eael-product-popup.woocommerce .button, .eael-product-popup.woocommerce button.button.alt',
+				'selector' => '{{WRAPPER}} .eael-product-popup.woocommerce .button, .eael-product-popup.woocommerce button.button.alt',
 			]
 		);
 		$this->add_control(
@@ -1877,7 +1877,7 @@ class Product_Grid extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'.eael-product-popup.woocommerce .button, .eael-product-popup.woocommerce button.button.alt' => 'border-radius: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-product-popup.woocommerce .button, .eael-product-popup.woocommerce button.button.alt' => 'border-radius: {{SIZE}}px;',
 				],
 			]
 		);
@@ -1893,7 +1893,7 @@ class Product_Grid extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#F5EAFF',
 				'selectors' => [
-					'.eael-product-popup.woocommerce .button:hover, .eael-product-popup.woocommerce button.button.alt:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-popup.woocommerce .button:hover, .eael-product-popup.woocommerce button.button.alt:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1905,7 +1905,7 @@ class Product_Grid extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#F12DE0',
 				'selectors' => [
-					'.eael-product-popup.woocommerce .button:hover, .eael-product-popup.woocommerce button.button.alt:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-popup.woocommerce .button:hover, .eael-product-popup.woocommerce button.button.alt:hover' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1917,7 +1917,7 @@ class Product_Grid extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
-					'.eael-product-popup.woocommerce .button:hover, .eael-product-popup.woocommerce button.button.alt:hover' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-popup.woocommerce .button:hover, .eael-product-popup.woocommerce button.button.alt:hover' => 'border-color: {{VALUE}};',
 				],
 				'condition' => [
 					'eael_product_popup_cart_button_border_border!' => '',
@@ -1944,7 +1944,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'name'     => 'eael_product_popup_sku_typo',
 				'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-				'selector' => '.eael-product-popup.woocommerce .product_meta',
+				'selector' => '{{WRAPPER}} .eael-product-popup.woocommerce .product_meta',
 			]
 		);
 		$this->add_control(
@@ -1953,7 +1953,7 @@ class Product_Grid extends Widget_Base {
 				'label'     => __('Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'.eael-product-popup.woocommerce .product_meta' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-popup.woocommerce .product_meta' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1963,7 +1963,7 @@ class Product_Grid extends Widget_Base {
 				'label'     => __('Link Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'.eael-product-popup.woocommerce .product_meta .sku, .eael-product-popup.woocommerce .product_meta a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-popup.woocommerce .product_meta .sku, .eael-product-popup.woocommerce .product_meta a' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1973,7 +1973,7 @@ class Product_Grid extends Widget_Base {
 				'label'     => __('Link Hover Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'.eael-product-popup.woocommerce .product_meta a:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-popup.woocommerce .product_meta a:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -2008,7 +2008,7 @@ class Product_Grid extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'.eael-product-popup button.mfp-close' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-product-popup button.eael-product-popup-close' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -2034,7 +2034,7 @@ class Product_Grid extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'.eael-product-popup button.mfp-close' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-product-popup button.eael-product-popup-close' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -2045,7 +2045,7 @@ class Product_Grid extends Widget_Base {
 				'label'     => __('Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'.eael-product-popup button.mfp-close' => 'color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-product-popup button.eael-product-popup-close' => 'color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -2056,7 +2056,7 @@ class Product_Grid extends Widget_Base {
 				'label'     => __('Background', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'.eael-product-popup button.mfp-close' => 'background-color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-product-popup button.eael-product-popup-close' => 'background-color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -2079,7 +2079,7 @@ class Product_Grid extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'.eael-product-popup button.mfp-close' => 'border-radius: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-product-popup button.eael-product-popup-close' => 'border-radius: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -2089,7 +2089,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'name'     => 'eael_product_popup_close_button_box_shadow',
 				'label'    => __('Box Shadow', 'essential-addons-for-elementor-lite'),
-				'selector' => '.eael-product-popup button.mfp-close',
+				'selector' => '{{WRAPPER}} .eael-product-popup button.eael-product-popup-close',
 			]
 		);
 
@@ -2100,7 +2100,7 @@ class Product_Grid extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
-					'.eael-product-popup' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-product-popup .eael-product-popup-details' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'separator'  => 'before',
 			]
@@ -2112,7 +2112,7 @@ class Product_Grid extends Widget_Base {
 				'name'     => 'eael_product_popup_background',
 				'label'    => __('Background', 'essential-addons-for-elementor-lite'),
 				'types'    => ['classic', 'gradient'],
-				'selector' => '.eael-product-popup',
+				'selector' => '{{WRAPPER}} .eael-product-popup .eael-product-popup-details',
 				'exclude'  => [
 					'image',
 				],
@@ -2124,7 +2124,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'name'     => 'eael_product_popup_box_shadow',
 				'label'    => __('Box Shadow', 'essential-addons-for-elementor-lite'),
-				'selector' => '.eael-product-popup',
+				'selector' => '{{WRAPPER}} .eael-product-popup .eael-product-popup-details',
 			]
 		);
 
@@ -2298,11 +2298,6 @@ class Product_Grid extends Widget_Base {
                         });
                     }
 
-                    // $('.open-popup-link').magnificPopup({
-                    //     type:'inline',
-                    //     midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
-                    // });
-
                     $(document).on('click','.open-popup-link',function(e){
                     	e.preventDefault();
 	                    e.stopPropagation();
@@ -2310,7 +2305,12 @@ class Product_Grid extends Widget_Base {
                     	const id = $this.attr('href');
                     	const popup = $(id);
 	                    popup.addClass("eael-product-popup-ready").removeClass("eael-product-modal-removing");
-                    })
+                    });
+
+                    $(document).on("click", '.eael-product-popup-close', function (event) {
+                        event.stopPropagation();
+                        $('.eael-product-popup').addClass("eael-product-modal-removing").removeClass("eael-product-popup-ready");
+                    });
 
 	                $(document).on('click', function (event) {
 		                if (event.target.closest(".eael-product-popup-details")) return;
