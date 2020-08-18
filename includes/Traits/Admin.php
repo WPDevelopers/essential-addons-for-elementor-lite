@@ -24,7 +24,7 @@ trait Admin
             'manage_options',
             'eael-settings',
             [$this, 'eael_admin_settings_page'],
-            Helper::safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-white.svg'),
+            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-white.svg'),
             '58.6'
         );
         $plugins = \get_option('active_plugins');

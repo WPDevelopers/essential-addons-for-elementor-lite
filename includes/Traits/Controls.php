@@ -22,7 +22,7 @@ trait Controls
      */
     public static function query($wb)
     {
-        $post_types = Helper::eael_get_post_types();
+        $post_types = Helper::get_post_types();
         $post_types['by_id'] = __('Manual Selection', 'essential-addons-for-elementor-lite');
         $taxonomies = get_taxonomies([], 'objects');
 
@@ -70,7 +70,7 @@ trait Controls
             [
                 'label' => __('Search & Select', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT2,
-                'options' => Helper::eael_get_all_types_post(),
+                'options' => Helper::get_posts_list(),
                 'label_block' => true,
                 'multiple' => true,
                 'condition' => [
@@ -86,7 +86,7 @@ trait Controls
                 'type' => Controls_Manager::SELECT2,
                 'multiple' => true,
                 'default' => [],
-                'options' => Helper::eael_get_authors(),
+                'options' => Helper::get_authors_list(),
                 'condition' => [
                     'post_type!' => 'by_id',
                 ],
@@ -119,7 +119,7 @@ trait Controls
             [
                 'label' => __('Exclude', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT2,
-                'options' => Helper::eael_get_all_types_post(),
+                'options' => Helper::get_posts_list(),
                 'label_block' => true,
                 'post_type' => '',
                 'multiple' => true,
@@ -152,7 +152,7 @@ trait Controls
             [
                 'label' => __('Order By', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'options' => Helper::eael_get_post_orderby_options(),
+                'options' => Helper::get_post_orderby_options(),
                 'default' => 'date',
 
             ]
@@ -204,7 +204,7 @@ trait Controls
                 'label' => __('Include', 'essential-addons-for-elementor-lite'),
                 'label_block' => true,
                 'type' => Controls_Manager::SELECT2,
-                'options' => Helper::eael_post_type_categories('term_id', 'doc_category'),
+                'options' => Helper::get_post_type_categories('doc_category', 'term_id'),
                 'multiple' => true,
                 'default' => [],
             ]
@@ -215,7 +215,7 @@ trait Controls
             [
                 'label' => __('Exclude', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT2,
-                'options' => Helper::eael_post_type_categories('term_id', 'doc_category'),
+                'options' => Helper::get_post_type_categories('doc_category', 'term_id'),
                 'label_block' => true,
                 'post_type' => '',
                 'multiple' => true,
@@ -307,7 +307,7 @@ trait Controls
                 [
                     'label' => __('Order By', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
-                    'options' => Helper::eael_get_post_orderby_options(),
+                    'options' => Helper::get_post_orderby_options(),
                     'default' => 'date',
                 ]
             );
@@ -1574,7 +1574,7 @@ trait Controls
                 [
                     'label' => esc_html__('Table ID', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
-                    'options' => Helper::eael_list_ninja_tables(),
+                    'options' => Helper::get_ninja_tables_list(),
                     'condition' => [
                         'ea_adv_data_table_source' => 'ninja',
                     ],

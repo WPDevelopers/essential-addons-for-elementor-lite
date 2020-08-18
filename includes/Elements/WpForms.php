@@ -90,7 +90,7 @@ class WpForms extends Widget_Base {
                     'label'             => esc_html__( 'Select Form', 'essential-addons-for-elementor-lite'),
                     'type'              => Controls_Manager::SELECT,
                     'label_block'       => true,
-                    'options'           => Helper::eael_select_wpforms_forms(),
+                    'options'           => Helper::get_wpforms_list(),
                     'default'           => '0',
                 ]
             );

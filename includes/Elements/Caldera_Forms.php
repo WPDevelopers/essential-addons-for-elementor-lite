@@ -97,7 +97,7 @@ class Caldera_Forms extends Widget_Base
                     'label' => esc_html__('Caldera Form', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'label_block' => true,
-                    'options' => Helper::eael_select_caldera_form(),
+                    'options' => Helper::get_caldera_form_list(),
                     'default' => '0',
                 ]
             );

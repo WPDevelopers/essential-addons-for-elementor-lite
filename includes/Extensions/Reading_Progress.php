@@ -19,7 +19,7 @@ class Reading_Progress
     public function register_controls($element)
     {
 
-        if(Helper::is_prevent_load_extension(get_the_ID())){
+        if(Helper::prevent_extension_loading(get_the_ID())){
             return false;
         }
 

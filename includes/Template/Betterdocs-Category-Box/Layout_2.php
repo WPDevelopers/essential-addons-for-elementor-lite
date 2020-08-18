@@ -27,7 +27,7 @@ echo '<a href="'.get_term_link( $term->slug, 'doc_category' ).'" class="eael-bet
     }
 
     if($settings['show_count']) {
-        printf('<div class="eael-bd-cb-cat-count__layout-2"><span class="count-inner__layout-2">%s</span></div>', Helper::eael_get_doc_post_count($term->count, $term->term_id));
+        printf('<div class="eael-bd-cb-cat-count__layout-2"><span class="count-inner__layout-2">%s</span></div>', Helper::get_doc_post_count($term->count, $term->term_id));
     }
 
     echo '</div>';

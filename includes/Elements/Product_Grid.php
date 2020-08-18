@@ -152,7 +152,7 @@ class Product_Grid extends Widget_Base {
                 'type'        => Controls_Manager::SELECT2,
                 'label_block' => true,
                 'multiple'    => true,
-                'options'     => Helper::eael_woocommerce_product_categories(),
+                'options'     => Helper::get_post_type_categories('product_cat', 'slug'),
             ]
         );
 

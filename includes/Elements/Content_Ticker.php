@@ -723,7 +723,7 @@ class Content_Ticker extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
         $settings = Helper::fix_old_query($settings);
-        $args = Helper::eael_get_query_args($settings);
+        $args = Helper::get_query_args($settings);
 
         $this->add_render_attribute('content-ticker-wrap', 'class', 'swiper-container-wrap eael-ticker');
 
