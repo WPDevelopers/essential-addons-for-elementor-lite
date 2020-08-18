@@ -11,41 +11,6 @@ use \Elementor\Controls_Manager;
 class Helper
 {
     /**
-     * Generate safe url
-     *
-     * @since v3.0.0
-     */
-    public static function safe_protocol($url)
-    {
-        if (is_ssl()) {
-            $url = wp_parse_url($url);
-
-            if (!empty($url['host'])) {
-                $url['scheme'] = 'https';
-            }
-
-            return self::unparse_url($url);
-        }
-
-        return $url;
-    }
-
-    public static function unparse_url($parsed_url)
-    {
-        $scheme = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : '';
-        $host = isset($parsed_url['host']) ? $parsed_url['host'] : '';
-        $port = isset($parsed_url['port']) ? ':' . $parsed_url['port'] : '';
-        $user = isset($parsed_url['user']) ? $parsed_url['user'] : '';
-        $pass = isset($parsed_url['pass']) ? ':' . $parsed_url['pass'] : '';
-        $pass = ($user || $pass) ? "$pass@" : '';
-        $path = isset($parsed_url['path']) ? $parsed_url['path'] : '';
-        $query = isset($parsed_url['query']) ? '?' . $parsed_url['query'] : '';
-        $fragment = isset($parsed_url['fragment']) ? '#' . $parsed_url['fragment'] : '';
-
-        return "$scheme$user$pass$host$port$path$query$fragment";
-    }
-
-    /**
      * check EAEL extension can load this page or post
      *
      * @param $id  page or post id
@@ -53,7 +18,7 @@ class Helper
      * @return bool
      * @since  4.0.4
      */
-    public static function is_prevent_load_extension($id)
+    public static function prevent_extension_loading($id)
     {
         $template_name = get_post_meta($id, '_elementor_template_type', true);
         $template_list = [
@@ -62,59 +27,8 @@ class Helper
             'section',
             'popup',
         ];
-        
+
         return in_array($template_name, $template_list);
-    }
-
-    /**
-     * Get all types of post.
-     * @return array
-     */
-    public static function eael_get_all_types_post($post_type = 'any')
-    {
-        $posts = get_posts([
-            'post_type' => $post_type,
-            'post_status' => 'publish',
-            'numberposts' => -1,
-        ]);
-
-        if (!empty($posts)) {
-            return wp_list_pluck($posts, 'post_title', 'ID');
-        }
-
-        return [];
-    }
-
-    /**
-     * Go Premium
-     *
-     */
-    public static function go_premium($wb)
-    {
-        $wb->start_controls_section(
-            'eael_section_pro',
-            [
-                'label' => __('Go Premium for More Features', 'essential-addons-for-elementor-lite'),
-            ]
-        );
-
-        $wb->add_control(
-            'eael_control_get_pro',
-            [
-                'label' => __('Unlock more possibilities', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-                    '1' => [
-                        'title' => __('', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-unlock-alt',
-                    ],
-                ],
-                'default' => '1',
-                'description' => '<span class="pro-feature"> Get the  <a href="http://essential-addons.com/elementor/#pricing" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
-            ]
-        );
-
-        $wb->end_controls_section();
     }
 
     public static function fix_old_query($settings)
@@ -149,7 +63,7 @@ class Helper
         return $settings;
     }
 
-    public static function eael_get_query_args($settings = [], $requested_post_type = 'post')
+    public static function get_query_args($settings = [], $requested_post_type = 'post')
     {
         $settings = wp_parse_args($settings, [
             'post_type' => $requested_post_type,
@@ -211,10 +125,42 @@ class Helper
     }
 
     /**
+     * Go Premium
+     *
+     */
+    public static function go_premium($wb)
+    {
+        $wb->start_controls_section(
+            'eael_section_pro',
+            [
+                'label' => __('Go Premium for More Features', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $wb->add_control(
+            'eael_control_get_pro',
+            [
+                'label' => __('Unlock more possibilities', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    '1' => [
+                        'title' => __('', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-unlock-alt',
+                    ],
+                ],
+                'default' => '1',
+                'description' => '<span class="pro-feature"> Get the  <a href="http://essential-addons.com/elementor/#pricing" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+            ]
+        );
+
+        $wb->end_controls_section();
+    }
+
+    /**
      * Get All POst Types
      * @return array
      */
-    public static function eael_get_post_types()
+    public static function get_post_types()
     {
         $post_types = get_post_types(['public' => true, 'show_in_nav_menus' => true], 'objects');
         $post_types = wp_list_pluck($post_types, 'label', 'name');
@@ -223,11 +169,30 @@ class Helper
     }
 
     /**
+     * Get all types of post.
+     * @return array
+     */
+    public static function get_posts_list($post_type = 'any')
+    {
+        $posts = get_posts([
+            'post_type' => $post_type,
+            'post_status' => 'publish',
+            'numberposts' => -1,
+        ]);
+
+        if (!empty($posts)) {
+            return wp_list_pluck($posts, 'post_title', 'ID');
+        }
+
+        return [];
+    }
+
+    /**
      * POst Orderby Options
      *
      * @return array
      */
-    public static function eael_get_post_orderby_options()
+    public static function get_post_orderby_options()
     {
         $orderby = array(
             'ID' => 'Post ID',
@@ -245,293 +210,25 @@ class Helper
     }
 
     /**
-     * This function is responsible for counting doc post under a category.
-     *
-     * @param int $term_count
-     * @param int $term_id
-     * @return int $term_count;
-     */
-    public static function eael_get_doc_post_count($term_count = 0, $term_id)
-    {
-        $tax_terms = get_terms('doc_category', ['child_of' => $term_id]);
-
-        foreach ($tax_terms as $tax_term) {
-            $term_count += $tax_term->count;
-        }
-        return $term_count;
-    }
-
-    /**
      * Get Post Categories
      *
      * @return array
      */
-    public static function eael_post_type_categories($type = 'term_id', $term_key = 'category')
+    public static function get_post_type_categories($taxonomy = 'category', $key = 'term_id')
     {
-        $terms = get_terms(array(
-            'taxonomy' => $term_key,
-            'hide_empty' => true,
-        ));
-
         $options = [];
-
-        if (!empty($terms) && !is_wp_error($terms)) {
-            foreach ($terms as $term) {
-                $options[$term->{$type}] = $term->name;
-            }
-        }
-
-        return $options;
-    }
-
-    /**
-     * WooCommerce Product Query
-     *
-     * @return array
-     */
-    public static function eael_woocommerce_product_categories()
-    {
         $terms = get_terms(array(
-            'taxonomy' => 'product_cat',
+            'taxonomy' => $taxonomy,
             'hide_empty' => true,
         ));
 
         if (!empty($terms) && !is_wp_error($terms)) {
             foreach ($terms as $term) {
-                $options[$term->slug] = $term->name;
-            }
-            return $options;
-        }
-    }
-
-    /**
-     * WooCommerce Get Product By Id
-     *
-     * @return array
-     */
-    public static function eael_woocommerce_product_get_product_by_id()
-    {
-        $postlist = get_posts(array(
-            'post_type' => 'product',
-            'showposts' => 9999,
-        ));
-        $options = array();
-
-        if (!empty($postlist) && !is_wp_error($postlist)) {
-            foreach ($postlist as $post) {
-                $options[$post->ID] = $post->post_title;
-            }
-            return $options;
-
-        }
-    }
-
-    /**
-     * WooCommerce Get Product Category By Id
-     *
-     * @return array
-     */
-    public static function eael_woocommerce_product_categories_by_id()
-    {
-        $terms = get_terms(array(
-            'taxonomy' => 'product_cat',
-            'hide_empty' => true,
-        ));
-
-        if (!empty($terms) && !is_wp_error($terms)) {
-            foreach ($terms as $term) {
-                $options[$term->term_id] = $term->name;
-            }
-            return $options;
-        }
-
-    }
-
-    /**
-     * Get Contact Form 7 [ if exists ]
-     */
-    public static function eael_select_contact_form()
-    {
-        $options = array();
-
-        if (function_exists('wpcf7')) {
-            $wpcf7_form_list = get_posts(array(
-                'post_type' => 'wpcf7_contact_form',
-                'showposts' => 999,
-            ));
-            $options[0] = esc_html__('Select a Contact Form', 'essential-addons-for-elementor-lite');
-            if (!empty($wpcf7_form_list) && !is_wp_error($wpcf7_form_list)) {
-                foreach ($wpcf7_form_list as $post) {
-                    $options[$post->ID] = $post->post_title;
-                }
-            } else {
-                $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
-            }
-        }
-        return $options;
-    }
-
-    /**
-     * Get Gravity Form [ if exists ]
-     *
-     * @return array
-     */
-    public static function eael_select_gravity_form()
-    {
-        $options = array();
-
-        if (class_exists('GFCommon')) {
-            $gravity_forms = \RGFormsModel::get_forms(null, 'title');
-
-            if (!empty($gravity_forms) && !is_wp_error($gravity_forms)) {
-
-                $options[0] = esc_html__('Select Gravity Form', 'essential-addons-for-elementor-lite');
-                foreach ($gravity_forms as $form) {
-                    $options[$form->id] = $form->title;
-                }
-
-            } else {
-                $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
+                $options[$term->{$key}] = $term->name;
             }
         }
 
         return $options;
-    }
-
-    /**
-     * Get WeForms Form List
-     *
-     * @return array
-     */
-    public static function eael_select_weform()
-    {
-        $wpuf_form_list = get_posts(array(
-            'post_type' => 'wpuf_contact_form',
-            'showposts' => 999,
-        ));
-
-        $options = array();
-
-        if (!empty($wpuf_form_list) && !is_wp_error($wpuf_form_list)) {
-            $options[0] = esc_html__('Select weForm', 'essential-addons-for-elementor-lite');
-            foreach ($wpuf_form_list as $post) {
-                $options[$post->ID] = $post->post_title;
-            }
-        } else {
-            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
-        }
-
-        return $options;
-    }
-
-    /**
-     * Get Ninja Form List
-     *
-     * @return array
-     */
-    public static function eael_select_ninja_form()
-    {
-        $options = array();
-
-        if (class_exists('Ninja_Forms')) {
-            $contact_forms = Ninja_Forms()->form()->get_forms();
-
-            if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
-
-                $options[0] = esc_html__('Select Ninja Form', 'essential-addons-for-elementor-lite');
-
-                foreach ($contact_forms as $form) {
-                    $options[$form->get_id()] = $form->get_setting('title');
-                }
-            }
-        } else {
-            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
-        }
-
-        return $options;
-    }
-
-    /**
-     * Get Caldera Form List
-     *
-     * @return array
-     */
-    public static function eael_select_caldera_form()
-    {
-        $options = array();
-
-        if (class_exists('Caldera_Forms')) {
-            $contact_forms = \Caldera_Forms_Forms::get_forms(true, true);
-
-            if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
-                $options[0] = esc_html__('Select Caldera Form', 'essential-addons-for-elementor-lite');
-                foreach ($contact_forms as $form) {
-                    $options[$form['ID']] = $form['name'];
-                }
-            }
-        } else {
-            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
-        }
-
-        return $options;
-    }
-
-    /**
-     * Get WPForms List
-     *
-     * @return array
-     */
-    public static function eael_select_wpforms_forms()
-    {
-        $options = array();
-
-        if (class_exists('\WPForms\WPForms')) {
-            $args = array(
-                'post_type' => 'wpforms',
-                'posts_per_page' => -1,
-            );
-
-            $contact_forms = get_posts($args);
-
-            if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
-                $options[0] = esc_html__('Select a WPForm', 'essential-addons-for-elementor-lite');
-                foreach ($contact_forms as $post) {
-                    $options[$post->ID] = $post->post_title;
-                }
-            }
-        } else {
-            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
-        }
-
-        return $options;
-    }
-
-    /**
-     * Get FluentForms List
-     *
-     * @return array
-     */
-    public static function eael_select_fluent_forms()
-    {
-
-        $options = array();
-
-        if (defined('FLUENTFORM')) {
-            global $wpdb;
-
-            $result = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}fluentform_forms");
-            if ($result) {
-                $options[0] = esc_html__('Select a Fluent Form', 'essential-addons-for-elementor-lite');
-                foreach ($result as $form) {
-                    $options[$form->id] = $form->title;
-                }
-            } else {
-                $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
-            }
-        }
-
-        return $options;
-
     }
 
     /**
@@ -539,8 +236,9 @@ class Helper
      *
      * @return array
      */
-    public static function eael_get_page_templates($type = null)
+    public static function get_elementor_templates($type = null)
     {
+        $options = [];
         $args = [
             'post_type' => 'elementor_library',
             'posts_per_page' => -1,
@@ -557,13 +255,13 @@ class Helper
         }
 
         $page_templates = get_posts($args);
-        $options = array();
 
         if (!empty($page_templates) && !is_wp_error($page_templates)) {
             foreach ($page_templates as $post) {
                 $options[$post->ID] = $post->post_title;
             }
         }
+
         return $options;
     }
 
@@ -572,7 +270,7 @@ class Helper
      *
      * @return array
      */
-    public static function eael_get_authors()
+    public static function get_authors_list()
     {
         $users = get_users([
             'who' => 'authors',
@@ -597,17 +295,15 @@ class Helper
      *
      * @return array
      */
-    public static function eael_get_tags($args = array())
+    public static function get_tags_list($args = array())
     {
         $options = [];
         $tags = get_tags($args);
 
-        if (is_wp_error($tags)) {
-            return [];
-        }
-
-        foreach ($tags as $tag) {
-            $options[$tag->term_id] = $tag->name;
+        if (!is_wp_error($tags) && !empty($tags)) {
+            foreach ($tags as $tag) {
+                $options[$tag->term_id] = $tag->name;
+            }
         }
 
         return $options;
@@ -653,56 +349,193 @@ class Helper
     }
 
     /**
-     * Get all Posts
-     *
-     * @return array
+     * Get Contact Form 7 [ if exists ]
      */
-    public static function eael_get_posts()
+    public static function get_wpcf7_list()
     {
-        $post_list = get_posts(array(
-            'post_type' => 'post',
-            'orderby' => 'date',
-            'order' => 'DESC',
-            'posts_per_page' => -1,
-        ));
+        $options = array();
 
-        $posts = array();
-
-        if (!empty($post_list) && !is_wp_error($post_list)) {
-            foreach ($post_list as $post) {
-                $posts[$post->ID] = $post->post_title;
+        if (function_exists('wpcf7')) {
+            $wpcf7_form_list = get_posts(array(
+                'post_type' => 'wpcf7_contact_form',
+                'showposts' => 999,
+            ));
+            $options[0] = esc_html__('Select a Contact Form', 'essential-addons-for-elementor-lite');
+            if (!empty($wpcf7_form_list) && !is_wp_error($wpcf7_form_list)) {
+                foreach ($wpcf7_form_list as $post) {
+                    $options[$post->ID] = $post->post_title;
+                }
+            } else {
+                $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
             }
         }
-
-        return $posts;
+        return $options;
     }
 
     /**
-     * Get all Pages
+     * Get Gravity Form [ if exists ]
      *
      * @return array
      */
-    public static function eael_get_pages()
+    public static function get_gravity_form_list()
     {
-        $page_list = get_posts(array(
-            'post_type' => 'page',
-            'orderby' => 'date',
-            'order' => 'DESC',
-            'posts_per_page' => -1,
-        ));
+        $options = array();
 
-        $pages = array();
+        if (class_exists('GFCommon')) {
+            $gravity_forms = \RGFormsModel::get_forms(null, 'title');
 
-        if (!empty($page_list) && !is_wp_error($page_list)) {
-            foreach ($page_list as $page) {
-                $pages[$page->ID] = $page->post_title;
+            if (!empty($gravity_forms) && !is_wp_error($gravity_forms)) {
+
+                $options[0] = esc_html__('Select Gravity Form', 'essential-addons-for-elementor-lite');
+                foreach ($gravity_forms as $form) {
+                    $options[$form->id] = $form->title;
+                }
+
+            } else {
+                $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
             }
         }
 
-        return $pages;
+        return $options;
     }
 
-    public static function eael_list_ninja_tables()
+    /**
+     * Get WeForms Form List
+     *
+     * @return array
+     */
+    public static function get_weform_list()
+    {
+        $wpuf_form_list = get_posts(array(
+            'post_type' => 'wpuf_contact_form',
+            'showposts' => 999,
+        ));
+
+        $options = array();
+
+        if (!empty($wpuf_form_list) && !is_wp_error($wpuf_form_list)) {
+            $options[0] = esc_html__('Select weForm', 'essential-addons-for-elementor-lite');
+            foreach ($wpuf_form_list as $post) {
+                $options[$post->ID] = $post->post_title;
+            }
+        } else {
+            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
+        }
+
+        return $options;
+    }
+
+    /**
+     * Get Ninja Form List
+     *
+     * @return array
+     */
+    public static function get_ninja_form_list()
+    {
+        $options = array();
+
+        if (class_exists('Ninja_Forms')) {
+            $contact_forms = Ninja_Forms()->form()->get_forms();
+
+            if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
+
+                $options[0] = esc_html__('Select Ninja Form', 'essential-addons-for-elementor-lite');
+
+                foreach ($contact_forms as $form) {
+                    $options[$form->get_id()] = $form->get_setting('title');
+                }
+            }
+        } else {
+            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
+        }
+
+        return $options;
+    }
+
+    /**
+     * Get Caldera Form List
+     *
+     * @return array
+     */
+    public static function get_caldera_form_list()
+    {
+        $options = array();
+
+        if (class_exists('Caldera_Forms')) {
+            $contact_forms = \Caldera_Forms_Forms::get_forms(true, true);
+
+            if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
+                $options[0] = esc_html__('Select Caldera Form', 'essential-addons-for-elementor-lite');
+                foreach ($contact_forms as $form) {
+                    $options[$form['ID']] = $form['name'];
+                }
+            }
+        } else {
+            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
+        }
+
+        return $options;
+    }
+
+    /**
+     * Get WPForms List
+     *
+     * @return array
+     */
+    public static function get_wpforms_list()
+    {
+        $options = array();
+
+        if (class_exists('\WPForms\WPForms')) {
+            $args = array(
+                'post_type' => 'wpforms',
+                'posts_per_page' => -1,
+            );
+
+            $contact_forms = get_posts($args);
+
+            if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
+                $options[0] = esc_html__('Select a WPForm', 'essential-addons-for-elementor-lite');
+                foreach ($contact_forms as $post) {
+                    $options[$post->ID] = $post->post_title;
+                }
+            }
+        } else {
+            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
+        }
+
+        return $options;
+    }
+
+    /**
+     * Get FluentForms List
+     *
+     * @return array
+     */
+    public static function get_fluent_forms_list()
+    {
+
+        $options = array();
+
+        if (defined('FLUENTFORM')) {
+            global $wpdb;
+
+            $result = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}fluentform_forms");
+            if ($result) {
+                $options[0] = esc_html__('Select a Fluent Form', 'essential-addons-for-elementor-lite');
+                foreach ($result as $form) {
+                    $options[$form->id] = $form->title;
+                }
+            } else {
+                $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
+            }
+        }
+
+        return $options;
+
+    }
+
+    public static function get_ninja_tables_list()
     {
         $tables = get_posts([
             'post_type' => 'ninja-table',
@@ -731,8 +564,9 @@ class Helper
             return;
         }
 
-        $html = '<ul class="post-carousel-categories">';
         $count = 0;
+
+        $html = '<ul class="post-carousel-categories">';
         foreach ($terms as $term) {
             if ($count === $length) {break;}
             $link = ($term_type === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
@@ -747,5 +581,23 @@ class Helper
 
         return $html;
 
+    }
+
+    /**
+     * This function is responsible for counting doc post under a category.
+     *
+     * @param int $term_count
+     * @param int $term_id
+     * @return int $term_count;
+     */
+    public static function get_doc_post_count($term_count = 0, $term_id)
+    {
+        $tax_terms = get_terms('doc_category', ['child_of' => $term_id]);
+
+        foreach ($tax_terms as $tax_term) {
+            $term_count += $tax_term->count;
+        }
+
+        return $term_count;
     }
 }

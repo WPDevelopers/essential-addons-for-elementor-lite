@@ -14,7 +14,7 @@ trait Enqueue
     {
         // Compatibility: Gravity forms
         if (in_array('gravity-form', $widgets) && class_exists('GFCommon')) {
-            foreach (Helper::eael_select_gravity_form() as $form_id => $form_name) {
+            foreach (Helper::get_gravity_form_list() as $form_id => $form_name) {
                 if ($form_id != '0') {
                     gravity_form_enqueue_scripts($form_id);
                 }
@@ -125,7 +125,7 @@ trait Enqueue
                 // enqueue
                 wp_enqueue_style(
                     $this->uid('eael'),
-                    Helper::safe_protocol(EAEL_ASSET_URL . '/' . $this->uid('eael') . '.min.css'),
+                    $this->safe_protocol(EAEL_ASSET_URL . '/' . $this->uid('eael') . '.min.css'),
                     false,
                     time()
                 );
@@ -144,7 +144,7 @@ trait Enqueue
                 // enqueue
                 wp_enqueue_script(
                     $this->uid('eael'),
-                    Helper::safe_protocol(EAEL_ASSET_URL . '/' . $this->uid('eael') . '.min.js'),
+                    $this->safe_protocol(EAEL_ASSET_URL . '/' . $this->uid('eael') . '.min.js'),
                     ['jquery'],
                     time(),
                     true
@@ -193,7 +193,7 @@ trait Enqueue
                 // enqueue
                 wp_enqueue_style(
                     $this->uid(),
-                    Helper::safe_protocol(EAEL_ASSET_URL . '/' . $this->uid() . '.min.css'),
+                    $this->safe_protocol(EAEL_ASSET_URL . '/' . $this->uid() . '.min.css'),
                     false,
                     time()
                 );
@@ -207,14 +207,14 @@ trait Enqueue
         // ea icon font
         wp_enqueue_style(
             'ea-icon',
-            Helper::safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/css/eaicon.css'),
+            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/css/eaicon.css'),
             false
         );
 
         // editor style
         wp_enqueue_style(
             'eael-editor',
-            Helper::safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/css/editor.css'),
+            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/css/editor.css'),
             false
         );
     }
@@ -268,7 +268,7 @@ trait Enqueue
 
                     wp_enqueue_script(
                         $this->uid(),
-                        Helper::safe_protocol(EAEL_ASSET_URL . '/' . $this->uid() . '.min.js'),
+                        $this->safe_protocol(EAEL_ASSET_URL . '/' . $this->uid() . '.min.js'),
                         ['jquery'],
                         time(),
                         true

@@ -330,7 +330,7 @@ class Post_Timeline extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
         $settings = Helper::fix_old_query($settings);
-        $args = Helper::eael_get_query_args($settings);
+        $args = Helper::get_query_args($settings);
         $settings = [
             'eael_show_image' => $settings['eael_show_image'],
             'image_size' => $settings['image_size'],

@@ -94,7 +94,7 @@ class WeForms extends Widget_Base
                     'description' => esc_html__('Please save and refresh the page after selecting the form', 'essential-addons-for-elementor-lite'),
                     'label_block' => true,
                     'type' => Controls_Manager::SELECT,
-                    'options' => Helper::eael_select_weform(),
+                    'options' => Helper::get_weform_list(),
                     'default' => '0',
                 ]
             );

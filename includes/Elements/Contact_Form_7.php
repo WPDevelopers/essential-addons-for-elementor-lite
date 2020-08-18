@@ -138,7 +138,7 @@ class Contact_Form_7 extends Widget_Base
                     'label' => esc_html__('Select Form', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'label_block' => true,
-                    'options' => Helper::eael_select_contact_form(),
+                    'options' => Helper::get_wpcf7_list(),
                     'default' => '0',
                 ]
             );

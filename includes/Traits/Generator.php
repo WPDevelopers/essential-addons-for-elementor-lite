@@ -96,7 +96,7 @@ trait Generator
         }, $widgets);
 
         // collect page extensions
-        if (!Helper::is_prevent_load_extension($post_id)) {
+        if (!Helper::prevent_extension_loading($post_id)) {
             if ($document->get_settings('eael_custom_js')) {
                 $widgets[] = 'eael-custom-js';
             }

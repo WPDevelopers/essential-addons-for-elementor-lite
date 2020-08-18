@@ -410,7 +410,7 @@ class Event_Calendar extends Widget_Base
                     'multiple' => true,
                     'label_block' => true,
                     'default' => [],
-                    'options' => Helper::eael_get_tags(['taxonomy' => 'tribe_events_cat', 'hide_empty' => false]),
+                    'options' => Helper::get_tags_list(['taxonomy' => 'tribe_events_cat', 'hide_empty' => false]),
                 ]
             );
 

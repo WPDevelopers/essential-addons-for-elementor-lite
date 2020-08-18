@@ -1160,7 +1160,7 @@ class Post_Grid extends Widget_Base
     protected function render() {
         $settings = $this->get_settings();
         $settings = Helper::fix_old_query($settings);
-        $args = Helper::eael_get_query_args($settings);
+        $args = Helper::get_query_args($settings);
 
         if ($settings['post_type'] === 'source_dynamic' && is_archive()) {
 

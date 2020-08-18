@@ -110,7 +110,7 @@ class FluentForm extends Widget_Base
                     'label' => esc_html__('Fluent Form', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'label_block' => true,
-                    'options' => Helper::eael_select_fluent_forms(),
+                    'options' => Helper::get_fluent_forms_list(),
                     'default' => '0',
                 ]
             );

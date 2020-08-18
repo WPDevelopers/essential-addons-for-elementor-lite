@@ -320,7 +320,7 @@ trait Elements
         $global_settings = get_option('eael_global_settings');
 
         foreach ($this->loaded_templates as $post_id) {
-            if (Helper::is_prevent_load_extension($post_id)) {
+            if (Helper::prevent_extension_loading($post_id)) {
                 continue;
             }
 

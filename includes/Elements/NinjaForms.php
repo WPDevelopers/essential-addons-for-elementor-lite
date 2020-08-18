@@ -97,7 +97,7 @@ class NinjaForms extends Widget_Base {
                     'label'       => esc_html__( 'Select Form', 'essential-addons-for-elementor-lite'),
                     'type'        => Controls_Manager::SELECT,
                     'label_block' => true,
-                    'options'     => Helper::eael_select_ninja_form(),
+                    'options'     => Helper::get_ninja_form_list(),
                     'default'     => '0',
                 ]
             );
