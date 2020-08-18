@@ -996,8 +996,7 @@ class Post_Grid extends Widget_Base
         do_action('eael/controls/load_more_button_style', $this);
     }
 
-    private function render_template__header($style = null)
-    {
+    private function render_template__header( $style = null ) {
         $settings = $this->get_settings_for_display();
 
         if ($style === 'two' && $settings['eael_show_meta'] && $settings['meta_position'] == 'meta-entry-header') {
@@ -1158,8 +1157,7 @@ class Post_Grid extends Widget_Base
         }
     }
 
-    protected function render()
-    {
+    protected function render() {
         $settings = $this->get_settings();
         $settings = Helper::fix_old_query($settings);
         $args = Helper::eael_get_query_args($settings);
@@ -1236,8 +1234,10 @@ class Post_Grid extends Widget_Base
             'image_link_nofollow' => $settings['image_link_nofollow'],
             'image_link_target_blank' => $settings['image_link_target_blank'],
             'eael_title_length' => $settings['eael_title_length'],
-            'eael_post_grid_preset_style' => $settings['eael_post_grid_preset_style'],
+            'eael_post_grid_preset_style' => $settings['eael_post_grid_preset_style']
         ];
+
+
 
         $this->add_render_attribute(
             'post_grid_wrapper',
@@ -1261,28 +1261,28 @@ class Post_Grid extends Widget_Base
             ]
         );
 
-        echo '<div ' . $this->get_render_attribute_string('post_grid_wrapper') . '>
-            <div ' . $this->get_render_attribute_string('post_grid_container') . ' data-layout-mode="' . $settings["layout_mode"] . '">';
-        $query = new \WP_Query($args);
+        echo '<div ' . $this->get_render_attribute_string( 'post_grid_wrapper' ) . '>
+            <div ' . $this->get_render_attribute_string( 'post_grid_container' ) . ' data-layout-mode="' . $settings["layout_mode"] . '">';
+                $query = new \WP_Query( $args );
 
-        if ($query->have_posts()) {
-            while ($query->have_posts()) {
-                $query->the_post();
+                if ( $query->have_posts() ) {
+                    while ( $query->have_posts() ) {
+                        $query->the_post();
 
-                include $this->get_template('default');
-            }
-        } else {
-            _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
-        }
-        wp_reset_postdata();
-        echo '</div>
+                        include($this->get_template('default'));
+                    }
+                }else {
+                    _e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
+                }
+                wp_reset_postdata();
+            echo '</div>
             <div class="clearfix"></div>
         </div>';
 
         if ('yes' == $settings['show_load_more']) {
             if ($args['posts_per_page'] != '-1') {
                 echo '<div class="eael-load-more-button-wrap">
-					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings_arry) . '" data-layout="' . $settings['layout_mode'] . '" data-page="1">
+					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-template-path="'.$this->get_template('default').'" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings_arry) . '" data-layout="' . $settings['layout_mode'] . '" data-page="1">
 						<div class="eael-btn-loader button__loader"></div>
 						<span>' . esc_html__($settings['show_load_more_text'], 'essential-addons-for-elementor-lite') . '</span>
 					</button>
