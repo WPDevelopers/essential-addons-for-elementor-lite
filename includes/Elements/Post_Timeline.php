@@ -70,7 +70,7 @@ class Post_Timeline extends Widget_Base
         do_action('eael/controls/layout', $this);
 
         if (!apply_filters('eael/pro_enabled', false)) {
-            Helper::eael_go_premium($this);
+            Helper::go_premium($this);
         }
 
         $this->start_controls_section(
