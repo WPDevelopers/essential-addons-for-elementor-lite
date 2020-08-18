@@ -535,11 +535,6 @@ $config = [
                         'type' => 'self',
                         'context' => 'view',
                     ],
-	                [
-		                'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/magnific-popup/magnific-popup.min.css',
-		                'type'    => 'lib',
-		                'context' => 'view',
-	                ],
                 ],
                 'js'  => [
 	                [
@@ -552,11 +547,6 @@ $config = [
                         'type' => 'self',
                         'context' => 'view',
                     ],
-	                [
-		                'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/magnific-popup/jquery.magnific-popup.min.js',
-		                'type'    => 'lib',
-		                'context' => 'view',
-	                ],
                 ],
             ],
         ],
