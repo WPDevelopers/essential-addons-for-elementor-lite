@@ -11,6 +11,58 @@ use \Essential_Addons_Elementor\Elements\Woo_Checkout;
 
 trait Helper
 {
+
+    /**
+     * This function is responsible for get the post data.
+     * It will return HTML markup with AJAX call and with normal call.
+     *
+     * @return string of an html markup with AJAX call.
+     * @return array of content and found posts count without AJAX call.
+     */
+    public function eael_load_more_ajax()
+    {
+        parse_str($_REQUEST['args'], $args);
+        parse_str($_REQUEST['settings'], $settings);
+
+        var_dump($_REQUEST['template_path']);
+
+        $class = '\\' . str_replace('\\\\', '\\', $_REQUEST['class']);
+        $args['offset'] = (int) $args['offset'] + (((int) $_REQUEST['page'] - 1) * (int) $args['posts_per_page']);
+
+        if (isset($_REQUEST['taxonomy']) && $_REQUEST['taxonomy']['taxonomy'] != 'all') {
+            $args['tax_query'] = [
+                $_REQUEST['taxonomy'],
+            ];
+        }
+
+        if ($class == '\Essential_Addons_Elementor\Elements\Post_Grid' && $settings['orderby'] === 'rand') {
+            $args['post__not_in'] = array_unique($_REQUEST['post__not_in']);
+        }
+
+        // $html = $class::render_template_($args, $settings);
+
+        $html = include($_REQUEST['template_path']);
+
+        echo $html;
+        wp_die();
+    }
+
+    /**
+     * @param $page_obj
+     * @param $key
+     * @return string
+     */
+    public function eael_get_extension_settings($page_settings_model = [], $global_settings = [], $extension, $key)
+    {
+        if (isset($page_settings_model) && $page_settings_model->get_settings($extension) == 'yes') {
+            return $page_settings_model->get_settings($key);
+        } else if (isset($global_settings[$extension]['enabled'])) {
+            return isset($global_settings[$extension][$key]) ? $global_settings[$extension][$key] : '';
+        }
+
+        return '';
+    }
+
     /**
      * @param $id
      * @param $global_data
@@ -87,36 +139,5 @@ trait Helper
             }
         }
         wp_send_json_success(['status' => 'success']);
-    }
-
-    /**
-     * This function is responsible for get the post data.
-     * It will return HTML markup with AJAX call and with normal call.
-     *
-     * @return string of an html markup with AJAX call.
-     * @return array of content and found posts count without AJAX call.
-     */
-    public function eael_load_more_ajax()
-    {
-        parse_str($_REQUEST['args'], $args);
-        parse_str($_REQUEST['settings'], $settings);
-
-        $class = '\\' . str_replace('\\\\', '\\', $_REQUEST['class']);
-        $args['offset'] = (int) $args['offset'] + (((int) $_REQUEST['page'] - 1) * (int) $args['posts_per_page']);
-
-        if (isset($_REQUEST['taxonomy']) && $_REQUEST['taxonomy']['taxonomy'] != 'all') {
-            $args['tax_query'] = [
-                $_REQUEST['taxonomy'],
-            ];
-        }
-
-        if ($class == '\Essential_Addons_Elementor\Elements\Post_Grid' && $settings['orderby'] === 'rand') {
-            $args['post__not_in'] = array_unique($_REQUEST['post__not_in']);
-        }
-
-        $html = $class::render_template_($args, $settings);
-
-        echo $html;
-        wp_die();
     }
 }
