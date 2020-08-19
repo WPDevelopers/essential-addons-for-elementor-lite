@@ -23,7 +23,7 @@ trait Admin
             __('Essential Addons', 'essential-addons-for-elementor-lite'),
             'manage_options',
             'eael-settings',
-            [$this, 'eael_admin_settings_page'],
+            [$this, 'admin_settings_page'],
             $this->safe_url(EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-white.svg'),
             '58.6'
         );
@@ -157,7 +157,7 @@ trait Admin
      *
      * @since 1.1.2
      */
-    public function eael_admin_settings_page()
+    public function admin_settings_page()
     {
         ?>
         <div class="eael-settings-wrap">

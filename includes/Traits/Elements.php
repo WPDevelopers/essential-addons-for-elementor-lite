@@ -366,7 +366,7 @@ trait Elements
                     if ($document->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['eael_ext_table_of_content']['enabled'])) {
                         $toc_settings = $document;
                         $el_class .= ' eael-toc-global';
-                        $this->eael_toc_global_css($document, $global_settings);
+                        $this->toc_global_css($document, $global_settings);
                     }
                     $icon = 'fas fa-list';
                     $support_tag = (array) $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_supported_heading_tag');
@@ -440,7 +440,7 @@ trait Elements
      * @param $elements
      * @return string|void
      */
-    public function eael_toc_global_css($page_settings_model, $global_settings)
+    public function toc_global_css($page_settings_model, $global_settings)
     {
 
         $eael_toc = $global_settings['eael_ext_table_of_content'];

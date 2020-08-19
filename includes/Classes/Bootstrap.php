@@ -112,7 +112,7 @@ class Bootstrap
         // Core
         add_action('init', [$this, 'i18n']);
         add_filter('eael/active_plugins', [$this, 'active_plugins'], 10, 1);
-        add_filter('wpml_elementor_widgets_to_translate', [$this, 'eael_translatable_widgets']);
+        add_filter('wpml_elementor_widgets_to_translate', [$this, 'translatable_widgets']);
         add_action('elementor/editor/after_save', array($this, 'save_global_values'), 10, 2);
 
         // Enqueue
@@ -151,7 +151,7 @@ class Bootstrap
         add_action('eael/controls/load_more_button_style', [$this, 'load_more_button_style'], 10, 1);
         add_action('eael/controls/custom_positioning', [$this, 'custom_positioning'], 10, 5);
 
-        add_filter('eael/controls/event-calendar/source', [$this, 'eael_event_calendar_source']);
+        add_filter('eael/controls/event-calendar/source', [$this, 'event_calendar_source']);
         add_action('eael/controls/advanced-data-table/source', [$this, 'advanced_data_table_source_control']);
         add_filter('eael/advanced-data-table/table_html/integration/ninja', [$this, 'advanced_data_table_ninja_integration'], 10, 1);
 
