@@ -446,10 +446,10 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
         margin-left: auto;
         margin-right: auto;
         cursor: pointer;
-        .eael-google {
+        &.eael-google {
             width: 175px;
         }
-        .eael-facebook {
+        &.eael-facebook {
             width: 190px;
         }
     }
