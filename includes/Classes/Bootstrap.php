@@ -124,8 +124,8 @@ class Bootstrap
         add_action('wp_footer', [$this, 'enqueue_inline_scripts']);
 
         // Ajax
-        add_action('wp_ajax_load_more', array($this, 'eael_load_more_ajax'));
-        add_action('wp_ajax_nopriv_load_more', array($this, 'eael_load_more_ajax'));
+        add_action('wp_ajax_load_more', array($this, 'ajax_load_more'));
+        add_action('wp_ajax_nopriv_load_more', array($this, 'ajax_load_more'));
 
         add_action('wp_ajax_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
         add_action('wp_ajax_nopriv_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
@@ -134,7 +134,7 @@ class Bootstrap
         add_action('wp_ajax_nopriv_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
 
         //handle typeform auth token
-        add_action('admin_post_nopriv_typeform_token_data', [$this, 'eael_typeform_auth_handle']);
+        add_action('admin_post_nopriv_typeform_token_data', [$this, 'typeform_auth_handle']);
 
         // Elements
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
@@ -161,7 +161,7 @@ class Bootstrap
         add_filter('wp_new_user_notification_email_admin', array($this, 'new_user_notification_email_admin'), 10, 3);
 
         //rank math support
-        add_filter('rank_math/researches/toc_plugins', [$this, 'eael_toc_rank_math_support']);
+        add_filter('rank_math/researches/toc_plugins', [$this, 'toc_rank_math_support']);
 
         // Admin
         if (is_admin()) {

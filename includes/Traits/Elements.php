@@ -449,8 +449,8 @@ trait Elements
         $toc_list_separator_style = $eael_toc['eael_ext_table_of_content_list_separator_style'];
         $header_padding = $eael_toc['eael_ext_toc_header_padding'];
         $body_padding = $eael_toc['eael_ext_toc_body_padding'];
-        $header_typography = $this->eael_get_typography_data('eael_ext_table_of_content_header_typography', $eael_toc);
-        $list_typography = $this->eael_get_typography_data('eael_ext_table_of_content_list_typography_normal', $eael_toc);
+        $header_typography = $this->get_typography_data('eael_ext_table_of_content_header_typography', $eael_toc);
+        $list_typography = $this->get_typography_data('eael_ext_table_of_content_list_typography_normal', $eael_toc);
         $box_shadow = $eael_toc['eael_ext_toc_table_box_shadow_box_shadow'];
         $border_radius = $eael_toc['eael_ext_toc_box_border_radius']['size'];
         $bullet_size = $eael_toc['eael_ext_toc_box_list_bullet_size']['size'];
