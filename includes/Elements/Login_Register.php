@@ -3374,7 +3374,6 @@ class Login_Register extends Widget_Base {
         </div>
 
 		<?php
-		$this->print_recaptcha_script();
 	}
 
 	protected function print_login_form() {
@@ -3867,30 +3866,6 @@ class Login_Register extends Widget_Base {
 			do_action( 'eael/login-register/after-showing-login-error', $login_error, $this );
 
 			delete_transient( $error_key );
-		}
-	}
-
-	protected function print_recaptcha_script() {
-	    return;
-		if ( ! empty( $this->recaptcha_sitekey ) ) { ?>
-            <script type="text/javascript">
-                function onloadLRcb() {
-                    var loginRecaptchaNode = document.getElementById('login-recaptcha-node-<?php echo $this->get_id(); ?>');
-                    var registerRecaptchaNode = document.getElementById('register-recaptcha-node-<?php echo $this->get_id(); ?>');
-
-                    if (loginRecaptchaNode) {
-                        grecaptcha.render(loginRecaptchaNode, {
-                            'sitekey': '<?php echo esc_js( $this->recaptcha_sitekey ); ?>',
-                        });
-                    }
-                    if (registerRecaptchaNode) {
-                        grecaptcha.render(registerRecaptchaNode, {
-                            'sitekey': '<?php echo esc_js( $this->recaptcha_sitekey ); ?>',
-                        });
-                    }
-                }
-            </script>
-			<?php
 		}
 	}
 
