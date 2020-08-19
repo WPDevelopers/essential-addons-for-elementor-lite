@@ -1601,7 +1601,7 @@ trait Controls
      *
      * @return array
      */
-    public function eael_event_calendar_source($source)
+    public function event_calendar_source($source)
     {
         if (apply_filters('eael/pro_enabled', false)) {
             $source['eventon'] = __('EventON', 'essential-addons-for-elementor-lite');
