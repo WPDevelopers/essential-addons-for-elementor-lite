@@ -7,7 +7,6 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use \Elementor\Plugin;
-
 use \Essential_Addons_Elementor\Classes\Helper;
 
 trait Elements

@@ -6,9 +6,6 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \Elementor\Controls_Manager;
-use \Essential_Addons_Elementor\Elements\Woo_Checkout;
-
 trait Twitter_Feed
 {
     /**

@@ -6,7 +6,6 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \Elementor\Controls_Manager;
 use \Essential_Addons_Elementor\Elements\Woo_Checkout;
 
 trait Helper
@@ -38,7 +37,7 @@ trait Helper
 
         // $html = $class::render_template_($args, $settings);
 
-        $html = include($_REQUEST['template_path']);
+        $html = include $_REQUEST['template_path'];
 
         // echo $html;
         wp_die();
