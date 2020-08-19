@@ -15,7 +15,7 @@ class Woocommerce_Review extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'WooCommerce Review', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'ReviewX Woo Review', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
