@@ -17,7 +17,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                 echo '<div class="eael-entry-media">';
                 // if ( $style == null && $settings['eael_show_post_terms'] === 'yes' ) {
                 if ( $settings['eael_show_post_terms'] === 'yes' ) {
-                    echo self::get_terms_as_list( $settings['eael_post_terms'], $settings['eael_post_terms_max_length'] );
+                    echo Helper::get_terms_as_list( $settings['eael_post_terms'], $settings['eael_post_terms_max_length'] );
                 }
     
                 echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">';
@@ -189,7 +189,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                 echo '<div class="eael-entry-media">';
                 // if ( $style == null && $settings['eael_show_post_terms'] === 'yes' ) {
                 if ( $settings['eael_show_post_terms'] === 'yes' ) {
-                    echo self::get_terms_as_list( $settings['eael_post_terms'], $settings['eael_post_terms_max_length'] );
+                    echo Helper::get_terms_as_list( $settings['eael_post_terms'], $settings['eael_post_terms_max_length'] );
                 }
     
                 echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">';
@@ -327,7 +327,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                 echo '<div class="eael-entry-media">';
                 // if ( $style == null && $settings['eael_show_post_terms'] === 'yes' ) {
                 if ( $settings['eael_show_post_terms'] === 'yes' ) {
-                    echo self::get_terms_as_list( $settings['eael_post_terms'], $settings['eael_post_terms_max_length'] );
+                    echo Helper::get_terms_as_list( $settings['eael_post_terms'], $settings['eael_post_terms_max_length'] );
                 }
     
                 echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">';
@@ -349,8 +349,11 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                             </div>';
                 echo '</div>';
                 // if ( $style === 'three' && $settings['eael_show_date'] === 'yes' ) {
+
+                // var_dump($settings['eael_show_date']);
+
                 if ( $settings['eael_show_date'] === 'yes' ) {
-                    echo '<span class="eael-meta-posted-on"><time datetime="' . get_the_date() . '"><span>' . get_the_date( 'd' ) . '</span>' . get_the_date( 'F' ) . '</time></span>';
+                    // echo '<span class="eael-meta-posted-on"><time datetime="' . get_the_date() . '"><span>' . get_the_date( 'd' ) . '</span>' . get_the_date( 'F' ) . '</time></span>';
                 }
             }
 
