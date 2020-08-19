@@ -554,7 +554,6 @@ class Product_Grid extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-grid.list .eael-product-wrap .product-image-wrap' => 'width: {{SIZE}}%;',
-					'{{WRAPPER}} .eael-product-grid.list .eael-product-wrap .product-details-wrap' => 'width: calc(100% - {{SIZE}}%);',
 				],
 				'condition' => [
 					'eael_product_grid_layout' => 'list',
@@ -646,6 +645,25 @@ class Product_Grid extends Widget_Base {
 					'{{WRAPPER}} .eael-product-grid.list .eael-product-list-preset-2 .eael-product-wrap' => 'padding: {{SIZE}}px;',
 					'{{WRAPPER}} .eael-product-grid.list .eael-product-list-preset-2 .eael-product-wrap .product-details-wrap' => 'padding: 0 0 0 {{SIZE}}px;',
 					'{{WRAPPER}} .eael-product-grid.list .eael-product-list-preset-3 .eael-product-wrap .product-details-wrap' => 'padding: 0 0 0 {{SIZE}}px;',
+				],
+				'condition' => [
+					'eael_product_grid_layout' => 'list',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_product_list_content_width',
+			[
+				'label' => esc_html__('Width (%)', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'%' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-grid.list .eael-product-wrap .product-details-wrap' => 'width: {{SIZE}}%;',
 				],
 				'condition' => [
 					'eael_product_grid_layout' => 'list',
