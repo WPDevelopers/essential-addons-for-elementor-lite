@@ -10,7 +10,7 @@ ea.hooks.addAction("init", "ea", () => {
         const $regLinkAction = $scope.find('#eael-lr-reg-toggle');
         const $loginLinkAction = $scope.find('#eael-lr-login-toggle');
         const $passField = $loginFormWrapper.find('#eael-user-password');
-
+        const recaptchaAvailable = (typeof grecaptcha !== 'undefined' && grecaptcha !== null);
         if ('form' === $regLinkAction.data('action')) {
             $regLinkAction.on('click', function (e) {
                 e.preventDefault();
@@ -59,13 +59,13 @@ ea.hooks.addAction("init", "ea", () => {
             }
         }
 
-        if (grecaptcha && isEditMode){
+        if (recaptchaAvailable && isEditMode){
             // on elementor editor, window load event already fired, so run recaptcha
             onloadLRcb();
         }else{
             // on frontend, load even is yet to fire, so wait and fire recaptcha
             $(window).load(function () {
-                if (grecaptcha){
+                if (recaptchaAvailable){
                     onloadLRcb();
                 }
             });
