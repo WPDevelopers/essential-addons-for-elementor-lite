@@ -1504,7 +1504,7 @@ class Info_Box extends Widget_Base {
 	 * 
 	 * @param	$settings
 	 */
-	protected function eael_infobox_before() {
+	protected function infobox_before() {
 		$settings = $this->get_settings();
 
 		$this->add_render_attribute('eael_infobox_inner', 'class', 'eael-infobox');
@@ -1532,7 +1532,7 @@ class Info_Box extends Widget_Base {
 	 * 
 	 * @param	$settings
 	 */
-	protected function eael_infobox_after() {
+	protected function infobox_after() {
 		$settings = $this->get_settings();
 		ob_start();?></div><?php
 		if( 'yes' == $settings['eael_show_infobox_clickable'] ) : ?></a><?php endif;
@@ -1724,9 +1724,9 @@ class Info_Box extends Widget_Base {
 	}
 
 	protected function render() {
-		$this->eael_infobox_before();
+		$this->infobox_before();
 		$this->render_infobox_icon();
 		$this->render_infobox_content();
-		$this->eael_infobox_after();
+		$this->infobox_after();
 	}
 }

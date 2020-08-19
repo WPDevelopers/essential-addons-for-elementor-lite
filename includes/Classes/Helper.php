@@ -319,7 +319,7 @@ class Helper
      *
      * @return array
      */
-    public static function eael_get_taxonomies_by_post($args = [], $output = 'names', $operator = 'and')
+    public static function get_taxonomies_by_post($args = [], $output = 'names', $operator = 'and')
     {
         global $wp_taxonomies;
 
@@ -599,5 +599,49 @@ class Helper
         }
 
         return $term_count;
+    }
+
+    public static function get_dynamic_args(array $settings, array $args)
+    {
+        if ($settings['post_type'] === 'source_dynamic' && is_archive()) {
+
+            $data = get_queried_object();
+
+            if ($data) {
+                $args['post_type'] = $data->post_type;
+
+                $args['tax_query'] = [];
+
+                if ($data->taxonomy) {
+                    $args['tax_query'][] = [
+                        'taxonomy' => $data->taxonomy,
+                        'field' => 'term_id',
+                        'terms' => $data->term_id,
+                    ];
+                }
+            } else {
+                global $wp_query;
+
+                $args['post_type'] = $wp_query->query_vars['post_type'];
+            }
+
+            if (get_query_var('author') > 0) {
+                $args['author__in'] = get_query_var('author');
+            }
+
+            if (get_query_var('year') || get_query_var('monthnum') || get_query_var('day')) {
+                $args['date_query'] = [
+                    'year' => get_query_var('year'),
+                    'month' => get_query_var('monthnum'),
+                    'day' => get_query_var('day'),
+                ];
+            }
+
+            if (!empty($args['tax_query'])) {
+                $args['tax_query']['relation'] = 'AND';
+            }
+        }
+
+        return $args;
     }
 }
