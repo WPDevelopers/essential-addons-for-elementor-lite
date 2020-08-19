@@ -2900,7 +2900,7 @@ class Filterable_Gallery extends Widget_Base
         return $gallery_store;
     }
 
-    protected function eael_render_fg_buttons($settings, $item)
+    protected function render_fg_buttons($settings, $item)
     {
         $zoom_icon_migrated = isset($settings['__fa4_migrated']['eael_section_fg_zoom_icon_new']);
         $zoom_icon_is_new = empty($settings['eael_section_fg_zoom_icon']);
@@ -3024,7 +3024,7 @@ class Filterable_Gallery extends Widget_Base
                                     
                                     if ( empty($settings['eael_section_fg_full_image_clickable']) ) {
                                         
-                                        $html .= ($this->eael_render_fg_buttons($settings, $item));
+                                        $html .= ($this->render_fg_buttons($settings, $item));
                                     
                                     }
                                 }
@@ -3110,7 +3110,7 @@ class Filterable_Gallery extends Widget_Base
                             
                             if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] === 'card') {
                                 $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer ' . $settings['eael_fg_grid_hover_style'] . '">';
-                                    $html .= ($this->eael_render_fg_buttons($settings, $item));
+                                    $html .= ($this->render_fg_buttons($settings, $item));
                                 $html .= '</div>';
                             }
                         
@@ -3158,7 +3158,7 @@ class Filterable_Gallery extends Widget_Base
                                     if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] !== 'card') {
                                         
                                         if ( empty($settings['eael_section_fg_full_image_clickable']) ) {
-                                            $html .= ($this->eael_render_fg_buttons($settings, $item));
+                                            $html .= ($this->render_fg_buttons($settings, $item));
                                         }
 
                                     }

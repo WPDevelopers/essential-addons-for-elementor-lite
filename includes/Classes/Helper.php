@@ -319,7 +319,7 @@ class Helper
      *
      * @return array
      */
-    public static function eael_get_taxonomies_by_post($args = [], $output = 'names', $operator = 'and')
+    public static function get_taxonomies_by_post($args = [], $output = 'names', $operator = 'and')
     {
         global $wp_taxonomies;
 
