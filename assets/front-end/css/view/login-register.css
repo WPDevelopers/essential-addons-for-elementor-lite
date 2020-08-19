@@ -466,9 +466,9 @@
   margin-right: auto;
   cursor: pointer;
 }
-.lr-social-login-container .eael-social-button .eael-google {
+.lr-social-login-container .eael-social-button.eael-google {
   width: 175px;
 }
-.lr-social-login-container .eael-social-button .eael-facebook {
+.lr-social-login-container .eael-social-button.eael-facebook {
   width: 190px;
 }
