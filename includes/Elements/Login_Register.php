@@ -2299,6 +2299,10 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->start_popover();
+		$this->add_control( 'eael_form_input_fields_heading', [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Form Input Fields', EAEL_TEXTDOMAIN ),
+		] );
 		$this->add_responsive_control( "eael_form_field_margin", [
 			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -2314,7 +2318,6 @@ class Login_Register extends Widget_Base {
 				'eael_form_field_po_toggle' => 'yes',
 			],
 		] );
-
 		$this->add_responsive_control( "eael_form_field_padding", [
 			'label'      => __( 'Padding', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -2325,6 +2328,41 @@ class Login_Register extends Widget_Base {
 			],
 			'selectors'  => [
 				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => $this->apply_dim( 'padding' ),
+			],
+			'condition'  => [
+				'eael_form_field_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_control( 'eael_form_rm_fields_heading', [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Remember Me Field', EAEL_TEXTDOMAIN ),
+			'separator' => 'before',
+		] );
+		$this->add_responsive_control( "eael_form_rm_field_margin", [
+			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael-forever-forget" => $this->apply_dim( 'margin' ),
+			],
+			'condition'  => [
+				'eael_form_field_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_rm_field_padding", [
+			'label'      => __( 'Padding', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael-forever-forget" => $this->apply_dim( 'padding' ),
 			],
 			'condition'  => [
 				'eael_form_field_po_toggle' => 'yes',
