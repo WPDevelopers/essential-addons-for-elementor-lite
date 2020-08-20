@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
+use \Elementor\Utils;
 use \Essential_Addons_Elementor\Classes\Helper;
 
 trait Controls
