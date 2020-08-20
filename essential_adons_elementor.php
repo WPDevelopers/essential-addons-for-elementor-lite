@@ -9,7 +9,7 @@
  * Text Domain: essential-addons-for-elementor-lite
  * Domain Path: /languages
  *
- * WC tested up to: 4.3.1
+ * WC tested up to: 4.4.1
  */
 
 if (!defined('ABSPATH')) {
