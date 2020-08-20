@@ -582,7 +582,7 @@ class Product_Grid extends Widget_Base {
 						'icon' => 'fa fa-align-left',
 					],
 					'center' => [
-						'title' => __('Right', 'essential-addons-for-elementor-lite'),
+						'title' => __('Center', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-center',
 					],
 				],
