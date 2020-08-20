@@ -145,9 +145,33 @@ trait Admin
 
             wp_enqueue_script('essential_addons_elementor-admin-js', EAEL_PLUGIN_URL . '/assets/admin/js/admin.js', array('jquery'), EAEL_PLUGIN_VERSION, true);
 
+            //Internationalizing JS string translation
+            $i18n = [
+                    'login_register' => [
+	                        //m=modal, rm=response modal, r=reCAPTCHA, g= google, f=facebook, e=error
+                            'm_title' => __('Login | Register Settings', EAEL_TEXTDOMAIN),
+                            'm_footer' => __('Read the doc on how to get above credentials', EAEL_TEXTDOMAIN),
+                            'save' => __('Save', EAEL_TEXTDOMAIN),
+                            'cancel' => __('Cancel', EAEL_TEXTDOMAIN),
+                            'rm_title' => __('Login | Register Settings Saved', EAEL_TEXTDOMAIN),
+                            'rm_footer' => __('Reload the page to see updated data', EAEL_TEXTDOMAIN),
+                            'e_title' => __('Oops...', EAEL_TEXTDOMAIN),
+                            'e_text' => __('Something went wrong!', EAEL_TEXTDOMAIN),
+                            'r_title' => __('reCAPTCHA', EAEL_TEXTDOMAIN),
+                            'r_sitekey' => __('Site Key', EAEL_TEXTDOMAIN),
+                            'r_sitesecret' => __('Site Secret', EAEL_TEXTDOMAIN),
+                            'g_title' => __('Google Login', EAEL_TEXTDOMAIN),
+                            'g_cid' => __('Google Client ID', EAEL_TEXTDOMAIN),
+                            'f_title' => __('Facebook Login', EAEL_TEXTDOMAIN),
+                            'f_app_id' => __('Facebook APP ID', EAEL_TEXTDOMAIN),
+                            'f_app_secret' => __('Facebook APP Secret', EAEL_TEXTDOMAIN),
+                    ]
+            ];
+
             wp_localize_script('essential_addons_elementor-admin-js', 'localize', array(
                 'ajaxurl' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('essential-addons-elementor'),
+                'i18n' => $i18n,
             ));
         }
     }
