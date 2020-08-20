@@ -54,7 +54,7 @@ trait Product_Grid
 					     ($settings['eael_product_grid_price'] != 'yes' ? '' : '<span class="price">' . $product->get_price_html() . '</span>') .'
                     </li>';
 				} else if (($settings['eael_product_grid_style_preset'] == 'eael-product-preset-5') || ($settings['eael_product_grid_style_preset'] == 'eael-product-preset-6') || ($settings['eael_product_grid_style_preset'] == 'eael-product-preset-7')) { ?>
-					<li class="product">
+					<li <?php post_class( 'product' ); ?>>
 						<div class="eael-product-wrap">
 							<div class="product-image-wrap">
 								<div class="image-wrap">
@@ -126,7 +126,7 @@ trait Product_Grid
 						</div>
 					</li>
                     <?php } else if ($settings['eael_product_grid_style_preset'] == 'eael-product-preset-8') { ?>
-                    <li class="product">
+                    <li <?php post_class( 'product' ); ?>>
                         <div class="eael-product-wrap">
                             <div class="product-image-wrap">
                                 <div class="image-wrap">
@@ -361,7 +361,7 @@ trait Product_Grid
 			            <?php do_action( 'eael_woo_single_product_summary' ); ?>
                     </div>
                 </div>
-                <button class="eael-product-popup-close">x</button>
+                <button class="eael-product-popup-close"><i class="fas fa-times"></i></button>
             </div>
 
         </div>
