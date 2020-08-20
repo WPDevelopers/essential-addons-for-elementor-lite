@@ -1815,17 +1815,17 @@ class Product_Grid extends Widget_Base {
 				'label'     => __('Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-product-popup .eael-onsale' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-popup .eael-onsale' => 'color: {{VALUE}}!important;',
 				],
 			]
 		);
 		$this->add_control(
 			'eael_product_popup_sale_bg_color',
 			[
-				'label'     => __('Link Color', 'essential-addons-for-elementor-lite'),
+				'label'     => __('Background Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-product-popup .eael-onsale' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-popup .eael-onsale' => 'background-color: {{VALUE}}!important;',
 				],
 			]
 		);
