@@ -13,9 +13,11 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
 .d-none {
     display: none;
 }
+
 .d-ib {
     display: inline-block;
 }
+
 .mr-auto {
     margin-right: auto;
 }
@@ -118,10 +120,12 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
         .forget-menot {
             display: flex;
             align-items: center;
+
             label {
                 margin: 0 0 0 10px;
             }
         }
+
         .forget-menot, .forget-pass {
             flex: 1;
             margin: 0;
@@ -146,7 +150,7 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
         }
     }
 
-    .eael-lr-btn{
+    .eael-lr-btn {
         background-color: #744ffb;
         color: #fff;
         position: relative;
@@ -158,6 +162,7 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
         transition: all .2s;
         padding: 15px;
         width: 130px;
+
         &.eael-lr-btn-block {
             display: block;
             //width: 100%;
@@ -167,7 +172,8 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
             display: inline-block;
         }
     }
-    .eael-lr-link{
+
+    .eael-lr-link {
         display: inline-block;
     }
 
@@ -242,14 +248,17 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
         display: flex;
         margin-bottom: 1rem;
         align-items: center;
+
         .eael-lr-tnc-link {
             margin-left: 5px;
             display: inline-block;
         }
     }
-    .eael-recaptcha-wrapper{
+
+    .eael-recaptcha-wrapper {
         margin-bottom: 1rem;
     }
+
     .eael-lr-footer {
         display: flex;
         justify-content: center;
@@ -402,6 +411,46 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
                     }
                 }
             }
+        }
+    }
+
+
+}
+
+.lr-social-login-container {
+    margin-top: 1rem;
+    .lr-separator {
+        width: 100%;
+        text-align: center;
+        p {
+            padding: 0;
+            margin: 0;
+        }
+        hr {
+            width: 100%;
+            border-bottom: 1px solid gray;
+        }
+    }
+
+    .lr-social-buttons-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .eael-social-button {
+        display: flex;
+        max-width: 100%;
+        justify-content: space-evenly;
+        align-items: center;
+        padding-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        cursor: pointer;
+        &.eael-google {
+            width: 175px;
+        }
+        &.eael-facebook {
+            width: 190px;
         }
     }
 }

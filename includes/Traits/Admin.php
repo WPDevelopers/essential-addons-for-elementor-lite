@@ -142,6 +142,7 @@ trait Admin
             wp_enqueue_style('sweetalert2-css', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/css/sweetalert2.min.css', false, EAEL_PLUGIN_VERSION);
             wp_enqueue_script('sweetalert2-js', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array('jquery', 'sweetalert2-core-js'), EAEL_PLUGIN_VERSION, true);
             wp_enqueue_script('sweetalert2-core-js', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/js/core.js', array('jquery'), EAEL_PLUGIN_VERSION, true);
+
             wp_enqueue_script('essential_addons_elementor-admin-js', EAEL_PLUGIN_URL . '/assets/admin/js/admin.js', array('jquery'), EAEL_PLUGIN_VERSION, true);
 
             wp_localize_script('essential_addons_elementor-admin-js', 'localize', array(
@@ -205,20 +206,34 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
      */
     public function save_settings()
     {
-        check_ajax_referer('essential-addons-elementor', 'security');
+	    check_ajax_referer('essential-addons-elementor', 'security');
 
         if (!isset($_POST['fields'])) {
             return;
         }
 
         parse_str($_POST['fields'], $settings);
-        // Recaptcha Related stuff
-        $r_keys = !empty( $settings['eael_recaptcha_keys']) ? explode( ':',  sanitize_text_field( $settings['eael_recaptcha_keys'])): [];
-        $eael_recaptcha_site_key = !empty( $r_keys[0]) ? sanitize_text_field( $r_keys[0]): '';
-	    $eael_recaptcha_secret = !empty( $r_keys[1]) ? sanitize_text_field( $r_keys[1]): '';
-	    // Saving recaptcha keys
-        update_option( 'eael_recaptcha_sitekey', $eael_recaptcha_site_key);
-        update_option( 'eael_recaptcha_secret', $eael_recaptcha_secret);
+	    if ( !empty( $_POST['is_login_register']) ) {
+		    // Saving Login | Register Related Data
+		    if ( isset( $settings['recaptchaSiteKey']) ) {
+			    update_option( 'eael_recaptcha_sitekey', sanitize_text_field( $settings['recaptchaSiteKey']));
+		    }
+		    if ( isset( $settings['recaptchaSiteSecret']) ) {
+			    update_option( 'eael_recaptcha_secret', sanitize_text_field( $settings['recaptchaSiteSecret']));
+		    }
+		    //pro settings
+		    if ( isset( $settings['gClientId']) ) {
+			    update_option( 'eael_g_client_id', sanitize_text_field( $settings['gClientId']));
+		    }
+		    if ( isset( $settings['fbAppId'] ) ) {
+			    update_option( 'eael_fb_app_id', sanitize_text_field( $settings['fbAppId']));
+		    }
+		    if ( isset( $settings['fbAppSecret'] ) ) {
+			    update_option( 'eael_fb_app_secret', sanitize_text_field( $settings['fbAppSecret']));
+		    }
+		    wp_send_json_success( ['message'=> __('Login | Register Settings updated', EAEL_TEXTDOMAIN)]);
+        }
+
 
         // Saving Google Map Api Key
         update_option('eael_save_google_map_api', @$settings['google-map-api']);
