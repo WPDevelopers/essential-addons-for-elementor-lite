@@ -84,7 +84,7 @@ class Login_Register extends Widget_Base {
 	 */
 	protected $form_logo_pos;
 	/**
-	 * Google Recaptcha Site key
+	 * Google reCAPTCHA Site key
 	 * @var string|false
 	 */
 	protected $recaptcha_sitekey;
@@ -465,7 +465,7 @@ class Login_Register extends Widget_Base {
 			if ( empty( $this->recaptcha_sitekey ) ) {
 				$this->add_control( 'eael_recaptcha_keys_missing', [
 					'type'            => Controls_Manager::RAW_HTML,
-					'raw'             => sprintf( __( 'Recaptcha API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', EAEL_TEXTDOMAIN ), '<strong>', '</strong>' ),
+					'raw'             => sprintf( __( 'reCAPTCHA API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', EAEL_TEXTDOMAIN ), '<strong>', '</strong>' ),
 					'content_classes' => 'eael-warning',
 					'condition'       => [
 						'enable_register_recaptcha' => 'yes',

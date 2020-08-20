@@ -234,14 +234,14 @@
         let fbAppSecret = $dnode.data('fb-app-secret');
         //@TODO; localize all js string translation later
         let html = `<div class="eael-lr-settings-fields" id="lr_settings_fields">
-                        <h2>Recaptcha</h2>
+                        <h2>reCAPTCHA</h2>
                         <div class="sf-group">
                             <label for="lr_recaptcha_sitekey">Site Key:</label>
-                            <input value="${rSitekey}" name="lr_recaptcha_sitekey" id="lr_recaptcha_sitekey" placeholder="Recaptcha Site Key"/><br/>
+                            <input value="${rSitekey}" name="lr_recaptcha_sitekey" id="lr_recaptcha_sitekey" placeholder="reCAPTCHA Site Key"/><br/>
                         </div>
                         <div class="sf-group">
                             <label for="lr_recaptcha_secret">Secret Key:</label>
-                            <input value="${rSecret}" name="lr_recaptcha_secret" id="lr_recaptcha_secret" placeholder="Recaptcha Site Secret"/><br/>
+                            <input value="${rSecret}" name="lr_recaptcha_secret" id="lr_recaptcha_secret" placeholder="reCAPTCHA Site Secret"/><br/>
                         </div>
                     `;
         if (isProEnable){
