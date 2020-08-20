@@ -205,7 +205,7 @@ trait Controls
                 'label' => __('Include', 'essential-addons-for-elementor-lite'),
                 'label_block' => true,
                 'type' => Controls_Manager::SELECT2,
-                'options' => Helper::get_post_type_categories('doc_category', 'term_id'),
+                'options' => Helper::get_terms_list('doc_category', 'term_id'),
                 'multiple' => true,
                 'default' => [],
             ]
@@ -216,7 +216,7 @@ trait Controls
             [
                 'label' => __('Exclude', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT2,
-                'options' => Helper::get_post_type_categories('doc_category', 'term_id'),
+                'options' => Helper::get_terms_list('doc_category', 'term_id'),
                 'label_block' => true,
                 'post_type' => '',
                 'multiple' => true,
