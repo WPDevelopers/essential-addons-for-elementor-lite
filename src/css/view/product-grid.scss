@@ -160,6 +160,13 @@
                             font-weight: 900;
                             padding-right: 8px;
                         }
+
+                        &.product_type_variable {
+                            &:before {
+                                content: "\f00c";
+                            }
+                        }
+
                         &:focus {
                             outline: none;
                         }
@@ -305,6 +312,12 @@
                                 font-weight: 900;
                             }
 
+                            &.product_type_variable {
+                                &:after {
+                                    content: "\f00c";
+                                }
+                            }
+
                             &.loading {
                                 &:before {
                                     display: none;
@@ -429,6 +442,12 @@
                 font-family: "Font Awesome 5 Free";
                 font-weight: 900;
                 padding-right: 8px;
+            }
+
+            &.product_type_variable {
+                &:before {
+                    content: "\f00c";
+                }
             }
         }
     }
@@ -1053,6 +1072,12 @@
                                     left: 50%;
                                     position: absolute;
                                 }
+
+                                &.product_type_variable {
+                                    &:before {
+                                        content: "\f00c";
+                                    }
+                                }
                             }
                         }
                     }
@@ -1114,6 +1139,12 @@
                                     top: 50%;
                                     left: 50%;
                                     position: absolute;
+                                }
+
+                                &.product_type_variable {
+                                    &:before {
+                                        content: "\f00c";
+                                    }
                                 }
                             }
 
@@ -1184,6 +1215,12 @@
                                     top: 50%;
                                     left: 50%;
                                     position: absolute;
+                                }
+
+                                &.product_type_variable {
+                                    &:before {
+                                        content: "\f00c";
+                                    }
                                 }
                             }
 
