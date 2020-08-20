@@ -84,7 +84,7 @@ class Login_Register extends Widget_Base {
 	 */
 	protected $form_logo_pos;
 	/**
-	 * Google Recaptcha Site key
+	 * Google reCAPTCHA Site key
 	 * @var string|false
 	 */
 	protected $recaptcha_sitekey;
@@ -465,7 +465,7 @@ class Login_Register extends Widget_Base {
 			if ( empty( $this->recaptcha_sitekey ) ) {
 				$this->add_control( 'eael_recaptcha_keys_missing', [
 					'type'            => Controls_Manager::RAW_HTML,
-					'raw'             => sprintf( __( 'Recaptcha API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', EAEL_TEXTDOMAIN ), '<strong>', '</strong>' ),
+					'raw'             => sprintf( __( 'reCAPTCHA API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', EAEL_TEXTDOMAIN ), '<strong>', '</strong>' ),
 					'content_classes' => 'eael-warning',
 					'condition'       => [
 						'enable_register_recaptcha' => 'yes',
@@ -2299,6 +2299,10 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->start_popover();
+		$this->add_control( 'eael_form_input_fields_heading', [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Form Input Fields', EAEL_TEXTDOMAIN ),
+		] );
 		$this->add_responsive_control( "eael_form_field_margin", [
 			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -2314,7 +2318,6 @@ class Login_Register extends Widget_Base {
 				'eael_form_field_po_toggle' => 'yes',
 			],
 		] );
-
 		$this->add_responsive_control( "eael_form_field_padding", [
 			'label'      => __( 'Padding', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -2325,6 +2328,41 @@ class Login_Register extends Widget_Base {
 			],
 			'selectors'  => [
 				"{{WRAPPER}} .lr-form-wrapper .eael-lr-form-control" => $this->apply_dim( 'padding' ),
+			],
+			'condition'  => [
+				'eael_form_field_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_control( 'eael_form_rm_fields_heading', [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Remember Me Field', EAEL_TEXTDOMAIN ),
+			'separator' => 'before',
+		] );
+		$this->add_responsive_control( "eael_form_rm_field_margin", [
+			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael-forever-forget" => $this->apply_dim( 'margin' ),
+			],
+			'condition'  => [
+				'eael_form_field_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_rm_field_padding", [
+			'label'      => __( 'Padding', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael-forever-forget" => $this->apply_dim( 'padding' ),
 			],
 			'condition'  => [
 				'eael_form_field_po_toggle' => 'yes',
@@ -3374,7 +3412,6 @@ class Login_Register extends Widget_Base {
         </div>
 
 		<?php
-		$this->print_recaptcha_script();
 	}
 
 	protected function print_login_form() {
@@ -3867,30 +3904,6 @@ class Login_Register extends Widget_Base {
 			do_action( 'eael/login-register/after-showing-login-error', $login_error, $this );
 
 			delete_transient( $error_key );
-		}
-	}
-
-	protected function print_recaptcha_script() {
-	    return;
-		if ( ! empty( $this->recaptcha_sitekey ) ) { ?>
-            <script type="text/javascript">
-                function onloadLRcb() {
-                    var loginRecaptchaNode = document.getElementById('login-recaptcha-node-<?php echo $this->get_id(); ?>');
-                    var registerRecaptchaNode = document.getElementById('register-recaptcha-node-<?php echo $this->get_id(); ?>');
-
-                    if (loginRecaptchaNode) {
-                        grecaptcha.render(loginRecaptchaNode, {
-                            'sitekey': '<?php echo esc_js( $this->recaptcha_sitekey ); ?>',
-                        });
-                    }
-                    if (registerRecaptchaNode) {
-                        grecaptcha.render(registerRecaptchaNode, {
-                            'sitekey': '<?php echo esc_js( $this->recaptcha_sitekey ); ?>',
-                        });
-                    }
-                }
-            </script>
-			<?php
 		}
 	}
 
