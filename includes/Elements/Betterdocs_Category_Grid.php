@@ -280,6 +280,9 @@ class Betterdocs_Category_Grid extends Widget_Base
                 [
                     'label' => __('Button Text', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
+                    'dynamic' => [
+                        'active' => true,
+                    ],
                     'default' => __('Explore More', 'essential-addons-for-elementor-lite'),
                     'condition' => [
                         'show_button' => 'true',

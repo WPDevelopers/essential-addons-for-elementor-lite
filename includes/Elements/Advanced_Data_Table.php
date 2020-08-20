@@ -147,6 +147,9 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label'     => __('Placeholder', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default'   => __('Search', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'ea_adv_data_table_search' => 'yes',

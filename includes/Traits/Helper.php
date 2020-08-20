@@ -738,6 +738,9 @@ trait Helper
             [
                 'label' => esc_html__('Label Text', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'label_block' => false,
                 'default' => esc_html__('Read More', 'essential-addons-for-elementor-lite'),
                 'condition' => [

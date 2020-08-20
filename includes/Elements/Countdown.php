@@ -177,6 +177,9 @@ class Countdown extends Widget_Base {
             [
                 'label'       => esc_html__( 'Custom Label for Days', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default'     => esc_html__( 'Days', 'essential-addons-for-elementor-lite' ),
                 'description' => esc_html__( 'Leave blank to hide', 'essential-addons-for-elementor-lite' ),
                 'condition'   => [
@@ -200,6 +203,9 @@ class Countdown extends Widget_Base {
             [
                 'label'       => esc_html__( 'Custom Label for Hours', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default'     => esc_html__( 'Hours', 'essential-addons-for-elementor-lite' ),
                 'description' => esc_html__( 'Leave blank to hide', 'essential-addons-for-elementor-lite' ),
                 'condition'   => [
@@ -223,6 +229,9 @@ class Countdown extends Widget_Base {
             [
                 'label'       => esc_html__( 'Custom Label for Minutes', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default'     => esc_html__( 'Minutes', 'essential-addons-for-elementor-lite' ),
                 'description' => esc_html__( 'Leave blank to hide', 'essential-addons-for-elementor-lite' ),
                 'condition'   => [
@@ -246,6 +255,9 @@ class Countdown extends Widget_Base {
             [
                 'label'       => esc_html__( 'Custom Label for Seconds', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default'     => esc_html__( 'Seconds', 'essential-addons-for-elementor-lite' ),
                 'description' => esc_html__( 'Leave blank to hide', 'essential-addons-for-elementor-lite' ),
                 'condition'   => [
