@@ -1566,7 +1566,7 @@ trait Controls
         $wb->end_controls_section();
     }
 
-    public function advanced_data_table_source_control($wb)
+    public function advanced_data_table_source($wb)
     {
         if (apply_filters('eael/active_plugins', 'ninja-tables/ninja-tables.php')) {
             $wb->add_control(
