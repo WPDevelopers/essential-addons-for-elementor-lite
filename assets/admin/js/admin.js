@@ -233,7 +233,6 @@
         let gClientId = $dnode.data('g-client-id');
         let fbAppId = $dnode.data('fb-app-id');
         let fbAppSecret = $dnode.data('fb-app-secret');
-        //@TODO; localize all js string translation later
         let html = `<div class="eael-lr-settings-fields" id="lr_settings_fields">
                         <h2>${lr_i18n.r_title}</h2>
                         <div class="sf-group">

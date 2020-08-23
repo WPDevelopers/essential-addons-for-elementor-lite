@@ -157,7 +157,7 @@ trait Admin
                             'rm_footer' => __('Reload the page to see updated data', EAEL_TEXTDOMAIN),
                             'e_title' => __('Oops...', EAEL_TEXTDOMAIN),
                             'e_text' => __('Something went wrong!', EAEL_TEXTDOMAIN),
-                            'r_title' => __('reCAPTCHA', EAEL_TEXTDOMAIN),
+                            'r_title' => __('reCAPTCHA v2', EAEL_TEXTDOMAIN),
                             'r_sitekey' => __('Site Key', EAEL_TEXTDOMAIN),
                             'r_sitesecret' => __('Site Secret', EAEL_TEXTDOMAIN),
                             'g_title' => __('Google Login', EAEL_TEXTDOMAIN),
