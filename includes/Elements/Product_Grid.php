@@ -1200,7 +1200,7 @@ class Product_Grid extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'eael_product_grid_buttons_typography',
-				'selector' => '{{WRAPPER}} .eael-product-grid .icons-wrap li.add-to-cart',
+				'selector' => '{{WRAPPER}} .eael-product-grid .icons-wrap li.add-to-cart a',
 			]
 		);
 
