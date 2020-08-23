@@ -1224,6 +1224,7 @@ class Post_Grid extends Widget_Base
 
         echo '<div ' . $this->get_render_attribute_string( 'post_grid_wrapper' ) . '>
             <div ' . $this->get_render_attribute_string( 'post_grid_container' ) . ' data-layout-mode="' . $settings["layout_mode"] . '">';
+
                 $query = new \WP_Query( $args );
 
                 if ( $query->have_posts() ) {
