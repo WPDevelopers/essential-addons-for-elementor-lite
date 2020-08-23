@@ -391,6 +391,27 @@ class Product_Grid extends Widget_Base {
 					'{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product.eael-product-list-preset-3, {{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product.eael-product-list-preset-4'
                     => 'background-color: transparent;',
 				],
+				'conditions' => [
+					'relation' => 'and',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_layout',
+							'operator' => 'in',
+							'value' => [
+								'grid',
+								'list',
+								'masonry',
+							],
+						],
+						[
+							'name' => 'eael_product_list_style_preset',
+							'operator' => '!=',
+							'value' => [
+								'eael-product-list-preset-3',
+							]
+						],
+					],
+				],
 			]
 		);
 
@@ -917,6 +938,7 @@ class Product_Grid extends Widget_Base {
 						'eael-product-preset-5',
 						'eael-product-preset-6',
 						'eael-product-preset-7',
+						'eael-product-preset-8',
 					],
                     'eael_product_grid_layout!' => 'list',
 				],
@@ -1154,6 +1176,7 @@ class Product_Grid extends Widget_Base {
                                 'eael-product-preset-5',
                                 'eael-product-preset-6',
                                 'eael-product-preset-7',
+                                'eael-product-preset-8',
                             ],
 						],
 						[
@@ -1214,30 +1237,20 @@ class Product_Grid extends Widget_Base {
 					'{{WRAPPER}} .eael-product-grid .icons-wrap.block-style li' => 'border-color: {{VALUE}};',
 				],
 				'conditions' => [
-					'relation' => 'or',
+					'relation' => 'and',
 					'terms' => [
 						[
 							'name' => 'eael_product_grid_layout',
-							'operator' => '!==',
-							'value' => 'list'
+							'operator' => 'in',
+							'value' => [
+								'grid',
+								'masonry',
+							],
 						],
 						[
-							'relation' => 'and',
-							'terms' => [
-                                [
-                                    'name' => 'eael_product_grid_layout',
-                                    'operator' => 'in',
-                                    'value' => [
-                                        'grid',
-                                        'masonry',
-                                    ],
-                                ],
-                                [
-                                    'name' => 'eael_product_grid_style_preset',
-                                    'operator' => '==',
-                                    'value' => 'eael-product-preset-5'
-                                ]
-                            ],
+							'name' => 'eael_product_grid_style_preset',
+							'operator' => '==',
+							'value' => 'eael-product-preset-5',
 						],
 					],
 				],
@@ -1757,6 +1770,18 @@ class Product_Grid extends Widget_Base {
 				'default'   => '#0242e4',
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-popup.woocommerce div.product .price' => 'color: {{VALUE}}!important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_popup_sale_price_color',
+			[
+				'label'     => __('Sale Price Color', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ff2a13',
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-popup.woocommerce div.product .price ins' => 'color: {{VALUE}}!important;',
 				],
 			]
 		);
