@@ -203,6 +203,8 @@ class Login_Register extends Widget_Base {
 		$this->init_content_register_admin_email_controls();
 		//Terms & Conditions
 		$this->init_content_terms_controls();
+		// Error Messages
+		$this->init_content_validation_messages_controls();
 		do_action( 'eael/login-register/after-content-controls', $this );
 
 		/*----Style Tab----*/
@@ -853,6 +855,131 @@ class Login_Register extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	protected function init_content_validation_messages_controls() {
+		$this->start_controls_section( 'section_content_errors', [
+			'label'      => __( 'Validation Messages', EAEL_TEXTDOMAIN ),
+		] );
+
+		$this->add_control( 'err_message_heading', [
+			'label'     => esc_html__( 'Error Messages', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::HEADING,
+		] );
+
+		$this->add_control( 'err_email', [
+			'label'       => __( 'Invalid Email', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. Your email is invalid.', EAEL_TEXTDOMAIN ),
+			'default'     => __( "You have used an invalid email", EAEL_TEXTDOMAIN ),
+		] );
+		$this->add_control( 'err_email_missing', [
+			'label'       => __( 'Email is missing', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. Email is missing or Invalid', EAEL_TEXTDOMAIN ),
+			'default'     => __( 'Email is missing or Invalid', EAEL_TEXTDOMAIN ),
+		] );
+		$this->add_control( 'err_email_used', [
+			'label'       => __( 'Already Used Email', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. Your email is already in use..', EAEL_TEXTDOMAIN ),
+			'default'     => __( 'The provided email is already registered with other account. Please login or reset password or use another email.', EAEL_TEXTDOMAIN ),
+		] );
+		$this->add_control( 'err_username', [
+			'label'       => __( 'Invalid Username', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. Your username is invalid.', EAEL_TEXTDOMAIN ),
+			'default'     => __( "You have used an invalid username", EAEL_TEXTDOMAIN ),
+		] );
+		$this->add_control( 'err_username_used', [
+			'label'       => __( 'Username already in use', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. Your username is already registered.', EAEL_TEXTDOMAIN ),
+			'default'     => __( 'Invalid username provided or the username already registered.', EAEL_TEXTDOMAIN ),
+		] );
+		$this->add_control( 'err_pass', [
+			'label'       => __( 'Invalid Password', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. Your password is invalid', EAEL_TEXTDOMAIN ),
+			'default'     => __( "Your password is invalid.", EAEL_TEXTDOMAIN ),
+		] );
+
+		$this->add_control( 'err_conf_pass', [
+			'label'       => __( 'Invalid Password Confirmed', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. Password did not matched', EAEL_TEXTDOMAIN ),
+			'default'     => __( "Your confirmed password did not match", EAEL_TEXTDOMAIN ),
+		] );
+
+		$this->add_control( 'err_loggedin', [
+			'label'       => __( 'Already Logged In', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. You are already logged in', EAEL_TEXTDOMAIN ),
+			'default'     => __( "You are already logged in", EAEL_TEXTDOMAIN ),
+		] );
+
+		$this->add_control( 'err_recaptcha', [
+			'label'       => __( 'reCAPTCHA Failed', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. Recaptcha Validation Failed', EAEL_TEXTDOMAIN ),
+			'default'     => __( "You did not pass recaptcha challenge.", EAEL_TEXTDOMAIN ),
+		] );
+
+		$this->add_control( 'err_tc', [
+			'label'       => __( 'Terms & Condition Error', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. You must accept the Terms & Conditions', EAEL_TEXTDOMAIN ),
+			'default'     =>  __( 'You did not accept the Terms and Conditions. Please accept it and try again.', EAEL_TEXTDOMAIN ),
+		] );
+
+		$this->add_control( 'err_unknown', [
+			'label'       => __( 'Other Errors', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. Something went wrong', EAEL_TEXTDOMAIN ),
+			'default'     => __( "Something went wrong!", EAEL_TEXTDOMAIN ),
+		] );
+
+		$this->add_control( 'success_message_heading', [
+			'label'     => esc_html__( 'Success Messages', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+
+		$this->add_control( 'success_login', [
+			'label'       => __( 'Logged in', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. You have logged in successfully', EAEL_TEXTDOMAIN ),
+			'default'     => __( "You have logged in successfully", EAEL_TEXTDOMAIN ),
+		] );
+
+		$this->add_control( 'success_login', [
+			'label'       => __( 'Successful Login', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. You have logged in successfully', EAEL_TEXTDOMAIN ),
+			'default'     => __( "You have logged in successfully", EAEL_TEXTDOMAIN ),
+		] );
+		$this->add_control( 'success_register', [
+			'label'       => __( 'Successful Registration', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXTAREA,
+			'default'     => __( 'Registration completed successfully, Check your inbox for password if you did not provided while registering.', EAEL_TEXTDOMAIN ),
+			'placeholder' => __( 'eg. Registration completed successfully', EAEL_TEXTDOMAIN ),
+		] );
+
+		$this->end_controls_section();
+	}
+
+
 	protected function init_content_register_fields_controls() {
 
 		$this->start_controls_section( 'section_content_register_fields', [
@@ -1042,19 +1169,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 
-		$this->add_control( 'register_success_msg', [
-			'label'       => __( 'Success Message', EAEL_TEXTDOMAIN ),
-			'type'        => Controls_Manager::TEXTAREA,
-			'default'     => __( 'Registration completed successfully, Check your inbox for password if you did not provided while registering.', EAEL_TEXTDOMAIN ),
-			'placeholder' => __( 'eg. Registration completed successfully', EAEL_TEXTDOMAIN ),
-		] );
 
-		$this->add_control( 'register_error_msg', [
-			'label'       => __( 'Error Message', EAEL_TEXTDOMAIN ),
-			'type'        => Controls_Manager::TEXTAREA,
-			'default'     => __( 'Something went wrong, Please try again.', EAEL_TEXTDOMAIN ),
-			'placeholder' => __( 'eg. Something went wrong, Please try again.', EAEL_TEXTDOMAIN ),
-		] );
 
 		$this->end_controls_section();
 	}
@@ -4054,8 +4169,8 @@ class Login_Register extends Widget_Base {
 		?>
         <div class="eael-form-msg invalid">
 			<?php
-			if ( ! empty( $this->ds['register_error_msg'] ) ) {
-				printf( '<p>%s</p>', esc_html( $this->ds['register_error_msg'] ) );
+			if ( ! empty( $this->ds['err_unknown'] ) ) {
+				printf( '<p>%s</p>', esc_html( $this->ds['err_unknown'] ) );
 			}
 			?>
             <ol>
@@ -4073,7 +4188,7 @@ class Login_Register extends Widget_Base {
 	protected function print_registration_success_message( $success ) {
 
 		if ( $success ) {
-			$message = '<p class="eael-form-msg valid">' . esc_html( $this->get_settings_for_display( 'register_success_msg' ) ) . '</p>';
+			$message = '<p class="eael-form-msg valid">' . esc_html( $this->get_settings_for_display( 'success_register' ) ) . '</p>';
 			echo apply_filters( 'eael/login-register/registration-success-msg', $message, $success );
 
 			delete_transient( 'eael_register_success_' . $this->get_id() );
