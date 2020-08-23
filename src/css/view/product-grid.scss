@@ -695,6 +695,11 @@
                     display: none;
                 }
             }
+
+            &.right {
+                left: auto;
+                right: 0;
+            }
         }
 
         &.sale-preset-2 {
@@ -839,6 +844,11 @@
                     br {
                         display: none;
                     }
+                }
+
+                &.right {
+                    left: auto;
+                    right: 0;
                 }
             }
 
