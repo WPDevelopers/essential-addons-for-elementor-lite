@@ -209,6 +209,9 @@ class Product_Grid extends Widget_Base {
             [
                 'label'       => esc_html__( 'Label Text', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'label_block' => false,
                 'default'     => esc_html__( 'Load More', 'essential-addons-for-elementor-lite' ),
                 'condition'   => [
