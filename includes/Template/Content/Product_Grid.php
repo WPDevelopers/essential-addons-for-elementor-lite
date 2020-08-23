@@ -58,7 +58,8 @@ trait Product_Grid
 						<div class="eael-product-wrap">
 							<div class="product-image-wrap">
 								<div class="image-wrap">
-									<?php echo ($product->is_on_sale() ? '<span class="eael-onsale '.$settings['eael_product_sale_badge_preset'].' '.$settings['eael_product_sale_badge_alignment'].'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '');
+									<?php
+									echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$settings['eael_product_sale_badge_preset'].' '.$settings['eael_product_sale_badge_alignment'].'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$settings['eael_product_sale_badge_preset'].' '.$settings['eael_product_sale_badge_alignment'].'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
 									echo $product->get_image($settings['eael_product_grid_image_size']);
 									?>
 								</div>
@@ -132,8 +133,7 @@ trait Product_Grid
                                 <div class="image-wrap">
 									<?php
                                     echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
-                                        echo ($product->is_on_sale() ? '<span class="eael-onsale '.$settings['eael_product_sale_badge_preset'].' '.$settings['eael_product_sale_badge_alignment'].'">' . __('Sale!',
-                                                'essential-addons-for-elementor-lite') . '</span>' : '');
+                                        echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$settings['eael_product_sale_badge_preset'].' '.$settings['eael_product_sale_badge_alignment'].'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$settings['eael_product_sale_badge_preset'].' '.$settings['eael_product_sale_badge_alignment'].'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
                                         echo $product->get_image($settings['eael_product_grid_image_size']);
                                     echo '</a>';
 									?>
@@ -182,8 +182,7 @@ trait Product_Grid
 								<div class="image-wrap">
 									<?php
 									echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
-									echo ($product->is_on_sale() ? '<span class="eael-onsale '.$settings['eael_product_sale_badge_preset'].'">' . __('Sale!',
-											'essential-addons-for-elementor-lite') . '</span>' : '');
+									echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$settings['eael_product_sale_badge_preset'].' '.$settings['eael_product_sale_badge_alignment'].'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$settings['eael_product_sale_badge_preset'].' '.$settings['eael_product_sale_badge_alignment'].'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
 									echo $product->get_image($settings['eael_product_grid_image_size']);
 									echo '</a>';
 									?>

@@ -689,6 +689,12 @@
 
         &.sale-preset-1 {
             //height: 100px;
+
+            &.outofstock {
+                br {
+                    display: none;
+                }
+            }
         }
 
         &.sale-preset-2 {
@@ -700,17 +706,36 @@
             line-height: 50px;
             border-radius: 100%;
             -webkit-font-smoothing: antialiased;
+
+            &.outofstock {
+                line-height: normal;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
 
         &.sale-preset-3 {
             border-radius: 50px;
             left: 15px;
             top: 15px;
+
+            &.outofstock {
+                br {
+                    display: none;
+                }
+            }
         }
 
         &.sale-preset-4 {
             left: 0;
             top: 15px;
+
+            &.outofstock {
+                br {
+                    display: none;
+                }
+            }
 
             &:after {
                 position: absolute;
@@ -735,6 +760,13 @@
             right: auto;
             padding: 0;
             transform: rotate(-45deg);
+
+            &.outofstock {
+                line-height: normal;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
 
     }
@@ -802,6 +834,12 @@
 
             &.sale-preset-1 {
                 //height: 100px;
+
+                &.outofstock {
+                    br {
+                        display: none;
+                    }
+                }
             }
 
             &.sale-preset-2 {
@@ -815,6 +853,13 @@
                 border-radius: 100%;
                 -webkit-font-smoothing: antialiased;
 
+                &.outofstock {
+                    line-height: normal;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
                 &.right {
                     left: auto;
                     right: 5px;
@@ -826,6 +871,12 @@
                 left: 15px;
                 top: 15px;
 
+                &.outofstock {
+                    br {
+                        display: none;
+                    }
+                }
+
                 &.right {
                     left: auto;
                     right: 15px;
@@ -835,6 +886,12 @@
             &.sale-preset-4 {
                 left: 0;
                 top: 15px;
+
+                &.outofstock {
+                    br {
+                        display: none;
+                    }
+                }
 
                 &:after {
                     position: absolute;
@@ -871,6 +928,13 @@
                 right: auto;
                 padding: 0;
                 transform: rotate(-45deg);
+
+                &.outofstock {
+                    line-height: normal;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
 
                 &.right {
                     left: auto;
