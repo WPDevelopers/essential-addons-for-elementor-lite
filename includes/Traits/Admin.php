@@ -212,6 +212,13 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         }
 
         parse_str($_POST['fields'], $settings);
+        // Recaptcha Related stuff
+        $r_keys = !empty( $settings['eael_recaptcha_keys']) ? explode( ':',  sanitize_text_field( $settings['eael_recaptcha_keys'])): [];
+        $eael_recaptcha_site_key = !empty( $r_keys[0]) ? sanitize_text_field( $r_keys[0]): '';
+	    $eael_recaptcha_secret = !empty( $r_keys[1]) ? sanitize_text_field( $r_keys[1]): '';
+	    // Saving recaptcha keys
+        update_option( 'eael_recaptcha_sitekey', $eael_recaptcha_site_key);
+        update_option( 'eael_recaptcha_secret', $eael_recaptcha_secret);
 
         // Saving Google Map Api Key
         update_option('eael_save_google_map_api', @$settings['google-map-api']);
