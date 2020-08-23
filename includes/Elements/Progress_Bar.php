@@ -119,6 +119,9 @@ class Progress_Bar extends Widget_Base
             [
                 'label' => __('Title', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default' => __('Progress Bar', 'essential-addons-for-elementor-lite'),
                 'separator' => 'before',
             ]

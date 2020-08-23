@@ -374,6 +374,9 @@ class Info_Box extends Widget_Base {
 			[
 				'label' => __( 'Button Text', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
 				'label_block' => true,
 				'default' => 'Click Me!',
 				'separator'	=> 'before',

@@ -384,6 +384,9 @@ class Filterable_Gallery extends Widget_Base
                         'name' => 'eael_fg_control',
                         'label' => esc_html__('List Item', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::TEXT,
+                        'dynamic' => [
+                            'active' => true,
+                        ],
                         'label_block' => true,
                         'default' => esc_html__('Gallery Item', 'essential-addons-for-elementor-lite'),
                     ],
@@ -433,6 +436,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Video Link', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'label_block' => true,
                 'default' => 'https://www.youtube.com/watch?v=kB4U67tiQLA',
                 'condition' => [
@@ -446,6 +452,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Control Name', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'label_block' => true,
                 'default' => '',
                 'description' => __('Use the gallery control name from Control Settings. Separate multiple items with comma (e.g. <strong>Gallery Item, Gallery Item 2</strong>)', 'essential-addons-for-elementor-lite'),
@@ -457,6 +466,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Item Name', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'label_block' => true,
                 'default' => esc_html__('Gallery item name', 'essential-addons-for-elementor-lite'),
             ]
@@ -480,6 +492,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Item Price', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default' => esc_html__('$20.00', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'fg_item_price_switch' => 'true'
@@ -504,6 +519,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Item Ratings', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default' => esc_html__('5', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'fg_item_ratings_switch' => 'true'
@@ -528,6 +546,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Item Category', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default' => esc_html__('Essential Addons', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'fg_item_cat_switch' => 'true'
@@ -674,6 +695,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => __('Button Text', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default' => __('Load More', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'pagination' => 'yes',
@@ -686,6 +710,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => __('No More Items Text', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default' => __('No more items!', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'pagination' => 'yes',
