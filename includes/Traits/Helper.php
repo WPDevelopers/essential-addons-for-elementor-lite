@@ -10,6 +10,25 @@ use \Essential_Addons_Elementor\Elements\Woo_Checkout;
 
 trait Helper
 {
+
+    public function includes_with_variable(string $file_path, array $variables = [])
+    {
+
+        $output = NULL;
+
+        if( file_exists($file_path) ) {
+            extract($variables);
+
+            ob_start();
+
+            include $file_path;
+
+            $output = ob_get_clean();
+        }
+
+        echo $output;
+    }
+
     /**
      * This function is responsible for get the post data.
      * It will return HTML markup with AJAX call and with normal call.
@@ -35,11 +54,18 @@ trait Helper
             $args['post__not_in'] = array_unique($_REQUEST['post__not_in']);
         }
 
-        // $html = $class::render_template_($args, $settings);
+        $file_path = $_REQUEST['template_path'];
 
-        $html = include $_REQUEST['template_path'];
+        $query = new \WP_Query( $args );
 
-        // echo $html;
+        if ( $query->have_posts() ) {
+            while ( $query->have_posts() ) {
+                $query->the_post();
+
+                $html = $this->includes_with_variable($file_path, ['settings' => $settings]);
+            }
+        }
+
         wp_die();
     }
 
