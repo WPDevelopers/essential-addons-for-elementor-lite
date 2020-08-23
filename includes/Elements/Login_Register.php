@@ -216,6 +216,8 @@ class Login_Register extends Widget_Base {
 		$this->init_style_register_button_controls();
 		$this->init_style_login_link_controls();
 		$this->init_style_register_link_controls();
+		$this->init_style_login_recaptcha_controls();
+		$this->init_style_register_recaptcha_controls();
 		do_action( 'eael/login-register/after-style-controls', $this );
 
 	}
@@ -2815,6 +2817,13 @@ class Login_Register extends Widget_Base {
 		$this->_init_link_style( 'register' );
 	}
 
+	protected function init_style_login_recaptcha_controls() {
+        $this->_init_recaptcha_style('login');
+	}
+	protected function init_style_register_recaptcha_controls() {
+		$this->_init_recaptcha_style('register');
+	}
+
 	/**
 	 * Print style controls for a specific type of button.
 	 *
@@ -3053,6 +3062,56 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'height: {{SIZE}}{{UNIT}};',
 			],
 		] );
+		$this->end_controls_section();
+	}
+
+	/**
+	 * Print style controls for a specific type of reCAPTCHA.
+	 *
+	 * @param string $form_type the type of the reCAPTCHA. accepts login or register.
+	 */
+	protected function _init_recaptcha_style( $form_type = 'login' ) {
+		$this->start_controls_section( "section_style_{$form_type}_rc", [
+			'label'      => sprintf( __( '%s Form reCAPTCHA', EAEL_TEXTDOMAIN ), ucfirst( $form_type ) ),
+			'tab'        => Controls_Manager::TAB_STYLE,
+			'condition' => [
+			        "enable_{$form_type}_recaptcha" => 'yes'
+            ],
+		] );
+		$this->add_responsive_control( "{$form_type}_rc_margin", [
+			'label'      => __( 'Margin', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-{$form_type}-form .eael-recaptcha-wrapper" => $this->apply_dim( 'margin' ),
+			],
+
+		] );
+
+		$this->add_control( "{$form_type}_rc_theme", [
+			'label'     => __( 'Theme', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SELECT,
+			'options'   => [
+				'light'    => __( 'Light', EAEL_TEXTDOMAIN ),
+				'dark' => __( 'Dark', EAEL_TEXTDOMAIN ),
+			],
+			'default'   => 'light',
+		] );
+
+		$this->add_control( "{$form_type}_rc_size", [
+			'label'     => __( 'Size', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SELECT,
+			'options'   => [
+				'normal'    => __( 'Normal', EAEL_TEXTDOMAIN ),
+				'compact' => __( 'Compact', EAEL_TEXTDOMAIN ),
+			],
+			'default'   => 'normal',
+		] );
+
 		$this->end_controls_section();
 	}
 
@@ -3379,6 +3438,7 @@ class Login_Register extends Widget_Base {
 	}
 
 
+
 	protected function render() {
 		//Note. forms are handled in Login_Registration Trait used in the Bootstrap class.
 		if ( ! $this->in_editor && 'yes' === $this->get_settings_for_display( 'hide_for_logged_in_user' ) && is_user_logged_in() ) {
@@ -3479,8 +3539,11 @@ class Login_Register extends Widget_Base {
 			$btn_align = isset( $this->ds['login_btn_align'] ) ? $this->ds['login_btn_align'] : '';
 			// btn alignment
 			$link_align = isset( $this->ds['login_link_align'] ) ? $this->ds['login_link_align'] : '';
+			// reCAPTCHA style
+            $rc_theme =  isset( $this->ds['login_rc_theme'] ) ? $this->ds['login_rc_theme'] : 'light';
+            $rc_size =  isset( $this->ds['login_rc_size'] ) ? $this->ds['login_rc_size'] : 'normal';
 			?>
-            <section id="eael-login-form-wrapper" class="<?php echo esc_attr( $default_hide_class ); ?>">
+            <section id="eael-login-form-wrapper" class="<?php echo esc_attr( $default_hide_class ); ?>" data-recaptcha-theme="<?php echo esc_attr($rc_theme); ?>" data-recaptcha-size="<?php echo esc_attr($rc_size); ?>">
                 <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2">
 					<?php
 					if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor ) {
@@ -3632,9 +3695,12 @@ class Login_Register extends Widget_Base {
 			// btn alignment
 			$btn_align  = isset( $this->ds['register_btn_align'] ) ? $this->ds['register_btn_align'] : '';
 			$link_align = isset( $this->ds['register_link_align'] ) ? $this->ds['register_link_align'] : '';
+			// reCAPTCHA style
+			$rc_theme =  isset( $this->ds['register_rc_theme'] ) ? $this->ds['register_rc_theme'] : 'light';
+			$rc_size =  isset( $this->ds['register_rc_size'] ) ? $this->ds['register_rc_size'] : 'normal';
 			ob_start();
 			?>
-            <section id="eael-register-form-wrapper" class="<?php echo esc_attr( $default_hide_class ); ?>">
+            <section id="eael-register-form-wrapper" class="<?php echo esc_attr( $default_hide_class ); ?>" data-recaptcha-theme="<?php echo esc_attr($rc_theme); ?>" data-recaptcha-size="<?php echo esc_attr($rc_size); ?>">
                 <div class="eael-register-form-wrapper eael-lr-form-wrapper style-2">
 					<?php if ( 'left' === $this->form_illustration_pos ) {
 						$this->print_form_illustration();

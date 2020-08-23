@@ -472,3 +472,9 @@
 .lr-social-login-container .eael-social-button.eael-facebook {
   width: 190px;
 }
+.rc-anchor-normal .rc-anchor-checkbox-label {
+  width: 90px !important;
+}
+.rc-anchor-normal .rc-anchor-content {
+  width: 150px !important;
+}
