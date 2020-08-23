@@ -323,7 +323,7 @@ trait Elements
                 continue;
             }
             
-            if (Helper::is_prevent_load_extension($post_id)) {
+            if (Helper::prevent_extension_loading($post_id)) {
                 continue;
             }
 
