@@ -2114,7 +2114,10 @@ trait Helper
 
                 if ($item['entities']['hashtags']) {
                     foreach ($item['entities']['hashtags'] as $tag) {
-                        if (strcasecmp($tag['text'], $settings['eael_twitter_feed_hashtag_name']) == 0) {
+                        if (
+                            (isset($tag['text']) && isset($settings['eael_twitter_feed_hashtag_name'])) &&
+                            strcasecmp($tag['text'], $settings['eael_twitter_feed_hashtag_name']) == 0
+                        ) {
                             $match = true;
                         }
                     }
@@ -2130,9 +2133,10 @@ trait Helper
 
         foreach ($items as $item) {
             $delimeter = strlen($item['full_text']) > $settings['eael_twitter_feed_content_length'] ? '...' : '';
+            $has_media = (isset($item['extended_entities']['media'][0]) && $settings['eael_twitter_feed_media'] == 'true' ? true : false);
             if ($settings['eael_twitter_feed_card_choose_style'] == 'three') {
                 $html .= '<div class="eael-twitter-feed-item eael-twitter-feed-item-style-three ' . $class . '">
-                <div class="eael-twitter-feed-item-inner">';
+                <div class="eael-twitter-feed-item-inner' . ($has_media === true ? ' has-media' : '') . '">';
                 // left icon bar
                 $html .= '<div class="eael-twitter-feed-entry-iconwrap">';
                 if ($settings['eael_twitter_feed_show_avatar'] == 'true') {
@@ -2156,19 +2160,19 @@ trait Helper
                 }
                 $html .= '</div>
                         <div class="eael-twitter-feed-item-content">
-                            <p>' . substr(str_replace(@$item['entities']['urls'][0]['url'], '', $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . $delimeter . '</p>';
+                            <p>' . substr((isset($item['entities']['urls'][0]['url']) ? str_replace(@$item['entities']['urls'][0]['url'], '', $item['full_text']) : $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . $delimeter  . '</p>';
 
                 if ($settings['eael_twitter_feed_show_read_more'] == 'true') {
                     $html .= '<a href="//twitter.com/' . @$item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">Read More <i class="fas fa-angle-double-right"></i></a>';
                 }
                 $html .= '</div>
-                        ' . (isset($item['extended_entities']['media'][0]) && $settings['eael_twitter_feed_media'] == 'true' ? ($item['extended_entities']['media'][0]['type'] == 'photo' ? '<img src="' . $item['extended_entities']['media'][0]['media_url_https'] . '">' : '') : '') . '
+                        ' . ($has_media ? ($item['extended_entities']['media'][0]['type'] == 'photo' ? '<img src="' . $item['extended_entities']['media'][0]['media_url_https'] . '">' : '') : '') . '
                 </div>
                 </div>
 			</div>';
             } elseif ($settings['eael_twitter_feed_card_choose_style'] == 'two') {
                 $html .= '<div class="eael-twitter-feed-item eael-twitter-feed-item-style-two ' . $class . '">
-				<div class="eael-twitter-feed-item-inner">
+				<div class="eael-twitter-feed-item-inner' . ($has_media === true ? ' has-media' : '') . '">
 				    <div class="eael-twitter-feed-item-header clearfix">';
                 if ($settings['eael_twitter_feed_show_avatar'] == 'true') {
                     $html .= '<a class="eael-twitter-feed-item-avatar avatar-' . $settings['eael_twitter_feed_avatar_style'] . '" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">
@@ -2183,18 +2187,18 @@ trait Helper
                 }
                 $html .= '</div>
                     <div class="eael-twitter-feed-item-content">
-                        <p>' . substr(str_replace(@$item['entities']['urls'][0]['url'], '', $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . $delimeter . '</p>';
+                        <p>' . substr((isset($item['entities']['urls'][0]['url']) ? str_replace(@$item['entities']['urls'][0]['url'], '', $item['full_text']) : $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . $delimeter . '</p>';
 
                 if ($settings['eael_twitter_feed_show_read_more'] == 'true') {
                     $html .= '<a href="//twitter.com/' . @$item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">Read More <i class="fas fa-angle-double-right"></i></a>';
                 }
                 $html .= '</div>
-                    ' . (isset($item['extended_entities']['media'][0]) && $settings['eael_twitter_feed_media'] == 'true' ? ($item['extended_entities']['media'][0]['type'] == 'photo' ? '<img src="' . $item['extended_entities']['media'][0]['media_url_https'] . '">' : '') : '') . '
+                    ' . ($has_media ? ($item['extended_entities']['media'][0]['type'] == 'photo' ? '<img src="' . $item['extended_entities']['media'][0]['media_url_https'] . '">' : '') : '') . '
                 </div>
 			</div>';
             } else {
                 $html .= '<div class="eael-twitter-feed-item ' . $class . '">
-				<div class="eael-twitter-feed-item-inner">
+				<div class="eael-twitter-feed-item-inner' . ($has_media === true ? ' has-media' : '') . '">
 				    <div class="eael-twitter-feed-item-header clearfix">';
                 if ($settings['eael_twitter_feed_show_avatar'] == 'true') {
                     $html .= '<a class="eael-twitter-feed-item-avatar avatar-' . $settings['eael_twitter_feed_avatar_style'] . '" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">
@@ -2213,13 +2217,13 @@ trait Helper
                 }
                 $html .= '</div>
                     <div class="eael-twitter-feed-item-content">
-                        <p>' . substr(str_replace(@$item['entities']['urls'][0]['url'], '', $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . $delimeter . '</p>';
+                        <p>' . substr((isset($item['entities']['urls'][0]['url']) ? str_replace(@$item['entities']['urls'][0]['url'], '', $item['full_text']) : $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . $delimeter . '</p>';
 
                 if ($settings['eael_twitter_feed_show_read_more'] == 'true') {
                     $html .= '<a href="//twitter.com/' . @$item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">Read More <i class="fas fa-angle-double-right"></i></a>';
                 }
                 $html .= '</div>
-                    ' . (isset($item['extended_entities']['media'][0]) && $settings['eael_twitter_feed_media'] == 'true' ? ($item['extended_entities']['media'][0]['type'] == 'photo' ? '<img src="' . $item['extended_entities']['media'][0]['media_url_https'] . '">' : '') : '') . '
+                    ' . ($has_media ? ($item['extended_entities']['media'][0]['type'] == 'photo' ? '<img src="' . $item['extended_entities']['media'][0]['media_url_https'] . '">' : '') : '') . '
                 </div>
 			</div>';
             }

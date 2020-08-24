@@ -33,6 +33,10 @@
   transition: all 0.3s ease;
 }
 
+.eael-twitter-feed-item .eael-twitter-feed-item-inner.has-media {
+  overflow: hidden;
+}
+
 .eael-twitter-feed-item a {
   color: #0088cc;
   text-decoration: none;
