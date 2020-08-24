@@ -212,28 +212,40 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         }
 
         parse_str($_POST['fields'], $settings);
+        
         // Recaptcha Related stuff
-        $r_keys = !empty( $settings['eael_recaptcha_keys']) ? explode( ':',  sanitize_text_field( $settings['eael_recaptcha_keys'])): [];
-        $eael_recaptcha_site_key = !empty( $r_keys[0]) ? sanitize_text_field( $r_keys[0]): '';
-	    $eael_recaptcha_secret = !empty( $r_keys[1]) ? sanitize_text_field( $r_keys[1]): '';
-	    // Saving recaptcha keys
-        update_option( 'eael_recaptcha_sitekey', $eael_recaptcha_site_key);
-        update_option( 'eael_recaptcha_secret', $eael_recaptcha_secret);
+        $r_keys = !empty($settings['eael_recaptcha_keys']) ? explode(':', sanitize_text_field($settings['eael_recaptcha_keys'])) : [];
+        $eael_recaptcha_site_key = !empty($r_keys[0]) ? sanitize_text_field($r_keys[0]) : '';
+        $eael_recaptcha_secret = !empty($r_keys[1]) ? sanitize_text_field($r_keys[1]) : '';
+
+        // Saving recaptcha keys
+        update_option('eael_recaptcha_sitekey', $eael_recaptcha_site_key);
+        update_option('eael_recaptcha_secret', $eael_recaptcha_secret);
 
         // Saving Google Map Api Key
-        update_option('eael_save_google_map_api', @$settings['google-map-api']);
+        if (!empty($settings['google-map-api'])) {
+            update_option('eael_save_google_map_api', sanitize_text_field($settings['google-map-api']));
+        }
 
         // Saving Mailchimp Api Key
-        update_option('eael_save_mailchimp_api', @$settings['mailchimp-api']);
+        if (!empty($settings['mailchimp-api'])) {
+            update_option('eael_save_mailchimp_api', sanitize_text_field($settings['mailchimp-api']));
+        }
 
         // Saving TYpeForm token
-        update_option('eael_save_typeform_personal_token', @$settings['typeform-personal-token']);
+        if (!empty($settings['typeform-personal-token'])) {
+            update_option('eael_save_typeform_personal_token', sanitize_text_field($settings['typeform-personal-token']));
+        }
 
         // Saving Duplicator Settings
-        update_option('eael_save_post_duplicator_post_type', @$settings['post-duplicator-post-type']);
+        if (!empty($settings['post-duplicator-post-type'])) {
+            update_option('eael_save_post_duplicator_post_type', sanitize_text_field($settings['post-duplicator-post-type']));
+        }
 
         // save js print method
-        update_option('eael_js_print_method', @$settings['eael-js-print-method']);
+        if (!empty($settings['eael-js-print-method'])) {
+            update_option('eael_js_print_method', sanitize_text_field($settings['eael-js-print-method']));
+        }
 
         $defaults = array_fill_keys(array_keys(array_merge($this->registered_elements, $this->registered_extensions)), false);
         $elements = array_merge($defaults, array_fill_keys(array_keys(array_intersect_key($settings, $defaults)), true));

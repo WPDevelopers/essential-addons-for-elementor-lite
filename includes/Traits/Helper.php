@@ -13,10 +13,9 @@ trait Helper
 
     public function includes_with_variable(string $file_path, array $variables = [])
     {
+        $output = null;
 
-        $output = NULL;
-
-        if( file_exists($file_path) ) {
+        if (file_exists($file_path)) {
             extract($variables);
 
             ob_start();
@@ -56,10 +55,10 @@ trait Helper
 
         $file_path = $_REQUEST['template_path'];
 
-        $query = new \WP_Query( $args );
+        $query = new \WP_Query($args);
 
-        if ( $query->have_posts() ) {
-            while ( $query->have_posts() ) {
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
                 $query->the_post();
 
                 $html = $this->includes_with_variable($file_path, ['settings' => $settings]);
