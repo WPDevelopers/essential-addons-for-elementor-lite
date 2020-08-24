@@ -1,6 +1,0 @@
-{
-    "[php]": {
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "junstyle.php-cs-fixer"
-    }
-}
