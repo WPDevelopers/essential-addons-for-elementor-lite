@@ -524,6 +524,9 @@ class Twitter_Feed extends Widget_Base
                 'name' => 'eael_twitter_feed_card_item_right_border',
                 'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-twitter-feed-item-style-three .eael-twitter-feed-item-inner .eael-twitter-feed-entry-contentwrap',
+                'condition' => [
+                    'eael_twitter_feed_card_choose_style' => 'three',
+                ]
             ]
         );
 
@@ -814,7 +817,6 @@ class Twitter_Feed extends Widget_Base
                     'square' => 'Square',
                 ],
                 'default' => 'circle',
-                'prefix_class' => 'eael-social-feed-avatar-',
             ]
         );
 
