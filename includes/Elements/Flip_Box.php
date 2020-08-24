@@ -33,7 +33,7 @@ class Flip_Box extends Widget_Base {
    	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
-    
+
     public function get_keywords() {
         return [
 			'flip',
@@ -333,8 +333,8 @@ class Flip_Box extends Widget_Base {
 			);
 
 			$this->end_controls_tab();
-			
-			
+
+
 			$this->start_controls_tab(
 				'eael_flipbox_content_back',
 				[
@@ -365,7 +365,7 @@ class Flip_Box extends Widget_Base {
 			$this->end_controls_tab();
 
 		$this->end_controls_tabs();
-			
+
 		$this->add_control(
 			'eael_flipbox_content_alignment',
 			[
@@ -468,7 +468,7 @@ class Flip_Box extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_control(
             'button_icon_position',
             [
@@ -495,7 +495,7 @@ class Flip_Box extends Widget_Base {
 					'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite')
 				]
 			);
-		
+
 			$this->add_control(
 				'eael_control_get_pro',
 				[
@@ -503,7 +503,7 @@ class Flip_Box extends Widget_Base {
 					'type' => Controls_Manager::CHOOSE,
 					'options' => [
 						'1' => [
-							'title' => __( '', 'essential-addons-for-elementor-lite'),
+							'title' => '',
 							'icon' => 'fa fa-unlock-alt',
 						],
 					],
@@ -511,10 +511,10 @@ class Flip_Box extends Widget_Base {
 					'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
 				]
 			);
-			
+
 			$this->end_controls_section();
 		}
-        
+
 		/**
 		 * -------------------------------------------
 		 * Tab Style (Flipbox Style)
@@ -676,7 +676,7 @@ class Flip_Box extends Widget_Base {
 		 * -------------------------------------------
 		 * Tab Style (Flip Box Icon Style)
 		 * -------------------------------------------
-		 */		
+		 */
 		$this->start_controls_section(
 			'eael_section_flipbox_icon_style_settings',
 			[
@@ -760,7 +760,7 @@ class Flip_Box extends Widget_Base {
 						]
 					]
 			);
-	
+
 			$this->add_responsive_control(
 				'eael_flipbox_icon_front_padding',
 				[
@@ -772,7 +772,7 @@ class Flip_Box extends Widget_Base {
 					 ],
 				]
 			);
-	
+
 			$this->add_control(
 				'eael_flipbox_icon_front_border_radius',
 				[
@@ -799,9 +799,9 @@ class Flip_Box extends Widget_Base {
 					]
 				]
 			);
-			
+
 			$this->end_controls_tab();
-			
+
 			$this->start_controls_tab('eael_section_icon_back_style_settings', [
 				'label' => esc_html__( 'Back', 'essential-addons-for-elementor-lite')
 			]);
@@ -873,7 +873,7 @@ class Flip_Box extends Widget_Base {
 						]
 					]
 			);
-	
+
 			$this->add_responsive_control(
 				'eael_flipbox_icon_back_padding',
 				[
@@ -885,7 +885,7 @@ class Flip_Box extends Widget_Base {
 					 ],
 				]
 			);
-	
+
 			$this->add_control(
 				'eael_flipbox_icon_back_border_radius',
 				[
@@ -930,7 +930,7 @@ class Flip_Box extends Widget_Base {
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
-		
+
 		$this->start_controls_tabs('eael_section_flipbox_typo_style_settings');
 			$this->start_controls_tab('eael_section_flipbox_typo_style_front_settings', [
 				'label' => esc_html__( 'Front', 'essential-addons-for-elementor-lite')
@@ -997,7 +997,7 @@ class Flip_Box extends Widget_Base {
 						'selector' => '{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-content'
 					]
 				);
-				
+
 			$this->end_controls_tab();
 
 			$this->start_controls_tab('eael_section_flipbox_typo_style_back_settings', [

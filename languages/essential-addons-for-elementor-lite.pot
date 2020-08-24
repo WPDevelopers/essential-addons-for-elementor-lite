@@ -465,9 +465,6 @@ msgstr ""
 msgid "Unlock more possibilities"
 msgstr ""
 
-#: ../includes/Elements/Adv_Accordion.php:241, ../includes/Elements/Adv_Tabs.php:245, ../includes/Elements/Contact_Form_7.php:274, ../includes/Elements/Content_Ticker.php:343, ../includes/Elements/Countdown.php:462, ../includes/Elements/Creative_Button.php:174, ../includes/Elements/Cta_Box.php:343, ../includes/Elements/Data_Table.php:443, ../includes/Elements/Dual_Color_Header.php:207, ../includes/Elements/Facebook_Feed.php:87, ../includes/Elements/Facebook_Feed.php:98, ../includes/Elements/Fancy_Text.php:277, ../includes/Elements/Filterable_Gallery.php:790, ../includes/Elements/Flip_Box.php:506, ../includes/Elements/Info_Box.php:473, ../includes/Elements/Pricing_Table.php:636, ../includes/Elements/Progress_Bar.php:275, ../includes/Elements/Team_Member.php:229, ../includes/Elements/Testimonial.php:224, ../includes/Elements/Tooltip.php:513, ../includes/Elements/Twitter_Feed.php:310, ../includes/Elements/WeForms.php:119, ../includes/Traits/Helper.php:1371
-msgstr ""
-
 #: ../includes/Elements/Adv_Accordion.php:261, ../includes/Elements/Data_Table.php:463, ../includes/Elements/Filterable_Gallery.php:810
 msgid "General Style"
 msgstr ""
