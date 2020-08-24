@@ -86,21 +86,21 @@ trait Enqueue
             'font-awesome-5-all',
             ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/all.min.css',
             false,
-            time()
+            EAEL_PLUGIN_VERSION
         );
 
         wp_register_style(
             'font-awesome-4-shim',
             ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/v4-shims.min.css',
             false,
-            time()
+            EAEL_PLUGIN_VERSION
         );
 
         wp_register_script(
             'font-awesome-4-shim',
             ELEMENTOR_ASSETS_URL . 'lib/font-awesome/js/v4-shims.min.js',
             false,
-            time()
+            EAEL_PLUGIN_VERSION
         );
 
         // localize object
