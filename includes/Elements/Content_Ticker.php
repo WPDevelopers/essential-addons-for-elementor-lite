@@ -340,7 +340,7 @@ class Content_Ticker extends Widget_Base
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         '1' => [
-                            'title' => __('', 'essential-addons-for-elementor-lite'),
+                            'title' => '',
                             'icon' => 'fa fa-unlock-alt',
                         ],
                     ],
@@ -826,7 +826,7 @@ class Content_Ticker extends Widget_Base
                         $html .= '<i class="' . $arrow . '"></i>';
                     }
                 $html .= '</div>';
-                
+
                 $html .='<div class="swiper-button-prev swiper-button-prev-' . $this->get_id() . '">';
                     if( isset($settings['prev_arrow']['value']['url'])) {
                         $html .= '<img src="'.esc_url($settings['prev_arrow']['value']['url']).'" alt="'.esc_attr(get_post_meta($settings['prev_arrow']['value']['id'], '_wp_attachment_image_alt', true)).'" />';
@@ -834,7 +834,7 @@ class Content_Ticker extends Widget_Base
                         $html .= '<i class="' . esc_attr($settings['prev_arrow']['value']) . '"></i>';
                     }
                 $html .= '</div>';
-                
+
             $html .= '</div>';
 
 
