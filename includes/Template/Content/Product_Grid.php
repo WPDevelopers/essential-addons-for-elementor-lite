@@ -392,6 +392,7 @@ trait Product_Grid
 
 	public function eael_product_grid_script(){
 		if ( version_compare( WC()->version, '3.0.0', '>=' ) ) {
+            \WC_Frontend_Scripts::load_scripts();
 			if ( current_theme_supports( 'wc-product-gallery-zoom' ) ) {
 				wp_enqueue_script( 'zoom' );
 			}
