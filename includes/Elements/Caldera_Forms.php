@@ -118,6 +118,9 @@ class Caldera_Forms extends Widget_Base
                 [
                     'label' => esc_html__('Title', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
+                    'dynamic' => [
+                        'active' => true,
+                    ],
                     'label_block' => true,
                     'default' => '',
                     'condition' => [
@@ -131,6 +134,9 @@ class Caldera_Forms extends Widget_Base
                 [
                     'label' => esc_html__('Description', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXTAREA,
+                    'dynamic' => [
+                        'active' => true,
+                    ],
                     'default' => '',
                     'condition' => [
                         'custom_title_description' => 'yes',
