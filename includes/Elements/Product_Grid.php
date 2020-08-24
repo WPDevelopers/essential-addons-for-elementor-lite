@@ -902,7 +902,7 @@ class Product_Grid extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#fff',
 				'selectors' => [
-					'{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -914,7 +914,7 @@ class Product_Grid extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ff2a13',
 				'selectors' => [
-					'{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
