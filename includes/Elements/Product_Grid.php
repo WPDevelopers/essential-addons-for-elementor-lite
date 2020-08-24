@@ -2358,6 +2358,10 @@ class Product_Grid extends Widget_Base {
 	                });
 
                 });
+                if(isEditMode){
+                    $(".eael-product-image-wrap .woocommerce-product-gallery").css("opacity","1");
+                }
+
             });
 
 		</script>
