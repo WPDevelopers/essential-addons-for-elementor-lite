@@ -505,6 +505,7 @@ class Product_Grid extends Widget_Base {
                         'eael-product-preset-5',
                         'eael-product-preset-6',
                         'eael-product-preset-7',
+                        'eael-product-preset-8',
                     ]
 				],
 			]
