@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.5
 Requires PHP: 5.4
-Stable tag: 4.2.0
+Stable tag: 4.2.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -223,6 +223,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.2.1 - 20/08/2020 =
+- Added: Google reCAPTCHA option in EA Login | Register Form
+- Added: Compatibility with WooCommerce 4.4.1
+- Fixed: User Role not setting correctly in EA Login | Register Form
+- Few minor bugfix and improvements
 
 = 4.2.0 - 06/08/2020 =
 - Added: EA Login | Register Widget
