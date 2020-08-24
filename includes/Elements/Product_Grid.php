@@ -919,7 +919,7 @@ class Product_Grid extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'eael_product_grid_stock_out_badge_typography',
-				'selector' => '{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge',
+				'selector' => '{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock',
 			]
 		);
 
@@ -1075,7 +1075,7 @@ class Product_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_product_badges',
 			[
-				'label' => esc_html__( 'Sale Badge', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Sale / Stock Out Badge', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 		$this->add_control(
@@ -1988,9 +1988,9 @@ class Product_Grid extends Widget_Base {
 			]
 		);
 		$this->add_control(
-			'eael_product_popup_sku_color',
+			'eael_product_popup_sku_title_color',
 			[
-				'label'     => __('Color', 'essential-addons-for-elementor-lite'),
+				'label'     => __('Title Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-popup.woocommerce .product_meta' => 'color: {{VALUE}};',
@@ -1998,9 +1998,9 @@ class Product_Grid extends Widget_Base {
 			]
 		);
 		$this->add_control(
-			'eael_product_popup_sku_link_color',
+			'eael_product_popup_sku_content_color',
 			[
-				'label'     => __('Link Color', 'essential-addons-for-elementor-lite'),
+				'label'     => __('Content Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-popup.woocommerce .product_meta .sku, .eael-product-popup.woocommerce .product_meta a' => 'color: {{VALUE}};',
@@ -2008,9 +2008,9 @@ class Product_Grid extends Widget_Base {
 			]
 		);
 		$this->add_control(
-			'eael_product_popup_sku_link_hover_color',
+			'eael_product_popup_sku_hover_color',
 			[
-				'label'     => __('Link Hover Color', 'essential-addons-for-elementor-lite'),
+				'label'     => __('Hover Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-popup.woocommerce .product_meta a:hover' => 'color: {{VALUE}};',
@@ -2326,11 +2326,6 @@ class Product_Grid extends Widget_Base {
                             itemSelector: "li.product",
                             layoutMode: $layout_mode,
                             percentPosition: true
-                        });
-
-                        // layout gal, while images are loading
-                        $isotope_products.imagesLoaded().progress(function() {
-                            $isotope_products.isotope("layout");
                         });
 
                         $('li.product', $products).resize(function() {
