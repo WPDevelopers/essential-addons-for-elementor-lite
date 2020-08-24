@@ -423,7 +423,6 @@ class Product_Grid extends Widget_Base {
 				'default' => '#ada8a8',
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-grid .price-wrap, {{WRAPPER}} .eael-product-grid .title-wrap' => 'border-color: {{VALUE}};',
-					'{{WRAPPER}} .eael-product-grid.list .eael-product-list-preset-4 .eael-product-wrap .product-details-wrap' => 'border-color: {{VALUE}};',
 				],
 				'conditions' => [
 					'relation' => 'and',
@@ -438,11 +437,8 @@ class Product_Grid extends Widget_Base {
 						],
 						[
 							'name' => 'eael_product_list_style_preset',
-							'operator' => 'in',
-							'value' => [
-							        'eael-product-list-preset-3',
-							        'eael-product-list-preset-4',
-                                ]
+							'operator' => '==',
+							'value' => 'eael-product-list-preset-3',
 						],
 					],
 				],
