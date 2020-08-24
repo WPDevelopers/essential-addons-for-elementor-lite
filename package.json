@@ -31,7 +31,8 @@
 		"sass": "^1.26.3",
 		"sass-loader": "^8.0.2",
 		"webpack": "^4.42.1",
-		"webpack-cli": "^3.3.10"
+		"webpack-cli": "^3.3.10",
+		"wp-pot": "^1.9.3"
 	},
 	"dependencies": {
 		"@wordpress/hooks": "^2.6.0"

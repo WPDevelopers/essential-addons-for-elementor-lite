@@ -149,22 +149,22 @@ trait Admin
             $i18n = [
                     'login_register' => [
 	                        //m=modal, rm=response modal, r=reCAPTCHA, g= google, f=facebook, e=error
-                            'm_title' => __('Login | Register Settings', EAEL_TEXTDOMAIN),
-                            'm_footer' => __('Read the doc on how to get above credentials', EAEL_TEXTDOMAIN),
-                            'save' => __('Save', EAEL_TEXTDOMAIN),
-                            'cancel' => __('Cancel', EAEL_TEXTDOMAIN),
-                            'rm_title' => __('Login | Register Settings Saved', EAEL_TEXTDOMAIN),
-                            'rm_footer' => __('Reload the page to see updated data', EAEL_TEXTDOMAIN),
-                            'e_title' => __('Oops...', EAEL_TEXTDOMAIN),
-                            'e_text' => __('Something went wrong!', EAEL_TEXTDOMAIN),
-                            'r_title' => __('reCAPTCHA v2', EAEL_TEXTDOMAIN),
-                            'r_sitekey' => __('Site Key', EAEL_TEXTDOMAIN),
-                            'r_sitesecret' => __('Site Secret', EAEL_TEXTDOMAIN),
-                            'g_title' => __('Google Login', EAEL_TEXTDOMAIN),
-                            'g_cid' => __('Google Client ID', EAEL_TEXTDOMAIN),
-                            'f_title' => __('Facebook Login', EAEL_TEXTDOMAIN),
-                            'f_app_id' => __('Facebook APP ID', EAEL_TEXTDOMAIN),
-                            'f_app_secret' => __('Facebook APP Secret', EAEL_TEXTDOMAIN),
+                            'm_title' => __('Login | Register Settings', 'essential-addons-for-elementor-lite'),
+                            'm_footer' => __('Read the doc on how to get above credentials', 'essential-addons-for-elementor-lite'),
+                            'save' => __('Save', 'essential-addons-for-elementor-lite'),
+                            'cancel' => __('Cancel', 'essential-addons-for-elementor-lite'),
+                            'rm_title' => __('Login | Register Settings Saved', 'essential-addons-for-elementor-lite'),
+                            'rm_footer' => __('Reload the page to see updated data', 'essential-addons-for-elementor-lite'),
+                            'e_title' => __('Oops...', 'essential-addons-for-elementor-lite'),
+                            'e_text' => __('Something went wrong!', 'essential-addons-for-elementor-lite'),
+                            'r_title' => __('reCAPTCHA v2', 'essential-addons-for-elementor-lite'),
+                            'r_sitekey' => __('Site Key', 'essential-addons-for-elementor-lite'),
+                            'r_sitesecret' => __('Site Secret', 'essential-addons-for-elementor-lite'),
+                            'g_title' => __('Google Login', 'essential-addons-for-elementor-lite'),
+                            'g_cid' => __('Google Client ID', 'essential-addons-for-elementor-lite'),
+                            'f_title' => __('Facebook Login', 'essential-addons-for-elementor-lite'),
+                            'f_app_id' => __('Facebook APP ID', 'essential-addons-for-elementor-lite'),
+                            'f_app_secret' => __('Facebook APP Secret', 'essential-addons-for-elementor-lite'),
                     ]
             ];
 
@@ -255,7 +255,7 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
 		    if ( isset( $settings['fbAppSecret'] ) ) {
 			    update_option( 'eael_fb_app_secret', sanitize_text_field( $settings['fbAppSecret']));
 		    }
-		    wp_send_json_success( ['message'=> __('Login | Register Settings updated', EAEL_TEXTDOMAIN)]);
+		    wp_send_json_success( ['message'=> __('Login | Register Settings updated', 'essential-addons-for-elementor-lite')]);
         }
 
 
