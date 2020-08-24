@@ -47,21 +47,30 @@ trait Login_Registration {
 	 */
 	public function log_user_in() {
 		$ajax   = wp_doing_ajax();
-		$errors = [];
+
 		// before even thinking about login, check security and exit early if something is not right.
 		$page_id = 0;
 		if ( ! empty( $_POST['page_id'] ) ) {
 			$page_id = intval( $_POST['page_id'], 10 );
 		} else {
-			$errors['page_id'] = __( 'Page ID is missing', EAEL_TEXTDOMAIN );
+			$err_msg = __( 'Page ID is missing', EAEL_TEXTDOMAIN );
 		}
 
 		$widget_id = 0;
 		if ( ! empty( $_POST['widget_id'] ) ) {
 			$widget_id = sanitize_text_field( $_POST['widget_id'] );
 		} else {
-			$errors['widget_id'] = __( 'Widget ID is missing', EAEL_TEXTDOMAIN );
+			$err_msg = __( 'Widget ID is missing', EAEL_TEXTDOMAIN );
 		}
+		if (!empty( $err_msg )){
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			$this->set_transient( 'eael_login_error_' . $widget_id, $err_msg );
+
+			return false;
+		}
+
 
 		if ( empty( $_POST['eael-login-nonce'] ) ) {
 			$err_msg = __( 'Insecure form submitted without security token', EAEL_TEXTDOMAIN );
@@ -82,20 +91,14 @@ trait Login_Registration {
 
 			return false;
 		}
-		$document = Plugin::$instance->documents->get( $page_id );
-		$settings = [];
-		if ( $document ) {
-			$elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
-			$widget_data = $this->find_element_recursive( $elements, $widget_id );
-			$widget      = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
-			$settings    = $widget->get_settings_for_display();
-		}
+		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
 		if ( is_user_logged_in() ) {
 			$err_msg = isset( $settings['err_loggedin'] ) ? $settings['err_loggedin'] : __( 'You are already logged in', EAEL_TEXTDOMAIN );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
+			$this->set_transient( 'eael_login_error_' . $widget_id, $err_msg );
 
 			return false;
 		}
@@ -134,6 +137,9 @@ trait Login_Registration {
 				$err_msg = isset( $settings['err_email'] ) ? $settings['err_email'] : __( 'Invalid Email. Please check your email or try again with your username.', EAEL_TEXTDOMAIN );
 			} elseif ( isset( $user_data->errors['invalid_username'][0] ) || isset( $user_data->errors['incorrect_password'][0] ) || isset( $user_data->errors['empty_password'][0] ) ) {
 				$err_msg = isset( $settings['err_username'] ) ? $settings['err_username'] : __( 'Invalid Username. Please check your username or try again with your email.', EAEL_TEXTDOMAIN );
+
+			} elseif ( isset( $user_data->errors['incorrect_password'][0] ) || isset( $user_data->errors['empty_password'][0] ) ) {
+				$err_msg = isset( $settings['err_pass'] ) ? $settings['err_pass'] : __( 'Invalid Password', EAEL_TEXTDOMAIN );
 
 			}
 
@@ -198,14 +204,9 @@ trait Login_Registration {
 		}
 
 
-		$document = Plugin::$instance->documents->get( $page_id );
-		$settings = [];
-		if ( $document ) {
-			$elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
-			$widget_data = $this->find_element_recursive( $elements, $widget_id );
-			$widget      = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
-			$settings    = $widget->get_settings_for_display();
-		}
+
+		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
+
 
 		if ( is_user_logged_in() ) {
 			$err_msg = isset( $settings['err_loggedin'] ) ? $settings['err_loggedin'] : __( 'You are already logged in.', EAEL_TEXTDOMAIN );
@@ -327,14 +328,9 @@ trait Login_Registration {
 		if ( ! empty( $_POST['website'] ) ) {
 			$user_data['user_url'] = self::$email_options['website'] = esc_url_raw( $_POST['website'] );
 		}
-		$document            = Plugin::$instance->documents->get( $page_id );
 		$register_actions    = [];
 		$custom_redirect_url = '';
-		if ( $document ) {
-			$elements            = Plugin::instance()->documents->get( $page_id )->get_elements_data();
-			$widget_data         = $this->find_element_recursive( $elements, $widget_id );
-			$widget              = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
-			$settings            = $widget->get_settings_for_display();
+		if ( !empty( $settings) ) {
 			$register_actions    = ! empty( $settings['register_action'] ) ? (array) $settings['register_action'] : [];
 			$custom_redirect_url = ! empty( $settings['register_redirect_url']['url'] ) ? $settings['register_redirect_url']['url'] : '/';
 			if ( ! empty( $settings['register_user_role'] ) ) {
@@ -687,5 +683,19 @@ trait Login_Registration {
 		if ( $site_key = get_option( 'eael_recaptcha_sitekey' ) ) {
 			wp_register_script( 'eael-recaptcha', "https://www.google.com/recaptcha/api.js?render=explicit", false, $version, false );
 		}
+	}
+
+	public function lr_get_widget_settings( $page_id, $widget_id ) {
+		$document = Plugin::$instance->documents->get( $page_id );
+		$settings = [];
+		if ( $document ) {
+			$elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
+			$widget_data = $this->find_element_recursive( $elements, $widget_id );
+			$widget      = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
+			if ( $widget ) {
+				$settings    = $widget->get_settings_for_display();
+			}
+		}
+		return $settings;
 	}
 }
