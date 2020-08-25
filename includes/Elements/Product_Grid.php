@@ -2259,6 +2259,8 @@ class Product_Grid extends Widget_Base {
 			$args['order']    = 'DESC';
 		}
 
+		$widget_id = $this->get_id();
+
 		$settings = [
 			'eael_product_grid_style_preset' => $settings['eael_product_grid_style_preset'],
 			'eael_product_grid_layout' => $settings['eael_product_grid_layout'],
@@ -2287,7 +2289,7 @@ class Product_Grid extends Widget_Base {
 		$html .= '<div class="woocommerce">';
 		$html .= do_action( 'eael_woo_before_product_loop' );
 		$html .= '<ul class="products" data-layout-mode="' . $settings["eael_product_grid_layout"] . '">
-                    ' . self::render_template_( $args, $settings ) . '
+                    ' . self::render_template_( $args, $settings, $widget_id ) . '
                 </ul>';
 
 		if ( 'true' == $settings['show_pagination'] ) {
