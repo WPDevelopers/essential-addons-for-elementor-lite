@@ -1124,6 +1124,26 @@ class Product_Grid extends Widget_Base {
 			'eael_section_product_action_buttons',
 			[
 				'label' => esc_html__( 'Buttons', 'essential-addons-for-elementor-lite' ),
+				'conditions' => [
+					'relation' => 'or',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_style_preset',
+							'operator' => 'in',
+							'value' => [
+								'eael-product-preset-5',
+								'eael-product-preset-6',
+								'eael-product-preset-7',
+								'eael-product-preset-8',
+							],
+						],
+						[
+							'name' => 'eael_product_grid_layout',
+							'operator' => '==',
+							'value' => 'list'
+						]
+					],
+				],
 			]
 		);
 
