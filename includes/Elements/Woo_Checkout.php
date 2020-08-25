@@ -154,6 +154,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Your Order', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
 			]
 		);
 
@@ -173,6 +176,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Product Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Product', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
 				'condition' => [
 					'ea_woo_checkout_table_header_text' => 'yes',
 				],
@@ -184,6 +190,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Quantity Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Quantity', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
 				'condition' => [
 					'ea_woo_checkout_table_header_text' => 'yes',
 				],
@@ -195,6 +204,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Price Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Price', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
 				'condition' => [
 					'ea_woo_checkout_table_header_text' => 'yes',
 				],
@@ -206,6 +218,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Subtotal Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Subtotal', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
                 'condition' => [
                     'ea_woo_checkout_table_header_text' => 'yes',
                 ],
@@ -217,6 +232,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Shipping Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Shipping', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
                 'condition' => [
                     'ea_woo_checkout_table_header_text' => 'yes',
                 ],
@@ -228,6 +246,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Total Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Total', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
                 'condition' => [
                     'ea_woo_checkout_table_header_text' => 'yes',
                 ],
@@ -250,6 +271,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Link Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Continue Shopping', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
 				'condition' => [
 					'ea_woo_checkout_shop_link' => 'yes',
 				],
@@ -286,6 +310,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Title', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Have a coupon?', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
 			]
 		);
 		$this->add_control(
@@ -294,6 +321,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Link Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Click here to enter your code', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
 			]
 		);
 		$this->end_controls_section();
@@ -338,6 +368,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Title', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Returning customer?', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
 			]
 		);
 		$this->add_control(
@@ -346,6 +379,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Link Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Click here to login', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
 			]
 		);
 		$this->end_controls_section();
@@ -367,6 +403,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Billing Title', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Billing Details', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
 			]
 		);
 		$this->add_control(
@@ -375,6 +414,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Shipping Title', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Ship to a different address?', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
 			]
 		);
 		$this->add_control(
@@ -383,6 +425,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Additional Info Title', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Additional Information', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
 			]
 		);
 		$this->end_controls_section();
@@ -404,6 +449,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Title', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Payment Methods', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
 			]
 		);
 		$this->add_control(
@@ -412,6 +460,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Button text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Place Order', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
 			]
 		);
 		$this->end_controls_section();
