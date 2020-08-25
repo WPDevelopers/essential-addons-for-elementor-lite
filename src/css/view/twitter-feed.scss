@@ -46,6 +46,9 @@
         transition: all 0.3s ease;
         &.has-media {
             overflow: hidden;
+            .eael-twitter-feed-entry-contentwrap {
+                overflow: hidden;
+            }
         }
         .eael-twitter-feed-item-avatar.avatar-circle {
             img {

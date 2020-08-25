@@ -37,6 +37,10 @@
   overflow: hidden;
 }
 
+.eael-twitter-feed-item .eael-twitter-feed-item-inner.has-media .eael-twitter-feed-entry-contentwrap {
+  overflow: hidden;
+}
+
 .eael-twitter-feed-item .eael-twitter-feed-item-inner .eael-twitter-feed-item-avatar.avatar-circle img {
   border-radius: 50%;
 }
