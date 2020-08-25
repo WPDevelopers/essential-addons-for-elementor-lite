@@ -336,15 +336,15 @@ class Twitter_Feed extends Widget_Base
                 'type' => \Elementor\Controls_Manager::CHOOSE,
                 'options' => [
                     'flex-start' => [
-                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
+                        'title' => __('Top', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
+                        'title' => __('Middle', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-center',
                     ],
                     'flex-end' => [
-                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
+                        'title' => __('Bottom', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-right',
                     ],
                 ],
@@ -527,6 +527,21 @@ class Twitter_Feed extends Widget_Base
                 'condition' => [
                     'eael_twitter_feed_card_choose_style' => 'three',
                 ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_twitter_feed_card_item_right_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-item-style-three .eael-twitter-feed-item-inner .eael-twitter-feed-entry-contentwrap' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_twitter_feed_card_choose_style' => 'three',
+                ],
             ]
         );
 
