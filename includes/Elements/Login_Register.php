@@ -1500,6 +1500,9 @@ class Login_Register extends Widget_Base {
 				'gradient',
 			],
 			'selector' => "{{WRAPPER}} .eael-lr-form-wrapper",
+			'condition'  => [
+				'form_form_wrap_po_toggle' => 'yes',
+			],
 		] );
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
@@ -4194,7 +4197,7 @@ class Login_Register extends Widget_Base {
 	 *
 	 * @return string
 	 */
-	protected function apply_dim( $css_property ) {
+	public function apply_dim( $css_property ) {
 		return "{$css_property}: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};";
 	}
 
