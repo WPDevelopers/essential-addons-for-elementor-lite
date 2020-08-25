@@ -158,10 +158,11 @@ trait Enqueue
 
         // view mode
         if ($this->is_preview_mode()) {
-            $update_requires = (bool) get_transient('eael_requires_update');
+            $editor_updated_at = get_transient('eael_editor_updated_at');
+            $post_updated_at = get_transient($this->uid() . '_updated_at');
             $loaded_templates = get_transient($this->uid() . '_loaded_templates');
 
-            if ($loaded_templates === false || $update_requires) {
+            if ($loaded_templates === false || $editor_updated_at != $post_updated_at) {
                 $this->loaded_widgets = $this->get_settings();
             } else {
                 if (empty($loaded_templates)) {
@@ -286,7 +287,6 @@ trait Enqueue
 
             // update transient
             set_transient($this->uid() . '_loaded_templates', $this->loaded_templates);
-            set_transient('eael_requires_update', false);
         }
     }
 }
