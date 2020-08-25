@@ -159,18 +159,18 @@ trait Enqueue
         // view mode
         if ($this->is_preview_mode()) {
             $update_requires = (bool) get_transient('eael_requires_update');
-            $posts = get_transient($this->uid());
+            $loaded_templates = get_transient($this->uid() . '_loaded_templates');
 
-            if ($posts === false || $update_requires) {
+            if ($loaded_templates === false || $update_requires) {
                 $this->loaded_widgets = $this->get_settings();
             } else {
-                if (empty($posts)) {
+                if (empty($loaded_templates)) {
                     return;
                 }
 
                 // parse widgets from post
-                foreach ($posts as $post) {
-                    $widgets = (array) $this->parse_widgets($post);
+                foreach ($loaded_templates as $post_id) {
+                    $widgets = (array) $this->parse_widgets($post_id);
 
                     // loaded widgets stack
                     $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $widgets)));
@@ -285,7 +285,7 @@ trait Enqueue
             }
 
             // update transient
-            set_transient($this->uid(), $this->loaded_templates);
+            set_transient($this->uid() . '_loaded_templates', $this->loaded_templates);
             set_transient('eael_requires_update', false);
         }
     }
