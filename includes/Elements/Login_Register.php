@@ -1398,7 +1398,7 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->start_popover();
 		$this->add_responsive_control( "eael_form_wrap_width", [
-			'label'           => esc_html__( 'width', 'essential-addons-for-elementor-lite' ),
+			'label'           => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
 			'type'            => Controls_Manager::SLIDER,
 			'size_units'      => [
 				'px',
