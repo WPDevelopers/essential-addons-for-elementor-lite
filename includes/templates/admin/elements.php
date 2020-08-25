@@ -382,7 +382,7 @@ $elements = [
             [
                 'key'   => 'fluentform',
                 'title' => __( 'FluentForm', 'essential-addons-for-elementor-lite'),
-                'demo_link' => 'https://essential-addons.com/elementor/fluentform/',
+                'demo_link' => 'https://essential-addons.com/elementor/fluent-forms/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/fluent-form/',
             ],
             [
