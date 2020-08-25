@@ -374,7 +374,7 @@ class Product_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'eael_product_grid_styles',
 			[
-				'label' => esc_html__( 'Products Styles', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Products', 'essential-addons-for-elementor-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -928,7 +928,7 @@ class Product_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_product_grid_add_to_cart_styles',
 			[
-				'label' => esc_html__( 'Add to Cart Button Styles', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Add to Cart Button', 'essential-addons-for-elementor-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'eael_product_grid_style_preset!' => [
@@ -1161,7 +1161,7 @@ class Product_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_product_grid_buttons_styles',
 			[
-				'label' => esc_html__( 'Button Styles', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Button', 'essential-addons-for-elementor-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'conditions' => [
 					'relation' => 'or',
@@ -1494,7 +1494,7 @@ class Product_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_product_pagination_style',
 			[
-				'label' => __('Pagination Style', 'essential-addons-for-elementor-lite'),
+				'label' => __('Pagination', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' =>[
 					'show_pagination' => 'true',
