@@ -13,6 +13,7 @@ use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 use \Elementor\Group_Control_Box_Shadow;
 use \Essential_Addons_Elementor\Classes\Controls;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Betterdocs_Category_Grid extends Widget_Base
 {
@@ -1602,37 +1603,90 @@ class Betterdocs_Category_Grid extends Widget_Base
             $terms_object['exclude'] =  $settings['exclude'];
         }
 
-        $taxonomy_objects = get_terms($terms_object);
+        if($settings['multiple_kb']) {
 
 
-        $html = '<div ' . $this->get_render_attribute_string('bd_category_grid_wrapper') . '>';
-            $html .= '<div '.$this->get_render_attribute_string('bd_category_grid_inner').'>';
-            if(file_exists($this->get_template($settings['layout_template']))) {
 
-                if($taxonomy_objects && ! is_wp_error( $taxonomy_objects )) {
-                    foreach($taxonomy_objects as $term) {
-                        ob_start();
-                            include($this->get_template($settings['layout_template']));
-                        $html .= ob_get_clean(); 
-                    }
-                }else {
-                    _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+            $taxonomy_objects = Helper::get_multiple_kb_terms(false, false);
+            $taxonomy_objects = Helper::get_filtered_kb_terms($settings['multiple_kb_list'], $taxonomy_objects);
+
+            foreach($taxonomy_objects as $term) {
+
+                if($term->count != 0 ) {
+                    echo '<a href="'.get_term_link( $term->slug, 'knowledge_base' ).'" class="eael-better-docs-category-box-post">
+                        <div class="eael-bd-cb-inner">';
+
+                        if($settings['show_icon']) {
+
+                            $cat_icon_id = get_term_meta( $term->term_id, 'knowledge_base_image-id', true);
+					
+                            if($cat_icon_id){
+
+                                $$cat_icon = wp_get_attachment_image ( $cat_icon_id, 'thumbnail' );
+
+                            } else {
+
+                                $cat_icon = '<img class="docs-cat-icon" src="'.BETTERDOCS_ADMIN_URL.'assets/img/betterdocs-cat-icon.svg" alt="">';
+                            
+                            }
+
+                            echo '<div class="eael-bd-cb-cat-icon">'.$cat_icon.'</div>';
+                        }
+
+                        if($settings['show_title']) {
+                            echo '<'.$settings['title_tag'].' class="eael-bd-cb-cat-title">'.$term->name.'</'.$settings['title_tag'].'>';
+                        }
+
+                        $cat_desc = get_theme_mod('betterdocs_doc_page_cat_desc');
+					
+                        if ( $cat_desc == true ) {
+
+                            echo '<p class="cat-description">'.$term->description.'</p>';
+
+                        }
+
+                        if($settings['show_count']) {
+                            echo wp_sprintf('<span>%s ' . __('articles', 'essential-addons-for-elementor-lite').'</span>', $term->count);
+                        }
+
+                        echo '</div>';
+                    echo '</a>';
                 }
 
-                wp_reset_postdata();
-
-            }else {
-                $html .= '<h4>'.__( 'File Not Found', 'essential-addons-for-elementor-lite' ).'</h4>';
             }
+
+        }else {
+            $taxonomy_objects = get_terms($terms_object);
+
+            $html = '<div ' . $this->get_render_attribute_string('bd_category_grid_wrapper') . '>';
+                $html .= '<div '.$this->get_render_attribute_string('bd_category_grid_inner').'>';
+                if(file_exists($this->get_template($settings['layout_template']))) {
+
+                    if($taxonomy_objects && ! is_wp_error( $taxonomy_objects )) {
+                        foreach($taxonomy_objects as $term) {
+                            ob_start();
+                                include($this->get_template($settings['layout_template']));
+                            $html .= ob_get_clean(); 
+                        }
+                    }else {
+                        _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                    }
+
+                    wp_reset_postdata();
+
+                }else {
+                    $html .= '<h4>'.__( 'File Not Found', 'essential-addons-for-elementor-lite' ).'</h4>';
+                }
+                $html .= '</div>';
+                $html .= '<div class="clearfix"></div>';
+
+                if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
+                    $this->render_editor_script();
+                }
             $html .= '</div>';
-            $html .= '<div class="clearfix"></div>';
 
-            if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
-                $this->render_editor_script();
-            }
-        $html .= '</div>';
-
-        echo $html;
+            echo $html;
+        }
     
     }
 

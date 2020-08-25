@@ -188,6 +188,36 @@ trait Controls
             ]
         );
 
+        $default_multiple_kb = Helper::get_betterdocs_multiple_kb_status();
+
+        $wb->add_control(
+            'multiple_kb',
+            [
+                'label' => __('Multiple KB?', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'true',
+                'default' => $default_multiple_kb,
+                'disable'  => true
+            ]
+        );
+
+        $wb->add_control(
+            'multiple_kb_list',
+            [
+                'label' => __('Knowledge Bases', 'essential-addons-for-elementor-lite'),
+                'label_block' => true,
+                'type' => Controls_Manager::SELECT2,
+                'options' => Helper::get_multiple_kb_terms(true, false),
+                'multiple' => true,
+                'default' => [],
+                'condition' => [
+                    'multiple_kb'   => 'true'
+                ]
+            ]
+        );
+
         if ($wb->get_name() === 'eael-betterdocs-category-grid') {
             $wb->add_control(
                 'grid_query_heading',
