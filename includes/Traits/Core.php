@@ -262,12 +262,9 @@ trait Core
         }
 
         // update flag
-        set_transient('eael_requires_update', true);
+        set_transient('eael_editor_updated_at', strtotime('now'));
 
         // update options
         update_option('eael_global_settings', $global_settings);
-
-        // update page elements
-        update_post_meta($post_id, 'eael_transient_elements', []);
     }
 }

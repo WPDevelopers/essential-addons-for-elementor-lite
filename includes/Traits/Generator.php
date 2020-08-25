@@ -169,8 +169,11 @@ trait Generator
             return;
         }
 
-        // update loaded widgets data
-        set_transient($this->uid() . '_loaded_widgets', $widgets);
+        // update loaded widgets data & sync update time with editor time
+        if ($ext == 'css') {
+            set_transient($this->uid() . '_loaded_widgets', $widgets);
+            set_transient($this->uid() . '_updated_at', get_transient('eael_editor_updated_at'));
+        }
 
         // if folder not exists, create new folder
         if (!file_exists(EAEL_ASSET_PATH)) {
