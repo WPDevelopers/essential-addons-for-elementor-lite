@@ -644,4 +644,60 @@ class Helper
 
         return $args;
     }
+
+    public static function get_multiple_kb_terms(bool $prettify = false, bool $term_id = true)
+    {
+        $terms_object = array(
+            'taxonomy' => 'knowledge_base',
+            'hide_empty' => true,
+            'parent' => 0
+        );
+
+        $taxonomy_objects = get_terms( $terms_object );
+
+        if(! is_wp_error( $taxonomy_objects )) {
+            if($prettify === true) {
+                $pretty_taxonomies = [];
+    
+                foreach($taxonomy_objects as $object) {
+    
+                    $pretty_taxonomies[$term_id ? $object->term_id : $object->slug] = $object->name;
+                }
+    
+                return $pretty_taxonomies;
+            }
+        }
+
+        return $taxonomy_objects;
+    }
+
+    public static function get_filtered_kb_terms($selected_terms, $terms)
+    {
+
+        $new_terms = [];
+
+        for($i = 0; $i < count($selected_terms); $i++) {
+
+            for($j = 0; $j < count($terms); $j++) {
+
+                if($selected_terms[$i] == $terms[$j]->slug) {
+                    $new_terms[] = $terms[$j];
+                }
+
+                continue;
+            }
+
+        }
+
+        return $new_terms;
+    }
+
+    public static function get_betterdocs_multiple_kb_status()
+    {
+        if(\BetterDocs_DB::get_settings('multiple_kb') == 1) {
+            return 'true';
+        }
+
+        return '';
+    }
 }
