@@ -879,7 +879,7 @@ class Product_Grid extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'eael_product_grid_sale_badge_typography',
-				'selector' => '{{WRAPPER}} .woocommerce ul.products li.product .onsale, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale',
+				'selector' => '{{WRAPPER}} .woocommerce ul.products li.product .onsale, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale:not(.outofstock)',
 			]
 		);
 		// stock out badge
@@ -1349,6 +1349,9 @@ class Product_Grid extends Widget_Base {
 						'max' => 100,
 					],
 				],
+				'default' => [
+                    'size' => 3,
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-grid .eael-product-wrap .icons-wrap:not(.details-block-style-2) li a' => 'border-radius: {{SIZE}}px;',
 					'{{WRAPPER}} .eael-product-grid .eael-product-wrap .icons-wrap.details-block-style-2 li:only-child a' => 'border-radius: {{SIZE}}px!important;',
@@ -1609,7 +1612,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'name' => 'eael_product_grid_pagination_normal_border',
 				'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-				'selector' => '{{WRAPPER}} .eael-woo-pagination a',
+				'selector' => '{{WRAPPER}} .eael-woo-pagination a, {{WRAPPER}} .eael-woo-pagination span',
 			]
 		);
 
@@ -1767,6 +1770,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'label' => __('Price', 'essential-addons-for-elementor-lite'),
 				'type'  => Controls_Manager::HEADING,
+				'separator' => 'before',
 			]
 		);
 
@@ -1829,6 +1833,18 @@ class Product_Grid extends Widget_Base {
 				'default'   => '#707070',
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-popup .woocommerce-product-details__short-description' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_popup_table_border_color',
+			[
+				'label'     => __('Table Border Color', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ccc',
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-popup.woocommerce div.product table tbody tr, {{WRAPPER}} .eael-product-popup.woocommerce div.product .product_meta' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
