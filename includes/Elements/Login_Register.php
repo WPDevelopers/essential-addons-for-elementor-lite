@@ -1056,8 +1056,9 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'register_fields', [
+			'label' => __( 'Fields', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::REPEATER,
-			'fields'      => array_values( $repeater->get_controls() ),
+			'fields'      => $repeater->get_controls(),
 			'default'     => [
 				[
 					'field_type'  => 'user_name',
