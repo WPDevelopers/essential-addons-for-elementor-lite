@@ -233,7 +233,7 @@ msgstr ""
 msgid "Table"
 msgstr ""
 
-#: ../includes/Elements/Advanced_Data_Table.php:278, ../includes/Elements/Advanced_Data_Table.php:839, ../includes/Elements/Advanced_Data_Table.php:1034, ../includes/Elements/Betterdocs_Search_Form.php:290, ../includes/Elements/Caldera_Forms.php:1154, ../includes/Elements/Caldera_Forms.php:1168, ../includes/Elements/Contact_Form_7.php:1115, ../includes/Elements/Contact_Form_7.php:1129, ../includes/Elements/Creative_Button.php:417, ../includes/Elements/Data_Table.php:471, ../includes/Elements/Data_Table.php:1024, ../includes/Elements/Filterable_Gallery.php:2130, ../includes/Elements/Filterable_Gallery.php:2288, ../includes/Elements/FluentForm.php:1473, ../includes/Elements/FluentForm.php:1487, ../includes/Elements/Formstack.php:1389, ../includes/Elements/Formstack.php:1403, ../includes/Elements/GravityForms.php:1623, ../includes/Elements/GravityForms.php:1739, ../includes/Elements/GravityForms.php:1753, ../includes/Elements/GravityForms.php:1986, ../includes/Elements/Login_Register.php:1929, ../includes/Elements/NinjaForms.php:1318, ../includes/Elements/NinjaForms.php:1332, ../includes/Elements/Progress_Bar.php:349, ../includes/Elements/Sticky_Video.php:434, ../includes/Elements/Sticky_Video.php:518, ../includes/Elements/WpForms.php:1141, ../includes/Elements/WpForms.php:1155, ../includes/Extensions/Table_of_Content.php:381
+#: ../includes/Elements/Advanced_Data_Table.php:278, ../includes/Elements/Advanced_Data_Table.php:839, ../includes/Elements/Advanced_Data_Table.php:1034, ../includes/Elements/Betterdocs_Search_Form.php:290, ../includes/Elements/Caldera_Forms.php:1154, ../includes/Elements/Caldera_Forms.php:1168, ../includes/Elements/Contact_Form_7.php:1115, ../includes/Elements/Contact_Form_7.php:1129, ../includes/Elements/Creative_Button.php:417, ../includes/Elements/Data_Table.php:471, ../includes/Elements/Data_Table.php:1024, ../includes/Elements/Filterable_Gallery.php:2130, ../includes/Elements/Filterable_Gallery.php:2288, ../includes/Elements/FluentForm.php:1473, ../includes/Elements/FluentForm.php:1487, ../includes/Elements/Formstack.php:1389, ../includes/Elements/Formstack.php:1403, ../includes/Elements/GravityForms.php:1623, ../includes/Elements/GravityForms.php:1739, ../includes/Elements/GravityForms.php:1753, ../includes/Elements/GravityForms.php:1986, ../includes/Elements/Login_Register.php:1401, ../includes/Elements/Login_Register.php:1929, ../includes/Elements/NinjaForms.php:1318, ../includes/Elements/NinjaForms.php:1332, ../includes/Elements/Progress_Bar.php:349, ../includes/Elements/Sticky_Video.php:434, ../includes/Elements/Sticky_Video.php:518, ../includes/Elements/WpForms.php:1141, ../includes/Elements/WpForms.php:1155, ../includes/Extensions/Table_of_Content.php:381
 msgid "Width"
 msgstr ""
 
@@ -4072,10 +4072,6 @@ msgstr ""
 msgid "Container Box"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:1401, ../includes/Elements/Login_Register.php:2079
-msgid "width"
-msgstr ""
-
 #: ../includes/Elements/Login_Register.php:1509
 msgid "Container Box Shadow"
 msgstr ""
@@ -4150,6 +4146,10 @@ msgstr ""
 
 #: ../includes/Elements/Login_Register.php:2070
 msgid "Form Logo"
+msgstr ""
+
+#: ../includes/Elements/Login_Register.php:2079
+msgid "width"
 msgstr ""
 
 #: ../includes/Elements/Login_Register.php:2114
