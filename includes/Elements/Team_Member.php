@@ -11,6 +11,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Group_Control_Background;
+use Elementor\Repeater;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
 
@@ -155,7 +156,36 @@ class Team_Member extends Widget_Base {
 				'default' => 'yes',
 			]
 		);
-		
+
+        $repeater = new Repeater();
+
+        $repeater->add_control(
+            'social_new',
+            [
+                'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::ICONS,
+                'fa4compatibility' => 'social',
+                'default' => [
+                    'value' => 'fab fa-wordpress',
+                    'library' => 'fa-brands',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'link',
+            [
+                'name' => 'link',
+                'label' => esc_html__( 'Link', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::URL,
+                'label_block' => true,
+                'default' => [
+                    'url' => '',
+                    'is_external' => 'true',
+                ],
+                'placeholder' => esc_html__( 'Place URL here', 'essential-addons-for-elementor-lite'),
+            ]
+        );
 		
 		$this->add_control(
 			'eael_team_member_social_profile_links',
@@ -190,29 +220,7 @@ class Team_Member extends Widget_Base {
 						]
 					],
 				],
-				'fields' => [
-					[
-						'name' => 'social_new',
-						'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
-						'type' => Controls_Manager::ICONS,
-						'fa4compatibility' => 'social',
-						'default' => [
-							'value' => 'fab fa-wordpress',
-							'library' => 'fa-brands',
-						],
-					],
-					[
-						'name' => 'link',
-						'label' => esc_html__( 'Link', 'essential-addons-for-elementor-lite'),
-						'type' => Controls_Manager::URL,
-						'label_block' => true,
-						'default' => [
-							'url' => '',
-							'is_external' => 'true',
-						],
-						'placeholder' => esc_html__( 'Place URL here', 'essential-addons-for-elementor-lite'),
-					],
-				],
+				'fields' => $repeater->get_controls(),
 				'title_field' => '<i class="{{ social_new.value }}"></i>',
 			]
 		);

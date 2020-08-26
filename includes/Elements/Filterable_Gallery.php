@@ -371,6 +371,21 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
 
+        $fg_control_repeater = new Repeater();
+
+        $fg_control_repeater->add_control(
+            'eael_fg_control',
+            [
+                'label' => esc_html__('List Item', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
+                'label_block' => true,
+                'default' => esc_html__('Gallery Item', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
         $this->add_control(
             'eael_fg_controls',
             [
@@ -379,18 +394,7 @@ class Filterable_Gallery extends Widget_Base
                 'default' => [
                     ['eael_fg_control' => 'Gallery Item'],
                 ],
-                'fields' => [
-                    [
-                        'name' => 'eael_fg_control',
-                        'label' => esc_html__('List Item', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::TEXT,
-                        'dynamic' => [
-                            'active' => true,
-                        ],
-                        'label_block' => true,
-                        'default' => esc_html__('Gallery Item', 'essential-addons-for-elementor-lite'),
-                    ],
-                ],
+                'fields' => $fg_control_repeater->get_controls(),
                 'title_field' => '{{eael_fg_control}}',
             ]
         );
@@ -651,7 +655,7 @@ class Filterable_Gallery extends Widget_Base
                     ['eael_fg_gallery_item_name' => 'Gallery Item Name'],
                     ['eael_fg_gallery_item_name' => 'Gallery Item Name'],
                 ],
-                'fields' => array_values( $repeater->get_controls() ),
+                'fields' =>  $repeater->get_controls(),
                 'title_field' => '{{eael_fg_gallery_item_name}}',
             ]
         );

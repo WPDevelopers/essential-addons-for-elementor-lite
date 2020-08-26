@@ -13,6 +13,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use Elementor\Modules\DynamicTags\Module as TagsModule;
+use Elementor\Repeater;
 use \Elementor\Widget_Base;
 
 class Pricing_Table extends Widget_Base {
@@ -286,6 +287,182 @@ class Pricing_Table extends Widget_Base {
             ]
         );
 
+        $repeater = new Repeater();
+
+        $repeater->add_control(
+            'eael_pricing_table_item',
+            [
+                'label'       => esc_html__( 'List Item', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::TEXT,
+                'label_block' => true,
+                'default'     => esc_html__( 'Pricing table list item', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_pricing_table_list_icon_new',
+            [
+                'label'            => esc_html__( 'List Icon', 'essential-addons-for-elementor-lite' ),
+                'type'             => Controls_Manager::ICONS,
+                'fa4compatibility' => 'eael_pricing_table_list_icon',
+                'default'          => [
+                    'value'   => 'fas fa-check',
+                    'library' => 'fa-solid',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_pricing_table_icon_mood',
+            [
+                'label'        => esc_html__( 'Item Active?', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default'      => 'yes',
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_pricing_table_list_icon_color',
+            [
+                'label'   => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::COLOR,
+                'default' => '#00C853',
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_pricing_item_tooltip',
+            [
+                'label'        => esc_html__( 'Enable Tooltip?', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default'      => false,
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_pricing_item_tooltip_content',
+            [
+                'label'     => esc_html__( 'Tooltip Content', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::TEXTAREA,
+                'default'   => __( "I'm a awesome tooltip!!", 'essential-addons-for-elementor-lite' ),
+                'condition' => [
+                    'eael_pricing_item_tooltip' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_pricing_item_tooltip_side',
+            [
+                'label'     => esc_html__( 'Tooltip Side', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::CHOOSE,
+                'options'   => [
+                    'left'   => [
+                        'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-h-align-left',
+                    ],
+                    'top'    => [
+                        'title' => __( 'Top', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-v-align-top',
+                    ],
+                    'right'  => [
+                        'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-h-align-right',
+                    ],
+                    'bottom' => [
+                        'title' => __( 'Bottom', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-v-align-bottom',
+                    ],
+                ],
+                'default'   => 'top',
+                'condition' => [
+                    'eael_pricing_item_tooltip' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_pricing_item_tooltip_trigger',
+            [
+                'label'     => esc_html__( 'Tooltip Trigger', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::SELECT2,
+                'options'   => [
+                    'hover' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
+                    'click' => __( 'Click', 'essential-addons-for-elementor-lite' ),
+                ],
+                'default'   => 'hover',
+                'condition' => [
+                    'eael_pricing_item_tooltip' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_pricing_item_tooltip_animation',
+            [
+                'label'     => esc_html__( 'Tooltip Animation', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::SELECT2,
+                'options'   => [
+                    'fade'  => __( 'Fade', 'essential-addons-for-elementor-lite' ),
+                    'grow'  => __( 'Grow', 'essential-addons-for-elementor-lite' ),
+                    'swing' => __( 'Swing', 'essential-addons-for-elementor-lite' ),
+                    'slide' => __( 'Slide', 'essential-addons-for-elementor-lite' ),
+                    'fall'  => __( 'Fall', 'essential-addons-for-elementor-lite' ),
+                ],
+                'default'   => 'fade',
+                'condition' => [
+                    'eael_pricing_item_tooltip' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'pricing_item_tooltip_animation_duration',
+            [
+                'label'     => esc_html__( 'Animation Duration', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::TEXT,
+                'default'   => 300,
+                'condition' => [
+                    'eael_pricing_item_tooltip' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_pricing_table_toolip_arrow',
+            [
+                'label'        => esc_html__( 'Tooltip Arrow', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default'      => 'yes',
+                'condition'    => [
+                    'eael_pricing_item_tooltip' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_pricing_item_tooltip_theme',
+            [
+                'label'     => esc_html__( 'Tooltip Theme', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::SELECT2,
+                'options'   => [
+                    'default'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
+                    'noir'       => __( 'Noir', 'essential-addons-for-elementor-lite' ),
+                    'light'      => __( 'Light', 'essential-addons-for-elementor-lite' ),
+                    'punk'       => __( 'Punk', 'essential-addons-for-elementor-lite' ),
+                    'shadow'     => __( 'Shadow', 'essential-addons-for-elementor-lite' ),
+                    'borderless' => __( 'Borderless', 'essential-addons-for-elementor-lite' ),
+                ],
+                'default'   => 'noir',
+                'condition' => [
+                    'eael_pricing_item_tooltip' => 'yes',
+                ],
+            ]
+        );
+
         $this->add_control(
             'eael_pricing_table_items',
             [
@@ -298,146 +475,7 @@ class Pricing_Table extends Widget_Base {
                     ['eael_pricing_table_item' => '500 MB Bandwidth'],
                     ['eael_pricing_table_item' => '24/7 support'],
                 ],
-                'fields'      => [
-                    [
-                        'name'        => 'eael_pricing_table_item',
-                        'label'       => esc_html__( 'List Item', 'essential-addons-for-elementor-lite' ),
-                        'type'        => Controls_Manager::TEXT,
-                        'label_block' => true,
-                        'default'     => esc_html__( 'Pricing table list item', 'essential-addons-for-elementor-lite' ),
-                    ],
-                    [
-                        'name'             => 'eael_pricing_table_list_icon_new',
-                        'label'            => esc_html__( 'List Icon', 'essential-addons-for-elementor-lite' ),
-                        'type'             => Controls_Manager::ICONS,
-                        'fa4compatibility' => 'eael_pricing_table_list_icon',
-                        'default'          => [
-                            'value'   => 'fas fa-check',
-                            'library' => 'fa-solid',
-                        ],
-                    ],
-                    [
-                        'name'         => 'eael_pricing_table_icon_mood',
-                        'label'        => esc_html__( 'Item Active?', 'essential-addons-for-elementor-lite' ),
-                        'type'         => Controls_Manager::SWITCHER,
-                        'return_value' => 'yes',
-                        'default'      => 'yes',
-                    ],
-                    [
-                        'name'    => 'eael_pricing_table_list_icon_color',
-                        'label'   => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
-                        'type'    => Controls_Manager::COLOR,
-                        'default' => '#00C853',
-                    ],
-                    [
-                        'name'         => 'eael_pricing_item_tooltip',
-                        'label'        => esc_html__( 'Enable Tooltip?', 'essential-addons-for-elementor-lite' ),
-                        'type'         => Controls_Manager::SWITCHER,
-                        'return_value' => 'yes',
-                        'default'      => false,
-                    ],
-                    [
-                        'name'      => 'eael_pricing_item_tooltip_content',
-                        'label'     => esc_html__( 'Tooltip Content', 'essential-addons-for-elementor-lite' ),
-                        'type'      => Controls_Manager::TEXTAREA,
-                        'default'   => __( "I'm a awesome tooltip!!", 'essential-addons-for-elementor-lite' ),
-                        'condition' => [
-                            'eael_pricing_item_tooltip' => 'yes',
-                        ],
-                    ],
-                    [
-                        'name'      => 'eael_pricing_item_tooltip_side',
-                        'label'     => esc_html__( 'Tooltip Side', 'essential-addons-for-elementor-lite' ),
-                        'type'      => Controls_Manager::CHOOSE,
-                        'options'   => [
-                            'left'   => [
-                                'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
-                                'icon'  => 'eicon-h-align-left',
-                            ],
-                            'top'    => [
-                                'title' => __( 'Top', 'essential-addons-for-elementor-lite' ),
-                                'icon'  => 'eicon-v-align-top',
-                            ],
-                            'right'  => [
-                                'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
-                                'icon'  => 'eicon-h-align-right',
-                            ],
-                            'bottom' => [
-                                'title' => __( 'Bottom', 'essential-addons-for-elementor-lite' ),
-                                'icon'  => 'eicon-v-align-bottom',
-                            ],
-                        ],
-                        'default'   => 'top',
-                        'condition' => [
-                            'eael_pricing_item_tooltip' => 'yes',
-                        ],
-                    ],
-                    [
-                        'name'      => 'eael_pricing_item_tooltip_trigger',
-                        'label'     => esc_html__( 'Tooltip Trigger', 'essential-addons-for-elementor-lite' ),
-                        'type'      => Controls_Manager::SELECT2,
-                        'options'   => [
-                            'hover' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
-                            'click' => __( 'Click', 'essential-addons-for-elementor-lite' ),
-                        ],
-                        'default'   => 'hover',
-                        'condition' => [
-                            'eael_pricing_item_tooltip' => 'yes',
-                        ],
-                    ],
-                    [
-                        'name'      => 'eael_pricing_item_tooltip_animation',
-                        'label'     => esc_html__( 'Tooltip Animation', 'essential-addons-for-elementor-lite' ),
-                        'type'      => Controls_Manager::SELECT2,
-                        'options'   => [
-                            'fade'  => __( 'Fade', 'essential-addons-for-elementor-lite' ),
-                            'grow'  => __( 'Grow', 'essential-addons-for-elementor-lite' ),
-                            'swing' => __( 'Swing', 'essential-addons-for-elementor-lite' ),
-                            'slide' => __( 'Slide', 'essential-addons-for-elementor-lite' ),
-                            'fall'  => __( 'Fall', 'essential-addons-for-elementor-lite' ),
-                        ],
-                        'default'   => 'fade',
-                        'condition' => [
-                            'eael_pricing_item_tooltip' => 'yes',
-                        ],
-                    ],
-                    [
-                        'name'      => 'pricing_item_tooltip_animation_duration',
-                        'label'     => esc_html__( 'Animation Duration', 'essential-addons-for-elementor-lite' ),
-                        'type'      => Controls_Manager::TEXT,
-                        'default'   => 300,
-                        'condition' => [
-                            'eael_pricing_item_tooltip' => 'yes',
-                        ],
-                    ],
-                    [
-                        'name'         => 'eael_pricing_table_toolip_arrow',
-                        'label'        => esc_html__( 'Tooltip Arrow', 'essential-addons-for-elementor-lite' ),
-                        'type'         => Controls_Manager::SWITCHER,
-                        'return_value' => 'yes',
-                        'default'      => 'yes',
-                        'condition'    => [
-                            'eael_pricing_item_tooltip' => 'yes',
-                        ],
-                    ],
-                    [
-                        'name'      => 'eael_pricing_item_tooltip_theme',
-                        'label'     => esc_html__( 'Tooltip Theme', 'essential-addons-for-elementor-lite' ),
-                        'type'      => Controls_Manager::SELECT2,
-                        'options'   => [
-                            'default'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
-                            'noir'       => __( 'Noir', 'essential-addons-for-elementor-lite' ),
-                            'light'      => __( 'Light', 'essential-addons-for-elementor-lite' ),
-                            'punk'       => __( 'Punk', 'essential-addons-for-elementor-lite' ),
-                            'shadow'     => __( 'Shadow', 'essential-addons-for-elementor-lite' ),
-                            'borderless' => __( 'Borderless', 'essential-addons-for-elementor-lite' ),
-                        ],
-                        'default'   => 'noir',
-                        'condition' => [
-                            'eael_pricing_item_tooltip' => 'yes',
-                        ],
-                    ],
-                ],
+                'fields'      => $repeater->get_controls(),
                 'title_field' => '{{eael_pricing_table_item}}',
             ]
         );
