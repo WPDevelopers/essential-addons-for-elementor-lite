@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
+use Elementor\Repeater;
 use \Elementor\Widget_Base;
 
 class Adv_Accordion extends Widget_Base
@@ -143,6 +144,109 @@ class Adv_Accordion extends Widget_Base
                 'label' => esc_html__('Content Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
+
+        $repeater = new Repeater();
+
+        $repeater->add_control(
+            'eael_adv_accordion_tab_default_active',
+            [
+                'label' => esc_html__('Active as Default', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => 'no',
+                'return_value' => 'yes',
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_adv_accordion_tab_icon_show',
+            [
+                'label' => esc_html__('Enable Tab Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => 'yes',
+                'return_value' => 'yes',
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_adv_accordion_tab_title_icon_new',
+            [
+                'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::ICONS,
+                'fa4compatibility' => 'eael_adv_accordion_tab_title_icon',
+                'default' => [
+                    'value' => 'fas fa-plus',
+                    'library' => 'fa-solid',
+                ],
+                'condition' => [
+                    'eael_adv_accordion_tab_icon_show' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_adv_accordion_tab_title',
+            [
+                'label' => esc_html__('Tab Title', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('Tab Title', 'essential-addons-for-elementor-lite'),
+                'dynamic' => ['active' => true],
+            ]
+        );
+
+
+        $repeater->add_control(
+            'eael_adv_accordion_text_type',
+            [
+                'label' => __('Content Type', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'content' => __('Content', 'essential-addons-for-elementor-lite'),
+                    'template' => __('Saved Templates', 'essential-addons-for-elementor-lite'),
+                ],
+                'default' => 'content',
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_adv_accordion_text_type',
+            [
+                'label' => __('Content Type', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'content' => __('Content', 'essential-addons-for-elementor-lite'),
+                    'template' => __('Saved Templates', 'essential-addons-for-elementor-lite'),
+                ],
+                'default' => 'content',
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_primary_templates',
+            [
+                'name' => 'eael_primary_templates',
+                'label' => __('Choose Template', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => $this->eael_get_page_templates(),
+                'condition' => [
+                    'eael_adv_accordion_text_type' => 'template',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_adv_accordion_tab_content',
+            [
+                'name' => 'eael_adv_accordion_tab_content',
+                'label' => esc_html__('Tab Content', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::WYSIWYG,
+                'default' => esc_html__('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-for-elementor-lite'),
+                'dynamic' => ['active' => true],
+                'condition' => [
+                    'eael_adv_accordion_text_type' => 'content',
+                ],
+            ]
+        );
+
         $this->add_control(
             'eael_adv_accordion_tab',
             [
@@ -153,74 +257,11 @@ class Adv_Accordion extends Widget_Base
                     ['eael_adv_accordion_tab_title' => esc_html__('Accordion Tab Title 2', 'essential-addons-for-elementor-lite')],
                     ['eael_adv_accordion_tab_title' => esc_html__('Accordion Tab Title 3', 'essential-addons-for-elementor-lite')],
                 ],
-                'fields' => [
-                    [
-                        'name' => 'eael_adv_accordion_tab_default_active',
-                        'label' => esc_html__('Active as Default', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SWITCHER,
-                        'default' => 'no',
-                        'return_value' => 'yes',
-                    ],
-                    [
-                        'name' => 'eael_adv_accordion_tab_icon_show',
-                        'label' => esc_html__('Enable Tab Icon', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SWITCHER,
-                        'default' => 'yes',
-                        'return_value' => 'yes',
-                    ],
-                    [
-                        'name' => 'eael_adv_accordion_tab_title_icon_new',
-                        'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::ICONS,
-                        'fa4compatibility' => 'eael_adv_accordion_tab_title_icon',
-                        'default' => [
-                            'value' => 'fas fa-plus',
-                            'library' => 'fa-solid',
-                        ],
-                        'condition' => [
-                            'eael_adv_accordion_tab_icon_show' => 'yes',
-                        ],
-                    ],
-                    [
-                        'name' => 'eael_adv_accordion_tab_title',
-                        'label' => esc_html__('Tab Title', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::TEXT,
-                        'default' => esc_html__('Tab Title', 'essential-addons-for-elementor-lite'),
-                        'dynamic' => ['active' => true],
-                    ],
-                    [
-                        'name' => 'eael_adv_accordion_text_type',
-                        'label' => __('Content Type', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SELECT,
-                        'options' => [
-                            'content' => __('Content', 'essential-addons-for-elementor-lite'),
-                            'template' => __('Saved Templates', 'essential-addons-for-elementor-lite'),
-                        ],
-                        'default' => 'content',
-                    ],
-                    [
-                        'name' => 'eael_primary_templates',
-                        'label' => __('Choose Template', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SELECT,
-                        'options' => $this->eael_get_page_templates(),
-                        'condition' => [
-                            'eael_adv_accordion_text_type' => 'template',
-                        ],
-                    ],
-                    [
-                        'name' => 'eael_adv_accordion_tab_content',
-                        'label' => esc_html__('Tab Content', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::WYSIWYG,
-                        'default' => esc_html__('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-for-elementor-lite'),
-                        'dynamic' => ['active' => true],
-                        'condition' => [
-                            'eael_adv_accordion_text_type' => 'content',
-                        ],
-                    ],
-                ],
+                'fields' => $repeater->get_controls(),
                 'title_field' => '{{eael_adv_accordion_tab_title}}',
             ]
         );
+
         $this->end_controls_section();
 
         if (!apply_filters('eael/pro_enabled', false)) {
