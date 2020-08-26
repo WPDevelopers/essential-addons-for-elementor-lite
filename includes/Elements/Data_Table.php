@@ -214,7 +214,7 @@ class Data_Table extends Widget_Base {
 					[ 'eael_data_table_header_col' => 'Table Header' ],
 					[ 'eael_data_table_header_col' => 'Table Header' ],
 				],
-				'fields'      => array_values( $repeater->get_controls() ),
+				'fields'      =>  $repeater->get_controls() ,
 				'title_field' => '{{eael_data_table_header_col}}',
 			]
 		);
@@ -398,7 +398,7 @@ class Data_Table extends Widget_Base {
 					[ 'eael_data_table_content_row_type' => 'col' ],
 					[ 'eael_data_table_content_row_type' => 'col' ],
 				],
-				'fields' => array_values( $repeater->get_controls() ),
+				'fields' =>  $repeater->get_controls() ,
 				'title_field' => '{{eael_data_table_content_row_type}}::{{eael_data_table_content_row_title || eael_data_table_content_row_content}}',
 			]
 		);
