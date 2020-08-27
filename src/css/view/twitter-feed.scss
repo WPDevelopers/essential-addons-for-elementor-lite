@@ -152,3 +152,20 @@
         outline: none;
     }
 }
+// carousel
+.eael-twitter-feed-carousel {
+    &.swiper-container-flip {
+        .swiper-slide:not(.swiper-slide-active) {
+            opacity: 0 !important;
+        }
+    }
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+}
