@@ -93,6 +93,7 @@
 .eael-facebook-feed .eael-facebook-feed-item,
 .eael-facebook-feed .eael-facebook-feed-item-inner {
   position: relative;
+  overflow: hidden;
 }
 .eael-facebook-feed-overlay .eael-facebook-feed-item .eael-facebook-feed-item-overlay {
   display: -webkit-box;
@@ -140,6 +141,7 @@
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
   margin: 10px;
+  overflow: hidden;
 }
 .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-header {
   padding: 8px 12px;
