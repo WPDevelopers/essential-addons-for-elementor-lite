@@ -58,6 +58,7 @@ trait Enqueue
                 wp_add_inline_script('nf-front-end', 'var nfForms = nfForms || [];');
             });
         }
+
     }
 
     public function enqueue_template_scripts($css_file)
@@ -85,21 +86,21 @@ trait Enqueue
             'font-awesome-5-all',
             ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/all.min.css',
             false,
-            time()
+            EAEL_PLUGIN_VERSION
         );
 
         wp_register_style(
             'font-awesome-4-shim',
             ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/v4-shims.min.css',
             false,
-            time()
+            EAEL_PLUGIN_VERSION
         );
 
         wp_register_script(
             'font-awesome-4-shim',
             ELEMENTOR_ASSETS_URL . 'lib/font-awesome/js/v4-shims.min.js',
             false,
-            time()
+            EAEL_PLUGIN_VERSION
         );
 
         // localize object
@@ -157,19 +158,20 @@ trait Enqueue
 
         // view mode
         if ($this->is_preview_mode()) {
-            $update_requires = (bool) get_transient('eael_requires_update');
-            $posts = get_transient($this->uid());
+            $editor_updated_at = get_transient('eael_editor_updated_at');
+            $post_updated_at = get_transient($this->uid() . '_updated_at');
+            $loaded_templates = get_transient($this->uid() . '_loaded_templates');
 
-            if ($posts === false || $update_requires) {
+            if ($loaded_templates === false || $editor_updated_at != $post_updated_at) {
                 $this->loaded_widgets = $this->get_settings();
             } else {
-                if (empty($posts)) {
+                if (empty($loaded_templates)) {
                     return;
                 }
 
                 // parse widgets from post
-                foreach ($posts as $post) {
-                    $widgets = $this->parse_widgets($post);
+                foreach ($loaded_templates as $post_id) {
+                    $widgets = (array) $this->parse_widgets($post_id);
 
                     // loaded widgets stack
                     $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $widgets)));
@@ -248,7 +250,11 @@ trait Enqueue
 
                 // parse widgets from post
                 foreach ($this->loaded_templates as $post_id) {
-                    $widgets = $this->parse_widgets($post_id);
+                    if (get_post_status($post_id) === false) {
+                        continue;
+                    }
+                    
+                    $widgets = (array) $this->parse_widgets($post_id);
 
                     // loaded widgets stack
                     $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $widgets)));
@@ -280,8 +286,7 @@ trait Enqueue
             }
 
             // update transient
-            set_transient($this->uid(), $this->loaded_templates);
-            set_transient('eael_requires_update', false);
+            set_transient($this->uid() . '_loaded_templates', $this->loaded_templates);
         }
     }
 }

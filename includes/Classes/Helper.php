@@ -214,13 +214,13 @@ class Helper
      *
      * @return array
      */
-    public static function get_post_type_categories($taxonomy = 'category', $key = 'term_id')
+    public static function get_terms_list($taxonomy = 'category', $key = 'term_id')
     {
         $options = [];
-        $terms = get_terms(array(
+        $terms = get_terms([
             'taxonomy' => $taxonomy,
             'hide_empty' => true,
-        ));
+        ]);
 
         if (!empty($terms) && !is_wp_error($terms)) {
             foreach ($terms as $term) {
