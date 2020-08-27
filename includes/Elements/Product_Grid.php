@@ -1849,7 +1849,7 @@ class Product_Grid extends Widget_Base {
 			]
 		);
 		$this->add_control(
-			'eael_product_popup_review_link_color',
+			'eael_product_popup_review_link_hover',
 			[
 				'label'     => __('Review Link Hover', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
