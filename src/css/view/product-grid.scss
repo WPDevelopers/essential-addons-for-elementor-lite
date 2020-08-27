@@ -1994,20 +1994,26 @@ ul.products {
     margin: 15px 0;
 }
 .eael-product-grid-column-mobile-2 .eael-product-grid.masonry .woocommerce ul.products li.product{
-    width: 48%;
+    width: 48% !important;
+    margin: 1%;
 }
 .eael-product-grid-column-mobile-3 .eael-product-grid.masonry .woocommerce ul.products li.product{
-    width: 31.3333%;
+    width: 31.3333% !important;
+    margin: 1%;
 }
 .eael-product-grid-column-mobile-4 .eael-product-grid.masonry .woocommerce ul.products li.product{
-    width: 23%;
+    width: 23% !important;
+    margin: 1%;
 }
 .eael-product-grid-column-mobile-5 .eael-product-grid.masonry .woocommerce ul.products li.product{
-    width: 18%;
+    width: 18% !important;
+    margin: 1%;
 }
 .eael-product-grid-column-mobile-6 .eael-product-grid.masonry .woocommerce ul.products li.product{
-    width: 14.66666667%;
+    width: 14.66666667% !important;
+    margin: 1%;
 }
+
 }
 
 
