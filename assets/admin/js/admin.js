@@ -227,12 +227,8 @@
         const lr_i18n = localize.i18n.login_register;
         let settingsNodeId = $(this).data('settings-id');
         let $dnode = $('#'+settingsNodeId);
-        let isProEnable = $dnode.data('pro-enabled');
         let rSitekey = $dnode.data('r-sitekey');
         let rSecret = $dnode.data('r-secret');
-        let gClientId = $dnode.data('g-client-id');
-        let fbAppId = $dnode.data('fb-app-id');
-        let fbAppSecret = $dnode.data('fb-app-secret');
         let html = `<div class="eael-lr-settings-fields" id="lr_settings_fields">
                         <h2>${lr_i18n.r_title}</h2>
                         <div class="sf-group">
@@ -257,16 +253,10 @@
             confirmButtonText: lr_i18n.save,
             cancelButtonText: lr_i18n.cancel,
             preConfirm: () => {
-                let formData = {
+                return  {
                     recaptchaSiteKey: document.getElementById('lr_recaptcha_sitekey').value,
                     recaptchaSiteSecret: document.getElementById('lr_recaptcha_secret').value,
                 }
-                if (isProEnable){
-                    formData.gClientId = document.getElementById('lr_g_client_id').value;
-                    formData.fbAppId = document.getElementById('lr_fb_app_id').value;
-                    formData.fbAppSecret = document.getElementById('lr_fb_app_secret').value;
-                }
-                return formData;
             }
         }).then((result) => {
             if (result.value){
