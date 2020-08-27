@@ -227,8 +227,11 @@
         const lr_i18n = localize.i18n.login_register;
         let settingsNodeId = $(this).data('settings-id');
         let $dnode = $('#'+settingsNodeId);
+        let isProEnable = $dnode.data('pro-enabled');
         let rSitekey = $dnode.data('r-sitekey');
         let rSecret = $dnode.data('r-secret');
+        let footerLink = isProEnable ? `<a target="_blank" href="https://essential-addons.com/elementor/docs/login-register-form/">${lr_i18n.m_footer}</a>` : `<a target="_blank" href="https://www.google.com/recaptcha/admin/create">${lr_i18n.m_footer}</a>`
+
         let html = `<div class="eael-lr-settings-fields" id="lr_settings_fields">
                         <h2>${lr_i18n.r_title}</h2>
                         <div class="sf-group">
@@ -246,7 +249,7 @@
         Swal.fire({
             title: `<strong>${lr_i18n.m_title}</strong>`,
             html: html,
-            footer: `<a target="_blank" href="https://essential-addons.com/elementor/docs/login-register-form/">${lr_i18n.m_footer}</a>`,
+            footer: footerLink,
             showCloseButton: true,
             showCancelButton: true,
             focusConfirm: false,
