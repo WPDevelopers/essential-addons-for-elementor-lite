@@ -139,3 +139,23 @@
   background-image: none;
   outline: none;
 }
+
+.eael-twitter-feed-carousel.swiper-container-flip .swiper-slide:not(.swiper-slide-active) {
+  opacity: 0 !important;
+}
+
+.eael-twitter-feed-carousel .swiper-button-next,
+.eael-twitter-feed-carousel .swiper-button-prev {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
