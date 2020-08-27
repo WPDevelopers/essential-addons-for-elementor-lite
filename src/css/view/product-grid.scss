@@ -458,6 +458,8 @@
 
         a img {
             margin-bottom: 0;
+            display: block;
+            width: 100%;
         }
 
         .woocommerce-loop-product__title {
@@ -633,6 +635,10 @@
             margin-bottom: 10px;
             letter-spacing: normal;
             text-transform: capitalize;
+
+            &:before {
+                content: none;
+            }
         }
 
         .price {
@@ -1152,6 +1158,10 @@ form.cart {
         font-weight: 500;
         margin: 0 0 8px;
         padding: 0;
+
+        &:before {
+            content: none;
+        }
     }
     .eael-product-price {
         font-size: 18px;
