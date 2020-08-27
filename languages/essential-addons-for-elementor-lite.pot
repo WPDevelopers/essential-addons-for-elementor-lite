@@ -6164,7 +6164,7 @@ msgid "Login | Register Settings"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:153
-msgid "Read the doc on how to get above credentials"
+msgid "To retrieve your API Keys, click here"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:154
