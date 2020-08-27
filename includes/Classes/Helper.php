@@ -674,22 +674,27 @@ class Helper
     public static function get_filtered_kb_terms($selected_terms, $terms)
     {
 
-        $new_terms = [];
+        if( count($selected_terms) > 0 ) {
+            $new_terms = [];
 
-        for($i = 0; $i < count($selected_terms); $i++) {
+            for($i = 0; $i < count($selected_terms); $i++) {
 
-            for($j = 0; $j < count($terms); $j++) {
+                for($j = 0; $j < count($terms); $j++) {
 
-                if($selected_terms[$i] == $terms[$j]->slug) {
-                    $new_terms[] = $terms[$j];
+                    if($selected_terms[$i] == $terms[$j]->slug) {
+                        $new_terms[] = $terms[$j];
+                    }
+
+                    continue;
                 }
 
-                continue;
             }
 
+            return $new_terms;
         }
 
-        return $new_terms;
+        return $terms;
+        
     }
 
     public static function get_betterdocs_multiple_kb_status()
