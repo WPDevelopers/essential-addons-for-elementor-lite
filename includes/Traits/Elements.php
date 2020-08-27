@@ -319,6 +319,10 @@ trait Elements
         $global_settings = get_option('eael_global_settings');
 
         foreach ($this->loaded_templates as $post_id) {
+            if (get_post_status($post_id) === false) {
+                continue;
+            }
+            
             if (Helper::prevent_extension_loading($post_id)) {
                 continue;
             }

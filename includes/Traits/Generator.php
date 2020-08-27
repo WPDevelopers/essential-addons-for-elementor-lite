@@ -61,7 +61,6 @@ trait Generator
      */
     public function parse_widgets($post_id)
     {
-
         if (!Plugin::$instance->db->is_built_with_elementor($post_id)) {
             return;
         }
@@ -165,6 +164,17 @@ trait Generator
      */
     public function generate_script($widgets, $context, $ext)
     {
+        // check if script exists
+        if (get_transient($this->uid() . '_loaded_widgets') == $widgets && $this->has_assets_files($this->uid(), $ext)) {
+            return;
+        }
+
+        // update loaded widgets data & sync update time with editor time
+        if ($ext == 'css') {
+            set_transient($this->uid() . '_loaded_widgets', $widgets);
+            set_transient($this->uid() . '_updated_at', get_transient('eael_editor_updated_at'));
+        }
+
         // if folder not exists, create new folder
         if (!file_exists(EAEL_ASSET_PATH)) {
             wp_mkdir_p(EAEL_ASSET_PATH);
@@ -195,6 +205,10 @@ trait Generator
 
         if ($this->loaded_templates && $context == 'view' && $ext == 'js') {
             foreach ($this->loaded_templates as $post_id) {
+                if (get_post_status($post_id) === false) {
+                    continue;
+                }
+
                 $document = Plugin::$instance->documents->get($post_id);
 
                 if ($custom_js = $document->get_settings('eael_custom_js')) {
@@ -247,6 +261,28 @@ trait Generator
     }
 
     /**
+     * Check if assets files exists
+     *
+     * @since 3.0.0
+     */
+    public function has_assets_files($uid = null, $ext = ['css', 'js'])
+    {
+        if (!is_array($ext)) {
+            $ext = (array) $ext;
+        }
+
+        foreach ($ext as $e) {
+            $path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.' . $e;
+
+            if (!is_readable($this->safe_path($path))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Combine files into one
      *
      * @since 3.0.1
@@ -264,6 +300,10 @@ trait Generator
 
         if ($this->loaded_templates && $context == 'view' && $ext == 'js') {
             foreach ($this->loaded_templates as $post_id) {
+                if (get_post_status($post_id) === false) {
+                    continue;
+                }
+
                 $document = Plugin::$instance->documents->get($post_id);
 
                 if ($custom_js = $document->get_settings('eael_custom_js')) {

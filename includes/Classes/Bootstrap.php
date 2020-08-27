@@ -117,6 +117,8 @@ class Bootstrap
 
         // Enqueue
         add_action('eael/before_enqueue_styles', array($this, 'before_enqueue_styles'));
+        add_action('elementor/editor/before_enqueue_scripts', array($this, 'lr_enqueue_scripts'));
+        add_action('wp_enqueue_scripts', array($this, 'lr_enqueue_scripts'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
         add_action('elementor/css-file/post/enqueue', [$this, 'enqueue_template_scripts']);
         add_action('elementor/editor/before_enqueue_scripts', array($this, 'editor_enqueue_scripts'));
@@ -154,12 +156,12 @@ class Bootstrap
         add_filter('eael/controls/event-calendar/source', [$this, 'event_calendar_source']);
         add_action('eael/controls/advanced-data-table/source', [$this, 'advanced_data_table_source']);
         add_filter('eael/advanced-data-table/table_html/integration/ninja', [$this, 'advanced_data_table_ninja_integration'], 10, 1);
-
-        add_action('init', [$this, 'login_or_register_user']); //@TODO; add AJAX later
-
-        add_filter('wp_new_user_notification_email', array($this, 'new_user_notification_email'), 10, 3);
-        add_filter('wp_new_user_notification_email_admin', array($this, 'new_user_notification_email_admin'), 10, 3);
-
+        
+        // Login | Register
+        add_action( 'init', [ $this, 'login_or_register_user'] );
+	    add_filter( 'wp_new_user_notification_email', array( $this, 'new_user_notification_email' ), 10, 3 );
+	    add_filter( 'wp_new_user_notification_email_admin', array( $this, 'new_user_notification_email_admin' ), 10, 3 );
+        
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'toc_rank_math_support']);
 
