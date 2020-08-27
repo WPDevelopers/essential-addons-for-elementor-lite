@@ -842,6 +842,46 @@ class Product_Grid extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_product_grid_product_desc_heading',
+			[
+				'label' => __( 'Product Description', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+				'condition' => [
+                    'eael_product_grid_layout' => 'list',
+                    'eael_product_grid_excerpt' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_grid_product_desc_color',
+			[
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#272727',
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .eael-product-excerpt' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_product_grid_layout' => 'list',
+					'eael_product_grid_excerpt' => 'yes',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'eael_product_grid_product_desc_typography',
+				'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .eael-product-excerpt',
+				'condition' => [
+					'eael_product_grid_layout' => 'list',
+					'eael_product_grid_excerpt' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_product_grid_sale_badge_heading',
 			[
 				'label' => __( 'Sale Badge', 'essential-addons-for-elementor-lite' ),
