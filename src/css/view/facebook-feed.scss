@@ -96,6 +96,7 @@
     .eael-facebook-feed-item,
     .eael-facebook-feed-item-inner {
         position: relative;
+        overflow: hidden;
     }
 }
 
@@ -142,11 +143,11 @@
 .eael-facebook-feed-card {
     .eael-facebook-feed-item {
         .eael-facebook-feed-item-inner {
-            -webkit-transition: all .3s ease;
-            -moz-transition: all .3s ease;
-            transition: all .3s ease;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            transition: all 0.3s ease;
             margin: 10px;
-
+            overflow: hidden;
             .eael-facebook-feed-item-header {
                 padding: 8px 12px;
 
