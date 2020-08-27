@@ -1603,9 +1603,9 @@ class Betterdocs_Category_Grid extends Widget_Base
             $terms_object['exclude'] =  $settings['exclude'];
         }
 
-        if($settings['multiple_kb']) {
-
-
+        $default_multiple_kb = Helper::get_betterdocs_multiple_kb_status();
+        
+        if($default_multiple_kb && $settings['multiple_kb']) {
 
             $taxonomy_objects = Helper::get_multiple_kb_terms(false, false);
             $taxonomy_objects = Helper::get_filtered_kb_terms($settings['multiple_kb_list'], $taxonomy_objects);
@@ -1619,7 +1619,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                         if($settings['show_icon']) {
 
                             $cat_icon_id = get_term_meta( $term->term_id, 'knowledge_base_image-id', true);
-					
+                    
                             if($cat_icon_id){
 
                                 $$cat_icon = wp_get_attachment_image ( $cat_icon_id, 'thumbnail' );
@@ -1638,7 +1638,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                         }
 
                         $cat_desc = get_theme_mod('betterdocs_doc_page_cat_desc');
-					
+                    
                         if ( $cat_desc == true ) {
 
                             echo '<p class="cat-description">'.$term->description.'</p>';
