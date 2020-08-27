@@ -104,9 +104,9 @@ class Login_Register extends Widget_Base {
 
 	public function get_script_depends() {
 		$scripts   = parent::get_script_depends();
-		$scripts[] = 'eael-recaptcha'; //@TODO; debug later why this does not let recaptcha work on editor.
+		$scripts[] = 'eael-recaptcha';
 
-		return $scripts;
+		return apply_filters('eael/login-register/scripts', $scripts);
 	}
 
 

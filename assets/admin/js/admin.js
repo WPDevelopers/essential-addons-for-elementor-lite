@@ -244,24 +244,7 @@
                             <input value="${rSecret}" name="lr_recaptcha_secret" id="lr_recaptcha_secret" placeholder="${lr_i18n.r_sitesecret}"/><br/>
                         </div>
                     `;
-        if (isProEnable){
-            html += `<hr>
-                        <h2>${lr_i18n.g_title}</h2>
-                        <div class="sf-group">
-                            <label for="lr_g_client_id">${lr_i18n.g_cid}:</label>
-                            <input value="${gClientId}" name="lr_g_client_id" id="lr_g_client_id" placeholder="${lr_i18n.g_cid}"/><br/>
-                        </div>
-                        <hr>
-                        <h2>${lr_i18n.f_title}</h2>
-                        <div class="sf-group">
-                            <label for="lr_fb_app_id">${lr_i18n.f_app_id}:</label>
-                            <input value="${fbAppId}" name="lr_fb_app_id" id="lr_fb_app_id" placeholder="${lr_i18n.f_app_id}"/><br/>
-                        </div>
-                        <div class="sf-group">
-                            <label for="lr_fb_app_secret">${lr_i18n.f_app_secret}:</label>
-                            <input value="${fbAppSecret}" name="lr_fb_app_secret" id="lr_fb_app_secret" placeholder="${lr_i18n.f_app_secret}"/><br/>
-                        </div>`;
-        }
+
         html  += '</div>'
 
         Swal.fire({
