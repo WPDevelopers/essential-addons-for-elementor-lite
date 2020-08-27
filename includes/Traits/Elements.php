@@ -318,6 +318,10 @@ trait Elements
         $global_settings = get_option('eael_global_settings');
 
         foreach ($this->loaded_templates as $post_id) {
+            if (get_post_status($post_id) === false) {
+                continue;
+            }
+            
             if (Shared::is_prevent_load_extension($post_id)) {
                 continue;
             }
