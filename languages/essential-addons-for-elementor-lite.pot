@@ -6160,7 +6160,7 @@ msgid "Install Templately by Essential Addons to get access to the templates lib
 msgstr ""
 
 #: ../includes/Traits/Admin.php:152
-msgid "Login | Register Settings"
+msgid "Login | Register Form Settings"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:153
@@ -6176,7 +6176,7 @@ msgid "Cancel"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:156
-msgid "Login | Register Settings Saved"
+msgid "Login | Register Form Settings Saved"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:157

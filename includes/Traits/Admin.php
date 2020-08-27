@@ -149,11 +149,11 @@ trait Admin
             $i18n = [
                     'login_register' => [
 	                        //m=modal, rm=response modal, r=reCAPTCHA, g= google, f=facebook, e=error
-                            'm_title' => __('Login | Register Settings', 'essential-addons-for-elementor-lite'),
+                            'm_title' => __('Login | Register Form Settings', 'essential-addons-for-elementor-lite'),
                             'm_footer' => __('To retrieve your API Keys, click here', 'essential-addons-for-elementor-lite'),
                             'save' => __('Save', 'essential-addons-for-elementor-lite'),
                             'cancel' => __('Cancel', 'essential-addons-for-elementor-lite'),
-                            'rm_title' => __('Login | Register Settings Saved', 'essential-addons-for-elementor-lite'),
+                            'rm_title' => __('Login | Register Form Settings Saved', 'essential-addons-for-elementor-lite'),
                             'rm_footer' => __('Reload the page to see updated data', 'essential-addons-for-elementor-lite'),
                             'e_title' => __('Oops...', 'essential-addons-for-elementor-lite'),
                             'e_text' => __('Something went wrong!', 'essential-addons-for-elementor-lite'),
