@@ -1838,9 +1838,32 @@ class Product_Grid extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_product_popup_review_link_color',
+			[
+				'label'     => __('Review Link Color', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ccc',
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-popup .product_meta a.woocommerce-review-link, {{WRAPPER}} .eael-product-popup .product_meta a' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		$this->add_control(
+			'eael_product_popup_review_link_color',
+			[
+				'label'     => __('Review Link Hover', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ccc',
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-popup .product_meta a.woocommerce-review-link:hover, {{WRAPPER}} .eael-product-popup .product_meta a:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_product_popup_table_border_color',
 			[
-				'label'     => __('Table Border Color', 'essential-addons-for-elementor-lite'),
+				'label'     => __('Border Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ccc',
 				'selectors' => [

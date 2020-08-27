@@ -609,6 +609,11 @@
         div.images {
             width: 100%;
             margin-bottom: 0;
+
+            &.woocommerce-product-gallery .flex-viewport {
+                transform-style: preserve-3d;
+                margin-bottom: 1em;
+            }
         }
 
         div.woocommerce-product-gallery--columns-4 .flex-control-thumbs li {
@@ -696,11 +701,23 @@
 
                 .qty {
                     text-align: center;
+
+                    &:focus {
+                        outline: none;
+                        border: none;
+                    }
                 }
             }
 
             .button.single_add_to_cart_button {
                 padding: 10px 40px;
+            }
+
+            .product-single-quantity {
+                button.plus,
+                button.minus {
+                    display: none;
+                }
             }
         }
 
