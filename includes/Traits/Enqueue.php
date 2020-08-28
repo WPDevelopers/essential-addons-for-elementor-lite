@@ -77,6 +77,10 @@ trait Enqueue
 
     public function enqueue_scripts()
     {
+        if (!apply_filters('eael/active_plugins', 'elementor/elementor.php')) {
+            return;
+        }
+
         if ($this->is_running_background()) {
             return;
         }
