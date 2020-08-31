@@ -36,6 +36,20 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="'.get_the_ID
         
         if($settings['show_list'] === 'true') {
             echo '<div class="eael-bd-cg-body">';
+
+            $multiple_kb = Helper::get_betterdocs_multiple_kb_status();
+
+		    if ( $multiple_kb == true ) {
+
+                $taxes = array( 'knowledge_base', 'doc_category' );
+
+                foreach ( $taxes as $tax ) {
+                    $kterms = get_terms( $tax );
+                
+                    foreach ( $kterms as $kterm )
+                        $tax_map[$tax][$kterm->slug] = $kterm->term_taxonomy_id;
+                }
+
                 $args = array(
                     'post_type'   => 'docs',
                     'post_status' => 'publish',
@@ -43,15 +57,24 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="'.get_the_ID
                     'orderby'   => $settings['post_orderby'],
                     'order' => $settings['post_order'],
                     'tax_query' => array(
+                    'relation' => 'AND',
+                        array(
+                            'taxonomy' => 'knowledge_base',
+                            'field' => 'term_taxonomy_id',
+                            'terms' => array( $tax_map['knowledge_base'][$settings['selected_knowledge_base']] ),
+                            'operator' => 'IN',
+                            'include_children'  => false,
+                        ),
                         array(
                             'taxonomy' => 'doc_category',
-                            'field'    => 'slug',
-                            'terms'    => $term->slug,
-                            'operator'          => 'AND',
-                            'include_children'  => false
+                            'field' => 'term_taxonomy_id',
+                            'operator' => 'IN',
+                            'terms' => array( $tax_map['doc_category'][$term->slug] ),
+                            'include_children'  => false,
                         ),
-                    ),
+                    )
                 );
+            }
 
                 $query = new \WP_Query( $args );
                 if ( $query->have_posts() ) {
@@ -143,7 +166,9 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="'.get_the_ID
 
         echo '<div class="eael-bd-cg-footer">';
         if($settings['show_button']) {
-            echo '<a class="eael-bd-cg-button" href="'.get_term_link( $term->slug, 'doc_category' ).'">';
+            $button_link = str_replace('%knowledge_base%', $settings['selected_knowledge_base'], get_term_link( $term->slug, 'doc_category' ));
+            
+            echo '<a class="eael-bd-cg-button" href="'.$button_link.'">';
 
             if($settings['icon_position'] === 'before') {
                 if(isset($settings['button_icon']['value']['url']) && !empty($settings['button_icon']['value']['url'])) {
