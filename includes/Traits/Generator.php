@@ -143,7 +143,10 @@ trait Generator
 
                 if ($element['widgetType'] === 'global') {
                     $document = Plugin::$instance->documents->get($element['templateID']);
-                    $collections = array_merge($collections, $this->collect_recursive_elements($document->get_elements_data()));
+
+                    if ($document !== null) {
+                        $collections = array_merge($collections, $this->collect_recursive_elements($document->get_elements_data()));
+                    }
                 } else {
                     $collections[] = $element['widgetType'];
                 }
