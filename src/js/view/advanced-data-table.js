@@ -128,11 +128,6 @@ class advancedDataTable {
 					let classList = e.target.classList;
 					let collection = [];
 					let origTable = table.cloneNode(true);
-					let paginationType = pagination.classList.contains(
-						"ea-advanced-data-table-pagination-button"
-					)
-						? "button"
-						: "select";
 
 					if (classList.contains("asc")) {
 						e.target.classList.remove("asc");
@@ -148,6 +143,12 @@ class advancedDataTable {
 					}
 
 					if (pagination && pagination.innerHTML.length > 0) {
+						let paginationType = pagination.classList.contains(
+							"ea-advanced-data-table-pagination-button"
+						)
+							? "button"
+							: "select";
+
 						currentPage =
 							paginationType == "button"
 								? pagination.querySelector(

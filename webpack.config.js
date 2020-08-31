@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const wpPot = require('wp-pot');
 const outputEntry = () => {
 	let paths = {};
 
@@ -111,3 +112,11 @@ module.exports = (env, argv) => {
 		},
 	};
 };
+// Generate .pot
+wpPot({
+    destFile: 'languages/essential-addons-for-elementor-lite.pot',
+    domain: 'essential-addons-for-elementor-lite',
+    package: 'Essential Addons For Elementor Lite',
+    src: '**/*.php'
+});
+
