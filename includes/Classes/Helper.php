@@ -671,32 +671,6 @@ class Helper
         return $taxonomy_objects;
     }
 
-    public static function get_filtered_kb_terms($selected_terms, $terms)
-    {
-
-        if( count($selected_terms) > 0 ) {
-            $new_terms = [];
-
-            for($i = 0; $i < count($selected_terms); $i++) {
-
-                for($j = 0; $j < count($terms); $j++) {
-
-                    if($selected_terms[$i] == $terms[$j]->slug) {
-                        $new_terms[] = $terms[$j];
-                    }
-
-                    continue;
-                }
-
-            }
-
-            return $new_terms;
-        }
-
-        return $terms;
-        
-    }
-
     public static function get_betterdocs_multiple_kb_status()
     {
         if(\BetterDocs_DB::get_settings('multiple_kb') == 1) {
