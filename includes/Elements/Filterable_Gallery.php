@@ -788,7 +788,7 @@ class Filterable_Gallery extends Widget_Base
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         '1' => [
-                            'title' => __('', 'essential-addons-for-elementor-lite'),
+                            'title' => '',
                             'icon' => 'fa fa-unlock-alt',
                         ],
                     ],
@@ -1803,6 +1803,8 @@ class Filterable_Gallery extends Widget_Base
                 ],
             ]
         );
+
+
 
         $this->add_group_control(
             Group_Control_Border::get_type(),
@@ -3278,133 +3280,158 @@ class Filterable_Gallery extends Widget_Base
     { ?>
         <script type="text/javascript">
             jQuery(document).ready(function($) {
-                $('.eael-filter-gallery-container').each(function() {
-                    var $node_id = '<?php echo $this->get_id(); ?>',
-                        $scope = $('[data-id="' + $node_id + '"]'),
-                        $gallery = $(this),
-                        $settings = $gallery.data('settings'),
-                        $gallery_items = $gallery.data('gallery-items'),
-                        $layout_mode = ($settings.grid_style == 'masonry' ? 'masonry' : 'fitRows'),
-                        $gallery_enabled = ($settings.gallery_enabled == 'yes' ? true : false),
-                        input = $scope.find('#fg-search-box-input'),
-                        searchRegex, buttonFilter, timer;
+                        $('.eael-filter-gallery-container').each(function() {
+                                    var $node_id = '<?php echo $this->get_id(); ?>',
+                                        $scope = $('[data-id="' + $node_id + '"]'),
+                                        $gallery = $(this),
+                                        $settings = $gallery.data('settings'),
+                                        $gallery_items = $gallery.data('gallery-items'),
+                                        $layout_mode = ($settings.grid_style == 'masonry' ? 'masonry' : 'fitRows'),
+                                        $gallery_enabled = ($settings.gallery_enabled == 'yes' ? true : false),
+                                        input = $scope.find('#fg-search-box-input'),
+                                        searchRegex, buttonFilter, timer;
 
-                    if ($gallery.closest($scope).length < 1) {
-                        return;
-                    }
+                                    <<
+                                    <<
+                                    <<
+                                    <
+                                    HEAD
+                                    if ($gallery.closest($scope).length < 1) {
+                                        return;
+                                    }
 
-                    // init isotope
-                    var layoutMode = $('.eael-filter-gallery-wrapper').data('layout-mode');
-                    var mfpCaption = $('.eael-filter-gallery-wrapper').data('mfp_caption');
+                                    // init isotope
+                                    var layoutMode = $('.eael-filter-gallery-wrapper').data('layout-mode');
+                                    var mfpCaption = $('.eael-filter-gallery-wrapper').data('mfp_caption');
 
-                    var $isotope_gallery = $gallery.isotope({
-                        itemSelector: '.eael-filterable-gallery-item-wrap',
-                        layoutMode: $layout_mode,
-                        percentPosition: true,
-                        filter: function() {
-                            var $this = $(this);
-                            var $result = searchRegex ? $this.text().match(searchRegex) : true;
+                                    var $isotope_gallery = $gallery.isotope({
+                                            itemSelector: '.eael-filterable-gallery-item-wrap',
+                                            layoutMode: $layout_mode,
+                                            percentPosition: true,
+                                            filter: function() {
+                                                ===
+                                                ===
+                                                =
+                                                if ($gallery.closest($scope).length < 1) {
+                                                    return;
+                                                }
 
-                            if (buttonFilter == undefined) {
-                                if (layoutMode != 'layout_3') {
-                                    buttonFilter = $scope.find('.eael-filter-gallery-control ul li').first().data('filter');
-                                } else {
-                                    buttonFilter = $scope.find('.fg-layout-3-filter-controls li').first().data('filter');
-                                }
-                            }
+                                                // init isotope
+                                                var layoutMode = $('.eael-filter-gallery-wrapper').data('layout-mode');
+                                                var mfpCaption = $('.eael-filter-gallery-wrapper').data('mfp_caption');
 
-                            var buttonResult = buttonFilter ? $this.is(buttonFilter) : true;
-                            return $result && buttonResult;
-                        }
-                    });
+                                                var $isotope_gallery = $gallery.isotope({
+                                                    itemSelector: '.eael-filterable-gallery-item-wrap',
+                                                    layoutMode: $layout_mode,
+                                                    percentPosition: true,
+                                                    filter: function() {
+                                                        >>>
+                                                        >>>
+                                                        >
+                                                        origin
+                                                        var $this = $(this);
+                                                        var $result = searchRegex ? $this.text().match(searchRegex) : true;
 
-                    // Popup
-                    $($scope).magnificPopup({
-                        delegate: ".eael-magnific-link",
-                        type: "image",
-                        gallery: {
-                            enabled: $gallery_enabled
-                        },
-                        image: {
-                            titleSrc: function(item) {
-                                if (mfpCaption == "yes") {
-                                    return item.el.parents('.gallery-item-caption-over').find('.fg-item-title').html() || item.el.parents('.gallery-item-caption-wrap').find('.fg-item-title').html() || item.el.parents('.eael-filterable-gallery-item-wrap').find('.fg-item-title').html();
+                                                        if (buttonFilter == undefined) {
+                                                            if (layoutMode != 'layout_3') {
+                                                                buttonFilter = $scope.find('.eael-filter-gallery-control ul li').first().data('filter');
+                                                            } else {
+                                                                buttonFilter = $scope.find('.fg-layout-3-filter-controls li').first().data('filter');
+                                                            }
+                                                        }
 
-                                }
-                            }
-                        }
-                    });
+                                                        var buttonResult = buttonFilter ? $this.is(buttonFilter) : true;
+                                                        return $result && buttonResult;
+                                                    }
+                                                });
 
-                    // filter
-                    $scope.on("click", ".control", function() {
-                        var $this = $(this);
-                        buttonFilter = $(this).attr('data-filter');
-                        //delegateAbc = $(this).attr('data-filter') + ' a.eael-magnific-link';
+                                                // Popup
+                                                $($scope).magnificPopup({
+                                                    delegate: ".eael-magnific-link",
+                                                    type: "image",
+                                                    gallery: {
+                                                        enabled: $gallery_enabled
+                                                    },
+                                                    image: {
+                                                        titleSrc: function(item) {
+                                                            if (mfpCaption == "yes") {
+                                                                return item.el.parents('.gallery-item-caption-over').find('.fg-item-title').html() || item.el.parents('.gallery-item-caption-wrap').find('.fg-item-title').html() || item.el.parents('.eael-filterable-gallery-item-wrap').find('.fg-item-title').html();
 
-                        if ($scope.find('#fg-filter-trigger > span')) {
-                            $scope.find('#fg-filter-trigger > span').text($this.text());
-                        }
+                                                            }
+                                                        }
+                                                    }
+                                                });
 
-                        $this.siblings().removeClass("active");
-                        $this.addClass("active");
+                                                // filter
+                                                $scope.on("click", ".control", function() {
+                                                    var $this = $(this);
+                                                    buttonFilter = $(this).attr('data-filter');
+                                                    //delegateAbc = $(this).attr('data-filter') + ' a.eael-magnific-link';
 
-                        $isotope_gallery.isotope();
-                    });
+                                                    if ($scope.find('#fg-filter-trigger > span')) {
+                                                        $scope.find('#fg-filter-trigger > span').text($this.text());
+                                                    }
 
-                    //quick search
-                    input.on('input', function() {
-                        var $this = $(this);
+                                                    $this.siblings().removeClass("active");
+                                                    $this.addClass("active");
 
-                        clearTimeout(timer);
-                        timer = setTimeout(function() {
-                            searchRegex = new RegExp($this.val(), 'gi');
-                            $isotope_gallery.isotope();
-                        }, 600);
+                                                    $isotope_gallery.isotope();
+                                                });
 
-                    });
+                                                //quick search
+                                                input.on('input', function() {
+                                                    var $this = $(this);
 
-                    // not necessary, just in case
-                    $isotope_gallery.imagesLoaded().progress(function() {
-                        $isotope_gallery.isotope('layout');
-                    });
+                                                    clearTimeout(timer);
+                                                    timer = setTimeout(function() {
+                                                        searchRegex = new RegExp($this.val(), 'gi');
+                                                        $isotope_gallery.isotope();
+                                                    }, 600);
 
-                    // resize
-                    $('.eael-filterable-gallery-item-wrap', $gallery).resize(function() {
-                        $isotope_gallery.isotope('layout');
-                    });
+                                                });
 
-                    // Load more button
-                    $scope.on('click', '.eael-gallery-load-more', function(e) {
-                        e.preventDefault();
+                                                // not necessary, just in case
+                                                $isotope_gallery.imagesLoaded().progress(function() {
+                                                    $isotope_gallery.isotope('layout');
+                                                });
 
-                        var $this = $(this),
-                            $init_show = $('.eael-filter-gallery-container', $scope).children('.eael-filterable-gallery-item-wrap').length,
-                            $total_items = $gallery.data('total-gallery-items'),
-                            $images_per_page = $gallery.data('images-per-page'),
-                            $nomore_text = $gallery.data('nomore-item-text'),
-                            $items = [];
+                                                // resize
+                                                $('.eael-filterable-gallery-item-wrap', $gallery).resize(function() {
+                                                    $isotope_gallery.isotope('layout');
+                                                });
 
-                        if ($init_show == $total_items) {
-                            $this.html('<div class="no-more-items-text">' + $nomore_text + '</div>');
-                            setTimeout(function() {
-                                $this.fadeOut('slow');
-                            }, 600);
-                        }
+                                                // Load more button
+                                                $scope.on('click', '.eael-gallery-load-more', function(e) {
+                                                    e.preventDefault();
 
-                        // new items html
-                        for (var i = $init_show; i < ($init_show + $images_per_page); i++) {
-                            $items.push($($gallery_items[i])[0]);
-                        }
+                                                    var $this = $(this),
+                                                        $init_show = $('.eael-filter-gallery-container', $scope).children('.eael-filterable-gallery-item-wrap').length,
+                                                        $total_items = $gallery.data('total-gallery-items'),
+                                                        $images_per_page = $gallery.data('images-per-page'),
+                                                        $nomore_text = $gallery.data('nomore-item-text'),
+                                                        $items = [];
 
-                        // append items
-                        $gallery.append($items)
-                        $isotope_gallery.isotope('appended', $items)
-                        $isotope_gallery.imagesLoaded().progress(function() {
-                            $isotope_gallery.isotope('layout')
-                        })
-                    });
-                });
-            });
+                                                    if ($init_show == $total_items) {
+                                                        $this.html('<div class="no-more-items-text">' + $nomore_text + '</div>');
+                                                        setTimeout(function() {
+                                                            $this.fadeOut('slow');
+                                                        }, 600);
+                                                    }
+
+                                                    // new items html
+                                                    for (var i = $init_show; i < ($init_show + $images_per_page); i++) {
+                                                        $items.push($($gallery_items[i])[0]);
+                                                    }
+
+                                                    // append items
+                                                    $gallery.append($items)
+                                                    $isotope_gallery.isotope('appended', $items)
+                                                    $isotope_gallery.imagesLoaded().progress(function() {
+                                                        $isotope_gallery.isotope('layout')
+                                                    })
+                                                });
+                                            });
+                                    });
         </script>
 <?php
     }

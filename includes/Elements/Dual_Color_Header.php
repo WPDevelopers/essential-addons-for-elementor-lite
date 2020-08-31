@@ -796,74 +796,74 @@ class Dual_Color_Header extends Widget_Base
         }
         $separator_markup .= '</div>'; ?>
 
-	<?php if ('dch-default' == $settings['eael_dch_type']): ?>
-	<div class="eael-dual-header">
-		<?php echo($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
-		<<?php echo $settings['title_tag']; ?> class="title"><span class="lead"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo $settings['title_tag']; ?>>
-		<?php echo($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
-	   <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
-	   <?php if ('yes' == $settings['eael_show_dch_icon_content']): ?>
-			<?php if ($icon_is_new || $icon_migrated) {?>
-				<?php if (isset($settings['eael_dch_icon_new']['value']['url'])): ?>
-					<img src="<?php echo esc_attr($settings['eael_dch_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_dch_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>"/>
-				<?php else: ?>
-					<i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
-				<?php endif;?>
-			<?php } else {?>
-				<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
-			<?php } ?>
-		<?php endif; ?>
-	</div>
-	<?php endif; ?>
+        <?php if ('dch-default' == $settings['eael_dch_type']) : ?>
+            <div class="eael-dual-header">
+                <?php echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
+                <<?php echo $settings['title_tag']; ?> class="title"><span class="lead"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo $settings['title_tag']; ?>>
+                <?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
+                <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
+                <?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
+                    <?php if ($icon_is_new || $icon_migrated) { ?>
+                        <?php if (isset($settings['eael_dch_icon_new']['value']['url'])) : ?>
+                            <img src="<?php echo esc_attr($settings['eael_dch_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_dch_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                        <?php else : ?>
+                            <i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
+                        <?php endif; ?>
+                    <?php } else { ?>
+                        <i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
+                    <?php } ?>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
 
-	<?php if ('dch-icon-on-top' == $settings['eael_dch_type']): ?>
-	<div class="eael-dual-header">
-		<?php if ('yes' == $settings['eael_show_dch_icon_content']): ?>
-			<?php if ($icon_is_new || $icon_migrated) {?>
-				<i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
-			<?php } else {?>
-				<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
-			<?php } ?>
-		<?php endif; ?>
-		<?php echo($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
-		<<?php echo $settings['title_tag']; ?> class="title"><span class="lead"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo $settings['title_tag']; ?>>
-		<?php echo($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
-		<span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
-	</div>
-	<?php endif; ?>
+        <?php if ('dch-icon-on-top' == $settings['eael_dch_type']) : ?>
+            <div class="eael-dual-header">
+                <?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
+                    <?php if ($icon_is_new || $icon_migrated) { ?>
+                        <i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
+                    <?php } else { ?>
+                        <i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
+                    <?php } ?>
+                <?php endif; ?>
+                <?php echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
+                <<?php echo $settings['title_tag']; ?> class="title"><span class="lead"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo $settings['title_tag']; ?>>
+                <?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
+                <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
+            </div>
+        <?php endif; ?>
 
-	<?php if ('dch-icon-subtext-on-top' == $settings['eael_dch_type']): ?>
-	<div class="eael-dual-header">
-		<?php if ('yes' == $settings['eael_show_dch_icon_content']): ?>
-			<?php if ($icon_is_new || $icon_migrated) {?>
-				<i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
-			<?php } else {?>
-				<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
-			<?php } ?>
-		<?php endif; ?>
-	   <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
-	   <?php echo($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
-	   <<?php echo $settings['title_tag']; ?> class="title"><span class="lead"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo $settings['title_tag']; ?>>
-	   <?php echo($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
-	</div>
-	<?php endif; ?>
+        <?php if ('dch-icon-subtext-on-top' == $settings['eael_dch_type']) : ?>
+            <div class="eael-dual-header">
+                <?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
+                    <?php if ($icon_is_new || $icon_migrated) { ?>
+                        <i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
+                    <?php } else { ?>
+                        <i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
+                    <?php } ?>
+                <?php endif; ?>
+                <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
+                <?php echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
+                <<?php echo $settings['title_tag']; ?> class="title"><span class="lead"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo $settings['title_tag']; ?>>
+                <?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
+            </div>
+        <?php endif; ?>
 
-	<?php if ('dch-subtext-on-top' == $settings['eael_dch_type']): ?>
-	<div class="eael-dual-header">
-	   <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
-			<?php echo($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
-			<<?php echo $settings['title_tag']; ?> class="title"><span class="lead"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo $settings['title_tag']; ?>>
-			<?php echo($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
-			<?php if ('yes' == $settings['eael_show_dch_icon_content']): ?>
-			<?php if ($icon_is_new || $icon_migrated) {?>
-				<i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
-			<?php } else {?>
-				<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
-			<?php } ?>
-		<?php endif; ?>
-	</div>
-	<?php endif; ?>
+        <?php if ('dch-subtext-on-top' == $settings['eael_dch_type']) : ?>
+            <div class="eael-dual-header">
+                <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
+                <?php echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
+                <<?php echo $settings['title_tag']; ?> class="title"><span class="lead"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo $settings['title_tag']; ?>>
+                <?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
+                <?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
+                    <?php if ($icon_is_new || $icon_migrated) { ?>
+                        <i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
+                    <?php } else { ?>
+                        <i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
+                    <?php } ?>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
 
-	<?php
+<?php
     }
 }

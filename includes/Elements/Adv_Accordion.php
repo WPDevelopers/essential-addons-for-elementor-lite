@@ -273,8 +273,8 @@ class Adv_Accordion extends Widget_Base
                     'type'        => Controls_Manager::CHOOSE,
                     'options'     => [
                         '1' => [
-                            'title' => __('', 'essential-addons-for-elementor-lite'),
-                            'icon'  => 'fa fa-unlock-alt',
+                            'title' => '',
+                            'icon' => 'fa fa-unlock-alt',
                         ],
                     ],
                     'default'     => '1',
@@ -896,11 +896,13 @@ class Adv_Accordion extends Widget_Base
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
-                'name'     => 'eael_adv_tabs_tab_toggle_border',
-                'label'    => __('Border', 'essential-addons-for-elementor-lite'),
+                'name' => 'eael_adv_tabs_tab_toggle_border',
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle',
             ]
         );
+
+
 
         $this->end_controls_tab();
 
@@ -941,11 +943,12 @@ class Adv_Accordion extends Widget_Base
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
-                'name'     => 'eael_adv_tabs_tab_toggle_border_hover',
-                'label'    => __('Border', 'essential-addons-for-elementor-lite'),
+                'name' => 'eael_adv_tabs_tab_toggle_border_hover',
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle:hover',
             ]
         );
+
 
         $this->end_controls_tab();
 
@@ -987,11 +990,12 @@ class Adv_Accordion extends Widget_Base
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
-                'name'     => 'eael_adv_tabs_tab_toggle_border_active',
-                'label'    => __('Border', 'essential-addons-for-elementor-lite'),
+                'name' => 'eael_adv_tabs_tab_toggle_border_active',
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle',
             ]
         );
+
 
         $this->end_controls_tab();
 
