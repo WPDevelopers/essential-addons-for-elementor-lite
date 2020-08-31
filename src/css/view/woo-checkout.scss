@@ -313,6 +313,14 @@ $base-font-size: 14px;
 					padding: 0 10px;
 				}
 
+				.subscription-price {
+					.subscription-details {
+						display: block;
+						font-size: .8em;
+						line-height: 1.2rem;
+					}
+				}
+
 				@media all and (max-width: 767px) {
 					overflow-y: auto;
 
@@ -369,11 +377,32 @@ $base-font-size: 14px;
 					}
 				}
 
-				.shipping-area, .order-total, .cart-subtotal, .cart-discount {
+				.shipping-area, .order-total, .cart-subtotal, .cart-discount, .tax-rate {
 					display: flex;
 					justify-content: space-between;
 					border-top: 1px solid inherit;
 					padding: 3px 0;
+				}
+
+				.recurring-wrapper {
+					margin-bottom: 0;
+					tr {
+						display: table;
+						width: 100%;
+					}
+					th {
+						padding-left: 0;
+					}
+
+					td {
+						padding-right: 0;
+						text-align: right;
+						font-size: .7em;
+
+						.amount {
+							display: block;
+						}
+					}
 				}
 
 				.woocommerce-shipping-methods {
