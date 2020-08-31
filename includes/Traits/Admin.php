@@ -142,11 +142,36 @@ trait Admin
             wp_enqueue_style('sweetalert2-css', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/css/sweetalert2.min.css', false, EAEL_PLUGIN_VERSION);
             wp_enqueue_script('sweetalert2-js', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array('jquery', 'sweetalert2-core-js'), EAEL_PLUGIN_VERSION, true);
             wp_enqueue_script('sweetalert2-core-js', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/js/core.js', array('jquery'), EAEL_PLUGIN_VERSION, true);
+
             wp_enqueue_script('essential_addons_elementor-admin-js', EAEL_PLUGIN_URL . '/assets/admin/js/admin.js', array('jquery'), EAEL_PLUGIN_VERSION, true);
+
+            //Internationalizing JS string translation
+            $i18n = [
+                    'login_register' => [
+	                        //m=modal, rm=response modal, r=reCAPTCHA, g= google, f=facebook, e=error
+                            'm_title' => __('Login | Register Form Settings', 'essential-addons-for-elementor-lite'),
+                            'm_footer' => __('To retrieve your API Keys, click here', 'essential-addons-for-elementor-lite'),
+                            'save' => __('Save', 'essential-addons-for-elementor-lite'),
+                            'cancel' => __('Cancel', 'essential-addons-for-elementor-lite'),
+                            'rm_title' => __('Login | Register Form Settings Saved', 'essential-addons-for-elementor-lite'),
+                            'rm_footer' => __('Reload the page to see updated data', 'essential-addons-for-elementor-lite'),
+                            'e_title' => __('Oops...', 'essential-addons-for-elementor-lite'),
+                            'e_text' => __('Something went wrong!', 'essential-addons-for-elementor-lite'),
+                            'r_title' => __('reCAPTCHA v2', 'essential-addons-for-elementor-lite'),
+                            'r_sitekey' => __('Site Key', 'essential-addons-for-elementor-lite'),
+                            'r_sitesecret' => __('Site Secret', 'essential-addons-for-elementor-lite'),
+                            'g_title' => __('Google Login', 'essential-addons-for-elementor-lite'),
+                            'g_cid' => __('Google Client ID', 'essential-addons-for-elementor-lite'),
+                            'f_title' => __('Facebook Login', 'essential-addons-for-elementor-lite'),
+                            'f_app_id' => __('Facebook APP ID', 'essential-addons-for-elementor-lite'),
+                            'f_app_secret' => __('Facebook APP Secret', 'essential-addons-for-elementor-lite'),
+                    ]
+            ];
 
             wp_localize_script('essential_addons_elementor-admin-js', 'localize', array(
                 'ajaxurl' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('essential-addons-elementor'),
+                'i18n' => $i18n,
             ));
         }
     }
@@ -205,45 +230,60 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
      */
     public function save_settings()
     {
-        check_ajax_referer('essential-addons-elementor', 'security');
+	    check_ajax_referer('essential-addons-elementor', 'security');
 
         if (!isset($_POST['fields'])) {
             return;
         }
 
         parse_str($_POST['fields'], $settings);
-        
-        // Recaptcha Related stuff
-        $r_keys = !empty($settings['eael_recaptcha_keys']) ? explode(':', sanitize_text_field($settings['eael_recaptcha_keys'])) : [];
-        $eael_recaptcha_site_key = !empty($r_keys[0]) ? sanitize_text_field($r_keys[0]) : '';
-        $eael_recaptcha_secret = !empty($r_keys[1]) ? sanitize_text_field($r_keys[1]) : '';
 
-        // Saving recaptcha keys
-        update_option('eael_recaptcha_sitekey', $eael_recaptcha_site_key);
-        update_option('eael_recaptcha_secret', $eael_recaptcha_secret);
+	    if ( !empty( $_POST['is_login_register']) ) {
+		    // Saving Login | Register Related Data
+		    if ( isset( $settings['recaptchaSiteKey']) ) {
+			    update_option( 'eael_recaptcha_sitekey', sanitize_text_field( $settings['recaptchaSiteKey']));
+		    }
+		    if ( isset( $settings['recaptchaSiteSecret']) ) {
+			    update_option( 'eael_recaptcha_secret', sanitize_text_field( $settings['recaptchaSiteSecret']));
+            }
+            
+		    //pro settings
+		    if ( isset( $settings['gClientId']) ) {
+			    update_option( 'eael_g_client_id', sanitize_text_field( $settings['gClientId']));
+		    }
+		    if ( isset( $settings['fbAppId'] ) ) {
+			    update_option( 'eael_fb_app_id', sanitize_text_field( $settings['fbAppId']));
+		    }
+		    if ( isset( $settings['fbAppSecret'] ) ) {
+			    update_option( 'eael_fb_app_secret', sanitize_text_field( $settings['fbAppSecret']));
+            }
+            
+		    wp_send_json_success( ['message'=> __('Login | Register Settings updated', 'essential-addons-for-elementor-lite')]);
+        }
+
 
         // Saving Google Map Api Key
-        if (!empty($settings['google-map-api'])) {
+        if (isset($settings['google-map-api'])) {
             update_option('eael_save_google_map_api', sanitize_text_field($settings['google-map-api']));
         }
 
         // Saving Mailchimp Api Key
-        if (!empty($settings['mailchimp-api'])) {
+        if (isset($settings['mailchimp-api'])) {
             update_option('eael_save_mailchimp_api', sanitize_text_field($settings['mailchimp-api']));
         }
 
         // Saving TYpeForm token
-        if (!empty($settings['typeform-personal-token'])) {
+        if (isset($settings['typeform-personal-token'])) {
             update_option('eael_save_typeform_personal_token', sanitize_text_field($settings['typeform-personal-token']));
         }
 
         // Saving Duplicator Settings
-        if (!empty($settings['post-duplicator-post-type'])) {
+        if (isset($settings['post-duplicator-post-type'])) {
             update_option('eael_save_post_duplicator_post_type', sanitize_text_field($settings['post-duplicator-post-type']));
         }
 
         // save js print method
-        if (!empty($settings['eael-js-print-method'])) {
+        if (isset($settings['eael-js-print-method'])) {
             update_option('eael_js_print_method', sanitize_text_field($settings['eael-js-print-method']));
         }
 

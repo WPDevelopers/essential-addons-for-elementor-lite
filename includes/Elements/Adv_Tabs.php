@@ -242,7 +242,7 @@ class Adv_Tabs extends Widget_Base
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         '1' => [
-                            'title' => __( '', 'essential-addons-for-elementor-lite'),
+                            'title' => '',
                             'icon' => 'fa fa-unlock-alt',
                         ],
                     ],
@@ -250,10 +250,10 @@ class Adv_Tabs extends Widget_Base
                     'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
                 ]
             );
-            
+
             $this->end_controls_section();
         }
-        
+
         /**
          * -------------------------------------------
          * Tab Style Advance Tabs Generel Style
@@ -266,7 +266,7 @@ class Adv_Tabs extends Widget_Base
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
-        
+
         $this->add_responsive_control(
             'eael_adv_tabs_padding',
             [
@@ -822,7 +822,7 @@ class Adv_Tabs extends Widget_Base
 				'default' => 'yes',
 			]
         );
-        
+
         $this->end_controls_section();
     }
 

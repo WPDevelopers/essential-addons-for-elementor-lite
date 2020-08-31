@@ -428,3 +428,48 @@
     opacity: 0.6;
   }
 }
+.lr-social-login-container {
+  margin-top: 1rem;
+}
+.lr-social-login-container .lr-separator {
+  width: 100%;
+  text-align: center;
+}
+.lr-social-login-container .lr-separator p {
+  padding: 0;
+  margin: 0;
+}
+.lr-social-login-container .lr-separator hr {
+  width: 100%;
+  height: 1px;
+  background: gray;
+}
+.lr-social-login-container .lr-social-buttons-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.lr-social-login-container .eael-social-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 100%;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+}
+.lr-social-login-container .eael-social-button.eael-google {
+  width: 175px;
+}
+.lr-social-login-container .eael-social-button.eael-facebook {
+  width: 190px;
+}
