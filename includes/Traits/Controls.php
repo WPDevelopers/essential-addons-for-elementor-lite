@@ -192,19 +192,9 @@ trait Controls
         $default_multiple_kb = Helper::get_betterdocs_multiple_kb_status();
 
         if($default_multiple_kb) {
-            $wb->add_control(
-                'multiple_kb',
-                [
-                    'label' => __('Multiple KB?', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
-                    'return_value' => 'true',
-                    'default' => $default_multiple_kb,
-                    'disable'  => true
-                ]
-            );
-    
+
+            $default_slug = count(Helper::get_multiple_kb_terms(true, false)) > 0 ? array_key_first(Helper::get_multiple_kb_terms(true, false)) : '';
+
             $wb->add_control(
                 'selected_knowledge_base',
                 [
@@ -213,10 +203,7 @@ trait Controls
                     'type' => Controls_Manager::SELECT2,
                     'options' => Helper::get_multiple_kb_terms(true, false),
                     'multiple' => false,
-                    'default' => [],
-                    'condition' => [
-                        'multiple_kb'   => 'true'
-                    ]
+                    'default' => $default_slug
                 ]
             );
         }

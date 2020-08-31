@@ -1606,7 +1606,7 @@ class Betterdocs_Category_Grid extends Widget_Base
 
         $default_multiple_kb = Helper::get_betterdocs_multiple_kb_status();
         
-        if($default_multiple_kb && $settings['multiple_kb']) {
+        if($default_multiple_kb) {
 
             $taxonomy_objects = Helper::get_multiple_kb_terms(false, false);
 
