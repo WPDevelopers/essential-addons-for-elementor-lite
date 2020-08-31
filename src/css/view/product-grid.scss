@@ -1593,6 +1593,12 @@ form.cart {
     .product-image-wrap {
         overflow: inherit;
     }
+
+    .product-details-wrap {
+        & > div:first-child {
+            margin-top: 20px;
+        }
+    }
 }
 
 &.grid.eael-product-preset-5,
