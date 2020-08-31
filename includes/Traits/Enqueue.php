@@ -168,7 +168,7 @@ trait Enqueue
 
                 // parse widgets from post
                 foreach ($posts as $post) {
-                    $widgets = $this->parse_widgets($post);
+                    $widgets = (array) $this->parse_widgets($post);
 
                     // loaded widgets stack
                     $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $widgets)));
@@ -247,7 +247,11 @@ trait Enqueue
 
                 // parse widgets from post
                 foreach ($this->loaded_templates as $post_id) {
-                    $widgets = $this->parse_widgets($post_id);
+                    if (get_post_status($post_id) === false) {
+                        continue;
+                    }
+                    
+                    $widgets = (array) $this->parse_widgets($post_id);
 
                     // loaded widgets stack
                     $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $widgets)));

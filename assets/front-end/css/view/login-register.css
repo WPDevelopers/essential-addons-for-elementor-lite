@@ -441,7 +441,8 @@
 }
 .lr-social-login-container .lr-separator hr {
   width: 100%;
-  border-bottom: 1px solid gray;
+  height: 1px;
+  background: gray;
 }
 .lr-social-login-container .lr-social-buttons-container {
   display: -webkit-box;

@@ -30,7 +30,7 @@ class Tooltip extends Widget_Base {
    	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
-    
+
 	public function get_keywords()
 	{
         return [
@@ -219,7 +219,7 @@ class Tooltip extends Widget_Base {
 				]
 			]
 		);
-		
+
 		$this->add_control(
 			'eael_tooltip_enable_link',
 			[
@@ -510,7 +510,7 @@ class Tooltip extends Widget_Base {
 					'type' => Controls_Manager::CHOOSE,
 					'options' => [
 						'1' => [
-							'title' => __( '', 'essential-addons-for-elementor-lite'),
+							'title' => '',
 							'icon' => 'fa fa-unlock-alt',
 						],
 					],
@@ -518,7 +518,7 @@ class Tooltip extends Widget_Base {
 					'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
 				]
 			);
-			
+
 			$this->end_controls_section();
 		}
 
@@ -692,7 +692,7 @@ class Tooltip extends Widget_Base {
    		$target = $settings['eael_tooltip_link']['is_external'] ? 'target="_blank"' : '';
 		$nofollow = $settings['eael_tooltip_link']['nofollow'] ? 'rel="nofollow"' : '';
 		$icon_migrated = isset($settings['__fa4_migrated']['eael_tooltip_icon_content_new']);
-		$icon_is_new = empty($settings['eael_tooltip_icon_content']);  
+		$icon_is_new = empty($settings['eael_tooltip_icon_content']);
 	?>
 	<div class="eael-tooltip">
 		<?php if( $settings['eael_tooltip_type'] === 'text' ) : ?>

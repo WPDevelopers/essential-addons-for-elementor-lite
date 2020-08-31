@@ -35,7 +35,7 @@ class Twitter_Feed extends Widget_Base
     {
         return ['essential-addons-elementor'];
     }
-    
+
     public function get_keywords() {
         return [
             'twitter',
@@ -307,7 +307,7 @@ class Twitter_Feed extends Widget_Base
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         '1' => [
-                            'title' => __('', 'essential-addons-for-elementor-lite'),
+                            'title' => '',
                             'icon' => 'fa fa-unlock-alt',
                         ],
                     ],
@@ -514,7 +514,7 @@ class Twitter_Feed extends Widget_Base
         echo '<div class="eael-twitter-feed eael-twitter-feed-' . $this->get_id() . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type'] . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type_col_type'] . ' clearfix" data-gutter="' . $settings['eael_twitter_feed_column_spacing']['size'] . '">
 			' . $this->twitter_feed_render_items($this->get_id(), $settings) . '
         </div>';
-        
+
         echo '<style>
             .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-2 .eael-twitter-feed-item {
                 width: calc(50% - ' . ceil($settings['eael_twitter_feed_column_spacing']['size'] / 2) . 'px);

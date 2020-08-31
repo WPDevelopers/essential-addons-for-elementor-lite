@@ -145,9 +145,33 @@ trait Admin
 
             wp_enqueue_script('essential_addons_elementor-admin-js', EAEL_PLUGIN_URL . '/assets/admin/js/admin.js', array('jquery'), EAEL_PLUGIN_VERSION, true);
 
+            //Internationalizing JS string translation
+            $i18n = [
+                    'login_register' => [
+	                        //m=modal, rm=response modal, r=reCAPTCHA, g= google, f=facebook, e=error
+                            'm_title' => __('Login | Register Form Settings', 'essential-addons-for-elementor-lite'),
+                            'm_footer' => __('To retrieve your API Keys, click here', 'essential-addons-for-elementor-lite'),
+                            'save' => __('Save', 'essential-addons-for-elementor-lite'),
+                            'cancel' => __('Cancel', 'essential-addons-for-elementor-lite'),
+                            'rm_title' => __('Login | Register Form Settings Saved', 'essential-addons-for-elementor-lite'),
+                            'rm_footer' => __('Reload the page to see updated data', 'essential-addons-for-elementor-lite'),
+                            'e_title' => __('Oops...', 'essential-addons-for-elementor-lite'),
+                            'e_text' => __('Something went wrong!', 'essential-addons-for-elementor-lite'),
+                            'r_title' => __('reCAPTCHA v2', 'essential-addons-for-elementor-lite'),
+                            'r_sitekey' => __('Site Key', 'essential-addons-for-elementor-lite'),
+                            'r_sitesecret' => __('Site Secret', 'essential-addons-for-elementor-lite'),
+                            'g_title' => __('Google Login', 'essential-addons-for-elementor-lite'),
+                            'g_cid' => __('Google Client ID', 'essential-addons-for-elementor-lite'),
+                            'f_title' => __('Facebook Login', 'essential-addons-for-elementor-lite'),
+                            'f_app_id' => __('Facebook APP ID', 'essential-addons-for-elementor-lite'),
+                            'f_app_secret' => __('Facebook APP Secret', 'essential-addons-for-elementor-lite'),
+                    ]
+            ];
+
             wp_localize_script('essential_addons_elementor-admin-js', 'localize', array(
                 'ajaxurl' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('essential-addons-elementor'),
+                'i18n' => $i18n,
             ));
         }
     }
@@ -231,7 +255,7 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
 		    if ( isset( $settings['fbAppSecret'] ) ) {
 			    update_option( 'eael_fb_app_secret', sanitize_text_field( $settings['fbAppSecret']));
 		    }
-		    wp_send_json_success( ['message'=> __('Login | Register Settings updated', EAEL_TEXTDOMAIN)]);
+		    wp_send_json_success( ['message'=> __('Login | Register Settings updated', 'essential-addons-for-elementor-lite')]);
         }
 
 
