@@ -144,7 +144,7 @@ trait Generator
                 if ($element['widgetType'] === 'global') {
                     $document = Plugin::$instance->documents->get($element['templateID']);
 
-                    if ($document !== null) {
+                    if (is_object($document)) {
                         $collections = array_merge($collections, $this->collect_recursive_elements($document->get_elements_data()));
                     }
                 } else {
@@ -168,14 +168,20 @@ trait Generator
     public function generate_script($widgets, $context, $ext)
     {
         // check if script exists
-        if (get_transient($this->uid() . '_loaded_widgets') == $widgets && $this->has_assets_files($this->uid(), $ext)) {
-            return;
-        }
+        if ($context == 'view') {
+            if (get_transient($this->uid() . '_loaded_widgets') == $widgets && $this->has_assets_files($this->uid(), $ext)) {
+                return;
+            }
 
-        // update loaded widgets data & sync update time with editor time
-        if ($ext == 'css') {
-            set_transient($this->uid() . '_loaded_widgets', $widgets);
-            set_transient($this->uid() . '_updated_at', get_transient('eael_editor_updated_at'));
+            // update loaded widgets data & sync update time with editor time
+            if ($ext == 'css') {
+                set_transient($this->uid() . '_loaded_widgets', $widgets);
+                set_transient($this->uid() . '_updated_at', get_transient('eael_editor_updated_at'));
+            }
+        } else if ($context == 'edit') {
+            if ($this->has_assets_files($this->uid('eael'), $ext)) {
+                return;
+            }
         }
 
         // if folder not exists, create new folder
