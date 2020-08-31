@@ -2,7 +2,6 @@ ea.hooks.addAction("init", "ea", () => {
     const EALoginRegister = function ($scope, $) {
 
         const $wrap = $scope.find('.eael-login-registration-wrapper');// cache wrapper
-        //const recaptchaEnabled = $wrap.data('is-recaptcha');
         const widgetId = $wrap.data('widget-id');
         const recaptchaSiteKey = $wrap.data('recaptcha-sitekey');
         const $loginFormWrapper = $scope.find("#eael-login-form-wrapper");
