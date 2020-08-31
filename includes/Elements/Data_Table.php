@@ -35,7 +35,7 @@ class Data_Table extends Widget_Base {
    	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
-    
+
     public function get_keywords() {
         return [
 			'table',
@@ -232,7 +232,7 @@ class Data_Table extends Widget_Base {
   				'label' => esc_html__( 'Content', 'essential-addons-for-elementor-lite')
   			]
 		  );
-		  
+
 		$repeater = new Repeater();
 
 		$repeater->add_control(
@@ -434,7 +434,7 @@ class Data_Table extends Widget_Base {
 					'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite')
 				]
 			);
-		
+
 			$this->add_control(
 				'eael_control_get_pro',
 				[
@@ -442,7 +442,7 @@ class Data_Table extends Widget_Base {
 					'type' => Controls_Manager::CHOOSE,
 					'options' => [
 						'1' => [
-							'title' => __( '', 'essential-addons-for-elementor-lite'),
+							'title' => '',
 							'icon' => 'fa fa-unlock-alt',
 						],
 					],
@@ -450,7 +450,7 @@ class Data_Table extends Widget_Base {
 					'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
 				]
 			);
-			
+
 			$this->end_controls_section();
 		}
 
@@ -594,7 +594,7 @@ class Data_Table extends Widget_Base {
 						],
 					]
 				);
-				
+
 				$this->add_group_control(
 					Group_Control_Border::get_type(),
 						[
@@ -605,7 +605,7 @@ class Data_Table extends Widget_Base {
 				);
 
 			$this->end_controls_tab();
-			
+
 			$this->start_controls_tab( 'eael_data_table_header_title_hover', [ 'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite') ] );
 
 				$this->add_control(
@@ -849,7 +849,7 @@ class Data_Table extends Widget_Base {
 				);
 
 			$this->end_controls_tab();
-			
+
 			$this->start_controls_tab('eael_data_table_odd_cell_hover_style', ['label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite')]);
 
 				$this->add_control(
@@ -1128,7 +1128,7 @@ class Data_Table extends Widget_Base {
 
 	  			$table_tr_keys = array_keys( $table_tr );
 				  $last_key = end( $table_tr_keys );
-				  
+
 				$tbody_content = ($content_row['eael_data_table_content_type'] == 'editor') ? $content_row['eael_data_table_content_row_content'] : $content_row['eael_data_table_content_row_title'];
 
 	  			$table_td[] = [
@@ -1146,7 +1146,7 @@ class Data_Table extends Widget_Base {
 					'tr_id'			=> $content_row['eael_data_table_content_row_css_id']
 	  			];
 	  		}
-		}  
+		}
 		$table_th_count = count($settings['eael_data_table_header_cols_data']);
 		$this->add_render_attribute('eael_data_table_wrap', [
 			'class'                  => 'eael-data-table-wrap',

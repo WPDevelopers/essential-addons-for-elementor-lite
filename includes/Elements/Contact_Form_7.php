@@ -272,7 +272,7 @@ class Contact_Form_7 extends Widget_Base
                         'type' => Controls_Manager::CHOOSE,
                         'options' => [
                             '1' => [
-                                'title' => __('', 'essential-addons-for-elementor-lite'),
+                                'title' => '',
                                 'icon' => 'fa fa-unlock-alt',
                             ],
                         ],
@@ -1533,7 +1533,7 @@ class Contact_Form_7 extends Widget_Base
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
-        
+
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -1630,7 +1630,7 @@ class Contact_Form_7 extends Widget_Base
                 'separator' => 'before',
             ]
         );
-        
+
         $this->end_controls_section();
 
     }
