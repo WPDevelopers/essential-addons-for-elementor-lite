@@ -224,66 +224,41 @@
     // New Sweet Alert Forms for admin settings | Login & Register Settings
     $(document).on('click', '#eael-admin-settings-popup-extended', function (e) {
         e.preventDefault();
+        const lr_i18n = localize.i18n.login_register;
         let settingsNodeId = $(this).data('settings-id');
         let $dnode = $('#'+settingsNodeId);
-        let isProEnable = $dnode.data('pro-enabled');
         let rSitekey = $dnode.data('r-sitekey');
         let rSecret = $dnode.data('r-secret');
-        let gClientId = $dnode.data('g-client-id');
-        let fbAppId = $dnode.data('fb-app-id');
-        let fbAppSecret = $dnode.data('fb-app-secret');
-        //@TODO; localize all js string translation later
+        let footerLink = `<a target="_blank" href="https://www.google.com/recaptcha/admin/create">${lr_i18n.m_footer}</a>`
+
         let html = `<div class="eael-lr-settings-fields" id="lr_settings_fields">
-                        <h2>reCAPTCHA</h2>
+                        <h2>${lr_i18n.r_title}</h2>
                         <div class="sf-group">
-                            <label for="lr_recaptcha_sitekey">Site Key:</label>
-                            <input value="${rSitekey}" name="lr_recaptcha_sitekey" id="lr_recaptcha_sitekey" placeholder="reCAPTCHA Site Key"/><br/>
+                            <label for="lr_recaptcha_sitekey">${lr_i18n.r_sitekey}:</label>
+                            <input value="${rSitekey}" name="lr_recaptcha_sitekey" id="lr_recaptcha_sitekey" placeholder="${lr_i18n.r_sitekey}"/><br/>
                         </div>
                         <div class="sf-group">
-                            <label for="lr_recaptcha_secret">Secret Key:</label>
-                            <input value="${rSecret}" name="lr_recaptcha_secret" id="lr_recaptcha_secret" placeholder="reCAPTCHA Site Secret"/><br/>
+                            <label for="lr_recaptcha_secret">${lr_i18n.r_sitesecret}:</label>
+                            <input value="${rSecret}" name="lr_recaptcha_secret" id="lr_recaptcha_secret" placeholder="${lr_i18n.r_sitesecret}"/><br/>
                         </div>
                     `;
-        if (isProEnable){
-            html += `<hr>
-                        <h2>Google Login</h2>
-                        <div class="sf-group">
-                            <label for="lr_g_client_id">Google Client ID:</label>
-                            <input value="${gClientId}" name="lr_g_client_id" id="lr_g_client_id" placeholder="Google Client ID"/><br/>
-                        </div>
-                        <hr>
-                        <h2>Facebook Login</h2>
-                        <div class="sf-group">
-                            <label for="lr_fb_app_id">Facebook APP ID:</label>
-                            <input value="${fbAppId}" name="lr_fb_app_id" id="lr_fb_app_id" placeholder="Facebook APP ID"/><br/>
-                        </div>
-                        <div class="sf-group">
-                            <label for="lr_fb_app_secret">Facebook APP Secret:</label>
-                            <input value="${fbAppSecret}" name="lr_fb_app_secret" id="lr_fb_app_secret" placeholder="Facebook APP Secret"/><br/>
-                        </div>`;
-        }
+
         html  += '</div>'
 
         Swal.fire({
-            title: '<strong>Login | Register Settings</strong>',
+            title: `<strong>${lr_i18n.m_title}</strong>`,
             html: html,
-            footer: `<a target="_blank" href="https://essential-addons.com/elementor/docs/login-register-form/">Read the doc on how to get above credentials</a>`,
+            footer: footerLink,
             showCloseButton: true,
             showCancelButton: true,
             focusConfirm: false,
-            confirmButtonText: 'Save',
-            cancelButtonText: 'Cancel',
+            confirmButtonText: lr_i18n.save,
+            cancelButtonText: lr_i18n.cancel,
             preConfirm: () => {
-                let formData = {
+                return  {
                     recaptchaSiteKey: document.getElementById('lr_recaptcha_sitekey').value,
                     recaptchaSiteSecret: document.getElementById('lr_recaptcha_secret').value,
                 }
-                if (isProEnable){
-                    formData.gClientId = document.getElementById('lr_g_client_id').value;
-                    formData.fbAppId = document.getElementById('lr_fb_app_id').value;
-                    formData.fbAppSecret = document.getElementById('lr_fb_app_secret').value;
-                }
-                return formData;
             }
         }).then((result) => {
             if (result.value){
@@ -300,8 +275,8 @@
                         if (response.success){
                             Swal.fire({
                                 type: "success",
-                                title: response.message ? response.message : "Login | Register Settings Saved",
-                                footer: "Reload the page to see updated data",
+                                title: response.message ? response.message : lr_i18n.rm_title,
+                                footer: lr_i18n.rm_footer,
                                 showConfirmButton: true,
                                 timer: 5000,
                             });
@@ -310,8 +285,8 @@
                     error: function (err) {
                         Swal.fire({
                             type: "error",
-                            title: "Oops...",
-                            text: "Something went wrong!",
+                            title: lr_i18n.e_title,
+                            text: lr_i18n.e_text,
                         });
                     },
                 });

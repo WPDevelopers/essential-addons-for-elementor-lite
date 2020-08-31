@@ -6,7 +6,11 @@ ea.hooks.addAction("init", "ea", () => {
         const widgetId = $wrap.data('widget-id');
         const recaptchaSiteKey = $wrap.data('recaptcha-sitekey');
         const $loginFormWrapper = $scope.find("#eael-login-form-wrapper");
+        const loginRcTheme = $loginFormWrapper.data('recaptcha-theme');
+        const loginRcSize = $loginFormWrapper.data('recaptcha-size');
         const $regFormWrapper = $scope.find("#eael-register-form-wrapper");
+        const regRcTheme = $regFormWrapper.data('recaptcha-theme');
+        const regRcSize = $regFormWrapper.data('recaptcha-size');
         const $regLinkAction = $scope.find('#eael-lr-reg-toggle');
         const $loginLinkAction = $scope.find('#eael-lr-login-toggle');
         const $passField = $loginFormWrapper.find('#eael-user-password');
@@ -50,11 +54,15 @@ ea.hooks.addAction("init", "ea", () => {
             if (loginRecaptchaNode) {
                 grecaptcha.render(loginRecaptchaNode, {
                     'sitekey': recaptchaSiteKey,
+                    'theme': loginRcTheme,
+                    'size': loginRcSize,
                 });
             }
             if (registerRecaptchaNode) {
                 grecaptcha.render(registerRecaptchaNode, {
                     'sitekey': recaptchaSiteKey,
+                    'theme': regRcTheme,
+                    'size': regRcSize,
                 });
             }
         }
