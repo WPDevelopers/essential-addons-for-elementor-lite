@@ -227,10 +227,13 @@
         const lr_i18n = localize.i18n.login_register;
         let settingsNodeId = $(this).data('settings-id');
         let $dnode = $('#'+settingsNodeId);
+        let isProEnable = $dnode.data('pro-enabled');
         let rSitekey = $dnode.data('r-sitekey');
         let rSecret = $dnode.data('r-secret');
-        let footerLink = `<a target="_blank" href="https://www.google.com/recaptcha/admin/create">${lr_i18n.m_footer}</a>`
-
+        let gClientId = $dnode.data('g-client-id');
+        let fbAppId = $dnode.data('fb-app-id');
+        let fbAppSecret = $dnode.data('fb-app-secret');
+        let footerLink = isProEnable ? `<a target="_blank" href="https://essential-addons.com/elementor/docs/login-register-form/">${lr_i18n.m_footer}</a>` : `<a target="_blank" href="https://www.google.com/recaptcha/admin/create">${lr_i18n.m_footer}</a>`
         let html = `<div class="eael-lr-settings-fields" id="lr_settings_fields">
                         <h2>${lr_i18n.r_title}</h2>
                         <div class="sf-group">
@@ -242,7 +245,24 @@
                             <input value="${rSecret}" name="lr_recaptcha_secret" id="lr_recaptcha_secret" placeholder="${lr_i18n.r_sitesecret}"/><br/>
                         </div>
                     `;
-
+        if (isProEnable){
+            html += `<hr>
+                        <h2>${lr_i18n.g_title}</h2>
+                        <div class="sf-group">
+                            <label for="lr_g_client_id">${lr_i18n.g_cid}:</label>
+                            <input value="${gClientId}" name="lr_g_client_id" id="lr_g_client_id" placeholder="${lr_i18n.g_cid}"/><br/>
+                        </div>
+                        <hr>
+                        <h2>${lr_i18n.f_title}</h2>
+                        <div class="sf-group">
+                            <label for="lr_fb_app_id">${lr_i18n.f_app_id}:</label>
+                            <input value="${fbAppId}" name="lr_fb_app_id" id="lr_fb_app_id" placeholder="${lr_i18n.f_app_id}"/><br/>
+                        </div>
+                        <div class="sf-group">
+                            <label for="lr_fb_app_secret">${lr_i18n.f_app_secret}:</label>
+                            <input value="${fbAppSecret}" name="lr_fb_app_secret" id="lr_fb_app_secret" placeholder="${lr_i18n.f_app_secret}"/><br/>
+                        </div>`;
+        }
         html  += '</div>'
 
         Swal.fire({
@@ -255,10 +275,16 @@
             confirmButtonText: lr_i18n.save,
             cancelButtonText: lr_i18n.cancel,
             preConfirm: () => {
-                return  {
+                let formData = {
                     recaptchaSiteKey: document.getElementById('lr_recaptcha_sitekey').value,
                     recaptchaSiteSecret: document.getElementById('lr_recaptcha_secret').value,
                 }
+                if (isProEnable){
+                    formData.gClientId = document.getElementById('lr_g_client_id').value;
+                    formData.fbAppId = document.getElementById('lr_fb_app_id').value;
+                    formData.fbAppSecret = document.getElementById('lr_fb_app_secret').value;
+                }
+                return formData;
             }
         }).then((result) => {
             if (result.value){
