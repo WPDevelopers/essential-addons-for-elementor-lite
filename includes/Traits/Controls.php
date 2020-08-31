@@ -206,13 +206,13 @@ trait Controls
             );
     
             $wb->add_control(
-                'multiple_kb_list',
+                'selected_knowledge_base',
                 [
                     'label' => __('Knowledge Bases', 'essential-addons-for-elementor-lite'),
                     'label_block' => true,
                     'type' => Controls_Manager::SELECT2,
                     'options' => Helper::get_multiple_kb_terms(true, false),
-                    'multiple' => true,
+                    'multiple' => false,
                     'default' => [],
                     'condition' => [
                         'multiple_kb'   => 'true'
