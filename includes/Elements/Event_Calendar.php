@@ -1650,7 +1650,7 @@ class Event_Calendar extends Widget_Base {
                     <p></p>
                 </div>
                 <div class="eaelec-modal-footer">
-                    <a class="eaelec-event-details-link">'.__("Event Details","essential-addons-for-elementor-lite").'</a>
+                    <a class="eaelec-event-details-link">'.__('Event Details', 'essential-addons-for-elementor-lite').'</a>
                 </div>
             </div>
         </div>';

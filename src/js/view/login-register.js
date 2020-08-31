@@ -6,11 +6,15 @@ ea.hooks.addAction("init", "ea", () => {
         const widgetId = $wrap.data('widget-id');
         const recaptchaSiteKey = $wrap.data('recaptcha-sitekey');
         const $loginFormWrapper = $scope.find("#eael-login-form-wrapper");
+        const loginRcTheme = $loginFormWrapper.data('recaptcha-theme');
+        const loginRcSize = $loginFormWrapper.data('recaptcha-size');
         const $regFormWrapper = $scope.find("#eael-register-form-wrapper");
+        const regRcTheme = $regFormWrapper.data('recaptcha-theme');
+        const regRcSize = $regFormWrapper.data('recaptcha-size');
         const $regLinkAction = $scope.find('#eael-lr-reg-toggle');
         const $loginLinkAction = $scope.find('#eael-lr-login-toggle');
         const $passField = $loginFormWrapper.find('#eael-user-password');
-
+        const recaptchaAvailable = (typeof grecaptcha !== 'undefined' && grecaptcha !== null);
         if ('form' === $regLinkAction.data('action')) {
             $regLinkAction.on('click', function (e) {
                 e.preventDefault();
@@ -42,7 +46,7 @@ ea.hooks.addAction("init", "ea", () => {
         });
 
 
-        // Recaptcha
+        // reCAPTCHA
         function onloadLRcb() {
             let loginRecaptchaNode = document.getElementById('login-recaptcha-node-' + widgetId);
             let registerRecaptchaNode = document.getElementById('register-recaptcha-node-' + widgetId);
@@ -50,22 +54,26 @@ ea.hooks.addAction("init", "ea", () => {
             if (loginRecaptchaNode) {
                 grecaptcha.render(loginRecaptchaNode, {
                     'sitekey': recaptchaSiteKey,
+                    'theme': loginRcTheme,
+                    'size': loginRcSize,
                 });
             }
             if (registerRecaptchaNode) {
                 grecaptcha.render(registerRecaptchaNode, {
                     'sitekey': recaptchaSiteKey,
+                    'theme': regRcTheme,
+                    'size': regRcSize,
                 });
             }
         }
 
-        if (grecaptcha && isEditMode){
+        if (recaptchaAvailable && isEditMode){
             // on elementor editor, window load event already fired, so run recaptcha
             onloadLRcb();
         }else{
             // on frontend, load even is yet to fire, so wait and fire recaptcha
             $(window).load(function () {
-                if (grecaptcha){
+                if (recaptchaAvailable){
                     onloadLRcb();
                 }
             });

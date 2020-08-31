@@ -279,7 +279,7 @@ class Adv_Accordion extends Widget_Base
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         '1' => [
-                            'title' => __('', 'essential-addons-for-elementor-lite'),
+                            'title' => '',
                             'icon' => 'fa fa-unlock-alt',
                         ],
                     ],
@@ -448,7 +448,7 @@ class Adv_Accordion extends Widget_Base
                 ]
             ]
         );
-        
+
         $this->add_responsive_control(
             'eael_adv_accordion_tab_distance',
             [
@@ -857,7 +857,7 @@ class Adv_Accordion extends Widget_Base
                 ],
             ]
         );
-        
+
         // caret tabs
         $this->start_controls_tabs(
 			'eael_adv_accordion_tab_caret_tabs'
@@ -904,8 +904,8 @@ class Adv_Accordion extends Widget_Base
 				'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle',
 			]
 		);
-        
-	
+
+
 
 		$this->end_controls_tab();
 
@@ -951,10 +951,10 @@ class Adv_Accordion extends Widget_Base
 				'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle:hover',
 			]
 		);
-	
+
 
         $this->end_controls_tab();
-        
+
         $this->start_controls_tab(
 			'eael_adv_accordion_tab_caret_tabs_active',
 			[
@@ -998,7 +998,7 @@ class Adv_Accordion extends Widget_Base
 				'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle',
 			]
 		);
-	
+
 
 		$this->end_controls_tab();
 
