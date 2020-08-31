@@ -1,8 +1,9 @@
 <?php
+
 namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
-if ( !defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
     exit;
 }
 
@@ -11,27 +12,33 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
 
-class Content_Ticker extends Widget_Base {
+class Content_Ticker extends Widget_Base
+{
     use \Essential_Addons_Elementor\Traits\Helper;
     use \Essential_Addons_Elementor\Template\Content\Content_Ticker;
 
-    public function get_name() {
+    public function get_name()
+    {
         return 'eael-content-ticker';
     }
 
-    public function get_title() {
-        return esc_html__( 'Content Ticker', 'essential-addons-for-elementor-lite' );
+    public function get_title()
+    {
+        return esc_html__('Content Ticker', 'essential-addons-for-elementor-lite');
     }
 
-    public function get_icon() {
+    public function get_icon()
+    {
         return 'eaicon-content-ticker';
     }
 
-    public function get_categories() {
+    public function get_categories()
+    {
         return ['essential-addons-elementor'];
     }
 
-    public function get_keywords() {
+    public function get_keywords()
+    {
         return [
             'ticker',
             'ea ticker',
@@ -47,18 +54,20 @@ class Content_Ticker extends Widget_Base {
         ];
     }
 
-    public function get_custom_help_url() {
+    public function get_custom_help_url()
+    {
         return 'https://essential-addons.com/elementor/docs/content-ticker/';
     }
 
-    protected function _register_controls() {
+    protected function _register_controls()
+    {
         /**
          * Content Ticker Content Settings
          */
         $this->start_controls_section(
             'eael_section_content_ticker_settings',
             [
-                'label' => esc_html__( 'Ticker Settings', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__('Ticker Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
 
@@ -66,8 +75,8 @@ class Content_Ticker extends Widget_Base {
             'eael_ticker_options',
             [
                 'options'    => [
-                    'dynamic' => esc_html__( 'Dynamic', 'essential-addons-for-elementor-lite' ),
-                    'custom'  => esc_html__( 'Custom', 'essential-addons-for-elementor-lite' ),
+                    'dynamic' => esc_html__('Dynamic', 'essential-addons-for-elementor-lite'),
+                    'custom'  => esc_html__('Custom', 'essential-addons-for-elementor-lite'),
                 ],
                 'conditions' => [
                     'custom',
@@ -78,7 +87,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'eael_ticker_type',
             [
-                'label'       => esc_html__( 'Ticker Type', 'essential-addons-for-elementor-lite' ),
+                'label'       => esc_html__('Ticker Type', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::SELECT,
                 'default'     => 'dynamic',
                 'label_block' => false,
@@ -89,7 +98,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'eael_ticker_type_pro_alert',
             [
-                'label'     => esc_html__( 'Custom Content available in pro version only!', 'essential-addons-for-elementor-lite' ),
+                'label'     => esc_html__('Custom Content available in pro version only!', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::HEADING,
                 'condition' => [
                     'eael_ticker_type' => $ticker_options['conditions'],
@@ -100,10 +109,10 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'eael_ticker_tag_text',
             [
-                'label'       => esc_html__( 'Tag Text', 'essential-addons-for-elementor-lite' ),
+                'label'       => esc_html__('Tag Text', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'label_block' => false,
-                'default'     => esc_html__( 'Trending Today', 'essential-addons-for-elementor-lite' ),
+                'default'     => esc_html__('Trending Today', 'essential-addons-for-elementor-lite'),
             ]
         );
 
@@ -115,7 +124,7 @@ class Content_Ticker extends Widget_Base {
          */
         $this->eael_query_controls();
 
-        do_action( 'eael_ticker_custom_content_controls', $this );
+        do_action('eael_ticker_custom_content_controls', $this);
 
         /**
          * Content Tab: Carousel Settings
@@ -123,20 +132,20 @@ class Content_Ticker extends Widget_Base {
         $this->start_controls_section(
             'section_additional_options',
             [
-                'label' => __( 'Animation Settings', 'essential-addons-for-elementor-lite' ),
+                'label' => __('Animation Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'carousel_effect',
             [
-                'label'       => __( 'Effect', 'essential-addons-for-elementor-lite' ),
-                'description' => __( 'Sets transition effect', 'essential-addons-for-elementor-lite' ),
+                'label'       => __('Effect', 'essential-addons-for-elementor-lite'),
+                'description' => __('Sets transition effect', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::SELECT,
                 'default'     => 'slide',
                 'options'     => [
-                    'slide' => __( 'Slide', 'essential-addons-for-elementor-lite' ),
-                    'fade'  => __( 'Fade', 'essential-addons-for-elementor-lite' ),
+                    'slide' => __('Slide', 'essential-addons-for-elementor-lite'),
+                    'fade'  => __('Fade', 'essential-addons-for-elementor-lite'),
                 ],
             ]
         );
@@ -144,7 +153,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_responsive_control(
             'items',
             [
-                'label'          => __( 'Visible Items', 'essential-addons-for-elementor-lite' ),
+                'label'          => __('Visible Items', 'essential-addons-for-elementor-lite'),
                 'type'           => Controls_Manager::SLIDER,
                 'default'        => ['size' => 1],
                 'tablet_default' => ['size' => 1],
@@ -167,7 +176,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_responsive_control(
             'margin',
             [
-                'label'      => __( 'Items Gap', 'essential-addons-for-elementor-lite' ),
+                'label'      => __('Items Gap', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'default'    => ['size' => 10],
                 'range'      => [
@@ -187,8 +196,8 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'slider_speed',
             [
-                'label'       => __( 'Slider Speed', 'essential-addons-for-elementor-lite' ),
-                'description' => __( 'Duration of transition between slides (in ms)', 'essential-addons-for-elementor-lite' ),
+                'label'       => __('Slider Speed', 'essential-addons-for-elementor-lite'),
+                'description' => __('Duration of transition between slides (in ms)', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::SLIDER,
                 'default'     => ['size' => 400],
                 'range'       => [
@@ -206,11 +215,11 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'autoplay',
             [
-                'label'        => __( 'Autoplay', 'essential-addons-for-elementor-lite' ),
+                'label'        => __('Autoplay', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'default'      => 'yes',
-                'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-                'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'separator'    => 'before',
             ]
@@ -219,7 +228,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'autoplay_speed',
             [
-                'label'      => __( 'Autoplay Speed', 'essential-addons-for-elementor-lite' ),
+                'label'      => __('Autoplay Speed', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'default'    => ['size' => 2000],
                 'range'      => [
@@ -239,11 +248,11 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'pause_on_hover',
             [
-                'label'        => __( 'Pause On Hover', 'essential-addons-for-elementor-lite' ),
+                'label'        => __('Pause On Hover', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'default'      => '',
-                'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-                'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'condition'    => [
                     'autoplay' => 'yes',
@@ -254,11 +263,11 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'infinite_loop',
             [
-                'label'        => __( 'Infinite Loop', 'essential-addons-for-elementor-lite' ),
+                'label'        => __('Infinite Loop', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'default'      => 'yes',
-                'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-                'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
             ]
         );
@@ -266,12 +275,12 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'grab_cursor',
             [
-                'label'        => __( 'Grab Cursor', 'essential-addons-for-elementor-lite' ),
-                'description'  => __( 'Shows grab cursor when you hover over the slider', 'essential-addons-for-elementor-lite' ),
+                'label'        => __('Grab Cursor', 'essential-addons-for-elementor-lite'),
+                'description'  => __('Shows grab cursor when you hover over the slider', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'default'      => '',
-                'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-                'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'separator'    => 'before',
             ]
@@ -280,7 +289,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'navigation_heading',
             [
-                'label'     => __( 'Navigation', 'essential-addons-for-elementor-lite' ),
+                'label'     => __('Navigation', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -289,11 +298,11 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'arrows',
             [
-                'label'        => __( 'Arrows', 'essential-addons-for-elementor-lite' ),
+                'label'        => __('Arrows', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'default'      => 'yes',
-                'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-                'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
             ]
         );
@@ -301,12 +310,12 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'direction',
             [
-                'label'     => __( 'Direction', 'essential-addons-for-elementor-lite' ),
+                'label'     => __('Direction', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::SELECT,
                 'default'   => 'left',
                 'options'   => [
-                    'left'  => __( 'Left', 'essential-addons-for-elementor-lite' ),
-                    'right' => __( 'Right', 'essential-addons-for-elementor-lite' ),
+                    'left'  => __('Left', 'essential-addons-for-elementor-lite'),
+                    'right' => __('Right', 'essential-addons-for-elementor-lite'),
                 ],
                 'separator' => 'before',
                 'condition' => [
@@ -317,23 +326,23 @@ class Content_Ticker extends Widget_Base {
 
         $this->end_controls_section();
 
-        if ( !apply_filters( 'eael/pro_enabled', false ) ) {
+        if (!apply_filters('eael/pro_enabled', false)) {
             $this->start_controls_section(
                 'eael_section_pro',
                 [
-                    'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite' ),
+                    'label' => __('Go Premium for More Features', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
             $this->add_control(
                 'eael_control_get_pro',
                 [
-                    'label'       => __( 'Unlock more possibilities', 'essential-addons-for-elementor-lite' ),
+                    'label'       => __('Unlock more possibilities', 'essential-addons-for-elementor-lite'),
                     'type'        => Controls_Manager::CHOOSE,
                     'options'     => [
                         '1' => [
-                            'title' => __( '', 'essential-addons-for-elementor-lite' ),
-                            'icon'  => 'fa fa-unlock-alt',
+                            'title' => '',
+                            'icon' => 'fa fa-unlock-alt',
                         ],
                     ],
                     'default'     => '1',
@@ -352,7 +361,7 @@ class Content_Ticker extends Widget_Base {
         $this->start_controls_section(
             'eael_section_ticker_typography_settings',
             [
-                'label' => esc_html__( 'Ticker Content', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__('Ticker Content', 'essential-addons-for-elementor-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -360,7 +369,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'eael_ticker_content_bg',
             [
-                'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
@@ -372,7 +381,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'eael_ticker_content_color',
             [
-                'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#222222',
                 'selectors' => [
@@ -383,7 +392,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'eael_ticker_hover_content_color',
             [
-                'label'     => esc_html__( 'Text Hover Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => esc_html__('Text Hover Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#f44336',
                 'selectors' => [
@@ -404,7 +413,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_responsive_control(
             'eael_ticker_content_padding',
             [
-                'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+                'label'      => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -416,7 +425,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'eael_ticker_content_radius',
             [
-                'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -430,14 +439,14 @@ class Content_Ticker extends Widget_Base {
         $this->start_controls_section(
             'eael_section_ticker_tag_style_settings',
             [
-                'label' => esc_html__( 'Tag Style', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__('Tag Style', 'essential-addons-for-elementor-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
         $this->add_control(
             'eael_ticker_tag_bg_color',
             [
-                'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#222222',
                 'selectors' => [
@@ -448,7 +457,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'eael_ticker_tag_color',
             [
-                'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => esc_html__('Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
@@ -467,7 +476,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_responsive_control(
             'eael_ticker_tag_padding',
             [
-                'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+                'label'      => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -479,7 +488,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_responsive_control(
             'eael_ticker_tag_margin',
             [
-                'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+                'label'      => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -490,7 +499,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_responsive_control(
             'eael_ticker_tag_radius',
             [
-                'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
@@ -506,7 +515,7 @@ class Content_Ticker extends Widget_Base {
         $this->start_controls_section(
             'section_arrows_style',
             [
-                'label'     => __( 'Arrows', 'essential-addons-for-elementor-lite' ),
+                'label'     => __('Arrows', 'essential-addons-for-elementor-lite'),
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'arrows' => 'yes',
@@ -517,7 +526,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'prev_arrow',
             [
-                'label'       => __( 'Choose Prev Arrow', 'essential-addons-for-elementor-lite' ),
+                'label'       => __('Choose Prev Arrow', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::ICONS,
                 'label_block' => true,
                 'default'     => [
@@ -530,7 +539,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'arrow_new',
             [
-                'label'            => __( 'Choose Next Arrow', 'essential-addons-for-elementor-lite' ),
+                'label'            => __('Choose Next Arrow', 'essential-addons-for-elementor-lite'),
                 'type'             => Controls_Manager::ICONS,
                 'fa4compatibility' => 'arrow',
                 'label_block'      => true,
@@ -544,7 +553,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_responsive_control(
             'arrows_size',
             [
-                'label'      => __( 'Arrows Size', 'essential-addons-for-elementor-lite' ),
+                'label'      => __('Arrows Size', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'default'    => ['size' => '22'],
                 'range'      => [
@@ -565,7 +574,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_responsive_control(
             'left_arrow_position',
             [
-                'label'      => __( 'Align Left Arrow', 'essential-addons-for-elementor-lite' ),
+                'label'      => __('Align Left Arrow', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'range'      => [
                     'px' => [
@@ -584,7 +593,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_responsive_control(
             'right_arrow_position',
             [
-                'label'      => __( 'Align Right Arrow', 'essential-addons-for-elementor-lite' ),
+                'label'      => __('Align Right Arrow', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'range'      => [
                     'px' => [
@@ -600,19 +609,19 @@ class Content_Ticker extends Widget_Base {
             ]
         );
 
-        $this->start_controls_tabs( 'tabs_arrows_style' );
+        $this->start_controls_tabs('tabs_arrows_style');
 
         $this->start_controls_tab(
             'tab_arrows_normal',
             [
-                'label' => __( 'Normal', 'essential-addons-for-elementor-lite' ),
+                'label' => __('Normal', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'arrows_bg_color_normal',
             [
-                'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
@@ -624,7 +633,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'arrows_color_normal',
             [
-                'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => __('Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
@@ -637,7 +646,7 @@ class Content_Ticker extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name'        => 'arrows_border_normal',
-                'label'       => __( 'Border', 'essential-addons-for-elementor-lite' ),
+                'label'       => __('Border', 'essential-addons-for-elementor-lite'),
                 'placeholder' => '1px',
                 'default'     => '1px',
                 'selector'    => '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev',
@@ -647,7 +656,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'arrows_border_radius_normal',
             [
-                'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                'label'      => __('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
@@ -661,14 +670,14 @@ class Content_Ticker extends Widget_Base {
         $this->start_controls_tab(
             'tab_arrows_hover',
             [
-                'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
+                'label' => __('Hover', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'arrows_bg_color_hover',
             [
-                'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
@@ -680,7 +689,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'arrows_color_hover',
             [
-                'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => __('Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
@@ -692,7 +701,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_control(
             'arrows_border_color_hover',
             [
-                'label'     => __( 'Border Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => __('Border Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
@@ -708,7 +717,7 @@ class Content_Ticker extends Widget_Base {
         $this->add_responsive_control(
             'arrows_padding',
             [
-                'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
+                'label'      => __('Padding', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
@@ -721,80 +730,81 @@ class Content_Ticker extends Widget_Base {
         $this->end_controls_section();
     }
 
-    protected function render() {
+    protected function render()
+    {
         $settings = $this->get_settings_for_display();
-        $settings = $this->fix_old_query( $settings );
-        $args = $this->eael_get_query_args( $settings );
+        $settings = $this->fix_old_query($settings);
+        $args = $this->eael_get_query_args($settings);
 
-        $this->add_render_attribute( 'content-ticker-wrap', 'class', 'swiper-container-wrap eael-ticker' );
+        $this->add_render_attribute('content-ticker-wrap', 'class', 'swiper-container-wrap eael-ticker');
 
-        $this->add_render_attribute( 'content-ticker', 'class', 'swiper-container eael-content-ticker' );
-        $this->add_render_attribute( 'content-ticker', 'class', 'swiper-container-' . esc_attr( $this->get_id() ) );
-        $this->add_render_attribute( 'content-ticker', 'data-pagination', '.swiper-pagination-' . esc_attr( $this->get_id() ) );
-        $this->add_render_attribute( 'content-ticker', 'data-arrow-next', '.swiper-button-next-' . esc_attr( $this->get_id() ) );
-        $this->add_render_attribute( 'content-ticker', 'data-arrow-prev', '.swiper-button-prev-' . esc_attr( $this->get_id() ) );
+        $this->add_render_attribute('content-ticker', 'class', 'swiper-container eael-content-ticker');
+        $this->add_render_attribute('content-ticker', 'class', 'swiper-container-' . esc_attr($this->get_id()));
+        $this->add_render_attribute('content-ticker', 'data-pagination', '.swiper-pagination-' . esc_attr($this->get_id()));
+        $this->add_render_attribute('content-ticker', 'data-arrow-next', '.swiper-button-next-' . esc_attr($this->get_id()));
+        $this->add_render_attribute('content-ticker', 'data-arrow-prev', '.swiper-button-prev-' . esc_attr($this->get_id()));
 
-        if ( $settings['direction'] == 'right' ) {
-            $this->add_render_attribute( 'content-ticker', 'dir', 'rtl' );
+        if ($settings['direction'] == 'right') {
+            $this->add_render_attribute('content-ticker', 'dir', 'rtl');
         }
 
-        if ( !empty( $settings['items']['size'] ) ) {
-            $this->add_render_attribute( 'content-ticker', 'data-items', $settings['items']['size'] );
+        if (!empty($settings['items']['size'])) {
+            $this->add_render_attribute('content-ticker', 'data-items', $settings['items']['size']);
         }
-        if ( !empty( $settings['items_tablet']['size'] ) ) {
-            $this->add_render_attribute( 'content-ticker', 'data-items-tablet', $settings['items_tablet']['size'] );
+        if (!empty($settings['items_tablet']['size'])) {
+            $this->add_render_attribute('content-ticker', 'data-items-tablet', $settings['items_tablet']['size']);
         }
-        if ( !empty( $settings['items_mobile']['size'] ) ) {
-            $this->add_render_attribute( 'content-ticker', 'data-items-mobile', $settings['items_mobile']['size'] );
+        if (!empty($settings['items_mobile']['size'])) {
+            $this->add_render_attribute('content-ticker', 'data-items-mobile', $settings['items_mobile']['size']);
         }
-        if ( !empty( $settings['margin']['size'] ) ) {
-            $this->add_render_attribute( 'content-ticker', 'data-margin', $settings['margin']['size'] );
+        if (!empty($settings['margin']['size'])) {
+            $this->add_render_attribute('content-ticker', 'data-margin', $settings['margin']['size']);
         }
-        if ( !empty( $settings['margin_tablet']['size'] ) ) {
-            $this->add_render_attribute( 'content-ticker', 'data-margin-tablet', $settings['margin_tablet']['size'] );
+        if (!empty($settings['margin_tablet']['size'])) {
+            $this->add_render_attribute('content-ticker', 'data-margin-tablet', $settings['margin_tablet']['size']);
         }
-        if ( !empty( $settings['margin_mobile']['size'] ) ) {
-            $this->add_render_attribute( 'content-ticker', 'data-margin-mobile', $settings['margin_mobile']['size'] );
+        if (!empty($settings['margin_mobile']['size'])) {
+            $this->add_render_attribute('content-ticker', 'data-margin-mobile', $settings['margin_mobile']['size']);
         }
-        if ( $settings['carousel_effect'] ) {
-            $this->add_render_attribute( 'content-ticker', 'data-effect', $settings['carousel_effect'] );
+        if ($settings['carousel_effect']) {
+            $this->add_render_attribute('content-ticker', 'data-effect', $settings['carousel_effect']);
         }
-        if ( !empty( $settings['slider_speed']['size'] ) ) {
-            $this->add_render_attribute( 'content-ticker', 'data-speed', $settings['slider_speed']['size'] );
+        if (!empty($settings['slider_speed']['size'])) {
+            $this->add_render_attribute('content-ticker', 'data-speed', $settings['slider_speed']['size']);
         }
-        if ( $settings['autoplay'] == 'yes' && !empty( $settings['autoplay_speed']['size'] ) ) {
-            $this->add_render_attribute( 'content-ticker', 'data-autoplay', $settings['autoplay_speed']['size'] );
+        if ($settings['autoplay'] == 'yes' && !empty($settings['autoplay_speed']['size'])) {
+            $this->add_render_attribute('content-ticker', 'data-autoplay', $settings['autoplay_speed']['size']);
         } else {
-            $this->add_render_attribute( 'content-ticker', 'data-autoplay', '999999' );
+            $this->add_render_attribute('content-ticker', 'data-autoplay', '999999');
         }
-        if ( $settings['pause_on_hover'] == 'yes' ) {
-            $this->add_render_attribute( 'content-ticker', 'data-pause-on-hover', 'true' );
+        if ($settings['pause_on_hover'] == 'yes') {
+            $this->add_render_attribute('content-ticker', 'data-pause-on-hover', 'true');
         }
-        if ( $settings['infinite_loop'] == 'yes' ) {
-            $this->add_render_attribute( 'content-ticker', 'data-loop', true );
+        if ($settings['infinite_loop'] == 'yes') {
+            $this->add_render_attribute('content-ticker', 'data-loop', true);
         }
-        if ( $settings['grab_cursor'] == 'yes' ) {
-            $this->add_render_attribute( 'content-ticker', 'data-grab-cursor', true );
+        if ($settings['grab_cursor'] == 'yes') {
+            $this->add_render_attribute('content-ticker', 'data-grab-cursor', true);
         }
-        if ( $settings['arrows'] == 'yes' ) {
-            $this->add_render_attribute( 'content-ticker', 'data-arrows', '1' );
+        if ($settings['arrows'] == 'yes') {
+            $this->add_render_attribute('content-ticker', 'data-arrows', '1');
         }
 
         echo '<div class="eael-ticker-wrap" id="eael-ticker-wrap-' . $this->get_id() . '">';
-        if ( !empty( $settings['eael_ticker_tag_text'] ) ) {
+        if (!empty($settings['eael_ticker_tag_text'])) {
             echo '<div class="ticker-badge">
                     <span>' . $settings['eael_ticker_tag_text'] . '</span>
                 </div>';
         }
 
-        echo '<div ' . $this->get_render_attribute_string( 'content-ticker-wrap' ) . '>
-                <div ' . $this->get_render_attribute_string( 'content-ticker' ) . '>
+        echo '<div ' . $this->get_render_attribute_string('content-ticker-wrap') . '>
+                <div ' . $this->get_render_attribute_string('content-ticker') . '>
                     <div class="swiper-wrapper">';
-        if ( 'dynamic' === $settings['eael_ticker_type'] ) {
-            echo self::render_template_( $args, null );
+        if ('dynamic' === $settings['eael_ticker_type']) {
+            echo self::render_template_($args, null);
         }
 
-        do_action( 'render_content_ticker_custom_content', $settings );
+        do_action('render_content_ticker_custom_content', $settings);
         echo '</div>
 				</div>
 				' . $this->render_arrows() . '
@@ -809,11 +819,12 @@ class Content_Ticker extends Widget_Base {
      *
      * @access protected
      */
-    protected function render_arrows() {
+    protected function render_arrows()
+    {
         $settings = $this->get_settings_for_display();
 
-        if ( $settings['arrows'] == 'yes' ) {
-            if ( isset( $settings['__fa4_migrated']['arrow_new'] ) || empty( $settings['arrow'] ) ) {
+        if ($settings['arrows'] == 'yes') {
+            if (isset($settings['__fa4_migrated']['arrow_new']) || empty($settings['arrow'])) {
                 $arrow = $settings['arrow_new']['value'];
             } else {
                 $arrow = $settings['arrow'];
@@ -822,18 +833,18 @@ class Content_Ticker extends Widget_Base {
             $html = '<div class="content-ticker-pagination">';
 
             $html .= '<div class="swiper-button-next swiper-button-next-' . $this->get_id() . '">';
-            if ( isset( $arrow['url'] ) ) {
-                $html .= '<img src="' . esc_url( $arrow['url'] ) . '" alt="' . esc_attr( get_post_meta( $arrow['id'], '_wp_attachment_image_alt', true ) ) . '" />';
+            if (isset($arrow['url'])) {
+                $html .= '<img src="' . esc_url($arrow['url']) . '" alt="' . esc_attr(get_post_meta($arrow['id'], '_wp_attachment_image_alt', true)) . '" />';
             } else {
                 $html .= '<i class="' . $arrow . '"></i>';
             }
             $html .= '</div>';
 
             $html .= '<div class="swiper-button-prev swiper-button-prev-' . $this->get_id() . '">';
-            if ( isset( $settings['prev_arrow']['value']['url'] ) ) {
-                $html .= '<img src="' . esc_url( $settings['prev_arrow']['value']['url'] ) . '" alt="' . esc_attr( get_post_meta( $settings['prev_arrow']['value']['id'], '_wp_attachment_image_alt', true ) ) . '" />';
+            if (isset($settings['prev_arrow']['value']['url'])) {
+                $html .= '<img src="' . esc_url($settings['prev_arrow']['value']['url']) . '" alt="' . esc_attr(get_post_meta($settings['prev_arrow']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
             } else {
-                $html .= '<i class="' . esc_attr( $settings['prev_arrow']['value'] ) . '"></i>';
+                $html .= '<i class="' . esc_attr($settings['prev_arrow']['value']) . '"></i>';
             }
             $html .= '</div>';
 

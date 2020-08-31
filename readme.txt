@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.5
 Requires PHP: 5.4
-Stable tag: 4.2.1
+Stable tag: 4.2.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -223,6 +223,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.2.2 - 27/08/2020 =
+- Fixed: Sorting not working when Pagination is disabled in EA Advanced Data Table
+- Added: Styling controls for reCAPTCHA in EA Login | Register Form
+- Added: Translatable Strings in EA Login | Register Form
+- Added: Options to change the Error Messages in EA Login | Register Form
+- Few minor bugfix and improvements
 
 = 4.2.1 - 20/08/2020 =
 - Added: Google reCAPTCHA option in EA Login | Register Form

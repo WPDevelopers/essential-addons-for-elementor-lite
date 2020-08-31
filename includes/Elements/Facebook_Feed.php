@@ -87,7 +87,7 @@ class Facebook_Feed extends Widget_Base
                 'label'       => esc_html__('Page ID', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'label_block' => true,
-                'default'     => esc_html__('', 'essential-addons-for-elementor-lite'),
+                'default' => '',
                 'description' => __('<a href="https://findmyfbid.com/" class="eael-btn" target="_blank">Find Your Page ID</a>', 'essential-addons-for-elementor-lite'),
             ]
         );
@@ -98,7 +98,7 @@ class Facebook_Feed extends Widget_Base
                 'label'       => esc_html__('Access Token', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'label_block' => true,
-                'default'     => esc_html__('', 'essential-addons-for-elementor-lite'),
+                'default' => '',
                 'description' => __('<a href="https://essential-addons.com/elementor/docs/facebook-feed/" class="eael-btn" target="_blank">Get Access Token</a>', 'essential-addons-for-elementor-lite'),
             ]
         );

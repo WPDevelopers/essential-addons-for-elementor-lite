@@ -242,7 +242,7 @@ class Adv_Tabs extends Widget_Base
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         '1' => [
-                            'title' => __('', 'essential-addons-for-elementor-lite'),
+                            'title' => '',
                             'icon' => 'fa fa-unlock-alt',
                         ],
                     ],
@@ -814,9 +814,9 @@ class Adv_Tabs extends Widget_Base
         $this->add_control(
             'responsive_vertical_layout',
             [
-                'label' => __('Vertical Layout', 'essential-addons-elementor'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label'     => __('Vertical Layout', 'essential-addons-elementor'),
+                'type'      => Controls_Manager::SWITCHER,
+                'label_on'  => __('Yes', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('No', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default' => 'yes',
@@ -852,43 +852,43 @@ class Adv_Tabs extends Widget_Base
         }
 
         $this->add_render_attribute('eael_tab_icon_position', 'class', esc_attr($settings['eael_adv_tab_icon_position'])); ?>
-	<div <?php echo $this->get_render_attribute_string('eael_tab_wrapper'); ?>>
-  		<div class="eael-tabs-nav">
-		  <ul <?php echo $this->get_render_attribute_string('eael_tab_icon_position'); ?>>
-	    	<?php foreach ($settings['eael_adv_tabs_tab'] as $tab): ?>
-	      		<li class="<?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>"><?php if ($settings['eael_adv_tabs_icon_show'] === 'yes'):
-                    if ($tab['eael_adv_tabs_icon_type'] === 'icon'): ?>
-                            <?php if ($tab_icon_is_new || $tab_icon_migrated) {
-                        if (isset($tab['eael_adv_tabs_tab_title_icon_new']['value']['url'])) {
-                            echo '<img src="' . $tab['eael_adv_tabs_tab_title_icon_new']['value']['url'] . '"/>';
-                        } else {
-                            echo '<i class="' . $tab['eael_adv_tabs_tab_title_icon_new']['value'] . '"></i>';
-                        }
-                    } else {
-                        echo '<i class="' . $tab['eael_adv_tabs_tab_title_icon'] . '"></i>';
-                    } ?>
-                            <?php elseif ($tab['eael_adv_tabs_icon_type'] === 'image'): ?>
-                        <img src="<?php echo esc_attr($tab['eael_adv_tabs_tab_title_image']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($tab['eael_adv_tabs_tab_title_image']['id'], '_wp_attachment_image_alt', true)); ?>">
-                    <?php endif; ?>
-	      		<?php endif; ?> <span class="eael-tab-title"><?php echo $tab['eael_adv_tabs_tab_title']; ?></span></li>
-	      	<?php endforeach; ?>
-    		</ul>
-  		</div>
-  		<div class="eael-tabs-content">
-  			<?php foreach ($settings['eael_adv_tabs_tab'] as $tab): $eael_find_default_tab[] = $tab['eael_adv_tabs_tab_show_as_default']; ?>
-		    			<div class="clearfix <?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>">
-		      				<?php if ('content' == $tab['eael_adv_tabs_text_type']): ?>
-								<?php echo do_shortcode($tab['eael_adv_tabs_tab_content']); ?>
-							<?php elseif ('template' == $tab['eael_adv_tabs_text_type']): ?>
-						<?php if (!empty($tab['eael_primary_templates'])) {
-                        echo Plugin::$instance->frontend->get_builder_content($tab['eael_primary_templates'], true);
-                    } ?>
-					<?php endif; ?>
-    			</div>
-			<?php endforeach; ?>
-  		</div>
-	</div>
-	<?php
+        <div <?php echo $this->get_render_attribute_string('eael_tab_wrapper'); ?>>
+            <div class="eael-tabs-nav">
+                <ul <?php echo $this->get_render_attribute_string('eael_tab_icon_position'); ?>>
+                    <?php foreach ($settings['eael_adv_tabs_tab'] as $tab) : ?>
+                        <li class="<?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>"><?php if ($settings['eael_adv_tabs_icon_show'] === 'yes') :
+                                                                                                            if ($tab['eael_adv_tabs_icon_type'] === 'icon') : ?>
+                                    <?php if ($tab_icon_is_new || $tab_icon_migrated) {
+                                                                                                                    if (isset($tab['eael_adv_tabs_tab_title_icon_new']['value']['url'])) {
+                                                                                                                        echo '<img src="' . $tab['eael_adv_tabs_tab_title_icon_new']['value']['url'] . '"/>';
+                                                                                                                    } else {
+                                                                                                                        echo '<i class="' . $tab['eael_adv_tabs_tab_title_icon_new']['value'] . '"></i>';
+                                                                                                                    }
+                                                                                                                } else {
+                                                                                                                    echo '<i class="' . $tab['eael_adv_tabs_tab_title_icon'] . '"></i>';
+                                                                                                                } ?>
+                                <?php elseif ($tab['eael_adv_tabs_icon_type'] === 'image') : ?>
+                                    <img src="<?php echo esc_attr($tab['eael_adv_tabs_tab_title_image']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($tab['eael_adv_tabs_tab_title_image']['id'], '_wp_attachment_image_alt', true)); ?>">
+                                <?php endif; ?>
+                            <?php endif; ?> <span class="eael-tab-title"><?php echo $tab['eael_adv_tabs_tab_title']; ?></span></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <div class="eael-tabs-content">
+                <?php foreach ($settings['eael_adv_tabs_tab'] as $tab) : $eael_find_default_tab[] = $tab['eael_adv_tabs_tab_show_as_default']; ?>
+                    <div class="clearfix <?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>">
+                        <?php if ('content' == $tab['eael_adv_tabs_text_type']) : ?>
+                            <?php echo do_shortcode($tab['eael_adv_tabs_tab_content']); ?>
+                        <?php elseif ('template' == $tab['eael_adv_tabs_text_type']) : ?>
+                            <?php if (!empty($tab['eael_primary_templates'])) {
+                                echo Plugin::$instance->frontend->get_builder_content($tab['eael_primary_templates'], true);
+                            } ?>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+<?php
     }
 
     protected function content_template()
