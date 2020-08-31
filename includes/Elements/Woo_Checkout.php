@@ -695,6 +695,7 @@ class Woo_Checkout extends Widget_Base {
 				'default' => '#ab93f5',
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-checkout.layout-split .layout-split-container .table-area .ea-woo-checkout-order-review .ea-order-review-table .table-row, {{WRAPPER}} .ea-woo-checkout.layout-multi-steps .layout-multi-steps-container .table-area .ea-woo-checkout-order-review .ea-order-review-table .table-row, {{WRAPPER}} .ea-woo-checkout.layout-split .layout-split-container .table-area .ea-woo-checkout-order-review .ea-order-review-table-footer .footer-content .order-total, {{WRAPPER}} .ea-woo-checkout.layout-multi-steps .layout-multi-steps-container .table-area .ea-woo-checkout-order-review .ea-order-review-table-footer .footer-content .order-total' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .ea-woo-checkout .table-area .ea-woo-checkout-order-review .ea-order-review-table-footer .footer-content .recurring-wrapper td, {{WRAPPER}} .ea-woo-checkout .table-area .ea-woo-checkout-order-review .ea-order-review-table-footer .footer-content .recurring-wrapper th' => 'border-color: {{VALUE}};',
 				],
 				'condition' => [
 					'ea_woo_checkout_layout!' => 'default',
@@ -763,7 +764,7 @@ class Woo_Checkout extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'ea_woo_checkout_order_review_footer_typography',
-				'selector' => '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content',
+				'selector' => '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content, {{WRAPPER}} .ea-woo-checkout-order-review .footer-content table th, {{WRAPPER}} .ea-woo-checkout-order-review .footer-content table td .amount',
 			]
 		);
 		$this->add_control(
@@ -961,7 +962,7 @@ class Woo_Checkout extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'ea_woo_checkout_order_review_total_typo',
-                'selector' => '{{WRAPPER}} .ea-woo-checkout.layout-split .layout-split-container .table-area .ea-woo-checkout-order-review .ea-order-review-table-footer .footer-content .order-total',
+                'selector' => '{{WRAPPER}} .ea-woo-checkout.layout-split .layout-split-container .table-area .ea-woo-checkout-order-review .ea-order-review-table-footer .footer-content .order-total, {{WRAPPER}} .ea-woo-checkout.layout-multi-steps .layout-multi-steps-container .table-area .ea-woo-checkout-order-review .ea-order-review-table-footer .footer-content .order-total, {{WRAPPER}} .ea-woo-checkout .table-area .ea-woo-checkout-order-review .ea-order-review-table-footer .footer-content table th, {{WRAPPER}} .ea-woo-checkout .table-area .ea-woo-checkout-order-review .ea-order-review-table-footer .footer-content table td .amount',
                 'condition' => [
                     'ea_woo_checkout_layout!' => 'default',
                 ],
@@ -974,7 +975,7 @@ class Woo_Checkout extends Widget_Base {
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
-                    '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content .order-total' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content .order-total, {{WRAPPER}} .ea-woo-checkout-order-review .footer-content th, {{WRAPPER}} .ea-woo-checkout-order-review .footer-content td' => 'color: {{VALUE}};',
                 ],
                 'condition' => [
                     'ea_woo_checkout_layout!' => 'default',
