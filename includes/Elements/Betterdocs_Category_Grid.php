@@ -1706,8 +1706,6 @@ class Betterdocs_Category_Grid extends Widget_Base
                         $gallery = $(this);
                         $layout_mode = $gallery.data('layout-mode');
 
-                    console.log($layout_mode);
-
 
                     if($layout_mode === 'masonry') {
                         // init isotope
