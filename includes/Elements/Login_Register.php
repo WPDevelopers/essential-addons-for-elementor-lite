@@ -8,6 +8,7 @@ use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
+use Elementor\Icons_Manager;
 use Elementor\Plugin;
 use Elementor\Repeater;
 use Elementor\Utils;
@@ -33,25 +34,21 @@ class Login_Register extends Widget_Base
 	 * @var bool
 	 */
 	protected $user_can_register;
-
 	/**
 	 * Are you currently in Elementor Editor Screen?
 	 * @var bool
 	 */
 	protected $in_editor;
-
 	/**
 	 * Should login form be printed?
 	 * @var bool
 	 */
 	protected $should_print_login_form;
-
 	/**
 	 * Should registration form be printed?
 	 * @var bool
 	 */
 	protected $should_print_register_form;
-
 	/**
 	 * It contains an array of settings for the display
 	 * @var array
@@ -65,7 +62,6 @@ class Login_Register extends Widget_Base
 	 * @var bool|string
 	 */
 	protected $form_illustration_url;
-
 	/**
 	 * @var bool|string
 	 */
@@ -172,7 +168,6 @@ class Login_Register extends Widget_Base
 			'essential addons',
 		];
 	}
-
 
 	public function get_custom_help_url()
 	{
@@ -1007,7 +1002,6 @@ class Login_Register extends Widget_Base
 		$this->end_controls_section();
 	}
 
-
 	protected function init_content_register_fields_controls()
 	{
 
@@ -1090,12 +1084,12 @@ class Login_Register extends Widget_Base
 			],
 			'default' => '100',
 		] );
-
-		$this->add_control( 'register_fields', [
+		apply_filters( 'eael/login-register/register-repeater', $repeater );
+		$rf = [
 			'label'       => __( 'Fields', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::REPEATER,
-			'fields'      => $repeater->get_controls(),
-			'default'     => [
+			'fields'      => apply_filters( 'eael/login-register/register-repeater-fields', $repeater->get_controls() ),
+			'default'     => apply_filters( 'eael/login-register/register-rf-default', [
 				[
 					'field_type'  => 'user_name',
 					'field_label' => __( 'Username', 'essential-addons-for-elementor-lite' ),
@@ -1116,9 +1110,14 @@ class Login_Register extends Widget_Base
 					'required'    => 'yes',
 					'width'       => '100',
 				],
-			],
+			] ),
 			'title_field' => '{{{ field_label }}}',
-		] );
+		];
+		if ( $this->pro_enabled )
+		{
+			$rf['title_field'] = '{{{ elementor.helpers.renderIcon( this, icon, {}, "i", "panel" ) || \'<i class="{{ icon }}" aria-hidden="true"></i>\' }}} {{{ field_label }}}';
+		}
+		$this->add_control( 'register_fields', $rf );
 
 		$this->add_control( 'show_labels', [
 			'label'   => __( 'Show Label', 'essential-addons-for-elementor-lite' ),
@@ -1418,7 +1417,6 @@ class Login_Register extends Widget_Base
 
 		$this->end_controls_section();
 	}
-
 
 	/**
 	 * It prints controls for managing general style of both login and registration form
@@ -3598,7 +3596,6 @@ class Login_Register extends Widget_Base
 		];
 	}
 
-
 	protected function render()
 	{
 		//Note. forms are handled in Login_Registration Trait used in the Bootstrap class.
@@ -3715,15 +3712,15 @@ class Login_Register extends Widget_Base
 			$rc_theme = isset( $this->ds['login_rc_theme'] ) ? $this->ds['login_rc_theme'] : 'light';
 			$rc_size  = isset( $this->ds['login_rc_size'] ) ? $this->ds['login_rc_size'] : 'normal';
 			// input icons
-            $show_icon = ($this->pro_enabled && !empty( $this->ds['show_login_icon'] ) && 'yes' === $this->ds['show_login_icon']);
-            $icon_class = $show_icon ? 'lr-icon-showing' : '';
+			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_login_icon'] ) && 'yes' === $this->ds['show_login_icon'] );
+			$icon_class = $show_icon ? 'lr-icon-showing' : '';
 			?>
             <section
                     id="eael-login-form-wrapper"
                     class="<?php echo esc_attr( $default_hide_class ); ?>"
                     data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>"
                     data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>">
-                <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr( $icon_class);?>">
+                <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr( $icon_class ); ?>">
 					<?php
 					if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor )
 					{
@@ -3760,7 +3757,8 @@ class Login_Register extends Widget_Base
 									       } ?>"
                                            required>
 									<?php
-                                    if ( $show_icon ){
+									if ( $show_icon )
+									{
 										echo '<i class="fas fa-user"></i>';
 									} ?>
                                 </div>
@@ -3788,10 +3786,11 @@ class Login_Register extends Widget_Base
                                                       aria-hidden="true"></span>
                                             </button>
 										<?php } ?>
-                                        <?php
-                                    if ( $show_icon ){
-										echo '<i class="fas fa-lock"></i>';
-									} ?>
+										<?php
+										if ( $show_icon )
+										{
+											echo '<i class="fas fa-lock"></i>';
+										} ?>
                                     </div>
                                 </div>
                                 <div class="eael-forever-forget eael-lr-form-group">
@@ -3920,6 +3919,9 @@ class Login_Register extends Widget_Base
 			// reCAPTCHA style
 			$rc_theme = isset( $this->ds['register_rc_theme'] ) ? $this->ds['register_rc_theme'] : 'light';
 			$rc_size  = isset( $this->ds['register_rc_size'] ) ? $this->ds['register_rc_size'] : 'normal';
+			// input icons
+			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_register_icon'] ) && 'yes' === $this->ds['show_register_icon'] );
+			$icon_class = $show_icon ? 'lr-icon-showing' : '';
 			ob_start();
 			?>
             <section
@@ -3927,7 +3929,7 @@ class Login_Register extends Widget_Base
                     class="<?php echo esc_attr( $default_hide_class ); ?>"
                     data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>"
                     data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>">
-                <div class="eael-register-form-wrapper eael-lr-form-wrapper style-2">
+                <div class="eael-register-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr( $icon_class ); ?>">
 					<?php if ( 'left' === $this->form_illustration_pos )
 					{
 						$this->print_form_illustration();
@@ -4048,6 +4050,10 @@ class Login_Register extends Widget_Base
 										echo '<label ' . $this->get_render_attribute_string( $label_key ) . '>' . esc_attr( $field['field_label'] ) . '</label>';
 									}
 									echo '<input ' . $this->get_render_attribute_string( $input_key ) . '>';
+									if ( $show_icon && ! empty( $field['icon'] ) )
+									{
+										Icons_Manager::render_icon( $field['icon'], [ 'aria-hidden' => 'true' ] );
+									}
 									?>
                                 </div>
 							<?php
