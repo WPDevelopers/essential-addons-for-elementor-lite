@@ -2283,7 +2283,6 @@ class Product_Grid extends Widget_Base {
 			'post_type' => 'product',
 			'posts_per_page' => $settings['eael_product_grid_products_count'] ?: 4,
 			'order' => 'DESC',
-//			'offset' => $settings['product_offset'],
 		];
 
 		if ( ! empty( $settings['eael_product_grid_categories'] ) ) {
@@ -2302,17 +2301,20 @@ class Product_Grid extends Widget_Base {
 			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : '1';
 
 			$args['paged'] = $paged;
-		}
 
-		if ( 0 < $settings['product_offset'] ) {
+            if ( 0 < $settings['product_offset'] ) {
 
-			/**
-			 * Offser break the pagination. Using WordPress's work around
-			 *
-			 * @see https://codex.wordpress.org/Making_Custom_Queries_using_Offset_and_Pagination
-			 */
-			$args['offset_to_fix'] = $settings['product_offset'];
+                /**
+                 * Offser break the pagination. Using WordPress's work around
+                 *
+                 * @see https://codex.wordpress.org/Making_Custom_Queries_using_Offset_and_Pagination
+                 */
+                $args['offset_to_fix'] = $settings['product_offset'];
+            }
 		}
+		if ( 'true' == $settings['show_load_more'] ) {
+			$args ['offset'] = $settings['product_offset'];
+        }
 
 		if ( $settings['eael_product_grid_product_filter'] == 'featured-products' ) {
 			$args['tax_query'] = [
@@ -2382,13 +2384,14 @@ class Product_Grid extends Widget_Base {
 			'eael_product_action_buttons_preset' => $settings['eael_product_action_buttons_preset'],
 			'eael_product_grid_quick_view' => $settings['eael_product_grid_quick_view'],
 			'eael_product_grid_price' => $settings['eael_product_grid_price'],
+			'eael_widget_id' => $widget_id,
 		];
 
 		$html = '<div class="eael-product-grid ' . $settings['eael_product_grid_style_preset'] . ' ' . $settings['eael_product_grid_layout'] . '">';
 		$html .= '<div class="woocommerce">';
 		$html .= do_action( 'eael_woo_before_product_loop' );
 		$html .= '<ul class="products" data-layout-mode="' . $settings["eael_product_grid_layout"] . '">
-                    ' . self::render_template_( $args, $settings, $widget_id ) . '
+                    ' . self::render_template_( $args, $settings ) . '
                 </ul>';
 
 		if ( 'true' == $settings['show_pagination'] ) {
@@ -2427,6 +2430,10 @@ class Product_Grid extends Widget_Base {
                             itemSelector: "li.product",
                             layoutMode: $layout_mode,
                             percentPosition: true
+                        });
+
+                        $isotope_products.imagesLoaded().progress(function() {
+                            $isotope_products.isotope("layout");
                         });
 
                         $('li.product', $products).resize(function() {

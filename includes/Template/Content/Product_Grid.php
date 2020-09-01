@@ -8,8 +8,10 @@ if (!defined('ABSPATH')) {
 
 trait Product_Grid
 {
-	public static function render_template_($args, $settings, $widget_id)
+	public static function render_template_($args, $settings)
 	{
+		$widget_id = $settings['eael_widget_id'];
+
 		$query = new \WP_Query($args);
 		global $woocommerce_loop;
 
@@ -433,10 +435,13 @@ trait Product_Grid
 	/**
 	 * Added all actions
 	 */
-	public function eael_woo_checkout_add_actions() {
+	public function eael_woo_checkout_add_actions($settings) {
 
-		add_action( 'pre_get_posts', [ $this, 'eael_fix_query_offset' ], 1 );
-		add_filter( 'found_posts', [ $this, 'eael_fix_query_found_posts' ], 1, 2 );
+		if ( '' !== $settings['pagination_type'] ) {
+			add_action( 'pre_get_posts', [ $this, 'eael_fix_query_offset' ], 1 );
+		    add_filter( 'found_posts', [ $this, 'eael_fix_query_found_posts' ], 1, 2 );
+        }
+
 		add_filter( 'woocommerce_add_to_cart_form_action', array( $this, 'eael_avoid_redirect_to_single_page' ), 10,
 			1 );
 
