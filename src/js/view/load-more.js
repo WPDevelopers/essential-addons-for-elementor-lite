@@ -65,6 +65,16 @@
 				} else {
 					if ($data.class == "Essential_Addons_Elementor\\Elements\\Product_Grid") {
 						$(".eael-product-grid .products", $scope).append($content);
+
+						if ($layout == "masonry") {
+							var $isotope = $(".eael-product-grid .products", $scope).isotope();
+							$isotope.isotope("appended", $content).isotope("layout");
+
+							$isotope.imagesLoaded().progress(function () {
+								$isotope.isotope("layout");
+							});
+						}
+
 					} else {
 						$(".eael-post-appender", $scope).append($content);
 
