@@ -55,13 +55,15 @@ trait Helper
 
         $file_path = $_REQUEST['template_path'];
 
-        $query = new \WP_Query($args);
+        if($file_path) {
+            $query = new \WP_Query($args);
 
-        if ($query->have_posts()) {
-            while ($query->have_posts()) {
-                $query->the_post();
+            if ($query->have_posts()) {
+                while ($query->have_posts()) {
+                    $query->the_post();
 
-                $html = $this->includes_with_variable($file_path, ['settings' => $settings]);
+                    $html = $this->includes_with_variable($file_path, ['settings' => $settings]);
+                }
             }
         }
 
