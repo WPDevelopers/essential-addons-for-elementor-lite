@@ -2482,9 +2482,9 @@ class Product_Grid extends Widget_Base {
                 var nth  = pnumber;
                 var lmt  = plimit;
                 var ajax_url = localize.ajaxurl;
-                var pagination = jQuery("#post").attr('data-posttype');
-                var paginationcat = jQuery("#post").attr('data-cattype');
-                var paginationtax = jQuery("#post").attr('data-taxname');
+                // var pagination = jQuery("#post").attr('data-posttype');
+                // var paginationcat = jQuery("#post").attr('data-cattype');
+                // var paginationtax = jQuery("#post").attr('data-taxname');
                 var widgetid = jQuery("#post").attr('data-widgetid');
 
                 var $scope = ".elementor-element-"+widgetid;
@@ -2495,9 +2495,7 @@ class Product_Grid extends Widget_Base {
                     url		:ajax_url,
                     type	:'post',
                     data	:{ 'action':'woo_product_pagination_product','number':nth,'limit':lmt,
-                        'paginationpost':pagination,
-                        'paginationcatname':paginationcat,'paginationtaxname':paginationtax, 'args':$args,
-                        'settings':$settings },
+                        'args':$args,'settings':$settings },
                     beforeSend	: function(){
                         jQuery(".eael-product-grid .products").html("<li style='text-align:center;'>Loading please " +
                             "wait...!</li>");
@@ -2512,9 +2510,9 @@ class Product_Grid extends Widget_Base {
                 var nth  = pnumber;
                 var lmt  = plimit;
                 var ajax_url = localize.ajaxurl;
-                var pagination = jQuery("#post").attr('data-posttype');
-                var paginationcat = jQuery("#post").attr('data-cattype');
-                var paginationtax = jQuery("#post").attr('data-taxname');
+                // var pagination = jQuery("#post").attr('data-posttype');
+                // var paginationcat = jQuery("#post").attr('data-cattype');
+                // var paginationtax = jQuery("#post").attr('data-taxname');
                 var widgetid = jQuery("#post").attr('data-widgetid');
 
                 var $scope = ".elementor-element-"+widgetid;
@@ -2524,8 +2522,7 @@ class Product_Grid extends Widget_Base {
                 jQuery.ajax({
                     url		:ajax_url,
                     type	:'post',
-                    data	:{ 'action':'woo_product_pagination','number':nth,'limit':lmt,'paginationpost':pagination,
-                        'paginationcatname':paginationcat,'paginationtaxname':paginationtax, 'args':$args,
+                    data	:{ 'action':'woo_product_pagination','number':nth,'limit':lmt,'args':$args,
                         'settings':$settings },
                     beforeSend	: function(){
                         jQuery(".eael-product-grid .products").html("<li style='text-align:center;'>Loading please " +
