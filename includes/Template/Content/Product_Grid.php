@@ -311,9 +311,8 @@ trait Product_Grid
 		$paginationLimit = $settings['eael_product_grid_products_count'] ?: 4;
 		$pagination_Paginationlist = ceil($pagination_Count/$paginationLimit);
 		$last = ceil( $pagination_Paginationlist );
-		$paginationtaxname = 'product_cat';
-		$paginationType = 'product';
-		$paginationCatName = $settings['eael_product_grid_categories'] ?: '';
+//		$paginationtaxname = 'product_cat';
+//		$paginationCatName = $settings['eael_product_grid_categories'] ?: '';
 
 		$widget_id = $settings['eael_widget_id'];
 		$adjacents = "2";
@@ -329,7 +328,7 @@ trait Product_Grid
 				for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
 
 					if( $pagination ==  0 || $pagination ==  1 ){ $active="current"; }else{ $active=""; }
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-posttype='$paginationType' data-widgetid='$widget_id' data-taxname='$paginationtaxname' data-cattype='$paginationCatName' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
 
 				}
 
@@ -338,17 +337,17 @@ trait Product_Grid
 				for( $pagination=1; $pagination <= 4 + ($adjacents * 2); $pagination++){
 					if( $pagination ==  0 || $pagination ==  1 ){ $active="current"; }else{ $active=""; }
 
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-posttype='$paginationType' data-widgetid='$widget_id' data-taxname='$paginationtaxname' data-cattype='$paginationCatName' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
 				}
 
 				$setPagination .="<li class='pagitext dots'>...</li>";
-				$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-posttype='$paginationType' data-widgetid='$widget_id' data-taxname='$paginationtaxname' data-cattype='$paginationCatName' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
+				$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
 
 			} else {
 
 				for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
 					if( $pagination ==  0 || $pagination ==  1 ){ $active="current"; }else{ $active=""; }
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-posttype='$paginationType' data-widgetid='$widget_id' data-taxname='$paginationtaxname' data-cattype='$paginationCatName' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
 				}
 
 			}
