@@ -2119,7 +2119,7 @@ trait Helper
 
 			    for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
 
-				    if( $paginationNumber ==  $pagination ){ $active="active"; }else{ $active=""; }
+				    if( $paginationNumber ==  $pagination ){ $active="current"; }else{ $active=""; }
 				    $setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-posttype='$paginationType' data-taxname='$paginationtaxname' data-cattype='$paginationCatName' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
 
 			    }
@@ -2168,7 +2168,7 @@ trait Helper
 		    } else {
 
 			    for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
-				    if( $paginationNumber ==  $pagination ){ $active="active"; }else{ $active=""; }
+				    if( $paginationNumber ==  $pagination ){ $active="current"; }else{ $active=""; }
 				    $setPagination .="<li><a href='javascript:void(0);' id='post' class='$active' data-posttype='$paginationType' data-taxname='$paginationtaxname' data-cattype='$paginationCatName' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
 			    }
 
