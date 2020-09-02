@@ -3388,6 +3388,7 @@ class Filterable_Gallery extends Widget_Base
 				            $images_per_page = $gallery.data('images-per-page'),
 				            $nomore_text = $gallery.data('nomore-item-text'),
 				            $items = [];
+					    var filter_name      = $(".eael-filter-gallery-control li.active").data('filter');
 
 				        if ($init_show == $total_items) {
 				            $this.html('<div class="no-more-items-text">' + $nomore_text + '</div>');
@@ -3396,9 +3397,28 @@ class Filterable_Gallery extends Widget_Base
 				            }, 600);
 				        }
 
-				        // new items html
-					    for (var i = $init_show; i < ($init_show + $images_per_page); i++) {
-					        $items.push($($gallery_items[i])[0]);
+					    var i          = $init_show;
+					    var item_found = 0;
+					    while (i < $init_show + $images_per_page) {
+						    if (filter_name != '' && filter_name != '*') {
+							    for (var j = i; j < $gallery_items.length; j++) {
+								    var element = $($($gallery_items[j])[0]);
+								    if (element.is(filter_name)) {
+									    ++item_found;
+									    $items.push($($gallery_items[j])[0]);
+									    delete $gallery_items[j];
+									    if (item_found === $images_per_page) {
+										    break;
+									    }
+								    }
+							    }
+							    //break when cross $images_per_page or no image found
+							    break;
+						    } else {
+							    $items.push($($gallery_items[i])[0]);
+							    delete $gallery_items[i];
+						    }
+						    i++;
 					    }
 
 				        // append items
