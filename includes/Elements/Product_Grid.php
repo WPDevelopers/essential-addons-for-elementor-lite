@@ -2481,7 +2481,7 @@ class Product_Grid extends Widget_Base {
             function productPaginationProduct(pnumber,plimit){
                 var nth  = pnumber;
                 var lmt  = plimit;
-                var ajax_url = ajax_params.ajax_url;
+                var ajax_url = localize.ajaxurl;
                 var pagination = jQuery("#post").attr('data-posttype');
                 var paginationcat = jQuery("#post").attr('data-cattype');
                 var paginationtax = jQuery("#post").attr('data-taxname');
@@ -2511,7 +2511,7 @@ class Product_Grid extends Widget_Base {
             function productPagination(pnumber,plimit){
                 var nth  = pnumber;
                 var lmt  = plimit;
-                var ajax_url = ajax_params.ajax_url;
+                var ajax_url = localize.ajaxurl;
                 var pagination = jQuery("#post").attr('data-posttype');
                 var paginationcat = jQuery("#post").attr('data-cattype');
                 var paginationtax = jQuery("#post").attr('data-taxname');
