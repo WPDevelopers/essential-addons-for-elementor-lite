@@ -3846,11 +3846,11 @@ msgid "reCAPTCHA Failed"
 msgstr ""
 
 #: ../includes/Elements/Login_Register.php:962
-msgid "Eg. Recaptcha Validation Failed"
+msgid "Eg. reCAPTCHA Validation Failed"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:963, ../includes/Traits/Login_Registration.php:110, ../includes/Traits/Login_Registration.php:246
-msgid "You did not pass recaptcha challenge."
+#: ../includes/Elements/Login_Register.php:963
+msgid "You did not pass reCAPTCHA challenge."
 msgstr ""
 
 #: ../includes/Elements/Login_Register.php:967
@@ -6673,6 +6673,10 @@ msgstr ""
 
 #: ../includes/Traits/Login_Registration.php:86, ../includes/Traits/Login_Registration.php:189
 msgid "Security token did not match"
+msgstr ""
+
+#: ../includes/Traits/Login_Registration.php:110, ../includes/Traits/Login_Registration.php:246
+msgid "You did not pass recaptcha challenge."
 msgstr ""
 
 #: ../includes/Traits/Login_Registration.php:158

@@ -233,7 +233,7 @@
         let gClientId = $dnode.data('g-client-id');
         let fbAppId = $dnode.data('fb-app-id');
         let fbAppSecret = $dnode.data('fb-app-secret');
-        let footerLink = isProEnable ? `<a target="_blank" href="https://essential-addons.com/elementor/docs/login-register-form/">${lr_i18n.m_footer}</a>` : `<a target="_blank" href="https://www.google.com/recaptcha/admin/create">${lr_i18n.m_footer}</a>`
+        let footerLink = isProEnable ? `<a target="_blank" href="https://essential-addons.com/elementor/docs/social-login-recaptcha">${lr_i18n.m_footer}</a>` : `<a target="_blank" href="https://www.google.com/recaptcha/admin/create">${lr_i18n.m_footer}</a>`
         let html = `<div class="eael-lr-settings-fields" id="lr_settings_fields">
                         <h2>${lr_i18n.r_title}</h2>
                         <div class="sf-group">

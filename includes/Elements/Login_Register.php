@@ -959,8 +959,8 @@ class Login_Register extends Widget_Base
 			'label'       => __( 'reCAPTCHA Failed', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::TEXT,
 			'label_block' => true,
-			'placeholder' => __( 'Eg. Recaptcha Validation Failed', 'essential-addons-for-elementor-lite' ),
-			'default'     => __( "You did not pass recaptcha challenge.", 'essential-addons-for-elementor-lite' ),
+			'placeholder' => __( 'Eg. reCAPTCHA Validation Failed', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( "You did not pass reCAPTCHA challenge.", 'essential-addons-for-elementor-lite' ),
 		] );
 
 		$this->add_control( 'err_tc', [
