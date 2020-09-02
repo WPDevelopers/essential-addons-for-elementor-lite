@@ -3413,31 +3413,31 @@ msgstr ""
 msgid "Login | Register Form"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:192, ../includes/Elements/Login_Register.php:1095, ../includes/Elements/Login_Register.php:1096, ../includes/Elements/Login_Register.php:3883
+#: ../includes/Elements/Login_Register.php:192, ../includes/Elements/Login_Register.php:1095, ../includes/Elements/Login_Register.php:1096, ../includes/Elements/Login_Register.php:3891
 msgid "Username"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:193, ../includes/Elements/Login_Register.php:1101, ../includes/Elements/Login_Register.php:1102, ../includes/Elements/Login_Register.php:3880
+#: ../includes/Elements/Login_Register.php:193, ../includes/Elements/Login_Register.php:1101, ../includes/Elements/Login_Register.php:1102, ../includes/Elements/Login_Register.php:3888
 msgid "Email"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:194, ../includes/Elements/Login_Register.php:558, ../includes/Elements/Login_Register.php:559, ../includes/Elements/Login_Register.php:585, ../includes/Elements/Login_Register.php:586, ../includes/Elements/Login_Register.php:1108, ../includes/Elements/Login_Register.php:1109, ../includes/Elements/Login_Register.php:3679, ../includes/Elements/Login_Register.php:3881, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:307
+#: ../includes/Elements/Login_Register.php:194, ../includes/Elements/Login_Register.php:558, ../includes/Elements/Login_Register.php:559, ../includes/Elements/Login_Register.php:585, ../includes/Elements/Login_Register.php:586, ../includes/Elements/Login_Register.php:1108, ../includes/Elements/Login_Register.php:1109, ../includes/Elements/Login_Register.php:3687, ../includes/Elements/Login_Register.php:3889, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:307
 msgid "Password"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:195, ../includes/Elements/Login_Register.php:3882
+#: ../includes/Elements/Login_Register.php:195, ../includes/Elements/Login_Register.php:3890
 msgid "Confirm Password"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:196, ../includes/Elements/Login_Register.php:3884
+#: ../includes/Elements/Login_Register.php:196, ../includes/Elements/Login_Register.php:3892
 msgid "First Name"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:197, ../includes/Elements/Login_Register.php:3885
+#: ../includes/Elements/Login_Register.php:197, ../includes/Elements/Login_Register.php:3893
 msgid "Last Name"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:198, ../includes/Elements/Login_Register.php:3886
+#: ../includes/Elements/Login_Register.php:198, ../includes/Elements/Login_Register.php:3894
 msgid "Website"
 msgstr ""
 
@@ -3449,7 +3449,7 @@ msgstr ""
 msgid "Default Form Type"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:260, ../includes/Elements/Login_Register.php:3282, ../includes/Elements/Login_Register.php:3894, ../includes/Elements/Woo_Checkout.php:251, ../includes/Elements/Woo_Checkout.php:880, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:320, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:320
+#: ../includes/Elements/Login_Register.php:260, ../includes/Elements/Login_Register.php:3282, ../includes/Elements/Login_Register.php:3902, ../includes/Elements/Woo_Checkout.php:251, ../includes/Elements/Woo_Checkout.php:880, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:320, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:320
 msgid "Login"
 msgstr ""
 
@@ -3482,7 +3482,7 @@ msgstr ""
 msgid "Lost Password Text"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:309, ../includes/Elements/Login_Register.php:3697
+#: ../includes/Elements/Login_Register.php:309, ../includes/Elements/Login_Register.php:3705
 msgid "Forgot password?"
 msgstr ""
 
@@ -3594,7 +3594,7 @@ msgstr ""
 msgid "Username Label"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:548, ../includes/Elements/Login_Register.php:549, ../includes/Elements/Login_Register.php:575, ../includes/Elements/Login_Register.php:576, ../includes/Elements/Login_Register.php:3678
+#: ../includes/Elements/Login_Register.php:548, ../includes/Elements/Login_Register.php:549, ../includes/Elements/Login_Register.php:575, ../includes/Elements/Login_Register.php:576, ../includes/Elements/Login_Register.php:3686
 msgid "Username or Email Address"
 msgstr ""
 
@@ -3846,11 +3846,11 @@ msgid "reCAPTCHA Failed"
 msgstr ""
 
 #: ../includes/Elements/Login_Register.php:962
-msgid "Eg. Recaptcha Validation Failed"
+msgid "Eg. reCAPTCHA Validation Failed"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:963, ../includes/Traits/Login_Registration.php:110, ../includes/Traits/Login_Registration.php:246
-msgid "You did not pass recaptcha challenge."
+#: ../includes/Elements/Login_Register.php:963
+msgid "You did not pass reCAPTCHA challenge."
 msgstr ""
 
 #: ../includes/Elements/Login_Register.php:967
@@ -3937,7 +3937,7 @@ msgstr ""
 msgid "Register Button"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:1148, ../includes/Elements/Login_Register.php:3282, ../includes/Elements/Login_Register.php:3650
+#: ../includes/Elements/Login_Register.php:1148, ../includes/Elements/Login_Register.php:3282, ../includes/Elements/Login_Register.php:3658
 msgid "Register"
 msgstr ""
 
@@ -4308,34 +4308,34 @@ msgstr ""
 msgid "Link Height"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:3804
+#: ../includes/Elements/Login_Register.php:3812
 msgid "Remember Me"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:3728
+#: ../includes/Elements/Login_Register.php:3736
 msgid "You are already logged in as %s. "
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:3729
+#: ../includes/Elements/Login_Register.php:3737
 msgid "Logout"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:4141
+#: ../includes/Elements/Login_Register.php:4149
 msgid "Form Logo Image"
 msgstr ""
 
 #. translators: %s: Error fields
-#: ../includes/Elements/Login_Register.php:4273
+#: ../includes/Elements/Login_Register.php:4281
 msgid "Error! you seem to have added %s field in the form more than once."
 msgstr ""
 
 #. translators: %s: Error String
-#: ../includes/Elements/Login_Register.php:4291
+#: ../includes/Elements/Login_Register.php:4299
 msgid "Error! It is required to use %s field."
 msgstr ""
 
 #. translators: %s: Error String
-#: ../includes/Elements/Login_Register.php:4317
+#: ../includes/Elements/Login_Register.php:4325
 msgid "Error! It is required to use %s field with %s Field."
 msgstr ""
 
@@ -6673,6 +6673,10 @@ msgstr ""
 
 #: ../includes/Traits/Login_Registration.php:86, ../includes/Traits/Login_Registration.php:189
 msgid "Security token did not match"
+msgstr ""
+
+#: ../includes/Traits/Login_Registration.php:110, ../includes/Traits/Login_Registration.php:246
+msgid "You did not pass recaptcha challenge."
 msgstr ""
 
 #: ../includes/Traits/Login_Registration.php:158
