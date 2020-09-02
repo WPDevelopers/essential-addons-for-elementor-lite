@@ -28,9 +28,7 @@ var filterableGalleryHandler = function ($scope, $) {
 		    $layout_mode     = $settings.grid_style == "masonry" ? "masonry" : "fitRows",
 		    $first_show      = $(".eael-filter-gallery-container", $scope).children(".eael-filterable-gallery-item-wrap").length,
 		    $gallery_enabled = $settings.gallery_enabled == "yes" ? true : false;
-		if ($first_show > 0) {
-			$gallery_items.splice(0, $first_show);
-		}
+
 		// init isotope
 		var layoutMode       = $(".eael-filter-gallery-wrapper").data("layout-mode");
 		var mfpCaption       = $(".eael-filter-gallery-wrapper").data("mfp_caption");
