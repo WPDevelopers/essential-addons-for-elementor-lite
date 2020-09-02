@@ -125,6 +125,12 @@ class Bootstrap
         add_action('wp_ajax_load_more', array($this, 'eael_load_more_ajax'));
         add_action('wp_ajax_nopriv_load_more', array($this, 'eael_load_more_ajax'));
 
+        add_action('wp_ajax_woo_product_pagination_product', array($this, 'eael_woo_pagination_product_ajax'));
+        add_action('wp_ajax_nopriv_woo_product_pagination_product', array($this, 'eael_woo_pagination_product_ajax'));
+
+        add_action('wp_ajax_woo_product_pagination', array($this, 'eael_woo_pagination_ajax'));
+        add_action('wp_ajax_nopriv_woo_product_pagination', array($this, 'eael_woo_pagination_ajax'));
+
         add_action('wp_ajax_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
         add_action('wp_ajax_nopriv_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
 
