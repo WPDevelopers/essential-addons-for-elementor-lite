@@ -959,8 +959,8 @@ class Login_Register extends Widget_Base
 			'label'       => __( 'reCAPTCHA Failed', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::TEXT,
 			'label_block' => true,
-			'placeholder' => __( 'Eg. Recaptcha Validation Failed', 'essential-addons-for-elementor-lite' ),
-			'default'     => __( "You did not pass recaptcha challenge.", 'essential-addons-for-elementor-lite' ),
+			'placeholder' => __( 'Eg. reCAPTCHA Validation Failed', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( "You did not pass reCAPTCHA challenge.", 'essential-addons-for-elementor-lite' ),
 		] );
 
 		$this->add_control( 'err_tc', [
@@ -3623,12 +3623,20 @@ class Login_Register extends Widget_Base
 		$form_logo_id        = ! empty( $this->ds['lr_form_logo']['id'] ) ? $this->ds['lr_form_logo']['id'] : '';
 		$this->form_logo     = Group_Control_Image_Size::get_attachment_image_src( $form_logo_id, 'lr_form_logo', $this->ds );
 		$this->form_logo_pos = ! empty( $this->ds['lr_form_logo_position'] ) ? $this->ds['lr_form_logo_position'] : 'inline';
+
+		//@TODO; optimize data atts later, use render atts
 		?>
         <div class="eael-login-registration-wrapper"
              data-is-ajax="<?php echo esc_attr( $this->get_settings_for_display( 'enable_ajax' ) ); ?>"
              data-widget-id="<?php echo esc_attr( $this->get_id() ); ?>"
              data-recaptcha-sitekey="<?php echo esc_attr( get_option( 'eael_recaptcha_sitekey' ) ); ?>"
-             data-show-pass-strength="<?php echo esc_attr( $this->get_settings_for_display( 'show_pass_strength' ) ); ?>">
+             data-show-pass-strength="<?php echo esc_attr( $this->get_settings_for_display( 'show_pass_strength' ) ); ?>"
+             data-ps-text-type="<?php echo esc_attr( $this->get_settings_for_display( 'ps_text_type' ) ); ?>"
+             data-ps-text-bad="<?php echo esc_attr( $this->get_settings_for_display( 'ps_text_bad' ) ); ?>"
+             data-ps-text-good="<?php echo esc_attr( $this->get_settings_for_display( 'ps_text_good' ) ); ?>"
+             data-ps-text-strong="<?php echo esc_attr( $this->get_settings_for_display( 'ps_text_strong' ) ); ?>"
+             data-ps-text-short="<?php echo esc_attr( $this->get_settings_for_display( 'ps_text_short' ) ); ?>"
+        >
 			<?php
 			$this->print_login_form();
 			$this->print_register_form();
