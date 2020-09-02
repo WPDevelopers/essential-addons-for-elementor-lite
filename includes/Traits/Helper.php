@@ -2039,6 +2039,147 @@ trait Helper
         wp_die();
     }
 
+    public function eael_woo_pagination_product_ajax() {
+	    parse_str($_REQUEST['args'], $args);
+	    parse_str($_REQUEST['settings'], $settings);
+	    $class = '\Essential_Addons_Elementor\Elements\Product_Grid';
+
+	    global $wpdb;
+	    $paginationNumber = absint($_POST['number']);
+	    
+	    $paginationLimit  = absint($_POST['limit']);
+	    $paginationType = sanitize_text_field($_POST['paginationpost']);
+	    $paginationCatName = sanitize_text_field($_POST['paginationcatname']);
+	    $paginationtaxname = sanitize_text_field($_POST['paginationtaxname']);
+
+	    if( $paginationNumber == "1" ){
+		    $paginationOffsetValue = "0";
+		    if( $paginationtaxname ) {
+			    $args['posts_per_page'] = $paginationLimit;
+		    }else{
+			    $args['posts_per_page'] = $paginationLimit;
+		    }
+	    }else{
+		    $paginationOffsetValue = ($paginationNumber-1)*$paginationLimit;
+		    if( $paginationtaxname ) {
+			    $args['posts_per_page'] = $paginationLimit;
+			    $args['offset'] = $paginationOffsetValue;
+		    }else{
+			    $args['posts_per_page'] = $paginationLimit;
+			    $args['offset'] = $paginationOffsetValue;
+		    }
+
+	    }
+
+	    echo $class::render_template_($args, $settings);
+
+	    wp_die();
+    }
+
+    public function eael_woo_pagination_ajax() {
+	    parse_str($_REQUEST['args'], $args);
+	    parse_str($_REQUEST['settings'], $settings);
+	    $class = '\Essential_Addons_Elementor\Elements\Product_Grid';
+
+	    global $wpdb;
+	    $paginationNumber = absint($_POST['number']);
+
+	    $paginationLimit  = absint($_POST['limit']);
+	    $paginationType = sanitize_text_field($_POST['paginationpost']);
+	    $paginationCatName = sanitize_text_field($_POST['paginationcatname']);
+	    $paginationtaxname = sanitize_text_field($_POST['paginationtaxname']);
+
+	    $pagination_args = $args;
+
+	    if($paginationtaxname!=""){
+		    $pagination_args['posts_per_page'] = -1;
+	    }else{
+		    $pagination_args['posts_per_page'] = -1;
+	    }
+
+	    $pagination_Query = new \WP_Query( $pagination_args );
+	    $pagination_Count = count($pagination_Query->posts);
+	    $pagination_Paginationlist = ceil($pagination_Count/$paginationLimit);
+	    $last = ceil( $pagination_Paginationlist );
+	    $paginationprev = $paginationNumber-1;
+	    $paginationnext = $paginationNumber+1;
+	    if( $paginationNumber>1 ){ $paginationprev;	}
+	    if( $paginationNumber < $last ){ $paginationnext; }
+
+	    $adjacents = "2";
+
+	    $widget_id = $settings['eael_widget_id'];
+	    $setPagination = "";
+	    if( $pagination_Paginationlist > 0 ){
+
+		    $setPagination .="<ul class='page-numbers'>";
+		    $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' onclick='javascript:productPaginationProduct($paginationprev,$paginationLimit);javascript:productPagination($paginationprev,$paginationLimit);'>Prev</a></li>";
+
+		    if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
+
+			    for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
+
+				    if( $paginationNumber ==  $pagination ){ $active="active"; }else{ $active=""; }
+				    $setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-posttype='$paginationType' data-taxname='$paginationtaxname' data-cattype='$paginationCatName' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
+
+			    }
+
+		    } else if ( $pagination_Paginationlist > 5 + ($adjacents * 2) ){
+
+			    if( $paginationNumber < 1 + ($adjacents * 2) ){
+
+				    for( $pagination=1; $pagination <=4 + ($adjacents * 2); $pagination++){
+
+					    if( $paginationNumber ==  $pagination ){ $active="current"; }else{ $active=""; }
+					    $setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-posttype='$paginationType' data-taxname='$paginationtaxname' data-cattype='$paginationCatName' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
+				    }
+				    $setPagination .="<li class='pagitext dots'>...</li>";
+				    $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' onclick='javascript:productPagination($last,$paginationLimit)'>".$last."</a></li>";
+
+			    } elseif( $pagination_Paginationlist - ($adjacents * 2) > $paginationNumber && $paginationNumber > ($adjacents * 2)) {
+				    $active = '';
+				    $setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-posttype='$paginationType' data-taxname='$paginationtaxname' data-cattype='$paginationCatName' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct(1,$paginationLimit);productPagination(1,$paginationLimit);'>1</a></li>";
+				    $setPagination .="<li class='pagitext dots'>...</li>";
+
+				    for( $pagination=$paginationNumber - $adjacents; $pagination<=$paginationNumber + $adjacents; $pagination++){
+
+					    if( $paginationNumber ==  $pagination ){ $active="current"; }else{ $active=""; }
+					    $setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-posttype='$paginationType' data-taxname='$paginationtaxname' data-cattype='$paginationCatName' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
+
+				    }
+
+				    $setPagination .="<li class='pagitext dots'>...</li>";
+				    $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' onclick='javascript:productPagination($last,$paginationLimit)'>".$last."</a></li>";
+
+			    } else {
+				    $active = '';
+				    $setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-posttype='$paginationType' data-taxname='$paginationtaxname' data-cattype='$paginationCatName' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct(1,$paginationLimit);productPagination(1,$paginationLimit);'>1</a></li>";
+				    $setPagination .="<li class='pagitext dots'>...</li>";
+
+				    for ($pagination = $last - (2 + ($adjacents * 2)); $pagination <= $last; $pagination++){
+
+					    if( $paginationNumber ==  $pagination ){ $active="current"; }else{ $active=""; }
+					    $setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-posttype='$paginationType' data-taxname='$paginationtaxname' data-cattype='$paginationCatName' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
+
+				    }
+
+			    }
+
+		    } else {
+
+			    for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
+				    if( $paginationNumber ==  $pagination ){ $active="active"; }else{ $active=""; }
+				    $setPagination .="<li><a href='javascript:void(0);' id='post' class='$active' data-posttype='$paginationType' data-taxname='$paginationtaxname' data-cattype='$paginationCatName' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
+			    }
+
+		    }
+		    $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' onclick='javascript:productPaginationProduct($paginationnext,$paginationLimit);javascript:productPagination($paginationnext,$paginationLimit);'>Next</a></li>";
+		    $setPagination .="</ul>";
+	    }
+	    echo $setPagination;
+	    wp_die();
+    }
+
     /**
      * Twitter Feed
      *
