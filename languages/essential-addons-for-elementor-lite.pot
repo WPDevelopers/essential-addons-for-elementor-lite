@@ -101,22 +101,6 @@ msgstr ""
 msgid "You don't have set any slug and file name to install the plugins"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Dashboard_Widget.php:45
-msgid "WPDeveloper Feed"
-msgstr ""
-
-#: ../includes/Classes/WPDeveloper_Dashboard_Widget.php:77
-msgid "Posted on %s"
-msgstr ""
-
-#: ../includes/Classes/WPDeveloper_Dashboard_Widget.php:67
-msgid "No recent news."
-msgstr ""
-
-#: ../includes/Classes/WPDeveloper_Dashboard_Widget.php:83
-msgid "Keep Your Eyes on"
-msgstr ""
-
 #: ../includes/Classes/WPDeveloper_Notice.php:447
 msgid "Install Now!"
 msgstr ""
@@ -5744,7 +5728,7 @@ msgid "Button Width"
 msgstr ""
 
 #: ../includes/Elements/Woocommerce_Review.php:18
-msgid "WooCommerce Review"
+msgid "ReviewX Woo Review"
 msgstr ""
 
 #: ../includes/Elements/Woocommerce_Review.php:60
@@ -6164,7 +6148,7 @@ msgid "Login | Register Form Settings"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:153
-msgid "Read the doc on how to get above credentials"
+msgid "To configure the API Keys, check out this doc"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:153
