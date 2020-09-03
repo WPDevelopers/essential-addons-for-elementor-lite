@@ -10,35 +10,8 @@ trait Template_Query
 {
 
     private $template_headers = [
-        'Template Name',
+        'Template Name' => 'Template Name',
     ];
-
-
-    /**
-     * Retrive metadata from a file.
-     *
-     * @param string $file path to the file
-     * @param array  $template_headers default template header list.
-     */
-    private function get_meta_data($file, $template_headers)
-    {
-        $fopen = fopen($file, 'r');
-        $file_data = fread($fopen, filesize($file));
-        fclose($fopen);
-
-        $file_data = str_replace("\r", "\n", $file_data);
-        $headers = $template_headers;
-
-        foreach ($headers as $regex) {
-            if (preg_match('/^[ \t\/*#@]*' . preg_quote($regex, '/') . ':(.*)$/mi', $file_data, $match) && $match[1]) {
-                $headers = trim(preg_replace("/\s*(?:\*\/|\?>).*/", '', $match[1]));
-            } else {
-                $headers = '';
-            }
-        }
-
-        return $headers;
-    }
 
     private function process_directory_name()
     {
@@ -112,8 +85,9 @@ trait Template_Query
                         else if($key === 'pro') {
                             $path = sprintf('%s/%s', $this->get_pro_template_dir(), $handle);
                         }
-
-                        $template_name = $this->get_meta_data($path, $this->template_headers);
+                        
+                        $template_info = get_file_data($path, $this->template_headers);
+                        $template_name = $template_info['Template Name'];
 
                         if($template_name) {
                             $files[$template_name] = $path;
