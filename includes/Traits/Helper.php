@@ -2120,7 +2120,7 @@ trait Helper
 	    if( $pagination_Paginationlist > 0 ){
 
 		    $setPagination .="<ul class='page-numbers'>";
-		    $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-pnumber='$paginationprev' data-plimit='$paginationLimit'>Prev</a></li>";
+		    $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$paginationprev' data-plimit='$paginationLimit'>Prev</a></li>";
 
 		    if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
 
@@ -2141,7 +2141,7 @@ trait Helper
 					    $setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
 				    }
 				    $setPagination .="<li class='pagitext dots'>...</li>";
-				    $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' onclick='javascript:productPagination($last,$paginationLimit)'>".$last."</a></li>";
+				    $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$last' data-plimit='$paginationLimit'>".$last."</a></li>";
 
 			    } elseif( $pagination_Paginationlist - ($adjacents * 2) > $paginationNumber && $paginationNumber > ($adjacents * 2)) {
 				    $active = '';
@@ -2156,7 +2156,7 @@ trait Helper
 				    }
 
 				    $setPagination .="<li class='pagitext dots'>...</li>";
-				    $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-pnumber='$last' data-plimit='$paginationLimit'>".$last."</a></li>";
+				    $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$last' data-plimit='$paginationLimit'>".$last."</a></li>";
 
 			    } else {
 				    $active = '';
@@ -2180,7 +2180,8 @@ trait Helper
 			    }
 
 		    }
-		    $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-pnumber='$paginationnext' data-plimit='$paginationLimit'>Next</a></li>";
+		    $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-widgetid='$widget_id' data-args='"
+		                     .http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$paginationnext' data-plimit='$paginationLimit'>Next</a></li>";
 		    $setPagination .="</ul>";
 	    }
 	    echo $setPagination;
