@@ -15,7 +15,6 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
             if ( has_post_thumbnail() && $settings['eael_show_image'] == 'yes' ) {
 
                 echo '<div class="eael-entry-media">';
-                // if ( $style == null && $settings['eael_show_post_terms'] === 'yes' ) {
                 if ( $settings['eael_show_post_terms'] === 'yes' ) {
                     echo Helper::get_terms_as_list( $settings['eael_post_terms'], $settings['eael_post_terms_max_length'] );
                 }
@@ -39,7 +38,6 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                             </div>';
                 echo '</div>';
 
-                // if ( $style === 'three' && $settings['eael_show_date'] === 'yes' ) {
                 if ( $settings['eael_show_date'] === 'yes' ) {
                     echo '<span class="eael-meta-posted-on"><time datetime="' . get_the_date() . '"><span>' . get_the_date( 'd' ) . '</span>' . get_the_date( 'F' ) . '</time></span>';
                 }
@@ -103,8 +101,6 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                     echo '</h2></header>';
                 }
 
-
-                // if ( $style == '' && $settings['meta_position'] == 'meta-entry-header' )
 
                 if ( $settings['meta_position'] == 'meta-entry-header' ) {
                     if ( $settings['eael_show_meta'] ) {
@@ -193,7 +189,6 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
             if ( has_post_thumbnail() && $settings['eael_show_image'] == 'yes' ) {
 
                 echo '<div class="eael-entry-media">';
-                // if ( $style == null && $settings['eael_show_post_terms'] === 'yes' ) {
                 if ( $settings['eael_show_post_terms'] === 'yes' ) {
                     echo Helper::get_terms_as_list( $settings['eael_post_terms'], $settings['eael_post_terms_max_length'] );
                 }
@@ -216,7 +211,6 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                                 <img src="' . esc_url( wp_get_attachment_image_url( get_post_thumbnail_id(), $settings['image_size'] ) ) . '" alt="' . esc_attr( get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) ) . '">
                             </div>';
                 echo '</div>';
-                // if ( $style === 'three' && $settings['eael_show_date'] === 'yes' ) {
                 if ( $settings['eael_show_date'] === 'yes' ) {
                     echo '<span class="eael-meta-posted-on"><time datetime="' . get_the_date() . '"><span>' . get_the_date( 'd' ) . '</span>' . get_the_date( 'F' ) . '</time></span>';
                 }
@@ -224,7 +218,6 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
 
             if ( $settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt'] ) {
                 echo '<div class="eael-entry-wrapper">';
-                // if ( $style === 'two' && $settings['eael_show_meta'] && $settings['meta_position'] == 'meta-entry-header' ) {
 
                 if ( $settings['eael_show_meta'] && $settings['meta_position'] == 'meta-entry-header' ) {
                     echo '<div class="eael-entry-meta">';
@@ -280,7 +273,6 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                     echo '</a>';
                     echo '</h2></header>';
                 }
-                // if ( $style == '' && $settings['meta_position'] == 'meta-entry-header' ) {
 
                 if ( $settings['meta_position'] == 'meta-entry-header' ) {
                     if ( $settings['eael_show_meta'] ) {
@@ -331,7 +323,6 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
             if ( has_post_thumbnail() && $settings['eael_show_image'] == 'yes' ) {
 
                 echo '<div class="eael-entry-media">';
-                // if ( $style == null && $settings['eael_show_post_terms'] === 'yes' ) {
                 if ( $settings['eael_show_post_terms'] === 'yes' ) {
                     echo Helper::get_terms_as_list( $settings['eael_post_terms'], $settings['eael_post_terms_max_length'] );
                 }
@@ -354,20 +345,10 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                                 <img src="' . esc_url( wp_get_attachment_image_url( get_post_thumbnail_id(), $settings['image_size'] ) ) . '" alt="' . esc_attr( get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) ) . '">
                             </div>';
                 echo '</div>';
-                // if ( $style === 'three' && $settings['eael_show_date'] === 'yes' ) {
-
-                /**
-                 * Keep this code maybe it'll need soon.
-                 */
-
-                // if ( $settings['eael_show_date'] === 'yes' ) {
-                    // echo '<span class="eael-meta-posted-on"><time datetime="' . get_the_date() . '"><span>' . get_the_date( 'd' ) . '</span>' . get_the_date( 'F' ) . '</time></span>';
-                // }
             }
 
             if ( $settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt'] ) {
                 echo '<div class="eael-entry-wrapper">';
-                // if ( $style === 'two' && $settings['eael_show_meta'] && $settings['meta_position'] == 'meta-entry-header' ) {
 
                 if ( $settings['eael_show_meta'] && $settings['meta_position'] == 'meta-entry-header' ) {
                     echo '<div class="eael-entry-meta">';
@@ -424,7 +405,6 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                     echo '</h2></header>';
                 }
                 if ( $settings['meta_position'] == 'meta-entry-header' ) {
-                // if ( $style == '' && $settings['meta_position'] == 'meta-entry-header' ) {
                     if ( $settings['eael_show_meta'] ) {
                         echo '<div class="eael-entry-meta">';
                         if ( $settings['eael_show_author'] === 'yes' ) {
