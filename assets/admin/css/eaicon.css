@@ -23,6 +23,9 @@
 	speak: none;
 }
 
+.eaicon-easyjobs:before {
+	content: "\e952";
+}
 .eaicon-reviewx:before {
 	content: "\e951";
 }
