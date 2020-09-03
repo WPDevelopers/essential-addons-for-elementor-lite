@@ -584,7 +584,7 @@
 
     .eael-product-popup-details {
         position: relative;
-        margin: 40px auto;
+        margin: 5vh auto;
         padding: 20px;
         border: 1px solid #888;
         max-width: 900px;
@@ -592,10 +592,13 @@
         background-color: #fefefe;
         width: 100%;
         border-radius: 10px;
+        height: 90vh;
+        max-height: 90vh;
     }
 
     &.woocommerce div.product {
         display: flex;
+        height: 100%;
         overflow-y: auto;
         background: transparent;
         position: relative;
