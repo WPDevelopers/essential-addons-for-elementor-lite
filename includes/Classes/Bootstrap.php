@@ -172,9 +172,6 @@ class Bootstrap
                 $this->admin_notice();
             }
 
-            // dashboard feed
-            WPDeveloper_Dashboard_Widget::instance();
-
             add_action('admin_menu', array($this, 'admin_menu'));
             add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
             add_action('wp_ajax_save_settings_with_ajax', array($this, 'save_settings'));

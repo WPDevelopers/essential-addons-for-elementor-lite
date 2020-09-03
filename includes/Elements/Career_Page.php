@@ -8,18 +8,18 @@ if (!defined('ABSPATH')) {
 
 use \Elementor\Controls_Manager;
 use \Elementor\Widget_Base;
-class Woocommerce_Review extends Widget_Base {
+class Career_Page extends Widget_Base {
 
 	public function get_name() {
-		return 'eael-woocommerce-review';
+		return 'eael-career-page';
 	}
 
 	public function get_title() {
-		return esc_html__( 'ReviewX Woo Review', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'EasyJobs Career Page', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eaicon-reviewx';
+		return 'eaicon-easyjobs';
 	}
 
    	public function get_categories() {
@@ -28,21 +28,18 @@ class Woocommerce_Review extends Widget_Base {
     
     public function get_keywords() {
         return [
-            'reviewx',
-            'woo review',
-            'woo',
-            'woocommerce',
-            'comment',
-            'review',
+            'easyjobs',
             'addons',
             'ea',
+            'career',
+            'job',
+            'career page',
             'essential addons',
-            'woocommerce review'
 		];
     }
 
     public function get_custom_help_url() {
-        return 'https://reviewx.io/docs';
+        return 'https://easy.jobs/docs/';
     }
 
 	protected function _register_controls() {
@@ -57,7 +54,7 @@ class Woocommerce_Review extends Widget_Base {
             'eael_global_warning_text',
             [
                 'type'            => Controls_Manager::RAW_HTML,
-                'raw'             => __('<strong>ReviewX</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=reviewx&tab=search&type=term" target="_blank">ReviewX</a> first.',
+                'raw'             => __('<strong>EasyJobs</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=easyjobs&tab=search&type=term" target="_blank">EasyJobs</a> first.',
                     'essential-addons-for-elementor-lite'),
                 'content_classes' => 'eael-warning',
             ]
