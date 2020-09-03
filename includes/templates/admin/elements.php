@@ -585,6 +585,7 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
             <!-- hidden input -->
             <input type="hidden" name="embedpress" value="on">
             <input type="hidden" name="woocommerce-review" value="on">
+            <input type="hidden" name="career-page" value="on">
 
             <div class="eael-save-btn-wrap">
                 <button type="submit" class="button eael-btn js-eael-settings-save"><?php esc_html_e('Save settings', 'essential-addons-for-elementor-lite'); ?></button>
