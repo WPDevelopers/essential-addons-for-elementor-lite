@@ -27,7 +27,7 @@ class Helper
 
             ob_start();
 
-            include_once $file_path;
+            include $file_path;
 
             return ob_get_clean();
         }

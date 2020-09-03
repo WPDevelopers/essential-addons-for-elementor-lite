@@ -62,7 +62,7 @@ trait Helper
                     while ($query->have_posts()) {
                         $query->the_post();
 
-                        $html = HelperClass::includes_with_variable($file_path, ['settings' => $settings]);
+                        $html .= HelperClass::includes_with_variable($file_path, ['settings' => $settings]);
                     }
                 }
             }
