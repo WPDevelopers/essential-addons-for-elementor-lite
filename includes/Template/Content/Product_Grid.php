@@ -321,14 +321,14 @@ trait Product_Grid
 
 			$setPagination .="<nav class='eael-woo-pagination'>";
 			$setPagination .="<ul class='page-numbers'>";
-			$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' onclick='javascript:productPaginationProduct(1,$paginationLimit);javascript:productPagination(1,$paginationLimit);'>Prev</a></li>";
+			$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-pnumber='1' data-plimit='$paginationLimit'>Prev</a></li>";
 
 			if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
 
 				for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
 
 					if( $pagination ==  0 || $pagination ==  1 ){ $active="current"; }else{ $active=""; }
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
 
 				}
 
@@ -337,21 +337,21 @@ trait Product_Grid
 				for( $pagination=1; $pagination <= 4 + ($adjacents * 2); $pagination++){
 					if( $pagination ==  0 || $pagination ==  1 ){ $active="current"; }else{ $active=""; }
 
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
 				}
 
 				$setPagination .="<li class='pagitext dots'>...</li>";
-				$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
+				$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
 
 			} else {
 
 				for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
 					if( $pagination ==  0 || $pagination ==  1 ){ $active="current"; }else{ $active=""; }
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' onclick='productPaginationProduct($pagination,$paginationLimit);productPagination($pagination,$paginationLimit);'>$pagination</a></li>";
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
 				}
 
 			}
-			$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' onclick='javascript:productPaginationProduct(2,$paginationLimit);javascript:productPagination(2,$paginationLimit);'>Next</a></li>";
+			$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-pnumber='2' data-plimit='$paginationLimit'>Next</a></li>";
 			$setPagination .="</ul>";
 			$setPagination .="</nav>";
 

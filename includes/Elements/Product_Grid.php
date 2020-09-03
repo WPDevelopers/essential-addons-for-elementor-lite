@@ -2477,63 +2477,6 @@ class Product_Grid extends Widget_Base {
 
 
             });
-
-            function productPaginationProduct(pnumber,plimit){
-                var nth  = pnumber;
-                var lmt  = plimit;
-                var ajax_url = localize.ajaxurl;
-                // var pagination = jQuery("#post").attr('data-posttype');
-                // var paginationcat = jQuery("#post").attr('data-cattype');
-                // var paginationtax = jQuery("#post").attr('data-taxname');
-                var widgetid = jQuery("#post").attr('data-widgetid');
-
-                var $scope = ".elementor-element-"+widgetid;
-                var $args = jQuery("#post").attr('data-args');
-                var $settings = jQuery("#post").attr('data-settings');
-
-                jQuery.ajax({
-                    url		:ajax_url,
-                    type	:'post',
-                    data	:{ 'action':'woo_product_pagination_product','number':nth,'limit':lmt,
-                        'args':$args,'settings':$settings },
-                    beforeSend	: function(){
-                        jQuery(".eael-product-grid .products").html("<li style='text-align:center;'>Loading please " +
-                            "wait...!</li>");
-                    },
-                    success :function(response){
-                        jQuery($scope+" .eael-product-grid .products").html(response);
-                    }
-                });
-            }
-
-            function productPagination(pnumber,plimit){
-                var nth  = pnumber;
-                var lmt  = plimit;
-                var ajax_url = localize.ajaxurl;
-                // var pagination = jQuery("#post").attr('data-posttype');
-                // var paginationcat = jQuery("#post").attr('data-cattype');
-                // var paginationtax = jQuery("#post").attr('data-taxname');
-                var widgetid = jQuery("#post").attr('data-widgetid');
-
-                var $scope = ".elementor-element-"+widgetid;
-                var $args = jQuery("#post").attr('data-args');
-                var $settings = jQuery("#post").attr('data-settings');
-
-                jQuery.ajax({
-                    url		:ajax_url,
-                    type	:'post',
-                    data	:{ 'action':'woo_product_pagination','number':nth,'limit':lmt,'args':$args,
-                        'settings':$settings },
-                    beforeSend	: function(){
-                        jQuery(".eael-product-grid .products").html("<li style='text-align:center;'>Loading please " +
-                            "wait...!</li>");
-                    },
-                    success :function(response){
-                        jQuery($scope+" .eael-product-grid .eael-woo-pagination").html(response);
-                    }
-                });
-            }
-
         </script>
 
 		<?php
