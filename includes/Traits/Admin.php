@@ -150,7 +150,7 @@ trait Admin
                     'login_register' => [
 	                        //m=modal, rm=response modal, r=reCAPTCHA, g= google, f=facebook, e=error
                             'm_title' => __('Login | Register Form Settings', 'essential-addons-for-elementor-lite'),
-                            'm_footer' => __('To retrieve your API Keys, click here', 'essential-addons-for-elementor-lite'),
+                            'm_footer' => $this->pro_enabled ? __('To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite') :  __('To retrieve your API Keys, click here', 'essential-addons-for-elementor-lite'),
                             'save' => __('Save', 'essential-addons-for-elementor-lite'),
                             'cancel' => __('Cancel', 'essential-addons-for-elementor-lite'),
                             'rm_title' => __('Login | Register Form Settings Saved', 'essential-addons-for-elementor-lite'),
