@@ -15,8 +15,7 @@ use Elementor\Utils;
 use Elementor\Widget_Base;
 use Essential_Addons_Elementor\Traits\Login_Registration;
 
-if ( ! defined( 'ABSPATH' ) )
-{
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
@@ -24,8 +23,7 @@ if ( ! defined( 'ABSPATH' ) )
  * Class Login_Register
  * @package Essential_Addons_Elementor\Elements
  */
-class Login_Register extends Widget_Base
-{
+class Login_Register extends Widget_Base {
 
 	use Login_Registration;
 
@@ -96,8 +94,7 @@ class Login_Register extends Widget_Base
 	 * Initializing the Login_Register widget class.
 	 * @inheritDoc
 	 */
-	public function __construct( $data = [], $args = null )
-	{
+	public function __construct( $data = [], $args = null ) {
 		parent::__construct( $data, $args );
 		$this->user_can_register = get_option( 'users_can_register' );
 		$this->recaptcha_sitekey = get_option( 'eael_recaptcha_sitekey' );
@@ -109,29 +106,25 @@ class Login_Register extends Widget_Base
 	/**
 	 * @inheritDoc
 	 */
-	public function get_name()
-	{
+	public function get_name() {
 		return 'eael-login-register';
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	public function get_title()
-	{
+	public function get_title() {
 		return esc_html__( 'Login | Register Form', 'essential-addons-for-elementor-lite' );
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	public function get_icon()
-	{
+	public function get_icon() {
 		return 'eaicon-login';
 	}
 
-	public function get_script_depends()
-	{
+	public function get_script_depends() {
 		$scripts   = parent::get_script_depends();
 		$scripts[] = 'eael-recaptcha';
 
@@ -141,8 +134,7 @@ class Login_Register extends Widget_Base
 	/**
 	 * @inheritDoc
 	 */
-	public function get_style_depends()
-	{
+	public function get_style_depends() {
 		$styles   = parent::get_style_depends();
 		$styles[] = 'dashicons';
 
@@ -152,8 +144,7 @@ class Login_Register extends Widget_Base
 	/**
 	 * @inheritDoc
 	 */
-	public function get_keywords()
-	{
+	public function get_keywords() {
 		return [
 			'ea login register',
 			'ea register login',
@@ -169,16 +160,14 @@ class Login_Register extends Widget_Base
 		];
 	}
 
-	public function get_custom_help_url()
-	{
+	public function get_custom_help_url() {
 		return 'https://essential-addons.com/elementor/docs/login-register-form/';
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	public function get_categories()
-	{
+	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
 
@@ -186,8 +175,7 @@ class Login_Register extends Widget_Base
 	 * Get an array of form field types.
 	 * @return array
 	 */
-	protected function get_form_field_types()
-	{
+	protected function get_form_field_types() {
 		return apply_filters( 'eael/registration-form-fields', [
 			'user_name'    => __( 'Username', 'essential-addons-for-elementor-lite' ),
 			'email'        => __( 'Email', 'essential-addons-for-elementor-lite' ),
@@ -202,8 +190,7 @@ class Login_Register extends Widget_Base
 	/**
 	 * @inheritDoc
 	 */
-	protected function _register_controls()
-	{
+	protected function _register_controls() {
 		/*----Content Tab----*/
 		do_action( 'eael/login-register/before-content-controls', $this );
 		$this->init_content_general_controls();
@@ -243,8 +230,7 @@ class Login_Register extends Widget_Base
 	/**
 	 * It adds controls related to Login Form Types section to the Widget Content Tab
 	 */
-	protected function init_content_general_controls()
-	{
+	protected function init_content_general_controls() {
 		$this->start_controls_section( 'section_content_general', [
 			'label' => __( 'General', 'essential-addons-for-elementor-lite' ),
 		] );
@@ -262,8 +248,7 @@ class Login_Register extends Widget_Base
 			],
 			'default' => 'login',
 		] );
-		if ( ! $this->user_can_register )
-		{
+		if ( ! $this->user_can_register ) {
 			$this->add_control( 'registration_off_notice', [
 				'type'            => Controls_Manager::RAW_HTML,
 				/* translators: %1$s is settings page link open tag, %2$s is link closing tag */
@@ -338,8 +323,7 @@ class Login_Register extends Widget_Base
 			],
 		] );
 
-		if ( $this->user_can_register )
-		{
+		if ( $this->user_can_register ) {
 			$this->add_control( 'reg_hr', [
 				'type' => Controls_Manager::DIVIDER,
 			] );
@@ -391,8 +375,7 @@ class Login_Register extends Widget_Base
 					'show_register_link'       => 'yes',
 				],
 			] );
-		} else
-		{
+		} else {
 			$this->add_control( 'show_register_link', [
 				'label'     => __( 'Show Register Link', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::HIDDEN,
@@ -408,8 +391,7 @@ class Login_Register extends Widget_Base
 			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 			'return_value' => 'yes',
 		] );
-		if ( empty( $this->recaptcha_sitekey ) )
-		{
+		if ( empty( $this->recaptcha_sitekey ) ) {
 			$this->add_control( 'eael_login_recaptcha_keys_missing', [
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => sprintf( __( 'reCAPTCHA API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
@@ -423,8 +405,7 @@ class Login_Register extends Widget_Base
 
 
 		/*--show registration related control only if registration is enable on the site--*/
-		if ( $this->user_can_register )
-		{
+		if ( $this->user_can_register ) {
 			$this->add_control( 'gen_reg_content_po_toggle', [
 				'label'        => __( 'Register Form General', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::POPOVER_TOGGLE,
@@ -488,8 +469,7 @@ class Login_Register extends Widget_Base
 				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 			] );
-			if ( empty( $this->recaptcha_sitekey ) )
-			{
+			if ( empty( $this->recaptcha_sitekey ) ) {
 				$this->add_control( 'eael_recaptcha_keys_missing', [
 					'type'            => Controls_Manager::RAW_HTML,
 					'raw'             => sprintf( __( 'reCAPTCHA API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
@@ -501,8 +481,7 @@ class Login_Register extends Widget_Base
 			}
 			$this->end_popover();
 
-		} else
-		{
+		} else {
 			$this->add_control( 'show_login_link', [
 				'label'   => __( 'Show Login Link', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::HIDDEN,
@@ -517,8 +496,7 @@ class Login_Register extends Widget_Base
 	/**
 	 * It adds controls related to Login Form Fields section to the Widget Content Tab
 	 */
-	protected function init_content_login_fields_controls()
-	{
+	protected function init_content_login_fields_controls() {
 		$this->start_controls_section( 'section_content_login_fields', [
 			'label'      => __( 'Login Form Fields', 'essential-addons-for-elementor-lite' ),
 			'conditions' => $this->get_form_controls_display_condition( 'login' ),
@@ -654,8 +632,7 @@ class Login_Register extends Widget_Base
 		$this->end_controls_section();
 	}
 
-	protected function init_form_header_controls()
-	{
+	protected function init_form_header_controls() {
 		$this->start_controls_section( 'section_content_lr_form_header', [
 			'label' => __( 'Form Header Content', 'essential-addons-for-elementor-lite' ),
 		] );
@@ -759,8 +736,7 @@ class Login_Register extends Widget_Base
 		$this->end_controls_section();
 	}
 
-	protected function init_content_login_options_controls()
-	{
+	protected function init_content_login_options_controls() {
 
 		$this->start_controls_section( 'section_content_login_options', [
 			'label'      => __( 'Login Form Options', 'essential-addons-for-elementor-lite' ),
@@ -809,8 +785,7 @@ class Login_Register extends Widget_Base
 		$this->end_controls_section();
 	}
 
-	protected function init_content_terms_controls()
-	{
+	protected function init_content_terms_controls() {
 		$this->start_controls_section( 'section_content_terms_conditions', [
 			'label'      => __( 'Terms & Conditions', 'essential-addons-for-elementor-lite' ),
 			'conditions' => $this->get_form_controls_display_condition( 'register' ),
@@ -885,8 +860,7 @@ class Login_Register extends Widget_Base
 		$this->end_controls_section();
 	}
 
-	protected function init_content_validation_messages_controls()
-	{
+	protected function init_content_validation_messages_controls() {
 		$this->start_controls_section( 'section_content_errors', [
 			'label' => __( 'Validation Messages', 'essential-addons-for-elementor-lite' ),
 		] );
@@ -1002,8 +976,7 @@ class Login_Register extends Widget_Base
 		$this->end_controls_section();
 	}
 
-	protected function init_content_register_fields_controls()
-	{
+	protected function init_content_register_fields_controls() {
 
 		$this->start_controls_section( 'section_content_register_fields', [
 			'label'      => __( 'Register Form Fields', 'essential-addons-for-elementor-lite' ),
@@ -1113,8 +1086,7 @@ class Login_Register extends Widget_Base
 			] ),
 			'title_field' => '{{{ field_label }}}',
 		];
-		if ( $this->pro_enabled )
-		{
+		if ( $this->pro_enabled ) {
 			$rf['title_field'] = '{{{ elementor.helpers.renderIcon( this, icon, {}, "i", "panel" ) || \'<i class="{{ icon }}" aria-hidden="true"></i>\' }}} {{{ field_label }}}';
 		}
 		$this->add_control( 'register_fields', $rf );
@@ -1152,8 +1124,7 @@ class Login_Register extends Widget_Base
 		$this->end_controls_section();
 	}
 
-	protected function init_content_register_options_controls()
-	{
+	protected function init_content_register_options_controls() {
 
 		$this->start_controls_section( 'section_content_register_actions', [
 			'label'      => __( 'Register Form Options', 'essential-addons-for-elementor-lite' ),
@@ -1202,8 +1173,7 @@ class Login_Register extends Widget_Base
 		$this->end_controls_section();
 	}
 
-	protected function init_content_register_user_email_controls()
-	{
+	protected function init_content_register_user_email_controls() {
 		/* translators: %s: Site Name */
 		$default_subject = sprintf( __( 'Thank you for registering on "%s"!', 'essential-addons-for-elementor-lite' ), get_option( 'blogname' ) );
 		$default_message = $default_subject . "\r\n\r\n";
@@ -1311,8 +1281,7 @@ class Login_Register extends Widget_Base
 		$this->end_controls_section();
 	}
 
-	protected function init_content_register_admin_email_controls()
-	{
+	protected function init_content_register_admin_email_controls() {
 		/* translators: %s: Site Name */
 		$default_subject = sprintf( __( '["%s"] New User Registration', 'essential-addons-for-elementor-lite' ), get_option( 'blogname' ) );
 		/* translators: %s: Site Name */
@@ -1421,8 +1390,7 @@ class Login_Register extends Widget_Base
 	/**
 	 * It prints controls for managing general style of both login and registration form
 	 */
-	protected function init_style_general_controls()
-	{
+	protected function init_style_general_controls() {
 		$this->start_controls_section( 'section_style_general', [
 			'label' => __( 'General', 'essential-addons-for-elementor-lite' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
@@ -1798,8 +1766,7 @@ class Login_Register extends Widget_Base
 		$this->end_controls_section();
 	}
 
-	protected function init_style_header_content_controls( $form_type = 'login' )
-	{
+	protected function init_style_header_content_controls( $form_type = 'login' ) {
 		$this->start_controls_section( "section_style_{$form_type}_header_content", [
 			'label'      => sprintf( __( '%s Form Header', 'essential-addons-for-elementor-lite' ), ucfirst( $form_type ) ),
 			// Login Form Header | Register Form Header
@@ -2433,8 +2400,7 @@ class Login_Register extends Widget_Base
 		$this->end_controls_section();
 	}
 
-	protected function init_style_input_fields_controls()
-	{
+	protected function init_style_input_fields_controls() {
 		$this->start_controls_section( 'section_style_form_fields', [
 			'label' => __( 'Form Fields', 'essential-addons-for-elementor-lite' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
@@ -2635,8 +2601,7 @@ class Login_Register extends Widget_Base
 		$this->end_controls_section();
 	}
 
-	protected function init_style_input_labels_controls()
-	{
+	protected function init_style_input_labels_controls() {
 		$this->start_controls_section( 'section_style_form_labels', [
 			'label' => __( 'Form Labels', 'essential-addons-for-elementor-lite' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
@@ -2949,33 +2914,27 @@ class Login_Register extends Widget_Base
 		$this->end_controls_section();
 	}
 
-	protected function init_style_login_button_controls()
-	{
+	protected function init_style_login_button_controls() {
 		$this->_init_button_style( 'login' );
 	}
 
-	protected function init_style_register_button_controls()
-	{
+	protected function init_style_register_button_controls() {
 		$this->_init_button_style( 'register' );
 	}
 
-	protected function init_style_login_link_controls()
-	{
+	protected function init_style_login_link_controls() {
 		$this->_init_link_style( 'login' );
 	}
 
-	protected function init_style_register_link_controls()
-	{
+	protected function init_style_register_link_controls() {
 		$this->_init_link_style( 'register' );
 	}
 
-	protected function init_style_login_recaptcha_controls()
-	{
+	protected function init_style_login_recaptcha_controls() {
 		$this->_init_recaptcha_style( 'login' );
 	}
 
-	protected function init_style_register_recaptcha_controls()
-	{
+	protected function init_style_register_recaptcha_controls() {
 		$this->_init_recaptcha_style( 'register' );
 	}
 
@@ -2984,8 +2943,7 @@ class Login_Register extends Widget_Base
 	 *
 	 * @param string $button_type the type of the button. accepts login or register.
 	 */
-	protected function _init_button_style( $button_type = 'login' )
-	{
+	protected function _init_button_style( $button_type = 'login' ) {
 		$this->start_controls_section( "section_style_{$button_type}_btn", [
 			'label'      => sprintf( __( '%s Button', 'essential-addons-for-elementor-lite' ), ucfirst( $button_type ) ),
 			'tab'        => Controls_Manager::TAB_STYLE,
@@ -3226,8 +3184,7 @@ class Login_Register extends Widget_Base
 	 *
 	 * @param string $form_type the type of the reCAPTCHA. accepts login or register.
 	 */
-	protected function _init_recaptcha_style( $form_type = 'login' )
-	{
+	protected function _init_recaptcha_style( $form_type = 'login' ) {
 		$this->start_controls_section( "section_style_{$form_type}_rc", [
 			'label'     => sprintf( __( '%s Form reCAPTCHA', 'essential-addons-for-elementor-lite' ), ucfirst( $form_type ) ),
 			'tab'       => Controls_Manager::TAB_STYLE,
@@ -3277,8 +3234,7 @@ class Login_Register extends Widget_Base
 	 *
 	 * @param string $form_type the type of form where the link is being shown. accepts login or register.
 	 */
-	protected function _init_link_style( $form_type = 'login' )
-	{
+	protected function _init_link_style( $form_type = 'login' ) {
 		$form_name = 'login' === $form_type ? __( 'Register', 'essential-addons-for-elementor-lite' ) : __( 'Login', 'essential-addons-for-elementor-lite' );
 		$this->start_controls_section( "section_style_{$form_type}_link", [
 			'label'     => sprintf( __( '%s Link', 'essential-addons-for-elementor-lite' ), ucfirst( $form_name ) ),
@@ -3574,8 +3530,7 @@ class Login_Register extends Widget_Base
 	 *
 	 * @return array
 	 */
-	public function get_form_controls_display_condition( $type = 'login' )
-	{
+	public function get_form_controls_display_condition( $type = 'login' ) {
 		$form_type = in_array( $type, [
 			'login',
 			'register',
@@ -3596,11 +3551,9 @@ class Login_Register extends Widget_Base
 		];
 	}
 
-	protected function render()
-	{
+	protected function render() {
 		//Note. forms are handled in Login_Registration Trait used in the Bootstrap class.
-		if ( ! $this->in_editor && 'yes' === $this->get_settings_for_display( 'hide_for_logged_in_user' ) && is_user_logged_in() )
-		{
+		if ( ! $this->in_editor && 'yes' === $this->get_settings_for_display( 'hide_for_logged_in_user' ) && is_user_logged_in() ) {
 			return; // do not show any form for already logged in user. but let edit on editor
 		}
 
@@ -3609,8 +3562,7 @@ class Login_Register extends Widget_Base
 		$this->should_print_login_form = ( 'login' === $this->default_form || 'yes' === $this->get_settings_for_display( 'show_login_link' ) );
 
 		$this->should_print_register_form = ( $this->user_can_register && ( 'register' === $this->get_settings_for_display( 'default_form_type' ) || 'yes' === $this->get_settings_for_display( 'show_register_link' ) ) );
-		if ( Plugin::$instance->documents->get_current() )
-		{
+		if ( Plugin::$instance->documents->get_current() ) {
 			$this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
 		}
 
@@ -3624,18 +3576,11 @@ class Login_Register extends Widget_Base
 		$this->form_logo     = Group_Control_Image_Size::get_attachment_image_src( $form_logo_id, 'lr_form_logo', $this->ds );
 		$this->form_logo_pos = ! empty( $this->ds['lr_form_logo_position'] ) ? $this->ds['lr_form_logo_position'] : 'inline';
 
-		//@TODO; optimize data atts later, use render atts
 		?>
         <div class="eael-login-registration-wrapper"
              data-is-ajax="<?php echo esc_attr( $this->get_settings_for_display( 'enable_ajax' ) ); ?>"
              data-widget-id="<?php echo esc_attr( $this->get_id() ); ?>"
              data-recaptcha-sitekey="<?php echo esc_attr( get_option( 'eael_recaptcha_sitekey' ) ); ?>"
-             data-show-pass-strength="<?php echo esc_attr( $this->get_settings_for_display( 'show_pass_strength' ) ); ?>"
-             data-ps-text-type="<?php echo esc_attr( $this->get_settings_for_display( 'ps_text_type' ) ); ?>"
-             data-ps-text-bad="<?php echo esc_attr( $this->get_settings_for_display( 'ps_text_bad' ) ); ?>"
-             data-ps-text-good="<?php echo esc_attr( $this->get_settings_for_display( 'ps_text_good' ) ); ?>"
-             data-ps-text-strong="<?php echo esc_attr( $this->get_settings_for_display( 'ps_text_strong' ) ); ?>"
-             data-ps-text-short="<?php echo esc_attr( $this->get_settings_for_display( 'ps_text_short' ) ); ?>"
         >
 			<?php
 			$this->print_login_form();
@@ -3646,10 +3591,8 @@ class Login_Register extends Widget_Base
 		<?php
 	}
 
-	protected function print_login_form()
-	{
-		if ( $this->should_print_login_form )
-		{
+	protected function print_login_form() {
+		if ( $this->should_print_login_form ) {
 			// prepare all login form related vars
 			$default_hide_class = 'register' === $this->default_form ? 'd-none' : '';
 			//Reg link related
@@ -3662,8 +3605,7 @@ class Login_Register extends Widget_Base
 
 			$reg_link_placeholder = '<span class="d-ib">%1$s</span> <a href="%2$s" id="eael-lr-reg-toggle" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
 			$reg_atts             = $reg_url = '';
-			switch ( $reg_link_action )
-			{
+			switch ( $reg_link_action ) {
 				case 'custom':
 					$reg_url  = ! empty( $this->ds['custom_register_url']['url'] ) ? $this->ds['custom_register_url']['url'] : '';
 					$reg_atts = ! empty( $this->ds['custom_register_url']['is_external'] ) ? ' target="_blank"' : '';
@@ -3686,8 +3628,7 @@ class Login_Register extends Widget_Base
 			$u_label = $u_ph = __( 'Username or Email Address', 'essential-addons-for-elementor-lite' );
 			$p_label = $p_ph = __( 'Password', 'essential-addons-for-elementor-lite' );
 			// custom label n placeholder
-			if ( $is_custom_label )
-			{
+			if ( $is_custom_label ) {
 				$u_label = isset( $this->ds['login_user_label'] ) ? $this->ds['login_user_label'] : '';
 				$p_label = isset( $this->ds['login_password_label'] ) ? $this->ds['login_password_label'] : '';
 				$u_ph    = isset( $this->ds['login_user_placeholder'] ) ? $this->ds['login_user_placeholder'] : '';
@@ -3704,8 +3645,7 @@ class Login_Register extends Widget_Base
 			$show_lp = ( ! empty( $this->ds['show_lost_password'] ) && 'yes' === $this->ds['show_lost_password'] );
 			$lp_text = ! empty( $this->ds['lost_password_text'] ) ? $this->ds['lost_password_text'] : __( 'Forgot password?', 'essential-addons-for-elementor-lite' );
 			$lp_link = sprintf( '<a href="%s">%s</a>', esc_attr( wp_lostpassword_url() ), $lp_text );
-			if ( ! empty( $this->ds['lost_password_link_type'] ) && 'custom' === $this->ds['lost_password_link_type'] )
-			{
+			if ( ! empty( $this->ds['lost_password_link_type'] ) && 'custom' === $this->ds['lost_password_link_type'] ) {
 				$lp_url  = ! empty( $this->ds['lost_password_url']['url'] ) ? $this->ds['lost_password_url']['url'] : wp_lostpassword_url();
 				$lp_atts = ! empty( $this->ds['lost_password_url']['is_external'] ) ? ' target="_blank"' : '';
 				$lp_atts .= ! empty( $this->ds['lost_password_url']['nofollow'] ) ? ' rel="nofollow"' : '';
@@ -3730,15 +3670,12 @@ class Login_Register extends Widget_Base
                     data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>">
                 <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr( $icon_class ); ?>">
 					<?php
-					if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor )
-					{
+					if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor ) {
 						/* translators: %s user display name */
 						$logged_in_msg = sprintf( __( 'You are already logged in as %s. ', 'essential-addons-for-elementor-lite' ), wp_get_current_user()->display_name );
 						printf( '%1$s   (<a href="%2$s">%3$s</a>)', $logged_in_msg, esc_url( wp_logout_url() ), __( 'Logout', 'essential-addons-for-elementor-lite' ) );
-					} else
-					{
-						if ( 'left' === $this->form_illustration_pos )
-						{
+					} else {
+						if ( 'left' === $this->form_illustration_pos ) {
 							$this->print_form_illustration();
 						}
 						?>
@@ -3750,8 +3687,7 @@ class Login_Register extends Widget_Base
                                   method="post">
 								<?php do_action( 'eael/login-register/after-login-form-open', $this ); ?>
                                 <div class="eael-lr-form-group">
-									<?php if ( $display_label && $u_label )
-									{
+									<?php if ( $display_label && $u_label ) {
 										printf( '<label for="eael-user-login" class="eael-field-label">%s</label>', $u_label );
 									} ?>
                                     <input type="text"
@@ -3759,20 +3695,17 @@ class Login_Register extends Widget_Base
                                            id="eael-user-login"
                                            class="eael-lr-form-control"
                                            aria-describedby="emailHelp"
-                                           placeholder="<?php if ( $display_label && $u_ph )
-									       {
+                                           placeholder="<?php if ( $display_label && $u_ph ) {
 										       echo esc_attr( $u_ph );
 									       } ?>"
                                            required>
 									<?php
-									if ( $show_icon )
-									{
+									if ( $show_icon ) {
 										echo '<i class="fas fa-user"></i>';
 									} ?>
                                 </div>
                                 <div class="eael-lr-form-group">
-									<?php if ( $display_label && $p_label )
-									{
+									<?php if ( $display_label && $p_label ) {
 										printf( '<label for="eael-user-password" class="eael-field-label">%s</label>', $p_label );
 									} ?>
                                     <div class="eael-lr-password-wrapper">
@@ -3780,8 +3713,7 @@ class Login_Register extends Widget_Base
                                                name="eael-user-password"
                                                class="eael-lr-form-control"
                                                id="eael-user-password"
-                                               placeholder="<?php if ( $display_label && $p_ph )
-										       {
+                                               placeholder="<?php if ( $display_label && $p_ph ) {
 											       echo esc_attr( $p_ph );
 										       } ?>"
                                                required>
@@ -3795,8 +3727,7 @@ class Login_Register extends Widget_Base
                                             </button>
 										<?php } ?>
 										<?php
-										if ( $show_icon )
-										{
+										if ( $show_icon ) {
 											echo '<i class="fas fa-lock"></i>';
 										} ?>
                                     </div>
@@ -3812,8 +3743,7 @@ class Login_Register extends Widget_Base
                                                    class="eael-checkbox-label check-rememberme"><?php esc_html_e( 'Remember Me', 'essential-addons-for-elementor-lite' ); ?></label>
                                         </p>
 									<?php }
-									if ( $show_lp )
-									{
+									if ( $show_lp ) {
 										echo '<p class="forget-pass">' . $lp_link . '</p>';//XSS ok. already escaped
 									} ?>
 
@@ -3856,8 +3786,7 @@ class Login_Register extends Widget_Base
 							<?php do_action( 'eael/login-register/after-login-form', $this ); ?>
                         </div>
 						<?php
-						if ( 'right' === $this->form_illustration_pos )
-						{
+						if ( 'right' === $this->form_illustration_pos ) {
 							$this->print_form_illustration();
 						}
 					}
@@ -3869,10 +3798,8 @@ class Login_Register extends Widget_Base
 		}
 	}
 
-	protected function print_register_form()
-	{
-		if ( $this->should_print_register_form )
-		{
+	protected function print_register_form() {
+		if ( $this->should_print_register_form ) {
 			$default_hide_class = 'login' === $this->default_form ? 'd-none' : '';
 			$is_pass_valid      = false; // Does the form has a password field?
 			$is_pass_confirmed  = false;
@@ -3908,8 +3835,7 @@ class Login_Register extends Widget_Base
 			$lgn_link_placeholder = '<span class="d-ib">%1$s</span> <a href="%2$s" id="eael-lr-login-toggle" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
 			$lgn_url              = $lgn_atts = '';
 
-			switch ( $lgn_link_action )
-			{
+			switch ( $lgn_link_action ) {
 				case 'custom':
 					$lgn_url  = ! empty( $this->ds['custom_login_url']['url'] ) ? $this->ds['custom_login_url']['url'] : '';
 					$lgn_atts = ! empty( $this->ds['custom_login_url']['is_external'] ) ? ' target="_blank"' : '';
@@ -3938,8 +3864,7 @@ class Login_Register extends Widget_Base
                     data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>"
                     data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>">
                 <div class="eael-register-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr( $icon_class ); ?>">
-					<?php if ( 'left' === $this->form_illustration_pos )
-					{
+					<?php if ( 'left' === $this->form_illustration_pos ) {
 						$this->print_form_illustration();
 					} ?>
                     <div class="lr-form-wrapper">
@@ -3957,12 +3882,10 @@ class Login_Register extends Widget_Base
 								$dynamic_field_name = "{$field_type}_exists";
 								$$dynamic_field_name ++; //NOTE, double $$ intentional. Dynamically update the var check eg. $username_exists++ to prevent user from using the same field twice
 								// is same field repeated?
-								if ( $$dynamic_field_name > 1 )
-								{
+								if ( $$dynamic_field_name > 1 ) {
 									$repeated_f_labels[] = $f_labels[ $field_type ];
 								}
-								if ( 'password' === $field_type )
-								{
+								if ( 'password' === $field_type ) {
 									$is_pass_valid = true;
 								}
 
@@ -3978,8 +3901,7 @@ class Login_Register extends Widget_Base
 								$field_group_key = "field-group{$f_index}";
 
 								// determine proper input tag type
-								switch ( $field_type )
-								{
+								switch ( $field_type ) {
 									case 'user_name':
 									case 'first_name':
 									case 'last_name':
@@ -4013,14 +3935,12 @@ class Login_Register extends Widget_Base
 								] );
 
 								// print require field attributes
-								if ( $current_field_required )
-								{
+								if ( $current_field_required ) {
 									$this->add_render_attribute( $input_key, [
 										'required'      => 'required',
 										'aria-required' => 'true',
 									] );
-									if ( 'yes' === $this->ds['mark_required'] )
-									{
+									if ( 'yes' === $this->ds['mark_required'] ) {
 										$this->add_render_attribute( $label_key, [
 											'class' => 'mark-required',
 										] );
@@ -4040,31 +3960,31 @@ class Login_Register extends Widget_Base
 									],
 								] );
 
-								if ( ! empty( $field['width_tablet'] ) )
-								{
+								if ( ! empty( $field['width_tablet'] ) ) {
 									$this->add_render_attribute( $field_group_key, 'class', 'elementor-md-' . $field['width_tablet'] );
 								}
 
-								if ( ! empty( $field['width_mobile'] ) )
-								{
+								if ( ! empty( $field['width_mobile'] ) ) {
 									$this->add_render_attribute( $field_group_key, 'class', 'elementor-sm-' . $field['width_mobile'] );
 								}
 
 								?>
                                 <div <?php $this->print_render_attribute_string( $field_group_key ) ?>>
 									<?php
-									if ( 'yes' === $this->ds['show_labels'] && ! empty( $field['field_label'] ) )
-									{
+									if ( 'yes' === $this->ds['show_labels'] && ! empty( $field['field_label'] ) ) {
 										echo '<label ' . $this->get_render_attribute_string( $label_key ) . '>' . esc_attr( $field['field_label'] ) . '</label>';
 									}
 									echo '<input ' . $this->get_render_attribute_string( $input_key ) . '>';
-									if ( $show_icon && ! empty( $field['icon'] ) )
-									{
+									if ( $show_icon && ! empty( $field['icon'] ) ) {
 										Icons_Manager::render_icon( $field['icon'], [ 'aria-hidden' => 'true' ] );
 									}
 									?>
                                 </div>
-							<?php
+
+								<?php
+								if ( 'password' === $field['field_type'] ) {
+									do_action( 'eael/login-register/after-password-field', $this );
+								}
 							endforeach;
 							$this->print_necessary_hidden_fields( 'register' );
 							$this->print_terms_condition_notice();
@@ -4094,8 +4014,7 @@ class Login_Register extends Widget_Base
                         </form>
 						<?php do_action( 'eael/login-register/after-register-form', $this ); ?>
                     </div>
-					<?php if ( 'right' === $this->form_illustration_pos )
-					{
+					<?php if ( 'right' === $this->form_illustration_pos ) {
 						$this->print_form_illustration();
 					} ?>
                 </div>
@@ -4103,27 +4022,22 @@ class Login_Register extends Widget_Base
 			<?php
 			$form_markup = apply_filters( 'eael/login-register/register-form-markup', ob_get_clean() );
 			// if we are in the editor then show error related to different input field.
-			if ( $this->in_editor )
-			{
+			if ( $this->in_editor ) {
 				$repeated            = $this->print_error_for_repeated_fields( $repeated_f_labels );
 				$email_field_missing = $this->print_error_for_missing_email_field( $email_exists );
 				$pass_missing        = $this->print_error_for_missing_password_field( $password_exists, $confirm_pass_exists );
-				if ( $repeated || $email_field_missing || $pass_missing )
-				{
+				if ( $repeated || $email_field_missing || $pass_missing ) {
 					return false; // error found, exit, dont show form.
 				}
 				echo $form_markup; //XSS OK, data sanitized already.
-			} else
-			{
+			} else {
 				echo $form_markup; //XSS OK, data sanitized already.
 			}
 		}
 	}
 
-	protected function print_form_illustration()
-	{
-		if ( ! empty( $this->form_illustration_url ) )
-		{ ?>
+	protected function print_form_illustration() {
+		if ( ! empty( $this->form_illustration_url ) ) { ?>
             <div class="lr-form-illustration lr-img-pos-<?php echo esc_attr( $this->form_illustration_pos ); ?>"
                  style="background-image: url('<?php echo esc_attr( esc_url( $this->form_illustration_url ) ); ?>');"></div>
 		<?php }
@@ -4132,12 +4046,10 @@ class Login_Register extends Widget_Base
 	/**
 	 * @param string $form_type the type of form. Available values: login and register
 	 */
-	protected function print_form_header( $form_type = 'login' )
-	{
+	protected function print_form_header( $form_type = 'login' ) {
 		$title    = ! empty( $this->ds["{$form_type}_form_title"] ) ? esc_html( $this->ds["{$form_type}_form_title"] ) : '';
 		$subtitle = ! empty( $this->ds["{$form_type}_form_subtitle"] ) ? esc_html( $this->ds["{$form_type}_form_subtitle"] ) : '';
-		if ( empty( $this->form_logo ) && empty( $title ) && empty( $subtitle ) )
-		{
+		if ( empty( $this->form_logo ) && empty( $title ) && empty( $subtitle ) ) {
 			return;
 		}
 
@@ -4153,13 +4065,11 @@ class Login_Register extends Widget_Base
 			<?php if ( ! empty( $title ) || ! empty( $subtitle ) ) { ?>
                 <div class="form-dsc">
 					<?php
-					if ( ! empty( $title ) )
-					{
+					if ( ! empty( $title ) ) {
 						echo "<h4>{$title}</h4>"; // data escaped already.
 					}
 
-					if ( ! empty( $subtitle ) )
-					{
+					if ( ! empty( $subtitle ) ) {
 						echo "<p>{$subtitle}</p>"; // data escaped already.
 					} ?>
                 </div>
@@ -4168,12 +4078,9 @@ class Login_Register extends Widget_Base
 		<?php
 	}
 
-	protected function print_necessary_hidden_fields( $form_type = 'login' )
-	{
-		if ( 'login' === $form_type )
-		{
-			if ( ! empty( $this->ds['redirect_after_login'] ) && 'yes' === $this->ds['redirect_after_login'] )
-			{
+	protected function print_necessary_hidden_fields( $form_type = 'login' ) {
+		if ( 'login' === $form_type ) {
+			if ( ! empty( $this->ds['redirect_after_login'] ) && 'yes' === $this->ds['redirect_after_login'] ) {
 				$login_redirect_url = ! empty( $this->ds['redirect_url']['url'] ) ? esc_url( $this->ds['redirect_url']['url'] ) : '';
 				?>
                 <input type="hidden"
@@ -4193,10 +4100,8 @@ class Login_Register extends Widget_Base
 		<?php
 	}
 
-	protected function print_terms_condition_notice()
-	{
-		if ( empty( $this->ds['show_terms_conditions'] ) || 'yes' !== $this->ds['show_terms_conditions'] )
-		{
+	protected function print_terms_condition_notice() {
+		if ( empty( $this->ds['show_terms_conditions'] ) || 'yes' !== $this->ds['show_terms_conditions'] ) {
 			return;
 		}
 		$l         = isset( $this->ds['acceptance_label'] ) ? $this->ds['acceptance_label'] : '';
@@ -4206,8 +4111,7 @@ class Login_Register extends Widget_Base
 		$source    = isset( $this->ds['acceptance_text_source'] ) ? $this->ds['acceptance_text_source'] : 'editor';
 		$tc_text   = isset( $this->ds['acceptance_text'] ) ? $this->ds['acceptance_text'] : '';
 		$tc_link   = '<a href="#" id="eael-lr-tnc-link" class="eael-lr-tnc-link">' . esc_html( $link_text ) . '</a>';
-		if ( 'custom' === $source )
-		{
+		if ( 'custom' === $source ) {
 			$tc_url  = ! empty( $this->ds['acceptance_text_url']['url'] ) ? esc_url( $this->ds['acceptance_text_url']['url'] ) : esc_url( get_the_permalink( get_option( 'wp_page_for_privacy_policy' ) ) );
 			$tc_atts = ! empty( $this->ds['acceptance_text_url']['is_external'] ) ? ' target="_blank"' : '';
 			$tc_atts .= ! empty( $this->ds['acceptance_text_url']['nofollow'] ) ? ' rel="nofollow"' : '';
@@ -4243,11 +4147,9 @@ class Login_Register extends Widget_Base
 
 	}
 
-	protected function print_login_validation_errors()
-	{
+	protected function print_login_validation_errors() {
 		$error_key = 'eael_login_error_' . $this->get_id();
-		if ( $login_error = apply_filters( 'eael/login-register/login-error-message', get_transient( $error_key ) ) )
-		{
+		if ( $login_error = apply_filters( 'eael/login-register/login-error-message', get_transient( $error_key ) ) ) {
 			do_action( 'eael/login-register/before-showing-login-error', $login_error, $this );
 			?>
             <p class="eael-form-msg invalid">
@@ -4260,19 +4162,15 @@ class Login_Register extends Widget_Base
 		}
 	}
 
-	protected function print_recaptcha_node( $form_type = 'login' )
-	{
-		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) )
-		{
+	protected function print_recaptcha_node( $form_type = 'login' ) {
+		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) ) {
 			$id = "{$form_type}-recaptcha-node-" . $this->get_id();
 			echo "<input type='hidden' name='g-recaptcha-enabled' value='1'/><div id='{$id}' class='eael-recaptcha-wrapper'></div>";
 		}
 	}
 
-	protected function print_error_for_repeated_fields( $repeated_fields )
-	{
-		if ( ! empty( $repeated_fields ) )
-		{
+	protected function print_error_for_repeated_fields( $repeated_fields ) {
+		if ( ! empty( $repeated_fields ) ) {
 			$error_fields = '<strong>' . implode( "</strong>, <strong>", $repeated_fields ) . '</strong>';
 			?>
             <p class='eael-register-form-error elementor-alert elementor-alert-warning'>
@@ -4288,10 +4186,8 @@ class Login_Register extends Widget_Base
 		return false;
 	}
 
-	protected function print_error_for_missing_email_field( $email_exist )
-	{
-		if ( empty( $email_exist ) )
-		{
+	protected function print_error_for_missing_email_field( $email_exist ) {
+		if ( empty( $email_exist ) ) {
 			?>
             <p class='eael-register-form-error elementor-alert elementor-alert-warning'>
 				<?php
@@ -4314,10 +4210,8 @@ class Login_Register extends Widget_Base
 	 *
 	 * @return bool
 	 */
-	protected function print_error_for_missing_password_field( $password_exist, $confirm_pass_exist )
-	{
-		if ( empty( $password_exist ) && ! empty( $confirm_pass_exist ) )
-		{
+	protected function print_error_for_missing_password_field( $password_exist, $confirm_pass_exist ) {
+		if ( empty( $password_exist ) && ! empty( $confirm_pass_exist ) ) {
 			?>
             <p class='eael-register-form-error elementor-alert elementor-alert-warning'>
 				<?php
@@ -4332,37 +4226,30 @@ class Login_Register extends Widget_Base
 		return false;
 	}
 
-	protected function print_validation_message()
-	{
+	protected function print_validation_message() {
 		$errors  = get_transient( 'eael_register_errors_' . $this->get_id() );
 		$success = get_transient( 'eael_register_success_' . $this->get_id() );
-		if ( empty( $errors ) && empty( $success ) )
-		{
+		if ( empty( $errors ) && empty( $success ) ) {
 			return;
 		}
-		if ( ! empty( $errors ) && is_array( $errors ) )
-		{
+		if ( ! empty( $errors ) && is_array( $errors ) ) {
 			$this->print_registration_errors_message( $errors );
-		} else
-		{
+		} else {
 			$this->print_registration_success_message( $success );
 		}
 	}
 
-	protected function print_registration_errors_message( $errors )
-	{
+	protected function print_registration_errors_message( $errors ) {
 		?>
         <div class="eael-form-msg invalid">
 			<?php
-			if ( ! empty( $this->ds['err_unknown'] ) )
-			{
+			if ( ! empty( $this->ds['err_unknown'] ) ) {
 				printf( '<p>%s</p>', esc_html( $this->ds['err_unknown'] ) );
 			}
 			?>
             <ol>
 				<?php
-				foreach ( $errors as $register_error )
-				{
+				foreach ( $errors as $register_error ) {
 					printf( '<li>%s</li>', esc_html( $register_error ) );
 				}
 				?>
@@ -4372,11 +4259,9 @@ class Login_Register extends Widget_Base
 		delete_transient( 'eael_register_errors_' . $this->get_id() );
 	}
 
-	protected function print_registration_success_message( $success )
-	{
+	protected function print_registration_success_message( $success ) {
 
-		if ( $success )
-		{
+		if ( $success ) {
 			$message = '<p class="eael-form-msg valid">' . esc_html( $this->get_settings_for_display( 'success_register' ) ) . '</p>';
 			echo apply_filters( 'eael/login-register/registration-success-msg', $message, $success );
 
@@ -4395,8 +4280,7 @@ class Login_Register extends Widget_Base
 	 *
 	 * @return string
 	 */
-	public function apply_dim( $css_property )
-	{
+	public function apply_dim( $css_property ) {
 		return "{$css_property}: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};";
 	}
 
