@@ -856,6 +856,14 @@ $config = [
                 true,
             ],
         ],
+        'career-page' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Career_Page',
+            'condition' => [
+                'function_exists',
+                'run_easyjobs',
+                true,
+            ],
+        ],
     ],
     'extensions' => [
         'eael-promotion' => [
