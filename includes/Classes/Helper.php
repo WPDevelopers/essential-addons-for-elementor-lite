@@ -10,6 +10,31 @@ use \Elementor\Controls_Manager;
 
 class Helper
 {
+
+    /**
+     * Include a file with variables
+     *
+     * @param $file_path
+     * @param $variables
+     *
+     * @return string
+     * @since  4.2.2
+     */
+    public static function includes_with_variable(string $file_path, array $variables = [])
+    {
+        if (file_exists($file_path)) {
+            extract($variables);
+
+            ob_start();
+
+            include_once $file_path;
+
+            return ob_get_clean();
+        }
+
+        return '';
+    }
+
     /**
      * check EAEL extension can load this page or post
      *
@@ -650,20 +675,20 @@ class Helper
         $terms_object = array(
             'taxonomy' => 'knowledge_base',
             'hide_empty' => true,
-            'parent' => 0
+            'parent' => 0,
         );
 
-        $taxonomy_objects = get_terms( $terms_object );
+        $taxonomy_objects = get_terms($terms_object);
 
-        if(! is_wp_error( $taxonomy_objects )) {
-            if($prettify === true) {
+        if (!is_wp_error($taxonomy_objects)) {
+            if ($prettify === true) {
                 $pretty_taxonomies = [];
-    
-                foreach($taxonomy_objects as $object) {
-    
+
+                foreach ($taxonomy_objects as $object) {
+
                     $pretty_taxonomies[$term_id ? $object->term_id : $object->slug] = $object->name;
                 }
-    
+
                 return $pretty_taxonomies;
             }
         }
@@ -673,7 +698,7 @@ class Helper
 
     public static function get_betterdocs_multiple_kb_status()
     {
-        if(\BetterDocs_DB::get_settings('multiple_kb') == 1) {
+        if (\BetterDocs_DB::get_settings('multiple_kb') == 1) {
             return 'true';
         }
 

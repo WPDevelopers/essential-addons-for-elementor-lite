@@ -6,28 +6,11 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use \Essential_Addons_Elementor\Elements\Woo_Checkout;
 
 trait Helper
 {
-
-    public function includes_with_variable(string $file_path, array $variables = [])
-    {
-        $output = null;
-
-        if (file_exists($file_path)) {
-            extract($variables);
-
-            ob_start();
-
-            include $file_path;
-
-            $output = ob_get_clean();
-        }
-
-        echo $output;
-    }
-
     /**
      * This function is responsible for get the post data.
      * It will return HTML markup with AJAX call and with normal call.
@@ -40,6 +23,7 @@ trait Helper
         parse_str($_REQUEST['args'], $args);
         parse_str($_REQUEST['settings'], $settings);
 
+        $html = '';
         $class = '\\' . str_replace('\\\\', '\\', $_REQUEST['class']);
         $args['offset'] = (int) $args['offset'] + (((int) $_REQUEST['page'] - 1) * (int) $args['posts_per_page']);
 
@@ -55,35 +39,36 @@ trait Helper
 
         $template_info = $_REQUEST['template_info'];
 
-        if($template_info) {
-            if($template_info['dir'] === 'free') {
+        if ($template_info) {
+            if ($template_info['dir'] === 'free') {
                 $file_path = EAEL_PLUGIN_PATH;
             }
-            
-            if($template_info['dir'] === 'pro') {
+
+            if ($template_info['dir'] === 'pro') {
                 $file_path = EAEL_PRO_PLUGIN_PATH;
             }
-    
+
             $file_path = sprintf(
                 '%sincludes/Template/%s/%s.php',
                 $file_path,
                 $template_info['name'],
                 $template_info['file_name']
             );
-    
-            if($file_path) {
+
+            if ($file_path) {
                 $query = new \WP_Query($args);
-    
+
                 if ($query->have_posts()) {
                     while ($query->have_posts()) {
                         $query->the_post();
-    
-                        $html = $this->includes_with_variable($file_path, ['settings' => $settings]);
+
+                        $html = HelperClass::includes_with_variable($file_path, ['settings' => $settings]);
                     }
                 }
             }
         }
 
+        echo $html;
         wp_die();
     }
 
