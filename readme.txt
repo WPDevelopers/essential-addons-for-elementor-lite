@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.5
 Requires PHP: 5.4
-Stable tag: 4.2.2
+Stable tag: 4.2.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -223,6 +223,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.2.3 - 03/09/2020 =
+- Removed: Dashboard widget 
+- Fixed: EA Filterable Gallery | Showing Duplicate Images in Gallery View
+- Few minor bugfix and improvements
 
 = 4.2.2 - 27/08/2020 =
 - Fixed: Sorting not working when Pagination is disabled in EA Advanced Data Table
