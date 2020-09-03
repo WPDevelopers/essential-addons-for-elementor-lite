@@ -2483,6 +2483,42 @@ class Login_Register extends Widget_Base {
 				'eael_form_field_po_toggle' => 'yes',
 			],
 		] );
+
+		$this->add_control( 'eael_form_tc_fields_heading', [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Terms & Condition Field', 'essential-addons-for-elementor-lite' ),
+			'separator' => 'before',
+		] );
+		$this->add_responsive_control( "eael_form_tc_field_margin", [
+			'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap" => $this->apply_dim( 'margin' ),
+			],
+			'condition'  => [
+				'eael_form_field_po_toggle' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_tc_field_padding", [
+			'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap" => $this->apply_dim( 'padding' ),
+			],
+			'condition'  => [
+				'eael_form_field_po_toggle' => 'yes',
+			],
+		] );
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => "eael_fields_typography",
