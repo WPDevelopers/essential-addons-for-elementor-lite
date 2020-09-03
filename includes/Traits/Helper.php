@@ -53,16 +53,33 @@ trait Helper
             $args['post__not_in'] = array_unique($_REQUEST['post__not_in']);
         }
 
-        $file_path = $_REQUEST['template_path'];
+        $template_info = $_REQUEST['template_info'];
 
-        if($file_path) {
-            $query = new \WP_Query($args);
-
-            if ($query->have_posts()) {
-                while ($query->have_posts()) {
-                    $query->the_post();
-
-                    $html = $this->includes_with_variable($file_path, ['settings' => $settings]);
+        if($template_info) {
+            if($template_info['dir'] === 'free') {
+                $file_path = EAEL_PLUGIN_PATH;
+            }
+            
+            if($template_info['dir'] === 'pro') {
+                $file_path = EAEL_PRO_PLUGIN_PATH;
+            }
+    
+            $file_path = sprintf(
+                '%sincludes/Template/%s/%s.php',
+                $file_path,
+                $template_info['name'],
+                $template_info['file_name']
+            );
+    
+            if($file_path) {
+                $query = new \WP_Query($args);
+    
+                if ($query->have_posts()) {
+                    while ($query->have_posts()) {
+                        $query->the_post();
+    
+                        $html = $this->includes_with_variable($file_path, ['settings' => $settings]);
+                    }
                 }
             }
         }
