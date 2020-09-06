@@ -2046,11 +2046,7 @@ trait Helper
 
 	    global $wpdb;
 	    $paginationNumber = absint($_POST['number']);
-	    
 	    $paginationLimit  = absint($_POST['limit']);
-//	    $paginationType = sanitize_text_field($_POST['paginationpost']);
-//	    $paginationCatName = sanitize_text_field($_POST['paginationcatname']);
-//	    $paginationtaxname = sanitize_text_field($_POST['paginationtaxname']);
 
 	    $args['posts_per_page'] = $paginationLimit;
 
@@ -2064,16 +2060,6 @@ trait Helper
 	    }else{
 		    $paginationOffsetValue = ($paginationNumber-1)*$paginationLimit;
 		    $args['offset'] = $paginationOffsetValue;
-
-//
-//		    if( $paginationtaxname ) {
-//
-//			    $args['offset'] = $paginationOffsetValue;
-//		    }else{
-//
-//			    $args['offset'] = $paginationOffsetValue;
-//		    }
-
 	    }
 
 	    echo $class::render_template_($args, $settings);
@@ -2088,21 +2074,10 @@ trait Helper
 
 	    global $wpdb;
 	    $paginationNumber = absint($_POST['number']);
-
 	    $paginationLimit  = absint($_POST['limit']);
-//	    $paginationType = sanitize_text_field($_POST['paginationpost']);
-//	    $paginationCatName = sanitize_text_field($_POST['paginationcatname']);
-//	    $paginationtaxname = sanitize_text_field($_POST['paginationtaxname']);
 
 	    $pagination_args = $args;
-
 	    $pagination_args['posts_per_page'] = -1;
-
-//	    if($paginationtaxname!=""){
-//		    $pagination_args['posts_per_page'] = -1;
-//	    }else{
-//		    $pagination_args['posts_per_page'] = -1;
-//	    }
 
 	    $pagination_Query = new \WP_Query( $pagination_args );
 	    $pagination_Count = count($pagination_Query->posts);
@@ -2114,13 +2089,18 @@ trait Helper
 	    if( $paginationNumber < $last ){ $paginationnext; }
 
 	    $adjacents = "2";
-
 	    $widget_id = $settings['eael_widget_id'];
+	    $next_label = $settings['pagination_next_label'];
+	    $prev_label = $settings['pagination_prev_label'];
+
 	    $setPagination = "";
 	    if( $pagination_Paginationlist > 0 ){
 
 		    $setPagination .="<ul class='page-numbers'>";
-		    $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$paginationprev' data-plimit='$paginationLimit'>Prev</a></li>";
+
+		    if( 1< $paginationNumber ){
+			    $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$paginationprev' data-plimit='$paginationLimit'>$prev_label</a></li>";
+		    }
 
 		    if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
 
@@ -2180,8 +2160,12 @@ trait Helper
 			    }
 
 		    }
-		    $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-widgetid='$widget_id' data-args='"
-		                     .http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$paginationnext' data-plimit='$paginationLimit'>Next</a></li>";
+
+		    if ($paginationNumber < $pagination_Paginationlist){
+			    $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-widgetid='$widget_id' data-args='"
+			                     .http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$paginationnext' data-plimit='$paginationLimit'>$next_label</a></li>";
+		    }
+
 		    $setPagination .="</ul>";
 	    }
 	    echo $setPagination;

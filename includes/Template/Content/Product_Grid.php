@@ -311,17 +311,20 @@ trait Product_Grid
 		$paginationLimit = $settings['eael_product_grid_products_count'] ?: 4;
 		$pagination_Paginationlist = ceil($pagination_Count/$paginationLimit);
 		$last = ceil( $pagination_Paginationlist );
-//		$paginationtaxname = 'product_cat';
-//		$paginationCatName = $settings['eael_product_grid_categories'] ?: '';
 
 		$widget_id = $settings['eael_widget_id'];
+		$next_label = $settings['pagination_next_label'];
+		$prev_label = $settings['pagination_prev_label'];
+
 		$adjacents = "2";
 		$setPagination = "";
 		if( $pagination_Paginationlist > 0 ){
 
 			$setPagination .="<nav class='eael-woo-pagination'>";
 			$setPagination .="<ul class='page-numbers'>";
-			$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='1' data-plimit='$paginationLimit'>Prev</a></li>";
+//			$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers'
+// data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."'
+// data-pnumber='1' data-plimit='$paginationLimit'>$prev_label</a></li>";
 
 			if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
 
@@ -351,7 +354,8 @@ trait Product_Grid
 				}
 
 			}
-			$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='2' data-plimit='$paginationLimit'>Next</a></li>";
+
+            $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='2' data-plimit='$paginationLimit'>$next_label</a></li>";
 			$setPagination .="</ul>";
 			$setPagination .="</nav>";
 

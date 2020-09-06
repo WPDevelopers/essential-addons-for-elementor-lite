@@ -1513,29 +1513,10 @@ class Product_Grid extends Widget_Base {
 		);
 
 		$this->add_control(
-			'pagination_type',
-			[
-				'label'             => __( 'Type', 'essential-addons-for-elementor-lite' ),
-				'type'              => Controls_Manager::SELECT,
-				'default'           => 'numbers',
-				'options'           => [
-					'numbers'       => __( 'Numbers', 'essential-addons-for-elementor-lite' ),
-					'numbers_arrow' => __( 'Numbers + Pre/Next Arrow', 'essential-addons-for-elementor-lite' ),
-				],
-				'condition' =>[
-					'show_pagination' => 'true',
-				],
-			]
-		);
-
-		$this->add_control(
 			'pagination_prev_label',
 			[
 				'label'             => __( 'Previous Label', 'essential-addons-for-elementor-lite' ),
 				'default'           => __( '←', 'essential-addons-for-elementor-lite' ),
-				'condition'         => [
-					'pagination_type'      => 'numbers_arrow',
-				],
 			]
 		);
 
@@ -1544,9 +1525,6 @@ class Product_Grid extends Widget_Base {
 			[
 				'label'             => __( 'Next Label', 'essential-addons-for-elementor-lite' ),
 				'default'           => __( '→', 'essential-addons-for-elementor-lite' ),
-				'condition'         => [
-					'pagination_type'      => 'numbers_arrow',
-				],
 			]
 		);
 
@@ -2372,7 +2350,6 @@ class Product_Grid extends Widget_Base {
 			'show_load_more' => $settings['show_load_more'],
 			'show_load_more_text' => $settings['show_load_more_text'],
 			'show_pagination' => $settings['show_pagination'],
-			'pagination_type' => $settings['pagination_type'],
 			'pagination_prev_label' => $settings['pagination_prev_label'],
 			'pagination_next_label' => $settings['pagination_next_label'],
 			'eael_product_grid_products_count' => $settings['eael_product_grid_products_count'],
