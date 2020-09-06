@@ -17,6 +17,7 @@ use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 
 use \Essential_Addons_Elementor\Classes\Controls;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Betterdocs_Category_Box extends Widget_Base {
 
@@ -1096,39 +1097,104 @@ class Betterdocs_Category_Box extends Widget_Base {
             $terms_object['exclude'] = $settings['exclude'];
         }
 
-        $taxonomy_objects = get_terms($terms_object);
 
-        $html = '<div ' . $this->get_render_attribute_string('bd_category_box_wrapper') . '>';
-        $html .= '<div ' . $this->get_render_attribute_string('bd_category_box_inner') . '>';
+        $default_multiple_kb = Helper::get_betterdocs_multiple_kb_status();
+        
+        if($default_multiple_kb) {
+
+            $taxonomy_objects = Helper::get_multiple_kb_terms(false, false);
+
+            $terms_object = array(
+                'hide_empty' => true,
+                'taxonomy' => 'doc_category',
+                'orderby' => 'name',
+                'parent' => 0
+            );
+            
+            $meta_query = '';
+
+            
+            $terms_object['meta_query'] =  array(
+                array(
+                    'relation' => 'OR', 
+                    array(
+                        'key'       => 'doc_category_knowledge_base',
+                        'value'     => $settings['selected_knowledge_base'],
+                        'compare'   => 'LIKE'
+                    )
+                ),
+            );
+        
+            $taxonomy_objects = get_terms( $terms_object );
+
+            $html = '<div ' . $this->get_render_attribute_string('bd_category_box_wrapper') . '>';
+            $html .= '<div ' . $this->get_render_attribute_string('bd_category_box_inner') . '>';
 
 
-        if (file_exists($this->get_template($settings['layout_template'])))
-        {
-
-            if ($taxonomy_objects && !is_wp_error($taxonomy_objects))
+            if (file_exists($this->get_template($settings['layout_template'])))
             {
-                foreach ($taxonomy_objects as $term)
+
+                if ($taxonomy_objects && !is_wp_error($taxonomy_objects))
                 {
-                    ob_start();
-                    include($this->get_template($settings['layout_template']));
-                    $html .= ob_get_clean();
+                    foreach ($taxonomy_objects as $term)
+                    {
+                        ob_start();
+                        include($this->get_template($settings['layout_template']));
+                        $html .= ob_get_clean();
+                    }
+                } else
+                {
+                    _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
                 }
+
+                wp_reset_postdata();
+
             } else
             {
-                _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                $html .= '<h4>' . __('File Not Found', 'essential-addons-for-elementor-lite') . '</h4>';
             }
 
-            wp_reset_postdata();
+            $html .= '</div>';
+            $html .= '</div>';
 
-        } else
-        {
-            $html .= '<h4>' . __('File Not Found', 'essential-addons-for-elementor-lite') . '</h4>';
+            echo $html;
+
+        }else {
+            $taxonomy_objects = get_terms($terms_object);
+
+            $html = '<div ' . $this->get_render_attribute_string('bd_category_box_wrapper') . '>';
+            $html .= '<div ' . $this->get_render_attribute_string('bd_category_box_inner') . '>';
+
+
+            if (file_exists($this->get_template($settings['layout_template'])))
+            {
+
+                if ($taxonomy_objects && !is_wp_error($taxonomy_objects))
+                {
+                    foreach ($taxonomy_objects as $term)
+                    {
+                        ob_start();
+                        include($this->get_template($settings['layout_template']));
+                        $html .= ob_get_clean();
+                    }
+                } else
+                {
+                    _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                }
+
+                wp_reset_postdata();
+
+            } else
+            {
+                $html .= '<h4>' . __('File Not Found', 'essential-addons-for-elementor-lite') . '</h4>';
+            }
+
+            $html .= '</div>';
+            $html .= '</div>';
+
+            echo $html;
+            
         }
-
-        $html .= '</div>';
-        $html .= '</div>';
-
-        echo $html;
 
     }
 
