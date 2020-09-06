@@ -93,8 +93,10 @@ trait Template_Query
             
         }
         
-        if( ! is_plugin_active( 'essential-addons-elementor/essential_adons_elementor.php' ) ) return false;
-
+        if(!apply_filters('eael/active_plugins', 'essential-addons-elementor/essential_adons_elementor.php')) {
+            return false;
+        }
+        
         return \sprintf(
             '%sincludes/Template/%s',
             EAEL_PRO_PLUGIN_PATH, $this->process_directory_name()
