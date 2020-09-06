@@ -9,20 +9,67 @@ if (!defined('ABSPATH')) {
 trait Template_Query
 {
 
+    /**
+     * Retrives Template name from file header.
+     * 
+     * @array
+     */
     private $template_headers = [
         'Template Name' => 'Template Name',
     ];
 
+
+    /**
+     * Prepare the directory name from the following widget name.
+     * 
+     * @access private
+     * 
+     * 
+     * @return  string  $widget_name
+     */
     private function process_directory_name()
     {
-        $dir = str_replace('eael-', '', $this->get_name());
-        $dir = str_replace('-', ' ', $dir);
-        $dir = ucwords($dir);
-        $dir = str_replace(' ', '-', $dir);
+        $widget_name = str_replace('eael-', '', $this->get_name());
+        $widget_name = str_replace('-', ' ', $widget_name);
+        $widget_name = ucwords($widget_name);
+        $widget_name = str_replace(' ', '-', $widget_name);
 
-        return $dir;
+        return $widget_name;
     }
 
+
+    /**
+     * Retrive `Theme Template Directory`
+     * 
+     * @return string templates directory from the active theme.
+     */
+    private function theme_templates()
+    {
+        $current_theme = wp_get_theme();
+        
+        $dir = sprintf(
+            '%s/%s/Template/%s',
+            $current_theme->theme_root,
+            $current_theme->stylesheet,
+            $this->process_directory_name()
+        );
+
+        if(is_dir($dir)) {
+            $file = scandir($dir);
+            $file = array_pop($file);
+
+            return pathinfo($file, PATHINFO_EXTENSION) === 'php' ? $dir : false;
+        }
+
+        return false;
+    }
+
+
+    /**
+     * Retrives the lite plugin template directory path.
+     * 
+     * @return  string  templates directory path of lite version.
+     */
     private function get_template_dir()
     {
         return \sprintf(
@@ -31,6 +78,12 @@ trait Template_Query
         );
     }
 
+
+    /**
+     * Retrives the pro plugin template directory path.
+     * 
+     * @return  string  templates directory path of pro version.
+     */
     private function get_pro_template_dir()
     {
         // ensure is_plugin_active() exists (not on frontend)
@@ -48,6 +101,12 @@ trait Template_Query
         );
     }
 
+
+    /**
+     * Collecting templates from different sources.
+     * 
+     * @return array free templates+pro templates.
+     */
     private function get_template_files()
     {
         if($this->theme_templates()) {
@@ -67,9 +126,17 @@ trait Template_Query
         return array_merge($templates, $pro_templates);
     }
 
+
+    /**
+     * Retrives template list from template directory.
+     * 
+     * @return array template list.
+     */
     protected function get_template_list()
     {
         $files = [];
+
+        var_dump($this->get_template_files());
 
         if ($this->get_template_files()) {
 
@@ -101,6 +168,12 @@ trait Template_Query
         return $files;
     }
 
+
+    /**
+     * Preparing template options for frontend select
+     * 
+     * @return array teplate select options.
+     */
     private function get_template_options()
     {
         $files = [];
@@ -119,6 +192,12 @@ trait Template_Query
         return $files;
     }
 
+
+    /**
+     * Adding key value pairs in template options.
+     * 
+     * @return array
+     */
     private function template_options()
     {
         $keys = array_keys($this->get_template_options());
@@ -127,32 +206,14 @@ trait Template_Query
         return array_combine($keys, $values);
     }
 
+
     /**
-     * Retrive `Theme Template Directory`
+     * Retrive template
      * 
-     * @return 
+     * @param string $filename
+     * 
+     * @return string include-able full template path.
      */
-    private function theme_templates()
-    {
-        $current_theme = wp_get_theme();
-        
-        $dir = sprintf(
-            '%s/%s/Template/%s',
-            $current_theme->theme_root,
-            $current_theme->stylesheet,
-            $this->process_directory_name()
-        );
-
-        if(is_dir($dir)) {
-            $file = scandir($dir);
-            $file = array_pop($file);
-
-            return pathinfo($file, PATHINFO_EXTENSION) === 'php' ? $dir : false;
-        }
-
-        return false;
-    }
-
     public function get_template($filename)
     {
         if(in_array($filename, array_keys($this->get_template_options()))) {
@@ -164,6 +225,12 @@ trait Template_Query
         return false;
     }
 
+
+    /**
+     * Set default option in frontend select control.
+     * 
+     * @return string first option.
+     */
     public function get_default()
     {
         $dt = array_reverse($this->template_options());
