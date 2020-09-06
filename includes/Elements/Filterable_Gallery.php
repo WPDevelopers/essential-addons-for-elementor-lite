@@ -3293,8 +3293,9 @@ class Filterable_Gallery extends Widget_Base
                         $gallery_enabled = ($settings.gallery_enabled == 'yes' ? true : false),
                         input = $scope.find('#fg-search-box-input'),
                         searchRegex, buttonFilter, timer;
+					var filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0)
 
-					if ($gallery.closest($scope).length < 1) {
+                    if ($gallery.closest($scope).length < 1) {
         				return;
         			}
 
@@ -3389,6 +3390,10 @@ class Filterable_Gallery extends Widget_Base
 				            $nomore_text = $gallery.data('nomore-item-text'),
 				            $items = [];
 					    var filter_name      = $(".eael-filter-gallery-control li.active").data('filter');
+
+					    if(filterControls.length>0){
+						    filter_name = $(".fg-layout-3-filter-controls li.active").data('filter');
+					    }
 
 				        if ($init_show == $total_items) {
 				            $this.html('<div class="no-more-items-text">' + $nomore_text + '</div>');
