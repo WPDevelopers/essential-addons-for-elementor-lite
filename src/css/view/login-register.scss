@@ -44,7 +44,6 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
   box-shadow: 0 0 37.5px 14px rgba(2, 8, 53, .06);
 
   &.style-2 {
-    //width: 65%;
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
@@ -65,7 +64,6 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
       z-index: 1;
 
       @media (max-width: 767px) {
-        //width: 100%;
         padding-bottom: 200px;
       }
     }
@@ -112,25 +110,6 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
       outline: none;
     }
 
-  }
-
-  //Style when when input icon is showing
-  &.lr-icon-showing {
-    .eael-lr-form-group {
-      position: relative;
-    }
-
-    .eael-lr-form-control {
-      padding: 15px 15px 15px 30px;
-
-    }
-
-    i {
-      position: absolute;
-      bottom: 20px;
-      left: 10px;
-      color: inherit;
-    }
   }
 
   .eael-forever-forget {
@@ -435,51 +414,5 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
     }
   }
 
-
-}
-
-//Social Login
-.lr-social-login-container {
-  margin-top: 1rem;
-
-  .lr-separator {
-    width: 100%;
-    text-align: center;
-
-    p {
-      padding: 0;
-      margin: 0;
-    }
-
-    hr {
-      width: 100%;
-      height: 1px;
-      background: gray;
-    }
-  }
-
-  .lr-social-buttons-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .eael-social-button {
-    display: flex;
-    max-width: 100%;
-    justify-content: space-evenly;
-    align-items: center;
-    padding-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    cursor: pointer;
-
-    &.eael-google {
-      width: 175px;
-    }
-
-    &.eael-facebook {
-      width: 190px;
-    }
-  }
 }
 
