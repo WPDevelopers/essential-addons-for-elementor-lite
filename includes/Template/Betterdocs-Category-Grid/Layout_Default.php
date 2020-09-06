@@ -166,7 +166,11 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="'.get_the_ID
 
         echo '<div class="eael-bd-cg-footer">';
         if($settings['show_button']) {
-            $button_link = str_replace('%knowledge_base%', $settings['selected_knowledge_base'], get_term_link( $term->slug, 'doc_category' ));
+            if($default_multiple_kb) {
+                $button_link = str_replace('%knowledge_base%', $settings['selected_knowledge_base'], get_term_link( $term->slug, 'doc_category' ));
+            }else {
+                $button_link = get_term_link( $term->slug, 'doc_category' );
+            }
             
             echo '<a class="eael-bd-cg-button" href="'.$button_link.'">';
 

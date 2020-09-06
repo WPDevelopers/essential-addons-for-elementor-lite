@@ -7,7 +7,13 @@ use \Essential_Addons_Elementor\Classes\Helper;
  *
  */
 
-echo '<a href="'.get_term_link( $term->slug, 'doc_category' ).'" class="eael-better-docs-category-box-post layout__2">';
+if($default_multiple_kb) {
+    $button_link = str_replace('%knowledge_base%', $settings['selected_knowledge_base'], get_term_link( $term->slug, 'doc_category' ));
+}else {
+    $button_link = get_term_link( $term->slug, 'doc_category' );
+}
+
+echo '<a href="'.$button_link.'" class="eael-better-docs-category-box-post layout__2">';
     echo '<div class="eael-bd-cb-inner">';
 
     if($settings['show_icon']) {
