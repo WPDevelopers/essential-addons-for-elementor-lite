@@ -3201,4 +3201,26 @@ trait Helper
         }
         wp_send_json_success(['status' => 'success']);
     }
+
+	public function eael_product_grid_script(){
+		if ( version_compare( WC()->version, '3.0.0', '>=' ) ) {
+//			\WC_Frontend_Scripts::load_scripts();
+			if ( current_theme_supports( 'wc-product-gallery-zoom' ) ) {
+				wp_enqueue_script( 'zoom' );
+			}
+			if ( current_theme_supports( 'wc-product-gallery-slider' ) ) {
+				wp_enqueue_script( 'flexslider' );
+			}
+			if ( current_theme_supports( 'wc-product-gallery-lightbox' ) ) {
+				wp_enqueue_script( 'photoswipe-ui-default' );
+				wp_enqueue_style( 'photoswipe-default-skin' );
+				if ( has_action( 'wp_footer', 'woocommerce_photoswipe' ) === false ) {
+					add_action( 'wp_footer', 'woocommerce_photoswipe', 15 );
+				}
+			}
+
+			wp_enqueue_script( 'wc-single-product' );
+		}
+	}
+	
 }
