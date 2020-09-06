@@ -43,7 +43,7 @@ trait Template_Query
      * 
      * @return string templates directory from the active theme.
      */
-    private function theme_templates()
+    private function theme_templates_dir()
     {
         $current_theme = wp_get_theme();
         
@@ -109,8 +109,8 @@ trait Template_Query
      */
     private function get_template_files()
     {
-        if($this->theme_templates()) {
-            return $this->theme_templates();
+        if($this->theme_templates_dir()) {
+            return ['theme' => scandir($this->theme_templates_dir(), 1)];
         }
 
         $templates = $pro_templates = [];
@@ -135,9 +135,6 @@ trait Template_Query
     protected function get_template_list()
     {
         $files = [];
-
-        var_dump($this->get_template_files());
-
         if ($this->get_template_files()) {
 
             foreach ($this->get_template_files() as $key => $handler) {
@@ -151,6 +148,10 @@ trait Template_Query
 
                         else if($key === 'pro') {
                             $path = sprintf('%s/%s', $this->get_pro_template_dir(), $handle);
+                        }
+
+                        else if($key === 'theme') {
+                            $path = sprintf('%s/%s', $this->theme_templates_dir(), $handle);
                         }
                         
                         $template_info = get_file_data($path, $this->template_headers);
