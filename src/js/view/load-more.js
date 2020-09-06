@@ -70,9 +70,9 @@
 							var $isotope = $(".eael-product-grid .products", $scope).isotope();
 							$isotope.isotope("appended", $content).isotope("layout");
 
-							$isotope.imagesLoaded().progress(function () {
-								$isotope.isotope("layout");
-							});
+							// $isotope.imagesLoaded().progress(function () {
+							// 	$isotope.isotope("layout");
+							// });
 						}
 
 					} else {

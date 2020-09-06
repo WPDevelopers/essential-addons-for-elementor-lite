@@ -2376,15 +2376,6 @@ class Product_Grid extends Widget_Base {
 
 		if ( 'true' == $settings['show_pagination'] ) {
 			$html .= self::eael_pagination($args, $settings);
-
-//			$html .= '<div class="eael-woo-pagination" data-widget="' . $this->get_id() . '" data-class="' . get_class(
-//			        $this ) . '" data-args="' . http_build_query( $args ) . '" data-settings="' . http_build_query( $settings ) . '" data-layout="masonry" data-page="1">
-//                        <ul>
-//                        <li>prev</li>
-//                        <li>next</li>
-//                        </ul>
-//                    </div>';
-
 		}
 
 		if ( 'true' == $settings['show_load_more'] ) {
@@ -2420,9 +2411,9 @@ class Product_Grid extends Widget_Base {
                             percentPosition: true
                         });
 
-                        $isotope_products.imagesLoaded().progress(function() {
-                            $isotope_products.isotope("layout");
-                        });
+                        // $isotope_products.imagesLoaded().progress(function() {
+                        //     $isotope_products.isotope("layout");
+                        // });
 
                         $('li.product', $products).resize(function() {
                             $isotope_products.isotope('layout');

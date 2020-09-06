@@ -459,19 +459,20 @@ trait Product_Grid
 
 		// Image.
 //		add_action( 'eael_woo_single_product_image', 'woocommerce_show_product_sale_flash', 10 );
-		add_action( 'eael_woo_single_product_image', 'woocommerce_show_product_images', 20 );
-
-		// Summary.
-		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
-		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_rating', 10 );
-		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_price', 15 );
-		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
-		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_add_to_cart', 25 );
-		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_meta', 30 );
+//		add_action( 'eael_woo_single_product_image', 'woocommerce_show_product_images', 20 );
+//
+//		// Summary.
+//		add_action( 'eael_woo_single_product_summary', [ $this, 'quick_view_error'], 1 );
+//		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
+//		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_rating', 10 );
+//		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_price', 15 );
+//		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+//		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_add_to_cart', 25 );
+//		add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_meta', 30 );
 
 		add_action( 'eael_woo_before_product_loop', 'woocommerce_output_all_notices', 30 );
 
-		add_action( 'wp_footer', [ $this, 'eael_product_grid_script' ] );
+//		add_action( 'wp_footer', [ $this, 'eael_product_grid_script' ] );
 
 		add_filter( 'woocommerce_product_get_rating_html', [ $this, 'eael_rating_markup' ], 10, 3 );
 	}

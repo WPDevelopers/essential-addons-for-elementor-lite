@@ -25,11 +25,12 @@ var ProductGrid = function ($scope, $) {
 				args:args,
 				settings:settings
 			},
-			beforeSend	: function(){
-				$(widgetclass+" .eael-product-grid .products").html("<li style='text-align:center;'>Loading please " +
-					"wait...!</li>");
-			},
+			// beforeSend	: function(){
+			// 	$(widgetclass+" .eael-product-grid .products").html("<li style='text-align:center;'>Loading please " +
+			// 		"wait...!</li>");
+			// },
 			success :function(response){
+				// console.log(response);
 				$(widgetclass+" .eael-product-grid .products").html(response);
 			}
 		});
@@ -44,18 +45,17 @@ var ProductGrid = function ($scope, $) {
 				args:args,
 				settings:settings
 			},
-			beforeSend	: function(){
-				$(widgetclass+" .eael-product-grid .products").html("<li style='text-align:center;'>Loading please " +
-					"wait...!</li>");
-			},
+			// beforeSend	: function(){
+			// 	$(widgetclass+" .eael-product-grid .products").html("<li style='text-align:center;'>Loading please " +
+			// 		"wait...!</li>");
+			// },
 			success :function(response){
 				$(widgetclass+" .eael-product-grid .eael-woo-pagination").html(response);
 			}
 		});
 
+
 	});
-
-
 
 };
 
