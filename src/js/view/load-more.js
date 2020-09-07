@@ -69,7 +69,9 @@
 						if ($layout == "masonry") {
 							var $isotope = $(".eael-product-grid .products", $scope).isotope();
 							$isotope.isotope("appended", $content).isotope("layout");
-
+							$(".woocommerce-product-gallery",$scope).each(function () {
+								$(this).wc_product_gallery();
+							});
 							// $isotope.imagesLoaded().progress(function () {
 							// 	$isotope.isotope("layout");
 							// });
