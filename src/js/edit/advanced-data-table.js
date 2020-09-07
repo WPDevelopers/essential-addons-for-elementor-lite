@@ -103,7 +103,7 @@ class advancedDataTableEdit {
 		let quill = new Quill(cell.querySelector(".inline-editor"), {
 			theme: "bubble",
 			modules: {
-				toolbar: ["bold", "italic", "underline", "strike", "link", { list: "ordered" }, { list: "bullet" }, "image"],
+				toolbar: ["bold", "italic", "underline", "strike", "link", { list: "ordered" }, { list: "bullet" }],
 			},
 		});
 
