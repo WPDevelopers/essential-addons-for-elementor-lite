@@ -369,13 +369,13 @@
     -webkit-box-shadow: 0 0 0 var(--focus);
             box-shadow: 0 0 0 var(--focus);
   }
-  .eael-lr-form-wrapper input[type=checkbox]:not(#eael_accept_tnc) {
-    width: 18px;
+  .eael-lr-form-wrapper input[type=checkbox]:not(.lr-toggle) {
+    width: 18px !important;
   }
-  .eael-lr-form-wrapper input[type=checkbox]:not(#eael_accept_tnc):after {
+  .eael-lr-form-wrapper input[type=checkbox]:not(.lr-toggle):after {
     opacity: var(--o, 0);
   }
-  .eael-lr-form-wrapper input[type=checkbox]:not(#eael_accept_tnc):checked {
+  .eael-lr-form-wrapper input[type=checkbox]:not(.lr-toggle):checked {
     --o: 1;
   }
   .eael-lr-form-wrapper input[type=checkbox] + label {
@@ -386,10 +386,10 @@
     cursor: pointer;
     margin-left: 4px;
   }
-  .eael-lr-form-wrapper input[type=checkbox]:not(#eael_accept_tnc) {
+  .eael-lr-form-wrapper input[type=checkbox]:not(.lr-toggle) {
     border-radius: 3px;
   }
-  .eael-lr-form-wrapper input[type=checkbox]:not(#eael_accept_tnc):after {
+  .eael-lr-form-wrapper input[type=checkbox]:not(.lr-toggle):after {
     width: 5px;
     height: 9px;
     border: 2px solid var(--active-inner);
@@ -401,15 +401,15 @@
         -ms-transform: rotate(var(--r, 20deg));
             transform: rotate(var(--r, 20deg));
   }
-  .eael-lr-form-wrapper input[type=checkbox]:not(#eael_accept_tnc):checked {
+  .eael-lr-form-wrapper input[type=checkbox]:not(.lr-toggle):checked {
     --r: 43deg;
   }
-  .eael-lr-form-wrapper input[type=checkbox]#eael_accept_tnc {
-    width: 31px;
+  .eael-lr-form-wrapper input[type=checkbox].lr-toggle {
+    width: 31px !important;
     border-radius: 11px;
     border-width: 1px;
   }
-  .eael-lr-form-wrapper input[type=checkbox]#eael_accept_tnc:after {
+  .eael-lr-form-wrapper input[type=checkbox].lr-toggle:after {
     left: 2px;
     top: 2px;
     border-radius: 50%;
@@ -420,11 +420,11 @@
         -ms-transform: translateX(var(--x, 0));
             transform: translateX(var(--x, 0));
   }
-  .eael-lr-form-wrapper input[type=checkbox]#eael_accept_tnc:checked {
+  .eael-lr-form-wrapper input[type=checkbox].lr-toggle:checked {
     --ab: var(--active-inner);
     --x: 13px;
   }
-  .eael-lr-form-wrapper input[type=checkbox]#eael_accept_tnc:disabled:not(:checked):after {
+  .eael-lr-form-wrapper input[type=checkbox].lr-toggle:disabled:not(:checked):after {
     opacity: 0.6;
   }
 }
