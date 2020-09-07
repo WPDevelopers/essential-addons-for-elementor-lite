@@ -32,6 +32,10 @@ var ProductGrid = function ($scope, $) {
 			success :function(response){
 				// console.log(response);
 				$(widgetclass+" .eael-product-grid .products").html(response);
+				$('.woocommerce-product-gallery').each(function () {
+					$(this).wc_product_gallery();
+				});
+				console.log(12);
 			}
 		});
 
