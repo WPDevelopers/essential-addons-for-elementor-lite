@@ -2426,7 +2426,13 @@ class Product_Grid extends Widget_Base {
                         const $this = $(this);
                         const id = $this.attr('href');
                         const popup = $(id);
-                        popup.addClass("eael-product-popup-ready").removeClass("eael-product-modal-removing");
+	                    const popup_details =  popup.children( ".eael-product-popup-details" );
+	                    if(popup_details.height()>400){
+		                    popup_details.css("height",'90vh');
+                        }else{
+		                    popup_details.css("height",'auto');
+                        }
+	                    popup.addClass("eael-product-popup-ready").removeClass("eael-product-modal-removing");
                     });
 
                     $(document).on("click", '.eael-product-popup-close', function (event) {

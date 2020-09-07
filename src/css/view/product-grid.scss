@@ -592,8 +592,8 @@
         background-color: #fefefe;
         width: 100%;
         border-radius: 10px;
-        height: 90vh;
-        max-height: 90vh;
+        height: auto;
+        max-height: fit-content;
     }
 
     &.woocommerce div.product {
