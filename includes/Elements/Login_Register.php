@@ -3009,6 +3009,16 @@ class Login_Register extends Widget_Base {
 				'remember_me_style_pot' => 'yes',
 			],
 		] );
+		$this->add_control( 'eael_rm_checkbox_color', [
+			'label'     => __( 'Checkbox | Toggle Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-menot  input[type=checkbox]:checked" => 'border-color: {{VALUE}};background: {{VALUE}};',
+			],
+			'condition' => [
+				'remember_me_style_pot' => 'yes',
+			],
+		] );
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'label'    => __( 'Remember Me Typography', 'essential-addons-for-elementor-lite' ),
