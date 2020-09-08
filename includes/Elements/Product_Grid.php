@@ -1930,6 +1930,51 @@ class Product_Grid extends Widget_Base {
 			]
 		);
 
+		// Quantity
+		$this->add_control(
+			'eael_product_popup_quantity',
+			[
+				'label'     => __('Quantity', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_product_popup_quantity_typo',
+				'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
+				'selector' => '{{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity .qty, {{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity > a',
+			]
+		);
+
+		$this->add_control(
+			'eael_product_popup_quantity_color',
+			[
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#fff',
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity .qty, {{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity > a' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_popup_quantity_border_color',
+			[
+				'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#fff',
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity .qty, {{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity > a' => 'border-color: {{VALUE}};',
+					// OceanWP
+                    '{{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity .qty:focus' => 'border-color: {{VALUE}};',
+				],
+			]
+		);
+
 		// Cart Button
 		$this->add_control(
 			'eael_product_popup_cart_button',
