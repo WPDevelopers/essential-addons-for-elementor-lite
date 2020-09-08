@@ -89,22 +89,37 @@ jQuery(window).on('elementor/frontend/init', function () {
                     PlayerPlay(playerAbc, element)
                 }
             }
-
             // Overlay Operation Started
-            if (overlay === 'yes') {
+            if (overlay === 'yes' && autoplay === 'yes') {
+                var ovrlyElmnt = element.prev()
+                videoIsActive = 'off'
+
+                $('.eael-sticky-video-wrapper > i').hide()
+                ovrlyElmnt.css('display', 'none')
+                playerAbc.play()
+
+                if (sticky === 'yes') {
+                    eaelsvDomHeight = GetDomElementHeight(element)
+                    element.attr('id', 'videobox')
+                    videoIsActive = 'on'
+                    // When play event is cliked
+                    // Do the sticky process
+                    PlayerPlay(playerAbc, element)
+                }
+            } else if (overlay === 'yes') {
                 var ovrlyElmnt = element.prev()
                 videoIsActive = 'off'
                 $(ovrlyElmnt).on('click', function () {
                     $('.eael-sticky-video-wrapper > i').hide()
                     $(this).css('display', 'none')
                     playerAbc.play()
-                    if ($(this).next().data('autoplay') === 'yes') {
-                        playerAbc.restart()
-                        eaelsvDomHeight = GetDomElementHeight(this)
-                        if (sticky === 'yes') {
-                            $(this).next().attr('id', 'videobox')
-                            videoIsActive = 'on'
-                        }
+                    if (sticky === 'yes') {
+                        eaelsvDomHeight = GetDomElementHeight(element)
+                        element.attr('id', 'videobox')
+                        videoIsActive = 'on'
+                        // When play event is cliked
+                        // Do the sticky process
+                        PlayerPlay(playerAbc, element)
                     }
                 })
             }
