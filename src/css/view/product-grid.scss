@@ -2035,4 +2035,15 @@ ul.products {
 
 }
 
+.theme-oceanwp {
+    &.elementor-editor-active {
+        .eael-product-popup.woocommerce div.product form.cart div.quantity .qty {
+            max-width: 150px;
+        }
+    }
+    .eael-product-popup.woocommerce div.product form.cart div.quantity .qty:focus {
+        border: 1px solid;
+    }
+}
+
 
