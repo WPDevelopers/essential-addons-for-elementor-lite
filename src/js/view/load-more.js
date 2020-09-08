@@ -65,11 +65,12 @@
 				} else {
 					if ($data.class == "Essential_Addons_Elementor\\Elements\\Product_Grid") {
 						$(".eael-product-grid .products", $scope).append($content);
-
+						const dynamicID = "eael-product-"+Date.now();
 						if ($layout == "masonry") {
+							$content.find('.woocommerce-product-gallery').addClass(dynamicID);
 							var $isotope = $(".eael-product-grid .products", $scope).isotope();
 							$isotope.isotope("appended", $content).isotope("layout");
-							$(".woocommerce-product-gallery",$scope).each(function () {
+							$(".woocommerce-product-gallery."+dynamicID,$scope).each(function () {
 								$(this).wc_product_gallery();
 							});
 							// $isotope.imagesLoaded().progress(function () {
