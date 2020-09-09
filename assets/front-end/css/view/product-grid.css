@@ -177,7 +177,7 @@
   color: #fff;
   background-color: #333;
   padding: 0;
-  padding: 5px 25px;
+  padding: 5px 10px;
   border-radius: 0;
 }
 .eael-product-grid.eael-product-simple .woocommerce ul.products li.product .button.add_to_cart_button::before, .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product .button.add_to_cart_button::before,
