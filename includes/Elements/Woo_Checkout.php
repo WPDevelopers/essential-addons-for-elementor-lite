@@ -2497,6 +2497,8 @@ class Woo_Checkout extends Widget_Base {
             'ea_woo_checkout_table_price_text' => $settings['ea_woo_checkout_table_price_text'],
             'ea_woo_checkout_shop_link' => $settings['ea_woo_checkout_shop_link'],
             'ea_woo_checkout_shop_link_text' => $settings['ea_woo_checkout_shop_link_text'],
+            'ea_woo_checkout_table_subtotal_text' => $settings['ea_woo_checkout_table_subtotal_text'],
+            'ea_woo_checkout_table_total_text' => $settings['ea_woo_checkout_table_total_text'],
         ];
         $this->ea_woo_checkout_add_actions($settings);
 
