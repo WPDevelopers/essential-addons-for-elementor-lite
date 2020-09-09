@@ -249,6 +249,7 @@ class Product_Grid extends Widget_Base {
 				'default' => 'yes',
 				'condition' => [
 					'eael_product_grid_style_preset!' => 'eael-product-default',
+					'eael_product_grid_style_preset!' => 'eael-product-preset-8',
 				],
 			]
 		);
