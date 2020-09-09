@@ -61,6 +61,37 @@ var ProductGrid = function ($scope, $) {
 
 	});
 
+	// handle add to cart for quick view
+	$scope.on('click', '.eael-product-popup-details .single_add_to_cart_button', function (e) {
+		e.preventDefault();
+		var $this = $(this),
+		    product_id = $(this).val(),
+		    variation_id = $('input[name="variation_id"]').val() || '',
+		    group = [],
+		    quantity = $('input[name="quantity"]').val();
+
+		$this.removeClass('eael-addtocart-added');
+		$this.addClass('eael-addtocart-loading');
+		$.ajax({
+			url		:localize.ajaxurl,
+			type	:'post',
+			data	:{
+				action:'eael_product_add_to_cart',
+				product_id:product_id,
+				variation_id:variation_id,
+				quantity:quantity,
+				group:group,
+				eael_add_to_cart_nonce:localize.nonce
+			},
+			success :function(response){
+				if(response.success){
+					$(document.body).trigger('wc_fragment_refresh');
+					$this.removeClass('eael-addtocart-loading');
+					$this.addClass('eael-addtocart-added');
+				}
+			}
+		});
+	})
 };
 
 jQuery(window).on("elementor/frontend/init", function () {
