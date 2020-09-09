@@ -2922,7 +2922,7 @@ class Filterable_Gallery extends Widget_Base
             if ($zoom_icon_is_new || $zoom_icon_migrated) {
                 if (isset($settings['eael_section_fg_zoom_icon_new']['value']['url'])) {
                     echo '<img src="' . $settings['eael_section_fg_zoom_icon_new']['value']['url'] . '" alt="' . esc_attr(get_post_meta($settings['eael_section_fg_zoom_icon_new']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
-                } else {
+                } else if (isset($settings['eael_section_fg_zoom_icon_new']['value'])) {
                     echo '<i class="' . $settings['eael_section_fg_zoom_icon_new']['value'] . '" aria-hidden="true"></i>';
                 }
             } else {
