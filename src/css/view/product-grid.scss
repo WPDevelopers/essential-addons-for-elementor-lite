@@ -594,6 +594,24 @@
         border-radius: 10px;
         height: auto;
         max-height: fit-content;
+
+        .single_add_to_cart_button.eael-addtocart-added:after {
+            font-family: 'WooCommerce';
+            content: "\e017";
+            display: inline-block;
+            position: absolute;
+            right: 12px;
+        }
+
+        .single_add_to_cart_button.eael-addtocart-loading:after {
+            font-family: 'WooCommerce';
+            content: '\e01c';
+            position: absolute;
+            top: 50%;
+            right: 9px;
+            margin-top: -9px;
+            animation: spin 2s linear infinite;
+        }
     }
 
     &.woocommerce div.product {
@@ -2045,5 +2063,7 @@ ul.products {
         border: 1px solid;
     }
 }
+
+
 
 

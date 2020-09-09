@@ -2172,6 +2172,31 @@ trait Helper
 	    wp_die();
     }
 
+    public function eael_product_add_to_cart () {
+
+        $ajax   = wp_doing_ajax();
+
+        if ( ! wp_verify_nonce( $_POST['eael_add_to_cart_nonce'], 'essential-addons-elementor' ) ) {
+            $err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
+            if ( $ajax ) {
+                wp_send_json_error( $err_msg );
+            }
+
+            return false;
+        }
+
+        $product_id   = isset( $_POST['product_id'] ) ? sanitize_text_field( $_POST['product_id'] ) : 0;
+        $variation_id = isset( $_POST['variation_id'] ) ? sanitize_text_field( $_POST['variation_id'] ) : 0;
+        $quantity     = isset( $_POST['quantity'] ) ? sanitize_text_field( $_POST['quantity'] ) : 0;
+
+        if ( $variation_id ) {
+            WC()->cart->add_to_cart( $product_id, $quantity, $variation_id );
+        } else {
+            WC()->cart->add_to_cart( $product_id, $quantity );
+        }
+        wp_send_json_success();
+    }
+
     /**
      * Twitter Feed
      *
