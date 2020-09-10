@@ -114,7 +114,7 @@ class Post_Timeline extends Widget_Base
         $this->add_control(
             'eael_section_post_timeline_line_size',
             [
-                'label'      => __('Line Size', 'essential-addons-for-elementor-lite'),
+                'label'      => __('Line Width', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%'],
                 'range'      => [
@@ -169,7 +169,7 @@ class Post_Timeline extends Widget_Base
         $this->add_control(
             'eael_section_post_timeline_bullet_position_from_left',
             [
-                'label'      => __('Bullet Position From Left(Timeline all left article)', 'essential-addons-for-elementor-lite'),
+                'label'      => __('Left-sided Bullet Positon', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range'      => [
@@ -187,7 +187,7 @@ class Post_Timeline extends Widget_Base
         $this->add_control(
             'eael_section_post_timeline_bullet_position_from_right',
             [
-                'label'      => __('Bullet Position From Right(Timeline all right article)', 'essential-addons-for-elementor-lite'),
+                'label'      => __('Right-sided Bullet Position', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range'      => [

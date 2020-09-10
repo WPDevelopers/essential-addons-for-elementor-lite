@@ -552,7 +552,7 @@ class Dual_Color_Header extends Widget_Base
         $this->add_control(
             'eael_section_dch_separator_distance',
             [
-                'label' => __('Distance Between Them', 'essential-addons-for-elementor-lite'),
+                'label' => __('Distance Between Lines', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%'],
                 'range' => [
