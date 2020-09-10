@@ -140,7 +140,6 @@ var filterableGalleryHandler = function ($scope, $) {
 			}
 
 			// new items html
-			console.log($settings);
 			var i          = $init_show;
 			var item_found = 0;
 			while (i < $init_show + $images_per_page) {
