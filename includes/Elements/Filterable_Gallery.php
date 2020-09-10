@@ -3419,6 +3419,7 @@ class Filterable_Gallery extends Widget_Base
 				            $total_items = $gallery.data('total-gallery-items'),
 				            $images_per_page = $gallery.data('images-per-page'),
 				            $nomore_text = $gallery.data('nomore-item-text'),
+				            filter_enable = $(".eael-filter-gallery-control",$scope).length,
 				            $items = [];
 					    var filter_name      = $(".eael-filter-gallery-control li.active").data('filter');
 
@@ -3436,7 +3437,7 @@ class Filterable_Gallery extends Widget_Base
 					    var i          = $init_show;
 					    var item_found = 0;
 					    while (i < $init_show + $images_per_page) {
-						    if (filter_name != '' && filter_name != '*') {
+						    if (filter_name != '' && filter_name != '*' && filter_enable) {
 							    for (var j = i; j < $gallery_items.length; j++) {
 								    var element = $($($gallery_items[j])[0]);
 								    if (element.is(filter_name)) {
