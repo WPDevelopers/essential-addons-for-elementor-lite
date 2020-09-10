@@ -3,15 +3,7 @@
 namespace Essential_Addons_Elementor\Elements;
 
 use Elementor\Controls_Manager;
-use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Border;
-use Elementor\Group_Control_Box_Shadow;
-use Elementor\Group_Control_Image_Size;
-use Elementor\Group_Control_Typography;
-use Elementor\Icons_Manager;
-use Elementor\Plugin;
 use Elementor\Repeater;
-use Elementor\Utils;
 use Elementor\Widget_Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -35,7 +27,7 @@ class Woo_Product_Compare extends Widget_Base {
 	 * @inheritDoc
 	 */
 	public function get_title() {
-		return esc_html__( 'Woo Product Compare', 'essential-addons-elementor' );
+		return esc_html__( 'Woo Product Compare', 'essential-addons-for-elementor-lite' );
 	}
 
 	/**
@@ -75,7 +67,7 @@ class Woo_Product_Compare extends Widget_Base {
 	 * @inheritDoc
 	 */
 	public function get_categories() {
-		return [ 'essential-addons-elementor' ];
+		return [ 'essential-addons-for-elementor-lite' ];
 	}
 
 	/**
@@ -84,17 +76,17 @@ class Woo_Product_Compare extends Widget_Base {
 	 */
 	protected function get_field_types() {
 		return apply_filters( 'eael/wcpc/default-fields', [
-			'image'    => __( 'Image', 'essential-addons-elementor' ),
-			'title'        => __( 'Title', 'essential-addons-elementor' ),
-			'price'     => __( 'Price', 'essential-addons-elementor' ),
-			'add_to_cart' => __( 'Add to cart', 'essential-addons-elementor' ),
-			'description'   => __( 'Description', 'essential-addons-elementor' ),
-			'sku'    => __( 'SKU', 'essential-addons-elementor' ),
-			'availability'      => __( 'Availability', 'essential-addons-elementor' ),
-			'weight'      => __( 'weight', 'essential-addons-elementor' ),
-			'dimension'      => __( 'Dimension', 'essential-addons-elementor' ),
-			'color'      => __( 'Color', 'essential-addons-elementor' ),
-			'size'      => __( 'Size', 'essential-addons-elementor' ),
+			'image'        => __( 'Image', 'essential-addons-for-elementor-lite' ),
+			'title'        => __( 'Title', 'essential-addons-for-elementor-lite' ),
+			'price'        => __( 'Price', 'essential-addons-for-elementor-lite' ),
+			'add_to_cart'  => __( 'Add to cart', 'essential-addons-for-elementor-lite' ),
+			'description'  => __( 'Description', 'essential-addons-for-elementor-lite' ),
+			'sku'          => __( 'SKU', 'essential-addons-for-elementor-lite' ),
+			'availability' => __( 'Availability', 'essential-addons-for-elementor-lite' ),
+			'weight'       => __( 'weight', 'essential-addons-for-elementor-lite' ),
+			'dimension'    => __( 'Dimension', 'essential-addons-for-elementor-lite' ),
+			'color'        => __( 'Color', 'essential-addons-for-elementor-lite' ),
+			'size'         => __( 'Size', 'essential-addons-for-elementor-lite' ),
 		] );
 	}
 
@@ -105,43 +97,43 @@ class Woo_Product_Compare extends Widget_Base {
 		return apply_filters( 'eael/wcpc/default-rf-fields', [
 			[
 				'field_type'  => 'image',
-				'field_label' => __( 'Image', 'essential-addons-elementor' ),
+				'field_label' => __( 'Image', 'essential-addons-for-elementor-lite' ),
 			],
 			[
 				'field_type'  => 'title',
-				'field_label' => __( 'Title', 'essential-addons-elementor' ),
+				'field_label' => __( 'Title', 'essential-addons-for-elementor-lite' ),
 			],
 			[
 				'field_type'  => 'description',
-				'field_label' => __( 'Description', 'essential-addons-elementor' ),
+				'field_label' => __( 'Description', 'essential-addons-for-elementor-lite' ),
 			],
 			[
 				'field_type'  => 'add_to_cart',
-				'field_label' => __( 'Add to cart', 'essential-addons-elementor' ),
+				'field_label' => __( 'Add to cart', 'essential-addons-for-elementor-lite' ),
 			],
 			[
 				'field_type'  => 'sku',
-				'field_label' => __( 'SKU', 'essential-addons-elementor' ),
+				'field_label' => __( 'SKU', 'essential-addons-for-elementor-lite' ),
 			],
 			[
 				'field_type'  => 'availability',
-				'field_label' => __( 'Availability', 'essential-addons-elementor' ),
+				'field_label' => __( 'Availability', 'essential-addons-for-elementor-lite' ),
 			],
 			[
 				'field_type'  => 'weight',
-				'field_label' => __( 'Weight', 'essential-addons-elementor' ),
+				'field_label' => __( 'Weight', 'essential-addons-for-elementor-lite' ),
 			],
 			[
 				'field_type'  => 'dimension',
-				'field_label' => __( 'Dimension', 'essential-addons-elementor' ),
+				'field_label' => __( 'Dimension', 'essential-addons-for-elementor-lite' ),
 			],
 			[
 				'field_type'  => 'color',
-				'field_label' => __( 'Color', 'essential-addons-elementor' ),
+				'field_label' => __( 'Color', 'essential-addons-for-elementor-lite' ),
 			],
 			[
 				'field_type'  => 'size',
-				'field_label' => __( 'Size', 'essential-addons-elementor' ),
+				'field_label' => __( 'Size', 'essential-addons-for-elementor-lite' ),
 			],
 		] );
 	}
@@ -150,9 +142,26 @@ class Woo_Product_Compare extends Widget_Base {
 	 * @inheritDoc
 	 */
 	protected function _register_controls() {
+
+		if ( ! function_exists( 'WC' ) ) {
+			$this->start_controls_section( 'eael_global_warning', [
+				'label' => __( 'Warning!', 'essential-addons-for-elementor-lite' ),
+			] );
+
+			$this->add_control( 'eael_global_warning_text', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => __( '<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.', 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'eael-warning',
+			] );
+
+			$this->end_controls_section();
+
+			return;
+		}
+
 		/*----Content Tab----*/
 		do_action( 'eael/wcpc/before-content-controls', $this );
-        $this->init_content_general_controls();
+		$this->init_content_content_controls();
 		do_action( 'eael/wcpc/after-content-controls', $this );
 
 		/*----Style Tab----*/
@@ -162,26 +171,37 @@ class Woo_Product_Compare extends Widget_Base {
 
 	}
 
-	public function init_content_general_controls() {
-		$this->start_controls_section( 'section_content_general', [
-			'label'      => __( 'General', 'essential-addons-elementor' ),
+	public function init_content_content_controls() {
+		$this->start_controls_section( 'section_content_content', [
+			'label' => __( 'Content', 'essential-addons-for-elementor-lite' ),
+		] );
+
+		$this->add_control( "product_ids", [
+			'label'       => __( 'Product IDs', 'essential-addons-for-elementor-lite' ),
+			'description' => __( 'Enter Product IDs separated by a comma', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'placeholder' => __( 'Eg. 123, 456 etc.', 'essential-addons-for-elementor-lite' ),
+		] );
+		$this->end_controls_section();
+		$this->start_controls_section( 'section_content_table', [
+			'label' => __( 'Table Settings', 'essential-addons-for-elementor-lite' ),
 		] );
 		$this->add_control( "table_title", [
-			'label'       => __( 'Table Title', 'essential-addons-elementor' ),
+			'label'       => __( 'Table Title', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::TEXT,
-			'default' => __( 'Compare Products', 'essential-addons-elementor' ),
-			'placeholder' => __( 'Compare Products', 'essential-addons-elementor' ),
+			'default'     => __( 'Compare Products', 'essential-addons-for-elementor-lite' ),
+			'placeholder' => __( 'Compare Products', 'essential-addons-for-elementor-lite' ),
 		] );
 		$repeater = new Repeater();
 		$repeater->add_control( 'field_type', [
-			'label'   => __( 'Type', 'essential-addons-elementor' ),
+			'label'   => __( 'Type', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SELECT,
 			'options' => $this->get_field_types(),
 			'default' => 'title',
 		] );
 
 		$repeater->add_control( 'field_label', [
-			'label'   => __( 'Label', 'essential-addons-elementor' ),
+			'label'   => __( 'Label', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::TEXT,
 			'default' => '',
 			'dynamic' => [
@@ -190,8 +210,8 @@ class Woo_Product_Compare extends Widget_Base {
 		] );
 
 		$this->add_control( 'fields', [
-			'label'       => __( 'Fields to show', 'essential-addons-elementor' ),
-			'description'       => __( 'Select the fields to show in the comparison table', 'essential-addons-elementor' ),
+			'label'       => __( 'Fields to show', 'essential-addons-for-elementor-lite' ),
+			'description' => __( 'Select the fields to show in the comparison table', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::REPEATER,
 			'fields'      => apply_filters( 'eael/wcpc/rf-fields', $repeater->get_controls() ),
 			'default'     => $this->get_default_rf_fields(),
@@ -199,25 +219,28 @@ class Woo_Product_Compare extends Widget_Base {
 		] );
 
 		$this->add_control( 'repeat_price', [
-			'label' => __( 'Repeat "Price" field', 'essential-addons-elementor' ),
-			'description' => __( 'Repeat the "Price" field at the end of the table', 'essential-addons-elementor' ),
-			'type'  => Controls_Manager::SWITCHER,
-            'default' => 'yes'
+			'label'       => __( 'Repeat "Price" field', 'essential-addons-for-elementor-lite' ),
+			'description' => __( 'Repeat the "Price" field at the end of the table', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::SWITCHER,
+			'default'     => 'yes',
 		] );
 		$this->add_control( 'repeat_add_to_cart', [
-			'label' => __( 'Repeat "Add to cart" field', 'essential-addons-elementor' ),
-			'description' => __( 'Repeat the "Add to cart" field at the end of the table', 'essential-addons-elementor' ),
-			'type'  => Controls_Manager::SWITCHER,
+			'label'       => __( 'Repeat "Add to cart" field', 'essential-addons-for-elementor-lite' ),
+			'description' => __( 'Repeat the "Add to cart" field at the end of the table', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::SWITCHER,
 		] );
 		$this->end_controls_section();
 	}
 
 
 	protected function render() {
+		if ( ! function_exists( 'WC' ) ) {
+			return;
+		}
 		?>
-		<div class="eael-wcpc-wrapper">
+        <div class="eael-wcpc-wrapper">
             Woo Product Compare
-		</div>
+        </div>
 		<?php
 	}
 
