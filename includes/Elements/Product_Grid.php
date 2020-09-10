@@ -1278,6 +1278,30 @@ class Product_Grid extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_product_grid_buttons_icon_size',
+			[
+				'label' => esc_html__('Icons Size', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'max' => 50,
+					],
+				],
+				'default' => [
+					'size' => 18,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-grid.list .eael-product-wrap .icons-wrap li a i' => 'font-size: {{SIZE}}px;',
+				],
+				'condition' => [
+					'eael_product_grid_layout' => 'list',
+				],
+			]
+		);
+
+
+
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -1955,7 +1979,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#fff',
+				'default' => '#000',
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity .qty, {{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity > a' => 'color: {{VALUE}};',
 				],
