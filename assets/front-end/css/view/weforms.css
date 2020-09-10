@@ -21,6 +21,10 @@
   width: auto;
 }
 
+.eael-weform-container ul.wpuf-form {
+  list-style: none;
+}
+
 .eael-weform-container ul.wpuf-form li .wpuf-fields input[type=text],
 .eael-weform-container ul.wpuf-form li .wpuf-fields input[type=password],
 .eael-weform-container ul.wpuf-form li .wpuf-fields input[type=email],

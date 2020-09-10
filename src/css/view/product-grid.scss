@@ -1,4 +1,3 @@
-
 .eael-product-grid,
 .eael-post-grid {
     .woocommerce {
@@ -17,6 +16,12 @@
                 width: 100%;
                 margin: 0;
                 padding: 0;
+                a.add_to_cart_button,
+                span.price,
+                h2.woocommerce-loop-product__title {
+                    margin-left: 10px !important;
+                    margin-right: 10px !important;
+                }
             }
 
             &.products[class*='columns-'] li.product {
@@ -143,7 +148,7 @@
 
                     // add to cart button
                     .button.add_to_cart_button {
-                        display: block;
+                        display: inline-block;
                         font-size: 14px;
                         font-weight: 400;
                         line-height: 38px;
@@ -152,10 +157,10 @@
                         color: #fff;
                         background-color: #333;
                         padding: 0;
-                        margin: 15px;
+                        padding: 5px 10px;
                         border-radius: 0;
                         &::before {
-                            content: "\f217";
+                            content: '\f217';
                             font-family: 'Font Awesome\ 5 Free';
                             font-weight: 900;
                             padding-right: 8px;
@@ -230,7 +235,6 @@
                     border-radius: 0;
                     background-color: #fff;
                     box-shadow: none;
-
                     a {
                         text-decoration: none;
 
@@ -264,7 +268,9 @@
                         .product-link,
                         .add_to_cart_button,
                         .added_to_cart {
-                            display: inline-block;
+                            display: inline-flex;
+                            justify-content: center;
+                            align-items: center;
                             font-size: 14px;
                             line-height: 38px;
                             text-align: center;
@@ -422,9 +428,18 @@
 
     // default style
     &.eael-product-default {
+        .woocommerce ul.products li.product {
+            overflow: visible !important;
+            .onsale {
+                line-height: inherit;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
         .button.add_to_cart_button {
             &::before {
-                content: "\f217";
+                content: '\f217';
                 font-family: 'Font Awesome\ 5 Free';
                 font-weight: 900;
                 padding-right: 8px;
