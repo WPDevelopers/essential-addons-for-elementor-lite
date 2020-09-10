@@ -354,8 +354,9 @@ trait Product_Grid
 				}
 
 			}
-
-            $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='2' data-plimit='$paginationLimit'>$next_label</a></li>";
+			if ($pagination_Paginationlist > 1) {
+				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-widgetid='$widget_id' data-args='" . http_build_query( $args ) . "' data-settings='" . http_build_query( $settings ) . "' data-pnumber='2' data-plimit='$paginationLimit'>$next_label</a></li>";
+			}
 			$setPagination .="</ul>";
 			$setPagination .="</nav>";
 
