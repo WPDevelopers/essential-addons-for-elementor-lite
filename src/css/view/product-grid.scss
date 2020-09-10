@@ -612,6 +612,10 @@
             margin-top: -9px;
             animation: spin 2s linear infinite;
         }
+
+        .woocommerce-product-gallery__wrapper .woocommerce-product-gallery__image {
+            width: 350px !important;
+        }
     }
 
     &.woocommerce div.product {
