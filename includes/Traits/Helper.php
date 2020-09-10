@@ -2184,15 +2184,17 @@ trait Helper
 
             return false;
         }
-
-        $product_id   = isset( $_POST['product_id'] ) ? sanitize_text_field( $_POST['product_id'] ) : 0;
-        $variation_id = isset( $_POST['variation_id'] ) ? sanitize_text_field( $_POST['variation_id'] ) : 0;
-        $quantity     = isset( $_POST['quantity'] ) ? sanitize_text_field( $_POST['quantity'] ) : 0;
-
-        if ( $variation_id ) {
-            WC()->cart->add_to_cart( $product_id, $quantity, $variation_id );
-        } else {
-            WC()->cart->add_to_cart( $product_id, $quantity );
+        if(isset($_POST['product_data'])){
+            foreach ($_POST['product_data'] as $item){
+                $product_id   = isset( $item['product_id'] ) ? sanitize_text_field( $item['product_id'] ) : 0;
+                $variation_id = isset( $item['variation_id'] ) ? sanitize_text_field( $item['variation_id'] ) : 0;
+                $quantity     = isset( $item['quantity'] ) ? sanitize_text_field( $item['quantity'] ) : 0;
+                if ( $variation_id ) {
+                    WC()->cart->add_to_cart( $product_id, $quantity, $variation_id );
+                } else {
+                    WC()->cart->add_to_cart( $product_id, $quantity );
+                }
+            }
         }
         wp_send_json_success();
     }
