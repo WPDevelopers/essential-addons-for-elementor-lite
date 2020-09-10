@@ -1793,7 +1793,7 @@ form.cart {
                     }
                     a {
                         margin: 2px;
-                        padding: 8.5px 10px;
+                        padding: 10.5px 10px;
                     }
                 }
             }
@@ -1809,7 +1809,7 @@ form.cart {
                     }
                     &.add-to-cart {
                         a {
-                            padding: 9px 10px;
+                            padding: 8.5px 10px;
                             margin: 0;
                         }
                     }
@@ -1831,7 +1831,9 @@ form.cart {
                     text-align: center;
                     transition: all ease 0.4s;
                     background: blanchedalmond;
-                    padding: 8px 10px;
+                    padding: 9px 10px;
+                    line-height: 1.2em;
+                    font-weight: 700;
                     //border-radius: 5px;
 
                     &:hover {
