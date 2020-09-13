@@ -2222,7 +2222,7 @@ class Product_Grid extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .eael-product-popup button.eael-product-popup-close' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-product-popup button.eael-product-popup-close' => 'max-width: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; min-height: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
