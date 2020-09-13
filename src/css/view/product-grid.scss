@@ -605,6 +605,10 @@
         height: auto;
         max-height: fit-content;
 
+        .single_add_to_cart_button {
+           position: relative;
+        }
+
         .single_add_to_cart_button.eael-addtocart-added:after {
             font-family: 'WooCommerce';
             content: "\e017";
@@ -1387,7 +1391,7 @@
 
                             &.button.add_to_cart_button {
                                 padding: 0;
-                                margin: 0;
+                                margin: 3px;
                                 font-size: 0px;
                                 //background-color: transparent;
 
