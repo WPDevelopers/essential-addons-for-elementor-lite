@@ -396,11 +396,10 @@ class Woo_Product_Compare extends Widget_Base {
 		empty( $products ) && $products = $this->products_list;
 		$products = apply_filters( 'eael/wcpc/products_ids', $products );
 		$fields   = $this->fields( $products );
-
+		global $product;
 		foreach ( $products as $product_id ) {
 			/** @type WC_Product $product WooCommerce Product */
 			$product = wc_get_product( $product_id );
-
 			if ( ! $product ) {
 				continue;
 			}
@@ -409,7 +408,6 @@ class Woo_Product_Compare extends Widget_Base {
 
 			// custom attributes
 			foreach ( $fields as $field => $name ) {
-
 				switch ( $field ) {
 					case 'title':
 						$product->fields[ $field ] = $product->get_title();
@@ -452,14 +450,13 @@ class Woo_Product_Compare extends Widget_Base {
 					case 'dimensions':
 						$dimensions = function_exists( 'wc_format_dimensions' ) ? wc_format_dimensions( $product->get_dimensions( false ) ) : $product->get_dimensions();
 						! $dimensions && $dimensions = '-';
-
 						$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $dimensions ) );
 						break;
 					default:
 						if ( taxonomy_exists( $field ) ) {
 							$product->fields[ $field ] = [];
 							$terms                     = get_the_terms( $product_id, $field );
-							if ( ! empty( $terms ) ) {
+							if ( ! empty( $terms ) && is_array( $terms) ) {
 								foreach ( $terms as $term ) {
 									$term                        = sanitize_term( $term, $field );
 									$product->fields[ $field ][] = $term->name;
