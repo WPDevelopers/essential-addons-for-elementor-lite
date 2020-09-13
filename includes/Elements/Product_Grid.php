@@ -1991,7 +1991,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#fff',
+				'default' => '#000',
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity .qty, {{WRAPPER}} .eael-product-popup.woocommerce div.product form.cart div.quantity > a' => 'border-color: {{VALUE}};',
 					// OceanWP
