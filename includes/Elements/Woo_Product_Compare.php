@@ -343,7 +343,12 @@ class Woo_Product_Compare extends Widget_Base {
 	}
 
 	public function init_style_table_controls() {
+		$this->start_controls_section( 'section_style_table', [
+			'label' => __( 'Table Style', 'essential-addons-for-elementor-lite' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
 
+		$this->end_controls_section();
 	}
 
 	protected function render() {
@@ -365,24 +370,7 @@ class Woo_Product_Compare extends Widget_Base {
 				printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
 			} ?>
             <table class="eael-wcpc-table">
-                <thead>
-                <tr>
-                    <th>&nbsp;</th>
-					<?php foreach ( $products as $product_id => $product ) : ?>
-                        <td></td>
-					<?php endforeach; ?>
-                </tr>
-                </thead>
-                <tfoot>
-                <tr>
-                    <th>&nbsp;</th>
-					<?php foreach ( $products as $product_id => $product ) : ?>
-                        <td></td>
-					<?php endforeach; ?>
-                </tr>
-                </tfoot>
                 <tbody>
-
 				<?php if ( empty( $products ) ) { ?>
 
                     <tr class="no-products">
@@ -468,15 +456,11 @@ class Woo_Product_Compare extends Widget_Base {
 					<?php endif; ?>
 
 				<?php } ?>
-
                 </tbody>
             </table>
-
 			<?php do_action( 'eael/wcpc/after_main_table' ); ?>
-
         </div>
 		<?php do_action( 'eael/wcpc/after_content_wrapper' ); ?>
-
 		<?php
 	}
 
