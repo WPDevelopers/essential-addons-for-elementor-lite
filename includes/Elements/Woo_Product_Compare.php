@@ -3,6 +3,9 @@
 namespace Essential_Addons_Elementor\Elements;
 
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Background;
+use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Box_Shadow;
 use Elementor\Repeater;
 use Elementor\Widget_Base;
 use WC_Product;
@@ -39,7 +42,6 @@ class Woo_Product_Compare extends Widget_Base {
 	public function get_icon() {
 		return 'eicon-woocommerce';
 	}
-
 
 	/**
 	 * @inheritDoc
@@ -149,18 +151,15 @@ class Woo_Product_Compare extends Widget_Base {
 	 * @inheritDoc
 	 */
 	protected function _register_controls() {
-
 		if ( ! function_exists( 'WC' ) ) {
 			$this->start_controls_section( 'eael_global_warning', [
 				'label' => __( 'Warning!', 'essential-addons-for-elementor-lite' ),
 			] );
-
 			$this->add_control( 'eael_global_warning_text', [
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => __( '<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.', 'essential-addons-for-elementor-lite' ),
 				'content_classes' => 'eael-warning',
 			] );
-
 			$this->end_controls_section();
 
 			return;
@@ -174,7 +173,8 @@ class Woo_Product_Compare extends Widget_Base {
 
 		/*----Style Tab----*/
 		do_action( 'eael/wcpc/before-style-controls', $this );
-
+		$this->init_style_content_controls();
+		$this->init_style_table_controls();
 		do_action( 'eael/wcpc/after-style-controls', $this );
 
 	}
@@ -183,7 +183,6 @@ class Woo_Product_Compare extends Widget_Base {
 		$this->start_controls_section( 'section_content_content', [
 			'label' => __( 'Content', 'essential-addons-for-elementor-lite' ),
 		] );
-
 		$this->add_control( "product_ids", [
 			'label'       => __( 'Product IDs', 'essential-addons-for-elementor-lite' ),
 			'description' => __( 'Enter Product IDs separated by a comma', 'essential-addons-for-elementor-lite' ),
@@ -244,6 +243,108 @@ class Woo_Product_Compare extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	public function init_style_content_controls() {
+		$this->start_controls_section( 'section_style_general', [
+			'label' => __( 'General', 'essential-addons-for-elementor-lite' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+		$container_class = '{{WRAPPER}} .eael-wcpc-wrapper';
+		$this->add_responsive_control( "eael_container_width", [
+			'label'      => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px'  => [
+					'min'  => 0,
+					'max'  => 1000,
+					'step' => 5,
+				],
+				'rem' => [
+					'min'  => 0,
+					'max'  => 20,
+					'step' => .5,
+				],
+				'%'   => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'desktop'    => [
+				'unit' => '%',
+				'size' => 100,
+			],
+			'selectors'  => [
+				$container_class => 'width: {{SIZE}}{{UNIT}};',
+			],
+
+		] );
+
+		$this->add_responsive_control( "eael_container_margin", [
+			'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				$container_class => $this->apply_dim( 'margin' ),
+			],
+		] );
+		$this->add_responsive_control( "eael_container_padding", [
+			'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				$container_class => $this->apply_dim( 'padding' ),
+			],
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "eael_container_border",
+			'selector' => $container_class,
+		] );
+		$this->add_control( "eael_container_border_radius", [
+			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				$container_class => $this->apply_dim( 'border-radius' ),
+			],
+		] );
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'     => "eael_container_bg_color",
+			'label'    => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+			'types'    => [
+				'classic',
+				'gradient',
+			],
+			'selector' => $container_class,
+		] );
+		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
+			'label'    => __( 'Container Box Shadow', 'essential-addons-for-elementor-lite' ),
+			'name'     => 'eael_container_shadow',
+			'selector' => $container_class,
+			'exclude'  => [
+				'box_shadow_position',
+			],
+		] );
+		$this->end_controls_section();
+	}
+
+	public function init_style_table_controls() {
+
+	}
 
 	protected function render() {
 		if ( ! function_exists( 'WC' ) ) {
@@ -255,11 +356,15 @@ class Woo_Product_Compare extends Widget_Base {
 		} ) : [];
 		$products    = $this->get_products_list( $product_ids );
 		$fields      = $this->fields();
+		$title       = $this->get_settings_for_display( 'table_title' );
 		?>
+		<?php do_action( 'eael/wcpc/before_content_wrapper' ); ?>
         <div class="eael-wcpc-wrapper woocommerce">
 			<?php do_action( 'eael/wcpc/before_main_table' ); ?>
-
-            <table class="compare-list">
+			<?php if ( ! empty( $title ) ) {
+				printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
+			} ?>
+            <table class="eael-wcpc-table">
                 <thead>
                 <tr>
                     <th>&nbsp;</th>
@@ -370,6 +475,8 @@ class Woo_Product_Compare extends Widget_Base {
 			<?php do_action( 'eael/wcpc/after_main_table' ); ?>
 
         </div>
+		<?php do_action( 'eael/wcpc/after_content_wrapper' ); ?>
+
 		<?php
 	}
 
@@ -456,7 +563,7 @@ class Woo_Product_Compare extends Widget_Base {
 						if ( taxonomy_exists( $field ) ) {
 							$product->fields[ $field ] = [];
 							$terms                     = get_the_terms( $product_id, $field );
-							if ( ! empty( $terms ) && is_array( $terms) ) {
+							if ( ! empty( $terms ) && is_array( $terms ) ) {
 								foreach ( $terms as $term ) {
 									$term                        = sanitize_term( $term, $field );
 									$product->fields[ $field ][] = $term->name;
