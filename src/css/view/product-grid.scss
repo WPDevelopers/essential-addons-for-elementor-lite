@@ -610,20 +610,20 @@
         }
 
         .single_add_to_cart_button.eael-addtocart-added:after {
-            font-family: 'WooCommerce';
-            content: "\e017";
+            font-family: 'Font Awesome 5 Free';
+            content: "\f00c";
+            font-weight: 900;
             display: inline-block;
             position: absolute;
             right: 12px;
         }
 
         .single_add_to_cart_button.eael-addtocart-loading:after {
-            font-family: 'WooCommerce';
-            content: '\e01c';
+            font-family: 'Font Awesome 5 Free';
+            content: '\f110';
+            font-weight: 900;
             position: absolute;
-            top: 50%;
-            right: 9px;
-            margin-top: -9px;
+            right: 12px;
             animation: spin 2s linear infinite;
         }
 
@@ -699,6 +699,7 @@
 
         .button {
             margin: 0 !important;
+            line-height: 1.5em;
         }
 
         form.cart {
@@ -742,6 +743,11 @@
 
                 input, a {
                     height: 100%;
+                    border: 1px solid;
+                }
+
+                input[type="number"] {
+                    min-width: 2.5em;
                 }
 
                 .qty {
@@ -903,8 +909,21 @@
         &.grouped_form {
             display: block;
 
+            table {
+                .button {
+                    //min-height: 2.507em;
+                    line-height: 1.2em;
+                }
+            }
+
             .quantity {
                 width: 100%;
+
+                input, a {
+                    height: auto!important;
+                    min-height: 2.507em;
+                    line-height: 1.2em;
+                }
             }
         }
 
