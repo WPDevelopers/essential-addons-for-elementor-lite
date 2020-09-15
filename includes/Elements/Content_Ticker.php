@@ -446,7 +446,7 @@ class Content_Ticker extends Widget_Base
         $this->add_control(
             'eael_ticker_tag_color',
             [
-                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
