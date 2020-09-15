@@ -26,7 +26,7 @@ class Woo_Product_Compare extends Widget_Base {
 	 * @inheritDoc
 	 */
 	public function get_name() {
-		return 'woo-product-compare';
+		return 'eael-woo-product-compare';
 	}
 
 	/**
