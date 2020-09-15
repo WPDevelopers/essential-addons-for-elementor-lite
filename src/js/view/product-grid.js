@@ -65,17 +65,16 @@ var ProductGrid = function ($scope, $) {
 	$scope.on('click', '.eael-product-popup-details .single_add_to_cart_button', function (e) {
 		e.preventDefault();
 		var $this        = $(this),
+			product_id   = $(this).val(),
 		    variation_id = $this.closest('form.cart').find('input[name="variation_id"]').val() || '',
 		    quantity     = $this.closest('form.cart').find('input[name="quantity"]').val(),
 		    items        = $this.closest('form.cart.grouped_form'),
-		    variations_form = $this.closest('form.cart.variations_form'),
+		    form         = $this.closest('form.cart'),
 		    product_data = [];
-		items            = items.serializeArray();
+			items        = items.serializeArray();
 
-		if (variations_form) {
-			var product_id   = $this.closest('form.cart').find('input[name="product_id"]').val();
-		} else {
-			var product_id   = $(this).val();
+		if (form.hasClass('variations_form')) {
+			product_id = form.find('input[name="product_id"]').val();
 		}
 
 		if (items.length > 0) {
