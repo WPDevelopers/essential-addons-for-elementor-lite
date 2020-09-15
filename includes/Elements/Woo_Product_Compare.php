@@ -385,7 +385,7 @@ class Woo_Product_Compare extends Widget_Base {
 			<?php if ( ! empty( $title ) ) {
 				printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
 			} ?>
-            <table class="eael-wcpc-table">
+            <table class="eael-wcpc-table table-responsive">
                 <tbody>
 				<?php if ( empty( $products ) ) { ?>
 
@@ -394,23 +394,6 @@ class Woo_Product_Compare extends Widget_Base {
                     </tr>
 
 				<?php } else { ?>
-                    <tr class="remove">
-                        <th>&nbsp;</th>
-						<?php
-						$index = 0;
-						foreach ( $products as $product_id => $product ) :
-							$product_class = ( $index % 2 == 0 ? 'odd' : 'even' ) . ' product_' . $product_id ?>
-                            <td class="<?php echo esc_attr( $product_class ); ?>">
-                                <a href="<?php echo add_query_arg( 'redirect', 'view', $this->get_product_remove_url( $product_id ) ); ?>"
-                                   data-product_id="<?php echo esc_attr( $product_id ); ?>"><?php esc_html_e( 'Remove', 'essential-addons-for-elementor-lite' ) ?>
-                                    <span class="remove">x</span></a>
-                            </td>
-							<?php
-							++ $index;
-						endforeach;
-						?>
-                    </tr>
-
 					<?php foreach ( $fields as $field => $name ) : ?>
 
                         <tr class="<?php echo esc_attr( $field ); ?>">
