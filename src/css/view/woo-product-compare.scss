@@ -3,12 +3,50 @@
     display: block;
     width: 100%;
     overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .eael-wcpc-wrapper {
-background: gray !important;
+    --h-bg: #2d1e87;
+    --h-text-clr: #fff;
+    --h-border-clr: #b6aaff;
+    --text-clr: #707070;
+    --text-bold-clr: #252525;
+    table{
+        border-collapse: collapse;
+        border-spacing: 0;
+        th{
+            color: var(--text-bold-clr);
+        }
+        td{
+            color: var(--text-clr);
+        }
+        th,td{
+            padding: 20px;
+        }
+    }
+    tbody{
+        //2nd column header
+        tr:nth-child(2){
+            background: var(--h-bg);
+            color: var(--h-text-clr);
+            th,td{
+                color: inherit;
+                border:none;
+                border-left: 1px solid var(--h-border-clr);
+                border-right: 1px solid var(--h-border-clr);
+            }
+        }
+        tr.image{
+            td{
+                padding: 50px;
+                background: #6b55ec;
+                border:none;
+                border-left: 1px solid var(--h-border-clr);
+                border-right: 1px solid var(--h-border-clr);
+            }
+
+        }
+    }
 }
 
-body {
-    background: green !important;
-}
