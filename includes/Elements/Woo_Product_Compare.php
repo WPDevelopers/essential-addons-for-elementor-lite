@@ -95,6 +95,17 @@ class Woo_Product_Compare extends Widget_Base {
 		] );
 	}
 
+	protected function get_layouts() {
+		return apply_filters( 'eael/wcpc/default-layouts', [
+			'layout1'       => __( 'Layout 1', 'essential-addons-for-elementor-lite' ),
+			'layout2'       => __( 'Layout 2', 'essential-addons-for-elementor-lite' ),
+			'layout3'       => __( 'Layout 3', 'essential-addons-for-elementor-lite' ),
+			'layout4'       => __( 'Layout 4', 'essential-addons-for-elementor-lite' ),
+			'layout5'       => __( 'Layout 5', 'essential-addons-for-elementor-lite' ),
+			'layout6'       => __( 'Layout 6', 'essential-addons-for-elementor-lite' ),
+		] );
+	}
+
 	/**
 	 * Get default fields value for the repeater's default value
 	 */
@@ -347,7 +358,12 @@ class Woo_Product_Compare extends Widget_Base {
 			'label' => __( 'Table Style', 'essential-addons-for-elementor-lite' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
-
+		$this->add_control( 'layout', [
+			'label'   => __( 'Layout', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::SELECT,
+			'options' => $this->get_layouts(),
+			'default' => 'layout1',
+		] );
 		$this->end_controls_section();
 	}
 
