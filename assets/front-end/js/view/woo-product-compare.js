@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("ea.hooks.addAction(\"init\", \"ea\", function () {\n  var wooProductCompare = function wooProductCompare($scope, $) {\n    console.log('product compare script loaded successfully');\n  };\n\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/woo-product-compare.default\", wooProductCompare);\n});\n\n//# sourceURL=webpack:///./src/js/view/woo-product-compare.js?");
+eval("ea.hooks.addAction(\"init\", \"ea\", function () {\n  var wooProductCompare = function wooProductCompare($scope, $) {};\n\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/eael-woo-product-compare.default\", wooProductCompare);\n});\n\n//# sourceURL=webpack:///./src/js/view/woo-product-compare.js?");
 
 /***/ })
 
