@@ -2129,6 +2129,19 @@
     }
 }
 
+.woocommerce.loading {
+    position: relative;
 
-
-
+    &::after {
+        position: absolute;
+        top: 46%;
+        left: 50%;
+        font-family: 'Font Awesome 5 Free';
+        content: '\f110';
+        font-weight: 900;
+        //transform: translate(-50%, -50%);
+        animation: spin 5s linear infinite;
+        color: red;
+        font-size: 30px;
+    }
+}
