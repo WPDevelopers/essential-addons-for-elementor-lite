@@ -26,7 +26,7 @@ var ProductGrid = function ($scope, $) {
 				settings: settings
 			},
 			beforeSend	: function(){
-				$(widgetclass+" .eael-product-grid .woocommerce").addClass('loading');
+				$(widgetclass).addClass('eael-product-loader');
 			},
 			success: function (response) {
 				// console.log(response);
@@ -37,7 +37,7 @@ var ProductGrid = function ($scope, $) {
 
 			},
 			complete: function () {
-				$(widgetclass+" .eael-product-grid .woocommerce").removeClass('loading');
+				$(widgetclass).removeClass('eael-product-loader');
 			}
 		});
 
