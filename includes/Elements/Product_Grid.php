@@ -2520,6 +2520,9 @@ class Product_Grid extends Widget_Base {
                         }else{
 		                    popup_details.css("height",'auto');
                         }
+                        if($layout_mode === 'masonry') {
+                            $(id+" .woocommerce-product-gallery").wc_product_gallery();
+                        }
 	                    popup.addClass("eael-product-popup-ready").removeClass("eael-product-modal-removing");
                     });
 
