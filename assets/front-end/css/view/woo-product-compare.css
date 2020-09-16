@@ -21,6 +21,7 @@
 }
 .eael-wcpc-wrapper table td {
   color: var(--text-clr);
+  border: 1px solid var(--h-border-clr);
 }
 .eael-wcpc-wrapper table th, .eael-wcpc-wrapper table td {
   padding: 20px;
