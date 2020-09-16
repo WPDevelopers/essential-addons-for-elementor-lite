@@ -645,6 +645,7 @@
   -ms-flex-flow: wrap;
       flex-flow: wrap;
   margin: 0;
+  padding-left: 0;
 }
 .eael-post-grid-style-two .eael-entry-meta .post-meta-categories li {
   font-size: 12px;
