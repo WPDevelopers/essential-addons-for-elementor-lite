@@ -68,11 +68,13 @@
 						const dynamicID = "eael-product-"+Date.now();
 						if ($layout == "masonry") {
 							$content.find('.woocommerce-product-gallery').addClass(dynamicID);
+
+							// $(".woocommerce-product-gallery."+dynamicID,$scope).each(function () {
+							// 	$(this).wc_product_gallery();
+							// });
+
 							var $isotope = $(".eael-product-grid .products", $scope).isotope();
 							$isotope.isotope("appended", $content).isotope("layout");
-							$(".woocommerce-product-gallery."+dynamicID,$scope).each(function () {
-								$(this).wc_product_gallery();
-							});
 							// $isotope.imagesLoaded().progress(function () {
 							// 	$isotope.isotope("layout");
 							// });

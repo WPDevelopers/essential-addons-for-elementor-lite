@@ -2175,15 +2175,7 @@ trait Helper
     public function eael_product_add_to_cart () {
 
         $ajax   = wp_doing_ajax();
-
-        if ( ! wp_verify_nonce( $_POST['eael_add_to_cart_nonce'], 'essential-addons-elementor' ) ) {
-            $err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
-            if ( $ajax ) {
-                wp_send_json_error( $err_msg );
-            }
-
-            return false;
-        }
+        
         if(isset($_POST['product_data'])){
             foreach ($_POST['product_data'] as $item){
                 $product_id   = isset( $item['product_id'] ) ? sanitize_text_field( $item['product_id'] ) : 0;
