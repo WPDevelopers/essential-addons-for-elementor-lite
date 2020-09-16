@@ -512,7 +512,7 @@ class Product_Grid extends Widget_Base {
         $this->add_control(
             'eael_product_grid_add_to_cart_color',
             [
-                'label'     => esc_html__( 'Button Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => esc_html__( 'Font Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
@@ -563,7 +563,7 @@ class Product_Grid extends Widget_Base {
         $this->add_control(
             'eael_product_grid_add_to_cart_hover_color',
             [
-                'label'     => esc_html__( 'Button Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => esc_html__( 'Font Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
