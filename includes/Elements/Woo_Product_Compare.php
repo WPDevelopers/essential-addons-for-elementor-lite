@@ -382,9 +382,6 @@ class Woo_Product_Compare extends Widget_Base {
 		<?php do_action( 'eael/wcpc/before_content_wrapper' ); ?>
         <div class="eael-wcpc-wrapper woocommerce">
 			<?php do_action( 'eael/wcpc/before_main_table' ); ?>
-			<?php if ( ! empty( $title ) ) {
-				printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
-			} ?>
             <table class="eael-wcpc-table table-responsive">
                 <tbody>
 				<?php if ( empty( $products ) ) { ?>
@@ -398,10 +395,12 @@ class Woo_Product_Compare extends Widget_Base {
 
                         <tr class="<?php echo esc_attr( $field ); ?>">
 
-                            <th>
-								<?php if ( $field != 'image' ) {
+                            <th class="thead">
+								<?php if ( ! empty( $title ) &&  $field === 'image' ) {
+									printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
+								}else{
 									echo esc_html( $name );
-								} ?>
+								}?>
                             </th>
 
 							<?php
