@@ -121,8 +121,6 @@ class Bootstrap
         add_action('wp_head', [$this, 'enqueue_inline_styles']);
         add_action('wp_footer', [$this, 'enqueue_inline_scripts']);
 
-	    add_action( 'wp_footer', [ $this, 'eael_product_grid_script' ] );
-
         // Ajax
         add_action('wp_ajax_load_more', array($this, 'eael_load_more_ajax'));
         add_action('wp_ajax_nopriv_load_more', array($this, 'eael_load_more_ajax'));
@@ -162,15 +160,20 @@ class Bootstrap
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'eael_toc_rank_math_support']);
 
+	    if( class_exists( 'woocommerce' ) ) {
+		    add_action( 'wp_footer', [ $this, 'eael_product_grid_script' ] );
 
-		// quick view
-	    add_action( 'eael_woo_single_product_image', 'woocommerce_show_product_images', 20 );
-	    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
-	    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_rating', 10 );
-	    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_price', 15 );
-	    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
-	    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_add_to_cart', 25 );
-	    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_meta', 30 );
+		    // quick view
+		    add_action( 'eael_woo_single_product_image', 'woocommerce_show_product_images', 20 );
+		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
+		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_rating', 10 );
+		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_price', 15 );
+		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_add_to_cart', 25 );
+		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_meta', 30 );
+
+		    add_filter( 'woocommerce_product_get_rating_html', [ $this, 'eael_rating_markup' ], 10, 3 );
+	    }
 
         // Admin
         if (is_admin()) {

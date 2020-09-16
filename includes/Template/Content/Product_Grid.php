@@ -411,18 +411,18 @@ trait Product_Grid
 		return '';
 	}
 
-	/**
-	 * Rating Markup
-	 */
-	public function eael_rating_markup( $html, $rating, $count ) {
-
-		if ( 0 == $rating ) {
-			$html  = '<div class="star-rating">';
-			$html .= wc_get_star_rating_html( $rating, $count );
-			$html .= '</div>';
-		}
-		return $html;
-	}
+//	/**
+//	 * Rating Markup
+//	 */
+//	public function eael_rating_markup( $html, $rating, $count ) {
+//
+//		if ( 0 == $rating ) {
+//			$html  = '<div class="star-rating">';
+//			$html .= wc_get_star_rating_html( $rating, $count );
+//			$html .= '</div>';
+//		}
+//		return $html;
+//	}
 
 	/**
 	 * Added all actions
@@ -454,7 +454,7 @@ trait Product_Grid
 
 //		add_action( 'wp_footer', [ $this, 'eael_product_grid_script' ] );
 
-		add_filter( 'woocommerce_product_get_rating_html', [ $this, 'eael_rating_markup' ], 10, 3 );
+//		add_filter( 'woocommerce_product_get_rating_html', [ $this, 'eael_rating_markup' ], 10, 3 );
 	}
 }
 
