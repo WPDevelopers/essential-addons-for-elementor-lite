@@ -172,6 +172,8 @@ class Bootstrap
 	    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_add_to_cart', 25 );
 	    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_meta', 30 );
 
+	    add_filter( 'woocommerce_product_get_rating_html', [ $this, 'eael_rating_markup' ], 10, 3 );
+
         // Admin
         if (is_admin()) {
             // Admin
