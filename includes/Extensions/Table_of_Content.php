@@ -9,7 +9,7 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Scheme_Typography as Scheme_Typography;
+use \Elementor\Scheme_Typography;
 use Essential_Addons_Elementor\Classes\Helper;
 
 class Table_of_Content
