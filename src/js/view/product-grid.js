@@ -63,6 +63,17 @@ var ProductGrid = function ($scope, $) {
 
 	});
 
+	$('.eael-product-popup-details input[type=number]').on('keypress',(e)=>{
+		let keyValue = e.keyCode || e.which;
+		let regex = /^[0-9]+$/;
+
+		let isValid = regex.test(String.fromCharCode(keyValue));
+		if (!isValid) {
+			return false;
+		}
+		return isValid;
+	});
+
 	// handle add to cart for quick view
 	$scope.on('click', '.eael-product-popup-details .single_add_to_cart_button', function (e) {
 		e.preventDefault();
