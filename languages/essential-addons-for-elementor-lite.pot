@@ -593,7 +593,7 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: ../includes/Elements/Adv_Tabs.php:265, ../includes/Elements/Event_Calendar.php:132, ../includes/Elements/Login_Register.php:235, ../includes/Elements/Login_Register.php:1378, ../includes/Elements/Progress_Bar.php:299, ../includes/Elements/Progress_Bar.php:510, ../includes/Elements/Woo_Product_Compare.php:259, ../includes/Traits/Admin.php:202
+#: ../includes/Elements/Adv_Tabs.php:265, ../includes/Elements/Dummy_Widget.php:75, ../includes/Elements/Event_Calendar.php:132, ../includes/Elements/Login_Register.php:235, ../includes/Elements/Login_Register.php:1378, ../includes/Elements/Progress_Bar.php:299, ../includes/Elements/Progress_Bar.php:510, ../includes/Elements/Woo_Product_Compare.php:259, ../includes/Traits/Admin.php:202
 msgid "General"
 msgstr ""
 
@@ -625,7 +625,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:31, ../includes/templates/admin/elements.php:469
+#: ../includes/Elements/Betterdocs_Category_Box.php:31, ../includes/templates/admin/elements.php:475
 msgid "BetterDocs Category Box"
 msgstr ""
 
@@ -737,7 +737,7 @@ msgstr ""
 msgid "<p class=\"no-posts-found\">No posts found!</p>"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Grid.php:29, ../includes/templates/admin/elements.php:463
+#: ../includes/Elements/Betterdocs_Category_Grid.php:29, ../includes/templates/admin/elements.php:469
 msgid "BetterDocs Category Grid"
 msgstr ""
 
@@ -841,7 +841,7 @@ msgstr ""
 msgid "Button Alignment"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Search_Form.php:30, ../includes/templates/admin/elements.php:475
+#: ../includes/Elements/Betterdocs_Search_Form.php:30, ../includes/templates/admin/elements.php:481
 msgid "BetterDocs Search Form"
 msgstr ""
 
@@ -1973,6 +1973,14 @@ msgstr ""
 msgid "Right Line"
 msgstr ""
 
+#: ../includes/Elements/Dummy_Widget.php:33
+msgid "Dummy Widget"
+msgstr ""
+
+#: ../includes/Elements/Dummy_Widget.php:79
+msgid "Testing control"
+msgstr ""
+
 #: ../includes/Elements/EmbedPress.php:19
 msgid "EmbedPress"
 msgstr ""
@@ -2225,7 +2233,7 @@ msgstr ""
 msgid "No Title"
 msgstr ""
 
-#: ../includes/Elements/Facebook_Feed.php:26, ../includes/templates/admin/elements.php:440
+#: ../includes/Elements/Facebook_Feed.php:26, ../includes/templates/admin/elements.php:446
 msgid "Facebook Feed"
 msgstr ""
 
@@ -2705,7 +2713,7 @@ msgstr ""
 msgid "Filterable Gallery"
 msgstr ""
 
-#: ../includes/Elements/Filterable_Gallery.php:90, ../includes/Elements/Pricing_Table.php:75, ../includes/Traits/Core.php:48, ../includes/templates/admin/elements.php:565, ../includes/templates/admin/elements.php:548, ../includes/templates/admin/elements.php:545, ../includes/templates/admin/extensions.php:85
+#: ../includes/Elements/Filterable_Gallery.php:90, ../includes/Elements/Pricing_Table.php:75, ../includes/Traits/Core.php:48, ../includes/templates/admin/elements.php:571, ../includes/templates/admin/elements.php:554, ../includes/templates/admin/elements.php:551, ../includes/templates/admin/extensions.php:85
 msgid "Settings"
 msgstr ""
 
@@ -4987,7 +4995,7 @@ msgstr ""
 msgid "Button Gradient Background"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:40, ../includes/templates/admin/elements.php:486
+#: ../includes/Elements/Product_Grid.php:40, ../includes/templates/admin/elements.php:492
 msgid "Product Grid"
 msgstr ""
 
@@ -5783,7 +5791,7 @@ msgstr ""
 msgid "Arrow Color"
 msgstr ""
 
-#: ../includes/Elements/Twitter_Feed.php:27, ../includes/templates/admin/elements.php:420
+#: ../includes/Elements/Twitter_Feed.php:27, ../includes/templates/admin/elements.php:426
 msgid "Twitter Feed"
 msgstr ""
 
@@ -6007,7 +6015,7 @@ msgstr ""
 msgid "<strong>ReviewX</strong> is not installed/activated on your site. Please install and activate <a href=\"plugin-install.php?s=reviewx&tab=search&type=term\" target=\"_blank\">ReviewX</a> first."
 msgstr ""
 
-#: ../includes/Elements/Woo_Checkout.php:49, ../includes/templates/admin/elements.php:499
+#: ../includes/Elements/Woo_Checkout.php:49, ../includes/templates/admin/elements.php:505
 msgid "Woo Checkout"
 msgstr ""
 
@@ -6139,7 +6147,7 @@ msgstr ""
 msgid "Privacy Policy"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Compare.php:36, ../includes/templates/admin/elements.php:505
+#: ../includes/Elements/Woo_Product_Compare.php:36, ../includes/templates/admin/elements.php:511
 msgid "Woo Product Compare"
 msgstr ""
 
@@ -6587,7 +6595,7 @@ msgstr ""
 msgid "Essential Addons Settings"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:197, ../includes/templates/admin/elements.php:597, ../includes/templates/admin/extensions.php:106
+#: ../includes/Traits/Admin.php:197, ../includes/templates/admin/elements.php:603, ../includes/templates/admin/extensions.php:106
 msgid "Save settings"
 msgstr ""
 
@@ -6703,7 +6711,7 @@ msgstr ""
 msgid "Image Scroller"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:172, ../includes/templates/admin/elements.php:433
+#: ../includes/Traits/Elements.php:172, ../includes/templates/admin/elements.php:439
 msgid "Instagram Feed"
 msgstr ""
 
@@ -6715,7 +6723,7 @@ msgstr ""
 msgid "Interactive Promo"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:190, ../includes/templates/admin/elements.php:451
+#: ../includes/Traits/Elements.php:190, ../includes/templates/admin/elements.php:457
 msgid "LearnDash Course List"
 msgstr ""
 
@@ -6771,11 +6779,11 @@ msgstr ""
 msgid "Testimonial Slider"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:280, ../includes/templates/admin/elements.php:426
+#: ../includes/Traits/Elements.php:280, ../includes/templates/admin/elements.php:432
 msgid "Twitter Feed Carousel"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:286, ../includes/templates/admin/elements.php:492
+#: ../includes/Traits/Elements.php:286, ../includes/templates/admin/elements.php:498
 msgid "Woo Product Collections"
 msgstr ""
 
@@ -7351,23 +7359,23 @@ msgstr ""
 msgid "FluentForm"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:416
+#: ../includes/templates/admin/elements.php:422
 msgid "Social Feed Elemens"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:447
+#: ../includes/templates/admin/elements.php:453
 msgid "LearnDash Elements"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:459
+#: ../includes/templates/admin/elements.php:465
 msgid "Documentation Elements"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:482
+#: ../includes/templates/admin/elements.php:488
 msgid "WooCommerce Elements"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:542, ../includes/templates/admin/extensions.php:83
+#: ../includes/templates/admin/elements.php:548, ../includes/templates/admin/extensions.php:83
 msgid "Pro"
 msgstr ""
 
