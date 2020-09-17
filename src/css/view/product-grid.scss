@@ -629,6 +629,7 @@
 
     }
 
+
     &.woocommerce div.product {
         display: flex;
         height: 100%;
@@ -1079,6 +1080,10 @@
                 }
             }
         }
+    }
+
+    .woocommerce ul.products .product {
+        overflow-y: auto;
     }
 
     .eael-load-more-button-wrap {
