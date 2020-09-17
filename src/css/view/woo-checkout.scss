@@ -377,11 +377,21 @@ $base-font-size: 14px;
 					}
 				}
 
-				.shipping-area, .order-total, .cart-subtotal, .cart-discount, .tax-rate {
+				.order-total, .cart-subtotal, .cart-discount, .tax-rate {
 					display: flex;
 					justify-content: space-between;
 					border-top: 1px solid inherit;
 					padding: 3px 0;
+				}
+
+				.shipping-area {
+					display: grid;
+					grid-template-columns: 70% 30%;
+
+					#shipping_method {
+						text-align: right;
+						margin-right: 0;
+					}
 				}
 
 				.recurring-wrapper {
