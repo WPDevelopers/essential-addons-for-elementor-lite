@@ -1774,6 +1774,28 @@ class Product_Grid extends Widget_Base {
 			]
 		);
 
+		// Pagination Loader
+		$this->add_control(
+			'eael_product_pagination_loader',
+			[
+				'label'     => __('Loader', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'eael_product_pagination_loader_color',
+			[
+				'label'     => __('Color', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#000',
+				'selectors' => [
+					'{{WRAPPER}}.eael-product-loader::after' => 'border-left-color: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
