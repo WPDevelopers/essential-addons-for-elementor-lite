@@ -2543,7 +2543,9 @@ class Product_Grid extends Widget_Base {
 		                    popup_details.css("height",'auto');
                         }
                         if($layout_mode === 'masonry') {
-                            $(id+" .woocommerce-product-gallery").wc_product_gallery();
+                            if($(id+" .woocommerce-product-gallery").hasClass('eael-new-pr')){
+                                $(id+" .woocommerce-product-gallery").wc_product_gallery();
+                            }
                         }
 	                    popup.addClass("eael-product-popup-ready").removeClass("eael-product-modal-removing");
                     });
@@ -2562,8 +2564,6 @@ class Product_Grid extends Widget_Base {
                 if(isEditMode){
                     $(".eael-product-image-wrap .woocommerce-product-gallery").css("opacity","1");
                 }
-
-
             });
         </script>
 
