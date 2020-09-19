@@ -2547,6 +2547,7 @@ class Product_Grid extends Widget_Base {
                                 $(id+" .woocommerce-product-gallery").wc_product_gallery();
                             }
                         }
+                        $( id+" .variations_form" ).wc_variation_form();
 	                    popup.addClass("eael-product-popup-ready").removeClass("eael-product-modal-removing");
                     });
 
