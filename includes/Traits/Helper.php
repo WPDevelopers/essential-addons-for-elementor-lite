@@ -3237,7 +3237,7 @@ trait Helper
 					add_action( 'wp_footer', 'woocommerce_photoswipe', 15 );
 				}
 			}
-
+            wp_enqueue_script( 'wc-add-to-cart-variation' );
 			wp_enqueue_script( 'wc-single-product' );
 		}
 	}
