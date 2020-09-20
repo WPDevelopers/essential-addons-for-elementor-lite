@@ -71,7 +71,7 @@ trait Controls
             [
                 'label' => __('Search & Select', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT2,
-                'options' => Helper::get_posts_list(),
+                'options' => Helper::get_post_list(),
                 'label_block' => true,
                 'multiple' => true,
                 'condition' => [
@@ -120,7 +120,7 @@ trait Controls
             [
                 'label' => __('Exclude', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT2,
-                'options' => Helper::get_posts_list(),
+                'options' => Helper::get_post_list(),
                 'label_block' => true,
                 'post_type' => '',
                 'multiple' => true,

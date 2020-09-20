@@ -88,10 +88,10 @@ class Helper
         return $settings;
     }
 
-    public static function get_query_args($settings = [], $requested_post_type = 'post')
+    public static function get_query_args($settings = [], $post_type = 'post')
     {
         $settings = wp_parse_args($settings, [
-            'post_type' => $requested_post_type,
+            'post_type' => $post_type,
             'posts_ids' => [],
             'orderby' => 'date',
             'order' => 'desc',
@@ -197,7 +197,7 @@ class Helper
      * Get all types of post.
      * @return array
      */
-    public static function get_posts_list($post_type = 'any')
+    public static function get_post_list($post_type = 'any')
     {
         $posts = get_posts([
             'post_type' => $post_type,
