@@ -25,6 +25,11 @@ trait Controls
     {
         $post_types = Helper::get_post_types();
         $post_types['by_id'] = __('Manual Selection', 'essential-addons-for-elementor-lite');
+
+        if($wb->get_name() !== 'eael-dynamic-filterable-gallery' && $wb->get_name() !== 'eael-post-list') {
+            $post_types['source_dynamic'] = __( 'Dynamic', 'essential-addons-for-elementor-lite' );
+        }
+        
         $taxonomies = get_taxonomies([], 'objects');
 
         if ('eael-content-ticker' === $wb->get_name()) {
@@ -67,6 +72,18 @@ trait Controls
         );
 
         $wb->add_control(
+            'eael_global_dynamic_source_warning_text',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => __('This option will only affect in <strong>Archive page of Elementor Theme Builder</strong> dynamically.', 'essential-addons-for-elementor-lite'),
+                'content_classes' => 'eael-warning',
+                'condition' => [
+                    'post_type' => 'source_dynamic'
+                ]
+            ]
+        );
+
+        $wb->add_control(
             'posts_ids',
             [
                 'label' => __('Search & Select', 'essential-addons-for-elementor-lite'),
@@ -89,7 +106,7 @@ trait Controls
                 'default' => [],
                 'options' => Helper::get_authors_list(),
                 'condition' => [
-                    'post_type!' => 'by_id',
+                    'post_type!' => [ 'by_id', 'source_dynamic' ]
                 ],
             ]
         );
@@ -125,7 +142,7 @@ trait Controls
                 'post_type' => '',
                 'multiple' => true,
                 'condition' => [
-                    'post_type!' => 'by_id',
+                    'post_type!' => [ 'by_id', 'source_dynamic' ]
                 ],
             ]
         );
