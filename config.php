@@ -884,25 +884,6 @@ $config = [
 
 	        ],
         ],
-	    'dummy-widget' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Dummy_Widget',
-            'dependency' => [
-                'css' => [
-                    [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/dummy-widget.min.css',
-                        'type' => 'self',
-                        'context' => 'view',
-                    ],
-                ],
-                'js' => [
-                    [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/dummy-widget.min.js',
-                        'type' => 'self',
-                        'context' => 'view',
-                    ],
-                ],
-            ],
-        ],
     ],
     'extensions' => [
         'eael-promotion' => [

@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package namespace Essential_Addons_Elementor\Pro\Elements;
  */
 class Woo_Product_Compare extends Widget_Base {
-	protected $products_list;
+	protected $products_list = [];
 	protected $remove_action = 'eael-wcpc-remove-product';
 
 	/**
@@ -97,12 +97,12 @@ class Woo_Product_Compare extends Widget_Base {
 
 	protected function get_layouts() {
 		return apply_filters( 'eael/wcpc/default-layouts', [
-			'layout1'       => __( 'Layout 1', 'essential-addons-for-elementor-lite' ),
-			'layout2'       => __( 'Layout 2', 'essential-addons-for-elementor-lite' ),
-			'layout3'       => __( 'Layout 3', 'essential-addons-for-elementor-lite' ),
-			'layout4'       => __( 'Layout 4', 'essential-addons-for-elementor-lite' ),
-			'layout5'       => __( 'Layout 5', 'essential-addons-for-elementor-lite' ),
-			'layout6'       => __( 'Layout 6', 'essential-addons-for-elementor-lite' ),
+			'layout1' => __( 'Layout 1', 'essential-addons-for-elementor-lite' ),
+			'layout2' => __( 'Layout 2', 'essential-addons-for-elementor-lite' ),
+			'layout3' => __( 'Layout 3', 'essential-addons-for-elementor-lite' ),
+			'layout4' => __( 'Layout 4', 'essential-addons-for-elementor-lite' ),
+			'layout5' => __( 'Layout 5', 'essential-addons-for-elementor-lite' ),
+			'layout6' => __( 'Layout 6', 'essential-addons-for-elementor-lite' ),
 		] );
 	}
 
@@ -396,11 +396,11 @@ class Woo_Product_Compare extends Widget_Base {
                         <tr class="<?php echo esc_attr( $field ); ?>">
 
                             <th class="thead">
-								<?php if ( ! empty( $title ) &&  $field === 'image' ) {
+								<?php if ( ! empty( $title ) && $field === 'image' ) {
 									printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
-								}else{
+								} else {
 									echo esc_html( $name );
-								}?>
+								} ?>
                             </th>
 
 							<?php
@@ -482,87 +482,92 @@ class Woo_Product_Compare extends Widget_Base {
 	 */
 	public function get_products_list( $products = [] ) {
 		$products_list = [];
-		empty( $products ) && $products = $this->products_list;
+		if ( empty( $products ) ) {
+			$products = $this->products_list;
+		}
+
 		$products = apply_filters( 'eael/wcpc/products_ids', $products );
 		$fields   = $this->fields( $products );
 		global $product;
-		foreach ( $products as $product_id ) {
-			/** @type WC_Product $product WooCommerce Product */
-			$product = wc_get_product( $product_id );
-			if ( ! $product ) {
-				continue;
-			}
-
-			$product->fields = [];
-
-			// custom attributes
-			foreach ( $fields as $field => $name ) {
-				switch ( $field ) {
-					case 'title':
-						$product->fields[ $field ] = $product->get_title();
-						break;
-					case 'price':
-						$product->fields[ $field ] = $product->get_price_html();
-						break;
-					case 'add-to-cart':
-						ob_start();
-						woocommerce_template_loop_add_to_cart();
-						$product->fields[ $field ] = ob_get_clean();
-						break;
-					case 'image':
-						$product->fields[ $field ] = $product->get_image();
-						break;
-					case 'description':
-						$description               = apply_filters( 'woocommerce_short_description', $product->get_short_description() ? $product->get_short_description() : wc_trim_string( $product->get_description(), 400 ) );
-						$product->fields[ $field ] = apply_filters( 'eael/wcpc/woocommerce_short_description', $description );
-						break;
-					case 'stock':
-						$availability = $product->get_availability();
-						if ( empty( $availability['availability'] ) ) {
-							$availability['availability'] = __( 'In stock', 'essential-addons-for-elementor-lite' );
-						}
-						$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $availability['availability'] ) );
-						break;
-					case 'sku':
-						$sku = $product->get_sku();
-						! $sku && $sku = '-';
-						$product->fields[ $field ] = $sku;
-						break;
-					case 'weight':
-						if ( $weight = $product->get_weight() ) {
-							$weight = wc_format_localized_decimal( $weight ) . ' ' . esc_attr( get_option( 'woocommerce_weight_unit' ) );
-						} else {
-							$weight = '-';
-						}
-						$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $weight ) );
-						break;
-					case 'dimensions':
-						$dimensions = function_exists( 'wc_format_dimensions' ) ? wc_format_dimensions( $product->get_dimensions( false ) ) : $product->get_dimensions();
-						! $dimensions && $dimensions = '-';
-						$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $dimensions ) );
-						break;
-					default:
-						if ( taxonomy_exists( $field ) ) {
-							$product->fields[ $field ] = [];
-							$terms                     = get_the_terms( $product_id, $field );
-							if ( ! empty( $terms ) && is_array( $terms ) ) {
-								foreach ( $terms as $term ) {
-									$term                        = sanitize_term( $term, $field );
-									$product->fields[ $field ][] = $term->name;
-								}
-							}
-							$product->fields[ $field ] = implode( ', ', $product->fields[ $field ] );
-						} else {
-							do_action( 'eael/wcpc/compare_field_' . $field, [
-								$product,
-								&$product->fields,
-							] );
-						}
-						break;
+		if ( ! empty( $products ) && is_array( $products ) ) {
+			foreach ( $products as $product_id ) {
+				/** @type WC_Product $product WooCommerce Product */
+				$product = wc_get_product( $product_id );
+				if ( ! $product ) {
+					continue;
 				}
-			}
 
-			$products_list[ $product_id ] = $product;
+				$product->fields = [];
+
+				// custom attributes
+				foreach ( $fields as $field => $name ) {
+					switch ( $field ) {
+						case 'title':
+							$product->fields[ $field ] = $product->get_title();
+							break;
+						case 'price':
+							$product->fields[ $field ] = $product->get_price_html();
+							break;
+						case 'add-to-cart':
+							ob_start();
+							woocommerce_template_loop_add_to_cart();
+							$product->fields[ $field ] = ob_get_clean();
+							break;
+						case 'image':
+							$product->fields[ $field ] = $product->get_image();
+							break;
+						case 'description':
+							$description               = apply_filters( 'woocommerce_short_description', $product->get_short_description() ? $product->get_short_description() : wc_trim_string( $product->get_description(), 400 ) );
+							$product->fields[ $field ] = apply_filters( 'eael/wcpc/woocommerce_short_description', $description );
+							break;
+						case 'stock':
+							$availability = $product->get_availability();
+							if ( empty( $availability['availability'] ) ) {
+								$availability['availability'] = __( 'In stock', 'essential-addons-for-elementor-lite' );
+							}
+							$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $availability['availability'] ) );
+							break;
+						case 'sku':
+							$sku = $product->get_sku();
+							! $sku && $sku = '-';
+							$product->fields[ $field ] = $sku;
+							break;
+						case 'weight':
+							if ( $weight = $product->get_weight() ) {
+								$weight = wc_format_localized_decimal( $weight ) . ' ' . esc_attr( get_option( 'woocommerce_weight_unit' ) );
+							} else {
+								$weight = '-';
+							}
+							$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $weight ) );
+							break;
+						case 'dimensions':
+							$dimensions = function_exists( 'wc_format_dimensions' ) ? wc_format_dimensions( $product->get_dimensions( false ) ) : $product->get_dimensions();
+							! $dimensions && $dimensions = '-';
+							$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $dimensions ) );
+							break;
+						default:
+							if ( taxonomy_exists( $field ) ) {
+								$product->fields[ $field ] = [];
+								$terms                     = get_the_terms( $product_id, $field );
+								if ( ! empty( $terms ) && is_array( $terms ) ) {
+									foreach ( $terms as $term ) {
+										$term                        = sanitize_term( $term, $field );
+										$product->fields[ $field ][] = $term->name;
+									}
+								}
+								$product->fields[ $field ] = implode( ', ', $product->fields[ $field ] );
+							} else {
+								do_action( 'eael/wcpc/compare_field_' . $field, [
+									$product,
+									&$product->fields,
+								] );
+							}
+							break;
+					}
+				}
+
+				$products_list[ $product_id ] = $product;
+			}
 		}
 
 		return apply_filters( 'eael/wcpc/products_list', $products_list );

@@ -62,7 +62,6 @@ trait Enqueue
     public function enqueue_template_scripts($css_file)
     {
         $post_id = (int) $css_file->get_post_id();
-
         if ($this->is_running_background()) {
             return;
         }
@@ -78,7 +77,8 @@ trait Enqueue
         if ($this->is_running_background()) {
             return;
         }
-
+		//fix asset loading issue if no custom elementor css is not used.
+	    $this->loaded_templates[] = get_the_ID();
         // register fontawesome as fallback
         wp_register_style(
             'font-awesome-5-all',
@@ -156,9 +156,8 @@ trait Enqueue
 
         // view mode
         if ($this->is_preview_mode()) {
-            $update_requires = (bool) get_transient('eael_requires_update');
+	        $update_requires = (bool) get_transient('eael_requires_update');
             $posts = get_transient($this->uid());
-
             if ($posts === false || $update_requires) {
                 $this->loaded_widgets = $this->get_settings();
             } else {
@@ -166,20 +165,18 @@ trait Enqueue
                     return;
                 }
 
-                // parse widgets from post
+	            // parse widgets from post
                 foreach ($posts as $post) {
                     $widgets = (array) $this->parse_widgets($post);
-
                     // loaded widgets stack
                     $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $widgets)));
                 }
             }
 
             // if no widget in page, return
-            if (empty($this->loaded_widgets)) {
-                return;
+	        if (empty($this->loaded_widgets)) {
+	            return;
             }
-
             // run hook before enqueue styles
             do_action('eael/before_enqueue_styles', $this->loaded_widgets);
 
@@ -250,7 +247,7 @@ trait Enqueue
                     if (get_post_status($post_id) === false) {
                         continue;
                     }
-                    
+
                     $widgets = (array) $this->parse_widgets($post_id);
 
                     // loaded widgets stack
