@@ -229,7 +229,7 @@ trait Library
      *
      * @since v3.0.0
      */
-    public static function safe_url($url)
+    public function safe_url($url)
     {
         if (is_ssl()) {
             $url = wp_parse_url($url);
@@ -244,7 +244,7 @@ trait Library
         return $url;
     }
 
-    public static function unparse_url($parsed_url)
+    public function unparse_url($parsed_url)
     {
         $scheme = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : '';
         $host = isset($parsed_url['host']) ? $parsed_url['host'] : '';
