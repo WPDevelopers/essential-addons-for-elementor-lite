@@ -12,53 +12,78 @@
     --h-border-clr: #b6aaff;
     --text-clr: #707070;
     --text-bold-clr: #252525;
-    table{
+    --btn-bg: #6752e5;
+    --btn-bg-hover: #ff9582;
+    --btn-text: #fff;
+
+    table {
         border-collapse: collapse;
         border-spacing: 0;
-        th{
+        th, td {
+            padding: 15px;
+            border: 1px solid var(--h-border-clr);
+        }
+        th {
             color: var(--text-bold-clr);
             font-weight: normal;
             max-width: 300px;
-        }
-        td{
-            color: var(--text-clr);
+            border-left-width: 2px;
+            vertical-align: middle;
+            padding-left: 35px;
         }
 
-        th,td{
-            padding: 20px;
-            border: 1px solid var(--h-border-clr);
+        td {
+            color: var(--text-clr);
+            text-align: center;
         }
-        th{
-            border-left-width: 2px;
+
+        th.first-th {
+            border: none;
+            padding-left: 5px;
         }
-        th.first-th{
-            border: 0;
+
+        a.button {
+            border-radius: 5px;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            &:hover{
+                background: var(--btn-bg-hover);
+            }
         }
     }
-    tbody{
+
+    tbody {
         //2nd column header
-        tr:nth-child(2){
+        tr:nth-child(2) {
             background: var(--h-bg);
             color: var(--h-text-clr);
 
-            th,td{
+            th, td {
                 font-size: 20px;
                 color: inherit;
-                border:none;
+                border: none;
                 border-left: 1px solid var(--h-border-clr);
                 border-right: 1px solid var(--h-border-clr);
             }
         }
-        tr.image{
-            td{
-                padding: 50px;
+
+        tr.image {
+            td {
                 background: #6b55ec;
-                border:none;
+                border: none;
                 border-left: 1px solid var(--h-border-clr);
                 border-right: 1px solid var(--h-border-clr);
+                vertical-align: middle;
             }
-
         }
     }
 }
 
+//Responsive
+@media screen and (min-width: 769px) {
+    tr.image {
+        td {
+            padding: 50px;
+        }
+    }
+}
