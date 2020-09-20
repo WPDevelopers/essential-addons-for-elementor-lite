@@ -74,9 +74,27 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="'.get_the_ID
                         ),
                     )
                 );
+            }else {
+                $args = array(
+                    'post_type'   => 'docs',
+                    'post_status' => 'publish',
+                    'posts_per_page'    => $settings['post_per_page'],
+                    'orderby'   => $settings['post_orderby'],
+                    'order' => $settings['post_order'],
+                    'tax_query' => array(
+                        array(
+                            'taxonomy' => 'doc_category',
+                            'field'    => 'slug',
+                            'terms'    => $term->slug,
+                            'operator'          => 'AND',
+                            'include_children'  => false
+                        ),
+                    ),
+                );
             }
 
                 $query = new \WP_Query( $args );
+
                 if ( $query->have_posts() ) {
                     echo '<ul>';
                     while ( $query->have_posts() ) {
