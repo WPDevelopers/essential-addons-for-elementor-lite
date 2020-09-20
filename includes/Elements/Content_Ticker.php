@@ -423,6 +423,18 @@ class Content_Ticker extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_ticker_content_radius',
+            [
+                'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-ticker-wrap .eael-ticker' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -446,7 +458,7 @@ class Content_Ticker extends Widget_Base
         $this->add_control(
             'eael_ticker_tag_color',
             [
-                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [

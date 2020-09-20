@@ -7,11 +7,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
+use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Background;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Widget_Base;
 use \Elementor\Group_Control_Box_Shadow;
 use \Essential_Addons_Elementor\Classes\Controls;
 use \Essential_Addons_Elementor\Classes\Helper;
@@ -647,7 +647,8 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'size_units' => [ 'px', '%', 'em' ],
                     'selectors' => [
                         '{{WRAPPER}} .layout-2 .eael-docs-cat-title' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                        '{{WRAPPER}} .eael-bd-cg-header'   => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                        '{{WRAPPER}} .eael-bd-cg-header'   => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .eael-bd-cg-header .eael-bd-cg-header-inner'   => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                     ]
                 ]
             );

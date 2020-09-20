@@ -467,6 +467,44 @@ class Product_Grid extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'eael_product_grid_add_to_cart_padding',
+            [
+                'label' => __('Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button,
+                    {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link,
+                    {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_grid_add_to_cart_radius',
+            [
+                'label' => __('Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button,
+                    {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link,
+                    {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_product_grid_add_to_cart_is_gradient_bg',
+            [
+                'label' => __('Use Gradient Background', 'essential-addons-for-elementor-lite'),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+            ]
+        );
+
         $this->start_controls_tabs( 'eael_product_grid_add_to_cart_style_tabs' );
 
         $this->start_controls_tab( 'normal', ['label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' )] );
@@ -474,7 +512,7 @@ class Product_Grid extends Widget_Base {
         $this->add_control(
             'eael_product_grid_add_to_cart_color',
             [
-                'label'     => esc_html__( 'Button Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => esc_html__( 'Font Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
@@ -525,7 +563,7 @@ class Product_Grid extends Widget_Base {
         $this->add_control(
             'eael_product_grid_add_to_cart_hover_color',
             [
-                'label'     => esc_html__( 'Button Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => esc_html__( 'Font Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
