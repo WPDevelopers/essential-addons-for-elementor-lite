@@ -80,10 +80,9 @@ var ProductGrid = function ($scope, $) {
 		popup.addClass("eael-product-popup-ready").removeClass("eael-product-modal-removing");
 	});
 
-	$('.eael-product-popup-details input[type=number]').on('keypress',(e)=>{
+	$(document).on('keypress','.eael-product-details-wrap input[type=number]',(e)=>{
 		let keyValue = e.keyCode || e.which;
 		let regex = /^[0-9]+$/;
-
 		let isValid = regex.test(String.fromCharCode(keyValue));
 		if (!isValid) {
 			return false;
