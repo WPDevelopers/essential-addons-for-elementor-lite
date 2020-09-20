@@ -18,19 +18,28 @@
 }
 .eael-wcpc-wrapper table th {
   color: var(--text-bold-clr);
+  font-weight: normal;
+  max-width: 300px;
 }
 .eael-wcpc-wrapper table td {
   color: var(--text-clr);
-  border: 1px solid var(--h-border-clr);
 }
 .eael-wcpc-wrapper table th, .eael-wcpc-wrapper table td {
   padding: 20px;
+  border: 1px solid var(--h-border-clr);
+}
+.eael-wcpc-wrapper table th {
+  border-left-width: 2px;
+}
+.eael-wcpc-wrapper table th.first-th {
+  border: 0;
 }
 .eael-wcpc-wrapper tbody tr:nth-child(2) {
   background: var(--h-bg);
   color: var(--h-text-clr);
 }
 .eael-wcpc-wrapper tbody tr:nth-child(2) th, .eael-wcpc-wrapper tbody tr:nth-child(2) td {
+  font-size: 20px;
   color: inherit;
   border: none;
   border-left: 1px solid var(--h-border-clr);
