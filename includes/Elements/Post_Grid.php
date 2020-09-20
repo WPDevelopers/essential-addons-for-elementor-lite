@@ -907,7 +907,6 @@ class Post_Grid extends Widget_Base
             [
                 'label' => __('Post Hover Icon', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::ICONS,
-                'fa4compatibility' => 'eael_post_grid_bg_hover_icon',
                 'default' => [
                     'value' => 'fas fa-long-arrow-alt-right',
                     'library' => 'fa-solid',
@@ -1173,7 +1172,7 @@ class Post_Grid extends Widget_Base
             'meta_position' => $settings['meta_position'],
             'eael_excerpt_length' => intval($settings['eael_excerpt_length'], 10),
             'eael_post_grid_hover_animation' => $settings['eael_post_grid_hover_animation'],
-            'eael_post_grid_bg_hover_icon' => (isset($settings['__fa4_migrated']['eael_post_grid_bg_hover_icon_new']) || empty($settings['eael_post_grid_bg_hover_icon'])) ? $settings['eael_post_grid_bg_hover_icon_new']['value'] : $settings['eael_post_grid_bg_hover_icon'],
+            'eael_post_grid_bg_hover_icon_new' => $settings['eael_post_grid_bg_hover_icon_new'],
             'eael_show_read_more_button' => $settings['eael_show_read_more_button'],
             'read_more_button_text' => $settings['read_more_button_text'],
             'read_more_button_text' => $settings['read_more_button_text'],

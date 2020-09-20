@@ -1,4 +1,5 @@
 <?php
+
 namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
@@ -18,7 +19,6 @@ use \Essential_Addons_Elementor\Classes\Helper;
 class Betterdocs_Category_Grid extends Widget_Base
 {
     use \Essential_Addons_Elementor\Traits\Template_Query;
-    use \Essential_Addons_Elementor\Traits\Helper;
 
     public function get_name()
     {
@@ -647,7 +647,8 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'size_units' => [ 'px', '%', 'em' ],
                     'selectors' => [
                         '{{WRAPPER}} .layout-2 .eael-docs-cat-title' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                        '{{WRAPPER}} .eael-bd-cg-header'   => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                        '{{WRAPPER}} .eael-bd-cg-header'   => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .eael-bd-cg-header .eael-bd-cg-header-inner'   => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                     ]
                 ]
             );
@@ -1637,7 +1638,7 @@ class Betterdocs_Category_Grid extends Widget_Base
 
                     if($taxonomy_objects && ! is_wp_error( $taxonomy_objects )) {
                         foreach($taxonomy_objects as $term) {
-                            echo Helper::includes_with_variable($this->get_template($settings['layout_template']), ['term' => $term, 'settings' => $settings]);
+                            echo Helper::includes_with_variable($this->get_template($settings['layout_template']), ['term' => $term, 'settings' => $settings, 'default_multiple_kb' => $default_multiple_kb]);
                         }
                     }else {
                         _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
