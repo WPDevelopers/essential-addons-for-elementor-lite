@@ -63,6 +63,23 @@ var ProductGrid = function ($scope, $) {
 
 	});
 
+
+	$(document).on('click','.open-popup-link',function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		const $this = $(this);
+		const id = $this.attr('href');
+		const popup = $(id);
+		const popup_details =  popup.children( ".eael-product-popup-details" );
+		if(popup_details.height()>400){
+			popup_details.css("height",'75vh');
+		}else{
+			popup_details.css("height",'auto');
+		}
+		$( id+" .variations_form" ).wc_variation_form();
+		popup.addClass("eael-product-popup-ready").removeClass("eael-product-modal-removing");
+	});
+
 	$('.eael-product-popup-details input[type=number]').on('keypress',(e)=>{
 		let keyValue = e.keyCode || e.which;
 		let regex = /^[0-9]+$/;
