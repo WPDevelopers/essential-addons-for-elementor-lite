@@ -380,7 +380,7 @@ class Woo_Product_Compare extends Widget_Base {
 		$title       = $this->get_settings_for_display( 'table_title' );
 		?>
 		<?php do_action( 'eael/wcpc/before_content_wrapper' ); ?>
-        <div class="eael-wcpc-wrapper woocommerce">
+        <div class="eael-wcpc-wrapper woocommerce theme-2">
 			<?php do_action( 'eael/wcpc/before_main_table' ); ?>
             <table class="eael-wcpc-table table-responsive">
                 <tbody>

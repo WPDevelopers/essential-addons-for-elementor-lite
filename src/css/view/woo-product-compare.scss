@@ -15,14 +15,17 @@
     --btn-bg: #6752e5;
     --btn-bg-hover: #ff9582;
     --btn-text: #fff;
+    --image-bg: #6b55ec;
 
     table {
         border-collapse: collapse;
         border-spacing: 0;
+
         th, td {
             padding: 15px;
             border: 1px solid var(--h-border-clr);
         }
+
         th {
             color: var(--text-bold-clr);
             font-weight: normal;
@@ -46,7 +49,8 @@
             border-radius: 5px;
             background: var(--btn-bg);
             color: var(--btn-text);
-            &:hover{
+
+            &:hover {
                 background: var(--btn-bg-hover);
             }
         }
@@ -66,16 +70,40 @@
                 border-right: 1px solid var(--h-border-clr);
             }
         }
-
         tr.image {
             td {
-                background: #6b55ec;
+                background: var(--image-bg);
                 border: none;
                 border-left: 1px solid var(--h-border-clr);
                 border-right: 1px solid var(--h-border-clr);
                 vertical-align: middle;
             }
         }
+    }
+
+    // Style only for Theme 2
+    &.theme-2 {
+        --h-bg: #ff9453;
+        --h-border-clr: #f4ede9;
+        --btn-bg: #ff9453;
+        --btn-bg-hover: #6752e5;
+        --even-row-bg: #fbf8f7;
+
+        table {
+            tr:nth-child(even):not(:nth-child(2)){
+                background: var(--even-row-bg);
+            }
+        }
+        tbody{
+            tr.image {
+                td {
+                    background: none;
+                    border-left: none;
+                    border-right: none;
+                }
+            }
+        }
+
     }
 }
 

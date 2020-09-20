@@ -14,6 +14,7 @@
   --btn-bg: #6752e5;
   --btn-bg-hover: #ff9582;
   --btn-text: #fff;
+  --image-bg: #6b55ec;
 }
 .eael-wcpc-wrapper table {
   border-collapse: collapse;
@@ -59,11 +60,26 @@
   border-right: 1px solid var(--h-border-clr);
 }
 .eael-wcpc-wrapper tbody tr.image td {
-  background: #6b55ec;
+  background: var(--image-bg);
   border: none;
   border-left: 1px solid var(--h-border-clr);
   border-right: 1px solid var(--h-border-clr);
   vertical-align: middle;
+}
+.eael-wcpc-wrapper.theme-2 {
+  --h-bg: #ff9453;
+  --h-border-clr: #f4ede9;
+  --btn-bg: #ff9453;
+  --btn-bg-hover: #6752e5;
+  --even-row-bg: #fbf8f7;
+}
+.eael-wcpc-wrapper.theme-2 table tr:nth-child(even):not(:nth-child(2)) {
+  background: var(--even-row-bg);
+}
+.eael-wcpc-wrapper.theme-2 tbody tr.image td {
+  background: none;
+  border-left: none;
+  border-right: none;
 }
 @media screen and (min-width: 769px) {
   tr.image td {
