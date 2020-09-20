@@ -117,4 +117,65 @@ trait Helper
         }
         wp_send_json_success(['status' => 'success']);
     }
+
+    /*****************************
+     *
+     * Compatibility for Pro
+     *
+     * @since  4.2.4
+     */
+    public function eael_get_page_templates($type = null)
+    {
+        return HelperClass::get_elementor_templates($type);
+    }
+
+    public function eael_query_controls()
+    {
+        return do_action('eael/controls/query', $this);
+    }
+
+    public function eael_layout_controls()
+    {
+        return do_action('eael/controls/layout', $this);
+    }
+
+    public function eael_load_more_button_style()
+    {
+        return do_action('eael/controls/load_more_button_style', $this);
+    }
+
+    public function eael_read_more_button_style()
+    {
+        return do_action('eael/controls/read_more_button_style', $this);
+    }
+
+    public function eael_controls_custom_positioning($_1, $_2, $_3, $_4)
+    {
+        return do_action('eael/controls/custom_positioning', $this, $_1, $_2, $_3, $_4);
+    }
+
+    public function eael_get_all_types_post()
+    {
+        return HelperClass::get_post_types();
+    }
+
+    public function eael_get_pages()
+    {
+        return HelperClass::get_post_list('page');
+    }
+
+    public function eael_woocommerce_product_categories_by_id()
+    {
+        return HelperClass::get_terms_list('product_cat');
+    }
+
+    public function fix_old_query($settings)
+    {
+        return HelperClass::fix_old_query($settings);
+    }
+
+    public function eael_get_query_args($settings)
+    {
+        return HelperClass::get_query_args($settings);
+    }
 }
