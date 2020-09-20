@@ -390,12 +390,14 @@ class Woo_Product_Compare extends Widget_Base {
                         <td><?php esc_html_e( 'No products added to compare.', 'essential-addons-for-elementor-lite' ) ?></td>
                     </tr>
 
-				<?php } else { ?>
-					<?php foreach ( $fields as $field => $name ) : ?>
-
+				<?php } else {
+				    $count = 1;
+				    foreach ( $fields as $field => $name ) :
+					    $f_heading_class = 1 === $count ? 'first-th' : '';
+                        $count++;
+                        ?>
                         <tr class="<?php echo esc_attr( $field ); ?>">
-
-                            <th class="thead">
+                            <th class="thead <?php echo esc_attr( $f_heading_class ); ?>">
 								<?php if ( ! empty( $title ) && $field === 'image' ) {
 									printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
 								} else {

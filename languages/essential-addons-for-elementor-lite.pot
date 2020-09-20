@@ -593,7 +593,7 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: ../includes/Elements/Adv_Tabs.php:265, ../includes/Elements/Dummy_Widget.php:75, ../includes/Elements/Event_Calendar.php:132, ../includes/Elements/Login_Register.php:235, ../includes/Elements/Login_Register.php:1378, ../includes/Elements/Progress_Bar.php:299, ../includes/Elements/Progress_Bar.php:510, ../includes/Elements/Woo_Product_Compare.php:259, ../includes/Traits/Admin.php:202
+#: ../includes/Elements/Adv_Tabs.php:265, ../includes/Elements/Event_Calendar.php:132, ../includes/Elements/Login_Register.php:235, ../includes/Elements/Login_Register.php:1378, ../includes/Elements/Progress_Bar.php:299, ../includes/Elements/Progress_Bar.php:510, ../includes/Elements/Woo_Product_Compare.php:259, ../includes/Traits/Admin.php:202
 msgid "General"
 msgstr ""
 
@@ -1971,14 +1971,6 @@ msgstr ""
 
 #: ../includes/Elements/Dual_Color_Header.php:702
 msgid "Right Line"
-msgstr ""
-
-#: ../includes/Elements/Dummy_Widget.php:33
-msgid "Dummy Widget"
-msgstr ""
-
-#: ../includes/Elements/Dummy_Widget.php:79
-msgid "Testing control"
 msgstr ""
 
 #: ../includes/Elements/EmbedPress.php:19
@@ -6255,7 +6247,7 @@ msgstr ""
 msgid "No products added to compare."
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Compare.php:522
+#: ../includes/Elements/Woo_Product_Compare.php:528
 msgid "In stock"
 msgstr ""
 
