@@ -210,7 +210,7 @@ trait Controls
 
         if($default_multiple_kb) {
 
-            $default_slug = count(Helper::get_multiple_kb_terms(true, false)) > 0 ? array_key_first(Helper::get_multiple_kb_terms(true, false)) : '';
+            $default_slug = count(Helper::get_multiple_kb_terms(true, false)) > 0 ? array_keys(Helper::get_multiple_kb_terms(true, false))[0] : '';
 
             $wb->add_control(
                 'selected_knowledge_base',
