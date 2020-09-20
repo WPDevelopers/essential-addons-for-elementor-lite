@@ -2530,26 +2530,26 @@ class Product_Grid extends Widget_Base {
                         });
                     }
 
-                    $(document).on('click','.open-popup-link',function(e){
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const $this = $(this);
-                        const id = $this.attr('href');
-                        const popup = $(id);
-	                    const popup_details =  popup.children( ".eael-product-popup-details" );
-	                    if(popup_details.height()>400){
-		                    popup_details.css("height",'75vh');
-                        }else{
-		                    popup_details.css("height",'auto');
-                        }
-                        if($layout_mode === 'masonry') {
-                            if($(id+" .woocommerce-product-gallery").hasClass('eael-new-pr')){
-                                $(id+" .woocommerce-product-gallery").wc_product_gallery();
-                            }
-                        }
-                        $( id+" .variations_form" ).wc_variation_form();
-	                    popup.addClass("eael-product-popup-ready").removeClass("eael-product-modal-removing");
-                    });
+                    // $(document).on('click','.open-popup-link',function(e){
+                    //     e.preventDefault();
+                    //     e.stopPropagation();
+                    //     const $this = $(this);
+                    //     const id = $this.attr('href');
+                    //     const popup = $(id);
+	                //     const popup_details =  popup.children( ".eael-product-popup-details" );
+	                //     if(popup_details.height()>400){
+		            //         popup_details.css("height",'75vh');
+                    //     }else{
+		            //         popup_details.css("height",'auto');
+                    //     }
+                    //     if($layout_mode === 'masonry') {
+                    //         if($(id+" .woocommerce-product-gallery").hasClass('eael-new-pr')){
+                    //             $(id+" .woocommerce-product-gallery").wc_product_gallery();
+                    //         }
+                    //     }
+                    //     $( id+" .variations_form" ).wc_variation_form();
+	                //     popup.addClass("eael-product-popup-ready").removeClass("eael-product-modal-removing");
+                    // });
 
                     $(document).on("click", '.eael-product-popup-close', function (event) {
                         event.stopPropagation();
