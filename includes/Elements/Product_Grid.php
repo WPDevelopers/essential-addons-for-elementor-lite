@@ -528,7 +528,7 @@ class Product_Grid extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_product_grid_content_alignment',
 			[
 				'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
@@ -551,6 +551,28 @@ class Product_Grid extends Widget_Base {
 				'toggle' => true,
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product' => 'text-align: {{VALUE}};',
+				],
+				'conditions' => [
+					'relation' => 'and',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_layout',
+							'operator' => '!=',
+							'value' => [
+								'list',
+							],
+						],
+						[
+							'name' => 'eael_product_grid_style_preset',
+							'operator' => '==',
+							'value' => [
+								'eael-product-default',
+								'eael-product-simple',
+								'eael-product-reveal',
+								'eael-product-overlay',
+							]
+						],
+					],
 				],
 			]
 		);
@@ -629,6 +651,28 @@ class Product_Grid extends Widget_Base {
 				'size_units' => ['px', '%', 'em'],
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'conditions' => [
+					'relation' => 'and',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_layout',
+							'operator' => '!=',
+							'value' => [
+								'list',
+							],
+						],
+						[
+							'name' => 'eael_product_grid_style_preset',
+							'operator' => '==',
+							'value' => [
+								'eael-product-default',
+								'eael-product-simple',
+								'eael-product-reveal',
+								'eael-product-overlay',
+							]
+						],
+					],
 				],
 			]
 		);
@@ -792,13 +836,40 @@ class Product_Grid extends Widget_Base {
 						'title' => __('Center', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-center',
 					],
+                    'right' => [
+						'title' => __('Right', 'essential-addons-for-elementor-lite'),
+						'icon' => 'fa fa-align-right',
+					],
 				],
 				'default' => 'center',
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-grid .product-details-wrap' => 'text-align: {{VALUE}};',
 				],
-				'condition' => [
-					'eael_product_grid_layout!' => 'list',
+//				'condition' => [
+//					'eael_product_grid_layout!' => 'list',
+//				],
+
+				'conditions' => [
+					'relation' => 'and',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_layout',
+							'operator' => '!=',
+							'value' => [
+								'list',
+							],
+						],
+						[
+							'name' => 'eael_product_grid_style_preset',
+							'operator' => '!=',
+							'value' => [
+								'eael-product-default',
+								'eael-product-simple',
+								'eael-product-reveal',
+								'eael-product-overlay',
+							]
+						],
+					],
 				],
 			]
 		);
@@ -831,8 +902,30 @@ class Product_Grid extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-grid.grid .eael-product-wrap .product-details-wrap, {{WRAPPER}} .eael-product-grid.masonry .eael-product-wrap .product-details-wrap' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'condition' => [
-					'eael_product_grid_layout' => ['grid', 'masonry'],
+//				'condition' => [
+//					'eael_product_grid_layout' => ['grid', 'masonry'],
+//				],
+				'conditions' => [
+					'relation' => 'and',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_layout',
+							'operator' => '!=',
+							'value' => [
+								'list',
+							],
+						],
+						[
+							'name' => 'eael_product_grid_style_preset',
+							'operator' => '!=',
+							'value' => [
+								'eael-product-default',
+								'eael-product-simple',
+								'eael-product-reveal',
+								'eael-product-overlay',
+							]
+						],
+					],
 				],
 			]
 		);
