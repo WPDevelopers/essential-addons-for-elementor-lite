@@ -29,7 +29,7 @@ class Product_Grid extends Widget_Base {
     public function __construct($data = [], $args = null)
     {
         parent::__construct($data, $args);
-        
+
         add_filter('woocommerce_product_add_to_cart_text', [$this, 'add_to_cart_button_custom_text']);
     }
 
@@ -159,7 +159,17 @@ class Product_Grid extends Widget_Base {
             [
                 'label' => __('Order By', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'options' => $this->eael_get_product_orderby_options(),
+                'options' => [
+                    'ID' => __('Product ID', 'essential-addons-for-elementor-lite'),
+                    'title' => __('Product Title', 'essential-addons-for-elementor-lite'),
+                    '_price' => __('Price', 'essential-addons-for-elementor-lite'),
+                    '_sku' => __('SKU', 'essential-addons-for-elementor-lite'),
+                    'date' => __('Date', 'essential-addons-for-elementor-lite'),
+                    'modified' => __('Last Modified Date', 'essential-addons-for-elementor-lite'),
+                    'parent' => __('Parent Id', 'essential-addons-for-elementor-lite'),
+                    'rand' => __('Random', 'essential-addons-for-elementor-lite'),
+                    'menu_order' => __('Menu Order', 'essential-addons-for-elementor-lite'),
+                ],
                 'default' => 'date',
 
             ]
