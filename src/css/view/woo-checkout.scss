@@ -396,9 +396,18 @@ $base-font-size: 14px;
 
 				.recurring-wrapper {
 					margin-bottom: 0;
+					border-collapse: collapse;
+					border-spacing: 0;
+
 					tr {
 						display: table;
 						width: 100%;
+					}
+					th, td {
+						border-left: 0;
+						border-right: 0;
+						border-bottom: 0;
+						border-top: 1px solid;
 					}
 					th {
 						padding-left: 0;
