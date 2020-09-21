@@ -739,13 +739,6 @@ trait Woo_Checkout_Helper {
 		add_action( 'woocommerce_checkout_order_review', [ $this, 'ea_checkout_payment' ], 20 );
 
 		remove_action('woocommerce_checkout_billing', [ $wc_checkout_instance, 'checkout_form_shipping' ]);
-
-		if( class_exists('WC_Subscriptions_Cart') ) {
-			remove_action('woocommerce_review_order_after_order_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals' ), 10);
-			add_action('eael_display_recurring_total_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals'
-            ), 10);
-		}
-
 	}
 
 }
