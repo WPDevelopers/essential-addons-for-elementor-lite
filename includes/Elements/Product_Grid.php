@@ -245,6 +245,31 @@ class Product_Grid extends Widget_Base {
 		);
 
 		$this->add_control(
+			'orderby',
+			[
+				'label' => __('Order By', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SELECT,
+				'options' => $this->eael_get_product_orderby_options(),
+				'default' => 'date',
+
+			]
+		);
+
+		$this->add_control(
+			'order',
+			[
+				'label' => __('Order', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SELECT,
+				'options' => [
+					'asc' => 'Ascending',
+					'desc' => 'Descending',
+				],
+				'default' => 'desc',
+
+			]
+		);
+
+		$this->add_control(
 			'eael_product_grid_products_count',
 			[
 				'label' => __( 'Products Count', 'essential-addons-for-elementor-lite' ),
@@ -1808,7 +1833,7 @@ class Product_Grid extends Widget_Base {
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' =>[
 					'show_pagination' => 'true',
-//					'eael_product_grid_layout' => ['grid', 'list'],
+					'eael_product_grid_layout' => ['grid', 'list'],
 				],
 			]
 		);
@@ -2701,6 +2726,14 @@ class Product_Grid extends Widget_Base {
 
 		$widget_id = $this->get_id();
 
+		// add to custom button text
+		$this->is_show_custom_add_to_cart = boolval($settings['show_add_to_cart_custom_text']);
+		$this->simple_add_to_cart_button_text = $settings['add_to_cart_simple_product_button_text'];
+		$this->variable_add_to_cart_button_text = $settings['add_to_cart_variable_product_button_text'];
+		$this->grouped_add_to_cart_button_text = $settings['add_to_cart_grouped_product_button_text'];
+		$this->external_add_to_cart_button_text = $settings['add_to_cart_external_product_button_text'];
+		$this->default_add_to_cart_button_text = $settings['add_to_cart_default_product_button_text'];
+
 		$settings = [
 			'eael_product_grid_style_preset' => $settings['eael_product_grid_style_preset'],
 			'eael_product_grid_layout' => $settings['eael_product_grid_layout'],
@@ -2726,13 +2759,7 @@ class Product_Grid extends Widget_Base {
 			'eael_widget_id' => $widget_id,
 		];
 
-		// add to custom button text
-		$this->is_show_custom_add_to_cart = boolval($settings['show_add_to_cart_custom_text']);
-		$this->simple_add_to_cart_button_text = $settings['add_to_cart_simple_product_button_text'];
-		$this->variable_add_to_cart_button_text = $settings['add_to_cart_variable_product_button_text'];
-		$this->grouped_add_to_cart_button_text = $settings['add_to_cart_grouped_product_button_text'];
-		$this->external_add_to_cart_button_text = $settings['add_to_cart_external_product_button_text'];
-		$this->default_add_to_cart_button_text = $settings['add_to_cart_default_product_button_text'];
+
 
 		$html = '<div class="eael-product-grid ' . $settings['eael_product_grid_style_preset'] . ' ' . $settings['eael_product_grid_layout'] . '">';
 		$html .= '<div class="woocommerce">';
