@@ -151,6 +151,18 @@
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   outline: none;
 }
+.eael-lr-form-wrapper.lr-icon-showing .eael-lr-form-group {
+  position: relative;
+}
+.eael-lr-form-wrapper.lr-icon-showing .eael-lr-form-control {
+  padding: 15px 15px 15px 30px;
+}
+.eael-lr-form-wrapper.lr-icon-showing i {
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  color: inherit;
+}
 .eael-lr-form-wrapper .eael-forever-forget {
   display: -webkit-box;
   display: -ms-flexbox;
