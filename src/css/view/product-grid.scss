@@ -16,12 +16,6 @@
                 width: 100%;
                 margin: 0;
                 padding: 0;
-                a.add_to_cart_button,
-                span.price,
-                h2.woocommerce-loop-product__title {
-                    margin-left: 10px !important;
-                    margin-right: 10px !important;
-                }
             }
 
             &.products[class*='columns-'] li.product {
@@ -440,6 +434,20 @@
                         }
                     }
                 }
+            }
+        }
+    }
+
+    &.eael-product-default,
+    &.eael-product-simple,
+    &.eael-product-reveal,
+    &.eael-product-overlay {
+        .woocommerce ul.products .product {
+            a.add_to_cart_button,
+            span.price,
+            h2.woocommerce-loop-product__title {
+                margin-left: 10px !important;
+                margin-right: 10px !important;
             }
         }
     }
