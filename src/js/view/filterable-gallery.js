@@ -13,6 +13,7 @@ var filterableGalleryHandler = function ($scope, $) {
 		});
 	}
 
+
 	filterTrigger
 	.on("click", function () {
 		filterControls.toggleClass("open-filters");
@@ -119,14 +120,18 @@ var filterableGalleryHandler = function ($scope, $) {
 		// Load more button
 		$scope.on("click", ".eael-gallery-load-more", function (e) {
 			e.preventDefault();
-
 			var $this            = $(this),
 			    $init_show       = $(".eael-filter-gallery-container", $scope).children(".eael-filterable-gallery-item-wrap").length,
 			    $total_items     = $gallery.data("total-gallery-items"),
 			    $images_per_page = $gallery.data("images-per-page"),
 			    $nomore_text     = $gallery.data("nomore-item-text"),
+			    filter_enable = $(".eael-filter-gallery-control",$scope).length,
 			    $items           = [];
 			var filter_name      = $(".eael-filter-gallery-control li.active").data('filter');
+			if(filterControls.length>0){
+				filter_name = $(".fg-layout-3-filter-controls li.active").data('filter');
+			}
+
 			if ($init_show == $total_items) {
 				$this.html('<div class="no-more-items-text">' + $nomore_text + "</div>");
 				setTimeout(function () {
@@ -135,11 +140,10 @@ var filterableGalleryHandler = function ($scope, $) {
 			}
 
 			// new items html
-
 			var i          = $init_show;
 			var item_found = 0;
 			while (i < $init_show + $images_per_page) {
-				if (filter_name != '' && filter_name != '*') {
+				if (filter_name != '' && filter_name != '*' && filter_enable) {
 					for (var j = i; j < $gallery_items.length; j++) {
 						var element = $($($gallery_items[j])[0]);
 						if (element.is(filter_name)) {

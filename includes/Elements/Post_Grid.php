@@ -1,4 +1,5 @@
 <?php
+
 namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
@@ -6,6 +7,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use \Elementor\Plugin;
 use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
@@ -228,7 +230,7 @@ class Post_Grid extends Widget_Base
             'eael_post_grid_preset_style',
             [
                 'label' => __('Select Style', 'essential-addons-for-elementor-lite'),
-                'type' => \Elementor\Controls_Manager::SELECT,
+                'type' => Controls_Manager::SELECT,
                 'options' => [
                     '' => __('Default', 'essential-addons-for-elementor-lite'),
                     'two' => __('Style Two', 'essential-addons-for-elementor-lite'),
@@ -240,7 +242,7 @@ class Post_Grid extends Widget_Base
         $this->add_control(
             'eael_post_grid_style_three_alert',
             [
-                'type' => \Elementor\Controls_Manager::RAW_HTML,
+                'type' => Controls_Manager::RAW_HTML,
                 'raw' => __('Make sure to enable <strong>Show Date</strong> option from <strong>Layout Settings</strong>', 'essential-addons-for-elementor-lite'),
                 'content_classes' => 'eael-warning',
                 'condition' => [
@@ -386,7 +388,7 @@ class Post_Grid extends Widget_Base
             ]
         );
         $this->add_group_control(
-            \Elementor\Group_Control_Box_Shadow::get_type(),
+            Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'eael_post_grid_meta_date_shadow',
                 'label' => __('Shadow', 'essential-addons-for-elementor-lite'),
@@ -1156,13 +1158,13 @@ class Post_Grid extends Widget_Base
         }
     }
 
-    protected function render() {
+    protected function render()
+    {
         $settings = $this->get_settings();
         $settings = Helper::fix_old_query($settings);
         $args = Helper::get_query_args($settings);
         $args = Helper::get_dynamic_args($settings, $args);
         
-
         $settings_arry = [
             'eael_show_image' => $settings['eael_show_image'],
             'image_size' => $settings['image_size'],
@@ -1196,8 +1198,6 @@ class Post_Grid extends Widget_Base
             'eael_title_length' => $settings['eael_title_length'],
             'eael_post_grid_preset_style' => $settings['eael_post_grid_preset_style']
         ];
-
-
 
         $this->add_render_attribute(
             'post_grid_wrapper',
@@ -1251,21 +1251,21 @@ class Post_Grid extends Widget_Base
             }
         }
 
-        if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {?>
+        if (Plugin::instance()->editor->is_edit_mode()) {?>
             <script type="text/javascript">
                 jQuery(document).ready(function($) {
                     jQuery(".eael-post-grid").each(function() {
                         var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>"),
                             $gallery = $(this);
-                            $layout_mode = $gallery.data('layout-mode');
+                        $layout_mode = $gallery.data('layout-mode');
 
-                        if($layout_mode === 'masonry') {
+                        if ($layout_mode === 'masonry') {
                             // init isotope
                             var $isotope_gallery = $gallery.isotope({
-                                    itemSelector: ".eael-grid-post",
-                                    layoutMode: $layout_mode,
-                                    percentPosition: true
-                                });
+                                itemSelector: ".eael-grid-post",
+                                layoutMode: $layout_mode,
+                                percentPosition: true
+                            });
 
                             // layout gal, while images are loading
                             $isotope_gallery.imagesLoaded().progress(function() {
@@ -1280,6 +1280,6 @@ class Post_Grid extends Widget_Base
                 });
             </script>
             <?php
-}
+        }
     }
 }

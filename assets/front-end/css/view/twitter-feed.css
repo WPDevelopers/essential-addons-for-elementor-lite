@@ -28,6 +28,21 @@
 .eael-twitter-feed-item .eael-twitter-feed-item-inner {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.eael-twitter-feed-item .eael-twitter-feed-item-inner.has-media {
+  overflow: hidden;
+}
+
+.eael-twitter-feed-item .eael-twitter-feed-item-inner.has-media .eael-twitter-feed-entry-contentwrap {
+  overflow: hidden;
+}
+
+.eael-twitter-feed-item .eael-twitter-feed-item-inner .eael-twitter-feed-item-avatar.avatar-circle img {
+  border-radius: 50%;
 }
 
 .eael-twitter-feed-item a {
@@ -56,7 +71,7 @@
 }
 
 .eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-avatar img {
-  max-width: 100%;
+  max-width: initial;
   height: auto;
   -o-object-fit: cover;
      object-fit: cover;
@@ -102,8 +117,45 @@
   -webkit-box-orient: vertical;
 }
 
+.eael-twitter-feed-item-style-three .eael-twitter-feed-item-inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 20px 15px;
+}
+
+.eael-twitter-feed-item-style-three .eael-twitter-feed-item-inner .eael-twitter-feed-item-content,
+.eael-twitter-feed-item-style-three .eael-twitter-feed-item-inner .eael-twitter-feed-item-header {
+  padding: 0;
+}
+
+.eael-twitter-feed-item-style-two .eael-twitter-feed-item-icon {
+  float: right;
+  margin-top: 5px;
+}
+
 .eael-twitter-feed.swiper-container .swiper-button-next,
 .eael-twitter-feed.swiper-container .swiper-button-prev {
   background-image: none;
   outline: none;
+}
+
+.eael-twitter-feed-carousel.swiper-container-flip .swiper-slide:not(.swiper-slide-active) {
+  opacity: 0 !important;
+}
+
+.eael-twitter-feed-carousel .swiper-button-next,
+.eael-twitter-feed-carousel .swiper-button-prev {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
