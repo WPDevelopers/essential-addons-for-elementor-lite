@@ -1526,7 +1526,7 @@ class Info_Box extends Widget_Base
      */
     protected function eael_infobox_before()
     {
-        $settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
 
         $this->add_render_attribute('eael_infobox_inner', 'class', 'eael-infobox');
 

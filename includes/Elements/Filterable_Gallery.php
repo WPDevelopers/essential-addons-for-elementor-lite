@@ -3192,8 +3192,8 @@ class Filterable_Gallery extends Widget_Base
     
     protected function render()
     {
-        $settings = $this->get_settings();
-        
+        $settings = $this->get_settings_for_display();
+
         if (!empty($settings['eael_fg_filter_duration'])) {
             $filter_duration = $settings['eael_fg_filter_duration'];
         } else {

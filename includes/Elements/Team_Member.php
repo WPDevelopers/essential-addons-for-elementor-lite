@@ -852,7 +852,7 @@ class Team_Member extends Widget_Base {
 
 	protected function render( ) {
 
-		$settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
 		$team_member_image = $this->get_settings( 'eael_team_member_image' );
 		$team_member_image_url = Group_Control_Image_Size::get_attachment_image_src( $team_member_image['id'], 'thumbnail', $settings );
 		if( empty( $team_member_image_url ) ) : $team_member_image_url = $team_member_image['url']; else: $team_member_image_url = $team_member_image_url; endif;
