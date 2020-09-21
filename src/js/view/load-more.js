@@ -68,6 +68,7 @@
 						const dynamicID = "eael-product-"+Date.now();
 						if ($layout == "masonry") {
 							$content.find('.woocommerce-product-gallery').addClass(dynamicID);
+							$content.find('.woocommerce-product-gallery').addClass('eael-new-product');
 							$(".woocommerce-product-gallery."+dynamicID,$scope).each(function () {
 								$(this).wc_product_gallery();
 							});

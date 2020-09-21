@@ -76,6 +76,14 @@ var ProductGrid = function ($scope, $) {
 		}else{
 			popup_details.css("height",'auto');
 		}
+
+		if($layout_mode === 'masonry') {
+			if($(id+" .woocommerce-product-gallery").hasClass('eael-new-product')){
+				$(id+" .woocommerce-product-gallery.eael-new-product").wc_product_gallery({
+					photoswipe_enabled:false
+				});
+			}
+		}
 		$( id+" .variations_form" ).wc_variation_form();
 		popup.addClass("eael-product-popup-ready").removeClass("eael-product-modal-removing");
 	});
