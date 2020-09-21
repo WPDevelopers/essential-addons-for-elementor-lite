@@ -58,11 +58,22 @@ trait Helper
             if ($file_path) {
                 $query = new \WP_Query($args);
 
+                $iterator = 0;
+
                 if ($query->have_posts()) {
+
+                    if($class === '\Essential_Addons_Elementor\Pro\Elements\Post_List') {
+                        $html .= '<div class="eael-post-list-posts-wrap">';
+                    }
+
                     while ($query->have_posts()) {
                         $query->the_post();
 
-                        $html .= HelperClass::includes_with_variable($file_path, ['settings' => $settings]);
+                        $html .= HelperClass::includes_with_variable($file_path, ['settings' => $settings, 'iterator' => $iterator]);
+                        $iterator++;
+                    }
+                    if($class === '\Essential_Addons_Elementor\Pro\Elements\Post_List') {
+                        $html .= '</div>';
                     }
                 }
             }
