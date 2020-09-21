@@ -1424,7 +1424,7 @@ class WpForms extends Widget_Base
             return;
         }
 
-        $settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
 
         $this->add_render_attribute('contact-form', 'class', [
             'eael-contact-form',

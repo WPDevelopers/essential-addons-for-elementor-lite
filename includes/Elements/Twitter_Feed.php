@@ -912,7 +912,7 @@ class Twitter_Feed extends Widget_Base
 
     protected function render()
     {
-        $settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
 
         echo '<div class="eael-twitter-feed eael-twitter-feed-' . $this->get_id() . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type'] . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type_col_type'] . ' clearfix" data-gutter="' . $settings['eael_twitter_feed_column_spacing']['size'] . '">
 			' . $this->twitter_feed_render_items($this->get_id(), $settings) . '

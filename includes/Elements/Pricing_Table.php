@@ -2065,7 +2065,8 @@ class Pricing_Table extends Widget_Base
 
     protected function render()
     {
-        $settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
+
         $target = $settings['eael_pricing_table_btn_link']['is_external'] ? 'target="_blank"' : '';
         $nofollow = $settings['eael_pricing_table_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
         $featured_class = ('yes' === $settings['eael_pricing_table_featured'] ? 'featured ' . $settings['eael_pricing_table_featured_styles'] : '');

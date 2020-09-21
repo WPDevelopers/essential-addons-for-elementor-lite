@@ -530,7 +530,7 @@ class Creative_Button extends Widget_Base
 
     protected function render()
     {
-        $settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
         $icon_migrated = isset($settings['__fa4_migrated']['eael_creative_button_icon_new']);
         $icon_is_new = empty($settings['eael_creative_button_icon']);
 
