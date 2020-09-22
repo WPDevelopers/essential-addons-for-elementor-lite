@@ -379,7 +379,7 @@ class Woo_Product_Compare extends Widget_Base {
 		$fields                 = $this->fields();
 		$title                  = $this->get_settings_for_display( 'table_title' );
 		$highlighted_product_id = 317; //@todo; make it dynamic
-		$layout = 'theme-4'; //@todo; make it dynamic
+		$layout                 = 'theme-4'; //@todo; make it dynamic
 		?>
 		<?php do_action( 'eael/wcpc/before_content_wrapper' ); ?>
         <div class="eael-wcpc-wrapper woocommerce theme-4">
@@ -400,11 +400,18 @@ class Woo_Product_Compare extends Widget_Base {
 						?>
                         <tr class="<?php echo esc_attr( $field ); ?>">
                             <th class="thead <?php echo esc_attr( $f_heading_class ); ?>">
-								<?php if ( ! empty( $title ) && $field === 'image' ) {
-									printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
-								} else {
-									echo esc_html( $name );
-								} ?>
+                                <div>
+									<?php if ( $field === 'image' ) {
+										if ( ! empty( $title ) ) {
+											printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
+										}
+									} else {
+										if ( 'theme-4' === $layout ) {
+											$this->print_icon();
+										}
+										printf( '<span class="field-name">%s</span>', esc_html( $name ) );
+									} ?>
+                                </div>
                             </th>
 
 							<?php
@@ -415,17 +422,17 @@ class Woo_Product_Compare extends Widget_Base {
                                 <td class="<?php echo esc_attr( $product_class ); ?>">
                                     <span>
                                     <?php
-                                    if ($field === 'image'){
-                                        echo '<span class="img-inner">';
-	                                    if ( 'theme-4' === $layout  ) {
-	                                        echo '<span class="ribbon">New</span>';
+                                    if ( $field === 'image' ) {
+	                                    echo '<span class="img-inner">';
+	                                    if ( 'theme-4' === $layout ) {
+		                                    echo '<span class="ribbon">New</span>';
 	                                    }
                                     }
                                     echo ! empty( $product->fields[ $field ] ) ? $product->fields[ $field ] : '&nbsp;';
-                                    if ($field === 'image'){
-	                                    if ( 'theme-4' === $layout  ) {
-		                                    echo ! empty( $product->fields[ 'title' ] ) ? sprintf( "<p class='product-title'>%s</p>", esc_html( $product->fields[ 'title' ])) : '&nbsp;';
-		                                    echo ! empty( $product->fields[ 'price' ] ) ? $product->fields[ 'price' ] : '&nbsp;';
+                                    if ( $field === 'image' ) {
+	                                    if ( 'theme-4' === $layout ) {
+		                                    echo ! empty( $product->fields['title'] ) ? sprintf( "<p class='product-title'>%s</p>", esc_html( $product->fields['title'] ) ) : '&nbsp;';
+		                                    echo ! empty( $product->fields['price'] ) ? $product->fields['price'] : '&nbsp;';
 	                                    }
 	                                    echo '</span>';
                                     }
@@ -444,7 +451,15 @@ class Woo_Product_Compare extends Widget_Base {
 
 					<?php if ( $this->get_settings_for_display( 'repeat_price' ) == 'yes' && isset( $fields['price'] ) ) : ?>
                         <tr class="price repeated">
-                            <th><?php echo wp_kses_post( $fields['price'] ) ?></th>
+                            <th>
+                                <div>
+									<?php
+									if ( 'theme-4' === $layout ) {
+										$this->print_icon();
+									}
+									echo wp_kses_post( $fields['price'] ) ?>
+                                </div>
+                            </th>
 
 							<?php
 							$index             = 0;
@@ -461,7 +476,15 @@ class Woo_Product_Compare extends Widget_Base {
 
 					<?php if ( $this->get_settings_for_display( 'repeat_add_to_cart' ) == 'yes' && isset( $fields['add-to-cart'] ) ) : ?>
                         <tr class="add-to-cart repeated">
-                            <th><?php echo wp_kses_post( $fields['add-to-cart'] ); ?></th>
+                            <th>
+                                <div>
+									<?php
+									if ( 'theme-4' === $layout ) {
+										$this->print_icon();
+									}
+									echo wp_kses_post( $fields['add-to-cart'] ); ?>
+                                </div>
+                            </th>
 
 							<?php
 							$index             = 0;
@@ -633,6 +656,18 @@ class Woo_Product_Compare extends Widget_Base {
 		];
 
 		return apply_filters( 'eael/wcpc/get_product_remove_url', esc_url_raw( add_query_arg( $url_args, site_url() ) ), $this->remove_action );
+	}
+
+	protected function print_icon() {
+		?>
+        <svg class="icon right-arrow" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 492.004 492.004" xml:space="preserve">
+            <path d="M484.14,226.886L306.46,49.202c-5.072-5.072-11.832-7.856-19.04-7.856c-7.216,0-13.972,2.788-19.044,7.856l-16.132,16.136
+                    c-5.068,5.064-7.86,11.828-7.86,19.04c0,7.208,2.792,14.2,7.86,19.264L355.9,207.526H26.58C11.732,207.526,0,219.15,0,234.002
+                    v22.812c0,14.852,11.732,27.648,26.58,27.648h330.496L252.248,388.926c-5.068,5.072-7.86,11.652-7.86,18.864
+                    c0,7.204,2.792,13.88,7.86,18.948l16.132,16.084c5.072,5.072,11.828,7.836,19.044,7.836c7.208,0,13.968-2.8,19.04-7.872
+                    l177.68-177.68c5.084-5.088,7.88-11.88,7.86-19.1C492.02,238.762,489.228,231.966,484.14,226.886z"/>
+        </svg>
+		<?php
 	}
 
 
