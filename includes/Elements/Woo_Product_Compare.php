@@ -371,16 +371,17 @@ class Woo_Product_Compare extends Widget_Base {
 		if ( ! function_exists( 'WC' ) ) {
 			return;
 		}
-		$product_ids = $this->get_settings_for_display( 'product_ids' );
-		$product_ids = ! empty( $product_ids ) ? array_filter( array_map( 'trim', explode( ',', $product_ids ) ), function ( $id ) {
+		$product_ids            = $this->get_settings_for_display( 'product_ids' );
+		$product_ids            = ! empty( $product_ids ) ? array_filter( array_map( 'trim', explode( ',', $product_ids ) ), function ( $id ) {
 			return ( ! empty( $id ) && is_numeric( $id ) );
 		} ) : [];
-		$products    = $this->get_products_list( $product_ids );
-		$fields      = $this->fields();
-		$title       = $this->get_settings_for_display( 'table_title' );
+		$products               = $this->get_products_list( $product_ids );
+		$fields                 = $this->fields();
+		$title                  = $this->get_settings_for_display( 'table_title' );
+		$highlighted_product_id = 317; //@todo; make it dynamic
 		?>
 		<?php do_action( 'eael/wcpc/before_content_wrapper' ); ?>
-        <div class="eael-wcpc-wrapper woocommerce theme-2">
+        <div class="eael-wcpc-wrapper woocommerce theme-4">
 			<?php do_action( 'eael/wcpc/before_main_table' ); ?>
             <table class="eael-wcpc-table table-responsive">
                 <tbody>
@@ -391,11 +392,11 @@ class Woo_Product_Compare extends Widget_Base {
                     </tr>
 
 				<?php } else {
-				    $count = 1;
-				    foreach ( $fields as $field => $name ) :
-					    $f_heading_class = 1 === $count ? 'first-th' : '';
-                        $count++;
-                        ?>
+					$count = 1;
+					foreach ( $fields as $field => $name ) {
+						$f_heading_class = 1 === $count ? 'first-th' : '';
+						$count ++;
+						?>
                         <tr class="<?php echo esc_attr( $field ); ?>">
                             <th class="thead <?php echo esc_attr( $f_heading_class ); ?>">
 								<?php if ( ! empty( $title ) && $field === 'image' ) {
@@ -407,28 +408,41 @@ class Woo_Product_Compare extends Widget_Base {
 
 							<?php
 							$index = 0;
-							foreach ( $products as $product_id => $product ) :
-								$product_class = ( $index % 2 == 0 ? 'odd' : 'even' ) . ' product_' . $product_id; ?>
-                                <td class="<?php echo esc_attr( $product_class ); ?>"><?php
-									echo ! empty( $product->fields[ $field ] ) ? $product->fields[ $field ] : '&nbsp;';
-									?>
+							foreach ( $products as $product_id => $product ) {
+								$highlighted   = $product_id === $highlighted_product_id ? 'featured' : '';
+								$product_class = ( $index % 2 == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted" ?>
+                                <td class="<?php echo esc_attr( $product_class ); ?>">
+                                    <span>
+                                    <?php
+                                    if ($field === 'image'){
+                                        echo '<span class="img-inner">';
+                                    }
+                                    echo ! empty( $product->fields[ $field ] ) ? $product->fields[ $field ] : '&nbsp;';
+                                    if ($field === 'image'){
+	                                    echo '</span>';
+                                    }
+                                    ?>
+                                    </span>
                                 </td>
+
 								<?php
 								++ $index;
-							endforeach; ?>
+							}
+							?>
 
                         </tr>
 
-					<?php endforeach; ?>
+					<?php } ?>
 
 					<?php if ( $this->get_settings_for_display( 'repeat_price' ) == 'yes' && isset( $fields['price'] ) ) : ?>
                         <tr class="price repeated">
                             <th><?php echo wp_kses_post( $fields['price'] ) ?></th>
 
 							<?php
-							$index = 0;
+							$index             = 0;
 							foreach ( $products as $product_id => $product ) :
-								$product_class = ( $index % 2 == 0 ? 'odd' : 'even' ) . ' product_' . $product_id ?>
+								$highlighted = $product_id === $highlighted_product_id ? 'featured' : '';
+								$product_class = ( $index % 2 == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted" ?>
                                 <td class="<?php echo esc_attr( $product_class ) ?>"><?php echo wp_kses_post( $product->fields['price'] ); ?></td>
 								<?php
 								++ $index;
@@ -442,9 +456,10 @@ class Woo_Product_Compare extends Widget_Base {
                             <th><?php echo wp_kses_post( $fields['add-to-cart'] ); ?></th>
 
 							<?php
-							$index = 0;
+							$index             = 0;
 							foreach ( $products as $product_id => $product ) :
-								$product_class = ( $index % 2 == 0 ? 'odd' : 'even' ) . ' product_' . $product_id ?>
+								$highlighted = $product_id === $highlighted_product_id ? 'featured' : '';
+								$product_class = ( $index % 2 == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted" ?>
                                 <td class="<?php echo esc_attr( $product_class ); ?>">
 									<?php woocommerce_template_loop_add_to_cart(); ?>
                                 </td>
