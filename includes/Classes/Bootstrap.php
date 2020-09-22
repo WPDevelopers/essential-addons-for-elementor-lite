@@ -55,6 +55,9 @@ class Bootstrap
 
     // loaded widgets in a request
     public $loaded_widgets = [];
+    
+    // loaded extensions in a request
+    // public $loaded_extensions = [];
 
     // css strings, used for inline embed
     protected $css_strings;
@@ -120,10 +123,11 @@ class Bootstrap
         add_action('elementor/editor/before_enqueue_scripts', array($this, 'lr_enqueue_scripts'));
         add_action('wp_enqueue_scripts', array($this, 'lr_enqueue_scripts'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
-        add_action('elementor/css-file/post/enqueue', [$this, 'enqueue_template_scripts']);
+        add_action('elementor/css-file/post/enqueue', [$this, 'collect_loaded_templates']);
         add_action('elementor/editor/before_enqueue_scripts', array($this, 'editor_enqueue_scripts'));
         add_action('wp_head', [$this, 'enqueue_inline_styles']);
         add_action('wp_footer', [$this, 'enqueue_inline_scripts']);
+        add_action('wp_print_footer_scripts', [$this, 'update_request_data']);
 
         // Ajax
         add_action('wp_ajax_load_more', array($this, 'ajax_load_more'));
@@ -139,6 +143,7 @@ class Bootstrap
         add_action('admin_post_nopriv_typeform_token_data', [$this, 'typeform_auth_handle']);
 
         // Elements
+        add_action('elementor/frontend/widget/before_render', [$this, 'collect_widgets']);
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
         add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
         add_filter('elementor/editor/localize_settings', [$this, 'promote_pro_elements']);
