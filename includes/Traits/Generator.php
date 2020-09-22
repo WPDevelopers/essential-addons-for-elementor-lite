@@ -54,6 +54,80 @@ trait Generator
         return $uid;
     }
 
+    public function collect_loaded_templates($css_file)
+    {
+        $post_id = (int) $css_file->get_post_id();
+
+        if ($this->is_running_background()) {
+            return;
+        }
+
+        // loaded template stack
+        if ($this->is_edit_mode() || $this->is_preview_mode()) {
+            $this->loaded_templates[] = $post_id;
+        }
+    }
+
+    public function collect_widgets($element)
+    {
+        $this->loaded_widgets[] = $element->get_name();
+    }
+
+    public function update_request_data()
+    {
+        if ($this->is_preview_mode()) {
+            $widgets = get_transient($this->uid() . '_loaded_widgets');
+
+            if ($this->loaded_templates) {
+                foreach ($this->loaded_templates as $post_id) {
+                    $extensons = (array) $this->parse_extensions($post_id);
+
+                    // loaded widgets stack
+                    $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $extensons)));
+                }
+            }
+
+            // update transient
+            if ($widgets != $this->loaded_widgets) {
+                set_transient($this->uid() . '_loaded_widgets', $this->loaded_widgets);
+                set_transient($this->uid() . '_loaded_templates', $this->loaded_templates);
+            }
+        }
+    }
+
+    /**
+     * Parse widgets from page data
+     *
+     * @since 3.0.0
+     */
+    public function parse_extensions($post_id)
+    {
+        if (!Plugin::$instance->db->is_built_with_elementor($post_id)) {
+            return;
+        }
+
+        $global_settings = get_option('eael_global_settings');
+        $document = Plugin::$instance->documents->get($post_id);
+        $extensions = [];
+
+        // collect page extensions
+        if (!Helper::prevent_extension_loading($post_id)) {
+            if ($document->get_settings('eael_custom_js')) {
+                $extensions[] = 'eael-custom-js';
+            }
+
+            if ($document->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {
+                $extensions[] = 'eael-reading-progress';
+            }
+
+            if ($document->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['eael_ext_table_of_content']['enabled'])) {
+                $extensions[] = 'eael-table-of-content';
+            }
+        }
+
+        return $extensions;
+    }
+
     /**
      * Parse widgets from page data
      *

@@ -2,6 +2,9 @@
 
 $config = [
     'elements' => [
+        'hello-world' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Hello_World',
+        ],
         'post-grid' => [
             'class' => '\Essential_Addons_Elementor\Elements\Post_Grid',
             'dependency' => [

@@ -61,20 +61,6 @@ trait Enqueue
 
     }
 
-    public function enqueue_template_scripts($css_file)
-    {
-        $post_id = (int) $css_file->get_post_id();
-
-        if ($this->is_running_background()) {
-            return;
-        }
-
-        // loaded template stack
-        if ($this->is_edit_mode() || $this->is_preview_mode()) {
-            $this->loaded_templates[] = $post_id;
-        }
-    }
-
     public function enqueue_scripts()
     {
         if (!apply_filters('eael/active_plugins', 'elementor/elementor.php')) {
@@ -162,39 +148,27 @@ trait Enqueue
 
         // view mode
         if ($this->is_preview_mode()) {
+            $widgets = get_transient($this->uid() . '_loaded_widgets');
             $editor_updated_at = get_transient('eael_editor_updated_at');
             $post_updated_at = get_transient($this->uid() . '_updated_at');
-            $loaded_templates = get_transient($this->uid() . '_loaded_templates');
 
-            if ($loaded_templates === false || $editor_updated_at != $post_updated_at) {
-                $this->loaded_widgets = $this->get_settings();
-            } else {
-                if (empty($loaded_templates)) {
-                    return;
-                }
-
-                // parse widgets from post
-                foreach ($loaded_templates as $post_id) {
-                    $widgets = (array) $this->parse_widgets($post_id);
-
-                    // loaded widgets stack
-                    $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $widgets)));
-                }
+            if ($widgets === false || $editor_updated_at != $post_updated_at) {
+                $widgets = $this->get_settings();
             }
 
             // if no widget in page, return
-            if (empty($this->loaded_widgets)) {
+            if (empty($widgets)) {
                 return;
             }
 
             // run hook before enqueue styles
-            do_action('eael/before_enqueue_styles', $this->loaded_widgets);
+            do_action('eael/before_enqueue_styles', $widgets);
 
             // css
             if (get_option('elementor_css_print_method') == 'internal') {
-                echo '<style id="' . $this->uid() . '">' . $this->generate_strings($this->loaded_widgets, 'view', 'css') . '</style>';
+                echo '<style id="' . $this->uid() . '">' . $this->generate_strings($widgets, 'view', 'css') . '</style>';
             } else {
-                $this->generate_script($this->loaded_widgets, 'view', 'css');
+                $this->generate_script($widgets, 'view', 'css');
 
                 // enqueue
                 wp_enqueue_style(
@@ -250,18 +224,18 @@ trait Enqueue
         if ($this->is_preview_mode()) {
             if ($this->loaded_templates) {
                 // empty loaded widget stack
-                $this->loaded_widgets = [];
+                // $this->loaded_widgets = [];
 
                 // parse widgets from post
                 foreach ($this->loaded_templates as $post_id) {
                     if (get_post_status($post_id) === false) {
                         continue;
                     }
-                    
-                    $widgets = (array) $this->parse_widgets($post_id);
+
+                    $extensons = (array) $this->parse_extensions($post_id);
 
                     // loaded widgets stack
-                    $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $widgets)));
+                    $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $extensons)));
                 }
 
                 // run hook before enqueue scripts
@@ -288,9 +262,6 @@ trait Enqueue
                     wp_localize_script($this->uid(), 'localize', $this->localize_objects);
                 }
             }
-
-            // update transient
-            set_transient($this->uid() . '_loaded_templates', $this->loaded_templates);
         }
     }
 }
