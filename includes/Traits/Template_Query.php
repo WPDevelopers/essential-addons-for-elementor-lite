@@ -88,9 +88,7 @@ trait Template_Query
     {
         // ensure is_plugin_active() exists (not on frontend)
         if( !function_exists('is_plugin_active') ) {
-            
             include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-            
         }
         
         if(!apply_filters('eael/active_plugins', 'essential-addons-elementor/essential_adons_elementor.php')) {
@@ -137,10 +135,9 @@ trait Template_Query
     protected function get_template_list()
     {
         $files = [];
+
         if ($this->get_template_files()) {
-
             foreach ($this->get_template_files() as $key => $handler) {
-
                 foreach($handler as $handle) {
                     if (strpos($handle, '.php') !== false) {
 
@@ -165,7 +162,6 @@ trait Template_Query
                     }
                 }
             }
-
         }
 
         return $files;
@@ -182,14 +178,11 @@ trait Template_Query
         $files = [];
 
         if($this->get_template_list()) {
-
             foreach($this->get_template_list() as $filename => $path) {
-
                 $filename = \str_replace(' ', '-', $filename);
+
                 $files[strtolower($filename)] = $path;
-
             }
-
         }
 
         return $files;
