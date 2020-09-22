@@ -6243,11 +6243,11 @@ msgstr ""
 msgid "Table Style"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Compare.php:391
+#: ../includes/Elements/Woo_Product_Compare.php:392
 msgid "No products added to compare."
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Compare.php:543
+#: ../includes/Elements/Woo_Product_Compare.php:551
 msgid "In stock"
 msgstr ""
 
