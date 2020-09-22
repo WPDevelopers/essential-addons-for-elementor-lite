@@ -15,6 +15,8 @@
   --btn-bg-hover: #ff9582;
   --btn-text: #fff;
   --image-bg: #6b55ec;
+  --container-bg: "#fff";
+  background: var(--container-bg);
 }
 .eael-wcpc-wrapper table {
   border-collapse: collapse;
@@ -97,7 +99,6 @@
   --second-btn-bg: #7561f2;
   --third-btn-bg: #23d56e;
   padding: 20px;
-  background: var(--container-bg);
 }
 .eael-wcpc-wrapper.theme-3 table {
   -webkit-border-horizontal-spacing: 10px;
@@ -162,10 +163,17 @@
   --h-border-clr: #e8ebf0;
   --text-clr: #707070;
   --text-bold-clr: #252525;
-  --btn-bg: #6752e5;
+  --btn-bg: #613de6;
   --btn-bg-hover: #ff9582;
   --btn-text: #fff;
   --image-bg: none;
+  --container-bg: #f9fafc;
+}
+.eael-wcpc-wrapper.theme-4 table {
+  background: #fff;
+}
+.eael-wcpc-wrapper.theme-4 table th.first-th {
+  background: var(--container-bg);
 }
 .eael-wcpc-wrapper.theme-4 tbody tr:nth-child(2) th, .eael-wcpc-wrapper.theme-4 tbody tr:nth-child(2) td {
   font-size: 20px;
@@ -173,10 +181,41 @@
   border: 1px solid var(--h-border-clr);
 }
 .eael-wcpc-wrapper.theme-4 tbody tr.image td {
+  position: relative;
   border: 1px solid var(--h-border-clr);
+  overflow: hidden;
+}
+.eael-wcpc-wrapper.theme-4 tbody tr.image .ribbon {
+  position: absolute;
+  left: -44px;
+  top: 10px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  padding: 3px 50px;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transform-origin: center;
+  -ms-transform-origin: center;
+  transform-origin: center;
+}
+.eael-wcpc-wrapper.theme-4 tbody tr.image .product-title, .eael-wcpc-wrapper.theme-4 tbody tr.image .woocommerce-Price-amount {
+  font-size: 18px;
+  font-weight: bold;
+}
+.eael-wcpc-wrapper.theme-4 tbody tr.image .product-title {
+  color: var(--text-bold-clr);
+  margin: 0 auto 10px;
+}
+.eael-wcpc-wrapper.theme-4 tbody tr.image .woocommerce-Price-amount {
+  color: var(--btn-bg);
 }
 @media screen and (min-width: 769px) {
-  tr.image td {
+  .eael-wcpc-wrapper:not(.theme-4) tr.image td {
     padding: 50px;
+  }
+
+  .theme-4 tr.image td {
+    padding: 50px 10px;
   }
 }

@@ -379,6 +379,7 @@ class Woo_Product_Compare extends Widget_Base {
 		$fields                 = $this->fields();
 		$title                  = $this->get_settings_for_display( 'table_title' );
 		$highlighted_product_id = 317; //@todo; make it dynamic
+		$layout = 'theme-4'; //@todo; make it dynamic
 		?>
 		<?php do_action( 'eael/wcpc/before_content_wrapper' ); ?>
         <div class="eael-wcpc-wrapper woocommerce theme-4">
@@ -416,9 +417,16 @@ class Woo_Product_Compare extends Widget_Base {
                                     <?php
                                     if ($field === 'image'){
                                         echo '<span class="img-inner">';
+	                                    if ( 'theme-4' === $layout  ) {
+	                                        echo '<span class="ribbon">New</span>';
+	                                    }
                                     }
                                     echo ! empty( $product->fields[ $field ] ) ? $product->fields[ $field ] : '&nbsp;';
                                     if ($field === 'image'){
+	                                    if ( 'theme-4' === $layout  ) {
+		                                    echo ! empty( $product->fields[ 'title' ] ) ? sprintf( "<p class='product-title'>%s</p>", esc_html( $product->fields[ 'title' ])) : '&nbsp;';
+		                                    echo ! empty( $product->fields[ 'price' ] ) ? $product->fields[ 'price' ] : '&nbsp;';
+	                                    }
 	                                    echo '</span>';
                                     }
                                     ?>
