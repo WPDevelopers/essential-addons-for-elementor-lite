@@ -1638,7 +1638,7 @@ class Betterdocs_Category_Grid extends Widget_Base
 
                     if($taxonomy_objects && ! is_wp_error( $taxonomy_objects )) {
                         foreach($taxonomy_objects as $term) {
-                            echo Helper::includes_with_variable($this->get_template($settings['layout_template']), ['term' => $term, 'settings' => $settings, 'default_multiple_kb' => $default_multiple_kb]);
+                            echo Helper::include_with_variable($this->get_template($settings['layout_template']), ['term' => $term, 'settings' => $settings, 'default_multiple_kb' => $default_multiple_kb]);
                         }
                     }else {
                         _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');

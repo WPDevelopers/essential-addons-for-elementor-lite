@@ -20,7 +20,7 @@ class Helper
      * @return string
      * @since  4.2.2
      */
-    public static function includes_with_variable(string $file_path, array $variables = [])
+    public static function include_with_variable(string $file_path, array $variables = [])
     {
         if (file_exists($file_path)) {
             extract($variables);
