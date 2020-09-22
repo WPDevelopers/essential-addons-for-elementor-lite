@@ -244,6 +244,7 @@ class Pricing_Table extends Widget_Base
             [
                 'label'       => esc_html__('Price Currency', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => ['active' => true],
                 'label_block' => false,
                 'default'     => esc_html__('$', 'essential-addons-for-elementor-lite'),
             ]
@@ -270,6 +271,7 @@ class Pricing_Table extends Widget_Base
             [
                 'label'       => esc_html__('Price Period (per)', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => ['active' => true],
                 'label_block' => false,
                 'default'     => esc_html__('month', 'essential-addons-for-elementor-lite'),
             ]
@@ -280,6 +282,7 @@ class Pricing_Table extends Widget_Base
             [
                 'label'       => esc_html__('Period Separator', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => ['active' => true],
                 'label_block' => false,
                 'default'     => esc_html__('/', 'essential-addons-for-elementor-lite'),
             ]
@@ -304,6 +307,7 @@ class Pricing_Table extends Widget_Base
             [
                 'label'       => esc_html__( 'List Item', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default'     => esc_html__( 'Pricing table list item', 'essential-addons-for-elementor-lite' ),
             ]
@@ -573,6 +577,7 @@ class Pricing_Table extends Widget_Base
                 'label'       => esc_html__('Button Text', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'label_block' => true,
+                'dynamic' => ['active' => true],
                 'default'     => esc_html__('Choose Plan', 'essential-addons-for-elementor-lite'),
                 'condition'   => [
                     'eael_pricing_table_button_show' => 'yes',
@@ -645,6 +650,7 @@ class Pricing_Table extends Widget_Base
             [
                 'label'       => esc_html__('Featured Tag Text', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'     => ['active' => true],
                 'label_block' => false,
                 'default'     => esc_html__('Featured', 'essential-addons-for-elementor-lite'),
                 'selectors'   => [
