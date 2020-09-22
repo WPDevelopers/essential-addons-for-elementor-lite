@@ -17,11 +17,18 @@
     --btn-text: #fff;
     --image-bg: #6b55ec;
     --container-bg: '#fff';
+    --icon-color: #c3ccdc;
     background: var(--container-bg);
 
     table {
         border-collapse: collapse;
         border-spacing: 0;
+
+        .icon {
+            width: 16px;
+            margin-right: 6px;
+            fill: var(--icon-color);
+        }
 
         img {
             max-width: 100%;
@@ -39,6 +46,11 @@
             border-left-width: 2px;
             vertical-align: middle;
             padding-left: 35px;
+
+            div {
+                display: flex;
+                align-items: center;
+            }
         }
 
         td {
@@ -256,38 +268,38 @@
                     transform-origin: center;
                 }
 
-                    .product-title, .woocommerce-Price-amount {
-                        font-size: 18px;
-                        font-weight: bold;
-                    }
-
-                    .product-title {
-                        color: var(--text-bold-clr);
-                        margin: 0 auto 10px;
-                    }
-
-                    .woocommerce-Price-amount {
-                        color: var(--btn-bg);
-                    }
+                .product-title, .woocommerce-Price-amount {
+                    font-size: 18px;
+                    font-weight: bold;
                 }
 
+                .product-title {
+                    color: var(--text-bold-clr);
+                    margin: 0 auto 10px;
+                }
 
+                .woocommerce-Price-amount {
+                    color: var(--btn-bg);
+                }
             }
-        }
 
+
+        }
     }
 
-    //Responsive
-    @media screen and (min-width: 769px) {
-        .eael-wcpc-wrapper:not(.theme-4) {
-            tr.image td {
-                padding: 50px;
-            }
-        }
-        .theme-4 {
-            tr.image td {
-                padding: 50px 10px;
-            }
-        }
+}
 
+//Responsive
+@media screen and (min-width: 769px) {
+    .eael-wcpc-wrapper:not(.theme-4) {
+        tr.image td {
+            padding: 50px;
+        }
     }
+    .theme-4 {
+        tr.image td {
+            padding: 50px 10px;
+        }
+    }
+
+}
