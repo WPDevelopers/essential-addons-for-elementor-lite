@@ -69,7 +69,7 @@ trait Helper
                     while ($query->have_posts()) {
                         $query->the_post();
 
-                        $html .= HelperClass::includes_with_variable($file_path, ['settings' => $settings, 'iterator' => $iterator]);
+                        $html .= HelperClass::include_with_variable($file_path, ['settings' => $settings, 'iterator' => $iterator]);
                         $iterator++;
                     }
                     if($class === '\Essential_Addons_Elementor\Pro\Elements\Post_List') {
