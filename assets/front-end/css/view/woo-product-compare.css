@@ -224,6 +224,37 @@
 .eael-wcpc-wrapper.theme-4 tbody tr.image .woocommerce-Price-amount {
   color: var(--btn-bg);
 }
+.eael-wcpc-wrapper.theme-5 {
+  --first-col-color: #6a3ee8;
+  --second-col-color: #3e5ae8;
+  --third-col-color: #15e9c9;
+  --first-img-bg: #f4f0ff;
+  --second-img-bg: #eaedff;
+  --third-img-bg: #e5fffb;
+  --h-bg: none;
+  --h-text-clr: #707070;
+  --h-border-clr: #e8ebf0;
+  --first-btn-bg: #6a3ee8;
+  --second-btn-bg: #3e5ae8;
+  --third-btn-bg: #15e9c9;
+  --image-bg: none;
+}
+.eael-wcpc-wrapper.theme-5 table th {
+  border: none;
+}
+.eael-wcpc-wrapper.theme-5 table th.first-th {
+  background: var(--container-bg);
+}
+.eael-wcpc-wrapper.theme-5 tbody tr:nth-child(2) th, .eael-wcpc-wrapper.theme-5 tbody tr:nth-child(2) td {
+  font-size: 20px;
+  color: inherit;
+}
+.eael-wcpc-wrapper.theme-5 tbody tr:nth-child(2) td {
+  border: 1px solid var(--h-border-clr);
+}
+.eael-wcpc-wrapper.theme-5 tbody tr:nth-child(2) th {
+  border: none;
+}
 @media screen and (min-width: 769px) {
   .eael-wcpc-wrapper:not(.theme-4) tr.image td {
     padding: 50px;
