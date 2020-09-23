@@ -379,10 +379,10 @@ class Woo_Product_Compare extends Widget_Base {
 		$fields                 = $this->fields();
 		$title                  = $this->get_settings_for_display( 'table_title' );
 		$highlighted_product_id = 317; //@todo; make it dynamic
-		$layout                 = 'theme-5'; //@todo; make it dynamic
+		$layout                 = 'theme-6'; //@todo; make it dynamic
 		?>
 		<?php do_action( 'eael/wcpc/before_content_wrapper' ); ?>
-        <div class="eael-wcpc-wrapper woocommerce <?php echo esc_attr( $layout);?>">
+        <div class="eael-wcpc-wrapper woocommerce custom <?php echo esc_attr( $layout);?>">
 			<?php do_action( 'eael/wcpc/before_main_table' ); ?>
             <table class="eael-wcpc-table table-responsive">
                 <tbody>
