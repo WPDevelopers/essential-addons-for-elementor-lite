@@ -54,6 +54,7 @@
 .eael-wcpc-wrapper table td {
   color: var(--text-clr);
   text-align: center;
+  width: 300px;
 }
 .eael-wcpc-wrapper table th.first-th {
   border: none;
@@ -245,6 +246,24 @@
 }
 .eael-wcpc-wrapper.theme-5 table th.first-th {
   background: var(--container-bg);
+}
+.eael-wcpc-wrapper.theme-5 table tr.add-to-cart td.col_0 a.button {
+  background: var(--first-btn-bg);
+}
+.eael-wcpc-wrapper.theme-5 table tr.add-to-cart td.col_0 a.button:hover {
+  background: #5827e5;
+}
+.eael-wcpc-wrapper.theme-5 table tr.add-to-cart td.col_1 a.button {
+  background: var(--second-btn-bg);
+}
+.eael-wcpc-wrapper.theme-5 table tr.add-to-cart td.col_1 a.button:hover {
+  background: #2747e5;
+}
+.eael-wcpc-wrapper.theme-5 table tr.add-to-cart td.col_2 a.button {
+  background: var(--third-btn-bg);
+}
+.eael-wcpc-wrapper.theme-5 table tr.add-to-cart td.col_2 a.button:hover {
+  background: #13d2b5;
 }
 .eael-wcpc-wrapper.theme-5 tbody tr:nth-child(2) th, .eael-wcpc-wrapper.theme-5 tbody tr:nth-child(2) td {
   font-size: 20px;
