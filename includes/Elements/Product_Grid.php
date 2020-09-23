@@ -2729,6 +2729,14 @@ class Product_Grid extends Widget_Base {
 			'posts_per_page' => $settings['eael_product_grid_products_count'] ?: 4,
 			'order' => (isset($settings['order']) ? $settings['order'] : 'desc'),
 			'offset' => $settings['product_offset'],
+			'tax_query' => [
+				[
+					'taxonomy' => 'product_visibility',
+					'field'    => 'name',
+					'terms'    => ['exclude-from-search', 'exclude-from-catalog'],
+					'operator' => 'NOT IN',
+				],
+			],
 		];
 
 		// price & sku filter
