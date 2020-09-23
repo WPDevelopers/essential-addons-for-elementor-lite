@@ -287,6 +287,59 @@
         }
     }
 
+    // Style only for theme 5
+    &.theme-5 {
+        --first-col-color: #6a3ee8;
+        --second-col-color: #3e5ae8;
+        --third-col-color: #15e9c9;
+        --first-img-bg: #f4f0ff;
+        --second-img-bg: #eaedff;
+        --third-img-bg: #e5fffb;
+        --h-bg: none;
+        --h-text-clr: #707070;
+        --h-border-clr: #e8ebf0;
+
+        --first-btn-bg: #6a3ee8;
+        --second-btn-bg: #3e5ae8;
+        --third-btn-bg: #15e9c9;
+
+        --image-bg: none;
+
+        table {
+            th {
+                border: none;
+            }
+
+            th.first-th {
+                background: var(--container-bg);
+            }
+        }
+
+        tbody {
+            //2nd row header
+            tr:nth-child(2) {
+                th, td {
+                    font-size: 20px;
+                    color: inherit;
+                }
+
+                td {
+                    border: 1px solid var(--h-border-clr);
+                }
+                th{
+                    border:none;
+                }
+
+            }
+
+            tr.image {
+
+            }
+
+
+        }
+    }
+
 }
 
 //Responsive

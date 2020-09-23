@@ -379,10 +379,10 @@ class Woo_Product_Compare extends Widget_Base {
 		$fields                 = $this->fields();
 		$title                  = $this->get_settings_for_display( 'table_title' );
 		$highlighted_product_id = 317; //@todo; make it dynamic
-		$layout                 = 'theme-4'; //@todo; make it dynamic
+		$layout                 = 'theme-5'; //@todo; make it dynamic
 		?>
 		<?php do_action( 'eael/wcpc/before_content_wrapper' ); ?>
-        <div class="eael-wcpc-wrapper woocommerce theme-4">
+        <div class="eael-wcpc-wrapper woocommerce <?php echo esc_attr( $layout);?>">
 			<?php do_action( 'eael/wcpc/before_main_table' ); ?>
             <table class="eael-wcpc-table table-responsive">
                 <tbody>
@@ -409,7 +409,12 @@ class Woo_Product_Compare extends Widget_Base {
 										if ( 'theme-4' === $layout ) {
 											$this->print_icon();
 										}
-										printf( '<span class="field-name">%s</span>', esc_html( $name ) );
+										if ( 'theme-5' === $layout && $field === 'title' ) {
+											echo '&nbsp;';
+										}else{
+											printf( '<span class="field-name">%s</span>', esc_html( $name ) );
+
+										}
 									} ?>
                                 </div>
                             </th>
