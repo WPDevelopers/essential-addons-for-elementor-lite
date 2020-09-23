@@ -56,6 +56,7 @@
         td {
             color: var(--text-clr);
             text-align: center;
+            width: 300px;
         }
 
         th.first-th {
@@ -315,6 +316,35 @@
                 background: var(--container-bg);
             }
 
+
+            tr.add-to-cart {
+                td.col_0 {
+                    a.button {
+                        background: var(--first-btn-bg);
+                        &:hover {
+                            background: darken(#6a3ee8, 5);
+                        }
+                    }
+                }
+
+                td.col_1 {
+                    a.button {
+                        background: var(--second-btn-bg);
+                        &:hover {
+                            background: darken(#3e5ae8, 5);
+                        }
+                    }
+                }
+
+                td.col_2 {
+                    a.button {
+                        background: var(--third-btn-bg);
+                        &:hover {
+                            background: darken(#15e9c9, 5);
+                        }
+                    }
+                }
+            }
         }
 
         tbody {
