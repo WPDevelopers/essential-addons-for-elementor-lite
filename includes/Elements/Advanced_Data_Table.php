@@ -15,13 +15,6 @@ use \Elementor\Widget_Base;
 
 class Advanced_Data_Table extends Widget_Base
 {
-    public function __construct($data = [], $args = null)
-    {
-        parent::__construct($data, $args);
-
-        add_filter('eael/advanced-data-table/table_html', [$this, 'ninja_integration']);
-    }
-
     public function get_name()
     {
         return 'eael-advanced-data-table';
@@ -1508,13 +1501,13 @@ class Advanced_Data_Table extends Widget_Base
 
         echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-wrap') . '>';
 
-        if ($table_html = $this->table_html()) {
+        if ($content = $this->get_table_content()) {
             if ($settings['ea_adv_data_table_search'] == 'yes') {
                 echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-search-wrap') . '><input type="search" placeholder="' . $settings['ea_adv_data_table_search_placeholder'] . '" class="ea-advanced-data-table-search"></div>';
             }
 
             echo '<div class="ea-advanced-data-table-wrap-inner">
-                <table ' . $this->get_render_attribute_string('ea-adv-data-table') . '>' . $this->table_html() . '</table>
+                <table ' . $this->get_render_attribute_string('ea-adv-data-table') . '>' . $content . '</table>
             </div>';
 
             if ($settings['ea_adv_data_table_pagination'] == 'yes') {
@@ -1545,39 +1538,28 @@ class Advanced_Data_Table extends Widget_Base
         echo '</div>';
     }
 
-    protected function table_html()
+    public function get_table_content()
     {
-        $settings = $this->get_parsed_dynamic_settings();
+        $settings = $this->get_settings_for_display();
 
-        // default html
-        $html = $settings['ea_adv_data_table_static_html'];
-
-        if (in_array($settings['ea_adv_data_table_source'], ['database', 'remote'])) {
-            $html = apply_filters('eael/advanced-data-table/table_html/database', $settings);
-        } else if ($settings['ea_adv_data_table_source'] == 'google') {
-            $html = apply_filters('eael/advanced-data-table/table_html/integration/google_sheets', $settings);
-        } else if ($settings['ea_adv_data_table_source'] == 'tablepress') {
-            $html = apply_filters('eael/advanced-data-table/table_html/integration/tablepress', $settings);
+        if ($settings['ea_adv_data_table_source'] == 'static') {
+            return $settings['ea_adv_data_table_static_html'];
+        } else if ($settings['ea_adv_data_table_source'] == 'ninja') {
+            return $this->ninja_integration();
         }
 
-        // new filtered html
-        $html = apply_filters('eael/advanced-data-table/table_html', $settings, $html);
-
-        return $html;
+        return apply_filters('eael/advanced-data-table/table_html/integration/' . $settings['ea_adv_data_table_source'], $settings);
     }
 
-    protected function ninja_integration($settings, $html)
+    public function ninja_integration()
     {
-        if ($settings['ea_adv_data_table_source'] != 'ninja') {
-            return $html;
+        $settings = $this->get_settings_for_display();
+
+        if (empty($settings['ea_adv_data_table_source_ninja_table_id'])) {
+            return;
         }
 
         $html = '';
-
-        if (empty($settings['ea_adv_data_table_source_ninja_table_id'])) {
-            return $html;
-        }
-
         $table_settings = ninja_table_get_table_settings($settings['ea_adv_data_table_source_ninja_table_id']);
         $table_headers = ninja_table_get_table_columns($settings['ea_adv_data_table_source_ninja_table_id']);
         $table_rows = ninjaTablesGetTablesDataByID($settings['ea_adv_data_table_source_ninja_table_id']);
