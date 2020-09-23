@@ -178,6 +178,7 @@ class Team_Member extends Widget_Base {
                 'name' => 'link',
                 'label' => esc_html__( 'Link', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::URL,
+                'dynamic'   => ['active' => true],
                 'label_block' => true,
                 'default' => [
                     'url' => '',

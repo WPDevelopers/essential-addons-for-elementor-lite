@@ -206,6 +206,7 @@ class Image_Accordion extends Widget_Base {
                 'name'          => 'eael_accordion_title_link',
                 'label'         => esc_html__( 'Title Link', 'essential-addons-for-elementor-lite' ),
                 'type'          => Controls_Manager::URL,
+                'dynamic'   => ['active' => true],
                 'label_block'   => true,
                 'default'       => [
                     'url'         => '#',

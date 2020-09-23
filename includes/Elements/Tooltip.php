@@ -237,7 +237,8 @@ class Tooltip extends Widget_Base {
 			[
 				'label' => esc_html__( 'Button Link', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::URL,
-				'label_block' => true,
+                'dynamic'   => ['active' => true],
+                'label_block' => true,
 				'default' => [
         			'url' => '#',
         			'is_external' => '',

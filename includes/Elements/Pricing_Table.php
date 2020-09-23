@@ -360,6 +360,7 @@ class Pricing_Table extends Widget_Base
             [
                 'label'     => esc_html__( 'Tooltip Content', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::TEXTAREA,
+                'dynamic'   => ['active' => true],
                 'default'   => __( "I'm a awesome tooltip!!", 'essential-addons-for-elementor-lite' ),
                 'condition' => [
                     'eael_pricing_item_tooltip' => 'yes',
@@ -590,6 +591,7 @@ class Pricing_Table extends Widget_Base
             [
                 'label'         => esc_html__('Button Link', 'essential-addons-for-elementor-lite'),
                 'type'          => Controls_Manager::URL,
+                'dynamic'   => ['active' => true],
                 'label_block'   => true,
                 'default'       => [
                     'url'         => '#',
