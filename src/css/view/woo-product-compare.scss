@@ -17,7 +17,7 @@
         --btn-bg-hover: #ff9582;
         --btn-text: #fff;
         --image-bg: #6b55ec;
-        --container-bg: '#fff';
+        --container-bg: #fff;
         --icon-color: #c3ccdc;
         background: var(--container-bg);
 
@@ -394,9 +394,80 @@
         }
 
         &.theme-6 {
+            --container-bg: #f0eff6;
+            --first-row-color: #fff;
+            --first-col-bg: #fd907b;
+            --second-col-bg: #7f6cf4  ;
+            --third-col-bg: #3ae281;
+            --first-img-bg: #f4f0ff;
+            --second-img-bg: #eaedff;
+            --third-img-bg: #e5fffb;
+            --h-bg: none;
+            --h-text-clr: #707070;
+            --h-border-clr: #e8ebf0;
 
+            --first-btn-bg: #6a3ee8;
+            --second-btn-bg: #3e5ae8;
+            --third-btn-bg: #15e9c9;
+
+            --image-bg: none;;
             table {
+                //2nd row header
+                tr:nth-child(2) {
+                    th, td {
+                        border-left: 0;
+                        border-right: 0;
+                    }
+                    td {
+                        color: #fff;
+                    }
+                }
+                tr, th, td {
+                    border: none;
+                }
+                td {
+                    color: #fff;
+                    border-right: 20px solid #fff;
+                }
+                td:last-child {
+                    border-right: none;
+                }
 
+                tr {
+                    td.col_0 {
+                        background: var(--first-col-bg);
+                    }
+                    td.col_1 {
+                        background: var(--second-col-bg);
+                    }
+                    td.col_2 {
+                        background: var(--third-col-bg);
+                    }
+                }
+                tr:nth-child(even) {
+                    th, td {
+                      background: #f7f6fa;
+                    }
+                    td.col_0 {
+                        background: #fec1b5;
+                    }
+                    td.col_1 {
+                        background: #b7adf9;
+                    }
+                    td.col_2 {
+                        background: #91efb8;
+                    }
+                }
+                tr.image, tr.title {
+                    td {
+                        border: none;
+                        border-right: 20px solid #fff;
+                    }
+
+                    td:last-child {
+                        border-right: none;
+                    }
+                }
             }
         }
     }
