@@ -388,6 +388,7 @@ class Facebook_Feed extends Widget_Base
             [
                 'label'     => __('Label', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
                 'default'   => __('Load More', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'show_load_more' => 'yes',

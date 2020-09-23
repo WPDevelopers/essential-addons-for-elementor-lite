@@ -411,6 +411,7 @@ class Countdown extends Widget_Base {
             [
                 'label'     => esc_html__( 'On Expiry Title', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::TEXTAREA,
+                'dynamic' => ['active' => true],
                 'default'   => esc_html__( 'Countdown is finished!', 'essential-addons-for-elementor-lite' ),
                 'condition' => [
                     'countdown_expire_type' => 'text',
@@ -435,6 +436,7 @@ class Countdown extends Widget_Base {
             [
                 'label'     => esc_html__( 'Redirect To (URL)', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
                 'condition' => [
                     'countdown_expire_type' => 'url',
                 ],

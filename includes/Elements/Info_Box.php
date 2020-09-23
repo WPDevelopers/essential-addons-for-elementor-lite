@@ -419,6 +419,7 @@ class Info_Box extends Widget_Base
             [
                 'label'         => __('Link URL', 'essential-addons-for-elementor-lite'),
                 'type'          => Controls_Manager::URL,
+                'dynamic'   => ['active' => true],
                 'label_block'   => true,
                 'placeholder'   => __('Enter link URL for the button', 'essential-addons-for-elementor-lite'),
                 'show_external' => true,

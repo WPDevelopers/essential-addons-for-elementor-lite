@@ -260,6 +260,7 @@ class Cta_Box extends Widget_Base
             [
                 'label' => esc_html__('Primary Button Link', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::URL,
+                'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default' => [
                     'url' => 'http://',
@@ -299,6 +300,7 @@ class Cta_Box extends Widget_Base
             [
                 'label' => esc_html__('Secondary Button Link', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::URL,
+                'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default' => [
                     'url' => 'http://',

@@ -157,6 +157,7 @@ class Sticky_Video extends Widget_Base
             [
                 'label' => __('Link', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
                 'placeholder' => __('Enter your URL (YouTube)', 'essential-addons-for-elementor-lite'),
                 'label_block' => true,
                 'default' => 'https://www.youtube.com/watch?v=uuyXfUDqRZM',

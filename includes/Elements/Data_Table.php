@@ -97,6 +97,7 @@ class Data_Table extends Widget_Base
                 'label' => esc_html__('Column Name', 'essential-addons-for-elementor-lite'),
                 'default' => 'Table Header',
                 'type' => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
                 'label_block' => false,
             ]
         );
@@ -107,6 +108,7 @@ class Data_Table extends Widget_Base
                 'label' => esc_html__('Column Span', 'essential-addons-for-elementor-lite'),
                 'default' => '',
                 'type' => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
                 'label_block' => false,
             ]
         );
@@ -329,6 +331,7 @@ class Data_Table extends Widget_Base
 			[
 				'label' => esc_html__( 'Cell Text', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXTAREA,
+                'dynamic'   => ['active' => true],
 				'label_block' => true,
 				'default' => esc_html__( 'Content', 'essential-addons-for-elementor-lite'),
 				'condition' => [
@@ -357,6 +360,7 @@ class Data_Table extends Widget_Base
 			[
 				'label' => esc_html__( 'Link', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::URL,
+                'dynamic'   => ['active' => true],
 				'label_block' => true,
 				'default' => [
 						'url' => '',

@@ -385,6 +385,7 @@ class Filterable_Gallery extends Widget_Base
                         'name' => 'eael_fg_control',
                         'label' => esc_html__('List Item', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::TEXT,
+                        'dynamic'   => ['active' => true],
                         'label_block' => true,
                         'default' => esc_html__('Gallery Item', 'essential-addons-for-elementor-lite'),
                     ],
@@ -610,6 +611,7 @@ class Filterable_Gallery extends Widget_Base
             'eael_fg_gallery_img_link',
             [
                 'type' => Controls_Manager::URL,
+                'dynamic'   => ['active' => true],
                 'label_block' => true,
                 'default' => [
                     'url' => '#',
@@ -668,6 +670,7 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => __('Images Per Page', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
                 'default' => 6,
                 'condition' => [
                     'pagination' => 'yes',
@@ -680,6 +683,7 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => __('Button Text', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
                 'default' => __('Load More', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'pagination' => 'yes',
@@ -692,6 +696,7 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => __('No More Items Text', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
                 'default' => __('No more items!', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'pagination' => 'yes',
