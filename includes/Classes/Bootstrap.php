@@ -162,7 +162,6 @@ class Bootstrap
 
         add_filter('eael/controls/event-calendar/source', [$this, 'event_calendar_source']);
         add_action('eael/controls/advanced-data-table/source', [$this, 'advanced_data_table_source']);
-        add_filter('eael/advanced-data-table/table_html/integration/ninja', [$this, 'advanced_data_table_ninja_integration'], 10, 1);
         
         // Login | Register
         add_action( 'init', [ $this, 'login_or_register_user'] );
