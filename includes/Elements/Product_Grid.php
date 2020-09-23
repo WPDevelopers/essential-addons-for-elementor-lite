@@ -550,7 +550,7 @@ class Product_Grid extends Widget_Base {
 				'default' => 'center',
 				'toggle' => true,
 				'selectors' => [
-					'{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-grid:not(.list) .woocommerce ul.products li.product' => 'text-align: {{VALUE}};',
 				],
 				'conditions' => [
 					'relation' => 'and',
@@ -564,7 +564,7 @@ class Product_Grid extends Widget_Base {
 						],
 						[
 							'name' => 'eael_product_grid_style_preset',
-							'operator' => '==',
+							'operator' => 'in',
 							'value' => [
 								'eael-product-default',
 								'eael-product-simple',
@@ -664,7 +664,7 @@ class Product_Grid extends Widget_Base {
 						],
 						[
 							'name' => 'eael_product_grid_style_preset',
-							'operator' => '==',
+							'operator' => 'in',
 							'value' => [
 								'eael-product-default',
 								'eael-product-simple',
@@ -819,6 +819,30 @@ class Product_Grid extends Widget_Base {
 				'label' => __( 'Product Details', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
+				'conditions' => [
+					'relation' => 'and',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_layout',
+							'operator' => 'in',
+							'value' => [
+								'grid',
+								'list',
+								'masonry',
+							],
+						],
+						[
+							'name' => 'eael_product_grid_style_preset',
+							'operator' => '!in',
+							'value' => [
+								'eael-product-default',
+								'eael-product-simple',
+								'eael-product-reveal',
+								'eael-product-overlay',
+							]
+						],
+					],
+				],
 			]
 		);
 
@@ -861,7 +885,7 @@ class Product_Grid extends Widget_Base {
 						],
 						[
 							'name' => 'eael_product_grid_style_preset',
-							'operator' => '!=',
+							'operator' => '!in',
 							'value' => [
 								'eael-product-default',
 								'eael-product-simple',
@@ -917,7 +941,7 @@ class Product_Grid extends Widget_Base {
 						],
 						[
 							'name' => 'eael_product_grid_style_preset',
-							'operator' => '!=',
+							'operator' => '!in',
 							'value' => [
 								'eael-product-default',
 								'eael-product-simple',
@@ -1473,6 +1497,30 @@ class Product_Grid extends Widget_Base {
 			'eael_section_product_badges',
 			[
 				'label' => esc_html__( 'Sale / Stock Out Badge', 'essential-addons-for-elementor-lite' ),
+				'conditions' => [
+					'relation' => 'and',
+					'terms' => [
+						[
+							'name' => 'eael_product_grid_layout',
+							'operator' => '!=',
+							'value' => [
+								'grid',
+								'list',
+								'masonry',
+							],
+						],
+						[
+							'name' => 'eael_product_grid_style_preset',
+							'operator' => '!in',
+							'value' => [
+								'eael-product-default',
+								'eael-product-simple',
+								'eael-product-reveal',
+								'eael-product-overlay',
+							]
+						],
+					],
+				],
 			]
 		);
 		$this->add_control(

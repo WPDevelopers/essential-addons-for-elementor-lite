@@ -1913,7 +1913,8 @@
                         transition: all ease 0.4s;
                         background: blanchedalmond;
                         padding: 9px 10px;
-                        line-height: 1.2em;
+                        font-size: 15px;
+                        line-height: 1.4em;
                         font-weight: 700;
                         //border-radius: 5px;
 
@@ -1926,6 +1927,11 @@
                             position: relative;
                             font-size: 18px;
                         }
+                    }
+
+                    a.button {
+                        font-size: 15px;
+                        line-height: 1.4em;
                     }
                 }
             }
