@@ -15,7 +15,7 @@
   --btn-bg-hover: #ff9582;
   --btn-text: #fff;
   --image-bg: #6b55ec;
-  --container-bg: "#fff";
+  --container-bg: #fff;
   --icon-color: #c3ccdc;
   background: var(--container-bg);
 }
@@ -291,6 +291,68 @@
   color: var(--first-row-color);
 }
 .eael-wcpc-wrapper.custom.theme-5 table tr.image td:last-child, .eael-wcpc-wrapper.custom.theme-5 table tr.title td:last-child {
+  border-right: none;
+}
+.eael-wcpc-wrapper.custom.theme-6 {
+  --container-bg: #f0eff6;
+  --first-row-color: #fff;
+  --first-col-bg: #fd907b;
+  --second-col-bg: #7f6cf4 ;
+  --third-col-bg: #3ae281;
+  --first-img-bg: #f4f0ff;
+  --second-img-bg: #eaedff;
+  --third-img-bg: #e5fffb;
+  --h-bg: none;
+  --h-text-clr: #707070;
+  --h-border-clr: #e8ebf0;
+  --first-btn-bg: #6a3ee8;
+  --second-btn-bg: #3e5ae8;
+  --third-btn-bg: #15e9c9;
+  --image-bg: none;
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(2) th, .eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(2) td {
+  border-left: 0;
+  border-right: 0;
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(2) td {
+  color: #fff;
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr, .eael-wcpc-wrapper.custom.theme-6 table th, .eael-wcpc-wrapper.custom.theme-6 table td {
+  border: none;
+}
+.eael-wcpc-wrapper.custom.theme-6 table td {
+  color: #fff;
+  border-right: 20px solid #fff;
+}
+.eael-wcpc-wrapper.custom.theme-6 table td:last-child {
+  border-right: none;
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr td.col_0 {
+  background: var(--first-col-bg);
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr td.col_1 {
+  background: var(--second-col-bg);
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr td.col_2 {
+  background: var(--third-col-bg);
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(even) th, .eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(even) td {
+  background: #f7f6fa;
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(even) td.col_0 {
+  background: #fec1b5;
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(even) td.col_1 {
+  background: #b7adf9;
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(even) td.col_2 {
+  background: #91efb8;
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr.image td, .eael-wcpc-wrapper.custom.theme-6 table tr.title td {
+  border: none;
+  border-right: 20px solid #fff;
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr.image td:last-child, .eael-wcpc-wrapper.custom.theme-6 table tr.title td:last-child {
   border-right: none;
 }
 @media screen and (min-width: 769px) {
