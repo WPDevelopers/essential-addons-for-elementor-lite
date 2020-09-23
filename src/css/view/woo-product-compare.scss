@@ -289,9 +289,10 @@
 
     // Style only for theme 5
     &.theme-5 {
-        --first-col-color: #6a3ee8;
-        --second-col-color: #3e5ae8;
-        --third-col-color: #15e9c9;
+        --first-row-color: #fff;
+        --first-col-bg: #6a3ee8;
+        --second-col-bg: #3e5ae8;
+        --third-col-bg: #15e9c9;
         --first-img-bg: #f4f0ff;
         --second-img-bg: #eaedff;
         --third-img-bg: #e5fffb;
@@ -313,6 +314,7 @@
             th.first-th {
                 background: var(--container-bg);
             }
+
         }
 
         tbody {
@@ -321,21 +323,50 @@
                 th, td {
                     font-size: 20px;
                     color: inherit;
-                }
+                    border: none;
 
-                td {
-                    border: 1px solid var(--h-border-clr);
                 }
-                th{
-                    border:none;
-                }
-
             }
 
             tr.image {
+                td.col_0 {
+                    background: var(--first-img-bg);
+                }
 
+                td.col_1 {
+                    background: var(--second-img-bg);
+                }
+
+                td.col_2 {
+                    background: var(--third-img-bg);
+                }
             }
 
+            tr.title {
+                td.col_0 {
+                    background: var(--first-col-bg);
+                }
+
+                td.col_1 {
+                    background: var(--second-col-bg);
+                }
+
+                td.col_2 {
+                    background: var(--third-col-bg);
+                }
+            }
+
+            tr.image, tr.title {
+                td {
+                    border: none;
+                    border-right: 2px solid var(--first-row-color);
+                    color: var(--first-row-color)
+                }
+
+                td:last-child {
+                    border-right: none;
+                }
+            }
 
         }
     }
