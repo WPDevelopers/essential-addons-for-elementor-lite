@@ -68,15 +68,26 @@ trait Generator
         }
     }
 
-    public function collect_widgets($element)
+    public function collect_loaded_widgets($widget)
     {
-        $this->loaded_widgets[] = $element->get_name();
+        if ($widget->get_name() === 'global') {
+            $reflection = new ReflectionClass(get_class($widget));
+            $protected = $reflection->getProperty('template_data');
+            $protected->setAccessible(true);
+
+            if ($global_data = $protected->getValue($widget)) {
+                $this->loaded_widgets = array_merge($this->loaded_widgets, $this->collect_recursive_elements($global_data['content']));
+            }
+        } else {
+            $this->loaded_widgets[] = $widget->get_name();
+        }
     }
 
     public function update_request_data()
     {
         if ($this->is_preview_mode()) {
             $widgets = get_transient($this->uid() . '_loaded_widgets');
+            $templates = get_transient($this->uid() . '_loaded_templates');
 
             if ($this->loaded_templates) {
                 foreach ($this->loaded_templates as $post_id) {
@@ -87,9 +98,14 @@ trait Generator
                 }
             }
 
+            $this->loaded_widgets = $this->parse_widgets($this->loaded_widgets);
+
             // update transient
             if ($widgets != $this->loaded_widgets) {
                 set_transient($this->uid() . '_loaded_widgets', $this->loaded_widgets);
+            }
+
+            if ($templates != $this->loaded_templates) {
                 set_transient($this->uid() . '_loaded_templates', $this->loaded_templates);
             }
         }
@@ -133,12 +149,8 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function parse_widgets($post_id)
+    public function parse_widgets($widgets)
     {
-        if (!Plugin::$instance->db->is_built_with_elementor($post_id)) {
-            return;
-        }
-
         $replace = [
             'eicon-woocommerce' => 'eael-product-grid',
             'eael-countdown' => 'eael-count-down',
@@ -157,30 +169,13 @@ trait Generator
             'eael-google-map' => 'eael-adv-google-map',
             'eael-instafeed' => 'eael-instagram-gallery',
         ];
-        $global_settings = get_option('eael_global_settings');
-        $document = Plugin::$instance->documents->get($post_id);
-        $widgets = $this->collect_recursive_elements($document->get_elements_data());
+
         $widgets = array_map(function ($val) use ($replace) {
             if (array_key_exists($val, $replace)) {
                 $val = $replace[$val];
             }
             return (strpos($val, 'eael-') !== false ? preg_replace('/^eael-/', '', $val) : null);
         }, $widgets);
-
-        // collect page extensions
-        if (!Helper::prevent_extension_loading($post_id)) {
-            if ($document->get_settings('eael_custom_js')) {
-                $widgets[] = 'eael-custom-js';
-            }
-
-            if ($document->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {
-                $widgets[] = 'eael-reading-progress';
-            }
-
-            if ($document->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['eael_ext_table_of_content']['enabled'])) {
-                $widgets[] = 'eael-table-of-content';
-            }
-        }
 
         return array_filter(array_unique($widgets));
     }
@@ -194,42 +189,11 @@ trait Generator
     {
         $collections = [];
 
-        foreach ($elements as $element) {
-            // collect extensions for section
-            if (isset($element['elType']) && $element['elType'] == 'section') {
-                if (isset($element['settings']['eael_particle_switch']) && $element['settings']['eael_particle_switch'] == 'yes') {
-                    $collections[] = 'eael-section-particles';
-                }
-                if (isset($element['settings']['eael_parallax_switcher']) && $element['settings']['eael_parallax_switcher'] == 'yes') {
-                    $collections[] = 'eael-section-parallax';
-                }
+        array_walk_recursive($elements, function ($val, $key) use (&$collections) {
+            if ($key == 'widgetType') {
+                $collections[] = $val;
             }
-
-            // collect widget
-            if (isset($element['elType']) && $element['elType'] == 'widget') {
-                // collect extensions for widget
-                if (isset($element['settings']['eael_tooltip_section_enable']) && $element['settings']['eael_tooltip_section_enable'] == 'yes') {
-                    $collections[] = 'eael-eael-tooltip-section';
-                }
-                if (isset($element['settings']['eael_ext_content_protection']) && $element['settings']['eael_ext_content_protection'] == 'yes') {
-                    $collections[] = 'eael-eael-content-protection';
-                }
-
-                if ($element['widgetType'] === 'global') {
-                    $document = Plugin::$instance->documents->get($element['templateID']);
-
-                    if (is_object($document)) {
-                        $collections = array_merge($collections, $this->collect_recursive_elements($document->get_elements_data()));
-                    }
-                } else {
-                    $collections[] = $element['widgetType'];
-                }
-            }
-
-            if (!empty($element['elements'])) {
-                $collections = array_merge($collections, $this->collect_recursive_elements($element['elements']));
-            }
-        }
+        });
 
         return $collections;
     }
@@ -241,16 +205,19 @@ trait Generator
      */
     public function generate_script($widgets, $context, $ext)
     {
+        $loaded_assets = get_transient($this->uid() . '_loaded_assets');
+        $editor_updated_at = get_transient('eael_editor_updated_at');
+
         // check if script exists
         if ($context == 'view') {
-            if (get_transient($this->uid() . '_loaded_widgets') == $widgets && $this->has_assets_files($this->uid(), $ext)) {
+            if ($loaded_assets == $widgets && $this->has_assets_files($this->uid(), $ext)) {
                 return;
             }
 
             // update loaded widgets data & sync update time with editor time
-            if ($ext == 'css') {
-                set_transient($this->uid() . '_loaded_widgets', $widgets);
-                set_transient($this->uid() . '_updated_at', get_transient('eael_editor_updated_at'));
+            if ($ext == 'js') {
+                set_transient($this->uid() . '_loaded_assets', $widgets);
+                set_transient($this->uid() . '_updated_at', $editor_updated_at);
             }
         } else if ($context == 'edit') {
             if ($this->has_assets_files($this->uid('eael'), $ext)) {
@@ -263,11 +230,14 @@ trait Generator
             wp_mkdir_p(EAEL_ASSET_PATH);
         }
 
-        // collect library scripts & styles
-        $paths = $this->generate_dependency($widgets, $context, $ext);
+        // naming asset file
+        $file_name = ($context == 'view' ? $this->uid() : $this->uid('eael')) . '.min.' . $ext;
 
-        // combine files
-        $this->combine_files($paths, $context, $ext);
+        // output asset string
+        $output = $this->generate_strings($widgets, $context, $ext);
+
+        // write to file
+        file_put_contents($this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file_name), $output);
     }
 
     /**
@@ -286,16 +256,20 @@ trait Generator
             }
         }
 
-        if ($this->loaded_templates && $context == 'view' && $ext == 'js') {
-            foreach ($this->loaded_templates as $post_id) {
-                if (get_post_status($post_id) === false) {
-                    continue;
-                }
+        if ($context == 'view' && $ext == 'js') {
+            $templates = get_transient($this->uid() . '_loaded_templates');
 
-                $document = Plugin::$instance->documents->get($post_id);
+            if ($templates) {
+                foreach ($templates as $post_id) {
+                    if (get_post_status($post_id) === false) {
+                        continue;
+                    }
 
-                if ($custom_js = $document->get_settings('eael_custom_js')) {
-                    $output .= $custom_js;
+                    $document = Plugin::$instance->documents->get($post_id);
+
+                    if ($custom_js = $document->get_settings('eael_custom_js')) {
+                        $output .= $custom_js;
+                    }
                 }
             }
         }
@@ -363,38 +337,5 @@ trait Generator
         }
 
         return true;
-    }
-
-    /**
-     * Combine files into one
-     *
-     * @since 3.0.1
-     */
-    public function combine_files($paths = [], $context, $ext)
-    {
-        $output = '';
-        $file_name = ($context == 'view' ? $this->uid() : $this->uid('eael')) . '.min.' . $ext;
-
-        if (!empty($paths)) {
-            foreach ($paths as $path) {
-                $output .= file_get_contents($this->safe_path($path));
-            }
-        }
-
-        if ($this->loaded_templates && $context == 'view' && $ext == 'js') {
-            foreach ($this->loaded_templates as $post_id) {
-                if (get_post_status($post_id) === false) {
-                    continue;
-                }
-
-                $document = Plugin::$instance->documents->get($post_id);
-
-                if ($custom_js = $document->get_settings('eael_custom_js')) {
-                    $output .= $custom_js;
-                }
-            }
-        }
-
-        file_put_contents($this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file_name), $output);
     }
 }
