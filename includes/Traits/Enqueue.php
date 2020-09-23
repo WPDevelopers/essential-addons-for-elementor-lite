@@ -149,9 +149,10 @@ trait Enqueue
         // view mode
         if ($this->is_preview_mode()) {
             $widgets = get_transient($this->uid() . '_loaded_widgets');
+            // $assets = get_transient($this->uid() . '_loaded_assets');
             $editor_updated_at = get_transient('eael_editor_updated_at');
             $post_updated_at = get_transient($this->uid() . '_updated_at');
-
+            
             if ($widgets === false || $editor_updated_at != $post_updated_at) {
                 $widgets = $this->get_settings();
             }
@@ -166,7 +167,7 @@ trait Enqueue
 
             // css
             if (get_option('elementor_css_print_method') == 'internal') {
-                echo '<style id="' . $this->uid() . '">' . $this->generate_strings($widgets, 'view', 'css') . '</style>';
+                $this->css_strings = $this->generate_strings($widgets, 'view', 'css');
             } else {
                 $this->generate_script($widgets, 'view', 'css');
 
@@ -177,6 +178,25 @@ trait Enqueue
                     false,
                     time()
                 );
+            }
+
+            // js
+            if (get_option('eael_js_print_method') == 'internal') {
+                $this->js_strings = $this->generate_strings($widgets, 'edit', 'js');
+            } else {
+                // generate post script
+                $this->generate_script($widgets, 'view', 'js');
+
+                wp_enqueue_script(
+                    $this->uid(),
+                    $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid() . '.min.js'),
+                    ['jquery'],
+                    time(),
+                    true
+                );
+
+                // localize script
+                wp_localize_script($this->uid(), 'localize', $this->localize_objects);
             }
         }
     }
@@ -206,61 +226,21 @@ trait Enqueue
             if ($this->css_strings) {
                 echo '<style id="' . $this->uid('eael') . '">' . $this->css_strings . '</style>';
             }
+        } else if ($this->is_preview_mode()) {
+            if ($this->css_strings) {
+                echo '<style id="' . $this->uid() . '">' . $this->css_strings . '</style>';
+            }
         }
     }
 
     // inline enqueue scripts
     public function enqueue_inline_scripts()
     {
-        // edit mode
-        if ($this->is_edit_mode()) {
+        // view/edit mode mode
+        if ($this->is_edit_mode() || $this->is_preview_mode()) {
             if ($this->js_strings) {
                 echo '<script>var localize =' . json_encode($this->localize_objects) . '</script>';
                 echo '<script>' . $this->js_strings . '</script>';
-            }
-        }
-
-        // view mode
-        if ($this->is_preview_mode()) {
-            if ($this->loaded_templates) {
-                // empty loaded widget stack
-                // $this->loaded_widgets = [];
-
-                // parse widgets from post
-                foreach ($this->loaded_templates as $post_id) {
-                    if (get_post_status($post_id) === false) {
-                        continue;
-                    }
-
-                    $extensons = (array) $this->parse_extensions($post_id);
-
-                    // loaded widgets stack
-                    $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $extensons)));
-                }
-
-                // run hook before enqueue scripts
-                do_action('eael/before_enqueue_scripts', $this->loaded_widgets);
-
-                // js
-                if (get_option('eael_js_print_method') == 'internal') {
-                    // localize scripts for once
-                    echo '<script>var localize =' . json_encode($this->localize_objects) . '</script>';
-                    echo '<script>' . $this->generate_strings($this->loaded_widgets, 'view', 'js') . '</script>';
-                } else {
-                    // generate post script
-                    $this->generate_script($this->loaded_widgets, 'view', 'js');
-
-                    wp_enqueue_script(
-                        $this->uid(),
-                        $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid() . '.min.js'),
-                        ['jquery'],
-                        time(),
-                        true
-                    );
-
-                    // localize script
-                    wp_localize_script($this->uid(), 'localize', $this->localize_objects);
-                }
             }
         }
     }
