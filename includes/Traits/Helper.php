@@ -3167,8 +3167,9 @@ trait Helper
         if (isset($post['typeform_tk']) && isset($post['pr_code'])) {
             if (wp_hash('eael_typeform') === $post['pr_code']) {
                 update_option('eael_save_typeform_personal_token', sanitize_text_field($post['typeform_tk']));
+                wp_send_json_success(['status' => 'success']);
             }
         }
-        wp_send_json_success(['status' => 'success']);
+        wp_send_json_error(['status' => 'error']);
     }
 }
