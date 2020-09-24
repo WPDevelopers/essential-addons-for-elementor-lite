@@ -2778,6 +2778,7 @@ class Product_Grid extends Widget_Base {
 			'order' => (isset($settings['order']) ? $settings['order'] : 'desc'),
 			'offset' => $settings['product_offset'],
 			'tax_query' => [
+				'relation' => 'OR',
 				[
 					'taxonomy' => 'product_visibility',
 					'field'    => 'name',
@@ -2836,6 +2837,12 @@ class Product_Grid extends Widget_Base {
 					'taxonomy' => 'product_visibility',
 					'field' => 'name',
 					'terms' => 'featured',
+				],
+				[
+					'taxonomy' => 'product_visibility',
+					'field'    => 'name',
+					'terms'    => ['exclude-from-search', 'exclude-from-catalog'],
+					'operator' => 'NOT IN',
 				],
 			];
 
