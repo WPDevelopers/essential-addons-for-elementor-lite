@@ -95,14 +95,15 @@ class Woo_Product_Compare extends Widget_Base {
 		] );
 	}
 
-	protected function get_layouts() {
-		return apply_filters( 'eael/wcpc/default-layouts', [
-			'layout1' => __( 'Layout 1', 'essential-addons-for-elementor-lite' ),
-			'layout2' => __( 'Layout 2', 'essential-addons-for-elementor-lite' ),
-			'layout3' => __( 'Layout 3', 'essential-addons-for-elementor-lite' ),
-			'layout4' => __( 'Layout 4', 'essential-addons-for-elementor-lite' ),
-			'layout5' => __( 'Layout 5', 'essential-addons-for-elementor-lite' ),
-			'layout6' => __( 'Layout 6', 'essential-addons-for-elementor-lite' ),
+	protected function get_themes() {
+		return apply_filters( 'eael/wcpc/default-themes', [
+			''        => __( 'Theme Default', 'essential-addons-for-elementor-lite' ),
+			'theme-1' => __( 'Theme 1', 'essential-addons-for-elementor-lite' ),
+			'theme-2' => __( 'Theme 2', 'essential-addons-for-elementor-lite' ),
+			'theme-3' => __( 'Theme 3', 'essential-addons-for-elementor-lite' ),
+			'theme-4' => __( 'Theme 4', 'essential-addons-for-elementor-lite' ),
+			'theme-5' => __( 'Theme 5', 'essential-addons-for-elementor-lite' ),
+			'theme-6' => __( 'Theme 6', 'essential-addons-for-elementor-lite' ),
 		] );
 	}
 
@@ -200,6 +201,12 @@ class Woo_Product_Compare extends Widget_Base {
 			'type'        => Controls_Manager::TEXT,
 			'label_block' => true,
 			'placeholder' => __( 'Eg. 123, 456 etc.', 'essential-addons-for-elementor-lite' ),
+		] );
+		$this->add_control( 'theme', [
+			'label'   => __( 'Presets', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::SELECT,
+			'options' => $this->get_themes(),
+			'default' => '',
 		] );
 		$this->end_controls_section();
 	}
@@ -354,15 +361,20 @@ class Woo_Product_Compare extends Widget_Base {
 	}
 
 	public function init_style_table_controls() {
+		$img_class = '{{WRAPPER}} .eael-wcpc-wrapper.custom.{{theme.VALUE}} table tr.image td';
 		$this->start_controls_section( 'section_style_table', [
 			'label' => __( 'Table Style', 'essential-addons-for-elementor-lite' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
-		$this->add_control( 'layout', [
-			'label'   => __( 'Layout', 'essential-addons-for-elementor-lite' ),
-			'type'    => Controls_Manager::SELECT,
-			'options' => $this->get_layouts(),
-			'default' => 'layout1',
+
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'     => "image_bg",
+			'label'    => __( 'Image Background', 'essential-addons-for-elementor-lite' ),
+			'types'    => [
+				'classic',
+				'gradient',
+			],
+			'selector' => $img_class,
 		] );
 		$this->end_controls_section();
 	}
@@ -371,6 +383,7 @@ class Woo_Product_Compare extends Widget_Base {
 		if ( ! function_exists( 'WC' ) ) {
 			return;
 		}
+		$ds                     = $this->get_settings_for_display();
 		$product_ids            = $this->get_settings_for_display( 'product_ids' );
 		$product_ids            = ! empty( $product_ids ) ? array_filter( array_map( 'trim', explode( ',', $product_ids ) ), function ( $id ) {
 			return ( ! empty( $id ) && is_numeric( $id ) );
@@ -379,10 +392,14 @@ class Woo_Product_Compare extends Widget_Base {
 		$fields                 = $this->fields();
 		$title                  = $this->get_settings_for_display( 'table_title' );
 		$highlighted_product_id = 317; //@todo; make it dynamic
-		$layout                 = 'theme-6'; //@todo; make it dynamic
+		$theme_wrap_class       = $theme = '';
+		if ( ! empty( $ds['theme'] ) ) {
+			$theme            = esc_attr( $ds['theme'] );
+			$theme_wrap_class = " custom {$theme}";
+		}
 		?>
 		<?php do_action( 'eael/wcpc/before_content_wrapper' ); ?>
-        <div class="eael-wcpc-wrapper woocommerce custom <?php echo esc_attr( $layout);?>">
+        <div class="eael-wcpc-wrapper woocommerce <?php echo esc_attr( $theme_wrap_class ); ?>">
 			<?php do_action( 'eael/wcpc/before_main_table' ); ?>
             <table class="eael-wcpc-table table-responsive">
                 <tbody>
@@ -406,12 +423,12 @@ class Woo_Product_Compare extends Widget_Base {
 											printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
 										}
 									} else {
-										if ( 'theme-4' === $layout ) {
+										if ( 'theme-4' === $theme ) {
 											$this->print_icon();
 										}
-										if ( 'theme-5' === $layout && $field === 'title' ) {
+										if ( 'theme-5' === $theme && $field === 'title' ) {
 											echo '&nbsp;';
-										}else{
+										} else {
 											printf( '<span class="field-name">%s</span>', esc_html( $name ) );
 
 										}
@@ -429,13 +446,13 @@ class Woo_Product_Compare extends Widget_Base {
                                     <?php
                                     if ( $field === 'image' ) {
 	                                    echo '<span class="img-inner">';
-	                                    if ( 'theme-4' === $layout ) {
+	                                    if ( 'theme-4' === $theme ) {
 		                                    echo '<span class="ribbon">New</span>';
 	                                    }
                                     }
                                     echo ! empty( $product->fields[ $field ] ) ? $product->fields[ $field ] : '&nbsp;';
                                     if ( $field === 'image' ) {
-	                                    if ( 'theme-4' === $layout ) {
+	                                    if ( 'theme-4' === $theme ) {
 		                                    echo ! empty( $product->fields['title'] ) ? sprintf( "<p class='product-title'>%s</p>", esc_html( $product->fields['title'] ) ) : '&nbsp;';
 		                                    echo ! empty( $product->fields['price'] ) ? $product->fields['price'] : '&nbsp;';
 	                                    }
@@ -459,7 +476,7 @@ class Woo_Product_Compare extends Widget_Base {
                             <th>
                                 <div>
 									<?php
-									if ( 'theme-4' === $layout ) {
+									if ( 'theme-4' === $theme ) {
 										$this->print_icon();
 									}
 									echo wp_kses_post( $fields['price'] ) ?>
@@ -484,7 +501,7 @@ class Woo_Product_Compare extends Widget_Base {
                             <th>
                                 <div>
 									<?php
-									if ( 'theme-4' === $layout ) {
+									if ( 'theme-4' === $theme ) {
 										$this->print_icon();
 									}
 									echo wp_kses_post( $fields['add-to-cart'] ); ?>
