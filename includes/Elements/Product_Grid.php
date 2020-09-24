@@ -869,10 +869,6 @@ class Product_Grid extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-grid .product-details-wrap' => 'text-align: {{VALUE}};',
 				],
-//				'condition' => [
-//					'eael_product_grid_layout!' => 'list',
-//				],
-
 				'conditions' => [
 					'relation' => 'and',
 					'terms' => [
@@ -926,9 +922,6 @@ class Product_Grid extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-grid.grid .eael-product-wrap .product-details-wrap, {{WRAPPER}} .eael-product-grid.masonry .eael-product-wrap .product-details-wrap' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-//				'condition' => [
-//					'eael_product_grid_layout' => ['grid', 'masonry'],
-//				],
 				'conditions' => [
 					'relation' => 'and',
 					'terms' => [
@@ -2810,22 +2803,6 @@ class Product_Grid extends Widget_Base {
 			];
 		}
 
-//		if ( '' !== $settings['pagination_type'] ) {
-//
-//			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : '1';
-//
-//			$args['paged'] = $paged;
-//
-//			if ( 0 < $settings['product_offset'] ) {
-//
-//				/**
-//				 * Offser break the pagination. Using WordPress's work around
-//				 *
-//				 * @see https://codex.wordpress.org/Making_Custom_Queries_using_Offset_and_Pagination
-//				 */
-//				$args['offset_to_fix'] = $settings['product_offset'];
-//			}
-//		}
 		if ( 'true' == $settings['show_load_more'] ) {
 			$args ['offset'] = $settings['product_offset'];
 		}
@@ -2969,27 +2946,6 @@ class Product_Grid extends Widget_Base {
                             $isotope_products.isotope('layout');
                         });
                     }
-
-                    // $(document).on('click','.open-popup-link',function(e){
-                    //     e.preventDefault();
-                    //     e.stopPropagation();
-                    //     const $this = $(this);
-                    //     const id = $this.attr('href');
-                    //     const popup = $(id);
-	                //     const popup_details =  popup.children( ".eael-product-popup-details" );
-	                //     if(popup_details.height()>400){
-		            //         popup_details.css("height",'75vh');
-                    //     }else{
-		            //         popup_details.css("height",'auto');
-                    //     }
-                    //     if($layout_mode === 'masonry') {
-                    //         if($(id+" .woocommerce-product-gallery").hasClass('eael-new-pr')){
-                    //             $(id+" .woocommerce-product-gallery").wc_product_gallery();
-                    //         }
-                    //     }
-                    //     $( id+" .variations_form" ).wc_variation_form();
-	                //     popup.addClass("eael-product-popup-ready").removeClass("eael-product-modal-removing");
-                    // });
 
                     $(document).on("click", '.eael-product-popup-close', function (event) {
                         event.stopPropagation();
