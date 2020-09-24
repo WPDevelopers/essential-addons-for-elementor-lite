@@ -351,6 +351,22 @@ class Woo_Checkout extends Widget_Base {
 				'description' => 'You can force show login in order to style them properly.',
 			]
 		);
+        if('yes' != get_option( 'woocommerce_enable_checkout_login_reminder' )){
+            $this->add_control(
+                'ea_section_woo_login_show_warning_text',
+                [
+                    'type'            => Controls_Manager::RAW_HTML,
+                    'raw'             => __('Allow customers to log into an existing account during checkout is disabled on your site. Please enable it to use the login form. You can enable it from WooCommerce >> Settings >> Accounts & Privacy >> <a target="_blank" href="'.esc_url(admin_url( 'admin.php?page=wc-settings&tab=account')).'">Guest checkout.</a>',
+                        'essential-addons-for-elementor-lite'),
+                    'content_classes' => 'eael-warning',
+                    'condition' => [
+                        'ea_section_woo_login_show' => 'yes',
+                    ],
+                ]
+            );
+        }
+
+
 		$this->add_control(
 			'ea_woo_checkout_login_icon',
 			[
