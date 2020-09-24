@@ -575,7 +575,7 @@ class Helper
         return [];
     }
 
-    protected static function get_terms_as_list($term_type = 'category', $length = 1)
+    public static function get_terms_as_list($term_type = 'category', $length = 1)
     {
         if ($term_type === 'category') {
             $terms = get_the_category();

@@ -19,7 +19,6 @@ use \Essential_Addons_Elementor\Classes\Helper;
 
 class Post_Grid extends Widget_Base
 {
-    
     use \Essential_Addons_Elementor\Traits\Template_Query;
 
     public function get_name()
