@@ -1548,7 +1548,13 @@ class Advanced_Data_Table extends Widget_Base
             return $this->ninja_integration();
         }
 
-        return apply_filters('eael/advanced-data-table/table_html/integration/' . $settings['ea_adv_data_table_source'], $settings);
+        $content = apply_filters('eael/advanced-data-table/table_html/integration/' . $settings['ea_adv_data_table_source'], $settings);
+
+        if (is_array($content)) {
+            return '';
+        }
+
+        return $content;
     }
 
     public function ninja_integration()
