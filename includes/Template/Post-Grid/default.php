@@ -1,4 +1,7 @@
 <?php
+
+use \Essential_Addons_Elementor\Classes\Helper;
+
 /**
  * Template Name: Default
  */
