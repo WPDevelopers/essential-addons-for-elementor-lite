@@ -208,9 +208,9 @@ trait Controls
 
         $default_multiple_kb = Helper::get_betterdocs_multiple_kb_status();
 
-        if($default_multiple_kb) {
-
-            $default_slug = count(Helper::get_multiple_kb_terms(true, false)) > 0 ? array_keys(Helper::get_multiple_kb_terms(true, false))[0] : '';
+        if ($default_multiple_kb) {
+            $multiple_kb_terms = Helper::get_multiple_kb_terms(true, false);
+            $default_slug = count($multiple_kb_terms) > 0 ? array_keys($multiple_kb_terms)[0] : '';
 
             $wb->add_control(
                 'selected_knowledge_base',
@@ -218,14 +218,13 @@ trait Controls
                     'label' => __('Knowledge Bases', 'essential-addons-for-elementor-lite'),
                     'label_block' => true,
                     'type' => Controls_Manager::SELECT2,
-                    'options' => Helper::get_multiple_kb_terms(true, false),
+                    'options' => $multiple_kb_terms,
                     'multiple' => false,
                     'default' => $default_slug
                 ]
             );
         }
         
-
         if ($wb->get_name() === 'eael-betterdocs-category-grid') {
             $wb->add_control(
                 'grid_query_heading',
