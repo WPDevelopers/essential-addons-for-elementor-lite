@@ -2778,7 +2778,7 @@ class Product_Grid extends Widget_Base {
 			'order' => (isset($settings['order']) ? $settings['order'] : 'desc'),
 			'offset' => $settings['product_offset'],
 			'tax_query' => [
-				'relation' => 'OR',
+				'relation' => 'AND',
 				[
 					'taxonomy' => 'product_visibility',
 					'field'    => 'name',
@@ -2800,7 +2800,7 @@ class Product_Grid extends Widget_Base {
 		}
 
 		if ( ! empty( $settings['eael_product_grid_categories'] ) ) {
-			$args['tax_query'] = [
+			$args['tax_query'][] = [
 				[
 					'taxonomy' => 'product_cat',
 					'field' => 'slug',
