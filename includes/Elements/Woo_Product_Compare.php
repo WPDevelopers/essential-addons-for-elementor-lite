@@ -361,12 +361,101 @@ class Woo_Product_Compare extends Widget_Base {
 	}
 
 	public function init_style_table_controls() {
-		$img_class = '{{WRAPPER}} .eael-wcpc-wrapper.custom.{{theme.VALUE}} table tr.image td';
+		$img_class  = '{{WRAPPER}} .eael-wcpc-wrapper.custom table tr.image td';
+		$col1_img_bg = '{{WRAPPER}} .eael-wcpc-wrapper.custom table tr.image td.col_0';
+		$col2_img_bg = '{{WRAPPER}} .eael-wcpc-wrapper.custom table tr.image td.col_1';
+		$col3_img_bg = '{{WRAPPER}} .eael-wcpc-wrapper.custom table tr.image td.col_2';
 		$this->start_controls_section( 'section_style_table', [
 			'label' => __( 'Table Style', 'essential-addons-for-elementor-lite' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
+		$this->add_control( 'separate_col_style', [
+			'label' => __( 'Style Content Column Separately', 'essential-addons-for-elementor-lite' ),
+			'type'  => Controls_Manager::SWITCHER,
+		] );
 
+		// Column 1 style
+		$this->add_control( 'col1_style_po_toggle', [
+			'label'        => __( 'Column 1 Style', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Controls', 'essential-addons-for-elementor-lite' ),
+			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'condition'    => [
+				'separate_col_style' => 'yes',
+			],
+		] );
+		$this->start_popover();
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'      => "col1_img_bg",
+			'label'     => __( 'Image Background', 'essential-addons-for-elementor-lite' ),
+			'types'     => [
+				'classic',
+				'gradient',
+			],
+			'selector'  => $col1_img_bg,
+			'condition' => [
+				'col1_style_po_toggle' => 'yes',
+			],
+            'exclude' => ['image'],
+		] );
+		$this->end_popover();
+
+		// Column 2 style
+		$this->add_control( 'col2_style_po_toggle', [
+			'label'        => __( 'Column 2 Style', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Controls', 'essential-addons-for-elementor-lite' ),
+			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'condition'    => [
+				'separate_col_style' => 'yes',
+			],
+		] );
+		$this->start_popover();
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'      => "col2_img_bg",
+			'label'     => __( 'Image Background', 'essential-addons-for-elementor-lite' ),
+			'types'     => [
+				'classic',
+				'gradient',
+			],
+			'selector'  => $col2_img_bg,
+			'condition' => [
+				'col2_style_po_toggle' => 'yes',
+			],
+			'exclude' => ['image'],
+		] );
+		$this->end_popover();
+
+		// Column 3 style
+		$this->add_control( 'col3_style_po_toggle', [
+			'label'        => __( 'Column 3 Style', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Controls', 'essential-addons-for-elementor-lite' ),
+			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'condition'    => [
+				'separate_col_style' => 'yes',
+			],
+		] );
+		$this->start_popover();
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'      => "col3_img_bg",
+			'label'     => __( 'Image Background', 'essential-addons-for-elementor-lite' ),
+			'types'     => [
+				'classic',
+				'gradient',
+			],
+			'selector'  => $col3_img_bg,
+			'condition' => [
+				'col3_style_po_toggle' => 'yes',
+			],
+			'exclude' => ['image'],
+		] );
+		$this->end_popover();
+
+		// combined column styling
 		$this->add_group_control( Group_Control_Background::get_type(), [
 			'name'     => "image_bg",
 			'label'    => __( 'Image Background', 'essential-addons-for-elementor-lite' ),
@@ -375,6 +464,9 @@ class Woo_Product_Compare extends Widget_Base {
 				'gradient',
 			],
 			'selector' => $img_class,
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
 		] );
 		$this->end_controls_section();
 	}
