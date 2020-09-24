@@ -523,23 +523,16 @@
             &:before {
                 content: '\f005\f005\f005\f005\f005';
                 font-family: "Font Awesome 5 Free";
-                //font-size: 15px;
-                //letter-spacing: 3px;
                 font-weight: 400;
                 opacity: 1;
             }
 
             span {
                 display: inline-block;
-                //height: 21px;
-                //width: 120px;
 
                 &:before {
-                    //color: #a5a5a5;
                     content: '\f005 \f005 \f005 \f005 \f005';
                     font-family: "Font Awesome 5 Free";
-                    //font-size: 15px;
-                    //letter-spacing: 3px;
                     font-weight: 900;
                 }
             }
@@ -776,7 +769,6 @@
 
                     &:focus {
                         outline: none;
-                        //border: none;
                     }
                 }
             }
@@ -932,7 +924,6 @@
 
             table {
                 .button {
-                    //min-height: 2.507em;
                     line-height: 1.2em;
                 }
             }
@@ -968,13 +959,11 @@
         top: 30px;
         left: 0;
         margin: 0;
-        //border-radius: 100%;
         background-color: #ff7a80;
         color: #fff;
         z-index: 9;
 
         &.sale-preset-1 {
-            //height: 100px;
 
             &.outofstock {
                 br {
@@ -1125,13 +1114,11 @@
             top: 30px;
             left: 0;
             margin: 0;
-            //border-radius: 100%;
             background-color: #ff7a80;
             color: #fff;
             z-index: 9;
 
             &.sale-preset-1 {
-                //height: 100px;
 
                 &.outofstock {
                     br {
@@ -1277,8 +1264,6 @@
         .star-rating::before,
         p.stars a:hover:after,
         p.stars a:after {
-            //color: #ff0000 !important;
-            //letter-spacing: 1px;
         }
 
         a.button.add_to_cart_button.added {
@@ -1315,7 +1300,6 @@
             .product-image-wrap {
                 position: relative;
                 overflow: hidden;
-                //margin-bottom: 15px;
             }
 
             .icons-wrap {
@@ -1404,7 +1388,6 @@
                             width: 42px;
                             height: 42px;
                             margin: 3px;
-                            //border-radius: 2px;
                             box-shadow: 0px 15px 10px rgba(61, 70, 79, 0.12);
                             background-color: #ffffff;
                             display: flex;
@@ -1423,8 +1406,6 @@
                                     font-weight: 900;
                                     font-family: 'Font Awesome 5 Free';
                                     font-size: 18px;
-                                    //line-height: 38px;
-                                    //color: #fff;
                                     text-rendering: auto;
                                     -webkit-font-smoothing: antialiased;
                                     vertical-align: middle;
@@ -1437,7 +1418,6 @@
                                 padding: 0;
                                 margin: 3px;
                                 font-size: 0px;
-                                //background-color: transparent;
 
                                 &:before {
                                     content: "\f07a";
@@ -1445,7 +1425,6 @@
                                     font-family: "Font Awesome 5 Free";
                                     font-size: 18px;
                                     font-weight: 900;
-                                    //color: #000;
                                     transform: translate(-50%, -50%);
                                     top: 50%;
                                     left: 50%;
@@ -1479,7 +1458,6 @@
                             width: 42px;
                             height: 42px;
                             margin: 3px;
-                            //border-radius: 2px;
                             box-shadow: 0px 15px 10px rgba(61, 70, 79, 0.12);
                             background-color: #ffffff;
                             display: flex;
@@ -1499,7 +1477,6 @@
                                     font-family: "Font Awesome 5 Free";
                                     font-size: 18px;
                                     line-height: 38px;
-                                    //color: #fff;
                                     text-rendering: auto;
                                     -webkit-font-smoothing: antialiased;
                                     vertical-align: middle;
@@ -1512,7 +1489,6 @@
                                 padding: 0;
                                 margin: 0;
                                 font-size: 0px;
-                                //background-color: transparent;
 
                                 &:before {
                                     content: "\f07a";
@@ -1520,7 +1496,6 @@
                                     font-family: "Font Awesome 5 Free";
                                     font-size: 18px;
                                     font-weight: 900;
-                                    //color: #000;
                                     transform: translate(-50%, -50%);
                                     top: 50%;
                                     left: 50%;
@@ -1554,10 +1529,6 @@
                     align-items: center;
 
                     li {
-                        //width: 42px;
-                        //height: 42px;
-                        //border-radius: 2px;
-                        //background-color: #ffffff;
 
                         a {
                             position: relative;
@@ -1581,8 +1552,6 @@
                                     font-weight: 900;
                                     font-family: 'Font Awesome 5 Free';
                                     font-size: 18px;
-                                    //line-height: 38px;
-                                    //color: #fff;
                                     text-rendering: auto;
                                     -webkit-font-smoothing: antialiased;
                                     vertical-align: middle;
@@ -1595,7 +1564,6 @@
                                 padding: 0;
                                 margin: 10px 2px 0;
                                 font-size: 0px;
-                                //background-color: transparent;
 
                                 &:before {
                                     content: "\f07a";
@@ -1603,7 +1571,6 @@
                                     font-family: "Font Awesome 5 Free";
                                     font-size: 18px;
                                     font-weight: 900;
-                                    //color: #000;
                                     transform: translate(-50%, -50%);
                                     top: 50%;
                                     left: 50%;
@@ -1716,9 +1683,6 @@
                 text-align: center;
                 border: 1px solid black;
                 overflow: hidden;
-                //width: 25%;
-                //padding: 15px;
-
             }
         }
     }
@@ -1916,7 +1880,6 @@
                         font-size: 15px;
                         line-height: 1.4em;
                         font-weight: 700;
-                        //border-radius: 5px;
 
                         &:hover {
                             background: #ff7a80;

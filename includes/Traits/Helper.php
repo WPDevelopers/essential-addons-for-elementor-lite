@@ -2081,11 +2081,6 @@ trait Helper
 
 	    if( $paginationNumber == "1" ){
 		    $paginationOffsetValue = "0";
-//		    if( $paginationtaxname ) {
-//			    $args['posts_per_page'] = $paginationLimit;
-//		    }else{
-//			    $args['posts_per_page'] = $paginationLimit;
-//		    }
 	    }else{
 		    $paginationOffsetValue = ($paginationNumber-1)*$paginationLimit;
 		    $args['offset'] = $paginationOffsetValue;
@@ -3345,7 +3340,6 @@ trait Helper
 
 	public function eael_product_grid_script(){
 		if ( version_compare( WC()->version, '3.0.0', '>=' ) ) {
-//			\WC_Frontend_Scripts::load_scripts();
 			if ( current_theme_supports( 'wc-product-gallery-zoom' ) ) {
 				wp_enqueue_script( 'zoom' );
 			}
