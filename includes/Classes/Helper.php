@@ -672,28 +672,29 @@ class Helper
 
     public static function get_multiple_kb_terms(bool $prettify = false, bool $term_id = true)
     {
-        $terms_object = array(
+        $args = [
             'taxonomy' => 'knowledge_base',
             'hide_empty' => true,
             'parent' => 0,
-        );
+        ];
 
-        $taxonomy_objects = get_terms($terms_object);
+        $terms = get_terms($args);
 
-        if (!is_wp_error($taxonomy_objects)) {
-            if ($prettify === true) {
-                $pretty_taxonomies = [];
-
-                foreach ($taxonomy_objects as $object) {
-
-                    $pretty_taxonomies[$term_id ? $object->term_id : $object->slug] = $object->name;
-                }
-
-                return $pretty_taxonomies;
-            }
+        if (is_wp_error($terms)) {
+            return [];
         }
 
-        return $taxonomy_objects;
+        if ($prettify) {
+            $pretty_taxonomies = [];
+
+            foreach ($terms as $term) {
+                $pretty_taxonomies[$term_id ? $term->term_id : $term->slug] = $term->name;
+            }
+
+            return $pretty_taxonomies;
+        }
+
+        return $terms;
     }
 
     public static function get_betterdocs_multiple_kb_status()

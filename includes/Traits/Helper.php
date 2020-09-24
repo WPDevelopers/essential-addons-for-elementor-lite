@@ -190,6 +190,14 @@ trait Helper
         return HelperClass::get_query_args($settings);
     }
 
+    public function eael_get_tags($args) {
+        return HelperClass::get_tags_list($args);
+    }
+    
+    public function eael_get_taxonomies_by_post($args) {
+        return HelperClass::get_taxonomies_by_post($args);
+    }
+
     public function twitter_feed_render_items($id, $settings, $class = '')
     {
         $token = get_option($id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_token');
