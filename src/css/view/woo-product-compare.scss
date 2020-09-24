@@ -406,10 +406,6 @@
             --h-text-clr: #707070;
             --h-border-clr: #e8ebf0;
 
-            --first-btn-bg: #6a3ee8;
-            --second-btn-bg: #3e5ae8;
-            --third-btn-bg: #15e9c9;
-
             --image-bg: none;;
             table {
                 //2nd row header
@@ -466,6 +462,41 @@
 
                     td:last-child {
                         border-right: none;
+                    }
+                }
+                // button style
+                tr.add-to-cart {
+                    a.button {
+                        background: #fff;
+                        &:hover {
+                            background: #fff;
+                        }
+                    }
+                    td.col_0 {
+                        a.button {
+                            color: var(--first-col-bg);
+                            &:hover {
+                                color: darken(#fd907b, 20);
+                            }
+                        }
+                    }
+
+                    td.col_1 {
+                        a.button {
+                            color: var(--second-col-bg);
+                            &:hover {
+                                color: darken(#7f6cf4,20);
+                            }
+                        }
+                    }
+
+                    td.col_2 {
+                        a.button {
+                            color: var(--third-col-bg);
+                            &:hover {
+                                color: darken(#3ae281, 20);
+                            }
+                        }
                     }
                 }
             }

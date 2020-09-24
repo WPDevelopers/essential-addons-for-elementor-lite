@@ -305,9 +305,6 @@
   --h-bg: none;
   --h-text-clr: #707070;
   --h-border-clr: #e8ebf0;
-  --first-btn-bg: #6a3ee8;
-  --second-btn-bg: #3e5ae8;
-  --third-btn-bg: #15e9c9;
   --image-bg: none;
 }
 .eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(2) th, .eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(2) td {
@@ -354,6 +351,30 @@
 }
 .eael-wcpc-wrapper.custom.theme-6 table tr.image td:last-child, .eael-wcpc-wrapper.custom.theme-6 table tr.title td:last-child {
   border-right: none;
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr.add-to-cart a.button {
+  background: #fff;
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr.add-to-cart a.button:hover {
+  background: #fff;
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr.add-to-cart td.col_0 a.button {
+  color: var(--first-col-bg);
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr.add-to-cart td.col_0 a.button:hover {
+  color: #fb3c17;
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr.add-to-cart td.col_1 a.button {
+  color: var(--second-col-bg);
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr.add-to-cart td.col_1 a.button:hover {
+  color: #2f11e9;
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr.add-to-cart td.col_2 a.button {
+  color: var(--third-col-bg);
+}
+.eael-wcpc-wrapper.custom.theme-6 table tr.add-to-cart td.col_2 a.button:hover {
+  color: #179f51;
 }
 @media screen and (min-width: 769px) {
   .eael-wcpc-wrapper:not(.theme-4) tr.image td {
