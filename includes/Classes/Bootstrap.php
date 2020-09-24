@@ -18,7 +18,6 @@ use Essential_Addons_Elementor\Traits\Library;
 use Essential_Addons_Elementor\Traits\Login_Registration;
 use \Essential_Addons_Elementor\Traits\Facebook_Feed;
 use \Essential_Addons_Elementor\Traits\Helper;
-use \Essential_Addons_Elementor\Traits\Twitter_Feed;
 
 class Bootstrap
 {
@@ -33,7 +32,6 @@ class Bootstrap
     use Login_Registration;
     use Controls;
     use Facebook_Feed;
-    use Twitter_Feed;
 
     // instance container
     private static $instance = null;
