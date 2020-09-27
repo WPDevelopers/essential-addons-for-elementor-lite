@@ -650,6 +650,9 @@ class Woo_Checkout extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table li.table-header' => 'margin-bottom: {{SIZE}}{{UNIT}};',
 				],
+                'condition' => [
+                    'ea_woo_checkout_layout' => 'default',
+                ],
 			]
 		);
 
@@ -1379,7 +1382,7 @@ class Woo_Checkout extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'ea_woo_checkout_coupon_typo',
-				'selector' => '{{WRAPPER}} .ea-woo-checkout .woo-checkout-coupon',
+				'selector' => '{{WRAPPER}} .ea-woo-checkout .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-info,{{WRAPPER}} .ea-woo-checkout .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-info a.showcoupon',
 			]
 		);
 		$this->add_group_control(
