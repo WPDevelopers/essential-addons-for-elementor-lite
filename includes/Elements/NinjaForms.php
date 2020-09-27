@@ -14,8 +14,6 @@ use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 
-
-
 class NinjaForms extends Widget_Base {
     
     
