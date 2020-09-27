@@ -149,7 +149,6 @@ trait Enqueue
         // view mode
         if ($this->is_preview_mode()) {
             $widgets = get_transient($this->uid() . '_loaded_widgets');
-            // $assets = get_transient($this->uid() . '_loaded_assets');
             $editor_updated_at = get_transient('eael_editor_updated_at');
             $post_updated_at = get_transient($this->uid() . '_updated_at');
             
