@@ -362,23 +362,6 @@ class Woo_Product_Compare extends Widget_Base {
 	}
 
 	public function init_style_table_controls() {
-		$wrap           = "{{WRAPPER}} .eael-wcpc-wrapper";
-		$tbl            = "{$wrap} table";
-		$img_class      = "{$tbl} tr.image td";
-		$h_col          = "{$tbl} tr th:not(.first-th)";
-		$second_row     = "{$tbl} tr:nth-child(2) th, {$tbl} tr:nth-child(2) td";
-		$second_row_th  = "{$tbl} tr:nth-child(2) th";
-		$second_row_td  = "{$tbl} tr:nth-child(2) td";
-		$btn            = "{$tbl} a.button";
-		$col1_btn       = "{$tbl} td.col_0 a.button";
-		$col2_btn       = "{$tbl} td.col_1 a.button";
-		$col3_btn       = "{$tbl} td.col_2 a.button";
-		$col1_btn_hover = "{$tbl} td.col_0 a.button:hover";
-		$col2_btn_hover = "{$tbl} td.col_1 a.button:hover";
-		$col3_btn_hover = "{$tbl} td.col_2 a.button:hover";
-		$col1_img_bg    = "{$tbl} tr.image td.col_0";
-		$col2_img_bg    = "{$tbl} tr.image td.col_1";
-		$col3_img_bg    = "{$tbl} tr.image td.col_2";
 		$this->start_controls_section( 'section_style_table', [
 			'label' => __( 'Table Style', 'essential-addons-for-elementor-lite' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
@@ -387,6 +370,62 @@ class Woo_Product_Compare extends Widget_Base {
 			'label' => __( 'Style Content Column Separately', 'essential-addons-for-elementor-lite' ),
 			'type'  => Controls_Manager::SWITCHER,
 		] );
+		$this->init_style_table_common_style();
+		$this->init_style_header_column_style();
+		foreach ( range( 0, 2) as $column ) {
+			$this->init_style_product_column_style( $column );
+		}
+		$this->end_controls_section();
+	}
+
+	protected function init_style_table_common_style() {
+		$wrap           = "{{WRAPPER}} .eael-wcpc-wrapper";
+		$tbl            = "{$wrap} table";
+		$img_class      = "{$tbl} tr.image td";
+		$second_row     = "{$tbl} tr:nth-child(2) th, {$tbl} tr:nth-child(2) td";
+		$second_row_th  = "{$tbl} tr:nth-child(2) th";
+		$second_row_td  = "{$tbl} tr:nth-child(2) td";
+		$btn            = "{$tbl} a.button";
+		$this->add_control( 'table_gen_heading', [
+			'label'     => __( 'Common Style', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
+		] );
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'      => "image_bg",
+			'label'     => __( 'Image Background', 'essential-addons-for-elementor-lite' ),
+			'types'     => [
+				'classic',
+				'gradient',
+			],
+			'selector'  => $img_class,
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
+		] );
+		$this->add_control( 'btn_color', [
+			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $btn => 'color:{{VALUE}}' ],
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
+		] );
+		$this->add_control( 'btn_bg_color', [
+			'label'     => __( 'Button Background Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $btn => 'background:{{VALUE}}' ],
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
+		] );
+
+	}
+
+	protected function init_style_header_column_style() {
+		$h_col          = "{{WRAPPER}} .eael-wcpc-wrapper table tr th:not(.first-th)";
 		$this->add_control( 'h_col_style_po_toggle', [
 			'label'        => __( 'Header Column Style', 'essential-addons-for-elementor-lite' ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
@@ -407,7 +446,7 @@ class Woo_Product_Compare extends Widget_Base {
 			'range'      => [
 				'px'  => [
 					'min'  => 0,
-					'max'  => 1000,
+					'max'  => 550,
 					'step' => 5,
 				],
 				'rem' => [
@@ -472,56 +511,11 @@ class Woo_Product_Compare extends Widget_Base {
 			'condition' => [ 'h_col_style_po_toggle' => 'yes', ],
 		] );
 
-		// Column 1 style
-
-		foreach ( range( 0, 2) as $column ) {
-			$this->init_style_column_style( $column );
-		}
-
-		// combined column styling
-		$this->add_control( 'table_gen_heading', [
-			'label'     => __( 'Common Style', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::HEADING,
-			'condition' => [
-				'separate_col_style!' => 'yes',
-			],
-		] );
-		$this->add_group_control( Group_Control_Background::get_type(), [
-			'name'      => "image_bg",
-			'label'     => __( 'Image Background', 'essential-addons-for-elementor-lite' ),
-			'types'     => [
-				'classic',
-				'gradient',
-			],
-			'selector'  => $img_class,
-			'condition' => [
-				'separate_col_style!' => 'yes',
-			],
-		] );
-		$this->add_control( 'btn_color', [
-			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ $btn => 'color:{{VALUE}}' ],
-			'condition' => [
-				'separate_col_style!' => 'yes',
-			],
-		] );
-		$this->add_control( 'btn_bg_color', [
-			'label'     => __( 'Button Background Color', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ $btn => 'background:{{VALUE}}' ],
-			'condition' => [
-				'separate_col_style!' => 'yes',
-			],
-		] );
-
-
-		$this->end_controls_section();
 	}
-
-	protected function init_style_column_style( $column_number ) {
+	protected function init_style_product_column_style( $column_number ) {
 
 		$tbl          = "{{WRAPPER}} .eael-wcpc-wrapper table";
+		$column_class          = "{$tbl} td.col_{$column_number}";
 		$btn          = "{$tbl} td.col_{$column_number} a.button";
 		$btn_hover    = "{$tbl} td.col_{$column_number} a.button:hover";
 		$img_bg       = "{$tbl} tr.image td.col_{$column_number}";
@@ -538,6 +532,48 @@ class Woo_Product_Compare extends Widget_Base {
 			],
 		] );
 		$this->start_popover();
+		$this->add_responsive_control( "{$pfx}_width", [
+			'label'      => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px'  => [
+					'min'  => 0,
+					'max'  => 550,
+					'step' => 5,
+				],
+				'rem' => [
+					'min'  => 0,
+					'max'  => 10,
+					'step' => .5,
+				],
+				'%'   => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'selectors'  => [
+				$column_class => 'width: {{SIZE}}{{UNIT}};',
+			],
+			'condition' => [ "{$pfx}_style_po_toggle" => 'yes', ],
+		] );
+		$this->add_responsive_control( "{$pfx}_padding", [
+			'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				$column_class => $this->apply_dim( 'padding' ),
+			],
+			'condition' => [ "{$pfx}_style_po_toggle" => 'yes', ],
+		] );
 		$this->add_control( "{$pfx}_clr_heading", [
 			'label'     => __( 'Colors', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
@@ -573,8 +609,20 @@ class Woo_Product_Compare extends Widget_Base {
 				"{$pfx}_style_po_toggle" => 'yes',
 			],
 		] );
-		$this->end_popover();
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'      => "{$pfx}_border",
+			'selector'  => $column_class,
+			'condition' => [
+				"{$pfx}_style_po_toggle" => 'yes',
+			],
+		] );
 
+		$this->end_popover();
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'      => "{$pfx}_typo",
+			'label'        => sprintf( __( 'Product %d Typography', 'essential-addons-for-elementor-lite' ), $title_number ),
+			'selector'  => $column_class,
+		] );
 	}
 
 	protected function render() {
