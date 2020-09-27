@@ -38,6 +38,11 @@ var WooCheckout = function ($scope, $) {
 	$("form.checkout_coupon").submit(function (event) {
 		render_order_review_template();
 	});
+	var wooCheckout = $(".ea-woo-checkout");
+	wooCheckout.on( 'change', 'select.shipping_method, input[name^="shipping_method"], #ship-to-different-address input, .update_totals_on_change select, .update_totals_on_change input[type="radio"], .update_totals_on_change input[type="checkbox"]', function (){
+		$( document.body ).trigger( 'update_checkout' );
+		render_order_review_template();
+	} ); // eslint-disable-line max-len
 };
 
 jQuery(window).on("elementor/frontend/init", function () {
