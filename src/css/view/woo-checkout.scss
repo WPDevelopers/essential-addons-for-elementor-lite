@@ -741,5 +741,17 @@ $base-font-size: 14px;
 			}
 		}
 	}
+
+
+}
+.theme-twentyseventeen {
+	.ea-woo-checkout {
+		#ship-to-different-address label span {
+			position: relative;
+			display: block;
+			text-align: right;
+			padding-right: 45px;
+		}
+	}
 }
 
