@@ -362,7 +362,7 @@ class Woo_Product_Compare extends Widget_Base {
 
 	public function init_style_table_controls() {
 		$img_class   = '{{WRAPPER}} .eael-wcpc-wrapper.custom table tr.image td';
-		$col3_btn    = '{{WRAPPER}} .eael-wcpc-wrapper.custom table a.button';
+		$btn    = '{{WRAPPER}} .eael-wcpc-wrapper.custom table a.button';
 		$col1_btn    = '{{WRAPPER}} .eael-wcpc-wrapper.custom table td.col_0 a.button';
 		$col2_btn    = '{{WRAPPER}} .eael-wcpc-wrapper.custom table td.col_1 a.button';
 		$col3_btn    = '{{WRAPPER}} .eael-wcpc-wrapper.custom table td.col_2 a.button';
@@ -542,6 +542,27 @@ class Woo_Product_Compare extends Widget_Base {
 			'condition' => [
 				'separate_col_style!' => 'yes',
 			],
+		] );
+		$this->add_control( 'btn_color', [
+			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $btn => 'color:{{VALUE}}' ],
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
+		] );
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'      => "btn_bg",
+			'label'     => __( 'Button Background', 'essential-addons-for-elementor-lite' ),
+			'types'     => [
+				'classic',
+				'gradient',
+			],
+			'selector'  => $btn,
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
+			'exclude'   => [ 'image' ],
 		] );
 		$this->end_controls_section();
 	}
