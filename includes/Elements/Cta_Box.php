@@ -14,9 +14,11 @@ use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
 
+use \Essential_Addons_Elementor\Classes\Helper;
+
 class Cta_Box extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
+    
 
     public function get_name()
     {
@@ -216,7 +218,7 @@ class Cta_Box extends Widget_Base
             [
                 'label' => __('Choose Template', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'options' => $this->eael_get_page_templates(),
+                'options' => Helper::get_elementor_templates(),
                 'condition' => [
                     'eael_cta_title_content_type' => 'template',
                 ],
@@ -340,7 +342,7 @@ class Cta_Box extends Widget_Base
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         '1' => [
-                            'title' => __('', 'essential-addons-for-elementor-lite'),
+                            'title' => '',
                             'icon' => 'fa fa-unlock-alt',
                         ],
                     ],
@@ -690,8 +692,8 @@ class Cta_Box extends Widget_Base
             ]
         );
 
-        
-        
+
+
         $this->add_control(
             'eael_cta_btn_normal_bg_color',
             [
@@ -1048,7 +1050,7 @@ class Cta_Box extends Widget_Base
         // Button
         $target_primary     = $settings['eael_cta_btn_link']['is_external'] ? 'target="_blank"' : '';
         $nofollow_primary   = $settings['eael_cta_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
-        
+
 
         if ('cta-bg-color' == $settings['eael_cta_color_type']) {
             $cta_class = 'bg-lite';
@@ -1105,20 +1107,20 @@ class Cta_Box extends Widget_Base
     ?>
 	<?php if ('cta-basic' == $settings['eael_cta_type']): ?>
 	<div class="eael-call-to-action <?php echo esc_attr($cta_class); ?>">
-        <?php 
+        <?php
             print $headingMarkup;
             print $contentMarkup;
-            print $buttonMarkup; 
+            print $buttonMarkup;
         ?>
 	</div>
 	<?php endif;?>
 	<?php if ('cta-flex' == $settings['eael_cta_type']): ?>
 	<div class="eael-call-to-action cta-flex <?php echo esc_attr($cta_class); ?>">
 	    <div class="content">
-            <?php 
+            <?php
                 print $headingMarkup;
                 print $contentMarkup;
-            ?>            
+            ?>
 	    </div>
 	    <div class="action">
 	        <?php print $buttonMarkup; ?>
@@ -1139,10 +1141,10 @@ class Cta_Box extends Widget_Base
 			<?php }?>
 	    </div>
 	    <div class="content">
-            <?php 
+            <?php
                 print $headingMarkup;
                 print $contentMarkup;
-            ?> 
+            ?>
 	    </div>
 	    <div class="action">
             <?php print $buttonMarkup; ?>

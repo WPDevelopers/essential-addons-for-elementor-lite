@@ -1,4 +1,5 @@
 <?php
+
 namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
@@ -6,15 +7,15 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Widget_Base;
 
 class Twitter_Feed extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
+    use \Essential_Addons_Elementor\Traits\Twitter_Feed;
 
     public function get_name()
     {
@@ -35,8 +36,9 @@ class Twitter_Feed extends Widget_Base
     {
         return ['essential-addons-elementor'];
     }
-    
-    public function get_keywords() {
+
+    public function get_keywords()
+    {
         return [
             'twitter',
             'ea twitter feed',
@@ -48,11 +50,12 @@ class Twitter_Feed extends Widget_Base
             'tweet feed',
             'tweet embed',
             'ea',
-            'essential addons'
+            'essential addons',
         ];
     }
 
-    public function get_custom_help_url() {
+    public function get_custom_help_url()
+    {
         return 'https://essential-addons.com/elementor/docs/twitter-feed/';
     }
 
@@ -67,13 +70,12 @@ class Twitter_Feed extends Widget_Base
     public function get_script_depends()
     {
         return [
-            'font-awesome-4-shim'
+            'font-awesome-4-shim',
         ];
     }
 
     protected function _register_controls()
     {
-
         $this->start_controls_section(
             'eael_section_twitter_feed_acc_settings',
             [
@@ -89,7 +91,6 @@ class Twitter_Feed extends Widget_Base
                 'default' => '@wpdevteam',
                 'label_block' => false,
                 'description' => esc_html__('Use @ sign with your account name.', 'essential-addons-for-elementor-lite'),
-
             ]
         );
 
@@ -100,7 +101,6 @@ class Twitter_Feed extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'label_block' => false,
                 'description' => esc_html__('Remove # sign from your hashtag name.', 'essential-addons-for-elementor-lite'),
-
             ]
         );
 
@@ -238,23 +238,6 @@ class Twitter_Feed extends Widget_Base
         );
 
         $this->add_control(
-            'eael_twitter_feed_avatar_style',
-            [
-                'label' => __('Avatar Style', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'options' => [
-                    'circle' => 'Circle',
-                    'square' => 'Square',
-                ],
-                'default' => 'circle',
-                'prefix_class' => 'eael-social-feed-avatar-',
-                'condition' => [
-                    'eael_twitter_feed_show_avatar' => 'true',
-                ],
-            ]
-        );
-
-        $this->add_control(
             'eael_twitter_feed_show_date',
             [
                 'label' => esc_html__('Show Date', 'essential-addons-for-elementor-lite'),
@@ -307,7 +290,7 @@ class Twitter_Feed extends Widget_Base
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         '1' => [
-                            'title' => __('', 'essential-addons-for-elementor-lite'),
+                            'title' => '',
                             'icon' => 'fa fa-unlock-alt',
                         ],
                     ],
@@ -333,6 +316,73 @@ class Twitter_Feed extends Widget_Base
         );
 
         $this->add_control(
+            'eael_twitter_feed_card_choose_style',
+            [
+                'label' => __('Choose Style', 'essential-addons-for-elementor-lite'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => '',
+                'options' => [
+                    '' => __('Default Style', 'essential-addons-for-elementor-lite'),
+                    'two' => __('Style Two (right icon)', 'essential-addons-for-elementor-lite'),
+                    'three' => __('Style Three', 'essential-addons-for-elementor-lite'),
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_twitter_feed_card_left_icon_alignment',
+            [
+                'label' => __('Left Icon Alignment', 'essential-addons-for-elementor-lite'),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'flex-start' => [
+                        'title' => __('Top', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-align-left',
+                    ],
+                    'center' => [
+                        'title' => __('Middle', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-align-center',
+                    ],
+                    'flex-end' => [
+                        'title' => __('Bottom', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-align-right',
+                    ],
+                ],
+                'default' => 'center',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-entry-iconwrap' => 'align-self: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_twitter_feed_card_choose_style' => 'three',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_twitter_feed_card_is_gradient_bg',
+            [
+                'label' => __('Use gradient Background!', 'essential-addons-for-elementor-lite'),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'eael_twitter_feed_card_gradient_bg',
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .eael-twitter-feed-item-inner',
+                'condition' => [
+                    'eael_twitter_feed_card_is_gradient_bg' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'eael_twitter_feed_card_bg_color',
             [
                 'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
@@ -340,6 +390,24 @@ class Twitter_Feed extends Widget_Base
                 'default' => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-twitter-feed-item-inner' => 'background-color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_twitter_feed_card_is_gradient_bg' => '',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_twitter_feed_card_inner_padding',
+            [
+                'label' => esc_html__('Main Card Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-item-inner' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_twitter_feed_card_choose_style' => 'three',
                 ],
             ]
         );
@@ -353,6 +421,9 @@ class Twitter_Feed extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-twitter-feed-item-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} 0 {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} .eael-twitter-feed-item-content' => 'padding: 0 {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_twitter_feed_card_choose_style!' => 'three',
                 ],
             ]
         );
@@ -387,6 +458,185 @@ class Twitter_Feed extends Widget_Base
             [
                 'name' => 'eael_twitter_feed_card_shadow',
                 'selector' => '{{WRAPPER}} .eael-twitter-feed-item-inner',
+            ]
+        );
+        $this->add_control(
+            'eael_twitter_feed_card_left_icon_heading',
+            [
+                'label' => __('Left Icon Area', 'essential-addons-for-elementor-lite'),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'after',
+                'condition' => [
+                    'eael_twitter_feed_card_choose_style' => 'three',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'eael_twitter_feed_card_item_left_padding',
+            [
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-item-style-three .eael-twitter-feed-item-inner .eael-twitter-feed-entry-iconwrap' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'default' => [
+                    'top' => '10',
+                    'right' => '10',
+                    'bottom' => '10',
+                    'left' => '10',
+                    'unit' => 'px',
+                    'isLinked' => true,
+                ],
+                'condition' => [
+                    'eael_twitter_feed_card_choose_style' => 'three',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_twitter_feed_card_right_content_heading',
+            [
+                'label' => __('Right Content Area', 'essential-addons-for-elementor-lite'),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'after',
+                'condition' => [
+                    'eael_twitter_feed_card_choose_style' => 'three',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'eael_twitter_feed_card_item_right_padding',
+            [
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-item-style-three .eael-twitter-feed-item-inner .eael-twitter-feed-entry-contentwrap' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_twitter_feed_card_choose_style' => 'three',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'eael_twitter_feed_card_item_right_border',
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-twitter-feed-item-style-three .eael-twitter-feed-item-inner .eael-twitter-feed-entry-contentwrap',
+                'condition' => [
+                    'eael_twitter_feed_card_choose_style' => 'three',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_twitter_feed_card_item_right_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-item-style-three .eael-twitter-feed-item-inner .eael-twitter-feed-entry-contentwrap' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_twitter_feed_card_choose_style' => 'three',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /**
+         * -------------------------------------------
+         * Tab Style (Card Hover Style)
+         * -------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_section_twitter_feed_card_hover_settings',
+            [
+                'label' => esc_html__('Card Hover Style', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+        $this->add_control(
+            'eael_twitter_feed_card_hover_title_color',
+            [
+                'label' => __('Title Color', 'essential-addons-for-elementor-lite'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-item-inner:hover .eael-twitter-feed-item-author' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_twitter_feed_card_hover_content_color',
+            [
+                'label' => __('Content Color', 'essential-addons-for-elementor-lite'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-item-inner:hover .eael-twitter-feed-item-content p' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_twitter_feed_card_hover_link_color',
+            [
+                'label' => __('Link Color', 'essential-addons-for-elementor-lite'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}}  .eael-twitter-feed-item-inner:hover .eael-twitter-feed-item-content a' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_twitter_feed_card_hover_date_color',
+            [
+                'label' => __('Date Color', 'essential-addons-for-elementor-lite'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}}  .eael-twitter-feed-item-inner:hover .eael-twitter-feed-item-header .eael-twitter-feed-item-date' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_twitter_feed_card_hover_icon_color',
+            [
+                'label' => __('Icon Color', 'essential-addons-for-elementor-lite'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}}  .eael-twitter-feed-item-inner:hover .eael-twitter-feed-item-icon' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_twitter_feed_card_border_hover_color',
+            [
+                'label' => __('Border Color', 'essential-addons-for-elementor-lite'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}}  .eael-twitter-feed-item-inner:hover' => 'border-color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'eael_twitter_feed_card_hover_bg',
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .eael-twitter-feed-item-inner:hover',
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'eael_twitter_feed_card_hover_shadow',
+                'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-twitter-feed-item-inner:hover',
             ]
         );
 
@@ -505,6 +755,159 @@ class Twitter_Feed extends Widget_Base
         );
 
         $this->end_controls_section();
+
+        /**
+         * -------------------------------------------
+         * Tab Style (avatar style)
+         * -------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_section_twitter_feed_avatar_style',
+            [
+                'label' => esc_html__('Avatar', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_twitter_feed_show_avatar' => 'true',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_twitter_feed_avatar_width',
+            [
+                'label' => __('Width', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 5,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 38,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-item .eael-twitter-feed-item-avatar img' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_twitter_feed_avatar_height',
+            [
+                'label' => __('Height', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 5,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-item .eael-twitter-feed-item-avatar img' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_twitter_feed_avatar_style',
+            [
+                'label' => __('Avatar Style', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'circle' => 'Circle',
+                    'square' => 'Square',
+                ],
+                'default' => 'circle',
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'eael_twitter_feed_avatar_border',
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-twitter-feed-item .eael-twitter-feed-item-avatar img',
+            ]
+        );
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'eael_twitter_feed_avatar_shadow',
+                'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-twitter-feed-item .eael-twitter-feed-item-avatar img',
+            ]
+        );
+
+        $this->end_controls_section();
+        /**
+         * -------------------------------------------
+         * Tab Style (Icon style)
+         * -------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_section_twitter_feed_icon_style',
+            [
+                'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_twitter_feed_show_icon' => 'true',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_section_twitter_feed_icon_size',
+            [
+                'label' => __('Font Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 5,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-item .eael-twitter-feed-item-icon' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_section_twitter_feed_icon_color',
+            [
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'scheme' => [
+                    'type' => \Elementor\Scheme_Color::get_type(),
+                    'value' => \Elementor\Scheme_Color::COLOR_1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-item .eael-twitter-feed-item-icon' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
     protected function render()
@@ -514,7 +917,7 @@ class Twitter_Feed extends Widget_Base
         echo '<div class="eael-twitter-feed eael-twitter-feed-' . $this->get_id() . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type'] . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type_col_type'] . ' clearfix" data-gutter="' . $settings['eael_twitter_feed_column_spacing']['size'] . '">
 			' . $this->twitter_feed_render_items($this->get_id(), $settings) . '
         </div>';
-        
+
         echo '<style>
             .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-2 .eael-twitter-feed-item {
                 width: calc(50% - ' . ceil($settings['eael_twitter_feed_column_spacing']['size'] / 2) . 'px);
@@ -525,7 +928,7 @@ class Twitter_Feed extends Widget_Base
             .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-4 .eael-twitter-feed-item {
                 width: calc(25% - ' . ceil($settings['eael_twitter_feed_column_spacing']['size'] * 3 / 4) . 'px);
             }
-            
+
             .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-col-2 .eael-twitter-feed-item,
             .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-col-3 .eael-twitter-feed-item,
             .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-col-4 .eael-twitter-feed-item {
@@ -553,10 +956,10 @@ class Twitter_Feed extends Widget_Base
                                 gutter: $gutter
                             }
                         };
-                        
+
                         // init isotope
                         $twitter_feed_gallery = $(".eael-twitter-feed", $scope).isotope($settings);
-                    
+
                         // layout gal, while images are loading
                         $twitter_feed_gallery.imagesLoaded().progress(function() {
                             $twitter_feed_gallery.isotope("layout");

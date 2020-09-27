@@ -67,7 +67,7 @@ trait Core
             $links[] = sprintf('<a href="https://essential-addons.com/elementor/docs/?utm_medium=admin&utm_source=wp.org&utm_term=ea" target="_blank">' . __('Docs & FAQs', 'essential-addons-for-elementor-lite') . '</a>');
 
             // video tutorials
-            $links[] = sprintf('<a href="https://www.youtube.com/channel/UCOjzLEdsnpnFVkm1JKFurPA?utm_medium=admin&utm_source=wp.org&utm_term=ea" target="_blank">' . __('Video Tutorials','essential-addons-for-elementor-lite') . '</a>');
+            $links[] = sprintf('<a href="https://www.youtube.com/channel/UCOjzLEdsnpnFVkm1JKFurPA?utm_medium=admin&utm_source=wp.org&utm_term=ea" target="_blank">' . __('Video Tutorials', 'essential-addons-for-elementor-lite') . '</a>');
         }
 
         return $links;
@@ -104,8 +104,8 @@ trait Core
 
         if ($this->is_plugin_installed($elementor)) {
             $activation_url = wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $elementor . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $elementor);
-            
-            $message = sprintf( __('%1$sEssential Addons for Elementor%2$s requires %1$sElementor%2$s plugin to be active. Please activate Elementor to continue.', 'essential-addons-for-elementor-lite'), "<strong>", "</strong>");
+
+            $message = sprintf(__('%1$sEssential Addons for Elementor%2$s requires %1$sElementor%2$s plugin to be active. Please activate Elementor to continue.', 'essential-addons-for-elementor-lite'), "<strong>", "</strong>");
 
             $button_text = __('Activate Elementor', 'essential-addons-for-elementor-lite');
         } else {
@@ -262,12 +262,9 @@ trait Core
         }
 
         // update flag
-        set_transient('eael_requires_update', true);
+        set_transient('eael_editor_updated_at', strtotime('now'));
 
         // update options
         update_option('eael_global_settings', $global_settings);
-
-        // update page elements
-        update_post_meta($post_id, 'eael_transient_elements', []);
     }
 }

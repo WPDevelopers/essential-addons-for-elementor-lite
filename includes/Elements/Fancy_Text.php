@@ -6,11 +6,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Scheme_Typography as Scheme_Typography;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Scheme_Typography;
+use \Elementor\Widget_Base;
 use \Elementor\Repeater;
 
 class Fancy_Text extends Widget_Base {
@@ -31,7 +31,7 @@ class Fancy_Text extends Widget_Base {
     public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
-    
+
     public function get_keywords() {
         return [
 			'ea fancy text',
@@ -128,7 +128,7 @@ class Fancy_Text extends Widget_Base {
   				'label' => esc_html__( 'Fancy Text Settings', 'essential-addons-for-elementor-lite')
   			]
 		);
-		
+
 		$style_options = apply_filters(
 			'fancy_text_style_types',
 			[
@@ -139,7 +139,7 @@ class Fancy_Text extends Widget_Base {
 				'conditions'	=> ['style-2']
 			]
 		);
-		
+
   		$this->add_control(
 			'eael_fancy_text_style',
 			[
@@ -258,7 +258,7 @@ class Fancy_Text extends Widget_Base {
 
 		$this->end_controls_section();
 
-       
+
 		if(!apply_filters('eael/pro_enabled', false)) {
 			$this->start_controls_section(
 				'eael_section_pro',
@@ -266,7 +266,7 @@ class Fancy_Text extends Widget_Base {
 					'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite')
 				]
 			);
-	
+
 			$this->add_control(
 				'eael_control_get_pro',
 				[
@@ -274,7 +274,7 @@ class Fancy_Text extends Widget_Base {
 					'type' => Controls_Manager::CHOOSE,
 					'options' => [
 						'1' => [
-							'title' => __( '', 'essential-addons-for-elementor-lite'),
+							'title' => '',
 							'icon' => 'fa fa-unlock-alt',
 						],
 					],
@@ -282,7 +282,7 @@ class Fancy_Text extends Widget_Base {
 					'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
 				]
 			);
-			
+
 			$this->end_controls_section();
 		}
 

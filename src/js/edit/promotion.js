@@ -10,7 +10,7 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 
 					if (icon.classList.toString().indexOf("eaicon") >= 0) {
 						dialog.querySelector(".dialog-buttons-action").style.display = "none";
-
+						e.stopImmediatePropagation();
 						if (dialog.querySelector(".ea-dialog-buttons-action") === null) {
 							var button = document.createElement("a");
 							var buttonText = document.createTextNode("Upgrade Essential Addons");
