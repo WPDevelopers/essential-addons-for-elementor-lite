@@ -179,6 +179,9 @@ trait Enqueue
                 );
             }
 
+            // run hook before enqueue scripts
+            do_action('eael/before_enqueue_scripts', $widgets);
+
             // js
             if (get_option('eael_js_print_method') == 'internal') {
                 $this->js_strings = $this->generate_strings($widgets, 'edit', 'js');
