@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) {
 
 use \Elementor\Plugin;
 use \Essential_Addons_Elementor\Classes\Helper;
+use \ReflectionClass;
 
 trait Generator
 {
