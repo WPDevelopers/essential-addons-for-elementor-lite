@@ -473,152 +473,19 @@ class Woo_Product_Compare extends Widget_Base {
 		] );
 
 		// Column 1 style
-		$this->add_control( 'col1_style_po_toggle', [
-			'label'        => __( 'Product Column 1', 'essential-addons-for-elementor-lite' ),
-			'type'         => Controls_Manager::POPOVER_TOGGLE,
-			'label_off'    => __( 'Controls', 'essential-addons-for-elementor-lite' ),
-			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
-			'return_value' => 'yes',
-			'condition'    => [
-				'separate_col_style' => 'yes',
-			],
-		] );
-		$this->start_popover();
-		$this->add_control( 'col1_clr_heading', [
-			'label'     => __( 'Colors', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::HEADING,
-			'condition' => [ 'col1_style_po_toggle' => 'yes', ],
-		] );
-		$this->add_group_control( Group_Control_Background::get_type(), [
-			'name'      => "col1_img_bg",
-			'label'     => __( 'Image Background', 'essential-addons-for-elementor-lite' ),
-			'types'     => [
-				'classic',
-				'gradient',
-			],
-			'selector'  => $col1_img_bg,
-			'condition' => [
-				'col1_style_po_toggle' => 'yes',
-			],
-			'exclude'   => [ 'image' ],
-		] );
-		$this->add_control( 'col1_btn_color', [
-			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ $col1_btn => 'color:{{VALUE}}' ],
-			'condition' => [
-				'col1_style_po_toggle' => 'yes',
-			],
-			'separator' => 'before',
-		] );
-		$this->add_control( 'col1_btn_bg', [
-			'label'     => __( 'Button Background', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ $col1_btn => 'background-color:{{VALUE}}' ],
-			'condition' => [
-				'col1_style_po_toggle' => 'yes',
-			],
-		] );
 
-		$this->end_popover();
-
-		// Column 2 style
-		$this->add_control( 'col2_style_po_toggle', [
-			'label'        => __( 'Product Column 2', 'essential-addons-for-elementor-lite' ),
-			'type'         => Controls_Manager::POPOVER_TOGGLE,
-			'label_off'    => __( 'Controls', 'essential-addons-for-elementor-lite' ),
-			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
-			'return_value' => 'yes',
-			'condition'    => [
-				'separate_col_style' => 'yes',
-			],
-		] );
-		$this->start_popover();
-		$this->add_group_control( Group_Control_Background::get_type(), [
-			'name'      => "col2_img_bg",
-			'label'     => __( 'Image Background', 'essential-addons-for-elementor-lite' ),
-			'types'     => [
-				'classic',
-				'gradient',
-			],
-			'selector'  => $col2_img_bg,
-			'condition' => [
-				'col2_style_po_toggle' => 'yes',
-			],
-			'exclude'   => [ 'image' ],
-		] );
-		$this->add_control( 'col2_btn_color', [
-			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ $col2_btn => 'color:{{VALUE}}' ],
-			'condition' => [
-				'col2_style_po_toggle' => 'yes',
-			],
-		] );
-		$this->add_group_control( Group_Control_Background::get_type(), [
-			'name'      => "col2_btn_bg",
-			'label'     => __( 'Button Background', 'essential-addons-for-elementor-lite' ),
-			'types'     => [
-				'classic',
-				'gradient',
-			],
-			'selector'  => $col2_btn,
-			'condition' => [
-				'col2_style_po_toggle' => 'yes',
-			],
-			'exclude'   => [ 'image' ],
-		] );
-		$this->end_popover();
-
-		// Column 3 style
-		$this->add_control( 'col3_style_po_toggle', [
-			'label'        => __( 'Product Column 3', 'essential-addons-for-elementor-lite' ),
-			'type'         => Controls_Manager::POPOVER_TOGGLE,
-			'label_off'    => __( 'Controls', 'essential-addons-for-elementor-lite' ),
-			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
-			'return_value' => 'yes',
-			'condition'    => [
-				'separate_col_style' => 'yes',
-			],
-		] );
-		$this->start_popover();
-		$this->add_group_control( Group_Control_Background::get_type(), [
-			'name'      => "col3_img_bg",
-			'label'     => __( 'Image Background', 'essential-addons-for-elementor-lite' ),
-			'types'     => [
-				'classic',
-				'gradient',
-			],
-			'selector'  => $col3_img_bg,
-			'condition' => [
-				'col3_style_po_toggle' => 'yes',
-			],
-			'exclude'   => [ 'image' ],
-		] );
-		$this->add_control( 'col3_btn_color', [
-			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ $col3_btn => 'color:{{VALUE}}' ],
-			'condition' => [
-				'col3_style_po_toggle' => 'yes',
-			],
-		] );
-		$this->add_group_control( Group_Control_Background::get_type(), [
-			'name'      => "col3_btn_bg",
-			'label'     => __( 'Button Background', 'essential-addons-for-elementor-lite' ),
-			'types'     => [
-				'classic',
-				'gradient',
-			],
-			'selector'  => $col3_btn,
-			'condition' => [
-				'col3_style_po_toggle' => 'yes',
-			],
-			'exclude'   => [ 'image' ],
-		] );
-		$this->end_popover();
+		foreach ( range( 0, 2) as $column ) {
+			$this->init_style_column_style( $column );
+		}
 
 		// combined column styling
+		$this->add_control( 'table_gen_heading', [
+			'label'     => __( 'Common Style', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
+		] );
 		$this->add_group_control( Group_Control_Background::get_type(), [
 			'name'      => "image_bg",
 			'label'     => __( 'Image Background', 'essential-addons-for-elementor-lite' ),
@@ -650,6 +517,64 @@ class Woo_Product_Compare extends Widget_Base {
 
 
 		$this->end_controls_section();
+	}
+
+	protected function init_style_column_style( $column_number ) {
+
+		$tbl          = "{{WRAPPER}} .eael-wcpc-wrapper table";
+		$btn          = "{$tbl} td.col_{$column_number} a.button";
+		$btn_hover    = "{$tbl} td.col_{$column_number} a.button:hover";
+		$img_bg       = "{$tbl} tr.image td.col_{$column_number}";
+		$title_number = 1 + $column_number;
+		$pfx          = "col{$column_number}";
+		$this->add_control( "{$pfx}_style_po_toggle", [
+			'label'        => sprintf( __( 'Product Column %d', 'essential-addons-for-elementor-lite' ), $title_number ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Controls', 'essential-addons-for-elementor-lite' ),
+			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'condition'    => [
+				'separate_col_style' => 'yes',
+			],
+		] );
+		$this->start_popover();
+		$this->add_control( "{$pfx}_clr_heading", [
+			'label'     => __( 'Colors', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'condition' => [ "{$pfx}_style_po_toggle" => 'yes', ],
+		] );
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'      => "{$pfx}_img_bg",
+			'label'     => __( 'Image Background', 'essential-addons-for-elementor-lite' ),
+			'types'     => [
+				'classic',
+				'gradient',
+			],
+			'selector'  => $img_bg,
+			'condition' => [
+				"{$pfx}_style_po_toggle" => 'yes',
+			],
+			'exclude'   => [ 'image' ],
+		] );
+		$this->add_control( "{$pfx}_btn_color", [
+			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $btn => 'color:{{VALUE}}' ],
+			'condition' => [
+				"{$pfx}_style_po_toggle" => 'yes',
+			],
+			'separator' => 'before',
+		] );
+		$this->add_control( "{$pfx}_btn_bg", [
+			'label'     => __( 'Button Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $btn => 'background-color:{{VALUE}}' ],
+			'condition' => [
+				"{$pfx}_style_po_toggle" => 'yes',
+			],
+		] );
+		$this->end_popover();
+
 	}
 
 	protected function render() {
