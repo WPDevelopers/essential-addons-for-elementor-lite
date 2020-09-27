@@ -9,19 +9,19 @@ if (!defined('ABSPATH')) {
 use Essential_Addons_Elementor\Classes\WPDeveloper_Dashboard_Widget;
 use Essential_Addons_Elementor\Classes\WPML\Eael_WPML;
 use Essential_Addons_Elementor\Traits\Admin;
+use Essential_Addons_Elementor\Traits\Controls;
 use Essential_Addons_Elementor\Traits\Core;
 use Essential_Addons_Elementor\Traits\Elements;
 use Essential_Addons_Elementor\Traits\Enqueue;
 use Essential_Addons_Elementor\Traits\Generator;
-use Essential_Addons_Elementor\Traits\Helper;
 use Essential_Addons_Elementor\Traits\Library;
 use Essential_Addons_Elementor\Traits\Login_Registration;
-use Essential_Addons_Elementor\Traits\Shared;
+use \Essential_Addons_Elementor\Traits\Facebook_Feed;
+use \Essential_Addons_Elementor\Traits\Helper;
 
 class Bootstrap
 {
     use Library;
-    use Shared;
     use Core;
     use Helper;
     use Generator;
@@ -30,6 +30,8 @@ class Bootstrap
     use Elements;
     use Eael_WPML;
     use Login_Registration;
+    use Controls;
+    use Facebook_Feed;
 
     // instance container
     private static $instance = null;
@@ -51,6 +53,9 @@ class Bootstrap
 
     // loaded widgets in a request
     public $loaded_widgets = [];
+    
+    // loaded extensions in a request
+    // public $loaded_extensions = [];
 
     // css strings, used for inline embed
     protected $css_strings;
@@ -108,20 +113,26 @@ class Bootstrap
         // Core
         add_action('init', [$this, 'i18n']);
         add_filter('eael/active_plugins', [$this, 'active_plugins'], 10, 1);
-        add_filter('wpml_elementor_widgets_to_translate', [$this, 'eael_translatable_widgets']);
+        add_filter('wpml_elementor_widgets_to_translate', [$this, 'translatable_widgets']);
         add_action('elementor/editor/after_save', array($this, 'save_global_values'), 10, 2);
 
         // Enqueue
         add_action('eael/before_enqueue_styles', array($this, 'before_enqueue_styles'));
+        add_action('elementor/editor/before_enqueue_scripts', array($this, 'lr_enqueue_scripts'));
+        add_action('wp_enqueue_scripts', array($this, 'lr_enqueue_scripts'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
-        add_action('elementor/css-file/post/enqueue', [$this, 'enqueue_template_scripts']);
         add_action('elementor/editor/before_enqueue_scripts', array($this, 'editor_enqueue_scripts'));
         add_action('wp_head', [$this, 'enqueue_inline_styles']);
         add_action('wp_footer', [$this, 'enqueue_inline_scripts']);
 
+        // Generator
+        add_action('elementor/css-file/post/enqueue', [$this, 'collect_loaded_templates']);
+        add_action('elementor/frontend/widget/before_render', [$this, 'collect_loaded_widgets']);
+        add_action('wp_print_footer_scripts', [$this, 'update_request_data']);
+
         // Ajax
-        add_action('wp_ajax_load_more', array($this, 'eael_load_more_ajax'));
-        add_action('wp_ajax_nopriv_load_more', array($this, 'eael_load_more_ajax'));
+        add_action('wp_ajax_load_more', array($this, 'ajax_load_more'));
+        add_action('wp_ajax_nopriv_load_more', array($this, 'ajax_load_more'));
 
         add_action('wp_ajax_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
         add_action('wp_ajax_nopriv_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
@@ -130,7 +141,7 @@ class Bootstrap
         add_action('wp_ajax_nopriv_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
 
         //handle typeform auth token
-        add_action('admin_post_nopriv_typeform_token_data', [$this, 'eael_typeform_auth_handle']);
+        add_action('admin_post_nopriv_typeform_token_data', [$this, 'typeform_auth_handle']);
 
         // Elements
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
@@ -138,25 +149,32 @@ class Bootstrap
         add_filter('elementor/editor/localize_settings', [$this, 'promote_pro_elements']);
         add_action('wp_footer', array($this, 'render_global_html'));
 
-        add_filter('eael/event-calendar/source', [$this, 'eael_event_calendar_source']);
-        add_action('eael/advanced-data-table/source/control', [$this, 'advanced_data_table_source_control']);
-        add_filter('eael/advanced-data-table/table_html/integration/ninja', [$this, 'advanced_data_table_ninja_integration'], 10, 1);
+        // Controls
+        add_action('eael/controls/query', [$this, 'query'], 10, 1);
+        add_action('eael/controls/betterdocs/query', [$this, 'betterdocs_query'], 10, 1);
+        add_action('eael/controls/layout', [$this, 'layout'], 10, 1);
+        add_action('eael/controls/terms_style', [$this, 'terms_style'], 10, 1);
+        add_action('eael/controls/read_more_button_style', [$this, 'read_more_button_style'], 10, 1);
+        add_action('eael/controls/load_more_button_style', [$this, 'load_more_button_style'], 10, 1);
+        add_action('eael/controls/custom_positioning', [$this, 'custom_positioning'], 10, 5);
+
+        add_filter('eael/controls/event-calendar/source', [$this, 'event_calendar_source']);
+        add_action('eael/controls/advanced-data-table/source', [$this, 'advanced_data_table_source']);
+        
         // Login | Register
         add_action( 'init', [ $this, 'login_or_register_user'] );
 	    add_filter( 'wp_new_user_notification_email', array( $this, 'new_user_notification_email' ), 10, 3 );
 	    add_filter( 'wp_new_user_notification_email_admin', array( $this, 'new_user_notification_email_admin' ), 10, 3 );
+        
         //rank math support
-        add_filter('rank_math/researches/toc_plugins', [$this, 'eael_toc_rank_math_support']);
+        add_filter('rank_math/researches/toc_plugins', [$this, 'toc_rank_math_support']);
 
         // Admin
         if (is_admin()) {
             // Admin
-            if ( ! $this->pro_enabled ) {
+            if (!$this->pro_enabled) {
                 $this->admin_notice();
             }
-
-            // dashboard feed
-            WPDeveloper_Dashboard_Widget::instance();
 
             add_action('admin_menu', array($this, 'admin_menu'));
             add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));

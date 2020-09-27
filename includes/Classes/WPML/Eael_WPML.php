@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
 
 trait Eael_WPML {
 
-    public function eael_translatable_widgets($widgets)
+    public function translatable_widgets($widgets)
     {
         $widgets['eael-adv-accordion'] = [
             'conditions' => ['widgetType' => 'eael-adv-accordion'],

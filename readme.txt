@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.5
 Requires PHP: 5.4
-Stable tag: 4.2.0
+Stable tag: 4.2.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -223,6 +223,34 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.2.4 - 13/09/2020 =
+- Fixed: get_elements_data on bool error
+- Fixed: PHP error notice for 'Search & Filter' option in EA Filterable Gallery
+- Fixed: Unable to format quiz field in EA Contact Form 7
+- Fixed: EA Sticky Video not working when it's used multiple times on a page
+- Fixed: Sale badge and Overlay issues with EA Product Grid
+- Improved: New Design and Style controls for EA Dual Color Heading
+- Improved: Styling controls for EA Product Grid
+- Few minor bugfix and improvements
+
+= 4.2.3 - 03/09/2020 =
+- Removed: Dashboard widget 
+- Fixed: EA Filterable Gallery | Showing Duplicate Images in Gallery View
+- Few minor bugfix and improvements
+
+= 4.2.2 - 27/08/2020 =
+- Fixed: Sorting not working when Pagination is disabled in EA Advanced Data Table
+- Added: Styling controls for reCAPTCHA in EA Login | Register Form
+- Added: Translatable Strings in EA Login | Register Form
+- Added: Options to change the Error Messages in EA Login | Register Form
+- Few minor bugfix and improvements
+
+= 4.2.1 - 20/08/2020 =
+- Added: Google reCAPTCHA option in EA Login | Register Form
+- Added: Compatibility with WooCommerce 4.4.1
+- Fixed: User Role not setting correctly in EA Login | Register Form
+- Few minor bugfix and improvements
 
 = 4.2.0 - 06/08/2020 =
 - Added: EA Login | Register Widget

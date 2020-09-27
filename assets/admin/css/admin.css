@@ -956,3 +956,33 @@ button.eael-btn.eael-global-control-disable:hover {
 #eael-js-print-method {
     margin: 0 0 8px 0;
 }
+
+/*----LR-Settings Modal---*/
+.sf-group{
+    width: calc(100% - 30px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.sf-group input{
+    padding: 10px;
+    margin: 0 0 10px 10px;
+    display: block;
+    line-height: 2;
+    min-height: 30px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid gray;
+    width: calc(75% - 10px);
+}
+.sf-group input:focus{
+    border: 2px solid #007cba;
+}
+.sf-group input:last-child{
+    margin: 0;
+}
+.sf-group label{
+    width:25%;
+    max-width: 200px;
+}

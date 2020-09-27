@@ -1,4 +1,5 @@
 <?php
+
 namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
@@ -6,17 +7,16 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Scheme_Typography as Scheme_Typography;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Scheme_Typography;
+use \Elementor\Widget_Base;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class WeForms extends Widget_Base
 {
-
-    use \Essential_Addons_Elementor\Traits\Helper;
 
     public function get_name()
     {
@@ -37,8 +37,9 @@ class WeForms extends Widget_Base
     {
         return ['essential-addons-elementor'];
     }
-    
-    public function get_keywords() {
+
+    public function get_keywords()
+    {
         return [
             'contact form',
             'ea contact form',
@@ -54,14 +55,15 @@ class WeForms extends Widget_Base
         ];
     }
 
-    public function get_custom_help_url() {
+    public function get_custom_help_url()
+    {
         return 'https://essential-addons.com/elementor/docs/weforms/';
     }
 
     protected function _register_controls()
     {
 
-        if(!function_exists('WeForms')) {
+        if (!function_exists('WeForms')) {
             $this->start_controls_section(
                 'eael_global_warning',
                 [
@@ -94,7 +96,7 @@ class WeForms extends Widget_Base
                     'description' => esc_html__('Please save and refresh the page after selecting the form', 'essential-addons-for-elementor-lite'),
                     'label_block' => true,
                     'type' => Controls_Manager::SELECT,
-                    'options' => $this->eael_select_weform(),
+                    'options' => Helper::get_weform_list(),
                     'default' => '0',
                 ]
             );
@@ -116,7 +118,7 @@ class WeForms extends Widget_Base
                         'type' => Controls_Manager::CHOOSE,
                         'options' => [
                             '1' => [
-                                'title' => __('', 'essential-addons-for-elementor-lite'),
+                                'title' => '',
                                 'icon' => 'fa fa-unlock-alt',
                             ],
                         ],
@@ -368,6 +370,24 @@ class WeForms extends Widget_Base
             ]
         );
 
+        $this->add_responsive_control(
+            'eael_weform_input_margin',
+            [
+                'label' => esc_html__('Fields Margin', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"],
+                    {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"],
+                    {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"],
+                    {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"],
+                    {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"],
+                    {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"],
+                    {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields textarea' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
         $this->add_control(
             'eael_weform_input_border_radius',
             [
@@ -454,6 +474,28 @@ class WeForms extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control(
+            'eael_weform_label_style_heading',
+            [
+                'type' => Controls_Manager::HEADING,
+                'label' => esc_html__('Label Style', 'essential-addons-for-elementor-lite'),
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'eael_weform_label_margin',
+            [
+                'label' => __('Margin', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-weform-container .wpuf-label' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
 
         $this->end_controls_section();
 
@@ -740,14 +782,13 @@ class WeForms extends Widget_Base
         );
 
         $this->end_controls_section();
-
     }
 
     protected function render()
     {
-		if(!function_exists('WeForms')) {
-			return;
-		}
+        if (!function_exists('WeForms')) {
+            return;
+        }
 
         $settings = $this->get_settings();
 
@@ -756,6 +797,5 @@ class WeForms extends Widget_Base
 			' . do_shortcode('[weforms id="' . $settings['wpuf_contact_form'] . '" ]') . '
 		</div>';
         }
-
     }
 }
