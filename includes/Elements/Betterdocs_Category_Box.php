@@ -216,7 +216,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'type'      => Controls_Manager::TEXT,
                     'condition' => [
                         'show_count' => 'true',
-                        'layout_template' => 'Layout_Default'
+                        'layout_template' => 'default'
                     ]
                 ]
             );
@@ -229,7 +229,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'default'   => __('articles', 'essential-addons-for-elementor-lite'),
                     'condition' => [
                         'show_count' => 'true',
-                        'layout_template' => 'Layout_Default'
+                        'layout_template' => 'default'
                     ]
                 ]
             );
@@ -499,7 +499,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                     ],
                     'condition' => [
-                        'layout_template' => 'Layout_Default'
+                        'layout_template' => 'default'
                     ]
                 ]
             );
@@ -514,7 +514,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                     ],
                     'condition' => [
-                        'layout_template' => 'Layout_Default'
+                        'layout_template' => 'default'
                     ]
                 ]
             );
@@ -533,7 +533,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon' => 'margin: {{TOP}}{{UNIT}} auto {{BOTTOM}}{{UNIT}} auto;'
                     ],
                     'condition' => [
-                        'layout_template' => 'Layout_Default'
+                        'layout_template' => 'default'
                     ]
                 ]
             );
@@ -576,7 +576,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner:hover .eael-bd-cb-cat-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                     ],
                     'condition' => [
-                        'layout_template' => 'Layout_Default'
+                        'layout_template' => 'default'
                     ]
                 ]
             );
