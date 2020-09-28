@@ -57,11 +57,11 @@
   text-align: center;
   width: 300px;
 }
-.eael-wcpc-wrapper.custom table tr:nth-child(2) {
+.eael-wcpc-wrapper.custom table tr.title {
   background: var(--h-bg);
   color: var(--h-text-clr);
 }
-.eael-wcpc-wrapper.custom table tr:nth-child(2) th, .eael-wcpc-wrapper.custom table tr:nth-child(2) td {
+.eael-wcpc-wrapper.custom table tr.title th, .eael-wcpc-wrapper.custom table tr.title td {
   font-size: 20px;
   color: inherit;
   border: none;
@@ -92,7 +92,7 @@
   --btn-bg-hover: #6752e5;
   --even-row-bg: #fbf8f7;
 }
-.eael-wcpc-wrapper.custom.theme-2 table tr:nth-child(even):not(:nth-child(2)) {
+.eael-wcpc-wrapper.custom.theme-2 table tr:nth-child(even):not(.title) {
   background: var(--even-row-bg);
 }
 .eael-wcpc-wrapper.custom.theme-3 {
@@ -112,7 +112,7 @@
 .eael-wcpc-wrapper.custom.theme-3 table {
   -webkit-border-horizontal-spacing: 10px;
 }
-.eael-wcpc-wrapper.custom.theme-3 table tr:nth-child(even):not(:nth-child(2)) {
+.eael-wcpc-wrapper.custom.theme-3 table tr:nth-child(even):not(.title) {
   background: var(--even-row-bg);
 }
 .eael-wcpc-wrapper.custom.theme-3 table th, .eael-wcpc-wrapper.custom.theme-3 table td {
@@ -120,16 +120,16 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
-.eael-wcpc-wrapper.custom.theme-3 table tr:nth-child(2) td.featured,
+.eael-wcpc-wrapper.custom.theme-3 table tr.title td.featured,
 .eael-wcpc-wrapper.custom.theme-3 table tr:nth-child(odd) td.featured {
   -webkit-box-shadow: 18px 0 10px -10px rgba(86, 79, 127, 0.06), -18px 0 10px -10px rgba(86, 79, 127, 0.06);
   box-shadow: 18px 0 10px -10px rgba(86, 79, 127, 0.06), -18px 0 10px -10px rgba(86, 79, 127, 0.06);
 }
-.eael-wcpc-wrapper.custom.theme-3 table tr:nth-child(2) {
+.eael-wcpc-wrapper.custom.theme-3 table tr.title {
   background: initial;
   color: initial;
 }
-.eael-wcpc-wrapper.custom.theme-3 table tr:nth-child(2) th, .eael-wcpc-wrapper.custom.theme-3 table tr:nth-child(2) td {
+.eael-wcpc-wrapper.custom.theme-3 table tr.title th, .eael-wcpc-wrapper.custom.theme-3 table tr.title td {
   color: initial;
   border-left: none;
   border-right: none;
@@ -159,7 +159,7 @@
   padding: 10px;
   background: #fff;
 }
-.eael-wcpc-wrapper.custom.theme-3 table tr.image td:nth-child(2) span.img-inner {
+.eael-wcpc-wrapper.custom.theme-3 table tr.image td.title span.img-inner {
   background: var(--first-img-bg);
 }
 .eael-wcpc-wrapper.custom.theme-3 table tr.image td:nth-child(3) span.img-inner {
@@ -186,7 +186,7 @@
 .eael-wcpc-wrapper.custom.theme-4 table th.first-th {
   background: var(--container-bg);
 }
-.eael-wcpc-wrapper.custom.theme-4 table tr:nth-child(2) th, .eael-wcpc-wrapper.custom.theme-4 table tr:nth-child(2) td {
+.eael-wcpc-wrapper.custom.theme-4 table tr.title th, .eael-wcpc-wrapper.custom.theme-4 table tr.title td {
   font-size: 20px;
   color: inherit;
   border: 1px solid var(--h-border-clr);
@@ -261,7 +261,7 @@
 .eael-wcpc-wrapper.custom.theme-5 table td.col_2 .button:hover {
   background: #13d2b5;
 }
-.eael-wcpc-wrapper.custom.theme-5 table tr:nth-child(2) th, .eael-wcpc-wrapper.custom.theme-5 table tr:nth-child(2) td {
+.eael-wcpc-wrapper.custom.theme-5 table tr.title th, .eael-wcpc-wrapper.custom.theme-5 table tr.title td {
   font-size: 20px;
   color: inherit;
   border: none;
@@ -306,11 +306,11 @@
   --h-border-clr: #e8ebf0;
   --image-bg: none;
 }
-.eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(2) th, .eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(2) td {
+.eael-wcpc-wrapper.custom.theme-6 table tr.title th, .eael-wcpc-wrapper.custom.theme-6 table tr.title td {
   border-left: 0;
   border-right: 0;
 }
-.eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(2) td {
+.eael-wcpc-wrapper.custom.theme-6 table tr.title td {
   color: #fff;
 }
 .eael-wcpc-wrapper.custom.theme-6 table tr, .eael-wcpc-wrapper.custom.theme-6 table th, .eael-wcpc-wrapper.custom.theme-6 table td {
