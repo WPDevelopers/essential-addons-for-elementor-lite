@@ -456,6 +456,16 @@ $base-font-size: 14px;
 
 	}
 
+	.ea-checkout-review-order-table {
+		.recurring-wrapper {
+			tbody > tr:nth-child(odd) > td,
+			tbody > tr:nth-child(odd) > th,
+			tbody tr:hover > td,
+			tbody tr:hover > th {
+				background-color: inherit;
+			}
+		}
+	}
 }
 
 .eael-woo-checkout {
@@ -741,8 +751,6 @@ $base-font-size: 14px;
 			}
 		}
 	}
-
-
 }
 .theme-twentyseventeen {
 	.ea-woo-checkout {
