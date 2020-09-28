@@ -43,6 +43,13 @@ var WooCheckout = function ($scope, $) {
 		$( document.body ).trigger( 'update_checkout' );
 		render_order_review_template();
 	} ); // eslint-disable-line max-len
+
+
+	//move coupon remove message to coupon box (multi step and split layout)
+	$(document.body).on('removed_coupon_in_checkout',function(){
+		let message = $('.ea-woo-checkout .ms-tabs-content > .woocommerce-message,.ea-woo-checkout .split-tabs-content > .woocommerce-message').remove();
+		$('.ea-woo-checkout .checkout_coupon.woocommerce-form-coupon').before(message);
+	});
 };
 
 jQuery(window).on("elementor/frontend/init", function () {
