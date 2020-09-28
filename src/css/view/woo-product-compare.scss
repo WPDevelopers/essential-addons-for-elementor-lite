@@ -61,8 +61,8 @@
                 width: 300px;
             }
 
-            //2nd row header
-            tr:nth-child(2) {
+            //Title Row header
+            tr.title {
                 background: var(--h-bg);
                 color: var(--h-text-clr);
 
@@ -115,7 +115,7 @@
             --even-row-bg: #fbf8f7;
 
             table {
-                tr:nth-child(even):not(:nth-child(2)) {
+                tr:nth-child(even):not(.title) {
                     background: var(--even-row-bg);
                 }
             }
@@ -138,7 +138,7 @@
 
             table {
                 -webkit-border-horizontal-spacing: 10px;
-                tr:nth-child(even):not(:nth-child(2)) {
+                tr:nth-child(even):not(.title) {
                     background: var(--even-row-bg);
                 }
 
@@ -147,7 +147,7 @@
                     box-sizing: border-box;
                 }
 
-                tr:nth-child(2) td.featured,
+                tr.title td.featured,
                 tr:nth-child(odd) td.featured {
                     //background: #fff;
                     -webkit-box-shadow: 18px 0 10px -10px rgba(86, 79, 127, .06), -18px 0 10px -10px rgba(86, 79, 127, .06);
@@ -155,7 +155,7 @@
                     box-shadow: 18px 0 10px -10px rgba(86, 79, 127, .06), -18px 0 10px -10px rgba(86, 79, 127, .06);
                 }
 
-                tr:nth-child(2) {
+                tr.title {
                     background: initial;
                     color: initial;
 
@@ -196,7 +196,7 @@
                         background: #fff;
                     }
 
-                    td:nth-child(2) span.img-inner {
+                    td.title span.img-inner {
                         background: var(--first-img-bg);
                     }
 
@@ -231,8 +231,8 @@
                     background: var(--container-bg);
                 }
 
-                //2nd row header
-                tr:nth-child(2) {
+                //Title Row header
+                tr.title {
                     th, td {
                         font-size: 20px;
                         color: inherit;
@@ -337,8 +337,8 @@
                     }
                 }
 
-                //2nd row header
-                tr:nth-child(2) {
+                //Title Row header
+                tr.title {
                     th, td {
                         font-size: 20px;
                         color: inherit;
@@ -404,8 +404,8 @@
 
             --image-bg: none;;
             table {
-                //2nd row header
-                tr:nth-child(2) {
+                //Title Row header
+                tr.title {
                     th, td {
                         border-left: 0;
                         border-right: 0;
