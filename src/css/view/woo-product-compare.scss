@@ -82,7 +82,7 @@
                 }
             }
 
-            a.button {
+            .button {
                 border-radius: 5px;
                 background: var(--btn-bg);
                 color: var(--btn-text);
@@ -138,8 +138,6 @@
 
             table {
                 -webkit-border-horizontal-spacing: 10px;
-                border-horizontal-spacing: 10px;
-
                 tr:nth-child(even):not(:nth-child(2)) {
                     background: var(--even-row-bg);
                 }
@@ -309,34 +307,32 @@
                     background: var(--container-bg);
                 }
 
-                tr.add-to-cart {
-                    td.col_0 {
-                        a.button {
-                            background: var(--first-btn-bg);
+                td.col_0 {
+                    .button {
+                        background: var(--first-btn-bg);
 
-                            &:hover {
-                                background: darken(#6a3ee8, 5);
-                            }
+                        &:hover {
+                            background: darken(#6a3ee8, 5);
                         }
                     }
+                }
 
-                    td.col_1 {
-                        a.button {
-                            background: var(--second-btn-bg);
+                td.col_1 {
+                    .button {
+                        background: var(--second-btn-bg);
 
-                            &:hover {
-                                background: darken(#3e5ae8, 5);
-                            }
+                        &:hover {
+                            background: darken(#3e5ae8, 5);
                         }
                     }
+                }
 
-                    td.col_2 {
-                        a.button {
-                            background: var(--third-btn-bg);
+                td.col_2 {
+                    .button {
+                        background: var(--third-btn-bg);
 
-                            &:hover {
-                                background: darken(#15e9c9, 5);
-                            }
+                        &:hover {
+                            background: darken(#15e9c9, 5);
                         }
                     }
                 }
@@ -429,16 +425,14 @@
                     border-right: none;
                 }
 
-                tr {
-                    td.col_0 {
-                        background: var(--first-col-bg);
-                    }
-                    td.col_1 {
-                        background: var(--second-col-bg);
-                    }
-                    td.col_2 {
-                        background: var(--third-col-bg);
-                    }
+                td.col_0 {
+                    background: var(--first-col-bg);
+                }
+                td.col_1 {
+                    background: var(--second-col-bg);
+                }
+                td.col_2 {
+                    background: var(--third-col-bg);
                 }
                 tr:nth-child(even) {
                     th, td {
@@ -465,37 +459,35 @@
                     }
                 }
                 // button style
-                tr.add-to-cart {
-                    a.button {
+                .button {
+                    background: #fff;
+                    &:hover {
                         background: #fff;
+                    }
+                }
+                td.col_0 {
+                    .button {
+                        color: var(--first-col-bg);
                         &:hover {
-                            background: #fff;
+                            color: darken(#fd907b, 20);
                         }
                     }
-                    td.col_0 {
-                        a.button {
-                            color: var(--first-col-bg);
-                            &:hover {
-                                color: darken(#fd907b, 20);
-                            }
-                        }
-                    }
+                }
 
-                    td.col_1 {
-                        a.button {
-                            color: var(--second-col-bg);
-                            &:hover {
-                                color: darken(#7f6cf4,20);
-                            }
+                td.col_1 {
+                    .button {
+                        color: var(--second-col-bg);
+                        &:hover {
+                            color: darken(#7f6cf4,20);
                         }
                     }
+                }
 
-                    td.col_2 {
-                        a.button {
-                            color: var(--third-col-bg);
-                            &:hover {
-                                color: darken(#3ae281, 20);
-                            }
+                td.col_2 {
+                    .button {
+                        color: var(--third-col-bg);
+                        &:hover {
+                            color: darken(#3ae281, 20);
                         }
                     }
                 }
