@@ -464,7 +464,6 @@ trait Woo_Checkout_Helper {
 						<div class="shipping-area">
 							<?php
 							WC()->cart->calculate_totals();
-							error_log(print_r(WC()->session->chosen_shipping_methods,true));
 							wc_cart_totals_shipping_html();
 							?>
 						</div>
