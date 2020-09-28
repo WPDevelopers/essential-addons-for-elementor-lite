@@ -47,18 +47,6 @@ trait Enqueue
                 FLUENTFORM_VERSION
             );
         }
-
-        // Compatibility: Ninja forms
-        if (in_array('ninja-form', $widgets) && class_exists('\Ninja_Forms') && class_exists('\NF_Display_Render')) {
-            add_action('elementor/preview/enqueue_styles', function () {
-                ob_start();
-                \NF_Display_Render::localize(0);
-                ob_clean();
-
-                wp_add_inline_script('nf-front-end', 'var nfForms = nfForms || [];');
-            });
-        }
-
     }
 
     public function enqueue_scripts()
@@ -151,7 +139,7 @@ trait Enqueue
             $widgets = get_transient($this->uid() . '_loaded_widgets');
             $editor_updated_at = get_transient('eael_editor_updated_at');
             $post_updated_at = get_transient($this->uid() . '_updated_at');
-            
+
             if ($widgets === false || $editor_updated_at != $post_updated_at) {
                 $widgets = $this->get_settings();
             }
