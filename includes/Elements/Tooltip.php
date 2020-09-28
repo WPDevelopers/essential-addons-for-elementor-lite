@@ -688,9 +688,10 @@ class Tooltip extends Widget_Base {
 
 	protected function render( ) {
 
-   		$settings = $this->get_settings_for_display();
-   		$target = $settings['eael_tooltip_link']['is_external'] ? 'target="_blank"' : '';
-		$nofollow = $settings['eael_tooltip_link']['nofollow'] ? 'rel="nofollow"' : '';
+		$settings = $this->get_settings_for_display();
+		
+   		$target = isset($settings['eael_tooltip_link']['is_external']) ? 'target="_blank"' : '';
+		$nofollow = isset($settings['eael_tooltip_link']['nofollow']) ? 'rel="nofollow"' : '';
 		$icon_migrated = isset($settings['__fa4_migrated']['eael_tooltip_icon_content_new']);
 		$icon_is_new = empty($settings['eael_tooltip_icon_content']);
 	?>
