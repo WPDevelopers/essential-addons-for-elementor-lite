@@ -529,6 +529,26 @@ class Woo_Product_Compare extends Widget_Base {
 			],
 			'selector'  => $img_class,
 		] );
+		$this->add_control( 'common_h_col_bg', [
+			'label'     => __( 'Header Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $th => 'background-color:{{VALUE}}' ],
+		] );
+		$this->add_control( 'common_h_col_color', [
+			'label'     => __( 'Header Text Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $th => 'color:{{VALUE}}' ],
+		] );
+		$this->add_control( 'common_td_col_bg', [
+			'label'     => __( 'Product Column Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $td => 'background-color:{{VALUE}}' ],
+		] );
+		$this->add_control( 'common_td_col_color', [
+			'label'     => __( 'Product Column Text Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $td => 'color:{{VALUE}}' ],
+		] );
 		$this->add_control( 'btn_color', [
 			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
@@ -567,7 +587,22 @@ class Woo_Product_Compare extends Widget_Base {
 		] );
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
-
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'      => "common_h_col_border",
+			'label'     => __( 'Header border', 'essential-addons-for-elementor-lite' ),
+			'selector'  => $th,
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'      => "common_td_col_border",
+			'label'     => __( 'Header border', 'essential-addons-for-elementor-lite' ),
+			'selector'  => $td,
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
+		] );
 	}
 
 	protected function init_style_header_column_style() {
