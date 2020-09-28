@@ -266,14 +266,14 @@ trait Woo_Checkout_Helper {
 
                 <form class="checkout_coupon woocommerce-form-coupon" method="post" style="display:none">
 
-                    <p><?php esc_html_e( 'If you have a coupon code, please apply it below.', 'woocommerce' ); ?></p>
+                    <p><?php esc_html_e( 'If you have a coupon code, please apply it below.', 'essential-addons-for-elementor-lite' ); ?></p>
 
                     <p class="form-row form-row-first">
-                        <input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" id="coupon_code" value="" />
+                        <input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e( 'Coupon code', 'essential-addons-for-elementor-lite' ); ?>" id="coupon_code" value="" />
                     </p>
 
                     <p class="form-row form-row-last">
-                        <button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"><?php esc_html_e( 'Apply coupon', 'woocommerce' ); ?></button>
+                        <button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'essential-addons-for-elementor-lite' ); ?>"><?php esc_html_e( 'Apply coupon', 'essential-addons-for-elementor-lite' ); ?></button>
                     </p>
 
                     <div class="clear"></div>
@@ -569,7 +569,7 @@ trait Woo_Checkout_Helper {
 		<div class="woocommerce-billing-fields">
             <?php if ( wc_ship_to_billing_address_only() && WC()->cart->needs_shipping() ) : ?>
 
-                <h3><?php esc_html_e( 'Billing &amp; Shipping', 'woocommerce' ); ?></h3>
+                <h3><?php esc_html_e( 'Billing &amp; Shipping', 'essential-addons-for-elementor-lite' ); ?></h3>
 
             <?php else : ?>
 
@@ -598,7 +598,7 @@ trait Woo_Checkout_Helper {
 
                     <p class="form-row form-row-wide create-account">
                         <label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
-                            <input class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" id="createaccount" <?php checked( ( true === $checkout->get_value( 'createaccount' ) || ( true === apply_filters( 'woocommerce_create_account_default_checked', false ) ) ), true ); ?> type="checkbox" name="createaccount" value="1" /> <span><?php esc_html_e( 'Create an account?', 'woocommerce' ); ?></span>
+                            <input class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" id="createaccount" <?php checked( ( true === $checkout->get_value( 'createaccount' ) || ( true === apply_filters( 'woocommerce_create_account_default_checked', false ) ) ), true ); ?> type="checkbox" name="createaccount" value="1" /> <span><?php esc_html_e( 'Create an account?', 'essential-addons-for-elementor-lite' ); ?></span>
                         </label>
                     </p>
 
