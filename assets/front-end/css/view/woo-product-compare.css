@@ -72,12 +72,12 @@
   vertical-align: middle;
   border: none;
 }
-.eael-wcpc-wrapper.custom table a.button {
+.eael-wcpc-wrapper.custom table .button {
   border-radius: 5px;
   background: var(--btn-bg);
   color: var(--btn-text);
 }
-.eael-wcpc-wrapper.custom table a.button:hover {
+.eael-wcpc-wrapper.custom table .button:hover {
   background: var(--btn-bg-hover);
 }
 .eael-wcpc-wrapper.custom.theme-1 table tr.image td {
@@ -111,7 +111,6 @@
 }
 .eael-wcpc-wrapper.custom.theme-3 table {
   -webkit-border-horizontal-spacing: 10px;
-  border-horizontal-spacing: 10px;
 }
 .eael-wcpc-wrapper.custom.theme-3 table tr:nth-child(even):not(:nth-child(2)) {
   background: var(--even-row-bg);
@@ -244,22 +243,22 @@
 .eael-wcpc-wrapper.custom.theme-5 table th.first-th {
   background: var(--container-bg);
 }
-.eael-wcpc-wrapper.custom.theme-5 table tr.add-to-cart td.col_0 a.button {
+.eael-wcpc-wrapper.custom.theme-5 table td.col_0 .button {
   background: var(--first-btn-bg);
 }
-.eael-wcpc-wrapper.custom.theme-5 table tr.add-to-cart td.col_0 a.button:hover {
+.eael-wcpc-wrapper.custom.theme-5 table td.col_0 .button:hover {
   background: #5827e5;
 }
-.eael-wcpc-wrapper.custom.theme-5 table tr.add-to-cart td.col_1 a.button {
+.eael-wcpc-wrapper.custom.theme-5 table td.col_1 .button {
   background: var(--second-btn-bg);
 }
-.eael-wcpc-wrapper.custom.theme-5 table tr.add-to-cart td.col_1 a.button:hover {
+.eael-wcpc-wrapper.custom.theme-5 table td.col_1 .button:hover {
   background: #2747e5;
 }
-.eael-wcpc-wrapper.custom.theme-5 table tr.add-to-cart td.col_2 a.button {
+.eael-wcpc-wrapper.custom.theme-5 table td.col_2 .button {
   background: var(--third-btn-bg);
 }
-.eael-wcpc-wrapper.custom.theme-5 table tr.add-to-cart td.col_2 a.button:hover {
+.eael-wcpc-wrapper.custom.theme-5 table td.col_2 .button:hover {
   background: #13d2b5;
 }
 .eael-wcpc-wrapper.custom.theme-5 table tr:nth-child(2) th, .eael-wcpc-wrapper.custom.theme-5 table tr:nth-child(2) td {
@@ -324,13 +323,13 @@
 .eael-wcpc-wrapper.custom.theme-6 table td:last-child {
   border-right: none;
 }
-.eael-wcpc-wrapper.custom.theme-6 table tr td.col_0 {
+.eael-wcpc-wrapper.custom.theme-6 table td.col_0 {
   background: var(--first-col-bg);
 }
-.eael-wcpc-wrapper.custom.theme-6 table tr td.col_1 {
+.eael-wcpc-wrapper.custom.theme-6 table td.col_1 {
   background: var(--second-col-bg);
 }
-.eael-wcpc-wrapper.custom.theme-6 table tr td.col_2 {
+.eael-wcpc-wrapper.custom.theme-6 table td.col_2 {
   background: var(--third-col-bg);
 }
 .eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(even) th, .eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(even) td {
@@ -352,28 +351,28 @@
 .eael-wcpc-wrapper.custom.theme-6 table tr.image td:last-child, .eael-wcpc-wrapper.custom.theme-6 table tr.title td:last-child {
   border-right: none;
 }
-.eael-wcpc-wrapper.custom.theme-6 table tr.add-to-cart a.button {
+.eael-wcpc-wrapper.custom.theme-6 table .button {
   background: #fff;
 }
-.eael-wcpc-wrapper.custom.theme-6 table tr.add-to-cart a.button:hover {
+.eael-wcpc-wrapper.custom.theme-6 table .button:hover {
   background: #fff;
 }
-.eael-wcpc-wrapper.custom.theme-6 table tr.add-to-cart td.col_0 a.button {
+.eael-wcpc-wrapper.custom.theme-6 table td.col_0 .button {
   color: var(--first-col-bg);
 }
-.eael-wcpc-wrapper.custom.theme-6 table tr.add-to-cart td.col_0 a.button:hover {
+.eael-wcpc-wrapper.custom.theme-6 table td.col_0 .button:hover {
   color: #fb3c17;
 }
-.eael-wcpc-wrapper.custom.theme-6 table tr.add-to-cart td.col_1 a.button {
+.eael-wcpc-wrapper.custom.theme-6 table td.col_1 .button {
   color: var(--second-col-bg);
 }
-.eael-wcpc-wrapper.custom.theme-6 table tr.add-to-cart td.col_1 a.button:hover {
+.eael-wcpc-wrapper.custom.theme-6 table td.col_1 .button:hover {
   color: #2f11e9;
 }
-.eael-wcpc-wrapper.custom.theme-6 table tr.add-to-cart td.col_2 a.button {
+.eael-wcpc-wrapper.custom.theme-6 table td.col_2 .button {
   color: var(--third-col-bg);
 }
-.eael-wcpc-wrapper.custom.theme-6 table tr.add-to-cart td.col_2 a.button:hover {
+.eael-wcpc-wrapper.custom.theme-6 table td.col_2 .button:hover {
   color: #179f51;
 }
 @media screen and (min-width: 769px) {
