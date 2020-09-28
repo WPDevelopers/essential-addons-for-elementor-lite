@@ -404,6 +404,12 @@
     width: 100%;
   }
 }
+.ea-woo-checkout .ea-checkout-review-order-table .recurring-wrapper tbody > tr:nth-child(odd) > td,
+.ea-woo-checkout .ea-checkout-review-order-table .recurring-wrapper tbody > tr:nth-child(odd) > th,
+.ea-woo-checkout .ea-checkout-review-order-table .recurring-wrapper tbody tr:hover > td,
+.ea-woo-checkout .ea-checkout-review-order-table .recurring-wrapper tbody tr:hover > th {
+  background-color: inherit;
+}
 .eael-woo-checkout .woocommerce .woocommerce-error, .eael-woo-checkout .woocommerce .woocommerce-info, .eael-woo-checkout .woocommerce .woocommerce-message {
   border: 0;
   border-radius: 5px;
