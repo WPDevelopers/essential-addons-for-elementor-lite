@@ -48,6 +48,15 @@ const removeEntry = () => {
 };
 
 module.exports = (env, argv) => {
+    if(argv.mode === "production"){
+        // Generate .pot on production build only
+        wpPot({
+            destFile: 'languages/essential-addons-for-elementor-lite.pot',
+            domain: 'essential-addons-for-elementor-lite',
+            package: 'Essential Addons For Elementor Lite',
+            src: '**/*.php'
+        });
+    }
 	return {
 		stats: "minimal",
 		entry: outputEntry(),
@@ -112,11 +121,5 @@ module.exports = (env, argv) => {
 		},
 	};
 };
-// Generate .pot
-wpPot({
-    destFile: 'languages/essential-addons-for-elementor-lite.pot',
-    domain: 'essential-addons-for-elementor-lite',
-    package: 'Essential Addons For Elementor Lite',
-    src: '**/*.php'
-});
+
 
