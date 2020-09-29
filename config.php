@@ -864,6 +864,26 @@ $config = [
                 true,
             ],
         ],
+        'woo-product-compare'  => [
+	        'class'      => '\Essential_Addons_Elementor\Elements\Woo_Product_Compare',
+	        'dependency' => [
+		        'css' => [
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-compare.min.css',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+		        'js'  => [
+			        [
+				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-product-compare.min.js',
+				        'type'    => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+
+	        ],
+        ],
     ],
     'extensions' => [
         'eael-promotion' => [

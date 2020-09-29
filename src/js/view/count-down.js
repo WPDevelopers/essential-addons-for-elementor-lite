@@ -16,15 +16,14 @@ var CountDown = function ($scope, $) {
 				if ($expire_type == "text") {
 					countDown.html(
 						'<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
-							$expiry_title +
-							"</h4>" +
-							'<div class="eael-countdown-finish-text">' +
-							$expiry_text +
-							"</div></div>"
+						$expiry_title +
+						"</h4>" +
+						'<div class="eael-countdown-finish-text">' +
+						$expiry_text +
+						"</div></div>"
 					);
 				} else if ($expire_type === "url") {
-					var editMode = $("body").find("#elementor").length;
-					if (editMode > 0) {
+					if (isEditMode) {
 						countDown.html("Your Page will be redirected to given URL (only on Frontend).");
 					} else {
 						window.location.href = $redirect_url;
