@@ -19,7 +19,7 @@ class Reading_Progress
     public function register_controls($element)
     {
 
-        if(Helper::prevent_extension_loading(get_the_ID())){
+        if (Helper::prevent_extension_loading(get_the_ID())) {
             return false;
         }
 
@@ -49,7 +49,7 @@ class Reading_Progress
             'eael_ext_reading_progress_has_global',
             [
                 'label' => __('Enabled Globally?', 'essential-addons-for-elementor-lite'),
-                'type' => \Elementor\Controls_Manager::HIDDEN,
+                'type' => Controls_Manager::HIDDEN,
                 'default' => isset($global_settings['reading_progress']['enabled']) ? true : false,
             ]
         );
@@ -89,7 +89,7 @@ class Reading_Progress
                 'eael_ext_reading_progress_global_display_condition',
                 [
                     'label' => __('Display On', 'essential-addons-for-elementor-lite'),
-                    'type' => \Elementor\Controls_Manager::SELECT,
+                    'type' => Controls_Manager::SELECT,
                     'default' => 'all',
                     'options' => [
                         'posts' => __('All Posts', 'essential-addons-for-elementor-lite'),
