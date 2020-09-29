@@ -452,6 +452,8 @@ class Woo_Product_Compare extends Widget_Base {
 		$title_row = "{$tbl} tr.title th, {$tbl} tr.title td";
 		$btn       = "{$tbl} a.button";
 		$btn_hover = "{$tbl} a.button:hover";
+		$tr_even = "{$tbl} tr:nth-child(even) th, {$tbl} tr:nth-child(even) td";
+		$tr_odd = "{$tbl} tr:nth-child(odd) th, {$tbl} tr:nth-child(odd) td";
 		// common columns
 		$this->add_control( 'common_th_col_heading', [
 			'label'     => __( 'Header Column Style', 'essential-addons-for-elementor-lite' ),
@@ -668,6 +670,26 @@ class Woo_Product_Compare extends Widget_Base {
 				],
 			],
 		] );
+		$this->add_control( 'common_tr_even_bg', [
+			'label'     => __( 'Even Row Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $tr_even => 'background-color:{{VALUE}}' ],
+		] );
+		$this->add_control( 'common_tr_even_color', [
+			'label'     => __( 'Even Row Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $tr_even => 'color:{{VALUE}}' ],
+		] );
+		$this->add_control( 'common_tr_odd_bg', [
+			'label'     => __( 'Odd Row Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $tr_odd => 'background-color:{{VALUE}}' ],
+		] );
+		$this->add_control( 'common_tr_odd_color', [
+			'label'     => __( 'Odd Row Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $tr_odd => 'color:{{VALUE}}' ],
+		] );
 		$this->add_control( 'btn_color', [
 			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
@@ -700,7 +722,10 @@ class Woo_Product_Compare extends Widget_Base {
 	}
 
 	protected function init_style_header_column_style() {
-		$h_col = "{{WRAPPER}} .eael-wcpc-wrapper table tr:not(.image) th:not(.first-th)";
+	    $tbl = "{{WRAPPER}} .eael-wcpc-wrapper table";
+		$h_col = "{$tbl} tr:not(.image):not(.title) th:not(.first-th)";
+		$title_th = "{$tbl} tr.title th";
+
 		$this->start_controls_section( 'section_style_h_clm', [
 			'label'     => __( 'Header Column', 'essential-addons-for-elementor-lite' ),
 			'tab'       => Controls_Manager::TAB_STYLE,
@@ -754,6 +779,16 @@ class Woo_Product_Compare extends Widget_Base {
 			'label' => __( 'Colors', 'essential-addons-for-elementor-lite' ),
 			'type'  => Controls_Manager::HEADING,
 		] );
+		$this->add_control( 'title_h_col_bg', [
+			'label'     => __( 'Title Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $title_th => 'background-color:{{VALUE}}' ],
+		] );
+		$this->add_control( 'title_h_col_color', [
+			'label'     => __( 'Title Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $title_th => 'color:{{VALUE}}' ],
+		] );
 		$this->add_control( 'h_col_bg', [
 			'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
@@ -764,13 +799,38 @@ class Woo_Product_Compare extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $h_col => 'color:{{VALUE}}' ],
 		] );
+		$this->add_control( 'title_border_heading', [
+			'label'     => __( 'Title Border', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "title_h_col_border",
+			'selector' => $title_th,
+		] );
+		$this->add_control( 'h_border_heading', [
+			'label'     => __( 'Header Border', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "h_col_border",
 			'selector' => $h_col,
 		] );
+
+		$this->add_control( 'h_typo_heading', [
+			'label'     => __( 'Typography', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => "title_h_col_typo",
+			'label'    => __( 'Title', 'essential-addons-for-elementor-lite' ),
+			'selector' => $title_th,
+		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => "h_col_typo",
-			'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
+			'label'    => __( 'Header', 'essential-addons-for-elementor-lite' ),
 			'selector' => $h_col,
 		] );
 		$this->end_controls_section();
