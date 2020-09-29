@@ -44,6 +44,9 @@ var WooCheckout = function ($scope, $) {
 		render_order_review_template();
 	} ); // eslint-disable-line max-len
 
+	$( document.body ).bind( 'update_checkout', ()=> {
+		render_order_review_template();
+	} );
 
 	//move coupon remove message to coupon box (multi step and split layout)
 	$(document.body).on('removed_coupon_in_checkout',function(){
