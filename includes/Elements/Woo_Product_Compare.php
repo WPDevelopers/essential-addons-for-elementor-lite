@@ -357,7 +357,7 @@ class Woo_Product_Compare extends Widget_Base {
 	}
 
 	public function init_style_table_controls() {
-		$table      = "{{WRAPPER}} .eael-wcpc-wrapper table";
+		$table = "{{WRAPPER}} .eael-wcpc-wrapper table";
 
 		$this->start_controls_section( 'section_style_table', [
 			'label' => __( 'Table Style', 'essential-addons-for-elementor-lite' ),
@@ -431,7 +431,7 @@ class Woo_Product_Compare extends Widget_Base {
 				'classic',
 				'gradient',
 			],
-			'exclude' => ['image'],
+			'exclude'  => [ 'image' ],
 			'selector' => $table,
 		] );
 		$this->init_style_table_common_style();
@@ -443,17 +443,17 @@ class Woo_Product_Compare extends Widget_Base {
 	}
 
 	protected function init_style_table_common_style() {
-		$wrap      = "{{WRAPPER}} .eael-wcpc-wrapper";
-		$tbl       = "{$wrap} table";
-		$td        = "{$tbl} td";
-		$th = "{$tbl} tr:not(.image):not(.title) th:not(.first-th)"; // if we do not need to give title row weight, then remove :not(.title)
+		$wrap = "{{WRAPPER}} .eael-wcpc-wrapper";
+		$tbl  = "{$wrap} table";
+		$td   = "{$tbl} td";
+		$th   = "{$tbl} tr:not(.image):not(.title) th:not(.first-th)"; // if we do not need to give title row weight, then remove :not(.title)
 
 		$img_class = "{$tbl} tr.image td";
 		$title_row = "{$tbl} tr.title th, {$tbl} tr.title td";
 		$btn       = "{$tbl} a.button";
 		$btn_hover = "{$tbl} a.button:hover";
-		$tr_even = "{$tbl} tr:nth-child(even) th, {$tbl} tr:nth-child(even) td";
-		$tr_odd = "{$tbl} tr:nth-child(odd) th, {$tbl} tr:nth-child(odd) td";
+		$tr_even   = "{$tbl} tr:nth-child(even) th, {$tbl} tr:nth-child(even) td";
+		$tr_odd    = "{$tbl} tr:nth-child(odd) th, {$tbl} tr:nth-child(odd) td";
 		// common columns
 		$this->add_control( 'common_th_col_heading', [
 			'label'     => __( 'Header Column Style', 'essential-addons-for-elementor-lite' ),
@@ -626,6 +626,11 @@ class Woo_Product_Compare extends Widget_Base {
 			],
 			'selector' => $img_class,
 		] );
+		$this->add_control( "common_column_color_heading", [
+			'label'     => __( 'Columns', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
 		$this->add_control( 'common_h_col_bg', [
 			'label'     => __( 'Header Background', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
@@ -645,6 +650,27 @@ class Woo_Product_Compare extends Widget_Base {
 			'label'     => __( 'Product Column Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $td => 'color:{{VALUE}}' ],
+		] );
+
+		$this->add_control( "common_buttons_color_heading", [
+			'label'     => __( 'Buttons', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+		$this->add_control( 'btn_color', [
+			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $btn => 'color:{{VALUE}}' ],
+		] );
+		$this->add_control( 'btn_bg_color', [
+			'label'     => __( 'Button Background Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $btn => 'background:{{VALUE}}' ],
+		] );
+		$this->add_control( "common_row_color_heading", [
+			'label'     => __( 'Rows', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
 		] );
 		$this->add_control( 'common_title_row_bg', [
 			'label'     => __( 'Title Row Background', 'essential-addons-for-elementor-lite' ),
@@ -674,6 +700,7 @@ class Woo_Product_Compare extends Widget_Base {
 			'label'     => __( 'Even Row Background', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_even => 'background-color:{{VALUE}}' ],
+			'separator' => 'before',
 		] );
 		$this->add_control( 'common_tr_even_color', [
 			'label'     => __( 'Even Row Color', 'essential-addons-for-elementor-lite' ),
@@ -689,16 +716,6 @@ class Woo_Product_Compare extends Widget_Base {
 			'label'     => __( 'Odd Row Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_odd => 'color:{{VALUE}}' ],
-		] );
-		$this->add_control( 'btn_color', [
-			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ $btn => 'color:{{VALUE}}' ],
-		] );
-		$this->add_control( 'btn_bg_color', [
-			'label'     => __( 'Button Background Color', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ $btn => 'background:{{VALUE}}' ],
 		] );
 		$this->end_controls_tab();
 
@@ -722,10 +739,11 @@ class Woo_Product_Compare extends Widget_Base {
 	}
 
 	protected function init_style_header_column_style() {
-	    $tbl = "{{WRAPPER}} .eael-wcpc-wrapper table";
-		$h_col = "{$tbl} tr:not(.image):not(.title) th:not(.first-th)";
+		$tbl      = "{{WRAPPER}} .eael-wcpc-wrapper table";
+		$h_col    = "{$tbl} tr:not(.image):not(.title) th:not(.first-th)";
 		$title_th = "{$tbl} tr.title th";
-
+		$tr_even  = "{$tbl} tr:nth-child(even):not(.image) th:not(.first-th)";
+		$tr_odd   = "{$tbl} tr:nth-child(odd):not(.image) th:not(.first-th)";
 		$this->start_controls_section( 'section_style_h_clm', [
 			'label'     => __( 'Header Column', 'essential-addons-for-elementor-lite' ),
 			'tab'       => Controls_Manager::TAB_STYLE,
@@ -790,14 +808,40 @@ class Woo_Product_Compare extends Widget_Base {
 			'selectors' => [ $title_th => 'color:{{VALUE}}' ],
 		] );
 		$this->add_control( 'h_col_bg', [
-			'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Column Background Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $h_col => 'background-color:{{VALUE}}' ],
 		] );
 		$this->add_control( 'h_col_color', [
-			'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Column Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $h_col => 'color:{{VALUE}}' ],
+		] );
+		$this->add_control( "h_rows_clr_heading", [
+			'label'     => __( 'Rows', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+		$this->add_control( 'tr_even_bg', [
+			'label'     => __( 'Even Row Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $tr_even => 'background-color:{{VALUE}}' ],
+			'separator' => 'before',
+		] );
+		$this->add_control( 'tr_even_color', [
+			'label'     => __( 'Even Row Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $tr_even => 'color:{{VALUE}}' ],
+		] );
+		$this->add_control( 'tr_odd_bg', [
+			'label'     => __( 'Odd Row Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $tr_odd => 'background-color:{{VALUE}}' ],
+		] );
+		$this->add_control( 'tr_odd_color', [
+			'label'     => __( 'Odd Row Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $tr_odd => 'color:{{VALUE}}' ],
 		] );
 		$this->add_control( 'title_border_heading', [
 			'label'     => __( 'Title Border', 'essential-addons-for-elementor-lite' ),
@@ -841,6 +885,8 @@ class Woo_Product_Compare extends Widget_Base {
 		$tbl          = "{{WRAPPER}} .eael-wcpc-wrapper table";
 		$column_class = "{$tbl} td.col_{$column_number}";
 		$title_row    = "{$tbl} tr.title td.col_{$column_number}";
+		$tr_even      = "{$tbl} tr:nth-child(even) td.col_{$column_number}";
+		$tr_odd       = "{$tbl} tr:nth-child(odd) td.col_{$column_number}";
 		$btn          = "{$tbl} td.col_{$column_number} a.button";
 		$btn_hover    = "{$tbl} td.col_{$column_number} a.button:hover";
 		$img_bg       = "{$tbl} tr.image td.col_{$column_number}";
@@ -903,9 +949,9 @@ class Woo_Product_Compare extends Widget_Base {
 			'separator' => 'before',
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
-			'name'      => "{$pfx}_img_col_border",
-			'label'     => __( 'Product Image border', 'essential-addons-for-elementor-lite' ),
-			'selector'  => $img_bg,
+			'name'     => "{$pfx}_img_col_border",
+			'label'    => __( 'Product Image border', 'essential-addons-for-elementor-lite' ),
+			'selector' => $img_bg,
 		] );
 
 		//Typography
@@ -933,9 +979,9 @@ class Woo_Product_Compare extends Widget_Base {
 
 		//COLORS
 		$this->add_control( "{$pfx}_clr_heading", [
-			'label' => __( 'Colors', 'essential-addons-for-elementor-lite' ),
-			'type'  => Controls_Manager::HEADING,
-            'separator' => 'before'
+			'label'     => __( 'Colors', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
 		] );
 		$this->start_controls_tabs( "{$pfx}_tabs_style" );
 		/*-----NORMAL state------ */
@@ -976,6 +1022,11 @@ class Woo_Product_Compare extends Widget_Base {
 				],
 			],
 		] );
+		$this->add_control( "{$pfx}_button_clr_heading", [
+			'label'     => __( 'Button', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
 		$this->add_control( "{$pfx}_btn_color", [
 			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
@@ -986,6 +1037,32 @@ class Woo_Product_Compare extends Widget_Base {
 			'label'     => __( 'Button Background', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $btn => 'background-color:{{VALUE}}' ],
+		] );
+		$this->add_control( "{$pfx}_rows_clr_heading", [
+			'label'     => __( 'Rows', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+		$this->add_control( "{$pfx}_tr_even_bg", [
+			'label'     => __( 'Even Row Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $tr_even => 'background-color:{{VALUE}}' ],
+			'separator' => 'before',
+		] );
+		$this->add_control( "{$pfx}_tr_even_color", [
+			'label'     => __( 'Even Row Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $tr_even => 'color:{{VALUE}}' ],
+		] );
+		$this->add_control( "{$pfx}_tr_odd_bg", [
+			'label'     => __( 'Odd Row Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $tr_odd => 'background-color:{{VALUE}}' ],
+		] );
+		$this->add_control( "{$pfx}_tr_odd_color", [
+			'label'     => __( 'Odd Row Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $tr_odd => 'color:{{VALUE}}' ],
 		] );
 		$this->end_controls_tab();
 		/*-----HOVER state------ */
