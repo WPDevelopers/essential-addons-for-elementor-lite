@@ -213,7 +213,6 @@ class Woo_Product_Compare extends Widget_Base {
 	}
 
 	public function init_content_table_settings_controls() {
-
 		$this->start_controls_section( 'section_content_table', [
 			'label' => __( 'Table Settings', 'essential-addons-for-elementor-lite' ),
 		] );
@@ -230,7 +229,6 @@ class Woo_Product_Compare extends Widget_Base {
 			'options' => $this->get_field_types(),
 			'default' => 'title',
 		] );
-
 		$repeater->add_control( 'field_label', [
 			'label'   => __( 'Label', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::TEXT,
@@ -238,7 +236,6 @@ class Woo_Product_Compare extends Widget_Base {
 				'active' => true,
 			],
 		] );
-
 		$this->add_control( 'fields', [
 			'label'       => __( 'Fields to show', 'essential-addons-for-elementor-lite' ),
 			'description' => __( 'Select the fields to show in the comparison table', 'essential-addons-for-elementor-lite' ),
@@ -247,7 +244,6 @@ class Woo_Product_Compare extends Widget_Base {
 			'default'     => $this->get_default_rf_fields(),
 			'title_field' => '{{{ field_label }}}',
 		] );
-
 		$this->add_control( 'repeat_price', [
 			'label'       => __( 'Repeat "Price" field', 'essential-addons-for-elementor-lite' ),
 			'description' => __( 'Repeat the "Price" field at the end of the table', 'essential-addons-for-elementor-lite' ),
@@ -301,7 +297,6 @@ class Woo_Product_Compare extends Widget_Base {
 			],
 
 		] );
-
 		$this->add_responsive_control( "eael_container_margin", [
 			'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -362,6 +357,8 @@ class Woo_Product_Compare extends Widget_Base {
 	}
 
 	public function init_style_table_controls() {
+		$table      = "{{WRAPPER}} .eael-wcpc-wrapper table";
+
 		$this->start_controls_section( 'section_style_table', [
 			'label' => __( 'Table Style', 'essential-addons-for-elementor-lite' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
@@ -369,6 +366,73 @@ class Woo_Product_Compare extends Widget_Base {
 		$this->add_control( 'separate_col_style', [
 			'label' => __( 'Style Content Column Separately', 'essential-addons-for-elementor-lite' ),
 			'type'  => Controls_Manager::SWITCHER,
+		] );
+		$this->add_responsive_control( "table_width", [
+			'label'      => esc_html__( 'Table Width', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px'  => [
+					'min'  => 0,
+					'max'  => 1000,
+					'step' => 5,
+				],
+				'rem' => [
+					'min'  => 0,
+					'max'  => 20,
+					'step' => .5,
+				],
+				'%'   => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'desktop'    => [
+				'unit' => '%',
+				'size' => 100,
+			],
+			'selectors'  => [
+				$table => 'width: {{SIZE}}{{UNIT}};',
+			],
+
+		] );
+		$this->add_responsive_control( "table_margin", [
+			'label'      => __( 'Table Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				$table => $this->apply_dim( 'margin' ),
+			],
+		] );
+		$this->add_responsive_control( "table_padding", [
+			'label'      => __( 'Table Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				$table => $this->apply_dim( 'padding' ),
+			],
+		] );
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'     => "table_bg_color",
+			'label'    => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+			'types'    => [
+				'classic',
+				'gradient',
+			],
+			'exclude' => ['image'],
+			'selector' => $table,
 		] );
 		$this->init_style_table_common_style();
 		$this->end_controls_section();
@@ -382,7 +446,7 @@ class Woo_Product_Compare extends Widget_Base {
 		$wrap      = "{{WRAPPER}} .eael-wcpc-wrapper";
 		$tbl       = "{$wrap} table";
 		$td        = "{$tbl} td";
-		$th = "{$tbl} tr:not(.image) th:not(.first-th)";
+		$th = "{$tbl} tr:not(.image):not(.title) th:not(.first-th)"; // if we do not need to give title row weight, then remove :not(.title)
 
 		$img_class = "{$tbl} tr.image td";
 		$title_row = "{$tbl} tr.title th, {$tbl} tr.title td";
@@ -514,6 +578,22 @@ class Woo_Product_Compare extends Widget_Base {
 				'separate_col_style!' => 'yes',
 			],
 		] );
+		$this->add_control( 'common_img_col_brd_heading', [
+			'label'     => __( 'Product Image border', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'      => "common_img_col_border",
+			'label'     => __( 'Product Image border', 'essential-addons-for-elementor-lite' ),
+			'selector'  => $img_class,
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
+		] );
 		// Colors
 		$this->add_control( 'common_colors_heading', [
 			'label'     => __( 'Colors', 'essential-addons-for-elementor-lite' ),
@@ -565,7 +645,7 @@ class Woo_Product_Compare extends Widget_Base {
 			'selectors' => [ $td => 'color:{{VALUE}}' ],
 		] );
 		$this->add_control( 'common_title_row_bg', [
-			'label'     => __( 'Title row background', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Title Row Background', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $title_row => 'background-color:{{VALUE}}', ],
 			'condition' => [
@@ -713,7 +793,6 @@ class Woo_Product_Compare extends Widget_Base {
 				'separate_col_style' => 'yes',
 			],
 		] );
-
 		$this->add_responsive_control( "{$pfx}_width", [
 			'label'      => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::SLIDER,
@@ -754,11 +833,19 @@ class Woo_Product_Compare extends Widget_Base {
 				$column_class => $this->apply_dim( 'padding' ),
 			],
 		] );
-
-
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "{$pfx}_border",
 			'selector' => $column_class,
+		] );
+		$this->add_control( "{$pfx}_img_col_brd_heading", [
+			'label'     => __( 'Product Image border', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'      => "{$pfx}_img_col_border",
+			'label'     => __( 'Product Image border', 'essential-addons-for-elementor-lite' ),
+			'selector'  => $img_bg,
 		] );
 
 		//Typography
