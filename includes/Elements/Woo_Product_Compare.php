@@ -358,6 +358,8 @@ class Woo_Product_Compare extends Widget_Base {
 
 	public function init_style_table_controls() {
 		$table = "{{WRAPPER}} .eael-wcpc-wrapper table";
+		$table_title = "{{WRAPPER}} .eael-wcpc-wrapper .wcpc-title";
+		$table_title_wrap = "{{WRAPPER}} .eael-wcpc-wrapper .first-th";
 
 		$this->start_controls_section( 'section_style_table', [
 			'label' => __( 'Table Style', 'essential-addons-for-elementor-lite' ),
@@ -434,6 +436,66 @@ class Woo_Product_Compare extends Widget_Base {
 			'exclude'  => [ 'image' ],
 			'selector' => $table,
 		] );
+
+		$this->add_control( 'tbl_brd_heading', [
+			'label'     => __( 'Table Border', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "tbl_border",
+			'selector' => $table,
+		] );
+		$this->add_control( 'tbl_title_style_heading', [
+			'label'     => __( 'Table Title Style', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+			'condition' => [ 'table_title!' => '' ],
+		] );
+		$this->add_control( 'tbl_title_color', [
+			'label'     => __( 'Table Title Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'separator'      => 'before',
+			'selectors' => [ $table_title => 'color:{{VALUE}}' ],
+		] );
+		$this->add_control( 'tbl_title_bg', [
+			'label'     => __( 'Table Title Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $table_title_wrap => 'background-color:{{VALUE}}' ],
+			'condition' => [ 'table_title!' => '' ],
+		] );
+		$this->add_responsive_control( "table_title_padding", [
+			'label'      => __( 'Table Title Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				$table_title => $this->apply_dim( 'padding' ),
+			],
+		] );
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => "tbl_title_text_typo",
+			'label'    =>  __( 'Table Title Typography', 'essential-addons-for-elementor-lite' ),
+			'selector' => $table_title,
+			'condition' => [ 'table_title!' => '' ],
+		] );
+
+		$this->add_control( 'tbl_title_brd_heading', [
+			'label'     => __( 'Table Title Border', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+			'condition' => [ 'table_title!' => '' ],
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "tbl_title_cell_border",
+			'selector' => $table_title_wrap,
+			'condition' => [ 'table_title!' => '' ],
+		] );
+
+
 		$this->init_style_table_common_style();
 		$this->end_controls_section();
 		$this->init_style_header_column_style();
@@ -676,25 +738,11 @@ class Woo_Product_Compare extends Widget_Base {
 			'label'     => __( 'Title Row Background', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $title_row => 'background-color:{{VALUE}}', ],
-			'condition' => [
-				'theme' => [
-					'theme-1',
-					'theme-2',
-					'theme-5',
-				],
-			],
 		] );
 		$this->add_control( 'common_title_row_color', [
 			'label'     => __( 'Title Row Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $title_row => 'color:{{VALUE}}' ],
-			'condition' => [
-				'theme' => [
-					'theme-1',
-					'theme-2',
-					'theme-5',
-				],
-			],
 		] );
 		$this->add_control( 'common_tr_even_bg', [
 			'label'     => __( 'Even Row Background', 'essential-addons-for-elementor-lite' ),
