@@ -116,8 +116,8 @@ class Woo_Product_Compare extends Widget_Base {
 		} ) : [];
 		$products               = $this->get_products_list( $product_ids );
 		$fields                 = $this->fields();
-		$title                  = $this->get_settings_for_display( 'table_title' );
-		$highlighted_product_id = 317; //@todo; make it dynamic
+		$title                  = isset( $ds['table_title']) ? $ds['table_title']: '';
+		$highlighted_product_id = !empty( $ds['highlighted_product_id']) ? $ds['highlighted_product_id']: null;
 		$theme_wrap_class       = $theme = '';
 		if ( ! empty( $ds['theme'] ) ) {
 			$theme            = esc_attr( $ds['theme'] );

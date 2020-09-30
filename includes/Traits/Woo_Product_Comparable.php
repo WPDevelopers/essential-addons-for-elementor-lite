@@ -116,6 +116,14 @@ trait Woo_Product_Comparable {
 			'options' => $this->get_themes(),
 			'default' => '',
 		] );
+		$this->add_control( "highlighted_product_id", [
+			'label'       => __( 'Highlighted Product ID', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::NUMBER,
+			'description' => __( 'Enter any ID from the Product IDs used above', 'essential-addons-for-elementor-lite' ),
+			'condition'   => [
+				'theme' => 'theme-3',
+			],
+		] );
 		$this->end_controls_section();
 	}
 
