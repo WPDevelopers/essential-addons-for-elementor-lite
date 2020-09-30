@@ -11,9 +11,11 @@ use \Elementor\Controls_Manager as Controls_Manager;
 use \Elementor\Group_Control_Border as Group_Control_Border;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Widget_Base as Widget_Base;
+use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
 
 class Product_Grid extends Widget_Base
 {
+	use Woo_Product_Comparable;
     use \Essential_Addons_Elementor\Traits\Helper;
     use \Essential_Addons_Elementor\Template\Content\Product_Grid;
 
