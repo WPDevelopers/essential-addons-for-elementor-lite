@@ -123,7 +123,7 @@ class Woo_Product_Compare extends Widget_Base {
 			$theme            = esc_attr( $ds['theme'] );
 			$theme_wrap_class = " custom {$theme}";
 		}
-		$this->render_compare_table( compact( 'products', 'fields', 'title', 'highlighted_product_id', 'theme_wrap_class' ) );
+		$this->render_compare_table( compact( 'products', 'fields', 'title', 'highlighted_product_id', 'theme_wrap_class', 'theme' ) );
 	}
 
 }
