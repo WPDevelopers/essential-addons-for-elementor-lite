@@ -1102,14 +1102,14 @@ trait Woo_Product_Comparable {
                                     if ( $field === 'image' ) {
 	                                    echo '<span class="img-inner">';
 	                                    if ( 'theme-4' === $theme ) {
-		                                    echo '<span class="ribbon">New</span>';
+		                                    echo '<span class="ribbon">New</span>';//@todo; make it dynamic
 	                                    }
                                     }
                                     echo ! empty( $product->fields[ $field ] ) ? $product->fields[ $field ] : '&nbsp;';
                                     if ( $field === 'image' ) {
 	                                    if ( 'theme-4' === $theme ) {
 		                                    echo ! empty( $product->fields['title'] ) ? sprintf( "<p class='product-title'>%s</p>", esc_html( $product->fields['title'] ) ) : '&nbsp;';
-		                                    echo ! empty( $product->fields['price'] ) ? $product->fields['price'] : '&nbsp;';
+		                                    echo ! empty( $product->fields['price'] ) ? wp_kses_post( $product->fields['price']) : '&nbsp;';
 	                                    }
 	                                    echo '</span>';
                                     }
