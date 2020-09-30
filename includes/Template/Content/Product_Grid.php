@@ -30,6 +30,7 @@ trait Product_Grid
                             <span class="price">' . $product->get_price_html() . '</span>
                         </a>';
                         woocommerce_template_loop_add_to_cart();
+                        self::print_compare_button( $product->get_id());
                     echo '</li>';
                 } else if ($settings['eael_product_grid_style_preset'] == 'eael-product-overlay') {
                     echo '<li class="product">
@@ -38,7 +39,9 @@ trait Product_Grid
                             <div class="button-wrap clearfix">
                                 <a href="' . $product->get_permalink() . '" class="product-link"><span class="fas fa-link"></span></a>';
                                 woocommerce_template_loop_add_to_cart();
-                            echo '</div>
+	                self::print_compare_button( $product->get_id());
+
+	                echo '</div>
                         </div>
                         <h2 class="woocommerce-loop-product__title">' . $product->get_title() . '</h2>
                         ' . ($settings['eael_product_grid_rating'] != 'yes' ? '' : wc_get_rating_html($product->get_average_rating(), $product->get_rating_count())) . '

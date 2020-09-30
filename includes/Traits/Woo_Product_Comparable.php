@@ -1355,4 +1355,8 @@ trait Woo_Product_Comparable {
         </svg>
 		<?php
 	}
+
+	public static function print_compare_button($id) {
+        printf( '<a href="%s?action=eael-wcpc-add-product&id=%d" class="compare button" data-product_id="318" rel="nofollow">%s</a>', esc_url( get_site_url() ), intval( $id, 10), __('Compare', 'essential-addons-for-elementor-lite')  );
+	}
 }
