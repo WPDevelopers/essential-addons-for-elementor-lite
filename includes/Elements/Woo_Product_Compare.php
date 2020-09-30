@@ -117,13 +117,14 @@ class Woo_Product_Compare extends Widget_Base {
 		$products               = $this->get_products_list( $product_ids );
 		$fields                 = $this->fields();
 		$title                  = isset( $ds['table_title']) ? $ds['table_title']: '';
+		$ribbon                  = isset( $ds['ribbon']) ? $ds['ribbon']: '';
 		$highlighted_product_id = !empty( $ds['highlighted_product_id']) ? $ds['highlighted_product_id']: null;
 		$theme_wrap_class       = $theme = '';
 		if ( ! empty( $ds['theme'] ) ) {
 			$theme            = esc_attr( $ds['theme'] );
 			$theme_wrap_class = " custom {$theme}";
 		}
-		$this->render_compare_table( compact( 'products', 'fields', 'title', 'highlighted_product_id', 'theme_wrap_class', 'theme' ) );
+		$this->render_compare_table( compact( 'products', 'fields', 'title', 'highlighted_product_id', 'theme_wrap_class', 'theme', 'ribbon' ) );
 	}
 
 }

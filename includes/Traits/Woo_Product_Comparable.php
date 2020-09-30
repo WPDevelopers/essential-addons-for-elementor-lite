@@ -121,7 +121,16 @@ trait Woo_Product_Comparable {
 			'type'        => Controls_Manager::NUMBER,
 			'description' => __( 'Enter any ID from the Product IDs used above', 'essential-addons-for-elementor-lite' ),
 			'condition'   => [
-				'theme' => 'theme-3',
+				'theme' => ['theme-3', 'theme-4'],
+			],
+		] );
+		$this->add_control( "ribbon", [
+			'label'       => __( 'Ribbon Text', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'placeholder' => __( 'eg. New', 'essential-addons-for-elementor-lite' ),
+			'default' => __( 'New', 'essential-addons-for-elementor-lite' ),
+			'condition'   => [
+				'theme' => 'theme-4',
 			],
 		] );
 		$this->end_controls_section();
@@ -1051,7 +1060,7 @@ trait Woo_Product_Comparable {
 	protected function render_compare_table( $options ) {
 		$products               = $fields = [];
 		$highlighted_product_id = null;
-		$theme_wrap_class       = $theme = $title = '';
+		$theme_wrap_class       = $theme = $title = $ribbon = '';
 		extract( $options );
 		do_action( 'eael/wcpc/before_content_wrapper' ); ?>
         <div class="eael-wcpc-wrapper woocommerce <?php echo esc_attr( $theme_wrap_class ); ?>">
@@ -1094,15 +1103,16 @@ trait Woo_Product_Comparable {
 							<?php
 							$index = 0;
 							foreach ( $products as $product_id => $product ) {
-								$highlighted   = $product_id === $highlighted_product_id ? 'featured' : '';
+							    $is_highlighted = $product_id === $highlighted_product_id;
+								$highlighted   = $is_highlighted ? 'featured' : '';
 								$product_class = ( $index % 2 == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted" ?>
                                 <td class="<?php echo esc_attr( $product_class ); ?>">
                                     <span>
                                     <?php
                                     if ( $field === 'image' ) {
 	                                    echo '<span class="img-inner">';
-	                                    if ( 'theme-4' === $theme ) {
-		                                    echo '<span class="ribbon">New</span>';//@todo; make it dynamic
+	                                    if ( 'theme-4' === $theme && $is_highlighted && $ribbon) {
+		                                   printf( '<span class="ribbon">%s</span>', esc_html( $ribbon ));
 	                                    }
                                     }
                                     echo ! empty( $product->fields[ $field ] ) ? $product->fields[ $field ] : '&nbsp;';
