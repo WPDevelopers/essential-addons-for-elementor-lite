@@ -43,9 +43,9 @@ class Helper
      * @return bool
      * @since  4.0.4
      */
-    public static function prevent_extension_loading($id)
+    public static function prevent_extension_loading($post_id)
     {
-        $template_name = get_post_meta($id, '_elementor_template_type', true);
+        $template_name = get_post_meta($post_id, '_elementor_template_type', true);
         $template_list = [
             'footer',
             'header',

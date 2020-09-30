@@ -11,9 +11,17 @@ use \Essential_Addons_Elementor\Classes\Helper;
 trait Generator
 {
 
-    public function uid($uid = null)
+    public function uid()
     {
-        if ($uid == null) {
+        if ($this->is_running_background()) {
+            return;
+        }
+
+        if ($this->uid != null) {
+            return;
+        }
+
+        if ($this->is_preview_mode()) {
             if (is_front_page()) {
                 $uid = 'front-page';
             } else if (is_home()) {
@@ -34,24 +42,26 @@ trait Generator
                 $uid = 'tax-' . get_queried_object_id();
             } else if (is_author()) {
                 $uid = 'author-' . get_queried_object_id();
-            } else if (is_date()) {
-                $uid = 'date';
+            } elseif (is_year()) {
+                $uid = 'year-' . get_the_date('y');
+            } elseif (is_month()) {
+                $uid = 'month-' . get_the_date('m-y');
+            } elseif (is_day()) {
+                $uid = 'day-' . get_the_date('j-m-y');
             } else if (is_archive()) {
-                $uid = 'archive';
+                $uid = 'archive-' . get_queried_object_id();
             } else if (is_search()) {
                 $uid = 'search';
-            } else if (is_404()) {
-                $uid = 'error-404';
             } else if (is_single() || is_page() || is_singular()) {
                 $uid = 'singular-' . get_queried_object_id();
+            } else if (is_404()) {
+                $uid = 'error-404';
             }
+        } elseif ($this->is_edit_mode()) {
+            $uid = 'eael';
         }
 
-        if ($uid) {
-            return substr(md5($uid), 0, 9);
-        }
-
-        return $uid;
+        $this->uid = substr(md5($uid), 0, 9);
     }
 
     public function collect_loaded_templates($content, $post_id)
@@ -66,21 +76,6 @@ trait Generator
 
         return $content;
     }
-
-    // public function collect_loaded_widgets($widget)
-    // {
-    //     if ($widget->get_name() === 'global') {
-    //         $reflection = new ReflectionClass(get_class($widget));
-    //         $protected = $reflection->getProperty('template_data');
-    //         $protected->setAccessible(true);
-
-    //         if ($global_data = $protected->getValue($widget)) {
-    //             $this->loaded_widgets = array_merge($this->loaded_widgets, $this->collect_recursive_elements($global_data['content']));
-    //         }
-    //     } else {
-    //         $this->loaded_widgets[] = $widget->get_name();
-    //     }
-    // }
 
     public function collect_elements_in_content($elements)
     {
@@ -128,7 +123,6 @@ trait Generator
 
     public function update_request_data()
     {
-
         if ($this->is_running_background()) {
             return;
         }
@@ -145,18 +139,14 @@ trait Generator
         $this->loaded_elements = $this->parse_elements($this->loaded_elements);
 
         // prev data
-        $loaded_elements = get_transient($this->uid() . '_loaded_elements');
-        $editor_updated_at = get_transient('eael_editor_updated_at');
-        $post_updated_at = get_transient($this->uid() . '_updated_at');
+        $loaded_elements = get_transient($this->uid . '_loaded_elements');
 
-        if ($loaded_elements === false || $editor_updated_at === false || $post_updated_at === false || $editor_updated_at != $post_updated_at) {
-            // update transient
-            if ($loaded_elements != $this->loaded_elements) {
-                set_transient($this->uid() . '_loaded_elements', $this->loaded_elements);
-            }
+        // update where necessary
+        if ($loaded_elements != $this->loaded_elements) {
+            set_transient($this->uid . '_loaded_elements', $this->loaded_elements);
         }
 
-        // $templates = get_transient($this->uid() . '_loaded_templates');
+        // $templates = get_transient($this->uid . '_loaded_templates');
 
         // foreach ($this->loaded_templates as $post_id) {
         //     $extensons = (array) $this->parse_extensions($post_id);
@@ -168,7 +158,7 @@ trait Generator
         // $this->loaded_widgets = $this->parse_widgets($this->loaded_widgets);
 
         // if ($templates != $this->loaded_templates) {
-        //     set_transient($this->uid() . '_loaded_templates', $this->loaded_templates);
+        //     set_transient($this->uid . '_loaded_templates', $this->loaded_templates);
         // }
     }
 
@@ -248,22 +238,22 @@ trait Generator
      */
     public function generate_script($elements, $context, $ext)
     {
-        $loaded_assets = get_transient($this->uid() . '_loaded_assets');
+        $loaded_assets = get_transient($this->uid . '_loaded_assets');
         $editor_updated_at = get_transient('eael_editor_updated_at');
 
         // check if script exists
         if ($context == 'view') {
-            if ($loaded_assets == $elements && $this->has_assets_files($this->uid(), $ext)) {
+            if ($loaded_assets == $elements && $this->has_assets_files($this->uid, $ext)) {
                 return;
             }
 
             // update loaded elements data & sync update time with editor time
             if ($ext == 'js') {
-                set_transient($this->uid() . '_loaded_assets', $elements);
-                set_transient($this->uid() . '_updated_at', $editor_updated_at);
+                set_transient($this->uid . '_loaded_assets', $elements);
+                set_transient($this->uid . '_updated_at', $editor_updated_at);
             }
         } else if ($context == 'edit') {
-            if ($this->has_assets_files($this->uid('eael'), $ext)) {
+            if ($this->has_assets_files($this->uid, $ext)) {
                 return;
             }
         }
@@ -274,7 +264,7 @@ trait Generator
         }
 
         // naming asset file
-        $file_name = ($context == 'view' ? $this->uid() : $this->uid('eael')) . '.min.' . $ext;
+        $file_name = ($context == 'view' ? $this->uid : $this->uid) . '.min.' . $ext;
 
         // output asset string
         $output = $this->generate_strings($elements, $context, $ext);
@@ -300,7 +290,7 @@ trait Generator
         }
 
         // if ($context == 'view' && $ext == 'js') {
-        //     $templates = get_transient($this->uid() . '_loaded_templates');
+        //     $templates = get_transient($this->uid . '_loaded_templates');
 
         //     if ($templates) {
         //         foreach ($templates as $post_id) {

@@ -6,18 +6,17 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use Essential_Addons_Elementor\Classes\WPDeveloper_Dashboard_Widget;
 use Essential_Addons_Elementor\Classes\WPML\Eael_WPML;
-use Essential_Addons_Elementor\Traits\Admin;
-use Essential_Addons_Elementor\Traits\Controls;
-use Essential_Addons_Elementor\Traits\Core;
-use Essential_Addons_Elementor\Traits\Elements;
-use Essential_Addons_Elementor\Traits\Enqueue;
-use Essential_Addons_Elementor\Traits\Generator;
-use Essential_Addons_Elementor\Traits\Library;
-use Essential_Addons_Elementor\Traits\Login_Registration;
+use \Essential_Addons_Elementor\Traits\Admin;
+use \Essential_Addons_Elementor\Traits\Controls;
+use \Essential_Addons_Elementor\Traits\Core;
+use \Essential_Addons_Elementor\Traits\Elements;
+use \Essential_Addons_Elementor\Traits\Enqueue;
 use \Essential_Addons_Elementor\Traits\Facebook_Feed;
+use \Essential_Addons_Elementor\Traits\Generator;
 use \Essential_Addons_Elementor\Traits\Helper;
+use \Essential_Addons_Elementor\Traits\Library;
+use \Essential_Addons_Elementor\Traits\Login_Registration;
 
 class Bootstrap
 {
@@ -36,6 +35,8 @@ class Bootstrap
     // instance container
     private static $instance = null;
 
+    protected $uid = null;
+
     // registered elements container
     protected $registered_elements;
 
@@ -51,12 +52,11 @@ class Bootstrap
     // loaded templates in a request
     protected $loaded_templates = [];
 
-
     protected $loaded_elements = [];
 
     // loaded widgets in a request
     protected $loaded_widgets = [];
-    
+
     // loaded extensions in a request
     protected $loaded_extensions = [];
 
@@ -129,8 +129,8 @@ class Bootstrap
         add_action('wp_footer', [$this, 'enqueue_inline_scripts']);
 
         // Generator
+        add_action('wp', [$this, 'uid']);
         add_filter('elementor/frontend/builder_content_data', [$this, 'collect_loaded_templates'], 10, 2);
-        // add_action('elementor/frontend/widget/before_render', [$this, 'collect_loaded_widgets']);
         add_action('wp_print_footer_scripts', [$this, 'update_request_data']);
 
         // Ajax
@@ -163,12 +163,12 @@ class Bootstrap
 
         add_filter('eael/controls/event-calendar/source', [$this, 'event_calendar_source']);
         add_action('eael/controls/advanced-data-table/source', [$this, 'advanced_data_table_source']);
-        
+
         // Login | Register
-        add_action( 'init', [ $this, 'login_or_register_user'] );
-	    add_filter( 'wp_new_user_notification_email', array( $this, 'new_user_notification_email' ), 10, 3 );
-	    add_filter( 'wp_new_user_notification_email_admin', array( $this, 'new_user_notification_email_admin' ), 10, 3 );
-        
+        add_action('init', [$this, 'login_or_register_user']);
+        add_filter('wp_new_user_notification_email', array($this, 'new_user_notification_email'), 10, 3);
+        add_filter('wp_new_user_notification_email_admin', array($this, 'new_user_notification_email_admin'), 10, 3);
+
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'toc_rank_math_support']);
 

@@ -103,8 +103,8 @@ trait Enqueue
 
                 // enqueue
                 wp_enqueue_style(
-                    $this->uid('eael'),
-                    $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid('eael') . '.min.css'),
+                    $this->uid,
+                    $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid . '.min.css'),
                     false,
                     time()
                 );
@@ -122,23 +122,23 @@ trait Enqueue
 
                 // enqueue
                 wp_enqueue_script(
-                    $this->uid('eael'),
-                    $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid('eael') . '.min.js'),
+                    $this->uid,
+                    $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid . '.min.js'),
                     ['jquery'],
                     time(),
                     true
                 );
 
                 // localize
-                wp_localize_script($this->uid('eael'), 'localize', $this->localize_objects);
+                wp_localize_script($this->uid, 'localize', $this->localize_objects);
             }
         }
 
         // view mode
         if ($this->is_preview_mode()) {
-            $loaded_elements = get_transient($this->uid() . '_loaded_elements');
+            $loaded_elements = get_transient($this->uid . '_loaded_elements');
             $editor_updated_at = get_transient('eael_editor_updated_at');
-            $post_updated_at = get_transient($this->uid() . '_updated_at');
+            $post_updated_at = get_transient($this->uid . '_updated_at');
 
             if ($loaded_elements === false || $editor_updated_at === false || $post_updated_at === false || $editor_updated_at != $post_updated_at) {
                 $loaded_elements = $this->get_settings();
@@ -160,8 +160,8 @@ trait Enqueue
 
                 // enqueue
                 wp_enqueue_style(
-                    $this->uid(),
-                    $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid() . '.min.css'),
+                    $this->uid,
+                    $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid . '.min.css'),
                     false,
                     time()
                 );
@@ -178,15 +178,15 @@ trait Enqueue
                 $this->generate_script($loaded_elements, 'view', 'js');
 
                 wp_enqueue_script(
-                    $this->uid(),
-                    $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid() . '.min.js'),
+                    $this->uid,
+                    $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid . '.min.js'),
                     ['jquery'],
                     time(),
                     true
                 );
 
                 // localize script
-                wp_localize_script($this->uid(), 'localize', $this->localize_objects);
+                wp_localize_script($this->uid, 'localize', $this->localize_objects);
             }
         }
     }
@@ -214,11 +214,11 @@ trait Enqueue
     {
         if ($this->is_edit_mode()) {
             if ($this->css_strings) {
-                echo '<style id="' . $this->uid('eael') . '">' . $this->css_strings . '</style>';
+                echo '<style id="' . $this->uid . '">' . $this->css_strings . '</style>';
             }
         } else if ($this->is_preview_mode()) {
             if ($this->css_strings) {
-                echo '<style id="' . $this->uid() . '">' . $this->css_strings . '</style>';
+                echo '<style id="' . $this->uid . '">' . $this->css_strings . '</style>';
             }
         }
     }
