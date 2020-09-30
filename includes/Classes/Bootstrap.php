@@ -37,25 +37,28 @@ class Bootstrap
     private static $instance = null;
 
     // registered elements container
-    public $registered_elements;
+    protected $registered_elements;
 
     // registered extensions container
-    public $registered_extensions;
+    protected $registered_extensions;
 
     // identify whether pro is enabled
-    public $pro_enabled;
+    protected $pro_enabled;
 
     // localize objects
     public $localize_objects = [];
 
     // loaded templates in a request
-    public $loaded_templates = [];
+    protected $loaded_templates = [];
+
+
+    protected $loaded_elements = [];
 
     // loaded widgets in a request
-    public $loaded_widgets = [];
+    protected $loaded_widgets = [];
     
     // loaded extensions in a request
-    // public $loaded_extensions = [];
+    protected $loaded_extensions = [];
 
     // css strings, used for inline embed
     protected $css_strings;
@@ -126,8 +129,8 @@ class Bootstrap
         add_action('wp_footer', [$this, 'enqueue_inline_scripts']);
 
         // Generator
-        add_action('elementor/css-file/post/enqueue', [$this, 'collect_loaded_templates']);
-        add_action('elementor/frontend/widget/before_render', [$this, 'collect_loaded_widgets']);
+        add_filter('elementor/frontend/builder_content_data', [$this, 'collect_loaded_templates'], 10, 2);
+        // add_action('elementor/frontend/widget/before_render', [$this, 'collect_loaded_widgets']);
         add_action('wp_print_footer_scripts', [$this, 'update_request_data']);
 
         // Ajax
@@ -147,7 +150,7 @@ class Bootstrap
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
         add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
         add_filter('elementor/editor/localize_settings', [$this, 'promote_pro_elements']);
-        add_action('wp_footer', array($this, 'render_global_html'));
+        // add_action('wp_footer', array($this, 'render_global_html'));
 
         // Controls
         add_action('eael/controls/query', [$this, 'query'], 10, 1);
