@@ -322,12 +322,12 @@ trait Elements
             if (get_post_status($post_id) === false) {
                 continue;
             }
-            
-            if (Helper::prevent_extension_loading($post_id)) {
-                continue;
-            }
 
             if (!Plugin::$instance->db->is_built_with_elementor($post_id)) {
+                continue;
+            }
+            
+            if (Helper::prevent_extension_loading($post_id)) {
                 continue;
             }
 
@@ -337,13 +337,13 @@ trait Elements
             if ($this->get_settings('eael-reading-progress') == true) {
                 if ($document->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {
                     $reading_progress_html = '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-' . ($document->get_settings('eael_ext_reading_progress') == 'yes' ? 'local' : 'global') . '">
-                            <div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . $document->get_settings('eael_ext_reading_progress_position') . '">
-                                <div class="eael-reading-progress-fill"></div>
-                            </div>
-                            <div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' . @$global_settings['reading_progress']['position'] . '" style="height: ' . @$global_settings['reading_progress']['height']['size'] . 'px;background-color: ' . @$global_settings['reading_progress']['bg_color'] . ';">
-                                <div class="eael-reading-progress-fill" style="height: ' . @$global_settings['reading_progress']['height']['size'] . 'px;background-color: ' . @$global_settings['reading_progress']['fill_color'] . ';transition: width ' . @$global_settings['reading_progress']['animation_speed']['size'] . 'ms ease;"></div>
-                            </div>
-                        </div>';
+                        <div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . $document->get_settings('eael_ext_reading_progress_position') . '">
+                            <div class="eael-reading-progress-fill"></div>
+                        </div>
+                        <div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' . @$global_settings['reading_progress']['position'] . '" style="height: ' . @$global_settings['reading_progress']['height']['size'] . 'px;background-color: ' . @$global_settings['reading_progress']['bg_color'] . ';">
+                            <div class="eael-reading-progress-fill" style="height: ' . @$global_settings['reading_progress']['height']['size'] . 'px;background-color: ' . @$global_settings['reading_progress']['fill_color'] . ';transition: width ' . @$global_settings['reading_progress']['animation_speed']['size'] . 'ms ease;"></div>
+                        </div>
+                    </div>';
 
                     if ($document->get_settings('eael_ext_reading_progress') != 'yes') {
                         if (get_post_status($global_settings['reading_progress']['post_id']) != 'publish') {
@@ -445,7 +445,6 @@ trait Elements
      */
     public function toc_global_css($page_settings_model, $global_settings)
     {
-
         $eael_toc = $global_settings['eael_ext_table_of_content'];
         $eael_toc_width = isset($eael_toc['eael_ext_toc_width']['size']) ? $eael_toc['eael_ext_toc_width']['size'] : 300;
         $toc_list_color_active = $eael_toc['eael_ext_table_of_content_list_text_color_active'];
@@ -656,14 +655,11 @@ trait Elements
     /**
      * Register WC Hooks
      */
-
     public function register_wc_hooks()
     {
-
         if (class_exists('WooCommerce')) {
             wc()->frontend_includes();
         }
-
     }
 
 }

@@ -89,17 +89,17 @@ trait Enqueue
 
         // edit mode
         if ($this->is_edit_mode()) {
-            $widgets = $this->get_settings();
+            $loaded_elements = $this->get_settings();
 
             // run hook before enqueue styles
-            do_action('eael/before_enqueue_styles', $widgets);
+            do_action('eael/before_enqueue_styles', $loaded_elements);
 
             // css
             if (get_option('elementor_css_print_method') == 'internal') {
-                $this->css_strings = $this->generate_strings($widgets, 'edit', 'css');
+                $this->css_strings = $this->generate_strings($loaded_elements, 'edit', 'css');
             } else {
                 // generate editor style
-                $this->generate_script($widgets, 'edit', 'css');
+                $this->generate_script($loaded_elements, 'edit', 'css');
 
                 // enqueue
                 wp_enqueue_style(
@@ -111,14 +111,14 @@ trait Enqueue
             }
 
             // run hook before enqueue scripts
-            do_action('eael/before_enqueue_scripts', $widgets);
+            do_action('eael/before_enqueue_scripts', $loaded_elements);
 
             // js
             if (get_option('eael_js_print_method') == 'internal') {
-                $this->js_strings = $this->generate_strings($widgets, 'edit', 'js');
+                $this->js_strings = $this->generate_strings($loaded_elements, 'edit', 'js');
             } else {
                 // generate editor script
-                $this->generate_script($widgets, 'edit', 'js');
+                $this->generate_script($loaded_elements, 'edit', 'js');
 
                 // enqueue
                 wp_enqueue_script(
@@ -136,27 +136,27 @@ trait Enqueue
 
         // view mode
         if ($this->is_preview_mode()) {
-            $widgets = get_transient($this->uid() . '_loaded_widgets');
+            $loaded_elements = get_transient($this->uid() . '_loaded_elements');
             $editor_updated_at = get_transient('eael_editor_updated_at');
             $post_updated_at = get_transient($this->uid() . '_updated_at');
 
-            if ($widgets === false || $editor_updated_at != $post_updated_at) {
-                $widgets = $this->get_settings();
+            if ($loaded_elements === false || $editor_updated_at === false || $post_updated_at === false || $editor_updated_at != $post_updated_at) {
+                $loaded_elements = $this->get_settings();
             }
 
             // if no widget in page, return
-            if (empty($widgets)) {
+            if (empty($loaded_elements)) {
                 return;
             }
 
             // run hook before enqueue styles
-            do_action('eael/before_enqueue_styles', $widgets);
+            do_action('eael/before_enqueue_styles', $loaded_elements);
 
             // css
             if (get_option('elementor_css_print_method') == 'internal') {
-                $this->css_strings = $this->generate_strings($widgets, 'view', 'css');
+                $this->css_strings = $this->generate_strings($loaded_elements, 'view', 'css');
             } else {
-                $this->generate_script($widgets, 'view', 'css');
+                $this->generate_script($loaded_elements, 'view', 'css');
 
                 // enqueue
                 wp_enqueue_style(
@@ -168,14 +168,14 @@ trait Enqueue
             }
 
             // run hook before enqueue scripts
-            do_action('eael/before_enqueue_scripts', $widgets);
+            do_action('eael/before_enqueue_scripts', $loaded_elements);
 
             // js
             if (get_option('eael_js_print_method') == 'internal') {
-                $this->js_strings = $this->generate_strings($widgets, 'edit', 'js');
+                $this->js_strings = $this->generate_strings($loaded_elements, 'view', 'js');
             } else {
                 // generate post script
-                $this->generate_script($widgets, 'view', 'js');
+                $this->generate_script($loaded_elements, 'view', 'js');
 
                 wp_enqueue_script(
                     $this->uid(),

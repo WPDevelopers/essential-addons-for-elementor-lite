@@ -7,7 +7,6 @@ if (!defined('ABSPATH')) {
 
 use \Elementor\Plugin;
 use \Essential_Addons_Elementor\Classes\Helper;
-use \ReflectionClass;
 
 trait Generator
 {
@@ -55,61 +54,122 @@ trait Generator
         return $uid;
     }
 
-    public function collect_loaded_templates($css_file)
+    public function collect_loaded_templates($content, $post_id)
     {
-        $post_id = (int) $css_file->get_post_id();
+        if (!$this->is_running_background() && $this->is_preview_mode()) {
+            // loaded template stack
+            $this->loaded_templates[] = $post_id;
+
+            // loaded elements stack
+            $this->loaded_elements = array_merge($this->loaded_elements, $this->collect_elements_in_content($content));
+        }
+
+        return $content;
+    }
+
+    // public function collect_loaded_widgets($widget)
+    // {
+    //     if ($widget->get_name() === 'global') {
+    //         $reflection = new ReflectionClass(get_class($widget));
+    //         $protected = $reflection->getProperty('template_data');
+    //         $protected->setAccessible(true);
+
+    //         if ($global_data = $protected->getValue($widget)) {
+    //             $this->loaded_widgets = array_merge($this->loaded_widgets, $this->collect_recursive_elements($global_data['content']));
+    //         }
+    //     } else {
+    //         $this->loaded_widgets[] = $widget->get_name();
+    //     }
+    // }
+
+    public function collect_elements_in_content($elements)
+    {
+        $collections = [];
+
+        foreach ($elements as $element) {
+            // collect extensions for section
+            if (isset($element['elType']) && $element['elType'] == 'section') {
+                if (isset($element['settings']['eael_particle_switch']) && $element['settings']['eael_particle_switch'] == 'yes') {
+                    $collections[] = 'eael-section-particles';
+                }
+                if (isset($element['settings']['eael_parallax_switcher']) && $element['settings']['eael_parallax_switcher'] == 'yes') {
+                    $collections[] = 'eael-section-parallax';
+                }
+            }
+
+            // collect widget
+            if (isset($element['elType']) && $element['elType'] == 'widget') {
+                // collect extensions for widget
+                if (isset($element['settings']['eael_tooltip_section_enable']) && $element['settings']['eael_tooltip_section_enable'] == 'yes') {
+                    $collections[] = 'eael-tooltip-section';
+                }
+                if (isset($element['settings']['eael_ext_content_protection']) && $element['settings']['eael_ext_content_protection'] == 'yes') {
+                    $collections[] = 'eael-content-protection';
+                }
+
+                if ($element['widgetType'] === 'global') {
+                    $document = Plugin::$instance->documents->get($element['templateID']);
+
+                    if (is_object($document)) {
+                        $collections = array_merge($collections, $this->collect_elements_in_content($document->get_elements_data()));
+                    }
+                } else {
+                    $collections[] = $element['widgetType'];
+                }
+            }
+
+            if (!empty($element['elements'])) {
+                $collections = array_merge($collections, $this->collect_elements_in_content($element['elements']));
+            }
+        }
+
+        return $collections;
+    }
+
+    public function update_request_data()
+    {
 
         if ($this->is_running_background()) {
             return;
         }
 
-        // loaded template stack
-        if ($this->is_edit_mode() || $this->is_preview_mode()) {
-            $this->loaded_templates[] = $post_id;
+        if (!$this->is_preview_mode()) {
+            return;
         }
-    }
 
-    public function collect_loaded_widgets($widget)
-    {
-        if ($widget->get_name() === 'global') {
-            $reflection = new ReflectionClass(get_class($widget));
-            $protected = $reflection->getProperty('template_data');
-            $protected->setAccessible(true);
-
-            if ($global_data = $protected->getValue($widget)) {
-                $this->loaded_widgets = array_merge($this->loaded_widgets, $this->collect_recursive_elements($global_data['content']));
-            }
-        } else {
-            $this->loaded_widgets[] = $widget->get_name();
+        if (empty($this->loaded_elements)) {
+            return;
         }
-    }
 
-    public function update_request_data()
-    {
-        if ($this->is_preview_mode()) {
-            $widgets = get_transient($this->uid() . '_loaded_widgets');
-            $templates = get_transient($this->uid() . '_loaded_templates');
+        // parse loaded elements
+        $this->loaded_elements = $this->parse_elements($this->loaded_elements);
 
-            if ($this->loaded_templates) {
-                foreach ($this->loaded_templates as $post_id) {
-                    $extensons = (array) $this->parse_extensions($post_id);
+        // prev data
+        $loaded_elements = get_transient($this->uid() . '_loaded_elements');
+        $editor_updated_at = get_transient('eael_editor_updated_at');
+        $post_updated_at = get_transient($this->uid() . '_updated_at');
 
-                    // loaded widgets stack
-                    $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $extensons)));
-                }
-            }
-
-            $this->loaded_widgets = $this->parse_widgets($this->loaded_widgets);
-
+        if ($loaded_elements === false || $editor_updated_at === false || $post_updated_at === false || $editor_updated_at != $post_updated_at) {
             // update transient
-            if ($widgets != $this->loaded_widgets) {
-                set_transient($this->uid() . '_loaded_widgets', $this->loaded_widgets);
-            }
-
-            if ($templates != $this->loaded_templates) {
-                set_transient($this->uid() . '_loaded_templates', $this->loaded_templates);
+            if ($loaded_elements != $this->loaded_elements) {
+                set_transient($this->uid() . '_loaded_elements', $this->loaded_elements);
             }
         }
+
+        // $templates = get_transient($this->uid() . '_loaded_templates');
+
+        // foreach ($this->loaded_templates as $post_id) {
+        //     $extensons = (array) $this->parse_extensions($post_id);
+
+        //     // loaded widgets stack
+        //     $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $extensons)));
+        // }
+
+        // $this->loaded_widgets = $this->parse_widgets($this->loaded_widgets);
+
+        // if ($templates != $this->loaded_templates) {
+        //     set_transient($this->uid() . '_loaded_templates', $this->loaded_templates);
+        // }
     }
 
     /**
@@ -150,7 +210,7 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function parse_widgets($widgets)
+    public function parse_elements($widgets)
     {
         $replace = [
             'eicon-woocommerce' => 'eael-product-grid',
@@ -182,42 +242,24 @@ trait Generator
     }
 
     /**
-     * Traverse in element data recursively
-     *
-     * @since 3.0.0
-     */
-    public function collect_recursive_elements($elements)
-    {
-        $collections = [];
-
-        array_walk_recursive($elements, function ($val, $key) use (&$collections) {
-            if ($key == 'widgetType') {
-                $collections[] = $val;
-            }
-        });
-
-        return $collections;
-    }
-
-    /**
      * Generate scripts file.
      *
      * @since 3.0.0
      */
-    public function generate_script($widgets, $context, $ext)
+    public function generate_script($elements, $context, $ext)
     {
         $loaded_assets = get_transient($this->uid() . '_loaded_assets');
         $editor_updated_at = get_transient('eael_editor_updated_at');
 
         // check if script exists
         if ($context == 'view') {
-            if ($loaded_assets == $widgets && $this->has_assets_files($this->uid(), $ext)) {
+            if ($loaded_assets == $elements && $this->has_assets_files($this->uid(), $ext)) {
                 return;
             }
 
-            // update loaded widgets data & sync update time with editor time
+            // update loaded elements data & sync update time with editor time
             if ($ext == 'js') {
-                set_transient($this->uid() . '_loaded_assets', $widgets);
+                set_transient($this->uid() . '_loaded_assets', $elements);
                 set_transient($this->uid() . '_updated_at', $editor_updated_at);
             }
         } else if ($context == 'edit') {
@@ -235,7 +277,7 @@ trait Generator
         $file_name = ($context == 'view' ? $this->uid() : $this->uid('eael')) . '.min.' . $ext;
 
         // output asset string
-        $output = $this->generate_strings($widgets, $context, $ext);
+        $output = $this->generate_strings($elements, $context, $ext);
 
         // write to file
         file_put_contents($this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file_name), $output);
@@ -246,10 +288,10 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_strings($widgets, $context, $ext)
+    public function generate_strings($elements, $context, $ext)
     {
         $output = '';
-        $paths = $this->generate_dependency($widgets, $context, $ext);
+        $paths = $this->generate_dependency($elements, $context, $ext);
 
         if (!empty($paths)) {
             foreach ($paths as $path) {
@@ -257,23 +299,23 @@ trait Generator
             }
         }
 
-        if ($context == 'view' && $ext == 'js') {
-            $templates = get_transient($this->uid() . '_loaded_templates');
+        // if ($context == 'view' && $ext == 'js') {
+        //     $templates = get_transient($this->uid() . '_loaded_templates');
 
-            if ($templates) {
-                foreach ($templates as $post_id) {
-                    if (get_post_status($post_id) === false) {
-                        continue;
-                    }
+        //     if ($templates) {
+        //         foreach ($templates as $post_id) {
+        //             if (get_post_status($post_id) === false) {
+        //                 continue;
+        //             }
 
-                    $document = Plugin::$instance->documents->get($post_id);
+        //             $document = Plugin::$instance->documents->get($post_id);
 
-                    if ($custom_js = $document->get_settings('eael_custom_js')) {
-                        $output .= $custom_js;
-                    }
-                }
-            }
-        }
+        //             if ($custom_js = $document->get_settings('eael_custom_js')) {
+        //                 $output .= $custom_js;
+        //             }
+        //         }
+        //     }
+        // }
 
         return $output;
     }
