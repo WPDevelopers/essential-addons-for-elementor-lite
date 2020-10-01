@@ -13,11 +13,11 @@ trait Generator
 
     public function uid()
     {
-        if ($this->is_running_background()) {
+        if (is_admin()) {
             return;
         }
 
-        if ($this->uid != null) {
+        if ($this->is_running_background()) {
             return;
         }
 
@@ -57,11 +57,17 @@ trait Generator
             } else if (is_404()) {
                 $uid = 'error-404';
             }
+
+            if ($this->uid == null) {
+                $this->uid = substr(md5($uid), 0, 9);
+            }
         } elseif ($this->is_edit_mode()) {
             $uid = 'eael';
-        }
 
-        $this->uid = substr(md5($uid), 0, 9);
+            if ($this->uid == null) {
+                $this->uid = substr(md5($uid), 0, 9);
+            }
+        }
     }
 
     public function collect_loaded_templates($content, $post_id)
