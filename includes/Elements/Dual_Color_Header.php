@@ -820,7 +820,11 @@ class Dual_Color_Header extends Widget_Base
             <div class="eael-dual-header">
                 <?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
                     <?php if ($icon_is_new || $icon_migrated) { ?>
-                        <i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
+                        <?php if (isset($settings['eael_dch_icon_new']['value']['url'])) { ?>
+                            <img src="<?php echo esc_attr($settings['eael_dch_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_dch_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                        <?php } else { ?>
+                            <i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
+                        <?php } ?>
                     <?php } else { ?>
                         <i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
                     <?php } ?>
@@ -836,7 +840,11 @@ class Dual_Color_Header extends Widget_Base
             <div class="eael-dual-header">
                 <?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
                     <?php if ($icon_is_new || $icon_migrated) { ?>
-                        <i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
+                        <?php if (isset($settings['eael_dch_icon_new']['value']['url'])) { ?>
+                            <img src="<?php echo esc_attr($settings['eael_dch_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_dch_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                        <?php } else { ?>
+                            <i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
+                        <?php } ?>
                     <?php } else { ?>
                         <i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
                     <?php } ?>
@@ -856,7 +864,11 @@ class Dual_Color_Header extends Widget_Base
                 <?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
                 <?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
                     <?php if ($icon_is_new || $icon_migrated) { ?>
-                        <i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
+                        <?php if (isset($settings['eael_dch_icon_new']['value']['url'])) { ?>
+                            <img src="<?php echo esc_attr($settings['eael_dch_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_dch_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                        <?php } else { ?>
+                            <i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
+                        <?php } ?>
                     <?php } else { ?>
                         <i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
                     <?php } ?>
