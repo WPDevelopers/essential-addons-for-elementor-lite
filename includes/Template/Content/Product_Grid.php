@@ -104,8 +104,6 @@ trait Product_Grid {
                 line-height: 26px;
             }
         </style>
-        <button class="eael-wc-compare open-modal button" data-product-id="%d" rel="nofollow">Open Table</button>
-
         <div class="eael-wcpc-modal">
             <span class="close-modal" title="Close">x</span>
             <div class="modal__content">
@@ -114,44 +112,43 @@ trait Product_Grid {
         </div>
 
         <script>
-            (function ($) {
+            (function () {
                 const overlay = document.createElement("div");
                 overlay.classList.add('wcpc-overlay');
                 overlay.setAttribute('id', 'wcpc-overlay');
                 const body = document.getElementsByTagName('body')[0];
                 body.appendChild(overlay);
-                // const $modal = $('.eael-wcpc-modal').eq(0);
-                // const $doc = $(document);
-                // $doc.on('click', '.open-modal', function () {
-                //     $modal.css({
-                //         visibility: 'visible',
-                //         opacity: 1
-                //     });
-                // });
-                // $doc.on('click', '.close-modal', function () {
-                //     $modal.css({
-                //         visibility: 'hidden',
-                //         opacity: 0
-                //     });
-                // });
                 // Vanilla JS version
                 const overlayNode = document.getElementById('wcpc-overlay');
-                const openBtn = document.getElementsByClassName('open-modal')[0];
-                const closeBtn = document.getElementsByClassName('close-modal')[0];
+                //const openBtn = document.getElementsByClassName('open-modal')[0];
+                const openBtns = document.getElementsByClassName('eael-wc-compare');
+                //const closeBtn = document.getElementsByClassName('close-modal')[0];
+                const closeBtns = document.getElementsByClassName('close-modal');
                 const modal = document.getElementsByClassName('eael-wcpc-modal')[0];
-                openBtn.addEventListener('click', function (event) {
-                    modal.style.visibility = 'visible';
-                    modal.style.opacity = '1';
-                    overlayNode.style.visibility = 'visible';
-                    overlayNode.style.opacity = '1';
-                });
-                closeBtn.addEventListener('click', function (event) {
-                    modal.style.visibility = 'hidden';
-                    modal.style.opacity = '0';
-                    overlayNode.style.visibility = 'hidden';
-                    overlayNode.style.opacity = '0';
-                });
-            })(jQuery);
+                if (openBtns.length){
+                    for (let i = 0; i < openBtns.length ; i++) {
+                        openBtns[i].addEventListener('click', function (event) {
+                            modal.style.visibility = 'visible';
+                            modal.style.opacity = '1';
+                            overlayNode.style.visibility = 'visible';
+                            overlayNode.style.opacity = '1';
+                        })
+                    }
+                }
+
+                if (closeBtns.length){
+                    for (let i = 0; i < closeBtns.length ; i++) {
+                        closeBtns[i].addEventListener('click', function (event) {
+                            modal.style.visibility = 'hidden';
+                            modal.style.opacity = '0';
+                            overlayNode.style.visibility = 'hidden';
+                            overlayNode.style.opacity = '0';
+                        });
+                    }
+                }
+
+
+            })();
         </script>
 		<?php
 		return ob_get_clean();
