@@ -19,7 +19,7 @@ trait Woo_Product_Comparable {
 	 * Get an array of field types.
 	 * @return array
 	 */
-	protected function get_field_types() {
+	public function get_field_types() {
 		return apply_filters( 'eael/wcpc/default-fields', [
 			'image'       => __( 'Image', 'essential-addons-for-elementor-lite' ),
 			'title'       => __( 'Title', 'essential-addons-for-elementor-lite' ),
@@ -35,7 +35,7 @@ trait Woo_Product_Comparable {
 		] );
 	}
 
-	protected function get_themes() {
+	public function get_themes() {
 		return apply_filters( 'eael/wcpc/default-themes', [
 			''        => __( 'Theme Default', 'essential-addons-for-elementor-lite' ),
 			'theme-1' => __( 'Theme 1', 'essential-addons-for-elementor-lite' ),
@@ -50,7 +50,7 @@ trait Woo_Product_Comparable {
 	/**
 	 * Get default fields value for the repeater's default value
 	 */
-	protected function get_default_rf_fields() {
+	public function get_default_rf_fields() {
 		return apply_filters( 'eael/wcpc/default-rf-fields', [
 			[
 				'field_type'  => 'image',
@@ -428,7 +428,7 @@ trait Woo_Product_Comparable {
 		}
 	}
 
-	protected function init_style_table_common_style() {
+	public function init_style_table_common_style() {
 		$wrap = "{{WRAPPER}} .eael-wcpc-wrapper";
 		$tbl  = "{$wrap} table";
 		$td   = "{$tbl} td";
@@ -710,7 +710,7 @@ trait Woo_Product_Comparable {
 		$this->end_controls_tabs();
 	}
 
-	protected function init_style_header_column_style() {
+	public function init_style_header_column_style() {
 		$tbl      = "{{WRAPPER}} .eael-wcpc-wrapper table";
 		$h_col    = "{$tbl} tr:not(.image):not(.title) th:not(.first-th)";
 		$title_th = "{$tbl} tr.title th";
@@ -852,7 +852,7 @@ trait Woo_Product_Comparable {
 		$this->end_controls_section();
 	}
 
-	protected function init_style_product_column_style( $column_number ) {
+	public function init_style_product_column_style( $column_number ) {
 
 		$tbl          = "{{WRAPPER}} .eael-wcpc-wrapper table";
 		$column_class = "{$tbl} td.col_{$column_number}";
@@ -1057,10 +1057,10 @@ trait Woo_Product_Comparable {
 		$this->end_controls_section();
 	}
 
-	protected function render_compare_table( $options ) {
+	public static function render_compare_table( $options ) {
 		$products               = $fields = [];
 		$highlighted_product_id = null;
-		$theme_wrap_class       = $theme = $title = $ribbon = '';
+		$theme_wrap_class       = $theme = $title = $ribbon = $repeat_price = $repeat_add_to_cart = '';
 		extract( $options );
 		do_action( 'eael/wcpc/before_content_wrapper' ); ?>
         <div class="eael-wcpc-wrapper woocommerce <?php echo esc_attr( $theme_wrap_class ); ?>">
@@ -1088,7 +1088,7 @@ trait Woo_Product_Comparable {
 										}
 									} else {
 										if ( 'theme-4' === $theme ) {
-											$this->print_icon();
+											self::print_icon();
 										}
 										if ( 'theme-5' === $theme && $field === 'title' ) {
 											echo '&nbsp;';
@@ -1136,13 +1136,13 @@ trait Woo_Product_Comparable {
 
 					<?php } ?>
 
-					<?php if ( $this->get_settings_for_display( 'repeat_price' ) == 'yes' && isset( $fields['price'] ) ) : ?>
+					<?php if ( 'yes' === $repeat_price && isset( $fields['price'] ) ) : ?>
                         <tr class="price repeated">
                             <th>
                                 <div>
 									<?php
 									if ( 'theme-4' === $theme ) {
-										$this->print_icon();
+										self::print_icon();
 									}
 									echo wp_kses_post( $fields['price'] ) ?>
                                 </div>
@@ -1161,13 +1161,13 @@ trait Woo_Product_Comparable {
                         </tr>
 					<?php endif; ?>
 
-					<?php if ( $this->get_settings_for_display( 'repeat_add_to_cart' ) == 'yes' && isset( $fields['add-to-cart'] ) ) : ?>
+					<?php if ( 'yes' === $repeat_add_to_cart && isset( $fields['add-to-cart'] ) ) : ?>
                         <tr class="add-to-cart repeated">
                             <th>
                                 <div>
 									<?php
 									if ( 'theme-4' === $theme ) {
-										$this->print_icon();
+										self::print_icon();
 									}
 									echo wp_kses_post( $fields['add-to-cart'] ); ?>
                                 </div>
@@ -1344,7 +1344,7 @@ trait Woo_Product_Comparable {
 		return apply_filters( 'eael/wcpc/get_product_remove_url', esc_url_raw( add_query_arg( $url_args, site_url() ) ), $this->remove_action );
 	}
 
-	protected function print_icon() {
+	public static function print_icon() {
 		?>
         <svg class="icon right-arrow" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 492.004 492.004" xml:space="preserve">
             <path d="M484.14,226.886L306.46,49.202c-5.072-5.072-11.832-7.856-19.04-7.856c-7.216,0-13.972,2.788-19.044,7.856l-16.132,16.136
@@ -1356,7 +1356,11 @@ trait Woo_Product_Comparable {
 		<?php
 	}
 
+	// static methods for product grids only
 	public static function print_compare_button($id) {
-        printf( '<a href="%s?action=eael-wcpc-add-product&id=%d" class="compare button" data-product_id="318" rel="nofollow">%s</a>', esc_url( get_site_url() ), intval( $id, 10), __('Compare', 'essential-addons-for-elementor-lite')  );
+        printf( '<button class="eael-wc-compare button" data-product-id="%d" rel="nofollow">%s</button>',intval( $id, 10), __('Compare', 'essential-addons-for-elementor-lite')  );
 	}
+
+
+
 }
