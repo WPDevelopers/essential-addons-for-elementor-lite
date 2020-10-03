@@ -35,6 +35,7 @@ class Bootstrap
     // instance container
     private static $instance = null;
 
+    // request unique id container
     protected $uid = null;
 
     // registered elements container
@@ -49,22 +50,23 @@ class Bootstrap
     // localize objects
     public $localize_objects = [];
 
+    // request data container
+    protected $request_requires_update;
+
     // loaded templates in a request
     protected $loaded_templates = [];
 
+    // loaded elements in a request
     protected $loaded_elements = [];
 
-    // loaded widgets in a request
-    protected $loaded_widgets = [];
-
-    // loaded extensions in a request
-    protected $loaded_extensions = [];
-
-    // css strings, used for inline embed
+    // used for internal css
     protected $css_strings;
 
-    // js strings, used for inline embed
+    // used for internal js
     protected $js_strings;
+
+    // used to store custom js
+    protected $custom_js_strings;
 
     /**
      * Singleton instance
@@ -120,16 +122,14 @@ class Bootstrap
         add_action('elementor/editor/after_save', array($this, 'save_global_values'), 10, 2);
 
         // Enqueue
-        add_action('eael/before_enqueue_styles', array($this, 'before_enqueue_styles'));
-        add_action('elementor/editor/before_enqueue_scripts', array($this, 'lr_enqueue_scripts'));
-        add_action('wp_enqueue_scripts', array($this, 'lr_enqueue_scripts'));
-        add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
-        add_action('elementor/editor/before_enqueue_scripts', array($this, 'editor_enqueue_scripts'));
+        add_action('eael/before_enqueue_styles', [$this, 'before_enqueue_styles']);
+        add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
+        add_action('elementor/editor/before_enqueue_scripts', [$this, 'editor_enqueue_scripts']);
         add_action('wp_head', [$this, 'enqueue_inline_styles']);
         add_action('wp_footer', [$this, 'enqueue_inline_scripts']);
 
         // Generator
-        add_action('wp', [$this, 'uid']);
+        add_action('wp', [$this, 'init_request_data']);
         add_filter('elementor/frontend/builder_content_data', [$this, 'collect_loaded_templates'], 10, 2);
         add_action('wp_print_footer_scripts', [$this, 'update_request_data']);
 
@@ -150,7 +150,7 @@ class Bootstrap
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
         add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
         add_filter('elementor/editor/localize_settings', [$this, 'promote_pro_elements']);
-        // add_action('wp_footer', array($this, 'render_global_html'));
+        add_action('wp_footer', [$this, 'render_global_html']);
 
         // Controls
         add_action('eael/controls/query', [$this, 'query'], 10, 1);

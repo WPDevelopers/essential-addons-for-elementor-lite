@@ -37,10 +37,10 @@ trait Library
      * @param $key
      * @return string
      */
-    public function get_extension_settings($page_settings_model = [], $global_settings = [], $extension, $key)
+    public function get_extension_settings($page_settings = [], $global_settings = [], $extension, $key)
     {
-        if (isset($page_settings_model) && $page_settings_model->get_settings($extension) == 'yes') {
-            return $page_settings_model->get_settings($key);
+        if (isset($page_settings) && $page_settings->get_settings($extension) == 'yes') {
+            return $page_settings->get_settings($key);
         } else if (isset($global_settings[$extension]['enabled'])) {
             return isset($global_settings[$extension][$key]) ? $global_settings[$extension][$key] : '';
         }
@@ -81,6 +81,28 @@ trait Library
         }
 
         return $typo_data;
+    }
+
+    /**
+     * Check if assets files exists
+     *
+     * @since 3.0.0
+     */
+    public function has_assets_files($uid = null, $ext = ['css', 'js'])
+    {
+        if (!is_array($ext)) {
+            $ext = (array) $ext;
+        }
+
+        foreach ($ext as $e) {
+            $path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.' . $e;
+
+            if (!is_readable($this->safe_path($path))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
