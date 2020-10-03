@@ -10,9 +10,12 @@ use \Essential_Addons_Elementor\Classes\Helper;
 
 trait Generator
 {
-
-    public function uid()
+    public function init_request_data()
     {
+        if (!apply_filters('eael/active_plugins', 'elementor/elementor.php')) {
+            return;
+        }
+
         if (is_admin()) {
             return;
         }
@@ -20,6 +23,8 @@ trait Generator
         if ($this->is_running_background()) {
             return;
         }
+
+        $uid = null;
 
         if ($this->is_preview_mode()) {
             if (is_front_page()) {
@@ -57,27 +62,54 @@ trait Generator
             } else if (is_404()) {
                 $uid = 'error-404';
             }
-
-            if ($this->uid == null) {
-                $this->uid = substr(md5($uid), 0, 9);
-            }
         } elseif ($this->is_edit_mode()) {
             $uid = 'eael';
-
-            if ($this->uid == null) {
-                $this->uid = substr(md5($uid), 0, 9);
-            }
         }
+
+        // set request uid
+        if ($uid && $this->uid == null) {
+            $this->uid = substr(md5($uid), 0, 9);
+            $this->request_requires_update = $this->request_requires_update();
+        }
+    }
+
+    public function request_requires_update()
+    {
+        $elements = get_transient($this->uid . '_elements');
+        $editor_updated_at = get_transient('eael_editor_updated_at');
+        $post_updated_at = get_transient($this->uid . '_updated_at');
+
+        if ($elements === false) {
+            return true;
+        }
+        if ($editor_updated_at === false) {
+            return true;
+        }
+        if ($post_updated_at === false) {
+            return true;
+        }
+        if ($editor_updated_at != $post_updated_at) {
+            return true;
+        }
+
+        return false;
     }
 
     public function collect_loaded_templates($content, $post_id)
     {
-        if (!$this->is_running_background() && $this->is_preview_mode()) {
+        if ($this->is_running_background()) {
+            return $content;
+        }
+
+        if ($this->request_requires_update && $this->is_preview_mode()) {
             // loaded template stack
             $this->loaded_templates[] = $post_id;
 
             // loaded elements stack
             $this->loaded_elements = array_merge($this->loaded_elements, $this->collect_elements_in_content($content));
+
+            // loaded custom js string
+            $this->collect_elements_in_document($post_id);
         }
 
         return $content;
@@ -127,9 +159,40 @@ trait Generator
         return $collections;
     }
 
+    public function collect_elements_in_document($post_id)
+    {
+        if (!Plugin::$instance->db->is_built_with_elementor($post_id)) {
+            return;
+        }
+
+        $document = Plugin::$instance->documents->get($post_id);
+
+        if ($document->get_settings('eael_custom_js')) {
+            $this->custom_js_strings .= $document->get_settings('eael_custom_js');
+        }
+
+        if (!Helper::prevent_extension_loading($post_id)) {
+            if ($document->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {
+                $this->loaded_elements[] = 'eael-reading-progress';
+            }
+
+            if ($document->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['eael_ext_table_of_content']['enabled'])) {
+                $this->loaded_elements[] = 'eael-table-of-content';
+            }
+        }
+    }
+
     public function update_request_data()
     {
+        if (!apply_filters('eael/active_plugins', 'elementor/elementor.php')) {
+            return;
+        }
+
         if ($this->is_running_background()) {
+            return;
+        }
+
+        if ($this->uid === null) {
             return;
         }
 
@@ -137,68 +200,25 @@ trait Generator
             return;
         }
 
-        if (empty($this->loaded_elements)) {
+        if (!$this->request_requires_update) {
             return;
         }
 
         // parse loaded elements
         $this->loaded_elements = $this->parse_elements($this->loaded_elements);
 
-        // prev data
-        $loaded_elements = get_transient($this->uid . '_loaded_elements');
+        // update page data
+        set_transient($this->uid . '_elements', $this->loaded_elements);
+        set_transient($this->uid . '_custom_js', $this->custom_js_strings);
+        set_transient($this->uid . '_updated_at', get_transient('eael_editor_updated_at'));
 
-        // update where necessary
-        if ($loaded_elements != $this->loaded_elements) {
-            set_transient($this->uid . '_loaded_elements', $this->loaded_elements);
+        // remove old cache files
+        $this->remove_files($this->uid);
+
+        // output custom js as fallback
+        if ($this->custom_js_strings) {
+            echo '<script>' . $this->custom_js_strings . '</script>';
         }
-
-        // $templates = get_transient($this->uid . '_loaded_templates');
-
-        // foreach ($this->loaded_templates as $post_id) {
-        //     $extensons = (array) $this->parse_extensions($post_id);
-
-        //     // loaded widgets stack
-        //     $this->loaded_widgets = array_filter(array_unique(array_merge($this->loaded_widgets, $extensons)));
-        // }
-
-        // $this->loaded_widgets = $this->parse_widgets($this->loaded_widgets);
-
-        // if ($templates != $this->loaded_templates) {
-        //     set_transient($this->uid . '_loaded_templates', $this->loaded_templates);
-        // }
-    }
-
-    /**
-     * Parse widgets from page data
-     *
-     * @since 3.0.0
-     */
-    public function parse_extensions($post_id)
-    {
-        if (!Plugin::$instance->db->is_built_with_elementor($post_id)) {
-            return;
-        }
-
-        $global_settings = get_option('eael_global_settings');
-        $document = Plugin::$instance->documents->get($post_id);
-        $extensions = [];
-
-        // collect page extensions
-        if (!Helper::prevent_extension_loading($post_id)) {
-            if ($document->get_settings('eael_custom_js')) {
-                $extensions[] = 'eael-custom-js';
-            }
-
-            if ($document->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {
-                $extensions[] = 'eael-reading-progress';
-            }
-
-            if ($document->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['eael_ext_table_of_content']['enabled'])) {
-                $extensions[] = 'eael-table-of-content';
-            }
-        }
-
-        return $extensions;
     }
 
     /**
@@ -244,26 +264,6 @@ trait Generator
      */
     public function generate_script($elements, $context, $ext)
     {
-        $loaded_assets = get_transient($this->uid . '_loaded_assets');
-        $editor_updated_at = get_transient('eael_editor_updated_at');
-
-        // check if script exists
-        if ($context == 'view') {
-            if ($loaded_assets == $elements && $this->has_assets_files($this->uid, $ext)) {
-                return;
-            }
-
-            // update loaded elements data & sync update time with editor time
-            if ($ext == 'js') {
-                set_transient($this->uid . '_loaded_assets', $elements);
-                set_transient($this->uid . '_updated_at', $editor_updated_at);
-            }
-        } else if ($context == 'edit') {
-            if ($this->has_assets_files($this->uid, $ext)) {
-                return;
-            }
-        }
-
         // if folder not exists, create new folder
         if (!file_exists(EAEL_ASSET_PATH)) {
             wp_mkdir_p(EAEL_ASSET_PATH);
@@ -295,23 +295,9 @@ trait Generator
             }
         }
 
-        // if ($context == 'view' && $ext == 'js') {
-        //     $templates = get_transient($this->uid . '_loaded_templates');
-
-        //     if ($templates) {
-        //         foreach ($templates as $post_id) {
-        //             if (get_post_status($post_id) === false) {
-        //                 continue;
-        //             }
-
-        //             $document = Plugin::$instance->documents->get($post_id);
-
-        //             if ($custom_js = $document->get_settings('eael_custom_js')) {
-        //                 $output .= $custom_js;
-        //             }
-        //         }
-        //     }
-        // }
+        if ($this->request_requires_update == false && $context == 'view' && $ext == 'js') {
+            $output .= get_transient($this->uid . '_custom_js');
+        }
 
         return $output;
     }
@@ -354,27 +340,5 @@ trait Generator
         }
 
         return array_unique(array_merge($lib['view'], $lib['edit'], $self['general'], $self['edit'], $self['view']));
-    }
-
-    /**
-     * Check if assets files exists
-     *
-     * @since 3.0.0
-     */
-    public function has_assets_files($uid = null, $ext = ['css', 'js'])
-    {
-        if (!is_array($ext)) {
-            $ext = (array) $ext;
-        }
-
-        foreach ($ext as $e) {
-            $path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.' . $e;
-
-            if (!is_readable($this->safe_path($path))) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }

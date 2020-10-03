@@ -47,6 +47,11 @@ trait Enqueue
                 FLUENTFORM_VERSION
             );
         }
+
+        // Compatibility: reCaptcha with login/register
+        if (in_array('login-register', $widgets) && $site_key = get_option('eael_recaptcha_sitekey')) {
+            wp_register_script('eael-recaptcha', "https://www.google.com/recaptcha/api.js?render=explicit", false, EAEL_PLUGIN_VERSION, false);
+        }
     }
 
     public function enqueue_scripts()
@@ -56,6 +61,10 @@ trait Enqueue
         }
 
         if ($this->is_running_background()) {
+            return;
+        }
+
+        if ($this->uid === null) {
             return;
         }
 
@@ -89,17 +98,17 @@ trait Enqueue
 
         // edit mode
         if ($this->is_edit_mode()) {
-            $loaded_elements = $this->get_settings();
+            $elements = $this->get_settings();
 
             // run hook before enqueue styles
-            do_action('eael/before_enqueue_styles', $loaded_elements);
+            do_action('eael/before_enqueue_styles', $elements);
 
             // css
             if (get_option('elementor_css_print_method') == 'internal') {
-                $this->css_strings = $this->generate_strings($loaded_elements, 'edit', 'css');
+                $this->css_strings = $this->generate_strings($elements, 'edit', 'css');
             } else {
                 // generate editor style
-                $this->generate_script($loaded_elements, 'edit', 'css');
+                $this->generate_script($elements, 'edit', 'css');
 
                 // enqueue
                 wp_enqueue_style(
@@ -111,14 +120,14 @@ trait Enqueue
             }
 
             // run hook before enqueue scripts
-            do_action('eael/before_enqueue_scripts', $loaded_elements);
+            do_action('eael/before_enqueue_scripts', $elements);
 
             // js
             if (get_option('eael_js_print_method') == 'internal') {
-                $this->js_strings = $this->generate_strings($loaded_elements, 'edit', 'js');
+                $this->js_strings = $this->generate_strings($elements, 'edit', 'js');
             } else {
                 // generate editor script
-                $this->generate_script($loaded_elements, 'edit', 'js');
+                $this->generate_script($elements, 'edit', 'js');
 
                 // enqueue
                 wp_enqueue_script(
@@ -136,27 +145,28 @@ trait Enqueue
 
         // view mode
         if ($this->is_preview_mode()) {
-            $loaded_elements = get_transient($this->uid . '_loaded_elements');
-            $editor_updated_at = get_transient('eael_editor_updated_at');
-            $post_updated_at = get_transient($this->uid . '_updated_at');
-
-            if ($loaded_elements === false || $editor_updated_at === false || $post_updated_at === false || $editor_updated_at != $post_updated_at) {
-                $loaded_elements = $this->get_settings();
+            if ($this->request_requires_update) {
+                $elements = $this->get_settings();
+            } else {
+                $elements = get_transient($this->uid . '_elements');
             }
 
             // if no widget in page, return
-            if (empty($loaded_elements)) {
+            if (empty($elements)) {
                 return;
             }
 
             // run hook before enqueue styles
-            do_action('eael/before_enqueue_styles', $loaded_elements);
+            do_action('eael/before_enqueue_styles', $elements);
 
             // css
-            if (get_option('elementor_css_print_method') == 'internal') {
-                $this->css_strings = $this->generate_strings($loaded_elements, 'view', 'css');
+            if ($this->request_requires_update || get_option('elementor_css_print_method') == 'internal') {
+                $this->css_strings = $this->generate_strings($elements, 'view', 'css');
             } else {
-                $this->generate_script($loaded_elements, 'view', 'css');
+                // generate script if not exists
+                if (!$this->has_assets_files($this->uid, 'css')) {
+                    $this->generate_script($elements, 'view', 'css');
+                }
 
                 // enqueue
                 wp_enqueue_style(
@@ -168,15 +178,18 @@ trait Enqueue
             }
 
             // run hook before enqueue scripts
-            do_action('eael/before_enqueue_scripts', $loaded_elements);
+            do_action('eael/before_enqueue_scripts', $elements);
 
             // js
-            if (get_option('eael_js_print_method') == 'internal') {
-                $this->js_strings = $this->generate_strings($loaded_elements, 'view', 'js');
+            if ($this->request_requires_update || get_option('eael_js_print_method') == 'internal') {
+                $this->js_strings = $this->generate_strings($elements, 'view', 'js');
             } else {
-                // generate post script
-                $this->generate_script($loaded_elements, 'view', 'js');
+                // generate script if not exists
+                if (!$this->has_assets_files($this->uid, 'js')) {
+                    $this->generate_script($elements, 'view', 'js');
+                }
 
+                // enqueue
                 wp_enqueue_script(
                     $this->uid,
                     $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid . '.min.js'),
@@ -212,11 +225,7 @@ trait Enqueue
     // inline enqueue styles
     public function enqueue_inline_styles()
     {
-        if ($this->is_edit_mode()) {
-            if ($this->css_strings) {
-                echo '<style id="' . $this->uid . '">' . $this->css_strings . '</style>';
-            }
-        } else if ($this->is_preview_mode()) {
+        if ($this->is_edit_mode() || $this->is_preview_mode()) {
             if ($this->css_strings) {
                 echo '<style id="' . $this->uid . '">' . $this->css_strings . '</style>';
             }

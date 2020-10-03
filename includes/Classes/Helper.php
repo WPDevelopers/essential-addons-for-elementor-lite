@@ -47,13 +47,11 @@ class Helper
     {
         $template_name = get_post_meta($post_id, '_elementor_template_type', true);
         $template_list = [
-            'footer',
-            'header',
-            'section',
-            'popup',
+            'wp-page',
+            'wp-post',
         ];
 
-        return in_array($template_name, $template_list);
+        return !in_array($template_name, $template_list);
     }
 
     public static function fix_old_query($settings)
