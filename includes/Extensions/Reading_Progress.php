@@ -20,7 +20,7 @@ class Reading_Progress
     {
 
         if (Helper::prevent_extension_loading(get_the_ID())) {
-            return false;
+            return;
         }
 
         $global_settings = get_option('eael_global_settings');
