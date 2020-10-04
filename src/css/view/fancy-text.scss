@@ -62,7 +62,16 @@
 }
 
 .eael-fancy-text-container.style-2 .eael-fancy-text-strings {
-    background: #ff5544;
+    background: #062ACA;
     color: #fff;
     padding: 10px 25px;
+}
+
+.eael-fancy-text-container.style-1 .eael-fancy-text-strings {
+    color: #062ACA;
+
+    &.gradient-color {
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 }
