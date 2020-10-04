@@ -195,13 +195,17 @@ class Helper
      * Get all types of post.
      * @return array
      */
-    public static function get_post_list($post_type = 'any')
+    public static function get_post_list($post_type = 'any',$search = '')
     {
-        $posts = get_posts([
+        $arg = [
             'post_type' => $post_type,
             'post_status' => 'publish',
             'numberposts' => -1,
-        ]);
+        ];
+        if(!empty($search)){
+            $arg['s']= $search;
+        }
+        $posts = get_posts($arg);
 
         if (!empty($posts)) {
             return wp_list_pluck($posts, 'post_title', 'ID');
@@ -209,6 +213,7 @@ class Helper
 
         return [];
     }
+
 
     /**
      * POst Orderby Options

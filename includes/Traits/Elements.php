@@ -651,4 +651,8 @@ trait Elements
         }
     }
 
+    public function register_controls(){
+        $controls_manager = Plugin::$instance->controls_manager;
+        $controls_manager->register_control( 'ea_select2', new \Essential_Addons_Elementor\Elements\Controls\EA_Select2() );
+    }
 }
