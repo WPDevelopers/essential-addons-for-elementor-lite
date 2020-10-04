@@ -58,9 +58,6 @@ trait Product_Grid {
 		wp_reset_postdata();
 
 		?>
-        <style>
-
-        </style>
         <div class="eael-wcpc-modal">
             <span class="close-modal" title="Close">x</span>
             <div class="modal__content">
@@ -68,45 +65,6 @@ trait Product_Grid {
             </div>
         </div>
 
-        <script>
-            (function () {
-                const overlay = document.createElement("div");
-                overlay.classList.add('wcpc-overlay');
-                overlay.setAttribute('id', 'wcpc-overlay');
-                const body = document.getElementsByTagName('body')[0];
-                body.appendChild(overlay);
-                // Vanilla JS version
-                const overlayNode = document.getElementById('wcpc-overlay');
-                //const openBtn = document.getElementsByClassName('open-modal')[0];
-                const openBtns = document.getElementsByClassName('eael-wc-compare');
-                //const closeBtn = document.getElementsByClassName('close-modal')[0];
-                const closeBtns = document.getElementsByClassName('close-modal');
-                const modal = document.getElementsByClassName('eael-wcpc-modal')[0];
-                if (openBtns.length){
-                    for (let i = 0; i < openBtns.length ; i++) {
-                        openBtns[i].addEventListener('click', function (event) {
-                            modal.style.visibility = 'visible';
-                            modal.style.opacity = '1';
-                            overlayNode.style.visibility = 'visible';
-                            overlayNode.style.opacity = '1';
-                        })
-                    }
-                }
-
-                if (closeBtns.length){
-                    for (let i = 0; i < closeBtns.length ; i++) {
-                        closeBtns[i].addEventListener('click', function (event) {
-                            modal.style.visibility = 'hidden';
-                            modal.style.opacity = '0';
-                            overlayNode.style.visibility = 'hidden';
-                            overlayNode.style.opacity = '0';
-                        });
-                    }
-                }
-
-
-            })();
-        </script>
 		<?php
 		return ob_get_clean();
 	}
