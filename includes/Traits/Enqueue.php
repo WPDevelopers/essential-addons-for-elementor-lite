@@ -100,6 +100,11 @@ trait Enqueue
         if ($this->is_edit_mode()) {
             $elements = $this->get_settings();
 
+            // if no widget in page, return
+            if (empty($elements)) {
+                return;
+            }
+
             // run hook before enqueue styles
             do_action('eael/before_enqueue_styles', $elements);
 
