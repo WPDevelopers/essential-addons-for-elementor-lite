@@ -13,46 +13,46 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../includes/Classes/Helper.php:161, ../includes/Elements/Adv_Accordion.php:265, ../includes/Elements/Adv_Tabs.php:233, ../includes/Elements/Contact_Form_7.php:264, ../includes/Elements/Content_Ticker.php:335, ../includes/Elements/Countdown.php:453, ../includes/Elements/Creative_Button.php:171, ../includes/Elements/Cta_Box.php:334, ../includes/Elements/Data_Table.php:442, ../includes/Elements/Dual_Color_Header.php:211, ../includes/Elements/Fancy_Text.php:266, ../includes/Elements/Filterable_Gallery.php:780, ../includes/Elements/Flip_Box.php:542, ../includes/Elements/Info_Box.php:486, ../includes/Elements/Pricing_Table.php:635, ../includes/Elements/Progress_Bar.php:264, ../includes/Elements/Team_Member.php:218, ../includes/Elements/Testimonial.php:213, ../includes/Elements/Tooltip.php:502, ../includes/Elements/Twitter_Feed.php:282, ../includes/Elements/WeForms.php:110
+#: ../includes/Classes/Helper.php:159, ../includes/Elements/Adv_Accordion.php:265, ../includes/Elements/Adv_Tabs.php:233, ../includes/Elements/Contact_Form_7.php:264, ../includes/Elements/Content_Ticker.php:335, ../includes/Elements/Countdown.php:453, ../includes/Elements/Creative_Button.php:171, ../includes/Elements/Cta_Box.php:334, ../includes/Elements/Data_Table.php:442, ../includes/Elements/Dual_Color_Header.php:211, ../includes/Elements/Fancy_Text.php:266, ../includes/Elements/Filterable_Gallery.php:780, ../includes/Elements/Flip_Box.php:542, ../includes/Elements/Info_Box.php:486, ../includes/Elements/Pricing_Table.php:635, ../includes/Elements/Progress_Bar.php:264, ../includes/Elements/Team_Member.php:218, ../includes/Elements/Testimonial.php:213, ../includes/Elements/Tooltip.php:502, ../includes/Elements/Twitter_Feed.php:282, ../includes/Elements/WeForms.php:110
 msgid "Go Premium for More Features"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:168, ../includes/Elements/Adv_Accordion.php:272, ../includes/Elements/Adv_Tabs.php:240, ../includes/Elements/Contact_Form_7.php:271, ../includes/Elements/Content_Ticker.php:342, ../includes/Elements/Countdown.php:460, ../includes/Elements/Creative_Button.php:178, ../includes/Elements/Cta_Box.php:341, ../includes/Elements/Data_Table.php:449, ../includes/Elements/Dual_Color_Header.php:218, ../includes/Elements/Fancy_Text.php:273, ../includes/Elements/Filterable_Gallery.php:787, ../includes/Elements/Flip_Box.php:549, ../includes/Elements/Info_Box.php:493, ../includes/Elements/Pricing_Table.php:642, ../includes/Elements/Progress_Bar.php:271, ../includes/Elements/Team_Member.php:225, ../includes/Elements/Testimonial.php:220, ../includes/Elements/Tooltip.php:509, ../includes/Elements/Twitter_Feed.php:289, ../includes/Elements/WeForms.php:117
+#: ../includes/Classes/Helper.php:166, ../includes/Elements/Adv_Accordion.php:272, ../includes/Elements/Adv_Tabs.php:240, ../includes/Elements/Contact_Form_7.php:271, ../includes/Elements/Content_Ticker.php:342, ../includes/Elements/Countdown.php:460, ../includes/Elements/Creative_Button.php:178, ../includes/Elements/Cta_Box.php:341, ../includes/Elements/Data_Table.php:449, ../includes/Elements/Dual_Color_Header.php:218, ../includes/Elements/Fancy_Text.php:273, ../includes/Elements/Filterable_Gallery.php:787, ../includes/Elements/Flip_Box.php:549, ../includes/Elements/Info_Box.php:493, ../includes/Elements/Pricing_Table.php:642, ../includes/Elements/Progress_Bar.php:271, ../includes/Elements/Team_Member.php:225, ../includes/Elements/Testimonial.php:220, ../includes/Elements/Tooltip.php:509, ../includes/Elements/Twitter_Feed.php:289, ../includes/Elements/WeForms.php:117
 msgid "Unlock more possibilities"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:172, ../includes/Elements/Dual_Color_Header.php:222, ../includes/Elements/Flip_Box.php:553, ../includes/Elements/Info_Box.php:497
+#: ../includes/Classes/Helper.php:170, ../includes/Elements/Dual_Color_Header.php:222, ../includes/Elements/Flip_Box.php:553, ../includes/Elements/Info_Box.php:497
 msgstr ""
 
-#: ../includes/Classes/Helper.php:388
+#: ../includes/Classes/Helper.php:386
 msgid "Select a Contact Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:394, ../includes/Classes/Helper.php:420, ../includes/Classes/Helper.php:447, ../includes/Classes/Helper.php:474, ../includes/Classes/Helper.php:499, ../includes/Classes/Helper.php:529, ../includes/Classes/Helper.php:555
+#: ../includes/Classes/Helper.php:392, ../includes/Classes/Helper.php:418, ../includes/Classes/Helper.php:445, ../includes/Classes/Helper.php:472, ../includes/Classes/Helper.php:497, ../includes/Classes/Helper.php:527, ../includes/Classes/Helper.php:553
 msgid "Create a Form First"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:414
+#: ../includes/Classes/Helper.php:412
 msgid "Select Gravity Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:442, ../includes/Elements/WeForms.php:95
+#: ../includes/Classes/Helper.php:440, ../includes/Elements/WeForms.php:95
 msgid "Select weForm"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:467
+#: ../includes/Classes/Helper.php:465
 msgid "Select Ninja Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:493
+#: ../includes/Classes/Helper.php:491
 msgid "Select Caldera Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:523
+#: ../includes/Classes/Helper.php:521
 msgid "Select a WPForm"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:550
+#: ../includes/Classes/Helper.php:548
 msgid "Select a Fluent Form"
 msgstr ""
 
@@ -408,7 +408,7 @@ msgstr ""
 msgid "Accordion"
 msgstr ""
 
-#: ../includes/Elements/Adv_Accordion.php:99, ../includes/Traits/Elements.php:275, ../includes/templates/admin/elements.php:83
+#: ../includes/Elements/Adv_Accordion.php:99, ../includes/Traits/Elements.php:274, ../includes/templates/admin/elements.php:83
 msgid "Toggle"
 msgstr ""
 
@@ -2912,7 +2912,7 @@ msgstr ""
 msgid "Item Category"
 msgstr ""
 
-#: ../includes/Elements/Filterable_Gallery.php:532, ../includes/Traits/Admin.php:21, ../includes/Traits/Admin.php:22, ../includes/Traits/Elements.php:24
+#: ../includes/Elements/Filterable_Gallery.php:532, ../includes/Traits/Admin.php:21, ../includes/Traits/Admin.php:22, ../includes/Traits/Elements.php:23
 msgid "Essential Addons"
 msgstr ""
 
@@ -5298,7 +5298,7 @@ msgstr ""
 msgid "Fill Color"
 msgstr ""
 
-#: ../includes/Elements/Progress_Bar.php:697, ../includes/Traits/Elements.php:125, ../includes/templates/admin/elements.php:242
+#: ../includes/Elements/Progress_Bar.php:697, ../includes/Traits/Elements.php:124, ../includes/templates/admin/elements.php:242
 msgid "Counter"
 msgstr ""
 
@@ -6786,115 +6786,115 @@ msgstr ""
 msgid "Activate Elementor"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:113, ../includes/templates/admin/elements.php:76
+#: ../includes/Traits/Elements.php:112, ../includes/templates/admin/elements.php:76
 msgid "Advanced Menu"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:119, ../includes/templates/admin/elements.php:186
+#: ../includes/Traits/Elements.php:118, ../includes/templates/admin/elements.php:186
 msgid "Content Timeline"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:131, ../includes/templates/admin/elements.php:305
+#: ../includes/Traits/Elements.php:130, ../includes/templates/admin/elements.php:305
 msgid "Divider"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:137, ../includes/templates/admin/elements.php:193
+#: ../includes/Traits/Elements.php:136, ../includes/templates/admin/elements.php:193
 msgid "Dynamic Gallery"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:143, ../includes/templates/admin/elements.php:270
+#: ../includes/Traits/Elements.php:142, ../includes/templates/admin/elements.php:270
 msgid "Flip Carousel"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:149
+#: ../includes/Traits/Elements.php:148
 msgid "Google Map"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:155, ../includes/templates/admin/elements.php:263
+#: ../includes/Traits/Elements.php:154, ../includes/templates/admin/elements.php:263
 msgid "Image Comparison"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:161, ../includes/templates/admin/elements.php:298
+#: ../includes/Traits/Elements.php:160, ../includes/templates/admin/elements.php:298
 msgid "Image Hotspots"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:167, ../includes/templates/admin/elements.php:312
+#: ../includes/Traits/Elements.php:166, ../includes/templates/admin/elements.php:312
 msgid "Image Scroller"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:173, ../includes/templates/admin/elements.php:433
+#: ../includes/Traits/Elements.php:172, ../includes/templates/admin/elements.php:433
 msgid "Instagram Feed"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:179
+#: ../includes/Traits/Elements.php:178
 msgid "Interactive Card"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:185, ../includes/templates/admin/elements.php:235
+#: ../includes/Traits/Elements.php:184, ../includes/templates/admin/elements.php:235
 msgid "Interactive Promo"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:191, ../includes/templates/admin/elements.php:451
+#: ../includes/Traits/Elements.php:190, ../includes/templates/admin/elements.php:451
 msgid "LearnDash Course List"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:197, ../includes/templates/admin/elements.php:249
+#: ../includes/Traits/Elements.php:196, ../includes/templates/admin/elements.php:249
 msgid "Lightbox & Modal"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:203, ../includes/templates/admin/elements.php:277
+#: ../includes/Traits/Elements.php:202, ../includes/templates/admin/elements.php:277
 msgid "Logo Carousel"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:209, ../includes/templates/admin/elements.php:402
+#: ../includes/Traits/Elements.php:208, ../includes/templates/admin/elements.php:402
 msgid "Mailchimp"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:215, ../includes/templates/admin/elements.php:69
+#: ../includes/Traits/Elements.php:214, ../includes/templates/admin/elements.php:69
 msgid "Offcanvas"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:221, ../includes/templates/admin/elements.php:291
+#: ../includes/Traits/Elements.php:220, ../includes/templates/admin/elements.php:291
 msgid "One Page Navigation"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:227, ../includes/templates/admin/elements.php:165
+#: ../includes/Traits/Elements.php:226, ../includes/templates/admin/elements.php:165
 msgid "Post Block"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:233, ../includes/templates/admin/elements.php:172
+#: ../includes/Traits/Elements.php:232, ../includes/templates/admin/elements.php:172
 msgid "Post Carousel"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:239, ../includes/templates/admin/elements.php:179
+#: ../includes/Traits/Elements.php:238, ../includes/templates/admin/elements.php:179
 msgid "Smart Post List"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:245
+#: ../includes/Traits/Elements.php:244
 msgid "Price Menu"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:251, ../includes/templates/admin/elements.php:256
+#: ../includes/Traits/Elements.php:250, ../includes/templates/admin/elements.php:256
 msgid "Protected Content"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:257, ../includes/templates/admin/elements.php:97
+#: ../includes/Traits/Elements.php:256, ../includes/templates/admin/elements.php:97
 msgid "Static Product"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:263, ../includes/templates/admin/elements.php:104
+#: ../includes/Traits/Elements.php:262, ../includes/templates/admin/elements.php:104
 msgid "Team Member Carousel"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:269, ../includes/templates/admin/elements.php:90
+#: ../includes/Traits/Elements.php:268, ../includes/templates/admin/elements.php:90
 msgid "Testimonial Slider"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:281, ../includes/templates/admin/elements.php:426
+#: ../includes/Traits/Elements.php:280, ../includes/templates/admin/elements.php:426
 msgid "Twitter Feed Carousel"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:287, ../includes/templates/admin/elements.php:492
+#: ../includes/Traits/Elements.php:286, ../includes/templates/admin/elements.php:492
 msgid "Woo Product Collections"
 msgstr ""
 

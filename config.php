@@ -884,6 +884,11 @@ $config = [
                 ],
                 'js' => [
                     [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/reading-progress.min.js',
+                        'type' => 'self',
+                        'context' => 'edit',
+                    ],
+                    [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/reading-progress.min.js',
                         'type' => 'self',
                         'context' => 'view',
