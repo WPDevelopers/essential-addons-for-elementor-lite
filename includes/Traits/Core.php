@@ -163,7 +163,7 @@ trait Core
         if ($document->get_settings('eael_ext_reading_progress_global') == 'yes') {
             $global_settings['reading_progress'] = [
                 'post_id' => $post_id,
-                'enabled' => $document->get_settings('eael_ext_reading_progress_global') === 'yes',
+                'enabled' => true,
                 'display_condition' => $document->get_settings('eael_ext_reading_progress_global_display_condition'),
                 'position' => $document->get_settings('eael_ext_reading_progress_position'),
                 'height' => $document->get_settings('eael_ext_reading_progress_height'),
@@ -173,7 +173,16 @@ trait Core
             ];
         } else {
             if (isset($global_settings['reading_progress']['post_id']) && $global_settings['reading_progress']['post_id'] == $post_id) {
-                $global_settings['reading_progress'] = [];
+                $global_settings['reading_progress'] = [
+                    'post_id' => null,
+                    'enabled' => false,
+                    'display_condition' => '',
+                    'position' => '',
+                    'height' => '',
+                    'bg_color' => '',
+                    'fill_color' => '',
+                    'animation_speed' => '',
+                ];
             }
         }
 
@@ -261,7 +270,7 @@ trait Core
             }
         }
 
-        // update flag
+        // update editor time
         set_transient('eael_editor_updated_at', strtotime('now'));
 
         // update options
