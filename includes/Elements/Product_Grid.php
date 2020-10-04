@@ -7,17 +7,20 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Typography;
+use Elementor\Plugin;
+use \Elementor\Widget_Base;
+use Essential_Addons_Elementor\Template\Content\Product_Grid as Product_Grid_Trait;
+use Essential_Addons_Elementor\Traits\Helper;
 use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
 
 class Product_Grid extends Widget_Base
 {
 	use Woo_Product_Comparable;
-    use \Essential_Addons_Elementor\Traits\Helper;
-    use \Essential_Addons_Elementor\Template\Content\Product_Grid;
+    use Helper;
+    use Product_Grid_Trait;
 
     private $is_show_custom_add_to_cart = false;
     private $simple_add_to_cart_button_text;
@@ -25,8 +28,12 @@ class Product_Grid extends Widget_Base
     private $grouped_add_to_cart_button_text;
     private $external_add_to_cart_button_text;
     private $default_add_to_cart_button_text;
+	/**
+	 * @var int
+	 */
+	protected $page_id;
 
-    public function __construct($data = [], $args = null)
+	public function __construct($data = [], $args = null)
     {
         parent::__construct($data, $args);
         add_filter('woocommerce_product_add_to_cart_text', [$this, 'add_to_cart_button_custom_text']);
@@ -949,29 +956,49 @@ class Product_Grid extends Widget_Base
         $this->grouped_add_to_cart_button_text = $settings['add_to_cart_grouped_product_button_text'];
         $this->external_add_to_cart_button_text = $settings['add_to_cart_external_product_button_text'];
         $this->default_add_to_cart_button_text = $settings['add_to_cart_default_product_button_text'];
-
+	    if ( Plugin::$instance->documents->get_current() ) {
+		    $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
+	    }
         // render dom
-        $html = '<div class="eael-product-grid ' . $settings['eael_product_grid_style_preset'] . '">';
-        $html .= '<div class="woocommerce">';
+	    $this->add_render_attribute( 'wrap', [
+	    	'class' => "eael-product-grid {$settings['eael_product_grid_style_preset']}",
+            'id' => 'eael-product-grid',
+		    'data-widget-id' => $this->get_id(),
+		    'data-page-id' => $this->page_id,
+	    ]);
 
-        $html .= '<ul class="products">
-                    ' . self::render_template_($args, $render_settings) . '
-                </ul>';
+	    //Load more btn atts
+        $this->add_render_attribute( 'l-more-btn', [
+                'class' => 'eael-load-more-button',
+                'id' => "eael-load-more-btn-".$this->get_id(),
+                'data-widget' => $this->get_id(),
+                'data-class' => get_class($this),
+                'data-args' => http_build_query($args),
+                'data-settings' => http_build_query($settings),
+                'data-layout' => 'masonry',
+                'data-page' => '1',
 
-        if ('true' == $settings['show_load_more']) {
-            if ($args['posts_per_page'] != '-1') {
-                $html .= '<div class="eael-load-more-button-wrap">
-                            <button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings) . '" data-layout="masonry" data-page="1">
-                                <div class="eael-btn-loader button__loader"></div>
-                                <span>' . esc_html__($settings['show_load_more_text'], 'essential-addons-for-elementor-lite') . '</span>
-                            </button>
-                        </div>';
-            }
+        ]);
+
+?>
+<div <?php $this->print_render_attribute_string( 'wrap'); ?> >
+    <div class="woocommerce">
+        <ul class="products">
+            <?php echo self::render_template_($args, $render_settings); ?>
+        </ul>
+   <?php
+        if ( 'true' == $settings['show_load_more']) { ?>
+        <div class="eael-load-more-button-wrap">
+            <button <?php $this->print_render_attribute_string( 'l-more-btn'); ?>>
+                <div class="eael-btn-loader button__loader"></div>
+                <span><?php echo esc_html( $settings['show_load_more_text']); ?></span>
+            </button>
+        </div>
+            <?php
         }
-
-        $html .= '</div>
-        </div>';
-
-        echo $html;
+    ?>
+    </div>
+</div>
+<?php
     }
 }

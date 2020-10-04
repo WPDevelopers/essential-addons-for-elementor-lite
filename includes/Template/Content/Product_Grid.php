@@ -59,56 +59,7 @@ trait Product_Grid {
 
 		?>
         <style>
-            .eael-wcpc-modal {
-                position: absolute;
-                z-index: 9999999;
-                width: 100%;
-                height: 100vh;
-                background: #fff;
-                display: flex;
-                justify-content: center;
-                justify-items: center;
-            }
-            .modal__content{
-                max-width: 100%;
-            }
-            .wcpc-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                z-index: 10;
-                background: rgba(0, 0, 0, 0.5);
-                pointer-events: none;
-            }
-            .wcpc-overlay, .eael-wcpc-modal{
-                visibility: hidden;
-                opacity: 0;
-                transition: all .5s ease;
-            }
 
-            .close-modal {
-                position: absolute;
-                top: -10px;
-                right: -10px;
-                cursor: pointer;
-                display: block;
-                border-radius: 50%;
-                color: #fff;
-                background: #000000;
-                height: 30px;
-                width: 30px;
-                font-weight: bold;
-                text-align: center;
-                line-height: 23px;
-                border: 2px solid #fff;
-                box-shadow: 0 0 3px 0 black;
-                transition: transform 300ms ease;
-            }
-            .close-modal:hover {
-                transform: rotate(180deg);
-            }
         </style>
         <div class="eael-wcpc-modal">
             <span class="close-modal" title="Close">x</span>
