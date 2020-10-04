@@ -301,6 +301,8 @@ class Image_Accordion extends Widget_Base {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-img-accordion' => 'border-radius: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-img-accordion a:first-child' => 'border-radius: {{SIZE}}px 0 0 {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-img-accordion a:last-child' => 'border-radius: 0 {{SIZE}}px {{SIZE}}px 0;',
                 ],
             ]
         );
