@@ -324,9 +324,9 @@ trait Helper
     public function eael_select2_search_post () {
         $post_type = 'post';
         if(!empty($_GET['post_type'])){
-            $post_type = $_GET['post_type'];
+            $post_type = sanitize_text_field($_GET['post_type']);
         }
-        $search = !empty($_GET['term'])?$_GET['term']:'';
+        $search = !empty($_GET['term'])?sanitize_text_field($_GET['term']):'';
         $results = [];
         $post_list = HelperClass::get_post_list($post_type,$search);
         if(!empty($post_list)){
