@@ -101,7 +101,13 @@ trait Product_Grid {
                 width: 30px;
                 font-weight: bold;
                 text-align: center;
-                line-height: 26px;
+                line-height: 23px;
+                border: 2px solid #fff;
+                box-shadow: 0 0 3px 0 black;
+                transition: transform 300ms ease;
+            }
+            .close-modal:hover {
+                transform: rotate(180deg);
             }
         </style>
         <div class="eael-wcpc-modal">
