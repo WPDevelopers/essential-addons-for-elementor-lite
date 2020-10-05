@@ -11,6 +11,16 @@ use \Elementor\Plugin;
 trait Elements
 {
     /**
+     * Register custom controls
+     *
+     * @since v4.4.2
+     */
+    public function register_controls($controls_manager)
+    {
+        $controls_manager->register_control('ea_select2', new \Essential_Addons_Elementor\Controls\Select2());
+    }
+
+    /**
      * Add elementor category
      *
      * @since v1.0.0
@@ -645,10 +655,5 @@ trait Elements
         if (class_exists('WooCommerce')) {
             wc()->frontend_includes();
         }
-    }
-
-    public function register_controls(){
-        $controls_manager = Plugin::$instance->controls_manager;
-        $controls_manager->register_control( 'ea_select2', new \Essential_Addons_Elementor\Elements\Controls\EA_Select2() );
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Essential_Addons_Elementor\Elements\Controls;
+namespace Essential_Addons_Elementor\Controls;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
@@ -9,34 +9,38 @@ if (!defined('ABSPATH')) {
 
 use \Elementor\Base_Data_Control;
 
-class EA_Select2 extends Base_Data_Control {
-
-    public function get_type () {
+class Select2 extends Base_Data_Control
+{
+    public function get_type()
+    {
         return 'ea_select2';
     }
 
-    public function enqueue () {
-        wp_register_script('ea-select2', EAEL_PLUGIN_URL.'assets/front-end/js/edit/ea-select2.js',
+    public function enqueue()
+    {
+        wp_register_script('ea-select2', EAEL_PLUGIN_URL . 'assets/front-end/js/edit/ea-select2.js',
             ['jquery-elementor-select2'], '1.0.0', true);
         wp_localize_script(
             'ea-select2',
             'ea_select2_localize',
             [
-                'ajaxurl'     => admin_url('admin-ajax.php'),
-                'search_text' => esc_html__('Search', 'essential-addons-for-elementor-lite')
+                'ajaxurl' => admin_url('admin-ajax.php'),
+                'search_text' => esc_html__('Search', 'essential-addons-for-elementor-lite'),
             ]
         );
         wp_enqueue_script('ea-select2');
     }
 
-    protected function get_default_settings () {
+    protected function get_default_settings()
+    {
         return [
-            'multiple'    => false,
+            'multiple' => false,
             'source_type' => 'post',
         ];
     }
 
-    public function content_template () {
+    public function content_template()
+    {
         $control_uid = $this->get_control_uid();
         ?>
         <# var controlUID = '<?php echo $control_uid; ?>'; #>
