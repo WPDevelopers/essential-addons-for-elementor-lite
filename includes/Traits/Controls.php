@@ -220,7 +220,10 @@ trait Controls
                     'type' => Controls_Manager::SELECT2,
                     'options' => $multiple_kb_terms,
                     'multiple' => false,
-                    'default' => $default_slug
+                    'default' => '',
+                    'select2options' => [
+                        'allowClear' => true,
+                    ],
                 ]
             );
         }
