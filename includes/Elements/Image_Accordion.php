@@ -89,7 +89,7 @@ class Image_Accordion extends Widget_Base {
         $this->add_control(
             'eael_img_accordion_content_horizontal_align',
             [
-                'label'   => __( 'Content Horizontal Alignment', 'essential-addons-for-elementor-lite' ),
+                'label'   => __( 'Horizontal Alignment', 'essential-addons-for-elementor-lite' ),
                 'type'    => \Elementor\Controls_Manager::CHOOSE,
                 'options' => [
                     'left'   => [
@@ -112,7 +112,7 @@ class Image_Accordion extends Widget_Base {
         $this->add_control(
             'eael_img_accordion_content_vertical_align',
             [
-                'label'   => __( 'Content Vertical Alignment', 'essential-addons-for-elementor-lite' ),
+                'label'   => __( 'Vertical Alignment', 'essential-addons-for-elementor-lite' ),
                 'type'    => \Elementor\Controls_Manager::CHOOSE,
                 'options' => [
                     'top'    => [
@@ -223,7 +223,7 @@ class Image_Accordion extends Widget_Base {
         $this->start_controls_section(
             'eael_section_img_accordion_style_settings',
             [
-                'label' => esc_html__( 'Image Accordion Style', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'General', 'essential-addons-for-elementor-lite' ),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -349,7 +349,7 @@ class Image_Accordion extends Widget_Base {
         $this->start_controls_section(
             'eael_section_img_accordion_thumbnail_style_settings',
             [
-                'label' => esc_html__( 'Image Accordion Thumbnail Style', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Thumbnail', 'essential-addons-for-elementor-lite' ),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -383,7 +383,7 @@ class Image_Accordion extends Widget_Base {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-img-accordion a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-img-accordion a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
                 ],
             ]
         );
