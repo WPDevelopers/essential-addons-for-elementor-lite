@@ -193,25 +193,13 @@ class Helper
 
     /**
      * Get all types of post.
+     *
+     * @param  string  $post_type
+     *
      * @return array
      */
-    public static function get_post_list($post_type = 'any',$search = '')
-    {
-        $arg = [
-            'post_type' => $post_type,
-            'post_status' => 'publish',
-            'numberposts' => -1,
-        ];
-        if(!empty($search)){
-            $arg['s']= $search;
-        }
-        $posts = get_posts($arg);
-
-        if (!empty($posts)) {
-            return wp_list_pluck($posts, 'post_title', 'ID');
-        }
-
-        return [];
+    public static function get_post_list ($post_type = 'any') {
+        return self::get_query_post_list($post_type);
     }
 
 
