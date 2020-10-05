@@ -145,11 +145,11 @@ class Bootstrap
         add_action('wp_ajax_nopriv_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
 
         //handle select2 ajax search
-        add_action('wp_ajax_ea_select2_search_post', [$this, 'select2_ajax_posts_filter_autocomplete']);
-        add_action('wp_ajax_nopriv_ea_select2_search_post', [$this, 'select2_ajax_posts_filter_autocomplete']);
+        add_action('wp_ajax_eael_select2_search_post', [$this, 'select2_ajax_posts_filter_autocomplete']);
+        add_action('wp_ajax_nopriv_eael_select2_search_post', [$this, 'select2_ajax_posts_filter_autocomplete']);
 
-        add_action('wp_ajax_ea_select2_get_title', [$this, 'select2_ajax_get_posts_value_titles']);
-        add_action('wp_ajax_nopriv_ea_select2_get_title', [$this, 'select2_ajax_get_posts_value_titles']);
+        add_action('wp_ajax_eael_select2_get_title', [$this, 'select2_ajax_get_posts_value_titles']);
+        add_action('wp_ajax_nopriv_eael_select2_get_title', [$this, 'select2_ajax_get_posts_value_titles']);
 
         //handle typeform auth token
         add_action('admin_post_nopriv_typeform_token_data', [$this, 'typeform_auth_handle']);
