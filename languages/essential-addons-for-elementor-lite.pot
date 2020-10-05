@@ -24,35 +24,35 @@ msgstr ""
 #: ../includes/Classes/Helper.php:170, ../includes/Elements/Dual_Color_Header.php:222, ../includes/Elements/Flip_Box.php:553, ../includes/Elements/Info_Box.php:497
 msgstr ""
 
-#: ../includes/Classes/Helper.php:386
+#: ../includes/Classes/Helper.php:391
 msgid "Select a Contact Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:392, ../includes/Classes/Helper.php:418, ../includes/Classes/Helper.php:445, ../includes/Classes/Helper.php:472, ../includes/Classes/Helper.php:497, ../includes/Classes/Helper.php:527, ../includes/Classes/Helper.php:553
+#: ../includes/Classes/Helper.php:397, ../includes/Classes/Helper.php:423, ../includes/Classes/Helper.php:450, ../includes/Classes/Helper.php:477, ../includes/Classes/Helper.php:502, ../includes/Classes/Helper.php:532, ../includes/Classes/Helper.php:558
 msgid "Create a Form First"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:412
+#: ../includes/Classes/Helper.php:417
 msgid "Select Gravity Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:440, ../includes/Elements/WeForms.php:95
+#: ../includes/Classes/Helper.php:445, ../includes/Elements/WeForms.php:95
 msgid "Select weForm"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:465
+#: ../includes/Classes/Helper.php:470
 msgid "Select Ninja Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:491
+#: ../includes/Classes/Helper.php:496
 msgid "Select Caldera Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:521
+#: ../includes/Classes/Helper.php:526
 msgid "Select a WPForm"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:548
+#: ../includes/Classes/Helper.php:553
 msgid "Select a Fluent Form"
 msgstr ""
 
