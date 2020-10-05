@@ -321,17 +321,18 @@ trait Helper
 
         return $html;
     }
+
     public function select2_ajax_posts_filter_autocomplete () {
         $post_type = 'post';
-        if(!empty($_GET['post_type'])){
+        if (!empty($_GET['post_type'])) {
             $post_type = sanitize_text_field($_GET['post_type']);
         }
-        $search = !empty($_GET['term'])?sanitize_text_field($_GET['term']):'';
+        $search = !empty($_GET['term']) ? sanitize_text_field($_GET['term']) : '';
         $results = [];
-        $post_list = HelperClass::get_post_list($post_type,$search);
-        if(!empty($post_list)){
-            foreach ($post_list as $key => $item){
-                $results[] = ['text' => $item,'id'=> $key ];
+        $post_list = HelperClass::get_query_post_list($post_type, 10, $search);
+        if (!empty($post_list)) {
+            foreach ($post_list as $key => $item) {
+                $results[] = ['text' => $item, 'id' => $key];
             }
         }
         wp_send_json(['results' => $results]);
