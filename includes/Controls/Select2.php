@@ -13,22 +13,22 @@ class Select2 extends Base_Data_Control
 {
     public function get_type()
     {
-        return 'ea_select2';
+        return 'eael-select2';
     }
 
     public function enqueue()
     {
-        wp_register_script('ea-select2', EAEL_PLUGIN_URL . 'assets/front-end/js/edit/ea-select2.js',
+        wp_register_script('eael-select2', EAEL_PLUGIN_URL . 'assets/front-end/js/edit/ea-select2.js',
             ['jquery-elementor-select2'], '1.0.0', true);
         wp_localize_script(
-            'ea-select2',
-            'ea_select2_localize',
+            'eael-select2',
+            'eael_select2_localize',
             [
                 'ajaxurl' => admin_url('admin-ajax.php'),
                 'search_text' => esc_html__('Search', 'essential-addons-for-elementor-lite'),
             ]
         );
-        wp_enqueue_script('ea-select2');
+        wp_enqueue_script('eael-select2');
     }
 
     protected function get_default_settings()
@@ -55,7 +55,7 @@ class Select2 extends Base_Data_Control
         </div>
         <#
         ( function( $ ) {
-        $( document.body ).trigger( 'ea_select2_init',{currentID:currentID,data:data,controlUID:controlUID} );
+        $( document.body ).trigger( 'eael_select2_init',{currentID:currentID,data:data,controlUID:controlUID} );
         }( jQuery ) );
         #>
         <?php

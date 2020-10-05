@@ -17,7 +17,7 @@ trait Elements
      */
     public function register_controls($controls_manager)
     {
-        $controls_manager->register_control('ea_select2', new \Essential_Addons_Elementor\Controls\Select2());
+        $controls_manager->register_control('eael-select2', new \Essential_Addons_Elementor\Controls\Select2());
     }
 
     /**
