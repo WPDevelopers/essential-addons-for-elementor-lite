@@ -20,7 +20,7 @@ trait Woo_Product_Comparable {
 	 * Get an array of field types.
 	 * @return array
 	 */
-	public function get_field_types() {
+	public static function get_field_types() {
 		return apply_filters( 'eael/wcpc/default-fields', [
 			'image'       => __( 'Image', 'essential-addons-for-elementor-lite' ),
 			'title'       => __( 'Title', 'essential-addons-for-elementor-lite' ),
@@ -36,7 +36,7 @@ trait Woo_Product_Comparable {
 		] );
 	}
 
-	public function get_themes() {
+	public static function get_themes() {
 		return apply_filters( 'eael/wcpc/default-themes', [
 			''        => __( 'Theme Default', 'essential-addons-for-elementor-lite' ),
 			'theme-1' => __( 'Theme 1', 'essential-addons-for-elementor-lite' ),
@@ -51,7 +51,7 @@ trait Woo_Product_Comparable {
 	/**
 	 * Get default fields value for the repeater's default value
 	 */
-	public function get_default_rf_fields() {
+	public static function get_default_rf_fields() {
 		return apply_filters( 'eael/wcpc/default-rf-fields', [
 			[
 				'field_type'  => 'image',
@@ -1360,6 +1360,202 @@ trait Woo_Product_Comparable {
 	// static methods for product grids only
 	public static function print_compare_button($id) {
         printf( '<button class="eael-wc-compare button" data-product-id="%d" rel="nofollow">%s</button>',intval( $id, 10), __('Compare', 'essential-addons-for-elementor-lite')  );
+	}
+
+	public function get_compare_table() {
+		//error_log( '$POST CONTAINS');
+		//error_log( print_r( $_POST, 1));
+		$ajax   = wp_doing_ajax();
+		$page_id = 0;
+		$widget_id = 0;
+
+		if ( ! empty( $_POST['page_id'] ) ) {
+			$page_id = intval( $_POST['page_id'], 10 );
+		} else {
+			$err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
+		}
+		if ( ! empty( $_POST['widget_id'] ) ) {
+			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+		} else {
+			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
+		}
+		if ( ! empty( $_POST['product_id'] ) ) {
+			$product_id = sanitize_text_field( $_POST['product_id'] );
+		} else {
+			$err_msg = __( 'Product ID is missing', 'essential-addons-for-elementor-lite' );
+		}
+		$product_ids = get_transient( 'eael_product_compare_ids');
+		if ( !empty( $product_id) ) {
+			if ( !empty( $product_ids) && is_array( $product_ids) ) {
+				$product_ids[$product_id] = $product_id;
+			}else{
+				$product_ids = [$product_id => $product_id];
+			}
+		}
+
+		$this->eael_set_transient( 'eael_product_compare_ids', $product_ids);
+
+
+		if (!empty( $err_msg )){
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			return false;
+		}
+		if (empty( $_POST['nonce']) || !wp_verify_nonce( $_POST['nonce'], 'eael_product_grid' ) ) {
+			if ( $ajax ) {
+				wp_send_json_error( __( 'Security token did not match', 'essential-addons-for-elementor-lite' ) );
+			}
+			return false;
+		}
+		$product_ids = array_values( $product_ids);
+		$ds = $this->eael_get_widget_settings( $page_id, $widget_id);
+		//@TODO; until settings added, lets modify the settings
+        $ds['fields'] = self::get_field_types();
+        $products = self::static_get_products_list($product_ids, $ds);
+		$fields = self::static_fields($product_ids, $ds);
+
+		$title                  = isset( $ds['table_title'] ) ? $ds['table_title'] : '';
+		$ribbon                 = isset( $ds['ribbon'] ) ? $ds['ribbon'] : '';
+		$repeat_price           = isset( $ds['repeat_price'] ) ? $ds['repeat_price'] : '';
+		$repeat_add_to_cart     = isset( $ds['repeat_add_to_cart'] ) ? $ds['repeat_add_to_cart'] : '';
+		$highlighted_product_id = ! empty( $ds['highlighted_product_id'] ) ? $ds['highlighted_product_id'] : null;
+		$theme_wrap_class       = $theme = '';
+		if ( ! empty( $ds['theme'] ) ) {
+			$theme            = esc_attr( $ds['theme'] );
+			$theme_wrap_class = " custom {$theme}";
+		}
+		ob_start();
+		self::render_compare_table( compact( 'products', 'fields', 'title', 'highlighted_product_id', 'theme_wrap_class', 'theme', 'ribbon', 'repeat_price', 'repeat_add_to_cart' ) );
+        $table = ob_get_clean();
+		wp_send_json_success(['compare_table'=> $table]);
+	}
+
+	/**
+	 * Return the array with all products and all attributes values
+	 *
+	 * @param array $products ids of wc product
+	 * @param array $settings
+	 *
+	 * @return array The complete list of products with all attributes value
+	 */
+	public static function static_get_products_list( $products = [], $settings=[] ) {
+		$products_list = [];
+
+		$products = apply_filters( 'eael/wcpc/products_ids', $products );
+		$fields   = self::static_fields( $products, $settings );
+		global $product;
+		if ( ! empty( $products ) && is_array( $products ) ) {
+			foreach ( $products as $product_id ) {
+				/** @type WC_Product $product WooCommerce Product */
+				$product = wc_get_product( $product_id );
+				if ( ! $product ) {
+					continue;
+				}
+
+				$product->fields = [];
+
+				// custom attributes
+				foreach ( $fields as $field => $name ) {
+					switch ( $field ) {
+						case 'title':
+							$product->fields[ $field ] = $product->get_title();
+							break;
+						case 'price':
+							$product->fields[ $field ] = $product->get_price_html();
+							break;
+						case 'add-to-cart':
+							ob_start();
+							woocommerce_template_loop_add_to_cart();
+							$product->fields[ $field ] = ob_get_clean();
+							break;
+						case 'image':
+							$product->fields[ $field ] = $product->get_image();
+							break;
+						case 'description':
+							$description               = apply_filters( 'woocommerce_short_description', $product->get_short_description() ? $product->get_short_description() : wc_trim_string( $product->get_description(), 400 ) );
+							$product->fields[ $field ] = apply_filters( 'eael/wcpc/woocommerce_short_description', $description );
+							break;
+						case 'stock':
+							$availability = $product->get_availability();
+							if ( empty( $availability['availability'] ) ) {
+								$availability['availability'] = __( 'In stock', 'essential-addons-for-elementor-lite' );
+							}
+							$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $availability['availability'] ) );
+							break;
+						case 'sku':
+							$sku = $product->get_sku();
+							! $sku && $sku = '-';
+							$product->fields[ $field ] = $sku;
+							break;
+						case 'weight':
+							if ( $weight = $product->get_weight() ) {
+								$weight = wc_format_localized_decimal( $weight ) . ' ' . esc_attr( get_option( 'woocommerce_weight_unit' ) );
+							} else {
+								$weight = '-';
+							}
+							$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $weight ) );
+							break;
+						case 'dimensions':
+							$dimensions = function_exists( 'wc_format_dimensions' ) ? wc_format_dimensions( $product->get_dimensions( false ) ) : $product->get_dimensions();
+							! $dimensions && $dimensions = '-';
+							$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $dimensions ) );
+							break;
+						default:
+							if ( taxonomy_exists( $field ) ) {
+								$product->fields[ $field ] = [];
+								$terms                     = get_the_terms( $product_id, $field );
+								if ( ! empty( $terms ) && is_array( $terms ) ) {
+									foreach ( $terms as $term ) {
+										$term                        = sanitize_term( $term, $field );
+										$product->fields[ $field ][] = $term->name;
+									}
+								}
+								$product->fields[ $field ] = implode( ', ', $product->fields[ $field ] );
+							} else {
+								do_action( 'eael/wcpc/compare_field_' . $field, [
+									$product,
+									&$product->fields,
+								] );
+							}
+							break;
+					}
+				}
+
+				$products_list[ $product_id ] = $product;
+			}
+		}
+
+		return apply_filters( 'eael/wcpc/products_list', $products_list );
+	}
+
+	/**
+	 * Get the fields to show in the comparison table
+	 *
+	 * @param array $products Optional array of products ids
+	 * @param array $settings
+	 *
+	 * @return array $fields it returns an array of fields to show on the comparison table
+	 */
+	public static function static_fields( $products = [], $settings= [] ) {
+	    return self::get_field_types();
+		if ( empty( $settings[ 'fields' ] ) || ! is_array( $settings[ 'fields' ] ) ) {
+			return apply_filters( 'eael/wcpc/products_fields_none', [] );
+		}
+		$fields = $settings[ 'fields' ];
+		$df             = self::get_field_types();
+		$fields_to_show = [];
+		foreach ( $fields as $field ) {
+			if ( isset( $df[ $field['field_type'] ] ) ) {
+				$fields_to_show[ $field['field_type'] ] = $field['field_label'];
+			} else {
+				if ( taxonomy_exists( $field['field_type'] ) ) {
+					$fields_to_show[ $field['field_type'] ] = wc_attribute_label( $field['field_type'] );
+				}
+			}
+		}
+
+		return apply_filters( 'eael/wcpc/products_fields_to_show', $fields_to_show, $products );
 	}
 
 

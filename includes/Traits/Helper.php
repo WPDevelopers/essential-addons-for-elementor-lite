@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
+use Elementor\Plugin;
 use \Elementor\Utils;
 use \Essential_Addons_Elementor\Elements\Woo_Checkout;
 
@@ -3162,4 +3163,39 @@ trait Helper
         }
         wp_send_json_success(['status' => 'success']);
     }
+
+	/**
+	 * It returns the widget settings provided the page id and widget id
+	 * @param int $page_id Page ID where the widget is used
+	 * @param string $widget_id the id of the widget whose settings we want to fetch
+	 *
+	 * @return array
+	 */
+	public function eael_get_widget_settings( $page_id, $widget_id ) {
+		$document = Plugin::$instance->documents->get( $page_id );
+		$settings = [];
+		if ( $document ) {
+			$elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
+			$widget_data = $this->find_element_recursive( $elements, $widget_id );
+			$widget      = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
+			if ( $widget ) {
+				$settings    = $widget->get_settings_for_display();
+			}
+		}
+		return $settings;
+	}
+	/**
+	 * It store data temporarily for 5 mins by default
+	 *
+	 * @param     $name
+	 * @param     $data
+	 * @param int $time time in seconds. Default is 300s = 5 minutes
+	 *
+	 * @return bool it returns true if the data saved, otherwise, false returned.
+	 */
+	public function eael_set_transient( $name, $data, $time = 300 ) {
+		$time = empty( $time ) ? (int) $time : ( 5 * MINUTE_IN_SECONDS );
+
+		return set_transient( $name, $data, time() + $time );
+	}
 }

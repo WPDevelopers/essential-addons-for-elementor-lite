@@ -17,6 +17,7 @@ use Essential_Addons_Elementor\Traits\Helper;
 use Essential_Addons_Elementor\Traits\Library;
 use Essential_Addons_Elementor\Traits\Login_Registration;
 use Essential_Addons_Elementor\Traits\Shared;
+use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
 
 class Bootstrap
 {
@@ -30,6 +31,7 @@ class Bootstrap
     use Elements;
     use Eael_WPML;
     use Login_Registration;
+    use Woo_Product_Comparable;
 
     // instance container
     private static $instance = null;
@@ -130,6 +132,8 @@ class Bootstrap
 
         add_action('wp_ajax_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
         add_action('wp_ajax_nopriv_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
+	    add_action( 'wp_ajax_nopriv_eael_product_grid', [$this, 'get_compare_table']);
+	    add_action( 'wp_ajax_eael_product_grid', [$this, 'get_compare_table']);
 
         //handle typeform auth token
         add_action('admin_post_nopriv_typeform_token_data', [$this, 'eael_typeform_auth_handle']);

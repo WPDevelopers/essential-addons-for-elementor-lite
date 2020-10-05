@@ -37,6 +37,7 @@ class Product_Grid extends Widget_Base
     {
         parent::__construct($data, $args);
         add_filter('woocommerce_product_add_to_cart_text', [$this, 'add_to_cart_button_custom_text']);
+
     }
 
     public function get_name()
@@ -965,6 +966,7 @@ class Product_Grid extends Widget_Base
             'id' => 'eael-product-grid',
 		    'data-widget-id' => $this->get_id(),
 		    'data-page-id' => $this->page_id,
+		    'data-nonce' => wp_create_nonce('eael_product_grid'),
 	    ]);
 
 	    //Load more btn atts
@@ -1001,4 +1003,6 @@ class Product_Grid extends Widget_Base
 </div>
 <?php
     }
+
+
 }
