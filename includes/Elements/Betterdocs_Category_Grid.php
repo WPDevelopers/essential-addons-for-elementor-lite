@@ -1618,17 +1618,19 @@ class Betterdocs_Category_Grid extends Widget_Base
             
             $meta_query = '';
 
-            
-            $terms_object['meta_query'] =  array(
-                array(
-                    'relation' => 'OR', 
+            if(!empty($settings['selected_knowledge_base'])){
+                $terms_object['meta_query'] =  array(
                     array(
-                        'key'       => 'doc_category_knowledge_base',
-                        'value'     => $settings['selected_knowledge_base'],
-                        'compare'   => 'LIKE'
-                    )
-                ),
-            );
+                        'relation' => 'OR',
+                        array(
+                            'key'       => 'doc_category_knowledge_base',
+                            'value'     => $settings['selected_knowledge_base'],
+                            'compare'   => 'LIKE'
+                        )
+                    ),
+                );
+            }
+
         
             $taxonomy_objects = get_terms( $terms_object );
 

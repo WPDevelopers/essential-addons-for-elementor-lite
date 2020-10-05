@@ -60,13 +60,6 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="' . get_the_
                     'tax_query' => array(
                         'relation' => 'AND',
                         array(
-                            'taxonomy' => 'knowledge_base',
-                            'field' => 'term_taxonomy_id',
-                            'terms' => array($tax_map['knowledge_base'][$settings['selected_knowledge_base']]),
-                            'operator' => 'IN',
-                            'include_children' => false,
-                        ),
-                        array(
                             'taxonomy' => 'doc_category',
                             'field' => 'term_taxonomy_id',
                             'operator' => 'IN',
@@ -75,6 +68,15 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="' . get_the_
                         ),
                     ),
                 );
+                if(!empty($settings['selected_knowledge_base'])){
+                    $args['tax_query'][] = array(
+                        'taxonomy' => 'knowledge_base',
+                        'field' => 'term_taxonomy_id',
+                        'terms' => array($tax_map['knowledge_base'][$settings['selected_knowledge_base']]),
+                        'operator' => 'IN',
+                        'include_children' => false,
+                    );
+                }
             } else {
                 $args = array(
                     'post_type' => 'docs',
