@@ -250,17 +250,19 @@ class Helper
     /**
      * Get all elementor page templates
      *
+     * @param  null  $type
+     *
      * @return array
      */
     public static function get_elementor_templates($type = null)
     {
         $options = [];
-        $args = [
-            'post_type' => 'elementor_library',
-            'posts_per_page' => -1,
-        ];
 
         if ($type) {
+            $args = [
+                'post_type' => 'elementor_library',
+                'posts_per_page' => -1,
+            ];
             $args['tax_query'] = [
                 [
                     'taxonomy' => 'elementor_library_type',
@@ -268,14 +270,16 @@ class Helper
                     'terms' => $type,
                 ],
             ];
-        }
 
-        $page_templates = get_posts($args);
+            $page_templates = get_posts($args);
 
-        if (!empty($page_templates) && !is_wp_error($page_templates)) {
-            foreach ($page_templates as $post) {
-                $options[$post->ID] = $post->post_title;
+            if (!empty($page_templates) && !is_wp_error($page_templates)) {
+                foreach ($page_templates as $post) {
+                    $options[$post->ID] = $post->post_title;
+                }
             }
+        }else{
+            $options = self::get_query_post_list('elementor_library');
         }
 
         return $options;
