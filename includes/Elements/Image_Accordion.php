@@ -53,7 +53,7 @@ class Image_Accordion extends Widget_Base {
         $this->start_controls_section(
             'eael_section_img_accordion_settings',
             [
-                'label' => esc_html__( 'Image Accordion Settings', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'General', 'essential-addons-for-elementor-lite' ),
             ]
         );
 
@@ -85,6 +85,14 @@ class Image_Accordion extends Widget_Base {
                 'default'     => 'accordion-direction-horizontal',
             ]
         );
+
+	    $this->add_control(
+		    'eael_img_accordion_content_heading',
+		    [
+			    'label'   => __( 'Content', 'essential-addons-for-elementor-lite' ),
+			    'type'    => \Elementor\Controls_Manager::HEADING,
+		    ]
+	    );
 
         $this->add_control(
             'eael_img_accordion_content_horizontal_align',
