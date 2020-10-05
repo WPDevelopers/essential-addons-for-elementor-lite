@@ -50,7 +50,7 @@ class Reading_Progress
             [
                 'label' => __('Enabled Globally?', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HIDDEN,
-                'default' => (bool) $global_settings['reading_progress']['enabled'],
+                'default' => (isset($global_settings['reading_progress']['enabled']) ? $global_settings['reading_progress']['enabled'] : false),
             ]
         );
 
