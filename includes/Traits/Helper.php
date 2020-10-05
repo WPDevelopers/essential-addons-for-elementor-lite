@@ -321,7 +321,7 @@ trait Helper
 
         return $html;
     }
-    public function eael_select2_search_post () {
+    public function select2_ajax_posts_filter_autocomplete () {
         $post_type = 'post';
         if(!empty($_GET['post_type'])){
             $post_type = sanitize_text_field($_GET['post_type']);
@@ -337,7 +337,7 @@ trait Helper
         wp_send_json(['results' => $results]);
     }
 
-    public function eael_select2_search_title () {
+    public function select2_ajax_get_posts_value_titles () {
         if (empty($_POST['id'])) {
             wp_send_json_error([]);
         }
