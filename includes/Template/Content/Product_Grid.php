@@ -58,12 +58,7 @@ trait Product_Grid {
 		wp_reset_postdata();
 
 		?>
-        <div class="eael-wcpc-modal">
-            <span class="close-modal" title="Close">x</span>
-            <div class="modal__content">
-				<?php self::test_table(); ?>
-            </div>
-        </div>
+
 
 		<?php
 		return ob_get_clean();
