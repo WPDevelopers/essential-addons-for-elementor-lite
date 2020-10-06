@@ -133,7 +133,11 @@ class Product_Grid extends Widget_Base {
 		$this->eael_load_more_button_style();
 		// Product Compare Table Style
         $container_class = '.eael-wcpc-modal';
+		$table            = ".eael-wcpc-modal .eael-wcpc-wrapper table";
+		$table_title      = ".eael-wcpc-modal .eael-wcpc-wrapper .wcpc-title";
+		$table_title_wrap = ".eael-wcpc-modal .eael-wcpc-wrapper .first-th";
         $this->init_style_content_controls(compact( 'container_class'));
+        $this->init_style_table_controls(compact( 'table', 'table_title', 'table_title_wrap'));
 	}
 
 	protected function init_content_product_settings_controls() {
