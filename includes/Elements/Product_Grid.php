@@ -810,7 +810,6 @@ class Product_Grid extends Widget_Base {
 			'data-page-id'   => $this->page_id,
 			'data-nonce'     => wp_create_nonce( 'eael_product_grid' ),
 		] );
-
 		//Load more btn atts
 		$this->add_render_attribute( 'l-more-btn', [
 			'class'         => 'eael-load-more-button',
@@ -823,7 +822,6 @@ class Product_Grid extends Widget_Base {
 			'data-page'     => '1',
 
 		] );
-
 		?>
         <div <?php $this->print_render_attribute_string( 'wrap' ); ?> >
             <div class="woocommerce">
@@ -845,6 +843,5 @@ class Product_Grid extends Widget_Base {
         </div>
 		<?php
 	}
-
 
 }
