@@ -7279,7 +7279,7 @@ msgstr ""
 msgid "No products added to compare."
 msgstr ""
 
-#: ../includes/Traits/Woo_Product_Comparable.php:1261, ../includes/Traits/Woo_Product_Comparable.php:1479
+#: ../includes/Traits/Woo_Product_Comparable.php:1261, ../includes/Traits/Woo_Product_Comparable.php:1482
 msgid "In stock"
 msgstr ""
 
