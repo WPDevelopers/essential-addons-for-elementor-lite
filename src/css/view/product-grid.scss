@@ -451,13 +451,19 @@
 // product compare
 .eael-wcpc-modal {
     position: absolute;
+    top: 10%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90%;
     z-index: 9999999;
-    width: 100%;
+    width: 1400px;
     height: 100vh;
     background: #fff;
     display: flex;
     justify-content: center;
-    justify-items: center;
+    align-items: center;
 }
 .modal__content{
     max-width: 100%;
@@ -501,6 +507,8 @@
     transform: rotate(180deg);
 }
 
+
+//----Responsive -------
 @media only screen and (min-width: 1025px) {
     .eael-product-grid-column-1 .eael-product-grid .woocommerce ul.products {
         grid-template-columns: 100%;
