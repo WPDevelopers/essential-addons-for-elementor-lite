@@ -435,7 +435,7 @@ class Image_Accordion extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-img-accordion .overlay h2' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-img-accordion .overlay .img-accordion-title' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -518,7 +518,7 @@ class Image_Accordion extends Widget_Base {
 		            <div class="overlay">
 		                <div class="overlay-inner">
                             <div class="overlay-inner' . ( $active === 'yes' ? ' overlay-inner-show' : '' ) . '">
-                                <'.$settings['title_tag'].'>' . $img_accordion['eael_accordion_tittle'] . '</'.$settings['title_tag'].'>
+                                <'.$settings['title_tag'].' class="img-accordion-title">' . $img_accordion['eael_accordion_tittle'] . '</' .$settings['title_tag'].'>
                                 <p>' . $img_accordion['eael_accordion_content'] . '</p>
                             </div>
                         </div>
