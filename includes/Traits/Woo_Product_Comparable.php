@@ -100,30 +100,47 @@ trait Woo_Product_Comparable {
 		] );
 	}
 
-	public function init_content_content_controls() {
+	protected function init_content_wc_notice_controls() {
+		if ( ! function_exists( 'WC' ) ) {
+			$this->start_controls_section( 'eael_global_warning', [
+				'label' => __( 'Warning!', 'essential-addons-for-elementor-lite' ),
+			] );
+			$this->add_control( 'eael_global_warning_text', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => __( '<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.', 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'eael-warning',
+			] );
+			$this->end_controls_section();
+
+			return;
+		}
+    }
+	public function init_content_product_compare_controls() {
 		$this->start_controls_section( 'section_content_content', [
-			'label' => __( 'Content', 'essential-addons-for-elementor-lite' ),
+			'label' => __( 'Product Compare', 'essential-addons-for-elementor-lite' ),
 		] );
-		$this->add_control( "product_ids", [
-			'label'       => __( 'Product IDs', 'essential-addons-for-elementor-lite' ),
-			'description' => __( 'Enter Product IDs separated by a comma', 'essential-addons-for-elementor-lite' ),
-			'type'        => Controls_Manager::TEXT,
-			'label_block' => true,
-			'placeholder' => __( 'Eg. 123, 456 etc.', 'essential-addons-for-elementor-lite' ),
-		] );
+		if ( 'eael-woo-product-compare' === $this->get_name() ) {
+			$this->add_control( "product_ids", [
+				'label'       => __( 'Product IDs', 'essential-addons-for-elementor-lite' ),
+				'description' => __( 'Enter Product IDs separated by a comma', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::TEXT,
+				'label_block' => true,
+				'placeholder' => __( 'Eg. 123, 456 etc.', 'essential-addons-for-elementor-lite' ),
+			] );
+			$this->add_control( "highlighted_product_id", [
+				'label'       => __( 'Highlighted Product ID', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::NUMBER,
+				'description' => __( 'Enter any ID from the Product IDs used above', 'essential-addons-for-elementor-lite' ),
+				'condition'   => [
+					'theme' => ['theme-3', 'theme-4'],
+				],
+			] );
+		}
 		$this->add_control( 'theme', [
 			'label'   => __( 'Presets', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SELECT,
 			'options' => $this->get_themes(),
 			'default' => '',
-		] );
-		$this->add_control( "highlighted_product_id", [
-			'label'       => __( 'Highlighted Product ID', 'essential-addons-for-elementor-lite' ),
-			'type'        => Controls_Manager::NUMBER,
-			'description' => __( 'Enter any ID from the Product IDs used above', 'essential-addons-for-elementor-lite' ),
-			'condition'   => [
-				'theme' => ['theme-3', 'theme-4'],
-			],
 		] );
 		$this->add_control( "ribbon", [
 			'label'       => __( 'Ribbon Text', 'essential-addons-for-elementor-lite' ),
