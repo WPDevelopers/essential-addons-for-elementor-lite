@@ -299,10 +299,11 @@ trait Woo_Product_Comparable {
 		$this->end_controls_section();
 	}
 
-	public function init_style_table_controls() {
-		$table            = "{{WRAPPER}} .eael-wcpc-wrapper table";
-		$table_title      = "{{WRAPPER}} .eael-wcpc-wrapper .wcpc-title";
-		$table_title_wrap = "{{WRAPPER}} .eael-wcpc-wrapper .first-th";
+	public function init_style_table_controls($css_classes=[]) {
+	    extract( $css_classes);
+		$table            = isset( $table) ? $table : "{{WRAPPER}} .eael-wcpc-wrapper table";
+		$table_title      = isset( $table_title) ? $table_title : "{{WRAPPER}} .eael-wcpc-wrapper .wcpc-title";
+		$table_title_wrap = isset( $table_title_wrap) ? $table_title_wrap : "{{WRAPPER}} .eael-wcpc-wrapper .first-th";
 
 		$this->start_controls_section( 'section_style_table', [
 			'label' => __( 'Table Style', 'essential-addons-for-elementor-lite' ),
@@ -379,7 +380,6 @@ trait Woo_Product_Comparable {
 			'exclude'  => [ 'image' ],
 			'selector' => $table,
 		] );
-
 		$this->add_control( 'tbl_brd_heading', [
 			'label'     => __( 'Table Border', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
@@ -425,7 +425,6 @@ trait Woo_Product_Comparable {
 			'selector'  => $table_title,
 			'condition' => [ 'table_title!' => '' ],
 		] );
-
 		$this->add_control( 'tbl_title_brd_heading', [
 			'label'     => __( 'Table Title Border', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
@@ -437,8 +436,6 @@ trait Woo_Product_Comparable {
 			'selector'  => $table_title_wrap,
 			'condition' => [ 'table_title!' => '' ],
 		] );
-
-
 		$this->init_style_table_common_style();
 		$this->end_controls_section();
 		$this->init_style_header_column_style();
