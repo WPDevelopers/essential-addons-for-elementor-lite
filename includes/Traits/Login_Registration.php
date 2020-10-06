@@ -541,7 +541,7 @@ trait Login_Registration {
 	}
 
 	/**
-	 * It store data temporarily
+	 * It store data temporarily,5 minutes by default
 	 *
 	 * @param     $name
 	 * @param     $data
