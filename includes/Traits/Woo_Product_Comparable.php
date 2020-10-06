@@ -156,7 +156,7 @@ trait Woo_Product_Comparable {
 
 	public function init_content_table_settings_controls() {
 		$this->start_controls_section( 'section_content_table', [
-			'label' => __( 'Table Settings', 'essential-addons-for-elementor-lite' ),
+			'label' => __( 'Compare Table Settings', 'essential-addons-for-elementor-lite' ),
 		] );
 		$this->add_control( "table_title", [
 			'label'       => __( 'Table Title', 'essential-addons-for-elementor-lite' ),
@@ -1428,7 +1428,7 @@ trait Woo_Product_Comparable {
 		$product_ids = array_values( $product_ids);
 		$ds = $this->eael_get_widget_settings( $page_id, $widget_id);
 		//@TODO; until settings added, lets modify the settings
-        $ds['fields'] = self::get_field_types();
+        //$ds['fields'] = self::get_field_types();
         $products = self::static_get_products_list($product_ids, $ds);
 		$fields = self::static_fields($product_ids, $ds);
 
@@ -1555,7 +1555,6 @@ trait Woo_Product_Comparable {
 	 * @return array $fields it returns an array of fields to show on the comparison table
 	 */
 	public static function static_fields( $products = [], $settings= [] ) {
-	    return self::get_field_types();
 		if ( empty( $settings[ 'fields' ] ) || ! is_array( $settings[ 'fields' ] ) ) {
 			return apply_filters( 'eael/wcpc/products_fields_none', [] );
 		}
