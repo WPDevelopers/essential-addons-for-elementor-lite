@@ -70,10 +70,7 @@ ea.hooks.addAction("init", "ea", () => {
 
 
         function handleSuccess(data) {
-                console.log('logging data');
-                console.log(data);
                 const success = (data && data.success);
-            console.log(data.data.compare_table);
                 if (success) {
                     $('#eael_modal_content').html(data.data.compare_table)
                     modal.style.visibility = 'visible';
