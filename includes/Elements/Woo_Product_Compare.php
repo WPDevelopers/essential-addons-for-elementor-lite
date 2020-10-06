@@ -77,23 +77,14 @@ class Woo_Product_Compare extends Widget_Base {
 	 * @inheritDoc
 	 */
 	protected function _register_controls() {
+		$this->init_content_wc_notice_controls();
 		if ( ! function_exists( 'WC' ) ) {
-			$this->start_controls_section( 'eael_global_warning', [
-				'label' => __( 'Warning!', 'essential-addons-for-elementor-lite' ),
-			] );
-			$this->add_control( 'eael_global_warning_text', [
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => __( '<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.', 'essential-addons-for-elementor-lite' ),
-				'content_classes' => 'eael-warning',
-			] );
-			$this->end_controls_section();
-
 			return;
 		}
 
 		/*----Content Tab----*/
 		do_action( 'eael/wcpc/before-content-controls', $this );
-		$this->init_content_content_controls();
+		$this->init_content_product_compare_controls();
 		$this->init_content_table_settings_controls();
 		do_action( 'eael/wcpc/after-content-controls', $this );
 
