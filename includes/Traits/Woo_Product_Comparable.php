@@ -1428,7 +1428,6 @@ trait Woo_Product_Comparable {
 		$product_ids = array_values( $product_ids);
 		$ds = $this->eael_get_widget_settings( $page_id, $widget_id);
 		//@TODO; until settings added, lets modify the settings
-        //$ds['fields'] = self::get_field_types();
         $products = self::static_get_products_list($product_ids, $ds);
 		$fields = self::static_fields($product_ids, $ds);
 
