@@ -1608,13 +1608,6 @@ class Betterdocs_Category_Grid extends Widget_Base
         if($default_multiple_kb) {
 
             $taxonomy_objects = Helper::get_multiple_kb_terms(false, false);
-
-            $terms_object = array(
-                'hide_empty' => true,
-                'taxonomy' => 'doc_category',
-                'orderby' => 'name',
-                'parent' => 0
-            );
             
             $meta_query = '';
 

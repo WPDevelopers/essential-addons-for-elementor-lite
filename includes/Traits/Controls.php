@@ -222,6 +222,7 @@ trait Controls
                     'multiple' => false,
                     'default' => '',
                     'select2options' => [
+                        'placeholder' => __( 'Select Knowledge Bases', 'essential-addons-for-elementor-lite' ),
                         'allowClear' => true,
                     ],
                 ]

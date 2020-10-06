@@ -1104,27 +1104,21 @@ class Betterdocs_Category_Box extends Widget_Base {
 
             $taxonomy_objects = Helper::get_multiple_kb_terms(false, false);
 
-            $terms_object = array(
-                'hide_empty' => true,
-                'taxonomy' => 'doc_category',
-                'orderby' => 'name',
-                'parent' => 0
-            );
-            
             $meta_query = '';
 
-            
-            $terms_object['meta_query'] =  array(
-                array(
-                    'relation' => 'OR', 
+            if(!empty($settings['selected_knowledge_base'])){
+                $terms_object['meta_query'] =  array(
                     array(
-                        'key'       => 'doc_category_knowledge_base',
-                        'value'     => $settings['selected_knowledge_base'],
-                        'compare'   => 'LIKE'
-                    )
-                ),
-            );
-        
+                        'relation' => 'OR',
+                        array(
+                            'key'       => 'doc_category_knowledge_base',
+                            'value'     => $settings['selected_knowledge_base'],
+                            'compare'   => 'LIKE'
+                        )
+                    ),
+                );
+            }
+
             $taxonomy_objects = get_terms( $terms_object );
 
             $html = '<div ' . $this->get_render_attribute_string('bd_category_box_wrapper') . '>';
