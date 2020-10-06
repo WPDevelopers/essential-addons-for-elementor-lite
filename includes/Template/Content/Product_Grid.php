@@ -57,10 +57,7 @@ trait Product_Grid {
 		}
 
 		wp_reset_postdata();
-
 		?>
-
-
 		<?php
 		return ob_get_clean();
 	}
