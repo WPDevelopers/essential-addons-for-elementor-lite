@@ -10,7 +10,7 @@ ea.hooks.addAction("init", "ea", () => {
         const body = document.getElementsByTagName('body')[0];
         body.appendChild(overlay);
         const overlayNode = document.getElementById('wcpc-overlay');
-
+        const $doc = $(document);
         const modalTemplate = `
         <div class="eael-wcpc-modal">
             <span class="close-modal" title="Close">x</span>
@@ -50,17 +50,16 @@ ea.hooks.addAction("init", "ea", () => {
             });
         }
 
-        $(document).on('click', '.eael-wc-compare', function (e) {
+        $doc.on('click', '.eael-wc-compare', function (e) {
             e.preventDefault();
             ajaxData.push({
                 name: 'product_id',
                 value: e.target.dataset.productId
             });
-            //handleSuccess({'success': true})
             sendData(ajaxData, handleSuccess, handleError);
         });
 
-        $(document).on('click', '.close-modal', function (e) {
+        $doc.on('click', '.close-modal', function (e) {
             modal.style.visibility = 'hidden';
             modal.style.opacity = '0';
             overlayNode.style.visibility = 'hidden';
@@ -72,7 +71,7 @@ ea.hooks.addAction("init", "ea", () => {
         function handleSuccess(data) {
                 const success = (data && data.success);
                 if (success) {
-                    $('#eael_modal_content').html(data.data.compare_table)
+                    $modalContentWraper.html(data.data.compare_table)
                     modal.style.visibility = 'visible';
                     modal.style.opacity = '1';
                     overlayNode.style.visibility = 'visible';
