@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
+use Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
 use Elementor\Plugin;
@@ -102,20 +103,15 @@ class Product_Grid extends Widget_Base
     {
         if ($this->is_show_custom_add_to_cart) {
             global $product;
-            $product_type = $product->product_type;
-            switch ($product_type) {
+            switch ($product->product_type) {
                 case 'external':
                     return $this->external_add_to_cart_button_text;
-                    break;
                 case 'grouped':
                     return $this->grouped_add_to_cart_button_text;
-                    break;
                 case 'simple':
                     return $this->simple_add_to_cart_button_text;
-                    break;
                 case 'variable':
                     return $this->variable_add_to_cart_button_text;
-                    break;
                 default:
                     return $this->default_add_to_cart_button_text;
             }
@@ -403,7 +399,7 @@ class Product_Grid extends Widget_Base
             'eael_product_grid_content_alignment',
             [
                 'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
-                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
@@ -716,7 +712,7 @@ class Product_Grid extends Widget_Base
             'eael_product_grid_add_to_cart_is_gradient_bg',
             [
                 'label' => __('Use Gradient Background', 'essential-addons-for-elementor-lite'),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
@@ -743,7 +739,7 @@ class Product_Grid extends Widget_Base
         );
 
         $this->add_group_control(
-            \Elementor\Group_Control_Background::get_type(),
+            Group_Control_Background::get_type(),
             [
                 'name' => 'eael_product_grid_add_to_cart_gradient_background',
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
@@ -811,7 +807,7 @@ class Product_Grid extends Widget_Base
             ]
         );
         $this->add_group_control(
-            \Elementor\Group_Control_Background::get_type(),
+            Group_Control_Background::get_type(),
             [
                 'name' => 'eael_product_grid_add_to_cart_hover_gradient_background',
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
