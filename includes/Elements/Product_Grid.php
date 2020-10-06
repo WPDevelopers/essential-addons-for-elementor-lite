@@ -125,11 +125,15 @@ class Product_Grid extends Widget_Base {
 		// Product Compare
 		$this->init_content_product_compare_controls();
 		$this->init_content_table_settings_controls();
-		// Style Controls
+
+		// Style Controls---------------
 		$this->init_style_product_controls();
 		$this->init_style_color_typography_controls();
 		$this->init_style_addtocart_controls();
 		$this->eael_load_more_button_style();
+		// Product Compare Table Style
+        $container_class = '.eael-wcpc-modal';
+        $this->init_style_content_controls(compact( 'container_class'));
 	}
 
 	protected function init_content_product_settings_controls() {
