@@ -200,12 +200,13 @@ trait Woo_Product_Comparable {
 		$this->end_controls_section();
 	}
 
-	public function init_style_content_controls() {
+	public function init_style_content_controls($css_classes=[]) {
+	    extract( $css_classes);
 		$this->start_controls_section( 'section_style_general', [
-			'label' => __( 'General', 'essential-addons-for-elementor-lite' ),
+			'label' => __( 'Compare Table General', 'essential-addons-for-elementor-lite' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
-		$container_class = '{{WRAPPER}} .eael-wcpc-wrapper';
+		$container_class = !empty( $container_class) ? $container_class : '{{WRAPPER}} .eael-wcpc-wrapper';
 		$this->add_responsive_control( "eael_container_width", [
 			'label'      => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::SLIDER,
