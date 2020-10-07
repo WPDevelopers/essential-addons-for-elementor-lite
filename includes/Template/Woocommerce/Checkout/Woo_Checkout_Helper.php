@@ -266,7 +266,7 @@ trait Woo_Checkout_Helper {
 
                 <form class="checkout_coupon woocommerce-form-coupon" method="post" style="display:none">
 
-                    <p><?php esc_html_e( 'If you have a coupon code, please apply it below.', 'essential-addons-for-elementor-lite' ); ?></p>
+                    <p><?php esc_html_e( $settings['ea_woo_checkout_coupon_form_content'], 'essential-addons-for-elementor-lite' ); ?></p>
 
                     <p class="form-row form-row-first">
                         <input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e( 'Coupon code', 'essential-addons-for-elementor-lite' ); ?>" id="coupon_code" value="" />
