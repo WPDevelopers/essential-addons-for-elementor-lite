@@ -338,6 +338,30 @@ class Woo_Checkout extends Widget_Base {
 				],
 			]
 		);
+
+		$this->add_control(
+			'ea_woo_checkout_coupon_placeholder_text',
+			[
+				'label' => __( 'Placeholder Text', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Coupon code', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
+			]
+		);
+
+		$this->add_control(
+			'ea_woo_checkout_coupon_button_text',
+			[
+				'label' => __( 'Button Text', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Apply Coupon', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
+			]
+		);
 		$this->end_controls_section();
 
 		/**
