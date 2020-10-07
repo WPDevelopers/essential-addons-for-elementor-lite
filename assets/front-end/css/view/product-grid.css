@@ -932,6 +932,18 @@
       -ms-transform: rotate(180deg);
           transform: rotate(180deg);
 }
+.eael-wc-remove {
+  cursor: pointer;
+  -webkit-transition: all 400ms ease;
+  -o-transition: all 400ms ease;
+  transition: all 400ms ease;
+}
+.eael-wc-remove:hover {
+  color: red;
+  -webkit-transform: scale(2);
+      -ms-transform: scale(2);
+          transform: scale(2);
+}
 @media only screen and (min-width: 1025px) {
   .eael-product-grid-column-1 .eael-product-grid .woocommerce ul.products {
     grid-template-columns: 100%;

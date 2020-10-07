@@ -521,7 +521,14 @@
     transform: rotate(180deg);
 }
 
-
+.eael-wc-remove{
+    cursor: pointer;
+    transition: all 400ms ease;
+}
+.eael-wc-remove:hover {
+    color: red;
+    transform: scale(2);
+}
 //----Responsive -------
 @media only screen and (min-width: 1025px) {
     .eael-product-grid-column-1 .eael-product-grid .woocommerce ul.products {
