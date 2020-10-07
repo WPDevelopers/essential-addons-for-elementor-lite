@@ -326,6 +326,18 @@ class Woo_Checkout extends Widget_Base {
 				],
 			]
 		);
+
+		$this->add_control(
+			'ea_woo_checkout_coupon_form_content',
+			[
+				'label' => __( 'Form Content', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXTAREA,
+				'default' => __( 'If you have a coupon code, please apply it below.', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
+			]
+		);
 		$this->end_controls_section();
 
 		/**
