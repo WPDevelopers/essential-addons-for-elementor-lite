@@ -47,11 +47,20 @@ class Helper
     {
         $template_name = get_post_meta($post_id, '_elementor_template_type', true);
         $template_list = [
-            'wp-page',
-            'wp-post',
+            'header',
+            'footer',
+            'single',
+            'post',
+            'page',
+            'archive',
+            'search-results',
+            'error-404',
+            'product',
+            'product-archive',
+            'section',
         ];
 
-        return !in_array($template_name, $template_list);
+        return in_array($template_name, $template_list);
     }
 
     public static function fix_old_query($settings)
@@ -198,10 +207,10 @@ class Helper
      *
      * @return array
      */
-    public static function get_post_list ($post_type = 'any') {
+    public static function get_post_list($post_type = 'any')
+    {
         return self::get_query_post_list($post_type);
     }
-
 
     /**
      * POst Orderby Options
@@ -278,7 +287,7 @@ class Helper
                     $options[$post->ID] = $post->post_title;
                 }
             }
-        }else{
+        } else {
             $options = self::get_query_post_list('elementor_library');
         }
 
@@ -701,41 +710,41 @@ class Helper
         return '';
     }
 
-    public static function get_query_post_list( $post_type = 'any', $limit = -1, $search = '' )
+    public static function get_query_post_list($post_type = 'any', $limit = -1, $search = '')
     {
         global $wpdb;
         $where = '';
         $data = [];
 
-        if ( -1 == $limit ) {
+        if (-1 == $limit) {
             $limit = '';
-        } elseif ( 0 == $limit ) {
+        } elseif (0 == $limit) {
             $limit = "limit 0,1";
         } else {
-            $limit = $wpdb->prepare( " limit 0,%d", esc_sql($limit) );
+            $limit = $wpdb->prepare(" limit 0,%d", esc_sql($limit));
         }
 
-        if ( 'any' === $post_type ) {
-            $in_search_post_types = get_post_types( ['exclude_from_search' => false] );
-            if ( empty( $in_search_post_types ) ) {
+        if ('any' === $post_type) {
+            $in_search_post_types = get_post_types(['exclude_from_search' => false]);
+            if (empty($in_search_post_types)) {
                 $where .= ' AND 1=0 ';
             } else {
-                $where .= " AND {$wpdb->posts}.post_type IN ('" . join( "', '",
-                        array_map( 'esc_sql', $in_search_post_types ) ) . "')";
+                $where .= " AND {$wpdb->posts}.post_type IN ('" . join("', '",
+                    array_map('esc_sql', $in_search_post_types)) . "')";
             }
-        } elseif ( !empty( $post_type ) ) {
-            $where .= $wpdb->prepare( " AND {$wpdb->posts}.post_type = %s", esc_sql($post_type) );
+        } elseif (!empty($post_type)) {
+            $where .= $wpdb->prepare(" AND {$wpdb->posts}.post_type = %s", esc_sql($post_type));
         }
 
-        if(!empty($search)){
-            $where .= $wpdb->prepare( " AND {$wpdb->posts}.post_title LIKE %s", '%'.esc_sql($search).'%' );
+        if (!empty($search)) {
+            $where .= $wpdb->prepare(" AND {$wpdb->posts}.post_title LIKE %s", '%' . esc_sql($search) . '%');
         }
 
         $query = "select post_title,ID  from $wpdb->posts where post_status = 'publish' $where $limit";
-        $results = $wpdb->get_results( $query );
-        if ( !empty( $results ) ) {
-            foreach ( $results as $row ) {
-                $data[ $row->ID ] = $row->post_title;
+        $results = $wpdb->get_results($query);
+        if (!empty($results)) {
+            foreach ($results as $row) {
+                $data[$row->ID] = $row->post_title;
             }
         }
         return $data;
