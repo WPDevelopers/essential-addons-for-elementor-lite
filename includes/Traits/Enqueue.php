@@ -90,6 +90,36 @@ trait Enqueue
             EAEL_PLUGIN_VERSION
         );
 
+        // register reading progress assets
+        wp_register_style(
+            'eael-reading-progress',
+            EAEL_PLUGIN_URL . 'assets/front-end/css/view/reading-progress.min.css',
+            false,
+            EAEL_PLUGIN_VERSION
+        );
+
+        wp_register_script(
+            'eael-reading-progress',
+            EAEL_PLUGIN_URL . 'assets/front-end/js/view/reading-progress.min.js',
+            false,
+            EAEL_PLUGIN_VERSION
+        );
+
+        // register Table of contents assets
+        wp_register_style(
+            'eael-table-of-content',
+            EAEL_PLUGIN_URL . 'assets/front-end/css/view/table-of-content.min.css',
+            false,
+            EAEL_PLUGIN_VERSION
+        );
+
+        wp_register_script(
+            'eael-table-of-content',
+            EAEL_PLUGIN_URL . 'assets/front-end/js/view/table-of-content.min.js',
+            false,
+            EAEL_PLUGIN_VERSION
+        );
+
         // localize object
         $this->localize_objects = apply_filters('eael/localize_objects', [
             'ajaxurl' => admin_url('admin-ajax.php'),

@@ -157,35 +157,34 @@ trait Core
      */
     public function save_global_values($post_id, $editor_data)
     {
-        $document = Plugin::$instance->documents->get($post_id);
+        $document = Plugin::$instance->documents->get($post_id,false);
         $global_settings = get_option('eael_global_settings');
-
-        if ($document->get_settings('eael_ext_reading_progress_global') == 'yes') {
+        if ($document->get_settings('eael_ext_reading_progress_global') == 'yes' && $document->get_settings('eael_ext_reading_progress') == 'yes') {
             $global_settings['reading_progress'] = [
-                'post_id' => $post_id,
-                'enabled' => true,
-                'display_condition' => $document->get_settings('eael_ext_reading_progress_global_display_condition'),
-                'position' => $document->get_settings('eael_ext_reading_progress_position'),
-                'height' => $document->get_settings('eael_ext_reading_progress_height'),
-                'bg_color' => $document->get_settings('eael_ext_reading_progress_bg_color'),
-                'fill_color' => $document->get_settings('eael_ext_reading_progress_fill_color'),
-                'animation_speed' => $document->get_settings('eael_ext_reading_progress_animation_speed'),
+                'post_id'                                            => $post_id,
+                'enabled'                                            => true,
+                'eael_ext_reading_progress'                          => $document->get_settings('eael_ext_reading_progress'),
+                'eael_ext_reading_progress_global_display_condition' => $document->get_settings('eael_ext_reading_progress_global_display_condition'),
+                'eael_ext_reading_progress_position'                 => $document->get_settings('eael_ext_reading_progress_position'),
+                'eael_ext_reading_progress_height'                   => $document->get_settings('eael_ext_reading_progress_height'),
+                'eael_ext_reading_progress_bg_color'                 => $document->get_settings('eael_ext_reading_progress_bg_color'),
+                'eael_ext_reading_progress_fill_color'               => $document->get_settings('eael_ext_reading_progress_fill_color'),
+                'eael_ext_reading_progress_animation_speed'          => $document->get_settings('eael_ext_reading_progress_animation_speed'),
             ];
         } else {
             if (isset($global_settings['reading_progress']['post_id']) && $global_settings['reading_progress']['post_id'] == $post_id) {
                 $global_settings['reading_progress'] = [
                     'post_id' => null,
                     'enabled' => false,
-                    'display_condition' => '',
-                    'position' => '',
-                    'height' => '',
-                    'bg_color' => '',
-                    'fill_color' => '',
-                    'animation_speed' => '',
+//                    'eael_ext_reading_progress_global_display_condition' => '',
+//                    'position' => '',
+//                    'height' => '',
+//                    'bg_color' => '',
+//                    'fill_color' => '',
+//                    'animation_speed' => '',
                 ];
             }
         }
-
         //save table of contents global value
         if ($document->get_settings('eael_ext_toc_global') == 'yes' && $document->get_settings('eael_ext_table_of_content') == 'yes') {
             $typography_fields = [
