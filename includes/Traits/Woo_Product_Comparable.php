@@ -1090,6 +1090,18 @@ trait Woo_Product_Comparable {
                     </tr>
 
 				<?php } else {
+
+					// for product grid, show remove button
+					if ( 'Essential_Addons_Elementor\Elements\Woo_Product_Compare' !== self::class) {
+						echo '<tr><th>&nbsp;</th>';
+						foreach ( $products as $product_id => $product ) {
+						    ?>
+                            <td><i class="fas fa-trash eael-wc-remove" data-product-id="<?php echo esc_attr($product_id);?>" title="<?php esc_attr_e( 'Remove', 'essential-addons-for-elementor-lite');?>"></i></td>
+                                <?php
+                        }
+						echo '</tr>';
+					}
+
 					$count = 1;
 					foreach ( $fields as $field => $name ) {
 						$f_heading_class = 1 === $count ? 'first-th' : '';
