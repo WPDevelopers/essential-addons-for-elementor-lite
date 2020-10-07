@@ -874,27 +874,27 @@ $config = [
         ],
         'eael-reading-progress' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Reading_Progress',
-            // 'dependency' => [
-            //     'css' => [
-            //         [
-            //             'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/reading-progress.min.css',
-            //             'type' => 'self',
-            //             'context' => 'view',
-            //         ],
-            //     ],
-            //     'js' => [
-            //         [
-            //             'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/reading-progress.min.js',
-            //             'type' => 'self',
-            //             'context' => 'edit',
-            //         ],
-            //         [
-            //             'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/reading-progress.min.js',
-            //             'type' => 'self',
-            //             'context' => 'view',
-            //         ],
-            //     ],
-            // ],
+            'dependency' => [
+                //     'css' => [
+                //         [
+                //             'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/reading-progress.min.css',
+                //             'type' => 'self',
+                //             'context' => 'view',
+                //         ],
+                //     ],
+                'js' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/reading-progress.min.js',
+                        'type' => 'self',
+                        'context' => 'edit',
+                    ],
+                    //         [
+                    //             'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/reading-progress.min.js',
+                    //             'type' => 'self',
+                    //             'context' => 'view',
+                    //         ],
+                ],
+            ],
         ],
         'eael-table-of-content' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Table_of_Content',
