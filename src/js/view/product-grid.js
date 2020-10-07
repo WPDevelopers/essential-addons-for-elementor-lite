@@ -13,7 +13,7 @@ ea.hooks.addAction("init", "ea", () => {
         const $doc = $(document);
         const modalTemplate = `
         <div class="eael-wcpc-modal">
-            <span class="close-modal" title="Close">x</span>
+            <i title="Close" class="close-modal far fa-times-circle"></i>
             <div class="modal__content" id="eael_modal_content">
             </div>
         </div>
