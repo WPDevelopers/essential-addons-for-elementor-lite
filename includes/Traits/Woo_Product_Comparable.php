@@ -1390,8 +1390,6 @@ trait Woo_Product_Comparable {
 	}
 
 	public function get_compare_table() {
-		//error_log( '$POST CONTAINS');
-		//error_log( print_r( $_POST, 1));
 		$ajax   = wp_doing_ajax();
 		$page_id = 0;
 		$widget_id = 0;
@@ -1413,10 +1411,15 @@ trait Woo_Product_Comparable {
 		}
 		$product_ids = get_transient( 'eael_product_compare_ids');
 		if ( !empty( $product_id) ) {
-			if ( !empty( $product_ids) && is_array( $product_ids) ) {
-				$product_ids[$product_id] = $product_id;
-			}else{
-				$product_ids = [$product_id => $product_id];
+		    $p_exist = !empty( $product_ids) && is_array( $product_ids);
+			if ( !empty( $_POST['remove_product']) && $p_exist ) {
+                unset( $product_ids[$product_id]);
+		    }else{
+				if ( $p_exist ) {
+					$product_ids[$product_id] = $product_id;
+				}else{
+					$product_ids = [$product_id => $product_id];
+				}
 			}
 		}
 

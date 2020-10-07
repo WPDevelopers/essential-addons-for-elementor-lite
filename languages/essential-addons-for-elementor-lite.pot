@@ -6927,11 +6927,11 @@ msgstr ""
 msgid "Essential Addons for Elementor"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:56, ../includes/Traits/Login_Registration.php:199, ../includes/Traits/Woo_Product_Comparable.php:1402
+#: ../includes/Traits/Login_Registration.php:56, ../includes/Traits/Login_Registration.php:199, ../includes/Traits/Woo_Product_Comparable.php:1400
 msgid "Page ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:63, ../includes/Traits/Login_Registration.php:204, ../includes/Traits/Woo_Product_Comparable.php:1407
+#: ../includes/Traits/Login_Registration.php:63, ../includes/Traits/Login_Registration.php:204, ../includes/Traits/Woo_Product_Comparable.php:1405
 msgid "Widget ID is missing"
 msgstr ""
 
@@ -6939,7 +6939,7 @@ msgstr ""
 msgid "Insecure form submitted without security token"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:87, ../includes/Traits/Login_Registration.php:190, ../includes/Traits/Woo_Product_Comparable.php:1434
+#: ../includes/Traits/Login_Registration.php:87, ../includes/Traits/Login_Registration.php:190, ../includes/Traits/Woo_Product_Comparable.php:1437
 msgid "Security token did not match"
 msgstr ""
 
@@ -7291,7 +7291,7 @@ msgstr ""
 msgid "No products added to compare."
 msgstr ""
 
-#: ../includes/Traits/Woo_Product_Comparable.php:1288, ../includes/Traits/Woo_Product_Comparable.php:1508
+#: ../includes/Traits/Woo_Product_Comparable.php:1288, ../includes/Traits/Woo_Product_Comparable.php:1511
 msgid "In stock"
 msgstr ""
 
@@ -7299,7 +7299,7 @@ msgstr ""
 msgid "Compare"
 msgstr ""
 
-#: ../includes/Traits/Woo_Product_Comparable.php:1412
+#: ../includes/Traits/Woo_Product_Comparable.php:1410
 msgid "Product ID is missing"
 msgstr ""
 

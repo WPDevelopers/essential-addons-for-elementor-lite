@@ -57,6 +57,8 @@ ea.hooks.addAction("init", "ea", () => {
                 value: e.target.dataset.productId
             });
             sendData(ajaxData, handleSuccess, handleError);
+            //@TODO; show a loader while fetching the table
+
         });
 
         $doc.on('click', '.close-modal', function (e) {
@@ -64,6 +66,22 @@ ea.hooks.addAction("init", "ea", () => {
             modal.style.opacity = '0';
             overlayNode.style.visibility = 'hidden';
             overlayNode.style.opacity = '0';
+        });
+
+        $doc.on('click', '.eael-wc-remove', function (e){
+            e.preventDefault();
+            const rmData = Array.from(ajaxData);
+            rmData.push({
+                name: 'product_id',
+                value: e.target.dataset.productId
+            });
+            rmData.push({
+                name: 'remove_product',
+                value: 1
+            });
+
+            sendData(rmData, handleSuccess, handleError);
+            //@TODO; show a loader while updating the table
         });
 
 
