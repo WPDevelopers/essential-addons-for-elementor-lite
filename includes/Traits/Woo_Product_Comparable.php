@@ -436,17 +436,16 @@ trait Woo_Product_Comparable {
 			'selector'  => $table_title_wrap,
 			'condition' => [ 'table_title!' => '' ],
 		] );
-		$this->init_style_table_common_style();
+		$this->init_style_table_common_style($table);
 		$this->end_controls_section();
 		$this->init_style_header_column_style();
 		foreach ( range( 0, 2 ) as $column ) {
-			$this->init_style_product_column_style( $column );
+			$this->init_style_product_column_style( $column, $table );
 		}
 	}
 
-	public function init_style_table_common_style() {
-		$wrap = "{{WRAPPER}} .eael-wcpc-wrapper";
-		$tbl  = "{$wrap} table";
+	public function init_style_table_common_style($tbl='') {
+		$tbl  =  !empty( $tbl) ? $tbl : "{{WRAPPER}} .eael-wcpc-wrapper table";
 		$td   = "{$tbl} td";
 		$th   = "{$tbl} tr:not(.image):not(.title) th:not(.first-th)"; // if we do not need to give title row weight, then remove :not(.title)
 
@@ -726,8 +725,8 @@ trait Woo_Product_Comparable {
 		$this->end_controls_tabs();
 	}
 
-	public function init_style_header_column_style() {
-		$tbl      = "{{WRAPPER}} .eael-wcpc-wrapper table";
+	public function init_style_header_column_style($tbl='') {
+		$tbl  =  !empty( $tbl) ? $tbl : "{{WRAPPER}} .eael-wcpc-wrapper table";
 		$h_col    = "{$tbl} tr:not(.image):not(.title) th:not(.first-th)";
 		$title_th = "{$tbl} tr.title th";
 		$tr_even  = "{$tbl} tr:nth-child(even):not(.image) th:not(.first-th)";
@@ -868,9 +867,9 @@ trait Woo_Product_Comparable {
 		$this->end_controls_section();
 	}
 
-	public function init_style_product_column_style( $column_number ) {
+	public function init_style_product_column_style( $column_number, $tbl='' ) {
+		$tbl  =  !empty( $tbl) ? $tbl : "{{WRAPPER}} .eael-wcpc-wrapper table";
 
-		$tbl          = "{{WRAPPER}} .eael-wcpc-wrapper table";
 		$column_class = "{$tbl} td.col_{$column_number}";
 		$title_row    = "{$tbl} tr.title td.col_{$column_number}";
 		$tr_even      = "{$tbl} tr:nth-child(even) td.col_{$column_number}";
