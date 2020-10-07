@@ -507,18 +507,12 @@
     border-radius: 50%;
     color: #fff;
     background: #000000;
-    height: 30px;
-    width: 30px;
+    font-size: 30px;
     font-weight: bold;
     text-align: center;
     line-height: 23px;
-    border: 2px solid #fff;
-    box-shadow: 0 0 3px 0 black;
+    box-shadow: -1px 0px 3px 0 #000;
     transition: transform 300ms ease;
-}
-
-.close-modal:hover {
-    transform: rotate(180deg);
 }
 
 .eael-wc-remove{

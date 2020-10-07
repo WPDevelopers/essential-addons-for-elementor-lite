@@ -913,24 +913,17 @@
   border-radius: 50%;
   color: #fff;
   background: #000000;
-  height: 30px;
-  width: 30px;
+  font-size: 30px;
   font-weight: bold;
   text-align: center;
   line-height: 23px;
-  border: 2px solid #fff;
-  -webkit-box-shadow: 0 0 3px 0 black;
-          box-shadow: 0 0 3px 0 black;
+  -webkit-box-shadow: -1px 0px 3px 0 #000;
+          box-shadow: -1px 0px 3px 0 #000;
   -webkit-transition: -webkit-transform 300ms ease;
   transition: -webkit-transform 300ms ease;
   -o-transition: transform 300ms ease;
   transition: transform 300ms ease;
   transition: transform 300ms ease, -webkit-transform 300ms ease;
-}
-.close-modal:hover {
-  -webkit-transform: rotate(180deg);
-      -ms-transform: rotate(180deg);
-          transform: rotate(180deg);
 }
 .eael-wc-remove {
   cursor: pointer;
