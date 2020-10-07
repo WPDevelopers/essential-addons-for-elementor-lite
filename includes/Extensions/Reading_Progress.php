@@ -141,7 +141,7 @@ class Reading_Progress
                     'size' => 5,
                 ],
                 'selectors' => [
-                    '.eael-reading-progress-wrap .eael-reading-progress' => 'height: {{SIZE}}{{UNIT}}',
+                    '.eael-reading-progress-wrap .eael-reading-progress' => 'height: {{SIZE}}{{UNIT}} !important',
                     '.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill' => 'height: {{SIZE}}{{UNIT}}',
                 ],
                 'separator' => 'before',

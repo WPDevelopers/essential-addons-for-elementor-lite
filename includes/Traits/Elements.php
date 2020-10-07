@@ -321,38 +321,58 @@ trait Elements
 
         $post_id = get_the_ID();
 
-        if (!Plugin::$instance->db->is_built_with_elementor($post_id)) {
-            return;
-        }
-
+//        if (!Plugin::$instance->db->is_built_with_elementor($post_id)) {
+//            return;
+//        }
         $html = '';
-        $global_settings = get_option('eael_global_settings');
-        $document = Plugin::$instance->documents->get($post_id);
+        $global_settings = [];
+        $document = [];
+
+        if ($this->get_settings('eael-reading-progress') || $this->get_settings('eael-table-of-content')) {
+            $html = '';
+            $global_settings = get_option('eael_global_settings');
+            $document = Plugin::$instance->documents->get($post_id, false);
+            $settings_data = $document->get_settings();
+        }
 
         // Reading Progress Bar
         if ($this->get_settings('eael-reading-progress') == true) {
-            if ($document->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {
-                $reading_progress_html = '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-' . ($document->get_settings('eael_ext_reading_progress') == 'yes' ? 'local' : 'global') . '">
-                        <div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . $document->get_settings('eael_ext_reading_progress_position') . '">
-                            <div class="eael-reading-progress-fill"></div>
+
+            $reading_progress_status = false;
+            if($settings_data['eael_ext_reading_progress']=='yes'){
+                $reading_progress_status = true;
+            }elseif($global_settings['reading_progress']['enabled']){
+                $reading_progress_status = true;
+                $settings_data = $global_settings['reading_progress'];
+            }
+
+            if ($reading_progress_status) {
+                $reading_progress_html = '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-' . ($settings_data['eael_ext_reading_progress'] == 'yes' ? 'local' : 'global') . '">
+                        <div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . $settings_data['eael_ext_reading_progress_position'] . '" style="height:' . $settings_data['eael_ext_reading_progress_height']['size'] . 'px;">
+                            <div class="eael-reading-progress-fill" style="height: ' . $settings_data['eael_ext_reading_progress_height']['size'] . 'px;background-color: ' . $settings_data['eael_ext_reading_progress_fill_color'] . ';transition: width ' . $settings_data['eael_ext_reading_progress_animation_speed']['size'] . 'ms ease;"></div>
                         </div>
-                        <div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' . @$global_settings['reading_progress']['position'] . '" style="height: ' . @$global_settings['reading_progress']['height']['size'] . 'px;background-color: ' . @$global_settings['reading_progress']['bg_color'] . ';">
-                            <div class="eael-reading-progress-fill" style="height: ' . @$global_settings['reading_progress']['height']['size'] . 'px;background-color: ' . @$global_settings['reading_progress']['fill_color'] . ';transition: width ' . @$global_settings['reading_progress']['animation_speed']['size'] . 'ms ease;"></div>
+                        <div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' . $settings_data['eael_ext_reading_progress_position'] . '" style="height: ' . $settings_data['eael_ext_reading_progress_height']['size'] . 'px;background-color: ' . $settings_data['eael_ext_reading_progress_bg_color'] . ';">
+                            <div class="eael-reading-progress-fill" style="height: ' . $settings_data['eael_ext_reading_progress_height']['size'] . 'px;background-color: ' . $settings_data['eael_ext_reading_progress_fill_color'] . ';transition: width ' . $settings_data['eael_ext_reading_progress_animation_speed']['size'] . 'ms ease;"></div>
                         </div>
                     </div>';
 
                 if ($document->get_settings('eael_ext_reading_progress') != 'yes') {
-                    if (get_post_status($global_settings['reading_progress']['post_id']) != 'publish') {
+                    $display_condition = $settings_data['eael_ext_reading_progress_global_display_condition'];
+                    if (get_post_status($settings_data['post_id']) != 'publish') {
                         $reading_progress_html = '';
-                    } else if ($global_settings['reading_progress']['display_condition'] == 'pages' && !is_page()) {
+                    } else if ($display_condition == 'pages' && !is_page()) {
                         $reading_progress_html = '';
-                    } else if ($global_settings['reading_progress']['display_condition'] == 'posts' && !is_single()) {
+                    } else if ($display_condition == 'posts' && !is_single()) {
                         $reading_progress_html = '';
-                    } else if ($global_settings['reading_progress']['display_condition'] == 'all' && !is_singular()) {
+                    } else if ($display_condition == 'all' && !is_singular()) {
                         $reading_progress_html = '';
                     }
                 }
 
+                if (!empty($reading_progress_html)) {
+                    wp_enqueue_script('eael-reading-progress');
+                    wp_enqueue_style('eael-reading-progress');
+                }
                 $html .= $reading_progress_html;
             }
         }
@@ -424,6 +444,10 @@ trait Elements
                     } else if ($global_settings['eael_ext_table_of_content']['display_condition'] == 'all' && !is_singular()) {
                         $table_of_content_html = '';
                     }
+                }
+                if(!empty($table_of_content_html)){
+                    wp_enqueue_script('eael-table-of-content');
+                    wp_enqueue_style('eael-table-of-content');
                 }
 
                 $html .= $table_of_content_html;
