@@ -454,7 +454,7 @@ trait Elements
                 $html .= $table_of_content_html;
             }
         }
-        $this->get_ec_setting('test');
+        
         if(!empty($table_of_content_html)){
             wp_enqueue_script('eael-table-of-content');
             wp_enqueue_style('eael-table-of-content');
