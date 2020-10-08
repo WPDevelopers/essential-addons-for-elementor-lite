@@ -176,12 +176,6 @@ trait Core
                 $global_settings['reading_progress'] = [
                     'post_id' => null,
                     'enabled' => false,
-//                    'eael_ext_reading_progress_global_display_condition' => '',
-//                    'position' => '',
-//                    'height' => '',
-//                    'bg_color' => '',
-//                    'fill_color' => '',
-//                    'animation_speed' => '',
                 ];
             }
         }
@@ -200,7 +194,8 @@ trait Core
             $global_settings['eael_ext_table_of_content'] = [
                 'post_id' => $post_id,
                 'enabled' => ($document->get_settings('eael_ext_toc_global') == 'yes'),
-                'display_condition' => $document->get_settings('eael_ext_toc_global_display_condition'),
+                'eael_ext_table_of_content' => $document->get_settings('eael_ext_table_of_content'),
+                'eael_ext_toc_global_display_condition' => $document->get_settings('eael_ext_toc_global_display_condition'),
                 'eael_ext_toc_title' => $document->get_settings('eael_ext_toc_title'),
                 'eael_ext_toc_position' => $document->get_settings('eael_ext_toc_position'),
                 'eael_ext_toc_supported_heading_tag' => $document->get_settings('eael_ext_toc_supported_heading_tag'),
@@ -209,7 +204,7 @@ trait Core
                 'eael_ext_toc_collapse_sub_heading' => $document->get_settings('eael_ext_toc_collapse_sub_heading'),
                 'eael_ext_toc_use_title_in_url' => $document->get_settings('eael_ext_toc_use_title_in_url'),
                 'eael_ext_toc_word_wrap' => $document->get_settings('eael_ext_toc_word_wrap'),
-                'eael_ext_toc_box_shadow' => $document->get_settings('eael_ext_toc_box_shadow'),
+                //'eael_ext_toc_box_shadow' => $document->get_settings('eael_ext_toc_box_shadow'),
                 'eael_ext_toc_table_box_shadow_box_shadow' => $document->get_settings('eael_ext_toc_table_box_shadow_box_shadow'),
                 'eael_ext_toc_auto_collapse' => $document->get_settings('eael_ext_toc_auto_collapse'),
                 'eael_ext_toc_hide_in_mobile' => $document->get_settings('eael_ext_toc_hide_in_mobile'),

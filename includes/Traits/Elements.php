@@ -10,6 +10,7 @@ use \Elementor\Plugin;
 
 trait Elements
 {
+    public $setting_data;
     /**
      * Register custom controls
      *
@@ -321,12 +322,8 @@ trait Elements
 
         $post_id = get_the_ID();
 
-//        if (!Plugin::$instance->db->is_built_with_elementor($post_id)) {
-//            return;
-//        }
         $html = '';
-        $global_settings = [];
-        $document = [];
+        $global_settings = $document = [];
 
         if ($this->get_settings('eael-reading-progress') || $this->get_settings('eael-table-of-content')) {
             $html = '';
@@ -347,6 +344,7 @@ trait Elements
             }
 
             if ($reading_progress_status) {
+                $this->setting_data = $settings_data;
                 $reading_progress_html = '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-' . ($settings_data['eael_ext_reading_progress'] == 'yes' ? 'local' : 'global') . '">
                         <div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . $settings_data['eael_ext_reading_progress_position'] . '" style="height:' . $settings_data['eael_ext_reading_progress_height']['size'] . 'px;">
                             <div class="eael-reading-progress-fill" style="height: ' . $settings_data['eael_ext_reading_progress_height']['size'] . 'px;background-color: ' . $settings_data['eael_ext_reading_progress_fill_color'] . ';transition: width ' . $settings_data['eael_ext_reading_progress_animation_speed']['size'] . 'ms ease;"></div>
@@ -379,38 +377,45 @@ trait Elements
 
         // Table of Contents
         if ($this->get_settings('eael-table-of-content')) {
-            if ($document->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['eael_ext_table_of_content']['enabled'])) {
+            $toc_status = false;
+            if($settings_data['eael_ext_table_of_content'] == 'yes'){
+                $toc_status = true;
+            }elseif(!empty($global_settings['eael_ext_table_of_content']['enabled'])){
+                $toc_status = true;
+                $settings_data = $global_settings['eael_ext_table_of_content'];
+            }
+
+            if ($toc_status) {
+                $this->setting_data = $settings_data;
                 $el_class = 'eael-toc eael-toc-disable';
 
-                if ($document->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['eael_ext_table_of_content']['enabled'])) {
-                    $toc_settings = $document;
+                if ($settings_data['eael_ext_table_of_content'] != 'yes' && !empty($settings_data['eael_ext_table_of_content']['enabled'])) {
                     $el_class .= ' eael-toc-global';
                     $this->toc_global_css($document, $global_settings);
                 }
                 $icon = 'fas fa-list';
-                $support_tag = (array) $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_supported_heading_tag');
-
+                $support_tag = (array) $settings_data['eael_ext_toc_supported_heading_tag'];
                 $support_tag = implode(',', array_filter($support_tag));
-                $position = $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_position');
-                $close_bt_text_style = $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_close_button_text_style');
-                $box_shadow = $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_box_shadow');
-                $auto_collapse = $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_auto_collapse');
-                $title_to_url = $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_use_title_in_url');
-                $toc_style = $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_table_of_content_list_style');
-                $toc_word_wrap = $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_word_wrap');
-                $toc_collapse = $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_collapse_sub_heading');
-                $list_icon = $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_list_icon');
-                $toc_title = $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_title');
-                $icon_check = $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_table_of_content_header_icon');
-                $sticky_scroll = $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_sticky_scroll');
-                $hide_mobile = $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_hide_in_mobile');
-                $content_selector = $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_content_selector');
-                $exclude_selector = $this->get_extension_settings($document, $global_settings, 'eael_ext_table_of_content', 'eael_toc_exclude_selector');
+                $position = $settings_data['eael_ext_toc_position'];
+                $close_bt_text_style = $settings_data['eael_ext_toc_close_button_text_style'];
+                //$box_shadow = $settings_data['eael_ext_toc_box_shadow'];
+                $auto_collapse = $settings_data['eael_ext_toc_auto_collapse'];
+                $title_to_url = $settings_data['eael_ext_toc_use_title_in_url'];
+                $toc_style = $settings_data['eael_ext_table_of_content_list_style'];
+                $toc_word_wrap = $settings_data['eael_ext_toc_word_wrap'];
+                $toc_collapse = $settings_data['eael_ext_toc_collapse_sub_heading'];
+                $list_icon = $settings_data['eael_ext_toc_list_icon'];
+                $toc_title = $settings_data['eael_ext_toc_title'];
+                $icon_check = $settings_data['eael_ext_table_of_content_header_icon'];
+                $sticky_scroll = $settings_data['eael_ext_toc_sticky_scroll'];
+                $hide_mobile = $settings_data['eael_ext_toc_hide_in_mobile'];
+                $content_selector = $settings_data['eael_ext_toc_content_selector'];
+                $exclude_selector = $settings_data['eael_toc_exclude_selector'];
 
                 $el_class .= ($position == 'right') ? ' eael-toc-right' : ' ';
                 $el_class .= ($close_bt_text_style == 'bottom_to_top') ? ' eael-bottom-to-top' : ' ';
                 $el_class .= ($auto_collapse == 'yes') ? ' eael-toc-auto-collapse' : ' ';
-                $el_class .= ($box_shadow == 'yes') ? ' eael-box-shadow' : ' ';
+                //$el_class .= ($box_shadow == 'yes') ? ' eael-box-shadow' : ' ';
                 $el_class .= ($hide_mobile == 'yes') ? ' eael-toc-mobile-hide' : ' ';
 
                 $toc_style_class = ' eael-toc-list-' . $toc_style;
@@ -434,27 +439,29 @@ trait Elements
                         <button class='eael-toc-button'><i class='{$icon}'></i><span>{$toc_title}</span></button>
                     </div>";
 
-                if ($document->get_settings('eael_ext_table_of_content') != 'yes') {
-                    if (get_post_status($global_settings['eael_ext_table_of_content']['post_id']) != 'publish') {
+                if ($settings_data['eael_ext_table_of_content'] != 'yes') {
+                    if (get_post_status($settings_data['post_id']) != 'publish') {
                         $table_of_content_html = '';
-                    } else if ($global_settings['eael_ext_table_of_content']['display_condition'] == 'pages' && !is_page()) {
+                    } else if ($settings_data['eael_ext_toc_global_display_condition'] == 'pages' && !is_page()) {
                         $table_of_content_html = '';
-                    } else if ($global_settings['eael_ext_table_of_content']['display_condition'] == 'posts' && !is_single()) {
+                    } else if ($settings_data['eael_ext_toc_global_display_condition'] == 'posts' && !is_single()) {
                         $table_of_content_html = '';
-                    } else if ($global_settings['eael_ext_table_of_content']['display_condition'] == 'all' && !is_singular()) {
+                    } else if ($settings_data['eael_ext_toc_global_display_condition'] == 'all' && !is_singular()) {
                         $table_of_content_html = '';
                     }
-                }
-                if(!empty($table_of_content_html)){
-                    wp_enqueue_script('eael-table-of-content');
-                    wp_enqueue_style('eael-table-of-content');
                 }
 
                 $html .= $table_of_content_html;
             }
         }
+        $this->get_ec_setting('test');
+        if(!empty($table_of_content_html)){
+            wp_enqueue_script('eael-table-of-content');
+            wp_enqueue_style('eael-table-of-content');
+        }
 
         echo $html;
+
     }
 
     /**
