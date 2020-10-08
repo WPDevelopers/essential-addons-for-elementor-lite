@@ -614,6 +614,21 @@ trait Woo_Product_Comparable {
 				'separate_col_style!' => 'yes',
 			],
 		] );
+		$this->add_responsive_control( "table_gen_img_padding", [
+			'label'      => __( 'Product Image Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				$img_class => $this->apply_dim( 'padding' ),
+			],
+			'condition'  => [
+				'separate_col_style!' => 'yes',
+			],
+		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'      => "common_td_col_border",
 			'label'     => __( 'Product column border', 'essential-addons-for-elementor-lite' ),
@@ -668,6 +683,7 @@ trait Woo_Product_Comparable {
 				'common_img_col_border_border!' => 'yes',
 			],
 		] );
+
 		// Colors
 		$this->add_control( 'common_colors_heading', [
 			'label'     => __( 'Colors', 'essential-addons-for-elementor-lite' ),
