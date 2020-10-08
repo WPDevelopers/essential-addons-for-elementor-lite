@@ -1048,7 +1048,7 @@ trait Woo_Product_Comparable {
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => "{$pfx}_btn_typo",
 			'label'    => sprintf( __( 'Button', 'essential-addons-for-elementor-lite' ), $title_number ),
-			'selector' => $column_class,
+			'selector' => $btn,
 		] );
 
 		//COLORS
