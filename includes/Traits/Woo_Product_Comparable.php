@@ -392,6 +392,17 @@ trait Woo_Product_Comparable {
 			'name'     => "tbl_border",
 			'selector' => $table,
 		] );
+		$this->add_control( "tbl_border_radius", [
+			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				$table => $this->apply_dim( 'border-radius' ),
+			],
+		] );
 		$this->add_control( 'tbl_title_style_heading', [
 			'label'     => __( 'Table Title Style', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
@@ -399,7 +410,7 @@ trait Woo_Product_Comparable {
 			'condition' => [ 'table_title!' => '' ],
 		] );
 		$this->add_control( 'tbl_title_color', [
-			'label'     => __( 'Table Title Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Table Title Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'separator' => 'before',
 			'selectors' => [ $table_title => 'color:{{VALUE}}' ],
@@ -437,6 +448,18 @@ trait Woo_Product_Comparable {
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'      => "tbl_title_cell_border",
 			'selector'  => $table_title_wrap,
+			'condition' => [ 'table_title!' => '' ],
+		] );
+		$this->add_control( "tbl_title_cell_border_radius", [
+			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				$table_title_wrap => $this->apply_dim( 'border-radius' ),
+			],
 			'condition' => [ 'table_title!' => '' ],
 		] );
 		$this->init_style_table_common_style( $table );
