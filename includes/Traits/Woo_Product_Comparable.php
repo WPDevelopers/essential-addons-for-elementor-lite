@@ -460,7 +460,7 @@ trait Woo_Product_Comparable {
 			'selectors'  => [
 				$table_title_wrap => $this->apply_dim( 'border-radius' ),
 			],
-			'condition' => [ 'table_title!' => '' ],
+			'condition'  => [ 'table_title!' => '' ],
 		] );
 		$this->init_style_table_common_style( $table );
 		$this->end_controls_section();
@@ -544,6 +544,21 @@ trait Woo_Product_Comparable {
 				'separate_col_style!' => 'yes',
 			],
 		] );
+		$this->add_control( "common_h_col_border_radius", [
+			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				$th => $this->apply_dim( 'border-radius' ),
+			],
+			'condition'  => [
+				'common_h_col_border_border!' => 'yes',
+				'separate_col_style!'         => 'yes',
+			],
+		] );
 		// Product column
 		$this->add_control( 'common_product_col_heading', [
 			'label'     => __( 'Product Column Style', 'essential-addons-for-elementor-lite' ),
@@ -607,6 +622,21 @@ trait Woo_Product_Comparable {
 				'separate_col_style!' => 'yes',
 			],
 		] );
+		$this->add_control( "common_td_col_border_radius", [
+			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				$td => $this->apply_dim( 'border-radius' ),
+			],
+			'condition'  => [
+				'separate_col_style!'          => 'yes',
+				'common_td_col_border_border!' => 'yes',
+			],
+		] );
 		$this->add_control( 'common_img_col_brd_heading', [
 			'label'     => __( 'Product Image border', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
@@ -621,6 +651,21 @@ trait Woo_Product_Comparable {
 			'selector'  => $img_class,
 			'condition' => [
 				'separate_col_style!' => 'yes',
+			],
+		] );
+		$this->add_control( "common_img_col_border_radius", [
+			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				$img_class => $this->apply_dim( 'border-radius' ),
+			],
+			'condition'  => [
+				'separate_col_style!'           => 'yes',
+				'common_img_col_border_border!' => 'yes',
 			],
 		] );
 		// Colors
