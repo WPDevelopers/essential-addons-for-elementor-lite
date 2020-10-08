@@ -40,10 +40,6 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                                 <img src="' . esc_url( wp_get_attachment_image_url( get_post_thumbnail_id(), $settings['image_size'] ) ) . '" alt="' . esc_attr( get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) ) . '">
                             </div>';
                 echo '</div>';
-
-                if ( $settings['eael_show_date'] === 'yes' ) {
-                    echo '<span class="eael-meta-posted-on"><time datetime="' . get_the_date() . '"><span>' . get_the_date( 'd' ) . '</span>' . get_the_date( 'F' ) . '</time></span>';
-                }
             }
 
             if ( $settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt'] ) {
