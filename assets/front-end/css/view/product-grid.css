@@ -925,17 +925,23 @@
   transition: transform 300ms ease;
   transition: transform 300ms ease, -webkit-transform 300ms ease;
 }
-.eael-wc-remove {
+.eael-wcpc-wrapper.custom .eael-wc-remove {
   cursor: pointer;
   -webkit-transition: all 400ms ease;
   -o-transition: all 400ms ease;
   transition: all 400ms ease;
 }
-.eael-wc-remove:hover {
+.eael-wcpc-wrapper.custom .eael-wc-remove:hover {
   color: red;
   -webkit-transform: scale(2);
       -ms-transform: scale(2);
           transform: scale(2);
+}
+.eael-wcpc-wrapper.custom .remove-row {
+  border: none;
+}
+.eael-wcpc-wrapper.custom .remove-row th, .eael-wcpc-wrapper.custom .remove-row td {
+  border: none;
 }
 @media only screen and (min-width: 1025px) {
   .eael-product-grid-column-1 .eael-product-grid .woocommerce ul.products {

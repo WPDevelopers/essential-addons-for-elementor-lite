@@ -15,7 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 trait Woo_Product_Comparable {
-
 	/**
 	 * Get an array of field types.
 	 * @return array
@@ -114,7 +113,8 @@ trait Woo_Product_Comparable {
 
 			return;
 		}
-    }
+	}
+
 	public function init_content_product_compare_controls() {
 		$this->start_controls_section( 'section_content_content', [
 			'label' => __( 'Product Compare', 'essential-addons-for-elementor-lite' ),
@@ -132,7 +132,10 @@ trait Woo_Product_Comparable {
 				'type'        => Controls_Manager::NUMBER,
 				'description' => __( 'Enter any ID from the Product IDs used above', 'essential-addons-for-elementor-lite' ),
 				'condition'   => [
-					'theme' => ['theme-3', 'theme-4'],
+					'theme' => [
+						'theme-3',
+						'theme-4',
+					],
 				],
 			] );
 		}
@@ -146,7 +149,7 @@ trait Woo_Product_Comparable {
 			'label'       => __( 'Ribbon Text', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::TEXT,
 			'placeholder' => __( 'eg. New', 'essential-addons-for-elementor-lite' ),
-			'default' => __( 'New', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( 'New', 'essential-addons-for-elementor-lite' ),
 			'condition'   => [
 				'theme' => 'theme-4',
 			],
@@ -200,13 +203,13 @@ trait Woo_Product_Comparable {
 		$this->end_controls_section();
 	}
 
-	public function init_style_content_controls($css_classes=[]) {
-	    extract( $css_classes);
+	public function init_style_content_controls( $css_classes = [] ) {
+		extract( $css_classes );
 		$this->start_controls_section( 'section_style_general', [
 			'label' => __( 'Compare Table General', 'essential-addons-for-elementor-lite' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
-		$container_class = !empty( $container_class) ? $container_class : '{{WRAPPER}} .eael-wcpc-wrapper';
+		$container_class = ! empty( $container_class ) ? $container_class : '{{WRAPPER}} .eael-wcpc-wrapper';
 		$this->add_responsive_control( "eael_container_width", [
 			'label'      => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::SLIDER,
@@ -299,11 +302,11 @@ trait Woo_Product_Comparable {
 		$this->end_controls_section();
 	}
 
-	public function init_style_table_controls($css_classes=[]) {
-	    extract( $css_classes);
-		$table            = isset( $table) ? $table : "{{WRAPPER}} .eael-wcpc-wrapper table";
-		$table_title      = isset( $table_title) ? $table_title : "{{WRAPPER}} .eael-wcpc-wrapper .wcpc-title";
-		$table_title_wrap = isset( $table_title_wrap) ? $table_title_wrap : "{{WRAPPER}} .eael-wcpc-wrapper .first-th";
+	public function init_style_table_controls( $css_classes = [] ) {
+		extract( $css_classes );
+		$table            = isset( $table ) ? $table : "{{WRAPPER}} .eael-wcpc-wrapper table";
+		$table_title      = isset( $table_title ) ? $table_title : "{{WRAPPER}} .eael-wcpc-wrapper .wcpc-title";
+		$table_title_wrap = isset( $table_title_wrap ) ? $table_title_wrap : "{{WRAPPER}} .eael-wcpc-wrapper .first-th";
 
 		$this->start_controls_section( 'section_style_table', [
 			'label' => __( 'Table Style', 'essential-addons-for-elementor-lite' ),
@@ -436,7 +439,7 @@ trait Woo_Product_Comparable {
 			'selector'  => $table_title_wrap,
 			'condition' => [ 'table_title!' => '' ],
 		] );
-		$this->init_style_table_common_style($table);
+		$this->init_style_table_common_style( $table );
 		$this->end_controls_section();
 		$this->init_style_header_column_style();
 		foreach ( range( 0, 2 ) as $column ) {
@@ -444,10 +447,10 @@ trait Woo_Product_Comparable {
 		}
 	}
 
-	public function init_style_table_common_style($tbl='') {
-		$tbl  =  !empty( $tbl) ? $tbl : "{{WRAPPER}} .eael-wcpc-wrapper table";
-		$td   = "{$tbl} td";
-		$th   = "{$tbl} tr:not(.image):not(.title) th:not(.first-th)"; // if we do not need to give title row weight, then remove :not(.title)
+	public function init_style_table_common_style( $tbl = '' ) {
+		$tbl = ! empty( $tbl ) ? $tbl : "{{WRAPPER}} .eael-wcpc-wrapper table";
+		$td  = "{$tbl} td";
+		$th  = "{$tbl} tr:not(.image):not(.title) th:not(.first-th)"; // if we do not need to give title row weight, then remove :not(.title)
 
 		$img_class = "{$tbl} tr.image td";
 		$title_row = "{$tbl} tr.title th, {$tbl} tr.title td";
@@ -725,8 +728,8 @@ trait Woo_Product_Comparable {
 		$this->end_controls_tabs();
 	}
 
-	public function init_style_header_column_style($tbl='') {
-		$tbl  =  !empty( $tbl) ? $tbl : "{{WRAPPER}} .eael-wcpc-wrapper table";
+	public function init_style_header_column_style( $tbl = '' ) {
+		$tbl      = ! empty( $tbl ) ? $tbl : "{{WRAPPER}} .eael-wcpc-wrapper table";
 		$h_col    = "{$tbl} tr:not(.image):not(.title) th:not(.first-th)";
 		$title_th = "{$tbl} tr.title th";
 		$tr_even  = "{$tbl} tr:nth-child(even):not(.image) th:not(.first-th)";
@@ -867,8 +870,8 @@ trait Woo_Product_Comparable {
 		$this->end_controls_section();
 	}
 
-	public function init_style_product_column_style( $column_number, $tbl='' ) {
-		$tbl  =  !empty( $tbl) ? $tbl : "{{WRAPPER}} .eael-wcpc-wrapper table";
+	public function init_style_product_column_style( $column_number, $tbl = '' ) {
+		$tbl = ! empty( $tbl ) ? $tbl : "{{WRAPPER}} .eael-wcpc-wrapper table";
 
 		$column_class = "{$tbl} td.col_{$column_number}";
 		$title_row    = "{$tbl} tr.title td.col_{$column_number}";
@@ -1091,13 +1094,17 @@ trait Woo_Product_Comparable {
 				<?php } else {
 
 					// for product grid, show remove button
-					if ( 'Essential_Addons_Elementor\Elements\Woo_Product_Compare' !== self::class) {
-						echo '<tr><th>&nbsp;</th>';
+					if ( 'Essential_Addons_Elementor\Elements\Woo_Product_Compare' !== self::class ) {
+						echo '<tr class="remove-row"><th class="remove-th">&nbsp;</th>';
+						$rm_index = 0;
 						foreach ( $products as $product_id => $product ) {
-						    ?>
-                            <td><i class="fas fa-trash eael-wc-remove" data-product-id="<?php echo esc_attr($product_id);?>" title="<?php esc_attr_e( 'Remove', 'essential-addons-for-elementor-lite');?>"></i></td>
-                                <?php
-                        }
+							?>
+                            <td class="rm-col<?php echo esc_attr( $rm_index ); ?>">
+                                <i class="fas fa-trash eael-wc-remove" data-product-id="<?php echo esc_attr( $product_id ); ?>" title="<?php esc_attr_e( 'Remove', 'essential-addons-for-elementor-lite' ); ?>"></i>
+                            </td>
+							<?php
+							$rm_index ++;
+						}
 						echo '</tr>';
 					}
 
@@ -1130,23 +1137,23 @@ trait Woo_Product_Comparable {
 							<?php
 							$index = 0;
 							foreach ( $products as $product_id => $product ) {
-							    $is_highlighted = $product_id === $highlighted_product_id;
-								$highlighted   = $is_highlighted ? 'featured' : '';
-								$product_class = ( $index % 2 == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted" ?>
+								$is_highlighted = $product_id === $highlighted_product_id;
+								$highlighted    = $is_highlighted ? 'featured' : '';
+								$product_class  = ( $index % 2 == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted" ?>
                                 <td class="<?php echo esc_attr( $product_class ); ?>">
                                     <span>
                                     <?php
                                     if ( $field === 'image' ) {
 	                                    echo '<span class="img-inner">';
-	                                    if ( 'theme-4' === $theme && $is_highlighted && $ribbon) {
-		                                   printf( '<span class="ribbon">%s</span>', esc_html( $ribbon ));
+	                                    if ( 'theme-4' === $theme && $is_highlighted && $ribbon ) {
+		                                    printf( '<span class="ribbon">%s</span>', esc_html( $ribbon ) );
 	                                    }
                                     }
                                     echo ! empty( $product->fields[ $field ] ) ? $product->fields[ $field ] : '&nbsp;';
                                     if ( $field === 'image' ) {
 	                                    if ( 'theme-4' === $theme ) {
 		                                    echo ! empty( $product->fields['title'] ) ? sprintf( "<p class='product-title'>%s</p>", esc_html( $product->fields['title'] ) ) : '&nbsp;';
-		                                    echo ! empty( $product->fields['price'] ) ? wp_kses_post( $product->fields['price']) : '&nbsp;';
+		                                    echo ! empty( $product->fields['price'] ) ? wp_kses_post( $product->fields['price'] ) : '&nbsp;';
 	                                    }
 	                                    echo '</span>';
                                     }
@@ -1224,7 +1231,8 @@ trait Woo_Product_Comparable {
 	}
 
 	/**
-	 * It will apply value like Elementor's dimension control to a property and return it.
+	 * It will apply value like Elementor's dimension control to a property
+	 * and return it.
 	 *
 	 * @param string $css_property CSS property name
 	 *
@@ -1384,13 +1392,13 @@ trait Woo_Product_Comparable {
 	}
 
 	// static methods for product grids only
-	public static function print_compare_button($id) {
-        printf( '<button class="eael-wc-compare button" data-product-id="%d" rel="nofollow">%s</button>',intval( $id, 10), __('Compare', 'essential-addons-for-elementor-lite')  );
+	public static function print_compare_button( $id ) {
+		printf( '<button class="eael-wc-compare button" data-product-id="%d" rel="nofollow">%s</button>', intval( $id, 10 ), __( 'Compare', 'essential-addons-for-elementor-lite' ) );
 	}
 
 	public function get_compare_table() {
-		$ajax   = wp_doing_ajax();
-		$page_id = 0;
+		$ajax      = wp_doing_ajax();
+		$page_id   = 0;
 		$widget_id = 0;
 
 		if ( ! empty( $_POST['page_id'] ) ) {
@@ -1408,40 +1416,42 @@ trait Woo_Product_Comparable {
 		} else {
 			$err_msg = __( 'Product ID is missing', 'essential-addons-for-elementor-lite' );
 		}
-		$product_ids = get_transient( 'eael_product_compare_ids');
-		if ( !empty( $product_id) ) {
-		    $p_exist = !empty( $product_ids) && is_array( $product_ids);
-			if ( !empty( $_POST['remove_product']) && $p_exist ) {
-                unset( $product_ids[$product_id]);
-		    }else{
+		$product_ids = get_transient( 'eael_product_compare_ids' );
+		if ( ! empty( $product_id ) ) {
+			$p_exist = ! empty( $product_ids ) && is_array( $product_ids );
+			if ( ! empty( $_POST['remove_product'] ) && $p_exist ) {
+				unset( $product_ids[ $product_id ] );
+			} else {
 				if ( $p_exist ) {
-					$product_ids[$product_id] = $product_id;
-				}else{
-					$product_ids = [$product_id => $product_id];
+					$product_ids[ $product_id ] = $product_id;
+				} else {
+					$product_ids = [ $product_id => $product_id ];
 				}
 			}
 		}
 
-		$this->eael_set_transient( 'eael_product_compare_ids', $product_ids);
+		$this->eael_set_transient( 'eael_product_compare_ids', $product_ids );
 
 
-		if (!empty( $err_msg )){
+		if ( ! empty( $err_msg ) ) {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
+
 			return false;
 		}
-		if (empty( $_POST['nonce']) || !wp_verify_nonce( $_POST['nonce'], 'eael_product_grid' ) ) {
+		if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'eael_product_grid' ) ) {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'Security token did not match', 'essential-addons-for-elementor-lite' ) );
 			}
+
 			return false;
 		}
-		$product_ids = array_values( $product_ids);
-		$ds = $this->eael_get_widget_settings( $page_id, $widget_id);
+		$product_ids = array_values( $product_ids );
+		$ds          = $this->eael_get_widget_settings( $page_id, $widget_id );
 		//@TODO; until settings added, lets modify the settings
-        $products = self::static_get_products_list($product_ids, $ds);
-		$fields = self::static_fields($product_ids, $ds);
+		$products = self::static_get_products_list( $product_ids, $ds );
+		$fields   = self::static_fields( $product_ids, $ds );
 
 		$title                  = isset( $ds['table_title'] ) ? $ds['table_title'] : '';
 		$ribbon                 = isset( $ds['ribbon'] ) ? $ds['ribbon'] : '';
@@ -1455,8 +1465,8 @@ trait Woo_Product_Comparable {
 		}
 		ob_start();
 		self::render_compare_table( compact( 'products', 'fields', 'title', 'highlighted_product_id', 'theme_wrap_class', 'theme', 'ribbon', 'repeat_price', 'repeat_add_to_cart' ) );
-        $table = ob_get_clean();
-		wp_send_json_success(['compare_table'=> $table]);
+		$table = ob_get_clean();
+		wp_send_json_success( [ 'compare_table' => $table ] );
 	}
 
 	/**
@@ -1467,7 +1477,7 @@ trait Woo_Product_Comparable {
 	 *
 	 * @return array The complete list of products with all attributes value
 	 */
-	public static function static_get_products_list( $products = [], $settings=[] ) {
+	public static function static_get_products_list( $products = [], $settings = [] ) {
 		$products_list = [];
 
 		$products = apply_filters( 'eael/wcpc/products_ids', $products );
@@ -1565,11 +1575,11 @@ trait Woo_Product_Comparable {
 	 *
 	 * @return array $fields it returns an array of fields to show on the comparison table
 	 */
-	public static function static_fields( $products = [], $settings= [] ) {
-		if ( empty( $settings[ 'fields' ] ) || ! is_array( $settings[ 'fields' ] ) ) {
+	public static function static_fields( $products = [], $settings = [] ) {
+		if ( empty( $settings['fields'] ) || ! is_array( $settings['fields'] ) ) {
 			return apply_filters( 'eael/wcpc/products_fields_none', [] );
 		}
-		$fields = $settings[ 'fields' ];
+		$fields         = $settings['fields'];
 		$df             = self::get_field_types();
 		$fields_to_show = [];
 		foreach ( $fields as $field ) {
@@ -1584,7 +1594,5 @@ trait Woo_Product_Comparable {
 
 		return apply_filters( 'eael/wcpc/products_fields_to_show', $fields_to_show, $products );
 	}
-
-
 
 }
