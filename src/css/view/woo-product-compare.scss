@@ -307,7 +307,7 @@
                     background: var(--container-bg);
                 }
 
-                td.col_0 {
+                td:nth-child(3n+1) {
                     .button {
                         background: var(--first-btn-bg);
 
@@ -317,7 +317,7 @@
                     }
                 }
 
-                td.col_1 {
+                td:nth-child(3n+2) {
                     .button {
                         background: var(--second-btn-bg);
 
@@ -327,7 +327,7 @@
                     }
                 }
 
-                td.col_2 {
+                td:nth-child(3n+3) {
                     .button {
                         background: var(--third-btn-bg);
 
@@ -348,29 +348,29 @@
                 }
 
                 tr.image {
-                    td.col_0 {
+                    td:nth-child(3n+1) {
                         background: var(--first-img-bg);
                     }
 
-                    td.col_1 {
+                    td:nth-child(3n+2) {
                         background: var(--second-img-bg);
                     }
 
-                    td.col_2 {
+                    td:nth-child(3n+3) {
                         background: var(--third-img-bg);
                     }
                 }
 
                 tr.title {
-                    td.col_0 {
+                    td:nth-child(3n+1) {
                         background: var(--first-col-bg);
                     }
 
-                    td.col_1 {
+                    td:nth-child(3n+2) {
                         background: var(--second-col-bg);
                     }
 
-                    td.col_2 {
+                    td:nth-child(3n+3) {
                         background: var(--third-col-bg);
                     }
                 }
@@ -425,26 +425,26 @@
                     border-right: none;
                 }
 
-                td.col_0 {
+                td:nth-child(3n+1) {
                     background: var(--first-col-bg);
                 }
-                td.col_1 {
+                td:nth-child(3n+2) {
                     background: var(--second-col-bg);
                 }
-                td.col_2 {
+                td:nth-child(3n+3) {
                     background: var(--third-col-bg);
                 }
                 tr:nth-child(even) {
                     th, td {
                       background: #f7f6fa;
                     }
-                    td.col_0 {
+                    td:nth-child(3n+1) {
                         background: #fec1b5;
                     }
-                    td.col_1 {
+                    td:nth-child(3n+2) {
                         background: #b7adf9;
                     }
-                    td.col_2 {
+                    td:nth-child(3n+3) {
                         background: #91efb8;
                     }
                 }
@@ -465,7 +465,7 @@
                         background: #fff;
                     }
                 }
-                td.col_0 {
+                td:nth-child(3n+1) {
                     .button {
                         color: var(--first-col-bg);
                         &:hover {
@@ -474,7 +474,7 @@
                     }
                 }
 
-                td.col_1 {
+                td:nth-child(3n+2) {
                     .button {
                         color: var(--second-col-bg);
                         &:hover {
@@ -483,7 +483,7 @@
                     }
                 }
 
-                td.col_2 {
+                td:nth-child(3n+3) {
                     .button {
                         color: var(--third-col-bg);
                         &:hover {
