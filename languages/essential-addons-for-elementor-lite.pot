@@ -760,11 +760,11 @@ msgstr ""
 msgid "<strong>BetterDocs</strong> is not installed/activated on your site. Please install and activate <a href=\"plugin-install.php?s=BetterDocs&tab=search&type=term\" target=\"_blank\">BetterDocs</a> first."
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:1183, ../includes/Elements/Betterdocs_Category_Box.php:1148, ../includes/Elements/Betterdocs_Category_Grid.php:1678, ../includes/Elements/Betterdocs_Category_Grid.php:1645
+#: ../includes/Elements/Betterdocs_Category_Box.php:1187, ../includes/Elements/Betterdocs_Category_Box.php:1152, ../includes/Elements/Betterdocs_Category_Grid.php:1682, ../includes/Elements/Betterdocs_Category_Grid.php:1649
 msgid "File Not Found"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:1176, ../includes/Elements/Betterdocs_Category_Box.php:1141, ../includes/Elements/Betterdocs_Category_Grid.php:1672, ../includes/Elements/Betterdocs_Category_Grid.php:1639, ../includes/Elements/Post_Grid.php:1235, ../includes/Elements/Post_Timeline.php:465, ../includes/Elements/Product_Grid.php:977
+#: ../includes/Elements/Betterdocs_Category_Box.php:1180, ../includes/Elements/Betterdocs_Category_Box.php:1145, ../includes/Elements/Betterdocs_Category_Grid.php:1676, ../includes/Elements/Betterdocs_Category_Grid.php:1643, ../includes/Elements/Post_Grid.php:1235, ../includes/Elements/Post_Timeline.php:465, ../includes/Elements/Product_Grid.php:977
 msgid "<p class=\"no-posts-found\">No posts found!</p>"
 msgstr ""
 
@@ -6587,7 +6587,7 @@ msgid "Knowledge Bases"
 msgstr ""
 
 #: ../includes/Traits/Controls.php:225
-msgid "Select Knowledge Bases"
+msgid "All Knowledge Base"
 msgstr ""
 
 #: ../includes/Traits/Controls.php:236
