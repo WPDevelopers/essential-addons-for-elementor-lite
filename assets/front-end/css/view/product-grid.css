@@ -244,22 +244,22 @@
 .eael-wcpc-wrapper.custom.theme-5 table th.first-th {
   background: var(--container-bg);
 }
-.eael-wcpc-wrapper.custom.theme-5 table td.col_0 .button {
+.eael-wcpc-wrapper.custom.theme-5 table td:nth-child(3n+1) .button {
   background: var(--first-btn-bg);
 }
-.eael-wcpc-wrapper.custom.theme-5 table td.col_0 .button:hover {
+.eael-wcpc-wrapper.custom.theme-5 table td:nth-child(3n+1) .button:hover {
   background: #5827e5;
 }
-.eael-wcpc-wrapper.custom.theme-5 table td.col_1 .button {
+.eael-wcpc-wrapper.custom.theme-5 table td:nth-child(3n+2) .button {
   background: var(--second-btn-bg);
 }
-.eael-wcpc-wrapper.custom.theme-5 table td.col_1 .button:hover {
+.eael-wcpc-wrapper.custom.theme-5 table td:nth-child(3n+2) .button:hover {
   background: #2747e5;
 }
-.eael-wcpc-wrapper.custom.theme-5 table td.col_2 .button {
+.eael-wcpc-wrapper.custom.theme-5 table td:nth-child(3n+3) .button {
   background: var(--third-btn-bg);
 }
-.eael-wcpc-wrapper.custom.theme-5 table td.col_2 .button:hover {
+.eael-wcpc-wrapper.custom.theme-5 table td:nth-child(3n+3) .button:hover {
   background: #13d2b5;
 }
 .eael-wcpc-wrapper.custom.theme-5 table tr.title th, .eael-wcpc-wrapper.custom.theme-5 table tr.title td {
@@ -267,22 +267,22 @@
   color: inherit;
   border: none;
 }
-.eael-wcpc-wrapper.custom.theme-5 table tr.image td.col_0 {
+.eael-wcpc-wrapper.custom.theme-5 table tr.image td:nth-child(3n+1) {
   background: var(--first-img-bg);
 }
-.eael-wcpc-wrapper.custom.theme-5 table tr.image td.col_1 {
+.eael-wcpc-wrapper.custom.theme-5 table tr.image td:nth-child(3n+2) {
   background: var(--second-img-bg);
 }
-.eael-wcpc-wrapper.custom.theme-5 table tr.image td.col_2 {
+.eael-wcpc-wrapper.custom.theme-5 table tr.image td:nth-child(3n+3) {
   background: var(--third-img-bg);
 }
-.eael-wcpc-wrapper.custom.theme-5 table tr.title td.col_0 {
+.eael-wcpc-wrapper.custom.theme-5 table tr.title td:nth-child(3n+1) {
   background: var(--first-col-bg);
 }
-.eael-wcpc-wrapper.custom.theme-5 table tr.title td.col_1 {
+.eael-wcpc-wrapper.custom.theme-5 table tr.title td:nth-child(3n+2) {
   background: var(--second-col-bg);
 }
-.eael-wcpc-wrapper.custom.theme-5 table tr.title td.col_2 {
+.eael-wcpc-wrapper.custom.theme-5 table tr.title td:nth-child(3n+3) {
   background: var(--third-col-bg);
 }
 .eael-wcpc-wrapper.custom.theme-5 table tr.image td, .eael-wcpc-wrapper.custom.theme-5 table tr.title td {
@@ -324,25 +324,25 @@
 .eael-wcpc-wrapper.custom.theme-6 table td:last-child {
   border-right: none;
 }
-.eael-wcpc-wrapper.custom.theme-6 table td.col_0 {
+.eael-wcpc-wrapper.custom.theme-6 table td:nth-child(3n+1) {
   background: var(--first-col-bg);
 }
-.eael-wcpc-wrapper.custom.theme-6 table td.col_1 {
+.eael-wcpc-wrapper.custom.theme-6 table td:nth-child(3n+2) {
   background: var(--second-col-bg);
 }
-.eael-wcpc-wrapper.custom.theme-6 table td.col_2 {
+.eael-wcpc-wrapper.custom.theme-6 table td:nth-child(3n+3) {
   background: var(--third-col-bg);
 }
 .eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(even) th, .eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(even) td {
   background: #f7f6fa;
 }
-.eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(even) td.col_0 {
+.eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(even) td:nth-child(3n+1) {
   background: #fec1b5;
 }
-.eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(even) td.col_1 {
+.eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(even) td:nth-child(3n+2) {
   background: #b7adf9;
 }
-.eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(even) td.col_2 {
+.eael-wcpc-wrapper.custom.theme-6 table tr:nth-child(even) td:nth-child(3n+3) {
   background: #91efb8;
 }
 .eael-wcpc-wrapper.custom.theme-6 table tr.image td, .eael-wcpc-wrapper.custom.theme-6 table tr.title td {
@@ -358,22 +358,22 @@
 .eael-wcpc-wrapper.custom.theme-6 table .button:hover {
   background: #fff;
 }
-.eael-wcpc-wrapper.custom.theme-6 table td.col_0 .button {
+.eael-wcpc-wrapper.custom.theme-6 table td:nth-child(3n+1) .button {
   color: var(--first-col-bg);
 }
-.eael-wcpc-wrapper.custom.theme-6 table td.col_0 .button:hover {
+.eael-wcpc-wrapper.custom.theme-6 table td:nth-child(3n+1) .button:hover {
   color: #fb3c17;
 }
-.eael-wcpc-wrapper.custom.theme-6 table td.col_1 .button {
+.eael-wcpc-wrapper.custom.theme-6 table td:nth-child(3n+2) .button {
   color: var(--second-col-bg);
 }
-.eael-wcpc-wrapper.custom.theme-6 table td.col_1 .button:hover {
+.eael-wcpc-wrapper.custom.theme-6 table td:nth-child(3n+2) .button:hover {
   color: #2f11e9;
 }
-.eael-wcpc-wrapper.custom.theme-6 table td.col_2 .button {
+.eael-wcpc-wrapper.custom.theme-6 table td:nth-child(3n+3) .button {
   color: var(--third-col-bg);
 }
-.eael-wcpc-wrapper.custom.theme-6 table td.col_2 .button:hover {
+.eael-wcpc-wrapper.custom.theme-6 table td:nth-child(3n+3) .button:hover {
   color: #179f51;
 }
 @media screen and (min-width: 769px) {
