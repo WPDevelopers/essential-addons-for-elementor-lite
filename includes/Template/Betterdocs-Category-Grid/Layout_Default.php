@@ -39,16 +39,16 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="' . get_the_
             $multiple_kb = Helper::get_betterdocs_multiple_kb_status();
 
             if ($multiple_kb == true) {
-
                 $taxes = array('knowledge_base', 'doc_category');
 
                 foreach ($taxes as $tax) {
                     $kterms = get_terms($tax);
 
-                    foreach ($kterms as $kterm) {
-                        $tax_map[$tax][$kterm->slug] = $kterm->term_taxonomy_id;
-                    }
-
+                    if (!is_wp_error($kterms)) {
+                        foreach ($kterms as $kterm) {
+                            $tax_map[$tax][$kterm->slug] = $kterm->term_taxonomy_id;
+                        }
+                    }    
                 }
 
                 $args = array(
