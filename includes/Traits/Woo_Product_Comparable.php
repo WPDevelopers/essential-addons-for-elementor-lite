@@ -307,7 +307,6 @@ trait Woo_Product_Comparable {
 		$table            = isset( $table ) ? $table : "{{WRAPPER}} .eael-wcpc-wrapper table";
 		$table_title      = isset( $table_title ) ? $table_title : "{{WRAPPER}} .eael-wcpc-wrapper .wcpc-title";
 		$table_title_wrap = isset( $table_title_wrap ) ? $table_title_wrap : "{{WRAPPER}} .eael-wcpc-wrapper .first-th";
-
 		$this->start_controls_section( 'section_style_table', [
 			'label' => __( 'Table Style', 'essential-addons-for-elementor-lite' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
@@ -439,6 +438,7 @@ trait Woo_Product_Comparable {
 			'selector'  => $table_title,
 			'condition' => [ 'table_title!' => '' ],
 		] );
+
 		$this->add_control( 'tbl_title_brd_heading', [
 			'label'     => __( 'Table Title Border', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
@@ -481,11 +481,27 @@ trait Woo_Product_Comparable {
 		$btn_hover = "{$tbl} a.button:hover";
 		$tr_even   = "{$tbl} tr:nth-child(even) th, {$tbl} tr:nth-child(even) td";
 		$tr_odd    = "{$tbl} tr:nth-child(odd) th, {$tbl} tr:nth-child(odd) td";
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'      => "title_row_typo",
+			'label'     => __( 'Product Title Row Typography', 'essential-addons-for-elementor-lite' ),
+			'selector'  => $title_row,
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
+		] );
 		// common columns
 		$this->add_control( 'common_th_col_heading', [
 			'label'     => __( 'Header Column Style', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
+		] );
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'      => "tbl_gen_th_typo",
+			'label'     => __( 'Header Column Typography', 'essential-addons-for-elementor-lite' ),
+			'selector'  => $th,
 			'condition' => [
 				'separate_col_style!' => 'yes',
 			],
@@ -564,6 +580,14 @@ trait Woo_Product_Comparable {
 			'label'     => __( 'Product Column Style', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
+		] );
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'      => "tbl_gen_td_typo",
+			'label'     => __( 'Product Column Typography', 'essential-addons-for-elementor-lite' ),
+			'selector'  => $td,
 			'condition' => [
 				'separate_col_style!' => 'yes',
 			],
@@ -1038,7 +1062,7 @@ trait Woo_Product_Comparable {
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => "{$pfx}_title_typo",
 			'label'    => sprintf( __( 'Title', 'essential-addons-for-elementor-lite' ), $title_number ),
-			'selector' => $column_class,
+			'selector' => $title_row,
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => "{$pfx}_text_typo",
@@ -1551,6 +1575,7 @@ trait Woo_Product_Comparable {
 		self::render_compare_table( compact( 'products', 'fields', 'title', 'highlighted_product_id', 'theme_wrap_class', 'theme', 'ribbon', 'repeat_price', 'repeat_add_to_cart' ) );
 		$table = ob_get_clean();
 		wp_send_json_success( [ 'compare_table' => $table ] );
+		return null;
 	}
 
 	/**
