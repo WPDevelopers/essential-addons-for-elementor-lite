@@ -18,7 +18,6 @@ class Reading_Progress
 
     public function register_controls($element)
     {
-
         if (Helper::prevent_extension_loading(get_the_ID())) {
             return;
         }
@@ -142,7 +141,7 @@ class Reading_Progress
                 ],
                 'selectors' => [
                     '.eael-reading-progress-wrap .eael-reading-progress' => 'height: {{SIZE}}{{UNIT}} !important',
-                    '.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill' => 'height: {{SIZE}}{{UNIT}}',
+                    '.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill' => 'height: {{SIZE}}{{UNIT}} !important',
                 ],
                 'separator' => 'before',
                 'condition' => [
@@ -174,7 +173,7 @@ class Reading_Progress
                 'type' => Controls_Manager::COLOR,
                 'default' => '#1fd18e',
                 'selectors' => [
-                    '.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill' => 'background-color: {{VALUE}}',
+                    '.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill' => 'background-color: {{VALUE}} !important',
                 ],
                 'separator' => 'before',
                 'condition' => [

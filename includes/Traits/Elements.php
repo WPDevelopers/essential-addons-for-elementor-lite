@@ -10,10 +10,8 @@ use \Elementor\Plugin;
 
 trait Elements
 {
-
     public $extensions_data = [];
 
-    public $setting_data;
     /**
      * Register custom controls
      *
@@ -326,22 +324,25 @@ trait Elements
         $post_id = get_the_ID();
 
         $html = '';
-        $global_settings = $document = [];
+        $global_settings = $setting_data = $document = [];
 
         if ($this->get_settings('reading-progress') || $this->get_settings('table-of-content')) {
-            error_log('kaj kore');
             $html = '';
             $global_settings = get_option('eael_global_settings');
             $document = Plugin::$instance->documents->get($post_id, false);
-            $settings_data = $document->get_settings();
+
+            if (is_object($document)) {
+                $settings_data = $document->get_settings();
+            }
         }
 
         // Reading Progress Bar
         if ($this->get_settings('reading-progress') == true) {
             $reading_progress_status = $global_reading_progress = false;
-            if($settings_data['eael_ext_reading_progress']=='yes'){
+
+            if ($settings_data['eael_ext_reading_progress'] == 'yes') {
                 $reading_progress_status = true;
-            }elseif($global_settings['reading_progress']['enabled']){
+            } elseif ($global_settings['reading_progress']['enabled']) {
                 $reading_progress_status = true;
                 $global_reading_progress = true;
                 $settings_data = $global_settings['reading_progress'];
@@ -349,19 +350,19 @@ trait Elements
 
             if ($reading_progress_status) {
                 $this->extensions_data = $settings_data;
-                $progress_height =!empty($settings_data['eael_ext_reading_progress_height']['size'])?$settings_data['eael_ext_reading_progress_height']['size']:'';
-                $animation_speed =!empty($settings_data['eael_ext_reading_progress_animation_speed']['size'])?$settings_data['eael_ext_reading_progress_animation_speed']['size']:'';
+                $progress_height = !empty($settings_data['eael_ext_reading_progress_height']['size']) ? $settings_data['eael_ext_reading_progress_height']['size'] : '';
+                $animation_speed = !empty($settings_data['eael_ext_reading_progress_animation_speed']['size']) ? $settings_data['eael_ext_reading_progress_animation_speed']['size'] : '';
 
                 $reading_progress_html = '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-' . ($this->get_extensions_value('eael_ext_reading_progress') == 'yes' ? 'local' : 'global') . '">';
 
-                if($global_reading_progress){
+                if ($global_reading_progress) {
                     $reading_progress_html .= '<div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' . $this->get_extensions_value('eael_ext_reading_progress_position') . '" style="height: ' . $progress_height . 'px;background-color: ' . $this->get_extensions_value('eael_ext_reading_progress_bg_color') . ';">
-                            <div class="eael-reading-progress-fill" style="height: ' . $progress_height . 'px;background-color: ' . $this->get_extensions_value('eael_ext_reading_progress_fill_color') . ';transition: width ' . $animation_speed . 'ms ease;"></div>
-                        </div>';
-                }else{
-                    $reading_progress_html .= '<div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . $this->get_extensions_value('eael_ext_reading_progress_position') . '" style="height:' . $progress_height . 'px;">
-                            <div class="eael-reading-progress-fill" style="height: ' . $progress_height . 'px;background-color: ' . $this->get_extensions_value('eael_ext_reading_progress_fill_color') . ';transition: width ' . $animation_speed . 'ms ease;"></div>
-                        </div>';
+                        <div class="eael-reading-progress-fill" style="height: ' . $progress_height . 'px;background-color: ' . $this->get_extensions_value('eael_ext_reading_progress_fill_color') . ';transition: width ' . $animation_speed . 'ms ease;"></div>
+                    </div>';
+                } else {
+                    $reading_progress_html .= '<div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . $this->get_extensions_value('eael_ext_reading_progress_position') . '">
+                        <div class="eael-reading-progress-fill"></div>
+                    </div>';
                 }
 
                 $reading_progress_html .= '</div>';
@@ -374,25 +375,24 @@ trait Elements
                         $reading_progress_html = '';
                     } else if ($display_condition == 'posts' && !is_single()) {
                         $reading_progress_html = '';
-                    } else if ($display_condition == 'all' && !is_singular()) {
-                        $reading_progress_html = '';
                     }
                 }
 
                 if (!empty($reading_progress_html)) {
                     wp_enqueue_script('eael-reading-progress');
                     wp_enqueue_style('eael-reading-progress');
+
+                    $html .= $reading_progress_html;
                 }
-                $html .= $reading_progress_html;
             }
         }
 
         // Table of Contents
         if ($this->get_settings('table-of-content')) {
             $toc_status = false;
-            if(isset($settings_data['eael_ext_table_of_content']) && $settings_data['eael_ext_table_of_content'] == 'yes'){
+            if (isset($settings_data['eael_ext_table_of_content']) && $settings_data['eael_ext_table_of_content'] == 'yes') {
                 $toc_status = true;
-            }elseif(!empty($global_settings['eael_ext_table_of_content']['enabled'])){
+            } elseif (!empty($global_settings['eael_ext_table_of_content']['enabled'])) {
                 $toc_status = true;
                 $settings_data = $global_settings['eael_ext_table_of_content'];
             }
@@ -410,7 +410,6 @@ trait Elements
                 $support_tag = implode(',', array_filter($support_tag));
                 $position = $settings_data['eael_ext_toc_position'];
                 $close_bt_text_style = $settings_data['eael_ext_toc_close_button_text_style'];
-                //$box_shadow = $settings_data['eael_ext_toc_box_shadow'];
                 $auto_collapse = $settings_data['eael_ext_toc_auto_collapse'];
                 $title_to_url = $settings_data['eael_ext_toc_use_title_in_url'];
                 $toc_style = $settings_data['eael_ext_table_of_content_list_style'];
@@ -458,15 +457,14 @@ trait Elements
                         $table_of_content_html = '';
                     } else if ($toc_global_display_condition == 'posts' && !is_single()) {
                         $table_of_content_html = '';
-                    } else if ($toc_global_display_condition == 'all' && !is_singular()) {
-                        $table_of_content_html = '';
                     }
                 }
 
-                $html .= $table_of_content_html;
-                if(!empty($table_of_content_html)){
+                if (!empty($table_of_content_html)) {
                     wp_enqueue_style('eael-table-of-content');
                     wp_enqueue_script('eael-table-of-content');
+
+                    $html .= $table_of_content_html;
                 }
             }
         }
@@ -683,12 +681,7 @@ trait Elements
             }";
         }
 
-        //wp_add_inline_style('eael-table-of-content', $toc_global_css);
-        wp_register_style('eael-toc-global', false);
-        wp_enqueue_style('eael-toc-global');
-        wp_add_inline_style('eael-toc-global', $toc_global_css);
-        //wp_add_inline_style('eael-table-of-content', $toc_global_css);
-
+        wp_add_inline_style('eael-table-of-content', $toc_global_css);
     }
 
     /**
@@ -701,7 +694,8 @@ trait Elements
         }
     }
 
-    public function get_extensions_value ($key = '') {
+    public function get_extensions_value($key = '')
+    {
         return isset($this->extensions_data[$key]) ? $this->extensions_data[$key] : '';
     }
 }

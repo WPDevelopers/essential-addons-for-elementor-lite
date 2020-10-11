@@ -35,10 +35,10 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 					);
 				}
 			}
-			var save = elementor.saver.update.apply();
-			save.then(function (){
+
+			elementor.saver.update.apply().then(function () {
 				elementor.reloadPreview();
-			})
+			});
 		}
 	);
 
