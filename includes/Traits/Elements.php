@@ -10,6 +10,9 @@ use \Elementor\Plugin;
 
 trait Elements
 {
+
+    public $extensions_data = [];
+
     public $setting_data;
     /**
      * Register custom controls
@@ -344,7 +347,7 @@ trait Elements
             }
 
             if ($reading_progress_status) {
-                $this->setting_data = $settings_data;
+                $this->extensions_data = $settings_data;
                 $reading_progress_html = '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-' . ($settings_data['eael_ext_reading_progress'] == 'yes' ? 'local' : 'global') . '">
                         <div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . $settings_data['eael_ext_reading_progress_position'] . '" style="height:' . $settings_data['eael_ext_reading_progress_height']['size'] . 'px;">
                             <div class="eael-reading-progress-fill" style="height: ' . $settings_data['eael_ext_reading_progress_height']['size'] . 'px;background-color: ' . $settings_data['eael_ext_reading_progress_fill_color'] . ';transition: width ' . $settings_data['eael_ext_reading_progress_animation_speed']['size'] . 'ms ease;"></div>
@@ -378,7 +381,7 @@ trait Elements
         // Table of Contents
         if ($this->get_settings('eael-table-of-content')) {
             $toc_status = false;
-            if($settings_data['eael_ext_table_of_content'] == 'yes'){
+            if(isset($settings_data['eael_ext_table_of_content']) && $settings_data['eael_ext_table_of_content'] == 'yes'){
                 $toc_status = true;
             }elseif(!empty($global_settings['eael_ext_table_of_content']['enabled'])){
                 $toc_status = true;
@@ -386,7 +389,7 @@ trait Elements
             }
 
             if ($toc_status) {
-                $this->setting_data = $settings_data;
+                $this->extensions_data = $settings_data;
                 $el_class = 'eael-toc eael-toc-disable';
 
                 if ($settings_data['eael_ext_table_of_content'] != 'yes' && !empty($settings_data['eael_ext_table_of_content']['enabled'])) {
@@ -415,7 +418,6 @@ trait Elements
                 $el_class .= ($position == 'right') ? ' eael-toc-right' : ' ';
                 $el_class .= ($close_bt_text_style == 'bottom_to_top') ? ' eael-bottom-to-top' : ' ';
                 $el_class .= ($auto_collapse == 'yes') ? ' eael-toc-auto-collapse' : ' ';
-                //$el_class .= ($box_shadow == 'yes') ? ' eael-box-shadow' : ' ';
                 $el_class .= ($hide_mobile == 'yes') ? ' eael-toc-mobile-hide' : ' ';
 
                 $toc_style_class = ' eael-toc-list-' . $toc_style;
@@ -685,5 +687,9 @@ trait Elements
         if (class_exists('WooCommerce')) {
             wc()->frontend_includes();
         }
+    }
+
+    public function get_extensions_value ($key = '') {
+        return isset($this->extensions_data[$key]) ? $this->extensions_data[$key] : '';
     }
 }
