@@ -35,6 +35,10 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 					);
 				}
 			}
+			var save = elementor.saver.update.apply();
+			save.then(function (){
+				elementor.reloadPreview();
+			})
 		}
 	);
 

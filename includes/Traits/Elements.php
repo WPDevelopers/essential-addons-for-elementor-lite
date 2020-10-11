@@ -337,28 +337,36 @@ trait Elements
 
         // Reading Progress Bar
         if ($this->get_settings('eael-reading-progress') == true) {
-
-            $reading_progress_status = false;
+            $reading_progress_status = $global_reading_progress = false;
             if($settings_data['eael_ext_reading_progress']=='yes'){
                 $reading_progress_status = true;
             }elseif($global_settings['reading_progress']['enabled']){
                 $reading_progress_status = true;
+                $global_reading_progress = true;
                 $settings_data = $global_settings['reading_progress'];
             }
 
             if ($reading_progress_status) {
                 $this->extensions_data = $settings_data;
-                $reading_progress_html = '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-' . ($settings_data['eael_ext_reading_progress'] == 'yes' ? 'local' : 'global') . '">
-                        <div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . $settings_data['eael_ext_reading_progress_position'] . '" style="height:' . $settings_data['eael_ext_reading_progress_height']['size'] . 'px;">
-                            <div class="eael-reading-progress-fill" style="height: ' . $settings_data['eael_ext_reading_progress_height']['size'] . 'px;background-color: ' . $settings_data['eael_ext_reading_progress_fill_color'] . ';transition: width ' . $settings_data['eael_ext_reading_progress_animation_speed']['size'] . 'ms ease;"></div>
-                        </div>
-                        <div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' . $settings_data['eael_ext_reading_progress_position'] . '" style="height: ' . $settings_data['eael_ext_reading_progress_height']['size'] . 'px;background-color: ' . $settings_data['eael_ext_reading_progress_bg_color'] . ';">
-                            <div class="eael-reading-progress-fill" style="height: ' . $settings_data['eael_ext_reading_progress_height']['size'] . 'px;background-color: ' . $settings_data['eael_ext_reading_progress_fill_color'] . ';transition: width ' . $settings_data['eael_ext_reading_progress_animation_speed']['size'] . 'ms ease;"></div>
-                        </div>
-                    </div>';
+                $progress_height =!empty($settings_data['eael_ext_reading_progress_height']['size'])?$settings_data['eael_ext_reading_progress_height']['size']:'';
+                $animation_speed =!empty($settings_data['eael_ext_reading_progress_animation_speed']['size'])?$settings_data['eael_ext_reading_progress_animation_speed']['size']:'';
+
+                $reading_progress_html = '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-' . ($this->get_extensions_value('eael_ext_reading_progress') == 'yes' ? 'local' : 'global') . '">';
+
+                if($global_reading_progress){
+                    $reading_progress_html .= '<div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' . $this->get_extensions_value('eael_ext_reading_progress_position') . '" style="height: ' . $progress_height . 'px;background-color: ' . $this->get_extensions_value('eael_ext_reading_progress_bg_color') . ';">
+                            <div class="eael-reading-progress-fill" style="height: ' . $progress_height . 'px;background-color: ' . $this->get_extensions_value('eael_ext_reading_progress_fill_color') . ';transition: width ' . $animation_speed . 'ms ease;"></div>
+                        </div>';
+                }else{
+                    $reading_progress_html .= '<div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . $this->get_extensions_value('eael_ext_reading_progress_position') . '" style="height:' . $progress_height . 'px;">
+                            <div class="eael-reading-progress-fill" style="height: ' . $progress_height . 'px;background-color: ' . $this->get_extensions_value('eael_ext_reading_progress_fill_color') . ';transition: width ' . $animation_speed . 'ms ease;"></div>
+                        </div>';
+                }
+
+                $reading_progress_html .= '</div>';
 
                 if ($document->get_settings('eael_ext_reading_progress') != 'yes') {
-                    $display_condition = $settings_data['eael_ext_reading_progress_global_display_condition'];
+                    $display_condition = $this->get_extensions_value('eael_ext_reading_progress_global_display_condition');
                     if (get_post_status($settings_data['post_id']) != 'publish') {
                         $reading_progress_html = '';
                     } else if ($display_condition == 'pages' && !is_page()) {
@@ -392,9 +400,9 @@ trait Elements
                 $this->extensions_data = $settings_data;
                 $el_class = 'eael-toc eael-toc-disable';
 
-                if ($settings_data['eael_ext_table_of_content'] != 'yes' && !empty($settings_data['eael_ext_table_of_content']['enabled'])) {
+                if ($this->get_extensions_value('eael_ext_table_of_content') != 'yes' && !empty($settings_data['enabled'])) {
                     $el_class .= ' eael-toc-global';
-                    $this->toc_global_css($document, $global_settings);
+                    $this->toc_global_css($global_settings);
                 }
                 $icon = 'fas fa-list';
                 $support_tag = (array) $settings_data['eael_ext_toc_supported_heading_tag'];
@@ -441,27 +449,26 @@ trait Elements
                         <button class='eael-toc-button'><i class='{$icon}'></i><span>{$toc_title}</span></button>
                     </div>";
 
-                if ($settings_data['eael_ext_table_of_content'] != 'yes') {
+                if ($this->get_extensions_value('eael_ext_table_of_content') != 'yes') {
+                    $toc_global_display_condition = $this->get_extensions_value('eael_ext_toc_global_display_condition');
                     if (get_post_status($settings_data['post_id']) != 'publish') {
                         $table_of_content_html = '';
-                    } else if ($settings_data['eael_ext_toc_global_display_condition'] == 'pages' && !is_page()) {
+                    } else if ($toc_global_display_condition == 'pages' && !is_page()) {
                         $table_of_content_html = '';
-                    } else if ($settings_data['eael_ext_toc_global_display_condition'] == 'posts' && !is_single()) {
+                    } else if ($toc_global_display_condition == 'posts' && !is_single()) {
                         $table_of_content_html = '';
-                    } else if ($settings_data['eael_ext_toc_global_display_condition'] == 'all' && !is_singular()) {
+                    } else if ($toc_global_display_condition == 'all' && !is_singular()) {
                         $table_of_content_html = '';
                     }
                 }
 
                 $html .= $table_of_content_html;
+                if(!empty($table_of_content_html)){
+                    wp_enqueue_style('eael-table-of-content');
+                    wp_enqueue_script('eael-table-of-content');
+                }
             }
         }
-
-        if(!empty($table_of_content_html)){
-            wp_enqueue_style('eael-table-of-content');
-            wp_enqueue_script('eael-table-of-content');
-        }
-
         echo $html;
 
     }
@@ -471,7 +478,7 @@ trait Elements
      * @param $elements
      * @return string|void
      */
-    public function toc_global_css($page_settings_model, $global_settings)
+    public function toc_global_css($global_settings)
     {
         $eael_toc = $global_settings['eael_ext_table_of_content'];
         $eael_toc_width = isset($eael_toc['eael_ext_toc_width']['size']) ? $eael_toc['eael_ext_toc_width']['size'] : 300;
@@ -675,7 +682,11 @@ trait Elements
             }";
         }
 
-        wp_add_inline_style('eael-table-of-content', $toc_global_css);
+        //wp_add_inline_style('eael-table-of-content', $toc_global_css);
+        wp_register_style('eael-toc-global', false);
+        wp_enqueue_style('eael-toc-global');
+        wp_add_inline_style('eael-toc-global', $toc_global_css);
+        //wp_add_inline_style('eael-table-of-content', $toc_global_css);
 
     }
 
