@@ -87,7 +87,7 @@ trait Elements
         $active_elements = (array) $this->get_settings();
 
         // set promotion extension enabled
-        array_push($active_elements, 'eael-promotion');
+        array_push($active_elements, 'promotion');
 
         foreach ($this->registered_extensions as $key => $extension) {
             if (!in_array($key, $active_elements)) {

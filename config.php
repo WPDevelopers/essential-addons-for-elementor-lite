@@ -866,13 +866,13 @@ $config = [
         ],
     ],
     'extensions' => [
-        'eael-promotion' => [
+        'promotion' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Promotion',
         ],
-        'eael-custom-js' => [
+        'custom-js' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Custom_JS',
         ],
-        'eael-reading-progress' => [
+        'reading-progress' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Reading_Progress',
             'dependency' => [
                 'css' => [
@@ -896,7 +896,7 @@ $config = [
                 ],
             ],
         ],
-        'eael-table-of-content' => [
+        'table-of-content' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Table_of_Content',
             'dependency' => [
                 'css' => [
@@ -915,7 +915,7 @@ $config = [
                 ],
             ],
         ],
-        'eael-post-duplicator' => [
+        'post-duplicator' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Post_Duplicator',
         ],
     ],
