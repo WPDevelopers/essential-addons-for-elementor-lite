@@ -561,7 +561,7 @@ trait Woo_Product_Comparable {
 				$th => $this->apply_dim( 'border-radius' ),
 			],
 			'condition'  => [
-				'common_h_col_border_border!' => 'yes',
+				'common_h_col_border_border!' => '',
 				'separate_col_style!'         => 'yes',
 			],
 		] );
@@ -663,7 +663,7 @@ trait Woo_Product_Comparable {
 			],
 			'condition'  => [
 				'separate_col_style!'          => 'yes',
-				'common_td_col_border_border!' => 'yes',
+				'common_td_col_border_border!' => '',
 			],
 		] );
 		$this->add_control( 'common_img_col_brd_heading', [
@@ -677,7 +677,7 @@ trait Woo_Product_Comparable {
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'      => "common_img_col_border",
 			'label'     => __( 'Product Image border', 'essential-addons-for-elementor-lite' ),
-			'selector'  => $img_class,
+			'selector'  => $img_class.' img',
 			'condition' => [
 				'separate_col_style!' => 'yes',
 			],
@@ -690,11 +690,11 @@ trait Woo_Product_Comparable {
 				'%',
 			],
 			'selectors'  => [
-				$img_class => $this->apply_dim( 'border-radius' ),
+				$img_class.' img' => $this->apply_dim( 'border-radius' ),
 			],
 			'condition'  => [
 				'separate_col_style!'           => 'yes',
-				'common_img_col_border_border!' => 'yes',
+				'common_img_col_border_border!' => '',
 			],
 		] );
 
