@@ -2,6 +2,8 @@
 
 namespace Essential_Addons_Elementor\Classes;
 
+use Essential_Addons_Elementor\Classes\WPDeveloper_Core_Installer;
+
 if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
@@ -186,6 +188,8 @@ class Bootstrap
             // Admin
             if (!$this->pro_enabled) {
                 $this->admin_notice();
+            } else {
+                new WPDeveloper_Core_Installer( basename( EAEL_PLUGIN_BASENAME, '.php' ) );
             }
 
             add_action('admin_menu', array($this, 'admin_menu'));
