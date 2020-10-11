@@ -818,7 +818,7 @@ class Content_Ticker extends Widget_Base
                                 }
                 
                             } else {
-                                $html .= '<div class="swiper-slide"><a href="#" class="ticker-content">' . __('No content found!', 'essential-addons-for-elementor-lite') . '</a></div>';
+                                echo '<div class="swiper-slide"><a href="#" class="ticker-content">' . __('No content found!', 'essential-addons-for-elementor-lite') . '</a></div>';
                             }
                         } elseif ('custom' === $settings['eael_ticker_type']) {
                             if (\file_exists($this->get_template($settings['eael_ticker_type']))) {

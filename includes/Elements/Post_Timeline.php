@@ -462,7 +462,7 @@ class Post_Timeline extends Widget_Base
                         include($this->get_template('default'));
                     }
                 } else {
-                    $html .= __('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                    _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
                 }
 
                 wp_reset_postdata();
