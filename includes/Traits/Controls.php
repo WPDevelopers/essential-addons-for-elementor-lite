@@ -26,10 +26,10 @@ trait Controls
         $post_types = Helper::get_post_types();
         $post_types['by_id'] = __('Manual Selection', 'essential-addons-for-elementor-lite');
 
-        if($wb->get_name() !== 'eael-dynamic-filterable-gallery' && $wb->get_name() !== 'eael-post-list') {
-            $post_types['source_dynamic'] = __( 'Dynamic', 'essential-addons-for-elementor-lite' );
+        if ($wb->get_name() !== 'eael-dynamic-filterable-gallery' && $wb->get_name() !== 'eael-post-list') {
+            $post_types['source_dynamic'] = __('Dynamic', 'essential-addons-for-elementor-lite');
         }
-        
+
         $taxonomies = get_taxonomies([], 'objects');
 
         if ('eael-content-ticker' === $wb->get_name()) {
@@ -78,8 +78,8 @@ trait Controls
                 'raw' => __('This option will only affect in <strong>Archive page of Elementor Theme Builder</strong> dynamically.', 'essential-addons-for-elementor-lite'),
                 'content_classes' => 'eael-warning',
                 'condition' => [
-                    'post_type' => 'source_dynamic'
-                ]
+                    'post_type' => 'source_dynamic',
+                ],
             ]
         );
 
@@ -106,7 +106,7 @@ trait Controls
                 'default' => [],
                 'options' => Helper::get_authors_list(),
                 'condition' => [
-                    'post_type!' => [ 'by_id', 'source_dynamic' ]
+                    'post_type!' => ['by_id', 'source_dynamic'],
                 ],
             ]
         );
@@ -142,7 +142,7 @@ trait Controls
                 'post_type' => '',
                 'multiple' => true,
                 'condition' => [
-                    'post_type!' => [ 'by_id', 'source_dynamic' ]
+                    'post_type!' => ['by_id', 'source_dynamic'],
                 ],
             ]
         );
@@ -222,13 +222,13 @@ trait Controls
                     'multiple' => false,
                     'default' => '',
                     'select2options' => [
-                        'placeholder' => __( 'Select Knowledge Bases', 'essential-addons-for-elementor-lite' ),
+                        'placeholder' => __('All Knowledge Base', 'essential-addons-for-elementor-lite'),
                         'allowClear' => true,
                     ],
                 ]
             );
         }
-        
+
         if ($wb->get_name() === 'eael-betterdocs-category-grid') {
             $wb->add_control(
                 'grid_query_heading',

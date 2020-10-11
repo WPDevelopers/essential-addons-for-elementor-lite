@@ -1099,6 +1099,10 @@ class Betterdocs_Category_Box extends Widget_Base {
 
 
         $default_multiple_kb = Helper::get_betterdocs_multiple_kb_status();
+
+        if ($settings['layout_template'] == 'Layout_2') {
+            $settings['layout_template'] = 'layout-2';
+        }
         
         if($default_multiple_kb) {
 
