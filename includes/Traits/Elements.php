@@ -454,10 +454,10 @@ trait Elements
                 $html .= $table_of_content_html;
             }
         }
-        
+
         if(!empty($table_of_content_html)){
-            wp_enqueue_script('eael-table-of-content');
             wp_enqueue_style('eael-table-of-content');
+            wp_enqueue_script('eael-table-of-content');
         }
 
         echo $html;
@@ -673,9 +673,8 @@ trait Elements
             }";
         }
 
-        wp_register_style('eael-toc-global', false);
-        wp_enqueue_style('eael-toc-global');
-        wp_add_inline_style('eael-toc-global', $toc_global_css);
+        wp_add_inline_style('eael-table-of-content', $toc_global_css);
+
     }
 
     /**
