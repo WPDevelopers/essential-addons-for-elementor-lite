@@ -324,16 +324,6 @@ trait Woo_Product_Comparable {
 				'%',
 			],
 			'range'      => [
-				'px'  => [
-					'min'  => 0,
-					'max'  => 1000,
-					'step' => 5,
-				],
-				'rem' => [
-					'min'  => 0,
-					'max'  => 20,
-					'step' => .5,
-				],
 				'%'   => [
 					'min' => 0,
 					'max' => 100,
