@@ -131,7 +131,15 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="' .
         echo '<div class="eael-bd-cg-footer">';
             if ($settings['show_button']) {
                 if ($default_multiple_kb) {
-                    $button_link = str_replace('%knowledge_base%', $settings['selected_knowledge_base'], get_term_link($term->slug, 'doc_category'));
+                    if(!empty($settings['selected_knowledge_base'])){
+                        if(!empty($settings['selected_knowledge_base'])){
+                            $button_link = str_replace('%knowledge_base%', $settings['selected_knowledge_base'], get_term_link($term->slug, 'doc_category'));
+                        }else{
+                            $button_link = str_replace('%knowledge_base%', 'non-knowledgebase', get_term_link($term->slug, 'doc_category'));
+                        }
+                    }else{
+                        $button_link = str_replace('%knowledge_base%', 'non-knowledgebase', get_term_link($term->slug, 'doc_category'));
+                    }
                 } else {
                     $button_link = get_term_link($term->slug, 'doc_category');
                 }
