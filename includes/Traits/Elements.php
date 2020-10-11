@@ -328,7 +328,8 @@ trait Elements
         $html = '';
         $global_settings = $document = [];
 
-        if ($this->get_settings('eael-reading-progress') || $this->get_settings('eael-table-of-content')) {
+        if ($this->get_settings('reading-progress') || $this->get_settings('table-of-content')) {
+            error_log('kaj kore');
             $html = '';
             $global_settings = get_option('eael_global_settings');
             $document = Plugin::$instance->documents->get($post_id, false);
@@ -336,7 +337,7 @@ trait Elements
         }
 
         // Reading Progress Bar
-        if ($this->get_settings('eael-reading-progress') == true) {
+        if ($this->get_settings('reading-progress') == true) {
             $reading_progress_status = $global_reading_progress = false;
             if($settings_data['eael_ext_reading_progress']=='yes'){
                 $reading_progress_status = true;
@@ -387,7 +388,7 @@ trait Elements
         }
 
         // Table of Contents
-        if ($this->get_settings('eael-table-of-content')) {
+        if ($this->get_settings('table-of-content')) {
             $toc_status = false;
             if(isset($settings_data['eael_ext_table_of_content']) && $settings_data['eael_ext_table_of_content'] == 'yes'){
                 $toc_status = true;

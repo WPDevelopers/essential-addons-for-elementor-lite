@@ -81,19 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/edit/reading-progress.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/edit/table-of-content.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/js/edit/reading-progress.js":
+/***/ "./src/js/edit/table-of-content.js":
 /*!*****************************************!*\
-  !*** ./src/js/edit/reading-progress.js ***!
+  !*** ./src/js/edit/table-of-content.js ***!
   \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("ea.hooks.addAction(\"editMode.init\", \"ea\", function () {\n  elementor.settings.page.addChangeCallback(\"eael_ext_reading_progress\", function (newValue) {\n    var $settings = elementor.settings.page.getSettings();\n\n    if (newValue == \"yes\") {\n      if (jQuery(\".eael-reading-progress-wrap\").length == 0) {\n        jQuery(\"body\").append('<div class=\"eael-reading-progress-wrap eael-reading-progress-wrap-local\"><div class=\"eael-reading-progress eael-reading-progress-local eael-reading-progress-' + $settings.settings.eael_ext_reading_progress_position + '\"><div class=\"eael-reading-progress-fill\"></div></div><div class=\"eael-reading-progress eael-reading-progress-global eael-reading-progress-' + $settings.settings.eael_ext_reading_progress_position + '\"><div class=\"eael-reading-progress-fill\"></div></div></div>');\n      }\n\n      jQuery(\".eael-reading-progress-wrap\").addClass(\"eael-reading-progress-wrap-local\").removeClass(\"eael-reading-progress-wrap-global eael-reading-progress-wrap-disabled\");\n    } else {\n      jQuery(\".eael-reading-progress-wrap\").removeClass(\"eael-reading-progress-wrap-local eael-reading-progress-wrap-global\");\n\n      if ($settings.settings.eael_ext_reading_progress_has_global == true) {\n        jQuery(\".eael-reading-progress-wrap\").addClass(\"eael-reading-progress-wrap-global\");\n      } else {\n        jQuery(\".eael-reading-progress-wrap\").addClass(\"eael-reading-progress-wrap-disabled\");\n      }\n    }\n\n    var save = elementor.saver.update.apply();\n    save.then(function () {\n      elementor.reloadPreview();\n    });\n  });\n  elementor.settings.page.addChangeCallback(\"eael_ext_reading_progress_position\", function (newValue) {\n    // elementor.reloadPreview();\n    elementor.settings.page.setSettings(\"eael_ext_reading_progress_position\", newValue);\n    jQuery(\".eael-reading-progress\").removeClass(\"eael-reading-progress-top eael-reading-progress-bottom\").addClass(\"eael-reading-progress-\" + newValue);\n  });\n});\n\n//# sourceURL=webpack:///./src/js/edit/reading-progress.js?");
+eval("ea.hooks.addAction(\"editMode.init\", \"ea\", function () {\n  elementor.settings.page.addChangeCallback(\"eael_ext_table_of_content\", function (newValue) {\n    elementor.settings.page.setSettings(\"eael_ext_table_of_content\", newValue);\n    var save = elementor.saver.update.apply();\n    save.then(function () {\n      elementor.reloadPreview();\n    });\n  });\n});\n\n//# sourceURL=webpack:///./src/js/edit/table-of-content.js?");
 
 /***/ })
 
