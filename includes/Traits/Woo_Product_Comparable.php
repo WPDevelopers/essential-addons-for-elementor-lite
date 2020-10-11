@@ -324,7 +324,7 @@ trait Woo_Product_Comparable {
 				'%',
 			],
 			'range'      => [
-				'%'   => [
+				'%' => [
 					'min' => 0,
 					'max' => 100,
 				],
@@ -666,7 +666,7 @@ trait Woo_Product_Comparable {
 			],
 		] );
 		$this->add_control( 'common_img_col_brd_heading', [
-			'label'     => __( 'Product Image Column', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Product Image Box Border', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
 			'condition' => [
@@ -681,11 +681,18 @@ trait Woo_Product_Comparable {
 				'separate_col_style!' => 'yes',
 			],
 		] );
-
+		$this->add_control( 'common_img_brd_heading', [
+			'label'     => __( 'Product Image Border', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
+		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'      => "common_img_border",
 			'label'     => __( 'Product Image border', 'essential-addons-for-elementor-lite' ),
-			'selector'  => $img_class.' img',
+			'selector'  => $img_class . ' img',
 			'condition' => [
 				'separate_col_style!' => 'yes',
 			],
@@ -698,10 +705,10 @@ trait Woo_Product_Comparable {
 				'%',
 			],
 			'selectors'  => [
-				$img_class.' img' => $this->apply_dim( 'border-radius' ),
+				$img_class . ' img' => $this->apply_dim( 'border-radius' ),
 			],
 			'condition'  => [
-				'separate_col_style!'           => 'yes',
+				'separate_col_style!'       => 'yes',
 				'common_img_border_border!' => '',
 			],
 		] );
@@ -985,7 +992,8 @@ trait Woo_Product_Comparable {
 		$tr_odd       = "{$tbl} tr:nth-child(odd) td.col_{$column_number}";
 		$btn          = "{$tbl} td.col_{$column_number} a.button";
 		$btn_hover    = "{$tbl} td.col_{$column_number} a.button:hover";
-		$img_bg       = "{$tbl} tr.image td.col_{$column_number}";
+		$img_td       = "{$tbl} tr.image td.col_{$column_number}";
+		$img          = "{$img_td} img";
 		$title_number = 1 + $column_number;
 		$pfx          = "col{$column_number}";
 		$this->start_controls_section( 'section_style_' . $pfx, [
@@ -1040,14 +1048,38 @@ trait Woo_Product_Comparable {
 			'selector' => $column_class,
 		] );
 		$this->add_control( "{$pfx}_img_col_brd_heading", [
-			'label'     => __( 'Product Image border', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Product Image Box Border', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "{$pfx}_img_col_border",
+			'label'    => __( 'Image Box border', 'essential-addons-for-elementor-lite' ),
+			'selector' => $img_td,
+		] );
+		$this->add_control( "{$pfx}_img_brd_heading", [
+			'label'     => __( 'Product Image Border', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "{$pfx}_img_border",
 			'label'    => __( 'Product Image border', 'essential-addons-for-elementor-lite' ),
-			'selector' => $img_bg,
+			'selector' => $img,
+		] );
+		$this->add_control( "{$pfx}_img_border_radius", [
+			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				$img => $this->apply_dim( 'border-radius' ),
+			],
+			'condition'  => [
+				"{$pfx}_img_border_border!" => '',
+			],
 		] );
 
 		//Typography
@@ -1090,7 +1122,7 @@ trait Woo_Product_Comparable {
 				'classic',
 				'gradient',
 			],
-			'selector' => $img_bg,
+			'selector' => $img_td,
 			'exclude'  => [ 'image' ],
 		] );
 		$this->add_control( "{$pfx}_title_bg", [
@@ -1572,6 +1604,7 @@ trait Woo_Product_Comparable {
 		self::render_compare_table( compact( 'products', 'fields', 'title', 'highlighted_product_id', 'theme_wrap_class', 'theme', 'ribbon', 'repeat_price', 'repeat_add_to_cart' ) );
 		$table = ob_get_clean();
 		wp_send_json_success( [ 'compare_table' => $table ] );
+
 		return null;
 	}
 
