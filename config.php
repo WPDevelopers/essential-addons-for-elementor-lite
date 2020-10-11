@@ -898,22 +898,22 @@ $config = [
         ],
         'eael-table-of-content' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Table_of_Content',
-            // 'dependency' => [
-            //     'css' => [
-            //         [
-            //             'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/table-of-content.min.css',
-            //             'type' => 'self',
-            //             'context' => 'view',
-            //         ],
-            //     ],
-            //     'js' => [
-            //         [
-            //             'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/table-of-content.min.js',
-            //             'type' => 'self',
-            //             'context' => 'view',
-            //         ],
-            //     ],
-            // ],
+             'dependency' => [
+//                 'css' => [
+//                     [
+//                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/table-of-content.min.css',
+//                         'type' => 'self',
+//                         'context' => 'edit',
+//                     ],
+//                 ],
+                 'js' => [
+                     [
+                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/table-of-content.min.js',
+                         'type' => 'self',
+                         'context' => 'edit',
+                     ],
+                 ],
+             ],
         ],
         'eael-post-duplicator' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Post_Duplicator',

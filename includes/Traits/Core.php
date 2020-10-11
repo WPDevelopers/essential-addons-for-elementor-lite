@@ -163,7 +163,7 @@ trait Core
             $global_settings['reading_progress'] = [
                 'post_id'                                            => $post_id,
                 'enabled'                                            => true,
-                'eael_ext_reading_progress'                          => $document->get_settings('eael_ext_reading_progress'),
+                //'eael_ext_reading_progress'                          => $document->get_settings('eael_ext_reading_progress'),
                 'eael_ext_reading_progress_global_display_condition' => $document->get_settings('eael_ext_reading_progress_global_display_condition'),
                 'eael_ext_reading_progress_position'                 => $document->get_settings('eael_ext_reading_progress_position'),
                 'eael_ext_reading_progress_height'                   => $document->get_settings('eael_ext_reading_progress_height'),
@@ -194,7 +194,7 @@ trait Core
             $global_settings['eael_ext_table_of_content'] = [
                 'post_id' => $post_id,
                 'enabled' => ($document->get_settings('eael_ext_toc_global') == 'yes'),
-                'eael_ext_table_of_content' => $document->get_settings('eael_ext_table_of_content'),
+                //'eael_ext_table_of_content' => $document->get_settings('eael_ext_table_of_content'),
                 'eael_ext_toc_global_display_condition' => $document->get_settings('eael_ext_toc_global_display_condition'),
                 'eael_ext_toc_title' => $document->get_settings('eael_ext_toc_title'),
                 'eael_ext_toc_position' => $document->get_settings('eael_ext_toc_position'),
