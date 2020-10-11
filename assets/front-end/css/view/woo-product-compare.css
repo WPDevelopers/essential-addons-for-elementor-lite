@@ -18,10 +18,12 @@
   --container-bg: #fff;
   --icon-color: #c3ccdc;
   background: var(--container-bg);
+  overflow: scroll;
 }
 .eael-wcpc-wrapper.custom table {
   border-collapse: collapse;
   border-spacing: 0;
+  max-width: none;
 }
 .eael-wcpc-wrapper.custom table .icon {
   width: 16px;
@@ -296,7 +298,7 @@
   --container-bg: #f0eff6;
   --first-row-color: #fff;
   --first-col-bg: #fd907b;
-  --second-col-bg: #7f6cf4 ;
+  --second-col-bg: #7f6cf4;
   --third-col-bg: #3ae281;
   --first-img-bg: #f4f0ff;
   --second-img-bg: #eaedff;
