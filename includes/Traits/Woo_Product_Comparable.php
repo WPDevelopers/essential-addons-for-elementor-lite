@@ -428,7 +428,6 @@ trait Woo_Product_Comparable {
 			'selector'  => $table_title,
 			'condition' => [ 'table_title!' => '' ],
 		] );
-
 		$this->add_control( 'tbl_title_brd_heading', [
 			'label'     => __( 'Table Title Border', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
@@ -667,7 +666,7 @@ trait Woo_Product_Comparable {
 			],
 		] );
 		$this->add_control( 'common_img_col_brd_heading', [
-			'label'     => __( 'Product Image border', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Product Image Column', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
 			'condition' => [
@@ -676,13 +675,22 @@ trait Woo_Product_Comparable {
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'      => "common_img_col_border",
+			'label'     => __( 'Image Box border', 'essential-addons-for-elementor-lite' ),
+			'selector'  => $img_class,
+			'condition' => [
+				'separate_col_style!' => 'yes',
+			],
+		] );
+
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'      => "common_img_border",
 			'label'     => __( 'Product Image border', 'essential-addons-for-elementor-lite' ),
 			'selector'  => $img_class.' img',
 			'condition' => [
 				'separate_col_style!' => 'yes',
 			],
 		] );
-		$this->add_control( "common_img_col_border_radius", [
+		$this->add_control( "common_img_border_radius", [
 			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -694,7 +702,7 @@ trait Woo_Product_Comparable {
 			],
 			'condition'  => [
 				'separate_col_style!'           => 'yes',
-				'common_img_col_border_border!' => '',
+				'common_img_border_border!' => '',
 			],
 		] );
 
@@ -1048,7 +1056,6 @@ trait Woo_Product_Comparable {
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
 		] );
-
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => "{$pfx}_title_typo",
 			'label'    => sprintf( __( 'Title', 'essential-addons-for-elementor-lite' ), $title_number ),
