@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Scheme_Typography;
