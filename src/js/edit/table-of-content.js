@@ -17,16 +17,16 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 		newValue
 	) {
 		if (newValue === "right") {
-			$("#eael-toc").addClass("eael-toc-right");
+			jQuery("#eael-toc").addClass("eael-toc-right");
 		} else {
-			$("#eael-toc").removeClass("eael-toc-right");
+			jQuery("#eael-toc").removeClass("eael-toc-right");
 		}
 	});
 
 	elementor.settings.page.addChangeCallback(
 		"eael_ext_table_of_content_list_style",
 		function (newValue) {
-			var list = $(".eael-toc-list");
+			var list = jQuery(".eael-toc-list");
 			list.removeClass("eael-toc-list-bar eael-toc-list-arrow");
 			if (newValue !== "none") {
 				list.addClass("eael-toc-list-" + newValue);
@@ -37,7 +37,7 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 	elementor.settings.page.addChangeCallback(
 		"eael_ext_toc_collapse_sub_heading",
 		function (newValue) {
-			var list = $(".eael-toc-list");
+			var list = jQuery(".eael-toc-list");
 			if (newValue === "yes") {
 				list.addClass("eael-toc-collapse");
 			} else {
@@ -57,7 +57,7 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 	elementor.settings.page.addChangeCallback("eael_ext_toc_list_icon", function (
 		newValue
 	) {
-		var list = $(".eael-toc-list");
+		var list = jQuery(".eael-toc-list");
 		if (newValue === "number") {
 			list.addClass("eael-toc-number").removeClass("eael-toc-bullet");
 		} else {
@@ -68,7 +68,7 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 	elementor.settings.page.addChangeCallback("eael_ext_toc_word_wrap", function (
 		newValue
 	) {
-		var list = $(".eael-toc-list");
+		var list = jQuery(".eael-toc-list");
 		if (newValue === "yes") {
 			list.addClass("eael-toc-word-wrap");
 		} else {
@@ -79,7 +79,7 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 	elementor.settings.page.addChangeCallback(
 		"eael_ext_toc_close_button_text_style",
 		function (newValue) {
-			var toc = $("#eael-toc");
+			var toc = jQuery("#eael-toc");
 			if (newValue === "bottom_to_top") {
 				toc.addClass("eael-bottom-to-top");
 			} else {
@@ -91,7 +91,7 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 	elementor.settings.page.addChangeCallback(
 		"eael_ext_toc_box_shadow",
 		function (newValue) {
-			var toc = $("#eael-toc");
+			var toc = jQuery("#eael-toc");
 			if (newValue === "yes") {
 				toc.addClass("eael-box-shadow");
 			} else {
@@ -103,7 +103,7 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 	elementor.settings.page.addChangeCallback(
 		"eael_ext_toc_auto_collapse",
 		function (newValue) {
-			var toc = $("#eael-toc");
+			var toc = jQuery("#eael-toc");
 			if (newValue === "yes") {
 				toc.addClass("eael-toc-auto-collapse");
 			} else {
@@ -117,7 +117,7 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 	) {
 		elementorFrontend.elements.$document.find(".eael-toc-title").text(newValue);
 		elementorFrontend.elements.$document
-			.find(".eael-toc-button span")
-			.text(newValue);
+		.find(".eael-toc-button span")
+		.text(newValue);
 	});
 });
