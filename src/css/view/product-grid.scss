@@ -515,7 +515,7 @@
     transition: transform 300ms ease;
 }
 
-.eael-wcpc-wrapper.custom {
+.eael-wcpc-wrapper {
     .eael-wc-remove {
         cursor: pointer;
         transition: all 400ms ease;
@@ -531,6 +531,7 @@
 
         th, td {
             border: none;
+            text-align: center;
         }
     }
 }
