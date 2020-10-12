@@ -101,7 +101,7 @@ trait Enqueue
         wp_register_script(
             'eael-reading-progress',
             EAEL_PLUGIN_URL . 'assets/front-end/js/view/reading-progress.min.js',
-            false,
+            ['jquery'],
             EAEL_PLUGIN_VERSION
         );
 
@@ -116,7 +116,7 @@ trait Enqueue
         wp_register_script(
             'eael-table-of-content',
             EAEL_PLUGIN_URL . 'assets/front-end/js/view/table-of-content.min.js',
-            false,
+            ['jquery'],
             EAEL_PLUGIN_VERSION
         );
 
