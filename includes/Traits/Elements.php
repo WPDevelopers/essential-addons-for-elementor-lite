@@ -340,9 +340,9 @@ trait Elements
         if ($this->get_settings('reading-progress') == true) {
             $reading_progress_status = $global_reading_progress = false;
 
-            if ($settings_data['eael_ext_reading_progress'] == 'yes') {
+            if (isset($settings_data['eael_ext_reading_progress']) && $settings_data['eael_ext_reading_progress'] == 'yes') {
                 $reading_progress_status = true;
-            } elseif ($global_settings['reading_progress']['enabled']) {
+            } elseif (isset($global_settings['reading_progress']['enabled']) && $global_settings['reading_progress']['enabled']) {
                 $reading_progress_status = true;
                 $global_reading_progress = true;
                 $settings_data = $global_settings['reading_progress'];
@@ -392,7 +392,7 @@ trait Elements
             $toc_status = false;
             if (isset($settings_data['eael_ext_table_of_content']) && $settings_data['eael_ext_table_of_content'] == 'yes') {
                 $toc_status = true;
-            } elseif (!empty($global_settings['eael_ext_table_of_content']['enabled'])) {
+            } elseif (isset($global_settings['eael_ext_table_of_content']['enabled']) && $global_settings['eael_ext_table_of_content']['enabled']) {
                 $toc_status = true;
                 $settings_data = $global_settings['eael_ext_table_of_content'];
             }
