@@ -17,7 +17,7 @@ use \Elementor\Widget_Base;
 use \Elementor\Icons_Manager;
 
 class Woo_Checkout extends Widget_Base {
-	use \Essential_Addons_Elementor\Traits\Helper;
+	
 	use \Essential_Addons_Elementor\Template\Woocommerce\Checkout\Woo_Checkout_Helper;
 
 	public function __construct( $data = [], $args = null ) {

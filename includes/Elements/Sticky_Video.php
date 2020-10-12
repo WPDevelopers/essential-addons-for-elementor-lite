@@ -13,7 +13,7 @@ use \Elementor\Widget_Base;
 
 class Sticky_Video extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
+    
 
     protected $eaelRElem = 1;
 
