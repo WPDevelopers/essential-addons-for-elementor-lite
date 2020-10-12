@@ -322,7 +322,25 @@ class Login_Register extends Widget_Base {
 				'show_lost_password'      => 'yes',
 			],
 		] );
-
+		$this->add_control( 'login_show_remember_me', [
+			'label'     => __( 'Remember Me Field', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::SWITCHER,
+			'default'   => 'yes',
+			'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+			'label_on'  => __( 'Show', 'essential-addons-for-elementor-lite' ),
+		] );
+		$this->add_control( 'remember_text', [
+			'label'       => __( 'Remember Me Field Text', 'essential-addons-for-elementor-lite' ),
+			'label_block' => true,
+			'type'        => Controls_Manager::TEXT,
+			'dynamic'     => [
+				'active' => true,
+			],
+			'default'     => __( 'Remember Me', 'essential-addons-for-elementor-lite' ),
+			'condition'   => [
+				'login_show_remember_me' => 'yes',
+			],
+		] );
 		if ( $this->user_can_register ) {
 			$this->add_control( 'reg_hr', [
 				'type' => Controls_Manager::DIVIDER,
@@ -594,14 +612,6 @@ class Login_Register extends Widget_Base {
 				'{{WRAPPER}} .eael-login-form input:not(.eael-lr-btn)' => 'width: {{SIZE}}{{UNIT}};',
 			],
 			'separator'  => 'before',
-		] );
-
-		$this->add_control( 'login_show_remember_me', [
-			'label'     => __( 'Remember Me Field', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::SWITCHER,
-			'default'   => 'yes',
-			'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-			'label_on'  => __( 'Show', 'essential-addons-for-elementor-lite' ),
 		] );
 
 		$this->add_control( 'password_toggle', [
@@ -3753,6 +3763,7 @@ class Login_Register extends Widget_Base {
 			$btn_text         = ! empty( $this->ds['login_button_text'] ) ? $this->ds['login_button_text'] : '';
 			$show_logout_link = ( ! empty( $this->ds['show_log_out_message'] ) && 'yes' === $this->ds['show_log_out_message'] );
 			$show_rememberme  = ( ! empty( $this->ds['login_show_remember_me'] ) && 'yes' === $this->ds['login_show_remember_me'] );
+			$remember_text         = isset( $this->ds['remember_text'] ) ? $this->ds['remember_text'] : esc_html__( 'Remember Me', 'essential-addons-for-elementor-lite');
 			$rm_type          = ! empty( $this->ds['remember_me_style'] ) ? $this->ds['remember_me_style'] : '';
 			$show_pv_icon     = ( ! empty( $this->ds['password_toggle'] ) && 'yes' === $this->ds['password_toggle'] );
 
@@ -3848,7 +3859,7 @@ class Login_Register extends Widget_Base {
                                     </div>
                                 </div>
                                 <div class="eael-forever-forget eael-lr-form-group">
-									<?php if ( $show_rememberme ) { ?>
+									<?php if ( $show_rememberme && !empty( $remember_text )) { ?>
                                         <p class="forget-menot">
                                             <input name="eael-rememberme"
                                                    type="checkbox"
@@ -3856,7 +3867,7 @@ class Login_Register extends Widget_Base {
                                                    class="remember-me <?php echo esc_attr( $rm_type ); ?>"
                                                    value="forever">
                                             <label for="rememberme"
-                                                   class="eael-checkbox-label rememberme"><?php esc_html_e( 'Remember Me', 'essential-addons-for-elementor-lite' ); ?></label>
+                                                   class="eael-checkbox-label rememberme"><?php echo esc_html( $remember_text ); ?></label>
                                         </p>
 									<?php }
 									if ( $show_lp ) {
