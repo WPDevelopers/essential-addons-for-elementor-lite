@@ -312,49 +312,27 @@
 				"</div>"
 			);
 		}
-
-		ea.hooks.addAction("editMode.init", "ea", () => {
-			elementorFrontend.hooks.addAction(
-				"frontend/element_ready/widget",
-				function ($scope, $) {
-					var tocLoad = $("#eael-toc #eael-toc-list");
-					var TocList = tocLoad.find("li.eael-first-child");
-					if (TocList.length < 1 && tocLoad.length >= 1) {
-						var tagList = $("#eael-toc").data("eaeltoctag");
-						if (tagList) {
-							eael_toc_content(eael_toc_check_content(), tagList);
+		if (typeof ea !== 'undefined'){
+			ea.hooks.addAction("editMode.init", "ea", () => {
+				elementorFrontend.hooks.addAction(
+					"frontend/element_ready/widget",
+					function ($scope, jQuery) {
+						var tocLoad = jQuery("#eael-toc #eael-toc-list");
+						var TocList = tocLoad.find("li.eael-first-child");
+						if (TocList.length < 1 && tocLoad.length >= 1) {
+							var tagList = jQuery("#eael-toc").data("eaeltoctag");
+							if (tagList) {
+								eael_toc_content(eael_toc_check_content(), tagList);
+							}
 						}
 					}
-				}
-			);
+				);
+			})
+		}
 
-			// elementor.settings.page.addChangeCallback("eael_ext_table_of_content", function (newValue) {
-			//     var tocGlobal = $(".eael-toc-global");
-			//     if (tocGlobal.length > 0) {
-			//         tocGlobal
-			//         .attr("id", "eael-toc-temp")
-			//         .removeClass("eael-toc")
-			//         .hide();
-			//         $(".eael-toc-global #eael-toc-list").attr("id", "");
-			//     }
-			//     $("#eael-toc").remove();
-			//     if (newValue === "yes") {
-			//         var $settings = elementor.settings.page.getSettings();
-			//         $("body").append(eael_build_toc($settings));
-			//         eael_toc_content(eael_toc_check_content(), $settings.settings.eael_ext_toc_supported_heading_tag.join(", "));
-			//     } else {
-			//         if (tocGlobal.length > 0) {
-			//             tocGlobal
-			//             .addClass("eael-toc")
-			//             .attr("id", "eael-toc")
-			//             .show();
-			//         }
-			//     }
-			// });
-		});
-
+		const editMode = (typeof isEditMode !== 'undefined')?isEditMode:false;
 		var intSupportTag = $("#eael-toc").data("eaeltoctag");
-		if (intSupportTag !== "" && !isEditMode) {
+		if (intSupportTag !== "" && !editMode) {
 			eael_toc_content(eael_toc_check_content(), intSupportTag);
 		}
 	});
