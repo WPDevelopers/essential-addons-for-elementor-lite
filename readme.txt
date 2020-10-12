@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.5
 Requires PHP: 5.4
-Stable tag: 4.2.4
+Stable tag: 4.3.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -223,6 +223,20 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.3.0 - 12/10/2020 =
+- Revamped: Code Structure for better performance
+- Improved: Asset Generator method
+- Improved: Slow queries for Dynamic widgets
+- Added: Dynamic support for Post Widgets
+- Added: Translation compatibility with more widgets
+- Added: Custom Template support for BetterDocs, Product & Post widgets
+- Fixed: EA BetterDocs widgets | 404 page not found error with Multiple-KB
+- Fixed: EA Widgets not loading properly inside Elementor Popups
+- Fixed: EA TOC & Reading Progress Bar not showing in Non-Elementor pages
+- Fixed: EA TOC & Reading Progress Bar not working correctly inside Elementor
+- Fixed: EA Creative Buttons throwing PHP error
+- Few minor bug fix and improvements
 
 = 4.2.4 - 13/09/2020 =
 - Fixed: get_elements_data on bool error
