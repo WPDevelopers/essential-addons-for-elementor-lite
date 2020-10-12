@@ -7,17 +7,16 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Scheme_Typography as Scheme_Typography;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Scheme_Typography;
+use \Elementor\Widget_Base;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class WeForms extends Widget_Base
 {
-
-    use \Essential_Addons_Elementor\Traits\Helper;
 
     public function get_name()
     {
@@ -97,7 +96,7 @@ class WeForms extends Widget_Base
                     'description' => esc_html__('Please save and refresh the page after selecting the form', 'essential-addons-for-elementor-lite'),
                     'label_block' => true,
                     'type' => Controls_Manager::SELECT,
-                    'options' => $this->eael_select_weform(),
+                    'options' => Helper::get_weform_list(),
                     'default' => '0',
                 ]
             );

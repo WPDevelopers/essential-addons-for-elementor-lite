@@ -14,9 +14,11 @@ use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
 
+use \Essential_Addons_Elementor\Classes\Helper;
+
 class Cta_Box extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
+    
 
     public function get_name()
     {
@@ -216,7 +218,7 @@ class Cta_Box extends Widget_Base
             [
                 'label' => __('Choose Template', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'options' => $this->eael_get_page_templates(),
+                'options' => Helper::get_elementor_templates(),
                 'condition' => [
                     'eael_cta_title_content_type' => 'template',
                 ],

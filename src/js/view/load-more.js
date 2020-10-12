@@ -14,6 +14,7 @@
 			$args = $this.data("args"),
 			$settings = $this.data("settings"),
 			$layout = $this.data("layout"),
+			$template_info = $this.data('template'),
 			$page = parseInt($this.data("page")) + 1;
 
 		if (typeof $widget_id == "undefined" || typeof $args == "undefined") {
@@ -27,6 +28,7 @@
 			args: $args,
 			settings: $settings,
 			page: $page,
+			template_info: $template_info
 		};
 
 		String($args)

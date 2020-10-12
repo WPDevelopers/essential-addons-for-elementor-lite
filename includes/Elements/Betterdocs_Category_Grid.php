@@ -1,4 +1,5 @@
 <?php
+
 namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
@@ -6,17 +7,17 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
+use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Background;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Widget_Base;
 use \Elementor\Group_Control_Box_Shadow;
+use \Essential_Addons_Elementor\Classes\Controls;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Betterdocs_Category_Grid extends Widget_Base
 {
-
-    use \Essential_Addons_Elementor\Traits\Helper;
     use \Essential_Addons_Elementor\Traits\Template_Query;
 
     public function get_name()
@@ -106,7 +107,7 @@ class Betterdocs_Category_Grid extends Widget_Base
              * Query  Controls!
              * @source includes/elementor-helper.php
              */
-            $this->eael_betterdocs_query_controls();
+            do_action('eael/controls/betterdocs/query', $this);
 
             /**
              * ----------------------------------------------------------
@@ -125,7 +126,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                 [
                     'label' => __('Select Layout', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT2,
-                    'options'   => $this->template_list(),
+                    'options'   => $this->template_options(),
                     'default' => $this->get_default(),
                     'label_block' => true
                 ]
@@ -646,7 +647,8 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'size_units' => [ 'px', '%', 'em' ],
                     'selectors' => [
                         '{{WRAPPER}} .layout-2 .eael-docs-cat-title' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                        '{{WRAPPER}} .eael-bd-cg-header'   => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                        '{{WRAPPER}} .eael-bd-cg-header'   => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .eael-bd-cg-header .eael-bd-cg-header-inner'   => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                     ]
                 ]
             );
@@ -757,6 +759,43 @@ class Betterdocs_Category_Grid extends Widget_Base
                 ]
             );
 
+            $this->add_group_control(
+                Group_Control_Typography::get_type(),
+                [
+                    'name' => 'count_font_size',
+                    'selector' => '{{WRAPPER}} .eael-docs-item-count',
+                ]
+            );
+
+            $this->add_responsive_control(
+                'count_size',
+                [
+                    'label' => __('Size', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SLIDER,
+                    'size_units' => ['px', '%', 'em'],
+                    'range' => [
+                        '%' => [
+                            'max' => 100,
+                            'step' => 1,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-docs-item-count' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};'
+                    ],
+                    'condition' => [
+                        'layout_template!' => 'Layout_2'
+                    ]
+                ]
+            );
+
+            $this->start_controls_tabs( 'count_settings_tabs' );
+
+            // Normal State Tab
+            $this->start_controls_tab(
+                'count_normal',
+                ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]
+            );
+
             $this->add_control(
                 'count_color',
                 [
@@ -794,45 +833,6 @@ class Betterdocs_Category_Grid extends Widget_Base
                 ]
             );
 
-            $this->add_responsive_control(
-                'count_font_size',
-                [
-                    'label' => __('Font Size', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SLIDER,
-                    'size_units' => ['px', '%', 'em'],
-                    'range' => [
-                        '%' => [
-                            'max' => 100,
-                            'step' => 1,
-                        ],
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .eael-docs-item-count' => 'font-size: {{SIZE}}{{UNIT}};',
-                    ],
-                ]
-            );
-
-            $this->add_responsive_control(
-                'count_size',
-                [
-                    'label' => __('Size', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SLIDER,
-                    'size_units' => ['px', '%', 'em'],
-                    'range' => [
-                        '%' => [
-                            'max' => 100,
-                            'step' => 1,
-                        ],
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .eael-docs-item-count' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};'
-                    ],
-                    'condition' => [
-                        'layout_template!' => 'Layout_2'
-                    ]
-                ]
-            );
-
             $this->add_group_control(
                 Group_Control_Border::get_type(),
                 [
@@ -859,6 +859,108 @@ class Betterdocs_Category_Grid extends Widget_Base
                     ]
                 ]
             );
+
+            $this->end_controls_tab();
+
+            // Hover State Tab
+            $this->start_controls_tab(
+                'count_hover',
+                ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]
+            );
+
+            $this->add_control(
+                'count_transition',
+                [
+                    'label'                 => __( 'Transition', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SLIDER,
+                    'default'               => [
+                        'size'      => '300',
+                        'unit'      => 'px',
+                    ],
+                    'range'                 => [
+                        'px'        => [
+                            'min'   => 0,
+                            'max'   => 10000,
+                            'step'  => 100,
+                        ],
+                    ],
+                    'size_units'            => [ 'px' ],
+                    'selectors'             => [
+                        '{{WRAPPER}} .eael-docs-item-count' => 'transition: {{SIZE}}ms;',
+                        '{{WRAPPER}} .eael-docs-item-count:after' => 'transition: {{SIZE}}ms;',
+                        '{{WRAPPER}} .eael-docs-item-count:after' => 'transition: {{SIZE}}ms;',
+                    ]
+                ]
+            );
+
+            $this->add_control(
+                'count_color_hover',
+                [
+                    'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::COLOR,
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-docs-item-count:hover' => 'color: {{VALUE}};',
+                    ],
+                ]
+            );
+
+            $this->add_group_control(
+                Group_Control_Background::get_type(),
+                [
+                    'name' => 'count_bg_hover',
+                    'types' => ['classic', 'gradient'],
+                    'selector' => '{{WRAPPER}} .eael-docs-item-count:hover, {{WRAPPER}} .layout-2 .eael-docs-item-count:hover:before',
+                    'exclude' => [
+                        'image',
+                    ],
+                ]
+            );
+
+            $this->add_control(
+                'count_ticker_color_hover',
+                [
+                    'label' => esc_html__('Ticker Background', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::COLOR,
+                    'selectors' => [
+                        '{{WRAPPER}} .layout-2 .eael-docs-item-count:hover:after' => 'border-top-color: {{VALUE}};',
+                    ],
+                    'condition' => [
+                        'layout_template' => 'Layout_2'
+                    ]
+                ]
+            );
+
+            $this->add_group_control(
+                Group_Control_Border::get_type(),
+                [
+                    'name' => 'count_border_hover', // Legacy control name change it with 'border_size' if anything happens.
+                    'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
+                    'selector' => '{{WRAPPER}} .eael-docs-item-count:hover',
+                    'condition' => [
+                        'layout_template!' => 'Layout_2'
+                    ]
+                ]
+            );
+
+            $this->add_control(
+                'count_border_radius_hover',
+                [
+                    'label' => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', '%', 'em' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-docs-item-count:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                    'condition' => [
+                        'layout_template!' => 'Layout_2'
+                    ]
+                ]
+            );
+
+            $this->end_controls_tab();
+
+            $this->end_controls_tabs();
+
 
             $this->end_controls_section(); # end of 'Count Settings'
 
@@ -1327,6 +1429,29 @@ class Betterdocs_Category_Grid extends Widget_Base
             );
 
             $this->add_control(
+                'button_transition',
+                [
+                    'label'                 => __( 'Transition', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SLIDER,
+                    'default'               => [
+                        'size'      => '300',
+                        'unit'      => 'px',
+                    ],
+                    'range'                 => [
+                        'px'        => [
+                            'min'   => 0,
+                            'max'   => 10000,
+                            'step'  => 100,
+                        ],
+                    ],
+                    'size_units'            => [ 'px' ],
+                    'selectors'             => [
+                        '{{WRAPPER}} .eael-bd-cg-button' => 'transition: {{SIZE}}ms;',
+                    ]
+                ]
+            );
+
+            $this->add_control(
                 'button_color_hover',
                 [
                     'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
@@ -1471,48 +1596,101 @@ class Betterdocs_Category_Grid extends Widget_Base
         );
 
         if ( $settings['include'] ) {
-            unset($terms_object['parent']);
             $terms_object['include'] = array_diff($settings['include'], (array) $settings['exclude']);
-            $terms_object['orderby'] = 'include';
         }
 
         if($settings['exclude']) {
-            unset($terms_object['parent']);
             $terms_object['exclude'] =  $settings['exclude'];
-            $terms_object['orderby'] = 'exclude';
         }
 
-        $taxonomy_objects = get_terms($terms_object);
+        $default_multiple_kb = Helper::get_betterdocs_multiple_kb_status();
 
+        if ($settings['layout_template'] == 'Layout_2') {
+            $settings['layout_template'] = 'layout-2';
+        }
+        
+        if($default_multiple_kb) {
 
-        $html = '<div ' . $this->get_render_attribute_string('bd_category_grid_wrapper') . '>';
-            $html .= '<div '.$this->get_render_attribute_string('bd_category_grid_inner').'>';
-            if(file_exists($this->get_template($settings['layout_template']))) {
+            $taxonomy_objects = Helper::get_multiple_kb_terms(false, false);
+            
+            $meta_query = '';
 
-                if($taxonomy_objects && ! is_wp_error( $taxonomy_objects )) {
-                    foreach($taxonomy_objects as $term) {
-                        ob_start();
-                            include($this->get_template($settings['layout_template']));
-                        $html .= ob_get_clean(); 
+            if(!empty($settings['selected_knowledge_base'])){
+                $terms_object['meta_query'] =  array(
+                    array(
+                        'relation' => 'OR',
+                        array(
+                            'key'       => 'doc_category_knowledge_base',
+                            'value'     => $settings['selected_knowledge_base'],
+                            'compare'   => 'LIKE'
+                        )
+                    ),
+                );
+            }
+
+        
+            $taxonomy_objects = get_terms( $terms_object );
+
+            $html = '<div ' . $this->get_render_attribute_string('bd_category_grid_wrapper') . '>';
+                $html .= '<div '.$this->get_render_attribute_string('bd_category_grid_inner').'>';
+                if(file_exists($this->get_template($settings['layout_template']))) {
+
+                    if($taxonomy_objects && ! is_wp_error( $taxonomy_objects )) {
+                        foreach($taxonomy_objects as $term) {
+                            echo Helper::include_with_variable($this->get_template($settings['layout_template']), ['term' => $term, 'settings' => $settings, 'default_multiple_kb' => $default_multiple_kb]);
+                        }
+                    }else {
+                        _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
                     }
+
+                    wp_reset_postdata();
+
                 }else {
-                    _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                    $html .= '<h4>'.__( 'File Not Found', 'essential-addons-for-elementor-lite' ).'</h4>';
                 }
+                $html .= '</div>';
+                $html .= '<div class="clearfix"></div>';
 
-                wp_reset_postdata();
-
-            }else {
-                $html .= '<h4>'.__( 'File Not Found', 'essential-addons-for-elementor-lite' ).'</h4>';
-            }
+                if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
+                    $this->render_editor_script();
+                }
             $html .= '</div>';
-            $html .= '<div class="clearfix"></div>';
 
-            if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
-                $this->render_editor_script();
-            }
-        $html .= '</div>';
+            echo $html;
 
-        echo $html;
+
+        }else {
+            $taxonomy_objects = get_terms($terms_object);
+
+            $html = '<div ' . $this->get_render_attribute_string('bd_category_grid_wrapper') . '>';
+                $html .= '<div '.$this->get_render_attribute_string('bd_category_grid_inner').'>';
+                if(file_exists($this->get_template($settings['layout_template']))) {
+
+                    if($taxonomy_objects && ! is_wp_error( $taxonomy_objects )) {
+                        foreach($taxonomy_objects as $term) {
+                            ob_start();
+                                include($this->get_template($settings['layout_template']));
+                            $html .= ob_get_clean(); 
+                        }
+                    }else {
+                        _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                    }
+
+                    wp_reset_postdata();
+
+                }else {
+                    $html .= '<h4>'.__( 'File Not Found', 'essential-addons-for-elementor-lite' ).'</h4>';
+                }
+                $html .= '</div>';
+                $html .= '<div class="clearfix"></div>';
+
+                if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
+                    $this->render_editor_script();
+                }
+            $html .= '</div>';
+
+            echo $html;
+        }
     
     }
 
@@ -1525,8 +1703,6 @@ class Betterdocs_Category_Grid extends Widget_Base
                     var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>"),
                         $gallery = $(this);
                         $layout_mode = $gallery.data('layout-mode');
-
-                    console.log($layout_mode);
 
 
                     if($layout_mode === 'masonry') {
