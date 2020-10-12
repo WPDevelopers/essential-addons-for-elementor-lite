@@ -249,6 +249,8 @@
 				contentSelectro = ".elementor-inner";
 			} else if ($("#site-content")[0]) {
 				contentSelectro = "#site-content";
+			}else if ($(".site-main")){
+				contentSelectro = ".site-main";
 			}
 			return contentSelectro;
 		}
