@@ -9,8 +9,8 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Scheme_Typography as Scheme_Typography;
-use Essential_Addons_Elementor\Traits\Shared;
+use \Elementor\Scheme_Typography;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Table_of_Content
 {
@@ -22,8 +22,8 @@ class Table_of_Content
 
     public function register_controls($element)
     {
-        if(Shared::is_prevent_load_extension(get_the_ID())){
-            return false;
+        if (Helper::prevent_extension_loading(get_the_ID())) {
+            return;
         }
 
         $global_settings = get_option('eael_global_settings');
@@ -117,14 +117,14 @@ class Table_of_Content
             ]
         );
 
-        $element->start_controls_tabs( 'eael_toc_include_exclude', [ 'separator' => 'before' ] );
+        $element->start_controls_tabs('eael_toc_include_exclude', ['separator' => 'before']);
 
-        $element->start_controls_tab( 'eael_toc_include',
+        $element->start_controls_tab('eael_toc_include',
             [
-                'label' => __( 'Include', 'essential-addons-for-elementor-lite' ),
+                'label' => __('Include', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
-                ]
+                ],
             ]
         );
 
@@ -172,26 +172,26 @@ class Table_of_Content
 
         $element->end_controls_tab(); // include
 
-        $element->start_controls_tab( 'eael_toc_exclude',
+        $element->start_controls_tab('eael_toc_exclude',
             [
-                'label' => __( 'Exclude', 'essential-addons-for-elementor-lite' ),
+                'label' => __('Exclude', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
-                ]
+                ],
             ]
         );
 
         $element->add_control(
             'eael_toc_exclude_selector',
             [
-                'label' => __( 'Exclude By Selector', 'essential-addons-for-elementor-lite' ),
+                'label' => __('Exclude By Selector', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
-                'description' => __( 'CSS selectors, in a comma-separated list', 'essential-addons-for-elementor-lite' ),
+                'description' => __('CSS selectors, in a comma-separated list', 'essential-addons-for-elementor-lite'),
                 'default' => '',
                 'label_block' => true,
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
-                ]
+                ],
             ]
         );
 
@@ -652,16 +652,16 @@ class Table_of_Content
         $element->add_control(
             'eael_ext_table_of_content_close_button_icon_size',
             [
-                'label'      => __('Icon Size', 'essential-addons-for-elementor-lite'),
-                'type'       => Controls_Manager::SLIDER,
+                'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
-                'range'      => [
+                'range' => [
                     'px' => [
                         'min' => 0,
                         'max' => 100,
-                    ]
+                    ],
                 ],
-                'selectors'  => [
+                'selectors' => [
                     '{{WRAPPER}} .eael-toc .eael-toc-close' => 'font-size: {{SIZE}}{{UNIT}};',
                 ],
             ]
@@ -670,16 +670,16 @@ class Table_of_Content
         $element->add_control(
             'eael_ext_table_of_content_close_button_size',
             [
-                'label'      => __('Button Size', 'essential-addons-for-elementor-lite'),
-                'type'       => Controls_Manager::SLIDER,
+                'label' => __('Button Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
-                'range'      => [
+                'range' => [
                     'px' => [
                         'min' => 0,
                         'max' => 100,
-                    ]
+                    ],
                 ],
-                'selectors'  => [
+                'selectors' => [
                     '{{WRAPPER}} .eael-toc .eael-toc-close' => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};',
                 ],
             ]
@@ -688,16 +688,16 @@ class Table_of_Content
         $element->add_control(
             'eael_ext_table_of_content_close_button_line_height',
             [
-                'label'      => __('Line Height', 'essential-addons-for-elementor-lite'),
-                'type'       => Controls_Manager::SLIDER,
+                'label' => __('Line Height', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
-                'range'      => [
+                'range' => [
                     'px' => [
                         'min' => 0,
                         'max' => 100,
-                    ]
+                    ],
                 ],
-                'selectors'  => [
+                'selectors' => [
                     '{{WRAPPER}} .eael-toc .eael-toc-close' => 'line-height: {{SIZE}}{{UNIT}};',
                 ],
             ]
@@ -730,16 +730,16 @@ class Table_of_Content
         $element->add_control(
             'eael_ext_table_of_content_close_button_border_radius',
             [
-                'label'      => __('Border Radius', 'essential-addons-for-elementor-lite'),
-                'type'       => Controls_Manager::SLIDER,
+                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
-                'range'      => [
+                'range' => [
                     'px' => [
                         'min' => 0,
                         'max' => 100,
-                    ]
+                    ],
                 ],
-                'selectors'  => [
+                'selectors' => [
                     '{{WRAPPER}} .eael-toc .eael-toc-close' => 'border-radius: {{SIZE}}{{UNIT}};',
                 ],
             ]
@@ -748,8 +748,8 @@ class Table_of_Content
         $element->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
-                'name'     => 'eael_ext_table_of_content_close_button_box_shadow',
-                'label'    => __('Box Shadow', 'essential-addons-for-elementor-lite'),
+                'name' => 'eael_ext_table_of_content_close_button_box_shadow',
+                'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-toc .eael-toc-close',
             ]
         );

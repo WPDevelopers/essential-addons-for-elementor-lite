@@ -6,13 +6,27 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use \Elementor\Plugin;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 trait Generator
 {
-
-    public function uid($uid = null)
+    public function init_request_data()
     {
-        if ($uid == null) {
+        if (!apply_filters('eael/active_plugins', 'elementor/elementor.php')) {
+            return;
+        }
+
+        if (is_admin()) {
+            return;
+        }
+
+        if ($this->is_running_background()) {
+            return;
+        }
+
+        $uid = null;
+
+        if ($this->is_preview_mode()) {
             if (is_front_page()) {
                 $uid = 'front-page';
             } else if (is_home()) {
@@ -33,90 +47,75 @@ trait Generator
                 $uid = 'tax-' . get_queried_object_id();
             } else if (is_author()) {
                 $uid = 'author-' . get_queried_object_id();
-            } else if (is_date()) {
-                $uid = 'date';
+            } elseif (is_year()) {
+                $uid = 'year-' . get_the_date('y');
+            } elseif (is_month()) {
+                $uid = 'month-' . get_the_date('m-y');
+            } elseif (is_day()) {
+                $uid = 'day-' . get_the_date('j-m-y');
             } else if (is_archive()) {
-                $uid = 'archive';
+                $uid = 'archive-' . get_queried_object_id();
             } else if (is_search()) {
                 $uid = 'search';
-            } else if (is_404()) {
-                $uid = 'error-404';
             } else if (is_single() || is_page() || is_singular()) {
                 $uid = 'singular-' . get_queried_object_id();
+            } else if (is_404()) {
+                $uid = 'error-404';
             }
+        } elseif ($this->is_edit_mode()) {
+            $uid = 'eael';
         }
 
-        if ($uid) {
-            return substr(md5($uid), 0, 9);
+        // set request uid
+        if ($uid && $this->uid == null) {
+            $this->uid = substr(md5($uid), 0, 9);
+            $this->request_requires_update = $this->request_requires_update();
         }
-
-        return $uid;
     }
 
-    /**
-     * Parse widgets from page data
-     *
-     * @since 3.0.0
-     */
-    public function parse_widgets($post_id)
+    public function request_requires_update()
     {
+        $elements = get_transient($this->uid . '_elements');
+        $editor_updated_at = get_transient('eael_editor_updated_at');
+        $post_updated_at = get_transient($this->uid . '_updated_at');
 
-        if (!Plugin::$instance->db->is_built_with_elementor($post_id)) {
-            return;
+        if ($elements === false) {
+            return true;
+        }
+        if ($editor_updated_at === false) {
+            return true;
+        }
+        if ($post_updated_at === false) {
+            return true;
+        }
+        if ($editor_updated_at != $post_updated_at) {
+            return true;
         }
 
-        $replace = [
-            'eicon-woocommerce' => 'eael-product-grid',
-            'eael-countdown' => 'eael-count-down',
-            'eael-creative-button' => 'eael-creative-btn',
-            'eael-team-member' => 'eael-team-members',
-            'eael-testimonial' => 'eael-testimonials',
-            'eael-weform' => 'eael-weforms',
-            'eael-cta-box' => 'eael-call-to-action',
-            'eael-dual-color-header' => 'eael-dual-header',
-            'eael-pricing-table' => 'eael-price-table',
-            'eael-filterable-gallery' => 'eael-filter-gallery',
-            'eael-one-page-nav' => 'eael-one-page-navigation',
-            'eael-interactive-card' => 'eael-interactive-cards',
-            'eael-image-comparison' => 'eael-img-comparison',
-            'eael-dynamic-filterable-gallery' => 'eael-dynamic-filter-gallery',
-            'eael-google-map' => 'eael-adv-google-map',
-            'eael-instafeed' => 'eael-instagram-gallery',
-        ];
-        $global_settings = get_option('eael_global_settings');
-        $document = Plugin::$instance->documents->get($post_id);
-        $widgets = $this->collect_recursive_elements($document->get_elements_data());
-        $widgets = array_map(function ($val) use ($replace) {
-            if (array_key_exists($val, $replace)) {
-                $val = $replace[$val];
-            }
-            return (strpos($val, 'eael-') !== false ? preg_replace('/^eael-/', '', $val) : null);
-        }, $widgets);
-
-        // collect page extensions
-        if (!Shared::is_prevent_load_extension($post_id)) {
-            if ($document->get_settings('eael_custom_js')) {
-                $widgets[] = 'eael-custom-js';
-            }
-
-            if ($document->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {
-                $widgets[] = 'eael-reading-progress';
-            }
-
-            if ($document->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['eael_ext_table_of_content']['enabled'])) {
-                $widgets[] = 'eael-table-of-content';
-            }
-        }
-
-        return array_filter(array_unique($widgets));
+        return false;
     }
 
-    /**
-     * Traverse in element data recursively
-     *
-     * @since 3.0.0
-     */
-    public function collect_recursive_elements($elements)
+    public function collect_loaded_templates($content, $post_id)
+    {
+        if ($this->is_running_background()) {
+            return $content;
+        }
+
+        if ($this->request_requires_update && $this->is_preview_mode()) {
+            // loaded template stack
+            $this->loaded_templates[] = $post_id;
+
+            // loaded elements stack
+            $this->loaded_elements = array_merge($this->loaded_elements, $this->collect_elements_in_content($content));
+
+            // loaded custom js string
+            $this->collect_elements_in_document($post_id);
+        }
+
+        return $content;
+    }
+
+    public function collect_elements_in_content($elements)
     {
         $collections = [];
 
@@ -135,17 +134,17 @@ trait Generator
             if (isset($element['elType']) && $element['elType'] == 'widget') {
                 // collect extensions for widget
                 if (isset($element['settings']['eael_tooltip_section_enable']) && $element['settings']['eael_tooltip_section_enable'] == 'yes') {
-                    $collections[] = 'eael-eael-tooltip-section';
+                    $collections[] = 'eael-tooltip-section';
                 }
                 if (isset($element['settings']['eael_ext_content_protection']) && $element['settings']['eael_ext_content_protection'] == 'yes') {
-                    $collections[] = 'eael-eael-content-protection';
+                    $collections[] = 'eael-content-protection';
                 }
 
                 if ($element['widgetType'] === 'global') {
                     $document = Plugin::$instance->documents->get($element['templateID']);
 
                     if (is_object($document)) {
-                        $collections = array_merge($collections, $this->collect_recursive_elements($document->get_elements_data()));
+                        $collections = array_merge($collections, $this->collect_elements_in_content($document->get_elements_data()));
                     }
                 } else {
                     $collections[] = $element['widgetType'];
@@ -153,11 +152,110 @@ trait Generator
             }
 
             if (!empty($element['elements'])) {
-                $collections = array_merge($collections, $this->collect_recursive_elements($element['elements']));
+                $collections = array_merge($collections, $this->collect_elements_in_content($element['elements']));
             }
         }
 
         return $collections;
+    }
+
+    public function collect_elements_in_document($post_id)
+    {
+        if (!Plugin::$instance->db->is_built_with_elementor($post_id)) {
+            return;
+        }
+
+        $global_settings = get_option('eael_global_settings');
+        $document = Plugin::$instance->documents->get($post_id);
+
+        if ($document->get_settings('eael_custom_js')) {
+            $this->custom_js_strings .= $document->get_settings('eael_custom_js');
+        }
+
+        // if (!Helper::prevent_extension_loading($post_id)) {
+        //     if ($document->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {
+        //         $this->loaded_elements[] = 'eael-eael-reading-progress';
+        //     }
+
+        //     if ($document->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['eael_ext_table_of_content']['enabled'])) {
+        //         $this->loaded_elements[] = 'eael-eael-table-of-content';
+        //     }
+        // }
+    }
+
+    public function update_request_data()
+    {
+        if (!apply_filters('eael/active_plugins', 'elementor/elementor.php')) {
+            return;
+        }
+
+        if ($this->is_running_background()) {
+            return;
+        }
+
+        if ($this->uid === null) {
+            return;
+        }
+
+        if (!$this->is_preview_mode()) {
+            return;
+        }
+
+        if (!$this->request_requires_update) {
+            return;
+        }
+
+        // parse loaded elements
+        $this->loaded_elements = $this->parse_elements($this->loaded_elements);
+
+        // update page data
+        set_transient($this->uid . '_elements', $this->loaded_elements);
+        set_transient($this->uid . '_custom_js', $this->custom_js_strings);
+        set_transient($this->uid . '_updated_at', get_transient('eael_editor_updated_at'));
+
+        // remove old cache files
+        $this->remove_files($this->uid);
+
+        // output custom js as fallback
+        if ($this->custom_js_strings) {
+            echo '<script>' . $this->custom_js_strings . '</script>';
+        }
+    }
+
+    /**
+     * Parse widgets from page data
+     *
+     * @since 3.0.0
+     */
+    public function parse_elements($widgets)
+    {
+        $replace = [
+            'eicon-woocommerce' => 'eael-product-grid',
+            'eael-countdown' => 'eael-count-down',
+            'eael-creative-button' => 'eael-creative-btn',
+            'eael-team-member' => 'eael-team-members',
+            'eael-testimonial' => 'eael-testimonials',
+            'eael-weform' => 'eael-weforms',
+            'eael-cta-box' => 'eael-call-to-action',
+            'eael-dual-color-header' => 'eael-dual-header',
+            'eael-pricing-table' => 'eael-price-table',
+            'eael-filterable-gallery' => 'eael-filter-gallery',
+            'eael-one-page-nav' => 'eael-one-page-navigation',
+            'eael-interactive-card' => 'eael-interactive-cards',
+            'eael-image-comparison' => 'eael-img-comparison',
+            'eael-dynamic-filterable-gallery' => 'eael-dynamic-filter-gallery',
+            'eael-google-map' => 'eael-adv-google-map',
+            'eael-instafeed' => 'eael-instagram-gallery',
+        ];
+
+        $widgets = array_map(function ($val) use ($replace) {
+            if (array_key_exists($val, $replace)) {
+                $val = $replace[$val];
+            }
+            return (strpos($val, 'eael-') !== false ? preg_replace('/^eael-/', '', $val) : null);
+        }, $widgets);
+
+        return array_filter(array_unique($widgets));
     }
 
     /**
@@ -165,18 +263,21 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_script($widgets, $context, $ext)
+    public function generate_script($elements, $context, $ext)
     {
         // if folder not exists, create new folder
         if (!file_exists(EAEL_ASSET_PATH)) {
             wp_mkdir_p(EAEL_ASSET_PATH);
         }
 
-        // collect library scripts & styles
-        $paths = $this->generate_dependency($widgets, $context, $ext);
+        // naming asset file
+        $file_name = ($context == 'view' ? $this->uid : $this->uid) . '.min.' . $ext;
 
-        // combine files
-        $this->combine_files($paths, $context, $ext);
+        // output asset string
+        $output = $this->generate_strings($elements, $context, $ext);
+
+        // write to file
+        file_put_contents($this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file_name), $output);
     }
 
     /**
@@ -184,10 +285,10 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_strings($widgets, $context, $ext)
+    public function generate_strings($elements, $context, $ext)
     {
         $output = '';
-        $paths = $this->generate_dependency($widgets, $context, $ext);
+        $paths = $this->generate_dependency($elements, $context, $ext);
 
         if (!empty($paths)) {
             foreach ($paths as $path) {
@@ -195,18 +296,8 @@ trait Generator
             }
         }
 
-        if ($this->loaded_templates && $context == 'view' && $ext == 'js') {
-            foreach ($this->loaded_templates as $post_id) {
-                if (get_post_status($post_id) === false) {
-                    continue;
-                }
-                
-                $document = Plugin::$instance->documents->get($post_id);
-
-                if ($custom_js = $document->get_settings('eael_custom_js')) {
-                    $output .= $custom_js;
-                }
-            }
+        if ($this->request_requires_update == false && $context == 'view' && $ext == 'js') {
+            $output .= get_transient($this->uid . '_custom_js');
         }
 
         return $output;
@@ -250,38 +341,5 @@ trait Generator
         }
 
         return array_unique(array_merge($lib['view'], $lib['edit'], $self['general'], $self['edit'], $self['view']));
-    }
-
-    /**
-     * Combine files into one
-     *
-     * @since 3.0.1
-     */
-    public function combine_files($paths = [], $context, $ext)
-    {
-        $output = '';
-        $file_name = ($context == 'view' ? $this->uid() : $this->uid('eael')) . '.min.' . $ext;
-
-        if (!empty($paths)) {
-            foreach ($paths as $path) {
-                $output .= file_get_contents($this->safe_path($path));
-            }
-        }
-
-        if ($this->loaded_templates && $context == 'view' && $ext == 'js') {
-            foreach ($this->loaded_templates as $post_id) {
-                if (get_post_status($post_id) === false) {
-                    continue;
-                }
-
-                $document = Plugin::$instance->documents->get($post_id);
-
-                if ($custom_js = $document->get_settings('eael_custom_js')) {
-                    $output .= $custom_js;
-                }
-            }
-        }
-
-        file_put_contents($this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file_name), $output);
     }
 }

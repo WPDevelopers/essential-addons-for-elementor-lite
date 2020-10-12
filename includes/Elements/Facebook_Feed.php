@@ -7,6 +7,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
+use \Essential_Addons_Elementor\Classes\Controls;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -14,7 +15,7 @@ if (!defined('ABSPATH')) {
 
 class Facebook_Feed extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
+    use \Essential_Addons_Elementor\Traits\Facebook_Feed;
 
     public function get_name()
     {
@@ -1142,7 +1143,7 @@ class Facebook_Feed extends Widget_Base
 
         $this->end_controls_section();
 
-        $this->eael_load_more_button_style();
+        do_action('eael/controls/load_more_button_style', $this);
     }
 
     protected function render()
