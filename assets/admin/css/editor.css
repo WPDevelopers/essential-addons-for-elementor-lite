@@ -144,3 +144,22 @@
 .elementor-control-gen_reg_content_po_toggle .elementor-control-popover-toggle-toggle:checked + .elementor-control-popover-toggle-toggle-label {
     color: inherit !important;
 }
+/* post block */
+.elementor-control-eael_post_block_tiled_preset_1_note .elementor-control-title,
+.elementor-control-eael_post_block_tiled_preset_5_note .elementor-control-title,
+.elementor-control-eael_post_block_tiled_preset_2_note .elementor-control-title,
+.elementor-control-eael_post_block_tiled_preset_4_note .elementor-control-title {
+	background-color: #f3fcff;
+	padding: 15px;
+	border-left: 3px solid #71d7f7;
+	position: relative;
+	font-size: 12px !important;
+	font-weight: 300 !important;
+	font-style: italic;
+	line-height: 1.5 !important;
+	text-align: left;
+	-webkit-border-radius: 0 3px 3px 0;
+	border-radius: 0 3px 3px 0;
+	-webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.07);
+	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.07);
+}
