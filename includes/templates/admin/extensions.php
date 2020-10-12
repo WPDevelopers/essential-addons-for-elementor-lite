@@ -19,39 +19,39 @@ $extensions = [
                 'is_pro' => true
             ],
             [
-                'key'    => 'eael-tooltip-section',
+                'key'    => 'tooltip-section',
                 'title'  => __( 'Advanced Tooltip', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/advanced-tooltip/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/ea-advanced-tooltip/',
                 'is_pro' => true
             ],
             [
-                'key'    => 'eael-content-protection',
+                'key'    => 'content-protection',
                 'title'  => __( 'Content Protection', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/content-protection/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/ea-content-protection/',
                 'is_pro' => true
             ],
             [
-                'key'    => 'eael-reading-progress',
+                'key'    => 'reading-progress',
                 'title'  => __( 'Reading Progress Bar', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/reading-progress/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/ea-reading-progress-bar/',
             ],
             [
-                'key'    => 'eael-table-of-content',
+                'key'    => 'table-of-content',
                 'title'  => __( 'Table of Contents', 'essential-addons-for-elementor-lite' ),
                 'demo_link' => 'https://essential-addons.com/elementor/table-of-content/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/table-of-content',
             ],
             [
-                'key'    => 'eael-post-duplicator',
+                'key'    => 'post-duplicator',
                 'title'  => __( 'Duplicator', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/duplicator/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/duplicator/',
             ],
             [
-                'key'    => 'eael-custom-js',
+                'key'    => 'custom-js',
                 'title'  => __( 'Custom JS', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/custom-js/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/custom-js/',
@@ -81,7 +81,7 @@ $extensions = [
                             <p class="eael-el-title">
                                 <?php _e( $item['title'], 'essential-addons-for-elementor-lite') ?>
                                 <?php echo isset( $item['is_pro'] ) && !$this->pro_enabled ? '<sup class="pro-label">'.__('Pro', 'essential-addons-for-elementor-lite').'</sup>' : ''; ?>
-                                <?php if ($item['key'] === 'eael-post-duplicator') {
+                                <?php if ($item['key'] === 'post-duplicator') {
                                     echo '<span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-title="Select Post Types" data-option="select" data-options=' . json_encode(get_post_types(['public' => true, 'show_in_nav_menus' => true])) . ' data-target="#post-duplicator-post-type">'.__('Settings', 'essential-addons-for-elementor-lite').'</a></span>
                                     <input type="hidden" name="post-duplicator-post-type" id="post-duplicator-post-type" class="post-duplicator-post-type" value="'.get_option('eael_save_post_duplicator_post_type').'">';
                                 } ?>

@@ -6,18 +6,20 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Scheme_Typography as Scheme_Typography;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Scheme_Typography;
+use \Elementor\Widget_Base;
+
+use \Essential_Addons_Elementor\Classes\Helper;
+
 
 /**
  * Gravity Forms Widget
  */
 class GravityForms extends Widget_Base {
-    use \Essential_Addons_Elementor\Traits\Helper;
     
     /**
 	 * Retrieve gravity forms widget name.
@@ -134,7 +136,7 @@ class GravityForms extends Widget_Base {
                     'label'                 => esc_html__( 'Select Form', 'essential-addons-for-elementor-lite'),
                     'type'                  => Controls_Manager::SELECT,
                     'label_block'           => true,
-                    'options'               => $this->eael_select_gravity_form(),
+                    'options'               => Helper::get_gravity_form_list(),
                     'default'               => '0',
                 ]
             );

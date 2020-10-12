@@ -7,15 +7,17 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Widget_Base;
 
-class Product_Grid extends Widget_Base
-{
-    use \Essential_Addons_Elementor\Traits\Helper;
-    use \Essential_Addons_Elementor\Template\Content\Product_Grid;
+use \Essential_Addons_Elementor\Classes\Helper;
+use \Essential_Addons_Elementor\Classes\Controls;
+
+class Product_Grid extends Widget_Base {
+    
+    use \Essential_Addons_Elementor\Traits\Template_Query;
 
     private $is_show_custom_add_to_cart = false;
     private $simple_add_to_cart_button_text;
@@ -27,6 +29,7 @@ class Product_Grid extends Widget_Base
     public function __construct($data = [], $args = null)
     {
         parent::__construct($data, $args);
+
         add_filter('woocommerce_product_add_to_cart_text', [$this, 'add_to_cart_button_custom_text']);
     }
 
@@ -156,7 +159,17 @@ class Product_Grid extends Widget_Base
             [
                 'label' => __('Order By', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'options' => $this->eael_get_product_orderby_options(),
+                'options' => [
+                    'ID' => __('Product ID', 'essential-addons-for-elementor-lite'),
+                    'title' => __('Product Title', 'essential-addons-for-elementor-lite'),
+                    '_price' => __('Price', 'essential-addons-for-elementor-lite'),
+                    '_sku' => __('SKU', 'essential-addons-for-elementor-lite'),
+                    'date' => __('Date', 'essential-addons-for-elementor-lite'),
+                    'modified' => __('Last Modified Date', 'essential-addons-for-elementor-lite'),
+                    'parent' => __('Parent Id', 'essential-addons-for-elementor-lite'),
+                    'rand' => __('Random', 'essential-addons-for-elementor-lite'),
+                    'menu_order' => __('Menu Order', 'essential-addons-for-elementor-lite'),
+                ],
                 'default' => 'date',
 
             ]
@@ -224,7 +237,7 @@ class Product_Grid extends Widget_Base
                 'type'        => Controls_Manager::SELECT2,
                 'label_block' => true,
                 'multiple'    => true,
-                'options'     => $this->eael_woocommerce_product_categories(),
+                'options'     => Helper::get_terms_list('product_cat', 'slug'),
             ]
         );
 
@@ -716,15 +729,14 @@ class Product_Grid extends Widget_Base
             ]
         );
 
-
-        $this->start_controls_tabs('eael_product_grid_add_to_cart_style_tabs');
+        $this->start_controls_tabs( 'eael_product_grid_add_to_cart_style_tabs' );
 
         $this->start_controls_tab('normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
 
         $this->add_control(
             'eael_product_grid_add_to_cart_color',
             [
-                'label'     => esc_html__('Button Color', 'essential-addons-for-elementor-lite'),
+                'label'     => esc_html__( 'Font Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
@@ -793,7 +805,7 @@ class Product_Grid extends Widget_Base
         $this->add_control(
             'eael_product_grid_add_to_cart_hover_color',
             [
-                'label'     => esc_html__('Button Color', 'essential-addons-for-elementor-lite'),
+                'label'     => esc_html__( 'Font Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
@@ -854,7 +866,8 @@ class Product_Grid extends Widget_Base
         /**
          * Load More Button Style Controls!
          */
-        $this->eael_load_more_button_style();
+        do_action('eael/controls/load_more_button_style', $this);
+
     }
 
     protected function render()
@@ -943,7 +956,6 @@ class Product_Grid extends Widget_Base
             'show_load_more_text'            => $settings['show_load_more_text'],
         ];
 
-        // add to custom button text
         $this->is_show_custom_add_to_cart = boolval($settings['show_add_to_cart_custom_text']);
         $this->simple_add_to_cart_button_text = $settings['add_to_cart_simple_product_button_text'];
         $this->variable_add_to_cart_button_text = $settings['add_to_cart_variable_product_button_text'];
@@ -951,28 +963,38 @@ class Product_Grid extends Widget_Base
         $this->external_add_to_cart_button_text = $settings['add_to_cart_external_product_button_text'];
         $this->default_add_to_cart_button_text = $settings['add_to_cart_default_product_button_text'];
 
-        // render dom
-        $html = '<div class="eael-product-grid ' . $settings['eael_product_grid_style_preset'] . '">';
-        $html .= '<div class="woocommerce">';
+        echo '<div class="eael-product-grid ' . $settings['eael_product_grid_style_preset'] . '">';
+        echo '<div class="woocommerce">';
 
-        $html .= '<ul class="products">
-                    ' . self::render_template_($args, $render_settings) . '
-                </ul>';
+        echo '<ul class="products">';
+        
+            $query = new \WP_Query($args);
 
-        if ('true' == $settings['show_load_more']) {
-            if ($args['posts_per_page'] != '-1') {
-                $html .= '<div class="eael-load-more-button-wrap">
-                            <button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings) . '" data-layout="masonry" data-page="1">
-                                <div class="eael-btn-loader button__loader"></div>
-                                <span>' . esc_html__($settings['show_load_more_text'], 'essential-addons-for-elementor-lite') . '</span>
-                            </button>
-                        </div>';
+            if ($query->have_posts()) {
+                while ($query->have_posts()) {
+                    $query->the_post();
+
+                    include($this->get_template('default'));
+                }
+            } else {
+                _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+            }
+            wp_reset_postdata();
+
+        echo '</ul>';
+
+        if ( 'true' == $settings['show_load_more'] ) {
+            if ( $args['posts_per_page'] != '-1' ) {
+                echo '<div class="eael-load-more-button-wrap">
+                    <button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-template='.json_encode([ 'dir'   => 'free', 'file_name' => 'default', 'name' => $this->process_directory_name() ], 1).' data-widget="' . $this->get_id() . '" data-class="' . get_class( $this ) . '" data-args="' . http_build_query( $args ) . '" data-settings="' . http_build_query( $settings ) . '" data-layout="masonry" data-page="1">
+                        <div class="eael-btn-loader button__loader"></div>
+                        <span>' . esc_html__($settings['show_load_more_text'], 'essential-addons-for-elementor-lite') . '</span>
+                    </button>
+                </div>';
             }
         }
 
-        $html .= '</div>
+        echo '</div>
         </div>';
-
-        echo $html;
     }
 }

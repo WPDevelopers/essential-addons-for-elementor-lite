@@ -33,6 +33,79 @@ trait Library
     }
 
     /**
+     * @param $page_obj
+     * @param $key
+     * @return string
+     */
+    public function get_extension_settings($page_settings = [], $global_settings = [], $extension, $key)
+    {
+        if (isset($page_settings) && $page_settings->get_settings($extension) == 'yes') {
+            return $page_settings->get_settings($key);
+        } else if (isset($global_settings[$extension]['enabled'])) {
+            return isset($global_settings[$extension][$key]) ? $global_settings[$extension][$key] : '';
+        }
+
+        return '';
+    }
+
+    /**
+     * @param $id
+     * @param $global_data
+     * @return string
+     */
+    public function get_typography_data($id, $global_data)
+    {
+        $typo_data = '';
+        $fields_keys = [
+            'font_family',
+            'font_weight',
+            'text_transform',
+            'font_style',
+            'text_decoration',
+            'font_size',
+            'letter_spacing',
+            'line_height',
+        ];
+
+        foreach ($fields_keys as $key => $field) {
+            $typo_attr = $global_data[$id . '_' . $field];
+            $attr = str_replace('_', '-', $field);
+
+            if (in_array($field, ['font_size', 'letter_spacing', 'line_height'])) {
+                if (!empty($typo_attr['size'])) {
+                    $typo_data .= "{$attr}:{$typo_attr['size']}{$typo_attr['unit']} !important;";
+                }
+            } elseif (!empty($typo_attr)) {
+                $typo_data .= ($attr == 'font-family') ? "{$attr}:{$typo_attr}, sans-serif;" : "{$attr}:{$typo_attr};";
+            }
+        }
+
+        return $typo_data;
+    }
+
+    /**
+     * Check if assets files exists
+     *
+     * @since 3.0.0
+     */
+    public function has_assets_files($uid = null, $ext = ['css', 'js'])
+    {
+        if (!is_array($ext)) {
+            $ext = (array) $ext;
+        }
+
+        foreach ($ext as $e) {
+            $path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.' . $e;
+
+            if (!is_readable($this->safe_path($path))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Remove files
      *
      * @since 3.0.0
@@ -171,5 +244,40 @@ trait Library
         $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
 
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
+    }
+
+    /**
+     * Generate safe url
+     *
+     * @since v3.0.0
+     */
+    public function safe_url($url)
+    {
+        if (is_ssl()) {
+            $url = wp_parse_url($url);
+
+            if (!empty($url['host'])) {
+                $url['scheme'] = 'https';
+            }
+
+            return $this->unparse_url($url);
+        }
+
+        return $url;
+    }
+
+    public function unparse_url($parsed_url)
+    {
+        $scheme = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : '';
+        $host = isset($parsed_url['host']) ? $parsed_url['host'] : '';
+        $port = isset($parsed_url['port']) ? ':' . $parsed_url['port'] : '';
+        $user = isset($parsed_url['user']) ? $parsed_url['user'] : '';
+        $pass = isset($parsed_url['pass']) ? ':' . $parsed_url['pass'] : '';
+        $pass = ($user || $pass) ? "$pass@" : '';
+        $path = isset($parsed_url['path']) ? $parsed_url['path'] : '';
+        $query = isset($parsed_url['query']) ? '?' . $parsed_url['query'] : '';
+        $fragment = isset($parsed_url['fragment']) ? '#' . $parsed_url['fragment'] : '';
+
+        return "$scheme$user$pass$host$port$path$query$fragment";
     }
 }

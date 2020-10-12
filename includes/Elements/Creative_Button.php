@@ -62,8 +62,7 @@ class Creative_Button extends Widget_Base
     protected function _register_controls()
     {
 
-        if (!apply_filters('eael/pro_enabled', false)) {
-
+        if ( !apply_filters( 'eael/pro_enabled', false ) ) {
             // Content Controls
             $this->start_controls_section(
                 'eael_section_creative_button_content',
@@ -179,9 +178,7 @@ class Creative_Button extends Widget_Base
             do_action('eael_creative_button_pro_controls', $this);
         }
 
-
-
-        if (!apply_filters('eael/pro_enabled', false)) {
+        if ( !apply_filters( 'eael/pro_enabled', false ) ) {
             $this->start_controls_section(
                 'eael_section_pro',
                 [

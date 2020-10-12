@@ -16,10 +16,10 @@ use Elementor\Repeater;
 use \Elementor\Plugin;
 use \Elementor\Widget_Base;
 
+use \Essential_Addons_Elementor\Classes\Helper;
+
 class Adv_Accordion extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
-
     public function get_name()
     {
         return 'eael-adv-accordion';
