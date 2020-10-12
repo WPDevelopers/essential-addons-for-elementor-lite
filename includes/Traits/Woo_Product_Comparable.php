@@ -531,11 +531,12 @@ trait Woo_Product_Comparable {
 		] );
 		// common columns
 		$this->add_control( 'common_th_style_pot', [
-			'label'     => __( 'Header Column Style', 'essential-addons-for-elementor-lite' ),
+			'label'        => __( 'Header Column Style', 'essential-addons-for-elementor-lite' ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
 			'label_off'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
 			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
 			'return_value' => 'yes',
+			'separator' => 'before',
 			'condition'    => [ 'separate_col_style!' => 'yes' ],
 		] );
 		$this->start_popover();
@@ -566,7 +567,7 @@ trait Woo_Product_Comparable {
 			'selectors'  => [
 				$th => 'width: {{SIZE}}{{UNIT}};',
 			],
-			'condition' => ['common_th_style_pot' => 'yes'],
+			'condition'  => [ 'common_th_style_pot' => 'yes' ],
 		] );
 		$this->add_responsive_control( "table_gen_th_padding", [
 			'label'      => __( 'Header Column Padding', 'essential-addons-for-elementor-lite' ),
@@ -579,13 +580,13 @@ trait Woo_Product_Comparable {
 			'selectors'  => [
 				$th => $this->apply_dim( 'padding' ),
 			],
-			'condition' => ['common_th_style_pot' => 'yes'],
+			'condition'  => [ 'common_th_style_pot' => 'yes' ],
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'      => "common_h_col_border",
 			'label'     => __( 'Header border', 'essential-addons-for-elementor-lite' ),
 			'selector'  => $th,
-			'condition' => ['common_th_style_pot' => 'yes'],
+			'condition' => [ 'common_th_style_pot' => 'yes' ],
 		] );
 		$this->add_control( "common_h_col_border_radius", [
 			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
@@ -612,22 +613,16 @@ trait Woo_Product_Comparable {
 			],
 		] );
 		// Product column
-		$this->add_control( 'common_product_col_heading', [
-			'label'     => __( 'Product Column Style', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::HEADING,
+		$this->add_control( 'common_td_style_pot', [
+			'label'        => __( 'Product Column Style', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
+			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
 			'separator' => 'before',
-			'condition' => [
-				'separate_col_style!' => 'yes',
-			],
+			'condition'    => [ 'separate_col_style!' => 'yes' ],
 		] );
-		$this->add_group_control( Group_Control_Typography::get_type(), [
-			'name'      => "tbl_gen_td_typo",
-			'label'     => __( 'Product Column Typography', 'essential-addons-for-elementor-lite' ),
-			'selector'  => $td,
-			'condition' => [
-				'separate_col_style!' => 'yes',
-			],
-		] );
+		$this->start_popover();
 		$this->add_responsive_control( "table_gen_td_width", [
 			'label'      => esc_html__( 'Product Column Width', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::SLIDER,
@@ -655,9 +650,7 @@ trait Woo_Product_Comparable {
 			'selectors'  => [
 				$td => 'width: {{SIZE}}{{UNIT}};',
 			],
-			'condition'  => [
-				'separate_col_style!' => 'yes',
-			],
+			'condition'  => [ 'common_td_style_pot' => 'yes' ],
 		] );
 		$this->add_responsive_control( "table_gen_td_padding", [
 			'label'      => __( 'Product Column Padding', 'essential-addons-for-elementor-lite' ),
@@ -670,9 +663,7 @@ trait Woo_Product_Comparable {
 			'selectors'  => [
 				$td => $this->apply_dim( 'padding' ),
 			],
-			'condition'  => [
-				'separate_col_style!' => 'yes',
-			],
+			'condition'  => [ 'common_td_style_pot' => 'yes' ],
 		] );
 		$this->add_responsive_control( "table_gen_img_padding", [
 			'label'      => __( 'Product Image Padding', 'essential-addons-for-elementor-lite' ),
@@ -685,17 +676,13 @@ trait Woo_Product_Comparable {
 			'selectors'  => [
 				$img_class => $this->apply_dim( 'padding' ),
 			],
-			'condition'  => [
-				'separate_col_style!' => 'yes',
-			],
+			'condition'  => [ 'common_td_style_pot' => 'yes' ],
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'      => "common_td_col_border",
 			'label'     => __( 'Product column border', 'essential-addons-for-elementor-lite' ),
 			'selector'  => $td,
-			'condition' => [
-				'separate_col_style!' => 'yes',
-			],
+			'condition' => [ 'common_td_style_pot' => 'yes' ],
 		] );
 		$this->add_control( "common_td_col_border_radius", [
 			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
@@ -716,33 +703,25 @@ trait Woo_Product_Comparable {
 			'label'     => __( 'Product Image Box Border', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
-			'condition' => [
-				'separate_col_style!' => 'yes',
-			],
+			'condition' => [ 'common_td_style_pot' => 'yes' ],
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'      => "common_img_col_border",
 			'label'     => __( 'Image Box border', 'essential-addons-for-elementor-lite' ),
 			'selector'  => $img_class,
-			'condition' => [
-				'separate_col_style!' => 'yes',
-			],
+			'condition' => [ 'common_td_style_pot' => 'yes' ],
 		] );
 		$this->add_control( 'common_img_brd_heading', [
 			'label'     => __( 'Product Image Border', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
-			'condition' => [
-				'separate_col_style!' => 'yes',
-			],
+			'condition' => [ 'common_td_style_pot' => 'yes' ],
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'      => "common_img_border",
 			'label'     => __( 'Product Image border', 'essential-addons-for-elementor-lite' ),
 			'selector'  => $img_class . ' img',
-			'condition' => [
-				'separate_col_style!' => 'yes',
-			],
+			'condition' => [ 'common_td_style_pot' => 'yes' ],
 		] );
 		$this->add_control( "common_img_border_radius", [
 			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
@@ -755,9 +734,17 @@ trait Woo_Product_Comparable {
 				$img_class . ' img' => $this->apply_dim( 'border-radius' ),
 			],
 			'condition'  => [
-				'separate_col_style!'       => 'yes',
+				'common_td_style_pot'       => 'yes',
 				'common_img_border_border!' => '',
 			],
+
+		] );
+		$this->end_popover();
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'      => "tbl_gen_td_typo",
+			'label'     => __( 'Product Column Typography', 'essential-addons-for-elementor-lite' ),
+			'selector'  => $td,
+			'condition' => [ 'separate_col_style!' => 'yes'],
 		] );
 
 		// Colors
