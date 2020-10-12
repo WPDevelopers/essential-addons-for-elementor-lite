@@ -315,6 +315,14 @@ trait Woo_Product_Comparable {
 			'label' => __( 'Style Content Column Separately', 'essential-addons-for-elementor-lite' ),
 			'type'  => Controls_Manager::SWITCHER,
 		] );
+		$this->add_control( 'table_style_pot', [
+			'label'        => __( 'Table Style', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
+			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+		] );
+		$this->start_popover();
 		$this->add_responsive_control( "table_width", [
 			'label'      => esc_html__( 'Table Width', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::SLIDER,
@@ -328,6 +336,10 @@ trait Woo_Product_Comparable {
 					'min' => 0,
 					'max' => 100,
 				],
+				'px' => [
+					'min' => 0,
+					'max' => 2000,
+				],
 			],
 			'desktop'    => [
 				'unit' => '%',
@@ -335,6 +347,9 @@ trait Woo_Product_Comparable {
 			],
 			'selectors'  => [
 				$table => 'width: {{SIZE}}{{UNIT}};',
+			],
+			'condition'  => [
+				'table_style_pot' => 'yes',
 			],
 
 		] );
@@ -349,6 +364,9 @@ trait Woo_Product_Comparable {
 			'selectors'  => [
 				$table => $this->apply_dim( 'margin' ),
 			],
+			'condition'  => [
+				'table_style_pot' => 'yes',
+			],
 		] );
 		$this->add_responsive_control( "table_padding", [
 			'label'      => __( 'Table Padding', 'essential-addons-for-elementor-lite' ),
@@ -361,6 +379,9 @@ trait Woo_Product_Comparable {
 			'selectors'  => [
 				$table => $this->apply_dim( 'padding' ),
 			],
+			'condition'  => [
+				'table_style_pot' => 'yes',
+			],
 		] );
 		$this->add_group_control( Group_Control_Background::get_type(), [
 			'name'     => "table_bg_color",
@@ -371,15 +392,24 @@ trait Woo_Product_Comparable {
 			],
 			'exclude'  => [ 'image' ],
 			'selector' => $table,
+			'condition'  => [
+				'table_style_pot' => 'yes',
+			],
 		] );
 		$this->add_control( 'tbl_brd_heading', [
 			'label'     => __( 'Table Border', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
+			'condition'  => [
+				'table_style_pot' => 'yes',
+			],
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "tbl_border",
 			'selector' => $table,
+			'condition'  => [
+				'table_style_pot' => 'yes',
+			],
 		] );
 		$this->add_control( "tbl_border_radius", [
 			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
@@ -391,7 +421,12 @@ trait Woo_Product_Comparable {
 			'selectors'  => [
 				$table => $this->apply_dim( 'border-radius' ),
 			],
+			'condition'  => [
+				'table_style_pot' => 'yes',
+			],
 		] );
+		$this->end_popover();
+
 		$this->add_control( 'tbl_title_style_heading', [
 			'label'     => __( 'Table Title Style', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
