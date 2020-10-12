@@ -674,7 +674,7 @@ class Helper
         return $args;
     }
 
-    public static function get_multiple_kb_terms(bool $prettify = false, bool $term_id = true)
+    public static function get_multiple_kb_terms($prettify = false, $term_id = true)
     {
         $args = [
             'taxonomy' => 'knowledge_base',
