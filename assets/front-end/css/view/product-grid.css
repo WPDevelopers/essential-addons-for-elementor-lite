@@ -446,8 +446,11 @@
 .eael-product-grid.eael-product-simple .woocommerce ul.products li.product img, .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product img,
 .eael-post-grid.eael-product-simple .woocommerce ul.products li.product img,
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product img {
-  width: 100%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   height: auto;
+  margin: auto;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
 }
@@ -644,7 +647,9 @@
 }
 .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product img,
 .eael-post-grid.eael-product-overlay .woocommerce ul.products li.product img {
-  width: 100%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   height: auto;
   margin: 0;
   -webkit-backface-visibility: hidden;
