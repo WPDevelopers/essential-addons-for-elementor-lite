@@ -166,13 +166,13 @@
   padding: 10px;
   background: #fff;
 }
-.eael-wcpc-wrapper.custom.theme-3 table tr.image td.title span.img-inner {
+.eael-wcpc-wrapper.custom.theme-3 table tr.image td:nth-child(3n+1) .img-inner {
   background: var(--first-img-bg);
 }
-.eael-wcpc-wrapper.custom.theme-3 table tr.image td:nth-child(3) span.img-inner {
+.eael-wcpc-wrapper.custom.theme-3 table tr.image td:nth-child(3n+2) .img-inner {
   background: var(--second-img-bg);
 }
-.eael-wcpc-wrapper.custom.theme-3 table tr.image td:nth-child(4) span.img-inner {
+.eael-wcpc-wrapper.custom.theme-3 table tr.image td:nth-child(3n+3) .img-inner {
   background: var(--third-img-bg);
 }
 .eael-wcpc-wrapper.custom.theme-4 {
