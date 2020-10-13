@@ -381,6 +381,11 @@
 .eael-wcpc-wrapper.custom.theme-6 table td:nth-child(3n+3) .button:hover {
   color: #179f51;
 }
+.eael-wcpc-wrapper.custom.theme-6 .img-inner {
+  display: block;
+  background: rgba(228, 228, 228, 0.45);
+  border-radius: 6px;
+}
 @media screen and (min-width: 769px) {
   .eael-wcpc-wrapper:not(.theme-4) tr.image td {
     padding: 10px;
