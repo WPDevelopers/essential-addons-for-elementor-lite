@@ -22,8 +22,8 @@ trait Admin
             __('Essential Addons', 'essential-addons-for-elementor-lite'),
             'manage_options',
             'eael-settings',
-            [$this, 'eael_admin_settings_page'],
-            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-white.svg'),
+            [$this, 'admin_settings_page'],
+            $this->safe_url(EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-white.svg'),
             '58.6'
         );
         $plugins = \get_option('active_plugins');
@@ -68,8 +68,8 @@ trait Admin
                         <div class="template-cloud-install">
                             <div class="templately-left">
                                 <div class="templately-cloud-title">
-                                    <h1><?php echo __( 'Explore 100+ Free Templates', 'essential-addons-for-elementor-lite' ); ?></h1>
-                                    <p><?php echo __( 'From multipurpose themes to niche templates, you’ll always find something that catches your eye.', 'essential-addons-for-elementor-lite' ); ?></p>
+                                    <h1><?php echo __('Explore 100+ Free Templates', 'essential-addons-for-elementor-lite'); ?></h1>
+                                    <p><?php echo __('From multipurpose themes to niche templates, you’ll always find something that catches your eye.', 'essential-addons-for-elementor-lite'); ?></p>
                                 </div>
                             </div>
                             <div class="templately-installer-wrapper">
@@ -80,7 +80,7 @@ trait Admin
                                 </div>
                                 <div class="templately-right">
                                     <div class="templately-admin-install">
-                                        <p><?php echo __( 'Install Templately by Essential Addons to get access to the templates library and cloud.', 'essential-addons-for-elementor-lite' ); ?></p>
+                                        <p><?php echo __('Install Templately by Essential Addons to get access to the templates library and cloud.', 'essential-addons-for-elementor-lite'); ?></p>
                                         <button class="eae-activate-templately"><?php echo $button_text; ?></button>
                                     </div>
                                 </div>
@@ -181,7 +181,7 @@ trait Admin
      *
      * @since 1.1.2
      */
-    public function eael_admin_settings_page()
+    public function admin_settings_page()
     {
         ?>
         <div class="eael-settings-wrap">
@@ -237,6 +237,7 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         }
 
         parse_str($_POST['fields'], $settings);
+
 	    if ( !empty( $_POST['is_login_register']) ) {
 		    // Saving Login | Register Related Data
 		    if ( isset( $settings['recaptchaSiteKey']) ) {
@@ -244,7 +245,8 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
 		    }
 		    if ( isset( $settings['recaptchaSiteSecret']) ) {
 			    update_option( 'eael_recaptcha_secret', sanitize_text_field( $settings['recaptchaSiteSecret']));
-		    }
+            }
+            
 		    //pro settings
 		    if ( isset( $settings['gClientId']) ) {
 			    update_option( 'eael_g_client_id', sanitize_text_field( $settings['gClientId']));
@@ -254,25 +256,36 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
 		    }
 		    if ( isset( $settings['fbAppSecret'] ) ) {
 			    update_option( 'eael_fb_app_secret', sanitize_text_field( $settings['fbAppSecret']));
-		    }
+            }
+            
 		    wp_send_json_success( ['message'=> __('Login | Register Settings updated', 'essential-addons-for-elementor-lite')]);
         }
 
 
         // Saving Google Map Api Key
-        update_option('eael_save_google_map_api', @$settings['google-map-api']);
+        if (isset($settings['google-map-api'])) {
+            update_option('eael_save_google_map_api', sanitize_text_field($settings['google-map-api']));
+        }
 
         // Saving Mailchimp Api Key
-        update_option('eael_save_mailchimp_api', @$settings['mailchimp-api']);
+        if (isset($settings['mailchimp-api'])) {
+            update_option('eael_save_mailchimp_api', sanitize_text_field($settings['mailchimp-api']));
+        }
 
         // Saving TYpeForm token
-        update_option('eael_save_typeform_personal_token', @$settings['typeform-personal-token']);
+        if (isset($settings['typeform-personal-token'])) {
+            update_option('eael_save_typeform_personal_token', sanitize_text_field($settings['typeform-personal-token']));
+        }
 
         // Saving Duplicator Settings
-        update_option('eael_save_post_duplicator_post_type', @$settings['post-duplicator-post-type']);
+        if (isset($settings['post-duplicator-post-type'])) {
+            update_option('eael_save_post_duplicator_post_type', sanitize_text_field($settings['post-duplicator-post-type']));
+        }
 
         // save js print method
-        update_option('eael_js_print_method', @$settings['eael-js-print-method']);
+        if (isset($settings['eael-js-print-method'])) {
+            update_option('eael_js_print_method', sanitize_text_field($settings['eael-js-print-method']));
+        }
 
         $defaults = array_fill_keys(array_keys(array_merge($this->registered_elements, $this->registered_extensions)), false);
         $elements = array_merge($defaults, array_fill_keys(array_keys(array_intersect_key($settings, $defaults)), true));

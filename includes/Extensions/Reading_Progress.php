@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
-use Essential_Addons_Elementor\Traits\Shared;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Reading_Progress
 {
@@ -18,9 +18,8 @@ class Reading_Progress
 
     public function register_controls($element)
     {
-
-        if(Shared::is_prevent_load_extension(get_the_ID())){
-            return false;
+        if (Helper::prevent_extension_loading(get_the_ID())) {
+            return;
         }
 
         $global_settings = get_option('eael_global_settings');
@@ -49,8 +48,8 @@ class Reading_Progress
             'eael_ext_reading_progress_has_global',
             [
                 'label' => __('Enabled Globally?', 'essential-addons-for-elementor-lite'),
-                'type' => \Elementor\Controls_Manager::HIDDEN,
-                'default' => isset($global_settings['reading_progress']['enabled']) ? true : false,
+                'type' => Controls_Manager::HIDDEN,
+                'default' => (isset($global_settings['reading_progress']['enabled']) ? $global_settings['reading_progress']['enabled'] : false),
             ]
         );
 
@@ -89,7 +88,7 @@ class Reading_Progress
                 'eael_ext_reading_progress_global_display_condition',
                 [
                     'label' => __('Display On', 'essential-addons-for-elementor-lite'),
-                    'type' => \Elementor\Controls_Manager::SELECT,
+                    'type' => Controls_Manager::SELECT,
                     'default' => 'all',
                     'options' => [
                         'posts' => __('All Posts', 'essential-addons-for-elementor-lite'),
@@ -141,8 +140,8 @@ class Reading_Progress
                     'size' => 5,
                 ],
                 'selectors' => [
-                    '.eael-reading-progress-wrap .eael-reading-progress' => 'height: {{SIZE}}{{UNIT}}',
-                    '.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill' => 'height: {{SIZE}}{{UNIT}}',
+                    '.eael-reading-progress-wrap .eael-reading-progress' => 'height: {{SIZE}}{{UNIT}} !important',
+                    '.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill' => 'height: {{SIZE}}{{UNIT}} !important',
                 ],
                 'separator' => 'before',
                 'condition' => [
@@ -174,7 +173,7 @@ class Reading_Progress
                 'type' => Controls_Manager::COLOR,
                 'default' => '#1fd18e',
                 'selectors' => [
-                    '.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill' => 'background-color: {{VALUE}}',
+                    '.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill' => 'background-color: {{VALUE}} !important',
                 ],
                 'separator' => 'before',
                 'condition' => [

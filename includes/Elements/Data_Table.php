@@ -15,9 +15,10 @@ use \Elementor\Utils;
 use \Elementor\Widget_Base;
 use \Elementor\Repeater;
 
-class Data_Table extends Widget_Base
-{
-    use \Essential_Addons_Elementor\Traits\Helper;
+use \Essential_Addons_Elementor\Classes\Helper;
+
+class Data_Table extends Widget_Base {
+	
 
     public $unique_id = null;
     public function get_name()
@@ -317,7 +318,7 @@ class Data_Table extends Widget_Base
 			[
 				'label'                 => __( 'Choose Template', 'essential-addons-for-elementor-lite'),
 				'type'                  => Controls_Manager::SELECT,
-				'options'               => $this->eael_get_page_templates(),
+				'options'               => Helper::get_elementor_templates(),
 				'condition'             => [
 					'eael_data_table_content_type'      => 'template',
 				],

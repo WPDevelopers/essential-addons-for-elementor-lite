@@ -15,10 +15,10 @@ use \Elementor\Group_Control_Typography;
 use \Elementor\Plugin;
 use \Elementor\Widget_Base;
 
+use \Essential_Addons_Elementor\Classes\Helper;
+
 class Adv_Accordion extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
-
     public function get_name()
     {
         return 'eael-adv-accordion';
@@ -234,10 +234,10 @@ class Adv_Accordion extends Widget_Base
                         'default' => 'content',
                     ],
                     [
-                        'name'      => 'eael_primary_templates',
-                        'label'     => __('Choose Template', 'essential-addons-for-elementor-lite'),
-                        'type'      => Controls_Manager::SELECT,
-                        'options'   => $this->eael_get_page_templates(),
+                        'name' => 'eael_primary_templates',
+                        'label' => __('Choose Template', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::SELECT,
+                        'options' => Helper::get_elementor_templates(),
                         'condition' => [
                             'eael_adv_accordion_text_type' => 'template',
                         ],

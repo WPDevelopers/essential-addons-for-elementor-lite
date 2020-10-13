@@ -7,15 +7,16 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Scheme_Typography as Scheme_Typography;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Scheme_Typography;
+use \Elementor\Widget_Base;
+use \Essential_Addons_Elementor\Classes\Helper;
+use \Essential_Addons_Elementor\Classes\Controls;
 
 class Post_Timeline extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
-    use \Essential_Addons_Elementor\Template\Content\Post_Timeline;
+    use \Essential_Addons_Elementor\Traits\Template_Query;
 
     public function get_name()
     {
@@ -65,11 +66,11 @@ class Post_Timeline extends Widget_Base
          * Query And Layout Controls!
          * @source includes/elementor-helper.php
          */
-        $this->eael_query_controls();
-        $this->eael_layout_controls();
+        do_action('eael/controls/query', $this);
+        do_action('eael/controls/layout', $this);
 
         if (!apply_filters('eael/pro_enabled', false)) {
-            $this->eael_go_premium();
+            Helper::go_premium($this);
         }
 
         $this->start_controls_section(
@@ -413,14 +414,17 @@ class Post_Timeline extends Widget_Base
 
         $this->end_controls_section();
 
-        $this->eael_load_more_button_style();
+        do_action('eael/controls/load_more_button_style', $this);
+
     }
 
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $settings = $this->fix_old_query($settings);
-        $args = $this->eael_get_query_args($settings);
+        $settings = Helper::fix_old_query($settings);
+        $args = Helper::get_query_args($settings);
+        $args = Helper::get_dynamic_args($settings, $args);
+
         $settings = [
             'eael_show_image'     => $settings['eael_show_image'],
             'image_size'          => $settings['image_size'],
@@ -448,15 +452,28 @@ class Post_Timeline extends Widget_Base
         );
 
         echo '<div ' . $this->get_render_attribute_string('eael_post_timeline_wrapper') . '>
-		    <div ' . $this->get_render_attribute_string('eael_post_timeline') . '>
-				' . self::render_template_($args, $settings) . '
-		    </div>
+            <div ' . $this->get_render_attribute_string('eael_post_timeline') . '>';
+                $query = new \WP_Query($args);
+
+                if ($query->have_posts()) {
+                    while ($query->have_posts()) {
+                        $query->the_post();
+
+                        include($this->get_template('default'));
+                    }
+                } else {
+                    _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                }
+
+                wp_reset_postdata();
+
+		    echo '</div>
 		</div>';
 
         if ('yes' == $settings['show_load_more']) {
             if ($args['posts_per_page'] != '-1') {
                 echo '<div class="eael-load-more-button-wrap">
-					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings) . '" data-page="1">
+					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-template='.json_encode([ 'dir'   => 'free', 'file_name' => 'default', 'name' => $this->process_directory_name() ], 1).' data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings) . '" data-page="1">
 						<div class="eael-btn-loader button__loader"></div>
 						<span>' . esc_html__($settings['show_load_more_text'], 'essential-addons-for-elementor-lite') . '</span>
 					</button>

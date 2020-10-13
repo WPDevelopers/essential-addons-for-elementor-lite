@@ -679,13 +679,6 @@ trait Login_Registration {
 		return false;
 	}
 
-	public function lr_enqueue_scripts() {
-		$version = defined( 'WP_DEBUG' ) ? time() : EAEL_PLUGIN_VERSION; // stop cache on debug mode
-		if ( $site_key = get_option( 'eael_recaptcha_sitekey' ) ) {
-			wp_register_script( 'eael-recaptcha', "https://www.google.com/recaptcha/api.js?render=explicit", false, $version, false );
-		}
-	}
-
 	public function lr_get_widget_settings( $page_id, $widget_id ) {
 		//@TODO; replace it with eael_get_widget_settings() from the helper in future release
 		$document = Plugin::$instance->documents->get( $page_id );
