@@ -58,8 +58,9 @@
                     }
 
                     img {
-                        width: 100%;
+                        width: fit-content;
                         height: auto;
+                        margin: auto;
                         backface-visibility: hidden;
                     }
 
@@ -252,7 +253,7 @@
                     }
 
                     img {
-                        width: 100%;
+                        width: fit-content;
                         height: auto;
                         margin: 0;
                         backface-visibility: hidden;
