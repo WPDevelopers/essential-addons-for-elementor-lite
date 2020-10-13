@@ -11,11 +11,13 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
+use \Essential_Addons_Elementor\Classes\Helper;
+use \Essential_Addons_Elementor\Classes\Controls;
 
 class Content_Ticker extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
-    use \Essential_Addons_Elementor\Template\Content\Content_Ticker;
+    
+    use \Essential_Addons_Elementor\Traits\Template_Query;
 
     public function get_name()
     {
@@ -122,7 +124,7 @@ class Content_Ticker extends Widget_Base
          * Query Controls
          * @source includes/helper.php
          */
-        $this->eael_query_controls();
+        do_action('eael/controls/query', $this);
 
         do_action('eael_ticker_custom_content_controls', $this);
 
@@ -457,9 +459,9 @@ class Content_Ticker extends Widget_Base
         $this->add_control(
             'eael_ticker_tag_color',
             [
-                'label'     => esc_html__('Color', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '#fff',
+                'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-ticker-wrap .ticker-badge span' => 'color: {{VALUE}};',
                 ],
@@ -733,8 +735,8 @@ class Content_Ticker extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $settings = $this->fix_old_query($settings);
-        $args = $this->eael_get_query_args($settings);
+        $settings = Helper::fix_old_query($settings);
+        $args = Helper::get_query_args($settings);
 
         $this->add_render_attribute('content-ticker-wrap', 'class', 'swiper-container-wrap eael-ticker');
 
@@ -789,7 +791,7 @@ class Content_Ticker extends Widget_Base
         if ($settings['arrows'] == 'yes') {
             $this->add_render_attribute('content-ticker', 'data-arrows', '1');
         }
-
+        
         echo '<div class="eael-ticker-wrap" id="eael-ticker-wrap-' . $this->get_id() . '">';
         if (!empty($settings['eael_ticker_tag_text'])) {
             echo '<div class="ticker-badge">
@@ -800,12 +802,33 @@ class Content_Ticker extends Widget_Base
         echo '<div ' . $this->get_render_attribute_string('content-ticker-wrap') . '>
                 <div ' . $this->get_render_attribute_string('content-ticker') . '>
                     <div class="swiper-wrapper">';
-        if ('dynamic' === $settings['eael_ticker_type']) {
-            echo self::render_template_($args, null);
-        }
 
-        do_action('render_content_ticker_custom_content', $settings);
-        echo '</div>
+                        if ('dynamic' === $settings['eael_ticker_type']) {
+                            if (\file_exists($this->get_template($settings['eael_ticker_type']))) {
+                                $query = new \WP_Query($args);
+                
+                                if ($query->have_posts()) {
+                                    while ($query->have_posts()) {
+                                        $query->the_post();
+                
+                                        include $this->get_template($settings['eael_ticker_type']);
+                                    }
+
+                                    wp_reset_postdata();
+                                }
+                
+                            } else {
+                                echo '<div class="swiper-slide"><a href="#" class="ticker-content">' . __('No content found!', 'essential-addons-for-elementor-lite') . '</a></div>';
+                            }
+                        } elseif ('custom' === $settings['eael_ticker_type']) {
+                            if (\file_exists($this->get_template($settings['eael_ticker_type']))) {
+                                foreach ($settings['eael_ticker_custom_contents'] as $content) {
+                                    echo Helper::include_with_variable($this->get_template($settings['eael_ticker_type']), ['content' => $content['eael_ticker_custom_content'], 'link' => $content['eael_ticker_custom_content_link']]);
+                                }
+                            }
+                        }
+                        
+                    echo '</div>
 				</div>
 				' . $this->render_arrows() . '
 			</div>

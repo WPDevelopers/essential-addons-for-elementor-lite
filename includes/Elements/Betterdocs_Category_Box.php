@@ -8,17 +8,20 @@ if (!defined('ABSPATH'))
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography;
 use \Elementor\Group_Control_Background;
-use \Elementor\Scheme_Typography as Scheme_Typography;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Scheme_Typography;
+use \Elementor\Widget_Base;
+
+use \Essential_Addons_Elementor\Classes\Controls;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Betterdocs_Category_Box extends Widget_Base {
 
-    use \Essential_Addons_Elementor\Traits\Helper;
+    
     use \Essential_Addons_Elementor\Traits\Template_Query;
 
     public function get_name()
@@ -102,7 +105,7 @@ class Betterdocs_Category_Box extends Widget_Base {
              * Query  Controls!
              * @source includes/elementor-helper.php
              */
-            $this->eael_betterdocs_query_controls();
+            do_action('eael/controls/betterdocs/query', $this);
 
             /**
              * ----------------------------------------------------------
@@ -121,7 +124,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                 [
                     'label'       => __('Select Layout', 'essential-addons-for-elementor-lite'),
                     'type'        => Controls_Manager::SELECT2,
-                    'options'     => $this->template_list(),
+                    'options'     => $this->template_options(),
                     'default'     => $this->get_default(),
                     'label_block' => true
                 ]
@@ -213,7 +216,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'type'      => Controls_Manager::TEXT,
                     'condition' => [
                         'show_count' => 'true',
-                        'layout_template' => 'Layout_Default'
+                        'layout_template' => 'default'
                     ]
                 ]
             );
@@ -226,7 +229,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'default'   => __('articles', 'essential-addons-for-elementor-lite'),
                     'condition' => [
                         'show_count' => 'true',
-                        'layout_template' => 'Layout_Default'
+                        'layout_template' => 'default'
                     ]
                 ]
             );
@@ -236,13 +239,13 @@ class Betterdocs_Category_Box extends Widget_Base {
 
             /**
              * ----------------------------------------------------------
-             * Section: Column Settings
+             * Section: Box Styles
              * ----------------------------------------------------------
              */
             $this->start_controls_section(
-                'section_column_settings',
+                'section_card_settings',
                 [
-                    'label' => __('Column', 'essential-addons-for-elementor-lite'),
+                    'label' => __('Box', 'essential-addons-for-elementor-lite'),
                     'tab'   => Controls_Manager::TAB_STYLE,
                 ]
             );
@@ -267,22 +270,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'size_units' => ['px', 'em', '%'],
                     'selectors'  => [
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    ],
-                ]
-            );
-
-            $this->end_controls_section(); # end of 'Column Settings'
-
-            /**
-             * ----------------------------------------------------------
-             * Section: Box Styles
-             * ----------------------------------------------------------
-             */
-            $this->start_controls_section(
-                'section_card_settings',
-                [
-                    'label' => __('Box', 'essential-addons-for-elementor-lite'),
-                    'tab'   => Controls_Manager::TAB_STYLE,
+                    ]
                 ]
             );
 
@@ -511,7 +499,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                     ],
                     'condition' => [
-                        'layout_template' => 'Layout_Default'
+                        'layout_template' => 'default'
                     ]
                 ]
             );
@@ -526,7 +514,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                     ],
                     'condition' => [
-                        'layout_template' => 'Layout_Default'
+                        'layout_template' => 'default'
                     ]
                 ]
             );
@@ -545,7 +533,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-cat-icon' => 'margin: {{TOP}}{{UNIT}} auto {{BOTTOM}}{{UNIT}} auto;'
                     ],
                     'condition' => [
-                        'layout_template' => 'Layout_Default'
+                        'layout_template' => 'default'
                     ]
                 ]
             );
@@ -588,7 +576,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                         '{{WRAPPER}} .eael-better-docs-category-box-post .eael-bd-cb-inner:hover .eael-bd-cb-cat-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                     ],
                     'condition' => [
-                        'layout_template' => 'Layout_Default'
+                        'layout_template' => 'default'
                     ]
                 ]
             );
@@ -643,7 +631,10 @@ class Betterdocs_Category_Box extends Widget_Base {
                 'title_styles_area_heading',
                 [
                     'label' => __( 'Area', 'essential-addons-for-elementor-lite' ),
-                    'type' =>   Controls_Manager::HEADING
+                    'type' =>   Controls_Manager::HEADING,
+                    'condition' => [
+                        'layout_template'   => 'Layout_2'
+                    ]
                 ]
             );
 
@@ -693,14 +684,6 @@ class Betterdocs_Category_Box extends Widget_Base {
                         '{{WRAPPER}} .eael-bd-cb-inner .eael-bd-cb-cat-title' => 'color: {{VALUE}};',
                         '{{WRAPPER}} .layout__2 .eael-bd-cb-cat-title__layout-2' => 'color: {{VALUE}};'
                     ],
-                ]
-            );
-
-            $this->add_group_control(
-                Group_Control_Typography::get_type(),
-                [
-                    'name'     => 'cat_title_typography_normal',
-                    'selector' => '{{WRAPPER}} .eael-bd-cb-inner .eael-bd-cb-cat-title, {{WRAPPER}} .layout__2 .eael-bd-cb-cat-title__layout-2'
                 ]
             );
 
@@ -763,6 +746,43 @@ class Betterdocs_Category_Box extends Widget_Base {
             $this->end_controls_tab();
 
             $this->end_controls_tabs();
+
+            $this->add_group_control(
+                Group_Control_Typography::get_type(),
+                [
+                    'name'     => 'cat_title_typography_normal',
+                    'selector' => '{{WRAPPER}} .eael-bd-cb-inner .eael-bd-cb-cat-title, {{WRAPPER}} .layout__2 .eael-bd-cb-cat-title__layout-2'
+                ]
+            );
+
+            $this->add_responsive_control(
+                'title_alignment',
+                [
+                    'label' => __('Text Alignment', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::CHOOSE,
+                    'options' => [
+                        'flex-start' => [
+                            'title' => __('Left', 'essential-addons-for-elementor-lite'),
+                            'icon' => 'fa fa-align-left',
+                        ],
+                        'center' => [
+                            'title' => __('Center', 'essential-addons-for-elementor-lite'),
+                            'icon' => 'fa fa-align-center',
+                        ],
+                        'flex-end' => [
+                            'title' => __('Right', 'essential-addons-for-elementor-lite'),
+                            'icon' => 'fa fa-align-right',
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .layout__2 .eael-bd-cb-cat-title__layout-2' => 'justify-content: {{VALUE}};',
+                    ],
+                    'condition' => [
+                        'layout_template'   => 'Layout_2'
+                    ],
+                    'separator' => 'before'
+                ]
+            );
 
             $this->end_controls_section(); # end of 'Icon Styles'
 
@@ -1069,51 +1089,110 @@ class Betterdocs_Category_Box extends Widget_Base {
 
         if ($settings['include'])
         {
-            unset($terms_object['parent']);
             $terms_object['include'] = array_diff($settings['include'], (array) $settings['exclude']);
-            $terms_object['orderby'] = 'include';
         }
 
         if ($settings['exclude'])
         {
-            unset($terms_object['parent']);
             $terms_object['exclude'] = $settings['exclude'];
-            $terms_object['orderby'] = 'exclude';
         }
 
-        $taxonomy_objects = get_terms($terms_object);
 
-        $html = '<div ' . $this->get_render_attribute_string('bd_category_box_wrapper') . '>';
-        $html .= '<div ' . $this->get_render_attribute_string('bd_category_box_inner') . '>';
+        $default_multiple_kb = Helper::get_betterdocs_multiple_kb_status();
 
+        if ($settings['layout_template'] == 'Layout_2') {
+            $settings['layout_template'] = 'layout-2';
+        }
+        
+        if($default_multiple_kb) {
 
-        if (file_exists($this->get_template($settings['layout_template'])))
-        {
+            $taxonomy_objects = Helper::get_multiple_kb_terms(false, false);
 
-            if ($taxonomy_objects && !is_wp_error($taxonomy_objects))
-            {
-                foreach ($taxonomy_objects as $term)
-                {
-                    ob_start();
-                    include($this->get_template($settings['layout_template']));
-                    $html .= ob_get_clean();
-                }
-            } else
-            {
-                _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+            $meta_query = '';
+
+            if(!empty($settings['selected_knowledge_base'])){
+                $terms_object['meta_query'] =  array(
+                    array(
+                        'relation' => 'OR',
+                        array(
+                            'key'       => 'doc_category_knowledge_base',
+                            'value'     => $settings['selected_knowledge_base'],
+                            'compare'   => 'LIKE'
+                        )
+                    ),
+                );
             }
 
-            wp_reset_postdata();
+            $taxonomy_objects = get_terms( $terms_object );
 
-        } else
-        {
-            $html .= '<h4>' . __('File Not Found', 'essential-addons-for-elementor-lite') . '</h4>';
+            $html = '<div ' . $this->get_render_attribute_string('bd_category_box_wrapper') . '>';
+            $html .= '<div ' . $this->get_render_attribute_string('bd_category_box_inner') . '>';
+
+
+            if (file_exists($this->get_template($settings['layout_template'])))
+            {
+
+                if ($taxonomy_objects && !is_wp_error($taxonomy_objects))
+                {
+                    foreach ($taxonomy_objects as $term)
+                    {
+                        ob_start();
+                        include($this->get_template($settings['layout_template']));
+                        $html .= ob_get_clean();
+                    }
+                } else
+                {
+                    _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                }
+
+                wp_reset_postdata();
+
+            } else
+            {
+                $html .= '<h4>' . __('File Not Found', 'essential-addons-for-elementor-lite') . '</h4>';
+            }
+
+            $html .= '</div>';
+            $html .= '</div>';
+
+            echo $html;
+
+        }else {
+            $taxonomy_objects = get_terms($terms_object);
+
+            $html = '<div ' . $this->get_render_attribute_string('bd_category_box_wrapper') . '>';
+            $html .= '<div ' . $this->get_render_attribute_string('bd_category_box_inner') . '>';
+
+
+            if (file_exists($this->get_template($settings['layout_template'])))
+            {
+
+                if ($taxonomy_objects && !is_wp_error($taxonomy_objects))
+                {
+                    foreach ($taxonomy_objects as $term)
+                    {
+                        ob_start();
+                        include($this->get_template($settings['layout_template']));
+                        $html .= ob_get_clean();
+                    }
+                } else
+                {
+                    _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                }
+
+                wp_reset_postdata();
+
+            } else
+            {
+                $html .= '<h4>' . __('File Not Found', 'essential-addons-for-elementor-lite') . '</h4>';
+            }
+
+            $html .= '</div>';
+            $html .= '</div>';
+
+            echo $html;
+            
         }
-
-        $html .= '</div>';
-        $html .= '</div>';
-
-        echo $html;
 
     }
 

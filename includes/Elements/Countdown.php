@@ -6,16 +6,18 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography;
 use \Elementor\Plugin;
-use \Elementor\Scheme_Typography as Scheme_Typography;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Scheme_Typography;
+use \Elementor\Widget_Base;
+
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Countdown extends Widget_Base {
-    use \Essential_Addons_Elementor\Traits\Helper;
+    
 
     public function get_name() {
         return 'eael-countdown';
@@ -435,7 +437,7 @@ class Countdown extends Widget_Base {
             [
                 'label'     => __( 'Choose Template', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::SELECT,
-                'options'   => $this->eael_get_page_templates(),
+                'options'   => Helper::get_elementor_templates(),
                 'condition' => [
                     'countdown_expire_type' => 'template',
                 ],

@@ -6,12 +6,12 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Image_Size as Group_Control_Image_Size;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Utils as Utils;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Image_Size;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Utils;
+use \Elementor\Widget_Base;
 
 class Testimonial extends Widget_Base {
 

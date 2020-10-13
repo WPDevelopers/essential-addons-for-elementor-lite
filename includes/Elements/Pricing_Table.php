@@ -17,7 +17,7 @@ use \Elementor\Widget_Base;
 class Pricing_Table extends Widget_Base
 {
 
-    use \Essential_Addons_Elementor\Traits\Helper;
+    
 
     public function get_name()
     {
