@@ -61,6 +61,7 @@
                         width: fit-content;
                         height: auto;
                         margin: auto;
+                        max-width: 100%;
                         backface-visibility: hidden;
                     }
 
@@ -167,7 +168,7 @@
 
                         &::before {
                             content: '\f217';
-                            font-family: 'Font Awesome\ 5 Free';
+                            font-family: 'Font Awesome 5 Free';
                             font-weight: 900;
                             padding-right: 8px;
                         }
@@ -254,8 +255,9 @@
 
                     img {
                         width: fit-content;
+                        max-width: 100%;
                         height: auto;
-                        margin: 0;
+                        margin: auto;
                         backface-visibility: hidden;
                     }
 
@@ -452,7 +454,7 @@
         .button.add_to_cart_button {
             &::before {
                 content: '\f217';
-                font-family: 'Font Awesome\ 5 Free';
+                font-family: 'Font Awesome 5 Free';
                 font-weight: 900;
                 padding-right: 8px;
             }
