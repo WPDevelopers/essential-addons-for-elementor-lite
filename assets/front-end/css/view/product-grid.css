@@ -451,6 +451,7 @@
   width: fit-content;
   height: auto;
   margin: auto;
+  max-width: 100%;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
 }
@@ -650,8 +651,9 @@
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  max-width: 100%;
   height: auto;
-  margin: 0;
+  margin: auto;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
 }
