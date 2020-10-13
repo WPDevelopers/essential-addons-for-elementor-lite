@@ -7,6 +7,10 @@
 }
 
 .eael-wcpc-wrapper {
+    img {
+        display: block;
+        margin: auto;
+    }
     &.custom {
         --h-bg: #2d1e87;
         --h-text-clr: #fff;
