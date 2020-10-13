@@ -515,6 +515,7 @@ trait Woo_Product_Comparable {
 		$th  = "{$tbl} tr:not(.image):not(.title) th:not(.first-th)"; // if we do not need to give title row weight, then remove :not(.title)
 
 		$img_class = "{$tbl} tr.image td";
+		$img = "{$tbl} tr.image td img";
 		$title_row = "{$tbl} tr.title th, {$tbl} tr.title td";
 		$btn       = "{$tbl} a.button";
 		$btn_hover = "{$tbl} a.button:hover";
@@ -665,6 +666,19 @@ trait Woo_Product_Comparable {
 			],
 			'condition'  => [ 'common_td_style_pot' => 'yes' ],
 		] );
+		$this->add_responsive_control( "table_gen_img_td_padding", [
+			'label'      => __( 'Product Image Box Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				$img_class => $this->apply_dim( 'padding' ),
+			],
+			'condition'  => [ 'common_td_style_pot' => 'yes' ],
+		] );
 		$this->add_responsive_control( "table_gen_img_padding", [
 			'label'      => __( 'Product Image Padding', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -674,7 +688,7 @@ trait Woo_Product_Comparable {
 				'%',
 			],
 			'selectors'  => [
-				$img_class => $this->apply_dim( 'padding' ),
+				$img => $this->apply_dim( 'padding' ),
 			],
 			'condition'  => [ 'common_td_style_pot' => 'yes' ],
 		] );
