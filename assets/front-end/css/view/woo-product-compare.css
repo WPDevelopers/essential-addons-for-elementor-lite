@@ -18,7 +18,7 @@
   --container-bg: #fff;
   --icon-color: #c3ccdc;
   background: var(--container-bg);
-  overflow: scroll;
+  overflow-x: scroll;
 }
 .eael-wcpc-wrapper.custom table {
   border-collapse: collapse;
@@ -379,7 +379,7 @@
 }
 @media screen and (min-width: 769px) {
   .eael-wcpc-wrapper:not(.theme-4) tr.image td {
-    padding: 50px;
+    padding: 10px;
   }
 
   .theme-4 tr.image td {
