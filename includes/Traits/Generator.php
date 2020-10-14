@@ -164,7 +164,6 @@ trait Generator
             return;
         }
 
-        $global_settings = get_option('eael_global_settings');
         $document = Plugin::$instance->documents->get($post_id);
 
         if ($document->get_settings('eael_custom_js')) {
