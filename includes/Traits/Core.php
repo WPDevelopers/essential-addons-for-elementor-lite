@@ -157,19 +157,23 @@ trait Core
      */
     public function save_global_values($post_id, $editor_data)
     {
-        $document = Plugin::$instance->documents->get($post_id,false);
+        if (wp_doing_cron()) {
+            return;
+        }
+
+        $document = Plugin::$instance->documents->get($post_id, false);
         $global_settings = get_option('eael_global_settings');
+
         if ($document->get_settings('eael_ext_reading_progress_global') == 'yes' && $document->get_settings('eael_ext_reading_progress') == 'yes') {
             $global_settings['reading_progress'] = [
-                'post_id'                                            => $post_id,
-                'enabled'                                            => true,
-                //'eael_ext_reading_progress'                          => $document->get_settings('eael_ext_reading_progress'),
+                'post_id' => $post_id,
+                'enabled' => true,
                 'eael_ext_reading_progress_global_display_condition' => $document->get_settings('eael_ext_reading_progress_global_display_condition'),
-                'eael_ext_reading_progress_position'                 => $document->get_settings('eael_ext_reading_progress_position'),
-                'eael_ext_reading_progress_height'                   => $document->get_settings('eael_ext_reading_progress_height'),
-                'eael_ext_reading_progress_bg_color'                 => $document->get_settings('eael_ext_reading_progress_bg_color'),
-                'eael_ext_reading_progress_fill_color'               => $document->get_settings('eael_ext_reading_progress_fill_color'),
-                'eael_ext_reading_progress_animation_speed'          => $document->get_settings('eael_ext_reading_progress_animation_speed'),
+                'eael_ext_reading_progress_position' => $document->get_settings('eael_ext_reading_progress_position'),
+                'eael_ext_reading_progress_height' => $document->get_settings('eael_ext_reading_progress_height'),
+                'eael_ext_reading_progress_bg_color' => $document->get_settings('eael_ext_reading_progress_bg_color'),
+                'eael_ext_reading_progress_fill_color' => $document->get_settings('eael_ext_reading_progress_fill_color'),
+                'eael_ext_reading_progress_animation_speed' => $document->get_settings('eael_ext_reading_progress_animation_speed'),
             ];
         } else {
             if (isset($global_settings['reading_progress']['post_id']) && $global_settings['reading_progress']['post_id'] == $post_id) {
@@ -179,6 +183,7 @@ trait Core
                 ];
             }
         }
+
         //save table of contents global value
         if ($document->get_settings('eael_ext_toc_global') == 'yes' && $document->get_settings('eael_ext_table_of_content') == 'yes') {
             $typography_fields = [
@@ -191,10 +196,10 @@ trait Core
                 'letter_spacing',
                 'line_height',
             ];
+
             $global_settings['eael_ext_table_of_content'] = [
                 'post_id' => $post_id,
                 'enabled' => ($document->get_settings('eael_ext_toc_global') == 'yes'),
-                //'eael_ext_table_of_content' => $document->get_settings('eael_ext_table_of_content'),
                 'eael_ext_toc_global_display_condition' => $document->get_settings('eael_ext_toc_global_display_condition'),
                 'eael_ext_toc_title' => $document->get_settings('eael_ext_toc_title'),
                 'eael_ext_toc_position' => $document->get_settings('eael_ext_toc_position'),
@@ -204,7 +209,6 @@ trait Core
                 'eael_ext_toc_collapse_sub_heading' => $document->get_settings('eael_ext_toc_collapse_sub_heading'),
                 'eael_ext_toc_use_title_in_url' => $document->get_settings('eael_ext_toc_use_title_in_url'),
                 'eael_ext_toc_word_wrap' => $document->get_settings('eael_ext_toc_word_wrap'),
-                //'eael_ext_toc_box_shadow' => $document->get_settings('eael_ext_toc_box_shadow'),
                 'eael_ext_toc_table_box_shadow_box_shadow' => $document->get_settings('eael_ext_toc_table_box_shadow_box_shadow'),
                 'eael_ext_toc_auto_collapse' => $document->get_settings('eael_ext_toc_auto_collapse'),
                 'eael_ext_toc_hide_in_mobile' => $document->get_settings('eael_ext_toc_hide_in_mobile'),
@@ -264,7 +268,7 @@ trait Core
             }
         }
 
-        // update editor time
+        // set editor time
         set_transient('eael_editor_updated_at', strtotime('now'));
 
         // update options
