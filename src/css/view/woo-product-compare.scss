@@ -121,7 +121,7 @@
             --even-row-bg: #fbf8f7;
 
             table {
-                tr:nth-child(even):not(.title) {
+                tr:nth-of-type(even):not(.title) {
                     background: var(--even-row-bg);
                 }
             }
@@ -145,7 +145,7 @@
             table {
                 -webkit-border-horizontal-spacing: 10px;
 
-                tr:nth-child(even):not(.title) {
+                tr:nth-of-type(even):not(.title) {
                     background: var(--even-row-bg);
                 }
 
@@ -155,7 +155,7 @@
                 }
 
                 tr.title td.featured,
-                tr:nth-child(odd) td.featured {
+                tr:nth-of-type(odd) td.featured {
                     //background: #fff;
                     -webkit-box-shadow: 18px 0 10px -10px rgba(86, 79, 127, .06), -18px 0 10px -10px rgba(86, 79, 127, .06);
                     -moz-box-shadow: 18px 0 10px -10px rgba(86, 79, 127, .06), -18px 0 10px -10px rgba(86, 79, 127, .06);
@@ -203,15 +203,15 @@
                         background: #fff;
                     }
 
-                    td:nth-child(3n+1) .img-inner {
+                    td:nth-of-type(3n+1) .img-inner {
                         background: var(--first-img-bg);
                     }
 
-                    td:nth-child(3n+2) .img-inner {
+                    td:nth-of-type(3n+2) .img-inner {
                         background: var(--second-img-bg);
                     }
 
-                    td:nth-child(3n+3) .img-inner {
+                    td:nth-of-type(3n+3) .img-inner {
                         background: var(--third-img-bg);
                     }
                 }
@@ -314,7 +314,7 @@
                     background: var(--container-bg);
                 }
 
-                td:nth-child(3n+1) {
+                td:nth-of-type(3n+1) {
                     .button {
                         background: var(--first-btn-bg);
 
@@ -324,7 +324,7 @@
                     }
                 }
 
-                td:nth-child(3n+2) {
+                td:nth-of-type(3n+2) {
                     .button {
                         background: var(--second-btn-bg);
 
@@ -334,7 +334,7 @@
                     }
                 }
 
-                td:nth-child(3n+3) {
+                td:nth-of-type(3n+3) {
                     .button {
                         background: var(--third-btn-bg);
 
@@ -355,29 +355,29 @@
                 }
 
                 tr.image {
-                    td:nth-child(3n+1) {
+                    td:nth-of-type(3n+1) {
                         background: var(--first-img-bg);
                     }
 
-                    td:nth-child(3n+2) {
+                    td:nth-of-type(3n+2) {
                         background: var(--second-img-bg);
                     }
 
-                    td:nth-child(3n+3) {
+                    td:nth-of-type(3n+3) {
                         background: var(--third-img-bg);
                     }
                 }
 
                 tr.title {
-                    td:nth-child(3n+1) {
+                    td:nth-of-type(3n+1) {
                         background: var(--first-col-bg);
                     }
 
-                    td:nth-child(3n+2) {
+                    td:nth-of-type(3n+2) {
                         background: var(--second-col-bg);
                     }
 
-                    td:nth-child(3n+3) {
+                    td:nth-of-type(3n+3) {
                         background: var(--third-col-bg);
                     }
                 }
@@ -437,32 +437,32 @@
                     border-right: none;
                 }
 
-                td:nth-child(3n+1) {
+                td:nth-of-type(3n+1) {
                     background: var(--first-col-bg);
                 }
 
-                td:nth-child(3n+2) {
+                td:nth-of-type(3n+2) {
                     background: var(--second-col-bg);
                 }
 
-                td:nth-child(3n+3) {
+                td:nth-of-type(3n+3) {
                     background: var(--third-col-bg);
                 }
 
-                tr:nth-child(even) {
+                tr:nth-of-type(even) {
                     th, td {
                         background: #f7f6fa;
                     }
 
-                    td:nth-child(3n+1) {
+                    td:nth-of-type(3n+1) {
                         background: #fec1b5;
                     }
 
-                    td:nth-child(3n+2) {
+                    td:nth-of-type(3n+2) {
                         background: #b7adf9;
                     }
 
-                    td:nth-child(3n+3) {
+                    td:nth-of-type(3n+3) {
                         background: #91efb8;
                     }
                 }
@@ -487,7 +487,7 @@
                     }
                 }
 
-                td:nth-child(3n+1) {
+                td:nth-of-type(3n+1) {
                     .button {
                         color: var(--first-col-bg);
 
@@ -497,7 +497,7 @@
                     }
                 }
 
-                td:nth-child(3n+2) {
+                td:nth-of-type(3n+2) {
                     .button {
                         color: var(--second-col-bg);
 
@@ -507,7 +507,7 @@
                     }
                 }
 
-                td:nth-child(3n+3) {
+                td:nth-of-type(3n+3) {
                     .button {
                         color: var(--third-col-bg);
 
