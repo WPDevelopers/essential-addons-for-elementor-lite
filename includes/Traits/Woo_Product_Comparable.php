@@ -1034,16 +1034,17 @@ trait Woo_Product_Comparable {
 	public function init_style_product_column_style( $column_number, $tbl = '' ) {
 		$tbl = ! empty( $tbl ) ? $tbl : "{{WRAPPER}} .eael-wcpc-wrapper table";
 
-		$column_class = "{$tbl} td.col_{$column_number}";
-		$title_row    = "{$tbl} tr.title td.col_{$column_number}";
-		$tr_even      = "{$tbl} tr:nth-child(even) td.col_{$column_number}";
-		$tr_odd       = "{$tbl} tr:nth-child(odd) td.col_{$column_number}";
-		$btn          = "{$tbl} td.col_{$column_number} a.button";
-		$btn_hover    = "{$tbl} td.col_{$column_number} a.button:hover";
-		$img_td       = "{$tbl} tr.image td.col_{$column_number}";
-		$img          = "{$img_td} img";
-		$title_number = 1 + $column_number;
+		$title_number = 1 + $column_number; // first column number is 0, so title number will start from 1 in the loop.
 		$pfx          = "col{$column_number}";
+        // New selectors
+		$column_class = "{$tbl} td:nth-of-type(3n+{$title_number})";
+		$title_row    = "{$tbl} tr.title td:nth-of-type(3n+{$title_number})";
+		$tr_even      = "{$tbl} tr:nth-of-type(even) td:nth-of-type(3n+{$title_number})";
+		$tr_odd       = "{$tbl} tr:nth-of-type(odd) td:nth-of-type(3n+{$title_number})";
+		$btn          = "{$tbl} td:nth-of-type(3n+{$title_number}) a.button";
+		$btn_hover    = "{$btn}:hover";
+		$img_td       = "{$tbl} tr.image td:nth-of-type(3n+{$title_number})";
+		$img          = "{$img_td} img";
 		$this->start_controls_section( 'section_style_' . $pfx, [
 			'label'     => sprintf( __( 'Product Column %d', 'essential-addons-for-elementor-lite' ), $title_number ),
 			'tab'       => Controls_Manager::TAB_STYLE,
