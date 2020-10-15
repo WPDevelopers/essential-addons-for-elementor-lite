@@ -11,6 +11,10 @@
   display: block;
   margin: auto;
 }
+.eael-wcpc-wrapper th i {
+  padding-right: 10px;
+  color: gainsboro;
+}
 .eael-wcpc-wrapper.custom {
   --h-bg: #2d1e87;
   --h-text-clr: #fff;
