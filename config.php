@@ -879,14 +879,6 @@ $config = [
 				        'context' => 'view',
 			        ],
 		        ],
-		        'js'  => [
-			        [
-				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-product-compare.min.js',
-				        'type'    => 'self',
-				        'context' => 'view',
-			        ],
-		        ],
-
 	        ],
         ],
     ],
