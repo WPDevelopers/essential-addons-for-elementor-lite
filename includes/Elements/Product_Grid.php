@@ -98,7 +98,7 @@ class Product_Grid extends Widget_Base {
 	public function add_to_cart_button_custom_text( $default ) {
 		if ( $this->is_show_custom_add_to_cart ) {
 			global $product;
-			switch ( $product->product_type ) {
+			switch ( $product->get_type() ) {
 				case 'external':
 					return $this->external_add_to_cart_button_text;
 				case 'grouped':
