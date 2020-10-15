@@ -382,7 +382,7 @@ trait Helper
 	 * @return bool it returns true if the data saved, otherwise, false returned.
 	 */
 	public function eael_set_transient( $name, $data, $time = 300 ) {
-		$time = empty( $time ) ? (int) $time : ( 5 * MINUTE_IN_SECONDS );
+		$time = !empty( $time ) ? (int) $time : ( 5 * MINUTE_IN_SECONDS );
 
 		return set_transient( $name, $data, time() + $time );
 	}
