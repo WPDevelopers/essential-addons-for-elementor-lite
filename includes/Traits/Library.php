@@ -175,6 +175,10 @@ trait Library
             return true;
         }
 
+        if (wp_doing_cron()) {
+            return true;
+        }
+
         if (wp_doing_ajax()) {
             return true;
         }

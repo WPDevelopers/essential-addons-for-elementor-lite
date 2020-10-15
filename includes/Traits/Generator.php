@@ -6,7 +6,6 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use \Elementor\Plugin;
-use \Essential_Addons_Elementor\Classes\Helper;
 
 trait Generator
 {
@@ -165,22 +164,11 @@ trait Generator
             return;
         }
 
-        $global_settings = get_option('eael_global_settings');
         $document = Plugin::$instance->documents->get($post_id);
 
         if ($document->get_settings('eael_custom_js')) {
             $this->custom_js_strings .= $document->get_settings('eael_custom_js');
         }
-
-        // if (!Helper::prevent_extension_loading($post_id)) {
-        //     if ($document->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {
-        //         $this->loaded_elements[] = 'eael-eael-reading-progress';
-        //     }
-
-        //     if ($document->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['eael_ext_table_of_content']['enabled'])) {
-        //         $this->loaded_elements[] = 'eael-eael-table-of-content';
-        //     }
-        // }
     }
 
     public function update_request_data()

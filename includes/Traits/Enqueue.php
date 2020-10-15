@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \Essential_Addons_Elementor\Classes\Helper;
+use \Essential_Addons_Elementor\Classes\Helper as EnqueueHelper;
 
 trait Enqueue
 {
@@ -14,7 +14,7 @@ trait Enqueue
     {
         // Compatibility: Gravity forms
         if (in_array('gravity-form', $widgets) && class_exists('GFCommon')) {
-            foreach (Helper::get_gravity_form_list() as $form_id => $form_name) {
+            foreach (EnqueueHelper::get_gravity_form_list() as $form_id => $form_name) {
                 if ($form_id != '0') {
                     gravity_form_enqueue_scripts($form_id);
                 }
