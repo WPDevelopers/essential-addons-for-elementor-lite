@@ -70,6 +70,7 @@ ea.hooks.addAction("init", "ea", () => {
 
         $doc.on('click', '.eael-wc-remove', function (e){
             e.preventDefault();
+            $(this).prop('disabled', true);// prevent additional ajax request
             const rmData = Array.from(ajaxData);
             rmData.push({
                 name: 'product_id',
