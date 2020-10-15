@@ -112,12 +112,13 @@ class Woo_Product_Compare extends Widget_Base {
 		$repeat_price           = isset( $ds['repeat_price'] ) ? $ds['repeat_price'] : '';
 		$repeat_add_to_cart     = isset( $ds['repeat_add_to_cart'] ) ? $ds['repeat_add_to_cart'] : '';
 		$highlighted_product_id = ! empty( $ds['highlighted_product_id'] ) ? $ds['highlighted_product_id'] : null;
+		$icon                   = ! empty( $ds['field_icon'] ) && ! empty( $ds['field_icon']['value'] ) ? $ds['field_icon'] : [];
 		$theme_wrap_class       = $theme = '';
 		if ( ! empty( $ds['theme'] ) ) {
 			$theme            = esc_attr( $ds['theme'] );
 			$theme_wrap_class = " custom {$theme}";
 		}
-		$this->render_compare_table( compact( 'products', 'fields', 'title', 'highlighted_product_id', 'theme_wrap_class', 'theme', 'ribbon', 'repeat_price', 'repeat_add_to_cart' ) );
+		$this->render_compare_table( compact( 'products', 'fields', 'title', 'highlighted_product_id', 'theme_wrap_class', 'theme', 'ribbon', 'repeat_price', 'repeat_add_to_cart', 'icon' ) );
 	}
 
 }

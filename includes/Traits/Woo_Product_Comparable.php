@@ -7,6 +7,7 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
+use Elementor\Icons_Manager;
 use Elementor\Repeater;
 use WC_Product;
 
@@ -199,6 +200,14 @@ trait Woo_Product_Comparable {
 			'label'       => __( 'Repeat "Add to cart" field', 'essential-addons-for-elementor-lite' ),
 			'description' => __( 'Repeat the "Add to cart" field at the end of the table', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::SWITCHER,
+		] );
+		$this->add_control( 'field_icon', [
+			'label'   => __( 'Fields Icon', 'elementor' ),
+			'type'    => Controls_Manager::ICONS,
+			'default' => [
+				'value'   => 'fas fa-arrow-right',
+				'library' => 'fa-solid',
+			],
 		] );
 		$this->end_controls_section();
 	}
@@ -515,7 +524,7 @@ trait Woo_Product_Comparable {
 		$th  = "{$tbl} tr:not(.image):not(.title) th:not(.first-th)"; // if we do not need to give title row weight, then remove :not(.title)
 
 		$img_class = "{$tbl} tr.image td";
-		$img = "{$tbl} tr.image td img";
+		$img       = "{$tbl} tr.image td img";
 		$title_row = "{$tbl} tr.title th, {$tbl} tr.title td";
 		$btn       = "{$tbl} a.button";
 		$btn_hover = "{$tbl} a.button:hover";
@@ -537,7 +546,7 @@ trait Woo_Product_Comparable {
 			'label_off'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
 			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
 			'return_value' => 'yes',
-			'separator' => 'before',
+			'separator'    => 'before',
 			'condition'    => [ 'separate_col_style!' => 'yes' ],
 		] );
 		$this->start_popover();
@@ -620,7 +629,7 @@ trait Woo_Product_Comparable {
 			'label_off'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
 			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
 			'return_value' => 'yes',
-			'separator' => 'before',
+			'separator'    => 'before',
 			'condition'    => [ 'separate_col_style!' => 'yes' ],
 		] );
 		$this->start_popover();
@@ -758,7 +767,7 @@ trait Woo_Product_Comparable {
 			'name'      => "tbl_gen_td_typo",
 			'label'     => __( 'Product Column Typography', 'essential-addons-for-elementor-lite' ),
 			'selector'  => $td,
-			'condition' => [ 'separate_col_style!' => 'yes'],
+			'condition' => [ 'separate_col_style!' => 'yes' ],
 		] );
 
 		// Colors
@@ -1036,7 +1045,7 @@ trait Woo_Product_Comparable {
 
 		$title_number = 1 + $column_number; // first column number is 0, so title number will start from 1 in the loop.
 		$pfx          = "col{$column_number}";
-        // New selectors
+		// New selectors
 		$column_class = "{$tbl} td:nth-of-type(3n+{$title_number})";
 		$title_row    = "{$tbl} tr.title td:nth-of-type(3n+{$title_number})";
 		$tr_even      = "{$tbl} tr:nth-of-type(even) td:nth-of-type(3n+{$title_number})";
@@ -1307,9 +1316,7 @@ trait Woo_Product_Comparable {
 											printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
 										}
 									} else {
-										if ( 'theme-4' === $theme ) {
-											self::print_icon();
-										}
+										self::print_icon( $icon );
 										if ( 'theme-5' === $theme && $field === 'title' ) {
 											echo '&nbsp;';
 										} else {
@@ -1361,9 +1368,7 @@ trait Woo_Product_Comparable {
                             <th>
                                 <div>
 									<?php
-									if ( 'theme-4' === $theme ) {
-										self::print_icon();
-									}
+									self::print_icon( $icon );
 									echo wp_kses_post( $fields['price'] ) ?>
                                 </div>
                             </th>
@@ -1387,7 +1392,7 @@ trait Woo_Product_Comparable {
                                 <div>
 									<?php
 									if ( 'theme-4' === $theme ) {
-										self::print_icon();
+										self::print_icon( $icon );
 									}
 									echo wp_kses_post( $fields['add-to-cart'] ); ?>
                                 </div>
@@ -1565,16 +1570,10 @@ trait Woo_Product_Comparable {
 		return apply_filters( 'eael/wcpc/get_product_remove_url', esc_url_raw( add_query_arg( $url_args, site_url() ) ), $this->remove_action );
 	}
 
-	public static function print_icon() {
-		?>
-        <svg class="icon right-arrow" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 492.004 492.004" xml:space="preserve">
-            <path d="M484.14,226.886L306.46,49.202c-5.072-5.072-11.832-7.856-19.04-7.856c-7.216,0-13.972,2.788-19.044,7.856l-16.132,16.136
-                    c-5.068,5.064-7.86,11.828-7.86,19.04c0,7.208,2.792,14.2,7.86,19.264L355.9,207.526H26.58C11.732,207.526,0,219.15,0,234.002
-                    v22.812c0,14.852,11.732,27.648,26.58,27.648h330.496L252.248,388.926c-5.068,5.072-7.86,11.652-7.86,18.864
-                    c0,7.204,2.792,13.88,7.86,18.948l16.132,16.084c5.072,5.072,11.828,7.836,19.044,7.836c7.208,0,13.968-2.8,19.04-7.872
-                    l177.68-177.68c5.084-5.088,7.88-11.88,7.86-19.1C492.02,238.762,489.228,231.966,484.14,226.886z"/>
-        </svg>
-		<?php
+	public static function print_icon( $icon ) {
+		if ( ! empty( $icon['value'] ) && ! empty( $icon['library'] ) ) {
+			Icons_Manager::render_icon( $icon, [ 'aria-hidden' => 'true' ] );
+		}
 	}
 
 	// static methods for product grids only
@@ -1635,7 +1634,6 @@ trait Woo_Product_Comparable {
 		}
 		$product_ids = array_values( $product_ids );
 		$ds          = $this->eael_get_widget_settings( $page_id, $widget_id );
-		//@TODO; until settings added, lets modify the settings
 		$products = self::static_get_products_list( $product_ids, $ds );
 		$fields   = self::static_fields( $product_ids, $ds );
 
@@ -1644,13 +1642,14 @@ trait Woo_Product_Comparable {
 		$repeat_price           = isset( $ds['repeat_price'] ) ? $ds['repeat_price'] : '';
 		$repeat_add_to_cart     = isset( $ds['repeat_add_to_cart'] ) ? $ds['repeat_add_to_cart'] : '';
 		$highlighted_product_id = ! empty( $ds['highlighted_product_id'] ) ? $ds['highlighted_product_id'] : null;
+		$icon                   = ! empty( $ds['field_icon'] ) && ! empty( $ds['field_icon']['value'] ) ? $ds['field_icon'] : [];
 		$theme_wrap_class       = $theme = '';
 		if ( ! empty( $ds['theme'] ) ) {
 			$theme            = esc_attr( $ds['theme'] );
 			$theme_wrap_class = " custom {$theme}";
 		}
 		ob_start();
-		self::render_compare_table( compact( 'products', 'fields', 'title', 'highlighted_product_id', 'theme_wrap_class', 'theme', 'ribbon', 'repeat_price', 'repeat_add_to_cart' ) );
+		self::render_compare_table( compact( 'products', 'fields', 'title', 'highlighted_product_id', 'theme_wrap_class', 'theme', 'ribbon', 'repeat_price', 'repeat_add_to_cart', 'icon' ) );
 		$table = ob_get_clean();
 		wp_send_json_success( [ 'compare_table' => $table ] );
 
