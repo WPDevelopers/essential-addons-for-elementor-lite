@@ -2,7 +2,9 @@
 /* Woo Product Compare */
 .table-responsive {
   display: block;
-  width: 100%;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
   overflow-x: auto;
   overflow-y: hidden;
 }
