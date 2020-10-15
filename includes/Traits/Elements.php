@@ -367,7 +367,7 @@ trait Elements
 
                 $reading_progress_html .= '</div>';
 
-                if ($document->get_settings('eael_ext_reading_progress') != 'yes') {
+                if ($this->get_extensions_value('eael_ext_reading_progress') != 'yes') {
                     $display_condition = $this->get_extensions_value('eael_ext_reading_progress_global_display_condition');
                     if (get_post_status($settings_data['post_id']) != 'publish') {
                         $reading_progress_html = '';
