@@ -11,6 +11,10 @@
         display: block;
         margin: auto;
     }
+    th i {
+        padding-right: 10px;
+        color: gainsboro;
+    }
     &.custom {
         --h-bg: #2d1e87;
         --h-text-clr: #fff;
