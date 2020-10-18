@@ -389,7 +389,9 @@ trait Elements
 
         // Table of Contents
         if ($this->get_settings('table-of-content')) {
-            $toc_status = false;
+            if (is_object($document)) {
+                $settings_data = $document->get_settings();
+            }
             if (isset($settings_data['eael_ext_table_of_content']) && $settings_data['eael_ext_table_of_content'] == 'yes') {
                 $toc_status = true;
             } elseif (isset($global_settings['eael_ext_table_of_content']['enabled']) && $global_settings['eael_ext_table_of_content']['enabled']) {
