@@ -60,7 +60,7 @@ class Formstack extends Widget_Base {
         return get_option('formstack_oauth2_code', '');
     }
 
-    private function formstackAuth (string $key) {
+    private function formstackAuth ($key) {
         return get_option('formstack_settings')[$key];
     }
 

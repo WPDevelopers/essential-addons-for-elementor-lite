@@ -193,6 +193,11 @@ trait Generator
             return;
         }
 
+        // check if already updated
+        if (get_transient('eael_editor_updated_at') == get_transient($this->uid . '_updated_at')) {
+            return;
+        }
+
         // parse loaded elements
         $this->loaded_elements = $this->parse_elements($this->loaded_elements);
 

@@ -171,15 +171,15 @@ trait Library
      */
     public function is_running_background()
     {
-        if (isset($_REQUEST['doing_wp_cron'])) {
-            return true;
-        }
-
         if (wp_doing_cron()) {
             return true;
         }
 
         if (wp_doing_ajax()) {
+            return true;
+        }
+        
+        if (isset($_REQUEST['action'])) {
             return true;
         }
 
@@ -193,7 +193,7 @@ trait Library
      */
     public function is_edit_mode()
     {
-        if (isset($_REQUEST['elementor-preview']) && isset($_REQUEST['ver'])) {
+        if (isset($_REQUEST['elementor-preview'])) {
             return true;
         }
 
@@ -211,11 +211,7 @@ trait Library
             return false;
         }
 
-        if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'elementor') {
-            return false;
-        }
-
-        if (isset($_REQUEST['ver'])) {
+        if (isset($_REQUEST['action'])) {
             return false;
         }
 
