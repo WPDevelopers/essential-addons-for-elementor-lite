@@ -635,7 +635,7 @@ class Helper
         if ($settings['post_type'] === 'source_dynamic' && is_archive()) {
 
             $data = get_queried_object();
-            if (!empty($data->post_type)) {
+            if (isset($data->post_type)) {
                 $args['post_type'] = $data->post_type;
 
                 $args['tax_query'] = [];
