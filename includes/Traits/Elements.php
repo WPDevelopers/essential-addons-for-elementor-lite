@@ -322,7 +322,6 @@ trait Elements
         }
 
         $post_id = get_the_ID();
-
         $html = '';
         $global_settings = $setting_data = $document = [];
 
@@ -389,10 +388,12 @@ trait Elements
 
         // Table of Contents
         if ($this->get_settings('table-of-content')) {
-            $toc_status = false;
+            $toc_status = true;
+
             if (is_object($document)) {
                 $settings_data = $document->get_settings();
             }
+
             if (isset($settings_data['eael_ext_table_of_content']) && $settings_data['eael_ext_table_of_content'] == 'yes') {
                 $toc_status = true;
             } elseif (isset($global_settings['eael_ext_table_of_content']['enabled']) && $global_settings['eael_ext_table_of_content']['enabled']) {
@@ -408,6 +409,7 @@ trait Elements
                     $el_class .= ' eael-toc-global';
                     $this->toc_global_css($global_settings);
                 }
+
                 $icon = 'fas fa-list';
                 $support_tag = (array) $settings_data['eael_ext_toc_supported_heading_tag'];
                 $support_tag = implode(',', array_filter($support_tag));
@@ -442,15 +444,15 @@ trait Elements
                 }
 
                 $table_of_content_html = "<div data-eaelTocTag='{$support_tag}' data-contentSelector='{$content_selector}' data-excludeSelector='{$exclude_selector}' data-stickyScroll='{$sticky_scroll['size']}' data-titleUrl='{$title_url}' id='eael-toc' class='{$el_class} '>
-                        <div class='eael-toc-header'>
-                                <span class='eael-toc-close'>×</span>
-                                <h2 class='eael-toc-title'>{$toc_title}</h2>
-                        </div>
-                        <div class='eael-toc-body'>
-                            <ul id='eael-toc-list' class='eael-toc-list {$toc_style_class}'></ul>
-                        </div>
-                        <button class='eael-toc-button'><i class='{$icon}'></i><span>{$toc_title}</span></button>
-                    </div>";
+                    <div class='eael-toc-header'>
+                            <span class='eael-toc-close'>×</span>
+                            <h2 class='eael-toc-title'>{$toc_title}</h2>
+                    </div>
+                    <div class='eael-toc-body'>
+                        <ul id='eael-toc-list' class='eael-toc-list {$toc_style_class}'></ul>
+                    </div>
+                    <button class='eael-toc-button'><i class='{$icon}'></i><span>{$toc_title}</span></button>
+                </div>";
 
                 if ($this->get_extensions_value('eael_ext_table_of_content') != 'yes') {
                     $toc_global_display_condition = $this->get_extensions_value('eael_ext_toc_global_display_condition');
@@ -471,8 +473,8 @@ trait Elements
                 }
             }
         }
-        echo $html;
 
+        echo $html;
     }
 
     /**
