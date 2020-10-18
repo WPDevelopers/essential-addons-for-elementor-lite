@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.5
 Requires PHP: 5.4
-Stable tag: 4.3.1
+Stable tag: 4.3.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -223,6 +223,15 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.3.2 - 18/10/2020 =
+- Fixed: Assets not generating properly
+- Fixed: Fatal error with BuddyPress plugin
+- Fixed: EA Twitter Feed | content not loading properly
+- Fixed: EA Table of Contents | not working correctly for posts
+- Fixed: PHP notices with EA Post Grid, Post Timeline & Post Carousel
+- Fixed: EA FormStack | Auth error in PHP 5.6
+- Few minor bug fix and improvements
 
 = 4.3.1 - 14/10/2020 =
 - Few minor bug fix
