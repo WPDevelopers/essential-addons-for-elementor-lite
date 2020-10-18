@@ -28,6 +28,7 @@ trait Woo_Product_Comparable {
 			'font-awesome-4-shim',
 		];
 	}
+
 	/**
 	 * Get an array of field types.
 	 * @return array
@@ -528,6 +529,8 @@ trait Woo_Product_Comparable {
 		foreach ( range( 0, 2 ) as $column ) {
 			$this->init_style_product_column_style( $column, $table );
 		}
+
+		$this->init_style_icon_controls( $table );
 	}
 
 	public function init_style_table_common_style( $tbl = '' ) {
@@ -923,7 +926,6 @@ trait Woo_Product_Comparable {
 				'separate_col_style' => 'yes',
 			],
 		] );
-
 		$this->add_responsive_control( "h_col_width", [
 			'label'      => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::SLIDER,
@@ -964,7 +966,6 @@ trait Woo_Product_Comparable {
 				$h_col => $this->apply_dim( 'padding' ),
 			],
 		] );
-
 		$this->add_control( 'h_col_clr_heading', [
 			'label' => __( 'Colors', 'essential-addons-for-elementor-lite' ),
 			'type'  => Controls_Manager::HEADING,
@@ -1033,7 +1034,6 @@ trait Woo_Product_Comparable {
 			'name'     => "h_col_border",
 			'selector' => $h_col,
 		] );
-
 		$this->add_control( 'h_typo_heading', [
 			'label'     => __( 'Typography', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
@@ -1282,6 +1282,70 @@ trait Woo_Product_Comparable {
 		$this->end_controls_section();
 	}
 
+	public function init_style_icon_controls( $tbl = '' ) {
+		$icon = "{$tbl} i";
+		$this->start_controls_section( 'section_style_icon', [
+			'label'     => __( 'Fields Icon', 'essential-addons-for-elementor-lite' ),
+			'tab'       => Controls_Manager::TAB_STYLE,
+			'condition' => [
+				'field_icon!' => '',
+			],
+		] );
+		$this->add_responsive_control( "field_icon_size", [
+			'label'      => esc_html__( 'Size', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px'  => [
+					'min'  => 0,
+					'max'  => 550,
+					'step' => 5,
+				],
+				'rem' => [
+					'min'  => 0,
+					'max'  => 10,
+					'step' => .5,
+				],
+			],
+			'selectors'  => [
+				$icon => 'font-size: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_responsive_control( "field_icon_size_margin", [
+			'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'rem',
+			],
+			'selectors'  => [
+				$icon => $this->apply_dim( 'margin' ),
+			],
+		] );
+		$this->add_responsive_control( "field_icon_pos", [
+			'label'      => __( 'Position', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'rem',
+			],
+			'selectors'  => [
+				$icon => "position:relative; top: {{TOP}}{{UNIT}};right: {{RIGHT}}{{UNIT}}; bottom: {{BOTTOM}}{{UNIT}}; left: {{LEFT}}{{UNIT}};",
+			],
+		] );
+		$this->add_control( 'field_icon_size_margin_color', [
+			'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $icon => 'color:{{VALUE}}' ],
+		] );
+		$this->end_controls_section();
+	}
+
 	public static function render_compare_table( $options ) {
 		$products               = $fields = [];
 		$highlighted_product_id = null;
@@ -1328,9 +1392,9 @@ trait Woo_Product_Comparable {
 											printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
 										}
 									} else {
-										if ( !empty( $icon) ) {
-										self::print_icon( $icon );
-									}
+										if ( ! empty( $icon ) ) {
+											self::print_icon( $icon );
+										}
 										if ( 'theme-5' === $theme && $field === 'title' ) {
 											echo '&nbsp;';
 										} else {
@@ -1382,7 +1446,7 @@ trait Woo_Product_Comparable {
                             <th>
                                 <div>
 									<?php
-									if ( !empty( $icon) ) {
+									if ( ! empty( $icon ) ) {
 										self::print_icon( $icon );
 									}
 									echo wp_kses_post( $fields['price'] ) ?>
@@ -1407,7 +1471,7 @@ trait Woo_Product_Comparable {
                             <th>
                                 <div>
 									<?php
-									if ( !empty( $icon) ) {
+									if ( ! empty( $icon ) ) {
 										self::print_icon( $icon );
 									}
 									echo wp_kses_post( $fields['add-to-cart'] ); ?>
@@ -1531,9 +1595,9 @@ trait Woo_Product_Comparable {
 										$product->fields[ $field ][] = $term->name;
 									}
 								}
-								if ( !empty( $product->fields[ $field ]) ) {
+								if ( ! empty( $product->fields[ $field ] ) ) {
 									$product->fields[ $field ] = implode( ', ', $product->fields[ $field ] );
-								}else{
+								} else {
 									$product->fields[ $field ] = '-';
 								}
 							} else {
@@ -1654,8 +1718,8 @@ trait Woo_Product_Comparable {
 		}
 		$product_ids = array_values( $product_ids );
 		$ds          = $this->eael_get_widget_settings( $page_id, $widget_id );
-		$products = self::static_get_products_list( $product_ids, $ds );
-		$fields   = self::static_fields( $product_ids, $ds );
+		$products    = self::static_get_products_list( $product_ids, $ds );
+		$fields      = self::static_fields( $product_ids, $ds );
 
 		$title                  = isset( $ds['table_title'] ) ? $ds['table_title'] : '';
 		$ribbon                 = isset( $ds['ribbon'] ) ? $ds['ribbon'] : '';
@@ -1744,7 +1808,9 @@ trait Woo_Product_Comparable {
 							break;
 						case 'dimension':
 							$dimensions = function_exists( 'wc_format_dimensions' ) ? wc_format_dimensions( $product->get_dimensions( false ) ) : $product->get_dimensions();
-							if(empty( $dimensions)) { $dimensions = '-'; }
+							if ( empty( $dimensions ) ) {
+								$dimensions = '-';
+							}
 							$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $dimensions ) );
 							break;
 						default:
@@ -1758,9 +1824,9 @@ trait Woo_Product_Comparable {
 									}
 								}
 
-								if ( !empty( $product->fields[ $field ]) ) {
+								if ( ! empty( $product->fields[ $field ] ) ) {
 									$product->fields[ $field ] = implode( ', ', $product->fields[ $field ] );
-								}else{
+								} else {
 									$product->fields[ $field ] = '-';
 								}
 							} else {
