@@ -369,7 +369,7 @@ trait Elements
 
                 if ($this->get_extensions_value('eael_ext_reading_progress') != 'yes') {
                     $display_condition = $this->get_extensions_value('eael_ext_reading_progress_global_display_condition');
-                    if (get_post_status($settings_data['post_id']) != 'publish') {
+                    if (get_post_status($this->get_extensions_value('post_id')) != 'publish') {
                         $reading_progress_html = '';
                     } else if ($display_condition == 'pages' && !is_page()) {
                         $reading_progress_html = '';
@@ -454,7 +454,7 @@ trait Elements
 
                 if ($this->get_extensions_value('eael_ext_table_of_content') != 'yes') {
                     $toc_global_display_condition = $this->get_extensions_value('eael_ext_toc_global_display_condition');
-                    if (get_post_status($settings_data['post_id']) != 'publish') {
+                    if (get_post_status($this->get_extensions_value('post_id')) != 'publish') {
                         $table_of_content_html = '';
                     } else if ($toc_global_display_condition == 'pages' && !is_page()) {
                         $table_of_content_html = '';
