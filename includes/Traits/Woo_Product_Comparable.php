@@ -1316,7 +1316,9 @@ trait Woo_Product_Comparable {
 											printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
 										}
 									} else {
+										if ( !empty( $icon) ) {
 										self::print_icon( $icon );
+									}
 										if ( 'theme-5' === $theme && $field === 'title' ) {
 											echo '&nbsp;';
 										} else {
@@ -1368,7 +1370,9 @@ trait Woo_Product_Comparable {
                             <th>
                                 <div>
 									<?php
-									self::print_icon( $icon );
+									if ( !empty( $icon) ) {
+										self::print_icon( $icon );
+									}
 									echo wp_kses_post( $fields['price'] ) ?>
                                 </div>
                             </th>
@@ -1391,7 +1395,7 @@ trait Woo_Product_Comparable {
                             <th>
                                 <div>
 									<?php
-									if ( 'theme-4' === $theme ) {
+									if ( !empty( $icon) ) {
 										self::print_icon( $icon );
 									}
 									echo wp_kses_post( $fields['add-to-cart'] ); ?>
