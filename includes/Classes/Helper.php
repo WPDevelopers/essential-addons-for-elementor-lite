@@ -20,7 +20,7 @@ class Helper
      * @return string
      * @since  4.2.2
      */
-    public static function include_with_variable(string $file_path, array $variables = [])
+    public static function include_with_variable( $file_path, $variables = [])
     {
         if (file_exists($file_path)) {
             extract($variables);
@@ -635,8 +635,7 @@ class Helper
         if ($settings['post_type'] === 'source_dynamic' && is_archive()) {
 
             $data = get_queried_object();
-
-            if ($data) {
+            if (isset($data->post_type)) {
                 $args['post_type'] = $data->post_type;
 
                 $args['tax_query'] = [];
