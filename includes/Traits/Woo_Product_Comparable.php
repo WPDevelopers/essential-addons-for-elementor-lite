@@ -1504,7 +1504,7 @@ trait Woo_Product_Comparable {
 							}
 							$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $weight ) );
 							break;
-						case 'dimensions':
+						case 'dimension':
 							$dimensions = function_exists( 'wc_format_dimensions' ) ? wc_format_dimensions( $product->get_dimensions( false ) ) : $product->get_dimensions();
 							! $dimensions && $dimensions = '-';
 							$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $dimensions ) );
@@ -1519,7 +1519,11 @@ trait Woo_Product_Comparable {
 										$product->fields[ $field ][] = $term->name;
 									}
 								}
-								$product->fields[ $field ] = implode( ', ', $product->fields[ $field ] );
+								if ( !empty( $product->fields[ $field ]) ) {
+									$product->fields[ $field ] = implode( ', ', $product->fields[ $field ] );
+								}else{
+									$product->fields[ $field ] = '-';
+								}
 							} else {
 								do_action( 'eael/wcpc/compare_field_' . $field, [
 									$product,
@@ -1673,6 +1677,7 @@ trait Woo_Product_Comparable {
 
 		$products = apply_filters( 'eael/wcpc/products_ids', $products );
 		$fields   = self::static_fields( $products, $settings );
+
 		global $product;
 		if ( ! empty( $products ) && is_array( $products ) ) {
 			foreach ( $products as $product_id ) {
@@ -1725,9 +1730,9 @@ trait Woo_Product_Comparable {
 							}
 							$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $weight ) );
 							break;
-						case 'dimensions':
+						case 'dimension':
 							$dimensions = function_exists( 'wc_format_dimensions' ) ? wc_format_dimensions( $product->get_dimensions( false ) ) : $product->get_dimensions();
-							! $dimensions && $dimensions = '-';
+							if(empty( $dimensions)) { $dimensions = '-'; }
 							$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $dimensions ) );
 							break;
 						default:
@@ -1740,7 +1745,12 @@ trait Woo_Product_Comparable {
 										$product->fields[ $field ][] = $term->name;
 									}
 								}
-								$product->fields[ $field ] = implode( ', ', $product->fields[ $field ] );
+
+								if ( !empty( $product->fields[ $field ]) ) {
+									$product->fields[ $field ] = implode( ', ', $product->fields[ $field ] );
+								}else{
+									$product->fields[ $field ] = '-';
+								}
 							} else {
 								do_action( 'eael/wcpc/compare_field_' . $field, [
 									$product,
