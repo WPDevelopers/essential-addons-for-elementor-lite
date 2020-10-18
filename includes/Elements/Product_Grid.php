@@ -82,19 +82,6 @@ class Product_Grid extends Widget_Base {
 		return 'https://essential-addons.com/elementor/docs/woocommerce-product-grid/';
 	}
 
-	public function get_style_depends() {
-		return [
-			'font-awesome-5-all',
-			'font-awesome-4-shim',
-		];
-	}
-
-	public function get_script_depends() {
-		return [
-			'font-awesome-4-shim',
-		];
-	}
-
 	public function add_to_cart_button_custom_text( $default ) {
 		if ( $this->is_show_custom_add_to_cart ) {
 			global $product;

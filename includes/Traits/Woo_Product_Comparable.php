@@ -16,6 +16,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 trait Woo_Product_Comparable {
+	public function get_style_depends() {
+		return [
+			'font-awesome-5-all',
+			'font-awesome-4-shim',
+		];
+	}
+
+	public function get_script_depends() {
+		return [
+			'font-awesome-4-shim',
+		];
+	}
 	/**
 	 * Get an array of field types.
 	 * @return array
