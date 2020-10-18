@@ -389,6 +389,7 @@ trait Elements
 
         // Table of Contents
         if ($this->get_settings('table-of-content')) {
+            $toc_status = true;
             if (is_object($document)) {
                 $settings_data = $document->get_settings();
             }
