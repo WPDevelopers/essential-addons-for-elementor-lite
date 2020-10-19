@@ -10,7 +10,7 @@ trait Template_Query
 {
 
     /**
-     * Retrives Template name from file header.
+     * Retrieves Template name from file header.
      *
      * @array
      */
@@ -37,7 +37,7 @@ trait Template_Query
     }
 
     /**
-     * Retrive `Theme Template Directory`
+     * Retrieve `Theme Template Directory`
      *
      * @return string templates directory from the active theme.
      */
@@ -63,7 +63,7 @@ trait Template_Query
     }
 
     /**
-     * Retrives the lite plugin template directory path.
+     * Retrieves the lite plugin template directory path.
      *
      * @return  string  templates directory path of lite version.
      */
@@ -76,17 +76,12 @@ trait Template_Query
     }
 
     /**
-     * Retrives the pro plugin template directory path.
+     * Retrieves the pro plugin template directory path.
      *
      * @return  string  templates directory path of pro version.
      */
     private function get_pro_template_dir()
     {
-        // ensure is_plugin_active() exists (not on frontend)
-        if (!function_exists('is_plugin_active')) {
-            include_once ABSPATH . 'wp-admin/includes/plugin.php';
-        }
-
         if (!apply_filters('eael/is_plugin_active', 'essential-addons-elementor/essential_adons_elementor.php')) {
             return false;
         }
@@ -100,29 +95,29 @@ trait Template_Query
     /**
      * Collecting templates from different sources.
      *
-     * @return array free templates+pro templates.
+     * @return array
      */
     private function get_template_files()
     {
-        if ($this->theme_templates_dir()) {
-            return ['theme' => scandir($this->theme_templates_dir(), 1)];
-        }
-
-        $templates = $pro_templates = [];
+        $templates = [];
 
         if (is_dir($this->get_template_dir())) {
             $templates['free'] = scandir($this->get_template_dir(), 1);
         }
 
-        if (is_dir($this->get_pro_template_dir())) {
-            $pro_templates['pro'] = scandir($this->get_pro_template_dir(), 1);
+        if ($this->theme_templates_dir()) {
+            $templates['theme'] = scandir($this->theme_templates_dir(), 1);
         }
 
-        return array_merge($templates, $pro_templates);
+        if (is_dir($this->get_pro_template_dir())) {
+            $templates['pro'] = scandir($this->get_pro_template_dir(), 1);
+        }
+
+        return $templates;
     }
 
     /**
-     * Retrives template list from template directory.
+     * Retrieves template list from template directory.
      *
      * @return array template list.
      */
@@ -155,6 +150,46 @@ trait Template_Query
         }
 
         return $files;
+    }
+
+    /**
+     * Retrieves template list from template directory.
+     *
+     * @return array template list.
+     */
+    public function get_template_list_for_dropdown()
+    {
+        $files = [];
+        if ($this->get_template_files()) {
+            foreach ($this->get_template_files() as $key => $handler) {
+                foreach ($handler as $handle) {
+                    if (strpos($handle, '.php') !== false) {
+
+                        $path = $this->_get_path($key, $handle);
+                        $template_info = get_file_data($path, $this->template_headers);
+                        $template_name = $template_info['Template Name'];
+
+                        if ($template_name) {
+                            $files[strtolower($template_name)] = sprintf("%s (%s)", ucfirst($template_name), ucfirst($key));
+                        }
+                    }
+                }
+            }
+        }
+        return $files;
+    }
+
+    public function _get_path($key, $handle)
+    {
+        $path = '';
+        if ($key === 'free') {
+            $path = sprintf('%s/%s', $this->get_template_dir(), $handle);
+        } else if ($key === 'pro') {
+            $path = sprintf('%s/%s', $this->get_pro_template_dir(), $handle);
+        } else if ($key === 'theme') {
+            $path = sprintf('%s/%s', $this->theme_templates_dir(), $handle);
+        }
+        return $path;
     }
 
     /**
@@ -191,7 +226,7 @@ trait Template_Query
     }
 
     /**
-     * Retrive template
+     * Retrieve template
      *
      * @param string $filename
      *
