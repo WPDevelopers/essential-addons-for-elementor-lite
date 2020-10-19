@@ -168,10 +168,34 @@ class Image_Accordion extends Widget_Base {
                 'type'        => Controls_Manager::REPEATER,
                 'seperator'   => 'before',
                 'default'     => [
-                    ['eael_accordion_bg' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png'],
-                    ['eael_accordion_bg' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png'],
-                    ['eael_accordion_bg' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png'],
-                    ['eael_accordion_bg' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png'],
+	                [
+		                'eael_accordion_tittle'  => esc_html__( 'Image Accordion #1', 'essential-addons-for-elementor-lite' ),
+		                'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
+		                'eael_accordion_bg' => [
+			                'url' => Utils::get_placeholder_image_src(),
+		                ]
+	                ],
+	                [
+		                'eael_accordion_tittle'  => esc_html__( 'Image Accordion #2', 'essential-addons-for-elementor-lite' ),
+		                'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
+		                'eael_accordion_bg' => [
+			                'url' => Utils::get_placeholder_image_src(),
+		                ]
+	                ],
+	                [
+		                'eael_accordion_tittle'  => esc_html__( 'Image Accordion #3', 'essential-addons-for-elementor-lite' ),
+		                'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
+		                'eael_accordion_bg' => [
+			                'url' => Utils::get_placeholder_image_src(),
+		                ]
+	                ],
+	                [
+		                'eael_accordion_tittle'  => esc_html__( 'Image Accordion #4', 'essential-addons-for-elementor-lite' ),
+		                'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
+		                'eael_accordion_bg' => [
+			                'url' => Utils::get_placeholder_image_src(),
+		                ]
+	                ],
                 ],
                 'fields'      => [
                     [
@@ -196,7 +220,7 @@ class Image_Accordion extends Widget_Base {
                         'label'       => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
                         'type'        => Controls_Manager::TEXT,
                         'label_block' => true,
-                        'default'     => esc_html__( 'Accordion item title', 'essential-addons-for-elementor-lite' ),
+                        'default'     => esc_html__( 'Image Accordion', 'essential-addons-for-elementor-lite' ),
                         'dynamic'     => ['active' => true],
                     ],
                     [
@@ -204,7 +228,7 @@ class Image_Accordion extends Widget_Base {
                         'label'       => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
                         'type'        => Controls_Manager::WYSIWYG,
                         'label_block' => true,
-                        'default'     => esc_html__( 'Accordion content goes here!', 'essential-addons-for-elementor-lite' ),
+                        'default'     => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
                     ],
                     [
                         'name'          => 'eael_accordion_title_link',
