@@ -127,7 +127,7 @@ class Product_Grid extends Widget_Base {
             ]
         );
 
-        if (!apply_filters('eael/active_plugins', 'woocommerce/woocommerce.php')) {
+        if (!apply_filters('eael/is_plugin_active', 'woocommerce/woocommerce.php')) {
             $this->add_control(
                 'ea_product_grid_woo_required',
                 [
@@ -871,7 +871,7 @@ class Product_Grid extends Widget_Base {
     {
         $settings = $this->get_settings_for_display();
 
-        if (!apply_filters('eael/active_plugins', 'woocommerce/woocommerce.php')) {
+        if (!apply_filters('eael/is_plugin_active', 'woocommerce/woocommerce.php')) {
             return;
         }
 
