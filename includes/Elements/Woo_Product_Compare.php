@@ -107,19 +107,8 @@ class Woo_Product_Compare extends Widget_Base {
 		} ) : [];
 		$products               = $this->get_products_list( $product_ids );
 		$fields                 = $this->fields();
-		$title                  = isset( $ds['table_title'] ) ? $ds['table_title'] : '';
-		$ribbon                 = isset( $ds['ribbon'] ) ? $ds['ribbon'] : '';
-		$repeat_price           = isset( $ds['repeat_price'] ) ? $ds['repeat_price'] : '';
-		$repeat_add_to_cart     = isset( $ds['repeat_add_to_cart'] ) ? $ds['repeat_add_to_cart'] : '';
-		$linkable_img     = isset( $ds['linkable_img'] ) ? $ds['linkable_img'] : '';
-		$highlighted_product_id = ! empty( $ds['highlighted_product_id'] ) ? $ds['highlighted_product_id'] : null;
-		$icon                   = ! empty( $ds['field_icon'] ) && ! empty( $ds['field_icon']['value'] ) ? $ds['field_icon'] : [];
-		$theme_wrap_class       = $theme = '';
-		if ( ! empty( $ds['theme'] ) ) {
-			$theme            = esc_attr( $ds['theme'] );
-			$theme_wrap_class = " custom {$theme}";
-		}
-		$this->render_compare_table( compact( 'products', 'fields', 'title', 'highlighted_product_id', 'theme_wrap_class', 'theme', 'ribbon', 'repeat_price', 'repeat_add_to_cart', 'icon', 'linkable_img' ) );
+
+		$this->render_compare_table( compact( 'products', 'fields', 'ds' ) );
 	}
 
 }

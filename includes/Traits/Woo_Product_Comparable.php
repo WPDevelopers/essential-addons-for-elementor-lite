@@ -1351,22 +1351,40 @@ trait Woo_Product_Comparable {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * It renders product compare table and it accepts an argument with 3 keys, products, fields and ds. Explanation is given below.
+	 *
+	 * @param array $options  {
+	 *
+	 * @var array   $products list of WC_product object
+	 * @var array   $fields   list of WC_Product feature fields
+	 * @var array   $ds       Widget's display settings array
+	 * }
+	 */
 	public static function render_compare_table( $options ) {
-		$products               = $fields = [];
-		$highlighted_product_id = null;
-		$theme_wrap_class       = $theme = $title = $ribbon = $repeat_price = $repeat_add_to_cart = $linkable_img = '';
+		$products = $fields = $ds = [];
 		extract( $options );
+		$title                  = isset( $ds['table_title'] ) ? $ds['table_title'] : '';
+		$ribbon                 = isset( $ds['ribbon'] ) ? $ds['ribbon'] : '';
+		$repeat_price           = isset( $ds['repeat_price'] ) ? $ds['repeat_price'] : '';
+		$repeat_add_to_cart     = isset( $ds['repeat_add_to_cart'] ) ? $ds['repeat_add_to_cart'] : '';
+		$linkable_img           = isset( $ds['linkable_img'] ) ? $ds['linkable_img'] : '';
+		$highlighted_product_id = ! empty( $ds['highlighted_product_id'] ) ? $ds['highlighted_product_id'] : null;
+		$icon                   = ! empty( $ds['field_icon'] ) && ! empty( $ds['field_icon']['value'] ) ? $ds['field_icon'] : [];
+		$theme_wrap_class       = $theme = '';
+		if ( ! empty( $ds['theme'] ) ) {
+			$theme            = esc_attr( $ds['theme'] );
+			$theme_wrap_class = " custom {$theme}";
+		}
 		do_action( 'eael/wcpc/before_content_wrapper' ); ?>
         <div class="eael-wcpc-wrapper woocommerce <?php echo esc_attr( $theme_wrap_class ); ?>">
 			<?php do_action( 'eael/wcpc/before_main_table' ); ?>
             <table class="eael-wcpc-table table-responsive">
                 <tbody>
 				<?php if ( empty( $products ) ) { ?>
-
                     <tr class="no-products">
                         <td><?php esc_html_e( 'No products added to compare.', 'essential-addons-for-elementor-lite' ) ?></td>
                     </tr>
-
 				<?php } else {
 
 					// for product grid, show remove button
@@ -1413,8 +1431,9 @@ trait Woo_Product_Comparable {
 							<?php
 							$index = 0;
 							/**
-							 * @var int $product_id
-                             * @var WC_Product $product */
+							 * @var int        $product_id
+							 * @var WC_Product $product
+							 */
 							foreach ( $products as $product_id => $product ) {
 								$is_highlighted = $product_id === $highlighted_product_id;
 								$highlighted    = $is_highlighted ? 'featured' : '';
@@ -1429,7 +1448,7 @@ trait Woo_Product_Comparable {
 	                                    }
 
 	                                    if ( 'yes' === $linkable_img ) {
-                                            printf( "<a href='%s'>", esc_url( $product->get_permalink()));
+		                                    printf( "<a href='%s'>", esc_url( $product->get_permalink() ) );
 	                                    }
                                     }
 
@@ -1737,21 +1756,8 @@ trait Woo_Product_Comparable {
 		$ds          = $this->eael_get_widget_settings( $page_id, $widget_id );
 		$products    = self::static_get_products_list( $product_ids, $ds );
 		$fields      = self::static_fields( $product_ids, $ds );
-
-		$title                  = isset( $ds['table_title'] ) ? $ds['table_title'] : '';
-		$ribbon                 = isset( $ds['ribbon'] ) ? $ds['ribbon'] : '';
-		$repeat_price           = isset( $ds['repeat_price'] ) ? $ds['repeat_price'] : '';
-		$repeat_add_to_cart     = isset( $ds['repeat_add_to_cart'] ) ? $ds['repeat_add_to_cart'] : '';
-		$linkable_img     = isset( $ds['linkable_img'] ) ? $ds['linkable_img'] : '';
-		$highlighted_product_id = ! empty( $ds['highlighted_product_id'] ) ? $ds['highlighted_product_id'] : null;
-		$icon                   = ! empty( $ds['field_icon'] ) && ! empty( $ds['field_icon']['value'] ) ? $ds['field_icon'] : [];
-		$theme_wrap_class       = $theme = '';
-		if ( ! empty( $ds['theme'] ) ) {
-			$theme            = esc_attr( $ds['theme'] );
-			$theme_wrap_class = " custom {$theme}";
-		}
 		ob_start();
-		self::render_compare_table( compact( 'products', 'fields', 'title', 'highlighted_product_id', 'theme_wrap_class', 'theme', 'ribbon', 'repeat_price', 'repeat_add_to_cart', 'icon', 'linkable_img' ) );
+		self::render_compare_table( compact( 'products', 'fields', 'ds' ) );
 		$table = ob_get_clean();
 		wp_send_json_success( [ 'compare_table' => $table ] );
 
