@@ -56,7 +56,7 @@ trait Enqueue
 
     public function enqueue_scripts()
     {
-        if (!apply_filters('eael/active_plugins', 'elementor/elementor.php')) {
+        if (!apply_filters('eael/is_plugin_active', 'elementor/elementor.php')) {
             return;
         }
 
