@@ -10,6 +10,7 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
+use \Elementor\Utils;
 use \Elementor\Widget_Base;
 
 class Image_Accordion extends Widget_Base {
@@ -186,9 +187,9 @@ class Image_Accordion extends Widget_Base {
                         'label'       => esc_html__( 'Background Image', 'essential-addons-for-elementor-lite' ),
                         'type'        => Controls_Manager::MEDIA,
                         'label_block' => true,
-                        'default'     => [
-                            'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png',
-                        ],
+	                    'default'               => [
+		                    'url' => Utils::get_placeholder_image_src(),
+	                    ],
                     ],
                     [
                         'name'        => 'eael_accordion_tittle',
@@ -328,7 +329,7 @@ class Image_Accordion extends Widget_Base {
             [
                 'label'     => esc_html__( 'Overlay Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => 'rgba(0, 0, 0, .3)',
+                'default'   => '#dce1f1c2',
                 'selectors' => [
                     '{{WRAPPER}} .eael-img-accordion a:after' => 'background-color: {{VALUE}};',
                 ],
@@ -340,7 +341,7 @@ class Image_Accordion extends Widget_Base {
             [
                 'label'     => esc_html__( 'Hover Overlay Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => 'rgba(0, 0, 0, .5)',
+                'default'   => '#8646e5d1',
                 'selectors' => [
                     '{{WRAPPER}} .eael-img-accordion a:hover::after'         => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-img-accordion a.overlay-active:after' => 'background-color: {{VALUE}};',
