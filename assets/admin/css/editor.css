@@ -149,7 +149,7 @@
 .elementor-control-eael_post_block_tiled_preset_5_note .elementor-control-title,
 .elementor-control-eael_post_block_tiled_preset_2_note .elementor-control-title,
 .elementor-control-eael_post_block_tiled_preset_4_note .elementor-control-title {
-	background-color: #f3fcff;
+	background-color: transparent;
 	padding: 15px;
 	border-left: 3px solid #71d7f7;
 	position: relative;
