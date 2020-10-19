@@ -1226,10 +1226,13 @@ class Post_Grid extends Widget_Base
                 $query = new \WP_Query( $args );
 
                 if ( $query->have_posts() ) {
+                    $template = $this->get_template($settings['eael_dynamic_template_Layout']);
                     while ( $query->have_posts() ) {
                         $query->the_post();
 
-                        include($this->get_template('default'));
+                        if(file_exists($template)){
+                            include($template);
+                        }
                     }
                 }else {
                     _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
