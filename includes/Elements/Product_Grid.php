@@ -242,6 +242,16 @@ class Product_Grid extends Widget_Base {
         );
 
         $this->add_control(
+            'eael_dynamic_template_Layout',
+            [
+                'label'   => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'default',
+                'options' => $this->get_template_list_for_dropdown(),
+            ]
+        );
+
+        $this->add_control(
             'eael_product_grid_style_preset',
             [
                 'label'   => esc_html__('Style Preset', 'essential-addons-for-elementor-lite'),
@@ -969,12 +979,13 @@ class Product_Grid extends Widget_Base {
         echo '<ul class="products">';
         
             $query = new \WP_Query($args);
-
+            $template = $this->get_template($settings['eael_dynamic_template_Layout']);
             if ($query->have_posts()) {
                 while ($query->have_posts()) {
                     $query->the_post();
-
-                    include($this->get_template('default'));
+                    if(file_exists($template)){
+                        include($template);
+                    }
                 }
             } else {
                 _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
