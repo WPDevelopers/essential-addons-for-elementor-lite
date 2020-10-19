@@ -121,10 +121,8 @@ trait Twitter_Feed
                     $html .= '</div>
 
                     <div class="eael-twitter-feed-item-content">';
-                        if (isset($item['entities']['urls'][0]['url'])) {
-                            $html .= '<p>' . substr(str_replace($item['entities']['urls'][0]['url'], '', $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . $delimeter . '</p>';
-                        }
-
+                            $link_free_text = isset($item['entities']['urls'][0]['url'])?str_replace($item['entities']['urls'][0]['url'], '', $item['full_text']):$item['full_text'];
+                            $html .= '<p>' . substr( $link_free_text, 0, $settings['eael_twitter_feed_content_length']) . $delimeter . '</p>';
                         if ($settings['eael_twitter_feed_show_read_more'] == 'true') {
                             $html .= '<a href="//twitter.com/' . $item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">Read More <i class="fas fa-angle-double-right"></i></a>';
                         }

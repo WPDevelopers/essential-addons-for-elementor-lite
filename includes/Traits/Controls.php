@@ -13,7 +13,7 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
-use \Essential_Addons_Elementor\Classes\Helper;
+use \Essential_Addons_Elementor\Classes\Helper as ControlsHelper;
 
 trait Controls
 {
@@ -23,7 +23,7 @@ trait Controls
      */
     public static function query($wb)
     {
-        $post_types = Helper::get_post_types();
+        $post_types = ControlsHelper::get_post_types();
         $post_types['by_id'] = __('Manual Selection', 'essential-addons-for-elementor-lite');
 
         if ($wb->get_name() !== 'eael-dynamic-filterable-gallery' && $wb->get_name() !== 'eael-post-list') {
@@ -88,7 +88,7 @@ trait Controls
             [
                 'label' => __('Search & Select', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT2,
-                'options' => Helper::get_post_list(),
+                'options' => ControlsHelper::get_post_list(),
                 'label_block' => true,
                 'multiple' => true,
                 'condition' => [
@@ -104,7 +104,7 @@ trait Controls
                 'type' => Controls_Manager::SELECT2,
                 'multiple' => true,
                 'default' => [],
-                'options' => Helper::get_authors_list(),
+                'options' => ControlsHelper::get_authors_list(),
                 'condition' => [
                     'post_type!' => ['by_id', 'source_dynamic'],
                 ],
@@ -137,7 +137,7 @@ trait Controls
             [
                 'label' => __('Exclude', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT2,
-                'options' => Helper::get_post_list(),
+                'options' => ControlsHelper::get_post_list(),
                 'label_block' => true,
                 'post_type' => '',
                 'multiple' => true,
@@ -170,7 +170,7 @@ trait Controls
             [
                 'label' => __('Order By', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'options' => Helper::get_post_orderby_options(),
+                'options' => ControlsHelper::get_post_orderby_options(),
                 'default' => 'date',
 
             ]
@@ -206,10 +206,10 @@ trait Controls
             ]
         );
 
-        $default_multiple_kb = Helper::get_betterdocs_multiple_kb_status();
+        $default_multiple_kb = ControlsHelper::get_betterdocs_multiple_kb_status();
 
         if ($default_multiple_kb) {
-            $multiple_kb_terms = Helper::get_multiple_kb_terms(true, false);
+            $multiple_kb_terms = ControlsHelper::get_multiple_kb_terms(true, false);
             $default_slug = count($multiple_kb_terms) > 0 ? array_keys($multiple_kb_terms)[0] : '';
 
             $wb->add_control(
@@ -245,7 +245,7 @@ trait Controls
                 'label' => __('Include', 'essential-addons-for-elementor-lite'),
                 'label_block' => true,
                 'type' => Controls_Manager::SELECT2,
-                'options' => Helper::get_terms_list('doc_category', 'term_id'),
+                'options' => ControlsHelper::get_terms_list('doc_category', 'term_id'),
                 'multiple' => true,
                 'default' => [],
             ]
@@ -256,7 +256,7 @@ trait Controls
             [
                 'label' => __('Exclude', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT2,
-                'options' => Helper::get_terms_list('doc_category', 'term_id'),
+                'options' => ControlsHelper::get_terms_list('doc_category', 'term_id'),
                 'label_block' => true,
                 'post_type' => '',
                 'multiple' => true,
@@ -348,7 +348,7 @@ trait Controls
                 [
                     'label' => __('Order By', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
-                    'options' => Helper::get_post_orderby_options(),
+                    'options' => ControlsHelper::get_post_orderby_options(),
                     'default' => 'date',
                 ]
             );
@@ -1615,7 +1615,7 @@ trait Controls
                 [
                     'label' => esc_html__('Table ID', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
-                    'options' => Helper::get_ninja_tables_list(),
+                    'options' => ControlsHelper::get_ninja_tables_list(),
                     'condition' => [
                         'ea_adv_data_table_source' => 'ninja',
                     ],
