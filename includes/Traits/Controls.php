@@ -1041,7 +1041,7 @@ trait Controls
             $wb->start_controls_section(
                 'eael_section_read_more_btn',
                 [
-                    'label' => __('Read More Button Style', 'essential-addons-for-elementor-lite'),
+                    'label' => __('Read More Button', 'essential-addons-for-elementor-lite'),
                     'tab' => Controls_Manager::TAB_STYLE,
                     'condition' => [
                         'eael_show_read_more_button' => 'yes',
