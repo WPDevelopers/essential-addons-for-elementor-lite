@@ -395,6 +395,16 @@ trait Controls
             ]
         );
 
+        $wb->add_control(
+            'eael_dynamic_template_Layout',
+            [
+                'label'   => esc_html__('Template Layout', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'default',
+                'options' => $wb->get_template_list_for_dropdown(),
+            ]
+        );
+
         if ('eael-post-grid' === $wb->get_name()) {
             $wb->add_responsive_control(
                 'eael_post_grid_columns',
