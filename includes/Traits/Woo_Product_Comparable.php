@@ -1288,7 +1288,7 @@ trait Woo_Product_Comparable {
 			'label'     => __( 'Fields Icon', 'essential-addons-for-elementor-lite' ),
 			'tab'       => Controls_Manager::TAB_STYLE,
 			'condition' => [
-				'field_icon!' => '',
+				'field_icon[value]!' => '',
 			],
 		] );
 		$this->add_responsive_control( "field_icon_size", [
