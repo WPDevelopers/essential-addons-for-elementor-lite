@@ -214,6 +214,11 @@ trait Woo_Product_Comparable {
 			'description' => __( 'Repeat the "Add to cart" field at the end of the table', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::SWITCHER,
 		] );
+		$this->add_control( 'linkable_img', [
+			'label'       => __( 'Make Product Image Linkable', 'essential-addons-for-elementor-lite' ),
+			'description' => __( 'You can link the product image to product details page', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::SWITCHER,
+		] );
 		$this->add_control( 'field_icon', [
 			'label'   => __( 'Fields Icon', 'elementor' ),
 			'type'    => Controls_Manager::ICONS,
@@ -1349,7 +1354,7 @@ trait Woo_Product_Comparable {
 	public static function render_compare_table( $options ) {
 		$products               = $fields = [];
 		$highlighted_product_id = null;
-		$theme_wrap_class       = $theme = $title = $ribbon = $repeat_price = $repeat_add_to_cart = '';
+		$theme_wrap_class       = $theme = $title = $ribbon = $repeat_price = $repeat_add_to_cart = $linkable_img = '';
 		extract( $options );
 		do_action( 'eael/wcpc/before_content_wrapper' ); ?>
         <div class="eael-wcpc-wrapper woocommerce <?php echo esc_attr( $theme_wrap_class ); ?>">
@@ -1407,6 +1412,9 @@ trait Woo_Product_Comparable {
 
 							<?php
 							$index = 0;
+							/**
+							 * @var int $product_id
+                             * @var WC_Product $product */
 							foreach ( $products as $product_id => $product ) {
 								$is_highlighted = $product_id === $highlighted_product_id;
 								$highlighted    = $is_highlighted ? 'featured' : '';
@@ -1419,9 +1427,18 @@ trait Woo_Product_Comparable {
 	                                    if ( 'theme-4' === $theme && $is_highlighted && $ribbon ) {
 		                                    printf( '<span class="ribbon">%s</span>', esc_html( $ribbon ) );
 	                                    }
+
+	                                    if ( 'yes' === $linkable_img ) {
+                                            printf( "<a href='%s'>", esc_url( $product->get_permalink()));
+	                                    }
                                     }
+
                                     echo ! empty( $product->fields[ $field ] ) ? $product->fields[ $field ] : '&nbsp;';
+
                                     if ( $field === 'image' ) {
+	                                    if ( 'yes' === $linkable_img ) {
+		                                    echo '</a>';
+	                                    }
 	                                    if ( 'theme-4' === $theme ) {
 		                                    echo ! empty( $product->fields['title'] ) ? sprintf( "<p class='product-title'>%s</p>", esc_html( $product->fields['title'] ) ) : '&nbsp;';
 		                                    echo ! empty( $product->fields['price'] ) ? wp_kses_post( $product->fields['price'] ) : '&nbsp;';
@@ -1725,6 +1742,7 @@ trait Woo_Product_Comparable {
 		$ribbon                 = isset( $ds['ribbon'] ) ? $ds['ribbon'] : '';
 		$repeat_price           = isset( $ds['repeat_price'] ) ? $ds['repeat_price'] : '';
 		$repeat_add_to_cart     = isset( $ds['repeat_add_to_cart'] ) ? $ds['repeat_add_to_cart'] : '';
+		$linkable_img     = isset( $ds['linkable_img'] ) ? $ds['linkable_img'] : '';
 		$highlighted_product_id = ! empty( $ds['highlighted_product_id'] ) ? $ds['highlighted_product_id'] : null;
 		$icon                   = ! empty( $ds['field_icon'] ) && ! empty( $ds['field_icon']['value'] ) ? $ds['field_icon'] : [];
 		$theme_wrap_class       = $theme = '';
@@ -1733,7 +1751,7 @@ trait Woo_Product_Comparable {
 			$theme_wrap_class = " custom {$theme}";
 		}
 		ob_start();
-		self::render_compare_table( compact( 'products', 'fields', 'title', 'highlighted_product_id', 'theme_wrap_class', 'theme', 'ribbon', 'repeat_price', 'repeat_add_to_cart', 'icon' ) );
+		self::render_compare_table( compact( 'products', 'fields', 'title', 'highlighted_product_id', 'theme_wrap_class', 'theme', 'ribbon', 'repeat_price', 'repeat_add_to_cart', 'icon', 'linkable_img' ) );
 		$table = ob_get_clean();
 		wp_send_json_success( [ 'compare_table' => $table ] );
 
