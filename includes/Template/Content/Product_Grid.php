@@ -38,21 +38,30 @@ trait Product_Grid {
                     </li>
 					<?php
 				} else if ( $settings['eael_product_grid_style_preset'] == 'eael-product-overlay' ) {
-					echo '<li class="product">
+				    ?>
+					<li class="product">
                         <div class="overlay">
-                            ' . $product->get_image( 'woocommerce_thumbnail' ) . '
+                            <?php echo $product->get_image( 'woocommerce_thumbnail' ); ?>
                             <div class="button-wrap clearfix">
-                                <a href="' . $product->get_permalink() . '" class="product-link"><span class="fas fa-link"></span></a>';
-					woocommerce_template_loop_add_to_cart();
-					self::print_compare_button( $product->get_id() );
-
-					echo '</div>
+                                <a href="<?php echo esc_url( $product->get_permalink()); ?>" class="product-link"><span class="fas fa-link"></span></a>';
+                                <?php
+                                woocommerce_template_loop_add_to_cart();
+                                self::print_compare_button( $product->get_id() );
+                                ?>
+					        </div>
                         </div>
-                        <h2 class="woocommerce-loop-product__title">' . $product->get_title() . '</h2>
-                        ' . ( $settings['eael_product_grid_rating'] != 'yes' ? '' : wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) ) . '
-                        ' . ( $product->is_on_sale() ? '<span class="onsale">' . __( 'Sale!', 'essential-addons-for-elementor-lite' ) . '</span>' : '' ) . '
-                        <span class="price">' . $product->get_price_html() . '</span>
-                    </li>';
+                        <h2 class="woocommerce-loop-product__title"><?php echo esc_html( $product->get_title()); ?></h2>
+                        <?php
+                        if ($settings['eael_product_grid_rating'] === 'yes') {
+                            echo wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() );
+                        }
+                        if ($product->is_on_sale()){
+                            printf( '<span class="onsale">%s</span>', __( 'Sale!', 'essential-addons-for-elementor-lite' ));
+                        }
+                        ?>
+                        <span class="price"> <?php echo $product->get_price_html(); ?> </span>
+                    </li>
+                    <?php
 				} else {
 					add_action( 'woocommerce_after_shop_loop_item', function (){
 					    global $product;
