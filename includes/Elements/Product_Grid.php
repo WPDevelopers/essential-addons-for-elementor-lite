@@ -14,11 +14,12 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Plugin;
 use Elementor\Widget_Base;
+use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Template\Content\Product_Grid as Product_Grid_Trait;
 use Essential_Addons_Elementor\Traits\Helper;
 use Essential_Addons_Elementor\Traits\Template_Query;
 use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
-use Essential_Addons_Elementor\Classes\Helper as HelperClass;
+
 class Product_Grid extends Widget_Base {
 	use Woo_Product_Comparable;
 	use Helper;
@@ -213,12 +214,12 @@ class Product_Grid extends Widget_Base {
 
 
 		$this->add_control( 'eael_product_grid_categories', [
-				'label'       => esc_html__( 'Product Categories', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::SELECT2,
-				'label_block' => true,
-				'multiple'    => true,
-				'options'     => HelperClass::get_terms_list( 'product_cat', 'slug' ),
-			] );
+			'label'       => esc_html__( 'Product Categories', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::SELECT2,
+			'label_block' => true,
+			'multiple'    => true,
+			'options'     => HelperClass::get_terms_list( 'product_cat', 'slug' ),
+		] );
 
 		$this->add_control( 'eael_product_grid_style_preset', [
 			'label'   => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite' ),
@@ -237,6 +238,11 @@ class Product_Grid extends Widget_Base {
 			'type'         => Controls_Manager::SWITCHER,
 			'return_value' => 'yes',
 			'default'      => 'yes',
+		] );
+
+		$this->add_control( 'show_compare', [
+			'label' => esc_html__( 'Show Product Compare?', 'essential-addons-for-elementor-lite' ),
+			'type'  => Controls_Manager::SWITCHER,
 		] );
 
 		$this->end_controls_section();
