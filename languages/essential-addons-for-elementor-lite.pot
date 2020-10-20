@@ -6951,11 +6951,11 @@ msgstr ""
 msgid "%s ago"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:56, ../includes/Traits/Login_Registration.php:199, ../includes/Traits/Woo_Product_Comparable.php:1712
+#: ../includes/Traits/Login_Registration.php:56, ../includes/Traits/Login_Registration.php:199, ../includes/Traits/Woo_Product_Comparable.php:1715
 msgid "Page ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:63, ../includes/Traits/Login_Registration.php:204, ../includes/Traits/Woo_Product_Comparable.php:1717
+#: ../includes/Traits/Login_Registration.php:63, ../includes/Traits/Login_Registration.php:204, ../includes/Traits/Woo_Product_Comparable.php:1720
 msgid "Widget ID is missing"
 msgstr ""
 
@@ -6963,7 +6963,7 @@ msgstr ""
 msgid "Insecure form submitted without security token"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:87, ../includes/Traits/Login_Registration.php:190, ../includes/Traits/Woo_Product_Comparable.php:1750
+#: ../includes/Traits/Login_Registration.php:87, ../includes/Traits/Login_Registration.php:190, ../includes/Traits/Woo_Product_Comparable.php:1753
 msgid "Security token did not match"
 msgstr ""
 
@@ -7359,15 +7359,15 @@ msgstr ""
 msgid "No products added to compare."
 msgstr ""
 
-#: ../includes/Traits/Woo_Product_Comparable.php:1602, ../includes/Traits/Woo_Product_Comparable.php:1816
+#: ../includes/Traits/Woo_Product_Comparable.php:1602, ../includes/Traits/Woo_Product_Comparable.php:1819
 msgid "In stock"
 msgstr ""
 
-#: ../includes/Traits/Woo_Product_Comparable.php:1701
+#: ../includes/Traits/Woo_Product_Comparable.php:1703
 msgid "Compare"
 msgstr ""
 
-#: ../includes/Traits/Woo_Product_Comparable.php:1722
+#: ../includes/Traits/Woo_Product_Comparable.php:1725
 msgid "Product ID is missing"
 msgstr ""
 
@@ -7563,11 +7563,11 @@ msgstr ""
 msgid "Layout 2"
 msgstr ""
 
-#: ../includes/Template/Content/Product_Grid.php:62
+#: ../includes/Template/Content/Product_Grid.php:75
 msgid "No products found!"
 msgstr ""
 
-#: ../includes/Template/Content/Product_Grid.php:53, ../includes/Template/Content/Product_Grid.php:29, ../includes/Template/Eicon-Woocommerce/default.php:34, ../includes/Template/Eicon-Woocommerce/default.php:18
+#: ../includes/Template/Content/Product_Grid.php:59, ../includes/Template/Content/Product_Grid.php:29, ../includes/Template/Eicon-Woocommerce/default.php:34, ../includes/Template/Eicon-Woocommerce/default.php:18
 msgid "Sale!"
 msgstr ""
 
