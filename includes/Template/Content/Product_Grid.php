@@ -54,8 +54,12 @@ trait Product_Grid {
                         <span class="price">' . $product->get_price_html() . '</span>
                     </li>';
 				} else {
+					add_action( 'woocommerce_after_shop_loop_item', function (){
+					    global $product;
+					    if (!$product) return;
+						self::print_compare_button( $product->get_id() );
+					});
 					wc_get_template_part( 'content', 'product' );
-					self::print_compare_button( $product->get_id() );
 				}
 			}
 		} else {
