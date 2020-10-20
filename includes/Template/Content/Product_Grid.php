@@ -46,7 +46,7 @@ trait Product_Grid {
                                 <a href="<?php echo esc_url( $product->get_permalink()); ?>" class="product-link"><span class="fas fa-link"></span></a>';
                                 <?php
                                 woocommerce_template_loop_add_to_cart();
-                                self::print_compare_button( $product->get_id() );
+                                self::print_compare_button( $product->get_id(), 'icon' );
                                 ?>
 					        </div>
                         </div>

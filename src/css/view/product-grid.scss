@@ -274,7 +274,7 @@
                             text-align: center;
                             transform: translateY(-50%);
                         }
-
+                        .eael-wc-compare,
                         .product-link,
                         .add_to_cart_button,
                         .added_to_cart {
@@ -423,9 +423,12 @@
                         font-size: 14px;
                         margin: 10px auto;
                     }
-
+                    .eael-wc-compare{
+                        padding: 5px !important;
+                    }
                     &:hover {
                         .overlay {
+                            .eael-wc-compare,
                             a,
                             .add_to_cart_button {
                                 opacity: 1;
