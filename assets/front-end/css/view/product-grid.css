@@ -620,8 +620,10 @@
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product {
   border: 1px solid transparent;
 }
+.eael-product-grid.eael-product-reveal .woocommerce ul.products li.product .eael-wc-compare,
 .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product .button.add_to_cart_button,
 .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product a.added_to_cart,
+.eael-post-grid.eael-product-reveal .woocommerce ul.products li.product .eael-wc-compare,
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product .button.add_to_cart_button,
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product a.added_to_cart {
   visibility: hidden;
@@ -633,8 +635,10 @@
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product:hover {
   border: 1px solid #eee;
 }
+.eael-product-grid.eael-product-reveal .woocommerce ul.products li.product:hover .eael-wc-compare,
 .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product:hover .button.add_to_cart_button,
 .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product:hover a.added_to_cart,
+.eael-post-grid.eael-product-reveal .woocommerce ul.products li.product:hover .eael-wc-compare,
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product:hover .button.add_to_cart_button,
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product:hover a.added_to_cart {
   visibility: visible;
