@@ -210,7 +210,7 @@
             ul.products {
                 li.product {
                     border: 1px solid transparent;
-
+                    .eael-wc-compare,
                     .button.add_to_cart_button,
                     a.added_to_cart {
                         visibility: hidden;
@@ -219,7 +219,7 @@
 
                     &:hover {
                         border: 1px solid #eee;
-
+                        .eael-wc-compare,
                         .button.add_to_cart_button,
                         a.added_to_cart {
                             visibility: visible;
