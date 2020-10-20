@@ -1208,7 +1208,7 @@ trait Controls
         $wb->start_controls_section(
             'eael_section_load_more_btn',
             [
-                'label' => __('Load More Button Style', 'essential-addons-for-elementor-lite'),
+                'label' => __('Load More Button', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_load_more' => ['yes', '1', 'true'],
