@@ -73,6 +73,16 @@ class Content_Ticker extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_dynamic_template_Layout',
+            [
+                'label'   => esc_html__('Template Layout', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'dynamic',
+                'options' => $this->get_template_list_for_dropdown(),
+            ]
+        );
+
         $ticker_options = apply_filters(
             'eael_ticker_options',
             [
@@ -804,26 +814,23 @@ class Content_Ticker extends Widget_Base
                     <div class="swiper-wrapper">';
 
                         if ('dynamic' === $settings['eael_ticker_type']) {
-                            if (\file_exists($this->get_template($settings['eael_ticker_type']))) {
+
+                            if (\file_exists($this->get_template($settings['eael_dynamic_template_Layout']))) {
                                 $query = new \WP_Query($args);
-                
                                 if ($query->have_posts()) {
                                     while ($query->have_posts()) {
                                         $query->the_post();
-                
-                                        include $this->get_template($settings['eael_ticker_type']);
+                                        include $this->get_template($settings['eael_dynamic_template_Layout']);
                                     }
-
                                     wp_reset_postdata();
                                 }
-                
                             } else {
                                 echo '<div class="swiper-slide"><a href="#" class="ticker-content">' . __('No content found!', 'essential-addons-for-elementor-lite') . '</a></div>';
                             }
                         } elseif ('custom' === $settings['eael_ticker_type']) {
-                            if (\file_exists($this->get_template($settings['eael_ticker_type']))) {
+                            if (\file_exists($this->get_template($settings['eael_dynamic_template_Layout']))) {
                                 foreach ($settings['eael_ticker_custom_contents'] as $content) {
-                                    echo Helper::include_with_variable($this->get_template($settings['eael_ticker_type']), ['content' => $content['eael_ticker_custom_content'], 'link' => $content['eael_ticker_custom_content_link']]);
+                                    echo Helper::include_with_variable($this->get_template($settings['eael_dynamic_template_Layout']), ['content' => $content['eael_ticker_custom_content'], 'link' => $content['eael_ticker_custom_content_link']]);
                                 }
                             }
                         }

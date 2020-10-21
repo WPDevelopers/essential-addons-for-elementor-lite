@@ -974,20 +974,23 @@ class Product_Grid extends Widget_Base {
         echo '<div class="woocommerce">';
 
         echo '<ul class="products">';
-        
-            $query = new \WP_Query($args);
-            $template = $this->get_template($settings['eael_dynamic_template_Layout']);
-            if ($query->have_posts()) {
-                while ($query->have_posts()) {
-                    $query->the_post();
-                    if(file_exists($template)){
-                        include($template);
+
+            $template = $this->get_template( $settings[ 'eael_dynamic_template_Layout' ] );
+            if ( file_exists( $template ) ) {
+                $query = new \WP_Query( $args );
+                if ( $query->have_posts() ) {
+                    while ( $query->have_posts() ) {
+                        $query->the_post();
+                        include( $template );
                     }
+
+                } else {
+                    _e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
                 }
+                wp_reset_postdata();
             } else {
-                _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                _e( '<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
             }
-            wp_reset_postdata();
 
         echo '</ul>';
 
