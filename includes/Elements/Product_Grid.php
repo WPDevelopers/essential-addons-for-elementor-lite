@@ -807,6 +807,7 @@ class Product_Grid extends Widget_Base {
 			'eael_product_grid_column'       => $settings['eael_product_grid_column'],
 			'show_load_more'                 => $settings['show_load_more'],
 			'show_load_more_text'            => $settings['show_load_more_text'],
+			'show_compare'                   => isset( $settings['show_compare']) ? $settings['show_compare'] : '',
 		];
 
 		// add to custom button text

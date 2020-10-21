@@ -33,7 +33,9 @@ trait Product_Grid {
                         </a>
 						<?php
 						woocommerce_template_loop_add_to_cart();
-						self::print_compare_button( $product->get_id() );
+						if ( isset( $settings['show_compare']) && 'yes' === $settings['show_compare'] ) {
+							self::print_compare_button( $product->get_id() );
+						}
 						?>
                     </li>
 					<?php
@@ -46,7 +48,9 @@ trait Product_Grid {
                                 <a href="<?php echo esc_url( $product->get_permalink()); ?>" class="product-link"><span class="fas fa-link"></span></a>';
                                 <?php
                                 woocommerce_template_loop_add_to_cart();
-                                self::print_compare_button( $product->get_id(), 'icon' );
+                                if ( isset( $settings['show_compare']) && 'yes' === $settings['show_compare'] ) {
+	                                self::print_compare_button( $product->get_id() );
+                                }
                                 ?>
 					        </div>
                         </div>
@@ -63,11 +67,14 @@ trait Product_Grid {
                     </li>
                     <?php
 				} else {
-					add_action( 'woocommerce_after_shop_loop_item', function (){
-					    global $product;
-					    if (!$product) return;
-						self::print_compare_button( $product->get_id() );
-					});
+					if ( isset( $settings['show_compare']) && 'yes' === $settings['show_compare'] ) {
+						add_action( 'woocommerce_after_shop_loop_item', function (){
+							global $product;
+							if (!$product) return;
+							self::print_compare_button( $product->get_id() );
+						});
+					}
+
 					wc_get_template_part( 'content', 'product' );
 				}
 			}
