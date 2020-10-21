@@ -26,15 +26,11 @@ trait Core
      *
      * @since 3.0.0
      */
-    public function active_plugins($plugin)
+    public function is_plugin_active($plugin)
     {
-        $plugins = get_option('active_plugins', []);
+        include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-        if (in_array($plugin, $plugins)) {
-            return true;
-        }
-
-        return false;
+        return is_plugin_active($plugin);
     }
 
     /**
