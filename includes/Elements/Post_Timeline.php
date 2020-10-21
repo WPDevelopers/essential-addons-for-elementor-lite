@@ -453,21 +453,24 @@ class Post_Timeline extends Widget_Base
 
         echo '<div ' . $this->get_render_attribute_string('eael_post_timeline_wrapper') . '>
             <div ' . $this->get_render_attribute_string('eael_post_timeline') . '>';
-                $query = new \WP_Query($args);
 
-                if ($query->have_posts()) {
-                    $template = $this->get_template($this->get_settings('eael_dynamic_template_Layout'));
-                    while ($query->have_posts()) {
-                        $query->the_post();
-                        if(file_exists($template)){
+                $template = $this->get_template($this->get_settings('eael_dynamic_template_Layout'));
+                if(file_exists($template)){
+                    $query = new \WP_Query($args);
+                    if ($query->have_posts()) {
+                        while ($query->have_posts()) {
+                            $query->the_post();
                             include($template);
                         }
+                    } else {
+                        _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
                     }
+                    wp_reset_postdata();
                 } else {
-                    _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                    _e('<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite');
                 }
 
-                wp_reset_postdata();
+
 
 		    echo '</div>
 		</div>';
