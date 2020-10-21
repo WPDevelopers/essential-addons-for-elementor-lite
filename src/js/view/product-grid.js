@@ -51,10 +51,9 @@ ea.hooks.addAction("init", "ea", () => {
         }
 
         $doc.on('click', '.eael-wc-compare', function (e) {
-            e.preventDefault();
             ajaxData.push({
                 name: 'product_id',
-                value: e.target.dataset.productId
+                value: $(this).data('product-id')
             });
             sendData(ajaxData, handleSuccess, handleError);
             //@TODO; show a loader while fetching the table
@@ -68,7 +67,7 @@ ea.hooks.addAction("init", "ea", () => {
             overlayNode.style.opacity = '0';
         });
 
-        $doc.on('click', '.eael-wc-remove', function (e){
+        $doc.on('click', '.eael-wc-remove', function (e) {
             e.preventDefault();
             $(this).prop('disabled', true);// prevent additional ajax request
             const rmData = Array.from(ajaxData);
@@ -86,16 +85,15 @@ ea.hooks.addAction("init", "ea", () => {
         });
 
 
-
         function handleSuccess(data) {
-                const success = (data && data.success);
-                if (success) {
-                    $modalContentWraper.html(data.data.compare_table)
-                    modal.style.visibility = 'visible';
-                    modal.style.opacity = '1';
-                    overlayNode.style.visibility = 'visible';
-                    overlayNode.style.opacity = '1';
-                }
+            const success = (data && data.success);
+            if (success) {
+                $modalContentWraper.html(data.data.compare_table)
+                modal.style.visibility = 'visible';
+                modal.style.opacity = '1';
+                overlayNode.style.visibility = 'visible';
+                overlayNode.style.opacity = '1';
+            }
 
         }
 
