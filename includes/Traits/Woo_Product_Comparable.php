@@ -559,8 +559,8 @@ trait Woo_Product_Comparable {
 		$title_row = "{$tbl} tr.title th, {$tbl} tr.title td";
 		$btn       = "{$tbl} a.button";
 		$btn_hover = "{$tbl} a.button:hover";
-		$tr_even   = "{$tbl} tr:nth-child(even) th, {$tbl} tr:nth-child(even) td";
-		$tr_odd    = "{$tbl} tr:nth-child(odd) th, {$tbl} tr:nth-child(odd) td";
+		$tr_even   = "{$tbl} tr:nth-child(even):not(.image):not(.title) th, {$tbl} tr:nth-child(even):not(.image):not(.title) td";
+		$tr_odd    = "{$tbl} tr:nth-child(odd):not(.image):not(.title) th, {$tbl} tr:nth-child(odd):not(.image):not(.title) td";
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'      => "title_row_typo",
@@ -908,8 +908,8 @@ trait Woo_Product_Comparable {
 		$tbl      = ! empty( $tbl ) ? $tbl : "{{WRAPPER}} .eael-wcpc-wrapper table";
 		$h_col    = "{$tbl} tr:not(.image):not(.title) th:not(.first-th)";
 		$title_th = "{$tbl} tr.title th";
-		$tr_even  = "{$tbl} tr:nth-child(even):not(.image) th:not(.first-th)";
-		$tr_odd   = "{$tbl} tr:nth-child(odd):not(.image) th:not(.first-th)";
+		$tr_even  = "{$tbl} tr:nth-child(even):not(.image):not(.title) th, {$tbl} tr:nth-child(even):not(.image):not(.title) td";
+		$tr_odd   = "{$tbl} tr:nth-child(odd):not(.image):not(.title) th, {$tbl} tr:nth-child(odd):not(.image):not(.title) td";
 		$this->start_controls_section( 'section_style_h_clm', [
 			'label'     => __( 'Header Column', 'essential-addons-for-elementor-lite' ),
 			'tab'       => Controls_Manager::TAB_STYLE,
@@ -1052,12 +1052,13 @@ trait Woo_Product_Comparable {
 		// New selectors
 		$column_class = "{$tbl} td:nth-of-type(3n+{$title_number})";
 		$title_row    = "{$tbl} tr.title td:nth-of-type(3n+{$title_number})";
-		$tr_even      = "{$tbl} tr:nth-of-type(even) td:nth-of-type(3n+{$title_number})";
-		$tr_odd       = "{$tbl} tr:nth-of-type(odd) td:nth-of-type(3n+{$title_number})";
+		$tr_even      = "{$tbl} tr:nth-of-type(even):not(.image):not(.title) td:nth-of-type(3n+{$title_number})";
+		$tr_odd       = "{$tbl} tr:nth-of-type(odd):not(.image):not(.title) td:nth-of-type(3n+{$title_number})";
 		$btn          = "{$tbl} td:nth-of-type(3n+{$title_number}) a.button";
 		$btn_hover    = "{$btn}:hover";
 		$img_td       = "{$tbl} tr.image td:nth-of-type(3n+{$title_number})";
 		$img          = "{$img_td} img";
+
 		$this->start_controls_section( 'section_style_' . $pfx, [
 			'label'     => sprintf( __( 'Product Column %d', 'essential-addons-for-elementor-lite' ), $title_number ),
 			'tab'       => Controls_Manager::TAB_STYLE,
