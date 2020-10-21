@@ -843,21 +843,7 @@ trait Woo_Product_Comparable {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $btn => 'background:{{VALUE}}' ],
 		] );
-		$this->add_control( "common_row_color_heading", [
-			'label'     => __( 'Rows', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::HEADING,
-			'separator' => 'before',
-		] );
-		$this->add_control( 'common_title_row_bg', [
-			'label'     => __( 'Title Row Background', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ $title_row => 'background-color:{{VALUE}}', ],
-		] );
-		$this->add_control( 'common_title_row_color', [
-			'label'     => __( 'Title Row Text Color', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ $title_row => 'color:{{VALUE}}' ],
-		] );
+
 		$this->add_control( 'common_tr_even_bg', [
 			'label'     => __( 'Even Row Background', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
@@ -878,6 +864,21 @@ trait Woo_Product_Comparable {
 			'label'     => __( 'Odd Row Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_odd => 'color:{{VALUE}}' ],
+		] );
+		$this->add_control( "common_row_color_heading", [
+			'label'     => __( 'Rows', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+		$this->add_control( 'common_title_row_bg', [
+			'label'     => __( 'Title Row Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $title_row => 'background-color:{{VALUE}}', ],
+		] );
+		$this->add_control( 'common_title_row_color', [
+			'label'     => __( 'Title Row Text Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ $title_row => 'color:{{VALUE}}' ],
 		] );
 		$this->end_controls_tab();
 
