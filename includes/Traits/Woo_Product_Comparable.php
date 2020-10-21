@@ -843,12 +843,15 @@ trait Woo_Product_Comparable {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $btn => 'background:{{VALUE}}' ],
 		] );
-
+		$this->add_control( "common_even_odd_clr_heading", [
+			'label'     => __( 'Even & Odd Rows', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
 		$this->add_control( 'common_tr_even_bg', [
 			'label'     => __( 'Even Row Background', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_even => 'background-color:{{VALUE}}' ],
-			'separator' => 'before',
 		] );
 		$this->add_control( 'common_tr_even_color', [
 			'label'     => __( 'Even Row Color', 'essential-addons-for-elementor-lite' ),
@@ -865,8 +868,8 @@ trait Woo_Product_Comparable {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_odd => 'color:{{VALUE}}' ],
 		] );
-		$this->add_control( "common_row_color_heading", [
-			'label'     => __( 'Rows', 'essential-addons-for-elementor-lite' ),
+		$this->add_control( "title_row_color_heading", [
+			'label'     => __( 'Title Row', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
 		] );
