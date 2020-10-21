@@ -49,7 +49,7 @@ trait Product_Grid {
                                 <?php
                                 woocommerce_template_loop_add_to_cart();
                                 if ( isset( $settings['show_compare']) && 'yes' === $settings['show_compare'] ) {
-	                                self::print_compare_button( $product->get_id() );
+	                                self::print_compare_button( $product->get_id(), 'icon' );
                                 }
                                 ?>
 					        </div>
