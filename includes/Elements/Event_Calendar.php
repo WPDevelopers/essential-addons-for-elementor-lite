@@ -102,7 +102,7 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-        if (!apply_filters('eael/active_plugins', 'the-events-calendar/the-events-calendar.php')) {
+        if (!apply_filters('eael/is_plugin_active', 'the-events-calendar/the-events-calendar.php')) {
             $this->add_control(
                 'eael_the_event_calendar_warning_text',
                 [
@@ -352,7 +352,7 @@ class Event_Calendar extends Widget_Base
         $this->end_controls_section();
 
         //the events calendar
-        if (apply_filters('eael/active_plugins', 'the-events-calendar/the-events-calendar.php')) {
+        if (apply_filters('eael/is_plugin_active', 'the-events-calendar/the-events-calendar.php')) {
             $this->start_controls_section(
                 'eael_event_the_events_calendar',
                 [
@@ -547,7 +547,7 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-        if (apply_filters('eael/active_plugins', 'eventON/eventon.php') && apply_filters('eael/pro_enabled', false)) {
+        if (apply_filters('eael/is_plugin_active', 'eventON/eventon.php') && apply_filters('eael/pro_enabled', false)) {
             $this->add_control(
                 'eael_event_on_featured_color',
                 [

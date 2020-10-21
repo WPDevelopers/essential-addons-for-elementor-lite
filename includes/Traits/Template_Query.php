@@ -82,7 +82,7 @@ trait Template_Query {
             include_once ABSPATH . 'wp-admin/includes/plugin.php';
         }
 
-        if ( !apply_filters( 'eael/active_plugins', 'essential-addons-elementor/essential_adons_elementor.php' ) ) {
+        if (!apply_filters('eael/is_plugin_active', 'essential-addons-elementor/essential_adons_elementor.php')) {
             return false;
         }
 

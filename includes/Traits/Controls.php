@@ -1619,7 +1619,7 @@ trait Controls
 
     public function advanced_data_table_source($wb)
     {
-        if (apply_filters('eael/active_plugins', 'ninja-tables/ninja-tables.php')) {
+        if (apply_filters('eael/is_plugin_active', 'ninja-tables/ninja-tables.php')) {
             $wb->add_control(
                 'ea_adv_data_table_source_ninja_table_id',
                 [
