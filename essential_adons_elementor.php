@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Essential Addons for Elementor
- * Description: The Essential plugin you install after Elementor! 70+ Premium elements, including WooCommerce, Event Calender, Data Table, Post Grid, Instagram Feed.
+ * Description: The Essential plugin you install after Elementor! Packed with 40+ stunning free elements including Advanced Data Table, Event Calendar, Filterable Gallery, WooCommerce, and many more.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
  * Version: 4.3.3
