@@ -1402,12 +1402,12 @@ trait Woo_Product_Comparable {
 											printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
 										}
 									} else {
-										if ( ! empty( $icon ) ) {
-											self::print_icon( $icon );
-										}
 										if ( 'theme-5' === $theme && $field === 'title' ) {
 											echo '&nbsp;';
 										} else {
+											if ( ! empty( $icon ) ) {
+												self::print_icon( $icon );
+											}
 											printf( '<span class="field-name">%s</span>', esc_html( $name ) );
 
 										}
