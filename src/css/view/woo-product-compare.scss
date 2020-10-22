@@ -1,7 +1,8 @@
 /* Woo Product Compare */
 .table-responsive {
-    display: block;
-    width: max-content;
+    //display: block;
+    //width: max-content;
+    width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
 }
@@ -54,11 +55,9 @@
             th {
                 color: var(--text-bold-clr);
                 font-weight: normal;
-                max-width: 300px;
+                max-width: 160px;
                 border-left-width: 2px;
                 vertical-align: middle;
-                padding-left: 35px;
-
                 div {
                     display: flex;
                     align-items: center;
@@ -68,7 +67,7 @@
             td {
                 color: var(--text-clr);
                 text-align: center;
-                width: 300px;
+                //width: 300px;
             }
 
             //Title Row header

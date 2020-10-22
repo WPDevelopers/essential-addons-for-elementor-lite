@@ -1,9 +1,6 @@
 /* Woo Product Compare */
 .table-responsive {
-  display: block;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
+  width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
 }
@@ -51,10 +48,9 @@
 .eael-wcpc-wrapper.custom table th {
   color: var(--text-bold-clr);
   font-weight: normal;
-  max-width: 300px;
+  max-width: 160px;
   border-left-width: 2px;
   vertical-align: middle;
-  padding-left: 35px;
 }
 .eael-wcpc-wrapper.custom table th div {
   display: -webkit-box;
@@ -67,7 +63,6 @@
 .eael-wcpc-wrapper.custom table td {
   color: var(--text-clr);
   text-align: center;
-  width: 300px;
 }
 .eael-wcpc-wrapper.custom table tr.title {
   background: var(--h-bg);
