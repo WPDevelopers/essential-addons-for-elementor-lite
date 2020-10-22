@@ -4,11 +4,11 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.5
 Requires PHP: 5.4
-Stable tag: 4.3.2
+Stable tag: 4.3.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-The Essential plugin you install after Elementor! 70+ Premium elements, including WooCommerce, Event Calender, Data Table, Post Grid. Your ultimate elements library. 
+The Essential plugin you install after Elementor! Packed with 40+ stunning free elements including Advanced Data Table, Event Calendar, Filterable Gallery, WooCommerce, and many more.
 
 == Description ==
 
@@ -223,6 +223,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.3.3 - 22/10/2020 =
+- Fixed: Assets not generating on Multi-sites
+- Fixed: Critical Errors related to Template queries
+- Few minor bug fix and improvements
 
 = 4.3.2 - 18/10/2020 =
 - Fixed: Assets not generating properly
