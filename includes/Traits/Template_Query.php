@@ -102,7 +102,7 @@ trait Template_Query
         $templates = [];
 
         if (is_dir($this->get_template_dir())) {
-            $templates['free'] = scandir($this->get_template_dir(), 1);
+            $templates['lite'] = scandir($this->get_template_dir(), 1);
         }
 
         if ($this->theme_templates_dir()) {
@@ -130,7 +130,7 @@ trait Template_Query
                 foreach ($handler as $handle) {
                     if (strpos($handle, '.php') !== false) {
 
-                        if ($key === 'free') {
+                        if ($key === 'lite') {
                             $path = sprintf('%s/%s', $this->get_template_dir(), $handle);
                         } else if ($key === 'pro') {
                             $path = sprintf('%s/%s', $this->get_pro_template_dir(), $handle);
@@ -182,7 +182,7 @@ trait Template_Query
     public function _get_path($key, $handle)
     {
         $path = '';
-        if ($key === 'free') {
+        if ($key === 'lite') {
             $path = sprintf('%s/%s', $this->get_template_dir(), $handle);
         } else if ($key === 'pro') {
             $path = sprintf('%s/%s', $this->get_pro_template_dir(), $handle);
