@@ -313,7 +313,7 @@ trait Elements
      */
     public function render_global_html()
     {
-        if (!apply_filters('eael/active_plugins', 'elementor/elementor.php')) {
+        if (!apply_filters('eael/is_plugin_active', 'elementor/elementor.php')) {
             return;
         }
 

@@ -453,19 +453,24 @@ class Post_Timeline extends Widget_Base
 
         echo '<div ' . $this->get_render_attribute_string('eael_post_timeline_wrapper') . '>
             <div ' . $this->get_render_attribute_string('eael_post_timeline') . '>';
-                $query = new \WP_Query($args);
 
-                if ($query->have_posts()) {
-                    while ($query->have_posts()) {
-                        $query->the_post();
-
-                        include($this->get_template('default'));
+                $template = $this->get_template($this->get_settings('eael_dynamic_template_Layout'));
+                if(file_exists($template)){
+                    $query = new \WP_Query($args);
+                    if ($query->have_posts()) {
+                        while ($query->have_posts()) {
+                            $query->the_post();
+                            include($template);
+                        }
+                    } else {
+                        _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
                     }
+                    wp_reset_postdata();
                 } else {
-                    _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                    _e('<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite');
                 }
 
-                wp_reset_postdata();
+
 
 		    echo '</div>
 		</div>';
@@ -473,7 +478,7 @@ class Post_Timeline extends Widget_Base
         if ('yes' == $settings['show_load_more']) {
             if ($args['posts_per_page'] != '-1') {
                 echo '<div class="eael-load-more-button-wrap">
-					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-template='.json_encode([ 'dir'   => 'free', 'file_name' => 'default', 'name' => $this->process_directory_name() ], 1).' data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings) . '" data-page="1">
+					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-template='.json_encode([ 'dir'   => 'free', 'file_name' => $this->get_settings('eael_dynamic_template_Layout'), 'name' => $this->process_directory_name() ], 1).' data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings) . '" data-page="1">
 						<div class="eael-btn-loader button__loader"></div>
 						<span>' . esc_html__($settings['show_load_more_text'], 'essential-addons-for-elementor-lite') . '</span>
 					</button>

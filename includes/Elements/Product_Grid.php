@@ -220,7 +220,15 @@ class Product_Grid extends Widget_Base {
 			'multiple'    => true,
 			'options'     => HelperClass::get_terms_list( 'product_cat', 'slug' ),
 		] );
-
+		$this->add_control(
+			'eael_dynamic_template_Layout',
+			[
+				'label'   => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'default',
+				'options' => $this->get_template_list_for_dropdown(),
+			]
+		);
 		$this->add_control( 'eael_product_grid_style_preset', [
 			'label'   => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SELECT,
@@ -578,7 +586,7 @@ class Product_Grid extends Widget_Base {
 				'em',
 			],
 			'selectors'  => [
-				'{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button,
+					'{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button,
                     {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link,
                     {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
@@ -724,143 +732,140 @@ class Product_Grid extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	protected function render() {
-		if ( ! function_exists( 'WC' ) ) {
-			return;
-		}
-		$settings = $this->get_settings_for_display();
+    protected function render()
+    {
+	    if ( ! function_exists( 'WC' ) ) {
+		    return;
+	    }
+	    $settings = $this->get_settings_for_display();
 
-		$args = [
-			'post_type'      => 'product',
-			'posts_per_page' => ( isset( $settings['eael_product_grid_products_count'] ) ? $settings['eael_product_grid_products_count'] : 4 ),
-			'offset'         => $settings['product_offset'],
-			'order'          => ( isset( $settings['order'] ) ? $settings['order'] : 'desc' ),
-		];
-		// price & sku filter
-		if ( $settings['orderby'] == '_price' ) {
-			$args['orderby']  = 'meta_value_num';
-			$args['meta_key'] = '_price';
-		} else if ( $settings['orderby'] == '_sku' ) {
-			$args['orderby']  = 'meta_value_num';
-			$args['meta_key'] = '_sku';
-		} else {
-			$args['orderby'] = ( isset( $settings['orderby'] ) ? $settings['orderby'] : 'date' );
-		}
+        $args = [
+            'post_type'      => 'product',
+            'posts_per_page' => (isset($settings['eael_product_grid_products_count']) ? $settings['eael_product_grid_products_count'] : 4),
+            'offset'         => $settings['product_offset'],
+            'order'          => (isset($settings['order']) ? $settings['order'] : 'desc'),
+        ];
+        // price & sku filter
+        if ($settings['orderby'] == '_price') {
+            $args['orderby']  = 'meta_value_num';
+            $args['meta_key'] = '_price';
+        } else if ($settings['orderby'] == '_sku') {
+            $args['orderby']  = 'meta_value_num';
+            $args['meta_key'] = '_sku';
+        } else {
+            $args['orderby']  = (isset($settings['orderby']) ? $settings['orderby'] : 'date');
+        }
 
-		if ( ! empty( $settings['eael_product_grid_categories'] ) ) {
-			$args['tax_query'] = [
-				[
-					'taxonomy' => 'product_cat',
-					'field'    => 'slug',
-					'terms'    => $settings['eael_product_grid_categories'],
-					'operator' => 'IN',
-				],
-			];
-		}
+        if (!empty($settings['eael_product_grid_categories'])) {
+            $args['tax_query'] = [
+                [
+                    'taxonomy' => 'product_cat',
+                    'field'    => 'slug',
+                    'terms'    => $settings['eael_product_grid_categories'],
+                    'operator' => 'IN',
+                ],
+            ];
+        }
 
-		if ( $settings['eael_product_grid_product_filter'] == 'featured-products' ) {
-			$args['tax_query'] = [
-				'relation' => 'AND',
-				[
-					'taxonomy' => 'product_visibility',
-					'field'    => 'name',
-					'terms'    => 'featured',
-				],
-			];
+        if ($settings['eael_product_grid_product_filter'] == 'featured-products') {
+            $args['tax_query'] = [
+                'relation' => 'AND',
+                [
+                    'taxonomy' => 'product_visibility',
+                    'field'    => 'name',
+                    'terms'    => 'featured',
+                ],
+            ];
 
-			if ( $settings['eael_product_grid_categories'] ) {
-				$args['tax_query'][] = [
-					'taxonomy' => 'product_cat',
-					'field'    => 'slug',
-					'terms'    => $settings['eael_product_grid_categories'],
-				];
-			}
-		} else if ( $settings['eael_product_grid_product_filter'] == 'best-selling-products' ) {
-			$args['meta_key'] = 'total_sales';
-			$args['orderby']  = 'meta_value_num';
-			$args['order']    = 'DESC';
-		} else if ( $settings['eael_product_grid_product_filter'] == 'sale-products' ) {
-			$args['meta_query'] = [
-				'relation' => 'OR',
-				[
-					'key'     => '_sale_price',
-					'value'   => 0,
-					'compare' => '>',
-					'type'    => 'numeric',
-				],
-				[
-					'key'     => '_min_variation_sale_price',
-					'value'   => 0,
-					'compare' => '>',
-					'type'    => 'numeric',
-				],
-			];
-		} else if ( $settings['eael_product_grid_product_filter'] == 'top-products' ) {
-			$args['meta_key'] = '_wc_average_rating';
-			$args['orderby']  = 'meta_value_num';
-			$args['order']    = 'DESC';
-		}
+            if ($settings['eael_product_grid_categories']) {
+                $args['tax_query'][] = [
+                    'taxonomy' => 'product_cat',
+                    'field'    => 'slug',
+                    'terms'    => $settings['eael_product_grid_categories'],
+                ];
+            }
+        } else if ($settings['eael_product_grid_product_filter'] == 'best-selling-products') {
+            $args['meta_key'] = 'total_sales';
+            $args['orderby'] = 'meta_value_num';
+            $args['order'] = 'DESC';
+        } else if ($settings['eael_product_grid_product_filter'] == 'sale-products') {
+            $args['meta_query'] = [
+                'relation' => 'OR',
+                [
+                    'key'     => '_sale_price',
+                    'value'   => 0,
+                    'compare' => '>',
+                    'type'    => 'numeric',
+                ], [
+                    'key'     => '_min_variation_sale_price',
+                    'value'   => 0,
+                    'compare' => '>',
+                    'type'    => 'numeric',
+                ],
+            ];
+        } else if ($settings['eael_product_grid_product_filter'] == 'top-products') {
+            $args['meta_key'] = '_wc_average_rating';
+            $args['orderby'] = 'meta_value_num';
+            $args['order'] = 'DESC';
+        }
 
-		$render_settings = [
-			'eael_product_grid_style_preset' => $settings['eael_product_grid_style_preset'],
-			'eael_product_grid_rating'       => $settings['eael_product_grid_rating'],
-			'eael_product_grid_column'       => $settings['eael_product_grid_column'],
-			'show_load_more'                 => $settings['show_load_more'],
-			'show_load_more_text'            => $settings['show_load_more_text'],
-			'show_compare'                   => isset( $settings['show_compare']) ? $settings['show_compare'] : '',
-		];
+        $this->is_show_custom_add_to_cart = boolval($settings['show_add_to_cart_custom_text']);
+        $this->simple_add_to_cart_button_text = $settings['add_to_cart_simple_product_button_text'];
+        $this->variable_add_to_cart_button_text = $settings['add_to_cart_variable_product_button_text'];
+        $this->grouped_add_to_cart_button_text = $settings['add_to_cart_grouped_product_button_text'];
+        $this->external_add_to_cart_button_text = $settings['add_to_cart_external_product_button_text'];
+        $this->default_add_to_cart_button_text = $settings['add_to_cart_default_product_button_text'];
 
-		// add to custom button text
-		$this->is_show_custom_add_to_cart       = boolval( $settings['show_add_to_cart_custom_text'] );
-		$this->simple_add_to_cart_button_text   = $settings['add_to_cart_simple_product_button_text'];
-		$this->variable_add_to_cart_button_text = $settings['add_to_cart_variable_product_button_text'];
-		$this->grouped_add_to_cart_button_text  = $settings['add_to_cart_grouped_product_button_text'];
-		$this->external_add_to_cart_button_text = $settings['add_to_cart_external_product_button_text'];
-		$this->default_add_to_cart_button_text  = $settings['add_to_cart_default_product_button_text'];
-		if ( Plugin::$instance->documents->get_current() ) {
-			$this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
-		}
-		// render dom
-		$this->add_render_attribute( 'wrap', [
-			'class'          => "eael-product-grid {$settings['eael_product_grid_style_preset']}",
-			'id'             => 'eael-product-grid',
-			'data-widget-id' => $this->get_id(),
-			'data-page-id'   => $this->page_id,
-			'data-nonce'     => wp_create_nonce( 'eael_product_grid' ),
-		] );
-		//Load more btn atts
-		$this->add_render_attribute( 'l-more-btn', [
-			'class'         => 'eael-load-more-button',
-			'id'            => "eael-load-more-btn-" . $this->get_id(),
-			'data-widget'   => $this->get_id(),
-			'data-class'    => get_class( $this ),
-			'data-args'     => http_build_query( $args ),
-			'data-settings' => http_build_query( $settings ),
-			'data-layout'   => 'masonry',
-			'data-page'     => '1',
-
-		] );
+	    if ( Plugin::$instance->documents->get_current() ) {
+		    $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
+	    }
+	    // render dom
+	    $this->add_render_attribute( 'wrap', [
+		    'class'          => "eael-product-grid {$settings['eael_product_grid_style_preset']}",
+		    'id'             => 'eael-product-grid',
+		    'data-widget-id' => $this->get_id(),
+		    'data-page-id'   => $this->page_id,
+		    'data-nonce'     => wp_create_nonce( 'eael_product_grid' ),
+	    ] );
 		?>
-        <div <?php $this->print_render_attribute_string( 'wrap' ); ?> >
-            <div class="woocommerce">
-                <ul class="products">
-					<?php echo self::render_template_( $args, $render_settings ); ?>
-                </ul>
-				<?php
-				if ( 'true' == $settings['show_load_more'] ) { ?>
-                    <div class="eael-load-more-button-wrap">
-                        <button <?php $this->print_render_attribute_string( 'l-more-btn' ); ?>>
-                            <div class="eael-btn-loader button__loader"></div>
-                            <span><?php echo esc_html( $settings['show_load_more_text'] ); ?></span>
-                        </button>
-                    </div>
-					<?php
-				}
-				?>
-            </div>
-        </div>
+
+    <div <?php $this->print_render_attribute_string( 'wrap' ); ?> >
+	    <div class="woocommerce">
 		<?php
-	}
+            $template = $this->get_template( $settings[ 'eael_dynamic_template_Layout' ] );
+            if ( file_exists( $template ) ) {
+                $query = new \WP_Query( $args );
+                if ( $query->have_posts() ) {
+                	echo '<ul class="products">';
+                    while ( $query->have_posts() ) {
+                        $query->the_post();
+                        include( $template );
+                    }
+	                wp_reset_postdata();
+	                echo '</ul>';
+                } else {
+                    _e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
+                }
+            } else {
+                _e( '<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
+            }
+
+        if ( 'true' == $settings['show_load_more'] ) {
+            if ( $args['posts_per_page'] != '-1' ) {
+                echo '<div class="eael-load-more-button-wrap">
+                    <button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-template='.json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $this->process_directory_name() ], 1).' data-widget="' . $this->get_id() . '" data-class="' . get_class( $this ) . '" data-args="' . http_build_query( $args ) . '" data-settings="' . http_build_query( $settings ) . '" data-layout="masonry" data-page="1">
+                        <div class="eael-btn-loader button__loader"></div>
+                        <span>' . esc_html__($settings['show_load_more_text'], 'essential-addons-for-elementor-lite') . '</span>
+                    </button>
+                </div>';
+            }
+        }
+
+		?>
+	    </div>
+    </div>
+	    <?php
+    }
 }
 
 
