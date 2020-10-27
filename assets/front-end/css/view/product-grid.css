@@ -981,6 +981,13 @@
   -o-transition: all 400ms ease;
   transition: all 400ms ease;
 }
+.eael-wcpc-wrapper .eael-wc-remove.disable,
+.eael-wcpc-wrapper.custom .eael-wc-remove.disable {
+  color: #a0a0a0 !important;
+  -webkit-transform: scale(1) !important;
+      -ms-transform: scale(1) !important;
+          transform: scale(1) !important;
+}
 .eael-wcpc-wrapper .eael-wc-remove:hover,
 .eael-wcpc-wrapper.custom .eael-wc-remove:hover {
   color: red;

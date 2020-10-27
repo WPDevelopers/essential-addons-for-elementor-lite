@@ -75,7 +75,9 @@ ea.hooks.addAction("init", "ea", () => {
 
         $doc.on('click', '.eael-wc-remove', function (e) {
             e.preventDefault();
-            $(this).prop('disabled', true);// prevent additional ajax request
+            let $rBtn = $(this);
+            $rBtn.addClass('disable');
+            $rBtn.prop('disabled', true);// prevent additional ajax request
             const rmData = Array.from(ajaxData);
             rmData.push({
                 name: 'product_id',
@@ -85,7 +87,6 @@ ea.hooks.addAction("init", "ea", () => {
                 name: 'remove_product',
                 value: 1
             });
-
             sendData(rmData, handleSuccess, handleError);
         });
 
