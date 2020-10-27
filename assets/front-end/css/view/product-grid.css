@@ -424,6 +424,22 @@
   margin-left: 10px !important;
   margin-right: 10px !important;
 }
+.eael-product-grid .woocommerce ul.products .product .eael-wc-compare,
+.eael-post-grid .woocommerce ul.products .product .eael-wc-compare {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+.eael-product-grid .woocommerce ul.products .product .eael-wc-compare-loader,
+.eael-post-grid .woocommerce ul.products .product .eael-wc-compare-loader {
+  display: none;
+  width: 1.5rem;
+}
 .eael-product-grid .woocommerce ul.products.products[class*=columns-] li.product,
 .eael-post-grid .woocommerce ul.products.products[class*=columns-] li.product {
   width: 100%;

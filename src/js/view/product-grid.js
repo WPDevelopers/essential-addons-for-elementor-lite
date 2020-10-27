@@ -11,6 +11,8 @@ ea.hooks.addAction("init", "ea", () => {
         body.appendChild(overlay);
         const overlayNode = document.getElementById('wcpc-overlay');
         const $doc = $(document);
+        let loader = false;
+        let compareBtn = false;
         const modalTemplate = `
         <div class="eael-wcpc-modal">
             <i title="Close" class="close-modal far fa-times-circle"></i>
@@ -39,24 +41,28 @@ ea.hooks.addAction("init", "ea", () => {
                 value: nonce
             },
         ];
-        const sendData = function sendData(ajaxData, successCb, errorCb) {
+        const sendData = function sendData(ajaxData, successCb, errorCb, beforeCb, completeCb) {
             $.ajax({
                 url: localize.ajaxurl,
                 type: 'POST',
                 dataType: 'json',
                 data: ajaxData,
+                beforeSend: beforeCb,
                 success: successCb,
-                error: errorCb
+                error: errorCb,
+                complete: completeCb,
             });
         }
 
         $doc.on('click', '.eael-wc-compare', function (e) {
+            compareBtn = $(this);
+            loader = compareBtn.find('.eael-wc-compare-loader');
+            loader.show();
             ajaxData.push({
                 name: 'product_id',
-                value: $(this).data('product-id')
+                value: compareBtn.data('product-id')
             });
             sendData(ajaxData, handleSuccess, handleError);
-            //@TODO; show a loader while fetching the table
 
         });
 
@@ -81,7 +87,6 @@ ea.hooks.addAction("init", "ea", () => {
             });
 
             sendData(rmData, handleSuccess, handleError);
-            //@TODO; show a loader while updating the table
         });
 
 
@@ -94,11 +99,15 @@ ea.hooks.addAction("init", "ea", () => {
                 overlayNode.style.visibility = 'visible';
                 overlayNode.style.opacity = '1';
             }
+            if (loader){
+                loader.hide();
+                compareBtn.find('span').text('Added');
+            }
 
         }
 
         function handleError(xhr, err) {
-            let errorHtml = `<p class="eael-form-msg invalid">${err.toString()} </p>`;
+            console.log(err.toString());
         }
     };
     elementorFrontend.hooks.addAction("frontend/element_ready/eicon-woocommerce.default", productGrid);
