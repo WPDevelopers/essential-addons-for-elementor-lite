@@ -25,6 +25,15 @@
                     margin-left: 10px !important;
                     margin-right: 10px !important;
                 }
+                .eael-wc-compare{
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: space-around;
+                }
+                .eael-wc-compare-loader{
+                    display: none;
+                    width: 1.5rem;
+                }
             }
 
             &.products[class*='columns-'] li.product {
