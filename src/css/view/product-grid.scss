@@ -536,6 +536,10 @@
     .eael-wc-remove {
         cursor: pointer;
         transition: all 400ms ease;
+        &.disable {
+            color: #a0a0a0 !important;
+            transform: scale(1) !important;
+        }
     }
 
     .eael-wc-remove:hover {
