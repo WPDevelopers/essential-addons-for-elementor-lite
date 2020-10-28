@@ -76,12 +76,8 @@ trait Template_Query {
      *
      * @return  string  templates directory path of pro version.
      */
-    private function get_pro_template_dir() {
-        // ensure is_plugin_active() exists (not on frontend)
-        if ( !function_exists( 'is_plugin_active' ) ) {
-            include_once ABSPATH . 'wp-admin/includes/plugin.php';
-        }
-
+    private function get_pro_template_dir()
+    {
         if (!apply_filters('eael/is_plugin_active', 'essential-addons-elementor/essential_adons_elementor.php')) {
             return false;
         }
@@ -97,19 +93,20 @@ trait Template_Query {
      *
      * @return array
      */
-    private function get_template_files() {
+    private function get_template_files()
+    {
         $templates = [];
 
-        if ( is_dir( $this->get_template_dir() ) ) {
-            $templates[ 'free' ] = scandir( $this->get_template_dir(), 1 );
+        if (is_dir($this->get_template_dir())) {
+            $templates['lite'] = scandir($this->get_template_dir(), 1);
         }
 
-        if ( $this->theme_templates_dir() ) {
-            $templates[ 'theme' ] = scandir( $this->theme_templates_dir(), 1 );
+        if ($this->theme_templates_dir()) {
+            $templates['theme'] = scandir($this->theme_templates_dir(), 1);
         }
 
-        if ( is_dir( $this->get_pro_template_dir() ) ) {
-            $templates[ 'pro' ] = scandir( $this->get_pro_template_dir(), 1 );
+        if (is_dir($this->get_pro_template_dir())) {
+            $templates['pro'] = scandir($this->get_pro_template_dir(), 1);
         }
 
         return $templates;
@@ -123,17 +120,17 @@ trait Template_Query {
     protected function get_template_list() {
         $files = [];
 
-        if ( $this->get_template_files() ) {
-            foreach ( $this->get_template_files() as $key => $handler ) {
-                foreach ( $handler as $handle ) {
-                    if ( strpos( $handle, '.php' ) !== false ) {
+        if ($this->get_template_files()) {
+            foreach ($this->get_template_files() as $key => $handler) {
+                foreach ($handler as $handle) {
+                    if (strpos($handle, '.php') !== false) {
 
-                        if ( $key === 'free' ) {
-                            $path = sprintf( '%s/%s', $this->get_template_dir(), $handle );
-                        } else if ( $key === 'pro' ) {
-                            $path = sprintf( '%s/%s', $this->get_pro_template_dir(), $handle );
-                        } else if ( $key === 'theme' ) {
-                            $path = sprintf( '%s/%s', $this->theme_templates_dir(), $handle );
+                        if ($key === 'lite') {
+                            $path = sprintf('%s/%s', $this->get_template_dir(), $handle);
+                        } else if ($key === 'pro') {
+                            $path = sprintf('%s/%s', $this->get_pro_template_dir(), $handle);
+                        } else if ($key === 'theme') {
+                            $path = sprintf('%s/%s', $this->theme_templates_dir(), $handle);
                         }
 
                         $template_info = get_file_data( $path, $this->template_headers );
@@ -155,19 +152,20 @@ trait Template_Query {
      *
      * @return array template list.
      */
-    public function get_template_list_for_dropdown() {
+    public function get_template_list_for_dropdown()
+    {
         $files = [];
-        if ( $this->get_template_files() ) {
-            foreach ( $this->get_template_files() as $key => $handler ) {
-                foreach ( $handler as $handle ) {
-                    if ( strpos( $handle, '.php' ) !== false ) {
+        if ($this->get_template_files()) {
+            foreach ($this->get_template_files() as $key => $handler) {
+                foreach ($handler as $handle) {
+                    if (strpos($handle, '.php') !== false) {
 
-                        $path = $this->_get_path( $key, $handle );
-                        $template_info = get_file_data( $path, $this->template_headers );
-                        $template_name = $template_info[ 'Template Name' ];
+                        $path = $this->_get_path($key, $handle);
+                        $template_info = get_file_data($path, $this->template_headers);
+                        $template_name = $template_info['Template Name'];
 
-                        if ( $template_name ) {
-                            $files[ strtolower( $template_name ) ] = sprintf( "%s (%s)", ucfirst( $template_name ), ucfirst( $key ) );
+                        if ($template_name) {
+                            $files[strtolower($template_name)] = sprintf("%s (%s)", ucfirst($template_name), ucfirst($key));
                         }
                     }
                 }
@@ -176,14 +174,15 @@ trait Template_Query {
         return $files;
     }
 
-    public function _get_path( $key, $handle ) {
+    public function _get_path($key, $handle)
+    {
         $path = '';
-        if ( $key === 'free' ) {
-            $path = sprintf( '%s/%s', $this->get_template_dir(), $handle );
-        } else if ( $key === 'pro' ) {
-            $path = sprintf( '%s/%s', $this->get_pro_template_dir(), $handle );
-        } else if ( $key === 'theme' ) {
-            $path = sprintf( '%s/%s', $this->theme_templates_dir(), $handle );
+        if ($key === 'lite') {
+            $path = sprintf('%s/%s', $this->get_template_dir(), $handle);
+        } else if ($key === 'pro') {
+            $path = sprintf('%s/%s', $this->get_pro_template_dir(), $handle);
+        } else if ($key === 'theme') {
+            $path = sprintf('%s/%s', $this->theme_templates_dir(), $handle);
         }
         return $path;
     }
