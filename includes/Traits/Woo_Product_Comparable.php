@@ -1705,7 +1705,7 @@ trait Woo_Product_Comparable {
             </g>
             </svg>';
 		$btn_content = 'icon' === $btn_type ? $icon2 : __( 'Compare', 'essential-addons-for-elementor-lite' );
-		printf( '<button class="eael-wc-compare button" data-product-id="%d" rel="nofollow" title="Compare">%s <span>%s</span></button>', intval( $id, 10 ), $loader, $btn_content );
+		printf( '<button class="eael-wc-compare button" data-product-id="%1$d" rel="nofollow" title="Compare">%2$s <span data-product-id="%1$d">%3$s</span></button>', intval( $id, 10 ), $loader, $btn_content );
 	}
 
 	public function get_compare_table() {

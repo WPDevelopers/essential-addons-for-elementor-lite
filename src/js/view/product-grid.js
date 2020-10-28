@@ -13,6 +13,7 @@ ea.hooks.addAction("init", "ea", () => {
         const $doc = $(document);
         let loader = false;
         let compareBtn = false;
+        let requestType = false; // compare | remove
         const modalTemplate = `
         <div class="eael-wcpc-modal">
             <i title="Close" class="close-modal far fa-times-circle"></i>
@@ -55,6 +56,7 @@ ea.hooks.addAction("init", "ea", () => {
         }
 
         $doc.on('click', '.eael-wc-compare', function (e) {
+            requestType = 'compare'
             compareBtn = $(this);
             loader = compareBtn.find('.eael-wc-compare-loader');
             loader.show();
@@ -72,21 +74,23 @@ ea.hooks.addAction("init", "ea", () => {
             overlayNode.style.visibility = 'hidden';
             overlayNode.style.opacity = '0';
         });
-
         $doc.on('click', '.eael-wc-remove', function (e) {
             e.preventDefault();
             let $rBtn = $(this);
+            let productId = $rBtn.data('product-id');
             $rBtn.addClass('disable');
             $rBtn.prop('disabled', true);// prevent additional ajax request
             const rmData = Array.from(ajaxData);
             rmData.push({
                 name: 'product_id',
-                value: e.target.dataset.productId
+                value: productId
             });
             rmData.push({
                 name: 'remove_product',
                 value: 1
             });
+            requestType = 'remove';
+            compareBtn = $('button[data-product-id="' + productId + '"]');
             sendData(rmData, handleSuccess, handleError);
         });
 
@@ -100,9 +104,14 @@ ea.hooks.addAction("init", "ea", () => {
                 overlayNode.style.visibility = 'visible';
                 overlayNode.style.opacity = '1';
             }
-            if (loader){
+            if (loader) {
                 loader.hide();
+            }
+            if ('compare' === requestType) {
                 compareBtn.find('span').text('Added');
+            }
+            if ('remove' === requestType) {
+                compareBtn.find('span').text('Compare');
             }
 
         }
@@ -110,6 +119,8 @@ ea.hooks.addAction("init", "ea", () => {
         function handleError(xhr, err) {
             console.log(err.toString());
         }
+
+
     };
     elementorFrontend.hooks.addAction("frontend/element_ready/eicon-woocommerce.default", productGrid);
 });
