@@ -12,8 +12,12 @@ ea.hooks.addAction("init", "ea", () => {
         const overlayNode = document.getElementById('wcpc-overlay');
         const $doc = $(document);
         let loader = false;
-        let compareBtn = false;
+        let compareIconSpan = false;
+        let compareBtnSpan = false;
         let requestType = false; // compare | remove
+        let iconBeforeCompare = '<i class="fas fa-balance-scale-right"></i>';
+        //let iconAfterCompare = '<i class="fas fa-balance-scale"></i>';
+        let iconAfterCompare = '<i class="fas fa-check-circle"></i>';
         const modalTemplate = `
         <div class="eael-wcpc-modal">
             <i title="Close" class="close-modal far fa-times-circle"></i>
@@ -57,9 +61,16 @@ ea.hooks.addAction("init", "ea", () => {
 
         $doc.on('click', '.eael-wc-compare', function (e) {
             requestType = 'compare'
-            compareBtn = $(this);
-            loader = compareBtn.find('.eael-wc-compare-loader');
-            loader.show();
+            let compareBtn = $(this);
+            compareBtnSpan = compareBtn.find('.eael-wc-compare-text');
+            if (!compareBtnSpan.length){
+                compareIconSpan = compareBtn.find('.eael-wc-compare-icon');
+            }
+            if (!compareIconSpan || !compareIconSpan.length){
+                loader = compareBtn.find('.eael-wc-compare-loader');
+                loader.show();
+            }
+
             ajaxData.push({
                 name: 'product_id',
                 value: compareBtn.data('product-id')
@@ -90,7 +101,11 @@ ea.hooks.addAction("init", "ea", () => {
                 value: 1
             });
             requestType = 'remove';
-            compareBtn = $('button[data-product-id="' + productId + '"]');
+            let compareBtn = $('button[data-product-id="' + productId + '"]');
+            compareBtnSpan = compareBtn.find('.eael-wc-compare-text');
+            if (!compareBtnSpan.length ) {
+                compareIconSpan = compareBtn.find('.eael-wc-compare-icon');
+            }
             sendData(rmData, handleSuccess, handleError);
         });
 
@@ -107,11 +122,20 @@ ea.hooks.addAction("init", "ea", () => {
             if (loader) {
                 loader.hide();
             }
+
             if ('compare' === requestType) {
-                compareBtn.find('span').text('Added');
+                if (compareBtnSpan && compareBtnSpan.length){
+                    compareBtnSpan.text(localize.i18n.added);
+                }else if(compareIconSpan && compareIconSpan.length){
+                    compareIconSpan.html(iconAfterCompare)
+                }
             }
             if ('remove' === requestType) {
-                compareBtn.find('span').text('Compare');
+                if (compareBtnSpan && compareBtnSpan.length){
+                    compareBtnSpan.text(localize.i18n.compare);
+                }else if(compareIconSpan && compareIconSpan.length){
+                    compareIconSpan.html(iconBeforeCompare)
+                }
             }
 
         }

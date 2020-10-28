@@ -125,6 +125,10 @@ trait Enqueue
         $this->localize_objects = apply_filters('eael/localize_objects', [
             'ajaxurl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('essential-addons-elementor'),
+	        'i18n' => [
+	        	'added' => __('Added ', 'essential-addons-for-elementor-lite'),
+	        	'compare' => __('Compare', 'essential-addons-for-elementor-lite'),
+	        ]
         ]);
 
         // edit mode
