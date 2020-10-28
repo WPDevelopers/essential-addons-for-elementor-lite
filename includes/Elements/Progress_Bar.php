@@ -237,6 +237,7 @@ class Progress_Bar extends Widget_Base
             [
                 'label' => __('Prefix Label', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'default' => __('Prefix', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'progress_bar_layout' => 'half_circle',
@@ -250,6 +251,7 @@ class Progress_Bar extends Widget_Base
             [
                 'label' => __('Postfix Label', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'default' => __('Postfix', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'progress_bar_layout' => 'half_circle',

@@ -307,6 +307,7 @@ class Product_Grid extends Widget_Base {
             [
                 'label'       => esc_html__('Simple Product Button Text', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
                 'default'     => esc_html__('Buy Now', 'essential-addons-for-elementor-lite'),
                 'condition'   => [
@@ -319,6 +320,7 @@ class Product_Grid extends Widget_Base {
             [
                 'label'       => esc_html__('Variable Product Button Text', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
                 'default'     => esc_html__('Select options', 'essential-addons-for-elementor-lite'),
                 'condition'   => [
@@ -331,6 +333,7 @@ class Product_Grid extends Widget_Base {
             [
                 'label'       => esc_html__('Grouped Product Button Text', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
                 'default'     => esc_html__('View products', 'essential-addons-for-elementor-lite'),
                 'condition'   => [
@@ -343,6 +346,7 @@ class Product_Grid extends Widget_Base {
             [
                 'label'       => esc_html__('External Product Button Text', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
                 'default'     => esc_html__('Buy Now', 'essential-addons-for-elementor-lite'),
                 'condition'   => [
@@ -355,6 +359,7 @@ class Product_Grid extends Widget_Base {
             [
                 'label'       => esc_html__('Default Product Button Text', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
                 'default'     => esc_html__('Read More', 'essential-addons-for-elementor-lite'),
                 'condition'   => [
