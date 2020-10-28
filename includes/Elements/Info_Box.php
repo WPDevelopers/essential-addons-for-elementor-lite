@@ -193,6 +193,7 @@ class Info_Box extends Widget_Base
             [
                 'label' => esc_html__('Number', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'condition' => [
                     'eael_infobox_img_or_icon' => 'number',
                 ],

@@ -214,6 +214,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                 [
                     'label'     => __('Prefix', 'essential-addons-for-elementor-lite'),
                     'type'      => Controls_Manager::TEXT,
+                    'dynamic'     => [ 'active' => true ],
                     'condition' => [
                         'show_count' => 'true',
                         'layout_template' => 'default'
@@ -226,6 +227,7 @@ class Betterdocs_Category_Box extends Widget_Base {
                 [
                     'label'     => __('Suffix', 'essential-addons-for-elementor-lite'),
                     'type'      => Controls_Manager::TEXT,
+                    'dynamic'     => [ 'active' => true ],
                     'default'   => __('articles', 'essential-addons-for-elementor-lite'),
                     'condition' => [
                         'show_count' => 'true',
