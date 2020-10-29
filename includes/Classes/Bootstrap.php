@@ -120,7 +120,10 @@ class Bootstrap
     {
         // Core
         add_action('init', [$this, 'i18n']);
-        add_filter('eael/active_plugins', [$this, 'active_plugins'], 10, 1);
+        // TODO::RM
+        add_filter('eael/active_plugins', [$this, 'is_plugin_active'], 10, 1);
+
+        add_filter('eael/is_plugin_active', [$this, 'is_plugin_active'], 10, 1);
         add_filter('wpml_elementor_widgets_to_translate', [$this, 'translatable_widgets']);
         add_action('elementor/editor/after_save', array($this, 'save_global_values'), 10, 2);
 

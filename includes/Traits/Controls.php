@@ -395,6 +395,16 @@ trait Controls
             ]
         );
 
+        $wb->add_control(
+            'eael_dynamic_template_Layout',
+            [
+                'label'   => esc_html__('Template Layout', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'default',
+                'options' => $wb->get_template_list_for_dropdown(),
+            ]
+        );
+
         if ('eael-post-grid' === $wb->get_name()) {
             $wb->add_responsive_control(
                 'eael_post_grid_columns',
@@ -1631,7 +1641,7 @@ trait Controls
 
     public function advanced_data_table_source($wb)
     {
-        if (apply_filters('eael/active_plugins', 'ninja-tables/ninja-tables.php')) {
+        if (apply_filters('eael/is_plugin_active', 'ninja-tables/ninja-tables.php')) {
             $wb->add_control(
                 'ea_adv_data_table_source_ninja_table_id',
                 [
