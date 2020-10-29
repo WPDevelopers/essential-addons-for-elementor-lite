@@ -780,7 +780,7 @@ class Helper
 				for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
 
 					if( $pagination ==  0 || $pagination ==  1 ){ $active="current"; }else{ $active=""; }
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
 
 				}
 
@@ -789,22 +789,22 @@ class Helper
 				for( $pagination=1; $pagination <= 4 + ($adjacents * 2); $pagination++){
 					if( $pagination ==  0 || $pagination ==  1 ){ $active="current"; }else{ $active=""; }
 
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
 				}
 
 				$setPagination .="<li class='pagitext dots'>...</li>";
-				$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+				$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
 
 			} else {
 
 				for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
 					if( $pagination ==  0 || $pagination ==  1 ){ $active="current"; }else{ $active=""; }
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
 				}
 
 			}
 			if ($pagination_Paginationlist > 1) {
-				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-widgetid='$widget_id' data-args='" . http_build_query( $args ) . "' data-settings='" . http_build_query( $settings ) . "' data-pnumber='2' data-plimit='$paginationLimit'>$next_label</a></li>";
+				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='" . http_build_query( $args ) . "' data-settings='" . http_build_query( $settings ) . "' data-pnumber='2' data-plimit='$paginationLimit'>$next_label</a></li>";
 			}
 			$setPagination .="</ul>";
 			$setPagination .="</nav>";

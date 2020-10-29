@@ -2951,6 +2951,7 @@ class Product_Grid extends Widget_Base {
 		echo '</ul>';
 
 		if ( 'true' == $settings['show_pagination'] ) {
+		    $settings['eael_widget_name'] = $this->get_name();
 			echo Helper::eael_pagination($args, $settings);
 		}
 
