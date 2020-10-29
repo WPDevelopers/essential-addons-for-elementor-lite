@@ -12,8 +12,8 @@ var ProductGrid = function ($scope, $) {
 		    args        = $this.data('args'),
 		    settings    = $this.data('settings'),
 		    widgetid    = $this.data('widgetid'),
-		    widgetclass = ".elementor-element-" + widgetid;
-
+		    widgetclass = ".elementor-element-" + widgetid,
+			template_info = $this.data('template');
 
 		$.ajax({
 			url: ajax_url,
@@ -23,6 +23,7 @@ var ProductGrid = function ($scope, $) {
 				number: nth,
 				limit: lmt,
 				args: args,
+				templateInfo: template_info,
 				settings: settings
 			},
 			beforeSend	: function(){
