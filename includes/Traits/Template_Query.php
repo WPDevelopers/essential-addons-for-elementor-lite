@@ -9,6 +9,13 @@ if (!defined('ABSPATH')) {
 trait Template_Query
 {
 
+
+    public $current_widget_name = '';
+
+    public function set_widget_name( $name = '' ) {
+        $this->current_widget_name = $name;
+    }
+
     /**
      * Retrieves Template name from file header.
      *
@@ -28,7 +35,10 @@ trait Template_Query
      */
     private function process_directory_name()
     {
-        $widget_name = str_replace('eael-', '', $this->get_name());
+        if ( empty( $this->current_widget_name ) ) {
+            $this->current_widget_name = $this->get_name();
+        }
+        $widget_name = str_replace('eael-', '', $this->current_widget_name);
         $widget_name = str_replace('-', ' ', $widget_name);
         $widget_name = ucwords($widget_name);
         $widget_name = str_replace(' ', '-', $widget_name);

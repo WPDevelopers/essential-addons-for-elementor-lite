@@ -11,6 +11,7 @@ use \Essential_Addons_Elementor\Elements\Woo_Checkout;
 
 trait Helper
 {
+    use \Essential_Addons_Elementor\Traits\Template_Query;
     /**
      * This function is responsible for get the post data.
      * It will return HTML markup with AJAX call and with normal call.
@@ -387,11 +388,7 @@ trait Helper
 	public function eael_woo_pagination_product_ajax() {
 		parse_str($_REQUEST['args'], $args);
 		parse_str($_REQUEST['settings'], $settings);
-		$class = '\Essential_Addons_Elementor\Elements\Product_Grid';
 
-		$html = '';
-
-		global $wpdb;
 		$paginationNumber = absint($_POST['number']);
 		$paginationLimit  = absint($_POST['limit']);
 
@@ -405,43 +402,18 @@ trait Helper
 		}
 
 		$template_info = $_REQUEST['templateInfo'];
-
-//		var_dump($template_info['name']);
-
-		if ($template_info) {
-			if ($template_info['dir'] === 'free') {
-				$file_path = EAEL_PLUGIN_PATH;
-			}
-
-			if ($template_info['dir'] === 'pro') {
-				$file_path = EAEL_PRO_PLUGIN_PATH;
-			}
-
-			$file_path = sprintf(
-				'%sincludes/Template/%s/%s.php',
-				$file_path,
-				$template_info['name'],
-				$template_info['file_name']
-			);
-
-			if ($file_path) {
-				$query = new \WP_Query($args);
-
-				if ($query->have_posts()) {
-					while ($query->have_posts()) {
-						$query->the_post();
-
-						$html .= HelperClass::include_with_variable($file_path, ['settings' => $settings, 'args' => $args]);
-					}
-				}
-			}
-		}
-
-		echo $html;
-
-//		echo $class::render_template_($args, $settings);
-
-		wp_die();
+        $this->set_widget_name( $template_info['name'] );
+        $template = $this->get_template( $template_info['file_name'] );
+        ob_start();
+        $query = new \WP_Query( $args );
+        if ( $query->have_posts() ) {
+            while ( $query->have_posts() ) {
+                $query->the_post();
+                include( $template );
+            }
+        }
+        echo ob_get_clean();
+        wp_die();
 	}
 
 	public function eael_woo_pagination_ajax() {

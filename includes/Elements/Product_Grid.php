@@ -2796,7 +2796,6 @@ class Product_Grid extends Widget_Base {
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-		error_log(print_r($settings,1));
         if (!apply_filters('eael/is_plugin_active', 'woocommerce/woocommerce.php')) {
             return;
         }
