@@ -46,7 +46,7 @@ if ($settings['eael_product_grid_style_preset'] == 'eael-product-simple' || $set
 					<div class="image-wrap">
 						<?php
 						echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$settings['eael_product_sale_badge_preset'].' '.$settings['eael_product_sale_badge_alignment'].'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$settings['eael_product_sale_badge_preset'].' '.$settings['eael_product_sale_badge_alignment'].'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
-						echo $product->get_image($settings['eael_product_grid_image_size']);
+						echo $product->get_image($settings['eael_product_grid_image_size_size']);
 						?>
 					</div>
 					<div class="image-hover-wrap">
@@ -127,7 +127,7 @@ if ($settings['eael_product_grid_style_preset'] == 'eael-product-simple' || $set
 						<?php
 						echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
 						echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$settings['eael_product_sale_badge_preset'].' '.$settings['eael_product_sale_badge_alignment'].'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$settings['eael_product_sale_badge_preset'].' '.$settings['eael_product_sale_badge_alignment'].'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
-						echo $product->get_image($settings['eael_product_grid_image_size']);
+						echo $product->get_image($settings['eael_product_grid_image_size_size']);
 						echo '</a>';
 						?>
 					</div>
@@ -181,7 +181,7 @@ if ($settings['eael_product_grid_style_preset'] == 'eael-product-simple' || $set
 						<?php
 						echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
 						echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$settings['eael_product_sale_badge_preset'].' '.$settings['eael_product_sale_badge_alignment'].'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$settings['eael_product_sale_badge_preset'].' '.$settings['eael_product_sale_badge_alignment'].'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
-						echo $product->get_image($settings['eael_product_grid_image_size']);
+						echo $product->get_image($settings['eael_product_grid_image_size_size']);
 						echo '</a>';
 						?>
 					</div>
