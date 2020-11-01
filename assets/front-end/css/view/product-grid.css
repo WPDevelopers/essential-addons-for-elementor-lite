@@ -811,6 +811,9 @@
 .eael-product-popup .eael-product-image-wrap .badge-container {
   display: none;
 }
+.eael-product-popup .eael-product-image-wrap .eael-new-product .flex-viewport {
+  height: auto !important;
+}
 .eael-product-popup .eael-product-details-wrap {
   width: 56%;
   margin-left: 4%;

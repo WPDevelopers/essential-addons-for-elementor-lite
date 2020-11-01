@@ -78,13 +78,13 @@ var ProductGrid = function ($scope, $) {
 			popup_details.css("height",'auto');
 		}
 
-		if($layout_mode === 'masonry') {
-			if($(id+" .woocommerce-product-gallery").hasClass('eael-new-product')){
-				$(id+" .woocommerce-product-gallery.eael-new-product").wc_product_gallery({
-					photoswipe_enabled:false
-				});
-			}
-		}
+		// if($layout_mode === 'masonry') {
+		// 	if($(id+" .woocommerce-product-gallery").hasClass('eael-new-product')){
+		// 		// $(id+" .woocommerce-product-gallery.eael-new-product").wc_product_gallery({
+		// 		// 	photoswipe_enabled:true,
+		// 		// });
+		// 	}
+		// }
 		$( id+" .variations_form" ).wc_variation_form();
 		popup.addClass("eael-product-popup-ready").removeClass("eael-product-modal-removing");
 	});
