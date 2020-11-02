@@ -913,6 +913,15 @@ class Product_Grid extends Widget_Base {
             ];
         }
 
+        $args['meta_query'] = ['relation' => 'AND'];
+
+        if (get_option('woocommerce_hide_out_of_stock_items') == 'yes') {
+            $args['meta_query'][] = [
+                'key' => '_stock_status',
+                'value' => 'instock'
+            ];
+        }
+
         if ($settings['eael_product_grid_product_filter'] == 'featured-products') {
             $args['tax_query'] = [
                 'relation' => 'AND',
@@ -935,7 +944,7 @@ class Product_Grid extends Widget_Base {
             $args['orderby'] = 'meta_value_num';
             $args['order'] = 'DESC';
         } else if ($settings['eael_product_grid_product_filter'] == 'sale-products') {
-            $args['meta_query'] = [
+            $args['meta_query'][] = [
                 'relation' => 'OR',
                 [
                     'key'     => '_sale_price',
