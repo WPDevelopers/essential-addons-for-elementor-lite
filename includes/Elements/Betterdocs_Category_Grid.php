@@ -1590,7 +1590,6 @@ class Betterdocs_Category_Grid extends Widget_Base
 
 
         $terms_object = array(
-            'parent' => 0,
             'taxonomy' => 'doc_category',
             'order' => $settings['order'],
             'orderby' => $settings['orderby'],
