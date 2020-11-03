@@ -96,6 +96,7 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Items to show', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
                 'default' => 6,
             ]
@@ -329,6 +330,7 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Gallery All Label', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'default' => 'All',
                 'condition' => [
                     'filter_enable' => 'yes',
