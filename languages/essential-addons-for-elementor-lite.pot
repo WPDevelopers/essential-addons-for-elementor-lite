@@ -692,7 +692,7 @@ msgstr ""
 msgid "Show Title"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:180, ../includes/Elements/Betterdocs_Category_Grid.php:218, ../includes/Elements/Cta_Box.php:186, ../includes/Elements/Image_Accordion.php:139, ../includes/Traits/Controls.php:653
+#: ../includes/Elements/Betterdocs_Category_Box.php:180, ../includes/Elements/Betterdocs_Category_Grid.php:218, ../includes/Elements/Cta_Box.php:186, ../includes/Elements/Image_Accordion.php:139
 msgid "Select Tag"
 msgstr ""
 
@@ -764,7 +764,7 @@ msgstr ""
 msgid "File Not Found"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:1180, ../includes/Elements/Betterdocs_Category_Box.php:1145, ../includes/Elements/Betterdocs_Category_Grid.php:1676, ../includes/Elements/Betterdocs_Category_Grid.php:1643, ../includes/Elements/Post_Grid.php:1237, ../includes/Elements/Post_Timeline.php:466, ../includes/Elements/Product_Grid.php:988
+#: ../includes/Elements/Betterdocs_Category_Box.php:1180, ../includes/Elements/Betterdocs_Category_Box.php:1145, ../includes/Elements/Betterdocs_Category_Grid.php:1676, ../includes/Elements/Betterdocs_Category_Grid.php:1643, ../includes/Elements/Post_Grid.php:1076, ../includes/Elements/Post_Timeline.php:466, ../includes/Elements/Product_Grid.php:997
 msgid "<p class=\"no-posts-found\">No posts found!</p>"
 msgstr ""
 
@@ -976,7 +976,7 @@ msgstr ""
 msgid "Form Alignment"
 msgstr ""
 
-#: ../includes/Elements/Caldera_Forms.php:405, ../includes/Elements/Contact_Form_7.php:321, ../includes/Elements/Contact_Form_7.php:822, ../includes/Elements/Creative_Button.php:210, ../includes/Elements/Cta_Box.php:629, ../includes/Elements/Cta_Box.php:846, ../includes/Elements/Dual_Color_Header.php:78, ../includes/Elements/Flip_Box.php:687, ../includes/Elements/FluentForm.php:424, ../includes/Elements/Formstack.php:324, ../includes/Elements/GravityForms.php:337, ../includes/Elements/Login_Register.php:412, ../includes/Elements/Login_Register.php:509, ../includes/Elements/Login_Register.php:1046, ../includes/Elements/Login_Register.php:1402, ../includes/Elements/Login_Register.php:1528, ../includes/Elements/Login_Register.php:1785, ../includes/Elements/Login_Register.php:1929, ../includes/Elements/Login_Register.php:2079, ../includes/Elements/Login_Register.php:2222, ../includes/Elements/Login_Register.php:2313, ../includes/Elements/Login_Register.php:2411, ../includes/Elements/Login_Register.php:2612, ../includes/Elements/Login_Register.php:2657, ../includes/Elements/Login_Register.php:2689, ../includes/Elements/Login_Register.php:2955, ../includes/Elements/Login_Register.php:3254, ../includes/Elements/NinjaForms.php:272, ../includes/Elements/Post_Grid.php:234, ../includes/Elements/Pricing_Table.php:83, ../includes/Elements/Pricing_Table.php:419, ../includes/Elements/Product_Grid.php:261, ../includes/Elements/Team_Member.php:357, ../includes/Elements/Testimonial.php:252, ../includes/Elements/Testimonial.php:271, ../includes/Elements/TypeForm.php:196, ../includes/Elements/WeForms.php:161, ../includes/Elements/WeForms.php:631, ../includes/Elements/Woo_Checkout.php:119, ../includes/Elements/WpForms.php:261, ../includes/Traits/Controls.php:453, ../includes/Traits/Controls.php:1402, ../includes/Traits/Login_Registration.php:528, ../includes/Template/Betterdocs-Category-Box/Layout_Default.php:4, ../includes/Template/Betterdocs-Category-Grid/Layout_Default.php:4, ../includes/Template/Eicon-Woocommerce/default.php:3, ../includes/Template/Post-Grid/default.php:4, ../includes/Template/Post-Timeline/default.php:3
+#: ../includes/Elements/Caldera_Forms.php:405, ../includes/Elements/Contact_Form_7.php:321, ../includes/Elements/Contact_Form_7.php:822, ../includes/Elements/Creative_Button.php:210, ../includes/Elements/Cta_Box.php:629, ../includes/Elements/Cta_Box.php:846, ../includes/Elements/Dual_Color_Header.php:78, ../includes/Elements/Flip_Box.php:687, ../includes/Elements/FluentForm.php:424, ../includes/Elements/Formstack.php:324, ../includes/Elements/GravityForms.php:337, ../includes/Elements/Login_Register.php:412, ../includes/Elements/Login_Register.php:509, ../includes/Elements/Login_Register.php:1046, ../includes/Elements/Login_Register.php:1402, ../includes/Elements/Login_Register.php:1528, ../includes/Elements/Login_Register.php:1785, ../includes/Elements/Login_Register.php:1929, ../includes/Elements/Login_Register.php:2079, ../includes/Elements/Login_Register.php:2222, ../includes/Elements/Login_Register.php:2313, ../includes/Elements/Login_Register.php:2411, ../includes/Elements/Login_Register.php:2612, ../includes/Elements/Login_Register.php:2657, ../includes/Elements/Login_Register.php:2689, ../includes/Elements/Login_Register.php:2955, ../includes/Elements/Login_Register.php:3254, ../includes/Elements/NinjaForms.php:272, ../includes/Elements/Post_Grid.php:234, ../includes/Elements/Pricing_Table.php:83, ../includes/Elements/Pricing_Table.php:419, ../includes/Elements/Product_Grid.php:261, ../includes/Elements/Team_Member.php:357, ../includes/Elements/Testimonial.php:252, ../includes/Elements/Testimonial.php:271, ../includes/Elements/TypeForm.php:196, ../includes/Elements/WeForms.php:161, ../includes/Elements/WeForms.php:631, ../includes/Elements/Woo_Checkout.php:119, ../includes/Elements/WpForms.php:261, ../includes/Traits/Controls.php:453, ../includes/Traits/Controls.php:1402, ../includes/Traits/Login_Registration.php:528, ../includes/Template/Betterdocs-Category-Box/Layout_Default.php:4, ../includes/Template/Betterdocs-Category-Grid/Layout_Default.php:4, ../includes/Template/Content-Ticker/default.php:3, ../includes/Template/Eicon-Woocommerce/default.php:3, ../includes/Template/Post-Grid/default.php:4, ../includes/Template/Post-Timeline/default.php:3
 msgid "Default"
 msgstr ""
 
@@ -1188,7 +1188,7 @@ msgstr ""
 msgid "Template Layout"
 msgstr ""
 
-#: ../includes/Elements/Content_Ticker.php:90, ../includes/Elements/Progress_Bar.php:155, ../includes/Traits/Controls.php:30, ../includes/Template/Content-Ticker/dynamic.php:3
+#: ../includes/Elements/Content_Ticker.php:90, ../includes/Elements/Progress_Bar.php:155, ../includes/Traits/Controls.php:30
 msgid "Dynamic"
 msgstr ""
 
@@ -1928,7 +1928,7 @@ msgstr ""
 msgid "Show Separator"
 msgstr ""
 
-#: ../includes/Elements/Dual_Color_Header.php:131
+#: ../includes/Elements/Dual_Color_Header.php:131, ../includes/Traits/Controls.php:653
 msgid "Title Tag"
 msgstr ""
 
@@ -4650,7 +4650,7 @@ msgstr ""
 msgid "Icon font size"
 msgstr ""
 
-#: ../includes/Elements/Post_Grid.php:1241
+#: ../includes/Elements/Post_Grid.php:1080
 msgid "<p class=\"no-posts-found\">No Layout Found!</p>"
 msgstr ""
 
@@ -4714,7 +4714,7 @@ msgstr ""
 msgid "Date Text Color"
 msgstr ""
 
-#: ../includes/Elements/Post_Timeline.php:470, ../includes/Elements/Product_Grid.php:992
+#: ../includes/Elements/Post_Timeline.php:470, ../includes/Elements/Product_Grid.php:1001
 msgid "<p class=\"no-posts-found\">No layout found!</p>"
 msgstr ""
 
