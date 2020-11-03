@@ -154,9 +154,10 @@ class Event_Calendar extends Widget_Base
         $repeater->add_control(
             'eael_event_link',
             [
-                'label' => __('Link', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::URL,
-                'placeholder' => __('https://sample-domain.com', 'essential-addons-for-elementor-lite'),
+                'label'         => __('Link', 'essential-addons-for-elementor-lite'),
+                'type'          => Controls_Manager::URL,
+                'dynamic'   => ['active' => true],
+                'placeholder'   => __('https://sample-domain.com', 'essential-addons-for-elementor-lite'),
                 'show_external' => true,
             ]
         );

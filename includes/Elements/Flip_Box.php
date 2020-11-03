@@ -276,6 +276,9 @@ class Flip_Box extends Widget_Base
             [
                 'label'       => esc_html__('Front Title', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'   => [
+                    'active' => true,
+                ],
                 'label_block' => true,
                 'default'     => esc_html__('Front Title', 'essential-addons-for-elementor-lite'),
 	            'condition'             => [
@@ -502,6 +505,9 @@ class Flip_Box extends Widget_Base
             [
                 'label'       => esc_html__('Back Title', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'   => [
+                    'active' => true,
+                ],
                 'label_block' => true,
                 'default'     => esc_html__('Back Title', 'essential-addons-for-elementor-lite'),
 	            'condition'             => [
@@ -1439,7 +1445,7 @@ class Flip_Box extends Widget_Base
     protected function render()
     {
 
-        $settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
         $flipbox_image = $this->get_settings('eael_flipbox_image');
         $flipbox_image_url = Group_Control_Image_Size::get_attachment_image_src($flipbox_image['id'], 'thumbnail', $settings);
         (empty($flipbox_image_url)) ? $flipbox_image_url = $flipbox_image['url'] : $flipbox_image_url = $flipbox_image_url;

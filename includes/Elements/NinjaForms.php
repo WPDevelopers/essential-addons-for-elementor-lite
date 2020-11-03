@@ -136,12 +136,15 @@ class NinjaForms extends Widget_Base
             $this->add_control(
                 'form_title_custom',
                 [
-                    'label' => esc_html__('Title', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::TEXT,
-                    'label_block' => true,
-                    'default' => '',
-                    'condition' => [
-                        'custom_title_description' => 'yes',
+                    'label'                 => esc_html__( 'Title', 'essential-addons-for-elementor-lite'),
+                    'type'                  => Controls_Manager::TEXT,
+                    'dynamic' => [
+                        'active' => true,
+                    ],
+                    'label_block'           => true,
+                    'default'               => '',
+                    'condition'             => [
+                        'custom_title_description'   => 'yes',
                     ],
                 ]
             );
@@ -149,11 +152,14 @@ class NinjaForms extends Widget_Base
             $this->add_control(
                 'form_description_custom',
                 [
-                    'label' => esc_html__('Description', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::TEXTAREA,
-                    'default' => '',
-                    'condition' => [
-                        'custom_title_description' => 'yes',
+                    'label'                 => esc_html__( 'Description', 'essential-addons-for-elementor-lite'),
+                    'type'                  => Controls_Manager::TEXTAREA,
+                    'dynamic' => [
+                        'active' => true,
+                    ],
+                    'default'               => '',
+                    'condition'             => [
+                        'custom_title_description'   => 'yes',
                     ],
                 ]
             );
