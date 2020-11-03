@@ -10,6 +10,8 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+$title_tag = isset($settings['title_tag']) ? $settings['title_tag'] : 'h2';
+
 if ($settings['eael_post_grid_preset_style'] === 'two') {
     echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . get_the_ID() . '">
         <div class="eael-grid-post-holder">
@@ -43,7 +45,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                 if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
                     echo '<div class="eael-entry-wrapper">';
                     if ($settings['eael_show_title']) {
-                        echo '<header class="eael-entry-header"><' . $settings['title_tag'] . ' class="eael-entry-title">';
+                        echo '<header class="eael-entry-header"><' . $title_tag . ' class="eael-entry-title">';
                         echo '<a
                                     class="eael-grid-post-link"
                                     href="' . get_the_permalink() . '"
@@ -58,7 +60,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                             echo implode(" ", array_slice(explode(" ", get_the_title()), 0, $settings['eael_title_length']));
                         }
                         echo '</a>';
-                        echo '</' . $settings['title_tag'] . '></header>';
+                        echo '</' . $title_tag . '></header>';
                     }
 
                     if ($settings['meta_position'] == 'meta-entry-header') {
@@ -177,7 +179,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
         echo '<div class="eael-entry-wrapper">';
 
         if ($settings['eael_show_title']) {
-            echo '<header class="eael-entry-header"><' . $settings['title_tag'] . ' class="eael-entry-title">';
+            echo '<header class="eael-entry-header"><' . $title_tag . ' class="eael-entry-title">';
             echo '<a
                         class="eael-grid-post-link"
                         href="' . get_the_permalink() . '"
@@ -192,7 +194,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                 echo implode(" ", array_slice(explode(" ", get_the_title()), 0, $settings['eael_title_length']));
             }
             echo '</a>';
-            echo '</' . $settings['title_tag'] . '></header>';
+            echo '</' . $title_tag . '></header>';
         }
 
         if ($settings['meta_position'] == 'meta-entry-footer') {
@@ -275,7 +277,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
     if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
         echo '<div class="eael-entry-wrapper">';
         if ($settings['eael_show_title']) {
-            echo '<header class="eael-entry-header"><' . $settings['title_tag'] . ' class="eael-entry-title">';
+            echo '<header class="eael-entry-header"><' . $title_tag . ' class="eael-entry-title">';
             echo '<a
                         class="eael-grid-post-link"
                         href="' . get_the_permalink() . '"
@@ -290,7 +292,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                 echo implode(" ", array_slice(explode(" ", get_the_title()), 0, $settings['eael_title_length']));
             }
             echo '</a>';
-            echo '</' . $settings['title_tag'] . '></header>';
+            echo '</' . $title_tag . '></header>';
         }
         if ($settings['meta_position'] == 'meta-entry-header') {
             if ($settings['eael_show_meta']) {
