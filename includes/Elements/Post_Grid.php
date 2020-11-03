@@ -1159,7 +1159,7 @@ class Post_Grid extends Widget_Base
 
     protected function render()
     {
-        $settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
         $settings = Helper::fix_old_query($settings);
         $args = Helper::get_query_args($settings);
         $args = Helper::get_dynamic_args($settings, $args);

@@ -790,7 +790,7 @@ class WeForms extends Widget_Base
             return;
         }
 
-        $settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
 
         if (!empty($settings['wpuf_contact_form'])) {
             echo '<div class="eael-weform-container">

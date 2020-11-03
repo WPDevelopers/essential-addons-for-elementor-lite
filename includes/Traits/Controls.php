@@ -537,6 +537,7 @@ trait Controls
                     [
                         'label' => esc_html__('Label Text', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::TEXT,
+                        'dynamic'     => [ 'active' => true ],
                         'label_block' => false,
                         'default' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
                         'condition' => [
@@ -736,6 +737,7 @@ trait Controls
                 [
                     'label' => esc_html__('Expanison Indicator', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
+                    'dynamic'     => [ 'active' => true ],
                     'label_block' => false,
                     'default' => esc_html__('...', 'essential-addons-for-elementor-lite'),
                     'condition' => [
@@ -762,6 +764,7 @@ trait Controls
                 [
                     'label' => esc_html__('Expanison Indicator', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
+                    'dynamic'     => [ 'active' => true ],
                     'label_block' => false,
                     'default' => esc_html__('...', 'essential-addons-for-elementor-lite'),
                     'condition' => [
@@ -791,6 +794,7 @@ trait Controls
             [
                 'label' => esc_html__('Label Text', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
                 'default' => esc_html__('Read More', 'essential-addons-for-elementor-lite'),
                 'condition' => [
@@ -825,6 +829,7 @@ trait Controls
                 [
                     'label' => __('Button Text', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
+                    'dynamic'     => [ 'active' => true ],
                     'default' => __('Read More', 'essential-addons-for-elementor-lite'),
                     'condition' => [
                         'eael_show_read_more_button' => 'yes',

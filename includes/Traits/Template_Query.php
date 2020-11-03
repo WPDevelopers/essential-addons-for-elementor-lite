@@ -2,12 +2,11 @@
 
 namespace Essential_Addons_Elementor\Traits;
 
-if (!defined('ABSPATH')) {
+if ( !defined( 'ABSPATH' ) ) {
     exit;
 } // Exit if accessed directly
 
-trait Template_Query
-{
+trait Template_Query {
 
 
     public $current_widget_name = '';
@@ -51,8 +50,7 @@ trait Template_Query
      *
      * @return string templates directory from the active theme.
      */
-    private function theme_templates_dir()
-    {
+    private function theme_templates_dir() {
         $current_theme = wp_get_theme();
 
         $dir = sprintf(
@@ -62,11 +60,11 @@ trait Template_Query
             $this->process_directory_name()
         );
 
-        if (is_dir($dir)) {
-            $file = scandir($dir);
-            $file = array_pop($file);
+        if ( is_dir( $dir ) ) {
+            $file = scandir( $dir );
+            $file = array_pop( $file );
 
-            return pathinfo($file, PATHINFO_EXTENSION) === 'php' ? $dir : false;
+            return pathinfo( $file, PATHINFO_EXTENSION ) === 'php' ? $dir : false;
         }
 
         return false;
@@ -77,8 +75,7 @@ trait Template_Query
      *
      * @return  string  templates directory path of lite version.
      */
-    private function get_template_dir()
-    {
+    private function get_template_dir() {
         return \sprintf(
             '%sincludes/Template/%s',
             EAEL_PLUGIN_PATH, $this->process_directory_name()
@@ -131,8 +128,7 @@ trait Template_Query
      *
      * @return array template list.
      */
-    protected function get_template_list()
-    {
+    protected function get_template_list() {
         $files = [];
 
         if ($this->get_template_files()) {
@@ -148,11 +144,11 @@ trait Template_Query
                             $path = sprintf('%s/%s', $this->theme_templates_dir(), $handle);
                         }
 
-                        $template_info = get_file_data($path, $this->template_headers);
-                        $template_name = $template_info['Template Name'];
+                        $template_info = get_file_data( $path, $this->template_headers );
+                        $template_name = $template_info[ 'Template Name' ];
 
-                        if ($template_name) {
-                            $files[$template_name] = $path;
+                        if ( $template_name ) {
+                            $files[ $template_name ] = $path;
                         }
                     }
                 }
@@ -207,15 +203,14 @@ trait Template_Query
      *
      * @return array teplate select options.
      */
-    private function get_template_options()
-    {
+    private function get_template_options() {
         $files = [];
 
-        if ($this->get_template_list()) {
-            foreach ($this->get_template_list() as $filename => $path) {
-                $filename = \str_replace(' ', '-', $filename);
+        if ( $this->get_template_list() ) {
+            foreach ( $this->get_template_list() as $filename => $path ) {
+                $filename = \str_replace( ' ', '-', $filename );
 
-                $files[strtolower($filename)] = $path;
+                $files[ strtolower( $filename ) ] = $path;
             }
         }
 
@@ -227,12 +222,11 @@ trait Template_Query
      *
      * @return array
      */
-    private function template_options()
-    {
-        $keys = array_keys($this->get_template_options());
-        $values = array_keys($this->get_template_list());
+    private function template_options() {
+        $keys = array_keys( $this->get_template_options() );
+        $values = array_keys( $this->get_template_list() );
 
-        return array_combine($keys, $values);
+        return array_combine( $keys, $values );
     }
 
     /**
@@ -242,10 +236,9 @@ trait Template_Query
      *
      * @return string include-able full template path.
      */
-    public function get_template($filename)
-    {
-        if (in_array($filename, array_keys($this->get_template_options()))) {
-            return $this->get_template_options()[$filename];
+    public function get_template( $filename ) {
+        if ( in_array( $filename, array_keys( $this->get_template_options() ) ) ) {
+            return $this->get_template_options()[ $filename ];
         }
 
         return false;
@@ -256,11 +249,10 @@ trait Template_Query
      *
      * @return string first option.
      */
-    public function get_default()
-    {
-        $dt = array_reverse($this->template_options());
+    public function get_default() {
+        $dt = array_reverse( $this->template_options() );
 
-        return strtolower(array_pop($dt));
+        return strtolower( array_pop( $dt ) );
     }
 
 }

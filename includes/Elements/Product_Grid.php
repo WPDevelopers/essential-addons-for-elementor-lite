@@ -98,7 +98,7 @@ class Product_Grid extends Widget_Base {
     {
         if ($this->is_show_custom_add_to_cart) {
             global $product;
-            $product_type = $product->product_type;
+            $product_type = $product->get_type();
             switch ($product_type) {
                 case 'external':
                     return $this->external_add_to_cart_button_text;
@@ -446,8 +446,9 @@ class Product_Grid extends Widget_Base {
         $this->add_control(
             'add_to_cart_simple_product_button_text',
             [
-                'label'       => esc_html__('Simple Product Button Text', 'essential-addons-for-elementor-lite'),
+                'label'       => esc_html__('Simple Product', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
                 'default'     => esc_html__('Buy Now', 'essential-addons-for-elementor-lite'),
                 'condition'   => [
@@ -458,8 +459,9 @@ class Product_Grid extends Widget_Base {
         $this->add_control(
             'add_to_cart_variable_product_button_text',
             [
-                'label'       => esc_html__('Variable Product Button Text', 'essential-addons-for-elementor-lite'),
+                'label'       => esc_html__('Variable Product', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
                 'default'     => esc_html__('Select options', 'essential-addons-for-elementor-lite'),
                 'condition'   => [
@@ -470,8 +472,9 @@ class Product_Grid extends Widget_Base {
         $this->add_control(
             'add_to_cart_grouped_product_button_text',
             [
-                'label'       => esc_html__('Grouped Product Button Text', 'essential-addons-for-elementor-lite'),
+                'label'       => esc_html__('Grouped Product', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
                 'default'     => esc_html__('View products', 'essential-addons-for-elementor-lite'),
                 'condition'   => [
@@ -482,8 +485,9 @@ class Product_Grid extends Widget_Base {
         $this->add_control(
             'add_to_cart_external_product_button_text',
             [
-                'label'       => esc_html__('External Product Button Text', 'essential-addons-for-elementor-lite'),
+                'label'       => esc_html__('External Product', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
                 'default'     => esc_html__('Buy Now', 'essential-addons-for-elementor-lite'),
                 'condition'   => [
@@ -494,8 +498,9 @@ class Product_Grid extends Widget_Base {
         $this->add_control(
             'add_to_cart_default_product_button_text',
             [
-                'label'       => esc_html__('Default Product Button Text', 'essential-addons-for-elementor-lite'),
+                'label'       => esc_html__('Default Product', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
                 'default'     => esc_html__('Read More', 'essential-addons-for-elementor-lite'),
                 'condition'   => [
@@ -538,6 +543,9 @@ class Product_Grid extends Widget_Base {
             [
                 'label'       => esc_html__('Label Text', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'label_block' => false,
                 'default'     => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
                 'condition'   => [
