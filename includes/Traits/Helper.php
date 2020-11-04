@@ -19,80 +19,80 @@ trait Helper
      * @return string of an html markup with AJAX call.
      * @return array of content and found posts count without AJAX call.
      */
-    public function ajax_load_more() {
-        parse_str( $_REQUEST[ 'args' ], $args );
-        parse_str( $_REQUEST[ 'settings' ], $settings );
+	public function ajax_load_more() {
+		parse_str( $_REQUEST[ 'args' ], $args );
+		parse_str( $_REQUEST[ 'settings' ], $settings );
 
-        $html = '';
-        $class = '\\' . str_replace( '\\\\', '\\', $_REQUEST[ 'class' ] );
-        $args[ 'offset' ] = (int)$args[ 'offset' ] + ( ( (int)$_REQUEST[ 'page' ] - 1 ) * (int)$args[ 'posts_per_page' ] );
+		$html = '';
+		$class = '\\' . str_replace( '\\\\', '\\', $_REQUEST[ 'class' ] );
+		$args[ 'offset' ] = (int)$args[ 'offset' ] + ( ( (int)$_REQUEST[ 'page' ] - 1 ) * (int)$args[ 'posts_per_page' ] );
 
-        if ( isset( $_REQUEST[ 'taxonomy' ] ) && $_REQUEST[ 'taxonomy' ][ 'taxonomy' ] != 'all' ) {
-            $args[ 'tax_query' ] = [
-                $_REQUEST[ 'taxonomy' ],
-            ];
-        }
+		if ( isset( $_REQUEST[ 'taxonomy' ] ) && $_REQUEST[ 'taxonomy' ][ 'taxonomy' ] != 'all' ) {
+			$args[ 'tax_query' ] = [
+				$_REQUEST[ 'taxonomy' ],
+			];
+		}
 
-        if ( $class == '\Essential_Addons_Elementor\Elements\Post_Grid' && $settings[ 'orderby' ] === 'rand' ) {
-            $args[ 'post__not_in' ] = array_unique( $_REQUEST[ 'post__not_in' ] );
-        }
+		if ( $class == '\Essential_Addons_Elementor\Elements\Post_Grid' && $settings[ 'orderby' ] === 'rand' ) {
+			$args[ 'post__not_in' ] = array_unique( $_REQUEST[ 'post__not_in' ] );
+		}
 
-        $template_info = $_REQUEST[ 'template_info' ];
+		$template_info = $_REQUEST[ 'template_info' ];
 
-        if ( $template_info ) {
-            if ( $template_info[ 'dir' ] === 'free' ) {
-                $file_path = EAEL_PLUGIN_PATH;
-            }
+		if ( $template_info ) {
+			if ( $template_info[ 'dir' ] === 'free' ) {
+				$file_path = EAEL_PLUGIN_PATH;
+			}
 
-            if ( $template_info[ 'dir' ] === 'pro' ) {
-                $file_path = EAEL_PRO_PLUGIN_PATH;
-            }
+			if ( $template_info[ 'dir' ] === 'pro' ) {
+				$file_path = EAEL_PRO_PLUGIN_PATH;
+			}
 
-            $file_path = sprintf(
-                '%sincludes/Template/%s/%s.php',
-                $file_path,
-                $template_info[ 'name' ],
-                $template_info[ 'file_name' ]
-            );
+			$file_path = sprintf(
+				'%sincludes/Template/%s/%s.php',
+				$file_path,
+				$template_info[ 'name' ],
+				$template_info[ 'file_name' ]
+			);
 
-            if ( $file_path ) {
-                $query = new \WP_Query( $args );
+			if ( $file_path ) {
+				$query = new \WP_Query( $args );
 
-                $iterator = 0;
+				$iterator = 0;
 
-                if ( $query->have_posts() ) {
-                    if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' && boolval( $settings[ 'show_add_to_cart_custom_text' ] ) ) {
+				if ( $query->have_posts() ) {
+					if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' && boolval( $settings[ 'show_add_to_cart_custom_text' ] ) ) {
 
-                        $add_to_cart_text = [
-                            'add_to_cart_simple_product_button_text' => $settings[ 'add_to_cart_simple_product_button_text' ],
-                            'add_to_cart_variable_product_button_text' => $settings[ 'add_to_cart_variable_product_button_text' ],
-                            'add_to_cart_grouped_product_button_text' => $settings[ 'add_to_cart_grouped_product_button_text' ],
-                            'add_to_cart_external_product_button_text' => $settings[ 'add_to_cart_external_product_button_text' ],
-                            'add_to_cart_default_product_button_text' => $settings[ 'add_to_cart_default_product_button_text' ],
-                        ];
-                        $this->change_add_to_cart_text($add_to_cart_text);
-                    }
+						$add_to_cart_text = [
+							'add_to_cart_simple_product_button_text' => $settings[ 'add_to_cart_simple_product_button_text' ],
+							'add_to_cart_variable_product_button_text' => $settings[ 'add_to_cart_variable_product_button_text' ],
+							'add_to_cart_grouped_product_button_text' => $settings[ 'add_to_cart_grouped_product_button_text' ],
+							'add_to_cart_external_product_button_text' => $settings[ 'add_to_cart_external_product_button_text' ],
+							'add_to_cart_default_product_button_text' => $settings[ 'add_to_cart_default_product_button_text' ],
+						];
+						$this->change_add_to_cart_text($add_to_cart_text);
+					}
 
-                    if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Post_List' ) {
-                        $html .= '<div class="eael-post-list-posts-wrap">';
-                    }
+					if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Post_List' ) {
+						$html .= '<div class="eael-post-list-posts-wrap">';
+					}
 
-                    while ( $query->have_posts() ) {
-                        $query->the_post();
+					while ( $query->have_posts() ) {
+						$query->the_post();
 
-                        $html .= HelperClass::include_with_variable( $file_path, [ 'settings' => $settings, 'iterator' => $iterator ] );
-                        $iterator++;
-                    }
-                    if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Post_List' ) {
-                        $html .= '</div>';
-                    }
-                }
-            }
-        }
+						$html .= HelperClass::include_with_variable( $file_path, [ 'settings' => $settings, 'iterator' => $iterator ] );
+						$iterator++;
+					}
+					if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Post_List' ) {
+						$html .= '</div>';
+					}
+				}
+			}
+		}
 
-        echo $html;
-        wp_die();
-    }
+		echo $html;
+		wp_die();
+	}
 
     /**
      * Woo Checkout
@@ -533,6 +533,28 @@ trait Helper
 			}
 		}
 		wp_send_json_success();
+	}
+
+	public function change_add_to_cart_text( $add_to_cart_text ) {
+		add_filter( 'woocommerce_product_add_to_cart_text', function ( $default ) use ( $add_to_cart_text ) {
+			global $product;
+			switch ( $product->get_type() ) {
+				case 'external':
+					return $add_to_cart_text[ 'add_to_cart_external_product_button_text' ];
+					break;
+				case 'grouped':
+					return $add_to_cart_text[ 'add_to_cart_grouped_product_button_text' ];
+					break;
+				case 'simple':
+					return $add_to_cart_text[ 'add_to_cart_simple_product_button_text' ];
+					break;
+				case 'variable':
+					return $add_to_cart_text[ 'add_to_cart_variable_product_button_text' ];
+					break;
+				default:
+					return $default;
+			}
+		} );
 	}
 	
 }
