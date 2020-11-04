@@ -835,6 +835,25 @@ class Product_Grid extends Widget_Base {
             'data-page-id'   => $this->page_id,
             'data-nonce'     => wp_create_nonce( 'eael_product_grid' ),
         ] );
+
+        $this->add_render_attribute('load-more', [
+            'class'          => "eael-load-more-button",
+            'id'             => "eael-load-more-btn-" . $this->get_id(),
+            'data-widget-id' => $this->get_id(),
+            'data-widget' => $this->get_id(),
+            'data-page-id'   => $this->page_id,
+            'data-nonce'     => wp_create_nonce( 'eael_product_grid' ),
+            'data-template'  => json_encode([
+                    'dir'   => 'free',
+                    'file_name' => $settings['eael_dynamic_template_Layout'],
+                    'name' => $this->process_directory_name() ],
+                1),
+            'data-class'    => get_class( $this ),
+            'data-layout'   => "masonry",
+            'data-page'     => "1",
+            'data-args'     => http_build_query( $args ),
+            'data-settings' => http_build_query($settings),
+        ]);
         ?>
 
         <div <?php $this->print_render_attribute_string( 'wrap' ); ?> >
@@ -857,19 +876,14 @@ class Product_Grid extends Widget_Base {
                 } else {
                     _e( '<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
                 }
-
-                if ( 'true' == $settings['show_load_more'] ) {
-                    if ( $args['posts_per_page'] != '-1' ) {
-                        echo '<div class="eael-load-more-button-wrap">
-                    <button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-template='.json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $this->process_directory_name() ], 1).' data-widget="' . $this->get_id() . '" data-class="' . get_class( $this ) . '" data-args="' . http_build_query( $args ) . '" data-settings="' . http_build_query( $settings ) . '" data-layout="masonry" data-page="1">
-                        <div class="eael-btn-loader button__loader"></div>
-                        <span>' . esc_html($settings['show_load_more_text']) . '</span>
-                    </button>
-                </div>';
-                    }
-                }
-
-                ?>
+                if ( 'true' == $settings['show_load_more'] && $args['posts_per_page'] != '-1' ) { ?>
+                    <div class="eael-load-more-button-wrap">
+                        <button <?php $this->print_render_attribute_string( 'load-more' ); ?>>
+                            <div class="eael-btn-loader button__loader"></div>
+                            <span><?php echo esc_html($settings['show_load_more_text']) ?></span>
+                        </button>
+                    </div>
+                <?php } ?>
             </div>
         </div>
         <?php
