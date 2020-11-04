@@ -174,9 +174,9 @@ trait Template_Query {
                         $path = $this->_get_path($key, $handle);
                         $template_info = get_file_data($path, $this->template_headers);
                         $template_name = $template_info['Template Name'];
-
-                        if ($template_name) {
-                            $files[strtolower($template_name)] = sprintf("%s (%s)", ucfirst($template_name), ucfirst($key));
+                        $template_key = str_replace( ' ', '-', strtolower( $template_name ) );
+                        if ( $template_name ) {
+                            $files[$template_key] = sprintf("%s (%s)", ucfirst($template_name), ucfirst($key));
                         }
                     }
                 }
