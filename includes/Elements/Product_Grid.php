@@ -329,7 +329,7 @@ class Product_Grid extends Widget_Base {
             'type'         => Controls_Manager::SWITCHER,
             'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
             'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-            'return_value' => 'true',
+            'return_value' => 'yes',
             'default'      => '',
         ] );
 
@@ -339,7 +339,7 @@ class Product_Grid extends Widget_Base {
             'label_block' => false,
             'default'     => esc_html__( 'Load More', 'essential-addons-for-elementor-lite' ),
             'condition'   => [
-                'show_load_more' => 'true',
+                'show_load_more' => 'yes',
             ],
         ] );
 
