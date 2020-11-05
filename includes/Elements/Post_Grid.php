@@ -1015,7 +1015,6 @@ class Post_Grid extends Widget_Base
             'eael_post_grid_bg_hover_icon_new' => $settings['eael_post_grid_bg_hover_icon_new'],
             'eael_show_read_more_button' => $settings['eael_show_read_more_button'],
             'read_more_button_text' => $settings['read_more_button_text'],
-            'read_more_button_text' => $settings['read_more_button_text'],
             'show_load_more' => $settings['show_load_more'],
             'show_load_more_text' => $settings['show_load_more_text'],
             'excerpt_expanison_indicator' => $settings['excerpt_expanison_indicator'],

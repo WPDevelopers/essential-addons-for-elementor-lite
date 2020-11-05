@@ -20,8 +20,50 @@ trait Helper
      */
     public function ajax_load_more()
     {
+        $ajax   = wp_doing_ajax();
+
         parse_str($_REQUEST['args'], $args);
-        parse_str($_REQUEST['settings'], $settings);
+
+        // @TODO; get the widget settings from the page id and widget id then
+        // @TODO; prepare query args from the $settings, DO NOT use user data for query.
+
+        if ( empty( $_POST['nonce'] ) ) {
+            $err_msg = __( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' );
+            if ( $ajax ) {
+                wp_send_json_error( $err_msg );
+            }
+            return false;
+        }
+
+        if ( ! wp_verify_nonce( $_POST['nonce'], 'load_more' ) ) {
+            $err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
+            if ( $ajax ) {
+                wp_send_json_error( $err_msg );
+            }
+            return false;
+        }
+
+        if ( ! empty( $_POST['page_id'] ) ) {
+            $page_id = intval( $_POST['page_id'], 10 );
+        } else {
+            $err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
+            if ( $ajax ) {
+                wp_send_json_error( $err_msg );
+            }
+            return false;
+        }
+
+        if ( ! empty( $_POST['widget_id'] ) ) {
+            $widget_id = sanitize_text_field( $_POST['widget_id'] );
+        } else {
+            $err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
+            if ( $ajax ) {
+                wp_send_json_error( $err_msg );
+            }
+            return false;
+        }
+
+        $settings = HelperClass::eael_get_widget_settings($page_id, $widget_id);
 
         $html = '';
         $class = '\\' . str_replace('\\\\', '\\', $_REQUEST['class']);
@@ -349,5 +391,35 @@ trait Helper
         } else {
             wp_send_json_error([]);
         }
+    }
+
+    public function print_load_more_button($settings, $args)
+    {
+        //@TODO; not all widget's settings contain posts_per_page name exactly, so adjust the settings before passing here or run a migration and make all settings key generalize for load more feature.
+        $this->add_render_attribute('load-more', [
+            'class'          => "eael-load-more-button",
+            'id'             => "eael-load-more-btn-" . $this->get_id(),
+            'data-widget-id' => $this->get_id(),
+            'data-widget' => $this->get_id(),
+            'data-page-id'   => $this->page_id,
+            'data-nonce'     => wp_create_nonce( 'load_more' ),
+            'data-template'  => json_encode([
+                'dir'   => 'free',
+                'file_name' => $settings['eael_dynamic_template_Layout'],
+                'name' => $this->process_directory_name() ],
+                1),
+            'data-class'    => get_class( $this ),
+            'data-layout'   => "masonry",
+            'data-page'     => "1",
+            'data-args'     => http_build_query( $args ),
+        ]);
+        if ( 'true' == $settings['show_load_more'] && $args['posts_per_page'] != '-1' ) { ?>
+            <div class="eael-load-more-button-wrap">
+                <button <?php $this->print_render_attribute_string( 'load-more' ); ?>>
+                    <div class="eael-btn-loader button__loader"></div>
+                    <span><?php echo esc_html($settings['show_load_more_text']) ?></span>
+                </button>
+            </div>
+        <?php }
     }
 }
