@@ -13,46 +13,46 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../includes/Classes/Helper.php:168, ../includes/Elements/Adv_Accordion.php:265, ../includes/Elements/Adv_Tabs.php:233, ../includes/Elements/Contact_Form_7.php:264, ../includes/Elements/Content_Ticker.php:345, ../includes/Elements/Countdown.php:453, ../includes/Elements/Creative_Button.php:171, ../includes/Elements/Cta_Box.php:334, ../includes/Elements/Data_Table.php:442, ../includes/Elements/Dual_Color_Header.php:211, ../includes/Elements/Fancy_Text.php:266, ../includes/Elements/Filterable_Gallery.php:780, ../includes/Elements/Flip_Box.php:542, ../includes/Elements/Info_Box.php:486, ../includes/Elements/Pricing_Table.php:635, ../includes/Elements/Progress_Bar.php:264, ../includes/Elements/Team_Member.php:218, ../includes/Elements/Testimonial.php:213, ../includes/Elements/Tooltip.php:502, ../includes/Elements/Twitter_Feed.php:282, ../includes/Elements/WeForms.php:110
+#: ../includes/Classes/Helper.php:169, ../includes/Elements/Adv_Accordion.php:265, ../includes/Elements/Adv_Tabs.php:233, ../includes/Elements/Contact_Form_7.php:264, ../includes/Elements/Content_Ticker.php:345, ../includes/Elements/Countdown.php:453, ../includes/Elements/Creative_Button.php:171, ../includes/Elements/Cta_Box.php:334, ../includes/Elements/Data_Table.php:442, ../includes/Elements/Dual_Color_Header.php:211, ../includes/Elements/Fancy_Text.php:266, ../includes/Elements/Filterable_Gallery.php:780, ../includes/Elements/Flip_Box.php:542, ../includes/Elements/Info_Box.php:486, ../includes/Elements/Pricing_Table.php:635, ../includes/Elements/Progress_Bar.php:264, ../includes/Elements/Team_Member.php:218, ../includes/Elements/Testimonial.php:213, ../includes/Elements/Tooltip.php:502, ../includes/Elements/Twitter_Feed.php:282, ../includes/Elements/WeForms.php:110
 msgid "Go Premium for More Features"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:175, ../includes/Elements/Adv_Accordion.php:272, ../includes/Elements/Adv_Tabs.php:240, ../includes/Elements/Contact_Form_7.php:271, ../includes/Elements/Content_Ticker.php:352, ../includes/Elements/Countdown.php:460, ../includes/Elements/Creative_Button.php:178, ../includes/Elements/Cta_Box.php:341, ../includes/Elements/Data_Table.php:449, ../includes/Elements/Dual_Color_Header.php:218, ../includes/Elements/Fancy_Text.php:273, ../includes/Elements/Filterable_Gallery.php:787, ../includes/Elements/Flip_Box.php:549, ../includes/Elements/Info_Box.php:493, ../includes/Elements/Pricing_Table.php:642, ../includes/Elements/Progress_Bar.php:271, ../includes/Elements/Team_Member.php:225, ../includes/Elements/Testimonial.php:220, ../includes/Elements/Tooltip.php:509, ../includes/Elements/Twitter_Feed.php:289, ../includes/Elements/WeForms.php:117
+#: ../includes/Classes/Helper.php:176, ../includes/Elements/Adv_Accordion.php:272, ../includes/Elements/Adv_Tabs.php:240, ../includes/Elements/Contact_Form_7.php:271, ../includes/Elements/Content_Ticker.php:352, ../includes/Elements/Countdown.php:460, ../includes/Elements/Creative_Button.php:178, ../includes/Elements/Cta_Box.php:341, ../includes/Elements/Data_Table.php:449, ../includes/Elements/Dual_Color_Header.php:218, ../includes/Elements/Fancy_Text.php:273, ../includes/Elements/Filterable_Gallery.php:787, ../includes/Elements/Flip_Box.php:549, ../includes/Elements/Info_Box.php:493, ../includes/Elements/Pricing_Table.php:642, ../includes/Elements/Progress_Bar.php:271, ../includes/Elements/Team_Member.php:225, ../includes/Elements/Testimonial.php:220, ../includes/Elements/Tooltip.php:509, ../includes/Elements/Twitter_Feed.php:289, ../includes/Elements/WeForms.php:117
 msgid "Unlock more possibilities"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:179, ../includes/Elements/Dual_Color_Header.php:222, ../includes/Elements/Flip_Box.php:553, ../includes/Elements/Info_Box.php:497
+#: ../includes/Classes/Helper.php:180, ../includes/Elements/Dual_Color_Header.php:222, ../includes/Elements/Flip_Box.php:553, ../includes/Elements/Info_Box.php:497
 msgstr ""
 
-#: ../includes/Classes/Helper.php:392
+#: ../includes/Classes/Helper.php:393
 msgid "Select a Contact Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:398, ../includes/Classes/Helper.php:424, ../includes/Classes/Helper.php:451, ../includes/Classes/Helper.php:478, ../includes/Classes/Helper.php:503, ../includes/Classes/Helper.php:533, ../includes/Classes/Helper.php:559
+#: ../includes/Classes/Helper.php:399, ../includes/Classes/Helper.php:425, ../includes/Classes/Helper.php:452, ../includes/Classes/Helper.php:479, ../includes/Classes/Helper.php:504, ../includes/Classes/Helper.php:534, ../includes/Classes/Helper.php:560
 msgid "Create a Form First"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:418
+#: ../includes/Classes/Helper.php:419
 msgid "Select Gravity Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:446, ../includes/Elements/WeForms.php:95
+#: ../includes/Classes/Helper.php:447, ../includes/Elements/WeForms.php:95
 msgid "Select weForm"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:471
+#: ../includes/Classes/Helper.php:472
 msgid "Select Ninja Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:497
+#: ../includes/Classes/Helper.php:498
 msgid "Select Caldera Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:527
+#: ../includes/Classes/Helper.php:528
 msgid "Select a WPForm"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:554
+#: ../includes/Classes/Helper.php:555
 msgid "Select a Fluent Form"
 msgstr ""
 
@@ -764,7 +764,7 @@ msgstr ""
 msgid "File Not Found"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:1180, ../includes/Elements/Betterdocs_Category_Box.php:1145, ../includes/Elements/Betterdocs_Category_Grid.php:1676, ../includes/Elements/Betterdocs_Category_Grid.php:1643, ../includes/Elements/Post_Grid.php:1076, ../includes/Elements/Post_Timeline.php:466, ../includes/Elements/Product_Grid.php:855
+#: ../includes/Elements/Betterdocs_Category_Box.php:1180, ../includes/Elements/Betterdocs_Category_Box.php:1145, ../includes/Elements/Betterdocs_Category_Grid.php:1676, ../includes/Elements/Betterdocs_Category_Grid.php:1643, ../includes/Elements/Post_Grid.php:1075, ../includes/Elements/Post_Timeline.php:466, ../includes/Elements/Product_Grid.php:854
 msgid "<p class=\"no-posts-found\">No posts found!</p>"
 msgstr ""
 
@@ -4650,7 +4650,7 @@ msgstr ""
 msgid "Icon font size"
 msgstr ""
 
-#: ../includes/Elements/Post_Grid.php:1080
+#: ../includes/Elements/Post_Grid.php:1079
 msgid "<p class=\"no-posts-found\">No Layout Found!</p>"
 msgstr ""
 
@@ -4714,7 +4714,7 @@ msgstr ""
 msgid "Date Text Color"
 msgstr ""
 
-#: ../includes/Elements/Post_Timeline.php:470, ../includes/Elements/Product_Grid.php:858
+#: ../includes/Elements/Post_Timeline.php:470, ../includes/Elements/Product_Grid.php:857
 msgid "<p class=\"no-posts-found\">No layout found!</p>"
 msgstr ""
 
@@ -6914,28 +6914,28 @@ msgstr ""
 msgid "Woo Product Collections"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:112
-msgid "Essential Addons for Elementor"
-msgstr ""
-
-#: ../includes/Traits/Helper.php:304, ../includes/Traits/Twitter_Feed.php:119
-msgid "%s ago"
-msgstr ""
-
-#: ../includes/Traits/Login_Registration.php:56, ../includes/Traits/Login_Registration.php:198
-msgid "Page ID is missing"
-msgstr ""
-
-#: ../includes/Traits/Login_Registration.php:63, ../includes/Traits/Login_Registration.php:203
-msgid "Widget ID is missing"
-msgstr ""
-
-#: ../includes/Traits/Login_Registration.php:76, ../includes/Traits/Login_Registration.php:182
+#: ../includes/Traits/Helper.php:31, ../includes/Traits/Login_Registration.php:76, ../includes/Traits/Login_Registration.php:182
 msgid "Insecure form submitted without security token"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:86, ../includes/Traits/Login_Registration.php:189
+#: ../includes/Traits/Helper.php:39, ../includes/Traits/Login_Registration.php:86, ../includes/Traits/Login_Registration.php:189
 msgid "Security token did not match"
+msgstr ""
+
+#: ../includes/Traits/Helper.php:49, ../includes/Traits/Login_Registration.php:56, ../includes/Traits/Login_Registration.php:198
+msgid "Page ID is missing"
+msgstr ""
+
+#: ../includes/Traits/Helper.php:59, ../includes/Traits/Login_Registration.php:63, ../includes/Traits/Login_Registration.php:203
+msgid "Widget ID is missing"
+msgstr ""
+
+#: ../includes/Traits/Helper.php:154
+msgid "Essential Addons for Elementor"
+msgstr ""
+
+#: ../includes/Traits/Helper.php:346, ../includes/Traits/Twitter_Feed.php:119
+msgid "%s ago"
 msgstr ""
 
 #: ../includes/Traits/Login_Registration.php:110, ../includes/Traits/Login_Registration.php:246

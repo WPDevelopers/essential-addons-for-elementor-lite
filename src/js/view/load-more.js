@@ -9,10 +9,11 @@
 		var $this = $(this),
 			$text = $("span", $this).html(),
 			$widget_id = $this.data("widget"),
+			$page_id = $this.data("page-id"),
+			$nonce = $this.data("nonce"),
 			$scope = $(".elementor-element-" + $widget_id),
 			$class = $this.data("class"),
 			$args = $this.data("args"),
-			$settings = $this.data("settings"),
 			$layout = $this.data("layout"),
 			$template_info = $this.data('template'),
 			$page = parseInt($this.data("page")) + 1;
@@ -26,8 +27,10 @@
 			action: "load_more",
 			class: $class,
 			args: $args,
-			settings: $settings,
 			page: $page,
+			page_id: $page_id,
+			widget_id: $widget_id,
+			nonce: $nonce,
 			template_info: $template_info
 		};
 
@@ -38,7 +41,7 @@
 				obj[arr[0]] = arr[1];
 			});
 
-		if (obj.orderby == "rand") {
+		if (obj.orderby === "rand") {
 			var $printed = $(".eael-grid-post");
 
 			if ($printed.length) {
@@ -62,15 +65,15 @@
 			success: function (response) {
 				var $content = $(response);
 
-				if ($content.hasClass("no-posts-found") || $content.length == 0) {
+				if ($content.hasClass("no-posts-found") || $content.length === 0) {
 					$this.remove();
 				} else {
-					if ($data.class == "Essential_Addons_Elementor\\Elements\\Product_Grid") {
+					if ($data.class === "Essential_Addons_Elementor\\Elements\\Product_Grid") {
 						$(".eael-product-grid .products", $scope).append($content);
 					} else {
 						$(".eael-post-appender", $scope).append($content);
 
-						if ($layout == "masonry") {
+						if ($layout === "masonry") {
 							var $isotope = $(".eael-post-appender", $scope).isotope();
 							$isotope.isotope("appended", $content).isotope("layout");
 
