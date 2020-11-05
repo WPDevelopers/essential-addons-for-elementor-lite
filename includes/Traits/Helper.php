@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+use Elementor\Plugin;
 use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use \Essential_Addons_Elementor\Elements\Woo_Checkout;
 
@@ -396,6 +397,11 @@ trait Helper
     public function print_load_more_button($settings, $args)
     {
         //@TODO; not all widget's settings contain posts_per_page name exactly, so adjust the settings before passing here or run a migration and make all settings key generalize for load more feature.
+        if (!isset($this->page_id)) {
+            if ( Plugin::$instance->documents->get_current() ) {
+                $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
+            }
+        }
         $this->add_render_attribute('load-more', [
             'class'          => "eael-load-more-button",
             'id'             => "eael-load-more-btn-" . $this->get_id(),
@@ -409,11 +415,11 @@ trait Helper
                 'name' => $this->process_directory_name() ],
                 1),
             'data-class'    => get_class( $this ),
-            'data-layout'   => "masonry",
-            'data-page'     => "1",
+            'data-layout'   => isset($settings['layout_mode']) ? $settings['layout_mode'] : "masonry",
+            'data-page'     => 1,
             'data-args'     => http_build_query( $args ),
         ]);
-        if ( 'true' == $settings['show_load_more'] && $args['posts_per_page'] != '-1' ) { ?>
+        if ( ('true' == $settings['show_load_more'] || 'yes' == $settings['show_load_more']) && $args['posts_per_page'] != '-1' ) { ?>
             <div class="eael-load-more-button-wrap">
                 <button <?php $this->print_render_attribute_string( 'load-more' ); ?>>
                     <div class="eael-btn-loader button__loader"></div>
