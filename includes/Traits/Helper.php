@@ -74,7 +74,7 @@ trait Helper
 					}
 
 					if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Post_List' ) {
-						$html .= '<div class="eael-post-list-posts-wrap">';
+//						$html .= '<div class="eael-post-list-posts-wrap">';
 					}
 
 					while ( $query->have_posts() ) {
@@ -84,7 +84,7 @@ trait Helper
 						$iterator++;
 					}
 					if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Post_List' ) {
-						$html .= '</div>';
+//						$html .= '</div>';
 					}
 				}
 			}
