@@ -1516,8 +1516,8 @@ class Info_Box extends Widget_Base
             $this->add_render_attribute('eael_infobox_inner', 'class', 'icon-on-right');
         }
 
-        $target = $settings['eael_show_infobox_clickable_link']['is_external'] ? 'target="_blank"' : '';
-        $nofollow = $settings['eael_show_infobox_clickable_link']['nofollow'] ? 'rel="nofollow"' : '';
+        $target = !empty($settings['eael_show_infobox_clickable_link']['is_external']) ? 'target="_blank"' : '';
+        $nofollow = !empty($settings['eael_show_infobox_clickable_link']['nofollow']) ? 'rel="nofollow"' : '';
 
         ob_start();
         ?>
