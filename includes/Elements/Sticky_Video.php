@@ -157,6 +157,7 @@ class Sticky_Video extends Widget_Base
             [
                 'label' => __('Link', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
                 'placeholder' => __('Enter your URL (YouTube)', 'essential-addons-for-elementor-lite'),
                 'label_block' => true,
                 'default' => 'https://www.youtube.com/watch?v=uuyXfUDqRZM',
@@ -171,6 +172,7 @@ class Sticky_Video extends Widget_Base
             [
                 'label' => __('Link', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'placeholder' => __('Enter your URL (Vimeo)', 'essential-addons-for-elementor-lite'),
                 'label_block' => true,
                 'default' => 'https://vimeo.com/235215203',
@@ -185,6 +187,7 @@ class Sticky_Video extends Widget_Base
             [
                 'label' => __('Link', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'placeholder' => __('Enter your URL (Dailymotion)', 'essential-addons-for-elementor-lite'),
                 'label_block' => true,
                 'condition' => [
@@ -229,6 +232,7 @@ class Sticky_Video extends Widget_Base
             [
                 'label' => __('Link', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'placeholder' => __('Enter your URL', 'essential-addons-for-elementor-lite'),
                 'label_block' => true,
                 'show_label' => false,

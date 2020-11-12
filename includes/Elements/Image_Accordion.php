@@ -11,7 +11,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
-
+use \Elementor\Repeater;
 class Image_Accordion extends Widget_Base {
     public function get_name() {
         return 'eael-image-accordion';
@@ -153,6 +153,68 @@ class Image_Accordion extends Widget_Base {
             ]
         );
 
+        $repeater = new Repeater();
+
+        $repeater->add_control(
+            'eael_accordion_is_active',
+            [
+                'label'        => __( 'Make it active?', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+                'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_accordion_bg',
+            [
+                'label'       => esc_html__( 'Background Image', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::MEDIA,
+                'label_block' => true,
+                'default'     => [
+                    'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_accordion_tittle',
+            [
+                'label'       => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::TEXT,
+                'label_block' => true,
+                'default'     => esc_html__( 'Accordion item title', 'essential-addons-for-elementor-lite' ),
+                'dynamic'     => ['active' => true],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_accordion_content',
+            [
+                'label'       => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::WYSIWYG,
+                'label_block' => true,
+                'default'     => esc_html__( 'Accordion content goes here!', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_accordion_title_link',
+            [
+                'name'          => 'eael_accordion_title_link',
+                'label'         => esc_html__( 'Title Link', 'essential-addons-for-elementor-lite' ),
+                'type'          => Controls_Manager::URL,
+                'dynamic'   => ['active' => true],
+                'label_block'   => true,
+                'default'       => [
+                    'url'         => '#',
+                    'is_external' => '',
+                ],
+                'show_external' => true,
+            ]
+        );
+
         $this->add_control(
             'eael_img_accordions',
             [
@@ -164,51 +226,7 @@ class Image_Accordion extends Widget_Base {
                     ['eael_accordion_bg' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png'],
                     ['eael_accordion_bg' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png'],
                 ],
-                'fields'      => [
-                    [
-                        'name'         => 'eael_accordion_is_active',
-                        'label'        => __( 'Make it active?', 'essential-addons-for-elementor-lite' ),
-                        'type'         => \Elementor\Controls_Manager::SWITCHER,
-                        'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-                        'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
-                        'return_value' => 'yes',
-                    ],
-                    [
-                        'name'        => 'eael_accordion_bg',
-                        'label'       => esc_html__( 'Background Image', 'essential-addons-for-elementor-lite' ),
-                        'type'        => Controls_Manager::MEDIA,
-                        'label_block' => true,
-                        'default'     => [
-                            'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png',
-                        ],
-                    ],
-                    [
-                        'name'        => 'eael_accordion_tittle',
-                        'label'       => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
-                        'type'        => Controls_Manager::TEXT,
-                        'label_block' => true,
-                        'default'     => esc_html__( 'Accordion item title', 'essential-addons-for-elementor-lite' ),
-                        'dynamic'     => ['active' => true],
-                    ],
-                    [
-                        'name'        => 'eael_accordion_content',
-                        'label'       => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
-                        'type'        => Controls_Manager::WYSIWYG,
-                        'label_block' => true,
-                        'default'     => esc_html__( 'Accordion content goes here!', 'essential-addons-for-elementor-lite' ),
-                    ],
-                    [
-                        'name'          => 'eael_accordion_title_link',
-                        'label'         => esc_html__( 'Title Link', 'essential-addons-for-elementor-lite' ),
-                        'type'          => Controls_Manager::URL,
-                        'label_block'   => true,
-                        'default'       => [
-                            'url'         => '#',
-                            'is_external' => '',
-                        ],
-                        'show_external' => true,
-                    ],
-                ],
+                'fields'      => $repeater->get_controls(),
                 'title_field' => '{{eael_accordion_tittle}}',
             ]
         );

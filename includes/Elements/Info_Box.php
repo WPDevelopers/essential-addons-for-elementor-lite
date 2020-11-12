@@ -193,6 +193,7 @@ class Info_Box extends Widget_Base
             [
                 'label' => esc_html__('Number', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'condition' => [
                     'eael_infobox_img_or_icon' => 'number',
                 ],
@@ -382,6 +383,7 @@ class Info_Box extends Widget_Base
             [
                 'label' => esc_html__('Infobox Link', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::URL,
+                'dynamic'   => ['active' => true],
                 'label_block' => true,
                 'default' => [
                     'url' => 'http://',
@@ -397,8 +399,11 @@ class Info_Box extends Widget_Base
         $this->add_control(
             'infobox_button_text',
             [
-                'label' => __('Button Text', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
+                'label'       => __('Button Text', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'dynamic' => [
+					'active' => true
+				],
                 'label_block' => true,
                 'default' => 'Click Me!',
                 'separator' => 'before',
@@ -413,10 +418,11 @@ class Info_Box extends Widget_Base
         $this->add_control(
             'infobox_button_link_url',
             [
-                'label' => __('Link URL', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::URL,
-                'label_block' => true,
-                'placeholder' => __('Enter link URL for the button', 'essential-addons-for-elementor-lite'),
+                'label'         => __('Link URL', 'essential-addons-for-elementor-lite'),
+                'type'          => Controls_Manager::URL,
+                'dynamic'   => ['active' => true],
+                'label_block'   => true,
+                'placeholder'   => __('Enter link URL for the button', 'essential-addons-for-elementor-lite'),
                 'show_external' => true,
                 'default' => [
                     'url' => '#',
@@ -1498,7 +1504,7 @@ class Info_Box extends Widget_Base
      */
     protected function eael_infobox_before()
     {
-        $settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
 
         $this->add_render_attribute('eael_infobox_inner', 'class', 'eael-infobox');
 
@@ -1510,8 +1516,8 @@ class Info_Box extends Widget_Base
             $this->add_render_attribute('eael_infobox_inner', 'class', 'icon-on-right');
         }
 
-        $target = $settings['eael_show_infobox_clickable_link']['is_external'] ? 'target="_blank"' : '';
-        $nofollow = $settings['eael_show_infobox_clickable_link']['nofollow'] ? 'rel="nofollow"' : '';
+        $target = !empty($settings['eael_show_infobox_clickable_link']['is_external']) ? 'target="_blank"' : '';
+        $nofollow = !empty($settings['eael_show_infobox_clickable_link']['nofollow']) ? 'rel="nofollow"' : '';
 
         ob_start();
         ?>

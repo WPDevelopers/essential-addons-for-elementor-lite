@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
+use Elementor\Modules\DynamicTags\Module as TagsModule;
 use \Elementor\Widget_Base;
 
 use \Essential_Addons_Elementor\Classes\Helper;
@@ -167,6 +168,13 @@ class Cta_Box extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
                 'default' => '',
+                'dynamic' => [
+                    'active' => true,
+                    'categories'   => [
+                        TagsModule::POST_META_CATEGORY,
+                        TagsModule::TEXT_CATEGORY,
+                    ],
+                ],
             ]
         );
         $this->add_control(
@@ -243,6 +251,7 @@ class Cta_Box extends Widget_Base
             [
                 'label' => esc_html__('Primary Button Text', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default' => esc_html__('Button Text', 'essential-addons-for-elementor-lite'),
             ]
@@ -253,6 +262,7 @@ class Cta_Box extends Widget_Base
             [
                 'label' => esc_html__('Primary Button Link', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::URL,
+                'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default' => [
                     'url' => 'http://',
@@ -278,6 +288,7 @@ class Cta_Box extends Widget_Base
             [
                 'label' => esc_html__('Secondary Button Text', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default' => esc_html__('Button Text Two', 'essential-addons-for-elementor-lite'),
                 'condition' => array(
@@ -291,6 +302,7 @@ class Cta_Box extends Widget_Base
             [
                 'label' => esc_html__('Secondary Button Link', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::URL,
+                'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default' => [
                     'url' => 'http://',

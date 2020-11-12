@@ -1003,7 +1003,7 @@ class Post_Grid extends Widget_Base
         $settings = HelperClass::fix_old_query($settings);
         $args = HelperClass::get_query_args($settings);
         $args = HelperClass::get_dynamic_args($settings, $args);
-        
+
         $settings_arry = [
             'eael_show_image' => $settings['eael_show_image'],
             'image_size' => $settings['image_size'],
@@ -1062,26 +1062,26 @@ class Post_Grid extends Widget_Base
         echo '<div ' . $this->get_render_attribute_string( 'post_grid_wrapper' ) . '>
             <div ' . $this->get_render_attribute_string( 'post_grid_container' ) . ' data-layout-mode="' . $settings["layout_mode"] . '">';
 
-                $template = $this->get_template($settings['eael_dynamic_template_Layout']);
-                if(file_exists($template)){
-                    $query = new \WP_Query( $args );
+        $template = $this->get_template($settings['eael_dynamic_template_Layout']);
+        if(file_exists($template)){
+            $query = new \WP_Query( $args );
 
-                    if ( $query->have_posts() ) {
+            if ( $query->have_posts() ) {
 
-                        while ( $query->have_posts() ) {
-                            $query->the_post();
-                            include($template);
-                        }
-                    }else {
-                        _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
-                    }
-                    wp_reset_postdata();
-                } else {
-                    _e('<p class="no-posts-found">No Layout Found!</p>', 'essential-addons-for-elementor-lite');
+                while ( $query->have_posts() ) {
+                    $query->the_post();
+                    include($template);
                 }
+            }else {
+                _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+            }
+            wp_reset_postdata();
+        } else {
+            _e('<p class="no-posts-found">No Layout Found!</p>', 'essential-addons-for-elementor-lite');
+        }
 
 
-            echo '</div>
+        echo '</div>
             <div class="clearfix"></div>
         </div>';
 

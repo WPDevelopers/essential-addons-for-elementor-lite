@@ -13,6 +13,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Plugin;
+use Elementor\Repeater;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
@@ -121,6 +122,122 @@ class Adv_Tabs extends Widget_Base
                 'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
             ]
         );
+
+        $repeater = new Repeater();
+
+        $repeater->add_control(
+            'eael_adv_tabs_tab_show_as_default',
+            [
+                'label' => __('Set as Default', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => 'inactive',
+                'return_value' => 'active-default',
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_adv_tabs_icon_type',
+            [
+                'label' => esc_html__('Icon Type', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'label_block' => false,
+                'options' => [
+                    'none' => [
+                        'title' => esc_html__('None', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-ban',
+                    ],
+                    'icon' => [
+                        'title' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-gear',
+                    ],
+                    'image' => [
+                        'title' => esc_html__('Image', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-picture-o',
+                    ],
+                ],
+                'default' => 'icon',
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_adv_tabs_tab_title_icon_new',
+            [
+                'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::ICONS,
+                'fa4compatibility' => 'eael_adv_tabs_tab_title_icon',
+                'default' => [
+                    'value' => 'fas fa-home',
+                    'library' => 'fa-solid',
+                ],
+                'condition' => [
+                    'eael_adv_tabs_icon_type' => 'icon',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_adv_tabs_tab_title_image',
+            [
+                'label' => esc_html__('Image', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => Utils::get_placeholder_image_src(),
+                ],
+                'condition' => [
+                    'eael_adv_tabs_icon_type' => 'image',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_adv_tabs_tab_title',
+            [
+                'name' => 'eael_adv_tabs_tab_title',
+                'label' => esc_html__('Tab Title', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('Tab Title', 'essential-addons-for-elementor-lite'),
+                'dynamic' => ['active' => true],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_adv_tabs_text_type',
+            [
+                'label' => __('Content Type', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'content' => __('Content', 'essential-addons-for-elementor-lite'),
+                    'template' => __('Saved Templates', 'essential-addons-for-elementor-lite'),
+                ],
+                'default' => 'content',
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_primary_templates',
+            [
+                'label' => __('Choose Template', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => Helper::get_elementor_templates(),
+                'condition' => [
+                    'eael_adv_tabs_text_type' => 'template',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_adv_tabs_tab_content',
+            [
+                'label' => esc_html__('Tab Content', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::WYSIWYG,
+                'default' => esc_html__('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-for-elementor-lite'),
+                'dynamic' => ['active' => true],
+                'condition' => [
+                    'eael_adv_tabs_text_type' => 'content',
+                ],
+            ]
+        );
+
         $this->add_control(
             'eael_adv_tabs_tab',
             [
@@ -131,96 +248,7 @@ class Adv_Tabs extends Widget_Base
                     ['eael_adv_tabs_tab_title' => esc_html__('Tab Title 2', 'essential-addons-for-elementor-lite')],
                     ['eael_adv_tabs_tab_title' => esc_html__('Tab Title 3', 'essential-addons-for-elementor-lite')],
                 ],
-                'fields' => [
-                    [
-                        'name' => 'eael_adv_tabs_tab_show_as_default',
-                        'label' => __('Set as Default', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SWITCHER,
-                        'default' => 'inactive',
-                        'return_value' => 'active-default',
-                    ],
-                    [
-                        'name' => 'eael_adv_tabs_icon_type',
-                        'label' => esc_html__('Icon Type', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::CHOOSE,
-                        'label_block' => false,
-                        'options' => [
-                            'none' => [
-                                'title' => esc_html__('None', 'essential-addons-for-elementor-lite'),
-                                'icon' => 'fa fa-ban',
-                            ],
-                            'icon' => [
-                                'title' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
-                                'icon' => 'fa fa-gear',
-                            ],
-                            'image' => [
-                                'title' => esc_html__('Image', 'essential-addons-for-elementor-lite'),
-                                'icon' => 'fa fa-picture-o',
-                            ],
-                        ],
-                        'default' => 'icon',
-                    ],
-                    [
-                        'name' => 'eael_adv_tabs_tab_title_icon_new',
-                        'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::ICONS,
-                        'fa4compatibility' => 'eael_adv_tabs_tab_title_icon',
-                        'default' => [
-                            'value' => 'fas fa-home',
-                            'library' => 'fa-solid',
-                        ],
-                        'condition' => [
-                            'eael_adv_tabs_icon_type' => 'icon',
-                        ],
-                    ],
-                    [
-                        'name' => 'eael_adv_tabs_tab_title_image',
-                        'label' => esc_html__('Image', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::MEDIA,
-                        'default' => [
-                            'url' => Utils::get_placeholder_image_src(),
-                        ],
-                        'condition' => [
-                            'eael_adv_tabs_icon_type' => 'image',
-                        ],
-                    ],
-                    [
-                        'name' => 'eael_adv_tabs_tab_title',
-                        'label' => esc_html__('Tab Title', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::TEXT,
-                        'default' => esc_html__('Tab Title', 'essential-addons-for-elementor-lite'),
-                        'dynamic' => ['active' => true],
-                    ],
-                    [
-                        'name' => 'eael_adv_tabs_text_type',
-                        'label' => __('Content Type', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SELECT,
-                        'options' => [
-                            'content' => __('Content', 'essential-addons-for-elementor-lite'),
-                            'template' => __('Saved Templates', 'essential-addons-for-elementor-lite'),
-                        ],
-                        'default' => 'content',
-                    ],
-                    [
-                        'name' => 'eael_primary_templates',
-                        'label' => __('Choose Template', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SELECT,
-                        'options' => Helper::get_elementor_templates(),
-                        'condition' => [
-                            'eael_adv_tabs_text_type' => 'template',
-                        ],
-                    ],
-                    [
-                        'name' => 'eael_adv_tabs_tab_content',
-                        'label' => esc_html__('Tab Content', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::WYSIWYG,
-                        'default' => esc_html__('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-for-elementor-lite'),
-                        'dynamic' => ['active' => true],
-                        'condition' => [
-                            'eael_adv_tabs_text_type' => 'content',
-                        ],
-                    ],
-                ],
+                'fields' => $repeater->get_controls(),
                 'title_field' => '{{eael_adv_tabs_tab_title}}',
             ]
         );

@@ -88,6 +88,7 @@ class Twitter_Feed extends Widget_Base
             [
                 'label' => esc_html__('Account Name', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'default' => '@wpdevteam',
                 'label_block' => false,
                 'description' => esc_html__('Use @ sign with your account name.', 'essential-addons-for-elementor-lite'),
@@ -99,6 +100,7 @@ class Twitter_Feed extends Widget_Base
             [
                 'label' => esc_html__('Hashtag Name', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
                 'description' => esc_html__('Remove # sign from your hashtag name.', 'essential-addons-for-elementor-lite'),
             ]
@@ -912,7 +914,7 @@ class Twitter_Feed extends Widget_Base
 
     protected function render()
     {
-        $settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
 
         echo '<div class="eael-twitter-feed eael-twitter-feed-' . $this->get_id() . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type'] . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type_col_type'] . ' clearfix" data-gutter="' . $settings['eael_twitter_feed_column_spacing']['size'] . '">
 			' . $this->twitter_feed_render_items($this->get_id(), $settings) . '
