@@ -11,6 +11,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Group_Control_Background;
+use Elementor\Repeater;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
 
@@ -105,6 +106,9 @@ class Team_Member extends Widget_Base {
 			[
 				'label' => esc_html__( 'Name', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
 				'default' => esc_html__( 'John Doe', 'essential-addons-for-elementor-lite'),
 			]
 		);
@@ -114,6 +118,9 @@ class Team_Member extends Widget_Base {
 			[
 				'label' => esc_html__( 'Job Position', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
 				'default' => esc_html__( 'Software Engineer', 'essential-addons-for-elementor-lite'),
 			]
 		);
@@ -123,6 +130,9 @@ class Team_Member extends Widget_Base {
 			[
 				'label' => esc_html__( 'Description', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXTAREA,
+                'dynamic' => [
+                    'active' => true,
+                ],
 				'default' => esc_html__( 'Add team member description here. Remove the text if not necessary.', 'essential-addons-for-elementor-lite'),
 			]
 		);
@@ -147,7 +157,37 @@ class Team_Member extends Widget_Base {
 			]
 		);
 
+        $repeater = new Repeater();
 
+        $repeater->add_control(
+            'social_new',
+            [
+                'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::ICONS,
+                'fa4compatibility' => 'social',
+                'default' => [
+                    'value' => 'fab fa-wordpress',
+                    'library' => 'fa-brands',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'link',
+            [
+                'name' => 'link',
+                'label' => esc_html__( 'Link', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::URL,
+                'dynamic'   => ['active' => true],
+                'label_block' => true,
+                'default' => [
+                    'url' => '',
+                    'is_external' => 'true',
+                ],
+                'placeholder' => esc_html__( 'Place URL here', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+		
 		$this->add_control(
 			'eael_team_member_social_profile_links',
 			[
@@ -181,29 +221,7 @@ class Team_Member extends Widget_Base {
 						]
 					],
 				],
-				'fields' => [
-					[
-						'name' => 'social_new',
-						'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
-						'type' => Controls_Manager::ICONS,
-						'fa4compatibility' => 'social',
-						'default' => [
-							'value' => 'fab fa-wordpress',
-							'library' => 'fa-brands',
-						],
-					],
-					[
-						'name' => 'link',
-						'label' => esc_html__( 'Link', 'essential-addons-for-elementor-lite'),
-						'type' => Controls_Manager::URL,
-						'label_block' => true,
-						'default' => [
-							'url' => '',
-							'is_external' => 'true',
-						],
-						'placeholder' => esc_html__( 'Place URL here', 'essential-addons-for-elementor-lite'),
-					],
-				],
+				'fields' => $repeater->get_controls(),
 				'title_field' => '<i class="{{ social_new.value }}"></i>',
 			]
 		);
@@ -835,7 +853,7 @@ class Team_Member extends Widget_Base {
 
 	protected function render( ) {
 
-		$settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
 		$team_member_image = $this->get_settings( 'eael_team_member_image' );
 		$team_member_image_url = Group_Control_Image_Size::get_attachment_image_src( $team_member_image['id'], 'thumbnail', $settings );
 		if( empty( $team_member_image_url ) ) : $team_member_image_url = $team_member_image['url']; else: $team_member_image_url = $team_member_image_url; endif;

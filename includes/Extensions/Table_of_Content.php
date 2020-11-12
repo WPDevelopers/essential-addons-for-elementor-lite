@@ -109,6 +109,7 @@ class Table_of_Content
             [
                 'label' => __('Title', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'default' => __('Table of Contents', 'essential-addons-for-elementor-lite'),
                 'label_block' => false,
                 'condition' => [
@@ -162,6 +163,7 @@ class Table_of_Content
             [
                 'label' => __('Content Selector', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'description' => __('Which content are searched for heading tag, Provide unique selector to replace default selector', 'essential-addons-for-elementor-lite'),
                 'label_block' => false,
                 'condition' => [
@@ -186,6 +188,7 @@ class Table_of_Content
             [
                 'label' => __('Exclude By Selector', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'description' => __('CSS selectors, in a comma-separated list', 'essential-addons-for-elementor-lite'),
                 'default' => '',
                 'label_block' => true,

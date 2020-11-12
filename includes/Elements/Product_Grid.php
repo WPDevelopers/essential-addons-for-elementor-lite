@@ -857,7 +857,7 @@ class Product_Grid extends Widget_Base {
                     _e( '<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
                 }
                 $this->print_load_more_button($settings, $args);
-                 ?>
+                ?>
             </div>
         </div>
         <?php

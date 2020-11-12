@@ -163,6 +163,9 @@ class Woo_Checkout extends Widget_Base {
 			[
 				'label' => __( 'Product Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
 				'default' => __( 'Product', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
 					'ea_woo_checkout_table_header_text' => 'yes',
@@ -174,6 +177,9 @@ class Woo_Checkout extends Widget_Base {
 			[
 				'label' => __( 'Quantity Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
 				'default' => __( 'Quantity', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
 					'ea_woo_checkout_table_header_text' => 'yes',
@@ -185,6 +191,9 @@ class Woo_Checkout extends Widget_Base {
 			[
 				'label' => __( 'Price Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
 				'default' => __( 'Price', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
 					'ea_woo_checkout_table_header_text' => 'yes',
@@ -207,6 +216,9 @@ class Woo_Checkout extends Widget_Base {
 			[
 				'label' => __( 'Link Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
 				'default' => __( 'Continue Shopping', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
 					'ea_woo_checkout_shop_link' => 'yes',
@@ -2290,9 +2302,9 @@ class Woo_Checkout extends Widget_Base {
 	        return;
         }
 
-		$settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
 
-		$this->add_render_attribute( 'container', 'class', [
+        $this->add_render_attribute( 'container', 'class', [
 			'ea-woo-checkout',
 			'layout-'. $settings['ea_woo_checkout_layout']
 		] );

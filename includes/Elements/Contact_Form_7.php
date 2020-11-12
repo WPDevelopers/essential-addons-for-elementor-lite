@@ -159,6 +159,9 @@ class Contact_Form_7 extends Widget_Base
                 [
                     'label' => esc_html__('Title', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
+                    'dynamic' => [
+                        'active' => true,
+                    ],
                     'label_block' => true,
                     'default' => '',
                     'condition' => [
@@ -183,6 +186,9 @@ class Contact_Form_7 extends Widget_Base
                 [
                     'label' => esc_html__('Description', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXTAREA,
+                    'dynamic' => [
+                        'active' => true,
+                    ],
                     'default' => '',
                     'condition' => [
                         'form_description' => 'yes',
@@ -1709,7 +1715,7 @@ class Contact_Form_7 extends Widget_Base
             return;
         }
 
-        $settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
 
         $this->add_render_attribute('contact-form', 'class', [
             'eael-contact-form',
