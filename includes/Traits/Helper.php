@@ -80,6 +80,16 @@ trait Helper
             $args['post__not_in'] = array_unique($_REQUEST['post__not_in']);
         }
 
+        // ensure control name compatibility to old code if it is post block
+        if ($class === '\Essential_Addons_Elementor\Pro\Elements\Post_Block' ) {
+            $settings ['post_block_hover_animation'] = $settings['eael_post_block_hover_animation'];
+            $settings ['show_read_more_button'] = $settings['eael_show_read_more_button'];
+            $settings ['eael_post_block_bg_hover_icon'] = (isset($settings['__fa4_migrated']['eael_post_block_bg_hover_icon_new']) || empty($settings['eael_post_block_bg_hover_icon'])) ? $settings['eael_post_block_bg_hover_icon_new']['value'] : $settings['eael_post_block_bg_hover_icon'];
+            $settings ['expanison_indicator'] = $settings['excerpt_expanison_indicator'];
+        }
+
+
+
         $template_info = $_REQUEST['template_info'];
 
         if ($template_info) {
@@ -394,7 +404,7 @@ trait Helper
         }
     }
 
-    public function print_load_more_button($settings, $args)
+    public function print_load_more_button($settings, $args, $plugin_type = 'free')
     {
         //@TODO; not all widget's settings contain posts_per_page name exactly, so adjust the settings before passing here or run a migration and make all settings key generalize for load more feature.
         if (!isset($this->page_id)) {
@@ -410,7 +420,7 @@ trait Helper
             'data-page-id'   => $this->page_id,
             'data-nonce'     => wp_create_nonce( 'load_more' ),
             'data-template'  => json_encode([
-                'dir'   => 'free',
+                'dir'   => $plugin_type,
                 'file_name' => $settings['eael_dynamic_template_Layout'],
                 'name' => $this->process_directory_name() ],
                 1),
