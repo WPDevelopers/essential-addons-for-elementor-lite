@@ -66,7 +66,7 @@ class Migration
             update_option('eael_version', EAEL_PLUGIN_VERSION);
 
             // update editor time
-            set_transient('eael_editor_updated_at', strtotime('now'));
+            update_option('eael_editor_updated_at', strtotime('now'));
         }
 
     }
