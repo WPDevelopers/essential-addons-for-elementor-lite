@@ -74,9 +74,9 @@ trait Generator
 
     public function request_requires_update()
     {
-        $elements = get_transient($this->uid . '_elements');
-        $editor_updated_at = get_transient('eael_editor_updated_at');
-        $post_updated_at = get_transient($this->uid . '_updated_at');
+        $elements = get_option($this->uid . '_elements');
+        $editor_updated_at = get_option('eael_editor_updated_at');
+        $post_updated_at = get_option($this->uid . '_updated_at');
 
         if ($elements === false) {
             return true;
@@ -194,7 +194,7 @@ trait Generator
         }
 
         // check if already updated
-        if (get_transient('eael_editor_updated_at') == get_transient($this->uid . '_updated_at')) {
+        if (get_option('eael_editor_updated_at') == get_option($this->uid . '_updated_at')) {
             return;
         }
 
@@ -202,9 +202,9 @@ trait Generator
         $this->loaded_elements = $this->parse_elements($this->loaded_elements);
 
         // update page data
-        set_transient($this->uid . '_elements', $this->loaded_elements);
-        set_transient($this->uid . '_custom_js', $this->custom_js_strings);
-        set_transient($this->uid . '_updated_at', get_transient('eael_editor_updated_at'));
+        update_option($this->uid . '_elements', $this->loaded_elements);
+        update_option($this->uid . '_custom_js', $this->custom_js_strings);
+        update_option($this->uid . '_updated_at', get_option('eael_editor_updated_at'));
 
         // remove old cache files
         $this->remove_files($this->uid);
@@ -290,7 +290,7 @@ trait Generator
         }
 
         if ($this->request_requires_update == false && $context == 'view' && $ext == 'js') {
-            $output .= get_transient($this->uid . '_custom_js');
+            $output .= get_option($this->uid . '_custom_js');
         }
 
         return $output;

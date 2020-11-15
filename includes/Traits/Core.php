@@ -265,7 +265,7 @@ trait Core
         }
 
         // set editor time
-        set_transient('eael_editor_updated_at', strtotime('now'));
+        update_option('eael_editor_updated_at', strtotime('now'));
 
         // update options
         update_option('eael_global_settings', $global_settings);

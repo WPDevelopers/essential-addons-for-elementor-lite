@@ -183,7 +183,7 @@ trait Enqueue
             if ($this->request_requires_update) {
                 $elements = $this->get_settings();
             } else {
-                $elements = get_transient($this->uid . '_elements');
+                $elements = get_option($this->uid . '_elements');
             }
 
             // if no widget in page, return
