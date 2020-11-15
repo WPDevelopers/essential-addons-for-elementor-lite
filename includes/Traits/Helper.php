@@ -144,7 +144,22 @@ trait Helper {
             }
         }
 
-        echo $html;
+        $json = wp_json_encode( $html );
+
+        while ( ob_get_status() ) {
+            ob_end_clean();
+        }
+        if ( function_exists( 'gzencode' ) ) {
+            $response = gzencode( $json );
+
+            header( 'Content-Type: application/json; charset=utf-8' );
+            header( 'Content-Encoding: gzip' );
+            header( 'Content-Length: ' . strlen( $response ) );
+
+            echo $response;
+        } else {
+            echo $json;
+        }
         wp_die();
     }
 
