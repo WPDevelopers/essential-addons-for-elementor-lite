@@ -134,7 +134,7 @@ class Product_Grid extends Widget_Base {
 			[
 				'label' => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::SELECT,
-				'default' => 'grid',
+				'default' => 'masonry',
 				'options' => [
 					'grid' => esc_html__( 'Grid', 'essential-addons-for-elementor-lite' ),
 					'list' => esc_html__( 'List', 'essential-addons-for-elementor-lite' ),
