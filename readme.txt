@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.5
 Requires PHP: 5.4
-Stable tag: 4.3.3
+Stable tag: 4.3.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -223,6 +223,16 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.3.5 - 03/11/2020 =
+- Fixed: EA Post Grid | PHP notice for Title Tag
+- Few minor bug fix and improvements
+
+= 4.3.4 - 02/11/2020 =
+- Fixed: EA Post Grid | Title Tag not working
+- Fixed: EA Product Grid | Displaying 'Out of Stock' products even if it's disabled from WooCommerce
+- Fixed: EA Product Grid | PHP Notices
+- Few minor bug fix and improvements
 
 = 4.3.3 - 22/10/2020 =
 - Fixed: Assets not generating on Multi-sites
