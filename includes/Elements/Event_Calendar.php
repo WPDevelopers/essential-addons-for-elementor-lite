@@ -147,6 +147,7 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Title', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
                 'label_block' => true,
             ]
         );
