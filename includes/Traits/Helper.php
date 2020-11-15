@@ -86,6 +86,9 @@ trait Helper {
             $settings ['eael_post_block_bg_hover_icon'] = (isset($settings['__fa4_migrated']['eael_post_block_bg_hover_icon_new']) || empty($settings['eael_post_block_bg_hover_icon'])) ? $settings['eael_post_block_bg_hover_icon_new']['value'] : $settings['eael_post_block_bg_hover_icon'];
             $settings ['expanison_indicator'] = $settings['excerpt_expanison_indicator'];
         }
+        if ( $class === '\Essential_Addons_Elementor\Elements\Post_Timeline' ) {
+            $settings ['expanison_indicator'] = $settings['excerpt_expanison_indicator'];
+        }
 
         $template_info = $_REQUEST['template_info'];
 
