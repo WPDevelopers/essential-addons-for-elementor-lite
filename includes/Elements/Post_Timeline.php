@@ -8,15 +8,15 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
-use \Essential_Addons_Elementor\Classes\Controls;
+use Essential_Addons_Elementor\Traits\Template_Query;
 
 class Post_Timeline extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Template_Query;
+    use Template_Query;
 
     public function get_name()
     {
@@ -347,7 +347,9 @@ class Post_Timeline extends Widget_Base
             [
                 'name'     => 'eael_timeline_title_typography',
                 'label'    => __('Title Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
                 'selector' => '{{WRAPPER}} .eael-timeline-post-title h2',
             ]
         );
@@ -407,7 +409,9 @@ class Post_Timeline extends Widget_Base
             [
                 'name'     => 'eael_timeline_excerpt_typography',
                 'label'    => __('Excerpt Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'   => Scheme_Typography::TYPOGRAPHY_3,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_TEXT,
+                ],
                 'selector' => '{{WRAPPER}} .eael-timeline-post-excerpt p',
             ]
         );
