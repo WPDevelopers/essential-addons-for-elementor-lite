@@ -66,3 +66,12 @@
     color: #fff;
     padding: 10px 25px;
 }
+
+
+// RTL
+
+.rtl {
+    .eael-fancy-text-container {
+        direction: ltr;
+    }
+}
