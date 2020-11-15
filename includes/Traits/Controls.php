@@ -673,7 +673,7 @@ trait Controls
         $wb->add_control(
             'title_tag',
             [
-                'label' => __('Select Tag', 'essential-addons-for-elementor-lite'),
+                'label' => __('Title Tag', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'h2',
                 'options' => [
