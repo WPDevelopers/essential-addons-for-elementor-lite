@@ -64,9 +64,6 @@ class Migration
         if (get_option('eael_version') != EAEL_PLUGIN_VERSION) {
             // update plugin version
             update_option('eael_version', EAEL_PLUGIN_VERSION);
-
-            // update editor time
-            update_option('eael_editor_updated_at', strtotime('now'));
         }
 
     }

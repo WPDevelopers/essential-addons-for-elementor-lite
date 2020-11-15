@@ -78,10 +78,11 @@ trait Generator
         $editor_updated_at = get_option('eael_editor_updated_at');
         $post_updated_at = get_option($this->uid . '_updated_at');
 
-        if ($elements === false) {
-            return true;
-        }
         if ($editor_updated_at === false) {
+            update_option('eael_editor_updated_at', strtotime('now'));
+        }
+
+        if ($elements === false) {
             return true;
         }
         if ($post_updated_at === false) {
