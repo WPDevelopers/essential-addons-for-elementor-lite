@@ -419,7 +419,7 @@ trait Helper {
                 'name' => $this->process_directory_name() ],
                 1),
             'data-class'    => get_class( $this ),
-            'data-layout'   => isset($settings['layout_mode']) ? $settings['layout_mode'] : "masonry",
+            'data-layout'   => isset($settings['layout_mode']) ? $settings['layout_mode'] : "",
             'data-page'     => 1,
             'data-args'     => http_build_query( $args ),
         ]);
