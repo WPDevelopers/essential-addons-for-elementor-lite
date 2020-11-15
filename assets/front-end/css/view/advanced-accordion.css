@@ -132,3 +132,9 @@
     transition: all 0.3s ease-in-out;
   }
 }
+
+.rtl .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
+  -webkit-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
