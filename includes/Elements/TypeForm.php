@@ -341,7 +341,7 @@ class TypeForm extends Widget_Base {
     protected function render () {
 
         $settings = $this->get_settings_for_display();
-        if ($settings['eael_typeform_list'] == '') {
+        if ($this->get_settings('eael_typeform_list') == '') {
             return;
         }
         $id = 'eael-type-form-'.$this->get_id();
