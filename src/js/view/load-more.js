@@ -74,8 +74,6 @@
 						$(".eael-post-appender", $scope).append($content);
 
 						if ($layout === "masonry") {
-							console.log('is it masonry');
-							console.log($layout);
 							var $isotope = $(".eael-post-appender", $scope).isotope();
 							$isotope.isotope("appended", $content).isotope("layout");
 

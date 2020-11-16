@@ -89,6 +89,13 @@ trait Helper {
         if ( $class === '\Essential_Addons_Elementor\Elements\Post_Timeline' ) {
             $settings ['expanison_indicator'] = $settings['excerpt_expanison_indicator'];
         }
+        if ($class === '\Essential_Addons_Elementor\Pro\Elements\Dynamic_Filterable_Gallery' ) {
+            $settings['eael_section_fg_zoom_icon'] = (isset($settings['__fa4_migrated']['eael_section_fg_zoom_icon_new']) || empty($settings['eael_section_fg_zoom_icon']) ? $settings['eael_section_fg_zoom_icon_new']['value'] : $settings['eael_section_fg_zoom_icon']);
+            $settings['eael_section_fg_link_icon'] = (isset($settings['__fa4_migrated']['eael_section_fg_link_icon_new']) || empty($settings['eael_section_fg_link_icon']) ? $settings['eael_section_fg_link_icon_new']['value'] : $settings['eael_section_fg_link_icon']);
+            $settings['show_load_more_text'] = $settings['eael_fg_loadmore_btn_text'];
+            $settings['layout_mode'] = isset($settings['layout_mode']) ? $settings['layout_mode'] : 'masonry';
+
+        }
 
         $template_info = $_REQUEST['template_info'];
 
@@ -441,7 +448,7 @@ trait Helper {
             'data-page'     => 1,
             'data-args'     => http_build_query( $args ),
         ]);
-        if ( ('true' == $settings['show_load_more'] || 'yes' == $settings['show_load_more']) && $args['posts_per_page'] != '-1' ) { ?>
+        if ( ('true' == $settings['show_load_more'] || 1 == $settings['show_load_more'] || 'yes' == $settings['show_load_more']) && $args['posts_per_page'] != '-1' ) { ?>
             <div class="eael-load-more-button-wrap">
                 <button <?php $this->print_render_attribute_string( 'load-more' ); ?>>
                     <div class="eael-btn-loader button__loader"></div>
