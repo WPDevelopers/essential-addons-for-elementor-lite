@@ -428,7 +428,7 @@ trait Elements
                 $content_selector = $settings_data['eael_ext_toc_content_selector'];
                 $exclude_selector = $settings_data['eael_toc_exclude_selector'];
 
-                $el_class .= ($position == 'right') ? ' eael-toc-right' : ' ';
+                $el_class .= ($position == 'right') ? ' eael-toc-right' : ' eael-toc-left';
                 $el_class .= ($close_bt_text_style == 'bottom_to_top') ? ' eael-bottom-to-top' : ' ';
                 $el_class .= ($auto_collapse == 'yes') ? ' eael-toc-auto-collapse' : ' ';
                 $el_class .= ($hide_mobile == 'yes') ? ' eael-toc-mobile-hide' : ' ';
