@@ -395,6 +395,104 @@ trait Controls
             ]
         );
 
+	    if ('eael-post-block' === $wb->get_name()) {
+		    $wb->add_control(
+			    'eael_post_block_layout',
+			    [
+				    'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+				    'type' => Controls_Manager::SELECT,
+				    'default' => 'post-block-layout-tiled',
+				    'options' => [
+					    'post-block-layout-block' => esc_html__('Block', 'essential-addons-for-elementor-lite'),
+					    'post-block-layout-tiled' => esc_html__('Tiled', 'essential-addons-for-elementor-lite'),
+				    ],
+			    ]
+		    );
+
+		    $wb->add_control(
+			    'eael_post_tiled_preset',
+			    [
+				    'label' => esc_html__('Preset', 'essential-addons-for-elementor-lite'),
+				    'type' => Controls_Manager::SELECT,
+				    'default' => 'eael-post-tiled-preset-1',
+				    'options' => [
+					    'eael-post-tiled-preset-1' => esc_html__('Preset 1', 'essential-addons-for-elementor-lite'),
+					    'eael-post-tiled-preset-2' => esc_html__('Preset 2', 'essential-addons-for-elementor-lite'),
+					    'eael-post-tiled-preset-3' => esc_html__('Preset 3', 'essential-addons-for-elementor-lite'),
+					    'eael-post-tiled-preset-4' => esc_html__('Preset 4', 'essential-addons-for-elementor-lite'),
+					    'eael-post-tiled-preset-5' => esc_html__('Preset 5', 'essential-addons-for-elementor-lite'),
+				    ],
+				    'condition' => [
+					    'eael_post_block_layout' => 'post-block-layout-tiled'
+				    ],
+			    ]
+		    );
+
+		    $wb->add_control(
+			    'eael_post_block_tiled_preset_1_note',
+			    [
+				    'label' => esc_html__('Note: Use 5 posts per page from Content » Query » Posts Per Page, to view this layout perfectly.', 'essential-addons-for-elementor-lite'),
+				    'type' => Controls_Manager::HEADING,
+				    'condition' => [
+					    'eael_post_block_layout' => 'post-block-layout-tiled',
+					    'eael_post_tiled_preset' => ['eael-post-tiled-preset-1', 'eael-post-tiled-preset-3'],
+				    ],
+			    ]
+		    );
+
+		    $wb->add_control(
+			    'eael_post_block_tiled_preset_5_note',
+			    [
+				    'label' => esc_html__('Note: Use 3 posts per page from Content » Query » Posts Per Page, to view this layout perfectly.', 'essential-addons-for-elementor-lite'),
+				    'type' => Controls_Manager::HEADING,
+				    'condition' => [
+					    'eael_post_block_layout' => 'post-block-layout-tiled',
+					    'eael_post_tiled_preset' => ['eael-post-tiled-preset-5'],
+				    ],
+			    ]
+		    );
+		    $wb->add_control(
+			    'eael_post_block_tiled_preset_2_note',
+			    [
+				    'label' => esc_html__('Note: Use 4 posts per page from Content » Query » Posts Per Page, to view this layout perfectly.', 'essential-addons-for-elementor-lite'),
+				    'type' => Controls_Manager::HEADING,
+				    'condition' => [
+					    'eael_post_block_layout' => 'post-block-layout-tiled',
+					    'eael_post_tiled_preset' => ['eael-post-tiled-preset-2'],
+				    ],
+			    ]
+		    );
+		    $wb->add_control(
+			    'eael_post_block_tiled_preset_4_note',
+			    [
+				    'label' => esc_html__('Note: Use 2 posts per page from Content » Query » Posts Per Page, to view this layout perfectly.', 'essential-addons-for-elementor-lite'),
+				    'type' => Controls_Manager::HEADING,
+				    'condition' => [
+					    'eael_post_block_layout' => 'post-block-layout-tiled',
+					    'eael_post_tiled_preset' => ['eael-post-tiled-preset-4'],
+				    ],
+			    ]
+		    );
+
+		    $wb->add_control(
+			    'eael_post_tiled_column',
+			    [
+				    'label' => esc_html__('Column', 'essential-addons-for-elementor-lite'),
+				    'type' => Controls_Manager::SELECT,
+				    'default' => 'eael-post-tiled-col-4',
+				    'options' => [
+					    'eael-post-tiled-col-2' => esc_html__('Column 2', 'essential-addons-for-elementor-lite'),
+					    'eael-post-tiled-col-3' => esc_html__('Column 3', 'essential-addons-for-elementor-lite'),
+					    'eael-post-tiled-col-4' => esc_html__('Column 4', 'essential-addons-for-elementor-lite'),
+				    ],
+				    'description' => esc_html__('Note: Column layout will be applied from second row.', 'essential-addons-for-elementor-lite'),
+				    'condition' => [
+					    'eael_post_block_layout' => 'post-block-layout-tiled',
+				    ],
+			    ]
+		    );
+	    }
+
         $wb->add_control(
             'eael_dynamic_template_Layout',
             [
