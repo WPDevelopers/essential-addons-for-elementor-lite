@@ -487,3 +487,22 @@
     clear: left;
   }
 }
+
+.rtl {
+  .eael-better-docs-category-grid-post.layout-2 .eael-docs-item-count:after {
+    position: absolute;
+    right: 40px;
+    left: 0;
+    border-top: 6px solid #ad5e62;
+    border-left: 6px solid transparent;
+    border-right: unset;
+  }
+  .eael-better-docs-category-grid-post .eael-bd-cg-header .eael-docs-item-count {
+    margin-right: auto;
+    margin-left: unset;
+  }
+  .eael-better-docs-category-grid-post.layout-2  .eael-bd-cg-header .eael-docs-item-count {
+    margin-right: unset;
+    margin-left: auto;
+  }
+}
