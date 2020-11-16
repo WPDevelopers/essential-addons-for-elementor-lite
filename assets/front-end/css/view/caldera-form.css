@@ -48,3 +48,8 @@
 .eael-caldera-form-button-full-width .form-group input[type=button] {
   width: 100%;
 }
+
+.rtl .eael-caldera-form-button-left .form-group input[type=button],
+.rtl .eael-caldera-form-button-left .form-group input[type=submit] {
+  float: left;
+}
