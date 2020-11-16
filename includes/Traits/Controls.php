@@ -401,7 +401,7 @@ trait Controls
 			    [
 				    'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
 				    'type' => Controls_Manager::SELECT,
-				    'default' => 'post-block-layout-tiled',
+				    'default' => 'post-block-layout-block',
 				    'options' => [
 					    'post-block-layout-block' => esc_html__('Block', 'essential-addons-for-elementor-lite'),
 					    'post-block-layout-tiled' => esc_html__('Tiled', 'essential-addons-for-elementor-lite'),
