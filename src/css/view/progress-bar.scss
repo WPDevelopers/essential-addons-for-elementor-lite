@@ -240,4 +240,25 @@ $color_2: rgba(255, 255, 255, .15);
             right: 0;
         }
     }
+
+    .eael-progressbar {
+        &.eael-progressbar-circle {
+            .eael-progressbar-circle-pie {
+                clip-path: inset(0 50% 0 0);
+            }
+
+            .eael-progressbar-circle-half {
+                clip-path: inset(0 0 0 50% );
+            }
+        }
+    }
+
+    .eael-progressbar-circle-container {
+        .eael-progressbar-half-circle-after{
+            .eael-progressbar-prefix-label {
+                float: left;
+            }
+        }
+    }
+
 }
