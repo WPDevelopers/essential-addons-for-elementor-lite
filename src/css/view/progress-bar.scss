@@ -224,3 +224,20 @@ $color_2: rgba(255, 255, 255, .15);
 .eael-progressbar-box-container.right > div {
     margin: 0 0 0 auto;
 }
+
+
+.rtl {
+    .eael-progressbar-line-container {
+        text-align: right;
+
+        .eael-progressbar-count-wrap {
+            left: 0;
+            right: auto;
+        }
+
+        .eael-progressbar-line-fill {
+            left: auto;
+            right: 0;
+        }
+    }
+}
