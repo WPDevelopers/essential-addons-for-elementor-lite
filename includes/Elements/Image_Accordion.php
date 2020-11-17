@@ -417,7 +417,7 @@ class Image_Accordion extends Widget_Base {
             [
                 'label'     => esc_html__( 'Overlay Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#dce1f1c2',
+                'default'   => 'rgba(0, 0, 0, .3)',
                 'selectors' => [
                     '{{WRAPPER}} .eael-img-accordion a:after' => 'background-color: {{VALUE}};',
                 ],
@@ -429,7 +429,7 @@ class Image_Accordion extends Widget_Base {
             [
                 'label'     => esc_html__( 'Hover Overlay Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#8646e5d1',
+                'default'   => 'rgba(0, 0, 0, .5)',
                 'selectors' => [
                     '{{WRAPPER}} .eael-img-accordion a:hover::after'         => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-img-accordion a.overlay-active:after' => 'background-color: {{VALUE}};',
