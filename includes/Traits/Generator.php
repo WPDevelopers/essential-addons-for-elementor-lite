@@ -62,14 +62,24 @@ trait Generator
                 $uid = 'error-404';
             }
         } elseif ($this->is_edit_mode()) {
-            $uid = 'eael';
+            $uid = 'eael-edit';
         }
 
         // set request uid
         if ($uid && $this->uid == null) {
-            $this->uid = substr(md5($uid), 0, 9);
+            $this->uid = $this->generate_uid($uid);
             $this->request_requires_update = $this->request_requires_update();
         }
+    }
+
+    public function generate_uid($str)
+    {
+        return substr(md5($str), 0, 9);
+    }
+
+    public function get_temp_uid()
+    {
+        return $this->generate_uid('eael-view');
     }
 
     public function request_requires_update()
@@ -257,7 +267,7 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_script($elements, $context, $ext)
+    public function generate_script($uid, $elements, $context, $ext)
     {
         // if folder not exists, create new folder
         if (!file_exists(EAEL_ASSET_PATH)) {
@@ -265,7 +275,7 @@ trait Generator
         }
 
         // naming asset file
-        $file_name = ($context == 'view' ? $this->uid : $this->uid) . '.min.' . $ext;
+        $file_name = $uid . '.min.' . $ext;
 
         // output asset string
         $output = $this->generate_strings($elements, $context, $ext);
