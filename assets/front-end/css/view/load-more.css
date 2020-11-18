@@ -81,3 +81,6 @@
 .eael-load-more-button.button--loading .eael-btn-loader {
   left: 0;
 }
+.rtl .eael-load-more-button-wrap {
+  direction: ltr;
+}

@@ -109,7 +109,7 @@
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
 }
-.eael-img-accordion .overlay .img-accordion-title {
+.eael-img-accordion .overlay h2 {
   color: #fff;
   -webkit-transform: translate3d(0, -60px, 0);
           transform: translate3d(0, -60px, 0);
