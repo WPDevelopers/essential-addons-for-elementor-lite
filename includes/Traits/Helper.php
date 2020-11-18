@@ -320,12 +320,34 @@ trait Helper
 
     public function select2_ajax_posts_filter_autocomplete() {
         $post_type = 'post';
+        $source_name = 'post_type';
+
         if ( !empty( $_GET[ 'post_type' ] ) ) {
             $post_type = sanitize_text_field( $_GET[ 'post_type' ] );
         }
+
+        if ( !empty( $_GET[ 'source_name' ] ) ) {
+            $source_name = sanitize_text_field( $_GET[ 'source_name' ] );
+        }
+
         $search = !empty( $_GET[ 'term' ] ) ? sanitize_text_field( $_GET[ 'term' ] ) : '';
-        $results = [];
-        $post_list = HelperClass::get_query_post_list( $post_type, 10, $search );
+        $results = $post_list = [];
+        switch($source_name){
+            case 'taxonomy':
+                $post_list = wp_list_pluck( get_terms( $post_type,
+                    [
+                        'hide_empty' => false,
+                        'orderby'    => 'name',
+                        'order'      => 'ASC',
+                        'search'     => $search,
+                        'number'     => '5',
+                    ]
+                ), 'name', 'term_id' );
+                break;
+            default:
+                $post_list = HelperClass::get_query_post_list( $post_type, 10, $search );
+        }
+
         if ( !empty( $post_list ) ) {
             foreach ( $post_list as $key => $item ) {
                 $results[] = [ 'text' => $item, 'id' => $key ];
@@ -338,10 +360,21 @@ trait Helper
         if ( empty( $_POST[ 'id' ] ) ) {
             wp_send_json_error( [] );
         }
-        $id = sanitize_text_field( $_POST[ 'id' ] );
-        $post_info = get_post( $id );
-        if ( $post_info ) {
-            wp_send_json_success( [ 'id' => $id, 'text' => $post_info->post_title ] );
+        $id          = sanitize_text_field( $_POST[ 'id' ] );
+        $source_name = !empty( $_POST[ 'source_name' ] ) ? sanitize_text_field( $_POST[ 'source_name' ] ) : '';
+
+        switch ( $source_name ) {
+            case 'taxonomy':
+                $term_info = get_term_by( 'id', $id, sanitize_text_field( $_POST[ 'post_type' ] ) );
+                $name      = isset( $term_info->name ) ? $term_info->name : '';
+                break;
+            default:
+                $post_info = get_post( $id );
+                $name      = isset( $post_info->post_title ) ? $post_info->post_title : '';
+        }
+
+        if ( !empty( $name ) ) {
+            wp_send_json_success( [ 'id' => $id, 'text' => $name ] );
         } else {
             wp_send_json_error( [] );
         }
