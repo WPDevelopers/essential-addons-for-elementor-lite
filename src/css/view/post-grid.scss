@@ -586,3 +586,9 @@
     }
   }
 }
+
+.rtl {
+	.eael-grid-post .eael-entry-footer {
+		direction: ltr;
+	}
+}
