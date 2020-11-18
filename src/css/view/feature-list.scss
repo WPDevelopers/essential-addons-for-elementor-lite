@@ -662,3 +662,10 @@ $enable-prefers-reduced-motion-media-query: true !default;
         }
     }
 }
+
+.rtl {
+    .elementor-widget-eael-feature-list .-icon-position-left .eael-feature-list-item,
+    .elementor-widget-eael-feature-list .-icon-position-right .eael-feature-list-item {
+        direction: ltr;
+    }
+}
