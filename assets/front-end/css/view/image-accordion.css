@@ -149,3 +149,6 @@
     background-color: transparent;
   }
 }
+.rtl .eael-img-accordion {
+  direction: ltr;
+}
