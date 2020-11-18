@@ -485,3 +485,9 @@
 .lr-social-login-container .eael-social-button.eael-facebook {
   width: 190px;
 }
+.rtl .eael-lr-form-wrapper.style-2 {
+  direction: ltr;
+}
+.rtl .eael-lr-form-wrapper .lr-form-header.header-inline {
+  direction: ltr;
+}
