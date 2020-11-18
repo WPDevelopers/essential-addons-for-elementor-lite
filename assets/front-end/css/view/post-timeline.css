@@ -354,3 +354,7 @@
     top: 205px;
   }
 }
+
+.rtl .eael-timeline-post {
+  direction: ltr;
+}

@@ -229,3 +229,25 @@
 .eael-progressbar-box-container.right > div {
   margin: 0 0 0 auto;
 }
+.rtl .eael-progressbar-line-container {
+  text-align: right;
+}
+.rtl .eael-progressbar-line-container .eael-progressbar-count-wrap {
+  left: 0;
+  right: auto;
+}
+.rtl .eael-progressbar-line-container .eael-progressbar-line-fill {
+  left: auto;
+  right: 0;
+}
+.rtl .eael-progressbar.eael-progressbar-circle .eael-progressbar-circle-pie {
+  -webkit-clip-path: inset(0 50% 0 0);
+          clip-path: inset(0 50% 0 0);
+}
+.rtl .eael-progressbar.eael-progressbar-circle .eael-progressbar-circle-half {
+  -webkit-clip-path: inset(0 0 0 50%);
+          clip-path: inset(0 0 0 50%);
+}
+.rtl .eael-progressbar-circle-container .eael-progressbar-half-circle-after .eael-progressbar-prefix-label {
+  float: left;
+}
