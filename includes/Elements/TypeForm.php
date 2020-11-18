@@ -362,9 +362,9 @@ class TypeForm extends Widget_Base {
         $this->add_render_attribute('eael_typeform_wrapper', 'class', 'eael-typeform-align-'.$alignment);
         $data = [
             'url'         => esc_url($settings['eael_typeform_list']),
-            'hideFooter'  => ($settings['eael_typeform_hidefooter'] == 'yes'),
-            'hideHeaders' => ($settings['eael_typeform_hideheaders'] == 'yes'),
-            'opacity'     => $settings['eael_typeform_opacity']['size']
+            'hideFooter'  => ($this->get_settings('eael_typeform_hidefooter') == 'yes'),
+            'hideHeaders' => ($this->get_settings('eael_typeform_hideheaders') == 'yes'),
+            'opacity'     => $this->get_settings('eael_typeform_opacity')['size']
         ];
         echo '<div data-typeform="'.htmlspecialchars(json_encode($data), ENT_QUOTES,
                 'UTF-8').'" '.$this->get_render_attribute_string('eael_typeform_wrapper').'></div>';
