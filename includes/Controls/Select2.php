@@ -35,6 +35,7 @@ class Select2 extends Base_Data_Control
     {
         return [
             'multiple' => false,
+            'source_name' => 'post_type',
             'source_type' => 'post',
         ];
     }
@@ -50,7 +51,8 @@ class Select2 extends Base_Data_Control
             <label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{data.label }}}</label>
             <# } #>
             <div class="elementor-control-input-wrapper elementor-control-unit-5">
-                <select id="<?php echo $control_uid; ?>" class="ea-select2" data-setting="{{ data.name }}"></select>
+                <# var multiple = ( data.multiple ) ? 'multiple' : ''; #>
+                <select id="<?php echo $control_uid; ?>" {{ multiple }} class="ea-select2" data-setting="{{ data.name }}"></select>
             </div>
         </div>
         <#
