@@ -5,9 +5,9 @@
 		e.preventDefault();
 		e.stopPropagation();
 		e.stopImmediatePropagation();
-
 		var $this = $(this),
-			$text = $("span", $this).html(),
+			$LoaderSpan = $("span", $this),
+			$text = $LoaderSpan.html(),
 			$widget_id = $this.data("widget"),
 			$page_id = $this.data("page-id"),
 			$nonce = $this.data("nonce"),
@@ -56,7 +56,7 @@
 		}
 
 		$this.addClass("button--loading");
-		$("span", $this).html("Loading...");
+		$LoaderSpan.html(localize.i18n.loading);
 
 		$.ajax({
 			url: localize.ajaxurl,
@@ -84,7 +84,7 @@
 					}
 
 					$this.removeClass("button--loading");
-					$("span", $this).html($text);
+					$LoaderSpan.html($text);
 
 					$this.data("page", $page);
 				}
