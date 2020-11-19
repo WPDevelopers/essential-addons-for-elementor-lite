@@ -57,7 +57,7 @@ class Select2 extends Base_Data_Control
         </div>
         <#
         ( function( $ ) {
-        $( document.body ).trigger( 'eael_select2_init',{currentID:currentID,data:data,controlUID:controlUID} );
+        $( document.body ).trigger( 'eael_select2_init',{currentID:currentID,data:data,controlUID:controlUID,multiple:data.multiple} );
         }( jQuery ) );
         #>
         <?php

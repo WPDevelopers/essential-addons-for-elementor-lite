@@ -357,7 +357,7 @@ trait Helper
     }
 
     public function select2_ajax_get_posts_value_titles() {
-        if ( empty( $_POST[ 'id' ] ) ) {
+        if ( empty( array_filter($_POST[ 'id' ]) ) ) {
             wp_send_json_error( [] );
         }
         $ids          = array_map('intval',$_POST[ 'id' ]);
@@ -365,7 +365,7 @@ trait Helper
 
         switch ( $source_name ) {
             case 'taxonomy':
-                $post_list = wp_list_pluck( get_terms( sanitize_text_field( $_POST[ 'post_type' ] ),
+                $response = wp_list_pluck( get_terms( sanitize_text_field( $_POST[ 'post_type' ] ),
                     [
                         'hide_empty' => false,
                         'orderby'    => 'name',
