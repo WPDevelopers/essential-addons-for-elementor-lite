@@ -9,6 +9,7 @@ var EventCalendar = function ($scope, $) {
 		locale = element.data("locale"),
 		translate = element.data("translate"),
 		defaultView = element.data("defaultview"),
+		time_format = (element.data("time_format") == 'yes') ? true : false,
 		calendarEl = document.getElementById("eael-event-calendar-" + calendarID);
 
 	var calendar = new Calendar(calendarEl, {
@@ -20,7 +21,7 @@ var EventCalendar = function ($scope, $) {
 		eventTimeFormat: {
 			hour: '2-digit',
 			minute: '2-digit',
-			meridiem: 'short'
+			hour12: !time_format
 		},
 		nextDayThreshold: "00:00:00",
 		header: {
@@ -48,7 +49,7 @@ var EventCalendar = function ($scope, $) {
 				e.preventDefault();
 				e.stopPropagation();
 				var startDate = event.start,
-					timeFormate = "h:mm A",
+					timeFormate = (time_format)?"H:mm A":"h:mm A",
 					endDate = event.end,
 					startSelector = $("span.eaelec-event-date-start"),
 					endSelector = $("span.eaelec-event-date-end");
