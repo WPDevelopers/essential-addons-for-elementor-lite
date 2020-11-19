@@ -360,21 +360,27 @@ trait Helper
         if ( empty( $_POST[ 'id' ] ) ) {
             wp_send_json_error( [] );
         }
-        $id          = sanitize_text_field( $_POST[ 'id' ] );
+        $ids          = array_map('intval',$_POST[ 'id' ]);
         $source_name = !empty( $_POST[ 'source_name' ] ) ? sanitize_text_field( $_POST[ 'source_name' ] ) : '';
 
         switch ( $source_name ) {
             case 'taxonomy':
-                $term_info = get_term_by( 'id', $id, sanitize_text_field( $_POST[ 'post_type' ] ) );
-                $name      = isset( $term_info->name ) ? $term_info->name : '';
+                $post_list = wp_list_pluck( get_terms( sanitize_text_field( $_POST[ 'post_type' ] ),
+                    [
+                        'hide_empty' => false,
+                        'orderby'    => 'name',
+                        'order'      => 'ASC',
+                        'include'    => implode( ',', $ids ),
+                    ]
+                ), 'name', 'term_id' );
                 break;
             default:
-                $post_info = get_post( $id );
-                $name      = isset( $post_info->post_title ) ? $post_info->post_title : '';
+                $post_info = get_posts( [ 'post_type' => sanitize_text_field( $_POST[ 'post_type' ] ), 'include' => implode( ',', $ids ) ] );
+                $response  = wp_list_pluck( $post_info, 'post_title', 'ID' );
         }
 
-        if ( !empty( $name ) ) {
-            wp_send_json_success( [ 'id' => $id, 'text' => $name ] );
+        if ( !empty( $response ) ) {
+            wp_send_json_success( [ 'results' => $response ] );
         } else {
             wp_send_json_error( [] );
         }
