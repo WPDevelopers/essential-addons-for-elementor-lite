@@ -41,6 +41,7 @@
 .eael-wcpc-wrapper.custom table th, .eael-wcpc-wrapper.custom table td {
   padding: 15px;
   border: 1px solid var(--h-border-clr);
+  border-collapse: collapse;
 }
 .eael-wcpc-wrapper.custom table th.first-th {
   border: none;
@@ -51,6 +52,7 @@
   font-weight: normal;
   max-width: 160px;
   border-left-width: 2px;
+  border-collapse: collapse;
   vertical-align: middle;
 }
 .eael-wcpc-wrapper.custom table th div {

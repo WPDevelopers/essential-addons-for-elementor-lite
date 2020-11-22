@@ -689,7 +689,7 @@ msgstr ""
 msgid "Show Title"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:180, ../includes/Elements/Betterdocs_Category_Grid.php:218, ../includes/Elements/Cta_Box.php:186, ../includes/Elements/Image_Accordion.php:139, ../includes/Traits/Controls.php:651
+#: ../includes/Elements/Betterdocs_Category_Box.php:180, ../includes/Elements/Betterdocs_Category_Grid.php:218, ../includes/Elements/Cta_Box.php:186, ../includes/Elements/Image_Accordion.php:139
 msgid "Select Tag"
 msgstr ""
 
@@ -761,7 +761,7 @@ msgstr ""
 msgid "File Not Found"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:1180, ../includes/Elements/Betterdocs_Category_Box.php:1145, ../includes/Elements/Betterdocs_Category_Grid.php:1676, ../includes/Elements/Betterdocs_Category_Grid.php:1643, ../includes/Elements/Post_Grid.php:1237, ../includes/Elements/Post_Timeline.php:466, ../includes/Elements/Product_Grid.php:847
+#: ../includes/Elements/Betterdocs_Category_Box.php:1180, ../includes/Elements/Betterdocs_Category_Box.php:1145, ../includes/Elements/Betterdocs_Category_Grid.php:1676, ../includes/Elements/Betterdocs_Category_Grid.php:1643, ../includes/Elements/Post_Grid.php:1076, ../includes/Elements/Post_Timeline.php:466, ../includes/Elements/Product_Grid.php:855
 msgid "<p class=\"no-posts-found\">No posts found!</p>"
 msgstr ""
 
@@ -1925,7 +1925,7 @@ msgstr ""
 msgid "Show Separator"
 msgstr ""
 
-#: ../includes/Elements/Dual_Color_Header.php:131
+#: ../includes/Elements/Dual_Color_Header.php:131, ../includes/Traits/Controls.php:651
 msgid "Title Tag"
 msgstr ""
 
@@ -4688,7 +4688,7 @@ msgstr ""
 msgid "Icon font size"
 msgstr ""
 
-#: ../includes/Elements/Post_Grid.php:1241
+#: ../includes/Elements/Post_Grid.php:1080
 msgid "<p class=\"no-posts-found\">No Layout Found!</p>"
 msgstr ""
 
@@ -4752,7 +4752,7 @@ msgstr ""
 msgid "Date Text Color"
 msgstr ""
 
-#: ../includes/Elements/Post_Timeline.php:470, ../includes/Elements/Product_Grid.php:850
+#: ../includes/Elements/Post_Timeline.php:470, ../includes/Elements/Product_Grid.php:858
 msgid "<p class=\"no-posts-found\">No layout found!</p>"
 msgstr ""
 
