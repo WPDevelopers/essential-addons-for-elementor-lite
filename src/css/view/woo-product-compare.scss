@@ -45,6 +45,7 @@
             th, td {
                 padding: 15px;
                 border: 1px solid var(--h-border-clr);
+                border-collapse: collapse;
             }
 
             th.first-th {
@@ -57,6 +58,7 @@
                 font-weight: normal;
                 max-width: 160px;
                 border-left-width: 2px;
+                border-collapse: collapse;
                 vertical-align: middle;
                 div {
                     display: flex;
