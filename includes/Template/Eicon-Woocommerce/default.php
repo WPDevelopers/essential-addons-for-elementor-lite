@@ -284,5 +284,9 @@ if ($settings['eael_product_grid_style_preset'] == 'eael-product-simple' || $set
 		<?php
 	}
 }else {
+    if($settings['eael_product_grid_rating']!='yes'){
+	    remove_action('woocommerce_after_shop_loop_item_title','woocommerce_template_loop_rating',5);
+    }
+
 	wc_get_template_part('content', 'product');
 }
