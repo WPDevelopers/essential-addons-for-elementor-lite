@@ -16,7 +16,7 @@
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	transition: flex .4s;
+	transition: flex 0.4s;
 	overflow: hidden;
 }
 
@@ -35,7 +35,7 @@
 		right: 0;
 		bottom: 0;
 		left: 0;
-		transition: background-color .4s;
+		transition: background-color 0.4s;
 	}
 	&-horizontal-align-left .overlay {
 		justify-content: flex-start;
@@ -98,18 +98,24 @@
 	opacity: 1;
 	visibility: visible;
 	transform: none !important;
-	transition: all .3s .3s;
+	transition: all 0.3s 0.3s;
 }
 @media screen and (max-width: 800px) {
 	.eael-img-accordion {
 		flex-direction: column;
 	}
-	
+
 	.eael-img-accordion a:hover {
 		flex: 1;
 	}
-	
+
 	.eael-img-accordion a:hover .overlay {
 		background-color: transparent;
+	}
+}
+// rtl
+.rtl {
+	.eael-img-accordion {
+		direction: ltr;
 	}
 }

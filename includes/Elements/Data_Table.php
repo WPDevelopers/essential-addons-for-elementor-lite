@@ -98,6 +98,7 @@ class Data_Table extends Widget_Base {
                 'label' => esc_html__('Column Name', 'essential-addons-for-elementor-lite'),
                 'default' => 'Table Header',
                 'type' => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
                 'label_block' => false,
             ]
         );
@@ -108,6 +109,7 @@ class Data_Table extends Widget_Base {
                 'label' => esc_html__('Column Span', 'essential-addons-for-elementor-lite'),
                 'default' => '',
                 'type' => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
                 'label_block' => false,
             ]
         );
@@ -200,6 +202,7 @@ class Data_Table extends Widget_Base {
 			[
 				'label'			=> esc_html__( 'CSS Class', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
 				'label_block' 	=> false,
 			]
 		);
@@ -209,6 +212,7 @@ class Data_Table extends Widget_Base {
 			[
 				'label'			=> esc_html__( 'CSS ID', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
 				'label_block'	=> false,
 			]
 		);
@@ -224,7 +228,7 @@ class Data_Table extends Widget_Base {
 					[ 'eael_data_table_header_col' => 'Table Header' ],
 					[ 'eael_data_table_header_col' => 'Table Header' ],
 				],
-				'fields'      => array_values( $repeater->get_controls() ),
+				'fields'      =>  $repeater->get_controls() ,
 				'title_field' => '{{eael_data_table_header_col}}',
 			]
 		);
@@ -330,6 +334,7 @@ class Data_Table extends Widget_Base {
 			[
 				'label' => esc_html__( 'Cell Text', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXTAREA,
+                'dynamic'   => ['active' => true],
 				'label_block' => true,
 				'default' => esc_html__( 'Content', 'essential-addons-for-elementor-lite'),
 				'condition' => [
@@ -358,6 +363,7 @@ class Data_Table extends Widget_Base {
 			[
 				'label' => esc_html__( 'Link', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::URL,
+                'dynamic'   => ['active' => true],
 				'label_block' => true,
 				'default' => [
 						'url' => '',
@@ -377,6 +383,7 @@ class Data_Table extends Widget_Base {
 			[
 				'label'			=> esc_html__( 'CSS Class', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
 				'label_block'	=> false,
 				'condition' 	=> [
 					'eael_data_table_content_row_type' => 'col'
@@ -389,6 +396,7 @@ class Data_Table extends Widget_Base {
 			[
 				'label'			=> esc_html__( 'CSS ID', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
 				'label_block'	=> false,
 				'condition' 	=> [
 					'eael_data_table_content_row_type' => 'col'
@@ -408,7 +416,7 @@ class Data_Table extends Widget_Base {
 					[ 'eael_data_table_content_row_type' => 'col' ],
 					[ 'eael_data_table_content_row_type' => 'col' ],
 				],
-				'fields' => array_values( $repeater->get_controls() ),
+				'fields' =>  $repeater->get_controls() ,
 				'title_field' => '{{eael_data_table_content_row_type}}::{{eael_data_table_content_row_title || eael_data_table_content_row_content}}',
 			]
 		);
@@ -555,6 +563,8 @@ class Data_Table extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-data-table thead tr th:first-child' => 'border-radius: {{SIZE}}px 0px 0px 0px;',
 					'{{WRAPPER}} .eael-data-table thead tr th:last-child' => 'border-radius: 0px {{SIZE}}px 0px 0px;',
+                    '.rtl {{WRAPPER}} .eael-data-table thead tr th:first-child' => 'border-radius: 0px {{SIZE}}px 0px 0px;',
+                    '.rtl {{WRAPPER}} .eael-data-table thead tr th:last-child' => 'border-radius: {{SIZE}}px 0px 0px 0px;',
 				],
 			]
 		);
@@ -1114,9 +1124,9 @@ class Data_Table extends Widget_Base {
 
 	protected function render( ) {
 
-   		$settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
 
-	  	$table_tr = [];
+        $table_tr = [];
 		$table_td = [];
 
 	  	// Storing Data table content values

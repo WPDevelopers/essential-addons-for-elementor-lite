@@ -144,6 +144,16 @@ class Bootstrap
         add_action('wp_ajax_load_more', array($this, 'ajax_load_more'));
         add_action('wp_ajax_nopriv_load_more', array($this, 'ajax_load_more'));
 
+        add_action('wp_ajax_woo_product_pagination_product', array($this, 'eael_woo_pagination_product_ajax'));
+        add_action('wp_ajax_nopriv_woo_product_pagination_product', array($this, 'eael_woo_pagination_product_ajax'));
+
+        add_action('wp_ajax_woo_product_pagination', array($this, 'eael_woo_pagination_ajax'));
+        add_action('wp_ajax_nopriv_woo_product_pagination', array($this, 'eael_woo_pagination_ajax'));
+
+        //ajax add to cart fro product grid quick view
+        add_action('wp_ajax_eael_product_add_to_cart', array($this, 'eael_product_add_to_cart'));
+        add_action('wp_ajax_nopriv_eael_product_add_to_cart', array($this, 'eael_product_add_to_cart'));
+
         add_action('wp_ajax_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
         add_action('wp_ajax_nopriv_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
 
@@ -188,6 +198,27 @@ class Bootstrap
 
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'toc_rank_math_support']);
+
+	    if( class_exists( 'woocommerce' ) ) {
+		    add_action( 'wp_footer', [ $this, 'eael_product_grid_script' ] );
+
+		    // quick view
+		    add_action( 'eael_woo_single_product_image', 'woocommerce_show_product_images', 20 );
+		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
+		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_rating', 10 );
+		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_price', 15 );
+		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_add_to_cart', 25 );
+		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_meta', 30 );
+
+		    add_filter( 'woocommerce_product_get_rating_html', [ $this, 'eael_rating_markup' ], 10, 3 );
+	    }
+
+	    if( class_exists('WC_Subscriptions_Cart') ) {
+		    remove_action('woocommerce_review_order_after_order_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals' ), 10);
+		    add_action('eael_display_recurring_total_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals'
+		    ), 10);
+	    }
 
         // Admin
         if (is_admin()) {

@@ -26,6 +26,11 @@
 
 .eael-dual-header .title span.lead {
     color: #1abc9c;
+
+    &.gradient-color {
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 }
 
 /*--- Builder Related Css ---*/

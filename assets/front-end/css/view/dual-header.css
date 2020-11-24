@@ -28,6 +28,11 @@
   color: #1abc9c;
 }
 
+.eael-dual-header .title span.lead.gradient-color {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /*--- Builder Related Css ---*/
 
 .eael-dual-header-content-align-center {
