@@ -62,26 +62,37 @@ trait Generator
                 $uid = 'error-404';
             }
         } elseif ($this->is_edit_mode()) {
-            $uid = 'eael';
+            $uid = 'eael-edit';
         }
 
         // set request uid
         if ($uid && $this->uid == null) {
-            $this->uid = substr(md5($uid), 0, 9);
+            $this->uid = $this->generate_uid($uid);
             $this->request_requires_update = $this->request_requires_update();
         }
     }
 
+    public function generate_uid($str)
+    {
+        return substr(md5($str), 0, 9);
+    }
+
+    public function get_temp_uid()
+    {
+        return $this->generate_uid('eael-view');
+    }
+
     public function request_requires_update()
     {
-        $elements = get_transient($this->uid . '_elements');
-        $editor_updated_at = get_transient('eael_editor_updated_at');
-        $post_updated_at = get_transient($this->uid . '_updated_at');
+        $elements = get_option($this->uid . '_elements');
+        $editor_updated_at = get_option('eael_editor_updated_at');
+        $post_updated_at = get_option($this->uid . '_updated_at');
+
+        if ($editor_updated_at === false) {
+            update_option('eael_editor_updated_at', strtotime('now'));
+        }
 
         if ($elements === false) {
-            return true;
-        }
-        if ($editor_updated_at === false) {
             return true;
         }
         if ($post_updated_at === false) {
@@ -194,7 +205,7 @@ trait Generator
         }
 
         // check if already updated
-        if (get_transient('eael_editor_updated_at') == get_transient($this->uid . '_updated_at')) {
+        if (get_option('eael_editor_updated_at') == get_option($this->uid . '_updated_at')) {
             return;
         }
 
@@ -202,9 +213,9 @@ trait Generator
         $this->loaded_elements = $this->parse_elements($this->loaded_elements);
 
         // update page data
-        set_transient($this->uid . '_elements', $this->loaded_elements);
-        set_transient($this->uid . '_custom_js', $this->custom_js_strings);
-        set_transient($this->uid . '_updated_at', get_transient('eael_editor_updated_at'));
+        update_option($this->uid . '_elements', $this->loaded_elements);
+        update_option($this->uid . '_custom_js', $this->custom_js_strings);
+        update_option($this->uid . '_updated_at', get_option('eael_editor_updated_at'));
 
         // remove old cache files
         $this->remove_files($this->uid);
@@ -256,7 +267,7 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_script($elements, $context, $ext)
+    public function generate_script($uid, $elements, $context, $ext)
     {
         // if folder not exists, create new folder
         if (!file_exists(EAEL_ASSET_PATH)) {
@@ -264,7 +275,7 @@ trait Generator
         }
 
         // naming asset file
-        $file_name = ($context == 'view' ? $this->uid : $this->uid) . '.min.' . $ext;
+        $file_name = $uid . '.min.' . $ext;
 
         // output asset string
         $output = $this->generate_strings($elements, $context, $ext);
@@ -290,7 +301,7 @@ trait Generator
         }
 
         if ($this->request_requires_update == false && $context == 'view' && $ext == 'js') {
-            $output .= get_transient($this->uid . '_custom_js');
+            $output .= get_option($this->uid . '_custom_js');
         }
 
         return $output;

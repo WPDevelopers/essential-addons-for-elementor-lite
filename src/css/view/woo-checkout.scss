@@ -313,6 +313,14 @@ $base-font-size: 14px;
 					padding: 0 10px;
 				}
 
+				.subscription-price {
+					.subscription-details {
+						display: block;
+						font-size: .8em;
+						line-height: 1.2rem;
+					}
+				}
+
 				@media all and (max-width: 767px) {
 					overflow-y: auto;
 
@@ -369,11 +377,52 @@ $base-font-size: 14px;
 					}
 				}
 
-				.shipping-area, .order-total, .cart-subtotal, .cart-discount {
+				.order-total, .cart-subtotal, .cart-discount, .tax-rate {
 					display: flex;
 					justify-content: space-between;
 					border-top: 1px solid inherit;
 					padding: 3px 0;
+				}
+
+				.shipping-area {
+					display: grid;
+					grid-template-columns: 70% 30%;
+
+					#shipping_method {
+						text-align: right;
+						margin-right: 0;
+					}
+				}
+
+				.recurring-wrapper {
+					margin-bottom: 0;
+					border-collapse: collapse;
+					border-spacing: 0;
+					border: 0;
+
+					tr {
+						display: table;
+						width: 100%;
+					}
+					th, td {
+						border-left: 0;
+						border-right: 0;
+						border-bottom: 0;
+						border-top: 1px solid;
+					}
+					th {
+						padding-left: 0;
+					}
+
+					td {
+						padding-right: 0;
+						text-align: right;
+						font-size: .7em;
+
+						.amount {
+							display: block;
+						}
+					}
 				}
 
 				.woocommerce-shipping-methods {
@@ -407,6 +456,16 @@ $base-font-size: 14px;
 
 	}
 
+	.ea-checkout-review-order-table {
+		.recurring-wrapper {
+			tbody > tr:nth-child(odd) > td,
+			tbody > tr:nth-child(odd) > th,
+			tbody tr:hover > td,
+			tbody tr:hover > th {
+				background-color: inherit;
+			}
+		}
+	}
 }
 
 .eael-woo-checkout {
@@ -683,36 +742,6 @@ $base-font-size: 14px;
 		}
 	}
 
-	// astra
-	&.theme-astra:not(.elementor-editor-active) {
-		.woocommerce {
-			#customer_details.col2-set {
-				.col-1 {
-					width: 100% !important;
-					float: none!important;
-
-					@media (min-width: 1024px) {
-						.woocommerce-billing-fields {
-							float: left !important;
-							width: 48% !important;
-							padding-right: 2%;
-						}
-
-						.woocommerce-account-fields, .woocommerce-shipping-fields, .woocommerce-additional-fields {
-							float: left !important;
-							width: 48% !important;
-							padding-left: 2%;
-						}
-					}
-				}
-				.col-2 {
-					clear: both;
-				}
-			}
-
-        }
-    }
-
 	&.elementor-editor-active {
 		.woocommerce {
 			.woo-checkout-login {
@@ -720,6 +749,16 @@ $base-font-size: 14px;
 					display: block;
 				}
 			}
+		}
+	}
+}
+.theme-twentyseventeen {
+	.ea-woo-checkout {
+		#ship-to-different-address label span {
+			position: relative;
+			display: block;
+			text-align: right;
+			padding-right: 45px;
 		}
 	}
 }

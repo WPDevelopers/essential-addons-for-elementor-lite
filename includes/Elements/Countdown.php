@@ -179,6 +179,9 @@ class Countdown extends Widget_Base {
             [
                 'label'       => esc_html__( 'Custom Label for Days', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default'     => esc_html__( 'Days', 'essential-addons-for-elementor-lite' ),
                 'description' => esc_html__( 'Leave blank to hide', 'essential-addons-for-elementor-lite' ),
                 'condition'   => [
@@ -202,6 +205,9 @@ class Countdown extends Widget_Base {
             [
                 'label'       => esc_html__( 'Custom Label for Hours', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default'     => esc_html__( 'Hours', 'essential-addons-for-elementor-lite' ),
                 'description' => esc_html__( 'Leave blank to hide', 'essential-addons-for-elementor-lite' ),
                 'condition'   => [
@@ -225,6 +231,9 @@ class Countdown extends Widget_Base {
             [
                 'label'       => esc_html__( 'Custom Label for Minutes', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default'     => esc_html__( 'Minutes', 'essential-addons-for-elementor-lite' ),
                 'description' => esc_html__( 'Leave blank to hide', 'essential-addons-for-elementor-lite' ),
                 'condition'   => [
@@ -248,6 +257,9 @@ class Countdown extends Widget_Base {
             [
                 'label'       => esc_html__( 'Custom Label for Seconds', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default'     => esc_html__( 'Seconds', 'essential-addons-for-elementor-lite' ),
                 'description' => esc_html__( 'Leave blank to hide', 'essential-addons-for-elementor-lite' ),
                 'condition'   => [
@@ -401,6 +413,7 @@ class Countdown extends Widget_Base {
             [
                 'label'     => esc_html__( 'On Expiry Title', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::TEXTAREA,
+                'dynamic' => ['active' => true],
                 'default'   => esc_html__( 'Countdown is finished!', 'essential-addons-for-elementor-lite' ),
                 'condition' => [
                     'countdown_expire_type' => 'text',
@@ -425,6 +438,7 @@ class Countdown extends Widget_Base {
             [
                 'label'     => esc_html__( 'Redirect To (URL)', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
                 'condition' => [
                     'countdown_expire_type' => 'url',
                 ],
@@ -1138,7 +1152,7 @@ class Countdown extends Widget_Base {
 
     protected function render() {
 
-        $settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
 
         $get_due_date = esc_attr( $settings['eael_countdown_due_time'] );
         $due_date = date( "M d Y G:i:s", strtotime( $get_due_date ) );

@@ -186,3 +186,11 @@
         }
     }
 }
+
+// rtl
+.rtl {
+    .eael-advance-tabs.eael-tabs-vertical > .eael-tabs-nav > ul li::after {
+        border-right: 10px solid #444;
+        border-left: 0;
+    }
+}

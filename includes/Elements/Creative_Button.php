@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
+use Elementor\Modules\DynamicTags\Module as TagsModule;
 use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 
@@ -75,6 +76,9 @@ class Creative_Button extends Widget_Base
                 [
                     'label'       => __('Button Text', 'essential-addons-for-elementor-lite'),
                     'type'        => Controls_Manager::TEXT,
+                    'dynamic' => [
+                        'active' => true,
+                    ],
                     'label_block' => true,
                     'default'     => 'Click Me!',
                     'placeholder' => __('Enter button text', 'essential-addons-for-elementor-lite'),
@@ -87,6 +91,9 @@ class Creative_Button extends Widget_Base
                 [
                     'label'       => __('Button Secondary Text', 'essential-addons-for-elementor-lite'),
                     'type'        => Controls_Manager::TEXT,
+                    'dynamic' => [
+                        'active' => true,
+                    ],
                     'label_block' => true,
                     'default'     => 'Go!',
                     'placeholder' => __('Enter button secondary text', 'essential-addons-for-elementor-lite'),
@@ -99,6 +106,13 @@ class Creative_Button extends Widget_Base
                 [
                     'label'         => esc_html__('Link URL', 'essential-addons-for-elementor-lite'),
                     'type'          => Controls_Manager::URL,
+                    'dynamic'               => [
+                        'active'       => true,
+                        'categories'   => [
+                            TagsModule::POST_META_CATEGORY,
+                            TagsModule::URL_CATEGORY,
+                        ],
+                    ],
                     'label_block'   => true,
                     'default'       => [
                         'url'         => '#',
@@ -513,7 +527,7 @@ class Creative_Button extends Widget_Base
 
     protected function render()
     {
-        $settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
         $icon_migrated = isset($settings['__fa4_migrated']['eael_creative_button_icon_new']);
         $icon_is_new = empty($settings['eael_creative_button_icon']);
 
