@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.5
 Requires PHP: 5.4
-Stable tag: 4.3.6
+Stable tag: 4.3.7
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -223,6 +223,18 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.3.7 - 19/11/2020 =
+- Fixed: Broken style if Object Cache is enabled
+- Fixed: Pages showing blank after updating with Elementor
+- Added: RTL Support 
+- Improved: EA Product Grid | New Presets, Quick View & Pagination
+- Improved: EA Woo Checkout | added text change options
+- Improved: EA Flip Box | Default Appearance & added 3D Effect 
+- Improved: EA Dual Color Heading | Gradient Text Color & SVG not showing in Content
+- Fixed: EA Woo Checkout | Invalid Recurring Shipping Method & not updating properly
+- Fixed: EA Image Accordion | Border Radius not working & Missing content alignment controls
+- Few minor bug fix and improvements
 
 = 4.3.6 - 12/11/2020 =
 - Added: Dynamic Tag/ACF Support for most widgets

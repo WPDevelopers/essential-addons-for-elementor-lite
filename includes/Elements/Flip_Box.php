@@ -14,8 +14,10 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Modules\DynamicTags\Module as TagsModule;
+use \Elementor\Plugin;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Flip_Box extends Widget_Base
 {
@@ -71,7 +73,7 @@ class Flip_Box extends Widget_Base
         $this->start_controls_section(
             'eael_section_flipbox_content_settings',
             [
-                'label' => esc_html__('Flipbox Settings', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
 
@@ -89,189 +91,32 @@ class Flip_Box extends Widget_Base
                     'animate-down'     => esc_html__('Flip Bottom', 'essential-addons-for-elementor-lite'),
                     'animate-zoom-in'  => esc_html__('Zoom In', 'essential-addons-for-elementor-lite'),
                     'animate-zoom-out' => esc_html__('Zoom Out', 'essential-addons-for-elementor-lite'),
+                    'animate-fade-in' => esc_html__('Fade In', 'essential-addons-for-elementor-lite'),
                 ],
             ]
         );
-
-        $this->start_controls_tabs('icon_image_front_back');
-
-        $this->start_controls_tab(
-            'front',
-            [
-                'label' => __('Front', 'essential-addons-for-elementor-lite'),
-            ]
-        );
-
-        $this->add_control(
-            'eael_flipbox_img_or_icon',
-            [
-                'label'   => esc_html__('Icon Type', 'essential-addons-for-elementor-lite'),
-                'type'    => Controls_Manager::SELECT,
-                'options' => [
-                    'none' => __('None', 'essential-addons-for-elementor-lite'),
-                    'img'  => __('Image', 'essential-addons-for-elementor-lite'),
-                    'icon' => __('Icon', 'essential-addons-for-elementor-lite'),
-                ],
-                'default' => 'icon',
-            ]
-        );
-
-        $this->add_control(
-            'eael_flipbox_image',
-            [
-                'label'     => esc_html__('Flipbox Image', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::MEDIA,
-                'default'   => [
-                    'url' => Utils::get_placeholder_image_src(),
-                ],
-                'condition' => [
-                    'eael_flipbox_img_or_icon' => 'img',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_flipbox_icon_new',
-            [
-                'label'            => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
-                'type'             => Controls_Manager::ICONS,
-                'fa4compatibility' => 'eael_flipbox_icon',
-                'default'          => [
-                    'value'   => 'fas fa-snowflake',
-                    'library' => 'fa-solid',
-                ],
-                'condition'        => [
-                    'eael_flipbox_img_or_icon' => 'icon',
-                ],
-            ]
-        );
+	    $this->add_control(
+		    'eael_flipbox_3d',
+		    [
+			    'label' => __( '3D Depth', 'essential-addons-for-elementor-lite' ),
+			    'type' => Controls_Manager::SWITCHER,
+			    'label_on' => __( 'On', 'essential-addons-for-elementor-lite' ),
+			    'label_off' => __( 'Off', 'essential-addons-for-elementor-lite' ),
+			    'return_value' => 'eael-flip-box--3d',
+			    'default' => '',
+			    'prefix_class' => '',
+			    'condition' => [
+				    'eael_flipbox_type' => [
+					    'animate-left',
+					    'animate-right',
+					    'animate-up',
+					    'animate-down',
+                    ]
+			    ],
+		    ]
+	    );
 
         $this->add_responsive_control(
-            'eael_flipbox_image_resizer',
-            [
-                'label'     => esc_html__('Image Resizer', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::SLIDER,
-                'default'   => [
-                    'size' => '100',
-                ],
-                'range'     => [
-                    'px' => [
-                        'max' => 500,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-icon-image > img.eael-flipbox-image-as-icon' => 'width: {{SIZE}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'eael_flipbox_img_or_icon' => 'img',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Image_Size::get_type(),
-            [
-                'name'      => 'thumbnail',
-                'default'   => 'full',
-                'condition' => [
-                    'eael_flipbox_image[url]!' => '',
-                    'eael_flipbox_img_or_icon' => 'img',
-                ],
-            ]
-        );
-
-        $this->end_controls_tab();
-
-        $this->start_controls_tab(
-            'back',
-            [
-                'label' => __('Back', 'essential-addons-for-elementor-lite'),
-            ]
-        );
-
-        $this->add_control(
-            'eael_flipbox_img_or_icon_back',
-            [
-                'label'   => esc_html__('Icon Type', 'essential-addons-for-elementor-lite'),
-                'type'    => Controls_Manager::SELECT,
-                'options' => [
-                    'none' => __('None', 'essential-addons-for-elementor-lite'),
-                    'img'  => __('Image', 'essential-addons-for-elementor-lite'),
-                    'icon' => __('Icon', 'essential-addons-for-elementor-lite'),
-                ],
-                'default' => 'icon',
-            ]
-        );
-
-        $this->add_control(
-            'eael_flipbox_image_back',
-            [
-                'label'     => esc_html__('Flipbox Image', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::MEDIA,
-                'default'   => [
-                    'url' => Utils::get_placeholder_image_src(),
-                ],
-                'condition' => [
-                    'eael_flipbox_img_or_icon_back' => 'img',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_flipbox_icon_back_new',
-            [
-                'label'            => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
-                'type'             => Controls_Manager::ICONS,
-                'fa4compatibility' => 'eael_flipbox_icon_back',
-                'default'          => [
-                    'value'   => 'fas fa-snowflake',
-                    'library' => 'fa-solid',
-                ],
-                'condition'        => [
-                    'eael_flipbox_img_or_icon_back' => 'icon',
-                ],
-            ]
-        );
-
-        $this->add_responsive_control(
-            'eael_flipbox_image_resizer_back',
-            [
-                'label'     => esc_html__('Image Resizer', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::SLIDER,
-                'default'   => [
-                    'size' => '100',
-                ],
-                'range'     => [
-                    'px' => [
-                        'max' => 500,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-icon-image > img.eael-flipbox-image-as-icon' => 'width: {{SIZE}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'eael_flipbox_img_or_icon_back' => 'img',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Image_Size::get_type(),
-            [
-                'name'      => 'thumbnail_back',
-                'default'   => 'full',
-                'condition' => [
-                    'eael_flipbox_image[url]!'      => '',
-                    'eael_flipbox_img_or_icon_back' => 'img',
-                ],
-            ]
-        );
-
-        $this->end_controls_tab();
-
-        $this->end_controls_tabs();
-
-        $this->add_control(
             'eael_flipbox_height',
             [
                 'label'      => esc_html__('Height', 'essential-addons-for-elementor-lite'),
@@ -281,7 +126,7 @@ class Flip_Box extends Widget_Base
                     'px' => [
                         'min'  => 0,
                         'step' => 1,
-                        'max'  => 600,
+                        'max'  => 1000,
                     ],
                     '%'  => [
                         'min'  => 0,
@@ -294,7 +139,8 @@ class Flip_Box extends Widget_Base
                     'size' => 300,
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-elements-flip-box-container' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-elements-flip-box-container:not(.eael-template)' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-elements-flip-box-container.eael-template' => 'min-height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -307,7 +153,7 @@ class Flip_Box extends Widget_Base
         $this->start_controls_section(
             'eael_flipbox_content',
             [
-                'label' => esc_html__('Flipbox Content', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
             ]
         );
 
@@ -319,6 +165,111 @@ class Flip_Box extends Widget_Base
                 'label' => __('Front', 'essential-addons-for-elementor-lite'),
             ]
         );
+	    $this->add_control(
+		    'eael_flipbox_front_content_type',
+		    [
+			    'label'                 => __( 'Content Type', 'essential-addons-elementor' ),
+			    'type'                  => Controls_Manager::SELECT,
+			    'options'               => [
+				    'content'       => __( 'Content', 'essential-addons-elementor' ),
+				    'template'      => __( 'Saved Templates', 'essential-addons-elementor' ),
+			    ],
+			    'default'               => 'content',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_flipbox_front_templates',
+		    [
+			    'label'                 => __( 'Choose Template', 'essential-addons-elementor' ),
+			    'type'                  => Controls_Manager::SELECT,
+			    'options'               => Helper::get_elementor_templates(),
+			    'condition'             => [
+				    'eael_flipbox_front_content_type'      => 'template',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_flipbox_img_or_icon',
+		    [
+			    'label'   => esc_html__('Icon Type', 'essential-addons-for-elementor-lite'),
+			    'type'    => Controls_Manager::SELECT,
+			    'options' => [
+				    'none' => __('None', 'essential-addons-for-elementor-lite'),
+				    'img'  => __('Image', 'essential-addons-for-elementor-lite'),
+				    'icon' => __('Icon', 'essential-addons-for-elementor-lite'),
+			    ],
+			    'default' => 'icon',
+			    'condition'             => [
+				    'eael_flipbox_front_content_type'      => 'content',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_flipbox_image',
+		    [
+			    'label'     => esc_html__('Flipbox Image', 'essential-addons-for-elementor-lite'),
+			    'type'      => Controls_Manager::MEDIA,
+			    'default'   => [
+				    'url' => Utils::get_placeholder_image_src(),
+			    ],
+			    'condition' => [
+				    'eael_flipbox_img_or_icon' => 'img',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_flipbox_icon_new',
+		    [
+			    'label'            => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
+			    'type'             => Controls_Manager::ICONS,
+			    'fa4compatibility' => 'eael_flipbox_icon',
+			    'default'          => [
+				    'value'   => 'fas fa-snowflake',
+				    'library' => 'fa-solid',
+			    ],
+			    'condition'        => [
+				    'eael_flipbox_img_or_icon' => 'icon',
+			    ],
+		    ]
+	    );
+
+	    $this->add_responsive_control(
+		    'eael_flipbox_image_resizer',
+		    [
+			    'label'     => esc_html__('Image Resizer', 'essential-addons-for-elementor-lite'),
+			    'type'      => Controls_Manager::SLIDER,
+			    'default'   => [
+				    'size' => '100',
+			    ],
+			    'range'     => [
+				    'px' => [
+					    'max' => 500,
+				    ],
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-icon-image > img.eael-flipbox-image-as-icon' => 'width: {{SIZE}}{{UNIT}};',
+			    ],
+			    'condition' => [
+				    'eael_flipbox_img_or_icon' => 'img',
+			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Image_Size::get_type(),
+		    [
+			    'name'      => 'thumbnail',
+			    'default'   => 'full',
+			    'condition' => [
+				    'eael_flipbox_image[url]!' => '',
+				    'eael_flipbox_img_or_icon' => 'img',
+			    ],
+		    ]
+	    );
 
         $this->add_control(
             'eael_flipbox_front_title',
@@ -330,6 +281,9 @@ class Flip_Box extends Widget_Base
                 ],
                 'label_block' => true,
                 'default'     => esc_html__('Front Title', 'essential-addons-for-elementor-lite'),
+	            'condition'             => [
+		            'eael_flipbox_front_content_type'      => 'content',
+	            ],
             ]
         );
 
@@ -350,18 +304,86 @@ class Flip_Box extends Widget_Base
                     'p'    => __('P', 'essential-addons-for-elementor-lite'),
                     'div'  => __('Div', 'essential-addons-for-elementor-lite'),
                 ],
+	            'condition'             => [
+		            'eael_flipbox_front_content_type'      => 'content',
+	            ],
             ]
         );
 
         $this->add_control(
             'eael_flipbox_front_text',
             [
-                'label'       => esc_html__('Front Text', 'essential-addons-for-elementor-lite'),
+                'label'       => esc_html__('Front Content', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::WYSIWYG,
                 'label_block' => true,
                 'default'     => __('This is front side content.', 'essential-addons-for-elementor-lite'),
+	            'condition'             => [
+		            'eael_flipbox_front_content_type'      => 'content',
+	            ],
             ]
         );
+
+	    $this->add_control(
+		    'eael_flipbox_front_vertical_position',
+		    [
+			    'label' => __( 'Vertical Position', 'essential-addons-for-elementor-lite' ),
+			    'type' => Controls_Manager::CHOOSE,
+			    'options' => [
+				    'top' => [
+					    'title' => __( 'Top', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-v-align-top',
+				    ],
+				    'middle' => [
+					    'title' => __( 'Middle', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-v-align-middle',
+				    ],
+				    'bottom' => [
+					    'title' => __( 'Bottom', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-v-align-bottom',
+				    ],
+			    ],
+			    'default' => 'middle',
+			    'selectors_dictionary' => [
+				    'top' => 'flex-start',
+				    'middle' => 'center',
+				    'bottom' => 'flex-end',
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-elements-flip-box-front-container' => 'align-items: {{VALUE}}',
+			    ],
+			    'condition'             => [
+				    'eael_flipbox_front_content_type'      => 'content',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_flipbox_content_alignment',
+		    [
+			    'label'        => esc_html__('Content Alignment', 'essential-addons-for-elementor-lite'),
+			    'type'         => Controls_Manager::CHOOSE,
+			    'label_block'  => true,
+			    'options'      => [
+				    'left'   => [
+					    'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
+					    'icon'  => 'fa fa-align-left',
+				    ],
+				    'center' => [
+					    'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
+					    'icon'  => 'fa fa-align-center',
+				    ],
+				    'right'  => [
+					    'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
+					    'icon'  => 'fa fa-align-right',
+				    ],
+			    ],
+			    'default'      => 'center',
+			    'prefix_class' => 'eael-flipbox-content-align-',
+			    'condition'             => [
+				    'eael_flipbox_front_content_type'      => 'content',
+			    ],
+		    ]
+	    );
 
         $this->end_controls_tab();
 
@@ -372,7 +394,113 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->add_control(
+	    $this->add_control(
+		    'eael_flipbox_back_content_type',
+		    [
+			    'label'                 => __( 'Content Type', 'essential-addons-elementor' ),
+			    'type'                  => Controls_Manager::SELECT,
+			    'options'               => [
+				    'content'       => __( 'Content', 'essential-addons-elementor' ),
+				    'template'      => __( 'Saved Templates', 'essential-addons-elementor' ),
+			    ],
+			    'default'               => 'content',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_flipbox_back_templates',
+		    [
+			    'label'                 => __( 'Choose Template', 'essential-addons-elementor' ),
+			    'type'                  => Controls_Manager::SELECT,
+			    'options'               => Helper::get_elementor_templates(),
+			    'condition'             => [
+				    'eael_flipbox_back_content_type'      => 'template',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_flipbox_img_or_icon_back',
+		    [
+			    'label'   => esc_html__('Icon Type', 'essential-addons-for-elementor-lite'),
+			    'type'    => Controls_Manager::SELECT,
+			    'options' => [
+				    'none' => __('None', 'essential-addons-for-elementor-lite'),
+				    'img'  => __('Image', 'essential-addons-for-elementor-lite'),
+				    'icon' => __('Icon', 'essential-addons-for-elementor-lite'),
+			    ],
+			    'default' => 'icon',
+			    'condition'             => [
+				    'eael_flipbox_back_content_type'      => 'content',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_flipbox_image_back',
+		    [
+			    'label'     => esc_html__('Flipbox Image', 'essential-addons-for-elementor-lite'),
+			    'type'      => Controls_Manager::MEDIA,
+			    'default'   => [
+				    'url' => Utils::get_placeholder_image_src(),
+			    ],
+			    'condition' => [
+				    'eael_flipbox_img_or_icon_back' => 'img',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_flipbox_icon_back_new',
+		    [
+			    'label'            => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
+			    'type'             => Controls_Manager::ICONS,
+			    'fa4compatibility' => 'eael_flipbox_icon_back',
+			    'default'          => [
+				    'value'   => 'fas fa-snowflake',
+				    'library' => 'fa-solid',
+			    ],
+			    'condition'        => [
+				    'eael_flipbox_img_or_icon_back' => 'icon',
+			    ],
+		    ]
+	    );
+
+	    $this->add_responsive_control(
+		    'eael_flipbox_image_resizer_back',
+		    [
+			    'label'     => esc_html__('Image Resizer', 'essential-addons-for-elementor-lite'),
+			    'type'      => Controls_Manager::SLIDER,
+			    'default'   => [
+				    'size' => '100',
+			    ],
+			    'range'     => [
+				    'px' => [
+					    'max' => 500,
+				    ],
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-icon-image > img.eael-flipbox-image-as-icon' => 'width: {{SIZE}}{{UNIT}};',
+			    ],
+			    'condition' => [
+				    'eael_flipbox_img_or_icon_back' => 'img',
+			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Image_Size::get_type(),
+		    [
+			    'name'      => 'thumbnail_back',
+			    'default'   => 'full',
+			    'condition' => [
+				    'eael_flipbox_image[url]!'      => '',
+				    'eael_flipbox_img_or_icon_back' => 'img',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
             'eael_flipbox_back_title',
             [
                 'label'       => esc_html__('Back Title', 'essential-addons-for-elementor-lite'),
@@ -382,6 +510,9 @@ class Flip_Box extends Widget_Base
                 ],
                 'label_block' => true,
                 'default'     => esc_html__('Back Title', 'essential-addons-for-elementor-lite'),
+	            'condition'             => [
+		            'eael_flipbox_back_content_type'      => 'content',
+	            ],
             ]
         );
 
@@ -402,47 +533,92 @@ class Flip_Box extends Widget_Base
                     'p'    => __('P', 'essential-addons-for-elementor-lite'),
                     'div'  => __('Div', 'essential-addons-for-elementor-lite'),
                 ],
+	            'condition'             => [
+		            'eael_flipbox_back_content_type'      => 'content',
+	            ],
             ]
         );
 
         $this->add_control(
             'eael_flipbox_back_text',
             [
-                'label'       => esc_html__('Back Text', 'essential-addons-for-elementor-lite'),
+                'label'       => esc_html__('Back Content', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::WYSIWYG,
                 'label_block' => true,
                 'default'     => __('This is back side content.', 'essential-addons-for-elementor-lite'),
+	            'condition'             => [
+		            'eael_flipbox_back_content_type'      => 'content',
+	            ],
             ]
         );
+
+	    $this->add_control(
+		    'eael_flipbox_back_vertical_position',
+		    [
+			    'label' => __( 'Vertical Position', 'essential-addons-for-elementor-lite' ),
+			    'type' => Controls_Manager::CHOOSE,
+			    'options' => [
+				    'top' => [
+					    'title' => __( 'Top', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-v-align-top',
+				    ],
+				    'middle' => [
+					    'title' => __( 'Middle', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-v-align-middle',
+				    ],
+				    'bottom' => [
+					    'title' => __( 'Bottom', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-v-align-bottom',
+				    ],
+			    ],
+			    'default' => 'middle',
+			    'selectors_dictionary' => [
+				    'top' => 'flex-start',
+				    'middle' => 'center',
+				    'bottom' => 'flex-end',
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-elements-flip-box-rear-container' => 'align-items: {{VALUE}}',
+			    ],
+			    'condition'             => [
+				    'eael_flipbox_back_content_type'      => 'content',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_flipbox_back_content_alignment',
+		    [
+			    'label'        => esc_html__('Content Alignment', 'essential-addons-for-elementor-lite'),
+			    'type'         => Controls_Manager::CHOOSE,
+			    'label_block'  => true,
+			    'options'      => [
+				    'left'   => [
+					    'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
+					    'icon'  => 'fa fa-align-left',
+				    ],
+				    'center' => [
+					    'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
+					    'icon'  => 'fa fa-align-center',
+				    ],
+				    'right'  => [
+					    'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
+					    'icon'  => 'fa fa-align-right',
+				    ],
+			    ],
+			    'default'  => 'center',
+			    'selectors' => [
+			        '{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-padding' => 'text-align: {{VALUE}}',
+                ],
+			    'condition'             => [
+				    'eael_flipbox_back_content_type'      => 'content',
+			    ],
+		    ]
+	    );
 
         $this->end_controls_tab();
 
         $this->end_controls_tabs();
-
-        $this->add_control(
-            'eael_flipbox_content_alignment',
-            [
-                'label'        => esc_html__('Content Alignment', 'essential-addons-for-elementor-lite'),
-                'type'         => Controls_Manager::CHOOSE,
-                'label_block'  => true,
-                'options'      => [
-                    'left'   => [
-                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-left',
-                    ],
-                    'center' => [
-                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-center',
-                    ],
-                    'right'  => [
-                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-right',
-                    ],
-                ],
-                'default'      => 'center',
-                'prefix_class' => 'eael-flipbox-content-align-',
-            ]
-        );
 
         $this->end_controls_section();
 
@@ -455,6 +631,9 @@ class Flip_Box extends Widget_Base
             'eael_flixbox_link_section',
             [
                 'label' => esc_html__('Link', 'essential-addons-for-elementor-lite'),
+	            'condition' => [
+		            'eael_flipbox_back_content_type' => 'content',
+	            ],
             ]
         );
 
@@ -1138,6 +1317,7 @@ class Flip_Box extends Widget_Base
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'flipbox_link_type' => 'button',
+	                'eael_flipbox_back_content_type' => 'content',
                 ],
             ]
         );
@@ -1191,7 +1371,7 @@ class Flip_Box extends Widget_Base
             [
                 'label'     => esc_html__('Background', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#000000',
+                'default'   => '#7048ff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-elements-flip-box-container .flipbox-button' => 'background: {{VALUE}};',
                 ],
@@ -1354,6 +1534,7 @@ class Flip_Box extends Widget_Base
                     'eael-elements-flip-box-container',
                     'eael-animate-flip',
                     'eael-' . esc_attr($settings['eael_flipbox_type']),
+                    'eael-' . esc_attr($settings['eael_flipbox_front_content_type']),
                 ],
             ]
         );
@@ -1364,82 +1545,99 @@ class Flip_Box extends Widget_Base
 
             <<?php echo $flipbox_if_html_tag, ' ', $this->get_render_attribute_string('flipbox-container'); ?>>
                 <div class="eael-elements-flip-box-front-container">
-                    <div class="eael-elements-slider-display-table">
-                        <div class="eael-elements-flip-box-vertical-align">
-                            <div class="eael-elements-flip-box-padding">
-                                <div class="eael-elements-flip-box-icon-image">
-                                    <?php if ('icon' === $settings['eael_flipbox_img_or_icon']) : ?>
-                                        <?php if ($front_icon_is_new || $front_icon_migrated) { ?>
-                                            <?php if (isset($settings['eael_flipbox_icon_new']['value']['url'])) : ?>
-                                                <img class="eael-flipbox-svg-icon" src="<?php echo esc_attr($settings['eael_flipbox_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_flipbox_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
-                                            <?php else : ?>
-                                                <i class="<?php echo esc_attr($settings['eael_flipbox_icon_new']['value']); ?>"></i>
-                                            <?php endif; ?>
-                                        <?php } else { ?>
-                                            <i class="<?php echo esc_attr($settings['eael_flipbox_icon']); ?>"></i>
-                                        <?php } ?>
-                                    <?php elseif ('img' === $settings['eael_flipbox_img_or_icon']) : ?>
-                                        <img class="eael-flipbox-image-as-icon" src="<?php echo esc_url($flipbox_image_url); ?>" alt="<?php echo esc_attr(get_post_meta($flipbox_image['id'], '_wp_attachment_image_alt', true)); ?>">
-                                    <?php endif; ?>
-                                </div>
-                                <<?php echo $settings['eael_flipbox_front_title_tag']; ?> class="eael-elements-flip-box-heading"><?php echo esc_html__($settings['eael_flipbox_front_title'], 'essential-addons-for-elementor-lite'); ?></<?php echo $settings['eael_flipbox_front_title_tag']; ?>>
-                                <div class="eael-elements-flip-box-content">
-                                    <p><?php echo __($settings['eael_flipbox_front_text'], 'essential-addons-for-elementor-lite'); ?></p>
+
+                    <?php
+                    if ( $settings['eael_flipbox_front_content_type'] == 'template' ) {
+                        if ( !empty( $settings['eael_flipbox_front_templates'] ) ) {
+                            echo Plugin::$instance->frontend->get_builder_content($settings['eael_flipbox_front_templates'], true);
+                        }
+                    } else { ?>
+
+                        <div class="eael-elements-slider-display-table">
+                            <div class="eael-elements-flip-box-vertical-align">
+                                <div class="eael-elements-flip-box-padding">
+                                    <div class="eael-elements-flip-box-icon-image">
+                                        <?php if ('icon' === $settings['eael_flipbox_img_or_icon']) : ?>
+                                            <?php if ($front_icon_is_new || $front_icon_migrated) { ?>
+                                                <?php if (isset($settings['eael_flipbox_icon_new']['value']['url'])) : ?>
+                                                    <img class="eael-flipbox-svg-icon" src="<?php echo esc_attr($settings['eael_flipbox_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_flipbox_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                                                <?php else : ?>
+                                                    <i class="<?php echo esc_attr($settings['eael_flipbox_icon_new']['value']); ?>"></i>
+                                                <?php endif; ?>
+                                            <?php } else { ?>
+                                                <i class="<?php echo esc_attr($settings['eael_flipbox_icon']); ?>"></i>
+                                            <?php } ?>
+                                        <?php elseif ('img' === $settings['eael_flipbox_img_or_icon']) : ?>
+                                            <img class="eael-flipbox-image-as-icon" src="<?php echo esc_url($flipbox_image_url); ?>" alt="<?php echo esc_attr(get_post_meta($flipbox_image['id'], '_wp_attachment_image_alt', true)); ?>">
+                                        <?php endif; ?>
+                                    </div>
+                                    <<?php echo $settings['eael_flipbox_front_title_tag']; ?> class="eael-elements-flip-box-heading"><?php echo esc_html__($settings['eael_flipbox_front_title'], 'essential-addons-for-elementor-lite'); ?></<?php echo $settings['eael_flipbox_front_title_tag']; ?>>
+                                    <div class="eael-elements-flip-box-content">
+                                        <p><?php echo __($settings['eael_flipbox_front_text'], 'essential-addons-for-elementor-lite'); ?></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <?php } ?>
                 </div>
 
                 <div class="eael-elements-flip-box-rear-container">
-                    <div class="eael-elements-slider-display-table">
-                        <div class="eael-elements-flip-box-vertical-align">
-                            <div class="eael-elements-flip-box-padding">
-                                <?php if ('none' != $settings['eael_flipbox_img_or_icon_back']) : ?>
-                                    <div class="eael-elements-flip-box-icon-image">
-                                        <?php if ('img' == $settings['eael_flipbox_img_or_icon_back']) : ?>
-                                            <img class="eael-flipbox-image-as-icon" <?php echo $this->get_render_attribute_string('flipbox-back-icon-image-container'); ?>>
-                                        <?php elseif ('icon' == $settings['eael_flipbox_img_or_icon_back']) : ?>
-                                            <?php if ($back_icon_is_new || $back_icon_migrated) { ?>
-                                                <?php if (isset($settings['eael_flipbox_icon_back_new']['value']['url'])) : ?>
-                                                    <img class="eael-flipbox-svg-icon" src="<?php echo esc_attr($settings['eael_flipbox_icon_back_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_flipbox_icon_back_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
-                                                <?php else : ?>
-                                                    <i class="<?php echo esc_attr($settings['eael_flipbox_icon_back_new']['value']); ?>"></i>
-                                                <?php endif; ?>
-                                            <?php } else { ?>
-                                                <i class="<?php echo esc_attr($settings['eael_flipbox_icon_back']); ?>"></i>
-                                            <?php } ?>
-                                        <?php endif; ?>
+
+                    <?php
+                    if ( $settings['eael_flipbox_back_content_type'] == 'template' ) {
+                        if ( !empty( $settings['eael_flipbox_back_templates'] ) ) {
+                            echo Plugin::$instance->frontend->get_builder_content($settings['eael_flipbox_back_templates'], true);
+                        }
+                    } else { ?>
+                        <div class="eael-elements-slider-display-table">
+                            <div class="eael-elements-flip-box-vertical-align">
+                                <div class="eael-elements-flip-box-padding">
+                                    <?php if ('none' != $settings['eael_flipbox_img_or_icon_back']) : ?>
+                                        <div class="eael-elements-flip-box-icon-image">
+                                            <?php if ('img' == $settings['eael_flipbox_img_or_icon_back']) : ?>
+                                                <img class="eael-flipbox-image-as-icon" <?php echo $this->get_render_attribute_string('flipbox-back-icon-image-container'); ?>>
+                                            <?php elseif ('icon' == $settings['eael_flipbox_img_or_icon_back']) : ?>
+                                                <?php if ($back_icon_is_new || $back_icon_migrated) { ?>
+                                                    <?php if (isset($settings['eael_flipbox_icon_back_new']['value']['url'])) : ?>
+                                                        <img class="eael-flipbox-svg-icon" src="<?php echo esc_attr($settings['eael_flipbox_icon_back_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_flipbox_icon_back_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                                                    <?php else : ?>
+                                                        <i class="<?php echo esc_attr($settings['eael_flipbox_icon_back_new']['value']); ?>"></i>
+                                                    <?php endif; ?>
+                                                <?php } else { ?>
+                                                    <i class="<?php echo esc_attr($settings['eael_flipbox_icon_back']); ?>"></i>
+                                                <?php } ?>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <<?php echo $flipbox_if_html_title_tag, ' ', $this->get_render_attribute_string('flipbox-title-container'); ?>><?php echo esc_html__($settings['eael_flipbox_back_title'], 'essential-addons-for-elementor-lite'); ?></<?php echo $flipbox_if_html_title_tag; ?>>
+                                    <div class="eael-elements-flip-box-content">
+                                        <p><?php echo __($settings['eael_flipbox_back_text'], 'essential-addons-for-elementor-lite'); ?></p>
                                     </div>
-                                <?php endif; ?>
 
-                                <<?php echo $flipbox_if_html_title_tag, ' ', $this->get_render_attribute_string('flipbox-title-container'); ?>><?php echo esc_html__($settings['eael_flipbox_back_title'], 'essential-addons-for-elementor-lite'); ?></<?php echo $flipbox_if_html_title_tag; ?>>
-                                <div class="eael-elements-flip-box-content">
-                                    <p><?php echo __($settings['eael_flipbox_back_text'], 'essential-addons-for-elementor-lite'); ?></p>
+                                    <?php if ($settings['flipbox_link_type'] == 'button' && !empty($settings['flipbox_button_text'])) : ?>
+                                        <a <?php echo $this->get_render_attribute_string('flipbox-button-container'); ?>>
+                                            <?php if ('before' == $settings['button_icon_position']) : ?>
+                                                <?php if ($button_icon_is_new || $button_icon_migrated) { ?>
+                                                    <i class="<?php echo $settings['button_icon_new']['value']; ?>"></i>
+                                                <?php } else { ?>
+                                                    <i class="<?php echo $settings['button_icon']; ?>"></i>
+                                                <?php } ?>
+                                            <?php endif; ?>
+                                            <?php echo esc_attr($settings['flipbox_button_text']); ?>
+                                            <?php if ('after' == $settings['button_icon_position']) : ?>
+                                                <?php if ($button_icon_is_new || $button_icon_migrated) { ?>
+                                                    <i class="<?php echo $settings['button_icon_new']['value']; ?>"></i>
+                                                <?php } else { ?>
+                                                    <i class="<?php echo $settings['button_icon']; ?>"></i>
+                                                <?php } ?>
+                                            <?php endif; ?>
+                                        </a>
+                                    <?php endif; ?>
                                 </div>
-
-                                <?php if ($settings['flipbox_link_type'] == 'button' && !empty($settings['flipbox_button_text'])) : ?>
-                                    <a <?php echo $this->get_render_attribute_string('flipbox-button-container'); ?>>
-                                        <?php if ('before' == $settings['button_icon_position']) : ?>
-                                            <?php if ($button_icon_is_new || $button_icon_migrated) { ?>
-                                                <i class="<?php echo $settings['button_icon_new']['value']; ?>"></i>
-                                            <?php } else { ?>
-                                                <i class="<?php echo $settings['button_icon']; ?>"></i>
-                                            <?php } ?>
-                                        <?php endif; ?>
-                                        <?php echo esc_attr($settings['flipbox_button_text']); ?>
-                                        <?php if ('after' == $settings['button_icon_position']) : ?>
-                                            <?php if ($button_icon_is_new || $button_icon_migrated) { ?>
-                                                <i class="<?php echo $settings['button_icon_new']['value']; ?>"></i>
-                                            <?php } else { ?>
-                                                <i class="<?php echo $settings['button_icon']; ?>"></i>
-                                            <?php } ?>
-                                        <?php endif; ?>
-                                    </a>
-                                <?php endif; ?>
                             </div>
                         </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </<?php echo $flipbox_if_html_tag; ?>>
         </div>

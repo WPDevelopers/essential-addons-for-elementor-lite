@@ -108,6 +108,10 @@ html {
   margin-top: 100%;
 }
 
+.eael-toc.eael-toc-left {
+  left: 0;
+}
+
 .eael-toc .eael-toc-header {
   position: relative;
   background: #ff7d50;

@@ -536,9 +536,19 @@ $config = [
                         'context' => 'view',
                     ],
                 ],
-                'js' => [
+                'js'  => [
+	                [
+		                'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js',
+		                'type'    => 'lib',
+		                'context' => 'view',
+	                ],
                     [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/load-more.min.js',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+	                [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/product-grid.min.js',
                         'type' => 'self',
                         'context' => 'view',
                     ],

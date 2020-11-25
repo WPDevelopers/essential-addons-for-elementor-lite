@@ -667,3 +667,7 @@
     display: none;
   }
 }
+.rtl .elementor-widget-eael-feature-list .-icon-position-left .eael-feature-list-item,
+.rtl .elementor-widget-eael-feature-list .-icon-position-right .eael-feature-list-item {
+  direction: ltr;
+}

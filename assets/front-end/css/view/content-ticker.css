@@ -85,3 +85,17 @@
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
+
+.rtl .eael-ticker-wrap .eael-content-ticker.swiper-container .swiper-slide {
+  text-align: right;
+}
+
+.rtl .eael-ticker-wrap .swiper-button-prev {
+  left: 0 !important;
+  right: auto !important;
+}
+
+.rtl .eael-ticker-wrap .swiper-button-next {
+  right: auto;
+  left: 12px;
+}

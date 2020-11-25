@@ -24,7 +24,6 @@ class Product_Grid extends Widget_Base {
     //use Woo_Product_Comparable;
     use Helper;
     //use Product_Grid_Trait;
-    use Template_Query;
 
     private $is_show_custom_add_to_cart = false;
     private $simple_add_to_cart_button_text;
