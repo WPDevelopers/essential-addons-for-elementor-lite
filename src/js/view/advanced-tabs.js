@@ -3,41 +3,51 @@ ea.hooks.addAction("init", "ea", () => {
 		"frontend/element_ready/eael-adv-tabs.default",
 		function ($scope, $) {
 			let hashTag = window.location.hash.substr(1);
+			let hashTagExists = false;
 
-			$(".eael-tabs-nav ul li", $scope).each(function (index) {
-				if (hashTag) {
+			if (hashTag) {
+				$(".eael-tabs-nav ul li", $scope).each(function (index) {
+					if ($(this).attr("id") == hashTag) {
+						hashTagExists = true;
+
+						$(this).removeClass("inactive").addClass("active");
+					}
+				});
+
+				$(".eael-tabs-content div", $scope).each(function (index) {
 					if ($(this).attr("id") == hashTag) {
 						$(this).removeClass("inactive").addClass("active");
 					}
-				} else {
+				});
+			}
+
+			if (hashTagExists === false) {
+				$(".eael-tabs-nav ul li", $scope).each(function (index) {
 					if ($(this).hasClass("active-default")) {
 						$(".eael-tabs-nav > ul li", $scope)
 							.removeClass("active")
 							.addClass("inactive");
-						$(this).removeClass("inactive");
-					} else {
-						if (index == 0) {
-							$(this).removeClass("inactive").addClass("active");
-						}
-					}
-				}
-			});
-
-			$(".eael-tabs-content div", $scope).each(function (index) {
-				if (hashTag) {
-					if ($(this).attr("id") == hashTag) {
 						$(this).removeClass("inactive").addClass("active");
-					}
-				} else {
-					if ($(this).hasClass("active-default")) {
-						$(".eael-tabs-content > div", $scope).removeClass("active");
 					} else {
 						if (index == 0) {
 							$(this).removeClass("inactive").addClass("active");
 						}
 					}
-				}
-			});
+				});
+
+				$(".eael-tabs-content div", $scope).each(function (index) {
+					if ($(this).hasClass("active-default")) {
+						$(".eael-tabs-content > div", $scope)
+							.removeClass("active")
+							.addClass("inactive");
+						$(this).removeClass("inactive").addClass("active");
+					} else {
+						if (index == 0) {
+							$(this).removeClass("inactive").addClass("active");
+						}
+					}
+				});
+			}
 
 			$(".eael-tabs-nav ul li", $scope).on("click", function (e) {
 				e.preventDefault();
