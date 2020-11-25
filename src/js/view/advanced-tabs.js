@@ -1,100 +1,115 @@
-var AdvanceTabHandler = function ($scope, $) {
-    var $currentTab = $scope.find('.eael-advance-tabs'),
-        $currentTabId = '#' + $currentTab.attr('id').toString()
+ea.hooks.addAction("init", "ea", () => {
+	elementorFrontend.hooks.addAction(
+		"frontend/element_ready/eael-adv-tabs.default",
+		function ($scope, $) {
+			let hashTag = window.location.hash.substr(1);
 
-    $($currentTabId + ' .eael-tabs-nav ul li').each(function (index) {
-        if ($(this).hasClass('active-default')) {
-            $($currentTabId + ' .eael-tabs-nav > ul li')
-                .removeClass('active')
-                .addClass('inactive')
-            $(this).removeClass('inactive')
-        } else {
-            if (index == 0) {
-                $(this).removeClass('inactive').addClass('active')
-            }
-        }
-    })
+			$(".eael-tabs-nav ul li", $scope).each(function (index) {
+				if (hashTag) {
+					if ($(this).attr("id") == hashTag) {
+						$(this).removeClass("inactive").addClass("active");
+					}
+				} else {
+					if ($(this).hasClass("active-default")) {
+						$(".eael-tabs-nav > ul li", $scope)
+							.removeClass("active")
+							.addClass("inactive");
+						$(this).removeClass("inactive");
+					} else {
+						if (index == 0) {
+							$(this).removeClass("inactive").addClass("active");
+						}
+					}
+				}
+			});
 
-    $($currentTabId + ' .eael-tabs-content div').each(function (index) {
-        if ($(this).hasClass('active-default')) {
-            $($currentTabId + ' .eael-tabs-content > div').removeClass('active')
-        } else {
-            if (index == 0) {
-                $(this).removeClass('inactive').addClass('active')
-            }
-        }
-    })
+			$(".eael-tabs-content div", $scope).each(function (index) {
+				if (hashTag) {
+					if ($(this).attr("id") == hashTag) {
+						$(this).removeClass("inactive").addClass("active");
+					}
+				} else {
+					if ($(this).hasClass("active-default")) {
+						$(".eael-tabs-content > div", $scope).removeClass("active");
+					} else {
+						if (index == 0) {
+							$(this).removeClass("inactive").addClass("active");
+						}
+					}
+				}
+			});
 
-    $($currentTabId + ' .eael-tabs-nav ul li').click(function () {
-        var currentTabIndex = $(this).index()
-        var tabsContainer = $(this).closest('.eael-advance-tabs')
+			$(".eael-tabs-nav ul li", $scope).on("click", function (e) {
+				e.preventDefault();
 
-        var tabsNav = $(tabsContainer)
-            .children('.eael-tabs-nav')
-            .children('ul')
-            .children('li')
-        var tabsContent = $(tabsContainer)
-            .children('.eael-tabs-content')
-            .children('div')
+				var currentTabIndex = $(this).index();
+				var tabsContainer = $(this).closest(".eael-advance-tabs");
+				var tabsNav = $(tabsContainer)
+					.children(".eael-tabs-nav")
+					.children("ul")
+					.children("li");
+				var tabsContent = $(tabsContainer)
+					.children(".eael-tabs-content")
+					.children("div");
 
-        $(this).parent('li').addClass('active')
+				$(this).parent("li").addClass("active");
 
-        $(tabsNav).removeClass('active active-default').addClass('inactive')
-        $(this).addClass('active').removeClass('inactive')
+				$(tabsNav).removeClass("active active-default").addClass("inactive");
+				$(this).addClass("active").removeClass("inactive");
 
-        $(tabsContent).removeClass('active').addClass('inactive')
-        $(tabsContent)
-            .eq(currentTabIndex)
-            .addClass('active')
-            .removeClass('inactive')
+				$(tabsContent).removeClass("active").addClass("inactive");
+				$(tabsContent)
+					.eq(currentTabIndex)
+					.addClass("active")
+					.removeClass("inactive");
 
-        var $filterGallery = tabsContent
-                .eq(currentTabIndex)
-                .find('.eael-filter-gallery-container'),
-            $postGridGallery = tabsContent
-                .eq(currentTabIndex)
-                .find('.eael-post-grid.eael-post-appender'),
-            $twitterfeedGallery = tabsContent
-                .eq(currentTabIndex)
-                .find('.eael-twitter-feed-masonry'),
-            $instaGallery = tabsContent
-                .eq(currentTabIndex)
-                .find('.eael-instafeed'),
-            $paGallery = tabsContent
-                .eq(currentTabIndex)
-                .find('.premium-gallery-container')
+				$(tabsContent).each(function (index) {
+					$(this).removeClass("active-default");
+				});
 
-        if ($postGridGallery.length) {
-            $postGridGallery.isotope('layout')
-        }
+				let $filterGallery = tabsContent
+						.eq(currentTabIndex)
+						.find(".eael-filter-gallery-container"),
+					$postGridGallery = tabsContent
+						.eq(currentTabIndex)
+						.find(".eael-post-grid.eael-post-appender"),
+					$twitterfeedGallery = tabsContent
+						.eq(currentTabIndex)
+						.find(".eael-twitter-feed-masonry"),
+					$instaGallery = tabsContent
+						.eq(currentTabIndex)
+						.find(".eael-instafeed"),
+					$paGallery = tabsContent
+						.eq(currentTabIndex)
+						.find(".premium-gallery-container"),
+					$evCalendar = $(".eael-event-calendar-cls", tabsContent);
 
-        if ($twitterfeedGallery.length) {
-            $twitterfeedGallery.isotope('layout')
-        }
+				if ($postGridGallery.length) {
+					$postGridGallery.isotope("layout");
+				}
 
-        if ($filterGallery.length) {
-            $filterGallery.isotope('layout')
-        }
+				if ($twitterfeedGallery.length) {
+					$twitterfeedGallery.isotope("layout");
+				}
 
-        if ($instaGallery.length) {
-            $instaGallery.isotope('layout')
-        }
+				if ($filterGallery.length) {
+					$filterGallery.isotope("layout");
+				}
 
-        if ($paGallery.length) {
-            $paGallery.each(function (index, item) {
-                $(item).isotope('layout')
-            })
-        }
+				if ($instaGallery.length) {
+					$instaGallery.isotope("layout");
+				}
 
-        $(tabsContent).each(function (index) {
-            $(this).removeClass('active-default')
-        })
-    })
-}
+				if ($paGallery.length) {
+					$paGallery.each(function (index, item) {
+						$(item).isotope("layout");
+					});
+				}
 
-jQuery(window).on('elementor/frontend/init', function () {
-    elementorFrontend.hooks.addAction(
-        'frontend/element_ready/eael-adv-tabs.default',
-        AdvanceTabHandler
-    )
-})
+				if ($evCalendar.length) {
+					ea.hooks.doAction("eventCalendar.reinit");
+				}
+			});
+		}
+	);
+});

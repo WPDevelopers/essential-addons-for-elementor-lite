@@ -237,6 +237,15 @@ class Adv_Tabs extends Widget_Base
                 ],
             ]
         );
+        
+        $repeater->add_control(
+            'eael_adv_tabs_tab_id',
+            [
+                'label' => esc_html__('Custom ID', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'default' => '',
+            ]
+        );
 
         $this->add_control(
             'eael_adv_tabs_tab',
@@ -883,8 +892,8 @@ class Adv_Tabs extends Widget_Base
         <div <?php echo $this->get_render_attribute_string('eael_tab_wrapper'); ?>>
             <div class="eael-tabs-nav">
                 <ul <?php echo $this->get_render_attribute_string('eael_tab_icon_position'); ?>>
-                    <?php foreach ($settings['eael_adv_tabs_tab'] as $tab) : ?>
-                        <li class="<?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>">
+                    <?php foreach ($settings['eael_adv_tabs_tab'] as $key => $tab) : ?>
+                        <li id="<?php echo $tab['eael_adv_tabs_tab_id'] ? $tab['eael_adv_tabs_tab_id'] : Helper::str_to_css_id($tab['eael_adv_tabs_tab_title']); ?>" class="<?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>">
                             <?php if ($settings['eael_adv_tabs_icon_show'] === 'yes') :
                                 if ($tab['eael_adv_tabs_icon_type'] === 'icon') : ?>
                                     <?php if ($tab_icon_is_new || $tab_icon_migrated) {
@@ -908,7 +917,7 @@ class Adv_Tabs extends Widget_Base
                 <?php foreach ($settings['eael_adv_tabs_tab'] as $tab) :
                     $eael_find_default_tab[] = $tab['eael_adv_tabs_tab_show_as_default']; ?>
 
-                    <div class="clearfix <?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>">
+                    <div id="<?php echo $tab['eael_adv_tabs_tab_id'] ? $tab['eael_adv_tabs_tab_id'] : Helper::str_to_css_id($tab['eael_adv_tabs_tab_title']); ?>" class="clearfix <?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>">
                         <?php if ('content' == $tab['eael_adv_tabs_text_type']) : ?>
                             <?php echo do_shortcode($tab['eael_adv_tabs_tab_content']); ?>
                         <?php elseif ('template' == $tab['eael_adv_tabs_text_type']) : ?>
