@@ -47,7 +47,6 @@ trait Login_Registration {
 	 */
 	public function log_user_in() {
 		$ajax   = wp_doing_ajax();
-
 		// before even thinking about login, check security and exit early if something is not right.
 		$page_id = 0;
 		if ( ! empty( $_POST['page_id'] ) ) {
@@ -69,7 +68,10 @@ trait Login_Registration {
 			}
 			$this->set_transient( 'eael_login_error_' . $widget_id, $err_msg );
 
-			return false;
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            }
 		}
 
 
@@ -80,7 +82,10 @@ trait Login_Registration {
 			}
 			$this->set_transient( 'eael_login_error_' . $widget_id, $err_msg );
 
-			return false;
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            }
 		}
 
 		if ( ! wp_verify_nonce( $_POST['eael-login-nonce'], 'eael-login-action' ) ) {
@@ -90,7 +95,10 @@ trait Login_Registration {
 			}
 			$this->set_transient( 'eael_login_error_' . $widget_id, $err_msg );
 
-			return false;
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            }
 		}
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
@@ -101,7 +109,10 @@ trait Login_Registration {
 			}
 			$this->set_transient( 'eael_login_error_' . $widget_id, $err_msg );
 
-			return false;
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            }
 		}
 
 		do_action( 'eael/login-register/before-login' );
@@ -114,7 +125,10 @@ trait Login_Registration {
 			}
 			$this->set_transient( 'eael_login_error_' . $widget_id, $err_msg );
 
-			return false; // vail early if recaptcha failed
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            } // vail early if recaptcha failed
 		}
 
 		$user_login = ! empty( $_POST['eael-user-login'] ) ? sanitize_text_field( $_POST['eael-user-login'] ) : '';
@@ -136,7 +150,7 @@ trait Login_Registration {
 			$err_msg = '';
 			if ( isset( $user_data->errors['invalid_email'][0] ) ) {
 				$err_msg = isset( $settings['err_email'] ) ? $settings['err_email'] : __( 'Invalid Email. Please check your email or try again with your username.', 'essential-addons-for-elementor-lite' );
-			} elseif ( isset( $user_data->errors['invalid_username'][0] ) || isset( $user_data->errors['incorrect_password'][0] ) || isset( $user_data->errors['empty_password'][0] ) ) {
+			} elseif ( isset( $user_data->errors['invalid_username'][0] )) {
 				$err_msg = isset( $settings['err_username'] ) ? $settings['err_username'] : __( 'Invalid Username. Please check your username or try again with your email.', 'essential-addons-for-elementor-lite' );
 
 			} elseif ( isset( $user_data->errors['incorrect_password'][0] ) || isset( $user_data->errors['empty_password'][0] ) ) {
@@ -147,7 +161,6 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-
 			$this->set_transient( 'eael_login_error_' . $widget_id, $err_msg );
 		} else {
 			wp_set_current_user( $user_data->ID, $user_login );
@@ -169,6 +182,10 @@ trait Login_Registration {
 				exit();
 			}
 		}
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            wp_safe_redirect($_SERVER['HTTP_REFERER']);
+            exit();
+        }
 	}
 
 	/**
