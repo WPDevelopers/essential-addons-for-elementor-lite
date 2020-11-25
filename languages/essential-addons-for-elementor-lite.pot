@@ -6938,11 +6938,11 @@ msgstr ""
 msgid "Page ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:197
+#: ../includes/Traits/Helper.php:196
 msgid "Essential Addons for Elementor"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:376, ../includes/Traits/Twitter_Feed.php:119
+#: ../includes/Traits/Helper.php:375, ../includes/Traits/Twitter_Feed.php:119
 msgid "%s ago"
 msgstr ""
 
