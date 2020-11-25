@@ -21,9 +21,6 @@ msgstr ""
 msgid "Unlock more possibilities"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:180, ../includes/Elements/Dual_Color_Header.php:223, ../includes/Elements/Flip_Box.php:559, ../includes/Elements/Info_Box.php:503
-msgstr ""
-
 #: ../includes/Classes/Helper.php:393
 msgid "Select a Contact Form"
 msgstr ""
