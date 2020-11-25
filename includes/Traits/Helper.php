@@ -151,13 +151,12 @@ trait Helper {
             }
         }
 
-        $json = wp_json_encode( $html );
 
         while ( ob_get_status() ) {
             ob_end_clean();
         }
         if ( function_exists( 'gzencode' ) ) {
-            $response = gzencode( $json );
+            $response = gzencode( wp_json_encode( $html ) );
 
             header( 'Content-Type: application/json; charset=utf-8' );
             header( 'Content-Encoding: gzip' );
@@ -165,7 +164,7 @@ trait Helper {
 
             echo $response;
         } else {
-            echo $json;
+            echo $html;
         }
         wp_die();
     }
