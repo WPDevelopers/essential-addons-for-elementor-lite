@@ -10,7 +10,9 @@ use Elementor\Plugin;
 use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use \Essential_Addons_Elementor\Elements\Woo_Checkout;
 
-trait Helper {
+trait Helper
+{
+    use Template_Query;
     /**
      * This function is responsible for get the post data.
      * It will return HTML markup with AJAX call and with normal call.
@@ -168,7 +170,6 @@ trait Helper {
         }
         wp_die();
     }
-
     /**
      * Woo Checkout
      */
@@ -457,26 +458,216 @@ trait Helper {
         <?php }
     }
 
-    public function change_add_to_cart_text( $add_to_cart_text ) {
-        add_filter( 'woocommerce_product_add_to_cart_text', function ( $default ) use ( $add_to_cart_text ) {
-            global $product;
-            switch ( $product->get_type() ) {
-                case 'external':
-                    return $add_to_cart_text[ 'add_to_cart_external_product_button_text' ];
-                    break;
-                case 'grouped':
-                    return $add_to_cart_text[ 'add_to_cart_grouped_product_button_text' ];
-                    break;
-                case 'simple':
-                    return $add_to_cart_text[ 'add_to_cart_simple_product_button_text' ];
-                    break;
-                case 'variable':
-                    return $add_to_cart_text[ 'add_to_cart_variable_product_button_text' ];
-                    break;
-                default:
-                    return $default;
+
+	public function eael_product_grid_script(){
+		if ( version_compare( WC()->version, '3.0.0', '>=' ) ) {
+			if ( current_theme_supports( 'wc-product-gallery-zoom' ) ) {
+				wp_enqueue_script( 'zoom' );
+			}
+			if ( current_theme_supports( 'wc-product-gallery-slider' ) ) {
+				wp_enqueue_script( 'flexslider' );
+			}
+			if ( current_theme_supports( 'wc-product-gallery-lightbox' ) ) {
+				wp_enqueue_script( 'photoswipe-ui-default' );
+				wp_enqueue_style( 'photoswipe-default-skin' );
+				if ( has_action( 'wp_footer', 'woocommerce_photoswipe' ) === false ) {
+					add_action( 'wp_footer', 'woocommerce_photoswipe', 15 );
+				}
+			}
+            wp_enqueue_script( 'wc-add-to-cart-variation' );
+			wp_enqueue_script( 'wc-single-product' );
+		}
+	}
+
+	/**
+	* Rating Markup
+	*/
+	public function eael_rating_markup( $html, $rating, $count ) {
+
+		if ( 0 == $rating ) {
+			$html  = '<div class="star-rating">';
+			$html .= wc_get_star_rating_html( $rating, $count );
+			$html .= '</div>';
+		}
+		return $html;
+	}
+
+	public function eael_woo_pagination_product_ajax() {
+		parse_str($_REQUEST['args'], $args);
+		parse_str($_REQUEST['settings'], $settings);
+
+		$paginationNumber = absint($_POST['number']);
+		$paginationLimit  = absint($_POST['limit']);
+
+		$args['posts_per_page'] = $paginationLimit;
+
+		if( $paginationNumber == "1" ){
+			$paginationOffsetValue = "0";
+		}else{
+			$paginationOffsetValue = ($paginationNumber-1)*$paginationLimit;
+			$args['offset'] = $paginationOffsetValue;
+		}
+
+		$template_info = $_REQUEST['templateInfo'];
+        $this->set_widget_name( $template_info['name'] );
+        $template = $this->get_template( $template_info['file_name'] );
+        ob_start();
+        $query = new \WP_Query( $args );
+        if ( $query->have_posts() ) {
+            while ( $query->have_posts() ) {
+                $query->the_post();
+                include( $template );
             }
-        } );
-    }
+        }
+        echo ob_get_clean();
+        wp_die();
+	}
+
+	public function eael_woo_pagination_ajax() {
+		parse_str($_REQUEST['args'], $args);
+		parse_str($_REQUEST['settings'], $settings);
+		$class = '\Essential_Addons_Elementor\Elements\Product_Grid';
+
+		global $wpdb;
+		$paginationNumber = absint($_POST['number']);
+		$paginationLimit  = absint($_POST['limit']);
+
+		$pagination_args = $args;
+		$pagination_args['posts_per_page'] = -1;
+
+		$pagination_Query = new \WP_Query( $pagination_args );
+		$pagination_Count = count($pagination_Query->posts);
+		$pagination_Paginationlist = ceil($pagination_Count/$paginationLimit);
+		$last = ceil( $pagination_Paginationlist );
+		$paginationprev = $paginationNumber-1;
+		$paginationnext = $paginationNumber+1;
+		if( $paginationNumber>1 ){ $paginationprev;	}
+		if( $paginationNumber < $last ){ $paginationnext; }
+
+		$adjacents = "2";
+		$widget_id = $settings['eael_widget_id'];
+		$next_label = $settings['pagination_next_label'];
+		$prev_label = $settings['pagination_prev_label'];
+
+		$setPagination = "";
+		if( $pagination_Paginationlist > 0 ){
+
+			$setPagination .="<ul class='page-numbers'>";
+
+			if( 1< $paginationNumber ){
+				$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$paginationprev' data-plimit='$paginationLimit'>$prev_label</a></li>";
+			}
+
+			if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
+
+				for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
+
+					if( $paginationNumber ==  $pagination ){ $active="current"; }else{ $active=""; }
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+
+				}
+
+			} else if ( $pagination_Paginationlist > 5 + ($adjacents * 2) ){
+
+				if( $paginationNumber < 1 + ($adjacents * 2) ){
+
+					for( $pagination=1; $pagination <=4 + ($adjacents * 2); $pagination++){
+
+						if( $paginationNumber ==  $pagination ){ $active="current"; }else{ $active=""; }
+						$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+					}
+					$setPagination .="<li class='pagitext dots'>...</li>";
+					$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$last' data-plimit='$paginationLimit'>".$last."</a></li>";
+
+				} elseif( $pagination_Paginationlist - ($adjacents * 2) > $paginationNumber && $paginationNumber > ($adjacents * 2)) {
+					$active = '';
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='1' data-plimit='$paginationLimit'>1</a></li>";
+					$setPagination .="<li class='pagitext dots'>...</li>";
+
+					for( $pagination=$paginationNumber - $adjacents; $pagination<=$paginationNumber + $adjacents; $pagination++){
+
+						if( $paginationNumber ==  $pagination ){ $active="current"; }else{ $active=""; }
+						$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+
+					}
+
+					$setPagination .="<li class='pagitext dots'>...</li>";
+					$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$last' data-plimit='$paginationLimit'>".$last."</a></li>";
+
+				} else {
+					$active = '';
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='1' data-plimit='$paginationLimit'>1</a></li>";
+					$setPagination .="<li class='pagitext dots'>...</li>";
+
+					for ($pagination = $last - (2 + ($adjacents * 2)); $pagination <= $last; $pagination++){
+
+						if( $paginationNumber ==  $pagination ){ $active="current"; }else{ $active=""; }
+						$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+
+					}
+
+				}
+
+			} else {
+
+				for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
+					if( $paginationNumber ==  $pagination ){ $active="current"; }else{ $active=""; }
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+				}
+
+			}
+
+			if ($paginationNumber < $pagination_Paginationlist){
+				$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='"
+				                 .http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$paginationnext' data-plimit='$paginationLimit'>$next_label</a></li>";
+			}
+
+			$setPagination .="</ul>";
+		}
+		echo $setPagination;
+		wp_die();
+	}
+
+	public function eael_product_add_to_cart () {
+
+		$ajax   = wp_doing_ajax();
+
+		if(isset($_POST['product_data'])){
+			foreach ($_POST['product_data'] as $item){
+				$product_id   = isset( $item['product_id'] ) ? sanitize_text_field( $item['product_id'] ) : 0;
+				$variation_id = isset( $item['variation_id'] ) ? sanitize_text_field( $item['variation_id'] ) : 0;
+				$quantity     = isset( $item['quantity'] ) ? sanitize_text_field( $item['quantity'] ) : 0;
+				if ( $variation_id ) {
+					WC()->cart->add_to_cart( $product_id, $quantity, $variation_id );
+				} else {
+					WC()->cart->add_to_cart( $product_id, $quantity );
+				}
+			}
+		}
+		wp_send_json_success();
+	}
+
+	public function change_add_to_cart_text( $add_to_cart_text ) {
+		add_filter( 'woocommerce_product_add_to_cart_text', function ( $default ) use ( $add_to_cart_text ) {
+			global $product;
+			switch ( $product->get_type() ) {
+				case 'external':
+					return $add_to_cart_text[ 'add_to_cart_external_product_button_text' ];
+					break;
+				case 'grouped':
+					return $add_to_cart_text[ 'add_to_cart_grouped_product_button_text' ];
+					break;
+				case 'simple':
+					return $add_to_cart_text[ 'add_to_cart_simple_product_button_text' ];
+					break;
+				case 'variable':
+					return $add_to_cart_text[ 'add_to_cart_variable_product_button_text' ];
+					break;
+				default:
+					return $default;
+			}
+		} );
+	}
+	
 }
 

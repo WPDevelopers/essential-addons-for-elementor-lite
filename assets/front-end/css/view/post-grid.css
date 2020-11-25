@@ -658,3 +658,6 @@
 .eael-post-grid-style-two .eael-entry-meta .post-meta-categories li a {
   color: #929292;
 }
+.rtl .eael-grid-post .eael-entry-footer {
+  direction: ltr;
+}

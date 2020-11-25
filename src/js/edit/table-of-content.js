@@ -16,10 +16,12 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 	elementor.settings.page.addChangeCallback("eael_ext_toc_position", function (
 		newValue
 	) {
+		var selector = jQuery("#eael-toc");
 		if (newValue === "right") {
-			jQuery("#eael-toc").addClass("eael-toc-right");
+			selector.addClass("eael-toc-right");
 		} else {
-			jQuery("#eael-toc").removeClass("eael-toc-right");
+			selector.removeClass("eael-toc-right");
+			selector.addClass("eael-toc-left");
 		}
 	});
 

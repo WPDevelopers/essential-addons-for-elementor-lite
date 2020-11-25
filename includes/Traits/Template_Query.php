@@ -8,6 +8,13 @@ if ( !defined( 'ABSPATH' ) ) {
 
 trait Template_Query {
 
+
+    public $current_widget_name = '';
+
+    public function set_widget_name( $name = '' ) {
+        $this->current_widget_name = $name;
+    }
+
     /**
      * Retrieves Template name from file header.
      *
@@ -25,11 +32,15 @@ trait Template_Query {
      *
      * @return  string  $widget_name
      */
-    private function process_directory_name() {
-        $widget_name = str_replace( 'eael-', '', $this->get_name() );
-        $widget_name = str_replace( '-', ' ', $widget_name );
-        $widget_name = ucwords( $widget_name );
-        $widget_name = str_replace( ' ', '-', $widget_name );
+    private function process_directory_name()
+    {
+        if ( empty( $this->current_widget_name ) ) {
+            $this->current_widget_name = $this->get_name();
+        }
+        $widget_name = str_replace('eael-', '', $this->current_widget_name);
+        $widget_name = str_replace('-', ' ', $widget_name);
+        $widget_name = ucwords($widget_name);
+        $widget_name = str_replace(' ', '-', $widget_name);
 
         return $widget_name;
     }
@@ -163,9 +174,9 @@ trait Template_Query {
                         $path = $this->_get_path($key, $handle);
                         $template_info = get_file_data($path, $this->template_headers);
                         $template_name = $template_info['Template Name'];
-
-                        if ($template_name) {
-                            $files[strtolower($template_name)] = sprintf("%s (%s)", ucfirst($template_name), ucfirst($key));
+                        $template_key = str_replace( ' ', '-', strtolower( $template_name ) );
+                        if ( $template_name ) {
+                            $files[$template_key] = sprintf("%s (%s)", ucfirst($template_name), ucfirst($key));
                         }
                     }
                 }

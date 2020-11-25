@@ -10,8 +10,11 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
+use \Elementor\Utils;
 use \Elementor\Widget_Base;
 use \Elementor\Repeater;
+
+
 class Image_Accordion extends Widget_Base {
     public function get_name() {
         return 'eael-image-accordion';
@@ -53,7 +56,7 @@ class Image_Accordion extends Widget_Base {
         $this->start_controls_section(
             'eael_section_img_accordion_settings',
             [
-                'label' => esc_html__( 'Image Accordion Settings', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'General', 'essential-addons-for-elementor-lite' ),
             ]
         );
 
@@ -86,10 +89,18 @@ class Image_Accordion extends Widget_Base {
             ]
         );
 
+	    $this->add_control(
+		    'eael_img_accordion_content_heading',
+		    [
+			    'label'   => __( 'Content', 'essential-addons-for-elementor-lite' ),
+			    'type'    => \Elementor\Controls_Manager::HEADING,
+		    ]
+	    );
+
         $this->add_control(
             'eael_img_accordion_content_horizontal_align',
             [
-                'label'   => __( 'Content Horizontal Alignment', 'essential-addons-for-elementor-lite' ),
+                'label'   => __( 'Horizontal Alignment', 'essential-addons-for-elementor-lite' ),
                 'type'    => \Elementor\Controls_Manager::CHOOSE,
                 'options' => [
                     'left'   => [
@@ -112,7 +123,7 @@ class Image_Accordion extends Widget_Base {
         $this->add_control(
             'eael_img_accordion_content_vertical_align',
             [
-                'label'   => __( 'Content Vertical Alignment', 'essential-addons-for-elementor-lite' ),
+                'label'   => __( 'Vertical Alignment', 'essential-addons-for-elementor-lite' ),
                 'type'    => \Elementor\Controls_Manager::CHOOSE,
                 'options' => [
                     'top'    => [
@@ -221,12 +232,80 @@ class Image_Accordion extends Widget_Base {
                 'type'        => Controls_Manager::REPEATER,
                 'seperator'   => 'before',
                 'default'     => [
-                    ['eael_accordion_bg' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png'],
-                    ['eael_accordion_bg' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png'],
-                    ['eael_accordion_bg' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png'],
-                    ['eael_accordion_bg' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png'],
+	                [
+		                'eael_accordion_tittle'  => esc_html__( 'Image Accordion #1', 'essential-addons-for-elementor-lite' ),
+		                'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
+		                'eael_accordion_bg' => [
+			                'url' => Utils::get_placeholder_image_src(),
+		                ]
+	                ],
+	                [
+		                'eael_accordion_tittle'  => esc_html__( 'Image Accordion #2', 'essential-addons-for-elementor-lite' ),
+		                'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
+		                'eael_accordion_bg' => [
+			                'url' => Utils::get_placeholder_image_src(),
+		                ]
+	                ],
+	                [
+		                'eael_accordion_tittle'  => esc_html__( 'Image Accordion #3', 'essential-addons-for-elementor-lite' ),
+		                'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
+		                'eael_accordion_bg' => [
+			                'url' => Utils::get_placeholder_image_src(),
+		                ]
+	                ],
+	                [
+		                'eael_accordion_tittle'  => esc_html__( 'Image Accordion #4', 'essential-addons-for-elementor-lite' ),
+		                'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
+		                'eael_accordion_bg' => [
+			                'url' => Utils::get_placeholder_image_src(),
+		                ]
+	                ],
                 ],
-                'fields'      => $repeater->get_controls(),
+                'fields'      => [
+                    [
+                        'name'         => 'eael_accordion_is_active',
+                        'label'        => __( 'Make it active?', 'essential-addons-for-elementor-lite' ),
+                        'type'         => \Elementor\Controls_Manager::SWITCHER,
+                        'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+                        'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+                        'return_value' => 'yes',
+                    ],
+                    [
+                        'name'        => 'eael_accordion_bg',
+                        'label'       => esc_html__( 'Background Image', 'essential-addons-for-elementor-lite' ),
+                        'type'        => Controls_Manager::MEDIA,
+                        'label_block' => true,
+	                    'default'               => [
+		                    'url' => Utils::get_placeholder_image_src(),
+	                    ],
+                    ],
+                    [
+                        'name'        => 'eael_accordion_tittle',
+                        'label'       => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
+                        'type'        => Controls_Manager::TEXT,
+                        'label_block' => true,
+                        'default'     => esc_html__( 'Image Accordion', 'essential-addons-for-elementor-lite' ),
+                        'dynamic'     => ['active' => true],
+                    ],
+                    [
+                        'name'        => 'eael_accordion_content',
+                        'label'       => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
+                        'type'        => Controls_Manager::WYSIWYG,
+                        'label_block' => true,
+                        'default'     => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
+                    ],
+                    [
+                        'name'          => 'eael_accordion_title_link',
+                        'label'         => esc_html__( 'Title Link', 'essential-addons-for-elementor-lite' ),
+                        'type'          => Controls_Manager::URL,
+                        'label_block'   => true,
+                        'default'       => [
+                            'url'         => '#',
+                            'is_external' => '',
+                        ],
+                        'show_external' => true,
+                    ],
+                ],
                 'title_field' => '{{eael_accordion_tittle}}',
             ]
         );
@@ -241,7 +320,7 @@ class Image_Accordion extends Widget_Base {
         $this->start_controls_section(
             'eael_section_img_accordion_style_settings',
             [
-                'label' => esc_html__( 'Image Accordion Style', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'General', 'essential-addons-for-elementor-lite' ),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -319,6 +398,8 @@ class Image_Accordion extends Widget_Base {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-img-accordion' => 'border-radius: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-img-accordion a:first-child' => 'border-radius: {{SIZE}}px 0 0 {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-img-accordion a:last-child' => 'border-radius: 0 {{SIZE}}px {{SIZE}}px 0;',
                 ],
             ]
         );
@@ -365,7 +446,7 @@ class Image_Accordion extends Widget_Base {
         $this->start_controls_section(
             'eael_section_img_accordion_thumbnail_style_settings',
             [
-                'label' => esc_html__( 'Image Accordion Thumbnail Style', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Thumbnail', 'essential-addons-for-elementor-lite' ),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -399,7 +480,7 @@ class Image_Accordion extends Widget_Base {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-img-accordion a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-img-accordion a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
                 ],
             ]
         );
@@ -443,7 +524,7 @@ class Image_Accordion extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-img-accordion .overlay h2' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-img-accordion .overlay .img-accordion-title' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -526,7 +607,7 @@ class Image_Accordion extends Widget_Base {
 		            <div class="overlay">
 		                <div class="overlay-inner">
                             <div class="overlay-inner' . ( $active === 'yes' ? ' overlay-inner-show' : '' ) . '">
-                                <'.$settings['title_tag'].'>' . $img_accordion['eael_accordion_tittle'] . '</'.$settings['title_tag'].'>
+                                <'.$settings['title_tag'].' class="img-accordion-title">' . $img_accordion['eael_accordion_tittle'] . '</' .$settings['title_tag'].'>
                                 <p>' . $img_accordion['eael_accordion_content'] . '</p>
                             </div>
                         </div>

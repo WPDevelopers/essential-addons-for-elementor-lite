@@ -344,3 +344,7 @@
 .eael-creative-button-icon-right {
   margin-left: 5px;
 }
+
+.rtl .eael-creative-button-wrapper {
+  direction: ltr;
+}

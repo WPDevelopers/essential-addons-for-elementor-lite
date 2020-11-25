@@ -50,7 +50,11 @@
 }
 
 .eael-fancy-text-container.style-2 .eael-fancy-text-strings {
-  background: #ff5544;
+  background: #062aca;
   color: #fff;
   padding: 10px 25px;
+}
+
+.rtl .eael-fancy-text-container {
+  direction: ltr;
 }
