@@ -94,6 +94,7 @@ ea.hooks.addAction("init", "ea", () => {
 						.find(".premium-gallery-container"),
 					$evCalendar = $(".eael-event-calendar-cls", tabsContent);
 
+				// added: compatibility for other js instance
 				if ($postGridGallery.length) {
 					$postGridGallery.isotope("layout");
 				}
