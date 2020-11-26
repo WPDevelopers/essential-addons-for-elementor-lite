@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const wpPot = require('wp-pot');
+const wpPot = require("wp-pot");
 const outputEntry = () => {
 	let paths = {};
 
@@ -48,15 +48,15 @@ const removeEntry = () => {
 };
 
 module.exports = (env, argv) => {
-    if(argv.mode === "production"){
-        // Generate .pot on production build only
-        wpPot({
-            destFile: 'languages/essential-addons-for-elementor-lite.pot',
-            domain: 'essential-addons-for-elementor-lite',
-            package: 'Essential Addons For Elementor Lite',
-            src: '**/*.php'
-        });
-    }
+	if (argv.mode === "production") {
+		// Generate .pot on production build only
+		wpPot({
+			destFile: "languages/essential-addons-for-elementor-lite.pot",
+			domain: "essential-addons-for-elementor-lite",
+			package: "Essential Addons For Elementor Lite",
+			src: "**/*.php",
+		});
+	}
 	return {
 		stats: "minimal",
 		entry: outputEntry(),
@@ -121,5 +121,3 @@ module.exports = (env, argv) => {
 		},
 	};
 };
-
-

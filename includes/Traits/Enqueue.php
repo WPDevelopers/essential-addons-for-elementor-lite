@@ -128,7 +128,8 @@ trait Enqueue
 	        'i18n' => [
 	        	'added' => __('Added ', 'essential-addons-for-elementor-lite'),
 	        	'compare' => __('Compare', 'essential-addons-for-elementor-lite'),
-	        ]
+                'loading' => esc_html__('Loading...', 'essential-addons-for-elementor-lite')
+            ]
         ]);
 
         // edit mode

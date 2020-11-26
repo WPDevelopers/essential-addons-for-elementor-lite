@@ -501,7 +501,7 @@ class Info_Box extends Widget_Base
                     'options' => [
                         '1' => [
                             'title' => '',
-                            'icon'  => 'fa fa-unlock-alt',
+                            'icon' => 'fa fa-unlock-alt',
                         ],
                     ],
                     'default' => '1',

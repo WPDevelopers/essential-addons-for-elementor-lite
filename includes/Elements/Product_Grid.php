@@ -15,14 +15,16 @@ use Elementor\Group_Control_Typography;
 use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
-use Essential_Addons_Elementor\Template\Content\Product_Grid as Product_Grid_Trait;
+//use Essential_Addons_Elementor\Template\Content\Product_Grid as Product_Grid_Trait;
 use Essential_Addons_Elementor\Traits\Helper;
-use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
+use Essential_Addons_Elementor\Traits\Template_Query;
+//use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
 
 class Product_Grid extends Widget_Base {
-    use Woo_Product_Comparable;
+    //use Woo_Product_Comparable;
     use Helper;
-    use Product_Grid_Trait;
+    //use Product_Grid_Trait;
+
     private $is_show_custom_add_to_cart = false;
     private $simple_add_to_cart_button_text;
     private $variable_add_to_cart_button_text;
@@ -115,7 +117,7 @@ class Product_Grid extends Widget_Base {
     }
 
     protected function _register_controls() {
-        $this->init_content_wc_notice_controls();
+        //$this->init_content_wc_notice_controls();
         if ( ! function_exists( 'WC' ) ) {
             return;
         }
@@ -124,8 +126,8 @@ class Product_Grid extends Widget_Base {
         $this->init_content_addtocart_controls();
         $this->init_content_load_more_controls();
         // Product Compare
-        $this->init_content_product_compare_controls();
-        $this->init_content_table_settings_controls();
+        //$this->init_content_product_compare_controls();
+        //$this->init_content_table_settings_controls();
 
         // Style Controls---------------
         $this->init_style_product_controls();
@@ -133,12 +135,12 @@ class Product_Grid extends Widget_Base {
         $this->init_style_addtocart_controls();
         $this->eael_load_more_button_style();
         // Product Compare Table Style
-        $container_class  = '.eael-wcpc-modal';
-        $table            = ".eael-wcpc-modal .eael-wcpc-wrapper table";
-        $table_title      = ".eael-wcpc-modal .eael-wcpc-wrapper .wcpc-title";
-        $table_title_wrap = ".eael-wcpc-modal .eael-wcpc-wrapper .first-th";
-        $this->init_style_content_controls( compact( 'container_class' ) );
-        $this->init_style_table_controls( compact( 'table', 'table_title', 'table_title_wrap' ) );
+        //$container_class  = '.eael-wcpc-modal';
+        //$table            = ".eael-wcpc-modal .eael-wcpc-wrapper table";
+        //$table_title      = ".eael-wcpc-modal .eael-wcpc-wrapper .wcpc-title";
+        //$table_title_wrap = ".eael-wcpc-modal .eael-wcpc-wrapper .first-th";
+        //$this->init_style_content_controls( compact( 'container_class' ) );
+        //$this->init_style_table_controls( compact( 'table', 'table_title', 'table_title_wrap' ) );
     }
 
     protected function init_content_product_settings_controls() {
@@ -245,10 +247,10 @@ class Product_Grid extends Widget_Base {
             'default'      => 'yes',
         ] );
 
-        $this->add_control( 'show_compare', [
-            'label' => esc_html__( 'Show Product Compare?', 'essential-addons-for-elementor-lite' ),
-            'type'  => Controls_Manager::SWITCHER,
-        ] );
+//        $this->add_control( 'show_compare', [
+//            'label' => esc_html__( 'Show Product Compare?', 'essential-addons-for-elementor-lite' ),
+//            'type'  => Controls_Manager::SWITCHER,
+//        ] );
 
         $this->end_controls_section();
     }
@@ -326,7 +328,7 @@ class Product_Grid extends Widget_Base {
             'type'         => Controls_Manager::SWITCHER,
             'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
             'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-            'return_value' => 'true',
+            'return_value' => 'yes',
             'default'      => '',
         ] );
 
@@ -336,7 +338,7 @@ class Product_Grid extends Widget_Base {
             'label_block' => false,
             'default'     => esc_html__( 'Load More', 'essential-addons-for-elementor-lite' ),
             'condition'   => [
-                'show_load_more' => 'true',
+                'show_load_more' => 'yes',
             ],
         ] );
 
@@ -833,7 +835,6 @@ class Product_Grid extends Widget_Base {
             'data-nonce'     => wp_create_nonce( 'eael_product_grid' ),
         ] );
         ?>
-
         <div <?php $this->print_render_attribute_string( 'wrap' ); ?> >
             <div class="woocommerce">
                 <?php
@@ -854,18 +855,7 @@ class Product_Grid extends Widget_Base {
                 } else {
                     _e( '<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
                 }
-
-                if ( 'true' == $settings['show_load_more'] ) {
-                    if ( $args['posts_per_page'] != '-1' ) {
-                        echo '<div class="eael-load-more-button-wrap">
-                    <button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-template='.json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $this->process_directory_name() ], 1).' data-widget="' . $this->get_id() . '" data-class="' . get_class( $this ) . '" data-args="' . http_build_query( $args ) . '" data-settings="' . http_build_query( $settings ) . '" data-layout="masonry" data-page="1">
-                        <div class="eael-btn-loader button__loader"></div>
-                        <span>' . esc_html__($settings['show_load_more_text'], 'essential-addons-for-elementor-lite') . '</span>
-                    </button>
-                </div>';
-                    }
-                }
-
+                $this->print_load_more_button($settings, $args);
                 ?>
             </div>
         </div>
