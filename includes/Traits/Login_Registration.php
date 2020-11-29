@@ -697,7 +697,6 @@ trait Login_Registration {
 	}
 
 	public function lr_get_widget_settings( $page_id, $widget_id ) {
-		//@TODO; replace it with eael_get_widget_settings() from the helper in future release
 		$document = Plugin::$instance->documents->get( $page_id );
 		$settings = [];
 		if ( $document ) {
