@@ -222,9 +222,7 @@ var EventCalendar = function ($scope, $) {
 	calendar.render();
 
 	ea.hooks.addAction("eventCalendar.reinit", "ea", () => {
-		setTimeout(() => {
-			calendar.today();
-		}, 5);
+		calendar.today();
 	});
 };
 
