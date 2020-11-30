@@ -2907,6 +2907,7 @@ class Product_Grid extends Widget_Base
                 $settings['eael_product_grid_style_preset'],
                 $settings['eael_product_grid_layout']
             ],
+            'id' => 'eael-product-grid',
             'data-widget-id' => $this->get_id(),
             'data-page-id' => $this->page_id,
             'data-nonce' => wp_create_nonce('eael_product_grid'),
