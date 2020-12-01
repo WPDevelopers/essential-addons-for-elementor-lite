@@ -423,42 +423,42 @@ trait Helper
         }
     }
 
-    public function print_load_more_button($settings, $args, $plugin_type = 'free')
-    {
-        //@TODO; not all widget's settings contain posts_per_page name exactly, so adjust the settings before passing here or run a migration and make all settings key generalize for load more feature.
-        if (!isset($this->page_id)) {
-            if ( Plugin::$instance->documents->get_current() ) {
-                $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
+	/**
+	 * It returns the widget settings provided the page id and widget id
+	 * @param int $page_id Page ID where the widget is used
+	 * @param string $widget_id the id of the widget whose settings we want to fetch
+	 *
+	 * @return array
+	 */
+	public function eael_get_widget_settings( $page_id, $widget_id ) {
+		$document = Plugin::$instance->documents->get( $page_id );
+		$settings = [];
+		if ( $document ) {
+			$elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
+			$widget_data = $this->find_element_recursive( $elements, $widget_id );
+            if(!empty($widget_data)) {
+                $widget      = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
+                if ( $widget ) {
+                    $settings    = $widget->get_settings_for_display();
+                }
             }
-        }
-        $this->add_render_attribute('load-more', [
-            'class'          => "eael-load-more-button",
-            'id'             => "eael-load-more-btn-" . $this->get_id(),
-            'data-widget-id' => $this->get_id(),
-            'data-widget' => $this->get_id(),
-            'data-page-id'   => $this->page_id,
-            'data-nonce'     => wp_create_nonce( 'load_more' ),
-            'data-template'  => json_encode([
-                'dir'   => $plugin_type,
-                'file_name' => $settings['eael_dynamic_template_Layout'],
-                'name' => $this->process_directory_name() ],
-                1),
-            'data-class'    => get_class( $this ),
-            'data-layout'   => isset($settings['layout_mode']) ? $settings['layout_mode'] : "",
-            'data-page'     => 1,
-            'data-args'     => http_build_query( $args ),
-        ]);
-        if ( ('true' == $settings['show_load_more'] || 1 == $settings['show_load_more'] || 'yes' == $settings['show_load_more']) && $args['posts_per_page'] != '-1' ) { ?>
-            <div class="eael-load-more-button-wrap">
-                <button <?php $this->print_render_attribute_string( 'load-more' ); ?>>
-                    <div class="eael-btn-loader button__loader"></div>
-                    <span><?php echo esc_html($settings['show_load_more_text']) ?></span>
-                </button>
-            </div>
-        <?php }
-    }
+		}
+		return $settings;
+	}
+	/**
+	 * It store data temporarily for 5 mins by default
+	 *
+	 * @param     $name
+	 * @param     $data
+	 * @param int $time time in seconds. Default is 300s = 5 minutes
+	 *
+	 * @return bool it returns true if the data saved, otherwise, false returned.
+	 */
+	public function eael_set_transient( $name, $data, $time = 300 ) {
+		$time = !empty( $time ) ? (int) $time : ( 5 * MINUTE_IN_SECONDS );
 
-
+		return set_transient( $name, $data, time() + $time );
+	}
 	public function eael_product_grid_script(){
 		if ( version_compare( WC()->version, '3.0.0', '>=' ) ) {
 			if ( current_theme_supports( 'wc-product-gallery-zoom' ) ) {

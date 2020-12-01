@@ -697,16 +697,19 @@ trait Login_Registration {
 	}
 
 	public function lr_get_widget_settings( $page_id, $widget_id ) {
-		//@TODO; replace it with eael_get_widget_settings() from the helper in future release
 		$document = Plugin::$instance->documents->get( $page_id );
 		$settings = [];
 		if ( $document ) {
 			$elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
 			$widget_data = $this->find_element_recursive( $elements, $widget_id );
-			$widget      = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
-			if ( $widget ) {
-				$settings    = $widget->get_settings_for_display();
-			}
+
+			if(!empty($widget_data)) {
+                $widget      = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
+                if ( $widget ) {
+                    $settings    = $widget->get_settings_for_display();
+                }
+            }
+
 		}
 		return $settings;
 	}
