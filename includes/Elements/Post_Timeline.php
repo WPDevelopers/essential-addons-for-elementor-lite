@@ -8,16 +8,17 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
-use \Essential_Addons_Elementor\Classes\Helper;
-use \Essential_Addons_Elementor\Classes\Controls;
+use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
+use Essential_Addons_Elementor\Traits\Template_Query;
+use Essential_Addons_Elementor\Traits\Helper;
 
 class Post_Timeline extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Template_Query;
-
+    use Template_Query;
+    use Helper;
     public function get_name()
     {
         return 'eael-post-timeline';
@@ -70,7 +71,7 @@ class Post_Timeline extends Widget_Base
         do_action('eael/controls/layout', $this);
 
         if (!apply_filters('eael/pro_enabled', false)) {
-            Helper::go_premium($this);
+            HelperClass::go_premium($this);
         }
 
         $this->start_controls_section(
@@ -347,7 +348,9 @@ class Post_Timeline extends Widget_Base
             [
                 'name'     => 'eael_timeline_title_typography',
                 'label'    => __('Title Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
                 'selector' => '{{WRAPPER}} .eael-timeline-post-title h2',
             ]
         );
@@ -407,7 +410,9 @@ class Post_Timeline extends Widget_Base
             [
                 'name'     => 'eael_timeline_excerpt_typography',
                 'label'    => __('Excerpt Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'   => Scheme_Typography::TYPOGRAPHY_3,
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_TEXT,
+                ],
                 'selector' => '{{WRAPPER}} .eael-timeline-post-excerpt p',
             ]
         );
@@ -421,20 +426,11 @@ class Post_Timeline extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $settings = Helper::fix_old_query($settings);
-        $args = Helper::get_query_args($settings);
-        $args = Helper::get_dynamic_args($settings, $args);
+        $settings = HelperClass::fix_old_query($settings);
+        $args = HelperClass::get_query_args($settings);
+        $args = HelperClass::get_dynamic_args($settings, $args);
 
-        $settings = [
-            'eael_show_image'     => $settings['eael_show_image'],
-            'image_size'          => $settings['image_size'],
-            'eael_show_title'     => $settings['eael_show_title'],
-            'eael_show_excerpt'   => $settings['eael_show_excerpt'],
-            'eael_excerpt_length' => $settings['eael_excerpt_length'],
-            'show_load_more'      => $settings['show_load_more'],
-            'show_load_more_text' => $settings['show_load_more_text'],
-            'expanison_indicator' => $settings['excerpt_expanison_indicator'],
-        ];
+        $settings ['expanison_indicator'] = $settings['excerpt_expanison_indicator'];
 
         $this->add_render_attribute(
             'eael_post_timeline_wrapper',
@@ -469,21 +465,9 @@ class Post_Timeline extends Widget_Base
                 } else {
                     _e('<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite');
                 }
-
-
-
 		    echo '</div>
 		</div>';
 
-        if ('yes' == $settings['show_load_more']) {
-            if ($args['posts_per_page'] != '-1') {
-                echo '<div class="eael-load-more-button-wrap">
-					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-template='.json_encode([ 'dir'   => 'free', 'file_name' => $this->get_settings('eael_dynamic_template_Layout'), 'name' => $this->process_directory_name() ], 1).' data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings) . '" data-page="1">
-						<div class="eael-btn-loader button__loader"></div>
-						<span>' . esc_html__($settings['show_load_more_text'], 'essential-addons-for-elementor-lite') . '</span>
-					</button>
-				</div>';
-            }
-        }
+        $this->print_load_more_button($settings, $args, 'free');
     }
 }

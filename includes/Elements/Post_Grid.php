@@ -14,13 +14,12 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
-use \Essential_Addons_Elementor\Classes\Helper;
-use Essential_Addons_Elementor\Traits\Template_Query;
+use Essential_Addons_Elementor\Classes\Helper as HelperClass;
+use Essential_Addons_Elementor\Traits\Helper;
 
 class Post_Grid extends Widget_Base
 {
-    use Template_Query;
-
+    use Helper;
     public function get_name()
     {
         return 'eael-post-grid';
@@ -999,43 +998,9 @@ class Post_Grid extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings();
-        $settings = Helper::fix_old_query($settings);
-        $args = Helper::get_query_args($settings);
-        $args = Helper::get_dynamic_args($settings, $args);
-
-        $settings_arry = [
-            'eael_show_image' => $settings['eael_show_image'],
-            'image_size' => $settings['image_size'],
-            'eael_show_title' => $settings['eael_show_title'],
-            'eael_show_excerpt' => $settings['eael_show_excerpt'],
-            'eael_show_meta' => $settings['eael_show_meta'],
-            'meta_position' => $settings['meta_position'],
-            'eael_excerpt_length' => intval($settings['eael_excerpt_length'], 10),
-            'eael_post_grid_hover_animation' => $settings['eael_post_grid_hover_animation'],
-            'eael_post_grid_bg_hover_icon_new' => $settings['eael_post_grid_bg_hover_icon_new'],
-            'eael_show_read_more_button' => $settings['eael_show_read_more_button'],
-            'read_more_button_text' => $settings['read_more_button_text'],
-            'read_more_button_text' => $settings['read_more_button_text'],
-            'show_load_more' => $settings['show_load_more'],
-            'show_load_more_text' => $settings['show_load_more_text'],
-            'excerpt_expanison_indicator' => $settings['excerpt_expanison_indicator'],
-            'layout_mode' => $settings['layout_mode'],
-            'orderby' => $settings['orderby'],
-            'eael_show_post_terms' => $settings['eael_show_post_terms'],
-            'eael_post_terms' => $settings['eael_post_terms'],
-            'eael_post_terms_max_length' => $settings['eael_post_terms_max_length'],
-            'eael_show_avatar' => $settings['eael_show_avatar'],
-            'eael_show_author' => $settings['eael_show_author'],
-            'eael_show_date' => $settings['eael_show_date'],
-            'title_link_nofollow' => $settings['title_link_nofollow'],
-            'title_link_target_blank' => $settings['title_link_target_blank'],
-            'read_more_link_nofollow' => $settings['read_more_link_nofollow'],
-            'read_more_link_target_blank' => $settings['read_more_link_target_blank'],
-            'image_link_nofollow' => $settings['image_link_nofollow'],
-            'image_link_target_blank' => $settings['image_link_target_blank'],
-            'eael_title_length' => $settings['eael_title_length'],
-            'eael_post_grid_preset_style' => $settings['eael_post_grid_preset_style']
-        ];
+        $settings = HelperClass::fix_old_query($settings);
+        $args = HelperClass::get_query_args($settings);
+        $args = HelperClass::get_dynamic_args($settings, $args);
 
         $this->add_render_attribute(
             'post_grid_wrapper',
@@ -1085,16 +1050,7 @@ class Post_Grid extends Widget_Base
             <div class="clearfix"></div>
         </div>';
 
-        if ('yes' == $settings['show_load_more']) {
-            if ($args['posts_per_page'] != '-1') {
-                echo '<div class="eael-load-more-button-wrap">
-					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-template='.json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $this->process_directory_name() ], 1).' data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings_arry) . '" data-layout="' . $settings['layout_mode'] . '" data-page="1">
-						<div class="eael-btn-loader button__loader"></div>
-						<span>' . esc_html__($settings['show_load_more_text'], 'essential-addons-for-elementor-lite') . '</span>
-					</button>
-				</div>';
-            }
-        }
+        $this->print_load_more_button($settings, $args);
 
         if (Plugin::instance()->editor->is_edit_mode()) {?>
             <script type="text/javascript">

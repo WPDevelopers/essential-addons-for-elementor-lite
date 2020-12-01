@@ -2940,16 +2940,8 @@ class Product_Grid extends Widget_Base
                     echo HelperClass::eael_pagination($args, $settings);
                 }
 
-                if ('true' == $settings['show_load_more'] && $args['posts_per_page'] != '-1') {
-                    echo '<div class="eael-load-more-button-wrap">
-					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-template='.json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $this->process_directory_name() ], 1).' data-widget="' . $this->get_id() . '" data-class="' . get_class( $this ) . '" data-args="' . http_build_query( $args ) . '" data-settings="' . http_build_query( $settings ) . '" data-layout="masonry" data-page="1">
-                        <div class="eael-btn-loader button__loader"></div>
-                        <span>' . esc_html__($settings['show_load_more_text'], 'essential-addons-for-elementor-lite') . '</span>
-                    </button>
-                </div>';
 
-                }
-
+                $this->print_load_more_button($settings, $args);
                 ?>
             </div>
         </div>
@@ -2966,9 +2958,7 @@ class Product_Grid extends Widget_Base
                             layoutMode: $layout_mode,
                             percentPosition: true
                         });
-                        // $isotope_products.imagesLoaded().progress(function() {
-                        //     $isotope_products.isotope("layout");
-                        // });
+
                         $('li.product', $products).resize(function() {
                             $isotope_products.isotope('layout');
                         });
