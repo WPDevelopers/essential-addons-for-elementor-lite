@@ -2953,6 +2953,40 @@ class Product_Grid extends Widget_Base
                 ?>
             </div>
         </div>
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                jQuery(".eael-product-grid").each(function() {
+                    var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>"),
+                        $products = $(this).find( '.products' );
+                    $layout_mode = $products.data('layout-mode');
+                    if($layout_mode === 'masonry') {
+                        // init isotope
+                        var $isotope_products = $products.isotope({
+                            itemSelector: "li.product",
+                            layoutMode: $layout_mode,
+                            percentPosition: true
+                        });
+                        // $isotope_products.imagesLoaded().progress(function() {
+                        //     $isotope_products.isotope("layout");
+                        // });
+                        $('li.product', $products).resize(function() {
+                            $isotope_products.isotope('layout');
+                        });
+                    }
+                    $(document).on("click", '.eael-product-popup-close', function (event) {
+                        event.stopPropagation();
+                        $('.eael-product-popup').addClass("eael-product-modal-removing").removeClass("eael-product-popup-ready");
+                    });
+                    $(document).on('click', function (event) {
+                        if (event.target.closest(".eael-product-popup-details")) return;
+                        $('.eael-product-popup.eael-product-zoom-in.eael-product-popup-ready').addClass("eael-product-modal-removing").removeClass("eael-product-popup-ready");
+                    });
+                });
+                if(isEditMode){
+                    $(".eael-product-image-wrap .woocommerce-product-gallery").css("opacity","1");
+                }
+            });
+        </script>
         <?php
     }
 }
