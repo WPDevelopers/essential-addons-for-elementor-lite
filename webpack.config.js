@@ -57,6 +57,7 @@ module.exports = (env, argv) => {
             src: '**/*.php'
         });
     }
+
 	return {
 		stats: "minimal",
 		entry: outputEntry(),
@@ -121,5 +122,3 @@ module.exports = (env, argv) => {
 		},
 	};
 };
-
-
