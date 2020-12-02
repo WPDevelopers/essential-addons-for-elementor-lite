@@ -765,7 +765,7 @@ msgstr ""
 msgid "File Not Found"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:1181, ../includes/Elements/Betterdocs_Category_Box.php:1146, ../includes/Elements/Betterdocs_Category_Grid.php:1678, ../includes/Elements/Betterdocs_Category_Grid.php:1645, ../includes/Elements/Post_Grid.php:1077, ../includes/Elements/Post_Timeline.php:462, ../includes/Elements/Product_Grid.php:2935
+#: ../includes/Elements/Betterdocs_Category_Box.php:1181, ../includes/Elements/Betterdocs_Category_Box.php:1146, ../includes/Elements/Betterdocs_Category_Grid.php:1678, ../includes/Elements/Betterdocs_Category_Grid.php:1645, ../includes/Elements/Post_Grid.php:1078, ../includes/Elements/Post_Timeline.php:462, ../includes/Elements/Product_Grid.php:2935
 msgid "<p class=\"no-posts-found\">No posts found!</p>"
 msgstr ""
 
@@ -2325,7 +2325,7 @@ msgstr ""
 msgid "Layout Settings"
 msgstr ""
 
-#: ../includes/Elements/Facebook_Feed.php:171, ../includes/Elements/Filterable_Gallery.php:172
+#: ../includes/Elements/Facebook_Feed.php:171, ../includes/Elements/Filterable_Gallery.php:172, ../includes/Template/Post-Grid/card.php:4
 msgid "Card"
 msgstr ""
 
@@ -4704,7 +4704,7 @@ msgstr ""
 msgid "Icon font size"
 msgstr ""
 
-#: ../includes/Elements/Post_Grid.php:1081
+#: ../includes/Elements/Post_Grid.php:1082
 msgid "<p class=\"no-posts-found\">No Layout Found!</p>"
 msgstr ""
 

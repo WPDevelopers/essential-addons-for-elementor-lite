@@ -1056,6 +1056,7 @@ class Post_Grid extends Widget_Base
                     'eael-post-appender',
                     'eael-post-appender-' . $this->get_id(),
                     'eael-post-grid-style-' . ($settings['eael_post_grid_preset_style'] !== "" ? $settings['eael_post_grid_preset_style'] : 'default'),
+                    'eael-post-grid-template-' . $settings['eael_dynamic_template_Layout'],
                 ],
             ]
         );
@@ -1086,7 +1087,7 @@ class Post_Grid extends Widget_Base
             <div class="clearfix"></div>
         </div>';
 
-        $this->print_load_more_button($settings, $args);
+//        $this->print_load_more_button($settings, $args);
 
         if (Plugin::instance()->editor->is_edit_mode()) {?>
             <script type="text/javascript">
