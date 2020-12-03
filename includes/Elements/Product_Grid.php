@@ -2791,6 +2791,8 @@ class Product_Grid extends Widget_Base
             return;
         }
         $settings = $this->get_settings_for_display();
+        $widget_id = $this->get_id();
+        $settings['eael_widget_id'] = $widget_id;
         $args = [
             'post_type' => 'product',
             'posts_per_page' => $settings['eael_product_grid_products_count'] ?: 4,
@@ -2908,7 +2910,7 @@ class Product_Grid extends Widget_Base
                 $settings['eael_product_grid_layout']
             ],
             'id' => 'eael-product-grid',
-            'data-widget-id' => $this->get_id(),
+            'data-widget-id' => $widget_id,
             'data-page-id' => $this->page_id,
             'data-nonce' => wp_create_nonce('eael_product_grid'),
         ]);
