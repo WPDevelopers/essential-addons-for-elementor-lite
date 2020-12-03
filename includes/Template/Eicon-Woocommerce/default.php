@@ -94,7 +94,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 						?>
 					</div>
 					<div class="image-hover-wrap">
-						<?php if($grid_style_preset == 'eael-product-preset-5'){?>
+						<?php if($grid_style_preset == 'eael-product-preset-5'){ ?>
 							<ul class="icons-wrap block-style">
 								<?php if( $should_print_quick_view ){?>
 									<li class="eael-product-quick-view">
@@ -104,14 +104,29 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 										</a>
 									</li>
 								<?php } ?>
+                                <?php
+                                if ( $should_print_compare_btn ) {
+                                    echo '<li class="add-to-compare">';
+                                    Product_Grid::print_compare_button( $product->get_id(), 'icon' );
+                                    echo '</li>';
+                                }
+                                ?>
 								<li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart();
 									?></li>
 								<li class="view-details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
+
 							</ul>
 						<?php } elseif ($grid_style_preset == 'eael-product-preset-7') { ?>
 							<ul class="icons-wrap block-box-style">
 								<li class="add-to-cart"><?php
 									woocommerce_template_loop_add_to_cart(); ?></li>
+                                <?php
+                                if ( $should_print_compare_btn ) {
+                                    echo '<li class="add-to-compare">';
+                                    Product_Grid::print_compare_button( $product->get_id(), 'icon' );
+                                    echo '</li>';
+                                }
+                                ?>
 								<?php if( $should_print_quick_view ){?>
 									<li class="eael-product-quick-view">
 										<a href="#eaproduct<?php echo $settings['eael_widget_id'].$product->get_id(); ?>"
@@ -127,6 +142,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 							<ul class="icons-wrap box-style">
 								<li class="add-to-cart"><?php
 									woocommerce_template_loop_add_to_cart(); ?></li>
+                                <?php
+                                if ( $should_print_compare_btn ) {
+                                    echo '<li class="add-to-compare">';
+                                    Product_Grid::print_compare_button( $product->get_id(), 'icon' );
+                                    echo '</li>';
+                                }
+                                ?>
 								<?php if( $should_print_quick_view ){?>
 									<li class="eael-product-quick-view">
 										<a href="#eaproduct<?php echo $settings['eael_widget_id'].$product->get_id(); ?>"
@@ -182,6 +204,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 						<ul class="icons-wrap over-box-style">
 							<li class="add-to-cart"><?php
 								woocommerce_template_loop_add_to_cart(); ?></li>
+                            <?php
+                            if ( $should_print_compare_btn ) {
+                                echo '<li class="add-to-compare">';
+                                Product_Grid::print_compare_button( $product->get_id(), 'icon' );
+                                echo '</li>';
+                            }
+                            ?>
 							<?php if( $should_print_quick_view ){?>
 								<li class="eael-product-quick-view">
 									<a href="#eaproduct<?php echo $settings['eael_widget_id'].$product->get_id(); ?>"
@@ -322,9 +351,18 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 					?>
 
 					<ul class="icons-wrap <?php echo $settings['eael_product_action_buttons_preset'] ;?>">
+                        <?php
+                        if ( $should_print_compare_btn ) {
+                            echo '<li class="add-to-compare">';
+                            Product_Grid::print_compare_button( $product->get_id(), 'icon' );
+                            echo '</li>';
+                        }
+                        ?>
 						<li class="add-to-cart"><?php
 							woocommerce_template_loop_add_to_cart(); ?></li>
-						<?php if( $should_print_quick_view ){?>
+
+						<?php
+                        if( $should_print_quick_view ){?>
 							<li class="eael-product-quick-view">
 								<a href="#eaproduct<?php echo $settings['eael_widget_id'].$product->get_id(); ?>"
 								   class="open-popup-link">
