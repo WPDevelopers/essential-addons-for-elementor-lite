@@ -471,7 +471,7 @@ trait Woo_Product_Comparable {
 				'%',
 			],
 			'selectors'  => [
-				$table => $this->apply_dim( 'border-radius' ) .'border-collapse:initial;',
+				$table => $this->apply_dim( 'border-radius' ) .'border-collapse:initial; overflow:hidden;',
 			],
 			'condition'  => [
 				'table_style_pot'    => 'yes',
