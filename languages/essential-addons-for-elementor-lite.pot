@@ -53,7 +53,7 @@ msgstr ""
 msgid "Select a Fluent Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:865, ../includes/Template/Content/Product_Grid.php:63, ../includes/Template/Content/Product_Grid.php:29, ../includes/Template/Eicon-Woocommerce/default.php:216, ../includes/Template/Eicon-Woocommerce/default.php:162, ../includes/Template/Eicon-Woocommerce/default.php:82, ../includes/Template/Eicon-Woocommerce/default.php:68, ../includes/Template/Eicon-Woocommerce/default.php:34
+#: ../includes/Classes/Helper.php:865, ../includes/Template/Content/Product_Grid.php:63, ../includes/Template/Content/Product_Grid.php:29, ../includes/Template/Eicon-Woocommerce/default.php:259, ../includes/Template/Eicon-Woocommerce/default.php:198, ../includes/Template/Eicon-Woocommerce/default.php:92, ../includes/Template/Eicon-Woocommerce/default.php:78, ../includes/Template/Eicon-Woocommerce/default.php:44
 msgid "Sale!"
 msgstr ""
 
@@ -765,7 +765,7 @@ msgstr ""
 msgid "File Not Found"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:1181, ../includes/Elements/Betterdocs_Category_Box.php:1146, ../includes/Elements/Betterdocs_Category_Grid.php:1678, ../includes/Elements/Betterdocs_Category_Grid.php:1645, ../includes/Elements/Post_Grid.php:1041, ../includes/Elements/Post_Timeline.php:462, ../includes/Elements/Product_Grid.php:2933
+#: ../includes/Elements/Betterdocs_Category_Box.php:1181, ../includes/Elements/Betterdocs_Category_Box.php:1146, ../includes/Elements/Betterdocs_Category_Grid.php:1678, ../includes/Elements/Betterdocs_Category_Grid.php:1645, ../includes/Elements/Post_Grid.php:1041, ../includes/Elements/Post_Timeline.php:462, ../includes/Elements/Product_Grid.php:2935
 msgid "<p class=\"no-posts-found\">No posts found!</p>"
 msgstr ""
 
@@ -4768,7 +4768,7 @@ msgstr ""
 msgid "Date Text Color"
 msgstr ""
 
-#: ../includes/Elements/Post_Timeline.php:466, ../includes/Elements/Product_Grid.php:2936
+#: ../includes/Elements/Post_Timeline.php:466, ../includes/Elements/Product_Grid.php:2938
 msgid "<p class=\"no-posts-found\">No layout found!</p>"
 msgstr ""
 
@@ -7884,15 +7884,15 @@ msgstr ""
 msgid "No products found!"
 msgstr ""
 
-#: ../includes/Template/Content/Product_Grid.php:27, ../includes/Template/Eicon-Woocommerce/default.php:32
+#: ../includes/Template/Content/Product_Grid.php:27, ../includes/Template/Eicon-Woocommerce/default.php:42
 msgid "Stock <br/> Out"
 msgstr ""
 
-#: ../includes/Template/Eicon-Woocommerce/default.php:216, ../includes/Template/Eicon-Woocommerce/default.php:162, ../includes/Template/Eicon-Woocommerce/default.php:82
+#: ../includes/Template/Eicon-Woocommerce/default.php:259, ../includes/Template/Eicon-Woocommerce/default.php:198, ../includes/Template/Eicon-Woocommerce/default.php:92
 msgid "Stock "
 msgstr ""
 
-#: ../includes/Template/Eicon-Woocommerce/default.php:216, ../includes/Template/Eicon-Woocommerce/default.php:162, ../includes/Template/Eicon-Woocommerce/default.php:82
+#: ../includes/Template/Eicon-Woocommerce/default.php:259, ../includes/Template/Eicon-Woocommerce/default.php:198, ../includes/Template/Eicon-Woocommerce/default.php:92
 msgid "Out"
 msgstr ""
 
