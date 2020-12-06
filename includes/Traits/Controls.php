@@ -147,14 +147,14 @@ trait Controls
             ]
         );
 
-        $wb->add_control(
-            'posts_per_page',
-            [
-                'label' => __('Posts Per Page', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::NUMBER,
-                'default' => '4',
-            ]
-        );
+	    $wb->add_control(
+		    'posts_per_page',
+		    [
+			    'label' => __('Posts Per Page', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::NUMBER,
+			    'default' => '4',
+		    ]
+	    );
 
         $wb->add_control(
             'offset',
@@ -189,6 +189,26 @@ trait Controls
 
             ]
         );
+
+	    if ($wb->get_name() === 'eael-post-grid') {
+		    $wb->add_control(
+			    'nothing_found_heading',
+			    [
+				    'label' => __('Nothing Found!', 'essential-addons-for-elementor-lite'),
+				    'type' => Controls_Manager::HEADING,
+				    'separator' => 'before',
+			    ]
+		    );
+
+		    $wb->add_control(
+			    'nothing_found_msg',
+			    [
+				    'label' => __('Message', 'essential-addons-for-elementor-lite'),
+				    'type' => Controls_Manager::TEXTAREA,
+				    'default' => __('No posts found!', 'essential-addons-for-elementor-lite'),
+			    ]
+		    );
+	    }
 
         $wb->end_controls_section();
     }
@@ -522,8 +542,64 @@ trait Controls
                     ],
                     'prefix_class' => 'elementor-grid%s-',
                     'frontend_available' => true,
+	                'condition' => [
+	                	'eael_dynamic_template_Layout' => 'default',
+	                ]
                 ]
             );
+
+	        $wb->add_responsive_control(
+		        'eael_post_grid_columns_3',
+		        [
+			        'label' => esc_html__('Column', 'essential-addons-for-elementor-lite'),
+			        'type' => Controls_Manager::SELECT,
+			        'default' => 'eael-col-3',
+			        'tablet_default' => 'eael-col-2',
+			        'mobile_default' => 'eael-col-1',
+			        'options' => [
+				        'eael-col-1' => esc_html__('1', 'essential-addons-for-elementor-lite'),
+				        'eael-col-2' => esc_html__('2', 'essential-addons-for-elementor-lite'),
+				        'eael-col-3' => esc_html__('3', 'essential-addons-for-elementor-lite'),
+				        'eael-col-4' => esc_html__('4', 'essential-addons-for-elementor-lite'),
+				        'eael-col-5' => esc_html__('5', 'essential-addons-for-elementor-lite'),
+				        'eael-col-6' => esc_html__('6', 'essential-addons-for-elementor-lite'),
+			        ],
+			        'prefix_class' => 'elementor-grid%s-',
+			        'frontend_available' => true,
+			        'condition' => [
+				        'eael_dynamic_template_Layout' => [
+					        'card-classic',
+					        'card-modern',
+					        'overlap-classic',
+					        'overlap-modern'
+				        ]
+			        ]
+		        ]
+	        );
+
+	        $wb->add_responsive_control(
+		        'eael_post_grid_columns_2',
+		        [
+			        'label' => esc_html__('Column', 'essential-addons-for-elementor-lite'),
+			        'type' => Controls_Manager::SELECT,
+			        'default' => 'eael-col-2',
+			        'tablet_default' => 'eael-col-2',
+			        'mobile_default' => 'eael-col-1',
+			        'options' => [
+				        'eael-col-1' => esc_html__('1', 'essential-addons-for-elementor-lite'),
+				        'eael-col-2' => esc_html__('2', 'essential-addons-for-elementor-lite'),
+				        'eael-col-3' => esc_html__('3', 'essential-addons-for-elementor-lite'),
+				        'eael-col-4' => esc_html__('4', 'essential-addons-for-elementor-lite'),
+				        'eael-col-5' => esc_html__('5', 'essential-addons-for-elementor-lite'),
+				        'eael-col-6' => esc_html__('6', 'essential-addons-for-elementor-lite'),
+			        ],
+			        'prefix_class' => 'elementor-grid%s-',
+			        'frontend_available' => true,
+			        'condition' => [
+				        'eael_dynamic_template_Layout' => ['news-classic', 'news-modern']
+			        ]
+		        ]
+	        );
 
             $wb->add_control(
                 'layout_mode',
@@ -1784,5 +1860,62 @@ trait Controls
         }
 
         return $source;
+    }
+
+    public static function nothing_found_style($wb){
+	    $wb->start_controls_section(
+		    'eael_section_nothing_found_style',
+		    [
+			    'label' => __('Nothing', 'essential-addons-for-elementor-lite'),
+			    'tab' => Controls_Manager::TAB_STYLE,
+		    ]
+	    );
+	    $wb->add_group_control(
+		    Group_Control_Typography::get_type(),
+		    [
+			    'name' => 'eael_post_nothing_found_typography',
+			    'selector' => '{{WRAPPER}} .eael-no-posts-found',
+		    ]
+	    );
+	    $wb->add_control(
+		    'eael_post_nothing_found_color',
+		    [
+			    'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-no-posts-found' => 'color: {{VALUE}};',
+			    ],
+		    ]
+	    );
+	    $wb->add_control(
+		    'eael_post_nothing_found_bg_color',
+		    [
+			    'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-no-posts-found' => 'background-color: {{VALUE}};',
+			    ],
+		    ]
+	    );
+	    $wb->add_responsive_control(
+		    'eael_post_nothing_found_padding',
+		    [
+			    'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::DIMENSIONS,
+			    'size_units' => ['px', 'em', '%'],
+			    'default'    => [
+				    'top'      => "25",
+				    'right'    => "25",
+				    'bottom'   => "25",
+				    'left'     => "25",
+				    'isLinked' => true,
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-no-posts-found' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
+	    $wb->end_controls_section();
     }
 }

@@ -3,7 +3,7 @@
 use \Essential_Addons_Elementor\Classes\Helper;
 
 /**
- * Template Name: News
+ * Template Name: Overlap Classic
  */
 
 if (!defined('ABSPATH')) {
@@ -16,38 +16,14 @@ $title_tag = isset($settings['title_tag']) ? $settings['title_tag'] : 'h2';
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
 
-    if (has_post_thumbnail() && $settings['eael_show_image'] == 'yes') {
+                if (has_post_thumbnail() && $settings['eael_show_image'] == 'yes') {
 
-        echo '<div class="eael-entry-media">';
-        if ($settings['eael_show_post_terms'] === 'yes') {
-            echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
-        }
+			        echo '<div class="eael-entry-media" style="background-image: url(' . wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size']) . ')">';
 
-        echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">';
+			        echo '</div>';
+			    }
 
-        if (isset($settings['eael_post_grid_bg_hover_icon_new']['url'])) {
-            echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['id'], '_wp_attachment_image_alt', true)) . '" />';
-        } else {
-            if (($settings['eael_post_grid_bg_hover_icon_new']['library']) == 'svg') {
-                echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['value']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
-            } else {
-                echo '<i class="' . $settings['eael_post_grid_bg_hover_icon_new']['value'] . '" aria-hidden="true"></i>';
-            }
-        }
-        echo '<a
-                            href="' . get_the_permalink() . '"
-                            ' . ($settings['image_link_nofollow'] ? 'rel="nofollow"' : '') . '
-                            ' . ($settings['image_link_target_blank'] ? 'target="_blank"' : '') . '
-                        ></a>';
-        echo '</div>';
-
-        echo '<div class="eael-entry-thumbnail">
-                                <img src="' . esc_url(wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])) . '" alt="' . esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) . '">
-                            </div>';
-        echo '</div>';
-    }
-
-    if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
+                if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
         echo '<div class="eael-entry-wrapper">';
         if ($settings['eael_show_title']) {
             echo '<header class="eael-entry-header"><' . $title_tag . ' class="eael-entry-title">';
@@ -126,5 +102,5 @@ $title_tag = isset($settings['title_tag']) ? $settings['title_tag'] : 'h2';
         echo '</div>';
     }
     echo '</div>
-        </div>
-    </article>';
+    </div>
+</article>';

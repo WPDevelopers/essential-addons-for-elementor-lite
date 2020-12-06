@@ -187,6 +187,7 @@ class Bootstrap
         add_action('eael/controls/read_more_button_style', [$this, 'read_more_button_style'], 10, 1);
         add_action('eael/controls/load_more_button_style', [$this, 'load_more_button_style'], 10, 1);
         add_action('eael/controls/custom_positioning', [$this, 'custom_positioning'], 10, 5);
+        add_action('eael/controls/nothing_found_style', [$this, 'nothing_found_style'], 10, 1);
 
         add_filter('eael/controls/event-calendar/source', [$this, 'event_calendar_source']);
         add_action('eael/controls/advanced-data-table/source', [$this, 'advanced_data_table_source']);

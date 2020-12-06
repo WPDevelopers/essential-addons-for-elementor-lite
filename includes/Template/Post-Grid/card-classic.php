@@ -3,7 +3,7 @@
 use \Essential_Addons_Elementor\Classes\Helper;
 
 /**
- * Template Name: Overlap
+ * Template Name: Card Classic
  */
 
 if (!defined('ABSPATH')) {
@@ -16,15 +16,33 @@ $title_tag = isset($settings['title_tag']) ? $settings['title_tag'] : 'h2';
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
 
-                if (has_post_thumbnail() && $settings['eael_show_image'] == 'yes') {
+    if (has_post_thumbnail() && $settings['eael_show_image'] == 'yes') {
 
-			        echo '<div class="eael-entry-media" style="background-image: url(' . wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size']) . ')">';
+        echo '<div class="eael-entry-media">';
+	        echo '<div class="eael-entry-thumbnail">
+	                <img src="' . esc_url(wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])) . '" alt="' . esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) . '">
+	            </div>';
+        echo '</div>';
+    }
 
-			        echo '</div>';
-			    }
-
-                if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
+    if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
         echo '<div class="eael-entry-wrapper">';
+
+	    if ($settings['meta_position'] == 'meta-entry-header') {
+		    if ($settings['eael_show_meta']) {
+			    echo '<div class="eael-entry-meta">';
+			    if ($settings['eael_show_date'] === 'yes') {
+				    echo '<span class="eael-posted-on"><time datetime="' . get_the_date('d.m.Y') . '">' .
+				         get_the_date('d.m.Y') . '</time></span>';
+			    }
+			    echo '</div>';
+		    }
+	    }
+
+	    if ($settings['eael_show_post_terms'] === 'yes') {
+		    echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
+	    }
+
         if ($settings['eael_show_title']) {
             echo '<header class="eael-entry-header"><' . $title_tag . ' class="eael-entry-title">';
             echo '<a
@@ -43,18 +61,7 @@ $title_tag = isset($settings['title_tag']) ? $settings['title_tag'] : 'h2';
             echo '</a>';
             echo '</' . $title_tag . '></header>';
         }
-        if ($settings['meta_position'] == 'meta-entry-header') {
-            if ($settings['eael_show_meta']) {
-                echo '<div class="eael-entry-meta">';
-                if ($settings['eael_show_author'] === 'yes') {
-                    echo '<span class="eael-posted-by">' . get_the_author_posts_link() . '</span>';
-                }
-                if ($settings['eael_show_date'] === 'yes') {
-                    echo '<span class="eael-posted-on"><time datetime="' . get_the_date() . '">' . get_the_date() . '</time></span>';
-                }
-                echo '</div>';
-            }
-        }
+
 
         if ($settings['eael_show_excerpt'] || $settings['eael_show_read_more_button']) {
             echo '<div class="eael-entry-content">
@@ -79,7 +86,7 @@ $title_tag = isset($settings['title_tag']) ? $settings['title_tag'] : 'h2';
                     </div>';
         }
 
-        if ($settings['eael_show_meta'] && $settings['meta_position'] == 'meta-entry-footer') {
+        if ($settings['eael_show_meta']) {
             echo '<div class="eael-entry-footer">';
             if ($settings['eael_show_avatar'] === 'yes') {
                 echo '<div class="eael-author-avatar"><a href="' . get_author_posts_url(get_the_author_meta('ID')) . '">' . get_avatar(get_the_author_meta('ID'), 96) . '</a></div>';
@@ -89,9 +96,6 @@ $title_tag = isset($settings['title_tag']) ? $settings['title_tag'] : 'h2';
                 echo '<div class="eael-entry-meta">';
                 if ($settings['eael_show_author'] === 'yes') {
                     echo '<span class="eael-posted-by">' . get_the_author_posts_link() . '</span>';
-                }
-                if ($settings['eael_show_date'] === 'yes') {
-                    echo '<span class="eael-posted-on"><time datetime="' . get_the_date() . '">' . get_the_date() . '</time></span>';
                 }
                 echo '</div>';
             }

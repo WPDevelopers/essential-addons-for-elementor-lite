@@ -7896,6 +7896,14 @@ msgstr ""
 msgid "Out"
 msgstr ""
 
+#: ../includes/Template/Post-Grid/news.php:4
+msgid "News"
+msgstr ""
+
+#: ../includes/Template/Post-Grid/overlap.php:4
+msgid "Overlap"
+msgstr ""
+
 #: ../includes/templates/admin/elements.php:5
 msgid "Content Elements"
 msgstr ""

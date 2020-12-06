@@ -83,8 +83,8 @@ class Post_Grid extends Widget_Base
          * Query And Layout Controls!
          * @source includes/elementor-helper.php
          */
-        do_action('eael/controls/query', $this);
         do_action('eael/controls/layout', $this);
+	    do_action('eael/controls/query', $this);
 
         /**
          * Grid Style Controls!
@@ -996,6 +996,11 @@ class Post_Grid extends Widget_Base
          * Load More Button Style Controls!
          */
         do_action('eael/controls/load_more_button_style', $this);
+
+        /**
+         * Nothing Found Style Controls!
+         */
+        do_action('eael/controls/nothing_found_style', $this);
     }
 
     protected function render()
@@ -1075,7 +1080,7 @@ class Post_Grid extends Widget_Base
                     include($template);
                 }
             }else {
-                _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                _e('<p class="eael-no-posts-found">'.$settings['nothing_found_msg'].'</p>', 'essential-addons-for-elementor-lite');
             }
             wp_reset_postdata();
         } else {

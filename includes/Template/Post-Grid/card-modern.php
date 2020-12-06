@@ -3,7 +3,7 @@
 use \Essential_Addons_Elementor\Classes\Helper;
 
 /**
- * Template Name: Card
+ * Template Name: Card Modern
  */
 
 if (!defined('ABSPATH')) {
