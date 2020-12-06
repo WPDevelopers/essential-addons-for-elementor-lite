@@ -1274,7 +1274,7 @@ trait Woo_Product_Comparable {
 	}
 
 	public function init_style_icon_controls( $tbl = '' ) {
-		$icon = "{$tbl} i";
+		$icon = "{$tbl} .elementor-icon";
 		$this->start_controls_section( 'section_style_icon', [
 			'label'     => __( 'Fields Icon', 'essential-addons-for-elementor-lite' ),
 			'tab'       => Controls_Manager::TAB_STYLE,
@@ -1679,7 +1679,9 @@ trait Woo_Product_Comparable {
 
 	public static function print_icon( $icon ) {
 		if ( ! empty( $icon['value'] ) && ! empty( $icon['library'] ) ) {
+		    echo '<span class="elementor-icon">';
 			Icons_Manager::render_icon( $icon, [ 'aria-hidden' => 'true' ] );
+			echo '</span>';
 		}
 	}
 
