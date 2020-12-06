@@ -536,6 +536,9 @@ class Product_Grid extends Widget_Base
     {
         $this->start_controls_section('eael_product_grid_load_more_section', [
             'label' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
+            'condition' => [
+                'show_pagination!' => 'true',
+            ],
         ]);
 
         $this->add_control('show_load_more', [
@@ -1945,6 +1948,7 @@ class Product_Grid extends Widget_Base
                 'tab' => Controls_Manager::TAB_CONTENT,
                 'condition' => [
                     'eael_product_grid_layout' => ['grid', 'list'],
+                    'show_load_more!' => 'true'
                 ],
             ]
         );
