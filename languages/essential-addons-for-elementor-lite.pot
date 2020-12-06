@@ -7240,7 +7240,7 @@ msgstr ""
 msgid "Added "
 msgstr ""
 
-#: ../includes/Traits/Enqueue.php:130, ../includes/Traits/Woo_Product_Comparable.php:1708
+#: ../includes/Traits/Enqueue.php:130, ../includes/Traits/Woo_Product_Comparable.php:1710
 msgid "Compare"
 msgstr ""
 
@@ -7252,7 +7252,7 @@ msgstr ""
 msgid "Post ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Helper.php:61, ../includes/Traits/Login_Registration.php:62, ../includes/Traits/Login_Registration.php:221, ../includes/Traits/Woo_Product_Comparable.php:1725
+#: ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Helper.php:61, ../includes/Traits/Login_Registration.php:62, ../includes/Traits/Login_Registration.php:221, ../includes/Traits/Woo_Product_Comparable.php:1727
 msgid "Widget ID is missing"
 msgstr ""
 
@@ -7260,11 +7260,11 @@ msgstr ""
 msgid "Insecure form submitted without security token"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:41, ../includes/Traits/Login_Registration.php:92, ../includes/Traits/Login_Registration.php:207, ../includes/Traits/Woo_Product_Comparable.php:1758
+#: ../includes/Traits/Helper.php:41, ../includes/Traits/Login_Registration.php:92, ../includes/Traits/Login_Registration.php:207, ../includes/Traits/Woo_Product_Comparable.php:1760
 msgid "Security token did not match"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:51, ../includes/Traits/Login_Registration.php:55, ../includes/Traits/Login_Registration.php:216, ../includes/Traits/Woo_Product_Comparable.php:1720
+#: ../includes/Traits/Helper.php:51, ../includes/Traits/Login_Registration.php:55, ../includes/Traits/Login_Registration.php:216, ../includes/Traits/Woo_Product_Comparable.php:1722
 msgid "Page ID is missing"
 msgstr ""
 
@@ -7680,11 +7680,11 @@ msgstr ""
 msgid "No products added to compare."
 msgstr ""
 
-#: ../includes/Traits/Woo_Product_Comparable.php:1589, ../includes/Traits/Woo_Product_Comparable.php:1824
+#: ../includes/Traits/Woo_Product_Comparable.php:1589, ../includes/Traits/Woo_Product_Comparable.php:1826
 msgid "In stock"
 msgstr ""
 
-#: ../includes/Traits/Woo_Product_Comparable.php:1730
+#: ../includes/Traits/Woo_Product_Comparable.php:1732
 msgid "Product ID is missing"
 msgstr ""
 
