@@ -1396,7 +1396,7 @@ trait Woo_Product_Comparable {
 						?>
                         <tr class="<?php echo esc_attr( $field ); ?>">
                             <th class="thead <?php echo esc_attr( $f_heading_class ); ?>">
-                                <div>
+                                <div class="wcpc-table-header">
 									<?php if ( $field === 'image' ) {
 										if ( ! empty( $title ) ) {
 											printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
