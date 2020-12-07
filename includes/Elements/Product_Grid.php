@@ -193,6 +193,16 @@ class Product_Grid extends Widget_Base
         $table = ".eael-wcpc-modal .eael-wcpc-wrapper table";
         $table_title = ".eael-wcpc-modal .eael-wcpc-wrapper .wcpc-title";
         $table_title_wrap = ".eael-wcpc-modal .eael-wcpc-wrapper .first-th";
+        $compare_btn_condition = [
+            'eael_product_grid_style_preset!' => [
+                'eael-product-preset-5',
+                'eael-product-preset-6',
+                'eael-product-preset-7',
+                'eael-product-preset-8',
+            ],
+            'eael_product_grid_layout!' => 'list',
+        ];
+        $this->init_style_compare_button_controls($compare_btn_condition);
         $this->init_style_content_controls(compact('container_class'));
         $this->init_style_table_controls(compact('table', 'table_title', 'table_title_wrap'));
     }
