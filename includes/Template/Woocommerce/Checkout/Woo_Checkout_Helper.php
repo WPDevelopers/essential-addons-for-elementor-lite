@@ -1,7 +1,8 @@
 <?php
 namespace Essential_Addons_Elementor\Template\Woocommerce\Checkout;
 
-use Elementor\Icons_Manager;
+use \Elementor\Icons_Manager;
+use \Exception;
 
 if (!defined('ABSPATH')) {
 	exit;
