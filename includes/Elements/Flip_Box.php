@@ -713,7 +713,6 @@ class Flip_Box extends Widget_Base
                 ],
                 'condition' => [
                     'flipbox_link_type' => 'button',
-                    'button_icon!'      => '',
                 ],
             ]
         );
