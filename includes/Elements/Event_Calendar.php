@@ -505,6 +505,17 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->add_control(
+            'eael_event_time_format',
+            [
+                'label' => __('24-hour Time format', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_block' => false,
+                'return_value' => 'yes',
+                'description' => __('Hide Event Details link in event popup', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $this->add_control(
             'eael_event_calendar_default_view',
             [
                 'label' => __('Calendar Default View', 'essential-addons-for-elementor-lite'),
@@ -1680,6 +1691,7 @@ class Event_Calendar extends Widget_Base
 
         $local = $settings['eael_event_calendar_language'];
         $default_view = $settings['eael_event_calendar_default_view'];
+        $time_format = $settings['eael_event_time_format'];
         $translate_date = [
             'today' => __('Today', 'essential-addons-for-elementor-lite'),
             'tomorrow' => __('Tomorrow', 'essential-addons-for-elementor-lite'),
@@ -1692,6 +1704,7 @@ class Event_Calendar extends Widget_Base
             data-locale = "' . $local . '"
             data-translate = "' . htmlspecialchars(json_encode($translate_date), ENT_QUOTES, 'UTF-8') . '"
             data-defaultview = "' . $default_view . '"
+            data-time_format = "' . $time_format . '"
             data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"
             data-first_day="' . $settings['eael_event_calendar_first_day'] . '"></div>
             ' . $this->eaelec_load_event_details() . '
