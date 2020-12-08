@@ -200,14 +200,20 @@ trait Login_Registration {
 				wp_send_json_error( __( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' ) );
 			}
 
-			return false;
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            }
 		}
 		if ( ! wp_verify_nonce( $_POST['eael-register-nonce'], 'eael-register-action' ) ) {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'Security token did not match', 'essential-addons-for-elementor-lite' ) );
 			}
 
-			return false;
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            }
 		}
 		$page_id = $widget_id = 0;
 		if ( ! empty( $_POST['page_id'] ) ) {
@@ -232,7 +238,10 @@ trait Login_Registration {
 				wp_send_json_error( $err_msg );
 			}
 
-			return false;
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            }
 		}
 
 		do_action( 'eael/login-register/before-register' );
@@ -474,6 +483,11 @@ trait Login_Registration {
 			wp_safe_redirect( $custom_redirect_url );
 			exit();
 		}
+
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            wp_safe_redirect($_SERVER['HTTP_REFERER']);
+            exit();
+        }
 
 	}
 
