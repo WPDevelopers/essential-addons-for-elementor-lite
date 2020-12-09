@@ -447,6 +447,7 @@
           align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  cursor: pointer;
 }
 .eael-product-grid .woocommerce ul.products .product .eael-wc-compare-loader,
 .eael-post-grid .woocommerce ul.products .product .eael-wc-compare-loader {
