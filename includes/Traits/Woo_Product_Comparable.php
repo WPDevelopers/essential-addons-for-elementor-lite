@@ -1845,10 +1845,14 @@ trait Woo_Product_Comparable {
               </g>
             </g>
             </svg>';
-		$fa_icon = '<span class="eael-wc-compare-icon"><i class="fas fa-balance-scale"></i></span>';
-
-		$btn_content = 'icon' === $btn_type ? $fa_icon : '<span class="eael-wc-compare-text">' .__( 'Compare', 'essential-addons-for-elementor-lite' ). '</span>';
-		printf( '<button class="eael-wc-compare button" data-product-id="%1$d" rel="nofollow" title="Compare">%2$s %3$s</button>', intval( $id, 10 ), $loader, $btn_content );
+//		$fa_icon = '<span class="eael-wc-compare-icon"><i class="fas fa-balance-scale"></i></span>';
+        $fa_icon = '<i class="fas fa-balance-scale"></i>';
+		$btn_content = '<span class="eael-wc-compare-text">' .__( 'Compare', 'essential-addons-for-elementor-lite' ). '</span>';
+        if ('icon' === $btn_type) {
+            printf( '<a class="eael-wc-compare eael-wc-compare-icon" data-product-id="%1$d" rel="nofollow" title="Compare">%2$s %3$s</a>', intval( $id ), $loader, $fa_icon );
+        }else{
+            printf( '<button class="eael-wc-compare button" data-product-id="%1$d" rel="nofollow" title="Compare">%2$s %3$s</button>', intval( $id ), $loader, $btn_content );
+        }
 	}
 
 	public function get_compare_table() {

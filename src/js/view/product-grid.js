@@ -12,7 +12,8 @@ ea.hooks.addAction("init", "ea", () => {
         const overlayNode = document.getElementById('wcpc-overlay');
         const $doc = $(document);
         let loader = false;
-        let compareIconSpan = false;
+        let compareBtn = false;
+        let hasCompareIcon = false;
         let compareBtnSpan = false;
         let requestType = false; // compare | remove
         let iconBeforeCompare = '<i class="fas fa-balance-scale-right"></i>';
@@ -60,13 +61,14 @@ ea.hooks.addAction("init", "ea", () => {
         }
 
         $doc.on('click', '.eael-wc-compare', function (e) {
+            e.preventDefault();
             requestType = 'compare'
-            let compareBtn = $(this);
+            compareBtn = $(this);
             compareBtnSpan = compareBtn.find('.eael-wc-compare-text');
             if (!compareBtnSpan.length){
-                compareIconSpan = compareBtn.find('.eael-wc-compare-icon');
+                hasCompareIcon = compareBtn.hasClass('eael-wc-compare-icon');
             }
-            if (!compareIconSpan || !compareIconSpan.length){
+            if (!hasCompareIcon){
                 loader = compareBtn.find('.eael-wc-compare-loader');
                 loader.show();
             }
@@ -104,7 +106,7 @@ ea.hooks.addAction("init", "ea", () => {
             let compareBtn = $('button[data-product-id="' + productId + '"]');
             compareBtnSpan = compareBtn.find('.eael-wc-compare-text');
             if (!compareBtnSpan.length ) {
-                compareIconSpan = compareBtn.find('.eael-wc-compare-icon');
+                hasCompareIcon = compareBtn.hasClass('eael-wc-compare-icon');
             }
             sendData(rmData, handleSuccess, handleError);
         });
@@ -126,15 +128,15 @@ ea.hooks.addAction("init", "ea", () => {
             if ('compare' === requestType) {
                 if (compareBtnSpan && compareBtnSpan.length){
                     compareBtnSpan.text(localize.i18n.added);
-                }else if(compareIconSpan && compareIconSpan.length){
-                    compareIconSpan.html(iconAfterCompare)
+                }else if(hasCompareIcon){
+                    compareBtn.html(iconAfterCompare);
                 }
             }
             if ('remove' === requestType) {
                 if (compareBtnSpan && compareBtnSpan.length){
                     compareBtnSpan.text(localize.i18n.compare);
-                }else if(compareIconSpan && compareIconSpan.length){
-                    compareIconSpan.html(iconBeforeCompare)
+                }else if(hasCompareIcon){
+                    compareBtn.html(iconAfterCompare);
                 }
             }
 
