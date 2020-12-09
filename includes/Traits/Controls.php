@@ -1075,21 +1075,40 @@ trait Controls
                 ]
             );
 
-            $wb->add_control(
-                'meta_position',
-                [
-                    'label' => esc_html__('Meta Position', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SELECT,
-                    'default' => 'meta-entry-footer',
-                    'options' => [
-                        'meta-entry-header' => esc_html__('Entry Header', 'essential-addons-for-elementor-lite'),
-                        'meta-entry-footer' => esc_html__('Entry Footer', 'essential-addons-for-elementor-lite'),
-                    ],
-                    'condition' => [
-                        'eael_show_meta' => 'yes',
-                    ],
-                ]
-            );
+            if('eael-post-grid' === $wb->get_name()) {
+	            $wb->add_control(
+		            'meta_position',
+		            [
+			            'label' => esc_html__('Meta Position', 'essential-addons-for-elementor-lite'),
+			            'type' => Controls_Manager::SELECT,
+			            'default' => 'meta-entry-footer',
+			            'options' => [
+				            'meta-entry-header' => esc_html__('Entry Header', 'essential-addons-for-elementor-lite'),
+				            'meta-entry-footer' => esc_html__('Entry Footer', 'essential-addons-for-elementor-lite'),
+			            ],
+			            'condition' => [
+				            'eael_show_meta' => 'yes',
+				            'eael_dynamic_template_Layout' => 'default',
+			            ],
+		            ]
+	            );
+            } else {
+	            $wb->add_control(
+		            'meta_position',
+		            [
+			            'label' => esc_html__('Meta Position', 'essential-addons-for-elementor-lite'),
+			            'type' => Controls_Manager::SELECT,
+			            'default' => 'meta-entry-footer',
+			            'options' => [
+				            'meta-entry-header' => esc_html__('Entry Header', 'essential-addons-for-elementor-lite'),
+				            'meta-entry-footer' => esc_html__('Entry Footer', 'essential-addons-for-elementor-lite'),
+			            ],
+			            'condition' => [
+				            'eael_show_meta' => 'yes',
+			            ],
+		            ]
+	            );
+            }
 
             $wb->add_control(
                 'eael_show_avatar',

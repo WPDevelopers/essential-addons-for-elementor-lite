@@ -12,20 +12,22 @@ if (!defined('ABSPATH')) {
 
 $title_tag = isset($settings['title_tag']) ? $settings['title_tag'] : 'h2';
 
-    echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . get_the_ID() . '">
-        <div class="eael-grid-post-holder">
-            <div class="eael-grid-post-holder-inner">';
+echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . get_the_ID() . '">
+    <div class="eael-grid-post-holder">
+        <div class="eael-grid-post-holder-inner">';
 
-			    if (has_post_thumbnail() && $settings['eael_show_image'] == 'yes') {
+		    if (has_post_thumbnail() && $settings['eael_show_image'] == 'yes') {
 
 			        echo '<div class="eael-entry-media">';
 				        echo '<div class="eael-entry-thumbnail">
-                                <img src="' . esc_url(wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])) . '" alt="' . esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) . '">
+								<a href="' . get_the_permalink() . '" ' . ($settings['image_link_nofollow'] ? 'rel="nofollow"' : '') . '' . ($settings['image_link_target_blank'] ? 'target="_blank"' : '') . '>
+                                	<img src="' . esc_url(wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])) . '" alt="' . esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) . '">
+                            	</a>
                             </div>';
 			        echo '</div>';
 			    }
 
-			    if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
+		    if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
 			        echo '<div class="eael-entry-wrapper">';
 
 				    if ($settings['eael_show_post_terms'] === 'yes') {
@@ -74,21 +76,20 @@ $title_tag = isset($settings['title_tag']) ? $settings['title_tag'] : 'h2';
 			                    </div>';
 			        }
 
-				    if ($settings['meta_position'] == 'meta-entry-header') {
-					    if ($settings['eael_show_meta']) {
-						    echo '<div class="eael-entry-meta">';
-						    if ($settings['eael_show_author'] === 'yes') {
-							    echo '<span class="eael-posted-by">' . get_the_author_posts_link() . '</span>';
-						    }
-						    if ($settings['eael_show_date'] === 'yes') {
-							    echo '<span class="eael-posted-on"><time datetime="' . get_the_date() . '">' . get_the_date() . '</time></span>';
-						    }
-						    echo '</div>';
+
+				    if ($settings['eael_show_meta']) {
+					    echo '<div class="eael-entry-meta">';
+					    if ($settings['eael_show_author'] === 'yes') {
+						    echo '<span class="eael-posted-by"><i class="far fa-user-circle"></i>' . get_the_author_posts_link() . '</span>';
 					    }
+					    if ($settings['eael_show_date'] === 'yes') {
+						    echo '<span class="eael-posted-on"><i class="far fa-clock"></i><time datetime="' . get_the_date('d.m.Y') . '">' . get_the_date('d.m.Y') . '</time></span>';
+					    }
+					    echo '</div>';
 				    }
 
 			        echo '</div>';
 			    }
     echo '</div>
-        </div>
-    </article>';
+    </div>
+</article>';
