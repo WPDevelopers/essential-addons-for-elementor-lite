@@ -583,7 +583,7 @@ trait Login_Registration {
 	public function set_transient( $name, $data, $time = 300 ) {
 		$time = empty( $time ) ? (int) $time : ( 5 * MINUTE_IN_SECONDS );
 
-		return set_transient( $name, $data, time() + $time );
+		return set_transient( $name, $data, $time );
 	}
 
 	/**

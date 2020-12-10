@@ -456,8 +456,7 @@ trait Helper
 	 */
 	public function eael_set_transient( $name, $data, $time = 300 ) {
 		$time = !empty( $time ) ? (int) $time : ( 5 * MINUTE_IN_SECONDS );
-
-		return set_transient( $name, $data, time() + $time );
+		return set_transient( $name, $data, $time );
 	}
     public function print_load_more_button($settings, $args, $plugin_type = 'free')
     {
