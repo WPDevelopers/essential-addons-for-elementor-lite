@@ -40,6 +40,30 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                             <img src="' . esc_url(wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])) . '" alt="' . esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) . '">
                         </div>';
                     echo '</div>';
+                } elseif ( $settings['eael_show_fallback_img'] == 'yes' && !empty( $settings['eael_post_fallback_img']['url'] ) ) {
+	                echo '<div class="eael-entry-media">';
+	                if ($settings['eael_show_post_terms'] === 'yes') {
+		                echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
+	                }
+
+	                echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">';
+	                if (isset($settings['eael_post_grid_bg_hover_icon_new']['url'])) {
+		                echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['id'], '_wp_attachment_image_alt', true)) . '" />';
+	                } else {
+		                echo '<i class="' . $settings['eael_post_grid_bg_hover_icon_new']['value'] . '" aria-hidden="true"></i>';
+	                }
+
+	                echo '<a
+                                href="' . get_the_permalink() . '"
+                                ' . ($settings['image_link_nofollow'] ? 'rel="nofollow"' : '') . '
+                                ' . ($settings['image_link_target_blank'] ? 'target="_blank"' : '') . '
+                            ></a>';
+	                echo '</div>';
+
+	                echo '<div class="eael-entry-thumbnail">
+                            <img src="' . $settings['eael_post_fallback_img']['url'] . '" alt="' . esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) . '">
+                        </div>';
+	                echo '</div>';
                 }
 
                 if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {

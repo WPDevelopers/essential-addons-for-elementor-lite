@@ -147,6 +147,40 @@ trait Controls
             ]
         );
 
+	    if ($wb->get_name() === 'eael-post-grid') {
+		    $wb->add_control(
+			    'posts_per_page',
+			    [
+				    'label' => __('Posts Per Page', 'essential-addons-for-elementor-lite'),
+				    'type' => Controls_Manager::NUMBER,
+				    'default' => '4',
+				    'condition' => [
+				    	'eael_dynamic_template_Layout' => [
+				    		'default',
+				    		'new-classic',
+				    		'new-modern',
+					    ],
+				    ]
+			    ]
+		    );
+
+		    $wb->add_control(
+			    'posts_per_page_3',
+			    [
+				    'label' => __('Posts Per Page', 'essential-addons-for-elementor-lite'),
+				    'type' => Controls_Manager::NUMBER,
+				    'default' => '3',
+				    'condition' => [
+					    'eael_dynamic_template_Layout!' => [
+						    'default',
+						    'new-classic',
+						    'new-modern',
+					    ],
+				    ]
+			    ]
+		    );
+	    } else {
+
 	    $wb->add_control(
 		    'posts_per_page',
 		    [
@@ -155,6 +189,7 @@ trait Controls
 			    'default' => '4',
 		    ]
 	    );
+	    }
 
         $wb->add_control(
             'offset',
@@ -613,7 +648,6 @@ trait Controls
                     ],
                 ]
             );
-
         }
 
         if ('eael-post-block' === $wb->get_name()) {
@@ -747,6 +781,36 @@ trait Controls
             );
 
         }
+
+	    if('eael-post-grid' === $wb->get_name()){
+		    $wb->add_control(
+			    'eael_show_fallback_img',
+			    [
+				    'label' => __('Fallback Image', 'essential-addons-for-elementor-lite'),
+				    'type' => Controls_Manager::SWITCHER,
+				    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+				    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+				    'return_value' => 'yes',
+				    'default' => 'yes',
+			    ]
+		    );
+		    $wb->add_control(
+			    'eael_post_fallback_img',
+			    [
+				    'label'             => __( 'Image', 'essential-addons-for-elementor-lite' ),
+				    'type'              => Controls_Manager::MEDIA,
+				    'dynamic' => [
+					    'active' => true,
+				    ],
+				    'default' => [
+					    'url' => \Elementor\Utils::get_placeholder_image_src(),
+				    ],
+				    'condition'         => [
+					    'eael_show_fallback_img'    => 'yes'
+				    ]
+			    ]
+		    );
+	    }
 
         if ('eael-content-timeline' === $wb->get_name()) {
 
@@ -1092,6 +1156,37 @@ trait Controls
 			            ],
 		            ]
 	            );
+	            $wb->add_control(
+		            'eael_show_avatar',
+		            [
+			            'label' => __('Show Avatar', 'essential-addons-for-elementor-lite'),
+			            'type' => Controls_Manager::SWITCHER,
+			            'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+			            'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+			            'return_value' => 'yes',
+			            'default' => 'yes',
+			            'conditions' => [
+				            'relation' => 'and',
+				            'terms' => [
+					            [
+						            'name' => 'meta_position',
+						            'operator' => '==',
+						            'value' => 'meta-entry-footer',
+					            ],
+					            [
+						            'name' => 'eael_show_meta',
+						            'operator' => '==',
+						            'value' => 'yes',
+					            ],
+					            [
+						            'name' => 'eael_dynamic_template_Layout',
+						            'operator' => '==',
+						            'value' => 'default',
+					            ]
+				            ]
+			            ],
+		            ]
+	            );
             } else {
 	            $wb->add_control(
 		            'meta_position',
@@ -1108,23 +1203,22 @@ trait Controls
 			            ],
 		            ]
 	            );
+	            $wb->add_control(
+		            'eael_show_avatar',
+		            [
+			            'label' => __('Show Avatar', 'essential-addons-for-elementor-lite'),
+			            'type' => Controls_Manager::SWITCHER,
+			            'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+			            'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+			            'return_value' => 'yes',
+			            'default' => 'yes',
+			            'condition' => [
+				            'meta_position' => 'meta-entry-footer',
+				            'eael_show_meta' => 'yes',
+			            ],
+		            ]
+	            );
             }
-
-            $wb->add_control(
-                'eael_show_avatar',
-                [
-                    'label' => __('Show Avatar', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
-                    'return_value' => 'yes',
-                    'default' => 'yes',
-                    'condition' => [
-                        'meta_position' => 'meta-entry-footer',
-                        'eael_show_meta' => 'yes',
-                    ],
-                ]
-            );
 
             $wb->add_control(
                 'eael_show_author',

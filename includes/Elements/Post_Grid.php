@@ -317,6 +317,35 @@ class Post_Grid extends Widget_Base
 		    ]
 	    );
 
+	    $this->add_responsive_control(
+		    'eael_post_grid_meta_alignment',
+		    [
+			    'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::CHOOSE,
+			    'options' => [
+				    'flex-start' => [
+					    'title' => __('Top', 'essential-addons-for-elementor-lite'),
+					    'icon' => 'fa fa-align-left',
+				    ],
+				    'center' => [
+					    'title' => __('Center', 'essential-addons-for-elementor-lite'),
+					    'icon' => 'fa fa-align-center',
+				    ],
+				    'flex-end' => [
+					    'title' => __('Bottom', 'essential-addons-for-elementor-lite'),
+					    'icon' => 'fa fa-align-right',
+				    ],
+			    ],
+			    'default' => 'flex-start',
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-grid-post .eael-entry-footer, {{WRAPPER}} .eael-grid-post .eael-entry-meta' => 'justify-content: {{VALUE}}',
+			    ],
+			    'condition' => [
+				    'eael_dynamic_template_Layout' => ['overlap-classic'],
+			    ]
+		    ]
+	    );
+
         $this->add_responsive_control(
             'eael_post_grid_spacing',
             [
@@ -329,36 +358,71 @@ class Post_Grid extends Widget_Base
             ]
         );
 
-        $this->add_group_control(
-            Group_Control_Border::get_type(),
-            [
-                'name' => 'eael_post_grid_border',
-                'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .eael-grid-post-holder',
-            ]
-        );
+        // tab start
+	    $this->start_controls_tabs('eael_post_grid_tabs');
+	    $this->start_controls_tab('eael_post_grid_tabs_normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
 
-        $this->add_control(
-            'eael_post_grid_border_radius',
-            [
-                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
-	            'selectors' => [
-		            '{{WRAPPER}} .eael-post-grid:not(.eael-post-grid-template-news-modern):not(.eael-post-grid-template-card-modern):not(.eael-post-grid-template-card-classic) .eael-grid-post-holder' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
-		            '{{WRAPPER}} .eael-post-grid-template-news-modern .eael-entry-wrapper, {{WRAPPER}} .eael-post-grid-template-card-modern .eael-entry-wrapper' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
-		            '{{WRAPPER}} .eael-post-grid-template-card-classic .eael-grid-post-holder-inner:after' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
-		            '{{WRAPPER}} .eael-post-grid-template-overlap-classic .eael-grid-post-holder-inner *' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
-	            ],
-            ]
-        );
+	    $this->add_group_control(
+		    Group_Control_Border::get_type(),
+		    [
+			    'name' => 'eael_post_grid_border',
+			    'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
+			    'selector' => '{{WRAPPER}} .eael-grid-post-holder',
+		    ]
+	    );
 
-        $this->add_group_control(
-            Group_Control_Box_Shadow::get_type(),
-            [
-                'name' => 'eael_post_grid_box_shadow',
-                'selector' => '{{WRAPPER}} .eael-post-grid:not(.eael-post-grid-template-news-modern):not(.eael-post-grid-template-card-modern):not(.eael-post-grid-template-card-classic) .eael-grid-post-holder, {{WRAPPER}} .eael-post-grid-template-news-modern .eael-entry-wrapper, {{WRAPPER}} .eael-post-grid-template-card-modern .eael-entry-wrapper, {{WRAPPER}} .eael-post-grid-template-card-classic .eael-grid-post-holder-inner::after',
-            ]
-        );
+	    $this->add_control(
+		    'eael_post_grid_border_radius',
+		    [
+			    'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::DIMENSIONS,
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-post-grid:not(.eael-post-grid-template-news-modern):not(.eael-post-grid-template-card-modern):not(.eael-post-grid-template-card-classic) .eael-grid-post-holder' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
+				    '{{WRAPPER}} .eael-post-grid-template-news-modern .eael-entry-wrapper, {{WRAPPER}} .eael-post-grid-template-card-modern .eael-entry-wrapper' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
+				    '{{WRAPPER}} .eael-post-grid-template-card-classic .eael-grid-post-holder-inner:after' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
+				    '{{WRAPPER}} .eael-post-grid-template-overlap-classic .eael-grid-post-holder-inner *' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
+			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Box_Shadow::get_type(),
+		    [
+			    'name' => 'eael_post_grid_box_shadow',
+			    'selector' => '{{WRAPPER}} .eael-post-grid:not(.eael-post-grid-template-news-modern):not(.eael-post-grid-template-card-modern):not(.eael-post-grid-template-card-classic) .eael-grid-post-holder, {{WRAPPER}} .eael-post-grid-template-news-modern .eael-entry-wrapper, {{WRAPPER}} .eael-post-grid-template-card-modern .eael-entry-wrapper, {{WRAPPER}} .eael-post-grid-template-card-classic .eael-grid-post-holder-inner::after',
+		    ]
+	    );
+
+	    $this->end_controls_tab();
+
+	    $this->start_controls_tab('eael_post_grid_tabs_hover', ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]);
+
+	    $this->add_control(
+		    'eael_post_grid_hover_border_color',
+		    [
+			    'label' => esc_html__('Border Color', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::COLOR,
+			    'default' => '',
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-grid-post-holder:hover' => 'border-color: {{VALUE}};',
+			    ],
+			    'condition' => [
+				    'eael_post_grid_border_border!' => '',
+			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Box_Shadow::get_type(),
+		    [
+			    'name' => 'eael_post_grid_box_shadow_hover',
+			    'selector' => '{{WRAPPER}} .eael-post-grid:not(.eael-post-grid-template-news-modern):not(.eael-post-grid-template-card-modern):not(.eael-post-grid-template-card-classic) .eael-grid-post-holder:hover, {{WRAPPER}} .eael-post-grid-template-news-modern .eael-entry-wrapper:hover, {{WRAPPER}} .eael-post-grid-template-card-modern .eael-entry-wrapper:hover, {{WRAPPER}} .eael-post-grid-template-card-classic .eael-grid-post-holder:hover .eael-grid-post-holder-inner::after',
+		    ]
+	    );
+
+	    $this->end_controls_tab();
+
+	    $this->end_controls_tabs();
 
         $this->end_controls_section();
 
@@ -769,6 +833,21 @@ class Post_Grid extends Widget_Base
             ]
         );
 
+	    $this->add_control(
+		    'eael_post_grid_excerpt_bg_color',
+		    [
+			    'label' => __('Background', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::COLOR,
+			    'default' => '',
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-post-grid-template-overlap-modern .eael-entry-wrapper' => 'background-color: {{VALUE}};',
+			    ],
+                'condition'=> [
+                    'eael_dynamic_template_Layout' => 'overlay-modern',
+                ]
+		    ]
+	    );
+
         $this->add_control(
             'eael_post_grid_excerpt_color',
             [
@@ -831,7 +910,9 @@ class Post_Grid extends Widget_Base
                     '%' => ['max' => 100],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-grid-post-holder .eael-entry-wrapper' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-post-grid:not(.eael-post-grid-template-overlap-modern).eael-grid-post-holder .eael-entry-wrapper' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-post-grid-template-overlap-modern .eael-grid-post-holder:hover .eael-entry-wrapper .eael-entry-content'
+                    => 'max-height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -946,6 +1027,7 @@ class Post_Grid extends Widget_Base
                 'default' => '',
                 'selectors' => [
                     '{{WRAPPER}} .post-carousel-categories li a, {{WRAPPER}} .post-carousel-categories li:after' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .terms-wrapper i' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1127,6 +1209,7 @@ class Post_Grid extends Widget_Base
     {
         $settings = $this->get_settings();
         $settings = HelperClass::fix_old_query($settings);
+	    $settings= HelperClass::fix_post_per_page($settings);
         $args = HelperClass::get_query_args($settings);
         $args = HelperClass::get_dynamic_args($settings, $args);
 
@@ -1160,7 +1243,9 @@ class Post_Grid extends Widget_Base
             'image_link_nofollow' => $settings['image_link_nofollow'],
             'image_link_target_blank' => $settings['image_link_target_blank'],
             'eael_title_length' => $settings['eael_title_length'],
-            'eael_post_grid_preset_style' => $settings['eael_post_grid_preset_style']
+            'eael_post_grid_preset_style' => $settings['eael_post_grid_preset_style'],
+            'eael_show_fallback_img'    => $settings['eael_show_fallback_img'],
+            'eael_post_fallback_img'    => $settings['eael_post_fallback_img'],
         ];
 
         $this->add_render_attribute(

@@ -18,12 +18,18 @@ echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . get_the
 
         if (has_post_thumbnail() && $settings['eael_show_image'] == 'yes') {
 
-        echo '<div class="eael-entry-media">';
+	        echo '<div class="eael-entry-media">';
+		        echo '<div class="eael-entry-thumbnail">
+		                <img src="' . esc_url(wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])) . '" alt="' . esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) . '">
+		            </div>';
+	        echo '</div>';
+	    } elseif ( $settings['eael_show_fallback_img'] == 'yes' && !empty( $settings['eael_post_fallback_img']['url'] ) ) {
+	        echo '<div class="eael-entry-media">';
 	        echo '<div class="eael-entry-thumbnail">
-	                <img src="' . esc_url(wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])) . '" alt="' . esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) . '">
-	            </div>';
-        echo '</div>';
-    }
+				                <img src="' . $settings['eael_post_fallback_img']['url'] . '" alt="' . esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) . '">
+				            </div>';
+	        echo '</div>';
+        }
 
         if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
         echo '<div class="eael-entry-wrapper">';

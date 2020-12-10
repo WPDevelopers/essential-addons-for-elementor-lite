@@ -604,6 +604,7 @@
 		position: relative;
 		z-index: 1;
 		width: 100%;
+		transition: all .3s ease-out;
 
 		&:after {
 			position: absolute;
@@ -634,11 +635,18 @@
 		margin-top: -60px;
 		position: relative;
 		box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.15);
+		transition: all .3s ease-out;
 	}
 }
 
 .eael-post-grid-template-card-classic,
 .eael-post-grid-template-card-modern {
+	.terms-wrapper {
+		i {
+			color: #8562f8;
+		}
+	}
+
 	.post-carousel-categories {
 		position: relative;
 		opacity: 1;
@@ -693,17 +701,43 @@
 
 }
 .eael-post-grid-template-overlap-modern {
+	.eael-entry-wrapper{
+		background-color: #8562f8;
+		left: 0;
+		bottom: 0;
 
+		.eael-entry-content{
+			max-height: 0;
+			transition: all .3s ease-out;
+			opacity: 0;
+
+			.eael-grid-post-excerpt {
+
+			}
+		}
+	}
+
+	.eael-grid-post-holder {
+
+		&:hover {
+			.eael-entry-wrapper .eael-entry-content{
+				max-height: 70px;
+				opacity: 1;
+				transform: translate(0,0);
+			}
+		}
+	}
 }
 
 .eael-post-grid-template-overlap-modern,
 .eael-post-grid-template-overlap-classic {
 	.eael-grid-post-holder {
 		overflow: hidden;
+		transition: all .3s ease-out;
 
 		.eael-grid-post-holder-inner {
 			position: relative;
-			height: 200px;
+			height: 350px;
 			overflow: hidden;
 			transition: all .3s ease-out;
 
@@ -716,6 +750,8 @@
 	}
 	.eael-entry-media {
 		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
 		transition: all .3s ease-out;
 		transform: scale(1,1);
 	}
@@ -756,6 +792,7 @@
 		filter: drop-shadow(0px 8px 17.5px rgba(11,65,139,0.1));
 		background-color: #ffffff;
 		border: none;
+		transition: all .3s ease-out;
 	}
 
 	.eael-grid-post-holder-inner {
@@ -800,6 +837,7 @@
 		margin: 15px 0 15px -40px;
 		position: relative;
 		filter: drop-shadow(0px 8px 17.5px rgba(11,65,139,0.1));
+		transition: all .3s ease-out;
 	}
 }
 
@@ -811,6 +849,7 @@
 		visibility: visible;
 		padding: 0;
 		line-height: 1.2em;
+		margin-bottom: 10px;
 
 		a {
 			color: #8562f8;
@@ -819,10 +858,13 @@
 		}
 	}
 
-	.eael-entry-title a{
-		font-size: 20px;
-		color: #383838;
-		font-weight: 500;
+	.eael-entry-title {
+		margin-top: 0;
+		a{
+			font-size: 20px;
+			color: #383838;
+			font-weight: 500;
+		}
 	}
 
 	.eael-entry-meta {
@@ -837,5 +879,9 @@
 		.eael-posted-on:before {
 			content: none !important;
 		}
+	}
+
+	.eael-post-elements-readmore-btn {
+		font-size: 14px;
 	}
 }
