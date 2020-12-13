@@ -431,9 +431,11 @@
 .eael-product-grid .woocommerce ul.products .product a.add_to_cart_button,
 .eael-product-grid .woocommerce ul.products .product span.price,
 .eael-product-grid .woocommerce ul.products .product h2.woocommerce-loop-product__title,
+.eael-product-grid .woocommerce ul.products .product .eael-wc-compare,
 .eael-post-grid .woocommerce ul.products .product a.add_to_cart_button,
 .eael-post-grid .woocommerce ul.products .product span.price,
-.eael-post-grid .woocommerce ul.products .product h2.woocommerce-loop-product__title {
+.eael-post-grid .woocommerce ul.products .product h2.woocommerce-loop-product__title,
+.eael-post-grid .woocommerce ul.products .product .eael-wc-compare {
   margin-left: 10px !important;
   margin-right: 10px !important;
 }
