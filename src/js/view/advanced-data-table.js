@@ -119,98 +119,114 @@ class advancedDataTable {
 	initTableSort(table, pagination, classCollection) {
 		if (table.classList.contains("ea-advanced-data-table-sortable")) {
 			table.addEventListener("click", (e) => {
+				let target = null;
+
 				if (e.target.tagName.toLowerCase() === "th") {
-					let index = e.target.cellIndex;
-					let currentPage = 1;
-					let startIndex = 1;
-					let endIndex = table.rows.length - 1;
-					let sort = "";
-					let classList = e.target.classList;
-					let collection = [];
-					let origTable = table.cloneNode(true);
+					target = e.target;
+				}
 
-					if (classList.contains("asc")) {
-						e.target.classList.remove("asc");
-						e.target.classList.add("desc");
-						sort = "desc";
-					} else if (classList.contains("desc")) {
-						e.target.classList.remove("desc");
-						e.target.classList.add("asc");
-						sort = "asc";
+				if (e.target.parentNode.tagName.toLowerCase() === "th") {
+					target = e.target.parentNode;
+				}
+
+				if (e.target.parentNode.parentNode.tagName.toLowerCase() === "th") {
+					target = e.target.parentNode.parentNode;
+				}
+
+				if (target === null) {
+					return;
+				}
+
+				let index = target.cellIndex;
+				let currentPage = 1;
+				let startIndex = 1;
+				let endIndex = table.rows.length - 1;
+				let sort = "";
+				let classList = target.classList;
+				let collection = [];
+				let origTable = table.cloneNode(true);
+
+				if (classList.contains("asc")) {
+					target.classList.remove("asc");
+					target.classList.add("desc");
+					sort = "desc";
+				} else if (classList.contains("desc")) {
+					target.classList.remove("desc");
+					target.classList.add("asc");
+					sort = "asc";
+				} else {
+					target.classList.add("asc");
+					sort = "asc";
+				}
+
+				if (pagination && pagination.innerHTML.length > 0) {
+					let paginationType = pagination.classList.contains(
+						"ea-advanced-data-table-pagination-button"
+					)
+						? "button"
+						: "select";
+
+					currentPage =
+						paginationType == "button"
+							? pagination.querySelector(
+									".ea-advanced-data-table-pagination-current"
+							  ).dataset.page
+							: pagination.querySelector("select").value;
+					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
+					endIndex =
+						endIndex - (currentPage - 1) * table.dataset.itemsPerPage >=
+						table.dataset.itemsPerPage
+							? currentPage * table.dataset.itemsPerPage
+							: endIndex;
+				}
+
+				// collect header class
+				classCollection[currentPage] = [];
+
+				table.querySelectorAll("th").forEach((el) => {
+					if (el.cellIndex != index) {
+						el.classList.remove("asc", "desc");
+					}
+
+					classCollection[currentPage].push(
+						el.classList.contains("asc")
+							? "asc"
+							: el.classList.contains("desc")
+							? "desc"
+							: ""
+					);
+				});
+
+				// collect table cells value
+				for (let i = startIndex; i <= endIndex; i++) {
+					let value;
+					let cell = table.rows[i].cells[index];
+
+					if (isNaN(parseInt(cell.innerText))) {
+						value = cell.innerText.toLowerCase();
 					} else {
-						e.target.classList.add("asc");
-						sort = "asc";
+						value = parseInt(cell.innerText);
 					}
 
-					if (pagination && pagination.innerHTML.length > 0) {
-						let paginationType = pagination.classList.contains(
-							"ea-advanced-data-table-pagination-button"
-						)
-							? "button"
-							: "select";
+					collection.push({ index: i, value });
+				}
 
-						currentPage =
-							paginationType == "button"
-								? pagination.querySelector(
-										".ea-advanced-data-table-pagination-current"
-								  ).dataset.page
-								: pagination.querySelector("select").value;
-						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
-						endIndex =
-							endIndex - (currentPage - 1) * table.dataset.itemsPerPage >=
-							table.dataset.itemsPerPage
-								? currentPage * table.dataset.itemsPerPage
-								: endIndex;
-					}
-
-					// collect header class
-					classCollection[currentPage] = [];
-
-					table.querySelectorAll("th").forEach((el) => {
-						if (el.cellIndex != index) {
-							el.classList.remove("asc", "desc");
-						}
-
-						classCollection[currentPage].push(
-							el.classList.contains("asc")
-								? "asc"
-								: el.classList.contains("desc")
-								? "desc"
-								: ""
-						);
+				// sort collection array
+				if (sort == "asc") {
+					collection.sort((x, y) => {
+						return x.value > y.value ? 1 : -1;
 					});
-
-					// collect table cells value
-					for (let i = startIndex; i <= endIndex; i++) {
-						let value;
-						let cell = table.rows[i].cells[index];
-
-						if (isNaN(parseInt(cell.innerText))) {
-							value = cell.innerText.toLowerCase();
-						} else {
-							value = parseInt(cell.innerText);
-						}
-
-						collection.push({ index: i, value });
-					}
-
-					// sort collection array
-					if (sort == "asc") {
-						collection.sort((x, y) => {
-							return x.value > y.value ? 1 : -1;
-						});
-					} else if (sort == "desc") {
-						collection.sort((x, y) => {
-							return x.value < y.value ? 1 : -1;
-						});
-					}
-
-					// sort table
-					collection.forEach((row, index) => {
-						table.rows[startIndex + index].innerHTML =
-							origTable.rows[row.index].innerHTML;
+				} else if (sort == "desc") {
+					collection.sort((x, y) => {
+						return x.value < y.value ? 1 : -1;
 					});
 				}
+
+				// sort table
+				collection.forEach((row, index) => {
+					table.rows[startIndex + index].innerHTML =
+						origTable.rows[row.index].innerHTML;
+				});
 			});
 		}
 	}
