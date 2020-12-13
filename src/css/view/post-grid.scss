@@ -698,7 +698,18 @@
 }
 
 .eael-post-grid-template-overlap-classic {
-
+	.eael-entry-wrapper{
+		&.vertical-align-top {
+			top: 0;
+		}
+		&.vertical-align-bottom {
+			bottom: 0;
+		}
+		&.vertical-align-center {
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
 }
 .eael-post-grid-template-overlap-modern {
 	.eael-entry-wrapper{
@@ -885,3 +896,9 @@
 		font-size: 14px;
 	}
 }
+
+//.eael-post-grid.eael-post-grid-template-overlap-modern {
+//	.eael-entry-wrapper .eael-entry-title a {
+//		color: red;
+//	}
+//}

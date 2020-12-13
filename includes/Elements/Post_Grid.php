@@ -297,6 +297,32 @@ class Post_Grid extends Widget_Base
 		    ]
 	    );
 
+	    $this->add_control(
+		    'eael_post_grid_vertical_align',
+		    [
+			    'label'   => __( 'Vertical Alignment', 'essential-addons-for-elementor-lite' ),
+			    'type'    => Controls_Manager::CHOOSE,
+			    'options' => [
+				    'top'    => [
+					    'title' => __( 'Top', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'eicon-v-align-top',
+				    ],
+				    'center' => [
+					    'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'eicon-v-align-middle',
+				    ],
+				    'bottom' => [
+					    'title' => __( 'Bottom', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'eicon-v-align-bottom',
+				    ],
+			    ],
+			    'default' => 'center',
+			    'toggle'  => true,
+			    'condition' => [
+				    'eael_dynamic_template_Layout' => ['overlap-classic'],
+			    ]
+		    ]
+	    );
 
 	    $this->add_control(
 		    'eael_post_grid_overlap_height',
@@ -314,35 +340,6 @@ class Post_Grid extends Widget_Base
 				    'eael_dynamic_template_Layout' => ['overlap-classic', 'overlap-modern']
 			    ],
                 'separator' => 'after',
-		    ]
-	    );
-
-	    $this->add_responsive_control(
-		    'eael_post_grid_meta_alignment',
-		    [
-			    'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::CHOOSE,
-			    'options' => [
-				    'flex-start' => [
-					    'title' => __('Top', 'essential-addons-for-elementor-lite'),
-					    'icon' => 'fa fa-align-left',
-				    ],
-				    'center' => [
-					    'title' => __('Center', 'essential-addons-for-elementor-lite'),
-					    'icon' => 'fa fa-align-center',
-				    ],
-				    'flex-end' => [
-					    'title' => __('Bottom', 'essential-addons-for-elementor-lite'),
-					    'icon' => 'fa fa-align-right',
-				    ],
-			    ],
-			    'default' => 'flex-start',
-			    'selectors' => [
-				    '{{WRAPPER}} .eael-grid-post .eael-entry-footer, {{WRAPPER}} .eael-grid-post .eael-entry-meta' => 'justify-content: {{VALUE}}',
-			    ],
-			    'condition' => [
-				    'eael_dynamic_template_Layout' => ['overlap-classic'],
-			    ]
 		    ]
 	    );
 
