@@ -205,7 +205,7 @@ class advancedDataTable {
 					if (isNaN(parseInt(cell.innerText))) {
 						value = cell.innerText.toLowerCase();
 					} else {
-						value = parseInt(cell.innerText);
+						value = parseFloat(cell.innerText);
 					}
 
 					collection.push({ index: i, value });
