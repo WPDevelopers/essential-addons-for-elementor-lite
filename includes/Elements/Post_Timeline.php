@@ -468,6 +468,6 @@ class Post_Timeline extends Widget_Base
 		    echo '</div>
 		</div>';
 
-        $this->print_load_more_button($settings, $args, 'free');
+//        $this->print_load_more_button($settings, $args, 'free');
     }
 }

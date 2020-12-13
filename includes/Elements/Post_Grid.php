@@ -304,10 +304,10 @@ class Post_Grid extends Widget_Base
 			    'type' => Controls_Manager::SLIDER,
 			    'size_units' => ['px'],
 			    'range' => [
-				    'px' => ['max' => 1, 'step' => 0.1],
+				    'px' => ['max' => 1, 'step' => 0.01],
 			    ],
 			    'default' => [
-				    'px' => 0.6,
+				    'size' => .5,
 			    ],
 			    'selectors' => [
 				    '{{WRAPPER}} .eael-post-grid-template-overlap-modern .overlap-bg, {{WRAPPER}} .eael-post-grid-template-overlap-classic .overlap-bg' => 'opacity: {{SIZE}};',
