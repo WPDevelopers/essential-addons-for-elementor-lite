@@ -157,8 +157,8 @@ trait Controls
 				    'condition' => [
 				    	'eael_dynamic_template_Layout' => [
 				    		'default',
-				    		'new-classic',
-				    		'new-modern',
+				    		'news-classic',
+				    		'news-modern',
 					    ],
 				    ]
 			    ]
@@ -167,14 +167,14 @@ trait Controls
 		    $wb->add_control(
 			    'posts_per_page_3',
 			    [
-				    'label' => __('Posts Per Page', 'essential-addons-for-elementor-lite'),
+				    'label' => __('Posts Per Page 3', 'essential-addons-for-elementor-lite'),
 				    'type' => Controls_Manager::NUMBER,
 				    'default' => '3',
 				    'condition' => [
 					    'eael_dynamic_template_Layout!' => [
 						    'default',
-						    'new-classic',
-						    'new-modern',
+						    'news-classic',
+						    'news-modern',
 					    ],
 				    ]
 			    ]

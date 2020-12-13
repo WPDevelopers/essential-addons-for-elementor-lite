@@ -942,7 +942,7 @@ class Post_Grid extends Widget_Base
                     '%' => ['max' => 100],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-post-grid:not(.eael-post-grid-template-overlap-modern).eael-grid-post-holder .eael-entry-wrapper' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-post-grid:not(.eael-post-grid-template-overlap-modern) .eael-grid-post-holder .eael-entry-wrapper' => 'height: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-post-grid-template-overlap-modern .eael-grid-post-holder:hover .eael-entry-wrapper .eael-entry-content'
                     => 'max-height: {{SIZE}}{{UNIT}};',
                 ],
