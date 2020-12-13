@@ -1,10 +1,10 @@
 === Essential Addons for Elementor ===
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, mahfuz01, nazsabuz, manzurahammed
 Tags: elementor, elements, addons, elementor addon, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
-Requires at least: 4.0
-Tested up to: 5.5
-Requires PHP: 5.4
-Stable tag: 4.3.7
+Requires at least: 5.0
+Tested up to: 5.6
+Requires PHP: 5.6
+Stable tag: 4.3.8
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -223,6 +223,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.3.8 - 10/12/2020 =
+- Fixed: EA Fancy Text & Adv. Data Table  | not working on WordPress 5.6
+- Fixed: EA Product Grid | Rating controller not working with Default Style
+- Fixed: EA Flip Box | Button icon not displaying
+- Added: EA Event Calendar | 24 Hours format option
+- Few minor bug fix and improvements
 
 = 4.3.7 - 19/11/2020 =
 - Fixed: Broken style if Object Cache is enabled

@@ -9,9 +9,9 @@ class advancedDataTable {
 
 	// init frontend features
 	initFrontend($scope, $) {
-		let table = $scope.context.querySelector(".ea-advanced-data-table");
-		let search = $scope.context.querySelector(".ea-advanced-data-table-search");
-		let pagination = $scope.context.querySelector(
+		let table = $scope[0].querySelector(".ea-advanced-data-table");
+		let search = $scope[0].querySelector(".ea-advanced-data-table-search");
+		let pagination = $scope[0].querySelector(
 			".ea-advanced-data-table-pagination"
 		);
 		let classCollection = {};
