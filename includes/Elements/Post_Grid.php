@@ -298,6 +298,27 @@ class Post_Grid extends Widget_Base
 	    );
 
 	    $this->add_control(
+		    'eael_post_grid_overlap_opacity',
+		    [
+			    'label' => esc_html__('Opacity', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SLIDER,
+			    'size_units' => ['px'],
+			    'range' => [
+				    'px' => ['max' => 1, 'step' => 0.1],
+			    ],
+			    'default' => [
+				    'px' => 0.6,
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-post-grid-template-overlap-modern .overlap-bg, {{WRAPPER}} .eael-post-grid-template-overlap-classic .overlap-bg' => 'opacity: {{SIZE}};',
+			    ],
+			    'condition' => [
+				    'eael_dynamic_template_Layout' => ['overlap-classic', 'overlap-modern']
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
 		    'eael_post_grid_vertical_align',
 		    [
 			    'label'   => __( 'Vertical Alignment', 'essential-addons-for-elementor-lite' ),
@@ -320,6 +341,20 @@ class Post_Grid extends Widget_Base
 			    'toggle'  => true,
 			    'condition' => [
 				    'eael_dynamic_template_Layout' => ['overlap-classic'],
+			    ]
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_post_grid_overlap_content_bg',
+		    [
+			    'label' => __('Content Background', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-entry-wrapper' => 'background-color: {{VALUE}}',
+			    ],
+			    'condition' => [
+				    'eael_dynamic_template_Layout' => ['overlap-modern']
 			    ]
 		    ]
 	    );
