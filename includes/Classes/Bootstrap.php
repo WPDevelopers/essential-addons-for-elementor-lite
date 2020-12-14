@@ -2,23 +2,23 @@
 
 namespace Essential_Addons_Elementor\Classes;
 
-use Essential_Addons_Elementor\Classes\WPDeveloper_Core_Installer;
-
 if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
 use Essential_Addons_Elementor\Classes\WPML\Eael_WPML;
-use \Essential_Addons_Elementor\Traits\Admin;
-use \Essential_Addons_Elementor\Traits\Controls;
-use \Essential_Addons_Elementor\Traits\Core;
-use \Essential_Addons_Elementor\Traits\Elements;
-use \Essential_Addons_Elementor\Traits\Enqueue;
-use \Essential_Addons_Elementor\Traits\Facebook_Feed;
-use \Essential_Addons_Elementor\Traits\Generator;
-use \Essential_Addons_Elementor\Traits\Helper;
-use \Essential_Addons_Elementor\Traits\Library;
-use \Essential_Addons_Elementor\Traits\Login_Registration;
+use Essential_Addons_Elementor\Traits\Admin;
+use Essential_Addons_Elementor\Traits\Core;
+use Essential_Addons_Elementor\Traits\Elements;
+use Essential_Addons_Elementor\Traits\Enqueue;
+use Essential_Addons_Elementor\Traits\Generator;
+use Essential_Addons_Elementor\Traits\Helper;
+use Essential_Addons_Elementor\Traits\Library;
+use Essential_Addons_Elementor\Traits\Login_Registration;
+use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
+use Essential_Addons_Elementor\Traits\Controls;
+use Essential_Addons_Elementor\Traits\Facebook_Feed;
+
 
 class Bootstrap
 {
@@ -31,6 +31,7 @@ class Bootstrap
     use Elements;
     use Eael_WPML;
     use Login_Registration;
+    use Woo_Product_Comparable;
     use Controls;
     use Facebook_Feed;
 
@@ -158,6 +159,8 @@ class Bootstrap
 
         add_action('wp_ajax_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
         add_action('wp_ajax_nopriv_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
+	    add_action( 'wp_ajax_nopriv_eael_product_grid', [$this, 'get_compare_table']);
+	    add_action( 'wp_ajax_eael_product_grid', [$this, 'get_compare_table']);
 
         //handle select2 ajax search
         add_action('wp_ajax_eael_select2_search_post', [$this, 'select2_ajax_posts_filter_autocomplete']);
