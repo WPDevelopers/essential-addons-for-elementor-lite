@@ -70,6 +70,9 @@ class Bootstrap
     // used to store custom js
     protected $custom_js_strings;
 
+    // modules
+    protected $installer;
+
     /**
      * Singleton instance
      *
@@ -91,6 +94,9 @@ class Bootstrap
      */
     private function __construct()
     {
+        // init modules
+        $this->installer = new WPDeveloper_Plugin_Installer();
+
         // before init hook
         do_action('eael/before_init');
 
