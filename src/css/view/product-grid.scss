@@ -35,6 +35,33 @@
                     display: none;
                     width: 1.5rem;
                 }
+
+                .star-rating {
+                    margin: 0 auto 5px;
+                    display: inline-block;
+                    float: none;
+                    height: 1em;
+                    width: 5.6em;
+                    font-size: 1em;
+                    line-height: 1em;
+
+                    &:before {
+                        content: '\f005\f005\f005\f005\f005';
+                        font-family: "Font Awesome 5 Free";
+                        font-weight: 400;
+                        opacity: 1;
+                    }
+
+                    span {
+                        display: inline-block;
+
+                        &:before {
+                            content: '\f005 \f005 \f005 \f005 \f005';
+                            font-family: "Font Awesome 5 Free";
+                            font-weight: 900;
+                        }
+                    }
+                }
             }
 
             &.products[class*='columns-'] li.product {
