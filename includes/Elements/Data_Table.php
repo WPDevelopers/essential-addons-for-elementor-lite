@@ -1141,8 +1141,8 @@ class Data_Table extends Widget_Base {
 
 	  		}
 	  		if( $content_row['eael_data_table_content_row_type'] == 'col' ) {
-	  			$target = $content_row['eael_data_table_content_row_title_link']['is_external'] ? 'target="_blank"' : '';
-	  			$nofollow = $content_row['eael_data_table_content_row_title_link']['nofollow'] ? 'rel="nofollow"' : '';
+	  			$target = !empty($content_row['eael_data_table_content_row_title_link']['is_external']) ? 'target="_blank"' : '';
+	  			$nofollow = !empty($content_row['eael_data_table_content_row_title_link']['nofollow']) ? 'rel="nofollow"' : '';
 
 	  			$table_tr_keys = array_keys( $table_tr );
 				  $last_key = end( $table_tr_keys );
@@ -1155,7 +1155,7 @@ class Data_Table extends Widget_Base {
 					'content_type'	=> $content_row['eael_data_table_content_type'],
 					'template'		=> $content_row['eael_primary_templates_for_tables'],
 	  				'title'			=> $tbody_content,
-	  				'link_url'		=> $content_row['eael_data_table_content_row_title_link']['url'],
+	  				'link_url'		=> !empty($content_row['eael_data_table_content_row_title_link']['url'])?$content_row['eael_data_table_content_row_title_link']['url']:'',
 	  				'link_target'	=> $target,
 	  				'nofollow'		=> $nofollow,
 					'colspan'		=> $content_row['eael_data_table_content_row_colspan'],
