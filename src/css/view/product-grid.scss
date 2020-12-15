@@ -1899,9 +1899,9 @@
 
         .eael-product-wrap {
 
-            @media only screen and (min-width: 768px) {
+            //@media only screen and (min-width: 768px) {
                 display: flex;
-            }
+            //}
 
             &:hover {
                 .icons-wrap {
@@ -2158,6 +2158,11 @@
         grid-template-columns: repeat(6, 1fr);
     }
 
+    // list
+    .eael-product-list-column-tablet-2 .eael-product-grid .woocommerce ul.products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     // Masonry
     .eael-product-grid-column-tablet-1 .eael-product-grid.masonry .woocommerce ul.products li.product {
         width: 100%;
@@ -2221,6 +2226,28 @@
     .woocommerce
     ul.products {
         grid-template-columns: repeat(6, 1fr);
+    }
+
+    // list
+    .eael-product-list-column-mobile-2 .eael-product-grid .woocommerce ul.products {
+        grid-template-columns: repeat(2, 1fr);
+
+        .eael-product-wrap {
+            flex-direction: column;
+
+            .product-image-wrap,
+            .product-details-wrap {
+                width: 100%;
+            }
+
+            .product-image-wrap {
+                margin-bottom: 15px;
+            }
+            .product-details-wrap {
+                padding: 0;
+                margin: 0;
+            }
+        }
     }
 
     // Masonry
