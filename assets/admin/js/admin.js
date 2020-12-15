@@ -329,29 +329,77 @@
 		});
 	});
 
-	// install plugin
-	$(document).on("click", ".ea-button-install-plugin", function (ev) {
+	// install/activate plugin
+	$(document).on("click", ".wpdeveloper-plugin-installer", function (ev) {
 		ev.preventDefault();
 
 		var button = $(this);
+		var action = $(this).data("action");
 		var slug = $(this).data("slug");
+		var basename = $(this).data("basename");
 
-		button.text("Installing...");
+		if ($.active) {
+			button.text("Waiting...").attr("disabled", true);
 
-		$.ajax({
-			url: localize.ajaxurl,
-			type: "POST",
-			data: {
-				action: "wpdeveloper_install_plugin",
-				security: localize.nonce,
-				slug: slug,
-			},
-			success: function (response) {
-				console.log(response);
-			},
-			error: function (err) {
-				console.log(response);
-			},
-		});
+			setInterval(function () {
+				if (!$.active) {
+					button.attr("disabled", false).trigger("click");
+				}
+			}, 1000);
+		}
+
+		if (action == "install" && !$.active) {
+			button.text("Installing...").attr("disabled", true);
+
+			$.ajax({
+				url: localize.ajaxurl,
+				type: "POST",
+				data: {
+					action: "wpdeveloper_install_plugin",
+					security: localize.nonce,
+					slug: slug,
+				},
+				success: function (response) {
+					if (response.success) {
+						button.text("Activated");
+						button.data("action", null);
+					} else {
+						button.text("Install");
+						alert(response.data);
+					}
+
+					button.attr("disabled", false);
+				},
+				error: function (err) {
+					console.log(err.responseJSON);
+				},
+			});
+		} else if (action == "activate" && !$.active) {
+			button.text("Activating...").attr("disabled", true);
+
+			$.ajax({
+				url: localize.ajaxurl,
+				type: "POST",
+				data: {
+					action: "wpdeveloper_activate_plugin",
+					security: localize.nonce,
+					basename: basename,
+				},
+				success: function (response) {
+					if (response.success) {
+						button.text("Activated");
+						button.data("action", null);
+					} else {
+						button.text("Activate");
+						alert(response.data);
+					}
+
+					button.attr("disabled", false);
+				},
+				error: function (err) {
+					console.log(err.responseJSON);
+				},
+			});
+		}
 	});
 })(jQuery);

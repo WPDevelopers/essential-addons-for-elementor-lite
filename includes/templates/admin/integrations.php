@@ -8,31 +8,17 @@ $integrations = [
         'desc' => 'Let the visitors know about your special offers, deals, announcement.',
     ],
     [
-        'slug' => 'notificationx',
-        'basename' => 'notificationx/notificationx.php',
+        'slug' => 'easyjobs',
+        'basename' => 'easyjobs/easyjobs.php',
         'logo' => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
-        'title' => 'NotificationX',
+        'title' => 'EasyJobs',
         'desc' => 'Let the visitors know about your special offers, deals, announcement.',
     ],
     [
-        'slug' => 'notificationx',
-        'basename' => 'notificationx/notificationx.php',
+        'slug' => 'team-member-block',
+        'basename' => 'team-member-block/team-member-block.php',
         'logo' => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
-        'title' => 'NotificationX',
-        'desc' => 'Let the visitors know about your special offers, deals, announcement.',
-    ],
-    [
-        'slug' => 'notificationx',
-        'basename' => 'notificationx/notificationx.php',
-        'logo' => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
-        'title' => 'NotificationX',
-        'desc' => 'Let the visitors know about your special offers, deals, announcement.',
-    ],
-    [
-        'slug' => 'notificationx',
-        'basename' => 'notificationx/notificationx.php',
-        'logo' => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
-        'title' => 'NotificationX',
+        'title' => 'Team Member Block',
         'desc' => 'Let the visitors know about your special offers, deals, announcement.',
     ],
 ];
@@ -52,9 +38,13 @@ $integrations = [
                             <p class="eael-admin-block-integrations-text"><?php echo $plugin['desc']; ?></p>
                             <div class="eael-admin-block-integrations-btn-wrap">
                                 <?php if ($this->installer->get_local_plugin_data($plugin['basename']) === false) {?>
-                                    <a href="#" class="ea-button ea-button-install-plugin" data-slug="<?php echo $plugin['slug']; ?>"><?php _e('Install Plugin', 'essential-addons-for-elementor-lite');?></a>
+                                    <a href="#" class="ea-button wpdeveloper-plugin-installer" data-action="install" data-slug="<?php echo $plugin['slug']; ?>"><?php _e('Install', 'essential-addons-for-elementor-lite');?></a>
                                 <?php } else {?>
-                                    <a href="#" class="ea-button"><?php _e('Plugin Installed', 'essential-addons-for-elementor-lite');?></a>
+                                    <?php if (is_plugin_active($plugin['basename'])) {?>
+                                        <a href="#" class="ea-button wpdeveloper-plugin-installer"><?php _e('Activated', 'essential-addons-for-elementor-lite');?></a>
+                                    <?php } else {?>
+                                        <a href="#" class="ea-button wpdeveloper-plugin-installer" data-action="activate" data-basename="<?php echo $plugin['basename']; ?>"><?php _e('Activate', 'essential-addons-for-elementor-lite');?></a>
+                                    <?php }?>
                                 <?php }?>
                             </div>
                         </div>
