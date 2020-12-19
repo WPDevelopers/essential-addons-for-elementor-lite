@@ -550,8 +550,22 @@ class Product_Grid extends Widget_Base
     {
         $this->start_controls_section('eael_product_grid_load_more_section', [
             'label' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
-            'condition' => [
-                'show_pagination!' => 'true',
+            'conditions' => [
+                'relation' => 'or',
+                'terms' => [
+                    [
+                        'name' => 'eael_product_grid_layout',
+                        'operator' => 'in',
+                        'value' => [
+                            'masonry',
+                        ],
+                    ],
+                    [
+                        'name' => 'show_pagination',
+                        'operator' => '!=',
+                        'value' => 'true'
+                    ],
+                ],
             ],
         ]);
 
