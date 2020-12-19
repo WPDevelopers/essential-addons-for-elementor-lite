@@ -5,6 +5,8 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly.
 
+use \WP_Error;
+
 class WPDeveloper_Plugin_Installer
 {
     public function __construct()
@@ -14,6 +16,12 @@ class WPDeveloper_Plugin_Installer
         add_action('wp_ajax_wpdeveloper_activate_plugin', [$this, 'ajax_activate_plugin']);
     }
 
+    /**
+     * get_local_plugin_data
+     *
+     * @param  mixed $basename
+     * @return array|false
+     */
     public function get_local_plugin_data($basename = '')
     {
         if (empty($basename)) {
@@ -33,10 +41,16 @@ class WPDeveloper_Plugin_Installer
         return $plugins[$basename];
     }
 
+    /**
+     * get_remote_plugin_data
+     *
+     * @param  mixed $slug
+     * @return mixed array|WP_Error
+     */
     public function get_remote_plugin_data($slug = '')
     {
         if (empty($slug)) {
-            return;
+            return new WP_Error('empty_arg', __('Argument should not be empty.'));
         }
 
         $response = wp_remote_post(
@@ -55,16 +69,23 @@ class WPDeveloper_Plugin_Installer
         );
 
         if (is_wp_error($response)) {
-            return $response->get_error_message();
+            return $response;
         }
 
         return unserialize(wp_remote_retrieve_body($response));
     }
 
+    /**
+     * install_plugin
+     *
+     * @param  mixed $slug
+     * @param  bool $active
+     * @return mixed bool|WP_Error
+     */
     public function install_plugin($slug = '', $active = true)
     {
         if (empty($slug)) {
-            return;
+            return new WP_Error('empty_arg', __('Argument should not be empty.'));
         }
 
         include_once ABSPATH . 'wp-admin/includes/file.php';
@@ -73,14 +94,18 @@ class WPDeveloper_Plugin_Installer
 
         $plugin_data = $this->get_remote_plugin_data($slug);
 
-        if (!isset($plugin_data->download_link)) {
-            return;
+        if (is_wp_error($plugin_data)) {
+            return $plugin_data;
         }
 
         $upgrader = new \Plugin_Upgrader(new \Automatic_Upgrader_Skin());
 
         // install plugin
         $install = $upgrader->install($plugin_data->download_link);
+
+        if (is_wp_error($install)) {
+            return $install;
+        }
 
         // activate plugin
         if ($install === true && $active) {
@@ -96,10 +121,16 @@ class WPDeveloper_Plugin_Installer
         return $install;
     }
 
+    /**
+     * upgrade_plugin
+     *
+     * @param  mixed $basename
+     * @return mixed bool|WP_Error
+     */
     public function upgrade_plugin($basename = '')
     {
         if (empty($slug)) {
-            return;
+            return new WP_Error('empty_arg', __('Argument should not be empty.'));
         }
 
         include_once ABSPATH . 'wp-admin/includes/file.php';
@@ -116,11 +147,8 @@ class WPDeveloper_Plugin_Installer
     {
         check_ajax_referer('essential-addons-elementor', 'security');
 
-        if (!isset($_POST['slug'])) {
-            wp_send_json_error(__('Plugin name not defined.', 'essential-addons-for-elementor-lite'));
-        }
-
-        $result = $this->install_plugin($_POST['slug']);
+        $slug = isset($_POST['slug']) ? $_POST['slug'] : '';
+        $result = $this->install_plugin($slug);
 
         if (is_wp_error($result)) {
             wp_send_json_error($result->get_error_message());
@@ -133,11 +161,8 @@ class WPDeveloper_Plugin_Installer
     {
         check_ajax_referer('essential-addons-elementor', 'security');
 
-        if (!isset($_POST['basename'])) {
-            wp_send_json_error(__('Plugin name not defined.', 'essential-addons-for-elementor-lite'));
-        }
-
-        $result = $this->upgrade_plugin($_POST['basename']);
+        $basename = isset($_POST['basename']) ? $_POST['basename'] : '';
+        $result = $this->upgrade_plugin($basename);
 
         if (is_wp_error($result)) {
             wp_send_json_error($result->get_error_message());
@@ -150,14 +175,15 @@ class WPDeveloper_Plugin_Installer
     {
         check_ajax_referer('essential-addons-elementor', 'security');
 
-        if (!isset($_POST['basename'])) {
-            wp_send_json_error(__('Plugin name not defined.', 'essential-addons-for-elementor-lite'));
-        }
-
-        $result = \activate_plugin($_POST['basename'], '', false, true);
+        $basename = isset($_POST['basename']) ? $_POST['basename'] : '';
+        $result = activate_plugin($basename, '', false, true);
 
         if (is_wp_error($result)) {
             wp_send_json_error($result->get_error_message());
+        }
+
+        if ($result === false) {
+            wp_send_json_error(__('Plugin couldn\'t activated.', 'essential-addons-for-elementor-lite'));
         }
 
         wp_send_json_success(__('Plugin activated successfully!', 'essential-addons-for-elementor-lite'));
