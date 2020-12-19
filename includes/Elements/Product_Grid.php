@@ -1792,6 +1792,7 @@ class Product_Grid extends Widget_Base
                 'default' => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-grid .eael-product-wrap .icons-wrap li a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-compare-icon' => 'fill: {{VALUE}};',
                 ],
             ]
         );
