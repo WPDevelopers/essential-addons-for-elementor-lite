@@ -1576,7 +1576,7 @@ class Product_Grid extends Widget_Base
             ]
         );
 
-        $this->add_responsive_control(
+        $this->add_control(
             'eael_product_sale_badge_alignment',
             [
                 'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
