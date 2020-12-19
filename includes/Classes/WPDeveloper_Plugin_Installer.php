@@ -154,7 +154,7 @@ class WPDeveloper_Plugin_Installer
             wp_send_json_error($result->get_error_message());
         }
 
-        wp_send_json_success(__('Plugin installed successfully!', 'essential-addons-for-elementor-lite'));
+        wp_send_json_success(__('Plugin is installed successfully!', 'essential-addons-for-elementor-lite'));
     }
 
     public function ajax_upgrade_plugin()
@@ -168,7 +168,7 @@ class WPDeveloper_Plugin_Installer
             wp_send_json_error($result->get_error_message());
         }
 
-        wp_send_json_success(__('Plugin upgraded successfully!', 'essential-addons-for-elementor-lite'));
+        wp_send_json_success(__('Plugin is updated successfully!', 'essential-addons-for-elementor-lite'));
     }
 
     public function ajax_activate_plugin()
@@ -183,9 +183,9 @@ class WPDeveloper_Plugin_Installer
         }
 
         if ($result === false) {
-            wp_send_json_error(__('Plugin couldn\'t activated.', 'essential-addons-for-elementor-lite'));
+            wp_send_json_error(__('Plugin couldn\'t be activated.', 'essential-addons-for-elementor-lite'));
         }
 
-        wp_send_json_success(__('Plugin activated successfully!', 'essential-addons-for-elementor-lite'));
+        wp_send_json_success(__('Plugin is activated successfully!', 'essential-addons-for-elementor-lite'));
     }
 }
