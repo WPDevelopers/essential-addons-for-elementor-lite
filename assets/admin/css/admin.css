@@ -542,7 +542,7 @@ textarea.eael-form-control {
 	background: #ff5544;
 }
 
-.eael-admin-block-content .ea-button {
+.ea-button {
 	font-size: 13px;
 	border-radius: 3px;
 	background-image: -webkit-linear-gradient(
@@ -558,9 +558,9 @@ textarea.eael-form-control {
 	-webkit-box-shadow: 0px 14px 15px 0px rgba(0, 5, 41, 0.08);
 	box-shadow: 0px 14px 15px 0px rgba(0, 5, 41, 0.08);
 	box-shadow: 0px 14px 15px 0px rgba(0, 5, 41, 0.08);
-	color: #fff;
+	color: #fff !important;
 	display: inline-block;
-	padding: 12px 22px 14px;
+	padding: 12px 22px;
 	text-decoration: none;
 	line-height: 1;
 	transition: all 0.3s;
@@ -708,7 +708,39 @@ textarea.eael-form-control {
 	transition: all 0.3s;
 }
 
-/* integrations */
+/* integrations - general */
+.eael-admin-block-templately-large {
+	position: relative;
+	background: transparent;
+	box-shadow: none;
+	padding: 0;
+	margin: 10px 10px 25px;
+}
+.eael-admin-block-templately-overlay {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 0 20px;
+}
+.eael-admin-block-templately-overlay-inner {
+	max-width: 230px;
+}
+.eael-admin-block-templately-logo {
+	width: 120px;
+	height: auto;
+	margin-bottom: 5px;
+}
+.eael-admin-block-templately-desc {
+	line-height: 19px;
+	margin-bottom: 10px !important;
+}
+
+/* integrations - page */
 #integrations .row {
 	justify-content: flex-start;
 }
