@@ -564,6 +564,8 @@ textarea.eael-form-control {
 	text-decoration: none;
 	line-height: 1;
 	transition: all 0.3s;
+	cursor: pointer;
+	user-select: none;
 }
 
 .ea-button:hover {

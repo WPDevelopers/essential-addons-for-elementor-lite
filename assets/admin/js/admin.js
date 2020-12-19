@@ -338,7 +338,7 @@
 		var slug = $(this).data("slug");
 		var basename = $(this).data("basename");
 
-		if ($.active) {
+		if ($.active && typeof action != "undefined") {
 			button.text("Waiting...").attr("disabled", true);
 
 			setInterval(function () {
