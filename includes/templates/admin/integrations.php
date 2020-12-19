@@ -38,12 +38,12 @@ $integrations = [
                             <p class="eael-admin-block-integrations-text"><?php echo $plugin['desc']; ?></p>
                             <div class="eael-admin-block-integrations-btn-wrap">
                                 <?php if ($this->installer->get_local_plugin_data($plugin['basename']) === false) {?>
-                                    <a href="#" class="ea-button wpdeveloper-plugin-installer" data-action="install" data-slug="<?php echo $plugin['slug']; ?>"><?php _e('Install', 'essential-addons-for-elementor-lite');?></a>
+                                    <a class="ea-button wpdeveloper-plugin-installer" data-action="install" data-slug="<?php echo $plugin['slug']; ?>"><?php _e('Install', 'essential-addons-for-elementor-lite');?></a>
                                 <?php } else {?>
                                     <?php if (is_plugin_active($plugin['basename'])) {?>
-                                        <a href="#" class="ea-button wpdeveloper-plugin-installer"><?php _e('Activated', 'essential-addons-for-elementor-lite');?></a>
+                                        <a class="ea-button wpdeveloper-plugin-installer"><?php _e('Activated', 'essential-addons-for-elementor-lite');?></a>
                                     <?php } else {?>
-                                        <a href="#" class="ea-button wpdeveloper-plugin-installer" data-action="activate" data-basename="<?php echo $plugin['basename']; ?>"><?php _e('Activate', 'essential-addons-for-elementor-lite');?></a>
+                                        <a class="ea-button wpdeveloper-plugin-installer" data-action="activate" data-basename="<?php echo $plugin['basename']; ?>"><?php _e('Activate', 'essential-addons-for-elementor-lite');?></a>
                                     <?php }?>
                                 <?php }?>
                             </div>
