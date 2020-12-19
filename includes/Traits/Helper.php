@@ -464,6 +464,8 @@ trait Helper
         if (!isset($this->page_id)) {
             if ( Plugin::$instance->documents->get_current() ) {
                 $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
+            }else{
+                $this->page_id = null;
             }
         }
         $this->add_render_attribute('load-more', [
