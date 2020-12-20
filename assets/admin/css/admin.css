@@ -5,6 +5,205 @@
  */
 
 /* General Style */
+.eael-setup-wizard {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+.eael-setup-wizard li {
+    position: relative;
+}
+.eael-setup-wizard li:first-child:before {
+    content: none;
+}
+.eael-setup-wizard li:last-child:after {
+    content: none;
+}
+.eael-setup-wizard li.active:after {
+    background-color: #a16bff;
+}
+
+.eael-setup-wizard li.active .setup-box {
+    border: 1px solid #a16bff;
+}
+.eael-setup-wizard li.active .setup-box .icon svg {
+    fill: #a16bff;
+}
+.setup-box {
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: 1px solid #ebebeb;
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+    width: 50%;
+    position: relative;
+    z-index: 1;
+}
+
+.setup-box:before {
+    background-color: #d3c9f7;
+    color: #7866FF;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 50px;
+}
+.eael-setup-wizard li:after,
+.eael-setup-wizard li:before {
+    content: "";
+    width: 50%;
+    height: 7px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 50%;
+    z-index: 0;
+}
+
+.eael-setup-wizard li:after {
+    right: 0;
+}
+.eael-setup-wizard li:before {
+    left: 0;
+}
+
+.setup-box .icon svg{
+    width: 30px;
+}
+
+.setup-box .name {
+    font-size: 14px;
+    line-height: 1.2em;
+    color: #4e4362;
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+.setup-content {
+    display: none;
+}
+
+.setup-content.active {
+    display: block;
+}
+
+/* config */
+.eael-input-group {
+
+    display: block;
+
+    position: relative;
+    border-radius: 5px;
+}
+
+.eael-input-group label {
+    padding: 30px;
+    display: block;
+    text-align: left;
+    color: #3C454C;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    transition: color 200ms ease-in;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: #fff;
+    margin: 10px 0;
+}
+
+/*.eael-input-group label:before {*/
+/*     width: 10px;*/
+/*     height: 10px;*/
+/*     border-radius: 50%;*/
+/*     content: '';*/
+/*     background-color: #5562eb;*/
+/*     position: absolute;*/
+/*     left: 50%;*/
+/*     top: 50%;*/
+/*     transform: translate(-50%, -50%) scale3d(1, 1, 1);*/
+/*     transition: all 300ms cubic-bezier(0.4, 0.0, 0.2, 1);*/
+/*     opacity: 0;*/
+/*     z-index: -1;*/
+/*}*/
+
+/*.eael-input-group label:after {*/
+/*     width: 32px;*/
+/*     height: 32px;*/
+/*     content: '';*/
+/*     border: 2px solid #D1D7DC;*/
+/*     background-color: #fff;*/
+/*     background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");*/
+/*     background-repeat: no-repeat;*/
+/*     background-position: 2px 3px;*/
+/*     border-radius: 50%;*/
+/*     z-index: 2;*/
+/*     position: absolute;*/
+/*     right: 30px;*/
+/*     top: 50%;*/
+/*     transform: translateY(-50%);*/
+/*     cursor: pointer;*/
+/*     transition: all 200ms ease-in;*/
+/* }*/
+
+/*.eael-input-group input:checked ~ label {*/
+/*    color: #fff;*/
+/*}*/
+
+/*.eael-input-group input:checked ~ label:before {*/
+/*     transform: translate(-50%, -50%) scale3d(56, 56, 1);*/
+/*     opacity: 1;*/
+/*}*/
+
+/*.eael-input-group input:checked ~ label:after {*/
+/*     background-color: #54E0C7;*/
+/*     border-color: #54E0C7;*/
+/* }*/
+
+.eael-input-group input {
+    /*width: 32px;*/
+    /*height: 32px;*/
+    /*order: 1;*/
+    /*z-index: 2;*/
+    /*position: absolute;*/
+    /*right: 30px;*/
+    /*top: 50%;*/
+    /*transform: translateY(-50%);*/
+    /*cursor: pointer;*/
+    display: none;
+}
+.eael-input-group input:checked ~ label {
+    box-shadow: 0px 40px 30px rgba(0,1,35,0.12);
+}
+.eael-input-group input:checked ~ label .eael-radio-circle {
+    border-color: #6e2dcf;
+    box-shadow: 0px 40px 30px rgba(0,1,35,0.12);
+}
+.eael-input-group input:checked ~ label .eael-radio-circle:before {
+    content: '';
+    background: #6e2dcf;
+    border-radius: 50%;
+    height: 10px;
+    left: 2px;
+    pointer-events: none;
+    position: absolute;
+    top: 2px;
+    transition: transform 400ms cubic-bezier(0.175, 0.885, 0.32, 1.2);
+    /*transform: translateY(-50px);*/
+    width: 10px;
+}
+.eael-radio-circle {
+    border: 2px solid #cccccc;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 14px;
+    position: absolute;
+    transition: border-color 300ms;
+    width: 14px;
+}
+.eael-radio-text {
+    margin-left: 35px;
+}
+
+/*end*/
 .eael-settings-wrap {
     padding: 15px;
 }
