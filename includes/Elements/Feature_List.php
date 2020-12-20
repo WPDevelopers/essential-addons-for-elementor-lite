@@ -10,7 +10,7 @@ if ( !defined( 'ABSPATH' ) ) {
 use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Repeater;
+use Elementor\Icons_Manager;use \Elementor\Repeater;
 use \Elementor\Scheme_Color;
 use \Elementor\Scheme_Typography;
 use \Elementor\Utils;
@@ -542,6 +542,7 @@ class Feature_List extends Widget_Base {
                 'default'   => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-feature-list-items .eael-feature-list-icon' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-feature-list-items .eael-feature-list-icon svg' => 'fill: {{VALUE}};',
                 ],
                 'separator' => 'before',
             ]
@@ -928,7 +929,6 @@ class Feature_List extends Widget_Base {
                 }
                 $feature_icon_tag = 'a';
             }
-            // var_dump( $settings['eael_feature_list_connector_type'] );
             ?>
 									                <li class="eael-feature-list-item">
 									                    <?php if ( 'yes' == $settings['eael_feature_list_connector'] ): ?>
@@ -943,24 +943,18 @@ class Feature_List extends Widget_Base {
 
 								<<?php echo $feature_icon_tag . ' ' . $this->get_render_attribute_string( 'eael_feature_list_icon' . $i ) . $this->get_render_attribute_string( 'eael_feature_list_link' . $i ) . $icon_bg; ?>>
 
-									<?php
-if ( $item['eael_feature_list_icon_type'] == 'icon' && $feature_has_icon ) {
+		<?php
+            if ( $item['eael_feature_list_icon_type'] == 'icon' && $feature_has_icon ) {
 
             if ( empty( $item['eael_feature_list_icon'] ) || isset( $item['__fa4_migrated']['eael_feature_list_icon_new'] ) ) {
-
-                if ( isset( $item['eael_feature_list_icon_new']['value']['url'] ) ) {
-                    echo '<img src="' . esc_url( $item['eael_feature_list_icon_new']['value']['url'] ) . '" alt="' . esc_attr( get_post_meta( $item['eael_feature_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true ) ) . '"/>';
-                } else {
-                    echo '<i class="' . esc_attr( $item['eael_feature_list_icon_new']['value'] ) . '" aria-hidden="true"' . $icon_color . '></i>';
-                }
-
+                Icons_Manager::render_icon( $item['eael_feature_list_icon_new'], [ 'aria-hidden' => 'true', 'fill' => 'red' ] );
             } else {
                 echo '<i class="' . esc_attr( $item['eael_feature_list_icon'] ) . '" aria-hidden="true"></i>';
             }
         }
-        ?>
 
-									<?php if ( $item['eael_feature_list_icon_type'] == 'image' ) {
+
+            if ( $item['eael_feature_list_icon_type'] == 'image' ) {
             $this->add_render_attribute( 'feature_list_image' . $i, [
                 'src'   => esc_url( $item['eael_feature_list_img']['url'] ),
                 'class' => 'eael-feature-list-img',

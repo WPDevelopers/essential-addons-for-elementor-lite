@@ -128,7 +128,7 @@ $enable-prefers-reduced-motion-media-query: true !default;
                     align-items: center;
                     justify-content: center;
 
-                    i {
+                    svg, i {
                         width: 1em;
                         height: 1em;
                         position: relative;
