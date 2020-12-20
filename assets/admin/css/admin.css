@@ -709,12 +709,15 @@ textarea.eael-form-control {
 }
 
 /* integrations - general */
-.eael-admin-block-templately-large {
+.eael-admin-block-templately {
 	position: relative;
 	background: transparent;
 	box-shadow: none;
 	padding: 0;
 	margin: 10px 10px 25px;
+}
+.eael-admin-sidebar .eael-admin-block-templately {
+	margin: inherit;
 }
 .eael-admin-block-templately-overlay {
 	position: absolute;
@@ -726,6 +729,10 @@ textarea.eael-form-control {
 	align-items: center;
 	justify-content: flex-end;
 	padding: 0 20px;
+}
+.eael-admin-sidebar .eael-admin-block-templately-overlay {
+	align-items: flex-start;
+	padding: 15px 20px;
 }
 .eael-admin-block-templately-overlay-inner {
 	max-width: 230px;

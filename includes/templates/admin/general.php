@@ -6,7 +6,7 @@
                     <?php do_action('add_admin_license_markup'); ?>
                     
                     <?php if (!defined('EAEL_PRO_PLUGIN_BASENAME') && !is_plugin_active('templately/templately.php')) {?>
-                        <div class="eael-admin-block-large eael-admin-block-banner eael-admin-block-templately-large">
+                        <div class="eael-admin-block-large eael-admin-block-templately">
                             <img class="eael-preview-img" src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/templately_promotion_lite.jpg'; ?>" alt="templately banner">
                             <div class="eael-admin-block-templately-overlay">
                                 <div class="eael-admin-block-templately-overlay-inner">
@@ -16,7 +16,7 @@
                                     <?php if ($this->installer->get_local_plugin_data('templately/templately.php') === false) {?>
                                         <a class="ea-button wpdeveloper-plugin-installer" data-action="install" data-slug="templately"><?php _e('Install Templately', 'essential-addons-for-elementor-lite');?></a>
                                     <?php } else {?>
-                                        <a class="ea-button wpdeveloper-plugin-installer" data-action="activate" data-basename="templately/templately.php"><?php _e('Activate', 'essential-addons-for-elementor-lite');?></a>
+                                        <a class="ea-button wpdeveloper-plugin-installer" data-action="activate" data-basename="templately/templately.php"><?php _e('Activate Templately', 'essential-addons-for-elementor-lite');?></a>
                                     <?php }?>
                                 </div>
                             </div>
@@ -90,8 +90,8 @@
             </div><!--admin block-wrapper end-->
         </div>
         <div class="eael-admin-sidebar">
-            <?php if (defined('EAEL_PRO_PLUGIN_BASENAME')) {?>
-                <div class="eael-sidebar-block eael-admin-block-banner eael-admin-block-templately-large">
+            <?php if (defined('EAEL_PRO_PLUGIN_BASENAME') && !is_plugin_active('templately/templately.php')) {?>
+                <div class="eael-sidebar-block eael-admin-block-templately">
                     <img class="eael-preview-img" src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/templately_promotion_pro.jpg'; ?>" alt="templately banner">
                     <div class="eael-admin-block-templately-overlay">
                         <div class="eael-admin-block-templately-overlay-inner">
@@ -101,11 +101,7 @@
                             <?php if ($this->installer->get_local_plugin_data('templately/templately.php') === false) {?>
                                 <a class="ea-button wpdeveloper-plugin-installer" data-action="install" data-slug="templately"><?php _e('Install Templately', 'essential-addons-for-elementor-lite');?></a>
                             <?php } else {?>
-                                <?php if (is_plugin_active('templately/templately.php')) {?>
-                                    <a class="ea-button wpdeveloper-plugin-installer"><?php _e('Activated', 'essential-addons-for-elementor-lite');?></a>
-                                <?php } else {?>
-                                    <a class="ea-button wpdeveloper-plugin-installer" data-action="activate" data-basename="templately/templately.php"><?php _e('Activate', 'essential-addons-for-elementor-lite');?></a>
-                                <?php }?>
+                                <a class="ea-button wpdeveloper-plugin-installer" data-action="activate" data-basename="templately/templately.php"><?php _e('Activate Templately', 'essential-addons-for-elementor-lite');?></a>
                             <?php }?>
                         </div>
                     </div>
