@@ -2104,6 +2104,9 @@
   font-size: 18px;
   line-height: 42px;
 }
+.eael-product-grid.grid .eael-product-wrap .icons-wrap li a svg, .eael-product-grid.masonry .eael-product-wrap .icons-wrap li a svg {
+  width: 18px;
+}
 .eael-product-grid.grid .eael-product-wrap .product-details-wrap, .eael-product-grid.masonry .eael-product-wrap .product-details-wrap {
   padding: 10px;
 }
@@ -2290,6 +2293,9 @@
 .eael-product-grid.list .eael-product-wrap .icons-wrap li a i {
   position: relative;
   font-size: 18px;
+}
+.eael-product-grid.list .eael-product-wrap .icons-wrap li a svg {
+  width: 18px;
 }
 .eael-product-grid.list .eael-product-wrap .icons-wrap li a.button {
   font-size: 15px;

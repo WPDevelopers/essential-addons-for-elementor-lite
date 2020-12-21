@@ -2824,6 +2824,8 @@ class Product_Grid extends Widget_Base
             return;
         }
         $settings = $this->get_settings_for_display();
+        // normalize for load more fix
+        $settings['layout_mode'] = $settings["eael_product_grid_layout"];
         $widget_id = $this->get_id();
         $settings['eael_widget_id'] = $widget_id;
         $args = [
