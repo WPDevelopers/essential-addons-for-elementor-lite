@@ -22,7 +22,7 @@ trait Admin
             __('Essential Addons', 'essential-addons-for-elementor-lite'),
             'manage_options',
             'eael-settings',
-            [$this, 'admin_settings_page'],
+            [$this, 'setup_wizard'],
             $this->safe_url(EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-white.svg'),
             '58.6'
         );
@@ -177,22 +177,13 @@ trait Admin
         }
     }
 
-    /**
-     * Create settings page.
-     *
-     * @since 1.1.2
-     */
-    public function admin_settings_page()
-    {
-        ?>
-        <div class="eael-settings-wrap">
-            <div class="eael-setup-wizard-wrap">
+    public function setup_wizard(){ ?>
+	    <div class="eael-setup-wizard-wrap">
                 <ul class="eael-setup-wizard">
                     <li class="step">
-                        <div class="setup-box">
-                            <div class="icon">
-                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                     viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                        <div class="icon">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                 viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
                                     <g>
                                         <path class="st0" d="M50,25c0-1.9-1.3-3.8-3-4.4c-1.6-0.6-3.2-2-3.7-3.1c-0.5-1.1-0.3-3.3,0.4-4.9c0.8-1.6,0.3-3.9-1-5.2
                                             c-1.3-1.3-3.7-1.8-5.2-1c-1.6,0.8-3.7,0.9-4.9,0.4C31.5,6.2,30,4.6,29.4,3c-0.6-1.7-2.6-3-4.4-3c-1.9,0-3.8,1.3-4.4,3
@@ -204,94 +195,73 @@ trait Admin
                                             c0-5.1,4.1-9.2,9.2-9.2c5.1,0,9.2,4.1,9.2,9.2C34.2,30.1,30.1,34.2,25,34.2L25,34.2z M25,34.2"/>
                                     </g>
                                     </svg>
-                            </div>
-                            <div class="name">Configuration</div>
                         </div>
+                        <div class="name">Configuration</div>
                     </li>
                     <li class="step">
-                        <div class="setup-box">
-                            <div class="icon">
-                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                     viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-                                    <g>
-                                        <path class="st0" d="M50,25c0-1.9-1.3-3.8-3-4.4c-1.6-0.6-3.2-2-3.7-3.1c-0.5-1.1-0.3-3.3,0.4-4.9c0.8-1.6,0.3-3.9-1-5.2
-                                            c-1.3-1.3-3.7-1.8-5.2-1c-1.6,0.8-3.7,0.9-4.9,0.4C31.5,6.2,30,4.6,29.4,3c-0.6-1.7-2.6-3-4.4-3c-1.9,0-3.8,1.3-4.4,3
-                                            c-0.6,1.7-2,3.3-3.1,3.7c-1.1,0.5-3.3,0.3-4.9-0.4C11,5.5,8.6,6,7.3,7.3C6,8.6,5.5,11,6.3,12.6c0.8,1.6,0.9,3.7,0.4,4.9
-                                            C6.2,18.6,4.6,20,3,20.6c-1.7,0.6-3,2.6-3,4.4c0,1.9,1.3,3.8,3,4.4c1.7,0.6,3.2,2,3.7,3.1c0.5,1.1,0.3,3.3-0.4,4.9
-                                            c-0.8,1.6-0.3,3.9,1,5.2c1.3,1.3,3.7,1.8,5.2,1c1.6-0.8,3.7-0.9,4.9-0.4c1.1,0.5,2.6,2.1,3.1,3.7c0.6,1.7,2.6,3,4.4,3
-                                            c1.9,0,3.8-1.3,4.4-3c0.6-1.6,2-3.3,3.1-3.7c1.1-0.5,3.3-0.3,4.9,0.4c1.6,0.8,3.9,0.3,5.2-1c1.3-1.3,1.8-3.7,1-5.2
-                                            c-0.8-1.6-0.9-3.7-0.4-4.9c0.5-1.1,2.1-2.6,3.7-3.1C48.7,28.8,50,26.9,50,25L50,25z M25,34.2c-5.1,0-9.2-4.1-9.2-9.2
-                                            c0-5.1,4.1-9.2,9.2-9.2c5.1,0,9.2,4.1,9.2,9.2C34.2,30.1,30.1,34.2,25,34.2L25,34.2z M25,34.2"/>
-                                    </g>
-                                    </svg>
-                            </div>
-                            <div class="name">Configuration</div>
+                        <div class="icon">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                 viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                                <g>
+                                    <path class="st0" d="M18.8,4.2H2.1C0.9,4.2,0,5.1,0,6.3v16.7C0,24.1,0.9,25,2.1,25h16.7c1.2,0,2.1-0.9,2.1-2.1V6.3
+    C20.8,5.1,19.9,4.2,18.8,4.2z"/>
+                                    <path class="st0" d="M18.8,29.2H6.3c-1.2,0-2.1,0.9-2.1,2.1v12.5c0,1.2,0.9,2.1,2.1,2.1h12.5c1.2,0,2.1-0.9,2.1-2.1V31.3
+    C20.8,30.1,19.9,29.2,18.8,29.2z"/>
+                                    <path class="st0" d="M43.8,29.2H27.1c-1.2,0-2.1,0.9-2.1,2.1v16.7c0,1.2,0.9,2.1,2.1,2.1h16.7c1.2,0,2.1-0.9,2.1-2.1V31.3
+    C45.8,30.1,44.9,29.2,43.8,29.2z"/>
+                                    <path class="st0" d="M47.9,0H27.1C25.9,0,25,0.9,25,2.1v20.8c0,1.2,0.9,2.1,2.1,2.1h20.8c1.2,0,2.1-0.9,2.1-2.1V2.1
+    C50,0.9,49.1,0,47.9,0z"/>
+                                </g>
+                            </svg>
                         </div>
+                        <div class="name">Elements</div>
                     </li>
                     <li class="step">
-                        <div class="setup-box">
-                            <div class="icon">
-                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                     viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                        <div class="icon">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                 viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                                <g>
+                                    <path class="st0" d="M9,38.9c7.3,0,7.3,11.1,0,11.1C1.7,50,1.7,38.9,9,38.9z"/>
+                                    <path class="st0" d="M25.3,38.9c7.3,0,7.3,11.1,0,11.1C18,50,18,38.9,25.3,38.9z"/>
                                     <g>
-                                        <path class="st0" d="M50,25c0-1.9-1.3-3.8-3-4.4c-1.6-0.6-3.2-2-3.7-3.1c-0.5-1.1-0.3-3.3,0.4-4.9c0.8-1.6,0.3-3.9-1-5.2
-                                            c-1.3-1.3-3.7-1.8-5.2-1c-1.6,0.8-3.7,0.9-4.9,0.4C31.5,6.2,30,4.6,29.4,3c-0.6-1.7-2.6-3-4.4-3c-1.9,0-3.8,1.3-4.4,3
-                                            c-0.6,1.7-2,3.3-3.1,3.7c-1.1,0.5-3.3,0.3-4.9-0.4C11,5.5,8.6,6,7.3,7.3C6,8.6,5.5,11,6.3,12.6c0.8,1.6,0.9,3.7,0.4,4.9
-                                            C6.2,18.6,4.6,20,3,20.6c-1.7,0.6-3,2.6-3,4.4c0,1.9,1.3,3.8,3,4.4c1.7,0.6,3.2,2,3.7,3.1c0.5,1.1,0.3,3.3-0.4,4.9
-                                            c-0.8,1.6-0.3,3.9,1,5.2c1.3,1.3,3.7,1.8,5.2,1c1.6-0.8,3.7-0.9,4.9-0.4c1.1,0.5,2.6,2.1,3.1,3.7c0.6,1.7,2.6,3,4.4,3
-                                            c1.9,0,3.8-1.3,4.4-3c0.6-1.6,2-3.3,3.1-3.7c1.1-0.5,3.3-0.3,4.9,0.4c1.6,0.8,3.9,0.3,5.2-1c1.3-1.3,1.8-3.7,1-5.2
-                                            c-0.8-1.6-0.9-3.7-0.4-4.9c0.5-1.1,2.1-2.6,3.7-3.1C48.7,28.8,50,26.9,50,25L50,25z M25,34.2c-5.1,0-9.2-4.1-9.2-9.2
-                                            c0-5.1,4.1-9.2,9.2-9.2c5.1,0,9.2,4.1,9.2,9.2C34.2,30.1,30.1,34.2,25,34.2L25,34.2z M25,34.2"/>
+                                        <path class="st0" d="M41.4,38.9c7.3,0,7.3,11.1,0,11.1C34.2,50,34.2,38.9,41.4,38.9z"/>
+                                        <path class="st0" d="M35.1,9.3c-0.3,0-0.6,0-0.9,0c-1.4-6.9-9.3-11.2-15.9-8.5c0,1.5,0,3.2,0,3.9c1.5,0,4.4,0,5.8,0v5.7
+        c-1.9,0-3.8,0-5.8,0c0,2,0,7.6,0,9.6c1.7,0,4,0,6,0c-1.5,6.8-11.3,6.4-11.8-0.7c0-2.5,0-6.4,0-9C-1,11.9,1.4,33.2,15.4,33
+        c0.1,0,19.7,0,19.8,0C50.6,32.8,50.6,9.4,35.1,9.3z"/>
                                     </g>
-                                    </svg>
-                            </div>
-                            <div class="name">Configuration</div>
+                                </g>
+                            </svg>
                         </div>
-                    </li class="step">
+                        <div class="name">Templately</div>
+                    </li>
                     <li class="step">
-                        <div class="setup-box">
-                            <div class="icon">
-                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                     viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-                                    <g>
-                                        <path class="st0" d="M50,25c0-1.9-1.3-3.8-3-4.4c-1.6-0.6-3.2-2-3.7-3.1c-0.5-1.1-0.3-3.3,0.4-4.9c0.8-1.6,0.3-3.9-1-5.2
-                                            c-1.3-1.3-3.7-1.8-5.2-1c-1.6,0.8-3.7,0.9-4.9,0.4C31.5,6.2,30,4.6,29.4,3c-0.6-1.7-2.6-3-4.4-3c-1.9,0-3.8,1.3-4.4,3
-                                            c-0.6,1.7-2,3.3-3.1,3.7c-1.1,0.5-3.3,0.3-4.9-0.4C11,5.5,8.6,6,7.3,7.3C6,8.6,5.5,11,6.3,12.6c0.8,1.6,0.9,3.7,0.4,4.9
-                                            C6.2,18.6,4.6,20,3,20.6c-1.7,0.6-3,2.6-3,4.4c0,1.9,1.3,3.8,3,4.4c1.7,0.6,3.2,2,3.7,3.1c0.5,1.1,0.3,3.3-0.4,4.9
-                                            c-0.8,1.6-0.3,3.9,1,5.2c1.3,1.3,3.7,1.8,5.2,1c1.6-0.8,3.7-0.9,4.9-0.4c1.1,0.5,2.6,2.1,3.1,3.7c0.6,1.7,2.6,3,4.4,3
-                                            c1.9,0,3.8-1.3,4.4-3c0.6-1.6,2-3.3,3.1-3.7c1.1-0.5,3.3-0.3,4.9,0.4c1.6,0.8,3.9,0.3,5.2-1c1.3-1.3,1.8-3.7,1-5.2
-                                            c-0.8-1.6-0.9-3.7-0.4-4.9c0.5-1.1,2.1-2.6,3.7-3.1C48.7,28.8,50,26.9,50,25L50,25z M25,34.2c-5.1,0-9.2-4.1-9.2-9.2
-                                            c0-5.1,4.1-9.2,9.2-9.2c5.1,0,9.2,4.1,9.2,9.2C34.2,30.1,30.1,34.2,25,34.2L25,34.2z M25,34.2"/>
-                                    </g>
-                                    </svg>
-                            </div>
-                            <div class="name">Configuration</div>
+                        <div class="icon">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                 viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                                <path class="st0" d="M48.9,16.6c-0.7-0.7-1.6-1.1-2.6-1.1c-1,0-1.9,0.4-2.6,1.1l-8.8,8.8L24.7,15.1l8.8-8.8c0.7-0.7,1.1-1.6,1.1-2.6
+c0-1-0.4-1.9-1.1-2.6C32.7,0.4,31.8,0,30.8,0c-1,0-1.9,0.4-2.6,1.1l-8.8,8.8l-5.6-5.6c-0.3-0.3-0.6-0.4-1-0.4c-0.4,0-0.7,0.2-1,0.4
+c-8,8.8-3.7,28-3.2,29.9l-8.1,8.1c-0.3,0.2-0.4,0.6-0.4,0.9c0,0.4,0.1,0.7,0.4,0.9L5.5,49c0.3,0.3,0.6,0.4,0.9,0.4
+c0.3,0,0.7-0.1,0.9-0.4l8.1-8.1c3.9,1,8.8,1.6,13.2,1.6c5.2,0,12.3-0.8,16.7-4.8c0.3-0.2,0.4-0.6,0.4-1c0-0.4-0.1-0.7-0.4-1
+l-5.2-5.2l8.8-8.8C50.4,20.4,50.4,18,48.9,16.6z"/>
+                            </svg>
                         </div>
-                    </li class="step">
+                        <div class="name">Integrations</div>
+                    </li>
                     <li class="step">
-                        <div class="setup-box">
-                            <div class="icon">
-                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                     viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-                                    <g>
-                                        <path class="st0" d="M50,25c0-1.9-1.3-3.8-3-4.4c-1.6-0.6-3.2-2-3.7-3.1c-0.5-1.1-0.3-3.3,0.4-4.9c0.8-1.6,0.3-3.9-1-5.2
-                                            c-1.3-1.3-3.7-1.8-5.2-1c-1.6,0.8-3.7,0.9-4.9,0.4C31.5,6.2,30,4.6,29.4,3c-0.6-1.7-2.6-3-4.4-3c-1.9,0-3.8,1.3-4.4,3
-                                            c-0.6,1.7-2,3.3-3.1,3.7c-1.1,0.5-3.3,0.3-4.9-0.4C11,5.5,8.6,6,7.3,7.3C6,8.6,5.5,11,6.3,12.6c0.8,1.6,0.9,3.7,0.4,4.9
-                                            C6.2,18.6,4.6,20,3,20.6c-1.7,0.6-3,2.6-3,4.4c0,1.9,1.3,3.8,3,4.4c1.7,0.6,3.2,2,3.7,3.1c0.5,1.1,0.3,3.3-0.4,4.9
-                                            c-0.8,1.6-0.3,3.9,1,5.2c1.3,1.3,3.7,1.8,5.2,1c1.6-0.8,3.7-0.9,4.9-0.4c1.1,0.5,2.6,2.1,3.1,3.7c0.6,1.7,2.6,3,4.4,3
-                                            c1.9,0,3.8-1.3,4.4-3c0.6-1.6,2-3.3,3.1-3.7c1.1-0.5,3.3-0.3,4.9,0.4c1.6,0.8,3.9,0.3,5.2-1c1.3-1.3,1.8-3.7,1-5.2
-                                            c-0.8-1.6-0.9-3.7-0.4-4.9c0.5-1.1,2.1-2.6,3.7-3.1C48.7,28.8,50,26.9,50,25L50,25z M25,34.2c-5.1,0-9.2-4.1-9.2-9.2
-                                            c0-5.1,4.1-9.2,9.2-9.2c5.1,0,9.2,4.1,9.2,9.2C34.2,30.1,30.1,34.2,25,34.2L25,34.2z M25,34.2"/>
-                                    </g>
-                                    </svg>
-                            </div>
-                            <div class="name">Configuration</div>
+                        <div class="icon">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                 viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                                <path class="st0" d="M48.5,3.1l-0.3-0.3c-0.9-0.9-2.1-1.4-3.3-1.3c-1.2,0-2.4,0.6-3.3,1.5L16.1,30.9l-0.5,0.2l-0.5-0.2l-6.3-7.4
+c-0.9-1.1-2.2-1.7-3.6-1.8c-1.4-0.1-2.8,0.5-3.8,1.5c-1.6,1.6-1.8,4.1-0.5,5.9l13.1,18.3c0.7,1,1.9,1.7,3.2,1.7h1.1
+c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
+                            </svg>
                         </div>
+                        <div class="name">Finalize</div>
                     </li>
                 </ul>
                 <div class="eael-setup-body">
                     <div id="configuration" class="setup-content">
-                        <div class="eael-input-group">
+                        <div class="eael-input-group config-list">
                             <input id="basic" name="radio" type="radio">
                             <label for="basic">
                                 <div class="eael-radio-circle"></div>
@@ -301,8 +271,8 @@ trait Admin
                                 </div>
                             </label>
                         </div>
-                        <div class="eael-input-group">
-                            <input id="advance" name="radio" type="radio">
+                        <div class="eael-input-group config-list">
+                            <input id="advance" name="radio" type="radio" checked>
                             <label for="advance">
                                 <div class="eael-radio-circle"></div>
                                 <div class="eael-radio-text">
@@ -311,7 +281,7 @@ trait Admin
                                 </div>
                             </label>
                         </div>
-                        <div class="eael-input-group">
+                        <div class="eael-input-group config-list">
                             <input id="custom" name="radio" type="radio">
                             <label for="custom">
                                 <div class="eael-radio-circle"></div>
@@ -322,14 +292,30 @@ trait Admin
                             </label>
                         </div>
                     </div>
-                    <div id="elements" class="setup-content">elements</div>
-                    <div id="templately" class="setup-content">templately</div>
-                    <div id="integrations" class="setup-content">integrations</div>
-                    <div id="finalize" class="setup-content">finalize</div>
+                    <div id="elements" class="setup-content eael-box">elements</div>
+                    <div id="templately" class="setup-content eael-box">
+                        <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately.jpg'; ?>" alt="">
+                    </div>
+                    <div id="integrations" class="setup-content eael-box">integrations</div>
+                    <div id="finalize" class="setup-content eael-box">
+                        <div class="eael-iframe">
+                            <iframe src="https://www.youtube.com/embed/CnSYwGcXnxA" frameborder="0"></iframe>
+                        </div>
+                        <div class="eael-setup-final-info">
+                            <div>
+                                <div class="eael-input-group">
+                                    <input type="checkbox" id="eael_user_email_address" name="eael_user_email_address" value="" checked>
+                                    <label for="eael_user_email_address">Share non-sensitive diagnosstic data and plugin usage information</label>
+                                </div>
+                                <button type="button" class="btn-collect"><?php esc_html_e('What We Collect?', 'essential-addons-for-elementor-lite'); ?></button>
+                            </div>
+                            <button type="button" id="betterdocsqswemailskipbutton" class="btn-skip"><?php esc_html_e('Skip This Step', 'essential-addons-for-elementor-lite'); ?></button>
+                        </div>
+                    </div>
                 </div>
-                <div class="eael-setup-body">
-                    <button id="prevBtn" onclick="next(-1)">Prev</button>
-                    <button id="nextBtn" class="button eael-btn" onclick="next(1)">Next</button>
+                <div class="eael-setup-footer">
+                    <button id="eael-prev" class="button eael-btn" onclick="next(-1)">< Previous</button>
+                    <button id="eael-next" class="button eael-btn" onclick="next(1)">Next ></button>
                 </div>
             </div>
 
@@ -339,54 +325,62 @@ trait Admin
                 showTab(currentTab);
 
                 function showTab(n) {
+	                var x = document.getElementsByClassName("setup-content");
+	                x[n].style.display = "block";
 
-
-                    var x = document.getElementsByClassName("setup-content");
-                    x[n].style.display = "block";
-
-                    if (n == 0) {
-                        document.getElementById("prevBtn").style.display = "none";
-                    } else {
-                        document.getElementById("prevBtn").style.display = "inline";
-                    }
-                    if (n == (x.length - 1)) {
-                        document.getElementById("nextBtn").innerHTML = "Submit";
-                    }
-                    else {
-                        document.getElementById("nextBtn").innerHTML = "Next";
-                    }
-                    fixStepIndicator(n)
+	                if (n == 0) {
+		                document.getElementById("eael-prev").style.display = "none";
+	                } else {
+		                document.getElementById("eael-prev").style.display = "inline";
+	                }
+	                if (n == (x.length - 1)) {
+		                document.getElementById("eael-next").innerHTML = "Submit";
+	                }
+	                else {
+		                document.getElementById("eael-next").innerHTML = "Next >";
+	                }
+	                fixStepIndicator(n)
                 }
 
                 function next(n) {
-                    var x = document.getElementsByClassName("setup-content");
+	                var x = document.getElementsByClassName("setup-content");
 
-                    x[currentTab].style.display = "none";
+	                x[currentTab].style.display = "none";
 
-                    currentTab = currentTab + n;
-                    // alert(currentTab);
+	                currentTab = currentTab + n;
 
-                    if (currentTab >= x.length) {
+	                if (currentTab >= x.length) {
 
-                        return false;
-                    }
+		                return false;
+	                }
 
-                    showTab(currentTab);
+	                showTab(currentTab);
                 }
 
                 function fixStepIndicator(n) {
-                    var i, x = document.getElementsByClassName("step");
-                    var done = document.getElementsByClassName("done");
+	                var i, x = document.getElementsByClassName("step");
+                    var container = document.getElementsByClassName("eael-setup-wizard");
+                    container[0].setAttribute('data-step', n);
 
                     for (i = 0; i < x.length; i++) {
-                        x[i].className = x[i].className.replace(" active done", " done");
+	                    x[i].className = x[i].className.replace(" active", "");
+
                     }
 
-                    x[n].className += " active done";
-                    // console.log(x[n]);
+                    x[n].className += " active";
                 }
             </script>
+    <?php }
 
+    /**
+     * Create settings page.
+     *
+     * @since 1.1.2
+     */
+    public function admin_settings_page()
+    {
+        ?>
+        <div class="eael-settings-wrap">
 		  	<form action="" method="POST" id="eael-settings" name="eael-settings">
 		  		<div class="eael-header-bar">
 					<div class="eael-header-left">
