@@ -63,21 +63,32 @@
 			data: $data,
 			success: function (response) {
 				var $content = $(response);
+
 				if ($content.hasClass("no-posts-found") || $content.length === 0) {
 					$this.remove();
 				} else {
 					if ($data.class == "Essential_Addons_Elementor\\Elements\\Product_Grid") {
-							$(".eael-product-grid .products", $scope).append($content);
+						$(".eael-product-grid .products", $scope).append($content.filter('li'));
 						const dynamicID = "eael-product-"+Date.now();
+						
 						if ($layout == "masonry") {
+							let outerWidth = null;
 							$content.find('.woocommerce-product-gallery').addClass(dynamicID);
 							$content.find('.woocommerce-product-gallery').addClass('eael-new-product');
+
+							$('.attachment-woocommerce_thumbnail').each(function(e) {
+								if(outerWidth === null) {
+									outerWidth = $(this).outerWidth();
+								}
+
+								$(this).css('height', (outerWidth / $(this).attr('width')) * $(this).attr('height'))
+							});
+							
 							$(".woocommerce-product-gallery."+dynamicID,$scope).each(function () {
 								$(this).wc_product_gallery();
 							});
-							console.dir($content);
-							var $isotope = $(".eael-product-grid .products", $scope).isotope();
-							$isotope.isotope("appended", $content).isotope("layout");
+
+							$(".eael-product-grid .products", $scope).isotope("appended", $content).isotope("layout");
 						}
 
 					} else {
