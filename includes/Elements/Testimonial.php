@@ -286,7 +286,7 @@ class Testimonial extends Widget_Base {
         ]
     );
     $this->add_group_control(
-        Group_Control_Background::get_type(),
+        \Elementor\Group_Control_Background::get_type(),
         [
             'name' => 'eael_testimonial_gradient_background',
             'label' => __('Gradient Background', 'essential-addons-elementor'),
