@@ -78,7 +78,7 @@
 
 							$('.attachment-woocommerce_thumbnail').each(function(e) {
 								if(outerWidth === null) {
-									outerWidth = $(this).outerWidth();
+									outerWidth = $(this).parents('.product').outerWidth();
 								}
 
 								$(this).css('height', (outerWidth / $(this).attr('width')) * $(this).attr('height'))
