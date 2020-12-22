@@ -660,6 +660,8 @@ class Pricing_Table extends Widget_Base
                     '{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item.featured:before' => 'content: "{{VALUE}}";',
                     '{{WRAPPER}} .eael-pricing.style-3 .eael-pricing-item.featured:before' => 'content: "{{VALUE}}";',
                     '{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item.featured:before' => 'content: "{{VALUE}}";',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-item.featured:before' => 'content: "{{VALUE}}";',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-image.featured:before' => 'content: "{{VALUE}}";',
                 ],
                 'condition'   => [
                     'eael_pricing_table_featured_styles' => ['ribbon-2', 'ribbon-3', 'ribbon-4'],
@@ -1288,6 +1290,8 @@ class Pricing_Table extends Widget_Base
                     '{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item.ribbon-1:before' => 'background: {{VALUE}};',
                     '{{WRAPPER}} .eael-pricing.style-3 .eael-pricing-item.ribbon-1:before' => 'background: {{VALUE}};',
                     '{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item.ribbon-1:before' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-item.ribbon-1:before' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-image.ribbon-1:before' => 'background: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_pricing_table_featured'        => 'yes',
@@ -1314,6 +1318,8 @@ class Pricing_Table extends Widget_Base
                     '{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item.ribbon-1:before' => 'height: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-pricing.style-3 .eael-pricing-item.ribbon-1:before' => 'height: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item.ribbon-1:before' => 'height: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-item.ribbon-1:before' => 'height: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-image.ribbon-1:before' => 'height: {{SIZE}}px;',
                 ],
                 'condition' => [
                     'eael_pricing_table_featured'        => 'yes',
@@ -1340,12 +1346,19 @@ class Pricing_Table extends Widget_Base
                     '{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item.ribbon-2:before' => 'font-size: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-pricing.style-3 .eael-pricing-item.ribbon-2:before' => 'font-size: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item.ribbon-2:before' => 'font-size: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-item.ribbon-2:before' => 'font-size: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-image.ribbon-2:before' => 'font-size: {{SIZE}}px;',
 
                     '{{WRAPPER}} .eael-pricing.style-1 .eael-pricing-item.ribbon-3:before' => 'font-size: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item.ribbon-3:before' => 'font-size: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-pricing.style-3 .eael-pricing-item.ribbon-3:before' => 'font-size: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item.ribbon-3:before' => 'font-size: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-item.ribbon-3:before' => 'font-size: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-image.ribbon-3:before' => 'font-size: {{SIZE}}px;',
+
                     '{{WRAPPER}} .eael-pricing .eael-pricing-item.ribbon-4:before'         => 'font-size: {{SIZE}}px;',
+
+                    '{{WRAPPER}} .eael-pricing .eael-pricing-image.ribbon-4:before'         => 'font-size: {{SIZE}}px;',
 
                 ],
                 'condition' => [
@@ -1366,13 +1379,20 @@ class Pricing_Table extends Widget_Base
                     '{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item.ribbon-2:before' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-pricing.style-3 .eael-pricing-item.ribbon-2:before' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item.ribbon-2:before' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-item.ribbon-2:before' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-image.ribbon-2:before' => 'color: {{VALUE}};',
 
                     '{{WRAPPER}} .eael-pricing.style-1 .eael-pricing-item.ribbon-3:before' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item.ribbon-3:before' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-pricing.style-3 .eael-pricing-item.ribbon-3:before' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item.ribbon-3:before' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-item.ribbon-3:before' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-image.ribbon-3:before' => 'color: {{VALUE}};',
+
 
                     '{{WRAPPER}} .eael-pricing .eael-pricing-item.ribbon-4:before'         => 'color: {{VALUE}};',
+
+                    '{{WRAPPER}} .eael-pricing .eael-pricing-image.ribbon-4:before'         => 'color: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_pricing_table_featured'        => 'yes',
@@ -1404,7 +1424,17 @@ class Pricing_Table extends Widget_Base
                     '{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item.ribbon-2:after'  => 'border-bottom-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item.ribbon-3:before' => 'background: {{VALUE}};',
 
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-item.ribbon-2:before' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-item.ribbon-2:after'  => 'border-bottom-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-item.ribbon-3:before' => 'background: {{VALUE}};',
+
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-image.ribbon-2:before' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-image.ribbon-2:after'  => 'border-bottom-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-image.ribbon-3:before' => 'background: {{VALUE}};',
+
                     '{{WRAPPER}} .eael-pricing .eael-pricing-item.ribbon-4:before'         => 'background: {{VALUE}};',
+
+                    '{{WRAPPER}} .eael-pricing .eael-pricing-image.ribbon-4:before'         => 'background: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_pricing_table_featured'        => 'yes',
