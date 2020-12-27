@@ -258,7 +258,45 @@ class Testimonial extends Widget_Base {
 					'content-bottom-icon-title-inline'	=> __( 'Content Bottom | Icon Title Inline', 'essential-addons-for-elementor-lite')
 				]
 			]
-		);
+    );
+    
+
+    $this->add_control(
+      'eael_testimonial_is_gradient_background',
+      [
+          'label' => __('Use Gradient Background', 'essential-addons-elementor'),
+          'type' => Controls_Manager::SWITCHER,
+          'label_on' => __('Show', 'essential-addons-elementor'),
+          'label_off' => __('Hide', 'essential-addons-elementor'),
+          'return_value' => 'yes',
+      ]
+    );
+    $this->add_control(
+        'eael_testimonial_background',
+        [
+            'label' => esc_html__('Background Color', 'essential-addons-elementor'),
+            'type' => Controls_Manager::COLOR,
+            'default' => '',
+            'selectors' => [
+                '{{WRAPPER}} .eael-testimonial-item' => 'background-color: {{VALUE}};',
+            ],
+            'condition' => [
+                'eael_testimonial_is_gradient_background' => ''
+            ]
+        ]
+    );
+    $this->add_group_control(
+        \Elementor\Group_Control_Background::get_type(),
+        [
+            'name' => 'eael_testimonial_gradient_background',
+            'label' => __('Gradient Background', 'essential-addons-elementor'),
+            'types' => ['classic', 'gradient'],
+            'selector' => '{{WRAPPER}} .eael-testimonial-item',
+            'condition' => [
+                'eael_testimonial_is_gradient_background' => 'yes'
+            ]
+        ]
+    );
 
 		$this->add_control(
 			'eael_testimonial_alignment',
