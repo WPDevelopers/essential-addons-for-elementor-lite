@@ -25,10 +25,6 @@ trait Helper
         $ajax   = wp_doing_ajax();
 
         parse_str($_REQUEST['args'], $args);
-
-        // @TODO; get the widget settings from the page id and widget id then
-        // @TODO; prepare query args from the $settings, DO NOT use user data for query.
-
         if ( empty( $_POST['nonce'] ) ) {
             $err_msg = __( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' );
             if ( $ajax ) {
@@ -66,7 +62,7 @@ trait Helper
         }
 
         $settings = HelperClass::eael_get_widget_settings($page_id, $widget_id);
-
+        $settings['eael_widget_id'] = $widget_id;
         $html = '';
         $class = '\\' . str_replace( '\\\\', '\\', $_REQUEST[ 'class' ] );
         $args[ 'offset' ] = (int)$args[ 'offset' ] + ( ( (int)$_REQUEST[ 'page' ] - 1 ) * (int)$args[ 'posts_per_page' ] );
