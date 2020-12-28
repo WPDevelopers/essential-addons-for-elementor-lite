@@ -157,7 +157,7 @@ trait Helper
         while ( ob_get_status() ) {
             ob_end_clean();
         }
-        if ( function_exists( 'gzencode' ) ) {
+        if (false && function_exists( 'gzencode' ) ) {
             $response = gzencode( wp_json_encode( $html ) );
 
             header( 'Content-Type: application/json; charset=utf-8' );

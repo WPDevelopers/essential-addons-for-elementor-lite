@@ -2824,6 +2824,8 @@ class Product_Grid extends Widget_Base
             return;
         }
         $settings = $this->get_settings_for_display();
+        // normalize for load more fix
+        $settings['layout_mode'] = $settings["eael_product_grid_layout"];
         $widget_id = $this->get_id();
         $settings['eael_widget_id'] = $widget_id;
         $args = [
@@ -2983,6 +2985,7 @@ class Product_Grid extends Widget_Base
         <script type="text/javascript">
             jQuery(document).ready(function($) {
                 jQuery(".eael-product-grid").each(function() {
+                    var outerWidth = null;
                     var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>"),
                         $products = $(this).find( '.products' );
                     $layout_mode = $products.data('layout-mode');
@@ -2992,6 +2995,14 @@ class Product_Grid extends Widget_Base
                             itemSelector: "li.product",
                             layoutMode: $layout_mode,
                             percentPosition: true
+                        });
+
+                        $('img', $products).each(function(e) {
+                            if(outerWidth === null) {
+                                outerWidth = $(this).parents('.product').outerWidth();
+                            }
+
+                            $(this).css('height', (outerWidth / $(this).attr('width')) * $(this).attr('height'))
                         });
 
                         $('li.product', $products).resize(function() {
