@@ -34,8 +34,13 @@
   margin: 0;
 }
 
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header > i {
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header > i, .eael-adv-accordion .eael-accordion-list .eael-accordion-header span {
   margin-right: 10px;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header span svg {
+  width: 1em;
+  height: 1em;
 }
 
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
