@@ -765,7 +765,7 @@ msgstr ""
 msgid "File Not Found"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:1181, ../includes/Elements/Betterdocs_Category_Box.php:1146, ../includes/Elements/Betterdocs_Category_Grid.php:1678, ../includes/Elements/Betterdocs_Category_Grid.php:1645, ../includes/Elements/Post_Grid.php:1041, ../includes/Elements/Post_Timeline.php:462, ../includes/Elements/Product_Grid.php:2968
+#: ../includes/Elements/Betterdocs_Category_Box.php:1181, ../includes/Elements/Betterdocs_Category_Box.php:1146, ../includes/Elements/Betterdocs_Category_Grid.php:1678, ../includes/Elements/Betterdocs_Category_Grid.php:1645, ../includes/Elements/Post_Grid.php:1041, ../includes/Elements/Post_Timeline.php:462, ../includes/Elements/Product_Grid.php:2970
 msgid "<p class=\"no-posts-found\">No posts found!</p>"
 msgstr ""
 
@@ -4772,7 +4772,7 @@ msgstr ""
 msgid "Date Text Color"
 msgstr ""
 
-#: ../includes/Elements/Post_Timeline.php:466, ../includes/Elements/Product_Grid.php:2971
+#: ../includes/Elements/Post_Timeline.php:466, ../includes/Elements/Product_Grid.php:2973
 msgid "<p class=\"no-posts-found\">No layout found!</p>"
 msgstr ""
 
