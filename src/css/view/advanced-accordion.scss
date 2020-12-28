@@ -19,8 +19,12 @@
         flex-grow: 1;
         margin: 0;
     }
-    > i {
+    > i, span{
         margin-right: 10px;
+    }
+    span svg {
+        width: 1em;
+        height: 1em
     }
 }
 
