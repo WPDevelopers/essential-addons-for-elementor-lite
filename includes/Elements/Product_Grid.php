@@ -37,16 +37,6 @@ class Product_Grid extends Widget_Base
      */
     protected $page_id;
 
-    public function __construct($data = [], $args = null)
-    {
-        parent::__construct($data, $args);
-        add_filter('woocommerce_product_add_to_cart_text', [
-            $this,
-            'add_to_cart_button_custom_text',
-        ]);
-
-    }
-
     public function get_name()
     {
         return 'eicon-woocommerce';
@@ -2949,6 +2939,11 @@ class Product_Grid extends Widget_Base
             'data-page-id' => $this->page_id,
             'data-nonce' => wp_create_nonce('eael_product_grid'),
         ]);
+
+        add_filter('woocommerce_product_add_to_cart_text', [
+            $this,
+            'add_to_cart_button_custom_text',
+        ]);
         ?>
 
         <div <?php $this->print_render_attribute_string('wrap'); ?> >
@@ -3024,5 +3019,9 @@ class Product_Grid extends Widget_Base
             });
         </script>
         <?php
+        remove_filter('woocommerce_product_add_to_cart_text', [
+            $this,
+            'add_to_cart_button_custom_text',
+        ]);
     }
 }
