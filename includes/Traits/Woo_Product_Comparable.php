@@ -1604,13 +1604,15 @@ trait Woo_Product_Comparable {
 
 					<?php if ( 'yes' === $repeat_price && isset( $fields['price'] ) ) : ?>
                         <tr class="price repeated">
-                            <th>
-                                <div>
+                            <th class="thead">
+                                <div class="wcpc-table-header">
 									<?php
 									if ( ! empty( $icon ) ) {
 										self::print_icon( $icon );
 									}
-									echo wp_kses_post( $fields['price'] ) ?>
+                                    printf( '<span class="field-name">%s</span>', esc_html( $fields['price'] ) );
+
+                                     ?>
                                 </div>
                             </th>
 
@@ -1629,13 +1631,13 @@ trait Woo_Product_Comparable {
 
 					<?php if ( 'yes' === $repeat_add_to_cart && isset( $fields['add-to-cart'] ) ) : ?>
                         <tr class="add-to-cart repeated">
-                            <th>
-                                <div>
+                            <th class="thead">
+                                <div class="wcpc-table-header">
 									<?php
 									if ( ! empty( $icon ) ) {
 										self::print_icon( $icon );
 									}
-									echo wp_kses_post( $fields['add-to-cart'] ); ?>
+                                    printf( '<span class="field-name">%s</span>', esc_html( $fields['add-to-cart'] ) ); ?>
                                 </div>
                             </th>
 
