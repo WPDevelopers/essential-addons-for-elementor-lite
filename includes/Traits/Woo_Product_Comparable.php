@@ -238,10 +238,6 @@ trait Woo_Product_Comparable {
 		$this->add_control( 'field_icon', [
 			'label'   => __( 'Fields Icon', 'elementor' ),
 			'type'    => Controls_Manager::ICONS,
-			'default' => [
-				'value'   => 'fas fa-arrow-right',
-				'library' => 'fa-solid',
-			],
 		] );
 		$this->end_controls_section();
 	}
