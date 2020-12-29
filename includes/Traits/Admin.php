@@ -17,12 +17,13 @@ trait Admin
      */
     public function admin_menu()
     {
+        $setup_wizard = new \Essential_Addons_Elementor\Classes\WPDeveloper_Setup_Wizard();
         add_menu_page(
             __('Essential Addons', 'essential-addons-for-elementor-lite'),
             __('Essential Addons', 'essential-addons-for-elementor-lite'),
             'manage_options',
             'eael-settings',
-            [$this, 'setup_wizard'],
+            [$setup_wizard, 'render_wizard'],
             $this->safe_url(EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-white.svg'),
             '58.6'
         );
@@ -326,6 +327,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
 
                 function showTab(n) {
 	                var x = document.getElementsByClassName("setup-content");
+	                console.log(x);
 	                x[n].style.display = "block";
 
 	                if (n == 0) {
