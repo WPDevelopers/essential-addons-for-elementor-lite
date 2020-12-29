@@ -81,8 +81,23 @@ class Adv_Accordion extends Widget_Base
     protected function _register_controls()
     {
         /**
-         * Advance Accordion Settings
+         * Content Tab Controls
          */
+        $this->init_content_general_controls();
+        $this->init_content_content_controls();
+        $this->init_content_promotion_controls();
+
+        /**
+         * Style Tab Controls
+         */
+        $this->init_style_general_controls();
+        $this->init_style_tab_controls();
+        $this->init_style_tab_content_controls();
+        $this->init_style_caret_controls();
+    }
+
+    protected function init_content_general_controls()
+    {
         $this->start_controls_section(
             'eael_section_adv-accordion_settings',
             [
@@ -170,10 +185,10 @@ class Adv_Accordion extends Widget_Base
             ]
         );
         $this->end_controls_section();
+    }
 
-        /**
-         * Advance Accordion Content Settings
-         */
+    protected function init_content_content_controls()
+    {
         $this->start_controls_section(
             'eael_section_adv_accordion_content_settings',
             [
@@ -287,7 +302,10 @@ class Adv_Accordion extends Widget_Base
         );
 
         $this->end_controls_section();
+    }
 
+    protected function init_content_promotion_controls()
+    {
         if (!apply_filters('eael/pro_enabled', false)) {
             $this->start_controls_section(
                 'eael_section_pro',
@@ -314,12 +332,10 @@ class Adv_Accordion extends Widget_Base
 
             $this->end_controls_section();
         }
+    }
 
-        /**
-         * -------------------------------------------
-         * Tab Style Advance Accordion Generel Style
-         * -------------------------------------------
-         */
+    protected function init_style_general_controls()
+    {
         $this->start_controls_section(
             'eael_section_adv_accordion_style_settings',
             [
@@ -376,12 +392,10 @@ class Adv_Accordion extends Widget_Base
             ]
         );
         $this->end_controls_section();
+    }
 
-        /**
-         * -------------------------------------------
-         * Tab Style Advance Accordion Content Style
-         * -------------------------------------------
-         */
+    protected function init_style_tab_controls()
+    {
         $this->start_controls_section(
             'eael_section_adv_accordions_tab_style_settings',
             [
@@ -414,7 +428,7 @@ class Adv_Accordion extends Widget_Base
                     ],
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header i, {{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .eaa-svg '   => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-accordion-icon'   => 'font-size: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -436,7 +450,7 @@ class Adv_Accordion extends Widget_Base
                     ],
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header i, {{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .eaa-svg'   => 'margin-left: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-accordion-icon'   => 'margin-left: {{SIZE}}{{UNIT}};',
                 ],
                 'condition'  => [
                     'eael_adv_accordion_toggle_icon_postion' => 'right',
@@ -462,7 +476,7 @@ class Adv_Accordion extends Widget_Base
                     ],
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header i, {{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .eaa-svg'   => 'margin-left: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-accordion-icon'   => 'margin-left: {{SIZE}}{{UNIT}};',
                 ],
                 'condition'  => [
                     'eael_adv_accordion_toggle_icon_postion' => '',
@@ -508,17 +522,7 @@ class Adv_Accordion extends Widget_Base
         $this->start_controls_tabs('eael_adv_accordion_header_tabs');
         # Normal State Tab
         $this->start_controls_tab('eael_adv_accordion_header_normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
-        $this->add_control(
-            'eael_adv_accordion_tab_color',
-            [
-                'label'     => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '#f1f1f1',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header' => 'background-color: {{VALUE}};',
-                ],
-            ]
-        );
+
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -545,8 +549,8 @@ class Adv_Accordion extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#333',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header i' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header svg' => 'color: {{VALUE}}; fill: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-accordion-icon' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-accordion-icon-svg svg' => 'color: {{VALUE}}; fill: {{VALUE}};',
                 ]
             ]
         );
@@ -578,17 +582,7 @@ class Adv_Accordion extends Widget_Base
                 'label' => esc_html__('Hover', 'essential-addons-for-elementor-lite'),
             ]
         );
-        $this->add_control(
-            'eael_adv_accordion_tab_color_hover',
-            [
-                'label'     => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '#414141',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover' => 'background-color: {{VALUE}};',
-                ],
-            ]
-        );
+
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -604,7 +598,6 @@ class Adv_Accordion extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
-//                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover'                           => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover .eael-accordion-tab-title' => 'color: {{VALUE}};',
                 ],
             ]
@@ -616,8 +609,8 @@ class Adv_Accordion extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover i' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover svg' => 'color: {{VALUE}}; fill: {{VALUE}}',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover .fa-accordion-icon' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover .fa-accordion-icon svg' => 'color: {{VALUE}}; fill: {{VALUE}}',
                 ]
             ]
         );
@@ -649,17 +642,7 @@ class Adv_Accordion extends Widget_Base
                 'label' => esc_html__('Active', 'essential-addons-for-elementor-lite'),
             ]
         );
-        $this->add_control(
-            'eael_adv_accordion_tab_color_active',
-            [
-                'label'     => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '#444',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active' => 'background-color: {{VALUE}};',
-                ],
-            ]
-        );
+
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -687,8 +670,8 @@ class Adv_Accordion extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active i' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active svg' => 'color: {{VALUE}};fill: {{VALUE}}',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-accordion-icon' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-accordion-icon svg' => 'color: {{VALUE}};fill: {{VALUE}}',
                 ],
             ]
         );
@@ -714,29 +697,15 @@ class Adv_Accordion extends Widget_Base
         $this->end_controls_tab();
         $this->end_controls_tabs();
         $this->end_controls_section();
+    }
 
-        /**
-         * -------------------------------------------
-         * Tab Style Advance Accordion Content Style
-         * -------------------------------------------
-         */
+    protected function init_style_tab_content_controls()
+    {
         $this->start_controls_section(
             'eael_section_adv_accordion_tab_content_style_settings',
             [
                 'label' => esc_html__('Content Style', 'essential-addons-for-elementor-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
-            ]
-        );
-
-        $this->add_control(
-            'adv_accordion_content_bg_color',
-            [
-                'label'     => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content' => 'background-color: {{VALUE}};',
-                ],
             ]
         );
 
@@ -806,10 +775,10 @@ class Adv_Accordion extends Widget_Base
             ]
         );
         $this->end_controls_section();
+    }
 
-        /**
-         * Advance Accordion Caret Settings
-         */
+    protected function init_style_caret_controls()
+    {
         $this->start_controls_section(
             'eael_section_adv_accordion_caret_settings',
             [
@@ -836,7 +805,7 @@ class Adv_Accordion extends Widget_Base
                     ],
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle, {{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header > .eaa-svg' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle, {{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header > .fa-toggle-svg' => 'font-size: {{SIZE}}{{UNIT}};',
                 ],
                 'condition'  => [
                     'eael_adv_accordion_icon_show' => 'yes',
@@ -851,7 +820,6 @@ class Adv_Accordion extends Widget_Base
                 'size_units' => ['px', '%', 'em'],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header > .eaa-svg'      => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'condition'  => [
                     'eael_adv_accordion_icon_show' => 'yes',
@@ -866,7 +834,6 @@ class Adv_Accordion extends Widget_Base
                 'size_units' => ['px', '%', 'em'],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header > svg'      => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'condition'  => [
                     'eael_adv_accordion_icon_show' => 'yes',
@@ -893,6 +860,7 @@ class Adv_Accordion extends Widget_Base
                 'default'   => '#444',
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle svg' => 'color: {{VALUE}}; fill:{{VALUE}}',
                 ],
                 'condition' => [
                     'eael_adv_accordion_icon_show' => 'yes',
@@ -937,8 +905,8 @@ class Adv_Accordion extends Widget_Base
                 'label'     => esc_html__('Caret Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle:hover' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header .fa-toggle:hover'  => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header .fa-toggle'  => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header .fa-toggle-svg svg'  => 'color: {{VALUE}}; fill: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_accordion_icon_show' => 'yes',
@@ -951,8 +919,7 @@ class Adv_Accordion extends Widget_Base
                 'label'     => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle:hover' => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header .fa-toggle:hover'  => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header .fa-toggle'  => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_accordion_icon_show' => 'yes',
@@ -985,7 +952,7 @@ class Adv_Accordion extends Widget_Base
                 'default'   => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header .fa-toggle'  => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle svg' => 'color: {{VALUE}}; fill: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_accordion_icon_show' => 'yes',
@@ -999,7 +966,6 @@ class Adv_Accordion extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle' => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header .fa-toggle'  => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_accordion_icon_show' => 'yes',
@@ -1033,10 +999,6 @@ class Adv_Accordion extends Widget_Base
 
         $this->add_render_attribute('eael-adv-accordion', 'class', 'eael-adv-accordion');
         $this->add_render_attribute('eael-adv-accordion', 'id', 'eael-adv-accordion-' . esc_attr($this->get_id()));
-
-        // icon handler
-        $accordion_icon_migrated = isset($settings['__fa4_migrated']['eael_adv_accordion_icon_new']);
-        $accordion_icon_is_new = empty($settings['eael_adv_accordion_icon']);
 ?>
         <div <?php echo $this->get_render_attribute_string('eael-adv-accordion'); ?> <?php echo 'data-accordion-id="' . esc_attr($this->get_id()) . '"'; ?> <?php echo !empty($settings['eael_adv_accordion_type']) ? 'data-accordion-type="' . esc_attr($settings['eael_adv_accordion_type']) . '"' : 'accordion'; ?> <?php echo !empty($settings['eael_adv_accordion_toggle_speed']) ? 'data-toogle-speed="' . esc_attr($settings['eael_adv_accordion_toggle_speed']) . '"' : '300'; ?>>
     <?php foreach ($settings['eael_adv_accordion_tab'] as $index => $tab) {
@@ -1076,23 +1038,7 @@ class Adv_Accordion extends Widget_Base
                 <div ' . $this->get_render_attribute_string($tab_title_setting_key) . '>';
             // toggle icon if user set position to left
             if ($settings['eael_adv_accordion_icon_show'] === 'yes' && $settings['eael_adv_accordion_toggle_icon_postion'] === '') {
-                if ($accordion_icon_is_new || $accordion_icon_migrated) {
-//                    if (isset($settings['eael_adv_accordion_icon_new']['value']['url'])) {
-//                        echo '<img src="' . $settings['eael_adv_accordion_icon_new']['value']['url'] . '" />';
-//                    } else {
-//                        echo '<i class="' . $settings['eael_adv_accordion_icon_new']['value'] . ' fa-toggle"></i>';
-//                    }
-                    if ( 'svg' === $settings['eael_adv_accordion_icon_new']['library'] ) {
-                        echo '<span class="fa-toggle eaa-svg">';
-                        Icons_Manager::render_icon( $settings['eael_adv_accordion_icon_new'] );
-                        echo '</span>';
-                    }else{
-                    Icons_Manager::render_icon( $settings['eael_adv_accordion_icon_new'], [ 'aria-hidden' => 'true', 'class' => "fa-toggle" ] );
-                    }
-
-                } else {
-                    echo '<i class="' . $settings['eael_adv_accordion_icon'] . ' fa-toggle"></i>';
-                }
+                $this->print_toggle_icon($settings);
             }
             // tab title
             if ($settings['eael_adv_accordion_toggle_icon_postion'] === '') {
@@ -1101,13 +1047,8 @@ class Adv_Accordion extends Widget_Base
             // tab icon
             if ($tab['eael_adv_accordion_tab_icon_show'] === 'yes') {
                 if ($tab_icon_is_new || $tab_icon_migrated) {
-//                    if (isset($tab['eael_adv_accordion_tab_title_icon_new']['value']['url'])) {
-//                        echo '<img src="' . $tab['eael_adv_accordion_tab_title_icon_new']['value']['url'] . '" />';
-//                    } else {
-//                        echo '<i class="' . $tab['eael_adv_accordion_tab_title_icon_new']['value'] . ' fa-accordion-icon"></i>';
-//                    }
                     if ( 'svg' === $tab['eael_adv_accordion_tab_title_icon_new']['library'] ) {
-                        echo '<span class="fa-accordion-icon eaa-svg">';
+                        echo '<span class="fa-accordion-icon fa-accordion-icon-svg eaa-svg">';
                         Icons_Manager::render_icon( $tab['eael_adv_accordion_tab_title_icon_new'] );
                         echo '</span>';
                     }else{
@@ -1125,24 +1066,7 @@ class Adv_Accordion extends Widget_Base
             }
             // toggle icon
             if ($settings['eael_adv_accordion_icon_show'] === 'yes' && $settings['eael_adv_accordion_toggle_icon_postion'] === 'right') {
-                if ($accordion_icon_is_new || $accordion_icon_migrated) {
-//                    if (isset($settings['eael_adv_accordion_icon_new']['value']['url'])) {
-//                        echo '<img src="' . $settings['eael_adv_accordion_icon_new']['value']['url'] . '" />';
-//                    } else {
-//                        echo '<i class="' . $settings['eael_adv_accordion_icon_new']['value'] . ' fa-toggle"></i>';
-//                    }
-
-                    if ( 'svg' === $settings['eael_adv_accordion_icon_new']['library'] ) {
-                        echo '<span class="fa-toggle eaa-svg">';
-                        Icons_Manager::render_icon( $settings['eael_adv_accordion_icon_new'] );
-                        echo '</span>';
-                    }else{
-                        Icons_Manager::render_icon( $settings['eael_adv_accordion_icon_new'], [ 'aria-hidden' => 'true', 'class' => "fa-toggle" ] );
-                    }
-
-                } else {
-                    echo '<i class="' . $settings['eael_adv_accordion_icon'] . ' fa-toggle"></i>';
-                }
+                $this->print_toggle_icon($settings);
             }
             echo '</div>';
 
@@ -1159,4 +1083,24 @@ class Adv_Accordion extends Widget_Base
         }
         echo '</div>';
     }
+
+    protected function print_toggle_icon($settings)
+    {
+        $accordion_icon_migrated = isset($settings['__fa4_migrated']['eael_adv_accordion_icon_new']);
+        $accordion_icon_is_new = empty($settings['eael_adv_accordion_icon']);
+        if ($accordion_icon_is_new || $accordion_icon_migrated) {
+            if ( 'svg' === $settings['eael_adv_accordion_icon_new']['library'] ) {
+                echo '<span class="fa-toggle fa-toggle-svg eaa-svg">';
+                Icons_Manager::render_icon( $settings['eael_adv_accordion_icon_new'] );
+                echo '</span>';
+            }else{
+                Icons_Manager::render_icon( $settings['eael_adv_accordion_icon_new'], [ 'aria-hidden' => 'true', 'class' => "fa-toggle" ] );
+            }
+
+        } else {
+            echo '<i class="' . $settings['eael_adv_accordion_icon'] . ' fa-toggle"></i>';
+        }
+    }
 }
+
+
