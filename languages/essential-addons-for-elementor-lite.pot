@@ -53,7 +53,7 @@ msgstr ""
 msgid "Select a Fluent Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:865, ../includes/Template/Content/Product_Grid.php:63, ../includes/Template/Content/Product_Grid.php:29, ../includes/Template/Eicon-Woocommerce/default.php:259, ../includes/Template/Eicon-Woocommerce/default.php:198, ../includes/Template/Eicon-Woocommerce/default.php:92, ../includes/Template/Eicon-Woocommerce/default.php:78, ../includes/Template/Eicon-Woocommerce/default.php:44
+#: ../includes/Classes/Helper.php:865, ../includes/Template/Content/Product_Grid.php:63, ../includes/Template/Content/Product_Grid.php:29, ../includes/Template/Eicon-Woocommerce/default.php:260, ../includes/Template/Eicon-Woocommerce/default.php:199, ../includes/Template/Eicon-Woocommerce/default.php:93, ../includes/Template/Eicon-Woocommerce/default.php:79, ../includes/Template/Eicon-Woocommerce/default.php:45
 msgid "Sale!"
 msgstr ""
 
@@ -7256,27 +7256,27 @@ msgstr ""
 msgid "Post ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Helper.php:61, ../includes/Traits/Login_Registration.php:62, ../includes/Traits/Login_Registration.php:227, ../includes/Traits/Woo_Product_Comparable.php:1878
+#: ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Helper.php:57, ../includes/Traits/Login_Registration.php:62, ../includes/Traits/Login_Registration.php:227, ../includes/Traits/Woo_Product_Comparable.php:1878
 msgid "Widget ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:33, ../includes/Traits/Login_Registration.php:79, ../includes/Traits/Login_Registration.php:200
+#: ../includes/Traits/Helper.php:29, ../includes/Traits/Login_Registration.php:79, ../includes/Traits/Login_Registration.php:200
 msgid "Insecure form submitted without security token"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:41, ../includes/Traits/Login_Registration.php:92, ../includes/Traits/Login_Registration.php:210, ../includes/Traits/Woo_Product_Comparable.php:1911
+#: ../includes/Traits/Helper.php:37, ../includes/Traits/Login_Registration.php:92, ../includes/Traits/Login_Registration.php:210, ../includes/Traits/Woo_Product_Comparable.php:1911
 msgid "Security token did not match"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:51, ../includes/Traits/Login_Registration.php:55, ../includes/Traits/Login_Registration.php:222, ../includes/Traits/Woo_Product_Comparable.php:1873
+#: ../includes/Traits/Helper.php:47, ../includes/Traits/Login_Registration.php:55, ../includes/Traits/Login_Registration.php:222, ../includes/Traits/Woo_Product_Comparable.php:1873
 msgid "Page ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:197
+#: ../includes/Traits/Helper.php:193
 msgid "Essential Addons for Elementor"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:376, ../includes/Traits/Twitter_Feed.php:119
+#: ../includes/Traits/Helper.php:372, ../includes/Traits/Twitter_Feed.php:119
 msgid "%s ago"
 msgstr ""
 
@@ -7892,15 +7892,15 @@ msgstr ""
 msgid "No products found!"
 msgstr ""
 
-#: ../includes/Template/Content/Product_Grid.php:27, ../includes/Template/Eicon-Woocommerce/default.php:42
+#: ../includes/Template/Content/Product_Grid.php:27, ../includes/Template/Eicon-Woocommerce/default.php:43
 msgid "Stock <br/> Out"
 msgstr ""
 
-#: ../includes/Template/Eicon-Woocommerce/default.php:259, ../includes/Template/Eicon-Woocommerce/default.php:198, ../includes/Template/Eicon-Woocommerce/default.php:92
+#: ../includes/Template/Eicon-Woocommerce/default.php:260, ../includes/Template/Eicon-Woocommerce/default.php:199, ../includes/Template/Eicon-Woocommerce/default.php:93
 msgid "Stock "
 msgstr ""
 
-#: ../includes/Template/Eicon-Woocommerce/default.php:259, ../includes/Template/Eicon-Woocommerce/default.php:198, ../includes/Template/Eicon-Woocommerce/default.php:92
+#: ../includes/Template/Eicon-Woocommerce/default.php:260, ../includes/Template/Eicon-Woocommerce/default.php:199, ../includes/Template/Eicon-Woocommerce/default.php:93
 msgid "Out"
 msgstr ""
 
