@@ -62,7 +62,8 @@ ea.hooks.addAction("init", "ea", () => {
 
         $doc.on('click', '.eael-wc-compare', function (e) {
             e.preventDefault();
-            requestType = 'compare'
+            e.stopImmediatePropagation();
+            requestType = 'compare';
             compareBtn = $(this);
             compareBtnSpan = compareBtn.find('.eael-wc-compare-text');
             if (!compareBtnSpan.length){
@@ -89,6 +90,7 @@ ea.hooks.addAction("init", "ea", () => {
         });
         $doc.on('click', '.eael-wc-remove', function (e) {
             e.preventDefault();
+            e.stopImmediatePropagation();
             let $rBtn = $(this);
             let productId = $rBtn.data('product-id');
             $rBtn.addClass('disable');
