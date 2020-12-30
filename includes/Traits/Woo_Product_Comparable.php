@@ -1901,6 +1901,7 @@ trait Woo_Product_Comparable {
 			$err_msg = __( 'Product ID is missing', 'essential-addons-for-elementor-lite' );
 		}
 		$product_ids = get_transient( 'eael_product_compare_ids' );
+
 		if ( ! empty( $product_id ) ) {
 			$p_exist = ! empty( $product_ids ) && is_array( $product_ids );
 			if ( ! empty( $_POST['remove_product'] ) && $p_exist ) {

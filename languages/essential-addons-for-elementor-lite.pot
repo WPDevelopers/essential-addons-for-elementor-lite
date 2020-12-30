@@ -7264,7 +7264,7 @@ msgstr ""
 msgid "Insecure form submitted without security token"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:37, ../includes/Traits/Login_Registration.php:92, ../includes/Traits/Login_Registration.php:210, ../includes/Traits/Woo_Product_Comparable.php:1929
+#: ../includes/Traits/Helper.php:37, ../includes/Traits/Login_Registration.php:92, ../includes/Traits/Login_Registration.php:210, ../includes/Traits/Woo_Product_Comparable.php:1930
 msgid "Security token did not match"
 msgstr ""
 
@@ -7692,7 +7692,7 @@ msgstr ""
 msgid "No products added to compare."
 msgstr ""
 
-#: ../includes/Traits/Woo_Product_Comparable.php:1749, ../includes/Traits/Woo_Product_Comparable.php:1995
+#: ../includes/Traits/Woo_Product_Comparable.php:1749, ../includes/Traits/Woo_Product_Comparable.php:1996
 msgid "In stock"
 msgstr ""
 
