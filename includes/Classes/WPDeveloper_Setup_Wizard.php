@@ -6,6 +6,8 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 } // Exit if accessed directly.
 
+//use Essential_Addons_Elementor\Classes\WPDeveloper_Plugin_Installer;
+
 class WPDeveloper_Setup_Wizard {
 
     private $eael_version;
@@ -13,7 +15,6 @@ class WPDeveloper_Setup_Wizard {
     public function __construct() {
 
     }
-
 
     public function tab_step() {
         ?>
@@ -112,7 +113,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             <form class="eael-setup-wizard-form" method="post">
                 <div id="configuration" class="setup-content">
                     <div class="eael-input-group config-list">
-                        <input id="basic" name="radio" type="radio">
+                        <input id="basic" value="basic" name="eael_preferences" type="radio">
                         <label for="basic">
                             <div class="eael-radio-circle"></div>
                             <div class="eael-radio-text">
@@ -132,7 +133,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                         </label>
                     </div>
                     <div class="eael-input-group config-list">
-                        <input id="advance" name="radio" type="radio" checked>
+                        <input id="advance" value="advance" name="eael_preferences" type="radio" checked>
                         <label for="advance">
                             <div class="eael-radio-circle"></div>
                             <div class="eael-radio-text">
@@ -152,7 +153,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                         </label>
                     </div>
                     <div class="eael-input-group config-list">
-                        <input id="custom" name="radio" type="radio">
+                        <input id="custom" value="custom"  name="eael_preferences" name="radio" type="radio">
                         <label for="custom">
                             <div class="eael-radio-circle"></div>
                             <div class="eael-radio-text">
@@ -185,9 +186,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                     <div class="eael-setup-final-info">
                         <div>
                             <div class="eael-input-group">
-                                <input type="checkbox" id="eael_user_email_address" name="eael_user_email_address"
-                                       value=""
-                                       checked>
+                                <input type="checkbox" id="eael_user_email_address" name="eael_user_email_address" checked>
                                 <label for="eael_user_email_address">Share non-sensitive diagnosstic data and plugin
                                     usage
                                     information</label>
@@ -209,6 +208,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         <div class="eael-setup-footer">
             <button id="eael-prev" class="button eael-btn" onclick="eaelNextStep(-1)">< Previous</button>
             <button id="eael-next" class="button eael-btn" onclick="eaelNextStep(1)">Next ></button>
+            <button id="eael-save" style="display: none" class="button eael-btn eael-setup-wizard-save">Submit</button>
         </div>
         <?php
     }
@@ -226,19 +226,61 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         <?php
     }
 
-    public function save_setup_wizard_data() {
-
-    }
-
     public function eael_elements() {
         ?>
-        <div id="elements" class="setup-content eael-box">Contain Elements</div>
+        <div id="elements" class="setup-content eael-box">Contain Elements
+            <div class="row">
+                <div class="eael-checkbox-container">
+                    <?php foreach ( $this->get_eael_elements() as $key => $element ): ?>
+                        <div class="eael-checkbox">
+                            <div class="eael-elements-info">
+                                <p class="eael-el-title"><?php echo $element; ?></p>
+                                <input type="checkbox" id="<?php echo $key; ?>" name="eael_element[<?php echo $key; ?>]"
+                                       checked="'checked'">
+                                <label for="<?php echo $key; ?>" class=""></label>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
         <?php
     }
 
     public function eael_integrations() {
         ?>
-        <div id="integrations" class="setup-content eael-box">integrations</div>
+        <div id="integrations" class="setup-content eael-box">
+            <div class="row">
+                <?php foreach ( $this->get_plugin_list() as $plugin ) { ?>
+                    <div class="col-one-fourth">
+                        <div class="eael-admin-block-wrapper">
+                            <div class="eael-admin-block eael-admin-block-integrations">
+                                <div class="eael-admin-block-content">
+                                    <div class="eael-admin-block-integrations-logo">
+                                        <img src="<?php echo $plugin[ 'logo' ]; ?>" alt="logo"/>
+                                    </div>
+                                    <h2 class="eael-admin-block-integrations-title"><?php echo $plugin[ 'title' ]; ?></h2>
+                                    <p class="eael-admin-block-integrations-text"><?php echo $plugin[ 'desc' ]; ?></p>
+                                    <div class="eael-admin-block-integrations-btn-wrap">
+                                        <?php if ( $this->get_local_plugin_data( $plugin[ 'basename' ] ) === false ) { ?>
+                                            <a class="ea-button wpdeveloper-plugin-installer" data-action="install"
+                                               data-slug="<?php echo $plugin[ 'slug' ]; ?>"><?php _e( 'Install', 'essential-addons-for-elementor-lite' ); ?></a>
+                                        <?php } else { ?>
+                                            <?php if ( is_plugin_active( $plugin[ 'basename' ] ) ) { ?>
+                                                <a class="ea-button wpdeveloper-plugin-installer"><?php _e( 'Activated', 'essential-addons-for-elementor-lite' ); ?></a>
+                                            <?php } else { ?>
+                                                <a class="ea-button wpdeveloper-plugin-installer" data-action="activate"
+                                                   data-basename="<?php echo $plugin[ 'basename' ]; ?>"><?php _e( 'Activate', 'essential-addons-for-elementor-lite' ); ?></a>
+                                            <?php } ?>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
         <?php
     }
 
@@ -261,22 +303,23 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             eaelRenderTab(eaelCurrentTab);
 
             function eaelRenderTab(step) {
-                var contents = document.getElementsByClassName("setup-content");
-                contents[step].style.display = "block";
+                var contents = document.getElementsByClassName("setup-content"),
+                    prev = document.getElementById("eael-prev"),
+                    nextElement = document.getElementById("eael-next"),
+                    saveElement = document.getElementById("eael-save");
 
-                if (step == 0) {
-                    document.getElementById("eael-prev").style.display = "none";
-                } else {
-                    document.getElementById("eael-prev").style.display = "inline";
-                }
+                contents[step].style.display = "block";
+                prev.style.display = (step == 0) ? "none" : "inline";
+
                 if (step == (contents.length - 1)) {
-                    document.getElementById("eael-next").innerHTML = "Submit";
+                    saveElement.style.display = "inline";
+                    nextElement.style.display = "none";
                 } else {
-                    document.getElementById("eael-next").innerHTML = "Next >";
+                    nextElement.style.display = "inline";
+                    saveElement.style.display = "none";
                 }
                 eaelStepIndicator(step)
             }
-
 
             function eaelStepIndicator(stepNumber) {
                 var steps = document.getElementsByClassName("step"),
@@ -291,5 +334,82 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             }
         </script>
         <?php
+    }
+
+    public function get_plugin_list() {
+        return [
+            [
+                'slug'     => 'notificationx',
+                'basename' => 'notificationx/notificationx.php',
+                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
+                'title'    => 'NotificationX',
+                'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
+            ],
+            [
+                'slug'     => 'easyjobs',
+                'basename' => 'easyjobs/easyjobs.php',
+                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
+                'title'    => 'EasyJobs',
+                'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
+            ],
+            [
+                'slug'     => 'team-member-block',
+                'basename' => 'team-member-block/team-member-block.php',
+                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
+                'title'    => 'Team Member Block',
+                'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
+            ],
+            [
+                'slug'     => 'team-member-block',
+                'basename' => 'team-member-block/team-member-block.php',
+                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
+                'title'    => 'Team Member Block',
+                'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
+            ],
+            [
+                'slug'     => 'team-member-block',
+                'basename' => 'team-member-block/team-member-block.php',
+                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
+                'title'    => 'Team Member Block',
+                'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
+            ],
+        ];
+    }
+
+    public function get_eael_elements() {
+        return [
+            'creative-btn'  => 'Creative Button',
+            'team-members'  => 'Team Member',
+            'testimonials'  => 'Testimonial',
+            'flip-box'      => 'Flip Box',
+            'info-box'      => 'Info Box',
+            'dual-header'   => 'Dual Header',
+            'tooltip'       => 'Tooltip',
+            'adv-accordion' => 'Adv Accordion',
+        ];
+    }
+
+    /**
+     * get_local_plugin_data
+     *
+     * @param mixed $basename
+     * @return array|false
+     */
+    public function get_local_plugin_data( $basename = '' ) {
+        if ( empty( $basename ) ) {
+            return false;
+        }
+
+        if ( !function_exists( 'get_plugins' ) ) {
+            include_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+
+        $plugins = get_plugins();
+
+        if ( !isset( $plugins[ $basename ] ) ) {
+            return false;
+        }
+
+        return $plugins[ $basename ];
     }
 }
