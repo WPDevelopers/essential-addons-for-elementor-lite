@@ -197,6 +197,25 @@ trait Woo_Product_Comparable {
 			'default'     => __( 'Compare Products', 'essential-addons-for-elementor-lite' ),
 			'placeholder' => __( 'Compare Products', 'essential-addons-for-elementor-lite' ),
 		] );
+        $this->add_control(
+            'table_title_tag',
+            [
+                'label' => __( 'Table Title HTML Tag', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'h1' => 'H1',
+                    'h2' => 'H2',
+                    'h3' => 'H3',
+                    'h4' => 'H4',
+                    'h5' => 'H5',
+                    'h6' => 'H6',
+                    'div' => 'div',
+                    'span' => 'span',
+                    'p' => 'p',
+                ],
+                'default' => 'h1',
+            ]
+        );
 		$repeater = new Repeater();
 		$repeater->add_control( 'field_type', [
 			'label'   => __( 'Type', 'essential-addons-for-elementor-lite' ),
@@ -238,10 +257,6 @@ trait Woo_Product_Comparable {
 		$this->add_control( 'field_icon', [
 			'label'   => __( 'Fields Icon', 'elementor' ),
 			'type'    => Controls_Manager::ICONS,
-			'default' => [
-				'value'   => 'fas fa-arrow-right',
-				'library' => 'fa-solid',
-			],
 		] );
 		$this->end_controls_section();
 	}
@@ -1494,6 +1509,7 @@ trait Woo_Product_Comparable {
 		$products = $fields = $ds = [];
 		extract( $options );
 		$title                  = isset( $ds['table_title'] ) ? $ds['table_title'] : '';
+		$title_tag                  = isset( $ds['table_title_tag'] ) ? $ds['table_title_tag'] : 'h1';
 		$ribbon                 = isset( $ds['ribbon'] ) ? $ds['ribbon'] : '';
 		$repeat_price           = isset( $ds['repeat_price'] ) ? $ds['repeat_price'] : '';
 		$repeat_add_to_cart     = isset( $ds['repeat_add_to_cart'] ) ? $ds['repeat_add_to_cart'] : '';
@@ -1541,7 +1557,7 @@ trait Woo_Product_Comparable {
                                 <div class="wcpc-table-header">
 									<?php if ( $field === 'image' ) {
 										if ( ! empty( $title ) ) {
-											printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
+											printf( "<{$title_tag} class='wcpc-title'>%s</{$title_tag}>", esc_html( $title ) );
 										}
 									} else {
 										if ( 'theme-5' === $theme && $field === 'title' ) {
@@ -1608,13 +1624,15 @@ trait Woo_Product_Comparable {
 
 					<?php if ( 'yes' === $repeat_price && isset( $fields['price'] ) ) : ?>
                         <tr class="price repeated">
-                            <th>
-                                <div>
+                            <th class="thead">
+                                <div class="wcpc-table-header">
 									<?php
 									if ( ! empty( $icon ) ) {
 										self::print_icon( $icon );
 									}
-									echo wp_kses_post( $fields['price'] ) ?>
+                                    printf( '<span class="field-name">%s</span>', esc_html( $fields['price'] ) );
+
+                                     ?>
                                 </div>
                             </th>
 
@@ -1633,13 +1651,13 @@ trait Woo_Product_Comparable {
 
 					<?php if ( 'yes' === $repeat_add_to_cart && isset( $fields['add-to-cart'] ) ) : ?>
                         <tr class="add-to-cart repeated">
-                            <th>
-                                <div>
+                            <th class="thead">
+                                <div class="wcpc-table-header">
 									<?php
 									if ( ! empty( $icon ) ) {
 										self::print_icon( $icon );
 									}
-									echo wp_kses_post( $fields['add-to-cart'] ); ?>
+                                    printf( '<span class="field-name">%s</span>', esc_html( $fields['add-to-cart'] ) ); ?>
                                 </div>
                             </th>
 
