@@ -1295,6 +1295,109 @@ trait Woo_Product_Comparable {
 		$this->end_controls_section();
 	}
 
+    public function init_style_close_button_controls()
+    {
+        $this->start_controls_section( 'section_style_cm_close_btn', [
+            'label'     => __( 'Compare Modal Close Button', 'essential-addons-for-elementor-lite' ),
+            'tab'       => Controls_Manager::TAB_STYLE,
+            'condition' => [
+                'show_compare' => 'yes',
+            ],
+        ] );
+
+        $this->add_control(
+            'eael_cm_close_btn_style',
+            [
+                'label' => __(' Close Button', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_cm_close_btn_icon_size',
+            [
+                'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '.eael-wcpc-modal .close-modal' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+
+        $this->add_control(
+            'eael_cm_close_btn_color',
+            [
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '.eael-wcpc-modal .close-modal' => 'color: {{VALUE}}!important;',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_cm_close_btn_bg',
+            [
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '.eael-wcpc-modal .close-modal' => 'background-color: {{VALUE}}!important;',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_cm_close_btn_border_radius',
+            [
+                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '.eael-wcpc-modal .close-modal' => 'border-radius: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'eael_cm_close_btn_box_shadow',
+                'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
+                'selector' => '.eael-wcpc-modal .close-modal',
+            ]
+        );
+        $this->end_controls_section();
+
+
+    }
 	public function init_style_icon_controls( $tbl = '' ) {
 		$icon = "{$tbl} .elementor-icon";
 		$this->start_controls_section( 'section_style_icon', [

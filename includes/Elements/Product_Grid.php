@@ -195,6 +195,7 @@ class Product_Grid extends Widget_Base
         $this->init_style_compare_button_controls($compare_btn_condition);
         $this->init_style_content_controls(compact('container_class'));
         $this->init_style_table_controls(compact('table', 'table_title', 'table_title_wrap'));
+        $this->init_style_close_button_controls();
     }
 
     protected function init_content_layout_controls()
