@@ -258,6 +258,13 @@ trait Woo_Product_Comparable {
 			'label'   => __( 'Fields Icon', 'elementor' ),
 			'type'    => Controls_Manager::ICONS,
 		] );
+        $this->add_control( "no_products_found_text", [
+            'label'       => __( 'Text for "No products are found to compare"', 'essential-addons-for-elementor-lite' ),
+            'default' => __( 'No products are added to Compare. Please add products to compare.', 'essential-addons-for-elementor-lite' ),
+            'type'        => Controls_Manager::TEXTAREA,
+            'label_block' => true,
+            'placeholder' => __( 'Eg. No products are added to Compare.', 'essential-addons-for-elementor-lite' ),
+        ] );
 		$this->end_controls_section();
 	}
 
@@ -1508,8 +1515,9 @@ trait Woo_Product_Comparable {
 	public static function render_compare_table( $options ) {
 		$products = $fields = $ds = [];
 		extract( $options );
+		$not_found_text                  = isset( $ds['no_products_found_text'] ) ? $ds['no_products_found_text'] : '';
 		$title                  = isset( $ds['table_title'] ) ? $ds['table_title'] : '';
-		$title_tag                  = isset( $ds['table_title_tag'] ) ? $ds['table_title_tag'] : 'h1';
+		$title_tag              = isset( $ds['table_title_tag'] ) ? $ds['table_title_tag'] : 'h1';
 		$ribbon                 = isset( $ds['ribbon'] ) ? $ds['ribbon'] : '';
 		$repeat_price           = isset( $ds['repeat_price'] ) ? $ds['repeat_price'] : '';
 		$repeat_add_to_cart     = isset( $ds['repeat_add_to_cart'] ) ? $ds['repeat_add_to_cart'] : '';
@@ -1528,7 +1536,7 @@ trait Woo_Product_Comparable {
                 <tbody>
 				<?php if ( empty( $products ) ) { ?>
                     <tr class="no-products">
-                        <td><?php esc_html_e( 'No products added to compare.', 'essential-addons-for-elementor-lite' ) ?></td>
+                        <td><?php echo esc_html($not_found_text ); ?></td>
                     </tr>
 				<?php } else {
 
