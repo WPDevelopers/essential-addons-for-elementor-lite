@@ -8,6 +8,8 @@ if ( !defined( 'ABSPATH' ) ) {
 
 class WPDeveloper_Setup_Wizard {
 
+    private $eael_version;
+
     public function __construct() {
 
     }
@@ -107,77 +109,97 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
     public function tab_content() {
         ?>
         <div class="eael-setup-body">
-            <div id="configuration" class="setup-content">
-                <div class="eael-input-group config-list">
-                    <input id="basic" name="radio" type="radio">
-                    <label for="basic">
-                        <div class="eael-radio-circle"></div>
-                        <div class="eael-radio-text">
-                            <strong>Basic</strong>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo
-                                viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis
-                                ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel
-                                facilisis. </p>
-                        </div>
-                    </label>
-                </div>
-                <div class="eael-input-group config-list">
-                    <input id="advance" name="radio" type="radio" checked>
-                    <label for="advance">
-                        <div class="eael-radio-circle"></div>
-                        <div class="eael-radio-text">
-                            <strong>Advance</strong>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo
-                                viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis
-                                ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel
-                                facilisis. </p>
-                        </div>
-                    </label>
-                </div>
-                <div class="eael-input-group config-list">
-                    <input id="custom" name="radio" type="radio">
-                    <label for="custom">
-                        <div class="eael-radio-circle"></div>
-                        <div class="eael-radio-text">
-                            <strong>Custom</strong>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo
-                                viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis
-                                ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel
-                                facilisis. </p>
-                        </div>
-                    </label>
-                </div>
-            </div>
-            <div id="elements" class="setup-content eael-box">elements</div>
-            <div id="templately" class="setup-content eael-box">
-                <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately.jpg'; ?>" alt="">
-            </div>
-            <div id="integrations" class="setup-content eael-box">integrations</div>
-            <div id="finalize" class="setup-content eael-box">
-                <div class="eael-iframe">
-                    <iframe src="https://www.youtube.com/embed/CnSYwGcXnxA" frameborder="0"></iframe>
-                </div>
-                <div class="eael-setup-final-info">
-                    <div>
-                        <div class="eael-input-group">
-                            <input type="checkbox" id="eael_user_email_address" name="eael_user_email_address" value=""
-                                   checked>
-                            <label for="eael_user_email_address">Share non-sensitive diagnosstic data and plugin usage
-                                information</label>
-                        </div>
-                        <button type="button"
-                                class="btn-collect"><?php esc_html_e( 'What We Collect?', 'essential-addons-for-elementor-lite' ); ?></button>
+            <form class="eael-setup-wizard-form" method="post">
+                <div id="configuration" class="setup-content">
+                    <div class="eael-input-group config-list">
+                        <input id="basic" name="radio" type="radio">
+                        <label for="basic">
+                            <div class="eael-radio-circle"></div>
+                            <div class="eael-radio-text">
+                                <strong>Basic</strong>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt
+                                    ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus
+                                    commodo
+                                    viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet,
+                                    consectetur
+                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    Quis
+                                    ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
+                                    vel
+                                    facilisis. </p>
+                            </div>
+                        </label>
                     </div>
-                    <button type="button" id="betterdocsqswemailskipbutton"
-                            class="btn-skip"><?php esc_html_e( 'Skip This Step', 'essential-addons-for-elementor-lite' ); ?></button>
+                    <div class="eael-input-group config-list">
+                        <input id="advance" name="radio" type="radio" checked>
+                        <label for="advance">
+                            <div class="eael-radio-circle"></div>
+                            <div class="eael-radio-text">
+                                <strong>Advance</strong>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt
+                                    ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus
+                                    commodo
+                                    viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet,
+                                    consectetur
+                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    Quis
+                                    ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
+                                    vel
+                                    facilisis. </p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="eael-input-group config-list">
+                        <input id="custom" name="radio" type="radio">
+                        <label for="custom">
+                            <div class="eael-radio-circle"></div>
+                            <div class="eael-radio-text">
+                                <strong>Custom</strong>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt
+                                    ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus
+                                    commodo
+                                    viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet,
+                                    consectetur
+                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    Quis
+                                    ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
+                                    vel
+                                    facilisis. </p>
+                            </div>
+                        </label>
+                    </div>
                 </div>
-            </div>
+                <?php $this->eael_elements(); ?>
+                <div id="templately" class="setup-content eael-box">
+                    <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately.jpg'; ?>" alt="">
+                </div>
+
+                <?php $this->eael_integrations(); ?>
+                <div id="finalize" class="setup-content eael-box">
+                    <div class="eael-iframe">
+                        <iframe src="https://www.youtube.com/embed/CnSYwGcXnxA" frameborder="0"></iframe>
+                    </div>
+                    <div class="eael-setup-final-info">
+                        <div>
+                            <div class="eael-input-group">
+                                <input type="checkbox" id="eael_user_email_address" name="eael_user_email_address"
+                                       value=""
+                                       checked>
+                                <label for="eael_user_email_address">Share non-sensitive diagnosstic data and plugin
+                                    usage
+                                    information</label>
+                            </div>
+                            <button type="button"
+                                    class="btn-collect"><?php esc_html_e( 'What We Collect?', 'essential-addons-for-elementor-lite' ); ?></button>
+                        </div>
+                        <button type="button" id="betterdocsqswemailskipbutton"
+                                class="btn-skip"><?php esc_html_e( 'Skip This Step', 'essential-addons-for-elementor-lite' ); ?></button>
+                    </div>
+                </div>
+            </form>
         </div>
         <?php
     }
@@ -209,11 +231,15 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
     }
 
     public function eael_elements() {
-
+        ?>
+        <div id="elements" class="setup-content eael-box">Contain Elements</div>
+        <?php
     }
 
     public function eael_integrations() {
-
+        ?>
+        <div id="integrations" class="setup-content eael-box">integrations</div>
+        <?php
     }
 
     public function inline_script() {
