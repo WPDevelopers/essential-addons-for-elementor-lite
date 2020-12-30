@@ -402,4 +402,27 @@
 			});
 		}
 	});
+
+	$(document).on('click','.eael-setup-wizard-save',function (e){
+		var $this = $(this);
+		//$this.attr('disabled','disabled');
+		$.ajax({
+			url: localize.ajaxurl,
+			type: "POST",
+			data: {
+				action: "save_setup_wizard_data",
+				security: localize.nonce,
+				fields:$( "form.eael-setup-wizard-form" ).serialize()
+			},
+
+			success: function (response) {
+
+			},
+			error: function () {
+				console.log('Error');
+			},
+		});
+
+	});
+
 })(jQuery);

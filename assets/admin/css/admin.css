@@ -198,7 +198,14 @@
 .eael-setup-wizard-wrap .button.eael-btn:hover {
     background-color: #02cc7b;
 }
-#eael-next {
+
+button#eael-save[disabled]{
+	cursor: wait;
+	background-image: -webkit-linear-gradient(-169deg, rgb(146, 113, 255) 0%, rgb(87, 37, 255) 100%) !important;
+}
+
+#eael-next ,
+#eael-save {
     background-image: -webkit-linear-gradient(-169deg, rgb(146, 113, 255) 0%, rgb(87, 37, 255) 100%);
 }
 #eael-prev {
@@ -463,6 +470,10 @@ textarea.eael-form-control {
 	border-radius: 5px;
 	background-color: rgb(255, 255, 255);
 	box-shadow: 0px 5px 18px 0px rgba(0, 4, 32, 0.08);
+}
+
+.eael-setup-body .eael-checkbox {
+	flex-basis: 260px;
 }
 
 .eael-checkbox-quick-tools {
