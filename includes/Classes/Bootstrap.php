@@ -159,6 +159,7 @@ class Bootstrap
 
         add_action('wp_ajax_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
         add_action('wp_ajax_nopriv_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
+        // Compare table
 	    add_action( 'wp_ajax_nopriv_eael_product_grid', [$this, 'get_compare_table']);
 	    add_action( 'wp_ajax_eael_product_grid', [$this, 'get_compare_table']);
 
