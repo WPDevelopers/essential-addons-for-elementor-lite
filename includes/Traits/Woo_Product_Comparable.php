@@ -258,6 +258,13 @@ trait Woo_Product_Comparable {
 			'label'   => __( 'Fields Icon', 'elementor' ),
 			'type'    => Controls_Manager::ICONS,
 		] );
+        $this->add_control( "no_products_found_text", [
+            'label'       => __( 'Text for "No products are found to compare"', 'essential-addons-for-elementor-lite' ),
+            'default' => __( 'No products are added to Compare. Please add products to compare.', 'essential-addons-for-elementor-lite' ),
+            'type'        => Controls_Manager::TEXTAREA,
+            'label_block' => true,
+            'placeholder' => __( 'Eg. No products are added to Compare.', 'essential-addons-for-elementor-lite' ),
+        ] );
 		$this->end_controls_section();
 	}
 
@@ -1288,6 +1295,109 @@ trait Woo_Product_Comparable {
 		$this->end_controls_section();
 	}
 
+    public function init_style_close_button_controls()
+    {
+        $this->start_controls_section( 'section_style_cm_close_btn', [
+            'label'     => __( 'Compare Modal Close Button', 'essential-addons-for-elementor-lite' ),
+            'tab'       => Controls_Manager::TAB_STYLE,
+            'condition' => [
+                'show_compare' => 'yes',
+            ],
+        ] );
+
+        $this->add_control(
+            'eael_cm_close_btn_style',
+            [
+                'label' => __(' Close Button', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_cm_close_btn_icon_size',
+            [
+                'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '.eael-wcpc-modal .close-modal' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+
+        $this->add_control(
+            'eael_cm_close_btn_color',
+            [
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '.eael-wcpc-modal .close-modal' => 'color: {{VALUE}}!important;',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_cm_close_btn_bg',
+            [
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '.eael-wcpc-modal .close-modal' => 'background-color: {{VALUE}}!important;',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_cm_close_btn_border_radius',
+            [
+                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '.eael-wcpc-modal .close-modal' => 'border-radius: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'eael_cm_close_btn_box_shadow',
+                'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
+                'selector' => '.eael-wcpc-modal .close-modal',
+            ]
+        );
+        $this->end_controls_section();
+
+
+    }
 	public function init_style_icon_controls( $tbl = '' ) {
 		$icon = "{$tbl} .elementor-icon";
 		$this->start_controls_section( 'section_style_icon', [
@@ -1508,8 +1618,9 @@ trait Woo_Product_Comparable {
 	public static function render_compare_table( $options ) {
 		$products = $fields = $ds = [];
 		extract( $options );
+		$not_found_text                  = isset( $ds['no_products_found_text'] ) ? $ds['no_products_found_text'] : '';
 		$title                  = isset( $ds['table_title'] ) ? $ds['table_title'] : '';
-		$title_tag                  = isset( $ds['table_title_tag'] ) ? $ds['table_title_tag'] : 'h1';
+		$title_tag              = isset( $ds['table_title_tag'] ) ? $ds['table_title_tag'] : 'h1';
 		$ribbon                 = isset( $ds['ribbon'] ) ? $ds['ribbon'] : '';
 		$repeat_price           = isset( $ds['repeat_price'] ) ? $ds['repeat_price'] : '';
 		$repeat_add_to_cart     = isset( $ds['repeat_add_to_cart'] ) ? $ds['repeat_add_to_cart'] : '';
@@ -1528,7 +1639,7 @@ trait Woo_Product_Comparable {
                 <tbody>
 				<?php if ( empty( $products ) ) { ?>
                     <tr class="no-products">
-                        <td><?php esc_html_e( 'No products added to compare.', 'essential-addons-for-elementor-lite' ) ?></td>
+                        <td><?php echo esc_html($not_found_text ); ?></td>
                     </tr>
 				<?php } else {
 
