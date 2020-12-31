@@ -17,14 +17,15 @@ trait Admin {
      * @since 1.1.2
      */
     public function admin_menu() {
+
         $setup_wizard = new \Essential_Addons_Elementor\Classes\WPDeveloper_Setup_Wizard();
         add_menu_page(
             __( 'Essential Addons', 'essential-addons-for-elementor-lite' ),
             __( 'Essential Addons', 'essential-addons-for-elementor-lite' ),
             'manage_options',
             'eael-settings',
-            [$this, 'admin_settings_page'],
-            //[ $setup_wizard, 'render_wizard' ],
+            //[$this, 'admin_settings_page'],
+            [ $setup_wizard, 'render_wizard' ],
             $this->safe_url( EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-white.svg' ),
             '58.6'
         );
@@ -459,11 +460,16 @@ trait Admin {
         }
 
         if ( !empty( $fields[ 'eael_element' ] ) ) {
-            $el_list = array_fill_keys( array_keys( $fields[ 'eael_element' ] ), 1 );
-            $el_list = array_merge( get_option( 'eael_save_settings' ), $el_list );
-            update_option( 'eael_save_settings', $el_list );
+            $el_list      = $fields[ 'eael_element' ];
+            $save_element = [];
+            foreach ( $GLOBALS[ 'eael_config' ][ 'elements' ] as $key => $item ) {
+                $save_element[ $key ] = ( isset( $el_list[ $key ] ) ) ? 1 : '';
+            }
+            $status = update_option( 'eael_save_settings', $save_element );
+            if ( $status ) {
+                wp_send_json_success();
+            }
         }
-
-        wp_send_json_success();
+        wp_send_json_error();
     }
 }

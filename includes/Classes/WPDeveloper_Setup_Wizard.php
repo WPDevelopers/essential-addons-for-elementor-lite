@@ -113,7 +113,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             <form class="eael-setup-wizard-form" method="post">
                 <div id="configuration" class="setup-content">
                     <div class="eael-input-group config-list">
-                        <input id="basic" value="basic" name="eael_preferences" type="radio">
+                        <input id="basic" data-elment-list = <?php echo htmlspecialchars(json_encode($this->get_eael_elements('basic')),ENT_QUOTES); ?> value="basic" class="eael_preferences" name="eael_preferences" type="radio">
                         <label for="basic">
                             <div class="eael-radio-circle"></div>
                             <div class="eael-radio-text">
@@ -122,18 +122,14 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                                     incididunt
                                     ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus
                                     commodo
-                                    viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet,
-                                    consectetur
-                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    Quis
-                                    ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                                    vel
+
                                     facilisis. </p>
                             </div>
                         </label>
                     </div>
                     <div class="eael-input-group config-list">
-                        <input id="advance" value="advance" name="eael_preferences" type="radio" checked>
+                        <input id="advance" value="advance" data-elment-list = <?php echo htmlspecialchars(json_encode($this->get_eael_elements('advanced')),ENT_QUOTES); ?> class="eael_preferences" name="eael_preferences"
+                               type="radio" checked>
                         <label for="advance">
                             <div class="eael-radio-circle"></div>
                             <div class="eael-radio-text">
@@ -142,10 +138,6 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                                     incididunt
                                     ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus
                                     commodo
-                                    viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet,
-                                    consectetur
-                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    Quis
                                     ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
                                     vel
                                     facilisis. </p>
@@ -153,7 +145,8 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                         </label>
                     </div>
                     <div class="eael-input-group config-list">
-                        <input id="custom" value="custom"  name="eael_preferences" name="radio" type="radio">
+                        <input id="custom" value="custom" class="eael_preferences" name="eael_preferences" name="radio"
+                               type="radio">
                         <label for="custom">
                             <div class="eael-radio-circle"></div>
                             <div class="eael-radio-text">
@@ -162,10 +155,6 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                                     incididunt
                                     ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus
                                     commodo
-                                    viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet,
-                                    consectetur
-                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    Quis
                                     ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
                                     vel
                                     facilisis. </p>
@@ -186,7 +175,8 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                     <div class="eael-setup-final-info">
                         <div>
                             <div class="eael-input-group">
-                                <input type="checkbox" id="eael_user_email_address" name="eael_user_email_address" checked>
+                                <input type="checkbox" id="eael_user_email_address" name="eael_user_email_address"
+                                       checked>
                                 <label for="eael_user_email_address">Share non-sensitive diagnosstic data and plugin
                                     usage
                                     information</label>
@@ -227,17 +217,19 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
     }
 
     public function eael_elements() {
+
         ?>
         <div id="elements" class="setup-content eael-box">Contain Elements
             <div class="row">
-                <div class="eael-checkbox-container">
-                    <?php foreach ( $this->get_eael_elements() as $key => $element ): ?>
+                <div class="eael-checkbox-container eael-elements-container">
+                    <?php foreach ( $this->get_eael_elements() as $element ): ?>
                         <div class="eael-checkbox">
                             <div class="eael-elements-info">
-                                <p class="eael-el-title"><?php echo $element; ?></p>
-                                <input type="checkbox" id="<?php echo $key; ?>" name="eael_element[<?php echo $key; ?>]"
-                                       checked="'checked'">
-                                <label for="<?php echo $key; ?>" class=""></label>
+                                <p class="eael-el-title"><?php echo $element[ 'name' ]; ?></p>
+                                <input type="checkbox" id="<?php echo $element[ 'key' ]; ?>"
+                                       name="eael_element[<?php echo $element[ 'key' ]; ?>]"
+                                    <?php echo ( $element[ 'preferences' ] == 'advanced' ) ? 'checked' : ''; ?>>
+                                <label for="<?php echo $element[ 'key' ]; ?>" class=""></label>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -376,18 +368,36 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         ];
     }
 
-    public function get_eael_elements() {
-        return [
-            'creative-btn'  => 'Creative Button',
-            'team-members'  => 'Team Member',
-            'testimonials'  => 'Testimonial',
-            'flip-box'      => 'Flip Box',
-            'info-box'      => 'Info Box',
-            'dual-header'   => 'Dual Header',
-            'tooltip'       => 'Tooltip',
-            'adv-accordion' => 'Adv Accordion',
+    public function get_eael_elements( $preferences = null ) {
+        $elements_list    = array();
+        $show_widget_list = [
+            'basic'    => [
+                'call-to-action',
+                'flip-box'
+            ],
+            'advanced' => [
+                'post-grid',
+                'post-timeline'
+            ]
         ];
+        if ( $preferences == 'basic' ) {
+            $elements_list = $show_widget_list[ 'basic' ];
+        } elseif ( $preferences == 'advanced' ) {
+            $elements_list = array_merge( $show_widget_list[ 'basic' ], $show_widget_list[ 'advanced' ] );
+        } else {
+            $globals_el_list = $GLOBALS[ 'eael_config' ][ 'elements' ];
+            $merge           = array_merge( $show_widget_list[ 'basic' ], $show_widget_list[ 'advanced' ] );
+            foreach ( $globals_el_list as $key => $item ) {
+                $elements_list[] = [
+                    'key'         => $key,
+                    'name'        => ucwords( str_replace( '-', ' ', $key ) ),
+                    'preferences' => in_array($key, $merge ) ? 'advanced' : '',
+                ];
+            }
+        }
+        return $elements_list;
     }
+
 
     /**
      * get_local_plugin_data
