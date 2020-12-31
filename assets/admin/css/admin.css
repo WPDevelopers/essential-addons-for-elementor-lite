@@ -532,7 +532,7 @@ textarea.eael-form-control {
 	height: 17px;
 	border-radius: 100%;
 	left: 5px;
-	top: 3px;
+	top: 4px;
 	transition: all 0.2s ease;
 	box-shadow: 0 0 0 5px #fcfff4 inset;
 	background: #cbcfd0;
@@ -1231,6 +1231,8 @@ button.eael-btn.eael-global-control-disable:hover {
 .eael-elements-info {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	width: 100%;
 }
 .eael-elements-info > a.eael-element-info-link {
 	position: relative;
