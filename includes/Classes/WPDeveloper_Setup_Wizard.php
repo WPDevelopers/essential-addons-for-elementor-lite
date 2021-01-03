@@ -6,8 +6,6 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 } // Exit if accessed directly.
 
-//use Essential_Addons_Elementor\Classes\WPDeveloper_Plugin_Installer;
-
 class WPDeveloper_Setup_Wizard {
 
     private $eael_version;
@@ -113,7 +111,9 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             <form class="eael-setup-wizard-form" method="post">
                 <div id="configuration" class="setup-content">
                     <div class="eael-input-group config-list">
-                        <input id="basic" data-elment-list = <?php echo htmlspecialchars(json_encode($this->get_eael_elements('basic')),ENT_QUOTES); ?> value="basic" class="eael_preferences" name="eael_preferences" type="radio">
+                        <input id="basic"
+                               data-elment-list= <?php echo htmlspecialchars( json_encode( $this->get_eael_elements( 'basic' ) ), ENT_QUOTES ); ?> value="basic"
+                               class="eael_preferences" name="eael_preferences" type="radio">
                         <label for="basic">
                             <div class="eael-radio-circle"></div>
                             <div class="eael-radio-text">
@@ -128,7 +128,9 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                         </label>
                     </div>
                     <div class="eael-input-group config-list">
-                        <input id="advance" value="advance" data-elment-list = <?php echo htmlspecialchars(json_encode($this->get_eael_elements('advanced')),ENT_QUOTES); ?> class="eael_preferences" name="eael_preferences"
+                        <input id="advance" value="advance"
+                               data-elment-list= <?php echo htmlspecialchars( json_encode( $this->get_eael_elements( 'advanced' ) ), ENT_QUOTES ); ?> class="eael_preferences"
+                               name="eael_preferences"
                                type="radio" checked>
                         <label for="advance">
                             <div class="eael-radio-circle"></div>
@@ -163,8 +165,9 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                     </div>
                 </div>
                 <?php $this->eael_elements(); ?>
-                <div id="templately" class="setup-content eael-box">
+                <div id="templately" class="setup-content eael-box eael-templately-popup">
                     <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately.jpg'; ?>" alt="">
+                    <?php if ( !is_plugin_active( 'templately/templately.php' ) ) $this->eael_templately_plugin_popup(); ?>
                 </div>
 
                 <?php $this->eael_integrations(); ?>
@@ -368,6 +371,10 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         ];
     }
 
+    /**
+     * @param null $preferences
+     * @return array
+     */
     public function get_eael_elements( $preferences = null ) {
         $elements_list    = array();
         $show_widget_list = [
@@ -391,7 +398,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                 $elements_list[] = [
                     'key'         => $key,
                     'name'        => ucwords( str_replace( '-', ' ', $key ) ),
-                    'preferences' => in_array($key, $merge ) ? 'advanced' : '',
+                    'preferences' => in_array( $key, $merge ) ? 'advanced' : '',
                 ];
             }
         }
@@ -422,4 +429,32 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
 
         return $plugins[ $basename ];
     }
+
+    public function eael_templately_plugin_popup() {
+        ?>
+        <div class="eael-popup__wrapper">
+            <div class="eael-popup__block">
+                <div class="eael-popup__logo">
+                    <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg'; ?>" alt="">
+                </div>
+                <p>Save all your designs with Templately & deploy in hundreds of websites with 1-click. Increase
+                    productivity and power up your whole team to build websites faster than ever before.</p>
+
+                <?php if ( $this->get_local_plugin_data( 'templately/templately.php' ) === false ) { ?>
+                    <a class="eael-popup__button wpdeveloper-plugin-installer" data-action="install"
+                       data-slug="<?php echo 'templately'; ?>"><?php _e( 'Install', 'essential-addons-for-elementor-lite' ); ?></a>
+                <?php } else { ?>
+                    <?php if ( is_plugin_active( 'templately/templately.php' ) ) { ?>
+                        <a class="eael-popup__button wpdeveloper-plugin-installer"><?php _e( 'Activated', 'essential-addons-for-elementor-lite' ); ?></a>
+                    <?php } else { ?>
+                        <a class="eael-popup__button wpdeveloper-plugin-installer" data-action="activate"
+                           data-basename="<?php echo 'templately/templately.php'; ?>"><?php _e( 'Activate', 'essential-addons-for-elementor-lite' ); ?></a>
+                    <?php } ?>
+                <?php } ?>
+            </div>
+        </div>
+        <?php
+    }
 }
+
+
