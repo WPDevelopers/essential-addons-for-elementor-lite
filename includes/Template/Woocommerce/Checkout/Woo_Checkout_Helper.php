@@ -310,7 +310,7 @@ trait Woo_Checkout_Helper {
             </div>
 
       <?php
-      $message  = $settings['ea_woo_checkout_login_message'] ? $settings['ea_woo_checkout_login_message']:esc_html__( 'If you have shopped with us before, please enter your details below. If you are a new customer, please proceed to the Billing section.', 'essential-addons-for-elementor-lite' );
+      $message  = $settings['ea_woo_checkout_login_message'];
 
 			$redirect = wc_get_checkout_url();
 			$hidden   = true;
