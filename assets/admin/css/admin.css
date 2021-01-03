@@ -1355,3 +1355,81 @@ button.eael-btn.eael-global-control-disable:hover {
 	width: 25%;
 	max-width: 200px;
 }
+
+/* Templately Plugin Popup */
+
+.eael-templately-popup {
+	line-height: 1.7;
+	font-weight: 400;
+	letter-spacing: 0;
+	font-family: "Roboto", sans-serif;
+}
+
+.eael-templately-popup .eael-popup__wrapper {
+	position: inherit;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #e6e6e6;
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;
+}
+
+.eael-templately-popup .eael-popup__wrapper.show {
+	display: block;
+}
+
+.eael-templately-popup .eael-popup__wrapper .eael-popup__block {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	background: rgba(255, 255, 255, 0.97);
+	max-width: 770px;
+	text-align: center;
+	padding: 60px 50px 50px;
+	border-radius: 10px;
+}
+
+.eael-templately-popup .eael-popup__wrapper .eael-popup__block .eael-popup__logo {
+	margin-bottom: 20px;
+}
+
+.eael-templately-popup .eael-popup__wrapper .eael-popup__block p {
+	font-size: 18px;
+	font-weight: 400;
+	color: #373747;
+	font-family: "Roboto", sans-serif;
+	margin-bottom: 30px;
+}
+
+.eael-templately-popup .eael-popup__wrapper .eael-popup__block .eael-popup__button {
+	border-radius: 5px;
+	background: linear-gradient(-177deg, #9c60ff 0%, #8543ff 39%, #6d25ff 100%);
+	-webkit-box-shadow: 0px 3px 7px 0px rgba(0, 5, 41, 0.1);
+	box-shadow: 0px 3px 7px 0px rgba(0, 5, 41, 0.1);
+	padding: 17px 30px;
+	color: #fff;
+	font-family: "Roboto", sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	outline: none;
+	cursor: pointer;
+}
+
+.eael-templately-popup .eael-popup__wrapper .eael-popup__logo img {
+	width: 190px;
+	height: 50px;
+}
+
+@media all and (max-width: 767px) {
+	.eael-templately-popup .eael-popup__wrapper .eael-popup__block {
+		padding: 60px 30px 50px;
+	}
+
+	.eael-templately-popup .eael-popup__wrapper .eael-popup__block p {
+		font-size: 16px;
+	}
+}

@@ -456,7 +456,20 @@ trait Admin {
         parse_str( $_POST[ 'fields' ], $fields );
 
         if ( $fields[ 'eael_user_email_address' ] ) {
-            //TODO send data
+            $plugin_name = basename( EAEL_PLUGIN_FILE, '.php' );
+            $is_tracked  = get_option( 'wpins_' . $plugin_name . '_force_tracked' );
+            if ( !$is_tracked ) {
+                if(class_exists('\Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker'))
+                (new \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker(
+                    EAEL_PLUGIN_FILE,
+                    'http://app.wpdeveloper.net',
+                    array(),
+                    true,
+                    true,
+                    1
+                ))->do_tracking( true );
+                update_option( 'wpins_' . $plugin_name . '_force_tracked', true );
+            }
         }
 
         if ( !empty( $fields[ 'eael_element' ] ) ) {
