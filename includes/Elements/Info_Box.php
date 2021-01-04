@@ -1586,7 +1586,7 @@ if ('yes' == $settings['eael_show_infobox_clickable']): ?></a><?php endif;
         }
 
         if ($infobox_icon_is_new || $infobox_icon_migrated) {
-            $icon = $settings['eael_infobox_icon_new']['value'];
+            $icon = $this->get_settings('eael_infobox_icon_new')['value'];
 
             if (isset($icon['url'])) {
                 $this->add_render_attribute('icon_or_image', [
