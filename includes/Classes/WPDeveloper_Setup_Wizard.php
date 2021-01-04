@@ -8,15 +8,11 @@ if ( !defined( 'ABSPATH' ) ) {
 
 class WPDeveloper_Setup_Wizard {
 
-    private $eael_version;
 
-    public function __construct() {
-
-    }
 
     public function tab_step() {
         ?>
-        <ul class="eael-setup-wizard">
+        <ul class="eael-setup-wizard"  data-step="1">
             <li class="step">
                 <div class="icon">
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
@@ -187,8 +183,6 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                             <button type="button"
                                     class="btn-collect"><?php esc_html_e( 'What We Collect?', 'essential-addons-for-elementor-lite' ); ?></button>
                         </div>
-                        <button type="button" id="betterdocsqswemailskipbutton"
-                                class="btn-skip"><?php esc_html_e( 'Skip This Step', 'essential-addons-for-elementor-lite' ); ?></button>
                     </div>
                 </div>
             </form>
@@ -199,8 +193,8 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
     public function setup_wizard_footer() {
         ?>
         <div class="eael-setup-footer">
-            <button id="eael-prev" class="button eael-btn" onclick="eaelNextStep(-1)">< Previous</button>
-            <button id="eael-next" class="button eael-btn" onclick="eaelNextStep(1)">Next ></button>
+            <button id="eael-prev" class="button eael-btn">< Previous</button>
+            <button id="eael-next" class="button eael-btn" >Next ></button>
             <button id="eael-save" style="display: none" class="button eael-btn eael-setup-wizard-save">Submit</button>
         </div>
         <?php
@@ -284,49 +278,16 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         <script>
             var eaelCurrentTab = 0;
 
-            function eaelNextStep(StepNumber) {
-                var contents = document.getElementsByClassName("setup-content");
-                contents[eaelCurrentTab].style.display = "none";
-                eaelCurrentTab = eaelCurrentTab + StepNumber;
-
-                if (eaelCurrentTab >= contents.length) {
-                    return false;
-                }
-                eaelRenderTab(eaelCurrentTab);
-            }
-
-            eaelRenderTab(eaelCurrentTab);
-
-            function eaelRenderTab(step) {
-                var contents = document.getElementsByClassName("setup-content"),
-                    prev = document.getElementById("eael-prev"),
-                    nextElement = document.getElementById("eael-next"),
-                    saveElement = document.getElementById("eael-save");
-
-                contents[step].style.display = "block";
-                prev.style.display = (step == 0) ? "none" : "inline";
-
-                if (step == (contents.length - 1)) {
-                    saveElement.style.display = "inline";
-                    nextElement.style.display = "none";
-                } else {
-                    nextElement.style.display = "inline";
-                    saveElement.style.display = "none";
-                }
-                eaelStepIndicator(step)
-            }
-
-            function eaelStepIndicator(stepNumber) {
-                var steps = document.getElementsByClassName("step"),
-                    container = document.getElementsByClassName("eael-setup-wizard");
-                container[0].setAttribute('data-step', stepNumber);
-
-                for (var i = 0; i < steps.length; i++) {
-                    steps[i].className = steps[i].className.replace(" active", "");
-                }
-
-                steps[stepNumber].className += " active";
-            }
+            // function eaelNextStep(StepNumber) {
+            //     var contents = document.getElementsByClassName("setup-content");
+            //     contents[eaelCurrentTab].style.display = "none";
+            //     eaelCurrentTab = eaelCurrentTab + StepNumber;
+            //
+            //     if (eaelCurrentTab >= contents.length) {
+            //         return false;
+            //     }
+            //     eaelRenderTab(eaelCurrentTab);
+            // }
         </script>
         <?php
     }
