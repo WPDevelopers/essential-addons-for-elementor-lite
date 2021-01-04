@@ -736,7 +736,7 @@ class Dual_Color_Header extends Widget_Base
 			]
 		);
 		$this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
+			Group_Control_Background::get_type(),
 			[
 				'name' => 'eael_dch_separator_left_bg',
 				'label' => __('Background', 'essential-addons-for-elementor-lite'),
@@ -816,7 +816,7 @@ class Dual_Color_Header extends Widget_Base
 			]
 		);
 		$this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
+			Group_Control_Background::get_type(),
 			[
 				'name' => 'eael_dch_separator_right_bg',
 				'label' => __('Background', 'essential-addons-for-elementor-lite'),
@@ -834,66 +834,33 @@ class Dual_Color_Header extends Widget_Base
 	protected function render()
 	{
 		$settings = $this->get_settings_for_display();
-
-		if ('dch-default' == $settings['eael_dch_type']) { ?>
+		 ?>
         <div class="eael-dual-header">
 		<?php
-        if ($settings['eael_dch_separator_position'] === 'before_title') {
-		    $this->print_separator($settings);
+        switch ($settings['eael_dch_type']) {
+            case 'dch-icon-on-top':
+                $this->print_icon($settings);
+                $this->print_title_with_separator($settings);
+                $this->print_subtitle($settings);
+                break;
+            case 'dch-icon-subtext-on-top':
+                $this->print_icon($settings);
+                $this->print_subtitle($settings);
+                $this->print_title_with_separator($settings);
+                break;
+            case 'dch-subtext-on-top':
+                $this->print_subtitle($settings);
+                $this->print_title_with_separator($settings);
+                $this->print_icon($settings);
+                break;
+            default:
+                $this->print_title_with_separator($settings);
+                $this->print_subtitle($settings);
+                $this->print_icon($settings);
         }
-        $this->print_title($settings);
-        if ($settings['eael_dch_separator_position'] === 'after_title') {
-            $this->print_separator($settings);
-        }
-        $this->print_subtitle($settings);
-        $this->print_icon($settings); ?>
+        ?>
         </div>
-	<?php } ?>
-
-		<?php if ('dch-icon-on-top' == $settings['eael_dch_type']) { ?>
-        <div class="eael-dual-header">
-            <?php $this->print_icon($settings);
-            if ($settings['eael_dch_separator_position'] === 'before_title') {
-                $this->print_separator($settings);
-            }
-            $this->print_title($settings);
-            if ($settings['eael_dch_separator_position'] === 'after_title') {
-                $this->print_separator($settings);
-            }
-            $this->print_subtitle($settings);
-            ?>
-        </div>
-	<?php } ?>
-
-		<?php if ('dch-icon-subtext-on-top' == $settings['eael_dch_type']) { ?>
-        <div class="eael-dual-header">
 		<?php
-        $this->print_icon($settings);
-        if ($settings['eael_dch_separator_position'] === 'before_title') {
-		    $this->print_separator($settings);
-        }
-        $this->print_title($settings);
-        if ($settings['eael_dch_separator_position'] === 'after_title') {
-            $this->print_separator($settings);
-        } ?>
-        </div>
-	<?php } ?>
-
-		<?php if ('dch-subtext-on-top' == $settings['eael_dch_type']) { ?>
-        <div class="eael-dual-header">
-        <?php
-        $this->print_subtitle($settings);
-        if ($settings['eael_dch_separator_position'] === 'before_title') {
-		    $this->print_separator($settings);
-        }
-        $this->print_title($settings);
-        if ($settings['eael_dch_separator_position'] === 'after_title') {
-            $this->print_separator($settings);
-        }
-        $this->print_icon($settings); ?>
-        </div>
-	<?php }
-
 	}
 
     protected function print_icon($settings)
@@ -909,7 +876,6 @@ class Dual_Color_Header extends Widget_Base
             <?php }
             endif;
 	}
-
     protected function print_title($settings)
     {
         ?>
@@ -920,7 +886,6 @@ class Dual_Color_Header extends Widget_Base
     {
         echo '<span class="subtext">'.wp_kses_post($settings['eael_dch_subtext']).'</span>';
 	}
-
     protected function print_separator($settings)
     { ?>
     <div class="eael-dch-separator-wrap">
@@ -932,5 +897,15 @@ class Dual_Color_Header extends Widget_Base
     <?php } ?>
         </div>
         <?php
+	}
+    protected function print_title_with_separator($settings)
+    {
+        if ($settings['eael_dch_separator_position'] === 'before_title') {
+            $this->print_separator($settings);
+        }
+        $this->print_title($settings);
+        if ($settings['eael_dch_separator_position'] === 'after_title') {
+            $this->print_separator($settings);
+        }
 	}
 }
