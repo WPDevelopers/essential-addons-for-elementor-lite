@@ -456,4 +456,53 @@
             }
         }
     });
+
+    eaelRenderTab();
+
+    function eaelRenderTab(step=0) {
+
+        var contents = document.getElementsByClassName("setup-content"),
+            prev = document.getElementById("eael-prev"),
+            nextElement = document.getElementById("eael-next"),
+            saveElement = document.getElementById("eael-save");
+        contents[step].style.display = "block";
+        prev.style.display = (step == 0) ? "none" : "inline";
+
+        if (step == (contents.length - 1)) {
+            saveElement.style.display = "inline";
+            nextElement.style.display = "none";
+        } else {
+            nextElement.style.display = "inline";
+            saveElement.style.display = "none";
+        }
+        eaelStepIndicator(step)
+    }
+
+    function eaelStepIndicator(stepNumber) {
+        var steps = document.getElementsByClassName("step"),
+            container = document.getElementsByClassName("eael-setup-wizard");
+        container[0].setAttribute('data-step', stepNumber);
+
+        for (var i = 0; i < steps.length; i++) {
+            steps[i].className = steps[i].className.replace(" active", "");
+        }
+
+        steps[stepNumber].className += " active";
+    }
+
+    $(document).on('click','#eael-next,#eael-prev',function (e){
+        var container = document.getElementsByClassName("eael-setup-wizard"),
+        StepNumber = parseInt(container[0].getAttribute('data-step')),
+        contents = document.getElementsByClassName("setup-content");
+
+        contents[StepNumber].style.display = "none";
+        StepNumber = (e.target.id == 'eael-prev')?StepNumber-1:StepNumber+1;
+
+        if (StepNumber >= contents.length) {
+            return false;
+        }
+        eaelRenderTab(StepNumber);
+    });
+
+
 })(jQuery);
