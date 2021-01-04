@@ -313,34 +313,7 @@ ea.hooks.addAction("init", "ea", () => {
 				});
 			}
 		);
-
-		var outerWidth = null;
-		var $products = $scope.find(".products");
-		var $layout_mode = $products.data("layout-mode");
-
-		if ($layout_mode === "masonry") {
-			// init isotope
-			var $isotope_products = $products.isotope({
-				itemSelector: "li.product",
-				layoutMode: $layout_mode,
-				percentPosition: true,
-			});
-
-			$("img", $products).each(function (e) {
-				if (outerWidth === null) {
-					outerWidth = $(this).parents(".product").outerWidth();
-				}
-
-				$(this).css(
-					"height",
-					(outerWidth / $(this).attr("width")) * $(this).attr("height")
-				);
-			});
-
-			$(window).on('resize', function () {
-				$isotope_products.isotope("layout");
-			});
-		}
+        
 		$(document).on("click", ".eael-product-popup-close", function (event) {
 			event.stopPropagation();
 			$(".eael-product-popup")
@@ -352,10 +325,14 @@ ea.hooks.addAction("init", "ea", () => {
 			$(".eael-product-popup.eael-product-zoom-in.eael-product-popup-ready")
 				.addClass("eael-product-modal-removing")
 				.removeClass("eael-product-popup-ready");
-        });
-        if (isEditMode) {
-            $(".eael-product-image-wrap .woocommerce-product-gallery").css("opacity","1");
-        }
+		});
+
+		if (isEditMode) {
+			$(".eael-product-image-wrap .woocommerce-product-gallery").css(
+				"opacity",
+				"1"
+			);
+		}
 	};
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eicon-woocommerce.default",

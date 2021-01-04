@@ -72,18 +72,9 @@
 						const dynamicID = "eael-product-"+Date.now();
 						
 						if ($layout == "masonry") {
-							let outerWidth = null;
 							$content.find('.woocommerce-product-gallery').addClass(dynamicID);
 							$content.find('.woocommerce-product-gallery').addClass('eael-new-product');
 
-							$('.attachment-woocommerce_thumbnail').each(function(e) {
-								if(outerWidth === null) {
-									outerWidth = $(this).parents('.product').outerWidth();
-								}
-
-								$(this).css('height', (outerWidth / $(this).attr('width')) * $(this).attr('height'))
-							});
-							
 							$(".woocommerce-product-gallery."+dynamicID,$scope).each(function () {
 								$(this).wc_product_gallery();
 							});
