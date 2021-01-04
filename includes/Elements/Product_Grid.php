@@ -2978,6 +2978,33 @@ class Product_Grid extends Widget_Base
                 ?>
             </div>
         </div>
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                jQuery(".eael-product-grid").each(function() {
+                    // var outerWidth = null;
+                    var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>");
+                    var $products = $(this).find( '.products' );
+                    var $layout_mode = $products.data('layout-mode');
+                    
+                    if ($layout_mode === 'masonry') {
+                        // init isotope
+                        var $isotope_products = $products.isotope({
+                            itemSelector: "li.product",
+                            layoutMode: $layout_mode,
+                            percentPosition: true
+                        });
+
+                        $isotope_products.imagesLoaded().progress( function() {
+                            $isotope_products.isotope('layout');
+                        })
+
+                        $(window).on('resize', function() {
+                            $isotope_products.isotope('layout');
+                        });
+                    }
+                });
+            });
+        </script>
         <?php
         remove_filter('woocommerce_product_add_to_cart_text', [
             $this,
