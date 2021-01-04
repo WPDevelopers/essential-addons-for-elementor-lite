@@ -870,9 +870,15 @@ class Dual_Color_Header extends Widget_Base
         $icon_is_new = empty($settings['eael_dch_icon']);
         if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
             <?php if ($icon_is_new || $icon_migrated) {
-                Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
+                if ( 'svg' === $settings['eael_dch_icon_new']['library'] ) {
+                    echo '<span class="dch-icon dch-icon-svg eaa-svg">';
+                    Icons_Manager::render_icon( $settings['eael_dch_icon_new'] );
+                    echo '</span>';
+                }else{
+                    Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true', 'class' => "dch-icon" ] );
+                }
             } else { ?>
-                <i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
+                <i class="<?php echo esc_attr($settings['eael_dch_icon']); ?> dch-icon"></i>
             <?php }
             endif;
 	}
@@ -891,7 +897,13 @@ class Dual_Color_Header extends Widget_Base
     <div class="eael-dch-separator-wrap">
     <?php
         if ($settings['eael_dch_separator_type'] == 'icon') {
-            Icons_Manager::render_icon( $settings['eael_dch_separator_icon'], [ 'aria-hidden' => 'true' ] );
+            if ( 'svg' === $settings['eael_dch_separator_icon']['library'] ) {
+                echo '<span class="dch-sep-icon dch-sep-icon-svg eaa-svg">';
+                Icons_Manager::render_icon( $settings['eael_dch_separator_icon'] );
+                echo '</span>';
+            }else{
+                Icons_Manager::render_icon( $settings['eael_dch_separator_icon'], [ 'aria-hidden' => 'true', 'class' => "dch-sep-icon" ] );
+            }
         } else { ?>
         <span class="separator-one"></span><span class="separator-two"></span>
     <?php } ?>
