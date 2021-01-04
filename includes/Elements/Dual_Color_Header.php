@@ -242,7 +242,7 @@ class Dual_Color_Header extends Widget_Base
 			'eael_section_dch_separator_settings',
 			[
 				'label' => __('Separator', 'essential-addons-for-elementor-lite'),
-				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+				'tab' => Controls_Manager::TAB_CONTENT,
 				'condition' => [
 					'eael_show_dch_separator' => 'yes',
 				],
@@ -253,7 +253,7 @@ class Dual_Color_Header extends Widget_Base
 			'eael_dch_separator_position',
 			[
 				'label' => __('Separator Position', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::SELECT,
+				'type' => Controls_Manager::SELECT,
 				'default' => 'after_title',
 				'options' => [
 					'before_title' => __('Before Title', 'essential-addons-for-elementor-lite'),
@@ -265,7 +265,7 @@ class Dual_Color_Header extends Widget_Base
 			'eael_dch_separator_type',
 			[
 				'label' => __('Separator Type', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::SELECT,
+				'type' => Controls_Manager::SELECT,
 				'default' => 'line',
 				'options' => [
 					'line' => __('Line', 'essential-addons-for-elementor-lite'),
@@ -277,7 +277,7 @@ class Dual_Color_Header extends Widget_Base
 			'eael_dch_separator_icon',
 			[
 				'label' => __('Icon', 'text-domain'),
-				'type' => \Elementor\Controls_Manager::ICONS,
+				'type' => Controls_Manager::ICONS,
 				'default' => [
 					'value' => 'fas fa-star',
 					'library' => 'solid',
@@ -406,8 +406,7 @@ class Dual_Color_Header extends Widget_Base
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-dual-header i' => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eael-dual-header img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-dual-header .dch-icon' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -419,7 +418,8 @@ class Dual_Color_Header extends Widget_Base
 				'type' => Controls_Manager::COLOR,
 				'default' => '#4d4d4d',
 				'selectors' => [
-					'{{WRAPPER}} .eael-dual-header i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-dual-header .dch-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-dual-header .dch-icon svg' => 'color: {{VALUE}}; fill: {{VALUE}};',
 				],
 			]
 		);
@@ -463,7 +463,7 @@ class Dual_Color_Header extends Widget_Base
 			'eael_dch_dual_color_selector',
 			[
 				'label' => esc_html__('Dual Color', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'solid-color' => [
 						'title' => __('Color', 'essential-addons-for-elementor-lite'),
@@ -577,7 +577,7 @@ class Dual_Color_Header extends Widget_Base
 			'eael_section_dch_separator_alignment',
 			[
 				'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'flex-start' => [
 						'title' => __('Flex Start', 'essential-addons-for-elementor-lite'),
@@ -636,23 +636,45 @@ class Dual_Color_Header extends Widget_Base
 				],
 			]
 		);
+        $this->add_control(
+            'eael_sep_icon_size',
+            [
+                'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'size' => 36,
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => 20,
+                        'max' => 500,
+                        'step' => 1,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-dual-header .dch-sep-icon' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_dch_separator_type' => 'icon',
+                ],
+            ]
+        );
 		$this->add_control(
 			'title_color',
 			[
-				'label' => __('Color', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-dch-separator-wrap i' => 'color: {{VALUE}}',
-				],
+				'label' => __('Icon Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+
+                'selectors' => [
+                    '{{WRAPPER}} .eael-dual-header .dch-sep-icon' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-dual-header .dch-sep-icon svg' => 'color: {{VALUE}}; fill: {{VALUE}};',
+                ],
 				'condition' => [
 					'eael_dch_separator_type' => 'icon',
 				],
 			]
 		);
+
 
 		// line left & right Tabs
 		$this->start_controls_tabs(
