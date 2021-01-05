@@ -68,18 +68,26 @@
 					$this.remove();
 				} else {
 					if ($data.class == "Essential_Addons_Elementor\\Elements\\Product_Grid") {
-						$(".eael-product-grid .products", $scope).append($content.filter('li'));
-						const dynamicID = "eael-product-"+Date.now();
-						
+						$content = $content.filter('li');
+
+						$(".eael-product-grid .products", $scope).append($content);
+
 						if ($layout == "masonry") {
+							const dynamicID = "eael-product-" + Date.now();
+							var $isotope = $(".eael-product-grid .products", $scope).isotope();
+
+							$isotope.isotope("appended", $content).isotope("layout");
+
+							$isotope.imagesLoaded().progress(function() {
+								$isotope.isotope("layout");
+							});
+
 							$content.find('.woocommerce-product-gallery').addClass(dynamicID);
 							$content.find('.woocommerce-product-gallery').addClass('eael-new-product');
 
-							$(".woocommerce-product-gallery."+dynamicID,$scope).each(function () {
+							$(".woocommerce-product-gallery."+dynamicID, $scope).each(function() {
 								$(this).wc_product_gallery();
 							});
-
-							$(".eael-product-grid .products", $scope).isotope("appended", $content).isotope("layout");
 						}
 
 					} else {

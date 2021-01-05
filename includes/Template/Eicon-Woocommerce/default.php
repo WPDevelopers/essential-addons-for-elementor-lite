@@ -33,7 +33,7 @@ $widget_id = isset($settings['eael_widget_id']) ? $settings['eael_widget_id'] : 
 if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-product-reveal' ) { ?>
     <li class="product">
         <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-            <?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail' ) ); ?>
+            <?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ) ); ?>
             <h2 class="woocommerce-loop-product__title"> <?php echo esc_html( $product->get_title() ); ?> </h2>
             <?php
             if ( $should_print_rating ) {
@@ -59,7 +59,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
     ?>
     <li class="product">
         <div class="overlay">
-            <?php echo $product->get_image( 'woocommerce_thumbnail' ); ?>
+            <?php echo $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ); ?>
             <div class="button-wrap clearfix">
                 <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="product-link"><span class="fas fa-link"></span></a>';
                 <?php
@@ -91,7 +91,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                     <div class="image-wrap">
                         <?php
                         echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
-                        echo $product->get_image($settings['eael_product_grid_image_size_size']);
+                        echo $product->get_image($settings['eael_product_grid_image_size_size'], ['loading' => 'eager']);
                         ?>
                     </div>
                     <div class="image-hover-wrap">
@@ -197,7 +197,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                         <?php
                         echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
                         echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
-                        echo $product->get_image($settings['eael_product_grid_image_size_size']);
+                        echo $product->get_image($settings['eael_product_grid_image_size_size'], ['loading' => 'eager']);
                         echo '</a>';
                         ?>
                     </div>
@@ -258,7 +258,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                         <?php
                         echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
                         echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
-                        echo $product->get_image($settings['eael_product_grid_image_size_size']);
+                        echo $product->get_image($settings['eael_product_grid_image_size_size'], ['loading' => 'eager']);
                         echo '</a>';
                         ?>
                     </div>
