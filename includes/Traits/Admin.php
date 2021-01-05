@@ -17,15 +17,12 @@ trait Admin {
      * @since 1.1.2
      */
     public function admin_menu() {
-
-        $setup_wizard = new \Essential_Addons_Elementor\Classes\WPDeveloper_Setup_Wizard();
         add_menu_page(
             __( 'Essential Addons', 'essential-addons-for-elementor-lite' ),
             __( 'Essential Addons', 'essential-addons-for-elementor-lite' ),
             'manage_options',
             'eael-settings',
-            //[$this, 'admin_settings_page'],
-            [ $setup_wizard, 'render_wizard' ],
+            [$this, 'admin_settings_page'],
             $this->safe_url( EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-white.svg' ),
             '58.6'
         );
@@ -446,43 +443,5 @@ trait Admin {
         $notice->init();
     }
 
-    public function save_setup_wizard_data() {
-        check_ajax_referer( 'essential-addons-elementor', 'security' );
 
-        if ( !isset( $_POST[ 'fields' ] ) ) {
-            return;
-        }
-
-        parse_str( $_POST[ 'fields' ], $fields );
-
-        if ( $fields[ 'eael_user_email_address' ] ) {
-            $plugin_name = basename( EAEL_PLUGIN_FILE, '.php' );
-            $is_tracked  = get_option( 'wpins_' . $plugin_name . '_force_tracked' );
-            if ( !$is_tracked ) {
-                if(class_exists('\Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker'))
-                (new \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker(
-                    EAEL_PLUGIN_FILE,
-                    'http://app.wpdeveloper.net',
-                    array(),
-                    true,
-                    true,
-                    1
-                ))->do_tracking( true );
-                update_option( 'wpins_' . $plugin_name . '_force_tracked', true );
-            }
-        }
-
-        if ( !empty( $fields[ 'eael_element' ] ) ) {
-            $el_list      = $fields[ 'eael_element' ];
-            $save_element = [];
-            foreach ( $GLOBALS[ 'eael_config' ][ 'elements' ] as $key => $item ) {
-                $save_element[ $key ] = ( isset( $el_list[ $key ] ) ) ? 1 : '';
-            }
-            $status = update_option( 'eael_save_settings', $save_element );
-            if ( $status ) {
-                wp_send_json_success();
-            }
-        }
-        wp_send_json_error();
-    }
 }

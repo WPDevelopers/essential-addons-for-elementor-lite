@@ -421,8 +421,16 @@
                         type: "success",
                         title: "Success",
                         footer: 'Success',
-                        showConfirmButton: true,
-                        timer: 5000,
+                        showConfirmButton: true
+                    }).then((result) => {
+                        window.location = response.data.redirect_url;
+                    });
+                }else{
+                    $this.attr('disabled', 'disabled');
+                    Swal.fire({
+                        type: "error",
+                        title: 'Error',
+                        text: 'error',
                     });
                 }
             },
@@ -497,12 +505,21 @@
 
         contents[StepNumber].style.display = "none";
         StepNumber = (e.target.id == 'eael-prev')?StepNumber-1:StepNumber+1;
-
+        if(e.target.id == 'eael-next' && StepNumber==2){
+            $.ajax({
+                url: localize.ajaxurl,
+                type: "POST",
+                data: {
+                    action: "save_eael_elements_data",
+                    security: localize.nonce,
+                    fields: $("form.eael-setup-wizard-form").serialize()
+                }
+            });
+        }
         if (StepNumber >= contents.length) {
             return false;
         }
         eaelRenderTab(StepNumber);
     });
-
 
 })(jQuery);

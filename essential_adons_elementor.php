@@ -90,3 +90,15 @@ add_action('upgrader_process_complete', function ($upgrader_object, $options) {
     $migration = new \Essential_Addons_Elementor\Classes\Migration;
     $migration->plugin_upgrade_hook($upgrader_object, $options);
 }, 10, 2);
+
+add_action( 'wp_loaded', function () {
+    $setup_wizard = get_option( 'eael_setup_wizard' );
+    if ( $setup_wizard == 'redirect' ) {
+        update_option( 'eael_setup_wizard', 'init' );
+        wp_redirect( admin_url( 'admin.php?page=eael-setup-wizard') );
+    }
+    if ( $setup_wizard == 'init' ) {
+        new \Essential_Addons_Elementor\Classes\WPDeveloper_Setup_Wizard();
+    }
+} );
+

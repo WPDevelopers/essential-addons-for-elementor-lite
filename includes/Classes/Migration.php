@@ -21,8 +21,13 @@ class Migration
         // remove old cache files
         $this->empty_dir(EAEL_ASSET_PATH);
 
+        //check setup wizard condition
+        $this->enable_setup_wizard();
+
         // save default values
         $this->set_default_values();
+
+
 
         // Redirect to options page - disabled temporarily
         // set_transient('eael_do_activation_redirect', true, 60);
