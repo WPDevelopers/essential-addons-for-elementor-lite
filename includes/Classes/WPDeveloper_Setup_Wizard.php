@@ -8,11 +8,54 @@ if ( !defined( 'ABSPATH' ) ) {
 
 class WPDeveloper_Setup_Wizard {
 
+    public function __construct() {
+        add_action( 'admin_enqueue_scripts', array( $this, 'setup_wizard_scripts' ) );
+        add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+        add_action( 'wp_ajax_save_setup_wizard_data', [ $this, 'save_setup_wizard_data' ] );
+        add_action( 'wp_ajax_save_eael_elements_data', [ $this, 'save_eael_elements_data' ] );
+    }
 
+    /**
+     * setup_wizard_scripts
+     * @param $hook
+     * @return array
+     */
+    public function setup_wizard_scripts( $hook ) {
+        if ( isset( $hook ) && $hook == 'admin_page_eael-setup-wizard' ) {
+            wp_enqueue_style( 'essential_addons_elementor-setup-wizard-css', EAEL_PLUGIN_URL . 'assets/admin/css/admin.css', false, EAEL_PLUGIN_VERSION );
+            wp_enqueue_style( 'sweetalert2-css', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/css/sweetalert2.min.css', false, EAEL_PLUGIN_VERSION );
+            wp_enqueue_script( 'sweetalert2-js', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array( 'jquery', 'sweetalert2-core-js' ), EAEL_PLUGIN_VERSION, true );
+            wp_enqueue_script( 'sweetalert2-core-js', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/js/core.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
+            wp_enqueue_script( 'essential_addons_elementor-setup-wizard-js', EAEL_PLUGIN_URL . 'assets/admin/js/admin.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
+            wp_localize_script( 'essential_addons_elementor-setup-wizard-js', 'localize', array(
+                'ajaxurl' => admin_url( 'admin-ajax.php' ),
+                'nonce'   => wp_create_nonce( 'essential-addons-elementor' ),
+            ) );
+        }
+        return [];
+    }
 
+    /**
+     * Create admin menu for setup wizard
+     */
+    public function admin_menu() {
+
+        add_submenu_page(
+            null,
+            __( 'Essential Addons ', 'essential-addons-for-elementor-lite' ),
+            __( 'Essential Addons ', 'essential-addons-for-elementor-lite' ),
+            'manage_options',
+            'eael-setup-wizard',
+            [ $this, 'render_wizard' ]
+        );
+    }
+
+    /**
+     * Render tav step
+     */
     public function tab_step() {
         ?>
-        <ul class="eael-setup-wizard"  data-step="1">
+        <ul class="eael-setup-wizard" data-step="1">
             <li class="step">
                 <div class="icon">
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
@@ -194,7 +237,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         ?>
         <div class="eael-setup-footer">
             <button id="eael-prev" class="button eael-btn">< Previous</button>
-            <button id="eael-next" class="button eael-btn" >Next ></button>
+            <button id="eael-next" class="button eael-btn">Next ></button>
             <button id="eael-save" style="display: none" class="button eael-btn eael-setup-wizard-save">Submit</button>
         </div>
         <?php
@@ -207,7 +250,6 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             $this->tab_step();
             $this->tab_content();
             $this->setup_wizard_footer();
-            $this->inline_script();
             ?>
         </div>
         <?php
@@ -273,25 +315,10 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         <?php
     }
 
-    public function inline_script() {
-        ?>
-        <script>
-            var eaelCurrentTab = 0;
-
-            // function eaelNextStep(StepNumber) {
-            //     var contents = document.getElementsByClassName("setup-content");
-            //     contents[eaelCurrentTab].style.display = "none";
-            //     eaelCurrentTab = eaelCurrentTab + StepNumber;
-            //
-            //     if (eaelCurrentTab >= contents.length) {
-            //         return false;
-            //     }
-            //     eaelRenderTab(eaelCurrentTab);
-            // }
-        </script>
-        <?php
-    }
-
+    /**
+     * get_plugin_list
+     * @return array
+     */
     public function get_plugin_list() {
         return [
             [
@@ -415,6 +442,79 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             </div>
         </div>
         <?php
+    }
+
+    /**
+     * Save setup wizard data
+     */
+    public function save_setup_wizard_data() {
+
+        check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+        if ( !isset( $_POST[ 'fields' ] ) ) {
+            return;
+        }
+
+        parse_str( $_POST[ 'fields' ], $fields );
+
+        if ( $fields[ 'eael_user_email_address' ] ) {
+            $plugin_name = basename( EAEL_PLUGIN_FILE, '.php' );
+            $is_tracked  = get_option( 'wpins_' . $plugin_name . '_force_tracked' );
+            if ( !$is_tracked ) {
+                if ( class_exists( '\Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker' ) )
+                    ( new \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker(
+                        EAEL_PLUGIN_FILE,
+                        'http://app.wpdeveloper.net',
+                        array(),
+                        true,
+                        true,
+                        1
+                    ) )->do_tracking( true );
+                update_option( 'wpins_' . $plugin_name . '_force_tracked', true );
+            }
+        }
+        update_option( 'eael_setup_wizard', 'complete' );
+        if ( $this->save_el_data( $fields ) ) {
+            wp_send_json_success(['redirect_url'=>admin_url('admin.php?page=eael-settings')]);
+        }
+        wp_send_json_error();
+    }
+
+    /**
+     * save_eael_elements_data
+     */
+    public function save_eael_elements_data() {
+        check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+        if ( !isset( $_POST[ 'fields' ] ) ) {
+            return;
+        }
+
+        parse_str( $_POST[ 'fields' ], $fields );
+
+        if ( $this->save_el_data( $fields ) ) {
+            wp_send_json_success();
+        }
+        wp_send_json_error();
+    }
+
+    /**
+     * save_el_data
+     * @param $fields
+     * @return bool
+     */
+    public function save_el_data( $fields ) {
+        if ( !empty( $fields ) ) {
+
+            $el_list      = $fields[ 'eael_element' ];
+            $save_element = [];
+            foreach ( $GLOBALS[ 'eael_config' ][ 'elements' ] as $key => $item ) {
+                $save_element[ $key ] = ( isset( $el_list[ $key ] ) ) ? 1 : '';
+            }
+            update_option( 'eael_save_settings', $save_element );
+            return true;
+        }
+        return false;
     }
 }
 
