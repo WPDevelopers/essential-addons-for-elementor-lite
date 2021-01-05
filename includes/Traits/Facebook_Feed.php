@@ -88,7 +88,9 @@ trait Facebook_Feed
         $items = array_splice($facebook_data, ($page * $settings['eael_facebook_feed_image_count']['size']), $settings['eael_facebook_feed_image_count']['size']);
 
         foreach ($items as $item) {
-            $message = wp_trim_words((isset($item['message']) ? $item['message'] : (isset($item['story']) ? $item['story'] : '')), $settings['eael_facebook_feed_message_max_length']['size'], '...');
+            $t = 'eael_facebook_feed_message_max_length'; // short it
+            $limit = isset($settings[$t]) && isset($settings[$t]['size']) ? $settings[$t]['size']: null;
+            $message = wp_trim_words((isset($item['message']) ? $item['message'] : (isset($item['story']) ? $item['story'] : '')), $limit, '...');
             $photo = (isset($item['full_picture']) ? esc_url($item['full_picture']) : '');
             $likes = (isset($item['reactions']) ? $item['reactions']['summary']['total_count'] : 0);
             $comments = (isset($item['comments']) ? $item['comments']['summary']['total_count'] : 0);
