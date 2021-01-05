@@ -62,6 +62,9 @@ trait Helper
         }
 
         $settings = HelperClass::eael_get_widget_settings($page_id, $widget_id);
+        if (empty($settings)) {
+            wp_send_json_error(['message' => __('Widget settings are not found. Did you save the widget before using load more??', 'essential-addons-for-elementor-lite')]);
+        }
         $settings['eael_widget_id'] = $widget_id;
         $html = '';
         $class = '\\' . str_replace( '\\\\', '\\', $_REQUEST[ 'class' ] );
@@ -153,7 +156,7 @@ trait Helper
         while ( ob_get_status() ) {
             ob_end_clean();
         }
-        if (false && function_exists( 'gzencode' ) ) {
+        if (function_exists( 'gzencode' ) ) {
             $response = gzencode( wp_json_encode( $html ) );
 
             header( 'Content-Type: application/json; charset=utf-8' );

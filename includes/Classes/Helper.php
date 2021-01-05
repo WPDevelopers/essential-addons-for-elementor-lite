@@ -756,8 +756,10 @@ class Helper
         if ( $document ) {
             $elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
             $widget_data = self::find_element_recursive( $elements, $widget_id );
-            $widget      = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
-            if ( $widget ) {
+            if (!empty($widget_data) && is_array($widget_data)) {
+                $widget      = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
+            }
+            if ( !empty($widget) ) {
                 $settings    = $widget->get_settings_for_display();
             }
         }
