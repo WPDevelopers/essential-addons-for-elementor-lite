@@ -53,7 +53,7 @@ msgstr ""
 msgid "Select a Fluent Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:865, ../includes/Template/Content/Product_Grid.php:63, ../includes/Template/Content/Product_Grid.php:29, ../includes/Template/Eicon-Woocommerce/default.php:260, ../includes/Template/Eicon-Woocommerce/default.php:199, ../includes/Template/Eicon-Woocommerce/default.php:93, ../includes/Template/Eicon-Woocommerce/default.php:79, ../includes/Template/Eicon-Woocommerce/default.php:45
+#: ../includes/Classes/Helper.php:867, ../includes/Template/Content/Product_Grid.php:63, ../includes/Template/Content/Product_Grid.php:29, ../includes/Template/Eicon-Woocommerce/default.php:260, ../includes/Template/Eicon-Woocommerce/default.php:199, ../includes/Template/Eicon-Woocommerce/default.php:93, ../includes/Template/Eicon-Woocommerce/default.php:79, ../includes/Template/Eicon-Woocommerce/default.php:45
 msgid "Sale!"
 msgstr ""
 
@@ -7272,11 +7272,15 @@ msgstr ""
 msgid "Page ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:193
+#: ../includes/Traits/Helper.php:66
+msgid "Widget settings are not found. Did you save the widget before using load more??"
+msgstr ""
+
+#: ../includes/Traits/Helper.php:196
 msgid "Essential Addons for Elementor"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:372, ../includes/Traits/Twitter_Feed.php:119
+#: ../includes/Traits/Helper.php:375, ../includes/Traits/Twitter_Feed.php:119
 msgid "%s ago"
 msgstr ""
 
