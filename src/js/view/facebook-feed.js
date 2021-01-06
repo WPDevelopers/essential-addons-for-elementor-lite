@@ -15,15 +15,15 @@ jQuery(window).on("elementor/frontend/init", function () {
         // ajax load more
         $(".eael-load-more-button", $scope).on("click", function (e) {
             e.preventDefault();
+            e.stopImmediatePropagation();
 
             let $this = $(this),
                 $LoaderSpan = $("span", $this),
                 $text = $LoaderSpan.html(),
                 $widget_id = $this.data("widget-id"),
                 $post_id = $this.data("post-id"),
-                $page = parseInt($this.data("page"), 10);
-
-            // update load moer button
+                $page = $this.data("page");
+            // update load more button
             $this.addClass("button--loading");
             $LoaderSpan.html(localize.i18n.loading);
 
@@ -50,7 +50,8 @@ jQuery(window).on("elementor/frontend/init", function () {
 
                     // update load more button
                     if (response.num_pages > $page) {
-                        $this.attr("data-page", parseInt($page) + 1);
+                        $page++;
+                        $this.data("page", $page);
                         $this.removeClass("button--loading");
                         $LoaderSpan.html($text);
                     } else {

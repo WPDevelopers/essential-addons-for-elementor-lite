@@ -84,9 +84,7 @@ trait Facebook_Feed
                 $facebook_data = array_reverse($facebook_data);
                 break;
         }
-
         $items = array_splice($facebook_data, ($page * $settings['eael_facebook_feed_image_count']['size']), $settings['eael_facebook_feed_image_count']['size']);
-
         foreach ($items as $item) {
             $t = 'eael_facebook_feed_message_max_length'; // short it
             $limit = isset($settings[$t]) && isset($settings[$t]['size']) ? $settings[$t]['size']: null;
