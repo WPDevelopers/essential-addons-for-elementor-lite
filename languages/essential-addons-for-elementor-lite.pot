@@ -22,7 +22,6 @@ msgid "Unlock more possibilities"
 msgstr ""
 
 #: ../includes/Classes/Helper.php:179, ../includes/Elements/Dual_Color_Header.php:223, ../includes/Elements/Flip_Box.php:737, ../includes/Elements/Info_Box.php:503
-msgid ""
 msgstr ""
 
 #: ../includes/Classes/Helper.php:392
