@@ -635,26 +635,28 @@ class Helper
         if ($settings['post_type'] === 'source_dynamic' && is_archive()) {
 
             $data = get_queried_object();
+
             if (isset($data->post_type)) {
                 $args['post_type'] = $data->post_type;
-
-                $args['tax_query'] = [];
-
-                if ($data->taxonomy) {
-                    $args['tax_query'][] = [
-                        'taxonomy' => $data->taxonomy,
-                        'field' => 'term_id',
-                        'terms' => $data->term_id,
-                    ];
-                }
             } else {
                 global $wp_query;
-
                 $args['post_type'] = $wp_query->query_vars['post_type'];
+            }
+
+            if ( isset($data->taxonomy) ) {
+                $args[ 'tax_query' ][] = [
+                    'taxonomy' => $data->taxonomy,
+                    'field'    => 'term_id',
+                    'terms'    => $data->term_id,
+                ];
             }
 
             if (get_query_var('author') > 0) {
                 $args['author__in'] = get_query_var('author');
+            }
+
+            if (get_query_var('s')!='') {
+                $args['s'] = get_query_var('s');
             }
 
             if (get_query_var('year') || get_query_var('monthnum') || get_query_var('day')) {
