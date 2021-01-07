@@ -3199,9 +3199,12 @@ class Filterable_Gallery extends Widget_Base
                 $html .= '</a>';
             }
 
+            if ($settings['eael_section_fg_full_image_clickable']) {
+                $html .= '</a>';
+            }
 
             $html .= '</div></div>';
-            
+
             $gallery_markup[] = $html;
         }
 

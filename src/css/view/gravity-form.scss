@@ -20,8 +20,7 @@
 }
 
 .eael-gravity-form .gform_wrapper ul.gform_fields li.gfield {
-	padding: 0;
-	padding-right:16px;
+  padding: 0px;
 }
 
 .eael-gravity-form .gform_wrapper textarea {
@@ -52,4 +51,22 @@
 
 .eael-gravity-form .gform_wrapper .gf_scroll_text .gsection_description {
 	margin: 0;
+}
+
+
+.gform_wrapper .gf_progressbar {
+  @media only screen and (max-width: 767px) {
+     width: calc(100%)!important;
+  }
+  @media only screen and (min-width: 768px) {
+    width: calc(100%)!important;
+ }
+   
+}
+
+
+.gform_wrapper.gform_validation_error .gform_body ul li.gfield.gfield_error:not(.gf_left_half):not(.gf_right_half) {
+  @media only screen and (min-width: 641px){
+    max-width: calc(100%)!important;
+  }
 }
