@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 5.0
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 4.3.9.1
+Stable tag: 4.3.10
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -224,7 +224,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 4.3.9.1 - 07/01/2021 =
+= 4.3.10 - 07/01/2021 =
 - Fixed: EA Info Box | Throwing PHP Notice when Image option is enabled
 - Fixed: EA Filterable Gallery | Dropdown menu not disappearing on Safari
 - Fixed: EA Woo Checkout | Added String Controller for returning customers
