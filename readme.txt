@@ -224,6 +224,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 4.3.9.1 - 07/01/2021 =
+- Fixed: EA Info Box | Throwing PHP Notice when Image option is enabled
+- Fixed: EA Filterable Gallery | Dropdown menu not disappearing on Safari
+- Fixed: EA Woo Checkout | Added String Controller for returning customers
+- Fixed: EA Gravity Forms | removed extra padding
+- Fixed: EA Data Table | Throwing PHP Notice
+- Few minor bug fix and improvements
+
 = 4.3.9 - 23/12/2020 =
 - Fixed: Custom JS not working after first reload
 - Fixed: EA Advanced Data Table | sorting not working for nested elements in table header
