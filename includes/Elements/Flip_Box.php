@@ -1458,12 +1458,6 @@ class Flip_Box extends Widget_Base
         $this->add_render_attribute('flipbox-container', 'class', 'eael-elements-flip-box-flip-card');
         $this->add_render_attribute('flipbox-title-container', 'class', 'eael-elements-flip-box-heading');
 
-        $front_icon_migrated = isset($settings['__fa4_migrated']['eael_flipbox_icon_new']);
-        $front_icon_is_new = empty($settings['eael_flipbox_icon']);
-        $back_icon_migrated = isset($settings['__fa4_migrated']['eael_flipbox_icon_back_new']);
-        $back_icon_is_new = empty($settings['eael_flipbox_icon_back']);
-        $button_icon_migrated = isset($settings['__fa4_migrated']['button_icon_new']);
-        $button_icon_is_new = empty($settings['button_icon']);
 
         if ($settings['flipbox_link_type'] != 'none') {
             if (!empty($settings['flipbox_link']['url'])) {
