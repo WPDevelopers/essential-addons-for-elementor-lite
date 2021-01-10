@@ -314,4 +314,15 @@ trait Enqueue
             }
         }
     }
+
+    // templately promo enqueue scripts
+    public function templately_promo_enqueue_scripts(){
+        // enqueue
+        wp_enqueue_script(
+            'templately-promo',
+            EAEL_PLUGIN_URL . 'assets/admin/js/eael-templately-promo.js',
+            ['jquery'],
+            EAEL_PLUGIN_VERSION
+        );
+    }
 }

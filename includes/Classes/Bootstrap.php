@@ -140,6 +140,8 @@ class Bootstrap
         add_action('wp_head', [$this, 'enqueue_inline_styles']);
         add_action('wp_footer', [$this, 'enqueue_inline_scripts']);
 
+        add_action( 'elementor/editor/before_enqueue_scripts', [$this, 'templately_promo_enqueue_scripts'] );
+
         // Generator
         add_action('wp', [$this, 'init_request_data']);
         add_filter('elementor/frontend/builder_content_data', [$this, 'collect_loaded_templates'], 10, 2);
