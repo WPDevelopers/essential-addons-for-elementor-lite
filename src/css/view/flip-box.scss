@@ -19,6 +19,18 @@
 	padding: 14px 18px;
 	border-radius: 3px;
 	margin-top: 15px;
+	.eaa-svg {
+		font-size: inherit;
+		background: inherit;
+		margin: 0;
+		padding: 0;
+		position: relative;
+		top: 2px;
+		svg {
+			width: 1em;
+			height: 1em
+		}
+	}
 }
 
 .eael-elements-flip-box-container a {
