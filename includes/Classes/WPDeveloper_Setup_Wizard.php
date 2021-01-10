@@ -260,7 +260,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         ?>
         <div id="elements" class="setup-content eael-box">
             <div class="row">
-                <h4>Content Elements</h4>
+                <h4 class="eael-elements-cat">Content Elements</h4>
                 <div class="eael-checkbox-container eael-elements-container">
                     <?php foreach ( $this->get_eael_elements() as $element ): ?>
                         <div class="eael-checkbox">
