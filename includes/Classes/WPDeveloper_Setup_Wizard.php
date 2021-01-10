@@ -258,17 +258,17 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
     public function eael_elements() {
 
         ?>
-        <div id="elements" class="setup-content eael-box">Contain Elements
+        <div id="elements" class="setup-content eael-box">
+            Contain Elements
             <div class="row">
                 <div class="eael-checkbox-container eael-elements-container">
                     <?php foreach ( $this->get_eael_elements() as $element ): ?>
                         <div class="eael-checkbox">
                             <div class="eael-elements-info">
-                                <p class="eael-el-title"><?php echo $element[ 'name' ]; ?></p>
-                                <input type="checkbox" id="<?php echo $element[ 'key' ]; ?>"
+                                <input type="checkbox" class="eael-element" id="<?php echo $element[ 'key' ]; ?>"
                                        name="eael_element[<?php echo $element[ 'key' ]; ?>]"
                                     <?php echo ( $element[ 'preferences' ] == 'advanced' ) ? 'checked' : ''; ?>>
-                                <label for="<?php echo $element[ 'key' ]; ?>" class=""></label>
+                                <label for="<?php echo $element[ 'key' ]; ?>" class="eael-element-title"><?php echo $element[ 'name' ]; ?></label>
                             </div>
                         </div>
                     <?php endforeach; ?>
