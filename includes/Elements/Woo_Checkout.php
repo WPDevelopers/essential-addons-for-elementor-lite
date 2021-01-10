@@ -436,7 +436,20 @@ class Woo_Checkout extends Widget_Base {
 					'active' => true,
 				],
 			]
-		);
+    );
+    
+    $this->add_control(
+			'ea_woo_checkout_login_message',
+			[
+				'label' => __( 'Message', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXTAREA,
+				'default' => __( 'If you have shopped with us before, please enter your details below. If you are a new customer, please proceed to the Billing section.', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
+			]
+    );
+    
 		$this->add_control(
 			'ea_woo_checkout_login_link_text',
 			[
