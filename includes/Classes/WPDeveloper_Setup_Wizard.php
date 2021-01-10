@@ -259,8 +259,21 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
 
         ?>
         <div id="elements" class="setup-content eael-box">
-            Contain Elements
             <div class="row">
+                <h4>Content Elements</h4>
+                <div class="eael-checkbox-container eael-elements-container">
+                    <?php foreach ( $this->get_eael_elements() as $element ): ?>
+                        <div class="eael-checkbox">
+                            <div class="eael-elements-info">
+                                <input type="checkbox" class="eael-element" id="<?php echo $element[ 'key' ]; ?>"
+                                       name="eael_element[<?php echo $element[ 'key' ]; ?>]"
+                                    <?php echo ( $element[ 'preferences' ] == 'advanced' ) ? 'checked' : ''; ?>>
+                                <label for="<?php echo $element[ 'key' ]; ?>" class="eael-element-title"><?php echo $element[ 'name' ]; ?></label>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <h4>Dynamic Content Elements</h4>
                 <div class="eael-checkbox-container eael-elements-container">
                     <?php foreach ( $this->get_eael_elements() as $element ): ?>
                         <div class="eael-checkbox">
@@ -382,12 +395,15 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         } else {
             $globals_el_list = $GLOBALS[ 'eael_config' ][ 'elements' ];
             $merge           = array_merge( $show_widget_list[ 'basic' ], $show_widget_list[ 'advanced' ] );
+            $i = 0;
             foreach ( $globals_el_list as $key => $item ) {
                 $elements_list[] = [
                     'key'         => $key,
                     'name'        => ucwords( str_replace( '-', ' ', $key ) ),
                     'preferences' => in_array( $key, $merge ) ? 'advanced' : '',
                 ];
+                $i++;
+                if($i==10) break;
             }
         }
         return $elements_list;
