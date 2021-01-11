@@ -79,10 +79,22 @@ ea.hooks.addAction("init", "ea", () => {
 				loader = compareBtn.find(".eael-wc-compare-loader");
 				loader.show();
 			}
+			let product_id = compareBtn.data("product-id");
+			let oldProductIds = localStorage.getItem('productIds');
+			if (oldProductIds){
+				oldProductIds = JSON.parse(oldProductIds);
+				oldProductIds.push(product_id);
+			}else {
+				oldProductIds = [product_id]
+			}
 
 			ajaxData.push({
 				name: "product_id",
 				value: compareBtn.data("product-id"),
+			});
+			ajaxData.push({
+				name: "product_ids",
+				value: JSON.stringify(oldProductIds),
 			});
 			sendData(ajaxData, handleSuccess, handleError);
 		});
@@ -100,6 +112,13 @@ ea.hooks.addAction("init", "ea", () => {
 			let productId = $rBtn.data("product-id");
 			$rBtn.addClass("disable");
 			$rBtn.prop("disabled", true); // prevent additional ajax request
+			let oldProductIds = localStorage.getItem('productIds');
+			if (oldProductIds){
+				oldProductIds = JSON.parse(oldProductIds);
+				oldProductIds.push(productId);
+			}else {
+				oldProductIds = [productId]
+			}
 			const rmData = Array.from(ajaxData);
 			rmData.push({
 				name: "product_id",
@@ -109,6 +128,11 @@ ea.hooks.addAction("init", "ea", () => {
 				name: "remove_product",
 				value: 1,
 			});
+			rmData.push({
+				name: "product_ids",
+				value: JSON.stringify(oldProductIds),
+			});
+
 			requestType = "remove";
 			let compareBtn = $('button[data-product-id="' + productId + '"]');
 			compareBtnSpan = compareBtn.find(".eael-wc-compare-text");
@@ -126,6 +150,8 @@ ea.hooks.addAction("init", "ea", () => {
 				modal.style.opacity = "1";
 				overlayNode.style.visibility = "visible";
 				overlayNode.style.opacity = "1";
+				localStorage.setItem('productIds', JSON.stringify(data.data.product_ids));
+
 			}
 			if (loader) {
 				loader.hide();
@@ -180,7 +206,6 @@ ea.hooks.addAction("init", "ea", () => {
 					$(widgetclass).addClass("eael-product-loader");
 				},
 				success: function (response) {
-					// console.log(response);
 					$(widgetclass + " .eael-product-grid .products").html(response);
 					$(widgetclass + " .woocommerce-product-gallery").each(function () {
 						$(this).wc_product_gallery();
