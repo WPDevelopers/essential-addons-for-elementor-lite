@@ -141,6 +141,7 @@ class Bootstrap
         add_action('wp_footer', [$this, 'enqueue_inline_scripts']);
 
         add_action( 'elementor/editor/before_enqueue_scripts', [$this, 'templately_promo_enqueue_scripts'] );
+        add_action( 'eael/before_enqueue_styles', [$this, 'templately_promo_enqueue_style'] );
 
         // Generator
         add_action('wp', [$this, 'init_request_data']);
