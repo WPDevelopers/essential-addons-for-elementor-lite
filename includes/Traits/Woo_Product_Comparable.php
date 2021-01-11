@@ -2011,22 +2011,25 @@ trait Woo_Product_Comparable {
 		} else {
 			$err_msg = __( 'Product ID is missing', 'essential-addons-for-elementor-lite' );
 		}
-		$product_ids = get_transient( 'eael_product_compare_ids' );
+
+        if (!empty($_POST['product_ids'])) {
+            $product_ids = wp_unslash(json_decode($_POST['product_ids']));
+		}
+
+        if (empty($product_ids)) {
+            $product_ids = [];
+        }
 
 		if ( ! empty( $product_id ) ) {
 			$p_exist = ! empty( $product_ids ) && is_array( $product_ids );
 			if ( ! empty( $_POST['remove_product'] ) && $p_exist ) {
-				unset( $product_ids[ $product_id ] );
+			    $product_ids = array_filter($product_ids, function ($id) use ($product_id){
+                    return $id != $product_id;
+			    });
 			} else {
-				if ( $p_exist ) {
-					$product_ids[ $product_id ] = $product_id;
-				} else {
-					$product_ids = [ $product_id => $product_id ];
-				}
+			    $product_ids[] = $product_id;
 			}
 		}
-
-		$this->eael_set_transient( 'eael_product_compare_ids', $product_ids );
 
 
 		if ( ! empty( $err_msg ) ) {
@@ -2043,14 +2046,15 @@ trait Woo_Product_Comparable {
 
 			return false;
 		}
-		$product_ids = array_values( $product_ids );
+		$product_ids = array_values(array_unique($product_ids));
+
 		$ds          = $this->eael_get_widget_settings( $page_id, $widget_id );
 		$products    = self::static_get_products_list( $product_ids, $ds );
 		$fields      = self::static_fields( $product_ids, $ds );
 		ob_start();
 		self::render_compare_table( compact( 'products', 'fields', 'ds' ) );
 		$table = ob_get_clean();
-		wp_send_json_success( [ 'compare_table' => $table ] );
+		wp_send_json_success( [ 'compare_table' => $table, 'product_ids' => $product_ids ] );
 
 		return null;
 	}

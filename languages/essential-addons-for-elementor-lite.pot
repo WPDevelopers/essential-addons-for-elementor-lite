@@ -7268,7 +7268,7 @@ msgstr ""
 msgid "Insecure form submitted without security token"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:37, ../includes/Traits/Login_Registration.php:92, ../includes/Traits/Login_Registration.php:210, ../includes/Traits/Woo_Product_Comparable.php:2041
+#: ../includes/Traits/Helper.php:37, ../includes/Traits/Login_Registration.php:92, ../includes/Traits/Login_Registration.php:210, ../includes/Traits/Woo_Product_Comparable.php:2044
 msgid "Security token did not match"
 msgstr ""
 
@@ -7712,7 +7712,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: ../includes/Traits/Woo_Product_Comparable.php:1860, ../includes/Traits/Woo_Product_Comparable.php:2107
+#: ../includes/Traits/Woo_Product_Comparable.php:1860, ../includes/Traits/Woo_Product_Comparable.php:2111
 msgid "In stock"
 msgstr ""
 
