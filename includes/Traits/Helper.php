@@ -556,5 +556,42 @@ trait Helper
 			}
 		} );
 	}
+
+	public function print_template_views(){
+        ?>
+        <div id="eael-promo-temp-wrap" class="eael-promo-temp-wrap">
+            <div class="eael-promo-temp-wrapper">
+                <div class="eael-promo-temp">
+                    <a href="#" class="eael-promo-temp__times"><img src="assets/img/times.png" alt=""></a>
+                    <div class="eael-promo-temp--left">
+                        <div class="eael-promo-temp__logo">
+                            <img src="assets/img/logo.png" alt="">
+                        </div>
+                        <ul class="eael-promo-temp__feature__list">
+                            <li>300+ Ready Template</li>
+                            <li>Supports Elementor & Gutenberg</li>
+                            <li>Powering up 10000+ Website</li>
+                            <li>Cloud Collaboration with Team</li>
+                        </ul>
+                        <form class="eael-promo-temp__form">
+                            <label for="radio1">
+                                <input type="radio" id="radio1" name='eael-promo-temp__radio'>
+                                <span>Templately Plugin Install</span>
+                            </label>
+                            <label for="radio2">
+                                <input type="radio" id="radio2" name='eael-promo-temp__radio'>
+                                <span>Don’t Show Again</span>
+                            </label>
+                        </form>
+                        <button>Active templately</button>
+                    </div>
+                    <div class="eael-promo-temp--right">
+                        <img src="assets/img/templates.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
 	
 }

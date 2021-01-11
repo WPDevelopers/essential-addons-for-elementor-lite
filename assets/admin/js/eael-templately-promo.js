@@ -11,12 +11,11 @@
         }
 
         elementor.on("preview:loaded", function () {
-
             $(elementor.$previewContents[0].body).on("click",".elementor-add-templately-promo-button", function (event){
-                var a = elementorCommon.dialogsManager.createWidget(
+                 window.tmPromo = elementorCommon.dialogsManager.createWidget(
                     "lightbox",
                     {
-                        id: "templately-app-modal",
+                        id: "eael-templately-promo-popup",
                         headerMessage: !1,
                         message: "",
                         hide: {
@@ -31,20 +30,21 @@
                             at: "center",
                         },
                         onShow: function () {
-                            console.log("onShow")
+                            var contentTemp = $(".dialog-content-tempromo")
+                            var cloneMarkup = $("#eael-promo-temp-wrap")
+                            cloneMarkup = cloneMarkup.clone( true )
+                            contentTemp.html(cloneMarkup);
                         },
                         onHide: function () {
-                            console.log("onHide")
-                        },
-                        onInit:function (){
-                            console.log("onInit")
-                        },
-                        onReady:function (){
-                            console.log("onReady")
+                            window.tmPromo.destroy();
                         }
                     }
                 );
-                a.show();
+                window.tmPromo.getElements("header").remove();
+                window.tmPromo.getElements("message").append(
+                    window.tmPromo.addElement("content-tempromo")
+                );
+                window.tmPromo.show();
             });
         });
     });
