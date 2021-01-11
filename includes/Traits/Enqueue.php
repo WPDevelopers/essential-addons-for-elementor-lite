@@ -324,5 +324,23 @@ trait Enqueue
             ['jquery'],
             EAEL_PLUGIN_VERSION
         );
+
+        wp_enqueue_style(
+            'templately-promo',
+            EAEL_PLUGIN_URL . 'assets/admin/css/eael-templately-promo.css',
+            false,
+            EAEL_PLUGIN_VERSION
+        );
+    }
+
+    public function templately_promo_enqueue_style(){
+        // enqueue
+
+        wp_enqueue_style(
+            'templately-promo',
+            EAEL_PLUGIN_URL . 'assets/admin/css/eael-templately-promo.css',
+            false,
+            EAEL_PLUGIN_VERSION
+        );
     }
 }
