@@ -1964,7 +1964,7 @@ trait Woo_Product_Comparable {
 			$id = $product->get_id();
 		}
 
-		$loader = '<svg class="eael-wc-compare-loader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style=" shape-rendering: auto; width: 1.5rem; height: 1.5rem" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+		$loader = '<svg class="eael-wc-compare-loader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style=" shape-rendering: auto; width: 14px;" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
             <g transform="translate(50,50)">
               <g transform="scale(0.7)">
               <circle cx="0" cy="0" r="50" fill="#c1c1c1"></circle>
@@ -1974,10 +1974,8 @@ trait Woo_Product_Comparable {
               </g>
             </g>
             </svg>';
-//		$fa_icon = '<span class="eael-wc-compare-icon"><i class="fas fa-balance-scale"></i></span>';
-//        $fa_icon = '<i class="fas fa-balance-scale"></i>';
         $fa_icon = '<svg class="eael-compare-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 493.4 493.4" style="enable-background:new 0 0 493.4 493.4;" xml:space="preserve">
+	 viewBox="0 0 493.4 493.4" style="width: 14px;" xml:space="preserve">
                 <g>
                     <polygon class="st0" points="382.6,167.5 0.4,167.5 0.4,114.1 382.6,114.1 382.6,39.9 492.5,140 382.6,241.4 	"/>
                     <polygon class="st0" points="1.3,330.8 111.2,230.6 111.2,304.8 493.4,304.8 493.4,358.2 111.2,358.2 111.2,432.1 	"/>
