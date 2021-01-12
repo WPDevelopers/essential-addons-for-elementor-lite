@@ -559,13 +559,13 @@ trait Helper
 
 	public function print_template_views(){
         ?>
-        <div id="eael-promo-temp-wrap" class="eael-promo-temp-wrap">
+        <div id="eael-promo-temp-wrap" class="eael-promo-temp-wrap" style="display: none">
             <div class="eael-promo-temp-wrapper">
                 <div class="eael-promo-temp">
-                    <a href="#" class="eael-promo-temp__times"><img src="assets/img/times.png" alt=""></a>
+                    <a href="#" class="eael-promo-temp__times"></a>
                     <div class="eael-promo-temp--left">
                         <div class="eael-promo-temp__logo">
-                            <img src="assets/img/logo.png" alt="">
+                            <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg'; ?>" alt="">
                         </div>
                         <ul class="eael-promo-temp__feature__list">
                             <li>300+ Ready Template</li>
@@ -575,18 +575,18 @@ trait Helper
                         </ul>
                         <form class="eael-promo-temp__form">
                             <label for="radio1">
-                                <input type="radio" id="radio1" name='eael-promo-temp__radio'>
+                                <input type="radio" value="install" id="radio1" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio'>
                                 <span>Templately Plugin Install</span>
                             </label>
                             <label for="radio2">
-                                <input type="radio" id="radio2" name='eael-promo-temp__radio'>
+                                <input type="radio" value="dnd" id="radio2" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio'>
                                 <span>Don’t Show Again</span>
                             </label>
                         </form>
                         <button>Active templately</button>
                     </div>
                     <div class="eael-promo-temp--right">
-                        <img src="assets/img/templates.jpg" alt="">
+                        <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/templates-edit.jpg'; ?>" alt="">
                     </div>
                 </div>
             </div>

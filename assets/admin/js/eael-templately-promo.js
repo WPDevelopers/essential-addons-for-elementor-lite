@@ -11,8 +11,8 @@
         }
 
         elementor.on("preview:loaded", function () {
-            $(elementor.$previewContents[0].body).on("click",".elementor-add-templately-promo-button", function (event){
-                 window.tmPromo = elementorCommon.dialogsManager.createWidget(
+            $(elementor.$previewContents[0].body).on("click", ".elementor-add-templately-promo-button", function (event) {
+                window.tmPromo = elementorCommon.dialogsManager.createWidget(
                     "lightbox",
                     {
                         id: "eael-templately-promo-popup",
@@ -32,7 +32,7 @@
                         onShow: function () {
                             var contentTemp = $(".dialog-content-tempromo")
                             var cloneMarkup = $("#eael-promo-temp-wrap")
-                            cloneMarkup = cloneMarkup.clone( true )
+                            cloneMarkup = cloneMarkup.clone(true).show()
                             contentTemp.html(cloneMarkup);
                         },
                         onHide: function () {
@@ -46,6 +46,10 @@
                 );
                 window.tmPromo.show();
             });
+        });
+
+        $(document).on('change','.eael-temp-promo-confirmation',function (){
+            console.log($(this).val());
         });
     });
 })(jQuery);
