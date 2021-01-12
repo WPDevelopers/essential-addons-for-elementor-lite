@@ -123,7 +123,7 @@ class Helper
         } else {
             $args['post_type'] = $settings['post_type'];
 
-            if ($args['post_type'] !== 'page') {
+            //if ($args['post_type'] !== 'page') {
                 $args['tax_query'] = [];
 
                 $taxonomies = get_object_taxonomies($settings['post_type'], 'objects');
@@ -143,7 +143,7 @@ class Helper
                 if (!empty($args['tax_query'])) {
                     $args['tax_query']['relation'] = 'AND';
                 }
-            }
+            //}
         }
 
         if (!empty($settings['authors'])) {
