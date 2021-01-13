@@ -50,10 +50,105 @@
 
         $(document).on('change', '.eael-temp-promo-confirmation', function (e) {
             var $this = $(this)
-            console.log();
-            $this.prop("checked", true)
-            $this.attr('checked', 'test')
-            console.log($this.val())
+            var status = localStorage.getItem('templately_promo_status');
+            if (status) {
+                $(".elementor-add-templately-promo-button").remove();
+                return false;
+            }
+            if ($this.val() == 'dnd') {
+                $.ajax({
+                    url: ajaxurl,
+                    type: "POST",
+                    data: {
+                        action: "templately_promo_status",
+                        security: localize.nonce,
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            console.log(response.success)
+                            $(".elementor-add-templately-promo-button").remove();
+                            localStorage.setItem('templately_promo_status', 'dnd');
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    },
+                });
+            }
+        });
+
+        // install/activate plugin
+        $(document).on("click", ".wpdeveloper-plugin-installer", function (ev) {
+            ev.preventDefault();
+
+            var button = $(this);
+            var action = $(this).data("action");
+            var slug = $(this).data("slug");
+            var basename = $(this).data("basename");
+
+            if ($.active && typeof action != "undefined") {
+                button.text("Waiting...").attr("disabled", true);
+
+                setInterval(function () {
+                    if (!$.active) {
+                        button.attr("disabled", false).trigger("click");
+                    }
+                }, 1000);
+            }
+
+            if (action == "install" && !$.active) {
+                button.text("Installing...").attr("disabled", true);
+
+                $.ajax({
+                    url: localize.ajaxurl,
+                    type: "POST",
+                    data: {
+                        action: "wpdeveloper_install_plugin",
+                        security: localize.nonce,
+                        slug: slug,
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            button.text("Activated");
+                            button.data("action", null);
+                        } else {
+                            button.text("Install");
+                            alert(response.data);
+                        }
+
+                        button.attr("disabled", false);
+                    },
+                    error: function (err) {
+                        console.log(err.responseJSON);
+                    },
+                });
+            } else if (action == "activate" && !$.active) {
+                button.text("Activating...").attr("disabled", true);
+
+                $.ajax({
+                    url: localize.ajaxurl,
+                    type: "POST",
+                    data: {
+                        action: "wpdeveloper_activate_plugin",
+                        security: localize.nonce,
+                        basename: basename,
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            button.text("Activated");
+                            button.data("action", null);
+                        } else {
+                            button.text("Activate");
+                            alert(response.data);
+                        }
+
+                        button.attr("disabled", false);
+                    },
+                    error: function (err) {
+                        console.log(err.responseJSON);
+                    },
+                });
+            }
         });
     });
 })(jQuery);
