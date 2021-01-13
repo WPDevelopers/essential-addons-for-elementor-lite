@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
+use Elementor\Icons_Manager;
 use \Elementor\Plugin;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
@@ -1499,32 +1500,23 @@ class Info_Box extends Widget_Base
     /**
      * This function is responsible for rendering divs and contents
      * for infobox before partial.
-     *
-     * @param    $settings
+     * @param $settings
      */
-    protected function eael_infobox_before()
+    protected function eael_infobox_before($settings)
     {
-        $settings = $this->get_settings_for_display();
 
         $this->add_render_attribute('eael_infobox_inner', 'class', 'eael-infobox');
 
-        if ('img-on-left' == $settings['eael_infobox_img_type']) {
-            $this->add_render_attribute('eael_infobox_inner', 'class', 'icon-on-left');
-        }
-
-        if ('img-on-right' == $settings['eael_infobox_img_type']) {
-            $this->add_render_attribute('eael_infobox_inner', 'class', 'icon-on-right');
-        }
+            $this->add_render_attribute('eael_infobox_inner', 'class', $settings['eael_infobox_img_type']);
 
         $target = !empty($settings['eael_show_infobox_clickable_link']['is_external']) ? 'target="_blank"' : '';
         $nofollow = !empty($settings['eael_show_infobox_clickable_link']['nofollow']) ? 'rel="nofollow"' : '';
 
-        ob_start();
         ?>
-        <?php if ('yes' == $settings['eael_show_infobox_clickable']): ?><a href="<?php echo esc_url($settings['eael_show_infobox_clickable_link']['url']) ?>" <?php echo $target; ?> <?php echo $nofollow; ?>><?php endif;?>
+        <?php if ('yes' == $settings['eael_show_infobox_clickable']){ ?><a href="<?php echo esc_url($settings['eael_show_infobox_clickable_link']['url']) ?>" <?php echo $target; ?> <?php echo $nofollow; ?>>
+        <?php } ?>
             <div <?php echo $this->get_render_attribute_string('eael_infobox_inner'); ?>>
             <?php
-echo ob_get_clean();
     }
 
     /**
@@ -1533,12 +1525,12 @@ echo ob_get_clean();
      *
      * @param    $settings
      */
-    protected function eael_infobox_after()
+    protected function eael_infobox_after($settings)
     {
-        $settings = $this->get_settings_for_display();
-        ob_start(); ?></div><?php
-if ('yes' == $settings['eael_show_infobox_clickable']): ?></a><?php endif;
-        echo ob_get_clean();
+        echo '</div>';
+        if ('yes' == $settings['eael_show_infobox_clickable']) {
+            echo '</a>';
+        }
     }
 
     /**
@@ -1546,26 +1538,22 @@ if ('yes' == $settings['eael_show_infobox_clickable']): ?></a><?php endif;
      *
      * @param $settings
      */
-    protected function render_infobox_icon()
+    protected function render_infobox_icon($settings)
     {
-        $settings = $this->get_settings_for_display();
-
         if ('none' == $settings['eael_infobox_img_or_icon']) {
             return;
         }
 
         $infobox_image = $this->get_settings('eael_infobox_image');
         $infobox_image_url = Group_Control_Image_Size::get_attachment_image_src($infobox_image['id'], 'thumbnail', $settings);
-        if (empty($infobox_image_url)): $infobox_image_url = $infobox_image['url'];
-        else:$infobox_image_url = $infobox_image_url;
+        if (empty($infobox_image_url)):
+        $infobox_image_url = $infobox_image['url'];
         endif;
         $infobox_icon_migrated = isset($settings['__fa4_migrated']['eael_infobox_icon_new']);
         $infobox_icon_is_new = empty($settings['eael_infobox_icon']);
 
-        $this->add_render_attribute(
-            'infobox_icon',
-            [
-                'class' => ['infobox-icon'],
+        $this->add_render_attribute('infobox_icon', [
+                'class' => 'infobox-icon',
             ]
         );
 
@@ -1602,7 +1590,6 @@ if ('yes' == $settings['eael_show_infobox_clickable']): ?></a><?php endif;
             $icon_tag = '<i class="' . esc_attr($settings['eael_infobox_icon']) . '"></i>';
         }
 
-        ob_start();
         ?>
         <div <?php echo $this->get_render_attribute_string('infobox_icon'); ?>>
 
@@ -1612,7 +1599,7 @@ if ('yes' == $settings['eael_show_infobox_clickable']): ?></a><?php endif;
 
             <?php if ('icon' == $settings['eael_infobox_img_or_icon']): ?>
                 <div class="infobox-icon-wrap">
-                    <?php echo $icon_tag; ?>
+                    <?php $this->print_icon($settings); ?>
                 </div>
             <?php endif;?>
 
@@ -1624,19 +1611,14 @@ if ('yes' == $settings['eael_show_infobox_clickable']): ?></a><?php endif;
 
         </div>
     <?php
-echo ob_get_clean();
     }
 
-    protected function render_infobox_content()
+    protected function render_infobox_content($settings)
     {
-        $settings = $this->get_settings_for_display();
-
         $this->add_render_attribute('infobox_content', 'class', 'infobox-content');
         if ('icon' == $settings['eael_infobox_img_or_icon']) {
             $this->add_render_attribute('infobox_content', 'class', 'eael-icon-only');
         }
-
-        ob_start();
         ?>
         <div <?php echo $this->get_render_attribute_string('infobox_content'); ?>>
             <<?php echo $settings['eael_infobox_title_tag']; ?> class="title"><?php echo $settings['eael_infobox_title']; ?></<?php echo $settings['eael_infobox_title_tag']; ?>>
@@ -1654,8 +1636,6 @@ echo ob_get_clean();
             <?php endif;?>
         </div>
     <?php
-
-        echo ob_get_clean();
     }
 
     /**
@@ -1663,9 +1643,8 @@ echo ob_get_clean();
      *
      * @param $settings
      */
-    protected function render_infobox_button()
+    protected function render_infobox_button( $settings )
     {
-        $settings = $this->get_settings_for_display();
         if ('yes' == $settings['eael_show_infobox_clickable'] || 'yes' != $settings['eael_show_infobox_button']) {
             return;
         }
@@ -1686,8 +1665,6 @@ echo ob_get_clean();
         if ('on' == $settings['infobox_button_link_url']['nofollow']) {
             $this->add_render_attribute('infobox_button', 'rel', 'nofollow');
         }
-
-        ob_start();
         ?>
         <div class="infobox-button">
             <a <?php echo $this->get_render_attribute_string('infobox_button'); ?>>
@@ -1736,14 +1713,32 @@ echo ob_get_clean();
             </a>
         </div>
 <?php
-echo ob_get_clean();
     }
 
     protected function render()
     {
-        $this->eael_infobox_before();
-        $this->render_infobox_icon();
-        $this->render_infobox_content();
-        $this->eael_infobox_after();
+        $settings = $this->get_settings_for_display();
+        $this->eael_infobox_before($settings);
+        $this->render_infobox_icon($settings);
+        $this->render_infobox_content($settings);
+        $this->eael_infobox_after($settings);
     }
+    protected function print_icon($settings)
+    {
+        $is_migrated = isset($settings['__fa4_migrated']['eael_infobox_icon_new']);
+        $is_new_icon = empty($settings['eael_infobox_icon']);
+        if ($is_new_icon || $is_migrated) {
+            if ( 'svg' === $settings['eael_infobox_icon_new']['library'] ) {
+                echo '<span class="eael-infobox-icon eael-infobox-icon-svg eaa-svg">';
+                Icons_Manager::render_icon( $settings['eael_infobox_icon_new'] );
+                echo '</span>';
+            }else{
+                Icons_Manager::render_icon( $settings['eael_infobox_icon_new'], [ 'aria-hidden' => 'true', 'class' => "eael-infobox-icon" ] );
+            }
+
+        } else {
+            echo '<i class="' . $settings['eael_infobox_icon'] . ' eael-infobox-icon"></i>';
+        }
+    }
+
 }
