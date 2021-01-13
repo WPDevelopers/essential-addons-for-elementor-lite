@@ -204,8 +204,9 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                     </div>
                 </div>
                 <?php $this->eael_elements(); ?>
-                <div id="templately" class="setup-content eael-box eael-templately-popup">
-                    <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately.jpg'; ?>" alt="">
+                <div id="templately" class="setup-content eael-box eael-templately-popup" style="background-image:
+                url('<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately.jpg'; ?>');">
+<!--                    <img src="--><?php //echo EAEL_PLUGIN_URL . 'assets/admin/images/templately.jpg'; ?><!--" alt="">-->
                     <?php if ( !is_plugin_active( 'templately/templately.php' ) ) $this->eael_templately_plugin_popup(); ?>
                 </div>
 
@@ -273,7 +274,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                         </div>
                     <?php endforeach; ?>
                 </div>
-                <h4>Dynamic Content Elements</h4>
+                <h4 class="eael-elements-cat">Dynamic Content Elements</h4>
                 <div class="eael-checkbox-container eael-elements-container">
                     <?php foreach ( $this->get_eael_elements() as $element ): ?>
                         <div class="eael-checkbox">
@@ -296,7 +297,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         <div id="integrations" class="setup-content eael-box">
             <div class="row">
                 <?php foreach ( $this->get_plugin_list() as $plugin ) { ?>
-                    <div class="col-one-fourth">
+                    <div class="col-one-third">
                         <div class="eael-admin-block-wrapper">
                             <div class="eael-admin-block eael-admin-block-integrations">
                                 <div class="eael-admin-block-content">
