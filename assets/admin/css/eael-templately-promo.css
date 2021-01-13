@@ -6,32 +6,26 @@
 	margin-left: 5px;
 }
 
+#eael-templately-promo-popup.dialog-type-lightbox .dialog-widget-content {
+	width: 1200px;
+	height: 80%;
+}
+
 .eael-promo-temp-wrap {
 	line-height: 1.7;
 	font-weight: 400;
 	letter-spacing: 0;
-	min-height: 100vh;
+	min-height: 100%;
 	font-family: "Roboto", sans-serif;
 }
-.eael-promo-temp-wrap * {
-	margin: 0;
-	padding: 0;
-	outline: none;
-	border: none;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-}
+
 .eael-promo-temp-wrapper {
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	min-height: 100vh;
 	background: rgba(0, 0, 0, 0.87);
-	display: none;
-	-webkit-transition: all 0.3s ease;
-	transition: all 0.3s ease;
 }
 .eael-promo-temp-wrapper.show {
 	display: block;
@@ -155,6 +149,7 @@
 	transition: all 0.3s ease;
 	background: -webkit-gradient(linear, left top, right top, from(#5725ff), to(#9271ff));
 	background: linear-gradient(to right, #5725ff, #9271ff);
+	border: none;
 }
 .eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left button:hover {
 	-webkit-box-shadow: none;
