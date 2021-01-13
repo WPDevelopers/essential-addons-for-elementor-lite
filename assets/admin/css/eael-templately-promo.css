@@ -7,8 +7,8 @@
 }
 
 #eael-templately-promo-popup.dialog-type-lightbox .dialog-widget-content {
-	width: 1200px;
-	height: 80%;
+	width: 1060px;
+	min-height: 80%;
 }
 
 .eael-promo-temp-wrap {
@@ -37,22 +37,28 @@
 	-webkit-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 	background: #fff;
-	width: 1200px;
+	width: 1060px;
+	max-height: 90%;
 	border-radius: 10px;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
+
 .eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp__times {
 	position: absolute;
 	top: 12px;
 	right: 16px;
+	font-size: 18px;
+	color: #222;
 }
+
 .eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left {
 	-webkit-box-flex: 0;
-	-ms-flex: 0 0 calc(100% - 890px);
-	flex: 0 0 calc(100% - 890px);
+	-ms-flex: 0 0 calc(100% - 755px);
+	flex: 0 0 calc(100% - 755px);
 	padding: 45px 30px 30px;
 	width: 310px;
 	text-align: center;
@@ -157,11 +163,12 @@
 }
 .eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--right {
 	-webkit-box-flex: 0;
-	-ms-flex: 0 0 890px;
-	flex: 0 0 890px;
+	-ms-flex: 0 0 755px;
+	flex: 0 0 755px;
 }
 .eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--right img {
 	display: block;
+	height: 550px;
 }
 @media all and (max-width: 1300px) {
 	.eael-promo-temp-wrapper .eael-promo-temp {
@@ -178,4 +185,18 @@
 		flex: 0 0 calc(100% - 600px);
 		width: 300px;
 	}
+}
+
+.eael-promo-temp-wrapper .eael-promo-temp::-webkit-scrollbar {
+	width: 5px;
+}
+.eael-promo-temp-wrapper .eael-promo-temp::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(51, 51, 51, 0.1);
+	box-shadow: inset 0 0 6px rgba(51, 51, 51, 0.1);
+	background: #dbe0e9;
+	border-radius: 5px;
+}
+.eael-promo-temp-wrapper .eael-promo-temp::-webkit-scrollbar-thumb {
+	background: #5725ff;
+	border-radius: 5px;
 }

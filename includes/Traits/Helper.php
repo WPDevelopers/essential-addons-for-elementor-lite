@@ -576,16 +576,27 @@ trait Helper
                             <li>Cloud Collaboration with Team</li>
                         </ul>
                         <form class="eael-promo-temp__form">
-                            <label for="radio1">
-                                <input type="radio" value="install" id="radio1" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio'>
+                            <label>
+                                <input type="radio" value="install" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio'>
                                 <span>Templately Plugin Install</span>
                             </label>
-                            <label for="radio2">
-                                <input type="radio" value="dnd" id="radio2" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio'>
+                            <label >
+                                <input type="radio" value="dnd" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio'>
                                 <span>Don’t Show Again</span>
                             </label>
                         </form>
-                        <button>Active templately</button>
+
+                        <?php if ( HelperClass::get_local_plugin_data( 'templately/templately.php' ) === false ) { ?>
+                            <button class="wpdeveloper-plugin-installer" data-action="install"
+                               data-slug="<?php echo 'templately'; ?>"><?php _e( 'Install templately', 'essential-addons-for-elementor-lite' ); ?></button>
+                        <?php } else { ?>
+                            <?php if ( is_plugin_active( 'templately/templately.php' ) ) { ?>
+                                <button class="wpdeveloper-plugin-installer"><?php _e( 'Activated', 'essential-addons-for-elementor-lite' ); ?></button>
+                            <?php } else { ?>
+                                <button class="wpdeveloper-plugin-installer" data-action="activate"
+                                   data-basename="<?php echo 'templately/templately.php'; ?>"><?php _e( 'Activate', 'essential-addons-for-elementor-lite' ); ?></button>
+                            <?php } ?>
+                        <?php } ?>
                     </div>
                     <div class="eael-promo-temp--right">
                         <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/templates-edit.jpg'; ?>" alt="">
@@ -594,6 +605,16 @@ trait Helper
             </div>
         </div>
         <?php
+    }
+
+    public function templately_promo_status() {
+        check_ajax_referer( 'essential-addons-elementor', 'security' );
+        $status = update_option( 'eael_templately_promo_hide', true );
+        if ( $status ) {
+            wp_send_json_success();
+        } else {
+            wp_send_json_error();
+        }
     }
 	
 }
