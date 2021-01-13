@@ -48,8 +48,12 @@
             });
         });
 
-        $(document).on('change','.eael-temp-promo-confirmation',function (){
-            console.log($(this).val());
+        $(document).on('change', '.eael-temp-promo-confirmation', function (e) {
+            var $this = $(this)
+            console.log();
+            $this.prop("checked", true)
+            $this.attr('checked', 'test')
+            console.log($this.val())
         });
     });
 })(jQuery);

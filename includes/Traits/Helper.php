@@ -562,7 +562,9 @@ trait Helper
         <div id="eael-promo-temp-wrap" class="eael-promo-temp-wrap" style="display: none">
             <div class="eael-promo-temp-wrapper">
                 <div class="eael-promo-temp">
-                    <a href="#" class="eael-promo-temp__times"></a>
+                    <a href="#" class="eael-promo-temp__times">
+                        <i class="eicon-close" aria-hidden="true" title="Close"></i>
+                    </a>
                     <div class="eael-promo-temp--left">
                         <div class="eael-promo-temp__logo">
                             <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg'; ?>" alt="">
