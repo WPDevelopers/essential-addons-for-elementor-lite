@@ -453,6 +453,7 @@ trait Helper
 	}
     public function print_load_more_button($settings, $args, $plugin_type = 'free')
     {
+        error_log(print_r($settings, 1));
         //@TODO; not all widget's settings contain posts_per_page name exactly, so adjust the settings before passing here or run a migration and make all settings key generalize for load more feature.
         if (!isset($this->page_id)) {
             if ( Plugin::$instance->documents->get_current() ) {
