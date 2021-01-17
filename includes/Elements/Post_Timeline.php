@@ -12,11 +12,11 @@ use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
-use Essential_Addons_Elementor\Traits\Template_Query;
+use Essential_Addons_Elementor\Traits\Helper;
 
 class Post_Timeline extends Widget_Base
 {
-    use Template_Query;
+    use Helper;
     public function get_name()
     {
         return 'eael-post-timeline';
