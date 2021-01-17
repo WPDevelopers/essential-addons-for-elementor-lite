@@ -96,6 +96,13 @@
     display: block;
 }
 
+.eael-elements-container + .eael-elements-cat {
+	margin-top: 30px;
+}
+.eael-elements-container {
+	width: 100%;
+}
+
 /* body */
 .eael-box {
     border-radius: 5px;
