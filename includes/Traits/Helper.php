@@ -135,18 +135,12 @@ trait Helper
                         $this->change_add_to_cart_text($add_to_cart_text);
                     }
 
-                    if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Post_List' ) {
-                        $html .= '<div class="eael-post-list-posts-wrap">';
-                    }
 
                     while ( $query->have_posts() ) {
                         $query->the_post();
 
                         $html .= HelperClass::include_with_variable( $file_path, [ 'settings' => $settings, 'iterator' => $iterator ] );
                         $iterator++;
-                    }
-                    if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Post_List' ) {
-                        $html .= '</div>';
                     }
                 }
             }
