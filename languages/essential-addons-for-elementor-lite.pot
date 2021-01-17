@@ -7280,11 +7280,11 @@ msgstr ""
 msgid "Widget settings are not found. Did you save the widget before using load more??"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:196
+#: ../includes/Traits/Helper.php:190
 msgid "Essential Addons for Elementor"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:375, ../includes/Traits/Twitter_Feed.php:119
+#: ../includes/Traits/Helper.php:369, ../includes/Traits/Twitter_Feed.php:119
 msgid "%s ago"
 msgstr ""
 
