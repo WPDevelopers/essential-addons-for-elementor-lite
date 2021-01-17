@@ -261,32 +261,29 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         ?>
         <div id="elements" class="setup-content eael-box">
             <div class="row">
-                <h4 class="eael-elements-cat">Content Elements</h4>
-                <div class="eael-checkbox-container eael-elements-container">
-                    <?php foreach ( $this->get_eael_elements() as $element ): ?>
-                        <div class="eael-checkbox">
-                            <div class="eael-elements-info">
-                                <input type="checkbox" class="eael-element" id="<?php echo $element[ 'key' ]; ?>"
-                                       name="eael_element[<?php echo $element[ 'key' ]; ?>]"
-                                    <?php echo ( $element[ 'preferences' ] == 'advanced' ) ? 'checked' : ''; ?>>
-                                <label for="<?php echo $element[ 'key' ]; ?>" class="eael-element-title"><?php echo $element[ 'name' ]; ?></label>
+                <?php foreach($this->get_element_list() as $key => $item): ?>
+                    <h4 class="eael-elements-cat"><?php echo $item['title']; ?></h4>
+                    <div class="eael-checkbox-container eael-elements-container">
+                        <?php foreach ( $item['elements'] as $element ):
+                            $preferences = $checked = '';
+                            if(isset($element[ 'preferences' ]) ){
+                                $preferences = $element[ 'preferences' ];
+                                if($element[ 'preferences' ]=='advance'){
+                                    $checked = 'checked';
+                                }
+                            }
+                            ?>
+                            <div class="eael-checkbox">
+                                <div class="eael-elements-info">
+                                    <input data-preferences="<?php echo $preferences;?>" type="checkbox" class="eael-element" id="<?php echo $element[ 'key' ]; ?>"
+                                           name="eael_element[<?php echo $element[ 'key' ]; ?>]"
+                                        <?php echo $checked;?> >
+                                    <label for="<?php echo $element[ 'key' ]; ?>" class="eael-element-title"><?php echo $element[ 'title' ]; ?></label>
+                                </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-                <h4 class="eael-elements-cat">Dynamic Content Elements</h4>
-                <div class="eael-checkbox-container eael-elements-container">
-                    <?php foreach ( $this->get_eael_elements() as $element ): ?>
-                        <div class="eael-checkbox">
-                            <div class="eael-elements-info">
-                                <input type="checkbox" class="eael-element" id="<?php echo $element[ 'key' ]; ?>"
-                                       name="eael_element[<?php echo $element[ 'key' ]; ?>]"
-                                    <?php echo ( $element[ 'preferences' ] == 'advanced' ) ? 'checked' : ''; ?>>
-                                <label for="<?php echo $element[ 'key' ]; ?>" class="eael-element-title"><?php echo $element[ 'name' ]; ?></label>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
         <?php
@@ -378,6 +375,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
      * @return array
      */
     public function get_eael_elements( $preferences = null ) {
+
         $elements_list    = array();
         $show_widget_list = [
             'basic'    => [
@@ -394,18 +392,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         } elseif ( $preferences == 'advanced' ) {
             $elements_list = array_merge( $show_widget_list[ 'basic' ], $show_widget_list[ 'advanced' ] );
         } else {
-            $globals_el_list = $GLOBALS[ 'eael_config' ][ 'elements' ];
-            $merge           = array_merge( $show_widget_list[ 'basic' ], $show_widget_list[ 'advanced' ] );
-            $i = 0;
-            foreach ( $globals_el_list as $key => $item ) {
-                $elements_list[] = [
-                    'key'         => $key,
-                    'name'        => ucwords( str_replace( '-', ' ', $key ) ),
-                    'preferences' => in_array( $key, $merge ) ? 'advanced' : '',
-                ];
-                $i++;
-                if($i==10) break;
-            }
+            $globals_el_list = $this->get_element_list();
         }
         return $elements_list;
     }
@@ -532,6 +519,247 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             return true;
         }
         return false;
+    }
+
+    public function get_element_list (){
+        return [
+            'content-elements'  => [
+                'title' => __( 'Content Elements', 'essential-addons-for-elementor-lite'),
+                'elements'  => [
+                    [
+                        'key'   => 'creative-btn',
+                        'title' => __( 'Creative Button', 'essential-addons-for-elementor-lite'),
+                        'preferences' => 'advance',
+                    ],
+                    [
+                        'key'   => 'team-members',
+                        'title' => __( 'Team Member', 'essential-addons-for-elementor-lite'),
+                        'preferences' => 'advance',
+                    ],
+                    [
+                        'key'   => 'testimonials',
+                        'title' => __( 'Testimonial', 'essential-addons-for-elementor-lite'),
+                    ],
+                    [
+                        'key'   => 'flip-box',
+                        'title' => __( 'Flip Box', 'essential-addons-for-elementor-lite'),
+                    ],
+                    [
+                        'key'   => 'info-box',
+                        'title' => __( 'Info Box', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'dual-header',
+                        'title' => __( 'Dual Color Heading', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'tooltip',
+                        'title' => __( 'Tooltip', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'adv-accordion',
+                        'title' => __( 'Advanced Accordion', 'essential-addons-for-elementor-lite'),
+                    ],
+                    [
+                        'key'   => 'adv-tabs',
+                        'title' => __( 'Advanced Tabs', 'essential-addons-for-elementor-lite'),
+                    ],
+                    [
+                        'key'   => 'feature-list',
+                        'title' => __( 'Feature List', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'sticky-video',
+                        'title' => __( 'Sticky Video', 'essential-addons-for-elementor-lite'),
+                    ],
+                    [
+                        'key'   => 'event-calendar',
+                        'title' => __( 'Event Calendar', 'essential-addons-elementor' ),
+                    ],
+                ]
+            ],
+            'dynamic-content-elements'  => [
+                'title' => __( 'Dynamic Content Elements', 'essential-addons-for-elementor-lite'),
+                'elements'  => [
+                    [
+                        'key'   => 'post-grid',
+                        'title' => __( 'Post Grid', 'essential-addons-for-elementor-lite'),
+                        'preferences' => 'basic',
+                    ],
+                    [
+                        'key'   => 'post-timeline',
+                        'title' => __( 'Post Timeline', 'essential-addons-for-elementor-lite'),
+                        'preferences' => 'basic',
+                    ],
+                    [
+                        'key'   => 'data-table',
+                        'title' => __( 'Data Table', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'advanced-data-table',
+                        'title' => __( 'Advanced Data Table', 'essential-addons-for-elementor-lite'),
+                    ],
+                    [
+                        'key'   => 'content-ticker',
+                        'title' => __( 'Content Ticker', 'essential-addons-for-elementor-lite'),
+                    ]
+                ]
+            ],
+            'creative-elements' => [
+                'title' => __( 'Creative Elements', 'essential-addons-for-elementor-lite'),
+                'elements'  => [
+                    [
+                        'key'   => 'count-down',
+                        'title' => __( 'Count Down', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'fancy-text',
+                        'title' => __( 'Fancy Text', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'filter-gallery',
+                        'title' => __( 'Filterable Gallery', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'    => 'image-accordion',
+                        'title'  => __( 'Image Accordion', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'progress-bar',
+                        'title' => __( 'Progress Bar', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                ]
+            ],
+            'marketing-elements'    => [
+                'title' => __( 'Marketing Elements', 'essential-addons-for-elementor-lite'),
+                'elements'  => [
+                    [
+                        'key'   => 'call-to-action',
+                        'title' => __( 'Call To Action', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'price-table',
+                        'title' => __( 'Pricing Table', 'essential-addons-for-elementor-lite'),
+                    ],
+
+                ]
+            ],
+            'form-styler-elements'  => [
+                'title' => __( 'Form Styler Elements', 'essential-addons-for-elementor-lite'),
+                'elements'  => [
+                    [
+                        'key'   => 'contact-form-7',
+                        'title' => __( 'Contact Form 7', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'weforms',
+                        'title' => __( 'weForms', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'ninja-form',
+                        'title' => __( 'Ninja Form', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'gravity-form',
+                        'title' => __( 'Gravity Form', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'caldera-form',
+                        'title' => __( 'Caldera Form', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'wpforms',
+                        'title' => __( 'WPForms', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'fluentform',
+                        'title' => __( 'FluentForm', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'formstack',
+                        'title' => __( 'Formstack', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'typeform',
+                        'title' => __( 'Typeform', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'login-register',
+                        'title' => __( 'Login Register Form', 'essential-addons-elementor' ),
+
+                    ],
+                ]
+            ],
+            'social-feed-elements'  => [
+                'title' => __( 'Social Feed Elemens', 'essential-addons-for-elementor-lite'),
+                'elements'  => [
+                    [
+                        'key'   => 'twitter-feed',
+                        'title' => __( 'Twitter Feed', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'    => 'facebook-feed',
+                        'title'  => __( 'Facebook Feed', 'essential-addons-for-elementor-lite'),
+                        'demo_link' => 'https://essential-addons.com/elementor/facebook-feed/',
+                        'doc_link' => 'https://essential-addons.com/elementor/docs/facebook-feed/',
+                    ],
+                ]
+            ],
+
+            'documentation-elements'   => [
+                'title' => __( 'Documentation Elements', 'essential-addons-for-elementor-lite'),
+                'elements'  => [
+                    [
+                        'key'   => 'betterdocs-category-grid',
+                        'title' => __( 'BetterDocs Category Grid', 'essential-addons-for-elementor-lite'),
+                    ],
+                    [
+                        'key'   => 'betterdocs-category-box',
+                        'title' => __( 'BetterDocs Category Box', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'betterdocs-search-form',
+                        'title' => __( 'BetterDocs Search Form', 'essential-addons-for-elementor-lite'),
+                    ]
+                ]
+            ],
+            'woocommerce-elements'   => [
+                'title' => __( 'WooCommerce Elements', 'essential-addons-for-elementor-lite'),
+                'elements'  => [
+                    [
+                        'key'    => 'product-grid',
+                        'title'  => __( 'Product Grid', 'essential-addons-for-elementor-lite'),
+
+                    ],
+                    [
+                        'key'   => 'woo-checkout',
+                        'title' => __( 'Woo Checkout', 'essential-addons-for-elementor-lite'),
+                    ]
+                ]
+            ]
+        ];
     }
 }
 

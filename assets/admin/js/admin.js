@@ -455,12 +455,11 @@
                 elements.prop('checked', true)
             } else {
                 elements.prop('checked', false)
-                var elementList = $this.data('elment-list')
-                if (elementList.length > 0) {
-                    elementList.map(function (item) {
-                        $("#" + item).prop('checked', true)
-                    });
-                }
+                elements.each(function (i,item){
+                    if($(item).data('preferences') == preferences){
+                        $(item).prop('checked', true)
+                    }
+                })
             }
         }
     });
