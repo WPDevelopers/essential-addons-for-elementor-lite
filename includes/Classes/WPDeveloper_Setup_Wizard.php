@@ -156,8 +156,8 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                         <label for="basic">
                             <div class="eael-radio-circle"></div>
                             <div class="eael-radio-text">
-                                <strong>Basic</strong>
-                                <p> For websites where you want to only use the basic features and keep your site lightweight. Most basic elements are activated in this option. <strong> [RECOMMENDED] </strong></p>
+                                <strong>Basic (Recommended)</strong>
+                                <p> For websites where you want to only use the basic features and keep your site lightweight. Most basic elements are activated in this option. </p>
                             </div>
                         </label>
                     </div>
