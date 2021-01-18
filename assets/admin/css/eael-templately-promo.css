@@ -117,6 +117,7 @@
 	position: relative;
 	padding-left: 23px;
 	cursor: pointer;
+	color: #6d7882;
 }
 .eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left .eael-promo-temp__form label span:before {
 	position: absolute;
