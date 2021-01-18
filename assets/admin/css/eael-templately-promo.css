@@ -200,3 +200,11 @@
 	background: #5725ff;
 	border-radius: 5px;
 }
+
+
+
+
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left button.eael-prmo-status-submit:disabled,
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left button.eael-prmo-status-submit[disabled]{
+	cursor: wait;
+}

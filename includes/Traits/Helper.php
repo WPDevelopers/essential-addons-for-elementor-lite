@@ -577,10 +577,10 @@ trait Helper
                         </ul>
                         <form class="eael-promo-temp__form">
                             <label>
-                                <input type="radio" value="install" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio'>
+                                <input type="radio" value="install" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio' checked>
                                 <span>Templately Plugin Install</span>
                             </label>
-                            <label >
+                            <label>
                                 <input type="radio" value="dnd" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio'>
                                 <span>Don’t Show Again</span>
                             </label>
@@ -597,6 +597,7 @@ trait Helper
                                    data-basename="<?php echo 'templately/templately.php'; ?>"><?php _e( 'Activate', 'essential-addons-for-elementor-lite' ); ?></button>
                             <?php } ?>
                         <?php } ?>
+                        <button class="eael-prmo-status-submit" style="display: none">Submit</button>
                     </div>
                     <div class="eael-promo-temp--right">
                         <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/templates-edit.jpg'; ?>" alt="">

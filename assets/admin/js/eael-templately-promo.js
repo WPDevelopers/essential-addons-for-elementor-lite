@@ -50,32 +50,46 @@
 
         $(document).on('change', '.eael-temp-promo-confirmation', function (e) {
             var $this = $(this)
-            var status = localStorage.getItem('templately_promo_status');
-            if (status) {
-                $(".elementor-add-templately-promo-button").remove();
-                return false;
-            }
             if ($this.val() == 'dnd') {
-                $.ajax({
-                    url: ajaxurl,
-                    type: "POST",
-                    data: {
-                        action: "templately_promo_status",
-                        security: localize.nonce,
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            console.log(response.success)
-                            $(".elementor-add-templately-promo-button").remove();
-                            localStorage.setItem('templately_promo_status', 'dnd');
-                        }
-                    },
-                    error: function (err) {
-                        console.log(err)
-                    },
-                });
+                $(".wpdeveloper-plugin-installer").hide();
+                $(".eael-prmo-status-submit").show();
+            } else {
+                $(".wpdeveloper-plugin-installer").show();
+                $(".eael-prmo-status-submit").hide();
             }
         });
+
+        $(document).on('click','.eael-prmo-status-submit',function (e){
+            e.preventDefault();
+            var $this = $(this);
+            $this.prop("disabled",true);
+            $(".eael-temp-promo-confirmation").prop("disabled", true);
+
+            $.ajax({
+                url: ajaxurl,
+                type: "POST",
+                data: {
+                    action: "templately_promo_status",
+                    security: localize.nonce,
+                },
+                success: function (response) {
+                    if (response.success) {
+                        elementor.saver.update.apply().then(function () {
+                            location.reload();
+                        });
+                    }
+                },
+                error: function (err) {
+                    $this.prop("disabled",false);
+                    console.log(err)
+                },
+            });
+        })
+
+        $(document).on('click','.eael-promo-temp__times',function (e){
+            e.preventDefault();
+            window.tmPromo.destroy();
+        })
 
         // install/activate plugin
         $(document).on("click", ".wpdeveloper-plugin-installer", function (ev) {
@@ -111,6 +125,7 @@
                         if (response.success) {
                             button.text("Activated");
                             button.data("action", null);
+                            location.reload();
                         } else {
                             button.text("Install");
                             alert(response.data);
@@ -137,6 +152,7 @@
                         if (response.success) {
                             button.text("Activated");
                             button.data("action", null);
+                            location.reload();
                         } else {
                             button.text("Activate");
                             alert(response.data);
