@@ -16,8 +16,7 @@ ea.hooks.addAction("init", "ea", () => {
 		let hasCompareIcon = false;
 		let compareBtnSpan = false;
 		let requestType = false; // compare | remove
-		let iconBeforeCompare = '<i class="fas fa-balance-scale-right"></i>';
-		//let iconAfterCompare = '<i class="fas fa-balance-scale"></i>';
+		let iconBeforeCompare = '<i class="fas fa-exchange-alt"></i>';
 		let iconAfterCompare = '<i class="fas fa-check-circle"></i>';
 		const modalTemplate = `
         <div class="eael-wcpc-modal">
@@ -168,7 +167,7 @@ ea.hooks.addAction("init", "ea", () => {
 				if (compareBtnSpan && compareBtnSpan.length) {
 					compareBtnSpan.text(localize.i18n.compare);
 				} else if (hasCompareIcon) {
-					compareBtn.html(iconAfterCompare);
+					compareBtn.html(iconBeforeCompare);
 				}
 			}
 		}

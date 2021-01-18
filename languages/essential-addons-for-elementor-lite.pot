@@ -7248,7 +7248,7 @@ msgstr ""
 msgid "Added "
 msgstr ""
 
-#: ../includes/Traits/Enqueue.php:130, ../includes/Traits/Woo_Product_Comparable.php:1984
+#: ../includes/Traits/Enqueue.php:130, ../includes/Traits/Woo_Product_Comparable.php:1978
 msgid "Compare"
 msgstr ""
 
@@ -7260,7 +7260,7 @@ msgstr ""
 msgid "Post ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Helper.php:57, ../includes/Traits/Login_Registration.php:62, ../includes/Traits/Login_Registration.php:227, ../includes/Traits/Woo_Product_Comparable.php:2005
+#: ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Helper.php:57, ../includes/Traits/Login_Registration.php:62, ../includes/Traits/Login_Registration.php:227, ../includes/Traits/Woo_Product_Comparable.php:1999
 msgid "Widget ID is missing"
 msgstr ""
 
@@ -7268,11 +7268,11 @@ msgstr ""
 msgid "Insecure form submitted without security token"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:37, ../includes/Traits/Login_Registration.php:92, ../includes/Traits/Login_Registration.php:210, ../includes/Traits/Woo_Product_Comparable.php:2042
+#: ../includes/Traits/Helper.php:37, ../includes/Traits/Login_Registration.php:92, ../includes/Traits/Login_Registration.php:210, ../includes/Traits/Woo_Product_Comparable.php:2036
 msgid "Security token did not match"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:47, ../includes/Traits/Login_Registration.php:55, ../includes/Traits/Login_Registration.php:222, ../includes/Traits/Woo_Product_Comparable.php:2000
+#: ../includes/Traits/Helper.php:47, ../includes/Traits/Login_Registration.php:55, ../includes/Traits/Login_Registration.php:222, ../includes/Traits/Woo_Product_Comparable.php:1994
 msgid "Page ID is missing"
 msgstr ""
 
@@ -7280,11 +7280,11 @@ msgstr ""
 msgid "Widget settings are not found. Did you save the widget before using load more??"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:196
+#: ../includes/Traits/Helper.php:190
 msgid "Essential Addons for Elementor"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:375, ../includes/Traits/Twitter_Feed.php:119
+#: ../includes/Traits/Helper.php:369, ../includes/Traits/Twitter_Feed.php:119
 msgid "%s ago"
 msgstr ""
 
@@ -7712,11 +7712,11 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: ../includes/Traits/Woo_Product_Comparable.php:1860, ../includes/Traits/Woo_Product_Comparable.php:2109
+#: ../includes/Traits/Woo_Product_Comparable.php:1860, ../includes/Traits/Woo_Product_Comparable.php:2103
 msgid "In stock"
 msgstr ""
 
-#: ../includes/Traits/Woo_Product_Comparable.php:2010
+#: ../includes/Traits/Woo_Product_Comparable.php:2004
 msgid "Product ID is missing"
 msgstr ""
 
