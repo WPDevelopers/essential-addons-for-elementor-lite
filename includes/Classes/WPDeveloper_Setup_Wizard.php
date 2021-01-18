@@ -157,12 +157,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                             <div class="eael-radio-circle"></div>
                             <div class="eael-radio-text">
                                 <strong>Basic</strong>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt
-                                    ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus
-                                    commodo
-
-                                    facilisis. </p>
+                                <p> For websites where you want to only use the basic features and keep your site lightweight. Most basic elements are activated in this option. <strong> [RECOMMENDED] </strong></p>
                             </div>
                         </label>
                     </div>
@@ -174,14 +169,8 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                         <label for="advance">
                             <div class="eael-radio-circle"></div>
                             <div class="eael-radio-text">
-                                <strong>Advance</strong>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt
-                                    ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus
-                                    commodo
-                                    ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                                    vel
-                                    facilisis. </p>
+                                <strong>Advanced</strong>
+                                <p> For advanced users who is trying to build complex websites wtih advanced functionalities with Elementor. All the dynamic elements will be activated in this option. </p>
                             </div>
                         </label>
                     </div>
@@ -192,13 +181,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                             <div class="eael-radio-circle"></div>
                             <div class="eael-radio-text">
                                 <strong>Custom</strong>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt
-                                    ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus
-                                    commodo
-                                    ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                                    vel
-                                    facilisis. </p>
+                                <p> Pick this option if you want to configure the elements as per you wish.  </p>
                             </div>
                         </label>
                     </div>
