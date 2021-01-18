@@ -575,7 +575,7 @@ class Product_Grid extends Widget_Base
             'label_block' => false,
             'default' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
             'condition' => [
-                'show_load_more' => 'true',
+                'show_load_more' => ['yes', '1', 'true'],
             ],
         ]);
 

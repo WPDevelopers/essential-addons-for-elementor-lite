@@ -394,7 +394,7 @@ class Facebook_Feed extends Widget_Base
                 'dynamic' => ['active' => true],
                 'default' => __('Load More', 'essential-addons-for-elementor-lite'),
                 'condition' => [
-                    'show_load_more' => 'yes',
+                    'show_load_more' => ['yes', '1', 'true'],
                 ],
             ]
         );
