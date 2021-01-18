@@ -1974,13 +1974,7 @@ trait Woo_Product_Comparable {
               </g>
             </g>
             </svg>';
-        $fa_icon = '<svg class="eael-compare-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 493.4 493.4" style="width: 14px;" xml:space="preserve">
-                <g>
-                    <polygon class="st0" points="382.6,167.5 0.4,167.5 0.4,114.1 382.6,114.1 382.6,39.9 492.5,140 382.6,241.4 	"/>
-                    <polygon class="st0" points="1.3,330.8 111.2,230.6 111.2,304.8 493.4,304.8 493.4,358.2 111.2,358.2 111.2,432.1 	"/>
-                </g>
-                </svg>';
+        $fa_icon = '<i class="fas fa-exchange-alt"></i>';
 		$btn_content = '<span class="eael-wc-compare-text">' .__( 'Compare', 'essential-addons-for-elementor-lite' ). '</span>';
         if ('icon' === $btn_type) {
             printf( '<a class="eael-wc-compare eael-wc-compare-icon" data-product-id="%1$d" rel="nofollow" title="Compare">%2$s %3$s</a>', intval( $id ), $loader, $fa_icon );
