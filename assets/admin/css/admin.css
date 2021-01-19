@@ -108,6 +108,16 @@
     margin-top: 5px;
 }
 
+.eael-setup-final-info .eael-whatwecollecttext {
+    margin: 0;
+    display: none;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+.btn-collect:focus{
+    outline: none;
+}
+
 .setup-content {
     display: none;
 }
