@@ -60,8 +60,10 @@ class WPDeveloper_Setup_Wizard {
      * Render tav step
      */
     public function tab_step() {
+	    !$this->templately_status ? $wizard_column = 'five' : $wizard_column = 'four';
+
         ?>
-        <ul class="eael-setup-wizard" data-step="1">
+        <ul class="eael-setup-wizard <?php echo $wizard_column; ?>" data-step="1">
             <li class="step">
                 <div class="icon">
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
@@ -206,6 +208,10 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                 <?php endif; ?>
                 <?php $this->eael_integrations(); ?>
                 <div id="finalize" class="setup-content eael-box">
+
+                    <h2>Getting Started</h2>
+                    <p>Easily get started with this easy setup wizard and complete setting up your knowledge base.</p>
+
                     <div class="eael-iframe">
                         <iframe src="https://www.youtube.com/embed/CnSYwGcXnxA" frameborder="0"></iframe>
                     </div>

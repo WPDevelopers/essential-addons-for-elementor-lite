@@ -16,6 +16,11 @@
     position: relative;
 	margin: 0 8%;
 }
+.eael-setup-wizard.four {
+    grid-template-columns: repeat(4, 19%);
+    grid-gap: 8%;
+    margin: 0 15%;
+}
 .eael-setup-wizard li {
     border-radius: 5px;
     background-color: #ffffff;
@@ -77,6 +82,20 @@
     width: 100%;
 }
 
+/* four */
+.eael-setup-wizard.four[data-step="0"]::before {
+    width: 22.8%;
+}
+.eael-setup-wizard.four[data-step="1"]::before {
+    width: 50%;
+}
+.eael-setup-wizard.four[data-step="2"]::before {
+    width: 77%;
+}
+.eael-setup-wizard.four[data-step="3"]::before {
+    width: 100%;
+}
+
 .step .icon svg{
     width: 20px;
     fill: #9ea3db;
@@ -132,11 +151,31 @@
     width: 100%;
 }
 
+/* finalize */
+
+#finalize h2 {
+    font-size: 20px;
+    text-align: center;
+    color: #3f3f3f;
+    margin: 18px 0;
+}
+
+#finalize p {
+    margin: 10px 0 0;
+    font-size: 15px;
+    line-height: 1.4em;
+    color: #5a5a5a;
+    font-weight: 400;
+    text-align: center;
+}
+
 .eael-iframe {
     position: relative;
     overflow: hidden;
-    width: 100%;
-    padding-top: 56.25%;
+    width: 80%;
+    padding-top: 45.25%;
+    margin: 25px auto;
+    border-radius: 5px;
 }
 .eael-iframe * {
     position: absolute;
@@ -150,9 +189,7 @@
 
 .eael-setup-final-info {
     margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    text-align: center;
 }
 .eael-setup-final-info .eael-input-group {
     margin-bottom: 15px;
