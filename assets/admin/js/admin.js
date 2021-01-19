@@ -419,13 +419,12 @@
                 if (response.success) {
                     Swal.fire({
                         type: "success",
-                        title: "Success",
-                        footer: 'Success',
+                        title: "Saved",
                         showConfirmButton: true
                     }).then((result) => {
                         window.location = response.data.redirect_url;
                     });
-                }else{
+                } else {
                     $this.attr('disabled', 'disabled');
                     Swal.fire({
                         type: "error",
@@ -455,8 +454,8 @@
                 elements.prop('checked', true)
             } else {
                 elements.prop('checked', false)
-                elements.each(function (i,item){
-                    if($(item).data('preferences') == preferences){
+                elements.each(function (i, item) {
+                    if ($(item).data('preferences') == preferences) {
                         $(item).prop('checked', true)
                     }
                 })
@@ -466,7 +465,7 @@
 
     eaelRenderTab();
 
-    function eaelRenderTab(step=0) {
+    function eaelRenderTab(step = 0) {
 
         var contents = document.getElementsByClassName("setup-content"),
             prev = document.getElementById("eael-prev"),
@@ -497,14 +496,14 @@
         steps[stepNumber].className += " active";
     }
 
-    $(document).on('click','#eael-next,#eael-prev',function (e){
+    $(document).on('click', '#eael-next,#eael-prev', function (e) {
         var container = document.getElementsByClassName("eael-setup-wizard"),
-        StepNumber = parseInt(container[0].getAttribute('data-step')),
-        contents = document.getElementsByClassName("setup-content");
+            StepNumber = parseInt(container[0].getAttribute('data-step')),
+            contents = document.getElementsByClassName("setup-content");
 
         contents[StepNumber].style.display = "none";
-        StepNumber = (e.target.id == 'eael-prev')?StepNumber-1:StepNumber+1;
-        if(e.target.id == 'eael-next' && StepNumber==2){
+        StepNumber = (e.target.id == 'eael-prev') ? StepNumber - 1 : StepNumber + 1;
+        if (e.target.id == 'eael-next' && StepNumber == 2) {
             $.ajax({
                 url: localize.ajaxurl,
                 type: "POST",
@@ -521,7 +520,7 @@
         eaelRenderTab(StepNumber);
     });
 
-    $('.btn-collect').on('click', function(){
+    $('.btn-collect').on('click', function () {
         $(".eael-whatwecollecttext").toggle();
     });
 
