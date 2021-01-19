@@ -859,7 +859,7 @@ trait Woo_Product_Comparable {
 			'separator' => 'before',
 		] );
 		$this->add_control( 'btn_color', [
-			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Button Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $btn => 'color:{{VALUE}}' ],
 		] );
@@ -916,7 +916,7 @@ trait Woo_Product_Comparable {
 			'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
 		] );
 		$this->add_control( 'btn_color_hover', [
-			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Button Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $btn_hover => 'color:{{VALUE}}' ],
 		] );
@@ -1241,7 +1241,7 @@ trait Woo_Product_Comparable {
 			'separator' => 'before',
 		] );
 		$this->add_control( "{$pfx}_btn_color", [
-			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Button Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $btn => 'color:{{VALUE}}' ],
 			'separator' => 'before',
@@ -1283,7 +1283,7 @@ trait Woo_Product_Comparable {
 			'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
 		] );
 		$this->add_control( "{$pfx}_btn_color_hover", [
-			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Button Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $btn_hover => 'color:{{VALUE}}' ],
 		] );
@@ -1517,7 +1517,7 @@ trait Woo_Product_Comparable {
         $this->add_control(
             'compare_btn_color',
             [
-                'label' => esc_html__('Button Color', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Button Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
@@ -1567,7 +1567,7 @@ trait Woo_Product_Comparable {
         $this->add_control(
             'compare_btn_hover_color',
             [
-                'label' => esc_html__('Button Color', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Button Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
