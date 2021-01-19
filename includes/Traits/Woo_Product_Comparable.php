@@ -1463,7 +1463,8 @@ trait Woo_Product_Comparable {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 			        $icon => 'color:{{VALUE}} !important;',
-			        $icon. ' i' => 'color:{{VALUE}} !important;'
+			        $icon. ' i' => 'color:{{VALUE}} !important;',
+			        $icon. ' svg' => 'color:{{VALUE}} !important;fill:{{VALUE}} !important;',
             ],
 		] );
 		$this->end_controls_section();
