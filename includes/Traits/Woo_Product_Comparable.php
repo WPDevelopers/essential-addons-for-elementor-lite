@@ -258,13 +258,16 @@ trait Woo_Product_Comparable {
 			'label'   => __( 'Fields Icon', 'elementor' ),
 			'type'    => Controls_Manager::ICONS,
 		] );
-        $this->add_control( "no_products_found_text", [
-            'label'       => __( 'Text for "No products are found to compare"', 'essential-addons-for-elementor-lite' ),
-            'default' => __( 'No products are added to Compare. Please add products to compare.', 'essential-addons-for-elementor-lite' ),
-            'type'        => Controls_Manager::TEXTAREA,
-            'label_block' => true,
-            'placeholder' => __( 'Eg. No products are added to Compare.', 'essential-addons-for-elementor-lite' ),
-        ] );
+        if ( 'eicon-woocommerce' === $this->get_name()) {
+            $this->add_control( "no_products_found_text", [
+                'label'       => __( 'Text for "No products are found to compare"', 'essential-addons-for-elementor-lite' ),
+                'default' => __( 'No products are added to Compare. Please add products to compare.', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::TEXTAREA,
+                'label_block' => true,
+                'placeholder' => __( 'Eg. No products are added to Compare.', 'essential-addons-for-elementor-lite' ),
+            ] );
+		}
+
 		$this->end_controls_section();
 	}
 
