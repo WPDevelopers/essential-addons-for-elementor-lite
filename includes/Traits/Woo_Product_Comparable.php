@@ -445,21 +445,21 @@ trait Woo_Product_Comparable {
 				'table_style_pot' => 'yes',
 			],
 		] );
-		$this->add_responsive_control( "table_padding", [
-			'label'      => __( 'Table Padding', 'essential-addons-for-elementor-lite' ),
-			'type'       => Controls_Manager::DIMENSIONS,
-			'size_units' => [
-				'px',
-				'em',
-				'%',
-			],
-			'selectors'  => [
-				$table => $this->apply_dim( 'padding' ),
-			],
-			'condition'  => [
-				'table_style_pot' => 'yes',
-			],
-		] );
+//		$this->add_responsive_control( "table_padding", [
+//			'label'      => __( 'Table Padding', 'essential-addons-for-elementor-lite' ),
+//			'type'       => Controls_Manager::DIMENSIONS,
+//			'size_units' => [
+//				'px',
+//				'em',
+//				'%',
+//			],
+//			'selectors'  => [
+//				$table => 'border-spacing:0; '.$this->apply_dim( 'padding' ),
+//			],
+//			'condition'  => [
+//				'table_style_pot' => 'yes',
+//			],
+//		] );
 		$this->add_group_control( Group_Control_Background::get_type(), [
 			'name'      => "table_bg_color",
 			'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
@@ -1458,10 +1458,13 @@ trait Woo_Product_Comparable {
 				$icon => "position:relative; top: {{TOP}}{{UNIT}};right: {{RIGHT}}{{UNIT}}; bottom: {{BOTTOM}}{{UNIT}}; left: {{LEFT}}{{UNIT}};",
 			],
 		] );
-		$this->add_control( 'field_icon_size_margin_color', [
+		$this->add_control( 'field_icon_color', [
 			'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ $icon => 'color:{{VALUE}}' ],
+			'selectors' => [
+			        $icon => 'color:{{VALUE}} !important;',
+			        $icon. ' i' => 'color:{{VALUE}} !important;'
+            ],
 		] );
 		$this->end_controls_section();
 	}
