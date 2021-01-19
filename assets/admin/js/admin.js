@@ -521,4 +521,9 @@
         eaelRenderTab(StepNumber);
     });
 
+    $('.btn-collect').on('click', function(){
+        $(".eael-whatwecollecttext").toggle();
+    });
+
+
 })(jQuery);
