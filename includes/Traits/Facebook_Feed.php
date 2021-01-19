@@ -37,9 +37,9 @@ trait Facebook_Feed
             return;
         }
 
-        $key = 'eael_facebook_feed_' . substr(str_rot13(str_replace('.', '', $page_id . $token)), 32);
+        $key = 'eael_facebook_feed_' . md5(substr(str_rot13(str_replace('.', '', $page_id . $token)), 32));
 
-        if (get_transient($key) === false) {
+        if (get_transient($key) == false) {
             $facebook_data = wp_remote_retrieve_body(wp_remote_get("https://graph.facebook.com/v8.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)&limit=99&access_token={$token}", [
                 'timeout' => 30,
             ]));
