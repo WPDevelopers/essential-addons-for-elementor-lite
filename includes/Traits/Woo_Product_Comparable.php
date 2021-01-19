@@ -879,7 +879,7 @@ trait Woo_Product_Comparable {
 			'selectors' => [ $tr_even => 'background-color:{{VALUE}}' ],
 		] );
 		$this->add_control( 'common_tr_even_color', [
-			'label'     => __( 'Even Row Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Even Row Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_even => 'color:{{VALUE}}' ],
 		] );
@@ -889,7 +889,7 @@ trait Woo_Product_Comparable {
 			'selectors' => [ $tr_odd => 'background-color:{{VALUE}}' ],
 		] );
 		$this->add_control( 'common_tr_odd_color', [
-			'label'     => __( 'Odd Row Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Odd Row Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_odd => 'color:{{VALUE}}' ],
 		] );
@@ -1019,7 +1019,7 @@ trait Woo_Product_Comparable {
 			'separator' => 'before',
 		] );
 		$this->add_control( 'tr_even_color', [
-			'label'     => __( 'Even Row Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Even Row Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_even => 'color:{{VALUE}}' ],
 		] );
@@ -1029,7 +1029,7 @@ trait Woo_Product_Comparable {
 			'selectors' => [ $tr_odd => 'background-color:{{VALUE}}' ],
 		] );
 		$this->add_control( 'tr_odd_color', [
-			'label'     => __( 'Odd Row Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Odd Row Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_odd => 'color:{{VALUE}}' ],
 		] );
@@ -1263,7 +1263,7 @@ trait Woo_Product_Comparable {
 			'separator' => 'before',
 		] );
 		$this->add_control( "{$pfx}_tr_even_color", [
-			'label'     => __( 'Even Row Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Even Row Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_even => 'color:{{VALUE}}' ],
 		] );
@@ -1273,7 +1273,7 @@ trait Woo_Product_Comparable {
 			'selectors' => [ $tr_odd => 'background-color:{{VALUE}}' ],
 		] );
 		$this->add_control( "{$pfx}_tr_odd_color", [
-			'label'     => __( 'Odd Row Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Odd Row Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_odd => 'color:{{VALUE}}' ],
 		] );
