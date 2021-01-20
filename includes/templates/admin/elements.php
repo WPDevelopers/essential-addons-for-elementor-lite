@@ -202,7 +202,7 @@ $elements = [
         'elements'  => [
             [
                 'key'   => 'count-down',
-                'title' => __( 'Count Down', 'essential-addons-for-elementor-lite'),
+                'title' => __( 'Countdown', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/countdown/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/countdown/',
             ],
