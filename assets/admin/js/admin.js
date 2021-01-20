@@ -455,7 +455,9 @@
             } else {
                 elements.prop('checked', false)
                 elements.each(function (i, item) {
-                    if ($(item).data('preferences') == preferences) {
+                    if (preferences == 'advance' && $(item).data('preferences') != '') {
+                        $(item).prop('checked', true)
+                    } else if ($(item).data('preferences') == preferences) {
                         $(item).prop('checked', true)
                     }
                 })

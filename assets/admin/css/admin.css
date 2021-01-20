@@ -137,6 +137,14 @@
     width: 100%;
 }
 
+.eael-setup-wizard-wrap .setup-content .eael-documentation-elements .eael-checkbox{
+    flex-basis: 23% !important;
+}
+
+.eael-setup-wizard-wrap #integrations .row {
+    grid-template-columns: repeat(4, 1fr);
+}
+
 /* body */
 .eael-box {
     border-radius: 5px;
@@ -244,11 +252,12 @@
 .eael-setup-final-info button:hover {
     text-decoration: underline;
 }
+
 /* integrations */
 
 #integrations .row {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 25px;
     padding: 0;
 }

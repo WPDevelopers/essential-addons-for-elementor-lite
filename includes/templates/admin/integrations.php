@@ -1,26 +1,33 @@
 <?php
 $integrations = [
     [
-        'slug' => 'notificationx',
+        'slug'     => 'notificationx',
         'basename' => 'notificationx/notificationx.php',
-        'logo' => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
-        'title' => 'NotificationX',
-        'desc' => 'Let the visitors know about your special offers, deals, announcement.',
+        'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
+        'title'    => 'NotificationX',
+        'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
     ],
     [
-        'slug' => 'easyjobs',
-        'basename' => 'easyjobs/easyjobs.php',
-        'logo' => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
-        'title' => 'EasyJobs',
-        'desc' => 'Let the visitors know about your special offers, deals, announcement.',
+        'slug'     => 'betterdocs',
+        'basename' => 'betterdocs/betterdocs.php',
+        'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bd-logo.png',
+        'title'    => 'BetterDocs',
+        'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
     ],
     [
-        'slug' => 'team-member-block',
-        'basename' => 'team-member-block/team-member-block.php',
-        'logo' => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
-        'title' => 'Team Member Block',
-        'desc' => 'Let the visitors know about your special offers, deals, announcement.',
+        'slug'     => 'embedpress',
+        'basename' => 'embedpress/embedpress.php',
+        'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/ep-logo.png',
+        'title'    => 'EmbedPress',
+        'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
     ],
+    [
+        'slug'     => 'reviewx',
+        'basename' => 'reviewx/reviewx.php',
+        'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/review-logo.gif',
+        'title'    => 'ReviewX',
+        'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
+    ]
 ];
 ?>
 
