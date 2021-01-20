@@ -204,7 +204,7 @@ $elements = [
                 'key'   => 'count-down',
                 'title' => __( 'Countdown', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/countdown/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/countdown/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/creative-elements/ea-countdown/',
             ],
             [
                 'key'   => 'fancy-text',
