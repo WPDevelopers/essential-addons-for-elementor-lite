@@ -354,7 +354,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                 'basename' => 'embedpress/embedpress.php',
                 'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/ep-logo.png',
                 'title'    => __('EmbedPress','essential-addons-for-elementor-lite'),
-                'desc'     => __('EmbedPress lets you embed videos, images, posts, audio, maps and upload PDF, DOC, PPT & all other types of content into your WordPress site with one-click and showcase it beautifully for the visitors. Classic Editor, Gutenberg & Elementor all supported.','essential-addons-for-elementor-lite'),
+                'desc'     => __('EmbedPress lets you embed videos, images, posts, audio, maps and upload PDF, DOC, PPT & all other types of content into your WordPress site. ','essential-addons-for-elementor-lite'),
             ],
             [
                 'slug'     => 'reviewx',

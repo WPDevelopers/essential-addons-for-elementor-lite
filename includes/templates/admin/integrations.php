@@ -4,29 +4,29 @@ $integrations = [
         'slug'     => 'notificationx',
         'basename' => 'notificationx/notificationx.php',
         'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
-        'title'    => 'NotificationX',
-        'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
+        'title'    => __('NotificationX','essential-addons-for-elementor-lite'),
+        'desc'     => __('Best FOMO, Social Proof, Sales Popup & WooCommerce Notification Bar With Elementor Support','essential-addons-for-elementor-lite'),
     ],
     [
         'slug'     => 'betterdocs',
         'basename' => 'betterdocs/betterdocs.php',
         'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bd-logo.png',
-        'title'    => 'BetterDocs',
-        'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
+        'title'    => __('BetterDocs','essential-addons-for-elementor-lite'),
+        'desc'     => __('BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily','essential-addons-for-elementor-lite'),
     ],
     [
         'slug'     => 'embedpress',
         'basename' => 'embedpress/embedpress.php',
         'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/ep-logo.png',
-        'title'    => 'EmbedPress',
-        'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
+        'title'    => __('EmbedPress','essential-addons-for-elementor-lite'),
+        'desc'     => __('EmbedPress lets you embed videos, images, posts, audio, maps and upload PDF, DOC, PPT & all other types of content into your WordPress site. ','essential-addons-for-elementor-lite'),
     ],
     [
         'slug'     => 'reviewx',
         'basename' => 'reviewx/reviewx.php',
         'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/review-logo.gif',
-        'title'    => 'ReviewX',
-        'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
+        'title'    => __('ReviewX','essential-addons-for-elementor-lite'),
+        'desc'     => __('ReviewX let’s you get instant customer rating and multicriteria reviews to add credibility to your WooCommerce Store and increase conversion rates.','essential-addons-for-elementor-lite'),
     ]
 ];
 ?>
