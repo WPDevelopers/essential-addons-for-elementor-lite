@@ -570,25 +570,25 @@ trait Helper
                             <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg'; ?>" alt="">
                         </div>
                         <ul class="eael-promo-temp__feature__list">
-                            <li>300+ Ready Template</li>
+                            <li>900+ Stunning Templates</li>
                             <li>Supports Elementor & Gutenberg</li>
-                            <li>Powering up 10000+ Website</li>
+                            <li>Powering up 17000+ Websites</li>
                             <li>Cloud Collaboration with Team</li>
                         </ul>
                         <form class="eael-promo-temp__form">
                             <label>
                                 <input type="radio" value="install" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio' checked>
-                                <span>Templately Plugin Install</span>
+                                <span>Install Templately</span>
                             </label>
                             <label>
                                 <input type="radio" value="dnd" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio'>
-                                <span>Don’t Show Again</span>
+                                <span>Don’t Show This Again</span>
                             </label>
                         </form>
 
                         <?php if ( HelperClass::get_local_plugin_data( 'templately/templately.php' ) === false ) { ?>
                             <button class="wpdeveloper-plugin-installer" data-action="install"
-                               data-slug="<?php echo 'templately'; ?>"><?php _e( 'Install templately', 'essential-addons-for-elementor-lite' ); ?></button>
+                               data-slug="<?php echo 'templately'; ?>"><?php _e( 'Install Templately', 'essential-addons-for-elementor-lite' ); ?></button>
                         <?php } else { ?>
                             <?php if ( is_plugin_active( 'templately/templately.php' ) ) { ?>
                                 <button class="wpdeveloper-plugin-installer"><?php _e( 'Activated', 'essential-addons-for-elementor-lite' ); ?></button>
