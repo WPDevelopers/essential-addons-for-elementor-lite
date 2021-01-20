@@ -11,7 +11,7 @@
                             <div class="eael-admin-block-templately-overlay">
                                 <div class="eael-admin-block-templately-overlay-inner">
                                     <img class="eael-admin-block-templately-logo" src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg'; ?>" alt="templately logo">
-                                    <p class="eael-admin-block-templately-desc"><?php _e('Install Templately by Essential Addons to get access to the template library and cloud.');?></p>
+                                    <p class="eael-admin-block-templately-desc"><?php _e('Get Access to over 900 Stunning Elementor Templates Library & Cloud with Templately');?></p>
                                     
                                     <?php if ($this->installer->get_local_plugin_data('templately/templately.php') === false) {?>
                                         <a class="ea-button wpdeveloper-plugin-installer" data-action="install" data-slug="templately"><?php _e('Install Templately', 'essential-addons-for-elementor-lite');?></a>

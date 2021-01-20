@@ -210,10 +210,10 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                 <div id="finalize" class="setup-content eael-box">
 
                     <h2>Getting Started</h2>
-                    <p>Easily get started with this easy setup wizard and complete setting up your knowledge base.</p>
+                    <p>Complete the Setup Wizard and Check out the walk-through tutorials to enhance your Elementor page building experience 🔥</p>
 
                     <div class="eael-iframe">
-                        <iframe src="https://www.youtube.com/embed/CnSYwGcXnxA" frameborder="0"></iframe>
+                        <iframe src="https://www.youtube.com/embed/uuyXfUDqRZM" frameborder="0"></iframe>
                     </div>
                     <div class="eael-setup-final-info">
                         <div>
@@ -225,7 +225,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                                     information','essential-addons-for-elementor-lite') ?></label>
                             </div>
                             <p style="display: none" class="eael-whatwecollecttext"><?php _e('We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress &amp; PHP version, plugins &amp; themes and email address to send you the discount coupon. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, we promise.','essential-addons-for-elementor-lite') ?></p>
-                            <button type="button" class="btn-collect"><?php _e( 'What We Collect?', 'essential-addons-for-elementor-lite' ); ?></button>
+                            <button type="button" class="btn-collect"><?php _e( 'What Do We Collect?', 'essential-addons-for-elementor-lite' ); ?></button>
                         </div>
                     </div>
                 </div>
@@ -239,7 +239,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         <div class="eael-setup-footer">
             <button id="eael-prev" class="button eael-btn"><?php _e('< Previous','essential-addons-for-elementor-lite') ?></button>
             <button id="eael-next" class="button eael-btn"><?php _e('Next >','essential-addons-for-elementor-lite') ?></button>
-            <button id="eael-save" style="display: none" class="button eael-btn eael-setup-wizard-save"><?php _e('Submit','essential-addons-for-elementor-lite') ?></button>
+            <button id="eael-save" style="display: none" class="button eael-btn eael-setup-wizard-save"><?php _e('Finish','essential-addons-for-elementor-lite') ?></button>
         </div>
         <?php
     }
@@ -403,8 +403,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                 <div class="eael-popup__logo">
                     <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg'; ?>" alt="">
                 </div>
-                <p><?php _e('Save all your designs with Templately & deploy in hundreds of websites with 1-click. Increase
-                    productivity and power up your whole team to build websites faster than ever before.','essential-addons-for-elementor-lite') ?></p>
+                <p><?php _e('Get the best out of Essential Addons & boost your Elementor design experience with Templately. Deploy in hundreds of websites with 1-click, push to cloud and collaborate with your whole team to build sites faster than ever.','essential-addons-for-elementor-lite') ?></p>
 
                 <?php if ( $this->get_local_plugin_data( 'templately/templately.php' ) === false ) { ?>
                     <a class="eael-popup__button wpdeveloper-plugin-installer" data-action="install"
