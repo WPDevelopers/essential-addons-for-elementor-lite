@@ -8,6 +8,7 @@ if ( !defined( 'ABSPATH' ) ) {
 
 class WPDeveloper_Setup_Wizard {
     public $templately_status;
+
     public function __construct() {
         add_action( 'admin_enqueue_scripts', array( $this, 'setup_wizard_scripts' ) );
         add_action( 'admin_menu', array( $this, 'admin_menu' ) );
@@ -16,8 +17,8 @@ class WPDeveloper_Setup_Wizard {
         $this->templately_status = $this->templately_active_status();
     }
 
-    public function templately_active_status(){
-        include_once(ABSPATH.'wp-admin/includes/plugin.php');
+    public function templately_active_status() {
+        include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
         return is_plugin_active( 'templately/templately.php' );
     }
 
@@ -60,7 +61,7 @@ class WPDeveloper_Setup_Wizard {
      * Render tav step
      */
     public function tab_step() {
-	    !$this->templately_status ? $wizard_column = 'five' : $wizard_column = 'four';
+        !$this->templately_status ? $wizard_column = 'five' : $wizard_column = 'four';
 
         ?>
         <ul class="eael-setup-wizard <?php echo $wizard_column; ?>" data-step="1">
@@ -102,12 +103,12 @@ class WPDeveloper_Setup_Wizard {
                 </div>
                 <div class="name"><?php _e( 'Elements', 'essential-addons-for-elementor-lite' ); ?></div>
             </li>
-            <?php if(!$this->templately_status): ?>
-            <li class="step">
-                <div class="icon">
-                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                         viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+            <?php if ( !$this->templately_status ): ?>
+                <li class="step">
+                    <div class="icon">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
                                 <g>
                                     <path class="st0" d="M9,38.9c7.3,0,7.3,11.1,0,11.1C1.7,50,1.7,38.9,9,38.9z"/>
                                     <path class="st0" d="M25.3,38.9c7.3,0,7.3,11.1,0,11.1C18,50,18,38.9,25.3,38.9z"/>
@@ -120,9 +121,9 @@ class WPDeveloper_Setup_Wizard {
                                     </g>
                                 </g>
                             </svg>
-                </div>
-                <div class="name"><?php _e( 'Templately', 'essential-addons-for-elementor-lite' ); ?></div>
-            </li>
+                    </div>
+                    <div class="name"><?php _e( 'Templately', 'essential-addons-for-elementor-lite' ); ?></div>
+                </li>
             <?php endif; ?>
             <li class="step">
                 <div class="icon">
@@ -166,9 +167,9 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                         <label for="basic">
                             <div class="eael-radio-circle"></div>
                             <div class="eael-radio-text">
-                                <strong><?php _e('Basic (Recommended)','essential-addons-for-elementor-lite'); ?></strong>
-                                <p> <?php _e('For websites where you want to only use the basic features and keep your site
-                                    lightweight. Most basic elements are activated in this option. ','essential-addons-for-elementor-lite'); ?></p>
+                                <strong><?php _e( 'Basic (Recommended)', 'essential-addons-for-elementor-lite' ); ?></strong>
+                                <p> <?php _e( 'For websites where you want to only use the basic features and keep your site
+                                    lightweight. Most basic elements are activated in this option. ', 'essential-addons-for-elementor-lite' ); ?></p>
                             </div>
                         </label>
                     </div>
@@ -180,10 +181,10 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                         <label for="advance">
                             <div class="eael-radio-circle"></div>
                             <div class="eael-radio-text">
-                                <strong><?php _e('Advanced','essential-addons-for-elementor-lite') ?></strong>
-                                <p> <?php _e('For advanced users who is trying to build complex websites wtih advanced
+                                <strong><?php _e( 'Advanced', 'essential-addons-for-elementor-lite' ) ?></strong>
+                                <p> <?php _e( 'For advanced users who is trying to build complex websites wtih advanced
                                     functionalities with Elementor. All the dynamic elements will be activated in this
-                                    option.','essential-addons-for-elementor-lite') ?> </p>
+                                    option.', 'essential-addons-for-elementor-lite' ) ?> </p>
                             </div>
                         </label>
                     </div>
@@ -193,18 +194,18 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                         <label for="custom">
                             <div class="eael-radio-circle"></div>
                             <div class="eael-radio-text">
-                                <strong><?php _e('Custom','essential-addons-for-elementor-lite'); ?></strong>
-                                <p> <?php _e('Pick this option if you want to configure the elements as per you wish.','essential-addons-for-elementor-lite'); ?> </p>
+                                <strong><?php _e( 'Custom', 'essential-addons-for-elementor-lite' ); ?></strong>
+                                <p> <?php _e( 'Pick this option if you want to configure the elements as per you wish.', 'essential-addons-for-elementor-lite' ); ?> </p>
                             </div>
                         </label>
                     </div>
                 </div>
                 <?php $this->eael_elements(); ?>
-                <?php if(!$this->templately_status): ?>
-                <div id="templately" class="setup-content eael-box eael-templately-popup" style="background-image:
-                        url('<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately.jpg'; ?>');">
-                    <?php if ( !is_plugin_active( 'templately/templately.php' ) ) $this->eael_templately_plugin_popup(); ?>
-                </div>
+                <?php if ( !$this->templately_status ): ?>
+                    <div id="templately" class="setup-content eael-box eael-templately-popup" style="background-image:
+                            url('<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately.jpg'; ?>');">
+                        <?php if ( !is_plugin_active( 'templately/templately.php' ) ) $this->eael_templately_plugin_popup(); ?>
+                    </div>
                 <?php endif; ?>
                 <?php $this->eael_integrations(); ?>
                 <div id="finalize" class="setup-content eael-box">
@@ -220,12 +221,14 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                             <div class="eael-input-group">
                                 <input type="checkbox" id="eael_user_email_address" name="eael_user_email_address"
                                        checked>
-                                <label for="eael_user_email_address"><?php _e('Share non-sensitive diagnosstic data and plugin
+                                <label for="eael_user_email_address"><?php _e( 'Share non-sensitive diagnosstic data and plugin
                                     usage
-                                    information','essential-addons-for-elementor-lite') ?></label>
+                                    information', 'essential-addons-for-elementor-lite' ) ?></label>
                             </div>
-                            <p style="display: none" class="eael-whatwecollecttext"><?php _e('We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress &amp; PHP version, plugins &amp; themes and email address to send you the discount coupon. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, we promise.','essential-addons-for-elementor-lite') ?></p>
-                            <button type="button" class="btn-collect"><?php _e( 'What We Collect?', 'essential-addons-for-elementor-lite' ); ?></button>
+                            <p style="display: none"
+                               class="eael-whatwecollecttext"><?php _e( 'We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress &amp; PHP version, plugins &amp; themes and email address to send you the discount coupon. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, we promise.', 'essential-addons-for-elementor-lite' ) ?></p>
+                            <button type="button"
+                                    class="btn-collect"><?php _e( 'What We Collect?', 'essential-addons-for-elementor-lite' ); ?></button>
                         </div>
                     </div>
                 </div>
@@ -237,9 +240,12 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
     public function setup_wizard_footer() {
         ?>
         <div class="eael-setup-footer">
-            <button id="eael-prev" class="button eael-btn"><?php _e('< Previous','essential-addons-for-elementor-lite') ?></button>
-            <button id="eael-next" class="button eael-btn"><?php _e('Next >','essential-addons-for-elementor-lite') ?></button>
-            <button id="eael-save" style="display: none" class="button eael-btn eael-setup-wizard-save"><?php _e('Submit','essential-addons-for-elementor-lite') ?></button>
+            <button id="eael-prev"
+                    class="button eael-btn"><?php _e( '< Previous', 'essential-addons-for-elementor-lite' ) ?></button>
+            <button id="eael-next"
+                    class="button eael-btn"><?php _e( 'Next >', 'essential-addons-for-elementor-lite' ) ?></button>
+            <button id="eael-save" style="display: none"
+                    class="button eael-btn eael-setup-wizard-save"><?php _e( 'Finish', 'essential-addons-for-elementor-lite' ) ?></button>
         </div>
         <?php
     }
@@ -263,7 +269,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             <div class="row">
                 <?php foreach ( $this->get_element_list() as $key => $item ): ?>
                     <h4 class="eael-elements-cat"><?php echo $item[ 'title' ]; ?></h4>
-                    <div class="eael-checkbox-container eael-elements-container">
+                    <div class="eael-checkbox-container eael-elements-container eael-<?php echo $key; ?>">
                         <?php foreach ( $item[ 'elements' ] as $element ):
                             $preferences = $checked = '';
                             if ( isset( $element[ 'preferences' ] ) ) {
@@ -342,33 +348,26 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                 'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
             ],
             [
-                'slug'     => 'easyjobs',
-                'basename' => 'easyjobs/easyjobs.php',
-                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
-                'title'    => 'EasyJobs',
+                'slug'     => 'betterdocs',
+                'basename' => 'betterdocs/betterdocs.php',
+                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bd-logo.png',
+                'title'    => 'BetterDocs',
                 'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
             ],
             [
-                'slug'     => 'team-member-block',
-                'basename' => 'team-member-block/team-member-block.php',
-                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
-                'title'    => 'Team Member Block',
+                'slug'     => 'embedpress',
+                'basename' => 'embedpress/embedpress.php',
+                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/ep-logo.png',
+                'title'    => 'EmbedPress',
                 'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
             ],
             [
-                'slug'     => 'team-member-block',
-                'basename' => 'team-member-block/team-member-block.php',
-                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
-                'title'    => 'Team Member Block',
+                'slug'     => 'reviewx',
+                'basename' => 'reviewx/reviewx.php',
+                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/review-logo.gif',
+                'title'    => 'ReviewX',
                 'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
-            ],
-            [
-                'slug'     => 'team-member-block',
-                'basename' => 'team-member-block/team-member-block.php',
-                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
-                'title'    => 'Team Member Block',
-                'desc'     => 'Let the visitors know about your special offers, deals, announcement.',
-            ],
+            ]
         ];
     }
 
@@ -403,8 +402,8 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                 <div class="eael-popup__logo">
                     <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg'; ?>" alt="">
                 </div>
-                <p><?php _e('Save all your designs with Templately & deploy in hundreds of websites with 1-click. Increase
-                    productivity and power up your whole team to build websites faster than ever before.','essential-addons-for-elementor-lite') ?></p>
+                <p><?php _e( 'Save all your designs with Templately & deploy in hundreds of websites with 1-click. Increase
+                    productivity and power up your whole team to build websites faster than ever before.', 'essential-addons-for-elementor-lite' ) ?></p>
 
                 <?php if ( $this->get_local_plugin_data( 'templately/templately.php' ) === false ) { ?>
                     <a class="eael-popup__button wpdeveloper-plugin-installer" data-action="install"
@@ -503,56 +502,63 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                     [
                         'key'         => 'creative-btn',
                         'title'       => __( 'Creative Button', 'essential-addons-for-elementor-lite' ),
-                        'preferences' => 'advance',
+                        'preferences' => 'basic',
                     ],
                     [
                         'key'         => 'team-members',
                         'title'       => __( 'Team Member', 'essential-addons-for-elementor-lite' ),
-                        'preferences' => 'advance',
+                        'preferences' => 'basic',
                     ],
                     [
-                        'key'   => 'testimonials',
-                        'title' => __( 'Testimonial', 'essential-addons-for-elementor-lite' ),
+                        'key'         => 'testimonials',
+                        'title'       => __( 'Testimonial', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'basic',
                     ],
                     [
-                        'key'   => 'flip-box',
-                        'title' => __( 'Flip Box', 'essential-addons-for-elementor-lite' ),
+                        'key'         => 'flip-box',
+                        'title'       => __( 'Flip Box', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'basic',
                     ],
                     [
-                        'key'   => 'info-box',
-                        'title' => __( 'Info Box', 'essential-addons-for-elementor-lite' ),
+                        'key'         => 'info-box',
+                        'title'       => __( 'Info Box', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'basic',
+                    ],
+                    [
+                        'key'         => 'dual-header',
+                        'title'       => __( 'Dual Color Heading', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'basic',
+                    ],
+                    [
+                        'key'         => 'tooltip',
+                        'title'       => __( 'Tooltip', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'basic',
+                    ],
+                    [
+                        'key'         => 'adv-accordion',
+                        'title'       => __( 'Advanced Accordion', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'basic',
+                    ],
+                    [
+                        'key'         => 'adv-tabs',
+                        'title'       => __( 'Advanced Tabs', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'basic',
+                    ],
+                    [
+                        'key'         => 'feature-list',
+                        'title'       => __( 'Feature List', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'basic',
 
                     ],
                     [
-                        'key'   => 'dual-header',
-                        'title' => __( 'Dual Color Heading', 'essential-addons-for-elementor-lite' ),
-
-                    ],
-                    [
-                        'key'   => 'tooltip',
-                        'title' => __( 'Tooltip', 'essential-addons-for-elementor-lite' ),
-
-                    ],
-                    [
-                        'key'   => 'adv-accordion',
-                        'title' => __( 'Advanced Accordion', 'essential-addons-for-elementor-lite' ),
-                    ],
-                    [
-                        'key'   => 'adv-tabs',
-                        'title' => __( 'Advanced Tabs', 'essential-addons-for-elementor-lite' ),
-                    ],
-                    [
-                        'key'   => 'feature-list',
-                        'title' => __( 'Feature List', 'essential-addons-for-elementor-lite' ),
-
-                    ],
-                    [
-                        'key'   => 'sticky-video',
-                        'title' => __( 'Sticky Video', 'essential-addons-for-elementor-lite' ),
+                        'key'         => 'sticky-video',
+                        'title'       => __( 'Sticky Video', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'basic',
                     ],
                     [
                         'key'   => 'event-calendar',
                         'title' => __( 'Event Calendar', 'essential-addons-elementor' ),
+                        'preferences' => 'advance',
                     ],
                 ]
             ],
@@ -560,27 +566,27 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                 'title'    => __( 'Dynamic Content Elements', 'essential-addons-for-elementor-lite' ),
                 'elements' => [
                     [
-                        'key'         => 'post-grid',
-                        'title'       => __( 'Post Grid', 'essential-addons-for-elementor-lite' ),
-                        'preferences' => 'basic',
+                        'key'   => 'post-grid',
+                        'title' => __( 'Post Grid', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'advance',
                     ],
                     [
-                        'key'         => 'post-timeline',
-                        'title'       => __( 'Post Timeline', 'essential-addons-for-elementor-lite' ),
-                        'preferences' => 'basic',
+                        'key'   => 'post-timeline',
+                        'title' => __( 'Post Timeline', 'essential-addons-for-elementor-lite' ),
                     ],
                     [
-                        'key'   => 'data-table',
-                        'title' => __( 'Data Table', 'essential-addons-for-elementor-lite' ),
-
+                        'key'         => 'data-table',
+                        'title'       => __( 'Data Table', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'basic',
                     ],
                     [
                         'key'   => 'advanced-data-table',
                         'title' => __( 'Advanced Data Table', 'essential-addons-for-elementor-lite' ),
                     ],
                     [
-                        'key'   => 'content-ticker',
-                        'title' => __( 'Content Ticker', 'essential-addons-for-elementor-lite' ),
+                        'key'         => 'content-ticker',
+                        'title'       => __( 'Content Ticker', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'basic',
                     ]
                 ]
             ],
@@ -590,41 +596,52 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                     [
                         'key'   => 'count-down',
                         'title' => __( 'Countdown', 'essential-addons-for-elementor-lite' ),
-
+                        'preferences' => 'basic',
                     ],
                     [
                         'key'   => 'fancy-text',
                         'title' => __( 'Fancy Text', 'essential-addons-for-elementor-lite' ),
-
+                        'preferences' => 'basic',
                     ],
                     [
                         'key'   => 'filter-gallery',
                         'title' => __( 'Filterable Gallery', 'essential-addons-for-elementor-lite' ),
-
+                        'preferences' => 'basic',
                     ],
                     [
                         'key'   => 'image-accordion',
                         'title' => __( 'Image Accordion', 'essential-addons-for-elementor-lite' ),
-
+                        'preferences' => 'basic',
                     ],
                     [
                         'key'   => 'progress-bar',
                         'title' => __( 'Progress Bar', 'essential-addons-for-elementor-lite' ),
-
+                        'preferences' => 'basic',
                     ],
                 ]
             ],
             'marketing-elements'       => [
-                'title'    => __( 'Marketing Elements', 'essential-addons-for-elementor-lite' ),
+                'title'    => __( 'Marketing & Social Feed Elements', 'essential-addons-for-elementor-lite' ),
                 'elements' => [
                     [
                         'key'   => 'call-to-action',
                         'title' => __( 'Call To Action', 'essential-addons-for-elementor-lite' ),
-
+                        'preferences' => 'basic',
                     ],
                     [
                         'key'   => 'price-table',
                         'title' => __( 'Pricing Table', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'basic',
+                    ],
+                    [
+                        'key'   => 'twitter-feed',
+                        'title' => __( 'Twitter Feed', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'advance',
+                    ],
+                    [
+                        'key'   => 'facebook-feed',
+                        'title' => __( 'Facebook Feed', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'advance',
                     ],
 
                 ]
@@ -635,73 +652,48 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                     [
                         'key'   => 'contact-form-7',
                         'title' => __( 'Contact Form 7', 'essential-addons-for-elementor-lite' ),
-
+                        'preferences' => 'advance',
                     ],
                     [
                         'key'   => 'weforms',
                         'title' => __( 'weForms', 'essential-addons-for-elementor-lite' ),
-
                     ],
                     [
                         'key'   => 'ninja-form',
                         'title' => __( 'Ninja Form', 'essential-addons-for-elementor-lite' ),
-
                     ],
                     [
                         'key'   => 'gravity-form',
                         'title' => __( 'Gravity Form', 'essential-addons-for-elementor-lite' ),
-
                     ],
                     [
                         'key'   => 'caldera-form',
                         'title' => __( 'Caldera Form', 'essential-addons-for-elementor-lite' ),
-
                     ],
                     [
                         'key'   => 'wpforms',
                         'title' => __( 'WPForms', 'essential-addons-for-elementor-lite' ),
-
                     ],
                     [
                         'key'   => 'fluentform',
                         'title' => __( 'FluentForm', 'essential-addons-for-elementor-lite' ),
-
                     ],
                     [
                         'key'   => 'formstack',
                         'title' => __( 'Formstack', 'essential-addons-for-elementor-lite' ),
-
                     ],
                     [
                         'key'   => 'typeform',
                         'title' => __( 'Typeform', 'essential-addons-for-elementor-lite' ),
-
                     ],
                     [
                         'key'   => 'login-register',
                         'title' => __( 'Login Register Form', 'essential-addons-elementor' ),
-
+                        'preferences' => 'advance',
                     ],
                 ]
             ],
-            'social-feed-elements'     => [
-                'title'    => __( 'Social Feed Elemens', 'essential-addons-for-elementor-lite' ),
-                'elements' => [
-                    [
-                        'key'   => 'twitter-feed',
-                        'title' => __( 'Twitter Feed', 'essential-addons-for-elementor-lite' ),
-
-                    ],
-                    [
-                        'key'       => 'facebook-feed',
-                        'title'     => __( 'Facebook Feed', 'essential-addons-for-elementor-lite' ),
-                        'demo_link' => 'https://essential-addons.com/elementor/facebook-feed/',
-                        'doc_link'  => 'https://essential-addons.com/elementor/docs/facebook-feed/',
-                    ],
-                ]
-            ],
-
-            'documentation-elements' => [
+            'documentation-elements'   => [
                 'title'    => __( 'Documentation Elements', 'essential-addons-for-elementor-lite' ),
                 'elements' => [
                     [
@@ -719,13 +711,13 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                     ]
                 ]
             ],
-            'woocommerce-elements'   => [
+            'woocommerce-elements'     => [
                 'title'    => __( 'WooCommerce Elements', 'essential-addons-for-elementor-lite' ),
                 'elements' => [
                     [
                         'key'   => 'product-grid',
                         'title' => __( 'Product Grid', 'essential-addons-for-elementor-lite' ),
-
+                        'preferences' => 'advance',
                     ],
                     [
                         'key'   => 'woo-checkout',
