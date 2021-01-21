@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 5.0
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 4.3.8
+Stable tag: 4.3.11
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
