@@ -272,7 +272,7 @@ trait Login_Registration {
 				wp_send_json_error( $errors['registration'] );
 			}
 
-            update_option( 'eael_register_errors_' . $widget_id, $errors, false );
+            //update_option( 'eael_register_errors_' . $widget_id, $errors, false );// if we redirect to other page, we dont need to save value
             wp_safe_redirect( site_url( 'wp-login.php?registration=disabled' ) );
 			exit();
 		}
@@ -293,7 +293,6 @@ trait Login_Registration {
 			}
 		} else {
 			$errors['email'] = isset( $settings['err_email_missing'] ) ? $settings['err_email_missing'] : __( 'Email is missing or Invalid', 'essential-addons-for-elementor-lite' );
-			//@todo; maybe it is good to abort here?? as email is most important. or continue to collect all other errors.
 		}
 
 		// if user provided user name, validate & sanitize it
@@ -305,7 +304,6 @@ trait Login_Registration {
 				$errors['user_name'] = isset( $settings['err_username_used'] ) ? $settings['err_username_used'] : __( 'The username already registered.', 'essential-addons-for-elementor-lite' );
 
 			}
-			//@TODO; Maybe it is good to add a check for filtering out blacklisted usernames later here.
 		} else {
 			// user has not provided username, so generate one from the provided email.
 			if ( empty( $errors['email'] ) && isset( $email ) ) {
@@ -452,7 +450,7 @@ trait Login_Registration {
 		wp_new_user_notification( $user_id, null, $admin_or_both );
 
 		// success & handle after registration action as defined by user in the widget
-		if ( ! $ajax ) {
+		if ( ! $ajax && !in_array( 'redirect', $register_actions ) ) {
 			update_option( 'eael_register_success_' . $widget_id, 1, false );
 		}
 
@@ -468,7 +466,7 @@ trait Login_Registration {
 				'user_password' => $password,
 				'remember'      => true,
 			] );
-
+            $this->delete_registration_options($widget_id);
 
 			if ( $ajax ) {
 				if ( in_array( 'redirect', $register_actions ) ) {
@@ -739,5 +737,11 @@ trait Login_Registration {
 
 		}
 		return $settings;
+	}
+
+    public function delete_registration_options($widget_id)
+    {
+        delete_option('eael_register_success_' . $widget_id);
+        delete_option('eael_register_errors_' . $widget_id);
 	}
 }
