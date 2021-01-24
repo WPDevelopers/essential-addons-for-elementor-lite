@@ -38,7 +38,7 @@ class Woo_Product_Compare extends Widget_Base {
 	 * @inheritDoc
 	 */
 	public function get_icon() {
-		return 'eicon-woocommerce';
+		return 'eaicon-product-compare';
 	}
 
 	/**
