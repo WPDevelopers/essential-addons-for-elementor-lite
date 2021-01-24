@@ -572,6 +572,7 @@ trait Woo_Product_Comparable {
 		}
 
 		$this->init_style_icon_controls( $table );
+		$this->init_style_price_controls( $table );
 	}
 
 	public function init_style_table_common_style( $tbl = '' ) {
@@ -1463,11 +1464,130 @@ trait Woo_Product_Comparable {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 			        $icon => 'color:{{VALUE}} !important;',
-			        $icon. ' i' => 'color:{{VALUE}} !important;'
+			        $icon. ' i' => 'color:{{VALUE}} !important;',
+			        $icon. ' svg' => 'color:{{VALUE}} !important;fill:{{VALUE}} !important;',
             ],
 		] );
 		$this->end_controls_section();
 	}
+
+    public function init_style_price_controls( $tbl = '' ) {
+        $strike = "{$tbl} del";
+        $price = "{$tbl} del .woocommerce-Price-amount";
+        $sales_price = "{$tbl} ins .woocommerce-Price-amount";
+        $this->start_controls_section( 'section_style_price', [
+            'label'     => __( 'Price Style', 'essential-addons-for-elementor-lite' ),
+            'tab'       => Controls_Manager::TAB_STYLE,
+            'condition' => [
+                'show_compare'       => 'yes',
+            ],
+        ] );
+        $this->add_control(
+            'price_heading',
+            [
+                'label' => __( 'Normal Price Style', 'plugin-name' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+        $this->add_responsive_control( "price_size", [
+            'label'      => esc_html__( 'Price Size', 'essential-addons-for-elementor-lite' ),
+            'type'       => Controls_Manager::SLIDER,
+            'size_units' => [
+                'px',
+                'rem',
+                '%',
+            ],
+            'range'      => [
+                'px'  => [
+                    'min'  => 0,
+                    'max'  => 40,
+                    'step' => 5,
+                ],
+                'rem' => [
+                    'min'  => 0,
+                    'max'  => 10,
+                    'step' => .5,
+                ],
+            ],
+            'selectors'  => [
+                $price => 'font-size: {{SIZE}}{{UNIT}};',
+            ],
+        ] );
+
+        $this->add_control( 'price_color', [
+            'label'     => __( 'Price Text Color', 'essential-addons-for-elementor-lite' ),
+            'type'      => Controls_Manager::COLOR,
+            'selectors' => [
+                $price => 'color:{{VALUE}};',
+            ],
+        ] );
+        $this->add_control( 'strike_price_color', [
+            'label'     => __( 'Price Strike Text Color', 'essential-addons-for-elementor-lite' ),
+            'description'     => __( 'Only applicable when sales price is available', 'essential-addons-for-elementor-lite' ),
+            'type'      => Controls_Manager::COLOR,
+            'selectors' => [
+                $strike => 'color:{{VALUE}};',
+            ],
+        ] );
+        $this->add_control( 'price_bg_color', [
+            'label'     => __( 'Price Background Color', 'essential-addons-for-elementor-lite' ),
+            'type'      => Controls_Manager::COLOR,
+            'selectors' => [
+                $price => 'background-color:{{VALUE}};',
+            ],
+            'separator'=> 'after'
+        ] );
+        $this->add_control(
+            'sales_price_heading',
+            [
+                'label' => __( 'Sales Price Style', 'plugin-name' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+        $this->add_responsive_control( "sales_price_size", [
+            'label'      => esc_html__( 'Sales Price Size', 'essential-addons-for-elementor-lite' ),
+            'type'       => Controls_Manager::SLIDER,
+            'size_units' => [
+                'px',
+                'rem',
+                '%',
+            ],
+            'range'      => [
+                'px'  => [
+                    'min'  => 0,
+                    'max'  => 40,
+                    'step' => 5,
+                ],
+                'rem' => [
+                    'min'  => 0,
+                    'max'  => 10,
+                    'step' => .5,
+                ],
+            ],
+            'selectors'  => [
+                $sales_price => 'font-size: {{SIZE}}{{UNIT}};',
+            ],
+        ] );
+
+        $this->add_control( 'sales_price_color', [
+            'label'     => __( 'Sales Price Text Color', 'essential-addons-for-elementor-lite' ),
+            'type'      => Controls_Manager::COLOR,
+            'selectors' => [
+                $sales_price => 'color:{{VALUE}};',
+            ],
+        ] );
+        $this->add_control( 'sales_price_bg_color', [
+            'label'     => __( 'Sales Price Background Color', 'essential-addons-for-elementor-lite' ),
+            'type'      => Controls_Manager::COLOR,
+            'selectors' => [
+                $sales_price => 'background-color:{{VALUE}};',
+            ],
+            'separator'=> 'after'
+        ] );
+        $this->end_controls_section();
+    }
 
     public function init_style_compare_button_controls($condition=null)
     {
