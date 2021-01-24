@@ -149,19 +149,22 @@ trait Woo_Product_Comparable {
 			] );
 
             $this->add_control( "product_ids", [
-                'label'       => __( 'Product IDs', 'essential-addons-for-elementor-lite' ),
+                'label'       => __( 'Products', 'essential-addons-for-elementor-lite' ),
                 'description' => __( 'Enter Product IDs separated by a comma', 'essential-addons-for-elementor-lite' ),
                 'type'        => 'eael-select2',
                 'label_block' => true,
                 'multiple'    => true,
                 'source_type' => 'product',
                 'source_name' => 'post_type',
-                'placeholder' => __( 'Eg. 123, 456 etc.', 'essential-addons-for-elementor-lite' ),
+                'placeholder' => __( 'Search by Product Name', 'essential-addons-for-elementor-lite' ),
             ] );
 
 			$this->add_control( "highlighted_product_id", [
-				'label'       => __( 'Highlighted Product ID', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::NUMBER,
+				'label'       => __( 'Highlighted Product', 'essential-addons-for-elementor-lite' ),
+                'type'        => 'eael-select2',
+                'label_block' => true,
+                'source_type' => 'product',
+                'source_name' => 'post_type',
 				'description' => __( 'Enter any ID from the Product IDs used above', 'essential-addons-for-elementor-lite' ),
 				'condition'   => [
 					'theme' => [
