@@ -1530,14 +1530,7 @@ trait Woo_Product_Comparable {
                 $strike => 'color:{{VALUE}};',
             ],
         ] );
-        $this->add_control( 'price_bg_color', [
-            'label'     => __( 'Price Background Color', 'essential-addons-for-elementor-lite' ),
-            'type'      => Controls_Manager::COLOR,
-            'selectors' => [
-                $price => 'background-color:{{VALUE}};',
-            ],
-            'separator'=> 'after'
-        ] );
+
         $this->add_control(
             'sales_price_heading',
             [
@@ -1578,14 +1571,7 @@ trait Woo_Product_Comparable {
                 $sales_price => 'color:{{VALUE}};',
             ],
         ] );
-        $this->add_control( 'sales_price_bg_color', [
-            'label'     => __( 'Sales Price Background Color', 'essential-addons-for-elementor-lite' ),
-            'type'      => Controls_Manager::COLOR,
-            'selectors' => [
-                $sales_price => 'background-color:{{VALUE}};',
-            ],
-            'separator'=> 'after'
-        ] );
+
         $this->end_controls_section();
     }
 
