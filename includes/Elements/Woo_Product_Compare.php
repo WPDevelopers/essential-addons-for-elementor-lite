@@ -102,9 +102,6 @@ class Woo_Product_Compare extends Widget_Base {
 		}
 		$ds                     = $this->get_settings_for_display();
 		$product_ids            = $this->get_settings_for_display( 'product_ids' );
-		$product_ids            = ! empty( $product_ids ) ? array_filter( array_map( 'trim', explode( ',', $product_ids ) ), function ( $id ) {
-			return ( ! empty( $id ) && is_numeric( $id ) );
-		} ) : [];
 		$products               = $this->get_products_list( $product_ids );
 		$fields                 = $this->fields();
 

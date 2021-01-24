@@ -147,13 +147,18 @@ trait Woo_Product_Comparable {
 				'type'    => Controls_Manager::HIDDEN,
 				'default' => 'yes',
 			] );
-			$this->add_control( "product_ids", [
-				'label'       => __( 'Product IDs', 'essential-addons-for-elementor-lite' ),
-				'description' => __( 'Enter Product IDs separated by a comma', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::TEXT,
-				'label_block' => true,
-				'placeholder' => __( 'Eg. 123, 456 etc.', 'essential-addons-for-elementor-lite' ),
-			] );
+
+            $this->add_control( "product_ids", [
+                'label'       => __( 'Product IDs', 'essential-addons-for-elementor-lite' ),
+                'description' => __( 'Enter Product IDs separated by a comma', 'essential-addons-for-elementor-lite' ),
+                'type'        => 'eael-select2',
+                'label_block' => true,
+                'multiple'    => true,
+                'source_type' => 'product',
+                'source_name' => 'post_type',
+                'placeholder' => __( 'Eg. 123, 456 etc.', 'essential-addons-for-elementor-lite' ),
+            ] );
+
 			$this->add_control( "highlighted_product_id", [
 				'label'       => __( 'Highlighted Product ID', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::NUMBER,
