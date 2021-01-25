@@ -25,6 +25,9 @@
   font-size: 20px;
   margin-right: 10px;
 }
+.eael-wcpc-wrapper table td {
+  text-align: center;
+}
 .eael-wcpc-wrapper.custom {
   --h-bg: #2d1e87;
   --h-text-clr: #fff;
