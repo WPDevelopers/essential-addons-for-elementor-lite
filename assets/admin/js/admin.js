@@ -361,14 +361,14 @@
                 },
                 success: function (response) {
                     if (response.success) {
+                        button.attr("disabled", true);
                         button.text("Activated");
                         button.data("action", null);
                     } else {
+                        button.attr("disabled", false);
                         button.text("Install");
                         alert(response.data);
                     }
-
-                    button.attr("disabled", false);
                 },
                 error: function (err) {
                     console.log(err.responseJSON);
@@ -473,6 +473,11 @@
             prev = document.getElementById("eael-prev"),
             nextElement = document.getElementById("eael-next"),
             saveElement = document.getElementById("eael-save");
+
+        if (contents.length < 1) {
+            return;
+        }
+
         contents[step].style.display = "block";
         prev.style.display = (step == 0) ? "none" : "inline";
 
