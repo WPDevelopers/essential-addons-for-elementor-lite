@@ -154,9 +154,7 @@ trait Core
      */
     public function enable_setup_wizard()
     {
-        $version = get_option( 'eael_version' );
-        $wizard  = get_option( 'eael_setup_wizard' );
-        if ( !$version && !$wizard ) {
+        if ( !get_option( 'eael_version' ) && !get_option( 'eael_setup_wizard' ) ) {
             update_option( 'eael_setup_wizard', 'redirect' );
         }
     }
