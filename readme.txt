@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 5.0
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 4.3.10
+Stable tag: 4.4.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -223,6 +223,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.4.0 - 26/01/2021 =
+- Added: EA Woo Product Compare
+- Added: EA Woo Product Compare integration with EA Product Grid
+- Fixed: EA Login | Register | Showing Invalid Username message for Invalid Password
+- Fixed: EA Login | Register | added "Remember Me" text controller
+- Few minor bug fix and improvements
+
 
 = 4.3.10 - 07/01/2021 =
 - Fixed: EA Info Box | Throwing PHP Notice when Image option is enabled
