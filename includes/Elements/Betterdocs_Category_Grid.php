@@ -32,7 +32,7 @@ class Betterdocs_Category_Grid extends Widget_Base
 
     public function get_categories()
     {
-        return ['essential-addons-elementor', 'betterdocs-elements', 'docs-archive'];
+        return ['essential-addons-elementor', 'docs-archive'];
     }
 
     public function get_icon()
