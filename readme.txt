@@ -85,7 +85,7 @@ We have designed 42 of the most useful widgets to enhance your Elementor Page Bu
 38. [Formstack](https://essential-addons.com/elementor/formstack/) - Design your Formstack forms within Elementor. 
 39. [Woo Checkout](https://essential-addons.com/elementor/woo-checkout/) - Create your own WooCommerce Checkout page and customize and design everything. 
 40. [Typeform](https://essential-addons.com/elementor/typeform/) - Embed and Design your Typeform forms within Elementor.
-41. [Login | Register Form] (https://essential-addons.com/elementor/login-register-form/) - Create amazing and attractive login or registration forms in Elementor 
+41. [Login | Register Form](https://essential-addons.com/elementor/login-register-form/) - Create amazing and attractive login or registration forms in Elementor 
 42. [Woo Product Compare](https://essential-addons.com/elementor/woo-product-compare/) - Create stunning WooCommerce Product Compare table instantly
 
 
@@ -226,6 +226,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.4.1 - 28/01/2021 =
+- Fixed: EA Filterable Gallery | style controls not working after Elementor update
+- Fixed: EA Fancy Text | not working inside Elementor Editor
+- Few minor bug fix and improvements
+
 
 = 4.4.0 - 26/01/2021 =
 - Added: EA Woo Product Compare
