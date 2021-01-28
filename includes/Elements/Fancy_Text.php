@@ -93,7 +93,7 @@ class Fancy_Text extends Widget_Base {
 				'label'       => __( 'Fancy Text Strings', 'essential-addons-for-elementor-lite'),
 				'type'        => Controls_Manager::REPEATER,
 				'show_label'  => true,
-				'fields'      => array_values( $repeater->get_controls() ),
+				'fields'      =>  $repeater->get_controls(),
 				'title_field' => '{{{ eael_fancy_text_strings_text_field }}}',
 				'default'     => [
 					[
