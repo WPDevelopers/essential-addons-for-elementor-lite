@@ -1798,11 +1798,20 @@ class Event_Calendar extends Widget_Base
             'calendar_id' => urlencode($settings['eael_event_calendar_id']),
         ];
 
+        $transient_args =  [
+            'key' => $settings['eael_event_google_api_key'],
+            'maxResults' => $settings['eael_google_calendar_max_result'],
+            'timeMin' => urlencode(date('Y-m-d H', $start_date)),
+            'singleEvents' => 'true',
+            'calendar_id' => urlencode($settings['eael_event_calendar_id']),
+        ];
+
         if (!empty($end_date) && $end_date > $start_date) {
-            $arg['timeMax'] = urlencode(date('c', $end_date));
+          $arg['timeMax'] = urlencode(date('c', $end_date));
+          $transient_args['timeMax'] = urlencode(date('Y-m-d H', $end_date));
         }
 
-        $transient_key = 'eael_google_calendar_' . md5(implode('', $arg));
+        $transient_key = 'eael_google_calendar_' . md5(implode('', $transient_args));
         $data = get_transient($transient_key);
 
         if (isset($arg['calendar_id'])) {
@@ -1888,6 +1897,7 @@ class Event_Calendar extends Widget_Base
         if (empty($events)) {
             return [];
         }
+
         $calendar_data = [];
         foreach ($events as $key => $event) {
             $date_format = 'Y-m-d';
