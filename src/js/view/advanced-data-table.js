@@ -205,10 +205,17 @@ class advancedDataTable {
           const data = cell.innerText;
 
           var regex = new RegExp(
-            "([0-9]{4}[-.](0[1-9]|1[0-2])[-.]([0-2]{1}[0-9]{1}|3[0-1]{1})|([0-2]{1}[0-9]{1}|3[0-1]{1})[-.](0[1-9]|1[0-2])[-.][0-9]{4})"
+            "([0-9]{4}[-./*](0[1-9]|1[0-2])[-./*]([0-2]{1}[0-9]{1}|3[0-1]{1})|([0-2]{1}[0-9]{1}|3[0-1]{1})[-./*](0[1-9]|1[0-2])[-./*][0-9]{4})"
           );
 
+          var reverseDate = /^(0?[1-9]|[12][0-9]|3[01])[\/\-\.](0?[1-9]|1[012])[\/\-\.]\d{4}$/;
+
           if (data.match(regex)) {
+            if (data.match(reverseDate)) {
+              dataString = data.split(/[\.\-\/\*]/);
+              data = dataString[2] + "-" + dataString[1] + "-" + dataString[0];
+              value = Date.parse(data);
+            }
             value = Date.parse(data);
           } else if (isNaN(parseInt(data))) {
             value = data.toLowerCase();
