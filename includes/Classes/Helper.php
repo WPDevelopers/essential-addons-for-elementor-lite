@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use \Elementor\Controls_Manager;
+use Elementor\Plugin;
 
 class Helper
 {
@@ -122,7 +123,7 @@ class Helper
         } else {
             $args['post_type'] = $settings['post_type'];
 
-            if ($args['post_type'] !== 'page') {
+            //if ($args['post_type'] !== 'page') {
                 $args['tax_query'] = [];
 
                 $taxonomies = get_object_taxonomies($settings['post_type'], 'objects');
@@ -142,7 +143,7 @@ class Helper
                 if (!empty($args['tax_query'])) {
                     $args['tax_query']['relation'] = 'AND';
                 }
-            }
+            //}
         }
 
         if (!empty($settings['authors'])) {
@@ -176,7 +177,7 @@ class Helper
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     '1' => [
-                        'title' => __('', 'essential-addons-for-elementor-lite'),
+                        'title' => '',
                         'icon' => 'fa fa-unlock-alt',
                     ],
                 ],
@@ -751,6 +752,48 @@ class Helper
         return $data;
     }
 
+    public static function eael_get_widget_settings( $page_id, $widget_id ) {
+        $document = Plugin::$instance->documents->get( $page_id );
+        $settings = [];
+        if ( $document ) {
+            $elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
+            $widget_data = self::find_element_recursive( $elements, $widget_id );
+            if (!empty($widget_data) && is_array($widget_data)) {
+                $widget      = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
+            }
+            if ( !empty($widget) ) {
+                $settings    = $widget->get_settings_for_display();
+            }
+        }
+        return $settings;
+    }
+
+    /**
+     * Get Widget data.
+     *
+     * @param array  $elements Element array.
+     * @param string $form_id  Element ID.
+     *
+     * @return bool|array
+     */
+    public static function find_element_recursive( $elements, $form_id ) {
+
+        foreach ( $elements as $element ) {
+            if ( $form_id === $element['id'] ) {
+                return $element;
+            }
+
+            if ( ! empty( $element['elements'] ) ) {
+                $element = self::find_element_recursive( $element['elements'], $form_id );
+
+                if ( $element ) {
+                    return $element;
+                }
+            }
+        }
+
+        return false;
+    }
 	/**
 	 * Product grid
 	 */
