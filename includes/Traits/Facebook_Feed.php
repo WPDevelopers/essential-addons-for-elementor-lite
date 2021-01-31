@@ -5,28 +5,51 @@ namespace Essential_Addons_Elementor\Traits;
 if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
+use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
 
 trait Facebook_Feed
 {
     /**
      * Facebook Feed
      *
+     * @param array $settings optional widget's settings
+     * @return false|string|void
      * @since 3.4.0
      */
-    public function facebook_feed_render_items()
+    public function facebook_feed_render_items($settings = [])
     {
         // check if ajax request
         if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'facebook_feed_load_more') {
+            $ajax = wp_doing_ajax();
             // check ajax referer
             check_ajax_referer('essential-addons-elementor', 'security');
 
             // init vars
-            $page = $_REQUEST['page'];
-            parse_str($_REQUEST['settings'], $settings);
+            $page = isset($_POST['page']) ? intval($_REQUEST['page'], 10) : 0;
+            if (!empty($_POST['post_id'])) {
+                $post_id = intval($_POST['post_id'], 10);
+            } else {
+                $err_msg = __('Post ID is missing', 'essential-addons-for-elementor-lite');
+                if ($ajax) {
+                    wp_send_json_error($err_msg);
+                }
+                return false;
+            }
+            if (!empty($_POST['widget_id'])) {
+                $widget_id = sanitize_text_field($_POST['widget_id']);
+            } else {
+                $err_msg = __('Widget ID is missing', 'essential-addons-for-elementor-lite');
+                if ($ajax) {
+                    wp_send_json_error($err_msg);
+                }
+                return false;
+            }
+            $settings = HelperClass::eael_get_widget_settings($post_id, $widget_id);
+
         } else {
             // init vars
             $page = 0;
-            $settings = $this->get_settings_for_display();
+            $settings = !empty($settings) ? $settings : $this->get_settings_for_display();
         }
 
         $html = '';
@@ -61,12 +84,12 @@ trait Facebook_Feed
                 $facebook_data = array_reverse($facebook_data);
                 break;
         }
-
         $items = array_splice($facebook_data, ($page * $settings['eael_facebook_feed_image_count']['size']), $settings['eael_facebook_feed_image_count']['size']);
-
         foreach ($items as $item) {
-            $message = wp_trim_words((isset($item['message']) ? $item['message'] : (isset($item['story']) ? $item['story'] : '')), $settings['eael_facebook_feed_message_max_length']['size'], '...');
-            $photo = (isset($item['full_picture']) ? $item['full_picture'] : '');
+            $t = 'eael_facebook_feed_message_max_length'; // short it
+            $limit = isset($settings[$t]) && isset($settings[$t]['size']) ? $settings[$t]['size']: null;
+            $message = wp_trim_words((isset($item['message']) ? $item['message'] : (isset($item['story']) ? $item['story'] : '')), $limit, '...');
+            $photo = (isset($item['full_picture']) ? esc_url($item['full_picture']) : '');
             $likes = (isset($item['reactions']) ? $item['reactions']['summary']['total_count'] : 0);
             $comments = (isset($item['comments']) ? $item['comments']['summary']['total_count'] : 0);
 
@@ -159,10 +182,25 @@ trait Facebook_Feed
         }
 
         if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'facebook_feed_load_more') {
-            wp_send_json([
+            $data = [
                 'num_pages' => ceil(count($facebook_data) / $settings['eael_facebook_feed_image_count']['size']),
                 'html' => $html,
-            ]);
+            ];
+            while (ob_get_status()) {
+                ob_end_clean();
+            }
+            if (function_exists('gzencode')) {
+                $response = gzencode(wp_json_encode($data));
+                header('Content-Type: application/json; charset=utf-8');
+                header('Content-Encoding: gzip');
+                header('Content-Length: ' . strlen($response));
+
+                echo $response;
+            } else {
+                wp_send_json($data);
+            }
+            wp_die();
+
         }
 
         return $html;

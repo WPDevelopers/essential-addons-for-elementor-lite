@@ -596,7 +596,6 @@ trait Controls
                             'center' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
                             'right' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
                         ],
-                        'default' => 'center',
                     ]
                 );
 
@@ -610,7 +609,6 @@ trait Controls
                             'inside' => esc_html__('Inside', 'essential-addons-for-elementor-lite'),
                             'outside' => esc_html__('Outside', 'essential-addons-for-elementor-lite'),
                         ],
-                        'default' => 'inside',
                         'condition' => [
                             'content_timeline_layout!' => 'center',
                         ],
@@ -639,7 +637,7 @@ trait Controls
                         'label_block' => false,
                         'default' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
                         'condition' => [
-                            'show_load_more' => 'yes',
+                            'show_load_more' => ['yes', '1', 'true'],
                         ],
                     ]
                 );

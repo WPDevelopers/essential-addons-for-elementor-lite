@@ -67,7 +67,8 @@ trait Enqueue
         if ($this->uid === null) {
             return;
         }
-
+		//fix asset loading issue if no custom elementor css is not used.
+	    $this->loaded_templates[] = get_the_ID();
         // register fontawesome as fallback
         wp_register_style(
             'font-awesome-5-all',
@@ -124,6 +125,11 @@ trait Enqueue
         $this->localize_objects = apply_filters('eael/localize_objects', [
             'ajaxurl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('essential-addons-elementor'),
+	        'i18n' => [
+	        	'added' => __('Added ', 'essential-addons-for-elementor-lite'),
+	        	'compare' => __('Compare', 'essential-addons-for-elementor-lite'),
+                'loading' => esc_html__('Loading...', 'essential-addons-for-elementor-lite')
+            ],
         ]);
 
         // edit mode
@@ -184,6 +190,7 @@ trait Enqueue
 
         // view mode
         if ($this->is_preview_mode()) {
+
             if ($this->request_requires_update) {
                 $elements = $this->get_settings();
                 $tmp_uid = $this->get_temp_uid();
@@ -195,7 +202,6 @@ trait Enqueue
             if (empty($elements)) {
                 return;
             }
-
             // run hook before enqueue styles
             do_action('eael/before_enqueue_styles', $elements);
 

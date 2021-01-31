@@ -640,7 +640,7 @@ class Filterable_Gallery extends Widget_Base
                     ['eael_fg_gallery_item_name' => 'Gallery Item Name'],
                     ['eael_fg_gallery_item_name' => 'Gallery Item Name'],
                 ],
-                'fields' => array_values($repeater->get_controls()),
+                'fields' => $repeater->get_controls(),
                 'title_field' => '{{eael_fg_gallery_item_name}}',
             ]
         );
@@ -3187,9 +3187,12 @@ class Filterable_Gallery extends Widget_Base
                 $html .= '</a>';
             }
 
+            if ($settings['eael_section_fg_full_image_clickable']) {
+                $html .= '</a>';
+            }
 
             $html .= '</div></div>';
-            
+
             $gallery_markup[] = $html;
         }
 

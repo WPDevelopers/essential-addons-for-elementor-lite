@@ -81,19 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/view/login-register.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/view/dummy-widget.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/js/view/login-register.js":
-/*!***************************************!*\
-  !*** ./src/js/view/login-register.js ***!
-  \***************************************/
+/***/ "./src/js/view/dummy-widget.js":
+/*!*************************************!*\
+  !*** ./src/js/view/dummy-widget.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("ea.hooks.addAction(\"init\", \"ea\", function () {\n  var EALoginRegister = function EALoginRegister($scope, $) {\n    var $wrap = $scope.find('.eael-login-registration-wrapper'); // cache wrapper\n\n    var widgetId = $wrap.data('widget-id');\n    var recaptchaSiteKey = $wrap.data('recaptcha-sitekey');\n    var $loginFormWrapper = $scope.find(\"#eael-login-form-wrapper\");\n    var loginRcTheme = $loginFormWrapper.data('recaptcha-theme');\n    var loginRcSize = $loginFormWrapper.data('recaptcha-size');\n    var $regFormWrapper = $scope.find(\"#eael-register-form-wrapper\");\n    var regRcTheme = $regFormWrapper.data('recaptcha-theme');\n    var regRcSize = $regFormWrapper.data('recaptcha-size');\n    var $regLinkAction = $scope.find('#eael-lr-reg-toggle');\n    var $loginLinkAction = $scope.find('#eael-lr-login-toggle');\n    var $passField = $loginFormWrapper.find('#eael-user-password');\n    var recaptchaAvailable = typeof grecaptcha !== 'undefined' && grecaptcha !== null;\n\n    if ('form' === $regLinkAction.data('action')) {\n      $regLinkAction.on('click', function (e) {\n        e.preventDefault();\n        $loginFormWrapper.hide();\n        $regFormWrapper.fadeIn();\n      });\n    }\n\n    if ('form' === $loginLinkAction.data('action')) {\n      $loginLinkAction.on('click', function (e) {\n        e.preventDefault();\n        $regFormWrapper.hide();\n        $loginFormWrapper.fadeIn();\n      });\n    } // Password Visibility Toggle\n\n\n    var pass_shown = false;\n    $(document).on('click', '#wp-hide-pw', function (e) {\n      var $icon = $(this).find('span'); // cache\n\n      if (pass_shown) {\n        $passField.attr('type', 'password');\n        $icon.removeClass('dashicons-hidden').addClass('dashicons-visibility');\n        pass_shown = false;\n      } else {\n        $passField.attr('type', 'text');\n        $icon.removeClass('dashicons-visibility').addClass('dashicons-hidden');\n        pass_shown = true;\n      }\n    }); // reCAPTCHA\n\n    function onloadLRcb() {\n      var loginRecaptchaNode = document.getElementById('login-recaptcha-node-' + widgetId);\n      var registerRecaptchaNode = document.getElementById('register-recaptcha-node-' + widgetId);\n\n      if (loginRecaptchaNode) {\n        grecaptcha.render(loginRecaptchaNode, {\n          'sitekey': recaptchaSiteKey,\n          'theme': loginRcTheme,\n          'size': loginRcSize\n        });\n      }\n\n      if (registerRecaptchaNode) {\n        grecaptcha.render(registerRecaptchaNode, {\n          'sitekey': recaptchaSiteKey,\n          'theme': regRcTheme,\n          'size': regRcSize\n        });\n      }\n    }\n\n    if (recaptchaAvailable && isEditMode) {\n      // on elementor editor, window load event already fired, so run recaptcha\n      onloadLRcb();\n    } else {\n      // on frontend, load even is yet to fire, so wait and fire recaptcha\n      $(window).on('load', function () {\n        if (recaptchaAvailable) {\n          onloadLRcb();\n        }\n      });\n    }\n  };\n\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/eael-login-register.default\", EALoginRegister);\n});\n\n//# sourceURL=webpack:///./src/js/view/login-register.js?");
+eval("ea.hooks.addAction(\"init\", \"ea\", function () {\n  var dummyWidget = function dummyWidget($scope, $) {\n    console.log('dummy widget loaded');\n  };\n\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/eael-dummy-widget.default\", dummyWidget);\n});\n\n//# sourceURL=webpack:///./src/js/view/dummy-widget.js?");
 
 /***/ })
 

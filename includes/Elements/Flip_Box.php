@@ -734,7 +734,7 @@ class Flip_Box extends Widget_Base
                     'type'        => Controls_Manager::CHOOSE,
                     'options'     => [
                         '1' => [
-                            'title' => __('', 'essential-addons-for-elementor-lite'),
+                            'title' => '',
                             'icon'  => 'fa fa-unlock-alt',
                         ],
                     ],
