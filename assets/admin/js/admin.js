@@ -338,7 +338,7 @@
         var slug = $(this).data("slug");
         var basename = $(this).data("basename");
 
-        if ($.active && typeof action != "undefined") {
+        if ($.active && typeof action != "undefined" && action!='completed') {
             button.text("Waiting...").attr("disabled", true);
 
             setInterval(function () {
@@ -363,7 +363,7 @@
                     if (response.success) {
                         button.attr("disabled", true);
                         button.text("Activated");
-                        button.data("action", null);
+                        button.data("action", 'completed');
                     } else {
                         button.attr("disabled", false);
                         button.text("Install");
