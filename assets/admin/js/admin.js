@@ -364,6 +364,7 @@
                         button.attr("disabled", true);
                         button.text("Activated");
                         button.data("action", 'completed');
+                        $( "body" ).trigger( 'eael_after_active_plugin',{plugin:slug} );
                     } else {
                         button.attr("disabled", false);
                         button.text("Install");
@@ -389,6 +390,7 @@
                     if (response.success) {
                         button.text("Activated");
                         button.data("action", null);
+                        $( "body" ).trigger( 'eael_after_active_plugin',{plugin:basename} );
                     } else {
                         button.text("Activate");
                         alert(response.data);
@@ -531,5 +533,14 @@
         $(".eael-whatwecollecttext").toggle();
     });
 
+
+    $(document).on('eael_after_active_plugin', function (event, obj) {
+        if (obj.plugin == 'templately/templately.php' || obj.plugin == 'templately') {
+            $(".eael-admin-block-large.eael-admin-block-templately").fadeOut(300, function () {
+                $(this).remove();
+            });
+            $(".eael-admin-block.eael-admin-block-banner").show();
+        }
+    })
 
 })(jQuery);
