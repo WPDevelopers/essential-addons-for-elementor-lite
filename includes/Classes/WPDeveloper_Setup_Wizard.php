@@ -64,6 +64,7 @@ class WPDeveloper_Setup_Wizard {
         !$this->templately_status ? $wizard_column = 'five' : $wizard_column = 'four';
 
         ?>
+
         <ul class="eael-setup-wizard <?php echo $wizard_column; ?>" data-step="1">
             <li class="step">
                 <div class="icon">
@@ -255,6 +256,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         ?>
         <div class="eael-setup-wizard-wrap">
             <?php
+            $this->change_site_title();
             $this->tab_step();
             $this->tab_content();
             $this->setup_wizard_footer();
@@ -731,6 +733,14 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
     public static function redirect(){
         update_option( 'eael_setup_wizard', 'init' );
         wp_redirect( admin_url( 'admin.php?page=eael-setup-wizard') );
+    }
+
+    public function change_site_title(){
+        ?>
+            <script>
+                document.title = "<?php _e('Quick Setup Wizard- Essential Addons','essential-addons-for-elementor-lite'); ?>"
+            </script>
+        <?php
     }
 }
 
