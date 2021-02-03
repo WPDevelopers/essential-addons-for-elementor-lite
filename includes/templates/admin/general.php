@@ -22,13 +22,17 @@
                             </div>
                         </div>
                     <?php }?>
-                <?php if( !defined('EAEL_PRO_PLUGIN_BASENAME') && is_plugin_active('templately/templately.php') ) : ?>
-                    <div class="eael-admin-block eael-admin-block-banner">
+
+                <?php if( !defined('EAEL_PRO_PLUGIN_BASENAME') ) :
+                    $banner_display = (is_plugin_active('templately/templately.php'))?'':'none';
+                    ?>
+                    <div class="eael-admin-block eael-admin-block-banner" style="display: <?php echo $banner_display; ?>">
                         <a href="https://essential-addons.com/elementor/" target="_blank">
                             <img class="eael-preview-img" src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/eael-featured.png'; ?>" alt="essential-addons-for-elementor-featured">
                         </a>
                     </div><!--preview image end-->
                 <?php endif; ?>
+
                     <div class="eael-admin-block eael-admin-block-docs">
                         <header class="eael-admin-block-header">
                             <div class="eael-admin-block-header-icon">
