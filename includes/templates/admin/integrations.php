@@ -1,13 +1,6 @@
 <?php
 $integrations = [
     [
-        'slug'     => 'notificationx',
-        'basename' => 'notificationx/notificationx.php',
-        'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
-        'title'    => __('NotificationX','essential-addons-for-elementor-lite'),
-        'desc'     => __('Best FOMO, Social Proof, Sales Popup & WooCommerce Notification Bar With Elementor Support','essential-addons-for-elementor-lite'),
-    ],
-    [
         'slug'     => 'betterdocs',
         'basename' => 'betterdocs/betterdocs.php',
         'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bd-logo.png',
@@ -27,6 +20,13 @@ $integrations = [
         'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/review-logo.gif',
         'title'    => __('ReviewX','essential-addons-for-elementor-lite'),
         'desc'     => __('ReviewX let’s you get instant customer rating and multicriteria reviews to add credibility to your WooCommerce Store and increase conversion rates.','essential-addons-for-elementor-lite'),
+    ],
+    [
+        'slug'     => 'notificationx',
+        'basename' => 'notificationx/notificationx.php',
+        'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
+        'title'    => __('NotificationX','essential-addons-for-elementor-lite'),
+        'desc'     => __('Best FOMO, Social Proof, Sales Popup & WooCommerce Notification Bar With Elementor Support','essential-addons-for-elementor-lite'),
     ]
 ];
 ?>
