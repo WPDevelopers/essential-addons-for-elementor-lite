@@ -74,9 +74,8 @@
                 },
                 success: function (response) {
                     if (response.success) {
-                        elementor.saver.update.apply().then(function () {
-                            location.reload();
-                        });
+                        $(elementor.$previewContents[0].body).find(".elementor-add-templately-promo-button").remove();
+                        window.tmPromo.destroy();
                     }
                 },
                 error: function (err) {

@@ -202,10 +202,17 @@
 	border-radius: 5px;
 }
 
-
-
-
 .eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left button.eael-prmo-status-submit:disabled,
 .eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left button.eael-prmo-status-submit[disabled]{
 	cursor: wait;
 }
+
+#eael-templately-promo-popup .dialog-widget-content.dialog-lightbox-widget-content {
+	box-shadow: none !important;
+}
+/*#eael-templately-promo-popup.dialog-type-lightbox,*/
+#eael-templately-promo-popup.dialog-type-lightbox .dialog-widget-content,
+#eael-templately-promo-popup .eael-promo-temp-wrapper {
+	background: transparent !important;
+}
+
