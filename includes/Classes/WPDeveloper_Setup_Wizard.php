@@ -14,12 +14,20 @@ class WPDeveloper_Setup_Wizard {
         add_action( 'admin_menu', array( $this, 'admin_menu' ) );
         add_action( 'wp_ajax_save_setup_wizard_data', [ $this, 'save_setup_wizard_data' ] );
         add_action( 'wp_ajax_save_eael_elements_data', [ $this, 'save_eael_elements_data' ] );
+        add_action( 'in_admin_header', [ $this, 'remove_notice' ], 1000 );
         $this->templately_status = $this->templately_active_status();
     }
 
     public function templately_active_status() {
         include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
         return is_plugin_active( 'templately/templately.php' );
+    }
+
+    public function remove_notice() {
+        if($_GET['page']=='eael-setup-wizard'){
+            remove_all_actions( 'admin_notices' );
+            remove_all_actions( 'all_admin_notices' );
+        }
     }
 
     /**
@@ -730,16 +738,16 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         ];
     }
 
-    public static function redirect(){
+    public static function redirect() {
         update_option( 'eael_setup_wizard', 'init' );
-        wp_redirect( admin_url( 'admin.php?page=eael-setup-wizard') );
+        wp_redirect( admin_url( 'admin.php?page=eael-setup-wizard' ) );
     }
 
-    public function change_site_title(){
+    public function change_site_title() {
         ?>
-            <script>
-                document.title = "<?php _e('Quick Setup Wizard- Essential Addons','essential-addons-for-elementor-lite'); ?>"
-            </script>
+        <script>
+            document.title = "<?php _e( 'Quick Setup Wizard- Essential Addons', 'essential-addons-for-elementor-lite' ); ?>"
+        </script>
         <?php
     }
 }

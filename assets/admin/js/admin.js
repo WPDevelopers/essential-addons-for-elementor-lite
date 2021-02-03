@@ -421,8 +421,8 @@
                 if (response.success) {
                     Swal.fire({
                         type: "success",
-                        title: "Saved",
-                        showConfirmButton: true
+                        timer: 3000,
+                        showConfirmButton: false,
                     }).then((result) => {
                         window.location = response.data.redirect_url;
                     });
