@@ -588,8 +588,8 @@ button#eael-save[disabled]{
     box-shadow: none;
     color: #343434;
 }
-.eael-settings-tabs .eael-admin-block-wrapper .eael-admin-block {
-    min-width: 275px;
+.eael-settings-tabs .col-one-fourth {
+    width: 100%;
 }
 p.eael-el-title {
     font-size: 15px;
