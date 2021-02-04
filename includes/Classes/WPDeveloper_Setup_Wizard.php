@@ -31,7 +31,7 @@ class WPDeveloper_Setup_Wizard {
      * Remove all notice in setup wizard page
      */
     public function remove_notice() {
-        if ( $_GET[ 'page' ] == 'eael-setup-wizard' ) {
+        if ( isset($_GET[ 'page' ]) && $_GET[ 'page' ] == 'eael-setup-wizard' ) {
             remove_all_actions( 'admin_notices' );
             remove_all_actions( 'all_admin_notices' );
         }
