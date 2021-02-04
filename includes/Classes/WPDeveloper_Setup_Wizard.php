@@ -474,7 +474,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             $plugin_name = basename( EAEL_PLUGIN_FILE, '.php' );
             $is_tracked  = get_option( 'wpins_' . $plugin_name . '_force_tracked' );
             if ( !$is_tracked ) {
-                if ( class_exists( '\Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker' ) )
+                if ( class_exists( '\Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker' ) ){
                     ( new \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker(
                         EAEL_PLUGIN_FILE,
                         'http://app.wpdeveloper.net',
@@ -483,7 +483,8 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                         true,
                         1
                     ) )->do_tracking( true );
-                update_option( 'wpins_' . $plugin_name . '_force_tracked', true );
+                    update_option( 'wpins_' . $plugin_name . '_force_tracked', true );
+                }
             }
         }
         update_option( 'eael_setup_wizard', 'complete' );
