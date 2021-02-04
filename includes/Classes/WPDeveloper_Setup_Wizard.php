@@ -78,9 +78,7 @@ class WPDeveloper_Setup_Wizard {
      */
     public function tab_step() {
         !$this->templately_status ? $wizard_column = 'five' : $wizard_column = 'four';
-
         ?>
-
         <ul class="eael-setup-wizard <?php echo $wizard_column; ?>" data-step="1">
             <li class="step">
                 <div class="icon">
@@ -470,22 +468,8 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
 
         parse_str( $_POST[ 'fields' ], $fields );
 
-        if ( $fields[ 'eael_user_email_address' ] ) {
-            $plugin_name = basename( EAEL_PLUGIN_FILE, '.php' );
-            $is_tracked  = get_option( 'wpins_' . $plugin_name . '_force_tracked' );
-            if ( !$is_tracked ) {
-                if ( class_exists( '\Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker' ) ){
-                    ( new \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker(
-                        EAEL_PLUGIN_FILE,
-                        'http://app.wpdeveloper.net',
-                        array(),
-                        true,
-                        true,
-                        1
-                    ) )->do_tracking( true );
-                    update_option( 'wpins_' . $plugin_name . '_force_tracked', true );
-                }
-            }
+        if ( isset($fields[ 'eael_user_email_address' ]) ) {
+            $this->wpins_process();
         }
         update_option( 'eael_setup_wizard', 'complete' );
         if ( $this->save_element_list( $fields ) ) {
@@ -780,6 +764,24 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             document.title = "<?php _e( 'Quick Setup Wizard- Essential Addons', 'essential-addons-for-elementor-lite' ); ?>"
         </script>
         <?php
+    }
+
+    public function wpins_process(){
+        $plugin_name = basename( EAEL_PLUGIN_FILE, '.php' );
+        $is_tracked  = get_option( 'wpins_' . $plugin_name . '_force_tracked' );
+        if ( !$is_tracked ) {
+            if ( class_exists( '\Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker' ) ){
+                ( new \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker(
+                    EAEL_PLUGIN_FILE,
+                    'http://app.wpdeveloper.net',
+                    array(),
+                    true,
+                    true,
+                    1
+                ) )->do_tracking( true );
+                update_option( 'wpins_' . $plugin_name . '_force_tracked', true );
+            }
+        }
     }
 }
 
