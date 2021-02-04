@@ -57,7 +57,7 @@
                     setTimeout(function () {
                         _this.html("Save Settings");
                         Swal.fire({
-                            type: "success",
+                            //type: "success",
                             title: "Settings Saved!",
                             footer: "Have Fun :-)",
                             showConfirmButton: false,
@@ -420,9 +420,9 @@
             success: function (response) {
                 if (response.success) {
                     Swal.fire({
-                        type: "success",
                         timer: 3000,
                         showConfirmButton: false,
+                        imageUrl: localize.success_image,
                     }).then((result) => {
                         window.location = response.data.redirect_url;
                     });

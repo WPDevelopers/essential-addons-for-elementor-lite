@@ -18,13 +18,20 @@ class WPDeveloper_Setup_Wizard {
         $this->templately_status = $this->templately_active_status();
     }
 
+    /**
+     * templately_active_status
+     * @return bool
+     */
     public function templately_active_status() {
         include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
         return is_plugin_active( 'templately/templately.php' );
     }
 
+    /**
+     * Remove all notice in setup wizard page
+     */
     public function remove_notice() {
-        if($_GET['page']=='eael-setup-wizard'){
+        if ( $_GET[ 'page' ] == 'eael-setup-wizard' ) {
             remove_all_actions( 'admin_notices' );
             remove_all_actions( 'all_admin_notices' );
         }
@@ -43,8 +50,9 @@ class WPDeveloper_Setup_Wizard {
             wp_enqueue_script( 'sweetalert2-core-js', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/js/core.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
             wp_enqueue_script( 'essential_addons_elementor-setup-wizard-js', EAEL_PLUGIN_URL . 'assets/admin/js/admin.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
             wp_localize_script( 'essential_addons_elementor-setup-wizard-js', 'localize', array(
-                'ajaxurl' => admin_url( 'admin-ajax.php' ),
-                'nonce'   => wp_create_nonce( 'essential-addons-elementor' ),
+                'ajaxurl'       => admin_url( 'admin-ajax.php' ),
+                'nonce'         => wp_create_nonce( 'essential-addons-elementor' ),
+                'success_image' => EAEL_PLUGIN_URL . 'assets/admin/images/success.gif',
             ) );
         }
         return [];
@@ -164,6 +172,9 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         <?php
     }
 
+    /**
+     * Tav view content
+     */
     public function tab_content() {
         ?>
         <div class="eael-setup-body">
@@ -219,9 +230,9 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                 <?php $this->eael_integrations(); ?>
                 <div id="finalize" class="setup-content eael-box">
 
-                    <h2>Getting Started</h2>
-                    <p>Complete the Setup Wizard and Check out the walk-through tutorials to enhance your Elementor page
-                        building experience 🔥</p>
+                    <h2><?php _e("Getting Started","essential-addons-for-elementor-lite") ?></h2>
+                    <p><?php _e("Complete the Setup Wizard and Check out the walk-through tutorials to enhance your Elementor page
+                        building experience","essential-addons-for-elementor-lite") ?> 🔥</p>
 
                     <div class="eael-iframe">
                         <iframe src="https://www.youtube.com/embed/uuyXfUDqRZM" frameborder="0"></iframe>
@@ -247,6 +258,9 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         <?php
     }
 
+    /**
+     * Footer content
+     */
     public function setup_wizard_footer() {
         ?>
         <div class="eael-setup-footer">
@@ -260,6 +274,9 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         <?php
     }
 
+    /**
+     * render_wizard
+     */
     public function render_wizard() {
         ?>
         <div class="eael-setup-wizard-wrap">
@@ -273,6 +290,9 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         <?php
     }
 
+    /**
+     * EAEL elements list
+     */
     public function eael_elements() {
 
         ?>
@@ -308,6 +328,9 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         <?php
     }
 
+    /**
+     * EAEL plugin integrations
+     */
     public function eael_integrations() {
         ?>
         <div id="integrations" class="setup-content eael-box">
@@ -406,6 +429,9 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         return $plugins[ $basename ];
     }
 
+    /**
+     * Templately promotion popup
+     */
     public function eael_templately_plugin_popup() {
         ?>
         <div class="eael-popup__wrapper">
@@ -461,7 +487,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             }
         }
         update_option( 'eael_setup_wizard', 'complete' );
-        if ( $this->save_el_data( $fields ) ) {
+        if ( $this->save_element_list( $fields ) ) {
             wp_send_json_success( [ 'redirect_url' => admin_url( 'admin.php?page=eael-settings' ) ] );
         }
         wp_send_json_error();
@@ -479,18 +505,18 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
 
         parse_str( $_POST[ 'fields' ], $fields );
 
-        if ( $this->save_el_data( $fields ) ) {
+        if ( $this->save_element_list( $fields ) ) {
             wp_send_json_success();
         }
         wp_send_json_error();
     }
 
     /**
-     * save_el_data
+     * save_element_list
      * @param $fields
      * @return bool
      */
-    public function save_el_data( $fields ) {
+    public function save_element_list( $fields ) {
         if ( !empty( $fields ) ) {
 
             $el_list      = $fields[ 'eael_element' ];
@@ -504,6 +530,10 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
         return false;
     }
 
+    /**
+     * get_element_list
+     * @return array[]
+     */
     public function get_element_list() {
         return [
             'content-elements'         => [
