@@ -536,7 +536,9 @@
 
     $(document).on('eael_after_active_plugin', function (event, obj) {
         if (obj.plugin == 'templately/templately.php' || obj.plugin == 'templately') {
-            location.reload();
+            if($(".eael-settings-tabs").length>0){
+                location.reload();
+            }
         }
     })
 

@@ -399,6 +399,13 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                 'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
                 'title'    => __( 'NotificationX', 'essential-addons-for-elementor-lite' ),
                 'desc'     => __( 'Best FOMO, Social Proof, Sales Popup & WooCommerce Notification Bar With Elementor Support', 'essential-addons-for-elementor-lite' ),
+            ],
+            [
+                'slug'     => 'easyjobs',
+                'basename' => 'easyjobs/.easyjobs.php',
+                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/easy-jobs-logo.png',
+                'title'    => __( 'EasyJobs', 'essential-addons-for-elementor-lite' ),
+                'desc'     => __( 'Easy solution for the job recruitment to attract, manage & hire right talent faster.', 'essential-addons-for-elementor-lite' ),
             ]
         ];
     }
@@ -410,6 +417,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
      * @return array|false
      */
     public function get_local_plugin_data( $basename = '' ) {
+
         if ( empty( $basename ) ) {
             return false;
         }

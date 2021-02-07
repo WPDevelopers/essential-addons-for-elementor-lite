@@ -27,6 +27,13 @@ $integrations = [
         'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
         'title'    => __('NotificationX','essential-addons-for-elementor-lite'),
         'desc'     => __('Best FOMO, Social Proof, Sales Popup & WooCommerce Notification Bar With Elementor Support','essential-addons-for-elementor-lite'),
+    ],
+    [
+        'slug'     => 'easyjobs',
+        'basename' => 'easyjobs/.easyjobs.php',
+        'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/easy-jobs-logo.png',
+        'title'    => __( 'EasyJobs', 'essential-addons-for-elementor-lite' ),
+        'desc'     => __( 'Easy solution for the job recruitment to attract, manage & hire right talent faster.', 'essential-addons-for-elementor-lite' ),
     ]
 ];
 ?>
