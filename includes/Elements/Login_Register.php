@@ -322,7 +322,25 @@ class Login_Register extends Widget_Base {
 				'show_lost_password'      => 'yes',
 			],
 		] );
-
+		$this->add_control( 'login_show_remember_me', [
+			'label'     => __( 'Remember Me Field', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::SWITCHER,
+			'default'   => 'yes',
+			'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+			'label_on'  => __( 'Show', 'essential-addons-for-elementor-lite' ),
+		] );
+		$this->add_control( 'remember_text', [
+			'label'       => __( 'Remember Me Field Text', 'essential-addons-for-elementor-lite' ),
+			'label_block' => true,
+			'type'        => Controls_Manager::TEXT,
+			'dynamic'     => [
+				'active' => true,
+			],
+			'default'     => __( 'Remember Me', 'essential-addons-for-elementor-lite' ),
+			'condition'   => [
+				'login_show_remember_me' => 'yes',
+			],
+		] );
 		if ( $this->user_can_register ) {
 			$this->add_control( 'reg_hr', [
 				'type' => Controls_Manager::DIVIDER,
@@ -596,14 +614,6 @@ class Login_Register extends Widget_Base {
 			'separator'  => 'before',
 		] );
 
-		$this->add_control( 'login_show_remember_me', [
-			'label'     => __( 'Remember Me Checkbox', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::SWITCHER,
-			'default'   => 'yes',
-			'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-			'label_on'  => __( 'Show', 'essential-addons-for-elementor-lite' ),
-		] );
-
 		$this->add_control( 'password_toggle', [
 			'label'     => __( 'Password Visibility Icon', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::SWITCHER,
@@ -764,23 +774,6 @@ class Login_Register extends Widget_Base {
 			],
 			'separator'     => 'after',
 		] );
-		// @todo; in future
-		//$this->add_control( 'redirect_after_logout', [
-		//	'label' => __( 'Redirect After Logout', 'essential-addons-for-elementor-lite' ),
-		//	'type'  => Controls_Manager::SWITCHER,
-		//] );
-		//
-		//$this->add_control( 'redirect_logout_url', [
-		//	'type'          => Controls_Manager::URL,
-		//	'show_label'    => false,
-		//	'show_external' => false,
-		//	'placeholder'   => __( 'https://your-link.com', 'essential-addons-for-elementor-lite' ),
-		//	'description'   => __( 'Please note that only your current domain is allowed here to keep your site secure.', 'essential-addons-for-elementor-lite' ),
-		//	'condition'     => [
-		//		'redirect_after_logout' => 'yes',
-		//	],
-		//	'separator'     => 'after',
-		//] );
 
 		$this->end_controls_section();
 	}
@@ -2448,12 +2441,13 @@ class Login_Register extends Widget_Base {
 				'eael_form_field_po_toggle' => 'yes',
 			],
 		] );
-		$this->add_control( 'eael_form_rm_fields_heading', [
+
+		$this->add_control( 'eael_form_tc_fields_heading', [
 			'type'      => Controls_Manager::HEADING,
-			'label'     => __( 'Remember Me Field', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Terms & Condition Field', 'essential-addons-for-elementor-lite' ),
 			'separator' => 'before',
 		] );
-		$this->add_responsive_control( "eael_form_rm_field_margin", [
+		$this->add_responsive_control( "eael_form_tc_field_margin", [
 			'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -2462,13 +2456,13 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .eael-forever-forget" => $this->apply_dim( 'margin' ),
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap" => $this->apply_dim( 'margin' ),
 			],
 			'condition'  => [
 				'eael_form_field_po_toggle' => 'yes',
 			],
 		] );
-		$this->add_responsive_control( "eael_form_rm_field_padding", [
+		$this->add_responsive_control( "eael_form_tc_field_padding", [
 			'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -2477,7 +2471,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .eael-forever-forget" => $this->apply_dim( 'padding' ),
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap" => $this->apply_dim( 'padding' ),
 			],
 			'condition'  => [
 				'eael_form_field_po_toggle' => 'yes',
@@ -2911,6 +2905,136 @@ class Login_Register extends Widget_Base {
 
 		$this->end_popover();
 
+		//Remember Me Style
+		$this->add_control( 'eael_form_rm_fields_heading', [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Remember Me Field', 'essential-addons-for-elementor-lite' ),
+			'separator' => 'before',
+		] );
+		$this->add_control( 'remember_me_style_pot', [
+			'label'        => __( 'Remember Me Style', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
+			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'condition'    => [
+				'login_show_remember_me' => 'yes',
+			],
+		] );
+
+		$this->start_popover();
+		$this->add_control( 'remember_me_style', [
+			'label'     => __( 'Style', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::SELECT,
+			'default'   => 'lr-checkbox',
+			'options'   => [
+				'lr-checkbox' => __( 'Checkbox', 'essential-addons-for-elementor-lite' ),
+				'lr-toggle'   => __( 'Toggle', 'essential-addons-for-elementor-lite' ),
+			],
+			'condition' => [
+				'remember_me_style_pot' => 'yes',
+			],
+			'separator' => 'before',
+		] );
+
+		$this->add_responsive_control( "eael_form_rm_field_margin", [
+			'label'      => __( 'Container Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael-forever-forget" => $this->apply_dim( 'margin' ),
+			],
+			'condition'  => [
+				'remember_me_style_pot' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_rm_field_padding", [
+			'label'      => __( 'Container Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael-forever-forget" => $this->apply_dim( 'padding' ),
+			],
+			'condition'  => [
+				'remember_me_style_pot' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_rm_lbl_margin", [
+			'label'      => __( 'Label Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-menot" => $this->apply_dim( 'margin' ),
+			],
+			'condition'  => [
+				'remember_me_style_pot' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_rm_lbl_padding", [
+			'label'      => __( 'Label Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-menot" => $this->apply_dim( 'padding' ),
+			],
+			'condition'  => [
+				'remember_me_style_pot' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'eael_rm_label_color', [
+			'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-menot" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'remember_me_style_pot' => 'yes',
+			],
+		] );
+		$this->add_control( 'eael_rm_label_bg_color', [
+			'label'     => __( 'Text Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#ffffff',
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-menot" => 'background-color: {{VALUE}};',
+			],
+			'condition' => [
+				'remember_me_style_pot' => 'yes',
+			],
+		] );
+		$this->add_control( 'eael_rm_checkbox_color', [
+			'label'     => __( 'Checkbox | Toggle Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-menot  input[type=checkbox]:checked" => 'border-color: {{VALUE}};background: {{VALUE}};',
+			],
+			'condition' => [
+				'remember_me_style_pot' => 'yes',
+			],
+		] );
+		$this->end_popover();
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'label'    => __( 'Remember Me Typography', 'essential-addons-for-elementor-lite' ),
+			'name'     => "eael_rm_label_typography",
+			'selector' => "{{WRAPPER}} .lr-form-wrapper .forget-menot",
+		] );
 		$this->end_controls_section();
 	}
 
@@ -3639,6 +3763,8 @@ class Login_Register extends Widget_Base {
 			$btn_text         = ! empty( $this->ds['login_button_text'] ) ? $this->ds['login_button_text'] : '';
 			$show_logout_link = ( ! empty( $this->ds['show_log_out_message'] ) && 'yes' === $this->ds['show_log_out_message'] );
 			$show_rememberme  = ( ! empty( $this->ds['login_show_remember_me'] ) && 'yes' === $this->ds['login_show_remember_me'] );
+			$remember_text         = isset( $this->ds['remember_text'] ) ? $this->ds['remember_text'] : esc_html__( 'Remember Me', 'essential-addons-for-elementor-lite');
+			$rm_type          = ! empty( $this->ds['remember_me_style'] ) ? $this->ds['remember_me_style'] : '';
 			$show_pv_icon     = ( ! empty( $this->ds['password_toggle'] ) && 'yes' === $this->ds['password_toggle'] );
 
 			//Loss password
@@ -3733,14 +3859,15 @@ class Login_Register extends Widget_Base {
                                     </div>
                                 </div>
                                 <div class="eael-forever-forget eael-lr-form-group">
-									<?php if ( $show_rememberme ) { ?>
+									<?php if ( $show_rememberme && !empty( $remember_text )) { ?>
                                         <p class="forget-menot">
                                             <input name="eael-rememberme"
                                                    type="checkbox"
                                                    id="rememberme"
+                                                   class="remember-me <?php echo esc_attr( $rm_type ); ?>"
                                                    value="forever">
                                             <label for="rememberme"
-                                                   class="eael-checkbox-label check-rememberme"><?php esc_html_e( 'Remember Me', 'essential-addons-for-elementor-lite' ); ?></label>
+                                                   class="eael-checkbox-label rememberme"><?php echo esc_html( $remember_text ); ?></label>
                                         </p>
 									<?php }
 									if ( $show_lp ) {
@@ -4125,6 +4252,7 @@ class Login_Register extends Widget_Base {
                    value="1">
             <input type="checkbox"
                    name="eael_accept_tnc"
+                   class="eael_accept_tnc lr-toggle"
                    value="1"
                    id="eael_accept_tnc">
             <label for="eael_accept_tnc"
@@ -4149,7 +4277,7 @@ class Login_Register extends Widget_Base {
 
 	protected function print_login_validation_errors() {
 		$error_key = 'eael_login_error_' . $this->get_id();
-		if ( $login_error = apply_filters( 'eael/login-register/login-error-message', get_transient( $error_key ) ) ) {
+		if ( $login_error = apply_filters( 'eael/login-register/login-error-message', get_option( $error_key ) ) ) {
 			do_action( 'eael/login-register/before-showing-login-error', $login_error, $this );
 			?>
             <p class="eael-form-msg invalid">
@@ -4158,7 +4286,7 @@ class Login_Register extends Widget_Base {
 			<?php
 			do_action( 'eael/login-register/after-showing-login-error', $login_error, $this );
 
-			delete_transient( $error_key );
+			delete_option( $error_key );
 		}
 	}
 
@@ -4227,8 +4355,8 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_validation_message() {
-		$errors  = get_transient( 'eael_register_errors_' . $this->get_id() );
-		$success = get_transient( 'eael_register_success_' . $this->get_id() );
+		$errors  = get_option( 'eael_register_errors_' . $this->get_id() );
+		$success = get_option( 'eael_register_success_' . $this->get_id() );
 		if ( empty( $errors ) && empty( $success ) ) {
 			return;
 		}
@@ -4256,7 +4384,7 @@ class Login_Register extends Widget_Base {
             </ol>
         </div>
 		<?php
-		delete_transient( 'eael_register_errors_' . $this->get_id() );
+		delete_option( 'eael_register_errors_' . $this->get_id() );
 	}
 
 	protected function print_registration_success_message( $success ) {
@@ -4265,7 +4393,7 @@ class Login_Register extends Widget_Base {
 			$message = '<p class="eael-form-msg valid">' . esc_html( $this->get_settings_for_display( 'success_register' ) ) . '</p>';
 			echo apply_filters( 'eael/login-register/registration-success-msg', $message, $success );
 
-			delete_transient( 'eael_register_success_' . $this->get_id() );
+			delete_option( 'eael_register_success_' . $this->get_id() );
 
 			return true; // it will help in case we wanna know if error is printed.
 		}
