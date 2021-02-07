@@ -558,6 +558,7 @@ trait Helper
 	}
 
 	public function print_template_views(){
+        $button_test = ( HelperClass::get_local_plugin_data( 'templately/templately.php' ) === false )?'Install Templately':'Activate';
         ?>
         <div id="eael-promo-temp-wrap" class="eael-promo-temp-wrap" style="display: none">
             <div class="eael-promo-temp-wrapper">
@@ -570,19 +571,19 @@ trait Helper
                             <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg'; ?>" alt="">
                         </div>
                         <ul class="eael-promo-temp__feature__list">
-                            <li>900+ Stunning Templates</li>
-                            <li>Supports Elementor & Gutenberg</li>
-                            <li>Powering up 17000+ Websites</li>
-                            <li>Cloud Collaboration with Team</li>
+                            <li><?php _e('1,000 Stunning Templates','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php _e('Supports Elementor & Gutenberg','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php _e('Powering up 17000+ Websites','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php _e('Cloud Collaboration with Team','essential-addons-for-elementor-lite'); ?></li>
                         </ul>
                         <form class="eael-promo-temp__form">
                             <label>
                                 <input type="radio" value="install" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio' checked>
-                                <span>Install Templately</span>
+                                <span><?php echo $button_test; ?></span>
                             </label>
                             <label>
                                 <input type="radio" value="dnd" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio'>
-                                <span>Don’t Show This Again</span>
+                                <span><?php _e('Don’t Show This Again','essential-addons-for-elementor-lite'); ?></span>
                             </label>
                         </form>
 
@@ -597,7 +598,7 @@ trait Helper
                                    data-basename="<?php echo 'templately/templately.php'; ?>"><?php _e( 'Activate', 'essential-addons-for-elementor-lite' ); ?></button>
                             <?php } ?>
                         <?php } ?>
-                        <button class="eael-prmo-status-submit" style="display: none">Submit</button>
+                        <button class="eael-prmo-status-submit" style="display: none"><?php _e('Submit','essential-addons-for-elementor-lite') ?></button>
                     </div>
                     <div class="eael-promo-temp--right">
                         <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/templates-edit.jpg'; ?>" alt="">
