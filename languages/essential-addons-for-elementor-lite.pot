@@ -7467,7 +7467,7 @@ msgid "Supports Elementor & Gutenberg"
 msgstr ""
 
 #: ../includes/Traits/Helper.php:756
-msgid "Powering up 17000+ Websites"
+msgid "Powering up 17,000+ Websites"
 msgstr ""
 
 #: ../includes/Traits/Helper.php:757
