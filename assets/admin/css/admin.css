@@ -1202,6 +1202,9 @@ textarea.eael-form-control {
     justify-content: flex-end;
     padding: 0 20px;
 }
+.eael-admin-sidebar.eael-templately-promo-show {
+    flex: inherit;
+}
 .eael-admin-sidebar .eael-admin-block-templately-overlay {
     align-items: flex-start;
     padding: 15px 20px;
