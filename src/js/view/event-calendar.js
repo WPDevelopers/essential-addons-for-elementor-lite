@@ -61,16 +61,8 @@ var EventCalendar = function ($scope, $) {
           endSelector = $("span.eaelec-event-date-end");
 
         if (event.allDay === "yes") {
-          if (endDate == null) {
-            var newEnd = moment(startDate).add(1, "days");
-            console.log("Inside Null", newEnd);
-            endDate = newEnd._i;
-          } else {
-            var newEnd = moment(endDate).subtract(1, "days");
-            console.log("Inside Regular", newEnd);
-            endDate = newEnd._i;
-          }
-          console.log("New End Date", endDate);
+          var newEnd = moment(endDate).subtract(1, "days");
+          endDate = newEnd._d;
           timeFormate = " ";
         }
 
