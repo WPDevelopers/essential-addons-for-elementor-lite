@@ -1906,13 +1906,21 @@ class Event_Calendar extends Widget_Base
                 $date_format .= ' H:i';
                 $all_day = '';
             }
+
+
+            if (tribe_event_is_all_day($event->ID)) {
+              $end = date('Y-m-d', strtotime("+1 days", strtotime(tribe_get_end_date($event->ID, true, $date_format))));
+            } else {
+              $end = date('Y-m-d H:i', strtotime(tribe_get_end_date($event->ID, true, $date_format))) . ":01";
+            }
+
             $calendar_data[] = [
                 'id' => ++$key,
                 'title' => !empty($event->post_title) ? $event->post_title : __('No Title',
                     'essential-addons-for-elementor-lite'),
                 'description' => $event->post_content,
                 'start' => tribe_get_start_date($event->ID, true, $date_format),
-                'end' => tribe_get_end_date($event->ID, true, $date_format),
+                'end' => $end,
                 'borderColor' => !empty($settings['eael_event_global_popup_ribbon_color']) ? $settings['eael_event_global_popup_ribbon_color'] : '#10ecab',
                 'textColor' => $settings['eael_event_global_text_color'],
                 'color' => $settings['eael_event_global_bg_color'],
