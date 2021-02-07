@@ -57,7 +57,7 @@
                     setTimeout(function () {
                         _this.html("Save Settings");
                         Swal.fire({
-                            //type: "success",
+                            type: "success",
                             title: "Settings Saved!",
                             footer: "Have Fun :-)",
                             showConfirmButton: false,
