@@ -747,6 +747,11 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                     [
                         'key'   => 'woo-checkout',
                         'title' => __( 'Woo Checkout', 'essential-addons-for-elementor-lite' ),
+                    ],
+                    [
+                        'key'         => 'woo-product-compare',
+                        'title'       => __( 'Woo Product Compare', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'advance',
                     ]
                 ]
             ]
