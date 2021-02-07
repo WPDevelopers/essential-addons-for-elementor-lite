@@ -62,11 +62,15 @@ var EventCalendar = function ($scope, $) {
 
         if (event.allDay === "yes") {
           if (endDate == null) {
-            var newEnd = moment(startDate);
+            var newEnd = moment(startDate).add(1, "days");
+            console.log("Inside Null", newEnd);
+            endDate = newEnd._i;
           } else {
             var newEnd = moment(endDate).subtract(1, "days");
+            console.log("Inside Regular", newEnd);
+            endDate = newEnd._i;
           }
-          endDate = newEnd._i;
+          console.log("New End Date", endDate);
           timeFormate = " ";
         }
 
