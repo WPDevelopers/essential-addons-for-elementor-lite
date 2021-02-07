@@ -71,7 +71,7 @@ ea.hooks.addAction("init", "ea", () => {
             onloadLRcb();
         }else{
             // on frontend, load even is yet to fire, so wait and fire recaptcha
-            $(window).load(function () {
+            $(window).on('load',function () {
                 if (recaptchaAvailable){
                     onloadLRcb();
                 }

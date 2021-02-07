@@ -410,6 +410,12 @@ $elements = [
 		        'demo_link' => 'https://essential-addons.com/elementor/login-register-form',
 		        'doc_link' => 'https://essential-addons.com/elementor/docs/login-register-form/',
 	        ],
+            [
+		        'key'   => 'dummy-widget',
+		        'title' => __( 'Dummy Widget', 'essential-addons-elementor' ),
+		        'demo_link' => 'https://essential-addons.com/elementor/dummy-widget',
+		        'doc_link' => 'https://essential-addons.com/elementor/docs/dummy-widget/',
+	        ],
         ]
     ],
     'social-feed-elements'  => [
@@ -499,7 +505,13 @@ $elements = [
                 'title' => __( 'Woo Checkout', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/woo-checkout/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/woo-checkout/'
-            ]
+            ],
+	        [
+		        'key'   => 'woo-product-compare',
+		        'title' => __( 'Woo Product Compare', 'essential-addons-for-elementor-lite'),
+		        'demo_link' => 'https://essential-addons.com/elementor/woo-product-compare/',
+		        'doc_link' => 'https://essential-addons.com/elementor/docs/woo-product-compare/'
+	        ],
         ]
     ]
 ];

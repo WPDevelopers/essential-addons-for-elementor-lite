@@ -166,8 +166,9 @@ trait Template_Query {
     public function get_template_list_for_dropdown()
     {
         $files = [];
-        if ($this->get_template_files()) {
-            foreach ($this->get_template_files() as $key => $handler) {
+        $templates = $this->get_template_files();
+        if (!empty( $templates)) {
+            foreach ($templates as $key => $handler) {
                 foreach ($handler as $handle) {
                     if (strpos($handle, '.php') !== false) {
 
