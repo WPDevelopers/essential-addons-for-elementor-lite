@@ -1204,6 +1204,9 @@ textarea.eael-form-control {
 }
 .eael-admin-sidebar.eael-templately-promo-show {
     flex: inherit;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
 }
 .eael-admin-sidebar .eael-admin-block-templately-overlay {
     align-items: flex-start;
