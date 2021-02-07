@@ -536,10 +536,7 @@
 
     $(document).on('eael_after_active_plugin', function (event, obj) {
         if (obj.plugin == 'templately/templately.php' || obj.plugin == 'templately') {
-            $(".eael-admin-block-large.eael-admin-block-templately").fadeOut(300, function () {
-                $(this).remove();
-            });
-            $(".eael-admin-block.eael-admin-block-banner").show();
+            location.reload();
         }
     })
 
