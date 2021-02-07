@@ -124,7 +124,9 @@
                         if (response.success) {
                             button.text("Activated");
                             button.data("action", null);
-                            location.reload();
+                            elementor.saver.update.apply().then(function () {
+                                location.reload();
+                            });
                         } else {
                             button.text("Install");
                             alert(response.data);
@@ -151,7 +153,9 @@
                         if (response.success) {
                             button.text("Activated");
                             button.data("action", null);
-                            location.reload();
+                            elementor.saver.update.apply().then(function () {
+                                location.reload();
+                            });
                         } else {
                             button.text("Activate");
                             alert(response.data);
