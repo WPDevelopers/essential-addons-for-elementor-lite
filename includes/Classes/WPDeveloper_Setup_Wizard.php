@@ -402,10 +402,10 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             ],
             [
                 'slug'     => 'easyjobs',
-                'basename' => 'easyjobs/.easyjobs.php',
+                'basename' => 'easyjobs/easyjobs.php',
                 'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/easy-jobs-logo.png',
                 'title'    => __( 'EasyJobs', 'essential-addons-for-elementor-lite' ),
-                'desc'     => __( 'Easy solution for the job recruitment to attract, manage & hire right talent faster.', 'essential-addons-for-elementor-lite' ),
+                'desc'     => __( 'Easy solution for the job recruitment to attract, manage & hire right talent faster. The Best Talent Recruitment Suite which lets you manage jobs & career page in Elementor.', 'essential-addons-for-elementor-lite' ),
             ]
         ];
     }
