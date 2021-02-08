@@ -26,7 +26,7 @@ $integrations = [
         'basename' => 'notificationx/notificationx.php',
         'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx-logo.png',
         'title'    => __('NotificationX','essential-addons-for-elementor-lite'),
-        'desc'     => __('Best FOMO, Social Proof, Sales Popup & WooCommerce Notification Bar With Elementor Support','essential-addons-for-elementor-lite'),
+        'desc'     => __('Best FOMO Social Proof Plugin to boost your sales conversion. Create stunning Sales Popup & Notification Bar With Elementor Support','essential-addons-for-elementor-lite'),
     ],
     [
         'slug'     => 'easyjobs',
