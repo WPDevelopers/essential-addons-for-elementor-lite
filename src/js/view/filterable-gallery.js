@@ -125,9 +125,9 @@ jQuery(window).on("elementor/frontend/init", function () {
 					$nomore_text     = $gallery.data("nomore-item-text"),
 					filter_enable = $(".eael-filter-gallery-control",$scope).length,
 					$items           = [];
-				var filter_name      = $(".eael-filter-gallery-control li.active").data('filter');
+				var filter_name      = $(".eael-filter-gallery-control li.active", $scope).data('filter');
 				if(filterControls.length>0){
-					filter_name = $(".fg-layout-3-filter-controls li.active").data('filter');
+					filter_name = $(".fg-layout-3-filter-controls li.active", $scope).data('filter');
 				}
 
 				if ($init_show === $total_items) {
