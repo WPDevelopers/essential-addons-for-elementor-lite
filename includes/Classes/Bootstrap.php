@@ -231,11 +231,6 @@ class Bootstrap
 		    add_filter( 'woocommerce_product_get_rating_html', [ $this, 'eael_rating_markup' ], 10, 3 );
 	    }
 
-	    if( class_exists('WC_Subscriptions_Cart') ) {
-		    remove_action('woocommerce_review_order_after_order_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals' ), 10);
-		    add_action('eael_display_recurring_total_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals'
-		    ), 10);
-	    }
 
         // Admin
         if (is_admin()) {
