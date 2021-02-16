@@ -475,7 +475,8 @@
 }
 .eael-woo-product-slider-container.slider-default .eael-product-slider {
   border-radius: 20px;
-  background-color: red;
+  background-color: green;
+  text-align: left;
 }
 .eael-woo-product-slider-container.slider-default .product-image-wrap {
   position: relative;
@@ -485,6 +486,24 @@
   bottom: 30px;
   visibility: visible;
   opacity: 1;
+}
+.eael-woo-product-slider-container.slider-default .product-details-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 20px;
+}
+.eael-woo-product-slider-container.slider-default .eael-product-title h2 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.2em;
+  font-weight: 500;
 }
 .eael-woo-product-slider-container.slider-default .icons-wrap {
   padding: 0;
