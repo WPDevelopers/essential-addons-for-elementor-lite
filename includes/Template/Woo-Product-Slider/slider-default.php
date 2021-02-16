@@ -19,8 +19,6 @@ if ( ! $product ) {
 }
 $should_print_compare_btn = isset( $settings['show_compare'] ) && 'yes' === $settings['show_compare'];
 // Improvement
-$grid_style_preset = isset($settings['eael_product_slider_style_preset']) ? $settings['eael_product_slider_style_preset'] : '';
-$list_style_preset = isset($settings['eael_product_list_style_preset']) ? $settings['eael_product_list_style_preset'] : '';
 $sale_badge_align = isset( $settings['eael_product_sale_badge_alignment'] ) ? $settings['eael_product_sale_badge_alignment'] : '';
 $sale_badge_preset = isset($settings['eael_product_sale_badge_preset']) ? $settings['eael_product_sale_badge_preset'] : '';
 // should print vars
@@ -77,7 +75,7 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
 	                    ($product->get_average_rating(), $product->get_rating_count());
                     } ?>
                 </div>
-                <?php if(($grid_style_preset != 'eael-product-preset-7') && $should_print_price ){
+                <?php if($should_print_price ){
                     echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
                 }?>
             </div>
