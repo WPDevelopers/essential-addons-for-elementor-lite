@@ -39,7 +39,7 @@ class Woo_Product_Slider extends Widget_Base
 
     public function get_name()
     {
-        return 'woo-product-slider';
+        return 'eael-woo-product-slider';
     }
 
     public function get_title()
