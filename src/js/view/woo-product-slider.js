@@ -122,7 +122,7 @@ ea.hooks.addAction("init", "ea", () => {
 
 	};
 	elementorFrontend.hooks.addAction(
-		"frontend/element_ready/woo-product-slider.default",
+		"frontend/element_ready/eael-woo-product-slider.default",
 		wooProductSlider
 	);
 });
