@@ -3,7 +3,7 @@
 use \Essential_Addons_Elementor\Classes\Helper;
 
 /**
- * Template Name: Slider Default
+ * Template Name: Slider Preset 1
  */
 
 use Essential_Addons_Elementor\Elements\Woo_Product_Slider;
@@ -17,7 +17,6 @@ if ( ! $product ) {
     error_log( '$product not found in ' . __FILE__ );
     return;
 }
-$should_print_compare_btn = isset( $settings['show_compare'] ) && 'yes' === $settings['show_compare'];
 // Improvement
 $sale_badge_align = isset( $settings['eael_product_sale_badge_alignment'] ) ? $settings['eael_product_sale_badge_alignment'] : '';
 $sale_badge_preset = isset($settings['eael_product_sale_badge_preset']) ? $settings['eael_product_sale_badge_preset'] : '';
@@ -43,13 +42,6 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                 <div class="image-hover-wrap">
                     <ul class="icons-wrap box-style">
                             <li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart(); ?></li>
-                            <?php
-                            if ( $should_print_compare_btn ) {
-                                echo '<li class="add-to-compare">';
-	                            Woo_Product_Slider::print_compare_button( $product->get_id(), 'icon' );
-                                echo '</li>';
-                            }
-                            ?>
                             <?php if( $should_print_quick_view ){?>
                                 <li class="eael-product-quick-view">
                                     <a href="#eaproduct<?php echo $widget_id.$product->get_id(); ?>"
