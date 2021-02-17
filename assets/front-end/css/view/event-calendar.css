@@ -93,6 +93,7 @@
   color: #555;
   padding-top: 2px;
   display: inline-block;
+  text-transform: capitalize;
 }
 .eael-event-calendar-wrapper .eaelec-modal-header .eaelec-event-popup-date i {
   color: #5725ff;
