@@ -16,6 +16,7 @@ use Elementor\Modules\DynamicTags\Module as TagsModule;
 use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 
+
 class Creative_Button extends Widget_Base
 {
 
@@ -557,8 +558,11 @@ class Creative_Button extends Widget_Base
 
         $this->add_render_attribute('eael_creative_button', [
             'class' => ['eael-creative-button', esc_attr($settings['creative_button_effect'])],
-            'href'  => esc_attr($settings['creative_button_link_url']['url']),
         ]);
+
+        if ( ! empty( $settings['creative_button_link_url']['url'] ) ) {
+          $this->add_link_attributes( 'eael_creative_button', $settings['creative_button_link_url'] );
+        }
 
         if ($settings['creative_button_link_url']['is_external']) {
             $this->add_render_attribute('eael_creative_button', 'target', '_blank');
