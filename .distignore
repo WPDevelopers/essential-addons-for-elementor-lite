@@ -39,6 +39,5 @@ node_modules
 *.tar.gz
 *.zip
 src
-languages
 build
 postcss.config.js
