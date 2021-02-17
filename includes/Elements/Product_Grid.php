@@ -2897,20 +2897,7 @@ class Product_Grid extends Widget_Base
             $args['orderby'] = 'meta_value_num';
             $args['order'] = 'DESC';
         } else if ($settings['eael_product_grid_product_filter'] == 'sale-products') {
-            $args['meta_query'][] = [
-                'relation' => 'OR',
-                [
-                    'key' => '_sale_price',
-                    'value' => 0,
-                    'compare' => '>',
-                    'type' => 'numeric',
-                ], [
-                    'key' => '_min_variation_sale_price',
-                    'value' => 0,
-                    'compare' => '>',
-                    'type' => 'numeric',
-                ],
-            ];
+            $args['post__in']  = array_merge( array( 0 ), wc_get_product_ids_on_sale() );
         } else if ($settings['eael_product_grid_product_filter'] == 'top-products') {
             $args['meta_key'] = '_wc_average_rating';
             $args['orderby'] = 'meta_value_num';
