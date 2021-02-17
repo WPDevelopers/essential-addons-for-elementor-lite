@@ -220,7 +220,6 @@ class Image_Accordion extends Widget_Base {
                 'label_off'    => __( 'Hide', 'your-plugin' ),
                 'return_value' => 'yes',
                 'default'      => 'yes',
-                'label_block'  => true,
             ]
         );
 
