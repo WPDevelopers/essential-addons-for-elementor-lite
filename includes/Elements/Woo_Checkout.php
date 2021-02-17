@@ -38,6 +38,7 @@ class Woo_Checkout extends Widget_Base {
 			}
 
 			add_filter('body_class' , [$this, 'add_checkout_body_class']);
+      $this->eael_woocheckout_recurring();
 		}
 	}
 
@@ -2556,6 +2557,15 @@ class Woo_Checkout extends Widget_Base {
 		}
 		return $classes;
 	}
+
+
+  public function eael_woocheckout_recurring(){
+    if( class_exists('WC_Subscriptions_Cart') ) {
+      remove_action('woocommerce_review_order_after_order_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals' ), 10);
+      add_action('eael_display_recurring_total_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals'
+      ), 10);
+    }
+  }
 
 	protected function render() {
 	    if( !class_exists('woocommerce') ) {
