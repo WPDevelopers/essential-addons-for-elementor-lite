@@ -55,7 +55,7 @@ var EventCalendar = function ($scope, $) {
         e.preventDefault();
         e.stopPropagation();
         var startDate = event.start,
-          timeFormate = time_format ? "H:mm A" : "h:mm A",
+          timeFormate = time_format ? "H:mm" : "h:mm A",
           endDate = event.end,
           startSelector = $("span.eaelec-event-date-start"),
           endSelector = $("span.eaelec-event-date-end");
