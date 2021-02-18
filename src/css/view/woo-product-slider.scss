@@ -199,13 +199,16 @@
             display: flex;
 
             .product-image-wrap {
-                width: 30%;
+                width: 40%;
                 position: relative;
                 overflow: hidden;
             }
 
             .product-details-wrap {
-                width: 70%;
+                width: 60%;
+                margin: 30px 0;
+                padding: 45px;
+                border-left: 0 !important;
             }
         }
     }

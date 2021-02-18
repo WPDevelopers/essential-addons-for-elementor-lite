@@ -528,13 +528,14 @@ class Woo_Product_Slider extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-slider' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-woo-product-slider-container:not(.slider-preset-2) .eael-product-slider' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .slider-preset-2 .product-details-wrap' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
 
         $this->add_control(
-            'eael_peoduct_slider_margin',
+            'eael_product_slider_margin',
             [
                 'label' => __('Margin', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
@@ -570,7 +571,7 @@ class Woo_Product_Slider extends Widget_Base
                         'default' => '#eee',
                     ],
                 ],
-                'selector' => '{{WRAPPER}} .eael-product-slider',
+                'selector' => '{{WRAPPER}} .eael-product-slider-container:not(.slider-preset-2) .eael-product-slider, {{WRAPPER}} .slider-preset-2 .product-details-wrap',
             ]
         );
 
@@ -621,9 +622,12 @@ class Woo_Product_Slider extends Widget_Base
                 'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-slider' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
-                    '{{WRAPPER}} .slider-preset-2 .slider-overlay, {{WRAPPER}} .slider-preset-2 .eael-product-slider img' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
-                    '{{WRAPPER}} .slider-preset-1 .eael-product-slider img' => 'border-radius: {{TOP}}px {{RIGHT}}px 0 0;',
+                    '{{WRAPPER}} .eael-woo-product-slider-container:not(.slider-preset-2) .eael-product-slider' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
+                    '{{WRAPPER}} .carousel-preset-2 .slider-overlay, {{WRAPPER}} .slider-preset-2 .eael-product-slider img' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
+                    '{{WRAPPER}} .carousel-preset-1 .eael-product-slider img' => 'border-radius: {{TOP}}px {{RIGHT}}px 0 0;',
+
+                    '{{WRAPPER}} .slider-preset-2 .eael-product-slider img' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
+                    '{{WRAPPER}} .slider-preset-2 .eael-product-slider .product-details-wrap' => 'border-radius: 0 {{RIGHT}}px {{BOTTOM}}px 0;',
                 ],
             ]
         );

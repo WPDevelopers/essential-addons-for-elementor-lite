@@ -84,7 +84,6 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
 		            }
 		            ?>
                 </div>
-
             </div>
         </div>
     </li>
