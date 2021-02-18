@@ -1,5 +1,5 @@
 
-.eael-woo-product-slider-container {
+.eael-woo-product-carousel-container {
     .woocommerce {
         ul.products {
             //display: grid;
@@ -76,8 +76,8 @@
         }
     }
 
-    &.carousel-preset-1 {
-        .eael-product-slider {
+    &.preset-1 {
+        .eael-product-carousel {
             //border-radius: 20px;
             //background-color: green;
             text-align: left;
@@ -107,8 +107,8 @@
         }
     }
 
-    &.carousel-preset-2 {
-        .eael-product-slider {
+    &.preset-2 {
+        .eael-product-carousel {
             position: relative;
             overflow: hidden;
 
@@ -164,55 +164,6 @@
             }
         }
     }
-
-    &.slider-preset-1 {
-        .eael-product-slider {
-            display: flex;
-
-            .product-image-wrap {
-                width: 30%;
-                position: relative;
-                overflow: hidden;
-
-                &:hover {
-                    .icons-wrap {
-                        &.box-style {
-                            bottom: 30px;
-                            visibility: visible;
-                            opacity: 1;
-                        }
-                    }
-                }
-            }
-
-            .product-details-wrap {
-                width: 70%;
-            }
-        }
-
-
-    }
-
-
-    &.slider-preset-2 {
-        .eael-product-slider {
-            display: flex;
-
-            .product-image-wrap {
-                width: 40%;
-                position: relative;
-                overflow: hidden;
-            }
-
-            .product-details-wrap {
-                width: 60%;
-                margin: 30px 0;
-                padding: 45px;
-                border-left: 0 !important;
-            }
-        }
-    }
-
 
     .eael-onsale {
         padding: 5px 10px;
