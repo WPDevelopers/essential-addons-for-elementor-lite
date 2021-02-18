@@ -613,6 +613,25 @@ class Helper
 
     }
 
+	/**
+	 * Returns product categories list
+	 *
+	 * @return string
+	 */
+	public function get_product_categories_list() {
+		global $product;
+
+		if ( ! is_a( $product, 'WC_Product' ) ) {
+			return;
+		}
+
+		$separator = '';
+		$before    = '<ul class="eael-product-cats"><li>';
+		$after     = '</li></ul>';
+
+		return get_the_term_list( $product->get_id(), 'product_cat', $before, $separator, $after );
+	}
+
     /**
      * This function is responsible for counting doc post under a category.
      *

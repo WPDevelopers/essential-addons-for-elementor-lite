@@ -1,6 +1,7 @@
 ea.hooks.addAction("init", "ea", () => {
 	const wooProductSlider = function ($scope, $) {
 		var $wooProductSlider = $scope.find(".eael-woo-product-slider").eq(0),
+			$type = $wooProductSlider.data("type"),
 			$autoplay =
 				$wooProductSlider.data("autoplay") !== undefined
 					? $wooProductSlider.data("autoplay")
@@ -71,6 +72,7 @@ ea.hooks.addAction("init", "ea", () => {
 			grabCursor: $grab_cursor,
 			autoHeight: true,
 			loop: $loop,
+			slidesPerGroup: 1,
 			autoplay: {
 				delay: $autoplay
 			},
@@ -84,25 +86,32 @@ ea.hooks.addAction("init", "ea", () => {
 			}
 		};
 
-		if($effect === 'slide' || $effect === 'coverflow') {
-			$sliderOptions.breakpoints = {
-				1024: {
-					slidesPerView: $items,
-					spaceBetween: $margin
-				},
-				768: {
-					slidesPerView: $items_tablet,
-					spaceBetween: $margin_tablet
-				},
-				320: {
-					slidesPerView: $items_mobile,
-					spaceBetween: $margin_mobile
-				}
-			};
-		}else {
-			$sliderOptions.items = 1;
+		if($type === 'carousel'){
+			if($effect === 'slide' || $effect === 'coverflow') {
+				$sliderOptions.breakpoints = {
+					1024: {
+						slidesPerView: $items,
+						spaceBetween: $margin
+					},
+					768: {
+						slidesPerView: $items_tablet,
+						spaceBetween: $margin_tablet
+					},
+					320: {
+						slidesPerView: $items_mobile,
+						spaceBetween: $margin_mobile
+					}
+				};
+			}else {
+				$sliderOptions.items = 1;
+			}
+		} else {
+			if($effect === 'slide' || $effect === 'coverflow') {
+				$sliderOptions.slidesPerView= 1;
+			}else {
+				$sliderOptions.items = 1;
+			}
 		}
-
 
 
 		var eaelWooProductSlider = new Swiper($wooProductSlider, $sliderOptions);
@@ -122,9 +131,6 @@ ea.hooks.addAction("init", "ea", () => {
 
 		// Quick view
 		$(document).on("click", ".open-popup-link", function (e) {
-
-			$(this).toggleClass('transform');
-
 			e.preventDefault();
 			e.stopPropagation();
 			const $this = $(this);
