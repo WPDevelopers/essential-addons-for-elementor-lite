@@ -891,19 +891,19 @@ $config = [
 		        ],
 	        ],
         ],
-	    'woo-product-slider' => [
-		    'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Slider',
+	    'woo-product-carousel' => [
+		    'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Carousel',
 		    'dependency' => [
 			    'css' => [
 				    [
-					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-slider.min.css',
+					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-carousel.min.css',
 					    'type' => 'self',
 					    'context' => 'view',
 				    ],
 			    ],
 			    'js'  => [
 				    [
-					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-product-slider.min.js',
+					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-product-carousel.min.js',
 					    'type' => 'self',
 					    'context' => 'view',
 				    ],

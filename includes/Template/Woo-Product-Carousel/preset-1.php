@@ -3,10 +3,10 @@
 use \Essential_Addons_Elementor\Classes\Helper;
 
 /**
- * Template Name: Carousel Preset 1
+ * Template Name: Preset 1
  */
 
-use Essential_Addons_Elementor\Elements\Woo_Product_Slider;
+use Essential_Addons_Elementor\Elements\Woo_Product_carousel;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -21,22 +21,22 @@ if ( ! $product ) {
 $sale_badge_align = isset( $settings['eael_product_sale_badge_alignment'] ) ? $settings['eael_product_sale_badge_alignment'] : '';
 $sale_badge_preset = isset($settings['eael_product_sale_badge_preset']) ? $settings['eael_product_sale_badge_preset'] : '';
 // should print vars
-$should_print_rating = isset( $settings['eael_product_slider_rating'] ) && 'yes' === $settings['eael_product_slider_rating'];
-$should_print_quick_view = isset( $settings['eael_product_slider_quick_view'] ) && 'yes' === $settings['eael_product_slider_quick_view'];
-$should_print_price = isset( $settings['eael_product_slider_price'] ) && 'yes' === $settings['eael_product_slider_price'];
-$should_print_excerpt = isset( $settings['eael_product_slider_excerpt'] ) && ('yes' === $settings['eael_product_slider_excerpt'] && has_excerpt());
+$should_print_rating = isset( $settings['eael_product_carousel_rating'] ) && 'yes' === $settings['eael_product_carousel_rating'];
+$should_print_quick_view = isset( $settings['eael_product_carousel_quick_view'] ) && 'yes' === $settings['eael_product_carousel_quick_view'];
+$should_print_price = isset( $settings['eael_product_carousel_price'] ) && 'yes' === $settings['eael_product_carousel_price'];
+$should_print_excerpt = isset( $settings['eael_product_carousel_excerpt'] ) && ('yes' === $settings['eael_product_carousel_excerpt'] && has_excerpt());
 $widget_id = isset($settings['eael_widget_id']) ? $settings['eael_widget_id'] : null;
 
 
 if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
     ?>
     <li <?php post_class( ['product', 'swiper-slide'] ); ?>>
-        <div class="eael-product-slider">
+        <div class="eael-product-carousel">
             <div class="product-image-wrap">
                 <div class="image-wrap">
                     <?php
                     echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
-                    echo $product->get_image($settings['eael_product_slider_image_size_size'], ['loading' => 'eager']);
+                    echo $product->get_image($settings['eael_product_carousel_image_size_size'], ['loading' => 'eager']);
                     ?>
                 </div>
                 <div class="image-hover-wrap">

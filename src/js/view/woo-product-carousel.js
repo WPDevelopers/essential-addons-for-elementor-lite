@@ -1,70 +1,70 @@
 ea.hooks.addAction("init", "ea", () => {
-	const wooProductSlider = function ($scope, $) {
-		var $wooProductSlider = $scope.find(".eael-woo-product-slider").eq(0),
-			$type = $wooProductSlider.data("type"),
+	const wooProductCarousel = function ($scope, $) {
+		var $wooProductCarousel = $scope.find(".eael-woo-product-carousel").eq(0),
+			$type = $wooProductCarousel.data("type"),
 			$autoplay =
-				$wooProductSlider.data("autoplay") !== undefined
-					? $wooProductSlider.data("autoplay")
+				$wooProductCarousel.data("autoplay") !== undefined
+					? $wooProductCarousel.data("autoplay")
 					: 999999,
 			$pagination =
-				$wooProductSlider.data("pagination") !== undefined
-					? $wooProductSlider.data("pagination")
+				$wooProductCarousel.data("pagination") !== undefined
+					? $wooProductCarousel.data("pagination")
 					: ".swiper-pagination",
 			$arrow_next =
-				$wooProductSlider.data("arrow-next") !== undefined
-					? $wooProductSlider.data("arrow-next")
+				$wooProductCarousel.data("arrow-next") !== undefined
+					? $wooProductCarousel.data("arrow-next")
 					: ".swiper-button-next",
 			$arrow_prev =
-				$wooProductSlider.data("arrow-prev") !== undefined
-					? $wooProductSlider.data("arrow-prev")
+				$wooProductCarousel.data("arrow-prev") !== undefined
+					? $wooProductCarousel.data("arrow-prev")
 					: ".swiper-button-prev",
 			$items =
-				$wooProductSlider.data("items") !== undefined
-					? $wooProductSlider.data("items")
+				$wooProductCarousel.data("items") !== undefined
+					? $wooProductCarousel.data("items")
 					: 3,
 			$items_tablet =
-				$wooProductSlider.data("items-tablet") !== undefined
-					? $wooProductSlider.data("items-tablet")
+				$wooProductCarousel.data("items-tablet") !== undefined
+					? $wooProductCarousel.data("items-tablet")
 					: 3,
 			$items_mobile =
-				$wooProductSlider.data("items-mobile") !== undefined
-					? $wooProductSlider.data("items-mobile")
+				$wooProductCarousel.data("items-mobile") !== undefined
+					? $wooProductCarousel.data("items-mobile")
 					: 3,
 			$margin =
-				$wooProductSlider.data("margin") !== undefined
-					? $wooProductSlider.data("margin")
+				$wooProductCarousel.data("margin") !== undefined
+					? $wooProductCarousel.data("margin")
 					: 10,
 			$margin_tablet =
-				$wooProductSlider.data("margin-tablet") !== undefined
-					? $wooProductSlider.data("margin-tablet")
+				$wooProductCarousel.data("margin-tablet") !== undefined
+					? $wooProductCarousel.data("margin-tablet")
 					: 10,
 			$margin_mobile =
-				$wooProductSlider.data("margin-mobile") !== undefined
-					? $wooProductSlider.data("margin-mobile")
+				$wooProductCarousel.data("margin-mobile") !== undefined
+					? $wooProductCarousel.data("margin-mobile")
 					: 10,
 			$effect =
-				$wooProductSlider.data("effect") !== undefined
-					? $wooProductSlider.data("effect")
+				$wooProductCarousel.data("effect") !== undefined
+					? $wooProductCarousel.data("effect")
 					: "slide",
 			$speed =
-				$wooProductSlider.data("speed") !== undefined
-					? $wooProductSlider.data("speed")
+				$wooProductCarousel.data("speed") !== undefined
+					? $wooProductCarousel.data("speed")
 					: 400,
 			$loop =
-				$wooProductSlider.data("loop") !== undefined
-					? $wooProductSlider.data("loop")
+				$wooProductCarousel.data("loop") !== undefined
+					? $wooProductCarousel.data("loop")
 					: 0,
 			$grab_cursor =
-				$wooProductSlider.data("grab-cursor") !== undefined
-					? $wooProductSlider.data("grab-cursor")
+				$wooProductCarousel.data("grab-cursor") !== undefined
+					? $wooProductCarousel.data("grab-cursor")
 					: 0,
 			$pause_on_hover =
-				$wooProductSlider.data("pause-on-hover") !== undefined
-					? $wooProductSlider.data("pause-on-hover")
+				$wooProductCarousel.data("pause-on-hover") !== undefined
+					? $wooProductCarousel.data("pause-on-hover")
 					: "",
 			$centeredSlides = $effect == "coverflow" ? true : false;
 
-		var $sliderOptions = {
+		var $carouselOptions = {
 			direction: "horizontal",
 			speed: $speed,
 			effect: $effect,
@@ -86,46 +86,37 @@ ea.hooks.addAction("init", "ea", () => {
 			}
 		};
 
-		if($type === 'carousel'){
-			if($effect === 'slide' || $effect === 'coverflow') {
-				$sliderOptions.breakpoints = {
-					1024: {
-						slidesPerView: $items,
-						spaceBetween: $margin
-					},
-					768: {
-						slidesPerView: $items_tablet,
-						spaceBetween: $margin_tablet
-					},
-					320: {
-						slidesPerView: $items_mobile,
-						spaceBetween: $margin_mobile
-					}
-				};
-			}else {
-				$sliderOptions.items = 1;
-			}
-		} else {
-			if($effect === 'slide' || $effect === 'coverflow') {
-				$sliderOptions.slidesPerView= 1;
-			}else {
-				$sliderOptions.items = 1;
-			}
+		if($effect === 'slide' || $effect === 'coverflow') {
+			$carouselOptions.breakpoints = {
+				1024: {
+					slidesPerView: $items,
+					spaceBetween: $margin
+				},
+				768: {
+					slidesPerView: $items_tablet,
+					spaceBetween: $margin_tablet
+				},
+				320: {
+					slidesPerView: $items_mobile,
+					spaceBetween: $margin_mobile
+				}
+			};
+		}else {
+			$carouselOptions.items = 1;
 		}
 
-
-		var eaelWooProductSlider = new Swiper($wooProductSlider, $sliderOptions);
+		var eaelWooProductCarousel = new Swiper($wooProductCarousel, $carouselOptions);
 
 		if ($autoplay === 0) {
-			eaelWooProductSlider.autoplay.stop();
+			eaelWooProductCarousel.autoplay.stop();
 		}
 
 		if ($pause_on_hover && $autoplay !== 0) {
-			$wooProductSlider.on("mouseenter", function() {
-				eaelWooProductSlider.autoplay.stop();
+			$wooProductCarousel.on("mouseenter", function() {
+				eaelWooProductCarousel.autoplay.stop();
 			});
-			$wooProductSlider.on("mouseleave", function() {
-				eaelWooProductSlider.autoplay.start();
+			$wooProductCarousel.on("mouseleave", function() {
+				eaelWooProductCarousel.autoplay.start();
 			});
 		}
 
@@ -246,7 +237,7 @@ ea.hooks.addAction("init", "ea", () => {
 
 	};
 	elementorFrontend.hooks.addAction(
-		"frontend/element_ready/eael-woo-product-slider.default",
-		wooProductSlider
+		"frontend/element_ready/eael-woo-product-carousel.default",
+		wooProductCarousel
 	);
 });

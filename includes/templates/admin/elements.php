@@ -501,10 +501,10 @@ $elements = [
                 'is_pro' => true
             ],
             [
-                'key'   => 'woo-product-slider',
-                'title' => __( 'Woo Product Slider', 'essential-addons-for-elementor-lite'),
-                'demo_link' => 'https://essential-addons.com/elementor/woo-product-slider/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/woo-product-slider/'
+                'key'   => 'woo-product-carousel',
+                'title' => __( 'Woo Product Carousel', 'essential-addons-for-elementor-lite'),
+                'demo_link' => 'https://essential-addons.com/elementor/woo-product-carousel/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/woo-product-carousel/'
             ],
             [
                 'key'   => 'woo-checkout',
