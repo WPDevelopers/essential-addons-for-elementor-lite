@@ -634,24 +634,25 @@ class Helper
     public static function get_dynamic_args(array $settings, array $args)
     {
         if ($settings['post_type'] === 'source_dynamic' && is_archive()) {
-
             $data = get_queried_object();
             if (isset($data->post_type)) {
                 $args['post_type'] = $data->post_type;
-
                 $args['tax_query'] = [];
-
-                if ($data->taxonomy) {
-                    $args['tax_query'][] = [
-                        'taxonomy' => $data->taxonomy,
-                        'field' => 'term_id',
-                        'terms' => $data->term_id,
-                    ];
-                }
             } else {
                 global $wp_query;
-
                 $args['post_type'] = $wp_query->query_vars['post_type'];
+                if(!empty($wp_query->query_vars['s'])){
+                    $args['s'] = $wp_query->query_vars['s'];
+                    $args['offset'] = 0;
+                }
+            }
+
+            if ( isset( $data->taxonomy ) ) {
+                $args[ 'tax_query' ][] = [
+                    'taxonomy' => $data->taxonomy,
+                    'field'    => 'term_id',
+                    'terms'    => $data->term_id,
+                ];
             }
 
             if (get_query_var('author') > 0) {
