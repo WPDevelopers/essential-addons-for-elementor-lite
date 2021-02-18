@@ -1785,4 +1785,60 @@ trait Controls
 
         return $source;
     }
+
+	public static function nothing_found_style($wb){
+		$wb->start_controls_section(
+			'eael_section_nothing_found_style',
+			[
+				'label' => __('Nothing', 'essential-addons-for-elementor-lite'),
+				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+		$wb->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'eael_post_nothing_found_typography',
+				'selector' => '{{WRAPPER}} .eael-no-posts-found',
+			]
+		);
+		$wb->add_control(
+			'eael_post_nothing_found_color',
+			[
+				'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-no-posts-found' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		$wb->add_control(
+			'eael_post_nothing_found_bg_color',
+			[
+				'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-no-posts-found' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+		$wb->add_responsive_control(
+			'eael_post_nothing_found_padding',
+			[
+				'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', 'em', '%'],
+				'default'    => [
+					'top'      => "25",
+					'right'    => "25",
+					'bottom'   => "25",
+					'left'     => "25",
+					'isLinked' => true,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-no-posts-found' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$wb->end_controls_section();
+	}
 }
