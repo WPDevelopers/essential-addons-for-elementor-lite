@@ -2857,12 +2857,117 @@ class Product_Grid extends Widget_Base
             return;
         }
         $settings = $this->get_settings_for_display();
-        $args = HelperClass::get_query_args($settings);
-        $args = HelperClass::get_dynamic_args($settings, $args);
+
         // normalize for load more fix
         $settings['layout_mode'] = $settings["eael_product_grid_layout"];
         $widget_id = $this->get_id();
         $settings['eael_widget_id'] = $widget_id;
+        if ( $settings[ 'post_type' ] === 'source_dynamic' && is_archive() || !empty($_REQUEST['post_type'])) {
+            $settings[ 'posts_per_page' ] = $settings[ 'eael_product_grid_products_count' ] ?: 4;
+            $settings[ 'offset' ]         = $settings[ 'product_offset' ];
+            $args                         = HelperClass::get_query_args( $settings );
+            $args                         = HelperClass::get_dynamic_args( $settings, $args );
+        } else {
+            $args = $this->build_product_query( $settings );
+        }
+
+        $this->is_show_custom_add_to_cart = boolval($settings['show_add_to_cart_custom_text']);
+        $this->simple_add_to_cart_button_text = $settings['add_to_cart_simple_product_button_text'];
+        $this->variable_add_to_cart_button_text = $settings['add_to_cart_variable_product_button_text'];
+        $this->grouped_add_to_cart_button_text = $settings['add_to_cart_grouped_product_button_text'];
+        $this->external_add_to_cart_button_text = $settings['add_to_cart_external_product_button_text'];
+        $this->default_add_to_cart_button_text = $settings['add_to_cart_default_product_button_text'];
+
+        if (Plugin::$instance->documents->get_current()) {
+            $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
+        }
+        // render dom
+        $this->add_render_attribute('wrap', [
+            'class' => [
+                "eael-product-grid",
+                $settings['eael_product_grid_style_preset'],
+                $settings['eael_product_grid_layout']
+            ],
+            'id' => 'eael-product-grid',
+            'data-widget-id' => $widget_id,
+            'data-page-id' => $this->page_id,
+            'data-nonce' => wp_create_nonce('eael_product_grid'),
+        ]);
+
+        add_filter('woocommerce_product_add_to_cart_text', [
+            $this,
+            'add_to_cart_button_custom_text',
+        ]);
+        ?>
+
+        <div <?php $this->print_render_attribute_string('wrap'); ?> >
+            <div class="woocommerce">
+                <?php
+                do_action( 'eael_woo_before_product_loop' );
+                $template = $this->get_template($settings['eael_dynamic_template_Layout']);
+                if (file_exists($template)) {
+                    $query = new \WP_Query($args);
+                    if ($query->have_posts()) {
+                        echo '<ul class="products" data-layout-mode="' . $settings["eael_product_grid_layout"] . '">';
+                        while ($query->have_posts()) {
+                            $query->the_post();
+                            include($template);
+                        }
+                        wp_reset_postdata();
+                        echo '</ul>';
+                    } else {
+                        _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                    }
+                } else {
+                    _e('<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite');
+                }
+                if ( 'true' == $settings['show_pagination'] ) {
+                    $settings['eael_widget_name'] = $this->get_name();
+                    echo HelperClass::eael_pagination($args, $settings);
+                }
+
+
+                $this->print_load_more_button($settings, $args);
+                ?>
+            </div>
+        </div>
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>");
+                var $products = $('.products', $scope);
+                var $layout_mode = $products.data('layout-mode');
+                
+                if ($layout_mode === 'masonry') {
+                    // init isotope
+                    var $isotope_products = $products.isotope({
+                        itemSelector: "li.product",
+                        layoutMode: $layout_mode,
+                        percentPosition: true
+                    });
+
+                    $isotope_products.imagesLoaded().progress( function() {
+                        $isotope_products.isotope('layout');
+                    })
+
+                    $(window).on('resize', function() {
+                        $isotope_products.isotope('layout');
+                    });
+                }
+            });
+        </script>
+        <?php
+        remove_filter('woocommerce_product_add_to_cart_text', [
+            $this,
+            'add_to_cart_button_custom_text',
+        ]);
+    }
+
+    /**
+     * build_product_query
+     * @param $settings
+     * @return array
+     */
+    public function build_product_query( $settings ){
         $args = [
             'post_type' => 'product',
             'posts_per_page' => $settings['eael_product_grid_products_count'] ?: 4,
@@ -2956,97 +3061,6 @@ class Product_Grid extends Widget_Base
             $args['orderby'] = 'meta_value_num';
             $args['order'] = 'DESC';
         }
-
-
-        $this->is_show_custom_add_to_cart = boolval($settings['show_add_to_cart_custom_text']);
-        $this->simple_add_to_cart_button_text = $settings['add_to_cart_simple_product_button_text'];
-        $this->variable_add_to_cart_button_text = $settings['add_to_cart_variable_product_button_text'];
-        $this->grouped_add_to_cart_button_text = $settings['add_to_cart_grouped_product_button_text'];
-        $this->external_add_to_cart_button_text = $settings['add_to_cart_external_product_button_text'];
-        $this->default_add_to_cart_button_text = $settings['add_to_cart_default_product_button_text'];
-
-        if (Plugin::$instance->documents->get_current()) {
-            $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
-        }
-        // render dom
-        $this->add_render_attribute('wrap', [
-            'class' => [
-                "eael-product-grid",
-                $settings['eael_product_grid_style_preset'],
-                $settings['eael_product_grid_layout']
-            ],
-            'id' => 'eael-product-grid',
-            'data-widget-id' => $widget_id,
-            'data-page-id' => $this->page_id,
-            'data-nonce' => wp_create_nonce('eael_product_grid'),
-        ]);
-
-        add_filter('woocommerce_product_add_to_cart_text', [
-            $this,
-            'add_to_cart_button_custom_text',
-        ]);
-        ?>
-
-        <div <?php $this->print_render_attribute_string('wrap'); ?> >
-            <div class="woocommerce">
-                <?php
-                do_action( 'eael_woo_before_product_loop' );
-                $template = $this->get_template($settings['eael_dynamic_template_Layout']);
-                if (file_exists($template)) {
-                  error_log(print_r( $args, 1 ));
-                    $query = new \WP_Query($args);
-                    if ($query->have_posts()) {
-                        echo '<ul class="products" data-layout-mode="' . $settings["eael_product_grid_layout"] . '">';
-                        while ($query->have_posts()) {
-                            $query->the_post();
-                            include($template);
-                        }
-                        wp_reset_postdata();
-                        echo '</ul>';
-                    } else {
-                        _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
-                    }
-                } else {
-                    _e('<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite');
-                }
-                if ( 'true' == $settings['show_pagination'] ) {
-                    $settings['eael_widget_name'] = $this->get_name();
-                    echo HelperClass::eael_pagination($args, $settings);
-                }
-
-
-                $this->print_load_more_button($settings, $args);
-                ?>
-            </div>
-        </div>
-        <script type="text/javascript">
-            jQuery(document).ready(function($) {
-                var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>");
-                var $products = $('.products', $scope);
-                var $layout_mode = $products.data('layout-mode');
-                
-                if ($layout_mode === 'masonry') {
-                    // init isotope
-                    var $isotope_products = $products.isotope({
-                        itemSelector: "li.product",
-                        layoutMode: $layout_mode,
-                        percentPosition: true
-                    });
-
-                    $isotope_products.imagesLoaded().progress( function() {
-                        $isotope_products.isotope('layout');
-                    })
-
-                    $(window).on('resize', function() {
-                        $isotope_products.isotope('layout');
-                    });
-                }
-            });
-        </script>
-        <?php
-        remove_filter('woocommerce_product_add_to_cart_text', [
-            $this,
-            'add_to_cart_button_custom_text',
-        ]);
+        return $args;
     }
 }
