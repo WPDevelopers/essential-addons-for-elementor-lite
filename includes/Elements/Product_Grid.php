@@ -309,11 +309,50 @@ class Product_Grid extends Widget_Base
             'label' => esc_html__('Product Settings', 'essential-addons-for-elementor-lite'),
         ]);
 
+        $this->add_control(
+            'post_type',
+            [
+                'label'   => __( 'Source', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'product',
+                'options' => [
+                    'product'        => esc_html__( 'Products', 'essential-addons-for-elementor-lite' ),
+                    'source_dynamic' => esc_html__( 'Dynamic', 'essential-addons-for-elementor-lite' ),
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_global_dynamic_source_warning_text',
+            [
+                'type'            => Controls_Manager::RAW_HTML,
+                'raw'             => __( 'This option will only affect in <strong>Archive page of Elementor Theme Builder</strong> dynamically.', 'essential-addons-for-elementor-lite' ),
+                'content_classes' => 'eael-warning',
+                'condition'       => [
+                    'post_type' => 'source_dynamic',
+                ],
+            ]
+        );
+
+        if ( !apply_filters( 'eael/is_plugin_active', 'woocommerce/woocommerce.php' ) ) {
+            $this->add_control(
+                'ea_product_grid_woo_required',
+                [
+                    'type'            => Controls_Manager::RAW_HTML,
+                    'raw'             => __( '<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.', 'essential-addons-for-elementor-lite' ),
+                    'content_classes' => 'eael-warning',
+                ]
+            );
+        }
+
         $this->add_control('eael_product_grid_product_filter', [
             'label' => esc_html__('Filter By', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::SELECT,
             'default' => 'recent-products',
             'options' => $this->eael_get_product_filterby_options(),
+            'condition' => [
+              'post_type!' => 'source_dynamic',
+            ],
         ]);
 
         $this->add_control('orderby', [
@@ -356,6 +395,9 @@ class Product_Grid extends Widget_Base
             'label_block' => true,
             'multiple' => true,
             'options' => HelperClass::get_terms_list('product_cat', 'slug'),
+            'condition'   => [
+              'post_type!' => 'source_dynamic',
+            ],
         ]);
         $this->add_control(
             'eael_dynamic_template_Layout',
@@ -2815,6 +2857,8 @@ class Product_Grid extends Widget_Base
             return;
         }
         $settings = $this->get_settings_for_display();
+        $args = HelperClass::get_query_args($settings);
+        $args = HelperClass::get_dynamic_args($settings, $args);
         // normalize for load more fix
         $settings['layout_mode'] = $settings["eael_product_grid_layout"];
         $widget_id = $this->get_id();
@@ -2854,10 +2898,6 @@ class Product_Grid extends Widget_Base
                     'operator' => 'IN',
                 ],
             ];
-        }
-
-        if ('true' == $settings['show_load_more']) {
-            $args ['offset'] = $settings['product_offset'];
         }
 
         $args['meta_query'] = ['relation' => 'AND'];
@@ -2953,6 +2993,7 @@ class Product_Grid extends Widget_Base
                 do_action( 'eael_woo_before_product_loop' );
                 $template = $this->get_template($settings['eael_dynamic_template_Layout']);
                 if (file_exists($template)) {
+                  error_log(print_r( $args, 1 ));
                     $query = new \WP_Query($args);
                     if ($query->have_posts()) {
                         echo '<ul class="products" data-layout-mode="' . $settings["eael_product_grid_layout"] . '">';
