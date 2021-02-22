@@ -410,12 +410,6 @@ $elements = [
 		        'demo_link' => 'https://essential-addons.com/elementor/login-register-form',
 		        'doc_link' => 'https://essential-addons.com/elementor/docs/login-register-form/',
 	        ],
-            [
-		        'key'   => 'dummy-widget',
-		        'title' => __( 'Dummy Widget', 'essential-addons-elementor' ),
-		        'demo_link' => 'https://essential-addons.com/elementor/dummy-widget',
-		        'doc_link' => 'https://essential-addons.com/elementor/docs/dummy-widget/',
-	        ],
         ]
     ],
     'social-feed-elements'  => [
