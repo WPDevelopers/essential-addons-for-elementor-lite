@@ -419,11 +419,11 @@ msgstr ""
 msgid "Pricing Table"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:671, ../includes/Elements/Twitter_Feed.php:27, ../includes/templates/admin/elements.php:426
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:671, ../includes/Elements/Twitter_Feed.php:27, ../includes/templates/admin/elements.php:420
 msgid "Twitter Feed"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:676, ../includes/Elements/Facebook_Feed.php:28, ../includes/templates/admin/elements.php:446
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:676, ../includes/Elements/Facebook_Feed.php:28, ../includes/templates/admin/elements.php:440
 msgid "Facebook Feed"
 msgstr ""
 
@@ -467,35 +467,35 @@ msgstr ""
 msgid "Typeform"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:730, ../includes/templates/admin/elements.php:465
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:730, ../includes/templates/admin/elements.php:459
 msgid "Documentation Elements"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:734, ../includes/Elements/Betterdocs_Category_Grid.php:30, ../includes/templates/admin/elements.php:469
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:734, ../includes/Elements/Betterdocs_Category_Grid.php:30, ../includes/templates/admin/elements.php:463
 msgid "BetterDocs Category Grid"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:738, ../includes/Elements/Betterdocs_Category_Box.php:34, ../includes/templates/admin/elements.php:475
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:738, ../includes/Elements/Betterdocs_Category_Box.php:34, ../includes/templates/admin/elements.php:469
 msgid "BetterDocs Category Box"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:743, ../includes/Elements/Betterdocs_Search_Form.php:30, ../includes/templates/admin/elements.php:481
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:743, ../includes/Elements/Betterdocs_Search_Form.php:30, ../includes/templates/admin/elements.php:475
 msgid "BetterDocs Search Form"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:748, ../includes/templates/admin/elements.php:488
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:748, ../includes/templates/admin/elements.php:482
 msgid "WooCommerce Elements"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:752, ../includes/Elements/Product_Grid.php:47, ../includes/templates/admin/elements.php:492
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:752, ../includes/Elements/Product_Grid.php:47, ../includes/templates/admin/elements.php:486
 msgid "Product Grid"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:757, ../includes/Elements/Woo_Checkout.php:50, ../includes/templates/admin/elements.php:505
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:757, ../includes/Elements/Woo_Checkout.php:50, ../includes/templates/admin/elements.php:499
 msgid "Woo Checkout"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:761, ../includes/Elements/Woo_Product_Compare.php:34, ../includes/templates/admin/elements.php:511
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:761, ../includes/Elements/Woo_Product_Compare.php:34, ../includes/templates/admin/elements.php:505
 msgid "Woo Product Compare"
 msgstr ""
 
@@ -3039,7 +3039,7 @@ msgstr ""
 msgid "Title Bottom Space"
 msgstr ""
 
-#: ../includes/Elements/Filterable_Gallery.php:90, ../includes/Elements/Flip_Box.php:76, ../includes/Elements/Pricing_Table.php:77, ../includes/Traits/Core.php:45, ../includes/templates/admin/elements.php:571, ../includes/templates/admin/elements.php:554, ../includes/templates/admin/elements.php:551, ../includes/templates/admin/extensions.php:85
+#: ../includes/Elements/Filterable_Gallery.php:90, ../includes/Elements/Flip_Box.php:76, ../includes/Elements/Pricing_Table.php:77, ../includes/Traits/Core.php:45, ../includes/templates/admin/elements.php:565, ../includes/templates/admin/elements.php:548, ../includes/templates/admin/elements.php:545, ../includes/templates/admin/extensions.php:85
 msgid "Settings"
 msgstr ""
 
@@ -6994,7 +6994,7 @@ msgstr ""
 msgid "Essential Addons Settings"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:104, ../includes/templates/admin/elements.php:603, ../includes/templates/admin/extensions.php:106
+#: ../includes/Traits/Admin.php:104, ../includes/templates/admin/elements.php:597, ../includes/templates/admin/extensions.php:106
 msgid "Save settings"
 msgstr ""
 
@@ -7350,7 +7350,7 @@ msgstr ""
 msgid "Image Scroller"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:184, ../includes/templates/admin/elements.php:439
+#: ../includes/Traits/Elements.php:184, ../includes/templates/admin/elements.php:433
 msgid "Instagram Feed"
 msgstr ""
 
@@ -7362,7 +7362,7 @@ msgstr ""
 msgid "Interactive Promo"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:202, ../includes/templates/admin/elements.php:457
+#: ../includes/Traits/Elements.php:202, ../includes/templates/admin/elements.php:451
 msgid "LearnDash Course List"
 msgstr ""
 
@@ -7418,11 +7418,11 @@ msgstr ""
 msgid "Testimonial Slider"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:292, ../includes/templates/admin/elements.php:432
+#: ../includes/Traits/Elements.php:292, ../includes/templates/admin/elements.php:426
 msgid "Twitter Feed Carousel"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:298, ../includes/templates/admin/elements.php:498
+#: ../includes/Traits/Elements.php:298, ../includes/templates/admin/elements.php:492
 msgid "Woo Product Collections"
 msgstr ""
 
@@ -8182,15 +8182,15 @@ msgstr ""
 msgid "Price menu"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:422
+#: ../includes/templates/admin/elements.php:416
 msgid "Social Feed Elemens"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:453
+#: ../includes/templates/admin/elements.php:447
 msgid "LearnDash Elements"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:548, ../includes/templates/admin/extensions.php:83
+#: ../includes/templates/admin/elements.php:542, ../includes/templates/admin/extensions.php:83
 msgid "Pro"
 msgstr ""
 
