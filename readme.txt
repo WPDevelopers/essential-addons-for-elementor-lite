@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 5.0
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 4.5.0
+Stable tag: 4.5.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -227,7 +227,21 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 4.5.0 - 08/01/2021 =
+= 4.5.1 - 23/02/2021 =
+- Fixed: EA Login Register Form | ‘Security Token Does Not Match’ error
+- Fixed: EA Product Grid | Pagination disappearing with the latest update
+- Fixed: EA Product Grid | ‘Filtered by Sale’ not working for variable products
+- Fixed: EA Image Accordion | toggle option to add link in the content
+- Fixed: EA Event Calendar | Date showing invalid for All day events
+- Fixed: EA Advanced Data Table | Sorting not working on Mozilla Firefox
+- Fixed: EA Post Grid | ‘Dynamic’ query not working
+- Fixed: EA Event Calendar | 24 Hours format not working correctly
+- Fixed: EA Product Grid | ‘Filtered by Sale’ not working for variable products
+- Fixed: EA Sticky Video | Copy Link button not working
+- Fixed: EA Creative Button | Icon color not changing
+- Few minor bug fix and improvements
+
+= 4.5.0 - 08/02/2021 =
 - Added: Quick Setup wizard for new installations
 - Few minor bug fix and improvements
 
