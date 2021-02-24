@@ -49,7 +49,10 @@ ea.hooks.addAction("init", "ea", () => {
         function onloadLRcb() {
             let loginRecaptchaNode = document.getElementById('login-recaptcha-node-' + widgetId);
             let registerRecaptchaNode = document.getElementById('register-recaptcha-node-' + widgetId);
-
+            console.log()
+            if(typeof grecaptcha.render !="function"){
+                return false;
+            }
             if (loginRecaptchaNode) {
                 grecaptcha.render(loginRecaptchaNode, {
                     'sitekey': recaptchaSiteKey,
@@ -71,11 +74,18 @@ ea.hooks.addAction("init", "ea", () => {
             onloadLRcb();
         }else{
             // on frontend, load even is yet to fire, so wait and fire recaptcha
-            $(window).on('load',function () {
-                if (recaptchaAvailable){
+            let navData = window.performance.getEntriesByType("navigation");
+            if (navData.length > 0 && navData[0].loadEventEnd > 0) {
+                if (recaptchaAvailable) {
                     onloadLRcb();
                 }
-            });
+            } else {
+                $(window).on('load', function () {
+                    if (recaptchaAvailable) {
+                        onloadLRcb();
+                    }
+                });
+            }
         }
     };
     elementorFrontend.hooks.addAction("frontend/element_ready/eael-login-register.default", EALoginRegister);
