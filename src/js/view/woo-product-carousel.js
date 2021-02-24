@@ -33,7 +33,7 @@ ea.hooks.addAction("init", "ea", () => {
 			$margin =
 				$wooProductCarousel.data("margin") !== undefined
 					? $wooProductCarousel.data("margin")
-					: 10,
+					: 0,
 			$margin_tablet =
 				$wooProductCarousel.data("margin-tablet") !== undefined
 					? $wooProductCarousel.data("margin-tablet")
@@ -83,11 +83,9 @@ ea.hooks.addAction("init", "ea", () => {
 			navigation: {
 				nextEl: $arrow_next,
 				prevEl: $arrow_prev
-			}
-		};
-
-		if($effect === 'slide' || $effect === 'coverflow') {
-			$carouselOptions.breakpoints = {
+			},
+			slidesPerView: $items,
+			breakpoints: {
 				1024: {
 					slidesPerView: $items,
 					spaceBetween: $margin
@@ -100,10 +98,16 @@ ea.hooks.addAction("init", "ea", () => {
 					slidesPerView: $items_mobile,
 					spaceBetween: $margin_mobile
 				}
-			};
-		}else {
-			$carouselOptions.items = 1;
-		}
+			},
+		};
+
+		// if($effect === 'slide' || $effect === 'coverflow') {
+		// 	$carouselOptions.breakpoints = {
+		//
+		// 	};
+		// }else {
+		// 	$carouselOptions.items = $items;
+		// }
 
 		var eaelWooProductCarousel = new Swiper($wooProductCarousel, $carouselOptions);
 
