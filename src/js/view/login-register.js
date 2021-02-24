@@ -49,7 +49,7 @@ ea.hooks.addAction("init", "ea", () => {
         function onloadLRcb() {
             let loginRecaptchaNode = document.getElementById('login-recaptcha-node-' + widgetId);
             let registerRecaptchaNode = document.getElementById('register-recaptcha-node-' + widgetId);
-            console.log()
+
             if(typeof grecaptcha.render !="function"){
                 return false;
             }
