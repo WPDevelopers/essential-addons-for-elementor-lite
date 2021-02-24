@@ -170,7 +170,7 @@ class Bootstrap
 	    add_action( 'wp_ajax_nopriv_eael_product_grid', [$this, 'get_compare_table']);
 	    add_action( 'wp_ajax_eael_product_grid', [$this, 'get_compare_table']);
 
-        //handle select2 ajax search
+//        handle select2 ajax search
         add_action('wp_ajax_eael_select2_search_post', [$this, 'select2_ajax_posts_filter_autocomplete']);
         add_action('wp_ajax_nopriv_eael_select2_search_post', [$this, 'select2_ajax_posts_filter_autocomplete']);
 
@@ -217,8 +217,6 @@ class Bootstrap
         }
 
 	    if( class_exists( 'woocommerce' ) ) {
-		    add_action( 'wp_footer', [ $this, 'eael_product_grid_script' ] );
-
 		    // quick view
 		    add_action( 'eael_woo_single_product_image', 'woocommerce_show_product_images', 20 );
 		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
