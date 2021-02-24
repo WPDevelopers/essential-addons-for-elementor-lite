@@ -1,5 +1,10 @@
 
 .eael-woo-product-carousel-container {
+    //theme
+    ins {
+        background: transparent;
+    }
+
     .woocommerce {
         ul.products {
             //display: grid;
@@ -23,32 +28,14 @@
                     //margin-left: 10px !important;
                     //margin-right: 10px !important;
                 }
-                .eael-wc-compare{
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: space-around;
-                    cursor: pointer;
-                    color: #fff;
-                    background-color: #333;
-                    margin: 15px;
-                    &:hover {
-                        color: #fff;
-                        background-color: #333;
-                    }
-                }
-
-                .eael-wc-compare-loader{
-                    display: none;
-                    width: 1.5rem;
-                }
 
                 .star-rating {
-                    margin: 0 auto 5px;
-                    display: inline-block;
+                    margin: 0;
+                    display: block;
                     float: none;
                     height: 1em;
                     width: 5.6em;
-                    font-size: 1em;
+                    font-size: 14px !important;
                     line-height: 1em;
 
                     &:before {
@@ -76,12 +63,86 @@
         }
     }
 
+    .eael-woo-product-carousel{
+        &[data-items="1"], &[data-items="2"], &[data-items="3"], &[data-items="4"], &[data-items="5"], &[data-items="6"] {
+            .product.swiper-slide {
+                position: relative;
+                min-height: 1px;
+                //padding: 10px;
+                box-sizing: border-box;
+                width: 100%;
+
+            }
+        }
+
+        @media (min-width: 1025px) {
+            &[data-items="1"] .product.swiper-slide{
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+            &[data-items="2"] .product.swiper-slide{
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+            &[data-items="3"] .product.swiper-slide{
+                flex: 0 0 33.33333%;
+                max-width: 33.33333%;
+            }
+            &[data-items="4"] .product.swiper-slide{
+                flex: 0 0 25%;
+                max-width: 25%;
+            }
+            &[data-items="5"] .product.swiper-slide{
+                flex: 0 0 20%;
+                max-width: 20%;
+            }
+            &[data-items="6"] .product.swiper-slide{
+                flex: 0 0 16.66666%;
+                max-width: 16.66666%;
+            }
+        }
+    }
+    // col
+    .col-mob-1 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .col-mob-2 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .col-mob-3 {
+        flex: 0 0 33.33333%;
+        max-width: 33.33333%;
+    }
+
+    .col-mob-4 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+
+    .col-mob-5 {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+
+    .col-mob-6 {
+        flex: 0 0 16.66666%;
+        max-width: 16.66666%;
+    }
+
     &.preset-1 {
         .eael-product-carousel {
-            //border-radius: 20px;
-            //background-color: green;
+            border-radius: 20px;
+            background-color: #f5f7fd;
             text-align: left;
-            margin: 20px;
+            margin: 10px;
+
+            img {
+                border-radius: 20px 20px 0 0;
+            }
         }
 
         .product-image-wrap {
@@ -104,7 +165,17 @@
             align-items: center;
             justify-content: space-between;
             padding: 20px;
+
+            .product-details {
+                width: 60%;
+            }
+            .eael-product-price {
+                width: 40%;
+                text-align: right;
+            }
         }
+
+        .eael-product-title {}
     }
 
     &.preset-2 {
@@ -113,7 +184,7 @@
             overflow: hidden;
 
             &:hover {
-                .slider-overlay  {
+                .carousel-overlay  {
                     opacity: 1;
                 }
                 .product-overlay-content {
@@ -150,7 +221,7 @@
                 transition: all 0.3s ease-in-out 0s;
             }
 
-            .slider-overlay {
+            .carousel-overlay {
                 background: rgba(0,0,0,0.7);
                 position: absolute;
                 height: 100%;
@@ -296,7 +367,7 @@
 
     }
 
-    // slider
+    // Carousel
     .swiper-image-stretch {
         .product-image-wrap img {
             width: 100%;
@@ -305,10 +376,16 @@
 
     // title
     .eael-product-title h2 {
-        margin: 0;
-        font-size: 24px;
+        margin: 0 0 10px 0;
+        font-size: 18px;
         line-height: 1.2em;
         font-weight: 500;
+    }
+
+    // price
+    .eael-product-price{
+        font-size: 16px;
+        line-height: 1.5em;
     }
 
     // icon
