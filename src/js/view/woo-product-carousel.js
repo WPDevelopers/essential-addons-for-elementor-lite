@@ -37,11 +37,11 @@ ea.hooks.addAction("init", "ea", () => {
 			$margin_tablet =
 				$wooProductCarousel.data("margin-tablet") !== undefined
 					? $wooProductCarousel.data("margin-tablet")
-					: 10,
+					: 0,
 			$margin_mobile =
 				$wooProductCarousel.data("margin-mobile") !== undefined
 					? $wooProductCarousel.data("margin-mobile")
-					: 10,
+					: 0,
 			$effect =
 				$wooProductCarousel.data("effect") !== undefined
 					? $wooProductCarousel.data("effect")
@@ -84,7 +84,7 @@ ea.hooks.addAction("init", "ea", () => {
 				nextEl: $arrow_next,
 				prevEl: $arrow_prev
 			},
-			slidesPerView: $items,
+			// slidesPerView: $items,
 			breakpoints: {
 				1024: {
 					slidesPerView: $items,

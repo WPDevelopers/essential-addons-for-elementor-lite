@@ -43,7 +43,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'essential-addons-elementor' ];
+		return [ 'essential-addons-for-elementor-lite' ];
 	}
 
 	public function get_keywords() {
@@ -115,6 +115,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->eael_woo_product_carousel_query();
 
 		$this->eael_product_action_buttons();
+		$this->eael_product_badges();
 
 		// Style Controls---------------
 		$this->init_style_product_controls();
@@ -149,7 +150,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_responsive_control(
 			'items',
 			[
-				'label'      => __( 'Visible Product', 'essential-addons-elementor' ),
+				'label'      => __( 'Visible Product', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::NUMBER,
 				'default'    => 4,
 				'min'        => 1,
@@ -162,25 +163,25 @@ class Woo_Product_Carousel extends Widget_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-			'margin',
-			[
-				'label'      => __( 'Product Gap', 'essential-addons-elementor' ),
-				'type'       => Controls_Manager::SLIDER,
-				'default'    => [ 'size' => 0 ],
-				'range'      => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 100,
-						'step' => 1,
-					],
-				],
-				'size_units' => '',
-				'condition'  => [
-					'carousel_effect' => [ 'slide', 'coverflow' ],
-				],
-			]
-		);
+//		$this->add_responsive_control(
+//			'margin',
+//			[
+//				'label'      => __( 'Product Gap', 'essential-addons-for-elementor-lite' ),
+//				'type'       => Controls_Manager::SLIDER,
+//				'default'    => [ 'size' => 0 ],
+//				'range'      => [
+//					'px' => [
+//						'min'  => 0,
+//						'max'  => 100,
+//						'step' => 1,
+//					],
+//				],
+//				'size_units' => '',
+//				'condition'  => [
+//					'carousel_effect' => [ 'slide', 'coverflow' ],
+//				],
+//			]
+//		);
 
 		$this->end_controls_section();
 	}
@@ -320,23 +321,23 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'section_additional_options',
 			[
-				'label' => __( 'Carousel', 'essential-addons-elementor' ),
+				'label' => __( 'Carousel', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'carousel_effect',
 			[
-				'label'       => __( 'Effect', 'essential-addons-elementor' ),
-				'description' => __( 'Sets transition effect', 'essential-addons-elementor' ),
+				'label'       => __( 'Effect', 'essential-addons-for-elementor-lite' ),
+				'description' => __( 'Sets transition effect', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'slide',
 				'options'     => [
-					'slide'     => __( 'Slide', 'essential-addons-elementor' ),
-					'fade'      => __( 'Fade', 'essential-addons-elementor' ),
-					'cube'      => __( 'Cube', 'essential-addons-elementor' ),
-					'coverflow' => __( 'Coverflow', 'essential-addons-elementor' ),
-					'flip'      => __( 'Flip', 'essential-addons-elementor' ),
+					'slide'     => __( 'Slide', 'essential-addons-for-elementor-lite' ),
+					'fade'      => __( 'Fade', 'essential-addons-for-elementor-lite' ),
+					'cube'      => __( 'Cube', 'essential-addons-for-elementor-lite' ),
+					'coverflow' => __( 'Coverflow', 'essential-addons-for-elementor-lite' ),
+					'flip'      => __( 'Flip', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);
@@ -344,8 +345,8 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'slider_speed',
 			[
-				'label'       => __( 'Speed', 'essential-addons-elementor' ),
-				'description' => __( 'Duration of transition between slides (in ms)', 'essential-addons-elementor' ),
+				'label'       => __( 'Speed', 'essential-addons-for-elementor-lite' ),
+				'description' => __( 'Duration of transition between slides (in ms)', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::SLIDER,
 				'default'     => [ 'size' => 400 ],
 				'range'       => [
@@ -362,11 +363,11 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'autoplay',
 			[
-				'label'        => __( 'Autoplay', 'essential-addons-elementor' ),
+				'label'        => __( 'Autoplay', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => 'yes',
-				'label_on'     => __( 'Yes', 'essential-addons-elementor' ),
-				'label_off'    => __( 'No', 'essential-addons-elementor' ),
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 			]
 		);
@@ -374,7 +375,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'autoplay_speed',
 			[
-				'label'      => __( 'Autoplay Speed', 'essential-addons-elementor' ),
+				'label'      => __( 'Autoplay Speed', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'default'    => [ 'size' => 2000 ],
 				'range'      => [
@@ -394,11 +395,11 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'pause_on_hover',
 			[
-				'label'        => __( 'Pause On Hover', 'essential-addons-elementor' ),
+				'label'        => __( 'Pause On Hover', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => '',
-				'label_on'     => __( 'Yes', 'essential-addons-elementor' ),
-				'label_off'    => __( 'No', 'essential-addons-elementor' ),
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'condition'    => [
 					'autoplay' => 'yes',
@@ -409,11 +410,11 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'infinite_loop',
 			[
-				'label'        => __( 'Infinite Loop', 'essential-addons-elementor' ),
+				'label'        => __( 'Infinite Loop', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => 'yes',
-				'label_on'     => __( 'Yes', 'essential-addons-elementor' ),
-				'label_off'    => __( 'No', 'essential-addons-elementor' ),
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 			]
 		);
@@ -421,12 +422,12 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'grab_cursor',
 			[
-				'label'        => __( 'Grab Cursor', 'essential-addons-elementor' ),
-				'description'  => __( 'Shows grab cursor when you hover over the slider', 'essential-addons-elementor' ),
+				'label'        => __( 'Grab Cursor', 'essential-addons-for-elementor-lite' ),
+				'description'  => __( 'Shows grab cursor when you hover over the slider', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => '',
-				'label_on'     => __( 'Show', 'essential-addons-elementor' ),
-				'label_off'    => __( 'Hide', 'essential-addons-elementor' ),
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 			]
 		);
@@ -434,7 +435,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'navigation_heading',
 			[
-				'label'     => __( 'Navigation', 'essential-addons-elementor' ),
+				'label'     => __( 'Navigation', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -443,11 +444,11 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'arrows',
 			[
-				'label'        => __( 'Arrows', 'essential-addons-elementor' ),
+				'label'        => __( 'Arrows', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'default'      => 'yes',
-				'label_on'     => __( 'Yes', 'essential-addons-elementor' ),
-				'label_off'    => __( 'No', 'essential-addons-elementor' ),
+				'default'      => 'no',
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 			]
 		);
@@ -455,11 +456,11 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'dots',
 			[
-				'label'        => __( 'Dots', 'essential-addons-elementor' ),
+				'label'        => __( 'Dots', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => 'yes',
-				'label_on'     => __( 'Yes', 'essential-addons-elementor' ),
-				'label_off'    => __( 'No', 'essential-addons-elementor' ),
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 			]
 		);
@@ -543,15 +544,48 @@ class Woo_Product_Carousel extends Widget_Base {
 			]
 		);
 
+		$this->end_controls_section();
+	}
+
+	protected function eael_product_badges() {
+		$this->start_controls_section(
+			'eael_section_product_badges',
+			[
+				'label' => esc_html__( 'Sale / Stock Out Badge', 'essential-addons-for-elementor-lite' ),
+
+			]
+		);
 		$this->add_control(
-			'eael_product_action_buttons_preset',
+			'eael_product_sale_badge_preset',
 			[
 				'label'   => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::SELECT,
-				'default' => 'details-block-style',
+				'default' => 'sale-preset-1',
 				'options' => [
-					'details-block-style'   => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
-					'details-block-style-2' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
+					'sale-preset-1' => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
+					'sale-preset-2' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
+					'sale-preset-3' => esc_html__( 'Preset 3', 'essential-addons-for-elementor-lite' ),
+					'sale-preset-4' => esc_html__( 'Preset 4', 'essential-addons-for-elementor-lite' ),
+					'sale-preset-5' => esc_html__( 'Preset 5', 'essential-addons-for-elementor-lite' ),
+
+				]
+			]
+		);
+
+		$this->add_control(
+			'eael_product_sale_badge_alignment',
+			[
+				'label'   => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'left'  => [
+						'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-align-left',
+					],
+					'right' => [
+						'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-align-right',
+					],
 				],
 			]
 		);
@@ -568,32 +602,35 @@ class Woo_Product_Carousel extends Widget_Base {
 			]
 		);
 
-		//$this->add_responsive_control(
-//			'eael_product_carousel_alignment',
-//			[
-//				'label'     => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
-//				'type'      => \Elementor\Controls_Manager::CHOOSE,
-//				'options'   => [
-//					'left'   => [
-//						'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
-//						'icon'  => 'fa fa-align-left',
-//					],
-//					'center' => [
-//						'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
-//						'icon'  => 'fa fa-align-center',
-//					],
-//					'right'  => [
-//						'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
-//						'icon'  => 'fa fa-align-right',
-//					],
-//				],
-//				'default'   => 'center',
-//				'toggle'    => true,
-//				'selectors' => [
-//					'{{WRAPPER}} .eael-product-carousel' => 'text-align: {{VALUE}};',
-//				],
-//			]
-//		);
+		$this->add_responsive_control(
+			'eael_product_carousel_alignment',
+			[
+				'label'     => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::CHOOSE,
+				'options'   => [
+					'left'   => [
+						'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-align-center',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-align-right',
+					],
+				],
+				'default'   => 'center',
+				'toggle'    => true,
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-carousel .product-details-wrap' => 'text-align: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_dynamic_template_layout' => 'preset-3',
+				]
+			]
+		);
 
 		$this->add_control(
 			'eael_product_carousel_background_color',
@@ -604,10 +641,28 @@ class Woo_Product_Carousel extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-woo-product-carousel-container .eael-product-carousel' => 'background-color: {{VALUE}};',
 				],
+                'condition' => [
+	                'eael_dynamic_template_layout!' => 'preset-2',
+                ]
 			]
 		);
 
 		$this->add_control(
+			'eael_product_carousel_overlay_color',
+			[
+				'label'     => esc_html__( 'Overlay Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+//				'default'   => '#fff',
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-product-carousel-container .eael-product-carousel .carousel-overlay' => 'background: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_dynamic_template_layout' => 'preset-2',
+				]
+			]
+		);
+
+		$this->add_responsive_control(
 			'eael_product_carousel_margin',
 			[
 				'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
@@ -768,7 +823,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Product Title Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#272727',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-carousel .woocommerce-loop-product__title, {{WRAPPER}} .eael-product-carousel .eael-product-title h2' => 'color: {{VALUE}};',
 				],
@@ -796,7 +851,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Product Price Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#272727',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-carousel .price, {{WRAPPER}} .eael-product-carousel .eael-product-price' => 'color: {{VALUE}};',
 				],
@@ -877,7 +932,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#272727',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-carousel .eael-product-excerpt' => 'color: {{VALUE}};',
 				],
@@ -1906,7 +1961,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'section_dots_style',
 			[
-				'label'     => __( 'Dots', 'essential-addons-elementor' ),
+				'label'     => __( 'Dots', 'essential-addons-for-elementor-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'dots' => 'yes',
@@ -1917,11 +1972,11 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'dots_position',
 			[
-				'label'   => __( 'Position', 'essential-addons-elementor' ),
+				'label'   => __( 'Position', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [
-					'inside'  => __( 'Inside', 'essential-addons-elementor' ),
-					'outside' => __( 'Outside', 'essential-addons-elementor' ),
+					'inside'  => __( 'Inside', 'essential-addons-for-elementor-lite' ),
+					'outside' => __( 'Outside', 'essential-addons-for-elementor-lite' ),
 				],
 				'default' => 'outside',
 			]
@@ -1930,10 +1985,10 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'is_use_dots_custom_width_height',
 			[
-				'label'        => __( 'Use Custom Width/Height?', 'essential-addons-elementor' ),
+				'label'        => __( 'Use Custom Width/Height?', 'essential-addons-for-elementor-lite' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Yes', 'essential-addons-elementor' ),
-				'label_off'    => __( 'No', 'essential-addons-elementor' ),
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 			]
 		);
@@ -1941,7 +1996,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_responsive_control(
 			'dots_width',
 			[
-				'label'      => __( 'Width', 'essential-addons-elementor' ),
+				'label'      => __( 'Width', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [
 					'px' => [
@@ -1963,7 +2018,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_responsive_control(
 			'dots_height',
 			[
-				'label'      => __( 'Height', 'essential-addons-elementor' ),
+				'label'      => __( 'Height', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [
 					'px' => [
@@ -1985,7 +2040,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_responsive_control(
 			'dots_size',
 			[
-				'label'      => __( 'Size', 'essential-addons-elementor' ),
+				'label'      => __( 'Size', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [
 					'px' => [
@@ -2007,7 +2062,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_responsive_control(
 			'dots_spacing',
 			[
-				'label'      => __( 'Spacing', 'essential-addons-elementor' ),
+				'label'      => __( 'Spacing', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [
 					'px' => [
@@ -2028,14 +2083,14 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->start_controls_tab(
 			'tab_dots_normal',
 			[
-				'label' => __( 'Normal', 'essential-addons-elementor' ),
+				'label' => __( 'Normal', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'dots_color_normal',
 			[
-				'label'     => __( 'Color', 'essential-addons-elementor' ),
+				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -2048,7 +2103,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'dots_border_normal',
-				'label'       => __( 'Border', 'essential-addons-elementor' ),
+				'label'       => __( 'Border', 'essential-addons-for-elementor-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet',
@@ -2058,7 +2113,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'dots_border_radius_normal',
 			[
-				'label'      => __( 'Border Radius', 'essential-addons-elementor' ),
+				'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -2070,7 +2125,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_responsive_control(
 			'dots_padding',
 			[
-				'label'              => __( 'Padding', 'essential-addons-elementor' ),
+				'label'              => __( 'Padding', 'essential-addons-for-elementor-lite' ),
 				'type'               => Controls_Manager::DIMENSIONS,
 				'size_units'         => [ 'px', 'em', '%' ],
 				'allowed_dimensions' => 'vertical',
@@ -2089,7 +2144,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'sub_section_dots_active_mode',
 			[
-				'label'     => __( 'Dots Active Style', 'essential-addons-elementor' ),
+				'label'     => __( 'Dots Active Style', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -2098,7 +2153,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'active_dot_color_normal',
 			[
-				'label'     => __( 'Color', 'essential-addons-elementor' ),
+				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -2110,7 +2165,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_responsive_control(
 			'active_dots_width',
 			[
-				'label'      => __( 'Width', 'essential-addons-elementor' ),
+				'label'      => __( 'Width', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [
 					'px' => [
@@ -2129,7 +2184,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_responsive_control(
 			'active_dots_height',
 			[
-				'label'      => __( 'Height', 'essential-addons-elementor' ),
+				'label'      => __( 'Height', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [
 					'px' => [
@@ -2148,7 +2203,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'active_dots_radius',
 			[
-				'label'      => __( 'Border Radius', 'essential-addons-elementor' ),
+				'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -2161,7 +2216,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'active_dots_shadow',
-				'label'    => __( 'Shadow', 'essential-addons-elementor' ),
+				'label'    => __( 'Shadow', 'essential-addons-for-elementor-lite' ),
 				'selector' => '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet-active',
 			]
 		);
@@ -2171,14 +2226,14 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->start_controls_tab(
 			'tab_dots_hover',
 			[
-				'label' => __( 'Hover', 'essential-addons-elementor' ),
+				'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'dots_color_hover',
 			[
-				'label'     => __( 'Color', 'essential-addons-elementor' ),
+				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -2190,7 +2245,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'dots_border_color_hover',
 			[
-				'label'     => __( 'Border Color', 'essential-addons-elementor' ),
+				'label'     => __( 'Border Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -2213,7 +2268,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'section_arrows_style',
 			[
-				'label'     => __( 'Arrows', 'essential-addons-elementor' ),
+				'label'     => __( 'Arrows', 'essential-addons-for-elementor-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'arrows' => 'yes',
@@ -2224,23 +2279,23 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'arrow',
 			[
-				'label'       => __( 'Choose Arrow', 'essential-addons-elementor' ),
+				'label'       => __( 'Choose Arrow', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::SELECT,
 				'label_block' => true,
 				'default'     => 'fa fa-angle-right',
 				'options'     => [
-					'fa fa-angle-right'          => __( 'Angle', 'essential-addons-elementor' ),
-					'fa fa-angle-double-right'   => __( 'Double Angle', 'essential-addons-elementor' ),
-					'fa fa-chevron-right'        => __( 'Chevron', 'essential-addons-elementor' ),
-					'fa fa-chevron-circle-right' => __( 'Chevron Circle', 'essential-addons-elementor' ),
-					'fa fa-arrow-right'          => __( 'Arrow', 'essential-addons-elementor' ),
-					'fa fa-long-arrow-right'     => __( 'Long Arrow', 'essential-addons-elementor' ),
-					'fa fa-caret-right'          => __( 'Caret', 'essential-addons-elementor' ),
-					'fa fa-caret-square-o-right' => __( 'Caret Square', 'essential-addons-elementor' ),
-					'fa fa-arrow-circle-right'   => __( 'Arrow Circle', 'essential-addons-elementor' ),
-					'fa fa-arrow-circle-o-right' => __( 'Arrow Circle O', 'essential-addons-elementor' ),
-					'fa fa-toggle-right'         => __( 'Toggle', 'essential-addons-elementor' ),
-					'fa fa-hand-o-right'         => __( 'Hand', 'essential-addons-elementor' ),
+					'fa fa-angle-right'          => __( 'Angle', 'essential-addons-for-elementor-lite' ),
+					'fa fa-angle-double-right'   => __( 'Double Angle', 'essential-addons-for-elementor-lite' ),
+					'fa fa-chevron-right'        => __( 'Chevron', 'essential-addons-for-elementor-lite' ),
+					'fa fa-chevron-circle-right' => __( 'Chevron Circle', 'essential-addons-for-elementor-lite' ),
+					'fa fa-arrow-right'          => __( 'Arrow', 'essential-addons-for-elementor-lite' ),
+					'fa fa-long-arrow-right'     => __( 'Long Arrow', 'essential-addons-for-elementor-lite' ),
+					'fa fa-caret-right'          => __( 'Caret', 'essential-addons-for-elementor-lite' ),
+					'fa fa-caret-square-o-right' => __( 'Caret Square', 'essential-addons-for-elementor-lite' ),
+					'fa fa-arrow-circle-right'   => __( 'Arrow Circle', 'essential-addons-for-elementor-lite' ),
+					'fa fa-arrow-circle-o-right' => __( 'Arrow Circle O', 'essential-addons-for-elementor-lite' ),
+					'fa fa-toggle-right'         => __( 'Toggle', 'essential-addons-for-elementor-lite' ),
+					'fa fa-hand-o-right'         => __( 'Hand', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);
@@ -2248,7 +2303,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_responsive_control(
 			'arrows_size',
 			[
-				'label'      => __( 'Arrows Size', 'essential-addons-elementor' ),
+				'label'      => __( 'Arrows Size', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'default'    => [ 'size' => '22' ],
 				'range'      => [
@@ -2268,7 +2323,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_responsive_control(
 			'left_arrow_position',
 			[
-				'label'      => __( 'Align Left Arrow', 'essential-addons-elementor' ),
+				'label'      => __( 'Align Left Arrow', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [
 					'px' => [
@@ -2287,7 +2342,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_responsive_control(
 			'right_arrow_position',
 			[
-				'label'      => __( 'Align Right Arrow', 'essential-addons-elementor' ),
+				'label'      => __( 'Align Right Arrow', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => [
 					'px' => [
@@ -2308,14 +2363,14 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->start_controls_tab(
 			'tab_arrows_normal',
 			[
-				'label' => __( 'Normal', 'essential-addons-elementor' ),
+				'label' => __( 'Normal', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'arrows_bg_color_normal',
 			[
-				'label'     => __( 'Background Color', 'essential-addons-elementor' ),
+				'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -2327,7 +2382,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'arrows_color_normal',
 			[
-				'label'     => __( 'Color', 'essential-addons-elementor' ),
+				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -2340,7 +2395,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'        => 'arrows_border_normal',
-				'label'       => __( 'Border', 'essential-addons-elementor' ),
+				'label'       => __( 'Border', 'essential-addons-for-elementor-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'    => '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev',
@@ -2350,7 +2405,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'arrows_border_radius_normal',
 			[
-				'label'      => __( 'Border Radius', 'essential-addons-elementor' ),
+				'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -2364,14 +2419,14 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->start_controls_tab(
 			'tab_arrows_hover',
 			[
-				'label' => __( 'Hover', 'essential-addons-elementor' ),
+				'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'arrows_bg_color_hover',
 			[
-				'label'     => __( 'Background Color', 'essential-addons-elementor' ),
+				'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -2383,7 +2438,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'arrows_color_hover',
 			[
-				'label'     => __( 'Color', 'essential-addons-elementor' ),
+				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -2395,7 +2450,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_control(
 			'arrows_border_color_hover',
 			[
-				'label'     => __( 'Border Color', 'essential-addons-elementor' ),
+				'label'     => __( 'Border Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -2411,7 +2466,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_responsive_control(
 			'arrows_padding',
 			[
-				'label'      => __( 'Padding', 'essential-addons-elementor' ),
+				'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -2575,11 +2630,11 @@ class Woo_Product_Carousel extends Widget_Base {
 			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-items', $settings['items'] );
 			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'class', 'view-col-'.$settings['items'] );
 		}
-		if ( ! empty( $settings['items_tablet']['size'] ) ) {
-			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-items-tablet', $settings['items_tablet']['size'] );
+		if ( ! empty( $settings['items_tablet'] ) ) {
+			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-items-tablet', $settings['items_tablet'] );
 		}
-		if ( ! empty( $settings['items_mobile']['size'] ) ) {
-			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-items-mobile', $settings['items_mobile']['size'] );
+		if ( ! empty( $settings['items_mobile'] ) ) {
+			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-items-mobile', $settings['items_mobile'] );
 		}
 		if ( ! empty( $settings['margin']['size'] ) ) {
 			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-margin', $settings['margin']['size'] );

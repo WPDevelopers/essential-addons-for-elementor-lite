@@ -1,5 +1,7 @@
 
 $theme-preset1: #597dfc;
+$theme-preset2: #597dfc;
+$theme-preset3: #15da8b;
 
 .eael-woo-product-carousel-container {
     //theme
@@ -193,9 +195,23 @@ $theme-preset1: #597dfc;
     }
 
     &.preset-2 {
+        .swiper-pagination .swiper-pagination-bullet-active {
+            background: $theme-preset3;
+        }
+
         .eael-product-carousel {
             position: relative;
             overflow: hidden;
+            border-radius: 10px;
+            margin: 10px;
+
+            img, .product-image-wrap {
+                border-radius: 10px 10px 0 0;
+            }
+
+            .eael-onsale {
+                background: $theme-preset2;
+            }
 
             &:hover {
                 .carousel-overlay  {
@@ -248,7 +264,7 @@ $theme-preset1: #597dfc;
                 transition: all 0.4s ease-in-out 0s;
             }
 
-            .eael-product-title h2 {
+            .eael-product-title h2, .eael-product-excerpt {
                 color: #fff;
             }
 
@@ -260,8 +276,12 @@ $theme-preset1: #597dfc;
     }
 
     &.preset-3 {
+        .swiper-pagination .swiper-pagination-bullet-active {
+            background: $theme-preset3;
+        }
+
         .eael-product-carousel {
-            border-radius: 20px;
+            border-radius: 10px;
             background-color: #f5f7fd;
             text-align: left;
             margin: 10px;
@@ -277,7 +297,15 @@ $theme-preset1: #597dfc;
             }
 
             img {
-                border-radius: 20px 20px 0 0;
+                border-radius: 10px 10px 0 0;
+            }
+
+            .eael-onsale {
+                background: $theme-preset3;
+            }
+
+            .star-rating {
+                display: inline-block!important;
             }
         }
 
@@ -287,17 +315,21 @@ $theme-preset1: #597dfc;
         }
 
         .product-details-wrap {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            //display: flex;
+            //align-items: center;
+            //justify-content: space-between;
             padding: 20px;
 
             .product-details {
-                width: 60%;
+                //width: 60%;
             }
-            .eael-product-price {
-                width: 40%;
-                text-align: right;
+            //.eael-product-price {
+            //    width: 40%;
+            //    text-align: right;
+            //}
+
+            .eael-product-excerpt p {
+                margin-top: 5px;
             }
         }
 
@@ -511,6 +543,11 @@ position: relative;
         }
     }
 
+    // dot
+    &.swiper-container-wrap .swiper-pagination {
+        bottom: 0;
+    }
+
     // title
     .eael-product-title h2 {
         margin: 0 0 10px 0;
@@ -525,13 +562,25 @@ position: relative;
         line-height: 1.5em;
     }
 
+    // desc
+    .eael-product-excerpt p {
+        margin-bottom: 0;
+    }
+
     // icon
     .product.product-type-grouped,
     .product.product-type-external {
-        .icons-wrap li:first-child {
-            display: none;
+        .icons-wrap {
+            &.block-style {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            li:first-child {
+                display: none;
+            }
         }
+
     }
+
     .icons-wrap {
         padding: 0;
         list-style: none;
@@ -655,6 +704,12 @@ position: relative;
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    border-radius: 5px;
+                    color: $theme-preset2;
+
+                    &:hover {
+                        background: $theme-preset2;
+                    }
 
                     i {
                         line-height: 1rem;
@@ -704,7 +759,7 @@ position: relative;
         }
 
         &.block-style {
-            background: red;
+            background: $theme-preset3;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             height: 50px;
@@ -712,6 +767,7 @@ position: relative;
             top: auto;
             bottom: -50px;
             margin: 0;
+            color: #fff;
 
             &:before, &:after {
                 content: none;
@@ -719,7 +775,7 @@ position: relative;
 
             li {
                 //flex: 1;
-                border-left: 1px solid;
+                border-left: 1px solid #fff;
 
                 &:first-child{
                     border: none;
@@ -731,6 +787,12 @@ position: relative;
 
                 a {
                     position: relative;
+                    color: #fff;
+                    
+                    &:hover {
+                        background: transparent;
+                        color: #fff;
+                    }
 
                     &.added_to_cart {
                         font-size: 0;

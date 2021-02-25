@@ -41,23 +41,15 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                 </div>
                 <div class="image-hover-wrap">
                     <ul class="icons-wrap block-style">
-		                <?php if( $should_print_quick_view ){?>
+                        <li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart(); ?></li>
+	                    <?php if( $should_print_quick_view ){?>
                             <li class="eael-product-quick-view">
                                 <a href="#eaproduct<?php echo $widget_id.$product->get_id(); ?>"
                                    class="open-popup-link">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </li>
-		                <?php } ?>
-		                <?php
-		                if ( $should_print_compare_btn ) {
-			                echo '<li class="add-to-compare">';
-			                Product_Grid::print_compare_button( $product->get_id(), 'icon' );
-			                echo '</li>';
-		                }
-		                ?>
-                        <li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart();
-			                ?></li>
+	                    <?php } ?>
                         <li class="view-details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
 
                     </ul>
@@ -69,16 +61,22 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                 </div>
             </div>
             <div class="product-details-wrap">
-                <div class="product-details">
-                    <div class="eael-product-title"><h2><?php echo $product->get_title(); ?></h2></div>
-                    <?php if ($should_print_rating) {
-	                    echo wc_get_rating_html
-	                    ($product->get_average_rating(), $product->get_rating_count());
-                    } ?>
-                </div>
+                <div class="eael-product-title"><h2><?php echo $product->get_title(); ?></h2></div>
                 <?php if($should_print_price ){
                     echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
                 }?>
+	            <?php if ($should_print_rating) {
+		            echo wc_get_rating_html
+		            ($product->get_average_rating(), $product->get_rating_count());
+	            }
+	            if ( $should_print_excerpt ) {
+		            echo '<div class="eael-product-excerpt">';
+		            echo '<p>' . wp_trim_words(strip_shortcodes(get_the_excerpt()), $settings['eael_product_carousel_excerpt_length'],
+				            $settings['eael_product_carousel_excerpt_expanison_indicator']) . '</p>';
+		            echo '</div>';
+	            }
+	            ?>
+
             </div>
         </div>
     </li>
