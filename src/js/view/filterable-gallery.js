@@ -140,22 +140,40 @@ jQuery(window).on("elementor/frontend/init", function () {
 				// new items html
 				var i          = $init_show;
 				var item_found = 0;
-				while (i < $init_show + $images_per_page) {
-					if (filter_name != '' && filter_name != '*' && filter_enable) {
-						for (var j = i; j < $gallery_items.length; j++) {
-							var element = $($($gallery_items[j])[0]);
+				while (i < ($init_show + $images_per_page) && item_found<$images_per_page) {
+					if (filter_name !== '' && filter_name !== '*' && filter_enable) {
+						console.log($gallery_items)
+						for (let j in $gallery_items){
+							const index = parseInt(j)+i;
+							console.log("loop "+index)
+							console.log("j "+j)
+							console.log("i "+i)
+							let element = $($($gallery_items[index])[0]);
 							if (element.is(filter_name)) {
 								++item_found;
-								$items.push($($gallery_items[j])[0]);
-								delete $gallery_items[j];
+								$items.push($($gallery_items[index])[0]);
+								delete $gallery_items[index];
 								if (item_found === $images_per_page) {
 									break;
 								}
 							}
 						}
+						// for (let j = i; j < $gallery_items.length; j++) {
+						// 	let element = $($($gallery_items[j])[0]);
+						// 	if (element.is(filter_name)) {
+						// 		++item_found;
+						// 		$items.push($($gallery_items[j])[0]);
+						// 		delete $gallery_items[j];
+						// 		if (item_found === $images_per_page) {
+						// 			break;
+						// 		}
+						// 	}
+						// }
 						//break when cross $images_per_page or no image found
 						break;
 					} else {
+						++item_found;
+						console.log("outer "+i)
 						$items.push($($gallery_items[i])[0]);
 						delete $gallery_items[i];
 					}
