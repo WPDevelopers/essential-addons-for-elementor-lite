@@ -141,7 +141,6 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->eael_woo_product_carousel_query();
 
 		$this->eael_product_action_buttons();
-		$this->eael_product_badges();
 		$this->eael_woo_product_carousel_addtocart();
 
 		// Style Controls---------------
@@ -581,52 +580,6 @@ class Woo_Product_Carousel extends Widget_Base {
 				'options' => [
 					'details-block-style'   => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
 					'details-block-style-2' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
-				],
-			]
-		);
-
-		$this->end_controls_section();
-	}
-
-	protected function eael_product_badges() {
-		$this->start_controls_section(
-			'eael_section_product_badges',
-			[
-				'label' => esc_html__( 'Sale / Stock Out Badge', 'essential-addons-for-elementor-lite' ),
-
-			]
-		);
-		$this->add_control(
-			'eael_product_sale_badge_preset',
-			[
-				'label'   => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'sale-preset-1',
-				'options' => [
-					'sale-preset-1' => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
-					'sale-preset-2' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
-					'sale-preset-3' => esc_html__( 'Preset 3', 'essential-addons-for-elementor-lite' ),
-					'sale-preset-4' => esc_html__( 'Preset 4', 'essential-addons-for-elementor-lite' ),
-					'sale-preset-5' => esc_html__( 'Preset 5', 'essential-addons-for-elementor-lite' ),
-
-				]
-			]
-		);
-
-		$this->add_control(
-			'eael_product_sale_badge_alignment',
-			[
-				'label'   => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::CHOOSE,
-				'options' => [
-					'left'  => [
-						'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-align-left',
-					],
-					'right' => [
-						'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-align-right',
-					],
 				],
 			]
 		);
