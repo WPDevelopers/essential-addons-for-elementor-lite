@@ -196,7 +196,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			[
 				'label'      => __( 'Product Gap', 'essential-addons-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'default'    => [ 'size' => 10 ],
+				'default'    => [ 'size' => 0 ],
 				'range'      => [
 					'px' => [
 						'min'  => 0,
@@ -294,20 +294,20 @@ class Woo_Product_Carousel extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'eael_show_post_terms',
-			[
-				'label'        => __( 'Show Post Terms', 'essential-addons-for-elementor-lite' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
-//			    'condition' => [
-//				    'eael_show_image' => 'yes',
-//			    ],
-				'separator'    => 'before',
-			]
-		);
+//		$this->add_control(
+//			'eael_show_post_terms',
+//			[
+//				'label'        => __( 'Show Post Terms', 'essential-addons-for-elementor-lite' ),
+//				'type'         => Controls_Manager::SWITCHER,
+//				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+//				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+//				'return_value' => 'yes',
+////			    'condition' => [
+////				    'eael_show_image' => 'yes',
+////			    ],
+//				'separator'    => 'before',
+//			]
+//		);
 
 		$this->add_control(
 			'eael_post_terms',
@@ -861,7 +861,8 @@ class Woo_Product_Carousel extends Widget_Base {
 				'type'      => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-carousel' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
-					'{{WRAPPER}} .eael-product-carousel img' => 'border-radius: {{TOP}}px {{RIGHT}}px 0 0;',
+					'{{WRAPPER}} .eael-product-carousel img, {{WRAPPER}} .eael-product-carousel .product-image-wrap'
+                    => 'border-radius: {{TOP}}px {{RIGHT}}px 0 0;',
 				],
 			]
 		);
@@ -1087,11 +1088,11 @@ class Woo_Product_Carousel extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Sale Badge Background', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#ff2a13',
+				'default'   => '',
 				'selectors' => [
-					'{{WRAPPER}} .woocommerce ul.products li.product .onsale, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale' => 'background-color: {{VALUE}};',
-					'{{WRAPPER}} .eael-product-carousel .price ins, {{WRAPPER}} .eael-product-carousel .eael-product-price ins'                 => 'color: {{VALUE}};',
-					'{{WRAPPER}} .woocommerce ul.products li.product .eael-onsale:not(.outofstock).sale-preset-4:after'                     => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-carousel .onsale, {{WRAPPER}} .eael-product-carousel .eael-onsale' => 'background-color: {{VALUE}};',
+//					'{{WRAPPER}} .eael-product-carousel .price ins, {{WRAPPER}} .eael-product-carousel .eael-product-price ins'                 => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-carousel .eael-onsale:not(.outofstock).sale-preset-4:after'                     => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
 				],
 			]
 		);

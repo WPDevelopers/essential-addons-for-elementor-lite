@@ -13,13 +13,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 } // Exit if accessed directly
 
 $product = wc_get_product( get_the_ID() );
+
 if ( ! $product ) {
     error_log( '$product not found in ' . __FILE__ );
     return;
 }
-// Improvement
-$sale_badge_align = isset( $settings['eael_product_sale_badge_alignment'] ) ? $settings['eael_product_sale_badge_alignment'] : '';
-$sale_badge_preset = isset($settings['eael_product_sale_badge_preset']) ? $settings['eael_product_sale_badge_preset'] : '';
 // should print vars
 $should_print_rating = isset( $settings['eael_product_carousel_rating'] ) && 'yes' === $settings['eael_product_carousel_rating'];
 $should_print_quick_view = isset( $settings['eael_product_carousel_quick_view'] ) && 'yes' === $settings['eael_product_carousel_quick_view'];
@@ -35,7 +33,7 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
             <div class="product-image-wrap">
                 <div class="image-wrap">
                     <?php
-                    echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
+                    echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock sale-preset-5">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale sale-preset-5">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
                     echo $product->get_image($settings['eael_product_carousel_image_size_size'], ['loading' => 'eager']);
                     ?>
                 </div>
@@ -65,7 +63,15 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                     <?php if ($should_print_rating) {
 	                    echo wc_get_rating_html
 	                    ($product->get_average_rating(), $product->get_rating_count());
-                    } ?>
+                    }
+                    if ( $should_print_excerpt ) {
+	                    echo '<div class="eael-product-excerpt">';
+	                    echo '<p>' . wp_trim_words(strip_shortcodes(get_the_excerpt()), $settings['eael_product_carousel_excerpt_length'],
+                                $settings['eael_product_carousel_excerpt_expanison_indicator']) . '</p>';
+	                    echo '</div>';
+                    }
+                    ?>
+
                 </div>
                 <?php if($should_print_price ){
                     echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
