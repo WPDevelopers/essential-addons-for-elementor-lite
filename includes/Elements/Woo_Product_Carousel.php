@@ -25,12 +25,6 @@ class Woo_Product_Carousel extends Widget_Base {
 
 //    use Product_slider_Trait;
 
-	private $is_show_custom_add_to_cart = false;
-	private $simple_add_to_cart_button_text;
-	private $variable_add_to_cart_button_text;
-	private $grouped_add_to_cart_button_text;
-	private $external_add_to_cart_button_text;
-	private $default_add_to_cart_button_text;
 	/**
 	 * @var int
 	 */
@@ -57,12 +51,12 @@ class Woo_Product_Carousel extends Widget_Base {
 			'woo',
 			'woocommerce',
 			'ea woocommerce',
-			'ea woo product slider',
-			'ea woocommerce product slider',
+			'ea woo product carousel',
+			'ea woocommerce product carousel',
 			'woo commerce',
 			'ea woo commerce',
 			'product gallery',
-			'woocommerce slider',
+			'woocommerce carousel',
 			'gallery',
 			'ea',
 			'essential addons',
@@ -70,7 +64,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	}
 
 	public function get_custom_help_url() {
-		return 'https://essential-addons.com/elementor/docs/woocommerce-product-slider/';
+		return 'https://essential-addons.com/elementor/docs/woocommerce-product-carousel/';
 	}
 
 	public function get_style_depends() {
@@ -84,26 +78,6 @@ class Woo_Product_Carousel extends Widget_Base {
 		return [
 			'font-awesome-4-shim',
 		];
-	}
-
-	public function add_to_cart_button_custom_text( $default ) {
-		if ( $this->is_show_custom_add_to_cart ) {
-			global $product;
-			switch ( $product->get_type() ) {
-				case 'external':
-					return $this->external_add_to_cart_button_text;
-				case 'grouped':
-					return $this->grouped_add_to_cart_button_text;
-				case 'simple':
-					return $this->simple_add_to_cart_button_text;
-				case 'variable':
-					return $this->variable_add_to_cart_button_text;
-				default:
-					return $this->default_add_to_cart_button_text;
-			}
-		}
-
-		return $default;
 	}
 
 	protected function eael_get_product_orderby_options() {
@@ -141,7 +115,6 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->eael_woo_product_carousel_query();
 
 		$this->eael_product_action_buttons();
-		$this->eael_woo_product_carousel_addtocart();
 
 		// Style Controls---------------
 		$this->init_style_product_controls();
@@ -149,7 +122,6 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->eael_woo_product_carousel_terms_style();
 
 		do_action( 'eael/controls/nothing_found_style', $this );
-		$this->eael_woo_product_carousel_addtocart_style();
 		$this->eael_woo_product_carousel_buttons_style();
 		$this->eael_product_view_popup_style();
 		$this->eael_woo_product_carousel_dots();
@@ -587,95 +559,6 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	protected function eael_woo_product_carousel_addtocart() {
-		$this->start_controls_section(
-			'eael_product_carousel_add_to_cart_section',
-			[
-				'label' => esc_html__( 'Add To Cart', 'essential-addons-for-elementor-lite' ),
-			]
-		);
-
-		$this->add_control(
-			'show_add_to_cart_custom_text',
-			[
-				'label'        => __( 'Show Add to cart custom text', 'essential-addons-for-elementor-lite' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'true',
-				'default'      => '',
-			]
-		);
-
-		$this->add_control(
-			'add_to_cart_simple_product_button_text',
-			[
-				'label'       => esc_html__( 'Simple Product', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::TEXT,
-				'dynamic'     => [ 'active' => true ],
-				'label_block' => false,
-				'default'     => esc_html__( 'Buy Now', 'essential-addons-for-elementor-lite' ),
-				'condition'   => [
-					'show_add_to_cart_custom_text' => 'true',
-				],
-			]
-		);
-		$this->add_control(
-			'add_to_cart_variable_product_button_text',
-			[
-				'label'       => esc_html__( 'Variable Product', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::TEXT,
-				'dynamic'     => [ 'active' => true ],
-				'label_block' => false,
-				'default'     => esc_html__( 'Select options', 'essential-addons-for-elementor-lite' ),
-				'condition'   => [
-					'show_add_to_cart_custom_text' => 'true',
-				],
-			]
-		);
-		$this->add_control(
-			'add_to_cart_grouped_product_button_text',
-			[
-				'label'       => esc_html__( 'Grouped Product', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::TEXT,
-				'dynamic'     => [ 'active' => true ],
-				'label_block' => false,
-				'default'     => esc_html__( 'View products', 'essential-addons-for-elementor-lite' ),
-				'condition'   => [
-					'show_add_to_cart_custom_text' => 'true',
-				],
-			]
-		);
-		$this->add_control(
-			'add_to_cart_external_product_button_text',
-			[
-				'label'       => esc_html__( 'External Product', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::TEXT,
-				'dynamic'     => [ 'active' => true ],
-				'label_block' => false,
-				'default'     => esc_html__( 'Buy Now', 'essential-addons-for-elementor-lite' ),
-				'condition'   => [
-					'show_add_to_cart_custom_text' => 'true',
-				],
-			]
-		);
-		$this->add_control(
-			'add_to_cart_default_product_button_text',
-			[
-				'label'       => esc_html__( 'Default Product', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::TEXT,
-				'dynamic'     => [ 'active' => true ],
-				'label_block' => false,
-				'default'     => esc_html__( 'Read More', 'essential-addons-for-elementor-lite' ),
-				'condition'   => [
-					'show_add_to_cart_custom_text' => 'true',
-				],
-			]
-		);
-
-		$this->end_controls_section(); # end of section 'add to cart'
-	}
-
 	protected function init_style_product_controls() {
 		$this->start_controls_section(
 			'eael_product_carousel_styles',
@@ -719,8 +602,7 @@ class Woo_Product_Carousel extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 //				'default'   => '#fff',
 				'selectors' => [
-					'{{WRAPPER}} .eael-woo-product-carousel-container:not(.slider-preset-2) .eael-product-carousel' => 'background-color: {{VALUE}};',
-					'{{WRAPPER}} .slider-preset-2 .product-details-wrap'=> 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-woo-product-carousel-container .eael-product-carousel' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1099,191 +981,6 @@ class Woo_Product_Carousel extends Widget_Base {
 				'selector' => '{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock',
 			]
 		);
-
-		$this->end_controls_section();
-	}
-
-	protected function eael_woo_product_carousel_addtocart_style() {
-// add to cart button
-		$this->start_controls_section(
-			'eael_section_product_carousel_add_to_cart_styles',
-			[
-				'label' => esc_html__( 'Add to Cart Button Styles', 'essential-addons-for-elementor-lite' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-
-			]
-		);
-
-		$this->add_control(
-			'eael_product_carousel_add_to_cart_padding',
-			[
-				'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'selectors'  => [
-					'{{WRAPPER}} .eael-product-carousel .woocommerce li.product .button.add_to_cart_button,
-                    {{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link,
-                    {{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_product_carousel_add_to_cart_radius',
-			[
-				'label'      => __( 'Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'selectors'  => [
-					'{{WRAPPER}} .eael-product-carousel .woocommerce li.product .button.add_to_cart_button,
-                    {{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link,
-                    {{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-		$this->add_control(
-			'eael_product_carousel_add_to_cart_is_gradient_bg',
-			[
-				'label'        => __( 'Use Gradient Background', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
-			]
-		);
-
-		$this->start_controls_tabs( 'eael_product_carousel_add_to_cart_style_tabs' );
-
-		$this->start_controls_tab( 'normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ) ] );
-
-		$this->add_control(
-			'eael_product_carousel_add_to_cart_color',
-			[
-				'label'     => esc_html__( 'Button Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-product-carousel .woocommerce li.product .button.add_to_cart_button'                               => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link'  => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
-			[
-				'name'      => 'eael_product_carousel_add_to_cart_gradient_background',
-				'label'     => __( 'Background', 'essential-addons-for-elementor-lite' ),
-				'types'     => [ 'classic', 'gradient' ],
-				'selector'  => '{{WRAPPER}} .eael-product-carousel .woocommerce li.product .button.add_to_cart_button,
-                {{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link,
-                {{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart',
-				'condition' => [
-					'eael_product_carousel_add_to_cart_is_gradient_bg' => 'yes'
-				]
-			]
-		);
-
-		$this->add_control(
-			'eael_product_carousel_add_to_cart_background',
-			[
-				'label'     => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#333',
-				'selectors' => [
-					'{{WRAPPER}} .eael-product-carousel .woocommerce li.product .button.add_to_cart_button'                               => 'background-color: {{VALUE}};',
-					'{{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link'  => 'background-color: {{VALUE}};',
-					'{{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart' => 'background-color: {{VALUE}};',
-				],
-				'condition' => [
-					'eael_product_carousel_add_to_cart_is_gradient_bg' => ''
-				]
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'     => 'eael_product_carousel_add_to_cart_border',
-				'selector' => '{{WRAPPER}} .eael-product-carousel .woocommerce li.product .button.add_to_cart_button, {{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link, {{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart',
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name'     => 'eael_product_carousel_add_to_cart_typography',
-				'selector' => '{{WRAPPER}} .eael-product-carousel .woocommerce li.product .button.add_to_cart_button',
-
-			]
-		);
-
-		$this->end_controls_tab();
-
-		$this->start_controls_tab( 'eael_product_carousel_add_to_cart_hover_styles', [ 'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ) ] );
-
-		$this->add_control(
-			'eael_product_carousel_add_to_cart_hover_color',
-			[
-				'label'     => esc_html__( 'Button Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-product-carousel .woocommerce li.product .button.add_to_cart_button:hover'                               => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link:hover'  => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:hover' => 'color: {{VALUE}};',
-				],
-			]
-		);
-		$this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
-			[
-				'name'      => 'eael_product_carousel_add_to_cart_hover_gradient_background',
-				'label'     => __( 'Background', 'essential-addons-for-elementor-lite' ),
-				'types'     => [ 'classic', 'gradient' ],
-				'selector'  => '{{WRAPPER}} .eael-product-carousel .woocommerce li.product .button.add_to_cart_button:hover,
-                {{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link:hover,
-                {{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:hover',
-				'condition' => [
-					'eael_product_carousel_add_to_cart_is_gradient_bg' => 'yes'
-				]
-			]
-		);
-		$this->add_control(
-			'eael_product_carousel_add_to_cart_hover_background',
-			[
-				'label'     => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#333',
-				'selectors' => [
-					'{{WRAPPER}} .eael-product-carousel .woocommerce li.product .button.add_to_cart_button:hover'                               => 'background-color: {{VALUE}};',
-					'{{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link:hover'  => 'background-color: {{VALUE}};',
-					'{{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:hover' => 'background-color: {{VALUE}};',
-				],
-				'condition' => [
-					'eael_product_carousel_add_to_cart_is_gradient_bg' => '',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_product_carousel_add_to_cart_hover_border_color',
-			[
-				'label'     => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '',
-				'selectors' => [
-					'{{WRAPPER}} .eael-product-carousel .woocommerce li.product .button.add_to_cart_button:hover'                               => 'border-color: {{VALUE}};',
-					'{{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link:hover'  => 'border-color: {{VALUE}};',
-					'{{WRAPPER}} .eael-product-carousel.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:hover' => 'border-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->end_controls_tab();
-
-		$this->end_controls_tabs();
 
 		$this->end_controls_section();
 	}
@@ -2830,14 +2527,6 @@ class Woo_Product_Carousel extends Widget_Base {
 			$args['order']    = 'DESC';
 		}
 
-
-		$this->is_show_custom_add_to_cart       = boolval( $settings['show_add_to_cart_custom_text'] );
-		$this->simple_add_to_cart_button_text   = $settings['add_to_cart_simple_product_button_text'];
-		$this->variable_add_to_cart_button_text = $settings['add_to_cart_variable_product_button_text'];
-		$this->grouped_add_to_cart_button_text  = $settings['add_to_cart_grouped_product_button_text'];
-		$this->external_add_to_cart_button_text = $settings['add_to_cart_external_product_button_text'];
-		$this->default_add_to_cart_button_text  = $settings['add_to_cart_default_product_button_text'];
-
 		if ( Plugin::$instance->documents->get_current() ) {
 			$this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
 		}
@@ -2848,7 +2537,7 @@ class Woo_Product_Carousel extends Widget_Base {
 				'eael-woo-product-carousel-container',
 				$settings['eael_dynamic_template_layout'],
 			],
-			'id'             => 'eael-product-slider-' . esc_attr( $this->get_id() ),
+			'id'             => 'eael-product-carousel-' . esc_attr( $this->get_id() ),
 			'data-widget-id' => $widget_id,
 //            'data-page-id' => $this->page_id,
 //            'data-nonce' => wp_create_nonce('eael_product_grid'),
@@ -2930,11 +2619,6 @@ class Woo_Product_Carousel extends Widget_Base {
 		if ( $settings['dots'] == 'yes' ) {
 			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-dots', '1' );
 		}
-
-		add_filter( 'woocommerce_product_add_to_cart_text', [
-			$this,
-			'add_to_cart_button_custom_text',
-		] );
 		?>
 
         <div <?php $this->print_render_attribute_string( 'container' ); ?> >
@@ -2976,10 +2660,6 @@ class Woo_Product_Carousel extends Widget_Base {
 			?>
         </div>
 		<?php
-		remove_filter( 'woocommerce_product_add_to_cart_text', [
-			$this,
-			'add_to_cart_button_custom_text',
-		] );
 	}
 
 	//changes
