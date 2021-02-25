@@ -337,72 +337,101 @@ $theme-preset3: #15da8b;
     }
 
     &.preset-4 {
+        .swiper-pagination .swiper-pagination-bullet-active {
+            background: $theme-preset3;
+        }
+
         .eael-product-carousel {
-            border-radius: 20px;
-            background-color: #f5f7fd;
-            text-align: left;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
             margin: 10px;
 
-            img {
-                border-radius: 20px 20px 0 0;
+            img, .product-image-wrap {
+                border-radius: 10px 10px 0 0;
+            }
+
+            .eael-onsale {
+                background: $theme-preset2;
             }
 
             &:hover {
-                .test {
-                    //transform: translateY(0);
+                .carousel-overlay  {
+                    opacity: 1;
                 }
-                .product-details {
-                    //transform: translateY(0);
-                    bottom: 0;
+                .product-overlay-content {
+                    bottom: 10px;
+                    opacity: 1;
+                }
+
+                //// icon
+                //.icons-wrap li {
+                //    transform: translateX(-70px);
+                //}
+
+            }
+
+            .icons-wrap {
+                bottom: 0;
+                position: relative;
+
+                &.box-style{
+                    visibility: visible;
+                    opacity: 1;
+                    justify-content: flex-start;
+                    margin: 10px 0 5px;
                 }
             }
-        }
 
-        .product-image-wrap {
-            //position: relative;
-            //overflow: hidden;
+            .product-overlay-content {
+                position: absolute;
+                padding-left: 1em;
+                padding-right: 1em;
+                width: 100%;
+                top: auto;
+                bottom: -100px;
+                left: 0;
+                opacity: 0;
+                //transform: translate(-50%, -50%);
+                transition: all 0.3s ease-in-out 0s;
+            }
 
-            //&:hover {
-            //    .icons-wrap {
-            //        &.box-style {
-            //            bottom: 30px;
-            //            visibility: visible;
-            //            opacity: 1;
-            //        }
-            //    }
-            //}
-        }
+            .carousel-overlay {
+                background: rgba(0,0,0,0.7);
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                opacity: 0;
+                transition: all 0.4s ease-in-out 0s;
+            }
 
-        .product-details-wrap {
-position: relative;
-            //margin-top: -50px;
-            background: red;
-            margin: -50px 20px 0;
-
-            //display: flex;
-            //align-items: center;
-            //justify-content: space-between;
-            padding: 20px;
-            overflow: hidden;
+            .eael-product-title h2, .eael-product-excerpt {
+                color: #fff;
+            }
 
             .product-details {
-                //transform: translateY(50px);
-                transition: 0.5s;
-                bottom: -40px;
-            }
-            .test {
-                width: 100%;
-                height: 30px;
-                transition: 0.5s;
-                //transform: translateY(-50px);
-            }
-            //.eael-product-price {
-            //    width: 40%;
-            //    text-align: right;
-            //}
-        }
+                display: flex;
+                justify-content: space-between;
+                //align-content: end;
 
-        .eael-product-title {}
+                .eael-product-title {
+                    width: 60%;
+                }
+                .eael-product-price {
+                    width: 40%;
+                    text-align: right;
+                }
+            }
+
+            .eael-product-price{
+                margin-top: 15px;
+                color: #fff;
+            }
+        }
     }
 
     .eael-onsale {
