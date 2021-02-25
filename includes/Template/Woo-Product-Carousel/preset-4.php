@@ -3,7 +3,7 @@
 use \Essential_Addons_Elementor\Classes\Helper;
 
 /**
- * Template Name: Preset 3
+ * Template Name: Preset 4
  */
 
 use Essential_Addons_Elementor\Elements\Woo_Product_carousel;
@@ -40,27 +40,18 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                     ?>
                 </div>
                 <div class="image-hover-wrap">
-                    <ul class="icons-wrap block-style">
-		                <?php if( $should_print_quick_view ){?>
-                            <li class="eael-product-quick-view">
-                                <a href="#eaproduct<?php echo $widget_id.$product->get_id(); ?>"
-                                   class="open-popup-link">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                            </li>
-		                <?php } ?>
-		                <?php
-		                if ( $should_print_compare_btn ) {
-			                echo '<li class="add-to-compare">';
-			                Product_Grid::print_compare_button( $product->get_id(), 'icon' );
-			                echo '</li>';
-		                }
-		                ?>
-                        <li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart();
-			                ?></li>
-                        <li class="view-details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
-
-                    </ul>
+                    <ul class="icons-wrap box-style">
+                            <li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart(); ?></li>
+                            <?php if( $should_print_quick_view ){?>
+                                <li class="eael-product-quick-view">
+                                    <a href="#eaproduct<?php echo $widget_id.$product->get_id(); ?>"
+                                       class="open-popup-link">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                            <li class="view-details" title="Details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
+                        </ul>
                     <?php
                     if( $should_print_quick_view ){
                         Helper::eael_product_quick_view( $product, $settings, $widget_id );
@@ -75,10 +66,11 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
 	                    echo wc_get_rating_html
 	                    ($product->get_average_rating(), $product->get_rating_count());
                     } ?>
+	                <?php if($should_print_price ){
+		                echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+	                }?>
+                    <div class="test">asdkhajhsjdsh</div>
                 </div>
-                <?php if($should_print_price ){
-                    echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
-                }?>
             </div>
         </div>
     </li>
