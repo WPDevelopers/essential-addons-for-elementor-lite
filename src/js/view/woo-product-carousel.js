@@ -68,7 +68,7 @@ ea.hooks.addAction("init", "ea", () => {
 			direction: "horizontal",
 			speed: $speed,
 			effect: $effect,
-			centeredSlides: $centeredSlides,
+			// centeredSlides: $centeredSlides,
 			grabCursor: $grab_cursor,
 			autoHeight: true,
 			loop: $loop,
@@ -84,7 +84,7 @@ ea.hooks.addAction("init", "ea", () => {
 				nextEl: $arrow_next,
 				prevEl: $arrow_prev
 			},
-			// slidesPerView: $items,
+			slidesPerView: $items,
 			breakpoints: {
 				1024: {
 					slidesPerView: $items,

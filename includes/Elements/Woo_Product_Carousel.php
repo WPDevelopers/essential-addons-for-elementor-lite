@@ -120,7 +120,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		// Style Controls---------------
 		$this->init_style_product_controls();
 		$this->style_color_typography();
-		$this->eael_woo_product_carousel_terms_style();
+//		$this->eael_woo_product_carousel_terms_style();
 
 		do_action( 'eael/controls/nothing_found_style', $this );
 		$this->eael_woo_product_carousel_buttons_style();
@@ -216,7 +216,7 @@ class Woo_Product_Carousel extends Widget_Base {
 				'label'        => esc_html__( 'Short Description?', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
-				'default'      => 'yes',
+				'default'      => 'no',
 			]
 		);
 		$this->add_control(
@@ -1224,175 +1224,175 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	protected function eael_woo_product_carousel_terms_style() {
-		$this->start_controls_section(
-			'eael_section_product_carousel_terms_styles',
-			[
-				'label' => esc_html__( 'Terms', 'essential-addons-for-elementor-lite' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name'     => 'eael_product_carousel_terms_typography',
-				'selector' => '{{WRAPPER}} .eael-product-cats a',
-			]
-		);
-
-		$this->start_controls_tabs( 'eael_product_carousel_terms_style_tabs' );
-
-		$this->start_controls_tab( 'eael_product_carousel_terms_style_tabs_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ) ] );
-
-		$this->add_control(
-			'eael_product_carousel_terms_color',
-			[
-				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-product-cats a' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_product_terms_background',
-			[
-				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#8040FF',
-				'selectors' => [
-					'{{WRAPPER}} .eael-product-cats a' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'     => 'eael_product_carousel_terms_border',
-				'selector' => '{{WRAPPER}} .eael-product-cats a',
-			]
-		);
-
-		$this->end_controls_tab();
-
-		$this->start_controls_tab( 'eael_product_carousel_terms_hover_styles', [ 'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ) ] );
-
-		$this->add_control(
-			'eael_product_carousel_terms_hover_color',
-			[
-				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#F5EAFF',
-				'selectors' => [
-					'{{WRAPPER}} .eael-product-cats a:hover' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_product_carousel_terms_hover_background',
-			[
-				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#333',
-				'selectors' => [
-					'{{WRAPPER}} .eael-product-cats a:hover' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_product_carousel_terms_hover_border_color',
-			[
-				'label'     => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '',
-				'selectors' => [
-					'{{WRAPPER}} .eael-product-cats a:hover' => 'border-color: {{VALUE}};',
-				],
-				'condition' => [
-					'eael_product_carousel_terms_border_border!' => '',
-				],
-			]
-		);
-
-		$this->end_controls_tab();
-
-		$this->end_controls_tabs();
-
-		$this->add_control(
-			'eael_product_carousel_terms_border_radius',
-			[
-				'label'     => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-					'px' => [
-						'max' => 100,
-					],
-				],
-				'default'   => [
-					'size' => 3,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-product-cats a' => 'border-radius: {{SIZE}}px;',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_product_carousel_terms_spacing',
-			[
-				'label'     => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-					'px' => [
-						'max' => 100,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-product-cats' => 'margin-right: {{SIZE}}px;',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_product_carousel_terms_padding',
-			[
-				'label'     => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::DIMENSIONS,
-				'range'     => [
-					'px' => [
-						'max' => 100,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-product-cats' => 'padding: {{TOP}}{{SIZE}}px {{RIGHT}}{{SIZE}}px {{BOTTOM}}{{SIZE}}px {{LEFT}}{{SIZE}}px;',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_product_carousel_terms_margin',
-			[
-				'label'     => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::DIMENSIONS,
-				'range'     => [
-					'px' => [
-						'max' => 100,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-product-cats' => 'margin: {{TOP}}{{SIZE}}px {{RIGHT}}{{SIZE}}px {{BOTTOM}}{{SIZE}}px {{LEFT}}{{SIZE}}px;',
-				],
-			]
-		);
-
-		$this->end_controls_section();
-	}
+//	protected function eael_woo_product_carousel_terms_style() {
+//		$this->start_controls_section(
+//			'eael_section_product_carousel_terms_styles',
+//			[
+//				'label' => esc_html__( 'Terms', 'essential-addons-for-elementor-lite' ),
+//				'tab'   => Controls_Manager::TAB_STYLE,
+//			]
+//		);
+//
+//		$this->add_group_control(
+//			Group_Control_Typography::get_type(),
+//			[
+//				'name'     => 'eael_product_carousel_terms_typography',
+//				'selector' => '{{WRAPPER}} .eael-product-cats a',
+//			]
+//		);
+//
+//		$this->start_controls_tabs( 'eael_product_carousel_terms_style_tabs' );
+//
+//		$this->start_controls_tab( 'eael_product_carousel_terms_style_tabs_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ) ] );
+//
+//		$this->add_control(
+//			'eael_product_carousel_terms_color',
+//			[
+//				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+//				'type'      => Controls_Manager::COLOR,
+//				'default'   => '#fff',
+//				'selectors' => [
+//					'{{WRAPPER}} .eael-product-cats a' => 'color: {{VALUE}};',
+//				],
+//			]
+//		);
+//
+//		$this->add_control(
+//			'eael_product_terms_background',
+//			[
+//				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+//				'type'      => Controls_Manager::COLOR,
+//				'default'   => '#8040FF',
+//				'selectors' => [
+//					'{{WRAPPER}} .eael-product-cats a' => 'background-color: {{VALUE}};',
+//				],
+//			]
+//		);
+//
+//		$this->add_group_control(
+//			Group_Control_Border::get_type(),
+//			[
+//				'name'     => 'eael_product_carousel_terms_border',
+//				'selector' => '{{WRAPPER}} .eael-product-cats a',
+//			]
+//		);
+//
+//		$this->end_controls_tab();
+//
+//		$this->start_controls_tab( 'eael_product_carousel_terms_hover_styles', [ 'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ) ] );
+//
+//		$this->add_control(
+//			'eael_product_carousel_terms_hover_color',
+//			[
+//				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+//				'type'      => Controls_Manager::COLOR,
+//				'default'   => '#F5EAFF',
+//				'selectors' => [
+//					'{{WRAPPER}} .eael-product-cats a:hover' => 'color: {{VALUE}};',
+//				],
+//			]
+//		);
+//
+//		$this->add_control(
+//			'eael_product_carousel_terms_hover_background',
+//			[
+//				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+//				'type'      => Controls_Manager::COLOR,
+//				'default'   => '#333',
+//				'selectors' => [
+//					'{{WRAPPER}} .eael-product-cats a:hover' => 'background-color: {{VALUE}};',
+//				],
+//			]
+//		);
+//
+//		$this->add_control(
+//			'eael_product_carousel_terms_hover_border_color',
+//			[
+//				'label'     => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
+//				'type'      => Controls_Manager::COLOR,
+//				'default'   => '',
+//				'selectors' => [
+//					'{{WRAPPER}} .eael-product-cats a:hover' => 'border-color: {{VALUE}};',
+//				],
+//				'condition' => [
+//					'eael_product_carousel_terms_border_border!' => '',
+//				],
+//			]
+//		);
+//
+//		$this->end_controls_tab();
+//
+//		$this->end_controls_tabs();
+//
+//		$this->add_control(
+//			'eael_product_carousel_terms_border_radius',
+//			[
+//				'label'     => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+//				'type'      => Controls_Manager::SLIDER,
+//				'range'     => [
+//					'px' => [
+//						'max' => 100,
+//					],
+//				],
+//				'default'   => [
+//					'size' => 3,
+//				],
+//				'selectors' => [
+//					'{{WRAPPER}} .eael-product-cats a' => 'border-radius: {{SIZE}}px;',
+//				],
+//			]
+//		);
+//
+//		$this->add_control(
+//			'eael_product_carousel_terms_spacing',
+//			[
+//				'label'     => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
+//				'type'      => Controls_Manager::SLIDER,
+//				'range'     => [
+//					'px' => [
+//						'max' => 100,
+//					],
+//				],
+//				'selectors' => [
+//					'{{WRAPPER}} .eael-product-cats' => 'margin-right: {{SIZE}}px;',
+//				],
+//			]
+//		);
+//
+//		$this->add_control(
+//			'eael_product_carousel_terms_padding',
+//			[
+//				'label'     => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+//				'type'      => Controls_Manager::DIMENSIONS,
+//				'range'     => [
+//					'px' => [
+//						'max' => 100,
+//					],
+//				],
+//				'selectors' => [
+//					'{{WRAPPER}} .eael-product-cats' => 'padding: {{TOP}}{{SIZE}}px {{RIGHT}}{{SIZE}}px {{BOTTOM}}{{SIZE}}px {{LEFT}}{{SIZE}}px;',
+//				],
+//			]
+//		);
+//
+//		$this->add_control(
+//			'eael_product_carousel_terms_margin',
+//			[
+//				'label'     => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+//				'type'      => Controls_Manager::DIMENSIONS,
+//				'range'     => [
+//					'px' => [
+//						'max' => 100,
+//					],
+//				],
+//				'selectors' => [
+//					'{{WRAPPER}} .eael-product-cats' => 'margin: {{TOP}}{{SIZE}}px {{RIGHT}}{{SIZE}}px {{BOTTOM}}{{SIZE}}px {{LEFT}}{{SIZE}}px;',
+//				],
+//			]
+//		);
+//
+//		$this->end_controls_section();
+//	}
 
 	protected function eael_product_view_popup_style() {
 		$this->start_controls_section(
