@@ -151,12 +151,16 @@ class Woo_Product_Carousel extends Widget_Base {
 			'items',
 			[
 				'label'      => __( 'Visible Product', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::NUMBER,
-				'default'    => 4,
-				'min'        => 1,
-				'max'        => 6,
-				'step'       => 1,
-				'size_units' => '',
+				'type'       => Controls_Manager::SELECT,
+				'options'   => [
+					'1' => __( '1', 'essential-addons-for-elementor-lite' ),
+					'2'     => __( '2', 'essential-addons-for-elementor-lite' ),
+					'3'     => __( '3', 'essential-addons-for-elementor-lite' ),
+					'4'     => __( '4', 'essential-addons-for-elementor-lite' ),
+					'5'     => __( '5', 'essential-addons-for-elementor-lite' ),
+					'6'     => __( '6', 'essential-addons-for-elementor-lite' ),
+				],
+				'default'    => 3,
 				'condition'  => [
 					'carousel_effect' => [ 'slide', 'coverflow' ],
 				],
@@ -1054,7 +1058,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#8040FF',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-carousel .eael-product-wrap .icons-wrap.block-style' => 'background: {{VALUE}};',
 				],
