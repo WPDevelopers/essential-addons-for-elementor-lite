@@ -218,7 +218,7 @@ $theme-preset3: #15da8b;
                     opacity: 1;
                 }
                 .product-overlay-content {
-                    bottom: 10px;
+                    bottom: 0;
                     opacity: 1;
                 }
 
@@ -240,8 +240,8 @@ $theme-preset3: #15da8b;
 
             .product-overlay-content {
                 position: absolute;
-                padding-left: 1em;
-                padding-right: 1em;
+                //padding-left: 1em;
+                //padding-right: 1em;
                 width: 100%;
                 top: auto;
                 bottom: -100px;
@@ -291,7 +291,7 @@ $theme-preset3: #15da8b;
                     &.block-style {
                         visibility: visible;
                         opacity: 1;
-                        transform: translateY(-50px);
+                        bottom: 0;
                     }
                 }
             }
@@ -360,7 +360,7 @@ $theme-preset3: #15da8b;
                     opacity: 1;
                 }
                 .product-overlay-content {
-                    bottom: 10px;
+                    bottom: 0;
                     opacity: 1;
                 }
 
@@ -379,7 +379,7 @@ $theme-preset3: #15da8b;
                     visibility: visible;
                     opacity: 1;
                     justify-content: flex-start;
-                    margin: 10px 0 5px;
+                    margin: 10px 0 0;
                 }
             }
 
@@ -389,8 +389,8 @@ $theme-preset3: #15da8b;
 
             .product-overlay-content {
                 position: absolute;
-                padding-left: 1em;
-                padding-right: 1em;
+                //padding-left: 1em;
+                //padding-right: 1em;
                 width: 100%;
                 top: auto;
                 bottom: -100px;
@@ -643,8 +643,8 @@ $theme-preset3: #15da8b;
 
                 a {
                     position: relative;
-                    width: 42px;
-                    height: 42px;
+                    width: 35px;
+                    height: 35px;
                     margin: 3px;
                     box-shadow: 0px 15px 10px rgba(61, 70, 79, 0.12);
                     background-color: #ffffff;
@@ -669,7 +669,7 @@ $theme-preset3: #15da8b;
                             content: '\f217';
                             font-weight: 900;
                             font-family: 'Font Awesome 5 Free';
-                            font-size: 18px;
+                            font-size: 16px;
                             text-rendering: auto;
                             -webkit-font-smoothing: antialiased;
                             vertical-align: middle;
@@ -679,7 +679,7 @@ $theme-preset3: #15da8b;
                     }
 
                     &.button.add_to_cart_button {
-                        padding: 0;
+                        padding: 0 !important;
                         margin: 3px;
                         font-size: 0px;
 
@@ -687,7 +687,7 @@ $theme-preset3: #15da8b;
                             content: "\f07a";
                             display: block;
                             font-family: "Font Awesome 5 Free";
-                            font-size: 18px;
+                            font-size: 16px;
                             font-weight: 900;
                             transform: translate(-50%, -50%);
                             top: 50%;
@@ -729,8 +729,8 @@ $theme-preset3: #15da8b;
 
                 a {
                     position: relative;
-                    width: 42px;
-                    height: 42px;
+                    width: 35px;
+                    height: 35px;
                     margin: 3px;
                     box-shadow: 0px 15px 10px rgba(61, 70, 79, 0.12);
                     background-color: #ffffff;
@@ -755,7 +755,7 @@ $theme-preset3: #15da8b;
                             content: '\f217';
                             font-weight: 900;
                             font-family: 'Font Awesome 5 Free';
-                            font-size: 18px;
+                            font-size: 16px;
                             text-rendering: auto;
                             -webkit-font-smoothing: antialiased;
                             vertical-align: middle;
@@ -765,7 +765,7 @@ $theme-preset3: #15da8b;
                     }
 
                     &.button.add_to_cart_button {
-                        padding: 0;
+                        padding: 0 !important;
                         margin: 3px;
                         font-size: 0px;
 
@@ -773,7 +773,7 @@ $theme-preset3: #15da8b;
                             content: "\f07a";
                             display: block;
                             font-family: "Font Awesome 5 Free";
-                            font-size: 18px;
+                            font-size: 16px;
                             font-weight: 900;
                             transform: translate(-50%, -50%);
                             top: 50%;
@@ -795,7 +795,7 @@ $theme-preset3: #15da8b;
             background: $theme-preset3;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            height: 50px;
+            height: 40px;
             width: 100%;
             top: auto;
             bottom: -50px;
@@ -808,9 +808,9 @@ $theme-preset3: #15da8b;
 
             li {
                 //flex: 1;
-                border-left: 1px solid #fff;
+                border-right: 1px solid #fff;
 
-                &:first-child{
+                &:last-child{
                     border: none;
                 }
 
@@ -834,7 +834,7 @@ $theme-preset3: #15da8b;
                             content: '\f217';
                             font-weight: 900;
                             font-family: 'Font Awesome 5 Free';
-                            font-size: 18px;
+                            font-size: 16px;
                             text-rendering: auto;
                             -webkit-font-smoothing: antialiased;
                             vertical-align: middle;
@@ -844,7 +844,7 @@ $theme-preset3: #15da8b;
                     }
 
                     &.button.add_to_cart_button {
-                        padding: 0;
+                        padding: 0 !important;
                         margin: 0;
                         font-size: 0;
                         background: transparent;
@@ -857,7 +857,7 @@ $theme-preset3: #15da8b;
                             content: "\f07a";
                             display: block;
                             font-family: "Font Awesome 5 Free";
-                            font-size: 18px;
+                            font-size: 16px;
                             font-weight: 900;
                             transform: translate(-50%, -50%);
                             top: 50%;
@@ -898,8 +898,8 @@ $theme-preset3: #15da8b;
 
                 i {
                     position: relative;
-                    font-size: 18px;
-                    line-height: 42px;
+                    font-size: 16px;
+                    line-height: 1.2em;
                 }
 
                 svg {
@@ -1665,23 +1665,23 @@ $theme-preset3: #15da8b;
     }
 }
 
-.eael-product-loader {
-    position: relative;
-
-    &::after {
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        position: absolute;
-        content: '';
-        border-top: 4px solid rgba(0, 0, 0, 0.2);
-        border-right: 4px solid rgba(0, 0, 0, 0.2);
-        border-bottom: 4px solid rgba(0, 0, 0, 0.2);
-        border-left: 4px solid #000;
-        transform: translate(-50%, -50%);
-        animation: loaderSpin 1.1s infinite linear;
-        left: 48%;
-        top: 40%;
-        transition: all 0.2s;
-    }
-}
+//.eael-product-loader {
+//    position: relative;
+//
+//    &::after {
+//        border-radius: 50%;
+//        width: 50px;
+//        height: 50px;
+//        position: absolute;
+//        content: '';
+//        border-top: 4px solid rgba(0, 0, 0, 0.2);
+//        border-right: 4px solid rgba(0, 0, 0, 0.2);
+//        border-bottom: 4px solid rgba(0, 0, 0, 0.2);
+//        border-left: 4px solid #000;
+//        transform: translate(-50%, -50%);
+//        animation: loaderSpin 1.1s infinite linear;
+//        left: 48%;
+//        top: 40%;
+//        transition: all 0.2s;
+//    }
+//}
