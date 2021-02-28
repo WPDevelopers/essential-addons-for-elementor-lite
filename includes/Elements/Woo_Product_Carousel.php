@@ -161,9 +161,9 @@ class Woo_Product_Carousel extends Widget_Base {
 					'6'     => __( '6', 'essential-addons-for-elementor-lite' ),
 				],
 				'default'    => 3,
-				'condition'  => [
-					'carousel_effect' => [ 'slide', 'coverflow' ],
-				],
+//				'condition'  => [
+//					'carousel_effect' => [ 'slide', 'coverflow' ],
+//				],
 			]
 		);
 
@@ -329,22 +329,22 @@ class Woo_Product_Carousel extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'carousel_effect',
-			[
-				'label'       => __( 'Effect', 'essential-addons-for-elementor-lite' ),
-				'description' => __( 'Sets transition effect', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::SELECT,
-				'default'     => 'slide',
-				'options'     => [
-					'slide'     => __( 'Slide', 'essential-addons-for-elementor-lite' ),
-					'fade'      => __( 'Fade', 'essential-addons-for-elementor-lite' ),
-					'cube'      => __( 'Cube', 'essential-addons-for-elementor-lite' ),
-					'coverflow' => __( 'Coverflow', 'essential-addons-for-elementor-lite' ),
-					'flip'      => __( 'Flip', 'essential-addons-for-elementor-lite' ),
-				],
-			]
-		);
+//		$this->add_control(
+//			'carousel_effect',
+//			[
+//				'label'       => __( 'Effect', 'essential-addons-for-elementor-lite' ),
+//				'description' => __( 'Sets transition effect', 'essential-addons-for-elementor-lite' ),
+//				'type'        => Controls_Manager::SELECT,
+//				'default'     => 'slide',
+//				'options'     => [
+//					'slide'     => __( 'Slide', 'essential-addons-for-elementor-lite' ),
+//					'fade'      => __( 'Fade', 'essential-addons-for-elementor-lite' ),
+//					'cube'      => __( 'Cube', 'essential-addons-for-elementor-lite' ),
+//					'coverflow' => __( 'Coverflow', 'essential-addons-for-elementor-lite' ),
+//					'flip'      => __( 'Flip', 'essential-addons-for-elementor-lite' ),
+//				],
+//			]
+//		);
 
 		$this->add_control(
 			'slider_speed',
@@ -2649,9 +2649,9 @@ class Woo_Product_Carousel extends Widget_Base {
 		if ( ! empty( $settings['margin_mobile']['size'] ) ) {
 			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-margin-mobile', $settings['margin_mobile']['size'] );
 		}
-		if ( $settings['carousel_effect'] ) {
-			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-effect', $settings['carousel_effect'] );
-		}
+//		if ( $settings['carousel_effect'] ) {
+//			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-effect', $settings['carousel_effect'] );
+//		}
 		if ( ! empty( $settings['slider_speed']['size'] ) ) {
 			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-speed', $settings['slider_speed']['size'] );
 		}
