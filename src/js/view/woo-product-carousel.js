@@ -42,10 +42,10 @@ ea.hooks.addAction("init", "ea", () => {
 				$wooProductCarousel.data("margin-mobile") !== undefined
 					? $wooProductCarousel.data("margin-mobile")
 					: 0,
-			$effect =
-				$wooProductCarousel.data("effect") !== undefined
-					? $wooProductCarousel.data("effect")
-					: "slide",
+			// $effect =
+			// 	$wooProductCarousel.data("effect") !== undefined
+			// 		? $wooProductCarousel.data("effect")
+			// 		: "slide",
 			$speed =
 				$wooProductCarousel.data("speed") !== undefined
 					? $wooProductCarousel.data("speed")
@@ -61,13 +61,12 @@ ea.hooks.addAction("init", "ea", () => {
 			$pause_on_hover =
 				$wooProductCarousel.data("pause-on-hover") !== undefined
 					? $wooProductCarousel.data("pause-on-hover")
-					: "",
-			$centeredSlides = $effect == "coverflow" ? true : false;
+					: "";
 
 		var $carouselOptions = {
 			direction: "horizontal",
 			speed: $speed,
-			effect: $effect,
+			effect: "slide",
 			// centeredSlides: $centeredSlides,
 			grabCursor: $grab_cursor,
 			autoHeight: true,
