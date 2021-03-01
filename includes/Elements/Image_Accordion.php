@@ -585,15 +585,17 @@ class Image_Accordion extends Widget_Base {
             $tag = 'div';
             if ( $img_accordion[ 'eael_accordion_enable_title_link' ] == 'yes' ) {
                 $eael_accordion_link = ( '#' === $img_accordion[ 'eael_accordion_title_link' ][ 'url' ] ) ? '#/' : $img_accordion[ 'eael_accordion_title_link' ][ 'url' ];
+            
                 $target              = $img_accordion[ 'eael_accordion_title_link' ][ 'is_external' ] ? 'target="_blank"' : '';
                 $nofollow            = $img_accordion[ 'eael_accordion_title_link' ][ 'nofollow' ] ? 'rel="nofollow"' : '';
                 $active              = $img_accordion[ 'eael_accordion_is_active' ];
-                $this->add_render_attribute( 'eael-image-accordion-link-' . $key, 'href', esc_url( $eael_accordion_link ) . '" ' . $target . ' ' . $nofollow );
+                $this->add_render_attribute( 'eael-image-accordion-link-' . $key, 'href', esc_url( $eael_accordion_link ));
+                
                 $tag = 'a';
             }
             ?>
 
-            <<?php echo $tag.' '; ?><?php echo $this->get_render_attribute_string( 'eael-image-accordion-link-' . $key ); ?>>
+            <<?php echo $tag.' '; ?><?php echo $this->get_render_attribute_string( 'eael-image-accordion-link-' . $key ), $target,$nofollow; ?> >
             <div class="overlay">
                 <div class="overlay-inner">
                     <div class="overlay-inner <?php echo( $active === 'yes' ? ' overlay-inner-show' : '' ); ?>">
