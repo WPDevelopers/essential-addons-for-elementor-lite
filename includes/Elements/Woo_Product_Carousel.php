@@ -2638,7 +2638,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		] );
 
 		if ( $settings['dots_position'] ) {
-			$this->add_render_attribute( 'eael-woo-product-carousel-container', 'class', 'swiper-container-wrap-dots-' . $settings['dots_position'] );
+			$this->add_render_attribute( 'container', 'class', 'swiper-container-wrap-dots-' . $settings['dots_position'] );
 		}
 
 		$this->add_render_attribute(
