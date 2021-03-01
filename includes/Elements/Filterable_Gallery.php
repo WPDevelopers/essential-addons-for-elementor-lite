@@ -3303,11 +3303,13 @@ class Filterable_Gallery extends Widget_Base
                         $scope = $('[data-id="' + $node_id + '"]'),
                         $gallery = $(this),
                         $settings = $gallery.data('settings'),
-                        $gallery_items = $gallery.data('gallery-items'),
+						fg_items = $gallery_items = $gallery.data('gallery-items'),
                         $layout_mode = ($settings.grid_style == 'masonry' ? 'masonry' : 'fitRows'),
                         $gallery_enabled = ($settings.gallery_enabled == 'yes' ? true : false),
                         input = $scope.find('#fg-search-box-input'),
                         searchRegex, buttonFilter, timer;
+					    $init_show_setting     = $gallery.data("init-show");
+					fg_items.splice(0, $init_show_setting)
                     var filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0)
 
                     if ($gallery.closest($scope).length < 1) {
@@ -3395,60 +3397,59 @@ class Filterable_Gallery extends Widget_Base
                     });
 
                     // Load more button
-                    $scope.on('click', '.eael-gallery-load-more', function(e) {
-                        e.preventDefault();
+					$scope.on("click", ".eael-gallery-load-more", function (e) {
+						e.preventDefault();
+						var $this            = $(this),
+							$init_show       = $(".eael-filter-gallery-container", $scope).children(".eael-filterable-gallery-item-wrap").length,
+							$total_items     = $gallery.data("total-gallery-items"),
+							$images_per_page = $gallery.data("images-per-page"),
+							$nomore_text     = $gallery.data("nomore-item-text"),
+							filter_enable = $(".eael-filter-gallery-control",$scope).length,
+							$items           = [];
+						var filter_name      = $(".eael-filter-gallery-control li.active", $scope).data('filter');
+						if(filterControls.length>0){
+							filter_name = $(".fg-layout-3-filter-controls li.active", $scope).data('filter');
+						}
 
-                        var $this = $(this),
-                            $init_show = $('.eael-filter-gallery-container', $scope).children('.eael-filterable-gallery-item-wrap').length,
-                            $total_items = $gallery.data('total-gallery-items'),
-                            $images_per_page = $gallery.data('images-per-page'),
-                            $nomore_text = $gallery.data('nomore-item-text'),
-                            filter_enable = $(".eael-filter-gallery-control",$scope).length,
-                            $items = [];
-                        var filter_name      = $(".eael-filter-gallery-control li.active").data('filter');
+						let item_found = 0;
+						for (const [index, item] of fg_items.entries()){
+							if (filter_name !== '' && filter_name !== '*' && filter_enable) {
+								let element = $($(item)[0]);
+								if (element.is(filter_name)) {
+									++item_found;
+									$items.push($(item)[0]);
+									fg_items.splice(index,1)
+								}
+								if((fg_items.length-1)===index){
+									$(".eael-filter-gallery-control li.active", $scope).data('load-more-status',1)
+									$this.hide()
+								}
+							}else {
+								++item_found;
+								$items.push($(item)[0]);
+								fg_items.splice(index,1)
+							}
 
-                        if(filterControls.length>0){
-                            filter_name = $(".fg-layout-3-filter-controls li.active").data('filter');
-                        }
+							if (item_found === $images_per_page) {
+								break;
+							}
+						}
 
-                        if ($init_show == $total_items) {
-                            $this.html('<div class="no-more-items-text">' + $nomore_text + '</div>');
-                            setTimeout(function() {
-                                $this.fadeOut('slow');
-                            }, 600);
-                        }
 
-                        var i          = $init_show;
-                        var item_found = 0;
-                        while (i < $init_show + $images_per_page) {
-                            if (filter_name != '' && filter_name != '*' && filter_enable) {
-                                for (var j = i; j < $gallery_items.length; j++) {
-                                    var element = $($($gallery_items[j])[0]);
-                                    if (element.is(filter_name)) {
-                                        ++item_found;
-                                        $items.push($($gallery_items[j])[0]);
-                                        delete $gallery_items[j];
-                                        if (item_found === $images_per_page) {
-                                            break;
-                                        }
-                                    }
-                                }
-                                //break when cross $images_per_page or no image found
-                                break;
-                            } else {
-                                $items.push($($gallery_items[i])[0]);
-                                delete $gallery_items[i];
-                            }
-                            i++;
-                        }
+						if (fg_items.length<1) {
+							$this.html('<div class="no-more-items-text">' + $nomore_text + "</div>");
+							setTimeout(function () {
+								$this.fadeOut("slow");
+							}, 600);
+						}
 
-                        // append items
-                        $gallery.append($items)
-                        $isotope_gallery.isotope('appended', $items)
-                        $isotope_gallery.imagesLoaded().progress(function() {
-                            $isotope_gallery.isotope('layout')
-                        })
-                    });
+						// append items
+						$gallery.append($items);
+						$isotope_gallery.isotope("appended", $items);
+						$isotope_gallery.imagesLoaded().progress(function () {
+							$isotope_gallery.isotope("layout");
+						});
+					});
                 });
             });
         </script>
