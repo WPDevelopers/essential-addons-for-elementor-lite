@@ -570,7 +570,7 @@ class Image_Accordion extends Widget_Base {
     <div <?php echo $this->get_render_attribute_string( 'eael-image-accordion' ); ?>>
         <?php foreach ( $settings[ 'eael_img_accordions' ] as $key => $img_accordion ): ?>
             <?php
-            $eael_accordion_link = $target = $nofollow = $active = '';
+            $eael_accordion_link = $target = $nofollow = $attributes = $active = '';
             $activeCSS           = ( $active === 'yes' ? ' flex: 3 1 0%;' : '' );
             $this->add_render_attribute(
                 'eael-image-accordion-link-' . $key,
@@ -588,6 +588,11 @@ class Image_Accordion extends Widget_Base {
             
                 $target              = $img_accordion[ 'eael_accordion_title_link' ][ 'is_external' ] ? 'target="_blank"' : '';
                 $nofollow            = $img_accordion[ 'eael_accordion_title_link' ][ 'nofollow' ] ? 'rel="nofollow"' : '';
+                if($img_accordion['eael_accordion_title_link']['custom_attributes']){
+                    $attributes = str_replace("|",'="',$img_accordion['eael_accordion_title_link']['custom_attributes']);
+                    $attributes = str_replace(",",'" ',$attributes);
+                    $attributes .='"';
+                }
                 $active              = $img_accordion[ 'eael_accordion_is_active' ];
                 $this->add_render_attribute( 'eael-image-accordion-link-' . $key, 'href', esc_url( $eael_accordion_link ));
                 
@@ -595,7 +600,7 @@ class Image_Accordion extends Widget_Base {
             }
             ?>
 
-            <<?php echo $tag.' '; ?><?php echo $this->get_render_attribute_string( 'eael-image-accordion-link-' . $key ), $target,$nofollow; ?> >
+            <<?php echo $tag.' '; ?><?php echo $this->get_render_attribute_string( 'eael-image-accordion-link-' . $key ), $target,$nofollow,$attributes; ?> >
             <div class="overlay">
                 <div class="overlay-inner">
                     <div class="overlay-inner <?php echo( $active === 'yes' ? ' overlay-inner-show' : '' ); ?>">
