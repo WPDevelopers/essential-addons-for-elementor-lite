@@ -755,7 +755,7 @@ class Woo_Product_Carousel extends Widget_Base {
 				'type'      => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-carousel' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
-					'{{WRAPPER}} .eael-product-carousel img, {{WRAPPER}} .eael-product-carousel .product-image-wrap'
+					'{{WRAPPER}} .eael-product-carousel .image-wrap img, {{WRAPPER}} .eael-product-carousel .product-image-wrap'
                     => 'border-radius: {{TOP}}px {{RIGHT}}px 0 0;',
 				],
 			]

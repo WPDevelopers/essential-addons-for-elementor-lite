@@ -110,36 +110,6 @@ $theme-preset3: #15da8b;
             }
         }
     }
-    // col
-    .col-mob-1 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-
-    .col-mob-2 {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-
-    .col-mob-3 {
-        flex: 0 0 33.33333%;
-        max-width: 33.33333%;
-    }
-
-    .col-mob-4 {
-        flex: 0 0 25%;
-        max-width: 25%;
-    }
-
-    .col-mob-5 {
-        flex: 0 0 20%;
-        max-width: 20%;
-    }
-
-    .col-mob-6 {
-        flex: 0 0 16.66666%;
-        max-width: 16.66666%;
-    }
 
     &.preset-1 {
         .swiper-pagination .swiper-pagination-bullet-active {
@@ -152,7 +122,7 @@ $theme-preset3: #15da8b;
             text-align: left;
             margin: 10px;
 
-            img, .product-image-wrap {
+            .image-wrap img, .product-image-wrap {
                 border-radius: 20px 20px 0 0;
             }
 
@@ -205,7 +175,7 @@ $theme-preset3: #15da8b;
             border-radius: 10px;
             margin: 10px;
 
-            img, .product-image-wrap {
+            .image-wrap img, .product-image-wrap {
                 border-radius: 10px 10px 0 0;
             }
 
@@ -296,7 +266,7 @@ $theme-preset3: #15da8b;
                 }
             }
 
-            img {
+            .image-wrap img {
                 border-radius: 10px 10px 0 0;
             }
 
@@ -347,7 +317,7 @@ $theme-preset3: #15da8b;
             border-radius: 10px;
             margin: 10px;
 
-            img, .product-image-wrap {
+            .image-wrap img, .product-image-wrap {
                 border-radius: 10px 10px 0 0;
             }
 
@@ -580,6 +550,28 @@ $theme-preset3: #15da8b;
     &.swiper-container-wrap .swiper-pagination {
         //bottom: 0;
     }
+
+    &.swiper-container-dots-outside .swiper-pagination,
+    &.swiper-container-wrap-dots-outside .swiper-pagination {
+        position: static;
+    }
+
+    &.swiper-container-wrap {
+        .swiper-pagination {
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+        }
+
+        .swiper-pagination-bullet {
+            background: #ccc;
+            margin: 0 4px;
+            opacity: 1;
+            height: 8px;
+            width: 8px;
+        }
+    }
+
 
     // title
     .eael-product-title h2 {
