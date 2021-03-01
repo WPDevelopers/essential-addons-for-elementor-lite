@@ -572,6 +572,20 @@ $theme-preset3: #15da8b;
         }
     }
 
+    .swiper-container .swiper-button-next,
+    .swiper-container .swiper-button-prev,
+    &.swiper-container-wrap .swiper-button-next,
+    &.swiper-container-wrap .swiper-button-prev {
+        background: 0 0;
+        font-size: 20px;
+        height: auto;
+        line-height: 1;
+        margin: 0;
+        text-align: center;
+        transform: translateY(-50%);
+        width: auto;
+    }
+
 
     // title
     .eael-product-title h2 {
