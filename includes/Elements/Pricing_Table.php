@@ -2104,8 +2104,9 @@ class Pricing_Table extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $target = $settings['eael_pricing_table_btn_link']['is_external'] ? 'target="_blank"' : '';
-        $nofollow = $settings['eael_pricing_table_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
+        $table_btn_link = $this->get_settings('eael_pricing_table_btn_link');
+        $target = $table_btn_link['is_external'] ? 'target="_blank"' : '';
+        $nofollow = $table_btn_link['nofollow'] ? 'rel="nofollow"' : '';
         $featured_class = ('yes' === $settings['eael_pricing_table_featured'] ? 'featured ' . $settings['eael_pricing_table_featured_styles'] : '');
         $featured_class .= ($settings['eael_pricing_table_ribbon_alignment'] === 'left' ? ' ribbon-left' : '');
         $inline_style = ($settings['eael_pricing_table_featured_styles'] === 'ribbon-4' && 'yes' === $settings['eael_pricing_table_featured'] ? ' style="overflow: hidden;"' : '');
@@ -2165,13 +2166,13 @@ class Pricing_Table extends Widget_Base
                         <?php $this->render_feature_list($settings, $this); ?>
                     </div>
                     <div class="footer">
-                        <a href="<?php echo esc_url($settings['eael_pricing_table_btn_link']['url']); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="eael-pricing-button">
+                        <a href="<?php echo esc_url($table_btn_link['url']); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="eael-pricing-button">
                             <?php if ('left' == $icon_position) : ?>
                                 <?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) { ?>
                                     <?php if (isset($settings['eael_pricing_table_button_icon_new']['value']['url'])) : ?>
                                         <img src="<?php echo esc_attr($settings['eael_pricing_table_button_icon_new']['value']['url']); ?>" class="fa-icon-left" alt="<?php echo esc_attr(get_post_meta($settings['eael_pricing_table_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
                                     <?php else : ?>
-                                        <i class="<?php echo esc_attr($settings['eael_pricing_table_button_icon_new']['value']); ?> fa-icon-left"></i>
+                                        <i class="<?php echo esc_attr($this->get_settings('eael_pricing_table_button_icon_new')['value']); ?> fa-icon-left"></i>
                                     <?php endif; ?>
                                 <?php } else { ?>
                                     <i class="<?php echo esc_attr($settings['eael_pricing_table_button_icon']); ?> fa-icon-left"></i>
