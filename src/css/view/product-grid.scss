@@ -461,6 +461,32 @@
                         transform: rotate(-45deg);
                     }
 
+                    .outofstock-badge {
+                        line-height: 16px;
+                        font-weight: 600;
+                        display: flex;
+                        justify-content: center;
+                        align-items: flex-end;
+                        letter-spacing: 0;
+                        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
+                        text-transform: uppercase;
+                        color: #fff;
+                        background-color: #ff2a13;
+                        border-radius: 0;
+                        border: none;
+                        box-shadow: none;
+                        position: absolute;
+                        height: 100px;
+                        width: 200px;
+                        z-index: 9;
+                        left: -95px;
+                        top: -45px;
+                        right: auto;
+                        margin: 0;
+                        padding: 0;
+                        transform: rotate(-45deg);
+                    }
+
                     .price {
                         font-size: 14px;
                         margin-bottom: 0;
@@ -526,6 +552,24 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+            }
+            .outofstock-badge {
+                min-height: 3.346em;
+                min-width: 3.746em;
+                padding: 0.202em;
+                font-size: 1em;
+                font-weight: 700;
+                position: absolute;
+                text-align: center;
+                line-height: 1.25;
+                top: -0.5em;
+                left: -0.5em;
+                margin: 0;
+                border-radius: 50%;
+                background-color: #ff2a13;
+                color: #fff;
+                font-size: 0.857em;
+                z-index: 9;
             }
         }
 
