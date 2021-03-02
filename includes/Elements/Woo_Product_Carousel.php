@@ -2667,7 +2667,7 @@ class Woo_Product_Carousel extends Widget_Base {
 
 		if ( ! empty( $settings['items'] ) ) {
 			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-items', $settings['items'] );
-			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'class', 'view-col-'.$settings['items'] );
+//			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'class', 'view-col-'.$settings['items'] );
 		}
 		if ( ! empty( $settings['items_tablet'] ) ) {
 			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-items-tablet', $settings['items_tablet'] );

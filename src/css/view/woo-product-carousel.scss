@@ -72,6 +72,15 @@ $theme-preset3: #15da8b;
             display: none !important;
         }
 
+        .swiper-wrapper.products {
+            margin: 0;
+            flex-wrap: unset;
+
+            .product {
+                float: none;
+            }
+        }
+
         &[data-items="1"], &[data-items="2"], &[data-items="3"], &[data-items="4"], &[data-items="5"], &[data-items="6"] {
             .product.swiper-slide {
                 position: relative;
