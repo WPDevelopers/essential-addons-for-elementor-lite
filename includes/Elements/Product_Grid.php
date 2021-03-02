@@ -309,11 +309,50 @@ class Product_Grid extends Widget_Base
             'label' => esc_html__('Product Settings', 'essential-addons-for-elementor-lite'),
         ]);
 
+        $this->add_control(
+            'post_type',
+            [
+                'label'   => __( 'Source', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'product',
+                'options' => [
+                    'product'        => esc_html__( 'Products', 'essential-addons-for-elementor-lite' ),
+                    'source_dynamic' => esc_html__( 'Dynamic', 'essential-addons-for-elementor-lite' ),
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_global_dynamic_source_warning_text',
+            [
+                'type'            => Controls_Manager::RAW_HTML,
+                'raw'             => __( 'This option will only affect in <strong>Archive page of Elementor Theme Builder</strong> dynamically.', 'essential-addons-for-elementor-lite' ),
+                'content_classes' => 'eael-warning',
+                'condition'       => [
+                    'post_type' => 'source_dynamic',
+                ],
+            ]
+        );
+
+        if ( !apply_filters( 'eael/is_plugin_active', 'woocommerce/woocommerce.php' ) ) {
+            $this->add_control(
+                'ea_product_grid_woo_required',
+                [
+                    'type'            => Controls_Manager::RAW_HTML,
+                    'raw'             => __( '<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.', 'essential-addons-for-elementor-lite' ),
+                    'content_classes' => 'eael-warning',
+                ]
+            );
+        }
+
         $this->add_control('eael_product_grid_product_filter', [
             'label' => esc_html__('Filter By', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::SELECT,
             'default' => 'recent-products',
             'options' => $this->eael_get_product_filterby_options(),
+            'condition' => [
+              'post_type!' => 'source_dynamic',
+            ],
         ]);
 
         $this->add_control('orderby', [
@@ -356,6 +395,9 @@ class Product_Grid extends Widget_Base
             'label_block' => true,
             'multiple' => true,
             'options' => HelperClass::get_terms_list('product_cat', 'slug'),
+            'condition'   => [
+              'post_type!' => 'source_dynamic',
+            ],
         ]);
         $this->add_control(
             'eael_dynamic_template_Layout',
@@ -2815,95 +2857,19 @@ class Product_Grid extends Widget_Base
             return;
         }
         $settings = $this->get_settings_for_display();
+
         // normalize for load more fix
         $settings['layout_mode'] = $settings["eael_product_grid_layout"];
         $widget_id = $this->get_id();
         $settings['eael_widget_id'] = $widget_id;
-        $args = [
-            'post_type' => 'product',
-            'posts_per_page' => $settings['eael_product_grid_products_count'] ?: 4,
-            'order' => (isset($settings['order']) ? $settings['order'] : 'desc'),
-            'offset' => $settings['product_offset'],
-            'tax_query' => [
-                'relation' => 'AND',
-                [
-                    'taxonomy' => 'product_visibility',
-                    'field' => 'name',
-                    'terms' => ['exclude-from-search', 'exclude-from-catalog'],
-                    'operator' => 'NOT IN',
-                ],
-            ],
-        ];
-        // price & sku filter
-        if ($settings['orderby'] == '_price') {
-            $args['orderby'] = 'meta_value_num';
-            $args['meta_key'] = '_price';
-        } else if ($settings['orderby'] == '_sku') {
-            $args['orderby'] = 'meta_value_num';
-            $args['meta_key'] = '_sku';
+        if ( $settings[ 'post_type' ] === 'source_dynamic' && is_archive() || !empty($_REQUEST['post_type'])) {
+            $settings[ 'posts_per_page' ] = $settings[ 'eael_product_grid_products_count' ] ?: 4;
+            $settings[ 'offset' ]         = $settings[ 'product_offset' ];
+            $args                         = HelperClass::get_query_args( $settings );
+            $args                         = HelperClass::get_dynamic_args( $settings, $args );
         } else {
-            $args['orderby'] = (isset($settings['orderby']) ? $settings['orderby'] : 'date');
+            $args = $this->build_product_query( $settings );
         }
-
-        if (!empty($settings['eael_product_grid_categories'])) {
-            $args['tax_query'] = [
-                [
-                    'taxonomy' => 'product_cat',
-                    'field' => 'slug',
-                    'terms' => $settings['eael_product_grid_categories'],
-                    'operator' => 'IN',
-                ],
-            ];
-        }
-
-        if ('true' == $settings['show_load_more']) {
-            $args ['offset'] = $settings['product_offset'];
-        }
-
-        $args['meta_query'] = ['relation' => 'AND'];
-
-        if (get_option('woocommerce_hide_out_of_stock_items') == 'yes') {
-            $args['meta_query'][] = [
-                'key' => '_stock_status',
-                'value' => 'instock'
-            ];
-        }
-
-        if ($settings['eael_product_grid_product_filter'] == 'featured-products') {
-            $args['tax_query'] = [
-                'relation' => 'AND',
-                [
-                    'taxonomy' => 'product_visibility',
-                    'field' => 'name',
-                    'terms' => 'featured',
-                ],
-                [
-                    'taxonomy' => 'product_visibility',
-                    'field' => 'name',
-                    'terms' => ['exclude-from-search', 'exclude-from-catalog'],
-                    'operator' => 'NOT IN',
-                ],
-            ];
-
-            if ($settings['eael_product_grid_categories']) {
-                $args['tax_query'][] = [
-                    'taxonomy' => 'product_cat',
-                    'field' => 'slug',
-                    'terms' => $settings['eael_product_grid_categories'],
-                ];
-            }
-        } else if ($settings['eael_product_grid_product_filter'] == 'best-selling-products') {
-            $args['meta_key'] = 'total_sales';
-            $args['orderby'] = 'meta_value_num';
-            $args['order'] = 'DESC';
-        } else if ($settings['eael_product_grid_product_filter'] == 'sale-products') {
-            $args['post__in']  = array_merge( array( 0 ), wc_get_product_ids_on_sale() );
-        } else if ($settings['eael_product_grid_product_filter'] == 'top-products') {
-            $args['meta_key'] = '_wc_average_rating';
-            $args['orderby'] = 'meta_value_num';
-            $args['order'] = 'DESC';
-        }
-
 
         $this->is_show_custom_add_to_cart = boolval($settings['show_add_to_cart_custom_text']);
         $this->simple_add_to_cart_button_text = $settings['add_to_cart_simple_product_button_text'];
@@ -2994,5 +2960,94 @@ class Product_Grid extends Widget_Base
             $this,
             'add_to_cart_button_custom_text',
         ]);
+    }
+
+    /**
+     * build_product_query
+     * @param $settings
+     * @return array
+     */
+    public function build_product_query( $settings ){
+        $args = [
+            'post_type' => 'product',
+            'posts_per_page' => $settings['eael_product_grid_products_count'] ?: 4,
+            'order' => (isset($settings['order']) ? $settings['order'] : 'desc'),
+            'offset' => $settings['product_offset'],
+            'tax_query' => [
+                'relation' => 'AND',
+                [
+                    'taxonomy' => 'product_visibility',
+                    'field' => 'name',
+                    'terms' => ['exclude-from-search', 'exclude-from-catalog'],
+                    'operator' => 'NOT IN',
+                ],
+            ],
+        ];
+        // price & sku filter
+        if ($settings['orderby'] == '_price') {
+            $args['orderby'] = 'meta_value_num';
+            $args['meta_key'] = '_price';
+        } else if ($settings['orderby'] == '_sku') {
+            $args['orderby'] = 'meta_value_num';
+            $args['meta_key'] = '_sku';
+        } else {
+            $args['orderby'] = (isset($settings['orderby']) ? $settings['orderby'] : 'date');
+        }
+
+        if (!empty($settings['eael_product_grid_categories'])) {
+            $args['tax_query'] = [
+                [
+                    'taxonomy' => 'product_cat',
+                    'field' => 'slug',
+                    'terms' => $settings['eael_product_grid_categories'],
+                    'operator' => 'IN',
+                ],
+            ];
+        }
+
+        $args['meta_query'] = ['relation' => 'AND'];
+
+        if (get_option('woocommerce_hide_out_of_stock_items') == 'yes') {
+            $args['meta_query'][] = [
+                'key' => '_stock_status',
+                'value' => 'instock'
+            ];
+        }
+
+        if ($settings['eael_product_grid_product_filter'] == 'featured-products') {
+            $args['tax_query'] = [
+                'relation' => 'AND',
+                [
+                    'taxonomy' => 'product_visibility',
+                    'field' => 'name',
+                    'terms' => 'featured',
+                ],
+                [
+                    'taxonomy' => 'product_visibility',
+                    'field' => 'name',
+                    'terms' => ['exclude-from-search', 'exclude-from-catalog'],
+                    'operator' => 'NOT IN',
+                ],
+            ];
+
+            if ($settings['eael_product_grid_categories']) {
+                $args['tax_query'][] = [
+                    'taxonomy' => 'product_cat',
+                    'field' => 'slug',
+                    'terms' => $settings['eael_product_grid_categories'],
+                ];
+            }
+        } else if ($settings['eael_product_grid_product_filter'] == 'best-selling-products') {
+            $args['meta_key'] = 'total_sales';
+            $args['orderby'] = 'meta_value_num';
+            $args['order'] = 'DESC';
+        } else if ($settings['eael_product_grid_product_filter'] == 'sale-products') {
+            $args['post__in']  = array_merge( array( 0 ), wc_get_product_ids_on_sale() );
+        } else if ($settings['eael_product_grid_product_filter'] == 'top-products') {
+            $args['meta_key'] = '_wc_average_rating';
+            $args['orderby'] = 'meta_value_num';
+            $args['order'] = 'DESC';
+        }
+        return $args;
     }
 }
