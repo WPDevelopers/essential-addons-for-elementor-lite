@@ -291,7 +291,7 @@ class Facebook_Feed extends Widget_Base
             'eael_facebook_feed_is_show_preview_content',
             [
                 'label' => __('Show Preview Content', 'essential-addons-for-elementor-lite'),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
@@ -303,7 +303,7 @@ class Facebook_Feed extends Widget_Base
             'eael_facebook_feed_is_show_preview_thumbnail',
             [
                 'label' => __('Show Preview Thumbnail', 'essential-addons-for-elementor-lite'),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
@@ -318,7 +318,7 @@ class Facebook_Feed extends Widget_Base
             'eael_facebook_feed_is_show_preview_host',
             [
                 'label' => __('Show Preview Host Name', 'essential-addons-for-elementor-lite'),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
@@ -333,7 +333,7 @@ class Facebook_Feed extends Widget_Base
             'eael_facebook_feed_is_show_preview_title',
             [
                 'label' => __('Show Preview Title', 'essential-addons-for-elementor-lite'),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
@@ -348,7 +348,7 @@ class Facebook_Feed extends Widget_Base
             'eael_facebook_feed_is_show_preview_description',
             [
                 'label' => __('Show Preview Description', 'essential-addons-for-elementor-lite'),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
