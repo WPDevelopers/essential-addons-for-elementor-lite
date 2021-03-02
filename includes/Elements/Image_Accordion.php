@@ -600,7 +600,7 @@ class Image_Accordion extends Widget_Base {
             }
             ?>
 
-            <<?php echo $tag.' '; ?><?php echo $this->get_render_attribute_string( 'eael-image-accordion-link-' . $key ), $target,$nofollow,$attributes; ?> >
+            <<?php echo $tag.' '; ?><?php echo $this->get_render_attribute_string( 'eael-image-accordion-link-' . $key ), $target,$nofollow,$attributes; ?>  tabindex="<?php echo $key; ?>">
             <div class="overlay">
                 <div class="overlay-inner">
                     <div class="overlay-inner <?php echo( $active === 'yes' ? ' overlay-inner-show' : '' ); ?>">
