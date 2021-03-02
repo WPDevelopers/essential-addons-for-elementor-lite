@@ -252,28 +252,28 @@ class Image_Accordion extends Widget_Base {
                         'eael_accordion_tittle'  => esc_html__( 'Image Accordion #1', 'essential-addons-for-elementor-lite' ),
                         'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
                         'eael_accordion_bg'      => [
-                            'url' => Utils::get_placeholder_image_src(),
+                            'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png',
                         ]
                     ],
                     [
                         'eael_accordion_tittle'  => esc_html__( 'Image Accordion #2', 'essential-addons-for-elementor-lite' ),
                         'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
                         'eael_accordion_bg'      => [
-                            'url' => Utils::get_placeholder_image_src(),
+                            'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png',
                         ]
                     ],
                     [
                         'eael_accordion_tittle'  => esc_html__( 'Image Accordion #3', 'essential-addons-for-elementor-lite' ),
                         'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
                         'eael_accordion_bg'      => [
-                            'url' => Utils::get_placeholder_image_src(),
+                            'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png',
                         ]
                     ],
                     [
                         'eael_accordion_tittle'  => esc_html__( 'Image Accordion #4', 'essential-addons-for-elementor-lite' ),
                         'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
                         'eael_accordion_bg'      => [
-                            'url' => Utils::get_placeholder_image_src(),
+                            'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png',
                         ]
                     ],
                 ],
