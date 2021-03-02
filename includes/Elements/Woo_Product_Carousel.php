@@ -591,6 +591,9 @@ class Woo_Product_Carousel extends Widget_Base {
 						'icon'  => 'fa fa-align-right',
 					],
 				],
+                'condition' => [
+                    'eael_dynamic_template_layout!' => 'preset-2',
+                ]
 			]
 		);
 
@@ -2180,12 +2183,45 @@ class Woo_Product_Carousel extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'sub_section_dots_active_mode',
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'tab_dots_hover',
 			[
-				'label'     => __( 'Dots Active Style', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
+				'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'dots_color_hover',
+			[
+				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet:hover' => 'background: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'dots_border_color_hover',
+			[
+				'label'     => __( 'Border Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet:hover' => 'border-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'tab_dots_active',
+			[
+				'label' => __( 'Active', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
@@ -2257,39 +2293,6 @@ class Woo_Product_Carousel extends Widget_Base {
 				'name'     => 'active_dots_shadow',
 				'label'    => __( 'Shadow', 'essential-addons-for-elementor-lite' ),
 				'selector' => '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet-active',
-			]
-		);
-
-		$this->end_controls_tab();
-
-		$this->start_controls_tab(
-			'tab_dots_hover',
-			[
-				'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
-			]
-		);
-
-		$this->add_control(
-			'dots_color_hover',
-			[
-				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '',
-				'selectors' => [
-					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet:hover' => 'background: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'dots_border_color_hover',
-			[
-				'label'     => __( 'Border Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '',
-				'selectors' => [
-					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet:hover' => 'border-color: {{VALUE}};',
-				],
 			]
 		);
 
