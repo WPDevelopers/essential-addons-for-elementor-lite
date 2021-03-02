@@ -83,6 +83,14 @@
 	transition: all 0.3s ease-in-out;
 }
 
+.eael-img-accordion .eael-image-accordion-hover:after {
+	background-color: rgba(0, 0, 0, .3);
+}
+
+.eael-img-accordion .eael-image-accordion-hover:hover::after {
+    background-color: rgba(0, 0, 0, .5);
+}
+
 .eael-img-accordion .overlay-inner * {
 	visibility: hidden;
 	opacity: 0;
