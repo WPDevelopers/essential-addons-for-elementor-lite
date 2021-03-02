@@ -775,7 +775,7 @@ class Feature_List extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_feature_list_title_typography',
-                'selector' => '{{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title',
+                'selector' => '{{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title, {{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title a',
                 'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
             ]
         );
