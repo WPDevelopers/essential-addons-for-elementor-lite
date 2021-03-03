@@ -131,15 +131,19 @@ ea.hooks.addAction("init", "ea", () => {
 			const id = $this.attr("href");
 			const popup = $(id);
 			const popup_details = popup.children(".eael-product-popup-details");
+			const popup_view = $(".eael-woocommerce-popup-view");
 			if (popup_details.height() > 400) {
 				popup_details.css("height", "75vh");
 			} else {
 				popup_details.css("height", "auto");
 			}
 			$(id + " .variations_form").wc_variation_form();
-			popup
-				.addClass("eael-product-popup-ready")
-				.removeClass("eael-product-modal-removing");
+
+			popup_view.find(".eael-popup-details-render").html(popup_details);
+			popup_view
+			.addClass("eael-product-popup-ready")
+			.removeClass("eael-product-modal-removing");
+			popup_view.show();
 		});
 
 		$(document).on(
