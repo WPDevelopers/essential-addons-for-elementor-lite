@@ -149,6 +149,7 @@
                     // out of stock
                     .outofstock-badge {
                         line-height: 16px;
+                        font-size: 13px;
                         font-weight: 600;
                         display: flex;
                         justify-content: center;
@@ -463,6 +464,7 @@
 
                     .outofstock-badge {
                         line-height: 16px;
+                        font-size: 13px;
                         font-weight: 600;
                         display: flex;
                         justify-content: center;
@@ -554,10 +556,10 @@
                 align-items: center;
             }
             .outofstock-badge {
-                min-height: 3.346em;
+                min-height: 3.746em;
                 min-width: 3.746em;
-                padding: 0.202em;
-                font-size: 1em;
+                padding: .502em;
+                font-size: 13px;
                 font-weight: 700;
                 position: absolute;
                 text-align: center;
@@ -1230,9 +1232,9 @@
         &.sale-preset-5 {
             display: block;
             line-height: 74px;
-            height: 50px;
-            width: 100px;
-            left: -35pX;
+            height: 60px;
+            width: 120px;
+            left: -37pX;
             top: -8px;
             right: auto;
             padding: 0;
@@ -1240,6 +1242,7 @@
 
             &.outofstock {
                 line-height: normal;
+                padding-top: 12px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -1408,9 +1411,9 @@
             &.sale-preset-5 {
                 display: block;
                 line-height: 74px;
-                height: 50px;
-                width: 100px;
-                left: -35pX;
+                height: 60px;
+                width: 120px;
+                left: -37pX;
                 top: -8px;
                 right: auto;
                 padding: 0;
@@ -1418,6 +1421,7 @@
 
                 &.outofstock {
                     line-height: normal;
+                    padding-top: 12px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -2376,4 +2380,11 @@
         top: 40%;
         transition: all 0.2s;
     }
+}
+
+
+// Astra Default stockout issue resolve
+
+.woocommerce ul.products li.product .ast-shop-product-out-of-stock, .woocommerce-page ul.products li.product .ast-shop-product-out-of-stock {
+    display: none;
 }
