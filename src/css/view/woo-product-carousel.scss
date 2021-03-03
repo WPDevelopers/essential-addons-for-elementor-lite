@@ -1139,7 +1139,7 @@ $theme-preset4: #597dfc;
         }
 
         .product_title {
-            font-size: 28px;
+            font-size: 22px;
             line-height: 1.2em;
             font-weight: 700;
             margin-bottom: 10px;
@@ -1231,7 +1231,7 @@ $theme-preset4: #597dfc;
             }
 
             .button.single_add_to_cart_button {
-                padding: 10px 40px;
+                padding: 10px 40px !important;
             }
 
             .product-single-quantity {
