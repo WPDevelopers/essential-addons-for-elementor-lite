@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 5.0
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 4.5.1
+Stable tag: 4.5.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -226,6 +226,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.5.2 - 03/03/2021 =
+
+- Added: Dynamic query option for EA Woo Product Grid
+- Fixed: EA Login/Register Form | Error/Success message not appearing after Registration
+- Fixed: EA Advanced Accordion | Showing a border around the tab
+- Fixed: EA Facebook Feed | Preview content settings not working properly
+- Few minor bug fix and improvements
 
 = 4.5.1 - 23/02/2021 =
 - Fixed: EA Login Register Form | ‘Security Token Does Not Match’ error
