@@ -36,7 +36,7 @@ class Betterdocs_Category_Box extends Widget_Base {
 
     public function get_categories()
     {
-        return ['essential-addons-elementor', 'docs-archive'];
+        return ['essential-addons-elementor'];
     }
 
     public function get_icon()
