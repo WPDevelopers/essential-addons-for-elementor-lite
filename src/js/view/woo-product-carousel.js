@@ -238,6 +238,12 @@ ea.hooks.addAction("init", "ea", () => {
 				.removeClass("eael-product-popup-ready");
 		});
 
+		if (isEditMode) {
+			$(".eael-product-image-wrap .woocommerce-product-gallery").css(
+				"opacity",
+				"1"
+			);
+		}
 	};
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eael-woo-product-carousel.default",
