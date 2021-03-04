@@ -1,10 +1,10 @@
 === Essential Addons for Elementor ===
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, mahfuz01, nazsabuz, manzurahammed
 Tags: elementor, elements, addons, elementor addon, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
-Requires at least: 4.0
-Tested up to: 5.5
-Requires PHP: 5.4
-Stable tag: 4.3.7
+Requires at least: 5.0
+Tested up to: 5.6
+Requires PHP: 5.6
+Stable tag: 4.5.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -43,7 +43,7 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 
 ### 40+ FREE WIDGETS AND COUNTING
 
-We have designed 39 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
+We have designed 42 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
 1. [Post Grid](https://essential-addons.com/elementor/post-grid/) - Showcase your blog posts in 4 unique styles 
 2. [Post Timeline](https://essential-addons.com/elementor/post-timeline/) - Create stunning timeline for your Posts, Pages or any Custom Post. 
@@ -84,7 +84,10 @@ We have designed 39 of the most useful widgets to enhance your Elementor Page Bu
 37. [Event Calendar](https://essential-addons.com/elementor/event-calendar) - Create your own customized Event page by custom events, Google Calendar events and many more third party plugin integrations. 
 38. [Formstack](https://essential-addons.com/elementor/formstack/) - Design your Formstack forms within Elementor. 
 39. [Woo Checkout](https://essential-addons.com/elementor/woo-checkout/) - Create your own WooCommerce Checkout page and customize and design everything. 
-40. [Typeform](https://essential-addons.com/elementor/typeform/) - Embed and Design your Typeform forms within Elementor. 
+40. [Typeform](https://essential-addons.com/elementor/typeform/) - Embed and Design your Typeform forms within Elementor.
+41. [Login | Register Form](https://essential-addons.com/elementor/login-register-form/) - Create amazing and attractive login or registration forms in Elementor 
+42. [Woo Product Compare](https://essential-addons.com/elementor/woo-product-compare/) - Create stunning WooCommerce Product Compare table instantly
+
 
 
 ### More elements (29+) on [Premium Version](https://wpdeveloper.net/in/upgrade-essential-addons-elementor)
@@ -124,7 +127,7 @@ Extensions (Free):
 
 1. [Reading Progress Bar](https://essential-addons.com/elementor/reading-progress/) - Add a reading progress bar to your page/post to indicate the current reading position.
 2. [Page/Post Duplicator](https://essential-addons.com/elementor/post-duplicator/) - Duplicate any page or post in a single click.
-3. [Table of Content](https://essential-addons.com/elementor/table-of-content/) - Display Table of Content automatically on any page, post or custom post type. You can control globally. 
+3. [Table of Contents](https://essential-addons.com/elementor/table-of-content/) - Display Table of Content automatically on any page, post or custom post type. You can control globally. 
 
 Extensions (Pro): 
 
@@ -223,6 +226,69 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.5.2 - 03/03/2021 =
+
+- Added: Dynamic query option for EA Woo Product Grid
+- Fixed: EA Login/Register Form | Error/Success message not appearing after Registration
+- Fixed: EA Advanced Accordion | Showing a border around the tab
+- Fixed: EA Facebook Feed | Preview content settings not working properly
+- Few minor bug fix and improvements
+
+= 4.5.1 - 23/02/2021 =
+- Fixed: EA Login Register Form | ‘Security Token Does Not Match’ error
+- Fixed: EA Product Grid | Pagination disappearing with the latest update
+- Fixed: EA Product Grid | ‘Filtered by Sale’ not working for variable products
+- Fixed: EA Image Accordion | toggle option to add link in the content
+- Fixed: EA Event Calendar | Date showing invalid for All day events
+- Fixed: EA Advanced Data Table | Sorting not working on Mozilla Firefox
+- Fixed: EA Post Grid | ‘Dynamic’ query not working
+- Fixed: EA Event Calendar | 24 Hours format not working correctly
+- Fixed: EA Product Grid | ‘Filtered by Sale’ not working for variable products
+- Fixed: EA Sticky Video | Copy Link button not working
+- Fixed: EA Creative Button | Icon color not changing
+- Few minor bug fix and improvements
+
+= 4.5.0 - 08/02/2021 =
+- Added: Quick Setup wizard for new installations
+- Few minor bug fix and improvements
+
+= 4.4.1 - 29/01/2021 =
+- Fixed: EA Filterable Gallery | style controls not working after Elementor update
+- Fixed: EA Fancy Text | not working inside Elementor Editor
+- Few minor bug fix and improvements
+
+
+= 4.4.0 - 26/01/2021 =
+- Added: EA Woo Product Compare
+- Added: EA Woo Product Compare integration with EA Product Grid
+- Fixed: EA Login | Register | Showing Invalid Username message for Invalid Password
+- Fixed: EA Login | Register | added "Remember Me" text controller
+- Few minor bug fix and improvements
+
+
+= 4.3.10 - 07/01/2021 =
+- Fixed: EA Info Box | Throwing PHP Notice when Image option is enabled
+- Fixed: EA Filterable Gallery | Dropdown menu not disappearing on Safari
+- Fixed: EA Woo Checkout | Added String Controller for returning customers
+- Fixed: EA Gravity Forms | removed extra padding
+- Fixed: EA Data Table | Throwing PHP Notice
+- Few minor bug fix and improvements
+
+= 4.3.9 - 23/12/2020 =
+- Fixed: Custom JS not working after first reload
+- Fixed: EA Advanced Data Table | sorting not working for nested elements in table header
+- Fixed: Missing Background color option for EA Testimonial
+- Fixed: EA Pricing Table | Style 5 Ribbon Text color not changing
+- Fixed: EA Info box | Dynamic tags not working
+- Few minor bug fix and improvements
+
+= 4.3.8 - 10/12/2020 =
+- Fixed: EA Fancy Text & Adv. Data Table  | not working on WordPress 5.6
+- Fixed: EA Product Grid | Rating controller not working with Default Style
+- Fixed: EA Flip Box | Button icon not displaying
+- Added: EA Event Calendar | 24 Hours format option
+- Few minor bug fix and improvements
 
 = 4.3.7 - 19/11/2020 =
 - Fixed: Broken style if Object Cache is enabled

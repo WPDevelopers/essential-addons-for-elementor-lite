@@ -212,6 +212,11 @@ trait Generator
         // parse loaded elements
         $this->loaded_elements = $this->parse_elements($this->loaded_elements);
 
+        // push custom js as element so that it prints to page if elements is empty
+        if ($this->custom_js_strings) {
+            $this->loaded_elements[] = 'custom-js';
+        }
+
         // update page data
         update_option($this->uid . '_elements', $this->loaded_elements);
         update_option($this->uid . '_custom_js', $this->custom_js_strings);

@@ -3718,7 +3718,8 @@ class Login_Register extends Widget_Base {
 	protected function print_login_form() {
 		if ( $this->should_print_login_form ) {
 			// prepare all login form related vars
-			$default_hide_class = 'register' === $this->default_form ? 'd-none' : '';
+			$default_hide_class = 'register' === $this->default_form || isset($_GET['eael-register']) ? 'd-none' : '';
+
 			//Reg link related
 			$reg_link_action = ! empty( $this->ds['registration_link_action'] ) ? $this->ds['registration_link_action'] : 'form';
 			$show_reg_link   = ( $this->user_can_register && 'yes' === $this->get_settings( 'show_register_link' ) );
@@ -3927,7 +3928,7 @@ class Login_Register extends Widget_Base {
 
 	protected function print_register_form() {
 		if ( $this->should_print_register_form ) {
-			$default_hide_class = 'login' === $this->default_form ? 'd-none' : '';
+			$default_hide_class = 'login' === $this->default_form && !isset($_GET['eael-register']) ? 'd-none' : ''; //eael-register flag for show error/success message when formal form submit
 			$is_pass_valid      = false; // Does the form has a password field?
 			$is_pass_confirmed  = false;
 			// placeholders to flag if user use one type of field more than once.
@@ -4277,7 +4278,7 @@ class Login_Register extends Widget_Base {
 
 	protected function print_login_validation_errors() {
 		$error_key = 'eael_login_error_' . $this->get_id();
-		if ( $login_error = apply_filters( 'eael/login-register/login-error-message', get_transient( $error_key ) ) ) {
+		if ( $login_error = apply_filters( 'eael/login-register/login-error-message', get_option( $error_key ) ) ) {
 			do_action( 'eael/login-register/before-showing-login-error', $login_error, $this );
 			?>
             <p class="eael-form-msg invalid">
@@ -4286,7 +4287,7 @@ class Login_Register extends Widget_Base {
 			<?php
 			do_action( 'eael/login-register/after-showing-login-error', $login_error, $this );
 
-			delete_transient( $error_key );
+			delete_option( $error_key );
 		}
 	}
 
@@ -4355,8 +4356,8 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_validation_message() {
-		$errors  = get_transient( 'eael_register_errors_' . $this->get_id() );
-		$success = get_transient( 'eael_register_success_' . $this->get_id() );
+		$errors  = get_option( 'eael_register_errors_' . $this->get_id() );
+		$success = get_option( 'eael_register_success_' . $this->get_id() );
 		if ( empty( $errors ) && empty( $success ) ) {
 			return;
 		}
@@ -4384,7 +4385,7 @@ class Login_Register extends Widget_Base {
             </ol>
         </div>
 		<?php
-		delete_transient( 'eael_register_errors_' . $this->get_id() );
+		delete_option( 'eael_register_errors_' . $this->get_id() );
 	}
 
 	protected function print_registration_success_message( $success ) {
@@ -4393,7 +4394,7 @@ class Login_Register extends Widget_Base {
 			$message = '<p class="eael-form-msg valid">' . esc_html( $this->get_settings_for_display( 'success_register' ) ) . '</p>';
 			echo apply_filters( 'eael/login-register/registration-success-msg', $message, $success );
 
-			delete_transient( 'eael_register_success_' . $this->get_id() );
+			delete_option( 'eael_register_success_' . $this->get_id() );
 
 			return true; // it will help in case we wanna know if error is printed.
 		}

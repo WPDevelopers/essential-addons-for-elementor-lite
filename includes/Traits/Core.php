@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
 
 use \Elementor\Plugin;
 use \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker;
+use function SimplePay\Core\Admin\Usage_Tracking\get_optin_notice;
 
 trait Core
 {
@@ -144,6 +145,18 @@ trait Core
         $values = get_option('eael_save_settings');
 
         return update_option('eael_save_settings', wp_parse_args($values, $defaults));
+    }
+
+    /**
+     * Save setup wizard data
+     *
+     * @since v4.0.0
+     */
+    public function enable_setup_wizard()
+    {
+        if ( !get_option( 'eael_version' ) && !get_option( 'eael_setup_wizard' ) ) {
+            update_option( 'eael_setup_wizard', 'redirect' );
+        }
     }
 
     /**

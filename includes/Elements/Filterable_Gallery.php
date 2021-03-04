@@ -640,7 +640,7 @@ class Filterable_Gallery extends Widget_Base
                     ['eael_fg_gallery_item_name' => 'Gallery Item Name'],
                     ['eael_fg_gallery_item_name' => 'Gallery Item Name'],
                 ],
-                'fields' => array_values($repeater->get_controls()),
+                'fields' => $repeater->get_controls(),
                 'title_field' => '{{eael_fg_gallery_item_name}}',
             ]
         );
@@ -3062,7 +3062,6 @@ class Filterable_Gallery extends Widget_Base
             
             $gallery_markup[] = $html;
         }
-        
         return $gallery_markup;
     }
     
@@ -3095,6 +3094,7 @@ class Filterable_Gallery extends Widget_Base
 
             if ($settings['eael_section_fg_full_image_clickable']) {
                 if ($settings['eael_section_fg_full_image_action'] === 'lightbox' && !$popup_status) {
+                    $popup_status = true;
                     $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap" data-elementor-open-lightbox="no">';
                 }
                 
@@ -3144,7 +3144,7 @@ class Filterable_Gallery extends Widget_Base
                 $html .= '</a>';
             }
 
-            if ($settings['eael_fg_show_popup'] == 'media' && $settings['eael_fg_caption_style'] !== 'card') {
+            if ($settings['eael_fg_show_popup'] == 'media' && $settings['eael_fg_caption_style'] !== 'card' && !$popup_status) {
                 $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap" data-elementor-open-lightbox="no">';
             }
 
@@ -3187,9 +3187,12 @@ class Filterable_Gallery extends Widget_Base
                 $html .= '</a>';
             }
 
+            if ($settings['eael_section_fg_full_image_clickable']) {
+                $html .= '</a>';
+            }
 
             $html .= '</div></div>';
-            
+
             $gallery_markup[] = $html;
         }
 

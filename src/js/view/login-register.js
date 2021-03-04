@@ -14,15 +14,24 @@ ea.hooks.addAction("init", "ea", () => {
         const $loginLinkAction = $scope.find('#eael-lr-login-toggle');
         const $passField = $loginFormWrapper.find('#eael-user-password');
         const recaptchaAvailable = (typeof grecaptcha !== 'undefined' && grecaptcha !== null);
+        const params = new URLSearchParams(location.search);
         if ('form' === $regLinkAction.data('action')) {
             $regLinkAction.on('click', function (e) {
                 e.preventDefault();
+                if (!params.has('eael-register')){
+                    params.append('eael-register',1);
+                }
+                window.history.replaceState({}, '', `${location.pathname}?${params}`);
                 $loginFormWrapper.hide();
                 $regFormWrapper.fadeIn();
             });
         }
         if ('form' === $loginLinkAction.data('action')) {
             $loginLinkAction.on('click', function (e) {
+                if (params.has('eael-register')){
+                    params.delete('eael-register');
+                }
+                window.history.replaceState({}, '', `${location.pathname}?${params}`);
                 e.preventDefault();
                 $regFormWrapper.hide();
                 $loginFormWrapper.fadeIn();
@@ -50,6 +59,9 @@ ea.hooks.addAction("init", "ea", () => {
             let loginRecaptchaNode = document.getElementById('login-recaptcha-node-' + widgetId);
             let registerRecaptchaNode = document.getElementById('register-recaptcha-node-' + widgetId);
 
+            if(typeof grecaptcha.render !="function"){
+                return false;
+            }
             if (loginRecaptchaNode) {
                 grecaptcha.render(loginRecaptchaNode, {
                     'sitekey': recaptchaSiteKey,
@@ -71,11 +83,18 @@ ea.hooks.addAction("init", "ea", () => {
             onloadLRcb();
         }else{
             // on frontend, load even is yet to fire, so wait and fire recaptcha
-            $(window).load(function () {
-                if (recaptchaAvailable){
+            let navData = window.performance.getEntriesByType("navigation");
+            if (navData.length > 0 && navData[0].loadEventEnd > 0) {
+                if (recaptchaAvailable) {
                     onloadLRcb();
                 }
-            });
+            } else {
+                $(window).on('load', function () {
+                    if (recaptchaAvailable) {
+                        onloadLRcb();
+                    }
+                });
+            }
         }
     };
     elementorFrontend.hooks.addAction("frontend/element_ready/eael-login-register.default", EALoginRegister);

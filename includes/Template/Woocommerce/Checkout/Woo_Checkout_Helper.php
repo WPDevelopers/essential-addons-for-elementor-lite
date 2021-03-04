@@ -1,7 +1,8 @@
 <?php
 namespace Essential_Addons_Elementor\Template\Woocommerce\Checkout;
 
-use Elementor\Icons_Manager;
+use \Elementor\Icons_Manager;
+use \Exception;
 
 if (!defined('ABSPATH')) {
 	exit;
@@ -308,8 +309,9 @@ trait Woo_Checkout_Helper {
 				<?php wc_print_notice( apply_filters( 'woocommerce_checkout_login_message', $settings['ea_woo_checkout_login_title'] ) . ' <a href="#" class="showlogin">' . $settings['ea_woo_checkout_login_link_text'] . '</a>', 'notice' ); ?>
             </div>
 
-			<?php
-			$message  = esc_html__( 'If you have shopped with us before, please enter your details below. If you are a new customer, please proceed to the Billing section.', 'essential-addons-for-elementor-lite' );
+      <?php
+      $message  = $settings['ea_woo_checkout_login_message'];
+
 			$redirect = wc_get_checkout_url();
 			$hidden   = true;
 			?>

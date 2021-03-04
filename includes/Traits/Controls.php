@@ -747,7 +747,7 @@ trait Controls
                         'label_block' => false,
                         'default' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
                         'condition' => [
-                            'show_load_more' => 'yes',
+                            'show_load_more' => ['yes', '1', 'true'],
                         ],
                     ]
                 );

@@ -164,8 +164,8 @@
         var val = $(target).val();
         var docSelector = $(this).data("doc");
         var docMarkup = docSelector
-                        ? $(docSelector).clone().css("display", "block")
-                        : false;
+            ? $(docSelector).clone().css("display", "block")
+            : false;
 
         if (Object.keys(options).length > 0) {
             prepareOptions["all"] = "All";
@@ -209,31 +209,36 @@
         }
     });
 
-
     /**
      * Open a popup for typeform auth2 authentication
      */
-    $("#eael-typeform-get-access").on('click', function (e) {
+    $("#eael-typeform-get-access").on("click", function (e) {
         e.preventDefault();
         var link = $(this).data("link");
-        if (link != '') {
-            window.open(link, 'mywindowtitle', 'width=500,height=500,left=500,top=200');
+        if (link != "") {
+            window.open(
+                link,
+                "mywindowtitle",
+                "width=500,height=500,left=500,top=200"
+            );
         }
     });
 
     // New Sweet Alert Forms for admin settings | Login & Register Settings
-    $(document).on('click', '#eael-admin-settings-popup-extended', function (e) {
+    $(document).on("click", "#eael-admin-settings-popup-extended", function (e) {
         e.preventDefault();
         const lr_i18n = localize.i18n.login_register;
-        let settingsNodeId = $(this).data('settings-id');
-        let $dnode = $('#'+settingsNodeId);
-        let isProEnable = $dnode.data('pro-enabled');
-        let rSitekey = $dnode.data('r-sitekey');
-        let rSecret = $dnode.data('r-secret');
-        let gClientId = $dnode.data('g-client-id');
-        let fbAppId = $dnode.data('fb-app-id');
-        let fbAppSecret = $dnode.data('fb-app-secret');
-        let footerLink = isProEnable ? `<a target="_blank" href="https://essential-addons.com/elementor/docs/social-login-recaptcha">${lr_i18n.m_footer}</a>` : `<a target="_blank" href="https://www.google.com/recaptcha/admin/create">${lr_i18n.m_footer}</a>`
+        let settingsNodeId = $(this).data("settings-id");
+        let $dnode = $("#" + settingsNodeId);
+        let isProEnable = $dnode.data("pro-enabled");
+        let rSitekey = $dnode.data("r-sitekey");
+        let rSecret = $dnode.data("r-secret");
+        let gClientId = $dnode.data("g-client-id");
+        let fbAppId = $dnode.data("fb-app-id");
+        let fbAppSecret = $dnode.data("fb-app-secret");
+        let footerLink = isProEnable
+            ? `<a target="_blank" href="https://essential-addons.com/elementor/docs/social-login-recaptcha">${lr_i18n.m_footer}</a>`
+            : `<a target="_blank" href="https://www.google.com/recaptcha/admin/create">${lr_i18n.m_footer}</a>`;
         let html = `<div class="eael-lr-settings-fields" id="lr_settings_fields">
                         <h2>${lr_i18n.r_title}</h2>
                         <div class="sf-group">
@@ -245,7 +250,7 @@
                             <input value="${rSecret}" name="lr_recaptcha_secret" id="lr_recaptcha_secret" placeholder="${lr_i18n.r_sitesecret}"/><br/>
                         </div>
                     `;
-        if (isProEnable){
+        if (isProEnable) {
             html += `<hr>
                         <h2>${lr_i18n.g_title}</h2>
                         <div class="sf-group">
@@ -263,7 +268,7 @@
                             <input value="${fbAppSecret}" name="lr_fb_app_secret" id="lr_fb_app_secret" placeholder="${lr_i18n.f_app_secret}"/><br/>
                         </div>`;
         }
-        html  += '</div>'
+        html += "</div>";
 
         Swal.fire({
             title: `<strong>${lr_i18n.m_title}</strong>`,
@@ -276,18 +281,22 @@
             cancelButtonText: lr_i18n.cancel,
             preConfirm: () => {
                 let formData = {
-                    recaptchaSiteKey: document.getElementById('lr_recaptcha_sitekey').value,
-                    recaptchaSiteSecret: document.getElementById('lr_recaptcha_secret').value,
-                }
-                if (isProEnable){
-                    formData.gClientId = document.getElementById('lr_g_client_id').value;
-                    formData.fbAppId = document.getElementById('lr_fb_app_id').value;
-                    formData.fbAppSecret = document.getElementById('lr_fb_app_secret').value;
+                    recaptchaSiteKey: document.getElementById("lr_recaptcha_sitekey")
+                        .value,
+                    recaptchaSiteSecret: document.getElementById("lr_recaptcha_secret")
+                        .value,
+                };
+                if (isProEnable) {
+                    formData.gClientId = document.getElementById("lr_g_client_id").value;
+                    formData.fbAppId = document.getElementById("lr_fb_app_id").value;
+                    formData.fbAppSecret = document.getElementById(
+                        "lr_fb_app_secret"
+                    ).value;
                 }
                 return formData;
-            }
+            },
         }).then((result) => {
-            if (result.value){
+            if (result.value) {
                 $.ajax({
                     url: localize.ajaxurl,
                     type: "POST",
@@ -298,7 +307,7 @@
                         is_login_register: 1,
                     },
                     success: function (response) {
-                        if (response.success){
+                        if (response.success) {
                             Swal.fire({
                                 type: "success",
                                 title: response.message ? response.message : lr_i18n.rm_title,
@@ -320,5 +329,217 @@
         });
     });
 
-})(jQuery);
+    // install/activate plugin
+    $(document).on("click", ".wpdeveloper-plugin-installer", function (ev) {
+        ev.preventDefault();
 
+        var button = $(this);
+        var action = $(this).data("action");
+        var slug = $(this).data("slug");
+        var basename = $(this).data("basename");
+
+        if ($.active && typeof action != "undefined" && action!='completed') {
+            button.text("Waiting...").attr("disabled", true);
+
+            setInterval(function () {
+                if (!$.active) {
+                    button.attr("disabled", false).trigger("click");
+                }
+            }, 1000);
+        }
+
+        if (action == "install" && !$.active) {
+            button.text("Installing...").attr("disabled", true);
+
+            $.ajax({
+                url: localize.ajaxurl,
+                type: "POST",
+                data: {
+                    action: "wpdeveloper_install_plugin",
+                    security: localize.nonce,
+                    slug: slug,
+                },
+                success: function (response) {
+                    if (response.success) {
+                        button.attr("disabled", true);
+                        button.text("Activated");
+                        button.data("action", 'completed');
+                        $( "body" ).trigger( 'eael_after_active_plugin',{plugin:slug} );
+                    } else {
+                        button.attr("disabled", false);
+                        button.text("Install");
+                        alert(response.data);
+                    }
+                },
+                error: function (err) {
+                    console.log(err.responseJSON);
+                },
+            });
+        } else if (action == "activate" && !$.active) {
+            button.text("Activating...").attr("disabled", true);
+
+            $.ajax({
+                url: localize.ajaxurl,
+                type: "POST",
+                data: {
+                    action: "wpdeveloper_activate_plugin",
+                    security: localize.nonce,
+                    basename: basename,
+                },
+                success: function (response) {
+                    if (response.success) {
+                        button.text("Activated");
+                        button.data("action", null);
+                        $( "body" ).trigger( 'eael_after_active_plugin',{plugin:basename} );
+                    } else {
+                        button.text("Activate");
+                        alert(response.data);
+                    }
+
+                    button.attr("disabled", false);
+                },
+                error: function (err) {
+                    console.log(err.responseJSON);
+                },
+            });
+        }
+    });
+
+    $(document).on('click', '.eael-setup-wizard-save', function (e) {
+        var $this = $(this);
+        $this.attr('disabled', 'disabled');
+        $.ajax({
+            url: localize.ajaxurl,
+            type: "POST",
+            data: {
+                action: "save_setup_wizard_data",
+                security: localize.nonce,
+                fields: $("form.eael-setup-wizard-form").serialize()
+            },
+
+            success: function (response) {
+                if (response.success) {
+                    Swal.fire({
+                        timer: 3000,
+                        showConfirmButton: false,
+                        imageUrl: localize.success_image,
+                    }).then((result) => {
+                        window.location = response.data.redirect_url;
+                    });
+                } else {
+                    $this.attr('disabled', 'disabled');
+                    Swal.fire({
+                        type: "error",
+                        title: 'Error',
+                        text: 'error',
+                    });
+                }
+            },
+            error: function (err) {
+                $this.attr('disabled', 'disabled');
+                Swal.fire({
+                    type: "error",
+                    title: 'Error',
+                    text: 'error',
+                });
+            },
+        });
+    });
+
+    $(document).on('change', '.eael_preferences', function (e) {
+        var $this = $(this),
+            preferences = $this.val();
+
+        var elements = $(".eael-elements-container .eael-elements-info input[type=checkbox]");
+        if (elements.length > 0) {
+            if (preferences == 'custom') {
+                elements.prop('checked', true)
+            } else {
+                elements.prop('checked', false)
+                elements.each(function (i, item) {
+                    if (preferences == 'advance' && $(item).data('preferences') != '') {
+                        $(item).prop('checked', true)
+                    } else if ($(item).data('preferences') == preferences) {
+                        $(item).prop('checked', true)
+                    }
+                })
+            }
+        }
+    });
+
+    eaelRenderTab();
+
+    function eaelRenderTab(step = 0) {
+
+        var contents = document.getElementsByClassName("setup-content"),
+            prev = document.getElementById("eael-prev"),
+            nextElement = document.getElementById("eael-next"),
+            saveElement = document.getElementById("eael-save");
+
+        if (contents.length < 1) {
+            return;
+        }
+
+        contents[step].style.display = "block";
+        prev.style.display = (step == 0) ? "none" : "inline";
+
+        if (step == (contents.length - 1)) {
+            saveElement.style.display = "inline";
+            nextElement.style.display = "none";
+        } else {
+            nextElement.style.display = "inline";
+            saveElement.style.display = "none";
+        }
+        eaelStepIndicator(step)
+    }
+
+    function eaelStepIndicator(stepNumber) {
+        var steps = document.getElementsByClassName("step"),
+            container = document.getElementsByClassName("eael-setup-wizard");
+        container[0].setAttribute('data-step', stepNumber);
+
+        for (var i = 0; i < steps.length; i++) {
+            steps[i].className = steps[i].className.replace(" active", "");
+        }
+
+        steps[stepNumber].className += " active";
+    }
+
+    $(document).on('click', '#eael-next,#eael-prev', function (e) {
+        var container = document.getElementsByClassName("eael-setup-wizard"),
+            StepNumber = parseInt(container[0].getAttribute('data-step')),
+            contents = document.getElementsByClassName("setup-content");
+
+        contents[StepNumber].style.display = "none";
+        StepNumber = (e.target.id == 'eael-prev') ? StepNumber - 1 : StepNumber + 1;
+        if (e.target.id == 'eael-next' && StepNumber == 2) {
+            $.ajax({
+                url: localize.ajaxurl,
+                type: "POST",
+                data: {
+                    action: "save_eael_elements_data",
+                    security: localize.nonce,
+                    fields: $("form.eael-setup-wizard-form").serialize()
+                }
+            });
+        }
+        if (StepNumber >= contents.length) {
+            return false;
+        }
+        eaelRenderTab(StepNumber);
+    });
+
+    $('.btn-collect').on('click', function () {
+        $(".eael-whatwecollecttext").toggle();
+    });
+
+
+    $(document).on('eael_after_active_plugin', function (event, obj) {
+        if (obj.plugin == 'templately/templately.php' || obj.plugin == 'templately') {
+            if($(".eael-settings-tabs").length>0){
+                location.reload();
+            }
+        }
+    })
+
+})(jQuery);

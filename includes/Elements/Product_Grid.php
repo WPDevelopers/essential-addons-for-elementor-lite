@@ -194,8 +194,19 @@ class Product_Grid extends Widget_Base
         $table = ".eael-wcpc-modal .eael-wcpc-wrapper table";
         $table_title = ".eael-wcpc-modal .eael-wcpc-wrapper .wcpc-title";
         $table_title_wrap = ".eael-wcpc-modal .eael-wcpc-wrapper .first-th";
+        $compare_btn_condition = [
+            'eael_product_grid_style_preset!' => [
+                'eael-product-preset-5',
+                'eael-product-preset-6',
+                'eael-product-preset-7',
+                'eael-product-preset-8',
+            ],
+            'eael_product_grid_layout!' => 'list',
+        ];
+        $this->init_style_compare_button_controls($compare_btn_condition);
         $this->init_style_content_controls(compact('container_class'));
         $this->init_style_table_controls(compact('table', 'table_title', 'table_title_wrap'));
+        $this->init_style_close_button_controls();
     }
 
     protected function init_content_layout_controls()
@@ -309,11 +320,50 @@ class Product_Grid extends Widget_Base
             'label' => esc_html__('Product Settings', 'essential-addons-for-elementor-lite'),
         ]);
 
+        $this->add_control(
+            'post_type',
+            [
+                'label'   => __( 'Source', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'product',
+                'options' => [
+                    'product'        => esc_html__( 'Products', 'essential-addons-for-elementor-lite' ),
+                    'source_dynamic' => esc_html__( 'Dynamic', 'essential-addons-for-elementor-lite' ),
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_global_dynamic_source_warning_text',
+            [
+                'type'            => Controls_Manager::RAW_HTML,
+                'raw'             => __( 'This option will only affect in <strong>Archive page of Elementor Theme Builder</strong> dynamically.', 'essential-addons-for-elementor-lite' ),
+                'content_classes' => 'eael-warning',
+                'condition'       => [
+                    'post_type' => 'source_dynamic',
+                ],
+            ]
+        );
+
+        if ( !apply_filters( 'eael/is_plugin_active', 'woocommerce/woocommerce.php' ) ) {
+            $this->add_control(
+                'ea_product_grid_woo_required',
+                [
+                    'type'            => Controls_Manager::RAW_HTML,
+                    'raw'             => __( '<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.', 'essential-addons-for-elementor-lite' ),
+                    'content_classes' => 'eael-warning',
+                ]
+            );
+        }
+
         $this->add_control('eael_product_grid_product_filter', [
             'label' => esc_html__('Filter By', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::SELECT,
             'default' => 'recent-products',
             'options' => $this->eael_get_product_filterby_options(),
+            'condition' => [
+              'post_type!' => 'source_dynamic',
+            ],
         ]);
 
         $this->add_control('orderby', [
@@ -356,6 +406,9 @@ class Product_Grid extends Widget_Base
             'label_block' => true,
             'multiple' => true,
             'options' => HelperClass::get_terms_list('product_cat', 'slug'),
+            'condition'   => [
+              'post_type!' => 'source_dynamic',
+            ],
         ]);
         $this->add_control(
             'eael_dynamic_template_Layout',
@@ -372,6 +425,10 @@ class Product_Grid extends Widget_Base
             'type' => Controls_Manager::SWITCHER,
             'return_value' => 'yes',
             'default' => 'yes',
+            'condition' => [
+                'eael_product_grid_style_preset!' => ['eael-product-preset-8'],
+            ],
+
         ]);
 
         $this->add_control(
@@ -537,6 +594,23 @@ class Product_Grid extends Widget_Base
     {
         $this->start_controls_section('eael_product_grid_load_more_section', [
             'label' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
+            'conditions' => [
+                'relation' => 'or',
+                'terms' => [
+                    [
+                        'name' => 'eael_product_grid_layout',
+                        'operator' => 'in',
+                        'value' => [
+                            'masonry',
+                        ],
+                    ],
+                    [
+                        'name' => 'show_pagination',
+                        'operator' => '!=',
+                        'value' => 'true'
+                    ],
+                ],
+            ],
         ]);
 
         $this->add_control('show_load_more', [
@@ -554,7 +628,7 @@ class Product_Grid extends Widget_Base
             'label_block' => false,
             'default' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
             'condition' => [
-                'show_load_more' => 'true',
+                'show_load_more' => ['yes', '1', 'true'],
             ],
         ]);
 
@@ -1560,7 +1634,7 @@ class Product_Grid extends Widget_Base
             ]
         );
 
-        $this->add_responsive_control(
+        $this->add_control(
             'eael_product_sale_badge_alignment',
             [
                 'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
@@ -1776,6 +1850,7 @@ class Product_Grid extends Widget_Base
                 'default' => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-grid .eael-product-wrap .icons-wrap li a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-compare-icon' => 'fill: {{VALUE}};',
                 ],
             ]
         );
@@ -1946,6 +2021,7 @@ class Product_Grid extends Widget_Base
                 'tab' => Controls_Manager::TAB_CONTENT,
                 'condition' => [
                     'eael_product_grid_layout' => ['grid', 'list'],
+                    'show_load_more!' => 'true'
                 ],
             ]
         );
@@ -2792,6 +2868,117 @@ class Product_Grid extends Widget_Base
             return;
         }
         $settings = $this->get_settings_for_display();
+
+        // normalize for load more fix
+        $settings['layout_mode'] = $settings["eael_product_grid_layout"];
+        $widget_id = $this->get_id();
+        $settings['eael_widget_id'] = $widget_id;
+        if ( $settings[ 'post_type' ] === 'source_dynamic' && is_archive() || !empty($_REQUEST['post_type'])) {
+            $settings[ 'posts_per_page' ] = $settings[ 'eael_product_grid_products_count' ] ?: 4;
+            $settings[ 'offset' ]         = $settings[ 'product_offset' ];
+            $args                         = HelperClass::get_query_args( $settings );
+            $args                         = HelperClass::get_dynamic_args( $settings, $args );
+        } else {
+            $args = $this->build_product_query( $settings );
+        }
+
+        $this->is_show_custom_add_to_cart = boolval($settings['show_add_to_cart_custom_text']);
+        $this->simple_add_to_cart_button_text = $settings['add_to_cart_simple_product_button_text'];
+        $this->variable_add_to_cart_button_text = $settings['add_to_cart_variable_product_button_text'];
+        $this->grouped_add_to_cart_button_text = $settings['add_to_cart_grouped_product_button_text'];
+        $this->external_add_to_cart_button_text = $settings['add_to_cart_external_product_button_text'];
+        $this->default_add_to_cart_button_text = $settings['add_to_cart_default_product_button_text'];
+
+        if (Plugin::$instance->documents->get_current()) {
+            $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
+        }
+        // render dom
+        $this->add_render_attribute('wrap', [
+            'class' => [
+                "eael-product-grid",
+                $settings['eael_product_grid_style_preset'],
+                $settings['eael_product_grid_layout']
+            ],
+            'id' => 'eael-product-grid',
+            'data-widget-id' => $widget_id,
+            'data-page-id' => $this->page_id,
+            'data-nonce' => wp_create_nonce('eael_product_grid'),
+        ]);
+
+        add_filter('woocommerce_product_add_to_cart_text', [
+            $this,
+            'add_to_cart_button_custom_text',
+        ]);
+        ?>
+
+        <div <?php $this->print_render_attribute_string('wrap'); ?> >
+            <div class="woocommerce">
+                <?php
+                do_action( 'eael_woo_before_product_loop' );
+                $template = $this->get_template($settings['eael_dynamic_template_Layout']);
+                if (file_exists($template)) {
+                    $query = new \WP_Query($args);
+                    if ($query->have_posts()) {
+                        echo '<ul class="products" data-layout-mode="' . $settings["eael_product_grid_layout"] . '">';
+                        while ($query->have_posts()) {
+                            $query->the_post();
+                            include($template);
+                        }
+                        wp_reset_postdata();
+                        echo '</ul>';
+                    } else {
+                        _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                    }
+                } else {
+                    _e('<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite');
+                }
+                if ( 'true' == $settings['show_pagination'] ) {
+                    $settings['eael_widget_name'] = $this->get_name();
+                    echo HelperClass::eael_pagination($args, $settings);
+                }
+
+
+                $this->print_load_more_button($settings, $args);
+                ?>
+            </div>
+        </div>
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>");
+                var $products = $('.products', $scope);
+                var $layout_mode = $products.data('layout-mode');
+                
+                if ($layout_mode === 'masonry') {
+                    // init isotope
+                    var $isotope_products = $products.isotope({
+                        itemSelector: "li.product",
+                        layoutMode: $layout_mode,
+                        percentPosition: true
+                    });
+
+                    $isotope_products.imagesLoaded().progress( function() {
+                        $isotope_products.isotope('layout');
+                    })
+
+                    $(window).on('resize', function() {
+                        $isotope_products.isotope('layout');
+                    });
+                }
+            });
+        </script>
+        <?php
+        remove_filter('woocommerce_product_add_to_cart_text', [
+            $this,
+            'add_to_cart_button_custom_text',
+        ]);
+    }
+
+    /**
+     * build_product_query
+     * @param $settings
+     * @return array
+     */
+    public function build_product_query( $settings ){
         $args = [
             'post_type' => 'product',
             'posts_per_page' => $settings['eael_product_grid_products_count'] ?: 4,
@@ -2870,20 +3057,7 @@ class Product_Grid extends Widget_Base
             $args['orderby'] = 'meta_value_num';
             $args['order'] = 'DESC';
         } else if ($settings['eael_product_grid_product_filter'] == 'sale-products') {
-            $args['meta_query'][] = [
-                'relation' => 'OR',
-                [
-                    'key' => '_sale_price',
-                    'value' => 0,
-                    'compare' => '>',
-                    'type' => 'numeric',
-                ], [
-                    'key' => '_min_variation_sale_price',
-                    'value' => 0,
-                    'compare' => '>',
-                    'type' => 'numeric',
-                ],
-            ];
+            $args['post__in']  = array_merge( array( 0 ), wc_get_product_ids_on_sale() );
         } else if ($settings['eael_product_grid_product_filter'] == 'top-products') {
             $args['meta_key'] = '_wc_average_rating';
             $args['orderby'] = 'meta_value_num';

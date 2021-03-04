@@ -505,6 +505,17 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->add_control(
+            'eael_event_time_format',
+            [
+                'label' => __('24-hour Time format', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_block' => false,
+                'return_value' => 'yes',
+                'description' => __('Hide Event Details link in event popup', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $this->add_control(
             'eael_event_calendar_default_view',
             [
                 'label' => __('Calendar Default View', 'essential-addons-for-elementor-lite'),
@@ -1680,6 +1691,7 @@ class Event_Calendar extends Widget_Base
 
         $local = $settings['eael_event_calendar_language'];
         $default_view = $settings['eael_event_calendar_default_view'];
+        $time_format = $settings['eael_event_time_format'];
         $translate_date = [
             'today' => __('Today', 'essential-addons-for-elementor-lite'),
             'tomorrow' => __('Tomorrow', 'essential-addons-for-elementor-lite'),
@@ -1692,6 +1704,7 @@ class Event_Calendar extends Widget_Base
             data-locale = "' . $local . '"
             data-translate = "' . htmlspecialchars(json_encode($translate_date), ENT_QUOTES, 'UTF-8') . '"
             data-defaultview = "' . $default_view . '"
+            data-time_format = "' . $time_format . '"
             data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"
             data-first_day="' . $settings['eael_event_calendar_first_day'] . '"></div>
             ' . $this->eaelec_load_event_details() . '
@@ -1785,11 +1798,20 @@ class Event_Calendar extends Widget_Base
             'calendar_id' => urlencode($settings['eael_event_calendar_id']),
         ];
 
+        $transient_args =  [
+            'key' => $settings['eael_event_google_api_key'],
+            'maxResults' => $settings['eael_google_calendar_max_result'],
+            'timeMin' => urlencode(date('Y-m-d H', $start_date)),
+            'singleEvents' => 'true',
+            'calendar_id' => urlencode($settings['eael_event_calendar_id']),
+        ];
+
         if (!empty($end_date) && $end_date > $start_date) {
-            $arg['timeMax'] = urlencode(date('c', $end_date));
+          $arg['timeMax'] = urlencode(date('c', $end_date));
+          $transient_args['timeMax'] = urlencode(date('Y-m-d H', $end_date));
         }
 
-        $transient_key = 'eael_google_calendar_' . md5(implode('', $arg));
+        $transient_key = 'eael_google_calendar_' . md5(implode('', $transient_args));
         $data = get_transient($transient_key);
 
         if (isset($arg['calendar_id'])) {
@@ -1875,6 +1897,7 @@ class Event_Calendar extends Widget_Base
         if (empty($events)) {
             return [];
         }
+
         $calendar_data = [];
         foreach ($events as $key => $event) {
             $date_format = 'Y-m-d';
@@ -1883,13 +1906,21 @@ class Event_Calendar extends Widget_Base
                 $date_format .= ' H:i';
                 $all_day = '';
             }
+
+
+            if (tribe_event_is_all_day($event->ID)) {
+              $end = date('Y-m-d', strtotime("+1 days", strtotime(tribe_get_end_date($event->ID, true, $date_format))));
+            } else {
+              $end = date('Y-m-d H:i', strtotime(tribe_get_end_date($event->ID, true, $date_format))) . ":01";
+            }
+
             $calendar_data[] = [
                 'id' => ++$key,
                 'title' => !empty($event->post_title) ? $event->post_title : __('No Title',
                     'essential-addons-for-elementor-lite'),
                 'description' => $event->post_content,
                 'start' => tribe_get_start_date($event->ID, true, $date_format),
-                'end' => tribe_get_end_date($event->ID, true, $date_format),
+                'end' => $end,
                 'borderColor' => !empty($settings['eael_event_global_popup_ribbon_color']) ? $settings['eael_event_global_popup_ribbon_color'] : '#10ecab',
                 'textColor' => $settings['eael_event_global_text_color'],
                 'color' => $settings['eael_event_global_bg_color'],

@@ -12,6 +12,21 @@
   padding-right: 10px;
   color: gainsboro;
 }
+.eael-wcpc-wrapper .wcpc-table-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.eael-wcpc-wrapper .elementor-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+.eael-wcpc-wrapper table td {
+  text-align: center;
+}
 .eael-wcpc-wrapper.custom {
   --h-bg: #2d1e87;
   --h-text-clr: #fff;

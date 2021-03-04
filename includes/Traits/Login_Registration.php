@@ -66,7 +66,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			$this->set_transient( 'eael_login_error_' . $widget_id, $err_msg );
+			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -80,7 +80,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			$this->set_transient( 'eael_login_error_' . $widget_id, $err_msg );
+			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -93,7 +93,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			$this->set_transient( 'eael_login_error_' . $widget_id, $err_msg );
+			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -107,7 +107,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			$this->set_transient( 'eael_login_error_' . $widget_id, $err_msg );
+			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -123,7 +123,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			$this->set_transient( 'eael_login_error_' . $widget_id, $err_msg );
+			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -161,7 +161,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			$this->set_transient( 'eael_login_error_' . $widget_id, $err_msg );
+			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
 		} else {
 			wp_set_current_user( $user_data->ID, $user_login );
 			do_action( 'wp_login', $user_data->user_login, $user_data );
@@ -200,26 +200,45 @@ trait Login_Registration {
 				wp_send_json_error( __( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' ) );
 			}
 
-			return false;
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            }
 		}
 		if ( ! wp_verify_nonce( $_POST['eael-register-nonce'], 'eael-register-action' ) ) {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'Security token did not match', 'essential-addons-for-elementor-lite' ) );
 			}
 
-			return false;
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            }
 		}
 		$page_id = $widget_id = 0;
-		if ( ! empty( $_POST['page_id'] ) ) {
-			$page_id = intval( $_POST['page_id'], 10 );
-		} else {
-			$errors['page_id'] = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
-		}
-		if ( ! empty( $_POST['widget_id'] ) ) {
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
-		} else {
-			$errors['widget_id'] = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
-		}
+        if ( ! empty( $_POST['page_id'] ) ) {
+            $page_id = intval( $_POST['page_id'] );
+        } else {
+            $err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
+        }
+        if ( ! empty( $_POST['widget_id'] ) ) {
+            $widget_id = sanitize_text_field( $_POST['widget_id'] );
+        } else {
+            $err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
+        }
+
+        if (!empty( $err_msg )){
+            if ( $ajax ) {
+                wp_send_json_error( $err_msg );
+            }
+            update_option( 'eael_register_errors_' . $widget_id, $err_msg, false );
+
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            }
+            return false;
+        }
 
 
 
@@ -232,7 +251,10 @@ trait Login_Registration {
 				wp_send_json_error( $err_msg );
 			}
 
-			return false;
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            }
 		}
 
 		do_action( 'eael/login-register/before-register' );
@@ -250,8 +272,8 @@ trait Login_Registration {
 				wp_send_json_error( $errors['registration'] );
 			}
 
-			$this->set_transient( 'eael_register_errors', $errors );
-			wp_safe_redirect( site_url( 'wp-login.php?registration=disabled' ) );
+            //update_option( 'eael_register_errors_' . $widget_id, $errors, false );// if we redirect to other page, we dont need to save value
+            wp_safe_redirect( site_url( 'wp-login.php?registration=disabled' ) );
 			exit();
 		}
 		// prepare vars and flag errors
@@ -271,7 +293,6 @@ trait Login_Registration {
 			}
 		} else {
 			$errors['email'] = isset( $settings['err_email_missing'] ) ? $settings['err_email_missing'] : __( 'Email is missing or Invalid', 'essential-addons-for-elementor-lite' );
-			//@todo; maybe it is good to abort here?? as email is most important. or continue to collect all other errors.
 		}
 
 		// if user provided user name, validate & sanitize it
@@ -283,7 +304,6 @@ trait Login_Registration {
 				$errors['user_name'] = isset( $settings['err_username_used'] ) ? $settings['err_username_used'] : __( 'The username already registered.', 'essential-addons-for-elementor-lite' );
 
 			}
-			//@TODO; Maybe it is good to add a check for filtering out blacklisted usernames later here.
 		} else {
 			// user has not provided username, so generate one from the provided email.
 			if ( empty( $errors['email'] ) && isset( $email ) ) {
@@ -316,7 +336,7 @@ trait Login_Registration {
 				$err_msg .= '</ol>';
 				wp_send_json_error( $err_msg );
 			}
-			$this->set_transient( 'eael_register_errors_' . $widget_id, $errors );
+			update_option( 'eael_register_errors_' . $widget_id, $errors, false );
 			wp_safe_redirect( esc_url( $url ) );
 			exit();
 		}
@@ -398,7 +418,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $errors['user_create'] );
 			}
-			$this->set_transient( 'eael_register_errors_' . $widget_id, $errors );
+			update_option( 'eael_register_errors_' . $widget_id, $errors, false );
 			wp_safe_redirect( esc_url( $url ) );
 			exit();
 		}
@@ -430,8 +450,8 @@ trait Login_Registration {
 		wp_new_user_notification( $user_id, null, $admin_or_both );
 
 		// success & handle after registration action as defined by user in the widget
-		if ( ! $ajax ) {
-			$this->set_transient( 'eael_register_success_' . $widget_id, 1 );
+		if ( ! $ajax && !in_array( 'redirect', $register_actions ) ) {
+			update_option( 'eael_register_success_' . $widget_id, 1, false );
 		}
 
 
@@ -446,7 +466,7 @@ trait Login_Registration {
 				'user_password' => $password,
 				'remember'      => true,
 			] );
-
+            $this->delete_registration_options($widget_id);
 
 			if ( $ajax ) {
 				if ( in_array( 'redirect', $register_actions ) ) {
@@ -474,6 +494,11 @@ trait Login_Registration {
 			wp_safe_redirect( $custom_redirect_url );
 			exit();
 		}
+
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            wp_safe_redirect($_SERVER['HTTP_REFERER']);
+            exit();
+        }
 
 	}
 
@@ -569,7 +594,7 @@ trait Login_Registration {
 	public function set_transient( $name, $data, $time = 300 ) {
 		$time = empty( $time ) ? (int) $time : ( 5 * MINUTE_IN_SECONDS );
 
-		return set_transient( $name, $data, time() + $time );
+		return set_transient( $name, $data, $time );
 	}
 
 	/**
@@ -712,5 +737,11 @@ trait Login_Registration {
 
 		}
 		return $settings;
+	}
+
+    public function delete_registration_options($widget_id)
+    {
+        delete_option('eael_register_success_' . $widget_id);
+        delete_option('eael_register_errors_' . $widget_id);
 	}
 }

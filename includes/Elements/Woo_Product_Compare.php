@@ -38,7 +38,7 @@ class Woo_Product_Compare extends Widget_Base {
 	 * @inheritDoc
 	 */
 	public function get_icon() {
-		return 'eicon-woocommerce';
+		return 'eaicon-product-compare';
 	}
 
 	/**
@@ -63,7 +63,7 @@ class Woo_Product_Compare extends Widget_Base {
 	}
 
 	public function get_custom_help_url() {
-		return 'https://essential-addons.com/elementor/docs/woo-product-comparison/';
+		return 'https://essential-addons.com/elementor/docs/woo-product-compare/';
 	}
 
 	/**
@@ -102,9 +102,6 @@ class Woo_Product_Compare extends Widget_Base {
 		}
 		$ds                     = $this->get_settings_for_display();
 		$product_ids            = $this->get_settings_for_display( 'product_ids' );
-		$product_ids            = ! empty( $product_ids ) ? array_filter( array_map( 'trim', explode( ',', $product_ids ) ), function ( $id ) {
-			return ( ! empty( $id ) && is_numeric( $id ) );
-		} ) : [];
 		$products               = $this->get_products_list( $product_ids );
 		$fields                 = $this->fields();
 

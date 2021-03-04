@@ -1551,6 +1551,14 @@ class Advanced_Data_Table extends Widget_Base
             return $this->ninja_integration();
         }
 
+        if ( $settings[ 'ea_adv_data_table_source' ] == 'remote' ) {
+            $settings_legacy                                        = $this->get_settings();
+            $settings[ 'ea_adv_data_table_source_remote_host' ]     = $settings_legacy[ 'ea_adv_data_table_source_remote_host' ];
+            $settings[ 'ea_adv_data_table_source_remote_username' ] = $settings_legacy[ 'ea_adv_data_table_source_remote_username' ];
+            $settings[ 'ea_adv_data_table_source_remote_password' ] = $settings_legacy[ 'ea_adv_data_table_source_remote_password' ];
+            $settings[ 'ea_adv_data_table_source_remote_database' ] = $settings_legacy[ 'ea_adv_data_table_source_remote_database' ];
+        }
+
         $content = apply_filters('eael/advanced-data-table/table_html/integration/' . $settings['ea_adv_data_table_source'], $settings);
 
         if (is_array($content)) {

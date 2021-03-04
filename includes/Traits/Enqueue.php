@@ -129,7 +129,7 @@ trait Enqueue
 	        	'added' => __('Added ', 'essential-addons-for-elementor-lite'),
 	        	'compare' => __('Compare', 'essential-addons-for-elementor-lite'),
                 'loading' => esc_html__('Loading...', 'essential-addons-for-elementor-lite')
-            ]
+            ],
         ]);
 
         // edit mode
@@ -319,5 +319,45 @@ trait Enqueue
                 echo '<script>' . $this->js_strings . '</script>';
             }
         }
+    }
+
+    // templately promo enqueue scripts
+    public function templately_promo_enqueue_scripts(){
+        // enqueue
+        wp_register_script(
+            'templately-promo',
+            EAEL_PLUGIN_URL . 'assets/admin/js/eael-templately-promo.js',
+            ['jquery'],
+            EAEL_PLUGIN_VERSION
+        );
+
+        wp_localize_script('templately-promo','localize',[
+            'ajaxurl' => admin_url( 'admin-ajax.php' ),
+            'nonce'   => wp_create_nonce( 'essential-addons-elementor' ),
+        ]);
+        wp_enqueue_script('templately-promo');
+        // enqueue
+        wp_enqueue_style(
+            'templately-promo',
+            EAEL_PLUGIN_URL . 'assets/admin/css/eael-templately-promo.css',
+            EAEL_PLUGIN_VERSION
+        );
+
+
+    }
+
+    public function templately_promo_enqueue_style(){
+        $src = EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo-icon.svg';
+        $css = "
+		.elementor-add-new-section .elementor-add-templately-promo-button{
+            background-color: #5d4fff;
+            background-image: url({$src});
+            background-repeat: no-repeat;
+            background-position: center center;
+            margin-left: 5px;
+            position: relative;
+            bottom: 5px;
+        }";
+        wp_add_inline_style( 'elementor-icons', $css );
     }
 }

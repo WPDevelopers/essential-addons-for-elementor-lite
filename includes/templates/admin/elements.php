@@ -202,9 +202,9 @@ $elements = [
         'elements'  => [
             [
                 'key'   => 'count-down',
-                'title' => __( 'Count Down', 'essential-addons-for-elementor-lite'),
+                'title' => __( 'Countdown', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/countdown/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/countdown/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/creative-elements/ea-countdown/',
             ],
             [
                 'key'   => 'fancy-text',
@@ -409,12 +409,6 @@ $elements = [
 		        'title' => __( 'Login Register Form', 'essential-addons-elementor' ),
 		        'demo_link' => 'https://essential-addons.com/elementor/login-register-form',
 		        'doc_link' => 'https://essential-addons.com/elementor/docs/login-register-form/',
-	        ],
-            [
-		        'key'   => 'dummy-widget',
-		        'title' => __( 'Dummy Widget', 'essential-addons-elementor' ),
-		        'demo_link' => 'https://essential-addons.com/elementor/dummy-widget',
-		        'doc_link' => 'https://essential-addons.com/elementor/docs/dummy-widget/',
 	        ],
         ]
     ],

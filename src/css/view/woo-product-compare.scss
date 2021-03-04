@@ -16,6 +16,19 @@
         padding-right: 10px;
         color: gainsboro;
     }
+    .wcpc-table-header{
+        display: flex;
+        align-items: center;
+    }
+    .elementor-icon {
+        font-size: 20px;
+        margin-right: 10px;
+    }
+    table {
+        td {
+            text-align: center;
+        }
+    }
     &.custom {
         --h-bg: #2d1e87;
         --h-text-clr: #fff;

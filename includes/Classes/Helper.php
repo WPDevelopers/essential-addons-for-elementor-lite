@@ -133,7 +133,7 @@ class Helper
         } else {
             $args['post_type'] = $settings['post_type'];
 
-            if ($args['post_type'] !== 'page') {
+            //if ($args['post_type'] !== 'page') {
                 $args['tax_query'] = [];
 
                 $taxonomies = get_object_taxonomies($settings['post_type'], 'objects');
@@ -153,7 +153,7 @@ class Helper
                 if (!empty($args['tax_query'])) {
                     $args['tax_query']['relation'] = 'AND';
                 }
-            }
+            //}
         }
 
         if (!empty($settings['authors'])) {
@@ -644,28 +644,42 @@ class Helper
     public static function get_dynamic_args(array $settings, array $args)
     {
         if ($settings['post_type'] === 'source_dynamic' && is_archive()) {
-
             $data = get_queried_object();
+
             if (isset($data->post_type)) {
                 $args['post_type'] = $data->post_type;
-
                 $args['tax_query'] = [];
-
-                if ($data->taxonomy) {
-                    $args['tax_query'][] = [
-                        'taxonomy' => $data->taxonomy,
-                        'field' => 'term_id',
-                        'terms' => $data->term_id,
-                    ];
-                }
             } else {
                 global $wp_query;
-
                 $args['post_type'] = $wp_query->query_vars['post_type'];
+                if(!empty($wp_query->query_vars['s'])){
+                    $args['s'] = $wp_query->query_vars['s'];
+                    $args['offset'] = 0;
+                }
+            }
+
+            if ( isset( $data->taxonomy ) ) {
+                $args[ 'tax_query' ][] = [
+                    'taxonomy' => $data->taxonomy,
+                    'field'    => 'term_id',
+                    'terms'    => $data->term_id,
+                ];
+            }
+
+            if ( isset($data->taxonomy) ) {
+                $args[ 'tax_query' ][] = [
+                    'taxonomy' => $data->taxonomy,
+                    'field'    => 'term_id',
+                    'terms'    => $data->term_id,
+                ];
             }
 
             if (get_query_var('author') > 0) {
                 $args['author__in'] = get_query_var('author');
+            }
+
+            if (get_query_var('s')!='') {
+                $args['s'] = get_query_var('s');
             }
 
             if (get_query_var('year') || get_query_var('monthnum') || get_query_var('day')) {
@@ -766,8 +780,10 @@ class Helper
         if ( $document ) {
             $elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
             $widget_data = self::find_element_recursive( $elements, $widget_id );
-            $widget      = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
-            if ( $widget ) {
+            if (!empty($widget_data) && is_array($widget_data)) {
+                $widget      = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
+            }
+            if ( !empty($widget) ) {
                 $settings    = $widget->get_settings_for_display();
             }
         }
@@ -897,4 +913,22 @@ class Helper
 		add_action( 'eael_woo_before_product_loop', 'woocommerce_output_all_notices', 30 );
 
 	}
+
+    public static function get_local_plugin_data( $basename = '' ) {
+        if ( empty( $basename ) ) {
+            return false;
+        }
+
+        if ( !function_exists( 'get_plugins' ) ) {
+            include_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+
+        $plugins = get_plugins();
+
+        if ( !isset( $plugins[ $basename ] ) ) {
+            return false;
+        }
+
+        return $plugins[ $basename ];
+    }
 }

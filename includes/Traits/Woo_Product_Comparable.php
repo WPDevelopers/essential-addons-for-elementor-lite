@@ -147,16 +147,24 @@ trait Woo_Product_Comparable {
 				'type'    => Controls_Manager::HIDDEN,
 				'default' => 'yes',
 			] );
-			$this->add_control( "product_ids", [
-				'label'       => __( 'Product IDs', 'essential-addons-for-elementor-lite' ),
-				'description' => __( 'Enter Product IDs separated by a comma', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::TEXT,
-				'label_block' => true,
-				'placeholder' => __( 'Eg. 123, 456 etc.', 'essential-addons-for-elementor-lite' ),
-			] );
+
+            $this->add_control( "product_ids", [
+                'label'       => __( 'Products', 'essential-addons-for-elementor-lite' ),
+                'description' => __( 'Enter Product IDs separated by a comma', 'essential-addons-for-elementor-lite' ),
+                'type'        => 'eael-select2',
+                'label_block' => true,
+                'multiple'    => true,
+                'source_type' => 'product',
+                'source_name' => 'post_type',
+                'placeholder' => __( 'Search by Product Name', 'essential-addons-for-elementor-lite' ),
+            ] );
+
 			$this->add_control( "highlighted_product_id", [
-				'label'       => __( 'Highlighted Product ID', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::NUMBER,
+				'label'       => __( 'Highlighted Product', 'essential-addons-for-elementor-lite' ),
+                'type'        => 'eael-select2',
+                'label_block' => true,
+                'source_type' => 'product',
+                'source_name' => 'post_type',
 				'description' => __( 'Enter any ID from the Product IDs used above', 'essential-addons-for-elementor-lite' ),
 				'condition'   => [
 					'theme' => [
@@ -197,6 +205,25 @@ trait Woo_Product_Comparable {
 			'default'     => __( 'Compare Products', 'essential-addons-for-elementor-lite' ),
 			'placeholder' => __( 'Compare Products', 'essential-addons-for-elementor-lite' ),
 		] );
+        $this->add_control(
+            'table_title_tag',
+            [
+                'label' => __( 'Table Title HTML Tag', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'h1' => 'H1',
+                    'h2' => 'H2',
+                    'h3' => 'H3',
+                    'h4' => 'H4',
+                    'h5' => 'H5',
+                    'h6' => 'H6',
+                    'div' => 'div',
+                    'span' => 'span',
+                    'p' => 'p',
+                ],
+                'default' => 'h1',
+            ]
+        );
 		$repeater = new Repeater();
 		$repeater->add_control( 'field_type', [
 			'label'   => __( 'Type', 'essential-addons-for-elementor-lite' ),
@@ -238,11 +265,17 @@ trait Woo_Product_Comparable {
 		$this->add_control( 'field_icon', [
 			'label'   => __( 'Fields Icon', 'elementor' ),
 			'type'    => Controls_Manager::ICONS,
-			'default' => [
-				'value'   => 'fas fa-arrow-right',
-				'library' => 'fa-solid',
-			],
 		] );
+        if ( 'eicon-woocommerce' === $this->get_name()) {
+            $this->add_control( "no_products_found_text", [
+                'label'       => __( 'Text for "No products are found to compare"', 'essential-addons-for-elementor-lite' ),
+                'default' => __( 'No products are added to Compare. Please add products to compare.', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::TEXTAREA,
+                'label_block' => true,
+                'placeholder' => __( 'Eg. No products are added to Compare.', 'essential-addons-for-elementor-lite' ),
+            ] );
+		}
+
 		$this->end_controls_section();
 	}
 
@@ -420,21 +453,21 @@ trait Woo_Product_Comparable {
 				'table_style_pot' => 'yes',
 			],
 		] );
-		$this->add_responsive_control( "table_padding", [
-			'label'      => __( 'Table Padding', 'essential-addons-for-elementor-lite' ),
-			'type'       => Controls_Manager::DIMENSIONS,
-			'size_units' => [
-				'px',
-				'em',
-				'%',
-			],
-			'selectors'  => [
-				$table => $this->apply_dim( 'padding' ),
-			],
-			'condition'  => [
-				'table_style_pot' => 'yes',
-			],
-		] );
+//		$this->add_responsive_control( "table_padding", [
+//			'label'      => __( 'Table Padding', 'essential-addons-for-elementor-lite' ),
+//			'type'       => Controls_Manager::DIMENSIONS,
+//			'size_units' => [
+//				'px',
+//				'em',
+//				'%',
+//			],
+//			'selectors'  => [
+//				$table => 'border-spacing:0; '.$this->apply_dim( 'padding' ),
+//			],
+//			'condition'  => [
+//				'table_style_pot' => 'yes',
+//			],
+//		] );
 		$this->add_group_control( Group_Control_Background::get_type(), [
 			'name'      => "table_bg_color",
 			'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
@@ -471,7 +504,7 @@ trait Woo_Product_Comparable {
 				'%',
 			],
 			'selectors'  => [
-				$table => $this->apply_dim( 'border-radius' ) .'border-collapse:initial;',
+				$table => $this->apply_dim( 'border-radius' ) .'border-collapse:initial; overflow:hidden;',
 			],
 			'condition'  => [
 				'table_style_pot'    => 'yes',
@@ -547,6 +580,7 @@ trait Woo_Product_Comparable {
 		}
 
 		$this->init_style_icon_controls( $table );
+		$this->init_style_price_controls( $table );
 	}
 
 	public function init_style_table_common_style( $tbl = '' ) {
@@ -834,7 +868,7 @@ trait Woo_Product_Comparable {
 			'separator' => 'before',
 		] );
 		$this->add_control( 'btn_color', [
-			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Button Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $btn => 'color:{{VALUE}}' ],
 		] );
@@ -854,7 +888,7 @@ trait Woo_Product_Comparable {
 			'selectors' => [ $tr_even => 'background-color:{{VALUE}}' ],
 		] );
 		$this->add_control( 'common_tr_even_color', [
-			'label'     => __( 'Even Row Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Even Row Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_even => 'color:{{VALUE}}' ],
 		] );
@@ -864,7 +898,7 @@ trait Woo_Product_Comparable {
 			'selectors' => [ $tr_odd => 'background-color:{{VALUE}}' ],
 		] );
 		$this->add_control( 'common_tr_odd_color', [
-			'label'     => __( 'Odd Row Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Odd Row Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_odd => 'color:{{VALUE}}' ],
 		] );
@@ -891,7 +925,7 @@ trait Woo_Product_Comparable {
 			'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
 		] );
 		$this->add_control( 'btn_color_hover', [
-			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Button Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $btn_hover => 'color:{{VALUE}}' ],
 		] );
@@ -994,7 +1028,7 @@ trait Woo_Product_Comparable {
 			'separator' => 'before',
 		] );
 		$this->add_control( 'tr_even_color', [
-			'label'     => __( 'Even Row Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Even Row Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_even => 'color:{{VALUE}}' ],
 		] );
@@ -1004,7 +1038,7 @@ trait Woo_Product_Comparable {
 			'selectors' => [ $tr_odd => 'background-color:{{VALUE}}' ],
 		] );
 		$this->add_control( 'tr_odd_color', [
-			'label'     => __( 'Odd Row Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Odd Row Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_odd => 'color:{{VALUE}}' ],
 		] );
@@ -1216,7 +1250,7 @@ trait Woo_Product_Comparable {
 			'separator' => 'before',
 		] );
 		$this->add_control( "{$pfx}_btn_color", [
-			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Button Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $btn => 'color:{{VALUE}}' ],
 			'separator' => 'before',
@@ -1238,7 +1272,7 @@ trait Woo_Product_Comparable {
 			'separator' => 'before',
 		] );
 		$this->add_control( "{$pfx}_tr_even_color", [
-			'label'     => __( 'Even Row Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Even Row Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_even => 'color:{{VALUE}}' ],
 		] );
@@ -1248,7 +1282,7 @@ trait Woo_Product_Comparable {
 			'selectors' => [ $tr_odd => 'background-color:{{VALUE}}' ],
 		] );
 		$this->add_control( "{$pfx}_tr_odd_color", [
-			'label'     => __( 'Odd Row Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Odd Row Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $tr_odd => 'color:{{VALUE}}' ],
 		] );
@@ -1258,7 +1292,7 @@ trait Woo_Product_Comparable {
 			'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
 		] );
 		$this->add_control( "{$pfx}_btn_color_hover", [
-			'label'     => __( 'Button Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Button Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [ $btn_hover => 'color:{{VALUE}}' ],
 		] );
@@ -1273,8 +1307,111 @@ trait Woo_Product_Comparable {
 		$this->end_controls_section();
 	}
 
+    public function init_style_close_button_controls()
+    {
+        $this->start_controls_section( 'section_style_cm_close_btn', [
+            'label'     => __( 'Compare Modal Close Button', 'essential-addons-for-elementor-lite' ),
+            'tab'       => Controls_Manager::TAB_STYLE,
+            'condition' => [
+                'show_compare' => 'yes',
+            ],
+        ] );
+
+        $this->add_control(
+            'eael_cm_close_btn_style',
+            [
+                'label' => __(' Close Button', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_cm_close_btn_icon_size',
+            [
+                'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '.eael-wcpc-modal .close-modal' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+
+        $this->add_control(
+            'eael_cm_close_btn_color',
+            [
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '.eael-wcpc-modal .close-modal' => 'color: {{VALUE}}!important;',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_cm_close_btn_bg',
+            [
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '.eael-wcpc-modal .close-modal' => 'background-color: {{VALUE}}!important;',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_cm_close_btn_border_radius',
+            [
+                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '.eael-wcpc-modal .close-modal' => 'border-radius: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'eael_cm_close_btn_box_shadow',
+                'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
+                'selector' => '.eael-wcpc-modal .close-modal',
+            ]
+        );
+        $this->end_controls_section();
+
+
+    }
 	public function init_style_icon_controls( $tbl = '' ) {
-		$icon = "{$tbl} i";
+		$icon = "{$tbl} .elementor-icon";
 		$this->start_controls_section( 'section_style_icon', [
 			'label'     => __( 'Fields Icon', 'essential-addons-for-elementor-lite' ),
 			'tab'       => Controls_Manager::TAB_STYLE,
@@ -1330,13 +1467,263 @@ trait Woo_Product_Comparable {
 				$icon => "position:relative; top: {{TOP}}{{UNIT}};right: {{RIGHT}}{{UNIT}}; bottom: {{BOTTOM}}{{UNIT}}; left: {{LEFT}}{{UNIT}};",
 			],
 		] );
-		$this->add_control( 'field_icon_size_margin_color', [
+		$this->add_control( 'field_icon_color', [
 			'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
-			'selectors' => [ $icon => 'color:{{VALUE}}' ],
+			'selectors' => [
+			        $icon => 'color:{{VALUE}} !important;',
+			        $icon. ' i' => 'color:{{VALUE}} !important;',
+			        $icon. ' svg' => 'color:{{VALUE}} !important;fill:{{VALUE}} !important;',
+            ],
 		] );
 		$this->end_controls_section();
 	}
+
+    public function init_style_price_controls( $tbl = '' ) {
+        $strike = "{$tbl} del";
+        $price = "{$tbl} del .woocommerce-Price-amount";
+        $sales_price = "{$tbl} ins .woocommerce-Price-amount";
+        $this->start_controls_section( 'section_style_price', [
+            'label'     => __( 'Price Style', 'essential-addons-for-elementor-lite' ),
+            'tab'       => Controls_Manager::TAB_STYLE,
+            'condition' => [
+                'show_compare'       => 'yes',
+            ],
+        ] );
+        $this->add_control(
+            'price_heading',
+            [
+                'label' => __( 'Normal Price Style', 'plugin-name' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+        $this->add_responsive_control( "price_size", [
+            'label'      => esc_html__( 'Price Size', 'essential-addons-for-elementor-lite' ),
+            'type'       => Controls_Manager::SLIDER,
+            'size_units' => [
+                'px',
+                'rem',
+                '%',
+            ],
+            'range'      => [
+                'px'  => [
+                    'min'  => 0,
+                    'max'  => 40,
+                    'step' => 5,
+                ],
+                'rem' => [
+                    'min'  => 0,
+                    'max'  => 10,
+                    'step' => .5,
+                ],
+            ],
+            'selectors'  => [
+                $price => 'font-size: {{SIZE}}{{UNIT}};',
+            ],
+        ] );
+
+        $this->add_control( 'price_color', [
+            'label'     => __( 'Price Text Color', 'essential-addons-for-elementor-lite' ),
+            'type'      => Controls_Manager::COLOR,
+            'selectors' => [
+                $price => 'color:{{VALUE}};',
+            ],
+        ] );
+        $this->add_control( 'strike_price_color', [
+            'label'     => __( 'Price Strike Text Color', 'essential-addons-for-elementor-lite' ),
+            'description'     => __( 'Only applicable when sales price is available', 'essential-addons-for-elementor-lite' ),
+            'type'      => Controls_Manager::COLOR,
+            'selectors' => [
+                $strike => 'color:{{VALUE}};',
+            ],
+        ] );
+
+        $this->add_control(
+            'sales_price_heading',
+            [
+                'label' => __( 'Sales Price Style', 'plugin-name' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+        $this->add_responsive_control( "sales_price_size", [
+            'label'      => esc_html__( 'Sales Price Size', 'essential-addons-for-elementor-lite' ),
+            'type'       => Controls_Manager::SLIDER,
+            'size_units' => [
+                'px',
+                'rem',
+                '%',
+            ],
+            'range'      => [
+                'px'  => [
+                    'min'  => 0,
+                    'max'  => 40,
+                    'step' => 5,
+                ],
+                'rem' => [
+                    'min'  => 0,
+                    'max'  => 10,
+                    'step' => .5,
+                ],
+            ],
+            'selectors'  => [
+                $sales_price => 'font-size: {{SIZE}}{{UNIT}};',
+            ],
+        ] );
+
+        $this->add_control( 'sales_price_color', [
+            'label'     => __( 'Sales Price Text Color', 'essential-addons-for-elementor-lite' ),
+            'type'      => Controls_Manager::COLOR,
+            'selectors' => [
+                $sales_price => 'color:{{VALUE}};',
+            ],
+        ] );
+
+        $this->end_controls_section();
+    }
+
+    public function init_style_compare_button_controls($condition=null)
+    {
+        $section_args = [
+            'label' => esc_html__('Compare Button', 'essential-addons-for-elementor-lite'),
+            'tab' => Controls_Manager::TAB_STYLE,
+        ];
+        if (is_array($condition)) {
+            $section_args['condition'] = $condition;
+        }
+
+        $this->start_controls_section('section_style_compare_btn', $section_args );
+
+        $this->add_control(
+            'compare_btn_padding',
+            [
+                'label' => __('Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.eael-wc-compare,
+                    {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link,
+                    {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .eael-wc-compare' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'compare_btn_radius',
+            [
+                'label' => __('Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.eael-wc-compare,
+                    {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link,
+                    {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .eael-wc-compare' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+
+        $this->start_controls_tabs('compare_btn_style_tabs');
+
+        $this->start_controls_tab('compare_btn_style_tab_normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
+
+        $this->add_control(
+            'compare_btn_color',
+            [
+                'label' => esc_html__('Button Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#fff',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.eael-wc-compare' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .eael-wc-compare' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'compare_btn_gradient_background',
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.eael-wc-compare,
+                {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link,
+                {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .eael-wc-compare',
+            ]
+        );
+
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'compare_btn_border',
+                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.eael-wc-compare, {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link, {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .eael-wc-compare',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'compare_btn_typography',
+                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.eael-wc-compare',
+                'condition' => [
+                    'eael_product_grid_style_preset' => ['eael-product-default', 'eael-product-simple'],
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab('compare_btn_hover_tab', ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]);
+
+        $this->add_control(
+            'compare_btn_hover_color',
+            [
+                'label' => esc_html__('Button Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#fff',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.eael-wc-compare:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .eael-wc-compare:hover' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'compare_btn_hover_gradient_background',
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.eael-wc-compare:hover,
+                {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link:hover,
+                {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .eael-wc-compare:hover',
+            ]
+        );
+
+
+        $this->add_control(
+            'compare_btn_hover_border_color',
+            [
+                'label' => esc_html__('Border Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.eael-wc-compare:hover' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link:hover' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .eael-wc-compare:hover' => 'border-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+        $this->end_controls_section();
+    }
 
 	/**
 	 * It renders product compare table and it accepts an argument with 3 keys, products, fields and ds. Explanation is given below.
@@ -1349,14 +1736,17 @@ trait Woo_Product_Comparable {
 	 * }
 	 */
 	public static function render_compare_table( $options ) {
+
 		$products = $fields = $ds = [];
 		extract( $options );
+		$not_found_text         = isset( $ds['no_products_found_text'] ) ? $ds['no_products_found_text'] : '';
 		$title                  = isset( $ds['table_title'] ) ? $ds['table_title'] : '';
+		$title_tag              = isset( $ds['table_title_tag'] ) ? $ds['table_title_tag'] : 'h1';
 		$ribbon                 = isset( $ds['ribbon'] ) ? $ds['ribbon'] : '';
 		$repeat_price           = isset( $ds['repeat_price'] ) ? $ds['repeat_price'] : '';
 		$repeat_add_to_cart     = isset( $ds['repeat_add_to_cart'] ) ? $ds['repeat_add_to_cart'] : '';
 		$linkable_img           = isset( $ds['linkable_img'] ) ? $ds['linkable_img'] : '';
-		$highlighted_product_id = ! empty( $ds['highlighted_product_id'] ) ? $ds['highlighted_product_id'] : null;
+		$highlighted_product_id = ! empty( $ds['highlighted_product_id'] ) ? intval( $ds[ 'highlighted_product_id' ] ) : null;
 		$icon                   = ! empty( $ds['field_icon'] ) && ! empty( $ds['field_icon']['value'] ) ? $ds['field_icon'] : [];
 		$theme_wrap_class       = $theme = '';
 		if ( ! empty( $ds['theme'] ) ) {
@@ -1370,7 +1760,7 @@ trait Woo_Product_Comparable {
                 <tbody>
 				<?php if ( empty( $products ) ) { ?>
                     <tr class="no-products">
-                        <td><?php esc_html_e( 'No products added to compare.', 'essential-addons-for-elementor-lite' ) ?></td>
+                        <td><?php echo esc_html($not_found_text ); ?></td>
                     </tr>
 				<?php } else {
 
@@ -1396,10 +1786,10 @@ trait Woo_Product_Comparable {
 						?>
                         <tr class="<?php echo esc_attr( $field ); ?>">
                             <th class="thead <?php echo esc_attr( $f_heading_class ); ?>">
-                                <div>
+                                <div class="wcpc-table-header">
 									<?php if ( $field === 'image' ) {
 										if ( ! empty( $title ) ) {
-											printf( "<h1 class='wcpc-title'>%s</h1>", esc_html( $title ) );
+											printf( "<{$title_tag} class='wcpc-title'>%s</{$title_tag}>", esc_html( $title ) );
 										}
 									} else {
 										if ( 'theme-5' === $theme && $field === 'title' ) {
@@ -1466,13 +1856,15 @@ trait Woo_Product_Comparable {
 
 					<?php if ( 'yes' === $repeat_price && isset( $fields['price'] ) ) : ?>
                         <tr class="price repeated">
-                            <th>
-                                <div>
+                            <th class="thead">
+                                <div class="wcpc-table-header">
 									<?php
 									if ( ! empty( $icon ) ) {
 										self::print_icon( $icon );
 									}
-									echo wp_kses_post( $fields['price'] ) ?>
+                                    printf( '<span class="field-name">%s</span>', esc_html( $fields['price'] ) );
+
+                                     ?>
                                 </div>
                             </th>
 
@@ -1491,13 +1883,13 @@ trait Woo_Product_Comparable {
 
 					<?php if ( 'yes' === $repeat_add_to_cart && isset( $fields['add-to-cart'] ) ) : ?>
                         <tr class="add-to-cart repeated">
-                            <th>
-                                <div>
+                            <th class="thead">
+                                <div class="wcpc-table-header">
 									<?php
 									if ( ! empty( $icon ) ) {
 										self::print_icon( $icon );
 									}
-									echo wp_kses_post( $fields['add-to-cart'] ); ?>
+                                    printf( '<span class="field-name">%s</span>', esc_html( $fields['add-to-cart'] ) ); ?>
                                 </div>
                             </th>
 
@@ -1679,7 +2071,9 @@ trait Woo_Product_Comparable {
 
 	public static function print_icon( $icon ) {
 		if ( ! empty( $icon['value'] ) && ! empty( $icon['library'] ) ) {
+		    echo '<span class="elementor-icon">';
 			Icons_Manager::render_icon( $icon, [ 'aria-hidden' => 'true' ] );
+			echo '</span>';
 		}
 	}
 
@@ -1691,10 +2085,7 @@ trait Woo_Product_Comparable {
 			$id = $product->get_id();
 		}
 
-		$icon1       = '<svg height="30px" viewBox="0 -31 480 479" width="30px" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="m32 32.5h16v16h-16zm0 0"/><path d="m64 32.5h16v16h-16zm0 0"/><path d="m96 32.5h16v16h-16zm0 0"/><path d="m456 .5h-432c-13.601562 0-24 10.398438-24 24v368c0 13.601562 10.398438 24 24 24h432c13.601562 0 24-10.398438 24-24v-368c0-13.601562-10.398438-24-24-24zm-432 16h432c4.800781 0 8 3.199219 8 8v8h-336v16h336v80h-448v-104c0-4.800781 3.199219-8 8-8zm0 384c-4.800781 0-8-3.199219-8-8v-248h144v256zm152-256h136v256h-136zm280 256h-128v-256h136v248c0 4.800781-3.199219 8-8 8zm0 0"/><path d="m192 336.5v48h104v-48zm88 32h-72v-16h72zm0 0"/><path d="m264 64.5h-48v48h48zm-16 32h-16v-16h16zm0 0"/><path d="m392 112.5c13.601562 0 24-10.398438 24-24s-10.398438-24-24-24-24 10.398438-24 24 10.398438 24 24 24zm0-32c4.800781 0 8 3.199219 8 8s-3.199219 8-8 8-8-3.199219-8-8 3.199219-8 8-8zm0 0"/><path d="m64 176.5h80v16h-80zm0 0"/><path d="m64 232.5h80v16h-80zm0 0"/><path d="m64 288.5h80v16h-80zm0 0"/><path d="m370.5 306.683594 32.242188-32.246094 11.316406 11.316406-32.246094 32.242188zm0 0"/><path d="m370.5 250.683594 32.242188-32.246094 11.316406 11.316406-32.246094 32.242188zm0 0"/><path d="m370.5 194.683594 32.242188-32.242188 11.316406 11.3125-32.246094 32.242188zm0 0"/><path d="m237.601562 318.101562 10.398438-10.402343 10.398438 10.402343 11.203124-11.203124-10.402343-10.398438 10.402343-10.398438-11.203124-11.203124-10.398438 10.402343-10.398438-10.402343-11.203124 11.203124 10.402343 10.398438-10.402343 10.398438zm0 0"/><path d="m237.601562 262.101562 10.398438-10.402343 10.398438 10.402343 11.203124-11.203124-10.402343-10.398438 10.402343-10.398438-11.203124-11.203124-10.398438 10.402343-10.398438-10.402343-11.203124 11.203124 10.402343 10.398438-10.402343 10.398438zm0 0"/><path d="m226.5 194.683594 32.246094-32.246094 11.3125 11.316406-32.242188 32.242188zm0 0"/><path d="m32 176.5h16v16h-16zm0 0"/><path d="m32 232.5h16v16h-16zm0 0"/><path d="m32 288.5h16v16h-16zm0 0"/><path d="m344 384.5h104v-48h-104zm16-32h72v16h-72zm0 0"/><path d="m32 80.5h112v16h-112zm0 0"/></svg>';
-		$icon2       = '<svg id="Capa_1" enable-background="new 0 0 64 64" height="100%" viewBox="0 0 64 64" width="100%" fill="#fff" xmlns="http://www.w3.org/2000/svg"><g><path d="m61 28h-8.347l7.453-8.074c2.675-2.897 2.495-7.414-.402-10.089-.019-.018-.038-.035-.058-.053-2.916-2.55-7.32-2.363-10.009.426l-.857.856-.856-.856c-1.919-1.91-4.715-2.642-7.324-1.918-.53.155-.834.711-.679 1.241s.711.834 1.241.679c1.908-.526 3.951.013 5.351 1.412l1.563 1.564c.39.39 1.024.39 1.414 0l1.564-1.564c1.95-2.002 5.116-2.158 7.253-.357 2.107 1.902 2.273 5.152.371 7.26-.012.014-.025.027-.037.04l-7.926 8.586c-.496.543-1.199.851-1.935.847-.734.003-1.436-.305-1.931-.847l-7.925-8.585c-1.63-1.754-1.824-4.404-.466-6.376.305-.46.179-1.081-.282-1.386-.452-.299-1.059-.184-1.37.259-1.887 2.741-1.617 6.424.649 8.861l7.452 8.074h-5.907c-.552 0-1 .448-1 1v2c0 1.657 1.343 3 3 3h8v1.184c-1.118.398-1.895 1.421-1.979 2.605l-30.568 8.492c-.125-.182-.27-.35-.432-.5-.296-.269-.643-.475-1.021-.607v-2.174h8c1.657 0 3-1.343 3-3v-2c0-.552-.448-1-1-1h-5.54c.991-1.097 1.54-2.522 1.54-4v-.184c1.555-.542 2.377-2.242 1.835-3.797-.299-.86-.975-1.535-1.835-1.835v-.484c3.201-2.855 3.934-7.577 1.747-11.268-.281-.476-.894-.634-1.37-.353s-.634.894-.353 1.37c1.777 2.993 1.072 6.839-1.65 9.008-.236.19-.374.477-.374.78v.763h-.883l.877-7.89c.06-.549-.336-1.043-.885-1.103-.143-.016-.288 0-.425.045l-2.684.894-2.684-.894c-.524-.175-1.09.109-1.265.633-.046.137-.061.282-.045.425l.877 7.89h-.883v-.761c0-.303-.138-.59-.374-.78-3.021-2.406-3.519-6.805-1.113-9.825 2.176-2.732 6.033-3.439 9.036-1.658.476.281 1.089.123 1.37-.353s.123-1.089-.353-1.37c-4.278-2.523-9.792-1.1-12.314 3.179-2.178 3.692-1.446 8.409 1.748 11.268v.482c-1.555.542-2.377 2.242-1.835 3.797.3.86.975 1.536 1.835 1.835v.186c0 1.478.549 2.903 1.54 4h-7.54c-.552 0-1 .448-1 1v2c0 1.657 1.343 3 3 3h8v2.185c-1.559.551-2.376 2.261-1.825 3.819.423 1.197 1.555 1.997 2.825 1.996h.141c1.521-.064 2.747-1.267 2.841-2.786l13.428-3.734-4.11 11.52h-1.3c-1.657 0-3 1.343-3 3v2c0 .552.448 1 1 1h10c.552 0 1-.448 1-1s-.448-1-1-1h-9v-1c0-.552.448-1 1-1h14c.552 0 1 .448 1 1v1h-3c-.552 0-1 .448-1 1s.448 1 1 1h4c.552 0 1-.448 1-1v-2c0-1.657-1.343-3-3-3h-1.3l-4.4-12.324 14.246-3.957c.946 1.356 2.812 1.69 4.168.744s1.69-2.812.744-4.168c-.358-.514-.868-.902-1.458-1.111v-1.184h8c.552 0 1-.448 1-1s-.448-1-1-1h-18c-.552 0-1-.448-1-1v-1h21c.552 0 1-.448 1-1s-.448-1-1-1zm-47.834-7.557 1.518.5c.205.069.427.069.632 0l1.518-.5-.734 6.557h-2.2zm-3.166 8.557h10c.552 0 1 .448 1 1s-.448 1-1 1h-10c-.552 0-1-.448-1-1s.448-1 1-1zm1 4h8c0 2.209-1.791 4-4 4s-4-1.791-4-4zm-7 7v-1h20v1c0 .552-.448 1-1 1h-18c-.552 0-1-.448-1-1zm24.419 16 3.581-10.026 3.581 10.026zm-13.68-7.326c-.179.196-.428.313-.693.325-.265.014-.525-.079-.72-.26-.409-.371-.439-1.004-.067-1.413.179-.197.429-.315.695-.326h.046c.552 0 1 .448.999 1.001 0 .249-.093.489-.261.673zm35.261-9.674c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1z"/><circle cx="32" cy="53" r="1"/><path d="m55.619 14.232c.23.204.368.493.38.8.025.534.465.955 1 .954h.047c.552-.025.979-.492.954-1.044 0-.001 0-.001 0-.002-.037-.839-.41-1.628-1.035-2.19-.552-.493-1.27-.761-2.01-.75-.552 0-1 .448-1 1s.448 1 1 1c.243-.01.48.073.664.232z"/><circle cx="3" cy="20" r="1"/><circle cx="27" cy="20" r="1"/><circle cx="15" cy="8" r="1"/><path d="m4.108 14.866c.478.276 1.09.112 1.366-.366s.112-1.09-.366-1.366-1.09-.112-1.366.366c-.276.478-.112 1.09.366 1.366z"/><path d="m4.108 14.866c.478.276 1.09.112 1.366-.366s.112-1.09-.366-1.366-1.09-.112-1.366.366c-.276.478-.112 1.09.366 1.366z"/><path d="m24.892 14.866c.478.276 1.09.112 1.366-.366s.112-1.09-.366-1.366-1.09-.112-1.366.366c-.276.478-.112 1.09.366 1.366z"/><path d="m24.892 26.866c.478.276 1.09.112 1.366-.366s.112-1.09-.366-1.366-1.09-.112-1.366.366c-.276.478-.112 1.09.366 1.366z"/><circle cx="21" cy="9.608" r="1"/><path d="m4.108 25.134c-.478.276-.642.888-.366 1.366s.888.642 1.366.366.642-.888.366-1.366c-.276-.478-.888-.642-1.366-.366z"/><path d="m9.5 10.474c.478-.276.642-.888.366-1.366s-.888-.642-1.366-.366-.642.888-.366 1.366c.276.478.888.642 1.366.366z"/></g></svg>';
-
-		$loader = '<svg class="eael-wc-compare-loader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style=" shape-rendering: auto; width: 1.5rem; height: 1.5rem" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+		$loader = '<svg class="eael-wc-compare-loader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style=" shape-rendering: auto; width: 14px;" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
             <g transform="translate(50,50)">
               <g transform="scale(0.7)">
               <circle cx="0" cy="0" r="50" fill="#c1c1c1"></circle>
@@ -1704,9 +2095,13 @@ trait Woo_Product_Comparable {
               </g>
             </g>
             </svg>';
-		$fa_icon = '<span class="eael-wc-compare-icon"><i class="fas fa-balance-scale"></i></span>';
-		$btn_content = 'icon' === $btn_type ? $fa_icon : '<span class="eael-wc-compare-text">' .__( 'Compare', 'essential-addons-for-elementor-lite' ). '</span>';
-		printf( '<button class="eael-wc-compare button" data-product-id="%1$d" rel="nofollow" title="Compare">%2$s %3$s</button>', intval( $id, 10 ), $loader, $btn_content );
+        $fa_icon = '<i class="fas fa-exchange-alt"></i>';
+		$btn_content = '<span class="eael-wc-compare-text">' .__( 'Compare', 'essential-addons-for-elementor-lite' ). '</span>';
+        if ('icon' === $btn_type) {
+            printf( '<a class="eael-wc-compare eael-wc-compare-icon" data-product-id="%1$d" rel="nofollow" title="Compare">%2$s %3$s</a>', intval( $id ), $loader, $fa_icon );
+        }else{
+            printf( '<button class="eael-wc-compare button" data-product-id="%1$d" rel="nofollow" title="Compare">%2$s %3$s</button>', intval( $id ), $loader, $btn_content );
+        }
 	}
 
 	public function get_compare_table() {
@@ -1729,21 +2124,25 @@ trait Woo_Product_Comparable {
 		} else {
 			$err_msg = __( 'Product ID is missing', 'essential-addons-for-elementor-lite' );
 		}
-		$product_ids = get_transient( 'eael_product_compare_ids' );
+
+        if (!empty($_POST['product_ids'])) {
+            $product_ids = wp_unslash(json_decode($_POST['product_ids']));
+		}
+
+        if (empty($product_ids)) {
+            $product_ids = [];
+        }
+
 		if ( ! empty( $product_id ) ) {
 			$p_exist = ! empty( $product_ids ) && is_array( $product_ids );
 			if ( ! empty( $_POST['remove_product'] ) && $p_exist ) {
-				unset( $product_ids[ $product_id ] );
+			    $product_ids = array_filter($product_ids, function ($id) use ($product_id){
+                    return $id != $product_id;
+			    });
 			} else {
-				if ( $p_exist ) {
-					$product_ids[ $product_id ] = $product_id;
-				} else {
-					$product_ids = [ $product_id => $product_id ];
-				}
+			    $product_ids[] = $product_id;
 			}
 		}
-
-		$this->eael_set_transient( 'eael_product_compare_ids', $product_ids );
 
 
 		if ( ! empty( $err_msg ) ) {
@@ -1760,14 +2159,15 @@ trait Woo_Product_Comparable {
 
 			return false;
 		}
-		$product_ids = array_values( $product_ids );
+		$product_ids = array_values(array_unique($product_ids));
+
 		$ds          = $this->eael_get_widget_settings( $page_id, $widget_id );
 		$products    = self::static_get_products_list( $product_ids, $ds );
 		$fields      = self::static_fields( $product_ids, $ds );
 		ob_start();
 		self::render_compare_table( compact( 'products', 'fields', 'ds' ) );
 		$table = ob_get_clean();
-		wp_send_json_success( [ 'compare_table' => $table ] );
+		wp_send_json_success( [ 'compare_table' => $table, 'product_ids' => $product_ids ] );
 
 		return null;
 	}

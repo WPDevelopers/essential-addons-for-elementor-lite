@@ -5,6 +5,471 @@
  */
 
 /* General Style */
+
+.eael-setup-wizard-wrap {
+    padding: 15px 10%;
+}
+.eael-setup-wizard {
+    display: grid;
+    grid-template-columns: repeat(5, 15%);
+    grid-gap: 6.3%;
+    position: relative;
+    margin: 0 8%;
+}
+.eael-setup-wizard.four {
+    grid-template-columns: repeat(4, 19%);
+    grid-gap: 8%;
+    margin: 0 15%;
+}
+.eael-setup-wizard li {
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: 1px solid #ebebeb;
+    text-align: center;
+    padding: 15px 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.eael-setup-wizard[data-step="0"] li:nth-child(-n + 1),
+.eael-setup-wizard[data-step="1"] li:nth-child(-n + 2),
+.eael-setup-wizard[data-step="2"] li:nth-child(-n + 3),
+.eael-setup-wizard[data-step="3"] li:nth-child(-n + 4),
+.eael-setup-wizard[data-step="4"] li:nth-child(-n + 5) {
+    border: 1px solid #a16bff;
+}
+
+.eael-setup-wizard[data-step="0"] li:nth-child(-n + 1) .icon svg,
+.eael-setup-wizard[data-step="1"] li:nth-child(-n + 2) .icon svg,
+.eael-setup-wizard[data-step="2"] li:nth-child(-n + 3) .icon svg,
+.eael-setup-wizard[data-step="3"] li:nth-child(-n + 4) .icon svg,
+.eael-setup-wizard[data-step="4"] li:nth-child(-n + 5) .icon svg {
+    fill: #a16bff;
+}
+
+.eael-setup-wizard:before,
+.eael-setup-wizard:after {
+    content: "";
+    width: 100%;
+    height: 5px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 0;
+}
+.eael-setup-wizard:before {
+    width: 10%;
+    left: 0;
+    background: #a16bff;
+    transition: width .5s;
+    z-index: 1;
+    border-radius: 5px;
+}
+.eael-setup-wizard[data-step="0"]::before {
+    width: 17.8%;
+}
+.eael-setup-wizard[data-step="1"]::before {
+    width: 39%;
+}
+.eael-setup-wizard[data-step="2"]::before {
+    width: 61%;
+}
+.eael-setup-wizard[data-step="3"]::before {
+    width: 82%;
+}
+.eael-setup-wizard[data-step="4"]::before {
+    width: 100%;
+}
+
+/* four */
+.eael-setup-wizard.four[data-step="0"]::before {
+    width: 22.8%;
+}
+.eael-setup-wizard.four[data-step="1"]::before {
+    width: 50%;
+}
+.eael-setup-wizard.four[data-step="2"]::before {
+    width: 77%;
+}
+.eael-setup-wizard.four[data-step="3"]::before {
+    width: 100%;
+}
+
+.step .icon svg{
+    width: 20px;
+    fill: #9ea3db;
+}
+.step .name {
+    font-size: 14px;
+    line-height: 1.2em;
+    color: #4e4362;
+    font-weight: 400;
+    margin-top: 5px;
+}
+
+.eael-setup-final-info .eael-whatwecollecttext {
+    margin: 0;
+    display: none;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+.btn-collect:focus{
+    outline: none;
+}
+
+.setup-content {
+    display: none;
+}
+.setup-content.active {
+    display: block;
+}
+
+.eael-elements-container + .eael-elements-cat {
+    margin-top: 30px;
+}
+.eael-elements-container {
+    width: 100%;
+}
+
+.eael-setup-wizard .eael-elements-info {
+    justify-content: space-between;
+    width: 100%;
+}
+
+.eael-setup-wizard-wrap .setup-content .eael-documentation-elements .eael-checkbox{
+    flex-basis: 23% !important;
+}
+
+.eael-setup-wizard-wrap #integrations .row {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* body */
+.eael-box {
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: 1px solid #ebebeb;
+    padding: 30px;
+}
+.eael-setup-body {
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+.eael-setup-body img {
+    max-width: 100%;
+    width: 100%;
+}
+
+/* finalize */
+
+#finalize h2 {
+    font-size: 20px;
+    text-align: center;
+    color: #3f3f3f;
+    margin: 18px 0;
+}
+
+#finalize p {
+    margin: 10px 0 0;
+    font-size: 15px;
+    line-height: 1.4em;
+    color: #5a5a5a;
+    font-weight: 400;
+    text-align: center;
+}
+
+.eael-iframe {
+    position: relative;
+    overflow: hidden;
+    width: 80%;
+    padding-top: 45.25%;
+    margin: 25px auto;
+    border-radius: 5px;
+}
+.eael-iframe * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.eael-setup-final-info {
+    margin-top: 20px;
+    text-align: center;
+}
+.eael-setup-final-info .eael-input-group {
+    margin-bottom: 15px;
+}
+.eael-setup-final-info input[type='checkbox'] {
+    padding: 10px !important;
+    border: 2px solid #b7b7b7;
+    background-color: #fff;
+    box-shadow: none !important;
+    border-radius: 2px;
+    color: #a16bff;
+    clear: none;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 0;
+    height: 23px;
+    margin: -.25rem .25rem 0 0;
+    outline: 0;
+    text-align: center;
+    vertical-align: middle;
+    width: 23px;
+    min-width: 23px;
+    -webkit-appearance: none;
+    transition: .05s border-color ease-in-out;
+}
+.eael-setup-final-info input[type=checkbox]:checked::before {
+    color: #a16bff;
+    margin: -9px 0 0 -8px;
+    width: 16px;
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26' fill='%23a16bff'%3E%3Cpath d='M 22.566406 4.730469 L 20.773438 3.511719 C 20.277344 3.175781 19.597656 3.304688 19.265625 3.796875 L 10.476563 16.757813 L 6.4375 12.71875 C 6.015625 12.296875 5.328125 12.296875 4.90625 12.71875 L 3.371094 14.253906 C 2.949219 14.675781 2.949219 15.363281 3.371094 15.789063 L 9.582031 22 C 9.929688 22.347656 10.476563 22.613281 10.96875 22.613281 C 11.460938 22.613281 11.957031 22.304688 12.277344 21.839844 L 22.855469 6.234375 C 23.191406 5.742188 23.0625 5.066406 22.566406 4.730469 Z'%3E%3C/path%3E%3C/svg%3E");
+}
+.eael-setup-final-info label {
+    font-size: 16px;
+    line-height: 1.2em;
+    color: #5a5a5a;
+    font-weight: 400;
+}
+.eael-setup-final-info button {
+    text-decoration: none;
+    border: 0;
+    padding: 0;
+    background: #fff;
+    transition: all .3s ease;
+    cursor: pointer;
+    font-size: 15px;
+    line-height: 1.2em;
+    color: #252525;
+    font-weight: 400;
+}
+.eael-setup-final-info button:hover {
+    text-decoration: underline;
+}
+
+/* integrations */
+
+#integrations .row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 25px;
+    padding: 0;
+}
+
+#integrations .col-one-third{
+    width: 100%;
+}
+#integrations .eael-admin-block-wrapper{
+    margin: 0;
+}
+
+#integrations .eael-admin-block-wrapper .eael-admin-block{
+    width: auto;
+    margin: 0;
+}
+
+/* templately */
+#templately {
+    position: relative;
+    min-height: 300px;
+}
+
+/* elements */
+#elements .row {
+    padding: 0;
+}
+.eael-elements-cat {
+    font-size: 18px;
+    line-height: 1.4em;
+    color: #252525;
+    font-weight: 400;
+    position: relative;
+    margin: 0 0 13px;
+}
+
+.eael-elements-cat:before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    width: 2px;
+    height: 100%;
+    background-color: #6e2dcf;
+}
+
+.setup-content .eael-checkbox-container {
+    margin: -5px;
+}
+.eael-setup-wizard-wrap .setup-content .eael-checkbox {
+    flex-basis: 18.7% !important;
+    font-size: 14px;
+    line-height: 1.2em;
+    color: #333;
+    font-weight: 500;
+    margin: 5px;
+    transition: none;
+    box-shadow: none;
+}
+.eael-setup-wizard-wrap .setup-content .eael-checkbox{
+    padding: 0px;
+}
+
+.eael-checkbox input[type="checkbox"].eael-element {
+    visibility: visible !important;
+
+    padding: 6.5px !important;
+    border: 1px solid #d7d7d7;
+    background-color: #fff;
+    box-shadow: none !important;
+    border-radius: 2px;
+    color: #a16bff;
+    clear: none;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 0;
+    height: 13px;
+    margin: 0;
+    outline: 0;
+    text-align: center;
+    vertical-align: middle;
+    width: 13px;
+    min-width: 13px;
+    -webkit-appearance: none;
+    transition: .05s border-color ease-in-out;
+}
+
+.eael-checkbox label.eael-element-title {
+    width: 100%;
+    height: unset;
+
+    font-size: 14px;
+    line-height: 1.2em;
+    color: #333;
+    font-weight: 500;
+    margin: 0 0 0 10px;
+}
+
+
+.eael-checkbox label.eael-element-title:before,
+.eael-checkbox label.eael-element-title:after {
+    content: none;
+}
+
+.eael-checkbox input[type=checkbox].eael-element:checked {
+    background-color: #a16bff;
+    border-color: #a16bff;
+}
+
+.eael-checkbox input[type=checkbox].eael-element:checked::before {
+    color: #ffffff;
+    margin: -5px 0 0 -5px;
+    width: 10px;
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26' fill='%23ffffff'%3E%3Cpath d='M 22.566406 4.730469 L 20.773438 3.511719 C 20.277344 3.175781 19.597656 3.304688 19.265625 3.796875 L 10.476563 16.757813 L 6.4375 12.71875 C 6.015625 12.296875 5.328125 12.296875 4.90625 12.71875 L 3.371094 14.253906 C 2.949219 14.675781 2.949219 15.363281 3.371094 15.789063 L 9.582031 22 C 9.929688 22.347656 10.476563 22.613281 10.96875 22.613281 C 11.460938 22.613281 11.957031 22.304688 12.277344 21.839844 L 22.855469 6.234375 C 23.191406 5.742188 23.0625 5.066406 22.566406 4.730469 Z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+/* footer */
+.eael-setup-footer {
+    text-align: right;
+}
+.eael-setup-wizard-wrap .eael-btn {
+    width: 140px;
+    text-transform: capitalize !important;
+
+}
+.eael-setup-wizard-wrap .button.eael-btn:focus,
+.eael-setup-wizard-wrap .button.eael-btn:hover {
+    background-color: #02cc7b;
+}
+
+button#eael-save[disabled]{
+    cursor: wait;
+    background-image: -webkit-linear-gradient(-169deg, rgb(146, 113, 255) 0%, rgb(87, 37, 255) 100%) !important;
+}
+
+#eael-next ,
+#eael-save {
+    background-image: -webkit-linear-gradient(-169deg, rgb(146, 113, 255) 0%, rgb(87, 37, 255) 100%);
+}
+#eael-prev {
+    margin-right: 10px;
+    background-color: #7d81ae;
+}
+
+/* config */
+.eael-input-group {
+    display: block;
+    position: relative;
+    margin-bottom: 10px;
+}
+.config-list label {
+    padding: 20px;
+    display: block;
+    text-align: left;
+    color: #3C454C;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    transition: color 200ms ease-in;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+}
+
+.config-list input[type=radio] {
+    display: none;
+}
+.config-list input:checked ~ label {
+    box-shadow: 1px 7px 30px rgba(0,1,35,0.12);
+}
+.config-list input:checked ~ label .eael-radio-circle {
+    border-color: #6e2dcf;
+    box-shadow: 0px 40px 30px rgba(0,1,35,0.12);
+}
+.config-list input:checked ~ label .eael-radio-circle:before {
+    content: '';
+    background: #6e2dcf;
+    border-radius: 50%;
+    height: 10px;
+    left: 2px;
+    pointer-events: none;
+    position: absolute;
+    top: 2px;
+    transition: transform 400ms cubic-bezier(0.175, 0.885, 0.32, 1.2);
+    width: 10px;
+}
+.eael-radio-circle {
+    border: 2px solid #cccccc;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 14px;
+    position: absolute;
+    transition: border-color 300ms;
+    width: 14px;
+}
+.eael-radio-text {
+    margin-left: 35px;
+}
+.eael-radio-text strong {
+    font-size: 18px;
+    line-height: 1.2em;
+    color: #252525;
+    font-weight: 400;
+}
+.eael-radio-text p {
+    margin: 10px 0 0;
+    font-size: 15px;
+    line-height: 1.4em;
+    color: #5a5a5a;
+    font-weight: 400;
+}
+/* end setup wizard */
+
 .eael-settings-wrap {
     padding: 15px;
 }
@@ -123,6 +588,9 @@
     box-shadow: none;
     color: #343434;
 }
+.eael-settings-tabs .col-one-fourth {
+    width: 100%;
+}
 p.eael-el-title {
     font-size: 15px;
     font-weight: 600;
@@ -167,6 +635,11 @@ textarea.eael-form-control {
     height: auto;
 }
 
+.col-one-fourth {
+    width: 25%;
+    height: auto;
+}
+
 /* Checkbox Style */
 .eael-checkbox-container {
     display: flex;
@@ -187,6 +660,10 @@ textarea.eael-form-control {
     border-radius: 5px;
     background-color: rgb(255, 255, 255);
     box-shadow: 0px 5px 18px 0px rgba(0, 4, 32, 0.08);
+}
+
+.eael-setup-body .eael-checkbox {
+    flex-basis: 260px;
 }
 
 .eael-checkbox-quick-tools {
@@ -245,7 +722,7 @@ textarea.eael-form-control {
     height: 17px;
     border-radius: 100%;
     left: 5px;
-    top: 3px;
+    top: 4px;
     transition: all 0.2s ease;
     box-shadow: 0 0 0 5px #fcfff4 inset;
     background: #cbcfd0;
@@ -504,19 +981,19 @@ textarea.eael-form-control {
 .eael-save-btn-wrap .eael-btn {
     border-radius: 3px;
     background-image: -moz-linear-gradient(
-        -169deg,
-        rgb(146, 113, 255) 0%,
-        rgb(87, 37, 255) 100%
+            -169deg,
+            rgb(146, 113, 255) 0%,
+            rgb(87, 37, 255) 100%
     );
     background-image: -webkit-linear-gradient(
-        -169deg,
-        rgb(146, 113, 255) 0%,
-        rgb(87, 37, 255) 100%
+            -169deg,
+            rgb(146, 113, 255) 0%,
+            rgb(87, 37, 255) 100%
     );
     background-image: -ms-linear-gradient(
-        -169deg,
-        rgb(146, 113, 255) 0%,
-        rgb(87, 37, 255) 100%
+            -169deg,
+            rgb(146, 113, 255) 0%,
+            rgb(87, 37, 255) 100%
     );
     width: 160px;
     height: 50px;
@@ -537,28 +1014,30 @@ textarea.eael-form-control {
     background: #ff5544;
 }
 
-.eael-admin-block-content .ea-button {
+.ea-button {
     font-size: 13px;
     border-radius: 3px;
     background-image: -webkit-linear-gradient(
-        -169deg,
-        rgb(146, 113, 255) 0%,
-        rgb(87, 37, 255) 100%
+            -169deg,
+            rgb(146, 113, 255) 0%,
+            rgb(87, 37, 255) 100%
     );
     background-image: -ms-linear-gradient(
-        -169deg,
-        rgb(146, 113, 255) 0%,
-        rgb(87, 37, 255) 100%
+            -169deg,
+            rgb(146, 113, 255) 0%,
+            rgb(87, 37, 255) 100%
     );
     -webkit-box-shadow: 0px 14px 15px 0px rgba(0, 5, 41, 0.08);
     box-shadow: 0px 14px 15px 0px rgba(0, 5, 41, 0.08);
     box-shadow: 0px 14px 15px 0px rgba(0, 5, 41, 0.08);
-    color: #fff;
+    color: #fff !important;
     display: inline-block;
-    padding: 12px 22px 14px;
+    padding: 12px 22px;
     text-decoration: none;
     line-height: 1;
     transition: all 0.3s;
+    cursor: pointer;
+    user-select: none;
 }
 
 .ea-button:hover {
@@ -654,7 +1133,6 @@ textarea.eael-form-control {
     padding-bottom: 30px;
     padding-top: 0px;
 }
-
 .eael-preview-img {
     width: 100%;
     height: 100%;
@@ -665,7 +1143,6 @@ textarea.eael-form-control {
 .eael-preview-img:hover {
     opacity: 0.9;
 }
-
 .eael-admin-sidebar {
     flex: 1 1 200px;
     padding: 20px;
@@ -687,7 +1164,6 @@ textarea.eael-form-control {
 .eael-admin-sidebar-cta {
     text-align: center;
 }
-
 .eael-admin-sidebar-cta a {
     font-size: 16px;
     font-weight: 600;
@@ -702,6 +1178,80 @@ textarea.eael-form-control {
     padding: 15px 35px;
     outline: none;
     transition: all 0.3s;
+}
+
+/* integrations - general */
+.eael-admin-block-templately {
+    position: relative;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 10px 10px 25px;
+}
+.eael-admin-sidebar .eael-admin-block-templately {
+    margin: inherit;
+}
+.eael-admin-block-templately-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 20px;
+}
+.eael-admin-sidebar.eael-templately-promo-show {
+    flex: inherit;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+}
+.eael-admin-sidebar .eael-admin-block-templately-overlay {
+    align-items: flex-start;
+    padding: 15px 20px;
+}
+.eael-admin-block-templately-overlay-inner {
+    max-width: 230px;
+}
+.eael-admin-block-templately-logo {
+    width: 120px;
+    height: auto;
+    margin-bottom: 5px;
+}
+.eael-admin-block-templately-desc {
+    line-height: 19px;
+    margin-bottom: 10px !important;
+}
+
+/* integrations - page */
+#integrations .row {
+    justify-content: flex-start;
+}
+.eael-admin-block-integrations .eael-admin-block-content {
+    padding-top: 1.5em;
+    padding-left: 1.5em;
+}
+.eael-admin-block-integrations-logo {
+    display: block;
+    text-align: center;
+}
+.eael-admin-block-integrations-logo img {
+    max-width: 100px;
+    height: auto;
+}
+.eael-admin-block-integrations-title {
+    font-size: 20px;
+    text-align: center;
+    color: #3f3f3f;
+    margin: 18px 0;
+}
+.eael-admin-block-integrations-text {
+    text-align: center;
+}
+.eael-admin-block-integrations-btn-wrap {
+    text-align: center;
 }
 
 /* Facebook Settings CSS */
@@ -769,9 +1319,21 @@ label.eael-get-pro + .eael-el-title {
     line-height: 1;
     padding: 3px 6px;
     border-radius: 2px;
-    background-image: -moz-linear-gradient( -122deg, rgb(146, 113, 255) 0%, rgb(87, 37, 255) 100% );
-    background-image: -webkit-linear-gradient( -122deg, rgb(146, 113, 255) 0%, rgb(87, 37, 255) 100% );
-    background-image: -ms-linear-gradient( -122deg, rgb(146, 113, 255) 0%, rgb(87, 37, 255) 100% );
+    background-image: -moz-linear-gradient(
+            -122deg,
+            rgb(146, 113, 255) 0%,
+            rgb(87, 37, 255) 100%
+    );
+    background-image: -webkit-linear-gradient(
+            -122deg,
+            rgb(146, 113, 255) 0%,
+            rgb(87, 37, 255) 100%
+    );
+    background-image: -ms-linear-gradient(
+            -122deg,
+            rgb(146, 113, 255) 0%,
+            rgb(87, 37, 255) 100%
+    );
     box-shadow: 0px 3px 7px 0px rgba(0, 5, 41, 0.1);
 }
 #toplevel_page_eael-settings.current .wp-menu-image img {
@@ -787,35 +1349,35 @@ label.eael-get-pro + .eael-el-title {
 }
 
 .eael-checkbox-container.elements-global-control-wrap
-    .eael-checkbox.checkbox-toggle-all {
+.eael-checkbox.checkbox-toggle-all {
     display: inline-block;
     margin: 0 auto;
 }
 
 .eael-checkbox-container.elements-global-control-wrap
-    .eael-checkbox
-    label:after {
+.eael-checkbox
+label:after {
     width: 1.8em;
     height: 1.8em;
 }
 
 .eael-checkbox-container.elements-global-control-wrap
-    .eael-checkbox
-    input[type="checkbox"]:checked
-    + label::after {
+.eael-checkbox
+input[type="checkbox"]:checked
++ label::after {
     left: 2.2em;
 }
 
 .eael-checkbox-container.elements-global-control-wrap .eael-checkbox label,
 .eael-checkbox-container.elements-global-control-wrap
-    .eael-checkbox
-    label:before {
+.eael-checkbox
+label:before {
     width: 100px;
     height: 2em;
 }
 
 .eael-checkbox-container.elements-global-control-wrap
-    .eael-checkbox.checkbox-toggle-all {
+.eael-checkbox.checkbox-toggle-all {
     flex-basis: 150px;
     padding: 10px 20px 5px;
 }
@@ -873,14 +1435,15 @@ button.eael-btn.eael-global-control-disable:hover {
     margin: 0 1px;
     text-decoration: none;
     color: #3a3c40;
-    opacity: .75;
+    opacity: 0.75;
     align-items: center;
     justify-content: center;
 }
-.eael-elements-info > a.eael-element-info-link:hover{
+.eael-elements-info > a.eael-element-info-link:hover {
     opacity: 1;
 }
-.eael-elements-info img, .eael-elements-info svg {
+.eael-elements-info img,
+.eael-elements-info svg {
     width: 16px;
     fill: #3a3c40;
 }
@@ -911,7 +1474,7 @@ button.eael-btn.eael-global-control-disable:hover {
     visibility: visible;
     opacity: 1;
     -webkit-transform: translate(-50%, -150%);
-          transform: translate(-50%, -150%);
+    transform: translate(-50%, -150%);
 }
 
 .eael-elements-info .eael-info-tooltip:after {
@@ -927,7 +1490,7 @@ button.eael-btn.eael-global-control-disable:hover {
     border-color: transparent;
     border-top-color: #3a3c40;
     -webkit-transform: translate(-50%, 100%);
-          transform: translate(-50%, 100%);
+    transform: translate(-50%, 100%);
 }
 
 .eael-admin-inside-select-block {
@@ -958,14 +1521,14 @@ button.eael-btn.eael-global-control-disable:hover {
 }
 
 /*----LR-Settings Modal---*/
-.sf-group{
+.sf-group {
     width: calc(100% - 30px);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
-.sf-group input{
+.sf-group input {
     padding: 10px;
     margin: 0 0 10px 10px;
     display: block;
@@ -976,13 +1539,93 @@ button.eael-btn.eael-global-control-disable:hover {
     border: 1px solid gray;
     width: calc(75% - 10px);
 }
-.sf-group input:focus{
+.sf-group input:focus {
     border: 2px solid #007cba;
 }
-.sf-group input:last-child{
+.sf-group input:last-child {
     margin: 0;
 }
-.sf-group label{
-    width:25%;
+.sf-group label {
+    width: 25%;
     max-width: 200px;
+}
+
+/* Templately Plugin Popup */
+
+.eael-templately-popup {
+    line-height: 1.7;
+    font-weight: 400;
+    letter-spacing: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+.eael-templately-popup .eael-popup__wrapper {
+    position: inherit;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /*background: #e6e6e6;*/
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.eael-templately-popup .eael-popup__wrapper.show {
+    display: block;
+}
+
+.eael-templately-popup .eael-popup__wrapper .eael-popup__block {
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*-webkit-transform: translate(-50%, -50%);*/
+    /*transform: translate(-50%, -50%);*/
+    background: rgba(255, 255, 255, 0.97);
+    max-width: 770px;
+    width: 70%;
+    margin: 30px auto;
+    text-align: center;
+    padding: 30px 40px 50px;
+    border-radius: 10px;
+}
+
+.eael-templately-popup .eael-popup__wrapper .eael-popup__block .eael-popup__logo {
+    margin-bottom: 20px;
+}
+
+.eael-templately-popup .eael-popup__wrapper .eael-popup__block p {
+    font-size: 18px;
+    font-weight: 400;
+    color: #373747;
+    font-family: "Roboto", sans-serif;
+    margin-bottom: 30px;
+}
+
+.eael-templately-popup .eael-popup__wrapper .eael-popup__block .eael-popup__button {
+    border-radius: 5px;
+    background: linear-gradient(-177deg, #9c60ff 0%, #8543ff 39%, #6d25ff 100%);
+    -webkit-box-shadow: 0px 3px 7px 0px rgba(0, 5, 41, 0.1);
+    box-shadow: 0px 3px 7px 0px rgba(0, 5, 41, 0.1);
+    padding: 17px 70px;
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+}
+
+.eael-templately-popup .eael-popup__wrapper .eael-popup__logo img {
+    width: 190px;
+    height: 50px;
+}
+
+@media all and (max-width: 767px) {
+    .eael-templately-popup .eael-popup__wrapper .eael-popup__block {
+        padding: 60px 30px 50px;
+    }
+
+    .eael-templately-popup .eael-popup__wrapper .eael-popup__block p {
+        font-size: 16px;
+    }
 }

@@ -71,6 +71,9 @@ class Bootstrap
     // used to store custom js
     protected $custom_js_strings;
 
+    // modules
+    protected $installer;
+
     /**
      * Singleton instance
      *
@@ -92,6 +95,9 @@ class Bootstrap
      */
     private function __construct()
     {
+        // init modules
+        $this->installer = new WPDeveloper_Plugin_Installer();
+
         // before init hook
         do_action('eael/before_init');
 
@@ -140,6 +146,7 @@ class Bootstrap
         add_filter('elementor/frontend/builder_content_data', [$this, 'collect_loaded_templates'], 10, 2);
         add_action('wp_print_footer_scripts', [$this, 'update_request_data']);
 
+
         // Ajax
         add_action('wp_ajax_load_more', array($this, 'ajax_load_more'));
         add_action('wp_ajax_nopriv_load_more', array($this, 'ajax_load_more'));
@@ -159,6 +166,7 @@ class Bootstrap
 
         add_action('wp_ajax_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
         add_action('wp_ajax_nopriv_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
+        // Compare table
 	    add_action( 'wp_ajax_nopriv_eael_product_grid', [$this, 'get_compare_table']);
 	    add_action( 'wp_ajax_eael_product_grid', [$this, 'get_compare_table']);
 
@@ -200,6 +208,15 @@ class Bootstrap
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'toc_rank_math_support']);
 
+
+        //templately plugin support
+        if( !class_exists('Templately\Plugin') && !get_option('eael_templately_promo_hide') ) {
+            add_action( 'elementor/editor/before_enqueue_scripts', [$this, 'templately_promo_enqueue_scripts'] );
+            add_action( 'eael/before_enqueue_styles', [$this, 'templately_promo_enqueue_style'] );
+            add_action( 'elementor/editor/footer', [ $this, 'print_template_views' ] );
+            add_action( 'wp_ajax_templately_promo_status', array($this, 'templately_promo_status'));
+        }
+
 	    if( class_exists( 'woocommerce' ) ) {
 		    add_action( 'wp_footer', [ $this, 'eael_product_grid_script' ] );
 
@@ -215,11 +232,6 @@ class Bootstrap
 		    add_filter( 'woocommerce_product_get_rating_html', [ $this, 'eael_rating_markup' ], 10, 3 );
 	    }
 
-	    if( class_exists('WC_Subscriptions_Cart') ) {
-		    remove_action('woocommerce_review_order_after_order_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals' ), 10);
-		    add_action('eael_display_recurring_total_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals'
-		    ), 10);
-	    }
 
         // Admin
         if (is_admin()) {

@@ -38,6 +38,7 @@ class Woo_Checkout extends Widget_Base {
 			}
 
 			add_filter('body_class' , [$this, 'add_checkout_body_class']);
+      $this->eael_woocheckout_recurring();
 		}
 	}
 
@@ -436,7 +437,20 @@ class Woo_Checkout extends Widget_Base {
 					'active' => true,
 				],
 			]
-		);
+    );
+    
+    $this->add_control(
+			'ea_woo_checkout_login_message',
+			[
+				'label' => __( 'Message', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXTAREA,
+				'default' => __( 'If you have shopped with us before, please enter your details below. If you are a new customer, please proceed to the Billing section.', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
+			]
+    );
+    
 		$this->add_control(
 			'ea_woo_checkout_login_link_text',
 			[
@@ -2543,6 +2557,15 @@ class Woo_Checkout extends Widget_Base {
 		}
 		return $classes;
 	}
+
+
+  public function eael_woocheckout_recurring(){
+    if( class_exists('WC_Subscriptions_Cart') ) {
+      remove_action('woocommerce_review_order_after_order_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals' ), 10);
+      add_action('eael_display_recurring_total_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals'
+      ), 10);
+    }
+  }
 
 	protected function render() {
 	    if( !class_exists('woocommerce') ) {
