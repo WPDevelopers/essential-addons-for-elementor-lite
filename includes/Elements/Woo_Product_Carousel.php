@@ -53,7 +53,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eaicon-post-carousel';
+		return 'eaicon-product-carousel';
 	}
 
 	public function get_categories() {
