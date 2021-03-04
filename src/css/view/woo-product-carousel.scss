@@ -134,6 +134,16 @@ $theme-preset4: #597dfc;
             }
         }
 
+        .swiper-container .swiper-button-next,
+        .swiper-container .swiper-button-prev,
+        &.swiper-container-wrap .swiper-button-next,
+        &.swiper-container-wrap .swiper-button-prev {
+            &:hover {
+                background-color: $theme-preset1;
+                color: #fff;
+            }
+        }
+
         .eael-product-carousel {
             border-radius: 20px;
             background-color: #f5f7fd;
@@ -198,6 +208,16 @@ $theme-preset4: #597dfc;
 
         .swiper-pagination-bullet {
             border-radius: 0;
+        }
+
+        .swiper-container .swiper-button-next,
+        .swiper-container .swiper-button-prev,
+        &.swiper-container-wrap .swiper-button-next,
+        &.swiper-container-wrap .swiper-button-prev {
+            &:hover {
+                background-color: $theme-preset2;
+                color: #fff;
+            }
         }
 
         .eael-product-carousel {
@@ -293,6 +313,16 @@ $theme-preset4: #597dfc;
             }
         }
 
+        .swiper-container .swiper-button-next,
+        .swiper-container .swiper-button-prev,
+        &.swiper-container-wrap .swiper-button-next,
+        &.swiper-container-wrap .swiper-button-prev {
+            &:hover {
+                background-color: $theme-preset3;
+                color: #fff;
+            }
+        }
+
         .eael-product-carousel {
             border-radius: 10px;
             background-color: #f5f7fd;
@@ -364,6 +394,16 @@ $theme-preset4: #597dfc;
 
             &.swiper-pagination-bullet-active {
                 background: $theme-preset4;
+            }
+        }
+
+        .swiper-container .swiper-button-next,
+        .swiper-container .swiper-button-prev,
+        &.swiper-container-wrap .swiper-button-next,
+        &.swiper-container-wrap .swiper-button-prev {
+            &:hover {
+                background-color: $theme-preset4;
+                color: #fff;
             }
         }
 
@@ -653,8 +693,35 @@ $theme-preset4: #597dfc;
         text-align: center;
         transform: translateY(-50%);
         width: auto;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 5px;
+        filter: drop-shadow(0px 23px 13.5px rgba(28,34,56,0.05));
+        background-color: #eee;
+        background-image: none;
+        color: #000;
+        transition: all .3s ease;
+
+        &:focus {
+            outline: none;
+        }
+
+        &.swiper-button-disabled {
+            color: #c3c9d0;
+            opacity: .7;
+        }
     }
 
+    .swiper-container .swiper-button-next,
+    &.swiper-container-wrap .swiper-button-next {
+        right: -40px;
+    }
+
+    .swiper-container .swiper-button-prev,
+    &.swiper-container-wrap .swiper-button-prev {
+        left: -40px;
+    }
 
     // title
     .eael-product-title h2 {
