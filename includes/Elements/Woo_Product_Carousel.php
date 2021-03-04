@@ -30,6 +30,20 @@ class Woo_Product_Carousel extends Widget_Base {
 	 */
 	protected $page_id;
 
+	public function __construct( $data = [], $args = null ) {
+		parent::__construct( $data, $args );
+
+		$is_type_instance = $this->is_type_instance();
+
+		if ( ! $is_type_instance && null === $args ) {
+			throw new \Exception( '`$args` argument is required when initializing a full widget instance.' );
+		}
+
+		if ( $is_type_instance && class_exists('woocommerce')) {
+			add_action('wp_body_open', [$this,'added_popup_markup']);
+		}
+	}
+
 	public function get_name() {
 		return 'eael-woo-product-carousel';
 	}
@@ -39,7 +53,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eaicon-post-carousel';
+		return 'eaicon-product-carousel';
 	}
 
 	public function get_categories() {
@@ -93,6 +107,17 @@ class Woo_Product_Carousel extends Widget_Base {
 			'menu_order' => __( 'Menu Order', 'essential-addons-for-elementor-lite' ),
 		] );
 	}
+
+	public function added_popup_markup(){
+	    ?>
+        <div style="display: none" class="eael-woocommerce-popup-view eael-product-popup
+		eael-product-zoom-in woocommerce">
+            <div class="eael-product-modal-bg"></div>
+            <div class="eael-popup-details-render"></div>
+        </div>
+        <?php
+
+    }
 
 	protected function eael_get_product_filterby_options() {
 		return apply_filters( 'eael/woo-product-carousel/filterby-options', [
