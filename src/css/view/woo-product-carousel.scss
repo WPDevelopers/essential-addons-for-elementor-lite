@@ -937,8 +937,7 @@ $theme-preset4: #597dfc;
 
         &.block-style {
             background: $theme-preset3;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: flex;
             height: 40px;
             width: 100%;
             top: auto;
@@ -951,7 +950,7 @@ $theme-preset4: #597dfc;
             }
 
             li {
-                //flex: 1;
+                flex: 1;
                 border-right: 1px solid #fff;
 
                 &:last-child{
@@ -965,6 +964,7 @@ $theme-preset4: #597dfc;
                 a {
                     position: relative;
                     color: #fff;
+                    background: $theme-preset3;
                     
                     &:hover {
                         background: transparent;
@@ -991,10 +991,10 @@ $theme-preset4: #597dfc;
                         padding: 0 !important;
                         margin: 0;
                         font-size: 0;
-                        background: transparent;
+                        background: $theme-preset3;
 
                         &:hover {
-                            background: transparent;
+                            background: inherit;
                         }
 
                         &:before {

@@ -1100,6 +1100,7 @@ class Woo_Product_Carousel extends Widget_Base {
 				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
+					'{{WRAPPER}} .eael-product-carousel .icons-wrap.block-style' => 'background-color: {{VALUE}};',
 					'{{WRAPPER}} .eael-product-carousel .icons-wrap li a' => 'background-color: {{VALUE}};',
 				],
 			]
