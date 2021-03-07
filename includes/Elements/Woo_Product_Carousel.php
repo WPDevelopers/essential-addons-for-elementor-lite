@@ -652,7 +652,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
-				'name'           => 'eael_peoduct_carousel_border',
+				'name'           => 'eael_product_carousel_border',
 				'fields_options' => [
 					'border' => [
 						'default' => 'solid',
@@ -677,7 +677,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->add_group_control(
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			[
-				'name'     => 'eael_peoduct_carousel_shadow',
+				'name'     => 'eael_product_carousel_shadow',
 				'label'    => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
 				'selector' => '{{WRAPPER}} .eael-product-carousel',
 			]
@@ -698,7 +698,7 @@ class Woo_Product_Carousel extends Widget_Base {
 					'{{WRAPPER}} .eael-product-carousel:hover' => 'border-color: {{VALUE}};',
 				],
 				'condition' => [
-					'eael_peoduct_carousel_border_border!' => '',
+					'eael_product_carousel_border_border!' => '',
 				],
 			]
 		);
@@ -716,7 +716,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		$this->end_controls_tabs();
 
 		$this->add_control(
-			'eael_peoduct_carousel_border_radius',
+			'eael_product_carousel_border_radius',
 			[
 				'label'     => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::DIMENSIONS,
@@ -2118,6 +2118,26 @@ class Woo_Product_Carousel extends Widget_Base {
 			[
 				'label'      => __( 'Arrows Size', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
+				'default'    => [ 'size' => '40' ],
+				'range'      => [
+					'px' => [
+						'min'  => 15,
+						'max'  => 100,
+						'step' => 1,
+					],
+				],
+				'size_units' => [ 'px' ],
+				'selectors'  => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'arrows_icon_size',
+			[
+				'label'      => __( 'Icon Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
 				'default'    => [ 'size' => '22' ],
 				'range'      => [
 					'px' => [
@@ -2276,16 +2296,12 @@ class Woo_Product_Carousel extends Widget_Base {
 
 		$this->end_controls_tabs();
 
-		$this->add_responsive_control(
-			'arrows_padding',
+		$this->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
 			[
-				'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'separator'  => 'before',
+				'name'     => 'eael_product_carousel_arrow_shadow',
+				'label'    => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
+				'selector' => '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev',
 			]
 		);
 

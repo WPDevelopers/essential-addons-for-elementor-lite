@@ -691,7 +691,6 @@ $theme-preset4: #597dfc;
         transform: translateY(-50%);
         width: 40px;
         height: 40px;
-        line-height: 40px;
         border-radius: 5px;
         filter: drop-shadow(0px 23px 13.5px rgba(28,34,56,0.05));
         background-color: #eee;
@@ -706,6 +705,13 @@ $theme-preset4: #597dfc;
         &.swiper-button-disabled {
             color: #c3c9d0;
             opacity: .7;
+        }
+
+        i {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
         }
     }
 
