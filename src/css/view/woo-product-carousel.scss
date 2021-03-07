@@ -826,6 +826,9 @@ $theme-preset4: #597dfc;
                         padding: 0 !important;
                         margin: 3px;
                         font-size: 0px;
+                        display: block;
+                        border: none;
+                        color: $theme-preset1;
 
                         &:before {
                             content: "\f07a";
@@ -837,6 +840,10 @@ $theme-preset4: #597dfc;
                             top: 50%;
                             left: 50%;
                             position: absolute;
+                        }
+
+                        &:hover {
+                            color: #fff;
                         }
 
                         &.product_type_variable {
@@ -912,6 +919,9 @@ $theme-preset4: #597dfc;
                         padding: 0 !important;
                         margin: 3px;
                         font-size: 0px;
+                        display: block;
+                        border: none;
+                        color: $theme-preset2;
 
                         &:before {
                             content: "\f07a";
@@ -923,6 +933,10 @@ $theme-preset4: #597dfc;
                             top: 50%;
                             left: 50%;
                             position: absolute;
+                        }
+
+                        &:hover {
+                            color: #fff;
                         }
 
                         &.product_type_variable {
@@ -994,9 +1008,13 @@ $theme-preset4: #597dfc;
                         font-size: 0;
                         border-radius: 0;
                         background: $theme-preset3;
+                        display: block;
+                        border: none;
+                        color: inherit;
 
                         &:hover {
                             background: inherit;
+                            color: inherit;
                         }
 
                         &:before {
