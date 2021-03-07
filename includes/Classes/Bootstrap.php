@@ -169,6 +169,9 @@ class Bootstrap
         // Compare table
 	    add_action( 'wp_ajax_nopriv_eael_product_grid', [$this, 'get_compare_table']);
 	    add_action( 'wp_ajax_eael_product_grid', [$this, 'get_compare_table']);
+		//quick view popup
+	    add_action( 'wp_ajax_nopriv_eael_product_quickview_popup', [$this, 'wp_ajax_eael_product_quickview_popup']);
+	    add_action( 'wp_ajax_eael_product_quickview_popup', [$this, 'wp_ajax_eael_product_quickview_popup']);
 
         //handle select2 ajax search
         add_action('wp_ajax_eael_select2_search_post', [$this, 'select2_ajax_posts_filter_autocomplete']);
