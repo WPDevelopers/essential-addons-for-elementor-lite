@@ -875,7 +875,9 @@ class Helper
 		}
 	}
 
-	public static function eael_product_quick_view ($product, $settings, $widget_id) { ?>
+	public static function eael_product_quick_view ($product, $settings, $widget_id) {
+
+	    ?>
 		<div id="eaproduct<?php echo $widget_id.$product->get_id(); ?>" class="eael-product-popup
 		eael-product-zoom-in woocommerce">
 			<div class="eael-product-modal-bg"></div>

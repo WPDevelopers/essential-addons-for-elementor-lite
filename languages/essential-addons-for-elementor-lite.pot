@@ -53,7 +53,7 @@ msgstr ""
 msgid "Select a Fluent Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:886, ../includes/Template/Content/Product_Grid.php:63, ../includes/Template/Content/Product_Grid.php:29, ../includes/Template/Eicon-Woocommerce/default.php:260, ../includes/Template/Eicon-Woocommerce/default.php:199, ../includes/Template/Eicon-Woocommerce/default.php:93, ../includes/Template/Eicon-Woocommerce/default.php:79, ../includes/Template/Eicon-Woocommerce/default.php:45, ../includes/Template/Woo-Product-Carousel/preset-1.php:41, ../includes/Template/Woo-Product-Carousel/preset-2.php:40, ../includes/Template/Woo-Product-Carousel/preset-3.php:38, ../includes/Template/Woo-Product-Carousel/preset-4.php:40
+#: ../includes/Classes/Helper.php:888, ../includes/Template/Content/Product_Grid.php:63, ../includes/Template/Content/Product_Grid.php:29, ../includes/Template/Eicon-Woocommerce/default.php:260, ../includes/Template/Eicon-Woocommerce/default.php:199, ../includes/Template/Eicon-Woocommerce/default.php:93, ../includes/Template/Eicon-Woocommerce/default.php:79, ../includes/Template/Eicon-Woocommerce/default.php:45, ../includes/Template/Woo-Product-Carousel/preset-1.php:45, ../includes/Template/Woo-Product-Carousel/preset-2.php:40, ../includes/Template/Woo-Product-Carousel/preset-3.php:38, ../includes/Template/Woo-Product-Carousel/preset-4.php:40
 msgid "Sale!"
 msgstr ""
 
@@ -8234,11 +8234,11 @@ msgstr ""
 msgid "Stock <br/> Out"
 msgstr ""
 
-#: ../includes/Template/Eicon-Woocommerce/default.php:260, ../includes/Template/Eicon-Woocommerce/default.php:199, ../includes/Template/Eicon-Woocommerce/default.php:93, ../includes/Template/Woo-Product-Carousel/preset-1.php:41, ../includes/Template/Woo-Product-Carousel/preset-2.php:40, ../includes/Template/Woo-Product-Carousel/preset-3.php:38, ../includes/Template/Woo-Product-Carousel/preset-4.php:40
+#: ../includes/Template/Eicon-Woocommerce/default.php:260, ../includes/Template/Eicon-Woocommerce/default.php:199, ../includes/Template/Eicon-Woocommerce/default.php:93, ../includes/Template/Woo-Product-Carousel/preset-1.php:45, ../includes/Template/Woo-Product-Carousel/preset-2.php:40, ../includes/Template/Woo-Product-Carousel/preset-3.php:38, ../includes/Template/Woo-Product-Carousel/preset-4.php:40
 msgid "Stock "
 msgstr ""
 
-#: ../includes/Template/Eicon-Woocommerce/default.php:260, ../includes/Template/Eicon-Woocommerce/default.php:199, ../includes/Template/Eicon-Woocommerce/default.php:93, ../includes/Template/Woo-Product-Carousel/preset-1.php:41, ../includes/Template/Woo-Product-Carousel/preset-2.php:40, ../includes/Template/Woo-Product-Carousel/preset-3.php:38, ../includes/Template/Woo-Product-Carousel/preset-4.php:40
+#: ../includes/Template/Eicon-Woocommerce/default.php:260, ../includes/Template/Eicon-Woocommerce/default.php:199, ../includes/Template/Eicon-Woocommerce/default.php:93, ../includes/Template/Woo-Product-Carousel/preset-1.php:45, ../includes/Template/Woo-Product-Carousel/preset-2.php:40, ../includes/Template/Woo-Product-Carousel/preset-3.php:38, ../includes/Template/Woo-Product-Carousel/preset-4.php:40
 msgid "Out"
 msgstr ""
 

@@ -29,7 +29,11 @@ $should_print_quick_view = isset( $settings['eael_product_carousel_quick_view'] 
 $should_print_price = isset( $settings['eael_product_carousel_price'] ) && 'yes' === $settings['eael_product_carousel_price'];
 $should_print_excerpt = isset( $settings['eael_product_carousel_excerpt'] ) && ('yes' === $settings['eael_product_carousel_excerpt'] && has_excerpt());
 $widget_id = isset($settings['eael_widget_id']) ? $settings['eael_widget_id'] : null;
-
+$quick_view_setting = [
+        'widget_id' => $widget_id,
+        'product_id' => $product->get_id(),
+        'page_id' => 2,
+];
 
 if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
     ?>
@@ -47,7 +51,7 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                             <li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart(); ?></li>
                             <?php if( $should_print_quick_view ){?>
                                 <li class="eael-product-quick-view">
-                                    <a href="#eaproduct<?php echo $widget_id.$product->get_id(); ?>"
+                                    <a data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>" data-widget-id="<?php echo $widget_id; ?>" data-product-id="<?php echo $product->get_id(); ?>" href="#eaproduct<?php echo $widget_id.$product->get_id(); ?>"
                                        class="open-popup-link">
                                         <i class="fas fa-eye"></i>
                                     </a>
@@ -57,7 +61,7 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                         </ul>
                     <?php
                     if( $should_print_quick_view ){
-                        Helper::eael_product_quick_view( $product, $settings, $widget_id );
+                       // Helper::eael_product_quick_view( $product, $settings, $widget_id );
                     }
                     ?>
                 </div>
