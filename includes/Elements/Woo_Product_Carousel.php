@@ -2500,10 +2500,10 @@ class Woo_Product_Carousel extends Widget_Base {
 						wp_reset_postdata();
 						echo '</ul>';
 					} else {
-						_e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
+						_e( '<p class="eael-no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
 					}
 				} else {
-					_e( '<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
+					_e( '<p class="eael-no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
 				}
 
 				?>
