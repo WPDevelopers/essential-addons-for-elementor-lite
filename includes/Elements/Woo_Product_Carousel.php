@@ -110,7 +110,7 @@ class Woo_Product_Carousel extends Widget_Base {
         <div style="display: none" class="eael-woocommerce-popup-view eael-product-popup
 		eael-product-zoom-in woocommerce">
             <div class="eael-product-modal-bg"></div>
-            <div class="eael-popup-details-render"></div>
+            <div class="eael-popup-details-render eael-woo-slider-popup"></div>
         </div>
         <?php
 

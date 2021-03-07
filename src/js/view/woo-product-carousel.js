@@ -128,13 +128,8 @@ ea.hooks.addAction("init", "ea", () => {
 			e.preventDefault();
 			e.stopPropagation();
 			const $this = $(this);
-			const id = $this.attr("href");
-			const popup = $(id);
 			const quickview_setting = $this.data('quickview-setting');
-			const popup_details = popup.children(".eael-product-popup-details");
 			const popup_view = $(".eael-woocommerce-popup-view");
-
-
 			$.ajax({
 			   url: localize.ajaxurl,
 			   type: "post",
@@ -146,27 +141,22 @@ ea.hooks.addAction("init", "ea", () => {
 			   success: function (response) {
 				   if (response.success) {
 				   	const product_preview = $(response.data);
-				   	const popup_details1 = product_preview.children(".eael-product-popup-details");
+				   	const popup_details = product_preview.children(".eael-product-popup-details");
 					   if (popup_details.height() > 400) {
 						   popup_details.css("height", "75vh");
 					   } else {
 						   popup_details.css("height", "auto");
 					   }
-					   $(id + " .variations_form").wc_variation_form();
-					   popup_view.find(".eael-popup-details-render").html(popup_details1);
+					   popup_details.find(".variations_form").wc_variation_form()
+					   popup_view.find(".eael-popup-details-render").html(popup_details);
 					   popup_view
 					   .addClass("eael-product-popup-ready")
 					   .removeClass("eael-product-modal-removing");
+					   popup_view.find(".woocommerce-product-gallery").wc_product_gallery();
 					   popup_view.show();
 				   }
 			   },
 		   });
-
-			// popup_view.find(".eael-popup-details-render").html(popup_details);
-			// popup_view
-			// .addClass("eael-product-popup-ready")
-			// .removeClass("eael-product-modal-removing");
-			// popup_view.show();
 		});
 
 		$(document).on(
@@ -184,9 +174,9 @@ ea.hooks.addAction("init", "ea", () => {
 		);
 
 		// handle add to cart for quick view
-		$scope.on(
+		$(document).on(
 			"click",
-			".eael-product-popup-details .single_add_to_cart_button",
+			".eael-woo-slider-popup .single_add_to_cart_button",
 			function (e) {
 				e.preventDefault();
 				var $this = $(this),
