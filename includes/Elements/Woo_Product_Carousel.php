@@ -858,15 +858,6 @@ class Woo_Product_Carousel extends Widget_Base {
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name'     => 'eael_product_carousel_rating_typography',
-				'selector' => '{{WRAPPER}} .eael-product-carousel .star-rating',
-
-			]
-		);
-
 		$this->add_responsive_control(
 			'eael_product_carousel_rating_size',
 			[
@@ -878,10 +869,10 @@ class Woo_Product_Carousel extends Widget_Base {
 					],
 				],
 				'default'   => [
-					'size' => 15,
+					'size' => 14,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-product-carousel .star-rating' => 'font-size: {{SIZE}}px!important;',
+					'{{WRAPPER}} .eael-woo-product-carousel-container .woocommerce ul.products .product .star-rating' => 'font-size: {{SIZE}}px!important;',
 				],
 
 			]
