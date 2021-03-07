@@ -241,6 +241,16 @@ $theme-preset4: #597dfc;
                 }
             }
 
+            .eael-product-price {
+                del .amount {
+                    color: #fff;
+                }
+                ins .amount,
+                .amount {
+                    color: #fff;
+                }
+            }
+
             &:hover {
                 .carousel-overlay  {
                     opacity: 1;
@@ -357,6 +367,16 @@ $theme-preset4: #597dfc;
             .star-rating {
                 display: inline-block!important;
             }
+
+            .eael-product-price {
+                //del .amount {
+                //    color: #fff;
+                //}
+                ins .amount,
+                .amount {
+                    color: $theme-preset3;
+                }
+            }
         }
 
         .product-image-wrap {
@@ -426,6 +446,16 @@ $theme-preset4: #597dfc;
 
                 &.sale-preset-4.right:after {
                     border-right-color: $theme-preset4;
+                }
+            }
+
+            .eael-product-price {
+                del .amount {
+                    color: #fff;
+                }
+                ins .amount,
+                .amount {
+                    color: #fff;
                 }
             }
 
