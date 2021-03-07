@@ -973,6 +973,7 @@ $theme-preset4: #597dfc;
 
                     &.added_to_cart {
                         font-size: 0;
+                        border-radius: 0;
 
                         &:after {
                             content: '\f217';
@@ -991,6 +992,7 @@ $theme-preset4: #597dfc;
                         padding: 0 !important;
                         margin: 0;
                         font-size: 0;
+                        border-radius: 0;
                         background: $theme-preset3;
 
                         &:hover {
