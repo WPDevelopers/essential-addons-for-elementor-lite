@@ -372,10 +372,10 @@ $theme-preset4: #597dfc;
                 //del .amount {
                 //    color: #fff;
                 //}
-                ins .amount,
-                .amount {
-                    color: $theme-preset3;
-                }
+                //ins .amount,
+                //.amount {
+                //    color: $theme-preset3;
+                //}
             }
         }
 
@@ -859,6 +859,7 @@ $theme-preset4: #597dfc;
                         display: block;
                         border: none;
                         color: $theme-preset1;
+                        background-color: #fff;
 
                         &:before {
                             content: "\f07a";
@@ -874,6 +875,7 @@ $theme-preset4: #597dfc;
 
                         &:hover {
                             color: #fff;
+                            background-color: $theme-preset1;
                         }
 
                         &.product_type_variable {
@@ -952,6 +954,7 @@ $theme-preset4: #597dfc;
                         display: block;
                         border: none;
                         color: $theme-preset2;
+                        background-color: #fff;
 
                         &:before {
                             content: "\f07a";
@@ -967,6 +970,7 @@ $theme-preset4: #597dfc;
 
                         &:hover {
                             color: #fff;
+                            background-color: $theme-preset1;
                         }
 
                         &.product_type_variable {
