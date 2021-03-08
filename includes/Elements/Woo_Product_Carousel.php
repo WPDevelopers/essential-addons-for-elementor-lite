@@ -153,12 +153,12 @@ class Woo_Product_Carousel extends Widget_Base {
         // Style Controls---------------
         $this->init_style_product_controls();
         $this->style_color_typography();
-        
-        do_action( 'eael/controls/nothing_found_style', $this );
+
         $this->eael_woo_product_carousel_buttons_style();
         $this->eael_product_view_popup_style();
         $this->eael_woo_product_carousel_dots();
         $this->eael_woo_product_carousel_arrows();
+	    do_action( 'eael/controls/nothing_found_style', $this );
     }
     
     protected function eael_woo_product_carousel_layout() {
@@ -311,6 +311,17 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
+
+	    $this->add_control(
+		    'eael_product_carousel_not_found_msg',
+		    [
+			    'label'     => __( 'Not Found Message', 'essential-addons-for-elementor-lite' ),
+			    'type'      => Controls_Manager::TEXT,
+			    'default'   => __( 'Products Not Found', 'essential-addons-for-elementor-lite' ),
+			    'separator' => 'before'
+		    ]
+	    );
+
         $this->end_controls_section();
     }
     
@@ -2554,8 +2565,7 @@ class Woo_Product_Carousel extends Widget_Base {
                         wp_reset_postdata();
                         echo '</ul>';
                     } else {
-                        _e( '<p class="eael-no-posts-found">No posts found!</p>',
-                            'essential-addons-for-elementor-lite' );
+                        echo '<p class="eael-no-posts-found">'.$settings['eael_product_carousel_not_found_msg'].'</p>';
                     }
                 } else {
                     _e( '<p class="eael-no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );

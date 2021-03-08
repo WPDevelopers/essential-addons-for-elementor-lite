@@ -1790,7 +1790,7 @@ trait Controls
 		$wb->start_controls_section(
 			'eael_section_nothing_found_style',
 			[
-				'label' => __('Nothing', 'essential-addons-for-elementor-lite'),
+				'label' => __('Not Found Message', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1839,6 +1839,33 @@ trait Controls
 				],
 			]
 		);
+
+		$wb->add_control(
+			'eael_post_nothing_found_alignment',
+			[
+				'label'     => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => [
+					'left'  => [
+						'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-align-left',
+					],
+					'center'  => [
+						'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-align-center',
+					],
+					'right' => [
+						'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-align-right',
+					],
+				],
+				'default' => 'center',
+				'selectors' => [
+					'{{WRAPPER}} .eael-no-posts-found' => 'text-align: {{VALUE}};',
+				],
+			]
+		);
+
 		$wb->end_controls_section();
 	}
 }
