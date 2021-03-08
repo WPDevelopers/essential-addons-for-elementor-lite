@@ -175,7 +175,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'preset-1',
-                'options' => $this->get_template_list_for_dropdown(),
+                'options' => $this->get_template_list_for_dropdown(true),
             ]
         );
         
