@@ -1122,6 +1122,10 @@ $theme-preset4: #597dfc;
     // no posts
     .eael-no-posts-found {
         margin: 0;
+        background: #ccc;
+        color: #000;
+        font-size: 16px;
+        line-height: 1.2em;
     }
 }
 
