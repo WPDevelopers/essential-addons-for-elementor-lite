@@ -124,9 +124,8 @@ ea.hooks.addAction("init", "ea", () => {
 		}
 
 		// Quick view
-		$(document).on("click", ".open-popup-link", function (e) {
+		$scope.on("click", ".open-popup-link", function (e) {
 			e.preventDefault();
-			e.stopPropagation();
 			const $this = $(this);
 			const quickview_setting = $this.data('quickview-setting');
 			const popup_view = $(".eael-woocommerce-popup-view");
@@ -142,13 +141,17 @@ ea.hooks.addAction("init", "ea", () => {
 				   if (response.success) {
 				   	const product_preview = $(response.data);
 				   	const popup_details = product_preview.children(".eael-product-popup-details");
+
 					   if (popup_details.height() > 400) {
 						   popup_details.css("height", "75vh");
 					   } else {
 						   popup_details.css("height", "auto");
 					   }
 					   popup_details.find(".variations_form").wc_variation_form()
+					   const popup_view_render = popup_view.find(".eael-popup-details-render");
 					   popup_view.find(".eael-popup-details-render").html(popup_details);
+					   popup_view_render.addClass("elementor-"+quickview_setting.page_id)
+					   popup_view_render.children().addClass("elementor-element elementor-element-"+quickview_setting.widget_id)
 					   popup_view
 					   .addClass("eael-product-popup-ready")
 					   .removeClass("eael-product-modal-removing");
