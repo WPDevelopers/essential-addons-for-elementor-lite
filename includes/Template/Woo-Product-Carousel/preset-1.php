@@ -32,7 +32,7 @@ $widget_id = isset($settings['eael_widget_id']) ? $settings['eael_widget_id'] : 
 $quick_view_setting = [
         'widget_id' => $widget_id,
         'product_id' => $product->get_id(),
-        'page_id' => 2,
+        'page_id' => $settings['eael_page_id'],
 ];
 
 if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
@@ -51,7 +51,7 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                             <li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart(); ?></li>
                             <?php if( $should_print_quick_view ){?>
                                 <li class="eael-product-quick-view">
-                                    <a data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>" data-widget-id="<?php echo $widget_id; ?>" data-product-id="<?php echo $product->get_id(); ?>" href="#eaproduct<?php echo $widget_id.$product->get_id(); ?>"
+                                    <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
                                        class="open-popup-link">
                                         <i class="fas fa-eye"></i>
                                     </a>
@@ -60,9 +60,6 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                             <li class="view-details" title="Details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
                         </ul>
                     <?php
-                    if( $should_print_quick_view ){
-                       // Helper::eael_product_quick_view( $product, $settings, $widget_id );
-                    }
                     ?>
                 </div>
             </div>
