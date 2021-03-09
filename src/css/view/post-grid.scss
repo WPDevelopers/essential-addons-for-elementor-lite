@@ -738,10 +738,31 @@
 			}
 		}
 	}
+
+	.post-carousel-categories li a {
+		background: #fff;
+		padding: 2px 4px;
+		border-radius: 2px;
+	}
 }
 
 .eael-post-grid-template-overlap-modern,
 .eael-post-grid-template-overlap-classic {
+	.post-carousel-categories {
+		position: relative;
+		opacity: 1;
+		visibility: visible;
+		padding: 0;
+		line-height: 1.2em;
+		margin-bottom: 10px;
+
+		a {
+			color: #8562f8;
+			font-size: 12px;
+			line-height: 1.2em;
+		}
+	}
+
 	.eael-grid-post-holder {
 		overflow: hidden;
 		transition: all .3s ease-out;

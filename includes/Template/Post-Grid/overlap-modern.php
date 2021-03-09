@@ -28,6 +28,11 @@ echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . get_the
 
 				if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
 	echo '<div class="eael-entry-wrapper">';
+
+					if ($settings['eael_show_post_terms'] === 'yes') {
+						echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
+					}
+
 	if ($settings['eael_show_title']) {
 		echo '<header class="eael-entry-header"><' . $title_tag . ' class="eael-entry-title">';
 		echo '<a

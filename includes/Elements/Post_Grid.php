@@ -662,6 +662,26 @@ class Post_Grid extends Widget_Base
         );
 
         $this->add_control(
+            'eael_post_grid_meta_margin_new',
+            [
+                'label' => __('Margin', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-entry-meta' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_dynamic_template_Layout' => [
+                            'news-classic',
+                            'news-modern',
+                            'overlap-classic',
+                            'overlap-modern',
+                        ]
+                ],
+            ]
+        );
+
+        $this->add_control(
             'eael_post_grid_meta_margin',
             [
                 'label' => __('Margin', 'essential-addons-for-elementor-lite'),
@@ -687,6 +707,12 @@ class Post_Grid extends Widget_Base
                 ],
                 'condition' => [
                     'meta_position' => 'meta-entry-footer',
+                    'eael_dynamic_template_Layout!' => [
+	                    'news-classic',
+	                    'news-modern',
+	                    'overlap-classic',
+	                    'overlap-modern',
+                    ]
                 ],
             ]
         );
@@ -1326,7 +1352,7 @@ class Post_Grid extends Widget_Base
             <div class="clearfix"></div>
         </div>';
 
-//        $this->print_load_more_button($settings, $args);
+        $this->print_load_more_button($settings, $args);
 
         if (Plugin::instance()->editor->is_edit_mode()) {?>
             <script type="text/javascript">
