@@ -110,7 +110,7 @@ trait Admin {
                                         src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-general.svg'; ?>"
                                         alt="essential-addons-general-settings"><span><?php echo __( 'General', 'essential-addons-for-elementor-lite' ); ?></span></a>
                         </li>
-                        <li><a href="#elements"><img
+                        <li><a class="eael-elements-tab" href="#elements"><img
                                         src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-elements.svg'; ?>"
                                         alt="essential-addons-elements"><span><?php echo __( 'Elements', 'essential-addons-for-elementor-lite' ); ?></span></a>
                         </li>
