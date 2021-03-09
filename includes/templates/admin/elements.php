@@ -550,11 +550,11 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                                         } elseif($item['key'] === 'typeform') {
                                             $query_param = [
                                                 'pr_code'      => wp_hash('eael_typeform'),
-                                                'redirect_uri' => esc_url(admin_url('admin-post.php'))
+                                                'redirect_uri' => esc_url(admin_url( 'admin.php?page=eael-settings' ))
                                             ];
                                             $url = esc_url( add_query_arg( $query_param, esc_url('https://app.essential-addons.com/typeform/index.php') ) );
                                             echo '<span style="font-size: 12px; font-style:italic;">
-                                            '.sprintf("<a id='eael-typeform-get-access' data-link='%s' href='#'>Get Access</a>", esc_url($url)).'
+                                            '.sprintf("<a target='_blank' id='' href='%s'>Get Access</a>", esc_url($url)).'
                                             </span>';
                                         } elseif ($item['key'] === 'login-register') {
                                             $eael_recaptcha_sitekey = get_option('eael_recaptcha_sitekey');

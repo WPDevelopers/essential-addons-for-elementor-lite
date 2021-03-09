@@ -177,9 +177,6 @@ class Bootstrap
         add_action('wp_ajax_eael_select2_get_title', [$this, 'select2_ajax_get_posts_value_titles']);
         add_action('wp_ajax_nopriv_eael_select2_get_title', [$this, 'select2_ajax_get_posts_value_titles']);
 
-        //handle typeform auth token
-        add_action('admin_post_nopriv_typeform_token_data', [$this, 'typeform_auth_handle']);
-
         // Elements
         add_action('elementor/controls/controls_registered', array($this, 'register_controls'));
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
@@ -256,6 +253,10 @@ class Bootstrap
             if (!did_action('elementor/loaded')) {
                 add_action('admin_notices', array($this, 'elementor_not_loaded'));
             }
+
+	        //handle typeform auth token
+	        add_action('admin_init', [$this, 'typeform_auth_handle']);
+
 
             // On Editor - Register WooCommerce frontend hooks before the Editor init.
             // Priority = 5, in order to allow plugins remove/add their wc hooks on init.

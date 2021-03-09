@@ -197,13 +197,13 @@ trait Helper
      * @since  4.0.2
      */
     public function typeform_auth_handle() {
-        $post = $_POST;
-        if ( isset( $post[ 'typeform_tk' ] ) && isset( $post[ 'pr_code' ] ) ) {
-            if ( wp_hash( 'eael_typeform' ) === $post[ 'pr_code' ] ) {
-                update_option( 'eael_save_typeform_personal_token', sanitize_text_field( $post[ 'typeform_tk' ] ) );
-            }
-        }
-        wp_send_json_success( [ 'status' => 'success' ] );
+	    if ( isset($_GET[ 'page' ]) && 'eael-settings' == $_GET[ 'page' ] ) {
+		    if ( isset( $_GET[ 'typeform_tk' ] ) && isset( $_GET[ 'pr_code' ] ) ) {
+			    if ( wp_hash( 'eael_typeform' ) === $_GET[ 'pr_code' ] ) {
+				    update_option( 'eael_save_typeform_personal_token', sanitize_text_field( $_GET[ 'typeform_tk' ] ), false );
+			    }
+		    }
+	    }
     }
 
     /*****************************
