@@ -1785,7 +1785,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
-                    '.eael-popup-details-render{{WRAPPER}} .eael-product-popup-details' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '.eael-popup-details-render{{WRAPPER}}.eael-product-popup-details' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator'  => 'before',
             ]
@@ -1797,7 +1797,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'name'     => 'eael_product_popup_background',
                 'label'    => __( 'Background', 'essential-addons-for-elementor-lite' ),
                 'types'    => ['classic', 'gradient'],
-                'selector' => '.eael-popup-details-render{{WRAPPER}} .eael-product-popup-details',
+                'selector' => '.eael-popup-details-render{{WRAPPER}}.eael-product-popup-details',
                 'exclude'  => [
                     'image',
                 ],
@@ -1809,7 +1809,7 @@ class Woo_Product_Carousel extends Widget_Base {
             [
                 'name'     => 'eael_product_popup_box_shadow',
                 'label'    => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
-                'selector' => '.eael-popup-details-render{{WRAPPER}} .eael-product-popup-details',
+                'selector' => '.eael-popup-details-render{{WRAPPER}}.eael-product-popup-details',
             ]
         );
         
