@@ -554,7 +554,7 @@ class Woo_Product_Carousel extends Widget_Base {
             [
                 'label'   => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite' ),
                 'type'    => Controls_Manager::SELECT,
-                'default' => 'sale-preset-1',
+                'default' => 'sale-preset-5',
                 'options' => [
                     'sale-preset-1' => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
                     'sale-preset-2' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
