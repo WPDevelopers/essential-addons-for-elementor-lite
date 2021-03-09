@@ -73,7 +73,8 @@ ea.hooks.addAction("init", "ea", () => {
 			loop: $loop,
 			slidesPerGroup: 1,
 			autoplay: {
-				delay: $autoplay
+				delay: $autoplay,
+				disableOnInteraction: false
 			},
 			pagination: {
 				el: $pagination,
@@ -99,14 +100,6 @@ ea.hooks.addAction("init", "ea", () => {
 				}
 			},
 		};
-
-		// if($effect === 'slide' || $effect === 'coverflow') {
-		// 	$carouselOptions.breakpoints = {
-		//
-		// 	};
-		// }else {
-		// 	$carouselOptions.items = $items;
-		// }
 
 		var eaelWooProductCarousel = new Swiper($wooProductCarousel, $carouselOptions);
 
