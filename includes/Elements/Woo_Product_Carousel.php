@@ -193,6 +193,8 @@ class Woo_Product_Carousel extends Widget_Base {
                     '6' => __( '6', 'essential-addons-for-elementor-lite' ),
                 ],
                 'default' => 3,
+                'tablet_default' => 2,
+                'mobile_default' => 1,
             ]
         );
         
