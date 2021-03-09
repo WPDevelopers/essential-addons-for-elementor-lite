@@ -660,8 +660,9 @@ $theme-preset4: #597dfc;
             &.outofstock {
                 line-height: normal;
                 display: flex;
-                align-items: center;
+                align-items: flex-end;
                 justify-content: center;
+                padding-bottom: 7px;
             }
 
             &.right {
@@ -776,7 +777,8 @@ $theme-preset4: #597dfc;
 
     // icon
     .product.product-type-grouped,
-    .product.product-type-external {
+    .product.product-type-external,
+    .product.outofstock {
         .icons-wrap {
             &.block-style {
                 grid-template-columns: repeat(2, 1fr);
@@ -1637,8 +1639,9 @@ $theme-preset4: #597dfc;
             &.outofstock {
                 line-height: normal;
                 display: flex;
-                align-items: center;
+                align-items: flex-end;
                 justify-content: center;
+                padding-bottom: 7px;
             }
         }
 
