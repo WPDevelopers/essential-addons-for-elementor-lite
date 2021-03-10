@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 5.0
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 4.5.2
+Stable tag: 4.5.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -226,6 +226,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.5.3 - 10/03/2021 =
+
+- Fixed: EA Typeform | Redirect Issue while connecting your account
+- Fixed: EA Image Accordion | Enable Title Link is not working properly
+- Fixed: EA Woo Product Grid | HTML tags are not working on Product Title
+- Fixed: EA Twitter Feed | Throws PHP Warning
+- Few minor bug fix and improvements
 
 = 4.5.2 - 03/03/2021 =
 
