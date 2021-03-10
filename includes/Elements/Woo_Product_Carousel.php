@@ -1369,7 +1369,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		    [
 			    'label'     => __( 'Review Color', 'essential-addons-for-elementor-lite' ),
 			    'type'      => Controls_Manager::COLOR,
-			    'default'   => '#ccc',
+			    'default'   => '#0274be',
 			    'selectors' => [
 				    '.eael-popup-details-render{{WRAPPER}} .woocommerce-product-rating .star-rating::before, .eael-popup-details-render{{WRAPPER}} .woocommerce-product-rating .star-rating span::before' => 'color: {{VALUE}};',
 			    ],
@@ -1381,7 +1381,7 @@ class Woo_Product_Carousel extends Widget_Base {
             [
                 'label'     => __( 'Review Link Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#ccc',
+                'default'   => '#0274be',
                 'selectors' => [
                     '.eael-popup-details-render{{WRAPPER}}  a.woocommerce-review-link' => 'color: {{VALUE}};',
                 ],
@@ -1393,7 +1393,7 @@ class Woo_Product_Carousel extends Widget_Base {
             [
                 'label'     => __( 'Review Link Hover', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#ccc',
+                'default'   => '#0274be',
                 'selectors' => [
                     '.eael-popup-details-render{{WRAPPER}}  a.woocommerce-review-link:hover' => 'color: {{VALUE}};',
                 ],
