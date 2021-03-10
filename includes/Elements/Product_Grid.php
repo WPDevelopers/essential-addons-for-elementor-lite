@@ -37,6 +37,20 @@ class Product_Grid extends Widget_Base
      */
     protected $page_id;
 
+	public function __construct( $data = [], $args = null ) {
+		parent::__construct( $data, $args );
+
+		$is_type_instance = $this->is_type_instance();
+
+		if ( ! $is_type_instance && null === $args ) {
+			throw new \Exception( '`$args` argument is required when initializing a full widget instance.' );
+		}
+
+		if ( $is_type_instance && class_exists('woocommerce')) {
+			add_action( 'wp_footer', [ $this, 'eael_product_grid_script' ] );
+		}
+	}
+
     public function get_name()
     {
         return 'eicon-woocommerce';
