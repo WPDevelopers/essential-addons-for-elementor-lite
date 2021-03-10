@@ -123,6 +123,7 @@ ea.hooks.addAction("init", "ea", () => {
 			const $this = $(this);
 			const quickview_setting = $this.data('quickview-setting');
 			const popup_view = $(".eael-woocommerce-popup-view");
+			popup_view.find(".eael-popup-details-render").html('<div class="eael-preloader"></div>')
 			popup_view
 			.addClass("eael-product-popup-ready")
 			.removeClass("eael-product-modal-removing");
@@ -147,7 +148,7 @@ ea.hooks.addAction("init", "ea", () => {
 					   }
 					   popup_details.find(".variations_form").wc_variation_form()
 					   const popup_view_render = popup_view.find(".eael-popup-details-render");
-					   popup_view.find(".eael-popup-details-render").html('');
+
 					   popup_view.find(".eael-popup-details-render").html(popup_details);
 					   popup_view_render.addClass("elementor-"+quickview_setting.page_id)
 					   popup_view_render.children().addClass("elementor-element elementor-element-"+quickview_setting.widget_id)
