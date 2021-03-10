@@ -1363,6 +1363,18 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
+
+	    $this->add_control(
+		    'eael_product_popup_review_color',
+		    [
+			    'label'     => __( 'Review Color', 'essential-addons-for-elementor-lite' ),
+			    'type'      => Controls_Manager::COLOR,
+			    'default'   => '#ccc',
+			    'selectors' => [
+				    '.eael-popup-details-render{{WRAPPER}} .woocommerce-product-rating .star-rating::before, .eael-popup-details-render{{WRAPPER}} .woocommerce-product-rating .star-rating span::before' => 'color: {{VALUE}};',
+			    ],
+		    ]
+	    );
         
         $this->add_control(
             'eael_product_popup_review_link_color',
@@ -1371,10 +1383,11 @@ class Woo_Product_Carousel extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#ccc',
                 'selectors' => [
-                    '.eael-popup-details-render{{WRAPPER}} .product_meta a.woocommerce-review-link, {{WRAPPER}} .eael-product-popup .product_meta a' => 'color: {{VALUE}};',
+                    '.eael-popup-details-render{{WRAPPER}}  a.woocommerce-review-link' => 'color: {{VALUE}};',
                 ],
             ]
         );
+
         $this->add_control(
             'eael_product_popup_review_link_hover',
             [
@@ -1382,7 +1395,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#ccc',
                 'selectors' => [
-                    '.eael-popup-details-render{{WRAPPER}} .product_meta a.woocommerce-review-link:hover, {{WRAPPER}} .eael-product-popup .product_meta a:hover' => 'color: {{VALUE}};',
+                    '.eael-popup-details-render{{WRAPPER}}  a.woocommerce-review-link:hover' => 'color: {{VALUE}};',
                 ],
             ]
         );
