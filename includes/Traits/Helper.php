@@ -799,7 +799,7 @@ trait Helper
         }
     }
 
-    public function wp_ajax_eael_product_quickview_popup(){
+    public function eael_product_quickview_popup(){
 	    //check nonce
         check_ajax_referer( 'essential-addons-elementor', 'security' );
         $widget_id = sanitize_key( $_POST[ 'widget_id' ] );

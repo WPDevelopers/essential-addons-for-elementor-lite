@@ -119,9 +119,14 @@ ea.hooks.addAction("init", "ea", () => {
 		// Quick view
 		$scope.on("click", ".open-popup-link", function (e) {
 			e.preventDefault();
+			e.stopPropagation();
 			const $this = $(this);
 			const quickview_setting = $this.data('quickview-setting');
 			const popup_view = $(".eael-woocommerce-popup-view");
+			popup_view
+			.addClass("eael-product-popup-ready")
+			.removeClass("eael-product-modal-removing");
+			popup_view.show();
 			$.ajax({
 			   url: localize.ajaxurl,
 			   type: "post",
@@ -145,11 +150,7 @@ ea.hooks.addAction("init", "ea", () => {
 					   popup_view.find(".eael-popup-details-render").html(popup_details);
 					   popup_view_render.addClass("elementor-"+quickview_setting.page_id)
 					   popup_view_render.children().addClass("elementor-element elementor-element-"+quickview_setting.widget_id)
-					   popup_view
-					   .addClass("eael-product-popup-ready")
-					   .removeClass("eael-product-modal-removing");
 					   popup_view.find(".woocommerce-product-gallery").wc_product_gallery();
-					   popup_view.show();
 				   }
 			   },
 		   });
