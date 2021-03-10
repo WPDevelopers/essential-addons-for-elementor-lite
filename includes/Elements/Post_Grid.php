@@ -1075,6 +1075,18 @@ class Post_Grid extends Widget_Base
         );
 
         $this->add_control(
+            'terms_background',
+            [
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .post-carousel-categories li a, {{WRAPPER}} .post-carousel-categories li:after' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'terms_color',
             [
                 'label' => __('Color', 'essential-addons-for-elementor-lite'),
