@@ -252,28 +252,28 @@ class Image_Accordion extends Widget_Base {
                         'eael_accordion_tittle'  => esc_html__( 'Image Accordion #1', 'essential-addons-for-elementor-lite' ),
                         'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
                         'eael_accordion_bg'      => [
-                            'url' => Utils::get_placeholder_image_src(),
+                            'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png',
                         ]
                     ],
                     [
                         'eael_accordion_tittle'  => esc_html__( 'Image Accordion #2', 'essential-addons-for-elementor-lite' ),
                         'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
                         'eael_accordion_bg'      => [
-                            'url' => Utils::get_placeholder_image_src(),
+                            'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png',
                         ]
                     ],
                     [
                         'eael_accordion_tittle'  => esc_html__( 'Image Accordion #3', 'essential-addons-for-elementor-lite' ),
                         'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
                         'eael_accordion_bg'      => [
-                            'url' => Utils::get_placeholder_image_src(),
+                            'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png',
                         ]
                     ],
                     [
                         'eael_accordion_tittle'  => esc_html__( 'Image Accordion #4', 'essential-addons-for-elementor-lite' ),
                         'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
                         'eael_accordion_bg'      => [
-                            'url' => Utils::get_placeholder_image_src(),
+                            'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png',
                         ]
                     ],
                 ],
@@ -391,7 +391,7 @@ class Image_Accordion extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => 'rgba(0, 0, 0, .3)',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-img-accordion a:after' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover:after' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -403,8 +403,8 @@ class Image_Accordion extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => 'rgba(0, 0, 0, .5)',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-img-accordion a:hover::after'         => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-img-accordion a.overlay-active:after' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover:hover::after'         => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover.overlay-active:after' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -570,7 +570,7 @@ class Image_Accordion extends Widget_Base {
     <div <?php echo $this->get_render_attribute_string( 'eael-image-accordion' ); ?>>
         <?php foreach ( $settings[ 'eael_img_accordions' ] as $key => $img_accordion ): ?>
             <?php
-            $eael_accordion_link = $target = $nofollow = $active = '';
+            $eael_accordion_link = $target = $nofollow = $attributes = $active = '';
             $activeCSS           = ( $active === 'yes' ? ' flex: 3 1 0%;' : '' );
             $this->add_render_attribute(
                 'eael-image-accordion-link-' . $key,
@@ -585,15 +585,22 @@ class Image_Accordion extends Widget_Base {
             $tag = 'div';
             if ( $img_accordion[ 'eael_accordion_enable_title_link' ] == 'yes' ) {
                 $eael_accordion_link = ( '#' === $img_accordion[ 'eael_accordion_title_link' ][ 'url' ] ) ? '#/' : $img_accordion[ 'eael_accordion_title_link' ][ 'url' ];
+            
                 $target              = $img_accordion[ 'eael_accordion_title_link' ][ 'is_external' ] ? 'target="_blank"' : '';
                 $nofollow            = $img_accordion[ 'eael_accordion_title_link' ][ 'nofollow' ] ? 'rel="nofollow"' : '';
+                if($img_accordion['eael_accordion_title_link']['custom_attributes']){
+                    $attributes = str_replace("|",'="',$img_accordion['eael_accordion_title_link']['custom_attributes']);
+                    $attributes = str_replace(",",'" ',$attributes);
+                    $attributes .='"';
+                }
                 $active              = $img_accordion[ 'eael_accordion_is_active' ];
-                $this->add_render_attribute( 'eael-image-accordion-link-' . $key, 'href', esc_url( $eael_accordion_link ) . '" ' . $target . ' ' . $nofollow );
+                $this->add_render_attribute( 'eael-image-accordion-link-' . $key, 'href', esc_url( $eael_accordion_link ));
+                
                 $tag = 'a';
             }
             ?>
 
-            <<?php echo $tag.' '; ?><?php echo $this->get_render_attribute_string( 'eael-image-accordion-link-' . $key ); ?>>
+            <<?php echo $tag.' '; ?><?php echo $this->get_render_attribute_string( 'eael-image-accordion-link-' . $key ), $target,$nofollow,$attributes; ?>  tabindex="<?php echo $key; ?>">
             <div class="overlay">
                 <div class="overlay-inner">
                     <div class="overlay-inner <?php echo( $active === 'yes' ? ' overlay-inner-show' : '' ); ?>">

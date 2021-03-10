@@ -10,27 +10,27 @@ var ImageAccordion = function ($scope, $) {
                 : "";
     var $clickCount = 0;
     if ("on-click" === $type) {
-        $("#eael-img-accordion-" + $id + " a").on("click", function (e) {
+        $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover").on("click", function (e) {
             if ($(this).hasClass("overlay-active") == false) {
                 e.preventDefault();
             }
-
+            $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover",$scope).removeClass("overlay-active");
             if ($clickCount == 0) {
-                if ($("#eael-img-accordion-" + $id + " a")
+                if ($("#eael-img-accordion-" + $id + " .eael-image-accordion-hover")
                     .hasClass('overlay-active')) {
-                    $("#eael-img-accordion-" + $id + " a")
+                    $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover")
                         .removeClass("overlay-active");
                 }
                 $clickCount += 1;
             }
 
-            $("#eael-img-accordion-" + $id + " a").css("flex", "1");
+            $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover").css("flex", "1");
 
             $(this)
                 .find(".overlay")
-                .parent("a")
+                .parent(".eael-image-accordion-hover")
                 .addClass("overlay-active");
-            $("#eael-img-accordion-" + $id + " a")
+            $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover")
                 .find(".overlay-inner")
                 .removeClass("overlay-inner-show");
             $(this)
@@ -38,23 +38,14 @@ var ImageAccordion = function ($scope, $) {
                 .addClass("overlay-inner-show");
             $(this).css("flex", "3");
         });
-        $("#eael-img-accordion-" + $id + " a").on("blur", function (e) {
-            $("#eael-img-accordion-" + $id + " a").css("flex", "1");
-            $("#eael-img-accordion-" + $id + " a")
-                .find(".overlay-inner")
-                .removeClass("overlay-inner-show");
-            $(this)
-                .find(".overlay")
-                .parent("a")
-                .removeClass("overlay-active");
-        });
+
     } else {
-        $("#eael-img-accordion-" + $id + " a").on('hover', function () {
-            if ($("#eael-img-accordion-" + $id + " a")
+        $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover").on('hover', function () {
+            if ($("#eael-img-accordion-" + $id + " .eael-image-accordion-hover")
                 .hasClass('overlay-active')) {
-                $("#eael-img-accordion-" + $id + " a.overlay-active").css("flex", "1");
-                $("#eael-img-accordion-" + $id + " a").removeClass("overlay-active");
-                $("#eael-img-accordion-" + $id + " a .overlay .overlay-inner").removeClass('overlay-inner-show');
+                $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover.overlay-active").css("flex", "1");
+                $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover").removeClass("overlay-active");
+                $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover .overlay .overlay-inner").removeClass('overlay-inner-show');
             }
         });
     }
