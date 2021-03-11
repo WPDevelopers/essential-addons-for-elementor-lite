@@ -627,7 +627,7 @@ class Event_Calendar extends Widget_Base
 	    $this->add_control(
 		    'eael_event_calendar_data_cache_limit',
 		    [
-			    'label' => __('Data Cache Limit', 'essential-addons-for-elementor-lite'),
+			    'label' => __('Data Cache Time', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::NUMBER,
 			    'min' => 1,
 			    'default' => 60,

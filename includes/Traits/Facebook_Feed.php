@@ -60,7 +60,7 @@ trait Facebook_Feed
             return;
         }
 
-        $key = 'eael_facebook_feed_' . md5(substr(str_rot13(str_replace('.', '', $page_id . $token)), 32));
+        $key = 'eael_facebook_feed_' . md5(substr(str_rot13(str_replace('.', '', $page_id . $token)), 32).$settings['eael_facebook_feed_cache_limit']);
         $facebook_data = get_transient($key);
         if ($facebook_data == false) {
             $facebook_data = wp_remote_retrieve_body(wp_remote_get("https://graph.facebook.com/v8.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)&limit=99&access_token={$token}", [
@@ -68,7 +68,7 @@ trait Facebook_Feed
             ]));
             $facebook_data = json_decode($facebook_data, true);
             if(isset($facebook_data['data'])){
-                set_transient($key, $facebook_data, 1800);
+                set_transient($key, $facebook_data, ($settings['eael_facebook_feed_cache_limit'] * MINUTE_IN_SECONDS));
             }
         }
 
