@@ -558,12 +558,12 @@ class Woo_Product_Carousel extends Widget_Base {
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'sale-preset-5',
                 'options' => [
-                    'sale-preset-1' => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
+                    'sale-preset-5' => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
                     'sale-preset-2' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
                     'sale-preset-3' => esc_html__( 'Preset 3', 'essential-addons-for-elementor-lite' ),
                     'sale-preset-4' => esc_html__( 'Preset 4', 'essential-addons-for-elementor-lite' ),
-                    'sale-preset-5' => esc_html__( 'Preset 5', 'essential-addons-for-elementor-lite' ),
-                
+                    'sale-preset-1' => esc_html__( 'Preset 5', 'essential-addons-for-elementor-lite' ),
+
                 ]
             ]
         );
