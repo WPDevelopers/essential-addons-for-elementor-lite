@@ -138,21 +138,22 @@ ea.hooks.addAction("init", "ea", () => {
 			   },
 			   success: function (response) {
 				   if (response.success) {
-				   	const product_preview = $(response.data);
-				   	const popup_details = product_preview.children(".eael-product-popup-details");
+				   		const product_preview = $(response.data);
+				   		const popup_details = product_preview.children(".eael-product-popup-details");
 
-					   if (popup_details.height() > 400) {
+					   	popup_details.find(".variations_form").wc_variation_form()
+					   	const popup_view_render = popup_view.find(".eael-popup-details-render");
+
+					   	popup_view.find(".eael-popup-details-render").html(popup_details);
+					   	popup_view_render.addClass("elementor-"+quickview_setting.page_id)
+					   	popup_view_render.children().addClass("elementor-element elementor-element-"+quickview_setting.widget_id)
+					   	popup_view.find(".woocommerce-product-gallery").wc_product_gallery();
+
+					   	if (popup_details.height() > 400) {
 						   popup_details.css("height", "75vh");
-					   } else {
+					   	} else {
 						   popup_details.css("height", "auto");
-					   }
-					   popup_details.find(".variations_form").wc_variation_form()
-					   const popup_view_render = popup_view.find(".eael-popup-details-render");
-
-					   popup_view.find(".eael-popup-details-render").html(popup_details);
-					   popup_view_render.addClass("elementor-"+quickview_setting.page_id)
-					   popup_view_render.children().addClass("elementor-element elementor-element-"+quickview_setting.widget_id)
-					   popup_view.find(".woocommerce-product-gallery").wc_product_gallery();
+					   	}
 				   }
 			   },
 		   });
