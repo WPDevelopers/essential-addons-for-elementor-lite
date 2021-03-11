@@ -610,6 +610,33 @@ class Event_Calendar extends Widget_Base
 
         $this->end_controls_section();
 
+
+	    /**
+	     * Data cache setting
+	     */
+	    $this->start_controls_section(
+		    'eael_event_calendar_data_cache',
+		    [
+			    'label' => __('Data Cache Setting', 'essential-addons-for-elementor-lite'),
+			    'condition' => [
+				    'eael_event_calendar_type!' => 'manual',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_event_calendar_data_cache_limit',
+		    [
+			    'label' => __('Data Cache Limit', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::NUMBER,
+			    'min' => 5,
+			    'default' => 60,
+				'description' => __('Cache expiration time (Minutes)', 'essential-addons-for-elementor-lite')
+		    ]
+	    );
+
+        $this->end_controls_section();
+
         /**
          * Style Tab Started
          */
@@ -1804,6 +1831,7 @@ class Event_Calendar extends Widget_Base
             'timeMin' => urlencode(date('Y-m-d H', $start_date)),
             'singleEvents' => 'true',
             'calendar_id' => urlencode($settings['eael_event_calendar_id']),
+            'cache_time' => $settings['eael_event_calendar_data_cache_limit']
         ];
 
         if (!empty($end_date) && $end_date > $start_date) {
@@ -1820,12 +1848,14 @@ class Event_Calendar extends Widget_Base
 
         if (empty($data)) {
             $data = wp_remote_retrieve_body(wp_remote_get(add_query_arg($arg, $base_url)));
-            set_transient($transient_key, $data, 1 * HOUR_IN_SECONDS);
+            $check_error = json_decode($data);
+
+	        if(!empty($check_error->error)){
+	        	return [];
+	        }
+            set_transient($transient_key, $data, $settings['eael_event_calendar_data_cache_limit'] * MINUTE_IN_SECONDS);
         }
 
-        if (is_wp_error($data)) {
-            return [];
-        }
 
         $data = json_decode($data);
         if (isset($data->items)) {
