@@ -629,7 +629,7 @@ class Event_Calendar extends Widget_Base
 		    [
 			    'label' => __('Data Cache Limit', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::NUMBER,
-			    'min' => 5,
+			    'min' => 1,
 			    'default' => 60,
 				'description' => __('Cache expiration time (Minutes)', 'essential-addons-for-elementor-lite')
 		    ]

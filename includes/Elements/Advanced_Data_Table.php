@@ -269,6 +269,32 @@ class Advanced_Data_Table extends Widget_Base
 
         $this->end_controls_section();
 
+	    /**
+	     * Data cache setting
+	     */
+	    $this->start_controls_section(
+		    'ea_adv_data_table_data_cache',
+		    [
+			    'label' => __('Data Cache Setting', 'essential-addons-for-elementor-lite'),
+			    'condition' => [
+				    'ea_adv_data_table_source' => 'google',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'ea_adv_data_table_data_cache_limit',
+		    [
+			    'label' => __('Data Cache Limit', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::NUMBER,
+			    'min' => 1,
+			    'default' => 60,
+			    'description' => __('Cache expiration time (Minutes)', 'essential-addons-for-elementor-lite')
+		    ]
+	    );
+
+	    $this->end_controls_section();
+
         // style
         $this->start_controls_section(
             'ea_section_adv_data_table_style_table',
