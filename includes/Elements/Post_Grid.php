@@ -595,6 +595,22 @@ class Post_Grid extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control(
+            'eael_post_grid_meta_color_date',
+            [
+                'label' => __('Date Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-entry-meta .eael-posted-on' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+	                'eael_show_date' => 'yes',
+                ],
+            ]
+        );
+
         $this->add_control(
             'eael_post_grid_meta_color',
             [
@@ -602,7 +618,7 @@ class Post_Grid extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-entry-meta, .eael-entry-meta a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-entry-meta, {{WRAPPER}} .eael-entry-meta a' => 'color: {{VALUE}};',
                 ],
             ]
         );
