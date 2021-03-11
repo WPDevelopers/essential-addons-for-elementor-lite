@@ -1845,6 +1845,21 @@ class Woo_Product_Carousel extends Widget_Base {
         );
         
         $this->add_control(
+            'dots_preset',
+            [
+                'label'   => __( 'Preset', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT,
+                'options' => [
+                    'dots-preset-1'  => __( 'Preset 1', 'essential-addons-for-elementor-lite' ),
+                    'dots-preset-2'  => __( 'Preset 2', 'essential-addons-for-elementor-lite' ),
+                    'dots-preset-3'  => __( 'Preset 3', 'essential-addons-for-elementor-lite' ),
+                    'dots-preset-4'  => __( 'Preset 4', 'essential-addons-for-elementor-lite' ),
+                ],
+                'default' => 'dots-preset-1',
+            ]
+        );
+
+        $this->add_control(
             'dots_position',
             [
                 'label'   => __( 'Position', 'essential-addons-for-elementor-lite' ),
@@ -1856,7 +1871,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'default' => 'outside',
             ]
         );
-        
+
         $this->add_control(
             'is_use_dots_custom_width_height',
             [
@@ -1867,7 +1882,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'return_value' => 'yes',
             ]
         );
-        
+
         $this->add_responsive_control(
             'dots_width',
             [
@@ -1889,7 +1904,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_responsive_control(
             'dots_height',
             [
@@ -1911,7 +1926,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_responsive_control(
             'dots_size',
             [
@@ -1933,7 +1948,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_responsive_control(
             'dots_spacing',
             [
@@ -1952,16 +1967,16 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->start_controls_tabs( 'tabs_dots_style' );
-        
+
         $this->start_controls_tab(
             'tab_dots_normal',
             [
                 'label' => __( 'Normal', 'essential-addons-for-elementor-lite' ),
             ]
         );
-        
+
         $this->add_control(
             'dots_color_normal',
             [
@@ -1973,7 +1988,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -1984,7 +1999,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'selector'    => '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet',
             ]
         );
-        
+
         $this->add_control(
             'dots_border_radius_normal',
             [
@@ -1996,7 +2011,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_responsive_control(
             'dots_padding',
             [
@@ -2015,16 +2030,16 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->end_controls_tab();
-        
+
         $this->start_controls_tab(
             'tab_dots_hover',
             [
                 'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
             ]
         );
-        
+
         $this->add_control(
             'dots_color_hover',
             [
@@ -2036,7 +2051,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_control(
             'dots_border_color_hover',
             [
@@ -2048,16 +2063,16 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->end_controls_tab();
-        
+
         $this->start_controls_tab(
             'tab_dots_active',
             [
                 'label' => __( 'Active', 'essential-addons-for-elementor-lite' ),
             ]
         );
-        
+
         $this->add_control(
             'active_dot_color_normal',
             [
@@ -2069,7 +2084,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_responsive_control(
             'active_dots_width',
             [
@@ -2088,7 +2103,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_responsive_control(
             'active_dots_height',
             [
@@ -2107,7 +2122,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_control(
             'active_dots_radius',
             [
@@ -2119,7 +2134,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_group_control(
             \Elementor\Group_Control_Box_Shadow::get_type(),
             [
@@ -2128,14 +2143,14 @@ class Woo_Product_Carousel extends Widget_Base {
                 'selector' => '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet-active',
             ]
         );
-        
+
         $this->end_controls_tab();
-        
+
         $this->end_controls_tabs();
-        
+
         $this->end_controls_section();
     }
-    
+
     protected function eael_woo_product_carousel_arrows() {
         /**
          * Style Tab: Arrows
@@ -2150,7 +2165,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_control(
             'arrow',
             [
@@ -2174,7 +2189,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_responsive_control(
             'arrows_size',
             [
@@ -2194,7 +2209,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_responsive_control(
             'arrows_icon_size',
             [
@@ -2214,7 +2229,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_responsive_control(
             'left_arrow_position',
             [
@@ -2233,7 +2248,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_responsive_control(
             'right_arrow_position',
             [
@@ -2252,16 +2267,16 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->start_controls_tabs( 'tabs_arrows_style' );
-        
+
         $this->start_controls_tab(
             'tab_arrows_normal',
             [
                 'label' => __( 'Normal', 'essential-addons-for-elementor-lite' ),
             ]
         );
-        
+
         $this->add_control(
             'arrows_bg_color_normal',
             [
@@ -2273,7 +2288,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_control(
             'arrows_color_normal',
             [
@@ -2285,7 +2300,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -2296,7 +2311,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'selector'    => '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev',
             ]
         );
-        
+
         $this->add_control(
             'arrows_border_radius_normal',
             [
@@ -2308,16 +2323,16 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->end_controls_tab();
-        
+
         $this->start_controls_tab(
             'tab_arrows_hover',
             [
                 'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
             ]
         );
-        
+
         $this->add_control(
             'arrows_bg_color_hover',
             [
@@ -2329,7 +2344,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_control(
             'arrows_color_hover',
             [
@@ -2341,7 +2356,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->add_control(
             'arrows_border_color_hover',
             [
@@ -2353,11 +2368,11 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ]
         );
-        
+
         $this->end_controls_tab();
-        
+
         $this->end_controls_tabs();
-        
+
         $this->add_group_control(
             \Elementor\Group_Control_Box_Shadow::get_type(),
             [
@@ -2366,10 +2381,10 @@ class Woo_Product_Carousel extends Widget_Base {
                 'selector' => '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev',
             ]
         );
-        
+
         $this->end_controls_section();
     }
-    
+
     protected function render() {
         if ( !function_exists( 'WC' ) ) {
             return;
@@ -2405,7 +2420,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 $args[ 'orderby' ] = ( isset( $settings[ 'orderby' ] ) ? $settings[ 'orderby' ] : 'date' );
             }
         }
-        
+
         if ( !empty( $settings[ 'eael_product_carousel_categories' ] ) ) {
             $args[ 'tax_query' ] = [
                 [
@@ -2416,16 +2431,16 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
             ];
         }
-        
+
         $args[ 'meta_query' ] = ['relation' => 'AND'];
-        
+
         if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' ) {
             $args[ 'meta_query' ][] = [
                 'key'   => '_stock_status',
                 'value' => 'instock'
             ];
         }
-        
+
         if ( $settings[ 'eael_product_carousel_product_filter' ] == 'featured-products' ) {
             $args[ 'tax_query' ] = [
                 'relation' => 'AND',
@@ -2441,7 +2456,7 @@ class Woo_Product_Carousel extends Widget_Base {
                     'operator' => 'NOT IN',
                 ],
             ];
-            
+
             if ( $settings[ 'eael_product_carousel_categories' ] ) {
                 $args[ 'tax_query' ][] = [
                     'taxonomy' => 'product_cat',
@@ -2480,7 +2495,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 }
             }
         }
-        
+
         if ( Plugin::$instance->documents->get_current() ) {
             $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
         }
@@ -2494,12 +2509,12 @@ class Woo_Product_Carousel extends Widget_Base {
             'id'             => 'eael-product-carousel-' . esc_attr( $this->get_id() ),
             'data-widget-id' => $widget_id,
         ] );
-        
+
         if ( $settings[ 'dots_position' ] ) {
             $this->add_render_attribute( 'container', 'class',
                 'swiper-container-wrap-dots-' . $settings[ 'dots_position' ] );
         }
-        
+
         $this->add_render_attribute(
             'eael-woo-product-carousel-wrap',
             [
@@ -2515,16 +2530,16 @@ class Woo_Product_Carousel extends Widget_Base {
                 'data-arrow-prev' => '.swiper-button-prev-' . esc_attr( $this->get_id() ),
             ]
         );
-        
+
         if ( $settings[ 'eael_dynamic_template_layout' ] ) {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-type',
                 $settings[ 'eael_dynamic_template_layout' ] );
         }
-        
+
         if ( $settings[ 'eael_woo_product_carousel_image_stretch' ] ) {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'class', 'swiper-image-stretch' );
         }
-        
+
         if ( !empty( $settings[ 'items' ] ) ) {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-items', $settings[ 'items' ] );
         }
@@ -2548,23 +2563,23 @@ class Woo_Product_Carousel extends Widget_Base {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-margin-mobile',
                 $settings[ 'margin_mobile' ][ 'size' ] );
         }
-        
+
         if ( !empty( $settings[ 'slider_speed' ][ 'size' ] ) ) {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-speed',
                 $settings[ 'slider_speed' ][ 'size' ] );
         }
-        
+
         if ( $settings[ 'autoplay' ] == 'yes' && !empty( $settings[ 'autoplay_speed' ][ 'size' ] ) ) {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-autoplay',
                 $settings[ 'autoplay_speed' ][ 'size' ] );
         } else {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-autoplay', '0' );
         }
-        
+
         if ( $settings[ 'pause_on_hover' ] == 'yes' ) {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-pause-on-hover', 'true' );
         }
-        
+
         if ( $settings[ 'infinite_loop' ] == 'yes' ) {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-loop', '1' );
         }
@@ -2601,17 +2616,17 @@ class Woo_Product_Carousel extends Widget_Base {
                 } else {
                     _e( '<p class="eael-no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
                 }
-                
+
                 ?>
             </div>
             <!--            <div class="clearfix"></div>-->
             <?php
-            
+
             /**
              * Render Slider Dots!
              */
             $this->render_dots();
-            
+
             /**
              * Render Slider Navigations!
              */
@@ -2620,14 +2635,15 @@ class Woo_Product_Carousel extends Widget_Base {
         </div>
         <?php
     }
-    
+
     //changes
     protected function render_dots() {
         $settings = $this->get_settings_for_display();
-        
+
         if ( $settings[ 'dots' ] == 'yes' ) { ?>
             <!-- Add Pagination -->
-            <div class="swiper-pagination swiper-pagination-<?php echo esc_attr( $this->get_id() ); ?>"></div>
+            <div class="swiper-pagination swiper-pagination-<?php echo esc_attr( $this->get_id() ) .' '. $settings['dots_preset'];
+            ?>"></div>
         <?php }
     }
     

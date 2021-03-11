@@ -123,14 +123,13 @@ $theme-preset4: #597dfc;
 
     &.preset-1 {
         .swiper-pagination .swiper-pagination-bullet {
-            border-radius: 2px;
-            width: 8px;
-            height: 3px;
+            //border-radius: 2px;
+            //width: 8px;
+            //height: 3px;
 
             &.swiper-pagination-bullet-active {
-                width: 20px;
+                //width: 20px;
                 background: $theme-preset1;
-
             }
         }
 
@@ -202,12 +201,15 @@ $theme-preset4: #597dfc;
     }
 
     &.preset-2 {
-        .swiper-pagination .swiper-pagination-bullet-active {
-            background: $theme-preset2;
-        }
+        .swiper-pagination {
+            &.dots-preset-4 .swiper-pagination-bullet {
+                //border-radius: 2px;
+                border: 1px solid $theme-preset2;
+            }
 
-        .swiper-pagination-bullet {
-            border-radius: 0;
+            .swiper-pagination-bullet-active {
+                background: $theme-preset2;
+            }
         }
 
         .swiper-container .swiper-button-next,
@@ -314,14 +316,17 @@ $theme-preset4: #597dfc;
     }
 
     &.preset-3 {
-        .swiper-pagination .swiper-pagination-bullet {
+        .swiper-pagination {
+            &.dots-preset-4 .swiper-pagination-bullet {
+                //border-radius: 2px;
+                border: 1px solid $theme-preset3;
+            }
 
-            &.swiper-pagination-bullet-active {
+            .swiper-pagination-bullet-active {
                 background: $theme-preset3;
-                transform: scale(2);
-                margin: 0 7px;
             }
         }
+
 
         .swiper-container .swiper-button-next,
         .swiper-container .swiper-button-prev,
@@ -407,12 +412,13 @@ $theme-preset4: #597dfc;
     }
 
     &.preset-4 {
-        .swiper-pagination .swiper-pagination-bullet {
-            //border-radius: 2px;
-            border: 1px solid $theme-preset4;
-            background: transparent;
+        .swiper-pagination {
+            &.dots-preset-4 .swiper-pagination-bullet {
+                //border-radius: 2px;
+                border: 1px solid $theme-preset4;
+            }
 
-            &.swiper-pagination-bullet-active {
+            .swiper-pagination-bullet-active {
                 background: $theme-preset4;
             }
         }
@@ -682,13 +688,42 @@ $theme-preset4: #597dfc;
     }
 
     // dot
-    &.swiper-container-wrap .swiper-pagination {
-        //bottom: 0;
-    }
-
     &.swiper-container-dots-outside .swiper-pagination,
     &.swiper-container-wrap-dots-outside .swiper-pagination {
         position: static;
+
+        &.dots-preset-1 .swiper-pagination-bullet {
+            border-radius: 2px;
+            width: 8px;
+            height: 3px;
+
+            &.swiper-pagination-bullet-active {
+                width: 20px;
+            }
+        }
+
+        &.dots-preset-2 .swiper-pagination-bullet {
+            border-radius: 0;
+        }
+
+        &.dots-preset-3 .swiper-pagination-bullet {
+
+            &.swiper-pagination-bullet-active {
+                //background: $theme-preset3;
+                transform: scale(2);
+                margin: 0 7px;
+            }
+        }
+
+        &.dots-preset-4 .swiper-pagination-bullet {
+            //border-radius: 2px;
+            border: 1px solid $theme-preset4;
+            background: transparent;
+
+            &.swiper-pagination-bullet-active {
+                background: $theme-preset4;
+            }
+        }
     }
 
     &.swiper-container-wrap {
