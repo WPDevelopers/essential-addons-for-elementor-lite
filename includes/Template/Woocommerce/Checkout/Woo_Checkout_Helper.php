@@ -718,27 +718,38 @@ trait Woo_Checkout_Helper {
 	 * Added all actions
 	 */
 	public function ea_woo_checkout_add_actions($settings) {
+
 	    self::ea_set_woo_checkout_settings($settings);
 		remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_login_form', 10 );
 		remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
-
-		add_action( 'woocommerce_before_checkout_form', [ $this, 'ea_login_template' ], 10 );
-		add_action( 'woocommerce_before_checkout_form', [ $this, 'ea_coupon_template' ], 10 );
+		if(!did_action('woocommerce_before_checkout_form')){
+			add_action( 'woocommerce_before_checkout_form', [ $this, 'ea_login_template' ], 10 );
+			add_action( 'woocommerce_before_checkout_form', [ $this, 'ea_coupon_template' ], 10 );
+		}
 
 		if( $settings['ea_woo_checkout_layout'] == 'default' ) {
-			add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_order_review_template' ], 9 );
+			if(!did_action('woocommerce_before_checkout_form')){
+				add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_order_review_template' ], 9 );
+			}
         }
 
-		$wc_checkout_instance=WC()->checkout();
+		$wc_checkout_instance = WC()->checkout();
 		remove_action( 'woocommerce_checkout_billing', [ $wc_checkout_instance, 'checkout_form_billing' ] );
 		remove_action( 'woocommerce_checkout_shipping', [ $wc_checkout_instance, 'checkout_form_shipping' ] );
 
-		add_action( 'woocommerce_checkout_billing', [ $this, 'ea_checkout_form_billing' ], 10);
-		add_action( 'woocommerce_checkout_shipping', [ $this, 'ea_checkout_form_shipping' ], 10 );
+		if(!did_action('woocommerce_checkout_billing')){
+			add_action( 'woocommerce_checkout_billing', [ $this, 'ea_checkout_form_billing' ], 10);
+		}
+
+		if(!did_action('woocommerce_checkout_shipping')){
+			add_action( 'woocommerce_checkout_shipping', [ $this, 'ea_checkout_form_shipping' ], 10 );
+		}
 
 		remove_action( 'woocommerce_checkout_order_review', 'woocommerce_order_review', 10 );
 		remove_action( 'woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20 );
-		add_action( 'woocommerce_checkout_order_review', [ $this, 'ea_checkout_payment' ], 20 );
+		if(!did_action('woocommerce_checkout_order_review')){
+			add_action( 'woocommerce_checkout_order_review', [ $this, 'ea_checkout_payment' ], 20 );
+		}
 
 		remove_action('woocommerce_checkout_billing', [ $wc_checkout_instance, 'checkout_form_shipping' ]);
 	}
