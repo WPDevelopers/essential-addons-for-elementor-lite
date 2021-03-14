@@ -87,7 +87,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				const LoadMoreShow = $(this).data("load-more-status"),
 					 loadMore = $(".eael-gallery-load-more",$scope);
 				//hide load more button if selected control have no item to show
-				if(LoadMoreShow){
+				if(LoadMoreShow || fg_items.length < 1){
 					loadMore.hide()
 				}else{
 					loadMore.show()
