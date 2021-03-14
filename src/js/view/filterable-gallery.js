@@ -139,14 +139,15 @@ jQuery(window).on("elementor/frontend/init", function () {
 				}
 
 				let item_found = 0;
+				let index_list = []
 				for (const [index, item] of fg_items.entries()){
 					if (filter_name !== '' && filter_name !== '*' && filter_enable) {
 						let element = $($(item)[0]);
-							if (element.is(filter_name)) {
-								++item_found;
-								$items.push($(item)[0]);
-								fg_items.splice(index,1)
-							}
+						if (element.is(filter_name)) {
+							++item_found;
+							$items.push($(item)[0]);
+							index_list.push(index);
+						}
 						if((fg_items.length-1)===index){
 							$(".eael-filter-gallery-control li.active", $scope).data('load-more-status',1)
 							$this.hide()
@@ -154,7 +155,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 					}else {
 						++item_found;
 						$items.push($(item)[0]);
-						fg_items.splice(index,1)
+						index_list.push(index);
 					}
 
 					if (item_found === $images_per_page) {
@@ -162,6 +163,11 @@ jQuery(window).on("elementor/frontend/init", function () {
 					}
 				}
 
+				if(index_list.length>0){
+					fg_items = fg_items.filter(function (item, index){
+						return !index_list.includes(index);
+					});
+				}
 
 				if (fg_items.length<1) {
 					$this.html('<div class="no-more-items-text">' + $nomore_text + "</div>");
