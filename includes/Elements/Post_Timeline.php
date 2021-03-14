@@ -68,6 +68,37 @@ class Post_Timeline extends Widget_Base
         do_action('eael/controls/query', $this);
         do_action('eael/controls/layout', $this);
 
+        $this->start_controls_section(
+            'section_post_timeline_links',
+            [
+                'label' => __('Links', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $this->add_control(
+            'timeline_link_nofollow',
+            [
+                'label' => __('No Follow', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'true',
+            ]
+        );
+
+        $this->add_control(
+            'timeline_link_target_blank',
+            [
+                'label' => __('Target Blank', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'true',
+            ]
+        );
+
+        $this->end_controls_section();
+
         if (!apply_filters('eael/pro_enabled', false)) {
             HelperClass::go_premium($this);
         }
