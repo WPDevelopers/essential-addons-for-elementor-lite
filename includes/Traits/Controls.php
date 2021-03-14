@@ -1800,7 +1800,7 @@ trait Controls
 			'raw'             => __( 'Style the message when no posts are found.', 'essential-addons-for-elementor-lite' ),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 		] );
-		
+
 		$wb->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
