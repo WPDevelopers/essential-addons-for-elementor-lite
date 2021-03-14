@@ -691,6 +691,12 @@ $theme-preset4: #597dfc;
     &.swiper-container-dots-outside .swiper-pagination,
     &.swiper-container-wrap-dots-outside .swiper-pagination {
         position: static;
+    }
+
+    &.swiper-container-dots-outside .swiper-pagination,
+    &.swiper-container-wrap-dots-outside .swiper-pagination,
+    &.swiper-container-dots-inside .swiper-pagination,
+    &.swiper-container-wrap-dots-inside .swiper-pagination, {
 
         &.dots-preset-1 .swiper-pagination-bullet {
             border-radius: 2px;
