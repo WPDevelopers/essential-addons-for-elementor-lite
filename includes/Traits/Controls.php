@@ -1795,15 +1795,12 @@ trait Controls
 			]
 		);
 
-		$wb->add_control(
-			'eael_section_nothing_found_info',
-			[
-				'label'     => __('Style the message when no posts are found.', 'essential-addons-for-elementor-lite'),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
+		$wb->add_control( 'eael_section_nothing_found_note', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( 'Style the message when no posts are found.', 'essential-addons-for-elementor-lite' ),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+		] );
+		
 		$wb->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
