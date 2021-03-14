@@ -1448,6 +1448,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '.eael-popup-details-render{{WRAPPER}} .eael-onsale' => 'background-color: {{VALUE}}!important;',
+                    '.eael-popup-details-render{{WRAPPER}} .eael-onsale:not(.outofstock).sale-preset-4:after'        => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
                 ],
             ]
         );
