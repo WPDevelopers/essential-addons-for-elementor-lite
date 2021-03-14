@@ -1946,9 +1946,10 @@ class Woo_Product_Carousel extends Widget_Base {
                 ],
                 'condition'  => [
                     'is_use_dots_custom_width_height' => '',
+                    'dots_preset!' => 'dots-preset-1',
                 ],
             ]
-        );
+        );  
 
         $this->add_responsive_control(
             'dots_spacing',
