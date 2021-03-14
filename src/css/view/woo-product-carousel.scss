@@ -73,6 +73,10 @@ $theme-preset4: #597dfc;
             display: none !important;
         }
 
+        .eael-product-quick-view a {
+            cursor: pointer;
+        }
+
         .swiper-wrapper.products {
             margin: 0;
             flex-wrap: unset;
