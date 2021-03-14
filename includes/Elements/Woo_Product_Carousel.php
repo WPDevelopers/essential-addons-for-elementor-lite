@@ -656,7 +656,7 @@ class Woo_Product_Carousel extends Widget_Base {
                     '{{WRAPPER}} .eael-woo-product-carousel-container .eael-product-carousel' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_dynamic_template_layout!' => 'preset-2',
+                    'eael_dynamic_template_layout!' => ['preset-2','preset-4'],
                 ]
             ]
         );
@@ -666,11 +666,12 @@ class Woo_Product_Carousel extends Widget_Base {
             [
                 'label'     => esc_html__( 'Overlay Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
+                'description'   => __( 'Use opacity color for overlay design.', 'essential-addons-for-elementor-lite' ),
                 'selectors' => [
                     '{{WRAPPER}} .eael-woo-product-carousel-container .eael-product-carousel .carousel-overlay' => 'background: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_dynamic_template_layout' => 'preset-2',
+                    'eael_dynamic_template_layout' => ['preset-2','preset-4'],
                 ]
             ]
         );
