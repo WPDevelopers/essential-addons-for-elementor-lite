@@ -1803,7 +1803,7 @@ trait Controls
 				'separator' => 'before',
 			]
 		);
-		
+
 		$wb->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
