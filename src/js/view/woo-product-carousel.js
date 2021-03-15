@@ -33,11 +33,11 @@ ea.hooks.addAction("init", "ea", () => {
 			$margin =
 				$wooProductCarousel.data("margin") !== undefined
 					? $wooProductCarousel.data("margin")
-					: 0,
+					: 10,
 			$margin_tablet =
 				$wooProductCarousel.data("margin-tablet") !== undefined
 					? $wooProductCarousel.data("margin-tablet")
-					: 0,
+					: 10,
 			$margin_mobile =
 				$wooProductCarousel.data("margin-mobile") !== undefined
 					? $wooProductCarousel.data("margin-mobile")
