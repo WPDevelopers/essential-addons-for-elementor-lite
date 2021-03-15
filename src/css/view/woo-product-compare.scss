@@ -19,6 +19,9 @@
     .wcpc-table-header{
         display: flex;
         align-items: center;
+        .wcpc-title {
+            word-break: break-word;
+        }
     }
     .elementor-icon {
         font-size: 20px;
