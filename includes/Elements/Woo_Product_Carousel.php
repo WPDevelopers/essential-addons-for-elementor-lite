@@ -15,6 +15,7 @@ use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
 use Elementor\Plugin;
 use Elementor\Widget_Base;
+use Essential_Addons_Elementor\Classes\Helper as ControlsHelper;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 
 use Essential_Addons_Elementor\Traits\Helper;
@@ -147,6 +148,7 @@ class Woo_Product_Carousel extends Widget_Base {
         $this->eael_woo_product_carousel_content();
         $this->eael_woo_product_carousel_options();
         $this->eael_woo_product_carousel_query();
+        $this->aa_query();
         
         $this->eael_product_action_buttons();
         $this->eael_product_badges();
@@ -594,9 +596,148 @@ class Woo_Product_Carousel extends Widget_Base {
             'multiple'    => true,
             'options'     => HelperClass::get_terms_list( 'product_cat', 'slug' ),
         ] );
+
+	    $taxonomies = get_taxonomies([], 'objects');
+
+	    foreach ($taxonomies as $taxonomy => $object) {
+		    if (!isset($object->object_type[0])) {
+			    continue;
+		    }
+
+		    $this->add_control(
+			    $taxonomy . '_ids',
+			    [
+				    'label' => $object->label,
+				    'type' => Controls_Manager::SELECT2,
+				    'label_block' => true,
+				    'multiple' => true,
+				    'object_type' => $taxonomy,
+				    'options' => wp_list_pluck(get_terms($taxonomy), 'name', 'term_id'),
+			    ]
+		    );
+	    }
         
         $this->end_controls_section();
     }
+
+	public function aa_query() {
+		$post_types = ['name' => 'product'];
+
+		$taxonomies = get_taxonomies([], 'objects');
+
+        $this->start_controls_section(
+            'eael_section_post__filters',
+            [
+                'label' => __('Query', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+
+		$this->add_control(
+			'post_type',
+			[
+				'label' => __('Source', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SELECT,
+				'options' => $post_types,
+				'default' => key($post_types),
+			]
+		);
+
+		$this->add_control(
+			'authors', [
+				'label' => __('Author', 'essential-addons-for-elementor-lite'),
+				'label_block' => true,
+				'type' => Controls_Manager::SELECT2,
+				'multiple' => true,
+				'default' => [],
+				'options' => ControlsHelper::get_authors_list(),
+				'condition' => [
+					'post_type!' => ['by_id', 'source_dynamic'],
+				],
+			]
+		);
+
+		foreach ($taxonomies as $taxonomy => $object) {
+			if (!isset($object->object_type[0]) || !in_array($object->object_type[0], array_keys($post_types))) {
+				continue;
+			}
+
+			$this->add_control(
+				$taxonomy . '_ids',
+				[
+					'label' => $object->label,
+					'type' => Controls_Manager::SELECT2,
+					'label_block' => true,
+					'multiple' => true,
+					'object_type' => $taxonomy,
+					'options' => wp_list_pluck(get_terms($taxonomy), 'name', 'term_id'),
+					'condition' => [
+						'post_type' => $object->object_type,
+					],
+				]
+			);
+		}
+
+		$this->add_control(
+			'post__not_in',
+			[
+				'label' => __('Exclude', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SELECT2,
+				'options' => ControlsHelper::get_post_list(),
+				'label_block' => true,
+				'post_type' => '',
+				'multiple' => true,
+				'condition' => [
+					'post_type!' => ['by_id', 'source_dynamic'],
+				],
+			]
+		);
+
+		$this->add_control(
+			'posts_per_page',
+			[
+				'label' => __('Posts Per Page', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::NUMBER,
+				'default' => '4',
+			]
+		);
+
+		$this->add_control(
+			'offset',
+			[
+				'label' => __('Offset', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::NUMBER,
+				'default' => '0',
+			]
+		);
+
+		$this->add_control(
+			'orderby',
+			[
+				'label' => __('Order By', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SELECT,
+				'options' => ControlsHelper::get_post_orderby_options(),
+				'default' => 'date',
+
+			]
+		);
+
+		$this->add_control(
+			'order',
+			[
+				'label' => __('Order', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SELECT,
+				'options' => [
+					'asc' => 'Ascending',
+					'desc' => 'Descending',
+				],
+				'default' => 'desc',
+
+			]
+		);
+
+		$this->end_controls_section();
+	}
     
     protected function eael_product_action_buttons() {
         $this->start_controls_section(
@@ -2679,8 +2820,16 @@ class Woo_Product_Carousel extends Widget_Base {
         ?>
 
         <div <?php $this->print_render_attribute_string( 'container' ); ?> >
+
+
             <div <?php echo $this->get_render_attribute_string( 'eael-woo-product-carousel-wrap' ); ?>>
                 <?php
+
+	    $taxonomies = get_taxonomies(['name' => 'product'], 'objects');
+
+	    foreach ($taxonomies as $taxonomy => $object) {
+	        var_dump($object->object_type[0]);
+	    }
                 do_action( 'eael_woo_before_product_loop' );
                 $template = $this->get_template( $settings[ 'eael_dynamic_template_layout' ] );
                 if ( file_exists( $template ) ) {
