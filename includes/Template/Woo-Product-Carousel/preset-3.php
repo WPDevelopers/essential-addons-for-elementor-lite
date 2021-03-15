@@ -65,7 +65,19 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                 </div>
             </div>
             <div class="product-details-wrap">
-                <div class="eael-product-title"><h2><?php echo $product->get_title(); ?></h2></div>
+	            <?php
+	            if ( $settings['eael_product_carousel_show_title'] ) {
+		            echo '<div class="eael-product-title">';
+		            echo '<' . $settings['eael_product_carousel_title_tag'] . '>';
+		            if ( empty( $settings['eael_product_carousel_title_length'] ) ) {
+			            echo $product->get_title();
+		            } else {
+			            echo implode( " ", array_slice( explode( " ", $product->get_title() ), 0, $settings['eael_product_carousel_title_length'] ) );
+		            }
+		            echo '</' . $settings['eael_product_carousel_title_tag'] . '>';
+		            echo '</div>';
+	            }
+	            ?>
                 <?php if($should_print_price ){
                     echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
                 }?>

@@ -152,6 +152,7 @@ $theme-preset4: #597dfc;
             background-color: #f5f7fd;
             text-align: left;
             margin: 10px;
+            direction: ltr;
 
             .image-wrap img, .product-image-wrap {
                 border-radius: 20px 20px 0 0;
@@ -308,7 +309,7 @@ $theme-preset4: #597dfc;
                 transition: all 0.4s ease-in-out 0s;
             }
 
-            .eael-product-title h2, .eael-product-excerpt {
+            .eael-product-title *, .eael-product-excerpt {
                 color: #fff;
             }
 
@@ -527,7 +528,7 @@ $theme-preset4: #597dfc;
                 transition: all 0.4s ease-in-out 0s;
             }
 
-            .eael-product-title h2, .eael-product-excerpt {
+            .eael-product-title *, .eael-product-excerpt {
                 color: #fff;
             }
 
@@ -802,7 +803,7 @@ $theme-preset4: #597dfc;
     }
 
     // title
-    .eael-product-title h2 {
+    .eael-product-title * {
         margin: 0 0 10px 0;
         font-size: 18px;
         line-height: 1.2em;
