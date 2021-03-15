@@ -477,6 +477,20 @@ class Woo_Product_Carousel extends Widget_Base {
                 'return_value' => 'yes',
             ]
         );
+
+	    $this->add_control(
+		    'direction',
+		    [
+			    'label'     => __( 'Direction', 'essential-addons-elementor' ),
+			    'type'      => Controls_Manager::SELECT,
+			    'default'   => 'left',
+			    'options'   => [
+				    'left'  => __( 'Left', 'essential-addons-elementor' ),
+				    'right' => __( 'Right', 'essential-addons-elementor' ),
+			    ],
+			    'separator' => 'before',
+		    ]
+	    );
         
         $this->end_controls_section();
     }
@@ -2612,6 +2626,10 @@ class Woo_Product_Carousel extends Widget_Base {
         if ( $settings[ 'dots' ] == 'yes' ) {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-dots', '1' );
         }
+
+	    if ( $settings['direction'] == 'right' ) {
+		    $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'dir', 'rtl' );
+	    }
         ?>
 
         <div <?php $this->print_render_attribute_string( 'container' ); ?> >
