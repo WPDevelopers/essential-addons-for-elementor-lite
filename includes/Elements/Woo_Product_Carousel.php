@@ -587,20 +587,10 @@ class Woo_Product_Carousel extends Widget_Base {
             'type'    => Controls_Manager::NUMBER,
             'default' => 0,
         ] );
-        
-        $this->add_control( 'eael_product_carousel_categories', [
-            'label'       => esc_html__( 'Product Categories', 'essential-addons-for-elementor-lite' ),
-            'type'        => Controls_Manager::SELECT2,
-            'label_block' => true,
-            'multiple'    => true,
-            'options'     => HelperClass::get_terms_list( 'product_cat', 'slug' ),
-        ] );
 
-	    $post_types = ['product'=>'Products'];
-
-	    $taxonomies = get_taxonomies([], 'objects');
+	    $taxonomies = get_taxonomies(['object_type' => ['product']], 'objects');
 	    foreach ($taxonomies as $taxonomy => $object) {
-		    if (!isset($object->object_type[0]) || !in_array($object->object_type[0], array_keys($post_types))) {
+		    if (!isset($object->object_type[0])) {
 			    continue;
 		    }
 
