@@ -469,6 +469,23 @@ class Woo_Product_Carousel extends Widget_Base {
 			    ]
 		    ]
 	    );
+
+	    $this->add_responsive_control(
+		    'margin',
+		    [
+			    'label'      => __('Items Gap', 'essential-addons-elementor'),
+			    'type'       => Controls_Manager::SLIDER,
+			    'default'    => ['size' => 10],
+			    'range'      => [
+				    'px' => [
+					    'min'  => 0,
+					    'max'  => 100,
+					    'step' => 1,
+				    ],
+			    ],
+			    'size_units' => '',
+		    ]
+	    );
         
         $this->add_control(
             'slider_speed',
