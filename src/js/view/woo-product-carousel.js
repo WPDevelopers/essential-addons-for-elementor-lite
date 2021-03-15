@@ -42,10 +42,10 @@ ea.hooks.addAction("init", "ea", () => {
 				$wooProductCarousel.data("margin-mobile") !== undefined
 					? $wooProductCarousel.data("margin-mobile")
 					: 0,
-			// $effect =
-			// 	$wooProductCarousel.data("effect") !== undefined
-			// 		? $wooProductCarousel.data("effect")
-			// 		: "slide",
+			$effect =
+				$wooProductCarousel.data("effect") !== undefined
+					? $wooProductCarousel.data("effect")
+					: "slide",
 			$speed =
 				$wooProductCarousel.data("speed") !== undefined
 					? $wooProductCarousel.data("speed")
@@ -61,13 +61,28 @@ ea.hooks.addAction("init", "ea", () => {
 			$pause_on_hover =
 				$wooProductCarousel.data("pause-on-hover") !== undefined
 					? $wooProductCarousel.data("pause-on-hover")
-					: "";
+					: "",
+			$centeredSlides = $effect == "coverflow" ? true : false,
+			$depth =
+				$wooProductCarousel.data("depth") !== undefined
+					? $wooProductCarousel.data("depth")
+					: 200,
+			$rotate =
+				$wooProductCarousel.data("rotate") !== undefined
+					? $wooProductCarousel.data("rotate")
+					: 0,
+			$stretch =
+				$wooProductCarousel.data("stretch") !== undefined
+					? $wooProductCarousel.data("stretch")
+					: 80;
+
+		// console.log($items);
 
 		var $carouselOptions = {
 			direction: "horizontal",
 			speed: $speed,
-			effect: "slide",
-			// centeredSlides: $centeredSlides,
+			effect: $effect,
+			centeredSlides: $centeredSlides,
 			grabCursor: $grab_cursor,
 			autoHeight: true,
 			loop: $loop,
@@ -85,7 +100,11 @@ ea.hooks.addAction("init", "ea", () => {
 				prevEl: $arrow_prev
 			},
 			slidesPerView: $items,
-			breakpoints: {
+		};
+
+		if($effect === 'slide') {
+
+			$carouselOptions.breakpoints = {
 				1024: {
 					slidesPerView: $items,
 					spaceBetween: $margin
@@ -98,8 +117,19 @@ ea.hooks.addAction("init", "ea", () => {
 					slidesPerView: $items_mobile,
 					spaceBetween: $margin_mobile
 				}
-			},
-		};
+			}
+		}
+
+		if($effect === 'coverflow') {
+			// $carouselOptions.slidesPerView = 'auto';
+			$carouselOptions.coverflowEffect = {
+				rotate: $rotate,
+				stretch: $stretch,
+				depth: $depth,
+				modifier: 1,
+				slideShadows: false,
+			}
+		}
 
 		var eaelWooProductCarousel = new Swiper($wooProductCarousel, $carouselOptions);
 
