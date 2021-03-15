@@ -2165,6 +2165,7 @@ class Pricing_Table extends Widget_Base
                     <div class="body">
                         <?php $this->render_feature_list($settings, $this); ?>
                     </div>
+	                <?php if($settings['eael_pricing_table_button_show']=='yes'): ?>
                     <div class="footer">
                         <a href="<?php echo esc_url(isset($table_btn_link['url'])?$table_btn_link['url']:''); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="eael-pricing-button">
                             <?php if ('left' == $icon_position) : ?>
@@ -2192,6 +2193,7 @@ class Pricing_Table extends Widget_Base
                             <?php endif; ?>
                         </a>
                     </div>
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endif; ?>
@@ -2223,6 +2225,7 @@ class Pricing_Table extends Widget_Base
                     <div class="body">
                         <?php $this->render_feature_list($settings, $this); ?>
                     </div>
+	                <?php if($settings['eael_pricing_table_button_show']=='yes'): ?>
                     <div class="footer">
                         <a href="<?php echo esc_url($settings['eael_pricing_table_btn_link']['url']); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="eael-pricing-button">
                             <?php if ('left' == $icon_position) : ?>
@@ -2249,6 +2252,7 @@ class Pricing_Table extends Widget_Base
                             <?php endif; ?>
                         </a>
                     </div>
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endif; ?>
