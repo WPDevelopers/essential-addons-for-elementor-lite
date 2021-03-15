@@ -166,49 +166,6 @@ class Content_Ticker extends Widget_Base
             ]
         );
 
-        $this->add_responsive_control(
-            'items',
-            [
-                'label'          => __('Visible Items', 'essential-addons-for-elementor-lite'),
-                'type'           => Controls_Manager::SLIDER,
-                'default'        => ['size' => 1],
-                'tablet_default' => ['size' => 1],
-                'mobile_default' => ['size' => 1],
-                'range'          => [
-                    'px' => [
-                        'min'  => 1,
-                        'max'  => 10,
-                        'step' => 1,
-                    ],
-                ],
-                'size_units'     => '',
-                'condition'      => [
-                    'carousel_effect' => 'slide',
-                ],
-                'separator'      => 'before',
-            ]
-        );
-
-        $this->add_responsive_control(
-            'margin',
-            [
-                'label'      => __('Items Gap', 'essential-addons-for-elementor-lite'),
-                'type'       => Controls_Manager::SLIDER,
-                'default'    => ['size' => 10],
-                'range'      => [
-                    'px' => [
-                        'min'  => 0,
-                        'max'  => 100,
-                        'step' => 1,
-                    ],
-                ],
-                'size_units' => '',
-                'condition'  => [
-                    'carousel_effect' => 'slide',
-                ],
-            ]
-        );
-
         $this->add_control(
             'slider_speed',
             [
@@ -763,19 +720,7 @@ class Content_Ticker extends Widget_Base
         if ($settings['direction'] == 'right') {
             $this->add_render_attribute('content-ticker', 'dir', 'rtl');
         }
-
-        if (!empty($settings['items']['size'])) {
-            $this->add_render_attribute('content-ticker', 'data-items', $settings['items']['size']);
-        }
-        if (!empty($settings['items_tablet']['size'])) {
-            $this->add_render_attribute('content-ticker', 'data-items-tablet', $settings['items_tablet']['size']);
-        }
-        if (!empty($settings['items_mobile']['size'])) {
-            $this->add_render_attribute('content-ticker', 'data-items-mobile', $settings['items_mobile']['size']);
-        }
-        if (!empty($settings['margin']['size'])) {
-            $this->add_render_attribute('content-ticker', 'data-margin', $settings['margin']['size']);
-        }
+        
         if (!empty($settings['margin_tablet']['size'])) {
             $this->add_render_attribute('content-ticker', 'data-margin-tablet', $settings['margin_tablet']['size']);
         }
