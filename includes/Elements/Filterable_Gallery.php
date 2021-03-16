@@ -3407,18 +3407,19 @@ class Filterable_Gallery extends Widget_Base
 							filter_enable = $(".eael-filter-gallery-control",$scope).length,
 							$items           = [];
 						var filter_name      = $(".eael-filter-gallery-control li.active", $scope).data('filter');
-						if(filterControls.length>0){
+						if (filterControls.length > 0) {
 							filter_name = $(".fg-layout-3-filter-controls li.active", $scope).data('filter');
 						}
 
 						let item_found = 0;
+						let index_list = []
 						for (const [index, item] of fg_items.entries()){
 							if (filter_name !== '' && filter_name !== '*' && filter_enable) {
 								let element = $($(item)[0]);
 								if (element.is(filter_name)) {
 									++item_found;
 									$items.push($(item)[0]);
-									fg_items.splice(index,1)
+									index_list.push(index);
 								}
 								if((fg_items.length-1)===index){
 									$(".eael-filter-gallery-control li.active", $scope).data('load-more-status',1)
@@ -3427,7 +3428,7 @@ class Filterable_Gallery extends Widget_Base
 							}else {
 								++item_found;
 								$items.push($(item)[0]);
-								fg_items.splice(index,1)
+								index_list.push(index);
 							}
 
 							if (item_found === $images_per_page) {
@@ -3435,6 +3436,11 @@ class Filterable_Gallery extends Widget_Base
 							}
 						}
 
+						if (index_list.length > 0) {
+							fg_items = fg_items.filter(function (item, index) {
+								return !index_list.includes(index);
+							});
+						}
 
 						if (fg_items.length<1) {
 							$this.html('<div class="no-more-items-text">' + $nomore_text + "</div>");
