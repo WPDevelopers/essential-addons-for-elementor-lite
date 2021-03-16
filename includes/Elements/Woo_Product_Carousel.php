@@ -2708,7 +2708,6 @@ class Woo_Product_Carousel extends Widget_Base {
                 if ( file_exists( $template ) ) {
 	                $settings['eael_page_id'] = get_the_ID();
                     $query = new \WP_Query( $args );
-                    error_log(print_r($query,1));
                     if ( $query->have_posts() ) {
                         echo '<ul class="swiper-wrapper products">';
                         while ( $query->have_posts() ) {
