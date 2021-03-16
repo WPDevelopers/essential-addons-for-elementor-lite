@@ -737,6 +737,56 @@ $theme-preset4: #597dfc;
         }
     }
 
+    // gallery pagination style
+    .eael-woo-product-carousel-gallary-pagination {
+        width: 350px !important;
+        margin-top: 20px;
+        //height: 100px !important;
+        //box-sizing: border-box;
+        //display: flex !important;
+        //justify-content: center !important;
+        //align-items: center !important;
+        .swiper-slide {
+            //width: 100px !important;
+            opacity: 0.4;
+            //display: flex;
+            //justify-content: center;
+            //align-items: center;
+
+            &.swiper-slide-active {
+                opacity: 1;
+
+                img {
+                    //transform: scale(1.2);
+                }
+            }
+
+            img {
+                width: 60px;
+                height: 60px;
+                transition: all 0.3s ease;
+            }
+        }
+
+        // pagination visibility
+        @media all and (min-width: 1024px) {
+            &.eael_gallery_pagination_hide_on_desktop {
+                display: none !important;
+            }
+        }
+        @media all and (min-width: 768px) and (max-width: 1024px) {
+            &.eael_gallery_pagination_hide_on_tablet {
+                display: none !important;
+            }
+        }
+        @media all and (max-width: 767px) {
+            &.eael_gallery_pagination_hide_on_mobile {
+                display: none !important;
+            }
+        }
+    }
+
+
     &.swiper-container-wrap {
         .swiper-pagination {
             bottom: 10px;

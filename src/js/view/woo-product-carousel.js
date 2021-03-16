@@ -146,6 +146,28 @@ ea.hooks.addAction("init", "ea", () => {
 			});
 		}
 
+		//gallery pagination
+		var $paginationGallerySelector = $scope
+			.find('.eael-woo-product-carousel-container .eael-woo-product-carousel-gallary-pagination')
+			.eq(0)
+		if ($paginationGallerySelector.length > 0) {
+			var $paginationGallerySlider = new Swiper($paginationGallerySelector, {
+				spaceBetween: 20,
+				centeredSlides: $centeredSlides,
+				touchRatio: 0.2,
+				slideToClickedSlide: true,
+				loop: $loop,
+				slidesPerGroup: 1,
+				// loopedSlides: $items,
+				slidesPerView: 3,
+			})
+			eaelWooProductCarousel.controller.control = $paginationGallerySlider
+			$paginationGallerySlider.controller.control = eaelWooProductCarousel
+		}
+
+
+
+
 		// Quick view
 		$scope.on("click", ".open-popup-link", function (e) {
 			e.preventDefault();
