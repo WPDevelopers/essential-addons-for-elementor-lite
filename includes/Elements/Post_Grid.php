@@ -150,6 +150,7 @@ class Post_Grid extends Widget_Base
                 'condition' => [
                     'eael_show_image' => 'yes',
                 ],
+                'separator' => 'after',
             ]
         );
 
@@ -161,7 +162,6 @@ class Post_Grid extends Widget_Base
                 'condition' => [
                     'eael_show_title' => 'yes',
                 ],
-                'separator' => 'before',
             ]
         );
 
@@ -190,6 +190,7 @@ class Post_Grid extends Widget_Base
                 'condition' => [
                     'eael_show_title' => 'yes',
                 ],
+                'separator' => 'after',
             ]
         );
 
@@ -201,7 +202,6 @@ class Post_Grid extends Widget_Base
                 'condition' => [
                     'eael_show_read_more_button' => 'yes',
                 ],
-                'separator' => 'before',
             ]
         );
 
