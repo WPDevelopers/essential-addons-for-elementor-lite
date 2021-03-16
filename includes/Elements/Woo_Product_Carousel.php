@@ -2568,113 +2568,13 @@ class Woo_Product_Carousel extends Widget_Base {
         if ( !function_exists( 'WC' ) ) {
             return;
         }
+
         $settings = $this->get_settings_for_display();
         // normalize for load more fix
         $widget_id = $this->get_id();
         $settings[ 'eael_widget_id' ] = $widget_id;
-        $args = [
-            'post_type'      => 'product',
-            'posts_per_page' => $settings[ 'eael_product_carousel_products_count' ] ? : 4,
-            'order'          => ( isset( $settings[ 'order' ] ) ? $settings[ 'order' ] : 'desc' ),
-            'offset'         => $settings[ 'product_offset' ],
-            'tax_query'      => [
-                'relation' => 'AND',
-                [
-                    'taxonomy' => 'product_visibility',
-                    'field'    => 'name',
-                    'terms'    => ['exclude-from-search', 'exclude-from-catalog'],
-                    'operator' => 'NOT IN',
-                ],
-            ],
-        ];
-        // price & sku filter
-        if ( $settings[ 'orderby' ] == '_price' ) {
-            $args[ 'orderby' ] = 'meta_value_num';
-            $args[ 'meta_key' ] = '_price';
-        } else {
-            if ( $settings[ 'orderby' ] == '_sku' ) {
-                $args[ 'orderby' ] = 'meta_value_num';
-                $args[ 'meta_key' ] = '_sku';
-            } else {
-                $args[ 'orderby' ] = ( isset( $settings[ 'orderby' ] ) ? $settings[ 'orderby' ] : 'date' );
-            }
-        }
 
-//        if ( !empty( $settings[ 'eael_product_carousel_categories' ] ) ) {
-//            $args[ 'tax_query' ] = [
-//                [
-//                    'taxonomy' => 'product_cat',
-//                    'field'    => 'slug',
-//                    'terms'    => $settings[ 'eael_product_carousel_categories' ],
-//                    'operator' => 'IN',
-//                ],
-//            ];
-//        }
-
-        $args[ 'meta_query' ] = ['relation' => 'AND'];
-
-        if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' ) {
-            $args[ 'meta_query' ][] = [
-                'key'   => '_stock_status',
-                'value' => 'instock'
-            ];
-        }
-
-        if ( $settings[ 'eael_product_carousel_product_filter' ] == 'featured-products' ) {
-            $args[ 'tax_query' ] = [
-                'relation' => 'AND',
-                [
-                    'taxonomy' => 'product_visibility',
-                    'field'    => 'name',
-                    'terms'    => 'featured',
-                ],
-                [
-                    'taxonomy' => 'product_visibility',
-                    'field'    => 'name',
-                    'terms'    => ['exclude-from-search', 'exclude-from-catalog'],
-                    'operator' => 'NOT IN',
-                ],
-            ];
-
-//            if ( $settings[ 'eael_product_carousel_categories' ] ) {
-//                $args[ 'tax_query' ][] = [
-//                    'taxonomy' => 'product_cat',
-//                    'field'    => 'slug',
-//                    'terms'    => $settings[ 'eael_product_carousel_categories' ],
-//                ];
-//            }
-        } else {
-            if ( $settings[ 'eael_product_carousel_product_filter' ] == 'best-selling-products' ) {
-                $args[ 'meta_key' ] = 'total_sales';
-                $args[ 'orderby' ] = 'meta_value_num';
-                $args[ 'order' ] = 'DESC';
-            } else {
-                if ( $settings[ 'eael_product_carousel_product_filter' ] == 'sale-products' ) {
-                    $args[ 'meta_query' ][] = [
-                        'relation' => 'OR',
-                        [
-                            'key'     => '_sale_price',
-                            'value'   => 0,
-                            'compare' => '>',
-                            'type'    => 'numeric',
-                        ],
-                        [
-                            'key'     => '_min_variation_sale_price',
-                            'value'   => 0,
-                            'compare' => '>',
-                            'type'    => 'numeric',
-                        ],
-                    ];
-                } else {
-                    if ( $settings[ 'eael_product_carousel_product_filter' ] == 'top-products' ) {
-                        $args[ 'meta_key' ] = '_wc_average_rating';
-                        $args[ 'orderby' ] = 'meta_value_num';
-                        $args[ 'order' ] = 'DESC';
-                    }
-                }
-            }
-        }
-
+        $args = $this->product_query_builder();
         if ( Plugin::$instance->documents->get_current() ) {
             $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
         }
@@ -2808,6 +2708,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 if ( file_exists( $template ) ) {
 	                $settings['eael_page_id'] = get_the_ID();
                     $query = new \WP_Query( $args );
+                    error_log(print_r($query,1));
                     if ( $query->have_posts() ) {
                         echo '<ul class="swiper-wrapper products">';
                         while ( $query->have_posts() ) {
@@ -2877,5 +2778,108 @@ class Woo_Product_Carousel extends Widget_Base {
             </div>
             <?php
         }
+    }
+
+	/**
+	 * Build proper query to fetch product data from wp query
+	 * @return array
+	 */
+    public function product_query_builder(){
+	    $settings = $this->get_settings_for_display();
+	    $widget_id = $this->get_id();
+	    $settings[ 'eael_widget_id' ] = $widget_id;
+	    $order_by = $settings[ 'orderby' ];
+	    $filter = $settings[ 'eael_product_carousel_product_filter' ];
+	    $args = [
+		    'post_type'      => 'product',
+		    'posts_per_page' => $settings[ 'eael_product_carousel_products_count' ] ? : 4,
+		    'order'          => $settings[ 'order' ],
+		    'offset'         => $settings[ 'product_offset' ],
+		    'tax_query'      => [
+			    'relation' => 'AND',
+			    [
+				    'taxonomy' => 'product_visibility',
+				    'field'     => 'name',
+				    'terms'    => ['exclude-from-search', 'exclude-from-catalog'],
+				    'operator' => 'NOT IN',
+			    ],
+		    ],
+	    ];
+
+	    if ( $filter == 'featured-products' ) {
+		    $args[ 'tax_query' ][] =
+			    [
+				    'taxonomy' => 'product_visibility',
+				    'field'     => 'name',
+				    'terms'    => 'featured',
+			    ];
+	    }
+
+	    if ( $filter == 'best-selling-products' ) {
+		    $args[ 'meta_key' ] = 'total_sales';
+		    $args[ 'orderby' ]  = 'meta_value_num';
+		    $args[ 'order' ]    = 'DESC';
+	    }
+
+	    if ( $filter == 'top-products' ) {
+		    $args[ 'meta_key' ] = '_wc_average_rating';
+		    $args[ 'orderby' ]  = 'meta_value_num';
+		    $args[ 'order' ]    = 'DESC';
+	    }
+
+	    if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' ) {
+		    $args[ 'meta_query' ] = ['relation' => 'AND'];
+		    $args[ 'meta_query' ][] = [
+			    'key'   => '_stock_status',
+			    'value' => 'instock'
+		    ];
+	    }
+
+	    if ( $filter == 'sale-products' ) {
+		    $count                          = isset( $args[ 'meta_query' ] ) ? count( $args[ 'meta_query' ] ) : 0;
+		    $args[ 'meta_query' ][ $count ] = [
+			    'relation' => 'OR',
+			    [
+				    'key'     => '_sale_price',
+				    'value'   => 0,
+				    'compare' => '>',
+				    'type'    => 'numeric',
+			    ],
+			    [
+				    'key'     => '_min_variation_sale_price',
+				    'value'   => 0,
+				    'compare' => '>',
+				    'type'    => 'numeric',
+			    ],
+		    ];
+	    }
+
+	    if ( $order_by == '_price' || $order_by == '_sku') {
+		    $args[ 'orderby' ]  = 'meta_value_num';
+		    $args[ 'meta_key' ] = $order_by;
+	    } else {
+	        $args[ 'orderby' ]  = $order_by;
+	    }
+
+	    $args['tax_query'] = [];
+
+	    $taxonomies = get_taxonomies(['object_type' => ['product']], 'objects');
+
+	    foreach ($taxonomies as $object) {
+		    $setting_key = $object->name . '_ids';
+		    if (!empty($settings[$setting_key])) {
+			    $args['tax_query'][] = [
+				    'taxonomy' => $object->name,
+				    'field' => 'term_id',
+				    'terms' => $settings[$setting_key],
+			    ];
+		    }
+	    }
+
+	    if (!empty($args['tax_query'])) {
+		    $args['tax_query']['relation'] = 'AND';
+	    }
+
+	    return $args;
     }
 }
