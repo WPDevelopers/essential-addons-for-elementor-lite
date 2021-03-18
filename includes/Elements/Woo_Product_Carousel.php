@@ -2804,9 +2804,9 @@ class Woo_Product_Carousel extends Widget_Base {
 			    ],
 		    ],
 	    ];
-
 	    if ( $filter == 'featured-products' ) {
-		    $args[ 'tax_query' ][] =
+		    $count                          = isset( $args[ 'tax_query' ] ) ? count( $args[ 'tax_query' ] ) : 0;
+		    $args[ 'tax_query' ][$count] =
 			    [
 				    'taxonomy' => 'product_visibility',
 				    'field'     => 'name',
@@ -2860,25 +2860,23 @@ class Woo_Product_Carousel extends Widget_Base {
 	        $args[ 'orderby' ]  = $order_by;
 	    }
 
-	    $args['tax_query'] = [];
 
 	    $taxonomies = get_taxonomies(['object_type' => ['product']], 'objects');
-
+	    $tax_query_count = isset( $args[ 'meta_query' ] ) ? count( $args[ 'meta_query' ] ) : 0;
 	    foreach ($taxonomies as $object) {
 		    $setting_key = $object->name . '_ids';
 		    if (!empty($settings[$setting_key])) {
-			    $args['tax_query'][] = [
+			    $args['tax_query'][$tax_query_count] = [
 				    'taxonomy' => $object->name,
 				    'field' => 'term_id',
 				    'terms' => $settings[$setting_key],
 			    ];
 		    }
+		    $tax_query_count++;
 	    }
 
-	    if (!empty($args['tax_query'])) {
-		    $args['tax_query']['relation'] = 'AND';
-	    }
 
+        error_log(print_r($args,1));
 	    return $args;
     }
 }
