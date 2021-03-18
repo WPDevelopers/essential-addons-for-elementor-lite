@@ -2876,8 +2876,6 @@ class Woo_Product_Carousel extends Widget_Base {
 		    $tax_query_count++;
 	    }
 
-
-        error_log(print_r($args,1));
 	    return $args;
     }
 }
