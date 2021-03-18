@@ -2454,7 +2454,7 @@ class Woo_Product_Carousel extends Widget_Base {
 				    'size' => 100,
 			    ],
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-woo-product-carousel-gallary-pagination img' => 'width: {{SIZE}}{{UNIT}} !important;',
+				    '{{WRAPPER}} .eael-woo-product-carousel-gallary-pagination img' => 'width: {{SIZE}}{{UNIT}} !important;height: {{SIZE}}{{UNIT}} !important;',
 			    ],
 		    ]
 	    );
@@ -2942,9 +2942,13 @@ class Woo_Product_Carousel extends Widget_Base {
 				echo '<div class="swiper-wrapper">';
 				while ( $query->have_posts() ) {
 					$query->the_post();
-					$product = wc_get_product( get_the_ID() );
+					$image_arr = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ),'full');
                     echo '<div class="swiper-slide">';
-					echo $product->get_image('thumbnail', ['loading' => 'eager']);
+                        echo '<div class="swiper-slide-container">';
+                            echo '<div class="eael-pagination-thumb">';
+                                echo '<img class="eael-thumbnail" src="'.esc_url(current($image_arr)).'">';
+                            echo '</div>';
+                        echo '</div>';
 					echo '</div>';
 				}
 				wp_reset_postdata();
