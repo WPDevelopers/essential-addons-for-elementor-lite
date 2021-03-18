@@ -2804,6 +2804,14 @@ class Woo_Product_Carousel extends Widget_Base {
 			    ],
 		    ],
 	    ];
+
+	    if ( $order_by == '_price' || $order_by == '_sku') {
+		    $args[ 'orderby' ]  = 'meta_value_num';
+		    $args[ 'meta_key' ] = $order_by;
+	    } else {
+		    $args[ 'orderby' ]  = $order_by;
+	    }
+
 	    if ( $filter == 'featured-products' ) {
 		    $count                          = isset( $args[ 'tax_query' ] ) ? count( $args[ 'tax_query' ] ) : 0;
 		    $args[ 'tax_query' ][$count] =
@@ -2851,13 +2859,6 @@ class Woo_Product_Carousel extends Widget_Base {
 				    'type'    => 'numeric',
 			    ],
 		    ];
-	    }
-
-	    if ( $order_by == '_price' || $order_by == '_sku') {
-		    $args[ 'orderby' ]  = 'meta_value_num';
-		    $args[ 'meta_key' ] = $order_by;
-	    } else {
-	        $args[ 'orderby' ]  = $order_by;
 	    }
 
 
