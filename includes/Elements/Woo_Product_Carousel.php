@@ -2936,7 +2936,7 @@ class Woo_Product_Carousel extends Widget_Base {
 
             <div <?php echo $this->get_render_attribute_string('eael_gallery_pagination_wrapper'); ?>>
 
-            <?
+            <?php
 			$query = new \WP_Query( $args );
 			if ( $query->have_posts() ) {
 				echo '<div class="swiper-wrapper">';
