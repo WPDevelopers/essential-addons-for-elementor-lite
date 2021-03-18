@@ -69,6 +69,10 @@ $theme-preset4: #597dfc;
     }
 
     .eael-woo-product-carousel{
+        .eael-product-carousel {
+            direction: ltr;
+        }
+
         a.button.add_to_cart_button.added {
             display: none !important;
         }
@@ -152,7 +156,6 @@ $theme-preset4: #597dfc;
             background-color: #f5f7fd;
             text-align: left;
             margin: 10px;
-            direction: ltr;
 
             .image-wrap img, .product-image-wrap {
                 border-radius: 20px 20px 0 0;
@@ -294,6 +297,7 @@ $theme-preset4: #597dfc;
                 opacity: 0;
                 //transform: translate(-50%, -50%);
                 transition: all 0.3s ease-in-out 0s;
+                text-align: left;
             }
 
             .carousel-overlay {
@@ -539,6 +543,7 @@ $theme-preset4: #597dfc;
 
                 .eael-product-title {
                     width: 60%;
+                    text-align: left;
                 }
                 .eael-product-price {
                     width: 40%;
@@ -1175,6 +1180,7 @@ $theme-preset4: #597dfc;
         color: #000;
         font-size: 16px;
         line-height: 1.2em;
+        direction: ltr;
     }
 }
 
