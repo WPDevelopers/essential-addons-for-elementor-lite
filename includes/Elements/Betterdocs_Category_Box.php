@@ -16,6 +16,7 @@ use \Elementor\Group_Control_Background;
 use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 
+
 use \Essential_Addons_Elementor\Classes\Controls;
 use \Essential_Addons_Elementor\Classes\Helper;
 
@@ -1058,7 +1059,6 @@ class Betterdocs_Category_Box extends Widget_Base {
     {
         if (!defined('BETTERDOCS_URL')) return;
         $settings = $this->get_settings_for_display();
-
 
         $this->add_render_attribute(
             'bd_category_box_wrapper',
