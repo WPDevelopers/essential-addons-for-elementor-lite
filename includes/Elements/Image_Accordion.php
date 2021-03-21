@@ -604,7 +604,7 @@ class Image_Accordion extends Widget_Base {
             <div class="overlay">
                 <div class="overlay-inner">
                     <div class="overlay-inner <?php echo( $active === 'yes' ? ' overlay-inner-show' : '' ); ?>">
-                        <?php printf( '<%1$s>%2$s</%1$s>', $settings[ 'title_tag' ], $img_accordion[ 'eael_accordion_tittle' ] ); ?>
+                        <?php printf( '<%1$s>%2$s</%1$s>', Utils::validate_html_tag($settings[ 'title_tag' ]), $img_accordion[ 'eael_accordion_tittle' ] ); ?>
                         <p><?php echo sprintf( "%s", $this->parse_text_editor( $img_accordion[ 'eael_accordion_content' ] ) ); ?></p>
                     </div>
                 </div>

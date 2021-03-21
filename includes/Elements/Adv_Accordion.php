@@ -14,6 +14,7 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use \Elementor\Plugin;
+use \Elementor\Utils;
 use \Elementor\Widget_Base;
 
 use \Essential_Addons_Elementor\Classes\Helper;
@@ -1097,7 +1098,7 @@ class Adv_Accordion extends Widget_Base
             }
             // tab title
             if ($settings['eael_adv_accordion_toggle_icon_postion'] === '') {
-                echo '<' . $settings['eael_adv_accordion_title_tag'] . ' class="eael-accordion-tab-title">' . $tab['eael_adv_accordion_tab_title'] . '</' . $settings['eael_adv_accordion_title_tag'] . '>';
+                echo '<' . Utils::validate_html_tag($settings['eael_adv_accordion_title_tag']) . ' class="eael-accordion-tab-title">' . $tab['eael_adv_accordion_tab_title'] . '</' . Utils::validate_html_tag($settings['eael_adv_accordion_title_tag']) . '>';
             }
             // tab icon
             if ($tab['eael_adv_accordion_tab_icon_show'] === 'yes') {
@@ -1113,7 +1114,7 @@ class Adv_Accordion extends Widget_Base
             }
             // tab title
             if ($settings['eael_adv_accordion_toggle_icon_postion'] === 'right' || $settings['eael_adv_accordion_toggle_icon_postion'] === null) {
-                echo '<' . $settings['eael_adv_accordion_title_tag'] . ' class="eael-accordion-tab-title">' . $tab['eael_adv_accordion_tab_title'] . '</' . $settings['eael_adv_accordion_title_tag'] . '>';
+                echo '<' . Utils::validate_html_tag($settings['eael_adv_accordion_title_tag']) . ' class="eael-accordion-tab-title">' . $tab['eael_adv_accordion_tab_title'] . '</' . Utils::validate_html_tag($settings['eael_adv_accordion_title_tag']) . '>';
             }
             // toggle icon
             if ($settings['eael_adv_accordion_icon_show'] === 'yes' && $settings['eael_adv_accordion_toggle_icon_postion'] === 'right') {
