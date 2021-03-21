@@ -231,6 +231,7 @@ ea.hooks.addAction("init", "ea", () => {
 			".eael-woo-slider-popup .single_add_to_cart_button",
 			function (e) {
 				e.preventDefault();
+				e.stopImmediatePropagation();
 				var $this = $(this),
 					product_id = $(this).val(),
 					variation_id =
