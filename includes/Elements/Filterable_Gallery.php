@@ -15,6 +15,7 @@ use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Repeater;
 use \Elementor\Group_Control_Background;
+use \Elementor\Utils;
 
 class Filterable_Gallery extends Widget_Base
 {
@@ -3053,7 +3054,7 @@ class Filterable_Gallery extends Widget_Base
                 $html .= '<div class="fg-item-category"><span>' . $item['category'] . '</span></div>';
             }
             
-            $html .= '<' . $settings['title_tag'] . ' class="fg-item-title">' . $item['title'] . '</' . $settings['title_tag'] . '>';
+            $html .= '<' . Utils::validate_html_tag($settings['title_tag']) . ' class="fg-item-title">' . $item['title'] . '</' . Utils::validate_html_tag($settings['title_tag']) . '>';
             $html .= '<div class="fg-item-content">' . wpautop($item['content']) . '</div>';
             $html .= '</div>';
             
@@ -3160,7 +3161,7 @@ class Filterable_Gallery extends Widget_Base
                     $html .= '<div class="gallery-item-caption-over">';
                         if (isset($item['title']) && !empty($item['title']) || isset($item['content']) && !empty($item['content'])) {
                             if (!empty($item['title'])) {
-                                $html .= '<' . $settings['title_tag'] . ' class="fg-item-title">' . $item['title'] . '</' . $settings['title_tag'] . '>';
+                                $html .= '<' . Utils::validate_html_tag($settings['title_tag']) . ' class="fg-item-title">' . $item['title'] . '</' . Utils::validate_html_tag($settings['title_tag']) . '>';
                             }
 
                             if (!empty($item['content'])) {
