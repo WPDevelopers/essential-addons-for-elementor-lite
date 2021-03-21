@@ -1,7 +1,7 @@
 <?php
 
 use \Essential_Addons_Elementor\Classes\Helper;
-
+use \Elementor\Utils;
 /**
  * Template Name: Default
  *
@@ -24,7 +24,7 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="' . get_the_
                         echo '<div class="eael-docs-cat-icon">' . $cat_icon . '</div>';
                     }
                     if ($settings['show_title']) {
-                        echo '<' . $settings['title_tag'] . ' class="eael-docs-cat-title">' . $term->name . '</' . $settings['title_tag'] . '>';
+                        echo '<' . Utils::validate_html_tag($settings['title_tag']) . ' class="eael-docs-cat-title">' . $term->name . '</' . Utils::validate_html_tag($settings['title_tag']) . '>';
                     }
                     if ($settings['show_count']) {
                         echo '<div class="eael-docs-item-count">' . Helper::get_doc_post_count($term->count, $term->term_id) . '</div>';

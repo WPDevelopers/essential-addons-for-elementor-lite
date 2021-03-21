@@ -9,6 +9,7 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Icons_Manager;
 use Elementor\Repeater;
+use Elementor\Utils;
 use WC_Product;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -1741,7 +1742,7 @@ trait Woo_Product_Comparable {
 		extract( $options );
 		$not_found_text         = isset( $ds['no_products_found_text'] ) ? $ds['no_products_found_text'] : '';
 		$title                  = isset( $ds['table_title'] ) ? $ds['table_title'] : '';
-		$title_tag              = isset( $ds['table_title_tag'] ) ? $ds['table_title_tag'] : 'h1';
+		$title_tag              = isset( $ds['table_title_tag'] ) ? Utils::validate_html_tag($ds['table_title_tag'])  : 'h1';
 		$ribbon                 = isset( $ds['ribbon'] ) ? $ds['ribbon'] : '';
 		$repeat_price           = isset( $ds['repeat_price'] ) ? $ds['repeat_price'] : '';
 		$repeat_add_to_cart     = isset( $ds['repeat_add_to_cart'] ) ? $ds['repeat_add_to_cart'] : '';

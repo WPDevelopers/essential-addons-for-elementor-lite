@@ -1,7 +1,7 @@
 <?php
 
 use \Essential_Addons_Elementor\Classes\Helper;
-
+use \Elementor\Utils;
 /**
  * Template Name: Layout 2
  *
@@ -16,7 +16,7 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="' .
                 echo '<div class="eael-docs-item-count" data-content="' . Helper::get_doc_post_count($term->count, $term->term_id) . '"></div>';
             }
             if ($settings['show_title']) {
-                echo '<' . $settings['title_tag'] . ' class="eael-docs-cat-title">' . $term->name . '</' . $settings['title_tag'] . '>';
+                echo '<' . Utils::validate_html_tag($settings['title_tag']) . ' class="eael-docs-cat-title">' . $term->name . '</' . Utils::validate_html_tag($settings['title_tag']) . '>';
             }
             echo '</div>';
         }
