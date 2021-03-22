@@ -430,7 +430,7 @@ trait Elements
 
                 $el_class .= ($position == 'right') ? ' eael-toc-right' : ' eael-toc-left';
                 $el_class .= ($close_bt_text_style == 'bottom_to_top') ? ' eael-bottom-to-top' : ' ';
-                $el_class .= ($auto_collapse == 'yes') ? ' eael-toc-auto-collapse' : ' ';
+                $el_class .= ($auto_collapse == 'yes') ? ' eael-toc-auto-collapse collapsed' : ' ';
                 $el_class .= ($hide_mobile == 'yes') ? ' eael-toc-mobile-hide' : ' ';
 
                 $toc_style_class = ' eael-toc-list-' . $toc_style;
