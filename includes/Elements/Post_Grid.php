@@ -1028,6 +1028,8 @@ class Post_Grid extends Widget_Base
             <div ' . $this->get_render_attribute_string( 'post_grid_container' ) . ' data-layout-mode="' . $settings["layout_mode"] . '">';
 
         $template = $this->get_template($settings['eael_dynamic_template_Layout']);
+        $settings['loadable_file_name'] = $this->get_filename_only($template);
+
         if(file_exists($template)){
             $query = new \WP_Query( $args );
 

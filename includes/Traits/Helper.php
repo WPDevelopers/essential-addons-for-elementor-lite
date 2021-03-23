@@ -24,7 +24,7 @@ trait Helper
     {
         $ajax   = wp_doing_ajax();
 
-        parse_str($_REQUEST['args'], $args);
+        parse_str($_POST['args'], $args);
         if ( empty( $_POST['nonce'] ) ) {
             $err_msg = __( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' );
             if ( $ajax ) {
@@ -98,10 +98,10 @@ trait Helper
 
         }
 
-        $template_info = $_REQUEST['template_info'];
-
+        $template_info = $_POST['template_info'];
 
         if ( $template_info ) {
+
             if ( $template_info[ 'dir' ] === 'free' ) {
                 $file_path = EAEL_PLUGIN_PATH;
             }
@@ -111,7 +111,7 @@ trait Helper
             }
 
             $file_path = sprintf(
-                '%sincludes/Template/%s/%s.php',
+                '%sincludes/Template/%s/%s',
                 $file_path,
                 $template_info[ 'name' ],
                 $template_info[ 'file_name' ]
@@ -509,7 +509,7 @@ trait Helper
             'data-nonce'     => wp_create_nonce( 'load_more' ),
             'data-template'  => json_encode([
                 'dir'   => $plugin_type,
-                'file_name' => $settings['eael_dynamic_template_Layout'],
+                'file_name' => $settings['loadable_file_name'],
                 'name' => $this->process_directory_name() ],
                 1),
             'data-class'    => get_class( $this ),
