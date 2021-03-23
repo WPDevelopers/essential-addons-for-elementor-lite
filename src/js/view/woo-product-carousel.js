@@ -1,5 +1,6 @@
 ea.hooks.addAction("init", "ea", () => {
 	const wooProductCarousel = function ($scope, $) {
+
 		var $wooProductCarousel = $scope.find(".eael-woo-product-carousel").eq(0),
 			$type = $wooProductCarousel.data("type"),
 			$autoplay =
@@ -131,7 +132,8 @@ ea.hooks.addAction("init", "ea", () => {
 			}
 		}
 
-		var eaelWooProductCarousel = new Swiper($wooProductCarousel, $carouselOptions);
+		//var eaelWooProductCarousel = new Swiper($wooProductCarousel, $carouselOptions);
+		var eaelWooProductCarousel = swiperLoader($wooProductCarousel, $carouselOptions);
 
 		if ($autoplay === 0) {
 			eaelWooProductCarousel.autoplay.stop();
@@ -151,7 +153,7 @@ ea.hooks.addAction("init", "ea", () => {
 			.find('.eael-woo-product-carousel-container .eael-woo-product-carousel-gallary-pagination')
 			.eq(0)
 		if ($paginationGallerySelector.length > 0) {
-			var $paginationGallerySlider = new Swiper($paginationGallerySelector, {
+			var $paginationGallerySlider  = swiperLoader($paginationGallerySelector, {
 				spaceBetween: 20,
 				centeredSlides: $centeredSlides,
 				touchRatio: 0.2,
@@ -160,7 +162,7 @@ ea.hooks.addAction("init", "ea", () => {
 				slidesPerGroup: 1,
 				// loopedSlides: $items,
 				slidesPerView: 3,
-			})
+			});
 			eaelWooProductCarousel.controller.control = $paginationGallerySlider
 			$paginationGallerySlider.controller.control = eaelWooProductCarousel
 		}
@@ -316,6 +318,18 @@ ea.hooks.addAction("init", "ea", () => {
 			);
 		}
 	};
+
+	const swiperLoader = (swiperElement, swiperConfig) => {
+		if ( 'undefined' === typeof Swiper ) {
+			const asyncSwiper = elementorFrontend.utils.swiper;
+			new asyncSwiper( swiperElement, swiperConfig ).then( ( newSwiperInstance ) => {
+				return  newSwiperInstance;
+			} );
+		} else {
+			return new Swiper( swiperElement, swiperConfig );
+		}
+	}
+
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eael-woo-product-carousel.default",
 		wooProductCarousel

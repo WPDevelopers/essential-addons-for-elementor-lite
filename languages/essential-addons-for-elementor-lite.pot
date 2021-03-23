@@ -6818,7 +6818,7 @@ msgstr ""
 msgid "Hand"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Carousel.php:2877
+#: ../includes/Elements/Woo_Product_Carousel.php:2876
 msgid "<p class=\"eael-no-posts-found\">No layout found!</p>"
 msgstr ""
 
