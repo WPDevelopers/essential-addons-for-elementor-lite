@@ -1172,10 +1172,7 @@ class Contact_Form_7 extends Widget_Base
                         'icon' => 'eicon-h-align-right',
                     ],
                 ],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form p:nth-last-of-type(1)' => 'text-align: {{VALUE}};',
-                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]' => 'display:inline-block;',
-                ],
+                'prefix_class' => 'eael-contact-form-7-button-align-',
                 'condition' => [
                     'button_width_type' => 'custom',
                 ],
