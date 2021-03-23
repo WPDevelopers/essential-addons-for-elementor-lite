@@ -2919,6 +2919,8 @@ class Product_Grid extends Widget_Base
                 <?php
                 do_action( 'eael_woo_before_product_loop' );
                 $template = $this->get_template($settings['eael_dynamic_template_Layout']);
+                $settings['loadable_file_name'] = $this->get_filename_only($template);
+
                 if (file_exists($template)) {
                     $query = new \WP_Query($args);
                     if ($query->have_posts()) {
