@@ -2697,7 +2697,7 @@ class Product_Grid extends Widget_Base
                 'label' => __('Content Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-popup.woocommerce .product_meta .sku, .eael-product-popup.woocommerce .product_meta a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-popup.woocommerce .product_meta .sku, {{WRAPPER}} .eael-product-popup.woocommerce .product_meta a' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -2951,7 +2951,7 @@ class Product_Grid extends Widget_Base
                 var $products = $('.products', $scope);
                 var $layout_mode = $products.data('layout-mode');
                 
-                if ($layout_mode === 'masonry') {
+                if ( $layout_mode === 'masonry' ) {
                     // init isotope
                     var $isotope_products = $products.isotope({
                         itemSelector: "li.product",
