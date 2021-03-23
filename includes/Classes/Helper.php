@@ -943,6 +943,11 @@ class Helper
         return $plugins[ $basename ];
     }
 
+	/**
+	 * eael_validate_html_tag
+	 * @param $tag
+	 * @return mixed|string
+	 */
     public static function eael_validate_html_tag( $tag ){
 	    return in_array( strtolower( $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
     }
