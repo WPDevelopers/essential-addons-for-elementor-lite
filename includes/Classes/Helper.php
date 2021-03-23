@@ -7,10 +7,31 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use \Elementor\Controls_Manager;
+use \Elementor\Utils;
 use Elementor\Plugin;
 
 class Helper
 {
+
+
+	const EAEL_ALLOWED_HTML_TAGS = [
+		'article',
+		'aside',
+		'div',
+		'footer',
+		'h1',
+		'h2',
+		'h3',
+		'h4',
+		'h5',
+		'h6',
+		'header',
+		'main',
+		'nav',
+		'p',
+		'section',
+		'span',
+	];
 
     /**
      * Include a file with variables
@@ -920,5 +941,9 @@ class Helper
         }
 
         return $plugins[ $basename ];
+    }
+
+    public static function eael_validate_html_tag( $tag ){
+	    return in_array( strtolower( $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
     }
 }
