@@ -16,6 +16,8 @@ use \Elementor\Scheme_Typography;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
 
+use \Essential_Addons_Elementor\Classes\Helper;
+
 class Feature_List extends Widget_Base {
     public function get_name() {
         return 'eael-feature-list';
@@ -898,7 +900,7 @@ class Feature_List extends Widget_Base {
             $icon_bg = (  ( $item['eael_feature_list_icon_is_individual_style'] == 'on' ) ? ' style="background-color:' . esc_attr( $item['eael_feature_list_icon_individual_bg_color'] ) . '"' : '' );
             $icon_box_bg = (  ( $item['eael_feature_list_icon_is_individual_style'] == 'on' ) ? ' style="background-color:' . esc_attr( $item['eael_feature_list_icon_individual_box_bg_color'] ) . '"' : '' );
 
-            $feat_title_tag = Utils::validate_html_tag($settings['eael_feature_list_title_size']);
+            $feat_title_tag = Helper::eael_validate_html_tag($settings['eael_feature_list_title_size']);
 
             if ( $item['eael_feature_list_link']['url'] ) {
                 $this->add_render_attribute( 'eael_feature_list_title_anchor' . $i, 'href', esc_url( $item['eael_feature_list_link']['url'] ) );
