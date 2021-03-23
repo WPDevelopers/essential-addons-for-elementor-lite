@@ -95,7 +95,7 @@ var ContentTicker = function($scope, $) {
             }
         };
 
-    var $contentTickerSlider = new Swiper(
+    var $contentTickerSlider = swiperLoader(
         $contentTicker,
         $contentTickerOptions
     );
@@ -111,6 +111,18 @@ var ContentTicker = function($scope, $) {
         });
     }
 };
+
+const swiperLoader = (swiperElement, swiperConfig) => {
+    if ( 'undefined' === typeof Swiper ) {
+        const asyncSwiper = elementorFrontend.utils.swiper;
+        new asyncSwiper( swiperElement, swiperConfig ).then( ( newSwiperInstance ) => {
+            return  newSwiperInstance;
+        } );
+    } else {
+        return new Swiper( swiperElement, swiperConfig );
+    }
+}
+
 jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-content-ticker.default",
