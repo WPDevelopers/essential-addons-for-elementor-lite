@@ -343,3 +343,61 @@
 		direction: ltr;
 	}
 }
+
+.eael-post-timeline.timeline-layout-card {
+	.eael-timeline-post {
+		width: 100%;
+		padding-bottom: 20px;
+		clear: both;
+
+		&:after {
+			left: 50%;
+			transform: translateX(-50%);
+			right: auto;
+			top: 40px;
+		}
+
+		.eael-timeline-bullet {
+			left: 50%;
+			transform: translateX(-50%);
+			right: auto;
+			top: 40px;
+		}
+
+		&:nth-last-child(2)::after {
+			height: 100%;
+		}
+
+		&:nth-child(2n) {
+			&:after {
+				display: block;
+			}
+		}
+
+
+		@media only screen and (min-width: 992px) {
+			&:nth-child(2n) {
+				.eael-timeline-post-inner {
+					float: right;
+
+					&::after {
+						content: "";
+						display: table;
+						clear: both;
+					}
+				}
+			}
+		}
+	}
+
+	//@media only screen and (min-width: 992px) {
+		.eael-timeline-post-inner {
+			//margin-left: 0px;
+			width: 45%;
+			//padding: 1.6em;
+			float: none;
+			margin: 0;
+		}
+	//}
+}
+

@@ -441,7 +441,7 @@ class Post_Timeline extends Widget_Base
         $this->add_render_attribute(
             'eael_post_timeline',
             [
-                'class' => ['eael-post-timeline', 'eael-post-appender', "eael-post-appender-{$this->get_id()}"],
+                'class' => ['eael-post-timeline', 'eael-post-appender', "eael-post-appender-{$this->get_id()}", "timeline-layout-{$settings['eael_dynamic_template_Layout']}"],
             ]
         );
 
