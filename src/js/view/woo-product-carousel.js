@@ -133,42 +133,40 @@ ea.hooks.addAction("init", "ea", () => {
 		}
 
 		//var eaelWooProductCarousel = new Swiper($wooProductCarousel, $carouselOptions);
-		var eaelWooProductCarousel = swiperLoader($wooProductCarousel, $carouselOptions);
-
-		if ($autoplay === 0) {
-			eaelWooProductCarousel.autoplay.stop();
-		}
-
-		if ($pause_on_hover && $autoplay !== 0) {
-			$wooProductCarousel.on("mouseenter", function() {
+		swiperLoader($wooProductCarousel, $carouselOptions).then((eaelWooProductCarousel)=>{
+			if ($autoplay === 0) {
 				eaelWooProductCarousel.autoplay.stop();
-			});
-			$wooProductCarousel.on("mouseleave", function() {
-				eaelWooProductCarousel.autoplay.start();
-			});
-		}
+			}
 
-		//gallery pagination
-		var $paginationGallerySelector = $scope
+			if ($pause_on_hover && $autoplay !== 0) {
+				$wooProductCarousel.on("mouseenter", function() {
+					eaelWooProductCarousel.autoplay.stop();
+				});
+				$wooProductCarousel.on("mouseleave", function() {
+					eaelWooProductCarousel.autoplay.start();
+				});
+			}
+
+			//gallery pagination
+			var $paginationGallerySelector = $scope
 			.find('.eael-woo-product-carousel-container .eael-woo-product-carousel-gallary-pagination')
 			.eq(0)
-		if ($paginationGallerySelector.length > 0) {
-			var $paginationGallerySlider  = swiperLoader($paginationGallerySelector, {
-				spaceBetween: 20,
-				centeredSlides: $centeredSlides,
-				touchRatio: 0.2,
-				slideToClickedSlide: true,
-				loop: $loop,
-				slidesPerGroup: 1,
-				// loopedSlides: $items,
-				slidesPerView: 3,
-			});
-			eaelWooProductCarousel.controller.control = $paginationGallerySlider
-			$paginationGallerySlider.controller.control = eaelWooProductCarousel
-		}
-
-
-
+			if ($paginationGallerySelector.length > 0) {
+				swiperLoader($paginationGallerySelector, {
+					spaceBetween: 20,
+					centeredSlides: $centeredSlides,
+					touchRatio: 0.2,
+					slideToClickedSlide: true,
+					loop: $loop,
+					slidesPerGroup: 1,
+					// loopedSlides: $items,
+					slidesPerView: 3,
+				}).then(($paginationGallerySlider) => {
+					eaelWooProductCarousel.controller.control = $paginationGallerySlider
+					$paginationGallerySlider.controller.control = eaelWooProductCarousel
+				});
+			}
+		});
 
 		// Quick view
 		$scope.on("click", ".open-popup-link", function (e) {
@@ -322,12 +320,19 @@ ea.hooks.addAction("init", "ea", () => {
 	const swiperLoader = (swiperElement, swiperConfig) => {
 		if ( 'undefined' === typeof Swiper ) {
 			const asyncSwiper = elementorFrontend.utils.swiper;
-			new asyncSwiper( swiperElement, swiperConfig ).then( ( newSwiperInstance ) => {
+			return new asyncSwiper( swiperElement, swiperConfig ).then( ( newSwiperInstance ) => {
 				return  newSwiperInstance;
 			} );
 		} else {
-			return new Swiper( swiperElement, swiperConfig );
+			return swiperPromise( swiperElement, swiperConfig );
 		}
+	}
+
+	const swiperPromise =  (swiperElement, swiperConfig) => {
+		return new Promise((resolve, reject) => {
+			const swiperInstance =  new Swiper( swiperElement, swiperConfig );
+			resolve( swiperInstance );
+		});
 	}
 
 	elementorFrontend.hooks.addAction(
