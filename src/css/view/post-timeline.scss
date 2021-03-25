@@ -387,6 +387,13 @@
 				.eael-timeline-post-inner {
 					float: right;
 				}
+
+				time {
+					left: auto;
+					right: calc(100% + 85px);
+					text-align: right;
+					font-size: 1em;
+				}
 			}
 		}
 
@@ -402,12 +409,38 @@
 			float: none;
 			margin: 0;
 			background: transparent !important;
+
+			&:hover {
+				.eael-timeline-post-excerpt {
+					top: 0;
+				}
+			}
 		}
 	//}
 
 	.eael-timeline-post-image {
 		background: none;
 		opacity: 1;
+	}
+
+	.eael-timeline-content {
+		padding: 30px;
+	}
+
+	.eael-timeline-post-title {
+		bottom: 0;
+
+		h2 {
+			margin-top: 0;
+			padding: 0;
+		}
+	}
+
+	.eael-timeline-post-excerpt {
+		p {
+			padding: 0;
+			margin-top: 0;
+		}
 	}
 
 	.eael-timeline-post-excerpt,
@@ -417,6 +450,25 @@
 
 		h2, p {
 			color: #000 !important;
+		}
+	}
+
+
+	@media only screen and (min-width: 992px) {
+		time {
+			position: absolute;
+			left: calc(100% + 85px);
+			top: 0;
+			font-size: 1em;
+			padding: 5px 10px;
+			text-align: left;
+			opacity: 1;
+			height: auto;
+			width: max-content;
+
+			&:before {
+				content: none;
+			}
 		}
 	}
 
