@@ -134,11 +134,11 @@ class Post_Timeline extends Widget_Base
 	    $this->add_responsive_control(
 		    'eael_post_grid_spacing',
 		    [
-			    'label' => esc_html__('Content Spacing', 'essential-addons-for-elementor-lite'),
+			    'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::DIMENSIONS,
 			    'size_units' => ['px', '%', 'em'],
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-timeline-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				    '{{WRAPPER}} .eael-timeline-post-inner' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			    ],
 			    'condition'   => [
 				    'eael_dynamic_template_Layout' => 'card',
@@ -171,6 +171,40 @@ class Post_Timeline extends Widget_Base
 		    ]
 	    );
 
+	    $this->add_control(
+		    'eael_post_timeline_content_heading',
+		    [
+			    'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::DIMENSIONS,
+			    'condition'   => [
+				    'eael_dynamic_template_Layout' => 'card',
+			    ],
+		    ]
+	    );
+
+	    $this->add_responsive_control(
+		    'eael_post_timeline_content_spacing',
+		    [
+			    'label' => esc_html__('Spacing', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::DIMENSIONS,
+			    'size_units' => ['px', '%', 'em'],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-timeline-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
+			    'condition'   => [
+				    'eael_dynamic_template_Layout' => 'card',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_post_timeline_arrow_heading',
+		    [
+			    'label' => esc_html__('Arrow', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::DIMENSIONS,
+		    ]
+	    );
+
         $this->add_control(
             'eael_timeline_border_color',
             [
@@ -182,7 +216,25 @@ class Post_Timeline extends Widget_Base
                     '{{WRAPPER}} .eael-timeline-post-inner::after'                                   => 'border-left-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner::after' => 'border-right-color: {{VALUE}};',
                 ],
+                'condition'   => [
+	                'eael_dynamic_template_Layout' => 'default',
+                ],
+            ]
+        );
 
+        $this->add_control(
+            'eael_timeline_arrow_color',
+            [
+                'label'     => __('Arrow Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-timeline-post-inner'                                          => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-timeline-post-inner::after'                                   => 'border-left-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner::after' => 'border-right-color: {{VALUE}};',
+                ],
+                'condition'   => [
+	                'eael_dynamic_template_Layout!' => 'default',
+                ],
             ]
         );
 
@@ -353,6 +405,18 @@ class Post_Timeline extends Widget_Base
 				    '{{WRAPPER}} .eael-timeline-post time' => 'color: {{VALUE}};',
 			    ],
 
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Typography::get_type(),
+		    [
+			    'name'     => 'eael_timeline_time_typography',
+			    'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
+			    'global' => [
+				    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+			    ],
+			    'selector' => '{{WRAPPER}} time',
 		    ]
 	    );
 
@@ -534,14 +598,14 @@ class Post_Timeline extends Widget_Base
             'eael_post_timeline_wrapper',
             [
                 'id'    => "eael-post-timeline-{$this->get_id()}",
-                'class' => 'eael-post-timeline',
+                'class' => ["eael-post-timeline", "timeline-layout-{$settings['eael_dynamic_template_Layout']}"],
             ]
         );
 
         $this->add_render_attribute(
             'eael_post_timeline',
             [
-                'class' => ['eael-post-timeline', 'eael-post-appender', "eael-post-appender-{$this->get_id()}", "timeline-layout-{$settings['eael_dynamic_template_Layout']}"],
+                'class' => ['eael-post-timeline', 'eael-post-appender', "eael-post-appender-{$this->get_id()}"],
             ]
         );
 
