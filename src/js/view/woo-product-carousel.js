@@ -206,7 +206,7 @@ ea.hooks.addAction("init", "ea", () => {
 							   } else {
 								   popup_details.css("height", "auto");
 							   }
-							   product_gallery.wc_product_gallery();
+							   setTimeout(function(){ product_gallery.wc_product_gallery(); }, 1000);
 						   }
 					   },
 				   });
