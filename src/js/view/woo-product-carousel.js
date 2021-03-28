@@ -67,15 +67,15 @@ ea.hooks.addAction("init", "ea", () => {
 			$depth =
 				$wooProductCarousel.data("depth") !== undefined
 					? $wooProductCarousel.data("depth")
-					: 200,
+					: 100,
 			$rotate =
 				$wooProductCarousel.data("rotate") !== undefined
 					? $wooProductCarousel.data("rotate")
-					: 0,
+					: 50,
 			$stretch =
 				$wooProductCarousel.data("stretch") !== undefined
 					? $wooProductCarousel.data("stretch")
-					: 80;
+					: 10;
 
 		// console.log($items);
 
