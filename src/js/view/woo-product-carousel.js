@@ -79,7 +79,7 @@ ea.hooks.addAction("init", "ea", () => {
 
 		// console.log($items);
 
-		var $carouselOptions = {
+		const $carouselOptions = {
 			direction: "horizontal",
 			speed: $speed,
 			effect: $effect,
@@ -103,7 +103,7 @@ ea.hooks.addAction("init", "ea", () => {
 			slidesPerView: $items,
 		};
 
-		if($effect === 'slide') {
+		if ($effect === 'slide') {
 
 			$carouselOptions.breakpoints = {
 				1024: {
@@ -121,7 +121,7 @@ ea.hooks.addAction("init", "ea", () => {
 			}
 		}
 
-		if($effect === 'coverflow') {
+		if ($effect === 'coverflow') {
 			// $carouselOptions.slidesPerView = 'auto';
 			$carouselOptions.coverflowEffect = {
 				rotate: $rotate,
@@ -132,23 +132,22 @@ ea.hooks.addAction("init", "ea", () => {
 			}
 		}
 
-		//var eaelWooProductCarousel = new Swiper($wooProductCarousel, $carouselOptions);
-		swiperLoader($wooProductCarousel, $carouselOptions).then((eaelWooProductCarousel)=>{
+		swiperLoader($wooProductCarousel, $carouselOptions).then((eaelWooProductCarousel) => {
 			if ($autoplay === 0) {
 				eaelWooProductCarousel.autoplay.stop();
 			}
 
 			if ($pause_on_hover && $autoplay !== 0) {
-				$wooProductCarousel.on("mouseenter", function() {
+				$wooProductCarousel.on("mouseenter", function () {
 					eaelWooProductCarousel.autoplay.stop();
 				});
-				$wooProductCarousel.on("mouseleave", function() {
+				$wooProductCarousel.on("mouseleave", function () {
 					eaelWooProductCarousel.autoplay.start();
 				});
 			}
 
 			//gallery pagination
-			var $paginationGallerySelector = $scope
+			const $paginationGallerySelector = $scope
 			.find('.eael-woo-product-carousel-container .eael-woo-product-carousel-gallary-pagination')
 			.eq(0)
 			if ($paginationGallerySelector.length > 0) {
@@ -181,34 +180,34 @@ ea.hooks.addAction("init", "ea", () => {
 			.removeClass("eael-product-modal-removing");
 			popup_view.show();
 			$.ajax({
-			   url: localize.ajaxurl,
-			   type: "post",
-			   data: {
-				   action: "eael_product_quickview_popup",
-				   ...quickview_setting,
-				   security: localize.nonce
-			   },
-			   success: function (response) {
-				   if (response.success) {
-				   		const product_preview = $(response.data);
-				   		const popup_details = product_preview.children(".eael-product-popup-details");
+					   url: localize.ajaxurl,
+					   type: "post",
+					   data: {
+						   action: "eael_product_quickview_popup",
+						   ...quickview_setting,
+						   security: localize.nonce
+					   },
+					   success: function (response) {
+						   if (response.success) {
+							   const product_preview = $(response.data);
+							   const popup_details = product_preview.children(".eael-product-popup-details");
 
-					   	popup_details.find(".variations_form").wc_variation_form()
-					   	const popup_view_render = popup_view.find(".eael-popup-details-render");
+							   popup_details.find(".variations_form").wc_variation_form()
+							   const popup_view_render = popup_view.find(".eael-popup-details-render");
 
-					   	popup_view.find(".eael-popup-details-render").html(popup_details);
-					   	popup_view_render.addClass("elementor-"+quickview_setting.page_id)
-					   	popup_view_render.children().addClass("elementor-element elementor-element-"+quickview_setting.widget_id)
-					   	popup_view.find(".woocommerce-product-gallery").wc_product_gallery();
+							   popup_view.find(".eael-popup-details-render").html(popup_details);
+							   popup_view_render.addClass("elementor-" + quickview_setting.page_id)
+							   popup_view_render.children().addClass("elementor-element elementor-element-" + quickview_setting.widget_id)
+							   popup_view.find(".woocommerce-product-gallery").wc_product_gallery();
 
-					   	if (popup_details.height() > 400) {
-						   popup_details.css("height", "75vh");
-					   	} else {
-						   popup_details.css("height", "auto");
-					   	}
-				   }
-			   },
-		   });
+							   if (popup_details.height() > 400) {
+								   popup_details.css("height", "75vh");
+							   } else {
+								   popup_details.css("height", "auto");
+							   }
+						   }
+					   },
+				   });
 		});
 
 		$(document).on(
@@ -236,13 +235,13 @@ ea.hooks.addAction("init", "ea", () => {
 					product_id = $(this).val(),
 					variation_id =
 						$this
-							.closest("form.cart")
-							.find('input[name="variation_id"]')
-							.val() || "",
-					quantity = $this
 						.closest("form.cart")
-						.find('input[name="quantity"]')
-						.val(),
+						.find('input[name="variation_id"]')
+						.val() || "",
+					quantity = $this
+					.closest("form.cart")
+					.find('input[name="quantity"]')
+					.val(),
 					items = $this.closest("form.cart.grouped_form"),
 					form = $this.closest("form.cart"),
 					product_data = [];
@@ -277,36 +276,36 @@ ea.hooks.addAction("init", "ea", () => {
 				$this.removeClass("eael-addtocart-added");
 				$this.addClass("eael-addtocart-loading");
 				$.ajax({
-					url: localize.ajaxurl,
-					type: "post",
-					data: {
-						action: "eael_product_add_to_cart",
-						product_data: product_data,
-						eael_add_to_cart_nonce: localize.nonce,
-					},
-					success: function (response) {
-						if (response.success) {
-							$(document.body).trigger("wc_fragment_refresh");
-							$this.removeClass("eael-addtocart-loading");
-							$this.addClass("eael-addtocart-added");
-						}
-					},
-				});
+						   url: localize.ajaxurl,
+						   type: "post",
+						   data: {
+							   action: "eael_product_add_to_cart",
+							   product_data: product_data,
+							   eael_add_to_cart_nonce: localize.nonce,
+						   },
+						   success: function (response) {
+							   if (response.success) {
+								   $(document.body).trigger("wc_fragment_refresh");
+								   $this.removeClass("eael-addtocart-loading");
+								   $this.addClass("eael-addtocart-added");
+							   }
+						   },
+					   });
 			}
 		);
 
 		$(document).on("click", ".eael-product-popup-close", function (event) {
 			event.stopPropagation();
 			$(".eael-product-popup")
-				.addClass("eael-product-modal-removing")
-				.removeClass("eael-product-popup-ready");
+			.addClass("eael-product-modal-removing")
+			.removeClass("eael-product-popup-ready");
 		});
 		$(document).on("click", function (event) {
 			if (event.target.closest(".eael-product-popup-details")) return;
 			$(".eael-product-popup.eael-product-zoom-in.eael-product-popup-ready")
-				.addClass("eael-product-modal-removing")
-				.removeClass("eael-product-popup-ready");
-				//
+			.addClass("eael-product-modal-removing")
+			.removeClass("eael-product-popup-ready");
+			//
 		});
 
 		if (isEditMode) {
@@ -318,20 +317,20 @@ ea.hooks.addAction("init", "ea", () => {
 	};
 
 	const swiperLoader = (swiperElement, swiperConfig) => {
-		if ( 'undefined' === typeof Swiper ) {
+		if ('undefined' === typeof Swiper) {
 			const asyncSwiper = elementorFrontend.utils.swiper;
-			return new asyncSwiper( swiperElement, swiperConfig ).then( ( newSwiperInstance ) => {
-				return  newSwiperInstance;
-			} );
+			return new asyncSwiper(swiperElement, swiperConfig).then((newSwiperInstance) => {
+				return newSwiperInstance;
+			});
 		} else {
-			return swiperPromise( swiperElement, swiperConfig );
+			return swiperPromise(swiperElement, swiperConfig);
 		}
 	}
 
-	const swiperPromise =  (swiperElement, swiperConfig) => {
+	const swiperPromise = (swiperElement, swiperConfig) => {
 		return new Promise((resolve, reject) => {
-			const swiperInstance =  new Swiper( swiperElement, swiperConfig );
-			resolve( swiperInstance );
+			const swiperInstance = new Swiper(swiperElement, swiperConfig);
+			resolve(swiperInstance);
 		});
 	}
 
