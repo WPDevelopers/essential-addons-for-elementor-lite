@@ -69,6 +69,10 @@ $theme-preset4: #597dfc;
     }
 
     .eael-woo-product-carousel{
+        &:not(.swiper-container-initialized) .eael-product-carousel {
+            width: 350px;
+            height: 450px
+        }
         .eael-product-carousel {
             direction: ltr;
         }
