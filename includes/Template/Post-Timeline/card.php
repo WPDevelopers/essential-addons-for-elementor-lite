@@ -9,8 +9,9 @@ if (!defined('ABSPATH')) {
 
 $image = '';
 if ($settings['eael_show_image'] == 'yes' && has_post_thumbnail()) {
-	$image = '<div class="eael-timeline-post-image"><img src="'. wp_get_attachment_image_url(get_post_thumbnail_id(),
-			$settings['image_size']) .'"></div>';
+	$image = '<div class="eael-timeline-post-image" style="background-image: url('. wp_get_attachment_image_url
+		(get_post_thumbnail_id(),
+			$settings['image_size']) .')"></div>';
 }
 
 

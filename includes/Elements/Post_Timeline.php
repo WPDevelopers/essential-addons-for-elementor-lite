@@ -175,10 +175,11 @@ class Post_Timeline extends Widget_Base
 		    'eael_post_timeline_content_heading',
 		    [
 			    'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::DIMENSIONS,
+			    'type' => Controls_Manager::HEADING,
 			    'condition'   => [
 				    'eael_dynamic_template_Layout' => 'card',
 			    ],
+			    'separator' => 'before',
 		    ]
 	    );
 
@@ -198,10 +199,41 @@ class Post_Timeline extends Widget_Base
 	    );
 
 	    $this->add_control(
+		    'eael_post_timeline_image_heading',
+		    [
+			    'label' => esc_html__('Image', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::HEADING,
+			    'separator' => 'before',
+			    'condition'   => [
+				    'eael_dynamic_template_Layout!' => 'default',
+			    ],
+		    ]
+	    );
+
+	    $this->add_responsive_control(
+		    'eael_timeline_image_height',
+		    [
+			    'label' => esc_html__('Height', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SLIDER,
+			    'range' => [
+				    '%' => [
+					    'max' => 50,
+				    ],
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-product-grid.list .eael-product-wrap .product-image-wrap' => 'width: {{SIZE}}%;',
+			    ],
+			    'condition'   => [
+				    'eael_dynamic_template_Layout!' => 'default',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
 		    'eael_post_timeline_arrow_heading',
 		    [
 			    'label' => esc_html__('Arrow', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::DIMENSIONS,
+			    'type' => Controls_Manager::HEADING,
 		    ]
 	    );
 
@@ -229,8 +261,8 @@ class Post_Timeline extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-timeline-post-inner'                                          => 'border-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-timeline-post-inner::after'                                   => 'border-left-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner::after' => 'border-right-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-timeline-post-inner::after'                                   => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}}',
+//                    '{{WRAPPER}} .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner::after' => 'border-right-color: {{VALUE}};',
                 ],
                 'condition'   => [
 	                'eael_dynamic_template_Layout!' => 'default',
@@ -413,10 +445,31 @@ class Post_Timeline extends Widget_Base
 		    [
 			    'name'     => 'eael_timeline_time_typography',
 			    'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-			    'global' => [
-				    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-			    ],
 			    'selector' => '{{WRAPPER}} time',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_timeline_time_padding',
+		    [
+			    'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::DIMENSIONS,
+			    'size_units' => ['px', '%'],
+			    'selectors' => [
+				    '{{WRAPPER}} time' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_timeline_time_border_radius',
+		    [
+			    'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::DIMENSIONS,
+			    'size_units' => ['px', '%'],
+			    'selectors' => [
+				    '{{WRAPPER}} time' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
 		    ]
 	    );
 
