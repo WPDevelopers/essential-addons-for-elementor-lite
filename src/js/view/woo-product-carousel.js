@@ -198,7 +198,6 @@ ea.hooks.addAction("init", "ea", () => {
 							   popup_view.find(".eael-popup-details-render").html(popup_details);
 							   const product_gallery = popup_view.find(".woocommerce-product-gallery");
 							   product_gallery.css("opacity",1);
-							   product_gallery.wc_product_gallery();
 							   popup_view_render.addClass("elementor-" + quickview_setting.page_id)
 							   popup_view_render.children().addClass("elementor-element elementor-element-" + quickview_setting.widget_id)
 
@@ -207,6 +206,7 @@ ea.hooks.addAction("init", "ea", () => {
 							   } else {
 								   popup_details.css("height", "auto");
 							   }
+							   product_gallery.wc_product_gallery();
 						   }
 					   },
 				   });
