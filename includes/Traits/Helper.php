@@ -799,29 +799,34 @@ trait Helper
         }
     }
 
+	/**
+	 * Retrieve product quick view data
+     *
+     * @return string
+	 */
     public function eael_product_quickview_popup(){
 	    //check nonce
-        check_ajax_referer( 'essential-addons-elementor', 'security' );
-        $widget_id = sanitize_key( $_POST[ 'widget_id' ] );
-        $product_id = absint( $_POST[ 'product_id' ] );
-        $page_id = absint( $_POST[ 'page_id' ] );
-    
-        if ( $widget_id == '' && $product_id == '' && $page_id == '' ) {
-            wp_send_json_error();
-        }
-    
-        global $post, $product;
-        $product = wc_get_product( $product_id );
-        $post = get_post( $product_id );
-        setup_postdata( $post );
-        
-        $settings = $this->eael_get_widget_settings( $page_id, $widget_id );
-        ob_start();
-        HelperClass::eael_product_quick_view( $product, $settings, $widget_id );
-        $data = ob_get_clean();
-        wp_reset_postdata();
-        
-        wp_send_json_success( $data );
+	    check_ajax_referer( 'essential-addons-elementor', 'security' );
+	    $widget_id  = sanitize_key( $_POST[ 'widget_id' ] );
+	    $product_id = absint( $_POST[ 'product_id' ] );
+	    $page_id    = absint( $_POST[ 'page_id' ] );
+
+	    if ( $widget_id == '' && $product_id == '' && $page_id == '' ) {
+		    wp_send_json_error();
+	    }
+
+	    global $post, $product;
+	    $product = wc_get_product( $product_id );
+	    $post    = get_post( $product_id );
+	    setup_postdata( $post );
+
+	    $settings = $this->eael_get_widget_settings( $page_id, $widget_id );
+	    ob_start();
+	    HelperClass::eael_product_quick_view( $product, $settings, $widget_id );
+	    $data = ob_get_clean();
+	    wp_reset_postdata();
+
+	    wp_send_json_success( $data );
     }
 	
 }
