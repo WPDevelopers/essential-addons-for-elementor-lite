@@ -39,15 +39,36 @@ class Woo_Product_Carousel extends Widget_Base {
             add_filter( 'body_class', [$this, 'add_slider_body_class'] );
         }
     }
-    
+
+	/**
+	 * get widget name
+     *
+     * Retrieve Woo Product Carousel widget name.
+     *
+	 * @return string
+	 */
     public function get_name() {
         return 'eael-woo-product-carousel';
     }
-    
+
+	/**
+	 * get widget title
+     *
+     * Retrieve Woo Product Carousel widget title.
+     *
+	 * @return string
+	 */
     public function get_title() {
         return esc_html__( 'Woo Product Carousel', 'essential-addons-for-elementor-lite' );
     }
-    
+
+	/**
+	 * get widget icon
+	 *
+	 * Retrieve Woo Product Carousel widget icon.
+	 *
+	 * @return string
+	 */
     public function get_icon() {
         return 'eaicon-product-carousel';
     }
@@ -55,7 +76,14 @@ class Woo_Product_Carousel extends Widget_Base {
     public function get_categories() {
         return ['essential-addons-for-elementor-lite'];
     }
-    
+
+	/**
+	 * get widget keywords
+	 *
+	 * Retrieve list of keywords the widget belongs to.
+     *
+	 * @return string[]
+	 */
     public function get_keywords() {
         return [
             'woo',
@@ -135,8 +163,15 @@ class Woo_Product_Carousel extends Widget_Base {
             'top-products'          => esc_html__( 'Top Rated Products', 'essential-addons-for-elementor-lite' ),
         ] );
     }
-    
-    protected function _register_controls() {
+
+	/**
+     * Register Woo Product carousel widget controls.
+     *
+     * Adds different input fields to allow the user to change and customize the widget settings.
+     *
+	 * register_controls
+	 */
+    protected function register_controls() {
 	    $this->init_content_wc_notice_controls();
         if ( !function_exists( 'WC' ) ) {
             return;
@@ -389,7 +424,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			    'default'     => 'slide',
 			    'options'     => [
 				    'slide'     => __('Slide', 'essential-addons-elementor'),
-				    'coverflow' => __('Coverflow', 'essential-addons-elementor'),
+				    'coverflow'  => __('Coverflow', 'essential-addons-elementor'),
 			    ],
 		    ]
 	    );
@@ -2732,6 +2767,7 @@ class Woo_Product_Carousel extends Widget_Base {
         if ( Plugin::$instance->documents->get_current() ) {
             $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
         }
+
         // render dom
         $this->add_render_attribute( 'container', [
             'class'          => [
@@ -2987,14 +3023,14 @@ class Woo_Product_Carousel extends Widget_Base {
 	 * @return array
 	 */
     public function product_query_builder(){
-	    $settings = $this->get_settings_for_display();
-	    $widget_id = $this->get_id();
+	    $settings                     = $this->get_settings_for_display();
+	    $widget_id                    = $this->get_id();
 	    $settings[ 'eael_widget_id' ] = $widget_id;
-	    $order_by = $settings[ 'orderby' ];
-	    $filter = $settings[ 'eael_product_carousel_product_filter' ];
-	    $args = [
+	    $order_by                     = $settings[ 'orderby' ];
+	    $filter                        = $settings[ 'eael_product_carousel_product_filter' ];
+	    $args                         = [
 		    'post_type'      => 'product',
-		    'posts_per_page' => $settings[ 'eael_product_carousel_products_count' ] ? : 4,
+		    'posts_per_page' => $settings[ 'eael_product_carousel_products_count' ] ?: 4,
 		    'order'          => $settings[ 'order' ],
 		    'offset'         => $settings[ 'product_offset' ],
 		    'tax_query'      => [
@@ -3002,22 +3038,22 @@ class Woo_Product_Carousel extends Widget_Base {
 			    [
 				    'taxonomy' => 'product_visibility',
 				    'field'     => 'name',
-				    'terms'    => ['exclude-from-search', 'exclude-from-catalog'],
+				    'terms'    => [ 'exclude-from-search', 'exclude-from-catalog' ],
 				    'operator' => 'NOT IN',
 			    ],
 		    ],
 	    ];
 
-	    if ( $order_by == '_price' || $order_by == '_sku') {
+	    if ( $order_by == '_price' || $order_by == '_sku' ) {
 		    $args[ 'orderby' ]  = 'meta_value_num';
 		    $args[ 'meta_key' ] = $order_by;
 	    } else {
-		    $args[ 'orderby' ]  = $order_by;
+		    $args[ 'orderby' ] = $order_by;
 	    }
 
 	    if ( $filter == 'featured-products' ) {
-		    $count                          = isset( $args[ 'tax_query' ] ) ? count( $args[ 'tax_query' ] ) : 0;
-		    $args[ 'tax_query' ][$count] =
+		    $count                         = isset( $args[ 'tax_query' ] ) ? count( $args[ 'tax_query' ] ) : 0;
+		    $args[ 'tax_query' ][ $count ] =
 			    [
 				    'taxonomy' => 'product_visibility',
 				    'field'     => 'name',
@@ -3038,7 +3074,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	    }
 
 	    if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' ) {
-		    $args[ 'meta_query' ] = ['relation' => 'AND'];
+		    $args[ 'meta_query' ]   = [ 'relation' => 'AND' ];
 		    $args[ 'meta_query' ][] = [
 			    'key'   => '_stock_status',
 			    'value' => 'instock'
@@ -3065,15 +3101,15 @@ class Woo_Product_Carousel extends Widget_Base {
 	    }
 
 
-	    $taxonomies = get_taxonomies(['object_type' => ['product']], 'objects');
+	    $taxonomies      = get_taxonomies( [ 'object_type' => [ 'product' ] ], 'objects' );
 	    $tax_query_count = isset( $args[ 'meta_query' ] ) ? count( $args[ 'meta_query' ] ) : 0;
-	    foreach ($taxonomies as $object) {
+	    foreach ( $taxonomies as $object ) {
 		    $setting_key = $object->name . '_ids';
-		    if (!empty($settings[$setting_key])) {
-			    $args['tax_query'][$tax_query_count] = [
+		    if ( !empty( $settings[ $setting_key ] ) ) {
+			    $args[ 'tax_query' ][ $tax_query_count ] = [
 				    'taxonomy' => $object->name,
-				    'field' => 'term_id',
-				    'terms' => $settings[$setting_key],
+				    'field'     => 'term_id',
+				    'terms'    => $settings[ $setting_key ],
 			    ];
 		    }
 		    $tax_query_count++;
