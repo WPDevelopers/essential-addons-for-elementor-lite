@@ -456,7 +456,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		    [
 			    'label'       => __( 'Rotate', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::SLIDER,
-			    'default'     => ['size' => 0],
+			    'default'     => ['size' => 50],
 			    'range'       => [
 				    'px' => [
 					    'min'  => 0,
@@ -474,7 +474,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		    [
 			    'label'       => __( 'Depth', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::SLIDER,
-			    'default'     => ['size' => 200],
+			    'default'     => ['size' => 100],
 			    'range'       => [
 				    'px' => [
 					    'min'  => 100,
@@ -492,7 +492,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		    [
 			    'label'       => __( 'Stretch', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::SLIDER,
-			    'default'     => ['size' => 80],
+			    'default'     => ['size' => 10],
 			    'range'       => [
 				    'px' => [
 					    'min'  => 0,
