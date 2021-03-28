@@ -1256,6 +1256,10 @@ $theme-preset4: #597dfc;
     justify-content: center;
     z-index: -1;
 
+    .woocommerce-product-gallery {
+        min-width: 310px;
+        min-height: 310px;
+    }
 
     &.eael-product-popup-ready {
         z-index: 999;
