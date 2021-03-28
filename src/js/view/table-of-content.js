@@ -314,22 +314,22 @@
 				"</div>"
 			);
 		}
-		if (typeof ea !== 'undefined'){
-			ea.hooks.addAction("editMode.init", "ea", () => {
-				elementorFrontend.hooks.addAction(
-					"frontend/element_ready/widget",
-					function ($scope, jQuery) {
-						var tocLoad = jQuery("#eael-toc #eael-toc-list");
-						var TocList = tocLoad.find("li.eael-first-child");
-						if (TocList.length < 1 && tocLoad.length >= 1) {
-							var tagList = jQuery("#eael-toc").data("eaeltoctag");
-							if (tagList) {
-								eael_toc_content(eael_toc_check_content(), tagList);
-							}
+
+
+		if (typeof ea !== 'undefined' && ea.isEditMode){
+			elementorFrontend.hooks.addAction(
+				"frontend/element_ready/widget",
+				function ($scope, jQuery) {
+					var tocLoad = jQuery("#eael-toc #eael-toc-list");
+					var TocList = tocLoad.find("li.eael-first-child");
+					if (TocList.length < 1 && tocLoad.length >= 1) {
+						var tagList = jQuery("#eael-toc").data("eaeltoctag");
+						if (tagList) {
+							eael_toc_content(eael_toc_check_content(), tagList);
 						}
 					}
-				);
-			})
+				}
+			);
 		}
 
 		const editMode = (typeof isEditMode !== 'undefined')?isEditMode:false;
