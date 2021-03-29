@@ -175,8 +175,8 @@ ea.hooks.addAction("init", "ea", () => {
 		function handleError(xhr, err) {
 			console.log(err.toString());
 		}
-		// pagination
 
+		// pagination
 		$(".eael-woo-pagination", $scope).on("click", "a", function (e) {
 			e.preventDefault();
 
@@ -209,6 +209,11 @@ ea.hooks.addAction("init", "ea", () => {
 					$(widgetclass + " .woocommerce-product-gallery").each(function () {
 						$(this).wc_product_gallery();
 					});
+
+					$('html, body').animate({
+						scrollTop: $(widgetclass + " .eael-product-grid").offset().top
+					}, "fast");
+
 				},
 				complete: function () {
 					$(widgetclass).removeClass("eael-product-loader");
@@ -233,6 +238,10 @@ ea.hooks.addAction("init", "ea", () => {
 					$(widgetclass + " .eael-product-grid .eael-woo-pagination").html(
 						response
 					);
+
+					$('html, body').animate({
+						scrollTop: $(widgetclass + " .eael-product-grid").offset().top
+					}, "fast");
 				},
 			});
 		});
