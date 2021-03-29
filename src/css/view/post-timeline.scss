@@ -129,7 +129,7 @@
 	width: 100%;
 }
 
-.eael-timeline-post-title h2 {
+.eael-timeline-post-title * {
 	color: #fff;
 	font-size: 20px;
 	font-weight: bold;
@@ -138,6 +138,7 @@
 	padding: 0 25px;
 	text-align: left;
 	text-transform: uppercase;
+	margin-bottom: 15px;
 }
 
 .eael-timeline-post-excerpt {
@@ -272,7 +273,7 @@
 	.eael-timeline-post-title {
 		bottom: 50px;
 	}
-	.eael-timeline-post-title h2 {
+	.eael-timeline-post-title * {
 		font-size: 0.8em;
 		line-height: 1.2em;
 	}
@@ -490,7 +491,7 @@
 	.eael-timeline-post-title {
 		bottom: 0;
 
-		h2 {
+		* {
 			margin-top: 0;
 			padding: 0;
 		}

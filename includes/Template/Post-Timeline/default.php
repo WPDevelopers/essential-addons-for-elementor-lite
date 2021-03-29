@@ -1,4 +1,7 @@
 <?php
+
+use \Essential_Addons_Elementor\Classes\Helper;
+
 /**
  * Template Name: Default
  */
@@ -6,6 +9,8 @@
 if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
+
+$title_tag = isset($settings['title_tag']) ? Helper::eael_validate_html_tag($settings['title_tag']) : 'h2';
 
 echo '<article class="eael-timeline-post eael-timeline-column">
     <div class="eael-timeline-bullet"></div>
@@ -25,7 +30,7 @@ echo '<article class="eael-timeline-post eael-timeline-column">
 
             if ($settings['eael_show_title']) {
                 echo '<div class="eael-timeline-post-title">
-                    <h2>' . get_the_title() . '</h2>
+                    <'.$title_tag.'>' . get_the_title() . '</'.$title_tag.'>
                 </div>';
             }
         echo '</a>

@@ -1,4 +1,7 @@
 <?php
+
+use \Essential_Addons_Elementor\Classes\Helper;
+
 /**
  * Template Name: Card
  */
@@ -14,6 +17,7 @@ if ($settings['eael_show_image'] == 'yes' && has_post_thumbnail()) {
 			$settings['image_size']) .')"></div>';
 }
 
+$title_tag = isset($settings['title_tag']) ? Helper::eael_validate_html_tag($settings['title_tag']) : 'h2';
 
 echo '<article class="eael-timeline-post">
     <div class="eael-timeline-bullet"></div>
@@ -27,8 +31,8 @@ echo '<article class="eael-timeline-post">
 
 				if ( $settings['eael_show_title'] ) {
 					echo '<div class="eael-timeline-post-title">
-				                    <h2>' . get_the_title() . '</h2>
-				                </div>';
+		                    <'.$title_tag.'>' . get_the_title() . '</'.$title_tag.'>
+		                </div>';
 				}
 				if ( $settings['eael_show_excerpt'] ) {
 					echo '<div class="eael-timeline-post-excerpt">';
