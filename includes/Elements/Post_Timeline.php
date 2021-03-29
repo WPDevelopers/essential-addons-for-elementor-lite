@@ -216,12 +216,12 @@ class Post_Timeline extends Widget_Base
 			    'label' => esc_html__('Height', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::SLIDER,
 			    'range' => [
-				    '%' => [
-					    'max' => 50,
+				    'px' => [
+					    'max' => 500,
 				    ],
 			    ],
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-product-grid.list .eael-product-wrap .product-image-wrap' => 'width: {{SIZE}}%;',
+				    '{{WRAPPER}} .eael-timeline-post-image' => 'height: {{SIZE}}PX;',
 			    ],
 			    'condition'   => [
 				    'eael_dynamic_template_Layout!' => 'default',
