@@ -87,10 +87,12 @@ trait Controls
             'posts_ids',
             [
                 'label' => __('Search & Select', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT2,
+                'type' => 'eael-select2',
                 'options' => ControlsHelper::get_post_list(),
                 'label_block' => true,
-                'multiple' => true,
+                'multiple'    => true,
+                'source_name' => 'post_type',
+                'source_type' => 'any',
                 'condition' => [
                     'post_type' => 'by_id',
                 ],
