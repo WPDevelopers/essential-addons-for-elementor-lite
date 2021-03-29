@@ -230,6 +230,21 @@ class Post_Timeline extends Widget_Base
 	    );
 
 	    $this->add_control(
+		    'eael_timeline_img_border_radius',
+		    [
+			    'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::DIMENSIONS,
+			    'size_units' => ['px', '%'],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-timeline-post-image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
+			    'condition'   => [
+				    'eael_dynamic_template_Layout!' => 'default',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
 		    'eael_post_timeline_arrow_heading',
 		    [
 			    'label' => esc_html__('Arrow', 'essential-addons-for-elementor-lite'),
