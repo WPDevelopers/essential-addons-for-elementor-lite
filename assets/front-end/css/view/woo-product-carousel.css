@@ -351,7 +351,7 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
-.eael-woo-product-carousel-container.preset-4 .eael-product-carousel .product-details .eael-product-title {
+.eael-woo-product-carousel-container.preset-4 .eael-product-carousel .product-details .eael-product-title-wrap {
   width: 60%;
   text-align: left;
 }
@@ -1005,6 +1005,10 @@
   -ms-flex-pack: center;
   justify-content: center;
   z-index: -1;
+}
+.eael-product-popup .woocommerce-product-gallery {
+  min-width: 310px;
+  min-height: 310px;
 }
 .eael-product-popup.eael-product-popup-ready {
   z-index: 999;
