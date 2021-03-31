@@ -1,8 +1,8 @@
 
 $theme-preset1: #597dfc;
-$theme-preset2: #597dfc;
-$theme-preset3: #15da8b;
-$theme-preset4: #597dfc;
+$theme-preset2: #5f3ae0;
+$theme-preset3: #5f3ae0;
+$theme-preset4: #ec3b75;
 
 .eael-woo-product-carousel-container {
     //theme
@@ -206,6 +206,7 @@ $theme-preset4: #597dfc;
             .eael-product-price {
                 width: 40%;
                 text-align: right;
+                color: $theme-preset1;
             }
         }
 
@@ -305,7 +306,7 @@ $theme-preset4: #597dfc;
             }
 
             .carousel-overlay {
-                background: rgba(0,0,0,0.7);
+                background: #5f3ae069;
                 position: absolute;
                 height: 100%;
                 width: 100%;
@@ -329,12 +330,22 @@ $theme-preset4: #597dfc;
     }
 
     &.preset-3 {
-        .swiper-pagination {
-            &.dots-preset-4 .swiper-pagination-bullet {
-                //border-radius: 2px;
-                border: 1px solid $theme-preset3;
-            }
 
+        &.swiper-container-wrap-dots-outside,
+        &.swiper-container-wrap-dots-inside {
+            .swiper-pagination {
+                &.dots-preset-4 .swiper-pagination-bullet {
+                    //border-radius: 2px;
+                    border: 1px solid $theme-preset3;
+
+                    &.swiper-pagination-bullet-active {
+                        background: $theme-preset3;
+                    }
+                }
+            }
+        }
+
+        .swiper-pagination {
             .swiper-pagination-bullet-active {
                 background: $theme-preset3;
             }
@@ -387,6 +398,8 @@ $theme-preset4: #597dfc;
             }
 
             .eael-product-price {
+                color: $theme-preset3;
+
                 //del .amount {
                 //    color: #fff;
                 //}
@@ -503,6 +516,24 @@ $theme-preset4: #597dfc;
                     opacity: 1;
                     justify-content: flex-start;
                     margin: 10px 0 0;
+
+                    li a {
+                        color: $theme-preset4;
+
+                        &:hover {
+                            background: $theme-preset4;
+                            color: #fff;
+                        }
+
+                        &.button.add_to_cart_button {
+                            color: $theme-preset4;
+
+                            &:hover {
+                                background: $theme-preset4;
+                                color: #fff;
+                            }
+                        }
+                    }
                 }
             }
 
@@ -524,7 +555,7 @@ $theme-preset4: #597dfc;
             }
 
             .carousel-overlay {
-                background: rgba(0,0,0,0.7);
+                background: rgb(23 70 236 / 55%);
                 position: absolute;
                 height: 100%;
                 width: 100%;
