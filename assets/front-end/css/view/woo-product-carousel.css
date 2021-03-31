@@ -351,7 +351,7 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
-.eael-woo-product-carousel-container.preset-4 .eael-product-carousel .product-details .eael-product-title {
+.eael-woo-product-carousel-container.preset-4 .eael-product-carousel .product-details .eael-product-title-wrap {
   width: 60%;
   text-align: left;
 }
