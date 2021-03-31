@@ -214,33 +214,27 @@ class Woo_Product_Carousel extends Widget_Base {
 	}
     
     protected function eael_woo_product_carousel_layout() {
-        $this->start_controls_section(
-            'eael_section_product_carousel_layouts',
-            [
-                'label' => esc_html__( 'Layouts', 'essential-addons-for-elementor-lite' ),
-            ]
-        );
-        
-        $this->add_control(
-            'eael_dynamic_template_layout',
-            [
-                'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
-                'type'    => Controls_Manager::SELECT,
-                'default' => 'preset-1',
-                'options' => $this->get_template_list_for_dropdown(true),
-            ]
-        );
-        
-        $this->end_controls_section();
+
     }
     
     protected function eael_woo_product_carousel_content() {
-        $this->start_controls_section(
-            'eael_section_product_carousel_content',
-            [
-                'label' => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
-            ]
-        );
+
+	    $this->start_controls_section(
+		    'eael_section_product_carousel_layouts',
+		    [
+			    'label' => esc_html__( 'Layout Settings', 'essential-addons-for-elementor-lite' ),
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_dynamic_template_layout',
+		    [
+			    'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
+			    'type'    => Controls_Manager::SELECT,
+			    'default' => 'preset-1',
+			    'options' => $this->get_template_list_for_dropdown(true),
+		    ]
+	    );
 
 	    $this->add_control(
 		    'eael_product_carousel_show_title',
@@ -403,6 +397,17 @@ class Woo_Product_Carousel extends Widget_Base {
 		    ]
 	    );
 
+	    $this->add_control(
+		    'eael_product_carousel_quick_view',
+		    [
+			    'label'        => esc_html__( 'Show Quick view?', 'essential-addons-for-elementor-lite' ),
+			    'type'         => Controls_Manager::SWITCHER,
+			    'return_value' => 'yes',
+			    'default'      => 'yes',
+			    'separator'    => 'after',
+		    ]
+	    );
+
         $this->end_controls_section();
     }
     
@@ -411,7 +416,7 @@ class Woo_Product_Carousel extends Widget_Base {
         $this->start_controls_section(
             'section_additional_options',
             [
-                'label' => __( 'Carousel', 'essential-addons-for-elementor-lite' ),
+                'label' => __( 'Carousel Settings', 'essential-addons-for-elementor-lite' ),
             ]
         );
 
@@ -692,6 +697,8 @@ class Woo_Product_Carousel extends Widget_Base {
 			    'separator' => 'before',
 		    ]
 	    );
+
+
         
         $this->end_controls_section();
     }
@@ -765,25 +772,7 @@ class Woo_Product_Carousel extends Widget_Base {
     }
     
     protected function eael_product_action_buttons() {
-        $this->start_controls_section(
-            'eael_section_product_action_buttons',
-            [
-                'label' => esc_html__( 'Buttons', 'essential-addons-for-elementor-lite' ),
-            ]
-        );
-        
-        $this->add_control(
-            'eael_product_carousel_quick_view',
-            [
-                'label'        => esc_html__( 'Show Quick view?', 'essential-addons-for-elementor-lite' ),
-                'type'         => Controls_Manager::SWITCHER,
-                'return_value' => 'yes',
-                'default'      => 'yes',
-                'separator'    => 'after',
-            ]
-        );
-        
-        $this->end_controls_section();
+
     }
     
     protected function eael_product_badges() {
