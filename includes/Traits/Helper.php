@@ -699,14 +699,23 @@ trait Helper
 	public function eael_product_add_to_cart () {
 
 		$ajax   = wp_doing_ajax();
-
+		$atts = $_POST['cart_item_data'];
+		$variation = [];
+		if(!empty($atts)){
+			foreach ($atts as $key => $value) {
+				if (preg_match("/^attribute*/", $value['name'])) {
+					$variation[$value['name']] = $value['value'];
+				}
+			}
+		}
 		if(isset($_POST['product_data'])){
 			foreach ($_POST['product_data'] as $item){
 				$product_id   = isset( $item['product_id'] ) ? sanitize_text_field( $item['product_id'] ) : 0;
 				$variation_id = isset( $item['variation_id'] ) ? sanitize_text_field( $item['variation_id'] ) : 0;
 				$quantity     = isset( $item['quantity'] ) ? sanitize_text_field( $item['quantity'] ) : 0;
+
 				if ( $variation_id ) {
-					WC()->cart->add_to_cart( $product_id, $quantity, $variation_id );
+					WC()->cart->add_to_cart( $product_id, $quantity, $variation_id, $variation );
 				} else {
 					WC()->cart->add_to_cart( $product_id, $quantity );
 				}
@@ -797,6 +806,36 @@ trait Helper
         } else {
             wp_send_json_error();
         }
+    }
+
+	/**
+	 * Retrieve product quick view data
+     *
+     * @return string
+	 */
+    public function eael_product_quickview_popup(){
+	    //check nonce
+	    check_ajax_referer( 'essential-addons-elementor', 'security' );
+	    $widget_id  = sanitize_key( $_POST[ 'widget_id' ] );
+	    $product_id = absint( $_POST[ 'product_id' ] );
+	    $page_id    = absint( $_POST[ 'page_id' ] );
+
+	    if ( $widget_id == '' && $product_id == '' && $page_id == '' ) {
+		    wp_send_json_error();
+	    }
+
+	    global $post, $product;
+	    $product = wc_get_product( $product_id );
+	    $post    = get_post( $product_id );
+	    setup_postdata( $post );
+
+	    $settings = $this->eael_get_widget_settings( $page_id, $widget_id );
+	    ob_start();
+	    HelperClass::eael_product_quick_view( $product, $settings, $widget_id );
+	    $data = ob_get_clean();
+	    wp_reset_postdata();
+
+	    wp_send_json_success( $data );
     }
 	
 }

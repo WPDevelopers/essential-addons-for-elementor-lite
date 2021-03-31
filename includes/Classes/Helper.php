@@ -634,6 +634,25 @@ class Helper
 
     }
 
+	/**
+	 * Returns product categories list
+	 *
+	 * @return string
+	 */
+	public function get_product_categories_list() {
+		global $product;
+
+		if ( ! is_a( $product, 'WC_Product' ) ) {
+			return;
+		}
+
+		$separator = '';
+		$before    = '<ul class="eael-product-cats"><li>';
+		$after     = '</li></ul>';
+
+		return get_the_term_list( $product->get_id(), 'product_cat', $before, $separator, $after );
+	}
+
     /**
      * This function is responsible for counting doc post under a category.
      *
@@ -891,7 +910,12 @@ class Helper
 		}
 	}
 
-	public static function eael_product_quick_view ($product, $settings, $widget_id) { ?>
+	public static function eael_product_quick_view ($product, $settings, $widget_id) {
+		$sale_badge_align = isset( $settings['eael_product_sale_badge_alignment'] ) ? $settings['eael_product_sale_badge_alignment'] : '';
+		$sale_badge_preset = isset($settings['eael_product_sale_badge_preset']) ? $settings['eael_product_sale_badge_preset'] : '';
+		$sale_text = !empty($settings['eael_product_carousel_sale_text']) ? $settings['eael_product_carousel_sale_text'] : 'Sale!';
+		$stockout_text = !empty($settings['eael_product_carousel_stockout_text']) ? $settings['eael_product_carousel_stockout_text'] : 'Stock Out';
+	    ?>
 		<div id="eaproduct<?php echo $widget_id.$product->get_id(); ?>" class="eael-product-popup
 		eael-product-zoom-in woocommerce">
 			<div class="eael-product-modal-bg"></div>
@@ -899,8 +923,7 @@ class Helper
 				<div id="product-<?php the_ID(); ?>" <?php post_class( 'product' ); ?>>
 					<div class="eael-product-image-wrap">
 						<?php
-						echo ($product->is_on_sale() ? '<span class="eael-onsale '.$settings['eael_product_sale_badge_preset'].'">' . __('Sale!',
-								'essential-addons-for-elementor-lite') . '</span>' : '');
+						echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'. $stockout_text .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . $sale_text . '</span>' : '') );
 						do_action( 'eael_woo_single_product_image' );
 						?>
 					</div>
