@@ -2962,6 +2962,10 @@ class Woo_Product_Carousel extends Widget_Base {
 				while ( $query->have_posts() ) {
 					$query->the_post();
 					$image_arr = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ),'full');
+					if(empty($image_arr)){
+						$image_arr[0] = wc_placeholder_img_src( 'full' );
+					}
+
                     echo '<div class="swiper-slide">';
                         echo '<div class="swiper-slide-container">';
                             echo '<div class="eael-pagination-thumb">';
