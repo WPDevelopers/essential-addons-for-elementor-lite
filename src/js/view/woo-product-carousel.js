@@ -77,8 +77,6 @@ ea.hooks.addAction("init", "ea", () => {
 					? $wooProductCarousel.data("stretch")
 					: 10;
 
-		// console.log($items);
-
 		const $carouselOptions = {
 			direction: "horizontal",
 			speed: $speed,
@@ -252,7 +250,6 @@ ea.hooks.addAction("init", "ea", () => {
 				if (form.hasClass("variations_form")) {
 					product_id = form.find('input[name="product_id"]').val();
 				}
-
 				if (items.length > 0) {
 					items.forEach((item, index) => {
 						var p_id = parseInt(item.name.replace(/[^\d.]/g, ""), 10);
@@ -284,6 +281,7 @@ ea.hooks.addAction("init", "ea", () => {
 							   action: "eael_product_add_to_cart",
 							   product_data: product_data,
 							   eael_add_to_cart_nonce: localize.nonce,
+							   cart_item_data: form.serializeArray(),
 						   },
 						   success: function (response) {
 							   if (response.success) {
