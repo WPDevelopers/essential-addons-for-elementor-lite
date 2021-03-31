@@ -7570,39 +7570,39 @@ msgstr ""
 msgid "%s ago"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:754
+#: ../includes/Traits/Helper.php:763
 msgid "1,000+ Stunning Templates"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:755
+#: ../includes/Traits/Helper.php:764
 msgid "Supports Elementor & Gutenberg"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:756
+#: ../includes/Traits/Helper.php:765
 msgid "Powering up 17,000+ Websites"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:757
+#: ../includes/Traits/Helper.php:766
 msgid "Cloud Collaboration with Team"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:766
+#: ../includes/Traits/Helper.php:775
 msgid "Don’t Show This Again"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:778, ../includes/templates/admin/general.php:19, ../includes/templates/admin/general.php:121
+#: ../includes/Traits/Helper.php:787, ../includes/templates/admin/general.php:19, ../includes/templates/admin/general.php:121
 msgid "Activate Templately"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:775
+#: ../includes/Traits/Helper.php:784
 msgid "Activated Templately"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:772, ../includes/templates/admin/general.php:17, ../includes/templates/admin/general.php:119
+#: ../includes/Traits/Helper.php:781, ../includes/templates/admin/general.php:17, ../includes/templates/admin/general.php:119
 msgid "Install Templately"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:781
+#: ../includes/Traits/Helper.php:790
 msgid "Submit"
 msgstr ""
 

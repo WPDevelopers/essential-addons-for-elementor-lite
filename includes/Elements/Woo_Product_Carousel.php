@@ -102,7 +102,7 @@ class Woo_Product_Carousel extends Widget_Base {
     }
     
     public function get_custom_help_url() {
-        return 'https://essential-addons.com/elementor/docs/woocommerce-product-carousel/';
+        return 'https://essential-addons.com/elementor/docs/woo-product-carousel/';
     }
     
     public function get_style_depends() {

@@ -1006,6 +1006,10 @@
   justify-content: center;
   z-index: -1;
 }
+.eael-product-popup .woocommerce-product-gallery {
+  min-width: 310px;
+  min-height: 310px;
+}
 .eael-product-popup.eael-product-popup-ready {
   z-index: 999;
   opacity: 1 !important;
