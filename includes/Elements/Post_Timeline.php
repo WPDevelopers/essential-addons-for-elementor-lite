@@ -35,7 +35,7 @@ class Post_Timeline extends Widget_Base
 
     public function get_categories()
     {
-        return ['essential-addons-elementor'];
+        return ['essential-addons-for-elementor-lite'];
     }
 
     public function get_keywords()
@@ -284,6 +284,32 @@ class Post_Timeline extends Widget_Base
                 ],
             ]
         );
+
+	    $this->add_responsive_control(
+		    'eael_timeline_arrow_alignment',
+		    [
+			    'label'     => __('Alignment', 'essential-addons-for-elementor-lite'),
+			    'type'      => Controls_Manager::CHOOSE,
+			    'options'   => [
+				    'top'       => [
+					    'title' => __( 'Top', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'eicon-v-align-top',
+				    ],
+				    'middle'    => [
+					    'title' => __( 'Middle', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'eicon-v-align-middle',
+				    ],
+				    'bottom'    => [
+					    'title' => __( 'Bottom', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'eicon-v-align-bottom',
+				    ],
+			    ],
+			    'default' => 'top',
+			    'condition'   => [
+				    'eael_dynamic_template_Layout!' => 'default',
+			    ],
+		    ]
+	    );
 
         $this->end_controls_section();
 
@@ -666,7 +692,7 @@ class Post_Timeline extends Widget_Base
             'eael_post_timeline_wrapper',
             [
                 'id'    => "eael-post-timeline-{$this->get_id()}",
-                'class' => ["eael-post-timeline", "timeline-layout-{$settings['eael_dynamic_template_Layout']}"],
+                'class' => ["eael-post-timeline", "timeline-layout-{$settings['eael_dynamic_template_Layout']}", "eael-post-timeline-arrow-{$settings['eael_timeline_arrow_alignment']}"],
             ]
         );
 
