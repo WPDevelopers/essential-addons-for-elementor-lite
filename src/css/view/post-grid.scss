@@ -247,6 +247,13 @@
 	transform: translateY(0);
 }
 
+.eael-grid-post {
+	.eael-entry-thumbnail > img {
+		height: 100%;
+		object-fit: cover;
+	}
+}
+
 /*--- Gallery Column CSS ---*/
 @media only screen and (min-width: 1025px) {
 	/* For Desktop: */
