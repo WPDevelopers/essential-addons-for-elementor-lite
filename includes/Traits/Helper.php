@@ -699,15 +699,16 @@ trait Helper
 	public function eael_product_add_to_cart () {
 
 		$ajax   = wp_doing_ajax();
-		$atts = $_POST['cart_item_data'];
+		$cart_items = isset($_POST['cart_item_data'])?$_POST['cart_item_data']:[];
 		$variation = [];
-		if(!empty($atts)){
-			foreach ($atts as $key => $value) {
+		if(!empty($cart_items)){
+			foreach ($cart_items as $key => $value) {
 				if (preg_match("/^attribute*/", $value['name'])) {
 					$variation[$value['name']] = $value['value'];
 				}
 			}
 		}
+
 		if(isset($_POST['product_data'])){
 			foreach ($_POST['product_data'] as $item){
 				$product_id   = isset( $item['product_id'] ) ? sanitize_text_field( $item['product_id'] ) : 0;

@@ -17,6 +17,7 @@ use Elementor\Plugin;
 use Elementor\Widget_Base;
 
 use Essential_Addons_Elementor\Traits\Helper;
+use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 
 class Woo_Product_Carousel extends Widget_Base {
     use Helper;
@@ -2875,6 +2876,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	    if ( $settings['direction'] == 'right' ) {
 		    $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'dir', 'rtl' );
 	    }
+	    $settings['eael_product_carousel_title_tag'] = HelperClass::eael_validate_html_tag($settings['eael_product_carousel_title_tag']);
         ?>
 
         <div <?php $this->print_render_attribute_string( 'container' ); ?> >
