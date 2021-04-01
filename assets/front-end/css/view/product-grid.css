@@ -2538,3 +2538,7 @@
   -o-transition: all 0.2s;
   transition: all 0.2s;
 }
+.theme-flexia .woocommerce ul.products li.product .woocommerce-LoopProduct-link {
+  position: unset;
+  display: unset;
+}

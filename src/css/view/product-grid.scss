@@ -2333,3 +2333,10 @@
         transition: all 0.2s;
     }
 }
+
+// Flexia theme conflict with pricing section position
+
+.theme-flexia .woocommerce ul.products li.product .woocommerce-LoopProduct-link {
+  position: unset;
+  display: unset;
+}

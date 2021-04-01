@@ -1,4 +1,5 @@
 <?php
+
 namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
@@ -10,10 +11,11 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Utils;
 use \Elementor\Widget_Base;
 use \Elementor\Repeater;
 
+
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Image_Accordion extends Widget_Base {
     public function get_name() {
@@ -29,7 +31,7 @@ class Image_Accordion extends Widget_Base {
     }
 
     public function get_categories() {
-        return ['essential-addons-elementor'];
+        return [ 'essential-addons-elementor' ];
     }
 
     public function get_keywords() {
@@ -89,13 +91,13 @@ class Image_Accordion extends Widget_Base {
             ]
         );
 
-	    $this->add_control(
-		    'eael_img_accordion_content_heading',
-		    [
-			    'label'   => __( 'Content', 'essential-addons-for-elementor-lite' ),
-			    'type'    => \Elementor\Controls_Manager::HEADING,
-		    ]
-	    );
+        $this->add_control(
+            'eael_img_accordion_content_heading',
+            [
+                'label' => __( 'Content', 'essential-addons-for-elementor-lite' ),
+                'type'  => \Elementor\Controls_Manager::HEADING,
+            ]
+        );
 
         $this->add_control(
             'eael_img_accordion_content_horizontal_align',
@@ -147,19 +149,19 @@ class Image_Accordion extends Widget_Base {
         $this->add_control(
             'title_tag',
             [
-                'label' => __('Select Tag', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
+                'label'   => __( 'Select Tag', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT,
                 'default' => 'h2',
                 'options' => [
-                    'h1' => __('H1', 'essential-addons-for-elementor-lite'),
-                    'h2' => __('H2', 'essential-addons-for-elementor-lite'),
-                    'h3' => __('H3', 'essential-addons-for-elementor-lite'),
-                    'h4' => __('H4', 'essential-addons-for-elementor-lite'),
-                    'h5' => __('H5', 'essential-addons-for-elementor-lite'),
-                    'h6' => __('H6', 'essential-addons-for-elementor-lite'),
-                    'span' => __('Span', 'essential-addons-for-elementor-lite'),
-                    'p' => __('P', 'essential-addons-for-elementor-lite'),
-                    'div' => __('Div', 'essential-addons-for-elementor-lite'),
+                    'h1'   => __( 'H1', 'essential-addons-for-elementor-lite' ),
+                    'h2'   => __( 'H2', 'essential-addons-for-elementor-lite' ),
+                    'h3'   => __( 'H3', 'essential-addons-for-elementor-lite' ),
+                    'h4'   => __( 'H4', 'essential-addons-for-elementor-lite' ),
+                    'h5'   => __( 'H5', 'essential-addons-for-elementor-lite' ),
+                    'h6'   => __( 'H6', 'essential-addons-for-elementor-lite' ),
+                    'span' => __( 'Span', 'essential-addons-for-elementor-lite' ),
+                    'p'    => __( 'P', 'essential-addons-for-elementor-lite' ),
+                    'div'  => __( 'Div', 'essential-addons-for-elementor-lite' ),
                 ],
             ]
         );
@@ -196,7 +198,7 @@ class Image_Accordion extends Widget_Base {
                 'type'        => Controls_Manager::TEXT,
                 'label_block' => true,
                 'default'     => esc_html__( 'Accordion item title', 'essential-addons-for-elementor-lite' ),
-                'dynamic'     => ['active' => true],
+                'dynamic'     => [ 'active' => true ],
             ]
         );
 
@@ -211,18 +213,33 @@ class Image_Accordion extends Widget_Base {
         );
 
         $repeater->add_control(
+            'eael_accordion_enable_title_link',
+            [
+                'label'        => esc_html__( 'Enable Title Link', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __( 'Show', 'your-plugin' ),
+                'label_off'    => __( 'Hide', 'your-plugin' ),
+                'return_value' => 'yes',
+                'default'      => 'yes',
+            ]
+        );
+
+        $repeater->add_control(
             'eael_accordion_title_link',
             [
                 'name'          => 'eael_accordion_title_link',
                 'label'         => esc_html__( 'Title Link', 'essential-addons-for-elementor-lite' ),
                 'type'          => Controls_Manager::URL,
-                'dynamic'   => ['active' => true],
+                'dynamic'       => [ 'active' => true ],
                 'label_block'   => true,
                 'default'       => [
                     'url'         => '#',
                     'is_external' => '',
                 ],
                 'show_external' => true,
+                'condition'     => [
+                    'eael_accordion_enable_title_link' => 'yes',
+                ],
             ]
         );
 
@@ -232,80 +249,36 @@ class Image_Accordion extends Widget_Base {
                 'type'        => Controls_Manager::REPEATER,
                 'seperator'   => 'before',
                 'default'     => [
-	                [
-		                'eael_accordion_tittle'  => esc_html__( 'Image Accordion #1', 'essential-addons-for-elementor-lite' ),
-		                'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
-		                'eael_accordion_bg' => [
-			                'url' => Utils::get_placeholder_image_src(),
-		                ]
-	                ],
-	                [
-		                'eael_accordion_tittle'  => esc_html__( 'Image Accordion #2', 'essential-addons-for-elementor-lite' ),
-		                'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
-		                'eael_accordion_bg' => [
-			                'url' => Utils::get_placeholder_image_src(),
-		                ]
-	                ],
-	                [
-		                'eael_accordion_tittle'  => esc_html__( 'Image Accordion #3', 'essential-addons-for-elementor-lite' ),
-		                'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
-		                'eael_accordion_bg' => [
-			                'url' => Utils::get_placeholder_image_src(),
-		                ]
-	                ],
-	                [
-		                'eael_accordion_tittle'  => esc_html__( 'Image Accordion #4', 'essential-addons-for-elementor-lite' ),
-		                'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
-		                'eael_accordion_bg' => [
-			                'url' => Utils::get_placeholder_image_src(),
-		                ]
-	                ],
-                ],
-                'fields'      => [
                     [
-                        'name'         => 'eael_accordion_is_active',
-                        'label'        => __( 'Make it active?', 'essential-addons-for-elementor-lite' ),
-                        'type'         => \Elementor\Controls_Manager::SWITCHER,
-                        'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-                        'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
-                        'return_value' => 'yes',
+                        'eael_accordion_tittle'  => esc_html__( 'Image Accordion #1', 'essential-addons-for-elementor-lite' ),
+                        'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
+                        'eael_accordion_bg'      => [
+                            'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png',
+                        ]
                     ],
                     [
-                        'name'        => 'eael_accordion_bg',
-                        'label'       => esc_html__( 'Background Image', 'essential-addons-for-elementor-lite' ),
-                        'type'        => Controls_Manager::MEDIA,
-                        'label_block' => true,
-	                    'default'               => [
-		                    'url' => Utils::get_placeholder_image_src(),
-	                    ],
+                        'eael_accordion_tittle'  => esc_html__( 'Image Accordion #2', 'essential-addons-for-elementor-lite' ),
+                        'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
+                        'eael_accordion_bg'      => [
+                            'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png',
+                        ]
                     ],
                     [
-                        'name'        => 'eael_accordion_tittle',
-                        'label'       => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
-                        'type'        => Controls_Manager::TEXT,
-                        'label_block' => true,
-                        'default'     => esc_html__( 'Image Accordion', 'essential-addons-for-elementor-lite' ),
-                        'dynamic'     => ['active' => true],
+                        'eael_accordion_tittle'  => esc_html__( 'Image Accordion #3', 'essential-addons-for-elementor-lite' ),
+                        'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
+                        'eael_accordion_bg'      => [
+                            'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png',
+                        ]
                     ],
                     [
-                        'name'        => 'eael_accordion_content',
-                        'label'       => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
-                        'type'        => Controls_Manager::WYSIWYG,
-                        'label_block' => true,
-                        'default'     => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
-                    ],
-                    [
-                        'name'          => 'eael_accordion_title_link',
-                        'label'         => esc_html__( 'Title Link', 'essential-addons-for-elementor-lite' ),
-                        'type'          => Controls_Manager::URL,
-                        'label_block'   => true,
-                        'default'       => [
-                            'url'         => '#',
-                            'is_external' => '',
-                        ],
-                        'show_external' => true,
+                        'eael_accordion_tittle'  => esc_html__( 'Image Accordion #4', 'essential-addons-for-elementor-lite' ),
+                        'eael_accordion_content' => esc_html__( 'Image Accordion Content Goes Here! Click edit button to change this text.', 'essential-addons-for-elementor-lite' ),
+                        'eael_accordion_bg'      => [
+                            'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png',
+                        ]
                     ],
                 ],
+                'fields'      => $repeater->get_controls(),
                 'title_field' => '{{eael_accordion_tittle}}',
             ]
         );
@@ -355,7 +328,7 @@ class Image_Accordion extends Widget_Base {
             [
                 'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em', '%'],
+                'size_units' => [ 'px', 'em', '%' ],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-img-accordion' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -367,7 +340,7 @@ class Image_Accordion extends Widget_Base {
             [
                 'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em', '%'],
+                'size_units' => [ 'px', 'em', '%' ],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-img-accordion' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -397,9 +370,9 @@ class Image_Accordion extends Widget_Base {
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-img-accordion' => 'border-radius: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-img-accordion'               => 'border-radius: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-img-accordion a:first-child' => 'border-radius: {{SIZE}}px 0 0 {{SIZE}}px;',
-                    '{{WRAPPER}} .eael-img-accordion a:last-child' => 'border-radius: 0 {{SIZE}}px {{SIZE}}px 0;',
+                    '{{WRAPPER}} .eael-img-accordion a:last-child'  => 'border-radius: 0 {{SIZE}}px {{SIZE}}px 0;',
                 ],
             ]
         );
@@ -419,7 +392,7 @@ class Image_Accordion extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => 'rgba(0, 0, 0, .3)',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-img-accordion a:after' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover:after' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -431,8 +404,8 @@ class Image_Accordion extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => 'rgba(0, 0, 0, .5)',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-img-accordion a:hover::after'         => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-img-accordion a.overlay-active:after' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover:hover::after'         => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover.overlay-active:after' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -456,7 +429,7 @@ class Image_Accordion extends Widget_Base {
             [
                 'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', '%', 'em'],
+                'size_units' => [ 'px', '%', 'em' ],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-img-accordion a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -467,7 +440,7 @@ class Image_Accordion extends Widget_Base {
             [
                 'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', '%', 'em'],
+                'size_units' => [ 'px', '%', 'em' ],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-img-accordion a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -478,7 +451,7 @@ class Image_Accordion extends Widget_Base {
             [
                 'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', '%', 'em'],
+                'size_units' => [ 'px', '%', 'em' ],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-img-accordion a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
                 ],
@@ -571,57 +544,83 @@ class Image_Accordion extends Widget_Base {
     }
 
     protected function render() {
-        $settings = $this->get_settings_for_display();
-        $horizontal_alignment = 'eael-img-accordion-horizontal-align-' . $settings['eael_img_accordion_content_horizontal_align'];
-        $vertical_alignment = 'eael-img-accordion-vertical-align-' . $settings['eael_img_accordion_content_vertical_align'];
+        $settings             = $this->get_settings_for_display();
+        $horizontal_alignment = 'eael-img-accordion-horizontal-align-' . $settings[ 'eael_img_accordion_content_horizontal_align' ];
+        $vertical_alignment   = 'eael-img-accordion-vertical-align-' . $settings[ 'eael_img_accordion_content_vertical_align' ];
 
         $this->add_render_attribute(
             'eael-image-accordion',
             [
                 'class' => [
                     'eael-img-accordion',
-                    $settings['eael_img_accordion_direction'],
+                    $settings[ 'eael_img_accordion_direction' ],
                     $horizontal_alignment,
                     $vertical_alignment,
                 ],
+                'id'    => 'eael-img-accordion-' . $this->get_id(),
             ]
         );
 
+
         $this->add_render_attribute( 'eael-image-accordion', 'data-img-accordion-id', esc_attr( $this->get_id() ) );
-        $this->add_render_attribute( 'eael-image-accordion', 'data-img-accordion-type', $settings['eael_img_accordion_type'] );
-
-        if ( !empty( $settings['eael_img_accordions'] ) ) {
-            echo '<div ' . $this->get_render_attribute_string( 'eael-image-accordion' ) . ' id="eael-img-accordion-' . $this->get_id() . '">';
-            foreach ( $settings['eael_img_accordions'] as $img_accordion ) {
-                $eael_accordion_link = ( '#' === $img_accordion['eael_accordion_title_link']['url'] ) ? '#/' : $img_accordion['eael_accordion_title_link']['url'];
-                $target = $img_accordion['eael_accordion_title_link']['is_external'] ? 'target="_blank"' : '';
-                $nofollow = $img_accordion['eael_accordion_title_link']['nofollow'] ? 'rel="nofollow"' : '';
-                $active = $img_accordion['eael_accordion_is_active'];
-                $activeCSS = ( $active === 'yes' ? ' flex: 3 1 0%;' : '' );
-
-                echo '<a
-                    href="' . esc_url( $eael_accordion_link ) . '" ' . $target . ' ' . $nofollow . '
-                    style="background-image: url(' . esc_url( $img_accordion['eael_accordion_bg']['url'] ) . ');' . $activeCSS . '"
-                    ' . ( $active === 'yes' ? ' class="overlay-active"' : '' ) . '
-                >
-		            <div class="overlay">
-		                <div class="overlay-inner">
-                            <div class="overlay-inner' . ( $active === 'yes' ? ' overlay-inner-show' : '' ) . '">
-                                <'.$settings['title_tag'].' class="img-accordion-title">' . $img_accordion['eael_accordion_tittle'] . '</' .$settings['title_tag'].'>
-                                <p>' . $img_accordion['eael_accordion_content'] . '</p>
-                            </div>
-                        </div>
-		            </div>
-		          </a>';
+        $this->add_render_attribute( 'eael-image-accordion', 'data-img-accordion-type', $settings[ 'eael_img_accordion_type' ] );
+        if ( empty( $settings[ 'eael_img_accordions' ] ) ) {
+            return;
+        }
+        ?>
+    <div <?php echo $this->get_render_attribute_string( 'eael-image-accordion' ); ?>>
+        <?php foreach ( $settings[ 'eael_img_accordions' ] as $key => $img_accordion ): ?>
+            <?php
+            $eael_accordion_link = $target = $nofollow = $attributes = $active = '';
+            $activeCSS           = ( $active === 'yes' ? ' flex: 3 1 0%;' : '' );
+            $this->add_render_attribute(
+                'eael-image-accordion-link-' . $key,
+                [
+                    'class' => 'eael-image-accordion-hover',
+                    'style' => "background-image: url(" . esc_url( $img_accordion[ 'eael_accordion_bg' ][ 'url' ] ) . ");" . $activeCSS,
+                ]
+            );
+            if ( $active === 'yes' ) {
+                $this->add_render_attribute( 'eael-image-accordion-link-' . $key, 'class', 'overlay-active' );
             }
-            echo '</div>';
+            $tag = 'div';
+            if ( $img_accordion[ 'eael_accordion_enable_title_link' ] == 'yes' ) {
+                $eael_accordion_link = ( '#' === $img_accordion[ 'eael_accordion_title_link' ][ 'url' ] ) ? '#/' : $img_accordion[ 'eael_accordion_title_link' ][ 'url' ];
+            
+                $target              = $img_accordion[ 'eael_accordion_title_link' ][ 'is_external' ] ? 'target="_blank"' : '';
+                $nofollow            = $img_accordion[ 'eael_accordion_title_link' ][ 'nofollow' ] ? 'rel="nofollow"' : '';
+                if($img_accordion['eael_accordion_title_link']['custom_attributes']){
+                    $attributes = str_replace("|",'="',$img_accordion['eael_accordion_title_link']['custom_attributes']);
+                    $attributes = str_replace(",",'" ',$attributes);
+                    $attributes .='"';
+                }
+                $active              = $img_accordion[ 'eael_accordion_is_active' ];
+                $this->add_render_attribute( 'eael-image-accordion-link-' . $key, 'href', esc_url( $eael_accordion_link ));
+                
+                $tag = 'a';
+            }
+            ?>
 
-            if ( 'on-hover' === $settings['eael_img_accordion_type'] ) {
+            <<?php echo $tag.' '; ?><?php echo $this->get_render_attribute_string( 'eael-image-accordion-link-' . $key ), $target,$nofollow,$attributes; ?>  tabindex="<?php echo $key; ?>">
+            <div class="overlay">
+                <div class="overlay-inner">
+                    <div class="overlay-inner <?php echo( $active === 'yes' ? ' overlay-inner-show' : '' ); ?>">
+                        <?php printf( '<%1$s>%2$s</%1$s>', Helper::eael_validate_html_tag($settings[ 'title_tag' ]), $img_accordion[ 'eael_accordion_tittle' ] ); ?>
+                        <p><?php echo sprintf( "%s", $this->parse_text_editor( $img_accordion[ 'eael_accordion_content' ] ) ); ?></p>
+                    </div>
+                </div>
+            </div>
+            </<?php echo $tag; ?>>
+        <?php endforeach; ?>
+        </div>
+        <?php
+        if ( !empty( $settings[ 'eael_img_accordions' ] ) ) {
+            if ( 'on-hover' === $settings[ 'eael_img_accordion_type' ] ) {
                 echo '<style typr="text/css">
-                    #eael-img-accordion-' . $this->get_id() . ' a:hover {
+                    #eael-img-accordion-' . $this->get_id() . ' .eael-image-accordion-hover:hover {
                         flex: 3 1 0% !important;
                     }
-                    #eael-img-accordion-' . $this->get_id() . ' a:hover .overlay-inner * {
+                    #eael-img-accordion-' . $this->get_id() . ' .eael-image-accordion-hover:hover:hover .overlay-inner * {
                         opacity: 1;
                         visibility: visible;
                         transform: none;
@@ -629,7 +628,6 @@ class Image_Accordion extends Widget_Base {
                     }
                 </style>';
             }
-
         }
     }
 }

@@ -13,6 +13,8 @@ use \Elementor\Group_Control_Typography;
 use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 
+use \Essential_Addons_Elementor\Classes\Helper;
+
 class Progress_Bar extends Widget_Base
 {
 
@@ -789,7 +791,7 @@ class Progress_Bar extends Widget_Base
             ]);
 
             echo '<div class="eael-progressbar-line-container ' . $settings['progress_bar_line_alignment'] . '">
-                ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="%2$s">', $settings['progress_bar_title_html_tag'], 'eael-progressbar-title') . $settings['progress_bar_title'] . sprintf('</%1$s>', $settings['progress_bar_title_html_tag']) : '') . '
+                ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="%2$s">', Helper::eael_validate_html_tag($settings['progress_bar_title_html_tag']), 'eael-progressbar-title') . $settings['progress_bar_title'] . sprintf('</%1$s>', Helper::eael_validate_html_tag($settings['progress_bar_title_html_tag'])) : '') . '
 
                 <div ' . $this->get_render_attribute_string('eael-progressbar-line') . '>
                     ' . ($settings['progress_bar_show_count'] === 'yes' ? '<span class="eael-progressbar-count-wrap"><span class="eael-progressbar-count">0</span><span class="postfix">' . __('%', 'essential-addons-for-elementor-lite') . '</span></span>' : '') . '
@@ -822,7 +824,7 @@ class Progress_Bar extends Widget_Base
                     </div>
                     <div class="eael-progressbar-circle-inner"></div>
                     <div class="eael-progressbar-circle-inner-content">
-                        ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="%2$s">', $settings['progress_bar_title_html_tag'], 'eael-progressbar-title') . $settings['progress_bar_title'] . sprintf('</%1$s>', $settings['progress_bar_title_html_tag']) : '') . '
+                        ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="%2$s">', Helper::eael_validate_html_tag($settings['progress_bar_title_html_tag']), 'eael-progressbar-title') . $settings['progress_bar_title'] . sprintf('</%1$s>', Helper::eael_validate_html_tag($settings['progress_bar_title_html_tag'])) : '') . '
                         ' . ($settings['progress_bar_show_count'] === 'yes' ? '<span class="eael-progressbar-count-wrap"><span class="eael-progressbar-count">0</span><span class="postfix">' . __('%', 'essential-addons-for-elementor-lite') . '</span></span>' : '') . '
                     </div>
                 </div>
@@ -868,7 +870,7 @@ class Progress_Bar extends Widget_Base
                         <div class="eael-progressbar-circle-inner"></div>
                     </div>
                     <div class="eael-progressbar-circle-inner-content">
-                        ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="%2$s">', $settings['progress_bar_title_html_tag'], 'eael-progressbar-title') . $settings['progress_bar_title'] . sprintf('</%1$s>', $settings['progress_bar_title_html_tag']) : '') . '
+                        ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="%2$s">', Helper::eael_validate_html_tag($settings['progress_bar_title_html_tag']), 'eael-progressbar-title') . $settings['progress_bar_title'] . sprintf('</%1$s>', Helper::eael_validate_html_tag($settings['progress_bar_title_html_tag'])) : '') . '
                         ' . ($settings['progress_bar_show_count'] === 'yes' ? '<span class="eael-progressbar-count-wrap"><span class="eael-progressbar-count">0</span><span class="postfix">' . __('%', 'essential-addons-for-elementor-lite') . '</span></span>' : '') . '
                     </div>
                 </div>

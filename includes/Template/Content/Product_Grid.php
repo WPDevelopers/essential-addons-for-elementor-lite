@@ -45,7 +45,7 @@ trait Product_Grid {
                         <div class="overlay">
                             <?php echo $product->get_image( 'woocommerce_thumbnail' ); ?>
                             <div class="button-wrap clearfix">
-                                <a href="<?php echo esc_url( $product->get_permalink()); ?>" class="product-link"><span class="fas fa-link"></span></a>';
+                                <a href="<?php echo esc_url( $product->get_permalink()); ?>" class="product-link"><span class="fas fa-link"></span></a>
                                 <?php
                                 woocommerce_template_loop_add_to_cart();
                                 if ( isset( $settings['show_compare']) && 'yes' === $settings['show_compare'] ) {

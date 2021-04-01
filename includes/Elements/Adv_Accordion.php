@@ -1097,7 +1097,7 @@ class Adv_Accordion extends Widget_Base
             }
             // tab title
             if ($settings['eael_adv_accordion_toggle_icon_postion'] === '') {
-                echo '<' . $settings['eael_adv_accordion_title_tag'] . ' class="eael-accordion-tab-title">' . $tab['eael_adv_accordion_tab_title'] . '</' . $settings['eael_adv_accordion_title_tag'] . '>';
+                echo '<' . Helper::eael_validate_html_tag($settings['eael_adv_accordion_title_tag']) . ' class="eael-accordion-tab-title">' . $tab['eael_adv_accordion_tab_title'] . '</' . Helper::eael_validate_html_tag($settings['eael_adv_accordion_title_tag']) . '>';
             }
             // tab icon
             if ($tab['eael_adv_accordion_tab_icon_show'] === 'yes') {
@@ -1113,7 +1113,7 @@ class Adv_Accordion extends Widget_Base
             }
             // tab title
             if ($settings['eael_adv_accordion_toggle_icon_postion'] === 'right' || $settings['eael_adv_accordion_toggle_icon_postion'] === null) {
-                echo '<' . $settings['eael_adv_accordion_title_tag'] . ' class="eael-accordion-tab-title">' . $tab['eael_adv_accordion_tab_title'] . '</' . $settings['eael_adv_accordion_title_tag'] . '>';
+                echo '<' . Helper::eael_validate_html_tag($settings['eael_adv_accordion_title_tag']) . ' class="eael-accordion-tab-title">' . $tab['eael_adv_accordion_tab_title'] . '</' . Helper::eael_validate_html_tag($settings['eael_adv_accordion_title_tag']) . '>';
             }
             // toggle icon
             if ($settings['eael_adv_accordion_icon_show'] === 'yes' && $settings['eael_adv_accordion_toggle_icon_postion'] === 'right') {

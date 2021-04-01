@@ -1,7 +1,6 @@
 <?php
 
 use \Essential_Addons_Elementor\Classes\Helper;
-
 /**
  * Template Name: Default
  *
@@ -33,7 +32,7 @@ echo '<a href="' . $button_link . '" class="eael-better-docs-category-box-post">
     }
 
     if ($settings['show_title']) {
-        echo '<' . $settings['title_tag'] . ' class="eael-bd-cb-cat-title">' . $term->name . '</' . $settings['title_tag'] . '>';
+        echo '<' . Helper::eael_validate_html_tag($settings['title_tag'] ). ' class="eael-bd-cb-cat-title">' . $term->name . '</' . Helper::eael_validate_html_tag($settings['title_tag']) . '>';
     }
 
     if ($settings['show_count']) {

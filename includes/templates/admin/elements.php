@@ -410,12 +410,6 @@ $elements = [
 		        'demo_link' => 'https://essential-addons.com/elementor/login-register-form',
 		        'doc_link' => 'https://essential-addons.com/elementor/docs/login-register-form/',
 	        ],
-            [
-		        'key'   => 'dummy-widget',
-		        'title' => __( 'Dummy Widget', 'essential-addons-elementor' ),
-		        'demo_link' => 'https://essential-addons.com/elementor/dummy-widget',
-		        'doc_link' => 'https://essential-addons.com/elementor/docs/dummy-widget/',
-	        ],
         ]
     ],
     'social-feed-elements'  => [
@@ -501,6 +495,12 @@ $elements = [
                 'is_pro' => true
             ],
             [
+                'key'   => 'woo-product-carousel',
+                'title' => __( 'Woo Product Carousel', 'essential-addons-for-elementor-lite'),
+                'demo_link' => 'https://essential-addons.com/elementor/woo-product-carousel/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/woo-product-carousel/'
+            ],
+            [
                 'key'   => 'woo-checkout',
                 'title' => __( 'Woo Checkout', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/woo-checkout/',
@@ -556,11 +556,11 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                                         } elseif($item['key'] === 'typeform') {
                                             $query_param = [
                                                 'pr_code'      => wp_hash('eael_typeform'),
-                                                'redirect_uri' => esc_url(admin_url('admin-post.php'))
+                                                'redirect_uri' => esc_url(admin_url( 'admin.php?page=eael-settings' ))
                                             ];
                                             $url = esc_url( add_query_arg( $query_param, esc_url('https://app.essential-addons.com/typeform/index.php') ) );
                                             echo '<span style="font-size: 12px; font-style:italic;">
-                                            '.sprintf("<a id='eael-typeform-get-access' data-link='%s' href='#'>Get Access</a>", esc_url($url)).'
+                                            '.sprintf("<a target='_blank' id='' href='%s'>Get Access</a>", esc_url($url)).'
                                             </span>';
                                         } elseif ($item['key'] === 'login-register') {
                                             $eael_recaptcha_sitekey = get_option('eael_recaptcha_sitekey');
