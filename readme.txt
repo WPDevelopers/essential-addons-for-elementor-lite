@@ -228,6 +228,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+
+= 4.6.0 - 04/01/2021 =
+
+- Added: EA Woo Product Carousel
+- Few minor bug fix and improvements
+
+
 = 4.5.5 - 23/03/2021 =
 
 - Fixed: PHP error related to HTML tags validation
