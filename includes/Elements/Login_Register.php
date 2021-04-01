@@ -3699,12 +3699,16 @@ class Login_Register extends Widget_Base {
 		$form_logo_id        = ! empty( $this->ds['lr_form_logo']['id'] ) ? $this->ds['lr_form_logo']['id'] : '';
 		$this->form_logo     = Group_Control_Image_Size::get_attachment_image_src( $form_logo_id, 'lr_form_logo', $this->ds );
 		$this->form_logo_pos = ! empty( $this->ds['lr_form_logo_position'] ) ? $this->ds['lr_form_logo_position'] : 'inline';
-
+		$login_redirect_url = '';
+		if ( ! empty( $this->ds['redirect_after_login'] ) && 'yes' === $this->ds['redirect_after_login'] ) {
+			$login_redirect_url = !empty( $this->ds[ 'redirect_url' ][ 'url' ] ) ? esc_url( $this->ds[ 'redirect_url' ][ 'url' ] ) : '';
+		}
 		?>
         <div class="eael-login-registration-wrapper"
              data-is-ajax="<?php echo esc_attr( $this->get_settings_for_display( 'enable_ajax' ) ); ?>"
              data-widget-id="<?php echo esc_attr( $this->get_id() ); ?>"
              data-recaptcha-sitekey="<?php echo esc_attr( get_option( 'eael_recaptcha_sitekey' ) ); ?>"
+             data-redirect-to="<?php echo esc_attr( $login_redirect_url ); ?>"
         >
 			<?php
 			$this->print_login_form();
