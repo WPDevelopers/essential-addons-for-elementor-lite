@@ -79,8 +79,6 @@ class Product_Grid extends Widget_Base
             'ea woocommerce',
             'ea woo product grid',
             'ea woocommerce product grid',
-            'woo commerce',
-            'ea woo commerce',
             'product gallery',
             'woocommerce grid',
             'gallery',

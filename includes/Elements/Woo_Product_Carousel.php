@@ -92,8 +92,6 @@ class Woo_Product_Carousel extends Widget_Base {
             'ea woocommerce',
             'ea woo product carousel',
             'ea woocommerce product carousel',
-            'woo commerce',
-            'ea woo commerce',
             'product gallery',
             'woocommerce carousel',
             'gallery',
