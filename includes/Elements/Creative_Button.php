@@ -16,6 +16,7 @@ use Elementor\Modules\DynamicTags\Module as TagsModule;
 use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 
+
 class Creative_Button extends Widget_Base
 {
 
@@ -256,6 +257,18 @@ class Creative_Button extends Widget_Base
 
             $this->start_controls_tab('normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
 
+	        $this->add_control('eael_creative_button_icon_color',
+                [
+                    'label' => esc_html__('Icon Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default' => '#ffffff',
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-creative-button i' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .eael-creative-button svg' => 'fill: {{VALUE}};',
+                    ],
+                ]
+            );
+
             $this->add_control(
                 'eael_creative_button_text_color',
                 [
@@ -335,6 +348,18 @@ class Creative_Button extends Widget_Base
             $this->end_controls_tab();
 
             $this->start_controls_tab('eael_creative_button_hover', ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]);
+
+	        $this->add_control('eael_creative_button_hover_icon_color',
+                [
+                    'label' => esc_html__('Icon Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default' => '#ffffff',
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-creative-button:hover i' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .eael-creative-button:hover svg' => 'fill: {{VALUE}};',
+                    ],
+                ]
+            );
 
             $this->add_control(
                 'eael_creative_button_hover_text_color',
@@ -533,8 +558,11 @@ class Creative_Button extends Widget_Base
 
         $this->add_render_attribute('eael_creative_button', [
             'class' => ['eael-creative-button', esc_attr($settings['creative_button_effect'])],
-            'href'  => esc_attr($settings['creative_button_link_url']['url']),
         ]);
+
+        if ( ! empty( $settings['creative_button_link_url']['url'] ) ) {
+          $this->add_link_attributes( 'eael_creative_button', $settings['creative_button_link_url'] );
+        }
 
         if ($settings['creative_button_link_url']['is_external']) {
             $this->add_render_attribute('eael_creative_button', 'target', '_blank');

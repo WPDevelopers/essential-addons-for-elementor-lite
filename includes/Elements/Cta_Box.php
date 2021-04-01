@@ -1094,7 +1094,7 @@ class Cta_Box extends Widget_Base
         if(!empty($sub_title)){
             $headingMarkup .='<h4 class="sub-title">'.$sub_title.'</h4>';
         }
-        $headingMarkup .='<'.$settings['title_tag'].' class="title">'.$settings['eael_cta_title'].'</'.$settings['title_tag'].'>';
+        $headingMarkup .='<'.Helper::eael_validate_html_tag($settings['title_tag']).' class="title">'.$settings['eael_cta_title'].'</'.Helper::eael_validate_html_tag($settings['title_tag']).'>';
 
         // content markup
         $contentMarkup = '';

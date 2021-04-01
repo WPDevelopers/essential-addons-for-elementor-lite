@@ -34,7 +34,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
     <li class="product">
         <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
             <?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ) ); ?>
-            <h2 class="woocommerce-loop-product__title"> <?php echo esc_html( $product->get_title() ); ?> </h2>
+            <h2 class="woocommerce-loop-product__title"> <?php echo $product->get_title() ; ?> </h2>
             <?php
             if ( $should_print_rating ) {
                 echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) );
@@ -44,8 +44,11 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
             } elseif ( $product->is_on_sale() ) {
                 printf( '<span class="onsale">%s</span>', __( 'Sale!', 'essential-addons-for-elementor-lite' ) );
             }
+
+            if ( $should_print_price ) {
+              echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+            }
             ?>
-            <span class="price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
         </a>
         <?php
         woocommerce_template_loop_add_to_cart();
@@ -61,7 +64,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
         <div class="overlay">
             <?php echo $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ); ?>
             <div class="button-wrap clearfix">
-                <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="product-link"><span class="fas fa-link"></span></a>';
+                <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="product-link"><span class="fas fa-link"></span></a>
                 <?php
                 woocommerce_template_loop_add_to_cart();
                 if ( $should_print_compare_btn ) {
@@ -70,7 +73,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                 ?>
             </div>
         </div>
-        <h2 class="woocommerce-loop-product__title"><?php echo esc_html( $product->get_title() ); ?></h2>
+        <h2 class="woocommerce-loop-product__title"><?php echo $product->get_title(); ?></h2>
         <?php
         if ( $should_print_rating ) {
             echo wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() );
@@ -78,8 +81,10 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
         if ( $product->is_on_sale() ) {
             printf( '<span class="onsale">%s</span>', __( 'Sale!', 'essential-addons-for-elementor-lite' ) );
         }
-        ?>
-        <span class="price"> <?php echo $product->get_price_html(); ?> </span>
+        if ( $should_print_price ) {
+          echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+        }
+       ?>
     </li>
     <?php
 } else if (($grid_style_preset == 'eael-product-preset-5') || ($grid_style_preset == 'eael-product-preset-6') || ($grid_style_preset == 'eael-product-preset-7')) {
@@ -335,8 +340,12 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                                 <a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                                                     <h2>'. $product->get_title() .'</h2>
                                                 </a>
-                                              </div>
-                                              <div class="eael-product-price">'.$product->get_price_html().'</div>';
+                                              </div>';
+
+                        if ( $should_print_price ) {
+                          echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+                        }
+                      
                         if ($should_print_rating) {
                             echo wc_get_rating_html
                             ($product->get_average_rating(), $product->get_rating_count());

@@ -1,7 +1,6 @@
 <?php
 
 use \Essential_Addons_Elementor\Classes\Helper;
-
 /**
  * Template Name: Layout 2
  *
@@ -33,7 +32,7 @@ if ($settings['show_icon']) {
 }
 
 if ($settings['show_title']) {
-    echo '<' . $settings['title_tag'] . ' class="eael-bd-cb-cat-title__layout-2"><span>' . $term->name . '</span></' . $settings['title_tag'] . '>';
+    echo '<' . Helper::eael_validate_html_tag($settings['title_tag']) . ' class="eael-bd-cb-cat-title__layout-2"><span>' . $term->name . '</span></' . Helper::eael_validate_html_tag($settings['title_tag']) . '>';
 }
 
 if ($settings['show_count']) {

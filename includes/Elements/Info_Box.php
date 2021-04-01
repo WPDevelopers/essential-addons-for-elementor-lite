@@ -1633,7 +1633,7 @@ echo ob_get_clean();
         ob_start();
         ?>
         <div <?php echo $this->get_render_attribute_string('infobox_content'); ?>>
-            <<?php echo $settings['eael_infobox_title_tag']; ?> class="title"><?php echo $settings['eael_infobox_title']; ?></<?php echo $settings['eael_infobox_title_tag']; ?>>
+            <<?php echo Helper::eael_validate_html_tag($settings['eael_infobox_title_tag']); ?> class="title"><?php echo $settings['eael_infobox_title']; ?></<?php echo Helper::eael_validate_html_tag($settings['eael_infobox_title_tag']); ?>>
             <?php if ('yes' == $settings['eael_show_infobox_content']): ?>
                 <?php if ('content' === $settings['eael_infobox_text_type']): ?>
                     <?php if (!empty($settings['eael_infobox_text'])): ?>

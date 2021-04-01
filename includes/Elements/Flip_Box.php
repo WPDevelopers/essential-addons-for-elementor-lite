@@ -1450,7 +1450,7 @@ class Flip_Box extends Widget_Base
         (empty($flipbox_image_url)) ? $flipbox_image_url = $flipbox_image['url'] : $flipbox_image_url = $flipbox_image_url;
 
         $flipbox_if_html_tag = 'div';
-        $flipbox_if_html_title_tag = $settings['eael_flipbox_back_title_tag'];
+        $flipbox_if_html_title_tag = Helper::eael_validate_html_tag($settings['eael_flipbox_back_title_tag']);
         $this->add_render_attribute('flipbox-container', 'class', 'eael-elements-flip-box-flip-card');
         $this->add_render_attribute('flipbox-title-container', 'class', 'eael-elements-flip-box-heading');
 
@@ -1570,7 +1570,7 @@ class Flip_Box extends Widget_Base
                                             <img class="eael-flipbox-image-as-icon" src="<?php echo esc_url($flipbox_image_url); ?>" alt="<?php echo esc_attr(get_post_meta($flipbox_image['id'], '_wp_attachment_image_alt', true)); ?>">
                                         <?php endif; ?>
                                     </div>
-                                    <<?php echo $settings['eael_flipbox_front_title_tag']; ?> class="eael-elements-flip-box-heading"><?php echo esc_html__($settings['eael_flipbox_front_title'], 'essential-addons-for-elementor-lite'); ?></<?php echo $settings['eael_flipbox_front_title_tag']; ?>>
+                                    <<?php echo Helper::eael_validate_html_tag($settings['eael_flipbox_front_title_tag']); ?> class="eael-elements-flip-box-heading"><?php echo esc_html__($settings['eael_flipbox_front_title'], 'essential-addons-for-elementor-lite'); ?></<?php echo Helper::eael_validate_html_tag($settings['eael_flipbox_front_title_tag']); ?>>
                                     <div class="eael-elements-flip-box-content">
                                         <p><?php echo __($settings['eael_flipbox_front_text'], 'essential-addons-for-elementor-lite'); ?></p>
                                     </div>

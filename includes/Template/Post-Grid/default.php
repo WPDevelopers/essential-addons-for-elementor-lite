@@ -1,7 +1,6 @@
 <?php
 
 use \Essential_Addons_Elementor\Classes\Helper;
-
 /**
  * Template Name: Default
  */
@@ -10,7 +9,7 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-$title_tag = isset($settings['title_tag']) ? $settings['title_tag'] : 'h2';
+$title_tag = isset($settings['title_tag']) ? Helper::eael_validate_html_tag($settings['title_tag']) : 'h2';
 
 if ($settings['eael_post_grid_preset_style'] === 'two') {
     echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . get_the_ID() . '">

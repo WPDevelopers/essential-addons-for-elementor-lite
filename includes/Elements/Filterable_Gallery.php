@@ -15,6 +15,9 @@ use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Repeater;
 use \Elementor\Group_Control_Background;
+use \Elementor\Utils;
+
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Filterable_Gallery extends Widget_Base
 {
@@ -3053,7 +3056,7 @@ class Filterable_Gallery extends Widget_Base
                 $html .= '<div class="fg-item-category"><span>' . $item['category'] . '</span></div>';
             }
             
-            $html .= '<' . $settings['title_tag'] . ' class="fg-item-title">' . $item['title'] . '</' . $settings['title_tag'] . '>';
+            $html .= '<' . Helper::eael_validate_html_tag($settings['title_tag']) . ' class="fg-item-title">' . $item['title'] . '</' . Helper::eael_validate_html_tag($settings['title_tag']) . '>';
             $html .= '<div class="fg-item-content">' . wpautop($item['content']) . '</div>';
             $html .= '</div>';
             
@@ -3062,7 +3065,6 @@ class Filterable_Gallery extends Widget_Base
             
             $gallery_markup[] = $html;
         }
-        
         return $gallery_markup;
     }
     
@@ -3095,6 +3097,7 @@ class Filterable_Gallery extends Widget_Base
 
             if ($settings['eael_section_fg_full_image_clickable']) {
                 if ($settings['eael_section_fg_full_image_action'] === 'lightbox' && !$popup_status) {
+                    $popup_status = true;
                     $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap" data-elementor-open-lightbox="no">';
                 }
                 
@@ -3144,7 +3147,7 @@ class Filterable_Gallery extends Widget_Base
                 $html .= '</a>';
             }
 
-            if ($settings['eael_fg_show_popup'] == 'media' && $settings['eael_fg_caption_style'] !== 'card') {
+            if ($settings['eael_fg_show_popup'] == 'media' && $settings['eael_fg_caption_style'] !== 'card' && !$popup_status) {
                 $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap" data-elementor-open-lightbox="no">';
             }
 
@@ -3160,7 +3163,7 @@ class Filterable_Gallery extends Widget_Base
                     $html .= '<div class="gallery-item-caption-over">';
                         if (isset($item['title']) && !empty($item['title']) || isset($item['content']) && !empty($item['content'])) {
                             if (!empty($item['title'])) {
-                                $html .= '<' . $settings['title_tag'] . ' class="fg-item-title">' . $item['title'] . '</' . $settings['title_tag'] . '>';
+                                $html .= '<' . Helper::eael_validate_html_tag($settings['title_tag']) . ' class="fg-item-title">' . $item['title'] . '</' . Helper::eael_validate_html_tag($settings['title_tag']) . '>';
                             }
 
                             if (!empty($item['content'])) {

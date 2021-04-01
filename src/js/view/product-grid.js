@@ -289,7 +289,7 @@ ea.hooks.addAction("init", "ea", () => {
 					items = $this.closest("form.cart.grouped_form"),
 					form = $this.closest("form.cart"),
 					product_data = [];
-				items = items.serializeArray();
+				    items = items.serializeArray();
 
 				if (form.hasClass("variations_form")) {
 					product_id = form.find('input[name="product_id"]').val();
@@ -326,6 +326,7 @@ ea.hooks.addAction("init", "ea", () => {
 						action: "eael_product_add_to_cart",
 						product_data: product_data,
 						eael_add_to_cart_nonce: localize.nonce,
+						cart_item_data: form.serializeArray(),
 					},
 					success: function (response) {
 						if (response.success) {

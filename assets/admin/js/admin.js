@@ -542,4 +542,29 @@
         }
     })
 
+    $(window).on('load', function () {
+        var params = new URLSearchParams(location.search);
+        if (params.has('typeform_tk')) {
+            var elements_tab = document.querySelector("ul.eael-tabs li a.eael-elements-tab");
+            params.delete('typeform_tk');
+            params.delete('pr_code');
+            window.history.replaceState({}, '', `${location.pathname}?${params}`);
+
+            if (elements_tab) {
+                elements_tab.click();
+            }
+
+            if (typeof Swal == 'function') {
+                Swal.fire(
+                    {
+                        timer: 3000,
+                        showConfirmButton: false,
+                        type: 'success',
+                        title: 'TypeForm Token Added',
+                    }
+                )
+            }
+        }
+    });
+
 })(jQuery);

@@ -169,16 +169,16 @@ class Bootstrap
         // Compare table
 	    add_action( 'wp_ajax_nopriv_eael_product_grid', [$this, 'get_compare_table']);
 	    add_action( 'wp_ajax_eael_product_grid', [$this, 'get_compare_table']);
+		//quick view popup
+	    add_action( 'wp_ajax_nopriv_eael_product_quickview_popup', [$this, 'eael_product_quickview_popup']);
+	    add_action( 'wp_ajax_eael_product_quickview_popup', [$this, 'eael_product_quickview_popup']);
 
-        //handle select2 ajax search
+//        handle select2 ajax search
         add_action('wp_ajax_eael_select2_search_post', [$this, 'select2_ajax_posts_filter_autocomplete']);
         add_action('wp_ajax_nopriv_eael_select2_search_post', [$this, 'select2_ajax_posts_filter_autocomplete']);
 
         add_action('wp_ajax_eael_select2_get_title', [$this, 'select2_ajax_get_posts_value_titles']);
         add_action('wp_ajax_nopriv_eael_select2_get_title', [$this, 'select2_ajax_get_posts_value_titles']);
-
-        //handle typeform auth token
-        add_action('admin_post_nopriv_typeform_token_data', [$this, 'typeform_auth_handle']);
 
         // Elements
         add_action('elementor/controls/controls_registered', array($this, 'register_controls'));
@@ -195,6 +195,7 @@ class Bootstrap
         add_action('eael/controls/read_more_button_style', [$this, 'read_more_button_style'], 10, 1);
         add_action('eael/controls/load_more_button_style', [$this, 'load_more_button_style'], 10, 1);
         add_action('eael/controls/custom_positioning', [$this, 'custom_positioning'], 10, 5);
+	    add_action('eael/controls/nothing_found_style', [$this, 'nothing_found_style'], 10, 1);
 
         add_filter('eael/controls/event-calendar/source', [$this, 'event_calendar_source']);
         add_action('eael/controls/advanced-data-table/source', [$this, 'advanced_data_table_source']);
@@ -217,8 +218,6 @@ class Bootstrap
         }
 
 	    if( class_exists( 'woocommerce' ) ) {
-		    add_action( 'wp_footer', [ $this, 'eael_product_grid_script' ] );
-
 		    // quick view
 		    add_action( 'eael_woo_single_product_image', 'woocommerce_show_product_images', 20 );
 		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
@@ -231,11 +230,6 @@ class Bootstrap
 		    add_filter( 'woocommerce_product_get_rating_html', [ $this, 'eael_rating_markup' ], 10, 3 );
 	    }
 
-	    if( class_exists('WC_Subscriptions_Cart') ) {
-		    remove_action('woocommerce_review_order_after_order_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals' ), 10);
-		    add_action('eael_display_recurring_total_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals'
-		    ), 10);
-	    }
 
         // Admin
         if (is_admin()) {
@@ -261,6 +255,10 @@ class Bootstrap
             if (!did_action('elementor/loaded')) {
                 add_action('admin_notices', array($this, 'elementor_not_loaded'));
             }
+
+	        //handle typeform auth token
+	        add_action('admin_init', [$this, 'typeform_auth_handle']);
+
 
             // On Editor - Register WooCommerce frontend hooks before the Editor init.
             // Priority = 5, in order to allow plugins remove/add their wc hooks on init.
