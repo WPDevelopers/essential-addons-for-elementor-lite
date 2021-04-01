@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 5.0
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 4.5.5
+Stable tag: 4.6.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -87,6 +87,7 @@ We have designed 42 of the most useful widgets to enhance your Elementor Page Bu
 40. [Typeform](https://essential-addons.com/elementor/typeform/) - Embed and Design your Typeform forms within Elementor.
 41. [Login | Register Form](https://essential-addons.com/elementor/login-register-form/) - Create amazing and attractive login or registration forms in Elementor 
 42. [Woo Product Compare](https://essential-addons.com/elementor/woo-product-compare/) - Create stunning WooCommerce Product Compare table instantly
+43. [Woo Product Carousel](https://essential-addons.com/elementor/woo-product-carousel/) - Design amazing WooCommerce Product Carousel with ease
 
 
 
