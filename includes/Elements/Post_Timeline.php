@@ -244,73 +244,6 @@ class Post_Timeline extends Widget_Base
 		    ]
 	    );
 
-	    $this->add_control(
-		    'eael_post_timeline_arrow_heading',
-		    [
-			    'label' => esc_html__('Arrow', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::HEADING,
-		    ]
-	    );
-
-        $this->add_control(
-            'eael_timeline_border_color',
-            [
-                'label'     => __('Border & Arrow Color', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '#e5eaed',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-timeline-post-inner'                                          => 'border-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-timeline-post-inner::after'                                   => 'border-left-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner::after' => 'border-right-color: {{VALUE}};',
-                ],
-                'condition'   => [
-	                'eael_dynamic_template_Layout' => 'default',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_timeline_arrow_color',
-            [
-                'label'     => __('Arrow Color', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .eael-timeline-post-inner'                                          => 'border-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-timeline-post-inner::after'                                   => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}}',
-//                    '{{WRAPPER}} .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner::after' => 'border-right-color: {{VALUE}};',
-                ],
-                'condition'   => [
-	                'eael_dynamic_template_Layout!' => 'default',
-                ],
-            ]
-        );
-
-	    $this->add_responsive_control(
-		    'eael_timeline_arrow_alignment',
-		    [
-			    'label'     => __('Alignment', 'essential-addons-for-elementor-lite'),
-			    'type'      => Controls_Manager::CHOOSE,
-			    'options'   => [
-				    'top'       => [
-					    'title' => __( 'Top', 'essential-addons-for-elementor-lite' ),
-					    'icon'  => 'eicon-v-align-top',
-				    ],
-				    'middle'    => [
-					    'title' => __( 'Middle', 'essential-addons-for-elementor-lite' ),
-					    'icon'  => 'eicon-v-align-middle',
-				    ],
-				    'bottom'    => [
-					    'title' => __( 'Bottom', 'essential-addons-for-elementor-lite' ),
-					    'icon'  => 'eicon-v-align-bottom',
-				    ],
-			    ],
-			    'default' => 'top',
-			    'condition'   => [
-				    'eael_dynamic_template_Layout!' => 'default',
-			    ],
-		    ]
-	    );
-
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -441,6 +374,98 @@ class Post_Timeline extends Widget_Base
                 'selector' => '{{WRAPPER}} .eael-timeline-post-excerpt p',
             ]
         );
+
+        $this->end_controls_section();
+
+		// Start Arrow Styling
+
+		$this->start_controls_section(
+		    'eael_section_arrow',
+		    [
+			    'label' => __('Arrow', 'essential-addons-for-elementor-lite'),
+			    'tab'   => Controls_Manager::TAB_STYLE,
+		    ]
+	    );
+
+        $this->add_control(
+            'eael_timeline_border_color',
+            [
+                'label'     => __('Border & Arrow Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#e5eaed',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-timeline-post-inner'                                          => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-timeline-post-inner::after'                                   => 'border-left-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner::after' => 'border-right-color: {{VALUE}};',
+                ],
+                'condition'   => [
+	                'eael_dynamic_template_Layout' => 'default',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_timeline_arrow_color',
+            [
+                'label'     => __('Arrow Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-timeline-post-inner'                                          => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-timeline-post-inner::after'                                   => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}}',
+//                    '{{WRAPPER}} .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner::after' => 'border-right-color: {{VALUE}};',
+                ],
+                'condition'   => [
+	                'eael_dynamic_template_Layout!' => 'default',
+                ],
+            ]
+        );
+
+		$this->add_responsive_control(
+		    'eael_timeline_arrow_size',
+		    [
+			    'label' => esc_html__('Size', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SLIDER,
+			    'range' => [
+				    'px' => [
+					    'max' => 20,
+				    ],
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-post-timeline.timeline-layout-card .eael-timeline-post-inner:after' => 'border-width: {{SIZE}}px; right: -{{SIZE}}px; left: -{{SIZE}}px',
+				    '{{WRAPPER}} .eael-post-timeline.timeline-layout-card .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner:after' => 'left: -{{SIZE}}px;',
+			    ],
+
+			    'condition'   => [
+				    'eael_dynamic_template_Layout!' => 'default',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_timeline_arrow_alignment',
+		    [
+			    'label'     => __('Alignment', 'essential-addons-for-elementor-lite'),
+			    'type'      => Controls_Manager::CHOOSE,
+			    'options'   => [
+				    'top'       => [
+					    'title' => __( 'Top', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'eicon-v-align-top',
+				    ],
+				    'middle'    => [
+					    'title' => __( 'Middle', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'eicon-v-align-middle',
+				    ],
+				    'bottom'    => [
+					    'title' => __( 'Bottom', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'eicon-v-align-bottom',
+				    ],
+			    ],
+			    'default' => 'top',
+			    'condition'   => [
+				    'eael_dynamic_template_Layout!' => 'default',
+			    ],
+		    ]
+	    );
 
         $this->end_controls_section();
 
