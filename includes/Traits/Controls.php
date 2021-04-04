@@ -914,9 +914,6 @@ trait Controls
                     'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
                     'return_value' => 'yes',
                     'default' => 'yes',
-                    'condition' => [
-                        'post_type!' => 'product',
-                    ],
                 ]
             );
 
@@ -929,7 +926,6 @@ trait Controls
                     'default' => __('Read More', 'essential-addons-for-elementor-lite'),
                     'condition' => [
                         'eael_show_read_more_button' => 'yes',
-                        'post_type!' => 'product',
                     ],
                 ]
             );
@@ -1156,7 +1152,6 @@ trait Controls
                     'tab' => Controls_Manager::TAB_STYLE,
                     'condition' => [
                         'eael_show_read_more_button' => 'yes',
-                        'post_type!' => 'product',
                     ],
                 ]
             );
