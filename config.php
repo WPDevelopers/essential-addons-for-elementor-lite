@@ -825,6 +825,34 @@ $config = [
                 true,
             ],
         ],
+
+        'crowdfundly-organization' => [
+	        'class' => '\Essential_Addons_Elementor\Elements\Crowdfundly_Organization',
+	        'condition' => [
+		        'class_exists',
+		        'Crowdfundly',
+		        true,
+	        ],
+        ],
+
+        'crowdfundly-all-campaign' => [
+	        'class' => '\Essential_Addons_Elementor\Elements\Crowdfundly_All_Campaign',
+	        'condition' => [
+		        'class_exists',
+		        'Crowdfundly',
+		        true,
+	        ],
+        ],
+
+        'crowdfundly-single-campaign' => [
+	        'class' => '\Essential_Addons_Elementor\Elements\Crowdfundly_Single_Campaign',
+	        'condition' => [
+		        'class_exists',
+		        'Crowdfundly',
+		        true,
+	        ],
+        ],
+
         'woo-checkout' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Checkout',
             'dependency' => [
