@@ -211,8 +211,8 @@ ea.hooks.addAction("init", "ea", () => {
 					});
 
 					$('html, body').animate({
-						scrollTop: $(widgetclass + " .eael-product-grid").offset().top
-					}, "fast");
+						scrollTop: $(widgetclass + " .eael-product-grid").offset().top - 50
+					}, 500);
 
 				},
 				complete: function () {
@@ -240,8 +240,8 @@ ea.hooks.addAction("init", "ea", () => {
 					);
 
 					$('html, body').animate({
-						scrollTop: $(widgetclass + " .eael-product-grid").offset().top
-					}, "fast");
+						scrollTop: $(widgetclass + " .eael-product-grid").offset().top - 50
+					}, 500);
 				},
 			});
 		});
