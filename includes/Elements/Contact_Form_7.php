@@ -1611,7 +1611,7 @@ class Contact_Form_7 extends Widget_Base
             [
                 'name' => 'contact_form_after_submit_feedback_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng, {{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok',
+                'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng, {{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok, {{WRAPPER}} .eael-contact-form-7 .wpcf7-response-output',
                 'separator' => 'before',
             ]
         );
@@ -1625,6 +1625,7 @@ class Contact_Form_7 extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-response-output' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -1635,7 +1636,7 @@ class Contact_Form_7 extends Widget_Base
                 'name' => 'contact_form_after_submit_feedback_background',
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng, {{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok',
+                'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng, {{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok, {{WRAPPER}} .eael-contact-form-7 .wpcf7-response-output',
                 'separator' => 'before',
             ]
         );
@@ -1647,7 +1648,7 @@ class Contact_Form_7 extends Widget_Base
                 'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'placeholder' => '1px',
                 'default' => '1px',
-                'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng, {{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok',
+                'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng, {{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok, {{WRAPPER}} .eael-contact-form-7 .wpcf7-response-output',
                 'separator' => 'before',
             ]
         );
@@ -1671,6 +1672,7 @@ class Contact_Form_7 extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng' => 'border-radius: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok' => 'border-radius: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-response-output' => 'border-radius: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -1684,6 +1686,7 @@ class Contact_Form_7 extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-response-output' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'before',
             ]
@@ -1698,6 +1701,7 @@ class Contact_Form_7 extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-response-output' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'before',
             ]
