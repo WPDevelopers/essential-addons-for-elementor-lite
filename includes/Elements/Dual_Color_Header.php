@@ -862,8 +862,8 @@ class Dual_Color_Header extends Widget_Base
 				echo '<span class="eael-dch-svg-icon">';
 				Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
 				echo '</span>';
-			    ?>
-			<?php } else { ?>
+
+             } else { ?>
 				<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
 			<?php } ?>
 		<?php endif; ?>
@@ -874,13 +874,11 @@ class Dual_Color_Header extends Widget_Base
 		<div class="eael-dual-header">
 		<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
 			<?php if ($icon_is_new || $icon_migrated) {
-
 				echo '<span class="eael-dch-svg-icon">';
 				Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
 				echo '</span>';
-			    ?>
 
-			<?php } else { ?>
+             } else { ?>
 				<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
 			<?php } ?>
 		<?php endif; ?>
@@ -898,9 +896,8 @@ class Dual_Color_Header extends Widget_Base
 				echo '<span class="eael-dch-svg-icon">';
 				Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
 				echo '</span>';
-			    ?>
 
-			<?php } else { ?>
+             } else { ?>
 				<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
 			<?php } ?>
 		<?php endif; ?>
@@ -922,8 +919,8 @@ class Dual_Color_Header extends Widget_Base
 				echo '<span class="eael-dch-svg-icon">';
 				Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
 				echo '</span>';
-			    ?>
-			<?php } else { ?>
+
+             } else { ?>
 				<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
 			<?php } ?>
 		<?php endif; ?>

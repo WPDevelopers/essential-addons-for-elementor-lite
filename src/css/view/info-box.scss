@@ -83,7 +83,8 @@
 
 /*--- Infobox Button ---*/
 .eael-infobox .infobox-button a.eael-infobox-button {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
 	padding: 5px 10px;
 	-webkit-transition: all 300ms ease-in-out 0s;
 	-o-transition: all 300ms ease-in-out 0s;
