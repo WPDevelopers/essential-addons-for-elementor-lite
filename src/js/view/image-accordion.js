@@ -40,7 +40,10 @@ var ImageAccordion = function ($scope, $) {
         });
 
     } else {
-        $("#eael-img-accordion-" + $id + " a").hover( function () {
+
+
+
+        $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover").on('hover', function () {
             if ($("#eael-img-accordion-" + $id + " .eael-image-accordion-hover")
                 .hasClass('overlay-active')) {
                 $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover.overlay-active").css("flex", "1");
@@ -50,7 +53,7 @@ var ImageAccordion = function ($scope, $) {
         });
     }
 };
-jQuery(window).on("elementor/frontend/init", function () {
+ea.hooks.addAction("init", "ea", () => {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-image-accordion.default",
         ImageAccordion
