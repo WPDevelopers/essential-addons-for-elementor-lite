@@ -88,6 +88,14 @@
 							$(".woocommerce-product-gallery."+dynamicID, $scope).each(function() {
 								$(this).wc_product_gallery();
 							});
+						} else {
+							const dynamicID = "eael-product-" + Date.now();
+							$content.find('.woocommerce-product-gallery').addClass(dynamicID);
+							$content.find('.woocommerce-product-gallery').addClass('eael-new-product');
+
+							$(".woocommerce-product-gallery."+dynamicID, $scope).each(function() {
+								$(this).wc_product_gallery();
+							});
 						}
 
 					} else {

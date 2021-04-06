@@ -1710,8 +1710,7 @@
                                 }
                             }
 
-                            &.product_type_external,
-                            &.product_type_variable {
+                            &.product_type_external {
                                 width: auto;
                                 height: auto;
                             }
@@ -1761,7 +1760,7 @@
                                 }
                             }
 
-                            &.button.add_to_cart_button.ajax_add_to_cart {
+                            &.button.add_to_cart_button {
                                 padding: 0;
                                 margin: 10px 2px 0;
                                 font-size: 0px;
@@ -1836,7 +1835,7 @@
                 display: block;
 
                 @media (min-width: 766px) {
-                    margin: 0 -15px;
+                    margin: 0 -1% !important;
                 }
 
                 &:before,
@@ -1888,6 +1887,10 @@
                 text-align: center;
                 border: 1px solid black;
                 overflow: hidden;
+
+                &.first {
+                    clear: none;
+                }
             }
         }
     }
