@@ -670,6 +670,30 @@ trait Controls
                 ]
             );
 
+            if( 'eael-post-grid' === $wb->get_name() ) {
+                $wb->add_responsive_control(
+                    'postgrid_image_height',
+                    [
+                        'label'      => __('Image Height', 'essential-addons-for-elementor-lite'),
+                        'type'       => Controls_Manager::SLIDER,
+                        'range'      => [
+                            'px' => [
+                                'min'  => 0,
+                                'max'  => 600,
+                                'step' => 1,
+                            ],
+                        ],
+                        'size_units' => ['px', 'em', '%'],
+                        'selectors'  => [
+                            '{{WRAPPER}} .eael-entry-thumbnail' => 'height: {{SIZE}}{{UNIT}};',
+                        ],
+                        'condition' => [
+                            'eael_show_image' => 'yes',
+                        ],
+                    ]
+                );
+            }
+
         }
 
         if ('eael-content-timeline' === $wb->get_name()) {
