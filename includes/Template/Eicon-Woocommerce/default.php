@@ -78,7 +78,9 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
         if ( $should_print_rating ) {
             echo wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() );
         }
-        if ( $product->is_on_sale() ) {
+        if ( ! $product->managing_stock() && ! $product->is_in_stock() ) {
+            printf( '<span class="outofstock-badge">%s</span>', __( 'Stock <br/> Out', 'essential-addons-for-elementor-lite' ) );
+        } elseif ( $product->is_on_sale() ) {
             printf( '<span class="onsale">%s</span>', __( 'Sale!', 'essential-addons-for-elementor-lite' ) );
         }
         if ( $should_print_price ) {
@@ -395,6 +397,14 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
     if($settings['eael_product_grid_rating']!='yes'){
         remove_action('woocommerce_after_shop_loop_item_title','woocommerce_template_loop_rating',5);
     }
+
+    add_action('woocommerce_before_shop_loop_item_title',function(){
+        global $product; 
+        if(empty($product->is_on_sale())  && !$product->is_in_stock()  ){
+          echo '<span class="outofstock-badge">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>';
+        } 
+    },9);
+    
     if ( $should_print_compare_btn ) {
         add_action( 'woocommerce_after_shop_loop_item', [
             '\Essential_Addons_Elementor\Elements\Product_Grid',
