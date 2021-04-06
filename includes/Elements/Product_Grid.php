@@ -1159,11 +1159,22 @@ class Product_Grid extends Widget_Base
         $this->add_control(
             'eael_product_grid_product_price_color',
             [
-                'label' => esc_html__('Product Price Color', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Price Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#272727',
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .price, {{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .eael-product-price' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_grid_product_sale_price_color',
+            [
+                'label' => esc_html__('Sale Price Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .price ins, {{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .eael-product-price ins' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1331,7 +1342,6 @@ class Product_Grid extends Widget_Base
                 'default' => '#ff2a13',
                 'selectors' => [
                     '{{WRAPPER}} .woocommerce ul.products li.product .onsale, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale' => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .price ins, {{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .eael-product-price ins' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .woocommerce ul.products li.product .eael-onsale:not(.outofstock).sale-preset-4:after' => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
                 ],
             ]
@@ -2695,7 +2705,7 @@ class Product_Grid extends Widget_Base
                 'label' => __('Content Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-popup.woocommerce .product_meta .sku, .eael-product-popup.woocommerce .product_meta a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-popup.woocommerce .product_meta .sku, {{WRAPPER}} .eael-product-popup.woocommerce .product_meta a' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -2949,7 +2959,7 @@ class Product_Grid extends Widget_Base
                 var $products = $('.products', $scope);
                 var $layout_mode = $products.data('layout-mode');
                 
-                if ($layout_mode === 'masonry') {
+                if ( $layout_mode === 'masonry' ) {
                     // init isotope
                     var $isotope_products = $products.isotope({
                         itemSelector: "li.product",
