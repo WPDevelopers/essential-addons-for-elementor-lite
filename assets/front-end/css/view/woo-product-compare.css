@@ -20,6 +20,9 @@
       -ms-flex-align: center;
           align-items: center;
 }
+.eael-wcpc-wrapper .wcpc-table-header .wcpc-title {
+  word-break: break-word;
+}
 .eael-wcpc-wrapper .elementor-icon {
   font-size: 20px;
   margin-right: 10px;
