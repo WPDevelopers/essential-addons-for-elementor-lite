@@ -1,31 +1,43 @@
-.eael-infobox .infobox-icon {
+
+.infobox-icon {
 	height: auto;
+	.eaa-svg {
+		font-size: 40px;
+		svg {
+			width: 1em;
+			height: 1em
+		}
+	}
+	.infobox-icon-wrap {
+		display: flex;
+		width: 100%;
+		height: auto;
+		transition: 0.3s;
+		align-items: center;
+		justify-content: center;
+		i {
+			transition: 0.3s;
+		}
+	}
+
 }
 
-.eael-infobox .infobox-icon .infobox-icon-wrap {
-	display: flex;
-	width: 100%;
-	height: auto;
-	transition: 0.3s;
-	align-items: center;
-	justify-content: center;
-}
-
-.eael-infobox .infobox-icon .infobox-icon-wrap i {
-	transition: 0.3s;
-}
 
 /*--- For Content Alignment ---*/
-.eael-infobox-content-align-left .eael-infobox .infobox-icon,
-.eael-infobox-content-align-left .eael-infobox .infobox-content,
-.eael-infobox-content-align-left .eael-infobox .infobox-button {
-	text-align: left;
+.eael-infobox-content-align-left .eael-infobox {
+	.infobox-icon,
+	.infobox-content,
+	.infobox-button {
+		text-align: left;
+	}
 }
 
-.eael-infobox-content-align-right .eael-infobox .infobox-icon,
-.eael-infobox-content-align-right .eael-infobox .infobox-content,
-.eael-infobox-content-align-right .eael-infobox .infobox-button {
-	text-align: right;
+.eael-infobox-content-align-right .eael-infobox {
+	.infobox-icon,
+	.infobox-content,
+	.infobox-button{
+		text-align: right;
+	}
 }
 
 .eael-infobox-content-align-center .eael-infobox .infobox-icon,
@@ -76,6 +88,13 @@
 	-webkit-transition: all 300ms ease-in-out 0s;
 	-o-transition: all 300ms ease-in-out 0s;
 	transition: all 300ms ease-in-out 0s;
+	.eaa-svg {
+		font-size: 16px;
+		svg {
+			width: 1em;
+			height: 1em
+		}
+	}
 }
 
 /*--- For icon bg shape alignment ---*/

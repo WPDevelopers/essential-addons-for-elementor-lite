@@ -8,10 +8,10 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Repeater;
 use \Elementor\Group_Control_Background;
@@ -1962,7 +1962,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'fg_item_price_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
                 'selector' => '{{WRAPPER}} .fg-caption-head .fg-item-price'
             ]
         );
@@ -2007,7 +2009,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'fg_item_ratings_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
                 'selector' => '{{WRAPPER}} .fg-caption-head .fg-item-ratings'
             ]
         );
@@ -2041,7 +2045,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'fg_item_category_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
                 'selector' => '{{WRAPPER}} .fg-item-category span'
             ]
         );
@@ -2096,7 +2102,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'fg_sf_controls_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
                 'selector' => '{{WRAPPER}} .fg-filter-trigger > span'
             ]
         );
@@ -2388,7 +2396,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'fg_sf_dropdown_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
                 'selector' => '{{WRAPPER}} .fg-layout-3-filter-controls li.control'
             ]
         );
@@ -2546,7 +2556,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'load_more_button_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
                 'selector' => '{{WRAPPER}} .eael-gallery-load-more .eael-filterable-gallery-load-more-text',
                 'condition' => [
                     'pagination' => 'yes',
