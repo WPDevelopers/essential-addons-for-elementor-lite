@@ -957,7 +957,7 @@ class Feature_List extends Widget_Base {
                     echo "#{$css_id} .eael-feature-list-icon.fl-icon-{$index} svg { color: {$icon_color} !important; fill: {$icon_color} !important; } ";
                      ?>
                 </style>
-                <?
+                <?php
                     }
 
                 Icons_Manager::render_icon( $item['eael_feature_list_icon_new'], [ 'aria-hidden' => 'true', 'style' => "color:{$icon_color};" ] );
