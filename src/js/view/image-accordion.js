@@ -40,9 +40,6 @@ var ImageAccordion = function ($scope, $) {
         });
 
     } else {
-
-
-
         $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover").on('hover', function () {
             if ($("#eael-img-accordion-" + $id + " .eael-image-accordion-hover")
                 .hasClass('overlay-active')) {
