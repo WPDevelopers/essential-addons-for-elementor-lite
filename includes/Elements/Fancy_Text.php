@@ -337,8 +337,8 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_color_selector',
 			[
-				'label' => esc_html__('Color Selector', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'label' => esc_html__('Choose Background Type', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'solid-color' => [
 						'title' => __('Color', 'essential-addons-for-elementor-lite'),
@@ -358,12 +358,13 @@ class Fancy_Text extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_fancy_text_strings_color',
+			'eael_fancy_text_strings_background_color',
 			[
-				'label' => esc_html__( 'Solid Color', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Background', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
+				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}} .eael-fancy-text-strings' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-fancy-text-strings' => 'background: {{VALUE}};',
 				],
 				'conditions' => [
 					'relation' => 'or',
@@ -375,11 +376,6 @@ class Fancy_Text extends Widget_Base {
 									'operator' => '==',
 									'value' => 'solid-color',
 								],
-								[
-									'name' => 'eael_fancy_text_style',
-									'operator' => '==',
-									'value' => 'style-1',
-								]
 							],
 						],
 						[
@@ -433,13 +429,12 @@ class Fancy_Text extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_fancy_text_strings_background_color',
+			'eael_fancy_text_strings_color',
 			[
-				'label' => esc_html__( 'Background', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Solid Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
-				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}} .eael-fancy-text-strings' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .eael-fancy-text-strings' => 'color: {{VALUE}};',
 				],
 				'conditions' => [
 					'relation' => 'or',
@@ -447,10 +442,10 @@ class Fancy_Text extends Widget_Base {
 						[
 							'terms' => [
 								[
-									'name' => 'eael_fancy_text_color_selector',
+									'name' => 'eael_fancy_text_style',
 									'operator' => '==',
-									'value' => 'solid-color',
-								],
+									'value' => 'style-1',
+								]
 							],
 						],
 						[

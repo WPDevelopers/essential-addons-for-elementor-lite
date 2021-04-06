@@ -1623,7 +1623,7 @@ msgstr ""
 msgid "Align Right Arrow"
 msgstr ""
 
-#: ../includes/Elements/Content_Ticker.php:832
+#: ../includes/Elements/Content_Ticker.php:829
 msgid "No content found!"
 msgstr ""
 
