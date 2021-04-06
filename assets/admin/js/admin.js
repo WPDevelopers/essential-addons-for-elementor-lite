@@ -368,7 +368,6 @@
                     } else {
                         button.attr("disabled", false);
                         button.text("Install");
-                        alert(response.data);
                     }
                 },
                 error: function (err) {
@@ -393,7 +392,6 @@
                         $( "body" ).trigger( 'eael_after_active_plugin',{plugin:basename} );
                     } else {
                         button.text("Activate");
-                        alert(response.data);
                     }
 
                     button.attr("disabled", false);
