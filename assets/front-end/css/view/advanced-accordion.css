@@ -9,6 +9,7 @@
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header {
   padding: 15px;
   border: 1px solid rgba(0, 0, 0, 0.02);
+  background-color: #f1f1f1;
   font-size: 1rem;
   font-weight: 600;
   line-height: 1;
@@ -34,8 +35,25 @@
   margin: 0;
 }
 
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header > i {
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header > i, .eael-adv-accordion .eael-accordion-list .eael-accordion-header span {
   margin-right: 10px;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header .eaa-svg {
+  font-size: 32px;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header .eaa-svg svg {
+  width: 1em;
+  height: 1em;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover {
+  background-color: #414141;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header.active {
+  background-color: #444444;
 }
 
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {

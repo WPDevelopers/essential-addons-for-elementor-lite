@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
+use Elementor\Icons_Manager;
 use \Elementor\Plugin;
 use Elementor\Repeater;
 use \Elementor\Utils;
@@ -410,6 +411,7 @@ class Adv_Tabs extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li i' => 'font-size: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li img' => 'width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li svg' => 'width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -431,8 +433,8 @@ class Adv_Tabs extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-tab-inline-icon li i, {{WRAPPER}} .eael-tab-inline-icon li img' => 'margin-right: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-tab-top-icon li i, {{WRAPPER}} .eael-tab-top-icon li img' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-tab-inline-icon li i, {{WRAPPER}} .eael-tab-inline-icon li img, {{WRAPPER}} .eael-tab-inline-icon li svg' => 'margin-right: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-tab-top-icon li i, {{WRAPPER}} .eael-tab-top-icon li img, {{WRAPPER}} .eael-tab-top-icon li svg' => 'margin-bottom: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -500,6 +502,7 @@ class Adv_Tabs extends Widget_Base
                 'default' => '#333',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li svg' => 'fill: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_tabs_icon_show' => 'yes',
@@ -566,6 +569,7 @@ class Adv_Tabs extends Widget_Base
                 'default' => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover > i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover > svg' => 'fill: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_tabs_icon_show' => 'yes',
@@ -635,6 +639,8 @@ class Adv_Tabs extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active > i' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default > i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active > svg' => 'fill: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default > svg' => 'fill: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_tabs_icon_show' => 'yes',
@@ -888,11 +894,7 @@ class Adv_Tabs extends Widget_Base
                             <?php if ($settings['eael_adv_tabs_icon_show'] === 'yes') :
                                 if ($tab['eael_adv_tabs_icon_type'] === 'icon') : ?>
                                     <?php if ($tab_icon_is_new || $tab_icon_migrated) {
-                                        if (isset($tab['eael_adv_tabs_tab_title_icon_new']['value']['url'])) {
-                                            echo '<img src="' . $tab['eael_adv_tabs_tab_title_icon_new']['value']['url'] . '"/>';
-                                        } else {
-                                            echo '<i class="' . $tab['eael_adv_tabs_tab_title_icon_new']['value'] . '"></i>';
-                                        }
+		                                Icons_Manager::render_icon( $tab['eael_adv_tabs_tab_title_icon_new'] );
                                     } else {
                                         echo '<i class="' . $tab['eael_adv_tabs_tab_title_icon'] . '"></i>';
                                     } ?>
