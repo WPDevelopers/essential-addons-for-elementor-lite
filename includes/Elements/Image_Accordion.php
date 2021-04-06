@@ -572,17 +572,6 @@ class Image_Accordion extends Widget_Base {
         <?php foreach ( $settings[ 'eael_img_accordions' ] as $key => $img_accordion ): ?>
             <?php
             $eael_accordion_link = $target = $nofollow = $attributes = $active = '';
-            $activeCSS           = ( $active === 'yes' ? ' flex: 3 1 0%;' : '' );
-            $this->add_render_attribute(
-                'eael-image-accordion-link-' . $key,
-                [
-                    'class' => 'eael-image-accordion-hover',
-                    'style' => "background-image: url(" . esc_url( $img_accordion[ 'eael_accordion_bg' ][ 'url' ] ) . ");" . $activeCSS,
-                ]
-            );
-            if ( $active === 'yes' ) {
-                $this->add_render_attribute( 'eael-image-accordion-link-' . $key, 'class', 'overlay-active' );
-            }
             $tag = 'div';
             if ( $img_accordion[ 'eael_accordion_enable_title_link' ] == 'yes' ) {
                 $eael_accordion_link = ( '#' === $img_accordion[ 'eael_accordion_title_link' ][ 'url' ] ) ? '#/' : $img_accordion[ 'eael_accordion_title_link' ][ 'url' ];
@@ -598,6 +587,17 @@ class Image_Accordion extends Widget_Base {
                 $this->add_render_attribute( 'eael-image-accordion-link-' . $key, 'href', esc_url( $eael_accordion_link ));
                 
                 $tag = 'a';
+            }
+            $activeCSS           = ( $active === 'yes' ? ' flex: 3 1 0%;' : '' );
+            $this->add_render_attribute(
+                'eael-image-accordion-link-' . $key,
+                [
+                    'class' => 'eael-image-accordion-hover',
+                    'style' => "background-image: url(" . esc_url( $img_accordion[ 'eael_accordion_bg' ][ 'url' ] ) . ");" . $activeCSS,
+                ]
+            );
+            if ( $active === 'yes' ) {
+                $this->add_render_attribute( 'eael-image-accordion-link-' . $key, 'class', 'overlay-active' );
             }
             ?>
 
