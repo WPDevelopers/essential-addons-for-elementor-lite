@@ -2949,26 +2949,27 @@ class Product_Grid extends Widget_Base
         </div>
         <script type="text/javascript">
             jQuery(document).ready(function($) {
-                var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>");
-                var $products = $('.products', $scope);
-                var $layout_mode = $products.data('layout-mode');
-                
-                if ($layout_mode === 'masonry') {
-                    // init isotope
-                    var $isotope_products = $products.isotope({
-                        itemSelector: "li.product",
-                        layoutMode: $layout_mode,
-                        percentPosition: true
-                    });
+                $(".eael-product-grid").each(function() {
+                    var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>"),
+                        $products = $(this).find(".products");
+                        $layout_mode = $products.data('layout-mode');
 
-                    $isotope_products.imagesLoaded().progress( function() {
-                        $isotope_products.isotope('layout');
-                    })
+                        if ($layout_mode == 'masonry') {
+                            var $isotope_products = $products.isotope({
+                                itemSelector: ".product",
+                                layoutMode: $layout_mode,
+                                percentPosition: true
+                            });
 
-                    $(window).on('resize', function() {
-                        $isotope_products.isotope('layout');
-                    });
-                }
+                            $isotope_products.imagesLoaded().progress( function() {
+                                $isotope_products.isotope('layout');
+                            });
+
+                            $('.product', $products).resize(function() {
+                                $isotope_products.isotope('layout');
+                            });
+                    }
+                });
             });
         </script>
         <?php
