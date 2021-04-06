@@ -1087,6 +1087,7 @@ class Info_Box extends Widget_Base
 				'default' => '#4d4d4d',
 				'selectors' => [
 					'{{WRAPPER}} .eael-infobox:hover .infobox-icon i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-infobox:hover .infobox-icon svg' => 'fill: {{VALUE}};',
 					'{{WRAPPER}} .eael-infobox.icon-beside-title:hover .infobox-content .title figure i' => 'color: {{VALUE}};',
 				],
 			]
@@ -1588,16 +1589,6 @@ class Info_Box extends Widget_Base
 			$this->add_render_attribute('infobox_icon', 'class', 'eael-icon-only');
 		}
 
-		if ($infobox_icon_is_new || $infobox_icon_migrated) {
-
-			echo '<span class="eael-infobox-svg-icon">';
-			Icons_Manager::render_icon( $settings['eael_infobox_icon_new'], [ 'aria-hidden' => 'true' ] );
-			echo '</span>';
-
-		} else {
-			$icon_tag = '<i class="' . esc_attr($settings['eael_infobox_icon']) . '"></i>';
-		}
-
 		ob_start();
 		?>
 		<div <?php echo $this->get_render_attribute_string('infobox_icon'); ?>>
@@ -1608,7 +1599,17 @@ class Info_Box extends Widget_Base
 
 			<?php if ('icon' == $settings['eael_infobox_img_or_icon']): ?>
 				<div class="infobox-icon-wrap">
-					<?php echo $icon_tag; ?>
+					<?php
+					if ($infobox_icon_is_new || $infobox_icon_migrated) {
+
+						echo '<span class="eael-infobox-svg-icon">';
+						Icons_Manager::render_icon( $settings['eael_infobox_icon_new'], [ 'aria-hidden' => 'true' ] );
+						echo '</span>';
+
+					} else {
+						echo '<i class="' . esc_attr($settings['eael_infobox_icon']) . '"></i>';
+					}
+					?>
 				</div>
 			<?php endif;?>
 
