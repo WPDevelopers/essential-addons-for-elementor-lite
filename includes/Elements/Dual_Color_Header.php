@@ -577,6 +577,50 @@ class Dual_Color_Header extends Widget_Base
 				],
 			]
 		);
+
+		$this->add_control(
+			'eael_section_dch_separator_icon_size',
+			[
+				'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 36,
+				],
+				'range' => [
+					'px' => [
+						'min' => 20,
+						'max' => 500,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-dual-header .eael-dch-separator-wrap i' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-dual-header .eael-dch-separator-wrap img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-dual-header .eael-dch-separator-wrap .eael-dch-svg-icon' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-dual-header .eael-dch-separator-wrap .eael-dch-svg-icon svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'eael_dch_separator_type' => 'icon',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_section_dch_separator_icon_color',
+			[
+				'label' => esc_html__('Icon Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#4d4d4d',
+				'selectors' => [
+					'{{WRAPPER}} .eael-dual-header .eael-dch-separator-wrap i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-dual-header .eael-dch-separator-wrap svg' => 'fill: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_dch_separator_type' => 'icon',
+				],
+			]
+		);
+
 		$this->add_control(
 			'eael_section_dch_separator_alignment',
 			[
