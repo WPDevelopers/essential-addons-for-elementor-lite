@@ -20,7 +20,7 @@ class Crowdfundly_All_Campaign extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'fa fa-handshake-o';
+		return 'eaicon-crowdfundly-campaign';
 	}
 
 	public function get_keywords() {
