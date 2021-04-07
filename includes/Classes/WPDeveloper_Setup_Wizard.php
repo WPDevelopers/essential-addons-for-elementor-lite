@@ -239,7 +239,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                         <div>
                             <div class="eael-input-group">
                                 <input type="checkbox" id="eael_user_email_address" name="eael_user_email_address"
-                                       checked>
+                                       >
                                 <label for="eael_user_email_address"><?php _e( 'Share non-sensitive diagnostic data and plugin
                                     usage
                                     information', 'essential-addons-for-elementor-lite' ) ?></label>
@@ -412,7 +412,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                 'basename' => 'crowdfundly/crowdfundly.php',
                 'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/crowdfundly-logo.png',
                 'title'    => __( 'Crowdfundly', 'essential-addons-for-elementor-lite' ),
-                'desc'     => __( 'Crowdfund.ly is a Software as a Service (SaaS) digital crowdfunding solution. Best fundraising solution in WordPress with Elementor & WooCommerce support.', 'essential-addons-for-elementor-lite' ),
+                'desc'     => __( 'Crowdfundly is a Software as a Service (SaaS) digital crowdfunding solution. Best fundraising solution in WordPress with Elementor & WooCommerce support.', 'essential-addons-for-elementor-lite' ),
             ],
         ];
     }
@@ -762,7 +762,6 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                     [
                         'key'         => 'woo-product-carousel',
                         'title'       => __( 'Woo Product Carousel', 'essential-addons-for-elementor-lite' ),
-                        'preferences' => 'advance',
                     ],
                     [
                         'key'   => 'woo-checkout',
