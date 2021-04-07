@@ -843,7 +843,9 @@ class Dual_Color_Header extends Widget_Base
 		// separator
 		$separator_markup = '<div class="eael-dch-separator-wrap">';
 		if ($settings['eael_dch_separator_type'] == 'icon') {
-			$separator_markup .= '<i class="' . esc_attr($settings['eael_dch_separator_icon']['value']) . '"></i>';
+            ob_start();
+			Icons_Manager::render_icon( $settings['eael_dch_separator_icon'], [ 'aria-hidden' => 'true' ] );
+			$separator_markup .= ob_get_clean();
 		} else {
 			$separator_markup .= '<span class="separator-one"></span>
 			<span class="separator-two"></span>';
