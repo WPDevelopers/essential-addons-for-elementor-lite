@@ -215,7 +215,7 @@ class Creative_Button extends Widget_Base
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
-        if (!apply_filters('eael/pro_enabled', false)) {
+        if (apply_filters('eael/pro_enabled', false)) {
             $this->add_control(
                 'creative_button_effect',
                 [
@@ -265,7 +265,7 @@ class Creative_Button extends Widget_Base
                     'default' => '#ffffff',
                     'selectors' => [
                         '{{WRAPPER}} .eael-creative-button i' => 'color: {{VALUE}};',
-                        '{{WRAPPER}} .eael-creative-button svg' => 'fill: {{VALUE}};',
+                        '{{WRAPPER}} .eael-creative-button .creative-button-inner svg' => 'fill: {{VALUE}};',
                     ],
                 ]
             );
@@ -370,8 +370,7 @@ class Creative_Button extends Widget_Base
                     'type'      => Controls_Manager::COLOR,
                     'default'   => '#ffffff',
                     'selectors' => [
-                        '{{WRAPPER}} .eael-creative-button:hover'                               => 'color: {{VALUE}};',
-                        '{{WRAPPER}} .eael-creative-button:hover svg'                               => 'fill: {{VALUE}};',
+                        '{{WRAPPER}} .eael-creative-button:hover .cretive-button-text' => 'color: {{VALUE}};',
                         '{{WRAPPER}} .eael-creative-button.eael-creative-button--winona::after' => 'color: {{VALUE}};',
                     ],
                 ]
