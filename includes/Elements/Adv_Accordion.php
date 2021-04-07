@@ -805,6 +805,19 @@ class Adv_Accordion extends Widget_Base
                 'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content',
             ]
         );
+
+        $this->add_responsive_control(
+            'eael_adv_accordion_content_border_radius',
+            [
+                'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
