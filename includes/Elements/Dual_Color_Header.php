@@ -596,8 +596,7 @@ class Dual_Color_Header extends Widget_Base
 				'selectors' => [
 					'{{WRAPPER}} .eael-dual-header .eael-dch-separator-wrap i' => 'font-size: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .eael-dual-header .eael-dch-separator-wrap img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eael-dual-header .eael-dch-separator-wrap .eael-dch-svg-icon' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eael-dual-header .eael-dch-separator-wrap .eael-dch-svg-icon svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-dual-header .eael-dch-separator-wrap svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
 				],
 				'condition' => [
 					'eael_dch_separator_type' => 'icon',
