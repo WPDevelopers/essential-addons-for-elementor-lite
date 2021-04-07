@@ -389,7 +389,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             [
                 'slug'     => 'reviewx',
                 'basename' => 'reviewx/reviewx.php',
-                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/review-logo.gif',
+                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/review-logo.png',
                 'title'    => __( 'ReviewX', 'essential-addons-for-elementor-lite' ),
                 'desc'     => __( 'ReviewX lets you get instant customer ratings and multi criteria reviews to add credibility to your WooCommerce Store and increase conversion rates.', 'essential-addons-for-elementor-lite' ),
             ],
@@ -406,7 +406,14 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                 'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/easy-jobs-logo.png',
                 'title'    => __( 'EasyJobs', 'essential-addons-for-elementor-lite' ),
                 'desc'     => __( 'Easy solution for the job recruitment to attract, manage & hire right talent faster. The Best Talent Recruitment Suite which lets you manage jobs & career page in Elementor.', 'essential-addons-for-elementor-lite' ),
-            ]
+            ],
+            [
+                'slug'     => 'crowdfundly',
+                'basename' => 'crowdfundly/crowdfundly.php',
+                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/crowdfundly-logo.png',
+                'title'    => __( 'Crowdfundly', 'essential-addons-for-elementor-lite' ),
+                'desc'     => __( 'Crowdfund.ly is a Software as a Service (SaaS) digital crowdfunding solution. Best fundraising solution in WordPress with Elementor & WooCommerce support.', 'essential-addons-for-elementor-lite' ),
+            ],
         ];
     }
 
@@ -750,6 +757,11 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                     [
                         'key'         => 'product-grid',
                         'title'       => __( 'Product Grid', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'advance',
+                    ],
+                    [
+                        'key'         => 'woo-product-carousel',
+                        'title'       => __( 'Woo Product Carousel', 'essential-addons-for-elementor-lite' ),
                         'preferences' => 'advance',
                     ],
                     [
