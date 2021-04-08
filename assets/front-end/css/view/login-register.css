@@ -47,6 +47,9 @@
 .d-none {
   display: none;
 }
+.eael-lr-d-none {
+  display: none;
+}
 .d-ib {
   display: inline-block;
 }
