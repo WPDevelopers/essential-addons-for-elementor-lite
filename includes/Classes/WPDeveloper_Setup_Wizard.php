@@ -794,14 +794,11 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
     public function wpins_process(){
         $plugin_name = basename( EAEL_PLUGIN_FILE, '.php' );
         if ( class_exists( '\Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker' ) ){
-            $tracker = new \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker(
-                EAEL_PLUGIN_FILE,
-                'http://app.wpdeveloper.net',
-                array(),
-                true,
-                true,
-                1
-            );
+            $tracker = \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker::get_instance( EAEL_PLUGIN_FILE, [
+                'opt_in'       => true,
+                'goodbye_form' => true,
+                'item_id'      => '760e8569757fa16992d8'
+            ] );
             $tracker->set_is_tracking_allowed( true );
             $tracker->do_tracking( true );
         }
@@ -809,12 +806,12 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
 
     public function get_dummy_widget(){
         return [
-	        'embedpress'                  => 1,
-	        'woocommerce-review'          => 1,
-	        'career-page'                 => 1,
-	        'crowdfundly-single-campaign' => 1,
-	        'crowdfundly-organization'    => 1,
-	        'crowdfundly-all-campaign'    => 1,
+            'embedpress'                  => 1,
+            'woocommerce-review'          => 1,
+            'career-page'                 => 1,
+            'crowdfundly-single-campaign' => 1,
+            'crowdfundly-organization'    => 1,
+            'crowdfundly-all-campaign'    => 1,
         ];
     }
 }
