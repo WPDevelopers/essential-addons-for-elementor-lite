@@ -524,6 +524,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             foreach ( $GLOBALS[ 'eael_config' ][ 'elements' ] as $key => $item ) {
                 $save_element[ $key ] = ( isset( $el_list[ $key ] ) ) ? 1 : '';
             }
+	        $save_element = array_merge($save_element,$this->get_dummy_widget());
             update_option( 'eael_save_settings', $save_element );
             return true;
         }
@@ -804,6 +805,17 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             $tracker->set_is_tracking_allowed( true );
             $tracker->do_tracking( true );
         }
+    }
+
+    public function get_dummy_widget(){
+        return [
+	        'embedpress'                  => 1,
+	        'woocommerce-review'          => 1,
+	        'career-page'                 => 1,
+	        'crowdfundly-single-campaign' => 1,
+	        'crowdfundly-organization'    => 1,
+	        'crowdfundly-all-campaign'    => 1,
+        ];
     }
 }
 
