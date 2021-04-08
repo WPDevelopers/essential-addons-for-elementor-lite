@@ -124,14 +124,19 @@ trait Core
      */
     public function start_plugin_tracking()
     {
-        new Plugin_Usage_Tracker(
-            EAEL_PLUGIN_FILE,
-            'http://app.wpdeveloper.net',
-            array(),
-            true,
-            true,
-            1
-        );
+        $tracker = Plugin_Usage_Tracker::get_instance( EAEL_PLUGIN_FILE, [
+            'opt_in'       => true,
+            'goodbye_form' => true,
+            'item_id'      => '760e8569757fa16992d8'
+        ] );
+        $tracker->set_notice_options(array(
+            'notice' => __( 'Want to help make <strong>Essential Addons for Elementor</strong> even more awesome? You can get a <strong>10% discount coupon</strong> for Pro upgrade if you allow.', 'essential-addons-for-elementor-lite' ),
+            'extra_notice' => __( 'We collect non-sensitive diagnostic data and plugin usage information.
+            Your site URL, WordPress & PHP version, plugins & themes and email address to send you the
+            discount coupon. This data lets us make sure this plugin always stays compatible with the most
+            popular plugins and themes. No spam, I promise.', 'essential-addons-for-elementor-lite' ),
+        ));
+        $tracker->init();
     }
 
     /**
