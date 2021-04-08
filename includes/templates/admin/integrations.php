@@ -17,7 +17,7 @@ $integrations = [
     [
         'slug'     => 'reviewx',
         'basename' => 'reviewx/reviewx.php',
-        'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/review-logo.gif',
+        'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/review-logo.png',
         'title'    => __('ReviewX','essential-addons-for-elementor-lite'),
         'desc'     => __('ReviewX let’s you get instant customer rating and multicriteria reviews to add credibility to your WooCommerce Store and increase conversion rates.','essential-addons-for-elementor-lite'),
     ],
@@ -34,6 +34,13 @@ $integrations = [
         'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/easy-jobs-logo.png',
         'title'    => __( 'EasyJobs', 'essential-addons-for-elementor-lite' ),
         'desc'     => __( 'Easy solution for the job recruitment to attract, manage & hire right talent faster. The Best Talent Recruitment Suite which lets you manage jobs & career page in Elementor.', 'essential-addons-for-elementor-lite' ),
+    ],
+    [
+	    'slug'     => 'crowdfundly',
+	    'basename' => 'crowdfundly/crowdfundly.php',
+	    'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/crowdfundly-logo.png',
+	    'title'    => __( 'Crowdfundly', 'essential-addons-for-elementor-lite' ),
+	    'desc'     => __( 'Crowdfundly is a Software as a Service (SaaS) digital crowdfunding solution. Best fundraising solution in WordPress with Elementor & WooCommerce support.', 'essential-addons-for-elementor-lite' ),
     ]
 ];
 ?>
