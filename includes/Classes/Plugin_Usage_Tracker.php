@@ -24,7 +24,8 @@ if( ! class_exists('Plugin_Usage_Tracker') ) :
 		/**
 		 * API URL
 		 */
-		const API_URL = 'http://app.wpdeveloper.net?usage_tracker=hello';
+		// const API_URL = 'http://app.wpdeveloper.net?usage_tracker=hello';
+		const API_URL = 'https://send.wpinsight.com/process-plugin-data';
 		/**
 		 * Installed Plugin File
 		 *
