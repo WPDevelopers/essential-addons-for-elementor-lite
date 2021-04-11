@@ -151,11 +151,6 @@ https://www.youtube.com/watch?v=K9BssSV-KC8
 
 https://www.youtube.com/watch?v=wvmteLgbbe4
 
-**Our friend Dave Swift highlighted the features he loves the most**
-
-https://www.youtube.com/watch?v=PhFb-LfG7h8
-
-
 ### Looking for a companion theme?
 
 Check [Flexia](https://wordpress.org/themes/flexia/), the best friend of Elementor and Essential Addons. A modern lightweight and versatile theme for WordPress with endless customization options. **And fully Free.** 
