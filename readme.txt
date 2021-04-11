@@ -223,7 +223,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 4.6.1 - 04/11/2021 =
+= 4.6.1 - 11/04/2021 =
 
 - Added: Cache Settings for EA Facebook Feed, Twitter Feed, Event Calendar and Adv. Data Table
 - Fixed: SVG color not changing in some of the widgets
@@ -242,7 +242,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Few minor bug fix and improvements
 
 
-= 4.6.0 - 04/01/2021 =
+= 4.6.0 - 01/04/2021 =
 
 - Added: EA Woo Product Carousel
 - Few minor bug fix and improvements
