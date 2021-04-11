@@ -1106,6 +1106,130 @@ class Product_Grid extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_product_grid_product_image_heading',
+            [
+                'label' => __('Image Styles', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->start_controls_tabs('eael_product_grid_image_tabs', [
+            'conditions' => [
+                'relation' => 'or',
+                'terms' => [
+                    [
+                        'name' => 'eael_product_grid_layout',
+                        'operator' => 'in',
+                        'value' => [
+                            'grid',
+                            'mesonry',
+                        ]
+                    ],
+                    [
+                        'name' => 'eael_product_list_style_preset',
+                        'operator' => '!in',
+                        'value' => [
+                            'eael-product-list-preset-3',
+                            'eael-product-list-preset-4',
+                        ]
+                    ]
+                ]
+            ],
+        ]);
+
+        $this->start_controls_tab('eael_product_grid_image_tabs_normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name'      => 'eael_product_grid_image_background',
+                'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+                'types'     => ['classic', 'gradient'],
+                'selector'  => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product img',
+            ]
+        );
+
+        $this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'eael_product_grid_image_border',
+				'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
+				'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product img',
+			]
+		);
+
+        $this->add_control(
+            'eael_product_grid_image_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%' ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'eael_peoduct_grid_image_shadow',
+                'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product img',
+            ]
+        );
+
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab('eael_product_grid_image_hover_styles', ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]);
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name'      => 'eael_product_grid_image_hover_background',
+                'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+                'types'     => ['classic', 'gradient'],
+                'selector'  => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product img:hover',
+            ]
+        );
+
+        $this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'eael_product_grid_image_hover_border',
+				'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
+				'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product img:hover',
+			]
+		);
+
+        $this->add_control(
+            'eael_product_grid_image_hover_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%' ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product img:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'eael_peoduct_grid_image_hover_shadow',
+                'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product img:hover',
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
         $this->end_controls_section();
     }
 
