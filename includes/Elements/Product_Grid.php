@@ -47,7 +47,7 @@ class Product_Grid extends Widget_Base
 		}
 
 		if ( $is_type_instance && class_exists('woocommerce')) {
-			add_action( 'wp_footer', [ $this, 'eael_product_grid_script' ] );
+			add_filter( 'body_class', [$this, 'add_slider_body_class'] );
 		}
 	}
 
@@ -106,6 +106,28 @@ class Product_Grid extends Widget_Base
             'font-awesome-4-shim',
         ];
     }
+
+	/**
+	 * added custom markup for popup
+	 *
+	 * @param $classes
+	 * @return mixed
+	 */
+	public function add_slider_body_class( $classes ) {
+		if ( !in_array( 'eael-woo-slider', $classes ) ) {
+			add_action( 'wp_body_open', function () {
+				?>
+                <div style="display: none" class="eael-woocommerce-popup-view eael-product-popup
+		eael-product-zoom-in woocommerce">
+                    <div class="eael-product-modal-bg"></div>
+                    <div class="eael-popup-details-render eael-woo-slider-popup"><div class="eael-preloader"></div></div>
+                </div>
+				<?php
+			} );
+			$classes[] = 'eael-woo-slider';
+		}
+		return $classes;
+	}
 
     public function add_to_cart_button_custom_text($default)
     {
@@ -2878,6 +2900,9 @@ class Product_Grid extends Widget_Base
         if (!function_exists('WC')) {
             return;
         }
+
+        $this->load_quick_view_asset();
+
         $settings = $this->get_settings_for_display();
 
         // normalize for load more fix
@@ -2928,6 +2953,7 @@ class Product_Grid extends Widget_Base
                 do_action( 'eael_woo_before_product_loop' );
                 $template = $this->get_template($settings['eael_dynamic_template_Layout']);
                 if (file_exists($template)) {
+	                $settings['eael_page_id'] = get_the_ID();
                     $query = new \WP_Query($args);
                     if ($query->have_posts()) {
                         echo '<ul class="products" data-layout-mode="' . $settings["eael_product_grid_layout"] . '">';
@@ -3071,5 +3097,27 @@ class Product_Grid extends Widget_Base
             $args['order'] = 'DESC';
         }
         return $args;
+    }
+
+    public function load_quick_view_asset(){
+	    add_action('wp_footer',function (){
+		    if ( version_compare( WC()->version, '3.0.0', '>=' ) ) {
+			    if ( current_theme_supports( 'wc-product-gallery-zoom' ) ) {
+				    wp_enqueue_script( 'zoom' );
+			    }
+			    if ( current_theme_supports( 'wc-product-gallery-slider' ) ) {
+				    wp_enqueue_script( 'flexslider' );
+			    }
+			    if ( current_theme_supports( 'wc-product-gallery-lightbox' ) ) {
+				    wp_enqueue_script( 'photoswipe-ui-default' );
+				    wp_enqueue_style( 'photoswipe-default-skin' );
+				    if ( has_action( 'wp_footer', 'woocommerce_photoswipe' ) === false ) {
+					    add_action( 'wp_footer', 'woocommerce_photoswipe', 15 );
+				    }
+			    }
+			    wp_enqueue_script( 'wc-add-to-cart-variation' );
+			    wp_enqueue_script( 'wc-single-product' );
+		    }
+	    });
     }
 }
