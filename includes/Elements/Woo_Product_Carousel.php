@@ -2746,6 +2746,8 @@ class Woo_Product_Carousel extends Widget_Base {
             return;
         }
 
+	    $this->load_quick_view_asset();
+
         $settings = $this->get_settings_for_display();
         // normalize for load more fix
         $widget_id = $this->get_id();
@@ -3110,4 +3112,26 @@ class Woo_Product_Carousel extends Widget_Base {
 
 	    return $args;
     }
+
+	public function load_quick_view_asset(){
+		add_action('wp_footer',function (){
+			if ( version_compare( WC()->version, '3.0.0', '>=' ) ) {
+				if ( current_theme_supports( 'wc-product-gallery-zoom' ) ) {
+					wp_enqueue_script( 'zoom' );
+				}
+				if ( current_theme_supports( 'wc-product-gallery-slider' ) ) {
+					wp_enqueue_script( 'flexslider' );
+				}
+				if ( current_theme_supports( 'wc-product-gallery-lightbox' ) ) {
+					wp_enqueue_script( 'photoswipe-ui-default' );
+					wp_enqueue_style( 'photoswipe-default-skin' );
+					if ( has_action( 'wp_footer', 'woocommerce_photoswipe' ) === false ) {
+						add_action( 'wp_footer', 'woocommerce_photoswipe', 15 );
+					}
+				}
+				wp_enqueue_script( 'wc-add-to-cart-variation' );
+				wp_enqueue_script( 'wc-single-product' );
+			}
+		});
+	}
 }
