@@ -296,11 +296,12 @@ ea.hooks.addAction("init", "ea", () => {
 		);
 
 		// handle add to cart for quick view
-		$scope.on(
+		$(document).on(
 			"click",
-			".eael-product-popup-details .single_add_to_cart_button",
+			".eael-woo-slider-popup .single_add_to_cart_button",
 			function (e) {
 				e.preventDefault();
+				e.stopImmediatePropagation();
 				var $this = $(this),
 					product_id = $(this).val(),
 					variation_id =
