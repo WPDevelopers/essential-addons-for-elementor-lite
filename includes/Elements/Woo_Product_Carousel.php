@@ -37,6 +37,7 @@ class Woo_Product_Carousel extends Widget_Base {
         }
         
         if ( $is_type_instance && class_exists( 'woocommerce' ) ) {
+	        $this->load_quick_view_asset();
             add_filter( 'body_class', [$this, 'add_slider_body_class'] );
         }
     }
@@ -2745,8 +2746,6 @@ class Woo_Product_Carousel extends Widget_Base {
         if ( !function_exists( 'WC' ) ) {
             return;
         }
-
-	    $this->load_quick_view_asset();
 
         $settings = $this->get_settings_for_display();
         // normalize for load more fix
