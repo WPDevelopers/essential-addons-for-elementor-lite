@@ -172,9 +172,6 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                 <li class="view-details" title="Details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
                             </ul>
                         <?php }
-                        if( $should_print_quick_view ){
-                            Helper::eael_product_quick_view( $product, $settings, $widget_id );
-                        }
                         ?>
                     </div>
                 </div>
@@ -233,9 +230,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                             <?php } ?>
                         </ul>
                         <?php
-                        if( $should_print_quick_view ){
-                            Helper::eael_product_quick_view( $product, $settings, $widget_id );
-                        }
+
                         ?>
                     </div>
                 </div>
@@ -387,11 +382,6 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                             </li>
                         <?php } ?>
                     </ul>
-                    <?php
-                    if( $should_print_quick_view ){
-                        Helper::eael_product_quick_view( $product, $settings, $widget_id );
-                    }
-                    ?>
                 </div>
             </div>
         </li>
