@@ -223,6 +223,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 4.6.2 - 13/04/2021 =
+
+- Fixed: EA Creative Button | Missing style controls
+- Few minor bug fix and improvements
+
 = 4.6.1 - 11/04/2021 =
 
 - Added: Cache Settings for EA Facebook Feed, Twitter Feed, Event Calendar and Adv. Data Table
