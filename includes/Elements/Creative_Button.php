@@ -358,7 +358,7 @@ class Creative_Button extends Widget_Base
                     'default' => '#ffffff',
                     'selectors' => [
                         '{{WRAPPER}} .eael-creative-button:hover i' => 'color: {{VALUE}};',
-                        '{{WRAPPER}} .eael-creative-button:hover svg' => 'fill: {{VALUE}};',
+                        '{{WRAPPER}} .eael-creative-button:hover .creative-button-inner svg' => 'fill: {{VALUE}};',
                     ],
                 ]
             );
