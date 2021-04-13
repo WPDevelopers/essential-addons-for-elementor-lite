@@ -15,7 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Main SDK for Plugin_Usage_Tracker.
  */
-if( ! class_exists('Plugin_Usage_Tracker') ) :
 	class Plugin_Usage_Tracker {
 		/**
 		 * WP Insights Version
@@ -909,4 +908,3 @@ if( ! class_exists('Plugin_Usage_Tracker') ) :
 			</script>
 		<?php }
 	}
-endif;
