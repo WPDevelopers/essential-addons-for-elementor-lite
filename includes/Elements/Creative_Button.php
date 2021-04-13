@@ -215,7 +215,7 @@ class Creative_Button extends Widget_Base
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
-        if (apply_filters('eael/pro_enabled', false)) {
+        if (!apply_filters('eael/pro_enabled', false)) {
             $this->add_control(
                 'creative_button_effect',
                 [
