@@ -8,7 +8,6 @@ if (!defined('ABSPATH')) {
 
 use \Elementor\Plugin;
 use \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker;
-use function SimplePay\Core\Admin\Usage_Tracking\get_optin_notice;
 
 trait Core
 {
