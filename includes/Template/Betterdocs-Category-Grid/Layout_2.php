@@ -153,7 +153,7 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="' .
                     }
                 }
 
-                echo $settings['button_text'];
+                echo Helper::eael_wp_kses($settings['button_text']);
 
                 if ($settings['icon_position'] === 'after') {
                     if (isset($settings['button_icon']['value']['url']) && !empty($settings['button_icon']['value']['url'])) {
