@@ -36,7 +36,7 @@ echo '<a href="' . $button_link . '" class="eael-better-docs-category-box-post">
     }
 
     if ($settings['show_count']) {
-        printf('<div class="eael-bd-cb-cat-count"><span class="count-prefix">%s</span>%s<span class="count-suffix">%s</span></div>', $settings['count_prefix'], Helper::get_doc_post_count($term->count, $term->term_id), $settings['count_suffix']);
+        printf('<div class="eael-bd-cb-cat-count"><span class="count-prefix">%s</span>%s<span class="count-suffix">%s</span></div>', Helper::eael_wp_kses($settings['count_prefix']) , Helper::get_doc_post_count($term->count, $term->term_id), Helper::eael_wp_kses($settings['count_suffix']));
     }
 
     echo '</div>
