@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
+use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 
 class Testimonial extends Widget_Base {
 
@@ -740,8 +741,8 @@ class Testimonial extends Widget_Base {
 
 	protected function render_user_name_and_company() {
 		$settings = $this->get_settings_for_display();
-		if( ! empty($settings['eael_testimonial_name']) ) : ?><p <?php echo $this->get_render_attribute_string('eael_testimonial_user'); ?>><?php echo $settings['eael_testimonial_name']; ?></p><?php endif;
-		if( ! empty($settings['eael_testimonial_company_title']) ) : ?><p class="eael-testimonial-user-company"><?php echo $settings['eael_testimonial_company_title']; ?></p><?php endif;
+		if( ! empty($settings['eael_testimonial_name']) ) : ?><p <?php echo $this->get_render_attribute_string('eael_testimonial_user'); ?>><?php echo HelperClass::eael_wp_kses($settings['eael_testimonial_name']); ?></p><?php endif;
+		if( ! empty($settings['eael_testimonial_company_title']) ) : ?><p class="eael-testimonial-user-company"><?php echo HelperClass::eael_wp_kses($settings['eael_testimonial_company_title']); ?></p><?php endif;
 	}
 
 	protected function testimonial_quote() {
