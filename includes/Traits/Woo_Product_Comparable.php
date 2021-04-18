@@ -1744,7 +1744,7 @@ trait Woo_Product_Comparable {
 		$not_found_text         = isset( $ds['no_products_found_text'] ) ? $ds['no_products_found_text'] : '';
 		$title                  = isset( $ds['table_title'] ) ? $ds['table_title'] : '';
 		$title_tag              = isset( $ds['table_title_tag'] ) ? HelperClass::eael_validate_html_tag($ds['table_title_tag'])  : 'h1';
-		$ribbon                 = isset( $ds['ribbon'] ) ? $ds['ribbon'] : '';
+		$ribbon                 = isset( $ds['ribbon'] ) ? HelperClass::eael_wp_kses($ds['ribbon']): '';
 		$repeat_price           = isset( $ds['repeat_price'] ) ? $ds['repeat_price'] : '';
 		$repeat_add_to_cart     = isset( $ds['repeat_add_to_cart'] ) ? $ds['repeat_add_to_cart'] : '';
 		$linkable_img           = isset( $ds['linkable_img'] ) ? $ds['linkable_img'] : '';
@@ -2051,7 +2051,7 @@ trait Woo_Product_Comparable {
 		$fields_to_show = [];
 		foreach ( $fields as $field ) {
 			if ( isset( $df[ $field['field_type'] ] ) ) {
-				$fields_to_show[ $field['field_type'] ] = $field['field_label'];
+				$fields_to_show[ $field['field_type'] ] = HelperClass::eael_wp_kses($field['field_label']);
 			} else {
 				if ( taxonomy_exists( $field['field_type'] ) ) {
 					$fields_to_show[ $field['field_type'] ] = wc_attribute_label( $field['field_type'] );
@@ -2297,7 +2297,7 @@ trait Woo_Product_Comparable {
 		$fields_to_show = [];
 		foreach ( $fields as $field ) {
 			if ( isset( $df[ $field['field_type'] ] ) ) {
-				$fields_to_show[ $field['field_type'] ] = $field['field_label'];
+				$fields_to_show[ $field['field_type'] ] = HelperClass::eael_wp_kses($field['field_label']);
 			} else {
 				if ( taxonomy_exists( $field['field_type'] ) ) {
 					$fields_to_show[ $field['field_type'] ] = wc_attribute_label( $field['field_type'] );

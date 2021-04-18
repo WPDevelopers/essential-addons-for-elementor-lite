@@ -2875,6 +2875,8 @@ class Woo_Product_Carousel extends Widget_Base {
 		    $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'dir', 'rtl' );
 	    }
 	    $settings['eael_product_carousel_title_tag'] = HelperClass::eael_validate_html_tag($settings['eael_product_carousel_title_tag']);
+	    $settings['eael_product_carousel_sale_text'] = HelperClass::eael_wp_kses($settings['eael_product_carousel_sale_text']);
+	    $settings['eael_product_carousel_stockout_text'] = HelperClass::eael_wp_kses($settings['eael_product_carousel_stockout_text']);
         ?>
 
         <div <?php $this->print_render_attribute_string( 'container' ); ?> >
@@ -2895,7 +2897,7 @@ class Woo_Product_Carousel extends Widget_Base {
                             echo '</ul>';
                         echo '</div>';
                     else:
-	                    echo '<p class="eael-no-posts-found">'.$settings['eael_product_carousel_not_found_msg'].'</p>';
+	                    echo '<p class="eael-no-posts-found">'.HelperClass::eael_wp_kses($settings['eael_product_carousel_not_found_msg']).'</p>';
                     endif;
                 else:
 	                _e( '<p class="eael-no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
