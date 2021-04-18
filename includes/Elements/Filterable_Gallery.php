@@ -2871,7 +2871,7 @@ class Filterable_Gallery extends Widget_Base
                         <?php } ?>
                     <?php } ?>
                     <span class="eael-filterable-gallery-load-more-text">
-                        <?php echo $settings['load_more_text']; ?>
+                        <?php echo Helper::eael_wp_kses($settings['load_more_text']); ?>
                     </span>
                     <?php if ($settings['button_icon_position'] == 'after') { ?>
                         <?php if ($icon_is_new || $icon_migrated) { ?>
@@ -2897,7 +2897,7 @@ class Filterable_Gallery extends Widget_Base
         $counter = 0;
         
         foreach ($gallery_items as $gallery) {
-            $gallery_store[$counter]['title'] = $gallery['eael_fg_gallery_item_name'];
+            $gallery_store[$counter]['title'] = Helper::eael_wp_kses($gallery['eael_fg_gallery_item_name']);
             $gallery_store[$counter]['content'] = $gallery['eael_fg_gallery_item_content'];
             $gallery_store[$counter]['id'] = $gallery['_id'];
             $gallery_store[$counter]['image'] = $gallery['eael_fg_gallery_img'];
@@ -3248,7 +3248,7 @@ class Filterable_Gallery extends Widget_Base
         
         $gallery_settings['widget_id'] = $this->get_id();
         
-        $no_more_items_text = esc_html__($settings['nomore_items_text'], 'essential-addons-for-elementor-lite');
+        $no_more_items_text = Helper::eael_wp_kses($settings['nomore_items_text']);
         $grid_class = $settings['eael_fg_grid_style'] == 'grid' ? 'eael-filter-gallery-grid' : 'masonry';
         
         $this->add_render_attribute('gallery-items-wrap', [

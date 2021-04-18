@@ -1056,7 +1056,7 @@ class Cta_Box extends Widget_Base
     {
 
         $settings = $this->get_settings_for_display();
-        $sub_title = $settings['eael_cta_sub_title'];
+        $sub_title = Helper::eael_wp_kses($settings['eael_cta_sub_title']);
         $icon_migrated = isset($settings['__fa4_migrated']['eael_cta_flex_grid_icon_new']);
         $icon_is_new = empty($settings['eael_cta_flex_grid_icon']);
         // Button
@@ -1094,7 +1094,7 @@ class Cta_Box extends Widget_Base
         if(!empty($sub_title)){
             $headingMarkup .='<h4 class="sub-title">'.$sub_title.'</h4>';
         }
-        $headingMarkup .='<'.Helper::eael_validate_html_tag($settings['title_tag']).' class="title">'.$settings['eael_cta_title'].'</'.Helper::eael_validate_html_tag($settings['title_tag']).'>';
+        $headingMarkup .='<'.Helper::eael_validate_html_tag($settings['title_tag']).' class="title">'.Helper::eael_wp_kses($settings['eael_cta_title']).'</'.Helper::eael_validate_html_tag($settings['title_tag']).'>';
 
         // content markup
         $contentMarkup = '';
