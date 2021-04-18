@@ -96,7 +96,7 @@ class Data_Table extends Widget_Base {
             'eael_data_table_header_col',
             [
                 'label' => esc_html__('Column Name', 'essential-addons-for-elementor-lite'),
-                'default' => 'Table Header',
+                'default' => esc_html__('Table Header', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic'   => ['active' => true],
                 'label_block' => false,
@@ -1147,7 +1147,7 @@ class Data_Table extends Widget_Base {
 	  			$table_tr_keys = array_keys( $table_tr );
 				  $last_key = end( $table_tr_keys );
 
-				$tbody_content = ($content_row['eael_data_table_content_type'] == 'editor') ? $content_row['eael_data_table_content_row_content'] : $content_row['eael_data_table_content_row_title'];
+				$tbody_content = ($content_row['eael_data_table_content_type'] == 'editor') ? $content_row['eael_data_table_content_row_content'] : Helper::eael_wp_kses($content_row['eael_data_table_content_row_title']);
 
 	  			$table_td[] = [
 	  				'row_id'		=> $table_tr[$last_key]['id'],
@@ -1223,7 +1223,7 @@ class Data_Table extends Widget_Base {
 										'style'	=> "width:{$header_title['eael_data_table_header_col_img_size']}px;",
 										'alt'	=> esc_attr(get_post_meta($header_title['eael_data_table_header_col_img']['id'], '_wp_attachment_image_alt', true))
 									]);
-							?><img <?php echo $this->get_render_attribute_string('data_table_th_img'.$i); ?>><?php endif; ?><span class="data-table-header-text"><?php echo __( $header_title['eael_data_table_header_col'], 'essential-addons-for-elementor-lite'); ?></span></th>
+							?><img <?php echo $this->get_render_attribute_string('data_table_th_img'.$i); ?>><?php endif; ?><span class="data-table-header-text"><?php echo __( Helper::eael_wp_kses($header_title['eael_data_table_header_col']), 'essential-addons-for-elementor-lite'); ?></span></th>
 			        	<?php $i++; endforeach; ?>
 			        </tr>
 			    </thead>

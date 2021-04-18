@@ -13,6 +13,8 @@ use \Elementor\Group_Control_Typography;
 use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Repeater;
+use Essential_Addons_Elementor\Classes\Helper as HelperClass;
+
 
 class Fancy_Text extends Widget_Base {
 
@@ -572,11 +574,10 @@ class Fancy_Text extends Widget_Base {
 		$fancy_text = array("");
 		foreach ( $settings as $item ) {
 			if ( ! empty( $item['eael_fancy_text_strings_text_field'] ) )  {
-				$fancy_text[] = $item['eael_fancy_text_strings_text_field'] ;
+				$fancy_text[] = HelperClass::eael_wp_kses($item['eael_fancy_text_strings_text_field']) ;
 			}
 		}
-		$fancy_text = implode("|",$fancy_text);
-		return $fancy_text;
+		return implode("|",$fancy_text);
 	}
 
 	protected function render() {
@@ -598,7 +599,7 @@ class Fancy_Text extends Widget_Base {
 
 	<div  <?php echo $this->get_render_attribute_string( 'fancy-text' ); ?> >
 		<?php if ( ! empty( $settings['eael_fancy_text_prefix'] ) ) : ?>
-			<span class="eael-fancy-text-prefix"><?php echo wp_kses_post($settings['eael_fancy_text_prefix']); ?> </span>
+			<span class="eael-fancy-text-prefix"><?php echo HelperClass::eael_wp_kses($settings['eael_fancy_text_prefix']); ?> </span>
 		<?php endif; ?>
 
 		<?php if ( $settings['eael_fancy_text_transition_type']  == 'fancy' ) : ?>
@@ -621,7 +622,7 @@ class Fancy_Text extends Widget_Base {
 		<?php endif; ?>
 
 		<?php if ( ! empty( $settings['eael_fancy_text_suffix'] ) ) : ?>
-			<span class="eael-fancy-text-suffix"> <?php echo wp_kses_post($settings['eael_fancy_text_suffix']); ?></span>
+			<span class="eael-fancy-text-suffix"> <?php echo HelperClass::eael_wp_kses($settings['eael_fancy_text_suffix']); ?></span>
 		<?php endif; ?>
 	</div><!-- close .eael-fancy-text-container -->
 
