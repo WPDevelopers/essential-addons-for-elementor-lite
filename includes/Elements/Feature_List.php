@@ -10,9 +10,10 @@ if ( !defined( 'ABSPATH' ) ) {
 use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Typography;
-use Elementor\Icons_Manager;use \Elementor\Repeater;
-use \Elementor\Scheme_Color;
-use \Elementor\Scheme_Typography;
+use \Elementor\Icons_Manager;
+use \Elementor\Repeater;
+use \Elementor\Core\Schemes\Typography;
+use \Elementor\Core\Schemes\Color;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
 
@@ -121,8 +122,8 @@ class Feature_List extends Widget_Base {
                 'label'            => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
                 'type'             => Controls_Manager::COLOR,
                 'scheme'           => [
-                    'type'  => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_1,
+                    'type'  => Color::get_type(),
+                    'value' => Color::COLOR_1,
                 ],
                 'fa4compatibility' => 'eael_feature_list_icon',
                 'condition'        => [
@@ -136,8 +137,8 @@ class Feature_List extends Widget_Base {
                 'label'            => esc_html__( 'Icon Background', 'essential-addons-for-elementor-lite' ),
                 'type'             => Controls_Manager::COLOR,
                 'scheme'           => [
-                    'type'  => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_1,
+                    'type'  => Color::get_type(),
+                    'value' => Color::COLOR_1,
                 ],
                 'fa4compatibility' => 'eael_feature_list_icon',
                 'condition'        => [
@@ -151,8 +152,8 @@ class Feature_List extends Widget_Base {
                 'label'            => esc_html__( 'Icon Box Background', 'essential-addons-for-elementor-lite' ),
                 'type'             => Controls_Manager::COLOR,
                 'scheme'           => [
-                    'type'  => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_1,
+                    'type'  => Color::get_type(),
+                    'value' => Color::COLOR_1,
                 ],
                 'fa4compatibility' => 'eael_feature_list_icon',
                 'condition'        => [
@@ -449,8 +450,8 @@ class Feature_List extends Widget_Base {
                 'label'     => esc_html__( 'Connector Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'scheme'    => [
-                    'type'  => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_1,
+                    'type'  => Color::get_type(),
+                    'value' => Color::COLOR_1,
                 ],
                 'default'   => '#37368e',
                 'selectors' => [
@@ -768,8 +769,8 @@ class Feature_List extends Widget_Base {
                     '{{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title, {{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title > a, {{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title:visited' => 'color: {{VALUE}};',
                 ],
                 'scheme'    => [
-                    'type'  => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_1,
+                    'type'  => Color::get_type(),
+                    'value' => Color::COLOR_1,
                 ],
             ]
         );
@@ -779,7 +780,7 @@ class Feature_List extends Widget_Base {
             [
                 'name'     => 'eael_feature_list_title_typography',
                 'selector' => '{{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title, {{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title a',
-                'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
+                'scheme'   => Typography::TYPOGRAPHY_1,
             ]
         );
 
@@ -802,8 +803,8 @@ class Feature_List extends Widget_Base {
                     '{{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-content' => 'color: {{VALUE}};',
                 ],
                 'scheme'    => [
-                    'type'  => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_3,
+                    'type'  => Color::get_type(),
+                    'value' => Color::COLOR_3,
                 ],
             ]
         );
@@ -813,7 +814,7 @@ class Feature_List extends Widget_Base {
             [
                 'name'           => 'eael_feature_list_description_typography',
                 'selector'       => '{{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-content',
-                'scheme'         => Scheme_Typography::TYPOGRAPHY_3,
+                'scheme'         => Typography::TYPOGRAPHY_3,
                 'fields_options' => [
                     'font_size' => ['default' => ['unit' => 'px', 'size' => 14]],
                 ],

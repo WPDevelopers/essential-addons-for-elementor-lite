@@ -10,7 +10,7 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Scheme_Typography;
+use \Elementor\Core\Schemes\Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Repeater;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
@@ -313,7 +313,7 @@ class Fancy_Text extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
              'name' => 'typography',
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'fields_options' => [
 					'typography' => ['default' => 'yes'],
 					'font_size' => ['default' => ['size' => 22]],
@@ -420,7 +420,7 @@ class Fancy_Text extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
             'name' => 'eael_fancy_text_strings_typography',
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'fields_options' => [
 					'typography' => ['default' => 'yes'],
 					'font_size' => ['default' => ['size' => 22]],
@@ -554,7 +554,7 @@ class Fancy_Text extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
              'name' => 'ending_typography',
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme' => Typography::TYPOGRAPHY_1,
 				'fields_options' => [
 					'typography' => ['default' => 'yes'],
 					'font_size' => ['default' => ['size' => 22]],
