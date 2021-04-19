@@ -2768,7 +2768,7 @@ class Filterable_Gallery extends Widget_Base
     protected function render_filters()
     {
         $settings = $this->get_settings_for_display();
-        $all_text = ($settings['eael_fg_all_label_text'] != '') ? $settings['eael_fg_all_label_text'] : esc_html__('All', 'essential-addons-for-elementor-lite');
+        $all_text = ($settings['eael_fg_all_label_text'] != '') ? Helper::eael_wp_kses($settings['eael_fg_all_label_text']) : esc_html__('All', 'essential-addons-for-elementor-lite');
         
         if ($settings['filter_enable'] == 'yes') {
             ?>
@@ -2801,7 +2801,7 @@ class Filterable_Gallery extends Widget_Base
                         <span>
                             <?php
                             if ($settings['eael_fg_all_label_text']) {
-                                echo $settings['eael_fg_all_label_text'];
+                                echo Helper::eael_wp_kses($settings['eael_fg_all_label_text']);
                             } elseif (isset($settings['eael_fg_controls']) && !empty($settings['eael_fg_controls'])) {
                                 echo $settings['eael_fg_controls'][0]['eael_fg_control'];
                             }
@@ -2822,7 +2822,7 @@ class Filterable_Gallery extends Widget_Base
                     </button>
                     <ul class="fg-layout-3-filter-controls">
                         <?php if ($settings['eael_fg_all_label_text']) { ?>
-                            <li class="control active" data-filter="*"><?php echo $settings['eael_fg_all_label_text']; ?></li>
+                            <li class="control active" data-filter="*"><?php echo Helper::eael_wp_kses($settings['eael_fg_all_label_text']); ?></li>
                         <?php } ?>
                         
                         <?php foreach ($settings['eael_fg_controls'] as $key => $control) :
