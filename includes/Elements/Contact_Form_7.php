@@ -1172,10 +1172,7 @@ class Contact_Form_7 extends Widget_Base
                         'icon' => 'eicon-h-align-right',
                     ],
                 ],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form p:nth-last-of-type(1)' => 'text-align: {{VALUE}};',
-                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]' => 'display:inline-block;',
-                ],
+                'prefix_class' => 'eael-contact-form-7-button-align-',
                 'condition' => [
                     'button_width_type' => 'custom',
                 ],
@@ -1424,6 +1421,65 @@ class Contact_Form_7 extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'error_alert_bg_color',
+            [
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-not-valid-tip' => 'background: {{VALUE}}',
+                ],
+                'condition' => [
+                    'error_messages' => 'show',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'error_alert_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-not-valid-tip',
+                'separator' => 'before',
+                'condition' => [
+                    'error_messages' => 'show',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'error_alert_border',
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
+                'placeholder' => '1px',
+                'default' => '1px',
+                'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-not-valid-tip',
+                'separator' => 'before',
+                'condition' => [
+                    'error_messages' => 'show',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'error_alert_padding',
+            [
+                'label' => __('Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-not-valid-tip' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'error_messages' => 'show',
+                ],
+            ]
+        );
+
         $this->add_responsive_control(
             'error_alert_spacing',
             [
@@ -1480,7 +1536,7 @@ class Contact_Form_7 extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-not-valid' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-not-valid.wpcf7-text' => 'color: {{VALUE}}',
                 ],
                 'condition' => [
                     'error_messages' => 'show',
@@ -1507,92 +1563,6 @@ class Contact_Form_7 extends Widget_Base
 
         $this->end_controls_tabs();
 
-        $this->add_control(
-            'validation_errors_heading',
-            [
-                'label' => __('Validation Errors', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
-                'condition' => [
-                    'validation_errors' => 'show',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'validation_errors_bg_color',
-            [
-                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-validation-errors' => 'background: {{VALUE}}',
-                ],
-                'condition' => [
-                    'validation_errors' => 'show',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'validation_errors_color',
-            [
-                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-validation-errors' => 'color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'validation_errors' => 'show',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name' => 'validation_errors_typography',
-                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
-                'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-validation-errors',
-                'separator' => 'before',
-                'condition' => [
-                    'validation_errors' => 'show',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Border::get_type(),
-            [
-                'name' => 'validation_errors_border',
-                'label' => __('Border', 'essential-addons-for-elementor-lite'),
-                'placeholder' => '1px',
-                'default' => '1px',
-                'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-validation-errors',
-                'separator' => 'before',
-                'condition' => [
-                    'validation_errors' => 'show',
-                ],
-            ]
-        );
-
-        $this->add_responsive_control(
-            'validation_errors_margin',
-            [
-                'label' => __('Margin', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em', '%'],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-validation-errors' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'validation_errors' => 'show',
-                ],
-            ]
-        );
-
         $this->end_controls_section();
 
         /**
@@ -1611,7 +1581,7 @@ class Contact_Form_7 extends Widget_Base
             [
                 'name' => 'contact_form_after_submit_feedback_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng, {{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok',
+                'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng, {{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok, {{WRAPPER}} .eael-contact-form-7 .wpcf7-response-output',
                 'separator' => 'before',
             ]
         );
@@ -1625,6 +1595,7 @@ class Contact_Form_7 extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-response-output' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -1635,7 +1606,7 @@ class Contact_Form_7 extends Widget_Base
                 'name' => 'contact_form_after_submit_feedback_background',
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng, {{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok',
+                'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng, {{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok, {{WRAPPER}} .eael-contact-form-7 .wpcf7-response-output',
                 'separator' => 'before',
             ]
         );
@@ -1647,7 +1618,7 @@ class Contact_Form_7 extends Widget_Base
                 'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'placeholder' => '1px',
                 'default' => '1px',
-                'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng, {{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok',
+                'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng, {{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok, {{WRAPPER}} .eael-contact-form-7 .wpcf7-response-output',
                 'separator' => 'before',
             ]
         );
@@ -1671,6 +1642,7 @@ class Contact_Form_7 extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng' => 'border-radius: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok' => 'border-radius: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-response-output' => 'border-radius: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -1684,6 +1656,7 @@ class Contact_Form_7 extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-response-output' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'before',
             ]
@@ -1698,6 +1671,7 @@ class Contact_Form_7 extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ng' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-mail-sent-ok' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-response-output' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'before',
             ]

@@ -71,7 +71,7 @@
 	z-index: 1;
 }
 
-.eael-img-accordion .eael-image-accordion-hover:after {
+.eael-img-accordion .eael-image-accordion-hover:before {
 	content: "";
 	position: absolute;
 	width: 100%;
@@ -84,11 +84,11 @@
 	transition: all 0.3s ease-in-out;
 }
 
-.eael-img-accordion .eael-image-accordion-hover:after {
+.eael-img-accordion .eael-image-accordion-hover:before {
 	background-color: rgba(0, 0, 0, .3);
 }
 
-.eael-img-accordion .eael-image-accordion-hover:hover::after {
+.eael-img-accordion .eael-image-accordion-hover:hover::before {
     background-color: rgba(0, 0, 0, .5);
 }
 

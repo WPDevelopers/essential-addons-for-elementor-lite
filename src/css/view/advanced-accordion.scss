@@ -7,6 +7,7 @@
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header {
     padding: 15px;
     border: 1px solid rgba(0, 0, 0, 0.02);
+    background-color: #f1f1f1;
     font-size: 1rem;
     font-weight: 600;
     line-height: 1;
@@ -19,8 +20,21 @@
         flex-grow: 1;
         margin: 0;
     }
-    > i {
+    > i, span{
         margin-right: 10px;
+    }
+    .eaa-svg {
+        font-size: 32px;
+        svg {
+            width: 1em;
+            height: 1em
+        }
+    }
+    &:hover{
+       background-color: #414141;
+    }
+    &.active{
+        background-color: #444444;
     }
 }
 

@@ -670,6 +670,30 @@ trait Controls
                 ]
             );
 
+            if( 'eael-post-grid' === $wb->get_name() ) {
+                $wb->add_responsive_control(
+                    'postgrid_image_height',
+                    [
+                        'label'      => __('Image Height', 'essential-addons-for-elementor-lite'),
+                        'type'       => Controls_Manager::SLIDER,
+                        'range'      => [
+                            'px' => [
+                                'min'  => 0,
+                                'max'  => 600,
+                                'step' => 1,
+                            ],
+                        ],
+                        'size_units' => ['px', 'em', '%'],
+                        'selectors'  => [
+                            '{{WRAPPER}} .eael-entry-thumbnail' => 'height: {{SIZE}}{{UNIT}};',
+                        ],
+                        'condition' => [
+                            'eael_show_image' => 'yes',
+                        ],
+                    ]
+                );
+            }
+
         }
 
         if ('eael-content-timeline' === $wb->get_name()) {
@@ -914,9 +938,6 @@ trait Controls
                     'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
                     'return_value' => 'yes',
                     'default' => 'yes',
-                    'condition' => [
-                        'post_type!' => 'product',
-                    ],
                 ]
             );
 
@@ -929,7 +950,6 @@ trait Controls
                     'default' => __('Read More', 'essential-addons-for-elementor-lite'),
                     'condition' => [
                         'eael_show_read_more_button' => 'yes',
-                        'post_type!' => 'product',
                     ],
                 ]
             );
@@ -1156,7 +1176,6 @@ trait Controls
                     'tab' => Controls_Manager::TAB_STYLE,
                     'condition' => [
                         'eael_show_read_more_button' => 'yes',
-                        'post_type!' => 'product',
                     ],
                 ]
             );

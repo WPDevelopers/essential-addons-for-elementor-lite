@@ -8,10 +8,10 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Repeater;
 use \Elementor\Group_Control_Background;
@@ -1962,7 +1962,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'fg_item_price_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
                 'selector' => '{{WRAPPER}} .fg-caption-head .fg-item-price'
             ]
         );
@@ -2007,7 +2009,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'fg_item_ratings_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
                 'selector' => '{{WRAPPER}} .fg-caption-head .fg-item-ratings'
             ]
         );
@@ -2041,7 +2045,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'fg_item_category_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
                 'selector' => '{{WRAPPER}} .fg-item-category span'
             ]
         );
@@ -2096,7 +2102,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'fg_sf_controls_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
                 'selector' => '{{WRAPPER}} .fg-filter-trigger > span'
             ]
         );
@@ -2388,7 +2396,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'fg_sf_dropdown_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
                 'selector' => '{{WRAPPER}} .fg-layout-3-filter-controls li.control'
             ]
         );
@@ -2546,7 +2556,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'load_more_button_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
                 'selector' => '{{WRAPPER}} .eael-gallery-load-more .eael-filterable-gallery-load-more-text',
                 'condition' => [
                     'pagination' => 'yes',
@@ -2763,12 +2775,12 @@ class Filterable_Gallery extends Widget_Base
             <div class="eael-filter-gallery-control">
                 <ul>
                     <?php if ($settings['eael_fg_all_label_text']) { ?>
-                        <li class="control all-control active" data-filter="*"><?php echo $all_text; ?></li>
+                        <li data-load-more-status="0" class="control all-control active" data-filter="*"><?php echo $all_text; ?></li>
                     <?php } ?>
                     
                     <?php foreach ($settings['eael_fg_controls'] as $key => $control) :
                         $sorter_filter = $this->sorter_class($control['eael_fg_control']); ?>
-                        <li class="control <?php if ($key == 0 && empty($settings['eael_fg_all_label_text'])) {
+                        <li data-load-more-status="0" class="control <?php if ($key == 0 && empty($settings['eael_fg_all_label_text'])) {
                             echo 'active';
                         } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html__($control['eael_fg_control']); ?></li>
                     <?php endforeach; ?>
@@ -3306,11 +3318,13 @@ class Filterable_Gallery extends Widget_Base
                         $scope = $('[data-id="' + $node_id + '"]'),
                         $gallery = $(this),
                         $settings = $gallery.data('settings'),
-                        $gallery_items = $gallery.data('gallery-items'),
+						fg_items = $gallery_items = $gallery.data('gallery-items'),
                         $layout_mode = ($settings.grid_style == 'masonry' ? 'masonry' : 'fitRows'),
                         $gallery_enabled = ($settings.gallery_enabled == 'yes' ? true : false),
                         input = $scope.find('#fg-search-box-input'),
                         searchRegex, buttonFilter, timer;
+					    $init_show_setting     = $gallery.data("init-show");
+					fg_items.splice(0, $init_show_setting)
                     var filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0)
 
                     if ($gallery.closest($scope).length < 1) {
@@ -3398,60 +3412,65 @@ class Filterable_Gallery extends Widget_Base
                     });
 
                     // Load more button
-                    $scope.on('click', '.eael-gallery-load-more', function(e) {
-                        e.preventDefault();
+					$scope.on("click", ".eael-gallery-load-more", function (e) {
+						e.preventDefault();
+						var $this            = $(this),
+							$init_show       = $(".eael-filter-gallery-container", $scope).children(".eael-filterable-gallery-item-wrap").length,
+							$total_items     = $gallery.data("total-gallery-items"),
+							$images_per_page = $gallery.data("images-per-page"),
+							$nomore_text     = $gallery.data("nomore-item-text"),
+							filter_enable = $(".eael-filter-gallery-control",$scope).length,
+							$items           = [];
+						var filter_name      = $(".eael-filter-gallery-control li.active", $scope).data('filter');
+						if (filterControls.length > 0) {
+							filter_name = $(".fg-layout-3-filter-controls li.active", $scope).data('filter');
+						}
 
-                        var $this = $(this),
-                            $init_show = $('.eael-filter-gallery-container', $scope).children('.eael-filterable-gallery-item-wrap').length,
-                            $total_items = $gallery.data('total-gallery-items'),
-                            $images_per_page = $gallery.data('images-per-page'),
-                            $nomore_text = $gallery.data('nomore-item-text'),
-                            filter_enable = $(".eael-filter-gallery-control",$scope).length,
-                            $items = [];
-                        var filter_name      = $(".eael-filter-gallery-control li.active").data('filter');
+						let item_found = 0;
+						let index_list = []
+						for (const [index, item] of fg_items.entries()){
+							if (filter_name !== '' && filter_name !== '*' && filter_enable) {
+								let element = $($(item)[0]);
+								if (element.is(filter_name)) {
+									++item_found;
+									$items.push($(item)[0]);
+									index_list.push(index);
+								}
+								if((fg_items.length-1)===index){
+									$(".eael-filter-gallery-control li.active", $scope).data('load-more-status',1)
+									$this.hide()
+								}
+							}else {
+								++item_found;
+								$items.push($(item)[0]);
+								index_list.push(index);
+							}
 
-                        if(filterControls.length>0){
-                            filter_name = $(".fg-layout-3-filter-controls li.active").data('filter');
-                        }
+							if (item_found === $images_per_page) {
+								break;
+							}
+						}
 
-                        if ($init_show == $total_items) {
-                            $this.html('<div class="no-more-items-text">' + $nomore_text + '</div>');
-                            setTimeout(function() {
-                                $this.fadeOut('slow');
-                            }, 600);
-                        }
+						if (index_list.length > 0) {
+							fg_items = fg_items.filter(function (item, index) {
+								return !index_list.includes(index);
+							});
+						}
 
-                        var i          = $init_show;
-                        var item_found = 0;
-                        while (i < $init_show + $images_per_page) {
-                            if (filter_name != '' && filter_name != '*' && filter_enable) {
-                                for (var j = i; j < $gallery_items.length; j++) {
-                                    var element = $($($gallery_items[j])[0]);
-                                    if (element.is(filter_name)) {
-                                        ++item_found;
-                                        $items.push($($gallery_items[j])[0]);
-                                        delete $gallery_items[j];
-                                        if (item_found === $images_per_page) {
-                                            break;
-                                        }
-                                    }
-                                }
-                                //break when cross $images_per_page or no image found
-                                break;
-                            } else {
-                                $items.push($($gallery_items[i])[0]);
-                                delete $gallery_items[i];
-                            }
-                            i++;
-                        }
+						if (fg_items.length<1) {
+							$this.html('<div class="no-more-items-text">' + $nomore_text + "</div>");
+							setTimeout(function () {
+								$this.fadeOut("slow");
+							}, 600);
+						}
 
-                        // append items
-                        $gallery.append($items)
-                        $isotope_gallery.isotope('appended', $items)
-                        $isotope_gallery.imagesLoaded().progress(function() {
-                            $isotope_gallery.isotope('layout')
-                        })
-                    });
+						// append items
+						$gallery.append($items);
+						$isotope_gallery.isotope("appended", $items);
+						$isotope_gallery.imagesLoaded().progress(function () {
+							$isotope_gallery.isotope("layout");
+						});
+					});
                 });
             });
         </script>

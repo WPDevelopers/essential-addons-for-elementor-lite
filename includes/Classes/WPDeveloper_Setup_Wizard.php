@@ -239,7 +239,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                         <div>
                             <div class="eael-input-group">
                                 <input type="checkbox" id="eael_user_email_address" name="eael_user_email_address"
-                                       checked>
+                                       >
                                 <label for="eael_user_email_address"><?php _e( 'Share non-sensitive diagnostic data and plugin
                                     usage
                                     information', 'essential-addons-for-elementor-lite' ) ?></label>
@@ -389,7 +389,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             [
                 'slug'     => 'reviewx',
                 'basename' => 'reviewx/reviewx.php',
-                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/review-logo.gif',
+                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/review-logo.png',
                 'title'    => __( 'ReviewX', 'essential-addons-for-elementor-lite' ),
                 'desc'     => __( 'ReviewX lets you get instant customer ratings and multi criteria reviews to add credibility to your WooCommerce Store and increase conversion rates.', 'essential-addons-for-elementor-lite' ),
             ],
@@ -406,7 +406,14 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                 'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/easy-jobs-logo.png',
                 'title'    => __( 'EasyJobs', 'essential-addons-for-elementor-lite' ),
                 'desc'     => __( 'Easy solution for the job recruitment to attract, manage & hire right talent faster. The Best Talent Recruitment Suite which lets you manage jobs & career page in Elementor.', 'essential-addons-for-elementor-lite' ),
-            ]
+            ],
+            [
+                'slug'     => 'crowdfundly',
+                'basename' => 'crowdfundly/crowdfundly.php',
+                'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/crowdfundly-logo.png',
+                'title'    => __( 'Crowdfundly', 'essential-addons-for-elementor-lite' ),
+                'desc'     => __( 'Crowdfundly is a Software as a Service (SaaS) digital crowdfunding solution. Best fundraising solution in WordPress with Elementor & WooCommerce support.', 'essential-addons-for-elementor-lite' ),
+            ],
         ];
     }
 
@@ -517,6 +524,7 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
             foreach ( $GLOBALS[ 'eael_config' ][ 'elements' ] as $key => $item ) {
                 $save_element[ $key ] = ( isset( $el_list[ $key ] ) ) ? 1 : '';
             }
+	        $save_element = array_merge($save_element,$this->get_dummy_widget());
             update_option( 'eael_save_settings', $save_element );
             return true;
         }
@@ -753,6 +761,10 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
                         'preferences' => 'advance',
                     ],
                     [
+                        'key'         => 'woo-product-carousel',
+                        'title'       => __( 'Woo Product Carousel', 'essential-addons-for-elementor-lite' ),
+                    ],
+                    [
                         'key'   => 'woo-checkout',
                         'title' => __( 'Woo Checkout', 'essential-addons-for-elementor-lite' ),
                     ],
@@ -782,17 +794,25 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
     public function wpins_process(){
         $plugin_name = basename( EAEL_PLUGIN_FILE, '.php' );
         if ( class_exists( '\Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker' ) ){
-            $tracker = new \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker(
-                EAEL_PLUGIN_FILE,
-                'http://app.wpdeveloper.net',
-                array(),
-                true,
-                true,
-                1
-            );
+            $tracker = \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker::get_instance( EAEL_PLUGIN_FILE, [
+                'opt_in'       => true,
+                'goodbye_form' => true,
+                'item_id'      => '760e8569757fa16992d8'
+            ] );
             $tracker->set_is_tracking_allowed( true );
             $tracker->do_tracking( true );
         }
+    }
+
+    public function get_dummy_widget(){
+        return [
+            'embedpress'                  => 1,
+            'woocommerce-review'          => 1,
+            'career-page'                 => 1,
+            'crowdfundly-single-campaign' => 1,
+            'crowdfundly-organization'    => 1,
+            'crowdfundly-all-campaign'    => 1,
+        ];
     }
 }
 

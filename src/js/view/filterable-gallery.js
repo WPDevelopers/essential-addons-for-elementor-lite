@@ -24,10 +24,11 @@ jQuery(window).on("elementor/frontend/init", function () {
 		if (!isEditMode) {
 			var $gallery         = $(".eael-filter-gallery-container", $scope),
 				$settings        = $gallery.data("settings"),
-				$gallery_items   = $gallery.data("gallery-items"),
+				fg_items = $gallery_items   = $gallery.data("gallery-items"),
 				$layout_mode     = $settings.grid_style === "masonry" ? "masonry" : "fitRows",
-				$gallery_enabled = ($settings.gallery_enabled === "yes");
-
+				$gallery_enabled = ($settings.gallery_enabled === "yes"),
+				$init_show_setting     = $gallery.data("init-show");
+				fg_items.splice(0, $init_show_setting)
 			// init isotope
 			let gwrap = $(".eael-filter-gallery-wrapper");
 			var layoutMode       = gwrap.data("layout-mode");
@@ -83,7 +84,14 @@ jQuery(window).on("elementor/frontend/init", function () {
 				if ($tspan.length) {
 					$tspan.text($this.text());
 				}
-
+				const LoadMoreShow = $(this).data("load-more-status"),
+					 loadMore = $(".eael-gallery-load-more",$scope);
+				//hide load more button if selected control have no item to show
+				if(LoadMoreShow || fg_items.length < 1){
+					loadMore.hide()
+				}else{
+					loadMore.show()
+				}
 				$this.siblings().removeClass("active");
 				$this.addClass("active");
 				$isotope_gallery.isotope();
@@ -125,41 +133,47 @@ jQuery(window).on("elementor/frontend/init", function () {
 					$nomore_text     = $gallery.data("nomore-item-text"),
 					filter_enable = $(".eael-filter-gallery-control",$scope).length,
 					$items           = [];
-				var filter_name      = $(".eael-filter-gallery-control li.active").data('filter');
+				var filter_name      = $(".eael-filter-gallery-control li.active", $scope).data('filter');
 				if(filterControls.length>0){
-					filter_name = $(".fg-layout-3-filter-controls li.active").data('filter');
+					filter_name = $(".fg-layout-3-filter-controls li.active", $scope).data('filter');
 				}
 
-				if ($init_show === $total_items) {
+				let item_found = 0;
+				let index_list = []
+				for (const [index, item] of fg_items.entries()){
+					if (filter_name !== '' && filter_name !== '*' && filter_enable) {
+						let element = $($(item)[0]);
+						if (element.is(filter_name)) {
+							++item_found;
+							$items.push($(item)[0]);
+							index_list.push(index);
+						}
+						if((fg_items.length-1)===index){
+							$(".eael-filter-gallery-control li.active", $scope).data('load-more-status',1)
+							$this.hide()
+						}
+					}else {
+						++item_found;
+						$items.push($(item)[0]);
+						index_list.push(index);
+					}
+
+					if (item_found === $images_per_page) {
+						break;
+					}
+				}
+
+				if(index_list.length>0){
+					fg_items = fg_items.filter(function (item, index){
+						return !index_list.includes(index);
+					});
+				}
+
+				if (fg_items.length<1) {
 					$this.html('<div class="no-more-items-text">' + $nomore_text + "</div>");
 					setTimeout(function () {
 						$this.fadeOut("slow");
 					}, 600);
-				}
-
-				// new items html
-				var i          = $init_show;
-				var item_found = 0;
-				while (i < $init_show + $images_per_page) {
-					if (filter_name != '' && filter_name != '*' && filter_enable) {
-						for (var j = i; j < $gallery_items.length; j++) {
-							var element = $($($gallery_items[j])[0]);
-							if (element.is(filter_name)) {
-								++item_found;
-								$items.push($($gallery_items[j])[0]);
-								delete $gallery_items[j];
-								if (item_found === $images_per_page) {
-									break;
-								}
-							}
-						}
-						//break when cross $images_per_page or no image found
-						break;
-					} else {
-						$items.push($($gallery_items[i])[0]);
-						delete $gallery_items[i];
-					}
-					i++;
 				}
 
 				// append items

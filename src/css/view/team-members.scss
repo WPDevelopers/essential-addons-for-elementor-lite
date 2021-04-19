@@ -107,7 +107,9 @@
 }
 
 .eael-team-member-social-link > a {
+    width: 100%;
 	display: inline-block;
+    text-align: center;
 	-webkit-transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0s;
 	transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0s;
 }

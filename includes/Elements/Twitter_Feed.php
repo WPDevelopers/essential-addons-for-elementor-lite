@@ -128,6 +128,17 @@ class Twitter_Feed extends Widget_Base
             ]
         );
 
+	    $this->add_control(
+		    'eael_twitter_feed_data_cache_limit',
+		    [
+			    'label' => __('Data Cache Time', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::NUMBER,
+			    'min' => 1,
+			    'default' => 60,
+			    'description' => __('Cache expiration time (Minutes)', 'essential-addons-for-elementor-lite')
+		    ]
+	    );
+
         $this->end_controls_section();
 
         $this->start_controls_section(
