@@ -96,7 +96,7 @@ class Fancy_Text extends Widget_Base {
 				'type'        => Controls_Manager::REPEATER,
 				'show_label'  => true,
 				'fields'      =>  $repeater->get_controls(),
-				'title_field' => '{{{ eael_fancy_text_strings_text_field }}}',
+				'title_field' => '{{ eael_fancy_text_strings_text_field }}',
 				'default'     => [
 					[
 						'eael_fancy_text_strings_text_field' => __( 'First string', 'essential-addons-for-elementor-lite'),
@@ -613,7 +613,7 @@ class Fancy_Text extends Widget_Base {
 					<?php
 						$eael_fancy_text_strings_list = "";
 						foreach ( $settings['eael_fancy_text_strings'] as $item ) {
-							$eael_fancy_text_strings_list .=  $item['eael_fancy_text_strings_text_field'] . ', ';
+							$eael_fancy_text_strings_list .=  HelperClass::eael_wp_kses($item['eael_fancy_text_strings_text_field']) . ', ';
 						}
 						echo rtrim($eael_fancy_text_strings_list, ", ");
 					?>
