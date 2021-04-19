@@ -206,7 +206,7 @@
 }
 .eael-setup-final-info input[type='checkbox'] {
     padding: 10px !important;
-    border: 2px solid #b7b7b7;
+    border: 3px solid #b7b7b7;
     background-color: #fff;
     box-shadow: none !important;
     border-radius: 2px;
@@ -224,6 +224,9 @@
     min-width: 23px;
     -webkit-appearance: none;
     transition: .05s border-color ease-in-out;
+}
+.eael-setup-final-info input[type='checkbox']:not(:checked){
+    border: 3px solid red;
 }
 .eael-setup-final-info input[type=checkbox]:checked::before {
     color: #a16bff;

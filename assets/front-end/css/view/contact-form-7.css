@@ -92,4 +92,31 @@
 .eael-contact-form-7 .wpcf7-form p input.wpcf7-submit {
   font-family: inherit;
   font-weight: normal;
+  margin-bottom: 10px;
+}
+
+.eael-contact-form-7 .wpcf7-form p input.wpcf7-submit:focus {
+  outline: unset;
+}
+
+.eael-contact-form-7 .wpcf7-form .ajax-loader {
+  display: block;
+  margin: 0 auto;
+}
+
+.eael-contact-form-7 .wpcf7-form p:nth-last-of-type(1) {
+  display: table;
+  margin: 0;
+}
+
+.eael-contact-form-7-button-align-left .eael-contact-form-7 .wpcf7-form p:nth-last-of-type(1) {
+  margin: 0;
+}
+
+.eael-contact-form-7-button-align-center .eael-contact-form-7 .wpcf7-form p:nth-last-of-type(1) {
+  margin: 0 auto;
+}
+
+.eael-contact-form-7-button-align-right .eael-contact-form-7 .wpcf7-form p:nth-last-of-type(1) {
+  margin: 0 0 0 auto;
 }

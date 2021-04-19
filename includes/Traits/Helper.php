@@ -518,7 +518,7 @@ trait Helper
             'data-args'     => http_build_query( $args ),
         ]);
         if ( ('true' == $settings['show_load_more'] || 1 == $settings['show_load_more'] || 'yes' == $settings['show_load_more']) && $args['posts_per_page'] != '-1' ) { ?>
-            <div class="eael-load-more-button-wrap">
+            <div class="eael-load-more-button-wrap<?php echo "eael-dynamic-filterable-gallery" == $this->get_name() ? " dynamic-filter-gallery-loadmore" : ""; ?>">
                 <button <?php $this->print_render_attribute_string( 'load-more' ); ?>>
                     <div class="eael-btn-loader button__loader"></div>
                     <span><?php echo esc_html($settings['show_load_more_text']) ?></span>
