@@ -639,7 +639,7 @@ class Helper
 	 *
 	 * @return string
 	 */
-	public function get_product_categories_list() {
+	public static function get_product_categories_list($terms_name) {
 		global $product;
 
 		if ( ! is_a( $product, 'WC_Product' ) ) {
@@ -650,7 +650,7 @@ class Helper
 		$before    = '<ul class="eael-product-cats"><li>';
 		$after     = '</li></ul>';
 
-		return get_the_term_list( $product->get_id(), 'product_cat', $before, $separator, $after );
+		return get_the_term_list( $product->get_id(), $terms_name, $before, $separator, $after );
 	}
 
     /**
