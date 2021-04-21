@@ -919,7 +919,7 @@ class Helper
         
         remove_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
         add_action( 'eael_woo_single_product_summary', function () use ( $tag ) {
-            the_title( '<' . $tag . ' class="product_title entry-title">', '</' . $tag . '>' );
+            the_title( '<' . $tag . ' class="eael-product-quick-view-title product_title entry-title">', '</' . $tag . '>' );
         }, 5 );
         
 	    ?>
