@@ -915,6 +915,13 @@ class Helper
 		$sale_badge_preset = isset($settings['eael_product_sale_badge_preset']) ? $settings['eael_product_sale_badge_preset'] : '';
 		$sale_text = !empty($settings['eael_product_carousel_sale_text']) ? $settings['eael_product_carousel_sale_text'] : 'Sale!';
 		$stockout_text = !empty($settings['eael_product_carousel_stockout_text']) ? $settings['eael_product_carousel_stockout_text'] : 'Stock Out';
+        $tag = !empty($settings['eael_product_quick_view_title_tag']) ? self::eael_validate_html_tag($settings['eael_product_quick_view_title_tag']) : 'h1';
+        
+        remove_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
+        add_action( 'eael_woo_single_product_summary', function () use ( $tag ) {
+            the_title( '<' . $tag . ' class="product_title entry-title">', '</' . $tag . '>' );
+        }, 5 );
+        
 	    ?>
 		<div id="eaproduct<?php echo $widget_id.$product->get_id(); ?>" class="eael-product-popup
 		eael-product-zoom-in woocommerce">
