@@ -19,11 +19,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 		/**
 		 * WP Insights Version
 		 */
-		const WPINS_VERSION = '3.0.2';
+		const WPINS_VERSION = '3.0.3';
 		/**
 		 * API URL
 		 */
-		// const API_URL = 'http://app.wpdeveloper.net?usage_tracker=hello';
 		const API_URL = 'https://send.wpinsight.com/process-plugin-data';
 		/**
 		 * Installed Plugin File
@@ -346,6 +345,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$email = $current_user->user_email;
 				if( is_email( $email ) ) {
 					$body['email'] = $email;
+				} else {
+					$email = get_option( 'admin_email' );
+					if( is_email($email) ) {
+						$body['email'] = $email;
+					}
 				}
 			}
 			$body['marketing_method'] = $this->marketing;
