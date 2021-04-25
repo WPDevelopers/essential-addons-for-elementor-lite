@@ -9,8 +9,8 @@
  * Text Domain: essential-addons-for-elementor-lite
  * Domain Path: /languages
  *
- * WC tested up to: 5.1.0
- * Elementor tested up to: 3.1.4
+ * WC tested up to: 5.2.2
+ * Elementor tested up to: 3.2.1
  * Elementor Pro tested up to: 3.2.1
  */
 
