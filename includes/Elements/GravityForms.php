@@ -10,7 +10,7 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Scheme_Typography;
+use \Elementor\Core\Schemes\Typography;
 use \Elementor\Widget_Base;
 
 use \Essential_Addons_Elementor\Classes\Helper;
@@ -526,7 +526,7 @@ class GravityForms extends Widget_Base {
             [
                 'name'                  => 'title_typography',
                 'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
+                'scheme'                => Typography::TYPOGRAPHY_4,
                 'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_wrapper .gform_title, {{WRAPPER}} .eael-gravity-form .eael-gravity-form-title',
             ]
         );
@@ -557,7 +557,7 @@ class GravityForms extends Widget_Base {
             [
                 'name'                  => 'description_typography',
                 'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
+                'scheme'                => Typography::TYPOGRAPHY_4,
                 'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_wrapper .gform_description, {{WRAPPER}} .eael-gravity-form .eael-gravity-form-description',
             ]
         );
@@ -1000,7 +1000,7 @@ class GravityForms extends Widget_Base {
             [
                 'name'                  => 'section_field_typography',
                 'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
+                'scheme'                => Typography::TYPOGRAPHY_4,
                 'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield.gsection .gsection_title',
 				'separator'             => 'before',
             ]
@@ -1931,7 +1931,7 @@ class GravityForms extends Widget_Base {
             [
                 'name'                  => 'button_typography',
                 'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
+                'scheme'                => Typography::TYPOGRAPHY_4,
                 'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"], {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]',
 				'separator'             => 'before',
             ]
@@ -2152,7 +2152,7 @@ class GravityForms extends Widget_Base {
             [
                 'name'                  => 'eael_gravity_forms_next_button_typography',
                 'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
+                'scheme'                => Typography::TYPOGRAPHY_4,
                 'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="button"]',
 				'separator'             => 'before',
             ]
@@ -2345,7 +2345,7 @@ class GravityForms extends Widget_Base {
             [
                 'name'                  => 'eaelgf_thankyou_message_typography',
                 'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
+                'scheme'                => Typography::TYPOGRAPHY_4,
                 'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_confirmation_wrapper .gform_confirmation_message',
 				'separator'             => 'before',
             ]

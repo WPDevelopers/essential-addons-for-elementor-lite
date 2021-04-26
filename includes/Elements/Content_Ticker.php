@@ -754,7 +754,7 @@ class Content_Ticker extends Widget_Base
         echo '<div class="eael-ticker-wrap" id="eael-ticker-wrap-' . $this->get_id() . '">';
         if (!empty($settings['eael_ticker_tag_text'])) {
             echo '<div class="ticker-badge">
-                    <span>' . $settings['eael_ticker_tag_text'] . '</span>
+                    <span>' . Helper::eael_wp_kses($settings['eael_ticker_tag_text']) . '</span>
                 </div>';
         }
 

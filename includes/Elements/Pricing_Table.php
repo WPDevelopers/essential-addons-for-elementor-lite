@@ -15,6 +15,7 @@ use \Elementor\Group_Control_Typography;
 use Elementor\Modules\DynamicTags\Module as TagsModule;
 use Elementor\Repeater;
 use \Elementor\Widget_Base;
+use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 
 class Pricing_Table extends Widget_Base
 {
@@ -2091,7 +2092,7 @@ class Pricing_Table extends Widget_Base
                             <?php } ?>
                         </span>
                     <?php endif; ?>
-                    <?php echo $item['eael_pricing_table_item']; ?>
+                    <?php echo HelperClass::eael_wp_kses($item['eael_pricing_table_item']); ?>
                 </li>
             <?php
                 $counter++;
@@ -2111,7 +2112,10 @@ class Pricing_Table extends Widget_Base
         $featured_class .= ($settings['eael_pricing_table_ribbon_alignment'] === 'left' ? ' ribbon-left' : '');
         $inline_style = ($settings['eael_pricing_table_featured_styles'] === 'ribbon-4' && 'yes' === $settings['eael_pricing_table_featured'] ? ' style="overflow: hidden;"' : '');
         $icon_position = $this->get_settings('eael_pricing_table_button_icon_alignment');
-
+	    $settings['eael_pricing_table_price'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_price']);
+	    $settings['eael_pricing_table_onsale_price'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_onsale_price']);
+	    $settings['eael_pricing_table_price_cur'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_price_cur']);
+	    $settings['eael_pricing_table_btn'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_btn']);
         if ('yes' === $settings['eael_pricing_table_onsale']) {
             if ($settings['eael_pricing_table_price_cur_placement'] == 'left') {
                 $pricing = '<del class="original-price">
@@ -2156,11 +2160,11 @@ class Pricing_Table extends Widget_Base
             <div class="eael-pricing style-1" <?php echo $inline_style; ?>>
                 <div class="eael-pricing-item <?php echo esc_attr($featured_class); ?>">
                     <div class="header">
-                        <h2 class="title"><?php echo $settings['eael_pricing_table_title']; ?></h2>
+                        <h2 class="title"><?php echo HelperClass::eael_wp_kses($settings['eael_pricing_table_title']); ?></h2>
                     </div>
                     <div class="eael-pricing-tag">
                         <span class="price-tag"><?php echo $pricing; ?></span>
-                        <span class="price-period"><?php echo $settings['eael_pricing_table_period_separator']; ?> <?php echo $settings['eael_pricing_table_price_period']; ?></span>
+                        <span class="price-period"><?php echo HelperClass::eael_wp_kses($settings['eael_pricing_table_period_separator']); ?> <?php echo HelperClass::eael_wp_kses($settings['eael_pricing_table_price_period']); ?></span>
                     </div>
                     <div class="body">
                         <?php $this->render_feature_list($settings, $this); ?>
@@ -2220,7 +2224,7 @@ class Pricing_Table extends Widget_Base
                     </div>
                     <div class="eael-pricing-tag">
                         <span class="price-tag"><?php echo $pricing; ?></span>
-                        <span class="price-period"><?php echo $settings['eael_pricing_table_period_separator']; ?> <?php echo $settings['eael_pricing_table_price_period']; ?></span>
+                        <span class="price-period"><?php echo HelperClass::eael_wp_kses($settings['eael_pricing_table_period_separator']); ?> <?php echo HelperClass::eael_wp_kses($settings['eael_pricing_table_price_period']); ?></span>
                     </div>
                     <div class="body">
                         <?php $this->render_feature_list($settings, $this); ?>

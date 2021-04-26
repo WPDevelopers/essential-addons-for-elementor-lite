@@ -767,6 +767,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                 [
                     'name' => 'count_font_size',
                     'selector' => '{{WRAPPER}} .eael-docs-item-count',
+                    'exclude' => [ 'line_height' ],
                 ]
             );
 

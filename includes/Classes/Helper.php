@@ -981,4 +981,132 @@ class Helper
     public static function eael_validate_html_tag( $tag ){
 	    return in_array( strtolower( $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
     }
+
+	/**
+     *
+     * Strip tag based on allowed html tag
+	 * eael_wp_kses
+	 * @param $text
+	 * @return string
+	 */
+    public static function eael_wp_kses($text){
+        return wp_kses($text,self::eael_allowed_tags());
+    }
+
+	/**
+     * List of allowed html tag for wp_kses
+     *
+	 * eael_allowed_tags
+	 * @return array
+	 */
+    public static function eael_allowed_tags(){
+	    return  [
+		    'a' => [
+			    'href' => [],
+			    'title' => [],
+			    'class' => [],
+                'rel' => [],
+			    'id' => [],
+		    ],
+		    'q' => [
+			    'cite' => [],
+			    'class' => [],
+			    'id' => [],
+		    ],
+		    'img' => [
+			    'src' => [],
+			    'alt' => [],
+			    'height' => [],
+			    'width' => [],
+			    'class' => [],
+			    'id' => [],
+			    'style' => []
+		    ],
+		    'span' => [
+			    'class' => [],
+			    'id' => [],
+			    'style' => []
+		    ],
+		    'dfn' => [],
+		    'time' => [
+			    'datetime' => [],
+			    'class' => [],
+			    'id' => [],
+		    ],
+		    'cite' => [
+			    'title' => [],
+			    'class' => [],
+			    'id' => [],
+		    ],
+		    'hr' => [
+			    'class' => [],
+			    'id' => [],
+		    ],
+		    'b' => [
+			    'class' => [],
+			    'id' => [],
+		    ],
+		    'i' => [
+			    'class' => [],
+			    'id' => [],
+			    'style' => []
+		    ],
+		    'u' => [
+			    'class' => [],
+			    'id' => [],
+			    'style' => []
+		    ],
+		    's' => [
+			    'class' => [],
+			    'id' => [],
+		    ],
+		    'br' => [],
+		    'em' => [
+			    'class' => [],
+			    'id' => [],
+			    'style' => []
+		    ],
+		    'code' => [
+			    'class' => [],
+			    'id' => [],
+		    ],
+		    'small' => [
+			    'class' => [],
+			    'id' => [],
+			    'style' => []
+		    ],
+		    'abbr' => [
+			    'title' => [],
+		    ],
+		    'strong' => [
+			    'class' => [],
+			    'id' => [],
+			    'style' => []
+		    ],
+		    'del' => [
+			    'class' => [],
+			    'id' => [],
+			    'style' => []
+		    ],
+		    'ins' => [
+			    'class' => [],
+			    'id' => [],
+			    'style' => []
+		    ],
+		    'sub' => [
+			    'class' => [],
+		    ],
+		    'sup' => [
+			    'class' => []
+		    ],
+		    'strike' => [],
+		    'acronym' => [],
+		    'h1' => [],
+		    'h2' => [],
+		    'h3' => [],
+		    'h4' => [],
+		    'h5' => [],
+		    'h6' => [],
+	    ];
+    }
 }
