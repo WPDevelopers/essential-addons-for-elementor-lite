@@ -149,6 +149,9 @@
 			$(document).off("scroll");
 
 			var target = this.hash;
+            var headerHeight = $("header").height();
+            var offsetSpan = (headerHeight !== undefined ) ? headerHeight : 120 ;
+
 			history.pushState(
 				"",
 				document.title,
@@ -158,7 +161,9 @@
 			var parentLi = $(this).parent();
 
 			if (parentLi.is(".eael-highlight-parent.eael-highlight-active")) {
-				window.location.hash = target;
+				$('html, body').animate({
+                    scrollTop: $(target).offset().top - offsetSpan
+                }, 500);
 				return false;
 			}
 
@@ -170,7 +175,9 @@
 
 			$(this).parent().addClass("eael-highlight-active");
 
-			window.location.hash = target;
+			$('html, body').animate({
+                scrollTop: $(target).offset().top - offsetSpan
+            }, 500);
 		});
 
 		//some site not working with **window.onscroll**
