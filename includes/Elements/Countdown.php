@@ -11,7 +11,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Plugin;
-use \Elementor\Scheme_Typography;
+use \Elementor\Core\Schemes\Typography;
 use \Elementor\Widget_Base;
 
 use \Essential_Addons_Elementor\Classes\Helper;
@@ -374,7 +374,7 @@ class Countdown extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'      => 'eael_countdown_separator_typography',
-                'scheme'    => Scheme_Typography::TYPOGRAPHY_2,
+                'scheme'    => Typography::TYPOGRAPHY_2,
                 'selector'  => '{{WRAPPER}} .eael-countdown-digits::after',
                 'condition' => [
                     'eael_countdown_separator' => 'eael-countdown-show-separator',
@@ -674,7 +674,7 @@ class Countdown extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_countdown_digit_typography',
-                'scheme'   => Scheme_Typography::TYPOGRAPHY_2,
+                'scheme'   => Typography::TYPOGRAPHY_2,
                 'selector' => '{{WRAPPER}} .eael-countdown-digits',
             ]
         );
@@ -703,7 +703,7 @@ class Countdown extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_countdown_label_typography',
-                'scheme'   => Scheme_Typography::TYPOGRAPHY_2,
+                'scheme'   => Typography::TYPOGRAPHY_2,
                 'selector' => '{{WRAPPER}} .eael-countdown-label',
             ]
         );
@@ -1074,7 +1074,7 @@ class Countdown extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'      => 'eael_countdown_expire_title_typography',
-                'scheme'    => Scheme_Typography::TYPOGRAPHY_2,
+                'scheme'   => Typography::TYPOGRAPHY_2,
                 'selector'  => '{{WRAPPER}} .eael-countdown-finish-message .expiry-title',
                 'condition' => [
                     'countdown_expire_type' => 'text',
@@ -1122,7 +1122,7 @@ class Countdown extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'      => 'eael_countdown_expire_message_typography',
-                'scheme'    => Scheme_Typography::TYPOGRAPHY_2,
+                'scheme'    => Typography::TYPOGRAPHY_2,
                 'selector'  => '.eael-countdown-finish-text',
                 'condition' => [
                     'countdown_expire_type' => 'text',

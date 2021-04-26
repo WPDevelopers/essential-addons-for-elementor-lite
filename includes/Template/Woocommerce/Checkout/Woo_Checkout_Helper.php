@@ -3,7 +3,7 @@ namespace Essential_Addons_Elementor\Template\Woocommerce\Checkout;
 
 use \Elementor\Icons_Manager;
 use \Exception;
-
+use \Essential_Addons_Elementor\Classes\Helper as CheckoutHelperCLass;
 if (!defined('ABSPATH')) {
 	exit;
 } // Exit if accessed directly
@@ -310,7 +310,7 @@ trait Woo_Checkout_Helper {
             </div>
 
       <?php
-      $message  = $settings['ea_woo_checkout_login_message'];
+      $message  = CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_login_message']);
 
 			$redirect = wc_get_checkout_url();
 			$hidden   = true;
@@ -367,7 +367,7 @@ trait Woo_Checkout_Helper {
 		?>
 		<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
 		<h3 id="order_review_heading" class="woo-checkout-section-title">
-			<?php echo $settings['ea_woo_checkout_order_details_title']; ?>
+			<?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_order_details_title']); ?>
         </h3>
 
 		<?php do_action('woocommerce_checkout_before_order_review'); ?>
@@ -390,9 +390,9 @@ trait Woo_Checkout_Helper {
                 <?php
                 if( $settings['ea_woo_checkout_layout'] == 'default' ) { ?>
                     <li class="table-header">
-                        <div class="table-col-1"><?php echo $settings['ea_woo_checkout_table_product_text']; ?></div>
-                        <div class="table-col-2"><?php echo $settings['ea_woo_checkout_table_quantity_text']; ?></div>
-                        <div class="table-col-3"><?php echo $settings['ea_woo_checkout_table_price_text']; ?></div>
+                        <div class="table-col-1"><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_product_text']); ?></div>
+                        <div class="table-col-2"><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_quantity_text']); ?></div>
+                        <div class="table-col-3"><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_price_text']); ?></div>
                     </li>
                 <?php }
                 ?>
@@ -443,14 +443,14 @@ trait Woo_Checkout_Helper {
 				if($settings['ea_woo_checkout_shop_link'] == 'yes') { ?>
 					<div class="back-to-shop">
 						<a class="back-to-shopping" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
-							<i class="fas fa-long-arrow-alt-left"></i><?php echo $settings['ea_woo_checkout_shop_link_text']; ?>
+							<i class="fas fa-long-arrow-alt-left"></i><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_shop_link_text']); ?>
 						</a>
 					</div>
 				<?php } ?>
 
 				<div class="footer-content">
 					<div class="cart-subtotal">
-						<div><?php echo $settings['ea_woo_checkout_table_subtotal_text']; ?></div>
+						<div><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_subtotal_text']); ?></div>
 						<div><?php wc_cart_totals_subtotal_html(); ?></div>
 					</div>
 
@@ -498,7 +498,7 @@ trait Woo_Checkout_Helper {
 					<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
 
 					<div class="order-total">
-						<div><?php echo $settings['ea_woo_checkout_table_total_text']; ?></div>
+						<div><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_total_text']); ?></div>
 						<div><?php wc_cart_totals_order_total_html(); ?></div>
 					</div>
 
@@ -575,7 +575,7 @@ trait Woo_Checkout_Helper {
 
             <?php else : ?>
 
-                <h3><?php echo $settings['ea_woo_checkout_billing_title']; ?></h3>
+                <h3><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_billing_title']); ?></h3>
 
             <?php endif; ?>
 
@@ -637,7 +637,7 @@ trait Woo_Checkout_Helper {
 
                 <h3 id="ship-to-different-address">
                     <label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
-                        <input id="ship-to-different-address-checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" <?php checked( apply_filters( 'woocommerce_ship_to_different_address_checked', 'shipping' === get_option( 'woocommerce_ship_to_destination' ) ? 1 : 0 ), 1 ); ?> type="checkbox" name="ship_to_different_address" value="1" /> <span><?php echo $settings['ea_woo_checkout_shipping_title']; ?></span>
+                        <input id="ship-to-different-address-checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" <?php checked( apply_filters( 'woocommerce_ship_to_different_address_checked', 'shipping' === get_option( 'woocommerce_ship_to_destination' ) ? 1 : 0 ), 1 ); ?> type="checkbox" name="ship_to_different_address" value="1" /> <span><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_shipping_title']); ?></span>
                     </label>
                 </h3>
 
@@ -668,7 +668,7 @@ trait Woo_Checkout_Helper {
 
 				<?php if ( ! WC()->cart->needs_shipping() || wc_ship_to_billing_address_only() ) : ?>
 
-                    <h3><?php echo $settings['ea_woo_checkout_additional_info_title']; ?></h3>
+                    <h3><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_additional_info_title']); ?></h3>
 
 				<?php endif; ?>
 
@@ -700,7 +700,7 @@ trait Woo_Checkout_Helper {
 
         <div class="woo-checkout-payment">
             <h3 id="payment-title" class="woo-checkout-section-title">
-				<?php echo $settings['ea_woo_checkout_payment_title']; ?>
+				<?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_payment_title']); ?>
             </h3>
 
 			<?php wc_get_template(
@@ -708,7 +708,7 @@ trait Woo_Checkout_Helper {
 			array(
 				'checkout'           => WC()->checkout(),
 				'available_gateways' => $available_gateways,
-				'order_button_text'  => apply_filters( 'woocommerce_order_button_text', $settings['ea_woo_checkout_place_order_text'] ),
+				'order_button_text'  => apply_filters( 'woocommerce_order_button_text', CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_place_order_text']) ),
 			)
 		); ?>
         </div>

@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Plugin;
 use \Elementor\Widget_Base;
+use Essential_Addons_Elementor\Classes\Helper;
 
 class Advanced_Data_Table extends Widget_Base
 {
@@ -1532,7 +1533,7 @@ class Advanced_Data_Table extends Widget_Base
 
         if ($content = $this->get_table_content()) {
             if ($settings['ea_adv_data_table_search'] == 'yes') {
-                echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-search-wrap') . '><input type="search" placeholder="' . $settings['ea_adv_data_table_search_placeholder'] . '" class="ea-advanced-data-table-search"></div>';
+                echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-search-wrap') . '><input type="search" placeholder="' . Helper::eael_wp_kses($settings['ea_adv_data_table_search_placeholder'] ). '" class="ea-advanced-data-table-search"></div>';
             }
 
             echo '<div class="ea-advanced-data-table-wrap-inner">
