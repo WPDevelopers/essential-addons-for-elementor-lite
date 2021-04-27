@@ -5,6 +5,12 @@
 		 * @param selector
 		 * @param supportTag
 		 */
+
+         var headerHeight = $("header").height();
+         var page_offset = $("#eael-toc").data("page_offset");
+         var page_offset = ( page_offset !== 0 && page_offset !== undefined ) ? page_offset : null;
+         var offsetSpan = (page_offset !== null ) ? page_offset : ((headerHeight !== undefined  && headerHeight!== 0 ) ? ( headerHeight + 10 ) : 120)  ;
+
 		function eael_toc_content(selector, supportTag) {
 			var listId = document.getElementById("eael-toc-list");
 			if (selector === null || supportTag === undefined || !listId) {
@@ -149,9 +155,6 @@
 			$(document).off("scroll");
 
 			var target = this.hash;
-            var headerHeight = $("header").height();
-            var offsetSpan = (headerHeight !== undefined ) ? headerHeight : 120 ;
-
 			history.pushState(
 				"",
 				document.title,
@@ -163,7 +166,7 @@
 			if (parentLi.is(".eael-highlight-parent.eael-highlight-active")) {
 				$('html, body').animate({
                     scrollTop: $(target).offset().top - offsetSpan
-                }, 500);
+                }, 0);
 				return false;
 			}
 
@@ -177,7 +180,7 @@
 
 			$('html, body').animate({
                 scrollTop: $(target).offset().top - offsetSpan
-            }, 500);
+            }, 0);
 		});
 
 		//some site not working with **window.onscroll**
