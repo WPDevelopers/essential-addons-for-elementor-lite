@@ -857,7 +857,7 @@ trait Controls
             $wb->add_control(
                 'excerpt_expanison_indicator',
                 [
-                    'label' => esc_html__('Expanison Indicator', 'essential-addons-for-elementor-lite'),
+                    'label' => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
                     'dynamic'     => [ 'active' => true ],
                     'label_block' => false,
@@ -884,7 +884,7 @@ trait Controls
             $wb->add_control(
                 'excerpt_expanison_indicator',
                 [
-                    'label' => esc_html__('Expanison Indicator', 'essential-addons-for-elementor-lite'),
+                    'label' => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
                     'dynamic'     => [ 'active' => true ],
                     'label_block' => false,
