@@ -394,7 +394,6 @@ trait Elements
                 $settings_data = $document->get_settings();
             }
 
-            error_log(print_r( $settings_data['eael_ext_toc_main_page_offset'], 1 ));
             if (isset($settings_data['eael_ext_table_of_content']) && $settings_data['eael_ext_table_of_content'] == 'yes') {
                 $toc_status = true;
             } elseif (isset($global_settings['eael_ext_table_of_content']['enabled']) && $global_settings['eael_ext_table_of_content']['enabled']) {
