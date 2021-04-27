@@ -779,7 +779,7 @@ class Content_Ticker extends Widget_Base
                         } elseif ('custom' === $settings['eael_ticker_type'] && apply_filters('eael/is_plugin_active', 'essential-addons-elementor/essential_adons_elementor.php')) {
                             if (\file_exists($this->get_template($settings['eael_dynamic_template_Layout']))) {
                                 foreach ($settings['eael_ticker_custom_contents'] as $content) {
-                                    echo Helper::include_with_variable($this->get_template($settings['eael_dynamic_template_Layout']), ['content' => $content['eael_ticker_custom_content'], 'link' => $content['eael_ticker_custom_content_link']]);
+                                    echo Helper::include_with_variable($this->get_template($settings['eael_dynamic_template_Layout']), ['content' => Helper::eael_wp_kses($content['eael_ticker_custom_content']), 'link' => $content['eael_ticker_custom_content_link']]);
                                 }
                             }
                         }
