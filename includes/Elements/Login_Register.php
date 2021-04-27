@@ -1078,10 +1078,10 @@ class Login_Register extends Widget_Base {
 					'width'       => '100',
 				],
 			] ),
-			'title_field' => '{{{ field_label }}}',
+			'title_field' => '{{ field_label }}',
 		];
 		if ( $this->pro_enabled ) {
-			$rf['title_field'] = '{{{ elementor.helpers.renderIcon( this, icon, {}, "i", "panel" ) || \'<i class="{{ icon }}" aria-hidden="true"></i>\' }}} {{{ field_label }}}';
+			$rf['title_field'] = '{{{ elementor.helpers.renderIcon( this, icon, {}, "i", "panel" ) || \'<i class="{{ icon }}" aria-hidden="true"></i>\' }}} {{ field_label }}';
 		}
 		$this->add_control( 'register_fields', $rf );
 
