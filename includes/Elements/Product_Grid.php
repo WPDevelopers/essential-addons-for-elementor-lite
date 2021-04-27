@@ -434,6 +434,7 @@ class Product_Grid extends Widget_Base
               'post_type!' => 'source_dynamic',
             ],
         ]);
+
         $this->add_control(
             'eael_dynamic_template_Layout',
             [
@@ -441,6 +442,26 @@ class Product_Grid extends Widget_Base
                 'type' => Controls_Manager::SELECT,
                 'default' => 'default',
                 'options' => $this->get_template_list_for_dropdown(),
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_grid_title_html_tag',
+            [
+                'label'   => __( 'Title HTML Tag', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'h2',
+                'options' => [
+                    'h1'   => __( 'H1', 'essential-addons-for-elementor-lite' ),
+                    'h2'   => __( 'H2', 'essential-addons-for-elementor-lite' ),
+                    'h3'   => __( 'H3', 'essential-addons-for-elementor-lite' ),
+                    'h4'   => __( 'H4', 'essential-addons-for-elementor-lite' ),
+                    'h5'   => __( 'H5', 'essential-addons-for-elementor-lite' ),
+                    'h6'   => __( 'H6', 'essential-addons-for-elementor-lite' ),
+                    'div'  => __( 'div', 'essential-addons-for-elementor-lite' ),
+                    'span' => __( 'span', 'essential-addons-for-elementor-lite' ),
+                    'p'    => __( 'p', 'essential-addons-for-elementor-lite' ),
+                ],
             ]
         );
 
