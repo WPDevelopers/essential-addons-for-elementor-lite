@@ -215,7 +215,8 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                     <div class="image-hover-wrap">
                         <ul class="icons-wrap over-box-style">
                             <li class="add-to-cart"><?php
-                                woocommerce_template_loop_add_to_cart(); ?></li>
+                                woocommerce_template_loop_add_to_cart(); ?>
+                            </li>
                             <?php
                             if ( $should_print_compare_btn ) {
                                 echo '<li class="add-to-compare">';
@@ -232,9 +233,6 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                 </li>
                             <?php } ?>
                         </ul>
-                        <?php
-
-                        ?>
                     </div>
                 </div>
                 <div class="product-details-wrap">
@@ -245,8 +243,9 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                     ?>
                     <div class="eael-product-title">
                         <?php
-                        echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
-                         printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title());
+                            echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+                            printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title());
+                            echo '</a>';
                         ?>
                     </div>
                 </div>
