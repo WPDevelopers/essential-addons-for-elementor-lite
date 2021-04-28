@@ -240,13 +240,14 @@ trait Woo_Product_Comparable {
 				'active' => true,
 			],
 		] );
+
 		$this->add_control( 'fields', [
 			'label'       => __( 'Fields to show', 'essential-addons-for-elementor-lite' ),
 			'description' => __( 'Select the fields to show in the comparison table', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::REPEATER,
 			'fields'      => apply_filters( 'eael/wcpc/rf-fields', $repeater->get_controls() ),
 			'default'     => $this->get_default_rf_fields(),
-			'title_field' => '{{{ field_label }}}',
+			'title_field' => '{{ field_label }}',
 		] );
 		$this->add_control( 'repeat_price', [
 			'label'       => __( 'Repeat "Price" field', 'essential-addons-for-elementor-lite' ),
@@ -1791,7 +1792,7 @@ trait Woo_Product_Comparable {
                                 <div class="wcpc-table-header">
 									<?php if ( $field === 'image' ) {
 										if ( ! empty( $title ) ) {
-											printf( "<{$title_tag} class='wcpc-title'>%s</{$title_tag}>", esc_html( $title ) );
+											printf( "<{$title_tag} class='wcpc-title'>%s</{$title_tag}>", HelperClass::eael_wp_kses( $title ) );
 										}
 									} else {
 										if ( 'theme-5' === $theme && $field === 'title' ) {
@@ -1800,7 +1801,7 @@ trait Woo_Product_Comparable {
 											if ( ! empty( $icon ) ) {
 												self::print_icon( $icon );
 											}
-											printf( '<span class="field-name">%s</span>', esc_html( $name ) );
+											printf( '<span class="field-name">%s</span>', HelperClass::eael_wp_kses( $name ) );
 
 										}
 									} ?>
