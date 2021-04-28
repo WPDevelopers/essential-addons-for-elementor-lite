@@ -140,6 +140,9 @@ class Product_Grid extends Widget_Base
                 case 'grouped':
                     return $this->grouped_add_to_cart_button_text;
                 case 'simple':
+                    if ( ! $product->managing_stock() && ! $product->is_in_stock() ) {
+                        return $this->default_add_to_cart_button_text;
+                    }
                     return $this->simple_add_to_cart_button_text;
                 case 'variable':
                     return $this->variable_add_to_cart_button_text;
