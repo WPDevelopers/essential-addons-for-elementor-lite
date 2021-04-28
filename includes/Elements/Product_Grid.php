@@ -1227,7 +1227,7 @@ class Product_Grid extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'eael_product_grid_product_price_typography',
-                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .price',
+                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .price,{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .eael-product-price',
             ]
         );
 
