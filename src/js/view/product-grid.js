@@ -237,22 +237,48 @@ ea.hooks.addAction("init", "ea", () => {
 			});
 		});
 
-		$(document).on("click", ".open-popup-link", function (e) {
+		$scope.on("click", ".eael-product-grid-open-popup", function (e) {
 			e.preventDefault();
 			e.stopPropagation();
 			const $this = $(this);
-			const id = $this.attr("href");
-			const popup = $(id);
-			const popup_details = popup.children(".eael-product-popup-details");
-			if (popup_details.height() > 400) {
-				popup_details.css("height", "75vh");
-			} else {
-				popup_details.css("height", "auto");
-			}
-			$(id + " .variations_form").wc_variation_form();
-			popup
-				.addClass("eael-product-popup-ready")
-				.removeClass("eael-product-modal-removing");
+			const quickview_setting = $this.data('quickview-setting');
+			const popup_view = $(".eael-woocommerce-popup-view");
+			popup_view.find(".eael-popup-details-render").html('<div class="eael-preloader"></div>')
+			popup_view
+			.addClass("eael-product-popup-ready")
+			.removeClass("eael-product-modal-removing");
+			popup_view.show();
+			$.ajax({
+					   url: localize.ajaxurl,
+					   type: "post",
+					   data: {
+						   action: "eael_product_quickview_popup",
+						   ...quickview_setting,
+						   security: localize.nonce
+					   },
+					   success: function (response) {
+						   if (response.success) {
+							   const product_preview = $(response.data);
+							   const popup_details = product_preview.children(".eael-product-popup-details");
+
+							   popup_details.find(".variations_form").wc_variation_form()
+							   const popup_view_render = popup_view.find(".eael-popup-details-render");
+
+							   popup_view.find(".eael-popup-details-render").html(popup_details);
+							   const product_gallery = popup_view.find(".woocommerce-product-gallery");
+							   product_gallery.css("opacity",1);
+							   popup_view_render.addClass("elementor-" + quickview_setting.page_id)
+							   popup_view_render.children().addClass("elementor-element elementor-element-" + quickview_setting.widget_id)
+
+							   if (popup_details.height() > 400) {
+								   popup_details.css("height", "75vh");
+							   } else {
+								   popup_details.css("height", "auto");
+							   }
+							   setTimeout(function(){ product_gallery.wc_product_gallery(); }, 1000);
+						   }
+					   },
+				   });
 		});
 
 		$(document).on(
@@ -270,11 +296,12 @@ ea.hooks.addAction("init", "ea", () => {
 		);
 
 		// handle add to cart for quick view
-		$scope.on(
+		$(document).on(
 			"click",
-			".eael-product-popup-details .single_add_to_cart_button",
+			".eael-woo-slider-popup .single_add_to_cart_button",
 			function (e) {
 				e.preventDefault();
+				e.stopImmediatePropagation();
 				var $this = $(this),
 					product_id = $(this).val(),
 					variation_id =
