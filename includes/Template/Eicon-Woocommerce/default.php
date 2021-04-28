@@ -29,7 +29,11 @@ $should_print_quick_view = isset( $settings['eael_product_grid_quick_view'] ) &&
 $should_print_price = isset( $settings['eael_product_grid_price'] ) && 'yes' === $settings['eael_product_grid_price'];
 $should_print_excerpt = isset( $settings['eael_product_grid_excerpt'] ) && ('yes' === $settings['eael_product_grid_excerpt'] && has_excerpt());
 $widget_id = isset($settings['eael_widget_id']) ? $settings['eael_widget_id'] : null;
-
+$quick_view_setting = [
+	'widget_id' => $widget_id,
+	'product_id' => $product->get_id(),
+	'page_id' => $settings['eael_page_id'],
+];
 if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-product-reveal' ) { ?>
     <li class="product">
         <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
@@ -106,8 +110,8 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                             <ul class="icons-wrap block-style">
                                 <?php if( $should_print_quick_view ){?>
                                     <li class="eael-product-quick-view">
-                                        <a href="#eaproduct<?php echo $widget_id.$product->get_id(); ?>"
-                                           class="open-popup-link">
+                                        <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
+                                           class="eael-product-grid-open-popup">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </li>
@@ -137,8 +141,8 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                 ?>
                                 <?php if( $should_print_quick_view ){?>
                                     <li class="eael-product-quick-view">
-                                        <a href="#eaproduct<?php echo $widget_id.$product->get_id(); ?>"
-                                           class="open-popup-link">
+                                        <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
+                                           class="eael-product-grid-open-popup">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </li>
@@ -159,8 +163,8 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                 ?>
                                 <?php if( $should_print_quick_view ){?>
                                     <li class="eael-product-quick-view">
-                                        <a href="#eaproduct<?php echo $widget_id.$product->get_id(); ?>"
-                                           class="open-popup-link">
+                                        <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
+                                           class="eael-product-grid-open-popup">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </li>
@@ -168,9 +172,6 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                 <li class="view-details" title="Details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
                             </ul>
                         <?php }
-                        if( $should_print_quick_view ){
-                            Helper::eael_product_quick_view( $product, $settings, $widget_id );
-                        }
                         ?>
                     </div>
                 </div>
@@ -221,17 +222,15 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                             ?>
                             <?php if( $should_print_quick_view ){?>
                                 <li class="eael-product-quick-view">
-                                    <a href="#eaproduct<?php echo $widget_id.$product->get_id(); ?>"
-                                       class="open-popup-link">
+                                    <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
+                                       class="eael-product-grid-open-popup">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                 </li>
                             <?php } ?>
                         </ul>
                         <?php
-                        if( $should_print_quick_view ){
-                            Helper::eael_product_quick_view( $product, $settings, $widget_id );
-                        }
+
                         ?>
                     </div>
                 </div>
@@ -376,18 +375,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                         <?php
                         if( $should_print_quick_view ){?>
                             <li class="eael-product-quick-view">
-                                <a href="#eaproduct<?php echo $widget_id.$product->get_id(); ?>"
-                                   class="open-popup-link">
+                                <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
+                                   class="eael-product-grid-open-popup">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </li>
                         <?php } ?>
                     </ul>
-                    <?php
-                    if( $should_print_quick_view ){
-                        Helper::eael_product_quick_view( $product, $settings, $widget_id );
-                    }
-                    ?>
                 </div>
             </div>
         </li>
