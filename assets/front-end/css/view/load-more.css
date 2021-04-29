@@ -40,10 +40,6 @@
   font-size: 16px;
   overflow: hidden;
 }
-.eael-button > span,
-.eael-load-more-button > span {
-  margin-left: -20px;
-}
 .eael-button.button--loading .eael-btn-loader,
 .eael-load-more-button.button--loading .eael-btn-loader {
   display: block;
