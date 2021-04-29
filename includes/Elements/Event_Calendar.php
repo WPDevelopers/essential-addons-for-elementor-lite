@@ -1948,7 +1948,7 @@ class Event_Calendar extends Widget_Base
                 'id' => ++$key,
                 'title' => !empty($event->post_title) ? $event->post_title : __('No Title',
                     'essential-addons-for-elementor-lite'),
-                'description' => $event->post_content,
+                'description' => do_shortcode($event->post_content),
                 'start' => tribe_get_start_date($event->ID, true, $date_format),
                 'end' => $end,
                 'borderColor' => !empty($settings['eael_event_global_popup_ribbon_color']) ? $settings['eael_event_global_popup_ribbon_color'] : '#10ecab',
