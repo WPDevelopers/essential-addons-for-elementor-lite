@@ -1092,6 +1092,11 @@ class Helper
 		    'sup' => [
 			    'class' => []
 		    ],
+            'div' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
 		    'strike' => [],
 		    'acronym' => [],
 		    'h1' => [],
