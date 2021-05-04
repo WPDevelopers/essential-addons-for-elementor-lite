@@ -477,6 +477,10 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
 
         check_ajax_referer( 'essential-addons-elementor', 'security' );
 
+        if(!current_user_can('manage_options')){
+            wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
+        }
+
         if ( !isset( $_POST[ 'fields' ] ) ) {
             return;
         }
@@ -498,6 +502,10 @@ c2.2,0,4.2-1.1,5.4-2.8L49.1,9.5C50.5,7.5,50.2,4.8,48.5,3.1z"/>
      */
     public function save_eael_elements_data() {
         check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+        if(!current_user_can('manage_options')){
+            wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
+        }
 
         if ( !isset( $_POST[ 'fields' ] ) ) {
             return;
