@@ -24,10 +24,15 @@
 	overflow: hidden;
 
 	> span {
-		margin-left: -20px;
+		//margin-left: -20px;
 	}
-
+	&.button--loading {
+		.eael-btn-loader {
+			display: block;
+		}
+	}
 	.eael-btn-loader {
+		display: none;
 		border-radius: 50%;
 		width: 20px;
 		height: 20px;

@@ -1,10 +1,10 @@
 === Essential Addons for Elementor ===
-Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, mahfuz01, manzurahammed
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, manzurahammed
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 5.7
+Tested up to: 5.7.1
 Requires PHP: 5.6
-Stable tag: 4.6.3
+Stable tag: 4.6.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -222,6 +222,17 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.6.4 - 03/05/2021 =
+
+- Improved: Query Optimization in dynamic widgets
+- Improved: Refactored code for Security Enhancement
+- Added: EA Data Table | Added ‘icon’ option in Content Type
+- Fixed: Conflict with swiperJS
+- Fixed: EA Creative Button | issues with the tab view and default styles 
+- Fixed: EA Product Grid | Product header tag not being changeable
+- Fixed: EA Facebook Feed | different page ID's showing same content
+- Few minor bug fix and improvements
 
 = 4.6.3 - 25/04/2021 =
 
