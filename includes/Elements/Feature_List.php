@@ -241,7 +241,7 @@ class Feature_List extends Widget_Base {
                     ],
                 ],
                 'fields'      => $repeater->get_controls(),
-                'title_field' => '<i class="{{ eael_feature_list_icon_new.value }}" aria-hidden="true"></i> {{{ eael_feature_list_title }}}',
+                'title_field' => '<i class="{{ eael_feature_list_icon_new.value }}" aria-hidden="true"></i> {{ eael_feature_list_title }}',
             ]
         );
 

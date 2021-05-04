@@ -40,12 +40,13 @@
   font-size: 16px;
   overflow: hidden;
 }
-.eael-button > span,
-.eael-load-more-button > span {
-  margin-left: -20px;
+.eael-button.button--loading .eael-btn-loader,
+.eael-load-more-button.button--loading .eael-btn-loader {
+  display: block;
 }
 .eael-button .eael-btn-loader,
 .eael-load-more-button .eael-btn-loader {
+  display: none;
   border-radius: 50%;
   width: 20px;
   height: 20px;
