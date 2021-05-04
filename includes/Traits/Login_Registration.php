@@ -409,6 +409,12 @@ trait Login_Registration {
 		$user_data = apply_filters( 'eael/login-register/new-user-data', $user_data );
 
 		do_action( 'eael/login-register/before-insert-user', $user_data );
+		$user_default_role = get_option( 'default_role' );
+
+        if(!empty($user_default_role)){
+            $user_data['role'] = $user_default_role;
+        }
+
 		$user_id = wp_insert_user( $user_data );
 		do_action( 'eael/login-register/after-insert-user', $user_id, $user_data );
 
