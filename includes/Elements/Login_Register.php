@@ -1155,14 +1155,21 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
+        if(current_user_can('create_users')){
+            $user_role = $this->get_user_roles();
+        }else{
+            $user_role = [
+                get_option( 'default_role' ) =>  ucfirst(get_option( 'default_role' ))
+            ];
+        }
+
 		$this->add_control( 'register_user_role', [
 			'label'     => __( 'New User Role', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::SELECT,
 			'default'   => '',
-			'options'   => $this->get_user_roles(),
+			'options'   => $user_role,
 			'separator' => 'before',
 		] );
-
 
 		$this->end_controls_section();
 	}
