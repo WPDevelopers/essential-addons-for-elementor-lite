@@ -392,7 +392,7 @@ class Image_Accordion extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => 'rgba(0, 0, 0, .3)',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover:after' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover:before' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -404,8 +404,8 @@ class Image_Accordion extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => 'rgba(0, 0, 0, .5)',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover:hover::after'         => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover.overlay-active:after' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover:hover::before'         => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover.overlay-active:hover::before' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -506,7 +506,7 @@ class Image_Accordion extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_accordion_title_typography',
-                'selector' => '{{WRAPPER}} .eael-img-accordion .overlay h2',
+                'selector' => '{{WRAPPER}} .eael-img-accordion .overlay .img-accordion-title',
             ]
         );
 
@@ -605,7 +605,7 @@ class Image_Accordion extends Widget_Base {
             <div class="overlay">
                 <div class="overlay-inner">
                     <div class="overlay-inner <?php echo( $active === 'yes' ? ' overlay-inner-show' : '' ); ?>">
-                        <?php printf( '<%1$s>%2$s</%1$s>', Helper::eael_validate_html_tag($settings[ 'title_tag' ]), Helper::eael_wp_kses($img_accordion[ 'eael_accordion_tittle' ]) ); ?>
+                        <?php printf( '<%1$s class="img-accordion-title">%2$s</%1$s>', Helper::eael_validate_html_tag($settings[ 'title_tag' ]), Helper::eael_wp_kses($img_accordion[ 'eael_accordion_tittle' ]) ); ?>
                         <p><?php echo sprintf( "%s", $this->parse_text_editor( $img_accordion[ 'eael_accordion_content' ] ) ); ?></p>
                     </div>
                 </div>
