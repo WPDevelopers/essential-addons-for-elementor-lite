@@ -8,7 +8,7 @@ $elements = [
                 'key'   => 'creative-btn',
                 'title' => __( 'Creative Button', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/creative-buttons/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/creative-buttons/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/creative-elements/ea-countdown/',
             ],
             [
                 'key'   => 'team-members',
