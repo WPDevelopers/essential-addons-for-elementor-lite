@@ -299,6 +299,12 @@ trait Elements
                 'icon' => 'eaicon-woo-product-collections',
                 'categories' => '["essential-addons-elementor"]',
             ],
+	        [
+		        'name' => 'eael-woo-product-slider',
+		        'title' => __('Woo Product Slider', 'essential-addons-for-elementor-lite'),
+		        'icon' => 'eaicon-woo-product-collections',
+		        'categories' => '["essential-addons-elementor"]',
+	        ],
         ]);
 
         $config['promotionWidgets'] = $combine_array;
