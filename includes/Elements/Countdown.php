@@ -52,7 +52,7 @@ class Countdown extends Widget_Base {
     }
 
     public function get_custom_help_url() {
-        return 'https://essential-addons.com/elementor/docs/countdown/';
+        return 'https://essential-addons.com/elementor/docs/creative-elements/ea-countdown/';
     }
 
     protected function _register_controls() {
