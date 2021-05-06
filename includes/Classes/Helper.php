@@ -639,7 +639,7 @@ class Helper
 	 *
 	 * @return string
 	 */
-	public function get_product_categories_list() {
+	public static function get_product_categories_list($terms_name) {
 		global $product;
 
 		if ( ! is_a( $product, 'WC_Product' ) ) {
@@ -650,7 +650,7 @@ class Helper
 		$before    = '<ul class="eael-product-cats"><li>';
 		$after     = '</li></ul>';
 
-		return get_the_term_list( $product->get_id(), 'product_cat', $before, $separator, $after );
+		return get_the_term_list( $product->get_id(), $terms_name, $before, $separator, $after );
 	}
 
     /**
@@ -915,6 +915,13 @@ class Helper
 		$sale_badge_preset = isset($settings['eael_product_sale_badge_preset']) ? $settings['eael_product_sale_badge_preset'] : '';
 		$sale_text = !empty($settings['eael_product_carousel_sale_text']) ? $settings['eael_product_carousel_sale_text'] : 'Sale!';
 		$stockout_text = !empty($settings['eael_product_carousel_stockout_text']) ? $settings['eael_product_carousel_stockout_text'] : 'Stock Out';
+        $tag = !empty($settings['eael_product_quick_view_title_tag']) ? self::eael_validate_html_tag($settings['eael_product_quick_view_title_tag']) : 'h1';
+        
+        remove_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
+        add_action( 'eael_woo_single_product_summary', function () use ( $tag ) {
+            the_title( '<' . $tag . ' class="eael-product-quick-view-title product_title entry-title">', '</' . $tag . '>' );
+        }, 5 );
+        
 	    ?>
 		<div id="eaproduct<?php echo $widget_id.$product->get_id(); ?>" class="eael-product-popup
 		eael-product-zoom-in woocommerce">
