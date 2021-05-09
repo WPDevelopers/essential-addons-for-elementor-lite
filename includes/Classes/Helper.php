@@ -117,6 +117,16 @@ class Helper
         return $settings;
     }
 
+    public static function fix_post_per_page($settings){
+        if(($settings['eael_dynamic_template_Layout'] == 'default') || ($settings['eael_dynamic_template_Layout'] == 'news-classic') || ($settings['eael_dynamic_template_Layout'] == 'news-modern')) {
+	        return $settings;
+        } else {
+	        $settings['posts_per_page'] = $settings['posts_per_page_3'];
+        }
+
+        return $settings;
+    }
+
     public static function get_query_args($settings = [], $post_type = 'post')
     {
         $settings = wp_parse_args($settings, [
