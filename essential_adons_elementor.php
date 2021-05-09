@@ -11,7 +11,7 @@
  *
  * WC tested up to: 5.2.2
  * Elementor tested up to: 3.2.3
- * Elementor Pro tested up to: 3.2.1
+ * Elementor Pro tested up to: 3.2.2
  */
 
 if (!defined('ABSPATH')) {
