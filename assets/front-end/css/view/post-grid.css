@@ -795,6 +795,26 @@
       -ms-transform: translate(0, 0);
           transform: translate(0, 0);
 }
+.eael-post-grid-template-overlap-modern .post-carousel-categories li a {
+  background: #fff;
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+.eael-post-grid-template-overlap-modern .post-carousel-categories,
+.eael-post-grid-template-overlap-classic .post-carousel-categories {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  padding: 0;
+  line-height: 1.2em;
+  margin-bottom: 10px;
+}
+.eael-post-grid-template-overlap-modern .post-carousel-categories a,
+.eael-post-grid-template-overlap-classic .post-carousel-categories a {
+  color: #8562f8;
+  font-size: 12px;
+  line-height: 1.2em;
+}
 .eael-post-grid-template-overlap-modern .eael-grid-post-holder,
 .eael-post-grid-template-overlap-classic .eael-grid-post-holder {
   overflow: hidden;
