@@ -129,7 +129,6 @@
                             });
                         } else {
                             button.text("Install");
-                            alert(response.data);
                         }
 
                         button.attr("disabled", false);
@@ -158,7 +157,6 @@
                             });
                         } else {
                             button.text("Activate");
-                            alert(response.data);
                         }
 
                         button.attr("disabled", false);

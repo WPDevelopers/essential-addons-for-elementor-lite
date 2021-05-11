@@ -87,10 +87,12 @@ trait Controls
             'posts_ids',
             [
                 'label' => __('Search & Select', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT2,
+                'type' => 'eael-select2',
                 'options' => ControlsHelper::get_post_list(),
                 'label_block' => true,
-                'multiple' => true,
+                'multiple'    => true,
+                'source_name' => 'post_type',
+                'source_type' => 'any',
                 'condition' => [
                     'post_type' => 'by_id',
                 ],
@@ -120,11 +122,11 @@ trait Controls
                 $taxonomy . '_ids',
                 [
                     'label' => $object->label,
-                    'type' => Controls_Manager::SELECT2,
+                    'type' => 'eael-select2',
                     'label_block' => true,
                     'multiple' => true,
-                    'object_type' => $taxonomy,
-                    'options' => wp_list_pluck(get_terms($taxonomy), 'name', 'term_id'),
+                    'source_name' => 'taxonomy',
+                    'source_type' => $taxonomy,
                     'condition' => [
                         'post_type' => $object->object_type,
                     ],
@@ -132,20 +134,20 @@ trait Controls
             );
         }
 
-        $wb->add_control(
-            'post__not_in',
-            [
-                'label' => __('Exclude', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT2,
-                'options' => ControlsHelper::get_post_list(),
-                'label_block' => true,
-                'post_type' => '',
-                'multiple' => true,
-                'condition' => [
-                    'post_type!' => ['by_id', 'source_dynamic'],
-                ],
-            ]
-        );
+	    $wb->add_control(
+		    'post__not_in',
+		    [
+			    'label'       => __( 'Exclude', 'essential-addons-for-elementor-lite' ),
+			    'type'        => 'eael-select2',
+			    'label_block' => true,
+			    'multiple'    => true,
+			    'source_name' => 'post_type',
+			    'source_type' => 'any',
+			    'condition'   => [
+				    'post_type!' => [ 'by_id', 'source_dynamic' ],
+			    ],
+		    ]
+	    );
 
         $wb->add_control(
             'posts_per_page',
@@ -855,7 +857,7 @@ trait Controls
             $wb->add_control(
                 'excerpt_expanison_indicator',
                 [
-                    'label' => esc_html__('Expanison Indicator', 'essential-addons-for-elementor-lite'),
+                    'label' => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
                     'dynamic'     => [ 'active' => true ],
                     'label_block' => false,
@@ -882,7 +884,7 @@ trait Controls
             $wb->add_control(
                 'excerpt_expanison_indicator',
                 [
-                    'label' => esc_html__('Expanison Indicator', 'essential-addons-for-elementor-lite'),
+                    'label' => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
                     'dynamic'     => [ 'active' => true ],
                     'label_block' => false,

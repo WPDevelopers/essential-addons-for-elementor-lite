@@ -150,6 +150,10 @@ trait Library
     {
         check_ajax_referer('essential-addons-elementor', 'security');
 
+        if(!current_user_can('manage_options')){
+            wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
+        }
+
         if (isset($_REQUEST['posts'])) {
             if (!empty($_POST['posts'])) {
                 foreach (json_decode($_POST['posts']) as $post) {

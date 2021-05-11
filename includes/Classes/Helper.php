@@ -639,7 +639,7 @@ class Helper
 	 *
 	 * @return string
 	 */
-	public function get_product_categories_list() {
+	public static function get_product_categories_list($terms_name) {
 		global $product;
 
 		if ( ! is_a( $product, 'WC_Product' ) ) {
@@ -650,7 +650,7 @@ class Helper
 		$before    = '<ul class="eael-product-cats"><li>';
 		$after     = '</li></ul>';
 
-		return get_the_term_list( $product->get_id(), 'product_cat', $before, $separator, $after );
+		return get_the_term_list( $product->get_id(), $terms_name, $before, $separator, $after );
 	}
 
     /**
@@ -915,6 +915,13 @@ class Helper
 		$sale_badge_preset = isset($settings['eael_product_sale_badge_preset']) ? $settings['eael_product_sale_badge_preset'] : '';
 		$sale_text = !empty($settings['eael_product_carousel_sale_text']) ? $settings['eael_product_carousel_sale_text'] : 'Sale!';
 		$stockout_text = !empty($settings['eael_product_carousel_stockout_text']) ? $settings['eael_product_carousel_stockout_text'] : 'Stock Out';
+        $tag = !empty($settings['eael_product_quick_view_title_tag']) ? self::eael_validate_html_tag($settings['eael_product_quick_view_title_tag']) : 'h1';
+        
+        remove_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
+        add_action( 'eael_woo_single_product_summary', function () use ( $tag ) {
+            the_title( '<' . $tag . ' class="eael-product-quick-view-title product_title entry-title">', '</' . $tag . '>' );
+        }, 5 );
+        
 	    ?>
 		<div id="eaproduct<?php echo $widget_id.$product->get_id(); ?>" class="eael-product-popup
 		eael-product-zoom-in woocommerce">
@@ -993,113 +1000,141 @@ class Helper
 	 * @return array
 	 */
     public static function eael_allowed_tags(){
-	    return  [
-		    'a' => [
-			    'href' => [],
-			    'title' => [],
-			    'class' => [],
+        return [
+            'a' => [
+                'href' => [],
+                'title' => [],
+                'class' => [],
                 'rel' => [],
-			    'id' => [],
-		    ],
-		    'q' => [
-			    'cite' => [],
-			    'class' => [],
-			    'id' => [],
-		    ],
-		    'img' => [
-			    'src' => [],
-			    'alt' => [],
-			    'height' => [],
-			    'width' => [],
-			    'class' => [],
-			    'id' => [],
-			    'style' => []
-		    ],
-		    'span' => [
-			    'class' => [],
-			    'id' => [],
-			    'style' => []
-		    ],
-		    'dfn' => [],
-		    'time' => [
-			    'datetime' => [],
-			    'class' => [],
-			    'id' => [],
-		    ],
-		    'cite' => [
-			    'title' => [],
-			    'class' => [],
-			    'id' => [],
-		    ],
-		    'hr' => [
-			    'class' => [],
-			    'id' => [],
-		    ],
-		    'b' => [
-			    'class' => [],
-			    'id' => [],
-		    ],
-		    'i' => [
-			    'class' => [],
-			    'id' => [],
-			    'style' => []
-		    ],
-		    'u' => [
-			    'class' => [],
-			    'id' => [],
-			    'style' => []
-		    ],
-		    's' => [
-			    'class' => [],
-			    'id' => [],
-		    ],
-		    'br' => [],
-		    'em' => [
-			    'class' => [],
-			    'id' => [],
-			    'style' => []
-		    ],
-		    'code' => [
-			    'class' => [],
-			    'id' => [],
-		    ],
-		    'small' => [
-			    'class' => [],
-			    'id' => [],
-			    'style' => []
-		    ],
-		    'abbr' => [
-			    'title' => [],
-		    ],
-		    'strong' => [
-			    'class' => [],
-			    'id' => [],
-			    'style' => []
-		    ],
-		    'del' => [
-			    'class' => [],
-			    'id' => [],
-			    'style' => []
-		    ],
-		    'ins' => [
-			    'class' => [],
-			    'id' => [],
-			    'style' => []
-		    ],
-		    'sub' => [
-			    'class' => [],
-		    ],
-		    'sup' => [
-			    'class' => []
-		    ],
-		    'strike' => [],
-		    'acronym' => [],
-		    'h1' => [],
-		    'h2' => [],
-		    'h3' => [],
-		    'h4' => [],
-		    'h5' => [],
-		    'h6' => [],
-	    ];
+                'id' => [],
+            ],
+            'q' => [
+                'cite' => [],
+                'class' => [],
+                'id' => [],
+            ],
+            'img' => [
+                'src' => [],
+                'alt' => [],
+                'height' => [],
+                'width' => [],
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'span' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'dfn' => [],
+            'time' => [
+                'datetime' => [],
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'cite' => [
+                'title' => [],
+                'class' => [],
+                'id' => [],
+            ],
+            'hr' => [
+                'class' => [],
+                'id' => [],
+            ],
+            'b' => [
+                'class' => [],
+                'id' => [],
+            ],
+            'p' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'i' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'u' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            's' => [
+                'class' => [],
+                'id' => [],
+            ],
+            'br' => [],
+            'em' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'code' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'mark' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'small' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'abbr' => [
+                'title' => [],
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'strong' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'del' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'ins' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'sub' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'sup' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'div' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'strike' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'acronym' => [],
+            'h1' => [],
+            'h2' => [],
+            'h3' => [],
+            'h4' => [],
+            'h5' => [],
+            'h6' => [],
+        ];
     }
 }

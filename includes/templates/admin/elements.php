@@ -8,7 +8,7 @@ $elements = [
                 'key'   => 'creative-btn',
                 'title' => __( 'Creative Button', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/creative-buttons/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/creative-buttons/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/creative-elements/ea-countdown/',
             ],
             [
                 'key'   => 'team-members',
@@ -492,6 +492,13 @@ $elements = [
                 'title'  => __( 'Woo Product Collections', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/woocommerce-product-collections/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/ea-woo-product-collections/',
+                'is_pro' => true
+            ],
+            [
+                'key'   => 'woo-product-slider',
+                'title' => __( 'Woo Product Slider', 'essential-addons-for-elementor-lite'),
+                'demo_link' => 'https://essential-addons.com/elementor/woo-product-slider/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/woo-product-slider/',
                 'is_pro' => true
             ],
             [
