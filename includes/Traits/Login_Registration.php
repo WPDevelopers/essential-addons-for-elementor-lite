@@ -409,6 +409,12 @@ trait Login_Registration {
 		$user_data = apply_filters( 'eael/login-register/new-user-data', $user_data );
 
 		do_action( 'eael/login-register/before-insert-user', $user_data );
+		$user_default_role = get_option( 'default_role' );
+
+        if(!empty($user_default_role) && empty($user_data['role'])){
+            $user_data['role'] = $user_default_role;
+        }
+
 		$user_id = wp_insert_user( $user_data );
 		do_action( 'eael/login-register/after-insert-user', $user_id, $user_data );
 
@@ -573,12 +579,12 @@ trait Login_Registration {
 			$wp_roles = get_editable_roles();
 			$roles    = $wp_roles ? $wp_roles : [];
 			if ( ! empty( $roles ) && is_array( $roles ) ) {
+
 				foreach ( $wp_roles as $role_key => $role ) {
 					$user_roles[ $role_key ] = $role['name'];
 				}
 			}
 		}
-
 		return apply_filters( 'eael/login-register/new-user-roles', $user_roles );
 	}
 

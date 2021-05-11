@@ -147,6 +147,10 @@ class WPDeveloper_Plugin_Installer
     {
         check_ajax_referer('essential-addons-elementor', 'security');
 
+        if(!current_user_can( 'install_plugins' )) {
+            wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
+        }
+
         $slug = isset($_POST['slug']) ? $_POST['slug'] : '';
         $result = $this->install_plugin($slug);
 
@@ -160,7 +164,10 @@ class WPDeveloper_Plugin_Installer
     public function ajax_upgrade_plugin()
     {
         check_ajax_referer('essential-addons-elementor', 'security');
-
+        //check user capabilities
+        if(!current_user_can( 'update_plugins' )) {
+            wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
+        }
         $basename = isset($_POST['basename']) ? $_POST['basename'] : '';
         $result = $this->upgrade_plugin($basename);
 
@@ -175,6 +182,11 @@ class WPDeveloper_Plugin_Installer
     {
         check_ajax_referer('essential-addons-elementor', 'security');
 
+        //check user capabilities
+        if(!current_user_can( 'activate_plugins' )) {
+            wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
+        }
+
         $basename = isset($_POST['basename']) ? $_POST['basename'] : '';
         $result = activate_plugin($basename, '', false, true);
 
@@ -185,7 +197,6 @@ class WPDeveloper_Plugin_Installer
         if ($result === false) {
             wp_send_json_error(__('Plugin couldn\'t be activated.', 'essential-addons-for-elementor-lite'));
         }
-
         wp_send_json_success(__('Plugin is activated successfully!', 'essential-addons-for-elementor-lite'));
     }
 }

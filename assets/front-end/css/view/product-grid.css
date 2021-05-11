@@ -2337,6 +2337,9 @@
 .eael-product-grid.list .eael-product-wrap .icons-wrap.details-block-style-2 li a {
   border: 2px solid #ddd;
 }
+.eael-product-grid.list .eael-product-wrap .icons-wrap.details-block-style-2 li a.eael-wc-compare.eael-wc-compare-icon {
+  margin: 2px;
+}
 .eael-product-grid.list .eael-product-wrap .icons-wrap li {
   display: inline-block;
   margin: 0;
@@ -2355,6 +2358,7 @@
   font-size: 15px;
   line-height: 1.4em;
   font-weight: 700;
+  cursor: pointer;
 }
 .eael-product-grid.list .eael-product-wrap .icons-wrap li a:hover {
   background: #ff7a80;
