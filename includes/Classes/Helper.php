@@ -1137,4 +1137,25 @@ class Helper
             'h6' => [],
         ];
     }
+
+	/**
+	 * Get all registered menus.
+	 *
+	 * @return array of menus.
+	 */
+	public static function get_simple_menus()
+	{
+		$menus = wp_get_nav_menus();
+		$options = [];
+
+		if (empty($menus)) {
+			return $options;
+		}
+
+		foreach ($menus as $menu) {
+			$options[$menu->term_id] = $menu->name;
+		}
+
+		return $options;
+	}
 }
