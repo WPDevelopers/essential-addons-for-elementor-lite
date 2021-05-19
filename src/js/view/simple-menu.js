@@ -186,32 +186,5 @@ jQuery(window).on('elementor/frontend/init', function () {
         'frontend/element_ready/eael-simple-menu.default',
         SimpleMenu
     )
-    elementorFrontend.hooks.addAction(
-        'frontend/element_ready/eael-simple-menu.skin-one',
-        SimpleMenu
-    )
-    elementorFrontend.hooks.addAction(
-        'frontend/element_ready/eael-simple-menu.skin-two',
-        SimpleMenu
-    )
-    elementorFrontend.hooks.addAction(
-        'frontend/element_ready/eael-simple-menu.skin-three',
-        SimpleMenu
-    )
-    elementorFrontend.hooks.addAction(
-        'frontend/element_ready/eael-simple-menu.skin-four',
-        SimpleMenu
-    )
-    elementorFrontend.hooks.addAction(
-        'frontend/element_ready/eael-simple-menu.skin-five',
-        SimpleMenu
-    )
-    elementorFrontend.hooks.addAction(
-        'frontend/element_ready/eael-simple-menu.skin-six',
-        SimpleMenu
-    )
-    elementorFrontend.hooks.addAction(
-        'frontend/element_ready/eael-simple-menu.skin-seven',
-        SimpleMenu
-    )
+
 })
