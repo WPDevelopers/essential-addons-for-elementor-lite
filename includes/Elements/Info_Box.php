@@ -1464,7 +1464,7 @@ class Info_Box extends Widget_Base
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}} .eael-infobox:hover .infobox-content h4' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-infobox:hover .infobox-content .title' => 'color: {{VALUE}};',
 				],
 			]
 		);
