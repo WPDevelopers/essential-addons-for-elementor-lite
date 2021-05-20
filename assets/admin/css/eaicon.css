@@ -297,3 +297,7 @@
 	font-size: 39px;
 	content: "\e958";
 }
+
+.eaicon-simple-menu:before {
+	content: "\e959";
+}
