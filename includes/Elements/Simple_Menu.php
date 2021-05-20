@@ -501,7 +501,8 @@ class Simple_Menu extends Widget_Base {
 				    'value' => 'fas fa-angle-down',
 				    'library' => 'fa-solid',
 			    ],
-
+			    'skin'					=> 'media',
+			    'exclude_inline_options'=> 'svg',
 		    ]
 	    );
 
