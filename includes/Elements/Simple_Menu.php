@@ -388,7 +388,6 @@ class Simple_Menu extends Widget_Base {
 			    ],
 			    'selectors' => [
 				    '{{WRAPPER}} .eael-simple-menu li a' => 'padding-left: {{SIZE}}{{UNIT}}; padding-right: {{SIZE}}{{UNIT}};',
-				    '{{WRAPPER}} .eael-simple-menu.eael-simple-menu-horizontal li ul li a' => 'padding-left: {{SIZE}}{{UNIT}}; padding-right: {{SIZE}}{{UNIT}};',
 			    ],
 
 		    ]
@@ -501,7 +500,8 @@ class Simple_Menu extends Widget_Base {
 				    'value' => 'fas fa-angle-down',
 				    'library' => 'fa-solid',
 			    ],
-			    'skin'					=> 'media',
+			    'label_block' => false,
+			    'skin' => 'inline',
 			    'exclude_inline_options'=> 'svg',
 		    ]
 	    );
@@ -685,6 +685,29 @@ class Simple_Menu extends Widget_Base {
 				    ],
 			    ],
 			    'default' => 'eael-simple-menu-dropdown-align-left',
+		    ]
+	    );
+
+	    $this->add_responsive_control(
+		    'eael_simple_menu_dropdown_item_padding',
+		    [
+			    'label' => __('Padding', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SLIDER,
+			    'size_units' => ['px'],
+			    'range' => [
+				    'px' => [
+					    'min' => 0,
+					    'max' => 100,
+					    'step' => 1,
+				    ],
+			    ],
+			    'default' => [
+				    'unit' => 'px',
+				    'size' => 20,
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-simple-menu.eael-simple-menu-horizontal li ul li a' => 'padding-left: {{SIZE}}{{UNIT}}; padding-right: {{SIZE}}{{UNIT}};',
+			    ],
 		    ]
 	    );
 
