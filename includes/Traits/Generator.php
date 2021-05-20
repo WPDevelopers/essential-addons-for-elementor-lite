@@ -171,7 +171,7 @@ trait Generator
 
     public function collect_elements_in_document($post_id)
     {
-        if (!Plugin::$instance->db->is_built_with_elementor($post_id)) {
+        if (!Plugin::$instance->documents->get( $post_id )->is_built_with_elementor()) {
             return;
         }
 
