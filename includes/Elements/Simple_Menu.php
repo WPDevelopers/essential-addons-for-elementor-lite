@@ -99,16 +99,30 @@ class Simple_Menu extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_simple_menu_menu',
-            [
-                'label' => esc_html__('Select Menu', 'essential-addons-for-elementor-lite'),
-                'description' => sprintf(__('Go to the <a href="%s" target="_blank">Menu screen</a> to manage your menus.', 'essential-addons-for-elementor-lite'), admin_url('nav-menus.php')),
-                'type' => Controls_Manager::SELECT,
-                'label_block' => false,
-                'options' => $this->get_simple_menus(),
-            ]
-        );
+	    $simple_menus = $this->get_simple_menus();
+
+	    if($simple_menus) {
+		    $this->add_control(
+			    'eael_simple_menu_menu',
+			    [
+				    'label' => esc_html__('Select Menu', 'essential-addons-for-elementor-lite'),
+				    'description' => sprintf(__('Go to the <a href="%s" target="_blank">Menu screen</a> to manage your menus.', 'essential-addons-for-elementor-lite'), admin_url('nav-menus.php')),
+				    'type' => Controls_Manager::SELECT,
+				    'label_block' => false,
+				    'options' => $simple_menus,
+				    'default'     => array_keys( $simple_menus )[0],
+			    ]
+		    );
+	    } else {
+		    $this->add_control(
+			    'menu',
+			    [
+				    'type'            => Controls_Manager::RAW_HTML,
+				    'raw'             => sprintf( __( '<strong>There are no menus in your site.</strong><br>Go to the <a href="%s" target="_blank">Menus screen</a> to create one.', 'essential-addons-for-elementor-lite' ), admin_url( 'nav-menus.php?action=edit&menu=0' ) ),
+				    'separator'       => 'after',
+			    ]
+		    );
+	    }
 
         $this->add_control(
             'eael_simple_menu_preset',
