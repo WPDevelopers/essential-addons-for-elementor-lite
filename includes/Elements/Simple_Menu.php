@@ -66,6 +66,27 @@ class Simple_Menu extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/simple-menu/';
     }
 
+    /**
+     * Get all registered menus.
+     *
+     * @return array of menus.
+     */
+    private function get_simple_menus()
+    {
+        $menus = wp_get_nav_menus();
+        $options = [];
+
+        if (empty($menus)) {
+            return $options;
+        }
+
+        foreach ($menus as $menu) {
+            $options[$menu->term_id] = $menu->name;
+        }
+
+        return $options;
+    }
+
     protected function register_controls()
     {
         /**
@@ -85,8 +106,7 @@ class Simple_Menu extends Widget_Base
                 'description' => sprintf(__('Go to the <a href="%s" target="_blank">Menu screen</a> to manage your menus.', 'essential-addons-for-elementor-lite'), admin_url('nav-menus.php')),
                 'type' => Controls_Manager::SELECT,
                 'label_block' => false,
-                'options' => HelperClass::get_simple_menus(),
-
+                'options' => $this->get_simple_menus(),
             ]
         );
 
