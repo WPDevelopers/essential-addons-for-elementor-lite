@@ -84,9 +84,13 @@ trait Generator
 
     public function request_requires_update()
     {
-        $elements = get_option($this->uid . '_elements');
+        $elements = get_option($this->uid . '_eael_elements');
         $editor_updated_at = get_option('eael_editor_updated_at');
-        $post_updated_at = get_option($this->uid . '_updated_at');
+        $post_updated_at = get_option($this->uid . '_eael_updated_at');
+
+        if(get_the_ID()>0 && !Plugin::$instance->documents->get( get_the_ID() )->is_built_with_elementor()){
+            return false;
+        }
 
         if ($editor_updated_at === false) {
             update_option('eael_editor_updated_at', strtotime('now'));
@@ -95,9 +99,11 @@ trait Generator
         if ($elements === false) {
             return true;
         }
+
         if ($post_updated_at === false) {
             return true;
         }
+
         if ($editor_updated_at != $post_updated_at) {
             return true;
         }
@@ -205,7 +211,7 @@ trait Generator
         }
 
         // check if already updated
-        if (get_option('eael_editor_updated_at') == get_option($this->uid . '_updated_at')) {
+        if (get_option('eael_editor_updated_at') == get_option($this->uid . '_eael_updated_at')) {
             return;
         }
 
@@ -218,9 +224,9 @@ trait Generator
         }
 
         // update page data
-        update_option($this->uid . '_elements', $this->loaded_elements);
-        update_option($this->uid . '_custom_js', $this->custom_js_strings);
-        update_option($this->uid . '_updated_at', get_option('eael_editor_updated_at'));
+        update_option($this->uid . '_eael_elements', $this->loaded_elements,false);
+        update_option($this->uid . '_eael_custom_js', $this->custom_js_strings,false);
+        update_option($this->uid . '_eael_updated_at', get_option('eael_editor_updated_at'),false);
 
         // remove old cache files
         $this->remove_files($this->uid);
@@ -306,7 +312,7 @@ trait Generator
         }
 
         if ($this->request_requires_update == false && $context == 'view' && $ext == 'js') {
-            $output .= get_option($this->uid . '_custom_js');
+            $output .= get_option($this->uid . '_eael_custom_js');
         }
 
         return $output;
