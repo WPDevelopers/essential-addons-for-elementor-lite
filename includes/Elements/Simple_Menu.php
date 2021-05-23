@@ -34,7 +34,7 @@ class Simple_Menu extends Widget_Base {
 
     public function get_icon()
     {
-        return 'eaicon-advanced-accordion';
+        return 'eaicon-simple-menu';
     }
 
     public function get_categories()
@@ -83,6 +83,7 @@ class Simple_Menu extends Widget_Base {
                 'description' => sprintf(__('Go to the <a href="%s" target="_blank">Menu screen</a> to manage your menus.', 'essential-addons-elementor'), admin_url('nav-menus.php')),
                 'type' => Controls_Manager::SELECT,
                 'label_block' => false,
+
                 'options' => HelperClass::get_simple_menus(),
 
             ]
