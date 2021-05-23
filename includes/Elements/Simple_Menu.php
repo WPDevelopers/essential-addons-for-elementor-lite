@@ -129,8 +129,12 @@ class Simple_Menu extends Widget_Base
             [
                 'label' => esc_html__('Preset', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'default' => 'default',
-                'options' => $this->get_template_list_for_dropdown(true),
+                'default' => 'preset-1',
+                'options' => [
+	                'preset-1' => esc_html__('Preset 1', 'essential-addons-for-elementor-lite'),
+	                'preset-2' => esc_html__('Preset 2', 'essential-addons-for-elementor-lite'),
+	                'preset-3' => esc_html__('Preset 3', 'essential-addons-for-elementor-lite'),
+                ],
             ]
         );
 
@@ -296,7 +300,7 @@ class Simple_Menu extends Widget_Base
             [
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#ffffff',
+//                'default' => '#ffffff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-simple-menu li ul' => 'background-color: {{VALUE}}',
                 ],
@@ -368,7 +372,7 @@ class Simple_Menu extends Widget_Base
             [
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#54595f',
+//                'default' => '#54595f',
                 'selectors' => [
                     '{{WRAPPER}} .eael-simple-menu-container' => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal' => 'background-color: {{VALUE}}',
@@ -451,6 +455,60 @@ class Simple_Menu extends Widget_Base
                     ],
                 ],
                 'default' => 'eael-simple-menu-align-left',
+	            'condition' => [
+	            	'eael_simple_menu_preset!' => ['preset-2', 'preset-3']
+	            ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_simple_menu_item_alignment_right',
+            [
+                'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'eael-simple-menu-align-left' => [
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-align-left',
+                    ],
+                    'eael-simple-menu-align-center' => [
+                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-align-center',
+                    ],
+                    'eael-simple-menu-align-right' => [
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-align-right',
+                    ],
+                ],
+                'default' => 'eael-simple-menu-align-right',
+                'condition' => [
+	                'eael_simple_menu_preset' => ['preset-3']
+                ]
+            ]
+        );
+        $this->add_control(
+            'eael_simple_menu_item_alignment_center',
+            [
+                'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'eael-simple-menu-align-left' => [
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-align-left',
+                    ],
+                    'eael-simple-menu-align-center' => [
+                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-align-center',
+                    ],
+                    'eael-simple-menu-align-right' => [
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-align-right',
+                    ],
+                ],
+                'default' => 'eael-simple-menu-align-center',
+                'condition' => [
+	                'eael_simple_menu_preset' => ['preset-2']
+                ]
             ]
         );
 
@@ -495,7 +553,7 @@ class Simple_Menu extends Widget_Base
             [
                 'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#ffffff',
+//                'default' => '#ffffff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-simple-menu li > a' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-simple-menu-toggle-text' => 'color: {{VALUE}}',
@@ -604,7 +662,7 @@ class Simple_Menu extends Widget_Base
             [
                 'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#ffffff',
+//                'default' => '#ffffff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-simple-menu li:hover > a' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-simple-menu li.current-menu-item > a' => 'color: {{VALUE}}',
@@ -618,7 +676,7 @@ class Simple_Menu extends Widget_Base
             [
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#ee355f',
+//                'default' => '#ee355f',
                 'selectors' => [
                     '{{WRAPPER}} .eael-simple-menu li:hover > a' => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-simple-menu li.current-menu-item > a' => 'background-color: {{VALUE}}',
@@ -787,7 +845,7 @@ class Simple_Menu extends Widget_Base
             [
                 'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#000000',
+//                'default' => '#000000',
                 'selectors' => [
                     '{{WRAPPER}} .eael-simple-menu li ul li > a' => 'color: {{VALUE}}',
                 ],
@@ -799,7 +857,7 @@ class Simple_Menu extends Widget_Base
             [
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => 'rgba(255,255,255,0)',
+//                'default' => 'rgba(255,255,255,0)',
                 'selectors' => [
                     '{{WRAPPER}} .eael-simple-menu li ul li > a' => 'background-color: {{VALUE}}',
                 ],
@@ -893,7 +951,7 @@ class Simple_Menu extends Widget_Base
             [
                 'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#ee355f',
+//                'default' => '#ee355f',
                 'selectors' => [
                     '{{WRAPPER}} .eael-simple-menu li ul li:hover > a' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-simple-menu li ul li.current-menu-item > a' => 'color: {{VALUE}}',
@@ -907,7 +965,7 @@ class Simple_Menu extends Widget_Base
             [
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => 'rgba(255,255,255,0)',
+//                'default' => 'rgba(255,255,255,0)',
                 'selectors' => [
                     '{{WRAPPER}} .eael-simple-menu li ul li:hover > a' => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-simple-menu li ul li.current-menu-item > a' => 'background-color: {{VALUE}}',
@@ -985,8 +1043,17 @@ class Simple_Menu extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings();
+
+        if ($settings['eael_simple_menu_preset'] == 'preset-2') {
+	        $align = $settings['eael_simple_menu_item_alignment_center'];
+        } elseif ($settings['eael_simple_menu_preset'] == 'preset-3') {
+	        $align = $settings['eael_simple_menu_item_alignment_right'];
+        } else {
+	        $align = $settings['eael_simple_menu_item_alignment'];
+        }
+
         $menu_classes = ['eael-simple-menu', $settings['eael_simple_menu_dropdown_animation'], 'eael-simple-menu-indicator'];
-        $container_classes = ['eael-simple-menu-container', $settings['eael_simple_menu_item_alignment'], $settings['eael_simple_menu_dropdown_item_alignment']];
+        $container_classes = ['eael-simple-menu-container', $align, $settings['eael_simple_menu_dropdown_item_alignment'], $settings['eael_simple_menu_preset']];
 
         if ($settings['eael_simple_menu_layout'] == 'horizontal') {
             $menu_classes[] = 'eael-simple-menu-horizontal';
@@ -1013,18 +1080,8 @@ class Simple_Menu extends Widget_Base
                 'echo' => false,
             ];
 
-            echo '<div ' . $this->get_render_attribute_string('eael-simple-menu') . '>';
+            echo '<div ' . $this->get_render_attribute_string('eael-simple-menu') . '>' . wp_nav_menu($args) . '</div>';
 
-            $template = $this->get_template($this->get_settings('eael_simple_menu_preset'));
-            if (file_exists($template)) {
-
-                include($template);
-
-            } else {
-                _e('<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite');
-            }
-
-            echo '</div>';
         }
     }
 
