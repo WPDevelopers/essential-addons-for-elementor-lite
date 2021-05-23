@@ -101,7 +101,7 @@
             &.current-menu-item {
                 > a {
                     color: #ffffff;
-                    background-color: #ee355f;
+                    //background-color: #ee355f;
                 }
             }
         }
@@ -473,6 +473,111 @@
                 }
             }
         }
+    }
+
+
+    &.preset-1 {
+        background-color: #4E36A3;
+
+        .eael-simple-menu {
+            
+            li > a {
+                color: #fff;
+            }
+            
+            li.current-menu-ancestor>a,
+            li:hover > a,
+            li.current-menu-item > a {
+                background-color: #743EFF;
+            }
+
+            li ul {
+                background-color: #743EFF;
+
+                li.current-menu-ancestor>a,
+                li:hover > a,
+                li.current-menu-item > a {
+                    background-color: #4E36A3;
+                }
+            }
+        }
+
+    }
+
+    &.preset-3 {
+        background-color: #15DBD5;
+
+        .eael-simple-menu {
+
+            li > a {
+                color: #2A1A6C;
+            }
+
+            li.current-menu-ancestor>a,
+            li:hover > a,
+            li.current-menu-item > a {
+                color: #fff;
+                background-color: #F72C8A;
+            }
+
+            li ul {
+                background-color: #F72C8A;
+
+                li > a {
+                    color: #fff;
+                    border-bottom: 1px solid #F72C8A;
+                }
+
+                li.current-menu-ancestor>a,
+                li:hover > a,
+                li.current-menu-item > a {
+                    background-color: #f30875;
+                }
+            }
+        }
+
+    }
+
+    &.preset-2 {
+        background-color: #fff;
+        border: 1px solid #1BC1FF;
+        //text-align: right;
+
+        .eael-simple-menu {
+            li > a {
+                color: #5D5E61;
+            }
+            &.eael-simple-menu-horizontal:not(.eael-simple-menu-responsive)>li:first-child>a {
+                border-left: 1px solid #1BC1FF;
+            }
+
+            &.eael-simple-menu-horizontal:not(.eael-advanced-menu-responsive)>li>a {
+                border-right: 1px solid #1BC1FF;
+            }
+
+            li.current-menu-ancestor>a,
+            li:hover > a,
+            li.current-menu-item > a {
+                color: #1BC1FF;
+            }
+
+            li ul {
+                background-color: #fff;
+                border: 1px solid #1BC1FF;
+
+                li > a {
+                    color: #5f5d5d;
+                    border-bottom: 1px solid #1BC1FF;
+                }
+
+                li.current-menu-ancestor>a,
+                li:hover > a,
+                li.current-menu-item > a {
+                    color: #1BC1FF;
+                }
+            }
+        }
+
     }
 }
 
