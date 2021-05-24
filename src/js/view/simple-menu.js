@@ -13,7 +13,7 @@ var SimpleMenu = function ($scope, $) {
         'eael-simple-menu-horizontal'
     )
 
-    console.log($indicator_class);
+    // console.log($indicator_class);
 
     var $fullWidth = $('.eael-simple-menu--stretch');
 
@@ -37,7 +37,7 @@ var SimpleMenu = function ($scope, $) {
             )
         }
 
-        if($indicator_icon == 'svg') {
+        if($dropdown_indicator_icon == 'svg') {
             $('.eael-simple-menu > li ul li.menu-item-has-children', $scope).each(
                 function () {
                     $('> a', $(this)).append(
@@ -133,14 +133,26 @@ var SimpleMenu = function ($scope, $) {
     $('.eael-simple-menu > li.menu-item-has-children', $scope).each(
         function () {
             // indicator position
-            var $height = parseInt($('a', this).css('line-height')) / 2
-            $(this).append(
-                '<span class="eael-simple-menu-indicator ' +
+
+            if($indicator_icon == 'svg') {
+                var $height = parseInt($('a', this).css('line-height')) / 2
+                $(this).append(
+                    '<span class="eael-simple-menu-indicator" style="top:' +
+                    $height +
+                    'px"> ' +
+                    $indicator_class +
+                    '</span>'
+                )
+            } else {
+                var $height = parseInt($('a', this).css('line-height')) / 2
+                $(this).append(
+                    '<span class="eael-simple-menu-indicator ' +
                     $indicator_class +
                     '" style="top:' +
                     $height +
                     'px"></span>'
-            )
+                )
+            }
 
             // if current, keep indicator open
             // $(this).hasClass('current-menu-ancestor') ? $(this).addClass('eael-simple-menu-indicator-open') : ''
@@ -150,14 +162,26 @@ var SimpleMenu = function ($scope, $) {
     $('.eael-simple-menu > li ul li.menu-item-has-children', $scope).each(
         function (e) {
             // indicator position
-            var $height = parseInt($('a', this).css('line-height')) / 2
-            $(this).append(
-                '<span class="eael-simple-menu-indicator ' +
+            if($dropdown_indicator_icon == 'svg') {
+                var $height = parseInt($('a', this).css('line-height')) / 2
+                $(this).append(
+                    '<span class="eael-simple-menu-indicator" style="top:' +
+                    $height +
+                    'px"> ' +
+                    $dropdown_indicator_class +
+                    '</span>'
+                )
+            } else {
+                var $height = parseInt($('a', this).css('line-height')) / 2
+                $(this).append(
+                    '<span class="eael-simple-menu-indicator ' +
                     $dropdown_indicator_class +
                     '" style="top:' +
                     $height +
                     'px"></span>'
-            )
+                )
+            }
+
 
             // if current, keep indicator open
             // $(this).hasClass('current-menu-ancestor') ? $(this).addClass('eael-simple-menu-indicator-open') : ''
