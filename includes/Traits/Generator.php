@@ -88,9 +88,7 @@ trait Generator
         $editor_updated_at = get_option('eael_editor_updated_at');
         $post_updated_at = get_option($this->uid . '_eael_updated_at');
 
-        if(get_the_ID()>0 && !Plugin::$instance->documents->get( get_the_ID() )->is_built_with_elementor()){
-            return false;
-        }
+
 
         if ($editor_updated_at === false) {
             update_option('eael_editor_updated_at', strtotime('now'));
@@ -221,6 +219,12 @@ trait Generator
         // push custom js as element so that it prints to page if elements is empty
         if ($this->custom_js_strings) {
             $this->loaded_elements[] = 'custom-js';
+        }
+
+        if ((get_the_ID() > 0 && !Plugin::$instance->documents->get(get_the_ID())->is_built_with_elementor())) {
+            if (empty($this->loaded_elements)) {
+                return;
+            }
         }
 
         // update page data
