@@ -542,7 +542,7 @@ class Simple_Menu extends Widget_Base
                 'name'     => 'eael_simple_menu_item_typography',
                 'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme'   => Typography::TYPOGRAPHY_1,
-                'selector' => '{{WRAPPER}} .eael-simple-menu > li > a, .eael-simple-menu-container .eael-simple-menu-toggle-text,',
+                'selector' => '{{WRAPPER}} .eael-simple-menu >li > a, .eael-simple-menu-container .eael-simple-menu-toggle-text',
             ]
         );
 
