@@ -480,6 +480,11 @@
         background-color: #4E36A3;
 
         .eael-simple-menu {
+            @media screen and (max-width: 991px) {
+                &.eael-simple-menu-horizontal {
+                    background-color: #4E36A3;
+                }
+            }
             
             li > a {
                 color: #fff;
@@ -508,6 +513,11 @@
         background-color: #15DBD5;
 
         .eael-simple-menu {
+            @media screen and (max-width: 991px) {
+                &.eael-simple-menu-horizontal {
+                    background-color: #15DBD5;
+                }
+            }
 
             li > a {
                 color: #2A1A6C;
@@ -544,6 +554,19 @@
         //text-align: right;
 
         .eael-simple-menu {
+
+            @media screen and (max-width: 991px) {
+                &.eael-simple-menu-horizontal {
+                    background-color: #1BC1FF;
+
+                    li.current-menu-ancestor>a,
+                    li:hover > a,
+                    li.current-menu-item > a {
+                        color: #fff;
+                    }
+                }
+            }
+
             li > a {
                 color: #5D5E61;
             }
