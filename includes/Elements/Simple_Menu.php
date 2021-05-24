@@ -557,6 +557,7 @@ class Simple_Menu extends Widget_Base
 //                'default' => '#ffffff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-simple-menu li > a'      => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-simple-menu li > a > span svg'      => 'fill: {{VALUE}}',
                     '{{WRAPPER}} .eael-simple-menu-toggle-text' => 'color: {{VALUE}}',
                 ],
             ]
@@ -683,6 +684,7 @@ class Simple_Menu extends Widget_Base
 //                'default' => '#ffffff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-simple-menu li:hover > a'                 => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-simple-menu li:hover > a > span svg'                 => 'fill: {{VALUE}}',
                     '{{WRAPPER}} .eael-simple-menu li.current-menu-item > a'     => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-simple-menu li.current-menu-ancestor > a' => 'color: {{VALUE}}',
                 ],
@@ -1084,7 +1086,7 @@ class Simple_Menu extends Widget_Base
 
         if ($settings['eael_simple_menu_item_indicator']['library'] == 'svg'){
 	        ob_start();
-	        Icons_Manager::render_icon( $settings['eael_simple_menu_item_indicator'] );
+	        Icons_Manager::render_icon( $settings['eael_simple_menu_item_indicator'], [ 'aria-hidden' => 'true' ] );
 	        $indicator_icon = ob_get_clean();
 
 	        $this->add_render_attribute( 'eael-simple-menu', 'data-indicator-class', $indicator_icon );
@@ -1103,6 +1105,7 @@ class Simple_Menu extends Widget_Base
 	    } else {
 		    $this->add_render_attribute( 'eael-simple-menu', 'data-indicator-class', $settings['eael_simple_menu_item_indicator'] );
 	    }
+
 
         $this->add_render_attribute('eael-simple-menu', [
             'class'                         => implode(' ', array_filter($container_classes)),
