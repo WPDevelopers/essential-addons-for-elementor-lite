@@ -159,6 +159,9 @@ class Simple_Menu extends Widget_Base
             'eael_simple_menu_section_hamburger',
             [
                 'label' => esc_html__('Hamburger Options', 'essential-addons-for-elementor-lite'),
+                'condition'    => [
+                    'eael_simple_menu_layout' => 'horizontal',
+                ],
             ]
         );
 
