@@ -1084,7 +1084,7 @@ class Simple_Menu extends Widget_Base
             $menu_classes[] = 'eael-simple-menu-indicator';
         }
 
-        if ($settings['eael_simple_menu_item_indicator']['library'] == 'svg'){
+        if (!empty($settings['eael_simple_menu_item_indicator']['library']) && $settings['eael_simple_menu_item_indicator']['library'] == 'svg'){
 	        ob_start();
 	        Icons_Manager::render_icon( $settings['eael_simple_menu_item_indicator'], [ 'aria-hidden' => 'true' ] );
 	        $indicator_icon = ob_get_clean();
@@ -1092,10 +1092,10 @@ class Simple_Menu extends Widget_Base
 	        $this->add_render_attribute( 'eael-simple-menu', 'data-indicator-class', $indicator_icon );
 	        $this->add_render_attribute( 'eael-simple-menu', 'data-indicator', 'svg' );
         } else {
-	        $this->add_render_attribute( 'eael-simple-menu', 'data-indicator-class', $settings['eael_simple_menu_item_indicator'] );
+	        $this->add_render_attribute( 'eael-simple-menu', 'data-indicator-class', $settings['eael_simple_menu_item_indicator']['value'] );
         }
 
-	    if ($settings['eael_simple_menu_dropdown_item_indicator']['library'] == 'svg'){
+	    if ($settings['eael_simple_menu_dropdown_item_indicator']['library']=='svg'){
 		    ob_start();
 		    Icons_Manager::render_icon( $settings['eael_simple_menu_dropdown_item_indicator'] );
 		    $dropdown_indicator_icon = ob_get_clean();
@@ -1103,7 +1103,7 @@ class Simple_Menu extends Widget_Base
 		    $this->add_render_attribute( 'eael-simple-menu', 'data-dropdown-indicator-class', $dropdown_indicator_icon );
 		    $this->add_render_attribute( 'eael-simple-menu', 'data-dropdown-indicator', 'svg' );
 	    } else {
-		    $this->add_render_attribute( 'eael-simple-menu', 'data-indicator-class', $settings['eael_simple_menu_item_indicator'] );
+		    $this->add_render_attribute( 'eael-simple-menu', 'data-indicator-class', $settings['eael_simple_menu_item_indicator']['value'] );
 	    }
 
 
