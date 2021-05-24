@@ -2,6 +2,9 @@ var SimpleMenu = function ($scope, $) {
     var $indicator_class = $('.eael-simple-menu-container', $scope).data(
         'indicator-class'
     )
+    var $indicator_icon = $('.eael-simple-menu-container', $scope).data('indicator')
+    var $dropdown_indicator_icon = $('.eael-simple-menu-container', $scope).data('dropdown-indicator')
+
     var $dropdown_indicator_class = $(
         '.eael-simple-menu-container',
         $scope
@@ -10,24 +13,47 @@ var SimpleMenu = function ($scope, $) {
         'eael-simple-menu-horizontal'
     )
 
+    console.log($indicator_class);
+
     var $fullWidth = $('.eael-simple-menu--stretch');
 
     if ($horizontal) {
         // insert indicator
-        $('.eael-simple-menu > li.menu-item-has-children', $scope).each(
-            function () {
-                $('> a', $(this)).append(
-                    '<span class="' + $indicator_class + '"></span>'
-                )
-            }
-        )
-        $('.eael-simple-menu > li ul li.menu-item-has-children', $scope).each(
-            function () {
-                $('> a', $(this)).append(
-                    '<span class="' + $dropdown_indicator_class + '"></span>'
-                )
-            }
-        )
+        if($indicator_icon == 'svg') {
+            $('.eael-simple-menu > li.menu-item-has-children', $scope).each(
+                function () {
+                    $('> a', $(this)).append(
+                        '<span class="indicator-svg">' + $indicator_class + '</span>'
+                    )
+                }
+            )
+        } else {
+            $('.eael-simple-menu > li.menu-item-has-children', $scope).each(
+                function () {
+                    $('> a', $(this)).append(
+                        '<span class="' + $indicator_class + '"></span>'
+                    )
+                }
+            )
+        }
+
+        if($indicator_icon == 'svg') {
+            $('.eael-simple-menu > li ul li.menu-item-has-children', $scope).each(
+                function () {
+                    $('> a', $(this)).append(
+                        '<span class="dropdown-indicator-svg">' + $dropdown_indicator_class + '</span>'
+                    )
+                }
+            )
+        }else {
+            $('.eael-simple-menu > li ul li.menu-item-has-children', $scope).each(
+                function () {
+                    $('> a', $(this)).append(
+                        '<span class="' + $dropdown_indicator_class + '"></span>'
+                    )
+                }
+            )
+        }
 
         // insert responsive menu toggle, text
         $('.eael-simple-menu-horizontal', $scope)

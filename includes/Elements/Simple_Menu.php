@@ -7,6 +7,7 @@ use Elementor\Core\Schemes\Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
+use Elementor\Icons_Manager;
 use Elementor\Widget_Base;
 
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
@@ -535,7 +536,7 @@ class Simple_Menu extends Widget_Base
                 'name'     => 'eael_simple_menu_item_typography',
                 'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme'   => Typography::TYPOGRAPHY_1,
-                'selector' => '{{WRAPPER}} .eael-simple-menu > li > a, .eael-simple-menu-container .eael-simple-menu-toggle-text',
+                'selector' => '{{WRAPPER}} .eael-simple-menu > li > a, .eael-simple-menu-container .eael-simple-menu-toggle-text,',
             ]
         );
 
@@ -596,11 +597,28 @@ class Simple_Menu extends Widget_Base
                     'value'   => 'fas fa-angle-down',
                     'library' => 'fa-solid',
                 ],
-                'label_block'            => false,
-                'skin'                   => 'inline',
-                'exclude_inline_options' => 'svg',
             ]
         );
+
+	    $this->add_control(
+		    'eael_simple_menu_item_indicator_size',
+		    [
+			    'label' => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
+			    'type' => Controls_Manager::SLIDER,
+			    'default' => [
+				    'size' => '15'
+			    ],
+			    'range' => [
+				    'px' => [
+					    'max' => 100,
+				    ],
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-simple-menu li a span' => 'font-size: {{SIZE}}{{UNIT}};',
+				    '{{WRAPPER}} .indicator-svg svg'	=> 'width: {{SIZE}}{{UNIT}};',
+			    ],
+		    ]
+	    );
 
         $this->add_control(
             'eael_simple_menu_item_indicator_note',
@@ -887,9 +905,6 @@ class Simple_Menu extends Widget_Base
                     'value'   => 'fas fa-angle-down',
                     'library' => 'fa-solid',
                 ],
-                'skin'                   => 'inline',
-                'exclude_inline_options' => 'svg',
-
             ]
         );
 
@@ -1067,10 +1082,32 @@ class Simple_Menu extends Widget_Base
             $menu_classes[] = 'eael-simple-menu-indicator';
         }
 
+        if ($settings['eael_simple_menu_item_indicator']['library'] == 'svg'){
+	        ob_start();
+	        Icons_Manager::render_icon( $settings['eael_simple_menu_item_indicator'] );
+	        $indicator_icon = ob_get_clean();
+
+	        $this->add_render_attribute( 'eael-simple-menu', 'data-indicator-class', $indicator_icon );
+	        $this->add_render_attribute( 'eael-simple-menu', 'data-indicator', 'svg' );
+        } else {
+	        $this->add_render_attribute( 'eael-simple-menu', 'data-indicator-class', $settings['eael_simple_menu_item_indicator'] );
+        }
+
+	    if ($settings['eael_simple_menu_dropdown_item_indicator']['library'] == 'svg'){
+		    ob_start();
+		    Icons_Manager::render_icon( $settings['eael_simple_menu_dropdown_item_indicator'] );
+		    $dropdown_indicator_icon = ob_get_clean();
+
+		    $this->add_render_attribute( 'eael-simple-menu', 'data-dropdown-indicator-class', $dropdown_indicator_icon );
+		    $this->add_render_attribute( 'eael-simple-menu', 'data-dropdown-indicator', 'svg' );
+	    } else {
+		    $this->add_render_attribute( 'eael-simple-menu', 'data-indicator-class', $settings['eael_simple_menu_item_indicator'] );
+	    }
+
         $this->add_render_attribute('eael-simple-menu', [
             'class'                         => implode(' ', array_filter($container_classes)),
-            'data-indicator-class'          => $settings['eael_simple_menu_item_indicator'],
-            'data-dropdown-indicator-class' => $settings['eael_simple_menu_dropdown_item_indicator'],
+//            'data-indicator-class'          => $settings['eael_simple_menu_item_indicator'],
+//            'data-dropdown-indicator-class' => $settings['eael_simple_menu_dropdown_item_indicator'],
         ]);
 
         if ($settings['eael_simple_menu_menu']) {
