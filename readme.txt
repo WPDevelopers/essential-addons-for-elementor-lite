@@ -2,7 +2,7 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, manzurahammed
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 5.7.1
+Tested up to: 5.7.2
 Requires PHP: 5.6
 Stable tag: 4.7.0
 License: GPLv3
