@@ -660,7 +660,7 @@ class Helper
      * @param int $term_id
      * @return int $term_count;
      */
-    public static function get_doc_post_count($term_count = 0, $term_id)
+    public static function get_doc_post_count($term_count = 0, $term_id = 0)
     {
         $tax_terms = get_terms('doc_category', ['child_of' => $term_id]);
 
