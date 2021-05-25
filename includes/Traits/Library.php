@@ -37,7 +37,7 @@ trait Library
      * @param $key
      * @return string
      */
-    public function get_extension_settings($page_settings = [], $global_settings = [], $extension, $key)
+    public function get_extension_settings($page_settings = [], $global_settings = [], $extension = '', $key = '')
     {
         if (isset($page_settings) && $page_settings->get_settings($extension) == 'yes') {
             return $page_settings->get_settings($key);
