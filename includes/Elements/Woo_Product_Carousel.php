@@ -38,7 +38,6 @@ class Woo_Product_Carousel extends Widget_Base {
         
         if ( $is_type_instance && class_exists( 'woocommerce' ) ) {
 	        $this->load_quick_view_asset();
-            add_filter( 'body_class', [$this, 'add_slider_body_class'] );
         }
     }
 
@@ -130,28 +129,6 @@ class Woo_Product_Carousel extends Widget_Base {
             'rand'       => __( 'Random', 'essential-addons-for-elementor-lite' ),
             'menu_order' => __( 'Menu Order', 'essential-addons-for-elementor-lite' ),
         ] );
-    }
-    
-    /**
-     * added custom markup for popup
-     *
-     * @param $classes
-     * @return mixed
-     */
-    public function add_slider_body_class( $classes ) {
-        if ( !in_array( 'eael-woo-slider', $classes ) ) {
-            add_action( 'wp_body_open', function () {
-                ?>
-                <div style="display: none" class="eael-woocommerce-popup-view eael-product-popup
-		eael-product-zoom-in woocommerce">
-                    <div class="eael-product-modal-bg"></div>
-                    <div class="eael-popup-details-render eael-woo-slider-popup"><div class="eael-preloader"></div></div>
-                </div>
-                <?php
-            } );
-            $classes[] = 'eael-woo-slider';
-        }
-        return $classes;
     }
     
     protected function eael_get_product_filterby_options() {
