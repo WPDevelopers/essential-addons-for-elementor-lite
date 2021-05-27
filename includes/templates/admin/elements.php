@@ -118,6 +118,12 @@ $elements = [
                 'demo_link' => 'https://essential-addons.com/elementor/event-calendar/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/event-calendar/',
             ],
+            [
+                'key'   => 'simple-menu',
+                'title' => __( 'Simple Menu', 'essential-addons-elementor' ),
+                'demo_link' => 'https://essential-addons.com/elementor/simple-menu/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/simple-menu/',
+            ],
         ]
     ],
     'dynamic-content-elements'  => [
