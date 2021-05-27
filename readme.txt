@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, manzurahammed
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 5.7.1
+Tested up to: 5.7.2
 Requires PHP: 5.6
-Stable tag: 4.6.6
+Stable tag: 4.7.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -88,6 +88,7 @@ We have designed 43 of the most useful widgets to enhance your Elementor Page Bu
 41. [Login | Register Form](https://essential-addons.com/elementor/login-register-form/) - Create amazing and attractive login or registration forms in Elementor 
 42. [Woo Product Compare](https://essential-addons.com/elementor/woo-product-compare/) - Create stunning WooCommerce Product Compare table instantly
 43. [Woo Product Carousel](https://essential-addons.com/elementor/woo-product-carousel/) - Design amazing WooCommerce Product Carousel with ease
+44. [Simple Menu](https://essential-addons.com/elementor/simple-menu/)- Design beautiful Navigation menu for your WordPress site quite easily
 
 
 
@@ -223,6 +224,10 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.7.0 - 24/05/2021 =
+
+- Added: EA Simple Menu widget
 
 = 4.6.6 - 09/05/2021 =
 
