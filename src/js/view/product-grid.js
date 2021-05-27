@@ -385,6 +385,21 @@ ea.hooks.addAction("init", "ea", () => {
 				"1"
 			);
 		}
+
+		const eael_popup = $(document).find(".eael-woocommerce-popup-view");
+		if ( eael_popup.length < 1 ) {
+			eael_add_popup();
+		}
+
+
+		function eael_add_popup() {
+			let markup = `<div style="display: none" class="eael-woocommerce-popup-view eael-product-popup eael-product-zoom-in woocommerce">
+                    <div class="eael-product-modal-bg"></div>
+                    <div class="eael-popup-details-render eael-woo-slider-popup"><div class="eael-preloader"></div></div>
+                </div>`;
+			$("body").append(markup);
+		}
+
 	};
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eicon-woocommerce.default",
