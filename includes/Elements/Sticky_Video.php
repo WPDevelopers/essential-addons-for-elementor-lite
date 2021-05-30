@@ -751,7 +751,7 @@ class Sticky_Video extends Widget_Base
                 'data-position' => $settings['eaelsv_sticky_position'],
                 'data-sheight' => $settings['eaelsv_sticky_height'],
                 'data-swidth' => $settings['eaelsv_sticky_width'],
-                'data-scroll_height' => $settings['eaelsv_scroll_height_display_sticky']['size'],
+                'data-scroll_height' => !empty($settings['eaelsv_scroll_height_display_sticky']['size']) ? $settings['eaelsv_scroll_height_display_sticky']['size'] : '',
                 'data-autoplay' => $autoplay,
                 'data-overlay' => ($settings['eaelsv_overlay_options'] == 'yes') ? $settings['eaelsv_overlay_options'] : 'no',
             ]
