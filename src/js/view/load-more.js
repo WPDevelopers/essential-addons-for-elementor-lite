@@ -15,7 +15,7 @@
 			$class = $this.data("class"),
 			$args = $this.data("args"),
 			$layout = $this.data("layout"),
-			$template_info = $this.data('template'),
+			$template_info = $this.data("template"),
 			$page = parseInt($this.data("page")) + 1;
 
 		if (typeof $widget_id == "undefined" || typeof $args == "undefined") {
@@ -31,7 +31,7 @@
 			page_id: $page_id,
 			widget_id: $widget_id,
 			nonce: $nonce,
-			template_info: $template_info
+			template_info: $template_info,
 		};
 		String($args)
 			.split("&")
@@ -64,28 +64,48 @@
 			success: function (response) {
 				var $content = $(response);
 
-				if ($content.hasClass("no-posts-found") || $content.length === 0) {
+				if (
+					$content.hasClass("no-posts-found") ||
+					$content.length === 0
+				) {
 					$this.remove();
 				} else {
-					if ($data.class == "Essential_Addons_Elementor\\Elements\\Product_Grid") {
-						$content = $content.filter('li');
+					if (
+						$data.class ==
+						"Essential_Addons_Elementor\\Elements\\Product_Grid"
+					) {
+						$content = $content.filter("li");
 
-						$(".eael-product-grid .products", $scope).append($content);
+						$(".eael-product-grid .products", $scope).append(
+							$content
+						);
 
 						if ($layout == "masonry") {
 							const dynamicID = "eael-product-" + Date.now();
-							var $isotope = $(".eael-product-grid .products", $scope).isotope();
+							var $isotope = $(
+								".eael-product-grid .products",
+								$scope
+							).isotope();
 
-							$isotope.isotope("appended", $content).isotope("layout");
+							$isotope
+								.isotope("appended", $content)
+								.isotope("layout");
 
-							$isotope.imagesLoaded().progress(function() {
+							$isotope.imagesLoaded().progress(function () {
 								$isotope.isotope("layout");
 							});
 
-							$content.find('.woocommerce-product-gallery').addClass(dynamicID);
-							$content.find('.woocommerce-product-gallery').addClass('eael-new-product');
+							$content
+								.find(".woocommerce-product-gallery")
+								.addClass(dynamicID);
+							$content
+								.find(".woocommerce-product-gallery")
+								.addClass("eael-new-product");
 
-							$(".woocommerce-product-gallery."+dynamicID, $scope).each(function() {
+							$(
+								".woocommerce-product-gallery." + dynamicID,
+								$scope
+							).each(function () {
 								$(this).wc_product_gallery();
 							});
 						} else {
@@ -97,13 +117,17 @@
 								$(this).wc_product_gallery();
 							});
 						}
-
 					} else {
 						$(".eael-post-appender", $scope).append($content);
 
 						if ($layout == "masonry") {
-							var $isotope = $(".eael-post-appender", $scope).isotope();
-							$isotope.isotope("appended", $content).isotope("layout");
+							var $isotope = $(
+								".eael-post-appender",
+								$scope
+							).isotope();
+							$isotope
+								.isotope("appended", $content)
+								.isotope("layout");
 
 							$isotope.imagesLoaded().progress(function () {
 								$isotope.isotope("layout");

@@ -480,6 +480,8 @@ class Post_Timeline extends Widget_Base
             <div ' . $this->get_render_attribute_string('eael_post_timeline') . '>';
 
                 $template = $this->get_template($this->get_settings('eael_dynamic_template_Layout'));
+                $settings['loadable_file_name'] = $this->get_filename_only($template);
+
                 if(file_exists($template)){
                     $query = new \WP_Query($args);
                     if ($query->have_posts()) {

@@ -1058,6 +1058,8 @@ class Post_Grid extends Widget_Base
             <div ' . $this->get_render_attribute_string( 'post_grid_container' ) . ' data-layout-mode="' . $settings["layout_mode"] . '">';
 
         $template = $this->get_template($settings['eael_dynamic_template_Layout']);
+        $settings['loadable_file_name'] = $this->get_filename_only($template);
+
         if(file_exists($template)){
             $query = new \WP_Query( $args );
 
@@ -1087,10 +1089,10 @@ class Post_Grid extends Widget_Base
                 jQuery(document).ready(function($) {
                     jQuery(".eael-post-grid").each(function() {
                         var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>"),
-                            $gallery = $(this);
-                        $layout_mode = $gallery.data('layout-mode');
+                            $gallery = $(this),
+                            $layout_mode = $gallery.data('layout-mode');
 
-                        if ($layout_mode === 'masonry') {
+                        if ( $layout_mode === 'masonry' ) {
                             // init isotope
                             var $isotope_gallery = $gallery.isotope({
                                 itemSelector: ".eael-grid-post",
@@ -1104,7 +1106,7 @@ class Post_Grid extends Widget_Base
                             });
 
                             $('.eael-grid-post', $gallery).resize(function() {
-                                $isotope_gallery.isotope('layout');
+                                $isotope_gallery.isotope("layout");
                             });
                         }
                     });
