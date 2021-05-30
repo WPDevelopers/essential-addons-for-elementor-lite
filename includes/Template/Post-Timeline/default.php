@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 echo '<article class="eael-timeline-post eael-timeline-column">
     <div class="eael-timeline-bullet"></div>
     <div class="eael-timeline-post-inner">
-        <a class="eael-timeline-post-link" href="' . get_the_permalink() . '" title="' . esc_html(get_the_title()) . '">
+        <a class="eael-timeline-post-link" href="' . get_the_permalink() . '" title="' . esc_html(get_the_title()) . '"' . ($settings['timeline_link_nofollow'] ? 'rel="nofollow"' : '') .'' . ($settings['timeline_link_target_blank'] ? 'target="_blank"' : '') . '>
             <time datetime="' . get_the_date() . '">' . get_the_date() . '</time>
             <div class="eael-timeline-post-image" ' . ($settings['eael_show_image'] == 'yes' ? 'style="background-image: url(' . wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size']) . ');"' : null) . '></div>';
             if ($settings['eael_show_excerpt']) {
