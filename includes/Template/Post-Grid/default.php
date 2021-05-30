@@ -28,11 +28,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                                 echo '<i class="' . $settings['eael_post_grid_bg_hover_icon_new']['value'] . '" aria-hidden="true"></i>';
                             }
                             
-                            echo '<a
-                                href="' . get_the_permalink() . '"
-                                ' . ($settings['image_link_nofollow'] ? 'rel="nofollow"' : '') . '
-                                ' . ($settings['image_link_target_blank'] ? 'target="_blank"' : '') . '
-                            ></a>';
+                            echo '<a href="' . get_the_permalink() . '"' . $link_settings['image_link_nofollow'] . '' . $link_settings['image_link_target_blank'] . '></a>';
                         echo '</div>';
 
                         echo '<div class="eael-entry-thumbnail">
@@ -48,10 +44,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                         echo '<a
                                     class="eael-grid-post-link"
                                     href="' . get_the_permalink() . '"
-                                    title="' . get_the_title() . '"
-                                    ' . ($settings['title_link_nofollow'] ? 'rel="nofollow"' : '') . '
-                                    ' . ($settings['title_link_target_blank'] ? 'target="_blank"' : '') . '
-                                    >';
+                                    title="' . get_the_title() . '"' . $link_settings['title_link_nofollow'] . '' . $link_settings['title_link_target_blank'] . '>';
 
                         if (empty($settings['eael_title_length'])) {
                             echo get_the_title();
@@ -89,10 +82,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                         if ($settings['eael_show_read_more_button']) {
                             echo '<a
                                         href="' . get_the_permalink() . '"
-                                        class="eael-post-elements-readmore-btn"
-                                        ' . ($settings['read_more_link_nofollow'] ? 'rel="nofollow"' : '') . '
-                                        ' . ($settings['read_more_link_target_blank'] ? 'target="_blank"' : '') . '
-                                        >' . esc_attr($settings['read_more_button_text']) . '</a>';
+                                        class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . esc_attr($settings['read_more_button_text']) . '</a>';
                         }
                         echo '</div>
                                 </div>';
@@ -158,11 +148,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
         } else {
             echo '<i class="' . $settings['eael_post_grid_bg_hover_icon_new']['value'] . '" aria-hidden="true"></i>';
         }
-        echo '<a
-                            href="' . get_the_permalink() . '"
-                            ' . ($settings['image_link_nofollow'] ? 'rel="nofollow"' : '') . '
-                            ' . ($settings['image_link_target_blank'] ? 'target="_blank"' : '') . '
-                        ></a>';
+        echo '<a href="' . get_the_permalink() . '"' . $link_settings['image_link_nofollow'] . '' . $link_settings['image_link_target_blank'] . '></a>';
         echo '</div>';
 
         echo '<div class="eael-entry-thumbnail">
@@ -182,10 +168,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             echo '<a
                         class="eael-grid-post-link"
                         href="' . get_the_permalink() . '"
-                        title="' . get_the_title() . '"
-                        ' . ($settings['title_link_nofollow'] ? 'rel="nofollow"' : '') . '
-                        ' . ($settings['title_link_target_blank'] ? 'target="_blank"' : '') . '
-                        >';
+                        title="' . get_the_title() . '"' . $link_settings['title_link_nofollow'] . '' . $link_settings['title_link_target_blank'] . '>';
 
             if (empty($settings['eael_title_length'])) {
                 echo get_the_title();
@@ -223,10 +206,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             if ($settings['eael_show_read_more_button']) {
                 echo '<a
                             href="' . get_the_permalink() . '"
-                            class="eael-post-elements-readmore-btn"
-                            ' . ($settings['read_more_link_nofollow'] ? 'rel="nofollow"' : '') . '
-                            ' . ($settings['read_more_link_target_blank'] ? 'target="_blank"' : '') . '
-                            >' . esc_attr($settings['read_more_button_text']) . '</a>';
+                            class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . esc_attr($settings['read_more_button_text']) . '</a>';
             }
             echo '</div>
                     </div>';
@@ -260,11 +240,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                 echo '<i class="' . $settings['eael_post_grid_bg_hover_icon_new']['value'] . '" aria-hidden="true"></i>';
             }
         }
-        echo '<a
-                            href="' . get_the_permalink() . '"
-                            ' . ($settings['image_link_nofollow'] ? 'rel="nofollow"' : '') . '
-                            ' . ($settings['image_link_target_blank'] ? 'target="_blank"' : '') . '
-                        ></a>';
+        echo '<a href="' . get_the_permalink() . '"' . $link_settings['image_link_nofollow'] . '' . $link_settings['image_link_target_blank'] . '></a>';
         echo '</div>';
 
         echo '<div class="eael-entry-thumbnail">
@@ -280,10 +256,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             echo '<a
                         class="eael-grid-post-link"
                         href="' . get_the_permalink() . '"
-                        title="' . get_the_title() . '"
-                        ' . ($settings['title_link_nofollow'] ? 'rel="nofollow"' : '') . '
-                        ' . ($settings['title_link_target_blank'] ? 'target="_blank"' : '') . '
-                        >';
+                        title="' . get_the_title() . '"' . $link_settings['title_link_nofollow'] . '' . $link_settings['title_link_target_blank'] . '>';
 
             if (empty($settings['eael_title_length'])) {
                 echo get_the_title();
@@ -320,10 +293,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             if ($settings['eael_show_read_more_button']) {
                 echo '<a
                             href="' . get_the_permalink() . '"
-                            class="eael-post-elements-readmore-btn"
-                            ' . ($settings['read_more_link_nofollow'] ? 'rel="nofollow"' : '') . '
-                            ' . ($settings['read_more_link_target_blank'] ? 'target="_blank"' : '') . '
-                            >' . esc_attr($settings['read_more_button_text']) . '</a>';
+                            class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . esc_attr($settings['read_more_button_text']) . '</a>';
             }
             echo '</div>
                     </div>';

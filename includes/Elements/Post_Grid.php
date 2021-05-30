@@ -90,6 +90,27 @@ class Post_Grid extends Widget_Base
             'section_post_grid_links',
             [
                 'label' => __('Links', 'essential-addons-for-elementor-lite'),
+                'conditions' => [
+                    'relation' => 'or',
+                    'terms' => [
+                       [
+                          'name' => 'eael_show_image',
+                          'operator' => '==',
+                          'value' => 'yes',
+                       ],
+                       [
+                          'name' => 'eael_show_title',
+                          'operator' => '==',
+                          'value' => 'yes',
+                       ],
+                       [
+                          'name' => 'eael_show_read_more_button',
+                          'operator' => '==',
+                          'value' => 'yes',
+                       ],
+                       
+                    ],
+                ],
             ]
         );
 
@@ -129,6 +150,7 @@ class Post_Grid extends Widget_Base
                 'condition' => [
                     'eael_show_image' => 'yes',
                 ],
+                'separator' => 'after',
             ]
         );
 
@@ -140,7 +162,6 @@ class Post_Grid extends Widget_Base
                 'condition' => [
                     'eael_show_title' => 'yes',
                 ],
-                'separator' => 'before',
             ]
         );
 
@@ -169,6 +190,7 @@ class Post_Grid extends Widget_Base
                 'condition' => [
                     'eael_show_title' => 'yes',
                 ],
+                'separator' => 'after',
             ]
         );
 
@@ -180,7 +202,6 @@ class Post_Grid extends Widget_Base
                 'condition' => [
                     'eael_show_read_more_button' => 'yes',
                 ],
-                'separator' => 'before',
             ]
         );
 
@@ -1001,6 +1022,15 @@ class Post_Grid extends Widget_Base
         $settings = HelperClass::fix_old_query($settings);
         $args = HelperClass::get_query_args($settings);
         $args = HelperClass::get_dynamic_args($settings, $args);
+
+        $link_settings = [
+            'image_link_nofollow' => $settings['image_link_nofollow'] ? 'rel="nofollow"' : '',
+            'image_link_target_blank' => $settings['image_link_target_blank'] ? 'target="_blank"' : '',
+            'title_link_nofollow' => $settings['title_link_nofollow'] ? 'rel="nofollow"' : '',
+            'title_link_target_blank' => $settings['title_link_target_blank'] ? 'target="_blank"' : '',
+            'read_more_link_nofollow' => $settings['read_more_link_nofollow'] ? 'rel="nofollow"' : '',
+            'read_more_link_target_blank' => $settings['read_more_link_target_blank'] ? 'target="_blank"' : '',
+        ];
 
         $this->add_render_attribute(
             'post_grid_wrapper',
