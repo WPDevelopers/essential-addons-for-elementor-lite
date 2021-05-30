@@ -1,6 +1,7 @@
 <?php
 
 use \Essential_Addons_Elementor\Classes\Helper;
+use \Elementor\Group_Control_Image_Size;
 /**
  * Template Name: Default
  */
@@ -8,6 +9,14 @@ use \Essential_Addons_Elementor\Classes\Helper;
 if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
+
+if (has_post_thumbnail() && $settings['eael_show_image'] == 'yes') {
+	$settings[ 'eael_image_size_customize' ] = [
+		'id' => get_post_thumbnail_id(),
+	];
+	$settings['eael_image_size_customize_size'] = $settings['image_size'];
+	$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'eael_image_size_customize' );
+}
 
 $title_tag = isset($settings['title_tag']) ? Helper::eael_validate_html_tag($settings['title_tag']) : 'h2';
 
@@ -32,9 +41,9 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                         echo '</div>';
 
                         echo '<div class="eael-entry-thumbnail">
-                            <img src="' . esc_url(wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])) . '" alt="' . esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) . '">
-                        </div>';
-                    echo '</div>';
+                                '.$thumbnail_html.'
+                              </div>
+                      </div>';
                 }
 
                 if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
@@ -152,9 +161,9 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
         echo '</div>';
 
         echo '<div class="eael-entry-thumbnail">
-                                <img src="' . esc_url(wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])) . '" alt="' . esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) . '">
-                            </div>';
-        echo '</div>';
+                 '.$thumbnail_html.'
+             </div>
+        </div>';
         if ($settings['meta_position'] == 'meta-entry-header' && $settings['eael_show_date'] === 'yes') {
             echo '<span class="eael-meta-posted-on"><time datetime="' . get_the_date() . '"><span>' . get_the_date('d') . '</span>' . get_the_date('F') . '</time></span>';
         }
@@ -244,9 +253,9 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
         echo '</div>';
 
         echo '<div class="eael-entry-thumbnail">
-                                <img src="' . esc_url(wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])) . '" alt="' . esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) . '">
-                            </div>';
-        echo '</div>';
+                '.$thumbnail_html.'
+            </div>
+        </div>';
     }
 
     if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
