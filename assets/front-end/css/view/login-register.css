@@ -428,6 +428,9 @@
     opacity: 0.6;
   }
 }
+.has-illustration .eael-lr-form-wrapper.style-2 {
+  width: 100%;
+}
 .rtl .eael-lr-form-wrapper.style-2 {
   direction: ltr;
 }
