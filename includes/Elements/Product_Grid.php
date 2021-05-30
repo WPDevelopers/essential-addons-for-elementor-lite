@@ -3077,6 +3077,7 @@ class Product_Grid extends Widget_Base
     public function build_product_query( $settings ){
         $args = [
             'post_type' => 'product',
+            'post_status'    => array( 'publish', 'pending', 'future' ),
             'posts_per_page' => $settings['eael_product_grid_products_count'] ?: 4,
             'order' => (isset($settings['order']) ? $settings['order'] : 'desc'),
             'offset' => $settings['product_offset'],
