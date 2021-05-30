@@ -2017,6 +2017,11 @@ $theme-preset4: #ec3b75;
     }
 }
 
+.theme-astra .woocommerce ul.products, .woocommerce-page ul.products {
+    display: flex;
+    column-gap: 0;
+}
+
 //.eael-product-loader {
 //    position: relative;
 //
