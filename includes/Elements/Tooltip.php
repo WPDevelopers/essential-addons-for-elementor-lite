@@ -53,7 +53,7 @@ class Tooltip extends Widget_Base {
         return 'https://essential-addons.com/elementor/docs/tooltip/';
     }
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		/**
   		 * Tooltip Settings
   		 */
@@ -63,7 +63,7 @@ class Tooltip extends Widget_Base {
   				'label' => esc_html__( 'Content Settings', 'essential-addons-for-elementor-lite')
   			]
   		);
-		$this->add_responsive_control(
+		$this->add_control(
 			'eael_tooltip_type',
 			[
 				'label' => esc_html__( 'Content Type', 'essential-addons-for-elementor-lite'),
@@ -90,6 +90,50 @@ class Tooltip extends Widget_Base {
 				'default' => 'icon',
 			]
 		);
+
+        $this->add_control(
+			'eael_tooltip_icon_content_new',
+			[
+				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::ICONS,
+				'fa4compatibility' => 'eael_tooltip_icon_content',
+				'default' => [
+					'value' => 'fas fa-home',
+					'library' => 'fa-solid',
+				],
+				'condition' => [
+					'eael_tooltip_type' => [ 'icon' ]
+				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_tooltip_icon_size',
+			[
+				'label'     => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::SLIDER,
+				'size_units'	=> [ '%', 'px' ],
+				'default'   => [
+					'size' => 60,
+				],
+				'range'     => [
+					'px' => [
+						'max' => 150,
+					],
+					'%'	=> [
+						'max'	=> 100
+					]
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-tooltip .eael-tooltip-content i'	=> 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-tooltip .eael-tooltip-content .ea-tooltip-svg-trigger'	=> 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+				],
+				'condition'	=> [
+					'eael_tooltip_type'	=> 'icon'
+				]
+			]
+		);
+
   		$this->add_control(
 			'eael_tooltip_content',
 			[
@@ -126,34 +170,8 @@ class Tooltip extends Widget_Base {
 		     	]
 		  	]
 		);
-		$this->add_control(
-			'eael_tooltip_shortcode_content',
-			[
-				'label' => esc_html__( 'Shortcode', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::TEXTAREA,
-				'label_block' => true,
-				'default' => esc_html__( '[shortcode-here]', 'essential-addons-for-elementor-lite'),
-				'condition' => [
-					'eael_tooltip_type' => [ 'shortcode' ]
-				]
-			]
-		);
-		$this->add_control(
-			'eael_tooltip_icon_content_new',
-			[
-				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::ICONS,
-				'fa4compatibility' => 'eael_tooltip_icon_content',
-				'default' => [
-					'value' => 'fas fa-home',
-					'library' => 'fa-solid',
-				],
-				'condition' => [
-					'eael_tooltip_type' => [ 'icon' ]
-				]
-			]
-		);
-		$this->add_control(
+
+        $this->add_control(
 			'eael_tooltip_img_content',
 			[
 				'label' => esc_html__( 'Image', 'essential-addons-for-elementor-lite'),
@@ -166,6 +184,20 @@ class Tooltip extends Widget_Base {
 				]
 			]
 		);
+
+		$this->add_control(
+			'eael_tooltip_shortcode_content',
+			[
+				'label' => esc_html__( 'Shortcode', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::TEXTAREA,
+				'label_block' => true,
+				'default' => esc_html__( '[shortcode-here]', 'essential-addons-for-elementor-lite'),
+				'condition' => [
+					'eael_tooltip_type' => [ 'shortcode' ]
+				]
+			]
+		);
+
 		$this->add_responsive_control(
 			'eael_tooltip_content_alignment',
 			[
@@ -191,34 +223,7 @@ class Tooltip extends Widget_Base {
 					],
 				],
 				'default' => 'left',
-				'prefix_class' => 'eael-tooltip-align-',
-			]
-		);
-
-		$this->add_responsive_control(
-			'eael_tooltip_icon_size',
-			[
-				'label'     => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite'),
-				'type'      => Controls_Manager::SLIDER,
-				'size_units'	=> [ '%', 'px' ],
-				'default'   => [
-					'size' => 60,
-				],
-				'range'     => [
-					'px' => [
-						'max' => 150,
-					],
-					'%'	=> [
-						'max'	=> 100
-					]
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-tooltip .eael-tooltip-content i'	=> 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eael-tooltip .eael-tooltip-content .ea-tooltip-svg-trigger'	=> 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
-				],
-				'condition'	=> [
-					'eael_tooltip_type'	=> 'icon'
-				]
+				'prefix_class' => 'eael-tooltip-align%s-',
 			]
 		);
 
@@ -385,6 +390,9 @@ class Tooltip extends Widget_Base {
 						'icon' => 'fa fa-align-justify',
 					],
 				],
+                'condition' => [
+                    'eael_tooltip_type' => 'text'
+                ],
 				'default' => 'left',
 				'prefix_class' => 'eael-tooltip-text-align-',
 			]
