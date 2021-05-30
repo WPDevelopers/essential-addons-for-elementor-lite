@@ -537,6 +537,9 @@ class Product_Grid extends Widget_Base
                 'exclude' => ['custom'],
                 'default' => 'medium',
                 'label_block' => true,
+                'condition' => [
+                    'eael_product_grid_style_preset!' => 'eael-product-default',
+                ],
             ]
         );
 
