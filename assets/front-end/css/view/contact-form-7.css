@@ -67,8 +67,8 @@
   margin-bottom: 20px;
 }
 
-.eael-contact-form-7-button-full-width .wpcf7-form-control.wpcf7-submit {
-  width: 100%;
+.eael-contact-form-7-button-full-width .eael-contact-form-7 .wpcf7-form p:nth-last-of-type(1) {
+  display: grid;
 }
 
 .wpcf7 form > div,
