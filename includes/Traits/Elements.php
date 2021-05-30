@@ -420,6 +420,7 @@ trait Elements
                 $support_tag = (array) $settings_data['eael_ext_toc_supported_heading_tag'];
                 $support_tag = implode(',', array_filter($support_tag));
                 $position = $settings_data['eael_ext_toc_position'];
+                $page_offset = !empty($settings_data['eael_ext_toc_main_page_offset']) ? $settings_data['eael_ext_toc_main_page_offset']['size'] : 0 ;
                 $close_bt_text_style = $settings_data['eael_ext_toc_close_button_text_style'];
                 $auto_collapse = $settings_data['eael_ext_toc_auto_collapse'];
                 $title_to_url = $settings_data['eael_ext_toc_use_title_in_url'];
@@ -449,7 +450,7 @@ trait Elements
                     $icon = $icon_check['value'];
                 }
 
-                $table_of_content_html = "<div data-eaelTocTag='{$support_tag}' data-contentSelector='{$content_selector}' data-excludeSelector='{$exclude_selector}' data-stickyScroll='{$sticky_scroll['size']}' data-titleUrl='{$title_url}' id='eael-toc' class='{$el_class} '>
+                $table_of_content_html = "<div data-eaelTocTag='{$support_tag}' data-contentSelector='{$content_selector}' data-excludeSelector='{$exclude_selector}' data-stickyScroll='{$sticky_scroll['size']}' data-titleUrl='{$title_url}' data-page_offset='{$page_offset}' id='eael-toc' class='{$el_class} '>
                     <div class='eael-toc-header'>
                             <span class='eael-toc-close'>×</span>
                             <h2 class='eael-toc-title'>{$toc_title}</h2>
