@@ -905,7 +905,7 @@ class Dual_Color_Header extends Widget_Base
 	protected function render()
 	{
 		$settings = $this->get_settings_for_display();
-
+        $gradient_style = '';
         if ( $settings['eael_dch_dual_title_color_gradient_first']  && $settings['eael_dch_dual_title_color_gradient_second']  ) {
             $gradient_style = 'style="background: -webkit-linear-gradient('. $settings['eael_dch_dual_title_color_gradient_first']. ', '. $settings['eael_dch_dual_title_color_gradient_second'].');-webkit-background-clip: text;
             -webkit-text-fill-color: transparent;"';
