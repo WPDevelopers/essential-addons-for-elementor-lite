@@ -415,6 +415,10 @@ trait Login_Registration {
             $user_data['role'] = $user_default_role;
         }
 
+        if ('administrator' == strtolower($user_data['role'])) {
+            $user_data['role'] = !empty($settings['register_user_role']) ? $settings['register_user_role'] : get_option('default_role');
+        }
+
 		$user_id = wp_insert_user( $user_data );
 		do_action( 'eael/login-register/after-insert-user', $user_id, $user_data );
 
