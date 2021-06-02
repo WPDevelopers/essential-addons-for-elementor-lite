@@ -19,8 +19,6 @@ if ( ! $product ) {
     return;
 }
 
-//error_log(print_r( $settings, 1 ));
-
 
 if ( has_post_thumbnail() ) {
 	$settings[ 'eael_image_size_customize' ] = [
@@ -51,7 +49,7 @@ $quick_view_setting = [
 if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-product-reveal' ) { ?>
     <li class="product">
         <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-            <?php echo  $thumbnail_html;
+            <?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ) );
             printf('<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, $product->get_title());
             if ( $should_print_rating ) {
                 echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) );
@@ -79,7 +77,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
     ?>
     <li class="product">
         <div class="overlay">
-            <?php echo $thumbnail_html; ?>
+            <?php echo $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ); ?>
             <div class="button-wrap clearfix">
                 <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="product-link"><span class="fas fa-link"></span></a>
                 <?php
@@ -116,7 +114,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                     <div class="image-wrap">
                         <?php
                         echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
-                        echo $thumbnail_html;
+                        echo $product->get_image($settings['eael_product_grid_image_size_size'], ['loading' => 'eager']);
                         ?>
                     </div>
                     <div class="image-hover-wrap">
@@ -221,7 +219,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                         <?php
                         echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
                         echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
-                        echo $thumbnail_html;
+                        echo $product->get_image($settings['eael_product_grid_image_size_size'], ['loading' => 'eager']);
                         echo '</a>';
                         ?>
                     </div>
@@ -279,7 +277,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                         <?php
                         echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
                         echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
-                        echo $thumbnail_html;
+                        echo $product->get_image($settings['eael_product_grid_image_size_size'], ['loading' => 'eager']);
                         echo '</a>';
                         ?>
                     </div>
