@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 5.7.2
 Requires PHP: 5.6
-Stable tag: 4.7.0
+Stable tag: 4.7.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -224,6 +224,24 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.7.1 - 02/06/2021 =
+
+- Removed: Elementor  deprecation methods
+- Added: Compatibility with PHP 8.0
+- Added: EA Login/Register Form | Added permission check for security enhancement
+- Fixed: EA Gravity Form | Styles being applied to input fields
+- Fixed: EA Tooltip | Alignment in Responsive Design not working properly
+- Fixed: EA Creative Button | ‘Shikoba’ effect breaking the design
+- Fixed: EA Advanced Accordion | Saved Template is not showing properly
+- Fixed: EA Contact Form 7 | Submit button ‘Full Width’ not working
+- Fixed: EA Countdown | design broken on mobile device
+- Fixed: EA Product Grid | Draft products being displayed
+- Fixed: HTML(inline CSS) not working with <a> tag in some widgets
+- Improved: Added Target_Blank options in post widgets
+- Improved: EA Product Grid | not scrolling to top when you hit the pagination options
+- Removed: EA Progress Bar | Removed duplicate controls
+- Few minor bug fix and improvements
 
 = 4.7.0 - 24/05/2021 =
 
