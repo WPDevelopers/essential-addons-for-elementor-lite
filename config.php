@@ -618,6 +618,13 @@ $config = [
                         'context' => 'view',
                     ],
                 ],
+                'js' => [
+	                [
+		                'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/gravity-form.min.js',
+		                'type' => 'self',
+		                'context' => 'edit',
+	                ],
+                ],
             ],
         ],
         'caldera-form' => [
