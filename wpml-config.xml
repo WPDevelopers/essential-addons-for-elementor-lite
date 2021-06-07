@@ -1,0 +1,25 @@
+<wpml-config>
+    <elementor-widgets>
+        <widget name="eael-creative-button">
+            <conditions>
+                <condition key="widgetType">eael-creative-button</condition>
+            </conditions>
+            <fields>
+                <field type="Creative Button: Text" editor_type="LINE">creative_button_text</field>
+                <field type="Creative Button: Secondary Text" editor_type="LINE">creative_button_secondary_text</field>
+                <field type="Creative Button: Link" editor_type="LINE" key_of="creative_button_link_url">url</field>
+            </fields>
+        </widget>
+
+        <widget name="eael-cta-box">
+            <conditions>
+                <condition key="widgetType">eael-cta-box</condition>
+            </conditions>
+            <fields>
+                <field type="Call to Action: Title" editor_type="LINE">eael_cta_title</field>
+                <field type="Call to Action: Content" editor_type="VISUAL">eael_cta_content</field>
+                <field type="Call to Action: Button Text" editor_type="LINE">eael_cta_btn_text</field>
+            </fields>
+        </widget>
+    </elementor-widgets>
+</wpml-config>
