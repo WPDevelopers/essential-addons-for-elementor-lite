@@ -225,7 +225,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 4.7.1 - 02/06/2021 =
+= 4.7.1 - 07/06/2021 =
 
 - Removed: Elementor  deprecation methods
 - Added: Compatibility with PHP 8.0
