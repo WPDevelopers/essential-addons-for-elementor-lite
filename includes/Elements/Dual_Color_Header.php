@@ -498,30 +498,54 @@ class Dual_Color_Header extends Widget_Base
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
+        $this->add_control(
+			'eael_dch_dual_title_color_gradient_first',
 			[
-				'name'     => 'eael_dch_dual_title_color_gradient',
-				'types'    => ['gradient'],
-				'fields_options' => [
-					'background' => [
-						'label' => _x( 'Gradient Color', 'Text Shadow Control', 'elementor' ),
-						'toggle' => false,
-						'default' => 'gradient',
-					],
-					'color' => [
-						'default' => '#062ACA',
-					],
-					'color_b' => [
-						'default' => '#9401D9',
-					]
-				],
-				'selector' => '{{WRAPPER}} .eael-dual-header .title span.lead',
+				'label' => esc_html__('First Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#062ACA',
 				'condition' => [
 					'eael_dch_dual_color_selector' => 'gradient-color'
 				],
 			]
 		);
+
+        $this->add_control(
+			'eael_dch_dual_title_color_gradient_second',
+			[
+				'label' => esc_html__('Second Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#9401D9',
+				'condition' => [
+					'eael_dch_dual_color_selector' => 'gradient-color'
+				],
+			]
+		);
+
+		// $this->add_group_control(
+		// 	Group_Control_Background::get_type(),
+		// 	[
+		// 		'name'     => 'eael_dch_dual_title_color_gradient',
+		// 		'types'    => ['gradient'],
+		// 		'fields_options' => [
+		// 			'background' => [
+		// 				'label' => _x( 'Gradient Color', 'Text Shadow Control', 'elementor' ),
+		// 				'toggle' => false,
+		// 				'default' => 'gradient',
+		// 			],
+		// 			'color' => [
+		// 				'default' => '#062ACA',
+		// 			],
+		// 			'color_b' => [
+		// 				'default' => '#9401D9',
+		// 			]
+		// 		],
+		// 		'selector' => '{{WRAPPER}} .eael-dual-header .title span.lead',
+		// 		'condition' => [
+		// 			'eael_dch_dual_color_selector' => 'gradient-color'
+		// 		],
+		// 	]
+		// );
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
@@ -881,6 +905,11 @@ class Dual_Color_Header extends Widget_Base
 	protected function render()
 	{
 		$settings = $this->get_settings_for_display();
+        $gradient_style = '';
+        if ( $settings['eael_dch_dual_title_color_gradient_first']  && $settings['eael_dch_dual_title_color_gradient_second']  ) {
+            $gradient_style = 'style="background: -webkit-linear-gradient('. $settings['eael_dch_dual_title_color_gradient_first']. ', '. $settings['eael_dch_dual_title_color_gradient_second'].');-webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;"';
+        };
 		$icon_migrated = isset($settings['__fa4_migrated']['eael_dch_icon_new']);
 		$icon_is_new = empty($settings['eael_dch_icon']);
 		// separator
@@ -896,9 +925,9 @@ class Dual_Color_Header extends Widget_Base
 		$separator_markup .= '</div>'; ?>
 
 		<?php if ('dch-default' == $settings['eael_dch_type']) : ?>
-		<div class="eael-dual-header">
+        <div class="eael-dual-header">
 		<?php echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
-		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title"><span class="lead <?php echo $settings['eael_dch_dual_color_selector']; ?>"><?php esc_html_e
+		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title"><span <?php echo $gradient_style;  ?> class="lead <?php echo $settings['eael_dch_dual_color_selector']; ?>"><?php esc_html_e
 			($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?>>
 		<?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
 		<span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
@@ -928,7 +957,7 @@ class Dual_Color_Header extends Widget_Base
 			<?php } ?>
 		<?php endif; ?>
 		<?php echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
-		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title"><span class="lead <?php echo $settings['eael_dch_dual_color_selector']; ?>"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?>>
+		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title"><span <?php echo $gradient_style;  ?> class="lead <?php echo $settings['eael_dch_dual_color_selector']; ?>"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?>>
 		<?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
 		<span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
 		</div>
@@ -948,7 +977,7 @@ class Dual_Color_Header extends Widget_Base
 		<?php endif; ?>
 		<span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
 		<?php echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
-		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title"><span class="lead <?php echo $settings['eael_dch_dual_color_selector']; ?>"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?>>
+		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title"><span <?php echo $gradient_style;  ?> class="lead <?php echo $settings['eael_dch_dual_color_selector']; ?>"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?>>
 		<?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
 		</div>
 	<?php endif; ?>
@@ -957,7 +986,7 @@ class Dual_Color_Header extends Widget_Base
 		<div class="eael-dual-header">
 		<span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
 		<?php echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
-		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title"><span class="lead <?php echo $settings['eael_dch_dual_color_selector']; ?>"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?>>
+		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title"><span <?php echo $gradient_style;  ?> class="lead <?php echo $settings['eael_dch_dual_color_selector']; ?>"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?>>
 		<?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
 		<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
 			<?php if ($icon_is_new || $icon_migrated) {

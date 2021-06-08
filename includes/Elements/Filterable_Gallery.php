@@ -2573,7 +2573,7 @@ class Filterable_Gallery extends Widget_Base
                 'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
-                    'size' => 36,
+                    'size' => 15,
                 ],
                 'range' => [
                     'px' => [

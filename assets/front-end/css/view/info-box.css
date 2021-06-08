@@ -30,15 +30,33 @@
   transition: 0.3s;
 }
 /*--- For Content Alignment ---*/
-.eael-infobox-content-align-left .eael-infobox .infobox-icon,
+.eael-infobox-content-align-left .eael-infobox .infobox-icon {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
 .eael-infobox-content-align-left .eael-infobox .infobox-content,
 .eael-infobox-content-align-left .eael-infobox .infobox-button {
   text-align: left;
 }
-.eael-infobox-content-align-right .eael-infobox .infobox-icon,
+.eael-infobox-content-align-right .eael-infobox .infobox-icon {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
 .eael-infobox-content-align-right .eael-infobox .infobox-content,
 .eael-infobox-content-align-right .eael-infobox .infobox-button {
   text-align: right;
+}
+.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-none .infobox-icon-wrap {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-none .infobox-icon-wrap {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
 .eael-infobox-content-align-center .eael-infobox .infobox-icon,
 .eael-infobox-content-align-center .eael-infobox .infobox-content,
@@ -156,7 +174,7 @@
 .eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap {
   background: none;
   border: 0px;
-  text-align: left;
+  text-align: center;
   height: auto;
   display: block;
 }

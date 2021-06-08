@@ -25,7 +25,9 @@
 
 /*--- For Content Alignment ---*/
 .eael-infobox-content-align-left .eael-infobox {
-	.infobox-icon,
+    .infobox-icon{
+        justify-content: flex-start;
+    }
 	.infobox-content,
 	.infobox-button {
 		text-align: left;
@@ -33,11 +35,25 @@
 }
 
 .eael-infobox-content-align-right .eael-infobox {
-	.infobox-icon,
+	.infobox-icon{
+        justify-content: flex-end;
+    }
 	.infobox-content,
 	.infobox-button{
 		text-align: right;
 	}
+}
+
+.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-none {
+	.infobox-icon-wrap{
+        justify-content: flex-end;
+    }
+}
+
+.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-none {
+	.infobox-icon-wrap{
+        justify-content: flex-start;
+    }
 }
 
 .eael-infobox-content-align-center .eael-infobox .infobox-icon,
@@ -137,7 +153,7 @@
 .eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap {
 	background: none;
 	border: 0px;
-	text-align: left;
+	text-align: center;
 	height: auto;
 	display: block;
 }

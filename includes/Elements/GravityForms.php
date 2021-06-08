@@ -640,7 +640,7 @@ class GravityForms extends Widget_Base {
 				],
 				'default'               => '',
 				'selectors'             => [
-					'{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield input[type="email"], {{WRAPPER}} .eael-gravity-form .gfield input[type="tel"], {{WRAPPER}} .eael-gravity-form .gfield input[type="number"], {{WRAPPER}} .eael-gravity-form .gfield textarea' => 'text-align: {{VALUE}};',
 				],
 			]
 		);
@@ -661,7 +661,7 @@ class GravityForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield input[type="email"], {{WRAPPER}} .eael-gravity-form .gfield input[type="tel"], {{WRAPPER}} .eael-gravity-form .gfield input[type="number"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -673,7 +673,7 @@ class GravityForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield input[type="email"], {{WRAPPER}} .eael-gravity-form .gfield input[type="tel"], {{WRAPPER}} .eael-gravity-form .gfield input[type="number"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -747,7 +747,7 @@ class GravityForms extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select' => 'text-indent: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield input[type="email"], {{WRAPPER}} .eael-gravity-form .gfield input[type="tel"], {{WRAPPER}} .eael-gravity-form .gfield input[type="number"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select' => 'text-indent: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -766,7 +766,7 @@ class GravityForms extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield select' => 'width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield input[type="email"], {{WRAPPER}} .eael-gravity-form .gfield input[type="tel"], {{WRAPPER}} .eael-gravity-form .gfield input[type="number"], {{WRAPPER}} .eael-gravity-form .gfield select' => 'width: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -785,7 +785,7 @@ class GravityForms extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield input[type="email"], {{WRAPPER}} .eael-gravity-form .gfield input[type="url"], {{WRAPPER}} .eael-gravity-form .gfield select' => 'height: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield input[type="email"], {{WRAPPER}} .eael-gravity-form .gfield input[type="tel"], {{WRAPPER}} .eael-gravity-form .gfield input[type="number"], {{WRAPPER}} .eael-gravity-form .gfield input[type="email"], {{WRAPPER}} .eael-gravity-form .gfield input[type="url"], {{WRAPPER}} .eael-gravity-form .gfield select' => 'height: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -835,7 +835,7 @@ class GravityForms extends Widget_Base {
 				'label'                 => __( 'Border', 'essential-addons-for-elementor-lite'),
 				'placeholder'           => '1px',
 				'default'               => '1px',
-				'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select',
+				'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield input[type="email"], {{WRAPPER}} .eael-gravity-form .gfield input[type="tel"], {{WRAPPER}} .eael-gravity-form .gfield input[type="number"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select',
 				'separator'             => 'before',
 			]
 		);
@@ -847,7 +847,7 @@ class GravityForms extends Widget_Base {
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => [ 'px', 'em', '%' ],
 				'selectors'             => [
-					'{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield input[type="email"], {{WRAPPER}} .eael-gravity-form .gfield input[type="tel"], {{WRAPPER}} .eael-gravity-form .gfield input[type="number"], {{WRAPPER}} .eael-gravity-form .gfield textarea' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -857,7 +857,7 @@ class GravityForms extends Widget_Base {
             [
                 'name'                  => 'field_typography',
                 'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
-                'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield .ginput_complex.ginput_container input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield .ginput_container_date input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield .ginput_container_phone input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield .ginput_container_email input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield .ginput_container_text input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select',
+                'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield .ginput_container input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield .ginput_container input[type="email"], {{WRAPPER}} .eael-gravity-form .gfield .ginput_container input[type="tel"], {{WRAPPER}} .eael-gravity-form .gfield .ginput_container input[type="number"], {{WRAPPER}} .eael-gravity-form .gfield .ginput_container_date input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield .ginput_container_phone input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield .ginput_container_email input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield .ginput_container_text input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select',
 				'separator'             => 'before',
             ]
         );
@@ -866,7 +866,7 @@ class GravityForms extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'                  => 'field_box_shadow',
-				'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select',
+				'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield input[type="email"], {{WRAPPER}} .eael-gravity-form .gfield input[type="tel"], {{WRAPPER}} .eael-gravity-form .gfield input[type="number"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select',
 				'separator'             => 'before',
 			]
 		);
@@ -2432,6 +2432,6 @@ class GravityForms extends Widget_Base {
         }
     }
 
-    protected function _content_template() {}
+    protected function content_template() {}
 
 }

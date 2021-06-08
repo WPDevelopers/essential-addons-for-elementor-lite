@@ -1,11 +1,13 @@
 <?php
 
-use \Essential_Addons_Elementor\Classes\Helper;
+
 /**
  * Template Name: Default
  */
 
+use \Essential_Addons_Elementor\Classes\Helper;
 use Essential_Addons_Elementor\Elements\Product_Grid;
+use \Elementor\Group_Control_Image_Size;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -15,6 +17,15 @@ $product = wc_get_product( get_the_ID() );
 if ( ! $product ) {
     error_log( '$product not found in ' . __FILE__ );
     return;
+}
+
+
+if ( has_post_thumbnail() ) {
+	$settings[ 'eael_image_size_customize' ] = [
+		'id' => get_post_thumbnail_id(),
+	];
+	$settings['eael_image_size_customize_size'] = $settings['eael_product_grid_image_size_size'];
+	$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'eael_image_size_customize' );
 }
 
 $title_tag = isset( $settings['eael_product_grid_title_html_tag'] ) ? Helper::eael_validate_html_tag($settings['eael_product_grid_title_html_tag'])  : 'h2';
@@ -390,6 +401,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
         <?php
     }
 }else {
+
     if($settings['eael_product_grid_rating']!='yes'){
         remove_action('woocommerce_after_shop_loop_item_title','woocommerce_template_loop_rating',5);
     }
@@ -398,7 +410,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
         global $product; 
         if(empty($product->is_on_sale())  && !$product->is_in_stock()  ){
           echo '<span class="outofstock-badge">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>';
-        } 
+        }
     },9);
     
     if ( $should_print_compare_btn ) {

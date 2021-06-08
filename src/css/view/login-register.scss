@@ -414,6 +414,14 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
 
 }
 
+.has-illustration {
+    .eael-lr-form-wrapper {
+        &.style-2 {
+            width: 100%;
+        }
+    }
+}
+
 .rtl {
   .eael-lr-form-wrapper.style-2 {
     direction: ltr;

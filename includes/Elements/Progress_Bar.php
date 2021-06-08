@@ -298,7 +298,7 @@ class Progress_Bar extends Widget_Base
         /**
          * Style Tab: General(Line)
          */
-        $style_condition = apply_filters('eael_progressbar_general_style_condition', ['line', 'line_rainbow']);
+        $style_condition = apply_filters('eael_progressbar_general_style_condition', ['line']);
 
         $this->start_controls_section(
             'progress_bar_section_style_general_line',
