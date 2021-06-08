@@ -1,5 +1,23 @@
 <wpml-config>
     <elementor-widgets>
+        <widget name="eael-adv-accordion">
+            <conditions>
+                <condition key="widgetType">eael-adv-accordion</condition>
+            </conditions>
+            <fields-in-item items_of="eael_adv_accordion_tab">
+                <field type="Advance Accordion: Title" editor_type="LINE">eael_adv_accordion_tab_title</field>
+                <field type="Advance Accordion: Content" editor_type="VISUAL">eael_adv_accordion_tab_content</field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-adv-tabs">
+            <conditions>
+                <condition key="widgetType">eael-adv-tabs</condition>
+            </conditions>
+            <fields-in-item items_of="eael_adv_tabs_tab">
+                <field type="Advance Tab: Title" editor_type="LINE">eael_adv_tabs_tab_title</field>
+                <field type="Advance Tab: Content" editor_type="VISUAL">eael_adv_tabs_tab_content</field>
+            </fields-in-item>
+        </widget>
         <widget name="eael-creative-button">
             <conditions>
                 <condition key="widgetType">eael-creative-button</condition>
@@ -10,7 +28,6 @@
                 <field type="Creative Button: Link" editor_type="LINE" key_of="creative_button_link_url">url</field>
             </fields>
         </widget>
-
         <widget name="eael-cta-box">
             <conditions>
                 <condition key="widgetType">eael-cta-box</condition>
@@ -19,6 +36,29 @@
                 <field type="Call to Action: Title" editor_type="LINE">eael_cta_title</field>
                 <field type="Call to Action: Content" editor_type="VISUAL">eael_cta_content</field>
                 <field type="Call to Action: Button Text" editor_type="LINE">eael_cta_btn_text</field>
+            </fields>
+        </widget>
+        <widget name="eael-data-table">
+            <conditions>
+                <condition key="widgetType">eael-data-table</condition>
+            </conditions>
+            <fields-in-item items_of="eael_data_table_header_cols_data">
+                <field type="Data Table: Header" editor_type="LINE">eael_data_table_header_col</field>
+            </fields-in-item>
+            <fields-in-item items_of="eael_data_table_content_rows">
+                <field type="Data Table: Cell Text" editor_type="AREA">eael_data_table_content_row_title</field>
+                <field type="Data Table: Cell Content" editor_type="VISUAL">eael_data_table_content_row_content</field>
+                <field type="Data Table: Link" editor_type="LINE" key_of="eael_data_table_content_row_title_link">url</field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-dual-color-header">
+            <conditions>
+                <condition key="widgetType">eael-dual-color-header</condition>
+            </conditions>
+            <fields>
+                <field type="Dual Color Heading: Title ( First Part )" editor_type="LINE">eael_dch_first_title</field>
+                <field type="Dual Color Heading: Title ( Last Part )" editor_type="LINE">eael_dch_last_title</field>
+                <field type="Dual Color Heading: Sub Text" editor_type="VISUAL">eael_dch_subtext</field>
             </fields>
         </widget>
     </elementor-widgets>
