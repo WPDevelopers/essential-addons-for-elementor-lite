@@ -90,6 +90,27 @@ class Post_Grid extends Widget_Base
             'section_post_grid_links',
             [
                 'label' => __('Links', 'essential-addons-for-elementor-lite'),
+                'conditions' => [
+                    'relation' => 'or',
+                    'terms' => [
+                       [
+                          'name' => 'eael_show_image',
+                          'operator' => '==',
+                          'value' => 'yes',
+                       ],
+                       [
+                          'name' => 'eael_show_title',
+                          'operator' => '==',
+                          'value' => 'yes',
+                       ],
+                       [
+                          'name' => 'eael_show_read_more_button',
+                          'operator' => '==',
+                          'value' => 'yes',
+                       ],
+                       
+                    ],
+                ],
             ]
         );
 
@@ -129,6 +150,7 @@ class Post_Grid extends Widget_Base
                 'condition' => [
                     'eael_show_image' => 'yes',
                 ],
+                'separator' => 'after',
             ]
         );
 
@@ -140,7 +162,6 @@ class Post_Grid extends Widget_Base
                 'condition' => [
                     'eael_show_title' => 'yes',
                 ],
-                'separator' => 'before',
             ]
         );
 
@@ -169,6 +190,7 @@ class Post_Grid extends Widget_Base
                 'condition' => [
                     'eael_show_title' => 'yes',
                 ],
+                'separator' => 'after',
             ]
         );
 
@@ -180,7 +202,6 @@ class Post_Grid extends Widget_Base
                 'condition' => [
                     'eael_show_read_more_button' => 'yes',
                 ],
-                'separator' => 'before',
             ]
         );
 
@@ -1002,6 +1023,15 @@ class Post_Grid extends Widget_Base
         $args = HelperClass::get_query_args($settings);
         $args = HelperClass::get_dynamic_args($settings, $args);
 
+        $link_settings = [
+            'image_link_nofollow' => $settings['image_link_nofollow'] ? 'rel="nofollow"' : '',
+            'image_link_target_blank' => $settings['image_link_target_blank'] ? 'target="_blank"' : '',
+            'title_link_nofollow' => $settings['title_link_nofollow'] ? 'rel="nofollow"' : '',
+            'title_link_target_blank' => $settings['title_link_target_blank'] ? 'target="_blank"' : '',
+            'read_more_link_nofollow' => $settings['read_more_link_nofollow'] ? 'rel="nofollow"' : '',
+            'read_more_link_target_blank' => $settings['read_more_link_target_blank'] ? 'target="_blank"' : '',
+        ];
+
         $this->add_render_attribute(
             'post_grid_wrapper',
             [
@@ -1028,6 +1058,8 @@ class Post_Grid extends Widget_Base
             <div ' . $this->get_render_attribute_string( 'post_grid_container' ) . ' data-layout-mode="' . $settings["layout_mode"] . '">';
 
         $template = $this->get_template($settings['eael_dynamic_template_Layout']);
+        $settings['loadable_file_name'] = $this->get_filename_only($template);
+
         if(file_exists($template)){
             $query = new \WP_Query( $args );
 
@@ -1057,10 +1089,10 @@ class Post_Grid extends Widget_Base
                 jQuery(document).ready(function($) {
                     jQuery(".eael-post-grid").each(function() {
                         var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>"),
-                            $gallery = $(this);
-                        $layout_mode = $gallery.data('layout-mode');
+                            $gallery = $(this),
+                            $layout_mode = $gallery.data('layout-mode');
 
-                        if ($layout_mode === 'masonry') {
+                        if ( $layout_mode === 'masonry' ) {
                             // init isotope
                             var $isotope_gallery = $gallery.isotope({
                                 itemSelector: ".eael-grid-post",
@@ -1074,7 +1106,7 @@ class Post_Grid extends Widget_Base
                             });
 
                             $('.eael-grid-post', $gallery).resize(function() {
-                                $isotope_gallery.isotope('layout');
+                                $isotope_gallery.isotope("layout");
                             });
                         }
                     });

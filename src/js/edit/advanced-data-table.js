@@ -5,6 +5,7 @@ class advancedDataTableEdit {
 		this.model = null;
 		this.view = null;
 		this.table = null;
+		this.tableInnerHTML = null;
 
 		this.timeout = null;
 		this.activeCell = null;
@@ -321,6 +322,8 @@ class advancedDataTableEdit {
 					body += "</tbody>";
 
 					if (header.length > 0 || body.length > 0) {
+						this.tableInnerHTML = header + body;
+
 						this.updateFromView(
 							this.view,
 							{
@@ -366,11 +369,15 @@ class advancedDataTableEdit {
 			// parse table html
 			let origTable = this.parseHTML(this.table.cloneNode(true));
 
+			if ( this.tableInnerHTML == null ) {
+				this.tableInnerHTML = origTable.innerHTML;
+			}
+
 			// update table
 			this.updateFromView(
 				this.view,
 				{
-					ea_adv_data_table_static_html: origTable.innerHTML,
+					ea_adv_data_table_static_html: this.tableInnerHTML,
 				},
 				true
 			);

@@ -3006,6 +3006,8 @@ class Product_Grid extends Widget_Base
                 <?php
                 do_action( 'eael_woo_before_product_loop' );
                 $template = $this->get_template($settings['eael_dynamic_template_Layout']);
+                $settings['loadable_file_name'] = $this->get_filename_only($template);
+
                 if (file_exists($template)) {
 	                $settings['eael_page_id'] = get_the_ID();
                     $query = new \WP_Query($args);
@@ -3072,6 +3074,7 @@ class Product_Grid extends Widget_Base
     public function build_product_query( $settings ){
         $args = [
             'post_type' => 'product',
+            'post_status'    => array( 'publish', 'pending', 'future' ),
             'posts_per_page' => $settings['eael_product_grid_products_count'] ?: 4,
             'order' => (isset($settings['order']) ? $settings['order'] : 'desc'),
             'offset' => $settings['product_offset'],

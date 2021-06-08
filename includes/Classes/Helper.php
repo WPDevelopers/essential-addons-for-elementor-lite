@@ -660,7 +660,7 @@ class Helper
      * @param int $term_id
      * @return int $term_count;
      */
-    public static function get_doc_post_count($term_count = 0, $term_id)
+    public static function get_doc_post_count($term_count = 0, $term_id = 0)
     {
         $tax_terms = get_terms('doc_category', ['child_of' => $term_id]);
 
@@ -1007,6 +1007,7 @@ class Helper
                 'class' => [],
                 'rel' => [],
                 'id' => [],
+                'style' => []
             ],
             'q' => [
                 'cite' => [],
@@ -1027,7 +1028,11 @@ class Helper
                 'id' => [],
                 'style' => []
             ],
-            'dfn' => [],
+            'dfn' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
             'time' => [
                 'datetime' => [],
                 'class' => [],
@@ -1038,14 +1043,17 @@ class Helper
                 'title' => [],
                 'class' => [],
                 'id' => [],
+                'style' => [],
             ],
             'hr' => [
                 'class' => [],
                 'id' => [],
+                'style' => [],
             ],
             'b' => [
                 'class' => [],
                 'id' => [],
+                'style' => [],
             ],
             'p' => [
                 'class' => [],
@@ -1065,6 +1073,7 @@ class Helper
             's' => [
                 'class' => [],
                 'id' => [],
+                'style' => [],
             ],
             'br' => [],
             'em' => [
@@ -1129,12 +1138,41 @@ class Helper
                 'style' => [],
             ],
             'acronym' => [],
-            'h1' => [],
-            'h2' => [],
-            'h3' => [],
-            'h4' => [],
-            'h5' => [],
-            'h6' => [],
+            'h1' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'h2' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'h3' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'h4' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'h5' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'h6' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'button' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
         ];
     }
 }
