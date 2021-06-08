@@ -177,5 +177,46 @@
                 <field type="Pricing Table: Feature Tooltip" editor_type="LINE">eael_pricing_item_tooltip_content</field>
             </fields-in-item>
         </widget>
+        <widget name="eael-progress-bar">
+            <conditions>
+                <condition key="widgetType">eael-progress-bar</condition>
+            </conditions>
+            <fields>
+                <field type="Progressbar: Title" editor_type="LINE">progress_bar_title</field>
+            </fields>
+        </widget>
+        <widget name="eael-team-member">
+            <conditions>
+                <condition key="widgetType">eael-team-member</condition>
+            </conditions>
+            <fields>
+                <field type="Team Member: Name" editor_type="LINE">eael_team_member_name</field>
+                <field type="Team Member: Title" editor_type="LINE">eael_team_member_job_title</field>
+                <field type="Team Member: Description" editor_type="AREA">eael_team_member_description</field>
+            </fields>
+            <fields-in-item items_of="eael_team_member_social_profile_links">
+                <field type="Team Member: Social Link" key_of="link" editor_type="LINE">url</field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-testimonial">
+            <conditions>
+                <condition key="widgetType">eael-testimonial</condition>
+            </conditions>
+            <fields>
+                <field type="Testimonial: User Name" editor_type="LINE">eael_testimonial_name</field>
+                <field type="Testimonial: Company Name" editor_type="LINE">eael_testimonial_company_title</field>
+                <field type="Testimonial: Description" editor_type="VISUAL">eael_testimonial_description</field>
+            </fields>
+        </widget>
+        <widget name="eael-tooltip">
+            <conditions>
+                <condition key="widgetType">eael-tooltip</condition>
+            </conditions>
+            <fields>
+                <field type="Tooltip: Link" key_of="eael_tooltip_link" editor_type="LINE">url</field>
+                <field type="Tooltip: Description" editor_type="VISUAL">eael_tooltip_content</field>
+                <field type="Tooltip: Hover Description" editor_type="VISUAL">eael_tooltip_hover_content</field>
+            </fields>
+        </widget>
     </elementor-widgets>
 </wpml-config>
