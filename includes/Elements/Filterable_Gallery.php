@@ -3263,9 +3263,9 @@ class Filterable_Gallery extends Widget_Base
         
         $this->add_render_attribute('gallery-items-wrap', 'data-settings', wp_json_encode($gallery_settings));
         if ('layout_3' == $settings['eael_fg_caption_style']) {
-            $this->add_render_attribute('gallery-items-wrap', 'data-gallery-items', wp_json_encode($this->render_layout_3_gallery_items()));
+            $this->add_render_attribute( 'gallery-items-wrap', 'data-gallery-items', wp_json_encode( $this->render_layout_3_gallery_items(), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE ) );
         } else {
-            $this->add_render_attribute('gallery-items-wrap', 'data-gallery-items', wp_json_encode($this->render_gallery_items()));
+            $this->add_render_attribute( 'gallery-items-wrap', 'data-gallery-items', wp_json_encode( $this->render_gallery_items(), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE ) );
         }
         $this->add_render_attribute('gallery-items-wrap', 'data-init-show', esc_attr($settings['eael_fg_items_to_show']));
         ?>
