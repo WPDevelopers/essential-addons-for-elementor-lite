@@ -48,7 +48,8 @@
             <fields-in-item items_of="eael_data_table_content_rows">
                 <field type="Data Table: Cell Text" editor_type="AREA">eael_data_table_content_row_title</field>
                 <field type="Data Table: Cell Content" editor_type="VISUAL">eael_data_table_content_row_content</field>
-                <field type="Data Table: Link" editor_type="LINE" key_of="eael_data_table_content_row_title_link">url</field>
+                <field type="Data Table: Link" editor_type="LINE" key_of="eael_data_table_content_row_title_link">url
+                </field>
             </fields-in-item>
         </widget>
         <widget name="eael-dual-color-header">
@@ -60,6 +61,121 @@
                 <field type="Dual Color Heading: Title ( Last Part )" editor_type="LINE">eael_dch_last_title</field>
                 <field type="Dual Color Heading: Sub Text" editor_type="VISUAL">eael_dch_subtext</field>
             </fields>
+        </widget>
+        <widget name="eael-fancy-text">
+            <conditions>
+                <condition key="widgetType">eael-fancy-text</condition>
+            </conditions>
+            <fields>
+                <field type="Fancy Text: Prefix Text" editor_type="LINE">eael_fancy_text_prefix</field>
+                <field type="Fancy Text: Suffix Text" editor_type="LINE">eael_fancy_text_suffix</field>
+            </fields>
+            <fields-in-item items_of="eael_fancy_text_strings">
+                <field type="Fancy Text: String" editor_type="LINE">eael_fancy_text_strings_text_field</field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-filterable-gallery">
+            <conditions>
+                <condition key="widgetType">eael-filterable-gallery</condition>
+            </conditions>
+            <fields>
+                <field type="Filterable Gallery: Label" editor_type="LINE">eael_fg_all_label_text</field>
+            </fields>
+            <fields-in-item items_of="eael_fg_controls">
+                <field type="Filterable Gallery: Control" editor_type="LINE">eael_fg_control</field>
+                <field type="Filterable Gallery: Load More" editor_type="LINE">load_more_text</field>
+                <field type="Filterable Gallery: No More Text" editor_type="LINE">nomore_items_text</field>
+            </fields-in-item>
+            <fields-in-item items_of="eael_fg_gallery_items">
+                <field type="Filterable Gallery: Control Name" editor_type="LINE">eael_fg_gallery_control_name</field>
+                <field type="Filterable Gallery: Item Name" editor_type="LINE">eael_fg_gallery_item_name</field>
+                <field type="Filterable Gallery: Item Price" editor_type="LINE">fg_item_price</field>
+                <field type="Filterable Gallery: Item Rating" editor_type="LINE">fg_item_ratings</field>
+                <field type="Filterable Gallery: Item Category" editor_type="LINE">fg_item_cat</field>
+                <field type="Filterable Gallery: Item Content" editor_type="VISUAL">eael_fg_gallery_item_content</field>
+                <field type="Filterable Gallery: Item Link" key_of="eael_fg_gallery_img_link" editor_type="LINE">url
+                </field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-image-accordion">
+            <conditions>
+                <condition key="widgetType">eael-image-accordion</condition>
+            </conditions>
+            <fields-in-item items_of="eael_img_accordions">
+                <field type="Image Accordion: Title" editor_type="LINE">eael_accordion_tittle</field>
+                <field type="Image Accordion: Content" editor_type="VISUAL">eael_accordion_content</field>
+                <field type="Image Accordion: Link" key_of="eael_accordion_title_link" editor_type="LINE">url</field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-flip-box">
+            <conditions>
+                <condition key="widgetType">eael-flip-box</condition>
+            </conditions>
+            <fields>
+                <field type="Flip Box: Front Title" editor_type="LINE">eael_flipbox_front_title</field>
+                <field type="Flip Box: Front Content" editor_type="VISUAL">eael_flipbox_front_text</field>
+                <field type="Flip Box: Back Title" editor_type="LINE">eael_flipbox_back_title</field>
+                <field type="Flip Box: Back Content" editor_type="LINE">eael_flipbox_back_text</field>
+                <field type="Flip Box: Button Text" editor_type="VISUAL">flipbox_button_text</field>
+                <field type="Flip Box: Button Link" key_of="flipbox_link" editor_type="LINE">url</field>
+            </fields>
+        </widget>
+        <widget name="eael-info-box">
+            <conditions>
+                <condition key="widgetType">eael-info-box</condition>
+            </conditions>
+            <fields>
+                <field type="Info Box: Title" editor_type="LINE">eael_infobox_title</field>
+                <field type="Flip Box: Content" editor_type="VISUAL">eael_infobox_text</field>
+                <field type="Flip Box: Button Text" editor_type="LINE">infobox_button_text</field>
+                <field type="Flip Box: Link" key_of="infobox_button_link_url"  editor_type="LINE">url</field>
+            </fields>
+        </widget>
+        <widget name="eael-info-box">
+            <conditions>
+                <condition key="widgetType">eael-info-box</condition>
+            </conditions>
+            <fields>
+                <field type="Info Box: Title" editor_type="LINE">eael_infobox_title</field>
+                <field type="Info Box: Content" editor_type="VISUAL">eael_infobox_text</field>
+                <field type="Info Box: Button Text" editor_type="LINE">infobox_button_text</field>
+                <field type="Info Box: Link" key_of="infobox_button_link_url"  editor_type="LINE">url</field>
+            </fields>
+        </widget>
+        <widget name="eael-post-grid">
+            <conditions>
+                <condition key="widgetType">eael-post-grid</condition>
+            </conditions>
+            <fields>
+                <field type="Post Grid: Load More" editor_type="LINE">show_load_more_text</field>
+                <field type="Post Grid: Button Text" editor_type="LINE">read_more_button_text</field>
+            </fields>
+        </widget>
+        <widget name="eael-post-timeline">
+            <conditions>
+                <condition key="widgetType">eael-post-timeline</condition>
+            </conditions>
+            <fields>
+                <field type="Post Timeline: Load More" editor_type="LINE">show_load_more_text</field>
+            </fields>
+        </widget>
+        <widget name="eael-pricing-table">
+            <conditions>
+                <condition key="widgetType">eael-pricing-table</condition>
+            </conditions>
+            <fields>
+                <field type="Pricing Table: Title" editor_type="LINE">eael_pricing_table_title</field>
+                <field type="Pricing Table: Sub Title" editor_type="LINE">eael_pricing_table_sub_title</field>
+                <field type="Pricing Table: Price" editor_type="LINE">eael_pricing_table_price</field>
+                <field type="Pricing Table: Price Button Text" editor_type="LINE">eael_pricing_table_btn</field>
+                <field type="Pricing Table: Price Button Link" key_of="eael_pricing_table_btn_link" editor_type="LINE">url</field>
+                <field type="Pricing Table: Price Period" editor_type="LINE">eael_pricing_table_price_period</field>
+                <field type="Pricing Table: Price Tag Text" editor_type="LINE">eael_pricing_table_featured_tag_text</field>
+            </fields>
+            <fields-in-item items_of="eael_pricing_table_items">
+                <field type="Pricing Table: Feature" editor_type="LINE">eael_pricing_table_item</field>
+                <field type="Pricing Table: Feature Tooltip" editor_type="LINE">eael_pricing_item_tooltip_content</field>
+            </fields-in-item>
         </widget>
     </elementor-widgets>
 </wpml-config>
