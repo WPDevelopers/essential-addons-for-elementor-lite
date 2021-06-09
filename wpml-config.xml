@@ -126,17 +126,6 @@
             </conditions>
             <fields>
                 <field type="Info Box: Title" editor_type="LINE">eael_infobox_title</field>
-                <field type="Flip Box: Content" editor_type="VISUAL">eael_infobox_text</field>
-                <field type="Flip Box: Button Text" editor_type="LINE">infobox_button_text</field>
-                <field type="Flip Box: Link" key_of="infobox_button_link_url" editor_type="LINE">url</field>
-            </fields>
-        </widget>
-        <widget name="eael-info-box">
-            <conditions>
-                <condition key="widgetType">eael-info-box</condition>
-            </conditions>
-            <fields>
-                <field type="Info Box: Title" editor_type="LINE">eael_infobox_title</field>
                 <field type="Info Box: Content" editor_type="VISUAL">eael_infobox_text</field>
                 <field type="Info Box: Button Text" editor_type="LINE">infobox_button_text</field>
                 <field type="Info Box: Link" key_of="infobox_button_link_url" editor_type="LINE">url</field>
@@ -314,6 +303,85 @@
                 <field type="Fluent Form: Title" editor_type="LINE">form_title_custom</field>
                 <field type="Fluent Form: Description" editor_type="AREA">form_description_custom</field>
             </fields>
+        </widget>
+        <widget name="eael-betterdocs-category-box">
+            <conditions>
+                <condition key="widgetType">eael-betterdocs-category-box</condition>
+            </conditions>
+            <fields>
+                <field type="BetterDocs Category Box: Count Prefix" editor_type="LINE">count_prefix</field>
+                <field type="BetterDocs Category Box: Count Suffix" editor_type="LINE">count_suffix</field>
+            </fields>
+        </widget>
+        <widget name="eael-betterdocs-category-grid">
+            <conditions>
+                <condition key="widgetType">eael-betterdocs-category-grid</condition>
+            </conditions>
+            <fields>
+                <field type="BetterDocs Category Grid: Button Text" editor_type="LINE">button_text</field>
+            </fields>
+        </widget>
+        <widget name="eael-content-ticker">
+            <conditions>
+                <condition key="widgetType">eael-content-ticker</condition>
+            </conditions>
+            <fields>
+                <field type="Content Ticker: Tag Text" editor_type="LINE">eael_ticker_tag_text</field>
+            </fields>
+        </widget>
+        <widget name="eael-countdown">
+            <conditions>
+                <condition key="widgetType">eael-countdown</condition>
+            </conditions>
+            <fields>
+                <field type="Countdown: Days Text" editor_type="LINE">eael_countdown_days_label</field>
+                <field type="Countdown: Hours Text" editor_type="LINE">eael_countdown_hours_label</field>
+                <field type="Countdown: Minute Text" editor_type="LINE">eael_countdown_minutes_label</field>
+                <field type="Countdown: Seconds Text" editor_type="LINE">eael_countdown_seconds_label</field>
+            </fields>
+        </widget>
+        <widget name="eael-login-register">
+            <conditions>
+                <condition key="widgetType">eael-login-register</condition>
+            </conditions>
+            <fields>
+                <field type="Login | Register Form: Lost Password Text" editor_type="LINE">lost_password_text</field>
+                <field type="Login | Register Form: Lost Password Link" key_of="lost_password_url" editor_type="LINE">url</field>
+                <field type="Login | Register Form: Remember Text" editor_type="LINE">remember_text</field>
+                <field type="Login | Register Form: Login Form Title" editor_type="LINE">login_form_title</field>
+                <field type="Login | Register Form: Login Form Subtitle" editor_type="AREA">login_form_subtitle</field>
+                <field type="Login | Register Form: Register Form Title" editor_type="LINE">register_form_title</field>
+                <field type="Login | Register Form: Register Form Subtitle" editor_type="AREA">register_form_subtitle</field>
+                <field type="Login | Register Form: Lost Password Text" editor_type="AREA">login_button_text</field>
+                <field type="Login | Register Form: Login Button Text" editor_type="AREA">google_login_text</field>
+                <field type="Login | Register Form: FB Login Text" editor_type="LINE">fb_login_text</field>
+                <field type="Login | Register Form: Lost Password Text" editor_type="AREA">separator_text</field>
+                <field type="Login | Register Form: Error Email Text" editor_type="LINE">err_email</field>
+                <field type="Login | Register Form: Error Email Missing Text" editor_type="LINE">err_email_missing</field>
+                <field type="Login | Register Form: Error Email Used Text" editor_type="LINE">err_email_used</field>
+                <field type="Login | Register Form: Error Username Text" editor_type="LINE">err_username</field>
+                <field type="Login | Register Form: Error Username Used Text" editor_type="LINE">err_username_used</field>
+                <field type="Login | Register Form: Error Password Text" editor_type="LINE">err_pass</field>
+                <field type="Login | Register Form: Error Conf Password Text" editor_type="LINE">err_conf_pass</field>
+                <field type="Login | Register Form: Error Loggedin Text" editor_type="LINE">err_loggedin</field>
+                <field type="Login | Register Form: Error Recaptcha Text" editor_type="LINE">err_recaptcha</field>
+                <field type="Login | Register Form: Error tc" editor_type="LINE">err_tc</field>
+                <field type="Login | Register Form: Error Unknown Text" editor_type="LINE">err_unknown</field>
+                <field type="Login | Register Form: Success Login Text" editor_type="LINE">success_login</field>
+                <field type="Login | Register Form: Success RegisterText" editor_type="LINE">success_register</field>
+                <field type="Login | Register Form: Login User Label Text" editor_type="LINE">login_user_label</field>
+                <field type="Login | Register Form: Login Password Label Text" editor_type="LINE">login_password_label</field>
+                <field type="Login | Register Form: Login User Placeholder Text" editor_type="LINE">login_user_placeholder</field>
+                <field type="Login | Register Form: Login Password Placeholder Text" editor_type="LINE">login_password_placeholder</field>
+                <field type="Login | Register Form: Login Button Text" editor_type="LINE">login_button_text</field>
+                <field type="Login | Register Form: Register Button Text" editor_type="LINE">reg_button_text</field>
+                <field type="Login | Register Form: Redirect URL" key_of="redirect_url" editor_type="LINE">url</field>
+            </fields>
+            <fields-in-item items_of="register_fields">
+                <field type="Login | Register Form: Field Label" editor_type="LINE">field_label</field>
+                <field type="Login | Register Form: Placeholder" editor_type="AREA">placeholder</field>
+                <field type="Login | Register Form: Required Note" editor_type="AREA">required_note</field>
+            </fields-in-item>
         </widget>
     </elementor-widgets>
 </wpml-config>
