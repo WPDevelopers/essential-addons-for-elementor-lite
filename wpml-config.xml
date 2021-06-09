@@ -128,7 +128,7 @@
                 <field type="Info Box: Title" editor_type="LINE">eael_infobox_title</field>
                 <field type="Flip Box: Content" editor_type="VISUAL">eael_infobox_text</field>
                 <field type="Flip Box: Button Text" editor_type="LINE">infobox_button_text</field>
-                <field type="Flip Box: Link" key_of="infobox_button_link_url"  editor_type="LINE">url</field>
+                <field type="Flip Box: Link" key_of="infobox_button_link_url" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-info-box">
@@ -139,7 +139,7 @@
                 <field type="Info Box: Title" editor_type="LINE">eael_infobox_title</field>
                 <field type="Info Box: Content" editor_type="VISUAL">eael_infobox_text</field>
                 <field type="Info Box: Button Text" editor_type="LINE">infobox_button_text</field>
-                <field type="Info Box: Link" key_of="infobox_button_link_url"  editor_type="LINE">url</field>
+                <field type="Info Box: Link" key_of="infobox_button_link_url" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-post-grid">
@@ -168,13 +168,17 @@
                 <field type="Pricing Table: Sub Title" editor_type="LINE">eael_pricing_table_sub_title</field>
                 <field type="Pricing Table: Price" editor_type="LINE">eael_pricing_table_price</field>
                 <field type="Pricing Table: Price Button Text" editor_type="LINE">eael_pricing_table_btn</field>
-                <field type="Pricing Table: Price Button Link" key_of="eael_pricing_table_btn_link" editor_type="LINE">url</field>
+                <field type="Pricing Table: Price Button Link" key_of="eael_pricing_table_btn_link" editor_type="LINE">
+                    url
+                </field>
                 <field type="Pricing Table: Price Period" editor_type="LINE">eael_pricing_table_price_period</field>
-                <field type="Pricing Table: Price Tag Text" editor_type="LINE">eael_pricing_table_featured_tag_text</field>
+                <field type="Pricing Table: Price Tag Text" editor_type="LINE">eael_pricing_table_featured_tag_text
+                </field>
             </fields>
             <fields-in-item items_of="eael_pricing_table_items">
                 <field type="Pricing Table: Feature" editor_type="LINE">eael_pricing_table_item</field>
-                <field type="Pricing Table: Feature Tooltip" editor_type="LINE">eael_pricing_item_tooltip_content</field>
+                <field type="Pricing Table: Feature Tooltip" editor_type="LINE">eael_pricing_item_tooltip_content
+                </field>
             </fields-in-item>
         </widget>
         <widget name="eael-progress-bar">
@@ -216,6 +220,99 @@
                 <field type="Tooltip: Link" key_of="eael_tooltip_link" editor_type="LINE">url</field>
                 <field type="Tooltip: Description" editor_type="VISUAL">eael_tooltip_content</field>
                 <field type="Tooltip: Hover Description" editor_type="VISUAL">eael_tooltip_hover_content</field>
+            </fields>
+        </widget>
+        <widget name="eael-feature-list">
+            <conditions>
+                <condition key="widgetType">eael-feature-list</condition>
+            </conditions>
+            <fields-in-item items_of="eael_team_member_social_profile_links">
+                <field type="Feature List: Title" editor_type="LINE">eael_feature_list_title</field>
+                <field type="Feature List: Content" editor_type="AREA">eael_feature_list_content</field>
+                <field type="Feature List: Link" key_of="eael_feature_list_link" editor_type="LINE">url</field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-caldera-form">
+            <conditions>
+                <condition key="widgetType">eael-caldera-form</condition>
+            </conditions>
+            <fields>
+                <field type="Caldera Form: Title" editor_type="LINE">form_title_custom</field>
+                <field type="Caldera Form: Description" editor_type="AREA">form_description_custom</field>
+            </fields>
+        </widget>
+        <widget name="eael-contact-form-7">
+            <conditions>
+                <condition key="widgetType">eael-contact-form-7</condition>
+            </conditions>
+            <fields>
+                <field type="Contact Form-7: Title" editor_type="LINE">form_title_custom</field>
+                <field type="Contact Form-7: Description" editor_type="AREA">form_description_custom</field>
+            </fields>
+        </widget>
+        <widget name="eael-gravity-form">
+            <conditions>
+                <condition key="widgetType">eael-gravity-form</condition>
+            </conditions>
+            <fields>
+                <field type="Gravity Form: Title" editor_type="LINE">form_title_custom</field>
+                <field type="Gravity Form: Description" editor_type="AREA">form_description_custom</field>
+            </fields>
+        </widget>
+        <widget name="eael-wpforms">
+            <conditions>
+                <condition key="widgetType">eael-wpforms</condition>
+            </conditions>
+            <fields>
+                <field type="WPForms: Title" editor_type="LINE">form_title_custom</field>
+                <field type="WPForms: Description" editor_type="AREA">form_description_custom</field>
+            </fields>
+        </widget>
+        <widget name="eael-ninja">
+            <conditions>
+                <condition key="widgetType">eael-ninja</condition>
+            </conditions>
+            <fields>
+                <field type="NinjaForm: Title" editor_type="LINE">form_title_custom</field>
+                <field type="NinjaForm: Description" editor_type="AREA">form_description_custom</field>
+            </fields>
+        </widget>
+        <widget name="eael-event-calendar">
+            <conditions>
+                <condition key="widgetType">eael-event-calendar</condition>
+            </conditions>
+            <fields-in-item items_of="eael_event_items">
+                <field type="Event: Title" editor_type="LINE">eael_event_title</field>
+                <field type="Event: Description" editor_type="AREA">eael_event_description</field>
+                <field type="Event : Link" key_of="eael_event_link" editor_type="LINE">url</field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-advanced-data-table">
+            <conditions>
+                <condition key="widgetType">eael-advanced-data-table</condition>
+            </conditions>
+            <fields>
+                <field type="Adv Data Table: Search Placeholder" editor_type="LINE">
+                    ea_adv_data_table_search_placeholder
+                </field>
+            </fields>
+        </widget>
+        <widget name="eael-formstack">
+            <conditions>
+                <condition key="widgetType">eael-formstack</condition>
+            </conditions>
+            <fields>
+                <field type="Formstack: Title" editor_type="LINE">eael_formstack_form_title_custom</field>
+                <field type="Formstack: Description" editor_type="AREA">eael_formstack_form_description_custom</field>
+            </fields>
+        </widget>
+        <widget name="eael-fluentform">
+            <conditions>
+                <condition key="widgetType">eael-fluentform</condition>
+            </conditions>
+            <fields>
+                <field type="Fluent Form: Title" editor_type="LINE">form_title_custom</field>
+                <field type="Fluent Form: Description" editor_type="AREA">form_description_custom</field>
             </fields>
         </widget>
     </elementor-widgets>
