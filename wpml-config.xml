@@ -34,8 +34,12 @@
             </conditions>
             <fields>
                 <field type="Call to Action: Title" editor_type="LINE">eael_cta_title</field>
+                <field type="Call to Action: Sub Title" editor_type="LINE">eael_cta_sub_title</field>
                 <field type="Call to Action: Content" editor_type="VISUAL">eael_cta_content</field>
                 <field type="Call to Action: Button Text" editor_type="LINE">eael_cta_btn_text</field>
+                <field type="Call to Action: Button Link" key_of="eael_cta_btn_link" editor_type="LINE">url</field>
+                <field type="Call to Action: Button Text Two" editor_type="LINE">eael_cta_secondary_btn_text</field>
+                <field type="Call to Action: Secondary Button Link" key_of="eael_cta_secondary_btn_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-data-table">
