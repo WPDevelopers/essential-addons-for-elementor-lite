@@ -133,7 +133,9 @@
                 <field type="Info Box: Title" editor_type="LINE">eael_infobox_title</field>
                 <field type="Info Box: Content" editor_type="VISUAL">eael_infobox_text</field>
                 <field type="Info Box: Button Text" editor_type="LINE">infobox_button_text</field>
-                <field type="Info Box: Link" key_of="infobox_button_link_url" editor_type="LINE">url</field>
+                <field type="Info Box: Sub Title Text" editor_type="LINE">eael_infobox_number</field>
+                <field type="Info Box: Button Link" key_of="infobox_button_link_url" editor_type="LINE">url</field>
+                <field type="Info Box: Link" key_of="eael_show_infobox_clickable_link" editor_type="LINE">url</field>
             </fields>
         </widget>
         <widget name="eael-post-grid">
