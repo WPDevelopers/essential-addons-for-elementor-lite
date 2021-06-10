@@ -163,6 +163,8 @@
                 <field type="Pricing Table: Title" editor_type="LINE">eael_pricing_table_title</field>
                 <field type="Pricing Table: Sub Title" editor_type="LINE">eael_pricing_table_sub_title</field>
                 <field type="Pricing Table: Price" editor_type="LINE">eael_pricing_table_price</field>
+                <field type="Pricing Table: Sell Price" editor_type="LINE">eael_pricing_table_onsale_price</field>
+                <field type="Pricing Table: Price Currency" editor_type="LINE">eael_pricing_table_price_cur</field>
                 <field type="Pricing Table: Price Button Text" editor_type="LINE">eael_pricing_table_btn</field>
                 <field type="Pricing Table: Price Button Link" key_of="eael_pricing_table_btn_link" editor_type="LINE">
                     url
