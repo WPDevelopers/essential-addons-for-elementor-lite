@@ -84,11 +84,12 @@
             </conditions>
             <fields>
                 <field type="Filterable Gallery: Label" editor_type="LINE">eael_fg_all_label_text</field>
-            </fields>
-            <fields-in-item items_of="eael_fg_controls">
-                <field type="Filterable Gallery: Control" editor_type="LINE">eael_fg_control</field>
                 <field type="Filterable Gallery: Load More" editor_type="LINE">load_more_text</field>
                 <field type="Filterable Gallery: No More Text" editor_type="LINE">nomore_items_text</field>
+            </fields>
+            <fields-in-item items_of="eael_fgFlipBox_controls">
+                <field type="Filterable Gallery: Control" editor_type="LINE">eael_fg_control</field>
+
             </fields-in-item>
             <fields-in-item items_of="eael_fg_gallery_items">
                 <field type="Filterable Gallery: Control Name" editor_type="LINE">eael_fg_gallery_control_name</field>
