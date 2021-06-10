@@ -91,7 +91,7 @@ class Facebook_Feed extends Widget_Base
                 'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default' => '',
-                'description' => __('<a href="https://findmyfbid.com/" class="eael-btn" target="_blank">Find Your Page ID</a>', 'essential-addons-for-elementor-lite'),
+                'description' => __('<a href="https://findidfb.com/" class="eael-btn" target="_blank">Find Your Page ID</a>', 'essential-addons-for-elementor-lite'),
             ]
         );
 
