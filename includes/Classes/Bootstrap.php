@@ -28,7 +28,6 @@ class Bootstrap
     use Enqueue;
     use Admin;
     use Elements;
-    use Eael_WPML;
     use Login_Registration;
     use Woo_Product_Comparable;
     use Controls;
