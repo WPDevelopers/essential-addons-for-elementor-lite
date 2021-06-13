@@ -384,7 +384,9 @@
                 <field type="Login | Register Form: Login Password Placeholder Text" editor_type="LINE">login_password_placeholder</field>
                 <field type="Login | Register Form: Login Button Text" editor_type="LINE">login_button_text</field>
                 <field type="Login | Register Form: Register Button Text" editor_type="LINE">reg_button_text</field>
+                <field type="Login | Register Form: Register Link Text" editor_type="AREA">registration_link_text</field>
                 <field type="Login | Register Form: Redirect URL" key_of="redirect_url" editor_type="LINE">url</field>
+                <field type="Login | Register Form: Register Link" key_of="custom_register_url" editor_type="LINE">url</field>
             </fields>
             <fields-in-item items_of="register_fields">
                 <field type="Login | Register Form: Field Label" editor_type="LINE">field_label</field>
