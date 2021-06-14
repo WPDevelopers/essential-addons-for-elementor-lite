@@ -151,6 +151,10 @@ class Product_Grid extends Widget_Base
             }
         }
 
+	    if( 'Read more' === $default ) {
+		    return esc_html__( 'View More', 'essential-addons-for-elementor-lite' );
+	    }
+
         return $default;
     }
 
