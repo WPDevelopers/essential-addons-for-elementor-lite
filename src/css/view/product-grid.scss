@@ -86,6 +86,7 @@
                 li.product {
                     position: relative;
                     float: left;
+                    display: block;
                     overflow: hidden;
                     text-align: center;
                     padding: 0;
@@ -199,6 +200,7 @@
                     }
 
                     // add to cart button
+                    .button,
                     .button.add_to_cart_button {
                         display: block;
                         font-size: 14px;
@@ -226,6 +228,10 @@
                         &:focus {
                             outline: none;
                         }
+                    }
+
+                    .button::before {
+                        content: none;
                     }
 
                     .eael-wc-compare {
