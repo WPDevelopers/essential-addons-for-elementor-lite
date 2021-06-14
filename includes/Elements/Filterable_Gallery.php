@@ -3136,6 +3136,8 @@ class Filterable_Gallery extends Widget_Base
                         $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer ' . $settings['eael_fg_grid_hover_style'] . '">
                             ' . $this->render_fg_buttons($settings, $item) . '
                         </div>';
+                    } elseif ( $settings['eael_fg_show_popup'] === 'media' && $settings['eael_fg_caption_style'] === 'card' ) {
+	                    $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer ' . $settings['eael_fg_grid_hover_style'] . '"></div>';
                     }
                 }
 
