@@ -30,6 +30,8 @@ if ( has_post_thumbnail() ) {
 
 $title_tag = isset( $settings['eael_product_grid_title_html_tag'] ) ? Helper::eael_validate_html_tag($settings['eael_product_grid_title_html_tag'])  : 'h2';
 $should_print_compare_btn = isset( $settings['show_compare'] ) && 'yes' === $settings['show_compare'];
+$should_print_wishlist_btn = isset( $settings['eael_product_grid_wishlist'] ) && 'yes' === $settings['eael_product_grid_wishlist'];
+
 // Improvement
 $grid_style_preset = isset($settings['eael_product_grid_style_preset']) ? $settings['eael_product_grid_style_preset'] : '';
 $list_style_preset = isset($settings['eael_product_list_style_preset']) ? $settings['eael_product_list_style_preset'] : '';
@@ -71,6 +73,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
             Product_Grid::print_compare_button( $product->get_id() );
         }
         ?>
+	    <?php
+	    if ( $should_print_wishlist_btn ) {
+		    echo '<div class="add-to-whishlist">';
+		    echo do_shortcode('[yith_wcwl_add_to_wishlist]');
+		    echo '</div>';
+	    }
+	    ?>
     </li>
     <?php
 } else if ( $grid_style_preset == 'eael-product-overlay' ) {
@@ -86,6 +95,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                     Product_Grid::print_compare_button( $product->get_id(), 'icon' );
                 }
                 ?>
+	            <?php
+	            if ( $should_print_wishlist_btn ) {
+		            echo '<div class="add-to-whishlist">';
+		            echo do_shortcode('[yith_wcwl_add_to_wishlist]');
+		            echo '</div>';
+	            }
+	            ?>
             </div>
         </div>
         <?php
@@ -135,10 +151,15 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                     echo '</li>';
                                 }
                                 ?>
-                                <li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart();
-                                    ?></li>
+	                            <?php
+	                            if ( $should_print_wishlist_btn ) {
+		                            echo '<li class="add-to-whishlist">';
+		                            echo do_shortcode('[yith_wcwl_add_to_wishlist]');
+		                            echo '</li>';
+	                            }
+	                            ?>
                                 <li class="view-details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
-
+                                <li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart(); ?></li>
                             </ul>
                         <?php } elseif ($grid_style_preset == 'eael-product-preset-7') { ?>
                             <ul class="icons-wrap block-box-style">
@@ -151,6 +172,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                     echo '</li>';
                                 }
                                 ?>
+	                            <?php
+	                            if ( $should_print_wishlist_btn ) {
+		                            echo '<li class="add-to-whishlist">';
+		                            echo do_shortcode('[yith_wcwl_add_to_wishlist]');
+		                            echo '</li>';
+	                            }
+	                            ?>
                                 <?php if( $should_print_quick_view ){?>
                                     <li class="eael-product-quick-view">
                                         <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
@@ -159,6 +187,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                         </a>
                                     </li>
                                 <?php } ?>
+
                                 <li class="view-details"><?php echo '<a href="' . $product->get_permalink
                                         () . '"><i class="fas fa-link"></i></a>'; ?></li>
                             </ul>
@@ -173,6 +202,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                     echo '</li>';
                                 }
                                 ?>
+	                            <?php
+	                            if ( $should_print_wishlist_btn ) {
+		                            echo '<li class="add-to-whishlist">';
+		                            echo do_shortcode('[yith_wcwl_add_to_wishlist]');
+		                            echo '</li>';
+	                            }
+	                            ?>
                                 <?php if( $should_print_quick_view ){?>
                                     <li class="eael-product-quick-view">
                                         <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
@@ -180,6 +216,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </li>
+
                                 <?php } ?>
                                 <li class="view-details" title="Details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
                             </ul>
@@ -235,6 +272,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                 echo '</li>';
                             }
                             ?>
+	                        <?php
+	                        if ( $should_print_wishlist_btn ) {
+		                        echo '<li class="add-to-whishlist">';
+		                        echo do_shortcode('[yith_wcwl_add_to_wishlist]');
+		                        echo '</li>';
+	                        }
+	                        ?>
                             <?php if( $should_print_quick_view ){?>
                                 <li class="eael-product-quick-view">
                                     <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
@@ -385,6 +429,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                         <li class="add-to-cart"><?php
                             woocommerce_template_loop_add_to_cart(); ?></li>
 
+	                    <?php
+	                    if ( $should_print_wishlist_btn ) {
+		                    echo '<li class="add-to-whishlist">';
+		                    echo do_shortcode('[yith_wcwl_add_to_wishlist]');
+		                    echo '</li>';
+	                    }
+	                    ?>
                         <?php
                         if( $should_print_quick_view ){?>
                             <li class="eael-product-quick-view">
