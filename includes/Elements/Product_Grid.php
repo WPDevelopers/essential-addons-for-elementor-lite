@@ -545,6 +545,26 @@ class Product_Grid extends Widget_Base
             'type' => Controls_Manager::SWITCHER,
         ]);
 
+	    if ( ! function_exists( 'YITH_WCWL' ) ) {
+
+		    $this->add_control( 'eael_wishlist_warning_text', [
+			    'type'            => Controls_Manager::RAW_HTML,
+			    'raw'             => __( '<strong>YITH WOOCOMMERCE WISHLIST</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=yith-woocommerce-wishlist&tab=search&type=term" target="_blank">YITH WOOCOMMERCE WISHLIST</a> first.', 'essential-addons-for-elementor-lite' ),
+			    'content_classes' => 'eael-warning',
+		    ] );
+
+	    } else {
+		    $this->add_control(
+			    'eael_product_grid_wishlist',
+			    [
+				    'label' => esc_html__('Show Wishlist?', 'essential-addons-for-elementor-lite'),
+				    'type' => Controls_Manager::SWITCHER,
+				    'return_value' => 'yes',
+				    'default' => 'no',
+			    ]
+		    );
+	    }
+
         $this->end_controls_section();
     }
 

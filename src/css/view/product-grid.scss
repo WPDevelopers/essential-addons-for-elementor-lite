@@ -243,6 +243,67 @@
                         color: #333;
                         background-color: transparent;
                     }
+
+                    .add-to-whishlist {
+                        width: 90%;
+                        margin: 0 auto;
+
+                        .yith-wcwl-add-to-wishlist {
+                            margin: 0;
+                            padding: 0;
+                            color: #fff;
+                            background-color: #333;
+
+                            &.exists {
+                                span {
+                                    display: none;
+                                }
+
+                                a {
+                                    font-size: 0;
+
+                                    i {
+                                        display: none;
+                                    }
+
+                                    &:after {
+                                        content: '\f004';
+                                        font-weight: 900;
+                                        font-family: 'Font Awesome 5 Free';
+                                        font-size: 18px;
+                                        text-rendering: auto;
+                                        -webkit-font-smoothing: antialiased;
+                                        vertical-align: middle;
+                                        margin: 0;
+                                        padding: 0;
+                                    }
+                                }
+                            }
+                        }
+
+                        a {
+                            font-size: 0;
+                            vertical-align: middle;
+                            display: inline-block;
+                            color: inherit;
+
+                            i {
+                                display: none;
+                            }
+
+                            &:after {
+                                content: '\f004';
+                                //font-weight: 900;
+                                font-family: 'Font Awesome 5 Free';
+                                font-size: 18px;
+                                text-rendering: auto;
+                                -webkit-font-smoothing: antialiased;
+                                vertical-align: middle;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -328,11 +389,14 @@
                             right: 0;
                             text-align: center;
                             transform: translateY(-50%);
+                            display: flex;
+                            justify-content: center;
                         }
                         .eael-wc-compare,
                         .product-link,
                         .add_to_cart_button,
-                        .added_to_cart {
+                        .added_to_cart,
+                        .add-to-whishlist a {
                             display: inline-flex;
                             justify-content: center;
                             align-items: center;
@@ -422,6 +486,59 @@
                                 vertical-align: middle;
                                 margin: 0;
                                 padding: 0;
+                            }
+                        }
+
+                        .add-to-whishlist {
+                            .yith-wcwl-add-to-wishlist {
+                                margin: 0;
+                                padding: 0;
+
+                                &.exists {
+                                    span {
+                                        display: none;
+                                    }
+
+                                    a {
+                                        font-size: 0;
+
+                                        i {
+                                            display: none;
+                                        }
+
+                                        &:after {
+                                            content: '\f004';
+                                            font-weight: 900;
+                                            font-family: 'Font Awesome 5 Free';
+                                            font-size: 18px;
+                                            text-rendering: auto;
+                                            -webkit-font-smoothing: antialiased;
+                                            vertical-align: middle;
+                                            margin: 0;
+                                            padding: 0;
+                                        }
+                                    }
+                                }
+                            }
+
+                            a {
+                                font-size: 0;
+
+                                i {
+                                    display: none;
+                                }
+
+                                &:after {
+                                    content: '\f004';
+                                    //font-weight: 900;
+                                    font-family: 'Font Awesome 5 Free';
+                                    font-size: 18px;
+                                    text-rendering: auto;
+                                    -webkit-font-smoothing: antialiased;
+                                    vertical-align: middle;
+                                    margin: 0;
+                                    padding: 0;
+                                }
                             }
                         }
                     }
@@ -1543,6 +1660,39 @@
                     li {
                         flex: 1;
 
+                        &.add-to-whishlist {
+                            .yith-wcwl-add-to-wishlist {
+                                margin: 0;
+                                padding: 0;
+
+                                &.exists {
+                                    span {
+                                        display: none;
+                                    }
+
+                                    a {
+                                        font-size: 0;
+
+                                        i {
+                                            display: none;
+                                        }
+
+                                        &:after {
+                                            content: '\f004';
+                                            font-weight: 900;
+                                            font-family: 'Font Awesome 5 Free';
+                                            font-size: 18px;
+                                            text-rendering: auto;
+                                            -webkit-font-smoothing: antialiased;
+                                            vertical-align: middle;
+                                            margin: 0;
+                                            padding: 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
                         &:not(:last-child) {
                             border-right: 1px solid #fff;
                         }
@@ -1561,6 +1711,14 @@
                             color: #fff;
                             display: flex;
                             flex-direction: column;
+                            min-height: 42px;
+                            align-content: center;
+                            justify-content: center;
+
+                            &.added_to_cart,
+                            &.button.add_to_cart_button {
+                                padding: 0 !important;
+                            }
 
                             &:hover {
                                 background-color: transparent;
@@ -1569,6 +1727,26 @@
 
                             i {
                                 line-height: normal;
+                            }
+
+                            &.add_to_wishlist {
+                                font-size: 0;
+
+                                i {
+                                    display: none;
+                                }
+
+                                &:after {
+                                    content: '\f004';
+                                    //font-weight: 900;
+                                    font-family: 'Font Awesome 5 Free';
+                                    font-size: 18px;
+                                    text-rendering: auto;
+                                    -webkit-font-smoothing: antialiased;
+                                    vertical-align: middle;
+                                    margin: 0;
+                                    padding: 0;
+                                }
                             }
                         }
                     }
@@ -1583,6 +1761,39 @@
                     bottom: -100px;
 
                     li {
+
+                        &.add-to-whishlist {
+                            .yith-wcwl-add-to-wishlist {
+                                margin: 0;
+                                padding: 0;
+
+                                &.exists {
+                                    span {
+                                        display: none;
+                                    }
+
+                                    a {
+                                        font-size: 0;
+
+                                        i {
+                                            display: none;
+                                        }
+
+                                        &:after {
+                                            content: '\f004';
+                                            font-weight: 900;
+                                            font-family: 'Font Awesome 5 Free';
+                                            font-size: 18px;
+                                            text-rendering: auto;
+                                            -webkit-font-smoothing: antialiased;
+                                            vertical-align: middle;
+                                            margin: 0;
+                                            padding: 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
 
                         a {
                             position: relative;
@@ -1638,6 +1849,26 @@
                                     }
                                 }
                             }
+
+                            &.add_to_wishlist {
+                                font-size: 0;
+
+                                i {
+                                    display: none;
+                                }
+
+                                &:after {
+                                    content: '\f004';
+                                    //font-weight: 900;
+                                    font-family: 'Font Awesome 5 Free';
+                                    font-size: 18px;
+                                    text-rendering: auto;
+                                    -webkit-font-smoothing: antialiased;
+                                    vertical-align: middle;
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                            }
                         }
                     }
                 }
@@ -1654,6 +1885,39 @@
                     margin: 0 5%;
 
                     li {
+                        &.add-to-whishlist {
+                            .yith-wcwl-add-to-wishlist {
+                                margin: 0;
+                                padding: 0;
+
+                                &.exists {
+                                    span {
+                                        display: none;
+                                    }
+
+                                    a {
+                                        font-size: 0;
+
+                                        i {
+                                            display: none;
+                                        }
+
+                                        &:after {
+                                            content: '\f004';
+                                            font-weight: 900;
+                                            font-family: 'Font Awesome 5 Free';
+                                            font-size: 18px;
+                                            text-rendering: auto;
+                                            -webkit-font-smoothing: antialiased;
+                                            vertical-align: middle;
+                                            margin: 0;
+                                            padding: 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
                         a {
                             position: relative;
                             width: 42px;
@@ -1714,6 +1978,26 @@
                                 width: auto;
                                 height: auto;
                             }
+
+                            &.add_to_wishlist {
+                                font-size: 0;
+
+                                i {
+                                    display: none;
+                                }
+
+                                &:after {
+                                    content: '\f004';
+                                    //font-weight: 900;
+                                    font-family: 'Font Awesome 5 Free';
+                                    font-size: 18px;
+                                    text-rendering: auto;
+                                    -webkit-font-smoothing: antialiased;
+                                    vertical-align: middle;
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                            }
                         }
                     }
                 }
@@ -1729,6 +2013,38 @@
                     align-items: center;
 
                     li {
+                        &.add-to-whishlist {
+                            .yith-wcwl-add-to-wishlist {
+                                margin: 0;
+                                padding: 0;
+
+                                &.exists {
+                                    span {
+                                        display: none;
+                                    }
+
+                                    a {
+                                        font-size: 0;
+
+                                        i {
+                                            display: none;
+                                        }
+
+                                        &:after {
+                                            content: '\f004';
+                                            font-weight: 900;
+                                            font-family: 'Font Awesome 5 Free';
+                                            font-size: 18px;
+                                            text-rendering: auto;
+                                            -webkit-font-smoothing: antialiased;
+                                            vertical-align: middle;
+                                            margin: 0;
+                                            padding: 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
 
                         a {
                             position: relative;
@@ -1786,6 +2102,26 @@
 
                             i {
                                 //line-height: normal;
+                            }
+
+                            &.add_to_wishlist {
+                                font-size: 0;
+
+                                i {
+                                    display: none;
+                                }
+
+                                &:after {
+                                    content: '\f004';
+                                    //font-weight: 900;
+                                    font-family: 'Font Awesome 5 Free';
+                                    font-size: 18px;
+                                    text-rendering: auto;
+                                    -webkit-font-smoothing: antialiased;
+                                    vertical-align: middle;
+                                    margin: 0;
+                                    padding: 0;
+                                }
                             }
                         }
                     }
@@ -2036,15 +2372,78 @@
 
                 &.details-block-style {
                     li {
+                        &.add-to-whishlist {
+                            .yith-wcwl-add-to-wishlist {
+                                margin: 0;
+                                padding: 0;
+
+                                &.exists {
+                                    span {
+                                        display: none;
+                                    }
+
+                                    a {
+                                        font-size: 0;
+
+                                        i {
+                                            display: none;
+                                        }
+
+                                        &:after {
+                                            content: '\f004';
+                                            font-weight: 900;
+                                            font-family: 'Font Awesome 5 Free';
+                                            font-size: 18px;
+                                            text-rendering: auto;
+                                            -webkit-font-smoothing: antialiased;
+                                            vertical-align: middle;
+                                            margin: 0;
+                                            padding: 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
                         &.add-to-cart {
                             a {
                                 padding: 11px 15px !important;
+                                width: auto;
                             }
                         }
 
                         a {
                             margin: 2px;
                             padding: 10.5px 10px;
+                            width: 42px;
+                            height: 42px;
+                            display: flex;
+                            -webkit-box-pack: center;
+                            -ms-flex-pack: center;
+                            justify-content: center;
+                            -webkit-box-align: center;
+                            -ms-flex-align: center;
+                            align-items: center;
+
+                            &.add_to_wishlist {
+                                font-size: 0;
+
+                                i {
+                                    display: none;
+                                }
+
+                                &:after {
+                                    content: '\f004';
+                                    //font-weight: 900;
+                                    font-family: 'Font Awesome 5 Free';
+                                    font-size: 18px;
+                                    text-rendering: auto;
+                                    -webkit-font-smoothing: antialiased;
+                                    vertical-align: middle;
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                            }
                         }
                     }
                 }
