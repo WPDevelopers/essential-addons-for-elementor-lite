@@ -797,7 +797,14 @@ trait Controls
                         ],
                         'size_units' => ['px', 'em', '%'],
                         'selectors'  => [
-                            '{{WRAPPER}} .eael-entry-thumbnail' => 'height: {{SIZE}}{{UNIT}};',
+                            '{{WRAPPER}} .eael-entry-thumbnail,
+                            {{WRAPPER}} .post-block-layout-tiled .eael-post-block-grid.eael-post-tiled-preset-1 article:nth-child(1) .eael-entry-thumbnail,
+                            {{WRAPPER}} .post-block-layout-tiled .eael-post-block-grid.eael-post-tiled-preset-2 article:nth-child(1) .eael-entry-thumbnail,
+                            {{WRAPPER}} .post-block-layout-tiled .eael-post-block-grid.eael-post-tiled-preset-2 article:nth-child(2) .eael-entry-thumbnail,
+                            {{WRAPPER}} .post-block-layout-tiled .eael-post-block-grid.eael-post-tiled-preset-3 article:nth-child(2) .eael-entry-thumbnail,
+                            {{WRAPPER}} .post-block-layout-tiled .eael-post-block-grid.eael-post-tiled-preset-4.eael-post-tiled-col-4 article:nth-child(2) .eael-entry-thumbnail,
+                            {{WRAPPER}} .post-block-layout-tiled .eael-post-block-grid.eael-post-tiled-preset-4.eael-post-tiled-col-3 article:nth-child(2) .eael-entry-thumbnail,
+                            {{WRAPPER}} .post-block-layout-tiled .eael-post-block-grid.eael-post-tiled-preset-5 article:nth-child(1) .eael-entry-thumbnail' => 'height: {{SIZE}}{{UNIT}};',
                         ],
                         'condition' => [
                             'eael_show_image' => 'yes',
