@@ -12,11 +12,9 @@ var SimpleMenu = function ($scope, $) {
     var $horizontal = $('.eael-simple-menu', $scope).hasClass(
         'eael-simple-menu-horizontal'
     )
-
-    // console.log($indicator_class);
-
+    
     var $fullWidth = $('.eael-simple-menu--stretch');
-
+    
     if ($horizontal) {
         // insert indicator
         if($indicator_icon == 'svg') {
@@ -61,17 +59,15 @@ var SimpleMenu = function ($scope, $) {
             .after(
                 '<button class="eael-simple-menu-toggle"><span class="eicon-menu-bar"></span></button>'
             )
-
-
-
+        eael_menu_resize();
+        
         // responsive menu slide
         $('.eael-simple-menu-container', $scope).on(
             'click',
             '.eael-simple-menu-toggle',
             function (e) {
-                e.preventDefault()
+                e.preventDefault();
                 const $siblings = $(this).siblings('nav').children('.eael-simple-menu-horizontal');
-
                 $siblings.css('display') == 'none'
                     ? $siblings.slideDown(300)
                     : $siblings.slideUp(300)
@@ -80,46 +76,50 @@ var SimpleMenu = function ($scope, $) {
 
         // clear responsive props
         $(window).on('resize load', function () {
-            if (window.matchMedia('(max-width: 991px)').matches) {
-                $('.eael-simple-menu-horizontal', $scope).addClass(
-                    'eael-simple-menu-responsive'
-                )
-                $('.eael-simple-menu-toggle-text', $scope).text(
-                    $(
-                        '.eael-simple-menu-horizontal .current-menu-item a',
-                        $scope
-                    )
-                        .eq(0)
-                        .text()
-                )
-
-                if ($fullWidth) {
-                    const css = {}
-                    if(!$('.eael-simple-menu-horizontal', $scope).parent().hasClass('eael-nav-menu-wrapper')){
-                        $('.eael-simple-menu-horizontal', $scope).wrap('<nav class="eael-nav-menu-wrapper"></nav>');
-                    }
-                    const $navMenu = $(".eael-simple-menu-container nav",$scope);
-                    menu_size_reset($navMenu);
-
-
-                    if($fullWidth.length>0){
-                        css.width = parseFloat($('.elementor').width()) + 'px';
-                        css.left = -parseFloat($navMenu.offset().left) + 'px';
-                        css.position = 'absolute';
-                    }
-                    $navMenu.css(css);
-                }
-            } else {
-                $('.eael-simple-menu-horizontal', $scope).removeClass(
-                    'eael-simple-menu-responsive'
-                )
-                $(
-                    '.eael-simple-menu-horizontal, .eael-simple-menu-horizontal ul',
-                    $scope
-                ).css('display', '')
-                $(".eael-simple-menu-container nav",$scope).removeAttr( 'style' );;
-            }
+            eael_menu_resize();
         })
+    }
+    
+    function eael_menu_resize(){
+        if (window.matchMedia('(max-width: 991px)').matches) {
+            $('.eael-simple-menu-horizontal', $scope).addClass(
+                'eael-simple-menu-responsive'
+            )
+            $('.eael-simple-menu-toggle-text', $scope).text(
+                $(
+                    '.eael-simple-menu-horizontal .current-menu-item a',
+                    $scope
+                )
+                .eq(0)
+                .text()
+            )
+        
+            if ($fullWidth) {
+                const css = {}
+                if(!$('.eael-simple-menu-horizontal', $scope).parent().hasClass('eael-nav-menu-wrapper')){
+                    $('.eael-simple-menu-horizontal', $scope).wrap('<nav class="eael-nav-menu-wrapper"></nav>');
+                }
+                const $navMenu = $(".eael-simple-menu-container nav",$scope);
+                menu_size_reset($navMenu);
+            
+            
+                if($fullWidth.length>0){
+                    css.width = parseFloat($('.elementor').width()) + 'px';
+                    css.left = -parseFloat($navMenu.offset().left) + 'px';
+                    css.position = 'absolute';
+                }
+                $navMenu.css(css);
+            }
+        } else {
+            $('.eael-simple-menu-horizontal', $scope).removeClass(
+                'eael-simple-menu-responsive'
+            )
+            $(
+                '.eael-simple-menu-horizontal, .eael-simple-menu-horizontal ul',
+                $scope
+            ).css('display', '')
+            $(".eael-simple-menu-container nav",$scope).removeAttr( 'style' );
+        }
     }
 
     function menu_size_reset(selector){
