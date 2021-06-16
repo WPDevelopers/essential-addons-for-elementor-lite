@@ -299,6 +299,12 @@
                     background-color: #fff;
                     box-shadow: none;
 
+                    &.outofstock {
+                        .button {
+                            display: none;
+                        }
+                    }
+
                     a {
                         text-decoration: none;
 

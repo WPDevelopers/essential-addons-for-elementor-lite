@@ -75,7 +75,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
     <?php
 } else if ( $grid_style_preset == 'eael-product-overlay' ) {
     ?>
-    <li class="product">
+    <li <?php post_class( 'product' ); ?>>
         <div class="overlay">
             <?php echo $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ); ?>
             <div class="button-wrap clearfix">
