@@ -6,7 +6,6 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use Essential_Addons_Elementor\Classes\WPML\Eael_WPML;
 use Essential_Addons_Elementor\Traits\Admin;
 use Essential_Addons_Elementor\Traits\Core;
 use Essential_Addons_Elementor\Traits\Elements;
@@ -29,7 +28,6 @@ class Bootstrap
     use Enqueue;
     use Admin;
     use Elements;
-    use Eael_WPML;
     use Login_Registration;
     use Woo_Product_Comparable;
     use Controls;
@@ -131,7 +129,6 @@ class Bootstrap
         add_filter('eael/active_plugins', [$this, 'is_plugin_active'], 10, 1);
 
         add_filter('eael/is_plugin_active', [$this, 'is_plugin_active'], 10, 1);
-        add_filter('wpml_elementor_widgets_to_translate', [$this, 'translatable_widgets']);
         add_action('elementor/editor/after_save', array($this, 'save_global_values'), 10, 2);
 
         // Enqueue

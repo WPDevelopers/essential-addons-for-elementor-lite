@@ -334,7 +334,7 @@ class Filterable_Gallery extends Widget_Base
                 'label' => esc_html__('Gallery All Label', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic'     => [ 'active' => true ],
-                'default' => 'All',
+                'default' => esc_html__('All', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'filter_enable' => 'yes',
                 ],
@@ -3136,6 +3136,8 @@ class Filterable_Gallery extends Widget_Base
                         $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer ' . $settings['eael_fg_grid_hover_style'] . '">
                             ' . $this->render_fg_buttons($settings, $item) . '
                         </div>';
+                    } elseif ( $settings['eael_fg_show_popup'] === 'media' && $settings['eael_fg_caption_style'] === 'card' ) {
+	                    $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer ' . $settings['eael_fg_grid_hover_style'] . '"></div>';
                     }
                 }
 
@@ -3263,9 +3265,9 @@ class Filterable_Gallery extends Widget_Base
         
         $this->add_render_attribute('gallery-items-wrap', 'data-settings', wp_json_encode($gallery_settings));
         if ('layout_3' == $settings['eael_fg_caption_style']) {
-            $this->add_render_attribute('gallery-items-wrap', 'data-gallery-items', wp_json_encode($this->render_layout_3_gallery_items()));
+            $this->add_render_attribute( 'gallery-items-wrap', 'data-gallery-items', wp_json_encode( $this->render_layout_3_gallery_items(), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE ) );
         } else {
-            $this->add_render_attribute('gallery-items-wrap', 'data-gallery-items', wp_json_encode($this->render_gallery_items()));
+            $this->add_render_attribute( 'gallery-items-wrap', 'data-gallery-items', wp_json_encode( $this->render_gallery_items(), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE ) );
         }
         $this->add_render_attribute('gallery-items-wrap', 'data-init-show', esc_attr($settings['eael_fg_items_to_show']));
         ?>
