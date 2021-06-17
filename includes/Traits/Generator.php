@@ -92,11 +92,13 @@ trait Generator
             update_option('eael_editor_updated_at', strtotime('now'));
         }
 
-        $this->check_password_protected_post();
-
         if ($elements === false) {
             return true;
         }
+
+	    if ( $this->check_password_protected_post() ) {
+		    return true;
+	    }
 
         if ($post_updated_at === false) {
             return true;
@@ -362,9 +364,11 @@ trait Generator
 	 * If Page are protected by password, EA dynamic widget asset not loading properly
 	 * Update  _updated_at field to regenerated asset
 	 */
-    public function check_password_protected_post(){
-	    if(isset( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ])){
-		    update_option( $this->uid . '_updated_at', strtotime( 'now' ) );
-	    }
-    }
+	public function check_password_protected_post() {
+		if ( isset( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] ) && $this->is_preview_mode() ) {
+			update_option('eael_editor_updated_at', strtotime( 'now' ) );
+			return true;
+		}
+		return false;
+	}
 }
