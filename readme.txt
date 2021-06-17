@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 5.7.2
 Requires PHP: 5.6
-Stable tag: 4.7.1
+Stable tag: 4.7.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -224,6 +224,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.7.2 - 15/06/2021 =
+
+- Improved: WPML Compatibility
+- Fixed: EA Filterable Gallery | Hover overlay color not working in Card view
+- Few minor bug fix and improvements
 
 = 4.7.1 - 07/06/2021 =
 
