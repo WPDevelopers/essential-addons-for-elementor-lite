@@ -663,9 +663,9 @@ class Info_Box extends Widget_Base
 					],
 				],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-infobox .infobox-icon img' => 'width: {{SIZE}}px; height: {{SIZE}}px;',
-                    '{{WRAPPER}} .eael-infobox.icon-on-left .infobox-icon' => 'width: {{SIZE}}px; height: {{SIZE}}px;',
-                    '{{WRAPPER}} .eael-infobox.icon-on-right .infobox-icon' => 'width: {{SIZE}}px; height: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-infobox .infobox-icon img' => 'width: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-infobox.icon-on-left .infobox-icon' => 'width: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-infobox.icon-on-right .infobox-icon' => 'width: {{SIZE}}px;',
                 ],
 			]
 		);
