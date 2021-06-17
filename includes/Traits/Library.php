@@ -183,7 +183,7 @@ trait Library
             return true;
         }
         
-        if (isset($_REQUEST['action'])) {
+        if (!empty($_REQUEST['action']) && !$this->check_background_action($_REQUEST['action'])) {
             return true;
         }
 
@@ -215,7 +215,7 @@ trait Library
             return false;
         }
 
-        if (isset($_REQUEST['action'])) {
+        if (!empty($_REQUEST['action']) && !$this->check_background_action($_REQUEST['action'])) {
             return false;
         }
 
@@ -283,5 +283,17 @@ trait Library
         $fragment = isset($parsed_url['fragment']) ? '#' . $parsed_url['fragment'] : '';
 
         return "$scheme$user$pass$host$port$path$query$fragment";
+    }
+
+    /**
+     * Allow to load asset for some pre defined action query param in elementor preview
+     * @return bool
+     */
+    public function check_background_action($action_name){
+        $allow_action = ['subscriptions'];
+        if (in_array($action_name, $allow_action)){
+            return true;
+        }
+        return false;
     }
 }

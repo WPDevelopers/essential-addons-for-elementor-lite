@@ -195,7 +195,7 @@ trait Enqueue
                 $elements = $this->get_settings();
                 $tmp_uid = $this->get_temp_uid();
             } else {
-                $elements = get_option($this->uid . '_elements');
+                $elements = get_option($this->uid . '_eael_elements');
             }
 
             // if no widget in page, return
