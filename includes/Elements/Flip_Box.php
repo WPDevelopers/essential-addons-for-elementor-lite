@@ -1604,7 +1604,7 @@ class Flip_Box extends Widget_Base
                                             <?php if ('before' == $settings['button_icon_position']) {
                                                 $this->render_icon($settings, 'button');
                                             } ?>
-                                            <?php echo esc_attr($settings['flipbox_button_text']); ?>
+                                            <?php echo Helper::eael_wp_kses($settings['flipbox_button_text']); ?>
                                             <?php if ('after' == $settings['button_icon_position']) {
                                                 $this->render_icon($settings, 'button');
                                             } ?>
