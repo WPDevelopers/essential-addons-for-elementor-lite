@@ -203,9 +203,6 @@ class Pricing_Table extends Widget_Base
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'               => [
                     'active'       => true,
-                    'categories'   => [
-                        TagsModule::NUMBER_CATEGORY,
-                    ],
                 ],
                 'label_block' => false,
                 'default'     => esc_html__('99', 'essential-addons-for-elementor-lite'),
@@ -229,9 +226,6 @@ class Pricing_Table extends Widget_Base
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'               => [
                     'active'       => true,
-                    'categories'   => [
-                        TagsModule::NUMBER_CATEGORY,
-                    ],
                 ],
                 'label_block' => false,
                 'default'     => esc_html__('89', 'essential-addons-for-elementor-lite'),
