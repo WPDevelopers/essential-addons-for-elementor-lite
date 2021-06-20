@@ -589,23 +589,11 @@ class Simple_Menu extends Widget_Base
             'eael_simple_menu_item_padding',
             [
                 'label'      => __('Item Padding', 'essential-addons-for-elementor-lite'),
-                'type'       => Controls_Manager::SLIDER,
-                'size_units' => ['px'],
-                'range'      => [
-                    'px' => [
-                        'min'  => 0,
-                        'max'  => 100,
-                        'step' => 1,
-                    ],
-                ],
-                'default'    => [
-                    'unit' => 'px',
-                    'size' => 20,
-                ],
-                'selectors'  => [
-                    '{{WRAPPER}} .eael-simple-menu li a' => 'padding-left: {{SIZE}}{{UNIT}}; padding-right: {{SIZE}}{{UNIT}};',
-                ],
-
+	            'type'       => Controls_Manager::DIMENSIONS,
+	            'size_units' => ['px', '%', 'em'],
+	            'selectors'  => [
+		            '{{WRAPPER}} .eael-simple-menu li a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	            ],
             ]
         );
 
