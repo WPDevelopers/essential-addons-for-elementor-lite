@@ -243,6 +243,7 @@ class Adv_Tabs extends Widget_Base
             [
                 'label' => esc_html__('Custom ID', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'description' => esc_html__( 'Custom ID will be added as an anchor tag. For example, if you add ‘test’ as your custom ID, the link will become like the following: https://www.example.com/#test and it will open the respective tab directly.', 'essential-addons-for-elementor-lite' ),
                 'default' => '',
             ]
         );
