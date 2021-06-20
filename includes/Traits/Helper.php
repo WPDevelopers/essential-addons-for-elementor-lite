@@ -152,6 +152,8 @@ trait Helper
                         $html .= HelperClass::include_with_variable( $file_path, [ 'settings' => $settings, 'link_settings' => $link_settings, 'iterator' => $iterator ] );
                         $iterator++;
                     }
+                } else {
+	                $html .= __( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
                 }
             }
         }
