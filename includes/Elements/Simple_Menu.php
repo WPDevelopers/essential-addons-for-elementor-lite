@@ -308,6 +308,31 @@ class Simple_Menu extends Widget_Base
 		    ]
 	    );
 
+	    $this->add_control(
+		    'eael_hamburger_menu_item_alignment',
+		    [
+			    'label'     => __('Alignment', 'essential-addons-for-elementor-lite'),
+			    'type'      => Controls_Manager::CHOOSE,
+			    'options'   => [
+				    'eael-hamburger-left'   => [
+					    'title' => __('Left', 'essential-addons-for-elementor-lite'),
+					    'icon'  => 'fa fa-align-left',
+				    ],
+				    'eael-hamburger-center' => [
+					    'title' => __('Center', 'essential-addons-for-elementor-lite'),
+					    'icon'  => 'fa fa-align-center',
+				    ],
+				    'eael-hamburger-right'  => [
+					    'title' => __('Right', 'essential-addons-for-elementor-lite'),
+					    'icon'  => 'fa fa-align-right',
+				    ],
+			    ],
+			    'condition' => [
+				    'eael_simple_menu_preset!' => ['preset-2', 'preset-3']
+			    ]
+		    ]
+	    );
+
 	    $this->start_controls_tabs('eael_simple_menu_hamburger_top_level_item');
 
 	    $this->start_controls_tab(
@@ -560,7 +585,7 @@ class Simple_Menu extends Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'eael_simple_menu_item_padding',
             [
                 'label'      => __('Item Padding', 'essential-addons-for-elementor-lite'),
@@ -1239,7 +1264,7 @@ class Simple_Menu extends Widget_Base
             $align = $settings['eael_simple_menu_item_alignment'];
         }
 
-        $menu_classes      = ['eael-simple-menu', $settings['eael_simple_menu_dropdown_animation'], 'eael-simple-menu-indicator'];
+        $menu_classes      = ['eael-simple-menu', $settings['eael_simple_menu_dropdown_animation'], 'eael-simple-menu-indicator', $settings['eael_hamburger_menu_item_alignment']];
         $container_classes = ['eael-simple-menu-container', $align, $settings['eael_simple_menu_dropdown_item_alignment'], $settings['eael_simple_menu_preset']];
 
         if ($settings['eael_simple_menu_layout'] == 'horizontal') {
