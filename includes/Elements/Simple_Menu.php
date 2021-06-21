@@ -245,11 +245,13 @@ class Simple_Menu extends Widget_Base
                 ],
             ]
         );
-	    $this->add_control(
-		    'eael_simple_menu_hamburger_size',
+	    $this->add_responsive_control(
+		    'eael_simple_menu_hamburger_min_height',
 		    [
 			    'label' => esc_html__( 'Min Height', 'essential-addons-elementor' ),
 			    'type' => Controls_Manager::SLIDER,
+//			    'devices' => [ 'tablet', 'mobile' ],
+//			    'devices' => [ 'desktop', 'mobile' ],
 			    'range' => [
 				    'px' => [
 					    'max' => 500,
