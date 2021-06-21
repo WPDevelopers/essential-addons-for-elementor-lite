@@ -82,6 +82,9 @@ var SimpleMenu = function ($scope, $) {
     
     function eael_menu_resize(){
         if (window.matchMedia('(max-width: 991px)').matches) {
+            $('.eael-simple-menu-container', $scope).addClass(
+                'eael-simple-menu-hamburger'
+            )
             $('.eael-simple-menu-horizontal', $scope).addClass(
                 'eael-simple-menu-responsive'
             )
@@ -111,6 +114,9 @@ var SimpleMenu = function ($scope, $) {
                 $navMenu.css(css);
             }
         } else {
+            $('.eael-simple-menu-container', $scope).removeClass(
+                'eael-simple-menu-hamburger'
+            )
             $('.eael-simple-menu-horizontal', $scope).removeClass(
                 'eael-simple-menu-responsive'
             )
