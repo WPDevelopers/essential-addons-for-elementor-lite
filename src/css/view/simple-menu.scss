@@ -10,7 +10,8 @@
         position: absolute;
         top: 0;
         right: 0;
-        min-height: 50px;
+        //min-height: 50px;
+        height: 100%;
         padding-top: 0;
         padding-bottom: 0;
         padding-left: 15px;
@@ -644,3 +645,42 @@
         max-height: 100vh;
     }
 }
+
+.eael-simple-menu-container .eael-simple-menu-responsive {
+    &.eael-hamburger-center {
+        li {
+            .eael-simple-menu-indicator {
+                left: initial !important;
+                right: 10px !important;
+            }
+            a {
+                text-align: center !important;
+            }
+        }
+    }
+    &.eael-hamburger-left {
+        li {
+            .eael-simple-menu-indicator {
+                left: initial !important;
+                right: 10px !important;
+            }
+            a {
+                text-align: left !important;
+            }
+        }
+
+    }
+    &.eael-hamburger-right {
+        li {
+            .eael-simple-menu-indicator {
+                right: initial !important;
+                left: 10px !important;
+            }
+            a {
+                text-align: right !important;
+            }
+        }
+
+    }
+}
+
