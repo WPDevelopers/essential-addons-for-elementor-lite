@@ -69,7 +69,6 @@ trait Generator
         if ($uid && $this->uid == null) {
             $this->uid = $this->generate_uid($uid);
             $this->request_requires_update = $this->request_requires_update();
-            error_log(print_r($this->request_requires_update,1));
         }
         //exit;
     }
@@ -95,9 +94,7 @@ trait Generator
         if ($editor_updated_at === false) {
             update_option('eael_editor_updated_at', strtotime('now'));
         }
-		error_log(print_r($elements,1));
-		error_log(print_r($post_updated_at,1));
-		error_log(print_r($editor_updated_at,1));
+
         if ($elements === false) {
             return true;
         }
