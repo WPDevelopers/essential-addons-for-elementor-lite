@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 5.7.2
 Requires PHP: 5.6
-Stable tag: 4.7.2
+Stable tag: 4.7.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -224,6 +224,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.7.3 - 21/06/2021 =
+
+- Improved: EA Simple Menu | Added more options for Hamburger menu
+- Fixed: Assets not loading properly for private pages
+- Fixed: EA Filterable Gallery | Removed blank space from Filterable controls
+- Few minor bug fix and improvements
 
 = 4.7.2 - 15/06/2021 =
 
