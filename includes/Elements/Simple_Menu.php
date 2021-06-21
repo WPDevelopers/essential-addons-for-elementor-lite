@@ -245,6 +245,21 @@ class Simple_Menu extends Widget_Base
                 ],
             ]
         );
+	    $this->add_control(
+		    'eael_simple_menu_hamburger_size',
+		    [
+			    'label' => esc_html__( 'Min Height', 'essential-addons-elementor' ),
+			    'type' => Controls_Manager::SLIDER,
+			    'range' => [
+				    'px' => [
+					    'max' => 500,
+				    ],
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-simple-menu-container.eael-simple-menu-hamburger' => 'min-height: {{SIZE}}{{UNIT}};',
+			    ],
+		    ]
+	    );
 
         $this->add_control(
             'eael_simple_menu_hamburger_bg',
