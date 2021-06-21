@@ -3027,7 +3027,7 @@ class Filterable_Gallery extends Widget_Base
                 }
             }
             
-            $html .= '<div class="fg-layout-3-item-thumb">';
+            $html .= '<div class="gallery-item-thumbnail-wrap fg-layout-3-item-thumb">';
             
             $html .= '<img src="' . $item['image'] . '" data-lazy-src="' . $item['image'] . '" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '" class="gallery-item-thumbnail">';
             
