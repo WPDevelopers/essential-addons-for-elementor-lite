@@ -110,7 +110,6 @@ trait Generator
         if ($editor_updated_at != $post_updated_at) {
             return true;
         }
-		return true;
         return false;
     }
 
@@ -375,7 +374,7 @@ trait Generator
 	 */
 	public function check_password_protected_post() {
 		if ( isset( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] ) && $this->is_preview_mode() ) {
-			update_option('eael_editor_updated_at', strtotime( 'now' ) );
+			update_option($this->uid . '_eael_updated_at', get_option('eael_editor_updated_at'),false);
 			return true;
 		}
 		return false;
