@@ -245,12 +245,12 @@
                     }
 
                     .add-to-whishlist {
-                        width: 90%;
+                        //width: 90%;
                         margin: 0 auto;
 
                         .yith-wcwl-add-to-wishlist {
-                            margin: 0;
-                            padding: 0;
+                            margin: 0 15px 15px 15px;
+                            padding: 7px;
                             color: #fff;
                             background-color: #333;
 
@@ -328,7 +328,8 @@
                     border: 1px solid transparent;
                     .eael-wc-compare,
                     .button.add_to_cart_button,
-                    a.added_to_cart {
+                    a.added_to_cart,
+                    .add-to-whishlist {
                         visibility: hidden;
                         transition: none;
                     }
@@ -337,7 +338,8 @@
                         border: 1px solid #eee;
                         .eael-wc-compare,
                         .button.add_to_cart_button,
-                        a.added_to_cart {
+                        a.added_to_cart,
+                        .add-to-whishlist {
                             visibility: visible;
                         }
                     }
