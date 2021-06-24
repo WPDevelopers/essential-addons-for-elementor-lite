@@ -33,6 +33,7 @@ trait Twitter_Feed
                 $response = wp_remote_post('https://api.twitter.com/oauth2/token', [
                     'method' => 'POST',
                     'httpversion' => '1.1',
+                    'timeout'     => 70,
                     'blocking' => true,
                     'headers' => [
                         'Authorization' => 'Basic ' . $credentials,
@@ -61,6 +62,7 @@ trait Twitter_Feed
 
             $response = wp_remote_get('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' . $settings['eael_twitter_feed_ac_name'] . '&count=999&tweet_mode=extended', [
                 'httpversion' => '1.1',
+                'timeout'     => 70,
                 'blocking' => true,
                 'headers' => [
                     'Authorization' => "Bearer $token",
