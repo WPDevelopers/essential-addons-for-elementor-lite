@@ -2416,7 +2416,8 @@ class Product_Grid extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#252525',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-popup .eael-product-quick-view-title.product_title.entry-title' => 'color: {{VALUE}};',
+//                    '{{WRAPPER}} .eael-product-popup .eael-product-quick-view-title.product_title.entry-title' => 'color: {{VALUE}};',
+                    '.eael-popup-details-render{{WRAPPER}} div.product .product_title' => 'color: {{VALUE}};',
                 ],
             ]
         );
