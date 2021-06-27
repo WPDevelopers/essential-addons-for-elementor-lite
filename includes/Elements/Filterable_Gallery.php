@@ -3131,7 +3131,7 @@ class Filterable_Gallery extends Widget_Base
             $html .= '<div class="gallery-item-thumbnail-wrap">';
                 $html .= '<img src="' . $item['image'] . '" data-lazy-src="'.$item['image'].'" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '" class="gallery-item-thumbnail">';
 
-                if ( empty($settings['eael_section_fg_full_image_clickable']) ) {
+                if ( empty($settings['eael_section_fg_full_image_clickable']) && $item['video_gallery_switch'] !== 'true' ) {
                     if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] === 'card') {
                         $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer ' . $settings['eael_fg_grid_hover_style'] . '">
                             ' . $this->render_fg_buttons($settings, $item) . '
