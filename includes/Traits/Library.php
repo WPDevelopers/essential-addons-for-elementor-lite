@@ -290,7 +290,13 @@ trait Library
      * @return bool
      */
     public function check_background_action($action_name){
-        $allow_action = ['subscriptions', 'mepr_unauthorized'];
+        $allow_action = [
+        	'subscriptions',
+	        'mepr_unauthorized',
+	        'home',
+	        'subscriptions',
+	        'payments',
+        ];
         if (in_array($action_name, $allow_action)){
             return true;
         }
