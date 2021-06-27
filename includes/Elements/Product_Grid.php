@@ -151,6 +151,10 @@ class Product_Grid extends Widget_Base
             }
         }
 
+	    if( 'Read more' === $default ) {
+		    return esc_html__( 'View More', 'essential-addons-for-elementor-lite' );
+	    }
+
         return $default;
     }
 
@@ -1474,7 +1478,8 @@ class Product_Grid extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button,
+                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button,
+                    {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button,
                     {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link,
                     {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -1488,7 +1493,8 @@ class Product_Grid extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button,
+	                '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button,
+                    {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button,
                     {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link,
                     {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -1516,7 +1522,8 @@ class Product_Grid extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button, 
+                    {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart' => 'color: {{VALUE}};',
                 ],
@@ -1529,7 +1536,8 @@ class Product_Grid extends Widget_Base
                 'name' => 'eael_product_grid_add_to_cart_gradient_background',
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button,
+                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button,
+                {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button,
                 {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link,
                 {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart',
                 'condition' => [
@@ -1545,7 +1553,8 @@ class Product_Grid extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#333',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button, 
+                    {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart' => 'background-color: {{VALUE}};',
                 ],
@@ -1559,7 +1568,10 @@ class Product_Grid extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'eael_product_grid_add_to_cart_border',
-                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button, {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link, {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart',
+                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button, 
+                {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button, 
+                {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link, 
+                {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart',
             ]
         );
 
@@ -1567,7 +1579,8 @@ class Product_Grid extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'eael_product_grid_add_to_cart_typography',
-                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button',
+                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button,
+                {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button',
                 'condition' => [
                     'eael_product_grid_style_preset' => ['eael-product-default', 'eael-product-simple'],
                 ],
@@ -1585,7 +1598,8 @@ class Product_Grid extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button:hover,
+                    {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button:hover' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link:hover' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:hover' => 'color: {{VALUE}};',
                 ],
@@ -1597,7 +1611,8 @@ class Product_Grid extends Widget_Base
                 'name' => 'eael_product_grid_add_to_cart_hover_gradient_background',
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button:hover,
+                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button:hover,
+                {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button:hover,
                 {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link:hover,
                 {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:hover',
                 'condition' => [
@@ -1612,7 +1627,8 @@ class Product_Grid extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#333',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button:hover' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button:hover,
+                    {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button:hover' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link:hover' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:hover' => 'background-color: {{VALUE}};',
                 ],
@@ -1629,7 +1645,8 @@ class Product_Grid extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button:hover' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button:hover,
+                    {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button:hover' => 'border-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link:hover' => 'border-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:hover' => 'border-color: {{VALUE}};',
                 ],
@@ -1967,7 +1984,9 @@ class Product_Grid extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'eael_product_grid_buttons_border',
-                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button, {{WRAPPER}} .eael-product-grid .eael-product-wrap .icons-wrap li a',
+                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button,
+                {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button, 
+                {{WRAPPER}} .eael-product-grid .eael-product-wrap .icons-wrap li a',
                 'conditions' => [
                     'relation' => 'or',
                     'terms' => [
