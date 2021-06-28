@@ -199,9 +199,9 @@ class Simple_Menu extends Widget_Base
                 ],
                 'default'      => 'eael-simple-menu-hamburger-align-right',
                 'prefix_class' => 'eael-simple-menu-hamburger-align-',
-                'condition'    => [
-                    'eael_simple_menu_hamburger_disable_selected_menu' => 'hide',
-                ],
+//                'condition'    => [
+//                    'eael_simple_menu_hamburger_disable_selected_menu' => 'hide',
+//                ],
             ]
         );
 

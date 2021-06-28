@@ -143,9 +143,7 @@ var SimpleMenu = function ($scope, $) {
             if($indicator_icon == 'svg') {
                 var $height = parseInt($('a', this).css('line-height')) / 2
                 $(this).append(
-                    '<span class="eael-simple-menu-indicator" style="top:' +
-                    $height +
-                    'px"> ' +
+                    '<span class="eael-simple-menu-indicator"> ' +
                     $indicator_class +
                     '</span>'
                 )
@@ -154,9 +152,7 @@ var SimpleMenu = function ($scope, $) {
                 $(this).append(
                     '<span class="eael-simple-menu-indicator ' +
                     $indicator_class +
-                    '" style="top:' +
-                    $height +
-                    'px"></span>'
+                    '"></span>'
                 )
             }
 
@@ -171,9 +167,7 @@ var SimpleMenu = function ($scope, $) {
             if($dropdown_indicator_icon == 'svg') {
                 var $height = parseInt($('a', this).css('line-height')) / 2
                 $(this).append(
-                    '<span class="eael-simple-menu-indicator" style="top:' +
-                    $height +
-                    'px"> ' +
+                    '<span class="eael-simple-menu-indicator"> ' +
                     $dropdown_indicator_class +
                     '</span>'
                 )
@@ -182,9 +176,7 @@ var SimpleMenu = function ($scope, $) {
                 $(this).append(
                     '<span class="eael-simple-menu-indicator ' +
                     $dropdown_indicator_class +
-                    '" style="top:' +
-                    $height +
-                    'px"></span>'
+                    '"></span>'
                 )
             }
 
@@ -242,5 +234,4 @@ jQuery(window).on('elementor/frontend/init', function () {
         'frontend/element_ready/eael-simple-menu.default',
         SimpleMenu
     )
-
 })
