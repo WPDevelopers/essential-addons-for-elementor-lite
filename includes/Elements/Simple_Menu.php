@@ -213,9 +213,7 @@ class Simple_Menu extends Widget_Base
                 'description'  => __('Stretch the dropdown of the menu to full width.', 'essential-addons-for-elementor-lite'),
                 'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
                 'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
-                'return_value' => 'stretch',
                 'default'      => 'no',
-                'prefix_class' => 'eael-simple-menu--',
             ]
         );
 
@@ -1269,8 +1267,14 @@ class Simple_Menu extends Widget_Base
             $align = $settings['eael_simple_menu_item_alignment'];
         }
 
+        if ($settings['eael_simple_menu_full_width'] == 'yes') {
+	        $fullWidth = 'eael-simple-menu--stretch';
+        } else {
+	        $fullWidth = '';
+        }
+
         $menu_classes      = ['eael-simple-menu', $settings['eael_simple_menu_dropdown_animation'], 'eael-simple-menu-indicator', $settings['eael_hamburger_menu_item_alignment']];
-        $container_classes = ['eael-simple-menu-container', $align, $settings['eael_simple_menu_dropdown_item_alignment'], $settings['eael_simple_menu_preset']];
+        $container_classes = ['eael-simple-menu-container', $align, $fullWidth, $settings['eael_simple_menu_dropdown_item_alignment'], $settings['eael_simple_menu_preset']];
 
         if ($settings['eael_simple_menu_layout'] == 'horizontal') {
             $menu_classes[] = 'eael-simple-menu-horizontal';
@@ -1301,7 +1305,6 @@ class Simple_Menu extends Widget_Base
 	    } else {
 		    $this->add_render_attribute( 'eael-simple-menu', 'data-dropdown-indicator-class', $settings['eael_simple_menu_dropdown_item_indicator']['value'] );
 	    }
-
 
         $this->add_render_attribute('eael-simple-menu', [
             'class'                         => implode(' ', array_filter($container_classes)),

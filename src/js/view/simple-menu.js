@@ -96,21 +96,32 @@ var SimpleMenu = function ($scope, $) {
                 .eq(0)
                 .text()
             )
-        
-            if ($fullWidth) {
+
+            if ($('.eael-simple-menu-container', $scope).hasClass('eael-simple-menu--stretch')){
                 const css = {}
                 if(!$('.eael-simple-menu-horizontal', $scope).parent().hasClass('eael-nav-menu-wrapper')){
                     $('.eael-simple-menu-horizontal', $scope).wrap('<nav class="eael-nav-menu-wrapper"></nav>');
                 }
                 const $navMenu = $(".eael-simple-menu-container nav",$scope);
                 menu_size_reset($navMenu);
-            
-            
-                if($fullWidth.length>0){
-                    css.width = parseFloat($('.elementor').width()) + 'px';
-                    css.left = -parseFloat($navMenu.offset().left) + 'px';
-                    css.position = 'absolute';
+
+                css.width = parseFloat($('.elementor').width()) + 'px';
+                css.left = -parseFloat($navMenu.offset().left) + 'px';
+                css.position = 'absolute';
+
+                $navMenu.css(css);
+            } else {
+                const css = {}
+                if(!$('.eael-simple-menu-horizontal', $scope).parent().hasClass('eael-nav-menu-wrapper')){
+                    $('.eael-simple-menu-horizontal', $scope).wrap('<nav class="eael-nav-menu-wrapper"></nav>');
                 }
+                const $navMenu = $(".eael-simple-menu-container nav",$scope);
+                menu_size_reset($navMenu);
+
+                css.width = '';
+                css.left = '';
+                css.position = 'inherit';
+
                 $navMenu.css(css);
             }
         } else {
