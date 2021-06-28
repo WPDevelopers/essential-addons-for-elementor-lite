@@ -241,6 +241,9 @@ trait Generator
         // remove old cache files
         $this->remove_files($this->uid);
 
+        // remove old cache value from options table
+	    $this->remove_old_cache();
+
         // output custom js as fallback
         if ($this->custom_js_strings) {
             echo '<script>' . $this->custom_js_strings . '</script>';
@@ -378,5 +381,18 @@ trait Generator
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Added eael_ prefix in options field that's why need to delete old cache value
+	 * for optimize options table
+	 */
+	public function remove_old_cache() {
+		$old_post_updated_at = get_option( $this->uid . '_updated_at' );
+		if ( $old_post_updated_at ) {
+			delete_option( $this->uid . '_updated_at' );
+			delete_option( $this->uid . '_custom_js' );
+			delete_option( $this->uid . '_elements' );
+		}
 	}
 }
