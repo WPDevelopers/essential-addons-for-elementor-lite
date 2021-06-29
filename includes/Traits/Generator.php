@@ -89,7 +89,8 @@ trait Generator
         $editor_updated_at = get_option('eael_editor_updated_at');
         $post_updated_at = get_option($this->uid . '_eael_updated_at');
 
-
+	    // remove old cache value from options table
+	    $this->remove_old_cache();
 
         if ($editor_updated_at === false) {
             update_option('eael_editor_updated_at', strtotime('now'));
@@ -241,8 +242,7 @@ trait Generator
         // remove old cache files
         $this->remove_files($this->uid);
 
-        // remove old cache value from options table
-	    $this->remove_old_cache();
+
 
         // output custom js as fallback
         if ($this->custom_js_strings) {
