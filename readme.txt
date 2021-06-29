@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 5.7.2
 Requires PHP: 5.6
-Stable tag: 4.7.3
+Stable tag: 4.7.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -224,6 +224,22 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.7.4 - 29/06/2021 =
+
+- Fixed: EA Filterable gallery | Image height not working for "Search and Filter" layout
+- Fixed: EA Login/Register Form | Backslash (\) not working in Login form
+- Fixed: EA Login/Register Form | Shortcode not working inside Header Content
+- Fixed: EA Woo Product Carousel | Cart button default color not changing
+- Fixed: EA Woo Product Carousel | Broken layout on Astra theme
+- Fixed: EA Product Grid | Button styles not working for "Out of Stock" products
+- Fixed: EA Sticky Video | PHP notice when Sticky option is not enabled 
+- Fixed: EA Countdown | Saved Template not working as per the condition
+- Fixed: EA Product Grid | Product Title color not changing on the Quick view Popup section
+- Fixed: EA Flip Box | Zoom out and Fade in effects not working
+- Fixed: EA Filterable Gallery | Videos not working for Card layout
+- Fixed: EA Post Grid | Typography colors not changing
+- Few minor bug fix and improvements
 
 = 4.7.3 - 21/06/2021 =
 
