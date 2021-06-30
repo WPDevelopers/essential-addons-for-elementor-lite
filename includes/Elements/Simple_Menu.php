@@ -453,6 +453,98 @@ class Simple_Menu extends Widget_Base
 	    $this->end_controls_tab();
 	    $this->end_controls_tabs();
 
+	    $this->add_control(
+		    'eael_simple_menu_hamburger_dropdown_heading',
+		    [
+			    'label'     => __('Dropdown Items', 'essential-addons-for-elementor-lite'),
+			    'type'      => Controls_Manager::HEADING,
+			    'separator' => 'before',
+		    ]
+	    );
+
+	    $this->add_responsive_control(
+		    'eael_simple_menu_hamburger_dropdown_item_padding',
+		    [
+			    'label'      => __('Padding', 'essential-addons-for-elementor-lite'),
+			    'type'       => Controls_Manager::DIMENSIONS,
+			    'size_units' => ['px', '%', 'em'],
+			    'selectors'  => [
+				    '{{WRAPPER}} .eael-simple-menu.eael-simple-menu-responsive li ul li a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
+	    $this->start_controls_tabs('eael_simple_menu_hamburger_dropdown_item');
+
+	    $this->start_controls_tab(
+		    'eael_simple_menu_hamburger_dropdown_item_default',
+		    [
+			    'label' => __('Default', 'essential-addons-for-elementor-lite'),
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_simple_menu_hamburger_dropdown_item_color',
+		    [
+			    'label'     => __('Text Color', 'essential-addons-for-elementor-lite'),
+			    'type'      => Controls_Manager::COLOR,
+//                'default' => '#ffffff',
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-simple-menu.eael-simple-menu-responsive li ul li a'      => 'color: {{VALUE}}',
+				    '{{WRAPPER}} .eael-simple-menu.eael-simple-menu-responsive li ul li > span svg'      => 'fill: {{VALUE}}',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_simple_menu_hamburger_dropdown_item_background',
+		    [
+			    'label'     => __('Background Color', 'essential-addons-for-elementor-lite'),
+			    'type'      => Controls_Manager::COLOR,
+			    'default'   => '',
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-simple-menu.eael-simple-menu-responsive li ul li a' => 'background-color: {{VALUE}}',
+			    ],
+		    ]
+	    );
+
+	    $this->end_controls_tab();
+
+	    $this->start_controls_tab(
+		    'eael_simple_menu_hamburger_dropdown_item_hover',
+		    [
+			    'label' => __('Hover', 'essential-addons-for-elementor-lite'),
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_simple_menu_hamburger_dropdown_item_color_hover',
+		    [
+			    'label'     => __('Text Color', 'essential-addons-for-elementor-lite'),
+			    'type'      => Controls_Manager::COLOR,
+//                'default' => '#ffffff',
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-simple-menu.eael-simple-menu-responsive li ul li:hover a'      => 'color: {{VALUE}}',
+				    '{{WRAPPER}} .eael-simple-menu.eael-simple-menu-responsive li ul li:hover a > span svg'      => 'fill: {{VALUE}}',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_simple_menu_hamburger_dropdown_item_bg_hover',
+		    [
+			    'label'     => __('Background Color', 'essential-addons-for-elementor-lite'),
+			    'type'      => Controls_Manager::COLOR,
+			    'default'   => '',
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-simple-menu.eael-simple-menu-responsive li ul li:hover a' => 'background-color: {{VALUE}}',
+			    ],
+		    ]
+	    );
+
+	    $this->end_controls_tab();
+	    $this->end_controls_tabs();
+
         $this->end_controls_section();
 
         /**
