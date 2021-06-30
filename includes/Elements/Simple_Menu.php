@@ -545,6 +545,32 @@ class Simple_Menu extends Widget_Base
 	    $this->end_controls_tab();
 	    $this->end_controls_tabs();
 
+	    $this->add_control(
+		    'eael_simple_menu_hamburger_dropdown_a',
+		    [
+			    'label'     => __('Dropdown Indicator', 'essential-addons-for-elementor-lite'),
+			    'type'      => Controls_Manager::HEADING,
+			    'separator' => 'before',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_simple_menu_hamburger_indicator_possition',
+		    [
+			    'label' => esc_html__( 'Top Position', 'essential-addons-elementor' ),
+			    'type' => Controls_Manager::SLIDER,
+//			    'range' => [
+//				    'px' => [
+//					    'max' => 30,
+//				    ],
+//			    ],
+			    'size_units' => ['px', '%'],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-simple-menu.eael-simple-menu-responsive .eael-simple-menu-indicator' => 'top: {{SIZE}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
         $this->end_controls_section();
 
         /**
