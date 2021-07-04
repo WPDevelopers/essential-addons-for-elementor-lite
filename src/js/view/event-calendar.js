@@ -190,7 +190,15 @@ var EventCalendar = function ($scope, $) {
         if (event.url == "") {
           $(".eaelec-modal-footer a").css("display", "none");
         }
-
+  
+        const motionCheck = $(document).find(".elementor-widget-wrap.elementor-motion-effects-element #eaelecModal.eael-ec-popup-ready")
+  
+        if (motionCheck.length > 0) {
+          let transform = motionCheck.closest(".elementor-widget-wrap.elementor-motion-effects-element");
+          if (transform.css("--translateY") != undefined) {
+            transform.css("transform", "none");
+          }
+        }
         // Popup color
         $(".eaelec-modal-header").css(
           "border-left",
@@ -202,19 +210,29 @@ var EventCalendar = function ($scope, $) {
 
   CloseButton.on("click", function () {
     event.stopPropagation();
-    ecModal
-      .addClass("eael-ec-modal-removing")
-      .removeClass("eael-ec-popup-ready");
+    eael_remove_popup(ecModal)
   });
 
   $(document).on("click", function (event) {
     if (event.target.closest(".eaelec-modal-content")) return;
     if (ecModal.hasClass("eael-ec-popup-ready")) {
-      ecModal
-        .addClass("eael-ec-modal-removing")
-        .removeClass("eael-ec-popup-ready");
+      eael_remove_popup(ecModal)
     }
   });
+  
+  function eael_remove_popup(ecModal) {
+    ecModal
+    .addClass("eael-ec-modal-removing")
+    .removeClass("eael-ec-popup-ready");
+    const motionCheck = $(document).find(".elementor-widget-wrap.elementor-motion-effects-element #eaelecModal.eael-ec-modal-removing")
+    
+    if (motionCheck.length > 0) {
+      let transform = motionCheck.closest(".elementor-widget-wrap.elementor-motion-effects-element");
+      if (transform.css("--translateY") != undefined) {
+        transform.css("transform", "translateY(var(--translateY))");
+      }
+    }
+  }
 
   calendar.render();
 };
