@@ -191,10 +191,10 @@ var EventCalendar = function ($scope, $) {
           $(".eaelec-modal-footer a").css("display", "none");
         }
   
-        const motionCheck = $(document).find(".elementor-widget-wrap.elementor-motion-effects-element #eaelecModal.eael-ec-popup-ready")
+        const motionCheck = $(document).find(".elementor-motion-effects-element #eaelecModal.eael-ec-popup-ready")
   
         if (motionCheck.length > 0) {
-          let transform = motionCheck.closest(".elementor-widget-wrap.elementor-motion-effects-element");
+          let transform = motionCheck.closest(".elementor-motion-effects-element");
           if (transform.css("--translateY") != undefined) {
             transform.css("transform", "none");
           }
@@ -224,10 +224,10 @@ var EventCalendar = function ($scope, $) {
     ecModal
     .addClass("eael-ec-modal-removing")
     .removeClass("eael-ec-popup-ready");
-    const motionCheck = $(document).find(".elementor-widget-wrap.elementor-motion-effects-element #eaelecModal.eael-ec-modal-removing")
+    const motionCheck = $(document).find(".elementor-motion-effects-element #eaelecModal.eael-ec-modal-removing")
     
     if (motionCheck.length > 0) {
-      let transform = motionCheck.closest(".elementor-widget-wrap.elementor-motion-effects-element");
+      let transform = motionCheck.closest(".elementor-motion-effects-element");
       if (transform.css("--translateY") != undefined) {
         transform.css("transform", "translateY(var(--translateY))");
       }
