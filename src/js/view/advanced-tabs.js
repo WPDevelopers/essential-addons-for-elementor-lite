@@ -89,6 +89,8 @@ var AdvanceTabHandler = function ($scope, $) {
         $(tabsContent).each(function (index) {
             $(this).removeClass('active-default')
         })
+
+        $(window).trigger('resize');
     })
 }
 
