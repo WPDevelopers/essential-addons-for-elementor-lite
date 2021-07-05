@@ -3730,7 +3730,7 @@ class Login_Register extends Widget_Base {
 	protected function print_login_form() {
 		if ( $this->should_print_login_form ) {
 			// prepare all login form related vars
-			$default_hide_class = 'register' === $this->default_form || isset($_GET['eael-register']) ? 'd-none' : '';
+			$default_hide_class = 'register' === $this->default_form || isset($_GET['eael-register']) ? 'eael-lr-d-none' : '';
 
 			//Reg link related
 			$reg_link_action = ! empty( $this->ds['registration_link_action'] ) ? $this->ds['registration_link_action'] : 'form';
@@ -3940,7 +3940,7 @@ class Login_Register extends Widget_Base {
 
 	protected function print_register_form() {
 		if ( $this->should_print_register_form ) {
-			$default_hide_class = 'login' === $this->default_form && !isset($_GET['eael-register']) ? 'd-none' : ''; //eael-register flag for show error/success message when formal form submit
+			$default_hide_class = 'login' === $this->default_form && !isset($_GET['eael-register']) ? 'eael-lr-d-none' : ''; //eael-register flag for show error/success message when formal form submit
 			$is_pass_valid      = false; // Does the form has a password field?
 			$is_pass_confirmed  = false;
 			// placeholders to flag if user use one type of field more than once.
