@@ -1034,6 +1034,14 @@
 .eael-post-grid.eael-product-default .button.add_to_cart_button.product_type_variable:before {
   content: "";
 }
+.eael-product-grid.eael-product-preset-5 ul.products li.product .image-wrap img, .eael-product-grid.eael-product-preset-6 ul.products li.product .image-wrap img, .eael-product-grid.eael-product-preset-7 ul.products li.product .image-wrap img, .eael-product-grid.eael-product-preset-8 ul.products li.product .image-wrap img,
+.eael-post-grid.eael-product-preset-5 ul.products li.product .image-wrap img,
+.eael-post-grid.eael-product-preset-6 ul.products li.product .image-wrap img,
+.eael-post-grid.eael-product-preset-7 ul.products li.product .image-wrap img,
+.eael-post-grid.eael-product-preset-8 ul.products li.product .image-wrap img {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
 .eael-wcpc-modal {
   position: fixed;
   top: 50px;
