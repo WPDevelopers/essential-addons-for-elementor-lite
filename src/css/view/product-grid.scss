@@ -590,6 +590,21 @@
             }
         }
     }
+
+    &.eael-product-preset-5,
+    &.eael-product-preset-6,
+    &.eael-product-preset-7,
+    &.eael-product-preset-8 {
+        ul.products {
+            li.product {
+                .image-wrap {
+                    img {
+                        backface-visibility: hidden;
+                    }
+                }
+            }
+        }
+    }
 }
 
 // product compare
