@@ -128,6 +128,18 @@ ea.hooks.addAction("init", "ea", () => {
 				modifier: 1,
 				slideShadows: false,
 			}
+
+			$carouselOptions.breakpoints = {
+				1024: {
+					slidesPerView: 3,
+				},
+				768: {
+					slidesPerView: 1,
+				},
+				320: {
+					slidesPerView: 1,
+				}
+			}
 		}
 
 		swiperLoader($wooProductCarousel, $carouselOptions).then((eaelWooProductCarousel) => {
