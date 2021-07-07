@@ -1664,7 +1664,7 @@
 .theme-oceanwp .eael-product-popup.woocommerce div.product form.cart div.quantity .qty:focus {
   border: 1px solid;
 }
-.theme-astra .woocommerce ul.products, .woocommerce-page ul.products {
+.theme-astra .woocommerce.eael-woo-product-carousel ul.products, .woocommerce-page .eael-woo-product-carousel ul.products {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
