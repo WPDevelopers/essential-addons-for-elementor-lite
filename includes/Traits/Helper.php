@@ -112,16 +112,16 @@ trait Helper
 
         if ( $template_info ) {
 
-            if ( $template_info[ 'dir' ] === 'free' ) {
-                $file_path = EAEL_PLUGIN_PATH;
-            }
-
-            if ( $template_info[ 'dir' ] === 'pro' ) {
-                $file_path = EAEL_PRO_PLUGIN_PATH;
+	        if ( $template_info[ 'dir' ] === 'theme' ) {
+		        $file_path = $this->retrive_theme_path();
+	        } else if($template_info[ 'dir' ] === 'pro') {
+		        $file_path = sprintf("%sincludes",EAEL_PRO_PLUGIN_PATH);
+            } else {
+		        $file_path = sprintf("%sincludes",EAEL_PLUGIN_PATH);
             }
 
             $file_path = sprintf(
-                '%sincludes/Template/%s/%s',
+                '%s/Template/%s/%s',
                 $file_path,
                 $template_info[ 'name' ],
                 $template_info[ 'file_name' ]
@@ -853,6 +853,19 @@ trait Helper
 
 	    wp_send_json_success( $data );
     }
+
+	/**
+	 * return file path which are store in theme Template directory
+	 * @param $file
+	 */
+	private function retrive_theme_path() {
+		$current_theme = wp_get_theme();
+		return sprintf(
+			'%s/%s',
+			$current_theme->theme_root,
+			$current_theme->stylesheet
+		);
+	}
 	
 }
 
