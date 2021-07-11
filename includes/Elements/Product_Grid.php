@@ -3027,6 +3027,7 @@ class Product_Grid extends Widget_Base
                 do_action( 'eael_woo_before_product_loop' );
                 $template = $this->get_template($settings['eael_dynamic_template_Layout']);
                 $settings['loadable_file_name'] = $this->get_filename_only($template);
+                $dir_name = $this->get_temp_dir_name($settings['loadable_file_name']);
 
                 if (file_exists($template)) {
 	                $settings['eael_page_id'] = get_the_ID();
@@ -3051,7 +3052,7 @@ class Product_Grid extends Widget_Base
                 }
 
 
-                $this->print_load_more_button($settings, $args);
+                $this->print_load_more_button($settings, $args, $dir_name);
                 ?>
             </div>
         </div>
