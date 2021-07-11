@@ -296,6 +296,8 @@ trait Library
 	        'home',
 	        'subscriptions',
 	        'payments',
+	        'newpassword',
+	        'manage_sub_accounts',
         ];
         if (in_array($action_name, $allow_action)){
             return true;
