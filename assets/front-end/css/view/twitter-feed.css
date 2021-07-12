@@ -159,3 +159,7 @@
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
+
+.eael-twitter-feed-carousel.swiper-container {
+  width: 100%;
+}
