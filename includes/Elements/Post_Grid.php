@@ -645,7 +645,7 @@ class Post_Grid extends Widget_Base
                 'name' => 'eael_post_grid_title_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Typography::TYPOGRAPHY_1,
-                'selector' => '{{WRAPPER}} .eael-entry-title',
+                'selector' => '{{WRAPPER}} .eael-entry-title, {{WRAPPER}} .eael-entry-title a',
             ]
         );
 

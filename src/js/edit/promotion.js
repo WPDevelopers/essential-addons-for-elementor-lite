@@ -1,4 +1,7 @@
 ea.hooks.addAction("editMode.init", "ea", () => {
+	if (typeof parent.document==="undefined"){
+		return false;
+	}
 	parent.document.addEventListener("mousedown", function (e) {
 		var widgets = parent.document.querySelectorAll(".elementor-element--promotion");
 

@@ -1664,6 +1664,14 @@
 .theme-oceanwp .eael-product-popup.woocommerce div.product form.cart div.quantity .qty:focus {
   border: 1px solid;
 }
+.theme-astra .woocommerce ul.products, .woocommerce-page ul.products {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 0;
+     -moz-column-gap: 0;
+          column-gap: 0;
+}
 .eael-popup-details-render {
   /* Safari */
 }

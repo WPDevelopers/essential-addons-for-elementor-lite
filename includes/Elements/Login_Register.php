@@ -3730,7 +3730,7 @@ class Login_Register extends Widget_Base {
 	protected function print_login_form() {
 		if ( $this->should_print_login_form ) {
 			// prepare all login form related vars
-			$default_hide_class = 'register' === $this->default_form || isset($_GET['eael-register']) ? 'd-none' : '';
+			$default_hide_class = 'register' === $this->default_form || isset($_GET['eael-register']) ? 'eael-lr-d-none' : '';
 
 			//Reg link related
 			$reg_link_action = ! empty( $this->ds['registration_link_action'] ) ? $this->ds['registration_link_action'] : 'form';
@@ -3940,7 +3940,7 @@ class Login_Register extends Widget_Base {
 
 	protected function print_register_form() {
 		if ( $this->should_print_register_form ) {
-			$default_hide_class = 'login' === $this->default_form && !isset($_GET['eael-register']) ? 'd-none' : ''; //eael-register flag for show error/success message when formal form submit
+			$default_hide_class = 'login' === $this->default_form && !isset($_GET['eael-register']) ? 'eael-lr-d-none' : ''; //eael-register flag for show error/success message when formal form submit
 			$is_pass_valid      = false; // Does the form has a password field?
 			$is_pass_confirmed  = false;
 			// placeholders to flag if user use one type of field more than once.
@@ -4187,7 +4187,7 @@ class Login_Register extends Widget_Base {
 	 * @param string $form_type the type of form. Available values: login and register
 	 */
 	protected function print_form_header( $form_type = 'login' ) {
-		$title    = ! empty( $this->ds["{$form_type}_form_title"] ) ? esc_html( $this->ds["{$form_type}_form_title"] ) : '';
+		$title    = ! empty( $this->ds["{$form_type}_form_title"] ) ?  $this->ds["{$form_type}_form_title"]  : '';
 		$subtitle = ! empty( $this->ds["{$form_type}_form_subtitle"] ) ? esc_html( $this->ds["{$form_type}_form_subtitle"] ) : '';
 		if ( empty( $this->form_logo ) && empty( $title ) && empty( $subtitle ) ) {
 			return;

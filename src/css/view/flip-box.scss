@@ -317,6 +317,7 @@
 /*--- Zoom Out ---*/
 .eael-animate-zoom-out.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
 	opacity: 0;
+	visibility: hidden;
 	transform: scale(0.75);
 }
 
@@ -361,6 +362,7 @@
 	&:hover {
 		.eael-elements-flip-box-front-container {
 			opacity: 0;
+			visibility: hidden;
 		}
 		.eael-elements-flip-box-rear-container {
 			opacity: 1;
