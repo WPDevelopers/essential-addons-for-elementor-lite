@@ -172,8 +172,8 @@
     &.swiper-container {
         width: 100%;
 
-        ~ .swiper-button-prev:after,
-        ~ .swiper-button-next:after {
+        .swiper-button-prev:after,
+        .swiper-button-next:after {
             content: none;
         }
     }
