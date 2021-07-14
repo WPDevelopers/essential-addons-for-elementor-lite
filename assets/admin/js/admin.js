@@ -233,6 +233,7 @@
         let isProEnable = $dnode.data("pro-enabled");
         let rSitekey = $dnode.data("r-sitekey");
         let rSecret = $dnode.data("r-secret");
+        let rLanguage = $dnode.data("r-language");
         let gClientId = $dnode.data("g-client-id");
         let fbAppId = $dnode.data("fb-app-id");
         let fbAppSecret = $dnode.data("fb-app-secret");
@@ -248,6 +249,10 @@
                         <div class="sf-group">
                             <label for="lr_recaptcha_secret">${lr_i18n.r_sitesecret}:</label>
                             <input value="${rSecret}" name="lr_recaptcha_secret" id="lr_recaptcha_secret" placeholder="${lr_i18n.r_sitesecret}"/><br/>
+                        </div>
+                        <div class="sf-group">
+                            <label for="lr_recaptcha_language">${lr_i18n.r_language}: <a style="vertical-align: middle;" href="https://developers.google.com/recaptcha/docs/language" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:16px;height:16px;"><path style="fill:#545454;" d="M 12 2 C 6.4889971 2 2 6.4889971 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z M 12 4 C 16.430123 4 20 7.5698774 20 12 C 20 16.430123 16.430123 20 12 20 C 7.5698774 20 4 16.430123 4 12 C 4 7.5698774 7.5698774 4 12 4 z M 12 6 C 9.79 6 8 7.79 8 10 L 10 10 C 10 8.9 10.9 8 12 8 C 13.1 8 14 8.9 14 10 C 14 12 11 12.367 11 15 L 13 15 C 13 13.349 16 12.5 16 10 C 16 7.79 14.21 6 12 6 z M 11 16 L 11 18 L 13 18 L 13 16 L 11 16 z"></path></svg></a></label>
+                            <input value="${rLanguage}" name="lr_recaptcha_language" id="lr_recaptcha_language" placeholder="${lr_i18n.r_language_ph}"/><br/>
                         </div>
                     `;
         if (isProEnable) {
@@ -281,10 +286,9 @@
             cancelButtonText: lr_i18n.cancel,
             preConfirm: () => {
                 let formData = {
-                    recaptchaSiteKey: document.getElementById("lr_recaptcha_sitekey")
-                        .value,
-                    recaptchaSiteSecret: document.getElementById("lr_recaptcha_secret")
-                        .value,
+                    recaptchaSiteKey: document.getElementById("lr_recaptcha_sitekey").value,
+                    recaptchaSiteSecret: document.getElementById("lr_recaptcha_secret").value,
+                    recaptchaLanguage: document.getElementById("lr_recaptcha_language").value,
                 };
                 if (isProEnable) {
                     formData.gClientId = document.getElementById("lr_g_client_id").value;
