@@ -1270,6 +1270,11 @@ $theme-preset4: #ec3b75;
 
     .swiper-container {
         width: 100%;
+
+        ~ .swiper-button-prev:after,
+        ~ .swiper-button-next:after {
+            content: none;
+        }
     }
 }
 
