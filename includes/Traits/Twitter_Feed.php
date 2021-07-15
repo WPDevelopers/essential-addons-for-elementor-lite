@@ -24,7 +24,7 @@ trait Twitter_Feed
             return;
         }
 
-        if ($items === false) {
+        if (empty($items)) {
             if (empty($token)) {
                 $credentials = base64_encode($settings['eael_twitter_feed_consumer_key'] . ':' . $settings['eael_twitter_feed_consumer_secret']);
 
