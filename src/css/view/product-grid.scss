@@ -2404,6 +2404,6 @@
   }
 // Astra Default stockout issue resolve
 
-.woocommerce ul.products li.product .ast-shop-product-out-of-stock, .woocommerce-page ul.products li.product .ast-shop-product-out-of-stock {
+.eael-product-grid .woocommerce ul.products li.product .ast-shop-product-out-of-stock {
     display: none;
 }
