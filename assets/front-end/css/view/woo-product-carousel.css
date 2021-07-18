@@ -1010,6 +1010,13 @@
   line-height: 1.2em;
   direction: ltr;
 }
+.eael-woo-product-carousel-container .swiper-container {
+  width: 100%;
+}
+.eael-woo-product-carousel-container .swiper-container ~ .swiper-button-prev:after,
+.eael-woo-product-carousel-container .swiper-container ~ .swiper-button-next:after {
+  content: none;
+}
 .eael-product-popup {
   position: fixed;
   left: 0;

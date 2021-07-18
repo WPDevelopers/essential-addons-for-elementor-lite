@@ -1267,6 +1267,15 @@ $theme-preset4: #ec3b75;
         line-height: 1.2em;
         direction: ltr;
     }
+
+    .swiper-container {
+        width: 100%;
+
+        ~ .swiper-button-prev:after,
+        ~ .swiper-button-next:after {
+            content: none;
+        }
+    }
 }
 
 // popup
