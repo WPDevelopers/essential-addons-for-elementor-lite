@@ -82,7 +82,7 @@ class Advanced_Data_Table extends Widget_Base
                 'options' => call_user_func(function () {
                     $source = [];
                     $source['static'] = __('Static Data', 'essential-addons-for-elementor-lite');
-
+	                $source['ninja'] = __('Ninja Tables', 'essential-addons-for-elementor-lite');
                     if (apply_filters('eael/pro_enabled', false)) {
                         $source['database'] = __('Database', 'essential-addons-for-elementor-lite');
                         $source['remote'] = __('Remote Database', 'essential-addons-for-elementor-lite');
@@ -95,13 +95,26 @@ class Advanced_Data_Table extends Widget_Base
                         $source['tablepress'] = __('TablePress(PRO)', 'essential-addons-for-elementor-lite');
                     }
 
-                    $source['ninja'] = __('Ninja Tables', 'essential-addons-for-elementor-lite');
+
 
                     return $source;
                 }),
                 'default' => 'static',
             ]
         );
+
+	    if (!apply_filters('eael/pro_enabled', false)) {
+		    $this->add_control(
+			    'eael_adv_data_table_pro_enable_warning',
+			    [
+				    'label' => esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite'),
+				    'type' => Controls_Manager::HEADING,
+				    'condition' => [
+					    'ea_adv_data_table_source' => ['database','remote','google','tablepress'],
+				    ],
+			    ]
+		    );
+	    }
 
         // TODO: RM
         do_action('eael/advanced-data-table/source/control', $this);
