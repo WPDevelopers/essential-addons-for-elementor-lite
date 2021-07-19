@@ -118,6 +118,8 @@ class Woo_Checkout extends Widget_Base {
 				'label_block' => false,
 				'options' => apply_filters('eael/woo-checkout/layout', [
 					'default' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+					'multi-steps' => esc_html__( 'Multi Steps (Pro)', 'essential-addons-for-elementor-lite' ),
+					'split' => esc_html__( 'Split (Pro)', 'essential-addons-for-elementor-lite' ),
 				]),
 			]
 		);
@@ -2573,6 +2575,12 @@ class Woo_Checkout extends Widget_Base {
         }
 
         $settings = $this->get_settings_for_display();
+
+		if ( in_array( $settings[ 'ea_woo_checkout_layout' ], [ 'multi-steps', 'split' ] ) ) {
+			if ( !apply_filters( 'eael/pro_enabled', false ) ) {
+				return;
+			}
+		}
 
         $this->add_render_attribute( 'container', 'class', [
 			'ea-woo-checkout',
