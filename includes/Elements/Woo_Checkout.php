@@ -128,8 +128,8 @@ class Woo_Checkout extends Widget_Base {
 			$this->add_control(
 				'eael_woo_checkout_pro_enable_warning',
 				[
-					'label' => esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite'),
-					'type' => Controls_Manager::HEADING,
+					'label' => sprintf( '<a href="https://wpdeveloper.net/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+					'type' => Controls_Manager::RAW_HTML,
 					'condition' => [
 						'ea_woo_checkout_layout' => ['multi-steps', 'split'],
 					],
