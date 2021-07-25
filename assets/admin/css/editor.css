@@ -165,7 +165,7 @@
 	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.07);
 }
 
-.elementor-control.eael-pro-control::before{
+.elementor-control.eael-pro-control::after {
 	content: '';
 	position: absolute;
 	width: 100%;
@@ -179,7 +179,7 @@
 	background: transparent;
 }
 
-.elementor-control.eael-pro-control > .eael-pro-label {
+.elementor-control.eael-pro-control .eael-pro-label {
 	color: red;
 	font-weight: bold;
 	font-size: 11px;
