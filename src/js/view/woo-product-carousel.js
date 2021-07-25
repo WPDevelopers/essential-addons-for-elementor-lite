@@ -315,7 +315,7 @@ ea.hooks.addAction("init", "ea", () => {
 			);
 		}
 
-		jQuery('.elementor-widget-eael-lightbox [data-lightbox-type="lightbox_type_template"]').on('click', function () {
+		$('.elementor-widget-eael-lightbox [data-lightbox-type="lightbox_type_template"]').on('click', function () {
 			var $this = $(this),
 				$content = $($this.data('src'));
 			if ($content.find('.eael-woo-product-carousel').length) {
