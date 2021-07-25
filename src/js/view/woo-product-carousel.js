@@ -315,10 +315,8 @@ ea.hooks.addAction("init", "ea", () => {
 			);
 		}
 
-		$('.elementor-widget-eael-lightbox [data-lightbox-type="lightbox_type_template"]').on('click', function () {
-			var $this = $(this),
-				$content = $($this.data('src'));
-			if ($content.find('.eael-woo-product-carousel').length) {
+		ea.hooks.addAction("ea-lightbox-triggered", "ea", ($src) => {
+			if ($($src).find('.eael-woo-product-carousel').length) {
 				swiperLoader($wooProductCarousel, $carouselOptions);
 			}
 		});
