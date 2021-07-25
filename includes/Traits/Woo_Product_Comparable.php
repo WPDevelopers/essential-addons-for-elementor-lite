@@ -46,9 +46,7 @@ trait Woo_Product_Comparable {
 			'stock'       => __( 'Availability', 'essential-addons-for-elementor-lite' ),
 			'weight'      => __( 'weight', 'essential-addons-for-elementor-lite' ),
 			'dimension'   => __( 'Dimension', 'essential-addons-for-elementor-lite' ),
-			'pa_color'    => __( 'Color', 'essential-addons-for-elementor-lite' ),
-			'pa_size'     => __( 'Size', 'essential-addons-for-elementor-lite' ),
-		] );
+		] + self::get_wc_attr_taxonomies_list() );
 	}
 
 	public static function get_themes() {
@@ -114,6 +112,18 @@ trait Woo_Product_Comparable {
 			],
 		] );
 	}
+
+	/*
+	 * return woocommerce attribute taxonomies list
+	 */
+	public static function get_wc_attr_taxonomies_list(){
+		$attributes_tax =  wc_get_attribute_taxonomies();
+		$data = [];
+		foreach ($attributes_tax as $item){
+			$data[wc_attribute_taxonomy_name($item->attribute_name)] = $item->attribute_label;
+		}
+		return $data;
+    }
 
 	protected function init_content_wc_notice_controls() {
 		if ( ! function_exists( 'WC' ) ) {
