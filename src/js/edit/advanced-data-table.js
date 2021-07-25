@@ -117,7 +117,7 @@ class advancedDataTableEdit {
 
 			// parse table html
 			let origTable = this.parseHTML(this.table.cloneNode(true));
-
+			this.tableInnerHTML = origTable.innerHTML;
 			// update table
 			this.updateFromView(this.view, {
 				ea_adv_data_table_static_html: origTable.innerHTML,
@@ -368,7 +368,6 @@ class advancedDataTableEdit {
 		model.once("editor:close", () => {
 			// parse table html
 			let origTable = this.parseHTML(this.table.cloneNode(true));
-
 			if ( this.tableInnerHTML == null ) {
 				this.tableInnerHTML = origTable.innerHTML;
 			}

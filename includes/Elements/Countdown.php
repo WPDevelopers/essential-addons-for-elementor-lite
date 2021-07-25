@@ -1157,12 +1157,6 @@ class Countdown extends Widget_Base {
         $get_due_date = esc_attr( $settings['eael_countdown_due_time'] );
         $due_date = date( "M d Y G:i:s", strtotime( $get_due_date ) );
 
-        if ( 'template' == $settings['countdown_expire_type'] ) {
-            if ( !empty( $settings['countdown_expiry_templates'] ) ) {
-                echo Plugin::$instance->frontend->get_builder_content( $settings['countdown_expiry_templates'], true );
-            }
-        }
-
         $this->add_render_attribute( 'eael-countdown', 'class', 'eael-countdown-wrapper' );
         $this->add_render_attribute( 'eael-countdown', 'data-countdown-id', esc_attr( $this->get_id() ) );
         $this->add_render_attribute( 'eael-countdown', 'data-expire-type', $settings['countdown_expire_type'] );
@@ -1178,7 +1172,7 @@ class Countdown extends Widget_Base {
         } elseif ( $settings['countdown_expire_type'] == 'url' ) {
             $this->add_render_attribute( 'eael-countdown', 'data-redirect-url', $settings['countdown_expiry_redirection'] );
         } elseif ( $settings['countdown_expire_type'] == 'template' ) {
-            $this->add_render_attribute( 'eael-countdown', 'data-template', esc_attr( $template ) );
+            //$this->add_render_attribute( 'eael-countdown', 'data-template', esc_attr( $template ) );
         } else {
             //do nothing
         }
@@ -1208,6 +1202,15 @@ class Countdown extends Widget_Base {
 				<?php if ( !empty( $settings['eael_countdown_minutes'] ) ): ?><li class="eael-countdown-item"><div class="eael-countdown-minutes"><span data-minutes class="eael-countdown-digits">00</span><?php if ( !empty( $settings['eael_countdown_minutes_label'] ) ): ?><span class="eael-countdown-label"><?php echo esc_attr( $settings['eael_countdown_minutes_label'] ); ?></span><?php endif;?></div></li><?php endif;?>
 				<?php if ( !empty( $settings['eael_countdown_seconds'] ) ): ?><li class="eael-countdown-item"><div class="eael-countdown-seconds"><span data-seconds class="eael-countdown-digits">00</span><?php if ( !empty( $settings['eael_countdown_seconds_label'] ) ): ?><span class="eael-countdown-label"><?php echo esc_attr( $settings['eael_countdown_seconds_label'] ); ?></span><?php endif;?></div></li><?php endif;?>
 				</ul>
+                <div class="eael-countdown-expiry-template" style="display: none;">
+					<?php
+					if ( 'template' == $settings['countdown_expire_type'] ) {
+						if ( ! empty( $settings['countdown_expiry_templates'] ) ) {
+							echo Plugin::$instance->frontend->get_builder_content( $settings['countdown_expiry_templates'], true );
+						}
+					}
+					?>
+                </div>
 				<div class="clearfix"></div>
 			</div>
 		</div>

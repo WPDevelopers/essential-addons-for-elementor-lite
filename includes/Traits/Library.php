@@ -290,10 +290,41 @@ trait Library
      * @return bool
      */
     public function check_background_action($action_name){
-        $allow_action = ['subscriptions'];
+        $allow_action = [
+        	'subscriptions',
+	        'mepr_unauthorized',
+	        'home',
+	        'subscriptions',
+	        'payments',
+        ];
         if (in_array($action_name, $allow_action)){
             return true;
         }
         return false;
     }
+
+	/**
+	 * Remove some old options value from wp_options table which are not use any more
+	 *
+	 * @since 4.7.4
+	 */
+	public function remove_old_options_cache() {
+		$status = get_option( "eael_remove_old_cache" );
+		if ( !$status ) {
+			update_option("eael_remove_old_cache",true);
+			global $wpdb;
+			$sql     = "from {$wpdb->options} as options_tb 
+    				inner join (SELECT option_id FROM {$wpdb->options} 
+    				WHERE ((option_name like '%\_elements' and LENGTH(option_name) = 18 and option_name not like '%\_eael_elements') 
+    				           or (option_name like '%\_custom_js' and LENGTH(option_name) = 19 and option_name not like '%\_eael_custom_js' and (option_value IS NULL or option_value = ''))) 
+    				  and autoload = 'yes') AS options_tb2 
+    				    ON options_tb2.option_id = options_tb.option_id";
+			$selection_sql  = "select count(options_tb.option_id) as total ".$sql;
+			$results = $wpdb->get_var( $selection_sql );
+			if ( $results > 1 ) {
+				$deletiation_sql  = "delete options_tb ".$sql;
+				$wpdb->query($deletiation_sql);
+			}
+		}
+	}
 }

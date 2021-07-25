@@ -619,7 +619,9 @@ class Helper
 
         $html = '<ul class="post-carousel-categories">';
         foreach ($terms as $term) {
-            if ($count === $length) {break;}
+            if ( $count === absint( $length ) ) {
+                break;
+            }
             $link = ($term_type === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
             $html .= '<li>';
             $html .= '<a href="' . esc_url($link) . '">';

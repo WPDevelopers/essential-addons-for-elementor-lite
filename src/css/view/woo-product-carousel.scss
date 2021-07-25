@@ -1267,6 +1267,15 @@ $theme-preset4: #ec3b75;
         line-height: 1.2em;
         direction: ltr;
     }
+
+    .swiper-container {
+        width: 100%;
+
+        ~ .swiper-button-prev:after,
+        ~ .swiper-button-next:after {
+            content: none;
+        }
+    }
 }
 
 // popup
@@ -2015,6 +2024,11 @@ $theme-preset4: #ec3b75;
     .eael-product-popup.woocommerce div.product form.cart div.quantity .qty:focus {
         border: 1px solid;
     }
+}
+
+.theme-astra .woocommerce.eael-woo-product-carousel ul.products, .woocommerce-page .eael-woo-product-carousel ul.products {
+    display: flex;
+    column-gap: 0;
 }
 
 //.eael-product-loader {
