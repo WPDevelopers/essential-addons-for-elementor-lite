@@ -275,6 +275,19 @@ class Twitter_Feed extends Widget_Base
         );
 
         $this->add_control(
+            'eael_twitter_feed_show_read_more_text',
+            [
+                'label' => esc_html__('Read More Text', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'label_block' => false,
+                'default' => __('Read More', 'essential-addons-for-elementor-lite'),
+	            'condition' => [
+	            	'eael_twitter_feed_show_read_more' => 'true',
+	            ]
+            ]
+        );
+
+        $this->add_control(
             'eael_twitter_feed_show_icon',
             [
                 'label' => esc_html__('Show Icon', 'essential-addons-for-elementor-lite'),
