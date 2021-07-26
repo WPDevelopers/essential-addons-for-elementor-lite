@@ -24,8 +24,6 @@ var AdvAccordionHandler = function ($scope, $) {
 				".eael-filter-gallery-container"
 			);
 
-		ea.hooks.doAction("ea-advanced-accordion-triggered", $contentNext);
-
 		if ($accordionType === "accordion") {
 			if ($this.hasClass("show")) {
 				$this.removeClass("show active");
@@ -62,6 +60,8 @@ var AdvAccordionHandler = function ($scope, $) {
 				}
 			}
 		}
+
+		ea.hooks.doAction("ea-advanced-accordion-triggered", $contentNext);
 	});
 };
 jQuery(window).on("elementor/frontend/init", function () {
