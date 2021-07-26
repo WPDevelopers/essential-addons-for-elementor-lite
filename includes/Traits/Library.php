@@ -327,4 +327,14 @@ trait Library
 			}
 		}
 	}
+
+	/*
+	 * Check some other cookie for solve asset loading issue
+	 */
+	public function check_third_party_cookie_status() {
+		if ( method_exists( $Password_Protected, 'cookie_name' ) && isset( $_COOKIE[ $Password_Protected->cookie_name() ] ) ) {
+			return true;
+		}
+		return false;
+	}
 }
