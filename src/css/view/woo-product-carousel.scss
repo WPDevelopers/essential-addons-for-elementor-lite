@@ -1413,7 +1413,9 @@ $theme-preset4: #ec3b75;
             }
 
             .flex-control-thumbs {
-                display: flex;
+                li:nth-child(4n) {
+                    margin-right: 0;
+                }
             }
         }
 
@@ -2077,4 +2079,3 @@ $theme-preset4: #ec3b75;
         100% { transform: rotate(360deg); }
     }
 }
-
