@@ -933,7 +933,7 @@ class Info_Box extends Widget_Base
         $this->add_responsive_control(
             'eael_infobox_icon_size',
             [
-                'label' => __('Icon Sizeaaaaa', 'essential-addons-for-elementor-lite'),
+                'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 40,
