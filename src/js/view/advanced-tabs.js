@@ -47,6 +47,8 @@ var AdvanceTabHandler = function ($scope, $) {
             .addClass('active')
             .removeClass('inactive')
 
+        ea.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
+
         var $filterGallery = tabsContent
                 .eq(currentTabIndex)
                 .find('.eael-filter-gallery-container'),
