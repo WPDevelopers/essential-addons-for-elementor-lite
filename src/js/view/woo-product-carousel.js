@@ -315,11 +315,14 @@ ea.hooks.addAction("init", "ea", () => {
 			);
 		}
 
-		ea.hooks.addAction("ea-lightbox-triggered", "ea", ($src) => {
+		var WooProductCarouselLoader = function ($src) {
 			if ($($src).find('.eael-woo-product-carousel').length) {
 				swiperLoader($wooProductCarousel, $carouselOptions);
 			}
-		});
+		}
+
+		ea.hooks.addAction("ea-lightbox-triggered", "ea", WooProductCarouselLoader);
+		ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", WooProductCarouselLoader);
 	};
 
 	const swiperLoader = (swiperElement, swiperConfig) => {
