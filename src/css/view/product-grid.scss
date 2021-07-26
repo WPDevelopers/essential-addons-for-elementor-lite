@@ -888,6 +888,11 @@
                 transform-style: preserve-3d;
                 margin-bottom: 1em;
             }
+            .flex-control-thumbs {
+                li:nth-child(4n) {
+                    margin-right: 0;
+                }
+            }
         }
 
         div.woocommerce-product-gallery--columns-4 .flex-control-thumbs li {

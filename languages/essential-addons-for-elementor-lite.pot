@@ -835,7 +835,7 @@ msgstr ""
 msgid "Tab Style"
 msgstr ""
 
-#: ../includes/Elements/Adv_Accordion.php:416, ../includes/Elements/Adv_Accordion.php:793, ../includes/Elements/Adv_Tabs.php:397, ../includes/Elements/Creative_Button.php:499, ../includes/Elements/Data_Table.php:700, ../includes/Elements/Data_Table.php:1048, ../includes/Elements/Dual_Color_Header.php:397, ../includes/Elements/Dual_Color_Header.php:608, ../includes/Elements/Event_Calendar.php:1444, ../includes/Elements/Event_Calendar.php:1511, ../includes/Elements/Feature_List.php:577, ../includes/Elements/Filterable_Gallery.php:1774, ../includes/Elements/Filterable_Gallery.php:2136, ../includes/Elements/Filterable_Gallery.php:2573, ../includes/Elements/Flip_Box.php:961, ../includes/Elements/Flip_Box.php:1074, ../includes/Elements/Info_Box.php:1178, ../includes/Elements/Login_Register.php:2829, ../includes/Elements/Pricing_Table.php:1236, ../includes/Elements/Pricing_Table.php:1671, ../includes/Elements/Pricing_Table.php:1842, ../includes/Elements/Product_Grid.php:1293, ../includes/Elements/Product_Grid.php:2831, ../includes/Elements/Team_Member.php:643, ../includes/Elements/Tooltip.php:113, ../includes/Elements/Woo_Product_Carousel.php:1164, ../includes/Elements/Woo_Product_Carousel.php:1948, ../includes/Elements/Woo_Product_Carousel.php:2596, ../includes/Extensions/Table_of_Content.php:681, ../includes/Traits/Woo_Product_Comparable.php:1345
+#: ../includes/Elements/Adv_Accordion.php:416, ../includes/Elements/Adv_Accordion.php:793, ../includes/Elements/Adv_Tabs.php:397, ../includes/Elements/Creative_Button.php:499, ../includes/Elements/Data_Table.php:700, ../includes/Elements/Data_Table.php:1048, ../includes/Elements/Dual_Color_Header.php:397, ../includes/Elements/Dual_Color_Header.php:608, ../includes/Elements/Event_Calendar.php:1444, ../includes/Elements/Event_Calendar.php:1511, ../includes/Elements/Feature_List.php:577, ../includes/Elements/Filterable_Gallery.php:1774, ../includes/Elements/Filterable_Gallery.php:2136, ../includes/Elements/Filterable_Gallery.php:2573, ../includes/Elements/Flip_Box.php:961, ../includes/Elements/Flip_Box.php:1074, ../includes/Elements/Info_Box.php:936, ../includes/Elements/Info_Box.php:1178, ../includes/Elements/Login_Register.php:2829, ../includes/Elements/Pricing_Table.php:1236, ../includes/Elements/Pricing_Table.php:1671, ../includes/Elements/Pricing_Table.php:1842, ../includes/Elements/Product_Grid.php:1293, ../includes/Elements/Product_Grid.php:2831, ../includes/Elements/Team_Member.php:643, ../includes/Elements/Tooltip.php:113, ../includes/Elements/Woo_Product_Carousel.php:1164, ../includes/Elements/Woo_Product_Carousel.php:1948, ../includes/Elements/Woo_Product_Carousel.php:2596, ../includes/Extensions/Table_of_Content.php:681, ../includes/Traits/Woo_Product_Comparable.php:1345
 msgid "Icon Size"
 msgstr ""
 
@@ -3801,10 +3801,6 @@ msgstr ""
 
 #: ../includes/Elements/Info_Box.php:800, ../includes/Elements/Info_Box.php:880, ../includes/Elements/Info_Box.php:1018, ../includes/Elements/Info_Box.php:1114
 msgid "Background Shape"
-msgstr ""
-
-#: ../includes/Elements/Info_Box.php:936
-msgid "Icon Sizeaaaaa"
 msgstr ""
 
 #: ../includes/Elements/Info_Box.php:1159
