@@ -854,17 +854,37 @@ trait Helper
 	    wp_send_json_success( $data );
     }
 
-	/**
+    /**
 	 * return file path which are store in theme Template directory
 	 * @param $file
 	 */
-	private function retrive_theme_path() {
+	public function retrive_theme_path() {
 		$current_theme = wp_get_theme();
 		return sprintf(
 			'%s/%s',
 			$current_theme->theme_root,
 			$current_theme->stylesheet
 		);
+	}
+
+	/**
+	 * @param string $tag
+	 * @param string $function_to_remove
+	 * @param int|string $priority
+	 */
+	public function eael_forcefully_remove_action( $tag, $function_to_remove, $priority ) {
+		global $wp_filter;
+
+		if ( ! isset( $wp_filter[ $tag ][ $priority ] ) && ! is_array( $wp_filter[ $tag ][ $priority ] ) ) {
+			return;
+		}
+
+		foreach ( $wp_filter[ $tag ][ $priority ] as $callback_function => $registration ) {
+			if ( strlen( $callback_function ) > 32 && strpos( $callback_function, $function_to_remove, 32 ) !== false || $callback_function === $function_to_remove ) {
+				remove_action( $tag, $callback_function, $priority );
+				break;
+			}
+		}
 	}
 	
 }
