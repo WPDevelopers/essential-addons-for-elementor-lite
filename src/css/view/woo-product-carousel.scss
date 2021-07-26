@@ -1411,6 +1411,10 @@ $theme-preset4: #ec3b75;
                 transform-style: preserve-3d;
                 margin-bottom: 1em;
             }
+
+            .flex-control-thumbs {
+                display: flex;
+            }
         }
 
         div.woocommerce-product-gallery--columns-4 .flex-control-thumbs li {
