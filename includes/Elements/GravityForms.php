@@ -273,7 +273,7 @@ class GravityForms extends Widget_Base {
                         'hide'          => __( 'Hide', 'essential-addons-for-elementor-lite'),
                     ],
                     'selectors_dictionary'  => [
-                        'show'          => " ",
+                        'show'          => ' ',
                         'hide'          => 'none !important',
                     ],
                     'selectors'             => [
