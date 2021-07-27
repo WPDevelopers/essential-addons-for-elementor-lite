@@ -333,7 +333,7 @@ trait Library
 	 */
 	public function check_third_party_cookie_status() {
 		global $Password_Protected;
-		if ( method_exists( $Password_Protected, 'cookie_name' ) && isset( $_COOKIE[ $Password_Protected->cookie_name() ] ) ) {
+		if ( is_object( $Password_Protected ) && method_exists( $Password_Protected, 'cookie_name' ) && isset( $_COOKIE[ $Password_Protected->cookie_name() ] ) ) {
 			return true;
 		}
 		return false;
