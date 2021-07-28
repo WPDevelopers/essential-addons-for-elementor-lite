@@ -3705,7 +3705,11 @@ class Login_Register extends Widget_Base {
 
 	protected function render() {
 		if ( ! is_admin() && 'yes' === $this->get_settings_for_display( 'redirect_for_logged_in_user' ) && is_user_logged_in() ) {
-			wp_safe_redirect( $this->get_settings_for_display( 'redirect_url_for_logged_in_user' )['url'] );
+			if ( $redirect = $this->get_settings_for_display( 'redirect_url_for_logged_in_user' )['url'] ) {
+				wp_safe_redirect( $redirect );
+			} else {
+				wp_safe_redirect( site_url() );
+			}
 		}
 
 		//Note. forms are handled in Login_Registration Trait used in the Bootstrap class.
