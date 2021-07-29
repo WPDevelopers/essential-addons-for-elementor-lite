@@ -1666,30 +1666,30 @@ class Product_Grid extends Widget_Base
             'eael_section_product_badges',
             [
                 'label' => esc_html__('Sale / Stock Out Badge', 'essential-addons-for-elementor-lite'),
-                'conditions' => [
-                    'relation' => 'and',
-                    'terms' => [
-                        [
-                            'name' => 'eael_product_grid_layout',
-                            'operator' => '!=',
-                            'value' => [
-                                'grid',
-                                'list',
-                                'masonry',
-                            ],
-                        ],
-                        [
-                            'name' => 'eael_product_grid_style_preset',
-                            'operator' => '!in',
-                            'value' => [
-                                'eael-product-default',
-                                'eael-product-simple',
-                                'eael-product-reveal',
-                                'eael-product-overlay',
-                            ]
-                        ],
-                    ],
-                ],
+//                'conditions' => [
+//                    'relation' => 'and',
+//                    'terms' => [
+//                        [
+//                            'name' => 'eael_product_grid_layout',
+//                            'operator' => '!=',
+//                            'value' => [
+//                                'grid',
+//                                'list',
+//                                'masonry',
+//                            ],
+//                        ],
+//                        [
+//                            'name' => 'eael_product_grid_style_preset',
+//                            'operator' => '!in',
+//                            'value' => [
+//                                'eael-product-default',
+//                                'eael-product-simple',
+//                                'eael-product-reveal',
+//                                'eael-product-overlay',
+//                            ]
+//                        ],
+//                    ],
+//                ],
             ]
         );
         $this->add_control(
@@ -1729,6 +1729,23 @@ class Product_Grid extends Widget_Base
                 ],
             ]
         );
+
+	    $this->add_control(
+		    'eael_product_carousel_sale_text',
+		    [
+			    'label'       => esc_html__( 'Sale Text', 'essential-addons-for-elementor-lite' ),
+			    'type'        => Controls_Manager::TEXT,
+			    'separator' => 'before',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_product_carousel_stockout_text',
+		    [
+			    'label'       => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
+			    'type'        => Controls_Manager::TEXT,
+		    ]
+	    );
 
         $this->end_controls_section();
     }
