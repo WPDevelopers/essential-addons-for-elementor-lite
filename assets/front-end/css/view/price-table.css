@@ -518,6 +518,11 @@
   text-align: center;
 }
 
+.eael-pricing-content-align-left .eael-pricing .eael-pricing-item.ribbon-4:before,
+.eael-pricing-content-align-right .eael-pricing .eael-pricing-item.ribbon-4:before {
+  text-align: center;
+}
+
 .eael-pricing-content-align-left .eael-pricing.style-4 {
   text-align: left;
 }
