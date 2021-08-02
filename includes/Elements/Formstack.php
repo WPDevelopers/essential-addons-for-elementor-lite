@@ -11,10 +11,10 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Scheme_Typography;
+use \Elementor\Core\Schemes\Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Group_Control_Background;
-use \Elementor\Scheme_Color;
+use \Elementor\Core\Schemes\Color;
 
 class Formstack extends Widget_Base {
 
@@ -541,7 +541,7 @@ class Formstack extends Widget_Base {
             [
                 'name'     => 'eael_formstack_form_description_typography',
                 'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'   => Scheme_Typography::TYPOGRAPHY_4,
+                'scheme'   => Typography::TYPOGRAPHY_4,
                 'selector' => '{{WRAPPER}} .eael-formstack-description'
             ]
         );
@@ -1633,8 +1633,8 @@ class Formstack extends Widget_Base {
                 'label'     => __('Title Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'scheme'    => [
-                    'type'  => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_1,
+                    'type'  => Color::get_type(),
+                    'value' => Color::COLOR_1,
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-formstack .fsProgressBarContainer .fsProgressText' => 'color: {{VALUE}};',
@@ -1791,7 +1791,7 @@ class Formstack extends Widget_Base {
             [
                 'name'     => 'eael_formstack_pagination_button_typography',
                 'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
+                'scheme'   => Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .eael-formstack .fsPagination button .fsFull',
             ]
         );

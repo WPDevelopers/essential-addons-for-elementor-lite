@@ -272,3 +272,32 @@
 .eaicon-typeform:before {
 	content: "\e950";
 }
+.eaicon-product-compare:before {
+	content: "\e953";
+}
+
+.eaicon-product-carousel:before {
+	font-size: 40px;
+	content: "\e954";
+}
+
+.eaicon-crowdfundly-campaign:before {
+	content: "\e955";
+}
+
+.eaicon-crowdfundly-organization:before {
+	content: "\e956";
+}
+
+.eaicon-crowdfundly-single-campaign:before {
+	content: "\e957";
+}
+
+.eaicon-product-slider:before {
+	font-size: 39px;
+	content: "\e958";
+}
+
+.eaicon-simple-menu:before {
+	content: "\e959";
+}

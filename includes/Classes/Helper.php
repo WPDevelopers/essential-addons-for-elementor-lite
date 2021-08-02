@@ -7,24 +7,31 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use \Elementor\Controls_Manager;
+use \Elementor\Utils;
+use Elementor\Plugin;
 
 class Helper
 {
-    public static function str_to_css_id($str)
-    {
-        $str = strtolower($str);
-        
-        //Make alphanumeric (removes all other characters)
-        $str = preg_replace("/[^a-z0-9_\s-]/", "", $str);
-        
-        //Clean up multiple dashes or whitespaces
-        $str = preg_replace("/[\s-]+/", " ", $str);
-        
-        //Convert whitespaces and underscore to dash
-        $str = preg_replace("/[\s_]/", "-", $str);
-        
-        return $str;
-    }
+
+
+	const EAEL_ALLOWED_HTML_TAGS = [
+		'article',
+		'aside',
+		'div',
+		'footer',
+		'h1',
+		'h2',
+		'h3',
+		'h4',
+		'h5',
+		'h6',
+		'header',
+		'main',
+		'nav',
+		'p',
+		'section',
+		'span',
+	];
 
     /**
      * Include a file with variables
@@ -35,7 +42,7 @@ class Helper
      * @return string
      * @since  4.2.2
      */
-    public static function include_with_variable($file_path, $variables = [])
+    public static function include_with_variable( $file_path, $variables = [])
     {
         if (file_exists($file_path)) {
             extract($variables);
@@ -137,7 +144,7 @@ class Helper
         } else {
             $args['post_type'] = $settings['post_type'];
 
-            if ($args['post_type'] !== 'page') {
+            //if ($args['post_type'] !== 'page') {
                 $args['tax_query'] = [];
 
                 $taxonomies = get_object_taxonomies($settings['post_type'], 'objects');
@@ -157,7 +164,7 @@ class Helper
                 if (!empty($args['tax_query'])) {
                     $args['tax_query']['relation'] = 'AND';
                 }
-            }
+            //}
         }
 
         if (!empty($settings['authors'])) {
@@ -191,7 +198,7 @@ class Helper
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     '1' => [
-                        'title' => __('', 'essential-addons-for-elementor-lite'),
+                        'title' => '',
                         'icon' => 'fa fa-unlock-alt',
                     ],
                 ],
@@ -612,7 +619,9 @@ class Helper
 
         $html = '<ul class="post-carousel-categories">';
         foreach ($terms as $term) {
-            if ($count === $length) {break;}
+            if ( $count === absint( $length ) ) {
+                break;
+            }
             $link = ($term_type === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
             $html .= '<li>';
             $html .= '<a href="' . esc_url($link) . '">';
@@ -627,6 +636,25 @@ class Helper
 
     }
 
+	/**
+	 * Returns product categories list
+	 *
+	 * @return string
+	 */
+	public static function get_product_categories_list($terms_name) {
+		global $product;
+
+		if ( ! is_a( $product, 'WC_Product' ) ) {
+			return;
+		}
+
+		$separator = '';
+		$before    = '<ul class="eael-product-cats"><li>';
+		$after     = '</li></ul>';
+
+		return get_the_term_list( $product->get_id(), $terms_name, $before, $separator, $after );
+	}
+
     /**
      * This function is responsible for counting doc post under a category.
      *
@@ -634,7 +662,7 @@ class Helper
      * @param int $term_id
      * @return int $term_count;
      */
-    public static function get_doc_post_count($term_count = 0, $term_id)
+    public static function get_doc_post_count($term_count = 0, $term_id = 0)
     {
         $tax_terms = get_terms('doc_category', ['child_of' => $term_id]);
 
@@ -648,28 +676,42 @@ class Helper
     public static function get_dynamic_args(array $settings, array $args)
     {
         if ($settings['post_type'] === 'source_dynamic' && is_archive()) {
-
             $data = get_queried_object();
+
             if (isset($data->post_type)) {
                 $args['post_type'] = $data->post_type;
-
                 $args['tax_query'] = [];
-
-                if ($data->taxonomy) {
-                    $args['tax_query'][] = [
-                        'taxonomy' => $data->taxonomy,
-                        'field' => 'term_id',
-                        'terms' => $data->term_id,
-                    ];
-                }
             } else {
                 global $wp_query;
-
                 $args['post_type'] = $wp_query->query_vars['post_type'];
+                if(!empty($wp_query->query_vars['s'])){
+                    $args['s'] = $wp_query->query_vars['s'];
+                    $args['offset'] = 0;
+                }
+            }
+
+            if ( isset( $data->taxonomy ) ) {
+                $args[ 'tax_query' ][] = [
+                    'taxonomy' => $data->taxonomy,
+                    'field'    => 'term_id',
+                    'terms'    => $data->term_id,
+                ];
+            }
+
+            if ( isset($data->taxonomy) ) {
+                $args[ 'tax_query' ][] = [
+                    'taxonomy' => $data->taxonomy,
+                    'field'    => 'term_id',
+                    'terms'    => $data->term_id,
+                ];
             }
 
             if (get_query_var('author') > 0) {
                 $args['author__in'] = get_query_var('author');
+            }
+
+            if (get_query_var('s')!='') {
+                $args['s'] = get_query_var('s');
             }
 
             if (get_query_var('year') || get_query_var('monthnum') || get_query_var('day')) {
@@ -764,87 +806,138 @@ class Helper
         return $data;
     }
 
-    /**
-     * Product grid
-     */
-    public static function eael_pagination($args, $settings)
-    {
-        $args['posts_per_page'] = -1;
-
-        $pagination_Query = new \WP_Query($args);
-        $pagination_Count = count($pagination_Query->posts);
-        $paginationLimit = $settings['eael_product_grid_products_count'] ?: 4;
-        $pagination_Paginationlist = ceil($pagination_Count / $paginationLimit);
-        $last = ceil($pagination_Paginationlist);
-
-        $widget_id = $settings['eael_widget_id'];
-        $next_label = $settings['pagination_next_label'];
-        $prev_label = $settings['pagination_prev_label'];
-
-        $adjacents = "2";
-        $setPagination = "";
-        if ($pagination_Paginationlist > 0) {
-
-            $setPagination .= "<nav class='eael-woo-pagination'>";
-            $setPagination .= "<ul class='page-numbers'>";
-//            $setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers'
-            // data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."'
-            // data-pnumber='1' data-plimit='$paginationLimit'>$prev_label</a></li>";
-
-            if ($pagination_Paginationlist < 7 + ($adjacents * 2)) {
-
-                for ($pagination = 1; $pagination <= $pagination_Paginationlist; $pagination++) {
-
-                    if ($pagination == 0 || $pagination == 1) {$active = "current";} else { $active = "";}
-                    $setPagination .= "<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='" . json_encode(['dir' => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name']], 1) . "' data-widgetid='$widget_id' data-args='" . http_build_query($args) . "' data-settings='" . http_build_query($settings) . "' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
-
-                }
-
-            } else if ($pagination_Paginationlist > 5 + ($adjacents * 2)) {
-
-                for ($pagination = 1; $pagination <= 4 + ($adjacents * 2); $pagination++) {
-                    if ($pagination == 0 || $pagination == 1) {$active = "current";} else { $active = "";}
-
-                    $setPagination .= "<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='" . json_encode(['dir' => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name']], 1) . "' data-widgetid='$widget_id' data-args='" . http_build_query($args) . "' data-settings='" . http_build_query($settings) . "' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
-                }
-
-                $setPagination .= "<li class='pagitext dots'>...</li>";
-                $setPagination .= "<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='" . json_encode(['dir' => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name']], 1) . "' data-widgetid='$widget_id' data-args='" . http_build_query($args) . "' data-settings='" . http_build_query($settings) . "' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
-
-            } else {
-
-                for ($pagination = 1; $pagination <= $pagination_Paginationlist; $pagination++) {
-                    if ($pagination == 0 || $pagination == 1) {$active = "current";} else { $active = "";}
-                    $setPagination .= "<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='" . json_encode(['dir' => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name']], 1) . "' data-widgetid='$widget_id' data-args='" . http_build_query($args) . "' data-settings='" . http_build_query($settings) . "' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
-                }
-
+    public static function eael_get_widget_settings( $page_id, $widget_id ) {
+        $document = Plugin::$instance->documents->get( $page_id );
+        $settings = [];
+        if ( $document ) {
+            $elements    = Plugin::instance()->documents->get( $page_id )->get_elements_data();
+            $widget_data = self::find_element_recursive( $elements, $widget_id );
+            if (!empty($widget_data) && is_array($widget_data)) {
+                $widget      = Plugin::instance()->elements_manager->create_element_instance( $widget_data );
             }
-            if ($pagination_Paginationlist > 1) {
-                $setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='" . json_encode(['dir' => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name']], 1) . "' data-widgetid='$widget_id' data-args='" . http_build_query($args) . "' data-settings='" . http_build_query($settings) . "' data-pnumber='2' data-plimit='$paginationLimit'>$next_label</a></li>";
+            if ( !empty($widget) ) {
+                $settings    = $widget->get_settings_for_display();
             }
-            $setPagination .= "</ul>";
-            $setPagination .= "</nav>";
-
-            return $setPagination;
         }
+        return $settings;
     }
 
-    public static function eael_product_quick_view($product, $settings, $widget_id)
-    {?>
-		<div id="eaproduct<?php echo $widget_id . $product->get_id(); ?>" class="eael-product-popup
+    /**
+     * Get Widget data.
+     *
+     * @param array  $elements Element array.
+     * @param string $form_id  Element ID.
+     *
+     * @return bool|array
+     */
+    public static function find_element_recursive( $elements, $form_id ) {
+
+        foreach ( $elements as $element ) {
+            if ( $form_id === $element['id'] ) {
+                return $element;
+            }
+
+            if ( ! empty( $element['elements'] ) ) {
+                $element = self::find_element_recursive( $element['elements'], $form_id );
+
+                if ( $element ) {
+                    return $element;
+                }
+            }
+        }
+
+        return false;
+    }
+	/**
+	 * Product grid
+	 */
+	public static function eael_pagination ($args, $settings) {
+		$args['posts_per_page'] = -1;
+
+		$pagination_Query = new \WP_Query($args);
+		$pagination_Count = count($pagination_Query->posts);
+		$paginationLimit = $settings['eael_product_grid_products_count'] ?: 4;
+		$pagination_Paginationlist = ceil($pagination_Count/$paginationLimit);
+		$last = ceil( $pagination_Paginationlist );
+
+		$widget_id = $settings['eael_widget_id'];
+		$next_label = $settings['pagination_next_label'];
+		$prev_label = $settings['pagination_prev_label'];
+
+		$adjacents = "2";
+		$setPagination = "";
+		if( $pagination_Paginationlist > 0 ){
+
+			$setPagination .="<nav class='eael-woo-pagination'>";
+			$setPagination .="<ul class='page-numbers'>";
+//			$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers'
+// data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."'
+// data-pnumber='1' data-plimit='$paginationLimit'>$prev_label</a></li>";
+
+			if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
+
+				for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
+
+					if( $pagination ==  0 || $pagination ==  1 ){ $active="current"; }else{ $active=""; }
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+
+				}
+
+			} else if ( $pagination_Paginationlist > 5 + ($adjacents * 2) ){
+
+				for( $pagination=1; $pagination <= 4 + ($adjacents * 2); $pagination++){
+					if( $pagination ==  0 || $pagination ==  1 ){ $active="current"; }else{ $active=""; }
+
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+				}
+
+				$setPagination .="<li class='pagitext dots'>...</li>";
+				$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+
+			} else {
+
+				for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
+					if( $pagination ==  0 || $pagination ==  1 ){ $active="current"; }else{ $active=""; }
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+				}
+
+			}
+			if ($pagination_Paginationlist > 1) {
+				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='" . http_build_query( $args ) . "' data-settings='" . http_build_query( $settings ) . "' data-pnumber='2' data-plimit='$paginationLimit'>$next_label</a></li>";
+			}
+			$setPagination .="</ul>";
+			$setPagination .="</nav>";
+
+			return $setPagination;
+		}
+	}
+
+	public static function eael_product_quick_view ($product, $settings, $widget_id) {
+		$sale_badge_align = isset( $settings['eael_product_sale_badge_alignment'] ) ? $settings['eael_product_sale_badge_alignment'] : '';
+		$sale_badge_preset = isset($settings['eael_product_sale_badge_preset']) ? $settings['eael_product_sale_badge_preset'] : '';
+		$sale_text = !empty($settings['eael_product_carousel_sale_text']) ? $settings['eael_product_carousel_sale_text'] : 'Sale!';
+		$stockout_text = !empty($settings['eael_product_carousel_stockout_text']) ? $settings['eael_product_carousel_stockout_text'] : 'Stock Out';
+        $tag = !empty($settings['eael_product_quick_view_title_tag']) ? self::eael_validate_html_tag($settings['eael_product_quick_view_title_tag']) : 'h1';
+        
+        remove_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
+        add_action( 'eael_woo_single_product_summary', function () use ( $tag ) {
+            the_title( '<' . $tag . ' class="eael-product-quick-view-title product_title entry-title">', '</' . $tag . '>' );
+        }, 5 );
+        
+	    ?>
+		<div id="eaproduct<?php echo $widget_id.$product->get_id(); ?>" class="eael-product-popup
 		eael-product-zoom-in woocommerce">
 			<div class="eael-product-modal-bg"></div>
 			<div class="eael-product-popup-details">
-				<div id="product-<?php the_ID();?>" <?php post_class('product');?>>
+				<div id="product-<?php the_ID(); ?>" <?php post_class( 'product' ); ?>>
 					<div class="eael-product-image-wrap">
 						<?php
-echo ($product->is_on_sale() ? '<span class="eael-onsale ' . $settings['eael_product_sale_badge_preset'] . '">' . __('Sale!',
-        'essential-addons-for-elementor-lite') . '</span>' : '');
-        do_action('eael_woo_single_product_image');
-        ?>
+						echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'. $stockout_text .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . $sale_text . '</span>' : '') );
+						do_action( 'eael_woo_single_product_image' );
+						?>
 					</div>
 					<div class="eael-product-details-wrap">
-						<?php do_action('eael_woo_single_product_summary');?>
+						<?php do_action( 'eael_woo_single_product_summary' ); ?>
 					</div>
 				</div>
 				<button class="eael-product-popup-close"><i class="fas fa-times"></i></button>
@@ -853,16 +946,235 @@ echo ($product->is_on_sale() ? '<span class="eael-onsale ' . $settings['eael_pro
 		</div>
 	<?php }
 
-    public static function eael_avoid_redirect_to_single_page()
-    {
-        return '';
+	public static function eael_avoid_redirect_to_single_page() {
+		return '';
+	}
+
+	public static function eael_woo_product_grid_actions() {
+
+		add_filter( 'woocommerce_add_to_cart_form_action', self::eael_avoid_redirect_to_single_page(), 10 );
+		add_action( 'eael_woo_before_product_loop', 'woocommerce_output_all_notices', 30 );
+
+	}
+
+    public static function get_local_plugin_data( $basename = '' ) {
+        if ( empty( $basename ) ) {
+            return false;
+        }
+
+        if ( !function_exists( 'get_plugins' ) ) {
+            include_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+
+        $plugins = get_plugins();
+
+        if ( !isset( $plugins[ $basename ] ) ) {
+            return false;
+        }
+
+        return $plugins[ $basename ];
     }
 
-    public static function eael_woo_product_grid_actions()
-    {
+	/**
+	 * eael_validate_html_tag
+	 * @param $tag
+	 * @return mixed|string
+	 */
+    public static function eael_validate_html_tag( $tag ){
+	    return in_array( strtolower( $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
+    }
 
-        add_filter('woocommerce_add_to_cart_form_action', self::eael_avoid_redirect_to_single_page(), 10);
-        add_action('eael_woo_before_product_loop', 'woocommerce_output_all_notices', 30);
+	/**
+     *
+     * Strip tag based on allowed html tag
+	 * eael_wp_kses
+	 * @param $text
+	 * @return string
+	 */
+    public static function eael_wp_kses($text){
+        return wp_kses($text,self::eael_allowed_tags());
+    }
 
+	/**
+     * List of allowed html tag for wp_kses
+     *
+	 * eael_allowed_tags
+	 * @return array
+	 */
+    public static function eael_allowed_tags(){
+        return [
+            'a' => [
+                'href' => [],
+                'title' => [],
+                'class' => [],
+                'rel' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'q' => [
+                'cite' => [],
+                'class' => [],
+                'id' => [],
+            ],
+            'img' => [
+                'src' => [],
+                'alt' => [],
+                'height' => [],
+                'width' => [],
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'span' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'dfn' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'time' => [
+                'datetime' => [],
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'cite' => [
+                'title' => [],
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'hr' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'b' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'p' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'i' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'u' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            's' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'br' => [],
+            'em' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'code' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'mark' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'small' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'abbr' => [
+                'title' => [],
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'strong' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'del' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'ins' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'sub' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'sup' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'div' => [
+                'class' => [],
+                'id' => [],
+                'style' => []
+            ],
+            'strike' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'acronym' => [],
+            'h1' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'h2' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'h3' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'h4' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'h5' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'h6' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+            'button' => [
+                'class' => [],
+                'id' => [],
+                'style' => [],
+            ],
+        ];
     }
 }

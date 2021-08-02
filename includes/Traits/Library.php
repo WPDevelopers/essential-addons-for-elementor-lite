@@ -37,7 +37,7 @@ trait Library
      * @param $key
      * @return string
      */
-    public function get_extension_settings($page_settings = [], $global_settings = [], $extension, $key)
+    public function get_extension_settings($page_settings = [], $global_settings = [], $extension = '', $key = '')
     {
         if (isset($page_settings) && $page_settings->get_settings($extension) == 'yes') {
             return $page_settings->get_settings($key);
@@ -150,6 +150,10 @@ trait Library
     {
         check_ajax_referer('essential-addons-elementor', 'security');
 
+        if(!current_user_can('manage_options')){
+            wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
+        }
+
         if (isset($_REQUEST['posts'])) {
             if (!empty($_POST['posts'])) {
                 foreach (json_decode($_POST['posts']) as $post) {
@@ -179,7 +183,7 @@ trait Library
             return true;
         }
         
-        if (isset($_REQUEST['action'])) {
+        if (!empty($_REQUEST['action']) && !$this->check_background_action($_REQUEST['action'])) {
             return true;
         }
 
@@ -211,7 +215,7 @@ trait Library
             return false;
         }
 
-        if (isset($_REQUEST['action'])) {
+        if (!empty($_REQUEST['action']) && !$this->check_background_action($_REQUEST['action'])) {
             return false;
         }
 
@@ -280,4 +284,58 @@ trait Library
 
         return "$scheme$user$pass$host$port$path$query$fragment";
     }
+
+    /**
+     * Allow to load asset for some pre defined action query param in elementor preview
+     * @return bool
+     */
+    public function check_background_action($action_name){
+        $allow_action = [
+        	'subscriptions',
+	        'mepr_unauthorized',
+	        'home',
+	        'subscriptions',
+	        'payments',
+        ];
+        if (in_array($action_name, $allow_action)){
+            return true;
+        }
+        return false;
+    }
+
+	/**
+	 * Remove some old options value from wp_options table which are not use any more
+	 *
+	 * @since 4.7.4
+	 */
+	public function remove_old_options_cache() {
+		$status = get_option( "eael_remove_old_cache" );
+		if ( !$status ) {
+			update_option("eael_remove_old_cache",true);
+			global $wpdb;
+			$sql     = "from {$wpdb->options} as options_tb 
+    				inner join (SELECT option_id FROM {$wpdb->options} 
+    				WHERE ((option_name like '%\_elements' and LENGTH(option_name) = 18 and option_name not like '%\_eael_elements') 
+    				           or (option_name like '%\_custom_js' and LENGTH(option_name) = 19 and option_name not like '%\_eael_custom_js' and (option_value IS NULL or option_value = ''))) 
+    				  and autoload = 'yes') AS options_tb2 
+    				    ON options_tb2.option_id = options_tb.option_id";
+			$selection_sql  = "select count(options_tb.option_id) as total ".$sql;
+			$results = $wpdb->get_var( $selection_sql );
+			if ( $results > 1 ) {
+				$deletiation_sql  = "delete options_tb ".$sql;
+				$wpdb->query($deletiation_sql);
+			}
+		}
+	}
+
+	/*
+	 * Check some other cookie for solve asset loading issue
+	 */
+	public function check_third_party_cookie_status() {
+		global $Password_Protected;
+		if ( is_object( $Password_Protected ) && method_exists( $Password_Protected, 'cookie_name' ) && isset( $_COOKIE[ $Password_Protected->cookie_name() ] ) ) {
+			return true;
+		}
+		return false;
+	}
 }

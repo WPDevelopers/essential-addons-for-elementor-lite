@@ -1,37 +1,44 @@
 .eael-dual-header {
     display: block;
     margin-bottom: 50px;
-}
+    .eaa-svg {
+        font-size: 36px;
+    }
+    svg {
+        height: 1em;
+        width: 1em;
+    }
+    .dch-sep-icon,
+    .dch-icon {
+        display: block;
+        padding: 0;
+        margin: 20px 0 10px 0;
+        font-size: 36px;
+    }
+    .title,
+    .title span {
+        font-size: 36px;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 48px;
+        margin: 10px 0;
 
-.eael-dual-header .title,
-.eael-dual-header .title span {
-    font-size: 36px;
-    font-weight: 700;
-    text-transform: uppercase;
-    line-height: 48px;
-    margin: 10px 0px;
-}
+        &.load {
+            color: #1abc9c;
 
-.eael-dual-header .subtext {
-    font-size: 16px;
-    display: block;
-}
-
-.eael-dual-header i {
-    display: block;
-    padding: 0px;
-    margin: 20px 0px 10px 0px;
-    font-size: 36px;
-}
-
-.eael-dual-header .title span.lead {
-    color: #1abc9c;
-
-    &.gradient-color {
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+            &.gradient-color {
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+    }
+    .subtext {
+        font-size: 16px;
+        display: block;
     }
 }
+
+
 
 /*--- Builder Related Css ---*/
 .eael-dual-header-content-align-center {

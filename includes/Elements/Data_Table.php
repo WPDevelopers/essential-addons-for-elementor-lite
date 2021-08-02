@@ -14,6 +14,7 @@ use \Elementor\Plugin;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
 use \Elementor\Repeater;
+use Elementor\Icons_Manager;
 
 use \Essential_Addons_Elementor\Classes\Helper;
 
@@ -96,7 +97,7 @@ class Data_Table extends Widget_Base {
             'eael_data_table_header_col',
             [
                 'label' => esc_html__('Column Name', 'essential-addons-for-elementor-lite'),
-                'default' => 'Table Header',
+                'default' => esc_html__('Table Header', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic'   => ['active' => true],
                 'label_block' => false,
@@ -282,6 +283,10 @@ class Data_Table extends Widget_Base {
 				'label'		=> esc_html__( 'Content Type', 'essential-addons-for-elementor-lite'),
 				'type'	=> Controls_Manager::CHOOSE,
 				'options'               => [
+                    'icon' => [
+						'title' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
+						'icon' => 'fa fa-info',
+					],
 					'textarea'        => [
 						'title'   => esc_html__( 'Textarea', 'essential-addons-for-elementor-lite'),
 						'icon'    => 'fa fa-text-width',
@@ -326,6 +331,22 @@ class Data_Table extends Widget_Base {
 				'condition'             => [
 					'eael_data_table_content_type'      => 'template',
 				],
+			]
+		);
+
+        $repeater->add_control(
+			'eael_data_table_icon_content_new',
+			[
+				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::ICONS,
+				'fa4compatibility' => 'eael_data_table_icon_content',
+				'default' => [
+					'value' => 'fas fa-home',
+					'library' => 'fa-solid',
+				],
+				'condition' => [
+					'eael_data_table_content_type' => [ 'icon' ]
+				]
 			]
 		);
 
@@ -1009,8 +1030,82 @@ class Data_Table extends Widget_Base {
 				'prefix_class' => 'eael-dt-td-align%s-',
 			]
 		);
-		$this->end_controls_section();
 
+		/* Table Content Icon  Style*/
+
+        $this->add_control(
+			'eael_data_table_content_icon_style',
+			[
+				'label' => esc_html__( 'Icon Style', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::HEADING,
+				'separator'	=> 'before'
+			]
+		);
+
+        $this->add_responsive_control(
+            'eael_data_table_content_icon_size',
+            [
+                'label'      => __('Icon Size', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 70,
+                    ],
+                ],
+                'default'    => [
+                    'size' => 20,
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-data-table tbody .td-content-wrapper .eael-datatable-icon i' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-data-table tbody .td-content-wrapper .eael-datatable-icon svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+                ],
+				'separator'	=> 'before'
+            ]
+        );
+
+		$this->start_controls_tabs( 'eael_data_table_icon_tabs' );
+
+			// Normal State Tab
+			$this->start_controls_tab( 'eael_data_table_icon_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite') ] );
+
+			$this->add_control(
+				'eael_data_table_icon_normal_color',
+				[
+					'label' => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite'),
+					'type' => Controls_Manager::COLOR,
+					'default' => '#c15959',
+					'selectors' => [
+						'{{WRAPPER}} .eael-data-table tbody .td-content-wrapper .eael-datatable-icon i' => 'color: {{VALUE}};',
+						'{{WRAPPER}} .eael-data-table tbody .td-content-wrapper .eael-datatable-icon svg' => 'fill: {{VALUE}};',
+					],
+				]
+			);
+
+			$this->end_controls_tab();
+
+			// Hover State Tab
+			$this->start_controls_tab( 'eael_data_table_icon_hover', [ 'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite') ] );
+
+			$this->add_control(
+				'eael_data_table_link_hover_color',
+				[
+					'label' => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite'),
+					'type' => Controls_Manager::COLOR,
+					'default' => '#6d7882',
+					'selectors' => [
+						'{{WRAPPER}} .eael-data-table tbody .td-content-wrapper:hover .eael-datatable-icon i' => 'color: {{VALUE}};',
+						'{{WRAPPER}} .eael-data-table tbody .td-content-wrapper:hover .eael-datatable-icon svg' => 'fill: {{VALUE}};',
+					],
+				]
+			);
+
+			$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		$this->end_controls_section();
 
 		/**
 		 * -------------------------------------------
@@ -1131,7 +1226,6 @@ class Data_Table extends Widget_Base {
 
 	  	// Storing Data table content values
 	  	foreach( $settings['eael_data_table_content_rows'] as $content_row ) {
-
 	  		$row_id = uniqid();
 	  		if( $content_row['eael_data_table_content_row_type'] == 'row' ) {
 	  			$table_tr[] = [
@@ -1141,13 +1235,17 @@ class Data_Table extends Widget_Base {
 
 	  		}
 	  		if( $content_row['eael_data_table_content_row_type'] == 'col' ) {
-	  			$target = $content_row['eael_data_table_content_row_title_link']['is_external'] ? 'target="_blank"' : '';
-	  			$nofollow = $content_row['eael_data_table_content_row_title_link']['nofollow'] ? 'rel="nofollow"' : '';
+
+                $icon_migrated = isset($settings['__fa4_migrated']['eael_data_table_icon_content_new']);
+                $icon_is_new = empty($settings['eael_data_table_icon_content']);
+
+	  			$target = !empty($content_row['eael_data_table_content_row_title_link']['is_external']) ? 'target="_blank"' : '';
+	  			$nofollow = !empty($content_row['eael_data_table_content_row_title_link']['nofollow']) ? 'rel="nofollow"' : '';
 
 	  			$table_tr_keys = array_keys( $table_tr );
 				  $last_key = end( $table_tr_keys );
 
-				$tbody_content = ($content_row['eael_data_table_content_type'] == 'editor') ? $content_row['eael_data_table_content_row_content'] : $content_row['eael_data_table_content_row_title'];
+				$tbody_content = ($content_row['eael_data_table_content_type'] == 'editor') ? $content_row['eael_data_table_content_row_content'] : Helper::eael_wp_kses($content_row['eael_data_table_content_row_title']);
 
 	  			$table_td[] = [
 	  				'row_id'		=> $table_tr[$last_key]['id'],
@@ -1155,7 +1253,11 @@ class Data_Table extends Widget_Base {
 					'content_type'	=> $content_row['eael_data_table_content_type'],
 					'template'		=> $content_row['eael_primary_templates_for_tables'],
 	  				'title'			=> $tbody_content,
-	  				'link_url'		=> $content_row['eael_data_table_content_row_title_link']['url'],
+	  				'link_url'		=> !empty($content_row['eael_data_table_content_row_title_link']['url'])?$content_row['eael_data_table_content_row_title_link']['url']:'',
+	  				'icon_content_new'	=> !empty($content_row['eael_data_table_icon_content_new']) ? $content_row['eael_data_table_icon_content_new']:'',
+	  				'icon_content'	=> !empty($content_row['eael_data_table_icon_content']) ? $content_row['eael_data_table_icon_content']:'',
+	  				'icon_migrated'	=> $icon_migrated,
+	  				'icon_is_new'	=> $icon_is_new,
 	  				'link_target'	=> $target,
 	  				'nofollow'		=> $nofollow,
 					'colspan'		=> $content_row['eael_data_table_content_row_colspan'],
@@ -1223,7 +1325,7 @@ class Data_Table extends Widget_Base {
 										'style'	=> "width:{$header_title['eael_data_table_header_col_img_size']}px;",
 										'alt'	=> esc_attr(get_post_meta($header_title['eael_data_table_header_col_img']['id'], '_wp_attachment_image_alt', true))
 									]);
-							?><img <?php echo $this->get_render_attribute_string('data_table_th_img'.$i); ?>><?php endif; ?><span class="data-table-header-text"><?php echo __( $header_title['eael_data_table_header_col'], 'essential-addons-for-elementor-lite'); ?></span></th>
+							?><img <?php echo $this->get_render_attribute_string('data_table_th_img'.$i); ?>><?php endif; ?><span class="data-table-header-text"><?php echo __( Helper::eael_wp_kses($header_title['eael_data_table_header_col']), 'essential-addons-for-elementor-lite'); ?></span></th>
 			        	<?php $i++; endforeach; ?>
 			        </tr>
 			    </thead>
@@ -1243,7 +1345,19 @@ class Data_Table extends Widget_Base {
 											]
 										);
 										?>
-										<?php if(  $table_td[$j]['content_type'] == 'textarea' && !empty($table_td[$j]['link_url']) ) : ?>
+									   <?php if(  $table_td[$j]['content_type'] == 'icon' ) : ?>
+											<td <?php echo $this->get_render_attribute_string('table_inside_td'.$i.$j); ?>>
+												<div class="td-content-wrapper">
+													<?php if ( $table_td[$j]['icon_is_new'] || $table_td[$j]['icon_migrated']) { ?>
+                                                        <span class="eael-datatable-icon">
+                                                        <?php Icons_Manager::render_icon( $table_td[$j]['icon_content_new'] );?>
+                                                        </span>
+                                                   <?php } else { ?>
+                                                        <span class="<?php echo $table_td[$j]['icon_content'] ?>" aria-hidden="true"></span>
+                                                    <?php } ?>
+												</div>
+											</td>
+										<?php elseif(  $table_td[$j]['content_type'] == 'textarea' && !empty($table_td[$j]['link_url']) ) : ?>
 											<td <?php echo $this->get_render_attribute_string('table_inside_td'.$i.$j); ?>>
 												<div class="td-content-wrapper">
 													<a href="<?php echo esc_url( $table_td[$j]['link_url'] ); ?>" <?php echo $table_td[$j]['link_target'] ?> <?php echo $table_td[$j]['nofollow'] ?>><?php echo wp_kses_post($table_td[$j]['title']); ?></a>

@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Plugin;
 use \Elementor\Widget_Base;
+use Essential_Addons_Elementor\Classes\Helper;
 
 class Advanced_Data_Table extends Widget_Base
 {
@@ -268,6 +269,32 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->end_controls_section();
+
+	    /**
+	     * Data cache setting
+	     */
+	    $this->start_controls_section(
+		    'ea_adv_data_table_data_cache',
+		    [
+			    'label' => __('Data Cache Setting', 'essential-addons-for-elementor-lite'),
+			    'condition' => [
+				    'ea_adv_data_table_source' => 'google',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'ea_adv_data_table_data_cache_limit',
+		    [
+			    'label' => __('Data Cache Time', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::NUMBER,
+			    'min' => 1,
+			    'default' => 60,
+			    'description' => __('Cache expiration time (Minutes)', 'essential-addons-for-elementor-lite')
+		    ]
+	    );
+
+	    $this->end_controls_section();
 
         // style
         $this->start_controls_section(
@@ -1506,7 +1533,7 @@ class Advanced_Data_Table extends Widget_Base
 
         if ($content = $this->get_table_content()) {
             if ($settings['ea_adv_data_table_search'] == 'yes') {
-                echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-search-wrap') . '><input type="search" placeholder="' . $settings['ea_adv_data_table_search_placeholder'] . '" class="ea-advanced-data-table-search"></div>';
+                echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-search-wrap') . '><input type="search" placeholder="' . Helper::eael_wp_kses($settings['ea_adv_data_table_search_placeholder'] ). '" class="ea-advanced-data-table-search"></div>';
             }
 
             echo '<div class="ea-advanced-data-table-wrap-inner">
@@ -1549,6 +1576,14 @@ class Advanced_Data_Table extends Widget_Base
             return $settings['ea_adv_data_table_static_html'];
         } else if ($settings['ea_adv_data_table_source'] == 'ninja') {
             return $this->ninja_integration();
+        }
+
+        if ( $settings[ 'ea_adv_data_table_source' ] == 'remote' ) {
+            $settings_legacy                                        = $this->get_settings();
+            $settings[ 'ea_adv_data_table_source_remote_host' ]     = $settings_legacy[ 'ea_adv_data_table_source_remote_host' ];
+            $settings[ 'ea_adv_data_table_source_remote_username' ] = $settings_legacy[ 'ea_adv_data_table_source_remote_username' ];
+            $settings[ 'ea_adv_data_table_source_remote_password' ] = $settings_legacy[ 'ea_adv_data_table_source_remote_password' ];
+            $settings[ 'ea_adv_data_table_source_remote_database' ] = $settings_legacy[ 'ea_adv_data_table_source_remote_database' ];
         }
 
         $content = apply_filters('eael/advanced-data-table/table_html/integration/' . $settings['ea_adv_data_table_source'], $settings);

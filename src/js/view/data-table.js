@@ -17,7 +17,11 @@ var dataTable = function($scope, $) {
 			$(item)
 				.find("td .td-content-wrapper")
 				.each(function(index, item) {
-					$(this).prepend('<div class="th-mobile-screen">' + $th.eq(index).html() + "</div>");
+                    if ($th.eq(index).length == 0) {
+                      $(this).prepend('<div class="th-mobile-screen">' + '' + "</div>");
+                    } else {
+                      $(this).prepend('<div class="th-mobile-screen">' + $th.eq(index).html() + "</div>"); 
+                    }
 				});
 		});
 	}

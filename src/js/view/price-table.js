@@ -30,6 +30,7 @@ var PricingTooltip = function($scope, $) {
             $currentTooltip.tooltipster({
                 animation: $animation,
                 trigger: $tooltipTrigger,
+                contentAsHTML: true,
                 side: $tooltipSide,
                 delay: $anim_duration,
                 arrow: $arrow,

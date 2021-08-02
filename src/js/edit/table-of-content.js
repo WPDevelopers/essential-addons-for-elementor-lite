@@ -107,9 +107,9 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 		function (newValue) {
 			var toc = jQuery("#eael-toc");
 			if (newValue === "yes") {
-				toc.addClass("eael-toc-auto-collapse");
+				toc.addClass("eael-toc-auto-collapse collapsed");
 			} else {
-				toc.removeClass("eael-toc-auto-collapse");
+				toc.removeClass("eael-toc-auto-collapse collapsed");
 			}
 		}
 	);

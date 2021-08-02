@@ -11,7 +11,7 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Scheme_Typography;
+use \Elementor\Core\Schemes\Typography;
 use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 
@@ -653,7 +653,7 @@ class WeForms extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'eael_weform_submit_btn_typography',
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'scheme' => Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]',
             ]
         );

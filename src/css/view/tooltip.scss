@@ -114,28 +114,63 @@
 }
 
 /*--- Alignments ---*/
+
 .eael-tooltip-align-left {
-	display: flex;
-	width: 100%;
-	justify-content: flex-start;
+    text-align: left;
 }
 
 .eael-tooltip-align-right {
-	display: flex;
-	width: 100%;
-	justify-content: flex-end;
+    text-align: right;
 }
 
 .eael-tooltip-align-center {
-	display: flex;
-	width: 100%;
-	justify-content: center;
+    text-align: center;
 }
 
 .eael-tooltip-align-justify .eael-tooltip {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+@media (min-width: 481px) and (max-width: 960px)  {
+    .eael-tooltip-align-tablet-left {
+        text-align: left;
+    }
+    
+    .eael-tooltip-align-tablet-right {
+        text-align: right;
+    }
+    
+    .eael-tooltip-align-tablet-center {
+        text-align: center;
+    }
+
+    .eael-tooltip-align-tablet-justify .eael-tooltip {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px){
+    .eael-tooltip-align-mobile-left {
+        text-align: left;
+    }
+    
+    .eael-tooltip-align-mobile-right {
+        text-align: right;
+    }
+    
+    .eael-tooltip-align-mobile-center {
+        text-align: center;
+    }
+
+    .eael-tooltip-align-mobile-justify .eael-tooltip {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 /*--- Tooltip Keyframes ---*/
