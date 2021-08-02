@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
+use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 
 class Testimonial extends Widget_Base {
 
@@ -258,7 +259,45 @@ class Testimonial extends Widget_Base {
 					'content-bottom-icon-title-inline'	=> __( 'Content Bottom | Icon Title Inline', 'essential-addons-for-elementor-lite')
 				]
 			]
-		);
+    );
+    
+
+    $this->add_control(
+      'eael_testimonial_is_gradient_background',
+      [
+          'label' => __('Use Gradient Background', 'essential-addons-elementor'),
+          'type' => Controls_Manager::SWITCHER,
+          'label_on' => __('Show', 'essential-addons-elementor'),
+          'label_off' => __('Hide', 'essential-addons-elementor'),
+          'return_value' => 'yes',
+      ]
+    );
+    $this->add_control(
+        'eael_testimonial_background',
+        [
+            'label' => esc_html__('Background Color', 'essential-addons-elementor'),
+            'type' => Controls_Manager::COLOR,
+            'default' => '',
+            'selectors' => [
+                '{{WRAPPER}} .eael-testimonial-item' => 'background-color: {{VALUE}};',
+            ],
+            'condition' => [
+                'eael_testimonial_is_gradient_background' => ''
+            ]
+        ]
+    );
+    $this->add_group_control(
+        \Elementor\Group_Control_Background::get_type(),
+        [
+            'name' => 'eael_testimonial_gradient_background',
+            'label' => __('Gradient Background', 'essential-addons-elementor'),
+            'types' => ['classic', 'gradient'],
+            'selector' => '{{WRAPPER}} .eael-testimonial-item',
+            'condition' => [
+                'eael_testimonial_is_gradient_background' => 'yes'
+            ]
+        ]
+    );
 
 		$this->add_control(
 			'eael_testimonial_alignment',
@@ -702,8 +741,8 @@ class Testimonial extends Widget_Base {
 
 	protected function render_user_name_and_company() {
 		$settings = $this->get_settings_for_display();
-		if( ! empty($settings['eael_testimonial_name']) ) : ?><p <?php echo $this->get_render_attribute_string('eael_testimonial_user'); ?>><?php echo $settings['eael_testimonial_name']; ?></p><?php endif;
-		if( ! empty($settings['eael_testimonial_company_title']) ) : ?><p class="eael-testimonial-user-company"><?php echo $settings['eael_testimonial_company_title']; ?></p><?php endif;
+		if( ! empty($settings['eael_testimonial_name']) ) : ?><p <?php echo $this->get_render_attribute_string('eael_testimonial_user'); ?>><?php echo HelperClass::eael_wp_kses($settings['eael_testimonial_name']); ?></p><?php endif;
+		if( ! empty($settings['eael_testimonial_company_title']) ) : ?><p class="eael-testimonial-user-company"><?php echo HelperClass::eael_wp_kses($settings['eael_testimonial_company_title']); ?></p><?php endif;
 	}
 
 	protected function testimonial_quote() {

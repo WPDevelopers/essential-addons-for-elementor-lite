@@ -10,11 +10,14 @@ if ( !defined( 'ABSPATH' ) ) {
 use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Typography;
+use \Elementor\Icons_Manager;
 use \Elementor\Repeater;
-use \Elementor\Scheme_Color;
-use \Elementor\Scheme_Typography;
+use \Elementor\Core\Schemes\Typography;
+use \Elementor\Core\Schemes\Color;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
+
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Feature_List extends Widget_Base {
     public function get_name() {
@@ -119,8 +122,8 @@ class Feature_List extends Widget_Base {
                 'label'            => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
                 'type'             => Controls_Manager::COLOR,
                 'scheme'           => [
-                    'type'  => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_1,
+                    'type'  => Color::get_type(),
+                    'value' => Color::COLOR_1,
                 ],
                 'fa4compatibility' => 'eael_feature_list_icon',
                 'condition'        => [
@@ -134,8 +137,8 @@ class Feature_List extends Widget_Base {
                 'label'            => esc_html__( 'Icon Background', 'essential-addons-for-elementor-lite' ),
                 'type'             => Controls_Manager::COLOR,
                 'scheme'           => [
-                    'type'  => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_1,
+                    'type'  => Color::get_type(),
+                    'value' => Color::COLOR_1,
                 ],
                 'fa4compatibility' => 'eael_feature_list_icon',
                 'condition'        => [
@@ -149,8 +152,8 @@ class Feature_List extends Widget_Base {
                 'label'            => esc_html__( 'Icon Box Background', 'essential-addons-for-elementor-lite' ),
                 'type'             => Controls_Manager::COLOR,
                 'scheme'           => [
-                    'type'  => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_1,
+                    'type'  => Color::get_type(),
+                    'value' => Color::COLOR_1,
                 ],
                 'fa4compatibility' => 'eael_feature_list_icon',
                 'condition'        => [
@@ -238,7 +241,7 @@ class Feature_List extends Widget_Base {
                     ],
                 ],
                 'fields'      => $repeater->get_controls(),
-                'title_field' => '<i class="{{ eael_feature_list_icon_new.value }}" aria-hidden="true"></i> {{{ eael_feature_list_title }}}',
+                'title_field' => '<i class="{{ eael_feature_list_icon_new.value }}" aria-hidden="true"></i> {{ eael_feature_list_title }}',
             ]
         );
 
@@ -447,8 +450,8 @@ class Feature_List extends Widget_Base {
                 'label'     => esc_html__( 'Connector Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'scheme'    => [
-                    'type'  => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_1,
+                    'type'  => Color::get_type(),
+                    'value' => Color::COLOR_1,
                 ],
                 'default'   => '#37368e',
                 'selectors' => [
@@ -542,6 +545,7 @@ class Feature_List extends Widget_Base {
                 'default'   => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-feature-list-items .eael-feature-list-icon' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-feature-list-items .eael-feature-list-icon svg' => 'fill: {{VALUE}};',
                 ],
                 'separator' => 'before',
             ]
@@ -765,8 +769,8 @@ class Feature_List extends Widget_Base {
                     '{{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title, {{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title > a, {{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title:visited' => 'color: {{VALUE}};',
                 ],
                 'scheme'    => [
-                    'type'  => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_1,
+                    'type'  => Color::get_type(),
+                    'value' => Color::COLOR_1,
                 ],
             ]
         );
@@ -775,8 +779,8 @@ class Feature_List extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_feature_list_title_typography',
-                'selector' => '{{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title',
-                'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title, {{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title a',
+                'scheme'   => Typography::TYPOGRAPHY_1,
             ]
         );
 
@@ -799,8 +803,8 @@ class Feature_List extends Widget_Base {
                     '{{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-content' => 'color: {{VALUE}};',
                 ],
                 'scheme'    => [
-                    'type'  => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_3,
+                    'type'  => Color::get_type(),
+                    'value' => Color::COLOR_3,
                 ],
             ]
         );
@@ -810,7 +814,7 @@ class Feature_List extends Widget_Base {
             [
                 'name'           => 'eael_feature_list_description_typography',
                 'selector'       => '{{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-content',
-                'scheme'         => Scheme_Typography::TYPOGRAPHY_3,
+                'scheme'         => Typography::TYPOGRAPHY_3,
                 'fields_options' => [
                     'font_size' => ['default' => ['unit' => 'px', 'size' => 14]],
                 ],
@@ -822,9 +826,9 @@ class Feature_List extends Widget_Base {
 
     protected function render() {
         $settings = $this->get_settings_for_display();
-
+        $css_id = 'eael-feature-list-' . esc_attr( $this->get_id() );
         $this->add_render_attribute( 'eael_feature_list', [
-            'id'    => 'eael-feature-list-' . esc_attr( $this->get_id() ),
+            'id'    => $css_id,
             'class' => [
                 'eael-feature-list-items',
                 $settings['eael_feature_list_icon_shape'],
@@ -887,28 +891,29 @@ class Feature_List extends Widget_Base {
         ?>
 		<div <?php echo $this->get_render_attribute_string( 'eael_feature_list_wrapper' ); ?>>
 			<ul <?php echo $this->get_render_attribute_string( 'eael_feature_list' ); ?>>
-				<?php $i = 0;
+			<?php
+			$individual_icon_color_css = '';
         foreach ( $settings['eael_feature_list'] as $index => $item ):
 
-            $this->add_render_attribute( 'eael_feature_list_icon' . $i, 'class', 'eael-feature-list-icon' );
-            $this->add_render_attribute( 'eael_feature_list_title' . $i, 'class', 'eael-feature-list-title' );
-            $this->add_render_attribute( 'eael_feature_list_content' . $i, 'class', 'eael-feature-list-content' );
+            $this->add_render_attribute( 'eael_feature_list_icon' . $index, 'class', 'eael-feature-list-icon fl-icon-'.$index );
+            $this->add_render_attribute( 'eael_feature_list_title' . $index, 'class', 'eael-feature-list-title' );
+            $this->add_render_attribute( 'eael_feature_list_content' . $index, 'class', 'eael-feature-list-content' );
             // icon color
-            $icon_color = (  ( $item['eael_feature_list_icon_is_individual_style'] == 'on' ) ? ' style="color:' . esc_attr( $item['eael_feature_list_icon_individual_color'] ) . '"' : '' );
+            $icon_color =  ( $item['eael_feature_list_icon_is_individual_style'] == 'on' && isset($item['eael_feature_list_icon_individual_color']) ) ? esc_attr( $item['eael_feature_list_icon_individual_color'] ) : '' ;
             $icon_bg = (  ( $item['eael_feature_list_icon_is_individual_style'] == 'on' ) ? ' style="background-color:' . esc_attr( $item['eael_feature_list_icon_individual_bg_color'] ) . '"' : '' );
             $icon_box_bg = (  ( $item['eael_feature_list_icon_is_individual_style'] == 'on' ) ? ' style="background-color:' . esc_attr( $item['eael_feature_list_icon_individual_box_bg_color'] ) . '"' : '' );
 
-            $feat_title_tag = $settings['eael_feature_list_title_size'];
+            $feat_title_tag = Helper::eael_validate_html_tag($settings['eael_feature_list_title_size']);
 
             if ( $item['eael_feature_list_link']['url'] ) {
-                $this->add_render_attribute( 'eael_feature_list_title_anchor' . $i, 'href', esc_url( $item['eael_feature_list_link']['url'] ) );
+                $this->add_render_attribute( 'eael_feature_list_title_anchor' . $index, 'href', esc_url( $item['eael_feature_list_link']['url'] ) );
 
                 if ( $item['eael_feature_list_link']['is_external'] ) {
-                    $this->add_render_attribute( 'eael_feature_list_title_anchor' . $i, 'target', '_blank' );
+                    $this->add_render_attribute( 'eael_feature_list_title_anchor' . $index, 'target', '_blank' );
                 }
 
                 if ( $item['eael_feature_list_link']['nofollow'] ) {
-                    $this->add_render_attribute( 'eael_feature_list_title_anchor' . $i, 'rel', 'nofollow' );
+                    $this->add_render_attribute( 'eael_feature_list_title_anchor' . $index, 'rel', 'nofollow' );
                 }
             }
 
@@ -917,82 +922,82 @@ class Feature_List extends Widget_Base {
             $feature_has_icon = ( !empty( $item['eael_feature_list_icon'] ) || !empty( $item['eael_feature_list_icon_new'] ) );
 
             if ( $item['eael_feature_list_link']['url'] ) {
-                $this->add_render_attribute( 'eael_feature_list_link' . $i, 'href', $item['eael_feature_list_link']['url'] );
+                $this->add_render_attribute( 'eael_feature_list_link' . $index, 'href', $item['eael_feature_list_link']['url'] );
 
                 if ( $item['eael_feature_list_link']['is_external'] ) {
-                    $this->add_render_attribute( 'eael_feature_list_link' . $i, 'target', '_blank' );
+                    $this->add_render_attribute( 'eael_feature_list_link' . $index, 'target', '_blank' );
                 }
 
                 if ( $item['eael_feature_list_link']['nofollow'] ) {
-                    $this->add_render_attribute( 'eael_feature_list_link' . $i, 'rel', 'nofollow' );
+                    $this->add_render_attribute( 'eael_feature_list_link' . $index, 'rel', 'nofollow' );
                 }
                 $feature_icon_tag = 'a';
             }
-            // var_dump( $settings['eael_feature_list_connector_type'] );
             ?>
-									                <li class="eael-feature-list-item">
-									                    <?php if ( 'yes' == $settings['eael_feature_list_connector'] ): ?>
-									                        <span class="connector" style="<?php echo $connector; ?>"></span>
-									                        <span class="connector connector-tablet" style="<?php echo $connector_tablet; ?>"></span>
-									                        <span class="connector connector-mobile" style="<?php echo $connector_mobile; ?>"></span>
-									                    <?php endif;?>
-
+                <li class="eael-feature-list-item">
+                    <?php if ( 'yes' == $settings['eael_feature_list_connector'] ): ?>
+                        <span class="connector" style="<?php echo $connector; ?>"></span>
+                        <span class="connector connector-tablet" style="<?php echo $connector_tablet; ?>"></span>
+                        <span class="connector connector-mobile" style="<?php echo $connector_mobile; ?>"></span>
+                    <?php endif;?>
 
 						<div class="eael-feature-list-icon-box">
 							<div class="eael-feature-list-icon-inner"<?php echo $icon_box_bg; ?>>
 
-								<<?php echo $feature_icon_tag . ' ' . $this->get_render_attribute_string( 'eael_feature_list_icon' . $i ) . $this->get_render_attribute_string( 'eael_feature_list_link' . $i ) . $icon_bg; ?>>
+								<<?php echo $feature_icon_tag . ' ' . $this->get_render_attribute_string( 'eael_feature_list_icon' . $index) . $this->get_render_attribute_string( 'eael_feature_list_link' . $index) . $icon_bg; ?>>
 
-									<?php
-if ( $item['eael_feature_list_icon_type'] == 'icon' && $feature_has_icon ) {
+		<?php
+            if ( $item['eael_feature_list_icon_type'] == 'icon' && $feature_has_icon ) {
 
             if ( empty( $item['eael_feature_list_icon'] ) || isset( $item['__fa4_migrated']['eael_feature_list_icon_new'] ) ) {
+                // if svg then build individual color css
+                if ( 'svg' === $item['eael_feature_list_icon_new']['library'] && $icon_color ) {
+                        ?>
+                <style>
+                    <?php
+                    echo "#{$css_id} .eael-feature-list-icon.fl-icon-{$index} svg { color: {$icon_color} !important; fill: {$icon_color} !important; } ";
+                     ?>
+                </style>
+                <?php
+                    }
 
-                if ( isset( $item['eael_feature_list_icon_new']['value']['url'] ) ) {
-                    echo '<img src="' . esc_url( $item['eael_feature_list_icon_new']['value']['url'] ) . '" alt="' . esc_attr( get_post_meta( $item['eael_feature_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true ) ) . '"/>';
-                } else {
-                    echo '<i class="' . esc_attr( $item['eael_feature_list_icon_new']['value'] ) . '" aria-hidden="true"' . $icon_color . '></i>';
-                }
-
+                Icons_Manager::render_icon( $item['eael_feature_list_icon_new'], [ 'aria-hidden' => 'true', 'style' => "color:{$icon_color};" ] );
             } else {
                 echo '<i class="' . esc_attr( $item['eael_feature_list_icon'] ) . '" aria-hidden="true"></i>';
             }
         }
-        ?>
 
-									<?php if ( $item['eael_feature_list_icon_type'] == 'image' ) {
-            $this->add_render_attribute( 'feature_list_image' . $i, [
+
+            if ( $item['eael_feature_list_icon_type'] == 'image' ) {
+            $this->add_render_attribute( 'feature_list_image' . $index, [
                 'src'   => esc_url( $item['eael_feature_list_img']['url'] ),
                 'class' => 'eael-feature-list-img',
                 'alt'   => esc_attr( get_post_meta( $item['eael_feature_list_img']['id'], '_wp_attachment_image_alt', true ) ),
             ] );
 
-            echo '<img ' . $this->get_render_attribute_string( 'feature_list_image' . $i ) . '>';
+            echo '<img ' . $this->get_render_attribute_string( 'feature_list_image' . $index) . '>';
 
         }?>
-
 								</<?php echo $feature_icon_tag; ?>>
 							</div>
 						</div>
-
-
-
 						<div class="eael-feature-list-content-box">
 							<<?php echo implode( ' ', [
             $feat_title_tag,
-            $this->get_render_attribute_string( 'eael_feature_list_title' . $i ),
+            $this->get_render_attribute_string( 'eael_feature_list_title' . $index),
         ] ); ?>
-							><?php echo !empty( $item['eael_feature_list_link']['url'] ) ? "<a {$this->get_render_attribute_string( 'eael_feature_list_title_anchor' . $i )}>" : ''; ?><?php echo $item['eael_feature_list_title']; ?><?php echo !empty( $item['eael_feature_list_link']['url'] ) ? "</a>" : ''; ?></<?php echo $feat_title_tag; ?>
+							><?php echo !empty( $item['eael_feature_list_link']['url'] ) ? "<a {$this->get_render_attribute_string( 'eael_feature_list_title_anchor' . $index)}>" : ''; ?><?php echo Helper::eael_wp_kses($item['eael_feature_list_title']); ?><?php echo !empty( $item['eael_feature_list_link']['url'] ) ? "</a>" : ''; ?></<?php echo $feat_title_tag; ?>
 						>
-						<p <?php echo $this->get_render_attribute_string( 'eael_feature_list_content' . $i ); ?>><?php echo $item['eael_feature_list_content']; ?></p>
+						<p <?php echo $this->get_render_attribute_string( 'eael_feature_list_content' . $index); ?>><?php echo Helper::eael_wp_kses($item['eael_feature_list_content']); ?></p>
 						</div>
 
 					</li>
-				<?php $i++;endforeach;?>
+				<?php
+				endforeach;?>
 			</ul>
 		</div>
 		<?php
 }
 
-    protected function _content_template() {}
+    protected function content_template() {}
 }

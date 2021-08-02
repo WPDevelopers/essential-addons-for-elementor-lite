@@ -24,24 +24,28 @@
 	overflow: hidden;
 
 	> span {
-		margin-left: -20px;
+		//margin-left: -20px;
 	}
-
+	&.button--loading {
+		.eael-btn-loader {
+			display: block;
+		}
+	}
 	.eael-btn-loader {
+		display: none;
 		border-radius: 50%;
 		width: 20px;
 		height: 20px;
 		font-size: 10px;
 		position: relative;
-		text-indent: -9999em;
+		top: auto;
+		left: -200%;
 		border-top: 4px solid rgba(255, 255, 255, 0.2);
 		border-right: 4px solid rgba(255, 255, 255, 0.2);
 		border-bottom: 4px solid rgba(255, 255, 255, 0.2);
 		border-left: 4px solid #ffffff;
 		transform: translateZ(0);
 		animation: loaderSpin 1.1s infinite linear;
-		left: -100%;
-		top: auto;
 		margin-right: 5px;
 		transition: all 0.2s;
 
@@ -50,6 +54,10 @@
 			width: 20px;
 			height: 20px;
 		}
+	}
+
+	&:focus {
+		outline: none;
 	}
 
 	&.button--loading {

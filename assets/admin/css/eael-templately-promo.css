@@ -1,0 +1,218 @@
+.elementor-add-new-section .elementor-add-templately-promo-button{
+	background-color: red;
+	background-image: url(../images/templately/logo-icon.svg);
+	background-repeat: no-repeat;
+	background-position: center center;
+	margin-left: 5px;
+}
+
+#eael-templately-promo-popup.dialog-type-lightbox .dialog-widget-content {
+	width: 1060px;
+	min-height: 80%;
+}
+
+.eael-promo-temp-wrap {
+	line-height: 1.7;
+	font-weight: 400;
+	letter-spacing: 0;
+	min-height: 100%;
+	font-family: "Roboto", sans-serif;
+}
+
+.eael-promo-temp-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.87);
+}
+.eael-promo-temp-wrapper.show {
+	display: block;
+}
+.eael-promo-temp-wrapper .eael-promo-temp {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	background: #fff;
+	width: 1060px;
+	max-height: 90%;
+	border-radius: 10px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp__times {
+	position: absolute;
+	top: 12px;
+	right: 16px;
+	font-size: 18px;
+	color: #222;
+}
+
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left {
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 calc(100% - 755px);
+	flex: 0 0 calc(100% - 755px);
+	padding: 45px 30px 30px;
+	width: 310px;
+	text-align: center;
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left .eael-promo-temp__logo {
+	margin-bottom: 35px;
+	text-align: left;
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left .eael-promo-temp__feature__list {
+	margin: 0;
+	margin-bottom: 50px;
+	list-style: none;
+	text-align: left;
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left .eael-promo-temp__feature__list li {
+	font-size: 15px;
+	color: #727272;
+	font-family: "Roboto", sans-serif;
+	position: relative;
+	padding-left: 18px;
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left .eael-promo-temp__feature__list li:not(:last-child) {
+	margin-bottom: 10px;
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left .eael-promo-temp__feature__list li:before {
+	position: absolute;
+	top: 6px;
+	left: 0;
+	height: 10px;
+	width: 10px;
+	border-radius: 50%;
+	background: #c0bbcf;
+	content: "";
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left .eael-promo-temp__form {
+	background: #f3f6fb;
+	padding: 30px 20px;
+	border-radius: 5px;
+	text-align: left;
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left .eael-promo-temp__form label {
+	display: block;
+	margin-bottom: 0;
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left .eael-promo-temp__form label:not(:last-child) {
+	margin-bottom: 15px;
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left .eael-promo-temp__form label input {
+	display: none;
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left .eael-promo-temp__form label input:checked ~ span:before {
+	background: #5725ff;
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left .eael-promo-temp__form label span {
+	display: inline-block;
+	position: relative;
+	padding-left: 23px;
+	cursor: pointer;
+	color: #6d7882;
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left .eael-promo-temp__form label span:before {
+	position: absolute;
+	top: 5px;
+	left: 0;
+	height: 15px;
+	width: 15px;
+	border-radius: 50%;
+	content: "";
+	background: #d2d3e0;
+	-webkit-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left .eael-promo-temp__form label span:after {
+	position: absolute;
+	top: 10px;
+	left: 5px;
+	height: 5px;
+	width: 5px;
+	border-radius: 50%;
+	content: "";
+	background: #ffffff;
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left button {
+	font-size: 15px;
+	font-weight: 400;
+	font-family: "Roboto", sans-serif;
+	color: #fff;
+	padding: 12px 24px;
+	border-radius: 5px;
+	margin-top: 20px;
+	-webkit-box-shadow: 0px 14px 15px 0px rgba(0, 5, 41, 0.08);
+	box-shadow: 0px 14px 15px 0px rgba(0, 5, 41, 0.08);
+	cursor: pointer;
+	-webkit-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+	background: -webkit-gradient(linear, left top, right top, from(#5725ff), to(#9271ff));
+	background: linear-gradient(to right, #5725ff, #9271ff);
+	border: none;
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left button:hover {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--right {
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 755px;
+	flex: 0 0 755px;
+}
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--right img {
+	display: block;
+	height: 550px;
+}
+@media all and (max-width: 1300px) {
+	.eael-promo-temp-wrapper .eael-promo-temp {
+		width: 900px;
+	}
+	.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--right {
+		-webkit-box-flex: 0;
+		-ms-flex: 0 0 600px;
+		flex: 0 0 600px;
+	}
+	.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left {
+		-webkit-box-flex: 0;
+		-ms-flex: 0 0 calc(100% - 600px);
+		flex: 0 0 calc(100% - 600px);
+		width: 300px;
+	}
+}
+
+.eael-promo-temp-wrapper .eael-promo-temp::-webkit-scrollbar {
+	width: 5px;
+}
+.eael-promo-temp-wrapper .eael-promo-temp::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(51, 51, 51, 0.1);
+	box-shadow: inset 0 0 6px rgba(51, 51, 51, 0.1);
+	background: #dbe0e9;
+	border-radius: 5px;
+}
+.eael-promo-temp-wrapper .eael-promo-temp::-webkit-scrollbar-thumb {
+	background: #5725ff;
+	border-radius: 5px;
+}
+
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left button.eael-prmo-status-submit:disabled,
+.eael-promo-temp-wrapper .eael-promo-temp .eael-promo-temp--left button.eael-prmo-status-submit[disabled]{
+	cursor: wait;
+}
+
+#eael-templately-promo-popup .dialog-widget-content.dialog-lightbox-widget-content {
+	box-shadow: none !important;
+}
+/*#eael-templately-promo-popup.dialog-type-lightbox,*/
+#eael-templately-promo-popup.dialog-type-lightbox .dialog-widget-content,
+#eael-templately-promo-popup .eael-promo-temp-wrapper {
+	background: transparent !important;
+}
+

@@ -128,6 +128,17 @@ class Twitter_Feed extends Widget_Base
             ]
         );
 
+	    $this->add_control(
+		    'eael_twitter_feed_data_cache_limit',
+		    [
+			    'label' => __('Data Cache Time', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::NUMBER,
+			    'min' => 1,
+			    'default' => 60,
+			    'description' => __('Cache expiration time (Minutes)', 'essential-addons-for-elementor-lite')
+		    ]
+	    );
+
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -260,6 +271,19 @@ class Twitter_Feed extends Widget_Base
                 'label_off' => __('no', 'essential-addons-for-elementor-lite'),
                 'default' => 'true',
                 'return_value' => 'true',
+            ]
+        );
+
+        $this->add_control(
+            'eael_twitter_feed_show_read_more_text',
+            [
+                'label' => esc_html__('Read More Text', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'label_block' => false,
+                'default' => __('Read More', 'essential-addons-for-elementor-lite'),
+	            'condition' => [
+	            	'eael_twitter_feed_show_read_more' => 'true',
+	            ]
             ]
         );
 
@@ -900,8 +924,8 @@ class Twitter_Feed extends Widget_Base
                 'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'scheme' => [
-                    'type' => \Elementor\Scheme_Color::get_type(),
-                    'value' => \Elementor\Scheme_Color::COLOR_1,
+                    'type' => \Elementor\Core\Schemes\Color::get_type(),
+                    'value' => \Elementor\Core\Schemes\Color::COLOR_1,
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-twitter-feed-item .eael-twitter-feed-item-icon' => 'color: {{VALUE}}',
@@ -915,6 +939,7 @@ class Twitter_Feed extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+        $feedcolumnspacing = $this->get_settings('eael_twitter_feed_column_spacing')['size'];
 
         echo '<div class="eael-twitter-feed eael-twitter-feed-' . $this->get_id() . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type'] . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type_col_type'] . ' clearfix" data-gutter="' . $settings['eael_twitter_feed_column_spacing']['size'] . '">
 			' . $this->twitter_feed_render_items($this->get_id(), $settings) . '
@@ -922,13 +947,13 @@ class Twitter_Feed extends Widget_Base
 
         echo '<style>
             .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-2 .eael-twitter-feed-item {
-                width: calc(50% - ' . ceil($settings['eael_twitter_feed_column_spacing']['size'] / 2) . 'px);
+                width: calc(50% - ' . ceil($feedcolumnspacing / 2) . 'px);
             }
             .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-3 .eael-twitter-feed-item {
                 width: calc(33.33% - ' . ceil($settings['eael_twitter_feed_column_spacing']['size'] * 2 / 3) . 'px);
             }
             .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-4 .eael-twitter-feed-item {
-                width: calc(25% - ' . ceil($settings['eael_twitter_feed_column_spacing']['size'] * 3 / 4) . 'px);
+                width: calc(25% - ' . ceil($feedcolumnspacing * 3 / 4) . 'px);
             }
 
             .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-col-2 .eael-twitter-feed-item,
@@ -939,7 +964,7 @@ class Twitter_Feed extends Widget_Base
             @media only screen and (min-width: 768px) and (max-width: 992px) {
                 .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-3 .eael-twitter-feed-item,
                 .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-4 .eael-twitter-feed-item {
-                    width: calc(50% - ' . ceil($settings['eael_twitter_feed_column_spacing']['size'] / 2) . 'px);
+                    width: calc(50% - ' . ceil($feedcolumnspacing / 2) . 'px);
                 }
             }
         </style>';

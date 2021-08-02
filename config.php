@@ -537,6 +537,11 @@ $config = [
                     ],
                 ],
                 'js'  => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
 	                [
 		                'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js',
 		                'type'    => 'lib',
@@ -612,6 +617,13 @@ $config = [
                         'type' => 'self',
                         'context' => 'view',
                     ],
+                ],
+                'js' => [
+	                [
+		                'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/gravity-form.min.js',
+		                'type' => 'self',
+		                'context' => 'edit',
+	                ],
                 ],
             ],
         ],
@@ -820,6 +832,34 @@ $config = [
                 true,
             ],
         ],
+
+        'crowdfundly-organization' => [
+	        'class' => '\Essential_Addons_Elementor\Elements\Crowdfundly_Organization',
+	        'condition' => [
+		        'class_exists',
+		        'Crowdfundly',
+		        true,
+	        ],
+        ],
+
+        'crowdfundly-all-campaign' => [
+	        'class' => '\Essential_Addons_Elementor\Elements\Crowdfundly_All_Campaign',
+	        'condition' => [
+		        'class_exists',
+		        'Crowdfundly',
+		        true,
+	        ],
+        ],
+
+        'crowdfundly-single-campaign' => [
+	        'class' => '\Essential_Addons_Elementor\Elements\Crowdfundly_Single_Campaign',
+	        'condition' => [
+		        'class_exists',
+		        'Crowdfundly',
+		        true,
+	        ],
+        ],
+
         'woo-checkout' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Checkout',
             'dependency' => [
@@ -873,6 +913,56 @@ $config = [
                 'run_easyjobs',
                 true,
             ],
+        ],
+        'woo-product-compare'  => [
+	        'class'      => '\Essential_Addons_Elementor\Elements\Woo_Product_Compare',
+	        'dependency' => [
+		        'css' => [
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-compare.min.css',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+	        ],
+        ],
+	    'woo-product-carousel' => [
+		    'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Carousel',
+		    'dependency' => [
+			    'css' => [
+				    [
+					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-carousel.min.css',
+					    'type' => 'self',
+					    'context' => 'view',
+				    ],
+			    ],
+			    'js'  => [
+				    [
+					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-product-carousel.min.js',
+					    'type' => 'self',
+					    'context' => 'view',
+				    ],
+			    ],
+		    ],
+	    ],
+        'simple-menu' => [
+	        'class' => '\Essential_Addons_Elementor\Elements\Simple_Menu',
+	        'dependency' => [
+		        'css' => [
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/simple-menu.min.css',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+		        'js'  => [
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/simple-menu.min.js',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+	        ],
         ],
     ],
     'extensions' => [

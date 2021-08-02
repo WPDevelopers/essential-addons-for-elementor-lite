@@ -31,12 +31,12 @@ var FancyText = function ($scope, $) {
 			},
 		});
 	}
-
-	jQuery(window).on("load", function () {
+	jQuery(document).ready(function() {
 		setTimeout(function () {
 			$(".eael-fancy-text-strings", $scope).css("display", "inline-block");
 		}, 500);
 	});
+
 
 	if (isEditMode) {
 		setTimeout(function () {

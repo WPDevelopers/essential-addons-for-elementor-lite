@@ -5,16 +5,17 @@
 		e.preventDefault();
 		e.stopPropagation();
 		e.stopImmediatePropagation();
-
 		var $this = $(this),
-			$text = $("span", $this).html(),
+			$LoaderSpan = $("span", $this),
+			$text = $LoaderSpan.html(),
 			$widget_id = $this.data("widget"),
+			$page_id = $this.data("page-id"),
+			$nonce = $this.data("nonce"),
 			$scope = $(".elementor-element-" + $widget_id),
 			$class = $this.data("class"),
 			$args = $this.data("args"),
-			$settings = $this.data("settings"),
 			$layout = $this.data("layout"),
-			$template_info = $this.data('template'),
+			$template_info = $this.data("template"),
 			$page = parseInt($this.data("page")) + 1;
 
 		if (typeof $widget_id == "undefined" || typeof $args == "undefined") {
@@ -26,11 +27,12 @@
 			action: "load_more",
 			class: $class,
 			args: $args,
-			settings: $settings,
 			page: $page,
-			template_info: $template_info
+			page_id: $page_id,
+			widget_id: $widget_id,
+			nonce: $nonce,
+			template_info: $template_info,
 		};
-
 		String($args)
 			.split("&")
 			.forEach(function (item, index) {
@@ -53,7 +55,7 @@
 		}
 
 		$this.addClass("button--loading");
-		$("span", $this).html("Loading...");
+		$LoaderSpan.html(localize.i18n.loading);
 
 		$.ajax({
 			url: localize.ajaxurl,
@@ -62,28 +64,70 @@
 			success: function (response) {
 				var $content = $(response);
 
-				if ($content.hasClass("no-posts-found") || $content.length == 0) {
+				if (
+					$content.hasClass("no-posts-found") ||
+					$content.length === 0
+				) {
 					$this.remove();
 				} else {
-					if ($data.class == "Essential_Addons_Elementor\\Elements\\Product_Grid") {
-						$(".eael-product-grid .products", $scope).append($content);
-						const dynamicID = "eael-product-"+Date.now();
+					if (
+						$data.class ==
+						"Essential_Addons_Elementor\\Elements\\Product_Grid"
+					) {
+						$content = $content.filter("li");
+
+						$(".eael-product-grid .products", $scope).append(
+							$content
+						);
+
 						if ($layout == "masonry") {
-							$content.find('.woocommerce-product-gallery').addClass(dynamicID);
-							$content.find('.woocommerce-product-gallery').addClass('eael-new-product');
-							$(".woocommerce-product-gallery."+dynamicID,$scope).each(function () {
+							const dynamicID = "eael-product-" + Date.now();
+							var $isotope = $(
+								".eael-product-grid .products",
+								$scope
+							).isotope();
+
+							$isotope
+								.isotope("appended", $content)
+								.isotope("layout");
+
+							$isotope.imagesLoaded().progress(function () {
+								$isotope.isotope("layout");
+							});
+
+							$content
+								.find(".woocommerce-product-gallery")
+								.addClass(dynamicID);
+							$content
+								.find(".woocommerce-product-gallery")
+								.addClass("eael-new-product");
+
+							$(
+								".woocommerce-product-gallery." + dynamicID,
+								$scope
+							).each(function () {
 								$(this).wc_product_gallery();
 							});
-							var $isotope = $(".eael-product-grid .products", $scope).isotope();
-							$isotope.isotope("appended", $content).isotope("layout");
-						}
+						} else {
+							const dynamicID = "eael-product-" + Date.now();
+							$content.find('.woocommerce-product-gallery').addClass(dynamicID);
+							$content.find('.woocommerce-product-gallery').addClass('eael-new-product');
 
+							$(".woocommerce-product-gallery."+dynamicID, $scope).each(function() {
+								$(this).wc_product_gallery();
+							});
+						}
 					} else {
 						$(".eael-post-appender", $scope).append($content);
 
 						if ($layout == "masonry") {
-							var $isotope = $(".eael-post-appender", $scope).isotope();
-							$isotope.isotope("appended", $content).isotope("layout");
+							var $isotope = $(
+								".eael-post-appender",
+								$scope
+							).isotope();
+							$isotope
+								.isotope("appended", $content)
+								.isotope("layout");
 
 							$isotope.imagesLoaded().progress(function () {
 								$isotope.isotope("layout");
@@ -92,7 +136,7 @@
 					}
 
 					$this.removeClass("button--loading");
-					$("span", $this).html($text);
+					$LoaderSpan.html($text);
 
 					$this.data("page", $page);
 				}

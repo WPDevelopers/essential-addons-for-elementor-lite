@@ -15,10 +15,12 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Icons_Manager;
+use Essential_Addons_Elementor\Traits\Helper;
 
 class Woo_Checkout extends Widget_Base {
 	
 	use \Essential_Addons_Elementor\Template\Woocommerce\Checkout\Woo_Checkout_Helper;
+	use Helper;
 
 	public function __construct( $data = [], $args = null ) {
 		parent::__construct( $data, $args );
@@ -38,6 +40,7 @@ class Woo_Checkout extends Widget_Base {
 			}
 
 			add_filter('body_class' , [$this, 'add_checkout_body_class']);
+      $this->eael_woocheckout_recurring();
 		}
 	}
 
@@ -436,7 +439,20 @@ class Woo_Checkout extends Widget_Base {
 					'active' => true,
 				],
 			]
-		);
+    );
+    
+    $this->add_control(
+			'ea_woo_checkout_login_message',
+			[
+				'label' => __( 'Message', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXTAREA,
+				'default' => __( 'If you have shopped with us before, please enter your details below. If you are a new customer, please proceed to the Billing section.', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [
+					'active' => true,
+				],
+			]
+    );
+    
 		$this->add_control(
 			'ea_woo_checkout_login_link_text',
 			[
@@ -2544,10 +2560,25 @@ class Woo_Checkout extends Widget_Base {
 		return $classes;
 	}
 
+
+  public function eael_woocheckout_recurring(){
+    if( class_exists('WC_Subscriptions_Cart') ) {
+      remove_action('woocommerce_review_order_after_order_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals' ), 10);
+      add_action('eael_display_recurring_total_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals'
+      ), 10);
+    }
+  }
+
 	protected function render() {
 	    if( !class_exists('woocommerce') ) {
 	        return;
         }
+
+		/**
+		 * Remove WC Coupon Action From  Neve Theme
+		 */
+		$this->eael_forcefully_remove_action( 'woocommerce_before_checkout_form', 'move_coupon', 10 );
+		$this->eael_forcefully_remove_action( 'woocommerce_before_checkout_billing_form', 'clear_coupon', 10 );
 
         $settings = $this->get_settings_for_display();
 

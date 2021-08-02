@@ -1,0 +1,398 @@
+<wpml-config>
+    <elementor-widgets>
+        <widget name="eael-adv-accordion">
+            <conditions>
+                <condition key="widgetType">eael-adv-accordion</condition>
+            </conditions>
+            <fields-in-item items_of="eael_adv_accordion_tab">
+                <field type="Advance Accordion: Title" editor_type="LINE">eael_adv_accordion_tab_title</field>
+                <field type="Advance Accordion: Content" editor_type="VISUAL">eael_adv_accordion_tab_content</field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-adv-tabs">
+            <conditions>
+                <condition key="widgetType">eael-adv-tabs</condition>
+            </conditions>
+            <fields-in-item items_of="eael_adv_tabs_tab">
+                <field type="Advance Tab: Title" editor_type="LINE">eael_adv_tabs_tab_title</field>
+                <field type="Advance Tab: Content" editor_type="VISUAL">eael_adv_tabs_tab_content</field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-creative-button">
+            <conditions>
+                <condition key="widgetType">eael-creative-button</condition>
+            </conditions>
+            <fields>
+                <field type="Creative Button: Text" editor_type="LINE">creative_button_text</field>
+                <field type="Creative Button: Secondary Text" editor_type="LINE">creative_button_secondary_text</field>
+                <field type="Creative Button: Link" editor_type="LINE" key_of="creative_button_link_url">url</field>
+            </fields>
+        </widget>
+        <widget name="eael-cta-box">
+            <conditions>
+                <condition key="widgetType">eael-cta-box</condition>
+            </conditions>
+            <fields>
+                <field type="Call to Action: Title" editor_type="LINE">eael_cta_title</field>
+                <field type="Call to Action: Sub Title" editor_type="LINE">eael_cta_sub_title</field>
+                <field type="Call to Action: Content" editor_type="VISUAL">eael_cta_content</field>
+                <field type="Call to Action: Button Text" editor_type="LINE">eael_cta_btn_text</field>
+                <field type="Call to Action: Primary Button Link" key_of="eael_cta_btn_link" editor_type="LINE" >url</field>
+                <field type="Call to Action: Button Text Two" editor_type="LINE">eael_cta_secondary_btn_text</field>
+                <field type="Call to Action: Secondary Button Link" key_of="eael_cta_secondary_btn_link" editor_type="LINE">url</field>
+            </fields>
+        </widget>
+        <widget name="eael-data-table">
+            <conditions>
+                <condition key="widgetType">eael-data-table</condition>
+            </conditions>
+            <fields-in-item items_of="eael_data_table_header_cols_data">
+                <field type="Data Table: Header" editor_type="LINE">eael_data_table_header_col</field>
+            </fields-in-item>
+            <fields-in-item items_of="eael_data_table_content_rows">
+                <field type="Data Table: Cell Text" editor_type="AREA">eael_data_table_content_row_title</field>
+                <field type="Data Table: Cell Content" editor_type="VISUAL">eael_data_table_content_row_content</field>
+                <field type="Data Table: Link" editor_type="LINE" key_of="eael_data_table_content_row_title_link">url
+                </field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-dual-color-header">
+            <conditions>
+                <condition key="widgetType">eael-dual-color-header</condition>
+            </conditions>
+            <fields>
+                <field type="Dual Color Heading: Title ( First Part )" editor_type="LINE">eael_dch_first_title</field>
+                <field type="Dual Color Heading: Title ( Last Part )" editor_type="LINE">eael_dch_last_title</field>
+                <field type="Dual Color Heading: Sub Text" editor_type="VISUAL">eael_dch_subtext</field>
+            </fields>
+        </widget>
+        <widget name="eael-fancy-text">
+            <conditions>
+                <condition key="widgetType">eael-fancy-text</condition>
+            </conditions>
+            <fields>
+                <field type="Fancy Text: Prefix Text" editor_type="LINE">eael_fancy_text_prefix</field>
+                <field type="Fancy Text: Suffix Text" editor_type="LINE">eael_fancy_text_suffix</field>
+            </fields>
+            <fields-in-item items_of="eael_fancy_text_strings">
+                <field type="Fancy Text: String" editor_type="LINE">eael_fancy_text_strings_text_field</field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-filterable-gallery">
+            <conditions>
+                <condition key="widgetType">eael-filterable-gallery</condition>
+            </conditions>
+            <fields>
+                <field type="Filterable Gallery: Label" editor_type="LINE">eael_fg_all_label_text</field>
+                <field type="Filterable Gallery: Load More" editor_type="LINE">load_more_text</field>
+                <field type="Filterable Gallery: No More Text" editor_type="LINE">nomore_items_text</field>
+            </fields>
+            <fields-in-item items_of="eael_fgFlipBox_controls">
+                <field type="Filterable Gallery: Control" editor_type="LINE">eael_fg_control</field>
+
+            </fields-in-item>
+            <fields-in-item items_of="eael_fg_gallery_items">
+                <field type="Filterable Gallery: Control Name" editor_type="LINE">eael_fg_gallery_control_name</field>
+                <field type="Filterable Gallery: Item Name" editor_type="LINE">eael_fg_gallery_item_name</field>
+                <field type="Filterable Gallery: Item Price" editor_type="LINE">fg_item_price</field>
+                <field type="Filterable Gallery: Item Rating" editor_type="LINE">fg_item_ratings</field>
+                <field type="Filterable Gallery: Item Category" editor_type="LINE">fg_item_cat</field>
+                <field type="Filterable Gallery: Item Content" editor_type="VISUAL">eael_fg_gallery_item_content</field>
+                <field type="Filterable Gallery: Item Link" key_of="eael_fg_gallery_img_link" editor_type="LINE">url
+                </field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-image-accordion">
+            <conditions>
+                <condition key="widgetType">eael-image-accordion</condition>
+            </conditions>
+            <fields-in-item items_of="eael_img_accordions">
+                <field type="Image Accordion: Title" editor_type="LINE">eael_accordion_tittle</field>
+                <field type="Image Accordion: Content" editor_type="VISUAL">eael_accordion_content</field>
+                <field type="Image Accordion: Link" key_of="eael_accordion_title_link" editor_type="LINE">url</field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-flip-box">
+            <conditions>
+                <condition key="widgetType">eael-flip-box</condition>
+            </conditions>
+            <fields>
+                <field type="Flip Box: Front Title" editor_type="LINE">eael_flipbox_front_title</field>
+                <field type="Flip Box: Front Content" editor_type="VISUAL">eael_flipbox_front_text</field>
+                <field type="Flip Box: Back Title" editor_type="LINE">eael_flipbox_back_title</field>
+                <field type="Flip Box: Back Content" editor_type="LINE">eael_flipbox_back_text</field>
+                <field type="Flip Box: Button Text" editor_type="VISUAL">flipbox_button_text</field>
+                <field type="Flip Box: Button Link" key_of="flipbox_link" editor_type="LINE">url</field>
+            </fields>
+        </widget>
+        <widget name="eael-info-box">
+            <conditions>
+                <condition key="widgetType">eael-info-box</condition>
+            </conditions>
+            <fields>
+                <field type="Info Box: Title" editor_type="LINE">eael_infobox_title</field>
+                <field type="Info Box: Content" editor_type="VISUAL">eael_infobox_text</field>
+                <field type="Info Box: Button Text" editor_type="LINE">infobox_button_text</field>
+                <field type="Info Box: Sub Title Text" editor_type="LINE">eael_infobox_number</field>
+                <field type="Info Box: Button Link" key_of="infobox_button_link_url" editor_type="LINE">url</field>
+                <field type="Info Box: Link" key_of="eael_show_infobox_clickable_link" editor_type="LINE">url</field>
+            </fields>
+        </widget>
+        <widget name="eael-post-grid">
+            <conditions>
+                <condition key="widgetType">eael-post-grid</condition>
+            </conditions>
+            <fields>
+                <field type="Post Grid: Load More" editor_type="LINE">show_load_more_text</field>
+                <field type="Post Grid: Button Text" editor_type="LINE">read_more_button_text</field>
+            </fields>
+        </widget>
+        <widget name="eael-post-timeline">
+            <conditions>
+                <condition key="widgetType">eael-post-timeline</condition>
+            </conditions>
+            <fields>
+                <field type="Post Timeline: Load More" editor_type="LINE">show_load_more_text</field>
+            </fields>
+        </widget>
+        <widget name="eael-pricing-table">
+            <conditions>
+                <condition key="widgetType">eael-pricing-table</condition>
+            </conditions>
+            <fields>
+                <field type="Pricing Table: Title" editor_type="LINE">eael_pricing_table_title</field>
+                <field type="Pricing Table: Sub Title" editor_type="LINE">eael_pricing_table_sub_title</field>
+                <field type="Pricing Table: Price" editor_type="LINE">eael_pricing_table_price</field>
+                <field type="Pricing Table: Sell Price" editor_type="LINE">eael_pricing_table_onsale_price</field>
+                <field type="Pricing Table: Price Currency" editor_type="LINE">eael_pricing_table_price_cur</field>
+                <field type="Pricing Table: Price Button Text" editor_type="LINE">eael_pricing_table_btn</field>
+                <field type="Pricing Table: Price Button Link" key_of="eael_pricing_table_btn_link" editor_type="LINE">
+                    url
+                </field>
+                <field type="Pricing Table: Price Period" editor_type="LINE">eael_pricing_table_price_period</field>
+                <field type="Pricing Table: Price Tag Text" editor_type="LINE">eael_pricing_table_featured_tag_text
+                </field>
+            </fields>
+            <fields-in-item items_of="eael_pricing_table_items">
+                <field type="Pricing Table: Feature" editor_type="LINE">eael_pricing_table_item</field>
+                <field type="Pricing Table: Feature Tooltip" editor_type="LINE">eael_pricing_item_tooltip_content
+                </field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-progress-bar">
+            <conditions>
+                <condition key="widgetType">eael-progress-bar</condition>
+            </conditions>
+            <fields>
+                <field type="Progressbar: Title" editor_type="LINE">progress_bar_title</field>
+            </fields>
+        </widget>
+        <widget name="eael-team-member">
+            <conditions>
+                <condition key="widgetType">eael-team-member</condition>
+            </conditions>
+            <fields>
+                <field type="Team Member: Name" editor_type="LINE">eael_team_member_name</field>
+                <field type="Team Member: Title" editor_type="LINE">eael_team_member_job_title</field>
+                <field type="Team Member: Description" editor_type="AREA">eael_team_member_description</field>
+            </fields>
+            <fields-in-item items_of="eael_team_member_social_profile_links">
+                <field type="Team Member: Social Link" key_of="link" editor_type="LINE">url</field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-testimonial">
+            <conditions>
+                <condition key="widgetType">eael-testimonial</condition>
+            </conditions>
+            <fields>
+                <field type="Testimonial: User Name" editor_type="LINE">eael_testimonial_name</field>
+                <field type="Testimonial: Company Name" editor_type="LINE">eael_testimonial_company_title</field>
+                <field type="Testimonial: Description" editor_type="VISUAL">eael_testimonial_description</field>
+            </fields>
+        </widget>
+        <widget name="eael-tooltip">
+            <conditions>
+                <condition key="widgetType">eael-tooltip</condition>
+            </conditions>
+            <fields>
+                <field type="Tooltip: Link" key_of="eael_tooltip_link" editor_type="LINE">url</field>
+                <field type="Tooltip: Description" editor_type="VISUAL">eael_tooltip_content</field>
+                <field type="Tooltip: Hover Description" editor_type="VISUAL">eael_tooltip_hover_content</field>
+            </fields>
+        </widget>
+        <widget name="eael-feature-list">
+            <conditions>
+                <condition key="widgetType">eael-feature-list</condition>
+            </conditions>
+            <fields-in-item items_of="eael_feature_list">
+                <field type="Feature List: Title" editor_type="LINE">eael_feature_list_title</field>
+                <field type="Feature List: Content" editor_type="AREA">eael_feature_list_content</field>
+                <field type="Feature List: Link" key_of="eael_feature_list_link" editor_type="LINE">url</field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-caldera-form">
+            <conditions>
+                <condition key="widgetType">eael-caldera-form</condition>
+            </conditions>
+            <fields>
+                <field type="Caldera Form: Title" editor_type="LINE">form_title_custom</field>
+                <field type="Caldera Form: Description" editor_type="AREA">form_description_custom</field>
+            </fields>
+        </widget>
+        <widget name="eael-contact-form-7">
+            <conditions>
+                <condition key="widgetType">eael-contact-form-7</condition>
+            </conditions>
+            <fields>
+                <field type="Contact Form-7: Title" editor_type="LINE">form_title_custom</field>
+                <field type="Contact Form-7: Description" editor_type="AREA">form_description_custom</field>
+            </fields>
+        </widget>
+        <widget name="eael-gravity-form">
+            <conditions>
+                <condition key="widgetType">eael-gravity-form</condition>
+            </conditions>
+            <fields>
+                <field type="Gravity Form: Title" editor_type="LINE">form_title_custom</field>
+                <field type="Gravity Form: Description" editor_type="AREA">form_description_custom</field>
+            </fields>
+        </widget>
+        <widget name="eael-wpforms">
+            <conditions>
+                <condition key="widgetType">eael-wpforms</condition>
+            </conditions>
+            <fields>
+                <field type="WPForms: Title" editor_type="LINE">form_title_custom</field>
+                <field type="WPForms: Description" editor_type="AREA">form_description_custom</field>
+            </fields>
+        </widget>
+        <widget name="eael-ninja">
+            <conditions>
+                <condition key="widgetType">eael-ninja</condition>
+            </conditions>
+            <fields>
+                <field type="NinjaForm: Title" editor_type="LINE">form_title_custom</field>
+                <field type="NinjaForm: Description" editor_type="AREA">form_description_custom</field>
+            </fields>
+        </widget>
+        <widget name="eael-event-calendar">
+            <conditions>
+                <condition key="widgetType">eael-event-calendar</condition>
+            </conditions>
+            <fields-in-item items_of="eael_event_items">
+                <field type="Event: Title" editor_type="LINE">eael_event_title</field>
+                <field type="Event: Description" editor_type="AREA">eael_event_description</field>
+                <field type="Event : Link" key_of="eael_event_link" editor_type="LINE">url</field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-advanced-data-table">
+            <conditions>
+                <condition key="widgetType">eael-advanced-data-table</condition>
+            </conditions>
+            <fields>
+                <field type="Adv Data Table: Search Placeholder" editor_type="LINE">
+                    ea_adv_data_table_search_placeholder
+                </field>
+            </fields>
+        </widget>
+        <widget name="eael-formstack">
+            <conditions>
+                <condition key="widgetType">eael-formstack</condition>
+            </conditions>
+            <fields>
+                <field type="Formstack: Title" editor_type="LINE">eael_formstack_form_title_custom</field>
+                <field type="Formstack: Description" editor_type="AREA">eael_formstack_form_description_custom</field>
+            </fields>
+        </widget>
+        <widget name="eael-fluentform">
+            <conditions>
+                <condition key="widgetType">eael-fluentform</condition>
+            </conditions>
+            <fields>
+                <field type="Fluent Form: Title" editor_type="LINE">form_title_custom</field>
+                <field type="Fluent Form: Description" editor_type="AREA">form_description_custom</field>
+            </fields>
+        </widget>
+        <widget name="eael-betterdocs-category-box">
+            <conditions>
+                <condition key="widgetType">eael-betterdocs-category-box</condition>
+            </conditions>
+            <fields>
+                <field type="BetterDocs Category Box: Count Prefix" editor_type="LINE">count_prefix</field>
+                <field type="BetterDocs Category Box: Count Suffix" editor_type="LINE">count_suffix</field>
+            </fields>
+        </widget>
+        <widget name="eael-betterdocs-category-grid">
+            <conditions>
+                <condition key="widgetType">eael-betterdocs-category-grid</condition>
+            </conditions>
+            <fields>
+                <field type="BetterDocs Category Grid: Button Text" editor_type="LINE">button_text</field>
+            </fields>
+        </widget>
+        <widget name="eael-content-ticker">
+            <conditions>
+                <condition key="widgetType">eael-content-ticker</condition>
+            </conditions>
+            <fields>
+                <field type="Content Ticker: Tag Text" editor_type="LINE">eael_ticker_tag_text</field>
+            </fields>
+        </widget>
+        <widget name="eael-countdown">
+            <conditions>
+                <condition key="widgetType">eael-countdown</condition>
+            </conditions>
+            <fields>
+                <field type="Countdown: Days Text" editor_type="LINE">eael_countdown_days_label</field>
+                <field type="Countdown: Hours Text" editor_type="LINE">eael_countdown_hours_label</field>
+                <field type="Countdown: Minute Text" editor_type="LINE">eael_countdown_minutes_label</field>
+                <field type="Countdown: Seconds Text" editor_type="LINE">eael_countdown_seconds_label</field>
+            </fields>
+        </widget>
+        <widget name="eael-login-register">
+            <conditions>
+                <condition key="widgetType">eael-login-register</condition>
+            </conditions>
+            <fields>
+                <field type="Login | Register Form: Lost Password Text" editor_type="LINE">lost_password_text</field>
+                <field type="Login | Register Form: Lost Password Link" key_of="lost_password_url" editor_type="LINE">url</field>
+                <field type="Login | Register Form: Remember Text" editor_type="LINE">remember_text</field>
+                <field type="Login | Register Form: Login Form Title" editor_type="LINE">login_form_title</field>
+                <field type="Login | Register Form: Login Form Subtitle" editor_type="AREA">login_form_subtitle</field>
+                <field type="Login | Register Form: Register Form Title" editor_type="LINE">register_form_title</field>
+                <field type="Login | Register Form: Register Form Subtitle" editor_type="AREA">register_form_subtitle</field>
+                <field type="Login | Register Form: Lost Password Text" editor_type="AREA">login_button_text</field>
+                <field type="Login | Register Form: Login Button Text" editor_type="AREA">google_login_text</field>
+                <field type="Login | Register Form: FB Login Text" editor_type="LINE">fb_login_text</field>
+                <field type="Login | Register Form: Lost Password Text" editor_type="AREA">separator_text</field>
+                <field type="Login | Register Form: Error Email Text" editor_type="LINE">err_email</field>
+                <field type="Login | Register Form: Error Email Missing Text" editor_type="LINE">err_email_missing</field>
+                <field type="Login | Register Form: Error Email Used Text" editor_type="LINE">err_email_used</field>
+                <field type="Login | Register Form: Error Username Text" editor_type="LINE">err_username</field>
+                <field type="Login | Register Form: Error Username Used Text" editor_type="LINE">err_username_used</field>
+                <field type="Login | Register Form: Error Password Text" editor_type="LINE">err_pass</field>
+                <field type="Login | Register Form: Error Conf Password Text" editor_type="LINE">err_conf_pass</field>
+                <field type="Login | Register Form: Error Loggedin Text" editor_type="LINE">err_loggedin</field>
+                <field type="Login | Register Form: Error Recaptcha Text" editor_type="LINE">err_recaptcha</field>
+                <field type="Login | Register Form: Error tc" editor_type="LINE">err_tc</field>
+                <field type="Login | Register Form: Error Unknown Text" editor_type="LINE">err_unknown</field>
+                <field type="Login | Register Form: Success Login Text" editor_type="LINE">success_login</field>
+                <field type="Login | Register Form: Success RegisterText" editor_type="LINE">success_register</field>
+                <field type="Login | Register Form: Login User Label Text" editor_type="LINE">login_user_label</field>
+                <field type="Login | Register Form: Login Password Label Text" editor_type="LINE">login_password_label</field>
+                <field type="Login | Register Form: Login User Placeholder Text" editor_type="LINE">login_user_placeholder</field>
+                <field type="Login | Register Form: Login Password Placeholder Text" editor_type="LINE">login_password_placeholder</field>
+                <field type="Login | Register Form: Login Button Text" editor_type="LINE">login_button_text</field>
+                <field type="Login | Register Form: Register Button Text" editor_type="LINE">reg_button_text</field>
+                <field type="Login | Register Form: Register Link Text" editor_type="AREA">registration_link_text</field>
+                <field type="Login | Register Form: Redirect URL" key_of="redirect_url" editor_type="LINE">url</field>
+                <field type="Login | Register Form: Register Link" key_of="custom_register_url" editor_type="LINE">url</field>
+            </fields>
+            <fields-in-item items_of="register_fields">
+                <field type="Login | Register Form: Field Label" editor_type="LINE">field_label</field>
+                <field type="Login | Register Form: Placeholder" editor_type="AREA">placeholder</field>
+                <field type="Login | Register Form: Required Note" editor_type="AREA">required_note</field>
+            </fields-in-item>
+        </widget>
+    </elementor-widgets>
+</wpml-config>

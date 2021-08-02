@@ -15,6 +15,7 @@ use Elementor\Repeater;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
 
+use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
 class Team_Member extends Widget_Base {
 
 	public function get_name() {
@@ -874,8 +875,8 @@ class Team_Member extends Widget_Base {
 			</div>
 
 			<div class="eael-team-content">
-				<h3 class="eael-team-member-name"><?php echo $settings['eael_team_member_name']; ?></h3>
-				<h4 class="eael-team-member-position"><?php echo $settings['eael_team_member_job_title']; ?></h4>
+				<h3 class="eael-team-member-name"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_name']); ?></h3>
+				<h4 class="eael-team-member-position"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_job_title']); ?></h4>
 
 				<?php if( 'eael-team-members-social-bottom' === $settings['eael_team_members_preset'] ) : ?>
 					<?php do_action('eael/team_member_social_botton_markup', $settings); ?>
@@ -904,7 +905,7 @@ class Team_Member extends Widget_Base {
 							<?php endforeach; ?>
 						</ul>
 					<?php endif; ?>
-					<p class="eael-team-text"><?php echo $settings['eael_team_member_description']; ?></p>
+					<p class="eael-team-text"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_description']); ?></p>
 				<?php endif; ?>
 			</div>
 		</div>

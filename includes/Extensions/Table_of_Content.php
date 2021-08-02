@@ -9,7 +9,7 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Scheme_Typography;
+use \Elementor\Core\Schemes\Typography;
 use \Essential_Addons_Elementor\Classes\Helper;
 
 class Table_of_Content
@@ -327,6 +327,29 @@ class Table_of_Content
         );
 
         $element->add_control(
+            'eael_ext_toc_main_page_offset',
+            [
+                'label' => __('Main Page Offset', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 5,
+                        'max' => 2000,
+                        'step' => 10,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 120,
+                ],
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
             'eael_ext_toc_sticky_z_index',
             [
                 'label' => __('Z Index', 'essential-addons-for-elementor-lite'),
@@ -591,7 +614,7 @@ class Table_of_Content
             [
                 'name' => 'eael_ext_table_of_content_header_typography',
                 'selector' => '{{WRAPPER}} .eael-toc-header .eael-toc-title,{{WRAPPER}} .eael-toc.collapsed .eael-toc-button',
-                'scheme' => Scheme_Typography::TYPOGRAPHY_2,
+                'scheme' => Typography::TYPOGRAPHY_2,
             ]
         );
 
@@ -876,7 +899,7 @@ class Table_of_Content
             [
                 'name' => 'eael_ext_table_of_content_list_typography_normal',
                 'selector' => '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list',
-                'scheme' => Scheme_Typography::TYPOGRAPHY_2,
+                'scheme' => Typography::TYPOGRAPHY_2,
             ]
         );
 

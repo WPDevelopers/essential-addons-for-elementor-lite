@@ -12,8 +12,10 @@ use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
+use Elementor\Icons_Manager;
 use \Elementor\Widget_Base;
 
+use \Essential_Addons_Elementor\Classes\Helper;
 class Dual_Color_Header extends Widget_Base
 {
 	public function get_name()
@@ -220,7 +222,7 @@ class Dual_Color_Header extends Widget_Base
 					'type' => Controls_Manager::CHOOSE,
 					'options' => [
 						'1' => [
-							'title' => __('', 'essential-addons-for-elementor-lite'),
+							'title' => '',
 							'icon' => 'fa fa-unlock-alt',
 						],
 					],
@@ -407,6 +409,8 @@ class Dual_Color_Header extends Widget_Base
 				'selectors' => [
 					'{{WRAPPER}} .eael-dual-header i' => 'font-size: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .eael-dual-header img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-dual-header .eael-dch-svg-icon' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-dual-header .eael-dch-svg-icon svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -419,6 +423,7 @@ class Dual_Color_Header extends Widget_Base
 				'default' => '#4d4d4d',
 				'selectors' => [
 					'{{WRAPPER}} .eael-dual-header i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-dual-header svg' => 'fill: {{VALUE}};',
 				],
 			]
 		);
@@ -493,30 +498,54 @@ class Dual_Color_Header extends Widget_Base
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
+        $this->add_control(
+			'eael_dch_dual_title_color_gradient_first',
 			[
-				'name'     => 'eael_dch_dual_title_color_gradient',
-				'types'    => ['gradient'],
-				'fields_options' => [
-					'background' => [
-						'label' => _x( 'Gradient Color', 'Text Shadow Control', 'elementor' ),
-						'toggle' => false,
-						'default' => 'gradient',
-					],
-					'color' => [
-						'default' => '#062ACA',
-					],
-					'color_b' => [
-						'default' => '#9401D9',
-					]
-				],
-				'selector' => '{{WRAPPER}} .eael-dual-header .title span.lead',
+				'label' => esc_html__('First Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#062ACA',
 				'condition' => [
 					'eael_dch_dual_color_selector' => 'gradient-color'
 				],
 			]
 		);
+
+        $this->add_control(
+			'eael_dch_dual_title_color_gradient_second',
+			[
+				'label' => esc_html__('Second Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#9401D9',
+				'condition' => [
+					'eael_dch_dual_color_selector' => 'gradient-color'
+				],
+			]
+		);
+
+		// $this->add_group_control(
+		// 	Group_Control_Background::get_type(),
+		// 	[
+		// 		'name'     => 'eael_dch_dual_title_color_gradient',
+		// 		'types'    => ['gradient'],
+		// 		'fields_options' => [
+		// 			'background' => [
+		// 				'label' => _x( 'Gradient Color', 'Text Shadow Control', 'elementor' ),
+		// 				'toggle' => false,
+		// 				'default' => 'gradient',
+		// 			],
+		// 			'color' => [
+		// 				'default' => '#062ACA',
+		// 			],
+		// 			'color_b' => [
+		// 				'default' => '#9401D9',
+		// 			]
+		// 		],
+		// 		'selector' => '{{WRAPPER}} .eael-dual-header .title span.lead',
+		// 		'condition' => [
+		// 			'eael_dch_dual_color_selector' => 'gradient-color'
+		// 		],
+		// 	]
+		// );
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
@@ -572,6 +601,49 @@ class Dual_Color_Header extends Widget_Base
 				],
 			]
 		);
+
+		$this->add_control(
+			'eael_section_dch_separator_icon_size',
+			[
+				'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 36,
+				],
+				'range' => [
+					'px' => [
+						'min' => 20,
+						'max' => 500,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-dual-header .eael-dch-separator-wrap i' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-dual-header .eael-dch-separator-wrap img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-dual-header .eael-dch-separator-wrap svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'eael_dch_separator_type' => 'icon',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_section_dch_separator_icon_color',
+			[
+				'label' => esc_html__('Icon Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#4d4d4d',
+				'selectors' => [
+					'{{WRAPPER}} .eael-dual-header .eael-dch-separator-wrap i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-dual-header .eael-dch-separator-wrap svg' => 'fill: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_dch_separator_type' => 'icon',
+				],
+			]
+		);
+
 		$this->add_control(
 			'eael_section_dch_separator_alignment',
 			[
@@ -641,8 +713,8 @@ class Dual_Color_Header extends Widget_Base
 				'label' => __('Color', 'essential-addons-for-elementor-lite'),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => \Elementor\Core\Schemes\Color::get_type(),
+					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-dch-separator-wrap i' => 'color: {{VALUE}}',
@@ -833,12 +905,19 @@ class Dual_Color_Header extends Widget_Base
 	protected function render()
 	{
 		$settings = $this->get_settings_for_display();
+        $gradient_style = '';
+        if ( $settings['eael_dch_dual_title_color_gradient_first']  && $settings['eael_dch_dual_title_color_gradient_second']  ) {
+            $gradient_style = 'style="background: -webkit-linear-gradient('. $settings['eael_dch_dual_title_color_gradient_first']. ', '. $settings['eael_dch_dual_title_color_gradient_second'].');-webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;"';
+        };
 		$icon_migrated = isset($settings['__fa4_migrated']['eael_dch_icon_new']);
 		$icon_is_new = empty($settings['eael_dch_icon']);
 		// separator
 		$separator_markup = '<div class="eael-dch-separator-wrap">';
 		if ($settings['eael_dch_separator_type'] == 'icon') {
-			$separator_markup .= '<i class="' . esc_attr($settings['eael_dch_separator_icon']['value']) . '"></i>';
+            ob_start();
+			Icons_Manager::render_icon( $settings['eael_dch_separator_icon'], [ 'aria-hidden' => 'true' ] );
+			$separator_markup .= ob_get_clean();
 		} else {
 			$separator_markup .= '<span class="separator-one"></span>
 			<span class="separator-two"></span>';
@@ -848,82 +927,78 @@ class Dual_Color_Header extends Widget_Base
 		<?php if ('dch-default' == $settings['eael_dch_type']) : ?>
         <div class="eael-dual-header">
 		<?php echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
-        <<?php echo $settings['title_tag']; ?> class="title"><span class="lead <?php echo $settings['eael_dch_dual_color_selector']; ?>"><?php esc_html_e
-			($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo $settings['title_tag']; ?>>
+		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title"><span <?php echo $gradient_style;  ?> class="lead <?php echo $settings['eael_dch_dual_color_selector']; ?>"><?php esc_html_e
+			($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?>>
 		<?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
-        <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
+		<span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
 		<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
-			<?php if ($icon_is_new || $icon_migrated) { ?>
-				<?php if (isset($settings['eael_dch_icon_new']['value']['url'])) : ?>
-                    <img src="<?php echo esc_attr($settings['eael_dch_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_dch_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
-				<?php else : ?>
-                    <i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
-				<?php endif; ?>
-			<?php } else { ?>
-                <i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
+			<?php if ($icon_is_new || $icon_migrated) {
+				echo '<span class="eael-dch-svg-icon">';
+				Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
+				echo '</span>';
+
+             } else { ?>
+				<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
 			<?php } ?>
 		<?php endif; ?>
-        </div>
+		</div>
 	<?php endif; ?>
 
 		<?php if ('dch-icon-on-top' == $settings['eael_dch_type']) : ?>
-        <div class="eael-dual-header">
+		<div class="eael-dual-header">
 		<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
-			<?php if ($icon_is_new || $icon_migrated) { ?>
-				<?php if (isset($settings['eael_dch_icon_new']['value']['url'])) { ?>
-                    <img src="<?php echo esc_attr($settings['eael_dch_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_dch_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
-				<?php } else { ?>
-                    <i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
-				<?php } ?>
-			<?php } else { ?>
-                <i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
+			<?php if ($icon_is_new || $icon_migrated) {
+				echo '<span class="eael-dch-svg-icon">';
+				Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
+				echo '</span>';
+
+             } else { ?>
+				<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
 			<?php } ?>
 		<?php endif; ?>
 		<?php echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
-        <<?php echo $settings['title_tag']; ?> class="title"><span class="lead <?php echo $settings['eael_dch_dual_color_selector']; ?>"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo $settings['title_tag']; ?>>
+		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title"><span <?php echo $gradient_style;  ?> class="lead <?php echo $settings['eael_dch_dual_color_selector']; ?>"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?>>
 		<?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
-        <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
-        </div>
+		<span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
+		</div>
 	<?php endif; ?>
 
 		<?php if ('dch-icon-subtext-on-top' == $settings['eael_dch_type']) : ?>
-        <div class="eael-dual-header">
+		<div class="eael-dual-header">
 		<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
-			<?php if ($icon_is_new || $icon_migrated) { ?>
-				<?php if (isset($settings['eael_dch_icon_new']['value']['url'])) { ?>
-                    <img src="<?php echo esc_attr($settings['eael_dch_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_dch_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
-				<?php } else { ?>
-                    <i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
-				<?php } ?>
-			<?php } else { ?>
-                <i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
+			<?php if ($icon_is_new || $icon_migrated) {
+				echo '<span class="eael-dch-svg-icon">';
+				Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
+				echo '</span>';
+
+             } else { ?>
+				<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
 			<?php } ?>
 		<?php endif; ?>
-        <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
+		<span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
 		<?php echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
-        <<?php echo $settings['title_tag']; ?> class="title"><span class="lead <?php echo $settings['eael_dch_dual_color_selector']; ?>"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo $settings['title_tag']; ?>>
+		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title"><span <?php echo $gradient_style;  ?> class="lead <?php echo $settings['eael_dch_dual_color_selector']; ?>"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?>>
 		<?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
-        </div>
+		</div>
 	<?php endif; ?>
 
 		<?php if ('dch-subtext-on-top' == $settings['eael_dch_type']) : ?>
-        <div class="eael-dual-header">
-        <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
+		<div class="eael-dual-header">
+		<span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
 		<?php echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
-        <<?php echo $settings['title_tag']; ?> class="title"><span class="lead <?php echo $settings['eael_dch_dual_color_selector']; ?>"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo $settings['title_tag']; ?>>
+		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title"><span <?php echo $gradient_style;  ?> class="lead <?php echo $settings['eael_dch_dual_color_selector']; ?>"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?>>
 		<?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
 		<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
-			<?php if ($icon_is_new || $icon_migrated) { ?>
-				<?php if (isset($settings['eael_dch_icon_new']['value']['url'])) { ?>
-                    <img src="<?php echo esc_attr($settings['eael_dch_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_dch_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
-				<?php } else { ?>
-                    <i class="<?php echo esc_attr($settings['eael_dch_icon_new']['value']); ?>"></i>
-				<?php } ?>
-			<?php } else { ?>
-                <i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
+			<?php if ($icon_is_new || $icon_migrated) {
+				echo '<span class="eael-dch-svg-icon">';
+				Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
+				echo '</span>';
+
+             } else { ?>
+				<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
 			<?php } ?>
 		<?php endif; ?>
-        </div>
+		</div>
 	<?php endif; ?>
 
 		<?php
