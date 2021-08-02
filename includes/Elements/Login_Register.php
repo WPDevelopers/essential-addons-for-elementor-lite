@@ -3706,9 +3706,8 @@ class Login_Register extends Widget_Base {
 	protected function render() {
 		if ( ! is_admin() && 'yes' === $this->get_settings_for_display( 'redirect_for_logged_in_user' ) && is_user_logged_in() ) {
 			if ( $redirect = $this->get_settings_for_display( 'redirect_url_for_logged_in_user' )['url'] ) {
-				wp_safe_redirect( $redirect );
-			} else {
-				wp_safe_redirect( site_url() );
+				$redirect = wp_sanitize_redirect( $redirect );
+				$logged_in_location = wp_validate_redirect( $redirect, site_url() );
 			}
 		}
 
@@ -3745,6 +3744,7 @@ class Login_Register extends Widget_Base {
              data-widget-id="<?php echo esc_attr( $this->get_id() ); ?>"
              data-recaptcha-sitekey="<?php echo esc_attr( get_option( 'eael_recaptcha_sitekey' ) ); ?>"
              data-redirect-to="<?php echo esc_attr( $login_redirect_url ); ?>"
+             data-logged-in-location="<?php echo empty( $logged_in_location ) ? '' : esc_url( $logged_in_location ); ?>"
         >
 			<?php
 			$this->print_login_form();
