@@ -89,10 +89,10 @@ class Advanced_Data_Table extends Widget_Base
                         $source['google'] = __('Google Sheets', 'essential-addons-for-elementor-lite');
                         $source['tablepress'] = __('TablePress', 'essential-addons-for-elementor-lite');
                     } else {
-                        $source['database'] = __('Database(PRO)', 'essential-addons-for-elementor-lite');
-                        $source['remote'] = __('Remote Database(PRO)', 'essential-addons-for-elementor-lite');
-                        $source['google'] = __('Google Sheets(PRO)', 'essential-addons-for-elementor-lite');
-                        $source['tablepress'] = __('TablePress(PRO)', 'essential-addons-for-elementor-lite');
+                        $source['database'] = __('Database (Pro)', 'essential-addons-for-elementor-lite');
+                        $source['remote'] = __('Remote Database (Pro)', 'essential-addons-for-elementor-lite');
+                        $source['google'] = __('Google Sheets (Pro)', 'essential-addons-for-elementor-lite');
+                        $source['tablepress'] = __('TablePress (Pro)', 'essential-addons-for-elementor-lite');
                     }
 
 
