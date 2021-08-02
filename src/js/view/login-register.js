@@ -4,6 +4,7 @@ ea.hooks.addAction("init", "ea", () => {
         const $wrap = $scope.find('.eael-login-registration-wrapper');// cache wrapper
         const widgetId = $wrap.data('widget-id');
         const recaptchaSiteKey = $wrap.data('recaptcha-sitekey');
+        const loggedInLocation = $wrap.data('logged-in-location');
         const $loginFormWrapper = $scope.find("#eael-login-form-wrapper");
         const loginRcTheme = $loginFormWrapper.data('recaptcha-theme');
         const loginRcSize = $loginFormWrapper.data('recaptcha-size');
@@ -15,6 +16,10 @@ ea.hooks.addAction("init", "ea", () => {
         const $passField = $loginFormWrapper.find('#eael-user-password');
         const recaptchaAvailable = (typeof grecaptcha !== 'undefined' && grecaptcha !== null);
         const params = new URLSearchParams(location.search);
+
+        if ( loggedInLocation !== '' ) {
+            location.replace(loggedInLocation);
+        }
         if ('form' === $regLinkAction.data('action')) {
             $regLinkAction.on('click', function (e) {
                 e.preventDefault();
