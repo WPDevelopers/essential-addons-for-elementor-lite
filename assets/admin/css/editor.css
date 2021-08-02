@@ -41,10 +41,23 @@
 .elementor-control-eael_section_data_table_enabled_pro_alert .elementor-control-title,
 .elementor-control-eael_img_accordion_type_pro_alert .elementor-control-title,
 .elementor-control-eael_ticker_type_pro_alert .elementor-control-title,
-.elementor-control-eael_event_calendar_pro_enable_warning .elementor-control-title,
+.elementor-control-eael_event_calendar_pro_enable_warning .elementor-control-title a,
 .elementor-control-eael_team_members_preset_pro_alert .elementor-control-title,
-.elementor-control-eael_adv_data_table_pro_enable_warning .elementor-control-title ,
-.elementor-control-eael_woo_checkout_pro_enable_warning .elementor-control-title {
+.elementor-control-eael_adv_data_table_pro_enable_warning .elementor-control-title a,
+.elementor-control-eael_woo_checkout_pro_enable_warning .elementor-control-title a{
+	color: #f54 !important;
+}
+
+.elementor-control-eael_pricing_table_style_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_section_countdown_style_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_fancy_text_style_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_section_data_table_enabled_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_img_accordion_type_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_ticker_type_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_event_calendar_pro_enable_warning .elementor-control-title a:hover,
+.elementor-control-eael_team_members_preset_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_adv_data_table_pro_enable_warning .elementor-control-title a:hover,
+.elementor-control-eael_woo_checkout_pro_enable_warning .elementor-control-title a:hover{
 	color: #f54;
 }
 
