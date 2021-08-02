@@ -1149,6 +1149,9 @@
           transform-style: preserve-3d;
   margin-bottom: 1em;
 }
+.eael-product-popup.woocommerce div.product div.images .flex-control-thumbs li:nth-child(4n) {
+  margin-right: 0;
+}
 .eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-4 .flex-control-thumbs li {
   width: calc(25% - .75em);
   margin-right: 1em;

@@ -15,10 +15,12 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Icons_Manager;
+use Essential_Addons_Elementor\Traits\Helper;
 
 class Woo_Checkout extends Widget_Base {
 	
 	use \Essential_Addons_Elementor\Template\Woocommerce\Checkout\Woo_Checkout_Helper;
+	use Helper;
 
 	public function __construct( $data = [], $args = null ) {
 		parent::__construct( $data, $args );
@@ -2571,6 +2573,12 @@ class Woo_Checkout extends Widget_Base {
 	    if( !class_exists('woocommerce') ) {
 	        return;
         }
+
+		/**
+		 * Remove WC Coupon Action From  Neve Theme
+		 */
+		$this->eael_forcefully_remove_action( 'woocommerce_before_checkout_form', 'move_coupon', 10 );
+		$this->eael_forcefully_remove_action( 'woocommerce_before_checkout_billing_form', 'clear_coupon', 10 );
 
         $settings = $this->get_settings_for_display();
 
