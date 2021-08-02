@@ -541,6 +541,9 @@
 .eael-woo-checkout .woocommerce .woo-checkout-payment {
   clear: both;
 }
+.eael-woo-checkout .woocommerce .woo-checkout-payment #payment {
+  border: none;
+}
 .eael-woo-checkout .woocommerce .woo-checkout-payment #payment .payment_methods {
   padding: 0 0 20px 0 !important;
   margin: 0;
