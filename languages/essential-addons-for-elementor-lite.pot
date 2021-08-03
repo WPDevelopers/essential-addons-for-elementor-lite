@@ -13,43 +13,43 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../includes/Classes/Helper.php:190, ../includes/Elements/Adv_Accordion.php:313, ../includes/Elements/Adv_Tabs.php:272, ../includes/Elements/Contact_Form_7.php:270, ../includes/Elements/Content_Ticker.php:306, ../includes/Elements/Countdown.php:467, ../includes/Elements/Creative_Button.php:188, ../includes/Elements/Cta_Box.php:346, ../includes/Elements/Data_Table.php:471, ../includes/Elements/Dual_Color_Header.php:214, ../includes/Elements/Fancy_Text.php:269, ../includes/Elements/Filterable_Gallery.php:795, ../includes/Elements/Flip_Box.php:727, ../includes/Elements/Info_Box.php:493, ../includes/Elements/Pricing_Table.php:697, ../includes/Elements/Progress_Bar.php:271, ../includes/Elements/Team_Member.php:237, ../includes/Elements/Testimonial.php:214, ../includes/Elements/Tooltip.php:513, ../includes/Elements/Twitter_Feed.php:308, ../includes/Elements/WeForms.php:110
+#: ../includes/Classes/Helper.php:205, ../includes/Elements/Adv_Accordion.php:313, ../includes/Elements/Adv_Tabs.php:272, ../includes/Elements/Contact_Form_7.php:270, ../includes/Elements/Content_Ticker.php:306, ../includes/Elements/Countdown.php:467, ../includes/Elements/Creative_Button.php:188, ../includes/Elements/Cta_Box.php:346, ../includes/Elements/Data_Table.php:471, ../includes/Elements/Dual_Color_Header.php:214, ../includes/Elements/Fancy_Text.php:269, ../includes/Elements/Filterable_Gallery.php:795, ../includes/Elements/Flip_Box.php:727, ../includes/Elements/Info_Box.php:493, ../includes/Elements/Pricing_Table.php:697, ../includes/Elements/Progress_Bar.php:271, ../includes/Elements/Team_Member.php:237, ../includes/Elements/Testimonial.php:214, ../includes/Elements/Tooltip.php:513, ../includes/Elements/Twitter_Feed.php:308, ../includes/Elements/WeForms.php:110
 msgid "Go Premium for More Features"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:197, ../includes/Elements/Adv_Accordion.php:320, ../includes/Elements/Adv_Tabs.php:279, ../includes/Elements/Contact_Form_7.php:277, ../includes/Elements/Content_Ticker.php:313, ../includes/Elements/Countdown.php:474, ../includes/Elements/Creative_Button.php:195, ../includes/Elements/Cta_Box.php:353, ../includes/Elements/Data_Table.php:478, ../includes/Elements/Dual_Color_Header.php:221, ../includes/Elements/Fancy_Text.php:276, ../includes/Elements/Filterable_Gallery.php:802, ../includes/Elements/Flip_Box.php:734, ../includes/Elements/Info_Box.php:500, ../includes/Elements/Pricing_Table.php:704, ../includes/Elements/Progress_Bar.php:278, ../includes/Elements/Team_Member.php:244, ../includes/Elements/Testimonial.php:221, ../includes/Elements/Tooltip.php:520, ../includes/Elements/Twitter_Feed.php:315, ../includes/Elements/WeForms.php:117
+#: ../includes/Classes/Helper.php:212, ../includes/Elements/Adv_Accordion.php:320, ../includes/Elements/Adv_Tabs.php:279, ../includes/Elements/Contact_Form_7.php:277, ../includes/Elements/Content_Ticker.php:313, ../includes/Elements/Countdown.php:474, ../includes/Elements/Creative_Button.php:195, ../includes/Elements/Cta_Box.php:353, ../includes/Elements/Data_Table.php:478, ../includes/Elements/Dual_Color_Header.php:221, ../includes/Elements/Fancy_Text.php:276, ../includes/Elements/Filterable_Gallery.php:802, ../includes/Elements/Flip_Box.php:734, ../includes/Elements/Info_Box.php:500, ../includes/Elements/Pricing_Table.php:704, ../includes/Elements/Progress_Bar.php:278, ../includes/Elements/Team_Member.php:244, ../includes/Elements/Testimonial.php:221, ../includes/Elements/Tooltip.php:520, ../includes/Elements/Twitter_Feed.php:315, ../includes/Elements/WeForms.php:117
 msgid "Unlock more possibilities"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:414
+#: ../includes/Classes/Helper.php:429
 msgid "Select a Contact Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:420, ../includes/Classes/Helper.php:446, ../includes/Classes/Helper.php:473, ../includes/Classes/Helper.php:500, ../includes/Classes/Helper.php:525, ../includes/Classes/Helper.php:555, ../includes/Classes/Helper.php:581
+#: ../includes/Classes/Helper.php:435, ../includes/Classes/Helper.php:461, ../includes/Classes/Helper.php:488, ../includes/Classes/Helper.php:515, ../includes/Classes/Helper.php:540, ../includes/Classes/Helper.php:570, ../includes/Classes/Helper.php:596
 msgid "Create a Form First"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:440
+#: ../includes/Classes/Helper.php:455
 msgid "Select Gravity Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:468, ../includes/Elements/WeForms.php:95
+#: ../includes/Classes/Helper.php:483, ../includes/Elements/WeForms.php:95
 msgid "Select weForm"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:493
+#: ../includes/Classes/Helper.php:508
 msgid "Select Ninja Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:519
+#: ../includes/Classes/Helper.php:534
 msgid "Select Caldera Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:549
+#: ../includes/Classes/Helper.php:564
 msgid "Select a WPForm"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:576
+#: ../includes/Classes/Helper.php:591
 msgid "Select a Fluent Form"
 msgstr ""
 
