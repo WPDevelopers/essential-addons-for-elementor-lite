@@ -82,7 +82,7 @@ class Data_Table extends Widget_Base {
 
 	        $this->add_control(
 		        'eael_section_data_table_enabled', [
-		        'label'        => sprintf( __( 'Enable Table Sorting %s', 'essential-addons-for-elementor-lite' ), __( '<sup class="eael-pro-label">Pro</sup>', 'essential-addons-for-elementor-lite' ) ),
+		        'label'        => sprintf( __( 'Enable Table Sorting %s', 'essential-addons-for-elementor-lite' ), __( '<i class="eael-pro-labe eicon-pro-icon"></i>', 'essential-addons-for-elementor-lite' ) ),
 		        'type'         => Controls_Manager::SWITCHER,
 		        'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
 		        'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),

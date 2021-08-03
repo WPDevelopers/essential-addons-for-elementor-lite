@@ -197,3 +197,8 @@
 	font-weight: bold;
 	font-size: 11px;
 }
+.elementor-control.eael-pro-control .eicon-pro-icon:before {
+	color:#b4b5b7;
+	margin-left: 4px;
+	font-size: 14px;
+}

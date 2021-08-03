@@ -519,7 +519,7 @@ class Login_Register extends Widget_Base {
 
 		do_action( 'eael/login-register/after-general-controls', $this );
 		$this->add_control( 'enable_ajax', [
-			'label'   => sprintf( __( 'Submit Form via AJAX %s', 'essential-addons-for-elementor-lite' ), __( '<sup class="eael-pro-label">Pro</sup>', 'essential-addons-for-elementor-lite' ) ),
+			'label'   => sprintf( __( 'Submit Form via AJAX %s', 'essential-addons-for-elementor-lite' ), '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
 			'type'    => Controls_Manager::SWITCHER,
 			'classes' => 'eael-pro-control',
 		] );
@@ -802,13 +802,13 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'enable_google_login', [
-			'label'   => sprintf( __( 'Enable Login with Google %s', 'essential-addons-for-elementor-lite' ), __( '<sup class="eael-pro-label">Pro</sup>', 'essential-addons-for-elementor-lite' ) ),
+			'label'   => sprintf( __( 'Enable Login with Google %s', 'essential-addons-for-elementor-lite' ),  '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
 			'type'    => Controls_Manager::SWITCHER,
 			'classes' => 'eael-pro-control',
 		] );
 
 		$this->add_control( 'enable_fb_login', [
-			'label'   => sprintf( __( 'Enable Login with Facebook %s', 'essential-addons-for-elementor-lite' ), __( '<sup class="eael-pro-label">Pro</sup>', 'essential-addons-for-elementor-lite' ) ),
+			'label'   => sprintf( __( 'Enable Login with Facebook %s', 'essential-addons-for-elementor-lite' ),  '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
 			'type'    => Controls_Manager::SWITCHER,
 			'classes' => 'eael-pro-control',
 		] );
