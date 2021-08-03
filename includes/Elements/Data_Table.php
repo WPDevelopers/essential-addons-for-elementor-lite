@@ -79,6 +79,17 @@ class Data_Table extends Widget_Base {
         do_action('eael_section_data_table_enabled', $this);
 
         if (!apply_filters('eael/pro_enabled', false)) {
+
+	        $this->add_control(
+		        'eael_section_data_table_enabled', [
+		        'label'        => sprintf( __( 'Enable Table Sorting %s', 'essential-addons-for-elementor-lite' ), __( '<i class="eael-pro-labe eicon-pro-icon"></i>', 'essential-addons-for-elementor-lite' ) ),
+		        'type'         => Controls_Manager::SWITCHER,
+		        'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+		        'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+		        'return_value' => 'true',
+		        'classes'      => 'eael-pro-control',
+	        ] );
+
             $this->add_control(
                 'eael_pricing_table_style_pro_alert',
                 [
@@ -484,7 +495,7 @@ class Data_Table extends Widget_Base {
 						],
 					],
 					'default' => '1',
-					'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
+					'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
 				]
 			);
 

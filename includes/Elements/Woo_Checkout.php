@@ -120,6 +120,8 @@ class Woo_Checkout extends Widget_Base {
 				'label_block' => false,
 				'options' => apply_filters('eael/woo-checkout/layout', [
 					'default' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+					'multi-steps' => esc_html__( 'Multi Steps (Pro)', 'essential-addons-for-elementor-lite' ),
+					'split' => esc_html__( 'Split (Pro)', 'essential-addons-for-elementor-lite' ),
 				]),
 			]
 		);
@@ -128,8 +130,8 @@ class Woo_Checkout extends Widget_Base {
 			$this->add_control(
 				'eael_woo_checkout_pro_enable_warning',
 				[
-					'label' => esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite'),
-					'type' => Controls_Manager::HEADING,
+					'label' => sprintf( '<a target="_blank" href="https://wpdeveloper.net/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+					'type' => Controls_Manager::RAW_HTML,
 					'condition' => [
 						'ea_woo_checkout_layout' => ['multi-steps', 'split'],
 					],
@@ -2581,6 +2583,12 @@ class Woo_Checkout extends Widget_Base {
 		$this->eael_forcefully_remove_action( 'woocommerce_before_checkout_billing_form', 'clear_coupon', 10 );
 
         $settings = $this->get_settings_for_display();
+
+		if ( in_array( $settings[ 'ea_woo_checkout_layout' ], [ 'multi-steps', 'split' ] ) ) {
+			if ( !apply_filters( 'eael/pro_enabled', false ) ) {
+				return;
+			}
+		}
 
         $this->add_render_attribute( 'container', 'class', [
 			'ea-woo-checkout',
