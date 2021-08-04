@@ -518,11 +518,14 @@ class Login_Register extends Widget_Base {
 		}
 
 		do_action( 'eael/login-register/after-general-controls', $this );
-		$this->add_control( 'enable_ajax', [
-			'label'   => sprintf( __( 'Submit Form via AJAX %s', 'essential-addons-for-elementor-lite' ), '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
-			'type'    => Controls_Manager::SWITCHER,
-			'classes' => 'eael-pro-control',
-		] );
+
+		if ( !$this->pro_enabled ) {
+			$this->add_control( 'enable_ajax', [
+				'label'   => sprintf( __( 'Submit Form via AJAX %s', 'essential-addons-for-elementor-lite' ), '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
+				'type'    => Controls_Manager::SWITCHER,
+				'classes' => 'eael-pro-control',
+			] );
+		}
 
 		$this->end_controls_section();
 	}
