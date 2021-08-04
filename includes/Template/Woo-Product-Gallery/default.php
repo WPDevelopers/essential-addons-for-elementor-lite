@@ -22,28 +22,27 @@ if ( has_post_thumbnail() ) {
 	$settings[ 'eael_image_size_customize' ] = [
 		'id' => get_post_thumbnail_id(),
 	];
-	$settings['eael_image_size_customize_size'] = $settings['eael_product_grid_image_size_size'];
+	$settings['eael_image_size_customize_size'] = $settings['eael_product_gallery_image_size_size'];
 	$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'eael_image_size_customize' );
 }
 
-$title_tag = isset( $settings['eael_product_grid_title_html_tag'] ) ? Helper::eael_validate_html_tag($settings['eael_product_grid_title_html_tag'])  : 'h2';
+$title_tag = isset( $settings['eael_product_gallery_title_html_tag'] ) ? Helper::eael_validate_html_tag($settings['eael_product_gallery_title_html_tag'])  : 'h2';
 
 // Improvement
-$grid_style_preset = isset($settings['eael_product_grid_style_preset']) ? $settings['eael_product_grid_style_preset'] : '';
+$gallery_style_preset = isset($settings['eael_product_gallery_style_preset']) ? $settings['eael_product_gallery_style_preset'] : '';
 $sale_badge_align = isset( $settings['eael_product_sale_badge_alignment'] ) ? $settings['eael_product_sale_badge_alignment'] : '';
 $sale_badge_preset = isset($settings['eael_product_sale_badge_preset']) ? $settings['eael_product_sale_badge_preset'] : '';
 // should print vars
-$should_print_rating = isset( $settings['eael_product_grid_rating'] ) && 'yes' === $settings['eael_product_grid_rating'];
-$should_print_quick_view = isset( $settings['eael_product_grid_quick_view'] ) && 'yes' === $settings['eael_product_grid_quick_view'];
-$should_print_price = isset( $settings['eael_product_grid_price'] ) && 'yes' === $settings['eael_product_grid_price'];
-$should_print_excerpt = isset( $settings['eael_product_grid_excerpt'] ) && ('yes' === $settings['eael_product_grid_excerpt'] && has_excerpt());
+$should_print_rating = isset( $settings['eael_product_gallery_rating'] ) && 'yes' === $settings['eael_product_gallery_rating'];
+$should_print_quick_view = isset( $settings['eael_product_gallery_quick_view'] ) && 'yes' === $settings['eael_product_gallery_quick_view'];
+$should_print_price = isset( $settings['eael_product_gallery_price'] ) && 'yes' === $settings['eael_product_gallery_price'];
 $widget_id = isset($settings['eael_widget_id']) ? $settings['eael_widget_id'] : null;
 $quick_view_setting = [
 	'widget_id' => $widget_id,
 	'product_id' => $product->get_id(),
 	'page_id' => $settings['eael_page_id'],
 ];
-if ( $grid_style_preset == 'eael-product-simple' ) { ?>
+if ( $gallery_style_preset == 'eael-product-simple' ) { ?>
     <li class="product">
         <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
             <?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ) );
@@ -67,7 +66,7 @@ if ( $grid_style_preset == 'eael-product-simple' ) { ?>
         ?>
     </li>
     <?php
-} else if (($grid_style_preset == 'eael-product-preset-6') || ($grid_style_preset == 'eael-product-preset-7')) {
+} else if (($gallery_style_preset == 'eael-product-preset-6') || ($gallery_style_preset == 'eael-product-preset-7')) {
     if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
         ?>
         <li <?php post_class( 'product' ); ?>>
@@ -76,16 +75,16 @@ if ( $grid_style_preset == 'eael-product-simple' ) { ?>
                     <div class="image-wrap">
                         <?php
                         echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
-                        echo $product->get_image($settings['eael_product_grid_image_size_size'], ['loading' => 'eager']);
+                        echo $product->get_image($settings['eael_product_gallery_image_size_size'], ['loading' => 'eager']);
                         ?>
                     </div>
                     <div class="image-hover-wrap">
-                        <?php if($grid_style_preset == 'eael-product-preset-5'){ ?>
+                        <?php if($gallery_style_preset == 'eael-product-preset-5'){ ?>
                             <ul class="icons-wrap block-style">
                                 <?php if( $should_print_quick_view ){?>
                                     <li class="eael-product-quick-view">
                                         <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                           class="eael-product-grid-open-popup">
+                                           class="eael-product-gallery-open-popup">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </li>
@@ -95,14 +94,14 @@ if ( $grid_style_preset == 'eael-product-simple' ) { ?>
                                 <li class="view-details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
 
                             </ul>
-                        <?php } elseif ($grid_style_preset == 'eael-product-preset-7') { ?>
+                        <?php } elseif ($gallery_style_preset == 'eael-product-preset-7') { ?>
                             <ul class="icons-wrap block-box-style">
                                 <li class="add-to-cart"><?php
                                     woocommerce_template_loop_add_to_cart(); ?></li>
                                 <?php if( $should_print_quick_view ){?>
                                     <li class="eael-product-quick-view">
                                         <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                           class="eael-product-grid-open-popup">
+                                           class="eael-product-gallery-open-popup">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </li>
@@ -117,7 +116,7 @@ if ( $grid_style_preset == 'eael-product-simple' ) { ?>
                                 <?php if( $should_print_quick_view ){?>
                                     <li class="eael-product-quick-view">
                                         <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                           class="eael-product-grid-open-popup">
+                                           class="eael-product-gallery-open-popup">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </li>
@@ -130,7 +129,7 @@ if ( $grid_style_preset == 'eael-product-simple' ) { ?>
                 </div>
                 <div class="product-details-wrap">
                     <?php
-                    if(($grid_style_preset == 'eael-product-preset-7') && $should_print_price ){
+                    if(($gallery_style_preset == 'eael-product-preset-7') && $should_print_price ){
                         echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
                     }
 
@@ -142,7 +141,7 @@ if ( $grid_style_preset == 'eael-product-simple' ) { ?>
                     <div class="eael-product-title">
                        <?php printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title()); ?>
                     </div>
-                    <?php if(($grid_style_preset != 'eael-product-preset-7') && $should_print_price ){
+                    <?php if(($gallery_style_preset != 'eael-product-preset-7') && $should_print_price ){
                         echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
                     }?>
                 </div>
@@ -150,7 +149,7 @@ if ( $grid_style_preset == 'eael-product-simple' ) { ?>
         </li>
         <?php
     }
-} else if ($grid_style_preset == 'eael-product-preset-8') {
+} else if ($gallery_style_preset == 'eael-product-preset-8') {
     if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
         ?>
         <li <?php post_class( 'product' ); ?>>
@@ -160,7 +159,7 @@ if ( $grid_style_preset == 'eael-product-simple' ) { ?>
                         <?php
                         echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
                         echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
-                        echo $product->get_image($settings['eael_product_grid_image_size_size'], ['loading' => 'eager']);
+                        echo $product->get_image($settings['eael_product_gallery_image_size_size'], ['loading' => 'eager']);
                         echo '</a>';
                         ?>
                     </div>
@@ -172,7 +171,7 @@ if ( $grid_style_preset == 'eael-product-simple' ) { ?>
                             <?php if( $should_print_quick_view ){?>
                                 <li class="eael-product-quick-view">
                                     <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                       class="eael-product-grid-open-popup">
+                                       class="eael-product-gallery-open-popup">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                 </li>
