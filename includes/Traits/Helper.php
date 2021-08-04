@@ -886,6 +886,48 @@ trait Helper
 			}
 		}
 	}
+
+
+	/**
+	 * Retrieve product quick view data
+	 *
+	 * @return string
+	 */
+	public function ajax_eael_product_gallery(){
+
+
+		//check nonce
+//		check_ajax_referer( 'essential-addons-elementor', 'security' );
+		$widget_id  = sanitize_key( $_POST[ 'widget_id' ] );
+//		$product_id = absint( $_POST[ 'product_id' ] );
+		$page_id    = absint( $_POST[ 'page_id' ] );
+		$args    = absint( $_POST[ 'args' ] );
+
+		echo $args['post_type'];
+
+		if ( $widget_id == '' && $page_id == '' ) {
+			wp_send_json_error();
+		}
+
+		global $product;
+//		$product = wc_get_product( $product_id );
+//		$post    = get_post( $product_id );
+//		setup_postdata( $post );
+
+		if ( isset( $_REQUEST[ 'taxonomy' ] ) && isset($_REQUEST[ 'taxonomy' ][ 'taxonomy' ]) && $_REQUEST[ 'taxonomy' ][ 'taxonomy' ] != 'all' ) {
+			$args[ 'tax_query' ] = [
+				$_REQUEST[ 'taxonomy' ],
+			];
+		}
+
+		$settings = $this->eael_get_widget_settings( $page_id, $widget_id );
+		ob_start();
+		HelperClass::eael_product_gallery( $settings );
+		$data = ob_get_clean();
+		wp_reset_postdata();
+
+		wp_send_json_success( $data );
+	}
 	
 }
 
