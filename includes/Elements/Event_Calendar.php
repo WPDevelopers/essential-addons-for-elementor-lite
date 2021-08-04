@@ -122,7 +122,7 @@ class Event_Calendar extends Widget_Base
                 'eael_event_calendar_pro_enable_warning',
                 [
 	                'label' => sprintf( '<a target="_blank" href="https://wpdeveloper.net/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
-                    'type' => Controls_Manager::HEADING,
+                    'type' => Controls_Manager::RAW_HTML,
                     'condition' => [
                         'eael_event_calendar_type' => ['eventon'],
                     ],
