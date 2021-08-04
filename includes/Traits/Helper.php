@@ -874,15 +874,12 @@ trait Helper
 	 */
 	public function eael_forcefully_remove_action( $tag, $function_to_remove, $priority ) {
 		global $wp_filter;
-
-		if ( ! isset( $wp_filter[ $tag ][ $priority ] ) && ! is_array( $wp_filter[ $tag ][ $priority ] ) ) {
-			return;
-		}
-
-		foreach ( $wp_filter[ $tag ][ $priority ] as $callback_function => $registration ) {
-			if ( strlen( $callback_function ) > 32 && strpos( $callback_function, $function_to_remove, 32 ) !== false || $callback_function === $function_to_remove ) {
-				remove_action( $tag, $callback_function, $priority );
-				break;
+		if (  isset( $wp_filter[ $tag ][ $priority ] ) &&  is_array( $wp_filter[ $tag ][ $priority ] ) ) {
+			foreach ( $wp_filter[ $tag ][ $priority ] as $callback_function => $registration ) {
+				if ( strlen( $callback_function ) > 32 && strpos( $callback_function, $function_to_remove, 32 ) !== false || $callback_function === $function_to_remove ) {
+					remove_action( $tag, $callback_function, $priority );
+					break;
+				}
 			}
 		}
 	}
