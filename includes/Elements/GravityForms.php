@@ -273,11 +273,11 @@ class GravityForms extends Widget_Base {
                         'hide'          => __( 'Hide', 'essential-addons-for-elementor-lite'),
                     ],
                     'selectors_dictionary'  => [
-                        'show'          => 'block',
-                        'hide'          => 'none',
+                        'show'          => ' ',
+                        'hide'          => 'none !important',
                     ],
                     'selectors'             => [
-                        '{{WRAPPER}} .eael-gravity-form .validation_message' => 'display: {{VALUE}} !important;',
+                        '{{WRAPPER}} .eael-gravity-form .validation_message' => 'display: {{VALUE}};',
                     ],
                 ]
             );
@@ -293,11 +293,11 @@ class GravityForms extends Widget_Base {
                         'hide'          => __( 'Hide', 'essential-addons-for-elementor-lite'),
                     ],
                     'selectors_dictionary'  => [
-                        'show'          => 'block',
-                        'hide'          => 'none',
+                        'show'          => ' ',
+                        'hide'          => 'none !important',
                     ],
                     'selectors'             => [
-                        '{{WRAPPER}} .eael-gravity-form .validation_error' => 'display: {{VALUE}} !important;',
+                        '{{WRAPPER}} .eael-gravity-form .validation_error' => 'display: {{VALUE}};',
                     ],
                 ]
             );
