@@ -1179,7 +1179,7 @@ class Helper
     }
 
 	public static function eael_product_gallery ($settings) {
-        echo 'gallery';
+//        echo 'gallery';
 		$product = wc_get_product( get_the_ID() );
 		if ( ! $product ) {
 			error_log( '$product not found in ' . __FILE__ );

@@ -905,8 +905,6 @@ trait Helper
 //		$product_id = absint( $_POST[ 'product_id' ] );
 		$page_id    = absint( $_POST[ 'page_id' ] );
 
-		echo $args['post_type'];
-
 		if ( $widget_id == '' && $page_id == '' ) {
 			wp_send_json_error();
 		}
@@ -916,30 +914,48 @@ trait Helper
 //		$post    = get_post( $product_id );
 //		setup_postdata( $post );
 
+
+		$settings = $this->eael_get_widget_settings( $page_id, $widget_id );
+
+		$settings['eael_widget_id'] = $widget_id;
+		$html = '';
+		$class = '\\' . str_replace( '\\\\', '\\', $_REQUEST[ 'class' ] );
+		$args[ 'offset' ] = (int)$args[ 'offset' ] + ( ( (int)$_REQUEST[ 'page' ] - 1 ) * (int)$args[ 'posts_per_page' ] );
+
 		if ( isset( $_REQUEST[ 'taxonomy' ] ) && isset($_REQUEST[ 'taxonomy' ][ 'taxonomy' ]) && $_REQUEST[ 'taxonomy' ][ 'taxonomy' ] != 'all' ) {
 			$args[ 'tax_query' ] = [
 				$_REQUEST[ 'taxonomy' ],
 			];
 		}
 
-		$html = '';
+		$link_settings = [
+			'image_link_nofollow' => $settings['image_link_nofollow'] ? 'rel="nofollow"' : '',
+			'image_link_target_blank' => $settings['image_link_target_blank'] ? 'target="_blank"' : '',
+			'title_link_nofollow' => $settings['title_link_nofollow'] ? 'rel="nofollow"' : '',
+			'title_link_target_blank' => $settings['title_link_target_blank'] ? 'target="_blank"' : '',
+			'read_more_link_nofollow' => $settings['read_more_link_nofollow'] ? 'rel="nofollow"' : '',
+			'read_more_link_target_blank' => $settings['read_more_link_target_blank'] ? 'target="_blank"' : '',
+		];
 
-		$settings = $this->eael_get_widget_settings( $page_id, $widget_id );
+		$template_info = $_REQUEST['template_info'];
+		$this->set_widget_name( $template_info['name'] );
+		$template = $this->get_template( $template_info['file_name'] );
 
-
+//		echo $template;
+		ob_start();
 		$query = new \WP_Query( $args );
-
-//		var_dump($query);
-
 		if ( $query->have_posts() ) {
-			echo 'loop';
 			while ( $query->have_posts() ) {
 				$query->the_post();
-
-
-				$html .= HelperClass::eael_product_gallery( $settings );
+//				include( $template );
+				HelperClass::eael_product_gallery( $settings);
 			}
+		} else {
+			echo 'fail';
 		}
+		echo ob_get_clean();
+		wp_die();
+
 	}
 	
 }
