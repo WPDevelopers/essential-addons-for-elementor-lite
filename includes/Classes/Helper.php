@@ -1179,6 +1179,7 @@ class Helper
     }
 
 	public static function eael_product_gallery ($settings) {
+        echo 'gallery';
 		$product = wc_get_product( get_the_ID() );
 		if ( ! $product ) {
 			error_log( '$product not found in ' . __FILE__ );
@@ -1190,7 +1191,7 @@ class Helper
 				'id' => get_post_thumbnail_id(),
 			];
 			$settings['eael_image_size_customize_size'] = $settings['eael_product_gallery_image_size_size'];
-			$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'eael_image_size_customize' );
+//			$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'eael_image_size_customize' );
 		}
 
 		$title_tag = isset( $settings['eael_product_gallery_title_html_tag'] ) ? Helper::eael_validate_html_tag($settings['eael_product_gallery_title_html_tag'])  : 'h2';

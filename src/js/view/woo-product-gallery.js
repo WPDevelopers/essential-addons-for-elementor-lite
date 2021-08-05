@@ -1,9 +1,8 @@
 ea.hooks.addAction("init", "ea", () => {
 	const wooProductGallery = function ($scope, $) {
 		// category
-		const $post_cat_wrap = $('.eael-cat-tab li a', $scope)
-		console.log($post_cat_wrap.length);
-		$post_cat_wrap.on('click',function (e) {
+		const $post_cat_wrap = $('.eael-cat-tab', $scope)
+		$post_cat_wrap.on('click', 'a', function (e) {
 			e.preventDefault();
 			let $this = $(this);
 			// tab class
@@ -22,8 +21,6 @@ ea.hooks.addAction("init", "ea", () => {
 					terms: [$('.eael-cat-tab li a.active', $scope).data('id')]
 				};
 
-			console.log($args)
-
 			// ajax
 			$.ajax({
 				url: localize.ajaxurl,
@@ -40,11 +37,12 @@ ea.hooks.addAction("init", "ea", () => {
 				},
 				success: function (response) {
 					var $content = $(response);
+					// console.log('ok');
 
 					if ($content.hasClass('no-posts-found') || $content.length == 0) {
 						// do nothing
 					} else {
-						// console.log($content);
+
 						$('.eael-post-appender', $scope)
 							.empty()
 							.append($content);
