@@ -898,10 +898,12 @@ trait Helper
 
 		//check nonce
 //		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		parse_str($_POST['args'], $args);
+
 		$widget_id  = sanitize_key( $_POST[ 'widget_id' ] );
 //		$product_id = absint( $_POST[ 'product_id' ] );
 		$page_id    = absint( $_POST[ 'page_id' ] );
-		$args    = absint( $_POST[ 'args' ] );
 
 		echo $args['post_type'];
 
@@ -920,13 +922,24 @@ trait Helper
 			];
 		}
 
-		$settings = $this->eael_get_widget_settings( $page_id, $widget_id );
-		ob_start();
-		HelperClass::eael_product_gallery( $settings );
-		$data = ob_get_clean();
-		wp_reset_postdata();
+		$html = '';
 
-		wp_send_json_success( $data );
+		$settings = $this->eael_get_widget_settings( $page_id, $widget_id );
+
+
+		$query = new \WP_Query( $args );
+
+//		var_dump($query);
+
+		if ( $query->have_posts() ) {
+			echo 'loop';
+			while ( $query->have_posts() ) {
+				$query->the_post();
+
+
+				$html .= HelperClass::eael_product_gallery( $settings );
+			}
+		}
 	}
 	
 }
