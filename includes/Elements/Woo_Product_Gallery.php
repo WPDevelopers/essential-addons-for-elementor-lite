@@ -346,7 +346,7 @@ class Woo_Product_Gallery extends Widget_Base
         ]);
 
         $this->add_control(
-            'eael_dynamic_template_Layout',
+            'eael_product_gallery_dynamic_template',
             [
                 'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
@@ -2101,13 +2101,14 @@ class Woo_Product_Gallery extends Widget_Base
 	    $get_product_cats = $settings['eael_product_gallery_categories'];
 	    $product_cats = str_replace(' ', '', $get_product_cats);
 
-//	    var_dump($product_cats);
-
         ?>
 
 	    <?php
 	    if ($settings['eael_woo_product_gallery_terms'] === 'yes') {
-		    echo '<ul class="eael-cat-tab" data-nonce="'.wp_create_nonce( 'eael_product_gallery' ).'" data-page-id="'.$this->page_id.'" data-widget-id="'.$this->get_id().'" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-page="1">';
+		    $template = $this->get_template($this->get_settings('eael_product_gallery_dynamic_template'));
+		    $dir_name = method_exists( $this, 'get_temp_dir_name' ) ? $this->get_temp_dir_name( $this->get_filename_only($template) ) : "pro";
+
+		    echo '<ul class="eael-cat-tab" data-template=' . json_encode(['dir'   => $dir_name, 'file_name' => $this->get_filename_only($template), 'name' => $this->process_directory_name()], 1) . '  data-nonce="'.wp_create_nonce( 'eael_product_gallery' ).'" data-page-id="'.$this->page_id.'" data-widget-id="'.$this->get_id().'" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-page="1">';
 
 		    echo '<li><a href="javascript:;" data-taxonomy="all" data-id="" class="active post-list-filter-item post-list-cat-' . $this->get_id() . '">' . __($settings['eael_woo_product_gallery_terms_all_text'], 'essential-addons-elementor') . '</a></li>';
 		    // Category retrive
@@ -2123,7 +2124,7 @@ class Woo_Product_Gallery extends Widget_Base
 
 		    if( !empty( $product_cats ) && count( $product_categories ) > 0 ){
 			    foreach ( $product_categories as $category ) {
-				    echo '<li><a href="javascript:;" data-taxonomy="'.$category->slug.'" data-id="'
+				    echo '<li><a href="javascript:;" data-terms="'.$category->slug.'" data-id="'
 				         .$category->term_id.'" class="post-list-filter-item ">' .$category->name.'</a></li>';
 			    }
             }
@@ -2136,13 +2137,13 @@ class Woo_Product_Gallery extends Widget_Base
             <div class="woocommerce">
                 <?php
                 do_action( 'eael_woo_before_product_loop' );
-                $template = $this->get_template($settings['eael_dynamic_template_Layout']);
+                $template = $this->get_template($settings['eael_product_gallery_dynamic_template']);
                 $settings['loadable_file_name'] = $this->get_filename_only($template);
                 $dir_name = $this->get_temp_dir_name($settings['loadable_file_name']);
 
                 if (file_exists($template)) {
 	                $settings['eael_page_id'] = get_the_ID();
-                    $query = new \WP_Query($args);
+	                $query = new \WP_Query($args);
                     if ($query->have_posts()) {
                         echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="gird">';
                         while ($query->have_posts()) {

@@ -15,10 +15,11 @@ ea.hooks.addAction("init", "ea", () => {
 				$nonce = $post_cat_wrap.data("nonce"),
 				$args = $post_cat_wrap.data('args'),
 				$page = 1,
+				$template_info = $post_cat_wrap.data('template'),
 				$taxonomy = {
-					taxonomy: $('.eael-cat-tab li a.active', $scope).data('taxonomy'),
-					field: 'term_id',
-					terms: [$('.eael-cat-tab li a.active', $scope).data('id')]
+					taxonomy: 'product_cat',
+					field: 'slug',
+					terms: [$('.eael-cat-tab li a.active', $scope).data('terms')]
 				};
 
 			// ajax
@@ -30,6 +31,7 @@ ea.hooks.addAction("init", "ea", () => {
 					class: $class,
 					args: $args,
 					taxonomy: $taxonomy,
+					template_info: $template_info,
 					page: $page,
 					page_id: $page_id,
 					widget_id: $widget_id,
@@ -37,13 +39,14 @@ ea.hooks.addAction("init", "ea", () => {
 				},
 				success: function (response) {
 					var $content = $(response);
-					// console.log('ok');
+					// console.log($content);
 
 					if ($content.hasClass('no-posts-found') || $content.length == 0) {
 						// do nothing
 					} else {
-
-						$('.eael-post-appender', $scope)
+						// alert('.elementor-element-' + $widget_id + ' .eael-product-gallery .eael-post-appender', $scope);
+						$('.elementor-element-' + $widget_id + ' .eael-product-gallery .woocommerce' +
+							' .eael-post-appender')
 							.empty()
 							.append($content);
 
