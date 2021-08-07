@@ -2100,7 +2100,6 @@ class Woo_Product_Gallery extends Widget_Base
 
 	    $get_product_cats = $settings['eael_product_gallery_categories'];
 	    $product_cats = str_replace(' ', '', $get_product_cats);
-
         ?>
 
 	    <?php
@@ -2110,7 +2109,8 @@ class Woo_Product_Gallery extends Widget_Base
 
 		    echo '<ul class="eael-cat-tab" data-template=' . json_encode(['dir'   => $dir_name, 'file_name' => $this->get_filename_only($template), 'name' => $this->process_directory_name()], 1) . '  data-nonce="'.wp_create_nonce( 'eael_product_gallery' ).'" data-page-id="'.$this->page_id.'" data-widget-id="'.$this->get_id().'" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-page="1">';
 
-		    echo '<li><a href="javascript:;" data-taxonomy="all" data-id="" class="active post-list-filter-item post-list-cat-' . $this->get_id() . '">' . __($settings['eael_woo_product_gallery_terms_all_text'], 'essential-addons-elementor') . '</a></li>';
+		    echo '<li><a href="javascript:;" data-terms='. json_encode($product_cats). ' class="active post-list-filter-item post-list-cat-'
+                 . $this->get_id() . '">' . __($settings['eael_woo_product_gallery_terms_all_text'], 'essential-addons-elementor') . '</a></li>';
 		    // Category retrive
 		    $catargs = array(
 			    'orderby'    => 'name',
@@ -2124,7 +2124,7 @@ class Woo_Product_Gallery extends Widget_Base
 
 		    if( !empty( $product_cats ) && count( $product_categories ) > 0 ){
 			    foreach ( $product_categories as $category ) {
-				    echo '<li><a href="javascript:;" data-terms="'.$category->slug.'" data-id="'
+				    echo '<li><a href="javascript:;" data-terms='.json_encode([$category->slug]).' data-id="'
 				         .$category->term_id.'" class="post-list-filter-item ">' .$category->name.'</a></li>';
 			    }
             }
@@ -2140,6 +2140,8 @@ class Woo_Product_Gallery extends Widget_Base
                 $template = $this->get_template($settings['eael_product_gallery_dynamic_template']);
                 $settings['loadable_file_name'] = $this->get_filename_only($template);
                 $dir_name = $this->get_temp_dir_name($settings['loadable_file_name']);
+
+                var_dump($args['tax_query']);
 
                 if (file_exists($template)) {
 	                $settings['eael_page_id'] = get_the_ID();

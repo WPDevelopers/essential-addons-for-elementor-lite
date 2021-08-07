@@ -8,6 +8,7 @@ ea.hooks.addAction("init", "ea", () => {
 			// tab class
 			$('.eael-cat-tab li a', $scope).removeClass('active');
 			$this.addClass('active');
+
 			// collect props
 			const $class = $post_cat_wrap.data('class'),
 				$widget_id = $post_cat_wrap.data("widget"),
@@ -19,7 +20,7 @@ ea.hooks.addAction("init", "ea", () => {
 				$taxonomy = {
 					taxonomy: 'product_cat',
 					field: 'slug',
-					terms: [$('.eael-cat-tab li a.active', $scope).data('terms')]
+					terms: $('.eael-cat-tab li a.active', $scope).data('terms'),
 				};
 
 			// ajax
@@ -44,7 +45,6 @@ ea.hooks.addAction("init", "ea", () => {
 					if ($content.hasClass('no-posts-found') || $content.length == 0) {
 						// do nothing
 					} else {
-						// alert('.elementor-element-' + $widget_id + ' .eael-product-gallery .eael-post-appender', $scope);
 						$('.elementor-element-' + $widget_id + ' .eael-product-gallery .woocommerce' +
 							' .eael-post-appender')
 							.empty()
