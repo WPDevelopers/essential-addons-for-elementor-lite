@@ -938,6 +938,11 @@ $config = [
 			    ],
 			    'js'  => [
 				    [
+					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/quick-view.js',
+					    'type' => 'self',
+					    'context' => 'view',
+				    ],
+				    [
 					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-product-carousel.min.js',
 					    'type' => 'self',
 					    'context' => 'view',
