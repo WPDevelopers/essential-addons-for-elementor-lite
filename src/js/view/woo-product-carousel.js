@@ -1,10 +1,11 @@
 ea.hooks.addAction("init", "ea", () => {
 	const wooProductCarousel = function ($scope, $) {
-		const popupMarkup = `<div style="display: none" class="eael-woocommerce-popup-view eael-product-popup eael-product-zoom-in woocommerce">
-                    			<div class="eael-product-modal-bg"></div>
-                    			<div class="eael-popup-details-render eael-woo-slider-popup"><div class="eael-preloader"></div></div>
-               				 </div>`;
-		$('body').prepend(popupMarkup);
+		// const popupMarkup = `<div style="display: none" class="eael-woocommerce-popup-view eael-product-popup eael-product-zoom-in woocommerce">
+        //             			<div class="eael-product-modal-bg"></div>
+        //             			<div class="eael-popup-details-render eael-woo-slider-popup"><div class="eael-preloader"></div></div>
+        //        				 </div>`;
+		// $('body').prepend(popupMarkup);
+		console.log(QuickView);
 		var $wooProductCarousel = $scope.find(".eael-woo-product-carousel").eq(0),
 			$type = $wooProductCarousel.data("type"),
 			$autoplay =
@@ -321,6 +322,7 @@ ea.hooks.addAction("init", "ea", () => {
 				"1"
 			);
 		}
+		ad(1,2);
 	};
 
 	const swiperLoader = (swiperElement, swiperConfig) => {
