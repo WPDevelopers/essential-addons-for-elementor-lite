@@ -225,7 +225,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 4.8.3 - 05/08/2021 =
+= 4.8.3 - 08/08/2021 =
 
 - Added: EA WooCommerce Widgets | Option to change the 'Stock Out' text
 - Fixed: 'Out of stock' label not displaying in shop page when EA is active
