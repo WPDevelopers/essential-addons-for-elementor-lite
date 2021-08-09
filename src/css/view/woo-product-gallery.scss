@@ -334,6 +334,34 @@
             }
         }
     }
+
+    &.masonry {
+        .woocommerce {
+            ul.products {
+                display: block;
+
+                @media (min-width: 766px) {
+                    margin: 0 -1% !important;
+                }
+
+                &:before,
+                &:after {
+                    display: table;
+                    content: " ";
+                }
+
+                li.product {
+                    float: left;
+                    margin: 15px 0;
+
+                    @media (min-width: 766px) {
+                        margin: 1%;
+                    }
+
+                }
+            }
+        }
+    }
 }
 
 .eael-product-gallery {
@@ -1097,7 +1125,8 @@
         }
     }
 
-    &.grid{
+    &.grid,
+    &.masonary {
         .eael-product-wrap {
 
             &:hover {
@@ -1453,7 +1482,7 @@
         }
     }
 
-    &.grid.eael-product-preset-8 {
+    &.eael-product-preset-8 {
         .product-image-wrap {
             overflow: inherit;
         }
@@ -1465,9 +1494,9 @@
         }
     }
 
-    &.grid.eael-product-preset-6,
-    &.grid.eael-product-preset-7,
-    &.grid.eael-product-preset-8 {
+    &.eael-product-preset-6,
+    &.eael-product-preset-7,
+    &.eael-product-preset-8 {
         ul.products {
             padding: 0;
             margin: 0;
@@ -1485,9 +1514,9 @@
         }
     }
 
-    &.grid.eael-product-preset-6,
-    &.grid.eael-product-preset-7,
-    &.grid.eael-product-preset-8 {
+    &.eael-product-preset-6,
+    &.eael-product-preset-7,
+    &.eael-product-preset-8 {
         .product.outofstock {
             .icons-wrap .button {
                 display: none;
@@ -1526,6 +1555,27 @@
 
     .eael-product-gallery-column-6 .eael-product-gallery .woocommerce ul.products {
         grid-template-columns: repeat(6, 1fr);
+    }
+
+    // Masonry
+    .eael-product-gallery-column-1 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 100%;
+        margin: 15px 0;
+    }
+    .eael-product-gallery-column-2 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 48%;
+    }
+    .eael-product-gallery-column-3 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 31.3333%;
+    }
+    .eael-product-gallery-column-4 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 23%;
+    }
+    .eael-product-gallery-column-5 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 18%;
+    }
+    .eael-product-gallery-column-6 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 14.66666667%;
     }
 }
 
@@ -1572,6 +1622,28 @@
         grid-template-columns: repeat(6, 1fr);
     }
 
+
+    // Masonry
+    .eael-product-gallery-column-tablet-1 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 100%;
+        margin: 15px 0;
+    }
+    .eael-product-gallery-column-tablet-2 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 48%;
+    }
+    .eael-product-gallery-column-tablet-3 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 31.3333%;
+    }
+    .eael-product-gallery-column-tablet-4 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 23%;
+    }
+    .eael-product-gallery-column-tablet-5 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 18%;
+    }
+    .eael-product-gallery-column-tablet-6 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 14.66666667%;
+    }
+
 }
 
 @media only screen and (max-width: 767px) {
@@ -1615,6 +1687,32 @@
     .woocommerce
     ul.products {
         grid-template-columns: repeat(6, 1fr);
+    }
+
+    // Masonry
+    .eael-product-gallery-column-mobile-1 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 100%;
+        margin: 15px 0;
+    }
+    .eael-product-gallery-column-mobile-2 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 48% !important;
+        margin: 1%;
+    }
+    .eael-product-gallery-column-mobile-3 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 31.3333% !important;
+        margin: 1%;
+    }
+    .eael-product-gallery-column-mobile-4 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 23% !important;
+        margin: 1%;
+    }
+    .eael-product-gallery-column-mobile-5 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 18% !important;
+        margin: 1%;
+    }
+    .eael-product-gallery-column-mobile-6 .eael-product-gallery.masonry .woocommerce ul.products li.product {
+        width: 14.66666667% !important;
+        margin: 1%;
     }
 
 }

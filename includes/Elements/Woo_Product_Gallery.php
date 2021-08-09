@@ -288,6 +288,19 @@ class Woo_Product_Gallery extends Widget_Base
 		    ]
 	    );
 
+	    $this->add_control(
+		    'eael_product_gallery_items_layout',
+		    [
+			    'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SELECT,
+			    'default' => 'grid',
+			    'options' => [
+				    'grid' => esc_html__('Grid', 'essential-addons-for-elementor-lite'),
+				    'masonry' => esc_html__('Masonry', 'essential-addons-for-elementor-lite'),
+			    ]
+		    ]
+	    );
+
         $this->add_control(
             'eael_product_gallery_style_preset',
             [
@@ -2223,7 +2236,7 @@ class Woo_Product_Gallery extends Widget_Base
         $settings = $this->get_settings_for_display();
 
         // normalize for load more fix
-        $settings['layout_mode'] = 'grid';
+        $settings['layout_mode'] = $settings['eael_product_gallery_items_layout'];
         $widget_id = $this->get_id();
         $settings['eael_widget_id'] = $widget_id;
         if ( $settings[ 'post_type' ] === 'source_dynamic' && is_archive() || !empty($_REQUEST['post_type'])) {
@@ -2243,7 +2256,7 @@ class Woo_Product_Gallery extends Widget_Base
             'class' => [
                 "eael-product-gallery",
                 $settings['eael_product_gallery_style_preset'],
-                "grid"
+	            $settings['eael_product_gallery_items_layout']
             ],
             'id' => 'eael-product-gallery',
             'data-widget-id' => $widget_id,
@@ -2271,13 +2284,11 @@ class Woo_Product_Gallery extends Widget_Base
                 $settings['loadable_file_name'] = $this->get_filename_only($template);
                 $dir_name = $this->get_temp_dir_name($settings['loadable_file_name']);
 
-//                var_dump($args);
-
                 if (file_exists($template)) {
 	                $settings['eael_page_id'] = get_the_ID();
 	                $query = new \WP_Query($args);
                     if ($query->have_posts()) {
-                        echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="gird">';
+                        echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="' . $settings["eael_product_gallery_items_layout"] . '">';
                         while ($query->have_posts()) {
                             $query->the_post();
 //                            include($template);
