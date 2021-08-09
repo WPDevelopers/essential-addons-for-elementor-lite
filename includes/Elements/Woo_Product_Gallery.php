@@ -1151,6 +1151,18 @@ class Woo_Product_Gallery extends Widget_Base
 		);
 
 		$this->add_control(
+			'eael_product_gallery_background',
+			[
+				'label' => esc_html__('Background', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+//				'default' => '#333',
+				'selectors' => [
+					'{{WRAPPER}} .eael-cat-tab' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_product_gallery_terms',
 			[
 				'label'      => __( 'Width', 'essential-addons-for-elementor-lite' ),
@@ -1197,6 +1209,27 @@ class Woo_Product_Gallery extends Widget_Base
 				'selectors' => [
 					'{{WRAPPER}} .eael-cat-tab' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_gallery_radius',
+			[
+				'label' => __('Radius', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', '%', 'em'],
+				'selectors' => [
+					'{{WRAPPER}} .eael-cat-tab' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'eael_product_gallery_box_shadow',
+				'label'    => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
+				'selector' => '{{WRAPPER}} .eael-cat-tab',
 			]
 		);
 
@@ -1253,15 +1286,144 @@ class Woo_Product_Gallery extends Widget_Base
 			]
 		);
 
+		$this->start_controls_tabs('eael_product_gallery_item_style_tabs');
+
+		$this->start_controls_tab('eael_product_gallery_item_style_tabs_normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
+
+		$this->add_control(
+			'eael_product_gallery_item_color',
+			[
+				'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+//				'default' => '#fff',
+				'selectors' => [
+					'{{WRAPPER}} .eael-cat-tab a' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_gallery_item_background',
+			[
+				'label' => esc_html__('Background', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+//				'default' => '#333',
+				'selectors' => [
+					'{{WRAPPER}} .eael-cat-tab a' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'eael_product_gallery_item_border',
+				'selector' => '{{WRAPPER}} .eael-cat-tab a',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab('eael_product_gallery_item_hover_styles', ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]);
+
+		$this->add_control(
+			'eael_product_gallery_item_hover_color',
+			[
+				'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+//				'default' => '#fff',
+				'selectors' => [
+					'{{WRAPPER}} .eael-cat-tab a:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_gallery_item_hover_background',
+			[
+				'label' => esc_html__('Background', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+//				'default' => '#333',
+				'selectors' => [
+					'{{WRAPPER}} .eael-cat-tab a:hover' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_gallery_item_hover_border_color',
+			[
+				'label' => esc_html__('Border Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-cat-tab a:hover' => 'border-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab('eael_product_gallery_item_active_styles', ['label' => esc_html__('Active', 'essential-addons-for-elementor-lite')]);
+
+		$this->add_control(
+			'eael_product_gallery_item_active_color',
+			[
+				'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+//				'default' => '#fff',
+				'selectors' => [
+					'{{WRAPPER}} .eael-cat-tab a.active' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_gallery_item_active_background',
+			[
+				'label' => esc_html__('Background', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+//				'default' => '#333',
+				'selectors' => [
+					'{{WRAPPER}} .eael-cat-tab a.active' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_gallery_item_active_border_color',
+			[
+				'label' => esc_html__('Border Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-cat-tab a.active' => 'border-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'eael_product_gallery_item_box_shadow',
+				'label'    => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
+				'selector' => '{{WRAPPER}} .eael-cat-tab a',
+			]
+		);
+
 		$this->add_control(
 			'eael_product_gallery_item_thumb_heading',
 			[
 				'label' => __('Thumbnail', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::HEADING,
 				'separator'=> 'before',
-                'condition' => [
-                    'eael_woo_product_gallery_terms_thumb' => 'yes',
-                ]
+				'condition' => [
+					'eael_woo_product_gallery_terms_thumb' => 'yes',
+				]
 			]
 		);
 
@@ -1290,126 +1452,6 @@ class Woo_Product_Gallery extends Widget_Base
 				]
 			]
 		);
-
-		$this->start_controls_tabs('eael_product_gallery_item_style_tabs');
-
-		$this->start_controls_tab('eael_product_gallery_item_style_tabs_normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
-
-		$this->add_control(
-			'eael_product_gallery_item_color',
-			[
-				'label' => esc_html__('Button Color', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-cat-tab a' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_product_gallery_item_background',
-			[
-				'label' => esc_html__('Background', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#333',
-				'selectors' => [
-					'{{WRAPPER}} .eael-cat-tab a' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name' => 'eael_product_gallery_item_border',
-				'selector' => '{{WRAPPER}} .eael-cat-tab a',
-			]
-		);
-
-		$this->end_controls_tab();
-
-		$this->start_controls_tab('eael_product_gallery_item_hover_styles', ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]);
-
-		$this->add_control(
-			'eael_product_gallery_item_hover_color',
-			[
-				'label' => esc_html__('Button Color', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-cat-tab a:hover' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_product_gallery_item_hover_background',
-			[
-				'label' => esc_html__('Background', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#333',
-				'selectors' => [
-					'{{WRAPPER}} .eael-cat-tab a:hover' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_product_gallery_item_hover_border_color',
-			[
-				'label' => esc_html__('Border Color', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'selectors' => [
-					'{{WRAPPER}} .eael-cat-tab a:hover' => 'border-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->end_controls_tab();
-
-		$this->start_controls_tab('eael_product_gallery_item_active_styles', ['label' => esc_html__('Active', 'essential-addons-for-elementor-lite')]);
-
-		$this->add_control(
-			'eael_product_gallery_item_active_color',
-			[
-				'label' => esc_html__('Button Color', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-cat-tab a.active' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_product_gallery_item_active_background',
-			[
-				'label' => esc_html__('Background', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#333',
-				'selectors' => [
-					'{{WRAPPER}} .eael-cat-tab a.active' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_product_gallery_item_active_border_color',
-			[
-				'label' => esc_html__('Border Color', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'selectors' => [
-					'{{WRAPPER}} .eael-cat-tab a.active' => 'border-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->end_controls_tab();
-
-		$this->end_controls_tabs();
 
 		$this->end_controls_section();
 	}

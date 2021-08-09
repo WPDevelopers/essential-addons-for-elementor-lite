@@ -3,6 +3,11 @@
 
     &.eael-terms-layout-horizontal {
         flex-direction: column;
+
+        .eael-cat-tab img {
+            display: block;
+            margin: 0 auto 5px auto;
+        }
     }
 
     &.eael-terms-layout-vertical {
@@ -40,10 +45,16 @@
             padding: 20px;
             display: block;
             margin: 5px;
+            background-color: #f8f6ff;
+            color: #7d7a94;
+            font-size: 17px;
+
+            &:hover,
+            &.active {
+                color: #fff;
+                background-color: #8941ff;
+            }
         }
-    }
-    .post-list-filter-item.active {
-        background: black;
     }
 
     // end terms styles
