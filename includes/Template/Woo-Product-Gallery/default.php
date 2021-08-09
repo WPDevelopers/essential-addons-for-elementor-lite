@@ -42,159 +42,158 @@ $quick_view_setting = [
 	'product_id' => $product->get_id(),
 	'page_id' => $settings['eael_page_id'],
 ];
-if ( $gallery_style_preset == 'eael-product-simple' ) { ?>
-    <li class="product">
-        <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-            <?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ) );
-            printf('<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, $product->get_title());
-            if ( $should_print_rating ) {
-                echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) );
-            }
-            if ( ! $product->managing_stock() && ! $product->is_in_stock() ) {
-                printf( '<span class="outofstock-badge">%s</span>', __( 'Stock <br/> Out', 'essential-addons-for-elementor-lite' ) );
-            } elseif ( $product->is_on_sale() ) {
-                printf( '<span class="onsale">%s</span>', __( 'Sale!', 'essential-addons-for-elementor-lite' ) );
-            }
 
-            if ( $should_print_price ) {
-              echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
-            }
+if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
+    if ( $gallery_style_preset == 'eael-product-simple' ) { ?>
+        <li class="product">
+            <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+                <?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ) );
+                printf('<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, $product->get_title());
+                if ( $should_print_rating ) {
+                    echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) );
+                }
+                if ( ! $product->managing_stock() && ! $product->is_in_stock() ) {
+                    printf( '<span class="outofstock-badge">%s</span>', __( 'Stock <br/> Out', 'essential-addons-for-elementor-lite' ) );
+                } elseif ( $product->is_on_sale() ) {
+                    printf( '<span class="onsale">%s</span>', __( 'Sale!', 'essential-addons-for-elementor-lite' ) );
+                }
+
+                if ( $should_print_price ) {
+                  echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+                }
+                ?>
+            </a>
+            <?php
+            woocommerce_template_loop_add_to_cart();
             ?>
-        </a>
-        <?php
-        woocommerce_template_loop_add_to_cart();
-        ?>
-    </li>
-    <?php
-} else if (($gallery_style_preset == 'eael-product-preset-6') || ($gallery_style_preset == 'eael-product-preset-7')) {
-    if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
-        ?>
-        <li <?php post_class( 'product' ); ?>>
-            <div class="eael-product-wrap">
-                <div class="product-image-wrap">
-                    <div class="image-wrap">
-                        <?php
-                        echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
-                        echo $product->get_image($settings['eael_product_gallery_image_size_size'], ['loading' => 'eager']);
-                        ?>
-                    </div>
-                    <div class="image-hover-wrap">
-                        <?php if($gallery_style_preset == 'eael-product-preset-5'){ ?>
-                            <ul class="icons-wrap block-style">
-                                <?php if( $should_print_quick_view ){?>
-                                    <li class="eael-product-quick-view">
-                                        <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                           class="eael-product-gallery-open-popup">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                    </li>
-                                <?php } ?>
-                                <li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart();
-                                    ?></li>
-                                <li class="view-details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
-
-                            </ul>
-                        <?php } elseif ($gallery_style_preset == 'eael-product-preset-7') { ?>
-                            <ul class="icons-wrap block-box-style">
-                                <li class="add-to-cart"><?php
-                                    woocommerce_template_loop_add_to_cart(); ?></li>
-                                <?php if( $should_print_quick_view ){?>
-                                    <li class="eael-product-quick-view">
-                                        <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                           class="eael-product-gallery-open-popup">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                    </li>
-                                <?php } ?>
-                                <li class="view-details"><?php echo '<a href="' . $product->get_permalink
-                                        () . '"><i class="fas fa-link"></i></a>'; ?></li>
-                            </ul>
-                        <?php } else { ?>
-                            <ul class="icons-wrap box-style">
-                                <li class="add-to-cart"><?php
-                                    woocommerce_template_loop_add_to_cart(); ?></li>
-                                <?php if( $should_print_quick_view ){?>
-                                    <li class="eael-product-quick-view">
-                                        <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                           class="eael-product-gallery-open-popup">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                    </li>
-                                <?php } ?>
-                                <li class="view-details" title="Details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
-                            </ul>
-                        <?php }
-                        ?>
-                    </div>
-                </div>
-                <div class="product-details-wrap">
-                    <?php
-                    if(($gallery_style_preset == 'eael-product-preset-7') && $should_print_price ){
-                        echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
-                    }
-
-                    if ($should_print_rating) {
-                        echo wc_get_rating_html
-                        ($product->get_average_rating(), $product->get_rating_count());
-                    }
-                    ?>
-                    <div class="eael-product-title">
-                       <?php printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title()); ?>
-                    </div>
-                    <?php if(($gallery_style_preset != 'eael-product-preset-7') && $should_print_price ){
-                        echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
-                    }?>
-                </div>
-            </div>
         </li>
         <?php
-    }
-} else if ($gallery_style_preset == 'eael-product-preset-8') {
-    if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
-        ?>
-        <li <?php post_class( 'product' ); ?>>
-            <div class="eael-product-wrap">
-                <div class="product-image-wrap">
-                    <div class="image-wrap">
-                        <?php
-                        echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
-                        echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
-                        echo $product->get_image($settings['eael_product_gallery_image_size_size'], ['loading' => 'eager']);
-                        echo '</a>';
-                        ?>
+    } else if (($gallery_style_preset == 'eael-product-preset-6') || ($gallery_style_preset == 'eael-product-preset-7')) {
+            ?>
+            <li <?php post_class( 'product' ); ?>>
+                <div class="eael-product-wrap">
+                    <div class="product-image-wrap">
+                        <div class="image-wrap">
+                            <?php
+                            echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
+                            echo $product->get_image($settings['eael_product_gallery_image_size_size'], ['loading' => 'eager']);
+                            ?>
+                        </div>
+                        <div class="image-hover-wrap">
+                            <?php if($gallery_style_preset == 'eael-product-preset-5'){ ?>
+                                <ul class="icons-wrap block-style">
+                                    <?php if( $should_print_quick_view ){?>
+                                        <li class="eael-product-quick-view">
+                                            <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
+                                               class="eael-product-gallery-open-popup">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        </li>
+                                    <?php } ?>
+                                    <li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart();
+                                        ?></li>
+                                    <li class="view-details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
+
+                                </ul>
+                            <?php } elseif ($gallery_style_preset == 'eael-product-preset-7') { ?>
+                                <ul class="icons-wrap block-box-style">
+                                    <li class="add-to-cart"><?php
+                                        woocommerce_template_loop_add_to_cart(); ?></li>
+                                    <?php if( $should_print_quick_view ){?>
+                                        <li class="eael-product-quick-view">
+                                            <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
+                                               class="eael-product-gallery-open-popup">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        </li>
+                                    <?php } ?>
+                                    <li class="view-details"><?php echo '<a href="' . $product->get_permalink
+                                            () . '"><i class="fas fa-link"></i></a>'; ?></li>
+                                </ul>
+                            <?php } else { ?>
+                                <ul class="icons-wrap box-style">
+                                    <li class="add-to-cart"><?php
+                                        woocommerce_template_loop_add_to_cart(); ?></li>
+                                    <?php if( $should_print_quick_view ){?>
+                                        <li class="eael-product-quick-view">
+                                            <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
+                                               class="eael-product-gallery-open-popup">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        </li>
+                                    <?php } ?>
+                                    <li class="view-details" title="Details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
+                                </ul>
+                            <?php }
+                            ?>
+                        </div>
                     </div>
-                    <div class="image-hover-wrap">
-                        <ul class="icons-wrap over-box-style">
-                            <li class="add-to-cart"><?php
-                                woocommerce_template_loop_add_to_cart(); ?>
-                            </li>
-                            <?php if( $should_print_quick_view ){?>
-                                <li class="eael-product-quick-view">
-                                    <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                       class="eael-product-gallery-open-popup">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                </li>
-                            <?php } ?>
-                        </ul>
+                    <div class="product-details-wrap">
+                        <?php
+                        if(($gallery_style_preset == 'eael-product-preset-7') && $should_print_price ){
+                            echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+                        }
+
+                        if ($should_print_rating) {
+                            echo wc_get_rating_html
+                            ($product->get_average_rating(), $product->get_rating_count());
+                        }
+                        ?>
+                        <div class="eael-product-title">
+                           <?php printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title()); ?>
+                        </div>
+                        <?php if(($gallery_style_preset != 'eael-product-preset-7') && $should_print_price ){
+                            echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+                        }?>
                     </div>
                 </div>
-                <div class="product-details-wrap">
-                    <?php
-                    if ( $should_print_price ) {
-                        echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
-                    }
-                    ?>
-                    <div class="eael-product-title">
-                        <?php
+            </li>
+            <?php
+
+    } else if ($gallery_style_preset == 'eael-product-preset-8') { ?>
+            <li <?php post_class( 'product' ); ?>>
+                <div class="eael-product-wrap">
+                    <div class="product-image-wrap">
+                        <div class="image-wrap">
+                            <?php
                             echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
-                            printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title());
+                            echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
+                            echo $product->get_image($settings['eael_product_gallery_image_size_size'], ['loading' => 'eager']);
                             echo '</a>';
+                            ?>
+                        </div>
+                        <div class="image-hover-wrap">
+                            <ul class="icons-wrap over-box-style">
+                                <li class="add-to-cart"><?php
+                                    woocommerce_template_loop_add_to_cart(); ?>
+                                </li>
+                                <?php if( $should_print_quick_view ){?>
+                                    <li class="eael-product-quick-view">
+                                        <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
+                                           class="eael-product-gallery-open-popup">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-details-wrap">
+                        <?php
+                        if ( $should_print_price ) {
+                            echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+                        }
                         ?>
+                        <div class="eael-product-title">
+                            <?php
+                                echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+                                printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title());
+                                echo '</a>';
+                            ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </li>
-        <?php
+            </li>
+            <?php
     }
 }
