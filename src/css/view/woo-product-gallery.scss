@@ -12,6 +12,7 @@
 
     &.eael-terms-layout-vertical {
         flex-direction: row;
+        align-items: flex-start;
 
         @media (max-width: 767px) {
             flex-direction: column;

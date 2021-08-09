@@ -1167,20 +1167,16 @@ class Woo_Product_Gallery extends Widget_Base
 			[
 				'label'      => __( 'Width', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => ['px', '%'],
+				'size_units' => ['%'],
 				'range'      => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 100,
-						'step' => 1,
-					],
 					'%'  => [
 						'min' => 0,
 						'max' => 100,
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .eael-cat-tab' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-cat-tab' => 'width: {{SIZE}}%;',
+					'{{WRAPPER}} .woocommerce' => 'width: calc(100% - {{SIZE}}%);',
 				],
 				'condition' => [
 					'eael_product_gallery_terms_position' => 'eael-terms-layout-vertical',
