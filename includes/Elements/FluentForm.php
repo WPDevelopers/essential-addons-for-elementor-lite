@@ -1641,7 +1641,7 @@ class FluentForm extends Widget_Base
 			    ],
 			    'size_units' => ['px', 'em', '%'],
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper.eael-fluent-form-subscription .ff-el-group .ff-btn-submit' => 'right: {{SIZE}}{{UNIT}};position: relative;',
+				    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper.eael-fluent-form-subscription .ff-el-group .ff-btn-submit' => 'right: {{SIZE}}{{UNIT}};position: relative;min-width: inherit;',
 			    ],
 		    ]
 	    );
