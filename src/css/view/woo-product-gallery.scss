@@ -1125,362 +1125,361 @@
         }
     }
 
-    &.grid,
-    &.masonary {
-        .eael-product-wrap {
 
-            &:hover {
-                .icons-wrap {
-                    &.box-style {
-                        bottom: 30px;
-                        visibility: visible;
-                        opacity: 1;
-                    }
+    .eael-product-wrap {
 
-                    &.block-box-style {
-                        visibility: visible;
-                        opacity: 1;
-                        transform: translateY(-50px);
-                    }
-
-                    &.block-style {
-                        visibility: visible;
-                        opacity: 1;
-                        transform: translateY(-50px);
-                    }
-                }
-            }
-
-            .product-image-wrap {
-                position: relative;
-                overflow: hidden;
-            }
-
+        &:hover {
             .icons-wrap {
-                padding: 0;
-                list-style: none;
-                position: absolute;
-                z-index: 9;
-                display: block;
-                top: 50%;
-                left: 0;
-                right: 0;
-                -webkit-transform: translateY(0);
-                -moz-transform: translateY(0);
-                -ms-transform: translateY(0);
-                -o-transform: translateY(0);
-                transform: translateY(0);
-                opacity: 0;
-                visibility: hidden;
-                -webkit-transform-origin: center center;
-                -moz-transform-origin: center center;
-                -ms-transform-origin: center center;
-                -o-transform-origin: center center;
-                transform-origin: center center;
-                margin: 0 auto;
-                -webkit-transition: all ease 0.4s;
-                -moz-transition: all ease 0.4s;
-                -ms-transition: all ease 0.4s;
-                -o-transition: all ease 0.4s;
-                transition: all ease 0.4s;
-
-                &.block-style {
-                    background: red;
-                    display: flex;
-                    align-items: center;
-                    justify-content: stretch;
-                    width: 100%;
-                    top: auto;
-                    bottom: -50px;
-
-                    li {
-                        flex: 1;
-
-                        &:not(:last-child) {
-                            border-right: 1px solid #fff;
-                        }
-
-                        &.add-to-cart {
-                            flex: 4;
-                        }
-
-                        a {
-                            position: relative;
-                            background-color: transparent;
-                            margin: 0;
-                            padding: 10px 5px;
-                            font-size: 15px;
-                            line-height: 1.2em;
-                            color: #fff;
-                            display: flex;
-                            flex-direction: column;
-
-                            &:hover {
-                                background-color: transparent;
-                                color: #000;
-                            }
-
-                            i {
-                                line-height: normal;
-                            }
-                        }
-                    }
-                }
-
                 &.box-style {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                    align-items: center;
-                    top: auto;
-                    bottom: -100px;
-
-                    li {
-
-                        a {
-                            position: relative;
-                            width: 42px;
-                            height: 42px;
-                            margin: 3px;
-                            box-shadow: 0px 15px 10px rgba(61, 70, 79, 0.12);
-                            background-color: #ffffff;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-
-                            i {
-                                line-height: 1rem;
-                            }
-
-                            &.added_to_cart {
-                                font-size: 0;
-
-                                &:after {
-                                    content: '\f217';
-                                    font-weight: 900;
-                                    font-family: 'Font Awesome 5 Free';
-                                    font-size: 18px;
-                                    text-rendering: auto;
-                                    -webkit-font-smoothing: antialiased;
-                                    vertical-align: middle;
-                                    margin: 0;
-                                    padding: 0;
-                                }
-                            }
-
-                            &.button.add_to_cart_button {
-                                padding: 0;
-                                margin: 3px;
-                                font-size: 0px;
-
-                                &:before {
-                                    content: "\f07a";
-                                    display: block;
-                                    font-family: "Font Awesome 5 Free";
-                                    font-size: 18px;
-                                    font-weight: 900;
-                                    transform: translate(-50%, -50%);
-                                    top: 50%;
-                                    left: 50%;
-                                    position: absolute;
-                                }
-
-                                &.product_type_variable {
-                                    &:before {
-                                        content: "\f00c";
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                &.over-box-style {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: flex-end;
-                    align-items: center;
+                    bottom: 30px;
                     visibility: visible;
                     opacity: 1;
-                    top: auto;
-                    bottom: -24px;
-                    margin: 0 5%;
-
-                    li {
-                        a {
-                            position: relative;
-                            width: 42px;
-                            height: 42px;
-                            margin: 3px;
-                            box-shadow: 0px 15px 10px rgba(61, 70, 79, 0.12);
-                            background-color: #ffffff;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-
-                            i {
-                                line-height: 1rem;
-                            }
-
-                            &.added_to_cart {
-                                font-size: 0;
-
-                                &:after {
-                                    content: '\f217';
-                                    font-weight: 900;
-                                    font-family: "Font Awesome 5 Free";
-                                    font-size: 18px;
-                                    line-height: 38px;
-                                    text-rendering: auto;
-                                    -webkit-font-smoothing: antialiased;
-                                    vertical-align: middle;
-                                    margin: 0;
-                                    padding: 0;
-                                }
-                            }
-
-                            &.button.add_to_cart_button {
-                                padding: 0;
-                                margin: 0;
-                                font-size: 0px;
-
-                                &:before {
-                                    content: "\f07a";
-                                    display: block;
-                                    font-family: "Font Awesome 5 Free";
-                                    font-size: 18px;
-                                    font-weight: 900;
-                                    transform: translate(-50%, -50%);
-                                    top: 50%;
-                                    left: 50%;
-                                    position: absolute;
-                                }
-
-                                &.product_type_variable {
-                                    &:before {
-                                        content: "\f00c";
-                                    }
-                                }
-                            }
-
-                            &.product_type_external {
-                                width: auto;
-                                height: auto;
-                            }
-                        }
-                    }
                 }
 
                 &.block-box-style {
-                    background: white;
-                    width: 100%;
-                    top: auto;
-                    bottom: -50px;
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                    align-items: center;
-
-                    li {
-
-                        a {
-                            position: relative;
-                            width: 42px;
-                            height: 42px;
-                            margin: 10px 2px 0;
-                            padding: 0;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-
-                            i {
-                                line-height: 1rem;
-                            }
-
-                            &.added_to_cart {
-                                font-size: 0;
-
-                                &:after {
-                                    content: '\f217';
-                                    font-weight: 900;
-                                    font-family: 'Font Awesome 5 Free';
-                                    font-size: 18px;
-                                    text-rendering: auto;
-                                    -webkit-font-smoothing: antialiased;
-                                    vertical-align: middle;
-                                    margin: 0;
-                                    padding: 0;
-                                }
-                            }
-
-                            &.button.add_to_cart_button {
-                                padding: 0;
-                                margin: 10px 2px 0;
-                                font-size: 0px;
-
-                                &:before {
-                                    content: "\f07a";
-                                    display: block;
-                                    font-family: "Font Awesome 5 Free";
-                                    font-size: 18px;
-                                    font-weight: 900;
-                                    transform: translate(-50%, -50%);
-                                    top: 50%;
-                                    left: 50%;
-                                    position: absolute;
-                                }
-
-                                &.product_type_variable {
-                                    &:before {
-                                        content: "\f00c";
-                                    }
-                                }
-                            }
-
-                            i {
-                                //line-height: normal;
-                            }
-                        }
-                    }
+                    visibility: visible;
+                    opacity: 1;
+                    transform: translateY(-50px);
                 }
 
+                &.block-style {
+                    visibility: visible;
+                    opacity: 1;
+                    transform: translateY(-50px);
+                }
+            }
+        }
+
+        .product-image-wrap {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .icons-wrap {
+            padding: 0;
+            list-style: none;
+            position: absolute;
+            z-index: 9;
+            display: block;
+            top: 50%;
+            left: 0;
+            right: 0;
+            -webkit-transform: translateY(0);
+            -moz-transform: translateY(0);
+            -ms-transform: translateY(0);
+            -o-transform: translateY(0);
+            transform: translateY(0);
+            opacity: 0;
+            visibility: hidden;
+            -webkit-transform-origin: center center;
+            -moz-transform-origin: center center;
+            -ms-transform-origin: center center;
+            -o-transform-origin: center center;
+            transform-origin: center center;
+            margin: 0 auto;
+            -webkit-transition: all ease 0.4s;
+            -moz-transition: all ease 0.4s;
+            -ms-transition: all ease 0.4s;
+            -o-transition: all ease 0.4s;
+            transition: all ease 0.4s;
+
+            &.block-style {
+                background: red;
+                display: flex;
+                align-items: center;
+                justify-content: stretch;
+                width: 100%;
+                top: auto;
+                bottom: -50px;
+
                 li {
-                    display: inline-block;
-                    margin: 0;
-                    padding: 0;
+                    flex: 1;
+
+                    &:not(:last-child) {
+                        border-right: 1px solid #fff;
+                    }
+
+                    &.add-to-cart {
+                        flex: 4;
+                    }
 
                     a {
-                        display: block;
-                        position: absolute;
-                        color: #000;
-                        width: 100%;
-                        height: 100%;
-                        text-align: center;
-                        transition: all ease 0.4s;
+                        position: relative;
+                        background-color: transparent;
+                        margin: 0;
+                        padding: 10px 5px;
+                        font-size: 15px;
+                        line-height: 1.2em;
+                        color: #fff;
+                        display: flex;
+                        flex-direction: column;
 
                         &:hover {
-                            background: #ff7a80;
-                            color: #fff;
+                            background-color: transparent;
+                            color: #000;
                         }
 
                         i {
-                            position: relative;
-                            font-size: 18px;
-                            line-height: 42px;
-                        }
-
-                        svg {
-                            width: 18px;
+                            line-height: normal;
                         }
                     }
                 }
             }
 
-            .product-details-wrap {
-                padding: 10px;
+            &.box-style {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                top: auto;
+                bottom: -100px;
+
+                li {
+
+                    a {
+                        position: relative;
+                        width: 42px;
+                        height: 42px;
+                        margin: 3px;
+                        box-shadow: 0px 15px 10px rgba(61, 70, 79, 0.12);
+                        background-color: #ffffff;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        i {
+                            line-height: 1rem;
+                        }
+
+                        &.added_to_cart {
+                            font-size: 0;
+
+                            &:after {
+                                content: '\f217';
+                                font-weight: 900;
+                                font-family: 'Font Awesome 5 Free';
+                                font-size: 18px;
+                                text-rendering: auto;
+                                -webkit-font-smoothing: antialiased;
+                                vertical-align: middle;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        }
+
+                        &.button.add_to_cart_button {
+                            padding: 0;
+                            margin: 3px;
+                            font-size: 0px;
+
+                            &:before {
+                                content: "\f07a";
+                                display: block;
+                                font-family: "Font Awesome 5 Free";
+                                font-size: 18px;
+                                font-weight: 900;
+                                transform: translate(-50%, -50%);
+                                top: 50%;
+                                left: 50%;
+                                position: absolute;
+                            }
+
+                            &.product_type_variable {
+                                &:before {
+                                    content: "\f00c";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.over-box-style {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+                visibility: visible;
+                opacity: 1;
+                top: auto;
+                bottom: -24px;
+                margin: 0 5%;
+
+                li {
+                    a {
+                        position: relative;
+                        width: 42px;
+                        height: 42px;
+                        margin: 3px;
+                        box-shadow: 0px 15px 10px rgba(61, 70, 79, 0.12);
+                        background-color: #ffffff;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        i {
+                            line-height: 1rem;
+                        }
+
+                        &.added_to_cart {
+                            font-size: 0;
+
+                            &:after {
+                                content: '\f217';
+                                font-weight: 900;
+                                font-family: "Font Awesome 5 Free";
+                                font-size: 18px;
+                                line-height: 38px;
+                                text-rendering: auto;
+                                -webkit-font-smoothing: antialiased;
+                                vertical-align: middle;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        }
+
+                        &.button.add_to_cart_button {
+                            padding: 0;
+                            margin: 0;
+                            font-size: 0px;
+
+                            &:before {
+                                content: "\f07a";
+                                display: block;
+                                font-family: "Font Awesome 5 Free";
+                                font-size: 18px;
+                                font-weight: 900;
+                                transform: translate(-50%, -50%);
+                                top: 50%;
+                                left: 50%;
+                                position: absolute;
+                            }
+
+                            &.product_type_variable {
+                                &:before {
+                                    content: "\f00c";
+                                }
+                            }
+                        }
+
+                        &.product_type_external {
+                            width: auto;
+                            height: auto;
+                        }
+                    }
+                }
+            }
+
+            &.block-box-style {
+                background: white;
+                width: 100%;
+                top: auto;
+                bottom: -50px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+
+                li {
+
+                    a {
+                        position: relative;
+                        width: 42px;
+                        height: 42px;
+                        margin: 10px 2px 0;
+                        padding: 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        i {
+                            line-height: 1rem;
+                        }
+
+                        &.added_to_cart {
+                            font-size: 0;
+
+                            &:after {
+                                content: '\f217';
+                                font-weight: 900;
+                                font-family: 'Font Awesome 5 Free';
+                                font-size: 18px;
+                                text-rendering: auto;
+                                -webkit-font-smoothing: antialiased;
+                                vertical-align: middle;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        }
+
+                        &.button.add_to_cart_button {
+                            padding: 0;
+                            margin: 10px 2px 0;
+                            font-size: 0px;
+
+                            &:before {
+                                content: "\f07a";
+                                display: block;
+                                font-family: "Font Awesome 5 Free";
+                                font-size: 18px;
+                                font-weight: 900;
+                                transform: translate(-50%, -50%);
+                                top: 50%;
+                                left: 50%;
+                                position: absolute;
+                            }
+
+                            &.product_type_variable {
+                                &:before {
+                                    content: "\f00c";
+                                }
+                            }
+                        }
+
+                        i {
+                            //line-height: normal;
+                        }
+                    }
+                }
+            }
+
+            li {
+                display: inline-block;
+                margin: 0;
+                padding: 0;
+
+                a {
+                    display: block;
+                    position: absolute;
+                    color: #000;
+                    width: 100%;
+                    height: 100%;
+                    text-align: center;
+                    transition: all ease 0.4s;
+
+                    &:hover {
+                        background: #ff7a80;
+                        color: #fff;
+                    }
+
+                    i {
+                        position: relative;
+                        font-size: 18px;
+                        line-height: 42px;
+                    }
+
+                    svg {
+                        width: 18px;
+                    }
+                }
             }
         }
+
+        .product-details-wrap {
+            padding: 10px;
+        }
     }
+
 
     &.eael-product-preset-8 {
         .product-image-wrap {

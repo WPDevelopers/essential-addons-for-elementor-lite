@@ -15,6 +15,7 @@ ea.hooks.addAction("init", "ea", () => {
 				$page_id = $post_cat_wrap.data("page-id"),
 				$nonce = $post_cat_wrap.data("nonce"),
 				$args = $post_cat_wrap.data('args'),
+				$layout = $post_cat_wrap.data('layout'),
 				$page = 1,
 				$template_info = $post_cat_wrap.data('template'),
 				$taxonomy = {
@@ -50,6 +51,26 @@ ea.hooks.addAction("init", "ea", () => {
 							.empty()
 							.append($content);
 
+						if ($layout == "masonry") {
+
+							var $products = $('.eael-product-gallery .products', $scope);
+
+							// init isotope
+							var $isotope_products = $products.isotope({
+								itemSelector: "li.product",
+								layoutMode: $layout,
+								percentPosition: true
+							});
+
+							$isotope_products.imagesLoaded().progress( function() {
+								$isotope_products.isotope('layout');
+							})
+
+							$(window).on('resize', function() {
+								$isotope_products.isotope('layout');
+							});
+
+						}
 					}
 				},
 				error: function (response) {

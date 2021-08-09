@@ -2454,7 +2454,8 @@ class Woo_Product_Gallery extends Widget_Base
 	    $dir_name = method_exists( $this, 'get_temp_dir_name' ) ? $this->get_temp_dir_name( $this->get_filename_only($template) ) : "pro";
 	    $show_cat_thumb = isset( $settings['eael_woo_product_gallery_terms_thumb'] ) && 'yes' === $settings['eael_woo_product_gallery_terms_thumb'];
 
-	    echo '<ul class="eael-cat-tab" data-template=' . json_encode(['dir'   => $dir_name, 'file_name' => $this->get_filename_only($template), 'name' => $this->process_directory_name()], 1) . '  data-nonce="'.wp_create_nonce( 'eael_product_gallery' ).'" data-page-id="'.$this->page_id.'" data-widget-id="'.$this->get_id().'" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-page="1">';
+	    echo '<ul class="eael-cat-tab" data-layout="'.$settings["eael_product_gallery_items_layout"].'" data-template=' . json_encode(['dir'   => $dir_name, 'file_name' =>
+                $this->get_filename_only($template), 'name' => $this->process_directory_name()], 1) . '  data-nonce="'.wp_create_nonce( 'eael_product_gallery' ).'" data-page-id="'.$this->page_id.'" data-widget-id="'.$this->get_id().'" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-page="1">';
 
 	    echo '<li><a href="javascript:;" data-terms='. json_encode($product_cats). ' class="active post-list-filter-item post-list-cat-'
 	         . $this->get_id() . '">' . __($settings['eael_woo_product_gallery_terms_all_text'], 'essential-addons-for-elementor-lite') . '</a></li>';
