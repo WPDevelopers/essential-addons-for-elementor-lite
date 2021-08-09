@@ -619,7 +619,9 @@ class FluentForm extends Widget_Base
                 ],
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea, {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group select' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=text]):not([type=email]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea, {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group select' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group input[type=email] ' => 'float: {{VALUE}};',
+                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group input[type=text] ' => 'float: {{VALUE}};',
                 ],
             ]
         );
@@ -1530,6 +1532,7 @@ class FluentForm extends Widget_Base
                 'size_units' => ['px', '%'],
                 'selectors' => [
                     '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group .ff-btn-submit' => 'width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper.eael-contact-form-align-default .ff-el-group .ff-btn-submit' => 'width: {{SIZE}}{{UNIT}};min-width: inherit;',
                 ],
                 'condition' => [
                     'button_width_type' => 'custom',
@@ -1623,6 +1626,27 @@ class FluentForm extends Widget_Base
                 ],
             ]
         );
+
+	    $this->add_responsive_control(
+		    'button_position',
+		    [
+			    'label' => __('Button Position', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SLIDER,
+			    'range' => [
+				    'px' => [
+					    'min' => 0,
+					    'max' => 1000,
+					    'step' => 1,
+				    ],
+			    ],
+			    'size_units' => ['px', 'em', '%'],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper.eael-fluent-form-subscription .ff-el-group .ff-btn-submit' => 'right: {{SIZE}}{{UNIT}};position: relative;',
+			    ],
+		    ]
+	    );
+
+
 
         $this->add_group_control(
             Group_Control_Typography::get_type(),
