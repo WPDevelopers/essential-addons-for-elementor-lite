@@ -1060,6 +1060,14 @@
 .eael-post-grid.eael-product-default .button.add_to_cart_button.product_type_variable:before {
   content: "";
 }
+.eael-product-grid.eael-product-preset-5 ul.products li.product .image-wrap img, .eael-product-grid.eael-product-preset-6 ul.products li.product .image-wrap img, .eael-product-grid.eael-product-preset-7 ul.products li.product .image-wrap img, .eael-product-grid.eael-product-preset-8 ul.products li.product .image-wrap img,
+.eael-post-grid.eael-product-preset-5 ul.products li.product .image-wrap img,
+.eael-post-grid.eael-product-preset-6 ul.products li.product .image-wrap img,
+.eael-post-grid.eael-product-preset-7 ul.products li.product .image-wrap img,
+.eael-post-grid.eael-product-preset-8 ul.products li.product .image-wrap img {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
 .eael-wcpc-modal {
   position: fixed;
   top: 50px;
@@ -1160,6 +1168,8 @@
   margin-bottom: 0;
   display: block;
   width: 100%;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
 }
 .eael-product-grid .woocommerce ul.products li.product .woocommerce-loop-product__title {
   letter-spacing: normal;
@@ -1329,6 +1339,9 @@
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
   margin-bottom: 1em;
+}
+.eael-product-popup.woocommerce div.product div.images .flex-control-thumbs li:nth-child(4n) {
+  margin-right: 0;
 }
 .eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-4 .flex-control-thumbs li {
   width: calc(25% - .75em);
@@ -1641,8 +1654,8 @@
   line-height: 74px;
   height: 60px;
   width: 120px;
-  left: -37pX;
-  top: -8px;
+  left: -39pX;
+  top: -10px;
   right: auto;
   padding: 0;
   -webkit-transform: rotate(-45deg);
@@ -1797,8 +1810,8 @@
   line-height: 74px;
   height: 60px;
   width: 120px;
-  left: -37pX;
-  top: -8px;
+  left: -39px;
+  top: -10px;
   right: auto;
   padding: 0;
   -webkit-transform: rotate(-45deg);
@@ -2636,6 +2649,6 @@
   position: unset;
   display: unset;
 }
-.woocommerce ul.products li.product .ast-shop-product-out-of-stock, .woocommerce-page ul.products li.product .ast-shop-product-out-of-stock {
+.eael-product-grid .woocommerce ul.products li.product .ast-shop-product-out-of-stock {
   display: none;
 }

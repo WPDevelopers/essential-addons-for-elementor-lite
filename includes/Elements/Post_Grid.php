@@ -454,7 +454,25 @@ class Post_Grid extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-entry-meta, .eael-entry-meta a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-entry-meta a' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+	                'eael_show_author_name' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_grid_meta_color_date',
+            [
+                'label' => __('Date Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-entry-meta .eael-posted-on' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+	                'eael_show_date' => 'yes',
                 ],
             ]
         );
@@ -1059,6 +1077,7 @@ class Post_Grid extends Widget_Base
 
         $template = $this->get_template($settings['eael_dynamic_template_Layout']);
         $settings['loadable_file_name'] = $this->get_filename_only($template);
+	    $dir_name = $this->get_temp_dir_name($settings['loadable_file_name']);
 
         if(file_exists($template)){
             $query = new \WP_Query( $args );
@@ -1082,7 +1101,7 @@ class Post_Grid extends Widget_Base
             <div class="clearfix"></div>
         </div>';
 
-        $this->print_load_more_button($settings, $args);
+        $this->print_load_more_button($settings, $args, $dir_name);
 
         if (Plugin::instance()->editor->is_edit_mode()) {?>
             <script type="text/javascript">

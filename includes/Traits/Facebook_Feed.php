@@ -107,7 +107,7 @@ trait Facebook_Feed
 
                 if ($settings['eael_facebook_feed_message'] && !empty($message)) {
                     $html .= '<div class="eael-facebook-feed-item-content">
-                                        <p class="eael-facebook-feed-message">' . esc_html($message) . '</p>
+                                        <p class="eael-facebook-feed-message">' . $this->eael_str_check($message) . '</p>
                                     </div>';
                 }
 
@@ -223,4 +223,29 @@ trait Facebook_Feed
 
         return $html;
     }
+
+	public function eael_str_check($textData = '') {
+		$stringText = '';
+		if(strlen($textData) > 5) {
+			$explodeText = explode(' ', trim($textData));
+			for($st = 0; $st < count($explodeText); $st++) {
+				$pos      = stripos(trim($explodeText[$st]), '#');
+				$pos1     = stripos(trim($explodeText[$st]), '@');
+				$poshttp  = stripos(trim($explodeText[$st]), 'http');
+				$poshttps = stripos(trim($explodeText[$st]), 'https');
+
+				if($pos !== false) {
+					$stringText .= '<a href="https://facebook.com/hashtag/' . str_replace('#', '', $explodeText[$st]) . '?source=feed_text" target="_blank"> ' . $explodeText[$st] . ' </a>';
+				} elseif($pos1 !== false) {
+					$stringText .= '<a href="https://facebook.com/' . $explodeText[$st] . '/" target="_blank"> ' . $explodeText[$st] . ' </a>';
+				} elseif($poshttp !== false || $poshttps !== false) {
+					$stringText .= '<a href="' . $explodeText[$st] . '" target="_blank"> ' . $explodeText[$st] . ' </a>';
+				} else {
+					$stringText .= ' ' . $explodeText[$st];
+				}
+			}
+		}
+
+		return $stringText;
+	}
 }
