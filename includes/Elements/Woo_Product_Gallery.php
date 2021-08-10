@@ -321,7 +321,7 @@ class Woo_Product_Gallery extends Widget_Base
 		    [
 			    'label' => esc_html__('Columns', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::SELECT,
-			    'default' => '4',
+			    'default' => '3',
 			    'options' => [
 				    '1' => esc_html__('1', 'essential-addons-for-elementor-lite'),
 				    '2' => esc_html__('2', 'essential-addons-for-elementor-lite'),
@@ -412,7 +412,7 @@ class Woo_Product_Gallery extends Widget_Base
         $this->add_control('eael_product_gallery_products_count', [
             'label' => __('Products Count', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::NUMBER,
-            'default' => 4,
+            'default' => 3,
             'min' => 1,
             'max' => 1000,
             'step' => 1,
@@ -677,6 +677,13 @@ class Woo_Product_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
+                'default' => [
+	                'top' => 5,
+	                'right' => 5,
+	                'bottom' => 5,
+	                'left' => 5,
+	                'isLinked' => true,
+                ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-gallery .woocommerce ul.products li.product' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
                     '{{WRAPPER}} .eael-product-gallery .woocommerce ul.products li.product woocommerce-loop-product__link img' => 'border-radius: {{TOP}}px {{RIGHT}}px 0 0;',
@@ -2554,6 +2561,8 @@ class Woo_Product_Gallery extends Widget_Base
 
 			    if ($show_cat_thumb && $image_url) {
 				    $show_cat_thumb_tag = '<img src="'.$image_url.'" />';
+			    } else {
+				    $show_cat_thumb_tag = '';
 			    }
 
 			    echo '<li><a href="javascript:;" data-terms='.json_encode([$category->slug]).' data-id="'

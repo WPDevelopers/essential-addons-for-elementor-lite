@@ -150,7 +150,7 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
             </li>
             <?php
 
-    } else if ($gallery_style_preset == 'eael-product-preset-8') { ?>
+    } else if ($gallery_style_preset == 'eael-product-preset-1') { ?>
             <li <?php post_class( 'product' ); ?>>
                 <div class="eael-product-wrap">
                     <div class="product-image-wrap">
