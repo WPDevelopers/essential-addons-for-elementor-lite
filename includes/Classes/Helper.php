@@ -1179,7 +1179,6 @@ class Helper
     }
 
 	public static function eael_product_gallery ($settings) {
-//        echo 'gallery';
 		$product = wc_get_product( get_the_ID() );
 		if ( ! $product ) {
 			error_log( '$product not found in ' . __FILE__ );
@@ -1210,7 +1209,7 @@ class Helper
 			'product_id' => $product->get_id(),
 			'page_id' => $settings['eael_page_id'],
 		];
-		if ( $gallery_style_preset == 'eael-product-simple' ) { ?>
+		if ( $gallery_style_preset == 'eael-product-preset-4' ) { ?>
             <li class="product">
                 <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
 					<?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ) );
@@ -1234,7 +1233,7 @@ class Helper
 				?>
             </li>
 			<?php
-		} else if (($gallery_style_preset == 'eael-product-preset-6') || ($gallery_style_preset == 'eael-product-preset-7')) {
+		} else if (($gallery_style_preset == 'eael-product-preset-3') || ($gallery_style_preset == 'eael-product-preset-2')) {
 			if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
 				?>
                 <li <?php post_class( 'product' ); ?>>
@@ -1247,22 +1246,7 @@ class Helper
 								?>
                             </div>
                             <div class="image-hover-wrap">
-								<?php if($gallery_style_preset == 'eael-product-preset-5'){ ?>
-                                    <ul class="icons-wrap block-style">
-										<?php if( $should_print_quick_view ){?>
-                                            <li class="eael-product-quick-view">
-                                                <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                                   class="eael-product-gallery-open-popup">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
-                                            </li>
-										<?php } ?>
-                                        <li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart();
-											?></li>
-                                        <li class="view-details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
-
-                                    </ul>
-								<?php } elseif ($gallery_style_preset == 'eael-product-preset-7') { ?>
+								<?php if ($gallery_style_preset == 'eael-product-preset-2') { ?>
                                     <ul class="icons-wrap block-box-style">
                                         <li class="add-to-cart"><?php
 											woocommerce_template_loop_add_to_cart(); ?></li>
@@ -1297,7 +1281,7 @@ class Helper
                         </div>
                         <div class="product-details-wrap">
 							<?php
-							if(($gallery_style_preset == 'eael-product-preset-7') && $should_print_price ){
+							if(($gallery_style_preset == 'eael-product-preset-2') && $should_print_price ){
 								echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
 							}
 
@@ -1309,7 +1293,7 @@ class Helper
                             <div class="eael-product-title">
 								<?php printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title()); ?>
                             </div>
-							<?php if(($gallery_style_preset != 'eael-product-preset-7') && $should_print_price ){
+							<?php if(($gallery_style_preset != 'eael-product-preset-2') && $should_print_price ){
 								echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
 							}?>
                         </div>
@@ -1317,7 +1301,7 @@ class Helper
                 </li>
 				<?php
 			}
-		} else if ($gallery_style_preset == 'eael-product-preset-8') {
+		} else if ($gallery_style_preset == 'eael-product-preset-1') {
 			if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
 				?>
                 <li <?php post_class( 'product' ); ?>>

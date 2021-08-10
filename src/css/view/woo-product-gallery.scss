@@ -13,6 +13,7 @@
     &.eael-terms-layout-vertical {
         flex-direction: row;
         align-items: flex-start;
+        gap: 2%;
 
         @media (max-width: 767px) {
             flex-direction: column;
@@ -21,12 +22,16 @@
         .eael-cat-tab {
             flex-direction: column;
             justify-content: flex-start;
-            width: 30%;
+            width: 25%;
 
             @media (max-width: 767px) {
                 flex-direction: row;
                 justify-content: center;
                 width: 100%;
+            }
+
+            img {
+                margin: 0 5px 0 0;
             }
         }
     }
@@ -137,7 +142,7 @@
     }
 
     // simple & reveal style
-    &.eael-product-simple {
+    &.eael-product-preset-4 {
         .woocommerce {
             ul.products {
                 li.product {
@@ -312,7 +317,7 @@
     }
 
     // simple style
-    &.eael-product-simple {
+    &.eael-product-preset-4 {
         .woocommerce {
             ul.products {
                 li.product {
@@ -322,7 +327,7 @@
         }
     }
 
-    &.eael-product-simple {
+    &.eael-product-preset-4 {
         .woocommerce ul.products .product {
             a.add_to_cart_button,
             span.price,
@@ -334,8 +339,8 @@
     }
 
     &.eael-product-preset-6,
-    &.eael-product-preset-7,
-    &.eael-product-preset-8 {
+    &.eael-product-preset-2,
+    &.eael-product-preset-1 {
         ul.products {
             li.product {
                 .image-wrap {
@@ -1493,7 +1498,7 @@
     }
 
 
-    &.eael-product-preset-8 {
+    &.eael-product-preset-1 {
         .product-image-wrap {
             overflow: inherit;
         }
@@ -1506,8 +1511,8 @@
     }
 
     &.eael-product-preset-6,
-    &.eael-product-preset-7,
-    &.eael-product-preset-8 {
+    &.eael-product-preset-2,
+    &.eael-product-preset-1 {
         ul.products {
             padding: 0;
             margin: 0;
@@ -1526,8 +1531,8 @@
     }
 
     &.eael-product-preset-6,
-    &.eael-product-preset-7,
-    &.eael-product-preset-8 {
+    &.eael-product-preset-2,
+    &.eael-product-preset-1 {
         .product.outofstock {
             .icons-wrap .button {
                 display: none;
