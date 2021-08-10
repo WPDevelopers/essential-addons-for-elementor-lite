@@ -16,6 +16,9 @@ ea.hooks.addAction("init", "ea", () => {
 				$nonce = $post_cat_wrap.data("nonce"),
 				$args = $post_cat_wrap.data('args'),
 				$layout = $post_cat_wrap.data('layout'),
+
+				$widget_class = ".elementor-element-" + $widget_id,
+
 				$page = 1,
 				$template_info = $post_cat_wrap.data('template'),
 				$taxonomy = {
@@ -38,6 +41,9 @@ ea.hooks.addAction("init", "ea", () => {
 					page_id: $page_id,
 					widget_id: $widget_id,
 					nonce: $nonce
+				},
+				beforeSend: function () {
+					$($widget_class + ' .woocommerce').addClass("eael-product-loader");
 				},
 				success: function (response) {
 					var $content = $(response);
@@ -73,12 +79,14 @@ ea.hooks.addAction("init", "ea", () => {
 						}
 					}
 				},
+				complete: function () {
+					$($widget_class + ' .woocommerce').removeClass("eael-product-loader");
+				},
 				error: function (response) {
 					console.log(response);
 				}
 			});
 		});
-
 
 
 		//
