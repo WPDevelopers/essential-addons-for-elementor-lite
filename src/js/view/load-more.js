@@ -68,8 +68,12 @@
 					$content.hasClass("no-posts-found") ||
 					$content.length === 0
 				) {
+					console.log('load mor');
+
 					$this.remove();
 				} else {
+
+
 					if (
 						$data.class ==
 						"Essential_Addons_Elementor\\Elements\\Product_Grid"

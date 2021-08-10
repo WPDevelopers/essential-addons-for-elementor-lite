@@ -4,9 +4,18 @@
     &.eael-terms-layout-horizontal {
         flex-direction: column;
 
-        .eael-cat-tab img {
-            display: block;
-            margin: 0 auto 5px auto;
+        .eael-cat-tab {
+            li:first-child a {
+                border-radius: 5px 0 0 5px;
+            }
+            li:last-child a {
+                border-radius: 0 5px 5px 0;
+            }
+
+            img {
+                display: block;
+                margin: 0 auto 5px auto;
+            }
         }
     }
 
@@ -30,6 +39,17 @@
                 width: 100%;
             }
 
+            li:first-child a {
+                border-radius: 5px 5px 0 0;
+            }
+            li:last-child a {
+                border-radius: 0 0 5px 5px;
+            }
+
+            a {
+                padding: 20px 30px;
+            }
+
             img {
                 margin: 0 5px 0 0;
             }
@@ -39,21 +59,26 @@
     .eael-cat-tab {
         display: flex;
         list-style: none;
-        margin: 0;
+        margin: 0 auto 50px auto;
         padding: 0;
         justify-content: center;
+        background: #f8f6ff;
+        width: max-content;
+        border-radius: 5px;
 
         img {
             width: 35px;
         }
 
         a {
-            padding: 20px;
+            padding: 20px 40px;
             display: block;
-            margin: 5px;
+            margin: 0;
             background-color: #f8f6ff;
             color: #7d7a94;
-            font-size: 17px;
+            font-size: 20px;
+            line-height: 1.2em;
+            font-weight: 600;
 
             &:hover,
             &.active {
@@ -69,7 +94,7 @@
         ul.products {
             display: grid;
             grid-gap: 25px;
-            margin: 0 0 15px 0;
+            margin: 0 0 15px 0 !important;
             padding: 0 !important;
 
             &:before,
@@ -155,6 +180,7 @@
                     border-radius: 0;
                     background-color: #fff;
                     box-shadow: none;
+                    border: 1px solid #eee;
 
                     a {
                         text-decoration: none;
@@ -311,17 +337,6 @@
                         color: #333;
                         background-color: transparent;
                     }
-                }
-            }
-        }
-    }
-
-    // simple style
-    &.eael-product-preset-4 {
-        .woocommerce {
-            ul.products {
-                li.product {
-                    border: 1px solid #eee;
                 }
             }
         }
