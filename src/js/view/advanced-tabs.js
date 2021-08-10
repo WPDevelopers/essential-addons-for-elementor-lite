@@ -2,7 +2,7 @@ var AdvanceTabHandler = function ($scope, $) {
     var $currentTab = $scope.find('.eael-advance-tabs'),
         $currentTabId = '#' + $currentTab.attr('id').toString()
 
-    $($currentTabId + ' .eael-tabs-nav ul li').each(function (index) {
+    $($currentTabId + ' > .eael-tabs-nav ul li').each(function (index) {
         if ($(this).hasClass('active-default')) {
             $($currentTabId + ' .eael-tabs-nav > ul li')
                 .removeClass('active')
@@ -14,10 +14,9 @@ var AdvanceTabHandler = function ($scope, $) {
             }
         }
     })
-
-    $($currentTabId + ' .eael-tabs-content div').each(function (index) {
+    $($currentTabId + ' > .eael-tabs-content > div').each(function (index) {
         if ($(this).hasClass('active-default')) {
-            $($currentTabId + ' .eael-tabs-content > div').removeClass('active')
+            $($currentTabId + ' > .eael-tabs-content > div').removeClass('active')
         } else {
             if (index == 0) {
                 $(this).removeClass('inactive').addClass('active')

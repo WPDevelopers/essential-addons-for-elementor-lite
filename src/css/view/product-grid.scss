@@ -598,6 +598,21 @@
             }
         }
     }
+
+    &.eael-product-preset-5,
+    &.eael-product-preset-6,
+    &.eael-product-preset-7,
+    &.eael-product-preset-8 {
+        ul.products {
+            li.product {
+                .image-wrap {
+                    img {
+                        backface-visibility: hidden;
+                    }
+                }
+            }
+        }
+    }
 }
 
 // product compare
@@ -691,6 +706,7 @@
             margin-bottom: 0;
             display: block;
             width: 100%;
+            backface-visibility: hidden;
         }
 
         .woocommerce-loop-product__title {
@@ -871,6 +887,11 @@
             &.woocommerce-product-gallery .flex-viewport {
                 transform-style: preserve-3d;
                 margin-bottom: 1em;
+            }
+            .flex-control-thumbs {
+                li:nth-child(4n) {
+                    margin-right: 0;
+                }
             }
         }
 
@@ -1242,8 +1263,8 @@
             line-height: 74px;
             height: 60px;
             width: 120px;
-            left: -37pX;
-            top: -8px;
+            left: -39pX;
+            top: -10px;
             right: auto;
             padding: 0;
             transform: rotate(-45deg);
@@ -1421,8 +1442,8 @@
                 line-height: 74px;
                 height: 60px;
                 width: 120px;
-                left: -37pX;
-                top: -8px;
+                left: -39px;
+                top: -10px;
                 right: auto;
                 padding: 0;
                 transform: rotate(-45deg);
@@ -2404,6 +2425,6 @@
   }
 // Astra Default stockout issue resolve
 
-.woocommerce ul.products li.product .ast-shop-product-out-of-stock, .woocommerce-page ul.products li.product .ast-shop-product-out-of-stock {
+.eael-product-grid .woocommerce ul.products li.product .ast-shop-product-out-of-stock {
     display: none;
 }

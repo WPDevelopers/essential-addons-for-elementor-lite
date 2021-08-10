@@ -578,12 +578,13 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                                         } elseif ($item['key'] === 'login-register') {
                                             $eael_recaptcha_sitekey = get_option('eael_recaptcha_sitekey');
                                             $eael_recaptcha_secret = get_option('eael_recaptcha_secret');
+                                            $eael_recaptcha_language = get_option('eael_recaptcha_language');
                                             $eael_g_client_id = get_option('eael_g_client_id');
                                             $eael_fb_app_id = get_option('eael_fb_app_id');
                                             $eael_fb_app_secret = get_option('eael_fb_app_secret');
                                             echo '<span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup-extended" id="eael-admin-settings-popup-extended" data-settings-id="lr_settings_data">'.__('Settings', 'essential-addons-for-elementor-lite').'</a></span>';
                                             ?>
-                                <span class="eael-lr-settings-data" id="lr_settings_data" style="display: none" data-pro-enabled="<?php echo $this->pro_enabled ?>" data-r-sitekey="<?php echo esc_attr($eael_recaptcha_sitekey);?>" data-r-secret="<?php echo esc_attr($eael_recaptcha_secret);?>"  data-g-client-id="<?php echo esc_attr($eael_g_client_id);?>" data-fb-app-id="<?php echo esc_attr($eael_fb_app_id);?>" data-fb-app-secret="<?php echo esc_attr($eael_fb_app_secret);?>" >
+                                <span class="eael-lr-settings-data" id="lr_settings_data" style="display: none" data-pro-enabled="<?php echo $this->pro_enabled ?>" data-r-sitekey="<?php echo esc_attr($eael_recaptcha_sitekey);?>" data-r-secret="<?php echo esc_attr($eael_recaptcha_secret);?>" data-r-language="<?php echo esc_attr($eael_recaptcha_language); ?>"  data-g-client-id="<?php echo esc_attr($eael_g_client_id);?>" data-fb-app-id="<?php echo esc_attr($eael_fb_app_id);?>" data-fb-app-secret="<?php echo esc_attr($eael_fb_app_secret);?>" >
                                 </span>
                                     <?php } ?>
                                 </p>

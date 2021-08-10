@@ -109,7 +109,7 @@
 
         .eael-simple-menu-indicator {
             position: absolute;
-            top: 0;
+            top: 25px;
             right: 10px;
             width: 28px;
             height: 28px;
@@ -117,7 +117,7 @@
             border: 1px solid #ffffff80;
             border-radius: 2px;
             text-align: center;
-            transform: translateY(-50%);
+            //transform: translateY(-50%);
             cursor: pointer;
 
             &:before {
