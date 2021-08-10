@@ -66,6 +66,7 @@ ea.hooks.addAction("init", "ea", () => {
 						$this.next().slideDown($accordionSpeed);
 					}
 				}
+				ea.hooks.doAction("widgets.reinit",$this.parent());
 			});
 		}
 	);
