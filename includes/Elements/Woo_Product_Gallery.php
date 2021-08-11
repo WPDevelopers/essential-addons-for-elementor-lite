@@ -54,7 +54,7 @@ class Woo_Product_Gallery extends Widget_Base
 
     public function get_icon()
     {
-        return 'eaicon-product-grid';
+        return 'eaicon-product-gallery';
     }
 
     public function get_categories()
