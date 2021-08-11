@@ -17,9 +17,7 @@ ea.hooks.addAction("init", "ea", () => {
 				$nonce = $post_cat_wrap.data("nonce"),
 				$args = $post_cat_wrap.data('args'),
 				$layout = $post_cat_wrap.data('layout'),
-
 				$widget_class = ".elementor-element-" + $widget_id,
-
 				$page = 1,
 				$template_info = $post_cat_wrap.data('template'),
 				$taxonomy = {
@@ -78,8 +76,6 @@ ea.hooks.addAction("init", "ea", () => {
 								$isotope_products.isotope('layout');
 							});
 						}
-
-
 					}
 				},
 				complete: function () {
@@ -92,7 +88,7 @@ ea.hooks.addAction("init", "ea", () => {
 		});
 
 
-		//
+		// product grid
 
 		// Quick view
 		$scope.on("click", ".eael-product-gallery-open-popup", function (e) {
@@ -245,7 +241,6 @@ ea.hooks.addAction("init", "ea", () => {
 		}
 
 	};
-
 
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eael-woo-product-gallery.default",

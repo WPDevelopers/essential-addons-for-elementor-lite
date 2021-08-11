@@ -45,14 +45,14 @@
 
 			if( eael_cat_tab == 'true') {
 				localStorage.removeItem('eael-cat-tab');
-				 var $apage = 1 + 1;
+				 var $gallery_page = 1 + 1;
 
 			} else {
-				 var $apage = parseInt($('.eael-cat-tab li a.active', $scope).data("apage")) + 1;
+				 var $gallery_page = parseInt($('.eael-cat-tab li a.active', $scope).data("page")) + 1;
 			}
 
 			$data.taxonomy = $taxonomy;
-			$data.page = $apage;
+			$data.page = $gallery_page;
 		}
 
 		String($args)
@@ -167,7 +167,7 @@
 					$LoaderSpan.html($text);
 
 					if ( $data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery" ) {
-						$('.eael-cat-tab li a.active', $scope).data("apage", $apage);
+						$('.eael-cat-tab li a.active', $scope).data("page", $gallery_page);
 					} else {
 						$this.data("page", $page);
 					}

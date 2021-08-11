@@ -38,7 +38,7 @@ class Woo_Product_Gallery extends Widget_Base
 
 		if ( $is_type_instance && class_exists('woocommerce')) {
 		    $this->load_quick_view_asset();
-			add_filter( 'body_class', [$this, 'add_slider_body_class'] );
+			add_filter( 'body_class', [$this, 'add_product_gallery_body_class'] );
 		}
 	}
 
@@ -104,8 +104,8 @@ class Woo_Product_Gallery extends Widget_Base
 	 * @param $classes
 	 * @return mixed
 	 */
-	public function add_slider_body_class( $classes ) {
-		if ( !in_array( 'eael-woo-slider', $classes ) ) {
+	public function add_product_gallery_body_class( $classes ) {
+		if ( !in_array( 'eael-woo-gallery', $classes ) ) {
 			add_action( 'wp_body_open', function () {
 				?>
                 <div style="display: none" class="eael-woocommerce-popup-view eael-product-popup eael-product-zoom-in
@@ -116,7 +116,7 @@ class Woo_Product_Gallery extends Widget_Base
                 </div>
 				<?php
 			} );
-			$classes[] = 'eael-woo-slider';
+			$classes[] = 'eael-woo-gallery';
 		}
 		return $classes;
 	}
@@ -160,20 +160,12 @@ class Woo_Product_Gallery extends Widget_Base
 
         // Style Controls---------------
 	    $this->init_style_gallery_controls();
-
         $this->init_style_product_controls();
         $this->init_style_color_typography_controls();
         $this->init_style_addtocart_controls();
         $this->eael_product_action_buttons();
         $this->eael_product_action_buttons_style();
-        /**
-         * Load More Button Style Controls!
-         */
         do_action('eael/controls/load_more_button_style', $this);
-
-        /**
-         * Quick view Style Controls!
-         */
         $this->eael_product_view_popup_style();
 
     }
@@ -2324,7 +2316,7 @@ class Woo_Product_Gallery extends Widget_Base
         $widget_id = $this->get_id();
         $settings['eael_widget_id'] = $widget_id;
         if ( $settings[ 'post_type' ] === 'source_dynamic' && is_archive() || !empty($_REQUEST['post_type'])) {
-            $settings[ 'posts_per_page' ] = $settings[ 'eael_product_gallery_products_count' ] ?: 4;
+            $settings[ 'posts_per_page' ] = $settings[ 'eael_product_gallery_products_count' ] ?: 3;
             $settings[ 'offset' ]         = $settings[ 'product_offset' ];
             $args                         = HelperClass::get_query_args( $settings );
             $args                         = HelperClass::get_dynamic_args( $settings, $args );
@@ -2375,7 +2367,6 @@ class Woo_Product_Gallery extends Widget_Base
                         echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="' . $settings["eael_product_gallery_items_layout"] . '">';
                         while ($query->have_posts()) {
                             $query->the_post();
-//                            include($template);
 	                        HelperClass::eael_product_gallery( $settings);
                         }
                         wp_reset_postdata();
@@ -2541,7 +2532,7 @@ class Woo_Product_Gallery extends Widget_Base
 	    echo '<ul class="eael-cat-tab" data-layout="'.$settings["eael_product_gallery_items_layout"].'" data-template=' . json_encode(['dir'   => $dir_name, 'file_name' =>
                 $this->get_filename_only($template), 'name' => $this->process_directory_name()], 1) . '  data-nonce="'.wp_create_nonce( 'eael_product_gallery' ).'" data-page-id="'.$this->page_id.'" data-widget-id="'.$this->get_id().'" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-page="1">';
 
-	    echo '<li><a href="javascript:;" data-apage="1" data-terms='. json_encode($product_cats). ' class="active post-list-filter-item post-list-cat-'
+	    echo '<li><a href="javascript:;" data-page="1" data-terms='. json_encode($product_cats). ' class="active post-list-filter-item post-list-cat-'
 	         . $this->get_id() . '">' . __($settings['eael_woo_product_gallery_terms_all_text'], 'essential-addons-for-elementor-lite') . '</a></li>';
 
 	    // Category retrive
@@ -2565,7 +2556,7 @@ class Woo_Product_Gallery extends Widget_Base
 				    $show_cat_thumb_tag = '';
 			    }
 
-			    echo '<li><a href="javascript:;" data-apage="1" data-terms='.json_encode([$category->slug]).' data-id="'
+			    echo '<li><a href="javascript:;" data-page="1" data-terms='.json_encode([$category->slug]).' data-id="'
 			         .$category->term_id.'" class="post-list-filter-item ">'.$show_cat_thumb_tag.'' .$category->name.'</a></li>';
 		    }
 	    }
