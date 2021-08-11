@@ -1538,6 +1538,22 @@ class Woo_Product_Gallery extends Widget_Base
             ]
         );
 
+	    $this->add_control(
+		    'eael_product_gallery_sale_text',
+		    [
+			    'label'       => esc_html__( 'Sale Text', 'essential-addons-for-elementor-lite' ),
+			    'type'        => Controls_Manager::TEXT,
+			    'separator' => 'before',
+		    ]
+	    );
+	    $this->add_control(
+		    'eael_product_gallery_stockout_text',
+		    [
+			    'label'       => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
+			    'type'        => Controls_Manager::TEXT,
+		    ]
+	    );
+
         $this->end_controls_section();
     }
 
