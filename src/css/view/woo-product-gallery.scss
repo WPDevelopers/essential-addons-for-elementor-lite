@@ -1562,6 +1562,11 @@
     }
 }
 
+// hide-load-more
+.eael-load-more-button.hide-load-more {
+    display: none !important;
+}
+
 //----Responsive -------
 @media only screen and (min-width: 1025px) {
     .eael-product-gallery-column-1 .eael-product-gallery .woocommerce ul.products {
