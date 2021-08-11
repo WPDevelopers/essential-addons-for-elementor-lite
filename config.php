@@ -938,7 +938,7 @@ $config = [
 			    ],
 			    'js'  => [
 				    [
-					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/quick-view.js',
+					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/quick-view.min.js',
 					    'type' => 'self',
 					    'context' => 'view',
 				    ],
