@@ -129,7 +129,7 @@ class Adv_Tabs extends Widget_Base
         $repeater->add_control(
             'eael_adv_tabs_tab_show_as_default',
             [
-                'label' => __('Set as Default', 'essential-addons-for-elementor-lite'),
+                'label' => __('Active as Default', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'inactive',
                 'return_value' => 'active-default',

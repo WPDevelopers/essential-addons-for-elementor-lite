@@ -775,7 +775,7 @@ msgstr ""
 msgid "Content Settings"
 msgstr ""
 
-#: ../includes/Elements/Adv_Accordion.php:204
+#: ../includes/Elements/Adv_Accordion.php:204, ../includes/Elements/Adv_Tabs.php:132
 msgid "Active as Default"
 msgstr ""
 
@@ -909,10 +909,6 @@ msgstr ""
 
 #: ../includes/Elements/Adv_Tabs.php:108, ../includes/Elements/Contact_Form_7.php:831, ../includes/Elements/Countdown.php:85, ../includes/Elements/Login_Register.php:3131, ../includes/Elements/Login_Register.php:3431
 msgid "Inline"
-msgstr ""
-
-#: ../includes/Elements/Adv_Tabs.php:132
-msgid "Set as Default"
 msgstr ""
 
 #: ../includes/Elements/Adv_Tabs.php:142, ../includes/Elements/Feature_List.php:74, ../includes/Elements/Flip_Box.php:197, ../includes/Elements/Flip_Box.php:426

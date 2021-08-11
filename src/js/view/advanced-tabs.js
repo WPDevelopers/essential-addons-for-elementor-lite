@@ -7,7 +7,6 @@ ea.hooks.addAction("init", "ea", () => {
 			let hashTag = window.location.hash.substr(1);
 			
 			$($currentTabId + ' > .eael-tabs-nav ul li', $scope).each(function (index) {
-				console.log("test 1");
 				if (hashTag) {
 					if ($(this).attr("id") == hashTag) {
 						$(this).removeClass("inactive").addClass("active");
@@ -17,7 +16,7 @@ ea.hooks.addAction("init", "ea", () => {
 						$($currentTabId + ' .eael-tabs-nav > ul li', $scope)
 						.removeClass("active")
 						.addClass("inactive");
-						$(this).removeClass("inactive");
+						$(this).removeClass("inactive").addClass('active');
 					} else {
 						if (index == 0) {
 							$(this).removeClass("inactive").addClass("active");
@@ -34,6 +33,7 @@ ea.hooks.addAction("init", "ea", () => {
 				} else {
 					if ($(this).hasClass("active-default")) {
 						$($currentTabId + ' > .eael-tabs-content > div', $scope).removeClass("active");
+						$(this).removeClass("inactive").addClass("active");
 					} else {
 						if (index == 0) {
 							$(this).removeClass("inactive").addClass("active");
