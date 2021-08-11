@@ -895,14 +895,11 @@ trait Helper
 	 */
 	public function ajax_eael_product_gallery(){
 
-
 		//check nonce
 //		check_ajax_referer( 'essential-addons-elementor', 'security' );
 
 		parse_str($_POST['args'], $args);
-
 		$widget_id  = sanitize_key( $_POST[ 'widget_id' ] );
-//		$product_id = absint( $_POST[ 'product_id' ] );
 		$page_id    = absint( $_POST[ 'page_id' ] );
 
 		if ( $widget_id == '' && $page_id == '' ) {
@@ -914,12 +911,8 @@ trait Helper
 //		$post    = get_post( $product_id );
 //		setup_postdata( $post );
 
-
 		$settings = $this->eael_get_widget_settings( $page_id, $widget_id );
-
 		$settings['eael_widget_id'] = $widget_id;
-		$html = '';
-		$class = '\\' . str_replace( '\\\\', '\\', $_REQUEST[ 'class' ] );
 		$args[ 'offset' ] = (int)$args[ 'offset' ] + ( ( (int)$_REQUEST[ 'page' ] - 1 ) * (int)$args[ 'posts_per_page' ] );
 
 		if ( isset( $_REQUEST[ 'taxonomy' ] ) && isset($_REQUEST[ 'taxonomy' ][ 'taxonomy' ]) && $_REQUEST[ 'taxonomy' ][ 'taxonomy' ] != 'all' ) {
@@ -928,30 +921,19 @@ trait Helper
 			];
 		}
 
-		$link_settings = [
-			'image_link_nofollow' => $settings['image_link_nofollow'] ? 'rel="nofollow"' : '',
-			'image_link_target_blank' => $settings['image_link_target_blank'] ? 'target="_blank"' : '',
-			'title_link_nofollow' => $settings['title_link_nofollow'] ? 'rel="nofollow"' : '',
-			'title_link_target_blank' => $settings['title_link_target_blank'] ? 'target="_blank"' : '',
-			'read_more_link_nofollow' => $settings['read_more_link_nofollow'] ? 'rel="nofollow"' : '',
-			'read_more_link_target_blank' => $settings['read_more_link_target_blank'] ? 'target="_blank"' : '',
-		];
-
 		$template_info = $_REQUEST['template_info'];
 		$this->set_widget_name( $template_info['name'] );
 		$template = $this->get_template( $template_info['file_name'] );
 
-//		echo $template;
 		ob_start();
 		$query = new \WP_Query( $args );
 		if ( $query->have_posts() ) {
 			while ( $query->have_posts() ) {
 				$query->the_post();
-//				include( $template );
 				HelperClass::eael_product_gallery( $settings);
 			}
 		} else {
-			echo 'fail';
+			echo 'fail gallery ajax';
 		}
 		echo ob_get_clean();
 		wp_die();
