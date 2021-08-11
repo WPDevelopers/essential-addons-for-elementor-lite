@@ -33,6 +33,28 @@
 			nonce: $nonce,
 			template_info: $template_info,
 		};
+
+		if ( $data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery" ) {
+
+			const $taxonomy = {
+				taxonomy: 'product_cat',
+				field: 'slug',
+				terms: $('.eael-cat-tab li a.active', $scope).data('terms'),
+			};
+			const eael_cat_tab = localStorage.getItem('eael-cat-tab');
+
+			if( eael_cat_tab == 'true') {
+				localStorage.removeItem('eael-cat-tab');
+				 var $apage = 1 + 1;
+
+			} else {
+				 var $apage = parseInt($('.eael-cat-tab li a.active', $scope).data("apage")) + 1;
+			}
+
+			$data.taxonomy = $taxonomy;
+			$data.page = $apage;
+		}
+
 		String($args)
 			.split("&")
 			.forEach(function (item, index) {
@@ -68,12 +90,14 @@
 					$content.hasClass("no-posts-found") ||
 					$content.length === 0
 				) {
-					console.log('load mor');
+					if ( $data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery" ) {
+						$this.removeClass('button--loading').addClass('hide-load-more');
+						$LoaderSpan.html($text)
+					} else {
+						$this.remove();
+					}
 
-					$this.remove();
 				} else {
-
-
 					if (
 						$data.class ==
 						"Essential_Addons_Elementor\\Elements\\Product_Grid"
@@ -142,7 +166,11 @@
 					$this.removeClass("button--loading");
 					$LoaderSpan.html($text);
 
-					$this.data("page", $page);
+					if ( $data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery" ) {
+						$('.eael-cat-tab li a.active', $scope).data("apage", $apage);
+					} else {
+						$this.data("page", $page);
+					}
 				}
 			},
 			error: function (response) {

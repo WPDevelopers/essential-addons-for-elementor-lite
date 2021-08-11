@@ -9,6 +9,7 @@ ea.hooks.addAction("init", "ea", () => {
 			$('.eael-cat-tab li a', $scope).removeClass('active');
 			$this.addClass('active');
 
+			localStorage.setItem('eael-cat-tab', 'true');
 			// collect props
 			const $class = $post_cat_wrap.data('class'),
 				$widget_id = $post_cat_wrap.data("widget"),
@@ -57,8 +58,9 @@ ea.hooks.addAction("init", "ea", () => {
 							.empty()
 							.append($content);
 
-						if ($layout == "masonry") {
+						$('.eael-load-more-button', $scope).removeClass('hide-load-more');
 
+						if ($layout == "masonry") {
 							var $products = $('.eael-product-gallery .products', $scope);
 
 							// init isotope
@@ -75,8 +77,9 @@ ea.hooks.addAction("init", "ea", () => {
 							$(window).on('resize', function() {
 								$isotope_products.isotope('layout');
 							});
-
 						}
+
+
 					}
 				},
 				complete: function () {

@@ -5,7 +5,7 @@
  */
 
 use \Essential_Addons_Elementor\Classes\Helper;
-use Essential_Addons_Elementor\Elements\Product_Grid;
+use Essential_Addons_Elementor\Elements\Woo_Product_Gallery;
 use \Elementor\Group_Control_Image_Size;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -44,7 +44,7 @@ $quick_view_setting = [
 ];
 
 if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
-    if ( $gallery_style_preset == 'eael-product-simple' ) { ?>
+    if ( $gallery_style_preset == 'eael-product-preset-4' ) { ?>
         <li class="product">
             <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                 <?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ) );
@@ -68,7 +68,7 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
             ?>
         </li>
         <?php
-    } else if (($gallery_style_preset == 'eael-product-preset-6') || ($gallery_style_preset == 'eael-product-preset-7')) {
+    } else if (($gallery_style_preset == 'eael-product-preset-3') || ($gallery_style_preset == 'eael-product-preset-2')) {
             ?>
             <li <?php post_class( 'product' ); ?>>
                 <div class="eael-product-wrap">
@@ -80,22 +80,7 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                             ?>
                         </div>
                         <div class="image-hover-wrap">
-                            <?php if($gallery_style_preset == 'eael-product-preset-5'){ ?>
-                                <ul class="icons-wrap block-style">
-                                    <?php if( $should_print_quick_view ){?>
-                                        <li class="eael-product-quick-view">
-                                            <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                               class="eael-product-gallery-open-popup">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                        </li>
-                                    <?php } ?>
-                                    <li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart();
-                                        ?></li>
-                                    <li class="view-details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
-
-                                </ul>
-                            <?php } elseif ($gallery_style_preset == 'eael-product-preset-7') { ?>
+                            <?php if ($gallery_style_preset == 'eael-product-preset-2') { ?>
                                 <ul class="icons-wrap block-box-style">
                                     <li class="add-to-cart"><?php
                                         woocommerce_template_loop_add_to_cart(); ?></li>
@@ -130,7 +115,7 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                     </div>
                     <div class="product-details-wrap">
                         <?php
-                        if(($gallery_style_preset == 'eael-product-preset-7') && $should_print_price ){
+                        if(($gallery_style_preset == 'eael-product-preset-2') && $should_print_price ){
                             echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
                         }
 
@@ -142,7 +127,7 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                         <div class="eael-product-title">
                            <?php printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title()); ?>
                         </div>
-                        <?php if(($gallery_style_preset != 'eael-product-preset-7') && $should_print_price ){
+                        <?php if(($gallery_style_preset != 'eael-product-preset-2') && $should_print_price ){
                             echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
                         }?>
                     </div>
