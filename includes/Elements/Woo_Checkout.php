@@ -2140,6 +2140,92 @@ class Woo_Checkout extends Widget_Base {
 
 		$this->end_controls_section();
 
+		if( true ) {
+			$this->start_controls_section(
+				'ea_section_woo_checkout_pickup_point_style',
+				[
+					'label' => esc_html__( 'Pickup Point', 'essential-addons-for-elementor-lite' ),
+					'tab' => Controls_Manager::TAB_STYLE,
+				]
+			);
+
+			$this->add_control(
+				'ea_woo_checkout_pickup_point_title_color',
+				[
+					'label' => esc_html__( 'Title Color', 'essential-addons-for-elementor-lite' ),
+					'type' => Controls_Manager::COLOR,
+					'default' => '#ffffff',
+					'selectors' => [
+						'.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment .carrier-agents-postcode-search #carrier-agent-heading' => 'color: {{VALUE}};',
+					],
+				]
+			);
+
+			$this->start_controls_tabs('ea_woo_checkout_pickup_point_tabs');
+			$this->start_controls_tab('ea_woo_checkout_pickup_point_tab_normal', ['label' => __('Normal', 'essential-addons-for-elementor')]);
+
+			$this->add_control('ea_woo_checkout_pickup_point_btn_bg_color', [
+				'label' => __('Background Color', 'essential-addons-for-elementor'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#7866ff',
+				'selectors' => [
+					'{{WRAPPER}} .woo-checkout-payment .carrier-agents-postcode-search .woo-carrier-agents-postcode-input-wrapper #woo-carrier-agents-search-button' => 'background-color: {{VALUE}};',
+				],
+			]);
+
+			$this->add_control('ea_woo_checkout_pickup_point_btn_color', [
+				'label' => __('Color', 'essential-addons-for-elementor'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .woo-checkout-payment .carrier-agents-postcode-search .woo-carrier-agents-postcode-input-wrapper #woo-carrier-agents-search-button' => 'color: {{VALUE}};',
+				],
+			]);
+
+			$this->add_group_control(Group_Control_Border::get_type(), [
+				'name' => 'ea_woo_checkout_pickup_point_btn_border',
+				'selector' => '{{WRAPPER}} .woo-checkout-payment .carrier-agents-postcode-search .woo-carrier-agents-postcode-input-wrapper #woo-carrier-agents-search-button',
+			]);
+
+			$this->end_controls_tab();
+
+			$this->start_controls_tab('ea_woo_checkout_pickup_point_tab_hover', ['label' => __('Hover', 'essential-addons-for-elementor')]);
+
+			$this->add_control('ea_woo_checkout_pickup_point_btn_bg_color_hover', [
+				'label' => __('Background Color', 'essential-addons-for-elementor'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#7866ff',
+				'selectors' => [
+					'{{WRAPPER}} .woo-checkout-payment .carrier-agents-postcode-search .woo-carrier-agents-postcode-input-wrapper #woo-carrier-agents-search-button:hover' => 'background-color: {{VALUE}};',
+				],
+			]);
+
+			$this->add_control('ea_woo_checkout_pickup_point_btn_color_hover', [
+				'label' => __('Color', 'essential-addons-for-elementor'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .woo-checkout-payment .carrier-agents-postcode-search .woo-carrier-agents-postcode-input-wrapper #woo-carrier-agents-search-button:hover' => 'color: {{VALUE}};',
+				],
+			]);
+
+			$this->add_control('ea_woo_checkout_pickup_point_btn_border_color_hover', [
+				'label' => __('Border Color', 'essential-addons-for-elementor'),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .woo-checkout-payment .carrier-agents-postcode-search .woo-carrier-agents-postcode-input-wrapper #woo-carrier-agents-search-button:hover' => 'border-color: {{VALUE}};',
+				],
+				'condition' => [
+					'ea_woo_checkout_pickup_point_btn_border_border!' => '',
+				],
+			]);
+
+			$this->end_controls_tab();
+			$this->end_controls_tabs();
+
+			$this->end_controls_section();
+		}
+
 		/**
 		 * -------------------------------------------
 		 * Tab Style Payment
@@ -2581,6 +2667,12 @@ class Woo_Checkout extends Widget_Base {
 		 */
 		$this->eael_forcefully_remove_action( 'woocommerce_before_checkout_form', 'move_coupon', 10 );
 		$this->eael_forcefully_remove_action( 'woocommerce_before_checkout_billing_form', 'clear_coupon', 10 );
+
+		if ( class_exists( '\Woo_Carrier_Agents' ) ) {
+			$this->eael_forcefully_remove_action( 'woocommerce_checkout_order_review', 'add_carrier_agent_field_before_payment', 15 );
+			$wca = new \Woo_Carrier_Agents();
+			add_action( 'eael_wc_multistep_checkout_after_shipping', [ $wca, 'add_carrier_agent_field_before_payment' ], 10, 0 );
+		}
 
         $settings = $this->get_settings_for_display();
 
