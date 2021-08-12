@@ -7,6 +7,53 @@ const QuickView = {
                				 </div>`;
 		jq('body').prepend(popupMarkup);
 	},
+	
+	openPopup:($scope, $)=>{
+		// Quick view
+		$scope.on("click", ".open-popup-link", function (e) {
+			e.preventDefault();
+			e.stopPropagation();
+			const $this = $(this);
+			const quickview_setting = $this.data('quickview-setting');
+			const popup_view = $(".eael-woocommerce-popup-view");
+			popup_view.find(".eael-popup-details-render").html('<div class="eael-preloader"></div>')
+			popup_view
+			.addClass("eael-product-popup-ready")
+			.removeClass("eael-product-modal-removing");
+			popup_view.show();
+			$.ajax({
+			       url: localize.ajaxurl,
+			       type: "post",
+			       data: {
+				       action: "eael_product_quickview_popup",
+				       ...quickview_setting,
+				       security: localize.nonce
+			       },
+			       success: function (response) {
+				       if (response.success) {
+					       const product_preview = $(response.data);
+					       const popup_details = product_preview.children(".eael-product-popup-details");
+					
+					       popup_details.find(".variations_form").wc_variation_form()
+					       const popup_view_render = popup_view.find(".eael-popup-details-render");
+					
+					       popup_view.find(".eael-popup-details-render").html(popup_details);
+					       const product_gallery = popup_view.find(".woocommerce-product-gallery");
+					       product_gallery.css("opacity",1);
+					       popup_view_render.addClass("elementor-" + quickview_setting.page_id)
+					       popup_view_render.children().addClass("elementor-element elementor-element-" + quickview_setting.widget_id)
+					
+					       if (popup_details.height() > 400) {
+						       popup_details.css("height", "75vh");
+					       } else {
+						       popup_details.css("height", "auto");
+					       }
+					       setTimeout(function(){ product_gallery.wc_product_gallery(); }, 1000);
+				       }
+			       },
+		       });
+		});
+	},
 	closePopup: ($scope, jq) => {
 		
 		jq(document).on("click", ".eael-product-popup-close", function (event) {
@@ -113,6 +160,7 @@ const QuickView = {
 }
 
 ea.hooks.addAction('quickViewAddMarkup', 'ea', QuickView.quickViewAddMarkup, 10);
+ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.openPopup, 10);
 ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.closePopup, 10);
 ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.singlePageAddToCartButton, 10);
 ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.preventStringInNumberField, 10);
