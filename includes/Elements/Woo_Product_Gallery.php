@@ -522,11 +522,6 @@ class Woo_Product_Gallery extends Widget_Base
             ]
         );
 
-        $this->add_control('show_compare', [
-            'label' => esc_html__('Show Product Compare?', 'essential-addons-for-elementor-lite'),
-            'type' => Controls_Manager::SWITCHER,
-        ]);
-
         $this->end_controls_section();
     }
 
@@ -1678,7 +1673,6 @@ class Woo_Product_Gallery extends Widget_Base
                 'default' => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-gallery .eael-product-wrap .icons-wrap li a' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-compare-icon' => 'fill: {{VALUE}};',
                 ],
             ]
         );
