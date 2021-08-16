@@ -187,17 +187,17 @@ class Woo_Product_Gallery extends Widget_Base
 	        ]
         );
 	    
-	    $this->add_control(
-		    'eael_woo_product_gallery_terms',
-		    [
-			    'label' => __('Show Category Gallery', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::SWITCHER,
-			    'default' => 'yes',
-			    'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
-			    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
-			    'return_value' => 'yes',
-		    ]
-	    );
+//	    $this->add_control(
+//		    'eael_woo_product_gallery_terms',
+//		    [
+//			    'label' => __('Show Category Gallery', 'essential-addons-for-elementor-lite'),
+//			    'type' => Controls_Manager::SWITCHER,
+//			    'default' => 'yes',
+//			    'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+//			    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+//			    'return_value' => 'yes',
+//		    ]
+//	    );
 
 	    $this->add_control(
 		    'eael_product_gallery_terms_position',
@@ -209,9 +209,9 @@ class Woo_Product_Gallery extends Widget_Base
 				    'eael-terms-layout-horizontal' => __( 'Horizontal', 'essential-addons-for-elementor-lite' ),
 				    'eael-terms-layout-vertical' => __( 'Vertical', 'essential-addons-for-elementor-lite' ),
 			    ],
-			    'condition' => [
-				    'eael_woo_product_gallery_terms' => 'yes',
-			    ],
+//			    'condition' => [
+//				    'eael_woo_product_gallery_terms' => 'yes',
+//			    ],
 		    ]
 	    );
 
@@ -240,7 +240,7 @@ class Woo_Product_Gallery extends Widget_Base
 				    '{{WRAPPER}} .eael-product-gallery .eael-cat-tab' => 'align-self: {{VALUE}};',
 			    ],
 			    'condition' => [
-				    'eael_woo_product_gallery_terms' => 'yes',
+//				    'eael_woo_product_gallery_terms' => 'yes',
 				    'eael_product_gallery_terms_position' => 'eael-terms-layout-horizontal',
 			    ],
 		    ]
@@ -267,7 +267,7 @@ class Woo_Product_Gallery extends Widget_Base
 				    '{{WRAPPER}} .eael-product-gallery' => 'flex-direction: {{VALUE}};',
 			    ],
 			    'condition' => [
-				    'eael_woo_product_gallery_terms' => 'yes',
+//				    'eael_woo_product_gallery_terms' => 'yes',
 				    'eael_product_gallery_terms_position' => 'eael-terms-layout-vertical',
 			    ],
 		    ]
@@ -281,9 +281,9 @@ class Woo_Product_Gallery extends Widget_Base
 			    'dynamic' => [ 'active' => true ],
 			    'label_block' => false,
 			    'default' => esc_html__('All', 'essential-addons-for-elementor-lite'),
-			    'condition' => [
-				    'eael_woo_product_gallery_terms' => 'yes',
-			    ],
+//			    'condition' => [
+//				    'eael_woo_product_gallery_terms' => 'yes',
+//			    ],
 		    ]
 	    );
 
@@ -297,9 +297,9 @@ class Woo_Product_Gallery extends Widget_Base
 			    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
 			    'return_value' => 'yes',
 			    'description' => __('Display thumbnail if a category has a thumbnail.', 'essential-addons-for-elementor-lite'),
-			    'condition' => [
-				    'eael_woo_product_gallery_terms' => 'yes',
-			    ],
+//			    'condition' => [
+//				    'eael_woo_product_gallery_terms' => 'yes',
+//			    ],
 		    ]
 	    );
 
@@ -1166,9 +1166,9 @@ class Woo_Product_Gallery extends Widget_Base
 			[
 				'label' => esc_html__('Gallery Styles', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
-				'condition' => [
-					'eael_woo_product_gallery_terms' => 'yes',
-				],
+//				'condition' => [
+//					'eael_woo_product_gallery_terms' => 'yes',
+//				],
 			]
 		);
 
@@ -2381,17 +2381,17 @@ class Woo_Product_Gallery extends Widget_Base
             'data-nonce' => wp_create_nonce('eael_product_gallery'),
         ]);
 
-	    if ( $settings['eael_woo_product_gallery_terms'] === 'yes') {
+//	    if ( $settings['eael_woo_product_gallery_terms'] === 'yes') {
 		    $this->add_render_attribute( 'wrap', 'class', $settings['eael_product_gallery_terms_position'] );
-	    }
+//	    }
 
         ?>
 
         <div <?php $this->print_render_attribute_string('wrap'); ?> >
 	        <?php
-	        if ($settings['eael_woo_product_gallery_terms'] === 'yes') {
+//	        if ($settings['eael_woo_product_gallery_terms'] === 'yes') {
 		        $this->eael_product_terms_render($settings, $args);
-	        }
+//	        }
 	        ?>
 
             <div class="woocommerce">
