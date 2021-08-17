@@ -9,11 +9,17 @@
             align-self: center;
             margin: 0 0 50px 0;
 
+            //li:only-child {
+            //    border-radius: 5px;
+            //}
+            //
             li:first-child a {
-                border-radius: 5px 0 0 5px;
+                //border-radius: 5px 0 0 5px;
+                margin-left: 0;
             }
             li:last-child a {
-                border-radius: 0 5px 5px 0;
+                //border-radius: 0 5px 5px 0;
+                margin-right: 0;
             }
 
             img {
@@ -44,10 +50,12 @@
             }
 
             li:first-child a {
-                border-radius: 5px 5px 0 0;
+                //border-radius: 5px 5px 0 0;
+                margin-top: 0;
             }
             li:last-child a {
-                border-radius: 0 0 5px 5px;
+                //border-radius: 0 0 5px 5px;
+                margin-bottom: 0;
             }
 
             a {
@@ -66,7 +74,7 @@
         margin: 0;
         padding: 0;
         justify-content: center;
-        background: #f8f6ff;
+        //background: #f8f6ff;
         width: max-content;
         border-radius: 5px;
 
@@ -75,14 +83,16 @@
         }
 
         a {
-            padding: 20px 40px;
+            padding: 20px 30px;
             display: block;
-            margin: 0;
+            //margin: 0;
             background-color: #f8f6ff;
             color: #7d7a94;
             font-size: 20px;
             line-height: 1.2em;
             font-weight: 600;
+            border-radius: 5px;
+            margin: 3px;
 
             &:hover,
             &.active {
