@@ -436,6 +436,11 @@ trait Helper
     }
 
     public function select2_ajax_get_posts_value_titles() {
+
+	    if ( empty( $_POST[ 'id' ] ) ) {
+		    wp_send_json_error( [] );
+	    }
+        error_log(print_r($_POST[ 'id' ],1));
         if ( empty( array_filter($_POST[ 'id' ]) ) ) {
             wp_send_json_error( [] );
         }
