@@ -1315,7 +1315,7 @@
                         }
 
                         &.added_to_cart {
-                            font-size: 0;
+                            font-size: 0 !important;
 
                             &:after {
                                 content: '\f217';
@@ -1333,7 +1333,7 @@
                         &.button.add_to_cart_button {
                             padding: 0;
                             margin: 3px;
-                            font-size: 0px;
+                            font-size: 0px !important;
 
                             &:before {
                                 content: "\f07a";
@@ -1385,7 +1385,7 @@
                         }
 
                         &.added_to_cart {
-                            font-size: 0;
+                            font-size: 0 !important;
 
                             &:after {
                                 content: '\f217';
@@ -1404,7 +1404,7 @@
                         &.button.add_to_cart_button {
                             padding: 0;
                             margin: 0;
-                            font-size: 0px;
+                            font-size: 0px !important;
 
                             &:before {
                                 content: "\f07a";
@@ -1460,7 +1460,7 @@
                         }
 
                         &.added_to_cart {
-                            font-size: 0;
+                            font-size: 0 !important;
 
                             &:after {
                                 content: '\f217';
@@ -1478,7 +1478,7 @@
                         &.button.add_to_cart_button {
                             padding: 0;
                             margin: 10px 2px 0;
-                            font-size: 0px;
+                            font-size: 0px !important;
 
                             &:before {
                                 content: "\f07a";
