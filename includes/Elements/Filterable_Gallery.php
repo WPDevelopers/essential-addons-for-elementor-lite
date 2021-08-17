@@ -2776,7 +2776,7 @@ class Filterable_Gallery extends Widget_Base
             <div class="eael-filter-gallery-control">
                 <ul><?php
                     if ($settings['eael_fg_all_label_text']) {
-                        ?><li data-load-more-status="0" class="control all-control active" data-filter="*"><?php echo $all_text; ?></li><?php
+                        ?><li data-load-more-status="0" data-first-init="1" class="control all-control active" data-filter="*"><?php echo $all_text; ?></li><?php
                     }
 
                     foreach ($settings['eael_fg_controls'] as $key => $control) :
