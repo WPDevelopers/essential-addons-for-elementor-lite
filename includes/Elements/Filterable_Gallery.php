@@ -3425,16 +3425,51 @@ class Filterable_Gallery extends Widget_Base
                     // filter
                     $scope.on("click", ".control", function() {
                         var $this = $(this);
+	                    const firstInit = parseInt($this.data('first-init'));
                         buttonFilter = $(this).attr('data-filter');
-                        //delegateAbc = $(this).attr('data-filter') + ' a.eael-magnific-link';
 
                         if ($scope.find('#fg-filter-trigger > span')) {
                             $scope.find('#fg-filter-trigger > span').text($this.text());
                         }
 
+	                    if(!firstInit){
+		                    $this.data('first-init', 1);
+		                    let item_found = 0;
+		                    let index_list = $items =  [];
+		                    for (const [index, item] of fg_items.entries()){
+			                    if (buttonFilter !== '' && buttonFilter !== '*') {
+				                    let element = $($(item)[0]);
+				                    if (element.is(buttonFilter)) {
+					                    ++item_found;
+					                    $items.push($(item)[0]);
+					                    index_list.push(index);
+				                    }
+			                    }
+
+			                    if (item_found === $init_show_setting) {
+				                    break;
+			                    }
+		                    }
+
+		                    if(index_list.length>0){
+			                    fg_items = fg_items.filter(function (item, index){
+				                    return !index_list.includes(index);
+			                    });
+		                    }
+	                    }
+
                         $this.siblings().removeClass("active");
                         $this.addClass("active");
-                        $isotope_gallery.isotope();
+	                    if (!firstInit && $items.length > 0) {
+		                    $gallery.append($items);
+		                    $isotope_gallery.isotope('appended', $items);
+		                    $isotope_gallery.isotope({filter: buttonFilter});
+		                    $isotope_gallery.imagesLoaded().progress(function () {
+			                    $isotope_gallery.isotope("layout");
+		                    });
+	                    } else {
+		                    $isotope_gallery.isotope({filter: buttonFilter});
+	                    }
                     });
 
                     //quick search
@@ -3463,8 +3498,8 @@ class Filterable_Gallery extends Widget_Base
 					$scope.on("click", ".eael-gallery-load-more", function (e) {
 						e.preventDefault();
 						var $this            = $(this),
-							$init_show       = $(".eael-filter-gallery-container", $scope).children(".eael-filterable-gallery-item-wrap").length,
-							$total_items     = $gallery.data("total-gallery-items"),
+							// $init_show       = $(".eael-filter-gallery-container", $scope).children(".eael-filterable-gallery-item-wrap").length,
+							// $total_items     = $gallery.data("total-gallery-items"),
 							$images_per_page = $gallery.data("images-per-page"),
 							$nomore_text     = $gallery.data("nomore-item-text"),
 							filter_enable = $(".eael-filter-gallery-control",$scope).length,
