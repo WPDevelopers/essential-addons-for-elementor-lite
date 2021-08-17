@@ -221,7 +221,7 @@ class Woo_Product_Gallery extends Widget_Base
 			    'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::CHOOSE,
 			    'options' => [
-				    'flex-start' => [
+				    'left' => [
 					    'title' => __('Left', 'essential-addons-for-elementor-lite'),
 					    'icon' => 'fa fa-align-left',
 				    ],
@@ -229,7 +229,7 @@ class Woo_Product_Gallery extends Widget_Base
 					    'title' => __('Center', 'essential-addons-for-elementor-lite'),
 					    'icon' => 'fa fa-align-center',
 				    ],
-				    'flex-end' => [
+				    'right' => [
 					    'title' => __('Right', 'essential-addons-for-elementor-lite'),
 					    'icon' => 'fa fa-align-right',
 				    ],
@@ -237,7 +237,7 @@ class Woo_Product_Gallery extends Widget_Base
 			    'default' => 'center',
 			    'toggle' => true,
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-product-gallery .eael-cat-tab' => 'align-self: {{VALUE}};',
+				    '{{WRAPPER}} .eael-product-gallery .eael-cat-tab' => 'text-align: {{VALUE}};',
 			    ],
 			    'condition' => [
 //				    'eael_woo_product_gallery_terms' => 'yes',
