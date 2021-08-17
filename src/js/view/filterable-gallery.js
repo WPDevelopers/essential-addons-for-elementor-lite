@@ -82,6 +82,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 			$scope.on("click", ".control", function () {
 				var $this    = $(this);
 				buttonFilter = $(this).attr("data-filter");
+				let initData = $(".eael-filter-gallery-container .eael-filterable-gallery-item-wrap"+buttonFilter,$scope).length;
 				let $tspan = $scope.find("#fg-filter-trigger > span");
 				if ($tspan.length) {
 					$tspan.text($this.text());
@@ -90,7 +91,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				
 				if(!firstInit){
 					$this.data('first-init', 1);
-					let item_found = 0;
+					let item_found = initData;
 					let index_list = $items =  [];
 					for (const [index, item] of fg_items.entries()){
 						if (buttonFilter !== '' && buttonFilter !== '*') {
