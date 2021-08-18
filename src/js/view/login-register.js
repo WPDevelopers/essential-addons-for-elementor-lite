@@ -17,7 +17,7 @@ ea.hooks.addAction("init", "ea", () => {
         const recaptchaAvailable = (typeof grecaptcha !== 'undefined' && grecaptcha !== null);
         const params = new URLSearchParams(location.search);
 
-        if ( loggedInLocation !== '' ) {
+        if ( loggedInLocation !== undefined && loggedInLocation !== '' ) {
             location.replace(loggedInLocation);
         }
         if ('form' === $regLinkAction.data('action')) {
