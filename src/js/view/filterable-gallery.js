@@ -103,7 +103,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 							}
 						}
 						
-						if (item_found === $init_show_setting) {
+						if (item_found === $images_per_page) {
 							break;
 						}
 					}
