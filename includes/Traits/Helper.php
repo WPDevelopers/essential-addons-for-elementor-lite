@@ -923,22 +923,37 @@ trait Helper
 		}
 
 		$template_info = $_REQUEST['template_info'];
-		$this->set_widget_name( $template_info['name'] );
-		$template = $this->get_template( $template_info['file_name'] );
 
-		ob_start();
-		$query = new \WP_Query( $args );
-		if ( $query->have_posts() ) {
-			while ( $query->have_posts() ) {
-				$query->the_post();
-				HelperClass::eael_product_gallery( $settings);
+		if ( $template_info ) {
+
+			if ( $template_info[ 'dir' ] === 'theme' ) {
+				$file_path = $this->retrive_theme_path();
+			} else if($template_info[ 'dir' ] === 'pro') {
+				$file_path = sprintf("%sincludes",EAEL_PRO_PLUGIN_PATH);
+			} else {
+				$file_path = sprintf("%sincludes",EAEL_PLUGIN_PATH);
 			}
-		} else {
-			echo 'fail gallery ajax';
-		}
-		echo ob_get_clean();
-		wp_die();
 
+			$file_path = sprintf(
+				'%s/Template/%s/%s',
+				$file_path,
+				$template_info[ 'name' ],
+				$template_info[ 'file_name' ]
+			);
+
+			if ( $file_path ) {
+				$query = new \WP_Query( $args );
+
+				if ( $query->have_posts() ) {
+
+					while ( $query->have_posts() ) {
+						$query->the_post();
+						echo HelperClass::include_with_variable( $file_path, [ 'settings' => $settings ] );
+					}
+				}
+			}
+		}
+		wp_die();
 	}
 	
 }
