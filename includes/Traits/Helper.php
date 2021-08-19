@@ -913,6 +913,7 @@ trait Helper
 
 		$settings = $this->eael_get_widget_settings( $page_id, $widget_id );
 		$settings['eael_widget_id'] = $widget_id;
+		$settings['eael_page_id'] = $page_id;
 		$args[ 'offset' ] = (int)$args[ 'offset' ] + ( ( (int)$_REQUEST[ 'page' ] - 1 ) * (int)$args[ 'posts_per_page' ] );
 
 		if ( isset( $_REQUEST[ 'taxonomy' ] ) && isset($_REQUEST[ 'taxonomy' ][ 'taxonomy' ]) && $_REQUEST[ 'taxonomy' ][ 'taxonomy' ] != 'all' ) {
