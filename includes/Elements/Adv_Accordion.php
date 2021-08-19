@@ -259,18 +259,20 @@ class Adv_Accordion extends Widget_Base
             ]
         );
 
-        $repeater->add_control(
-            'eael_primary_templates',
-            [
-                'name' => 'eael_primary_templates',
-                'label' => __('Choose Template', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'options' => Helper::get_elementor_templates(),
-                'condition' => [
-                    'eael_adv_accordion_text_type' => 'template',
-                ],
-            ]
-        );
+	    $repeater->add_control(
+		    'eael_primary_templates',
+		    [
+			    'name' => 'eael_primary_templates',
+			    'label' => __('Choose Template', 'essential-addons-for-elementor-lite'),
+			    'type' => 'eael-select2',
+			    'source_name' => 'post_type',
+			    'source_type' => 'elementor_library',
+			    'label_block' => true,
+			    'condition' => [
+				    'eael_adv_accordion_text_type' => 'template',
+			    ],
+		    ]
+	    );
 
         $repeater->add_control(
             'eael_adv_accordion_tab_content',
