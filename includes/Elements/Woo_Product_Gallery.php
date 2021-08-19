@@ -2408,7 +2408,7 @@ class Woo_Product_Gallery extends Widget_Base
                         echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="' . $settings["eael_product_gallery_items_layout"] . '">';
                         while ($query->have_posts()) {
                             $query->the_post();
-	                        HelperClass::eael_product_gallery( $settings);
+	                        include($template);
                         }
                         wp_reset_postdata();
                         echo '</ul>';
