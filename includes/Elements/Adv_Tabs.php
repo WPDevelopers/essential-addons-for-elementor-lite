@@ -221,6 +221,7 @@ class Adv_Tabs extends Widget_Base
                 'type' => 'eael-select2',
                 'source_name' => 'post_type',
                 'source_type' => 'elementor_library',
+                'label_block' => true,
                 'condition' => [
                     'eael_adv_tabs_text_type' => 'template',
                 ],
