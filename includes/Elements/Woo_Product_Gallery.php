@@ -292,7 +292,7 @@ class Woo_Product_Gallery extends Widget_Base
 		    [
 			    'label' => __('Show Category Thumbnail', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::SWITCHER,
-			    'default' => 'yes',
+			    'default' => 'no',
 			    'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
 			    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
 			    'return_value' => 'yes',
@@ -447,16 +447,16 @@ class Woo_Product_Gallery extends Widget_Base
             'default' => 0,
         ]);
 
-        $this->add_control('eael_product_gallery_categories', [
-            'label' => esc_html__('Product Categories', 'essential-addons-for-elementor-lite'),
-            'type' => Controls_Manager::SELECT2,
-            'label_block' => true,
-            'multiple' => true,
-            'options' => HelperClass::get_terms_list('product_cat', 'slug'),
-            'condition'   => [
-              'post_type!' => 'source_dynamic',
-            ],
-        ]);
+        $this->add_control(
+        'eael_product_gallery_categories', [
+                'label' => __('Product Categories', 'essential-addons-for-elementor-lite'),
+                'type' => 'eael-select2',
+                'source_name' => 'taxonomy',
+                'source_type' => 'product_cat',
+                'label_block' => true,
+                'multiple'    => true,
+            ]
+        );
 
         $this->add_control(
             'eael_product_gallery_dynamic_template',
@@ -2392,6 +2392,8 @@ class Woo_Product_Gallery extends Widget_Base
 //	        if ($settings['eael_woo_product_gallery_terms'] === 'yes') {
 		        $this->eael_product_terms_render($settings, $args);
 //	        }
+
+//            var_dump($args['tax_query']);
 	        ?>
 
             <div class="woocommerce">
@@ -2487,7 +2489,7 @@ class Woo_Product_Gallery extends Widget_Base
             $args['tax_query'] = [
                 [
                     'taxonomy' => 'product_cat',
-                    'field' => 'slug',
+                    'field' => 'term_id',
                     'terms' => $settings['eael_product_gallery_categories'],
                     'operator' => 'IN',
                 ],
@@ -2522,7 +2524,7 @@ class Woo_Product_Gallery extends Widget_Base
             if ($settings['eael_product_gallery_categories']) {
                 $args['tax_query'][] = [
                     'taxonomy' => 'product_cat',
-                    'field' => 'slug',
+                    'field' => 'term_id',
                     'terms' => $settings['eael_product_gallery_categories'],
                 ];
             }
@@ -2573,16 +2575,17 @@ class Woo_Product_Gallery extends Widget_Base
 	    echo '<ul class="eael-cat-tab" data-layout="'.$settings["eael_product_gallery_items_layout"].'" data-template=' . json_encode(['dir'   => $dir_name, 'file_name' =>
                 $this->get_filename_only($template), 'name' => $this->process_directory_name()], 1) . '  data-nonce="'.wp_create_nonce( 'eael_product_gallery' ).'" data-page-id="'.$this->page_id.'" data-widget-id="'.$this->get_id().'" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-page="1">';
 
-	    echo '<li><a href="javascript:;" data-page="1" data-terms='. json_encode($product_cats). ' class="active post-list-filter-item post-list-cat-'
+	    echo '<li><a href="javascript:;" data-page="1" data-id='. json_encode($product_cats). ' class="active post-list-filter-item post-list-cat-'
 	         . $this->get_id() . '">' . __($settings['eael_woo_product_gallery_terms_all_text'], 'essential-addons-for-elementor-lite') . '</a></li>';
+
+//	    var_dump($product_cats);
 
 	    // Category retrive
 	    $catargs = array(
-		    'orderby'    => 'name',
 		    'order'      => 'ASC',
 		    'hide_empty' => false,
-		    'slug'       => $product_cats,
-
+		    'include'       => $product_cats,
+		    'orderby'  => 'include',
 	    );
 	    $product_categories = get_terms( 'product_cat', $catargs);
 

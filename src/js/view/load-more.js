@@ -38,8 +38,8 @@
 
 			const $taxonomy = {
 				taxonomy: 'product_cat',
-				field: 'slug',
-				terms: $('.eael-cat-tab li a.active', $scope).data('terms'),
+				field: 'term_id',
+				terms: $('.eael-cat-tab li a.active', $scope).data('id'),
 			};
 			const eael_cat_tab = localStorage.getItem('eael-cat-tab');
 

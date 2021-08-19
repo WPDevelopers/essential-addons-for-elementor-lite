@@ -22,8 +22,8 @@ ea.hooks.addAction("init", "ea", () => {
 				$template_info = $post_cat_wrap.data('template'),
 				$taxonomy = {
 					taxonomy: 'product_cat',
-					field: 'slug',
-					terms: $('.eael-cat-tab li a.active', $scope).data('terms'),
+					field: 'term_id',
+					terms: $('.eael-cat-tab li a.active', $scope).data('id'),
 				};
 
 			// ajax
