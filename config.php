@@ -1006,6 +1006,11 @@ $config = [
 				        'context' => 'view',
 			        ],
 			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/quick-view.min.js',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+			        [
 				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-product-gallery.min.js',
 				        'type' => 'self',
 				        'context' => 'view',

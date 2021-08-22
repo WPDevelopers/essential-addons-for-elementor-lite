@@ -38,7 +38,6 @@ class Woo_Product_Gallery extends Widget_Base
 
 		if ( $is_type_instance && class_exists('woocommerce')) {
 		    $this->load_quick_view_asset();
-			add_filter( 'body_class', [$this, 'add_product_gallery_body_class'] );
 		}
 	}
 
@@ -98,28 +97,6 @@ class Woo_Product_Gallery extends Widget_Base
         ];
     }
 
-	/**
-	 * added custom markup for popup
-	 *
-	 * @param $classes
-	 * @return mixed
-	 */
-	public function add_product_gallery_body_class( $classes ) {
-		if ( !in_array( 'eael-woo-gallery', $classes ) ) {
-			add_action( 'wp_body_open', function () {
-				?>
-                <div style="display: none" class="eael-woocommerce-popup-view eael-product-popup eael-product-zoom-in
-                 woocommerce">
-                    <div class="eael-product-modal-bg"></div>
-                    <div class="eael-popup-details-render eael-woo-product-gallery-popup"><div
-                                class="eael-preloader"></div></div>
-                </div>
-				<?php
-			} );
-			$classes[] = 'eael-woo-gallery';
-		}
-		return $classes;
-	}
 
     protected function eael_get_product_orderby_options()
     {
