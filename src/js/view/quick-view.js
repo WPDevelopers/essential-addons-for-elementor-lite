@@ -5,7 +5,9 @@ const QuickView = {
                     			<div class="eael-product-modal-bg"></div>
                     			<div class="eael-popup-details-render eael-woo-slider-popup"><div class="eael-preloader"></div></div>
                				 </div>`;
-		jq('body').prepend(popupMarkup);
+		if (!jq('body > .eael-woocommerce-popup-view').length) {
+			jq('body').prepend(popupMarkup);
+		}
 	},
 	
 	openPopup:($scope, $)=>{
