@@ -90,7 +90,7 @@ $quick_view_setting = [
                                 <?php if( $should_print_quick_view ){?>
                                     <li class="eael-product-quick-view">
                                         <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                           class="eael-product-gallery-open-popup">
+                                           class="eael-product-gallery-open-popup open-popup-link">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </li>
@@ -105,7 +105,7 @@ $quick_view_setting = [
                                 <?php if( $should_print_quick_view ){?>
                                     <li class="eael-product-quick-view">
                                         <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                           class="eael-product-gallery-open-popup">
+                                           class="eael-product-gallery-open-popup open-popup-link">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </li>
@@ -159,7 +159,7 @@ $quick_view_setting = [
                             <?php if( $should_print_quick_view ){?>
                                 <li class="eael-product-quick-view">
                                     <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                       class="eael-product-gallery-open-popup">
+                                       class="eael-product-gallery-open-popup open-popup-link">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                 </li>
