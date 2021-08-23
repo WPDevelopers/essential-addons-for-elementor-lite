@@ -3031,7 +3031,6 @@ class Product_Grid extends Widget_Base
 
                 if (file_exists($template)) {
 	                $settings['eael_page_id'] = get_the_ID();
-	                var_dump($args['tax_query']);
                     $query = new \WP_Query($args);
                     if ($query->have_posts()) {
                         echo '<ul class="products" data-layout-mode="' . $settings["eael_product_grid_layout"] . '">';
