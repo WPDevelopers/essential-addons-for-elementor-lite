@@ -97,6 +97,22 @@ class Woo_Product_Gallery extends Widget_Base
         ];
     }
 
+	protected function init_content_wc_notice_controls() {
+		if ( ! function_exists( 'WC' ) ) {
+			$this->start_controls_section( 'eael_global_warning', [
+				'label' => __( 'Warning!', 'essential-addons-for-elementor-lite' ),
+			] );
+			$this->add_control( 'eael_global_warning_text', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => __( '<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.', 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'eael-warning',
+			] );
+			$this->end_controls_section();
+
+			return;
+		}
+	}
+
 
     protected function eael_get_product_orderby_options()
     {
@@ -126,6 +142,8 @@ class Woo_Product_Gallery extends Widget_Base
 
     protected function _register_controls()
     {
+	    $this->init_content_wc_notice_controls();
+
         if (!function_exists('WC')) {
             return;
         }
@@ -368,17 +386,6 @@ class Woo_Product_Gallery extends Widget_Base
                 ],
             ]
         );
-
-        if ( !apply_filters( 'eael/is_plugin_active', 'woocommerce/woocommerce.php' ) ) {
-            $this->add_control(
-                'ea_product_gallery_woo_required',
-                [
-                    'type'            => Controls_Manager::RAW_HTML,
-                    'raw'             => __( '<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.', 'essential-addons-for-elementor-lite' ),
-                    'content_classes' => 'eael-warning',
-                ]
-            );
-        }
 
         $this->add_control('eael_product_gallery_product_filter', [
             'label' => esc_html__('Filter By', 'essential-addons-for-elementor-lite'),
