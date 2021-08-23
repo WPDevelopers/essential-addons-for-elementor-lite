@@ -7,8 +7,13 @@ ea.hooks.addAction("init", "ea", () => {
 		$('.eael-cat-tab li:first a', $scope).addClass('active');
 
 		$post_cat_wrap.on('click', 'a', function (e) {
+			
 			e.preventDefault();
 			let $this = $(this);
+			console.log($this.hasClass('active'));
+			if($this.hasClass('active')){
+				return false;
+			}
 			// tab class
 			$('.eael-cat-tab li a', $scope).removeClass('active');
 			$this.addClass('active');
@@ -99,7 +104,6 @@ ea.hooks.addAction("init", "ea", () => {
 				"1"
 			);
 		}
-
 	};
 
 	elementorFrontend.hooks.addAction(
