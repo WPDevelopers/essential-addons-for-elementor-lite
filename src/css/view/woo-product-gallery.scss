@@ -145,24 +145,24 @@
                     //margin-left: 10px !important;
                     //margin-right: 10px !important;
                 }
-                .eael-wc-compare{
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: space-around;
-                    cursor: pointer;
-                    color: #fff;
-                    background-color: #333;
-                    margin: 15px;
-                    &:hover {
-                        color: #fff;
-                        background-color: #333;
-                    }
-                }
-
-                .eael-wc-compare-loader{
-                    display: none;
-                    width: 1.5rem;
-                }
+                //.eael-wc-compare{
+                //    display: inline-flex;
+                //    align-items: center;
+                //    justify-content: space-around;
+                //    cursor: pointer;
+                //    color: #fff;
+                //    background-color: #333;
+                //    margin: 15px;
+                //    &:hover {
+                //        color: #fff;
+                //        background-color: #333;
+                //    }
+                //}
+                //
+                //.eael-wc-compare-loader{
+                //    display: none;
+                //    width: 1.5rem;
+                //}
 
                 .star-rating {
                     margin: 0 auto 5px;
@@ -430,7 +430,8 @@
 
 .eael-product-gallery {
     .woocommerce ul.products li.product {
-        a img {
+        a img,
+        img {
             margin-bottom: 0;
             display: block;
             width: 100%;
