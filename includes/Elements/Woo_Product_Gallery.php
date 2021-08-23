@@ -1573,13 +1573,13 @@ class Woo_Product_Gallery extends Widget_Base
             'eael_section_product_action_buttons',
             [
                 'label' => esc_html__('Buttons', 'essential-addons-for-elementor-lite'),
-                'condition' => [
-	                'eael_product_gallery_style_preset' => [
-		                'eael-product-preset-3',
-		                'eael-product-preset-2',
-		                'eael-product-preset-1',
-	                ],
-                ],
+//                'condition' => [
+//	                'eael_product_gallery_style_preset' => [
+//		                'eael-product-preset-3',
+//		                'eael-product-preset-2',
+//		                'eael-product-preset-1',
+//	                ],
+//                ],
             ]
         );
 
@@ -1590,6 +1590,11 @@ class Woo_Product_Gallery extends Widget_Base
                 'type' => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default' => 'yes',
+                'condition' => [
+	                'eael_product_gallery_style_preset!' => [
+		                'eael-product-preset-4',
+	                ],
+                ],
             ]
         );
 
@@ -1612,10 +1617,50 @@ class Woo_Product_Gallery extends Widget_Base
                     'div' => __('Div', 'essential-addons-for-elementor-lite'),
                 ],
                 'condition' => [
+	                'eael_product_gallery_style_preset!' => [
+		                'eael-product-preset-4',
+	                ],
                     'eael_product_gallery_quick_view' => 'yes',
                 ],
             ]
         );
+
+	    $this->add_control(
+		    'eael_product_gallery_addtocart_show',
+		    [
+			    'label' => esc_html__('Show Add to Cart?', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SWITCHER,
+			    'return_value' => 'yes',
+			    'default' => 'yes',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_product_gallery_link_show',
+		    [
+			    'label' => esc_html__('Show Link?', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SWITCHER,
+			    'return_value' => 'yes',
+			    'default' => 'yes',
+			    'condition' => [
+				    'eael_product_gallery_style_preset!' => [
+//					    'eael-product-preset-3',
+					    'eael-product-preset-4',
+					    'eael-product-preset-1',
+				    ],
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_product_gallery_image_clickable',
+		    [
+			    'label' => esc_html__('Image Clickable?', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SWITCHER,
+			    'return_value' => 'yes',
+			    'default' => 'yes',
+		    ]
+	    );
 
         $this->end_controls_section();
     }
