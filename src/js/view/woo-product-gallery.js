@@ -3,6 +3,9 @@ ea.hooks.addAction("init", "ea", () => {
 		// category
 		ea.hooks.doAction("quickViewAddMarkup",$scope,$);
 		const $post_cat_wrap = $('.eael-cat-tab', $scope)
+
+		$('.eael-cat-tab li:first a', $scope).addClass('active');
+
 		$post_cat_wrap.on('click', 'a', function (e) {
 			e.preventDefault();
 			let $this = $(this);
