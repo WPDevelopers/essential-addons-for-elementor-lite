@@ -975,6 +975,7 @@ trait Helper
 				$template_info[ 'file_name' ]
 			);
 
+            $html  = '';
 			if ( $file_path ) {
 				$query = new \WP_Query( $args );
 
@@ -982,8 +983,10 @@ trait Helper
 
 					while ( $query->have_posts() ) {
 						$query->the_post();
-						echo HelperClass::include_with_variable( $file_path, [ 'settings' => $settings ] );
+						$html .= HelperClass::include_with_variable( $file_path, [ 'settings' => $settings ] );
 					}
+					print $html;
+					wp_reset_postdata();
 				}
 			}
 		}
