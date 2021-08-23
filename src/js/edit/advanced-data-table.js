@@ -547,6 +547,18 @@ class advancedDataTableEdit {
 								ea.hooks.doAction("advancedDataTable.updateFromView", view, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
+
+								// @TODO need to apply this patch to add/delete column also
+								if (table.classList.contains("ea-advanced-data-table-static")) {
+									var cellSelector = jQuery('thead tr:first-child th:first-child .ql-editor p', table),
+										cellSelector = cellSelector.length ? cellSelector : jQuery('tbody tr:first-child td:first-child .ql-editor p', table),
+										cellData = cellSelector.html();
+									cellSelector.html(cellData + ' ');
+
+									setTimeout(() => {
+										cellSelector.html(cellData);
+									}, 1100);
+								}
 							}
 						},
 					},
