@@ -181,18 +181,6 @@ class Woo_Product_Gallery extends Widget_Base
 			    'type' => Controls_Manager::HEADING,
 	        ]
         );
-	    
-//	    $this->add_control(
-//		    'eael_woo_product_gallery_terms',
-//		    [
-//			    'label' => __('Show Category Gallery', 'essential-addons-for-elementor-lite'),
-//			    'type' => Controls_Manager::SWITCHER,
-//			    'default' => 'yes',
-//			    'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
-//			    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
-//			    'return_value' => 'yes',
-//		    ]
-//	    );
 
 	    $this->add_control(
 		    'eael_product_gallery_terms_position',
@@ -268,6 +256,18 @@ class Woo_Product_Gallery extends Widget_Base
 		    ]
 	    );
 
+        $this->add_control(
+		    'eael_woo_product_gallery_terms_show_all',
+		    [
+			    'label' => __('Show All Category Tab', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SWITCHER,
+			    'default' => 'yes',
+			    'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+			    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+			    'return_value' => 'yes',
+		    ]
+	    );
+
 	    $this->add_control(
 		    'eael_woo_product_gallery_terms_all_text',
 		    [
@@ -276,9 +276,9 @@ class Woo_Product_Gallery extends Widget_Base
 			    'dynamic' => [ 'active' => true ],
 			    'label_block' => false,
 			    'default' => esc_html__('All', 'essential-addons-for-elementor-lite'),
-//			    'condition' => [
-//				    'eael_woo_product_gallery_terms' => 'yes',
-//			    ],
+			    'condition' => [
+				    'eael_woo_product_gallery_terms_show_all' => 'yes',
+			    ],
 		    ]
 	    );
 
@@ -2478,6 +2478,15 @@ class Woo_Product_Gallery extends Widget_Base
                     'operator' => 'IN',
                 ],
             ];
+        } else {
+	        $args['tax_query'] = [
+		        [
+			        'taxonomy' => 'product_cat',
+			        'field' => 'term_id',
+			        'terms' => $settings['eael_product_gallery_categories'],
+			        'operator' => 'IN',
+		        ],
+	        ];
         }
 
         $args['meta_query'] = ['relation' => 'AND'];
@@ -2559,10 +2568,14 @@ class Woo_Product_Gallery extends Widget_Base
 	    echo '<ul class="eael-cat-tab" data-layout="'.$settings["eael_product_gallery_items_layout"].'" data-template=' . json_encode(['dir'   => $dir_name, 'file_name' =>
                 $this->get_filename_only($template), 'name' => $this->process_directory_name()], 1) . '  data-nonce="'.wp_create_nonce( 'eael_product_gallery' ).'" data-page-id="'.$this->page_id.'" data-widget-id="'.$this->get_id().'" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-page="1">';
 
-	    echo '<li><a href="javascript:;" data-page="1" data-id='. json_encode($product_cats). ' class="active post-list-filter-item post-list-cat-'
-	         . $this->get_id() . '">' . __($settings['eael_woo_product_gallery_terms_all_text'], 'essential-addons-for-elementor-lite') . '</a></li>';
+	    if($settings['eael_woo_product_gallery_terms_show_all'] == 'yes') {
+		    echo '<li><a href="javascript:;" data-page="1" data-id='. json_encode($product_cats). ' class="active post-list-filter-item post-list-cat-'
+		         . $this->get_id() . '">' . __($settings['eael_woo_product_gallery_terms_all_text'], 'essential-addons-for-elementor-lite') . '</a></li>';
+	    } elseif(($settings['eael_woo_product_gallery_terms_show_all'] == '') && empty($get_product_cats) ) {
+		    _e('<p class="no-posts-found">No Category Found!</p>', 'essential-addons-for-elementor-lite');
+	    }
 
-//	    var_dump($product_cats);
+//	    var_dump(empty($get_product_cats) . $settings['eael_woo_product_gallery_terms_show_all']);
 
 	    // Category retrive
 	    $catargs = array(

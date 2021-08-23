@@ -2975,8 +2975,6 @@ class Product_Grid extends Widget_Base
             return;
         }
 
-
-
         $settings = $this->get_settings_for_display();
 
         // normalize for load more fix
