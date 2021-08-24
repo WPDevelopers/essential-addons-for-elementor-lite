@@ -2524,14 +2524,16 @@ class Woo_Product_Gallery extends Widget_Base
                 ],
             ];
         } else {
-	        $args['tax_query'] = [
-		        [
-			        'taxonomy' => 'product_cat',
-			        'field' => 'term_id',
-			        'terms' => $settings['eael_product_gallery_categories'],
-			        'operator' => 'IN',
-		        ],
-	        ];
+            if($settings['eael_woo_product_gallery_terms_show_all'] == '') {
+	            $args['tax_query'] = [
+		            [
+			            'taxonomy' => 'product_cat',
+			            'field' => 'term_id',
+			            'terms' => $settings['eael_product_gallery_categories'],
+			            'operator' => 'IN',
+		            ],
+	            ];
+            }
         }
 
         $args['meta_query'] = ['relation' => 'AND'];
