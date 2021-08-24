@@ -34,7 +34,7 @@ $sale_badge_align = isset( $settings['eael_product_sale_badge_alignment'] ) ? $s
 $sale_badge_preset = isset($settings['eael_product_sale_badge_preset']) ? $settings['eael_product_sale_badge_preset'] : '';
 // should print vars
 $sale_text = !empty($settings['eael_product_gallery_sale_text']) ? $settings['eael_product_gallery_sale_text'] : 'Sale!';
-$stockout_text = !empty($settings['eael_product_gallery_stockout_text']) ? $settings['eael_product_gallery_stockout_text'] : 'Stock Out';
+$stockout_text = !empty($settings['eael_product_gallery_stockout_text']) ? $settings['eael_product_gallery_stockout_text'] : 'Stock <br/> Out';
 $should_print_rating = isset( $settings['eael_product_gallery_rating'] ) && 'yes' === $settings['eael_product_gallery_rating'];
 $should_print_quick_view = isset( $settings['eael_product_gallery_quick_view'] ) && 'yes' === $settings['eael_product_gallery_quick_view'];
 $should_print_addtocart = isset( $settings['eael_product_gallery_addtocart_show'] ) && 'yes' === $settings['eael_product_gallery_addtocart_show'];
