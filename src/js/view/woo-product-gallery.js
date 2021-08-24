@@ -30,7 +30,7 @@ ea.hooks.addAction("init", "ea", () => {
 				$page = 1,
 				$template_info = $post_cat_wrap.data('template'),
 				$taxonomy = {
-					taxonomy: 'product_cat',
+					taxonomy: $('.eael-cat-tab li a.active', $scope).data('taxonomy'),
 					field: 'term_id',
 					terms: $('.eael-cat-tab li a.active', $scope).data('id'),
 				};
@@ -60,6 +60,7 @@ ea.hooks.addAction("init", "ea", () => {
 					if ($content.hasClass('no-posts-found') || $content.length == 0) {
 						// do nothing
 					} else {
+
 						$('.elementor-element-' + $widget_id + ' .eael-product-gallery .woocommerce' +
 							' .eael-post-appender')
 							.empty()
@@ -67,7 +68,7 @@ ea.hooks.addAction("init", "ea", () => {
 
 						$('.eael-load-more-button', $scope).removeClass('hide-load-more');
 
-						if ($layout == "masonry") {
+						if ($layout === 'masonry') {
 							var $products = $('.eael-product-gallery .products', $scope);
 
 							// init isotope
@@ -81,9 +82,9 @@ ea.hooks.addAction("init", "ea", () => {
 								$isotope_products.isotope('layout');
 							})
 
-							$(window).on('resize', function() {
-								$isotope_products.isotope('layout');
-							});
+							// $(window).on('resize', function() {
+							// 	$isotope_products.isotope('layout');
+							// });
 						}
 					}
 				},
