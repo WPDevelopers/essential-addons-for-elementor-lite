@@ -71,6 +71,8 @@ ea.hooks.addAction("init", "ea", () => {
 						if ($layout === 'masonry') {
 							var $products = $('.eael-product-gallery .products', $scope);
 
+							$products.isotope('destroy');
+
 							// init isotope
 							var $isotope_products = $products.isotope({
 								itemSelector: "li.product",
