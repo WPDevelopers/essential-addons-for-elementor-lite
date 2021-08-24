@@ -36,11 +36,11 @@
 
 		if ( $data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery" ) {
 
-			// const $taxonomy = {
-			// 	taxonomy: 'product_cat',
-			// 	field: 'term_id',
-			// 	terms: $('.eael-cat-tab li a.active', $scope).data('id'),
-			// };
+			const $taxonomy = {
+				taxonomy: $('.eael-cat-tab li a.active', $scope).data('taxonomy'),
+				field: 'term_id',
+				terms: $('.eael-cat-tab li a.active', $scope).data('id'),
+			};
 			const eael_cat_tab = localStorage.getItem('eael-cat-tab');
 
 			if( eael_cat_tab == 'true') {
@@ -51,7 +51,7 @@
 				 var $gallery_page = parseInt($('.eael-cat-tab li a.active', $scope).data("page")) + 1;
 			}
 
-			// $data.taxonomy = $taxonomy;
+			$data.taxonomy = $taxonomy;
 			$data.page = $gallery_page;
 		}
 
