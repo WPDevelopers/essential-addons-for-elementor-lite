@@ -121,8 +121,8 @@ class Event_Calendar extends Widget_Base
             $this->add_control(
                 'eael_event_calendar_pro_enable_warning',
                 [
-                    'label' => esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::HEADING,
+	                'label' => sprintf( '<a target="_blank" href="https://wpdeveloper.net/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+                    'type' => Controls_Manager::RAW_HTML,
                     'condition' => [
                         'eael_event_calendar_type' => ['eventon'],
                     ],
@@ -558,6 +558,18 @@ class Event_Calendar extends Widget_Base
                 'description' => __('Hide Event Details link in event popup', 'essential-addons-for-elementor-lite'),
             ]
         );
+
+	    $this->add_control(
+		    'eael_event_details_text',
+		    [
+			    'label' => __('Event Details Text', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::TEXT,
+			    'default' => __('Event Details','essential-addons-for-elementor-lite'),
+			    'condition' => [
+				    'eael_event_details_link_hide!' => 'yes',
+			    ],
+		    ]
+	    );
 
         if (apply_filters('eael/is_plugin_active', 'eventON/eventon.php') && apply_filters('eael/pro_enabled', false)) {
             $this->add_control(
@@ -1740,6 +1752,7 @@ class Event_Calendar extends Widget_Base
 
     protected function eaelec_load_event_details()
     {
+    	$event_details_text = $this->get_settings('eael_event_details_text');
         return '<div id="eaelecModal" class="eaelec-modal eael-zoom-in">
             <div class="eael-ec-modal-bg"></div>
             <div class="eaelec-modal-content">
@@ -1753,7 +1766,7 @@ class Event_Calendar extends Widget_Base
                     <p></p>
                 </div>
                 <div class="eaelec-modal-footer">
-                    <a class="eaelec-event-details-link">' . __("Event Details", "essential-addons-for-elementor-lite") . '</a>
+                    <a class="eaelec-event-details-link">' . esc_html($event_details_text) . '</a>
                 </div>
             </div>
         </div>';

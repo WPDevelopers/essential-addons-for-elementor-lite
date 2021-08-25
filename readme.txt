@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 4.8.2
+Stable tag: 4.8.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -224,6 +224,27 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.8.4 - 19/08/2021 =
+
+- Added: Anchor Link support in EA Advanced Tabs & Advanced Accordion
+- Fixed: EA Gravity Forms | Styles not working properly
+- Fixed: EA Post Grid & Post Timeline | Throwing console error when used custom template from theme
+- Fixed: EA Feature List | Icons color not changing when we have set color from Global Color setting
+- Few minor bug fix and improvements
+
+= 4.8.3 - 08/08/2021 =
+
+- Added: EA WooCommerce Widgets | Option to change the 'Stock Out' text
+- Fixed: 'Out of stock' label not displaying in shop page when EA is active
+- Fixed: EA Gravity Forms | File Upload field showing a validation message
+- Fixed: EA Data Table | Text alignment not working in mobile devices
+- Fixed: EA Pricing Table | Ribbon text alignment not changing correctly
+- Fixed: EA Interactive Card | SVG Icon not showing
+- Fixed: EA Facebook Feed | Background & Link colors not working properly
+- Added: EA Event Calendar | Option to change the 'Event Details' text
+- Added: EA Login/Registration | Option to translate reCaptcha
+- Few minor bug fix and improvements
 
 = 4.8.2 - 27/07/2021 =
 

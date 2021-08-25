@@ -259,6 +259,24 @@ table.eael-data-table thead .sorting:after {
     display: -ms-flexbox;
     display: flex;
   }
+
+  .eael-dt-td-align-mobile-left .td-content {
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+
+  .eael-dt-td-align-mobile-center .td-content {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+
+  .eael-dt-td-align-mobile-right .td-content {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
 }
 table.eael-data-table thead .sorting:after {
   content: "";
