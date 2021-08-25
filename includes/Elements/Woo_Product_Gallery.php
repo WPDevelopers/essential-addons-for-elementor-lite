@@ -2432,7 +2432,7 @@ class Woo_Product_Gallery extends Widget_Base
 
                 if (file_exists($template)) {
 	                $settings['eael_page_id'] = get_the_ID();
-	                var_dump($args['tax_query']);
+//	                var_dump($args['tax_query']);
 	                $query = new \WP_Query($args);
                     if ($query->have_posts()) {
                         echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="' . $settings["eael_product_gallery_items_layout"] . '">';
