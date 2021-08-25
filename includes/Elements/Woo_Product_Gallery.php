@@ -1922,7 +1922,7 @@ class Woo_Product_Gallery extends Widget_Base
             [
                 'label' => __('Review Link Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#ccc',
+                'default' => '#707070',
                 'selectors' => [
                     '.eael-popup-details-render{{WRAPPER}} .product_meta a.woocommerce-review-link, .eael-popup-details-render{{WRAPPER}} .product_meta a' => 'color: {{VALUE}};',
                 ],
@@ -1933,7 +1933,7 @@ class Woo_Product_Gallery extends Widget_Base
             [
                 'label' => __('Review Link Hover', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#ccc',
+                'default' => '#707070',
                 'selectors' => [
                     '.eael-popup-details-render{{WRAPPER}} a.woocommerce-review-link:hover, .eael-popup-details-render{{WRAPPER}} .product_meta a:hover' => 'color: {{VALUE}};',
                 ],
