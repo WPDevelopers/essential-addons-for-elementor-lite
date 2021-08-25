@@ -1508,9 +1508,9 @@ class Woo_Product_Gallery extends Widget_Base
             'eael_section_product_badges',
             [
                 'label' => esc_html__('Sale / Stock Out Badge', 'essential-addons-for-elementor-lite'),
-                'condition' => [
-	                'eael_product_gallery_style_preset!' => 'eael-product-preset-4',
-                ],
+//                'condition' => [
+//	                'eael_product_gallery_style_preset!' => 'eael-product-preset-4',
+//                ],
             ]
         );
         $this->add_control(
