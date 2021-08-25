@@ -10,7 +10,6 @@ ea.hooks.addAction("init", "ea", () => {
 			
 			e.preventDefault();
 			let $this = $(this);
-			console.log($this.hasClass('active'));
 			if($this.hasClass('active')){
 				return false;
 			}
@@ -55,8 +54,6 @@ ea.hooks.addAction("init", "ea", () => {
 				},
 				success: function (response) {
 					var $content = $(response);
-					// console.log($content);
-
 					if ($content.hasClass('no-posts-found') || $content.length == 0) {
 						// do nothing
 					} else {
