@@ -2421,9 +2421,7 @@ class Woo_Product_Gallery extends Widget_Base
 //	        if ($settings['eael_woo_product_gallery_terms'] === 'yes') {
 		        $this->eael_product_terms_render($settings, $args);
 //	        }
-
-//            var_dump($args['tax_query']);
-	        ?>
+            ?>
 
             <div class="woocommerce">
                 <?php
@@ -2434,7 +2432,7 @@ class Woo_Product_Gallery extends Widget_Base
 
                 if (file_exists($template)) {
 	                $settings['eael_page_id'] = get_the_ID();
-//	                var_dump($args['tax_query']);
+	                var_dump($args['tax_query']);
 	                $query = new \WP_Query($args);
                     if ($query->have_posts()) {
                         echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="' . $settings["eael_product_gallery_items_layout"] . '">';
@@ -2488,6 +2486,17 @@ class Woo_Product_Gallery extends Widget_Base
      * @return array
      */
     public function build_product_query( $settings ){
+	    $get_product_cats = $settings['eael_product_gallery_categories'];
+	    $product_cats = str_replace(' ', '', $get_product_cats);
+	    // Category retrive
+	    $catargs = array(
+		    'order'      => 'ASC',
+		    'hide_empty' => false,
+		    'include'       => $product_cats,
+		    'orderby'  => 'include',
+	    );
+	    $product_categories = get_terms( 'product_cat', $catargs);
+
         $args = [
             'post_type' => 'product',
             'post_status'    => array( 'publish', 'pending', 'future' ),
@@ -2516,16 +2525,18 @@ class Woo_Product_Gallery extends Widget_Base
         }
 
         if (!empty($settings['eael_product_gallery_categories'])) {
-            $args['tax_query'] = [
-                [
-                    'taxonomy' => 'product_cat',
-                    'field' => 'term_id',
-                    'terms' => $settings['eael_product_gallery_categories'],
-                    'operator' => 'IN',
-                ],
-            ];
-        } else {
 	        if($settings['eael_woo_product_gallery_terms_show_all'] == '') {
+                if( !empty( $product_cats ) && count( $product_categories ) > 0 ){
+	                $args['tax_query'] = [
+		                [
+			                'taxonomy' => 'product_cat',
+			                'field' => 'term_id',
+			                'terms' => $product_categories[0]->term_id,
+			                'operator' => 'IN',
+		                ],
+	                ];
+                }
+	        } else {
 		        $args['tax_query'] = [
 			        [
 				        'taxonomy' => 'product_cat',
@@ -2536,6 +2547,18 @@ class Woo_Product_Gallery extends Widget_Base
 		        ];
 	        }
         }
+//        else {
+//	        if($settings['eael_woo_product_gallery_terms_show_all'] == '') {
+//		        $args['tax_query'] = [
+//			        [
+//				        'taxonomy' => 'product_cat',
+//				        'field' => 'term_id',
+//				        'terms' => $settings['eael_product_gallery_categories'],
+//				        'operator' => 'IN',
+//			        ],
+//		        ];
+//	        }
+//        }
 
         $args['meta_query'] = ['relation' => 'AND'];
 
