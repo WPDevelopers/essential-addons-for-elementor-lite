@@ -224,9 +224,9 @@
                     }
 
                     img {
-                        width: fit-content;
+                        width: 100%;
                         height: auto;
-                        margin: auto;
+                        margin: 0;
                         max-width: 100%;
                         backface-visibility: hidden;
                     }

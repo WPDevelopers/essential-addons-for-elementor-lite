@@ -52,7 +52,11 @@ $quick_view_setting = [
 
     if ( $gallery_style_preset == 'eael-product-preset-4' ) { ?>
         <li class="product">
-	        <?php if( $should_print_image_clickable ) {
+            <div class="eael-product-wrap">
+	        <?php
+	        echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'. $stockout_text .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . $sale_text . '</span>' : '') );
+
+	        if( $should_print_image_clickable ) {
 		        echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
 	        }?>
                 <?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ) );
@@ -63,11 +67,6 @@ $quick_view_setting = [
                 if ( $should_print_rating ) {
                     echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) );
                 }
-                if ( ! $product->managing_stock() && ! $product->is_in_stock() ) {
-                    printf( '<span class="outofstock-badge">%s</span>', $stockout_text );
-                } elseif ( $product->is_on_sale() ) {
-                    printf( '<span class="onsale">%s</span>', $sale_text );
-                }
 
                 if ( $should_print_price ) {
                     echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
@@ -77,6 +76,7 @@ $quick_view_setting = [
 	        if ( $should_print_addtocart ) {
 		        woocommerce_template_loop_add_to_cart();
 	        } ?>
+            </div>
         </li>
         <?php
     } else if (($gallery_style_preset == 'eael-product-preset-3') || ($gallery_style_preset == 'eael-product-preset-2')) {
