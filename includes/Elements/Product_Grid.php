@@ -48,7 +48,6 @@ class Product_Grid extends Widget_Base
 
 		if ( $is_type_instance && class_exists('woocommerce')) {
 		    $this->load_quick_view_asset();
-			add_filter( 'body_class', [$this, 'add_slider_body_class'] );
 		}
 	}
 
@@ -107,28 +106,6 @@ class Product_Grid extends Widget_Base
             'font-awesome-4-shim',
         ];
     }
-
-	/**
-	 * added custom markup for popup
-	 *
-	 * @param $classes
-	 * @return mixed
-	 */
-	public function add_slider_body_class( $classes ) {
-		if ( !in_array( 'eael-woo-slider', $classes ) ) {
-			add_action( 'wp_body_open', function () {
-				?>
-                <div style="display: none" class="eael-woocommerce-popup-view eael-product-popup
-		eael-product-zoom-in woocommerce">
-                    <div class="eael-product-modal-bg"></div>
-                    <div class="eael-popup-details-render eael-woo-slider-popup"><div class="eael-preloader"></div></div>
-                </div>
-				<?php
-			} );
-			$classes[] = 'eael-woo-slider';
-		}
-		return $classes;
-	}
 
     public function add_to_cart_button_custom_text($default)
     {
@@ -205,6 +182,7 @@ class Product_Grid extends Widget_Base
         $this->init_style_product_controls();
         $this->init_style_color_typography_controls();
         $this->init_style_addtocart_controls();
+        $this->sale_badge_style();
         $this->eael_product_action_buttons();
         $this->eael_product_action_buttons_style();
         /**
@@ -1365,95 +1343,99 @@ class Product_Grid extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_product_grid_sale_badge_heading',
-            [
-                'label' => __('Sale Badge', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-            ]
-        );
-
-        $this->add_control(
-            'eael_product_grid_sale_badge_color',
-            [
-                'label' => esc_html__('Sale Badge Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#fff',
-                'selectors' => [
-                    '{{WRAPPER}} .woocommerce ul.products li.product .onsale, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale' => 'color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_product_grid_sale_badge_background',
-            [
-                'label' => esc_html__('Sale Badge Background', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#ff2a13',
-                'selectors' => [
-                    '{{WRAPPER}} .woocommerce ul.products li.product .onsale, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale' => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .woocommerce ul.products li.product .eael-onsale:not(.outofstock).sale-preset-4:after' => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name' => 'eael_product_grid_sale_badge_typography',
-                'selector' => '{{WRAPPER}} .woocommerce ul.products li.product .onsale, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale:not(.outofstock)',
-            ]
-        );
-
-        // stock out badge
-        $this->add_control(
-            'eael_product_grid_stock_out_badge_heading',
-            [
-                'label' => __('Stock Out Badge', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-            ]
-        );
-
-        $this->add_control(
-            'eael_product_grid_stock_out_badge_color',
-            [
-                'label' => esc_html__('Stock Out Badge Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#fff',
-                'selectors' => [
-                    '{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock' => 'color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_product_grid_stock_out_badge_background',
-            [
-                'label' => esc_html__('Stock Out Badge Background', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#ff2a13',
-                'selectors' => [
-                    '{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock' => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock.sale-preset-4:after' => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name' => 'eael_product_grid_stock_out_badge_typography',
-                'selector' => '{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock',
-            ]
-        );
-
         $this->end_controls_section();
+    }
+
+    protected function sale_badge_style(){
+	    $this->start_controls_section(
+		    'eael_section_product_grid_sale_badge_style',
+		    [
+			    'label' => esc_html__('Sale Badge Style', 'essential-addons-for-elementor-lite'),
+			    'tab' => Controls_Manager::TAB_STYLE,
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_product_grid_sale_badge_color',
+		    [
+			    'label' => esc_html__('Sale Badge Color', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::COLOR,
+			    'default' => '#fff',
+			    'selectors' => [
+				    '{{WRAPPER}} .woocommerce ul.products li.product .onsale, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale' => 'color: {{VALUE}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_product_grid_sale_badge_background',
+		    [
+			    'label' => esc_html__('Sale Badge Background', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::COLOR,
+			    'default' => '#ff2a13',
+			    'selectors' => [
+				    '{{WRAPPER}} .woocommerce ul.products li.product .onsale, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale' => 'background-color: {{VALUE}};',
+				    '{{WRAPPER}} .woocommerce ul.products li.product .eael-onsale:not(.outofstock).sale-preset-4:after' => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Typography::get_type(),
+		    [
+			    'name' => 'eael_product_grid_sale_badge_typography',
+			    'selector' => '{{WRAPPER}} .woocommerce ul.products li.product .onsale, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale:not(.outofstock)',
+		    ]
+	    );
+
+	    // stock out badge
+	    $this->add_control(
+		    'eael_product_grid_stock_out_badge_heading',
+		    [
+			    'label' => __('Stock Out Badge', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::HEADING,
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_product_grid_stock_out_badge_color',
+		    [
+			    'label' => esc_html__('Stock Out Badge Color', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::COLOR,
+			    'default' => '#fff',
+			    'selectors' => [
+				    '{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock' => 'color: {{VALUE}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_product_grid_stock_out_badge_background',
+		    [
+			    'label' => esc_html__('Stock Out Badge Background', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::COLOR,
+			    'default' => '#ff2a13',
+			    'selectors' => [
+				    '{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock' => 'background-color: {{VALUE}};',
+				    '{{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock.sale-preset-4:after' => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Typography::get_type(),
+		    [
+			    'name' => 'eael_product_grid_stock_out_badge_typography',
+			    'selector' => '{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock',
+		    ]
+	    );
+
+	    $this->end_controls_section();
     }
 
     protected function init_style_addtocart_controls()
     {
-// add to cart button
+        // add to cart button
         $this->start_controls_section(
             'eael_section_product_grid_add_to_cart_styles',
             [
@@ -1666,30 +1648,30 @@ class Product_Grid extends Widget_Base
             'eael_section_product_badges',
             [
                 'label' => esc_html__('Sale / Stock Out Badge', 'essential-addons-for-elementor-lite'),
-                'conditions' => [
-                    'relation' => 'and',
-                    'terms' => [
-                        [
-                            'name' => 'eael_product_grid_layout',
-                            'operator' => '!=',
-                            'value' => [
-                                'grid',
-                                'list',
-                                'masonry',
-                            ],
-                        ],
-                        [
-                            'name' => 'eael_product_grid_style_preset',
-                            'operator' => '!in',
-                            'value' => [
-                                'eael-product-default',
-                                'eael-product-simple',
-                                'eael-product-reveal',
-                                'eael-product-overlay',
-                            ]
-                        ],
-                    ],
-                ],
+//                'conditions' => [
+//                    'relation' => 'and',
+//                    'terms' => [
+//                        [
+//                            'name' => 'eael_product_grid_layout',
+//                            'operator' => '!=',
+//                            'value' => [
+//                                'grid',
+//                                'list',
+//                                'masonry',
+//                            ],
+//                        ],
+//                        [
+//                            'name' => 'eael_product_grid_style_preset',
+//                            'operator' => '!in',
+//                            'value' => [
+//                                'eael-product-default',
+//                                'eael-product-simple',
+//                                'eael-product-reveal',
+//                                'eael-product-overlay',
+//                            ]
+//                        ],
+//                    ],
+//                ],
             ]
         );
         $this->add_control(
@@ -1729,6 +1711,23 @@ class Product_Grid extends Widget_Base
                 ],
             ]
         );
+
+	    $this->add_control(
+		    'eael_product_sale_text',
+		    [
+			    'label'       => esc_html__( 'Sale Text', 'essential-addons-for-elementor-lite' ),
+			    'type'        => Controls_Manager::TEXT,
+			    'separator' => 'before',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_product_stockout_text',
+		    [
+			    'label'       => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
+			    'type'        => Controls_Manager::TEXT,
+		    ]
+	    );
 
         $this->end_controls_section();
     }

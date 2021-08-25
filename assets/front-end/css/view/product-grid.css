@@ -1654,8 +1654,8 @@
   line-height: 74px;
   height: 60px;
   width: 120px;
-  left: -37pX;
-  top: -8px;
+  left: -39pX;
+  top: -10px;
   right: auto;
   padding: 0;
   -webkit-transform: rotate(-45deg);
@@ -1810,8 +1810,8 @@
   line-height: 74px;
   height: 60px;
   width: 120px;
-  left: -37pX;
-  top: -8px;
+  left: -39px;
+  top: -10px;
   right: auto;
   padding: 0;
   -webkit-transform: rotate(-45deg);
@@ -2649,6 +2649,6 @@
   position: unset;
   display: unset;
 }
-.woocommerce ul.products li.product .ast-shop-product-out-of-stock, .woocommerce-page ul.products li.product .ast-shop-product-out-of-stock {
+.eael-product-grid .woocommerce ul.products li.product .ast-shop-product-out-of-stock {
   display: none;
 }

@@ -216,6 +216,15 @@ table.eael-data-table thead .sorting:after {
 		align-items: center;
 		display: flex;
 	}
+	.eael-dt-td-align-mobile-left .td-content {
+		justify-content: flex-start;
+	}
+	.eael-dt-td-align-mobile-center .td-content {
+		justify-content: center;
+	}
+	.eael-dt-td-align-mobile-right .td-content {
+		justify-content: flex-end;
+	}
 }
 table.eael-data-table thead .sorting:after {
 	content: "";

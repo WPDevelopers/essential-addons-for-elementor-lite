@@ -199,6 +199,11 @@ class Login_Register extends Widget_Base {
 		// Login Form Related---
 		$this->init_content_login_fields_controls();
 		$this->init_content_login_options_controls();
+
+		if(!$this->pro_enabled){
+			$this->social_login_promo();
+        }
+
 		do_action( 'eael/login-register/after-login-controls-section', $this );
 		// Registration For Related---
 		$this->init_content_register_fields_controls();
@@ -210,6 +215,10 @@ class Login_Register extends Widget_Base {
 		// Error Messages
 		$this->init_content_validation_messages_controls();
 		do_action( 'eael/login-register/after-content-controls', $this );
+
+		if(!$this->pro_enabled){
+			$this->show_pro_promotion();
+		}
 
 		/*----Style Tab----*/
 		do_action( 'eael/login-register/before-style-controls', $this );
@@ -509,6 +518,15 @@ class Login_Register extends Widget_Base {
 		}
 
 		do_action( 'eael/login-register/after-general-controls', $this );
+
+		if ( !$this->pro_enabled ) {
+			$this->add_control( 'enable_ajax', [
+				'label'   => sprintf( __( 'Submit Form via AJAX %s', 'essential-addons-for-elementor-lite' ), '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
+				'type'    => Controls_Manager::SWITCHER,
+				'classes' => 'eael-pro-control',
+			] );
+		}
+
 		$this->end_controls_section();
 	}
 
@@ -779,6 +797,28 @@ class Login_Register extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	protected function social_login_promo() {
+
+		$this->start_controls_section( 'section_content_social_login', [
+			'label'      => __( 'Social Login', 'essential-addons-elementor' ),
+			'conditions' => $this->get_form_controls_display_condition( 'login' ),
+		] );
+
+		$this->add_control( 'enable_google_login', [
+			'label'   => sprintf( __( 'Enable Login with Google %s', 'essential-addons-for-elementor-lite' ),  '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
+			'type'    => Controls_Manager::SWITCHER,
+			'classes' => 'eael-pro-control',
+		] );
+
+		$this->add_control( 'enable_fb_login', [
+			'label'   => sprintf( __( 'Enable Login with Facebook %s', 'essential-addons-for-elementor-lite' ),  '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
+			'type'    => Controls_Manager::SWITCHER,
+			'classes' => 'eael-pro-control',
+		] );
+
+		$this->end_controls_section();
+	}
+
 	protected function init_content_terms_controls() {
 		$this->start_controls_section( 'section_content_terms_conditions', [
 			'label'      => __( 'Terms & Conditions', 'essential-addons-for-elementor-lite' ),
@@ -969,6 +1009,35 @@ class Login_Register extends Widget_Base {
 
 		$this->end_controls_section();
 	}
+
+	protected function show_pro_promotion(){
+
+        $this->start_controls_section(
+            'eael_section_pro',
+            [
+                'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
+
+        $this->add_control(
+            'eael_control_get_pro',
+            [
+                'label'       => __( 'Unlock more possibilities', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::CHOOSE,
+                'options'     => [
+                    '1' => [
+                        'title' => '',
+                        'icon'  => 'fa fa-unlock-alt',
+                    ],
+                ],
+                'default'     => '1',
+                'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+            ]
+        );
+
+        $this->end_controls_section();
+
+    }
 
 	protected function init_content_register_fields_controls() {
 
