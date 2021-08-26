@@ -1658,7 +1658,7 @@ class Woo_Product_Gallery extends Widget_Base
 			    'label' => esc_html__('Image Clickable?', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::SWITCHER,
 			    'return_value' => 'yes',
-			    'default' => 'yes',
+			    'default' => 'no',
 		    ]
 	    );
 
