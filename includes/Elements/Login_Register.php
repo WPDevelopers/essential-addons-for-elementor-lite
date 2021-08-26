@@ -2386,7 +2386,7 @@ class Login_Register extends Widget_Base {
 			'separator'    => 'before',
 		] );
 		$this->start_popover();
-		$this->add_control( "{$form_type}_form_subtitle_margin", [
+		$this->add_responsive_control( "{$form_type}_form_subtitle_margin", [
 			'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -2401,7 +2401,7 @@ class Login_Register extends Widget_Base {
 				"{$form_type}_form_subtitle_po_toggle" => 'yes',
 			],
 		] );
-		$this->add_control( "{$form_type}_form_subtitle_padding", [
+		$this->add_responsive_control( "{$form_type}_form_subtitle_padding", [
 			'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
