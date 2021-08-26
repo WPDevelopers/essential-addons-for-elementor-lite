@@ -756,7 +756,7 @@ class Woo_Product_Gallery extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#272727',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-gallery .woocommerce ul.products li.product .woocommerce-loop-product__title, {{WRAPPER}} .eael-product-gallery .woocommerce ul.products li.product .eael-product-title h2' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-gallery .woocommerce ul.products li.product .woocommerce-loop-product__title, {{WRAPPER}} .eael-product-gallery .woocommerce ul.products li.product .eael-product-title *' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -765,7 +765,7 @@ class Woo_Product_Gallery extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'eael_product_gallery_product_title_typography',
-                'selector' => '{{WRAPPER}} .eael-product-gallery .woocommerce ul.products li.product .woocommerce-loop-product__title, {{WRAPPER}} .eael-product-gallery .woocommerce ul.products li.product .eael-product-title h2',
+                'selector' => '{{WRAPPER}} .eael-product-gallery .woocommerce ul.products li.product .woocommerce-loop-product__title, {{WRAPPER}} .eael-product-gallery .woocommerce ul.products li.product .eael-product-title *',
             ]
         );
 
