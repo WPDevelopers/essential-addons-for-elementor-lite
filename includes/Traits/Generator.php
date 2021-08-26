@@ -377,7 +377,7 @@ trait Generator
 	 */
 	public function check_password_protected_post() {
 		if ( $this->is_preview_mode() ) {
-			if ( $this->check_third_party_cookie_status() || isset( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] ) ) {
+			if ( $this->check_third_party_cookie_status() || isset( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] ) || $this->check_protected_content_status() ) {
 				update_option( $this->uid . '_eael_updated_at', strtotime('now'), false );
 				return true;
 			}
