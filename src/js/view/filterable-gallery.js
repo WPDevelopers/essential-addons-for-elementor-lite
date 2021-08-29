@@ -62,7 +62,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 			// Popup
 			$($scope).magnificPopup({
-				delegate: ".eael-magnific-link",
+				delegate: ".eael-magnific-link.active",
 				type: "image",
 				gallery: {
 					enabled: $gallery_enabled
@@ -94,6 +94,16 @@ jQuery(window).on("elementor/frontend/init", function () {
 				}
 				$this.siblings().removeClass("active");
 				$this.addClass("active");
+
+				//Only filtered items should be available for popup
+				if($(this).hasClass('all-control')){
+					//All items are active
+					$('.eael-filterable-gallery-item-wrap .eael-magnific-link').removeClass('active').addClass('active');
+				}else {
+					$('.eael-filterable-gallery-item-wrap .eael-magnific-link').removeClass('active');
+					$(buttonFilter + ' .eael-magnific-link').addClass('active');
+				}
+
 				$isotope_gallery.isotope();
 			});
 
