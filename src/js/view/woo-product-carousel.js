@@ -130,6 +130,10 @@ ea.hooks.addAction("init", "ea", () => {
 			}
 		}
 
+		if ($autoplay === 0) {
+			$carouselOptions.autoplay = false
+		}
+
 		swiperLoader($wooProductCarousel, $carouselOptions).then((eaelWooProductCarousel) => {
 			if ($autoplay === 0) {
 				eaelWooProductCarousel.autoplay.stop();
