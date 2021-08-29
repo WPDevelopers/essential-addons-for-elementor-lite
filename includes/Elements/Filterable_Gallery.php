@@ -3110,7 +3110,8 @@ class Filterable_Gallery extends Widget_Base
             if ($settings['eael_section_fg_full_image_clickable']) {
                 if ($settings['eael_section_fg_full_image_action'] === 'lightbox' && !$popup_status) {
                     $popup_status = true;
-                    $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap" data-elementor-open-lightbox="no">';
+                    $eael_magnific_link_class = isset($item['video_gallery_switch']) && ($item['video_gallery_switch'] === 'true') ? ' ' : 'eael-magnific-link ';
+                    $html .= '<a href="' . esc_url($item['image']) . '" class="'.$eael_magnific_link_class.' media-content-wrap" data-elementor-open-lightbox="no">';
                 }
                 
                 if ($settings['eael_section_fg_full_image_action'] === 'link') {
