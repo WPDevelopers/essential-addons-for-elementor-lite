@@ -1812,6 +1812,12 @@ class Woo_Product_Gallery extends Widget_Base
             [
                 'label' => __('Popup', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+	                'eael_product_gallery_quick_view' => 'yes',
+                    'eael_product_gallery_style_preset!' => [
+		                'eael-product-preset-4',
+	                ],
+                ],
             ]
         );
 
