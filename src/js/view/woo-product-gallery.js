@@ -80,10 +80,7 @@ ea.hooks.addAction("init", "ea", () => {
 							$isotope_products.imagesLoaded().progress( function() {
 								$isotope_products.isotope('layout');
 							})
-
-							// $(window).on('resize', function() {
-							// 	$isotope_products.isotope('layout');
-							// });
+							
 						}
 					}
 				},

@@ -5,20 +5,12 @@
         flex-direction: column;
 
         .eael-cat-tab {
-            //align-items: center;
-            //align-self: center;
             margin: 0 0 50px 0;
 
-            //li:only-child {
-            //    border-radius: 5px;
-            //}
-            //
             li:first-child a {
-                //border-radius: 5px 0 0 5px;
                 margin-left: 0;
             }
             li:last-child a {
-                //border-radius: 0 5px 5px 0;
                 margin-right: 0;
             }
 
@@ -39,13 +31,11 @@
         }
 
         .eael-cat-tab {
-            //flex-direction: column;
-            //justify-content: flex-start;
+
             width: 25%;
 
             @media (max-width: 767px) {
-                //flex-direction: row;
-                //justify-content: center;
+
                 width: 100%;
             }
 
@@ -57,11 +47,9 @@
             }
 
             li:first-child a {
-                //border-radius: 5px 5px 0 0;
                 margin-top: 0;
             }
             li:last-child a {
-                //border-radius: 0 0 5px 5px;
                 margin-bottom: 0;
             }
 
@@ -83,13 +71,9 @@
     }
 
     .eael-cat-tab {
-        //display: flex;
         list-style: none;
         margin: 0;
         padding: 0;
-        //justify-content: center;
-        //background: #f8f6ff;
-        //width: max-content;
         border-radius: 5px;
 
         li {
@@ -103,7 +87,6 @@
         a {
             padding: 20px 30px;
             display: block;
-            //margin: 0;
             background-color: #f8f6ff;
             color: #7d7a94;
             font-size: 20px;
@@ -145,24 +128,6 @@
                     //margin-left: 10px !important;
                     //margin-right: 10px !important;
                 }
-                //.eael-wc-compare{
-                //    display: inline-flex;
-                //    align-items: center;
-                //    justify-content: space-around;
-                //    cursor: pointer;
-                //    color: #fff;
-                //    background-color: #333;
-                //    margin: 15px;
-                //    &:hover {
-                //        color: #fff;
-                //        background-color: #333;
-                //    }
-                //}
-                //
-                //.eael-wc-compare-loader{
-                //    display: none;
-                //    width: 1.5rem;
-                //}
 
                 .star-rating {
                     margin: 0 auto 5px;
@@ -1823,25 +1788,6 @@
 .eael-product-loader {
     opacity: 0.6 !important;
     pointer-events: none !important;
-
-    //position: relative;
-    //
-    //&::after {
-    //    border-radius: 50%;
-    //    width: 50px;
-    //    height: 50px;
-    //    position: absolute;
-    //    content: '';
-    //    border-top: 4px solid rgba(0, 0, 0, 0.2);
-    //    border-right: 4px solid rgba(0, 0, 0, 0.2);
-    //    border-bottom: 4px solid rgba(0, 0, 0, 0.2);
-    //    border-left: 4px solid #000;
-    //    transform: translate(-50%, -50%);
-    //    animation: ploaderSpin 1.1s infinite linear;
-    //    left: 48%;
-    //    top: 40%;
-    //    transition: all 0.2s;
-    //}
 }
 
 .eael-popup-details-render {
