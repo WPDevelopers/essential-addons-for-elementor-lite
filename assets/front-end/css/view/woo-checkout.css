@@ -541,6 +541,28 @@
 .eael-woo-checkout .woocommerce .woo-checkout-payment {
   clear: both;
 }
+.eael-woo-checkout .woocommerce .woo-checkout-payment .carrier-agents-postcode-search #carrier-agent-heading {
+  color: #fff;
+}
+.eael-woo-checkout .woocommerce .woo-checkout-payment .carrier-agents-postcode-search .woo-carrier-agents-postcode-input-wrapper input {
+  padding: 0 15px;
+  line-height: 40px;
+  border: none;
+  border-radius: 5px;
+}
+.eael-woo-checkout .woocommerce .woo-checkout-payment .carrier-agents-postcode-search .woo-carrier-agents-postcode-input-wrapper #woo-carrier-agents-search-button {
+  background: #7866ff;
+  color: #fff;
+  line-height: 40px;
+  padding: 0 20px;
+  border-radius: 5px;
+}
+.eael-woo-checkout .woocommerce .woo-checkout-payment .carrier-agents-postcode-search #woo-carrier-agents-container {
+  background: #fff;
+}
+.eael-woo-checkout .woocommerce .woo-checkout-payment .carrier-agents-postcode-search #woo-carrier-agents-container #woo-carrier-agents .woo-carrier-agent {
+  border-radius: 5px;
+}
 .eael-woo-checkout .woocommerce .woo-checkout-payment #payment {
   border: none;
 }
