@@ -274,6 +274,26 @@ class Login_Register extends Widget_Base {
 			'type'    => Controls_Manager::SWITCHER,
 			'default' => 'yes',
 		] );
+		$this->add_control( 'redirect_for_logged_in_user', [
+			'label'   => __( 'Redirect for Logged-in Users', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::SWITCHER,
+			'default' => 'no',
+		] );
+		$this->add_control( 'redirect_url_for_logged_in_user', [
+			'type'          => Controls_Manager::URL,
+			'show_label'    => false,
+			'show_external' => false,
+			'placeholder'   => site_url(),
+			'description'   => __( 'Please note that only your current domain is allowed here to keep your site secure.', 'essential-addons-for-elementor-lite' ),
+			'condition'     => [
+				'redirect_for_logged_in_user' => 'yes',
+			],
+			'default'       => [
+				'url'         => site_url(),
+				'is_external' => false,
+				'nofollow'    => true,
+			],
+		] );
 		$this->add_control( 'gen_lgn_content_po_toggle', [
 			'label'        => __( 'Login Form General', 'essential-addons-for-elementor-lite' ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
@@ -3753,6 +3773,15 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function render() {
+		if ( ! is_admin() && 'yes' === $this->get_settings_for_display( 'redirect_for_logged_in_user' ) && is_user_logged_in() ) {
+			if ( $redirect = $this->get_settings_for_display( 'redirect_url_for_logged_in_user' )['url'] ) {
+				$redirect = wp_sanitize_redirect( $redirect );
+				$logged_in_location = wp_validate_redirect( $redirect, site_url() ); ?>
+                <div class="" data-logged-in-location="<?php echo empty( $logged_in_location ) ? '' : esc_url( $logged_in_location ); ?>"></div>
+				<?php
+			}
+		}
+
 		//Note. forms are handled in Login_Registration Trait used in the Bootstrap class.
 		if ( ! $this->in_editor && 'yes' === $this->get_settings_for_display( 'hide_for_logged_in_user' ) && is_user_logged_in() ) {
 			return; // do not show any form for already logged in user. but let edit on editor
