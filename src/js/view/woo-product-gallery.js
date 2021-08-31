@@ -55,7 +55,10 @@ ea.hooks.addAction("init", "ea", () => {
 				success: function (response) {
 					var $content = $(response);
 					if ($content.hasClass('no-posts-found') || $content.length == 0) {
-						// do nothing
+						$('.elementor-element-' + $widget_id + ' .eael-product-gallery .woocommerce' +
+							  ' .eael-post-appender')
+						.empty()
+						.append(`<h2 class="eael-product-not-found">No Product Found</h2>`);
 					} else {
 
 						$('.elementor-element-' + $widget_id + ' .eael-product-gallery .woocommerce' +
