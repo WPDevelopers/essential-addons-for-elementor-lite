@@ -102,7 +102,7 @@ $elements = [
             [
                 'key'    => 'team-member-carousel',
                 'title'  => __( 'Team Member Carousel', 'essential-addons-for-elementor-lite'),
-                'demo_link' => 'https://essential-addons.com/elementor/team-member-carousel/',
+                'demo_link' => 'https://essential-addons.com/elementor/team-members-carousel/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/team-member-carousel/',
                 'is_pro' => true
             ],
