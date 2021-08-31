@@ -388,12 +388,22 @@
                     }
 
                 }
+
             }
         }
     }
 }
 
 .eael-product-gallery {
+
+    .woocommerce ul.products {
+        h2.eael-product-not-found {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 20px;
+        }
+    }
+
     .woocommerce ul.products li.product {
         a img,
         img {
