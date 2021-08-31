@@ -59,6 +59,7 @@ ea.hooks.addAction("init", "ea", () => {
 							  ' .eael-post-appender')
 						.empty()
 						.append(`<h2 class="eael-product-not-found">No Product Found</h2>`);
+						$('.eael-load-more-button', $scope).addClass('hide-load-more');
 					} else {
 
 						$('.elementor-element-' + $widget_id + ' .eael-product-gallery .woocommerce' +
