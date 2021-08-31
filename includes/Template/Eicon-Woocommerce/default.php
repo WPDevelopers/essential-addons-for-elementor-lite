@@ -129,7 +129,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                 <?php if( $should_print_quick_view ){?>
                                     <li class="eael-product-quick-view">
                                         <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                           class="eael-product-grid-open-popup">
+                                           class="eael-product-grid-open-popup open-popup-link">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </li>
@@ -160,7 +160,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                 <?php if( $should_print_quick_view ){?>
                                     <li class="eael-product-quick-view">
                                         <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                           class="eael-product-grid-open-popup">
+                                           class="eael-product-grid-open-popup open-popup-link">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </li>
@@ -182,7 +182,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                 <?php if( $should_print_quick_view ){?>
                                     <li class="eael-product-quick-view">
                                         <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                           class="eael-product-grid-open-popup">
+                                           class="eael-product-grid-open-popup open-popup-link">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </li>
@@ -244,7 +244,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                             <?php if( $should_print_quick_view ){?>
                                 <li class="eael-product-quick-view">
                                     <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                       class="eael-product-grid-open-popup">
+                                       class="eael-product-grid-open-popup open-popup-link">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                 </li>
@@ -395,7 +395,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                         if( $should_print_quick_view ){?>
                             <li class="eael-product-quick-view">
                                 <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                   class="eael-product-grid-open-popup">
+                                   class="eael-product-grid-open-popup open-popup-link">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </li>
