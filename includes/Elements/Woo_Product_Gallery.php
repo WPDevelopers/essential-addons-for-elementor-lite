@@ -14,6 +14,7 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
 use Elementor\Plugin;
+use Elementor\Utils;
 use Elementor\Widget_Base;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Traits\Helper;
@@ -274,6 +275,24 @@ class Woo_Product_Gallery extends Widget_Base {
 				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'description'  => __( 'Display thumbnail if a category has a thumbnail.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'eael_all_tab_thumb',
+			[
+				'label' => esc_html__( 'Choose All Tab Thumb', 'elementor' ),
+				'type' => Controls_Manager::MEDIA,
+				'dynamic' => [
+					'active' => true,
+				],
+				'default' => [
+					'url' => Utils::get_placeholder_image_src(),
+				],
+				'condition'   => [
+					'eael_woo_product_gallery_terms_show_all' => 'yes',
+					'eael_woo_product_gallery_terms_thumb' => 'yes',
+				],
 			]
 		);
 
@@ -2553,9 +2572,17 @@ class Woo_Product_Gallery extends Widget_Base {
 			} else {
 				$all_taxonomy = 'product_cat';
 			}
+
+			if ( $show_cat_thumb && !empty($settings['eael_all_tab_thumb']['url'])) {
+				$show_all_cat_thumb = '<img src="' . $settings['eael_all_tab_thumb']['url'] . '" />';
+			} else {
+				$show_all_cat_thumb = '';
+			}
+
+
 			echo '<li><a href="javascript:;" data-taxonomy="' . $all_taxonomy . '" data-page="1" data-id=' . json_encode( $product_cats ) .
 			     ' class="active post-list-filter-item post-list-cat-'
-			     . $this->get_id() . '">' . __( $settings[ 'eael_woo_product_gallery_terms_all_text' ], 'essential-addons-for-elementor-lite' ) . '</a></li>';
+			     . $this->get_id() . '">' .$show_all_cat_thumb. '' . __( $settings[ 'eael_woo_product_gallery_terms_all_text' ], 'essential-addons-for-elementor-lite' ) . '</a></li>';
 		} elseif ( ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == '' ) && empty( $get_product_cats ) ) {
 			_e( '<p class="no-posts-found">No Category Found!</p>', 'essential-addons-for-elementor-lite' );
 		}
