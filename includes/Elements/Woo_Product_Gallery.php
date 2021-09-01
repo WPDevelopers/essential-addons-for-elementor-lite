@@ -1039,7 +1039,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#333',
+				'default'   => '#4045AE',
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-gallery .woocommerce li.product .button, 
                     {{WRAPPER}} .eael-product-gallery .woocommerce li.product .button.add_to_cart_button' => 'background-color: {{VALUE}};',
@@ -1105,7 +1105,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#333',
+				'default'   => '#4045AE',
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-gallery .woocommerce li.product .button:hover,
                     {{WRAPPER}} .eael-product-gallery .woocommerce li.product .button.add_to_cart_button:hover' => 'background-color: {{VALUE}};',
@@ -1730,7 +1730,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#333',
+				'default'   => '#4045AE',
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-gallery .eael-product-wrap .icons-wrap li a:hover' => 'background-color: {{VALUE}};',
 				],
