@@ -286,6 +286,16 @@ class Adv_Accordion extends Widget_Base
             ]
         );
 
+	    $repeater->add_control(
+		    'eael_adv_accordion_tab_id',
+		    [
+			    'label' => esc_html__('Custom ID', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::TEXT,
+			    'description' => esc_html__( 'Custom ID will be added as an anchor tag. For example, if you add ‘test’ as your custom ID, the link will become like the following: https://www.example.com/#test and it will open the respective tab directly.', 'essential-addons-for-elementor-lite' ),
+			    'default' => '',
+		    ]
+	    );
+
         $this->add_control(
             'eael_adv_accordion_tab',
             [
@@ -326,7 +336,7 @@ class Adv_Accordion extends Widget_Base
                         ],
                     ],
                     'default'     => '1',
-                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
                 ]
             );
 
@@ -1018,7 +1028,7 @@ class Adv_Accordion extends Widget_Base
             }
 
             $this->add_render_attribute($tab_title_setting_key, [
-                'id'            => 'elementor-tab-title-' . $id_int . $tab_count,
+                'id'            => $tab['eael_adv_accordion_tab_id'] ? $tab['eael_adv_accordion_tab_id'] : Helper::str_to_css_id($tab['eael_adv_accordion_tab_title']),
                 'class'         => $tab_title_class,
                 'tabindex'      => $id_int . $tab_count,
                 'data-tab'      => $tab_count,
@@ -1031,7 +1041,7 @@ class Adv_Accordion extends Widget_Base
                 'class'           => $tab_content_class,
                 'data-tab'        => $tab_count,
                 'role'            => 'tabpanel',
-                'aria-labelledby' => 'elementor-tab-title-' . $id_int . $tab_count,
+                'aria-labelledby' => $tab['eael_adv_accordion_tab_id'] ? $tab['eael_adv_accordion_tab_id'] : Helper::str_to_css_id($tab['eael_adv_accordion_tab_title']),
             ]);
 
             echo '<div class="eael-accordion-list">

@@ -699,6 +699,7 @@ trait Woo_Checkout_Helper {
 		?>
 
         <div class="woo-checkout-payment">
+	        <?php do_action('eael_wc_multistep_checkout_after_shipping'); ?>
             <h3 id="payment-title" class="woo-checkout-section-title">
 				<?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_payment_title']); ?>
             </h3>

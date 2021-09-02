@@ -273,11 +273,11 @@ class GravityForms extends Widget_Base {
                         'hide'          => __( 'Hide', 'essential-addons-for-elementor-lite'),
                     ],
                     'selectors_dictionary'  => [
-                        'show'          => 'block',
-                        'hide'          => 'none',
+                        'show'          => ' ',
+                        'hide'          => 'none !important',
                     ],
                     'selectors'             => [
-                        '{{WRAPPER}} .eael-gravity-form .validation_message' => 'display: {{VALUE}} !important;',
+                        '{{WRAPPER}} .eael-gravity-form .validation_message' => 'display: {{VALUE}};',
                     ],
                 ]
             );
@@ -293,11 +293,11 @@ class GravityForms extends Widget_Base {
                         'hide'          => __( 'Hide', 'essential-addons-for-elementor-lite'),
                     ],
                     'selectors_dictionary'  => [
-                        'show'          => 'block',
-                        'hide'          => 'none',
+                        'show'          => ' ',
+                        'hide'          => 'none !important',
                     ],
                     'selectors'             => [
-                        '{{WRAPPER}} .eael-gravity-form .validation_error' => 'display: {{VALUE}} !important;',
+                        '{{WRAPPER}} .eael-gravity-form .validation_error' => 'display: {{VALUE}};',
                     ],
                 ]
             );
@@ -585,7 +585,7 @@ class GravityForms extends Widget_Base {
                 'label'                 => __( 'Text Color', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::COLOR,
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield label' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-gravity-form .gfield label, {{WRAPPER}} .eael-gravity-form .gfield .gfield_label' => 'color: {{VALUE}}',
                 ],
                 'condition'             => [
                     'labels_switch'   => 'yes',
@@ -598,7 +598,7 @@ class GravityForms extends Widget_Base {
             [
                 'name'                  => 'typography_label',
                 'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
-                'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield label',
+                'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield label, {{WRAPPER}} .eael-gravity-form .gfield .gfield_label',
                 'condition'             => [
                     'labels_switch'   => 'yes',
                 ],

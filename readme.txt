@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, manzurahammed
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 5.7.2
+Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 4.7.5
+Stable tag: 4.9.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -43,7 +43,7 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 
 ### 40+ FREE WIDGETS AND COUNTING
 
-We have designed 43 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
+We have designed 45 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
 1. [Post Grid](https://essential-addons.com/elementor/post-grid/) - Showcase your blog posts in 4 unique styles 
 2. [Post Timeline](https://essential-addons.com/elementor/post-timeline/) - Create stunning timeline for your Posts, Pages or any Custom Post. 
@@ -89,6 +89,7 @@ We have designed 43 of the most useful widgets to enhance your Elementor Page Bu
 42. [Woo Product Compare](https://essential-addons.com/elementor/woo-product-compare/) - Create stunning WooCommerce Product Compare table instantly
 43. [Woo Product Carousel](https://essential-addons.com/elementor/woo-product-carousel/) - Design amazing WooCommerce Product Carousel with ease
 44. [Simple Menu](https://essential-addons.com/elementor/simple-menu/)- Design beautiful Navigation menu for your WordPress site quite easily
+45. [Woo Product Gallery](https://essential-addons.com/elementor/woo-product-gallery/)- Showcase your WooCommerce Products in a filterable gallery layout
 
 
 
@@ -224,6 +225,63 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.9.0 - 01/09/2021 =
+
+- Added: EA Woo Product Gallery widget
+- Added: EA Login Register | Option to Redirect logged in users to another page
+- Fixed: EA Filterable Gallery | video overlay image showing on lightbox
+- Fixed: EA Woo Checkout | Noutopiste section is missing in EA Woo Checkout
+- Fixed: EA Product Grid | Product images being misaligned in quick view
+- Fixed: EA Woo Product Carousel | Coverflow effect not being responsive
+- Fixed: EA Woo Product Carousel | not showing “Add to Cart” in Quick View for variable products
+- Fixed: EA Advanced Tabs | Full content not showing when the content is shown from Saved Template
+- Fixed: EA Gravity Forms | Styling not working when "enable legacy markup" option is turned off
+- Few minor bug fix & improvements
+
+= 4.8.4 - 19/08/2021 =
+
+- Added: Anchor Link support in EA Advanced Tabs & Advanced Accordion
+- Fixed: EA Gravity Forms | Styles not working properly
+- Fixed: EA Post Grid & Post Timeline | Throwing console error when used custom template from theme
+- Fixed: EA Feature List | Icons color not changing when we have set color from Global Color setting
+- Few minor bug fix and improvements
+
+= 4.8.3 - 08/08/2021 =
+
+- Added: EA WooCommerce Widgets | Option to change the 'Stock Out' text
+- Fixed: 'Out of stock' label not displaying in shop page when EA is active
+- Fixed: EA Gravity Forms | File Upload field showing a validation message
+- Fixed: EA Data Table | Text alignment not working in mobile devices
+- Fixed: EA Pricing Table | Ribbon text alignment not changing correctly
+- Fixed: EA Interactive Card | SVG Icon not showing
+- Fixed: EA Facebook Feed | Background & Link colors not working properly
+- Added: EA Event Calendar | Option to change the 'Event Details' text
+- Added: EA Login/Registration | Option to translate reCaptcha
+- Few minor bug fix and improvements
+
+= 4.8.2 - 27/07/2021 =
+
+- Fixed: Asset loading issue with Password Protected plugins
+- Fixed: EA Info Box | SVG icon color not changing
+- Fixed: EA Post Grid | Meta Style color not changing
+- Fixed: EA Woo Product Carousel | 'Quick View' popup not showing properly when multiple images are used
+- Fixed: EA Woo Product Carousel | Draft products being displayed on Edit Mode 
+- Fixed: EA Woo Product Compare | Product Custom Attribute not showing
+- Added: EA Woo Product Grid | Heading tag for 'Quick View' option
+- Added: EA Twitter Feed | 'Read More' text change control
+- Few minor bug fix and improvements
+
+= 4.8.1 - 18/07/2021 =
+
+- Fixed: Broken Shop page layout when Woo Product Carousel is activated
+- Fixed: EA Product Grid | product images being blurry
+- Few minor bug fix and improvements
+
+= 4.8.0 - 14/07/2021 =
+
+- Improved: Reduced data in options table for better performance
+- Few minor bug fix and improvements
 
 = 4.7.5 - 07/07/2021 =
 

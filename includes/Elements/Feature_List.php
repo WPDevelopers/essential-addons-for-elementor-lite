@@ -121,9 +121,9 @@ class Feature_List extends Widget_Base {
             [
                 'label'            => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
                 'type'             => Controls_Manager::COLOR,
-                'scheme'           => [
-                    'type'  => Color::get_type(),
-                    'value' => Color::COLOR_1,
+                'selectors' => [
+                    "{{WRAPPER}} {{CURRENT_ITEM}} .eael-feature-list-icon i" => 'color: {{VALUE}};',
+                    "{{WRAPPER}} {{CURRENT_ITEM}} .eael-feature-list-icon svg" => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
                 ],
                 'fa4compatibility' => 'eael_feature_list_icon',
                 'condition'        => [
@@ -136,9 +136,8 @@ class Feature_List extends Widget_Base {
             [
                 'label'            => esc_html__( 'Icon Background', 'essential-addons-for-elementor-lite' ),
                 'type'             => Controls_Manager::COLOR,
-                'scheme'           => [
-                    'type'  => Color::get_type(),
-                    'value' => Color::COLOR_1,
+                'selectors' => [
+                    "{{WRAPPER}} {{CURRENT_ITEM}} .eael-feature-list-icon" => 'background-color: {{VALUE}}',
                 ],
                 'fa4compatibility' => 'eael_feature_list_icon',
                 'condition'        => [
@@ -151,9 +150,8 @@ class Feature_List extends Widget_Base {
             [
                 'label'            => esc_html__( 'Icon Box Background', 'essential-addons-for-elementor-lite' ),
                 'type'             => Controls_Manager::COLOR,
-                'scheme'           => [
-                    'type'  => Color::get_type(),
-                    'value' => Color::COLOR_1,
+                'selectors' => [
+                    "{{WRAPPER}} {{CURRENT_ITEM}} .eael-feature-list-icon-inner" => 'background-color: {{VALUE}}',
                 ],
                 'fa4compatibility' => 'eael_feature_list_icon',
                 'condition'        => [
@@ -241,7 +239,7 @@ class Feature_List extends Widget_Base {
                     ],
                 ],
                 'fields'      => $repeater->get_controls(),
-                'title_field' => '<i class="{{ eael_feature_list_icon_new.value }}" aria-hidden="true"></i> {{ eael_feature_list_title }}',
+                'title_field' => '{{{ elementor.helpers.renderIcon( this, eael_feature_list_icon_new, {}, "i", "panel" ) || \'<i class="{{ eael_feature_list_icon_new.value }}" aria-hidden="true"></i>\' }}} {{ eael_feature_list_title }}',
             ]
         );
 
@@ -934,7 +932,7 @@ class Feature_List extends Widget_Base {
                 $feature_icon_tag = 'a';
             }
             ?>
-                <li class="eael-feature-list-item">
+                <li class="eael-feature-list-item <?php echo 'elementor-repeater-item-' . esc_attr( $item['_id'] ); ?>">
                     <?php if ( 'yes' == $settings['eael_feature_list_connector'] ): ?>
                         <span class="connector" style="<?php echo $connector; ?>"></span>
                         <span class="connector connector-tablet" style="<?php echo $connector_tablet; ?>"></span>
@@ -942,26 +940,15 @@ class Feature_List extends Widget_Base {
                     <?php endif;?>
 
 						<div class="eael-feature-list-icon-box">
-							<div class="eael-feature-list-icon-inner"<?php echo $icon_box_bg; ?>>
+							<div class="eael-feature-list-icon-inner">
 
-								<<?php echo $feature_icon_tag . ' ' . $this->get_render_attribute_string( 'eael_feature_list_icon' . $index) . $this->get_render_attribute_string( 'eael_feature_list_link' . $index) . $icon_bg; ?>>
+								<<?php echo $feature_icon_tag . ' ' . $this->get_render_attribute_string( 'eael_feature_list_icon' . $index) . $this->get_render_attribute_string( 'eael_feature_list_link' . $index); ?>>
 
 		<?php
             if ( $item['eael_feature_list_icon_type'] == 'icon' && $feature_has_icon ) {
 
             if ( empty( $item['eael_feature_list_icon'] ) || isset( $item['__fa4_migrated']['eael_feature_list_icon_new'] ) ) {
-                // if svg then build individual color css
-                if ( 'svg' === $item['eael_feature_list_icon_new']['library'] && $icon_color ) {
-                        ?>
-                <style>
-                    <?php
-                    echo "#{$css_id} .eael-feature-list-icon.fl-icon-{$index} svg { color: {$icon_color} !important; fill: {$icon_color} !important; } ";
-                     ?>
-                </style>
-                <?php
-                    }
-
-                Icons_Manager::render_icon( $item['eael_feature_list_icon_new'], [ 'aria-hidden' => 'true', 'style' => "color:{$icon_color};" ] );
+                Icons_Manager::render_icon( $item['eael_feature_list_icon_new'], [ 'aria-hidden' => 'true' ] );
             } else {
                 echo '<i class="' . esc_attr( $item['eael_feature_list_icon'] ) . '" aria-hidden="true"></i>';
             }

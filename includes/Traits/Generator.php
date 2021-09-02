@@ -89,7 +89,8 @@ trait Generator
         $editor_updated_at = get_option('eael_editor_updated_at');
         $post_updated_at = get_option($this->uid . '_eael_updated_at');
 
-
+	    // remove old cache value from options table
+	    $this->remove_old_cache();
 
         if ($editor_updated_at === false) {
             update_option('eael_editor_updated_at', strtotime('now'));
@@ -241,6 +242,8 @@ trait Generator
         // remove old cache files
         $this->remove_files($this->uid);
 
+
+
         // output custom js as fallback
         if ($this->custom_js_strings) {
             echo '<script>' . $this->custom_js_strings . '</script>';
@@ -373,10 +376,25 @@ trait Generator
 	 * Update  _updated_at field to regenerated asset
 	 */
 	public function check_password_protected_post() {
-		if ( isset( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] ) && $this->is_preview_mode() ) {
-			update_option($this->uid . '_eael_updated_at', get_option('eael_editor_updated_at'),false);
-			return true;
+		if ( $this->is_preview_mode() ) {
+			if ( $this->check_third_party_cookie_status() || isset( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] ) ) {
+				update_option( $this->uid . '_eael_updated_at', strtotime('now'), false );
+				return true;
+			}
 		}
 		return false;
+	}
+
+	/**
+	 * Added eael_ prefix in options field that's why need to delete old cache value
+	 * for optimize options table
+	 */
+	public function remove_old_cache() {
+		$old_post_updated_at = get_option( $this->uid . '_updated_at' );
+		if ( $old_post_updated_at ) {
+			delete_option( $this->uid . '_updated_at' );
+			delete_option( $this->uid . '_custom_js' );
+			delete_option( $this->uid . '_elements' );
+		}
 	}
 }

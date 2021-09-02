@@ -809,7 +809,7 @@ class Filterable_Gallery extends Widget_Base
                         ],
                     ],
                     'default' => '1',
-                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
+                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
                 ]
             );
             
@@ -3084,7 +3084,7 @@ class Filterable_Gallery extends Widget_Base
         echo '<div class="gallery-item-buttons">';
         
         if ($item['show_lightbox'] == true) {
-            echo '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link" data-elementor-open-lightbox="no">';
+            echo '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link active" data-elementor-open-lightbox="no">';
             
             echo '<span class="fg-item-icon-inner">';
             if ($zoom_icon_is_new || $zoom_icon_migrated) {
@@ -3407,7 +3407,7 @@ class Filterable_Gallery extends Widget_Base
 
                     // Popup
                     $($scope).magnificPopup({
-                        delegate: ".eael-magnific-link",
+                        delegate: ".eael-magnific-link.active",
                         type: "image",
                         gallery: {
                             enabled: $gallery_enabled
