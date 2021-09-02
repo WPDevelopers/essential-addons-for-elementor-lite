@@ -1436,9 +1436,9 @@ class Woo_Product_Gallery extends Widget_Base {
 		$this->add_control(
 			'eael_product_gallery_item_thumb_width',
 			[
-				'label'      => __( 'Width', 'essential-addons-for-elementor-lite' ),
+				'label'      => __( 'Width (PX)', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%' ],
+				'size_units' => [ 'px' ],
 				'range'      => [
 					'px' => [
 						'min'  => 0,
@@ -1451,7 +1451,7 @@ class Woo_Product_Gallery extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .eael-cat-tab img' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-cat-tab img' => 'width: {{SIZE}}px;',
 				],
 				'condition'  => [
 					'eael_woo_product_gallery_terms_thumb' => 'yes',
