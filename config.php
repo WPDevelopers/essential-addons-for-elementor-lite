@@ -552,6 +552,11 @@ $config = [
                         'type' => 'self',
                         'context' => 'view',
                     ],
+                    [
+	                    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/quick-view.min.js',
+	                    'type' => 'self',
+	                    'context' => 'view',
+                    ],
 	                [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/product-grid.min.js',
                         'type' => 'self',
@@ -938,6 +943,11 @@ $config = [
 			    ],
 			    'js'  => [
 				    [
+					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/quick-view.min.js',
+					    'type' => 'self',
+					    'context' => 'view',
+				    ],
+				    [
 					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-product-carousel.min.js',
 					    'type' => 'self',
 					    'context' => 'view',
@@ -958,6 +968,50 @@ $config = [
 		        'js'  => [
 			        [
 				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/simple-menu.min.js',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+	        ],
+        ],
+        'woo-product-gallery' => [
+	        'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Gallery',
+	        'dependency' => [
+		        'css' => [
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/load-more.min.css',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-gallery.min.css',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+		        'js'  => [
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
+				        'type' => 'lib',
+				        'context' => 'view',
+			        ],
+			        [
+				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js',
+				        'type'    => 'lib',
+				        'context' => 'view',
+			        ],
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/load-more.min.js',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/quick-view.min.js',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-product-gallery.min.js',
 				        'type' => 'self',
 				        'context' => 'view',
 			        ],

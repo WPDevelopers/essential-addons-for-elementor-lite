@@ -70,6 +70,6 @@ class Migration
             // update plugin version
             update_option('eael_version', EAEL_PLUGIN_VERSION);
         }
-
+		$this->remove_old_options_cache();
     }
 }
