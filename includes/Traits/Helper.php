@@ -81,6 +81,7 @@ trait Helper
 
         if ( $class == '\Essential_Addons_Elementor\Elements\Post_Grid' && $settings[ 'orderby' ] === 'rand' ) {
             $args[ 'post__not_in' ] = array_unique( $_REQUEST[ 'post__not_in' ] );
+	        unset( $args['offset'] );
         }
 
         // ensure control name compatibility to old code if it is post block
