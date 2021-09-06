@@ -171,9 +171,10 @@
 						$('.eael-cat-tab li a.active', $scope).data("page", $gallery_page);
 					} else {
 						$this.data("page", $page);
-						if ($max_page && $page >= $max_page) {
-							$this.remove();
-						}
+					}
+
+					if ($max_page && $data.page >= $max_page) {
+						$this.remove();
 					}
 				}
 			},
