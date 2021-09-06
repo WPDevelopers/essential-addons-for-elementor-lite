@@ -16,7 +16,8 @@
 			$args = $this.data("args"),
 			$layout = $this.data("layout"),
 			$template_info = $this.data("template"),
-			$page = parseInt($this.data("page")) + 1;
+			$page = parseInt($this.data("page")) + 1,
+			$max_page = $this.data("max-page") != undefined ? parseInt($this.data("max-page")) : false;
 
 		if (typeof $widget_id == "undefined" || typeof $args == "undefined") {
 			return;
@@ -170,6 +171,9 @@
 						$('.eael-cat-tab li a.active', $scope).data("page", $gallery_page);
 					} else {
 						$this.data("page", $page);
+						if ($max_page && $page >= $max_page) {
+							$this.remove();
+						}
 					}
 				}
 			},

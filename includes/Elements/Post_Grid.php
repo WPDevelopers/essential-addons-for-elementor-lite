@@ -1078,11 +1078,15 @@ class Post_Grid extends Widget_Base
         $template = $this->get_template($settings['eael_dynamic_template_Layout']);
         $settings['loadable_file_name'] = $this->get_filename_only($template);
 	    $dir_name = $this->get_temp_dir_name($settings['loadable_file_name']);
+	    $found_posts = 0;
 
         if(file_exists($template)){
             $query = new \WP_Query( $args );
 
             if ( $query->have_posts() ) {
+	            $found_posts      = $query->found_posts;
+	            $max_page         = ceil( $found_posts / absint( $args['posts_per_page'] ) );
+	            $args['max_page'] = $max_page;
 
                 while ( $query->have_posts() ) {
                     $query->the_post();
@@ -1101,7 +1105,9 @@ class Post_Grid extends Widget_Base
             <div class="clearfix"></div>
         </div>';
 
-        $this->print_load_more_button($settings, $args, $dir_name);
+	    if ( $found_posts > $args['posts_per_page'] ) {
+		    $this->print_load_more_button( $settings, $args, $dir_name );
+	    }
 
         if (Plugin::instance()->editor->is_edit_mode()) {?>
             <script type="text/javascript">
