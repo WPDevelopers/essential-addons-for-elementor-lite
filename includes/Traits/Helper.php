@@ -989,6 +989,19 @@ trait Helper
 		}
 		wp_die();
 	}
+
+	/**
+	 * eael_wpml_template_translation
+	 * @param $id
+	 * @return mixed|void
+	 */
+    public function eael_wpml_template_translation($id){
+	    $postType = get_post_type( $id );
+	    if ( 'elementor_library' === $postType ) {
+		    return apply_filters( 'wpml_object_id', $id, $postType, true );
+	    }
+	    return $id;
+    }
 	
 }
 
