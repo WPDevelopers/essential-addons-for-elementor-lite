@@ -715,6 +715,13 @@ trait Woo_Checkout_Helper {
         </div>
 	<?php }
 
+    public function custom_shipping_package_name( $name ) {
+        if( ! empty( self::$setting_data[ 'ea_woo_checkout_table_shipping_text' ] ) ) {
+            $name = self::$setting_data['ea_woo_checkout_table_shipping_text'];
+        }
+        return $name;
+    }
+
 	/**
 	 * Added all actions
 	 */
@@ -753,6 +760,7 @@ trait Woo_Checkout_Helper {
 		}
 
 		remove_action('woocommerce_checkout_billing', [ $wc_checkout_instance, 'checkout_form_shipping' ]);
+		add_filter('woocommerce_shipping_package_name', [ $this, 'custom_shipping_package_name' ], 10, 3);
 	}
 
 }
