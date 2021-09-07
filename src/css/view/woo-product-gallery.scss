@@ -1564,7 +1564,8 @@
         }
 
         .icons-wrap {
-            .button.product_type_grouped {
+            .button.product_type_grouped,
+            .button.product_type_variable {
                 display: none;
             }
         }
