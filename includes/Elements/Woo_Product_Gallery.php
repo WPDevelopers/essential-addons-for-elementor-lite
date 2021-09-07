@@ -1597,7 +1597,6 @@ class Woo_Product_Gallery extends Widget_Base {
 				'condition'    => [
 					'eael_product_gallery_style_preset!' => [
                         'eael-product-preset-4',
-                        'eael-product-preset-1',
 					],
 				],
 			]
