@@ -210,6 +210,12 @@ class Login_Register extends Widget_Base {
 		$this->init_content_register_options_controls();
 		$this->init_content_register_user_email_controls();
 		$this->init_content_register_admin_email_controls();
+		
+		if(!$this->pro_enabled){
+			$this->social_register_promo();
+        }
+		do_action( 'eael/login-register/after-register-controls-section', $this );
+
 		//Terms & Conditions
 		$this->init_content_terms_controls();
 		// Error Messages
@@ -832,6 +838,28 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'enable_fb_login', [
 			'label'   => sprintf( __( 'Enable Login with Facebook %s', 'essential-addons-for-elementor-lite' ),  '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
+			'type'    => Controls_Manager::SWITCHER,
+			'classes' => 'eael-pro-control',
+		] );
+
+		$this->end_controls_section();
+	}
+
+	protected function social_register_promo() {
+
+		$this->start_controls_section( 'section_content_social_register', [
+			'label'      => __( 'Social Signup', 'essential-addons-elementor' ),
+			'conditions' => $this->get_form_controls_display_condition( 'register' ),
+		] );
+
+		$this->add_control( 'enable_google_register', [
+			'label'   => sprintf( __( 'Enable Signup with Google %s', 'essential-addons-for-elementor-lite' ),  '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
+			'type'    => Controls_Manager::SWITCHER,
+			'classes' => 'eael-pro-control',
+		] );
+
+		$this->add_control( 'enable_fb_register', [
+			'label'   => sprintf( __( 'Enable Signup with Facebook %s', 'essential-addons-for-elementor-lite' ),  '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
 			'type'    => Controls_Manager::SWITCHER,
 			'classes' => 'eael-pro-control',
 		] );
