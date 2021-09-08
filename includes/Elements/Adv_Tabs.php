@@ -112,6 +112,30 @@ class Adv_Tabs extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control(
+            'eael_adv_tabs_tab_icon_alignment',
+            [
+                'label' => esc_html__( 'Icon Alignment', 'essential-addons-for-elementor-lite' ),
+                'description' => sprintf( __( 'Set icon position before/after the tab title.', 'essential-addons-for-elementor-lite' ) ),
+                'type' => Controls_Manager::CHOOSE,
+                'default' => 'before',
+                'options' => [
+                    'before' => [
+                        'title' => esc_html__( 'Before', 'essential-addons-for-elementor-lite' ),
+                        'icon' => 'eicon-h-align-left',
+                    ],
+                    'after' => [
+                        'title' => esc_html__( 'After', 'essential-addons-for-elementor-lite' ),
+                        'icon' => 'eicon-h-align-right',
+                    ],
+                ],
+                'condition' => [
+                    'eael_adv_tab_icon_position' => 'eael-tab-inline-icon',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
 
         /**
@@ -443,11 +467,13 @@ class Adv_Tabs extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-tab-inline-icon li i, {{WRAPPER}} .eael-tab-inline-icon li img, {{WRAPPER}} .eael-tab-inline-icon li svg' => 'margin-right: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-tab-inline-icon li span.title-before-icon' => 'margin-right: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-tab-inline-icon li span.title-after-icon' => 'margin-left: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-tab-top-icon li i, {{WRAPPER}} .eael-tab-top-icon li img, {{WRAPPER}} .eael-tab-top-icon li svg' => 'margin-bottom: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
+
         $this->add_responsive_control(
             'eael_adv_tabs_tab_padding',
             [
@@ -870,6 +896,7 @@ class Adv_Tabs extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+
         $eael_find_default_tab = [];
         $eael_adv_tab_id = 1;
         $eael_adv_tab_content_id = 1;
@@ -896,8 +923,12 @@ class Adv_Tabs extends Widget_Base
         <div <?php echo $this->get_render_attribute_string('eael_tab_wrapper'); ?>>
             <div class="eael-tabs-nav">
                 <ul <?php echo $this->get_render_attribute_string('eael_tab_icon_position'); ?>>
-                    <?php foreach ($settings['eael_adv_tabs_tab'] as $key => $tab) : ?>
-                        <li id="<?php echo $tab['eael_adv_tabs_tab_id'] ? $tab['eael_adv_tabs_tab_id'] : Helper::str_to_css_id($tab['eael_adv_tabs_tab_title']); ?>" class="<?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>">
+                    <?php foreach ($settings['eael_adv_tabs_tab'] as $tab) : ?>
+                        <li class="<?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>">
+                            <?php if( $settings['eael_adv_tab_icon_position'] === 'eael-tab-inline-icon' && $settings['eael_adv_tabs_tab_icon_alignment'] === 'after' ) : ?>
+                                <span class="eael-tab-title title-before-icon"><?php echo Helper::eael_wp_kses($tab['eael_adv_tabs_tab_title']); ?></span>
+                            <?php endif; ?>
+
                             <?php if ($settings['eael_adv_tabs_icon_show'] === 'yes') :
                                 if ($tab['eael_adv_tabs_icon_type'] === 'icon') : ?>
                                     <?php if ($tab_icon_is_new || $tab_icon_migrated) {
@@ -908,7 +939,15 @@ class Adv_Tabs extends Widget_Base
                                 <?php elseif ($tab['eael_adv_tabs_icon_type'] === 'image') : ?>
                                     <img src="<?php echo esc_attr($tab['eael_adv_tabs_tab_title_image']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($tab['eael_adv_tabs_tab_title_image']['id'], '_wp_attachment_image_alt', true)); ?>">
                                 <?php endif; ?>
-                            <?php endif; ?> <span class="eael-tab-title"><?php echo Helper::eael_wp_kses($tab['eael_adv_tabs_tab_title']); ?></span>
+                            <?php endif; ?>
+
+                            <?php if( $settings['eael_adv_tab_icon_position'] === 'eael-tab-inline-icon' && $settings['eael_adv_tabs_tab_icon_alignment'] !== 'after' ) : ?>
+                                <span class="eael-tab-title title-after-icon"><?php echo Helper::eael_wp_kses($tab['eael_adv_tabs_tab_title']); ?></span>
+                            <?php endif; ?>
+
+                            <?php if( $settings['eael_adv_tab_icon_position'] !== 'eael-tab-inline-icon' ) : ?>
+                                <span class="eael-tab-title title-after-icon"><?php echo Helper::eael_wp_kses($tab['eael_adv_tabs_tab_title']); ?></span>
+                            <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>
