@@ -573,33 +573,7 @@ class Helper
         return $options;
     }
 
-    /**
-     * Get FluentForms List
-     *
-     * @return array
-     */
-    public static function get_fluent_forms_list()
-    {
 
-        $options = array();
-
-        if (defined('FLUENTFORM')) {
-            global $wpdb;
-
-            $result = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}fluentform_forms");
-            if ($result) {
-                $options[0] = esc_html__('Select a Fluent Form', 'essential-addons-for-elementor-lite');
-                foreach ($result as $form) {
-                    $options[$form->id] = $form->title;
-                }
-            } else {
-                $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
-            }
-        }
-
-        return $options;
-
-    }
 
     public static function get_ninja_tables_list()
     {
