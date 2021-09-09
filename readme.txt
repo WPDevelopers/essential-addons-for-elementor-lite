@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, manzurahammed
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 5.8
+Tested up to: 5.8.1
 Requires PHP: 5.6
-Stable tag: 4.9.0
+Stable tag: 4.9.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -225,6 +225,15 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.9.1 - 09/09/2021 =
+
+- Improved: EA Woo Product Gallery | Added options to change category tab icon & button hover control
+- Improved: EA advanced Tabs | Added option to change the icon position
+- Improved: EA Login/Register Form | Added option to design Header Subtitle in Responsive Mode
+- Fixed: EA Advanced Tabs | Content not initially loading with anchor link
+- Fixed: WPML Translations not working for EA Advanced Tabs & EA Filterable Gallery
+- Few minor bug fix & improvements
 
 = 4.9.0 - 01/09/2021 =
 
