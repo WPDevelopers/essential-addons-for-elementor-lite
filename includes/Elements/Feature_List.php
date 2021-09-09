@@ -849,7 +849,7 @@ class Feature_List extends Widget_Base {
             $border = $settings['eael_feature_list_icon_border_width']['right'] + $settings['eael_feature_list_icon_border_width']['left'];
         }
 
-        if ( $settings['eael_feature_list_icon_shape'] == 'rhombus' ) {
+        if ( !empty($settings['eael_feature_list_icon_shape']) && $settings['eael_feature_list_icon_shape'] == 'rhombus' ) {
             $margin = 30;
             $connector_width = intval( $circle_size + $margin + ( !empty( $settings['eael_feature_list_connector_width']['size'] ) ? $settings['eael_feature_list_connector_width']['size'] : 0 ) );
         } else {
@@ -857,31 +857,34 @@ class Feature_List extends Widget_Base {
         }
 
         // connector
-        if ( $settings['eael_feature_list_icon_position'] == 'right' ) {
+        if ( !empty($settings['eael_feature_list_icon_position']) && $settings['eael_feature_list_icon_position'] == 'right' ) {
             $connector = 'left: calc(100% - ' . $connector_width . 'px); right: 0;';
         } else {
             $connector = 'right: calc(100% - ' . $connector_width . 'px); left: 0;';
         }
         // mobile
-        if ( $settings['eael_feature_list_icon_position_tablet'] == 'right' ) {
+        if ( !empty($settings['eael_feature_list_icon_position_tablet']) && $settings['eael_feature_list_icon_position_tablet'] == 'right' ) {
             $connector_tablet = 'left: calc(100% - ' . $connector_width . 'px); right: 0;';
         } else {
             $connector_tablet = 'right: calc(100% - ' . $connector_width . 'px); left: 0;';
         }
         // mobile
-        if ( $settings['eael_feature_list_icon_position_mobile'] == 'right' ) {
+        if ( !empty($settings['eael_feature_list_icon_position_mobile']) && $settings['eael_feature_list_icon_position_mobile'] == 'right' ) {
             $connector_mobile = 'left: calc(100% - ' . $connector_width . 'px); right: 0;';
         } else {
             $connector_mobile = 'right: calc(100% - ' . $connector_width . 'px); left: 0;';
         }
         // icon position for all mode
+        $eael_feature_list_icon_position_setting = ( !empty($settings['eael_feature_list_icon_position']) && $settings['eael_feature_list_icon_position'] ) ? $settings['eael_feature_list_icon_position'] : '';
+        $eael_feature_list_icon_position_tablet_setting = ( !empty($settings['eael_feature_list_icon_position_tablet']) && $settings['eael_feature_list_icon_position_tablet'] ) ? $settings['eael_feature_list_icon_position_tablet'] : '';
+        $eael_feature_list_icon_position_mobile_setting = ( !empty($settings['eael_feature_list_icon_position_mobile']) && $settings['eael_feature_list_icon_position_mobile'] ) ? $settings['eael_feature_list_icon_position_mobile'] : '';
         $this->add_render_attribute(
             'eael_feature_list_wrapper',
             [
                 'class' => [
-                    '-icon-position-' . $settings['eael_feature_list_icon_position'],
-                    '-tablet-icon-position-' . $settings['eael_feature_list_icon_position_tablet'],
-                    '-mobile-icon-position-' . $settings['eael_feature_list_icon_position_mobile'],
+                    '-icon-position-' . $eael_feature_list_icon_position_setting,
+                    '-tablet-icon-position-' . $eael_feature_list_icon_position_tablet_setting,
+                    '-mobile-icon-position-' . $eael_feature_list_icon_position_mobile_setting,
                 ],
             ]
         );
