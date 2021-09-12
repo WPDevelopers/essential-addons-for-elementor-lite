@@ -3116,13 +3116,14 @@ class Filterable_Gallery extends Widget_Base
                 }
                 
                 if ($settings['eael_section_fg_full_image_action'] === 'link') {
-                    $fia_string = 'href="' . esc_url($item['link']['url']) . '"';
+                    $item_link_url = ( !empty($item['link']) && !empty($item['link']['url']) ) ? esc_url($item['link']['url']) : '#';
+                    $fia_string = 'href="' . $item_link_url . '"';
                     
-                    if ($item['link']['nofollow']) {
+                    if ( !empty($item['link']) && !empty($item['link']['nofollow']) ) {
                         $fia_string .= 'rel="nofollow"';
                     }
                     
-                    if ($item['link']['is_external']) {
+                    if ( !empty($item['link']) && !empty($item['link']['is_external']) ) {
                         $fia_string .= 'target="_blank"';
                     }
                     
