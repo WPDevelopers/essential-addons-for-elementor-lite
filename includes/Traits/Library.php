@@ -221,9 +221,6 @@ trait Library
             return false;
         }
 
-	    if ((get_the_ID() > 0 && !Plugin::$instance->documents->get(get_the_ID())->is_built_with_elementor())) {
-	    	return false;
-	    }
 
         return true;
     }
