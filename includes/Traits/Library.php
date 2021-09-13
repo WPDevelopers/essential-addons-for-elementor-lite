@@ -2,6 +2,8 @@
 
 namespace Essential_Addons_Elementor\Traits;
 
+use Elementor\Plugin;
+
 if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
@@ -218,6 +220,10 @@ trait Library
         if (!empty($_REQUEST['action']) && !$this->check_background_action($_REQUEST['action'])) {
             return false;
         }
+
+	    if ((get_the_ID() > 0 && !Plugin::$instance->documents->get(get_the_ID())->is_built_with_elementor())) {
+	    	return false;
+	    }
 
         return true;
     }
