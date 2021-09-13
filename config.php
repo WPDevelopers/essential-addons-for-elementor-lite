@@ -1018,6 +1018,25 @@ $config = [
 		        ],
 	        ],
         ],
+        'interactive-circle' => [
+	        'class' => '\Essential_Addons_Elementor\Elements\Interactive_Circle',
+	        'dependency' => [
+		        'css' => [
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/interactive-circle.min.css',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+		        'js'  => [
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/interactive-circle.min.js',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+	        ],
+        ],
     ],
     'extensions' => [
         'promotion' => [

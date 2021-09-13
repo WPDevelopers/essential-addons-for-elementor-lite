@@ -1,0 +1,77 @@
+.ea-circle-info-wrapper {
+    &.ea-circle-info-view-1 {
+        $nav-item-radius: 85px;
+        $nav-radius: 445px;
+        $nav-items: 6;
+        .ea-circle-info {
+            padding: 42.5px;
+            .ea-circle-info-inner {
+                transform: rotate(calc(-90deg - (#{$nav-items} * 10deg)));
+                position: relative;
+                width: $nav-radius;
+                height: $nav-radius;
+                border: 5px solid #f5f3ff;
+                border-radius: 50%;
+                .ea-circle-info-content {
+                    display: none;
+                    overflow: hidden;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    transform: rotate(calc(90deg + (#{$nav-items} * 10deg)));
+                    .ea-circle-info-content-inner {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 50px;
+                        text-align: center;
+                        width: 100%;
+                        height: 100%;
+                    }
+                    &.active {
+                        display: block;
+                    }
+                }
+                .ea-circle-info-icon {
+                    width: $nav-item-radius;
+                    height: $nav-item-radius;
+                    text-align: center;
+                    border-radius: 50%;
+                    display: block;
+                    overflow: hidden;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    background: #fff;
+                    border: 4px solid #fff;
+                    padding: 20px;
+                    margin: calc((#{$nav-item-radius} / 2) * -1);
+                    box-shadow: 0px 5px 40px rgba(131, 100, 196, 0.2);
+                    img,
+                    svg {
+                        width: 100%;
+                        fill: #a195dc;
+                    }
+                    &.active {
+                        background: #7a5bff;
+                        img,
+                        svg {
+                            fill: #fff;
+                        }
+                    }
+                }
+                @for $i from 1 through $nav-items {
+                    .ea-circle-info-icon-#{$i} {
+                        z-index: 99;
+                        transform: rotate(calc((360deg / #{$nav-items}) * #{$i}))
+                        translate(calc(#{$nav-radius} / 2))
+                        rotate(calc((360deg / #{$nav-items}) * #{$i} * -1))
+                        rotate(calc(90deg + (#{$nav-items} * 10deg)));
+                    }
+                }
+            }
+        }
+    }
+}
