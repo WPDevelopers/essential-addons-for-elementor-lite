@@ -1,21 +1,42 @@
 ea.hooks.addAction("init", "ea", () => {
 	const interactiveCircle = function ($scope, $) {
 
-		function setTabActive(evt, tabItem) {
-			var i, tabContent, tabLinks;
-			tabContent = document.getElementsByClassName("ea-circle-info-content");
-			tabLinks = document.getElementsByClassName("ea-circle-info-icon");
-			for (i = 0; i < tabLinks.length; i++) {
-				tabLinks[i].className = tabLinks[i].className.replace(" active", "");
-				tabContent[i].className = tabContent[i].className.replace(
-					" active",
-					""
-				);
-			}
-			document.getElementById(tabItem).className += " active";
-			evt.currentTarget.className += " active";
+		var $circleWrap = $scope.find(".eael-circle-wrapper");
+		var $eventType = "";
+
+		if($circleWrap.hasClass('toggle-on-click')){
+			$eventType = "click";
+		} else {
+			$eventType = "mouseenter";
 		}
 
+		console.log($eventType);
+
+		var $tabLinks = $circleWrap.find(".eael-circle-btn");
+		var $tabContents = $circleWrap.find(".eael-circle-btn-content");
+
+		$tabLinks.each(function (element) {
+			$(this).on($eventType, handleEvent(element));
+		});
+
+		function handleEvent(element) {
+			return function () {
+				var $element = $(this);
+				var $activeTab = $(this).hasClass("active");
+				if ($activeTab == false) {
+					$tabLinks.each(function (tabLink) {
+						$(this).removeClass("active");
+					});
+					$element.addClass("active");
+					$tabContents.each(function (tabContent) {
+						$(this).removeClass("active");
+						if ($(this).hasClass($element.attr("id"))) {
+							$(this).addClass("active");
+						}
+					});
+				}
+			};
+		}
 	};
 
 	elementorFrontend.hooks.addAction(
