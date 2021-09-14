@@ -456,7 +456,7 @@ trait Woo_Checkout_Helper {
                         <?php if($woo_checkout_order_details_change_label_settings == 'yes') : ?>
                             <div><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_subtotal_text']); ?></div>
                         <?php else : ?>
-                            default sub total
+                            <?php esc_html_e( 'Subtotal', 'essential-addons-for-elementor-lite' ); ?>
                         <?php endif; ?>
 
 						<div><?php wc_cart_totals_subtotal_html(); ?></div>
@@ -509,7 +509,7 @@ trait Woo_Checkout_Helper {
                         <?php if($woo_checkout_order_details_change_label_settings == 'yes') : ?>
                             <div><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_total_text']); ?></div>
                         <?php else : ?>
-                            default total
+                            <?php esc_html_e( 'Total', 'essential-addons-for-elementor-lite' ); ?>
                         <?php endif; ?>
 
 						<div><?php wc_cart_totals_order_total_html(); ?></div>
