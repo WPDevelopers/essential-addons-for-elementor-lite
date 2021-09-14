@@ -109,7 +109,7 @@ trait Generator
         }
 
 	    if ( $post_updated_at != false && $editor_updated_at != $post_updated_at ) {
-		    return false;
+		    return true;
 	    }
         return false;
     }
@@ -196,8 +196,6 @@ trait Generator
         if (!apply_filters('eael/is_plugin_active', 'elementor/elementor.php')) {
             return;
         }
-
-
 
         if ($this->is_running_background()) {
             return;
