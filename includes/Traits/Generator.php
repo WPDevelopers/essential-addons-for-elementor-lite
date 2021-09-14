@@ -96,7 +96,11 @@ trait Generator
             update_option('eael_editor_updated_at', strtotime('now'));
         }
 
-        if (empty($elements)) {
+	    if ( !empty( $editor_updated_at ) && strtotime( 'now' ) > strtotime( '+120 seconds', $editor_updated_at ) ) {
+		    update_option('eael_editor_updated_at', strtotime('now'));
+	    }
+
+        if ($elements===false) {
             return true;
         }
 
@@ -104,13 +108,14 @@ trait Generator
 		    return true;
 	    }
 
-        if (empty($post_updated_at)) {
+        if ($post_updated_at===false) {
             return true;
         }
 
 	    if ( $editor_updated_at != $post_updated_at ) {
 		    return true;
 	    }
+	    error_log("Final data");
         return false;
     }
 
