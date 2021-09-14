@@ -450,7 +450,15 @@ trait Woo_Checkout_Helper {
 
 				<div class="footer-content">
 					<div class="cart-subtotal">
-						<div><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_subtotal_text']); ?></div>
+                        <!-- Show default text (from woocommerce) if change label control (ea_woo_checkout_table_header_text) is off  -->
+                        <?php $woo_checkout_order_details_change_label_settings = CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_header_text'])  ?>
+
+                        <?php if($woo_checkout_order_details_change_label_settings == 'yes') : ?>
+                            <div><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_subtotal_text']); ?></div>
+                        <?php else : ?>
+                            default sub total
+                        <?php endif; ?>
+
 						<div><?php wc_cart_totals_subtotal_html(); ?></div>
 					</div>
 
@@ -498,7 +506,12 @@ trait Woo_Checkout_Helper {
 					<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
 
 					<div class="order-total">
-						<div><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_total_text']); ?></div>
+                        <?php if($woo_checkout_order_details_change_label_settings == 'yes') : ?>
+                            <div><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_total_text']); ?></div>
+                        <?php else : ?>
+                            default total
+                        <?php endif; ?>
+
 						<div><?php wc_cart_totals_order_total_html(); ?></div>
 					</div>
 
