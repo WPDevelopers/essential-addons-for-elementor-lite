@@ -183,7 +183,7 @@ If you like Essential Addons, then consider checking out our other WordPress Plu
 
 🗒️ **[BetterDocs](https://betterdocs.co/)** – Best Documentation & Knowledge Base Plugin for WordPress, which also reduce your manual support request.
 
-⏰ **[WP Scheduled Posts](https://wordpress.org/plugins/wp-scheduled-posts/)**  – Complete solution for WordPress Post Scheduling to manage schedules through an editorial calendar & Social Share.
+⏰ **[SchedulePress](https://wordpress.org/plugins/wp-scheduled-posts/)**  – Complete solution for WordPress Post Scheduling to manage schedules through an editorial calendar & Social Share.
 
 
 ⭐ **[ReviewX](https://wordpress.org/plugins/reviewx/)**  – Advanced multi criteria Rating & Reviews for WooCommerce that allows users to submit product review for multiple criteria.
@@ -226,7 +226,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 4.9.1 - 09/09/2021 =
+= 4.9.1 - 14/09/2021 =
 
 - Improved: EA Woo Product Gallery | Added options to change category tab icon & button hover control
 - Improved: EA advanced Tabs | Added option to change the icon position

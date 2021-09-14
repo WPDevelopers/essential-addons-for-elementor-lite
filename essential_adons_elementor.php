@@ -10,7 +10,7 @@
  * Domain Path: /languages
  *
  * WC tested up to: 5.6.0
- * Elementor tested up to: 3.4.3
+ * Elementor tested up to: 3.4.4
  * Elementor Pro tested up to: 3.4.1
  */
 
