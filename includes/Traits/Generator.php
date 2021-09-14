@@ -226,12 +226,6 @@ trait Generator
             $this->loaded_elements[] = 'custom-js';
         }
 
-        if ((get_the_ID() > 0 && !Plugin::$instance->documents->get(get_the_ID())->is_built_with_elementor())) {
-            if (empty($this->loaded_elements)) {
-                return;
-            }
-        }
-
         // update page data
         update_option($this->uid . '_eael_elements', $this->loaded_elements,false);
         update_option($this->uid . '_eael_custom_js', $this->custom_js_strings,false);
