@@ -439,20 +439,24 @@ trait Woo_Checkout_Helper {
 			</ul>
 
 			<div class="ea-order-review-table-footer">
-				<?php
+                <!-- Show default text (from woocommerce) if change label control (ea_woo_checkout_table_header_text) is off  -->
+                <?php $woo_checkout_order_details_change_label_settings = CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_header_text'])  ?>
+
+                <?php
 				if($settings['ea_woo_checkout_shop_link'] == 'yes') { ?>
 					<div class="back-to-shop">
 						<a class="back-to-shopping" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
-							<i class="fas fa-long-arrow-alt-left"></i><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_shop_link_text']); ?>
+							<?php if($woo_checkout_order_details_change_label_settings == 'yes') : ?>
+                                <i class="fas fa-long-arrow-alt-left"></i><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_shop_link_text']); ?>
+                            <?php else : ?>
+                                <i class="fas fa-long-arrow-alt-left"></i><?php esc_html_e( 'Continue Shopping', 'essential-addons-for-elementor-lite' ); ?>
+                            <?php endif; ?>
 						</a>
 					</div>
 				<?php } ?>
 
 				<div class="footer-content">
 					<div class="cart-subtotal">
-                        <!-- Show default text (from woocommerce) if change label control (ea_woo_checkout_table_header_text) is off  -->
-                        <?php $woo_checkout_order_details_change_label_settings = CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_header_text'])  ?>
-
                         <?php if($woo_checkout_order_details_change_label_settings == 'yes') : ?>
                             <div><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_subtotal_text']); ?></div>
                         <?php else : ?>
