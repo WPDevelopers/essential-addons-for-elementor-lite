@@ -96,7 +96,7 @@ trait Generator
             update_option('eael_editor_updated_at', strtotime('now'));
         }
 
-        if (!empty($elements)) {
+        if (empty($elements)) {
             return true;
         }
 
@@ -104,11 +104,11 @@ trait Generator
 		    return true;
 	    }
 
-        if (!empty($post_updated_at)) {
+        if (empty($post_updated_at)) {
             return true;
         }
 
-	    if ( $post_updated_at != false && $editor_updated_at != $post_updated_at ) {
+	    if ( $editor_updated_at != $post_updated_at ) {
 		    return true;
 	    }
         return false;
