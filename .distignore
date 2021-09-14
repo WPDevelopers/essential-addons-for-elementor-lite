@@ -6,6 +6,8 @@
 .eslintignore
 .eslintrc
 .git
+.github
+.gitattributes
 .gitignore
 .gitlab-ci.yml
 .travis.yml
