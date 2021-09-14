@@ -115,7 +115,7 @@ trait Generator
 	    if ( $editor_updated_at != $post_updated_at ) {
 		    return true;
 	    }
-	    error_log("Final data");
+
         return false;
     }
 
