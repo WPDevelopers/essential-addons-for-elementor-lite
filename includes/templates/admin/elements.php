@@ -519,6 +519,12 @@ $elements = [
                 'demo_link' => 'https://essential-addons.com/elementor/woo-checkout/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/woo-checkout/'
             ],
+            [
+                'key'   => 'woo-cart',
+                'title' => __( 'Woo Cart', 'essential-addons-for-elementor-lite'),
+                'demo_link' => 'https://essential-addons.com/elementor/woo-cart/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/woo-cart/'
+            ],
 	        [
 		        'key'   => 'woo-product-compare',
 		        'title' => __( 'Woo Product Compare', 'essential-addons-for-elementor-lite'),
