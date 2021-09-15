@@ -884,6 +884,25 @@ $config = [
                 ],
             ],
         ],
+        'woo-cart' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Cart',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-cart.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+                'js' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-cart.min.js',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
         'login-register' => [
             'class' => '\Essential_Addons_Elementor\Elements\Login_Register',
             'dependency' => [
