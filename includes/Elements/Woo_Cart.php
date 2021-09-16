@@ -13,11 +13,14 @@ use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
+use Elementor\Repeater;
 use \Elementor\Widget_Base;
 use \Elementor\Icons_Manager;
 use Essential_Addons_Elementor\Traits\Helper;
 
 class Woo_Cart extends Widget_Base {
+
+	use \Essential_Addons_Elementor\Template\Woocommerce\Cart\Woo_Cart_Helper;
 
 	public function __construct( $data = [], $args = NULL ) {
 		parent::__construct( $data, $args );
@@ -129,10 +132,26 @@ class Woo_Cart extends Widget_Base {
 				'options'     => apply_filters( 'eael/woo-cart/layout', [
 					'default' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
 					'style-2' => esc_html__( 'Style 2', 'essential-addons-for-elementor-lite' ),
-					'style-3' => esc_html__( 'Style 3', 'essential-addons-for-elementor-lite' ),
+					'style-3' => esc_html__( 'Style 3 (Pro)', 'essential-addons-for-elementor-lite' ),
+					'style-4' => esc_html__( 'Style 4 (Pro)', 'essential-addons-for-elementor-lite' ),
+					'style-5' => esc_html__( 'Style 5 (Pro)', 'essential-addons-for-elementor-lite' ),
 				] ),
 			]
 		);
+
+		if ( ! apply_filters( 'eael/pro_enabled', FALSE ) ) {
+			$this->add_control(
+				'eael_woo_cart_pro_enable_warning',
+				[
+					'label'     => sprintf( '<a target="_blank" href="https://wpdeveloper.net/upgrade/ea-pro">%s</a>',
+						esc_html__( 'Only Available in Pro Version!', 'essential-addons-for-elementor-lite' ) ),
+					'type'      => Controls_Manager::RAW_HTML,
+					'condition' => [
+						'ea_woo_cart_layout' => [ 'style-3', 'style-4', 'style-5' ],
+					],
+				]
+			);
+		}
 
 		$this->end_controls_section();
 
@@ -161,6 +180,80 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'ea_section_woo_cart_table_builder',
+			[
+				'label' => esc_html__( 'Table Builder', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$repeater = new Repeater();
+		$repeater->add_control(
+			'column_type',
+			[
+				'label'   => __( 'Column Item', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'name',
+				'options' => [
+					'remove'    => __( 'Remove', 'essential-addons-for-elementor-lite' ),
+					'thumbnail' => __( 'Product Image', 'essential-addons-for-elementor-lite' ),
+					'name'      => __( 'Product Title', 'essential-addons-for-elementor-lite' ),
+					'price'     => __( 'Price', 'essential-addons-for-elementor-lite' ),
+					'quantity'  => __( 'Quantity', 'essential-addons-for-elementor-lite' ),
+					'subtotal'  => __( 'Subtotal', 'essential-addons-for-elementor-lite' ),
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'column_heading_title',
+			[
+				'label'       => esc_html__( 'Heading Title', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => esc_html__( 'Product Title', 'essential-addons-for-elementor-lite' ),
+				'label_block' => TRUE,
+			]
+		);
+
+		$this->add_control(
+			'table_items',
+			[
+				'label'       => __( 'Table Items', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::REPEATER,
+				'fields'      => $repeater->get_controls(),
+				'default'     => [
+					[
+						'column_type'         => 'remove',
+						'column_heading_title' => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+					],
+					[
+						'column_type'         => 'thumbnail',
+						'column_heading_title' => esc_html__( 'Product', 'essential-addons-for-elementor-lite' ),
+					],
+					[
+						'column_type'         => 'name',
+						'column_heading_title' => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+					],
+					[
+						'column_type'         => 'price',
+						'column_heading_title' => esc_html__( 'Price', 'essential-addons-for-elementor-lite' ),
+					],
+					[
+						'column_type'         => 'quantity',
+						'column_heading_title' => esc_html__( 'Quantity', 'essential-addons-for-elementor-lite' ),
+					],
+					[
+						'column_type'         => 'subtotal',
+						'column_heading_title' => esc_html__( 'Total', 'essential-addons-for-elementor-lite' ),
+					],
+				],
+				'title_field' => '{{{ column_heading_title || column_type }}}',
+			]
+		);
+
+		$this->end_controls_section();
+
 	}
 
 	public function add_cart_body_class( $classes ) {
@@ -175,6 +268,17 @@ class Woo_Cart extends Widget_Base {
 		if ( ! class_exists( 'woocommerce' ) ) {
 			return;
 		}
+
+		$settings = $this->get_settings_for_display();
+		$this->ea_woo_cart_add_actions( $settings );
+
+		if ( in_array( $settings['ea_woo_cart_layout'], [ 'style-3', 'style-4', 'style-5' ] ) ) {
+			if ( ! apply_filters( 'eael/pro_enabled', FALSE ) ) {
+				return;
+			}
+		}
+
+		$this->ea_cart_render();
 	}
 
 }
