@@ -646,9 +646,9 @@ class Adv_Tabs extends Widget_Base
                 'default' => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active > i' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default > i' => 'color: {{VALUE}};',
+                    //'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default > i' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active > svg' => 'fill: {{VALUE}};',
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default > svg' => 'fill: {{VALUE}};',
+                    //'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default > svg' => 'fill: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_tabs_icon_show' => 'yes',
