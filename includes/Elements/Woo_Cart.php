@@ -19,6 +19,27 @@ use Essential_Addons_Elementor\Traits\Helper;
 
 class Woo_Cart extends Widget_Base {
 
+	public function __construct( $data = [], $args = NULL ) {
+		parent::__construct( $data, $args );
+
+		$is_type_instance = $this->is_type_instance();
+
+		if ( ! $is_type_instance && NULL === $args ) {
+			throw new \Exception( '`$args` argument is required when initializing a full widget instance.' );
+		}
+
+		if ( $is_type_instance && class_exists( 'woocommerce' ) ) {
+
+			if ( is_null( WC()->cart ) ) {
+				include_once WC_ABSPATH . 'includes/wc-cart-functions.php';
+				include_once WC_ABSPATH . 'includes/class-wc-cart.php';
+				wc_load_cart();
+			}
+
+			add_filter( 'body_class', [ $this, 'add_cart_body_class' ] );
+		}
+	}
+
 	public function get_name() {
 		return 'eael-woo-cart';
 	}
@@ -55,6 +76,8 @@ class Woo_Cart extends Widget_Base {
 			'woocommerce cart',
 			'ea',
 			'essential addons',
+			'essential addons cart',
+			'essential addons woocommerce cart',
 		];
 	}
 
@@ -103,7 +126,7 @@ class Woo_Cart extends Widget_Base {
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'default',
 				'label_block' => FALSE,
-				'options' => apply_filters( 'eael/woo-cart/layout', [
+				'options'     => apply_filters( 'eael/woo-cart/layout', [
 					'default' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
 					'style-2' => esc_html__( 'Style 2', 'essential-addons-for-elementor-lite' ),
 					'style-3' => esc_html__( 'Style 3', 'essential-addons-for-elementor-lite' ),
@@ -122,15 +145,15 @@ class Woo_Cart extends Widget_Base {
 			'ea_section_woo_cart_general_style',
 			[
 				'label' => esc_html__( 'General', 'essential-addons-for-elementor-lite' ),
-				'tab' => Controls_Manager::TAB_STYLE,
+				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
 		$this->add_control(
 			'ea_woo_cart_bg_color',
 			[
-				'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::COLOR,
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-cart' => 'background-color: {{VALUE}};',
 				],
@@ -138,6 +161,14 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$this->end_controls_section();
+	}
+
+	public function add_cart_body_class( $classes ) {
+		if ( is_cart() ) {
+			$classes[] = 'eael-woo-cart';
+		}
+
+		return $classes;
 	}
 
 	protected function render() {
