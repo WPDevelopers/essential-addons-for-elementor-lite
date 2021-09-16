@@ -27,6 +27,7 @@ ea.hooks.addAction("init", "ea", () => {
 				}
 			});
 			
+			var hashContent = false;
 			$($currentTabId + ' > .eael-tabs-content > div', $scope).each(function (index) {
 				if (hashTag && $(this).attr("id") == hashTag) {
 					$($currentTabId + ' > .eael-tabs-content > div', $scope).removeClass("active");
@@ -41,8 +42,9 @@ ea.hooks.addAction("init", "ea", () => {
 						$("#" + contentID).addClass("active")
 					}
 					$(this).removeClass("inactive").addClass("active");
+					hashContent = true
 				} else {
-					if ($(this).hasClass("active-default")) {
+					if ($(this).hasClass("active-default") && !hashContent) {
 						$($currentTabId + ' > .eael-tabs-content > div', $scope).removeClass("active");
 						$(this).removeClass("inactive").addClass("active");
 					} else {
