@@ -109,9 +109,19 @@ class Interactive_Circle extends Widget_Base
 //	    );
 
 	    $this->add_control(
-		    'eael_interactive_circle_title_icon_show',
+		    'eael_interactive_circle_btn_icon_show',
 		    [
-			    'label' => esc_html__('Enable Icon', 'essential-addons-for-elementor-lite'),
+			    'label' => esc_html__('Show Icon', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SWITCHER,
+			    'default' => 'yes',
+			    'return_value' => 'yes',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_interactive_circle_btn_text_show',
+		    [
+			    'label' => esc_html__('Show Text', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::SWITCHER,
 			    'default' => 'yes',
 			    'return_value' => 'yes',
@@ -148,7 +158,7 @@ class Interactive_Circle extends Widget_Base
 	    $repeater->start_controls_tab( 'interactive_circle_btn_tab', [ 'label' => __( 'Button', 'essential-addons-for-elementor-lite' ) ] );
 
 	    $repeater->add_control(
-		    'eael_interactive_circle_item_title_icon',
+		    'eael_interactive_circle_btn_icon',
 		    [
 			    'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::ICONS,
@@ -156,24 +166,30 @@ class Interactive_Circle extends Widget_Base
 				    'value' => 'fas fa-home',
 				    'library' => 'fa-solid',
 			    ],
+//                'condition' => [
+//                    'eael_interactive_circle_preset' => 'eael-interactive-circle-preset-3',
+//                ],
 		    ]
 	    );
 
 	    $repeater->add_control(
-		    'eael_interactive_circle_item_title',
+		    'eael_interactive_circle_btn_title',
 		    [
-			    'name' => 'eael_interactive_circle_item_title',
-			    'label' => esc_html__('Tab Title', 'essential-addons-for-elementor-lite'),
+			    'name' => 'eael_interactive_circle_btn_title',
+			    'label' => esc_html__('Short Title', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::TEXT,
-			    'default' => esc_html__('Tab Title', 'essential-addons-for-elementor-lite'),
+			    'default' => esc_html__('Title', 'essential-addons-for-elementor-lite'),
 			    'dynamic' => ['active' => true],
+//			    'condition' => [
+//				    'eael_interactive_circle_btn_text_show' => 'yes'
+//			    ],
 		    ]
 	    );
 
 	    $repeater->add_control(
-		    'eael_interactive_circle_short_desc',
+		    'eael_interactive_circle_btn_desc',
 		    [
-			    'label' => esc_html__('Tab Content', 'essential-addons-for-elementor-lite'),
+			    'label' => esc_html__('Short Content', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::TEXTAREA,
 			    'default' => esc_html__('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-for-elementor-lite'),
 			    'dynamic' => ['active' => true],
@@ -187,6 +203,7 @@ class Interactive_Circle extends Widget_Base
 	    $repeater->add_control(
 		    'eael_interactive_circle_item_content',
 		    [
+			    'name' => 'eael_interactive_circle_item_content',
 			    'label' => esc_html__('Tab Content', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::WYSIWYG,
 			    'default' => esc_html__('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-for-elementor-lite'),
@@ -207,6 +224,15 @@ class Interactive_Circle extends Widget_Base
 //			    'dynamic' => ['active' => true],
 //		    ]
 //	    );
+
+	    $repeater->add_group_control(
+		    Group_Control_Background::get_type(),
+		    [
+			    'name' => 'eael_interactive_circle_tab_bgtype',
+			    'types' => ['gradient'],
+			    'selector' => '{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner {{CURRENT_ITEM}} .eael-circle-btn-icon',
+		    ]
+	    );
 
 	    $repeater->add_control(
 		    'eael_interactive_circle_item_title_text_color',
@@ -230,18 +256,29 @@ class Interactive_Circle extends Widget_Base
 			    'seperator' => 'before',
 			    'default' => [
 				    [
-                        'eael_interactive_circle_item_title' => esc_html__('Tab Title 1', 'essential-addons-for-elementor-lite'),
+                        'eael_interactive_circle_btn_title' => esc_html__('Home', 'essential-addons-for-elementor-lite'),
                         'eael_interactive_circle_item_default_active' => __('active', 'essential-addons-for-elementor-lite'),
+                        'eael_interactive_circle_item_content' => esc_html__('Home Content', 'essential-addons-for-elementor-lite'),
                     ],
 				    [
-                        'eael_interactive_circle_item_title' => esc_html__('Tab Title 2', 'essential-addons-for-elementor-lite'),
+                        'eael_interactive_circle_btn_title' => esc_html__('About', 'essential-addons-for-elementor-lite'),
+                        'eael_interactive_circle_item_content' => esc_html__('About Content', 'essential-addons-for-elementor-lite'),
                     ],
 				    [
-                        'eael_interactive_circle_item_title' => esc_html__('Tab Title 3', 'essential-addons-for-elementor-lite'),
+                        'eael_interactive_circle_btn_title' => esc_html__('Service', 'essential-addons-for-elementor-lite'),
+                        'eael_interactive_circle_item_content' => esc_html__('Service Content', 'essential-addons-for-elementor-lite'),
+                    ],
+                    [
+                        'eael_interactive_circle_btn_title' => esc_html__('Contact', 'essential-addons-for-elementor-lite'),
+                        'eael_interactive_circle_item_content' => esc_html__('Contact Content', 'essential-addons-for-elementor-lite'),
+                    ],
+                    [
+                        'eael_interactive_circle_btn_title' => esc_html__('Support', 'essential-addons-for-elementor-lite'),
+                        'eael_interactive_circle_item_content' => esc_html__('Support Content', 'essential-addons-for-elementor-lite'),
                     ],
 			    ],
 			    'fields' => $repeater->get_controls(),
-			    'title_field' => '{{eael_interactive_circle_item_title}}',
+			    'title_field' => '{{eael_interactive_circle_btn_title}}',
 		    ]
 	    );
 	    $this->end_controls_section();
@@ -317,13 +354,19 @@ class Interactive_Circle extends Widget_Base
 	    );
 
 	    $this->add_responsive_control(
-		    'eael_interactive_circle_border_radius',
+		    'eael_interactive_circle_connectors',
 		    [
-			    'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::DIMENSIONS,
-			    'size_units' => ['px', 'em', '%'],
+			    'label' => esc_html__('Connectors', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::HEADING,
+		    ]
+	    );
+	    $this->add_control(
+		    'eael_interactive_circle_connector_color',
+		    [
+			    'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::COLOR,
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-circle-inner' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				    '{{WRAPPER}} .eael-shape-1, {{WRAPPER}} .eael-shape-2' => 'background: {{VALUE}}!important;',
 			    ],
 		    ]
 	    );
@@ -365,7 +408,7 @@ class Interactive_Circle extends Widget_Base
 				    ],
 			    ],
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-circle-button' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				    '{{WRAPPER}} .eael-circle-btn' => 'width: {{SIZE}}{{UNIT}}!important; height: {{SIZE}}{{UNIT}}!important;',
 			    ],
 
 		    ]
@@ -383,7 +426,7 @@ class Interactive_Circle extends Widget_Base
 			    'range' => [
 				    'px' => [
 					    'min' => 0,
-					    'max' => 200,
+					    'max' => 50,
 					    'step' => 1,
 				    ],
 			    ],
@@ -423,7 +466,7 @@ class Interactive_Circle extends Widget_Base
 			    'type' => Controls_Manager::DIMENSIONS,
 			    'size_units' => ['px', 'em', '%'],
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				    '{{WRAPPER}} .eael-circle-icon-inner' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			    ],
 		    ]
 	    );
@@ -447,18 +490,9 @@ class Interactive_Circle extends Widget_Base
 		    [
 			    'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::COLOR,
-			    'default' => '#f1f1f1',
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'background-color: {{VALUE}};',
+				    '{{WRAPPER}} .eael-circle-icon-inner' => 'background-color: {{VALUE}};',
 			    ],
-		    ]
-	    );
-	    $this->add_group_control(
-		    Group_Control_Background::get_type(),
-		    [
-			    'name' => 'eael_interactive_circle_tab_bgtype',
-			    'types' => ['classic', 'gradient'],
-			    'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li',
 		    ]
 	    );
 	    $this->add_control(
@@ -466,9 +500,8 @@ class Interactive_Circle extends Widget_Base
 		    [
 			    'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::COLOR,
-			    'default' => '#333',
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'color: {{VALUE}};',
+				    '{{WRAPPER}} .eael-circle-icon-inner' => 'color: {{VALUE}};',
 			    ],
 		    ]
 	    );
@@ -479,11 +512,11 @@ class Interactive_Circle extends Widget_Base
 			    'type' => Controls_Manager::COLOR,
 			    'default' => '#333',
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li i' => 'color: {{VALUE}};',
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li svg' => 'fill: {{VALUE}};',
+				    '{{WRAPPER}} .eael-circle-icon-inner i' => 'color: {{VALUE}};',
+				    '{{WRAPPER}} .eael-circle-icon-inner svg' => 'fill: {{VALUE}};',
 			    ],
 			    'condition' => [
-				    'eael_interactive_circle_icon_show' => 'yes',
+				    'eael_interactive_circle_btn_icon_show' => 'yes'
 			    ],
 		    ]
 	    );
@@ -492,42 +525,24 @@ class Interactive_Circle extends Widget_Base
 		    [
 			    'name' => 'eael_interactive_circle_tab_border',
 			    'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-			    'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li',
+			    'selector' => '{{WRAPPER}} .eael-circle-icon-inner',
 		    ]
 	    );
-	    $this->add_responsive_control(
-		    'eael_interactive_circle_tab_border_radius',
-		    [
-			    'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::DIMENSIONS,
-			    'size_units' => ['px', 'em', '%'],
-			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-			    ],
-		    ]
-	    );
+
 	    $this->end_controls_tab();
 	    // Hover State Tab
 	    $this->start_controls_tab('eael_interactive_circle_header_hover', ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]);
 	    $this->add_control(
 		    'eael_interactive_circle_tab_color_hover',
 		    [
-			    'label' => esc_html__('Tab Background Color', 'essential-addons-for-elementor-lite'),
+			    'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::COLOR,
-			    'default' => '#333',
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'background-color: {{VALUE}};',
+				    '{{WRAPPER}} .eael-circle-icon-inner:hover' => 'background-color: {{VALUE}};',
 			    ],
 		    ]
 	    );
-	    $this->add_group_control(
-		    Group_Control_Background::get_type(),
-		    [
-			    'name' => 'eael_interactive_circle_tab_bgtype_hover',
-			    'types' => ['classic', 'gradient'],
-			    'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover',
-		    ]
-	    );
+
 	    $this->add_control(
 		    'eael_interactive_circle_tab_text_color_hover',
 		    [
@@ -535,7 +550,7 @@ class Interactive_Circle extends Widget_Base
 			    'type' => Controls_Manager::COLOR,
 			    'default' => '#fff',
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'color: {{VALUE}};',
+				    '{{WRAPPER}} .eael-circle-icon-inner:hover' => 'color: {{VALUE}};',
 			    ],
 		    ]
 	    );
@@ -546,11 +561,11 @@ class Interactive_Circle extends Widget_Base
 			    'type' => Controls_Manager::COLOR,
 			    'default' => '#fff',
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover > i' => 'color: {{VALUE}};',
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover > svg' => 'fill: {{VALUE}};',
+				    '{{WRAPPER}} .eael-circle-icon-inner:hover > i' => 'color: {{VALUE}};',
+				    '{{WRAPPER}} .eael-circle-icon-inner:hover > svg' => 'fill: {{VALUE}};',
 			    ],
 			    'condition' => [
-				    'eael_interactive_circle_icon_show' => 'yes',
+				    'eael_interactive_circle_btn_icon_show' => 'yes'
 			    ],
 		    ]
 	    );
@@ -559,50 +574,31 @@ class Interactive_Circle extends Widget_Base
 		    [
 			    'name' => 'eael_interactive_circle_tab_border_hover',
 			    'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-			    'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover',
+			    'selector' => '{{WRAPPER}} .eael-circle-icon-inner:hover',
 		    ]
 	    );
-	    $this->add_responsive_control(
-		    'eael_interactive_circle_tab_border_radius_hover',
-		    [
-			    'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::DIMENSIONS,
-			    'size_units' => ['px', 'em', '%'],
-			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-			    ],
-		    ]
-	    );
+
 	    $this->end_controls_tab();
 	    // Active State Tab
 	    $this->start_controls_tab('eael_interactive_circle_header_active', ['label' => esc_html__('Active', 'essential-addons-for-elementor-lite')]);
 	    $this->add_control(
 		    'eael_interactive_circle_tab_color_active',
 		    [
-			    'label' => esc_html__('Tab Background Color', 'essential-addons-for-elementor-lite'),
+			    'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::COLOR,
-			    'default' => '#444',
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'background-color: {{VALUE}};',
+				    '{{WRAPPER}} .eael-circle-btn.active .eael-circle-icon-inner' => 'background-color: {{VALUE}};',
 			    ],
 		    ]
 	    );
-	    $this->add_group_control(
-		    Group_Control_Background::get_type(),
-		    [
-			    'name' => 'eael_interactive_circle_tab_bgtype_active',
-			    'types' => ['classic', 'gradient'],
-			    'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active',
-		    ]
-	    );
+
 	    $this->add_control(
 		    'eael_interactive_circle_tab_text_color_active',
 		    [
 			    'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::COLOR,
-			    'default' => '#fff',
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'color: {{VALUE}};',
+				    '{{WRAPPER}} .eael-circle-btn.active .eael-circle-icon-inner' => 'color: {{VALUE}};',
 			    ],
 		    ]
 	    );
@@ -613,10 +609,8 @@ class Interactive_Circle extends Widget_Base
 			    'type' => Controls_Manager::COLOR,
 			    'default' => '#fff',
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active > i' => 'color: {{VALUE}};',
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default > i' => 'color: {{VALUE}};',
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active > svg' => 'fill: {{VALUE}};',
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default > svg' => 'fill: {{VALUE}};',
+				    '{{WRAPPER}} .eael-circle-btn.active .eael-circle-icon-inner i' => 'color: {{VALUE}};',
+				    '{{WRAPPER}} .eael-circle-btn.active .eael-circle-icon-inner svg' => 'fill: {{VALUE}};',
 			    ],
 			    'condition' => [
 				    'eael_interactive_circle_icon_show' => 'yes',
@@ -628,22 +622,13 @@ class Interactive_Circle extends Widget_Base
 		    [
 			    'name' => 'eael_interactive_circle_tab_border_active',
 			    'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-			    'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active',
+			    'selector' => '{{WRAPPER}} .eael-circle-btn.active .eael-circle-icon-inner',
 		    ]
 	    );
-	    $this->add_responsive_control(
-		    'eael_interactive_circle_tab_border_radius_active',
-		    [
-			    'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::DIMENSIONS,
-			    'size_units' => ['px', 'em', '%'],
-			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-			    ],
-		    ]
-	    );
+
 	    $this->end_controls_tab();
 	    $this->end_controls_tabs();
+
 	    $this->end_controls_section();
     }
 
@@ -663,18 +648,11 @@ class Interactive_Circle extends Widget_Base
 			    'type' => Controls_Manager::COLOR,
 			    'default' => '',
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div' => 'background-color: {{VALUE}};',
+				    '{{WRAPPER}} .eael-circle-content' => 'background: {{VALUE}};',
 			    ],
 		    ]
 	    );
-	    $this->add_group_control(
-		    Group_Control_Background::get_type(),
-		    [
-			    'name' => 'adv_tabs_content_bgtype',
-			    'types' => ['classic', 'gradient'],
-			    'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div',
-		    ]
-	    );
+
 	    $this->add_control(
 		    'adv_tabs_content_text_color',
 		    [
@@ -682,15 +660,15 @@ class Interactive_Circle extends Widget_Base
 			    'type' => Controls_Manager::COLOR,
 			    'default' => '#333',
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div' => 'color: {{VALUE}};',
+				    '{{WRAPPER}} .eael-circle-content' => 'color: {{VALUE}};',
 			    ],
 		    ]
 	    );
 	    $this->add_group_control(
 		    Group_Control_Typography::get_type(),
 		    [
-			    'name' => 'eael_interactive_circle_content_typography',
-			    'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div',
+			    'name' => 'eael_interactive_circle_content_typo',
+			    'selector' => '{{WRAPPER}} .eael-circle-content',
 		    ]
 	    );
 	    $this->add_responsive_control(
@@ -700,7 +678,7 @@ class Interactive_Circle extends Widget_Base
 			    'type' => Controls_Manager::DIMENSIONS,
 			    'size_units' => ['px', 'em', '%'],
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				    '{{WRAPPER}} .eael-circle-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
 			    ],
 		    ]
 	    );
@@ -711,7 +689,7 @@ class Interactive_Circle extends Widget_Base
 			    'type' => Controls_Manager::DIMENSIONS,
 			    'size_units' => ['px', 'em', '%'],
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				    '{{WRAPPER}} .eael-circle-btn-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			    ],
 		    ]
 	    );
@@ -720,25 +698,15 @@ class Interactive_Circle extends Widget_Base
 		    [
 			    'name' => 'eael_interactive_circle_content_border',
 			    'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-			    'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div',
+			    'selector' => '{{WRAPPER}} .eael-circle-content',
 		    ]
 	    );
-	    $this->add_responsive_control(
-		    'eael_interactive_circle_content_border_radius',
-		    [
-			    'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::DIMENSIONS,
-			    'size_units' => ['px', 'em', '%'],
-			    'selectors' => [
-				    '{{WRAPPER}} .eael-tabs-content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-			    ],
-		    ]
-	    );
+
 	    $this->add_group_control(
 		    Group_Control_Box_Shadow::get_type(),
 		    [
 			    'name' => 'eael_interactive_circle_content_shadow',
-			    'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div',
+			    'selector' => '{{WRAPPER}} .eael-circle-content',
 			    'separator' => 'before',
 		    ]
 	    );
@@ -774,34 +742,34 @@ class Interactive_Circle extends Widget_Base
             ]
         );
 
+        $item_count = count($settings['eael_interactive_circle_item']);
+
 ?>
         <div <?php echo $this->get_render_attribute_string('eael_tab_wrapper'); ?>>
 
-<!--            --><?php //if(($settings['eael_interactive_circle_preset'] === 'eael-interactive-circle-preset-4') ||
-//                     ($settings['eael_interactive_circle_preset'] === 'eael-interactive-circle-preset-3')) { ?>
+            <?php if(($settings['eael_interactive_circle_preset'] != 'eael-interactive-circle-preset-2')) { ?>
                 <div class="eael-circle-wrapper toggle-on-click <?php echo $settings['eael_interactive_circle_preset']
-                ?>">
-                    <nav class="ea-circle-info">
+                ?>" >
+                    <div class="eael-circle-info" data-items="<?php echo $item_count; ?>">
                         <div class="eael-circle-inner">
                         <?php foreach ($settings['eael_interactive_circle_item'] as $index => $item) :
                             $item_count = $index + 1;
                             ?>
-                            <div class="eael-circle-item">
-                                <div class="eael-circle-btn" id="ea-circle-item-<?php echo $item_count; ?>" >
+                            <div class="eael-circle-item elementor-repeater-item-<?php echo $item['_id']; ?>">
+                                <div class="eael-circle-btn" id="eael-circle-item-<?php echo $item_count; ?>" >
                                     <div class="eael-circle-icon-shapes">
-                                        <div class="ea-shape-1"></div>
-                                        <div class="ea-shape-2"></div>
+                                        <div class="eael-shape-1"></div>
+                                        <div class="eael-shape-2"></div>
                                     </div>
                                     <div class="eael-circle-btn-icon">
                                         <div class="eael-circle-icon-inner">
-	                                        <?php Icons_Manager::render_icon($item['eael_interactive_circle_item_title_icon']); ?>
-	                                        <span class="eael-circle-btn-txt"><?php echo $item['eael_interactive_circle_item_title'];?></span>
+	                                        <?php Icons_Manager::render_icon($item['eael_interactive_circle_btn_icon']); ?>
+	                                        <span class="eael-circle-btn-txt"><?php echo $item['eael_interactive_circle_btn_title'];?></span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="eael-circle-btn-content ea-circle-item-<?php echo $item_count; ?>">
+                                <div class="eael-circle-btn-content eael-circle-item-<?php echo $item_count; ?>">
                                     <div class="eael-circle-content">
-                                        <h2>Graphics Design</h2>
 	                                    <?php echo $item['eael_interactive_circle_item_content'] ?>
                                     </div>
                                 </div>
@@ -810,14 +778,46 @@ class Interactive_Circle extends Widget_Base
 	                     <?php endforeach; ?>
 
                         </div>
-                    </nav>
+                    </div>
 
 
 <!--            --><?php //} elseif ($settings['eael_interactive_circle_preset'] === 'eael-interactive-circle-preset-3') {?>
 
-<!--            --><?php //} else {?>
-<!---->
-<!--            --><?php //}?>
+            <?php } else {?>
+
+        <div class="eael-circle-wrapper toggle-on-hover <?php echo $settings['eael_interactive_circle_preset']
+	    ?>" >
+            <div class="eael-circle-info" data-items="<?php echo $item_count; ?>">
+                <div class="eael-circle-inner">
+                <?php foreach ($settings['eael_interactive_circle_item'] as $index => $item) :
+                    $item_count = $index + 1;
+                    ?>
+                    <div class="eael-circle-item elementor-repeater-item-<?php echo $item['_id']; ?>">
+                        <div class="eael-circle-btn" id="eael-circle-item-<?php echo $item_count; ?>" >
+                            <div class="eael-circle-icon-shapes">
+                                <div class="eael-shape-1"></div>
+                                <div class="eael-shape-2"></div>
+                            </div>
+                            <div class="eael-circle-btn-icon">
+                                <div class="eael-circle-btn-icon-inner">
+	                                <?php Icons_Manager::render_icon($item['eael_interactive_circle_btn_icon']); ?>
+                                    <span class="eael-circle-btn-txt"><?php echo $item['eael_interactive_circle_btn_title'];?></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="eael-circle-btn-content eael-circle-item-<?php echo $item_count; ?>">
+                            <div class="eael-circle-content">
+	                            <?php echo $item['eael_interactive_circle_item_content'] ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+
+                </div>
+            </div>
+        </div>
+
+            <?php }?>
 
         </div>
 <?php }
