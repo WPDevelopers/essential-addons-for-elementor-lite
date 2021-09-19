@@ -467,14 +467,16 @@
   .eael-simple-menu-hamburger-align-left .eael-simple-menu-toggle {
     top: 0;
     left: 0;
+    right: auto;
   }
 }
 @media screen and (max-width: 991px) {
   .eael-simple-menu-hamburger-align-center .eael-simple-menu-toggle {
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
+    left: 50%;
+    right: auto;
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
   }
 }
 .eael-simple-menu--stretch .eael-simple-menu.eael-simple-menu-responsive {

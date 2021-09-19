@@ -618,6 +618,7 @@
     @media screen and (max-width: 991px) {
         top: 0;
         left: 0;
+        right: auto;
     }
   }
 }
@@ -625,10 +626,9 @@
 .eael-simple-menu-hamburger-align-center{
   .eael-simple-menu-toggle {
     @media screen and (max-width: 991px) {
-      left: 0; 
-      right: 0; 
-      margin-left: auto; 
-      margin-right: auto; 
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
     }
   }
 }
