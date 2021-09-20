@@ -12,7 +12,7 @@
     display: flex;
     justify-content: center;
 
-    .ea-circle-info {
+    .eael-circle-info {
         display: inline-flex;
     }
     .eael-circle-inner {
@@ -22,323 +22,326 @@
         border-radius: $nav-circle-border-radius;
     }
 
-    //&.eael-interactive-circle-preset-1 {
-    //    .ea-circle-info {
-    //        $nav-item-border-color: #fff;
-    //        $nav-item-border-width: 4px;
-    //        $nav-item-box-shadow: 0px 5px 40px rgba(131, 100, 196, 0.2);
-    //        $nav-item-padding: 20px;
-    //        $nav-item-icon-width: 30px;
-    //        $nav-item-initial-background: #fff;
-    //        $nav-item-hover-background: #7a5bff;
-    //        $nav-item-initial-color: #7a5bff;
-    //        $nav-item-hover-color: #fff;
-    //        .eael-circle-inner {
-    //            transform: rotate(calc(-90deg - (#{$nav-items} * 10deg)));
-    //            position: relative;
-    //            .eael-circle-item {
-    //                .eael-circle-btn {
-    //                    width: $nav-item-width;
-    //                    height: $nav-item-width;
-    //                    border-radius: $nav-item-border-radius;
-    //                    display: block;
-    //                    overflow: hidden;
-    //                    position: absolute;
-    //                    top: 50%;
-    //                    left: 50%;
-    //                    background: $nav-item-initial-background;
-    //                    border: $nav-item-border-width solid $nav-item-border-color;
-    //                    margin: calc((#{$nav-item-width} / 2) * -1);
-    //                    box-shadow: $nav-item-box-shadow;
-    //                    .eael-circle-icon-shapes {
-    //                        display: none;
-    //                    }
-    //                    .eael-circle-btn-icon {
-    //                        text-align: center;
-    //                        padding: $nav-item-padding;
-    //                        border-radius: $nav-item-border-radius;
-    //                        width: 100%;
-    //                        height: 100%;
-    //                        .eael-circle-icon-inner {
-    //                            display: flex;
-    //                            align-items: center;
-    //                            justify-content: center;
-    //                            flex-direction: column;
-    //                            width: 100%;
-    //                            height: 100%;
-    //
-    //                            img,
-    //                            svg {
-    //                                width: $nav-item-icon-width;
-    //                                fill: $nav-item-initial-color;
-    //                            }
-    //                        }
-    //                    }
-    //                    &.active {
-    //                        .eael-circle-btn-icon {
-    //                            background: $nav-item-hover-background;
-    //                            img,
-    //                            svg {
-    //                                fill: $nav-item-hover-color;
-    //                            }
-    //                        }
-    //                    }
-    //                    @for $i from 1 through $nav-items {
-    //                        &#eael-circle-item-#{$i} {
-    //                            z-index: 99;
-    //                            transform: rotate(calc((360deg / #{$nav-items}) * #{$i}))
-    //                            translate(calc(#{$nav-circle-width} / 2))
-    //                            rotate(calc((360deg / #{$nav-items}) * #{$i} * -1))
-    //                            rotate(calc(90deg + (#{$nav-items} * 10deg)));
-    //                        }
-    //                    }
-    //                }
-    //                .eael-circle-btn-content {
-    //                    display: none;
-    //                    overflow: hidden;
-    //                    position: absolute;
-    //                    top: 0;
-    //                    bottom: 0;
-    //                    left: 0;
-    //                    right: 0;
-    //                    transform: rotate(calc(90deg + (#{$nav-items} * 10deg)));
-    //                    .eael-circle-content {
-    //                        display: flex;
-    //                        flex-direction: column;
-    //                        align-items: center;
-    //                        justify-content: center;
-    //                        padding: $nav-content-padding;
-    //                        text-align: center;
-    //                        width: 100%;
-    //                        height: 100%;
-    //                        border-radius: $nav-circle-border-radius;
-    //                    }
-    //                    &.active {
-    //                        display: block;
-    //                    }
-    //                }
-    //            }
-    //        }
-    //
-    //        &[data-items="1"] {
-    //            .ea-circle-info-item {
-    //                #eael-circle-item-1 {
-    //                    top: 0;
-    //                    left: 50%;
-    //                    transform: translate(-50%, -50%);
-    //                }
-    //            }
-    //        }
-    //        &[data-items="2"] {
-    //            .ea-circle-info-item {
-    //                #eael-circle-item-1 {
-    //                    top: 0;
-    //                    left: 50%;
-    //                    transform: translate(-50%, -50%);
-    //                }
-    //                #eael-circle-item-2 {
-    //                    bottom: 0;
-    //                    left: 50%;
-    //                    transform: translate(-50%, 50%);
-    //                }
-    //            }
-    //        }
-    //        &[data-items="3"] {
-    //            .ea-circle-info-item {
-    //                #eael-circle-item-1 {
-    //                    top: 0;
-    //                    left: 50%;
-    //                    transform: translate(-50%, -50%);
-    //                }
-    //                #eael-circle-item-2 {
-    //                    top: 75%;
-    //                    right: 7%;
-    //                    transform: translate(50%, -50%);
-    //                }
-    //                #eael-circle-item-3 {
-    //                    top: 75%;
-    //                    left: 7%;
-    //                    transform: translate(-50%, -50%);
-    //                }
-    //            }
-    //        }
-    //        &[data-items="4"] {
-    //            .ea-circle-info-item {
-    //                #eael-circle-item-1 {
-    //                    top: 14.65%;
-    //                    left: 14.65%;
-    //                    transform: translate(-50%, -50%);
-    //                }
-    //                #eael-circle-item-2 {
-    //                    top: 14.65%;
-    //                    right: 14.65%;
-    //                    transform: translate(50%, -50%);
-    //                }
-    //                #eael-circle-item-3 {
-    //                    bottom: 14.65%;
-    //                    left: 14.65%;
-    //                    transform: translate(-50%, 50%);
-    //                }
-    //                #eael-circle-item-4 {
-    //                    bottom: 14.65%;
-    //                    right: 14.65%;
-    //                    transform: translate(50%, 50%);
-    //                }
-    //            }
-    //        }
-    //        &[data-items="5"] {
-    //            .ea-circle-info-item {
-    //                #eael-circle-item-1 {
-    //                    top: 0%;
-    //                    left: 50%;
-    //                    transform: translate(-50%, -50%);
-    //                }
-    //                #eael-circle-item-2 {
-    //                    top: 39%;
-    //                    right: 1%;
-    //                    transform: translate(50%, -50%);
-    //                }
-    //                #eael-circle-item-3 {
-    //                    bottom: 10%;
-    //                    left: 20%;
-    //                    transform: translate(-50%, 50%);
-    //                }
-    //                #eael-circle-item-4 {
-    //                    bottom: 10%;
-    //                    right: 20%;
-    //                    transform: translate(50%, 50%);
-    //                }
-    //                #eael-circle-item-5 {
-    //                    top: 39%;
-    //                    left: 1%;
-    //                    transform: translate(-50%, -50%);
-    //                }
-    //            }
-    //        }
-    //        &[data-items="6"] {
-    //            .ea-circle-info-item {
-    //                #eael-circle-item-1 {
-    //                    top: 0;
-    //                    left: 50%;
-    //                    transform: translate(-50%, -50%);
-    //                }
-    //                #eael-circle-item-2 {
-    //                    top: 25%;
-    //                    right: 7%;
-    //                    transform: translate(50%, -50%);
-    //                }
-    //                #eael-circle-item-3 {
-    //                    top: 75%;
-    //                    right: 7%;
-    //                    transform: translate(50%, -50%);
-    //                }
-    //                #eael-circle-item-4 {
-    //                    bottom: 0;
-    //                    left: 50%;
-    //                    transform: translate(-50%, 50%);
-    //                }
-    //                #eael-circle-item-5 {
-    //                    top: 75%;
-    //                    left: 7%;
-    //                    transform: translate(-50%, -50%);
-    //                }
-    //                #eael-circle-item-6 {
-    //                    top: 25%;
-    //                    left: 7%;
-    //                    transform: translate(-50%, -50%);
-    //                }
-    //            }
-    //        }
-    //        &[data-items="7"] {
-    //            .ea-circle-info-item {
-    //                #eael-circle-item-1 {
-    //                    top: 0%;
-    //                    left: 50%;
-    //                    transform: translate(-50%, -50%);
-    //                }
-    //                #eael-circle-item-2 {
-    //                    top: 20%;
-    //                    right: 8%;
-    //                    transform: translate(50%, -50%);
-    //                }
-    //                #eael-circle-item-3 {
-    //                    top: 61%;
-    //                    right: 1%;
-    //                    transform: translate(50%, -50%);
-    //                }
-    //                #eael-circle-item-4 {
-    //                    bottom: 5%;
-    //                    right: 28%;
-    //                    transform: translate(50%, 50%);
-    //                }
-    //                #eael-circle-item-5 {
-    //                    bottom: 5%;
-    //                    left: 28%;
-    //                    transform: translate(-50%, 50%);
-    //                }
-    //                #eael-circle-item-6 {
-    //                    top: 61%;
-    //                    left: 1%;
-    //                    transform: translate(-50%, -50%);
-    //                }
-    //                #eael-circle-item-7 {
-    //                    top: 20%;
-    //                    left: 8%;
-    //                    transform: translate(-50%, -50%);
-    //                }
-    //            }
-    //        }
-    //        &[data-items="8"] {
-    //            .ea-circle-info-item {
-    //                #eael-circle-item-1 {
-    //                    top: 0%;
-    //                    left: 50%;
-    //                    transform: translate(-50%, -50%);
-    //                }
-    //                #eael-circle-item-2 {
-    //                    top: 14.65%;
-    //                    right: 14.65%;
-    //                    transform: translate(50%, -50%);
-    //                }
-    //                #eael-circle-item-3 {
-    //                    top: 50%;
-    //                    right: 0%;
-    //                    transform: translate(50%, -50%);
-    //                }
-    //                #eael-circle-item-4 {
-    //                    bottom: 14.65%;
-    //                    right: 14.65%;
-    //                    transform: translate(50%, 50%);
-    //                }
-    //                #eael-circle-item-5 {
-    //                    bottom: 0%;
-    //                    left: 50%;
-    //                    transform: translate(-50%, 50%);
-    //                }
-    //                #eael-circle-item-6 {
-    //                    bottom: 14.65%;
-    //                    left: 14.65%;
-    //                    transform: translate(-50%, 50%);
-    //                }
-    //                #eael-circle-item-7 {
-    //                    top: 50%;
-    //                    left: 0%;
-    //                    transform: translate(-50%, -50%);
-    //                }
-    //                #eael-circle-item-8 {
-    //                    top: 14.65%;
-    //                    left: 14.65%;
-    //                    transform: translate(-50%, -50%);
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
+    &.eael-interactive-circle-preset-1 {
+        .eael-circle-info {
+            $nav-item-border-color: #fff;
+            $nav-item-border-width: 4px;
+            $nav-item-box-shadow: 0px 5px 40px rgba(131, 100, 196, 0.2);
+            $nav-item-padding: 20px;
+            $nav-item-icon-width: 30px;
+            $nav-item-initial-background: #fff;
+            $nav-item-hover-background: #7a5bff;
+            $nav-item-initial-color: #7a5bff;
+            $nav-item-hover-color: #fff;
+            .eael-circle-inner {
+                transform: rotate(calc(-90deg - (#{$nav-items} * 10deg)));
+                position: relative;
+                .eael-circle-item {
+                    .eael-circle-btn {
+                        width: $nav-item-width;
+                        height: $nav-item-width;
+                        border-radius: $nav-item-border-radius;
+                        display: block;
+                        overflow: hidden;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        background: $nav-item-initial-background;
+                        border: $nav-item-border-width solid $nav-item-border-color;
+                        margin: calc((#{$nav-item-width} / 2) * -1);
+                        box-shadow: $nav-item-box-shadow;
+                        .eael-circle-icon-shapes {
+                            display: none;
+                        }
+                        .eael-circle-btn-icon {
+                            text-align: center;
+                            padding: $nav-item-padding;
+                            border-radius: $nav-item-border-radius;
+                            width: 100%;
+                            height: 100%;
+                            .eael-circle-icon-inner {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                flex-direction: column;
+                                width: 100%;
+                                height: 100%;
+
+                                img,
+                                svg {
+                                    width: $nav-item-icon-width;
+                                    fill: $nav-item-initial-color;
+                                }
+                            }
+                        }
+                        &.active {
+                            .eael-circle-btn-icon {
+                                background: $nav-item-hover-background;
+                                img,
+                                svg {
+                                    fill: $nav-item-hover-color;
+                                }
+                            }
+                        }
+                        //@for $i from 1 through $nav-items {
+                        //    &#eael-circle-item-#{$i} {
+                        //        z-index: 99;
+                        //        transform: rotate(calc((360deg / #{$nav-items}) * #{$i}))
+                        //        translate(calc(#{$nav-circle-width} / 2))
+                        //        rotate(calc((360deg / #{$nav-items}) * #{$i} * -1))
+                        //        rotate(calc(90deg + (#{$nav-items} * 10deg)));
+                        //    }
+                        //}
+                    }
+                    .eael-circle-btn-content {
+                        display: none;
+                        overflow: hidden;
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        transform: rotate(calc(90deg + (#{$nav-items} * 10deg)));
+                        .eael-circle-content {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            padding: $nav-content-padding;
+                            text-align: center;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: $nav-circle-border-radius;
+                        }
+                        &.active {
+                            display: block;
+                        }
+                    }
+                }
+            }
+
+            &[data-items="1"] {
+                .eael-circle-info-item {
+                    #eael-circle-item-1 {
+                        top: 0;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+            &[data-items="2"] {
+                .eael-circle-info-item {
+                    #eael-circle-item-1 {
+                        top: 0;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-2 {
+                        bottom: 0;
+                        left: 50%;
+                        transform: translate(-50%, 50%);
+                    }
+                }
+            }
+            &[data-items="3"] {
+                .eael-circle-info-item {
+                    #eael-circle-item-1 {
+                        top: 0;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-2 {
+                        top: 75%;
+                        right: 7%;
+                        transform: translate(50%, -50%);
+                    }
+                    #eael-circle-item-3 {
+                        top: 75%;
+                        left: 7%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+            &[data-items="4"] {
+                .eael-circle-info-item {
+                    #eael-circle-item-1 {
+                        top: 14.65%;
+                        left: 14.65%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-2 {
+                        top: 14.65%;
+                        right: 14.65%;
+                        transform: translate(50%, -50%);
+                    }
+                    #eael-circle-item-3 {
+                        bottom: 14.65%;
+                        left: 14.65%;
+                        transform: translate(-50%, 50%);
+                    }
+                    #eael-circle-item-4 {
+                        bottom: 14.65%;
+                        right: 14.65%;
+                        transform: translate(50%, 50%);
+                    }
+                }
+            }
+            &[data-items="5"] {
+                .eael-circle-info-item {
+                    #eael-circle-item-1 {
+                        top: 0%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-2 {
+                        top: 39%;
+                        right: 1%;
+                        transform: translate(50%, -50%);
+                    }
+                    #eael-circle-item-3 {
+                        bottom: 10%;
+                        left: 20%;
+                        transform: translate(-50%, 50%);
+                    }
+                    #eael-circle-item-4 {
+                        bottom: 10%;
+                        right: 20%;
+                        transform: translate(50%, 50%);
+                    }
+                    #eael-circle-item-5 {
+                        top: 39%;
+                        left: 1%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+            &[data-items="6"] {
+                .eael-circle-info-item {
+                    #eael-circle-item-1 {
+                        top: 0;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-2 {
+                        top: 25%;
+                        right: 7%;
+                        transform: translate(50%, -50%);
+                    }
+                    #eael-circle-item-3 {
+                        top: 75%;
+                        right: 7%;
+                        transform: translate(50%, -50%);
+                    }
+                    #eael-circle-item-4 {
+                        bottom: 0;
+                        left: 50%;
+                        transform: translate(-50%, 50%);
+                    }
+                    #eael-circle-item-5 {
+                        top: 75%;
+                        left: 7%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-6 {
+                        top: 25%;
+                        left: 7%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+            &[data-items="7"] {
+                .eael-circle-info-item {
+                    #eael-circle-item-1 {
+                        top: 0%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-2 {
+                        top: 20%;
+                        right: 8%;
+                        transform: translate(50%, -50%);
+                    }
+                    #eael-circle-item-3 {
+                        top: 61%;
+                        right: 1%;
+                        transform: translate(50%, -50%);
+                    }
+                    #eael-circle-item-4 {
+                        bottom: 5%;
+                        right: 28%;
+                        transform: translate(50%, 50%);
+                    }
+                    #eael-circle-item-5 {
+                        bottom: 5%;
+                        left: 28%;
+                        transform: translate(-50%, 50%);
+                    }
+                    #eael-circle-item-6 {
+                        top: 61%;
+                        left: 1%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-7 {
+                        top: 20%;
+                        left: 8%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+            &[data-items="8"] {
+                .eael-circle-info-item {
+                    #eael-circle-item-1 {
+                        top: 0%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-2 {
+                        top: 14.65%;
+                        right: 14.65%;
+                        transform: translate(50%, -50%);
+                    }
+                    #eael-circle-item-3 {
+                        top: 50%;
+                        right: 0%;
+                        transform: translate(50%, -50%);
+                    }
+                    #eael-circle-item-4 {
+                        bottom: 14.65%;
+                        right: 14.65%;
+                        transform: translate(50%, 50%);
+                    }
+                    #eael-circle-item-5 {
+                        bottom: 0%;
+                        left: 50%;
+                        transform: translate(-50%, 50%);
+                    }
+                    #eael-circle-item-6 {
+                        bottom: 14.65%;
+                        left: 14.65%;
+                        transform: translate(-50%, 50%);
+                    }
+                    #eael-circle-item-7 {
+                        top: 50%;
+                        left: 0%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-8 {
+                        top: 14.65%;
+                        left: 14.65%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+        }
+    }
 
 
     &.eael-interactive-circle-preset-2 {
-        overflow: hidden;
-        padding-top: $nav-item-width;
+
+        $nav-circle-2-width: 700px;
+        //overflow: hidden;
+        //padding-top: $nav-item-width;
+        padding-top:120px;
 
         .eael-circle-info {
             $nav-item-border-width: 10px;
@@ -358,10 +361,14 @@
             $nav-content-text-color: #202b46;
             $nav-content-margin: 10px;
             $nav-content-padding: 0px 60px;
-            padding: ($nav-item-width / 2) + $nav-item-gap;
+            //padding: ($nav-item-width / 2) + $nav-item-gap;
             position: relative;
-            margin-bottom: - (($nav-circle-width / 2) + ($nav-item-width / 2) + $nav-item-gap);
+            //margin-bottom: - (($nav-circle-width / 2) + ($nav-item-width / 2) + $nav-item-gap);
             .eael-circle-inner {
+                width: $nav-circle-2-width;
+                height: $nav-circle-2-width / 2;
+                border-radius: $nav-circle-2-width $nav-circle-2-width 0 0;
+
                 .eael-circle-item {
                     .eael-circle-btn {
                         position: absolute;
@@ -369,6 +376,9 @@
                         height: $nav-item-width;
                         width: $nav-item-width;
                         border-radius: $nav-item-border-radius;
+                        top: 50%;
+                        left: 50%;
+
                         .eael-circle-icon-shapes {
                             position: absolute;
                             top: 0;
@@ -417,21 +427,28 @@
                     }
                     .eael-circle-btn-content {
                         position: absolute;
-                        $content-position: ($nav-item-width / 2) + $nav-item-gap;
-                        top: $content-position;
-                        bottom: $content-position;
-                        left: $content-position;
-                        right: $content-position;
+                        //$content-position: ($nav-item-width / 2) + $nav-item-gap;
+                        //top: $content-position;
+                        //bottom: $content-position;
+                        //left: $content-position;
+                        //right: $content-position;
+                        bottom: 10px;
+                        left: 50%;
+                        transform: translateX(-50%);
                         display: none;
                         padding: $nav-content-margin;
+                        width: 85%;
+
                         .eael-circle-content {
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            text-align: center;
-                            height: 100%;
-                            padding: $nav-content-padding;
-                            border-radius: $nav-circle-border-radius;
+                            //display: flex;
+                            //flex-direction: column;
+                            //align-items: center;
+                            //text-align: center;
+                            //height: 100%;
+                            ////padding: $nav-content-padding;
+                            //border-radius: $nav-circle-border-radius;
+
+
                             h2 {
                                 font-size: $nav-content-text-size;
                                 text-transform: uppercase;
@@ -449,9 +466,12 @@
                 }
                 .eael-circle-item {
                     #eael-circle-item-1 {
-                        top: 36%;
-                        left: 2.5%;
-                        transform: translate(-50%, -50%);
+                        //top: 36%;
+                        //left: 2.5%;
+                        //transform: translate(-50%, -50%);
+
+                        //transform: rotate(77deg) translate(-50%, (($nav-circle-2-width/2) + $nav-item-width)) rotate(-77deg);
+
                         .eael-circle-btn-icon {
                             background: radial-gradient(
                                             81.89% 82.54% at 48.96% 49.88%,
@@ -465,9 +485,11 @@
                         }
                     }
                     #eael-circle-item-2 {
-                        top: 20.3%;
-                        left: 10.5%;
-                        transform: translate(-50%, -50%);
+                        //top: 20.3%;
+                        //left: 10.5%;
+                        //transform: translate(-50%, -50%);
+
+                        //transform: rotate(97deg) translate(-50%, 301px) rotate(-97deg);
                         .eael-circle-btn-icon {
                             background: radial-gradient(
                                             64.96% 65.32% at 52.18% 47.01%,
@@ -481,9 +503,12 @@
                         }
                     }
                     #eael-circle-item-3 {
-                        top: 8.1%;
-                        left: 23.5%;
-                        transform: translate(-50%, -50%);
+                        //top: 8.1%;
+                        //left: 23.5%;
+                        //transform: translate(-50%, -50%);
+
+                        //transform: rotate(121deg) translate(-50%, 259px) rotate(-121deg);
+
                         .eael-circle-btn-icon {
                             background: radial-gradient(
                                             101.16% 101.7% at 47.77% 50.74%,
@@ -497,9 +522,12 @@
                         }
                     }
                     #eael-circle-item-4 {
-                        top: 1.5%;
-                        left: 40.6%;
-                        transform: translate(-50%, -50%);
+                        //top: 1.5%;
+                        //left: 40.6%;
+                        //transform: translate(-50%, -50%);
+
+                        //transform: rotate(152deg) translate(-50%, 220px) rotate(-152deg);
+
                         .eael-circle-btn-icon {
                             background: radial-gradient(
                                             65.76% 66.29% at 48.95% 49.57%,
@@ -513,9 +541,11 @@
                         }
                     }
                     #eael-circle-item-5 {
-                        top: 1.5%;
-                        right: 40.6%;
-                        transform: translate(50%, -50%);
+                        //top: 1.5%;
+                        //right: 40.6%;
+                        //transform: translate(50%, -50%);
+
+                        //transform: rotate(191deg) translate(-50%, 200px) rotate(-191deg);
                         .eael-circle-btn-icon {
                             background: radial-gradient(
                                             73.69% 72.33% at 51.12% 47.67%,
@@ -531,9 +561,11 @@
                         }
                     }
                     #eael-circle-item-6 {
-                        top: 8.1%;
-                        right: 23.5%;
-                        transform: translate(50%, -50%);
+                        //top: 8.1%;
+                        //right: 23.5%;
+                        //transform: translate(50%, -50%);
+
+                        //transform: rotate(234deg) translate(-50%, 223px) rotate(-234deg);
                         .eael-circle-btn-icon {
                             background: radial-gradient(
                                             94.25% 92.56% at 48.86% 49.71%,

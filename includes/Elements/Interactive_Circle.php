@@ -786,7 +786,7 @@ class Interactive_Circle extends Widget_Base
             <?php } else {?>
 
         <div class="eael-circle-wrapper toggle-on-hover <?php echo $settings['eael_interactive_circle_preset']
-	    ?>" >
+	    ?>">
             <div class="eael-circle-info" data-items="<?php echo $item_count; ?>">
                 <div class="eael-circle-inner">
                 <?php foreach ($settings['eael_interactive_circle_item'] as $index => $item) :
