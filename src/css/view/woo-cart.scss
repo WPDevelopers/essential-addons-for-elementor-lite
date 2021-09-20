@@ -1,0 +1,88 @@
+.eael-woo-cart-wrapper {
+    background: #efefef;
+    padding: 100px 0;
+
+    form.eael-woo-cart-form {
+        .eael-woo-cart-table {
+            border-collapse: separate;
+            border-spacing: 0 13px;
+
+            th,
+            td {
+                border: none;
+            }
+
+            thead {
+                tr {
+                    th {
+                        border: none;
+
+                        &.product-thumbnail {
+                            text-align: left;
+                        }
+
+                        &.product-name {
+                            text-align: left;
+                        }
+                    }
+                }
+            }
+
+            tbody {
+                tr {
+                    position: relative;
+                    z-index: 2;
+
+                    &::after {
+                        position: absolute;
+                        content: "";
+                        background: #fff;
+                        top: 0;
+                        left: 0;
+                        height: 100%;
+                        width: 100%;
+                        z-index: -1;
+                        box-shadow: 0 8px 18px 0 rgba(0, 1, 35, 0.05);
+                        border-radius: 5px;
+                    }
+
+                    td {
+                        border: none;
+                        background: transparent;
+                        text-align: center;
+
+                        &.product-thumbnail {
+                            text-align: left;
+
+                            img {
+                                width: 62px;
+                                height: auto;
+                                border-radius: 50%;
+                                display: block;
+                            }
+                        }
+
+                        &.product-name {
+                            text-align: left;
+                        }
+
+                        &.product-quantity {
+                            input::-webkit-outer-spin-button,
+                            input::-webkit-inner-spin-button {
+                                -webkit-appearance: none;
+                            }
+
+                            input[type=number] {
+                                -moz-appearance: textfield;
+                                width: 50px;
+                                background: #F9FBFF;
+                                border: none;
+                                border-radius: 3px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
