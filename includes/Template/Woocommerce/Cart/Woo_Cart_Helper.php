@@ -35,11 +35,11 @@ trait Woo_Cart_Helper {
 
 	public static function woo_cart_style_one( $settings ) {
 		do_action( 'woocommerce_before_cart' ); ?>
-
-        <form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
+        <div class="eael-woo-cart-wrapper">
+            <form class="woocommerce-cart-form eael-woo-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 			<?php do_action( 'woocommerce_before_cart_table' ); ?>
 
-            <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
+            <table class="shop_table cart woocommerce-cart-form__contents eael-woo-cart-table">
                 <thead>
                 <tr>
 					<?php
@@ -153,9 +153,7 @@ trait Woo_Cart_Helper {
                                             <td class="product-quantity" data-title="<?php esc_attr_e( 'Quantity', 'essential-addons-for-elementor-lite' ); ?>">
 												<?php
 												if ( $_product->is_sold_individually() ) {
-													$product_quantity
-														= sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1" />',
-														$cart_item_key );
+													$product_quantity = sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key );
 												} else {
 													$product_quantity = woocommerce_quantity_input(
 														[
@@ -241,7 +239,7 @@ trait Woo_Cart_Helper {
                 </div>
             </div>
         </form>
-
+        </div>
 		<?php do_action( 'woocommerce_after_cart' );
 	}
 

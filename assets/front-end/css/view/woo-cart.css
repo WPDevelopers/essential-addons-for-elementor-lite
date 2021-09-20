@@ -1,1 +1,66 @@
-
+.eael-woo-cart-wrapper {
+  background: #efefef;
+  padding: 100px 0;
+}
+.eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table {
+  border-collapse: separate;
+  border-spacing: 0 13px;
+}
+.eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table th,
+.eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td {
+  border: none;
+}
+.eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table thead tr th {
+  border: none;
+}
+.eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table thead tr th.product-thumbnail {
+  text-align: left;
+}
+.eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table thead tr th.product-name {
+  text-align: left;
+}
+.eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr {
+  position: relative;
+  z-index: 2;
+}
+.eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr::after {
+  position: absolute;
+  content: "";
+  background: #fff;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  -webkit-box-shadow: 0 8px 18px 0 rgba(0, 1, 35, 0.05);
+          box-shadow: 0 8px 18px 0 rgba(0, 1, 35, 0.05);
+  border-radius: 5px;
+}
+.eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td {
+  border: none;
+  background: transparent;
+  text-align: center;
+}
+.eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-thumbnail {
+  text-align: left;
+}
+.eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-thumbnail img {
+  width: 62px;
+  height: auto;
+  border-radius: 50%;
+  display: block;
+}
+.eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-name {
+  text-align: left;
+}
+.eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-quantity input::-webkit-outer-spin-button,
+.eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-quantity input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-quantity input[type=number] {
+  -moz-appearance: textfield;
+  width: 50px;
+  background: #F9FBFF;
+  border: none;
+  border-radius: 3px;
+}
