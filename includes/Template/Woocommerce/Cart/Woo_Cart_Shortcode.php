@@ -17,14 +17,14 @@ if ( class_exists( '\WC_Shortcode_Cart' ) ) {
 		 * @param array $atts Shortcode attributes.
 		 */
 		public static function output( $atts, $settings = [] ) {
-			if ( ! apply_filters( 'woocommerce_output_cart_shortcode_content', TRUE ) ) {
+			if ( ! apply_filters( 'woocommerce_output_cart_shortcode_content', true ) ) {
 				return;
 			}
 
 			// Constants.
-			wc_maybe_define_constant( 'WOOCOMMERCE_CART', TRUE );
+			wc_maybe_define_constant( 'WOOCOMMERCE_CART', true );
 
-			$atts = shortcode_atts( [], $atts, 'woocommerce_cart' );
+			$atts        = shortcode_atts( [], $atts, 'woocommerce_cart' );
 			$nonce_value = wc_get_var( $_REQUEST['woocommerce-shipping-calculator-nonce'],
 				wc_get_var( $_REQUEST['_wpnonce'], '' ) ); // @codingStandardsIgnoreLine.
 
