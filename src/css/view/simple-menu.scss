@@ -632,6 +632,7 @@
         .eael-simple-menu-toggle-text {
             display: block;
             left: calc(100% + 20px);
+            white-space: nowrap;
         }
     }
 }
