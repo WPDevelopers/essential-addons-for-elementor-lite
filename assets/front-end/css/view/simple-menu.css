@@ -479,6 +479,7 @@
 .eael-simple-menu-hamburger-align-left .eael-simple-menu-toggle .eael-simple-menu-toggle-text {
   display: block;
   left: calc(100% + 20px);
+  white-space: nowrap;
 }
 @media screen and (max-width: 991px) {
   .eael-simple-menu-hamburger-align-center .eael-simple-menu-toggle {
