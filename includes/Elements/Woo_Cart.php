@@ -22,12 +22,12 @@ class Woo_Cart extends Widget_Base {
 
 	use \Essential_Addons_Elementor\Template\Woocommerce\Cart\Woo_Cart_Helper;
 
-	public function __construct( $data = [], $args = NULL ) {
+	public function __construct( $data = [], $args = null ) {
 		parent::__construct( $data, $args );
 
 		$is_type_instance = $this->is_type_instance();
 
-		if ( ! $is_type_instance && NULL === $args ) {
+		if ( ! $is_type_instance && null === $args ) {
 			throw new \Exception( '`$args` argument is required when initializing a full widget instance.' );
 		}
 
@@ -128,7 +128,7 @@ class Woo_Cart extends Widget_Base {
 				'label'       => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'default',
-				'label_block' => FALSE,
+				'label_block' => false,
 				'options'     => apply_filters( 'eael/woo-cart/layout', [
 					'default' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
 					'style-2' => esc_html__( 'Style 2', 'essential-addons-for-elementor-lite' ),
@@ -139,7 +139,7 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
-		if ( ! apply_filters( 'eael/pro_enabled', FALSE ) ) {
+		if ( ! apply_filters( 'eael/pro_enabled', false ) ) {
 			$this->add_control(
 				'eael_woo_cart_pro_enable_warning',
 				[
@@ -212,7 +212,26 @@ class Woo_Cart extends Widget_Base {
 				'label'       => esc_html__( 'Heading Title', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__( 'Product Title', 'essential-addons-for-elementor-lite' ),
-				'label_block' => TRUE,
+				'label_block' => true,
+			]
+		);
+
+		$repeater->add_control(
+			'item_remove_icon',
+			[
+				'label'                  => __( 'Remove Icon', 'elementor' ),
+				'type'                   => Controls_Manager::ICONS,
+				'default'                => [
+					'value'   => 'fas fa-times',
+					'library' => 'fa-solid',
+				],
+				'label_block'            => false,
+				'skin'                   => 'inline',
+				'exclude_inline_options' => [ 'svg' ],
+				'frontend_available'     => true,
+				'condition'              => [
+					'column_type' => 'remove'
+				]
 			]
 		);
 
@@ -224,27 +243,27 @@ class Woo_Cart extends Widget_Base {
 				'fields'      => $repeater->get_controls(),
 				'default'     => [
 					[
-						'column_type'         => 'remove',
+						'column_type'          => 'remove',
 						'column_heading_title' => esc_html__( '', 'essential-addons-for-elementor-lite' ),
 					],
 					[
-						'column_type'         => 'thumbnail',
+						'column_type'          => 'thumbnail',
 						'column_heading_title' => esc_html__( 'Product', 'essential-addons-for-elementor-lite' ),
 					],
 					[
-						'column_type'         => 'name',
+						'column_type'          => 'name',
 						'column_heading_title' => esc_html__( '', 'essential-addons-for-elementor-lite' ),
 					],
 					[
-						'column_type'         => 'price',
+						'column_type'          => 'price',
 						'column_heading_title' => esc_html__( 'Price', 'essential-addons-for-elementor-lite' ),
 					],
 					[
-						'column_type'         => 'quantity',
+						'column_type'          => 'quantity',
 						'column_heading_title' => esc_html__( 'Quantity', 'essential-addons-for-elementor-lite' ),
 					],
 					[
-						'column_type'         => 'subtotal',
+						'column_type'          => 'subtotal',
 						'column_heading_title' => esc_html__( 'Total', 'essential-addons-for-elementor-lite' ),
 					],
 				],
@@ -273,7 +292,7 @@ class Woo_Cart extends Widget_Base {
 		$this->ea_woo_cart_add_actions( $settings );
 
 		if ( in_array( $settings['ea_woo_cart_layout'], [ 'style-3', 'style-4', 'style-5' ] ) ) {
-			if ( ! apply_filters( 'eael/pro_enabled', FALSE ) ) {
+			if ( ! apply_filters( 'eael/pro_enabled', false ) ) {
 				return;
 			}
 		}
