@@ -2,6 +2,8 @@
 
 namespace Essential_Addons_Elementor\Template\Woocommerce\Cart;
 
+use Elementor\Icons_Manager;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
@@ -31,7 +33,7 @@ trait Woo_Cart_Helper {
 		Woo_Cart_Shortcode::output( [], $settings );
 	}
 
-	public function woo_cart_style_one( $settings ) {
+	public static function woo_cart_style_one( $settings ) {
 		do_action( 'woocommerce_before_cart' ); ?>
 
         <form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
@@ -52,17 +54,15 @@ trait Woo_Cart_Helper {
                 </tr>
                 </thead>
                 <tbody>
-				<?php do_action( 'woocommerce_before_cart_contents' ); ?>
-
 				<?php
+				do_action( 'woocommerce_before_cart_contents' );
+
 				foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
-					$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item,
-						$cart_item_key );
-					$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'],
-						$cart_item, $cart_item_key );
+					$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+					$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
 
 					if ( $_product && $_product->exists() && $cart_item['quantity'] > 0
-					     && apply_filters( 'woocommerce_cart_item_visible', TRUE, $cart_item, $cart_item_key )
+					     && apply_filters( 'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key )
 					) {
 						$product_permalink = apply_filters( 'woocommerce_cart_item_permalink',
 							$_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item,
@@ -80,11 +80,12 @@ trait Woo_Cart_Helper {
 												echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 													'woocommerce_cart_item_remove_link',
 													sprintf(
-														'<a href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">&times;</a>',
+														'<a href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">%s</a>',
 														esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
-														esc_html__( 'Remove this item', 'woocommerce' ),
+														esc_html__( 'Remove this item', 'essential-addons-for-elementor-lite' ),
 														esc_attr( $product_id ),
-														esc_attr( $_product->get_sku() )
+														esc_attr( $_product->get_sku() ),
+														Icons_Manager::render_font_icon( $column_data['item_remove_icon'], [ 'aria-hidden' => 'true' ] )
 													),
 													$cart_item_key
 												);
@@ -95,8 +96,7 @@ trait Woo_Cart_Helper {
 										case 'thumbnail': ?>
                                             <td class="product-thumbnail">
 												<?php
-												$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail',
-													$_product->get_image(), $cart_item, $cart_item_key );
+												$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
 
 												if ( ! $product_permalink ) {
 													echo $thumbnail; // PHPCS: XSS ok.
@@ -109,8 +109,7 @@ trait Woo_Cart_Helper {
 											<?php
 											break;
 										case 'name': ?>
-                                            <td class="product-name"
-                                                data-title="<?php esc_attr_e( 'Product', 'woocommerce' ); ?>">
+                                            <td class="product-name" data-title="<?php esc_attr_e( 'Product', 'essential-addons-for-elementor-lite' ); ?>">
 												<?php
 												if ( ! $product_permalink ) {
 													echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name',
@@ -122,8 +121,7 @@ trait Woo_Cart_Helper {
 															$_product->get_name() ), $cart_item, $cart_item_key ) );
 												}
 
-												do_action( 'woocommerce_after_cart_item_name', $cart_item,
-													$cart_item_key );
+												do_action( 'woocommerce_after_cart_item_name', $cart_item, $cart_item_key );
 
 												// Meta data.
 												echo wc_get_formatted_cart_item_data( $cart_item ); // PHPCS: XSS ok.
@@ -134,7 +132,7 @@ trait Woo_Cart_Helper {
 												) {
 													echo wp_kses_post( apply_filters( 'woocommerce_cart_item_backorder_notification',
 														'<p class="backorder_notification">'
-														. esc_html__( 'Available on backorder', 'woocommerce' )
+														. esc_html__( 'Available on backorder', 'essential-addons-for-elementor-lite' )
 														. '</p>', $product_id ) );
 												}
 												?>
@@ -142,8 +140,7 @@ trait Woo_Cart_Helper {
 											<?php
 											break;
 										case 'price': ?>
-                                            <td class="product-price"
-                                                data-title="<?php esc_attr_e( 'Price', 'woocommerce' ); ?>">
+                                            <td class="product-price" data-title="<?php esc_attr_e( 'Price', 'essential-addons-for-elementor-lite' ); ?>">
 												<?php
 												echo apply_filters( 'woocommerce_cart_item_price',
 													WC()->cart->get_product_price( $_product ), $cart_item,
@@ -153,8 +150,7 @@ trait Woo_Cart_Helper {
 											<?php
 											break;
 										case 'quantity': ?>
-                                            <td class="product-quantity"
-                                                data-title="<?php esc_attr_e( 'Quantity', 'woocommerce' ); ?>">
+                                            <td class="product-quantity" data-title="<?php esc_attr_e( 'Quantity', 'essential-addons-for-elementor-lite' ); ?>">
 												<?php
 												if ( $_product->is_sold_individually() ) {
 													$product_quantity
@@ -170,7 +166,7 @@ trait Woo_Cart_Helper {
 															'product_name' => $_product->get_name(),
 														],
 														$_product,
-														FALSE
+														false
 													);
 												}
 
@@ -181,12 +177,11 @@ trait Woo_Cart_Helper {
 											<?php
 											break;
 										case 'subtotal': ?>
-                                            <td class="product-subtotal"
-                                                data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>">
+                                            <td class="product-subtotal" data-title="<?php esc_attr_e( 'Subtotal', 'essential-addons-for-elementor-lite' ); ?>">
 												<?php
 												echo apply_filters( 'woocommerce_cart_item_subtotal',
-													WC()->cart->get_product_subtotal( $_product,
-														$cart_item['quantity'] ), $cart_item,
+													WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ),
+													$cart_item,
 													$cart_item_key ); // PHPCS: XSS ok.
 												?>
                                             </td>
@@ -200,59 +195,57 @@ trait Woo_Cart_Helper {
 						<?php
 					}
 				}
-				?>
 
-				<?php do_action( 'woocommerce_cart_contents' ); ?>
-
-                <tr>
-                    <td colspan="6" class="actions">
-
-						<?php if ( wc_coupons_enabled() ) { ?>
-                            <div class="coupon">
-                                <label for="coupon_code"><?php esc_html_e( 'Coupon:', 'woocommerce' ); ?></label> <input
-                                        type="text" name="coupon_code" class="input-text" id="coupon_code" value=""
-                                        placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>"/>
-                                <button type="submit" class="button" name="apply_coupon"
-                                        value="<?php esc_attr_e( 'Apply coupon',
-									        'woocommerce' ); ?>"><?php esc_attr_e( 'Apply coupon',
-										'woocommerce' ); ?></button>
-								<?php do_action( 'woocommerce_cart_coupon' ); ?>
-                            </div>
-						<?php } ?>
-
-                        <button type="submit" class="button" name="update_cart" value="<?php esc_attr_e( 'Update cart',
-							'woocommerce' ); ?>"><?php esc_html_e( 'Update cart', 'woocommerce' ); ?></button>
-
-						<?php do_action( 'woocommerce_cart_actions' ); ?>
-
-						<?php wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' ); ?>
-                    </td>
-                </tr>
-
-				<?php do_action( 'woocommerce_after_cart_contents' ); ?>
+				do_action( 'woocommerce_cart_contents' );
+				do_action( 'woocommerce_after_cart_contents' ); ?>
                 </tbody>
             </table>
+
 			<?php do_action( 'woocommerce_after_cart_table' ); ?>
+
+            <div>
+                <div>
+					<?php if ( wc_coupons_enabled() ) { ?>
+                        <div class="coupon">
+                            <label for="coupon_code"><?php esc_html_e( 'Coupon:', 'essential-addons-for-elementor-lite' ); ?></label> <input
+                                    type="text" name="coupon_code" class="input-text" id="coupon_code" value=""
+                                    placeholder="<?php esc_attr_e( 'Coupon code', 'essential-addons-for-elementor-lite' ); ?>"/>
+                            <button type="submit" class="button" name="apply_coupon"
+                                    value="<?php esc_attr_e( 'Apply coupon',
+								        'essential-addons-for-elementor-lite' ); ?>"><?php esc_attr_e( 'Apply coupon',
+									'essential-addons-for-elementor-lite' ); ?></button>
+							<?php do_action( 'woocommerce_cart_coupon' ); ?>
+                        </div>
+					<?php } ?>
+
+                    <button type="submit" class="button" name="update_cart" value="<?php esc_attr_e( 'Update cart',
+						'essential-addons-for-elementor-lite' ); ?>"><?php esc_html_e( 'Update cart', 'essential-addons-for-elementor-lite' ); ?></button>
+
+					<?php do_action( 'woocommerce_cart_actions' ); ?>
+
+					<?php wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' ); ?>
+                </div>
+
+				<?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
+
+                <div class="cart-collaterals">
+					<?php
+					/**
+					 * Cart collaterals hook.
+					 *
+					 * @hooked woocommerce_cross_sell_display
+					 * @hooked woocommerce_cart_totals - 10
+					 */
+					do_action( 'woocommerce_cart_collaterals' );
+					?>
+                </div>
+            </div>
         </form>
-
-		<?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
-
-        <div class="cart-collaterals">
-			<?php
-			/**
-			 * Cart collaterals hook.
-			 *
-			 * @hooked woocommerce_cross_sell_display
-			 * @hooked woocommerce_cart_totals - 10
-			 */
-			do_action( 'woocommerce_cart_collaterals' );
-			?>
-        </div>
 
 		<?php do_action( 'woocommerce_after_cart' );
 	}
 
-	public function woo_cart_style_two() {
+	public static function woo_cart_style_two() {
 		echo 'this is from woo cart helper style two';
 	}
 
