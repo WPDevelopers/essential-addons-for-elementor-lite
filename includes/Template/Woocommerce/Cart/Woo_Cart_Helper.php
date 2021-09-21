@@ -33,9 +33,9 @@ trait Woo_Cart_Helper {
 		Woo_Cart_Shortcode::output( [], $settings );
 	}
 
-	public static function woo_cart_style_one( $settings ) {
-		do_action( 'woocommerce_before_cart' ); ?>
+	public static function woo_cart_style_one( $settings ) { ?>
         <div class="eael-woo-cart-wrapper">
+	        <?php do_action( 'woocommerce_before_cart' ); ?>
             <form class="woocommerce-cart-form eael-woo-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 			<?php do_action( 'woocommerce_before_cart_table' ); ?>
 
