@@ -1,5 +1,11 @@
+$text-color-1: #202B46;
+$text-color-2: #747C92;
+$text-color-3: #737373;
+$qty-button: #97A0B6;
+$icon-color: #BEC6D7;
+
 .eael-woo-cart-wrapper {
-    background: #efefef;
+    background: #f9fbff;
     padding: 100px 0;
 
     form.eael-woo-cart-form {
@@ -10,12 +16,20 @@
             th,
             td {
                 border: none;
+                color: $text-color-1;
+
+                a {
+                    color: $text-color-1;
+                }
             }
 
             thead {
                 tr {
                     th {
                         border: none;
+                        font-size: 18px;
+                        font-weight: 500;
+                        line-height: 30px;
 
                         &.product-thumbnail {
                             text-align: left;
@@ -50,6 +64,15 @@
                         border: none;
                         background: transparent;
                         text-align: center;
+                        font-size: 20px;
+
+                        &.product-remove {
+                            color: $icon-color;
+
+                            a {
+                                color: $icon-color;
+                            }
+                        }
 
                         &.product-thumbnail {
                             text-align: left;
@@ -66,19 +89,47 @@
                             text-align: left;
                         }
 
-                        &.product-quantity {
-                            input::-webkit-outer-spin-button,
-                            input::-webkit-inner-spin-button {
-                                -webkit-appearance: none;
-                            }
+                        &.product-price {
+                            color: $text-color-2;
+                        }
 
-                            input[type=number] {
-                                -moz-appearance: textfield;
-                                width: 50px;
-                                background: #F9FBFF;
-                                border: none;
-                                border-radius: 3px;
+                        &.product-quantity {
+                            .quantity {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+
+                                input::-webkit-outer-spin-button,
+                                input::-webkit-inner-spin-button {
+                                    -webkit-appearance: none;
+                                }
+
+                                input[type=number] {
+                                    -moz-appearance: textfield;
+                                    width: 50px;
+                                    background: #F9FBFF;
+                                    border: none;
+                                    border-radius: 3px;
+                                    padding: 10px;
+                                    line-height: 30px;
+                                    text-align: center;
+                                    font-size: 20px;
+                                    color: $text-color-1;
+                                }
+
+                                .eael-cart-qty-minus,
+                                .eael-cart-qty-plus {
+                                    line-height: 30px;
+                                    padding: 10px 15px;
+                                    color: $qty-button;
+                                    font-size: 20px;
+                                    cursor: pointer;
+                                }
                             }
+                        }
+
+                        &.product-subtotal {
+                            font-weight: 500;
                         }
                     }
                 }
