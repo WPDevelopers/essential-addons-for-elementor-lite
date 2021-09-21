@@ -1,3 +1,4 @@
+@use 'sass:math';
 
 .eael-circle-wrapper {
     $nav-circle-width: 500px;
@@ -8,6 +9,7 @@
     $nav-items: 6;
     $nav-item-width: 85px;
     $nav-item-border-radius: 50%;
+    $breakpoint: 600px;
 
     display: flex;
     justify-content: center;
@@ -22,6 +24,11 @@
         border-radius: $nav-circle-border-radius;
     }
 
+    .eael-circle-btn {
+        cursor: pointer;
+        transition: all .2ms;
+    }
+
     &.eael-interactive-circle-preset-1 {
         .eael-circle-info {
             $nav-item-border-color: #fff;
@@ -34,7 +41,6 @@
             $nav-item-initial-color: #7a5bff;
             $nav-item-hover-color: #fff;
             .eael-circle-inner {
-                transform: rotate(calc(-90deg - (#{$nav-items} * 10deg)));
                 position: relative;
                 .eael-circle-item {
                     .eael-circle-btn {
@@ -44,12 +50,10 @@
                         display: block;
                         overflow: hidden;
                         position: absolute;
-                        top: 50%;
-                        left: 50%;
                         background: $nav-item-initial-background;
                         border: $nav-item-border-width solid $nav-item-border-color;
-                        margin: calc((#{$nav-item-width} / 2) * -1);
                         box-shadow: $nav-item-box-shadow;
+                        z-index: 99;
                         .eael-circle-icon-shapes {
                             display: none;
                         }
@@ -61,50 +65,58 @@
                             height: 100%;
                             .eael-circle-icon-inner {
                                 display: flex;
+                                flex-direction: column;
                                 align-items: center;
                                 justify-content: center;
-                                flex-direction: column;
                                 width: 100%;
                                 height: 100%;
 
-                                img,
+                                i {
+                                    color: #A195DC;
+                                    font-size: 22px;
+                                }
                                 svg {
                                     width: $nav-item-icon-width;
-                                    fill: $nav-item-initial-color;
+                                    min-width: $nav-item-icon-width;
+                                    height: $nav-item-icon-width;
+                                    min-height: $nav-item-icon-width;
+                                    fill: #A195DC;
+                                }
+                                .eael-circle-btn-txt {
+                                    color: $nav-item-initial-color;
+                                    font-size: 14px;
+                                    line-height: 1.5em;
                                 }
                             }
                         }
+                        &:hover,
                         &.active {
                             .eael-circle-btn-icon {
                                 background: $nav-item-hover-background;
-                                img,
+
+                                i {
+                                    color: $nav-item-hover-color;
+                                }
                                 svg {
                                     fill: $nav-item-hover-color;
                                 }
+                                .eael-circle-btn-txt {
+                                    color: $nav-item-hover-color;
+                                }
                             }
                         }
-                        //@for $i from 1 through $nav-items {
-                        //    &#eael-circle-item-#{$i} {
-                        //        z-index: 99;
-                        //        transform: rotate(calc((360deg / #{$nav-items}) * #{$i}))
-                        //        translate(calc(#{$nav-circle-width} / 2))
-                        //        rotate(calc((360deg / #{$nav-items}) * #{$i} * -1))
-                        //        rotate(calc(90deg + (#{$nav-items} * 10deg)));
-                        //    }
-                        //}
                     }
                     .eael-circle-btn-content {
-                        display: none;
                         overflow: hidden;
                         position: absolute;
                         top: 0;
                         bottom: 0;
                         left: 0;
                         right: 0;
-                        transform: rotate(calc(90deg + (#{$nav-items} * 10deg)));
+                        visibility: hidden;
+                        opacity: 0;
                         .eael-circle-content {
                             display: flex;
-                            flex-direction: column;
                             align-items: center;
                             justify-content: center;
                             padding: $nav-content-padding;
@@ -112,16 +124,22 @@
                             width: 100%;
                             height: 100%;
                             border-radius: $nav-circle-border-radius;
+                            overflow: hidden;
+
+                            @media only screen and (max-width: $breakpoint) {
+                                border-radius: 0;
+                                margin-top: 20px;
+                            }
                         }
                         &.active {
-                            display: block;
+                            visibility: visible;
+                            opacity: 1;
                         }
                     }
                 }
             }
-
             &[data-items="1"] {
-                .eael-circle-info-item {
+                .eael-circle-item {
                     #eael-circle-item-1 {
                         top: 0;
                         left: 50%;
@@ -130,21 +148,21 @@
                 }
             }
             &[data-items="2"] {
-                .eael-circle-info-item {
+                .eael-circle-item {
                     #eael-circle-item-1 {
                         top: 0;
                         left: 50%;
                         transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-2 {
-                        bottom: 0;
+                        top: 10%;
                         left: 50%;
-                        transform: translate(-50%, 50%);
+                        transform: translate(-50%, -50%);
                     }
                 }
             }
             &[data-items="3"] {
-                .eael-circle-info-item {
+                .eael-circle-item {
                     #eael-circle-item-1 {
                         top: 0;
                         left: 50%;
@@ -152,8 +170,8 @@
                     }
                     #eael-circle-item-2 {
                         top: 75%;
-                        right: 7%;
-                        transform: translate(50%, -50%);
+                        left: 93%;
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-3 {
                         top: 75%;
@@ -163,7 +181,7 @@
                 }
             }
             &[data-items="4"] {
-                .eael-circle-info-item {
+                .eael-circle-item {
                     #eael-circle-item-1 {
                         top: 14.65%;
                         left: 14.65%;
@@ -171,23 +189,23 @@
                     }
                     #eael-circle-item-2 {
                         top: 14.65%;
-                        right: 14.65%;
-                        transform: translate(50%, -50%);
+                        left: 75.35%;
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-3 {
-                        bottom: 14.65%;
+                        top: 75.35%;
                         left: 14.65%;
-                        transform: translate(-50%, 50%);
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-4 {
-                        bottom: 14.65%;
-                        right: 14.65%;
-                        transform: translate(50%, 50%);
+                        top: 75.35%;
+                        left: 75.35%;
+                        transform: translate(-50%, -50%);
                     }
                 }
             }
             &[data-items="5"] {
-                .eael-circle-info-item {
+                .eael-circle-item {
                     #eael-circle-item-1 {
                         top: 0%;
                         left: 50%;
@@ -195,18 +213,18 @@
                     }
                     #eael-circle-item-2 {
                         top: 39%;
-                        right: 1%;
-                        transform: translate(50%, -50%);
+                        left: 99%;
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-3 {
-                        bottom: 10%;
+                        top: 90%;
                         left: 20%;
-                        transform: translate(-50%, 50%);
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-4 {
-                        bottom: 10%;
-                        right: 20%;
-                        transform: translate(50%, 50%);
+                        top: 90%;
+                        left: 80%;
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-5 {
                         top: 39%;
@@ -216,7 +234,7 @@
                 }
             }
             &[data-items="6"] {
-                .eael-circle-info-item {
+                .eael-circle-item {
                     #eael-circle-item-1 {
                         top: 0;
                         left: 50%;
@@ -224,18 +242,18 @@
                     }
                     #eael-circle-item-2 {
                         top: 25%;
-                        right: 7%;
-                        transform: translate(50%, -50%);
+                        left: 93%;
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-3 {
                         top: 75%;
-                        right: 7%;
-                        transform: translate(50%, -50%);
+                        left: 93%;
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-4 {
-                        bottom: 0;
+                        top: 100%;
                         left: 50%;
-                        transform: translate(-50%, 50%);
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-5 {
                         top: 75%;
@@ -250,7 +268,7 @@
                 }
             }
             &[data-items="7"] {
-                .eael-circle-info-item {
+                .eael-circle-item {
                     #eael-circle-item-1 {
                         top: 0%;
                         left: 50%;
@@ -258,23 +276,23 @@
                     }
                     #eael-circle-item-2 {
                         top: 20%;
-                        right: 8%;
-                        transform: translate(50%, -50%);
+                        left: 92%;
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-3 {
                         top: 61%;
-                        right: 1%;
-                        transform: translate(50%, -50%);
+                        left: 99%;
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-4 {
-                        bottom: 5%;
-                        right: 28%;
-                        transform: translate(50%, 50%);
+                        top: 95%;
+                        left: 72%;
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-5 {
-                        bottom: 5%;
+                        top: 95%;
                         left: 28%;
-                        transform: translate(-50%, 50%);
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-6 {
                         top: 61%;
@@ -289,7 +307,7 @@
                 }
             }
             &[data-items="8"] {
-                .eael-circle-info-item {
+                .eael-circle-item {
                     #eael-circle-item-1 {
                         top: 0%;
                         left: 50%;
@@ -297,28 +315,28 @@
                     }
                     #eael-circle-item-2 {
                         top: 14.65%;
-                        right: 14.65%;
-                        transform: translate(50%, -50%);
+                        left: 75.35%;
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-3 {
                         top: 50%;
-                        right: 0%;
-                        transform: translate(50%, -50%);
+                        left: 100%;
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-4 {
-                        bottom: 14.65%;
-                        right: 14.65%;
-                        transform: translate(50%, 50%);
+                        top: 75.35%;
+                        left: 75.35%;
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-5 {
-                        bottom: 0%;
+                        top: 100%;
                         left: 50%;
-                        transform: translate(-50%, 50%);
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-6 {
-                        bottom: 14.65%;
+                        top: 75.35%;
                         left: 14.65%;
-                        transform: translate(-50%, 50%);
+                        transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-7 {
                         top: 50%;
@@ -333,16 +351,122 @@
                 }
             }
         }
+        @media only screen and (min-width: $breakpoint + 1) {
+            &.eael-interactive-circle-animation-1 {
+                $animation-duration: 2s;
+                .eael-circle-inner {
+                    @keyframes eael-1-anim-1-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                        }
+                    }
+                    .eael-circle-btn {
+                        animation: eael-1-anim-1-btn-animation $animation-duration;
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-2 {
+                $animation-duration: 2s;
+                $animation-angle: 360deg;
+                .eael-circle-inner {
+                    @keyframes eael-1-anim-2-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                        }
+                    }
+                    @keyframes eael-1-anim-2-circle-animation {
+                        0% {
+                            height: 0;
+                            width: 0;
+                            margin-top: math.div($nav-circle-width, 2);
+                            margin-bottom: math.div($nav-circle-width, 2);
+                            transform: rotate(-$animation-angle);
+                        }
+                    }
+                    animation: eael-1-anim-2-circle-animation $animation-duration;
+                    .eael-circle-btn {
+                        animation: eael-1-anim-2-btn-animation $animation-duration;
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-3 {
+                $animation-duration: 2s;
+                $animation-angle: 360deg;
+                .eael-circle-inner {
+                    @keyframes eael-1-anim-3-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotate($animation-angle);
+                        }
+                    }
+                    @keyframes eael-1-anim-3-circle-animation {
+                        0% {
+                            transform: rotate(-$animation-angle);
+                        }
+                    }
+                    @keyframes eael-1-anim-3-circle-content-animation {
+                        0% {
+                            transform: rotate($animation-angle);
+                        }
+                    }
+                    animation: eael-1-anim-3-circle-animation $animation-duration;
+                    .eael-circle-btn-content {
+                        animation: eael-1-anim-3-circle-content-animation
+                        $animation-duration;
+                    }
+                    .eael-circle-btn {
+                        animation: eael-1-anim-3-btn-animation $animation-duration;
+                    }
+                }
+            }
+        }
+
+        @media only screen and (max-width: $breakpoint) {
+            .eael-circle-info {
+                width: 100%;
+                padding: 0 !important;
+            }
+            .eael-circle-inner {
+                display: grid;
+                width: 100% !important;
+                height: initial!important;
+                grid-template-columns: repeat(1, 1fr);
+                grid-gap: 20px;
+                border: none;
+            }
+            .eael-circle-item {
+                border: $nav-circle-border-width solid $nav-circle-border-color;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                .eael-circle-btn {
+                    position: initial !important;
+                    transform: none !important;
+                    .eael-circle-icon-shapes {
+                        display: none !important;
+                    }
+                }
+                .eael-circle-btn-content {
+                    position: initial !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                    display: block !important;
+                    .eael-circle-content {
+                        padding: 0 !important;
+                        background: transparent !important;
+                    }
+                }
+            }
+        }
     }
 
 
     &.eael-interactive-circle-preset-2 {
-
         $nav-circle-2-width: 700px;
-        //overflow: hidden;
-        //padding-top: $nav-item-width;
-        padding-top:120px;
-
         .eael-circle-info {
             $nav-item-border-width: 10px;
             $nav-item-icon-width: 35px;
@@ -354,20 +478,21 @@
             $nav-item-text-size: 16px;
             $nav-item-text-weight: 500;
             $nav-item-text-gap: 10px;
-            $nav-item-gap: 24px;
+            $nav-item-gap: 20px;
             $nav-content-background: #fff;
             $nav-content-text-size: 20px;
             $nav-content-text-weight: 500;
             $nav-content-text-color: #202b46;
             $nav-content-margin: 10px;
             $nav-content-padding: 0px 60px;
-            //padding: ($nav-item-width / 2) + $nav-item-gap;
+            padding: math.div($nav-item-width, 2) + $nav-item-gap math.div($nav-item-width, 2) + $nav-item-gap 0 math.div($nav-item-width, 2) + $nav-item-gap;
             position: relative;
-            //margin-bottom: - (($nav-circle-width / 2) + ($nav-item-width / 2) + $nav-item-gap);
             .eael-circle-inner {
                 width: $nav-circle-2-width;
-                height: $nav-circle-2-width / 2;
+                height: math.div($nav-circle-2-width, 2);
                 border-radius: $nav-circle-2-width $nav-circle-2-width 0 0;
+                border: 5px solid #FFE6DC;
+                border-bottom: none!important;
 
                 .eael-circle-item {
                     .eael-circle-btn {
@@ -376,9 +501,10 @@
                         height: $nav-item-width;
                         width: $nav-item-width;
                         border-radius: $nav-item-border-radius;
+                        box-shadow: 0px 5px 40px rgb(131 100 196 / 20%);
+                        background: #fff;
                         top: 50%;
                         left: 50%;
-
                         .eael-circle-icon-shapes {
                             position: absolute;
                             top: 0;
@@ -393,8 +519,10 @@
                             height: 100%;
                             width: 100%;
                             border-radius: $nav-item-border-radius;
+                            background: #fff;
+
                             .eael-circle-btn-icon-inner {
-                                background: $nav-item-initial-background;
+                                //background: $nav-item-initial-background;
                                 width: 100%;
                                 height: 100%;
                                 border-radius: $nav-item-border-radius;
@@ -403,10 +531,7 @@
                                 align-items: center;
                                 justify-content: center;
                                 text-align: center;
-                                img,
-                                svg {
-                                    width: $nav-item-icon-width;
-                                }
+
                                 h3 {
                                     font-size: $nav-item-text-size;
                                     font-weight: $nav-item-text-weight;
@@ -415,11 +540,40 @@
                                     margin-top: $nav-item-text-gap;
                                     color: $nav-item-text-initial-color;
                                 }
+
+                                i {
+                                    color: #A195DC;
+                                    font-size: 22px;
+                                }
+                                svg {
+                                    width: $nav-item-icon-width;
+                                    min-width: $nav-item-icon-width;
+                                    height: $nav-item-icon-width;
+                                    min-height: $nav-item-icon-width;
+                                    fill: #A195DC;
+                                }
+                                .eael-circle-btn-txt {
+                                    color: $nav-item-initial-color;
+                                    font-size: 14px;
+                                    line-height: 1.5em;
+                                }
                             }
                         }
+                        &:hover,
                         &.active {
                             .eael-circle-btn-icon {
-                                .eael-circle-btn-icon-inner {
+                                background: #B977FC;
+
+                                i {
+                                    color: $nav-item-hover-color;
+                                }
+                                svg {
+                                    fill: $nav-item-hover-color;
+                                }
+                                .eael-circle-btn-txt {
+                                    color: $nav-item-hover-color;
+                                }
+                                .eael-circle-icon-inner {
                                     background: $nav-item-hover-background;
                                 }
                             }
@@ -427,28 +581,17 @@
                     }
                     .eael-circle-btn-content {
                         position: absolute;
-                        //$content-position: ($nav-item-width / 2) + $nav-item-gap;
-                        //top: $content-position;
-                        //bottom: $content-position;
-                        //left: $content-position;
-                        //right: $content-position;
+                        width: calc( 85% - (2 * #{math.div($nav-item-width, 2) + $nav-item-gap}) );
                         bottom: 10px;
                         left: 50%;
                         transform: translateX(-50%);
-                        display: none;
+                        display: block;
+                        opacity: 0;
+                        visibility: hidden;
                         padding: $nav-content-margin;
-                        width: 85%;
+                        text-align: center;
 
                         .eael-circle-content {
-                            //display: flex;
-                            //flex-direction: column;
-                            //align-items: center;
-                            //text-align: center;
-                            //height: 100%;
-                            ////padding: $nav-content-padding;
-                            //border-radius: $nav-circle-border-radius;
-
-
                             h2 {
                                 font-size: $nav-content-text-size;
                                 text-transform: uppercase;
@@ -457,156 +600,712 @@
                                 color: $nav-content-text-color;
                                 margin-bottom: 0;
                             }
-
                         }
                         &.active {
-                            display: block;
+                            visibility: visible;
+                            opacity: 1;
                         }
                     }
                 }
-                .eael-circle-item {
-                    #eael-circle-item-1 {
-                        //top: 36%;
-                        //left: 2.5%;
-                        //transform: translate(-50%, -50%);
 
-                        //transform: rotate(77deg) translate(-50%, (($nav-circle-2-width/2) + $nav-item-width)) rotate(-77deg);
-
-                        .eael-circle-btn-icon {
-                            background: radial-gradient(
-                                            81.89% 82.54% at 48.96% 49.88%,
-                                            #0956c6 3.76%,
-                                            #07a9f0 55.38%,
-                                            #93dcfc 100%
-                            );
-                            svg {
-                                fill: #07a9f0;
-                            }
+                &[data-items="1"] {
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            top: 0%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    //background: radial-gradient(
+                            //    //                81.89% 82.54% at 48.96% 49.88%,
+                            //    //                #0956c6 3.76%,
+                            //    //                #07a9f0 55.38%,
+                            //    //                #93dcfc 100%
+                            //    //);
+                            //    svg {
+                            //        fill: #07a9f0;
+                            //    }
+                            //}
                         }
                     }
-                    #eael-circle-item-2 {
-                        //top: 20.3%;
-                        //left: 10.5%;
-                        //transform: translate(-50%, -50%);
-
-                        //transform: rotate(97deg) translate(-50%, 301px) rotate(-97deg);
-                        .eael-circle-btn-icon {
-                            background: radial-gradient(
-                                            64.96% 65.32% at 52.18% 47.01%,
-                                            #6f00ff 3.76%,
-                                            #533fff 55.38%,
-                                            #b9aaff 100%
-                            );
-                            svg {
-                                fill: #715eff;
-                            }
+                }
+                &[data-items="2"] {
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            top: 40%;
+                            left: 10%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    //background: radial-gradient(
+                            //    //                81.89% 82.54% at 48.96% 49.88%,
+                            //    //                #0956c6 3.76%,
+                            //    //                #07a9f0 55.38%,
+                            //    //                #93dcfc 100%
+                            //    //);
+                            //    svg {
+                            //        fill: #07a9f0;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-2 {
+                            top: 40%;
+                            left: 90%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    //background: radial-gradient(
+                            //    //                73.69% 72.33% at 51.12% 47.67%,
+                            //    //                #2b3894 3.76%,
+                            //    //                #364099 14.18%,
+                            //    //                #5356a8 32.43%,
+                            //    //                #8078bf 55.38%,
+                            //    //                #d2a8d1 100%
+                            //    //);
+                            //    svg {
+                            //        fill: #364099;
+                            //    }
+                            //}
                         }
                     }
-                    #eael-circle-item-3 {
-                        //top: 8.1%;
-                        //left: 23.5%;
-                        //transform: translate(-50%, -50%);
-
-                        //transform: rotate(121deg) translate(-50%, 259px) rotate(-121deg);
-
-                        .eael-circle-btn-icon {
-                            background: radial-gradient(
-                                            101.16% 101.7% at 47.77% 50.74%,
-                                            #ff9100 3.76%,
-                                            #ffb655 56.99%,
-                                            #fff04a 100%
-                            );
-                            svg {
-                                fill: #ffb655;
-                            }
+                }
+                &[data-items="3"] {
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            top: 72%;
+                            left: 2%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    //background: radial-gradient(
+                            //    //                81.89% 82.54% at 48.96% 49.88%,
+                            //    //                #0956c6 3.76%,
+                            //    //                #07a9f0 55.38%,
+                            //    //                #93dcfc 100%
+                            //    //);
+                            //    svg {
+                            //        fill: #07a9f0;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-2 {
+                            top: 0%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    //background: radial-gradient(
+                            //    //                65.76% 66.29% at 48.95% 49.57%,
+                            //    //                #b40042 3.76%,
+                            //    //                #c50048 48.92%,
+                            //    //                #ff5e93 100%
+                            //    //);
+                            //    svg {
+                            //        fill: #c50048;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-3 {
+                            top: 72%;
+                            left: 98%;
+                            transform: translate(-50%, -50%);
+                            //background: radial-gradient(
+                            //                94.25% 92.56% at 48.86% 49.71%,
+                            //                #199a8e 3.76%,
+                            //                #7af4ab 55.38%
+                            //);
+                            //svg {
+                            //    fill: #199a8e;
+                            //}
                         }
                     }
-                    #eael-circle-item-4 {
-                        //top: 1.5%;
-                        //left: 40.6%;
-                        //transform: translate(-50%, -50%);
-
-                        //transform: rotate(152deg) translate(-50%, 220px) rotate(-152deg);
-
-                        .eael-circle-btn-icon {
-                            background: radial-gradient(
-                                            65.76% 66.29% at 48.95% 49.57%,
-                                            #b40042 3.76%,
-                                            #c50048 48.92%,
-                                            #ff5e93 100%
-                            );
-                            svg {
-                                fill: #c50048;
-                            }
+                }
+                &[data-items="4"] {
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            top: 72%;
+                            left: 2%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    //background: radial-gradient(
+                            //    //                81.89% 82.54% at 48.96% 49.88%,
+                            //    //                #0956c6 3.76%,
+                            //    //                #07a9f0 55.38%,
+                            //    //                #93dcfc 100%
+                            //    //);
+                            //    svg {
+                            //        fill: #07a9f0;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-2 {
+                            top: 10.6%;
+                            left: 27.6%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    //background: radial-gradient(
+                            //    //                101.16% 101.7% at 47.77% 50.74%,
+                            //    //                #ff9100 3.76%,
+                            //    //                #ffb655 56.99%,
+                            //    //                #fff04a 100%
+                            //    //);
+                            //    svg {
+                            //        fill: #ffb655;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-3 {
+                            top: 10.6%;
+                            left: 72.4%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    //background: radial-gradient(
+                            //    //                94.25% 92.56% at 48.86% 49.71%,
+                            //    //                #199a8e 3.76%,
+                            //    //                #7af4ab 55.38%
+                            //    //);
+                            //    svg {
+                            //        fill: #7af4ab;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-4 {
+                            top: 72%;
+                            left: 98%;
+                            transform: translate(-50%, -50%);
+                            //background: radial-gradient(
+                            //                94.25% 92.56% at 48.86% 49.71%,
+                            //                #199a8e 3.76%,
+                            //                #7af4ab 55.38%
+                            //);
+                            //svg {
+                            //    fill: #199a8e;
+                            //}
                         }
                     }
-                    #eael-circle-item-5 {
-                        //top: 1.5%;
-                        //right: 40.6%;
-                        //transform: translate(50%, -50%);
+                }
+                &[data-items="5"] {
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            top: 72%;
+                            left: 2%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    81.89% 82.54% at 48.96% 49.88%,
+                            //                    #0956c6 3.76%,
+                            //                    #07a9f0 55.38%,
+                            //                    #93dcfc 100%
+                            //    );
+                            //    svg {
+                            //        fill: #07a9f0;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-2 {
+                            top: 20%;
+                            left: 20%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    101.16% 101.7% at 47.77% 50.74%,
+                            //                    #ff9100 3.76%,
+                            //                    #ffb655 56.99%,
+                            //                    #fff04a 100%
+                            //    );
+                            //    svg {
+                            //        fill: #ffb655;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-3 {
+                            top: 0%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    94.25% 92.56% at 48.86% 49.71%,
+                            //                    #199a8e 3.76%,
+                            //                    #7af4ab 55.38%
+                            //    );
+                            //    svg {
+                            //        fill: #7af4ab;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-4 {
+                            top: 20%;
+                            left: 80%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    65.76% 66.29% at 48.95% 49.57%,
+                            //                    #b40042 3.76%,
+                            //                    #c50048 48.92%,
+                            //                    #ff5e93 100%
+                            //    );
+                            //    svg {
+                            //        fill: #c50048;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-5 {
+                            top: 72%;
+                            left: 98%;
+                            transform: translate(-50%, -50%);
+                            //background: radial-gradient(
+                            //                94.25% 92.56% at 48.86% 49.71%,
+                            //                #199a8e 3.76%,
+                            //                #7af4ab 55.38%
+                            //);
+                            //svg {
+                            //    fill: #199a8e;
+                            //}
+                        }
+                    }
+                }
+                &[data-items="6"] {
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            top: 72%;
+                            left: 2%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    81.89% 82.54% at 48.96% 49.88%,
+                            //                    #0956c6 3.76%,
+                            //                    #07a9f0 55.38%,
+                            //                    #93dcfc 100%
+                            //    );
+                            //    svg {
+                            //        fill: #07a9f0;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-2 {
+                            top: 28.4%;
+                            left: 15%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    101.16% 101.7% at 47.77% 50.74%,
+                            //                    #ff9100 3.76%,
+                            //                    #ffb655 56.99%,
+                            //                    #fff04a 100%
+                            //    );
+                            //    svg {
+                            //        fill: #ffb655;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-3 {
+                            top: 3.6%;
+                            left: 36.6%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    94.25% 92.56% at 48.86% 49.71%,
+                            //                    #199a8e 3.76%,
+                            //                    #7af4ab 55.38%
+                            //    );
+                            //    svg {
+                            //        fill: #7af4ab;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-4 {
+                            top: 3.6%;
+                            left: 63.4%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    94.25% 92.56% at 48.86% 49.71%,
+                            //                    #199a8e 3.76%,
+                            //                    #7af4ab 55.38%
+                            //    );
+                            //    svg {
+                            //        fill: #7af4ab;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-5 {
+                            top: 28.4%;
+                            left: 85%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    65.76% 66.29% at 48.95% 49.57%,
+                            //                    #b40042 3.76%,
+                            //                    #c50048 48.92%,
+                            //                    #ff5e93 100%
+                            //    );
+                            //    svg {
+                            //        fill: #c50048;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-6 {
+                            top: 72%;
+                            left: 98%;
+                            transform: translate(-50%, -50%);
+                            //background: radial-gradient(
+                            //                94.25% 92.56% at 48.86% 49.71%,
+                            //                #199a8e 3.76%,
+                            //                #7af4ab 55.38%
+                            //);
+                            //svg {
+                            //    fill: #199a8e;
+                            //}
+                        }
+                    }
+                }
+                &[data-items="7"] {
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            top: 72%;
+                            left: 2%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    81.89% 82.54% at 48.96% 49.88%,
+                            //                    #0956c6 3.76%,
+                            //                    #07a9f0 55.38%,
+                            //                    #93dcfc 100%
+                            //    );
+                            //    svg {
+                            //        fill: #07a9f0;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-2 {
+                            top: 37.5%;
+                            left: 11%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    101.16% 101.7% at 47.77% 50.74%,
+                            //                    #ff9100 3.76%,
+                            //                    #ffb655 56.99%,
+                            //                    #fff04a 100%
+                            //    );
+                            //    svg {
+                            //        fill: #ffb655;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-3 {
+                            top: 10.9%;
+                            left: 27.3%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    65.76% 66.29% at 48.95% 49.57%,
+                            //                    #b40042 3.76%,
+                            //                    #c50048 48.92%,
+                            //                    #ff5e93 100%
+                            //    );
+                            //    svg {
+                            //        fill: #c50048;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-4 {
+                            top: 0%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    94.25% 92.56% at 48.86% 49.71%,
+                            //                    #199a8e 3.76%,
+                            //                    #7af4ab 55.38%
+                            //    );
+                            //    svg {
+                            //        fill: #7af4ab;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-5 {
+                            top: 10.9%;
+                            left: 72.7%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    65.76% 66.29% at 48.95% 49.57%,
+                            //                    #b40042 3.76%,
+                            //                    #c50048 48.92%,
+                            //                    #ff5e93 100%
+                            //    );
+                            //    svg {
+                            //        fill: #c50048;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-6 {
+                            top: 37.5%;
+                            left: 89%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    73.69% 72.33% at 51.12% 47.67%,
+                            //                    #2b3894 3.76%,
+                            //                    #364099 14.18%,
+                            //                    #5356a8 32.43%,
+                            //                    #8078bf 55.38%,
+                            //                    #d2a8d1 100%
+                            //    );
+                            //    svg {
+                            //        fill: #364099;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-7 {
+                            top: 72%;
+                            left: 98%;
+                            transform: translate(-50%, -50%);
+                            //background: radial-gradient(
+                            //                94.25% 92.56% at 48.86% 49.71%,
+                            //                #199a8e 3.76%,
+                            //                #7af4ab 55.38%
+                            //);
+                            //svg {
+                            //    fill: #199a8e;
+                            //}
+                        }
+                    }
+                }
+                &[data-items="8"] {
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            top: 72%;
+                            left: 2%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    81.89% 82.54% at 48.96% 49.88%,
+                            //                    #0956c6 3.76%,
+                            //                    #07a9f0 55.38%,
+                            //                    #93dcfc 100%
+                            //    );
+                            //    svg {
+                            //        fill: #07a9f0;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-2 {
+                            top: 40%;
+                            left: 10%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    64.96% 65.32% at 52.18% 47.01%,
+                            //                    #6f00ff 3.76%,
+                            //                    #533fff 55.38%,
+                            //                    #b9aaff 100%
+                            //    );
+                            //    svg {
+                            //        fill: #715eff;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-3 {
+                            top: 16%;
+                            left: 22.9%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    101.16% 101.7% at 47.77% 50.74%,
+                            //                    #ff9100 3.76%,
+                            //                    #ffb655 56.99%,
+                            //                    #fff04a 100%
+                            //    );
+                            //    svg {
+                            //        fill: #ffb655;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-4 {
+                            top: 1.9%;
+                            left: 40.6%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    65.76% 66.29% at 48.95% 49.57%,
+                            //                    #b40042 3.76%,
+                            //                    #c50048 48.92%,
+                            //                    #ff5e93 100%
+                            //    );
+                            //    svg {
+                            //        fill: #c50048;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-5 {
+                            top: 1.9%;
+                            left: 59.4%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    73.69% 72.33% at 51.12% 47.67%,
+                            //                    #2b3894 3.76%,
+                            //                    #364099 14.18%,
+                            //                    #5356a8 32.43%,
+                            //                    #8078bf 55.38%,
+                            //                    #d2a8d1 100%
+                            //    );
+                            //    svg {
+                            //        fill: #364099;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-6 {
+                            top: 16%;
+                            left: 77.1%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    94.25% 92.56% at 48.86% 49.71%,
+                            //                    #199a8e 3.76%,
+                            //                    #7af4ab 55.38%
+                            //    );
+                            //    svg {
+                            //        fill: #7af4ab;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-7 {
+                            top: 40%;
+                            left: 90%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    73.69% 72.33% at 51.12% 47.67%,
+                            //                    #2b3894 3.76%,
+                            //                    #364099 14.18%,
+                            //                    #5356a8 32.43%,
+                            //                    #8078bf 55.38%,
+                            //                    #d2a8d1 100%
+                            //    );
+                            //    svg {
+                            //        fill: #364099;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-8 {
+                            top: 72%;
+                            left: 98%;
+                            transform: translate(-50%, -50%);
+                            //background: radial-gradient(
+                            //                94.25% 92.56% at 48.86% 49.71%,
+                            //                #199a8e 3.76%,
+                            //                #7af4ab 55.38%
+                            //);
+                            //svg {
+                            //    fill: #199a8e;
+                            //}
+                        }
+                    }
+                }
+            }
+        }
+        @media only screen and (min-width: $breakpoint + 1) {
+            &.eael-interactive-circle-animation-1 {
+                $animation-duration: 2s;
+                .eael-circle-inner {
+                    @keyframes eael-2-anim-1-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                        }
+                    }
+                    .eael-circle-btn {
+                        animation: eael-2-anim-1-btn-animation $animation-duration;
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-2 {
+                $animation-duration: 2s;
+                $animation-angle: 700deg;
+                .eael-circle-info {
+                    @keyframes eael-2-anim-2-btn-animation {
+                        15% {
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100% {
+                            transform: translate(-50%, -50%) rotate(0deg);
+                        }
+                    }
+                    @keyframes eael-2-anim-2-content-animation {
+                        0% {
+                            transform: scale(0);
+                        }
+                        15% {
+                            transform: scale(0);
+                        }
+                    }
+                    .eael-circle-btn {
+                        transform-origin: center center;
+                        animation: eael-2-anim-2-btn-animation $animation-duration;
+                    }
+                    .eael-circle-btn-content {
+                        animation: eael-2-anim-2-content-animation $animation-duration;
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-3 {
+                $animation-duration: 2s;
+                $animation-angle: 360deg;
+                .eael-circle-info {
+                    @keyframes eael-2-anim-3-circle-animation {
+                        0% {
+                            transform: rotate(-$animation-angle);
+                        }
+                    }
+                    @keyframes eael-2-anim-3-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotate($animation-angle);
+                        }
+                    }
+                    animation: eael-2-anim-3-circle-animation $animation-duration;
+                    .eael-circle-btn {
+                        animation: eael-2-anim-3-btn-animation $animation-duration;
+                    }
+                }
+            }
+        }
 
-                        //transform: rotate(191deg) translate(-50%, 200px) rotate(-191deg);
-                        .eael-circle-btn-icon {
-                            background: radial-gradient(
-                                            73.69% 72.33% at 51.12% 47.67%,
-                                            #2b3894 3.76%,
-                                            #364099 14.18%,
-                                            #5356a8 32.43%,
-                                            #8078bf 55.38%,
-                                            #d2a8d1 100%
-                            );
-                            svg {
-                                fill: #364099;
-                            }
-                        }
+        @media only screen and (max-width: $breakpoint) {
+            .eael-circle-info {
+                width: 100%;
+                padding: 0 !important;
+            }
+            .eael-circle-inner {
+                display: grid;
+                width: 100%;
+                height: initial;
+                grid-template-columns: repeat(1, 1fr);
+                grid-gap: 20px;
+                border: none;
+            }
+            .eael-circle-item {
+                border: $nav-circle-border-width solid $nav-circle-border-color;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                .eael-circle-btn {
+                    position: initial !important;
+                    transform: none !important;
+                    .eael-circle-icon-shapes {
+                        display: none !important;
                     }
-                    #eael-circle-item-6 {
-                        //top: 8.1%;
-                        //right: 23.5%;
-                        //transform: translate(50%, -50%);
-
-                        //transform: rotate(234deg) translate(-50%, 223px) rotate(-234deg);
-                        .eael-circle-btn-icon {
-                            background: radial-gradient(
-                                            94.25% 92.56% at 48.86% 49.71%,
-                                            #199a8e 3.76%,
-                                            #7af4ab 55.38%
-                            );
-                            svg {
-                                fill: #7af4ab;
-                            }
-                        }
-                    }
-                    #eael-circle-item-7 {
-                        top: 20.3%;
-                        right: 10.5%;
-                        transform: translate(50%, -50%);
-                        .eael-circle-btn-icon {
-                            background: radial-gradient(
-                                            73.69% 72.33% at 51.12% 47.67%,
-                                            #2b3894 3.76%,
-                                            #364099 14.18%,
-                                            #5356a8 32.43%,
-                                            #8078bf 55.38%,
-                                            #d2a8d1 100%
-                            );
-                            svg {
-                                fill: #364099;
-                            }
-                        }
-                    }
-                    #eael-circle-item-8 {
-                        top: 36%;
-                        right: 2.5%;
-                        transform: translate(50%, -50%);
-                        background: radial-gradient(
-                                        94.25% 92.56% at 48.86% 49.71%,
-                                        #199a8e 3.76%,
-                                        #7af4ab 55.38%
-                        );
-                        svg {
-                            fill: #199a8e;
-                        }
+                }
+                .eael-circle-btn-content {
+                    position: initial !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                    display: block !important;
+                    .eael-circle-content {
+                        padding: 0 !important;
+                        background: transparent !important;
                     }
                 }
             }
@@ -634,9 +1333,12 @@
             $nav-content-text-color: #202b46;
             $nav-content-margin: 10px;
             $nav-content-padding: 10px;
-            padding: ($nav-item-width / 2) + $nav-item-gap;
+            padding: math.div($nav-item-width, 2) + $nav-item-gap;
             position: relative;
             .eael-circle-inner {
+                width: 400px;
+                height: 400px;
+
                 .eael-circle-item {
                     .eael-circle-btn {
                         position: absolute;
@@ -658,11 +1360,11 @@
                                 top: 50%;
                                 background: $nav-circle-border-color;
                                 height: $nav-line-shape-width;
-                                width: ($nav-item-width / 2) + $nav-item-gap;
+                                width: math.div($nav-item-width, 2) + $nav-item-gap;
                                 transform: translateY(-50%);
                             }
                             .eael-shape-2 {
-                                $content-position: ($nav-item-width / 2) + $nav-item-gap;
+                                $content-position: math.div($nav-item-width, 2) + $nav-item-gap;
                                 position: absolute;
                                 left: calc(
                                         50% + #{$content-position} + (#{$nav-circle-border-width} / 2)
@@ -714,13 +1416,14 @@
                     }
                     .eael-circle-btn-content {
                         position: absolute;
-                        $content-position: ($nav-item-width / 2) + $nav-item-gap;
+                        $content-position: math.div($nav-item-width, 2) + $nav-item-gap;
                         top: $content-position;
                         bottom: $content-position;
                         left: $content-position;
                         right: $content-position;
                         display: none;
-                        padding: $nav-content-margin;
+                        //padding: $nav-content-margin;
+                        padding: 50px;
                         .eael-circle-content {
                             display: flex;
                             flex-direction: column;
@@ -731,6 +1434,8 @@
                             padding: $nav-content-padding;
                             border-radius: $nav-circle-border-radius;
                             background: $nav-content-background;
+                            box-shadow: 0px 5px 40px rgba(131, 100, 196, 0.2);
+
                             h2 {
                                 font-size: $nav-content-text-size;
                                 text-transform: uppercase;
@@ -776,12 +1481,12 @@
                         left: 14.6%;
                         transform: translate(-50%, -50%);
                         .eael-circle-btn-icon {
-                            //background-image: radial-gradient(
-                            //                81.89% 82.54% at 48.96% 49.88%,
-                            //                #0956c6 3.76%,
-                            //                #07a9f0 55.38%,
-                            //                #93dcfc 100%
-                            //);
+                            background: radial-gradient(
+                                            81.89% 82.54% at 48.96% 49.88%,
+                                            #0956c6 3.76%,
+                                            #07a9f0 55.38%,
+                                            #93dcfc 100%
+                            );
                             svg {
                                 fill: #07a9f0;
                             }
@@ -792,15 +1497,15 @@
                     }
                     #eael-circle-item-2 {
                         top: 14.6%;
-                        right: 14.6%;
-                        transform: translate(50%, -50%);
+                        left: 85.4%;
+                        transform: translate(-50%, -50%);
                         .eael-circle-btn-icon {
-                            //background-image: radial-gradient(
-                            //                64.96% 65.32% at 52.18% 47.01%,
-                            //                #6f00ff 3.76%,
-                            //                #533fff 55.38%,
-                            //                #b9aaff 100%
-                            //);
+                            background: radial-gradient(
+                                            64.96% 65.32% at 52.18% 47.01%,
+                                            #6f00ff 3.76%,
+                                            #533fff 55.38%,
+                                            #b9aaff 100%
+                            );
                             svg {
                                 fill: #715eff;
                             }
@@ -810,16 +1515,16 @@
                         }
                     }
                     #eael-circle-item-3 {
-                        bottom: 14.6%;
+                        top: 85.4%;
                         left: 14.6%;
-                        transform: translate(-50%, 50%);
+                        transform: translate(-50%, -50%);
                         .eael-circle-btn-icon {
-                            //background-image: radial-gradient(
-                            //                101.16% 101.7% at 47.77% 50.74%,
-                            //                #ff9100 3.76%,
-                            //                #ffb655 56.99%,
-                            //                #fff04a 100%
-                            //);
+                            background: radial-gradient(
+                                            101.16% 101.7% at 47.77% 50.74%,
+                                            #ff9100 3.76%,
+                                            #ffb655 56.99%,
+                                            #fff04a 100%
+                            );
                             svg {
                                 fill: #ffb655;
                             }
@@ -829,16 +1534,16 @@
                         }
                     }
                     #eael-circle-item-4 {
-                        bottom: 14.6%;
-                        right: 14.6%;
-                        transform: translate(50%, 50%);
+                        top: 85.4%;
+                        left: 85.4%;
+                        transform: translate(-50%, -50%);
                         .eael-circle-btn-icon {
-                            //background-image: radial-gradient(
-                            //                65.76% 66.29% at 48.95% 49.57%,
-                            //                #b40042 3.76%,
-                            //                #c50048 48.92%,
-                            //                #ff5e93 100%
-                            //);
+                            background: radial-gradient(
+                                            65.76% 66.29% at 48.95% 49.57%,
+                                            #b40042 3.76%,
+                                            #c50048 48.92%,
+                                            #ff5e93 100%
+                            );
                             svg {
                                 fill: #c50048;
                             }
@@ -852,14 +1557,14 @@
                         left: 0%;
                         transform: translate(-50%, -50%);
                         .eael-circle-btn-icon {
-                            //background-image: radial-gradient(
-                            //                73.69% 72.33% at 51.12% 47.67%,
-                            //                #2b3894 3.76%,
-                            //                #364099 14.18%,
-                            //                #5356a8 32.43%,
-                            //                #8078bf 55.38%,
-                            //                #d2a8d1 100%
-                            //);
+                            background: radial-gradient(
+                                            73.69% 72.33% at 51.12% 47.67%,
+                                            #2b3894 3.76%,
+                                            #364099 14.18%,
+                                            #5356a8 32.43%,
+                                            #8078bf 55.38%,
+                                            #d2a8d1 100%
+                            );
                             svg {
                                 fill: #364099;
                             }
@@ -867,14 +1572,14 @@
                     }
                     #eael-circle-item-6 {
                         top: 50%;
-                        right: 0%;
-                        transform: translate(50%, -50%);
+                        left: 100%;
+                        transform: translate(-50%, -50%);
                         .eael-circle-btn-icon {
-                            //background-image: radial-gradient(
-                            //                94.25% 92.56% at 48.86% 49.71%,
-                            //                #199a8e 3.76%,
-                            //                #7af4ab 55.38%
-                            //);
+                            background: radial-gradient(
+                                            94.25% 92.56% at 48.86% 49.71%,
+                                            #199a8e 3.76%,
+                                            #7af4ab 55.38%
+                            );
                             svg {
                                 fill: #7af4ab;
                             }
@@ -888,14 +1593,14 @@
                         left: 50%;
                         transform: translate(-50%, -50%);
                         .eael-circle-btn-icon {
-                            //background-image: radial-gradient(
-                            //                73.69% 72.33% at 51.12% 47.67%,
-                            //                #2b3894 3.76%,
-                            //                #364099 14.18%,
-                            //                #5356a8 32.43%,
-                            //                #8078bf 55.38%,
-                            //                #d2a8d1 100%
-                            //);
+                            background: radial-gradient(
+                                            73.69% 72.33% at 51.12% 47.67%,
+                                            #2b3894 3.76%,
+                                            #364099 14.18%,
+                                            #5356a8 32.43%,
+                                            #8078bf 55.38%,
+                                            #d2a8d1 100%
+                            );
                             svg {
                                 fill: #364099;
                             }
@@ -905,14 +1610,14 @@
                         }
                     }
                     #eael-circle-item-8 {
-                        bottom: 0%;
+                        top: 100%;
                         left: 50%;
-                        transform: translate(-50%, 50%);
-                        //background-image: radial-gradient(
-                        //                94.25% 92.56% at 48.86% 49.71%,
-                        //                #199a8e 3.76%,
-                        //                #7af4ab 55.38%
-                        //);
+                        transform: translate(-50%, -50%);
+                        background: radial-gradient(
+                                        94.25% 92.56% at 48.86% 49.71%,
+                                        #199a8e 3.76%,
+                                        #7af4ab 55.38%
+                        );
                         svg {
                             fill: #199a8e;
                         }
@@ -923,8 +1628,130 @@
                 }
             }
         }
+
+        @media only screen and (min-width: $breakpoint + 1) {
+            &.eael-interactive-circle-animation-1 {
+                $animation-duration: 2s;
+                .eael-circle-inner {
+                    @keyframes eael-3-anim-1-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                        }
+                    }
+                    .eael-circle-btn {
+                        animation: eael-3-anim-1-btn-animation $animation-duration;
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-2 {
+                $animation-duration: 2s;
+                $animation-angle: 180deg;
+                .eael-circle-inner {
+                    @keyframes eael-3-anim-2-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotateX(-$animation-angle)
+                            rotateY(-$animation-angle) rotateZ(-$animation-angle);
+                        }
+                    }
+                    .eael-circle-btn {
+                        animation: eael-3-anim-2-btn-animation $animation-duration;
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-3 {
+                $animation-duration: 2s;
+                $animation-angle: 360deg;
+                .eael-circle-info {
+                    @keyframes eael-3-anim-3-circle-animation {
+                        0% {
+                            transform: rotate(-$animation-angle);
+                        }
+                    }
+                    @keyframes eael-3-anim-3-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotate($animation-angle);
+                        }
+                    }
+                    animation: eael-3-anim-3-circle-animation $animation-duration;
+                    .eael-circle-btn {
+                        animation: eael-3-anim-3-btn-animation $animation-duration;
+                    }
+                }
+            }
+        }
     }
+
     &.eael-interactive-circle-preset-4 {
+        @media only screen and (min-width: $breakpoint + 1) {
+            &.eael-interactive-circle-animation-1 {
+                $animation-duration: 2s;
+                .eael-circle-inner {
+                    @keyframes eael-4-anim-1-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                        }
+                    }
+                    .eael-circle-btn {
+                        animation: eael-4-anim-1-btn-animation $animation-duration;
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-2 {
+                $animation-duration: 2s;
+                $animation-angle: 180deg;
+                .eael-circle-inner {
+                    @keyframes eael-4-anim-2-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotateX(-$animation-angle)
+                            rotateY(-$animation-angle) rotateZ(-$animation-angle);
+                        }
+                    }
+                    .eael-circle-btn {
+                        animation: eael-4-anim-2-btn-animation $animation-duration;
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-3 {
+                $animation-duration: 2s;
+                $animation-angle: 360deg;
+                .eael-circle-info {
+                    @keyframes eael-4-anim-3-circle-animation {
+                        0% {
+                            transform: rotate(-$animation-angle);
+                        }
+                    }
+                    @keyframes eael-4-anim-3-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotate($animation-angle);
+                        }
+                    }
+                    @keyframes eael-4-anim-3-circle-content-animation {
+                        0% {
+                            transform: rotate($animation-angle);
+                        }
+                    }
+                    animation: eael-4-anim-3-circle-animation $animation-duration;
+                    .eael-circle-btn {
+                        animation: eael-4-anim-3-btn-animation $animation-duration;
+                    }
+                    .eael-circle-btn-content {
+                        animation: eael-4-anim-3-circle-content-animation
+                        $animation-duration;
+                    }
+                }
+            }
+        }
+
         .eael-circle-info {
             position: relative;
             $nav-item-border-width: 10px;
@@ -941,13 +1768,19 @@
             $nav-content-margin: 15px;
             $nav-content-padding: 30px;
             $nav-item-gap: 15px;
-            padding: ($nav-item-width / 2) + $nav-item-gap + ($nav-item-width / 5 );
+            padding: math.div($nav-item-width, 2) + $nav-item-gap + math.div($nav-item-width, 5 );
+
+            .eael-circle-inner {
+                width: 400px;
+                height: 400px;
+                border: 3px solid #DDDDEF;
+            }
             .eael-circle-item {
                 .eael-circle-btn {
                     position: absolute;
                     z-index: 99;
-                    height: $nav-item-width;
-                    width: $nav-item-width;
+                    height: 95px;
+                    width: 95px;
                     border-radius: $nav-item-border-radius;
                     .eael-circle-btn-icon {
                         padding: $nav-item-border-width;
@@ -990,12 +1823,14 @@
                 }
                 .eael-circle-btn-content {
                     position: absolute;
-                    $content-position: ($nav-item-width / 2) + $nav-item-gap + $nav-circle-border-width + ($nav-item-width / 5 );
+                    $content-position: math.div($nav-item-width, 2) + $nav-item-gap + $nav-circle-border-width + math.div($nav-item-width, 5 );
                     top: $content-position;
                     bottom: $content-position;
                     left: $content-position;
                     right: $content-position;
-                    display: none;
+                    display: block;
+                    visibility: hidden;
+                    opacity: 0;
                     padding: $nav-content-margin;
                     .eael-circle-content {
                         display: flex;
@@ -1022,14 +1857,34 @@
                     }
                     &.active {
                         display: block;
+                        visibility: visible;
+                        opacity: 1;
                     }
                 }
             }
             .eael-circle-item {
                 #eael-circle-item-1 {
-                    bottom: 14.6%;
+                    top: 50%;
+                    left: 0%;
+                    transform: translate(-50%, -50%);
+                    .eael-circle-icon-shapes {
+                        transform: rotate(-45deg);
+                        background: radial-gradient(
+                                        94.25% 92.56% at 48.86% 49.71%,
+                                        #199a8e 3.76%,
+                                        #7af4ab 55.38%
+                        );
+                    }
+                    .eael-circle-btn-icon {
+                        svg {
+                            fill: #199a8e;
+                        }
+                    }
+                }
+                #eael-circle-item-2 {
+                    top: 85.4%;
                     left: 14.6%;
-                    transform: translate(-50%, 50%);
+                    transform: translate(-50%, -50%);
                     .eael-circle-icon-shapes {
                         transform: rotate(-90deg);
                         background: linear-gradient(
@@ -1044,10 +1899,10 @@
                         }
                     }
                 }
-                #eael-circle-item-2 {
-                    bottom: 0%;
+                #eael-circle-item-3 {
+                    top: 100%;
                     left: 50%;
-                    transform: translate(-50%, 50%);
+                    transform: translate(-50%, -50%);
                     .eael-circle-icon-shapes {
                         transform: rotate(-135deg);
                         background: radial-gradient(
@@ -1063,10 +1918,10 @@
                         }
                     }
                 }
-                #eael-circle-item-3 {
-                    bottom: 14.6%;
-                    right: 14.6%;
-                    transform: translate(50%, 50%);
+                #eael-circle-item-4 {
+                    top: 85.4%;
+                    left: 85.4%;
+                    transform: translate(-50%, -50%);
                     .eael-circle-icon-shapes {
                         transform: rotate(-180deg);
                         background: radial-gradient(
@@ -1082,10 +1937,10 @@
                         }
                     }
                 }
-                #eael-circle-item-4 {
+                #eael-circle-item-5 {
                     top: 50%;
-                    right: 0%;
-                    transform: translate(50%, -50%);
+                    left: 100%;
+                    transform: translate(-50%, -50%);
                     .eael-circle-icon-shapes {
                         transform: rotate(135deg);
                         background: radial-gradient(
@@ -1101,10 +1956,10 @@
                         }
                     }
                 }
-                #eael-circle-item-5 {
+                #eael-circle-item-6 {
                     top: 14.6%;
-                    right: 14.6%;
-                    transform: translate(50%, -50%);
+                    left: 85.4%;
+                    transform: translate(-50%, -50%);
                     .eael-circle-icon-shapes {
                         transform: rotate(90deg);
                         background: radial-gradient(
@@ -1122,10 +1977,10 @@
                         }
                     }
                 }
-                #eael-circle-item-6 {
+                #eael-circle-item-7 {
                     top: 0%;
-                    right: 50%;
-                    transform: translate(50%, -50%);
+                    left: 50%;
+                    transform: translate(-50%, -50%);
                     .eael-circle-icon-shapes {
                         transform: rotate(45deg);
                         background: radial-gradient(
@@ -1140,7 +1995,7 @@
                         }
                     }
                 }
-                #eael-circle-item-7 {
+                #eael-circle-item-8 {
                     top: 14.6%;
                     left: 14.6%;
                     transform: translate(-50%, -50%);
@@ -1157,24 +2012,6 @@
                     .eael-circle-btn-icon {
                         svg {
                             fill: #2b3894;
-                        }
-                    }
-                }
-                #eael-circle-item-8 {
-                    bottom: 50%;
-                    left: 0%;
-                    transform: translate(-50%, 50%);
-                    .eael-circle-icon-shapes {
-                        transform: rotate(-45deg);
-                        background: radial-gradient(
-                                        94.25% 92.56% at 48.86% 49.71%,
-                                        #199a8e 3.76%,
-                                        #7af4ab 55.38%
-                        );
-                    }
-                    .eael-circle-btn-icon {
-                        svg {
-                            fill: #199a8e;
                         }
                     }
                 }

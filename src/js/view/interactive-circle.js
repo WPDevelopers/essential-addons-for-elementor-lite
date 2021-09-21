@@ -4,7 +4,7 @@ ea.hooks.addAction("init", "ea", () => {
 		var $circleWrap = $scope.find(".eael-circle-wrapper");
 		var $eventType = "";
 
-		if($circleWrap.hasClass('toggle-on-click')){
+		if($circleWrap.hasClass('eael-interactive-circle-event-click')){
 			$eventType = "click";
 		} else {
 			$eventType = "mouseenter";
@@ -41,24 +41,24 @@ ea.hooks.addAction("init", "ea", () => {
 			};
 		}
 
-		if($circleWrap.hasClass('eael-interactive-circle-preset-1')){
-
-			var $wrap = $circleWrap.find(".eael-circle-inner").width();
-			var $i = $tabLinks.length;
-			var $navwidth = $tabLinks.width();
-
-			for(var a=1;a<=$i;a++){
-				console.log($wrap);
-
-			$tabLinks.eq(a).css({
-				transform: 'rotate(calc((360deg / '+$i+') * '+a+')) translate(calc('+$wrap+'px / 2)) rotate(calc((360deg /' +
-					' '+$i+')' +
-					' * '+a+' * -1)) rotate(calc(180deg + ('+$i+' * 10deg)))',
-			});
-
-		}
-
-		}
+		// if($circleWrap.hasClass('eael-interactive-circle-preset-1')){
+		//
+		// 	var $wrap = $circleWrap.find(".eael-circle-inner").width();
+		// 	var $i = $tabLinks.length;
+		// 	var $navwidth = $tabLinks.width();
+		//
+		// 	for(var a=1;a<=$i;a++){
+		// 		console.log($wrap);
+		//
+		// 	$tabLinks.eq(a).css({
+		// 		transform: 'rotate(calc((360deg / '+$i+') * '+a+')) translate(calc('+$wrap+'px / 2)) rotate(calc((360deg /' +
+		// 			' '+$i+')' +
+		// 			' * '+a+' * -1)) rotate(calc(180deg + ('+$i+' * 10deg)))',
+		// 	});
+		//
+		// }
+		//
+		// }
 
 		// if($circleWrap.hasClass('eael-interactive-circle-preset-2')){
 		//
