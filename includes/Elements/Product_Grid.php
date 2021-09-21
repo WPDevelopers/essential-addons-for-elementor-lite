@@ -527,6 +527,16 @@ class Product_Grid extends Widget_Base
             'type' => Controls_Manager::SWITCHER,
         ]);
 
+	    $this->add_control(
+		    'eael_product_grid_image_clickable',
+		    [
+			    'label' => esc_html__('Image Clickable?', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SWITCHER,
+			    'return_value' => 'yes',
+			    'default' => 'no',
+		    ]
+	    );
+
         $this->end_controls_section();
     }
 
