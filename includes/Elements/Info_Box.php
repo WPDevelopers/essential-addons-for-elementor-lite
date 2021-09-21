@@ -101,7 +101,8 @@ class Info_Box extends Widget_Base
                     ],
                     'number' => [
                         'title' => esc_html__('Number', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-sort-numeric-desc',
+                        //'icon' => 'fa fa-sort-numeric-desc', //not showing/supported
+                        'icon' => 'fas fa-sort-numeric-up-alt', //fa version 5
                     ],
                     'icon' => [
                         'title' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
@@ -109,7 +110,8 @@ class Info_Box extends Widget_Base
                     ],
                     'img' => [
                         'title' => esc_html__('Image', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-picture-o',
+                        //'icon' => 'fa fa-picture-o',
+                        'icon' => 'far fa-image',
                     ],
                 ],
                 'default' => 'icon',
