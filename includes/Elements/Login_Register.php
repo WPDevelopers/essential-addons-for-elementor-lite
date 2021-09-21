@@ -202,7 +202,7 @@ class Login_Register extends Widget_Base {
 
 		if(!$this->pro_enabled){
 			$this->social_login_promo();
-        }
+		}
 
 		do_action( 'eael/login-register/after-login-controls-section', $this );
 		// Registration For Related---
@@ -210,12 +210,6 @@ class Login_Register extends Widget_Base {
 		$this->init_content_register_options_controls();
 		$this->init_content_register_user_email_controls();
 		$this->init_content_register_admin_email_controls();
-		
-		if(!$this->pro_enabled){
-			$this->social_register_promo();
-        }
-		do_action( 'eael/login-register/after-register-controls-section', $this );
-
 		//Terms & Conditions
 		$this->init_content_terms_controls();
 		// Error Messages
@@ -845,28 +839,6 @@ class Login_Register extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	protected function social_register_promo() {
-
-		$this->start_controls_section( 'section_content_social_register', [
-			'label'      => __( 'Social Signup', 'essential-addons-elementor' ),
-			'conditions' => $this->get_form_controls_display_condition( 'register' ),
-		] );
-
-		$this->add_control( 'enable_google_register', [
-			'label'   => sprintf( __( 'Enable Signup with Google %s', 'essential-addons-for-elementor-lite' ),  '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
-			'type'    => Controls_Manager::SWITCHER,
-			'classes' => 'eael-pro-control',
-		] );
-
-		$this->add_control( 'enable_fb_register', [
-			'label'   => sprintf( __( 'Enable Signup with Facebook %s', 'essential-addons-for-elementor-lite' ),  '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
-			'type'    => Controls_Manager::SWITCHER,
-			'classes' => 'eael-pro-control',
-		] );
-
-		$this->end_controls_section();
-	}
-
 	protected function init_content_terms_controls() {
 		$this->start_controls_section( 'section_content_terms_conditions', [
 			'label'      => __( 'Terms & Conditions', 'essential-addons-for-elementor-lite' ),
@@ -1060,32 +1032,32 @@ class Login_Register extends Widget_Base {
 
 	protected function show_pro_promotion(){
 
-        $this->start_controls_section(
-            'eael_section_pro',
-            [
-                'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite' ),
-            ]
-        );
+		$this->start_controls_section(
+			'eael_section_pro',
+			[
+				'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite' ),
+			]
+		);
 
-        $this->add_control(
-            'eael_control_get_pro',
-            [
-                'label'       => __( 'Unlock more possibilities', 'essential-addons-for-elementor-lite' ),
-                'type'        => Controls_Manager::CHOOSE,
-                'options'     => [
-                    '1' => [
-                        'title' => '',
-                        'icon'  => 'fa fa-unlock-alt',
-                    ],
-                ],
-                'default'     => '1',
-                'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
-            ]
-        );
+		$this->add_control(
+			'eael_control_get_pro',
+			[
+				'label'       => __( 'Unlock more possibilities', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'1' => [
+						'title' => '',
+						'icon'  => 'fa fa-unlock-alt',
+					],
+				],
+				'default'     => '1',
+				'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+			]
+		);
 
-        $this->end_controls_section();
+		$this->end_controls_section();
 
-    }
+	}
 
 	protected function init_content_register_fields_controls() {
 
@@ -1272,13 +1244,13 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
-        if(current_user_can('create_users')){
-            $user_role = $this->get_user_roles();
-        }else{
-            $user_role = [
-                get_option( 'default_role' ) =>  ucfirst(get_option( 'default_role' ))
-            ];
-        }
+		if(current_user_can('create_users')){
+			$user_role = $this->get_user_roles();
+		}else{
+			$user_role = [
+				get_option( 'default_role' ) =>  ucfirst(get_option( 'default_role' ))
+			];
+		}
 
 		$this->add_control( 'register_user_role', [
 			'label'     => __( 'New User Role', 'essential-addons-for-elementor-lite' ),
