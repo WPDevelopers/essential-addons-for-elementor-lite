@@ -39,7 +39,14 @@ class Woo_Cart extends Widget_Base {
 				wc_load_cart();
 			}
 
+			// Added 'eael-woo-cart' class to body
 			add_filter( 'body_class', [ $this, 'add_cart_body_class' ] );
+
+			// Remove default 'woocommerce_cart_totals' callback from 'woocommerce_cart_collaterals'
+			remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cart_totals', 10 );
+
+			// Added our cart totals section instead of woocommerce_cart_collaterals
+			add_action( 'woocommerce_cart_collaterals', [ $this, 'eael_woo_cart_totals' ], 10 );
 		}
 	}
 

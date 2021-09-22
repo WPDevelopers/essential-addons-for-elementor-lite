@@ -5,6 +5,7 @@
 .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table {
   border-collapse: separate;
   border-spacing: 0 13px;
+  margin: 0;
 }
 .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table th,
 .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td {
@@ -48,6 +49,7 @@
   border: none;
   background: transparent;
   text-align: center;
+  vertical-align: middle;
   font-size: 20px;
 }
 .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-remove {
@@ -108,4 +110,87 @@
 }
 .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-subtotal {
   font-weight: 500;
+}
+.eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals {
+  overflow: hidden;
+}
+.eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button {
+  background: #6557FF;
+  -webkit-box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  line-height: 30px;
+  font-weight: 500;
+}
+.eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper {
+  width: 50%;
+  float: left;
+}
+.eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon {
+  border: 1px solid #D7DFEF;
+  border-radius: 5px;
+  max-width: 400px;
+  padding: 7px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon input {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  line-height: 30px;
+}
+.eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button {
+  -webkit-box-shadow: 0 8px 18px rgba(56, 51, 117, 0.1);
+          box-shadow: 0 8px 18px rgba(56, 51, 117, 0.1);
+}
+.eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals {
+  width: 50%;
+  float: left;
+}
+.eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .eael-cart-update-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+.eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .eael-cart-update-btn button {
+  width: 48%;
+}
+.eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .eael-cart-update-btn button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals table {
+  border-collapse: separate;
+  border-spacing: 0 13px;
+  margin: 0;
+}
+.eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals table td,
+.eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals table th {
+  background: transparent;
+  border: none;
+}
+.eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals table tr {
+  position: relative;
+  z-index: 2;
+}
+.eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals table tr::after {
+  position: absolute;
+  content: "";
+  background: #fff;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  -webkit-box-shadow: 0 8px 18px 0 rgba(0, 1, 35, 0.05);
+          box-shadow: 0 8px 18px 0 rgba(0, 1, 35, 0.05);
+  border-radius: 5px;
 }
