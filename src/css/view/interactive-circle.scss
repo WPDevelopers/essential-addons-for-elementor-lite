@@ -485,6 +485,9 @@
             $nav-content-text-color: #202b46;
             $nav-content-margin: 10px;
             $nav-content-padding: 0px 60px;
+            $nav-item-initial-color: #7a5bff;
+            $nav-item-hover-color: #fff;
+
             padding: math.div($nav-item-width, 2) + $nav-item-gap math.div($nav-item-width, 2) + $nav-item-gap 0 math.div($nav-item-width, 2) + $nav-item-gap;
             position: relative;
             .eael-circle-inner {
@@ -494,7 +497,17 @@
                 border: 5px solid #FFE6DC;
                 border-bottom: none!important;
 
+                @media only screen and (max-width: $breakpoint) {
+                    width: 100%;
+                    height: auto;
+                    border-radius: 0;
+                    border: 0;
+                }
+
                 .eael-circle-item {
+                    @media only screen and (max-width: $breakpoint) {
+
+                    }
                     .eael-circle-btn {
                         position: absolute;
                         z-index: 99;
@@ -590,6 +603,12 @@
                         visibility: hidden;
                         padding: $nav-content-margin;
                         text-align: center;
+
+                        @media only screen and (max-width: $breakpoint) {
+                            width: 100%;
+                            transform: none;
+                            bottom: 0;
+                        }
 
                         .eael-circle-content {
                             h2 {
@@ -1312,7 +1331,6 @@
         }
     }
 
-
     &.eael-interactive-circle-preset-3 {
         .eael-circle-info {
             $nav-item-border-width: 10px;
@@ -1338,6 +1356,11 @@
             .eael-circle-inner {
                 width: 400px;
                 height: 400px;
+
+                @media only screen and (max-width: $breakpoint) {
+                    width: 100% !important;
+                    height: auto !important;
+                }
 
                 .eael-circle-item {
                     .eael-circle-btn {
@@ -1424,6 +1447,13 @@
                         display: none;
                         //padding: $nav-content-margin;
                         padding: 50px;
+
+                        @media only screen and (max-width: $breakpoint) {
+                            padding: 0;
+                            border: 0!important;
+                            margin-top: 20px;
+                        }
+
                         .eael-circle-content {
                             display: flex;
                             flex-direction: column;
@@ -1435,6 +1465,13 @@
                             border-radius: $nav-circle-border-radius;
                             background: $nav-content-background;
                             box-shadow: 0px 5px 40px rgba(131, 100, 196, 0.2);
+
+                            @media only screen and (max-width: $breakpoint) {
+                                box-shadow: none!important;
+                                background: transparent!important;
+                                border: 0!important;
+                                border-radius: 0!important;
+                            }
 
                             h2 {
                                 font-size: $nav-content-text-size;
@@ -1480,17 +1517,17 @@
                         top: 14.6%;
                         left: 14.6%;
                         transform: translate(-50%, -50%);
-                        .eael-circle-btn-icon {
-                            background: radial-gradient(
-                                            81.89% 82.54% at 48.96% 49.88%,
-                                            #0956c6 3.76%,
-                                            #07a9f0 55.38%,
-                                            #93dcfc 100%
-                            );
-                            svg {
-                                fill: #07a9f0;
-                            }
-                        }
+                        //.eael-circle-btn-icon {
+                        //    background: radial-gradient(
+                        //                    81.89% 82.54% at 48.96% 49.88%,
+                        //                    #0956c6 3.76%,
+                        //                    #07a9f0 55.38%,
+                        //                    #93dcfc 100%
+                        //    );
+                        //    svg {
+                        //        fill: #07a9f0;
+                        //    }
+                        //}
                         .eael-circle-icon-shapes {
                             transform: rotate(45deg);
                         }
@@ -1499,17 +1536,17 @@
                         top: 14.6%;
                         left: 85.4%;
                         transform: translate(-50%, -50%);
-                        .eael-circle-btn-icon {
-                            background: radial-gradient(
-                                            64.96% 65.32% at 52.18% 47.01%,
-                                            #6f00ff 3.76%,
-                                            #533fff 55.38%,
-                                            #b9aaff 100%
-                            );
-                            svg {
-                                fill: #715eff;
-                            }
-                        }
+                        //.eael-circle-btn-icon {
+                        //    background: radial-gradient(
+                        //                    64.96% 65.32% at 52.18% 47.01%,
+                        //                    #6f00ff 3.76%,
+                        //                    #533fff 55.38%,
+                        //                    #b9aaff 100%
+                        //    );
+                        //    svg {
+                        //        fill: #715eff;
+                        //    }
+                        //}
                         .eael-circle-icon-shapes {
                             transform: rotate(135deg);
                         }
@@ -1518,17 +1555,17 @@
                         top: 85.4%;
                         left: 14.6%;
                         transform: translate(-50%, -50%);
-                        .eael-circle-btn-icon {
-                            background: radial-gradient(
-                                            101.16% 101.7% at 47.77% 50.74%,
-                                            #ff9100 3.76%,
-                                            #ffb655 56.99%,
-                                            #fff04a 100%
-                            );
-                            svg {
-                                fill: #ffb655;
-                            }
-                        }
+                        //.eael-circle-btn-icon {
+                        //    background: radial-gradient(
+                        //                    101.16% 101.7% at 47.77% 50.74%,
+                        //                    #ff9100 3.76%,
+                        //                    #ffb655 56.99%,
+                        //                    #fff04a 100%
+                        //    );
+                        //    svg {
+                        //        fill: #ffb655;
+                        //    }
+                        //}
                         .eael-circle-icon-shapes {
                             transform: rotate(-45deg);
                         }
@@ -1537,17 +1574,17 @@
                         top: 85.4%;
                         left: 85.4%;
                         transform: translate(-50%, -50%);
-                        .eael-circle-btn-icon {
-                            background: radial-gradient(
-                                            65.76% 66.29% at 48.95% 49.57%,
-                                            #b40042 3.76%,
-                                            #c50048 48.92%,
-                                            #ff5e93 100%
-                            );
-                            svg {
-                                fill: #c50048;
-                            }
-                        }
+                        //.eael-circle-btn-icon {
+                        //    background: radial-gradient(
+                        //                    65.76% 66.29% at 48.95% 49.57%,
+                        //                    #b40042 3.76%,
+                        //                    #c50048 48.92%,
+                        //                    #ff5e93 100%
+                        //    );
+                        //    svg {
+                        //        fill: #c50048;
+                        //    }
+                        //}
                         .eael-circle-icon-shapes {
                             transform: rotate(-135deg);
                         }
@@ -1556,34 +1593,34 @@
                         top: 50%;
                         left: 0%;
                         transform: translate(-50%, -50%);
-                        .eael-circle-btn-icon {
-                            background: radial-gradient(
-                                            73.69% 72.33% at 51.12% 47.67%,
-                                            #2b3894 3.76%,
-                                            #364099 14.18%,
-                                            #5356a8 32.43%,
-                                            #8078bf 55.38%,
-                                            #d2a8d1 100%
-                            );
-                            svg {
-                                fill: #364099;
-                            }
-                        }
+                        //.eael-circle-btn-icon {
+                        //    background: radial-gradient(
+                        //                    73.69% 72.33% at 51.12% 47.67%,
+                        //                    #2b3894 3.76%,
+                        //                    #364099 14.18%,
+                        //                    #5356a8 32.43%,
+                        //                    #8078bf 55.38%,
+                        //                    #d2a8d1 100%
+                        //    );
+                        //    svg {
+                        //        fill: #364099;
+                        //    }
+                        //}
                     }
                     #eael-circle-item-6 {
                         top: 50%;
                         left: 100%;
                         transform: translate(-50%, -50%);
-                        .eael-circle-btn-icon {
-                            background: radial-gradient(
-                                            94.25% 92.56% at 48.86% 49.71%,
-                                            #199a8e 3.76%,
-                                            #7af4ab 55.38%
-                            );
-                            svg {
-                                fill: #7af4ab;
-                            }
-                        }
+                        //.eael-circle-btn-icon {
+                        //    background: radial-gradient(
+                        //                    94.25% 92.56% at 48.86% 49.71%,
+                        //                    #199a8e 3.76%,
+                        //                    #7af4ab 55.38%
+                        //    );
+                        //    svg {
+                        //        fill: #7af4ab;
+                        //    }
+                        //}
                         .eael-circle-icon-shapes {
                             transform: rotate(180deg);
                         }
@@ -1592,19 +1629,19 @@
                         top: 0%;
                         left: 50%;
                         transform: translate(-50%, -50%);
-                        .eael-circle-btn-icon {
-                            background: radial-gradient(
-                                            73.69% 72.33% at 51.12% 47.67%,
-                                            #2b3894 3.76%,
-                                            #364099 14.18%,
-                                            #5356a8 32.43%,
-                                            #8078bf 55.38%,
-                                            #d2a8d1 100%
-                            );
-                            svg {
-                                fill: #364099;
-                            }
-                        }
+                        //.eael-circle-btn-icon {
+                        //    background: radial-gradient(
+                        //                    73.69% 72.33% at 51.12% 47.67%,
+                        //                    #2b3894 3.76%,
+                        //                    #364099 14.18%,
+                        //                    #5356a8 32.43%,
+                        //                    #8078bf 55.38%,
+                        //                    #d2a8d1 100%
+                        //    );
+                        //    svg {
+                        //        fill: #364099;
+                        //    }
+                        //}
                         .eael-circle-icon-shapes {
                             transform: rotate(90deg);
                         }
@@ -1613,14 +1650,14 @@
                         top: 100%;
                         left: 50%;
                         transform: translate(-50%, -50%);
-                        background: radial-gradient(
-                                        94.25% 92.56% at 48.86% 49.71%,
-                                        #199a8e 3.76%,
-                                        #7af4ab 55.38%
-                        );
-                        svg {
-                            fill: #199a8e;
-                        }
+                        //background: radial-gradient(
+                        //                94.25% 92.56% at 48.86% 49.71%,
+                        //                #199a8e 3.76%,
+                        //                #7af4ab 55.38%
+                        //);
+                        //svg {
+                        //    fill: #199a8e;
+                        //}
                         .eael-circle-icon-shapes {
                             transform: rotate(-90deg);
                         }
@@ -1680,6 +1717,45 @@
                     animation: eael-3-anim-3-circle-animation $animation-duration;
                     .eael-circle-btn {
                         animation: eael-3-anim-3-btn-animation $animation-duration;
+                    }
+                }
+            }
+        }
+
+        @media only screen and (max-width: $breakpoint) {
+            .eael-circle-info {
+                width: 100%;
+                padding: 0 !important;
+            }
+            .eael-circle-inner {
+                display: grid;
+                width: 100%;
+                height: initial;
+                grid-template-columns: repeat(1, 1fr);
+                grid-gap: 20px;
+                border: none;
+            }
+            .eael-circle-item {
+                border: $nav-circle-border-width solid $nav-circle-border-color;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                .eael-circle-btn {
+                    position: initial !important;
+                    transform: none !important;
+                    .eael-circle-icon-shapes {
+                        display: none !important;
+                    }
+                }
+                .eael-circle-btn-content {
+                    position: initial !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                    display: block !important;
+                    .eael-circle-content {
+                        padding: 0 !important;
+                        background: transparent !important;
                     }
                 }
             }
@@ -1747,6 +1823,49 @@
                     .eael-circle-btn-content {
                         animation: eael-4-anim-3-circle-content-animation
                         $animation-duration;
+                    }
+                }
+            }
+        }
+
+        @media only screen and (max-width: $breakpoint) {
+            .eael-circle-info {
+                width: 100%;
+                padding: 0 !important;
+            }
+            .eael-circle-inner {
+                display: grid;
+                width: 100% !important;
+                height: auto!important;
+                grid-template-columns: repeat(1, 1fr);
+                grid-gap: 20px;
+                border: none!important;
+            }
+            .eael-circle-item {
+                border: $nav-circle-border-width solid $nav-circle-border-color;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                .eael-circle-btn {
+                    transform: none !important;
+                    position: relative !important;
+                    top: initial !important;
+                    left: initial !important;
+                    bottom: initial !important;
+                    right: initial !important;
+                    .eael-circle-icon-shapes {
+                        border-bottom-right-radius: $nav-item-border-radius;
+                    }
+                }
+                .eael-circle-btn-content {
+                    position: initial !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                    display: block !important;
+                    .eael-circle-content {
+                        padding: 0 !important;
+                        background: transparent !important;
                     }
                 }
             }
@@ -1863,10 +1982,7 @@
                 }
             }
             .eael-circle-item {
-                #eael-circle-item-1 {
-                    top: 50%;
-                    left: 0%;
-                    transform: translate(-50%, -50%);
+                &:nth-child(8n+1) {
                     .eael-circle-icon-shapes {
                         transform: rotate(-45deg);
                         background: radial-gradient(
@@ -1881,10 +1997,7 @@
                         }
                     }
                 }
-                #eael-circle-item-2 {
-                    top: 85.4%;
-                    left: 14.6%;
-                    transform: translate(-50%, -50%);
+                &:nth-child(8n+2) {
                     .eael-circle-icon-shapes {
                         transform: rotate(-90deg);
                         background: linear-gradient(
@@ -1899,10 +2012,7 @@
                         }
                     }
                 }
-                #eael-circle-item-3 {
-                    top: 100%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
+                &:nth-child(8n+3) {
                     .eael-circle-icon-shapes {
                         transform: rotate(-135deg);
                         background: radial-gradient(
@@ -1918,10 +2028,7 @@
                         }
                     }
                 }
-                #eael-circle-item-4 {
-                    top: 85.4%;
-                    left: 85.4%;
-                    transform: translate(-50%, -50%);
+                &:nth-child(8n+4) {
                     .eael-circle-icon-shapes {
                         transform: rotate(-180deg);
                         background: radial-gradient(
@@ -1936,11 +2043,9 @@
                             fill: #ffae42;
                         }
                     }
+
                 }
-                #eael-circle-item-5 {
-                    top: 50%;
-                    left: 100%;
-                    transform: translate(-50%, -50%);
+                &:nth-child(8n+5) {
                     .eael-circle-icon-shapes {
                         transform: rotate(135deg);
                         background: radial-gradient(
@@ -1956,10 +2061,7 @@
                         }
                     }
                 }
-                #eael-circle-item-6 {
-                    top: 14.6%;
-                    left: 85.4%;
-                    transform: translate(-50%, -50%);
+                &:nth-child(8n+6) {
                     .eael-circle-icon-shapes {
                         transform: rotate(90deg);
                         background: radial-gradient(
@@ -1976,11 +2078,9 @@
                             fill: #2b3894;
                         }
                     }
+
                 }
-                #eael-circle-item-7 {
-                    top: 0%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
+                &:nth-child(8n+7) {
                     .eael-circle-icon-shapes {
                         transform: rotate(45deg);
                         background: radial-gradient(
@@ -1994,11 +2094,9 @@
                             fill: #199a8e;
                         }
                     }
+
                 }
-                #eael-circle-item-8 {
-                    top: 14.6%;
-                    left: 14.6%;
-                    transform: translate(-50%, -50%);
+                &:nth-child(8n+8) {
                     .eael-circle-icon-shapes {
                         background: radial-gradient(
                                         73.69% 72.33% at 51.12% 47.67%,
@@ -2014,6 +2112,159 @@
                             fill: #2b3894;
                         }
                     }
+                }
+
+                #eael-circle-item-1 {
+                    top: 50%;
+                    left: 0%;
+                    transform: translate(-50%, -50%);
+                    //.eael-circle-icon-shapes {
+                    //    transform: rotate(-45deg);
+                    //    background: radial-gradient(
+                    //                    94.25% 92.56% at 48.86% 49.71%,
+                    //                    #199a8e 3.76%,
+                    //                    #7af4ab 55.38%
+                    //    );
+                    //}
+                    //.eael-circle-btn-icon {
+                    //    svg {
+                    //        fill: #199a8e;
+                    //    }
+                    //}
+                }
+                #eael-circle-item-2 {
+                    top: 85.4%;
+                    left: 14.6%;
+                    transform: translate(-50%, -50%);
+                    //.eael-circle-icon-shapes {
+                    //    transform: rotate(-90deg);
+                    //    background: linear-gradient(
+                    //                    144.3deg,
+                    //                    #476df8 15.07%,
+                    //                    #6a8aff 97.18%
+                    //    );
+                    //}
+                    //.eael-circle-btn-icon {
+                    //    svg {
+                    //        fill: #07a9f0;
+                    //    }
+                    //}
+                }
+                #eael-circle-item-3 {
+                    top: 100%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    //.eael-circle-icon-shapes {
+                    //    transform: rotate(-135deg);
+                    //    background: radial-gradient(
+                    //                    64.96% 65.32% at 52.18% 47.01%,
+                    //                    #6f00ff 3.76%,
+                    //                    #533fff 55.38%,
+                    //                    #b9aaff 100%
+                    //    );
+                    //}
+                    //.eael-circle-btn-icon {
+                    //    svg {
+                    //        fill: #715eff;
+                    //    }
+                    //}
+                }
+                #eael-circle-item-4 {
+                    top: 85.4%;
+                    left: 85.4%;
+                    transform: translate(-50%, -50%);
+                    //.eael-circle-icon-shapes {
+                    //    transform: rotate(-180deg);
+                    //    background: radial-gradient(
+                    //                    101.16% 101.7% at 47.77% 50.74%,
+                    //                    #ff9100 3.76%,
+                    //                    #ffb655 56.99%,
+                    //                    #fff04a 100%
+                    //    );
+                    //}
+                    //.eael-circle-btn-icon {
+                    //    svg {
+                    //        fill: #ffae42;
+                    //    }
+                    //}
+                }
+                #eael-circle-item-5 {
+                    top: 50%;
+                    left: 100%;
+                    transform: translate(-50%, -50%);
+                    //.eael-circle-icon-shapes {
+                    //    transform: rotate(135deg);
+                    //    background: radial-gradient(
+                    //                    65.76% 66.29% at 48.95% 49.57%,
+                    //                    #b40042 3.76%,
+                    //                    #c50048 48.92%,
+                    //                    #ff5e93 100%
+                    //    );
+                    //}
+                    //.eael-circle-btn-icon {
+                    //    svg {
+                    //        fill: #b40042;
+                    //    }
+                    //}
+                }
+                #eael-circle-item-6 {
+                    top: 14.6%;
+                    left: 85.4%;
+                    transform: translate(-50%, -50%);
+                    //.eael-circle-icon-shapes {
+                    //    transform: rotate(90deg);
+                    //    background: radial-gradient(
+                    //                    73.69% 72.33% at 51.12% 47.67%,
+                    //                    #2b3894 3.76%,
+                    //                    #364099 14.18%,
+                    //                    #5356a8 32.43%,
+                    //                    #8078bf 55.38%,
+                    //                    #d2a8d1 100%
+                    //    );
+                    //}
+                    //.eael-circle-btn-icon {
+                    //    svg {
+                    //        fill: #2b3894;
+                    //    }
+                    //}
+                }
+                #eael-circle-item-7 {
+                    top: 0%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    //.eael-circle-icon-shapes {
+                    //    transform: rotate(45deg);
+                    //    background: radial-gradient(
+                    //                    94.25% 92.56% at 48.86% 49.71%,
+                    //                    #199a8e 3.76%,
+                    //                    #7af4ab 55.38%
+                    //    );
+                    //}
+                    //.eael-circle-btn-icon {
+                    //    svg {
+                    //        fill: #199a8e;
+                    //    }
+                    //}
+                }
+                #eael-circle-item-8 {
+                    top: 14.6%;
+                    left: 14.6%;
+                    transform: translate(-50%, -50%);
+                    //.eael-circle-icon-shapes {
+                    //    background: radial-gradient(
+                    //                    73.69% 72.33% at 51.12% 47.67%,
+                    //                    #2b3894 3.76%,
+                    //                    #364099 14.18%,
+                    //                    #5356a8 32.43%,
+                    //                    #8078bf 55.38%,
+                    //                    #d2a8d1 100%
+                    //    );
+                    //}
+                    //.eael-circle-btn-icon {
+                    //    svg {
+                    //        fill: #2b3894;
+                    //    }
+                    //}
                 }
             }
         }

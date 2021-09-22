@@ -230,21 +230,21 @@ class Interactive_Circle extends Widget_Base
 		    [
 			    'name' => 'eael_interactive_circle_tab_bgtype',
 			    'types' => ['gradient'],
-			    'selector' => '{{WRAPPER}} .eael-circle-wrapper .eael-circle-info .eael-circle-inner {{CURRENT_ITEM}} .eael-circle-btn-icon',
+			    'selector' => '{{WRAPPER}} .eael-circle-wrapper:not(.eael-interactive-circle-preset-4) .eael-circle-info .eael-circle-inner {{CURRENT_ITEM}} .eael-circle-btn-icon, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-inner {{CURRENT_ITEM}} .eael-circle-icon-shapes',
 		    ]
 	    );
 
-	    $repeater->add_control(
-		    'eael_interactive_circle_item_title_text_color',
-		    [
-			    'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::COLOR,
-//			    'default' => '#333',
-			    'selectors' => [
-				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'color: {{VALUE}};',
-			    ],
-		    ]
-	    );
+//	    $repeater->add_control(
+//		    'eael_interactive_circle_item_title_text_color',
+//		    [
+//			    'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
+//			    'type' => Controls_Manager::COLOR,
+////			    'default' => '#333',
+//			    'selectors' => [
+//				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'color: {{VALUE}};',
+//			    ],
+//		    ]
+//	    );
 
 	    $repeater->end_controls_tab();
 	    $repeater->end_controls_tabs();
@@ -546,7 +546,8 @@ class Interactive_Circle extends Widget_Base
 			    'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::COLOR,
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-circle-btn-icon' => 'background-color: {{VALUE}}!important;',
+				    '{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-btn .eael-circle-btn-icon, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-2 .eael-circle-btn .eael-circle-btn-icon' => 'background-color: {{VALUE}}!important;',
+				    '{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-btn .eael-circle-icon-inner, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-btn .eael-circle-icon-inner' => 'background-color: {{VALUE}}!important;',
 			    ],
 		    ]
 	    );
@@ -593,7 +594,10 @@ class Interactive_Circle extends Widget_Base
 			    'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::COLOR,
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-circle-btn:hover .eael-circle-btn-icon, {{WRAPPER}} .eael-circle-btn.active:hover .eael-circle-btn-icon' => 'background-color: {{VALUE}}!important;',
+				    '{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-btn:hover .eael-circle-btn-icon, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-2 .eael-circle-btn:hover .eael-circle-btn-icon' => 'background-color: {{VALUE}}!important;',
+				    '{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-btn:hover .eael-circle-icon-inner, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-btn:hover .eael-circle-icon-inner' => 'background-color: {{VALUE}}!important;',
+                    '{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-btn.active:hover .eael-circle-btn-icon, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-2 .eael-circle-btn.active:hover .eael-circle-btn-icon' => 'background-color: {{VALUE}}!important;',
+				    '{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-btn.active:hover .eael-circle-icon-inner, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-btn.active:hover .eael-circle-icon-inner' => 'background-color: {{VALUE}}!important;',
 			    ],
 		    ]
 	    );
@@ -649,6 +653,9 @@ class Interactive_Circle extends Widget_Base
 			    'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::COLOR,
 			    'selectors' => [
+				    '{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-btn.active .eael-circle-btn-icon, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-2 .eael-circle-btn.active .eael-circle-btn-icon' => 'background-color: {{VALUE}}!important;',
+				    '{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-btn.active .eael-circle-icon-inner, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-btn.active .eael-circle-icon-inner' => 'background-color: {{VALUE}}!important;',
+
 				    '{{WRAPPER}} .eael-circle-btn.active .eael-circle-btn-icon' => 'background-color: {{VALUE}}!important;',
 			    ],
 		    ]
