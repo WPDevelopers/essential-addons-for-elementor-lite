@@ -304,3 +304,7 @@
 .eaicon-product-gallery:before {
 	content: "\e95a";
 }
+
+.eaicon-interactive-circle:before {
+	content: "\e95b";
+}

@@ -33,7 +33,7 @@ class Interactive_Circle extends Widget_Base
 
     public function get_icon()
     {
-        return 'eaicon-advanced-tabs';
+        return 'eaicon-interactive-circle';
     }
 
     public function get_categories()
