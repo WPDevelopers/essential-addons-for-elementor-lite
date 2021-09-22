@@ -3,15 +3,20 @@ $text-color-2: #747C92;
 $text-color-3: #737373;
 $qty-button: #97A0B6;
 $icon-color: #BEC6D7;
+$background: #f9fbff;
+$btn-bg: #6557FF;
+$transparent: transparent;
+$white: #fff;
 
 .eael-woo-cart-wrapper {
-    background: #f9fbff;
+    background: $background;
     padding: 100px 0;
 
     form.eael-woo-cart-form {
         .eael-woo-cart-table {
             border-collapse: separate;
             border-spacing: 0 13px;
+            margin: 0;
 
             th,
             td {
@@ -50,7 +55,7 @@ $icon-color: #BEC6D7;
                     &::after {
                         position: absolute;
                         content: "";
-                        background: #fff;
+                        background: $white;
                         top: 0;
                         left: 0;
                         height: 100%;
@@ -64,6 +69,7 @@ $icon-color: #BEC6D7;
                         border: none;
                         background: transparent;
                         text-align: center;
+                        vertical-align: middle;
                         font-size: 20px;
 
                         &.product-remove {
@@ -131,6 +137,98 @@ $icon-color: #BEC6D7;
                         &.product-subtotal {
                             font-weight: 500;
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    .eael-cart-coupon-and-collaterals {
+        overflow: hidden;
+
+        button {
+            background: $btn-bg;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+            border-radius: 5px;
+            color: $white;
+            border: none;
+            font-size: 18px;
+            line-height: 30px;
+            font-weight: 500;
+        }
+
+        .eael-cart-coupon-wrapper {
+            width: 50%;
+            float: left;
+
+            .coupon {
+                border: 1px solid #D7DFEF;
+                border-radius: 5px;
+                max-width: 400px;
+                padding: 7px;
+                display: flex;
+
+                input {
+                    background: $transparent;
+                    border: none;
+                    font-size: 18px;
+                    line-height: 30px;
+                }
+
+                button {
+                    box-shadow: 0 8px 18px rgba(56, 51, 117, 0.1);
+                }
+            }
+        }
+
+        .cart-collaterals {
+            width: 50%;
+            float: left;
+
+            .eael-cart-update-btn {
+                display: flex;
+                justify-content: flex-end;
+
+                button {
+                    width: 48%;
+
+                    &[disabled] {
+                        opacity: .5;
+                        cursor: not-allowed;
+                    }
+                }
+            }
+
+            table {
+                border-collapse: separate;
+                border-spacing: 0 13px;
+                margin: 0;
+
+                td,
+                th {
+                    background: $transparent;
+                    border: none;
+                }
+
+                tr {
+                    position: relative;
+                    z-index: 2;
+
+                    &::after {
+                        position: absolute;
+                        content: "";
+                        background: $white;
+                        top: 0;
+                        left: 0;
+                        height: 100%;
+                        width: 100%;
+                        z-index: -1;
+                        box-shadow: 0 8px 18px 0 rgba(0, 1, 35, 0.05);
+                        border-radius: 5px;
+                    }
+
+                    td {
+
                     }
                 }
             }
