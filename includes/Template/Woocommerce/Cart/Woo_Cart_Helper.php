@@ -339,6 +339,13 @@ trait Woo_Cart_Helper {
         <?php
     }
 
+	public static function eael_cart_button_proceed_to_checkout() { ?>
+        <a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="checkout-button button alt wc-forward">
+			<?php esc_html_e( 'Proceed to checkout', 'woocommerce' ); ?>
+        </a>
+		<?php
+	}
+
 	public static function woo_cart_style_two() {
 		echo 'this is from woo cart helper style two';
 	}
