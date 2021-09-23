@@ -8,7 +8,7 @@ $btn-bg: #6557FF;
 $transparent: transparent;
 $white: #fff;
 
-.eael-woo-cart-wrapper {
+.eael-woo-cart .eael-woo-cart-wrapper {
     background: $background;
     padding: 100px 0;
 
@@ -146,7 +146,8 @@ $white: #fff;
     .eael-cart-coupon-and-collaterals {
         overflow: hidden;
 
-        button {
+        button,
+        .button {
             background: $btn-bg;
             box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
             border-radius: 5px;
@@ -155,6 +156,7 @@ $white: #fff;
             font-size: 18px;
             line-height: 30px;
             font-weight: 500;
+            padding: 10px 40px;
         }
 
         .eael-cart-coupon-wrapper {
@@ -190,7 +192,8 @@ $white: #fff;
                 justify-content: flex-end;
 
                 button {
-                    width: 48%;
+                    max-width: 365px;
+                    width: 100%;
 
                     &[disabled] {
                         opacity: .5;
@@ -199,36 +202,78 @@ $white: #fff;
                 }
             }
 
-            table {
-                border-collapse: separate;
-                border-spacing: 0 13px;
-                margin: 0;
+            .cart_totals {
+                max-width: 365px;
+                width: 100%;
 
-                td,
-                th {
-                    background: $transparent;
-                    border: none;
-                }
+                table {
+                    border-collapse: separate;
+                    border-spacing: 0 13px;
+                    margin: 0;
 
-                tr {
-                    position: relative;
-                    z-index: 2;
-
-                    &::after {
-                        position: absolute;
-                        content: "";
-                        background: $white;
-                        top: 0;
-                        left: 0;
-                        height: 100%;
-                        width: 100%;
-                        z-index: -1;
-                        box-shadow: 0 8px 18px 0 rgba(0, 1, 35, 0.05);
-                        border-radius: 5px;
+                    td,
+                    th {
+                        background: $transparent;
+                        border: none;
+                        font-size: 18px;
+                        color: $text-color-3;
                     }
 
-                    td {
+                    tr {
+                        position: relative;
+                        z-index: 2;
 
+                        &::after {
+                            position: absolute;
+                            content: "";
+                            background: $white;
+                            top: 0;
+                            left: 0;
+                            height: 100%;
+                            width: 100%;
+                            z-index: -1;
+                            box-shadow: 0 8px 18px 0 rgba(0, 1, 35, 0.05);
+                            border-radius: 5px;
+                        }
+
+                        th {
+                            color: $text-color-3;
+                            font-weight: 500;
+                        }
+
+                        td {
+                            border-spacing: 0;
+
+                            a {
+                                color: $text-color-1;
+                            }
+
+                            .button {
+                                width: 100%;
+                            }
+                        }
+
+                        &.cart-subtotal,
+                        &.order-total {
+                            td {
+                                font-size: 20px;
+                                font-weight: 500;
+                                color: $text-color-1;
+
+                                strong {
+                                    font-weight: 500;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .wc-proceed-to-checkout {
+                    padding: 0;
+
+                    a.button {
+                        font-size: 20px;
+                        padding: 18px 0;
                     }
                 }
             }
