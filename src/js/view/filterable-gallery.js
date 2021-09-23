@@ -99,6 +99,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 							if (element.is(buttonFilter)) {
 								++item_found;
 								$items.push($(item)[0]);
+								index_list.push(index);
 							}
 						}
 						
