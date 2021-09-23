@@ -99,7 +99,6 @@ jQuery(window).on("elementor/frontend/init", function () {
 							if (element.is(buttonFilter)) {
 								++item_found;
 								$items.push($(item)[0]);
-								index_list.push(index);
 							}
 						}
 						
@@ -128,12 +127,13 @@ jQuery(window).on("elementor/frontend/init", function () {
 				$this.siblings().removeClass("active");
 				$this.addClass("active");
 				if (!firstInit && $items.length > 0) {
+					$isotope_gallery.isotope({filter: buttonFilter});
 					$gallery.append($items);
 					$isotope_gallery.isotope('appended', $items);
-					$isotope_gallery.isotope({filter: buttonFilter});
 					$isotope_gallery.imagesLoaded().progress(function () {
 						$isotope_gallery.isotope("layout");
 					});
+					
 				} else {
 					$isotope_gallery.isotope({filter: buttonFilter});
 				}
