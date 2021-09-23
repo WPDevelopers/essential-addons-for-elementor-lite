@@ -45,8 +45,14 @@ class Woo_Cart extends Widget_Base {
 			// Remove default 'woocommerce_cart_totals' callback from 'woocommerce_cart_collaterals'
 			remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cart_totals', 10 );
 
-			// Added our cart totals section instead of woocommerce_cart_collaterals
+			// Hooked our cart totals section in woocommerce_cart_collaterals
 			add_action( 'woocommerce_cart_collaterals', [ $this, 'eael_woo_cart_totals' ], 10 );
+
+			// Remove default 'woocommerce_button_proceed_to_checkout' callback from 'woocommerce_proceed_to_checkout'
+			remove_action( 'woocommerce_proceed_to_checkout', 'woocommerce_button_proceed_to_checkout', 20 );
+
+			// Hooked our proceed to checkout button in 'woocommerce_proceed_to_checkout'
+			add_action( 'woocommerce_proceed_to_checkout', [ $this, 'eael_cart_button_proceed_to_checkout' ], 20 );
 		}
 	}
 
@@ -283,9 +289,7 @@ class Woo_Cart extends Widget_Base {
 	}
 
 	public function add_cart_body_class( $classes ) {
-		if ( is_cart() ) {
-			$classes[] = 'eael-woo-cart';
-		}
+		$classes[] = 'eael-woo-cart';
 
 		return $classes;
 	}
