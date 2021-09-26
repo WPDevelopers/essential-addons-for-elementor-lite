@@ -325,7 +325,6 @@ $elements = [
 		        'title'  => __( 'Interactive Circle', 'essential-addons-for-elementor-lite'),
 		        'demo_link' => 'https://essential-addons.com/elementor/interactive-circle/',
 		        'doc_link' => 'https://essential-addons.com/elementor/docs/interactive-circle/',
-		        'is_pro' => true
 	        ]
         ]
     ],
