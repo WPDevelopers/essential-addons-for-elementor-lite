@@ -151,6 +151,12 @@ class Interactive_Circle extends Widget_Base
 		    ]
 	    );
 
+	    $this->add_control( 'eael_global_warning_text', [
+		    'type'            => Controls_Manager::RAW_HTML,
+		    'raw'             => __( '<strong>Circle Item limit max 8.</strong> If the item is more than 8 it will break the preset layout design.', 'essential-addons-for-elementor-lite' ),
+		    'content_classes' => 'eael-warning',
+	    ] );
+
 	    $repeater = new Repeater();
 
 	    $repeater->start_controls_tabs( 'interactive_circle_tabs' );
