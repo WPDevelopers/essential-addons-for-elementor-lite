@@ -29,6 +29,12 @@
         transition: all .2ms;
     }
 
+    .eael-circle-btn-txt {
+        //color: $nav-item-initial-color;
+        font-size: 14px;
+        line-height: 1.5em;
+    }
+
     &.eael-interactive-circle-preset-1 {
         .eael-circle-info {
             $nav-item-border-color: #fff;
@@ -87,8 +93,8 @@
                                 }
                                 .eael-circle-btn-txt {
                                     color: $nav-item-initial-color;
-                                    font-size: 14px;
-                                    line-height: 1.5em;
+                                    //font-size: 14px;
+                                    //line-height: 1.5em;
                                 }
                             }
                         }
@@ -570,8 +576,8 @@
                                 }
                                 .eael-circle-btn-txt {
                                     color: $nav-item-initial-color;
-                                    font-size: 14px;
-                                    line-height: 1.5em;
+                                    //font-size: 14px;
+                                    //line-height: 1.5em;
                                 }
                             }
                         }
