@@ -203,7 +203,7 @@ trait Woo_Cart_Helper {
 
                 <div class="eael-cart-coupon-and-collaterals">
                     <div class="eael-cart-coupon-wrapper">
-						<?php if ( wc_coupons_enabled() ) { ?>
+						<?php if ( wc_coupons_enabled() && $settings['eael_woo_cart_components_cart_coupon'] === 'yes' ) { ?>
                             <div class="coupon">
                                 <label for="coupon_code" class="sr-only"><?php esc_html_e( 'Coupon:', 'essential-addons-for-elementor-lite' ); ?></label>
                                 <input type="text" name="coupon_code" class="input-text" id="coupon_code" value=""
@@ -221,9 +221,12 @@ trait Woo_Cart_Helper {
 
                     <div class="cart-collaterals">
                         <div class="eael-cart-update-btn">
+	                        <?php if ( $settings['eael_woo_cart_components_cart_update_button'] === 'yes' ) { ?>
                             <button type="submit" class="button" name="update_cart" value="<?php esc_attr_e( 'Update cart',
 								'essential-addons-for-elementor-lite' ); ?>"><?php esc_html_e( 'Update cart', 'essential-addons-for-elementor-lite' ); ?></button>
 							<?php
+	                        }
+
 							do_action( 'woocommerce_cart_actions' );
 							wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' );
 							?>
@@ -236,7 +239,9 @@ trait Woo_Cart_Helper {
 						 * @hooked woocommerce_cross_sell_display
 						 * @hooked woocommerce_cart_totals - 10
 						 */
-						do_action( 'woocommerce_cart_collaterals' );
+						if ( $settings['eael_woo_cart_components_cart_totals'] === 'yes' ) {
+							do_action( 'woocommerce_cart_collaterals' );
+						}
 						?>
                     </div>
                 </div>

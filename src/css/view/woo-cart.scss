@@ -162,6 +162,7 @@ $white: #fff;
         .eael-cart-coupon-wrapper {
             width: 50%;
             float: left;
+            min-height: 1px;
 
             .coupon {
                 border: 1px solid #D7DFEF;
@@ -190,10 +191,12 @@ $white: #fff;
             .eael-cart-update-btn {
                 display: flex;
                 justify-content: flex-end;
+                margin-top: -13px;
 
                 button {
                     max-width: 365px;
                     width: 100%;
+                    margin-top: 13px;
 
                     &[disabled] {
                         opacity: .5;

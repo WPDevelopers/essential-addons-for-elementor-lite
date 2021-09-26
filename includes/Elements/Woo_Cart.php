@@ -169,31 +169,8 @@ class Woo_Cart extends Widget_Base {
 		$this->end_controls_section();
 
 		/**
-		 * -------------------------------------------
-		 * Tab Style General Style
-		 * -------------------------------------------
+		 * Table Builder
 		 */
-		$this->start_controls_section(
-			'ea_section_woo_cart_general_style',
-			[
-				'label' => esc_html__( 'General', 'essential-addons-for-elementor-lite' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_control(
-			'ea_woo_cart_bg_color',
-			[
-				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .ea-woo-cart' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->end_controls_section();
-
 		$this->start_controls_section(
 			'ea_section_woo_cart_table_builder',
 			[
@@ -202,6 +179,7 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$repeater = new Repeater();
+
 		$repeater->add_control(
 			'column_type',
 			[
@@ -281,6 +259,80 @@ class Woo_Cart extends Widget_Base {
 					],
 				],
 				'title_field' => '{{{ column_heading_title || column_type }}}',
+			]
+		);
+
+		$this->end_controls_section();
+
+		/**
+		 * Cart Components
+		 */
+		$this->start_controls_section(
+			'eael_woo_cart_components_section',
+			[
+				'label' => esc_html__( 'Cart Components', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_components_cart_update_button',
+			[
+				'label' => esc_html__( 'Cart Update Button', 'essential-addons-for-elementor-lite' ),
+				'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+				'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_components_cart_coupon',
+			[
+				'label' => esc_html__( 'Cart Coupon', 'essential-addons-for-elementor-lite' ),
+				'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+				'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_components_cart_totals',
+			[
+				'label' => esc_html__( 'Cart Totals', 'essential-addons-for-elementor-lite' ),
+				'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+				'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
+
+		$this->end_controls_section();
+
+		/**
+		 * -------------------------------------------
+		 * Tab Style General Style
+		 * -------------------------------------------
+		 */
+		$this->start_controls_section(
+			'ea_section_woo_cart_general_style',
+			[
+				'label' => esc_html__( 'General', 'essential-addons-for-elementor-lite' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'ea_woo_cart_bg_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .ea-woo-cart' => 'background-color: {{VALUE}};',
+				],
 			]
 		);
 
