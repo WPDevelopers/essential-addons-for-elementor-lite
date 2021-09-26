@@ -585,7 +585,7 @@ class GravityForms extends Widget_Base {
                 'label'                 => __( 'Text Color', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::COLOR,
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield label, {{WRAPPER}} .eael-gravity-form .gfield .gfield_label' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-gravity-form .gfield .gfield_label' => 'color: {{VALUE}}',
                 ],
                 'condition'             => [
                     'labels_switch'   => 'yes',
@@ -598,13 +598,56 @@ class GravityForms extends Widget_Base {
             [
                 'name'                  => 'typography_label',
                 'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
-                'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield label, {{WRAPPER}} .eael-gravity-form .gfield .gfield_label',
+                'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield .gfield_label',
                 'condition'             => [
                     'labels_switch'   => 'yes',
                 ],
             ]
         );
         
+        $this->end_controls_section();
+
+        /**
+         * Style Tab: Sub-Labels
+         * -------------------------------------------------
+         */
+        $this->start_controls_section(
+            'section_sub_label_style',
+            [
+                'label'                 => __( 'Sub-Labels', 'essential-addons-for-elementor-lite'),
+                'tab'                   => Controls_Manager::TAB_STYLE,
+                'condition'             => [
+                    'labels_switch'   => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'text_color_sub_label',
+            [
+                'label'                 => __( 'Text Color', 'essential-addons-for-elementor-lite'),
+                'type'                  => Controls_Manager::COLOR,
+                'selectors'             => [
+                    '{{WRAPPER}} .eael-gravity-form .gfield label' => 'color: {{VALUE}}',
+                ],
+                'condition'             => [
+                    'labels_switch'   => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'                  => 'typography_sub_label',
+                'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
+                'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield label',
+                'condition'             => [
+                    'labels_switch'   => 'yes',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
 
         /**
