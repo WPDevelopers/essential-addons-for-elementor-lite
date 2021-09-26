@@ -832,7 +832,7 @@ class Interactive_Circle extends Widget_Base
 		    Group_Control_Box_Shadow::get_type(),
 		    [
 			    'name' => 'eael_interactive_circle_content_shadow',
-			    'selector' => '{{WRAPPER}} .eael-circle-content',
+			    'selector' => '{{WRAPPER}} .eael-circle-content, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn-content .eael-circle-content',
                 'condition' => [
 				    'eael_interactive_circle_preset!' => 'eael-interactive-circle-preset-2'
 			    ],
