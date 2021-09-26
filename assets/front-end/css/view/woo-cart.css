@@ -130,6 +130,7 @@
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper {
   width: 50%;
   float: left;
+  min-height: 1px;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon {
   border: 1px solid #D7DFEF;
@@ -161,10 +162,12 @@
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  margin-top: -13px;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .eael-cart-update-btn button {
   max-width: 365px;
   width: 100%;
+  margin-top: 13px;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .eael-cart-update-btn button[disabled] {
   opacity: 0.5;
