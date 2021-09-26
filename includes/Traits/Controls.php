@@ -164,6 +164,9 @@ trait Controls
                 'label' => __('Offset', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '0',
+	            'condition' => [
+	            	'orderby!' => 'rand'
+	            ]
             ]
         );
 

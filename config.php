@@ -530,6 +530,11 @@ $config = [
                         'type' => 'self',
                         'context' => 'view',
                     ],
+	                [
+		                'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/quick-view.min.css',
+		                'type' => 'self',
+		                'context' => 'view',
+	                ],
                     [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/product-grid.min.css',
                         'type' => 'self',
@@ -936,6 +941,11 @@ $config = [
 		    'dependency' => [
 			    'css' => [
 				    [
+					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/quick-view.min.css',
+					    'type' => 'self',
+					    'context' => 'view',
+				    ],
+				    [
 					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-carousel.min.css',
 					    'type' => 'self',
 					    'context' => 'view',
@@ -980,6 +990,11 @@ $config = [
 		        'css' => [
 			        [
 				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/load-more.min.css',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/quick-view.min.css',
 				        'type' => 'self',
 				        'context' => 'view',
 			        ],

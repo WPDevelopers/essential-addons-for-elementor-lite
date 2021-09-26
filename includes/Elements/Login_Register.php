@@ -202,7 +202,7 @@ class Login_Register extends Widget_Base {
 
 		if(!$this->pro_enabled){
 			$this->social_login_promo();
-        }
+		}
 
 		do_action( 'eael/login-register/after-login-controls-section', $this );
 		// Registration For Related---
@@ -1032,32 +1032,32 @@ class Login_Register extends Widget_Base {
 
 	protected function show_pro_promotion(){
 
-        $this->start_controls_section(
-            'eael_section_pro',
-            [
-                'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite' ),
-            ]
-        );
+		$this->start_controls_section(
+			'eael_section_pro',
+			[
+				'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite' ),
+			]
+		);
 
-        $this->add_control(
-            'eael_control_get_pro',
-            [
-                'label'       => __( 'Unlock more possibilities', 'essential-addons-for-elementor-lite' ),
-                'type'        => Controls_Manager::CHOOSE,
-                'options'     => [
-                    '1' => [
-                        'title' => '',
-                        'icon'  => 'fa fa-unlock-alt',
-                    ],
-                ],
-                'default'     => '1',
-                'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
-            ]
-        );
+		$this->add_control(
+			'eael_control_get_pro',
+			[
+				'label'       => __( 'Unlock more possibilities', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'1' => [
+						'title' => '',
+						'icon'  => 'fa fa-unlock-alt',
+					],
+				],
+				'default'     => '1',
+				'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+			]
+		);
 
-        $this->end_controls_section();
+		$this->end_controls_section();
 
-    }
+	}
 
 	protected function init_content_register_fields_controls() {
 
@@ -1244,13 +1244,13 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
-        if(current_user_can('create_users')){
-            $user_role = $this->get_user_roles();
-        }else{
-            $user_role = [
-                get_option( 'default_role' ) =>  ucfirst(get_option( 'default_role' ))
-            ];
-        }
+		if(current_user_can('create_users')){
+			$user_role = $this->get_user_roles();
+		}else{
+			$user_role = [
+				get_option( 'default_role' ) =>  ucfirst(get_option( 'default_role' ))
+			];
+		}
 
 		$this->add_control( 'register_user_role', [
 			'label'     => __( 'New User Role', 'essential-addons-for-elementor-lite' ),
