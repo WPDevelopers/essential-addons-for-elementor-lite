@@ -253,32 +253,56 @@ class Interactive_Circle extends Widget_Base
 		    'eael_interactive_circle_item',
 		    [
 			    'type' => Controls_Manager::REPEATER,
-			    'seperator' => 'before',
+			    'separator' => 'before',
 			    'default' => [
 				    [
-                        'eael_interactive_circle_btn_title' => esc_html__('Home', 'essential-addons-for-elementor-lite'),
+					    'eael_interactive_circle_btn_icon' => [
+						    'value' => 'fas fa-leaf',
+						    'library' => 'fa-solid',
+					    ],
+                        'eael_interactive_circle_btn_title' => esc_html__('Item 1', 'essential-addons-for-elementor-lite'),
                         'eael_interactive_circle_item_default_active' => __('active', 'essential-addons-for-elementor-lite'),
-                        'eael_interactive_circle_item_content' => esc_html__('Home Content', 'essential-addons-for-elementor-lite'),
+                        'eael_interactive_circle_item_content' => esc_html__('Present your content in an attractive Circle layout item 1. You can highlight key information with click or hover effects and style it as per your preference.', 'essential-addons-for-elementor-lite'),
                     ],
 				    [
-                        'eael_interactive_circle_btn_title' => esc_html__('About', 'essential-addons-for-elementor-lite'),
-                        'eael_interactive_circle_item_content' => esc_html__('About Content', 'essential-addons-for-elementor-lite'),
+					    'eael_interactive_circle_btn_icon' => [
+						    'value' => 'fas fa-comment',
+						    'library' => 'fa-solid',
+					    ],
+                        'eael_interactive_circle_btn_title' => esc_html__('Item 2', 'essential-addons-for-elementor-lite'),
+                        'eael_interactive_circle_item_content' => esc_html__('Present your content in an attractive Circle layout item 2. You can highlight key information with click or hover effects and style it as per your preference.', 'essential-addons-for-elementor-lite'),
                     ],
 				    [
-                        'eael_interactive_circle_btn_title' => esc_html__('Service', 'essential-addons-for-elementor-lite'),
-                        'eael_interactive_circle_item_content' => esc_html__('Service Content', 'essential-addons-for-elementor-lite'),
+					    'eael_interactive_circle_btn_icon' => [
+						    'value' => 'fas fa-map-marker-alt',
+						    'library' => 'fa-solid',
+					    ],
+                        'eael_interactive_circle_btn_title' => esc_html__('Item 3', 'essential-addons-for-elementor-lite'),
+                        'eael_interactive_circle_item_content' => esc_html__('Present your content in an attractive Circle layout item 3. You can highlight key information with click or hover effects and style it as per your preference.', 'essential-addons-for-elementor-lite'),
                     ],
                     [
-                        'eael_interactive_circle_btn_title' => esc_html__('Contact', 'essential-addons-for-elementor-lite'),
-                        'eael_interactive_circle_item_content' => esc_html__('Contact Content', 'essential-addons-for-elementor-lite'),
+	                    'eael_interactive_circle_btn_icon' => [
+		                    'value' => 'fas fa-rocket',
+		                    'library' => 'fa-solid',
+	                    ],
+                        'eael_interactive_circle_btn_title' => esc_html__('Item 4', 'essential-addons-for-elementor-lite'),
+                        'eael_interactive_circle_item_content' => esc_html__('Present your content in an attractive Circle layout item four. You can highlight key information with click or hover effects and style it as per your preference.', 'essential-addons-for-elementor-lite'),
                     ],
                     [
-                        'eael_interactive_circle_btn_title' => esc_html__('Support', 'essential-addons-for-elementor-lite'),
-                        'eael_interactive_circle_item_content' => esc_html__('Support Content', 'essential-addons-for-elementor-lite'),
+	                    'eael_interactive_circle_btn_icon' => [
+		                    'value' => 'fas fa-hourglass-half',
+		                    'library' => 'fa-solid',
+	                    ],
+                        'eael_interactive_circle_btn_title' => esc_html__('Item 5', 'essential-addons-for-elementor-lite'),
+                        'eael_interactive_circle_item_content' => esc_html__('Present your content in an attractive Circle layout item 5. You can highlight key information with click or hover effects and style it as per your preference.', 'essential-addons-for-elementor-lite'),
                     ],
                     [
-                        'eael_interactive_circle_btn_title' => esc_html__('Team', 'essential-addons-for-elementor-lite'),
-                        'eael_interactive_circle_item_content' => esc_html__('Team Content', 'essential-addons-for-elementor-lite'),
+	                    'eael_interactive_circle_btn_icon' => [
+		                    'value' => 'fas fa-tag',
+		                    'library' => 'fa-solid',
+	                    ],
+                        'eael_interactive_circle_btn_title' => esc_html__('Item 6', 'essential-addons-for-elementor-lite'),
+                        'eael_interactive_circle_item_content' => esc_html__('Present your content in an attractive Circle layout item 6. You can highlight key information with click or hover effects and style it as per your preference.', 'essential-addons-for-elementor-lite'),
                     ],
 			    ],
 			    'fields' => $repeater->get_controls(),
