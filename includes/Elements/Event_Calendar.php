@@ -1869,10 +1869,9 @@ class Event_Calendar extends Widget_Base
             set_transient($transient_key, $data, $settings['eael_event_calendar_data_cache_limit'] * MINUTE_IN_SECONDS);
         }
 
-
+	    $calendar_data = [];
         $data = json_decode($data);
         if (isset($data->items)) {
-            $calendar_data = [];
 
             foreach ($data->items as $key => $item) {
                 if ($item->status !== 'confirmed') {

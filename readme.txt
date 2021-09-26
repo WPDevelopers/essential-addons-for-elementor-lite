@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, manzurahammed
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 5.8.1
+Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 4.9.1
+Stable tag: 4.9.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -185,7 +185,6 @@ If you like Essential Addons, then consider checking out our other WordPress Plu
 
 ⏰ **[SchedulePress](https://wordpress.org/plugins/wp-scheduled-posts/)**  – Complete solution for WordPress Post Scheduling to manage schedules through an editorial calendar & Social Share.
 
-
 ⭐ **[ReviewX](https://wordpress.org/plugins/reviewx/)**  – Advanced multi criteria Rating & Reviews for WooCommerce that allows users to submit product review for multiple criteria.
 
 
@@ -225,6 +224,19 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.9.2 - 26/09/2021 =
+
+- Fixed: EA Fliterable Gallery | Images not displaying under each filter until Load More button is hit
+- Fixed: EA Post Grid | Load More button not working with Random sorting
+- Fixed: EA Advanced Data Table | removed data reappearing
+- Fixed: EA Feature List | showing warning in browser console
+- Fixed: EA Advanced Tabs | 'Active as Default' getting priority over custom ID
+- Fixed: EA Filterable Gallery | PHP 8 Error
+- Fixed: EA Woo Product Gallery |  Out of Stock Badge not showing
+- Improved: EA Table of Contents | Added Height controller
+- Improved: EA WooCommerce elements | Added option to make product images clickable
+- Few minor bug fix & improvements
 
 = 4.9.1 - 14/09/2021 =
 

@@ -5,14 +5,16 @@ ea.hooks.addAction("init", "ea", () => {
 			const $currentTab = $scope.find('.eael-advance-tabs'),
 				$currentTabId = '#' + $currentTab.attr('id').toString()
 			let hashTag = window.location.hash.substr(1);
+			var hashLink = false;
 			$($currentTabId + ' > .eael-tabs-nav ul li', $scope).each(function (index) {
 				if (hashTag && $(this).attr("id") == hashTag) {
 					$($currentTabId + ' .eael-tabs-nav > ul li', $scope)
 					.removeClass("active")
 					.addClass("inactive");
 					$(this).removeClass("inactive").addClass("active");
+					hashLink = true;
 				} else {
-					if ($(this).hasClass("active-default")) {
+					if ($(this).hasClass("active-default") && !hashLink) {
 						$($currentTabId + ' .eael-tabs-nav > ul li', $scope)
 						.removeClass("active")
 						.addClass("inactive");
@@ -25,12 +27,24 @@ ea.hooks.addAction("init", "ea", () => {
 				}
 			});
 			
+			var hashContent = false;
 			$($currentTabId + ' > .eael-tabs-content > div', $scope).each(function (index) {
 				if (hashTag && $(this).attr("id") == hashTag) {
 					$($currentTabId + ' > .eael-tabs-content > div', $scope).removeClass("active");
+					let nestedLink = $(this).closest('.eael-tabs-content').closest('.eael-tab-content-item');
+					if (nestedLink.length) {
+						let parentTab = nestedLink.closest('.eael-advance-tabs'),
+							titleID = $("#"+nestedLink.attr("id")),
+							contentID = titleID.data('title-link');
+						parentTab.find(" > .eael-tabs-nav > ul > li").removeClass('active');
+						parentTab.find(" > .eael-tabs-content > div").removeClass('active');
+						titleID.addClass("active")
+						$("#" + contentID).addClass("active")
+					}
 					$(this).removeClass("inactive").addClass("active");
+					hashContent = true
 				} else {
-					if ($(this).hasClass("active-default")) {
+					if ($(this).hasClass("active-default") && !hashContent) {
 						$($currentTabId + ' > .eael-tabs-content > div', $scope).removeClass("active");
 						$(this).removeClass("inactive").addClass("active");
 					} else {
@@ -70,8 +84,8 @@ ea.hooks.addAction("init", "ea", () => {
 				});
 				
 				let $filterGallery = tabsContent
-				.eq(currentTabIndex)
-				.find(".eael-filter-gallery-container"),
+					.eq(currentTabIndex)
+					.find(".eael-filter-gallery-container"),
 					$postGridGallery = tabsContent
 					.eq(currentTabIndex)
 					.find(".eael-post-grid.eael-post-appender"),

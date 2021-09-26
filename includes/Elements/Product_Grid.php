@@ -117,7 +117,7 @@ class Product_Grid extends Widget_Base
                 case 'grouped':
                     return $this->grouped_add_to_cart_button_text;
                 case 'simple':
-                    if ( ! $product->managing_stock() && ! $product->is_in_stock() ) {
+                    if ( ! $product->is_in_stock() ) {
                         return $this->default_add_to_cart_button_text;
                     }
                     return $this->simple_add_to_cart_button_text;
@@ -526,6 +526,16 @@ class Product_Grid extends Widget_Base
             'label' => esc_html__('Show Product Compare?', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::SWITCHER,
         ]);
+
+	    $this->add_control(
+		    'eael_product_grid_image_clickable',
+		    [
+			    'label' => esc_html__('Image Clickable?', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SWITCHER,
+			    'return_value' => 'yes',
+			    'default' => 'no',
+		    ]
+	    );
 
         $this->end_controls_section();
     }
@@ -3025,11 +3035,16 @@ class Product_Grid extends Widget_Base
                 $template = $this->get_template($settings['eael_dynamic_template_Layout']);
                 $settings['loadable_file_name'] = $this->get_filename_only($template);
                 $dir_name = $this->get_temp_dir_name($settings['loadable_file_name']);
+                $found_posts = 0;
 
                 if (file_exists($template)) {
 	                $settings['eael_page_id'] = get_the_ID();
                     $query = new \WP_Query($args);
                     if ($query->have_posts()) {
+	                    $found_posts      = $query->found_posts;
+	                    $max_page         = ceil( $found_posts / absint( $args['posts_per_page'] ) );
+	                    $args['max_page'] = $max_page;
+
                         echo '<ul class="products" data-layout-mode="' . $settings["eael_product_grid_layout"] . '">';
                         while ($query->have_posts()) {
                             $query->the_post();
@@ -3048,8 +3063,9 @@ class Product_Grid extends Widget_Base
                     echo HelperClass::eael_pagination($args, $settings);
                 }
 
-
-                $this->print_load_more_button($settings, $args, $dir_name);
+                if ( $found_posts > $args['posts_per_page'] ) {
+	                $this->print_load_more_button( $settings, $args, $dir_name );
+                }
                 ?>
             </div>
         </div>

@@ -73,9 +73,12 @@
   transition: 0.5s;
 }
 
-.eael-pricing.style-1 .eael-pricing-item:hover {
+.eael-pricing.style-1:hover {
   -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .eael-pricing.style-1 .eael-pricing-item.featured {
