@@ -609,6 +609,14 @@ class Interactive_Circle extends Widget_Base
 		    ]
 	    );
 
+	    $this->add_group_control(
+		    Group_Control_Box_Shadow::get_type(),
+		    [
+			    'name' => 'eael_interactive_circle_btn_shadow',
+			    'selector' => '{{WRAPPER}} .eael-circle-wrapper .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn',
+		    ]
+	    );
+
 	    $this->end_controls_tab();
 	    // Hover State Tab
 	    $this->start_controls_tab('eael_interactive_circle_header_hover', ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]);
@@ -668,6 +676,14 @@ class Interactive_Circle extends Widget_Base
 		    ]
 	    );
 
+	    $this->add_group_control(
+		    Group_Control_Box_Shadow::get_type(),
+		    [
+			    'name' => 'eael_interactive_circle_btn_shadow_hover',
+			    'selector' => '{{WRAPPER}} .eael-circle-wrapper .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn:hover',
+		    ]
+	    );
+
 	    $this->end_controls_tab();
 	    // Active State Tab
 	    $this->start_controls_tab('eael_interactive_circle_header_active', ['label' => esc_html__('Active', 'essential-addons-for-elementor-lite')]);
@@ -722,6 +738,14 @@ class Interactive_Circle extends Widget_Base
 			    'condition' => [
 				    'eael_interactive_circle_btn_border_border!' => ''
 			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Box_Shadow::get_type(),
+		    [
+			    'name' => 'eael_interactive_circle_btn_shadow_active',
+			    'selector' => '{{WRAPPER}} .eael-circle-wrapper .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active',
 		    ]
 	    );
 
