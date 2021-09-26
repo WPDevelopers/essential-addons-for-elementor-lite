@@ -40,6 +40,9 @@
             $nav-item-hover-background: #7a5bff;
             $nav-item-initial-color: #7a5bff;
             $nav-item-hover-color: #fff;
+
+            margin: 45px 0;
+
             .eael-circle-inner {
                 position: relative;
                 .eael-circle-item {
@@ -1887,7 +1890,9 @@
             $nav-content-margin: 15px;
             $nav-content-padding: 30px;
             $nav-item-gap: 15px;
+
             padding: math.div($nav-item-width, 2) + $nav-item-gap + math.div($nav-item-width, 5 );
+            margin: 45px 0;
 
             .eael-circle-inner {
                 width: 400px;
