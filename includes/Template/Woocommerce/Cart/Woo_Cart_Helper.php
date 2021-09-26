@@ -257,44 +257,59 @@ trait Woo_Cart_Helper {
 
             <table class="shop_table shop_table_responsive">
 
+	            <?php if ( $settings['eael_woo_cart_components_cart_totals_subtotal'] === 'yes' ) { ?>
                 <tr class="cart-subtotal">
                     <th><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
                     <td data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>"><?php wc_cart_totals_subtotal_html(); ?></td>
                 </tr>
+                <?php } ?>
 
-				<?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
-                    <tr class="cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
-                        <th><?php wc_cart_totals_coupon_label( $coupon ); ?></th>
-                        <td data-title="<?php echo esc_attr( wc_cart_totals_coupon_label( $coupon, false ) ); ?>"><?php wc_cart_totals_coupon_html( $coupon ); ?></td>
-                    </tr>
-				<?php endforeach; ?>
+	            <?php
+	            if ( $settings['eael_woo_cart_components_cart_totals_coupon'] === 'yes' ) {
+		            foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
+                        <tr class="cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
+                            <th><?php wc_cart_totals_coupon_label( $coupon ); ?></th>
+                            <td data-title="<?php echo esc_attr( wc_cart_totals_coupon_label( $coupon, false ) ); ?>"><?php wc_cart_totals_coupon_html( $coupon ); ?></td>
+                        </tr>
+		            <?php
+		            endforeach;
+	            }
+	            ?>
 
-				<?php if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
+	            <?php
+	            if ( $settings['eael_woo_cart_components_cart_totals_shipping'] === 'yes' ) {
+		            if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
 
-					<?php do_action( 'woocommerce_cart_totals_before_shipping' ); ?>
+			            <?php do_action( 'woocommerce_cart_totals_before_shipping' ); ?>
 
-					<?php wc_cart_totals_shipping_html(); ?>
+			            <?php wc_cart_totals_shipping_html(); ?>
 
-					<?php do_action( 'woocommerce_cart_totals_after_shipping' ); ?>
+			            <?php do_action( 'woocommerce_cart_totals_after_shipping' ); ?>
 
-				<?php elseif ( WC()->cart->needs_shipping() && 'yes' === get_option( 'woocommerce_enable_shipping_calc' ) ) : ?>
+		            <?php elseif ( WC()->cart->needs_shipping() && 'yes' === get_option( 'woocommerce_enable_shipping_calc' ) ) : ?>
 
-                    <tr class="shipping">
-                        <th><?php esc_html_e( 'Shipping', 'woocommerce' ); ?></th>
-                        <td data-title="<?php esc_attr_e( 'Shipping', 'woocommerce' ); ?>"><?php woocommerce_shipping_calculator(); ?></td>
-                    </tr>
+                        <tr class="shipping">
+                            <th><?php esc_html_e( 'Shipping', 'woocommerce' ); ?></th>
+                            <td data-title="<?php esc_attr_e( 'Shipping', 'woocommerce' ); ?>"><?php woocommerce_shipping_calculator(); ?></td>
+                        </tr>
 
-				<?php endif; ?>
+		            <?php
+		            endif;
+	            } ?>
 
-				<?php foreach ( WC()->cart->get_fees() as $fee ) : ?>
-                    <tr class="fee">
-                        <th><?php echo esc_html( $fee->name ); ?></th>
-                        <td data-title="<?php echo esc_attr( $fee->name ); ?>"><?php wc_cart_totals_fee_html( $fee ); ?></td>
-                    </tr>
-				<?php endforeach; ?>
+	            <?php
+	            if ( $settings['eael_woo_cart_components_cart_totals_fees'] === 'yes' ) {
+		            foreach ( WC()->cart->get_fees() as $fee ) : ?>
+                        <tr class="fee">
+                            <th><?php echo esc_html( $fee->name ); ?></th>
+                            <td data-title="<?php echo esc_attr( $fee->name ); ?>"><?php wc_cart_totals_fee_html( $fee ); ?></td>
+                        </tr>
+		            <?php
+		            endforeach;
+	            } ?>
 
 				<?php
-				if ( wc_tax_enabled() && ! WC()->cart->display_prices_including_tax() ) {
+				if ( wc_tax_enabled() && ! WC()->cart->display_prices_including_tax() && $settings['eael_woo_cart_components_cart_totals_tax'] === 'yes' ) {
 					$taxable_address = WC()->customer->get_taxable_address();
 					$estimated_text  = '';
 
@@ -323,22 +338,31 @@ trait Woo_Cart_Helper {
 				}
 				?>
 
-				<?php do_action( 'woocommerce_cart_totals_before_order_total' ); ?>
+	            <?php
+	            do_action( 'woocommerce_cart_totals_before_order_total' );
 
-                <tr class="order-total">
-                    <th><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
-                    <td data-title="<?php esc_attr_e( 'Total', 'woocommerce' ); ?>"><?php wc_cart_totals_order_total_html(); ?></td>
-                </tr>
+	            if ( $settings['eael_woo_cart_components_cart_totals_total'] === 'yes' ) {
+		            ?>
+                    <tr class="order-total">
+                        <th><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
+                        <td data-title="<?php esc_attr_e( 'Total', 'woocommerce' ); ?>"><?php wc_cart_totals_order_total_html(); ?></td>
+                    </tr>
+		            <?php
+	            }
 
-				<?php do_action( 'woocommerce_cart_totals_after_order_total' ); ?>
+	            do_action( 'woocommerce_cart_totals_after_order_total' );
+	            ?>
 
             </table>
 
-            <div class="wc-proceed-to-checkout">
-				<?php do_action( 'woocommerce_proceed_to_checkout', $settings ); ?>
-            </div>
+	        <?php if ( $settings['eael_woo_cart_components_cart_totals_checkout_button'] === 'yes' ) { ?>
+                <div class="wc-proceed-to-checkout">
+			        <?php do_action( 'woocommerce_proceed_to_checkout', $settings ); ?>
+                </div>
+		        <?php
+	        }
 
-			<?php do_action( 'woocommerce_after_cart_totals' ); ?>
+	        do_action( 'woocommerce_after_cart_totals' ); ?>
 
         </div>
 		<?php
