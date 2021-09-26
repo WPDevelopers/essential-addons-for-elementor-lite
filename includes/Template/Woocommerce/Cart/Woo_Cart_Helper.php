@@ -203,15 +203,14 @@ trait Woo_Cart_Helper {
 
                 <div class="eael-cart-coupon-and-collaterals">
                     <div class="eael-cart-coupon-wrapper">
-						<?php if ( wc_coupons_enabled() && $settings['eael_woo_cart_components_cart_coupon'] === 'yes' ) { ?>
+						<?php if ( wc_coupons_enabled() && $settings['eael_woo_cart_components_cart_coupon'] === 'yes' ) {
+							$button_text = apply_filters( 'eael_woo_cart_coupon_button_text', $settings['eael_woo_cart_components_cart_coupon_button_text'] );
+							$placeholder = apply_filters( 'eael_woo_cart_coupon_placeholder', $settings['eael_woo_cart_components_cart_coupon_placeholder'] );
+                            ?>
                             <div class="coupon">
                                 <label for="coupon_code" class="sr-only"><?php esc_html_e( 'Coupon:', 'essential-addons-for-elementor-lite' ); ?></label>
-                                <input type="text" name="coupon_code" class="input-text" id="coupon_code" value=""
-                                       placeholder="<?php esc_attr_e( 'Coupon code', 'essential-addons-for-elementor-lite' ); ?>"/>
-                                <button type="submit" class="button" name="apply_coupon"
-                                        value="<?php esc_attr_e( 'Apply coupon',
-									        'essential-addons-for-elementor-lite' ); ?>"><?php esc_attr_e( 'Apply coupon',
-										'essential-addons-for-elementor-lite' ); ?></button>
+                                <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php echo esc_attr( $placeholder ); ?>"/>
+                                <button type="submit" class="button" name="apply_coupon" value="<?php echo esc_attr( $button_text ); ?>"><?php echo esc_html( $button_text ); ?></button>
 								<?php do_action( 'woocommerce_cart_coupon' ); ?>
                             </div>
 						<?php } ?>
@@ -221,9 +220,10 @@ trait Woo_Cart_Helper {
 
                     <div class="cart-collaterals">
                         <div class="eael-cart-update-btn">
-	                        <?php if ( $settings['eael_woo_cart_components_cart_update_button'] === 'yes' ) { ?>
-                            <button type="submit" class="button" name="update_cart" value="<?php esc_attr_e( 'Update cart',
-								'essential-addons-for-elementor-lite' ); ?>"><?php esc_html_e( 'Update cart', 'essential-addons-for-elementor-lite' ); ?></button>
+	                        <?php if ( $settings['eael_woo_cart_components_cart_update_button'] === 'yes' ) {
+		                        $update_text = apply_filters( 'eael_woo_cart_update_button_text', $settings['eael_woo_cart_components_cart_update_button_text'] );
+                                ?>
+                                <button type="submit" class="button" name="update_cart" value="<?php echo esc_attr( $update_text ); ?>"><?php echo esc_html( $update_text ); ?></button>
 							<?php
 	                        }
 
@@ -240,7 +240,7 @@ trait Woo_Cart_Helper {
 						 * @hooked woocommerce_cart_totals - 10
 						 */
 						if ( $settings['eael_woo_cart_components_cart_totals'] === 'yes' ) {
-							do_action( 'woocommerce_cart_collaterals' );
+							do_action( 'woocommerce_cart_collaterals', $settings );
 						}
 						?>
                     </div>
@@ -250,7 +250,7 @@ trait Woo_Cart_Helper {
 		<?php do_action( 'woocommerce_after_cart' );
 	}
 
-	public static function eael_woo_cart_totals() { ?>
+	public static function eael_woo_cart_totals( $settings ) { ?>
         <div class="cart_totals <?php echo ( WC()->customer->has_calculated_shipping() ) ? 'calculated_shipping' : ''; ?>">
 
 			<?php do_action( 'woocommerce_before_cart_totals' ); ?>
@@ -335,7 +335,7 @@ trait Woo_Cart_Helper {
             </table>
 
             <div class="wc-proceed-to-checkout">
-				<?php do_action( 'woocommerce_proceed_to_checkout' ); ?>
+				<?php do_action( 'woocommerce_proceed_to_checkout', $settings ); ?>
             </div>
 
 			<?php do_action( 'woocommerce_after_cart_totals' ); ?>
@@ -344,9 +344,11 @@ trait Woo_Cart_Helper {
 		<?php
 	}
 
-	public static function eael_cart_button_proceed_to_checkout() { ?>
+	public static function eael_cart_button_proceed_to_checkout( $settings ) {
+		$button_text = apply_filters( 'eael_woo_cart_checkout_button_text', $settings['eael_woo_cart_components_cart_checkout_button_text'] );
+		?>
         <a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="checkout-button button alt wc-forward">
-			<?php esc_html_e( 'Proceed to checkout', 'woocommerce' ); ?>
+			<?php echo esc_html( $button_text ); ?>
         </a>
 		<?php
 	}

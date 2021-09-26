@@ -287,6 +287,18 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_woo_cart_components_cart_update_button_text',
+			[
+				'label'     => esc_html__( 'Button Text', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => esc_html__( 'Update cart', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'eael_woo_cart_components_cart_update_button' => 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
 			'eael_woo_cart_components_cart_coupon',
 			[
 				'label' => esc_html__( 'Cart Coupon', 'essential-addons-for-elementor-lite' ),
@@ -295,6 +307,31 @@ class Woo_Cart extends Widget_Base {
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
+				'separator'	=> 'before'
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_components_cart_coupon_button_text',
+			[
+				'label'     => esc_html__( 'Button Text', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => esc_html__( 'Apply coupon', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'eael_woo_cart_components_cart_coupon' => 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_components_cart_coupon_placeholder',
+			[
+				'label'     => esc_html__( 'Placeholder', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => esc_html__( 'Coupon code', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'eael_woo_cart_components_cart_coupon' => 'yes'
+				]
 			]
 		);
 
@@ -307,6 +344,19 @@ class Woo_Cart extends Widget_Base {
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
+				'separator'	=> 'before'
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_components_cart_checkout_button_text',
+			[
+				'label'     => esc_html__( 'Checkout Button Text', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => esc_html__( 'Proceed to checkout', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'eael_woo_cart_components_cart_coupon' => 'yes'
+				]
 			]
 		);
 
