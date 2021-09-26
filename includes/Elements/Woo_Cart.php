@@ -355,7 +355,7 @@ class Woo_Cart extends Widget_Base {
 				'type'      => Controls_Manager::TEXT,
 				'default'   => esc_html__( 'Proceed to checkout', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
-					'eael_woo_cart_components_cart_coupon' => 'yes'
+					'eael_woo_cart_components_cart_totals' => 'yes'
 				]
 			]
 		);
