@@ -186,15 +186,15 @@ class Interactive_Circle extends Widget_Base
 		    ]
 	    );
 
-	    $repeater->add_control(
-		    'eael_interactive_circle_btn_desc',
-		    [
-			    'label' => esc_html__('Short Content', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::TEXTAREA,
-			    'default' => esc_html__('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-for-elementor-lite'),
-			    'dynamic' => ['active' => true],
-		    ]
-	    );
+//	    $repeater->add_control(
+//		    'eael_interactive_circle_btn_desc',
+//		    [
+//			    'label' => esc_html__('Short Content', 'essential-addons-for-elementor-lite'),
+//			    'type' => Controls_Manager::TEXTAREA,
+//			    'default' => esc_html__('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-for-elementor-lite'),
+//			    'dynamic' => ['active' => true],
+//		    ]
+//	    );
 
 	    $repeater->end_controls_tab();
 
