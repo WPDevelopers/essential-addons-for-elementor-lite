@@ -191,12 +191,11 @@ $white: #fff;
             .eael-cart-update-btn {
                 display: flex;
                 justify-content: flex-end;
-                margin-top: -13px;
 
                 button {
                     max-width: 365px;
                     width: 100%;
-                    margin-top: 13px;
+                    margin-bottom: 13px;
 
                     &[disabled] {
                         opacity: .5;
@@ -212,7 +211,7 @@ $white: #fff;
                 table {
                     border-collapse: separate;
                     border-spacing: 0 13px;
-                    margin: 0;
+                    margin: -13px 0;
 
                     td,
                     th {
@@ -242,10 +241,12 @@ $white: #fff;
                         th {
                             color: $text-color-3;
                             font-weight: 500;
+                            text-align: left;
                         }
 
                         td {
                             border-spacing: 0;
+                            text-align: right;
 
                             a {
                                 color: $text-color-1;
@@ -273,10 +274,12 @@ $white: #fff;
 
                 .wc-proceed-to-checkout {
                     padding: 0;
+                    margin-top: 13px;
 
                     a.button {
                         font-size: 20px;
                         padding: 18px 0;
+                        margin: 0;
                     }
                 }
             }
