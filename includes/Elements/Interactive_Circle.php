@@ -128,14 +128,14 @@ class Interactive_Circle extends Widget_Base
 		    ]
 	    );
 
-	    $this->add_control(
-		    'eael_interactive_circle_content_settings',
-		    [
-			    'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::HEADING,
-			    'separator' => 'before',
-		    ]
-	    );
+//	    $this->add_control(
+//		    'eael_interactive_circle_content_settings',
+//		    [
+//			    'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
+//			    'type' => Controls_Manager::HEADING,
+//			    'separator' => 'before',
+//		    ]
+//	    );
 	    
 	    $this->end_controls_section();
     }
