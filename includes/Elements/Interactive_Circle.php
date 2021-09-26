@@ -70,7 +70,7 @@ class Interactive_Circle extends Widget_Base
 	    $this->start_controls_section(
 		    'eael_section_interactive_circle_settings',
 		    [
-			    'label' => esc_html__('General Settings', 'essential-addons-for-elementor-lite'),
+			    'label' => esc_html__('General', 'essential-addons-for-elementor-lite'),
 		    ]
 	    );
 	    $this->add_control(
@@ -832,7 +832,7 @@ class Interactive_Circle extends Widget_Base
 		    Group_Control_Box_Shadow::get_type(),
 		    [
 			    'name' => 'eael_interactive_circle_content_shadow',
-			    'selector' => '{{WRAPPER}} .eael-circle-content, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn-content .eael-circle-content',
+			    'selector' => '{{WRAPPER}} .eael-circle-wrapper:not(.eael-interactive-circle-preset-1) .eael-circle-content, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn-content .eael-circle-content, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-inner',
                 'condition' => [
 				    'eael_interactive_circle_preset!' => 'eael-interactive-circle-preset-2'
 			    ],
