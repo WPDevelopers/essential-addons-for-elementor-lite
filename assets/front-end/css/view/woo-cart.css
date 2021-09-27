@@ -228,9 +228,11 @@
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.cart-subtotal td strong, .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.order-total td strong {
   font-weight: 500;
 }
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table + .wc-proceed-to-checkout {
+  margin-top: 13px;
+}
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals .wc-proceed-to-checkout {
   padding: 0;
-  margin-top: 13px;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals .wc-proceed-to-checkout a.button {
   font-size: 20px;
