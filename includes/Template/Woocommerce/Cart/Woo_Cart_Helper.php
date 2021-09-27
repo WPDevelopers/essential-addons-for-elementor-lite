@@ -206,11 +206,12 @@ trait Woo_Cart_Helper {
 						<?php if ( wc_coupons_enabled() && $settings['eael_woo_cart_components_cart_coupon'] === 'yes' ) {
 							$button_text = apply_filters( 'eael_woo_cart_coupon_button_text', $settings['eael_woo_cart_components_cart_coupon_button_text'] );
 							$placeholder = apply_filters( 'eael_woo_cart_coupon_placeholder', $settings['eael_woo_cart_components_cart_coupon_placeholder'] );
-                            ?>
+							?>
                             <div class="coupon">
                                 <label for="coupon_code" class="sr-only"><?php esc_html_e( 'Coupon:', 'essential-addons-for-elementor-lite' ); ?></label>
                                 <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php echo esc_attr( $placeholder ); ?>"/>
-                                <button type="submit" class="button" name="apply_coupon" value="<?php echo esc_attr( $button_text ); ?>"><?php echo esc_html( $button_text ); ?></button>
+                                <button type="submit" class="button" name="apply_coupon"
+                                        value="<?php echo esc_attr( $button_text ); ?>"><?php echo esc_html( $button_text ); ?></button>
 								<?php do_action( 'woocommerce_cart_coupon' ); ?>
                             </div>
 						<?php } ?>
@@ -220,12 +221,13 @@ trait Woo_Cart_Helper {
 
                     <div class="cart-collaterals">
                         <div class="eael-cart-update-btn">
-	                        <?php if ( $settings['eael_woo_cart_components_cart_update_button'] === 'yes' ) {
-		                        $update_text = apply_filters( 'eael_woo_cart_update_button_text', $settings['eael_woo_cart_components_cart_update_button_text'] );
-                                ?>
-                                <button type="submit" class="button" name="update_cart" value="<?php echo esc_attr( $update_text ); ?>"><?php echo esc_html( $update_text ); ?></button>
-							<?php
-	                        }
+							<?php if ( $settings['eael_woo_cart_components_cart_update_button'] === 'yes' ) {
+								$update_text = apply_filters( 'eael_woo_cart_update_button_text', $settings['eael_woo_cart_components_cart_update_button_text'] );
+								?>
+                                <button type="submit" class="button" name="update_cart"
+                                        value="<?php echo esc_attr( $update_text ); ?>"><?php echo esc_html( $update_text ); ?></button>
+								<?php
+							}
 
 							do_action( 'woocommerce_cart_actions' );
 							wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' );
@@ -258,7 +260,7 @@ trait Woo_Cart_Helper {
 
 			if ( $settings['eael_woo_cart_components_cart_totals_subtotal'] === 'yes' || $settings['eael_woo_cart_components_cart_totals_coupon'] === 'yes' ||
 			     $settings['eael_woo_cart_components_cart_totals_shipping'] === 'yes' ||
-                 ( ! empty( WC()->cart->get_fees() ) && $settings['eael_woo_cart_components_cart_totals_fees'] === 'yes' ) ||
+			     ( ! empty( WC()->cart->get_fees() ) && $settings['eael_woo_cart_components_cart_totals_fees'] === 'yes' ) ||
 			     $settings['eael_woo_cart_components_cart_totals_tax'] === 'yes' || $settings['eael_woo_cart_components_cart_totals_total'] === 'yes' ) {
 				?>
                 <table class="shop_table shop_table_responsive">
