@@ -59,6 +59,9 @@
                         display: block;
                         overflow: hidden;
                         position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
                         background: $nav-item-initial-background;
                         border: $nav-item-border-width solid $nav-item-border-color;
                         box-shadow: $nav-item-box-shadow;
@@ -124,8 +127,10 @@
                         right: 0;
                         visibility: hidden;
                         opacity: 0;
+                        border-radius: $nav-circle-border-radius;
                         .eael-circle-content {
                             display: flex;
+                            flex-direction: column;
                             align-items: center;
                             justify-content: center;
                             padding: $nav-content-padding;
@@ -164,7 +169,7 @@
                         transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-2 {
-                        top: 10%;
+                        top: 100%;
                         left: 50%;
                         transform: translate(-50%, -50%);
                     }
@@ -198,17 +203,17 @@
                     }
                     #eael-circle-item-2 {
                         top: 14.65%;
-                        left: 75.35%;
+                        left: 85.35%;
                         transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-3 {
-                        top: 75.35%;
+                        top: 85.35%;
                         left: 14.65%;
                         transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-4 {
-                        top: 75.35%;
-                        left: 75.35%;
+                        top: 85.35%;
+                        left: 85.35%;
                         transform: translate(-50%, -50%);
                     }
                 }
@@ -324,7 +329,7 @@
                     }
                     #eael-circle-item-2 {
                         top: 14.65%;
-                        left: 75.35%;
+                        left: 85.35%;
                         transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-3 {
@@ -333,8 +338,8 @@
                         transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-4 {
-                        top: 75.35%;
-                        left: 75.35%;
+                        top: 85.35%;
+                        left: 85.35%;
                         transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-5 {
@@ -343,7 +348,7 @@
                         transform: translate(-50%, -50%);
                     }
                     #eael-circle-item-6 {
-                        top: 75.35%;
+                        top: 85.35%;
                         left: 14.65%;
                         transform: translate(-50%, -50%);
                     }
@@ -603,16 +608,17 @@
                     }
                     .eael-circle-btn-content {
                         position: absolute;
-                        width: calc( 85% - (2 * #{math.div($nav-item-width, 2) + $nav-item-gap}) );
-                        bottom: 10px;
+                        width: calc(100% - #{$nav-item-width + $nav-item-gap});
+                        bottom: 0px;
                         left: 50%;
                         transform: translateX(-50%);
                         display: block;
                         opacity: 0;
                         visibility: hidden;
-                        padding: $nav-content-margin;
                         text-align: center;
-
+                        height: math.div($nav-circle-2-width, 2);
+                        padding: $nav-circle-border-width;
+                        padding-bottom: 0;
                         @media only screen and (max-width: $breakpoint) {
                             width: 100%;
                             transform: none;
@@ -620,6 +626,14 @@
                         }
 
                         .eael-circle-content {
+                            overflow: hidden;
+                            border-top-left-radius: $nav-circle-width;
+                            border-top-right-radius: $nav-circle-width;
+                            height: math.div($nav-circle-2-width, 2) - $nav-circle-border-width;
+                            padding: $nav-content-padding;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: flex-end;
                             h2 {
                                 font-size: $nav-content-text-size;
                                 text-transform: uppercase;
@@ -1255,9 +1269,6 @@
                             left: 50%;
                             transform: translate(-50%, -50%) rotate(-$animation-angle);
                         }
-                        100% {
-                            transform: translate(-50%, -50%) rotate(0deg);
-                        }
                     }
                     @keyframes eael-2-anim-2-content-animation {
                         0% {
@@ -1278,22 +1289,22 @@
             }
             &.eael-interactive-circle-animation-3 {
                 $animation-duration: 2s;
-                $animation-angle: 360deg;
+                $animation-angle: 700deg;
                 .eael-circle-info {
-                    @keyframes eael-2-anim-3-circle-animation {
-                        0% {
-                            transform: rotate(-$animation-angle);
-                        }
-                    }
                     @keyframes eael-2-anim-3-btn-animation {
-                        0% {
+                        5% {
                             top: 50%;
                             left: 50%;
-                            transform: translate(-50%, -50%) rotate($animation-angle);
+                            transform: translate(-50%, -50%);
+                        }
+                        20% {
+                            top: 30%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
                         }
                     }
-                    animation: eael-2-anim-3-circle-animation $animation-duration;
                     .eael-circle-btn {
+                        transform-origin: center center;
                         animation: eael-2-anim-3-btn-animation $animation-duration;
                     }
                 }
@@ -1398,9 +1409,7 @@
                             .eael-shape-2 {
                                 $content-position: math.div($nav-item-width, 2) + $nav-item-gap;
                                 position: absolute;
-                                left: calc(
-                                        50% + #{$content-position} + (#{$nav-circle-border-width} / 2)
-                                );
+                                left: calc(50% + #{$content-position} + #{math.div($nav-circle-border-width, 2)});
                                 top: 50%;
                                 border-radius: $nav-item-border-radius;
                                 background: $nav-circle-border-color;
@@ -1453,7 +1462,9 @@
                         bottom: $content-position;
                         left: $content-position;
                         right: $content-position;
-                        display: none;
+                        display: block;
+                        opacity: 0;
+                        visibility: hidden;
                         //padding: $nav-content-margin;
                         padding: 50px;
 
@@ -1464,6 +1475,8 @@
                         }
 
                         .eael-circle-content {
+                            border-radius: $nav-item-border-radius;
+                            overflow: hidden;
                             display: flex;
                             flex-direction: column;
                             align-items: center;
@@ -1491,7 +1504,8 @@
                             }
                         }
                         &.active {
-                            display: block;
+                            opacity: 1;
+                            visibility: visible;
                         }
                     }
                 }
@@ -1685,47 +1699,118 @@
                             left: 50%;
                         }
                     }
+                    @keyframes eael-3-anim-1-shape-1-animation {
+                        0% {
+                            width: 0;
+                        }
+                    }
+                    @keyframes eael-3-anim-1-shape-2-animation {
+                        0% {
+                            left: 50%;
+                        }
+                    }
                     .eael-circle-btn {
                         animation: eael-3-anim-1-btn-animation $animation-duration;
+                        .eael-shape-1 {
+                            animation: eael-3-anim-1-shape-1-animation $animation-duration;
+                        }
+                        .eael-shape-2 {
+                            animation: eael-3-anim-1-shape-2-animation $animation-duration;
+                        }
                     }
                 }
             }
             &.eael-interactive-circle-animation-2 {
                 $animation-duration: 2s;
-                $animation-angle: 180deg;
-                .eael-circle-inner {
-                    @keyframes eael-3-anim-2-btn-animation {
-                        0% {
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%) rotateX(-$animation-angle)
-                            rotateY(-$animation-angle) rotateZ(-$animation-angle);
-                        }
-                    }
-                    .eael-circle-btn {
-                        animation: eael-3-anim-2-btn-animation $animation-duration;
-                    }
-                }
-            }
-            &.eael-interactive-circle-animation-3 {
-                $animation-duration: 2s;
                 $animation-angle: 360deg;
                 .eael-circle-info {
-                    @keyframes eael-3-anim-3-circle-animation {
+                    @keyframes eael-3-anim-2-circle-animation {
                         0% {
                             transform: rotate(-$animation-angle);
                         }
                     }
-                    @keyframes eael-3-anim-3-btn-animation {
+                    @keyframes eael-3-anim-2-btn-animation {
                         0% {
                             top: 50%;
                             left: 50%;
                             transform: translate(-50%, -50%) rotate($animation-angle);
                         }
                     }
+                    @keyframes eael-3-anim-2-shape-1-animation {
+                        0% {
+                            width: 0;
+                        }
+                    }
+                    @keyframes eael-3-anim-2-shape-2-animation {
+                        0% {
+                            left: 50%;
+                        }
+                    }
+                    @keyframes eael-3-anim-2-circle-content-animation {
+                        0% {
+                            transform: rotate($animation-angle);
+                        }
+                    }
+                    animation: eael-3-anim-2-circle-animation $animation-duration;
+                    .eael-circle-btn-content {
+                        animation: eael-3-anim-2-circle-content-animation
+                        $animation-duration;
+                    }
+                    .eael-circle-btn {
+                        animation: eael-3-anim-2-btn-animation $animation-duration;
+                        .eael-shape-1 {
+                            animation: eael-3-anim-2-shape-1-animation $animation-duration;
+                        }
+                        .eael-shape-2 {
+                            animation: eael-3-anim-2-shape-2-animation $animation-duration;
+                        }
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-3 {
+                $animation-duration: 2s;
+                $animation-angle: 180deg;
+                .eael-circle-info {
+                    @keyframes eael-3-anim-3-circle-animation {
+                        30% {
+                            transform: rotate(-$animation-angle);
+                        }
+                    }
+                    @keyframes eael-3-anim-3-btn-animation {
+                        30% {
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotate($animation-angle);
+                        }
+                    }
+                    @keyframes eael-3-anim-3-shape-1-animation {
+                        30% {
+                            width: 0;
+                        }
+                    }
+                    @keyframes eael-3-anim-3-shape-2-animation {
+                        30% {
+                            left: 50%;
+                        }
+                    }
+                    @keyframes eael-3-anim-3-circle-content-animation {
+                        30% {
+                            transform: rotate($animation-angle);
+                        }
+                    }
                     animation: eael-3-anim-3-circle-animation $animation-duration;
+                    .eael-circle-btn-content {
+                        animation: eael-3-anim-3-circle-content-animation
+                        $animation-duration;
+                    }
                     .eael-circle-btn {
                         animation: eael-3-anim-3-btn-animation $animation-duration;
+                        .eael-shape-1 {
+                            animation: eael-3-anim-3-shape-1-animation $animation-duration;
+                        }
+                        .eael-shape-2 {
+                            animation: eael-3-anim-3-shape-2-animation $animation-duration;
+                        }
                     }
                 }
             }
@@ -1792,11 +1877,10 @@
                 $animation-angle: 180deg;
                 .eael-circle-inner {
                     @keyframes eael-4-anim-2-btn-animation {
-                        0% {
+                        40% {
                             top: 50%;
                             left: 50%;
-                            transform: translate(-50%, -50%) rotateX(-$animation-angle)
-                            rotateY(-$animation-angle) rotateZ(-$animation-angle);
+                            transform: translate(-50%, -50%) rotate($animation-angle);
                         }
                     }
                     .eael-circle-btn {
@@ -1972,6 +2056,7 @@
                         padding: $nav-content-padding;
                         border-radius: $nav-circle-border-radius;
                         background: $nav-content-background;
+                        overflow: hidden;
                         h2 {
                             font-size: $nav-content-title-size;
                             text-transform: $nav-content-title-case;
