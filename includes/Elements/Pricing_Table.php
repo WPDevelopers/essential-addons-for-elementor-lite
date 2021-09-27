@@ -1252,6 +1252,27 @@ class Pricing_Table extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_pricing_table_list_item_icon_size_svg',
+            [
+                'label'     => esc_html__('SVG Icon Size', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::SLIDER,
+                'default'   => [
+                    'size' => 20,
+                    'unit' => 'px',
+                ],
+                'range'     => [
+                    'px' => [
+                        'max' => 50,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-pricing-item .body ul li .li-icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-pricing-item .body ul li .li-icon svg'   => 'font-size: {{SIZE}}{{UNIT}}; width: 1em; height: 1em;',
+                ],
+            ]
+        );
+
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
