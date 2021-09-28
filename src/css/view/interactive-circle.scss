@@ -35,6 +35,12 @@
         line-height: 1.5em;
     }
 
+    .eael-circle-content {
+        h1, h2, h3, h4, h5, h6, p, span, div {
+            margin: 0;
+        }
+    }
+
     &.eael-interactive-circle-preset-1 {
         .eael-circle-info {
             $nav-item-border-color: #fff;

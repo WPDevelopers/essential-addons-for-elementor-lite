@@ -3916,7 +3916,7 @@ msgid "Item 4"
 msgstr ""
 
 #: ../includes/Elements/Interactive_Circle.php:295
-msgid "Present your content in an attractive Circle layout item four. You can highlight key information with click or hover effects and style it as per your preference."
+msgid "Present your content in an attractive Circle layout item 4. You can highlight key information with click or hover effects and style it as per your preference."
 msgstr ""
 
 #: ../includes/Elements/Interactive_Circle.php:302
