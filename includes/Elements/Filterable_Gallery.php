@@ -3015,7 +3015,7 @@ class Filterable_Gallery extends Widget_Base
         $icon_url = isset($item['play_icon']['url']) ? $item['play_icon']['url'] : '';
         $video_url = isset($item['video_link']) ? $item['video_link'] : '#';
 
-        $html .= '<a href="' . esc_url($video_url) . '" class="video-popup eael-magnific-link eael-magnific-video-link mfp-iframe">';
+        $html .= '<a href="' . esc_url($video_url) . '" class="video-popup eael-magnific-link active eael-magnific-video-link mfp-iframe">';
 
         if( $show_video_popup_bg ){
             $html .= '<div class="video-popup-bg"></div>';
