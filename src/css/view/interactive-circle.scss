@@ -492,6 +492,8 @@
 
     &.eael-interactive-circle-preset-2 {
         $nav-circle-2-width: 700px;
+        margin: 45px 0 0;
+
         .eael-circle-info {
             $nav-item-border-width: 10px;
             $nav-item-icon-width: 35px;
@@ -1363,6 +1365,8 @@
     }
 
     &.eael-interactive-circle-preset-3 {
+        margin: 45px;
+        
         .eael-circle-info {
             $nav-item-border-width: 10px;
             $nav-item-icon-width: 35px;
