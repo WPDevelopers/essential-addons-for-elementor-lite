@@ -292,7 +292,7 @@ class Interactive_Circle extends Widget_Base
 		                    'library' => 'fa-solid',
 	                    ],
                         'eael_interactive_circle_btn_title' => esc_html__('Item 4', 'essential-addons-for-elementor-lite'),
-                        'eael_interactive_circle_item_content' => esc_html__('Present your content in an attractive Circle layout item four. You can highlight key information with click or hover effects and style it as per your preference.', 'essential-addons-for-elementor-lite'),
+                        'eael_interactive_circle_item_content' => esc_html__('Present your content in an attractive Circle layout item 4. You can highlight key information with click or hover effects and style it as per your preference.', 'essential-addons-for-elementor-lite'),
                     ],
                     [
 	                    'eael_interactive_circle_btn_icon' => [
