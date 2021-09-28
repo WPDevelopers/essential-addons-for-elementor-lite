@@ -210,7 +210,7 @@ class Woo_Cart extends Widget_Base {
 		$repeater->add_control(
 			'item_remove_icon',
 			[
-				'label'                  => __( 'Remove Icon', 'elementor' ),
+				'label'                  => __( 'Remove Icon', 'essential-addons-for-elementor-lite' ),
 				'type'                   => Controls_Manager::ICONS,
 				'default'                => [
 					'value'   => 'fas fa-times',
@@ -223,6 +223,37 @@ class Woo_Cart extends Widget_Base {
 				'condition'              => [
 					'column_type' => 'remove'
 				]
+			]
+		);
+
+		$repeater->add_responsive_control(
+			'column_item_align',
+			[
+				'label'                => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'                 => Controls_Manager::CHOOSE,
+				'options'              => [
+					'left'   => [
+						'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'selectors_dictionary' => [
+					'left'   => 'text-align: left; justify-content: flex-start;',
+					'center' => 'text-align: center; justify-content: center;',
+					'right'  => 'text-align: right; justify-content: flex-end;',
+				],
+				'selectors'            => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table {{CURRENT_ITEM}}'           => '{{VALUE}};',
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table {{CURRENT_ITEM}} .quantity' => '{{VALUE}};',
+				],
 			]
 		);
 
