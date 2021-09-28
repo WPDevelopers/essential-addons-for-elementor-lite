@@ -42,18 +42,18 @@ trait Woo_Cart_Helper {
                 <table class="shop_table cart woocommerce-cart-form__contents eael-woo-cart-table">
                     <thead>
                     <tr>
-	                    <?php
-	                    if ( ! empty( $settings['table_items'] ) && is_array( $settings['table_items'] ) ) {
-		                    foreach ( $settings['table_items'] as $column_data ) {
-			                    $item_class = "elementor-repeater-item-{$column_data['_id']}";
-			                    ?>
+						<?php
+						if ( ! empty( $settings['table_items'] ) && is_array( $settings['table_items'] ) ) {
+							foreach ( $settings['table_items'] as $column_data ) {
+								$item_class = "elementor-repeater-item-{$column_data['_id']}";
+								?>
                                 <th class="<?php echo esc_attr( "product-{$column_data['column_type']} {$item_class}" ); ?>">
-                                    <?php echo esc_html( $column_data['column_heading_title'] ); ?>
+									<?php echo esc_html( $column_data['column_heading_title'] ); ?>
                                 </th>
-			                    <?php
-		                    }
-	                    }
-	                    ?>
+								<?php
+							}
+						}
+						?>
                     </tr>
                     </thead>
                     <tbody>
@@ -114,7 +114,7 @@ trait Woo_Cart_Helper {
 												<?php
 												break;
 											case 'name': ?>
-                                                <td class="product-name <?php echo esc_attr( $item_class ); ?>" data-title="<?php esc_attr_e( 'Product', 'essential-addons-for-elementor-lite' ); ?>">
+                                                <td class="product-name <?php echo esc_attr( $item_class ); ?>">
 													<?php
 													if ( ! $product_permalink ) {
 														echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name',
@@ -145,7 +145,7 @@ trait Woo_Cart_Helper {
 												<?php
 												break;
 											case 'price': ?>
-                                                <td class="product-price <?php echo esc_attr( $item_class ); ?>" data-title="<?php esc_attr_e( 'Price', 'essential-addons-for-elementor-lite' ); ?>">
+                                                <td class="product-price <?php echo esc_attr( $item_class ); ?>">
 													<?php
 													echo apply_filters( 'woocommerce_cart_item_price',
 														WC()->cart->get_product_price( $_product ), $cart_item,
@@ -155,7 +155,7 @@ trait Woo_Cart_Helper {
 												<?php
 												break;
 											case 'quantity': ?>
-                                                <td class="product-quantity <?php echo esc_attr( $item_class ); ?>" data-title="<?php esc_attr_e( 'Quantity', 'essential-addons-for-elementor-lite' ); ?>">
+                                                <td class="product-quantity <?php echo esc_attr( $item_class ); ?>">
 													<?php
 													if ( $_product->is_sold_individually() ) {
 														$product_quantity = sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key );
@@ -180,7 +180,7 @@ trait Woo_Cart_Helper {
 												<?php
 												break;
 											case 'subtotal': ?>
-                                                <td class="product-subtotal <?php echo esc_attr( $item_class ); ?>" data-title="<?php esc_attr_e( 'Subtotal', 'essential-addons-for-elementor-lite' ); ?>">
+                                                <td class="product-subtotal <?php echo esc_attr( $item_class ); ?>">
 													<?php
 													echo apply_filters( 'woocommerce_cart_item_subtotal',
 														WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ),
