@@ -48,14 +48,24 @@ if ( class_exists( '\WC_Shortcode_Cart' ) ) {
 			if ( WC()->cart->is_empty() ) {
 				wc_get_template( 'cart/cart-empty.php' );
 			} else {
-				switch ( $settings['ea_woo_cart_layout'] ) {
-					case 'default':
-						self::woo_cart_style_one( $settings );
-						break;
-					case 'style-2':
-						self::woo_cart_style_two();
-						break;
-				}
+				?>
+                <div class="eael-woo-cart-wrapper <?php echo esc_attr( "eael-woo-{$settings['ea_woo_cart_layout']}" ); ?>">
+					<?php
+					do_action( 'woocommerce_before_cart' );
+
+					switch ( $settings['ea_woo_cart_layout'] ) {
+						case 'default':
+							self::woo_cart_style_one( $settings );
+							break;
+						case 'style-2':
+							self::woo_cart_style_two( $settings );
+							break;
+					}
+
+					do_action( 'woocommerce_after_cart' );
+					?>
+                </div>
+				<?php
 			}
 		}
 
