@@ -386,16 +386,11 @@ class Interactive_Circle extends Widget_Base
 		    [
 			    'label' => __('Circle Width', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::SLIDER,
-			    'size_units' => ['px', '%'],
+			    'size_units' => ['px'],
 			    'range' => [
 				    'px' => [
 					    'min' => 0,
 					    'max' => 1000,
-					    'step' => 1,
-				    ],
-				    '%' => [
-					    'min' => 0,
-					    'max' => 80,
 					    'step' => 1,
 				    ],
 			    ],
