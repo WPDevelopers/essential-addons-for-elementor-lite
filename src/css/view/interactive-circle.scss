@@ -651,6 +651,8 @@
                             width: 100%;
                             transform: none;
                             bottom: 0;
+                            height: auto!important;
+                            margin-top: 20px;
                         }
 
                         .eael-circle-content {
@@ -662,6 +664,11 @@
                             display: flex;
                             flex-direction: column;
                             justify-content: flex-end;
+
+                            @media only screen and (max-width: $breakpoint) {
+                                height: auto!important;
+                            }
+
                             h2 {
                                 font-size: $nav-content-text-size;
                                 text-transform: uppercase;
