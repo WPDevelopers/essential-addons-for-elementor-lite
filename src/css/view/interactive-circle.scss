@@ -16,12 +16,22 @@
 
     .eael-circle-info {
         display: inline-flex;
+
+        @media only screen and (max-width: $breakpoint) {
+            margin: 0 !important;
+        }
     }
     .eael-circle-inner {
         width: $nav-circle-width;
         height: $nav-circle-width;
         border: $nav-circle-border-width solid $nav-circle-border-color;
         border-radius: $nav-circle-border-radius;
+
+        @media only screen and (max-width: $breakpoint) {
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+
     }
 
     .eael-circle-btn {
@@ -36,6 +46,11 @@
     }
 
     .eael-circle-content {
+        @media only screen and (max-width: $breakpoint) {
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+
         h1, h2, h3, h4, h5, h6, p, span, div {
             margin: 0;
         }
