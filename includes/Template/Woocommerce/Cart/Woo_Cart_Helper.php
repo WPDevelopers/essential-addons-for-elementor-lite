@@ -389,8 +389,208 @@ trait Woo_Cart_Helper {
 		<?php
 	}
 
-	public static function woo_cart_style_two( $settings ) {
-		echo 'this is from woo cart helper style two';
+	public static function woo_cart_style_two( $settings ) { ?>
+        <form class="woocommerce-cart-form eael-woo-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
+			<?php do_action( 'woocommerce_before_cart_table' ); ?>
+
+            <div class="shop_table cart woocommerce-cart-form__contents eael-woo-cart-table">
+                <div class="eael-woo-cart-thead">
+                    <div class="eael-woo-cart-tr">
+                        <?php $item_class = "elementor-repeater-item"; ?>
+                        <div class="eael-woo-cart-tr-left">
+                            <div class="eael-woo-cart-td product-thumbnail <?php echo esc_attr( $item_class ); ?>">
+                                <?php echo esc_html( "thumbnail" ); ?>
+                            </div>
+                        </div>
+                        <div class="eael-woo-cart-tr-right">
+                            <div class="eael-woo-cart-td product-price <?php echo esc_attr( $item_class ); ?>">
+                                <?php echo esc_html( "price" ); ?>
+                            </div>
+                            <div class="eael-woo-cart-td product-quantity <?php echo esc_attr( $item_class ); ?>">
+                                <?php echo esc_html( "quantity" ); ?>
+                            </div>
+                            <div class="eael-woo-cart-td product-subtotal <?php echo esc_attr( $item_class ); ?>">
+                                <?php echo esc_html( "subtotal" ); ?>
+                            </div>
+                            <div class="eael-woo-cart-td product-remove <?php echo esc_attr( $item_class ); ?>"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="eael-woo-cart-tbody">
+				<?php
+				do_action( 'woocommerce_before_cart_contents' );
+
+				foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+					$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+					$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
+
+					if ( $_product && $_product->exists() && $cart_item['quantity'] > 0
+					     && apply_filters( 'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key )
+					) {
+						$product_permalink = apply_filters( 'woocommerce_cart_item_permalink',
+							$_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item,
+							$cart_item_key );
+						?>
+                        <div class="eael-woo-cart-tr woocommerce-cart-form__cart-item <?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class',
+							'cart_item', $cart_item, $cart_item_key ) ); ?>">
+                            <?php $item_class = "elementor-repeater-item"; ?>
+                            <div class="eael-woo-cart-tr-left">
+                                <div class="eael-woo-cart-td product-thumbnail <?php echo esc_attr( $item_class ); ?>">
+		                            <?php
+		                            $thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
+
+		                            if ( ! $product_permalink ) {
+			                            echo $thumbnail; // PHPCS: XSS ok.
+		                            } else {
+			                            printf( '<a href="%s">%s</a>', esc_url( $product_permalink ),
+				                            $thumbnail ); // PHPCS: XSS ok.
+		                            }
+		                            ?>
+                                </div>
+                                <div class="eael-woo-cart-td product-name <?php echo esc_attr( $item_class ); ?>">
+		                            <?php
+		                            if ( ! $product_permalink ) {
+			                            echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name',
+					                            $_product->get_name(), $cart_item, $cart_item_key )
+			                                               . '&nbsp;' );
+		                            } else {
+			                            echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name',
+				                            sprintf( '<a href="%s">%s</a>', esc_url( $product_permalink ),
+					                            $_product->get_name() ), $cart_item, $cart_item_key ) );
+		                            }
+
+		                            do_action( 'woocommerce_after_cart_item_name', $cart_item, $cart_item_key );
+
+		                            // Meta data.
+		                            echo wc_get_formatted_cart_item_data( $cart_item ); // PHPCS: XSS ok.
+
+		                            // Backorder notification.
+		                            if ( $_product->backorders_require_notification()
+		                                 && $_product->is_on_backorder( $cart_item['quantity'] )
+		                            ) {
+			                            echo wp_kses_post( apply_filters( 'woocommerce_cart_item_backorder_notification',
+				                            '<p class="backorder_notification">'
+				                            . esc_html__( 'Available on backorder', 'essential-addons-for-elementor-lite' )
+				                            . '</p>', $product_id ) );
+		                            }
+		                            ?>
+                                </div>
+                            </div>
+                            <div class="eael-woo-cart-tr-right">
+                                <div class="eael-woo-cart-td product-price <?php echo esc_attr( $item_class ); ?>">
+		                            <?php
+		                            echo apply_filters( 'woocommerce_cart_item_price',
+			                            WC()->cart->get_product_price( $_product ), $cart_item,
+			                            $cart_item_key ); // PHPCS: XSS ok.
+		                            ?>
+                                </div>
+                                <div class="eael-woo-cart-td product-quantity <?php echo esc_attr( $item_class ); ?>">
+		                            <?php
+		                            if ( $_product->is_sold_individually() ) {
+			                            $product_quantity = sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key );
+		                            } else {
+			                            $product_quantity = woocommerce_quantity_input(
+				                            [
+					                            'input_name'   => "cart[{$cart_item_key}][qty]",
+					                            'input_value'  => $cart_item['quantity'],
+					                            'max_value'    => $_product->get_max_purchase_quantity(),
+					                            'min_value'    => '0',
+					                            'product_name' => $_product->get_name(),
+				                            ],
+				                            $_product,
+				                            false
+			                            );
+		                            }
+
+		                            echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity,
+			                            $cart_item_key, $cart_item ); // PHPCS: XSS ok.
+		                            ?>
+                                </div>
+                                <div class="eael-woo-cart-td product-subtotal <?php echo esc_attr( $item_class ); ?>">
+		                            <?php
+		                            echo apply_filters( 'woocommerce_cart_item_subtotal',
+			                            WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ),
+			                            $cart_item,
+			                            $cart_item_key ); // PHPCS: XSS ok.
+		                            ?>
+                                </div>
+                                <div class="eael-woo-cart-td product-remove <?php echo esc_attr( $item_class ); ?>">
+		                            <?php
+		                            echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			                            'woocommerce_cart_item_remove_link',
+			                            sprintf(
+				                            '<a href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">%s</a>',
+				                            esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
+				                            esc_html__( 'Remove this item', 'essential-addons-for-elementor-lite' ),
+				                            esc_attr( $product_id ),
+				                            esc_attr( $_product->get_sku() ),
+				                            'x'
+			                            ),
+			                            $cart_item_key
+		                            );
+		                            ?>
+                                </div>
+                            </div>
+                        </div>
+						<?php
+					}
+				}
+
+				do_action( 'woocommerce_cart_contents' );
+				do_action( 'woocommerce_after_cart_contents' ); ?>
+                </div>
+            </div>
+
+			<?php do_action( 'woocommerce_after_cart_table' ); ?>
+
+            <div style="display: none;" class="eael-cart-coupon-and-collaterals">
+                <div class="eael-cart-coupon-wrapper">
+					<?php if ( wc_coupons_enabled() && $settings['eael_woo_cart_components_cart_coupon'] === 'yes' ) {
+						$button_text = apply_filters( 'eael_woo_cart_coupon_button_text', $settings['eael_woo_cart_components_cart_coupon_button_text'] );
+						$placeholder = apply_filters( 'eael_woo_cart_coupon_placeholder', $settings['eael_woo_cart_components_cart_coupon_placeholder'] );
+						?>
+                        <div class="coupon">
+                            <label for="coupon_code" class="sr-only"><?php esc_html_e( 'Coupon:', 'essential-addons-for-elementor-lite' ); ?></label>
+                            <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php echo esc_attr( $placeholder ); ?>"/>
+                            <button type="submit" class="button" name="apply_coupon"
+                                    value="<?php echo esc_attr( $button_text ); ?>"><?php echo esc_html( $button_text ); ?></button>
+							<?php do_action( 'woocommerce_cart_coupon' ); ?>
+                        </div>
+					<?php } ?>
+                </div>
+
+				<?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
+
+                <div class="cart-collaterals">
+                    <div class="eael-cart-update-btn">
+						<?php if ( $settings['eael_woo_cart_components_cart_update_button'] === 'yes' ) {
+							$update_text = apply_filters( 'eael_woo_cart_update_button_text', $settings['eael_woo_cart_components_cart_update_button_text'] );
+							?>
+                            <button type="submit" class="button" name="update_cart"
+                                    value="<?php echo esc_attr( $update_text ); ?>"><?php echo esc_html( $update_text ); ?></button>
+							<?php
+						}
+
+						do_action( 'woocommerce_cart_actions' );
+						wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' );
+						?>
+                    </div>
+
+					<?php
+					/**
+					 * Cart collaterals hook.
+					 *
+					 * @hooked woocommerce_cross_sell_display
+					 * @hooked woocommerce_cart_totals - 10
+					 */
+					if ( $settings['eael_woo_cart_components_cart_totals'] === 'yes' ) {
+						do_action( 'woocommerce_cart_collaterals', $settings );
+					}
+					?>
+                </div>
+            </div>
+        </form>
+		<?php
 	}
 
 }

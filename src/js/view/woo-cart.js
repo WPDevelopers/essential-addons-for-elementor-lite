@@ -1,5 +1,5 @@
 var qtyIncDecButton = function () {
-        jQuery('td.product-quantity div.quantity')
+        jQuery('.eael-woo-cart-table .product-quantity div.quantity')
             .prepend('<span class="eael-cart-qty-minus" data-action-type="minus">-</span>')
             .append('<span class="eael-cart-qty-plus" data-action-type="plus">+</span>');
     },
