@@ -186,15 +186,15 @@ class Simple_Menu extends Widget_Base
                 'options'      => [
                     'left'   => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-center',
+                        'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                 ],
                 'default'      => 'eael-simple-menu-hamburger-align-right',
@@ -331,15 +331,15 @@ class Simple_Menu extends Widget_Base
 			    'options'   => [
 				    'eael-hamburger-left'   => [
 					    'title' => __('Left', 'essential-addons-for-elementor-lite'),
-					    'icon'  => 'fa fa-align-left',
+					    'icon'  => 'eicon-text-align-left',
 				    ],
 				    'eael-hamburger-center' => [
 					    'title' => __('Center', 'essential-addons-for-elementor-lite'),
-					    'icon'  => 'fa fa-align-center',
+					    'icon'  => 'eicon-text-align-center',
 				    ],
 				    'eael-hamburger-right'  => [
 					    'title' => __('Right', 'essential-addons-for-elementor-lite'),
-					    'icon'  => 'fa fa-align-right',
+					    'icon'  => 'eicon-text-align-right',
 				    ],
 			    ],
 			    'condition' => [
@@ -738,15 +738,15 @@ class Simple_Menu extends Widget_Base
                 'options'   => [
                     'eael-simple-menu-align-left'   => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'eael-simple-menu-align-center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-center',
+                        'icon'  => 'eicon-text-align-center',
                     ],
                     'eael-simple-menu-align-right'  => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                 ],
                 'default'   => 'eael-simple-menu-align-left',
@@ -764,15 +764,15 @@ class Simple_Menu extends Widget_Base
                 'options'   => [
                     'eael-simple-menu-align-left'   => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'eael-simple-menu-align-center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-center',
+                        'icon'  => 'eicon-text-align-center',
                     ],
                     'eael-simple-menu-align-right'  => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                 ],
                 'default'   => 'eael-simple-menu-align-right',
@@ -789,15 +789,15 @@ class Simple_Menu extends Widget_Base
                 'options'   => [
                     'eael-simple-menu-align-left'   => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'eael-simple-menu-align-center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-center',
+                        'icon'  => 'eicon-text-align-center',
                     ],
                     'eael-simple-menu-align-right'  => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                 ],
                 'default'   => 'eael-simple-menu-align-center',
@@ -1084,15 +1084,15 @@ class Simple_Menu extends Widget_Base
                 'options' => [
                     'eael-simple-menu-dropdown-align-left'   => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'eael-simple-menu-dropdown-align-center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-center',
+                        'icon'  => 'eicon-text-align-center',
                     ],
                     'eael-simple-menu-dropdown-align-right'  => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                 ],
                 'default' => 'eael-simple-menu-dropdown-align-left',
