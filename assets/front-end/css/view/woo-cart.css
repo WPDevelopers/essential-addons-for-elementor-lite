@@ -16,6 +16,41 @@
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td a {
   color: #202B46;
 }
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity input::-webkit-outer-spin-button,
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity input[type=number] {
+  -moz-appearance: textfield;
+  width: 50px;
+  background: #F9FBFF;
+  border: none;
+  border-radius: 3px;
+  padding: 10px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 20px;
+  color: #202B46;
+}
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity .eael-cart-qty-minus,
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity .eael-cart-qty-plus {
+  line-height: 30px;
+  padding: 10px 15px;
+  color: #97A0B6;
+  font-size: 20px;
+  cursor: pointer;
+}
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table thead tr th {
   border: none;
   font-size: 18px;
@@ -79,41 +114,6 @@
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-price {
   color: #747C92;
-}
-.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-quantity .quantity {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-quantity .quantity input::-webkit-outer-spin-button,
-.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-quantity .quantity input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}
-.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-quantity .quantity input[type=number] {
-  -moz-appearance: textfield;
-  width: 50px;
-  background: #F9FBFF;
-  border: none;
-  border-radius: 3px;
-  padding: 10px;
-  line-height: 30px;
-  text-align: center;
-  font-size: 20px;
-  color: #202B46;
-}
-.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-quantity .quantity .eael-cart-qty-minus,
-.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-quantity .quantity .eael-cart-qty-plus {
-  line-height: 30px;
-  padding: 10px 15px;
-  color: #97A0B6;
-  font-size: 20px;
-  cursor: pointer;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-subtotal {
   font-weight: 500;
@@ -245,4 +245,64 @@
   font-size: 20px;
   padding: 18px 0;
   margin: 0;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 {
+  background: -webkit-gradient(linear, left top, right top, color-stop(45%, #FAFAFA), color-stop(0%, #FFF));
+  background: -o-linear-gradient(left, #FAFAFA 45%, #FFF 0%);
+  background: linear-gradient(to right, #FAFAFA 45%, #FFF 0%);
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-left {
+  width: 45%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-left > .product-thumbnail {
+  width: 130px;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right {
+  width: 55%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right::after {
+  position: absolute;
+  content: "";
+  width: calc(100% - 60px);
+  left: 30px;
+  top: 100%;
+  height: 1px;
+  background: #EAEEF4;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 20%;
+          flex: 1 1 20%;
+  text-align: center;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td.product-quantity {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 30%;
+          flex: 1 1 30%;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td.product-quantity input[type=number] {
+  background: transparent;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td.product-remove {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 5%;
+          flex: 1 1 5%;
 }
