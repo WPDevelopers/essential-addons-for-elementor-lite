@@ -355,15 +355,15 @@ class Post_Timeline extends Widget_Base
                 'options'   => [
                     'left'   => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-center',
+                        'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                 ],
                 'selectors' => [
@@ -413,19 +413,19 @@ class Post_Timeline extends Widget_Base
                 'options'   => [
                     'left'    => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'center'  => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-center',
+                        'icon'  => 'eicon-text-align-center',
                     ],
                     'right'   => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                     'justify' => [
                         'title' => __('Justified', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-justify',
+                        'icon'  => 'eicon-text-align-justify',
                     ],
                 ],
                 'selectors' => [

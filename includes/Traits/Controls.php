@@ -1154,15 +1154,15 @@ trait Controls
                 'options' => [
                     'left' => [
                         'title' => __('Left', 'essential-addons-elementor'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-elementor'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
                         'title' => __('Right', 'essential-addons-elementor'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'selectors' => [
@@ -1526,15 +1526,15 @@ trait Controls
                 'options' => [
                     'flex-start' => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'flex-end' => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'default' => 'center',
@@ -1900,15 +1900,15 @@ trait Controls
 				'options'   => [
 					'left'  => [
 						'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-align-left',
+						'icon'  => 'eicon-text-align-left',
 					],
 					'center'  => [
 						'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-align-center',
+						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
 						'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-align-right',
+						'icon'  => 'eicon-text-align-right',
 					],
 				],
 				'default' => 'center',
