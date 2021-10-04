@@ -97,16 +97,6 @@ class Interactive_Circle extends Widget_Base
 		    ]
 	    );
 
-//	    $this->add_control(
-//		    'eael_interactive_circle_item_default_active',
-//		    [
-//			    'label' => esc_html__('Active as Default', 'essential-addons-for-elementor-lite'),
-//			    'type' => Controls_Manager::SWITCHER,
-//			    'default' => '',
-//			    'return_value' => 'active',
-//		    ]
-//	    );
-
 	    $this->add_control(
 		    'eael_interactive_circle_btn_icon_show',
 		    [
@@ -126,15 +116,6 @@ class Interactive_Circle extends Widget_Base
 			    'return_value' => 'yes',
 		    ]
 	    );
-
-//	    $this->add_control(
-//		    'eael_interactive_circle_content_settings',
-//		    [
-//			    'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
-//			    'type' => Controls_Manager::HEADING,
-//			    'separator' => 'before',
-//		    ]
-//	    );
 	    
 	    $this->end_controls_section();
     }
@@ -171,9 +152,6 @@ class Interactive_Circle extends Widget_Base
 				    'value' => 'fas fa-home',
 				    'library' => 'fa-solid',
 			    ],
-//                'condition' => [
-//                    'eael_interactive_circle_preset' => 'eael-interactive-circle-preset-3',
-//                ],
 		    ]
 	    );
 
@@ -185,21 +163,8 @@ class Interactive_Circle extends Widget_Base
 			    'type' => Controls_Manager::TEXT,
 			    'default' => esc_html__('Title', 'essential-addons-for-elementor-lite'),
 			    'dynamic' => ['active' => true],
-//			    'condition' => [
-//				    'eael_interactive_circle_btn_text_show' => 'yes'
-//			    ],
 		    ]
 	    );
-
-//	    $repeater->add_control(
-//		    'eael_interactive_circle_btn_desc',
-//		    [
-//			    'label' => esc_html__('Short Content', 'essential-addons-for-elementor-lite'),
-//			    'type' => Controls_Manager::TEXTAREA,
-//			    'default' => esc_html__('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-for-elementor-lite'),
-//			    'dynamic' => ['active' => true],
-//		    ]
-//	    );
 
 	    $repeater->end_controls_tab();
 
@@ -220,16 +185,6 @@ class Interactive_Circle extends Widget_Base
 
 	    $repeater->start_controls_tab( 'interactive_circle_item_style_tab', [ 'label' => __( 'Style', 'essential-addons-for-elementor-lite' ) ] );
 
-	    //	    $repeater->add_control(
-//		    'eael_interactive_circle_tab_content',
-//		    [
-//			    'label' => esc_html__('Tab Content', 'essential-addons-for-elementor-lite'),
-//			    'type' => Controls_Manager::WYSIWYG,
-//			    'default' => esc_html__('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-for-elementor-lite'),
-//			    'dynamic' => ['active' => true],
-//		    ]
-//	    );
-
 	    $repeater->add_group_control(
 		    Group_Control_Background::get_type(),
 		    [
@@ -238,18 +193,6 @@ class Interactive_Circle extends Widget_Base
 			    'selector' => '{{WRAPPER}} .eael-circle-wrapper:not(.eael-interactive-circle-preset-4) .eael-circle-info .eael-circle-inner {{CURRENT_ITEM}} .eael-circle-btn-icon, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-inner {{CURRENT_ITEM}} .eael-circle-icon-shapes',
 		    ]
 	    );
-
-//	    $repeater->add_control(
-//		    'eael_interactive_circle_item_title_text_color',
-//		    [
-//			    'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
-//			    'type' => Controls_Manager::COLOR,
-////			    'default' => '#333',
-//			    'selectors' => [
-//				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'color: {{VALUE}};',
-//			    ],
-//		    ]
-//	    );
 
 	    $repeater->end_controls_tab();
 	    $repeater->end_controls_tabs();
@@ -517,51 +460,6 @@ class Interactive_Circle extends Widget_Base
 			    ],
 		    ]
 	    );
-//	    $this->add_responsive_control(
-//		    'eael_interactive_circle_btn_icon_gap',
-//		    [
-//			    'label' => __('Icon Gap', 'essential-addons-for-elementor-lite'),
-//			    'type' => Controls_Manager::SLIDER,
-//			    'default' => [
-//				    'size' => 10,
-//				    'unit' => 'px',
-//			    ],
-//			    'size_units' => ['px'],
-//			    'range' => [
-//				    'px' => [
-//					    'min' => 0,
-//					    'max' => 100,
-//					    'step' => 1,
-//				    ],
-//			    ],
-//			    'selectors' => [
-//				    '{{WRAPPER}} .eael-tab-inline-icon li i, {{WRAPPER}} .eael-tab-inline-icon li img, {{WRAPPER}} .eael-tab-inline-icon li svg' => 'margin-right: {{SIZE}}{{UNIT}};',
-//				    '{{WRAPPER}} .eael-tab-top-icon li i, {{WRAPPER}} .eael-tab-top-icon li img, {{WRAPPER}} .eael-tab-top-icon li svg' => 'margin-bottom: {{SIZE}}{{UNIT}};',
-//			    ],
-//		    ]
-//	    );
-//	    $this->add_responsive_control(
-//		    'eael_interactive_circle_btn_padding',
-//		    [
-//			    'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
-//			    'type' => Controls_Manager::DIMENSIONS,
-//			    'size_units' => ['px', 'em', '%'],
-//			    'selectors' => [
-//				    '{{WRAPPER}} .eael-circle-icon-inner' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-//			    ],
-//		    ]
-//	    );
-//	    $this->add_responsive_control(
-//		    'eael_interactive_circle_tab_margin',
-//		    [
-//			    'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
-//			    'type' => Controls_Manager::DIMENSIONS,
-//			    'size_units' => ['px', 'em', '%'],
-//			    'selectors' => [
-//				    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-//			    ],
-//		    ]
-//	    );
 
 	    $this->start_controls_tabs('eael_interactive_circle_header_tabs');
 	    // Normal State Tab
@@ -858,11 +756,6 @@ class Interactive_Circle extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $eael_find_default_tab = [];
-        $eael_adv_tab_id = 1;
-        $eael_adv_tab_content_id = 1;
-        $tab_icon_migrated = isset($settings['__fa4_migrated']['eael_interactive_circle_item_title_icon_new']);
-        $tab_icon_is_new = empty($settings['eael_interactive_circle_item_title_icon']);
 
         $this->add_render_attribute(
             'eael_interactive_circle_container',
