@@ -368,6 +368,17 @@ class Interactive_Circle extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_interactive_circle_border_color',
+			[
+				'label'     => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-circle-inner' => 'border-color: {{VALUE}}!important;',
+				],
+			]
+		);
+
 		$this->add_responsive_control(
 			'eael_interactive_circle_connectors',
 			[
