@@ -363,6 +363,7 @@ class Interactive_Circle extends Widget_Base {
 				'name'     => 'eael_interactive_circle_border',
 				'label'    => esc_html__( 'Border', 'essential-addons-for-elementor-lite' ),
 				'selector' => '{{WRAPPER}} .eael-circle-inner',
+				'exclude' => [ 'color' ],
 			]
 		);
 
