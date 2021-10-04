@@ -179,7 +179,8 @@ class Interactive_Circle extends Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name'     => 'eael_interactive_circle_tab_bgtype',
-				'types'    => [ 'gradient' ],
+				'types'    => [ 'gradient','classic' ],
+				'exclude' => [ 'image' ],
 				'selector' => '{{WRAPPER}} .eael-circle-wrapper:not(.eael-interactive-circle-preset-4) .eael-circle-info .eael-circle-inner {{CURRENT_ITEM}} .eael-circle-btn-icon, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-inner {{CURRENT_ITEM}} .eael-circle-icon-shapes',
 			]
 		);
