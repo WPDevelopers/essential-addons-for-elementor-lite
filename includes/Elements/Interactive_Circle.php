@@ -44,15 +44,14 @@ class Interactive_Circle extends Widget_Base
     public function get_keywords()
     {
         return [
-            'tab',
-            'tabs',
-            'ea tabs',
-            'ea advanced tabs',
-            'panel',
-            'navigation',
-            'group',
-            'tabs content',
-            'product tabs',
+            'interactive circle',
+            'interactive tabs',
+            'interactive infobox',
+            'ea interactive circle',
+            'ea interactive infobox',
+            'ea interactive tabs',
+            'circle',
+            'ea circle',
             'ea',
             'essential addons',
         ];
