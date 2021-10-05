@@ -202,54 +202,10 @@ trait Woo_Cart_Helper {
                 </tbody>
             </table>
 
-			<?php do_action( 'woocommerce_after_cart_table' ); ?>
-
-            <div class="eael-cart-coupon-and-collaterals">
-                <div class="eael-cart-coupon-wrapper">
-					<?php if ( wc_coupons_enabled() && $settings['eael_woo_cart_components_cart_coupon'] === 'yes' ) {
-						$button_text = apply_filters( 'eael_woo_cart_coupon_button_text', $settings['eael_woo_cart_components_cart_coupon_button_text'] );
-						$placeholder = apply_filters( 'eael_woo_cart_coupon_placeholder', $settings['eael_woo_cart_components_cart_coupon_placeholder'] );
-						?>
-                        <div class="coupon">
-                            <label for="coupon_code" class="sr-only"><?php esc_html_e( 'Coupon:', 'essential-addons-for-elementor-lite' ); ?></label>
-                            <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php echo esc_attr( $placeholder ); ?>"/>
-                            <button type="submit" class="button" name="apply_coupon"
-                                    value="<?php echo esc_attr( $button_text ); ?>"><?php echo esc_html( $button_text ); ?></button>
-							<?php do_action( 'woocommerce_cart_coupon' ); ?>
-                        </div>
-					<?php } ?>
-                </div>
-
-				<?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
-
-                <div class="cart-collaterals">
-                    <div class="eael-cart-update-btn">
-						<?php if ( $settings['eael_woo_cart_components_cart_update_button'] === 'yes' ) {
-							$update_text = apply_filters( 'eael_woo_cart_update_button_text', $settings['eael_woo_cart_components_cart_update_button_text'] );
-							?>
-                            <button type="submit" class="button" name="update_cart"
-                                    value="<?php echo esc_attr( $update_text ); ?>"><?php echo esc_html( $update_text ); ?></button>
-							<?php
-						}
-
-						do_action( 'woocommerce_cart_actions' );
-						wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' );
-						?>
-                    </div>
-
-					<?php
-					/**
-					 * Cart collaterals hook.
-					 *
-					 * @hooked woocommerce_cross_sell_display
-					 * @hooked woocommerce_cart_totals - 10
-					 */
-					if ( $settings['eael_woo_cart_components_cart_totals'] === 'yes' ) {
-						do_action( 'woocommerce_cart_collaterals', $settings );
-					}
-					?>
-                </div>
-            </div>
+	        <?php
+	        do_action( 'woocommerce_after_cart_table' );
+	        self::woo_cart_collaterals( $settings );
+	        ?>
         </form>
 		<?php
 	}
@@ -538,56 +494,62 @@ trait Woo_Cart_Helper {
                 </div>
             </div>
 
-			<?php do_action( 'woocommerce_after_cart_table' ); ?>
-
-            <div class="eael-cart-coupon-and-collaterals">
-                <div class="eael-cart-coupon-wrapper">
-					<?php if ( wc_coupons_enabled() && $settings['eael_woo_cart_components_cart_coupon'] === 'yes' ) {
-						$button_text = apply_filters( 'eael_woo_cart_coupon_button_text', $settings['eael_woo_cart_components_cart_coupon_button_text'] );
-						$placeholder = apply_filters( 'eael_woo_cart_coupon_placeholder', $settings['eael_woo_cart_components_cart_coupon_placeholder'] );
-						?>
-                        <div class="coupon">
-                            <label for="coupon_code" class="sr-only"><?php esc_html_e( 'Coupon:', 'essential-addons-for-elementor-lite' ); ?></label>
-                            <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php echo esc_attr( $placeholder ); ?>"/>
-                            <button type="submit" class="button" name="apply_coupon"
-                                    value="<?php echo esc_attr( $button_text ); ?>"><?php echo esc_html( $button_text ); ?></button>
-							<?php do_action( 'woocommerce_cart_coupon' ); ?>
-                        </div>
-					<?php } ?>
-                </div>
-
-				<?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
-
-                <div class="cart-collaterals">
-                    <div class="eael-cart-update-btn">
-						<?php if ( $settings['eael_woo_cart_components_cart_update_button'] === 'yes' ) {
-							$update_text = apply_filters( 'eael_woo_cart_update_button_text', $settings['eael_woo_cart_components_cart_update_button_text'] );
-							?>
-                            <button type="submit" class="button" name="update_cart" value="<?php echo esc_attr( $update_text ); ?>"><?php echo esc_html( $update_text ); ?></button>
-							<?php
-						}
-
-						do_action( 'woocommerce_cart_actions' );
-						wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' );
-						?>
-                    </div>
-
-					<?php
-					/**
-					 * Cart collaterals hook.
-					 *
-					 * @hooked woocommerce_cross_sell_display
-					 * @hooked woocommerce_cart_totals - 10
-					 */
-					if ( $settings['eael_woo_cart_components_cart_totals'] === 'yes' ) {
-						do_action( 'woocommerce_cart_collaterals', $settings );
-					}
-					?>
-                </div>
-            </div>
+	        <?php
+	        do_action( 'woocommerce_after_cart_table' );
+	        self::woo_cart_collaterals( $settings );
+	        ?>
         </form>
 		<?php
 	}
+
+    public static function woo_cart_collaterals ( $settings ) { ?>
+        <div class="eael-cart-coupon-and-collaterals">
+            <div class="eael-cart-coupon-wrapper">
+			    <?php if ( wc_coupons_enabled() && $settings['eael_woo_cart_components_cart_coupon'] === 'yes' ) {
+				    $button_text = apply_filters( 'eael_woo_cart_coupon_button_text', $settings['eael_woo_cart_components_cart_coupon_button_text'] );
+				    $placeholder = apply_filters( 'eael_woo_cart_coupon_placeholder', $settings['eael_woo_cart_components_cart_coupon_placeholder'] );
+				    ?>
+                    <div class="coupon">
+                        <label for="coupon_code" class="sr-only"><?php esc_html_e( 'Coupon:', 'essential-addons-for-elementor-lite' ); ?></label>
+                        <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php echo esc_attr( $placeholder ); ?>"/>
+                        <button type="submit" class="button" name="apply_coupon"
+                                value="<?php echo esc_attr( $button_text ); ?>"><?php echo esc_html( $button_text ); ?></button>
+					    <?php do_action( 'woocommerce_cart_coupon' ); ?>
+                    </div>
+			    <?php } ?>
+            </div>
+
+		    <?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
+
+            <div class="cart-collaterals">
+                <div class="eael-cart-update-btn">
+				    <?php if ( $settings['eael_woo_cart_components_cart_update_button'] === 'yes' ) {
+					    $update_text = apply_filters( 'eael_woo_cart_update_button_text', $settings['eael_woo_cart_components_cart_update_button_text'] );
+					    ?>
+                        <button type="submit" class="button" name="update_cart" value="<?php echo esc_attr( $update_text ); ?>"><?php echo esc_html( $update_text ); ?></button>
+					    <?php
+				    }
+
+				    do_action( 'woocommerce_cart_actions' );
+				    wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' );
+				    ?>
+                </div>
+
+			    <?php
+			    /**
+			     * Cart collaterals hook.
+			     *
+			     * @hooked woocommerce_cross_sell_display
+			     * @hooked woocommerce_cart_totals - 10
+			     */
+			    if ( $settings['eael_woo_cart_components_cart_totals'] === 'yes' ) {
+				    do_action( 'woocommerce_cart_collaterals', $settings );
+			    }
+			    ?>
+            </div>
+        </div>
+        <?php
+    }
 
 }
 
