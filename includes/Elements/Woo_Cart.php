@@ -299,6 +299,95 @@ class Woo_Cart extends Widget_Base {
 		$this->end_controls_section();
 
 		/**
+		 * Table Components
+		 */
+		$this->start_controls_section(
+			'eael_woo_cart_table_components_section',
+			[
+				'label' => esc_html__( 'Table Components', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_table_components_thumbnail',
+			[
+				'label'        => esc_html__( 'Thumbnail', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_table_components_name',
+			[
+				'label'        => esc_html__( 'Product Name', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'separator'    => 'before'
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_table_components_price',
+			[
+				'label'        => esc_html__( 'Name', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'separator'    => 'before'
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_table_components_qty',
+			[
+				'label'        => esc_html__( 'Quantity', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'separator'    => 'before'
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_table_components_subtotal',
+			[
+				'label'        => esc_html__( 'Subtotal', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'separator'    => 'before'
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_table_components_remove',
+			[
+				'label'        => esc_html__( 'Remove', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'separator'    => 'before'
+			]
+		);
+
+		$this->end_controls_section();
+
+		/**
 		 * Cart Components
 		 */
 		$this->start_controls_section(
