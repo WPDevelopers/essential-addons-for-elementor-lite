@@ -732,7 +732,7 @@ trait Controls
                     'options' => [
                         'img' => [
                             'title' => __('Image', 'essential-addons-for-elementor-lite'),
-                            'icon' => 'fa fa-picture-o',
+                            'icon' => 'eicon-image-bold',
                         ],
                         'icon' => [
                             'title' => __('Icon', 'essential-addons-for-elementor-lite'),
