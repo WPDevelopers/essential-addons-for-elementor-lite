@@ -263,7 +263,7 @@ class Interactive_Circle extends Widget_Base {
 		$this->add_control(
 			'eael_interactive_circle_event',
 			[
-				'label'       => esc_html__( 'Event', 'essential-addons-for-elementor-lite' ),
+				'label'       => esc_html__( 'Mouse Event', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'eael-interactive-circle-event-click',
 				'label_block' => false,
@@ -275,25 +275,17 @@ class Interactive_Circle extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_interactive_circle_animation_heading',
-			[
-				'label'  => esc_html__( 'Animation', 'essential-addons-for-elementor-lite' ),
-				'type'   => Controls_Manager::HEADING,
-				'before' => 'separator'
-			]
-		);
-		$this->add_control(
 			'eael_interactive_circle_animation',
 			[
-				'label'       => esc_html__( 'Style', 'essential-addons-for-elementor-lite' ),
+				'label'       => esc_html__( 'Animation', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'eael-interactive-circle-animation-0',
 				'label_block' => false,
 				'options'     => [
 					'eael-interactive-circle-animation-0' => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
-					'eael-interactive-circle-animation-1' => esc_html__( 'Animation 1', 'essential-addons-for-elementor-lite' ),
-					'eael-interactive-circle-animation-2' => esc_html__( 'Animation 2', 'essential-addons-for-elementor-lite' ),
-					'eael-interactive-circle-animation-3' => esc_html__( 'Animation 3', 'essential-addons-for-elementor-lite' ),
+					'eael-interactive-circle-animation-1' => esc_html__( 'Bounce In', 'essential-addons-for-elementor-lite' ),
+					'eael-interactive-circle-animation-2' => esc_html__( 'Rotate', 'essential-addons-for-elementor-lite' ),
+					'eael-interactive-circle-animation-3' => esc_html__( 'Spinning', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);
@@ -410,7 +402,7 @@ class Interactive_Circle extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_interactive_circle_tab_style_settings',
 			[
-				'label' => esc_html__( 'Button', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Item', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
