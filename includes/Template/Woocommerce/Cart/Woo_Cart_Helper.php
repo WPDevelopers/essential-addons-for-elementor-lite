@@ -352,23 +352,22 @@ trait Woo_Cart_Helper {
             <div class="shop_table cart woocommerce-cart-form__contents eael-woo-cart-table">
                 <div class="eael-woo-cart-thead">
                     <div class="eael-woo-cart-tr">
-						<?php $item_class = "elementor-repeater-item"; ?>
                         <div class="eael-woo-cart-tr-left">
-                            <div class="eael-woo-cart-td product-thumbnail <?php echo esc_attr( $item_class ); ?>">
+                            <div class="eael-woo-cart-td product-thumbnail">
 								<?php echo esc_html( "thumbnail" ); ?>
                             </div>
                         </div>
                         <div class="eael-woo-cart-tr-right">
-                            <div class="eael-woo-cart-td product-price <?php echo esc_attr( $item_class ); ?>">
+                            <div class="eael-woo-cart-td product-price">
 								<?php echo esc_html( "price" ); ?>
                             </div>
-                            <div class="eael-woo-cart-td product-quantity <?php echo esc_attr( $item_class ); ?>">
+                            <div class="eael-woo-cart-td product-quantity">
 								<?php echo esc_html( "quantity" ); ?>
                             </div>
-                            <div class="eael-woo-cart-td product-subtotal <?php echo esc_attr( $item_class ); ?>">
+                            <div class="eael-woo-cart-td product-subtotal">
 								<?php echo esc_html( "subtotal" ); ?>
                             </div>
-                            <div class="eael-woo-cart-td product-remove <?php echo esc_attr( $item_class ); ?>"></div>
+                            <div class="eael-woo-cart-td product-remove"></div>
                         </div>
                     </div>
                 </div>
