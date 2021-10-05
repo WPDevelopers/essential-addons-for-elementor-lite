@@ -1789,15 +1789,19 @@ class Event_Calendar extends Widget_Base
                     $end = date('Y-m-d H:i', strtotime($event["eael_event_end_date"])) . ":01";
                 }
 
+                $settings_eael_event_global_bg_color = $this->fetch_color_or_global_color($event, 'eael_event_bg_color');
+                $settings_eael_event_global_text_color = $this->fetch_color_or_global_color($event, 'eael_event_text_color');
+                $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($event, 'eael_event_border_color');
+
                 $data[] = [
                     'id' => $i,
                     'title' => !empty($event["eael_event_title"]) ? $event["eael_event_title"] : 'No Title',
                     'description' => $event["eael_event_description"],
                     'start' => $start,
                     'end' => $end,
-                    'borderColor' => !empty($event['eael_event_border_color']) ? $event['eael_event_border_color'] : '#10ecab',
-                    'textColor' => $event['eael_event_text_color'],
-                    'color' => $event['eael_event_bg_color'],
+                    'borderColor' => !empty($settings_eael_event_global_popup_ribbon_color) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
+                    'textColor' => $settings_eael_event_global_text_color,
+                    'color' => $settings_eael_event_global_bg_color,
                     'url' => ($settings['eael_event_details_link_hide'] !== 'yes') ? $event["eael_event_link"]["url"] : '',
                     'allDay' => $event['eael_event_all_day'],
                     'external' => $event['eael_event_link']['is_external'],
