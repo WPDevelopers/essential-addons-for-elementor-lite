@@ -367,6 +367,50 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_woo_cart_components_continue_shopping',
+			[
+				'label'        => esc_html__( 'Continue Shopping', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'separator'    => 'before'
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_components_continue_shopping_text',
+			[
+				'label'     => esc_html__( 'Button Text', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => esc_html__( 'Continue Shopping', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'eael_woo_cart_components_continue_shopping' => 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_components_continue_shopping_icon',
+			[
+				'label'                  => __( 'Button Icon', 'essential-addons-for-elementor-lite' ),
+				'type'                   => Controls_Manager::ICONS,
+				'default'                => [
+					'value'   => 'fas fa-chevron-left',
+					'library' => 'fa-solid',
+				],
+				'label_block'            => false,
+				'skin'                   => 'inline',
+				'exclude_inline_options' => [ 'svg' ],
+				'frontend_available'     => true,
+				'condition'              => [
+					'eael_woo_cart_components_continue_shopping' => 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
 			'eael_woo_cart_components_cart_totals',
 			[
 				'label'        => esc_html__( 'Cart Totals Section', 'essential-addons-for-elementor-lite' ),
