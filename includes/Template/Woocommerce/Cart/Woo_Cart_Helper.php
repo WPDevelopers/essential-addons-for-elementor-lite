@@ -519,9 +519,13 @@ trait Woo_Cart_Helper {
 			        <?php
 		        }
 
-		        if ( true ) {
-			        $continue_shopping_text = apply_filters( 'eael_woo_cart_continue_shopping_text', __( 'Continue Shopping', '' ) );
-			        printf( '<a class="eael-woo-cart-back-to-shop" href="%s">%s %s</a>', get_permalink( wc_get_page_id( 'shop' ) ), '<i aria-hidden="true" class="fas fa-chevron-left"></i>', esc_html( $continue_shopping_text ) );
+		        if ( $settings['eael_woo_cart_components_continue_shopping'] === 'yes' ) {
+			        $continue_shopping_text = apply_filters( 'eael_woo_cart_continue_shopping_text', $settings['eael_woo_cart_components_continue_shopping_text'] );
+			        printf( '<a class="eael-woo-cart-back-to-shop" href="%s">%s %s</a>',
+                        get_permalink( wc_get_page_id( 'shop' ) ),
+				        Icons_Manager::render_font_icon( $settings['eael_woo_cart_components_continue_shopping_icon'], [ 'aria-hidden' => 'true' ] ),
+                        esc_html( $continue_shopping_text )
+                    );
 		        }
 		        ?>
             </div>
