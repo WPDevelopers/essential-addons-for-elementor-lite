@@ -161,6 +161,13 @@
   -webkit-box-shadow: 0 8px 18px rgba(56, 51, 117, 0.1);
           box-shadow: 0 8px 18px rgba(56, 51, 117, 0.1);
 }
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop {
+  font-size: 16px;
+  font-weight: 500;
+  color: #202B46;
+  margin-top: 25px;
+  display: inline-block;
+}
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals {
   width: 50%;
   float: left;
