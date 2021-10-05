@@ -458,15 +458,13 @@ trait Woo_Cart_Helper {
 										do_action( 'woocommerce_after_cart_item_name', $cart_item, $cart_item_key );
 
 										// Product SKU
-										echo sprintf( '<p class="eael-woo-cart-sku">#%s</p>', $_product->get_sku() );
+										printf( '<p class="eael-woo-cart-sku">#%s</p>', $_product->get_sku() );
 
 										// Meta data.
 										echo wc_get_formatted_cart_item_data( $cart_item ); // PHPCS: XSS ok.
 
 										// Backorder notification.
-										if ( $_product->backorders_require_notification()
-										     && $_product->is_on_backorder( $cart_item['quantity'] )
-										) {
+										if ( $_product->backorders_require_notification() && $_product->is_on_backorder( $cart_item['quantity'] ) ) {
 											echo wp_kses_post( apply_filters( 'woocommerce_cart_item_backorder_notification',
 												'<p class="backorder_notification">'
 												. esc_html__( 'Available on backorder', 'essential-addons-for-elementor-lite' )
@@ -542,7 +540,7 @@ trait Woo_Cart_Helper {
 
 			<?php do_action( 'woocommerce_after_cart_table' ); ?>
 
-            <div style="display: none;" class="eael-cart-coupon-and-collaterals">
+            <div class="eael-cart-coupon-and-collaterals">
                 <div class="eael-cart-coupon-wrapper">
 					<?php if ( wc_coupons_enabled() && $settings['eael_woo_cart_components_cart_coupon'] === 'yes' ) {
 						$button_text = apply_filters( 'eael_woo_cart_coupon_button_text', $settings['eael_woo_cart_components_cart_coupon_button_text'] );
