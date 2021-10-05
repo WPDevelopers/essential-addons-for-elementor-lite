@@ -80,7 +80,7 @@ class Feature_List extends Widget_Base {
                     ],
                     'image' => [
                         'title' => esc_html__( 'Image', 'essential-addons-for-elementor-lite' ),
-                        'icon'  => 'fa fa-picture-o',
+                        'icon'  => 'eicon-image-bold',
                     ],
                 ],
                 'default'     => 'icon',

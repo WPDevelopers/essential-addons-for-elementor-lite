@@ -173,11 +173,11 @@ class Adv_Tabs extends Widget_Base
                     ],
                     'icon' => [
                         'title' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-gear',
+                        'icon' => 'eicon-icon-box',
                     ],
                     'image' => [
                         'title' => esc_html__('Image', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-picture-o',
+                        'icon' => 'eicon-image-bold',
                     ],
                 ],
                 'default' => 'icon',
