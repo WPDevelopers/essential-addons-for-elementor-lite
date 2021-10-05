@@ -175,6 +175,9 @@ class Woo_Cart extends Widget_Base {
 			'ea_section_woo_cart_table_builder',
 			[
 				'label' => esc_html__( 'Table Builder', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'ea_woo_cart_layout' => 'default'
+				]
 			]
 		);
 
