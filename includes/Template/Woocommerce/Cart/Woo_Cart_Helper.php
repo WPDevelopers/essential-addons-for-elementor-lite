@@ -505,18 +505,25 @@ trait Woo_Cart_Helper {
     public static function woo_cart_collaterals ( $settings ) { ?>
         <div class="eael-cart-coupon-and-collaterals">
             <div class="eael-cart-coupon-wrapper">
-			    <?php if ( wc_coupons_enabled() && $settings['eael_woo_cart_components_cart_coupon'] === 'yes' ) {
-				    $button_text = apply_filters( 'eael_woo_cart_coupon_button_text', $settings['eael_woo_cart_components_cart_coupon_button_text'] );
-				    $placeholder = apply_filters( 'eael_woo_cart_coupon_placeholder', $settings['eael_woo_cart_components_cart_coupon_placeholder'] );
-				    ?>
+		        <?php if ( wc_coupons_enabled() && $settings['eael_woo_cart_components_cart_coupon'] === 'yes' ) {
+			        $button_text = apply_filters( 'eael_woo_cart_coupon_button_text', $settings['eael_woo_cart_components_cart_coupon_button_text'] );
+			        $placeholder = apply_filters( 'eael_woo_cart_coupon_placeholder', $settings['eael_woo_cart_components_cart_coupon_placeholder'] );
+			        ?>
                     <div class="coupon">
                         <label for="coupon_code" class="sr-only"><?php esc_html_e( 'Coupon:', 'essential-addons-for-elementor-lite' ); ?></label>
                         <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php echo esc_attr( $placeholder ); ?>"/>
                         <button type="submit" class="button" name="apply_coupon"
                                 value="<?php echo esc_attr( $button_text ); ?>"><?php echo esc_html( $button_text ); ?></button>
-					    <?php do_action( 'woocommerce_cart_coupon' ); ?>
+				        <?php do_action( 'woocommerce_cart_coupon' ); ?>
                     </div>
-			    <?php } ?>
+			        <?php
+		        }
+
+		        if ( true ) {
+			        $continue_shopping_text = apply_filters( 'eael_woo_cart_continue_shopping_text', __( 'Continue Shopping', '' ) );
+			        printf( '<a class="eael-woo-cart-back-to-shop" href="%s">%s %s</a>', get_permalink( wc_get_page_id( 'shop' ) ), '<i aria-hidden="true" class="fas fa-chevron-left"></i>', esc_html( $continue_shopping_text ) );
+		        }
+		        ?>
             </div>
 
 		    <?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
