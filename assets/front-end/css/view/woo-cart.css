@@ -197,6 +197,7 @@
   border: none;
   font-size: 18px;
   color: #737373;
+  padding: 18px;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr {
   position: relative;
@@ -253,6 +254,10 @@
   background: -webkit-gradient(linear, left top, right top, color-stop(45%, #FAFAFA), color-stop(0%, #FFF));
   background: -o-linear-gradient(left, #FAFAFA 45%, #FFF 0%);
   background: linear-gradient(to right, #FAFAFA 45%, #FFF 0%);
+  padding: 0;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table {
+  margin-bottom: 13px;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr {
   display: -webkit-box;
@@ -360,6 +365,7 @@
   color: #737373;
   font-size: 16px;
   font-weight: 500;
+  padding: 45px 0 55px 0;
   text-transform: uppercase;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tbody .eael-woo-cart-tr .eael-woo-cart-tr-left {
@@ -387,6 +393,44 @@
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tbody .eael-woo-cart-tr:first-child .eael-woo-cart-tr-left {
   padding-top: 0;
 }
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tbody .eael-woo-cart-tr:last-child .eael-woo-cart-tr-left {
-  padding-bottom: 0;
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals button,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .button {
+  background: #312F4B;
+  font-size: 15px;
+  font-weight: 600;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper {
+  width: 45%;
+  padding-left: 50px;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon {
+  padding: 3px;
+  border-color: #CCD4E9;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon input {
+  font-size: 15px;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals {
+  width: 55%;
+  padding-right: 50px;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals {
+  padding-bottom: 30px;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table {
+  border-spacing: initial;
+  border-collapse: collapse;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr {
+  border-bottom: 1px solid #EFF2F7;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr:last-child {
+  border-bottom: none;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr::after {
+  content: none;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr th,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td {
+  padding: 20px 0;
 }

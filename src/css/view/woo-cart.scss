@@ -5,6 +5,7 @@ $qty-button: #97A0B6;
 $icon-color: #BEC6D7;
 $background: #f9fbff;
 $btn-bg: #6557FF;
+$btn2-bg: #312F4B;
 $transparent: transparent;
 $white: #fff;
 $thumb-bg-1: #E5F6FC;
@@ -233,6 +234,7 @@ $thumb-bg-1: #E5F6FC;
                         border: none;
                         font-size: 18px;
                         color: $text-color-3;
+                        padding: 18px;
                     }
 
                     tr {
@@ -305,9 +307,12 @@ $thumb-bg-1: #E5F6FC;
 
     &.eael-woo-style-2 {
         background: linear-gradient(to right, #FAFAFA 45%, #FFF 0%);
+        padding: 0;
 
         form.eael-woo-cart-form {
             .eael-woo-cart-table {
+                margin-bottom: 13px;
+
                 .eael-woo-cart-tr {
                     display: flex;
 
@@ -419,6 +424,7 @@ $thumb-bg-1: #E5F6FC;
                             color: $text-color-3;
                             font-size: 16px;
                             font-weight: 500;
+                            padding: 45px 0 55px 0;
                             text-transform: uppercase;
                         }
                     }
@@ -450,10 +456,58 @@ $thumb-bg-1: #E5F6FC;
                                 padding-top: 0;
                             }
                         }
+                    }
+                }
+            }
+        }
 
-                        &:last-child {
-                            .eael-woo-cart-tr-left {
-                                padding-bottom: 0;
+        .eael-cart-coupon-and-collaterals {
+            button,
+            .button {
+                background: $btn2-bg;
+                font-size: 15px;
+                font-weight: 600;
+            }
+
+            .eael-cart-coupon-wrapper {
+                width: 45%;
+                padding-left: 50px;
+
+                .coupon {
+                    padding: 3px;
+                    border-color: #CCD4E9;
+
+                    input {
+                        font-size: 15px;
+                    }
+                }
+            }
+
+            .cart-collaterals {
+                width: 55%;
+                padding-right: 50px;
+
+                .cart_totals {
+                    padding-bottom: 30px;
+
+                    table {
+                        border-spacing: initial;
+                        border-collapse: collapse;
+
+                        tr {
+                            border-bottom: 1px solid #EFF2F7;
+
+                            &:last-child {
+                                border-bottom: none;
+                            }
+
+                            &::after {
+                                content: none;
+                            }
+
+                            th,
+                            td {
+                                padding: 20px 0;
                             }
                         }
                     }
