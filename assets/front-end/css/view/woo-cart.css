@@ -364,9 +364,13 @@
   font-weight: 600;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td.product-remove {
+  color: #BEC6D7;
   -webkit-box-flex: 1;
       -ms-flex: 1 1 0%;
           flex: 1 1 0%;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td.product-remove a {
+  color: #BEC6D7;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-td {
   color: #202B46;

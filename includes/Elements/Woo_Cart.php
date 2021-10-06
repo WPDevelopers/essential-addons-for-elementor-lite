@@ -435,6 +435,25 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_woo_cart_table_components_remove_icon',
+			[
+				'label'                  => __( 'Remove Icon', 'essential-addons-for-elementor-lite' ),
+				'type'                   => Controls_Manager::ICONS,
+				'default'                => [
+					'value'   => 'fas fa-times',
+					'library' => 'fa-solid',
+				],
+				'label_block'            => false,
+				'skin'                   => 'inline',
+				'exclude_inline_options' => [ 'svg' ],
+				'frontend_available'     => true,
+				'condition'              => [
+					'eael_woo_cart_table_components_remove' => 'yes'
+				]
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**

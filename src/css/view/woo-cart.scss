@@ -420,7 +420,12 @@ $thumb-bg-1: #E5F6FC;
                             }
 
                             &.product-remove {
+                                color: $icon-color;
                                 flex: 1 1 0%;
+
+                                a {
+                                    color: $icon-color;
+                                }
                             }
                         }
                     }
