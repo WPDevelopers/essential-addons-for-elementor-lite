@@ -541,7 +541,7 @@ trait Woo_Cart_Helper {
 															esc_html__( 'Remove this item', 'essential-addons-for-elementor-lite' ),
 															esc_attr( $product_id ),
 															esc_attr( $_product->get_sku() ),
-															'x'
+															Icons_Manager::render_font_icon( $settings['eael_woo_cart_table_components_remove_icon'], [ 'aria-hidden' => 'true' ] )
 														),
 														$cart_item_key
 													);
