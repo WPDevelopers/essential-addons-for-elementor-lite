@@ -270,6 +270,7 @@
   background: #FAFAFA;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table {
+  min-height: 1px;
   margin-bottom: 13px;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr {
