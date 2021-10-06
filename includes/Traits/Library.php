@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
 
 trait Library
 {
+	public $a;
     /**
      *  Return array of registered elements.
      *
@@ -333,10 +334,26 @@ trait Library
 	/*
 	 * Check some other cookie for solve asset loading issue
 	 */
-	public function check_third_party_cookie_status() {
+	public function check_third_party_cookie_status($id='') {
 		global $Password_Protected;
 		if ( is_object( $Password_Protected ) && method_exists( $Password_Protected, 'cookie_name' ) && isset( $_COOKIE[ $Password_Protected->cookie_name() ] ) ) {
 			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * check_protected_content_status
+	 *
+	 * check EaeL Protected content cookie set or not
+	 *
+	 * @return bool
+	 */
+	public function check_protected_content_status(){
+		if(!empty($_POST['eael_protected_content_id'])){
+			if(!empty($_POST['protection_password_'.$_POST['eael_protected_content_id']])){
+				return true;
+			}
 		}
 		return false;
 	}
