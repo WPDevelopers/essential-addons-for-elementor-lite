@@ -321,9 +321,36 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_woo_cart_table_components_thumbnail_title',
+			[
+				'label'     => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => esc_html__( 'Thumbnail', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'eael_woo_cart_table_components_thumbnail' => 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
 			'eael_woo_cart_table_components_name',
 			[
-				'label'        => esc_html__( 'Product Name', 'essential-addons-for-elementor-lite' ),
+				'label'        => esc_html__( 'Name', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'condition' => [
+					'eael_woo_cart_table_components_thumbnail' => 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_table_components_price',
+			[
+				'label'        => esc_html__( 'Price', 'essential-addons-for-elementor-lite' ),
 				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
@@ -334,15 +361,14 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_woo_cart_table_components_price',
+			'eael_woo_cart_table_components_price_title',
 			[
-				'label'        => esc_html__( 'Name', 'essential-addons-for-elementor-lite' ),
-				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
-				'default'      => 'yes',
-				'separator'    => 'before'
+				'label'     => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => esc_html__( 'Price', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'eael_woo_cart_table_components_price' => 'yes'
+				]
 			]
 		);
 
@@ -360,6 +386,18 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_woo_cart_table_components_qty_title',
+			[
+				'label'     => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => esc_html__( 'Quantity', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'eael_woo_cart_table_components_qty' => 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
 			'eael_woo_cart_table_components_subtotal',
 			[
 				'label'        => esc_html__( 'Subtotal', 'essential-addons-for-elementor-lite' ),
@@ -369,6 +407,18 @@ class Woo_Cart extends Widget_Base {
 				'return_value' => 'yes',
 				'default'      => 'yes',
 				'separator'    => 'before'
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_table_components_subtotal_title',
+			[
+				'label'     => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => esc_html__( 'Subtotal', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'eael_woo_cart_table_components_subtotal' => 'yes'
+				]
 			]
 		);
 

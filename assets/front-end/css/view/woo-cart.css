@@ -258,10 +258,16 @@
   margin: 0;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 {
+  background: #fff;
+  padding: 0;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2.has-table-left-content.has-table-right-content {
   background: -webkit-gradient(linear, left top, right top, color-stop(45%, #FAFAFA), color-stop(0%, #FFF));
   background: -o-linear-gradient(left, #FAFAFA 45%, #FFF 0%);
   background: linear-gradient(to right, #FAFAFA 45%, #FFF 0%);
-  padding: 0;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2:not(.has-table-right-content) {
+  background: #FAFAFA;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table {
   margin-bottom: 13px;
@@ -441,4 +447,10 @@
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr th,
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td {
   padding: 20px 0;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2:not(.has-table-left-content) form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right {
+  width: 100%;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2:not(.has-table-right-content) form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-left {
+  width: 100%;
 }

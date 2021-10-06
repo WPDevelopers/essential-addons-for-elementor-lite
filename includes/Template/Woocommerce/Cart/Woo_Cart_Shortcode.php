@@ -48,8 +48,23 @@ if ( class_exists( '\WC_Shortcode_Cart' ) ) {
 			if ( WC()->cart->is_empty() ) {
 				wc_get_template( 'cart/cart-empty.php' );
 			} else {
+				$style_two_wrapper_class = '';
+				if ( $settings['ea_woo_cart_layout'] === 'style-2' ) {
+					if ( $settings['eael_woo_cart_table_components_thumbnail'] === 'yes' ) {
+						$style_two_wrapper_class .= ' has-table-left-content';
+					}
+
+                    if ( in_array( 'yes', [
+	                    $settings['eael_woo_cart_table_components_price'],
+	                    $settings['eael_woo_cart_table_components_qty'],
+	                    $settings['eael_woo_cart_table_components_subtotal'],
+	                    $settings['eael_woo_cart_table_components_remove']
+                    ] ) ) {
+	                    $style_two_wrapper_class .= ' has-table-right-content';
+                    }
+				}
 				?>
-                <div class="eael-woo-cart-wrapper <?php echo esc_attr( "eael-woo-{$settings['ea_woo_cart_layout']}" ); ?>">
+                <div class="eael-woo-cart-wrapper <?php echo esc_attr( "eael-woo-{$settings['ea_woo_cart_layout']} {$style_two_wrapper_class}" ); ?>">
 					<?php
 					do_action( 'woocommerce_before_cart' );
 
