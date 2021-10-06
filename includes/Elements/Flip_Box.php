@@ -182,14 +182,18 @@ class Flip_Box extends Widget_Base
 	    $this->add_control(
 		    'eael_flipbox_front_templates',
 		    [
-			    'label'                 => __( 'Choose Template', 'essential-addons-elementor' ),
-			    'type'                  => Controls_Manager::SELECT,
-			    'options'               => Helper::get_elementor_templates(),
-			    'condition'             => [
-				    'eael_flipbox_front_content_type'      => 'template',
+			    'label'       => __( 'Choose Template', 'essential-addons-elementor' ),
+			    'type'        => 'eael-select2',
+			    'source_name' => 'post_type',
+			    'source_type' => 'elementor_library',
+			    'label_block' => true,
+			    'condition'   => [
+				    'eael_flipbox_front_content_type' => 'template',
 			    ],
 		    ]
 	    );
+
+
 
 	    $this->add_control(
 		    'eael_flipbox_img_or_icon',
@@ -411,11 +415,13 @@ class Flip_Box extends Widget_Base
 	    $this->add_control(
 		    'eael_flipbox_back_templates',
 		    [
-			    'label'                 => __( 'Choose Template', 'essential-addons-elementor' ),
-			    'type'                  => Controls_Manager::SELECT,
-			    'options'               => Helper::get_elementor_templates(),
-			    'condition'             => [
-				    'eael_flipbox_back_content_type'      => 'template',
+			    'label'       => __( 'Choose Template', 'essential-addons-elementor' ),
+			    'type'        => 'eael-select2',
+			    'source_name' => 'post_type',
+			    'source_type' => 'elementor_library',
+			    'label_block' => true,
+			    'condition'   => [
+				    'eael_flipbox_back_content_type' => 'template',
 			    ],
 		    ]
 	    );
