@@ -462,7 +462,7 @@
   color: #1BC1FF;
 }
 @media screen and (max-width: 991px) {
-  .eael_advanced_menu_hamburger_disable_selected_menu_hide .eael-simple-menu-toggle-text {
+  .eael_simple_menu_hamburger_disable_selected_menu_hide .eael-simple-menu-toggle-text {
     display: none;
   }
 }
