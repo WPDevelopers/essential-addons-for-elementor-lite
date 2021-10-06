@@ -174,7 +174,7 @@ class Woo_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'ea_section_woo_cart_table_builder',
 			[
-				'label' => esc_html__( 'Table Builder', 'essential-addons-for-elementor-lite' ),
+				'label'     => esc_html__( 'Table Builder', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
 					'ea_woo_cart_layout' => 'default'
 				]
@@ -341,7 +341,7 @@ class Woo_Cart extends Widget_Base {
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => 'yes',
-				'condition' => [
+				'condition'    => [
 					'eael_woo_cart_table_components_thumbnail' => 'yes'
 				]
 			]
