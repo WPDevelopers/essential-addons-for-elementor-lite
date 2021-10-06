@@ -63,8 +63,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
             if ( $should_print_image_clickable ) {
 	            echo '</a>';
             }
-
-            printf('<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, $product->get_title());
+            printf('<%1$s class="woocommerce-loop-product__title"><a href="%3$s" class="woocommerce-LoopProduct-link woocommerce-loop-product__link woocommerce-loop-product__title_link woocommerce-loop-product__title_link_simple woocommerce-loop-product__title_link_reveal">%2$s</a></%1$s>', $title_tag, $product->get_title(), $product->get_permalink());
             if ( $should_print_rating ) {
                 echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) );
             }
@@ -111,7 +110,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
             </div>
         </div>
         <?php
-        printf('<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, $product->get_title());
+        printf('<%1$s class="woocommerce-loop-product__title"><a href="%3$s" class="woocommerce-LoopProduct-link woocommerce-loop-product__link woocommerce-loop-product__title_link woocommerce-loop-product__title_link_overlay">%2$s</a></%1$s>', $title_tag, $product->get_title(), $product->get_permalink());
 
         if ( $should_print_rating ) {
             echo wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() );
@@ -230,7 +229,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                     }
                     ?>
                     <div class="eael-product-title">
-                       <?php printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title()); ?>
+                       <?php printf('<%1$s><a href="%3$s" class="woocommerce-LoopProduct-link woocommerce-loop-product__link woocommerce-loop-product__title_link woocommerce-loop-product__title_link_simple woocommerce-loop-product__title_link_reveal">%2$s</a></%1$s>', $title_tag, $product->get_title(), $product->get_permalink()); ?>
                     </div>
                     <?php if(($grid_style_preset != 'eael-product-preset-7') && $should_print_price ){
                         echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
