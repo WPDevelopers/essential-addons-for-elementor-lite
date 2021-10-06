@@ -57,7 +57,7 @@ var SimpleMenu = function ($scope, $) {
         $('.eael-simple-menu-horizontal', $scope)
             .before('<span class="eael-simple-menu-toggle-text"></span>')
             .after(
-                '<button class="eael-simple-menu-toggle"><span class="eicon-menu-bar"></span></button>'
+                '<button class="eael-simple-menu-toggle"><span class="eicon-menu-bar"></span><span class="eael-simple-menu-toggle-text"></span></button>'
             )
         eael_menu_resize();
         
