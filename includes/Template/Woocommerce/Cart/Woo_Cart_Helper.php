@@ -226,12 +226,14 @@ trait Woo_Cart_Helper {
 				?>
                 <table class="shop_table shop_table_responsive">
 
-					<?php if ( $settings['eael_woo_cart_components_cart_totals_subtotal'] === 'yes' ) { ?>
+	                <?php if ( $settings['eael_woo_cart_components_cart_totals_subtotal'] === 'yes' ) {
+		                $subtotal_label = apply_filters( 'eael_woo_cart_totals_subtotal_label', esc_html__( 'Subtotal', 'essential-addons-for-elementor-lite' ) );
+		                ?>
                         <tr class="cart-subtotal">
-                            <th><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
-                            <td data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>"><?php wc_cart_totals_subtotal_html(); ?></td>
+                            <th><?php echo esc_html( $subtotal_label ); ?></th>
+                            <td data-title="<?php echo esc_attr( $subtotal_label ); ?>"><?php wc_cart_totals_subtotal_html(); ?></td>
                         </tr>
-					<?php } ?>
+	                <?php } ?>
 
 					<?php
 					if ( $settings['eael_woo_cart_components_cart_totals_coupon'] === 'yes' ) {
@@ -255,11 +257,13 @@ trait Woo_Cart_Helper {
 
 							<?php do_action( 'woocommerce_cart_totals_after_shipping' ); ?>
 
-						<?php elseif ( WC()->cart->needs_shipping() && 'yes' === get_option( 'woocommerce_enable_shipping_calc' ) ) : ?>
+						<?php elseif ( WC()->cart->needs_shipping() && 'yes' === get_option( 'woocommerce_enable_shipping_calc' ) ) :
+							$shipping_label = apply_filters( 'eael_woo_cart_totals_shipping_label', esc_html__( 'Shipping', 'essential-addons-for-elementor-lite' ) );
+                            ?>
 
                             <tr class="shipping">
-                                <th><?php esc_html_e( 'Shipping', 'woocommerce' ); ?></th>
-                                <td data-title="<?php esc_attr_e( 'Shipping', 'woocommerce' ); ?>"><?php woocommerce_shipping_calculator(); ?></td>
+                                <th><?php echo esc_html( $shipping_label ); ?></th>
+                                <td data-title="<?php echo esc_attr( $shipping_label ); ?>"><?php woocommerce_shipping_calculator(); ?></td>
                             </tr>
 
 						<?php
@@ -284,7 +288,7 @@ trait Woo_Cart_Helper {
 
 						if ( WC()->customer->is_customer_outside_base() && ! WC()->customer->has_calculated_shipping() ) {
 							/* translators: %s location. */
-							$estimated_text = sprintf( ' <small>' . esc_html__( '(estimated for %s)', 'woocommerce' ) . '</small>', WC()->countries->estimated_for_prefix( $taxable_address[0] ) . WC()->countries->countries[ $taxable_address[0] ] );
+							$estimated_text = sprintf( ' <small>' . esc_html__( '(estimated for %s)', 'essential-addons-for-elementor-lite' ) . '</small>', WC()->countries->estimated_for_prefix( $taxable_address[0] ) . WC()->countries->countries[ $taxable_address[0] ] );
 						}
 
 						if ( 'itemized' === get_option( 'woocommerce_tax_total_display' ) ) {
@@ -311,10 +315,11 @@ trait Woo_Cart_Helper {
 					do_action( 'woocommerce_cart_totals_before_order_total' );
 
 					if ( $settings['eael_woo_cart_components_cart_totals_total'] === 'yes' ) {
+						$total_label = apply_filters( 'eael_woo_cart_totals_total_label', esc_html__( 'Total', 'essential-addons-for-elementor-lite' ) );
 						?>
                         <tr class="order-total">
-                            <th><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
-                            <td data-title="<?php esc_attr_e( 'Total', 'woocommerce' ); ?>"><?php wc_cart_totals_order_total_html(); ?></td>
+                            <th><?php echo esc_html( $total_label ); ?></th>
+                            <td data-title="<?php echo esc_attr( $total_label ); ?>"><?php wc_cart_totals_order_total_html(); ?></td>
                         </tr>
 						<?php
 					}
@@ -572,19 +577,20 @@ trait Woo_Cart_Helper {
 	public static function woo_cart_collaterals( $settings ) { ?>
         <div class="eael-cart-coupon-and-collaterals">
             <div class="eael-cart-coupon-wrapper">
-				<?php if ( wc_coupons_enabled() && $settings['eael_woo_cart_components_cart_coupon'] === 'yes' ) {
-					$button_text = apply_filters( 'eael_woo_cart_coupon_button_text', $settings['eael_woo_cart_components_cart_coupon_button_text'] );
-					$placeholder = apply_filters( 'eael_woo_cart_coupon_placeholder', $settings['eael_woo_cart_components_cart_coupon_placeholder'] );
-					?>
+	            <?php if ( wc_coupons_enabled() && $settings['eael_woo_cart_components_cart_coupon'] === 'yes' ) {
+		            $button_text  = apply_filters( 'eael_woo_cart_coupon_button_text', $settings['eael_woo_cart_components_cart_coupon_button_text'] );
+		            $placeholder  = apply_filters( 'eael_woo_cart_coupon_placeholder', $settings['eael_woo_cart_components_cart_coupon_placeholder'] );
+		            $coupon_label = apply_filters( 'eael_woo_cart_coupon_label_text', esc_html__( 'Coupon:', 'essential-addons-for-elementor-lite' ) );
+		            ?>
                     <div class="coupon">
-                        <label for="coupon_code" class="sr-only"><?php esc_html_e( 'Coupon:', 'essential-addons-for-elementor-lite' ); ?></label>
+                        <label for="coupon_code" class="sr-only"><?php echo esc_html( $coupon_label ); ?></label>
                         <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php echo esc_attr( $placeholder ); ?>"/>
                         <button type="submit" class="button" name="apply_coupon"
                                 value="<?php echo esc_attr( $button_text ); ?>"><?php echo esc_html( $button_text ); ?></button>
-						<?php do_action( 'woocommerce_cart_coupon' ); ?>
+			            <?php do_action( 'woocommerce_cart_coupon' ); ?>
                     </div>
-					<?php
-				}
+		            <?php
+	            }
 
 				if ( $settings['eael_woo_cart_components_continue_shopping'] === 'yes' ) {
 					$continue_shopping_text = apply_filters( 'eael_woo_cart_continue_shopping_text', $settings['eael_woo_cart_components_continue_shopping_text'] );
