@@ -34,6 +34,34 @@ $thumb-bg-1: #E5F6FC;
                 }
             }
 
+            dl {
+                display: block;
+                margin-left: -5px;
+                font-size: 16px;
+                font-weight: 400;
+                color: $text-color-3;
+
+                dt {
+                    margin: 0 0 0 5px;;
+                    text-transform: capitalize;
+                    display: inline-block;
+
+                    &::before {
+                        content: "|";
+                        margin: 0 5px 0 -5px;
+                    }
+
+                    &:first-child::before {
+                        display: none;
+                    }
+                }
+
+                dd {
+                    margin: 0 0 0 5px;
+                    display: inline-block;
+                }
+            }
+
             .product-quantity {
                 .quantity {
                     display: flex;
@@ -353,34 +381,6 @@ $thumb-bg-1: #E5F6FC;
                                 font-size: 16px;
                                 font-weight: 400;
                                 color: $text-color-3;
-                            }
-
-                            dl {
-                                display: block;
-                                margin-left: -5px;
-                                font-size: 16px;
-                                font-weight: 400;
-                                color: $text-color-3;
-
-                                dt {
-                                    margin: 0 0 0 5px;;
-                                    text-transform: capitalize;
-                                    display: inline-block;
-
-                                    &::before {
-                                        content: "|";
-                                        margin: 0 5px 0 -5px;
-                                    }
-
-                                    &:first-child::before {
-                                        display: none;
-                                    }
-                                }
-
-                                dd {
-                                    margin: 0 0 0 5px;
-                                    display: inline-block;
-                                }
                             }
                         }
                     }

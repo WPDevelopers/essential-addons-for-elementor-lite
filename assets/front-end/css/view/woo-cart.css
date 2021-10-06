@@ -19,6 +19,29 @@
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td a {
   color: #202B46;
 }
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table dl {
+  display: block;
+  margin-left: -5px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #737373;
+}
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table dl dt {
+  margin: 0 0 0 5px;
+  text-transform: capitalize;
+  display: inline-block;
+}
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table dl dt::before {
+  content: "|";
+  margin: 0 5px 0 -5px;
+}
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table dl dt:first-child::before {
+  display: none;
+}
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table dl dd {
+  margin: 0 0 0 5px;
+  display: inline-block;
+}
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -301,29 +324,6 @@
   font-size: 16px;
   font-weight: 400;
   color: #737373;
-}
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-left > .product-name dl {
-  display: block;
-  margin-left: -5px;
-  font-size: 16px;
-  font-weight: 400;
-  color: #737373;
-}
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-left > .product-name dl dt {
-  margin: 0 0 0 5px;
-  text-transform: capitalize;
-  display: inline-block;
-}
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-left > .product-name dl dt::before {
-  content: "|";
-  margin: 0 5px 0 -5px;
-}
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-left > .product-name dl dt:first-child::before {
-  display: none;
-}
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-left > .product-name dl dd {
-  margin: 0 0 0 5px;
-  display: inline-block;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right {
   width: 55%;
