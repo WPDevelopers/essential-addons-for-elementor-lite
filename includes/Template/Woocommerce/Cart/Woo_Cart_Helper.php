@@ -16,8 +16,8 @@ trait Woo_Cart_Helper {
 		return self::$setting_data;
 	}
 
-	public static function ea_set_woo_cart_settings( $setting ) {
-		self::$setting_data = $setting;
+	public static function ea_set_woo_cart_settings( $settings ) {
+		self::$setting_data = $settings;
 	}
 
 	/**
