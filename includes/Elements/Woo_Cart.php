@@ -305,6 +305,9 @@ class Woo_Cart extends Widget_Base {
 			'eael_woo_cart_table_components_section',
 			[
 				'label' => esc_html__( 'Table Components', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'ea_woo_cart_layout' => 'style-2'
+				]
 			]
 		);
 
