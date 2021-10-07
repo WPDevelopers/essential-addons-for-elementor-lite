@@ -1,6 +1,5 @@
 .eael-woo-cart .eael-woo-cart-wrapper {
   background: #f9fbff;
-  padding: 100px 0;
 }
 .eael-woo-cart .eael-woo-cart-wrapper p {
   margin: 0;
@@ -215,6 +214,7 @@
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals {
   max-width: 365px;
   width: 100%;
+  padding-bottom: 10px;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table {
   border-collapse: separate;
@@ -282,7 +282,6 @@
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 {
   background: #fff;
-  padding: 0;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2.has-table-left-content.has-table-right-content {
   background: -webkit-gradient(linear, left top, right top, color-stop(45%, #FAFAFA), color-stop(0%, #FFF));
