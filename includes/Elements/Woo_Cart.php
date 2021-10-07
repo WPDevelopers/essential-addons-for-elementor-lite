@@ -260,6 +260,32 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$repeater->add_responsive_control(
+			'column_item_width',
+			[
+				'label'      => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ '%', 'px' ],
+				'range'      => [
+					'%'  => [
+						'min' => 0,
+						'max' => 100,
+					],
+					'px' => [
+						'min'  => 0,
+						'max'  => 1000,
+						'step' => 1,
+					],
+				],
+				'default'    => [
+					'unit' => '%',
+				],
+				'selectors'  => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table {{CURRENT_ITEM}}' => 'width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->add_control(
 			'table_items',
 			[
