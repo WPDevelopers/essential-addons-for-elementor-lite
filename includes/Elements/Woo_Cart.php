@@ -347,6 +347,31 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'eael_woo_cart_table_components_name_alignment',
+			[
+				'label'                => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'                 => Controls_Manager::CHOOSE,
+				'options'              => [
+					'left'   => [
+						'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'selectors_dictionary' => [
+					'left'   => 'text-align: left; flex-direction: row;',
+					'right'  => 'text-align: right; flex-direction: row-reverse; margin-left: -10px; margin-right: 10px;',
+				],
+				'selectors'            => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr-left' => '{{VALUE}}',
+				],
+			]
+		);
+
 		$this->add_control(
 			'eael_woo_cart_table_components_price',
 			[
@@ -369,6 +394,31 @@ class Woo_Cart extends Widget_Base {
 				'condition' => [
 					'eael_woo_cart_table_components_price' => 'yes'
 				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_woo_cart_table_components_price_alignment',
+			[
+				'label'                => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'                 => Controls_Manager::CHOOSE,
+				'options'              => [
+					'left'   => [
+						'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'selectors'            => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-price' => 'text-align: {{VALUE}};',
+				],
 			]
 		);
 
@@ -397,6 +447,37 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'eael_woo_cart_table_components_qty_alignment',
+			[
+				'label'                => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'                 => Controls_Manager::CHOOSE,
+				'options'              => [
+					'left'   => [
+						'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'selectors_dictionary' => [
+					'left'   => 'text-align: left; justify-content: flex-start;',
+					'center' => 'text-align: center; justify-content: center;',
+					'right'  => 'text-align: right; justify-content: flex-end;',
+				],
+				'selectors'            => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity' => '{{VALUE}};',
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity' => '{{VALUE}};',
+				],
+			]
+		);
+
 		$this->add_control(
 			'eael_woo_cart_table_components_subtotal',
 			[
@@ -419,6 +500,31 @@ class Woo_Cart extends Widget_Base {
 				'condition' => [
 					'eael_woo_cart_table_components_subtotal' => 'yes'
 				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_woo_cart_table_components_subtotal_alignment',
+			[
+				'label'                => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'                 => Controls_Manager::CHOOSE,
+				'options'              => [
+					'left'   => [
+						'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'selectors'            => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-subtotal' => 'text-align: {{VALUE}};',
+				],
 			]
 		);
 
@@ -451,6 +557,31 @@ class Woo_Cart extends Widget_Base {
 				'condition'              => [
 					'eael_woo_cart_table_components_remove' => 'yes'
 				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_woo_cart_table_components_remove_alignment',
+			[
+				'label'                => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'                 => Controls_Manager::CHOOSE,
+				'options'              => [
+					'left'   => [
+						'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'selectors'            => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-remove' => 'text-align: {{VALUE}};',
+				],
 			]
 		);
 

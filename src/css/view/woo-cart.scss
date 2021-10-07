@@ -366,14 +366,14 @@ $thumb-bg-1: #E5F6FC;
                         padding-left: 50px;
                         display: flex;
                         align-items: center;
+                        justify-content: space-between;
 
                         > .product-thumbnail {
                             width: 130px;
                         }
 
                         > .product-name {
-                            width: calc(100% - 130px);
-                            padding-left: 28px;
+                            width: calc(100% - 130px - 28px);
                             font-size: 20px;
                             font-weight: 500;
 
