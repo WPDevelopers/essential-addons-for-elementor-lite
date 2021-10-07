@@ -1,12 +1,13 @@
-var qtyIncDecButton = function () {
-        jQuery('.eael-woo-cart-table .product-quantity div.quantity')
+var qtyIncDecButton = function ($scope) {
+        $scope = $scope.type === 'updated_wc_div' ? document : $scope;
+        jQuery('.eael-woo-cart-table .product-quantity div.quantity', $scope)
             .prepend('<span class="eael-cart-qty-minus" data-action-type="minus">-</span>')
             .append('<span class="eael-cart-qty-plus" data-action-type="plus">+</span>');
     },
     WooCart = function ($scope, $) {
-        qtyIncDecButton();
+        qtyIncDecButton($scope);
 
-        $(document).on('click', 'div.quantity .eael-cart-qty-minus, div.quantity .eael-cart-qty-plus', function () {
+        $($scope, document).on('click', 'div.quantity .eael-cart-qty-minus, div.quantity .eael-cart-qty-plus', function () {
             var $this = $(this),
                 qtyInput = $this.siblings('input[type="number"]'),
                 qty = parseInt(qtyInput.val(), 10),
