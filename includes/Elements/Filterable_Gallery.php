@@ -2947,11 +2947,11 @@ class Filterable_Gallery extends Widget_Base
         if($check_popup_status){
             if ($settings['eael_section_fg_full_image_action'] === 'lightbox' && !$this->popup_status) {
                 $this->popup_status = true;
-                $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap" data-elementor-open-lightbox="no">';
+                $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap active" data-elementor-open-lightbox="no">';
             }
         }else {
             if ($settings['eael_section_fg_full_image_action'] === 'lightbox') {
-                $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap" data-elementor-open-lightbox="no">';
+                $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap active" data-elementor-open-lightbox="no">';
             }
         }
 
