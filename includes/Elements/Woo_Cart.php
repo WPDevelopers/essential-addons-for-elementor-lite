@@ -1005,7 +1005,11 @@ class Woo_Cart extends Widget_Base {
 		 * Tab Style General Style
 		 * -------------------------------------------
 		 */
-		$this->start_controls_section(
+		$this->woo_cart_style_controllers( $this );
+	}
+
+	public function woo_cart_style_controllers( $obj ) {
+		$obj->start_controls_section(
 			'ea_section_woo_cart_general_style',
 			[
 				'label' => esc_html__( 'General', 'essential-addons-for-elementor-lite' ),
@@ -1013,19 +1017,157 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$obj->add_control(
 			'ea_woo_cart_bg_color',
 			[
 				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-cart' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-woo-cart-wrapper' => 'background-color: {{VALUE}};',
+				],
+				'condition' => [
+					'ea_woo_cart_layout!' => 'style-2'
+				]
+			]
+		);
+
+		$obj->end_controls_section();
+
+		$obj->start_controls_section(
+			'ea_section_woo_cart_table_style',
+			[
+				'label' => esc_html__( 'Table', 'essential-addons-for-elementor-lite' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$obj->add_control(
+			'ea_section_woo_cart_table_style_thead_heading',
+			[
+				'label' => __( 'Table Head', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+			]
+		);
+
+		$obj->add_control(
+			'eael_woo_cart_table_style_thead_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table thead th' => 'color: {{VALUE}};',
 				],
 			]
 		);
 
-		$this->end_controls_section();
+		$obj->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'eael_woo_cart_table_style_thead_typography',
+				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table thead th',
+			]
+		);
 
+		$obj->add_control(
+			'ea_section_woo_cart_table_style_tbody_heading',
+			[
+				'label' => __( 'Table Body', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'           => 'ea_woo_cart_table_row_bg',
+				'fields_options' => [
+					'background' => [
+						'label' => esc_html__( 'Table Row Background', 'essential-addons-for-elementor-lite' ),
+					],
+				],
+				'types'          => [ 'classic', 'gradient' ],
+				'selector'       => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr::after',
+				'condition'      => [
+					'ea_woo_cart_layout' => 'default'
+				]
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'ea_woo_cart_table_row_box_shadow',
+				'label'    => __( 'Table Row Box Shadow', 'essential-addons-for-elementor-lite' ),
+				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr::after',
+			]
+		);
+
+		$obj->add_control(
+			'eael_woo_cart_table_style_name_color',
+			[
+				'label'     => esc_html__( 'Primary Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td.product-remove a:hover,
+					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td.product-name,
+					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td.product-name a,
+					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td.product-subtotal,
+					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td.product-quantity .quantity input[type=number]' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$obj->add_control(
+			'eael_woo_cart_table_style_name_secondary_color',
+			[
+				'label'     => esc_html__( 'Secondary Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td.product-price,
+					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td.product-quantity .quantity .eael-cart-qty-minus,
+					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td.product-quantity .quantity .eael-cart-qty-plus,
+					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td.product-name dl,
+					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td.product-remove a' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'eael_woo_cart_table_style_name_typography',
+				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td,
+					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td a,
+					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td.product-quantity .quantity .eael-cart-qty-minus,
+					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td.product-quantity .quantity .eael-cart-qty-plus,
+					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td.product-quantity .quantity input[type=number]',
+			]
+		);
+
+		$obj->add_responsive_control(
+			'eael_woo_cart_table_border_spacing',
+			[
+				'label'      => esc_html__( 'Row Space', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+				],
+				'selectors'  => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table' => 'border-spacing: 0 {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$obj->end_controls_section();
 	}
 
 	public function add_cart_body_class( $classes ) {
