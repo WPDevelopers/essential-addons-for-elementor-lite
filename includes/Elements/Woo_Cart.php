@@ -261,9 +261,49 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$repeater->add_responsive_control(
+			'column_item_thumbnail_width',
+			[
+				'label'      => esc_html__( 'Thumbnail Width', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 300,
+						'step' => 1,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+				],
+				'selectors'  => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table {{CURRENT_ITEM}} img' => 'width: {{SIZE}}{{UNIT}};',
+				],
+				'condition'  => [
+					'column_type' => 'thumbnail'
+				]
+			]
+		);
+
+		$repeater->add_responsive_control(
+			'column_item_thumbnail_border_radius',
+			[
+				'label'      => esc_html__( 'Thumbnail Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table {{CURRENT_ITEM}} img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'column_type' => 'thumbnail'
+				],
+			]
+		);
+
+		$repeater->add_responsive_control(
 			'column_item_width',
 			[
-				'label'      => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+				'label'      => esc_html__( 'Column Width', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ '%', 'px' ],
 				'range'      => [
@@ -1023,7 +1063,8 @@ class Woo_Cart extends Widget_Base {
 				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-woo-cart-wrapper' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-woo-cart-wrapper,
+					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity input[type=number]' => 'background-color: {{VALUE}};',
 				],
 				'condition' => [
 					'ea_woo_cart_layout!' => 'style-2'
@@ -1103,6 +1144,18 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$obj->add_responsive_control(
+			'ea_woo_cart_table_row_border_radius',
+			[
+				'label'      => esc_html__( 'Table Row Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr::after' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
 		$obj->add_control(
 			'eael_woo_cart_table_style_name_color',
 			[
@@ -1137,7 +1190,7 @@ class Woo_Cart extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'eael_woo_cart_table_style_name_typography',
-				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td,
+				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td:not(.product-thumbnail),
 					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td a,
 					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td.product-quantity .quantity .eael-cart-qty-minus,
 					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td.product-quantity .quantity .eael-cart-qty-plus,
