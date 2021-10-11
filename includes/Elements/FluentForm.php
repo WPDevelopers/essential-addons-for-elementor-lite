@@ -27,7 +27,7 @@ class FluentForm extends Widget_Base
 
     public function get_title()
     {
-        return __('Fluent Form', 'essential-addons-for-elementor-lite');
+        return __('Fluent Forms', 'essential-addons-for-elementor-lite');
     }
 
     public function get_categories()
