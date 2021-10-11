@@ -269,7 +269,6 @@ $thumb-bg-1: #E5F6FC;
                         background: $transparent;
                         border: none;
                         font-size: 18px;
-                        color: $text-color-3;
                         padding: 18px;
                     }
 
@@ -296,9 +295,14 @@ $thumb-bg-1: #E5F6FC;
                             text-align: left;
                         }
 
+                        &.shipping td {
+                            color: $text-color-3;
+                        }
+
                         td {
                             border-spacing: 0;
                             text-align: right;
+                            color: $text-color-1;
 
                             a {
                                 color: $text-color-1;
