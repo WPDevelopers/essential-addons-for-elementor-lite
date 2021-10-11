@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 4.9.3
+Stable tag: 4.9.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -74,7 +74,7 @@ We have designed 45 of the most useful widgets to enhance your Elementor Page Bu
 27. [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/) - Add beautiful accordions in your pages, posts, and anywhere. Supports nested accordions.
 28. [Progress Bar](https://essential-addons.com/elementor/progress-bar/) - Display progress bars with 4+ different styles
 29. [Feature List](https://essential-addons.com/elementor/feature-list/) - Display feature lists with custom icons and styles
-30. [Fluent Form](https://essential-addons.com/elementor/fluentform/) - Design your Fluent Form container, fields and anything you want
+30. [Fluent Forms](https://essential-addons.com/elementor/fluentform/) - Design your Fluent Forms container, fields and anything you want
 31. [Facebook Feed](https://essential-addons.com/elementor/facebook-feed/) - Display Facebook post feed from your page
 32. [Sticky Video](https://essential-addons.com/elementor/sticky-video/) - Create cool video from YouTube, Vimeo or self-hosted that will be sticky on scroll while playing.
 33. [BetterDocs Category Grid](https://essential-addons.com/elementor/betterdocs-category-grid/) - Cretae custom Knowledge Base layout with BetterDocs Category List.
@@ -224,6 +224,19 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.9.4 - 11/10/2021 =
+
+- Improved: Asset Generator method for better performance
+- Fixed: EA Product Grid | Title not being clickable for certain styles
+- Fixed: EA Product grid | Broken layout in responsive devices
+- Fixed: EA Gravity Forms | Form label styling not properly
+- Fixed: EA Event Calendar | Events colors not changing with global color
+- Fixed: EA Call to Action | Button URL Custom Attributes not working correctly
+- Fixed: Missing Control icons inside Elemenetor panel
+- Fixed: EA Simple Menu | Hamburger menu center option not working
+- Fixed: EA Simple Menu | Active Page being shown on Responsive Devices despite being disabled
+- Few minor bug fix & improvements
 
 = 4.9.3 - 29/09/2021 =
 
