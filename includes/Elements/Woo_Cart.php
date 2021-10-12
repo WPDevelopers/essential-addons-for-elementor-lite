@@ -1041,14 +1041,15 @@ class Woo_Cart extends Widget_Base {
 		$this->end_controls_section();
 
 		/**
-		 * -------------------------------------------
-		 * Tab Style General Style
-		 * -------------------------------------------
+		 * Style Tab
 		 */
 		$this->woo_cart_style_controllers( $this );
 	}
 
 	public function woo_cart_style_controllers( $obj ) {
+		/**
+		 * General Style
+		 */
 		$obj->start_controls_section(
 			'ea_section_woo_cart_general_style',
 			[
@@ -1074,6 +1075,9 @@ class Woo_Cart extends Widget_Base {
 
 		$obj->end_controls_section();
 
+		/**
+		 * Table Style
+		 */
 		$obj->start_controls_section(
 			'ea_section_woo_cart_table_style',
 			[
@@ -1222,6 +1226,9 @@ class Woo_Cart extends Widget_Base {
 
 		$obj->end_controls_section();
 
+		/**
+		 * Cart Totals Style
+		 */
 		$obj->start_controls_section(
 			'ea_section_woo_cart_totals_style',
 			[
@@ -1361,6 +1368,9 @@ class Woo_Cart extends Widget_Base {
 
 		$obj->end_controls_section();
 
+		/**
+		 * Button Style
+		 */
 		$obj->start_controls_section(
 			'ea_section_woo_cart_button_style',
 			[
@@ -1369,7 +1379,6 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
-		// Button Styles
 		$obj->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
