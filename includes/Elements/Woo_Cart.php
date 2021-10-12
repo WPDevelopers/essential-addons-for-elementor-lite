@@ -1100,7 +1100,8 @@ class Woo_Cart extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table thead th' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table thead th,
+					{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-thead .eael-woo-cart-tr .eael-woo-cart-td' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1109,7 +1110,8 @@ class Woo_Cart extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'eael_woo_cart_table_style_thead_typography',
-				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table thead th',
+				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table thead th,
+				{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-thead .eael-woo-cart-tr .eael-woo-cart-td',
 			]
 		);
 
@@ -1145,6 +1147,9 @@ class Woo_Cart extends Widget_Base {
 				'name'     => 'ea_woo_cart_table_row_box_shadow',
 				'label'    => __( 'Table Row Box Shadow', 'essential-addons-for-elementor-lite' ),
 				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr::after',
+				'condition'      => [
+					'ea_woo_cart_layout' => 'default'
+				]
 			]
 		);
 
@@ -1157,6 +1162,9 @@ class Woo_Cart extends Widget_Base {
 				'selectors'  => [
 					'{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr::after' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
+				'condition'      => [
+					'ea_woo_cart_layout' => 'default'
+				]
 			]
 		);
 
