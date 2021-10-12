@@ -1090,7 +1090,7 @@ class Woo_Cart extends Widget_Base {
 			'ea_section_woo_cart_table_style_thead_heading',
 			[
 				'label' => __( 'Table Head', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::HEADING,
+				'type'  => Controls_Manager::HEADING,
 			]
 		);
 
@@ -1108,7 +1108,7 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name' => 'eael_woo_cart_table_style_thead_typography',
+				'name'     => 'eael_woo_cart_table_style_thead_typography',
 				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table thead th',
 			]
 		);
@@ -1116,8 +1116,8 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_control(
 			'ea_section_woo_cart_table_style_tbody_heading',
 			[
-				'label' => __( 'Table Body', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::HEADING,
+				'label'     => __( 'Table Body', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
 		);
@@ -1193,7 +1193,7 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name' => 'eael_woo_cart_table_style_name_typography',
+				'name'     => 'eael_woo_cart_table_style_name_typography',
 				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td:not(.product-thumbnail),
 					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td a,
 					{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td.product-quantity .quantity .eael-cart-qty-minus,
@@ -1232,8 +1232,11 @@ class Woo_Cart extends Widget_Base {
 		$obj->start_controls_section(
 			'ea_section_woo_cart_totals_style',
 			[
-				'label' => esc_html__( 'Cart Totals', 'essential-addons-for-elementor-lite' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
+				'label'     => esc_html__( 'Cart Totals', 'essential-addons-for-elementor-lite' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'eael_woo_cart_components_cart_totals' => 'yes'
+				]
 			]
 		);
 
@@ -1278,8 +1281,8 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_control(
 			'ea_section_woo_cart_totals_label_heading',
 			[
-				'label' => __( 'Label Part', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::HEADING,
+				'label'     => __( 'Label Part', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
 		);
@@ -1298,7 +1301,7 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name' => 'ea_woo_cart_totals_label_typography',
+				'name'     => 'ea_woo_cart_totals_label_typography',
 				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr th',
 			]
 		);
@@ -1306,8 +1309,8 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_control(
 			'ea_section_woo_cart_totals_body_heading',
 			[
-				'label' => __( 'Body Part', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::HEADING,
+				'label'     => __( 'Body Part', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
 		);
@@ -1338,7 +1341,7 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name' => 'ea_woo_cart_totals_body_typography',
+				'name'     => 'ea_woo_cart_totals_body_typography',
 				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td,
 				{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td strong',
 			]
@@ -1363,6 +1366,61 @@ class Woo_Cart extends Widget_Base {
 				'selectors'  => [
 					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table' => 'border-spacing: 0 {{SIZE}}{{UNIT}};',
 				],
+			]
+		);
+
+		$obj->end_controls_section();
+
+		/**
+		 * Coupon Form Style
+		 */
+		$obj->start_controls_section(
+			'ea_section_woo_cart_coupon_style',
+			[
+				'label'     => esc_html__( 'Coupon Form', 'essential-addons-for-elementor-lite' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'eael_woo_cart_components_cart_coupon' => 'yes'
+				]
+			]
+		);
+
+		$obj->add_control(
+			'ea_section_woo_cart_coupon_input_color',
+			[
+				'label'     => esc_html__( 'Input Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon input'              => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon input::placeholder' => 'color: {{VALUE}}; opacity: .6;',
+				],
+			]
+		);
+
+		$obj->add_control(
+			'ea_section_woo_cart_coupon_placeholder_color',
+			[
+				'label'     => esc_html__( 'Placeholder Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon input::placeholder' => 'color: {{VALUE}}; opacity: 1;',
+				],
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'ea_section_woo_cart_coupon_typo',
+				'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
+				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon input',
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Border::get_type(), [
+				'name'     => 'ea_section_woo_cart_coupon_border',
+				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon',
 			]
 		);
 
