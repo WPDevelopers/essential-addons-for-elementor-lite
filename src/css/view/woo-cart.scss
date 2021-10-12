@@ -186,7 +186,12 @@ $thumb-bg-1: #E5F6FC;
     }
 
     .eael-cart-coupon-and-collaterals {
-        overflow: hidden;
+        &::before,
+        &::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
 
         button,
         .button {
