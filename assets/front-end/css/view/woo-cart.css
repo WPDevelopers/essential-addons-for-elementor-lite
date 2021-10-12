@@ -143,8 +143,10 @@
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-subtotal {
   font-weight: 500;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals {
-  overflow: hidden;
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals::before, .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals::after {
+  content: "";
+  display: block;
+  clear: both;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button,
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button {
