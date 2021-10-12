@@ -1260,9 +1260,12 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
-				'name'     => 'ea_woo_cart_totals_row_box_shadow',
-				'label'    => __( 'Table Row Box Shadow', 'essential-addons-for-elementor-lite' ),
-				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr::after',
+				'name'      => 'ea_woo_cart_totals_row_box_shadow',
+				'label'     => __( 'Table Row Box Shadow', 'essential-addons-for-elementor-lite' ),
+				'selector'  => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr::after',
+				'condition' => [
+					'ea_woo_cart_layout' => 'default'
+				]
 			]
 		);
 
@@ -1275,6 +1278,23 @@ class Woo_Cart extends Widget_Base {
 				'selectors'  => [
 					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr::after' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
+				'condition'  => [
+					'ea_woo_cart_layout' => 'default'
+				]
+			]
+		);
+
+		$obj->add_control(
+			'ea_woo_cart_totals_row_border_color',
+			[
+				'label'     => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr' => 'border-color: {{VALUE}};',
+				],
+				'condition'  => [
+					'ea_woo_cart_layout' => 'style-2'
+				]
 			]
 		);
 
@@ -1366,6 +1386,26 @@ class Woo_Cart extends Widget_Base {
 				'selectors'  => [
 					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table' => 'border-spacing: 0 {{SIZE}}{{UNIT}};',
 				],
+				'condition'  => [
+					'ea_woo_cart_layout' => 'default'
+				]
+			]
+		);
+
+		$obj->add_responsive_control(
+			'ea_woo_cart_totals_cell_padding',
+			[
+				'label'      => __( 'Table Cell Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'allowed_dimensions' => 'vertical',
+				'selectors'  => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr th,
+					{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'ea_woo_cart_layout' => 'style-2'
+				]
 			]
 		);
 
