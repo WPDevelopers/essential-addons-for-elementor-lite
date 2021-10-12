@@ -1427,6 +1427,96 @@ class Woo_Cart extends Widget_Base {
 		$obj->end_controls_section();
 
 		/**
+		 * Continue Shopping Style
+		 */
+		$obj->start_controls_section(
+			'ea_section_woo_cart_continue_shopping_style',
+			[
+				'label'     => esc_html__( 'Continue Shopping', 'essential-addons-for-elementor-lite' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'eael_woo_cart_components_continue_shopping' => 'yes'
+				]
+			]
+		);
+
+		$obj->add_control(
+			'ea_section_woo_cart_continue_shopping_text_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$obj->add_control(
+			'ea_section_woo_cart_continue_shopping_icon_color',
+			[
+				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop i' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'ea_section_woo_cart_continue_shopping_typo',
+				'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
+				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop',
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Border::get_type(), [
+				'name'     => 'ea_section_woo_cart_continue_shopping_border',
+				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop',
+			]
+		);
+
+		$obj->add_responsive_control(
+			'ea_section_woo_cart_continue_shopping_border_radius',
+			[
+				'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$obj->add_responsive_control(
+			'ea_section_woo_cart_continue_shopping_padding',
+			[
+				'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$obj->add_responsive_control(
+			'ea_section_woo_cart_continue_shopping_margin',
+			[
+				'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$obj->end_controls_section();
+
+		/**
 		 * Button Style
 		 */
 		$obj->start_controls_section(
