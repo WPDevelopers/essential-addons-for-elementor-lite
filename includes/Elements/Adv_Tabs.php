@@ -173,11 +173,11 @@ class Adv_Tabs extends Widget_Base
                     ],
                     'icon' => [
                         'title' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-gear',
+                        'icon' => 'eicon-icon-box',
                     ],
                     'image' => [
                         'title' => esc_html__('Image', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-picture-o',
+                        'icon' => 'eicon-image-bold',
                     ],
                 ],
                 'default' => 'icon',
@@ -242,8 +242,10 @@ class Adv_Tabs extends Widget_Base
             'eael_primary_templates',
             [
                 'label' => __('Choose Template', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'options' => Helper::get_elementor_templates(),
+                'type' => 'eael-select2',
+                'source_name' => 'post_type',
+                'source_type' => 'elementor_library',
+                'label_block' => true,
                 'condition' => [
                     'eael_adv_tabs_text_type' => 'template',
                 ],

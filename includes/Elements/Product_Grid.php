@@ -693,15 +693,15 @@ class Product_Grid extends Widget_Base
                 'options' => [
                     'left' => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'default' => 'center',
@@ -1011,15 +1011,15 @@ class Product_Grid extends Widget_Base
                 'options' => [
                     'left' => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'default' => 'center',
@@ -1709,11 +1709,11 @@ class Product_Grid extends Widget_Base
                 'options' => [
                     'left' => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'right' => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'condition' => [
@@ -2194,15 +2194,15 @@ class Product_Grid extends Widget_Base
                 'options' => [
                     'left' => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'default' => 'center',

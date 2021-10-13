@@ -27,6 +27,10 @@
         @media screen and (min-width: 992px) {
             display: none;
         }
+
+        .eael-simple-menu-toggle-text {
+            display: none;
+        }
     }
 
     .eael-simple-menu-toggle-text {
@@ -605,7 +609,7 @@
     }
 }
 
-.eael_advanced_menu_hamburger_disable_selected_menu_hide{
+.eael_simple_menu_hamburger_disable_selected_menu_hide{
   .eael-simple-menu-toggle-text {
     @media screen and (max-width: 991px) {
         display: none;
@@ -613,24 +617,34 @@
   }
 }
 
-.eael-simple-menu-hamburger-align-left{
-  .eael-simple-menu-toggle {
-    @media screen and (max-width: 991px) {
-        top: 0;
-        left: 0;
+.eael-simple-menu-hamburger-align-left {
+    .eael-simple-menu-toggle-text {
+        display: none;
     }
-  }
+
+    .eael-simple-menu-toggle {
+        @media screen and (max-width: 991px) {
+            top: 0;
+            left: 0;
+            right: auto;
+        }
+
+        .eael-simple-menu-toggle-text {
+            display: block;
+            left: calc(100% + 20px);
+            white-space: nowrap;
+        }
+    }
 }
 
-.eael-simple-menu-hamburger-align-center{
-  .eael-simple-menu-toggle {
-    @media screen and (max-width: 991px) {
-      left: 0; 
-      right: 0; 
-      margin-left: auto; 
-      margin-right: auto; 
+.eael-simple-menu-hamburger-align-center {
+    .eael-simple-menu-toggle {
+        @media screen and (max-width: 991px) {
+            left: 50%;
+            right: auto;
+            transform: translateX(-50%);
+        }
     }
-  }
 }
 
 

@@ -765,15 +765,15 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'options' => [
                         'flex-start' => [
                             'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                            'icon' => 'fa fa-align-left',
+                            'icon' => 'eicon-text-align-left',
                         ],
                         'center' => [
                             'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                            'icon' => 'fa fa-align-center',
+                            'icon' => 'eicon-text-align-center',
                         ],
                         'flex-end' => [
                             'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                            'icon' => 'fa fa-align-right',
+                            'icon' => 'eicon-text-align-right',
                         ],
                     ],
                     'selectors' => [
