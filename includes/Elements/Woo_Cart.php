@@ -1481,6 +1481,18 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$obj->add_responsive_control(
+			'ea_section_woo_cart_coupon_border_radius',
+			[
+				'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
 		$obj->end_controls_section();
 
 		/**
