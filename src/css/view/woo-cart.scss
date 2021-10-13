@@ -382,13 +382,16 @@ $thumb-bg-1: #E5F6FC;
 
                         > .product-name {
                             width: calc(100% - 130px - 28px);
-                            font-size: 20px;
                             font-weight: 500;
 
                             .eael-woo-cart-sku {
-                                font-size: 16px;
+                                font-size: 89%;
                                 font-weight: 400;
                                 color: $text-color-3;
+                            }
+
+                            dl {
+                                font-size: 89%;
                             }
                         }
                     }
@@ -417,6 +420,12 @@ $thumb-bg-1: #E5F6FC;
 
                             &.product-quantity {
                                 flex: 1 1 35%;
+
+                                .eael-cart-qty-minus,
+                                .eael-cart-qty-plus,
+                                input[type=number] {
+                                    font-size: 100%;
+                                }
 
                                 input[type=number] {
                                     background: transparent;
