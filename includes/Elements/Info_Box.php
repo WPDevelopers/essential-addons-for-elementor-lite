@@ -101,8 +101,7 @@ class Info_Box extends Widget_Base
                     ],
                     'number' => [
                         'title' => esc_html__('Number', 'essential-addons-for-elementor-lite'),
-                        //'icon' => 'fa fa-sort-numeric-desc', //not showing/supported
-                        'icon' => 'fas fa-sort-numeric-up-alt', //fa version 5
+                        'icon' => 'eicon-number-field',
                     ],
                     'icon' => [
                         'title' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
@@ -110,8 +109,7 @@ class Info_Box extends Widget_Base
                     ],
                     'img' => [
                         'title' => esc_html__('Image', 'essential-addons-for-elementor-lite'),
-                        //'icon' => 'fa fa-picture-o',
-                        'icon' => 'far fa-image',
+                        'icon' => 'eicon-image-bold',
                     ],
                 ],
                 'default' => 'icon',
@@ -304,15 +302,15 @@ class Info_Box extends Widget_Base
                 'options' => [
                     'left' => [
                         'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
                         'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'default' => 'center',
