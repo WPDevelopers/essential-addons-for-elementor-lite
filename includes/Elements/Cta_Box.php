@@ -197,7 +197,7 @@ class Cta_Box extends Widget_Base
                 'label' => esc_html__('Title', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
-                'default' => esc_html__('The Ultimate Addons For Elementor', 'essential-addons-for-elementor-lite'),
+                'default' => esc_html__('Sample Call to Action Heading', 'essential-addons-for-elementor-lite'),
                 'dynamic' => ['active' => true],
             ]
         );
@@ -267,7 +267,7 @@ class Cta_Box extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'dynamic' => ['active' => true],
                 'label_block' => true,
-                'default' => esc_html__('Button Text', 'essential-addons-for-elementor-lite'),
+                'default' => esc_html__('Click Here', 'essential-addons-for-elementor-lite'),
             ]
         );
 
@@ -304,7 +304,7 @@ class Cta_Box extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'dynamic' => ['active' => true],
                 'label_block' => true,
-                'default' => esc_html__('Button Text Two', 'essential-addons-for-elementor-lite'),
+                'default' => esc_html__('Click Now', 'essential-addons-for-elementor-lite'),
                 'condition' => array(
                     'eael_cta_secondary_btn_is_show' => 'yes'
                 )
