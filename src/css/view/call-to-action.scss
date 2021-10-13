@@ -266,3 +266,69 @@
         line-height: 30px;
     }
 }
+
+
+.eael-call-to-action.cta-preset-2 {
+    padding: 77px 77px 100px 85px;
+    border-radius: 5px;
+    box-shadow: 0 25px 35px 0 rgb(0 9 78 / 18%);
+
+    .sub-title {
+        font-family: "Poppins",Sans-serif;
+        color: #fff;
+        font-size: 25px;
+        font-weight: 400;
+        line-height: 1.2em;
+    }
+    .title {
+        color: #FFF;
+        font-family: "Poppins",Sans-serif;
+        font-size: 35px;
+        font-weight: 500;
+        line-height: 1.2em;
+    }
+
+    p {
+        color: #E9DEFF;
+        font-family: "Poppins",Sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5em;
+    }
+
+    .cta-button:not(.cta-secondary-button) {
+        color: #4D4D4D;
+        background: #FFF;
+        border-radius: 100px;
+        box-shadow: 0 10px 20px 0 rgb(0 9 78 / 12%);
+        font-family: "Poppins",Sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 1.8em;
+
+        &:hover {
+            background: #F92C8B;
+            color: #fff;
+        }
+    }
+
+    .icon i {
+        color: #fff;
+    }
+
+    &.cta-basic {
+        background-color: #8B54FF;
+        //text-align: center;
+    }
+    &.cta-flex {
+        background-color: #22CBD0;
+
+        p {
+            color: #fff;
+        }
+
+    }
+    &.cta-icon-flex {
+        background-color: #8B54FF;
+    }
+}
