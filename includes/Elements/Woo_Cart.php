@@ -1751,6 +1751,34 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$obj->add_responsive_control(
+			'ea_section_woo_cart_notice_padding',
+			[
+				'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error,
+					{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-info,
+					{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-message' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$obj->add_responsive_control(
+			'ea_section_woo_cart_notice_margin',
+			[
+				'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error,
+					{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-info,
+					{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-message' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
 		$obj->add_control(
 			'ea_section_woo_cart_notice_error_heading',
 			[
