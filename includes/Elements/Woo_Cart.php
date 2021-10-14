@@ -1515,7 +1515,8 @@ class Woo_Cart extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop,
+					{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper ~ .return-to-shop a' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1536,14 +1537,16 @@ class Woo_Cart extends Widget_Base {
 			[
 				'name'     => 'ea_section_woo_cart_continue_shopping_typo',
 				'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
-				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop',
+				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop,
+					{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper ~ .return-to-shop a',
 			]
 		);
 
 		$obj->add_group_control(
 			Group_Control_Border::get_type(), [
 				'name'     => 'ea_section_woo_cart_continue_shopping_border',
-				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop',
+				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop,
+					{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper ~ .return-to-shop a',
 			]
 		);
 
@@ -1554,7 +1557,8 @@ class Woo_Cart extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop,
+					{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper ~ .return-to-shop a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1566,7 +1570,8 @@ class Woo_Cart extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop,
+					{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper ~ .return-to-shop a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1578,7 +1583,8 @@ class Woo_Cart extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop,
+					{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper ~ .return-to-shop a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
