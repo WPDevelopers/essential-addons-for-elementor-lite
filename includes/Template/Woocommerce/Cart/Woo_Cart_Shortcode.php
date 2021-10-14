@@ -46,7 +46,7 @@ if ( class_exists( '\WC_Shortcode_Cart' ) ) {
 			WC()->cart->calculate_totals();
 
 			if ( WC()->cart->is_empty() ) { ?>
-                <div class="eael-woo-cart-wrapper <?php echo esc_attr( "eael-woo-{$settings['ea_woo_cart_layout']}" ); ?>">
+                <div class="eael-woo-cart-wrapper eael-woo-cart-empty <?php echo esc_attr( "eael-woo-{$settings['ea_woo_cart_layout']}" ); ?>">
 					<?php wc_get_template( 'cart/cart-empty.php' ); ?>
                 </div>
 				<?php
