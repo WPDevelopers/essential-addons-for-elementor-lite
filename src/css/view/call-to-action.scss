@@ -114,6 +114,9 @@
     padding-top: 22px;
     flex-basis: 22%;
 }
+.eael-call-to-action.cta-preset-2.cta-icon-flex .action {
+    flex-basis: 35%;
+}
 
 .eael-call-to-action.cta-icon-flex .content {
     flex-grow: 1;
@@ -131,6 +134,10 @@
     text-align: right;
     padding-top: 25px;
     flex-basis: 23%;
+}
+
+.cta-preset-2.eael-call-to-action.cta-flex .action {
+    flex-basis: 40%;
 }
 
 /*--- Cta Button ---*/
@@ -306,9 +313,49 @@
         font-weight: 400;
         line-height: 1.8em;
 
+        &.cta-secondary-button {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            box-shadow: none;
+
+            &:hover {
+                color: #000;
+                background: #fff;
+            }
+        }
+
         &:hover {
             background: #F92C8B;
             color: #fff;
+        }
+
+        &.cta-btn-preset-2 {
+            border-bottom-right-radius: 0;
+            padding-left: 70px;
+
+            &:hover {
+                i {
+                    background: #fff;
+                    color: #F92C8B;
+                }
+            }
+            
+            i {
+                background: #F92C8B;
+                color: #fff;
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 50px;
+                text-align: center;
+                border-radius: 50%;
+                font-size: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
         }
     }
 
