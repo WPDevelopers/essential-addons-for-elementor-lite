@@ -267,7 +267,7 @@ class Cta_Box extends Widget_Base
 		    [
 			    'label' => esc_html__('Button Preset', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::SELECT,
-			    'default' => 'cta-btn-preset-1',
+			    'default' => 'cta-btn-preset-2',
 			    'label_block' => false,
 			    'options' => [
 				    'cta-btn-preset-1' => esc_html__('Preset 1', 'essential-addons-for-elementor-lite'),
