@@ -1907,6 +1907,87 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$obj->add_control(
+			'ea_section_woo_cart_notice_message_heading',
+			[
+				'label'     => __( 'Message', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'           => 'ea_section_woo_cart_notice_message_bg',
+				'fields_options' => [
+					'background' => [
+						'label' => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
+					],
+				],
+				'types'          => [ 'classic', 'gradient' ],
+				'selector'       => '{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-message',
+			]
+		);
+
+		$obj->add_control(
+			'ea_section_woo_cart_notice_message_text_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-message' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$obj->add_control(
+			'ea_section_woo_cart_notice_message_icon_color',
+			[
+				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-message::before' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'ea_section_woo_cart_notice_message_typography',
+				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-message',
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'ea_section_woo_cart_notice_message_box_shadow',
+				'label'    => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
+				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-message',
+			]
+		);
+
+		$obj->add_responsive_control(
+			'ea_section_woo_cart_notice_message_border_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-message' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Border::get_type(), [
+				'name'     => 'ea_section_woo_cart_notice_message_border',
+				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-message',
+			]
+		);
+
 		$obj->end_controls_section();
 	}
 
