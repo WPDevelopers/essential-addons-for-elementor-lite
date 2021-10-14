@@ -13,7 +13,7 @@
           box-shadow: 0 8px 18px 0 rgba(0, 1, 35, 0.05);
   border-radius: 5px;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper ~ .return-to-shop {
+.eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper ~ .return-to-shop a {
   font-size: 16px;
   font-weight: 500;
   color: #202B46;
