@@ -138,6 +138,7 @@
         overflow-y: auto;
         background: transparent;
         position: relative;
+        width: inherit;
 
         &.ast-article-single, .ast-article-single {
             background: transparent;
