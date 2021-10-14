@@ -45,8 +45,11 @@ if ( class_exists( '\WC_Shortcode_Cart' ) ) {
 			// Calc totals.
 			WC()->cart->calculate_totals();
 
-			if ( WC()->cart->is_empty() ) {
-				wc_get_template( 'cart/cart-empty.php' );
+			if ( WC()->cart->is_empty() ) { ?>
+                <div class="eael-woo-cart-wrapper <?php echo esc_attr( "eael-woo-{$settings['ea_woo_cart_layout']}" ); ?>">
+					<?php wc_get_template( 'cart/cart-empty.php' ); ?>
+                </div>
+				<?php
 			} else {
 				$style_two_wrapper_class = '';
 				if ( $settings['ea_woo_cart_layout'] === 'style-2' ) {
