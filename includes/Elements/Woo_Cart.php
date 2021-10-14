@@ -1733,6 +1733,92 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$obj->end_controls_section();
+
+		/**
+		 * Notice Style
+		 */
+		$obj->start_controls_section(
+			'ea_section_woo_cart_notice_style',
+			[
+				'label' => esc_html__( 'Notice', 'essential-addons-for-elementor-lite' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$obj->add_control(
+			'ea_section_woo_cart_notice_error_heading',
+			[
+				'label' => __( 'Error', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::HEADING,
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'           => 'ea_section_woo_cart_notice_error_bg',
+				'fields_options' => [
+					'background' => [
+						'label' => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
+					],
+				],
+				'types'          => [ 'classic', 'gradient' ],
+				'selector'       => '{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error',
+			]
+		);
+
+		$obj->add_control(
+			'ea_section_woo_cart_notice_error_text_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error,
+					{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error li' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$obj->add_control(
+			'ea_section_woo_cart_notice_error_icon_color',
+			[
+				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error::before' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'      => 'ea_section_woo_cart_notice_error_box_shadow',
+				'label'     => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
+				'selector'  => '{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error',
+			]
+		);
+
+		$obj->add_responsive_control(
+			'ea_section_woo_cart_notice_error_border_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Border::get_type(), [
+				'name'     => 'ea_section_woo_cart_notice_error_border',
+				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error',
+			]
+		);
+
+		$obj->end_controls_section();
 	}
 
 	public function add_cart_body_class( $classes ) {
