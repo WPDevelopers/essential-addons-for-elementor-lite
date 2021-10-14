@@ -144,6 +144,7 @@
   background: transparent;
   position: relative;
   width: inherit;
+  float: inherit;
 }
 .eael-product-popup.woocommerce div.product.ast-article-single, .eael-product-popup.woocommerce div.product .ast-article-single {
   background: transparent;
