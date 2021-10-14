@@ -1144,10 +1144,10 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
-				'name'     => 'ea_woo_cart_table_row_box_shadow',
-				'label'    => __( 'Table Row Box Shadow', 'essential-addons-for-elementor-lite' ),
-				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr::after',
-				'condition'      => [
+				'name'      => 'ea_woo_cart_table_row_box_shadow',
+				'label'     => __( 'Table Row Box Shadow', 'essential-addons-for-elementor-lite' ),
+				'selector'  => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr::after',
+				'condition' => [
 					'ea_woo_cart_layout' => 'default'
 				]
 			]
@@ -1162,7 +1162,7 @@ class Woo_Cart extends Widget_Base {
 				'selectors'  => [
 					'{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr::after' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'condition'      => [
+				'condition'  => [
 					'ea_woo_cart_layout' => 'default'
 				]
 			]
@@ -1235,7 +1235,7 @@ class Woo_Cart extends Widget_Base {
 				'selectors'  => [
 					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table' => 'border-spacing: 0 {{SIZE}}{{UNIT}};',
 				],
-				'condition'      => [
+				'condition'  => [
 					'ea_woo_cart_layout' => 'default'
 				]
 			]
@@ -1309,7 +1309,7 @@ class Woo_Cart extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr' => 'border-color: {{VALUE}};',
 				],
-				'condition'  => [
+				'condition' => [
 					'ea_woo_cart_layout' => 'style-2'
 				]
 			]
@@ -1412,15 +1412,15 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_responsive_control(
 			'ea_woo_cart_totals_cell_padding',
 			[
-				'label'      => __( 'Table Cell Padding', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
+				'label'              => __( 'Table Cell Padding', 'essential-addons-for-elementor-lite' ),
+				'type'               => Controls_Manager::DIMENSIONS,
+				'size_units'         => [ 'px', 'em', '%' ],
 				'allowed_dimensions' => 'vertical',
-				'selectors'  => [
+				'selectors'          => [
 					'{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr th,
 					{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'condition'  => [
+				'condition'          => [
 					'ea_woo_cart_layout' => 'style-2'
 				]
 			]
@@ -1793,9 +1793,9 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
-				'name'      => 'ea_section_woo_cart_notice_error_box_shadow',
-				'label'     => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
-				'selector'  => '{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error',
+				'name'     => 'ea_section_woo_cart_notice_error_box_shadow',
+				'label'    => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
+				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error',
 			]
 		);
 
