@@ -1307,6 +1307,23 @@ class Cta_Box extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-call-to-action.cta-icon-flex .icon' => 'color: {{VALUE}};',
                 ],
+                'condition' => [
+	                'eael_cta_preset' => 'cta-preset-1',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_section_cta_icon_color_preset_2',
+            [
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action.cta-icon-flex .icon' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+	                'eael_cta_preset' => 'cta-preset-2',
+                ]
             ]
         );
 
