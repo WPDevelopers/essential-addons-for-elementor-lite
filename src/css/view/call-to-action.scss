@@ -264,7 +264,7 @@
         font-size: 14px;
         line-height: 26px;
     }
-    .eael-call-to-action .cta-button {
+    .eael-call-to-action .cta-button:not(.cta-btn-preset-2) {
         padding: 4px 20px;
         font-size: 12px;
     }
@@ -279,6 +279,10 @@
     padding: 77px 77px 100px 85px;
     border-radius: 5px;
     box-shadow: 0 25px 35px 0 rgb(0 9 78 / 18%);
+
+    @media all and (max-width: 767px) {
+        padding: 50px;
+    }
 
     .sub-title {
         font-family: "Poppins",Sans-serif;
@@ -359,7 +363,7 @@
         }
     }
 
-    .icon i {
+    .icon {
         color: #fff;
     }
 
