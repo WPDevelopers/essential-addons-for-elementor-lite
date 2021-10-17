@@ -767,7 +767,8 @@ class Cta_Box extends Widget_Base
 			    ],
                 'separator' => 'before',
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button' => 'font-size: {{SIZE}}px;',
+				    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-btn-preset-2 i' => 'font-size: {{SIZE}}px;',
+				    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-btn-preset-2 svg' => 'width: {{SIZE}}px; height: {{SIZE}}px;',
 			    ],
 		    ]
 	    );
@@ -886,10 +887,10 @@ class Cta_Box extends Widget_Base
 	    $this->add_control(
 		    'eael_cta_btn_icon_bg',
 		    [
-			    'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+			    'label' => esc_html__('Icon Background Color', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::COLOR,
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-btn-preset-2:not(.cta-secondary-button) i' => 'background: {{VALUE}};',
+				    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-btn-preset-2:not(.cta-secondary-button) .btn-icon' => 'background: {{VALUE}};',
 			    ],
                 'separator' => 'before',
 			    'condition' => [
@@ -902,10 +903,12 @@ class Cta_Box extends Widget_Base
         $this->add_control(
 		    'eael_cta_btn_icon_color',
 		    [
-			    'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+			    'label' => esc_html__('Icon Color', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::COLOR,
 			    'selectors' => [
 				    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-btn-preset-2:not(.cta-secondary-button) i' => 'color: {{VALUE}};',
+				    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-btn-preset-2:not(.cta-secondary-button) svg' =>
+                        'fill: {{VALUE}};',
 			    ],
 			    'condition' => [
 				    'eael_cta_btn_preset' => 'cta-btn-preset-2',
@@ -1014,10 +1017,10 @@ class Cta_Box extends Widget_Base
 	    $this->add_control(
 		    'eael_cta_btn_icon_bg_hover',
 		    [
-			    'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+			    'label' => esc_html__('Icon Background Color', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::COLOR,
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-btn-preset-2:not(.cta-secondary-button):hover i' =>
+				    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-btn-preset-2:not(.cta-secondary-button):hover .btn-icon' =>
                         'background: {{VALUE}};',
 			    ],
 			    'separator' => 'before',
@@ -1031,11 +1034,11 @@ class Cta_Box extends Widget_Base
 	    $this->add_control(
 		    'eael_cta_btn_icon_color_hover',
 		    [
-			    'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+			    'label' => esc_html__('Icon Color', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::COLOR,
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-btn-preset-2:not(.cta-secondary-button):hover i'
-                    => 'color: {{VALUE}};',
+				    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-btn-preset-2:not(.cta-secondary-button):hover i' => 'color: {{VALUE}};',
+				    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-btn-preset-2:not(.cta-secondary-button):hover svg' => 'fill: {{VALUE}};',
 			    ],
 			    'condition' => [
 				    'eael_cta_btn_preset' => 'cta-btn-preset-2',
@@ -1390,17 +1393,24 @@ class Cta_Box extends Widget_Base
 	    $this->add_render_attribute( 'button', 'class', "cta-button {$settings['eael_cta_btn_preset']} {$cta_btn_effect}" );
 
         if($settings['eael_cta_btn_preset'] === 'cta-btn-preset-2'){
+            $btn_icon_wrap = '<span class="btn-icon">';
 	        ob_start();
 	        Icons_Manager::render_icon( $settings['eael_cta_btn_icon'], [ 'aria-hidden' => 'true' ] );
 	        $btn_icon = ob_get_clean();
+	        $btn_icon_wrap_end = '</span>';
         } else {
+	        $btn_icon_wrap = '';
 	        $btn_icon = '';
+	        $btn_icon_wrap_end = '';
         }
 
 
 	    // button markup
 	    $buttonMarkup = '';
-	    $buttonMarkup .= '<a ' . $this->get_render_attribute_string( 'button' ) . '>'. $btn_icon . esc_html( $settings['eael_cta_btn_text'] ) . '</a>';
+	    $buttonMarkup .= '<a ' . $this->get_render_attribute_string( 'button' ) . '>'. $btn_icon_wrap. $btn_icon .
+                         $btn_icon_wrap_end .
+                         esc_html(
+                $settings['eael_cta_btn_text'] ) . '</a>';
 
         if ( $settings['eael_cta_secondary_btn_is_show'] === 'yes' ) {
 		    // button attributes
