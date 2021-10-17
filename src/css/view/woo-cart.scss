@@ -23,6 +23,7 @@ $thumb-bg-1: #E5F6FC;
         ~ .woocommerce-info,
         .woocommerce-message {
             background: $white;
+            color: $text-color-1;
             box-shadow: 0 8px 18px 0 rgba(0, 1, 35, 0.05);
             border-radius: 5px;
         }
@@ -43,6 +44,10 @@ $thumb-bg-1: #E5F6FC;
     }
 
     form.eael-woo-cart-form {
+        a {
+            text-decoration: none;
+        }
+
         .eael-woo-cart-table {
             border-collapse: separate;
             border-spacing: 0 13px;
@@ -66,10 +71,11 @@ $thumb-bg-1: #E5F6FC;
                 color: $text-color-3;
 
                 dt {
-                    margin: 0 0 0 5px;;
+                    margin: 0 0 0 5px;
                     text-transform: capitalize;
                     display: inline-block;
                     float: none;
+                    font-weight: 400;
 
                     &::before {
                         content: "|";
@@ -166,6 +172,7 @@ $thumb-bg-1: #E5F6FC;
                         text-align: center;
                         vertical-align: middle;
                         font-size: 20px;
+                        font-weight: 400;
 
                         &.product-remove {
                             color: $icon-color;
@@ -210,6 +217,10 @@ $thumb-bg-1: #E5F6FC;
                 }
             }
         }
+
+        .woocommerce-Price-amount {
+            font-weight: inherit;
+        }
     }
 
     .eael-cart-coupon-and-collaterals {
@@ -231,6 +242,7 @@ $thumb-bg-1: #E5F6FC;
             line-height: 30px;
             font-weight: 500;
             padding: 10px 40px;
+            white-space: nowrap;
         }
 
         .eael-cart-coupon-wrapper {
@@ -250,6 +262,7 @@ $thumb-bg-1: #E5F6FC;
                     border: none;
                     font-size: 18px;
                     line-height: 30px;
+                    width: 100%;
                 }
 
                 button {
@@ -289,8 +302,10 @@ $thumb-bg-1: #E5F6FC;
             .cart_totals {
                 max-width: 365px;
                 width: 100%;
-                padding-bottom: 10px;
+                padding: 0 0 10px 0;
+                margin: 0;
                 float: right;
+                border: none;
 
                 table {
                     border-collapse: separate;
