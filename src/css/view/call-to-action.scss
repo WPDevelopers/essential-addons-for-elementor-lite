@@ -339,13 +339,19 @@
             padding-left: 70px;
 
             &:hover {
-                i {
+                .btn-icon {
                     background: #fff;
+                }
+
+                i {
                     color: #F92C8B;
                 }
+                svg {
+                    fill: #F92C8B;
+                }
             }
-            
-            i {
+
+            .btn-icon {
                 background: #F92C8B;
                 color: #fff;
                 position: absolute;
@@ -359,6 +365,14 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+            }
+            
+            //i {
+            //    color: #fff;
+            //}
+
+            svg {
+                fill: #fff;
             }
         }
     }
