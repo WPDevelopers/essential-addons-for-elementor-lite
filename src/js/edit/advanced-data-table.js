@@ -356,7 +356,8 @@ class advancedDataTableEdit {
 		this.panel = panel;
 		this.model = model;
 		this.view = view;
-
+		const elClass = `.ea-advanced-data-table-${this.view.container.args.id}`;
+		this.table = this.view.el.querySelector( ".ea-advanced-data-table" + elClass )
 		// init inline edit
 		ea.hooks.doAction("advancedDataTable.initInlineEdit");
 
@@ -365,14 +366,12 @@ class advancedDataTableEdit {
 
 		// after panel init hook
 		ea.hooks.doAction("advancedDataTable.afterInitPanel", panel, model, view);
-
+		
 		model.once("editor:close", () => {
 			// parse table html
 			let origTable = this.parseHTML(this.table.cloneNode(true));
-			if ( this.tableInnerHTML == null ) {
-				this.tableInnerHTML = origTable.innerHTML;
-			}
-
+			this.tableInnerHTML = origTable.innerHTML;
+			
 			// update table
 			this.updateFromView(
 				this.view,
