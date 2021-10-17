@@ -28,6 +28,31 @@ $thumb-bg-1: #E5F6FC;
             border-radius: 5px;
         }
 
+        .woocommerce-error {
+            border-color: #b81c23;
+            list-style: none;
+
+            &::before {
+                color: #b81c23;
+            }
+        }
+
+        .woocommerce-info {
+            border-color: #1e85be;
+
+            &::before {
+                color: #1e85be;
+            }
+        }
+
+        .woocommerce-message {
+            border-color: #8fae1b;
+
+            &::before {
+                color: #8fae1b;
+            }
+        }
+
         ~ .return-to-shop a {
             font-size: 16px;
             font-weight: 500;
@@ -57,6 +82,7 @@ $thumb-bg-1: #E5F6FC;
             td {
                 border: none;
                 color: $text-color-1;
+                padding: 15px;
 
                 a {
                     color: $text-color-1;
@@ -136,6 +162,7 @@ $thumb-bg-1: #E5F6FC;
                         font-size: 18px;
                         font-weight: 500;
                         line-height: 30px;
+                        background: transparent;
 
                         &.product-thumbnail {
                             text-align: left;
@@ -196,6 +223,7 @@ $thumb-bg-1: #E5F6FC;
 
                             img {
                                 width: 62px;
+                                max-width: 100%;
                                 height: auto;
                                 border-radius: 50%;
                                 display: inline-block;
@@ -218,8 +246,11 @@ $thumb-bg-1: #E5F6FC;
             }
         }
 
-        .woocommerce-Price-amount {
+        .woocommerce-Price-amount,
+        .cart-collaterals .cart_totals .order-total td span.woocommerce-Price-amount.amount{
             font-weight: inherit;
+            color: inherit;
+            font-size: inherit;
         }
     }
 
@@ -243,6 +274,7 @@ $thumb-bg-1: #E5F6FC;
             font-weight: 500;
             padding: 10px 40px;
             white-space: nowrap;
+            letter-spacing: initial;
         }
 
         .eael-cart-coupon-wrapper {
@@ -260,6 +292,7 @@ $thumb-bg-1: #E5F6FC;
                 input {
                     background: $transparent;
                     border: none;
+                    box-shadow: none;
                     font-size: 18px;
                     line-height: 30px;
                     width: 100%;
@@ -345,6 +378,11 @@ $thumb-bg-1: #E5F6FC;
 
                         &.shipping td {
                             color: $text-color-3;
+
+                            a {
+                                display: inline-block;
+                                margin-top: 9px;
+                            }
                         }
 
                         td {
@@ -634,5 +672,23 @@ $thumb-bg-1: #E5F6FC;
                 width: 100%;
             }
         }
+    }
+}
+
+// OceanWP Theme Compatibility
+body.oceanwp-theme.eael-woo-cart .eael-woo-cart-wrapper {
+    .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td a {
+        font-size: inherit;
+        line-height: inherit;
+        font-weight: inherit;
+        padding: 0;
+        border: none;
+        text-transform: inherit;
+        letter-spacing: inherit;
+    }
+
+    .quantity .minus,
+    .quantity .plus {
+        display: none;
     }
 }
