@@ -236,6 +236,7 @@
   max-width: 365px;
   width: 100%;
   padding-bottom: 10px;
+  float: right;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table {
   border-collapse: separate;
@@ -303,6 +304,8 @@
   font-size: 20px;
   padding: 18px 0;
   margin: 0;
+  display: block;
+  text-align: center;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 {
   background: #fff;
