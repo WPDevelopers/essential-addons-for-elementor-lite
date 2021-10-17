@@ -14,6 +14,25 @@
           box-shadow: 0 8px 18px 0 rgba(0, 1, 35, 0.05);
   border-radius: 5px;
 }
+.eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error {
+  border-color: #b81c23;
+  list-style: none;
+}
+.eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error::before {
+  color: #b81c23;
+}
+.eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-info {
+  border-color: #1e85be;
+}
+.eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-info::before {
+  color: #1e85be;
+}
+.eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-message {
+  border-color: #8fae1b;
+}
+.eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-message::before {
+  color: #8fae1b;
+}
 .eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper ~ .return-to-shop a {
   font-size: 16px;
   font-weight: 500;
@@ -36,6 +55,7 @@
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td {
   border: none;
   color: #202B46;
+  padding: 15px;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table th a,
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td a {
@@ -107,6 +127,7 @@
   font-size: 18px;
   font-weight: 500;
   line-height: 30px;
+  background: transparent;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table thead tr th.product-thumbnail {
   text-align: left;
@@ -157,6 +178,7 @@
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-thumbnail img {
   width: 62px;
+  max-width: 100%;
   height: auto;
   border-radius: 50%;
   display: inline-block;
@@ -170,8 +192,11 @@
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-subtotal {
   font-weight: 500;
 }
-.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .woocommerce-Price-amount {
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .woocommerce-Price-amount,
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .cart-collaterals .cart_totals .order-total td span.woocommerce-Price-amount.amount {
   font-weight: inherit;
+  color: inherit;
+  font-size: inherit;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals::before, .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals::after {
   content: "";
@@ -191,6 +216,7 @@
   font-weight: 500;
   padding: 10px 40px;
   white-space: nowrap;
+  letter-spacing: initial;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper {
   width: 50%;
@@ -209,6 +235,8 @@
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon input {
   background: transparent;
   border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
   font-size: 18px;
   line-height: 30px;
   width: 100%;
@@ -289,6 +317,10 @@
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td {
   color: #737373;
+}
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td a {
+  display: inline-block;
+  margin-top: 9px;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td {
   border-spacing: 0;
@@ -525,4 +557,17 @@
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2:not(.has-table-right-content) form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-left {
   width: 100%;
+}
+body.oceanwp-theme.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td a {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  padding: 0;
+  border: none;
+  text-transform: inherit;
+  letter-spacing: inherit;
+}
+body.oceanwp-theme.eael-woo-cart .eael-woo-cart-wrapper .quantity .minus,
+body.oceanwp-theme.eael-woo-cart .eael-woo-cart-wrapper .quantity .plus {
+  display: none;
 }
