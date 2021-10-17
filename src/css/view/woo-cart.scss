@@ -69,6 +69,7 @@ $thumb-bg-1: #E5F6FC;
                     margin: 0 0 0 5px;;
                     text-transform: capitalize;
                     display: inline-block;
+                    float: none;
 
                     &::before {
                         content: "|";
@@ -83,6 +84,7 @@ $thumb-bg-1: #E5F6FC;
                 dd {
                     margin: 0 0 0 5px;
                     display: inline-block;
+                    padding-left: 0;
                 }
             }
 

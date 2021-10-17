@@ -48,6 +48,7 @@
   margin: 0 0 0 5px;
   text-transform: capitalize;
   display: inline-block;
+  float: none;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table dl dt::before {
   content: "|";
@@ -59,6 +60,7 @@
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table dl dd {
   margin: 0 0 0 5px;
   display: inline-block;
+  padding-left: 0;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity {
   display: -webkit-box;
