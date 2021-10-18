@@ -204,7 +204,7 @@
   display: block;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-thumbnail img {
-  width: 62px;
+  width: 62px !important;
   max-width: 100%;
   height: auto;
   border-radius: 50%;
@@ -231,7 +231,9 @@
   clear: both;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button,
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button:not(:hover):not(:active),
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button:not(:hover):not(:active) {
   background: #6557FF;
   -webkit-box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
           box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
@@ -249,7 +251,9 @@
   overflow: initial;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button:hover,
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button:hover {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button:hover,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button:not(:hover):not(:active):hover,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button:not(:hover):not(:active):hover {
   color: #fff;
   background: #6557FF;
   border-color: inherit;
@@ -639,4 +643,10 @@ body.theme-twentytwenty.eael-woo-cart .eael-woo-cart-wrapper section {
 }
 body.theme-twentytwenty.eael-woo-cart .eael-woo-cart-wrapper a.button:hover {
   text-decoration: none !important;
+}
+body.theme-twentytwentyone.eael-woo-cart .eael-woo-cart-wrapper a.button:hover {
+  text-decoration: none !important;
+}
+body.theme-twentytwentyone.eael-woo-cart .eael-woo-cart-wrapper ul.woocommerce-error {
+  padding: 0;
 }

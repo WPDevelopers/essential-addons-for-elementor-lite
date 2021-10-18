@@ -277,7 +277,7 @@ class Woo_Cart extends Widget_Base {
 					'unit' => 'px',
 				],
 				'selectors'  => [
-					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table {{CURRENT_ITEM}} img' => 'width: {{SIZE}}{{UNIT}};',
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table {{CURRENT_ITEM}} img' => 'width: {{SIZE}}{{UNIT}} !important;',
 				],
 				'condition'  => [
 					'column_type' => 'thumbnail'
