@@ -46,6 +46,9 @@
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form a {
   text-decoration: none;
 }
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form input {
+  outline: none;
+}
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table {
   border-collapse: separate;
   border-spacing: 0 13px;
