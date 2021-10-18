@@ -71,10 +71,12 @@ $thumb-bg-1: #E5F6FC;
     form.eael-woo-cart-form {
         a {
             text-decoration: none;
+            outline: none;
         }
 
         input {
             outline: none;
+            box-shadow: none;
         }
 
         .eael-woo-cart-table {
@@ -216,6 +218,16 @@ $thumb-bg-1: #E5F6FC;
 
                             a {
                                 color: $icon-color;
+                                display: block;
+                                width: auto;
+                                height: auto;
+                                line-height: inherit;
+                                font-weight: inherit;
+                                text-indent: initial;
+
+                                &::before {
+                                    content: none;
+                                }
                             }
                         }
 
@@ -553,16 +565,22 @@ $thumb-bg-1: #E5F6FC;
                                 }
                             }
 
-                            &.product-subtotal {
-                                font-weight: 600;
-                            }
-
                             &.product-remove {
                                 color: $icon-color;
                                 flex: 1 1 0%;
 
                                 a {
                                     color: $icon-color;
+                                    display: block;
+                                    width: auto;
+                                    height: auto;
+                                    line-height: inherit;
+                                    font-weight: inherit;
+                                    text-indent: initial;
+
+                                    &::before {
+                                        content: none;
+                                    }
                                 }
                             }
                         }
@@ -607,6 +625,14 @@ $thumb-bg-1: #E5F6FC;
 
                                 a {
                                     font-size: 0;
+                                }
+                            }
+                        }
+
+                        .eael-woo-cart-tr-right {
+                            > .eael-woo-cart-td {
+                                &.product-subtotal {
+                                    font-weight: 600;
                                 }
                             }
                         }
@@ -705,5 +731,14 @@ body.oceanwp-theme.eael-woo-cart .eael-woo-cart-wrapper {
     .quantity .minus,
     .quantity .plus {
         display: none;
+    }
+}
+
+// Storefront Theme Compatibility
+body.theme-storefront.eael-woo-cart .eael-woo-cart-wrapper {
+    form.eael-woo-cart-form .shipping input {
+        background: transparent;
+        border: 1px solid #aaa;
+        border-radius: 4px;
     }
 }
