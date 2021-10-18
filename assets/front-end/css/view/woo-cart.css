@@ -13,6 +13,7 @@
   -webkit-box-shadow: 0 8px 18px 0 rgba(0, 1, 35, 0.05);
           box-shadow: 0 8px 18px 0 rgba(0, 1, 35, 0.05);
   border-radius: 5px;
+  margin-bottom: 30px;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error {
   border-color: #b81c23;
@@ -188,6 +189,10 @@
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-remove a::before {
   content: none;
 }
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-remove a:hover {
+  background: transparent;
+  color: inherit !important;
+}
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-thumbnail {
   font-size: 0;
   text-align: left;
@@ -240,6 +245,7 @@
   white-space: nowrap;
   letter-spacing: initial;
   text-transform: initial;
+  text-decoration: none;
   overflow: initial;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button:hover,
@@ -510,6 +516,10 @@
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td.product-remove a::before {
   content: none;
 }
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td.product-remove a:hover {
+  background: transparent;
+  color: inherit !important;
+}
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-td {
   color: #202B46;
   font-size: 18px;
@@ -623,4 +633,10 @@ body.theme-neve.eael-woo-cart .eael-woo-cart-wrapper a:hover {
 }
 body.theme-neve.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .product-thumbnail img {
   min-width: auto !important;
+}
+body.theme-twentytwenty.eael-woo-cart .eael-woo-cart-wrapper section {
+  padding: 0;
+}
+body.theme-twentytwenty.eael-woo-cart .eael-woo-cart-wrapper a.button:hover {
+  text-decoration: none !important;
 }
