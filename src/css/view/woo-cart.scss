@@ -88,6 +88,7 @@ $thumb-bg-1: #E5F6FC;
                 border: none;
                 color: $text-color-1;
                 padding: 15px;
+                text-transform: initial;
 
                 a {
                     color: $text-color-1;
@@ -128,6 +129,7 @@ $thumb-bg-1: #E5F6FC;
             .product-quantity {
                 .quantity {
                     display: flex;
+                    float: none;
                     align-items: center;
                     justify-content: center;
 
@@ -283,6 +285,7 @@ $thumb-bg-1: #E5F6FC;
             padding: 10px 40px;
             white-space: nowrap;
             letter-spacing: initial;
+            text-transform: initial;
         }
 
         .eael-cart-coupon-wrapper {

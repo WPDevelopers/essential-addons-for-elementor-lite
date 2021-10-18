@@ -60,6 +60,7 @@
   border: none;
   color: #202B46;
   padding: 15px;
+  text-transform: initial;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table th a,
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table td a {
@@ -95,6 +96,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  float: none;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -225,6 +227,7 @@
   padding: 10px 40px;
   white-space: nowrap;
   letter-spacing: initial;
+  text-transform: initial;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper {
   width: 50%;
