@@ -357,7 +357,7 @@ class advancedDataTableEdit {
 		this.model = model;
 		this.view = view;
 		const elClass = `.ea-advanced-data-table-${this.view.container.args.id}`;
-		this.table = this.view.el.querySelector( ".ea-advanced-data-table" + elClass )
+		const eaTable  = this.view.el.querySelector( ".ea-advanced-data-table" + elClass )
 		// init inline edit
 		ea.hooks.doAction("advancedDataTable.initInlineEdit");
 
@@ -369,7 +369,7 @@ class advancedDataTableEdit {
 		
 		model.once("editor:close", () => {
 			// parse table html
-			let origTable = this.parseHTML(this.table.cloneNode(true));
+			let origTable = this.parseHTML(eaTable.cloneNode(true));
 			this.tableInnerHTML = origTable.innerHTML;
 			
 			// update table
