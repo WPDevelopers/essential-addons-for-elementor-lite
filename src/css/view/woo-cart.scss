@@ -250,7 +250,7 @@ $thumb-bg-1: #E5F6FC;
                             }
 
                             img {
-                                width: 62px;
+                                width: 62px !important;
                                 max-width: 100%;
                                 height: auto;
                                 border-radius: 50%;
@@ -291,7 +291,9 @@ $thumb-bg-1: #E5F6FC;
         }
 
         button,
-        .button {
+        .button,
+        button:not(:hover):not(:active),
+        .button:not(:hover):not(:active) {
             background: $btn-bg;
             box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
             border-radius: 5px;
@@ -781,5 +783,16 @@ body.theme-twentytwenty.eael-woo-cart .eael-woo-cart-wrapper {
 
     a.button:hover {
         text-decoration: none !important;
+    }
+}
+
+// Twenty Twenty-One Theme Compatibility
+body.theme-twentytwentyone.eael-woo-cart .eael-woo-cart-wrapper {
+    a.button:hover {
+        text-decoration: none !important;
+    }
+
+    ul.woocommerce-error {
+        padding: 0;
     }
 }
