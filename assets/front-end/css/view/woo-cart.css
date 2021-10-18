@@ -240,6 +240,7 @@
   white-space: nowrap;
   letter-spacing: initial;
   text-transform: initial;
+  overflow: initial;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper {
   width: 50%;
