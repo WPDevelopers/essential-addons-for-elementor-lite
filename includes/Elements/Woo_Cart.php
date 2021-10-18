@@ -615,9 +615,10 @@ class Woo_Cart extends Widget_Base {
 					'center' => 'text-align: center; justify-content: center;',
 					'right'  => 'text-align: right; justify-content: flex-end;',
 				],
-				'selectors'            => [
-					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity'           => '{{VALUE}};',
-					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity' => '{{VALUE}};',
+				'selectors' => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity,
+					.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .product-quantity' => '{{VALUE}};',
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity'                                                 => '{{VALUE}};',
 				],
 			]
 		);
