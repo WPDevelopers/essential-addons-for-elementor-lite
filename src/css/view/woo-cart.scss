@@ -76,6 +76,7 @@ $thumb-bg-1: #E5F6FC;
         .eael-woo-cart-table {
             border-collapse: separate;
             border-spacing: 0 13px;
+            border: none;
             margin: 0;
 
             th,
@@ -91,7 +92,7 @@ $thumb-bg-1: #E5F6FC;
 
             dl {
                 display: block;
-                margin-left: -5px;
+                margin: 0 0 0 -5px;
                 font-size: 80%;
                 font-weight: 400;
                 color: $text-color-3;
@@ -156,6 +157,8 @@ $thumb-bg-1: #E5F6FC;
             }
 
             thead {
+                background: $transparent;
+
                 tr {
                     th {
                         border: none;
@@ -163,6 +166,7 @@ $thumb-bg-1: #E5F6FC;
                         font-weight: 500;
                         line-height: 30px;
                         background: transparent;
+                        text-align: center;
 
                         &.product-thumbnail {
                             text-align: left;
@@ -382,6 +386,10 @@ $thumb-bg-1: #E5F6FC;
                             a {
                                 display: inline-block;
                                 margin-top: 9px;
+                            }
+
+                            .select2-container .select2-selection--single {
+                                padding: 0;
                             }
                         }
 
