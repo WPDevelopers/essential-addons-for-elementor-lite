@@ -299,6 +299,12 @@ $thumb-bg-1: #E5F6FC;
             letter-spacing: initial;
             text-transform: initial;
             overflow: initial;
+
+            &:hover {
+                color: $white;
+                background: $btn-bg;
+                border-color: inherit;
+            }
         }
 
         .eael-cart-coupon-wrapper {
@@ -741,5 +747,16 @@ body.theme-storefront.eael-woo-cart .eael-woo-cart-wrapper {
         background: transparent;
         border: 1px solid #aaa;
         border-radius: 4px;
+    }
+}
+
+// Neve Theme Compatibility
+body.theme-neve.eael-woo-cart .eael-woo-cart-wrapper {
+    a:hover {
+        opacity: 1;
+    }
+
+    form.eael-woo-cart-form .product-thumbnail img {
+        min-width: auto !important;
     }
 }

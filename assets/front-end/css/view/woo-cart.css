@@ -242,6 +242,12 @@
   text-transform: initial;
   overflow: initial;
 }
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button:hover,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button:hover {
+  color: #fff;
+  background: #6557FF;
+  border-color: inherit;
+}
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper {
   width: 50%;
   float: left;
@@ -611,4 +617,10 @@ body.theme-storefront.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-fo
   background: transparent;
   border: 1px solid #aaa;
   border-radius: 4px;
+}
+body.theme-neve.eael-woo-cart .eael-woo-cart-wrapper a:hover {
+  opacity: 1;
+}
+body.theme-neve.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .product-thumbnail img {
+  min-width: auto !important;
 }
