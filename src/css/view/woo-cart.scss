@@ -26,6 +26,7 @@ $thumb-bg-1: #E5F6FC;
             color: $text-color-1;
             box-shadow: 0 8px 18px 0 rgba(0, 1, 35, 0.05);
             border-radius: 5px;
+            margin-bottom: 30px;
         }
 
         .woocommerce-error {
@@ -228,6 +229,11 @@ $thumb-bg-1: #E5F6FC;
                                 &::before {
                                     content: none;
                                 }
+
+                                &:hover {
+                                    background: transparent;
+                                    color: inherit !important;
+                                }
                             }
                         }
 
@@ -298,6 +304,7 @@ $thumb-bg-1: #E5F6FC;
             white-space: nowrap;
             letter-spacing: initial;
             text-transform: initial;
+            text-decoration: none;
             overflow: initial;
 
             &:hover {
@@ -588,6 +595,11 @@ $thumb-bg-1: #E5F6FC;
                                     &::before {
                                         content: none;
                                     }
+
+                                    &:hover {
+                                        background: transparent;
+                                        color: inherit !important;
+                                    }
                                 }
                             }
                         }
@@ -758,5 +770,16 @@ body.theme-neve.eael-woo-cart .eael-woo-cart-wrapper {
 
     form.eael-woo-cart-form .product-thumbnail img {
         min-width: auto !important;
+    }
+}
+
+// Twenty Twenty Theme Compatibility
+body.theme-twentytwenty.eael-woo-cart .eael-woo-cart-wrapper {
+    section {
+        padding: 0;
+    }
+
+    a.button:hover {
+        text-decoration: none !important;
     }
 }
