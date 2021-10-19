@@ -145,6 +145,7 @@
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table thead tr th.product-thumbnail {
   text-align: left;
+  display: table-cell;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table thead tr th.product-name {
   text-align: left;
@@ -196,6 +197,7 @@
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-thumbnail {
   font-size: 0;
   text-align: left;
+  display: table-cell;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-thumbnail a {
   display: inline-block;
@@ -649,4 +651,41 @@ body.theme-twentytwentyone.eael-woo-cart .eael-woo-cart-wrapper a.button:hover {
 }
 body.theme-twentytwentyone.eael-woo-cart .eael-woo-cart-wrapper ul.woocommerce-error {
   padding: 0;
+}
+@media (max-width: 1024px) {
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr {
+    display: table-row;
+  }
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr th {
+    display: table-cell;
+  }
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td::before {
+    content: none;
+  }
+}
+@media (max-width: 767px) {
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-woo-cart-table-warp {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-woo-cart-table-warp table {
+    width: 700px;
+  }
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals {
+    width: 100%;
+    float: none;
+  }
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop {
+    margin-bottom: 25px;
+  }
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .coupon input {
+    padding-left: 5px;
+  }
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button:not(:hover):not(:active),
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button:not(:hover):not(:active) {
+    padding: 10px 20px;
+  }
 }
