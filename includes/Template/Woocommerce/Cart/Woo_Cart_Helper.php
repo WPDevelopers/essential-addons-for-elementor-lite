@@ -213,144 +213,151 @@ trait Woo_Cart_Helper {
 		<?php
 	}
 
-	public static function eael_woo_cart_totals( $settings ) { ?>
-        <div class="cart_totals <?php echo ( WC()->customer->has_calculated_shipping() ) ? 'calculated_shipping' : ''; ?>">
+	public static function eael_woo_cart_totals( $settings ) {
+		if ( ! empty( $settings['ea_woo_cart_layout'] ) ) {
+			?>
+            <div class="cart_totals <?php echo ( WC()->customer->has_calculated_shipping() ) ? 'calculated_shipping' : ''; ?>">
+				<?php
+				do_action( 'woocommerce_before_cart_totals' );
 
-			<?php
-			do_action( 'woocommerce_before_cart_totals' );
-
-			if ( $settings['eael_woo_cart_components_cart_totals_subtotal'] === 'yes' || $settings['eael_woo_cart_components_cart_totals_coupon'] === 'yes' ||
-			     $settings['eael_woo_cart_components_cart_totals_shipping'] === 'yes' ||
-			     ( ! empty( WC()->cart->get_fees() ) && $settings['eael_woo_cart_components_cart_totals_fees'] === 'yes' ) ||
-			     $settings['eael_woo_cart_components_cart_totals_tax'] === 'yes' || $settings['eael_woo_cart_components_cart_totals_total'] === 'yes' ) {
-				?>
-                <table class="shop_table shop_table_responsive">
-
-	                <?php if ( $settings['eael_woo_cart_components_cart_totals_subtotal'] === 'yes' ) {
-		                $subtotal_label = apply_filters( 'eael_woo_cart_totals_subtotal_label', esc_html__( 'Subtotal', 'essential-addons-for-elementor-lite' ) );
-		                ?>
-                        <tr class="cart-subtotal">
-                            <th><?php echo esc_html( $subtotal_label ); ?></th>
-                            <td data-title="<?php echo esc_attr( $subtotal_label ); ?>"><?php wc_cart_totals_subtotal_html(); ?></td>
-                        </tr>
-	                <?php } ?>
-
-					<?php
-					if ( $settings['eael_woo_cart_components_cart_totals_coupon'] === 'yes' ) {
-						foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
-                            <tr class="cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
-                                <th><?php wc_cart_totals_coupon_label( $coupon ); ?></th>
-                                <td data-title="<?php echo esc_attr( wc_cart_totals_coupon_label( $coupon, false ) ); ?>"><?php wc_cart_totals_coupon_html( $coupon ); ?></td>
-                            </tr>
-						<?php
-						endforeach;
-					}
+				if ( $settings['eael_woo_cart_components_cart_totals_subtotal'] === 'yes' || $settings['eael_woo_cart_components_cart_totals_coupon'] === 'yes' ||
+				     $settings['eael_woo_cart_components_cart_totals_shipping'] === 'yes' ||
+				     ( ! empty( WC()->cart->get_fees() ) && $settings['eael_woo_cart_components_cart_totals_fees'] === 'yes' ) ||
+				     $settings['eael_woo_cart_components_cart_totals_tax'] === 'yes' || $settings['eael_woo_cart_components_cart_totals_total'] === 'yes' ) {
 					?>
+                    <table class="shop_table shop_table_responsive">
 
-					<?php
-					if ( $settings['eael_woo_cart_components_cart_totals_shipping'] === 'yes' ) {
-						if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
-
-							<?php do_action( 'woocommerce_cart_totals_before_shipping' ); ?>
-
-							<?php wc_cart_totals_shipping_html(); ?>
-
-							<?php do_action( 'woocommerce_cart_totals_after_shipping' ); ?>
-
-						<?php elseif ( WC()->cart->needs_shipping() && 'yes' === get_option( 'woocommerce_enable_shipping_calc' ) ) :
-							$shipping_label = apply_filters( 'eael_woo_cart_totals_shipping_label', esc_html__( 'Shipping', 'essential-addons-for-elementor-lite' ) );
-                            ?>
-
-                            <tr class="shipping">
-                                <th><?php echo esc_html( $shipping_label ); ?></th>
-                                <td data-title="<?php echo esc_attr( $shipping_label ); ?>"><?php woocommerce_shipping_calculator(); ?></td>
+						<?php if ( $settings['eael_woo_cart_components_cart_totals_subtotal'] === 'yes' ) {
+							$subtotal_label = apply_filters( 'eael_woo_cart_totals_subtotal_label', esc_html__( 'Subtotal', 'essential-addons-for-elementor-lite' ) );
+							?>
+                            <tr class="cart-subtotal">
+                                <th><?php echo esc_html( $subtotal_label ); ?></th>
+                                <td data-title="<?php echo esc_attr( $subtotal_label ); ?>"><?php wc_cart_totals_subtotal_html(); ?></td>
                             </tr>
+						<?php } ?>
 
 						<?php
-						endif;
-					} ?>
-
-					<?php
-					if ( $settings['eael_woo_cart_components_cart_totals_fees'] === 'yes' ) {
-						foreach ( WC()->cart->get_fees() as $fee ) : ?>
-                            <tr class="fee">
-                                <th><?php echo esc_html( $fee->name ); ?></th>
-                                <td data-title="<?php echo esc_attr( $fee->name ); ?>"><?php wc_cart_totals_fee_html( $fee ); ?></td>
-                            </tr>
-						<?php
-						endforeach;
-					} ?>
-
-					<?php
-					if ( wc_tax_enabled() && ! WC()->cart->display_prices_including_tax() && $settings['eael_woo_cart_components_cart_totals_tax'] === 'yes' ) {
-						$taxable_address = WC()->customer->get_taxable_address();
-						$estimated_text  = '';
-
-						if ( WC()->customer->is_customer_outside_base() && ! WC()->customer->has_calculated_shipping() ) {
-							/* translators: %s location. */
-							$estimated_text = sprintf( ' <small>' . esc_html__( '(estimated for %s)', 'essential-addons-for-elementor-lite' ) . '</small>', WC()->countries->estimated_for_prefix( $taxable_address[0] ) . WC()->countries->countries[ $taxable_address[0] ] );
+						if ( $settings['eael_woo_cart_components_cart_totals_coupon'] === 'yes' ) {
+							foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
+                                <tr class="cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
+                                    <th><?php wc_cart_totals_coupon_label( $coupon ); ?></th>
+                                    <td data-title="<?php echo esc_attr( wc_cart_totals_coupon_label( $coupon, false ) ); ?>"><?php wc_cart_totals_coupon_html( $coupon ); ?></td>
+                                </tr>
+							<?php
+							endforeach;
 						}
+						?>
 
-						if ( 'itemized' === get_option( 'woocommerce_tax_total_display' ) ) {
-							foreach ( WC()->cart->get_tax_totals() as $code => $tax ) { // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+						<?php
+						if ( $settings['eael_woo_cart_components_cart_totals_shipping'] === 'yes' ) {
+							if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
+
+								<?php do_action( 'woocommerce_cart_totals_before_shipping' ); ?>
+
+								<?php wc_cart_totals_shipping_html(); ?>
+
+								<?php do_action( 'woocommerce_cart_totals_after_shipping' ); ?>
+
+							<?php elseif ( WC()->cart->needs_shipping() && 'yes' === get_option( 'woocommerce_enable_shipping_calc' ) ) :
+								$shipping_label = apply_filters( 'eael_woo_cart_totals_shipping_label', esc_html__( 'Shipping', 'essential-addons-for-elementor-lite' ) );
 								?>
-                                <tr class="tax-rate tax-rate-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
-                                    <th><?php echo esc_html( $tax->label ) . $estimated_text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></th>
-                                    <td data-title="<?php echo esc_attr( $tax->label ); ?>"><?php echo wp_kses_post( $tax->formatted_amount ); ?></td>
+
+                                <tr class="shipping">
+                                    <th><?php echo esc_html( $shipping_label ); ?></th>
+                                    <td data-title="<?php echo esc_attr( $shipping_label ); ?>"><?php woocommerce_shipping_calculator(); ?></td>
+                                </tr>
+
+							<?php
+							endif;
+						} ?>
+
+						<?php
+						if ( $settings['eael_woo_cart_components_cart_totals_fees'] === 'yes' ) {
+							foreach ( WC()->cart->get_fees() as $fee ) : ?>
+                                <tr class="fee">
+                                    <th><?php echo esc_html( $fee->name ); ?></th>
+                                    <td data-title="<?php echo esc_attr( $fee->name ); ?>"><?php wc_cart_totals_fee_html( $fee ); ?></td>
+                                </tr>
+							<?php
+							endforeach;
+						} ?>
+
+						<?php
+						if ( wc_tax_enabled() && ! WC()->cart->display_prices_including_tax() && $settings['eael_woo_cart_components_cart_totals_tax'] === 'yes' ) {
+							$taxable_address = WC()->customer->get_taxable_address();
+							$estimated_text  = '';
+
+							if ( WC()->customer->is_customer_outside_base() && ! WC()->customer->has_calculated_shipping() ) {
+								/* translators: %s location. */
+								$estimated_text = sprintf( ' <small>' . esc_html__( '(estimated for %s)', 'essential-addons-for-elementor-lite' ) . '</small>', WC()->countries->estimated_for_prefix( $taxable_address[0] ) . WC()->countries->countries[ $taxable_address[0] ] );
+							}
+
+							if ( 'itemized' === get_option( 'woocommerce_tax_total_display' ) ) {
+								foreach ( WC()->cart->get_tax_totals() as $code => $tax ) { // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+									?>
+                                    <tr class="tax-rate tax-rate-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
+                                        <th><?php echo esc_html( $tax->label ) . $estimated_text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></th>
+                                        <td data-title="<?php echo esc_attr( $tax->label ); ?>"><?php echo wp_kses_post( $tax->formatted_amount ); ?></td>
+                                    </tr>
+									<?php
+								}
+							} else {
+								?>
+                                <tr class="tax-total">
+                                    <th><?php echo esc_html( WC()->countries->tax_or_vat() ) . $estimated_text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></th>
+                                    <td data-title="<?php echo esc_attr( WC()->countries->tax_or_vat() ); ?>"><?php wc_cart_totals_taxes_total_html(); ?></td>
                                 </tr>
 								<?php
 							}
-						} else {
+						}
+						?>
+
+						<?php
+						do_action( 'woocommerce_cart_totals_before_order_total' );
+
+						if ( $settings['eael_woo_cart_components_cart_totals_total'] === 'yes' ) {
+							$total_label = apply_filters( 'eael_woo_cart_totals_total_label', esc_html__( 'Total', 'essential-addons-for-elementor-lite' ) );
 							?>
-                            <tr class="tax-total">
-                                <th><?php echo esc_html( WC()->countries->tax_or_vat() ) . $estimated_text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></th>
-                                <td data-title="<?php echo esc_attr( WC()->countries->tax_or_vat() ); ?>"><?php wc_cart_totals_taxes_total_html(); ?></td>
+                            <tr class="order-total">
+                                <th><?php echo esc_html( $total_label ); ?></th>
+                                <td data-title="<?php echo esc_attr( $total_label ); ?>"><?php wc_cart_totals_order_total_html(); ?></td>
                             </tr>
 							<?php
 						}
-					}
-					?>
 
-					<?php
-					do_action( 'woocommerce_cart_totals_before_order_total' );
-
-					if ( $settings['eael_woo_cart_components_cart_totals_total'] === 'yes' ) {
-						$total_label = apply_filters( 'eael_woo_cart_totals_total_label', esc_html__( 'Total', 'essential-addons-for-elementor-lite' ) );
+						do_action( 'woocommerce_cart_totals_after_order_total' );
 						?>
-                        <tr class="order-total">
-                            <th><?php echo esc_html( $total_label ); ?></th>
-                            <td data-title="<?php echo esc_attr( $total_label ); ?>"><?php wc_cart_totals_order_total_html(); ?></td>
-                        </tr>
-						<?php
-					}
 
-					do_action( 'woocommerce_cart_totals_after_order_total' );
-					?>
+                    </table>
+					<?php
+				}
 
-                </table>
-				<?php
-			}
+				if ( $settings['eael_woo_cart_components_cart_totals_checkout_button'] === 'yes' ) { ?>
+                    <div class="wc-proceed-to-checkout">
+						<?php do_action( 'woocommerce_proceed_to_checkout', $settings ); ?>
+                    </div>
+					<?php
+				}
 
-			if ( $settings['eael_woo_cart_components_cart_totals_checkout_button'] === 'yes' ) { ?>
-                <div class="wc-proceed-to-checkout">
-					<?php do_action( 'woocommerce_proceed_to_checkout', $settings ); ?>
-                </div>
-				<?php
-			}
-
-			do_action( 'woocommerce_after_cart_totals' ); ?>
-
-        </div>
-		<?php
+				do_action( 'woocommerce_after_cart_totals' ); ?>
+            </div>
+			<?php
+		} else {
+			woocommerce_cart_totals();
+		}
 	}
 
 	public static function eael_cart_button_proceed_to_checkout( $settings ) {
-		$button_text = apply_filters( 'eael_woo_cart_checkout_button_text', $settings['eael_woo_cart_components_cart_checkout_button_text'] );
-		?>
-        <a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="checkout-button button alt wc-forward">
-			<?php echo esc_html( $button_text ); ?>
-        </a>
-		<?php
+		if ( ! empty( $settings['ea_woo_cart_layout'] ) ) {
+			$button_text = apply_filters( 'eael_woo_cart_checkout_button_text', $settings['eael_woo_cart_components_cart_checkout_button_text'] );
+			?>
+            <a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="checkout-button button alt wc-forward">
+				<?php echo esc_html( $button_text ); ?>
+            </a>
+			<?php
+		} else {
+			woocommerce_button_proceed_to_checkout();
+		}
 	}
 
 	public static function woo_cart_style_two( $settings ) { ?>
