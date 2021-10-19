@@ -179,6 +179,7 @@ $thumb-bg-1: #E5F6FC;
 
                         &.product-thumbnail {
                             text-align: left;
+                            display: table-cell;
                         }
 
                         &.product-name {
@@ -240,6 +241,7 @@ $thumb-bg-1: #E5F6FC;
                         &.product-thumbnail {
                             font-size: 0;
                             text-align: left;
+                            display: table-cell;
 
                             a {
                                 display: inline-block;
@@ -275,7 +277,7 @@ $thumb-bg-1: #E5F6FC;
         }
 
         .woocommerce-Price-amount,
-        .cart-collaterals .cart_totals .order-total td span.woocommerce-Price-amount.amount{
+        .cart-collaterals .cart_totals .order-total td span.woocommerce-Price-amount.amount {
             font-weight: inherit;
             color: inherit;
             font-size: inherit;
@@ -794,5 +796,63 @@ body.theme-twentytwentyone.eael-woo-cart .eael-woo-cart-wrapper {
 
     ul.woocommerce-error {
         padding: 0;
+    }
+}
+
+// Responsive Tablet
+@media (max-width: 1024px) {
+    .eael-woo-cart .eael-woo-cart-wrapper {
+        .eael-cart-coupon-and-collaterals {
+            .cart-collaterals .cart_totals table tr {
+                display: table-row;
+
+                th {
+                    display: table-cell;
+                }
+
+                td {
+                    &::before {
+                        content: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsive Mobile
+@media (max-width: 767px) {
+    .eael-woo-cart .eael-woo-cart-wrapper {
+        .eael-woo-cart-table-warp {
+            width: 100%;
+            overflow-x: auto;
+
+            table {
+                width: 700px;
+            }
+        }
+
+        .eael-cart-coupon-and-collaterals {
+            .eael-cart-coupon-wrapper,
+            .cart-collaterals {
+                width: 100%;
+                float: none;
+            }
+
+            .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop {
+                margin-bottom: 25px;
+            }
+
+            .coupon input {
+                padding-left: 5px;
+            }
+
+            button,
+            .button,
+            button:not(:hover):not(:active),
+            .button:not(:hover):not(:active) {
+                padding: 10px 20px;
+            }
+        }
     }
 }
