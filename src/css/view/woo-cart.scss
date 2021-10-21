@@ -818,6 +818,11 @@ body.theme-twentytwentyone.eael-woo-cart .eael-woo-cart-wrapper {
             }
         }
     }
+
+    .woocommerce-page #content table.cart.eael-woo-cart-table .product-thumbnail,
+    .woocommerce-page table.cart.eael-woo-cart-table .product-thumbnail {
+        display: table-cell;
+    }
 }
 
 // Responsive Mobile

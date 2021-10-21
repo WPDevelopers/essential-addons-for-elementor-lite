@@ -662,6 +662,11 @@ body.theme-twentytwentyone.eael-woo-cart .eael-woo-cart-wrapper ul.woocommerce-e
   .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td::before {
     content: none;
   }
+
+  .woocommerce-page #content table.cart.eael-woo-cart-table .product-thumbnail,
+.woocommerce-page table.cart.eael-woo-cart-table .product-thumbnail {
+    display: table-cell;
+  }
 }
 @media (max-width: 767px) {
   .eael-woo-cart .eael-woo-cart-wrapper .eael-woo-cart-table-warp {
