@@ -466,7 +466,8 @@ $thumb-bg-1: #E5F6FC;
                 .wc-proceed-to-checkout {
                     padding: 0;
 
-                    .button {
+                    .button,
+                    .button:not(:hover):not(:active) {
                         font-size: 20px;
                         padding: 18px 0;
                         margin: 0;
@@ -672,7 +673,9 @@ $thumb-bg-1: #E5F6FC;
 
         .eael-cart-coupon-and-collaterals {
             button,
-            .button {
+            .button,
+            button:not(:hover):not(:active),
+            .button:not(:hover):not(:active) {
                 background: $btn2-bg;
                 font-size: 15px;
                 font-weight: 600;
