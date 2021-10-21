@@ -457,6 +457,25 @@ trait Woo_Cart_Helper {
 												} else {
 													printf( '<a href="%s">%s</a>', esc_url( $product_permalink ), $thumbnail ); // PHPCS: XSS ok.
 												}
+
+												if ( $settings['eael_woo_cart_table_components_remove'] === 'yes' ) { ?>
+                                                    <div class="eael-woo-cart-product-remove">
+														<?php
+														echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+															'woocommerce_cart_item_remove_link',
+															sprintf(
+																'<a href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">%s</a>',
+																esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
+																esc_html__( 'Remove this item', 'essential-addons-for-elementor-lite' ),
+																esc_attr( $product_id ),
+																esc_attr( $_product->get_sku() ),
+																Icons_Manager::render_font_icon( $settings['eael_woo_cart_table_components_remove_icon'], [ 'aria-hidden' => 'true' ] )
+															),
+															$cart_item_key
+														);
+														?>
+                                                    </div>
+												<?php }
 												?>
                                             </div>
 											<?php if ( $settings['eael_woo_cart_table_components_name'] === 'yes' ) { ?>
@@ -531,7 +550,7 @@ trait Woo_Cart_Helper {
 											}
 
 											if ( $settings['eael_woo_cart_table_components_subtotal'] === 'yes' ) { ?>
-                                                <div class="eael-woo-cart-td product-subtotal">
+                                                <div class="eael-woo-cart-td product-subtotal" data-title="<?php echo esc_html( $title ); ?>">
 													<?php
 													echo apply_filters( 'woocommerce_cart_item_subtotal',
 														WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ),

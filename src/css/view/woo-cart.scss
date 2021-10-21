@@ -8,6 +8,7 @@ $btn-bg: #6557FF;
 $btn2-bg: #312F4B;
 $transparent: transparent;
 $white: #fff;
+$black: #000;
 $thumb-bg-1: #E5F6FC;
 
 .eael-woo-cart .eael-woo-cart-wrapper {
@@ -15,6 +16,10 @@ $thumb-bg-1: #E5F6FC;
 
     p {
         margin: 0;
+    }
+
+    .eael-woo-cart-product-remove {
+        display: none;
     }
 
     .woocommerce-notices-wrapper {
@@ -647,7 +652,7 @@ $thumb-bg-1: #E5F6FC;
                                 justify-content: center;
                                 align-items: center;
 
-                                a {
+                                > a {
                                     font-size: 0;
                                 }
                             }
@@ -860,6 +865,95 @@ body.theme-twentytwentyone.eael-woo-cart .eael-woo-cart-wrapper {
             button:not(:hover):not(:active),
             .button:not(:hover):not(:active) {
                 padding: 10px 20px;
+            }
+        }
+
+        &.eael-woo-style-2 {
+            form.eael-woo-cart-form .eael-woo-cart-table {
+                .eael-woo-cart-thead {
+                    display: none;
+                }
+
+                .eael-woo-cart-tr {
+                    display: block;
+
+                    .eael-woo-cart-tr-left,
+                    .eael-woo-cart-tr-right {
+                        width: 100% !important;
+                        display: block;
+                        overflow: hidden;
+                        padding: 15px;
+
+                        .eael-woo-cart-td {
+                            display: block;
+                            width: 100%;
+                            text-align: left;
+
+                            &.product-thumbnail {
+                                width: 270px;
+                                height: 270px;
+                                margin: 0 auto;
+                                position: relative;
+
+                                .eael-woo-cart-product-remove {
+                                    display: block;
+                                    position: absolute;
+                                    top: 0;
+                                    right: 0;
+                                    height: 30px;
+                                    width: 30px;
+                                    text-align: center;
+                                    line-height: 30px;
+                                    border-radius: 50%;
+                                    background: $white;
+                                    border: 1px solid $black;
+                                }
+                            }
+
+                            &.product-price,
+                            &.product-quantity {
+                                width: 50%;
+                                float: left;
+                            }
+
+                            &.product-quantity {
+                                .quantity {
+                                    justify-content: flex-start;
+                                }
+                            }
+
+                            &.product-subtotal {
+                                float: left;
+                                padding-left: 50%;
+                                position: relative;
+
+                                &::before {
+                                    content: attr(data-title);
+                                    position: absolute;
+                                    left: 0;
+                                    top: 0;
+                                }
+                            }
+
+                            &.product-remove {
+                                display: none;
+                            }
+                        }
+                    }
+
+                    .eael-woo-cart-tr-right {
+                        border-bottom: 1px solid #eaeef4;
+                    }
+                }
+            }
+
+            .eael-cart-coupon-and-collaterals {
+                .eael-cart-coupon-wrapper,
+                .cart-collaterals {
+                    width: 100% !important;
+                    padding-left: 15px;
+                    padding-right: 15px;
+                }
             }
         }
     }
