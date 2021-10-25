@@ -1166,4 +1166,24 @@ class Helper
             ],
         ];
     }
+
+    public static function eael_fetch_color_or_global_color($settings, $control_name=''){
+        if( !isset($settings[$control_name])) {
+            return '';
+        }
+
+        $color = $settings[$control_name];
+
+        if(!empty($settings['__globals__']) && !empty($settings['__globals__'][$control_name])){
+            $color = $settings['__globals__'][$control_name];
+            $color_arr = explode('?id=', $color); //E.x. 'globals/colors/?id=primary'
+
+            $color_name = count($color_arr) > 1 ? $color_arr[1] : '';
+            if( !empty($color_name) ) {
+                $color = "var( --e-global-color-$color_name )";
+            }
+        }
+
+        return $color;
+    }
 }

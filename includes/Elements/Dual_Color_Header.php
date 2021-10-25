@@ -907,7 +907,9 @@ class Dual_Color_Header extends Widget_Base
 		$settings = $this->get_settings_for_display();
         $gradient_style = '';
         if ( $settings['eael_dch_dual_title_color_gradient_first']  && $settings['eael_dch_dual_title_color_gradient_second']  ) {
-            $gradient_style = 'style="background: -webkit-linear-gradient('. $settings['eael_dch_dual_title_color_gradient_first']. ', '. $settings['eael_dch_dual_title_color_gradient_second'].');-webkit-background-clip: text;
+            $settings_eael_dch_dual_title_color_gradient_first = Helper::eael_fetch_color_or_global_color($settings, 'eael_dch_dual_title_color_gradient_first');
+            $settings_eael_dch_dual_title_color_gradient_second = Helper::eael_fetch_color_or_global_color($settings, 'eael_dch_dual_title_color_gradient_second');
+            $gradient_style = 'style="background: -webkit-linear-gradient('. $settings_eael_dch_dual_title_color_gradient_first. ', '. $settings_eael_dch_dual_title_color_gradient_second.');-webkit-background-clip: text;
             -webkit-text-fill-color: transparent;"';
         };
 		$icon_migrated = isset($settings['__fa4_migrated']['eael_dch_icon_new']);
