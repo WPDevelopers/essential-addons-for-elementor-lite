@@ -387,8 +387,8 @@ msgstr ""
 msgid "WPForms"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:733, ../includes/templates/admin/elements.php:390
-msgid "FluentForm"
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:733, ../includes/Elements/FluentForm.php:30, ../includes/templates/admin/elements.php:390
+msgid "Fluent Forms"
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:737, ../includes/Elements/Formstack.php:28, ../includes/Elements/Formstack.php:169, ../includes/templates/admin/elements.php:396
@@ -3491,12 +3491,12 @@ msgstr ""
 msgid "Button Style"
 msgstr ""
 
-#: ../includes/Elements/FluentForm.php:30, ../includes/Elements/FluentForm.php:129, ../includes/Elements/FluentForm.php:138
-msgid "Fluent Form"
-msgstr ""
-
 #: ../includes/Elements/FluentForm.php:85
 msgid "Select a Fluent Form"
+msgstr ""
+
+#: ../includes/Elements/FluentForm.php:129, ../includes/Elements/FluentForm.php:138
+msgid "Fluent Form"
 msgstr ""
 
 #: ../includes/Elements/FluentForm.php:115
@@ -8298,11 +8298,11 @@ msgstr ""
 msgid "Stock <br/> Out"
 msgstr ""
 
-#: ../includes/Template/Eicon-Woocommerce/default.php:453
+#: ../includes/Template/Eicon-Woocommerce/default.php:470
 msgid "Stock "
 msgstr ""
 
-#: ../includes/Template/Eicon-Woocommerce/default.php:453
+#: ../includes/Template/Eicon-Woocommerce/default.php:470
 msgid "Out"
 msgstr ""
 
