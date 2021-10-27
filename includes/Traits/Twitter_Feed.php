@@ -67,9 +67,9 @@ trait Twitter_Feed
                 ],
             ]);
 
-            if (!is_wp_error($response)) {
-                $items = json_decode(wp_remote_retrieve_body($response), true);
-                set_transient( $cache_key, $items, $settings['eael_twitter_feed_data_cache_limit'] * MINUTE_IN_SECONDS);
+            if(!empty($response['response']) && $response['response']['code']==200){
+	            $items = json_decode(wp_remote_retrieve_body($response), true);
+	            set_transient( $cache_key, $items, $settings['eael_twitter_feed_data_cache_limit'] * MINUTE_IN_SECONDS);
             }
         }
 
