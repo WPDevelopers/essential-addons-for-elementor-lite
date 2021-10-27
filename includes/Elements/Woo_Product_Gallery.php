@@ -183,7 +183,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_product_gallery_terms_horizontal_align',
 			[
 				'label'     => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
@@ -1200,7 +1200,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_product_gallery_margin',
 			[
 				'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
@@ -1212,7 +1212,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_product_gallery_padding',
 			[
 				'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
@@ -1224,7 +1224,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_product_gallery_radius',
 			[
 				'label'      => __( 'Radius', 'essential-addons-for-elementor-lite' ),
@@ -1262,7 +1262,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_product_gallery_item_margin',
 			[
 				'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
@@ -1274,7 +1274,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_product_gallery_item_padding',
 			[
 				'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
@@ -1286,7 +1286,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_product_gallery_item_radius',
 			[
 				'label'      => __( 'Radius', 'essential-addons-for-elementor-lite' ),
