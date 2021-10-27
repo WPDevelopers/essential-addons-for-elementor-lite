@@ -463,7 +463,7 @@
 }
 @media screen and (max-width: 991px) {
   .eael_simple_menu_hamburger_disable_selected_menu_hide .eael-simple-menu-toggle-text {
-    display: none;
+    display: none !important;
   }
 }
 .eael-simple-menu-hamburger-align-left .eael-simple-menu-toggle-text {
