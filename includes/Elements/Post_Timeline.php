@@ -355,15 +355,15 @@ class Post_Timeline extends Widget_Base
                 'options'   => [
                     'left'   => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-center',
+                        'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                 ],
                 'selectors' => [
@@ -413,19 +413,19 @@ class Post_Timeline extends Widget_Base
                 'options'   => [
                     'left'    => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'center'  => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-center',
+                        'icon'  => 'eicon-text-align-center',
                     ],
                     'right'   => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                     'justify' => [
                         'title' => __('Justified', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-justify',
+                        'icon'  => 'eicon-text-align-justify',
                     ],
                 ],
                 'selectors' => [
@@ -481,10 +481,15 @@ class Post_Timeline extends Widget_Base
 
                 $template = $this->get_template($this->get_settings('eael_dynamic_template_Layout'));
                 $settings['loadable_file_name'] = $this->get_filename_only($template);
+	            $dir_name = $this->get_temp_dir_name($settings['loadable_file_name']);
+	            $found_posts = 0;
 
                 if(file_exists($template)){
                     $query = new \WP_Query($args);
                     if ($query->have_posts()) {
+	                    $found_posts      = $query->found_posts;
+	                    $max_page         = ceil( $found_posts / absint( $args['posts_per_page'] ) );
+	                    $args['max_page'] = $max_page;
                         while ($query->have_posts()) {
                             $query->the_post();
                             include($template);
@@ -499,6 +504,8 @@ class Post_Timeline extends Widget_Base
 		    echo '</div>
 		</div>';
 
-        $this->print_load_more_button($settings, $args, 'free');
+	    if ( $found_posts > $args['posts_per_page'] ) {
+		    $this->print_load_more_button( $settings, $args, $dir_name );
+	    }
     }
 }

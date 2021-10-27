@@ -16,7 +16,8 @@
 			$args = $this.data("args"),
 			$layout = $this.data("layout"),
 			$template_info = $this.data("template"),
-			$page = parseInt($this.data("page")) + 1;
+			$page = parseInt($this.data("page")) + 1,
+			$max_page = $this.data("max-page") != undefined ? parseInt($this.data("max-page")) : false;
 
 		if (typeof $widget_id == "undefined" || typeof $args == "undefined") {
 			return;
@@ -33,6 +34,28 @@
 			nonce: $nonce,
 			template_info: $template_info,
 		};
+
+		if ( $data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery" ) {
+
+			const $taxonomy = {
+				taxonomy: $('.eael-cat-tab li a.active', $scope).data('taxonomy'),
+				field: 'term_id',
+				terms: $('.eael-cat-tab li a.active', $scope).data('id'),
+			};
+			const eael_cat_tab = localStorage.getItem('eael-cat-tab');
+
+			if( eael_cat_tab == 'true') {
+				localStorage.removeItem('eael-cat-tab');
+				 var $gallery_page = 1 + 1;
+
+			} else {
+				 var $gallery_page = parseInt($('.eael-cat-tab li a.active', $scope).data("page")) + 1;
+			}
+
+			$data.taxonomy = $taxonomy;
+			$data.page = $gallery_page;
+		}
+
 		String($args)
 			.split("&")
 			.forEach(function (item, index) {
@@ -68,7 +91,13 @@
 					$content.hasClass("no-posts-found") ||
 					$content.length === 0
 				) {
-					$this.remove();
+					if ( $data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery" ) {
+						$this.removeClass('button--loading').addClass('hide-load-more');
+						$LoaderSpan.html($text)
+					} else {
+						$this.remove();
+					}
+
 				} else {
 					if (
 						$data.class ==
@@ -138,7 +167,15 @@
 					$this.removeClass("button--loading");
 					$LoaderSpan.html($text);
 
-					$this.data("page", $page);
+					if ( $data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery" ) {
+						$('.eael-cat-tab li a.active', $scope).data("page", $gallery_page);
+					} else {
+						$this.data("page", $page);
+					}
+
+					if ($max_page && $data.page >= $max_page) {
+						$this.remove();
+					}
 				}
 			},
 			error: function (response) {

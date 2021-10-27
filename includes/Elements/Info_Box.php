@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
+use Elementor\Icons_Manager;
 use \Elementor\Plugin;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
@@ -100,7 +101,7 @@ class Info_Box extends Widget_Base
                     ],
                     'number' => [
                         'title' => esc_html__('Number', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-sort-numeric-desc',
+                        'icon' => 'eicon-number-field',
                     ],
                     'icon' => [
                         'title' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
@@ -108,7 +109,7 @@ class Info_Box extends Widget_Base
                     ],
                     'img' => [
                         'title' => esc_html__('Image', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-picture-o',
+                        'icon' => 'eicon-image-bold',
                     ],
                 ],
                 'default' => 'icon',
@@ -301,15 +302,15 @@ class Info_Box extends Widget_Base
                 'options' => [
                     'left' => [
                         'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
                         'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'default' => 'center',
@@ -505,7 +506,7 @@ class Info_Box extends Widget_Base
                         ],
                     ],
                     'default' => '1',
-                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
                 ]
             );
 
@@ -946,6 +947,7 @@ class Info_Box extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-infobox .infobox-icon i' => 'font-size: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-infobox .infobox-icon svg' => 'height: {{SIZE}}px; width: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-infobox .infobox-icon .infobox-icon-wrap img' => 'height: {{SIZE}}px; width: {{SIZE}}px;',
                 ],
             ]
@@ -1004,6 +1006,7 @@ class Info_Box extends Widget_Base
                 'default' => '#4d4d4d',
                 'selectors' => [
                     '{{WRAPPER}} .eael-infobox .infobox-icon i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-infobox .infobox-icon svg' => 'fill: {{VALUE}};',
                     '{{WRAPPER}} .eael-infobox.icon-beside-title .infobox-content .title figure i' => 'color: {{VALUE}};',
                 ],
             ]
@@ -1083,6 +1086,7 @@ class Info_Box extends Widget_Base
                 'default' => '#4d4d4d',
                 'selectors' => [
                     '{{WRAPPER}} .eael-infobox:hover .infobox-icon i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-infobox:hover .infobox-icon svg' => 'fill: {{VALUE}};',
                     '{{WRAPPER}} .eael-infobox.icon-beside-title:hover .infobox-content .title figure i' => 'color: {{VALUE}};',
                 ],
             ]
@@ -1581,13 +1585,10 @@ if ('yes' == $settings['eael_show_infobox_clickable']): ?></a><?php endif;
 
         if ($infobox_icon_is_new || $infobox_icon_migrated) {
             $icon = $this->get_settings('eael_infobox_icon_new')['value'];
-
             if (isset($icon['url'])) {
-                $this->add_render_attribute('icon_or_image', [
-                    'src' => $icon['url'],
-                    'alt' => esc_attr(get_post_meta($icon['id'], '_wp_attachment_image_alt', true)),
-                ]);
-                $icon_tag = '<img ' . $this->get_render_attribute_string('icon_or_image') . '/>';
+	            ob_start();
+	            Icons_Manager::render_icon( $settings['eael_infobox_icon_new'], [ 'aria-hidden' => 'true' ] );
+	            $icon_tag = ob_get_clean();
             } else {
                 $this->add_render_attribute('icon_or_image', 'class', $icon);
                 $icon_tag = '<i ' . $this->get_render_attribute_string('icon_or_image') . '></i>';

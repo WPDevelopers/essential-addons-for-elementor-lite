@@ -38,9 +38,14 @@ $sale_badge_preset = isset($settings['eael_product_sale_badge_preset']) ? $setti
 // should print vars
 $should_print_rating = isset( $settings['eael_product_grid_rating'] ) && 'yes' === $settings['eael_product_grid_rating'];
 $should_print_quick_view = isset( $settings['eael_product_grid_quick_view'] ) && 'yes' === $settings['eael_product_grid_quick_view'];
+$should_print_image_clickable = isset( $settings['eael_product_grid_image_clickable'] ) && 'yes' === $settings['eael_product_grid_image_clickable'];
 $should_print_price = isset( $settings['eael_product_grid_price'] ) && 'yes' === $settings['eael_product_grid_price'];
 $should_print_excerpt = isset( $settings['eael_product_grid_excerpt'] ) && ('yes' === $settings['eael_product_grid_excerpt'] && has_excerpt());
 $widget_id = isset($settings['eael_widget_id']) ? $settings['eael_widget_id'] : null;
+
+$sale_badge_text = !empty($settings['eael_product_sale_text']) ? $settings['eael_product_sale_text'] :  __( 'Sale!', 'essential-addons-for-elementor-lite' );
+$stock_out_badge_text = !empty($settings['eael_product_stockout_text']) ?$settings['eael_product_stockout_text'] : __( 'Stock <br/> Out', 'essential-addons-for-elementor-lite' );
+
 $quick_view_setting = [
 	'widget_id' => $widget_id,
 	'product_id' => $product->get_id(),
@@ -48,36 +53,59 @@ $quick_view_setting = [
 ];
 if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-product-reveal' ) { ?>
     <li class="product">
-        <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+        <div class="eael-product-wrap">
+            <?php
+
+            if( $should_print_image_clickable ) {
+	            echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+            }?>
             <?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ) );
+            if ( $should_print_image_clickable ) {
+	            echo '</a>';
+            }
+            
+            // printf('<%1$s class="woocommerce-loop-product__title"><a href="%3$s" class="woocommerce-LoopProduct-link woocommerce-loop-product__link woocommerce-loop-product__title_link woocommerce-loop-product__title_link_simple woocommerce-loop-product__title_link_reveal">%2$s</a></%1$s>', $title_tag, $product->get_title(), $product->get_permalink());
+            echo '<div class="eael-product-title">
+            <a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
             printf('<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, $product->get_title());
+            echo '</a>
+            </div>';
+
             if ( $should_print_rating ) {
                 echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) );
             }
-            if ( ! $product->managing_stock() && ! $product->is_in_stock() ) {
-                printf( '<span class="outofstock-badge">%s</span>', __( 'Stock <br/> Out', 'essential-addons-for-elementor-lite' ) );
+            if ( ! $product->is_in_stock() ) {
+                printf( '<span class="outofstock-badge">%s</span>', $stock_out_badge_text );
             } elseif ( $product->is_on_sale() ) {
-                printf( '<span class="onsale">%s</span>', __( 'Sale!', 'essential-addons-for-elementor-lite' ) );
+                printf( '<span class="onsale">%s</span>', $sale_badge_text );
             }
 
             if ( $should_print_price ) {
               echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
             }
             ?>
-        </a>
-        <?php
-        woocommerce_template_loop_add_to_cart();
-        if ( $should_print_compare_btn ) {
-            Product_Grid::print_compare_button( $product->get_id() );
-        }
-        ?>
+            <?php
+            woocommerce_template_loop_add_to_cart();
+            if ( $should_print_compare_btn ) {
+                Product_Grid::print_compare_button( $product->get_id() );
+            }
+            ?>
+        </div>
     </li>
     <?php
 } else if ( $grid_style_preset == 'eael-product-overlay' ) {
     ?>
     <li class="product">
         <div class="overlay">
-            <?php echo $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ); ?>
+            <?php
+            if( $should_print_image_clickable ) {
+	            echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+            }
+            echo $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] );
+            if ( $should_print_image_clickable ) {
+	            echo '</a>';
+            }
+            ?>
             <div class="button-wrap clearfix">
                 <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="product-link"><span class="fas fa-link"></span></a>
                 <?php
@@ -89,16 +117,23 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
             </div>
         </div>
         <?php
+        // printf('<%1$s class="woocommerce-loop-product__title"><a href="%3$s" class="woocommerce-LoopProduct-link woocommerce-loop-product__link woocommerce-loop-product__title_link woocommerce-loop-product__title_link_overlay">%2$s</a></%1$s>', $title_tag, $product->get_title(), $product->get_permalink());        
+        echo '<div class="eael-product-title">
+        <a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
         printf('<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, $product->get_title());
+        echo '</a>
+        </div>';
 
         if ( $should_print_rating ) {
             echo wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() );
         }
-        if ( ! $product->managing_stock() && ! $product->is_in_stock() ) {
-            printf( '<span class="outofstock-badge">%s</span>', __( 'Stock <br/> Out', 'essential-addons-for-elementor-lite' ) );
+
+        if ( ! $product->is_in_stock() ) {
+	        printf( '<span class="outofstock-badge">%s</span>', $stock_out_badge_text );
         } elseif ( $product->is_on_sale() ) {
-            printf( '<span class="onsale">%s</span>', __( 'Sale!', 'essential-addons-for-elementor-lite' ) );
+	        printf( '<span class="onsale">%s</span>', $sale_badge_text );
         }
+
         if ( $should_print_price ) {
           echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
         }
@@ -113,8 +148,15 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                 <div class="product-image-wrap">
                     <div class="image-wrap">
                         <?php
-                        echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
+                        echo (! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.$stock_out_badge_text.'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . $sale_badge_text . '</span>' : '') );
+                        if( $should_print_image_clickable ) {
+	                        echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+                        }
                         echo $product->get_image($settings['eael_product_grid_image_size_size'], ['loading' => 'eager']);
+
+                        if( $should_print_image_clickable ) {
+	                        echo '</a>';
+                        }
                         ?>
                     </div>
                     <div class="image-hover-wrap">
@@ -123,7 +165,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                 <?php if( $should_print_quick_view ){?>
                                     <li class="eael-product-quick-view">
                                         <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                           class="eael-product-grid-open-popup">
+                                           class="eael-product-grid-open-popup open-popup-link">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </li>
@@ -154,7 +196,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                 <?php if( $should_print_quick_view ){?>
                                     <li class="eael-product-quick-view">
                                         <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                           class="eael-product-grid-open-popup">
+                                           class="eael-product-grid-open-popup open-popup-link">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </li>
@@ -176,7 +218,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                 <?php if( $should_print_quick_view ){?>
                                     <li class="eael-product-quick-view">
                                         <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                           class="eael-product-grid-open-popup">
+                                           class="eael-product-grid-open-popup open-popup-link">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </li>
@@ -199,7 +241,12 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                     }
                     ?>
                     <div class="eael-product-title">
-                       <?php printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title()); ?>
+                        <?php 
+                        echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+                        printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title());
+                        echo '</a>';
+                        ?>
+                       <?php //printf('<%1$s><a href="%3$s" class="woocommerce-LoopProduct-link woocommerce-loop-product__link woocommerce-loop-product__title_link woocommerce-loop-product__title_link_simple woocommerce-loop-product__title_link_reveal">%2$s</a></%1$s>', $title_tag, $product->get_title(), $product->get_permalink()); ?>
                     </div>
                     <?php if(($grid_style_preset != 'eael-product-preset-7') && $should_print_price ){
                         echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
@@ -217,10 +264,15 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                 <div class="product-image-wrap">
                     <div class="image-wrap">
                         <?php
-                        echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
-                        echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
+                        if( $should_print_image_clickable ) {
+	                        echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+                        }
+                        echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.$stock_out_badge_text.'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . $sale_badge_text. '</span>' : '') );
                         echo $product->get_image($settings['eael_product_grid_image_size_size'], ['loading' => 'eager']);
-                        echo '</a>';
+
+                        if( $should_print_image_clickable ) {
+	                        echo '</a>';
+                        }
                         ?>
                     </div>
                     <div class="image-hover-wrap">
@@ -238,7 +290,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                             <?php if( $should_print_quick_view ){?>
                                 <li class="eael-product-quick-view">
                                     <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                       class="eael-product-grid-open-popup">
+                                       class="eael-product-grid-open-popup open-popup-link">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                 </li>
@@ -275,10 +327,15 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                 <div class="product-image-wrap">
                     <div class="image-wrap">
                         <?php
-                        echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
-                        echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') );
+                        if( $should_print_image_clickable ) {
+	                        echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+                        }
+                        echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.$stock_out_badge_text.'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . $sale_badge_text. '</span>' : '') );
                         echo $product->get_image($settings['eael_product_grid_image_size_size'], ['loading' => 'eager']);
-                        echo '</a>';
+
+                        if( $should_print_image_clickable ) {
+	                        echo '</a>';
+                        }
                         ?>
                     </div>
                 </div>
@@ -389,7 +446,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                         if( $should_print_quick_view ){?>
                             <li class="eael-product-quick-view">
                                 <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
-                                   class="eael-product-grid-open-popup">
+                                   class="eael-product-grid-open-popup open-popup-link">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </li>
@@ -407,8 +464,9 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
     }
 
     add_action('woocommerce_before_shop_loop_item_title',function(){
-        global $product; 
-        if(empty($product->is_on_sale())  && !$product->is_in_stock()  ){
+        global $product;
+	    if ( ! $product->is_in_stock() ) {
+		    remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
           echo '<span class="outofstock-badge">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>';
         }
     },9);

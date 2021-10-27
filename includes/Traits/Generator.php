@@ -96,7 +96,11 @@ trait Generator
             update_option('eael_editor_updated_at', strtotime('now'));
         }
 
-        if ($elements === false) {
+	    if ( !empty( $editor_updated_at ) && strtotime( 'now' ) > strtotime( '+120 seconds', $editor_updated_at ) ) {
+		    update_option('eael_editor_updated_at', strtotime('now'));
+	    }
+
+        if ($elements===false) {
             return true;
         }
 
@@ -104,13 +108,14 @@ trait Generator
 		    return true;
 	    }
 
-        if ($post_updated_at === false) {
+        if ($post_updated_at===false) {
             return true;
         }
 
-        if ($editor_updated_at != $post_updated_at) {
-            return true;
-        }
+	    if ( $editor_updated_at != $post_updated_at ) {
+		    return true;
+	    }
+
         return false;
     }
 
@@ -197,8 +202,6 @@ trait Generator
             return;
         }
 
-
-
         if ($this->is_running_background()) {
             return;
         }
@@ -226,12 +229,6 @@ trait Generator
         // push custom js as element so that it prints to page if elements is empty
         if ($this->custom_js_strings) {
             $this->loaded_elements[] = 'custom-js';
-        }
-
-        if ((get_the_ID() > 0 && !Plugin::$instance->documents->get(get_the_ID())->is_built_with_elementor())) {
-            if (empty($this->loaded_elements)) {
-                return;
-            }
         }
 
         // update page data
@@ -376,9 +373,11 @@ trait Generator
 	 * Update  _updated_at field to regenerated asset
 	 */
 	public function check_password_protected_post() {
-		if ( isset( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] ) && $this->is_preview_mode() ) {
-			update_option($this->uid . '_eael_updated_at', get_option('eael_editor_updated_at'),false);
-			return true;
+		if ( $this->is_preview_mode() ) {
+			if ( $this->check_third_party_cookie_status() || isset( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] ) || $this->check_protected_content_status() ) {
+				update_option( $this->uid . '_eael_updated_at', strtotime('now'), false );
+				return true;
+			}
 		}
 		return false;
 	}

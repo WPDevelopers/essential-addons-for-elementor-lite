@@ -121,8 +121,8 @@ class Event_Calendar extends Widget_Base
             $this->add_control(
                 'eael_event_calendar_pro_enable_warning',
                 [
-                    'label' => esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::HEADING,
+	                'label' => sprintf( '<a target="_blank" href="https://wpdeveloper.net/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+                    'type' => Controls_Manager::RAW_HTML,
                     'condition' => [
                         'eael_event_calendar_type' => ['eventon'],
                     ],
@@ -559,6 +559,18 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+	    $this->add_control(
+		    'eael_event_details_text',
+		    [
+			    'label' => __('Event Details Text', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::TEXT,
+			    'default' => __('Event Details','essential-addons-for-elementor-lite'),
+			    'condition' => [
+				    'eael_event_details_link_hide!' => 'yes',
+			    ],
+		    ]
+	    );
+
         if (apply_filters('eael/is_plugin_active', 'eventON/eventon.php') && apply_filters('eael/pro_enabled', false)) {
             $this->add_control(
                 'eael_event_on_featured_color',
@@ -993,15 +1005,15 @@ class Event_Calendar extends Widget_Base
                 'options' => [
                     'left' => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'default' => 'center',
@@ -1125,15 +1137,15 @@ class Event_Calendar extends Widget_Base
                 'options' => [
                     'left' => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'default' => 'center',
@@ -1740,6 +1752,7 @@ class Event_Calendar extends Widget_Base
 
     protected function eaelec_load_event_details()
     {
+    	$event_details_text = $this->get_settings('eael_event_details_text');
         return '<div id="eaelecModal" class="eaelec-modal eael-zoom-in">
             <div class="eael-ec-modal-bg"></div>
             <div class="eaelec-modal-content">
@@ -1753,7 +1766,7 @@ class Event_Calendar extends Widget_Base
                     <p></p>
                 </div>
                 <div class="eaelec-modal-footer">
-                    <a class="eaelec-event-details-link">' . __("Event Details", "essential-addons-for-elementor-lite") . '</a>
+                    <a class="eaelec-event-details-link">' . esc_html($event_details_text) . '</a>
                 </div>
             </div>
         </div>';
@@ -1776,15 +1789,19 @@ class Event_Calendar extends Widget_Base
                     $end = date('Y-m-d H:i', strtotime($event["eael_event_end_date"])) . ":01";
                 }
 
+                $settings_eael_event_global_bg_color = $this->fetch_color_or_global_color($event, 'eael_event_bg_color');
+                $settings_eael_event_global_text_color = $this->fetch_color_or_global_color($event, 'eael_event_text_color');
+                $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($event, 'eael_event_border_color');
+
                 $data[] = [
                     'id' => $i,
                     'title' => !empty($event["eael_event_title"]) ? $event["eael_event_title"] : 'No Title',
                     'description' => $event["eael_event_description"],
                     'start' => $start,
                     'end' => $end,
-                    'borderColor' => !empty($event['eael_event_border_color']) ? $event['eael_event_border_color'] : '#10ecab',
-                    'textColor' => $event['eael_event_text_color'],
-                    'color' => $event['eael_event_bg_color'],
+                    'borderColor' => !empty($settings_eael_event_global_popup_ribbon_color) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
+                    'textColor' => $settings_eael_event_global_text_color,
+                    'color' => $settings_eael_event_global_bg_color,
                     'url' => ($settings['eael_event_details_link_hide'] !== 'yes') ? $event["eael_event_link"]["url"] : '',
                     'allDay' => $event['eael_event_all_day'],
                     'external' => $event['eael_event_link']['is_external'],
@@ -1856,10 +1873,9 @@ class Event_Calendar extends Widget_Base
             set_transient($transient_key, $data, $settings['eael_event_calendar_data_cache_limit'] * MINUTE_IN_SECONDS);
         }
 
-
+	    $calendar_data = [];
         $data = json_decode($data);
         if (isset($data->items)) {
-            $calendar_data = [];
 
             foreach ($data->items as $key => $item) {
                 if ($item->status !== 'confirmed') {
@@ -1875,15 +1891,19 @@ class Event_Calendar extends Widget_Base
                     $ev_end_date = $item->end->dateTime;
                 }
 
+                $settings_eael_event_global_bg_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_bg_color');
+                $settings_eael_event_global_text_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_text_color');
+                $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_popup_ribbon_color');
+
                 $calendar_data[] = [
                     'id' => ++$key,
                     'title' => !empty($item->summary) ? $item->summary : 'No Title',
                     'description' => isset($item->description) ? $item->description : '',
                     'start' => $ev_start_date,
                     'end' => $ev_end_date,
-                    'borderColor' => !empty($settings['eael_event_global_popup_ribbon_color']) ? $settings['eael_event_global_popup_ribbon_color'] : '#10ecab',
-                    'textColor' => $settings['eael_event_global_text_color'],
-                    'color' => $settings['eael_event_global_bg_color'],
+                    'borderColor' => !empty($settings_eael_event_global_popup_ribbon_color) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
+                    'textColor' => $settings_eael_event_global_text_color,
+                    'color' => $settings_eael_event_global_bg_color,
                     'url' => ($settings['eael_event_details_link_hide'] !== 'yes') ? $item->htmlLink : '',
                     'allDay' => $all_day,
                     'external' => 'on',
@@ -1944,6 +1964,10 @@ class Event_Calendar extends Widget_Base
               $end = date('Y-m-d H:i', strtotime(tribe_get_end_date($event->ID, true, $date_format))) . ":01";
             }
 
+            $settings_eael_event_global_bg_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_bg_color');
+            $settings_eael_event_global_text_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_text_color');
+            $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_popup_ribbon_color');
+
             $calendar_data[] = [
                 'id' => ++$key,
                 'title' => !empty($event->post_title) ? $event->post_title : __('No Title',
@@ -1951,9 +1975,9 @@ class Event_Calendar extends Widget_Base
                 'description' => $event->post_content,
                 'start' => tribe_get_start_date($event->ID, true, $date_format),
                 'end' => $end,
-                'borderColor' => !empty($settings['eael_event_global_popup_ribbon_color']) ? $settings['eael_event_global_popup_ribbon_color'] : '#10ecab',
-                'textColor' => $settings['eael_event_global_text_color'],
-                'color' => $settings['eael_event_global_bg_color'],
+                'borderColor' => !empty($settings_eael_event_global_popup_ribbon_color) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
+                'textColor' => $settings_eael_event_global_text_color,
+                'color' => $settings_eael_event_global_bg_color,
                 'url' => ($settings['eael_event_details_link_hide'] !== 'yes') ? get_the_permalink($event->ID) : '',
                 'allDay' => $all_day,
                 'external' => 'on',
@@ -1961,5 +1985,25 @@ class Event_Calendar extends Widget_Base
             ];
         }
         return $calendar_data;
+    }
+
+    public function fetch_color_or_global_color($settings, $control_name=''){
+        if( !isset($settings[$control_name])) {
+            return '';
+        }
+
+        $color = $settings[$control_name];
+
+        if(!empty($settings['__globals__']) && !empty($settings['__globals__'][$control_name])){
+            $color = $settings['__globals__'][$control_name];
+            $color_arr = explode('?id=', $color); //E.x. 'globals/colors/?id=primary'
+
+            $color_name = count($color_arr) > 1 ? $color_arr[1] : '';
+            if( !empty($color_name) ) {
+                $color = "var( --e-global-color-$color_name )";
+            }
+        }
+
+        return $color;
     }
 }

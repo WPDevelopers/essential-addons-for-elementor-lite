@@ -2,8 +2,8 @@ jQuery(window).on("elementor/frontend/init", function () {
 	var filterableGalleryHandler = function ($scope, $) {
 		var filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0),
 			filterTrigger  = $scope.find("#fg-filter-trigger"),
-			form           = $scope.find(".fg-layout-3-search-box"),
-			input          = $scope.find("#fg-search-box-input"),
+			form          = $scope.find(".fg-layout-3-search-box"),
+			input         = $scope.find("#fg-search-box-input"),
 			searchRegex,
 			buttonFilter,
 			timer;
@@ -17,6 +17,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 		filterTrigger.on("click", function () {
 			filterControls.toggleClass("open-filters");
 		});
+		
 		filterTrigger.on("blur",function () {
 			filterControls.removeClass("open-filters");
 		});
@@ -27,6 +28,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				fg_items = $gallery_items   = $gallery.data("gallery-items"),
 				$layout_mode     = $settings.grid_style === "masonry" ? "masonry" : "fitRows",
 				$gallery_enabled = ($settings.gallery_enabled === "yes"),
+				$images_per_page = $gallery.data("images-per-page"),
 				$init_show_setting     = $gallery.data("init-show");
 				fg_items.splice(0, $init_show_setting)
 			// init isotope
@@ -62,7 +64,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 			// Popup
 			$($scope).magnificPopup({
-				delegate: ".eael-magnific-link",
+				delegate: ".eael-magnific-link.active",
 				type: "image",
 				gallery: {
 					enabled: $gallery_enabled
@@ -80,21 +82,62 @@ jQuery(window).on("elementor/frontend/init", function () {
 			$scope.on("click", ".control", function () {
 				var $this    = $(this);
 				buttonFilter = $(this).attr("data-filter");
+				let initData = $(".eael-filter-gallery-container .eael-filterable-gallery-item-wrap"+buttonFilter,$scope).length;
 				let $tspan = $scope.find("#fg-filter-trigger > span");
 				if ($tspan.length) {
 					$tspan.text($this.text());
 				}
+				const firstInit = parseInt($this.data('first-init'));
+				
+				if(!firstInit){
+					$this.data('first-init', 1);
+					let item_found = initData;
+					let index_list = $items =  [];
+					for (const [index, item] of fg_items.entries()){
+						if (buttonFilter !== '' && buttonFilter !== '*') {
+							let element = $($(item)[0]);
+							if (element.is(buttonFilter)) {
+								++item_found;
+								$items.push($(item)[0]);
+								index_list.push(index);
+							}
+						}
+						
+						if (item_found === $images_per_page) {
+							break;
+						}
+					}
+					
+					if(index_list.length>0){
+						fg_items = fg_items.filter(function (item, index){
+							return !index_list.includes(index);
+						});
+					}
+				}
+				
 				const LoadMoreShow = $(this).data("load-more-status"),
 					 loadMore = $(".eael-gallery-load-more",$scope);
+				
 				//hide load more button if selected control have no item to show
 				if(LoadMoreShow || fg_items.length < 1){
 					loadMore.hide()
 				}else{
 					loadMore.show()
 				}
+				
 				$this.siblings().removeClass("active");
 				$this.addClass("active");
-				$isotope_gallery.isotope();
+				if (!firstInit && $items.length > 0) {
+					$isotope_gallery.isotope({filter: buttonFilter});
+					$gallery.append($items);
+					$isotope_gallery.isotope('appended', $items);
+					$isotope_gallery.imagesLoaded().progress(function () {
+						$isotope_gallery.isotope("layout");
+					});
+					
+				} else {
+					$isotope_gallery.isotope({filter: buttonFilter});
+				}
 			});
 
 			//quick search
@@ -127,9 +170,8 @@ jQuery(window).on("elementor/frontend/init", function () {
 			$scope.on("click", ".eael-gallery-load-more", function (e) {
 				e.preventDefault();
 				var $this            = $(this),
-					$init_show       = $(".eael-filter-gallery-container", $scope).children(".eael-filterable-gallery-item-wrap").length,
-					$total_items     = $gallery.data("total-gallery-items"),
-					$images_per_page = $gallery.data("images-per-page"),
+					// $init_show       = $(".eael-filter-gallery-container", $scope).children(".eael-filterable-gallery-item-wrap").length,
+					// $total_items     = $gallery.data("total-gallery-items"),
 					$nomore_text     = $gallery.data("nomore-item-text"),
 					filter_enable = $(".eael-filter-gallery-control",$scope).length,
 					$items           = [];

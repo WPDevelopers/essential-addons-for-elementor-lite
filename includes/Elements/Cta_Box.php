@@ -359,7 +359,7 @@ class Cta_Box extends Widget_Base
                         ],
                     ],
                     'default' => '1',
-                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
                 ]
             );
 
@@ -1059,10 +1059,6 @@ class Cta_Box extends Widget_Base
         $sub_title = Helper::eael_wp_kses($settings['eael_cta_sub_title']);
         $icon_migrated = isset($settings['__fa4_migrated']['eael_cta_flex_grid_icon_new']);
         $icon_is_new = empty($settings['eael_cta_flex_grid_icon']);
-        // Button
-        $target_primary     = $settings['eael_cta_btn_link']['is_external'] ? 'target="_blank"' : '';
-        $nofollow_primary   = $settings['eael_cta_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
-
 
         if ('cta-bg-color' == $settings['eael_cta_color_type']) {
             $cta_class = 'bg-lite';
@@ -1108,14 +1104,25 @@ class Cta_Box extends Widget_Base
             }
         }
 
-        // button markup
-        $buttonMarkup = '';
-        $buttonMarkup .='<a href="'.esc_url($settings['eael_cta_btn_link']['url']).'" '.$target_primary.' '.$nofollow_primary.' class="cta-button '.esc_attr($cta_btn_effect).'">'.esc_html($settings['eael_cta_btn_text']).'</a>';
-        if($settings['eael_cta_secondary_btn_is_show'] === 'yes'){
-            $target_secondary   = $settings['eael_cta_secondary_btn_link']['is_external'] ? 'target="_blank"' : '';
-            $nofollow_secondary = $settings['eael_cta_secondary_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
-            $buttonMarkup .='<a href="'.esc_url($settings['eael_cta_secondary_btn_link']['url']).'" '.$target_secondary.' '.$nofollow_secondary.' class="cta-button cta-secondary-button '.esc_attr($cta_secondary_btn_effect).'">'.esc_html($settings['eael_cta_secondary_btn_text']).'</a>';
-        }
+        // button attributes
+	    if ( ! empty( $settings['eael_cta_btn_link']['url'] ) ) {
+		    $this->add_link_attributes( 'button', $settings['eael_cta_btn_link'] );
+	    }
+	    $this->add_render_attribute( 'button', 'class', "cta-button {$cta_btn_effect}" );
+
+	    // button markup
+	    $buttonMarkup = '';
+	    $buttonMarkup .= '<a ' . $this->get_render_attribute_string( 'button' ) . '>' . esc_html( $settings['eael_cta_btn_text'] ) . '</a>';
+	    if ( $settings['eael_cta_secondary_btn_is_show'] === 'yes' ) {
+		    // button attributes
+		    if ( ! empty( $settings['eael_cta_secondary_btn_link']['url'] ) ) {
+			    $this->add_link_attributes( 'secondary_button', $settings['eael_cta_secondary_btn_link'] );
+		    }
+		    $this->add_render_attribute( 'secondary_button', 'class', "cta-button cta-secondary-button {$cta_secondary_btn_effect}" );
+
+		    // button markup
+		    $buttonMarkup .= '<a ' . $this->get_render_attribute_string( 'secondary_button' ) . '>' . esc_html( $settings['eael_cta_secondary_btn_text'] ) . '</a>';
+	    }
     ?>
 	<?php if ('cta-basic' == $settings['eael_cta_type']): ?>
 	<div class="eael-call-to-action <?php echo esc_attr($cta_class); ?>">

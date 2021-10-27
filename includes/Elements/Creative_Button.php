@@ -201,7 +201,7 @@ class Creative_Button extends Widget_Base
                         ],
                     ],
                     'default'     => '1',
-                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
                 ]
             );
 
@@ -443,15 +443,15 @@ class Creative_Button extends Widget_Base
                     'options'     => [
                         'flex-start' => [
                             'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
-                            'icon'  => 'fa fa-align-left',
+                            'icon'  => 'eicon-text-align-left',
                         ],
                         'center'     => [
                             'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                            'icon'  => 'fa fa-align-center',
+                            'icon'  => 'eicon-text-align-center',
                         ],
                         'flex-end'   => [
                             'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                            'icon'  => 'fa fa-align-right',
+                            'icon'  => 'eicon-text-align-right',
                         ],
                     ],
                     'default'     => '',

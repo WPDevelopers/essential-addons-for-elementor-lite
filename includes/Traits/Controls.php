@@ -164,6 +164,9 @@ trait Controls
                 'label' => __('Offset', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '0',
+	            'condition' => [
+	            	'orderby!' => 'rand'
+	            ]
             ]
         );
 
@@ -732,7 +735,7 @@ trait Controls
                     'options' => [
                         'img' => [
                             'title' => __('Image', 'essential-addons-for-elementor-lite'),
-                            'icon' => 'fa fa-picture-o',
+                            'icon' => 'eicon-image-bold',
                         ],
                         'icon' => [
                             'title' => __('Icon', 'essential-addons-for-elementor-lite'),
@@ -983,7 +986,8 @@ trait Controls
 
         if ( 'eael-post-carousel' === $wb->get_name() || 'eael-post-grid' === $wb->get_name() ) {
 
-	        $eael_show_post_terms_condition = 'eael-post-grid' === $wb->get_name() ? ['eael_show_image' => 'yes'] : [];
+//	        $eael_show_post_terms_condition = 'eael-post-grid' === $wb->get_name() ? ['eael_show_image' => 'yes'] : [];
+	        $eael_show_post_terms_condition = ['eael_show_image' => 'yes']; //Applicable for both elements: Post Carousel and Post Grid
 
             $wb->add_control(
                 'eael_show_post_terms',
@@ -997,6 +1001,8 @@ trait Controls
                 ]
             );
 
+            $eael_show_post_terms_child_condition = ['eael_show_image' => 'yes', 'eael_show_post_terms' => 'yes'];
+
             $wb->add_control(
                 'eael_post_terms',
                 [
@@ -1007,9 +1013,7 @@ trait Controls
                         'tags' => __('Tags', 'essential-addons-for-elementor-lite'),
                     ],
                     'default' => 'category',
-                    'condition' => [
-                        'eael_show_post_terms' => 'yes',
-                    ],
+                    'condition' => $eael_show_post_terms_child_condition,
                 ]
             );
 
@@ -1024,9 +1028,7 @@ trait Controls
                         3 => __('3', 'essential-addons-for-elementor-lite'),
                     ],
                     'default' => 1,
-                    'condition' => [
-                        'eael_show_post_terms' => 'yes',
-                    ],
+                    'condition' => $eael_show_post_terms_child_condition,
                 ]
             );
 
@@ -1155,15 +1157,15 @@ trait Controls
                 'options' => [
                     'left' => [
                         'title' => __('Left', 'essential-addons-elementor'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-elementor'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
                         'title' => __('Right', 'essential-addons-elementor'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'selectors' => [
@@ -1527,15 +1529,15 @@ trait Controls
                 'options' => [
                     'flex-start' => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'flex-end' => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'default' => 'center',
@@ -1901,15 +1903,15 @@ trait Controls
 				'options'   => [
 					'left'  => [
 						'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-align-left',
+						'icon'  => 'eicon-text-align-left',
 					],
 					'center'  => [
 						'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-align-center',
+						'icon'  => 'eicon-text-align-center',
 					],
 					'right' => [
 						'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-align-right',
+						'icon'  => 'eicon-text-align-right',
 					],
 				],
 				'default' => 'center',

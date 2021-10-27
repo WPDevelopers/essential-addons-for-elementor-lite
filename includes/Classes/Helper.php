@@ -85,6 +85,21 @@ class Helper
         return in_array($template_name, $template_list);
     }
 
+	public static function str_to_css_id( $str ) {
+		$str = strtolower( $str );
+
+		//Make alphanumeric (removes all other characters)
+		$str = preg_replace( "/[^a-z0-9_\s-]/", "", $str );
+
+		//Clean up multiple dashes or whitespaces
+		$str = preg_replace( "/[\s-]+/", " ", $str );
+
+		//Convert whitespaces and underscore to dash
+		$str = preg_replace( "/[\s_]/", "-", $str );
+
+		return $str;
+	}
+
     public static function fix_old_query($settings)
     {
         $update_query = false;
@@ -203,7 +218,7 @@ class Helper
                     ],
                 ],
                 'default' => '1',
-                'description' => '<span class="pro-feature"> Get the  <a href="http://essential-addons.com/elementor/#pricing" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+                'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
             ]
         );
 
@@ -558,33 +573,7 @@ class Helper
         return $options;
     }
 
-    /**
-     * Get FluentForms List
-     *
-     * @return array
-     */
-    public static function get_fluent_forms_list()
-    {
 
-        $options = array();
-
-        if (defined('FLUENTFORM')) {
-            global $wpdb;
-
-            $result = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}fluentform_forms");
-            if ($result) {
-                $options[0] = esc_html__('Select a Fluent Form', 'essential-addons-for-elementor-lite');
-                foreach ($result as $form) {
-                    $options[$form->id] = $form->title;
-                }
-            } else {
-                $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
-            }
-        }
-
-        return $options;
-
-    }
 
     public static function get_ninja_tables_list()
     {
@@ -932,7 +921,7 @@ class Helper
 				<div id="product-<?php the_ID(); ?>" <?php post_class( 'product' ); ?>>
 					<div class="eael-product-image-wrap">
 						<?php
-						echo ( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'. $stockout_text .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . $sale_text . '</span>' : '') );
+						echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'. $stockout_text .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . $sale_text . '</span>' : '') );
 						do_action( 'eael_woo_single_product_image' );
 						?>
 					</div>

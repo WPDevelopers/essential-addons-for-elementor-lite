@@ -182,14 +182,18 @@ class Flip_Box extends Widget_Base
 	    $this->add_control(
 		    'eael_flipbox_front_templates',
 		    [
-			    'label'                 => __( 'Choose Template', 'essential-addons-elementor' ),
-			    'type'                  => Controls_Manager::SELECT,
-			    'options'               => Helper::get_elementor_templates(),
-			    'condition'             => [
-				    'eael_flipbox_front_content_type'      => 'template',
+			    'label'       => __( 'Choose Template', 'essential-addons-elementor' ),
+			    'type'        => 'eael-select2',
+			    'source_name' => 'post_type',
+			    'source_type' => 'elementor_library',
+			    'label_block' => true,
+			    'condition'   => [
+				    'eael_flipbox_front_content_type' => 'template',
 			    ],
 		    ]
 	    );
+
+
 
 	    $this->add_control(
 		    'eael_flipbox_img_or_icon',
@@ -367,15 +371,15 @@ class Flip_Box extends Widget_Base
 			    'options'      => [
 				    'left'   => [
 					    'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
-					    'icon'  => 'fa fa-align-left',
+					    'icon'  => 'eicon-text-align-left',
 				    ],
 				    'center' => [
 					    'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-					    'icon'  => 'fa fa-align-center',
+					    'icon'  => 'eicon-text-align-center',
 				    ],
 				    'right'  => [
 					    'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-					    'icon'  => 'fa fa-align-right',
+					    'icon'  => 'eicon-text-align-right',
 				    ],
 			    ],
 			    'default'      => 'center',
@@ -411,11 +415,13 @@ class Flip_Box extends Widget_Base
 	    $this->add_control(
 		    'eael_flipbox_back_templates',
 		    [
-			    'label'                 => __( 'Choose Template', 'essential-addons-elementor' ),
-			    'type'                  => Controls_Manager::SELECT,
-			    'options'               => Helper::get_elementor_templates(),
-			    'condition'             => [
-				    'eael_flipbox_back_content_type'      => 'template',
+			    'label'       => __( 'Choose Template', 'essential-addons-elementor' ),
+			    'type'        => 'eael-select2',
+			    'source_name' => 'post_type',
+			    'source_type' => 'elementor_library',
+			    'label_block' => true,
+			    'condition'   => [
+				    'eael_flipbox_back_content_type' => 'template',
 			    ],
 		    ]
 	    );
@@ -596,15 +602,15 @@ class Flip_Box extends Widget_Base
 			    'options'      => [
 				    'left'   => [
 					    'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
-					    'icon'  => 'fa fa-align-left',
+					    'icon'  => 'eicon-text-align-left',
 				    ],
 				    'center' => [
 					    'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-					    'icon'  => 'fa fa-align-center',
+					    'icon'  => 'eicon-text-align-center',
 				    ],
 				    'right'  => [
 					    'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-					    'icon'  => 'fa fa-align-right',
+					    'icon'  => 'eicon-text-align-right',
 				    ],
 			    ],
 			    'default'  => 'center',
@@ -740,7 +746,7 @@ class Flip_Box extends Widget_Base
                         ],
                     ],
                     'default'     => '1',
-                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
                 ]
             );
 

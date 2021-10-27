@@ -277,6 +277,30 @@ class Table_of_Content
             ]
         );
 
+        $element->add_responsive_control(
+            'eael_ext_toc_max_height',
+            [
+                'label' => __( 'Height', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'vh' => [
+                        'min' => 10,
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'size' => 50,
+                ],
+                'size_units' => [ 'vh' ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-toc.eael-sticky .eael-toc-body' => 'max-height: {{SIZE}}vh; height: {{SIZE}}vh;',
+                ],
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                ],
+            ]
+        );
+
         $element->add_control(
             'eael_ext_toc_sticky_scroll',
             [
