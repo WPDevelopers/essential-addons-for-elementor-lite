@@ -1639,7 +1639,8 @@ class Woo_Cart extends Widget_Base {
 				'name'     => 'ea_woo_cart_btn_typo',
 				'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
 				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button, 
-				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button',
+				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button,
+				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals .wc-proceed-to-checkout .button:not(:hover):not(:active)',
 			]
 		);
 
@@ -1755,7 +1756,8 @@ class Woo_Cart extends Widget_Base {
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
 					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button, 
-				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button,
+				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals .wc-proceed-to-checkout .button:not(:hover):not(:active)' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
