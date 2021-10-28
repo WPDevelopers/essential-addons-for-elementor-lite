@@ -691,6 +691,10 @@ body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form
 body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity input.plus {
   display: none;
 }
+body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper .cart-totals-inner {
+  padding: 0;
+  border: none;
+}
 @media (max-width: 1024px) {
   .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr {
     display: table-row;
