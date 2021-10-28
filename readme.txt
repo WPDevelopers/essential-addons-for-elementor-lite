@@ -230,6 +230,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Fixed: EA Simple Menu | Active Page still showing on Responsive Devices
 - Fixed: EA Twitter Feed | Not pulling the feed when new Keys are inserted
 - Fixed: EA Advanced Data Table | Automatically copying data from another table
+- Fixed: EA Contact Form 7 | Field style not being editable
 - Improved: EA Woo Product Gallery | Added Responsive controls
 - Few minor bug fix & improvements
 
