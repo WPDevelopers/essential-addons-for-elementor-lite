@@ -129,6 +129,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  font-size: inherit;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity input::-webkit-outer-spin-button,
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity input::-webkit-inner-spin-button {
@@ -685,6 +686,10 @@ body.theme-twentytwentyone.eael-woo-cart .eael-woo-cart-wrapper a.button:hover {
 }
 body.theme-twentytwentyone.eael-woo-cart .eael-woo-cart-wrapper ul.woocommerce-error {
   padding: 0;
+}
+body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity input.minus,
+body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity input.plus {
+  display: none;
 }
 @media (max-width: 1024px) {
   .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr {

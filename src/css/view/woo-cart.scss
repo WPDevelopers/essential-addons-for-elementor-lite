@@ -154,6 +154,7 @@ $thumb-bg-1: #E5F6FC;
                     float: none;
                     align-items: center;
                     justify-content: center;
+                    font-size: inherit;
 
                     input::-webkit-outer-spin-button,
                     input::-webkit-inner-spin-button {
@@ -829,6 +830,14 @@ body.theme-twentytwentyone.eael-woo-cart .eael-woo-cart-wrapper {
 
     ul.woocommerce-error {
         padding: 0;
+    }
+}
+
+//WoodMart Theme Compatibility
+body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper {
+    form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity input.minus,
+    form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity input.plus {
+        display: none;
     }
 }
 
