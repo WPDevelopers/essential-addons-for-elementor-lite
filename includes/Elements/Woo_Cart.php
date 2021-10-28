@@ -1184,6 +1184,16 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$obj->add_group_control(
+			Group_Control_Border::get_type(), [
+				'name'      => 'ea_woo_cart_table_row_border',
+				'selector'  => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr::after',
+				'condition' => [
+					'ea_woo_cart_layout' => 'default'
+				]
+			]
+		);
+
 		$obj->add_responsive_control(
 			'ea_woo_cart_table_row_border_radius',
 			[
