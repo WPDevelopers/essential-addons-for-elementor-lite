@@ -448,6 +448,11 @@ $thumb-bg-1: #E5F6FC;
 
                             .select2-container .select2-selection--single {
                                 padding: 0;
+                                background: $transparent;
+                            }
+
+                            input {
+                                background: $transparent;
                             }
 
                             ul {
