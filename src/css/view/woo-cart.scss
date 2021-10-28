@@ -839,6 +839,11 @@ body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper {
     form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity input.plus {
         display: none;
     }
+
+    .cart-totals-inner {
+        padding: 0;
+        border: none;
+    }
 }
 
 // Responsive Tablet
