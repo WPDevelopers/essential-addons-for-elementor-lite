@@ -18,6 +18,22 @@
   border-radius: 5px;
   margin-bottom: 30px;
 }
+.eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error::before,
+.eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-info::before,
+.eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper ~ .woocommerce-info::before,
+.eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-message::before {
+  position: relative;
+  top: 0;
+  left: 0;
+  vertical-align: top;
+}
+.eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error li,
+.eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-info li,
+.eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper ~ .woocommerce-info li,
+.eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-message li {
+  display: inline-block;
+  width: calc(100% - 30px);
+}
 .eael-woo-cart .eael-woo-cart-wrapper .woocommerce-notices-wrapper .woocommerce-error {
   border-color: #b81c23;
   list-style: none;
