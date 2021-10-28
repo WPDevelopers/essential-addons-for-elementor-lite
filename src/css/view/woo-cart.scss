@@ -32,6 +32,18 @@ $thumb-bg-1: #E5F6FC;
             box-shadow: 0 8px 18px 0 rgba(0, 1, 35, 0.05);
             border-radius: 5px;
             margin-bottom: 30px;
+
+            &::before {
+                position: relative;
+                top: 0;
+                left: 0;
+                vertical-align: top;
+            }
+
+            li {
+                display: inline-block;
+                width: calc(100% - 30px);
+            }
         }
 
         .woocommerce-error {
