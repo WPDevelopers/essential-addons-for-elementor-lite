@@ -143,7 +143,7 @@ class Woo_Cart extends Widget_Base {
 				'default'     => 'default',
 				'label_block' => false,
 				'options'     => apply_filters( 'eael/woo-cart/layout', [
-					'default' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+					'default' => esc_html__( 'Style 1', 'essential-addons-for-elementor-lite' ),
 					'style-2' => esc_html__( 'Style 2', 'essential-addons-for-elementor-lite' ),
 				] ),
 			]
