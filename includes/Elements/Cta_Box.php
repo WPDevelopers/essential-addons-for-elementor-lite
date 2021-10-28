@@ -782,8 +782,9 @@ class Cta_Box extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#3F51B5',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-call-to-action .cta-button:after:not(.cta-secondary-button)' => 'background: {{VALUE}};',
-                    '{{WRAPPER}} .eael-call-to-action .cta-button:hover:not(.cta-secondary-button)' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-primary-button:after' => 'background: {{VALUE}};',
+//                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-primary-button.effect-default:hover' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-primary-button:hover' => 'background: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_cta_btn_is_used_gradient_bg' => ''
@@ -1076,6 +1077,8 @@ class Cta_Box extends Widget_Base
             $cta_btn_effect = 'effect-2';
         } elseif ('top-to-bottom' == $settings['eael_cta_btn_effect_type']) {
             $cta_btn_effect = 'effect-1';
+        }elseif ('default' == $settings['eael_cta_btn_effect_type']) {
+            $cta_btn_effect = 'effect-default';
         }
         // Secondary Button Effect
         $cta_secondary_btn_effect = '';
@@ -1083,6 +1086,8 @@ class Cta_Box extends Widget_Base
             $cta_secondary_btn_effect = 'effect-2';
         } elseif ('top-to-bottom' == $settings['eael_cta_secondary_btn_effect_type']) {
             $cta_secondary_btn_effect = 'effect-1';
+        }elseif ('default' == $settings['eael_cta_secondary_btn_effect_type']) {
+            $cta_secondary_btn_effect = 'effect-default';
         }
 
         // Heading Markup
@@ -1108,7 +1113,7 @@ class Cta_Box extends Widget_Base
 	    if ( ! empty( $settings['eael_cta_btn_link']['url'] ) ) {
 		    $this->add_link_attributes( 'button', $settings['eael_cta_btn_link'] );
 	    }
-	    $this->add_render_attribute( 'button', 'class', "cta-button {$cta_btn_effect}" );
+	    $this->add_render_attribute( 'button', 'class', "cta-button cta-primary-button {$cta_btn_effect}" );
 
 	    // button markup
 	    $buttonMarkup = '';
