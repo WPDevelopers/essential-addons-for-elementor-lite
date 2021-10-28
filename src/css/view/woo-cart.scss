@@ -135,6 +135,8 @@ $thumb-bg-1: #E5F6FC;
             }
 
             .product-quantity {
+                text-decoration: none !important;
+
                 .quantity {
                     display: flex;
                     float: none;
@@ -157,6 +159,7 @@ $thumb-bg-1: #E5F6FC;
                         text-align: center;
                         font-size: 20px;
                         color: $text-color-1;
+                        text-decoration: none !important;
                     }
 
                     .eael-cart-qty-minus,
@@ -166,6 +169,7 @@ $thumb-bg-1: #E5F6FC;
                         color: $qty-button;
                         font-size: 20px;
                         cursor: pointer;
+                        text-decoration: none !important;
                     }
                 }
             }
