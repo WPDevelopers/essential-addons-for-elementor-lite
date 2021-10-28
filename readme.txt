@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 4.9.4
+Stable tag: 4.9.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -224,6 +224,15 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.9.5 - 28/10/2021 =
+
+- Fixed: EA Simple Menu | Active Page still showing on Responsive Devices
+- Fixed: EA Twitter Feed | Not pulling the feed when new Keys are inserted
+- Fixed: EA Advanced Data Table | Automatically copying data from another table
+- Improved: EA Woo Product Gallery | Added Responsive controls
+- Few minor bug fix & improvements
+
 
 = 4.9.4 - 11/10/2021 =
 
