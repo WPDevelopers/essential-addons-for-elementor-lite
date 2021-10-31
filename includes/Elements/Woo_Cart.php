@@ -226,6 +226,34 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$repeater->add_control(
+			'item_remove_icon_color',
+			[
+				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-remove a' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'column_type' => 'remove'
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'item_remove_icon_color_hover',
+			[
+				'label'     => esc_html__( 'Icon Hover Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-remove a:hover' => 'color: {{VALUE}} !important;',
+				],
+				'condition' => [
+					'column_type' => 'remove'
+				]
+			]
+		);
+
 		$repeater->add_responsive_control(
 			'column_item_align',
 			[
@@ -739,6 +767,34 @@ class Woo_Cart extends Widget_Base {
 				'exclude_inline_options' => [ 'svg' ],
 				'frontend_available'     => true,
 				'condition'              => [
+					'eael_woo_cart_table_components_remove' => 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_table_components_remove_icon_color',
+			[
+				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right>.eael-woo-cart-td.product-remove a' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_woo_cart_table_components_remove' => 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_table_components_remove_icon_color_hover',
+			[
+				'label'     => esc_html__( 'Icon Hover Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right>.eael-woo-cart-td.product-remove a:hover' => 'color: {{VALUE}} !important;',
+				],
+				'condition' => [
 					'eael_woo_cart_table_components_remove' => 'yes'
 				]
 			]
