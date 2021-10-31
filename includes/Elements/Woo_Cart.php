@@ -1572,6 +1572,141 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$obj->add_control(
+			'ea_section_woo_cart_notice_error_heading',
+			[
+				'label'     => __( 'Button', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'after',
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'ea_woo_cart_coupon_btn_typo',
+				'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
+				'selector' => '.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button',
+			]
+		);
+
+		$obj->start_controls_tabs( 'ea_woo_cart_coupon_btn_tabs' );
+		$obj->start_controls_tab(
+			'ea_woo_cart_coupon_btn_tab_normal',
+			[
+				'label' => __( 'Normal', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$obj->add_control(
+			'ea_woo_cart_coupon_btn_btn_bg_color',
+			[
+				'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$obj->add_control(
+			'ea_woo_cart_coupon_btn_color',
+			[
+				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Border::get_type(), [
+				'name'     => 'ea_woo_cart_coupon_btn_border',
+				'selector' => '.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button',
+			]
+		);
+
+		$obj->end_controls_tab();
+
+		$obj->start_controls_tab(
+			'ea_woo_cart_coupon_btn_tab_hover',
+			[
+				'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$obj->add_control(
+			'ea_woo_cart_coupon_btn_bg_color_hover',
+			[
+				'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button:hover' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$obj->add_control(
+			'ea_woo_cart_coupon_btn_color_hover',
+			[
+				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$obj->add_control(
+			'ea_woo_cart_coupon_btn_border_color_hover',
+			[
+				'label'     => __( 'Border Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button:hover' => 'border-color: {{VALUE}};',
+				],
+				'condition' => [
+					'ea_woo_checkout_login_btn_border_border!' => '',
+				],
+			]
+		);
+
+		$obj->end_controls_tab();
+		$obj->end_controls_tabs();
+
+		$obj->add_control(
+			'ea_woo_cart_coupon_btn_border_radius',
+			[
+				'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$obj->add_responsive_control(
+			'ea_woo_cart_coupon_btn_padding',
+			[
+				'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$obj->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'ea_woo_cart_coupon_btn_box_shadow',
+				'selector' => '.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button',
+			]
+		);
+
 		$obj->end_controls_section();
 
 		/**
