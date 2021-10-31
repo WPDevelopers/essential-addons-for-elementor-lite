@@ -485,7 +485,7 @@ class Woo_Cart extends Widget_Base {
 				],
 				'selectors'  => [
 					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-left,
-					.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper'  => 'width: {{SIZE}}{{UNIT}};',
+					.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper'             => 'width: {{SIZE}}{{UNIT}};',
 					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right,
 					.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals' => 'width: calc(100% - {{SIZE}}{{UNIT}});',
 				],
@@ -612,10 +612,10 @@ class Woo_Cart extends Widget_Base {
 					'center' => 'text-align: center; justify-content: center;',
 					'right'  => 'text-align: right; justify-content: flex-end;',
 				],
-				'selectors' => [
+				'selectors'            => [
 					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity,
 					.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .product-quantity' => '{{VALUE}};',
-					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity'                                                 => '{{VALUE}};',
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity'                                                   => '{{VALUE}};',
 				],
 			]
 		);
@@ -1079,10 +1079,10 @@ class Woo_Cart extends Widget_Base {
 				'label'     => esc_html__( 'Background Color Left Side', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2:not(.has-table-right-content)' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2:not(.has-table-right-content)'                  => 'background: {{VALUE}};',
 					'{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2.has-table-left-content.has-table-right-content' => 'background: linear-gradient(to right, {{VALUE}} {{eael_woo_cart_table_components_left_side_width.SIZE}}{{eael_woo_cart_table_components_left_side_width.UNIT}}, {{ea_woo_cart_style2_bg_color_right.VALUE}} 0%);',
 				],
-				'default' => '#FAFAFA',
+				'default'   => '#FAFAFA',
 				'condition' => [
 					'ea_woo_cart_layout' => 'style-2'
 				]
@@ -1097,7 +1097,7 @@ class Woo_Cart extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2' => 'background: {{VALUE}};',
 				],
-				'default' => '#FFFFFF',
+				'default'   => '#FFFFFF',
 				'condition' => [
 					'ea_woo_cart_layout' => 'style-2'
 				]
@@ -1252,7 +1252,7 @@ class Woo_Cart extends Widget_Base {
 				'selectors' => [
 					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tbody .eael-woo-cart-tr .eael-woo-cart-tr-left > .product-thumbnail' => 'background: {{VALUE}};',
 				],
-				'condition'  => [
+				'condition' => [
 					'ea_woo_cart_layout' => 'style-2'
 				]
 			]
