@@ -491,7 +491,9 @@ trait Woo_Cart_Helper {
 													do_action( 'woocommerce_after_cart_item_name', $cart_item, $cart_item_key );
 
 													// Product SKU
-													printf( '<p class="eael-woo-cart-sku">#%s</p>', $_product->get_sku() );
+													if ( $settings['eael_woo_cart_table_components_sku'] === 'yes' ) {
+														printf( '<p class="eael-woo-cart-sku">#%s</p>', $_product->get_sku() );
+													}
 
 													// Meta data.
 													echo wc_get_formatted_cart_item_data( $cart_item ); // PHPCS: XSS ok.

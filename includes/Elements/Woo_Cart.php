@@ -521,6 +521,18 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_woo_cart_table_components_sku',
+			[
+				'label'        => esc_html__( 'SKU Visibility', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
 			'eael_woo_cart_table_components_price',
 			[
 				'label'        => esc_html__( 'Price', 'essential-addons-for-elementor-lite' ),
