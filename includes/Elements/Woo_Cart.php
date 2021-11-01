@@ -359,6 +359,9 @@ class Woo_Cart extends Widget_Base {
 				'selectors' => [
 					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity input[type=number]' => 'background-color: {{VALUE}};',
 				],
+				'condition' => [
+					'column_type' => 'quantity'
+				]
 			]
 		);
 
