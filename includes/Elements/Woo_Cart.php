@@ -1625,6 +1625,20 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$obj->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'           => 'ea_section_woo_cart_coupon_style_bg',
+				'fields_options' => [
+					'background' => [
+						'label' => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
+					],
+				],
+				'types'          => [ 'classic', 'gradient' ],
+				'selector'       => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon',
+			]
+		);
+
 		$obj->add_control(
 			'ea_section_woo_cart_coupon_input_color',
 			[
@@ -1672,6 +1686,30 @@ class Woo_Cart extends Widget_Base {
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
 					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$obj->add_responsive_control(
+			'ea_section_woo_cart_coupon_style_padding',
+			[
+				'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$obj->add_responsive_control(
+			'ea_section_woo_cart_coupon_style_margin',
+			[
+				'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
