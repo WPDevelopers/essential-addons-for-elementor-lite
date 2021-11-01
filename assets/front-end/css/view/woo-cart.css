@@ -436,6 +436,9 @@
   display: block;
   text-align: center;
 }
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals h2 {
+  display: none;
+}
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 {
   background: #fff;
 }
