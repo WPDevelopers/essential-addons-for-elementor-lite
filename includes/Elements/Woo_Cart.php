@@ -351,6 +351,17 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$repeater->add_control(
+			'column_item_quantity_field_bg_color',
+			[
+				'label'     => __( 'Input Field Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity input[type=number]' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->add_control(
 			'table_items',
 			[
