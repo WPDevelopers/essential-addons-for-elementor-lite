@@ -1522,6 +1522,28 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$obj->add_control(
+			'ea_woo_cart_totals_body_link_color',
+			[
+				'label'     => esc_html__( 'Link Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td a' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$obj->add_control(
+			'ea_woo_cart_totals_body_link_color_hover',
+			[
+				'label'     => esc_html__( 'Link Hover Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td a:hover' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
 		$obj->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
