@@ -1829,6 +1829,14 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$obj->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'ea_woo_cart_coupon_btn_box_shadow',
+				'selector' => '.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button',
+			]
+		);
+
 		$obj->add_responsive_control(
 			'ea_woo_cart_coupon_btn_padding',
 			[
@@ -1850,14 +1858,6 @@ class Woo_Cart extends Widget_Base {
 				'selectors'  => [
 					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-			]
-		);
-
-		$obj->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'     => 'ea_woo_cart_coupon_btn_box_shadow',
-				'selector' => '.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button',
 			]
 		);
 
