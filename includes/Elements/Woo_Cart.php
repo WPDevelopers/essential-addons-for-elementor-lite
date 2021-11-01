@@ -1641,7 +1641,7 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$obj->add_control(
-			'ea_section_woo_cart_notice_error_heading',
+			'ea_section_woo_cart_coupon_btn_heading',
 			[
 				'label'     => __( 'Button', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::HEADING,
