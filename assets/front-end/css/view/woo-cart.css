@@ -95,6 +95,7 @@
   font-size: 80%;
   font-weight: 400;
   color: #737373;
+  text-decoration: inherit;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table dl dt {
   margin: 0 0 0 5px;
@@ -102,6 +103,7 @@
   display: inline-block;
   float: none;
   font-weight: 400;
+  text-decoration: inherit;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table dl dt::before {
   content: "|";
@@ -114,6 +116,7 @@
   margin: 0 0 0 5px;
   display: inline-block;
   padding-left: 0;
+  text-decoration: inherit;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity {
   display: -webkit-box;
