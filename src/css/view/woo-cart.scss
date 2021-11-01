@@ -147,8 +147,6 @@ $thumb-bg-1: #E5F6FC;
             }
 
             .product-quantity {
-                text-decoration: none !important;
-
                 .quantity {
                     display: flex;
                     float: none;
@@ -294,6 +292,13 @@ $thumb-bg-1: #E5F6FC;
                             font-weight: 500;
                         }
                     }
+                }
+            }
+
+            tbody,
+            .eael-woo-cart-tbody {
+                .product-quantity {
+                    text-decoration: none !important;
                 }
             }
         }

@@ -115,9 +115,6 @@
   display: inline-block;
   padding-left: 0;
 }
-.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity {
-  text-decoration: none !important;
-}
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-quantity .quantity {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -245,6 +242,10 @@
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-subtotal {
   font-weight: 500;
+}
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody .product-quantity,
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tbody .product-quantity {
+  text-decoration: none !important;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .woocommerce-Price-amount,
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .cart-collaterals .cart_totals .order-total td span.woocommerce-Price-amount.amount {
