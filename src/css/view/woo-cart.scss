@@ -386,15 +386,18 @@ $thumb-bg-1: #E5F6FC;
         .cart-collaterals {
             width: 50%;
             float: left;
+            text-align: right;
 
             .eael-cart-update-btn {
-                display: flex;
-                justify-content: flex-end;
+                display: inline-block;
+                text-align: center;
+                max-width: 365px;
+                width: 100%;
 
                 button {
-                    max-width: 365px;
                     width: 100%;
                     margin-bottom: 13px;
+                    display: inline-block;
 
                     &[disabled] {
                         opacity: .5;
@@ -504,14 +507,16 @@ $thumb-bg-1: #E5F6FC;
 
                 .wc-proceed-to-checkout {
                     padding: 0;
+                    text-align: center;
 
                     .button,
                     .button:not(:hover):not(:active) {
                         font-size: 20px;
                         padding: 18px 0;
                         margin: 0;
-                        display: block;
+                        display: inline-block;
                         text-align: center;
+                        width: 100%;
                     }
                 }
 
