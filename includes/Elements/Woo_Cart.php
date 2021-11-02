@@ -45,6 +45,9 @@ class Woo_Cart extends Widget_Base {
 			// Remove default 'woocommerce_cart_totals' callback from 'woocommerce_cart_collaterals'
 			remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cart_totals', 10 );
 
+			// Remove default 'woocommerce_cross_sell_display' callback from 'woocommerce_cart_collaterals'
+			remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' );
+
 			// Hooked our cart totals section in woocommerce_cart_collaterals
 			add_action( 'woocommerce_cart_collaterals', [ $this, 'eael_woo_cart_totals' ], 10 );
 
