@@ -355,6 +355,7 @@
   border-collapse: separate;
   border-spacing: 0 13px;
   margin: -13px 0;
+  border: none;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table td,
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table th {
