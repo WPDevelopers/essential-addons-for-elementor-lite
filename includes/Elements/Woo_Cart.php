@@ -2125,6 +2125,58 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$obj->add_responsive_control(
+			'ea_woo_cart_btn_width',
+			[
+				'label'      => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ '%', 'px' ],
+				'range'      => [
+					'%'  => [
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					],
+					'px' => [
+						'min'  => 0,
+						'max'  => 365,
+						'step' => 1,
+					],
+				],
+				'selectors'  => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .eael-cart-update-btn button,
+					.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals .wc-proceed-to-checkout .button,
+					.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals .wc-proceed-to-checkout .button:not(:hover):not(:active)' => 'width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$obj->add_responsive_control(
+			'ea_woo_cart_btn_alignment',
+			[
+				'label'     => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => [
+					'left'   => [
+						'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'selectors' => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .eael-cart-update-btn,
+					.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals .wc-proceed-to-checkout' => 'text-align: {{VALUE}};',
+				],
+			]
+		);
+
 		$obj->end_controls_section();
 
 		/**
