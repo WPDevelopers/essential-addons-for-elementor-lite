@@ -80,3 +80,16 @@
 
     });
 }(jQuery));
+
+function ea_woo_cart_column_type_title(value) {
+    const labelValues = {
+        remove: eael_select2_localize.remove,
+        thumbnail: eael_select2_localize.thumbnail,
+        name: eael_select2_localize.name,
+        price: eael_select2_localize.price,
+        quantity: eael_select2_localize.quantity,
+        subtotal: eael_select2_localize.subtotal,
+    };
+
+    return labelValues[value] ? labelValues[value] : '';
+}

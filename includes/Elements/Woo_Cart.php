@@ -400,7 +400,7 @@ class Woo_Cart extends Widget_Base {
 						'column_heading_title' => esc_html__( 'Total', 'essential-addons-for-elementor-lite' ),
 					],
 				],
-				'title_field' => '{{{ column_heading_title || column_type }}}',
+				'title_field' => '{{{ column_heading_title || ea_woo_cart_column_type_title( column_type ) }}}',
 			]
 		);
 
