@@ -556,6 +556,7 @@ $thumb-bg-1: #E5F6FC;
 
         &.has-table-left-content.has-table-right-content {
             background: linear-gradient(to right, #FAFAFA 45%, #FFF 0%);
+            background-color: #FAFAFA;
         }
 
         &:not(.has-table-right-content) {
@@ -926,6 +927,10 @@ body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper {
         }
 
         &.eael-woo-style-2 {
+            &.has-table-left-content.has-table-right-content {
+                background-image: none !important;
+            }
+
             form.eael-woo-cart-form .eael-woo-cart-table {
                 .eael-woo-cart-thead {
                     display: none;
