@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 4.9.5
+Stable tag: 4.9.6
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -224,6 +224,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.9.6 - 03/11/2021 =
+
+- Improved: Asset Generator method for better performance
+- Fixed: EA Filterable Gallery | LightBox feature not working Properly
+- Fixed: EA Duplicator | showing unwanted texts if the title has special characters
+- Few minor bug fix & improvements
 
 = 4.9.5 - 28/10/2021 =
 
