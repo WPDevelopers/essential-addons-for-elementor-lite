@@ -1227,6 +1227,20 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$obj->add_control(
+			'eael_woo_cart_table_style_border_color',
+			[
+				'label'     => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right::after' => 'background: {{VALUE}};',
+				],
+				'condition' => [
+					'ea_woo_cart_layout' => 'style-2'
+				]
+			]
+		);
+
+		$obj->add_control(
 			'ea_section_woo_cart_table_style_thead_heading',
 			[
 				'label' => __( 'Table Head', 'essential-addons-for-elementor-lite' ),
