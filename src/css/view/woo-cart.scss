@@ -973,8 +973,9 @@ body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper {
 
                             &.product-price,
                             &.product-quantity {
-                                width: 50%;
-                                float: left;
+                                width: 48%;
+                                display: inline-block;
+                                vertical-align: middle;
                             }
 
                             &.product-quantity {
