@@ -335,7 +335,6 @@ $thumb-bg-1: #E5F6FC;
             line-height: 30px;
             font-weight: 500;
             padding: 10px 40px;
-            white-space: nowrap;
             letter-spacing: initial;
             text-transform: initial;
             text-decoration: none;
@@ -370,6 +369,7 @@ $thumb-bg-1: #E5F6FC;
                 }
 
                 button {
+                    white-space: nowrap;
                     box-shadow: 0 8px 18px rgba(56, 51, 117, 0.1);
                 }
             }
