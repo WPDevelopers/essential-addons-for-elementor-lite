@@ -436,7 +436,7 @@ class Woo_Cart extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::TEXT,
-				'default'   => esc_html__( 'Thumbnail', 'essential-addons-for-elementor-lite' ),
+				'default'   => esc_html__( 'Product Title', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
 					'eael_woo_cart_table_components_thumbnail' => 'yes'
 				]
