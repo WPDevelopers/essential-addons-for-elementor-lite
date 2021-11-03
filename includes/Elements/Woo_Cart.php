@@ -1165,7 +1165,7 @@ class Woo_Cart extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2:not(.has-table-right-content)'                  => 'background: {{VALUE}};',
-					'{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2.has-table-left-content.has-table-right-content' => 'background: linear-gradient(to right, {{VALUE}} {{eael_woo_cart_table_components_left_side_width.SIZE}}{{eael_woo_cart_table_components_left_side_width.UNIT}}, {{ea_woo_cart_style2_bg_color_right.VALUE}} 0%);',
+					'{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2.has-table-left-content.has-table-right-content' => 'background: linear-gradient(to right, {{VALUE}} {{eael_woo_cart_table_components_left_side_width.SIZE}}{{eael_woo_cart_table_components_left_side_width.UNIT}}, {{ea_woo_cart_style2_bg_color_right.VALUE}} 0%); background-color: {{VALUE}};',
 				],
 				'default'   => '#FAFAFA',
 				'condition' => [

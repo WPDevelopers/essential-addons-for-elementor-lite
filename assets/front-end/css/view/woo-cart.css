@@ -465,6 +465,7 @@
   background: -webkit-gradient(linear, left top, right top, color-stop(45%, #FAFAFA), color-stop(0%, #FFF));
   background: -o-linear-gradient(left, #FAFAFA 45%, #FFF 0%);
   background: linear-gradient(to right, #FAFAFA 45%, #FFF 0%);
+  background-color: #FAFAFA;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2:not(.has-table-right-content) {
   background: #FAFAFA;
@@ -744,6 +745,9 @@ body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper .cart-totals-inner {
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button:not(:hover):not(:active),
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button:not(:hover):not(:active) {
     padding: 10px 20px;
+  }
+  .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2.has-table-left-content.has-table-right-content {
+    background-image: none !important;
   }
   .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-thead {
     display: none;
