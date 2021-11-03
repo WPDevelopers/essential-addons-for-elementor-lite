@@ -275,7 +275,6 @@
   line-height: 30px;
   font-weight: 500;
   padding: 10px 40px;
-  white-space: nowrap;
   letter-spacing: initial;
   text-transform: initial;
   text-decoration: none;
@@ -313,6 +312,7 @@
   width: 100%;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button {
+  white-space: nowrap;
   -webkit-box-shadow: 0 8px 18px rgba(56, 51, 117, 0.1);
           box-shadow: 0 8px 18px rgba(56, 51, 117, 0.1);
 }
