@@ -1286,7 +1286,7 @@ class Woo_Cart extends Widget_Base {
 				'name'           => 'ea_woo_cart_table_row_bg',
 				'fields_options' => [
 					'background' => [
-						'label' => esc_html__( 'Table Row Background', 'essential-addons-for-elementor-lite' ),
+						'label' => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
 					],
 				],
 				'types'          => [ 'classic', 'gradient' ],
@@ -1301,7 +1301,7 @@ class Woo_Cart extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'      => 'ea_woo_cart_table_row_box_shadow',
-				'label'     => __( 'Table Row Box Shadow', 'essential-addons-for-elementor-lite' ),
+				'label'     => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
 				'selector'  => '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr::after',
 				'condition' => [
 					'ea_woo_cart_layout' => 'default'
@@ -1322,7 +1322,7 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_responsive_control(
 			'ea_woo_cart_table_row_border_radius',
 			[
-				'label'      => esc_html__( 'Table Row Border Radius', 'essential-addons-for-elementor-lite' ),
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1443,7 +1443,7 @@ class Woo_Cart extends Widget_Base {
 				'name'           => 'ea_woo_cart_totals_row_bg',
 				'fields_options' => [
 					'background' => [
-						'label' => esc_html__( 'Table Row Background', 'essential-addons-for-elementor-lite' ),
+						'label' => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
 					],
 				],
 				'types'          => [ 'classic', 'gradient' ],
@@ -1458,7 +1458,7 @@ class Woo_Cart extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'      => 'ea_woo_cart_totals_row_box_shadow',
-				'label'     => __( 'Table Row Box Shadow', 'essential-addons-for-elementor-lite' ),
+				'label'     => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
 				'selector'  => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr::after',
 				'condition' => [
 					'ea_woo_cart_layout' => 'default'
@@ -1469,7 +1469,7 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_responsive_control(
 			'ea_woo_cart_totals_row_border_radius',
 			[
-				'label'      => esc_html__( 'Table Row Border Radius', 'essential-addons-for-elementor-lite' ),
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
