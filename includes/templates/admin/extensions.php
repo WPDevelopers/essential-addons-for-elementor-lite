@@ -55,7 +55,13 @@ $extensions = [
                 'title'  => __( 'Custom JS', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/custom-js/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/custom-js/',
-            ]
+            ],
+            [
+                'key'    => 'scroll-to-top',
+                'title'  => __( 'Scroll to Top', 'essential-addons-for-elementor-lite'),
+                'demo_link' => 'https://essential-addons.com/elementor/scroll-to-top/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/ea-scroll-to-top/',
+            ],
         ]
     ]
 ];

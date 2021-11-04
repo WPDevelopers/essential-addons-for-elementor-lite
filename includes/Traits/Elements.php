@@ -331,7 +331,7 @@ trait Elements
         $html = '';
         $global_settings = $setting_data = $document = [];
 
-        if ($this->get_settings('reading-progress') || $this->get_settings('table-of-content')) {
+        if ($this->get_settings('reading-progress') || $this->get_settings('table-of-content') || $this->get_settings('scroll-to-top')) {
             $html = '';
             $global_settings = get_option('eael_global_settings');
             $document = Plugin::$instance->documents->get($post_id, false);
@@ -477,6 +477,34 @@ trait Elements
                     wp_enqueue_script('eael-table-of-content');
 
                     $html .= $table_of_content_html;
+                }
+            }
+        }
+
+        //Scroll to Top
+        if ($this->get_settings('scroll-to-top') == true) {
+            if (isset($document) && is_object($document)) {
+                $document_settings_data = $document->get_settings();
+            }
+
+            $scroll_to_top_status = $scroll_to_top_status_global = false;
+            
+            if (isset($document_settings_data['eael_ext_scroll_to_top']) && $document_settings_data['eael_ext_scroll_to_top'] == 'yes') {
+                $scroll_to_top_status = true;
+                $settings_data_scroll_to_top = $document_settings_data;
+            } elseif (isset($global_settings['eael_ext_scroll_to_top']['enabled']) && $global_settings['eael_ext_scroll_to_top']['enabled']) {
+                $scroll_to_top_status = true;
+                $scroll_to_top_status_global = true;
+                $settings_data_scroll_to_top = $global_settings['eael_ext_scroll_to_top'];
+            }
+            
+            if ($scroll_to_top_status) {
+                $scroll_to_top_html = '<div class="eael-ext-scroll-to-top-wrap"><span class="eael-ext-scroll-to-top-button dashicons dashicons-arrow-up-alt2"></span></div>';
+                if (!empty($scroll_to_top_html)) {
+                    wp_enqueue_script('eael-scroll-to-top');
+                    wp_enqueue_style('eael-scroll-to-top');
+
+                    $html .= $scroll_to_top_html;
                 }
             }
         }

@@ -281,10 +281,45 @@ trait Core
             }
         }
 
+        //Scroll to Top global settings
+        $global_settings['eael_ext_scroll_to_top'] = $this->get_ext_scroll_to_top_global_settings($post_id, $document, $global_settings);
+
         // set editor time
         update_option('eael_editor_updated_at', strtotime('now'));
 
         // update options
         update_option('eael_global_settings', $global_settings);
+    }
+
+    /**
+     * Get global settings of Scroll to Top extension
+     * 
+     * @return array
+     * @since v5.0.0
+     */
+    public function get_ext_scroll_to_top_global_settings($post_id, $document, $global_settings){
+        
+        $global_settings_scroll_to_top = array();
+        if ($document->get_settings('eael_ext_scroll_to_top_global') == 'yes' && $document->get_settings('eael_ext_scroll_to_top') == 'yes') {
+            $global_settings_scroll_to_top = [
+                'post_id' => $post_id,
+                'enabled' => true,
+                'eael_ext_scroll_to_top_global_display_condition' => $document->get_settings('eael_ext_scroll_to_top_global_display_condition'),
+                'eael_ext_scroll_to_top_position_bottom' => $document->get_settings('eael_ext_scroll_to_top_position_bottom'),
+                'eael_ext_scroll_to_top_position_right' => $document->get_settings('eael_ext_scroll_to_top_position_right'),
+                'eael_ext_scroll_to_top_button_width' => $document->get_settings('eael_ext_scroll_to_top_button_width'),
+                'eael_ext_scroll_to_top_button_height' => $document->get_settings('eael_ext_scroll_to_top_button_height'),
+                'eael_ext_scroll_to_top_button_bg_color' => $document->get_settings('eael_ext_scroll_to_top_button_bg_color'),
+            ];
+        } else {
+            if (isset($global_settings['eael_ext_scroll_to_top']['post_id']) && $global_settings['eael_ext_scroll_to_top']['post_id'] == $post_id) {
+                $global_settings_scroll_to_top = [
+                    'post_id' => null,
+                    'enabled' => false,
+                ];
+            }
+        }
+
+        return $global_settings_scroll_to_top;
     }
 }
