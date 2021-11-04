@@ -332,12 +332,11 @@ trait Woo_Cart_Helper {
 					<?php
 				}
 
-				if ( $settings['eael_woo_cart_components_cart_totals_checkout_button'] === 'yes' ) { ?>
-                    <div class="wc-proceed-to-checkout">
-						<?php do_action( 'woocommerce_proceed_to_checkout', $settings ); ?>
-                    </div>
-					<?php
-				}
+                ?>
+                <div class="wc-proceed-to-checkout">
+                    <?php do_action( 'woocommerce_proceed_to_checkout', $settings ); ?>
+                </div>
+                <?php
 
 				do_action( 'woocommerce_after_cart_totals' ); ?>
             </div>
@@ -656,6 +655,14 @@ trait Woo_Cart_Helper {
 				 */
 				if ( $settings['eael_woo_cart_components_cart_totals'] === 'yes' ) {
 					do_action( 'woocommerce_cart_collaterals', $settings );
+				} else {
+					?>
+                    <div class="cart_totals">
+                        <div class="wc-proceed-to-checkout">
+							<?php do_action( 'woocommerce_proceed_to_checkout', $settings ); ?>
+                        </div>
+                    </div>
+					<?php
 				}
 				?>
             </div>
