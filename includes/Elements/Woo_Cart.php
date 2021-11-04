@@ -1098,30 +1098,11 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_woo_cart_components_cart_totals_checkout_button',
-			[
-				'label'        => esc_html__( 'Checkout Button', 'essential-addons-for-elementor-lite' ),
-				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
-				'default'      => 'yes',
-				'condition'    => [
-					'eael_woo_cart_components_cart_totals' => 'yes'
-				]
-			]
-		);
-
-		$this->add_control(
 			'eael_woo_cart_components_cart_checkout_button_text',
 			[
 				'label'     => esc_html__( 'Checkout Button Text', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::TEXT,
 				'default'   => esc_html__( 'Proceed to checkout', 'essential-addons-for-elementor-lite' ),
-				'condition' => [
-					'eael_woo_cart_components_cart_totals'                 => 'yes',
-					'eael_woo_cart_components_cart_totals_checkout_button' => 'yes'
-				]
 			]
 		);
 
