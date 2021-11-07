@@ -388,7 +388,9 @@ class Advanced_Data_Table extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
                 'selectors' => [
-                    '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table-wrap-inner' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table-wrap-inner, {{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table-wrap-inner th:first-child' => 'border-radius: {{TOP}}{{UNIT}} 0 0 0;',
+                    '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table-wrap-inner th:last-child' => 'border-radius: 0 {{RIGHT}}{{UNIT}} 0 0;',
                 ],
             ]
         );
