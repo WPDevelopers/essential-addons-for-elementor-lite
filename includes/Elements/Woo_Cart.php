@@ -2490,6 +2490,9 @@ class Woo_Cart extends Widget_Base {
 		}
 
 		$this->ea_cart_render();
+		?>
+		<script>document.body.classList.add("eael-woo-cart");</script>
+		<?php
 	}
 
 }
