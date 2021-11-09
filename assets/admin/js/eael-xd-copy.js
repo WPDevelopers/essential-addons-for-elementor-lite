@@ -83,6 +83,8 @@
                         {
                             name: "ea_copy",
                             title: eael_xd_copy.xd_copy,
+                            icon: 'eicon-copy',
+                            shortcut: '<i class="eaicon-badge"></i>',
                             callback: function () {
                                 var copiedElement = {};
                                 copiedElement.elementtype = XdType === "widget" ? element.model.get("widgetType") : null;
@@ -98,6 +100,8 @@
                         {
                             name: "ea_paste",
                             title: eael_xd_copy.xd_paste,
+                            icon: 'eicon-import-kit',
+                            shortcut: '<i class="eaicon-badge"></i>',
                             callback: function () {
                                 xdLocalStorage.getItem("eael-xd-copy-data", function (newElement) {
                                     eaPasteHandler(JSON.parse(newElement.value), element);
