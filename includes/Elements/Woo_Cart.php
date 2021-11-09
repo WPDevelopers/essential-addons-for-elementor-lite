@@ -2136,7 +2136,7 @@ class Woo_Cart extends Widget_Base {
 					],
 					'px' => [
 						'min'  => 0,
-						'max'  => 365,
+						'max'  => 400,
 						'step' => 1,
 					],
 				],

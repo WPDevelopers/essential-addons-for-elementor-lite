@@ -331,7 +331,7 @@
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .eael-cart-update-btn {
   display: inline-block;
   text-align: center;
-  max-width: 365px;
+  max-width: 400px;
   width: 100%;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .eael-cart-update-btn button {
@@ -344,7 +344,7 @@
   cursor: not-allowed;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals {
-  max-width: 365px;
+  max-width: 400px;
   width: 100%;
   padding: 0 0 10px 0;
   margin: 0;
@@ -385,6 +385,7 @@
   color: #737373;
   font-weight: 500;
   text-align: left;
+  width: 40%;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td {
   color: #737373;
@@ -399,9 +400,13 @@
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td input {
   background: transparent;
+  vertical-align: middle;
+  margin-right: 5px;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td ul {
   list-style: none;
+  padding: 0;
+  margin: 0 0 10px;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td {
   border-spacing: 0;

@@ -391,7 +391,7 @@ $thumb-bg-1: #E5F6FC;
             .eael-cart-update-btn {
                 display: inline-block;
                 text-align: center;
-                max-width: 365px;
+                max-width: 400px;
                 width: 100%;
 
                 button {
@@ -407,7 +407,7 @@ $thumb-bg-1: #E5F6FC;
             }
 
             .cart_totals {
-                max-width: 365px;
+                max-width: 400px;
                 width: 100%;
                 padding: 0 0 10px 0;
                 margin: 0;
@@ -449,6 +449,7 @@ $thumb-bg-1: #E5F6FC;
                             color: $text-color-3;
                             font-weight: 500;
                             text-align: left;
+                            width: 40%;
                         }
 
                         &.shipping td {
@@ -466,10 +467,14 @@ $thumb-bg-1: #E5F6FC;
 
                             input {
                                 background: $transparent;
+                                vertical-align: middle;
+                                margin-right: 5px;
                             }
 
                             ul {
                                 list-style: none;
+                                padding: 0;
+                                margin: 0 0 10px;
                             }
                         }
 
