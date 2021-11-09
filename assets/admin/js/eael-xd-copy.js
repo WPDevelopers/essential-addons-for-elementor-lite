@@ -76,48 +76,47 @@
     var XdCopyType = ["section", "column", "widget"];
 
     XdCopyType.forEach(function (XdType, index) {
-            elementor.hooks.addFilter("elements/" + XdType + "/contextMenuGroups", function (groups, element) {
-                groups.push({
-                    name: "eael_" + XdType,
-                    actions: [
-                        {
-                            name: "ea_copy",
-                            title: eael_xd_copy.xd_copy,
-                            icon: 'eicon-copy',
-                            shortcut: '<i class="eaicon-badge"></i>',
-                            callback: function () {
-                                var copiedElement = {};
-                                copiedElement.elementtype = XdType === "widget" ? element.model.get("widgetType") : null;
-                                copiedElement.elementcode = element.model.toJSON();
+        elementor.hooks.addFilter("elements/" + XdType + "/contextMenuGroups", function (groups, element) {
+            groups.splice(1, 0, {
+                name: "eael_" + XdType,
+                actions: [
+                    {
+                        name: "ea_copy",
+                        title: eael_xd_copy.xd_copy,
+                        icon: 'eicon-copy',
+                        shortcut: '<i class="eaicon-badge"></i>',
+                        callback: function () {
+                            var copiedElement = {};
+                            copiedElement.elementtype = XdType === "widget" ? element.model.get("widgetType") : null;
+                            copiedElement.elementcode = element.model.toJSON();
 
-                                xdLocalStorage.setItem("eael-xd-copy-data", JSON.stringify(copiedElement), function (data) {
-                                    elementor.notifications.showToast({
-                                        message: elementor.translate(XdType.toUpperCase() + " Copied! 📰")
-                                    });
+                            xdLocalStorage.setItem("eael-xd-copy-data", JSON.stringify(copiedElement), function (data) {
+                                elementor.notifications.showToast({
+                                    message: elementor.translate(XdType.toUpperCase() + " Copied! 📰")
                                 });
-                            }
-                        },
-                        {
-                            name: "ea_paste",
-                            title: eael_xd_copy.xd_paste,
-                            icon: 'eicon-import-kit',
-                            shortcut: '<i class="eaicon-badge"></i>',
-                            callback: function () {
-                                xdLocalStorage.getItem("eael-xd-copy-data", function (newElement) {
-                                    eaPasteHandler(JSON.parse(newElement.value), element);
+                            });
+                        }
+                    },
+                    {
+                        name: "ea_paste",
+                        title: eael_xd_copy.xd_paste,
+                        icon: 'eicon-import-kit',
+                        shortcut: '<i class="eaicon-badge"></i>',
+                        callback: function () {
+                            xdLocalStorage.getItem("eael-xd-copy-data", function (newElement) {
+                                eaPasteHandler(JSON.parse(newElement.value), element);
 
-                                    elementor.notifications.showToast({
-                                        message: elementor.translate("EA Copy Data Pasted! ✔️")
-                                    });
+                                elementor.notifications.showToast({
+                                    message: elementor.translate("EA Copy Data Pasted! ✔️")
                                 });
-                            }
-                        },
-                    ]
-                });
-
-                return groups;
+                            });
+                        }
+                    },
+                ]
             });
-        }
-    );
+
+            return groups;
+        });
+    });
 
 })(jQuery);
