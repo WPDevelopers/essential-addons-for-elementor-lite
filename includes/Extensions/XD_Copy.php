@@ -27,7 +27,7 @@ class XD_Copy {
 	public function enqueue_xd_copy_scripts() {
 		wp_enqueue_script(
 			'eael-xd-copy',
-			$this->safe_url( EAEL_PLUGIN_URL . 'assets/admin/js/eael-xd-copy.js' ),
+			$this->safe_url( EAEL_PLUGIN_URL . 'assets/front-end/js/edit/eael-xd-copy.min.js' ),
 			[ 'jquery' ],
 			time(),
 			true
