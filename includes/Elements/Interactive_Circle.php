@@ -255,7 +255,7 @@ class Interactive_Circle extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_interactive_circle_additional',
 			[
-				'label' => esc_html__( 'Additional', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Additional Settings', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
