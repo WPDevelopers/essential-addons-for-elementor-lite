@@ -36,12 +36,18 @@ class XD_Copy {
 		wp_localize_script(
 			'eael-xd-copy',
 			'eael_xd_copy',
-			array(
+			[
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'nonce'    => wp_create_nonce( 'eael_xd_copy_fetch_content' ),
-				'xd_copy'  => __( 'EA Copy', 'essential-addons-for-elementor-lite' ),
-				'xd_paste' => __( 'EA Paste', 'essential-addons-for-elementor-lite' ),
-			)
+				'i18n'     => [
+					'ea_copy'  => __( 'EA Copy', 'essential-addons-for-elementor-lite' ),
+					'ea_paste' => __( 'EA Paste', 'essential-addons-for-elementor-lite' ),
+					'section_message' => __( 'Section Copied! 📰', 'essential-addons-for-elementor-lite' ),
+					'column_message' => __( 'Column Copied! 📰', 'essential-addons-for-elementor-lite' ),
+					'widget_message' => __( 'Widget Copied! 📰', 'essential-addons-for-elementor-lite' ),
+					'paste_message' => __( 'EA Copy Data Pasted! ✔️', 'essential-addons-for-elementor-lite' ),
+				]
+			]
 		);
 	}
 

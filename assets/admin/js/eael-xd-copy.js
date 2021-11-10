@@ -82,7 +82,7 @@
                 actions: [
                     {
                         name: "ea_copy",
-                        title: eael_xd_copy.xd_copy,
+                        title: eael_xd_copy.i18n.ea_copy,
                         icon: 'eicon-copy',
                         shortcut: '<i class="eaicon-badge"></i>',
                         callback: function () {
@@ -92,14 +92,14 @@
 
                             xdLocalStorage.setItem("eael-xd-copy-data", JSON.stringify(copiedElement), function (data) {
                                 elementor.notifications.showToast({
-                                    message: elementor.translate(XdType.toUpperCase() + " Copied! 📰")
+                                    message: eael_xd_copy.i18n[XdType + '_message']
                                 });
                             });
                         }
                     },
                     {
                         name: "ea_paste",
-                        title: eael_xd_copy.xd_paste,
+                        title: eael_xd_copy.i18n.ea_paste,
                         icon: 'eicon-import-kit',
                         shortcut: '<i class="eaicon-badge"></i>',
                         callback: function () {
@@ -107,7 +107,7 @@
                                 eaPasteHandler(JSON.parse(newElement.value), element);
 
                                 elementor.notifications.showToast({
-                                    message: elementor.translate("EA Copy Data Pasted! ✔️")
+                                    message: eael_xd_copy.i18n.paste_message
                                 });
                             });
                         }
