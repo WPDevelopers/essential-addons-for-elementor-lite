@@ -111,7 +111,7 @@ msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:189
 msgid ""
-"For websites where you want to only use the basic features and keep your site\n"
+"For websites where you want to only use the basic features and keep your site\n"
 "                                    lightweight. Most basic elements are activated in this option. "
 msgstr ""
 
@@ -121,8 +121,8 @@ msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:203
 msgid ""
-"For advanced users who are trying to build complex websites with advanced\n"
-"                                    functionalities with Elementor. All the dynamic elements will be activated in this\n"
+"For advanced users who are trying to build complex websites with advanced\n"
+"                                    functionalities with Elementor. All the dynamic elements will be activated in this\n"
 "                                    option."
 msgstr ""
 
@@ -140,14 +140,14 @@ msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:232
 msgid ""
-"Complete the Setup Wizard and Check out the walk-through tutorials to enhance your Elementor page\n"
+"Complete the Setup Wizard and Check out the walk-through tutorials to enhance your Elementor page\n"
 "                        building experience"
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:243
 msgid ""
-"Share non-sensitive diagnostic data and plugin\n"
-"                                    usage\n"
+"Share non-sensitive diagnostic data and plugin\n"
+"                                    usage\n"
 "                                    information"
 msgstr ""
 
@@ -3023,7 +3023,7 @@ msgstr ""
 msgid "Title Bottom Space"
 msgstr ""
 
-#: ../includes/Elements/Filterable_Gallery.php:94, ../includes/Elements/Flip_Box.php:77, ../includes/Elements/Pricing_Table.php:79, ../includes/Traits/Core.php:44, ../includes/templates/admin/elements.php:591, ../includes/templates/admin/elements.php:573, ../includes/templates/admin/elements.php:570, ../includes/templates/admin/extensions.php:85
+#: ../includes/Elements/Filterable_Gallery.php:94, ../includes/Elements/Flip_Box.php:77, ../includes/Elements/Pricing_Table.php:79, ../includes/Traits/Core.php:44, ../includes/templates/admin/elements.php:591, ../includes/templates/admin/elements.php:573, ../includes/templates/admin/elements.php:570, ../includes/templates/admin/extensions.php:91
 msgid "Settings"
 msgstr ""
 
@@ -7270,6 +7270,38 @@ msgstr ""
 msgid "Sub Item Space"
 msgstr ""
 
+#: ../includes/Extensions/XD_Copy.php:43
+msgid "EA Copy"
+msgstr ""
+
+#: ../includes/Extensions/XD_Copy.php:44
+msgid "EA Paste"
+msgstr ""
+
+#: ../includes/Extensions/XD_Copy.php:45
+msgid "Section Copied! 📰"
+msgstr ""
+
+#: ../includes/Extensions/XD_Copy.php:46
+msgid "Column Copied! 📰"
+msgstr ""
+
+#: ../includes/Extensions/XD_Copy.php:47
+msgid "Widget Copied! 📰"
+msgstr ""
+
+#: ../includes/Extensions/XD_Copy.php:48
+msgid "EA Copy Data Pasted! ✔️"
+msgstr ""
+
+#: ../includes/Extensions/XD_Copy.php:63
+msgid "Not a Valid User"
+msgstr ""
+
+#: ../includes/Extensions/XD_Copy.php:71
+msgid "Empty Content"
+msgstr ""
+
 #: ../includes/Traits/Admin.php:58
 msgid "Login | Register Form Settings"
 msgstr ""
@@ -7342,7 +7374,7 @@ msgstr ""
 msgid "Essential Addons Settings"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:106, ../includes/templates/admin/elements.php:626, ../includes/templates/admin/extensions.php:106
+#: ../includes/Traits/Admin.php:106, ../includes/templates/admin/elements.php:626, ../includes/templates/admin/extensions.php:112
 msgid "Save settings"
 msgstr ""
 
@@ -7628,9 +7660,9 @@ msgstr ""
 
 #: ../includes/Traits/Core.php:133
 msgid ""
-"We collect non-sensitive diagnostic data and plugin usage information.\n"
-"            Your site URL, WordPress & PHP version, plugins & themes and email address to send you the\n"
-"            discount coupon. This data lets us make sure this plugin always stays compatible with the most\n"
+"We collect non-sensitive diagnostic data and plugin usage information.\n"
+"            Your site URL, WordPress & PHP version, plugins & themes and email address to send you the\n"
+"            discount coupon. This data lets us make sure this plugin always stays compatible with the most\n"
 "            popular plugins and themes. No spam, I promise."
 msgstr ""
 
@@ -8330,7 +8362,7 @@ msgstr ""
 msgid "LearnDash Elements"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:567, ../includes/templates/admin/extensions.php:83
+#: ../includes/templates/admin/elements.php:567, ../includes/templates/admin/extensions.php:89
 msgid "Pro"
 msgstr ""
 
@@ -8360,6 +8392,10 @@ msgstr ""
 
 #: ../includes/templates/admin/extensions.php:49
 msgid "Duplicator"
+msgstr ""
+
+#: ../includes/templates/admin/extensions.php:61
+msgid "Cross-Domain Copy Paste"
 msgstr ""
 
 #: ../includes/templates/admin/general.php:14, ../includes/templates/admin/general.php:116
