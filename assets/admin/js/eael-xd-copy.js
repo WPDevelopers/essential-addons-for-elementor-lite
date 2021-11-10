@@ -1,12 +1,22 @@
 "use strict";window.XdUtils=window.XdUtils||function(){function a(a,b){var c,d=b||{};for(c in a)a.hasOwnProperty(c)&&(d[c]=a[c]);return d}return{extend:a}}(),window.xdLocalStorage=window.xdLocalStorage||function(){function a(a){k[a.id]&&(k[a.id](a),delete k[a.id])}function b(b){var c;try{c=JSON.parse(b.data)}catch(a){}c&&c.namespace===h&&("iframe-ready"===c.id?(m=!0,i.initCallback()):a(c))}function c(a,b,c,d){j++,k[j]=d;var e={namespace:h,id:j,action:a,key:b,value:c};g.contentWindow.postMessage(JSON.stringify(e),"*")}function d(a){i=XdUtils.extend(a,i);var c=document.createElement("div");window.addEventListener?window.addEventListener("message",b,!1):window.attachEvent("onmessage",b),c.innerHTML='<iframe id="'+i.iframeId+'" src='+i.iframeUrl+' style="display: none;"></iframe>',document.body.appendChild(c),g=document.getElementById(i.iframeId)}function e(){return l?!!m||(console.log("You must wait for iframe ready message before using the api."),!1):(console.log("You must call xdLocalStorage.init() before using it."),!1)}function f(){return"complete"===document.readyState}var g,h="eael-xd-copy-message",i={iframeId:"cross-domain-iframe",iframeUrl:void 0,initCallback:function(){}},j=-1,k={},l=!1,m=!0;return{init:function(a){if(!a.iframeUrl)throw"You must specify iframeUrl";if(l)return void console.log("xdLocalStorage was already initialized!");l=!0,f()?d(a):document.addEventListener?document.addEventListener("readystatechange",function(){f()&&d(a)}):document.attachEvent("readystatechange",function(){f()&&d(a)})},setItem:function(a,b,d){e()&&c("set",a,b,d)},getItem:function(a,b){e()&&c("get",a,null,b)},removeItem:function(a,b){e()&&c("remove",a,null,b)},key:function(a,b){e()&&c("key",a,null,b)},getSize:function(a){e()&&c("size",null,null,a)},getLength:function(a){e()&&c("length",null,null,a)},clear:function(a){e()&&c("clear",null,null,a)},wasInit:function(){return l}}}();
 
+// Initialize xdLocalStorage
+xdLocalStorage.init({
+    iframeUrl: "https://w3techies.net/xdcp/",
+    initCallback: function () {
+        console.log("eael xd copy iframe ready");
+    }
+});
+
 (function () {
+    //Get Unique ID
     function a(b) {
         return b.forEach(function (b) {
             b.id = elementorCommon.helpers.getUniqueId(), 0 < b.elements.length && a(b.elements)
         }), b
     }
 
+    // XD Copy Data import functionality
     function eaPasteHandler(b, c) {
         var d = c,
             e = c.model.get("elType"),
@@ -66,15 +76,8 @@
         })
     }
 
-    xdLocalStorage.init({
-        iframeUrl: "https://w3techies.net/xdcp/",
-        initCallback: function () {
-            console.log("eael xd copy iframe ready");
-        }
-    });
-
-    var XdCopyType = ["section", "column", "widget"];
-
+    // Added XD Copy Context Menu
+    const XdCopyType = ["section", "column", "widget"];
     XdCopyType.forEach(function (XdType, index) {
         elementor.hooks.addFilter("elements/" + XdType + "/contextMenuGroups", function (groups, element) {
             groups.splice(1, 0, {
@@ -83,7 +86,7 @@
                     {
                         name: "ea_copy",
                         title: eael_xd_copy.i18n.ea_copy,
-                        icon: 'eicon-copy',
+                        icon: "eicon-copy",
                         shortcut: '<i class="eaicon-badge"></i>',
                         callback: function () {
                             var copiedElement = {};
@@ -92,7 +95,7 @@
 
                             xdLocalStorage.setItem("eael-xd-copy-data", JSON.stringify(copiedElement), function (data) {
                                 elementor.notifications.showToast({
-                                    message: eael_xd_copy.i18n[XdType + '_message']
+                                    message: eael_xd_copy.i18n[XdType + "_message"]
                                 });
                             });
                         }
@@ -100,7 +103,7 @@
                     {
                         name: "ea_paste",
                         title: eael_xd_copy.i18n.ea_paste,
-                        icon: 'eicon-import-kit',
+                        icon: "eicon-import-kit",
                         shortcut: '<i class="eaicon-badge"></i>',
                         callback: function () {
                             xdLocalStorage.getItem("eael-xd-copy-data", function (newElement) {
