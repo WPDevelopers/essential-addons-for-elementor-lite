@@ -1568,6 +1568,31 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$obj->add_responsive_control(
+			'ea_woo_cart_totals_body_alignment',
+			[
+				'label'     => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => [
+					'left'   => [
+						'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'selectors' => [
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td' => 'text-align: {{VALUE}};',
+				],
+			]
+		);
+
+		$obj->add_responsive_control(
 			'ea_woo_cart_totals_row_border_spacing',
 			[
 				'label'      => esc_html__( 'Row Space', 'essential-addons-for-elementor-lite' ),
