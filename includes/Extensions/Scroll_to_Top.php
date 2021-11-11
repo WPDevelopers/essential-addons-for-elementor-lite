@@ -108,9 +108,14 @@ class Scroll_to_Top
         $element->add_control(
             'eael_ext_scroll_to_top_position_text',
             [
-                'label' => __('Position', 'essential-addons-for-elementor-lite'),
-                'description' => __('Set scroll to top button position from top to bottom and left to right.', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
+                'label' => esc_html__('Position', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'bottom-right',
+                'label_block' => false,
+                'options' => [
+                    'bottom-left' => esc_html__('Bottom Left', 'essential-addons-for-elementor-lite'),
+                    'bottom-right' => esc_html__('Bottom Right', 'essential-addons-for-elementor-lite'),
+                ],
                 'separator' => 'before',
                 'condition' => [
                     'eael_ext_scroll_to_top' => 'yes',
@@ -143,13 +148,50 @@ class Scroll_to_Top
                 ],
                 'default' => [
                     'unit' => 'px',
-                    'size' => 5,
+                    'size' => 15,
                 ],
                 'selectors' => [
-                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button' => 'bottom: {{SIZE}}{{UNIT}} !important',
+                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button' => 'bottom: {{SIZE}}{{UNIT}}',
                 ],
                 'condition' => [
                     'eael_ext_scroll_to_top' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_ext_scroll_to_top_position_left',
+            [
+                'label' => __('Left', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 1,
+                    ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 50,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 15,
+                ],
+                'selectors' => [
+                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button' => 'left: {{SIZE}}{{UNIT}}',
+                ],
+                'condition' => [
+                    'eael_ext_scroll_to_top' => 'yes',
+                    'eael_ext_scroll_to_top_position_text' => 'bottom-left',
                 ],
             ]
         );
@@ -182,10 +224,11 @@ class Scroll_to_Top
                     'size' => 15,
                 ],
                 'selectors' => [
-                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button' => 'right: {{SIZE}}{{UNIT}} !important',
+                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button' => 'right: {{SIZE}}{{UNIT}}',
                 ],
                 'condition' => [
                     'eael_ext_scroll_to_top' => 'yes',
+                    'eael_ext_scroll_to_top_position_text' => 'bottom-right',
                 ],
             ]
         );
@@ -244,15 +287,124 @@ class Scroll_to_Top
         );
 
         $element->add_control(
+            'eael_ext_scroll_to_top_z_index',
+            [
+                'label' => __('Z Index', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 9999,
+                        'step' => 10,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 9999,
+                ],
+                'selectors' => [
+                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button' => 'z-index: {{SIZE}}',
+                ],
+                'condition' => [
+                    'eael_ext_scroll_to_top' => 'yes',
+                ],
+            ]
+        );
+
+
+        $element->add_control(
+            'eael_ext_scroll_to_top_button_opacity',
+            [
+                'label' => __('Opacity', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1,
+                        'step' => 0.01,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 0.7,
+                ],
+                'selectors' => [
+                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button' => 'opacity: {{SIZE}};',
+                ],
+                'condition' => [
+                    'eael_ext_scroll_to_top' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_ext_scroll_to_top_button_icon_image',
+            [
+                'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::ICONS,
+                'default' => [
+                    'value' => 'fas fa-chevron-up',
+                    'library' => 'fa-solid',
+                ],
+                'separator' => 'before',
+                'condition' => [
+                    'eael_ext_scroll_to_top' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_ext_scroll_to_top_button_icon_color',
+            [
+                'label' => __('Icon Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#ffffff',
+                'selectors' => [
+                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button i' => 'color: {{VALUE}}',
+                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button svg' => 'fill: {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_ext_scroll_to_top' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
             'eael_ext_scroll_to_top_button_bg_color',
             [
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '',
+                'default' => '#000000',
                 'selectors' => [
-                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button::before' => 'background-color: {{VALUE}}',
+                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button' => 'background-color: {{VALUE}}',
                 ],
-                'separator' => 'before',
+                'condition' => [
+                    'eael_ext_scroll_to_top' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_ext_scroll_to_top_button_border_radius',
+            [
+                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 50,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 5,
+                ],
+                'selectors' => [
+                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button' => 'border-radius: {{SIZE}}{{UNIT}}',
+                ],
                 'condition' => [
                     'eael_ext_scroll_to_top' => 'yes',
                 ],
