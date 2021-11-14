@@ -316,6 +316,8 @@ trait Core
                 'eael_ext_scroll_to_top_z_index' => $document->get_settings('eael_ext_scroll_to_top_z_index'),
                 'eael_ext_scroll_to_top_button_opacity' => $document->get_settings('eael_ext_scroll_to_top_button_opacity'),
                 'eael_ext_scroll_to_top_button_icon_image' => $document->get_settings('eael_ext_scroll_to_top_button_icon_image'),
+                'eael_ext_scroll_to_top_button_icon_size' => $document->get_settings('eael_ext_scroll_to_top_button_icon_size'),
+                'eael_ext_scroll_to_top_button_icon_svg_size' => $document->get_settings('eael_ext_scroll_to_top_button_icon_svg_size'),
                 'eael_ext_scroll_to_top_button_icon_color' => $this->eael_ext_stt_fetch_color_or_global_color($document_settings, 'eael_ext_scroll_to_top_button_icon_color'),
                 'eael_ext_scroll_to_top_button_bg_color' => $this->eael_ext_stt_fetch_color_or_global_color($document_settings, 'eael_ext_scroll_to_top_button_bg_color'),
                 'eael_ext_scroll_to_top_button_border_radius' => $document->get_settings('eael_ext_scroll_to_top_button_border_radius'),
