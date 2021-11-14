@@ -100,7 +100,10 @@ trait Twitter_Feed
         foreach ($items as $item) {
             $delimeter = strlen($item['full_text']) > $settings['eael_twitter_feed_content_length'] ? '...' : '';
 
-	        $media = isset( $item['extended_entities']['media'] ) ? $item['extended_entities']['media'] : $item['retweeted_status']['entities']['media'];
+	        $media = isset( $item['extended_entities']['media'] ) ? $item['extended_entities']['media'] :
+		        ( isset( $item['retweeted_status']['entities']['media'] ) ? $item['retweeted_status']['entities']['media'] :
+			        ( isset( $item['quoted_status']['entities']['media'] ) ? $item['quoted_status']['entities']['media'] :
+				        [] ) );
 
             $html .= '<div class="eael-twitter-feed-item ' . $class . '">
 				<div class="eael-twitter-feed-item-inner">
