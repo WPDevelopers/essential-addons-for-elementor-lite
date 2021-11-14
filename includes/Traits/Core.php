@@ -281,7 +281,7 @@ trait Core
             }
         }
 
-        //Scroll to Top global settings
+        //Scroll to Top global settings : updated on elementor/editor/after_save action
         $global_settings['eael_ext_scroll_to_top'] = $this->get_ext_scroll_to_top_global_settings($post_id, $document, $global_settings);
         
         // set editor time
@@ -299,7 +299,7 @@ trait Core
      */
     public function get_ext_scroll_to_top_global_settings($post_id, $document, $global_settings){
         
-        $global_settings_scroll_to_top = array();
+        $global_settings_scroll_to_top = !empty($global_settings['eael_ext_scroll_to_top']) ? $global_settings['eael_ext_scroll_to_top'] : array();
         $document_settings = $document->get_settings();
         
         if ($document->get_settings('eael_ext_scroll_to_top_global') == 'yes' && $document->get_settings('eael_ext_scroll_to_top') == 'yes') {
