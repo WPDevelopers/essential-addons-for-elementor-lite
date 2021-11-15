@@ -515,7 +515,7 @@ trait Elements
                     $scroll_to_top_icon_html = "<i class='$scroll_to_top_icon_image'></i>";
                 }
 
-                $scroll_to_top_html = "<div class='eael-ext-scroll-to-top-wrap eael-stt-hide'><span class='eael-ext-scroll-to-top-button'>$scroll_to_top_icon_html</span></div>";
+                $scroll_to_top_html = "<div class='eael-ext-scroll-to-top-wrap scroll-to-top-hide'><span class='eael-ext-scroll-to-top-button'>$scroll_to_top_icon_html</span></div>";
                 if (!empty($scroll_to_top_html)) {
                     wp_enqueue_script('eael-scroll-to-top');
                     wp_enqueue_style('eael-scroll-to-top');
