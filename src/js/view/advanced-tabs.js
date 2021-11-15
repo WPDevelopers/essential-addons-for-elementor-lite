@@ -5,6 +5,7 @@ ea.hooks.addAction("init", "ea", () => {
 			const $currentTab = $scope.find('.eael-advance-tabs'),
 				$currentTabId = '#' + $currentTab.attr('id').toString()
 			let hashTag = window.location.hash.substr(1);
+				hashTag = hashTag === 'safari' ? 'eael-safari' : hashTag;
 			var hashLink = false;
 			$($currentTabId + ' > .eael-tabs-nav ul li', $scope).each(function (index) {
 				if (hashTag && $(this).attr("id") == hashTag) {
