@@ -42,10 +42,10 @@ class XD_Copy {
 				'i18n'     => [
 					'ea_copy'  => __( 'EA Copy', 'essential-addons-for-elementor-lite' ),
 					'ea_paste' => __( 'EA Paste', 'essential-addons-for-elementor-lite' ),
-					'section_message' => __( 'Section Copied! 📰', 'essential-addons-for-elementor-lite' ),
-					'column_message' => __( 'Column Copied! 📰', 'essential-addons-for-elementor-lite' ),
-					'widget_message' => __( 'Widget Copied! 📰', 'essential-addons-for-elementor-lite' ),
-					'paste_message' => __( 'EA Copy Data Pasted! ✔️', 'essential-addons-for-elementor-lite' ),
+					'section_message' => __( 'Section Copied Successfully ✅', 'essential-addons-for-elementor-lite' ),
+					'column_message' => __( 'Column Copied Successfully ✅', 'essential-addons-for-elementor-lite' ),
+					'widget_message' => __( 'Widget Copied Successfully ✅', 'essential-addons-for-elementor-lite' ),
+					'paste_message' => __( 'Pasted Successfully ✅', 'essential-addons-for-elementor-lite' ),
 				]
 			]
 		);
