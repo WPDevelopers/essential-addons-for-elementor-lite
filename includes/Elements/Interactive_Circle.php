@@ -667,6 +667,8 @@ class Interactive_Circle extends Widget_Base {
 				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-circle-content' => 'background: {{VALUE}} !important;',
+					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn-content .eael-circle-content' => 'background: {{VALUE}} !important;',
+					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item .eael-circle-btn-content .eael-circle-content' => 'background: {{VALUE}} !important;',
 				],
 				'condition' => [
 					'eael_interactive_circle_preset!' => 'eael-interactive-circle-preset-2'
