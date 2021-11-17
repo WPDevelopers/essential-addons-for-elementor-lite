@@ -2,8 +2,11 @@ ea.hooks.addAction("init", "ea", () => {
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eael-adv-tabs.default",
 		function ($scope, $) {
-			const $currentTab = $scope.find('.eael-advance-tabs'),
-				$currentTabId = '#' + $currentTab.attr('id').toString()
+			const $currentTab = $scope.find('.eael-advance-tabs');
+			if ( !$currentTab.attr( 'id' ) ) {
+				return false;
+			}
+			const $currentTabId = '#' + $currentTab.attr('id').toString();
 			let hashTag = window.location.hash.substr(1);
 			var hashLink = false;
 			$($currentTabId + ' > .eael-tabs-nav ul li', $scope).each(function (index) {
