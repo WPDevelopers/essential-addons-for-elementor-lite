@@ -906,7 +906,7 @@ class Woo_Cart extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Button Text', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::TEXT,
-				'default'   => esc_html__( 'Update cart', 'essential-addons-for-elementor-lite' ),
+				'default'   => esc_html__( 'Update Cart', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
 					'eael_woo_cart_components_cart_update_button' => 'yes'
 				]
@@ -931,7 +931,7 @@ class Woo_Cart extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Button Text', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::TEXT,
-				'default'   => esc_html__( 'Apply coupon', 'essential-addons-for-elementor-lite' ),
+				'default'   => esc_html__( 'Apply Coupon', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
 					'eael_woo_cart_components_cart_coupon' => 'yes'
 				]
@@ -1102,7 +1102,7 @@ class Woo_Cart extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Checkout Button Text', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::TEXT,
-				'default'   => esc_html__( 'Proceed to checkout', 'essential-addons-for-elementor-lite' ),
+				'default'   => esc_html__( 'Proceed to Checkout', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
