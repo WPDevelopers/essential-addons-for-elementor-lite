@@ -1029,8 +1029,11 @@ class Adv_Accordion extends Widget_Base
                 $tab_content_class[] = 'active-default';
             }
 
+            $tab_id = $tab['eael_adv_accordion_tab_id'] ? $tab['eael_adv_accordion_tab_id'] : Helper::str_to_css_id( $tab['eael_adv_accordion_tab_title'] );
+            $tab_id = $tab_id === 'safari' ? 'eael-safari' : $tab_id;
+
             $this->add_render_attribute($tab_title_setting_key, [
-                'id'            => $tab['eael_adv_accordion_tab_id'] ? $tab['eael_adv_accordion_tab_id'] : Helper::str_to_css_id($tab['eael_adv_accordion_tab_title']),
+                'id'            => $tab_id,
                 'class'         => $tab_title_class,
                 'tabindex'      => $id_int . $tab_count,
                 'data-tab'      => $tab_count,
@@ -1043,7 +1046,7 @@ class Adv_Accordion extends Widget_Base
                 'class'           => $tab_content_class,
                 'data-tab'        => $tab_count,
                 'role'            => 'tabpanel',
-                'aria-labelledby' => $tab['eael_adv_accordion_tab_id'] ? $tab['eael_adv_accordion_tab_id'] : Helper::str_to_css_id($tab['eael_adv_accordion_tab_title']),
+                'aria-labelledby' => $tab_id,
             ]);
 
             echo '<div class="eael-accordion-list">
