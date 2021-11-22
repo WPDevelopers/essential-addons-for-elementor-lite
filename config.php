@@ -1087,9 +1087,6 @@ $config = [
         'post-duplicator' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Post_Duplicator',
         ],
-        'xd-copy' => [
-            'class' => '\Essential_Addons_Elementor\Extensions\XD_Copy',
-        ],
     ],
 ];
 
