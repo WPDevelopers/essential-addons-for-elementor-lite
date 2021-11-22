@@ -302,6 +302,7 @@ trait Library
 	        'payments',
 	        'newpassword',
 	        'manage_sub_accounts',
+	        'ppw_postpass',
         ];
         if (in_array($action_name, $allow_action)){
             return true;
