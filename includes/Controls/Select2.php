@@ -23,10 +23,16 @@ class Select2 extends Base_Data_Control
         wp_localize_script(
             'eael-select2',
             'eael_select2_localize',
-            [
-                'ajaxurl' => admin_url('admin-ajax.php'),
-                'search_text' => esc_html__('Search', 'essential-addons-for-elementor-lite'),
-            ]
+	        [
+		        'ajaxurl'     => admin_url( 'admin-ajax.php' ),
+		        'search_text' => esc_html__( 'Search', 'essential-addons-for-elementor-lite' ),
+		        'remove'      => __( 'Remove', 'essential-addons-for-elementor-lite' ),
+		        'thumbnail'   => __( 'Image', 'essential-addons-for-elementor-lite' ),
+		        'name'        => __( 'Title', 'essential-addons-for-elementor-lite' ),
+		        'price'       => __( 'Price', 'essential-addons-for-elementor-lite' ),
+		        'quantity'    => __( 'Quantity', 'essential-addons-for-elementor-lite' ),
+		        'subtotal'    => __( 'Subtotal', 'essential-addons-for-elementor-lite' ),
+	        ]
         );
         wp_enqueue_script('eael-select2');
     }
