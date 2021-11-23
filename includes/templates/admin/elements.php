@@ -319,7 +319,13 @@ $elements = [
                 'demo_link' => 'https://essential-addons.com/elementor/image-scroller/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/ea-image-scroller/',
                 'is_pro' => true
-            ]
+            ],
+	        [
+		        'key'    => 'interactive-circle',
+		        'title'  => __( 'Interactive Circle', 'essential-addons-for-elementor-lite'),
+		        'demo_link' => 'https://essential-addons.com/elementor/interactive-circle/',
+		        'doc_link' => 'https://essential-addons.com/elementor/docs/interactive-circle/',
+	        ]
         ]
     ],
     'marketing-elements'    => [
