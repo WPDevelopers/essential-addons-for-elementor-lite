@@ -1125,6 +1125,18 @@ $config = [
         'post-duplicator' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Post_Duplicator',
         ],
+        'scroll-to-top' => [
+            'class' => '\Essential_Addons_Elementor\Extensions\Scroll_to_Top',
+            'dependency' => [
+                'js' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/scroll-to-top.min.js',
+                        'type' => 'self',
+                        'context' => 'edit',
+                    ],
+                ],
+            ],
+        ],
     ],
 ];
 
