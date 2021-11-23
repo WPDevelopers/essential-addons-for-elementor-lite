@@ -127,6 +127,21 @@ trait Enqueue
             EAEL_PLUGIN_VERSION
         );
 
+        // register scroll to top assets
+        wp_register_style(
+            'eael-scroll-to-top',
+            EAEL_PLUGIN_URL . 'assets/front-end/css/view/scroll-to-top.min.css',
+            false,
+            EAEL_PLUGIN_VERSION
+        );
+
+        wp_register_script(
+            'eael-scroll-to-top',
+            EAEL_PLUGIN_URL . 'assets/front-end/js/view/scroll-to-top.min.js',
+            ['jquery'],
+            EAEL_PLUGIN_VERSION
+        );
+
         // localize object
         $this->localize_objects = apply_filters('eael/localize_objects', [
             'ajaxurl' => admin_url('admin-ajax.php'),
