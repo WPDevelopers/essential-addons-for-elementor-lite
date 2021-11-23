@@ -56,13 +56,6 @@ $extensions = [
                 'demo_link' => 'https://essential-addons.com/elementor/custom-js/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/custom-js/',
             ],
-	        [
-		        'key'       => 'xd-copy',
-		        'title'     => __( 'Cross-Domain Copy Paste', 'essential-addons-for-elementor-lite' ),
-		        'demo_link' => 'https://essential-addons.com/elementor/xd-copy/',
-		        'doc_link'  => 'https://essential-addons.com/elementor/docs/xd-copy/',
-		        'is_pro'    => true
-            ],
             [
                 'key'    => 'scroll-to-top',
                 'title'  => __( 'Scroll to Top', 'essential-addons-for-elementor-lite'),
