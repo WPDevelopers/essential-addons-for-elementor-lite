@@ -366,4 +366,12 @@ trait Enqueue
         }";
         wp_add_inline_style( 'elementor-icons', $css );
     }
+
+	// replace beehive theme's swiper slider lib file with elementor's swiper lib file
+	public function beehive_theme_swiper_slider_compatibility( $scripts ) {
+		$scripts['swiper']['src']     = ELEMENTOR_ASSETS_URL . 'lib/swiper/swiper.min.js';
+		$scripts['swiper']['version'] = '5.3.6';
+
+		return $scripts;
+	}
 }
