@@ -122,6 +122,7 @@ trait Library
                 unlink($path);
             }
         }
+	    do_action( 'eael_remove_assets', $uid, $ext );
     }
 
     /**
