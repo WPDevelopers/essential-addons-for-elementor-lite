@@ -273,6 +273,6 @@ class Bootstrap
         }
 
 	    // beehive theme compatibility
-	    add_filter( 'beehive_scripts', array( $this, 'beehive_theme_swiper_slider_compatibility' ), 10 );
+	    add_filter( 'beehive_scripts', array( $this, 'beehive_theme_swiper_slider_compatibility' ), 999 );
     }
 }
