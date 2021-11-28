@@ -1621,6 +1621,19 @@ class GravityForms extends Widget_Base {
 
         $this->end_controls_section();
 
+	    /**
+	     * Style Tab: File upload
+	     * -------------------------------------------------
+	     */
+	    $this->start_controls_section(
+		    'file_upload_style',
+		    [
+			    'label' => __( 'File Upload', 'essential-addons-for-elementor-lite'),
+			    'tab'   => Controls_Manager::TAB_STYLE,
+		    ]
+	    );
+        
+	    $this->end_controls_section();
 
         /**
          * Style Tab: Scrolling Text
