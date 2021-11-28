@@ -1041,6 +1041,10 @@ class Post_Grid extends Widget_Base
         $args = HelperClass::get_query_args($settings);
         $args = HelperClass::get_dynamic_args($settings, $args);
 
+	    if ( ! in_array( $settings['post_type'], [ 'post', 'page', 'product', 'by_id', 'source_dynamic' ] ) ) {
+		    $settings['eael_post_terms'] = $settings["eael_{$settings['post_type']}_terms"];
+	    }
+
         $link_settings = [
             'image_link_nofollow' => $settings['image_link_nofollow'] ? 'rel="nofollow"' : '',
             'image_link_target_blank' => $settings['image_link_target_blank'] ? 'target="_blank"' : '',
