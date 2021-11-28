@@ -1009,15 +1009,15 @@ trait Controls
 		        $post_types['page'],
 		        $post_types['product']
 	        );
-	        $taxonomies = get_taxonomies( [], 'objects' );
+	        $taxonomies     = get_taxonomies( [], 'objects' );
+	        $post_types_tax = [];
 
-	        $post_types_taxonomies = [];
 	        foreach ( $taxonomies as $taxonomy => $object ) {
 		        if ( ! isset( $object->object_type[0] ) || ! in_array( $object->object_type[0], array_keys( $post_types ) ) ) {
 			        continue;
 		        }
 
-		        $post_types_taxonomies[ $object->object_type[0] ][ $taxonomy ] = $object->label;
+		        $post_types_tax[ $object->object_type[0] ][ $taxonomy ] = $object->label;
 	        }
 
 	        foreach ( $post_types as $post_type => $post_taxonomies ) {
@@ -1026,8 +1026,8 @@ trait Controls
 			        [
 				        'label'     => __( 'Show Terms From', 'essential-addons-for-elementor-lite' ),
 				        'type'      => Controls_Manager::SELECT,
-				        'options'   => $post_types_taxonomies[ $post_type ],
-				        'default'   => array_key_first( $post_types_taxonomies[ $post_type ] ),
+				        'options'   => $post_types_tax[ $post_type ],
+				        'default'   => array_key_first( $post_types_tax[ $post_type ] ),
 				        'condition' => [
 					        'eael_show_image'      => 'yes',
 					        'eael_show_post_terms' => 'yes',
