@@ -52,8 +52,7 @@
             <fields-in-item items_of="eael_data_table_content_rows">
                 <field type="Data Table: Cell Text" editor_type="AREA">eael_data_table_content_row_title</field>
                 <field type="Data Table: Cell Content" editor_type="VISUAL">eael_data_table_content_row_content</field>
-                <field type="Data Table: Link" editor_type="LINE" key_of="eael_data_table_content_row_title_link">url
-                </field>
+                <field type="Data Table: Link" editor_type="LINE" key_of="eael_data_table_content_row_title_link">url</field>
             </fields-in-item>
         </widget>
         <widget name="eael-dual-color-header">
@@ -97,8 +96,7 @@
                 <field type="Filterable Gallery: Item Rating" editor_type="LINE">fg_item_ratings</field>
                 <field type="Filterable Gallery: Item Category" editor_type="LINE">fg_item_cat</field>
                 <field type="Filterable Gallery: Item Content" editor_type="VISUAL">eael_fg_gallery_item_content</field>
-                <field type="Filterable Gallery: Item Link" key_of="eael_fg_gallery_img_link" editor_type="LINE">url
-                </field>
+                <field type="Filterable Gallery: Item Link" key_of="eael_fg_gallery_img_link" editor_type="LINE">url</field>
             </fields-in-item>
         </widget>
         <widget name="eael-image-accordion">
@@ -165,17 +163,13 @@
                 <field type="Pricing Table: Sell Price" editor_type="LINE">eael_pricing_table_onsale_price</field>
                 <field type="Pricing Table: Price Currency" editor_type="LINE">eael_pricing_table_price_cur</field>
                 <field type="Pricing Table: Price Button Text" editor_type="LINE">eael_pricing_table_btn</field>
-                <field type="Pricing Table: Price Button Link" key_of="eael_pricing_table_btn_link" editor_type="LINE">
-                    url
-                </field>
+                <field type="Pricing Table: Price Button Link" key_of="eael_pricing_table_btn_link" editor_type="LINE">url</field>
                 <field type="Pricing Table: Price Period" editor_type="LINE">eael_pricing_table_price_period</field>
-                <field type="Pricing Table: Price Tag Text" editor_type="LINE">eael_pricing_table_featured_tag_text
-                </field>
+                <field type="Pricing Table: Price Tag Text" editor_type="LINE">eael_pricing_table_featured_tag_text</field>
             </fields>
             <fields-in-item items_of="eael_pricing_table_items">
                 <field type="Pricing Table: Feature" editor_type="LINE">eael_pricing_table_item</field>
-                <field type="Pricing Table: Feature Tooltip" editor_type="LINE">eael_pricing_item_tooltip_content
-                </field>
+                <field type="Pricing Table: Feature Tooltip" editor_type="LINE">eael_pricing_item_tooltip_content</field>
             </fields-in-item>
         </widget>
         <widget name="eael-progress-bar">
@@ -289,9 +283,7 @@
                 <condition key="widgetType">eael-advanced-data-table</condition>
             </conditions>
             <fields>
-                <field type="Adv Data Table: Search Placeholder" editor_type="LINE">
-                    ea_adv_data_table_search_placeholder
-                </field>
+                <field type="Adv Data Table: Search Placeholder" editor_type="LINE">ea_adv_data_table_search_placeholder</field>
             </fields>
         </widget>
         <widget name="eael-formstack">
