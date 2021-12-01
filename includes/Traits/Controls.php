@@ -1027,7 +1027,7 @@ trait Controls
 				        'label'     => __( 'Show Terms From', 'essential-addons-for-elementor-lite' ),
 				        'type'      => Controls_Manager::SELECT,
 				        'options'   => isset( $post_types_tax[ $post_type ] ) ? $post_types_tax[ $post_type ] : [],
-				        'default'   => isset( $post_types_tax[ $post_type ] ) ? array_key_first( $post_types_tax[ $post_type ] ) : '',
+				        'default'   => isset( $post_types_tax[ $post_type ] ) ? key( $post_types_tax[ $post_type ] ) : '',
 				        'condition' => [
 					        'eael_show_image'      => 'yes',
 					        'eael_show_post_terms' => 'yes',
