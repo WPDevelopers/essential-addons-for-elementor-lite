@@ -2372,7 +2372,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				$found_posts                      = 0;
 
 				if ( file_exists( $template ) ) {
-					$settings[ 'eael_page_id' ] = get_the_ID();
+					$settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
 					$query = new \WP_Query( $args );
 					if ( $query->have_posts() ) {
 						$found_posts      = $query->found_posts;
