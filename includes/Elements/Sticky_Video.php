@@ -847,11 +847,12 @@ class Sticky_Video extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
 
-        if ('youtube' === $settings['eael_video_source']) {
-            $url = $settings['eaelsv_link_youtube'];
-            $link = explode('=', parse_url($url, PHP_URL_QUERY));
-	        $id = isset( $link[1] ) ? $link[1] : '';
-        }
+	    if ( 'youtube' === $settings['eael_video_source'] ) {
+		    $url        = $settings['eaelsv_link_youtube'];
+		    $link       = explode( '=', parse_url( $url, PHP_URL_QUERY ) );
+		    $short_link = explode( '/', $url );
+		    $id         = isset( $link[1] ) ? $link[1] : ( isset( $short_link[3] ) ? $short_link[3] : '' );
+	    }
         if ('vimeo' === $settings['eael_video_source']) {
             $url = $settings['eaelsv_link_vimeo'];
             $link = explode('/', $url);
