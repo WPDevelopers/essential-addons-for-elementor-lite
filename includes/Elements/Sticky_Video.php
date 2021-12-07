@@ -850,12 +850,12 @@ class Sticky_Video extends Widget_Base
         if ('youtube' === $settings['eael_video_source']) {
             $url = $settings['eaelsv_link_youtube'];
             $link = explode('=', parse_url($url, PHP_URL_QUERY));
-            $id = $link[1];
+	        $id = isset( $link[1] ) ? $link[1] : '';
         }
         if ('vimeo' === $settings['eael_video_source']) {
             $url = $settings['eaelsv_link_vimeo'];
             $link = explode('/', $url);
-            $id = $link[3];
+	        $id = isset( $link[3] ) ? $link[3] : '';
         }
         if ('self_hosted' === $settings['eael_video_source']) {
             $externalUrl = $settings['eaelsv_link_external'];
