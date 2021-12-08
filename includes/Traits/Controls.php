@@ -310,6 +310,7 @@ trait Controls
                     'id' => __('ID', 'essential-addons-for-elementor-lite'),
                     'description' => __('Description', 'essential-addons-for-elementor-lite'),
                     'parent' => __('Parent', 'essential-addons-for-elementor-lite'),
+                    'betterdocs_order' => __('BetterDocs Order', 'essential-addons-for-elementor-lite'),
                 ],
                 'default' => 'name',
             ]
