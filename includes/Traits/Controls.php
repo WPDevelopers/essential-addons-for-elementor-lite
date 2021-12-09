@@ -1210,6 +1210,33 @@ trait Controls
                 ]
             );
 
+	        if ('eael-post-grid' === $wb->get_name()) {
+	            $wb->add_responsive_control(
+		        'eael_post_grid_read_more_alignment',
+		        [
+			        'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
+			        'type' => Controls_Manager::CHOOSE,
+			        'options' => [
+				        'left' => [
+					        'title' => __('Left', 'essential-addons-for-elementor-lite'),
+					        'icon' => 'eicon-text-align-left',
+				        ],
+				        'center' => [
+					        'title' => __('Center', 'essential-addons-for-elementor-lite'),
+					        'icon' => 'eicon-text-align-center',
+				        ],
+				        'right' => [
+					        'title' => __('Right', 'essential-addons-for-elementor-lite'),
+					        'icon' => 'eicon-text-align-right',
+				        ],
+			        ],
+			        'selectors' => [
+				        '{{WRAPPER}} .eael-post-elements-readmore-btn' => 'text-align: {{VALUE}};',
+			        ],
+		        ]
+	        );
+	        }
+
             $wb->add_group_control(
                 Group_Control_Typography::get_type(),
                 [
@@ -1376,7 +1403,7 @@ trait Controls
             ]
         );
 
-        $wb->add_responsive_control(
+	    $wb->add_responsive_control(
             'eael_post_grid_load_more_btn_padding',
             [
                 'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
