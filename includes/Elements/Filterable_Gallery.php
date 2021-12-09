@@ -2763,6 +2763,23 @@ class Filterable_Gallery extends Widget_Base
         $sorter_class = str_replace(',-', ' eael-cf-', $sorter_class);
         $sorter_class = str_replace('.', '-', $sorter_class);
         $sorter_class = str_replace(',', ' ', $sorter_class);
+        $sorter_class = str_replace('~', 'tilde', $sorter_class);
+        $sorter_class = str_replace('!', 'exclamation', $sorter_class);
+        $sorter_class = str_replace('@', 'at', $sorter_class);
+        $sorter_class = str_replace('#', 'hash', $sorter_class);
+        $sorter_class = str_replace('(', 'parenthesis', $sorter_class);
+        $sorter_class = str_replace(')', 'parenthesis', $sorter_class);
+        $sorter_class = str_replace('=', 'equal', $sorter_class);
+        $sorter_class = str_replace(';', 'semicolon', $sorter_class);
+        $sorter_class = str_replace(':', 'colon', $sorter_class);
+        $sorter_class = str_replace('<', 'lessthan', $sorter_class);
+        $sorter_class = str_replace('>', 'greaterthan', $sorter_class);
+        $sorter_class = str_replace('|', 'pipe', $sorter_class);
+        $sorter_class = str_replace('\\', 'backslash', $sorter_class);
+        $sorter_class = str_replace('^', 'caret', $sorter_class);
+        $sorter_class = str_replace('*', 'asterisk', $sorter_class);
+	    $sorter_class = str_replace('$', 'dollar', $sorter_class);
+	    $sorter_class = str_replace('%', 'percent', $sorter_class);
         $sorter_class = utf8_encode($sorter_class);
         return $sorter_class;
     }
