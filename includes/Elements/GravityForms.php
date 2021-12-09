@@ -1636,7 +1636,7 @@ class GravityForms extends Widget_Base {
 	    $this->start_controls_tabs( 'file_upload_tabs_button_style' );
 
 	    $this->start_controls_tab(
-		    'tab_button_normal',
+		    'file_upload_tab_button_normal',
 		    [
 			    'label'                 => __( 'Normal', 'essential-addons-for-elementor-lite'),
 		    ]
@@ -1712,7 +1712,7 @@ class GravityForms extends Widget_Base {
 	    $this->end_controls_tab();
 
 	    $this->start_controls_tab(
-		    'tab_button_hover',
+		    'file_upload_tab_button_hover',
 		    [
 			    'label'                 => __( 'Hover', 'essential-addons-for-elementor-lite'),
 		    ]
