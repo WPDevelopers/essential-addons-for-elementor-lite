@@ -3,6 +3,7 @@ ea.hooks.addAction("init", "ea", () => {
 		"frontend/element_ready/eael-adv-accordion.default",
 		function ($scope, $) {
 			let hashTag = window.location.hash.substr(1);
+				hashTag = hashTag === 'safari' ? 'eael-safari' : hashTag;
 			let hashTagExists = false;
 			var $advanceAccordion = $scope.find(".eael-adv-accordion"),
 				$accordionHeader = $scope.find(".eael-accordion-header"),
