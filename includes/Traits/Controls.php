@@ -1004,6 +1004,40 @@ trait Controls
 
             $eael_show_post_terms_child_condition = ['eael_show_image' => 'yes', 'eael_show_post_terms' => 'yes'];
 
+	        $post_types = ControlsHelper::get_post_types();
+	        unset(
+		        $post_types['post'],
+		        $post_types['page'],
+		        $post_types['product']
+	        );
+	        $taxonomies     = get_taxonomies( [], 'objects' );
+	        $post_types_tax = [];
+
+	        foreach ( $taxonomies as $taxonomy => $object ) {
+		        if ( ! isset( $object->object_type[0] ) || ! in_array( $object->object_type[0], array_keys( $post_types ) ) ) {
+			        continue;
+		        }
+
+		        $post_types_tax[ $object->object_type[0] ][ $taxonomy ] = $object->label;
+	        }
+
+	        foreach ( $post_types as $post_type => $post_taxonomies ) {
+		        $wb->add_control(
+			        'eael_' . $post_type . '_terms',
+			        [
+				        'label'     => __( 'Show Terms From', 'essential-addons-for-elementor-lite' ),
+				        'type'      => Controls_Manager::SELECT,
+				        'options'   => isset( $post_types_tax[ $post_type ] ) ? $post_types_tax[ $post_type ] : [],
+				        'default'   => isset( $post_types_tax[ $post_type ] ) ? key( $post_types_tax[ $post_type ] ) : '',
+				        'condition' => [
+					        'eael_show_image'      => 'yes',
+					        'eael_show_post_terms' => 'yes',
+					        'post_type'            => $post_type
+				        ],
+			        ]
+		        );
+	        }
+
             $wb->add_control(
                 'eael_post_terms',
                 [
@@ -1014,7 +1048,11 @@ trait Controls
                         'tags' => __('Tags', 'essential-addons-for-elementor-lite'),
                     ],
                     'default' => 'category',
-                    'condition' => $eael_show_post_terms_child_condition,
+                    'condition' => [
+	                    'eael_show_image'      => 'yes',
+	                    'eael_show_post_terms' => 'yes',
+	                    'post_type'            => [ 'post', 'page', 'product', 'by_id', 'source_dynamic' ]
+                    ],
                 ]
             );
 
