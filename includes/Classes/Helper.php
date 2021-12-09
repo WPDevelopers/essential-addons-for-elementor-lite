@@ -592,6 +592,8 @@ class Helper
 
     public static function get_terms_as_list($term_type = 'category', $length = 1)
     {
+	    $terms = get_the_terms( get_the_ID(), $term_type );
+
         if ($term_type === 'category') {
             $terms = get_the_category();
         }
