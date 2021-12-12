@@ -2780,6 +2780,12 @@ class Filterable_Gallery extends Widget_Base
         $sorter_class = str_replace('*', 'asterisk', $sorter_class);
 	    $sorter_class = str_replace('$', 'dollar', $sorter_class);
 	    $sorter_class = str_replace('%', 'percent', $sorter_class);
+	    $sorter_class = str_replace('`', 'backtick', $sorter_class);
+	    $sorter_class = str_replace('[', 'bracket', $sorter_class);
+	    $sorter_class = str_replace(']', 'bracket', $sorter_class);
+	    $sorter_class = str_replace('{', 'curlybracket', $sorter_class);
+	    $sorter_class = str_replace('}', 'curlybracket', $sorter_class);
+	    $sorter_class = str_replace('?', 'questionmark', $sorter_class);
         $sorter_class = utf8_encode($sorter_class);
         return $sorter_class;
     }
