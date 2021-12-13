@@ -313,3 +313,7 @@
 .eaicon-woo-cart:before {
 	content: "\e95b";
 }
+
+.eaicon-advanced-search:before {
+	content: "\e95d";
+}
