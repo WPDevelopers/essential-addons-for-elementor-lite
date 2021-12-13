@@ -355,8 +355,8 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 }
 
 .eael-gallery-grid-item {
-  margin-left: calc(20px/2);
-  margin-right: calc(20px/2);
+  margin-left: 10px;
+  margin-right: 10px;
   margin-bottom: 20px;
   position: relative;
   overflow: hidden;

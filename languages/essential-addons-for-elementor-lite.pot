@@ -61,7 +61,7 @@ msgstr ""
 msgid "Install Now!"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:187, ../includes/Classes/WPDeveloper_Setup_Wizard.php:481, ../includes/Classes/WPDeveloper_Setup_Wizard.php:507, ../includes/Traits/Admin.php:165, ../includes/Traits/Helper.php:833, ../includes/Traits/Library.php:157
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:187, ../includes/Classes/WPDeveloper_Setup_Wizard.php:481, ../includes/Classes/WPDeveloper_Setup_Wizard.php:507, ../includes/Traits/Admin.php:165, ../includes/Traits/Helper.php:833, ../includes/Traits/Library.php:158
 msgid "you are not allowed to do this action"
 msgstr ""
 
@@ -3047,7 +3047,7 @@ msgstr ""
 msgid "Title Bottom Space"
 msgstr ""
 
-#: ../includes/Elements/Filterable_Gallery.php:94, ../includes/Elements/Flip_Box.php:77, ../includes/Elements/Pricing_Table.php:79, ../includes/Traits/Core.php:44, ../includes/templates/admin/elements.php:603, ../includes/templates/admin/elements.php:585, ../includes/templates/admin/elements.php:582, ../includes/templates/admin/extensions.php:91
+#: ../includes/Elements/Filterable_Gallery.php:94, ../includes/Elements/Flip_Box.php:77, ../includes/Elements/Pricing_Table.php:79, ../includes/Traits/Core.php:44, ../includes/templates/admin/elements.php:603, ../includes/templates/admin/elements.php:585, ../includes/templates/admin/elements.php:582, ../includes/templates/admin/extensions.php:98
 msgid "Settings"
 msgstr ""
 
@@ -7598,7 +7598,7 @@ msgstr ""
 msgid "Essential Addons Settings"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:106, ../includes/templates/admin/elements.php:638, ../includes/templates/admin/extensions.php:112
+#: ../includes/Traits/Admin.php:106, ../includes/templates/admin/elements.php:638, ../includes/templates/admin/extensions.php:119
 msgid "Save settings"
 msgstr ""
 
@@ -8582,7 +8582,7 @@ msgstr ""
 msgid "LearnDash Elements"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:579, ../includes/templates/admin/extensions.php:89
+#: ../includes/templates/admin/elements.php:579, ../includes/templates/admin/extensions.php:96
 msgid "Pro"
 msgstr ""
 
@@ -8615,6 +8615,10 @@ msgid "Duplicator"
 msgstr ""
 
 #: ../includes/templates/admin/extensions.php:61
+msgid "Cross-Domain Copy Paste"
+msgstr ""
+
+#: ../includes/templates/admin/extensions.php:68
 msgid "Scroll to Top"
 msgstr ""
 
