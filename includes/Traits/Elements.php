@@ -306,6 +306,12 @@ trait Elements
 		        'icon' => 'eaicon-woo-product-collections',
 		        'categories' => '["essential-addons-elementor"]',
 	        ],
+            [
+	            'name' => 'eaicon-advanced-search',
+	            'title' => __('Advanced Search', 'essential-addons-for-elementor-lite'),
+	            'icon' => 'eaicon-advanced-search',
+	            'categories' => '["essential-addons-elementor"]',
+            ],
         ]);
 
         $config['promotionWidgets'] = $combine_array;
