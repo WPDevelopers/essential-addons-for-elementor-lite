@@ -484,7 +484,9 @@
 
         contents[step].style.display = "block";
         prev.style.display = (step == 0) ? "none" : "inline";
-
+        console.log(step)
+        console.log(contents.length)
+        console.log((contents.length - 1))
         if (step == (contents.length - 1)) {
             saveElement.style.display = "inline";
             nextElement.style.display = "none";
@@ -496,8 +498,8 @@
     }
 
     function eaelStepIndicator(stepNumber) {
-        var steps = document.getElementsByClassName("step"),
-            container = document.getElementsByClassName("eael-setup-wizard");
+        var steps = document.getElementsByClassName("eael-quick-setup-step"),
+            container = document.getElementsByClassName("eael-quick-setup-wizard");
         container[0].setAttribute('data-step', stepNumber);
 
         for (var i = 0; i < steps.length; i++) {
@@ -508,7 +510,7 @@
     }
 
     $(document).on('click', '#eael-next,#eael-prev', function (e) {
-        var container = document.getElementsByClassName("eael-setup-wizard"),
+        var container = document.getElementsByClassName("eael-quick-setup-wizard"),
             StepNumber = parseInt(container[0].getAttribute('data-step')),
             contents = document.getElementsByClassName("setup-content");
 
