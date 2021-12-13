@@ -111,140 +111,21 @@ class WPDeveloper_Setup_Wizard {
 		<?php
 	}
 
-	public function configuration_tab() {
-		?>
-        <div class="eael-quick-setup-tab-content configuration">
-            <div class="eael-quick-setup-intro">
-                <div class="eael-quick-setup-logo">
-
-                </div>
-                <h2 class="eael-quick-setup-title">
-					<?php _e( 'Get Started with Essential Addons 🚀', 'essential-addons-for-elementor-lite' ); ?>
-                </h2>
-                <p class="eael-quick-setup-text">
-					<?php _e( 'Enhance your Elementor page building experience with 70+ amazing
-                        elements & extensions 🔥', 'essential-addons-for-elementor-lite' ); ?>
-                </p>
-                <div class="eael-quick-setup-input-group">
-                    <label class="eael-quick-setup-input config-list">
-                        <input type="radio" name="eael_preferances" checked/>
-                        <span class="eael-quick-setup-content">
-                  <h3 class="eael-quick-setup-title"><?php _e( 'Basic', 'essential-addons-for-elementor-lite' ); ?></h3>
-                  <p class="eael-quick-setup-text">
-                    <?php _e( 'For websites where you want to only use the basic features
-                    and keep your site lightweight. Most basic elements are
-                    activated in this option.', 'essential-addons-for-elementor-lite' ); ?>
-                  </p>
-                </span>
-                    </label>
-                    <label class="eael-quick-setup-input config-list">
-                        <input type="radio" name="eael_preferances"/>
-                        <span class="eael-quick-setup-content">
-                  <h3 class="eael-quick-setup-title"><?php _e( 'Advanced (Recommended)', 'essential-addons-for-elementor-lite' ); ?></h3>
-                  <p class="eael-quick-setup-text">
-                    <?php _e( 'For advanced users who are trying to build complex websites
-                    with advanced functionalities with Elementor. All the
-                    dynamic elements will be activated in this option.', 'essential-addons-for-elementor-lite' ); ?>
-                  </p>
-                </span>
-                    </label>
-                    <label class="eael-quick-setup-input config-list">
-                        <input type="radio" name="eael_preferances"/>
-                        <span class="eael-quick-setup-content">
-                  <h3 class="eael-quick-setup-title"><?php _e( 'Custom', 'essential-addons-for-elementor-lite' ); ?></h3>
-                  <p class="eael-quick-setup-text">
-                    <?php _e( 'Pick this option if you want to configure the elements as
-                    per your wish.', 'essential-addons-for-elementor-lite' ); ?>
-                  </p>
-                </span>
-                    </label>
-                </div>
-            </div>
-        </div>
-		<?php
-	}
-
 	/**
 	 * Tav view content
 	 */
 	public function tab_content() {
 		?>
-        <div class="eael-setup-body">
-            <form class="eael-setup-wizard-form" method="post">
-                <div id="configuration" class="setup-content">
-                    <div class="eael-input-group config-list">
-                        <input id="basic"
-                               value="basic"
-                               class="eael_preferences" name="eael_preferences" type="radio" checked>
-                        <label for="basic">
-                            <div class="eael-radio-circle"></div>
-                            <div class="eael-radio-text">
-                                <strong><?php _e( 'Basic (Recommended)', 'essential-addons-for-elementor-lite' ); ?></strong>
-                                <p> <?php _e( 'For websites where you want to only use the basic features and keep your site
-                                    lightweight. Most basic elements are activated in this option. ', 'essential-addons-for-elementor-lite' ); ?></p>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="eael-input-group config-list">
-                        <input id="advance" value="advance"
-                               class="eael_preferences"
-                               name="eael_preferences"
-                               type="radio">
-                        <label for="advance">
-                            <div class="eael-radio-circle"></div>
-                            <div class="eael-radio-text">
-                                <strong><?php _e( 'Advanced', 'essential-addons-for-elementor-lite' ) ?></strong>
-                                <p> <?php _e( 'For advanced users who are trying to build complex websites with advanced
-                                    functionalities with Elementor. All the dynamic elements will be activated in this
-                                    option.', 'essential-addons-for-elementor-lite' ) ?> </p>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="eael-input-group config-list">
-                        <input id="custom" value="custom" class="eael_preferences" name="eael_preferences" name="radio"
-                               type="radio">
-                        <label for="custom">
-                            <div class="eael-radio-circle"></div>
-                            <div class="eael-radio-text">
-                                <strong><?php _e( 'Custom', 'essential-addons-for-elementor-lite' ); ?></strong>
-                                <p> <?php _e( 'Pick this option if you want to configure the elements as per your wish.', 'essential-addons-for-elementor-lite' ); ?> </p>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-				<?php $this->eael_elements(); ?>
-				<?php if ( !$this->templately_status ): ?>
-                    <div id="templately" class="setup-content eael-box eael-templately-popup" style="background-image:
-                            url('<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately.jpg'; ?>');">
-						<?php if ( !is_plugin_active( 'templately/templately.php' ) ) $this->eael_templately_plugin_popup(); ?>
-                    </div>
-				<?php endif; ?>
-				<?php $this->eael_integrations(); ?>
-                <div id="finalize" class="setup-content eael-box">
-
-                    <h2><?php _e( "Getting Started", "essential-addons-for-elementor-lite" ) ?></h2>
-                    <p><?php _e( "Complete the Setup Wizard and Check out the walk-through tutorials to enhance your Elementor page
-                        building experience", "essential-addons-for-elementor-lite" ) ?> 🔥</p>
-
-                    <div class="eael-iframe">
-                        <iframe src="https://www.youtube.com/embed/uuyXfUDqRZM" frameborder="0"></iframe>
-                    </div>
-                    <div class="eael-setup-final-info">
-                        <div>
-                            <div class="eael-input-group">
-                                <input type="checkbox" id="eael_user_email_address" name="eael_user_email_address"
-                                >
-                                <label for="eael_user_email_address"><?php _e( 'Share non-sensitive diagnostic data and plugin
-                                    usage
-                                    information', 'essential-addons-for-elementor-lite' ) ?></label>
-                            </div>
-                            <p style="display: none"
-                               class="eael-whatwecollecttext"><?php _e( 'We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress &amp; PHP version, plugins &amp; themes and email address to send you the discount coupon. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, we promise.', 'essential-addons-for-elementor-lite' ) ?></p>
-                            <button type="button"
-                                    class="btn-collect"><?php _e( 'What Do We Collect?', 'essential-addons-for-elementor-lite' ); ?></button>
-                        </div>
-                    </div>
-                </div>
+        <div class="eael-quick-setup-body">
+            <form class="eael-setup-wizard-form eael-quick-setup-wizard-form" method="post">
+				<?php
+				$this->configuration_tab();
+				$this->eael_elements();
+                $this->go_pro();
+                $this->templately_integrations();
+                $this->eael_integrations();
+                $this->final_step();
+				?>
             </form>
         </div>
 		<?php
@@ -255,13 +136,15 @@ class WPDeveloper_Setup_Wizard {
 	 */
 	public function setup_wizard_footer() {
 		?>
-        <div class="eael-setup-footer">
-            <button id="eael-prev"
-                    class="button eael-btn"><?php _e( '< Previous', 'essential-addons-for-elementor-lite' ) ?></button>
+        <div class="eael-quick-setup-footer">
+            <button id="eael-prev" class="button eael-quick-setup-btn eael-quick-setup-prev-button">
+                <i class="fas fa-long-arrow-alt-left"></i>
+				<?php _e( 'Previous', 'essential-addons-for-elementor-lite' ) ?>
+            </button>
             <button id="eael-next"
-                    class="button eael-btn"><?php _e( 'Next >', 'essential-addons-for-elementor-lite' ) ?></button>
+                    class="button eael-btn button eael-quick-setup-btn eael-quick-setup-next-button"><?php _e( 'Next >', 'essential-addons-for-elementor-lite' ) ?></button>
             <button id="eael-save" style="display: none"
-                    class="button eael-btn eael-setup-wizard-save"><?php _e( 'Finish', 'essential-addons-for-elementor-lite' ) ?></button>
+                    class="button eael-btn button eael-quick-setup-btn eael-quick-setup-next-button eael-setup-wizard-save"><?php _e( 'Finish', 'essential-addons-for-elementor-lite' ) ?></button>
         </div>
 		<?php
 	}
@@ -282,13 +165,69 @@ class WPDeveloper_Setup_Wizard {
 		<?php
 	}
 
+	public function configuration_tab() {
+		?>
+        <div id="configuration" class="eael-quick-setup-tab-content configuration setup-content">
+            <div class="eael-quick-setup-intro">
+                <div class="eael-quick-setup-logo">
+                    <img src="<?php echo esc_url(EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/ea.svg'); ?>" alt="<?php _e('EA Logo','essential-addons-for-elementor-lite'); ?>">
+                </div>
+                <h2 class="eael-quick-setup-title">
+					<?php _e( 'Get Started with Essential Addons 🚀', 'essential-addons-for-elementor-lite' ); ?>
+                </h2>
+                <p class="eael-quick-setup-text">
+					<?php _e( 'Enhance your Elementor page building experience with 70+ amazing
+                        elements & extensions 🔥', 'essential-addons-for-elementor-lite' ); ?>
+                </p>
+            </div>
+            <div class="eael-quick-setup-input-group">
+                <label class="eael-quick-setup-input config-list">
+                    <input id="basic" value="basic" class="eael_preferences" name="eael_preferences" type="radio"
+                           checked/>
+                    <span class="eael-quick-setup-content">
+                  <h3 class="eael-quick-setup-title"><?php _e( 'Basic', 'essential-addons-for-elementor-lite' ); ?></h3>
+                  <p class="eael-quick-setup-text">
+                    <?php _e( 'For websites where you want to only use the basic features
+                    and keep your site lightweight. Most basic elements are
+                    activated in this option.', 'essential-addons-for-elementor-lite' ); ?>
+                  </p>
+                </span>
+                </label>
+                <label class="eael-quick-setup-input config-list">
+                    <input id="advance" value="advance" class="eael_preferences" name="eael_preferences"
+                           type="radio"/>
+                    <span class="eael-quick-setup-content">
+                  <h3 class="eael-quick-setup-title"><?php _e( 'Advanced (Recommended)', 'essential-addons-for-elementor-lite' ); ?></h3>
+                  <p class="eael-quick-setup-text">
+                    <?php _e( 'For advanced users who are trying to build complex websites
+                    with advanced functionalities with Elementor. All the
+                    dynamic elements will be activated in this option.', 'essential-addons-for-elementor-lite' ); ?>
+                  </p>
+                </span>
+                </label>
+                <label class="eael-quick-setup-input config-list">
+                    <input id="custom" value="custom" class="eael_preferences" name="eael_preferences"
+                           type="radio"/>
+                    <span class="eael-quick-setup-content">
+                  <h3 class="eael-quick-setup-title"><?php _e( 'Custom', 'essential-addons-for-elementor-lite' ); ?></h3>
+                  <p class="eael-quick-setup-text">
+                    <?php _e( 'Pick this option if you want to configure the elements as
+                    per your wish.', 'essential-addons-for-elementor-lite' ); ?>
+                  </p>
+                </span>
+                </label>
+            </div>
+        </div>
+		<?php
+	}
+
 	/**
 	 * EAEL elements list
 	 */
 	public function eael_elements() {
 
 		?>
-        <div class="eael-quick-setup-tab-content elements">
+        <div id="elements" class="eael-quick-setup-tab-content elements setup-content" style="display:none">
             <div class="eael-quick-setup-intro">
                 <h2 class="eael-quick-setup-title">
 					<?php _e( 'Turn on the Elements that you need', 'essential-addons-for-elementor-lite' ); ?>
@@ -299,42 +238,41 @@ class WPDeveloper_Setup_Wizard {
                 </p>
             </div>
             <div class="eael-quick-setup-elements-body">
-				<?php foreach ( $this->get_element_list() as $key => $item ): ?>
-                <div class="eael-quick-setup-post-grid-panel">
-                    <h3 class="eael-quick-setup-post-grid-panel-title"><?php echo esc_html( $item[ 'title' ] ); ?></h3>
-                </div>
-                <div class="eael-quick-setup-post-grid-wrapper eael-<?php echo $key; ?>">
-					<?php foreach ( $item[ 'elements' ] as $element ):
-					$preferences = $checked = '';
-					if ( isset( $element[ 'preferences' ] ) ) {
-						$preferences = $element[ 'preferences' ];
-						if ( $element[ 'preferences' ] == 'basic' ) {
-							$checked = 'checked';
-						}
-					}
-					?>
-
-                    <div class="eael-quick-setup-post-grid">
-                        <h3 class="eael-quick-setup-title"><?php echo $element[ 'title' ]; ?></h3>
-                        <label class="eael-quick-setup-toggler">
-                            <input data-preferences="<?php echo $preferences; ?>" type="checkbox"
-                                   class="eael-element" id="<?php echo $element[ 'key' ]; ?>"
-                                   name="eael_element[<?php echo $element[ 'key' ]; ?>]"
-								<?php echo $checked; ?> >
-                            <span class="eael-quick-setup-toggler-icons"></span>
-                        </label>
+		        <?php foreach ( $this->get_element_list() as $key => $item ): ?>
+                    <div class="eael-quick-setup-post-grid-panel">
+                        <h3 class="eael-quick-setup-post-grid-panel-title"><?php echo esc_html( $item[ 'title' ] ); ?></h3>
+                        <div class="eael-quick-setup-post-grid-wrapper eael-<?php echo $key; ?>">
+                            <?php foreach ( $item[ 'elements' ] as $element ):
+                                $preferences = $checked = '';
+                                if ( isset( $element[ 'preferences' ] ) ) {
+                                    $preferences = $element[ 'preferences' ];
+                                    if ( $element[ 'preferences' ] == 'basic' ) {
+                                        $checked = 'checked';
+                                    }
+                                }
+                                ?>
+                                <div class="eael-quick-setup-post-grid">
+                                    <h3 class="eael-quick-setup-title"><?php echo $element[ 'title' ]; ?></h3>
+                                    <label class="eael-quick-setup-toggler">
+                                        <input data-preferences="<?php echo $preferences; ?>" type="checkbox"
+                                               class="eael-element" id="<?php echo $element[ 'key' ]; ?>"
+                                               name="eael_element[<?php echo $element[ 'key' ]; ?>]"
+                                            <?php echo $checked; ?> >
+                                        <span class="eael-quick-setup-toggler-icons"></span>
+                                    </label>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
-                </div>
-			<?php endforeach; ?>
+                <?php endforeach; ?>
             </div>
-			<?php endforeach; ?>
         </div>
 		<?php
 	}
 
 	public function go_pro() {
 		?>
-        <div class="eael-quick-setup-tab-content go_pro">
+        <div id="go-pro" class="eael-quick-setup-tab-content go_pro setup-content" style="display:none">
             <div class="eael-quick-setup-intro">
                 <div class="eael-quick-setup-logo">
                 </div>
@@ -374,15 +312,15 @@ class WPDeveloper_Setup_Wizard {
 
 	public function templately_integrations() {
 		?>
-        <div class="eael-quick-setup-tab-content templately">
+        <div id="templately" class="eael-quick-setup-tab-content templately setup-content" style="display: none">
             <div class="eael-quick-setup-logo">
-                <button class="button eael-quick-setup-templately-button">
+                <button data-action="install" data-slug="templately"
+                        class="button eael-quick-setup-templately-button wpdeveloper-plugin-installer">
 					<?php _e( 'Install Templately', 'essential-addons-for-elementor-lite' ); ?>
                 </button>
                 <div class="eael-tm-logo">
 
                 </div>
-
             </div>
             <div class="eael-quick-setup-title">
 				<?php printf( __( '%s <span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), 'Unlock', '1600+', 'Ready Templates Built With Elementor & Essential Addons From
@@ -415,37 +353,79 @@ class WPDeveloper_Setup_Wizard {
 	 */
 	public function eael_integrations() {
 		?>
-        <div id="integrations" class="setup-content eael-box">
-            <div class="row">
+        <div id="integrations" class="eael-quick-setup-tab-content integrations setup-content" style="display: none">
+            <div class="eael-quick-setup-admin-block-wrapper">
 				<?php foreach ( $this->get_plugin_list() as $plugin ) { ?>
-                    <div class="col-one-third">
-                        <div class="eael-admin-block-wrapper">
-                            <div class="eael-admin-block eael-admin-block-integrations">
-                                <div class="eael-admin-block-content">
-                                    <div class="eael-admin-block-integrations-logo">
-                                        <img src="<?php echo $plugin[ 'logo' ]; ?>" alt="logo"/>
-                                    </div>
-                                    <h2 class="eael-admin-block-integrations-title"><?php echo $plugin[ 'title' ]; ?></h2>
-                                    <p class="eael-admin-block-integrations-text"><?php echo $plugin[ 'desc' ]; ?></p>
-                                    <div class="eael-admin-block-integrations-btn-wrap">
-										<?php if ( $this->get_local_plugin_data( $plugin[ 'basename' ] ) === false ) { ?>
-                                            <a class="ea-button wpdeveloper-plugin-installer" data-action="install"
-                                               data-slug="<?php echo $plugin[ 'slug' ]; ?>"><?php _e( 'Install', 'essential-addons-for-elementor-lite' ); ?></a>
-										<?php } else { ?>
-											<?php if ( is_plugin_active( $plugin[ 'basename' ] ) ) { ?>
-                                                <a class="ea-button wpdeveloper-plugin-installer"><?php _e( 'Activated', 'essential-addons-for-elementor-lite' ); ?></a>
-											<?php } else { ?>
-                                                <a class="ea-button wpdeveloper-plugin-installer" data-action="activate"
-                                                   data-basename="<?php echo $plugin[ 'basename' ]; ?>"><?php _e( 'Activate', 'essential-addons-for-elementor-lite' ); ?></a>
-											<?php } ?>
-										<?php } ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class=" eael-quick-setup-admin-block eael-quick-setup-admin-block-integrations">
+                        <span class="eael-quick-setup-logo">
+                            <img src="<?php echo $plugin[ 'logo' ]; ?>" alt="logo"/>
+                        </span>
+                        <h4 class="eael-quick-setup-title"><?php echo $plugin[ 'title' ]; ?></h4>
+                        <p class="eael-quick-setup-text"><?php echo $plugin[ 'desc' ]; ?></p>
+
+						<?php if ( $this->get_local_plugin_data( $plugin[ 'basename' ] ) === false ) { ?>
+                            <a class="ea-button wpdeveloper-plugin-installer eael-quick-setup-wpdeveloper-plugin-installer"
+                               data-action="install"
+                               data-slug="<?php echo $plugin[ 'slug' ]; ?>"><?php _e( 'Install', 'essential-addons-for-elementor-lite' ); ?></a>
+						<?php } else { ?>
+							<?php if ( is_plugin_active( $plugin[ 'basename' ] ) ) { ?>
+                                <a class="ea-button wpdeveloper-plugin-installer eael-quick-setup-wpdeveloper-plugin-installer"><?php _e( 'Activated', 'essential-addons-for-elementor-lite' ); ?></a>
+							<?php } else { ?>
+                                <a class="ea-button wpdeveloper-plugin-installer eael-quick-setup-wpdeveloper-plugin-installer"
+                                   data-action="activate"
+                                   data-basename="<?php echo $plugin[ 'basename' ]; ?>"><?php _e( 'Activate', 'essential-addons-for-elementor-lite' ); ?></a>
+							<?php } ?>
+						<?php } ?>
                     </div>
 				<?php } ?>
             </div>
+        </div>
+		<?php
+	}
+
+	public function final_step() {
+		?>
+        <div id="finalize" class="eael-quick-setup-tab-content finalize setup-content" style="display: none">
+            <div class="eael-quick-setup-intro">
+                <h2 class="eael-quick-setup-title">
+					<?php _e( 'Make Essential Addons more awesome by being our Contributor 💪', 'essential-addons-for-elementor-lite' ); ?>
+                </h2>
+            </div>
+            <div class="eael-quick-setup-message-wrapper">
+                <div class="eael-quick-setup-message">
+					<?php _e( 'We collect non-sensitive diagnostic data and plugin usage
+                    information. Your site URL, WordPress & PHP version, plugins &
+                    themes and email address to send you the discount coupon. This
+                    data lets us make sure this plugin always stays compatible with
+                    the most popular plugins and themes. No spam, we promise We
+                    collect non-sensitive diagnostic data and plugin usage
+                    information. Your site URL, WordPress & PHP version, plugins &
+                    themes and email address to send you the discount coupon. This
+                    data lets us make sure this plugin always stays compatible with
+                    the most popular plugins and themes. No spam, we promise We
+                    collect non-sensitive diagnostic data and plugin usage
+                    information. Your site URL, WordPress & PHP version, plugins &
+                    themes and email address to send you the discount coupon. This
+                    data lets us make sure this plugin always stays compatible with
+                    the most popular plugins and themes. No spam, we promise We
+                    collect non-sensitive diagnostic data and plugin usage
+                    information. Your site URL, WordPress & PHP version, plugins &
+                    themes and email address to send you the discount coupon. This
+                    data lets us make sure this plugin always stays compatible with
+                    the most popular plugins and themes. No spam, we promise We
+                    collect non-sensitive diagnostic data and plugin usage
+                    information. Your site URL, WordPress & PHP version, plugins &
+                    themes and email address to send you the discount coupon. This
+                    data lets us make sure this plugin always stays compatible with
+                    the most popular plugins and themes. No spam, we promise', 'essential-addons-for-elementor-lite' ); ?>
+                </div>
+            </div>
+            <label class="eael-quick-setup-checkbox">
+                <input id="eael_user_email_address" name="eael_user_email_address" type="checkbox"/>
+                <span class="eael-quick-setup-checkbox-text">
+                    <?php _e( 'Share non-sensitive diagnostic data and plugin usage information', 'essential-addons-for-elementor-lite' ); ?>
+                </span>
+            </label>
         </div>
 		<?php
 	}
