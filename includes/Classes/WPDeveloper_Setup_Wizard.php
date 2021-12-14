@@ -177,7 +177,7 @@ class WPDeveloper_Setup_Wizard {
             <div class="eael-quick-setup-input-group">
                 <label class="eael-quick-setup-input config-list">
                     <input id="basic" value="basic" class="eael_preferences" name="eael_preferences" type="radio"
-                           checked/>
+                           />
                     <span class="eael-quick-setup-content">
                   <h3 class="eael-quick-setup-title"><?php _e( 'Basic', 'essential-addons-for-elementor-lite' ); ?></h3>
                   <p class="eael-quick-setup-text">
@@ -189,7 +189,7 @@ class WPDeveloper_Setup_Wizard {
                 </label>
                 <label class="eael-quick-setup-input config-list">
                     <input id="advance" value="advance" class="eael_preferences" name="eael_preferences"
-                           type="radio"/>
+                           type="radio" checked/>
                     <span class="eael-quick-setup-content">
                   <h3 class="eael-quick-setup-title"><?php _e( 'Advanced (Recommended)', 'essential-addons-for-elementor-lite' ); ?></h3>
                   <p class="eael-quick-setup-text">
@@ -279,7 +279,7 @@ class WPDeveloper_Setup_Wizard {
             </div>
             <div class="eael-quick-setup-input-group">
 				<?php foreach ( $this->pro_elements() as $key => $elements ): ?>
-                    <a href="<?php echo esc_url($elements[ 'link' ]); ?>" class="eael-quick-setup-content">
+                    <a href="<?php echo esc_url($elements[ 'link' ]); ?>" class="eael-quick-setup-content" target="_blank">
                             <span class="eael-quick-setup-icon">
                                 <img src="<?php echo $elements[ 'logo' ]; ?>"
                                      alt="<?php echo $elements[ 'title' ]; ?>">
@@ -290,7 +290,7 @@ class WPDeveloper_Setup_Wizard {
 				<?php endforeach; ?>
             </div>
             <div class="eael-quick-setup-pro-button-wrapper">
-                <a href="https://wpdeveloper.com/plugins/essential-addons-elementor/#pricing" class="button eael-quick-setup-btn eael-quick-setup-pro-button">
+                <a target="_blank" href="https://wpdeveloper.com/plugins/essential-addons-elementor/#pricing" class="button eael-quick-setup-btn eael-quick-setup-pro-button">
 					<?php _e( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ); ?>
                 </a>
             </div>
