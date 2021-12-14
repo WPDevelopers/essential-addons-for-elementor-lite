@@ -70,3 +70,26 @@
     max-width: 100% !important;
   }
 }
+
+.ginput_container_fileupload input[type=file]::file-selector-button,
+.ginput_container_fileupload input[type=file]::-webkit-file-upload-button,
+.ginput_container_fileupload .button {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  padding: 0.5em 1em;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  border-radius: 3px;
+}
+
+.ginput_container_fileupload input[type=file]::file-selector-button:hover,
+.ginput_container_fileupload input[type=file]::-webkit-file-upload-button:hover,
+.ginput_container_fileupload .button:hover {
+  background-color: #262625;
+  color: #fff;
+}

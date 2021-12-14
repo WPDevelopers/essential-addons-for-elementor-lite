@@ -253,7 +253,7 @@ trait Admin {
         $notice->links = [
             'review' => array(
                 'later'            => array(
-                    'link'       => 'https://wpdeveloper.net/review-essential-addons-elementor',
+                    'link'       => 'https://wpdeveloper.com/review-essential-addons-elementor',
                     'target'     => '_blank',
                     'label'      => __( 'Ok, you deserve it!', 'essential-addons-for-elementor-lite' ),
                     'icon_class' => 'dashicons dashicons-external',
@@ -275,7 +275,7 @@ trait Admin {
                     ],
                 ),
                 'support'          => array(
-                    'link'       => 'https://wpdeveloper.net/support',
+                    'link'       => 'https://wpdeveloper.com/support',
                     'label'      => __( 'I need help', 'essential-addons-for-elementor-lite' ),
                     'icon_class' => 'dashicons dashicons-sos',
                 ),

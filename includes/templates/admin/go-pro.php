@@ -12,7 +12,7 @@
                     <div class="eael-admin-block-content">
                     <p><?php _e('The premium version helps us to continue development of the product incorporating even more features and enhancements.', 'essential-addons-for-elementor-lite'); ?></p>
                     <p><?php _e('You will also get world class support from our dedicated team, 24/7.', 'essential-addons-for-elementor-lite'); ?></p>
-                    <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" class="button eael-btn"><?php _e('Get Premium Version', 'essential-addons-for-elementor-lite'); ?></a>
+                    <a href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor" target="_blank" class="button eael-btn"><?php _e('Get Premium Version', 'essential-addons-for-elementor-lite'); ?></a>
                     </div>
                 </div>
             </div><!--admin block-wrapper end-->

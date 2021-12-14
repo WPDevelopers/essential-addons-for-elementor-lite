@@ -218,7 +218,7 @@ class Helper
                     ],
                 ],
                 'default' => '1',
-                'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+                'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.com/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
             ]
         );
 
@@ -592,6 +592,8 @@ class Helper
 
     public static function get_terms_as_list($term_type = 'category', $length = 1)
     {
+	    $terms = get_the_terms( get_the_ID(), $term_type );
+
         if ($term_type === 'category') {
             $terms = get_the_category();
         }
