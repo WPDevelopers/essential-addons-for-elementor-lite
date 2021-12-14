@@ -155,6 +155,7 @@ trait Controls
                 'label' => __('Posts Per Page', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '4',
+                'min' => '1',
             ]
         );
 
