@@ -452,7 +452,7 @@
         var $this = $(this),
             preferences = $this.val();
 
-        var elements = $(".eael-elements-container .eael-elements-info input[type=checkbox]");
+        var elements = $(".eael-quick-setup-post-grid .eael-quick-setup-toggler input[type=checkbox]");
         if (elements.length > 0) {
             if (preferences == 'custom') {
                 elements.prop('checked', true)
