@@ -52,7 +52,7 @@ class WPDeveloper_Setup_Wizard {
 			wp_localize_script( 'essential_addons_elementor-setup-wizard-js', 'localize', array(
 				'ajaxurl'       => admin_url( 'admin-ajax.php' ),
 				'nonce'         => wp_create_nonce( 'essential-addons-elementor' ),
-				'success_image' => EAEL_PLUGIN_URL . 'assets/admin/images/success.gif',
+				'success_image' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/success.gif',
 			) );
 		}
 		return [];
@@ -73,40 +73,46 @@ class WPDeveloper_Setup_Wizard {
 		);
 	}
 
+
+	/**
+	 * render_wizard
+	 */
+	public function render_wizard() {
+		?>
+        <div class="eael-quick-setup-wizard-wrap">
+			<?php
+			$this->change_site_title();
+			$this->tab_step();
+			$this->tab_content();
+			$this->setup_wizard_footer();
+			?>
+        </div>
+		<?php
+	}
+
 	/**
 	 * Render tab
 	 */
 	public function tab_step() {
 		!$this->templately_status ? $wizard_column = 'five' : $wizard_column = 'four';
+		$items = [
+			__( 'Configuration', 'essential-addons-for-elementor-lite' ),
+			__( 'Elements', 'essential-addons-for-elementor-lite' ),
+			__( 'Go PRO', 'essential-addons-for-elementor-lite' ),
+			__( 'Templately', 'essential-addons-for-elementor-lite' ),
+			__( 'Integrations', 'essential-addons-for-elementor-lite' ),
+			__( 'Finalize', 'essential-addons-for-elementor-lite' ),
+		];
+		$i     = 0;
 		?>
         <ul class="eael-quick-setup-wizard <?php echo $wizard_column; ?>" data-step="1">
-            <li class="eael-quick-setup-step active">
-                <div class="eael-quick-setup-icon">1</div>
-                <div class="eael-quick-setup-name"><?php _e( 'Configuration', 'essential-addons-for-elementor-lite' ); ?></div>
-            </li>
-            <li class="eael-quick-setup-step">
-                <div class="eael-quick-setup-icon">2</div>
-                <div class="eael-quick-setup-name"><?php _e( 'Elements', 'essential-addons-for-elementor-lite' ); ?></div>
-            </li>
-            <li class="eael-quick-setup-step">
-                <div class="eael-quick-setup-icon">3</div>
-                <div class="eael-quick-setup-name"><?php _e( 'Go PRO', 'essential-addons-for-elementor-lite' ); ?></div>
-            </li>
-			<?php if ( !$this->templately_status ): ?>
-                <li class="eael-quick-setup-step">
-                    <div class="eael-quick-setup-icon">4</div>
-                    <div class="eael-quick-setup-name"><?php _e( 'Templately', 'essential-addons-for-elementor-lite' ); ?></div>
+			<?php foreach ( $items as $item ): ?>
+				<?php if ( $item == 'Templately' && $this->templately_status ) continue; ?>
+                <li class="eael-quick-setup-step active">
+                    <div class="eael-quick-setup-icon"><?php echo ++$i; ?></div>
+                    <div class="eael-quick-setup-name"><?php echo $item; ?></div>
                 </li>
-			<?php endif; ?>
-            <li class="eael-quick-setup-step">
-                <div class="eael-quick-setup-icon">5</div>
-                <div class="eael-quick-setup-name"><?php _e( 'Integrations', 'essential-addons-for-elementor-lite' ); ?></div>
-            </li>
-            <li class="eael-quick-setup-step">
-                <div class="eael-quick-setup-icon">6</div>
-                <div class="eael-quick-setup-name">
-					<?php _e( 'Finalize', 'essential-addons-for-elementor-lite' ); ?></div>
-            </li>
+			<?php endforeach; ?>
         </ul>
 		<?php
 	}
@@ -138,29 +144,16 @@ class WPDeveloper_Setup_Wizard {
 		?>
         <div class="eael-quick-setup-footer">
             <button id="eael-prev" class="button eael-quick-setup-btn eael-quick-setup-prev-button">
-                <span class="dashicons dashicons-arrow-left-alt"></span>
+                <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/left-arrow.svg' ); ?>"
+                     alt="<?php _e( 'Go Pro Logo', 'essential-addons-for-elementor-lite' ); ?>">
 				<?php _e( 'Previous', 'essential-addons-for-elementor-lite' ) ?>
             </button>
             <button id="eael-next"
-                    class="button eael-btn button eael-quick-setup-btn eael-quick-setup-next-button"><?php _e( 'Next >', 'essential-addons-for-elementor-lite' ) ?></button>
+                    class="button  eael-quick-setup-btn eael-quick-setup-next-button"><?php _e( 'Next', 'essential-addons-for-elementor-lite' ) ?>
+                <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/right-arrow.svg' ); ?>"
+                     alt="<?php _e( 'Right', 'essential-addons-for-elementor-lite' ); ?>"></button>
             <button id="eael-save" style="display: none"
-                    class="button eael-btn button eael-quick-setup-btn eael-quick-setup-next-button eael-setup-wizard-save"><?php _e( 'Finish', 'essential-addons-for-elementor-lite' ) ?></button>
-        </div>
-		<?php
-	}
-
-	/**
-	 * render_wizard
-	 */
-	public function render_wizard() {
-		?>
-        <div class="eael-quick-setup-wizard-wrap">
-			<?php
-			$this->change_site_title();
-			$this->tab_step();
-			$this->tab_content();
-			$this->setup_wizard_footer();
-			?>
+                    class="button eael-quick-setup-btn eael-quick-setup-next-button eael-setup-wizard-save"><?php _e( 'Finish', 'essential-addons-for-elementor-lite' ) ?></button>
         </div>
 		<?php
 	}
@@ -283,31 +276,34 @@ class WPDeveloper_Setup_Wizard {
 					<?php _e( 'Get Access to 30+ Advanced PRO Elements to Enhance Your
                     Elementor Site Building Experience', 'essential-addons-for-elementor-lite' ); ?>
                 </h2>
-                <div class="eael-quick-setup-input-group">
-					<?php foreach ( $this->pro_elements() as $key => $elements ): ?>
-                        <label class="eael-quick-setup-input config-list">
-                            <input type="radio" name="items"/>
-                            <span class="eael-quick-setup-content">
-                                <span class="eael-quick-setup-icon">
-                                    <img src="<?php echo $elements[ 'logo' ]; ?>"
-                                         alt="<?php echo $elements[ 'title' ]; ?>">
-                                </span>
-                                <p class="eael-quick-setup-title"><?php echo esc_html( $elements[ 'title' ] ); ?></p>
+            </div>
+            <div class="eael-quick-setup-input-group">
+				<?php foreach ( $this->pro_elements() as $key => $elements ): ?>
+                    <a href="<?php echo esc_url($elements[ 'link' ]); ?>" class="eael-quick-setup-content">
+                            <span class="eael-quick-setup-icon">
+                                <img src="<?php echo $elements[ 'logo' ]; ?>"
+                                     alt="<?php echo $elements[ 'title' ]; ?>">
                             </span>
-                        </label>
-					<?php endforeach; ?>
-                </div>
-                <div class="eael-quick-setup-pro-button-wrapper">
-                    <button class="button eael-quick-setup-btn eael-quick-setup-pro-button">
-						<?php _e( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ); ?>
-                    </button>
-                </div>
+                        <p class="eael-quick-setup-title"><?php echo esc_html( $elements[ 'title' ] ); ?></p>
+                    </a>
+
+				<?php endforeach; ?>
+            </div>
+            <div class="eael-quick-setup-pro-button-wrapper">
+                <a href="https://wpdeveloper.com/plugins/essential-addons-elementor/#pricing" class="button eael-quick-setup-btn eael-quick-setup-pro-button">
+					<?php _e( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ); ?>
+                </a>
             </div>
         </div>
 		<?php
 	}
 
 	public function templately_integrations() {
+
+		if ( $this->templately_status ) {
+			return false;
+		}
+
 		?>
         <div id="templately" class="eael-quick-setup-tab-content templately setup-content"
              style="display: none;background-image: url('<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/mask-group.png' ) ?>')">
@@ -501,34 +497,6 @@ class WPDeveloper_Setup_Wizard {
 		}
 
 		return $plugins[ $basename ];
-	}
-
-	/**
-	 * Templately promotion popup
-	 */
-	public function eael_templately_plugin_popup() {
-		?>
-        <div class="eael-popup__wrapper">
-            <div class="eael-popup__block">
-                <div class="eael-popup__logo">
-                    <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg'; ?>" alt="">
-                </div>
-                <p><?php _e( 'Get the best out of Essential Addons & boost your Elementor design experience with Templately. Deploy in hundreds of websites with 1-click, push to cloud and collaborate with your whole team to build sites faster than ever.', 'essential-addons-for-elementor-lite' ) ?></p>
-
-				<?php if ( $this->get_local_plugin_data( 'templately/templately.php' ) === false ) { ?>
-                    <a class="eael-popup__button wpdeveloper-plugin-installer" data-action="install"
-                       data-slug="<?php echo 'templately'; ?>"><?php _e( 'Install', 'essential-addons-for-elementor-lite' ); ?></a>
-				<?php } else { ?>
-					<?php if ( is_plugin_active( 'templately/templately.php' ) ) { ?>
-                        <a class="eael-popup__button wpdeveloper-plugin-installer"><?php _e( 'Activated', 'essential-addons-for-elementor-lite' ); ?></a>
-					<?php } else { ?>
-                        <a class="eael-popup__button wpdeveloper-plugin-installer" data-action="activate"
-                           data-basename="<?php echo 'templately/templately.php'; ?>"><?php _e( 'Activate', 'essential-addons-for-elementor-lite' ); ?></a>
-					<?php } ?>
-				<?php } ?>
-            </div>
-        </div>
-		<?php
 	}
 
 	/**
