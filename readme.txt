@@ -93,7 +93,7 @@ We have designed 45 of the most useful widgets to enhance your Elementor Page Bu
 
 
 
-### More elements (30+) on [Premium Version](https://wpdeveloper.net/in/upgrade-essential-addons-elementor)
+### More elements (30+) on [Premium Version](https://wpdeveloper.com/in/upgrade-essential-addons-elementor)
 
 1. [Post Block (Flex)](https://essential-addons.com/elementor/post-block/) - Display your blog posts with variety of styles with the power of modern CSS Flexbox
 2. [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/) - Create Modal Popup which opens after certain actions.
@@ -172,7 +172,7 @@ https://www.youtube.com/watch?v=6811orBQcJc
 ### Happy User of Essential Addons?
 
 - Join our [Facebook Group](https://www.facebook.com/groups/essentialaddons/).
-- Learn from our tutorials on [Youtube Channel](https://wpdeveloper.net/go/youtube-channel).
+- Learn from our tutorials on [Youtube Channel](https://wpdeveloper.com/go/youtube-channel).
 - Or rate us on [WordPress](https://wordpress.org/support/plugin/essential-addons-for-elementor-lite/reviews/?rate=5#new-post) :)
 
 ### 🔥 WHAT’S NEXT
