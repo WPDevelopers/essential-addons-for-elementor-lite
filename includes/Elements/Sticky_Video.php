@@ -357,11 +357,12 @@ class Sticky_Video extends Widget_Base
             'eaelsv_overlay_options',
             [
                 'label' => __('Image Overlay', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_block' => false,
-                'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
-                'return_value' => 'yes',
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+	                '' => __('Default', 'essential-addons-for-elementor-lite'),
+	                'yes' => __('Custom', 'essential-addons-for-elementor-lite'),
+	                'transparent' => __('Transparent', 'essential-addons-for-elementor-lite'),
+                ],
                 'default' => '',
             ]
         );
