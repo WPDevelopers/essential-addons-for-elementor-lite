@@ -8447,7 +8447,7 @@ msgid "Leave a Review"
 msgstr ""
 
 #: ../includes/templates/admin/general.php:135
-msgid "<a href=\"https://wpdeveloper.net/in/upgrade-essential-addons-elementor\" target=\"_blank\">%s</a>"
+msgid "<a href=\"https://wpdeveloper.com/in/upgrade-essential-addons-elementor\" target=\"_blank\">%s</a>"
 msgstr ""
 
 #: ../includes/templates/admin/go-pro.php:10

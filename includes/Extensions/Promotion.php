@@ -27,7 +27,7 @@ class Promotion
             </div>
             <div class="ea-nerd-box-title">' . $texts['title'] . '</div>
             <div class="ea-nerd-box-message">' . $texts['messages'] . '</div>
-            <a class="ea-nerd-box-link elementor-button elementor-button-default" href="https://wpdeveloper.net/upgrade/ea-pro" target="_blank">
+            <a class="ea-nerd-box-link elementor-button elementor-button-default" href="https://wpdeveloper.com/upgrade/ea-pro" target="_blank">
             ' . __('Upgrade Essential Addons', 'essential-addons-for-elementor-lite') . '
             </a>
         </div>';
