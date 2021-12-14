@@ -2395,7 +2395,7 @@ msgstr ""
 msgid "Get Events"
 msgstr ""
 
-#: ../includes/Elements/Event_Calendar.php:376, ../includes/Elements/Filterable_Gallery.php:338, ../includes/Elements/Filterable_Gallery.php:2773, ../includes/Elements/Woo_Product_Gallery.php:261
+#: ../includes/Elements/Event_Calendar.php:376, ../includes/Elements/Filterable_Gallery.php:338, ../includes/Elements/Filterable_Gallery.php:2796, ../includes/Elements/Woo_Product_Gallery.php:261
 msgid "All"
 msgstr ""
 
