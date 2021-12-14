@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 4.9.6
+Stable tag: 4.9.7
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -224,6 +224,19 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.9.7 - 14/12/2021 =
+
+- Fixed: EA Filterable Gallery | Filter control not working while using special characters
+- Fixed: EA Filterable Gallery | Search not working when a filter is applied
+- Fixed: EA Post Grid | Throwing warning when 0 is selected as 'Posts per page
+- Fixed: EA Advanced Tabs & Advanced Accordion | Custom ID Anchor not working with links on same page
+- Fixed: EA Gravity Forms | File upload style options missing
+- Fixed: EA Data Table | Border Radius not working properly when adding border on the Header
+- Fixed: EA Twitter Feed | media element not showing
+- Fixed: EA Woo Elements | Add To Cart Icon not being visible in Blocksy Theme
+- Fixed: EA BetterDocs Category Grid | Docs order not showing properly
+- Few minor bug fix & improvements
 
 = 4.9.6 - 03/11/2021 =
 
