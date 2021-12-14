@@ -484,9 +484,6 @@
 
         contents[step].style.display = "block";
         prev.style.display = (step == 0) ? "none" : "inline";
-        console.log(step)
-        console.log(contents.length)
-        console.log((contents.length - 1))
         if (step == (contents.length - 1)) {
             saveElement.style.display = "inline";
             nextElement.style.display = "none";
