@@ -133,7 +133,7 @@ table.eael-data-table thead .sorting:after {
   width: 100%;
   height: auto;
   margin: 0;
-  border-collapse: collapse;
+  border-collapse: separate;
   border: none;
 }
 

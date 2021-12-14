@@ -100,6 +100,11 @@ trait Twitter_Feed
         foreach ($items as $item) {
             $delimeter = strlen($item['full_text']) > $settings['eael_twitter_feed_content_length'] ? '...' : '';
 
+	        $media = isset( $item['extended_entities']['media'] ) ? $item['extended_entities']['media'] :
+		        ( isset( $item['retweeted_status']['entities']['media'] ) ? $item['retweeted_status']['entities']['media'] :
+			        ( isset( $item['quoted_status']['entities']['media'] ) ? $item['quoted_status']['entities']['media'] :
+				        [] ) );
+
             $html .= '<div class="eael-twitter-feed-item ' . $class . '">
 				<div class="eael-twitter-feed-item-inner">
 				    <div class="eael-twitter-feed-item-header clearfix">';
@@ -129,7 +134,7 @@ trait Twitter_Feed
                             $html .= '<a href="//twitter.com/' . $item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">'.$read_more.' <i class="fas fa-angle-double-right"></i></a>';
                         }
                     $html .= '</div>
-                    ' . (isset($item['extended_entities']['media'][0]) && $settings['eael_twitter_feed_media'] == 'true' ? ($item['extended_entities']['media'][0]['type'] == 'photo' ? '<img src="' . $item['extended_entities']['media'][0]['media_url_https'] . '">' : '') : '') . '
+                    ' . ( isset( $media[0] ) && $settings['eael_twitter_feed_media'] == 'true' ? ( $media[0]['type'] == 'photo' ? '<img src="' . $media[0]['media_url_https'] . '">' : '' ) : '' ) . '
                 </div>
 			</div>';
         }

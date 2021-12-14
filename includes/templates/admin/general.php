@@ -69,7 +69,7 @@
 
                         <?php if( !defined('EAEL_PRO_PLUGIN_BASENAME') ): ?>
                             <p><?php _e('Stuck with something? Get help from the community on', 'essential-addons-for-elementor-lite'); ?> <a href="https://wordpress.org/support/plugin/essential-addons-for-elementor-lite/" target="_blank"><?php _e('WordPress.org Forum', 'essential-addons-for-elementor-lite'); ?></a> <?php _e('or', 'essential-addons-for-elementor-lite'); ?> <a href="https://www.facebook.com/groups/essentialaddons/" target="_blank"><?php _e('Facebook Community.', 'essential-addons-for-elementor-lite'); ?></a> <?php _e('In case of emergency, initiate a live chat at', 'essential-addons-for-elementor-lite'); ?> <a href="https://essential-addons.com/elementor/" target="_blank"><?php _e('Essential Addons website.', 'essential-addons-for-elementor-lite'); ?></a></p>
-                            <a href="http://wpdeveloper.net/support/" class="ea-button" target="_blank"><?php _e('Get Support', 'essential-addons-for-elementor-lite'); ?></a>
+                            <a href="http://wpdeveloper.com/support/" class="ea-button" target="_blank"><?php _e('Get Support', 'essential-addons-for-elementor-lite'); ?></a>
                         <?php
                             else:
                                 do_action('eael_premium_support_link');
@@ -90,7 +90,7 @@
                         <div class="eael-admin-block-content">
                             <p><?php _e('We love to have you in Essential Addons family. We are making it more awesome everyday. Take your 2 minutes to review the plugin and spread the love to encourage us to keep it going.', 'essential-addons-for-elementor-lite'); ?></p>
 
-                            <a href="https://wpdeveloper.net/review-essential-addons-elementor" class="review-flexia ea-button" target="_blank"><?php _e('Leave a Review', 'essential-addons-for-elementor-lite'); ?></a>
+                            <a href="https://wpdeveloper.com/review-essential-addons-elementor" class="review-flexia ea-button" target="_blank"><?php _e('Leave a Review', 'essential-addons-for-elementor-lite'); ?></a>
                         </div>
                     </div>
                     <?php
@@ -132,7 +132,7 @@
                 <div class="eael-admin-sidebar-cta">
                     <?php
                         if( !defined('EAEL_PRO_PLUGIN_BASENAME') ) {
-                            printf( __( '<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">%s</a>', 'essential-addons-for-elementor-lite'), 'Upgrade to Pro' );
+                            printf( __( '<a href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor" target="_blank">%s</a>', 'essential-addons-for-elementor-lite'), 'Upgrade to Pro' );
                         }else {
                             do_action('eael_manage_license_action_link');
                         }

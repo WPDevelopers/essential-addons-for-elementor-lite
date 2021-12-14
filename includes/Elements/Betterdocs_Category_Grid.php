@@ -1606,6 +1606,14 @@ class Betterdocs_Category_Grid extends Widget_Base
             $terms_object['exclude'] =  $settings['exclude'];
         }
 
+        if ($settings['orderby'] == 'betterdocs_order') {
+            $terms_object['meta_key'] = 'doc_category_order';
+            $terms_object['orderby'] = 'meta_value_num';
+            $terms_object['order'] = 'ASC';
+        } else {
+            $terms_object['orderby'] = $settings['orderby'];
+        }
+
         $default_multiple_kb = Helper::get_betterdocs_multiple_kb_status();
 
         if ($settings['layout_template'] == 'Layout_2') {
