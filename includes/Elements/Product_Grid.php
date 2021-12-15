@@ -800,7 +800,7 @@ class Product_Grid extends Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'eael_peoduct_grid_padding',
             [
                 'label' => __('Padding', 'essential-addons-for-elementor-lite'),

@@ -2459,3 +2459,20 @@
 .eael-product-grid .woocommerce ul.products li.product .ast-shop-product-out-of-stock {
     display: none;
 }
+
+// blocksy theme conflicts
+.theme-blocksy {
+    .button:before {
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)" /* IE 8+ */;
+        filter: none !important; /* IE 7 and the rest of the world */
+        opacity: 1;
+        z-index: 0;
+        bottom: 0!important;
+        right: 0;
+        line-height: 1.2em
+    }
+
+    .button:hover {
+        transform: none;
+    }
+}

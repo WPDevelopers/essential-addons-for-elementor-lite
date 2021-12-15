@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .eael-event-calendar-wrapper {
   font-family: Segoe UI;
 }
@@ -219,19 +218,19 @@
   -webkit-font-smoothing: antialiased;
 }
 .fc-toolbar.fc-header-toolbar button.fc-timeGridWeek-button:before {
-  content: "";
+  content: "\f03a";
   left: 8px;
 }
 .fc-toolbar.fc-header-toolbar button.fc-timeGridDay-button:before {
-  content: "";
+  content: "\f0c9";
   left: 21px;
 }
 .fc-toolbar.fc-header-toolbar button.fc-dayGridMonth-button:before {
-  content: "";
+  content: "\f00a";
 }
 .fc-toolbar.fc-header-toolbar button.fc-listWeek-button:before,
 .fc-toolbar.fc-header-toolbar button.fc-listMonth-button:before {
-  content: "";
+  content: "\f00b";
 }
 .fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary {
   -webkit-box-shadow: none;

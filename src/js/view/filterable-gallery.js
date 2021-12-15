@@ -128,7 +128,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				$this.siblings().removeClass("active");
 				$this.addClass("active");
 				if (!firstInit && $items.length > 0) {
-					$isotope_gallery.isotope({filter: buttonFilter});
+					$isotope_gallery.isotope();
 					$gallery.append($items);
 					$isotope_gallery.isotope('appended', $items);
 					$isotope_gallery.imagesLoaded().progress(function () {
@@ -136,7 +136,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 					});
 					
 				} else {
-					$isotope_gallery.isotope({filter: buttonFilter});
+					$isotope_gallery.isotope();
 				}
 			});
 

@@ -18,7 +18,7 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 							var button = document.createElement("a");
 							var buttonText = document.createTextNode("Upgrade Essential Addons");
 
-							button.setAttribute("href", "https://wpdeveloper.net/upgrade/ea-pro");
+							button.setAttribute("href", "https://wpdeveloper.com/upgrade/ea-pro");
 							button.setAttribute("target", "_blank");
 							button.classList.add(
 								"dialog-button",
