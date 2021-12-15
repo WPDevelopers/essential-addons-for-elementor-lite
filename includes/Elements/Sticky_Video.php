@@ -704,6 +704,7 @@ class Sticky_Video extends Widget_Base
         $sticky = $settings['eaelsv_is_sticky'];
         $autoplay = ($settings['eaelsv_autopaly'] == 'yes') ? $settings['eaelsv_autopaly'] : 'no';
         $eaelsvPlayer = '';
+	    $eaelsv_overlay_visibility = $settings['eaelsv_overlay_options'];
 
         if ('youtube' == $settings['eael_video_source']) {
             $eaelsvPlayer = $this->eaelsv_load_player_youtube();
@@ -715,7 +716,7 @@ class Sticky_Video extends Widget_Base
             $eaelsvPlayer = $this->eaelsv_load_player_self_hosted();
         }
 
-        echo '<div class="eael-sticky-video-wrapper">';
+	    echo '<div class="eael-sticky-video-wrapper eaelsv-overlay-visibility-' . esc_attr( $eaelsv_overlay_visibility ) . '">';
         if ('yes' === $settings['eaelsv_overlay_options']) {
             // $autoplay = 'yes';
             $icon = '';
