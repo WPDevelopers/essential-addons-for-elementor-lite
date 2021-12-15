@@ -55,18 +55,41 @@
 
 @media only screen and (max-width: 767px) {
   .gform_wrapper .gf_progressbar {
-    width: calc(100%) !important;
+    width: 100% !important;
   }
 }
 
 @media only screen and (min-width: 768px) {
   .gform_wrapper .gf_progressbar {
-    width: calc(100%) !important;
+    width: 100% !important;
   }
 }
 
 @media only screen and (min-width: 641px) {
   .gform_wrapper.gform_validation_error .gform_body ul li.gfield.gfield_error:not(.gf_left_half):not(.gf_right_half) {
-    max-width: calc(100%) !important;
+    max-width: 100% !important;
   }
+}
+
+.ginput_container_fileupload input[type=file]::file-selector-button,
+.ginput_container_fileupload input[type=file]::-webkit-file-upload-button,
+.ginput_container_fileupload .button {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  padding: 0.5em 1em;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  border-radius: 3px;
+}
+
+.ginput_container_fileupload input[type=file]::file-selector-button:hover,
+.ginput_container_fileupload input[type=file]::-webkit-file-upload-button:hover,
+.ginput_container_fileupload .button:hover {
+  background-color: #262625;
+  color: #fff;
 }

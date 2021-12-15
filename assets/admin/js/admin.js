@@ -17,7 +17,7 @@
             type: "warning",
             title: "<h2><span>Go</span> Premium",
             html:
-                'Purchase our <b><a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" rel="nofollow">premium version</a></b> to unlock these pro components!',
+                'Purchase our <b><a href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor" rel="nofollow">premium version</a></b> to unlock these pro components!',
             showConfirmButton: false,
             timer: 3000,
         });

@@ -1621,6 +1621,191 @@ class GravityForms extends Widget_Base {
 
         $this->end_controls_section();
 
+	    /**
+	     * Style Tab: File upload
+	     * -------------------------------------------------
+	     */
+	    $this->start_controls_section(
+		    'file_upload_style',
+		    [
+			    'label' => __( 'File Upload', 'essential-addons-for-elementor-lite'),
+			    'tab'   => Controls_Manager::TAB_STYLE,
+		    ]
+	    );
+
+	    $this->start_controls_tabs( 'file_upload_tabs_button_style' );
+
+	    $this->start_controls_tab(
+		    'file_upload_tab_button_normal',
+		    [
+			    'label'                 => __( 'Normal', 'essential-addons-for-elementor-lite'),
+		    ]
+	    );
+
+	    $this->add_control(
+		    'file_upload_button_bg_color_normal',
+		    [
+			    'label'                 => __( 'Background Color', 'essential-addons-for-elementor-lite'),
+			    'type'                  => Controls_Manager::COLOR,
+			    'default'               => '',
+			    'selectors'             => [
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::file-selector-button' => 'background-color: {{VALUE}}',
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::-webkit-file-upload-button' => 'background-color: {{VALUE}}',
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .button' => 'background-color: {{VALUE}}',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'file_upload_button_text_color_normal',
+		    [
+			    'label'                 => __( 'Text Color', 'essential-addons-for-elementor-lite'),
+			    'type'                  => Controls_Manager::COLOR,
+			    'default'               => '',
+			    'selectors'             => [
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::file-selector-button' => 'color: {{VALUE}}',
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::-webkit-file-upload-button' => 'color: {{VALUE}}',
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .button' => 'color: {{VALUE}}',
+			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Border::get_type(),
+		    [
+			    'name'                  => 'file_upload_button_border_normal',
+			    'label'                 => __( 'Border', 'essential-addons-for-elementor-lite'),
+			    'placeholder'           => '1px',
+			    'default'               => '1px',
+			    'selector'              => '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::file-selector-button, {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::-webkit-file-upload-button, {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .button',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'file_upload_button_border_radius',
+		    [
+			    'label'                 => __( 'Border Radius', 'essential-addons-for-elementor-lite'),
+			    'type'                  => Controls_Manager::DIMENSIONS,
+			    'size_units'            => [ 'px', 'em', '%' ],
+			    'selectors'             => [
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::file-selector-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::-webkit-file-upload-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_responsive_control(
+		    'file_upload_button_padding',
+		    [
+			    'label'                 => __( 'Padding', 'essential-addons-for-elementor-lite'),
+			    'type'                  => Controls_Manager::DIMENSIONS,
+			    'size_units'            => [ 'px', 'em', '%' ],
+			    'selectors'             => [
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::file-selector-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::-webkit-file-upload-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
+	    $this->end_controls_tab();
+
+	    $this->start_controls_tab(
+		    'file_upload_tab_button_hover',
+		    [
+			    'label'                 => __( 'Hover', 'essential-addons-for-elementor-lite'),
+		    ]
+	    );
+
+	    $this->add_control(
+		    'file_upload_button_bg_color_hover',
+		    [
+			    'label'                 => __( 'Background Color', 'essential-addons-for-elementor-lite'),
+			    'type'                  => Controls_Manager::COLOR,
+			    'default'               => '',
+			    'selectors'             => [
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::file-selector-button:hover' => 'background-color: {{VALUE}}',
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::-webkit-file-upload-button:hover' => 'background-color: {{VALUE}}',
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .button:hover' => 'background-color: {{VALUE}}',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'file_upload_button_text_color_hover',
+		    [
+			    'label'                 => __( 'Text Color', 'essential-addons-for-elementor-lite'),
+			    'type'                  => Controls_Manager::COLOR,
+			    'default'               => '',
+			    'selectors'             => [
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::file-selector-button:hover' => 'color: {{VALUE}}',
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::-webkit-file-upload-button:hover' => 'color: {{VALUE}}',
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .button:hover' => 'color: {{VALUE}}',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'file_upload_button_border_color_hover',
+		    [
+			    'label'                 => __( 'Border Color', 'essential-addons-for-elementor-lite'),
+			    'type'                  => Controls_Manager::COLOR,
+			    'default'               => '',
+			    'selectors'             => [
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::file-selector-button:hover' => 'border-color: {{VALUE}}',
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::-webkit-file-upload-button:hover' => 'border-color: {{VALUE}}',
+				    '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .button:hover' => 'border-color: {{VALUE}}',
+			    ],
+		    ]
+	    );
+
+	    $this->end_controls_tab();
+
+	    $this->end_controls_tabs();
+
+	    $this->add_group_control(
+		    Group_Control_Typography::get_type(),
+		    [
+			    'name'                  => 'file_upload_button_typography',
+			    'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
+			    'scheme'                => Typography::TYPOGRAPHY_4,
+			    'selector'              => '{{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::file-selector-button, {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::-webkit-file-upload-button, {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .button',
+			    'separator'             => 'before',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'file_upload_rules_heading',
+		    [
+			    'label'                 => __( 'Rules', 'essential-addons-for-elementor-lite'),
+			    'type'                  => Controls_Manager::HEADING,
+			    'separator'               => 'before',
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Typography::get_type(),
+		    [
+			    'name'                  => 'file_upload_rulestypography',
+			    'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
+			    'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_wrapper .gform_fileupload_rules',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'file_upload_rules_color',
+		    [
+			    'label'                 => __( 'Color', 'essential-addons-for-elementor-lite'),
+			    'type'                  => Controls_Manager::COLOR,
+			    'default'               => '',
+			    'selectors'             => [
+				    '{{WRAPPER}} .eael-gravity-form .gform_wrapper .gform_fileupload_rules' => 'color: {{VALUE}}',
+			    ],
+		    ]
+	    );
+
+	    $this->end_controls_section();
 
         /**
          * Style Tab: Scrolling Text
