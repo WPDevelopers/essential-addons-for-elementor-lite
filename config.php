@@ -1033,6 +1033,14 @@ $config = [
 		        ],
 	        ],
         ],
+        'better-payment' => [
+            'class' => '\Essential_Addons_Elementor\Elements\BetterPayment',
+            'condition' => [
+                'class_exists',
+                'BetterPayment',
+                true,
+            ],
+        ],
     ],
     'extensions' => [
         'promotion' => [
