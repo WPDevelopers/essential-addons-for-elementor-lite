@@ -84,7 +84,7 @@ $extensions = [
         </div>
         <div class="global__control__switch">
             <label class="eael-switch eael-switch--xl">
-                <input type="checkbox">
+                <input class="eael-element-global-switch" type="checkbox">
                 <span class="switch__box"></span>
             </label>
             <span class="switch__status enable">Enable All</span>
@@ -95,130 +95,42 @@ $extensions = [
         </div>
     </div>
 
-    <div class="eael-section mb50">
-        <h3 class="eael-section__header">Content Elements</h3>
-        <div class="eael-element__wrap">
-            <div class="eael-element__item">
-                <div class="isPro">
-                    <span>Pro</span>
-                </div>
-                <div class="element__content">
-                    <h4>Creative Button</h4>
-                    <div class="element__options">
-                        <a href="#" class="element__icon">
-                            <i class="ea-icon icon-doc"></i>
-                            <span class="tooltip-text">Documentation Documentation</span>
-                        </a>
-                        <a href="#" class="element__icon">
-                            <i class="ea-icon icon-monitor"></i>
-                            <span class="tooltip-text">Preview</span>
-                        </a>
-                        <label class="eael-switch">
-                            <input type="checkbox">
-                            <span class="switch__box"></span>
-                        </label>
+	<?php foreach ( $extensions as $key => $element ): ?>
+        <div class="eael-section mb50">
+            <h3 class="eael-section__header"><?php echo esc_html( $element[ 'title' ] ) ?></h3>
+            <div class="eael-element__wrap">
+				<?php foreach ( $element[ 'extensions' ] as $item ): ?>
+                    <div class="eael-element__item">
+						<?php if ( !empty( $item[ 'is_pro' ] ) ): ?>
+                            <div class="isPro">
+                                <span><?php esc_html_e( 'Pro', 'essential-addons-for-elementor-lite' ); ?></span>
+                            </div>
+						<?php endif; ?>
+                        <div class="element__content">
+                            <h4><?php echo $item[ 'title' ]; ?></h4>
+                            <div class="element__options">
+                                <a href="<?php echo esc_url( $item[ 'doc_link' ] ); ?>" class="element__icon">
+                                    <i class="ea-admin-icon icon-doc"></i>
+                                    <span class="tooltip-text"><?php esc_html_e( 'Documentation', 'essential-addons-for-elementor-lite' ); ?></span>
+                                </a>
+                                <a href="<?php echo esc_url( $item[ 'demo_link' ] ); ?>" class="element__icon">
+                                    <i class="ea-admin-icon icon-monitor"></i>
+                                    <span class="tooltip-text"><?php esc_html_e( 'Preview', 'essential-addons-for-elementor-lite' ); ?></span>
+                                </a>
+                                <label class="eael-switch">
+									<?php
+									$disabled = !empty( $item[ 'is_pro' ] ) ? 'disabled' : '';
+									printf( '<input class="eael-widget-item" id="%1$s" name="%1$s"
+                                           type="checkbox" %2$s>', $item[ 'key' ], $disabled );
+									?>
+
+                                    <span class="switch__box <?php echo $disabled; ?>"></span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="eael-element__item">
-                <div class="isPro"></div>
-                <div class="element__content">
-                    <h4>Creative Button</h4>
-                    <div class="element__options">
-                        <a href="#" class="element__icon">
-                            <i class="ea-icon icon-doc"></i>
-                            <span class="tooltip-text">Documentation</span>
-                        </a>
-                        <a href="#" class="element__icon">
-                            <i class="ea-icon icon-monitor"></i>
-                            <span class="tooltip-text">Preview</span>
-                        </a>
-                        <label class="eael-switch">
-                            <input type="checkbox" checked>
-                            <span class="switch__box"></span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="eael-element__item">
-                <div class="isPro"></div>
-                <div class="element__content">
-                    <h4>Creative Button</h4>
-                    <div class="element__options">
-                        <a href="#" class="element__icon">
-                            <i class="ea-icon icon-doc"></i>
-                            <span class="tooltip-text">Documentation</span>
-                        </a>
-                        <a href="#" class="element__icon">
-                            <i class="ea-icon icon-monitor"></i>
-                            <span class="tooltip-text">Preview</span>
-                        </a>
-                        <label class="eael-switch">
-                            <input type="checkbox">
-                            <span class="switch__box"></span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="eael-element__item">
-                <div class="isPro"></div>
-                <div class="element__content">
-                    <h4>Creative Button</h4>
-                    <div class="element__options">
-                        <a href="#" class="element__icon">
-                            <i class="ea-icon icon-doc"></i>
-                            <span class="tooltip-text">Documentation</span>
-                        </a>
-                        <a href="#" class="element__icon">
-                            <i class="ea-icon icon-monitor"></i>
-                            <span class="tooltip-text">Preview</span>
-                        </a>
-                        <label class="eael-switch">
-                            <input type="checkbox">
-                            <span class="switch__box"></span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="eael-element__item">
-                <div class="isPro"><span>Pro</span></div>
-                <div class="element__content">
-                    <h4>Creative Button</h4>
-                    <div class="element__options">
-                        <a href="#" class="element__icon">
-                            <i class="ea-icon icon-doc"></i>
-                            <span class="tooltip-text">Documentation</span>
-                        </a>
-                        <a href="#" class="element__icon">
-                            <i class="ea-icon icon-monitor"></i>
-                            <span class="tooltip-text">Preview</span>
-                        </a>
-                        <label class="eael-switch">
-                            <input type="checkbox" checked>
-                            <span class="switch__box"></span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="eael-element__item">
-                <div class="element__content">
-                    <h4>Creative Button</h4>
-                    <div class="element__options">
-                        <a href="#" class="element__icon">
-                            <i class="ea-icon icon-doc"></i>
-                            <span class="tooltip-text">Documentation</span>
-                        </a>
-                        <a href="#" class="element__icon">
-                            <i class="ea-icon icon-monitor"></i>
-                            <span class="tooltip-text">Preview</span>
-                        </a>
-                        <label class="eael-switch">
-                            <input type="checkbox">
-                            <span class="switch__box"></span>
-                        </label>
-                    </div>
-                </div>
+				<?php endforeach; ?>
             </div>
         </div>
-    </div>
+	<?php endforeach; ?>
 </div>
