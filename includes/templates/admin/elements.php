@@ -559,7 +559,7 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
         </div>
         <div class="global__control__switch">
             <label class="eael-switch eael-switch--xl">
-                <input type="checkbox">
+                <input class="eael-element-global-switch" type="checkbox">
                 <span class="switch__box"></span>
             </label>
             <span class="switch__status enable">Enable All</span>
@@ -594,11 +594,11 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                                 <label class="eael-switch">
 									<?php
 									$disabled = !empty( $item[ 'is_pro' ] ) ? 'disabled' : '';
-									printf( '<input id="%1$s" name="%1$s"
+									printf( '<input class="eael-widget-item" id="%1$s" name="%1$s"
                                            type="checkbox" %2$s>', $item[ 'key' ], $disabled );
 									?>
 
-                                    <span class="switch__box"></span>
+                                    <span class="switch__box <?php echo $disabled; ?>"></span>
                                 </label>
                             </div>
                         </div>
