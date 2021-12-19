@@ -125,33 +125,6 @@
 		$( ".eael-widget-item:enabled" ).each( function () {
 			$( this ).prop( "checked", status ).change();
 		} );
-	} );
-	
-	// Elements global control
-	$( document ).on( "click", ".eael-global-control-enable", function ( e ) {
-		e.preventDefault();
-		
-		$( ".eael-checkbox-container .eael-checkbox input:enabled" ).each( function (
-			i
-		) {
-			$( this ).prop( "checked", true ).change();
-		} );
-		
-		saveButton
-		.addClass( "save-now" )
-		.removeAttr( "disabled" )
-		.css( "cursor", "pointer" );
-	} );
-	
-	$( document ).on( "click", ".eael-global-control-disable", function ( e ) {
-		e.preventDefault();
-		
-		$( ".eael-checkbox-container .eael-checkbox input:enabled" ).each( function (
-			i
-		) {
-			$( this ).prop( "checked", false ).change();
-		} );
-		
 		saveButton
 		.addClass( "save-now" )
 		.removeAttr( "disabled" )
