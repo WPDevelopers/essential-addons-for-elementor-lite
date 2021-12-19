@@ -91,64 +91,36 @@ trait Admin {
      */
     public function admin_settings_page() {
         ?>
-        <div class="eael-settings-wrap">
-            <form action="" method="POST" id="eael-settings" name="eael-settings">
-                <div class="eael-header-bar">
-                    <div class="eael-header-left">
-                        <div class="eael-admin-logo-inline">
-                            <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-logo.svg'; ?>"
-                                 alt="essential-addons-for-elementor">
-                        </div>
-                        <h2 class="title"><?php echo __( 'Essential Addons Settings', 'essential-addons-for-elementor-lite' ); ?></h2>
-                    </div>
-                    <div class="eael-header-right">
-                        <button type="submit"
-                                class="button eael-btn js-eael-settings-save"><?php echo __( 'Save settings', 'essential-addons-for-elementor-lite' ); ?></button>
+            <div class="template__wrapper background__greyBg px30 py50">
+                <div class="eael-container">
+                    <div class="eael-main__tab mb45">
+                        <ul class="ls-none tab__menu">
+                            <li class="tab__list active"><a class="tab__item" href="#general"><i class="ea-admin-icon icon-gear-alt"></i><?php echo __( 'General', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#elements"><i class="ea-admin-icon icon-element"></i><?php echo __( 'Elements', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#extensions"><i class="ea-admin-icon icon-extension"></i><?php echo __( 'Extensions', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#tools"><i class="ea-admin-icon icon-tools"></i><?php echo __( 'Tools', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#integrations"><i class="ea-admin-icon icon-plug"></i><?php echo __( 'Integrations', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#go-pro"><i class="ea-admin-icon icon-lock-alt"></i><?php echo __( 'Go Premium', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="eael-settings-tabs">
-                    <ul class="eael-tabs">
-                        <li><a href="#general" class="active"><img
-                                        src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-general.svg'; ?>"
-                                        alt="essential-addons-general-settings"><span><?php echo __( 'General', 'essential-addons-for-elementor-lite' ); ?></span></a>
-                        </li>
-                        <li><a class="eael-elements-tab" href="#elements"><img
-                                        src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-elements.svg'; ?>"
-                                        alt="essential-addons-elements"><span><?php echo __( 'Elements', 'essential-addons-for-elementor-lite' ); ?></span></a>
-                        </li>
-                        <li><a href="#extensions"><img
-                                        src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-extensions.svg'; ?>"
-                                        alt="essential-addons-extensions"><span><?php echo __( 'Extensions', 'essential-addons-for-elementor-lite' ); ?></span></a>
-                        </li>
-                        <li><a href="#tools"><img
-                                        src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-tools.svg'; ?>"
-                                        alt="essential-addons-tools"><span><?php echo __( 'Tools', 'essential-addons-for-elementor-lite' ); ?></span></a>
-                        </li>
-                        <li><a href="#integrations"><img
-                                        src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-integrations.svg'; ?>"
-                                        alt="essential-addons-integrations"><span><?php echo __( 'Integrations', 'essential-addons-for-elementor-lite' ); ?></span></a>
-                        </li>
-                        <?php if ( !$this->pro_enabled ) { ?>
-                            <li><a href="#go-pro"><img
-                                            src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-upgrade.svg'; ?>"
-                                            alt="essential-addons-go-pro"><span><?php echo __( 'Go Premium', 'essential-addons-for-elementor-lite' ); ?></span></a>
-                            </li>
-                        <?php } ?>
-
-                    </ul>
-                    <?php
-                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
-                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
-                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
-                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
-                    if ( !$this->pro_enabled ) {
-                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
-                    }
-                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/integrations.php';
-                    ?>
+                <div class="eael-admin-setting-tabs">
+	                <?php
+	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
+	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
+	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
+	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
+	                if ( !$this->pro_enabled ) {
+		                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
+	                }
+	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/integrations.php';
+	                ?>
                 </div>
-            </form>
-        </div>
+                <div class="border__line mt30"><span></span></div>
+                <div class="eael__flex justify__end mt30">
+                    <a href="#" class="button button__themeColor">Save Settings</a>
+                </div>
+            </div>
         <?php
     }
 

@@ -45,33 +45,79 @@ $integrations = [
 ];
 ?>
 
-<div id="integrations" class="eael-settings-tab">
-    <div class="row">
-        <?php foreach ($integrations as $plugin) {?>
-            <div class="col-one-fourth">
-                <div class="eael-admin-block-wrapper">
-                    <div class="eael-admin-block eael-admin-block-integrations">
-                        <div class="eael-admin-block-content">
-                            <div class="eael-admin-block-integrations-logo">
-                                <img src="<?php echo $plugin['logo']; ?>" alt="logo" />
-                            </div>
-                            <h2 class="eael-admin-block-integrations-title"><?php echo $plugin['title']; ?></h2>
-                            <p class="eael-admin-block-integrations-text"><?php echo $plugin['desc']; ?></p>
-                            <div class="eael-admin-block-integrations-btn-wrap">
-                                <?php if ($this->installer->get_local_plugin_data($plugin['basename']) === false) {?>
-                                    <a class="ea-button wpdeveloper-plugin-installer" data-action="install" data-slug="<?php echo $plugin['slug']; ?>"><?php _e('Install', 'essential-addons-for-elementor-lite');?></a>
-                                <?php } else {?>
-                                    <?php if (is_plugin_active($plugin['basename'])) {?>
-                                        <a class="ea-button wpdeveloper-plugin-installer"><?php _e('Activated', 'essential-addons-for-elementor-lite');?></a>
-                                    <?php } else {?>
-                                        <a class="ea-button wpdeveloper-plugin-installer" data-action="activate" data-basename="<?php echo $plugin['basename']; ?>"><?php _e('Activate', 'essential-addons-for-elementor-lite');?></a>
-                                    <?php }?>
-                                <?php }?>
-                            </div>
-                        </div>
+<div id="integrations" class="eael-admin-setting-tab">
+    <div class="eael-grid">
+        <div class="eael-col-xl-3">
+            <div class="pt60">
+                <div class="eael-integration__card eael-integration__card--classic">
+                    <div class="icon">
+                        <img src="./assets/img/bd.svg" alt="">
                     </div>
+                    <h3>BetterDocs</h3>
+                    <p>BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily</p>
+                    <a href="#" class="button button__white hover__shadow">Install</a>
                 </div>
             </div>
-        <?php }?>
+        </div>
+        <div class="eael-col-xl-3">
+            <div class="pt60">
+                <div class="eael-integration__card eael-integration__card--classic">
+                    <div class="icon">
+                        <img src="./assets/img/ep.svg" alt="">
+                    </div>
+                    <h3>EmbedPress</h3>
+                    <p>EmbedPress lets you embed videos, images, posts, audio, maps and upload PDF, DOC, PPT & all other types of content into your WordPress site.</p>
+                    <a href="#" class="button button__white hover__shadow">Install</a>
+                </div>
+            </div>
+        </div>
+        <div class="eael-col-xl-3">
+            <div class="pt60">
+                <div class="eael-integration__card eael-integration__card--classic">
+                    <div class="icon">
+                        <img src="./assets/img/rx.svg" alt="">
+                    </div>
+                    <h3>ReviewX</h3>
+                    <p>ReviewX lets you get instant customer ratings and multi criteria reviews to add credibility to your WooCommerce Store and increase conversion rates.</p>
+                    <a href="#" class="button button__white hover__shadow">Install</a>
+                </div>
+            </div>
+        </div>
+        <div class="eael-col-xl-3">
+            <div class="pt60">
+                <div class="eael-integration__card eael-integration__card--classic">
+                    <div class="icon">
+                        <img src="./assets/img/nx.svg" alt="">
+                    </div>
+                    <h3>NotificationX</h3>
+                    <p>Best FOMO Social Proof Plugin to boost your sales conversion. Create stunning Sales Popup & Notification Bar With Elementor Support</p>
+                    <a href="#" class="button button__white hover__shadow">Install</a>
+                </div>
+            </div>
+        </div>
+        <div class="eael-col-xl-3">
+            <div class="pt60">
+                <div class="eael-integration__card eael-integration__card--classic">
+                    <div class="icon">
+                        <img src="./assets/img/ej.svg" alt="">
+                    </div>
+                    <h3>EasyJobs</h3>
+                    <p>Easy solution for the job recruitment to attract, manage & hire right talent faster. The Best Talent Recruitment Suite which lets you manage jobs & career page in Elementor.</p>
+                    <a href="#" class="button button__white hover__shadow">Install</a>
+                </div>
+            </div>
+        </div>
+        <div class="eael-col-xl-3">
+            <div class="pt60">
+                <div class="eael-integration__card eael-integration__card--classic">
+                    <div class="icon">
+                        <img src="./assets/img/cf.svg" alt="">
+                    </div>
+                    <h3>Crowdfundly</h3>
+                    <p>Crowdfundly is a Software as a Service (SaaS) digital crowdfunding solution. Best fundraising solution in WordPress with Elementor & WooCommerce support.</p>
+                    <a href="#" class="button button__white hover__shadow">Install</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

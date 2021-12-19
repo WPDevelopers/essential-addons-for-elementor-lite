@@ -3,13 +3,13 @@
     /**
      * Eael Tabs
      */
-    $(".eael-tabs li a").on("click", function (e) {
+    $(".eael-main__tab li.tab__list a").on("click", function (e) {
         e.preventDefault();
-        $(".eael-tabs li a").removeClass("active");
-        $(this).addClass("active");
+        $(".eael-main__tab li.tab__list").removeClass("active");
+        $(this).parent().addClass("active");
         var tab = $(this).attr("href");
-        $(".eael-settings-tab").removeClass("active");
-        $(".eael-settings-tabs").find(tab).addClass("active");
+        $(".eael-admin-setting-tab").removeClass("active");
+        $(".eael-admin-setting-tabs").find(tab).addClass("active");
     });
 
     $(".eael-get-pro").on("click", function () {
