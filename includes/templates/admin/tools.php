@@ -17,7 +17,7 @@
                 <div class="eael-col-md-7">
                     <div class="eael-tool__card">
                         <div class="content">
-                            <a href="#" id="eael-regenerate-files" class="button button__themeColor mb20">Regenerate Assets</a>
+                            <a href="#" id="eael-regenerate-files" class="eael-button button__themeColor mb20">Regenerate Assets</a>
                             <p>CSS Print Method is handled by Elementor Settings itself. Use External CSS Files for
                                 better
                                 performance (recommended).</p>
@@ -43,7 +43,7 @@
                 <div class="eael-col-md-7">
                     <div class="eael-tool__card">
                         <div class="content">
-                            <a href="<?php echo esc_url(admin_url('admin.php?page=elementor#tab-advanced')); ?>" target="_blank" class="button button__themeColor mb20">CSS Print Method</a>
+                            <a href="<?php echo esc_url(admin_url('admin.php?page=elementor#tab-advanced')); ?>" target="_blank" class="eael-button button__themeColor mb20">CSS Print Method</a>
                             <p>CSS Print Method is handled by Elementor Settings itself. Use External CSS Files for
                                 better
                                 performance (recommended).</p>

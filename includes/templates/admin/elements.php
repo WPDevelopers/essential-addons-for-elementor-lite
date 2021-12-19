@@ -566,7 +566,7 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
             <span class="switch__status disable">Disable All</span>
         </div>
         <div class="global__control__button">
-            <a href="#" class="button">Save Setting</a>
+            <a href="#" class="eael-button">Save Setting</a>
         </div>
     </div>
 	<?php foreach ( $elements as $key => $element ): ?>
@@ -574,6 +574,9 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
             <h3 class="eael-section__header"><?php echo esc_html( $element[ 'title' ] ) ?></h3>
             <div class="eael-element__wrap">
 				<?php foreach ( $element[ 'elements' ] as $item ): ?>
+                    <?php
+
+                    ?>
                     <div class="eael-element__item">
 						<?php if ( !empty( $item[ 'is_pro' ] ) ): ?>
                             <div class="isPro">
@@ -594,8 +597,9 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                                 <label class="eael-switch">
 									<?php
 									$disabled = !empty( $item[ 'is_pro' ] ) ? 'disabled' : '';
+									$status = isset($item['is_pro']) && !$this->pro_enabled ? 'disabled' : checked( 1, $this->get_settings($item['key']), false );
 									printf( '<input class="eael-widget-item" id="%1$s" name="%1$s"
-                                           type="checkbox" %2$s>', $item[ 'key' ], $disabled );
+                                           type="checkbox" %2$s>', $item[ 'key' ], $status );
 									?>
 
                                     <span class="switch__box <?php echo $disabled; ?>"></span>

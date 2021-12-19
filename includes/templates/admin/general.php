@@ -6,7 +6,7 @@
                     <p><i class="ea-admin-icon icon-edit"></i>Check out the changes & features we have added with our
                         new updates
                     </p>
-                    <a href="#" class="button">View Changelog</a>
+                    <a href="#" class="eael-button">View Changelog</a>
                 </div>
             </div>
             <div class="eael-block p45 eael-activate__license__block">
@@ -27,7 +27,7 @@
                 <div class="license__form__block">
                     <form action="">
                         <input type="text" class="eael-form__control" placeholder="Place Your License Key and Active">
-                        <button class="button button__themeColor">Active License</button>
+                        <button class="eael-button button__themeColor">Active License</button>
                     </form>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                     <li>🔥 Save Your Design Anywhere With MyCloud Storage Space</li>
                     <li>🚀 Add Team Members & Collaborate On Cloud With Templately WorkSpace</li>
                 </ul>
-                <a href="#" class="button button__secondary hover__shadow">Install Templately</a>
+                <a href="#" class="eael-button button__secondary hover__shadow">Install Templately</a>
             </div>
             <div class="eael-block px45 py25">
                 <div class="eael-basic__card eael__flex align__center justify__between">
@@ -54,7 +54,7 @@
                         </div>
                         <h4>Manage your License for your sites from your WPDeveloper account</h4>
                     </div>
-                    <a href="#" class="button button__themeColor">Manage License</a>
+                    <a href="#" class="eael-button button__themeColor">Manage License</a>
                 </div>
             </div>
         </div>

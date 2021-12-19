@@ -118,7 +118,7 @@ trait Admin {
                 </div>
                 <div class="border__line mt30"><span></span></div>
                 <div class="eael__flex justify__end mt30">
-                    <a href="#" class="button button__themeColor">Save Settings</a>
+                    <a href="#" class="eael-button button__themeColor">Save Settings</a>
                 </div>
             </div>
         <?php
