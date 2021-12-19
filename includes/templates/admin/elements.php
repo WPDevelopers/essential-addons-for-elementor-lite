@@ -574,9 +574,6 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
             <h3 class="eael-section__header"><?php echo esc_html( $element[ 'title' ] ) ?></h3>
             <div class="eael-element__wrap">
 				<?php foreach ( $element[ 'elements' ] as $item ): ?>
-                    <?php
-
-                    ?>
                     <div class="eael-element__item">
 						<?php if ( !empty( $item[ 'is_pro' ] ) ): ?>
                             <div class="isPro">

@@ -3210,6 +3210,12 @@ button.button__greyBg:hover:disabled {
     }
 }
 
+@media (min-width: 1400px) {
+    .eael-grid .eael-col-xxl-3 {
+        grid-column: span 3;
+    }
+}
+
 @media (min-width: 1600px) {
     .eael-grid .eael-col-hl-6 {
         grid-column: span 6;
@@ -3300,6 +3306,12 @@ button.button__greyBg:hover:disabled {
     align-items: center;
     padding: 9px 27px;
     border-radius: 8px;
+}
+
+@media (max-width: 1199.98px) {
+    .eael-main__tab .tab__menu .tab__list .tab__item {
+        padding: 9px 18px;
+    }
 }
 
 .eael-main__tab .tab__menu .tab__list .tab__item i {
@@ -3595,6 +3607,20 @@ button.button__greyBg:hover:disabled {
     grid-template-columns: repeat(5, 1fr);
     gap: var(--gutter-30);
     position: relative;
+}
+
+@media (max-width: 1599.98px) {
+    .eael-element__wrap {
+        -ms-grid-columns: (1fr)[4];
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .eael-element__wrap {
+        -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 .eael-element__wrap .eael-element__item {
@@ -4490,6 +4516,13 @@ button.button__greyBg:hover:disabled {
     -ms-grid-columns: (1fr)[4];
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
+}
+
+@media (max-width: 1199.98px) {
+    .eael-features {
+        -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 .eael-features .feature__item {
