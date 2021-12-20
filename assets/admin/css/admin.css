@@ -1423,6 +1423,36 @@
     margin: 0;
 }
 
+.eael-quick-setup-wizard[data-step="0"] li:nth-child(-n + 1) .eael-quick-setup-icon,
+.eael-quick-setup-wizard[data-step="1"] li:nth-child(-n + 2) .eael-quick-setup-icon,
+.eael-quick-setup-wizard[data-step="2"] li:nth-child(-n + 3) .eael-quick-setup-icon,
+.eael-quick-setup-wizard[data-step="3"] li:nth-child(-n + 4) .eael-quick-setup-icon,
+.eael-quick-setup-wizard[data-step="4"] li:nth-child(-n + 5) .eael-quick-setup-icon,
+.eael-quick-setup-wizard[data-step="5"] li:nth-child(-n + 6) .eael-quick-setup-icon{
+    background: #5e2eff;
+    color: white;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.eael-quick-setup-wizard[data-step="0"] li:nth-child(-n + 1) .eael-quick-setup-name,
+.eael-quick-setup-wizard[data-step="1"] li:nth-child(-n + 2) .eael-quick-setup-name,
+.eael-quick-setup-wizard[data-step="2"] li:nth-child(-n + 3) .eael-quick-setup-name,
+.eael-quick-setup-wizard[data-step="3"] li:nth-child(-n + 4) .eael-quick-setup-name,
+.eael-quick-setup-wizard[data-step="4"] li:nth-child(-n + 5) .eael-quick-setup-name,
+.eael-quick-setup-wizard[data-step="5"] li:nth-child(-n + 6) .eael-quick-setup-name {
+    color: #5e2eff;
+}
+
+.eael-quick-setup-wizard[data-step="0"] li:nth-child(-n + 1) .eael-quick-setup-name:after,
+.eael-quick-setup-wizard[data-step="1"] li:nth-child(-n + 2) .eael-quick-setup-name:after,
+.eael-quick-setup-wizard[data-step="2"] li:nth-child(-n + 3) .eael-quick-setup-name:after,
+.eael-quick-setup-wizard[data-step="3"] li:nth-child(-n + 4) .eael-quick-setup-name:after,
+.eael-quick-setup-wizard[data-step="4"] li:nth-child(-n + 5) .eael-quick-setup-name:after,
+.eael-quick-setup-wizard[data-step="5"] li:nth-child(-n + 6) .eael-quick-setup-name:after {
+    border-bottom-style: solid;
+    border-bottom-color: #5e2eff;
+}
 /* end setup wizard */
 
 .eael-settings-wrap {
