@@ -102,7 +102,7 @@ $extensions = [
             <div class="eael-element__wrap">
 				<?php foreach ( $element[ 'extensions' ] as $item ): ?>
                     <div class="eael-element__item">
-						<?php if ( !empty( $item[ 'is_pro' ] ) ): ?>
+						<?php if ( !empty( $item[ 'is_pro' ] ) && !$this->pro_enabled ): ?>
                             <div class="isPro">
                                 <span><?php esc_html_e( 'Pro', 'essential-addons-for-elementor-lite' ); ?></span>
                             </div>

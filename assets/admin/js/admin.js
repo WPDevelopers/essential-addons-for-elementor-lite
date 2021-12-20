@@ -181,12 +181,8 @@
 	} );
 	
 	$( document ).on( 'click', function ( event ) {
-		
 		var selector = $( event.target ).closest( ".eael-modal" );
-		if ( selector.length < 1 ) {
-			// eaelPopupBox.hide();
-			// $( ".modal__content__popup" ).hide();
-		}
+		
 	} );
 	
 	// Popup
