@@ -164,7 +164,8 @@ $elements = [
 				'title'     => __( 'Advanced Google Map', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/advanced-google-map/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/advanced-google-map/',
-				'is_pro'    => true
+				'is_pro'    => true,
+				'setting'   => $this->pro_enabled ? [ 'id' => 'eael-googl-map-setting' ] : []
 			],
 			[
 				'key'       => 'post-block',
@@ -408,19 +409,27 @@ $elements = [
 				'title'     => __( 'Typeform', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/typeform/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/typeform/',
+				'setting'   => [
+					'link' => esc_url( add_query_arg( [
+						'pr_code'      => wp_hash( 'eael_typeform' ),
+						'redirect_uri' => esc_url( admin_url( 'admin.php?page=eael-settings' ) )
+					], esc_url( 'https://app.essential-addons.com/typeform/index.php' ) ) )
+				],
 			],
 			[
 				'key'       => 'mailchimp',
 				'title'     => __( 'Mailchimp', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/mailchimp/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/mailchimp/',
-				'is_pro'    => true
+				'is_pro'    => true,
+				'setting'   => $this->pro_enabled ? [ 'id' => 'eael-mailchimp-setting' ] : []
 			],
 			[
 				'key'       => 'login-register',
 				'title'     => __( 'Login Register Form', 'essential-addons-elementor' ),
 				'demo_link' => 'https://essential-addons.com/elementor/login-register-form',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/login-register-form/',
+				'setting'   => [ 'id' => 'eael-login-register-setting' ]
 			],
 		]
 	],
@@ -583,18 +592,28 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                         <div class="element__content">
                             <h4><?php echo $item[ 'title' ]; ?></h4>
                             <div class="element__options">
+								<?php
+								if ( !empty( $item[ 'setting' ] ) ):
+									$link = !empty( $item[ 'setting' ][ 'link' ] ) ? $item[ 'setting' ][ 'link' ] : '#';
+									$id = !empty( $item[ 'setting' ][ 'id' ] ) ? $item[ 'setting' ][ 'id' ] : '';
+									?>
+                                    <a href="<?php echo $link; ?>" id="<?php echo $id; ?>" class="element__icon">
+                                        <i class="ea-admin-icon icon-gear"></i>
+                                        <span class="tooltip-text"><?php esc_html_e( 'Setting', 'essential-addons-for-elementor-lite' ); ?></span>
+                                    </a>
+								<?php endif; ?>
                                 <a href="<?php echo esc_url( $item[ 'doc_link' ] ); ?>" class="element__icon">
                                     <i class="ea-admin-icon icon-doc"></i>
                                     <span class="tooltip-text"><?php esc_html_e( 'Documentation', 'essential-addons-for-elementor-lite' ); ?></span>
                                 </a>
                                 <a href="<?php echo esc_url( $item[ 'demo_link' ] ); ?>" class="element__icon">
                                     <i class="ea-admin-icon icon-monitor"></i>
-                                    <span class="tooltip-text"><?php esc_html_e( 'Preview', 'essential-addons-for-elementor-lite' ); ?></span>
+                                    <span class="tooltip-text"><?php esc_html_e( 'Demo', 'essential-addons-for-elementor-lite' ); ?></span>
                                 </a>
                                 <label class="eael-switch">
 									<?php
 									$disabled = !empty( $item[ 'is_pro' ] ) && !$this->pro_enabled ? 'disabled' : '';
-									$status = isset($item['is_pro']) && !$this->pro_enabled ? 'disabled' : checked( 1, $this->get_settings($item['key']), false );
+									$status   = isset( $item[ 'is_pro' ] ) && !$this->pro_enabled ? 'disabled' : checked( 1, $this->get_settings( $item[ 'key' ] ), false );
 									printf( '<input class="eael-widget-item" id="%1$s" name="%1$s"
                                            type="checkbox" %2$s>', $item[ 'key' ], $status );
 									?>
@@ -608,6 +627,14 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
             </div>
         </div>
 	<?php endforeach; ?>
+
+    <input type="hidden" name="embedpress" value="on">
+    <input type="hidden" name="woocommerce-review" value="on">
+    <input type="hidden" name="career-page" value="on">
+    <input type="hidden" name="crowdfundly-single-campaign" value="on">
+    <input type="hidden" name="crowdfundly-organization" value="on">
+    <input type="hidden" name="crowdfundly-all-campaign" value="on">
+
     <div class="border__line mt30"><span></span></div>
     <div class="eael__flex justify__end mt30">
         <button class="eael-button button__themeColor js-eael-settings-save">Save Settings</button>

@@ -49,6 +49,7 @@ $extensions = [
 				'title'     => __( 'Duplicator', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/duplicator/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/duplicator/',
+				'setting'   => [ 'id' => 'eael-post-duplicator-setting' ]
 			],
 			[
 				'key'       => 'custom-js',
@@ -109,13 +110,24 @@ $extensions = [
                         <div class="element__content">
                             <h4><?php echo $item[ 'title' ]; ?></h4>
                             <div class="element__options">
+
+	                            <?php
+	                            if ( !empty( $item[ 'setting' ] ) ):
+		                            $link = !empty( $item[ 'setting' ][ 'link' ] ) ? $item[ 'setting' ][ 'link' ] : '#';
+		                            $id = !empty( $item[ 'setting' ][ 'id' ] ) ? $item[ 'setting' ][ 'id' ] : '';
+		                            ?>
+                                    <a href="<?php echo $link; ?>" id="<?php echo $id; ?>" class="element__icon">
+                                        <i class="ea-admin-icon icon-gear"></i>
+                                        <span class="tooltip-text"><?php esc_html_e( 'Setting', 'essential-addons-for-elementor-lite' ); ?></span>
+                                    </a>
+	                            <?php endif; ?>
                                 <a href="<?php echo esc_url( $item[ 'doc_link' ] ); ?>" class="element__icon">
                                     <i class="ea-admin-icon icon-doc"></i>
                                     <span class="tooltip-text"><?php esc_html_e( 'Documentation', 'essential-addons-for-elementor-lite' ); ?></span>
                                 </a>
                                 <a href="<?php echo esc_url( $item[ 'demo_link' ] ); ?>" class="element__icon">
                                     <i class="ea-admin-icon icon-monitor"></i>
-                                    <span class="tooltip-text"><?php esc_html_e( 'Preview', 'essential-addons-for-elementor-lite' ); ?></span>
+                                    <span class="tooltip-text"><?php esc_html_e( 'Demo', 'essential-addons-for-elementor-lite' ); ?></span>
                                 </a>
                                 <label class="eael-switch">
 									<?php

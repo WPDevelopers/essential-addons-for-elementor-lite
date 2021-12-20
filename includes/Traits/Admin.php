@@ -90,6 +90,7 @@ trait Admin {
      * @since 1.1.2
      */
     public function admin_settings_page() {
+        $a = 'manzur';
         ?>
         <form action="" method="POST" id="eael-settings" name="eael-settings">
             <div class="template__wrapper background__greyBg px30 py50">
@@ -117,6 +118,7 @@ trait Admin {
 		                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
 	                }
 	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/integrations.php';
+	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/popup.php';
 	                ?>
                 </div>
             </div>
@@ -306,5 +308,8 @@ trait Admin {
         $notice->init();
     }
 
+    public function eael_load_admin_popup()
+    {
 
+    }
 }
