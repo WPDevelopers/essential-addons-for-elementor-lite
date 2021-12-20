@@ -171,6 +171,27 @@ trait Admin {
             wp_send_json_success( [ 'message' => __( 'Login | Register Settings updated', 'essential-addons-for-elementor-lite' ) ] );
         }
 
+        //Login-register data
+	    if ( isset( $settings[ 'lr_recaptcha_sitekey' ] ) ) {
+		    update_option( 'eael_recaptcha_sitekey', sanitize_text_field( $settings[ 'lr_recaptcha_sitekey' ] ) );
+	    }
+	    if ( isset( $settings[ 'lr_recaptcha_secret' ] ) ) {
+		    update_option( 'eael_recaptcha_secret', sanitize_text_field( $settings[ 'lr_recaptcha_secret' ] ) );
+	    }
+	    if ( isset( $settings[ 'lr_recaptcha_language' ] ) ) {
+		    update_option( 'eael_recaptcha_language', sanitize_text_field( $settings[ 'lr_recaptcha_language' ] ) );
+	    }
+
+	    //pro settings
+	    if ( isset( $settings[ 'lr_g_client_id' ] ) ) {
+		    update_option( 'eael_g_client_id', sanitize_text_field( $settings[ 'lr_g_client_id' ] ) );
+	    }
+	    if ( isset( $settings[ 'lr_fb_app_id' ] ) ) {
+		    update_option( 'eael_fb_app_id', sanitize_text_field( $settings[ 'lr_fb_app_id' ] ) );
+	    }
+	    if ( isset( $settings[ 'lr_fb_app_secret' ] ) ) {
+		    update_option( 'eael_fb_app_secret', sanitize_text_field( $settings[ 'lr_fb_app_secret' ] ) );
+	    }
 
         // Saving Google Map Api Key
         if ( isset( $settings[ 'google-map-api' ] ) ) {
