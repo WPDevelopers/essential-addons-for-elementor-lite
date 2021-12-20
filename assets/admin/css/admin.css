@@ -77,49 +77,74 @@
 .icon-calendar:before {
     content: "\e912";
 }
+
 .icon-course:before {
     content: "\e913";
 }
+
 .icon-form:before {
     content: "\e914";
 }
+
 .icon-gallery:before {
     content: "\e915";
 }
+
 .icon-image-hotspot:before {
     content: "\e916";
 }
+
 .icon-instagram:before {
     content: "\e917";
 }
+
 .icon-marker:before {
     content: "\e918";
 }
+
 .icon-modal:before {
     content: "\e919";
 }
+
 .icon-parallax:before {
     content: "\e91a";
 }
+
 .icon-particel:before {
     content: "\e91b";
 }
+
 .icon-toggle:before {
     content: "\e91c";
 }
+
 .icon-tooltip:before {
     content: "\e91d";
 }
+
 .icon-angle-down:before {
     content: "\e900";
 }
+
 .icon-angle-right:before {
     content: "\e901";
 }
+
 .icon-doc:before {
     content: "\e902";
 }
 
+.icon-times:before {
+    content: "\e910";
+}
+
+.icon-gear:before {
+    content: "\e907";
+}
+
+.icon-long-arrow-right:before {
+    content: "\e909";
+}
 /* Start Setup Wizard */
 
 .eael-quick-setup-wizard-wrap {
@@ -3141,7 +3166,7 @@ button.button__greyBg:hover:disabled {
 .eael-grid {
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: (1fr)[12];
+    -ms-grid-columns: (1fr) [ 12 ];
     grid-template-columns: repeat(12, 1fr);
     gap: var(--gutter-30);
 }
@@ -3603,7 +3628,7 @@ button.button__greyBg:hover:disabled {
 .eael-element__wrap {
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: (1fr)[5];
+    -ms-grid-columns: (1fr) [ 5 ];
     grid-template-columns: repeat(5, 1fr);
     gap: var(--gutter-30);
     position: relative;
@@ -3611,14 +3636,14 @@ button.button__greyBg:hover:disabled {
 
 @media (max-width: 1599.98px) {
     .eael-element__wrap {
-        -ms-grid-columns: (1fr)[4];
+        -ms-grid-columns: (1fr) [ 4 ];
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
 @media (max-width: 1199.98px) {
     .eael-element__wrap {
-        -ms-grid-columns: (1fr)[3];
+        -ms-grid-columns: (1fr) [ 3 ];
         grid-template-columns: repeat(3, 1fr);
     }
 }
@@ -4513,14 +4538,14 @@ button.button__greyBg:hover:disabled {
 .eael-features {
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: (1fr)[4];
+    -ms-grid-columns: (1fr) [ 4 ];
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
 }
 
 @media (max-width: 1199.98px) {
     .eael-features {
-        -ms-grid-columns: (1fr)[3];
+        -ms-grid-columns: (1fr) [ 3 ];
         grid-template-columns: repeat(3, 1fr);
     }
 }
@@ -4600,4 +4625,17 @@ button.button__greyBg:hover:disabled {
 .eael-button svg#eael-spinner {
     margin-right: 10px;
     vertical-align: middle;
+}
+
+#eael-admn-setting-popup {
+    display: none;
+}
+
+#eael-admn-setting-popup .modal__content__popup {
+    display: none;
+}
+
+.js-eael-settings-save.save-now {
+    background: #5E2EFF;
+    color: #ffffff;
 }

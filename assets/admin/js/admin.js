@@ -26,16 +26,51 @@
 		
 	}
 	
+	var eaelPopupBox = $( "#eael-admn-setting-popup" );
+	
 	$( ".switch__box.disabled" ).on( "click", function () {
-		Swal.fire( {
-			           type: "warning",
-			           title: "<h2><span>Go</span> Premium",
-			           html:
-				           'Purchase our <b><a href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor" rel="nofollow">premium version</a></b> to unlock these pro components!',
-			           showConfirmButton: false,
-			           timer: 3000,
-		           } );
+		eaelPopupBox.show();
+		$( "#eael-pro-popup" ).show();
 	} );
+	
+	$( document ).on( 'click', '#eael-googl-map-setting', function ( event ) {
+		event.preventDefault();
+		eaelPopupBox.show();
+		$( "#eael-google-map-popup" ).show();
+	} )
+	
+	$( document ).on( 'click', '#eael-mailchimp-setting', function ( event ) {
+		event.preventDefault();
+		eaelPopupBox.show();
+		$( "#eael-mailchimp-popup" ).show();
+	} )
+	
+	$( document ).on( 'click', '#eael-login-register-setting', function ( event ) {
+		event.preventDefault();
+		eaelPopupBox.show();
+		$( "#eael-login-register-popup" ).show();
+	} )
+	
+	$( document ).on( 'click', '#eael-post-duplicator-setting', function ( event ) {
+		event.preventDefault();
+		eaelPopupBox.show();
+		$( "#eael-post-duplicator-popup" ).show();
+	} )
+	
+	$( document ).on( "click", ".eael-save-trigger", function ( event ) {
+		event.preventDefault();
+		saveButton
+		.addClass( "save-now" )
+		.removeAttr( "disabled" )
+		.css( "cursor", "pointer" );
+	} )
+	
+	//close popup
+	$( document ).on( "click", ".eael-admin-popup-close", function ( event ) {
+		event.preventDefault();
+		eaelPopupBox.hide();
+		$( ".modal__content__popup" ).hide();
+	} )
 	
 	// Save Button reacting on any changes
 	var saveButton = $( ".js-eael-settings-save" );
