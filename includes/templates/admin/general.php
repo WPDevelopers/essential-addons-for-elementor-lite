@@ -72,15 +72,15 @@
         <div class="eael-col-xl-4">
             <div class="eael-statistic eael-block py25 px30">
                 <div class="statistic__item">
-                    <h2>70</h2>
+                    <h2 id="eael-total-elements">88</h2>
                     <p>Total Elements</p>
                 </div>
                 <div class="statistic__item">
-                    <h2>35</h2>
+                    <h2 id="eael-used-elements">00</h2>
                     <p>Used Elements</p>
                 </div>
                 <div class="statistic__item">
-                    <h2>00</h2>
+                    <h2 id="eael-unused-elements">00</h2>
                     <p>Unused Elements</p>
                 </div>
             </div>
@@ -106,5 +106,6 @@
             </a>
         </div>
     </div>
+    <div class="border__line mt30"><span></span></div>
 </div>
 

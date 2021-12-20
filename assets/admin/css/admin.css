@@ -3452,11 +3452,11 @@ button.button__greyBg:hover:disabled {
     padding: var(--padding-50);
 }
 
-.eael-activate__license__block .license__form__block form {
+.eael-activate__license__block .license__form__block .eael-license-form-block {
     position: relative;
 }
 
-.eael-activate__license__block .license__form__block form .eael-form__control {
+.eael-activate__license__block .license__form__block .eael-license-form-block .eael-form__control {
     height: 50px;
     padding: 0 125px 0 15px;
     background: #ffffff;
@@ -3464,17 +3464,17 @@ button.button__greyBg:hover:disabled {
     border-radius: 5px;
 }
 
-.eael-activate__license__block .license__form__block form .eael-form__control:disabled {
+.eael-activate__license__block .license__form__block .eael-license-form-block .eael-form__control:disabled {
     background: #e9ecef;
 }
 
 @media (min-width: 992px) and (max-width: 1399.98px) {
-    .eael-activate__license__block .license__form__block form .eael-form__control {
+    .eael-activate__license__block .license__form__block .eael-license-form-block .eael-form__control {
         padding: 0 15px;
     }
 }
 
-.eael-activate__license__block .license__form__block form .eael-button,
+.eael-activate__license__block .license__form__block .eael-license-form-block .eael-button,
 .eael-activate__license__block .license__form__block form button {
     position: absolute;
     top: 5px;
@@ -3482,7 +3482,7 @@ button.button__greyBg:hover:disabled {
 }
 
 @media (min-width: 992px) and (max-width: 1399.98px) {
-    .eael-activate__license__block .license__form__block form .eael-button,
+    .eael-activate__license__block .license__form__block .eael-license-form-block .eael-button,
     .eael-activate__license__block .license__form__block form button {
         position: static;
         margin-top: 20px;
@@ -4595,4 +4595,9 @@ button.button__greyBg:hover:disabled {
     background: url("../images/quick-setup/mask-group.png") no-repeat bottom right;
     z-index: -1;
     opacity: 0.3;
+}
+
+.eael-button svg#eael-spinner {
+    margin-right: 10px;
+    vertical-align: middle;
 }
