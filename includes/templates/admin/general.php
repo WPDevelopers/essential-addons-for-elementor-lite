@@ -13,7 +13,7 @@
 			<?php if ( $this->installer->get_local_plugin_data( 'templately/templately.php' ) === false ) { ?>
                 <div class="template__block eael-block p45">
                     <div class="template__logo">
-                        <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-logo.svg' ) ?>"
+                        <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-logo.svg' ); ?>"
                              alt="">
                     </div>
                     <h2>Unlock <span class="color__secondary">1600+</span> Ready Templates Built With Elementor &
@@ -84,26 +84,26 @@
                     <p>Unused Elements</p>
                 </div>
             </div>
-            <div class="eael-info__box eael-block px30 py25">
+            <a href="" class="eael-info__box eael-block px30 py25">
                 <h6><i class="ea-admin-icon icon-edit"></i> View Knowledgebase</h6>
                 <p>Get started by spending some time with the documentation to get familiar with Essential Addons. Build
                     awesome websites</p>
-            </div>
-            <div class="eael-info__box eael-block px30 py25">
+            </a>
+            <a href="" class="eael-info__box eael-block px30 py25">
                 <h6><i class="ea-admin-icon icon-play-alt"></i> YouTube Tutorials</h6>
                 <p>Get started by spending some time with the documentation to get familiar with Essential Addons. Build
                     awesome websites</p>
-            </div>
-            <div class="eael-info__box eael-block px30 py25">
+            </a>
+            <a href="" class="eael-info__box eael-block px30 py25">
                 <h6><i class="ea-admin-icon icon-star"></i> 5 Star Review</h6>
                 <p>Get started by spending some time with the documentation to get familiar with Essential Addons. Build
                     awesome websites</p>
-            </div>
-            <div class="eael-info__box eael-block px30 py25">
+            </a>
+            <a href="" class="eael-info__box eael-block px30 py25">
                 <h6><i class="ea-admin-icon icon-support"></i> GitHub & Support section</h6>
                 <p>Get started by spending some time with the documentation to get familiar with Essential Addons. Build
                     awesome websites</p>
-            </div>
+            </a>
         </div>
     </div>
 </div>

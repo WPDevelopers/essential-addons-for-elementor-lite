@@ -575,7 +575,7 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
             <div class="eael-element__wrap">
 				<?php foreach ( $element[ 'elements' ] as $item ): ?>
                     <div class="eael-element__item">
-						<?php if ( !empty( $item[ 'is_pro' ] ) ): ?>
+						<?php if ( !empty( $item[ 'is_pro' ] ) && !$this->pro_enabled ): ?>
                             <div class="isPro">
                                 <span><?php esc_html_e( 'Pro', 'essential-addons-for-elementor-lite' ); ?></span>
                             </div>
@@ -593,7 +593,7 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                                 </a>
                                 <label class="eael-switch">
 									<?php
-									$disabled = !empty( $item[ 'is_pro' ] ) ? 'disabled' : '';
+									$disabled = !empty( $item[ 'is_pro' ] ) && !$this->pro_enabled ? 'disabled' : '';
 									$status = isset($item['is_pro']) && !$this->pro_enabled ? 'disabled' : checked( 1, $this->get_settings($item['key']), false );
 									printf( '<input class="eael-widget-item" id="%1$s" name="%1$s"
                                            type="checkbox" %2$s>', $item[ 'key' ], $status );
