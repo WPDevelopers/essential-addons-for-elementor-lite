@@ -107,7 +107,7 @@ class WPDeveloper_Setup_Wizard {
 		?>
         <ul class="eael-quick-setup-wizard <?php echo $wizard_column; ?>" data-step="1">
 			<?php foreach ( $items as $item ): ?>
-				<?php if ( $item == 'Templately' && $this->templately_status ) continue; ?>
+				<?php if ( $item == 'Templately' && $this->templately_status || ($this->get_local_plugin_data( 'templately/templately.php' ) !== false && $item == 'Templately')  ) continue; ?>
                 <li class="eael-quick-setup-step active">
                     <div class="eael-quick-setup-icon"><?php echo ++$i; ?></div>
                     <div class="eael-quick-setup-name"><?php echo $item; ?></div>
@@ -177,7 +177,7 @@ class WPDeveloper_Setup_Wizard {
             <div class="eael-quick-setup-input-group">
                 <label class="eael-quick-setup-input config-list">
                     <input id="basic" value="basic" class="eael_preferences" name="eael_preferences" type="radio"
-                           />
+                           checked/>
                     <span class="eael-quick-setup-content">
                   <h3 class="eael-quick-setup-title"><?php _e( 'Basic', 'essential-addons-for-elementor-lite' ); ?></h3>
                   <p class="eael-quick-setup-text">
@@ -189,7 +189,7 @@ class WPDeveloper_Setup_Wizard {
                 </label>
                 <label class="eael-quick-setup-input config-list">
                     <input id="advance" value="advance" class="eael_preferences" name="eael_preferences"
-                           type="radio" checked/>
+                           type="radio" />
                     <span class="eael-quick-setup-content">
                   <h3 class="eael-quick-setup-title"><?php _e( 'Advanced (Recommended)', 'essential-addons-for-elementor-lite' ); ?></h3>
                   <p class="eael-quick-setup-text">
@@ -279,7 +279,7 @@ class WPDeveloper_Setup_Wizard {
             </div>
             <div class="eael-quick-setup-input-group">
 				<?php foreach ( $this->pro_elements() as $key => $elements ): ?>
-                    <a href="<?php echo esc_url($elements[ 'link' ]); ?>" class="eael-quick-setup-content" target="_blank">
+                    <a target="_blank" href="<?php echo esc_url($elements[ 'link' ]); ?>" class="eael-quick-setup-content" >
                             <span class="eael-quick-setup-icon">
                                 <img src="<?php echo $elements[ 'logo' ]; ?>"
                                      alt="<?php echo $elements[ 'title' ]; ?>">
@@ -300,7 +300,7 @@ class WPDeveloper_Setup_Wizard {
 
 	public function templately_integrations() {
 
-		if ( $this->templately_status ) {
+		if ( $this->templately_status || $this->get_local_plugin_data( 'templately/templately.php' ) !== false ) {
 			return false;
 		}
 
