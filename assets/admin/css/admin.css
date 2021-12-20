@@ -1133,6 +1133,7 @@
     color: #727272;
     text-align: center;
     margin-top: 15px;
+    margin-bottom: auto;
 }
 
 @media (max-width: 1400.98px) {
