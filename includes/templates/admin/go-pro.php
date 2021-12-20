@@ -58,73 +58,73 @@
         </div>
         <div class="eael-block p30 mb30">
             <div class="eael-features mb30">
-                <a href="https://essential-addons.com/elementor/event-calendar/" class="feature__item">
+                <a target="_blank" href="https://essential-addons.com/elementor/event-calendar/" class="feature__item">
                     <div class="icon">
                         <i class="ea-admin-icon icon-calendar"></i>
                     </div>
                     <p>Event Calendar</p>
                 </a>
-                <a href="https://essential-addons.com/elementor/content-toggle/" class="feature__item">
+                <a target="_blank" href="https://essential-addons.com/elementor/content-toggle/" class="feature__item">
                     <div class="icon">
                         <i class="ea-admin-icon icon-toggle"></i>
                     </div>
                     <p>Toggle</p>
                 </a>
-                <a href="https://essential-addons.com/elementor/advanced-google-map/" class="feature__item">
+                <a target="_blank" href="https://essential-addons.com/elementor/advanced-google-map/" class="feature__item">
                     <div class="icon">
                         <i class="ea-admin-icon icon-marker"></i>
                     </div>
                     <p>Advanced Google Map</p>
                 </a>
-                <a href="https://essential-addons.com/elementor/dynamic-gallery/" class="feature__item">
+                <a target="_blank" href="https://essential-addons.com/elementor/dynamic-gallery/" class="feature__item">
                     <div class="icon">
                         <i class="ea-admin-icon icon-gallery"></i>
                     </div>
                     <p>Dynamic Gallery</p>
                 </a>
-                <a href="https://essential-addons.com/elementor/image-hotspots/" class="feature__item">
+                <a target="_blank" href="https://essential-addons.com/elementor/image-hotspots/" class="feature__item">
                     <div class="icon">
                         <i class="ea-admin-icon icon-image-hotspot"></i>
                     </div>
                     <p>Image Hotspots</p>
                 </a>
-                <a href="https://essential-addons.com/elementor/lightbox-modal/" class="feature__item">
+                <a target="_blank" href="https://essential-addons.com/elementor/lightbox-modal/" class="feature__item">
                     <div class="icon">
                         <i class="ea-admin-icon icon-modal"></i>
                     </div>
                     <p>Lightbox and Modal</p>
                 </a>
-                <a href="https://essential-addons.com/elementor/mailchimp/" class="feature__item">
+                <a target="_blank" href="https://essential-addons.com/elementor/mailchimp/" class="feature__item">
                     <div class="icon">
                         <i class="ea-admin-icon icon-form"></i>
                     </div>
                     <p>MailChimp</p>
                 </a>
-                <a href="https://essential-addons.com/elementor/instagram-feed/" class="feature__item">
+                <a target="_blank" href="https://essential-addons.com/elementor/instagram-feed/" class="feature__item">
                     <div class="icon">
                         <i class="ea-admin-icon icon-instagram"></i>
                     </div>
                     <p>Instagram Feed</p>
                 </a>
-                <a href="https://essential-addons.com/elementor/learndash-course-list/" class="feature__item">
+                <a target="_blank" href="https://essential-addons.com/elementor/learndash-course-list/" class="feature__item">
                     <div class="icon">
                         <i class="ea-admin-icon icon-course"></i>
                     </div>
                     <p>LearnDash Course List</p>
                 </a>
-                <a href="https://essential-addons.com/elementor/advanced-tooltip/" class="feature__item">
+                <a target="_blank" href="https://essential-addons.com/elementor/advanced-tooltip/" class="feature__item">
                     <div class="icon">
                         <i class="ea-admin-icon icon-tooltip"></i>
                     </div>
                     <p>Advanced Tooltip</p>
                 </a>
-                <a href="https://essential-addons.com/elementor/parallax-scrolling/" class="feature__item">
+                <a target="_blank" href="https://essential-addons.com/elementor/parallax-scrolling/" class="feature__item">
                     <div class="icon">
                         <i class="ea-admin-icon icon-parallax"></i>
                     </div>
                     <p>Parallax</p>
                 </a>
-                <a href="https://essential-addons.com/elementor/particle-effect/" class="feature__item">
+                <a target="_blank" href="https://essential-addons.com/elementor/particle-effect/" class="feature__item">
                     <div class="icon">
                         <i class="ea-admin-icon icon-particel"></i>
                     </div>
@@ -132,7 +132,7 @@
                 </a>
             </div>
             <div class="eael__flex justify__center">
-                <a href="https://essential-addons.com/elementor/demos/" class="eael-button">View More</a>
+                <a target="_blank" href="https://essential-addons.com/elementor/demos/" class="eael-button eael-extra-bt-size">View More</a>
             </div>
         </div>
         <div class="eael-block icon__card mb30">
@@ -148,7 +148,7 @@
             </div>
         </div>
         <div class="eael__flex justify__center">
-            <a href="https://wpdeveloper.com/plugins/essential-addons-elementor/#pricing" class="eael-button button__themeColor">Upgrade to PRO</a>
+            <a href="https://wpdeveloper.com/plugins/essential-addons-elementor/#pricing" class="eael-button button__themeColor eael-extra-bt-size">Upgrade to PRO</a>
         </div>
     </div>
     <div class="border__line mt30"><span></span></div>
