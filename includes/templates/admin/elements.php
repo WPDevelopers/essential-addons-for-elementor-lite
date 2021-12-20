@@ -566,7 +566,7 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
             <span class="switch__status disable">Disable All</span>
         </div>
         <div class="global__control__button">
-            <a href="#" class="eael-button">Save Setting</a>
+            <button class="eael-button js-eael-settings-save">Save Settings</button>
         </div>
     </div>
 	<?php foreach ( $elements as $key => $element ): ?>
@@ -608,4 +608,9 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
             </div>
         </div>
 	<?php endforeach; ?>
+    <div class="border__line mt30"><span></span></div>
+    <div class="eael__flex justify__end mt30">
+        <button class="eael-button button__themeColor js-eael-settings-save">Save Settings</button>
+    </div>
 </div>
+

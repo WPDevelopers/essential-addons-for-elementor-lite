@@ -91,6 +91,7 @@ trait Admin {
      */
     public function admin_settings_page() {
         ?>
+        <form action="" method="POST" id="eael-settings" name="eael-settings">
             <div class="template__wrapper background__greyBg px30 py50">
                 <div class="eael-container">
                     <div class="eael-main__tab mb45">
@@ -100,7 +101,9 @@ trait Admin {
                             <li class="tab__list"><a class="tab__item" href="#extensions"><i class="ea-admin-icon icon-extension"></i><?php echo __( 'Extensions', 'essential-addons-for-elementor-lite' ); ?></a></li>
                             <li class="tab__list"><a class="tab__item" href="#tools"><i class="ea-admin-icon icon-tools"></i><?php echo __( 'Tools', 'essential-addons-for-elementor-lite' ); ?></a></li>
                             <li class="tab__list"><a class="tab__item" href="#integrations"><i class="ea-admin-icon icon-plug"></i><?php echo __( 'Integrations', 'essential-addons-for-elementor-lite' ); ?></a></li>
-                            <li class="tab__list"><a class="tab__item" href="#go-pro"><i class="ea-admin-icon icon-lock-alt"></i><?php echo __( 'Go Premium', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <?php  if ( !$this->pro_enabled ) { ?>
+                                <li class="tab__list"><a class="tab__item" href="#go-pro"><i class="ea-admin-icon icon-lock-alt"></i><?php echo __( 'Go Premium', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                             <?php } ?>
                         </ul>
                     </div>
                 </div>
@@ -116,11 +119,8 @@ trait Admin {
 	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/integrations.php';
 	                ?>
                 </div>
-                <div class="border__line mt30"><span></span></div>
-                <div class="eael__flex justify__end mt30">
-                    <a href="#" class="eael-button button__themeColor">Save Settings</a>
-                </div>
             </div>
+        </form>
         <?php
     }
 

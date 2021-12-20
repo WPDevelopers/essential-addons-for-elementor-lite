@@ -151,6 +151,7 @@
             <a href="https://wpdeveloper.com/plugins/essential-addons-elementor/#pricing" class="eael-button button__themeColor">Upgrade to PRO</a>
         </div>
     </div>
+    <div class="border__line mt30"><span></span></div>
 </div>
 
 

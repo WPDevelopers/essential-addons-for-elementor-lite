@@ -73,6 +73,7 @@ $integrations = [
                 </div>
             </div>
 		<?php endforeach; ?>
-
     </div>
+    <div class="border__line mt30"><span></span></div>
 </div>
+

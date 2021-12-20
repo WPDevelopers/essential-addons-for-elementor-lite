@@ -134,4 +134,9 @@ $extensions = [
             </div>
         </div>
 	<?php endforeach; ?>
+    <div class="border__line mt30"><span></span></div>
+    <div class="eael__flex justify__end mt30">
+        <button class="eael-button button__themeColor js-eael-settings-save">Save Settings</button>
+    </div>
 </div>
+

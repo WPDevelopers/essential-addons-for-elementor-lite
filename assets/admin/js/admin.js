@@ -12,6 +12,20 @@
 		$( ".eael-admin-setting-tabs" ).find( tab ).addClass( "active" );
 	} );
 	
+	totalElements();
+	
+	function totalElements() {
+		var totalElements  = parseInt( $( '.eael-widget-item' ).length ),
+		    activeElements = parseInt( $( '.eael-widget-item:checked' ).length ),
+		    unusedElements = totalElements - activeElements;
+		
+		$( "#eael-total-elements" ).text( totalElements )
+		$( "#eael-used-elements" ).text( activeElements )
+		$( "#eael-unused-elements" ).text( unusedElements )
+		
+		
+	}
+	
 	$( ".switch__box.disabled" ).on( "click", function () {
 		Swal.fire( {
 			           type: "warning",
@@ -26,7 +40,8 @@
 	// Save Button reacting on any changes
 	var saveButton = $( ".js-eael-settings-save" );
 	
-	$( ".eael-checkbox input:enabled" ).on( "click", function ( e ) {
+	$( ".eael-widget-item:enabled" ).on( "click", function ( e ) {
+		totalElements();
 		saveButton
 		.addClass( "save-now" )
 		.removeAttr( "disabled" )
@@ -125,6 +140,7 @@
 		$( ".eael-widget-item:enabled" ).each( function () {
 			$( this ).prop( "checked", status ).change();
 		} );
+		totalElements();
 		saveButton
 		.addClass( "save-now" )
 		.removeAttr( "disabled" )
