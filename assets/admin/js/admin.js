@@ -22,8 +22,6 @@
 		$( "#eael-total-elements" ).text( totalElements )
 		$( "#eael-used-elements" ).text( activeElements )
 		$( "#eael-unused-elements" ).text( unusedElements )
-		
-		
 	}
 	
 	var eaelPopupBox = $( "#eael-admn-setting-popup" );
@@ -182,6 +180,15 @@
 		.css( "cursor", "pointer" );
 	} );
 	
+	$( document ).on( 'click', function ( event ) {
+		
+		var selector = $( event.target ).closest( ".eael-modal" );
+		if ( selector.length < 1 ) {
+			// eaelPopupBox.hide();
+			// $( ".modal__content__popup" ).hide();
+		}
+	} );
+	
 	// Popup
 	$( document ).on( "click", ".eael-admin-settings-popup", function ( e ) {
 		e.preventDefault();
@@ -253,115 +260,6 @@
 				"width=500,height=500,left=500,top=200"
 			);
 		}
-	} );
-	
-	// New Sweet Alert Forms for admin settings | Login & Register Settings
-	$( document ).on( "click", "#eael-admin-settings-popup-extended", function ( e ) {
-		e.preventDefault();
-		const lr_i18n      = localize.i18n.login_register;
-		let settingsNodeId = $( this ).data( "settings-id" );
-		let $dnode         = $( "#" + settingsNodeId );
-		let isProEnable    = $dnode.data( "pro-enabled" );
-		let rSitekey       = $dnode.data( "r-sitekey" );
-		let rSecret        = $dnode.data( "r-secret" );
-		let rLanguage      = $dnode.data( "r-language" );
-		let gClientId      = $dnode.data( "g-client-id" );
-		let fbAppId        = $dnode.data( "fb-app-id" );
-		let fbAppSecret    = $dnode.data( "fb-app-secret" );
-		let footerLink     = isProEnable
-			? `<a target="_blank" href="https://essential-addons.com/elementor/docs/social-login-recaptcha">${lr_i18n.m_footer}</a>`
-			: `<a target="_blank" href="https://www.google.com/recaptcha/admin/create">${lr_i18n.m_footer}</a>`;
-		let html           = `<div class="eael-lr-settings-fields" id="lr_settings_fields">
-                        <h2>${lr_i18n.r_title}</h2>
-                        <div class="sf-group">
-                            <label for="lr_recaptcha_sitekey">${lr_i18n.r_sitekey}:</label>
-                            <input value="${rSitekey}" name="lr_recaptcha_sitekey" id="lr_recaptcha_sitekey" placeholder="${lr_i18n.r_sitekey}"/><br/>
-                        </div>
-                        <div class="sf-group">
-                            <label for="lr_recaptcha_secret">${lr_i18n.r_sitesecret}:</label>
-                            <input value="${rSecret}" name="lr_recaptcha_secret" id="lr_recaptcha_secret" placeholder="${lr_i18n.r_sitesecret}"/><br/>
-                        </div>
-                        <div class="sf-group">
-                            <label for="lr_recaptcha_language">${lr_i18n.r_language}: <a style="vertical-align: middle;" href="https://developers.google.com/recaptcha/docs/language" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:16px;height:16px;"><path style="fill:#545454;" d="M 12 2 C 6.4889971 2 2 6.4889971 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z M 12 4 C 16.430123 4 20 7.5698774 20 12 C 20 16.430123 16.430123 20 12 20 C 7.5698774 20 4 16.430123 4 12 C 4 7.5698774 7.5698774 4 12 4 z M 12 6 C 9.79 6 8 7.79 8 10 L 10 10 C 10 8.9 10.9 8 12 8 C 13.1 8 14 8.9 14 10 C 14 12 11 12.367 11 15 L 13 15 C 13 13.349 16 12.5 16 10 C 16 7.79 14.21 6 12 6 z M 11 16 L 11 18 L 13 18 L 13 16 L 11 16 z"></path></svg></a></label>
-                            <input value="${rLanguage}" name="lr_recaptcha_language" id="lr_recaptcha_language" placeholder="${lr_i18n.r_language_ph}"/><br/>
-                        </div>
-                    `;
-		if ( isProEnable ) {
-			html += `<hr>
-                        <h2>${lr_i18n.g_title}</h2>
-                        <div class="sf-group">
-                            <label for="lr_g_client_id">${lr_i18n.g_cid}:</label>
-                            <input value="${gClientId}" name="lr_g_client_id" id="lr_g_client_id" placeholder="${lr_i18n.g_cid}"/><br/>
-                        </div>
-                        <hr>
-                        <h2>${lr_i18n.f_title}</h2>
-                        <div class="sf-group">
-                            <label for="lr_fb_app_id">${lr_i18n.f_app_id}:</label>
-                            <input value="${fbAppId}" name="lr_fb_app_id" id="lr_fb_app_id" placeholder="${lr_i18n.f_app_id}"/><br/>
-                        </div>
-                        <div class="sf-group">
-                            <label for="lr_fb_app_secret">${lr_i18n.f_app_secret}:</label>
-                            <input value="${fbAppSecret}" name="lr_fb_app_secret" id="lr_fb_app_secret" placeholder="${lr_i18n.f_app_secret}"/><br/>
-                        </div>`;
-		}
-		html += "</div>";
-		
-		Swal.fire( {
-			           title: `<strong>${lr_i18n.m_title}</strong>`,
-			           html: html,
-			           footer: footerLink,
-			           showCloseButton: true,
-			           showCancelButton: true,
-			           focusConfirm: false,
-			           confirmButtonText: lr_i18n.save,
-			           cancelButtonText: lr_i18n.cancel,
-			           preConfirm: () => {
-				           let formData = {
-					           recaptchaSiteKey: document.getElementById( "lr_recaptcha_sitekey" ).value,
-					           recaptchaSiteSecret: document.getElementById( "lr_recaptcha_secret" ).value,
-					           recaptchaLanguage: document.getElementById( "lr_recaptcha_language" ).value,
-				           };
-				           if ( isProEnable ) {
-					           formData.gClientId   = document.getElementById( "lr_g_client_id" ).value;
-					           formData.fbAppId     = document.getElementById( "lr_fb_app_id" ).value;
-					           formData.fbAppSecret = document.getElementById(
-						           "lr_fb_app_secret"
-					           ).value;
-				           }
-				           return formData;
-			           },
-		           } ).then( ( result ) => {
-			if ( result.value ) {
-				$.ajax( {
-					        url: localize.ajaxurl,
-					        type: "POST",
-					        data: {
-						        action: "save_settings_with_ajax",
-						        security: localize.nonce,
-						        fields: $.param( result.value ),
-						        is_login_register: 1,
-					        },
-					        success: function ( response ) {
-						        if ( response.success ) {
-							        Swal.fire( {
-								                   type: "success",
-								                   title: response.message ? response.message : lr_i18n.rm_title,
-								                   footer: lr_i18n.rm_footer,
-								                   showConfirmButton: true,
-								                   timer: 5000,
-							                   } );
-						        }
-					        },
-					        error: function ( err ) {
-						        Swal.fire( {
-							                   type: "error",
-							                   title: lr_i18n.e_title,
-							                   text: lr_i18n.e_text,
-						                   } );
-					        },
-				        } );
-			}
-		} );
 	} );
 	
 	// install/activate plugin

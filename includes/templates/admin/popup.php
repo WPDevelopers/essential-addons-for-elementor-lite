@@ -87,41 +87,45 @@
                             </div>
                         </div>
                     </div>
-                    <div class="border__line"><span></span></div>
-                    <div class="modal__content">
-                        <div class="eael-login__setup">
-                            <span class="login__setup__header">
-                                <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/google.svg' ); ?>"
-                                     alt="">
-                                Google Login
-                            </span>
-                            <div class="eael-input__inline">
-                                <label>Google Client ID:</label>
-                                <input name="lr_g_client_id" id="lr_g_client_id" value="<?php echo esc_attr( get_option( 'eael_g_client_id' ) ); ?>"
-                                       class="eael-form__control" type="text" placeholder="Google Client ID">
+                    <?php if($this->pro_enabled): ?>
+                        <div class="border__line"><span></span></div>
+                        <div class="modal__content">
+                            <div class="eael-login__setup">
+                                <span class="login__setup__header">
+                                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/google.svg' ); ?>"
+                                         alt="">
+                                    Google Login
+                                </span>
+                                <div class="eael-input__inline">
+                                    <label>Google Client ID:</label>
+                                    <input name="lr_g_client_id" id="lr_g_client_id" value="<?php echo esc_attr( get_option( 'eael_g_client_id' ) ); ?>"
+                                           class="eael-form__control" type="text" placeholder="Google Client ID">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="border__line"><span></span></div>
-                    <div class="modal__content">
-                        <div class="eael-login__setup">
-                            <span class="login__setup__header">
-                                <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/facebook.svg' ); ?>"
-                                     alt="">
-                                facebook Login
-                            </span>
-                            <div class="eael-input__inline mb15">
-                                <label>Facebook App ID:</label>
-                                <input name="lr_fb_app_id" id="lr_fb_app_id" value="<?php echo esc_attr( get_option( 'eael_fb_app_id' ) ); ?>"
-                                       class="eael-form__control" type="text" placeholder="Facebook App ID:">
-                            </div>
-                            <div class="eael-input__inline">
-                                <label>Facebook App Secret:</label>
-                                <input name="lr_fb_app_secret" id="lr_fb_app_secret" value="<?php echo esc_attr( get_option( 'eael_fb_app_secret' ) ); ?>"
-                                       class="eael-form__control" type="text" placeholder="Facebook App Secret:">
+                        <div class="border__line"><span></span></div>
+
+                        <div class="modal__content">
+                            <div class="eael-login__setup">
+                                <span class="login__setup__header">
+                                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/facebook.svg' ); ?>"
+                                         alt="">
+                                    facebook Login
+                                </span>
+                                <div class="eael-input__inline mb15">
+                                    <label>Facebook App ID:</label>
+                                    <input name="lr_fb_app_id" id="lr_fb_app_id" value="<?php echo esc_attr( get_option( 'eael_fb_app_id' ) ); ?>"
+                                           class="eael-form__control" type="text" placeholder="Facebook App ID:">
+                                </div>
+                                <div class="eael-input__inline">
+                                    <label>Facebook App Secret:</label>
+                                    <input name="lr_fb_app_secret" id="lr_fb_app_secret" value="<?php echo esc_attr( get_option( 'eael_fb_app_secret' ) ); ?>"
+                                           class="eael-form__control" type="text" placeholder="Facebook App Secret:">
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endif; ?>
+
                     <div class="border__line"><span></span></div>
                     <div class="modal__content">
                         <div class="eael__flex align__center justify__center">
