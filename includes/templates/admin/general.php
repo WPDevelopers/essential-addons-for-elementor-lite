@@ -38,7 +38,7 @@
                                 <p>Thank you for choosing Essential Addons for Elementor. Get ready to enhance your
                                     Elementor site building experience by using 40+ Essential Addons elements for
                                     FREE.</p>
-                                <a href="#" class="eael-button button__secondary hover__shadow">YouTube Tutorial</a>
+                                <a href="#" class="eael-button button__secondary hover__shadow">YouTube Tutorials</a>
                             </div>
                         </div>
                         <div class="eael-col-md-6">

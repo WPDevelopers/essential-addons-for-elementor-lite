@@ -92,7 +92,7 @@ $extensions = [
             <span class="switch__status disable">Disable All</span>
         </div>
         <div class="global__control__button">
-            <a href="#" class="eael-button">Save Setting</a>
+            <button class="eael-button js-eael-settings-save">Save Settings</button>
         </div>
     </div>
 
@@ -131,7 +131,7 @@ $extensions = [
                                 </a>
                                 <label class="eael-switch">
 									<?php
-									$disabled = !empty( $item[ 'is_pro' ] ) ? 'disabled' : '';
+									$disabled = !empty( $item[ 'is_pro' ] ) && !$this->pro_enabled ? 'disabled' : '';
 									$status = isset($item['is_pro']) && !$this->pro_enabled ? 'disabled' : checked( 1, $this->get_settings($item['key']), false );
 									printf( '<input class="eael-widget-item" id="%1$s" name="%1$s"
                                            type="checkbox" %2$s>', $item[ 'key' ], $status );

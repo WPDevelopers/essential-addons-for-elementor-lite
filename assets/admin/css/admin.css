@@ -3675,8 +3675,7 @@ button.button__greyBg:hover:disabled {
 }
 
 .eael-element__wrap .eael-element__item .isPro span {
-    font-size: 14px;
-    font-weight: 500;
+    font-weight: 700;
     color: #ffffff;
     background: #5E2EFF;
     text-transform: uppercase;
@@ -4687,4 +4686,21 @@ button.button__greyBg:hover:disabled {
     to {
         transform: rotate(360deg);
     }
+}
+
+.eael-post-duplicator-box {
+    width: 100%;
+    border: 1px solid black;
+    height: 40px;
+    font-size: 20px;
+    padding-left: 10px;
+}
+.eael-select-box .eael-post-duplicator-box:focus {
+    box-shadow: none;
+    border-color: inherit;
+    color: inherit;
+}
+
+.eael-extra-bt-size {
+    padding: 15px 40px;
 }
