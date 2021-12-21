@@ -200,6 +200,13 @@ $elements = [
                 'demo_link' => 'https://essential-addons.com/elementor/filterable-gallery/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/dynamic-filterable-gallery/',
                 'is_pro' => true
+            ],
+            [
+	            'key'   => 'advanced-search',
+	            'title' => __( 'Advanced Search', 'essential-addons-elementor' ),
+	            'demo_link' => 'https://essential-addons.com/elementor/advanced-search/',
+	            'doc_link' => 'https://essential-addons.com/elementor/docs/advanced-search/',
+	            'is_pro' => true
             ]
         ]
     ],
