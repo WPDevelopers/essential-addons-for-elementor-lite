@@ -1234,7 +1234,7 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_control(
 			'eael_woo_cart_table_style_thead_color',
 			[
-				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table thead th,
@@ -1488,7 +1488,7 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_control(
 			'ea_woo_cart_totals_label_color',
 			[
-				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr th' => 'color: {{VALUE}};',
@@ -1779,7 +1779,7 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_control(
 			'ea_woo_cart_coupon_btn_color',
 			[
-				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+				'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button' => 'color: {{VALUE}};',
@@ -1817,7 +1817,7 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_control(
 			'ea_woo_cart_coupon_btn_color_hover',
 			[
-				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+				'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button:hover' => 'color: {{VALUE}};',
@@ -2029,7 +2029,7 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_control(
 			'ea_woo_cart_btn_color',
 			[
-				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+				'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals button, 
@@ -2070,7 +2070,7 @@ class Woo_Cart extends Widget_Base {
 		$obj->add_control(
 			'ea_woo_cart_btn_color_hover',
 			[
-				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+				'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals button:hover, 
