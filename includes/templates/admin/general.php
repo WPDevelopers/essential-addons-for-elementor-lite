@@ -59,7 +59,7 @@
 
 			<?php } ?>
             <div class="eael-block px45 py25">
-                <div class="eael-basic__card eael__flex align__center justify__between">
+                <div class="eael-basic__card align__center justify__between eael__flex justify__between">
                     <div class="eael__flex align__center">
                         <div class="mr20 fs-0 thumb">
                             <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/ea.svg' ) ?>"
