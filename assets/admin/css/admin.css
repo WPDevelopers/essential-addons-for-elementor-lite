@@ -1214,13 +1214,6 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    margin-bottom: 30px;
-}
-
-@media (max-width: 1400.98px) {
-    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.finalize .eael-quick-setup-intro {
-        margin-bottom: 35px;
-    }
 }
 
 .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.finalize .eael-quick-setup-intro .eael-quick-setup-title {
@@ -1234,47 +1227,6 @@
 @media (max-width: 1400.98px) {
     .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.finalize .eael-quick-setup-intro .eael-quick-setup-title {
         font-size: 22px;
-    }
-}
-
-.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.finalize .eael-quick-setup-message-wrapper {
-    max-width: 1000px;
-    height: 200px;
-    border-radius: 10px;
-    background: #f9fafc;
-    border: 1px solid #e9edf5;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 25px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-@media (max-width: 1400.98px) {
-    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.finalize .eael-quick-setup-message-wrapper {
-        padding: 20px;
-    }
-}
-
-.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.finalize .eael-quick-setup-message-wrapper .eael-quick-setup-message {
-    font-size: 17px;
-    color: #727272;
-    line-height: 2;
-    border: 20px solid transparent;
-    border-right: 0;
-    padding-right: 20px;
-    height: 100%;
-    overflow-y: auto;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    text-align:justify;
-}
-
-@media (max-width: 1400.98px) {
-    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.finalize .eael-quick-setup-message-wrapper .eael-quick-setup-message {
-        border-width: 15px;
-        font-size: 16px;
-        line-height: 1.9;
     }
 }
 
@@ -1435,7 +1387,7 @@
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    padding: 20px;
+    padding: 100px 20px 50px;
     position: fixed;
     left: 0;
     right: 0;
@@ -1443,6 +1395,14 @@
     bottom: 0;
     z-index: 9;
     background: #b3b7bc;
+    padding-left: 180px;
+    overflow: auto;
+}
+
+@media (max-width: 959.98px) {
+    .eael-quick-setup-modal {
+        padding-left: 50px;
+    }
 }
 
 .eael-quick-setup-modal .eael-quick-setup-modal-content {
@@ -1458,25 +1418,25 @@
     box-shadow: 0px 40px 60px rgba(51, 62, 119, 0.12);
     border-radius: 5px;
     width: 100%;
-    max-width: 1020px;
+    max-width: 900px;
     height: auto;
     margin: auto;
 }
 
 @media (max-width: 1400.98px) {
     .eael-quick-setup-modal .eael-quick-setup-modal-content {
-        max-width: 800px;
+        max-width: 700px;
     }
 }
 
 @media (max-width: 1199.98px) {
     .eael-quick-setup-modal .eael-quick-setup-modal-content {
-        max-width: 700px;
+        max-width: 600px;
     }
 }
 
 .eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-header {
-    padding: 30px 30px 0;
+    padding: 30px;
 }
 
 @media (max-width: 1199.98px) {
@@ -1523,13 +1483,13 @@
 .eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-body .eael-quick-setup-message-wrapper {
     width: 100%;
     max-width: 850px;
-    height: 150px;
+    height: auto!important;
     border-radius: 10px;
     background: #f9fafc;
     border: 1px solid #e9edf5;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 15px;
+    padding: 10px 15px!important;
     margin-left: auto;
     margin-right: auto;
 }
@@ -1537,7 +1497,7 @@
 @media (max-width: 1400.98px) {
     .eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-body .eael-quick-setup-message-wrapper {
         max-width: 700px;
-        padding: 10px;
+        padding: 5px 10px!important;
     }
 }
 
@@ -1545,18 +1505,16 @@
     font-size: 17px;
     color: #727272;
     line-height: 2;
-    border: 20px solid transparent;
-    border-right: 0;
-    padding-right: 20px;
+    border: 0!important;
     height: 100%;
-    overflow-y: auto;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    padding: 0!important;
+    padding: 0!important;
 }
 
 @media (max-width: 1400.98px) {
     .eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-body .eael-quick-setup-message-wrapper .eael-quick-setup-message {
-        border-width: 15px;
         font-size: 16px;
         line-height: 1.9;
     }
