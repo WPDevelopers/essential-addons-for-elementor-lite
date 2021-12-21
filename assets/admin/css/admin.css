@@ -4768,10 +4768,12 @@ button.button__greyBg:hover:disabled {
 @media all and (max-width: 1440px) {
     .template__block h2 {
         line-height: 1.5;
+        font-size: var(--h6-fontsize);
     }
     .template__block p {
         line-height: 1.6;
         margin-bottom: 20px;
+        font-size: 14px;
     }
 }
 
