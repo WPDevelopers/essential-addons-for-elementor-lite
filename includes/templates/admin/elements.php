@@ -124,6 +124,13 @@ $elements = [
 				'demo_link' => 'https://essential-addons.com/elementor/simple-menu/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/simple-menu/',
 			],
+			[
+				'key'   => 'advanced-search',
+				'title' => __( 'Advanced Search', 'essential-addons-elementor' ),
+				'demo_link' => 'https://essential-addons.com/elementor/advanced-search/',
+				'doc_link' => 'https://essential-addons.com/elementor/docs/advanced-search/',
+				'is_pro' => true
+			],
 		]
 	],
 	'dynamic-content-elements' => [
