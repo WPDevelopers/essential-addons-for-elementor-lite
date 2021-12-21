@@ -70,7 +70,7 @@ class Woo_Product_Compare extends Widget_Base {
 	 * @inheritDoc
 	 */
 	public function get_categories() {
-		return [ 'essential-addons-for-elementor-lite' ];
+		return [ 'essential-addons-elementor' ];
 	}
 
 	/**
