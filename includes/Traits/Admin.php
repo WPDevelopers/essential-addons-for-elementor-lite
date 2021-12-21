@@ -80,6 +80,7 @@ trait Admin {
                 'ajaxurl' => admin_url( 'admin-ajax.php' ),
                 'nonce'   => wp_create_nonce( 'essential-addons-elementor' ),
                 'i18n'    => $i18n,
+                'settings_save' => EAEL_PLUGIN_URL . 'assets/admin/images/settings-save.gif',
             ) );
         }
     }
