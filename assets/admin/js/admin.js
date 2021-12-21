@@ -329,134 +329,6 @@
 		}
 	} );
 	
-	$( document ).on( 'click', '.eael-setup-wizard-save', function ( e ) {
-		var $this = $( this );
-		$this.attr( 'disabled', 'disabled' );
-		$.ajax( {
-			        url: localize.ajaxurl,
-			        type: "POST",
-			        data: {
-				        action: "save_setup_wizard_data",
-				        security: localize.nonce,
-				        fields: $( "form.eael-setup-wizard-form" ).serialize()
-			        },
-			
-			        success: function ( response ) {
-				        if ( response.success ) {
-					        Swal.fire( {
-						                   timer: 3000,
-						                   showConfirmButton: false,
-						                   imageUrl: localize.success_image,
-					                   } ).then( ( result ) => {
-						        window.location = response.data.redirect_url;
-					        } );
-				        } else {
-					        $this.attr( 'disabled', 'disabled' );
-					        Swal.fire( {
-						                   type: "error",
-						                   title: 'Error',
-						                   text: 'error',
-					                   } );
-				        }
-			        },
-			        error: function ( err ) {
-				        $this.attr( 'disabled', 'disabled' );
-				        Swal.fire( {
-					                   type: "error",
-					                   title: 'Error',
-					                   text: 'error',
-				                   } );
-			        },
-		        } );
-	} );
-	
-	$( document ).on( 'change', '.eael_preferences', function ( e ) {
-		var $this       = $( this ),
-		    preferences = $this.val();
-		
-		var elements = $( ".eael-quick-setup-post-grid .eael-quick-setup-toggler input[type=checkbox]" );
-		if ( elements.length > 0 ) {
-			if ( preferences == 'custom' ) {
-				elements.prop( 'checked', true )
-			} else {
-				elements.prop( 'checked', false )
-				elements.each( function ( i, item ) {
-					if ( preferences == 'advance' && $( item ).data( 'preferences' ) != '' ) {
-						$( item ).prop( 'checked', true )
-					} else if ( $( item ).data( 'preferences' ) == preferences ) {
-						$( item ).prop( 'checked', true )
-					}
-				} )
-			}
-		}
-	} );
-	
-	eaelRenderTab();
-	
-	function eaelRenderTab( step = 0 ) {
-		
-		var contents    = document.getElementsByClassName( "setup-content" ),
-		    prev        = document.getElementById( "eael-prev" ),
-		    nextElement = document.getElementById( "eael-next" ),
-		    saveElement = document.getElementById( "eael-save" );
-		
-		if ( contents.length < 1 ) {
-			return;
-		}
-		
-		contents[step].style.display = "block";
-		prev.style.display           = ( step == 0 ) ? "none" : "inline";
-		if ( step == ( contents.length - 1 ) ) {
-			saveElement.style.display = "inline";
-			nextElement.style.display = "none";
-		} else {
-			nextElement.style.display = "inline";
-			saveElement.style.display = "none";
-		}
-		eaelStepIndicator( step )
-	}
-	
-	function eaelStepIndicator( stepNumber ) {
-		var steps     = document.getElementsByClassName( "eael-quick-setup-step" ),
-		    container = document.getElementsByClassName( "eael-quick-setup-wizard" );
-		container[0].setAttribute( 'data-step', stepNumber );
-		
-		for ( var i = 0; i < steps.length; i++ ) {
-			steps[i].className = steps[i].className.replace( " active", "" );
-		}
-		
-		steps[stepNumber].className += " active";
-	}
-	
-	$( document ).on( 'click', '#eael-next,#eael-prev', function ( e ) {
-		var container  = document.getElementsByClassName( "eael-quick-setup-wizard" ),
-		    StepNumber = parseInt( container[0].getAttribute( 'data-step' ) ),
-		    contents   = document.getElementsByClassName( "setup-content" );
-		
-		contents[StepNumber].style.display = "none";
-		StepNumber                         = ( e.target.id == 'eael-prev' ) ? StepNumber - 1 : StepNumber + 1;
-		if ( e.target.id == 'eael-next' && StepNumber == 2 ) {
-			$.ajax( {
-				        url: localize.ajaxurl,
-				        type: "POST",
-				        data: {
-					        action: "save_eael_elements_data",
-					        security: localize.nonce,
-					        fields: $( "form.eael-setup-wizard-form" ).serialize()
-				        }
-			        } );
-		}
-		if ( StepNumber >= contents.length ) {
-			return false;
-		}
-		eaelRenderTab( StepNumber );
-	} );
-	
-	$( '.btn-collect' ).on( 'click', function () {
-		$( ".eael-whatwecollecttext" ).toggle();
-	} );
-	
-	
 	$( document ).on( 'eael_after_active_plugin', function ( event, obj ) {
 		if ( obj.plugin == 'templately/templately.php' || obj.plugin == 'templately' ) {
 			if ( $( ".eael-settings-tabs" ).length > 0 ) {
@@ -489,5 +361,147 @@
 			}
 		}
 	} );
+	
+	// Quick Setup
+	
+	eaelRenderTab();
+	
+	/**
+	 * eaelRenderTab
+	 * @param step
+	 */
+	function eaelRenderTab(step = 0) {
+		
+		var contents = document.getElementsByClassName("setup-content"),
+		    prev = document.getElementById("eael-prev"),
+		    nextElement = document.getElementById("eael-next"),
+		    saveElement = document.getElementById("eael-save");
+		
+		if (contents.length < 1) {
+			return;
+		}
+		
+		contents[step].style.display = "block";
+		prev.style.display = (step == 0) ? "none" : "inline";
+		if (step == (contents.length - 1)) {
+			saveElement.style.display = "inline";
+			nextElement.style.display = "none";
+		} else {
+			nextElement.style.display = "inline";
+			saveElement.style.display = "none";
+		}
+		eaelStepIndicator(step)
+	}
+	
+	/**
+	 * eaelStepIndicator
+	 * @param stepNumber
+	 */
+	function eaelStepIndicator(stepNumber) {
+		var steps = document.getElementsByClassName("eael-quick-setup-step"),
+		    container = document.getElementsByClassName("eael-quick-setup-wizard");
+		container[0].setAttribute('data-step', stepNumber);
+		
+		for (var i = 0; i < steps.length; i++) {
+			steps[i].className = steps[i].className.replace(" active", "");
+		}
+		
+		steps[stepNumber].className += " active";
+	}
+	
+	$(document).on('click', '#eael-next,#eael-prev', function (e) {
+		var container = document.getElementsByClassName("eael-quick-setup-wizard"),
+		    StepNumber = parseInt(container[0].getAttribute('data-step')),
+		    contents = document.getElementsByClassName("setup-content");
+		
+		contents[StepNumber].style.display = "none";
+		StepNumber = (e.target.id == 'eael-prev') ? StepNumber - 1 : StepNumber + 1;
+		if (e.target.id == 'eael-next' && StepNumber == 2) {
+			$.ajax({
+				       url: localize.ajaxurl,
+				       type: "POST",
+				       data: {
+					       action: "save_eael_elements_data",
+					       security: localize.nonce,
+					       fields: $("form.eael-setup-wizard-form").serialize()
+				       }
+			       });
+		}
+		if (StepNumber >= contents.length) {
+			return false;
+		}
+		eaelRenderTab(StepNumber);
+	});
+	
+	$('.btn-collect').on('click', function () {
+		$(".eael-whatwecollecttext").toggle();
+	});
+	
+	$(document).on('change', '.eael_preferences', function (e) {
+		var $this = $(this),
+		    preferences = $this.val();
+		
+		var elements = $(".eael-quick-setup-post-grid .eael-quick-setup-toggler input[type=checkbox]");
+		if (elements.length > 0) {
+			if (preferences == 'custom') {
+				elements.prop('checked', true)
+			} else {
+				elements.prop('checked', false)
+				elements.each(function (i, item) {
+					if (preferences == 'advance' && $(item).data('preferences') != '') {
+						$(item).prop('checked', true)
+					} else if ($(item).data('preferences') == preferences) {
+						$(item).prop('checked', true)
+					}
+				})
+			}
+		}
+	});
+	
+	$(document).on('click', '.eael-setup-wizard-save', function (e) {
+		var $this = $(this);
+		$(".eael-setup-wizard-save").attr('disabled', 'disabled');
+		
+		if ( $this.attr( 'id' ) && $this.attr( 'id' ) == 'eael-count-me-bt' ) {
+			$( "#eael_user_email_address" ).val( 1 );
+		}
+		
+		$.ajax({
+			       url: localize.ajaxurl,
+			       type: "POST",
+			       data: {
+				       action: "save_setup_wizard_data",
+				       security: localize.nonce,
+				       fields: $("form.eael-setup-wizard-form").serialize()
+			       },
+			
+			       success: function (response) {
+				       if (response.success) {
+					       Swal.fire({
+						                 timer: 3000,
+						                 showConfirmButton: false,
+						                 imageUrl: localize.success_image,
+					                 }).then((result) => {
+						       window.location = response.data.redirect_url;
+					       });
+				       } else {
+					       $this.attr('disabled', 'disabled');
+					       Swal.fire({
+						                 type: "error",
+						                 title: 'Error',
+						                 text: 'error',
+					                 });
+				       }
+			       },
+			       error: function (err) {
+				       $this.attr('disabled', 'disabled');
+				       Swal.fire({
+					                 type: "error",
+					                 title: 'Error',
+					                 text: 'error',
+				                 });
+			       },
+		       });
+	});
 	
 } )( jQuery );
