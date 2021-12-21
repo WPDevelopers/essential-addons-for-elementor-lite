@@ -20,7 +20,7 @@ class BetterPayment extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eaicon-creative-button';
+		return 'eaicon-better-payment';
 	}
 
    	public function get_categories() {
