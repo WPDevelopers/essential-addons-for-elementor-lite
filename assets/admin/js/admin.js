@@ -15,7 +15,7 @@
 	totalElements();
 	
 	function totalElements() {
-		var totalElements  = parseInt( $( '.eael-widget-item' ).length ),
+		var totalElements  = parseInt( $( '.eael-widget-item:enabled' ).length ),
 		    activeElements = parseInt( $( '.eael-widget-item:checked' ).length ),
 		    unusedElements = totalElements - activeElements;
 		
