@@ -49,7 +49,7 @@
                                          alt="">
                                 </div>
                                 <a target="_blank" href="https://youtu.be/uuyXfUDqRZM" class="play__btn">
-                                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/play-btn.svg' ) ?>"
+                                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/play-btn.png' ); ?>"
                                          alt="">
                                 </a>
                             </div>
@@ -95,30 +95,21 @@
             <a target="_blank" href="https://essential-addons.com/elementor/docs/"
                class="eael-info__box eael-block px30 py25">
                 <h6><i class="ea-admin-icon icon-edit"></i> View Knowledgebase</h6>
-                <p>Get started by spending some time with the documentation to get familiar with Essential Addons. Build
-                    awesome websites for you or your clients with ease.</p>
+                <p>Get started by spending some time with the documentation to get familiar with Essential Addons.</p>
             </a>
             <a target="_blank" href="https://wpdeveloper.com/review-essential-addons-elementor"
                class="eael-info__box eael-block px30 py25">
                 <h6><i class="ea-admin-icon icon-star"></i> Show Your Love</h6>
-                <p>We love to have you in Essential Addons family. We are making it more awesome everyday. Take your 2
-                    minutes to review the plugin and spread the love to encourage us to keep it going.</p>
+                <p>Take your 2 minutes to review the plugin and spread the love to encourage us to keep it going.</p>
             </a>
             <a target="_blank" href="https://wpdeveloper.com/support" class="eael-info__box eael-block px30 py25">
                 <h6><i class="ea-admin-icon icon-support"></i> Need Help?</h6>
                 <p>Stuck with something? Get help from live chat or submit a support ticket.</p>
             </a>
-            <a target="_blank" href="https://github.com/WPDevelopers/essential-addons-for-elementor-lite/issues/new"
-               class="eael-info__box eael-block px30 py25">
-                <h6><i class="ea-admin-icon icon-contribute"></i> Contribute to Essential Addons</h6>
-                <p>You can contribute to make Essential Addons better reporting bugs, creating issues, pull requests at
-                    GitHub.</p>
-            </a>
             <a target="_blank" href="https://www.facebook.com/groups/essentialaddons"
                class="eael-info__box eael-block px30 py25">
                 <h6><i class="ea-admin-icon icon-community"></i> Join the Community</h6>
-                <p>Join the CommunityJoin the Facebook community and discuss with fellow developers and users. Best way
-                    to connect with people and get feedback on your projects.</p>
+                <p>Join the Facebook community and discuss with fellow developers & users.</p>
             </a>
         </div>
     </div>
