@@ -14,7 +14,7 @@
                 <div class="eael-block eael-demo__card">
                     <div class="thumb">
                         <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/demo-1.png' ); ?>" alt="">
-                        <a href="https://youtu.be/UCUX3YlCYik" class="play-btn">
+                        <a target="_blank" href="https://youtu.be/UCUX3YlCYik" class="play-btn">
                             <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/play-btn.png' ); ?>"
                                  alt="">
                         </a>
@@ -22,7 +22,7 @@
                     <div class="content">
                         <h3>Protected Content</h3>
                         <p>Restrict important data by setting up user permission or giving passwords to certain area</p>
-                        <a href="https://essential-addons.com/elementor/protected-content/" class="demo-button">View
+                        <a target="_blank" href="https://essential-addons.com/elementor/protected-content/" class="demo-button">View
                             Demo</a>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                 <div class="eael-block eael-demo__card">
                     <div class="thumb">
                         <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/demo-2.png' ); ?>" alt="">
-                        <a href="https://youtu.be/WjyqdUcLXtU" class="play-btn">
+                        <a target="_blank" href="https://youtu.be/WjyqdUcLXtU" class="play-btn">
                             <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/play-btn.png' ); ?>"
                                  alt="">
                         </a>
@@ -39,7 +39,7 @@
                     <div class="content">
                         <h3>Smart Post List</h3>
                         <p>Display your blog posts in an amazing grid layout with advanced search & filter options.</p>
-                        <a href="https://essential-addons.com/elementor/post-list/" class="demo-button">View Demo</a>
+                        <a target="_blank" href="https://essential-addons.com/elementor/post-list/" class="demo-button">View Demo</a>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                 <div class="eael-block eael-demo__card">
                     <div class="thumb">
                         <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/demo-3.png' ); ?>" alt="">
-                        <a href="https://youtu.be/l5vfdBGb7pc" class="play-btn">
+                        <a target="_blank" href="https://youtu.be/l5vfdBGb7pc" class="play-btn">
                             <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/play-btn.png' ); ?>"
                                  alt="">
                         </a>
@@ -55,7 +55,7 @@
                     <div class="content">
                         <h3>Woo Product Slider</h3>
                         <p>Showcase your WooCommerce products beautifully with amazing ready slider layouts.</p>
-                        <a href="https://essential-addons.com/elementor/woo-product-slider/" class="demo-button">View
+                        <a target="_blank" href="https://essential-addons.com/elementor/woo-product-slider/" class="demo-button">View
                             Demo</a>
                     </div>
                 </div>
@@ -158,7 +158,7 @@
             </div>
         </div>
         <div class="eael__flex justify__center">
-            <a href="https://wpdeveloper.com/plugins/essential-addons-elementor/#pricing"
+            <a target="_blank" href="https://wpdeveloper.com/plugins/essential-addons-elementor/#pricing"
                class="eael-button button__themeColor eael-extra-bt-size">Upgrade to PRO</a>
         </div>
     </div>

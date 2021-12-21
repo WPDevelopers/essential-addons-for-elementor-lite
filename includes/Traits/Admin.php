@@ -81,6 +81,7 @@ trait Admin {
                 'nonce'   => wp_create_nonce( 'essential-addons-elementor' ),
                 'i18n'    => $i18n,
                 'settings_save' => EAEL_PLUGIN_URL . 'assets/admin/images/settings-save.gif',
+                'assets_regenerated' => EAEL_PLUGIN_URL . 'assets/admin/images/assets-regenerated.gif',
             ) );
         }
     }

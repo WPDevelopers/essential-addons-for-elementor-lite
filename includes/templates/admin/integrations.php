@@ -62,7 +62,7 @@ $integrations = [
                                data-slug="<?php echo $plugin[ 'slug' ]; ?>"><?php _e( 'Install', 'essential-addons-for-elementor-lite' ); ?></a>
 						<?php } else { ?>
 							<?php if ( is_plugin_active( $plugin[ 'basename' ] ) ) { ?>
-                                <a class="eael-button button__white hover__shadow wpdeveloper-plugin-installer"><?php _e( 'Activated', 'essential-addons-for-elementor-lite' ); ?></a>
+                                <a class="eael-button button__themeColor hover__shadow wpdeveloper-plugin-installer"><?php _e( 'Activated', 'essential-addons-for-elementor-lite' ); ?></a>
 							<?php } else { ?>
                                 <a class="eael-button button__white hover__shadow wpdeveloper-plugin-installer"
                                    data-action="activate"

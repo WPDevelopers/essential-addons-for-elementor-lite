@@ -43,7 +43,7 @@
                         </div>
                         <h3><?php _e( 'Mailchimp API Key', 'essential-addons-for-elementor-lite' ); ?></h3>
                         <div class="modal__api__form">
-                            <input name="mailchimp-api" id="mailchimp-api" type="password" class="eael-form__control"
+                            <input name="mailchimp-api" id="mailchimp-api" type="text" class="eael-form__control"
                                    value="<?php echo get_option( 'eael_save_mailchimp_api' ); ?>"
                                    placeholder="Set API key">
                             <button class="eael-button button__themeColor eael-save-trigger eael-admin-popup-close"><i

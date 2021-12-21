@@ -18,9 +18,6 @@
                     <div class="eael-tool__card">
                         <div class="content">
                             <a href="#" id="eael-regenerate-files" class="eael-button button__themeColor mb20">Regenerate Assets</a>
-                            <p>CSS Print Method is handled by Elementor Settings itself. Use External CSS Files for
-                                better
-                                performance (recommended).</p>
                         </div>
                     </div>
                 </div>
@@ -46,7 +43,7 @@
                             <a href="<?php echo esc_url(admin_url('admin.php?page=elementor#tab-advanced')); ?>" target="_blank" class="eael-button button__themeColor mb20">CSS Print Method</a>
                             <p>CSS Print Method is handled by Elementor Settings itself. Use External CSS Files for
                                 better
-                                performance (recommended).</p>
+                                performance (Recommended).</p>
                         </div>
 	                    <?php
 	                    $print_method = get_option('eael_js_print_method','external');
@@ -61,9 +58,8 @@
                                     </select>
                                 </div>
                             </div>
-                            <p>CSS Print Method is handled by Elementor Settings itself. Use External CSS Files for
-                                better
-                                performance (recommended).</p>
+                            <p style="display: <?php echo ($print_method==='external')?'block':'none'; ?>" class="quick-tools-description eael-external-printjs"><?php _e('Use external JS files for all generated scripts. Choose this setting for better performance (Recommended).', 'essential-addons-for-elementor-lite');?></p>
+                            <p style="display: <?php echo ($print_method==='internal')?'block':'none'; ?>" class="quick-tools-description eael-internal-printjs"><?php _e('Use internal JS that is embedded in the head of the page. For troubleshooting server configuration conflicts and managing development environments.', 'essential-addons-for-elementor-lite');?></p>
                         </div>
                     </div>
                 </div>
