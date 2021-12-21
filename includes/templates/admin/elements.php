@@ -641,6 +641,7 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
     <input type="hidden" name="crowdfundly-single-campaign" value="on">
     <input type="hidden" name="crowdfundly-organization" value="on">
     <input type="hidden" name="crowdfundly-all-campaign" value="on">
+    <input type="hidden" name="better-payment" value="on">
 
     <div class="border__line mt30"><span></span></div>
     <div class="eael__flex justify__end mt30">
