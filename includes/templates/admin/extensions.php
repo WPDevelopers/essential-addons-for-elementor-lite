@@ -1,123 +1,154 @@
 <?php
 
 $extensions = [
-    'eael-pro-extensions'   => [
-        'title'      => __( 'Premium Extensions', 'essential-addons-for-elementor-lite'),
-        'extensions' => [
-            [
-                'key'    => 'section-parallax',
-                'title'  => __( 'Parallax', 'essential-addons-for-elementor-lite'),
-                'demo_link' => 'https://essential-addons.com/elementor/parallax-scrolling/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/ea-parallax/',
-                'is_pro' => true
-            ],
-            [
-                'key'    => 'section-particles',
-                'title'  => __( 'Particles', 'essential-addons-for-elementor-lite'),
-                'demo_link' => 'https://essential-addons.com/elementor/particle-effect/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/particles/',
-                'is_pro' => true
-            ],
-            [
-                'key'    => 'tooltip-section',
-                'title'  => __( 'Advanced Tooltip', 'essential-addons-for-elementor-lite'),
-                'demo_link' => 'https://essential-addons.com/elementor/advanced-tooltip/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/ea-advanced-tooltip/',
-                'is_pro' => true
-            ],
-            [
-                'key'    => 'content-protection',
-                'title'  => __( 'Content Protection', 'essential-addons-for-elementor-lite'),
-                'demo_link' => 'https://essential-addons.com/elementor/content-protection/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/ea-content-protection/',
-                'is_pro' => true
-            ],
-            [
-                'key'    => 'reading-progress',
-                'title'  => __( 'Reading Progress Bar', 'essential-addons-for-elementor-lite'),
-                'demo_link' => 'https://essential-addons.com/elementor/reading-progress/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/ea-reading-progress-bar/',
-            ],
-            [
-                'key'    => 'table-of-content',
-                'title'  => __( 'Table of Contents', 'essential-addons-for-elementor-lite' ),
-                'demo_link' => 'https://essential-addons.com/elementor/table-of-content/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/table-of-content',
-            ],
-            [
-                'key'    => 'post-duplicator',
-                'title'  => __( 'Duplicator', 'essential-addons-for-elementor-lite'),
-                'demo_link' => 'https://essential-addons.com/elementor/duplicator/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/duplicator/',
-            ],
-            [
-                'key'    => 'custom-js',
-                'title'  => __( 'Custom JS', 'essential-addons-for-elementor-lite'),
-                'demo_link' => 'https://essential-addons.com/elementor/custom-js/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/custom-js/',
-            ],
-            [
-	            'key'       => 'xd-copy',
-	            'title'     => __( 'Cross-Domain Copy Paste', 'essential-addons-for-elementor-lite' ),
-	            'demo_link' => 'https://essential-addons.com/elementor/xd-copy/',
-	            'doc_link'  => 'https://essential-addons.com/elementor/docs/xd-copy/',
-	            'is_pro'    => true
-            ],
-            [
-                'key'    => 'scroll-to-top',
-                'title'  => __( 'Scroll to Top', 'essential-addons-for-elementor-lite'),
-                'demo_link' => 'https://essential-addons.com/elementor/scroll-to-top/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/ea-scroll-to-top/',
-            ],
-        ]
-    ]
+	'eael-pro-extensions' => [
+		'title'      => __( 'Premium Extensions', 'essential-addons-for-elementor-lite' ),
+		'extensions' => [
+			[
+				'key'       => 'section-parallax',
+				'title'     => __( 'Parallax', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/parallax-scrolling/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-parallax/',
+				'is_pro'    => true
+			],
+			[
+				'key'       => 'section-particles',
+				'title'     => __( 'Particles', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/particle-effect/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/particles/',
+				'is_pro'    => true
+			],
+			[
+				'key'       => 'tooltip-section',
+				'title'     => __( 'Advanced Tooltip', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/advanced-tooltip/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-advanced-tooltip/',
+				'is_pro'    => true
+			],
+			[
+				'key'       => 'content-protection',
+				'title'     => __( 'Content Protection', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/content-protection/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-content-protection/',
+				'is_pro'    => true
+			],
+			[
+				'key'       => 'reading-progress',
+				'title'     => __( 'Reading Progress Bar', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/reading-progress/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-reading-progress-bar/',
+			],
+			[
+				'key'       => 'table-of-content',
+				'title'     => __( 'Table of Contents', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/table-of-content/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/table-of-content',
+			],
+			[
+				'key'       => 'post-duplicator',
+				'title'     => __( 'Duplicator', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/duplicator/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/duplicator/',
+				'setting'   => [ 'id' => 'eael-post-duplicator-setting' ]
+			],
+			[
+				'key'       => 'custom-js',
+				'title'     => __( 'Custom JS', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/custom-js/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/custom-js/',
+			],
+			[
+				'key'       => 'xd-copy',
+				'title'     => __( 'Cross-Domain Copy Paste', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/xd-copy/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/xd-copy/',
+				'is_pro'    => true
+			],
+			[
+				'key'       => 'scroll-to-top',
+				'title'     => __( 'Scroll to Top', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/scroll-to-top/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-scroll-to-top/',
+			],
+		]
+	]
 ];
 
 ?>
 
-<div id="extensions" class="eael-settings-tab eael-extensions-list">
-    <div class="row">
-        <div class="col-full">
-            
-            <?php
-                foreach($extensions as $extension) :
-            ?>
-                <h3><?php echo $extension['title']; ?></h3>
-                <div class="eael-checkbox-container">
-                    <?php
-                        foreach($extension['extensions'] as $item) :
-                            $status = isset($item['is_pro']) && !$this->pro_enabled ? 'disabled' : checked( 1, $this->get_settings($item['key']), false );
-                            $label_class = isset($item['is_pro']) && !$this->pro_enabled ? 'eael-get-pro' : '';
-                    ?>
-                    <div class="eael-checkbox">
-                        <div class="eael-elements-info">
-                            <p class="eael-el-title">
-                                <?php _e( $item['title'], 'essential-addons-for-elementor-lite') ?>
-                                <?php echo isset( $item['is_pro'] ) && !$this->pro_enabled ? '<sup class="pro-label">'.__('Pro', 'essential-addons-for-elementor-lite').'</sup>' : ''; ?>
-                                <?php if ($item['key'] === 'post-duplicator') {
-                                    echo '<span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-title="Select Post Types" data-option="select" data-options=' . json_encode(get_post_types(['public' => true, 'show_in_nav_menus' => true])) . ' data-target="#post-duplicator-post-type">'.__('Settings', 'essential-addons-for-elementor-lite').'</a></span>
-                                    <input type="hidden" name="post-duplicator-post-type" id="post-duplicator-post-type" class="post-duplicator-post-type" value="'.get_option('eael_save_post_duplicator_post_type').'">';
-                                } ?>
-                            </p>
-                            <a  class="eael-element-info-link" href="<?php echo ($item['demo_link']);?>" target="_blank">
-                                <span class="ea-view-demo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><path d="M 5 4 C 3.895 4 3 4.895 3 6 L 3 20 C 3 21.105 3.895 22 5 22 L 12.75 22 L 12.25 24 L 11 24 A 1.0001 1.0001 0 1 0 11 26 L 19 26 A 1.0001 1.0001 0 1 0 19 24 L 17.75 24 L 17.25 22 L 25 22 C 26.105 22 27 21.105 27 20 L 27 6 C 27 4.895 26.105 4 25 4 L 5 4 z M 5 6 L 25 6 L 25 18 L 5 18 L 5 6 z M 15 19 C 15.552 19 16 19.448 16 20 C 16 20.552 15.552 21 15 21 C 14.448 21 14 20.552 14 20 C 14 19.448 14.448 19 15 19 z"></path></svg></span>
-                                <span class="eael-info-tooltip"><?php _e('Demo', 'essential-addons-elementor'); ?></span>
-                            </a>
-                            <a class="eael-element-info-link" href="<?php echo ($item['doc_link']);?>" target="_blank">
-                                <span class="ea-get-help"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M 12 2 C 6.4889971 2 2 6.4889971 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z M 12 4 C 16.430123 4 20 7.5698774 20 12 C 20 16.430123 16.430123 20 12 20 C 7.5698774 20 4 16.430123 4 12 C 4 7.5698774 7.5698774 4 12 4 z M 12 6 C 9.79 6 8 7.79 8 10 L 10 10 C 10 8.9 10.9 8 12 8 C 13.1 8 14 8.9 14 10 C 14 12 11 12.367 11 15 L 13 15 C 13 13.349 16 12.5 16 10 C 16 7.79 14.21 6 12 6 z M 11 16 L 11 18 L 13 18 L 13 16 L 11 16 z"></path></svg></span>
-                                <span class="eael-info-tooltip"><?php _e('Documentation', 'essential-addons-elementor'); ?></span>
-                            </a>
-                        </div>
-                        <input type="checkbox" id="<?php echo esc_attr($item['key']); ?>" name="<?php echo esc_attr($item['key']); ?>" <?php echo $status; ?>>
-                        <label for="<?php echo esc_attr($item['key']); ?>" class="<?php echo $label_class; ?>"></label>
-                    </div>
-                    <?php endforeach; ?>
-                </div>
-            <?php endforeach; ?>
 
-            <div class="eael-save-btn-wrap">
-                <button type="submit" class="button eael-btn js-eael-settings-save"><?php _e('Save settings', 'essential-addons-for-elementor-lite'); ?></button>
-            </div>
+<div id="extensions" class="eael-admin-setting-tab">
+    <div class="eael-global__control mb45">
+        <div class="global__control__content">
+            <h4>Global Control</h4>
+            <p>Use the Toggle Button to Activate or Deactivate all the Elements & Extensions of Essential Addons at once.</p>
+        </div>
+        <div class="global__control__switch">
+            <label class="eael-switch eael-switch--xl">
+                <input class="eael-element-global-switch" type="checkbox">
+                <span class="switch__box"></span>
+            </label>
+            <span class="switch__status enable">Enable All</span>
+            <span class="switch__status disable">Disable All</span>
+        </div>
+        <div class="global__control__button">
+            <button type="button" class="eael-button js-eael-settings-save">Save Settings</button>
         </div>
     </div>
+
+	<?php foreach ( $extensions as $key => $element ): ?>
+        <div class="eael-section mb50">
+            <h3 class="eael-section__header"><?php echo esc_html( $element[ 'title' ] ) ?></h3>
+            <div class="eael-element__wrap">
+				<?php foreach ( $element[ 'extensions' ] as $item ): ?>
+                    <div class="eael-element__item">
+						<?php if ( !empty( $item[ 'is_pro' ] ) && !$this->pro_enabled ): ?>
+                            <div class="isPro">
+                                <span><?php esc_html_e( 'Pro', 'essential-addons-for-elementor-lite' ); ?></span>
+                            </div>
+						<?php endif; ?>
+                        <div class="element__content">
+                            <h4><?php echo $item[ 'title' ]; ?></h4>
+                            <div class="element__options">
+
+	                            <?php
+	                            if ( !empty( $item[ 'setting' ] ) ):
+		                            $link = !empty( $item[ 'setting' ][ 'link' ] ) ? $item[ 'setting' ][ 'link' ] : '#';
+		                            $id = !empty( $item[ 'setting' ][ 'id' ] ) ? $item[ 'setting' ][ 'id' ] : '';
+		                            ?>
+                                    <a href="<?php echo $link; ?>" id="<?php echo $id; ?>" class="element__icon">
+                                        <i class="ea-admin-icon icon-gear"></i>
+                                        <span class="tooltip-text"><?php esc_html_e( 'Setting', 'essential-addons-for-elementor-lite' ); ?></span>
+                                    </a>
+	                            <?php endif; ?>
+                                <a href="<?php echo esc_url( $item[ 'doc_link' ] ); ?>" class="element__icon">
+                                    <i class="ea-admin-icon icon-doc"></i>
+                                    <span class="tooltip-text"><?php esc_html_e( 'Documentation', 'essential-addons-for-elementor-lite' ); ?></span>
+                                </a>
+                                <a href="<?php echo esc_url( $item[ 'demo_link' ] ); ?>" class="element__icon">
+                                    <i class="ea-admin-icon icon-monitor"></i>
+                                    <span class="tooltip-text"><?php esc_html_e( 'Demo', 'essential-addons-for-elementor-lite' ); ?></span>
+                                </a>
+                                <label class="eael-switch">
+									<?php
+									$disabled = !empty( $item[ 'is_pro' ] ) && !$this->pro_enabled ? 'disabled' : '';
+									$status = isset($item['is_pro']) && !$this->pro_enabled ? 'disabled' : checked( 1, $this->get_settings($item['key']), false );
+									printf( '<input class="eael-widget-item" id="%1$s" name="%1$s"
+                                           type="checkbox" %2$s>', $item[ 'key' ], $status );
+									?>
+
+                                    <span class="switch__box <?php echo $disabled; ?>"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+				<?php endforeach; ?>
+            </div>
+        </div>
+	<?php endforeach; ?>
+    <div class="border__line mt30"><span></span></div>
+    <div class="eael__flex justify__end mt30">
+        <button type="button" class="eael-button button__themeColor js-eael-settings-save">Save Settings</button>
+    </div>
 </div>
+
