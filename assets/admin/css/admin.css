@@ -3531,8 +3531,8 @@ button.button__greyBg:hover:disabled {
 @media (min-width: 992px) and (max-width: 1399.98px) {
     .eael-activate__license__block .license__form__block .eael-license-form-block .eael-button,
     .eael-activate__license__block .license__form__block form button {
-        position: static;
-        margin-top: 20px;
+        /*position: static;*/
+        /*margin-top: 20px;*/
     }
 }
 
