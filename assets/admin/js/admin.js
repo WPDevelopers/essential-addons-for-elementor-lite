@@ -409,7 +409,12 @@
 
     $(document).on('click', '.eael-setup-wizard-save', function (e) {
         var $this = $(this);
-        $this.attr('disabled', 'disabled');
+        $(".eael-setup-wizard-save").attr('disabled', 'disabled');
+        
+        if ( $this.attr( 'id' ) && $this.attr( 'id' ) == 'eael-count-me-bt' ) {
+            $( "#eael_user_email_address" ).val( 1 );
+        }
+        
         $.ajax({
             url: localize.ajaxurl,
             type: "POST",

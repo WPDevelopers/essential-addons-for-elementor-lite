@@ -397,21 +397,17 @@ class WPDeveloper_Setup_Wizard {
                     information. Your site URL, WordPress & PHP version, plugins &
                     themes and email address to send you the discount coupon. This
                     data lets us make sure this plugin always stays compatible with
-                    the most popular plugins and themes. No spam, we promise', 'essential-addons-for-elementor-lite' ); ?>
+                    the most popular plugins and themes. No spam, we promise.', 'essential-addons-for-elementor-lite' ); ?>
                             </div>
                         </div>
                     </div>
                     <div class="eael-quick-setup-modal-footer">
-                        <button class="button eael-quick-setup-button">No, Thanks</button>
-                        <button
-                                class="
-              button
-              eael-quick-setup-button eael-quick-setup-filled-button
-            "
-                        >
-                            Count me in
+                        <button  class="eael-button eael-quick-setup-button eael-setup-wizard-save"><?php _e('No, Thanks','essential-addons-for-elementor-lite') ?></button>
+                        <button id="eael-count-me-bt" class="eael-setup-wizard-save eael-button eael-quick-setup-button eael-quick-setup-filled-button">
+                            <?php _e('Count me in','essential-addons-for-elementor-lite') ?>
                         </button>
                     </div>
+                    <input type="hidden" value="0" id="eael_user_email_address" name="eael_user_email_address">
                 </div>
             </div>
         </div>
@@ -511,7 +507,7 @@ class WPDeveloper_Setup_Wizard {
 
 		parse_str( $_POST[ 'fields' ], $fields );
 
-		if ( isset( $fields[ 'eael_user_email_address' ] ) ) {
+		if ( isset( $fields[ 'eael_user_email_address' ] ) && intval( $fields[ 'eael_user_email_address' ] ) == 1 ) {
 			$this->wpins_process();
 		}
 		update_option( 'eael_setup_wizard', 'complete' );
