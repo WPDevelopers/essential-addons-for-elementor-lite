@@ -564,7 +564,7 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
     <div class="eael-global__control mb45">
         <div class="global__control__content">
             <h4>Global Control</h4>
-            <p>Use the Buttons to Activate or Deactivate all the Elements & Extensions of Essential Addons at once.</p>
+            <p>Use the Toggle Button to Activate or Deactivate all the Elements & Extensions of Essential Addons at once.</p>
         </div>
         <div class="global__control__switch">
             <label class="eael-switch eael-switch--xl">

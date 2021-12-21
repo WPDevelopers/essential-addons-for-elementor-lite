@@ -158,7 +158,7 @@
             </div>
         </div>
         <div class="eael__flex justify__center">
-            <a target="_blank" href="https://wpdeveloper.com/plugins/essential-addons-elementor/#pricing"
+            <a target="_blank" href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor"
                class="eael-button button__themeColor eael-extra-bt-size">Upgrade to PRO</a>
         </div>
     </div>
