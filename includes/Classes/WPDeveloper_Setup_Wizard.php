@@ -179,7 +179,7 @@ class WPDeveloper_Setup_Wizard {
                     <input id="basic" value="basic" class="eael_preferences" name="eael_preferences" type="radio"
                            checked/>
                     <span class="eael-quick-setup-content">
-                  <h3 class="eael-quick-setup-title"><?php _e( 'Basic', 'essential-addons-for-elementor-lite' ); ?></h3>
+                  <h3 class="eael-quick-setup-title"><?php _e( 'Basic (Recommended)', 'essential-addons-for-elementor-lite' ); ?></h3>
                   <p class="eael-quick-setup-text">
                     <?php _e( 'For websites where you want to only use the basic features
                     and keep your site lightweight. Most basic elements are
@@ -191,7 +191,7 @@ class WPDeveloper_Setup_Wizard {
                     <input id="advance" value="advance" class="eael_preferences" name="eael_preferences"
                            type="radio" />
                     <span class="eael-quick-setup-content">
-                  <h3 class="eael-quick-setup-title"><?php _e( 'Advanced (Recommended)', 'essential-addons-for-elementor-lite' ); ?></h3>
+                  <h3 class="eael-quick-setup-title"><?php _e( 'Advanced', 'essential-addons-for-elementor-lite' ); ?></h3>
                   <p class="eael-quick-setup-text">
                     <?php _e( 'For advanced users who are trying to build complex websites
                     with advanced functionalities with Elementor. All the
