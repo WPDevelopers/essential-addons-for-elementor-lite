@@ -6,7 +6,7 @@
                     <p><i class="ea-admin-icon icon-edit"></i>Check out the changes & features we have added with our
                         new updates
                     </p>
-                    <a href="#" class="eael-button">View Changelog</a>
+                    <a href="https://essential-addons.com/elementor/changelog/" class="eael-button">View Changelog</a>
                 </div>
             </div>
 			<?php do_action( 'add_admin_license_markup' ); ?>
@@ -38,7 +38,7 @@
                                 <p>Thank you for choosing Essential Addons for Elementor. Get ready to enhance your
                                     Elementor site building experience by using 40+ Essential Addons elements for
                                     FREE.</p>
-                                <a href="#" class="eael-button button__secondary hover__shadow">YouTube Tutorials</a>
+                                <a href="https://www.youtube.com/playlist?list=PLWHp1xKHCfxC7JeWSg31vtVbLHGzfxDvh" class="eael-button button__secondary hover__shadow">YouTube Tutorials</a>
                             </div>
                         </div>
                         <div class="eael-col-md-6">
@@ -84,25 +84,25 @@
                     <p>Unused Elements</p>
                 </div>
             </div>
-            <a href="" class="eael-info__box eael-block px30 py25">
+            <a target="_blank" href="https://essential-addons.com/elementor/docs/" class="eael-info__box eael-block px30 py25">
                 <h6><i class="ea-admin-icon icon-edit"></i> View Knowledgebase</h6>
-                <p>Get started by spending some time with the documentation to get familiar with Essential Addons. Build
-                    awesome websites</p>
+                <p>Get started by spending some time with the documentation to get familiar with Essential Addons. Build awesome websites for you or your clients with ease.</p>
             </a>
-            <a href="" class="eael-info__box eael-block px30 py25">
-                <h6><i class="ea-admin-icon icon-play-alt"></i> YouTube Tutorials</h6>
-                <p>Get started by spending some time with the documentation to get familiar with Essential Addons. Build
-                    awesome websites</p>
+            <a target="_blank" href="https://wpdeveloper.com/review-essential-addons-elementor" class="eael-info__box eael-block px30 py25">
+                <h6><i class="ea-admin-icon icon-star"></i> Show Your Love</h6>
+                <p>We love to have you in Essential Addons family. We are making it more awesome everyday. Take your 2 minutes to review the plugin and spread the love to encourage us to keep it going.</p>
             </a>
-            <a href="" class="eael-info__box eael-block px30 py25">
-                <h6><i class="ea-admin-icon icon-star"></i> 5 Star Review</h6>
-                <p>Get started by spending some time with the documentation to get familiar with Essential Addons. Build
-                    awesome websites</p>
+            <a href="https://wpdeveloper.com/support" class="eael-info__box eael-block px30 py25">
+                <h6><i class="ea-admin-icon icon-support"></i> Need Help?</h6>
+                <p>Stuck with something? Get help from live chat or submit a support ticket.</p>
             </a>
-            <a href="" class="eael-info__box eael-block px30 py25">
-                <h6><i class="ea-admin-icon icon-support"></i> GitHub & Support section</h6>
-                <p>Get started by spending some time with the documentation to get familiar with Essential Addons. Build
-                    awesome websites</p>
+            <a target="_blank" href="https://github.com/WPDevelopers/essential-addons-for-elementor-lite/issues/new" class="eael-info__box eael-block px30 py25">
+                <h6><i class="ea-admin-icon icon-contribute"></i> Contribute to Essential Addons</h6>
+                <p>You can contribute to make Essential Addons better reporting bugs, creating issues, pull requests at GitHub.</p>
+            </a>
+            <a target="_blank" href="https://www.facebook.com/groups/essentialaddons" class="eael-info__box eael-block px30 py25">
+                <h6><i class="ea-admin-icon icon-community"></i> Join the Community</h6>
+                <p>Join the CommunityJoin the Facebook community and discuss with fellow developers and users. Best way to connect with people and get feedback on your projects.</p>
             </a>
         </div>
     </div>

@@ -145,6 +145,14 @@
 .icon-long-arrow-right:before {
     content: "\e909";
 }
+
+.icon-community:before {
+    content: "\e91e";
+}
+
+.icon-contribute:before {
+    content: "\e91f";
+}
 /* Start Setup Wizard */
 
 .eael-quick-setup-wizard-wrap {

@@ -3,9 +3,9 @@
         <div class="eael-grid">
             <div class="eael-col">
                 <div class="eael-block p30 eael-welcome__card mb30">
-                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/go-pro.svg' ); ?>" alt="">
-                    <h4>Get Access to 30+ Advanced PRO Elements to Enhance Your
-                        Elementor Site Building Experience</h4>
+                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/go-pro.svg' ); ?>"
+                         alt="">
+                    <h4>Unlock 30+ Advanced PRO Elements to Enhance Your Elementor Site Building Experience</h4>
                 </div>
             </div>
         </div>
@@ -14,14 +14,16 @@
                 <div class="eael-block eael-demo__card">
                     <div class="thumb">
                         <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/demo-1.png' ); ?>" alt="">
-                        <a href="https://essential-addons.com/elementor/protected-content/" class="play-btn">
-                            <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/play-btn.png' ); ?>" alt="">
+                        <a href="https://youtu.be/UCUX3YlCYik" class="play-btn">
+                            <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/play-btn.png' ); ?>"
+                                 alt="">
                         </a>
                     </div>
                     <div class="content">
                         <h3>Protected Content</h3>
-                        <p>Restrict important data of your website by setting up user permission or giving</p>
-                        <a href="https://essential-addons.com/elementor/protected-content/" class="demo-button">View Demo</a>
+                        <p>Restrict important data by setting up user permission or giving passwords to certain area</p>
+                        <a href="https://essential-addons.com/elementor/protected-content/" class="demo-button">View
+                            Demo</a>
                     </div>
                 </div>
             </div>
@@ -29,13 +31,14 @@
                 <div class="eael-block eael-demo__card">
                     <div class="thumb">
                         <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/demo-2.png' ); ?>" alt="">
-                        <a href="https://essential-addons.com/elementor/post-list/" class="play-btn">
-                            <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/play-btn.png' ); ?>" alt="">
+                        <a href="https://youtu.be/WjyqdUcLXtU" class="play-btn">
+                            <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/play-btn.png' ); ?>"
+                                 alt="">
                         </a>
                     </div>
                     <div class="content">
                         <h3>Smart Post List</h3>
-                        <p>Restrict important data of your website by setting up user permission or giving</p>
+                        <p>Display your blog posts in an amazing grid layout with advanced search & filter options.</p>
                         <a href="https://essential-addons.com/elementor/post-list/" class="demo-button">View Demo</a>
                     </div>
                 </div>
@@ -44,14 +47,16 @@
                 <div class="eael-block eael-demo__card">
                     <div class="thumb">
                         <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/demo-3.png' ); ?>" alt="">
-                        <a href="https://essential-addons.com/elementor/woo-product-gallery/" class="play-btn">
-                            <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/play-btn.png' ); ?>" alt="">
+                        <a href="https://youtu.be/l5vfdBGb7pc" class="play-btn">
+                            <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/play-btn.png' ); ?>"
+                                 alt="">
                         </a>
                     </div>
                     <div class="content">
-                        <h3>Woo Product Gallery</h3>
-                        <p>Restrict important data of your website by setting up user permission or giving</p>
-                        <a href="https://essential-addons.com/elementor/woo-product-gallery/" class="demo-button">View Demo</a>
+                        <h3>Woo Product Slider</h3>
+                        <p>Showcase your WooCommerce products beautifully with amazing ready slider layouts.</p>
+                        <a href="https://essential-addons.com/elementor/woo-product-slider/" class="demo-button">View
+                            Demo</a>
                     </div>
                 </div>
             </div>
@@ -70,7 +75,8 @@
                     </div>
                     <p>Toggle</p>
                 </a>
-                <a target="_blank" href="https://essential-addons.com/elementor/advanced-google-map/" class="feature__item">
+                <a target="_blank" href="https://essential-addons.com/elementor/advanced-google-map/"
+                   class="feature__item">
                     <div class="icon">
                         <i class="ea-admin-icon icon-marker"></i>
                     </div>
@@ -106,19 +112,22 @@
                     </div>
                     <p>Instagram Feed</p>
                 </a>
-                <a target="_blank" href="https://essential-addons.com/elementor/learndash-course-list/" class="feature__item">
+                <a target="_blank" href="https://essential-addons.com/elementor/learndash-course-list/"
+                   class="feature__item">
                     <div class="icon">
                         <i class="ea-admin-icon icon-course"></i>
                     </div>
                     <p>LearnDash Course List</p>
                 </a>
-                <a target="_blank" href="https://essential-addons.com/elementor/advanced-tooltip/" class="feature__item">
+                <a target="_blank" href="https://essential-addons.com/elementor/advanced-tooltip/"
+                   class="feature__item">
                     <div class="icon">
                         <i class="ea-admin-icon icon-tooltip"></i>
                     </div>
                     <p>Advanced Tooltip</p>
                 </a>
-                <a target="_blank" href="https://essential-addons.com/elementor/parallax-scrolling/" class="feature__item">
+                <a target="_blank" href="https://essential-addons.com/elementor/parallax-scrolling/"
+                   class="feature__item">
                     <div class="icon">
                         <i class="ea-admin-icon icon-parallax"></i>
                     </div>
@@ -132,7 +141,8 @@
                 </a>
             </div>
             <div class="eael__flex justify__center">
-                <a target="_blank" href="https://essential-addons.com/elementor/demos/" class="eael-button eael-extra-bt-size">View More</a>
+                <a target="_blank" href="https://essential-addons.com/elementor/demos/"
+                   class="eael-button eael-extra-bt-size">View More</a>
             </div>
         </div>
         <div class="eael-block icon__card mb30">
@@ -148,7 +158,8 @@
             </div>
         </div>
         <div class="eael__flex justify__center">
-            <a href="https://wpdeveloper.com/plugins/essential-addons-elementor/#pricing" class="eael-button button__themeColor eael-extra-bt-size">Upgrade to PRO</a>
+            <a href="https://wpdeveloper.com/plugins/essential-addons-elementor/#pricing"
+               class="eael-button button__themeColor eael-extra-bt-size">Upgrade to PRO</a>
         </div>
     </div>
     <div class="border__line mt30"><span></span></div>

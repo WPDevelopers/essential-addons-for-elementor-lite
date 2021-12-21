@@ -10,8 +10,8 @@
                             <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/go-pro.svg' ); ?>"
                                  alt="">
                         </div>
-                        <h3>Go Premium</h3>
-                        <p>Purchase our premium version to unlock these pro components.</p>
+                        <h3>Go PRO</h3>
+                        <p>Unlock 30+ amazing widgets to build awesome websites.</p>
                         <a href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor" class="eael-button">Upgrade
                             Now</a>
                     </div>
