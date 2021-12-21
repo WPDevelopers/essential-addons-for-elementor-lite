@@ -297,9 +297,6 @@ trait Admin {
          * classes for wrapper,
          * Message message for showing.
          */
-        // $notice->classes('upsale', 'notice is-dismissible ');
-        // $notice->message('upsale', '<p>' . __('5,000+ People using <a href="https://betterdocs.co/wordpress-plugin" target="_blank">BetterDocs</a> to create better Documentation & Knowledge Base!', 'essential-addons-for-elementor-lite') . '</p>');
-        // $notice->thumbnail('upsale', plugins_url('assets/admin/images/icon-documentation.svg', EAEL_PLUGIN_BASENAME));
 
         // Update Notice For PRO Version
         if ( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '4.0.0', '<' ) ) {
@@ -308,16 +305,7 @@ trait Admin {
             $notice->thumbnail( 'update', plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ) );
         }
 
-        // $notice->upsale_args = array(
-        //     'slug' => 'betterdocs',
-        //     'page_slug' => 'betterdocs-setup',
-        //     'file' => 'betterdocs.php',
-        //     'btn_text' => __('Install Free', 'essential-addons-for-elementor-lite'),
-        //     'condition' => [
-        //         'by' => 'class',
-        //         'class' => 'BetterDocs',
-        //     ],
-        // );
+
         $notice->options_args = array(
             'notice_will_show' => [
                 'opt_in' => $notice->timestamp,
@@ -329,10 +317,5 @@ trait Admin {
         }
 
         $notice->init();
-    }
-
-    public function eael_load_admin_popup()
-    {
-
     }
 }
