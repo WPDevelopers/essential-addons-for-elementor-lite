@@ -107,7 +107,7 @@ class WPDeveloper_Setup_Wizard {
 		?>
         <ul class="eael-quick-setup-wizard <?php echo $wizard_column; ?>" data-step="1">
 			<?php foreach ( $items as $item ): ?>
-				<?php if ( $item == 'Templately' && $this->templately_status || ($this->get_local_plugin_data( 'templately/templately.php' ) !== false && $item == 'Templately')  ) continue; ?>
+				<?php if ( $item == 'Templately' && $this->templately_status || ( $this->get_local_plugin_data( 'templately/templately.php' ) !== false && $item == 'Templately' ) ) continue; ?>
                 <li class="eael-quick-setup-step active">
                     <div class="eael-quick-setup-icon"><?php echo ++$i; ?></div>
                     <div class="eael-quick-setup-name"><?php echo $item; ?></div>
@@ -189,7 +189,7 @@ class WPDeveloper_Setup_Wizard {
                 </label>
                 <label class="eael-quick-setup-input config-list">
                     <input id="advance" value="advance" class="eael_preferences" name="eael_preferences"
-                           type="radio" />
+                           type="radio"/>
                     <span class="eael-quick-setup-content">
                   <h3 class="eael-quick-setup-title"><?php _e( 'Advanced', 'essential-addons-for-elementor-lite' ); ?></h3>
                   <p class="eael-quick-setup-text">
@@ -279,7 +279,8 @@ class WPDeveloper_Setup_Wizard {
             </div>
             <div class="eael-quick-setup-input-group">
 				<?php foreach ( $this->pro_elements() as $key => $elements ): ?>
-                    <a target="_blank" href="<?php echo esc_url($elements[ 'link' ]); ?>" class="eael-quick-setup-content" >
+                    <a target="_blank" href="<?php echo esc_url( $elements[ 'link' ] ); ?>"
+                       class="eael-quick-setup-content">
                             <span class="eael-quick-setup-icon">
                                 <img src="<?php echo $elements[ 'logo' ]; ?>"
                                      alt="<?php echo $elements[ 'title' ]; ?>">
@@ -290,7 +291,8 @@ class WPDeveloper_Setup_Wizard {
 				<?php endforeach; ?>
             </div>
             <div class="eael-quick-setup-pro-button-wrapper">
-                <a target="_blank" href="https://wpdeveloper.com/plugins/essential-addons-elementor/#pricing" class="button eael-quick-setup-btn eael-quick-setup-pro-button">
+                <a target="_blank" href="https://wpdeveloper.com/plugins/essential-addons-elementor/#pricing"
+                   class="button eael-quick-setup-btn eael-quick-setup-pro-button">
 					<?php _e( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ); ?>
                 </a>
             </div>
@@ -379,46 +381,39 @@ class WPDeveloper_Setup_Wizard {
 	public function final_step() {
 		?>
         <div id="finalize" class="eael-quick-setup-tab-content finalize setup-content" style="display: none">
-            <div class="eael-quick-setup-intro">
-                <h2 class="eael-quick-setup-title">
-					<?php _e( 'Make Essential Addons more awesome by being our Contributor 💪', 'essential-addons-for-elementor-lite' ); ?>
-                </h2>
-            </div>
-            <div class="eael-quick-setup-message-wrapper">
-                <div class="eael-quick-setup-message">
-					<?php _e( 'We collect non-sensitive diagnostic data and plugin usage
-                    information. Your site URL, WordPress & PHP version, plugins &
-                    themes and email address to send you the discount coupon. This
-                    data lets us make sure this plugin always stays compatible with
-                    the most popular plugins and themes. No spam, we promise We
-                    collect non-sensitive diagnostic data and plugin usage
-                    information. Your site URL, WordPress & PHP version, plugins &
-                    themes and email address to send you the discount coupon. This
-                    data lets us make sure this plugin always stays compatible with
-                    the most popular plugins and themes. No spam, we promise We
-                    collect non-sensitive diagnostic data and plugin usage
-                    information. Your site URL, WordPress & PHP version, plugins &
-                    themes and email address to send you the discount coupon. This
-                    data lets us make sure this plugin always stays compatible with
-                    the most popular plugins and themes. No spam, we promise We
-                    collect non-sensitive diagnostic data and plugin usage
-                    information. Your site URL, WordPress & PHP version, plugins &
-                    themes and email address to send you the discount coupon. This
-                    data lets us make sure this plugin always stays compatible with
-                    the most popular plugins and themes. No spam, we promise We
-                    collect non-sensitive diagnostic data and plugin usage
+            <div class="eael-quick-setup-modal">
+                <div class="eael-quick-setup-modal-content">
+                    <div class="eael-quick-setup-modal-header">
+                        <div class="eael-quick-setup-intro">
+                            <h2 class="eael-quick-setup-title">
+	                            <?php _e( '💪 Make Essential Addons more awesome by being our Contributor', 'essential-addons-for-elementor-lite' ); ?>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="eael-quick-setup-modal-body">
+                        <div class="eael-quick-setup-message-wrapper">
+                            <div class="eael-quick-setup-message">
+	                            <?php _e( 'We collect non-sensitive diagnostic data and plugin usage
                     information. Your site URL, WordPress & PHP version, plugins &
                     themes and email address to send you the discount coupon. This
                     data lets us make sure this plugin always stays compatible with
                     the most popular plugins and themes. No spam, we promise', 'essential-addons-for-elementor-lite' ); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="eael-quick-setup-modal-footer">
+                        <button class="button eael-quick-setup-button">No, Thanks</button>
+                        <button
+                                class="
+              button
+              eael-quick-setup-button eael-quick-setup-filled-button
+            "
+                        >
+                            Count me in
+                        </button>
+                    </div>
                 </div>
             </div>
-            <label class="eael-quick-setup-checkbox">
-                <input id="eael_user_email_address" name="eael_user_email_address" type="checkbox"/>
-                <span class="eael-quick-setup-checkbox-text">
-                    <?php _e( 'Share non-sensitive diagnostic data and plugin usage information', 'essential-addons-for-elementor-lite' ); ?>
-                </span>
-            </label>
         </div>
 		<?php
 	}

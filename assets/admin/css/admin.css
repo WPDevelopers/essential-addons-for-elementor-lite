@@ -6,13 +6,14 @@
 
 /* Start Setup Wizard */
 
+/*font-family: "Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;*/
+
 .eael-quick-setup-wizard-wrap {
     padding: 45px 30px;
     font-weight: 400;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
-    font-family: "Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
 
 .eael-quick-setup-wizard {
@@ -831,9 +832,7 @@
 
 .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.go_pro .eael-quick-setup-pro-button-wrapper {
     margin-top: 45px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display:flex;
 }
 
 @media (max-width: 1199.98px) {
@@ -911,8 +910,8 @@
     align-items: center;
     font-size: 15px;
     font-weight: 600;
-    background: #ff5a72 !important;
-    color: white !important;
+    background: #ff5a72;
+    color: white;
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
@@ -1133,6 +1132,14 @@
     color: #727272;
     text-align: center;
     margin-top: 15px;
+}
+
+.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.integrations .eael-quick-setup-admin-block-wrapper .eael-quick-setup-admin-block-integrations .eael-quick-setup-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #727272;
+    text-align: center;
+    margin-top: 15px;
     margin-bottom: auto;
 }
 
@@ -1207,7 +1214,7 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    margin-bottom: 45px;
+    margin-bottom: 30px;
 }
 
 @media (max-width: 1400.98px) {
@@ -1232,7 +1239,7 @@
 
 .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.finalize .eael-quick-setup-message-wrapper {
     max-width: 1000px;
-    height: 300px;
+    height: 200px;
     border-radius: 10px;
     background: #f9fafc;
     border: 1px solid #e9edf5;
@@ -1258,6 +1265,9 @@
     padding-right: 20px;
     height: 100%;
     overflow-y: auto;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align:justify;
 }
 
 @media (max-width: 1400.98px) {
@@ -1397,6 +1407,211 @@
 .eael-quick-setup-footer .eael-quick-setup-btn.eael-quick-setup-prev-button svg,
 .eael-quick-setup-footer .eael-quick-setup-btn.eael-quick-setup-prev-button object {
     margin-right: 5px;
+}
+
+.eael-quick-setup-footer .eael-quick-setup-btn.eael-quick-setup-prev-button:not(:last-child) {
+    margin-right: 30px;
+}
+
+.eael-quick-setup-footer .eael-quick-setup-btn.eael-quick-setup-next-button {
+    min-height: 40px;
+    padding: 2px 30px;
+    background: #5e2eff;
+    color: white;
+    border-radius: 5px;
+}
+
+.eael-quick-setup-footer .eael-quick-setup-btn.eael-quick-setup-next-button img,
+.eael-quick-setup-footer .eael-quick-setup-btn.eael-quick-setup-next-button svg,
+.eael-quick-setup-footer .eael-quick-setup-btn.eael-quick-setup-next-button object {
+    margin-left: 5px;
+}
+
+.eael-quick-setup-modal {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 9;
+    background: #b3b7bc;
+}
+
+.eael-quick-setup-modal .eael-quick-setup-modal-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background: #fff;
+    -webkit-box-shadow: 0px 40px 60px rgba(51, 62, 119, 0.12);
+    box-shadow: 0px 40px 60px rgba(51, 62, 119, 0.12);
+    border-radius: 5px;
+    width: 100%;
+    max-width: 1020px;
+    height: auto;
+    margin: auto;
+}
+
+@media (max-width: 1400.98px) {
+    .eael-quick-setup-modal .eael-quick-setup-modal-content {
+        max-width: 800px;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .eael-quick-setup-modal .eael-quick-setup-modal-content {
+        max-width: 700px;
+    }
+}
+
+.eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-header {
+    padding: 30px 30px 0;
+}
+
+@media (max-width: 1199.98px) {
+    .eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-header {
+        padding: 40px 20px 25px;
+    }
+}
+
+.eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-header .eael-quick-setup-intro {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-header .eael-quick-setup-intro .eael-quick-setup-title {
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1;
+    text-align: center;
+    color: #041137;
+}
+
+@media (max-width: 1400.98px) {
+    .eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-header .eael-quick-setup-intro .eael-quick-setup-title {
+        font-size: 22px;
+    }
+}
+
+.eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-body {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-body .eael-quick-setup-message-wrapper {
+    width: 100%;
+    max-width: 850px;
+    height: 150px;
+    border-radius: 10px;
+    background: #f9fafc;
+    border: 1px solid #e9edf5;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 1400.98px) {
+    .eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-body .eael-quick-setup-message-wrapper {
+        max-width: 700px;
+        padding: 10px;
+    }
+}
+
+.eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-body .eael-quick-setup-message-wrapper .eael-quick-setup-message {
+    font-size: 17px;
+    color: #727272;
+    line-height: 2;
+    border: 20px solid transparent;
+    border-right: 0;
+    padding-right: 20px;
+    height: 100%;
+    overflow-y: auto;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+@media (max-width: 1400.98px) {
+    .eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-body .eael-quick-setup-message-wrapper .eael-quick-setup-message {
+        border-width: 15px;
+        font-size: 16px;
+        line-height: 1.9;
+    }
+}
+
+.eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-footer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 37px 30px 53px;
+}
+
+@media (max-width: 1199.98px) {
+    .eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-footer {
+        padding: 25px 20px 40px;
+    }
+}
+
+.eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-footer .eael-quick-setup-button {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 2px 25px;
+    border: 1px solid #5e2eff;
+    background: rgba(94, 46, 255, 0.1);
+    border-radius: 5px;
+    color: #5e2eff;
+    font-size: 14px;
+    line-height: 1.1;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-footer .eael-quick-setup-button.eael-quick-setup-filled-button {
+    background: #5e2eff;
+    color: white;
+}
+
+.eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-footer .eael-quick-setup-button:not(:last-child) {
+    margin-right: 15px;
+}
+
+.eael-quick-setup-modal .eael-quick-setup-modal-content .eael-quick-setup-modal-footer .eael-quick-setup-button:hover {
+    -webkit-box-shadow: 0px 8px 30px rgba(31, 2, 130, 0.12);
+    box-shadow: 0px 8px 30px rgba(31, 2, 130, 0.12);
 }
 
 .eael-quick-setup-footer .eael-quick-setup-btn.eael-quick-setup-prev-button:not(:last-child) {
