@@ -45,7 +45,7 @@
                         <div class="eael-col-md-6">
                             <div class="eael-video__block">
                                 <div class="thumb">
-                                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/youtube-promo.jpg' ) ?>"
+                                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/youtube-promo.png' ) ?>"
                                          alt="">
                                 </div>
                                 <a target="_blank" href="https://youtu.be/uuyXfUDqRZM" class="play__btn">

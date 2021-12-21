@@ -105,12 +105,10 @@
 					        setTimeout( function () {
 						        _this.html( "Save Settings" );
 						        Swal.fire( {
-							                   type: "success",
-							                   title: "Settings Saved!",
-							                   footer: "Have Fun :-)",
-							                   showConfirmButton: false,
 							                   timer: 2000,
-						                   } );
+							                   showConfirmButton: false,
+							                   imageUrl: localize.settings_save,
+						                   } )
 						        saveButton.removeClass( "save-now" );
 					        }, 500 );
 				        },
