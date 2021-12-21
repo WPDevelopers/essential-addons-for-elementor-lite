@@ -49,7 +49,7 @@ $integrations = [
     <div class="eael-grid">
 		<?php foreach ( $integrations as $plugin ): ?>
             <div class="eael-col-xxl-3 eael-col-xl-4">
-                <div class="pt60">
+                <div class="pt60 h-100">
                     <div class="eael-integration__card eael-integration__card--classic">
                         <div class="icon">
                             <img src="<?php echo esc_url( $plugin[ 'logo' ] ); ?>" alt="">

@@ -38,26 +38,34 @@
                                 <p>Thank you for choosing Essential Addons for Elementor. Get ready to enhance your
                                     Elementor site building experience by using 40+ Essential Addons elements for
                                     FREE.</p>
-                                <a href="https://www.youtube.com/playlist?list=PLWHp1xKHCfxC7JeWSg31vtVbLHGzfxDvh" class="eael-button button__secondary hover__shadow">YouTube Tutorials</a>
+                                <a href="https://www.youtube.com/playlist?list=PLWHp1xKHCfxC7JeWSg31vtVbLHGzfxDvh"
+                                   class="eael-button button__secondary hover__shadow">YouTube Tutorials</a>
                             </div>
                         </div>
                         <div class="eael-col-md-6">
-                            <iframe src="https://www.youtube.com/embed/rc-5L7fek3M" title="YouTube video player"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
+                            <div class="eael-video__block">
+                                <div class="thumb">
+                                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/youtube-promo.jpg' ) ?>"
+                                         alt="">
+                                </div>
+                                <a target="_blank" href="https://youtu.be/uuyXfUDqRZM" class="play__btn">
+                                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/play-btn.svg' ) ?>"
+                                         alt="">
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
+
 			<?php } ?>
             <div class="eael-block px45 py25">
                 <div class="eael-basic__card eael__flex align__center justify__between">
                     <div class="eael__flex align__center">
-                        <div class="mr20 fs-0">
+                        <div class="mr20 fs-0 thumb">
                             <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/ea.svg' ) ?>"
                                  alt="">
                         </div>
-                        <h4>Manage your License for your sites from your WPDeveloper account</h4>
+                        <p>Manage your License for your sites from your WPDeveloper account</p>
                     </div>
 					<?php
 					if ( !defined( 'EAEL_PRO_PLUGIN_BASENAME' ) ) {
@@ -70,7 +78,7 @@
             </div>
         </div>
         <div class="eael-col-xl-4">
-            <div class="eael-statistic eael-block py25 px30">
+            <div class="eael-statistic eael-block py25 px15">
                 <div class="statistic__item">
                     <h2 id="eael-total-elements">88</h2>
                     <p>Total Elements</p>
@@ -84,25 +92,33 @@
                     <p>Unused Elements</p>
                 </div>
             </div>
-            <a target="_blank" href="https://essential-addons.com/elementor/docs/" class="eael-info__box eael-block px30 py25">
+            <a target="_blank" href="https://essential-addons.com/elementor/docs/"
+               class="eael-info__box eael-block px30 py25">
                 <h6><i class="ea-admin-icon icon-edit"></i> View Knowledgebase</h6>
-                <p>Get started by spending some time with the documentation to get familiar with Essential Addons. Build awesome websites for you or your clients with ease.</p>
+                <p>Get started by spending some time with the documentation to get familiar with Essential Addons. Build
+                    awesome websites for you or your clients with ease.</p>
             </a>
-            <a target="_blank" href="https://wpdeveloper.com/review-essential-addons-elementor" class="eael-info__box eael-block px30 py25">
+            <a target="_blank" href="https://wpdeveloper.com/review-essential-addons-elementor"
+               class="eael-info__box eael-block px30 py25">
                 <h6><i class="ea-admin-icon icon-star"></i> Show Your Love</h6>
-                <p>We love to have you in Essential Addons family. We are making it more awesome everyday. Take your 2 minutes to review the plugin and spread the love to encourage us to keep it going.</p>
+                <p>We love to have you in Essential Addons family. We are making it more awesome everyday. Take your 2
+                    minutes to review the plugin and spread the love to encourage us to keep it going.</p>
             </a>
             <a href="https://wpdeveloper.com/support" class="eael-info__box eael-block px30 py25">
                 <h6><i class="ea-admin-icon icon-support"></i> Need Help?</h6>
                 <p>Stuck with something? Get help from live chat or submit a support ticket.</p>
             </a>
-            <a target="_blank" href="https://github.com/WPDevelopers/essential-addons-for-elementor-lite/issues/new" class="eael-info__box eael-block px30 py25">
+            <a target="_blank" href="https://github.com/WPDevelopers/essential-addons-for-elementor-lite/issues/new"
+               class="eael-info__box eael-block px30 py25">
                 <h6><i class="ea-admin-icon icon-contribute"></i> Contribute to Essential Addons</h6>
-                <p>You can contribute to make Essential Addons better reporting bugs, creating issues, pull requests at GitHub.</p>
+                <p>You can contribute to make Essential Addons better reporting bugs, creating issues, pull requests at
+                    GitHub.</p>
             </a>
-            <a target="_blank" href="https://www.facebook.com/groups/essentialaddons" class="eael-info__box eael-block px30 py25">
+            <a target="_blank" href="https://www.facebook.com/groups/essentialaddons"
+               class="eael-info__box eael-block px30 py25">
                 <h6><i class="ea-admin-icon icon-community"></i> Join the Community</h6>
-                <p>Join the CommunityJoin the Facebook community and discuss with fellow developers and users. Best way to connect with people and get feedback on your projects.</p>
+                <p>Join the CommunityJoin the Facebook community and discuss with fellow developers and users. Best way
+                    to connect with people and get feedback on your projects.</p>
             </a>
         </div>
     </div>
