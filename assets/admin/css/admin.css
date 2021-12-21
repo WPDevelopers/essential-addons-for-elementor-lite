@@ -4790,4 +4790,5 @@ button.button__greyBg:hover:disabled {
     background: #ffffff !important;
     color: #041137 !important;
     border-color: #C8D3E9 !important;
+    text-shadow: none !important;
 }
