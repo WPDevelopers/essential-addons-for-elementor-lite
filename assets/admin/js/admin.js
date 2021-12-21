@@ -145,13 +145,12 @@
 			        success: function ( response ) {
 				        setTimeout( function () {
 					        _this.html( "Regenerate Assets" );
-					
+					        
 					        Swal.fire( {
-						                   type: "success",
-						                   title: "Assets Regenerated!",
-						                   showConfirmButton: false,
 						                   timer: 2000,
-					                   } );
+						                   showConfirmButton: false,
+						                   imageUrl: localize.assets_regenerated,
+					                   } )
 				        }, 1000 );
 			        },
 			        error: function () {

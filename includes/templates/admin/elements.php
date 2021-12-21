@@ -434,7 +434,7 @@ $elements = [
 		]
 	],
 	'social-feed-elements'     => [
-		'title'    => __( 'Social Feed Elemens', 'essential-addons-for-elementor-lite' ),
+		'title'    => __( 'Social Feed Elements', 'essential-addons-for-elementor-lite' ),
 		'elements' => [
 			[
 				'key'       => 'twitter-feed',
@@ -564,7 +564,7 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
     <div class="eael-global__control mb45">
         <div class="global__control__content">
             <h4>Global Control</h4>
-            <p>Use the Buttons to Activate or Deactivate all the Elements of Essential Addons at once.</p>
+            <p>Use the Buttons to Activate or Deactivate all the Elements & Extensions of Essential Addons at once.</p>
         </div>
         <div class="global__control__switch">
             <label class="eael-switch eael-switch--xl">
@@ -597,16 +597,16 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
 									$link = !empty( $item[ 'setting' ][ 'link' ] ) ? $item[ 'setting' ][ 'link' ] : '#';
 									$id = !empty( $item[ 'setting' ][ 'id' ] ) ? $item[ 'setting' ][ 'id' ] : '';
 									?>
-                                    <a href="<?php echo $link; ?>" id="<?php echo $id; ?>" class="element__icon">
+                                    <a target="_blank" href="<?php echo $link; ?>" id="<?php echo $id; ?>" class="element__icon">
                                         <i class="ea-admin-icon icon-gear"></i>
                                         <span class="tooltip-text"><?php esc_html_e( 'Setting', 'essential-addons-for-elementor-lite' ); ?></span>
                                     </a>
 								<?php endif; ?>
-                                <a href="<?php echo esc_url( $item[ 'doc_link' ] ); ?>" class="element__icon">
+                                <a target="_blank" href="<?php echo esc_url( $item[ 'doc_link' ] ); ?>" class="element__icon">
                                     <i class="ea-admin-icon icon-doc"></i>
                                     <span class="tooltip-text"><?php esc_html_e( 'Documentation', 'essential-addons-for-elementor-lite' ); ?></span>
                                 </a>
-                                <a href="<?php echo esc_url( $item[ 'demo_link' ] ); ?>" class="element__icon">
+                                <a target="_blank" href="<?php echo esc_url( $item[ 'demo_link' ] ); ?>" class="element__icon">
                                     <i class="ea-admin-icon icon-monitor"></i>
                                     <span class="tooltip-text"><?php esc_html_e( 'Demo', 'essential-addons-for-elementor-lite' ); ?></span>
                                 </a>

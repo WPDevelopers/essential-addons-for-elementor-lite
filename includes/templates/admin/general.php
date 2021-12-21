@@ -2,11 +2,11 @@
     <div class="eael-grid">
         <div class="eael-col-xl-8">
             <div class="eael-block px45 py25">
-                <div class="eael-basic__card eael__flex eael__flex--wrap align__center justify__between">
+                <div class="eael-basic__card  align__center justify__between eael__flex justify__between">
                     <p><i class="ea-admin-icon icon-edit"></i>Check out the changes & features we have added with our
                         new updates
                     </p>
-                    <a href="https://essential-addons.com/elementor/changelog/" class="eael-button">View Changelog</a>
+                    <a target="_blank" href="https://essential-addons.com/elementor/changelog/" class="eael-button">View Changelog</a>
                 </div>
             </div>
 			<?php do_action( 'add_admin_license_markup' ); ?>
@@ -38,7 +38,7 @@
                                 <p>Thank you for choosing Essential Addons for Elementor. Get ready to enhance your
                                     Elementor site building experience by using 40+ Essential Addons elements for
                                     FREE.</p>
-                                <a href="https://www.youtube.com/playlist?list=PLWHp1xKHCfxC7JeWSg31vtVbLHGzfxDvh"
+                                <a target="_blank" href="https://www.youtube.com/playlist?list=PLWHp1xKHCfxC7JeWSg31vtVbLHGzfxDvh"
                                    class="eael-button button__secondary hover__shadow">YouTube Tutorials</a>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                     </div>
 					<?php
 					if ( !defined( 'EAEL_PRO_PLUGIN_BASENAME' ) ) {
-						printf( __( '<a class="eael-button button__themeColor" href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor" target="_blank">%s</a>', 'essential-addons-for-elementor-lite' ), 'Upgrade to Pro' );
+						printf( __( '<a target="_blank" class="eael-button button__themeColor" href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor" >%s</a>', 'essential-addons-for-elementor-lite' ), 'Upgrade to Pro' );
 					} else {
 						do_action( 'eael_manage_license_action_link' );
 					}
@@ -104,7 +104,7 @@
                 <p>We love to have you in Essential Addons family. We are making it more awesome everyday. Take your 2
                     minutes to review the plugin and spread the love to encourage us to keep it going.</p>
             </a>
-            <a href="https://wpdeveloper.com/support" class="eael-info__box eael-block px30 py25">
+            <a target="_blank" href="https://wpdeveloper.com/support" class="eael-info__box eael-block px30 py25">
                 <h6><i class="ea-admin-icon icon-support"></i> Need Help?</h6>
                 <p>Stuck with something? Get help from live chat or submit a support ticket.</p>
             </a>
