@@ -80,19 +80,19 @@ $extensions = [
 <div id="extensions" class="eael-admin-setting-tab">
     <div class="eael-global__control mb45">
         <div class="global__control__content">
-            <h4>Global Control</h4>
-            <p>Use the Toggle Button to Activate or Deactivate all the Elements & Extensions of Essential Addons at once.</p>
+            <h4><?php _e( 'Global Control', 'essential-addons-for-elementor-lite' ); ?></h4>
+            <p><?php _e( 'Use the Toggle Button to Activate or Deactivate all the Elements & Extensions of Essential Addons at once.', 'essential-addons-for-elementor-lite' ); ?></p>
         </div>
         <div class="global__control__switch">
             <label class="eael-switch eael-switch--xl">
                 <input class="eael-element-global-switch" type="checkbox">
                 <span class="switch__box"></span>
             </label>
-            <span class="switch__status enable">Enable All</span>
-            <span class="switch__status disable">Disable All</span>
+            <span class="switch__status enable"><?php _e( 'Enable All', 'essential-addons-for-elementor-lite' ); ?></span>
+            <span class="switch__status disable"><?php _e( 'Disable All', 'essential-addons-for-elementor-lite' ); ?></span>
         </div>
         <div class="global__control__button">
-            <button type="button" class="eael-button js-eael-settings-save">Save Settings</button>
+            <button type="button" class="eael-button js-eael-settings-save"><?php _e( 'Save Settings', 'essential-addons-for-elementor-lite' ); ?></button>
         </div>
     </div>
 
@@ -148,7 +148,7 @@ $extensions = [
 	<?php endforeach; ?>
     <div class="border__line mt30"><span></span></div>
     <div class="eael__flex justify__end mt30">
-        <button type="button" class="eael-button button__themeColor js-eael-settings-save">Save Settings</button>
+        <button type="button" class="eael-button button__themeColor js-eael-settings-save"><?php _e('Save Settings','essential-addons-for-elementor-lite'); ?></button>
     </div>
 </div>
 
