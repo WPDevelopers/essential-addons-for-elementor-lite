@@ -36,7 +36,7 @@
                             <div class="template__block">
                                 <h2>🚀 Get Started with Essential Addons for Elementor</h2>
                                 <p>Thank you for choosing Essential Addons for Elementor. Get ready to enhance your
-                                    Elementor site building experience by using 40+ Essential Addons elements for
+                                    Elementor site building experience by using 50+ Essential Addons elements for
                                     FREE.</p>
                                 <a target="_blank" href="https://www.youtube.com/playlist?list=PLWHp1xKHCfxC7JeWSg31vtVbLHGzfxDvh"
                                    class="eael-button button__secondary hover__shadow">YouTube Tutorials</a>
