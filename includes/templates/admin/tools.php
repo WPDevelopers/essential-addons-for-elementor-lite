@@ -8,16 +8,16 @@
                             <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/tool-1.svg' ) ?>" alt="">
                         </div>
                         <div class="content">
-                            <h3>Regenerate Assets</h3>
-                            <p>Essential Addons styles & scripts are saved in Uploads folder. This option will clear all
-                                those generated files.</p>
+                            <h3><?php _e('Regenerate Assets','essential-addons-for-elementor-lite'); ?></h3>
+                            <p><?php _e('Essential Addons styles & scripts are saved in Uploads folder. This option will clear all
+                                those generated files.','essential-addons-for-elementor-lite'); ?></p>
                         </div>
                     </div>
                 </div>
                 <div class="eael-col-md-7">
                     <div class="eael-tool__card">
                         <div class="content">
-                            <a href="#" id="eael-regenerate-files" class="eael-button button__themeColor mb20">Regenerate Assets</a>
+                            <a href="#" id="eael-regenerate-files" class="eael-button button__themeColor mb20"><?php _e('Regenerate Assets','essential-addons-for-elementor-lite'); ?></a>
                         </div>
                     </div>
                 </div>
@@ -32,25 +32,25 @@
                             <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/tool-2.svg' ) ?>" alt="">
                         </div>
                         <div class="content">
-                            <h3>Assets Embed Method</h3>
-                            <p>Configure the Essential Addons assets embed method. Keep it as default (recommended).</p>
+                            <h3><?php _e('Assets Embed Method','essential-addons-for-elementor-lite'); ?></h3>
+                            <p><?php _e('Configure the Essential Addons assets embed method. Keep it as default (recommended).','essential-addons-for-elementor-lite'); ?></p>
                         </div>
                     </div>
                 </div>
                 <div class="eael-col-md-7">
                     <div class="eael-tool__card">
                         <div class="content">
-                            <a href="<?php echo esc_url(admin_url('admin.php?page=elementor#tab-advanced')); ?>" target="_blank" class="eael-button button__themeColor mb20">CSS Print Method</a>
-                            <p>CSS Print Method is handled by Elementor Settings itself. Use External CSS Files for
+                            <a href="<?php echo esc_url(admin_url('admin.php?page=elementor#tab-advanced')); ?>" target="_blank" class="eael-button button__themeColor mb20"><?php _e('CSS Print Method','essential-addons-for-elementor-lite'); ?></a>
+                            <p><?php _e('CSS Print Method is handled by Elementor Settings itself. Use External CSS Files for
                                 better
-                                performance (Recommended).</p>
+                                performance (Recommended).','essential-addons-for-elementor-lite'); ?></p>
                         </div>
 	                    <?php
 	                    $print_method = get_option('eael_js_print_method','external');
 	                    ?>
                         <div class="content mt30">
                             <div class="eael__flex  align__center mb20">
-                                <h5 class="mr20">JS Print Method</h5>
+                                <h5 class="mr20"><?php _e('JS Print Method','essential-addons-for-elementor-lite'); ?></h5>
                                 <div class="eael-select">
                                     <select name="eael-js-print-method" id="eael-js-print-method">
                                         <option value="external" <?php echo $print_method == 'external' ? 'selected' : '' ?>><?php _e('External File', 'essential-addons-for-elementor-lite');?></option>
@@ -68,6 +68,6 @@
     </div>
     <div class="border__line mt30"><span></span></div>
     <div class="eael__flex justify__end mt30">
-        <button class="eael-button button__themeColor js-eael-settings-save">Save Settings</button>
+        <button class="eael-button button__themeColor js-eael-settings-save"><?php _e('Save Settings', 'essential-addons-for-elementor-lite');?></button>
     </div>
 </div>
