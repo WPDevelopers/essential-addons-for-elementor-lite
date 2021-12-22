@@ -151,6 +151,10 @@
 .icon-contribute:before {
     content: "\e91f";
 }
+
+.icon-settings-loader:before {
+    content: "\e920";
+}
 /* Start Setup Wizard */
 
 .eael-quick-setup-wizard-wrap {
@@ -4844,7 +4848,7 @@ button.button__greyBg:hover:disabled {
     opacity: 0.3;
 }
 
-.eael-button svg#eael-spinner {
+.eael-button i#eael-spinner {
     margin-right: 10px;
     vertical-align: middle;
 }

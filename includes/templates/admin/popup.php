@@ -29,7 +29,7 @@
                             <input name="google-map-api" id="google-map-api"
                                    value="<?php echo get_option( 'eael_save_google_map_api' ); ?>" type="text"
                                    class="eael-form__control" placeholder="Set API key">
-                            <button class="eael-button button__themeColor eael-save-trigger eael-admin-popup-close"><i
+                            <button type="button" class="eael-button button__themeColor eael-save-trigger eael-admin-popup-close"><i
                                         class="ea-admin-icon icon-long-arrow-right"></i></button>
                         </div>
                     </div>
@@ -155,6 +155,7 @@
                         <div class="eael-select-box mb30 mt30">
                             <select class="eael-post-duplicator-box" name="post-duplicator-post-type"
                                     id="post-duplicator-post-type">
+                                <option value="all">All</option>
 								<?php
 								$post_lists = get_post_types( [ 'public' => true, 'show_in_nav_menus' => true ] );
 								$post_name  = get_option( 'eael_save_post_duplicator_post_type' );
@@ -165,7 +166,7 @@
 								?>
                             </select>
                         </div>
-                        <button class="eael-button button__themeColor eael-save-trigger">Submit</button>
+                        <button class="eael-button button__themeColor eael-save-trigger eael-admin-popup-close">Submit</button>
                     </div>
                 </div>
 
