@@ -373,7 +373,7 @@ class WPDeveloper_Setup_Wizard {
                                     data-slug="<?php echo $plugin[ 'slug' ]; ?>"><?php _e( 'Install', 'essential-addons-for-elementor-lite' ); ?></button>
 						<?php } else { ?>
 							<?php if ( is_plugin_active( $plugin[ 'basename' ] ) ) { ?>
-                                <button class="wpdeveloper-plugin-installer eael-quick-setup-wpdeveloper-plugin-installer"><?php _e( 'Activated', 'essential-addons-for-elementor-lite' ); ?></button>
+                                <button class="wpdeveloper-plugin-installer button__white-not-hover eael-quick-setup-wpdeveloper-plugin-installer"><?php _e( 'Activated', 'essential-addons-for-elementor-lite' ); ?></button>
 							<?php } else { ?>
                                 <button class="wpdeveloper-plugin-installer eael-quick-setup-wpdeveloper-plugin-installer"
                                         data-action="activate"
