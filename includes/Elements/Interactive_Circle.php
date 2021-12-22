@@ -777,7 +777,7 @@ class Interactive_Circle extends Widget_Base {
     <div <?php echo $this->get_render_attribute_string( 'eael_interactive_circle_container' ); ?>>
 		<?php if ( ( $settings[ 'eael_interactive_circle_preset' ] != 'eael-interactive-circle-preset-2' ) ) { ?>
         <div <?php echo $this->get_render_attribute_string( 'eael_circle_wrapper' ); ?>>
-        <div class="eael-circle-info" data-items="<?php echo $item_count; ?>">
+            <div class="eael-circle-info" data-items="<?php echo $item_count; ?>">
             <div class="eael-circle-inner">
 				<?php foreach ( $settings[ 'eael_interactive_circle_item' ] as $index => $item ) :
 					$item_count = $index + 1;
@@ -811,6 +811,7 @@ class Interactive_Circle extends Widget_Base {
 				<?php endforeach; ?>
 
             </div>
+        </div>
         </div>
 
 	<?php } else { ?>
@@ -851,7 +852,6 @@ class Interactive_Circle extends Widget_Base {
                 </div>
             </div>
         </div>
-
 	<?php } ?>
 
         </div>
