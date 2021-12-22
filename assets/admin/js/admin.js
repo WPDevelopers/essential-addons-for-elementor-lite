@@ -114,7 +114,7 @@
 				        },
 				        beforeSend: function () {
 					        _this.html(
-						        '<svg id="eael-spinner" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><circle cx="24" cy="4" r="4" fill="#fff"/><circle cx="12.19" cy="7.86" r="3.7" fill="#fffbf2"/><circle cx="5.02" cy="17.68" r="3.4" fill="#fef7e4"/><circle cx="5.02" cy="30.32" r="3.1" fill="#fef3d7"/><circle cx="12.19" cy="40.14" r="2.8" fill="#feefc9"/><circle cx="24" cy="44" r="2.5" fill="#feebbc"/><circle cx="35.81" cy="40.14" r="2.2" fill="#fde7af"/><circle cx="42.98" cy="30.32" r="1.9" fill="#fde3a1"/><circle cx="42.98" cy="17.68" r="1.6" fill="#fddf94"/><circle cx="35.81" cy="7.86" r="1.3" fill="#fcdb86"/></svg><span>Saving Data...</span>'
+						        '<i id="eael-spinner" class="ea-admin-icon icon-settings-loader"></i><span>Saving Data...</span>'
 					        );
 				        },
 				        success: function ( response ) {
@@ -182,10 +182,22 @@
 	} );
 	
 	
-	
 	$( document ).on( 'click', function ( event ) {
-		var selector = $( event.target ).closest( ".eael-modal" );
+		var selector     = $( event.target ).closest( ".eael-modal" ),
+		    baseSelectro = $( event.target ).closest( "#eael-admn-setting-popup" ),
+		    modal        = $( "#eael-admn-setting-popup" );
+		if ( !modal.length ) {
+			return false;
+		}
 		
+		if ( 'block' == modal.css( 'display' ) && selector.length ) {
+			return false;
+		}
+		
+		if ( 'block' == modal.css( 'display' ) && baseSelectro.length ) {
+			modal.hide();
+			$( ".modal__content__popup" ).hide();
+		}
 	} );
 	
 	// Popup
