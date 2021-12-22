@@ -459,6 +459,7 @@
 	});
 	
 	$(document).on('click', '.eael-setup-wizard-save', function (e) {
+		e.preventDefault();
 		var $this = $(this);
 		$(".eael-setup-wizard-save").attr('disabled', 'disabled');
 		
