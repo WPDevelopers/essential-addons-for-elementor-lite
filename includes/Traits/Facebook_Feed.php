@@ -136,7 +136,8 @@ trait Facebook_Feed
 	                            }
 
 			                    if( isset($settings['eael_facebook_feed_is_show_preview_description']) && 'yes' == $settings['eael_facebook_feed_is_show_preview_description'] ) {
-				                    $html .= '<p class="eael-facebook-feed-url-description">' . @$item['attachments']['data'][0]['description'] . '</p>';
+				                    $description = isset( $item['attachments']['data'][0]['description'] ) ? $item['attachments']['data'][0]['description'] : '';
+				                    $html .= '<p class="eael-facebook-feed-url-description">' . $description . '</p>';
 			                    }
                             $html .= '</div>';
 
