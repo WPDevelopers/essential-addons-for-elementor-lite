@@ -1763,6 +1763,18 @@
 .eael-quick-setup-post-grid-panel-disable {
     display:none;
 }
+
+.eael-quick-setup-admin-block .eael-quick-setup-wpdeveloper-plugin-installer[data-action="install"],
+.eael-quick-setup-admin-block .eael-quick-setup-wpdeveloper-plugin-installer[data-action="activate"] {
+    background: #5e2eff !important;
+    border-color: #5e2eff !important;
+    color: white !important;
+}
+
+.eael-quick-setup-wizard .eael-quick-setup-step.finalize .eael-quick-setup-name:after {
+    content:none;
+}
+
 /* end setup wizard */
 
 /* EA Setting Page */

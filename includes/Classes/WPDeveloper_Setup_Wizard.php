@@ -108,7 +108,7 @@ class WPDeveloper_Setup_Wizard {
         <ul class="eael-quick-setup-wizard <?php echo $wizard_column; ?>" data-step="1">
 			<?php foreach ( $items as $item ): ?>
 				<?php if ( $item == 'Templately' && $this->templately_status || ( $this->get_local_plugin_data( 'templately/templately.php' ) !== false && $item == 'Templately' ) ) continue; ?>
-                <li class="eael-quick-setup-step active">
+                <li class="eael-quick-setup-step active <?php echo strtolower($item); ?>">
                     <div class="eael-quick-setup-icon"><?php echo ++$i; ?></div>
                     <div class="eael-quick-setup-name"><?php echo $item; ?></div>
                 </li>
@@ -469,7 +469,7 @@ class WPDeveloper_Setup_Wizard {
 				'basename' => 'wp-scheduled-posts/wp-scheduled-posts.php',
 				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/wscp.svg',
 				'title'    => __( 'SchedulePress', 'essential-addons-for-elementor-lite' ),
-				'desc'     => __( 'Crowdfundly is a Software as a Service (SaaS) digital crowdfunding solution. Best fundraising solution in WordPress with Elementor & WooCommerce support.', 'essential-addons-for-elementor-lite' ),
+				'desc'     => __( 'Best Content Marketing Tool For WordPress – Schedule, Organize, & Auto Share Blog Posts. Take a quick glance at your content planning with Schedule Calendar, Auto & Manual Scheduler and  more', 'essential-addons-for-elementor-lite' ),
 			],
 		];
 	}

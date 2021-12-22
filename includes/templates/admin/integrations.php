@@ -40,7 +40,7 @@ $integrations = [
 		'basename' => 'wp-scheduled-posts/wp-scheduled-posts.php',
 		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/wscp.svg',
 		'title'    => __( 'SchedulePress', 'essential-addons-for-elementor-lite' ),
-		'desc'     => __( 'Crowdfundly is a Software as a Service (SaaS) digital crowdfunding solution. Best fundraising solution in WordPress with Elementor & WooCommerce support.', 'essential-addons-for-elementor-lite' ),
+		'desc'     => __( 'Best Content Marketing Tool For WordPress – Schedule, Organize, & Auto Share Blog Posts. Take a quick glance at your content planning with Schedule Calendar, Auto & Manual Scheduler and  more', 'essential-addons-for-elementor-lite' ),
 	],
 ];
 ?>
