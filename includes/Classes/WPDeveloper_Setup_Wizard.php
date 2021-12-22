@@ -219,7 +219,7 @@ class WPDeveloper_Setup_Wizard {
 	 * EAEL elements list
 	 */
 	public function eael_elements() {
-
+        $init = 0;
 		?>
         <div id="elements" class="eael-quick-setup-tab-content elements setup-content" style="display:none">
             <div class="eael-quick-setup-intro">
@@ -232,8 +232,11 @@ class WPDeveloper_Setup_Wizard {
                 </p>
             </div>
             <div class="eael-quick-setup-elements-body">
-				<?php foreach ( $this->get_element_list() as $key => $item ): ?>
-                    <div class="eael-quick-setup-post-grid-panel">
+				<?php foreach ( $this->get_element_list() as $key => $item ):
+					$init++;
+					$disable = ( $init > 2 ) ? 'eael-quick-setup-post-grid-panel-disable' : '';
+				?>
+                    <div class="eael-quick-setup-post-grid-panel <?php echo $disable; ?>">
                         <h3 class="eael-quick-setup-post-grid-panel-title"><?php echo esc_html( $item[ 'title' ] ); ?></h3>
                         <div class="eael-quick-setup-post-grid-wrapper eael-<?php echo $key; ?>">
 							<?php foreach ( $item[ 'elements' ] as $element ):
@@ -259,6 +262,13 @@ class WPDeveloper_Setup_Wizard {
                         </div>
                     </div>
 				<?php endforeach; ?>
+                <div class="eael-quick-setup-overlay">
+                    <button type="button" id="eael-elements-load-more" class="button eael-quick-setup-btn">
+	                    <?php _e( 'View All', 'essential-addons-for-elementor-lite' ); ?>
+                        <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/el-load.svg' ); ?>"
+                             alt="<?php _e( 'View All', 'essential-addons-for-elementor-lite' ); ?>">
+                    </button>
+                </div>
             </div>
         </div>
 		<?php

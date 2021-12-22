@@ -624,7 +624,6 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
 									printf( '<input class="eael-widget-item" id="%1$s" name="%1$s"
                                            type="checkbox" %2$s>', $item[ 'key' ], $status );
 									?>
-
                                     <span class="switch__box <?php echo $disabled; ?>"></span>
                                 </label>
                             </div>
