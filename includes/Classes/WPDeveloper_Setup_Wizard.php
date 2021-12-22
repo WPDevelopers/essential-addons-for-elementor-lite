@@ -170,7 +170,7 @@ class WPDeveloper_Setup_Wizard {
 					<?php _e( 'Get Started with Essential Addons 🚀', 'essential-addons-for-elementor-lite' ); ?>
                 </h2>
                 <p class="eael-quick-setup-text">
-					<?php _e( 'Enhance your Elementor page building experience with 70+ amazing
+					<?php _e( 'Enhance your Elementor page building experience with 50+ amazing
                         elements & extensions 🔥', 'essential-addons-for-elementor-lite' ); ?>
                 </p>
             </div>
@@ -273,8 +273,7 @@ class WPDeveloper_Setup_Wizard {
                          alt="<?php _e( 'Go Pro Logo', 'essential-addons-for-elementor-lite' ); ?>">
                 </div>
                 <h2 class="eael-quick-setup-title">
-					<?php _e( 'Get Access to 30+ Advanced PRO Elements to Enhance Your
-                    Elementor Site Building Experience', 'essential-addons-for-elementor-lite' ); ?>
+					<?php _e( 'Unlock 30+ Advanced PRO Elements to Enhance Your Elementor Site Building Experience', 'essential-addons-for-elementor-lite' ); ?>
                 </h2>
             </div>
             <div class="eael-quick-setup-input-group">
@@ -291,7 +290,7 @@ class WPDeveloper_Setup_Wizard {
 				<?php endforeach; ?>
             </div>
             <div class="eael-quick-setup-pro-button-wrapper">
-                <a target="_blank" href="https://wpdeveloper.com/plugins/essential-addons-elementor/#pricing"
+                <a target="_blank" href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor"
                    class="button eael-quick-setup-btn eael-quick-setup-pro-button">
 					<?php _e( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ); ?>
                 </a>
@@ -456,10 +455,10 @@ class WPDeveloper_Setup_Wizard {
 				'desc'     => __( 'Easy solution for the job recruitment to attract, manage & hire right talent faster. The Best Talent Recruitment Suite which lets you manage jobs & career page in Elementor.', 'essential-addons-for-elementor-lite' ),
 			],
 			[
-				'slug'     => 'crowdfundly',
-				'basename' => 'crowdfundly/crowdfundly.php',
-				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/crowdfundly-logo.svg',
-				'title'    => __( 'Crowdfundly', 'essential-addons-for-elementor-lite' ),
+				'slug'     => 'wp-scheduled-posts',
+				'basename' => 'wp-scheduled-posts/wp-scheduled-posts.php',
+				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/wscp.svg',
+				'title'    => __( 'SchedulePress', 'essential-addons-for-elementor-lite' ),
 				'desc'     => __( 'Crowdfundly is a Software as a Service (SaaS) digital crowdfunding solution. Best fundraising solution in WordPress with Elementor & WooCommerce support.', 'essential-addons-for-elementor-lite' ),
 			],
 		];

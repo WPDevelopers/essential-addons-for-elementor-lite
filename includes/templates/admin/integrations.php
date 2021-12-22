@@ -36,10 +36,10 @@ $integrations = [
 		'desc'     => __( 'Easy solution for the job recruitment to attract, manage & hire right talent faster. The Best Talent Recruitment Suite which lets you manage jobs & career page in Elementor.', 'essential-addons-for-elementor-lite' ),
 	],
 	[
-		'slug'     => 'crowdfundly',
-		'basename' => 'crowdfundly/crowdfundly.php',
-		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/cf.svg',
-		'title'    => __( 'Crowdfundly', 'essential-addons-for-elementor-lite' ),
+		'slug'     => 'wp-scheduled-posts',
+		'basename' => 'wp-scheduled-posts/wp-scheduled-posts.php',
+		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/wscp.svg',
+		'title'    => __( 'SchedulePress', 'essential-addons-for-elementor-lite' ),
 		'desc'     => __( 'Crowdfundly is a Software as a Service (SaaS) digital crowdfunding solution. Best fundraising solution in WordPress with Elementor & WooCommerce support.', 'essential-addons-for-elementor-lite' ),
 	],
 ];

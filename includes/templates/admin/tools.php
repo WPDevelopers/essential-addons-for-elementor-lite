@@ -33,7 +33,7 @@
                         </div>
                         <div class="content">
                             <h3><?php _e('Assets Embed Method','essential-addons-for-elementor-lite'); ?></h3>
-                            <p><?php _e('Configure the Essential Addons assets embed method. Keep it as default (recommended).','essential-addons-for-elementor-lite'); ?></p>
+                            <p><?php _e('Configure the Essential Addons assets embed method. Keep it as default (Recommended).','essential-addons-for-elementor-lite'); ?></p>
                         </div>
                     </div>
                 </div>
