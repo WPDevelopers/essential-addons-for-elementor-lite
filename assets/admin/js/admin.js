@@ -81,6 +81,18 @@
 		.css( "cursor", "pointer" );
 	} );
 	
+	$( document ).on( 'click', '.eael-element-global-switch', function ( e ) {
+		var status = $( this ).prop( "checked" );
+		$( ".eael-widget-item:enabled" ).each( function () {
+			$( this ).prop( "checked", status ).change();
+		} );
+		totalElements();
+		saveButton
+		.addClass( "save-now" )
+		.removeAttr( "disabled" )
+		.css( "cursor", "pointer" );
+	} );
+	
 	// Saving Data With Ajax Request
 	$( ".js-eael-settings-save" ).on( "click", function ( event ) {
 		event.preventDefault();
@@ -165,17 +177,7 @@
 		        } );
 	} );
 	
-	$( document ).on( 'click', '.eael-element-global-switch', function ( e ) {
-		var status = $( this ).prop( "checked" );
-		$( ".eael-widget-item:enabled" ).each( function () {
-			$( this ).prop( "checked", status ).change();
-		} );
-		totalElements();
-		saveButton
-		.addClass( "save-now" )
-		.removeAttr( "disabled" )
-		.css( "cursor", "pointer" );
-	} );
+	
 	
 	$( document ).on( 'click', function ( event ) {
 		var selector = $( event.target ).closest( ".eael-modal" );
@@ -436,6 +438,12 @@
 	$('.btn-collect').on('click', function () {
 		$(".eael-whatwecollecttext").toggle();
 	});
+	
+	$( document ).on( 'click', '#eael-elements-load-more', function ( event ) {
+		event.preventDefault();
+		$(event.target).closest('.eael-quick-setup-overlay').remove();
+		$('.eael-quick-setup-post-grid-panel-disable').show();
+	} )
 	
 	$(document).on('change', '.eael_preferences', function (e) {
 		var $this = $(this),
