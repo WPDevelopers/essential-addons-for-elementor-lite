@@ -571,11 +571,11 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
     <div class="eael-global__control mb45">
         <div class="global__control__content">
             <h4><?php _e( 'Global Control', 'essential-addons-for-elementor-lite' ); ?></h4>
-            <p><?php _e( 'Use the Toggle Button to Activate or Deactivate all the Elements & Extensions of Essential Addons at once.', 'essential-addons-for-elementor-lite' ); ?></p>
+            <p><?php _e( 'Use the Toggle Button to Activate or Deactivate all the Elements of Essential Addons at once.', 'essential-addons-for-elementor-lite' ); ?></p>
         </div>
         <div class="global__control__switch">
             <label class="eael-switch eael-switch--xl">
-                <input class="eael-element-global-switch" type="checkbox">
+                <input data-id="eael-elements-list" id="eael-global-switch-for-element" class="eael-element-global-switch" type="checkbox">
                 <span class="switch__box"></span>
             </label>
             <span class="switch__status enable"><?php _e( 'Enable All', 'essential-addons-for-elementor-lite' ); ?></span>
@@ -621,7 +621,7 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
 									<?php
 									$disabled = !empty( $item[ 'is_pro' ] ) && !$this->pro_enabled ? 'disabled' : '';
 									$status   = isset( $item[ 'is_pro' ] ) && !$this->pro_enabled ? 'disabled' : checked( 1, $this->get_settings( $item[ 'key' ] ), false );
-									printf( '<input class="eael-widget-item" id="%1$s" name="%1$s"
+									printf( '<input class="eael-widget-item eael-elements-list" id="%1$s" name="%1$s"
                                            type="checkbox" %2$s>', $item[ 'key' ], $status );
 									?>
                                     <span class="switch__box <?php echo $disabled; ?>"></span>
