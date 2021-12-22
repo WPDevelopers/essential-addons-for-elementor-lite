@@ -126,6 +126,27 @@ class Cta_Box extends Widget_Base
             ]
         );
 
+        /**
+         * Condition: 'eael_cta_color_type' => 'cta-bg-img' && 'eael_cta_color_type' => 'cta-bg-img-fixed',
+         */
+        $this->add_control(
+            'eael_cta_bg_image',
+            [
+                'label' => esc_html__('Background Image', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => Utils::get_placeholder_image_src(),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action.bg-img' => 'background-image: url({{URL}});',
+                    '{{WRAPPER}} .eael-call-to-action.bg-img-fixed' => 'background-image: url({{URL}});',
+                ],
+                'condition' => [
+                    'eael_cta_color_type' => ['cta-bg-img', 'cta-bg-img-fixed'],
+                ],
+            ]
+        );
+
         $this->add_control(
             'eael_cta_bg_overlay',
             [
@@ -313,27 +334,6 @@ class Cta_Box extends Widget_Base
                 'condition' => array(
                     'eael_cta_secondary_btn_is_show' => 'yes'
                 )
-            ]
-        );
-
-        /**
-         * Condition: 'eael_cta_color_type' => 'cta-bg-img' && 'eael_cta_color_type' => 'cta-bg-img-fixed',
-         */
-        $this->add_control(
-            'eael_cta_bg_image',
-            [
-                'label' => esc_html__('Background Image', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::MEDIA,
-                'default' => [
-                    'url' => Utils::get_placeholder_image_src(),
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-call-to-action.bg-img' => 'background-image: url({{URL}});',
-                    '{{WRAPPER}} .eael-call-to-action.bg-img-fixed' => 'background-image: url({{URL}});',
-                ],
-                'condition' => [
-                    'eael_cta_color_type' => ['cta-bg-img', 'cta-bg-img-fixed'],
-                ],
             ]
         );
 
