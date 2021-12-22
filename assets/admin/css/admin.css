@@ -3750,6 +3750,7 @@ button.button__greyBg:hover:disabled {
     transition-property: -webkit-box-shadow;
     transition-property: box-shadow;
     transition-property: box-shadow, -webkit-box-shadow;
+    width:100%;
 }
 
 .eael-info__box:hover {

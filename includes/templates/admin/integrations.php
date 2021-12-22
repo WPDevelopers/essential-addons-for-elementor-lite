@@ -5,7 +5,7 @@ $integrations = [
 		'basename' => 'betterdocs/betterdocs.php',
 		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bd.svg',
 		'title'    => __( 'BetterDocs', 'essential-addons-for-elementor-lite' ),
-		'desc'     => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily', 'essential-addons-for-elementor-lite' ),
+		'desc'     => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
 	],
 	[
 		'slug'     => 'embedpress',
@@ -26,7 +26,7 @@ $integrations = [
 		'basename' => 'notificationx/notificationx.php',
 		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx.svg',
 		'title'    => __( 'NotificationX', 'essential-addons-for-elementor-lite' ),
-		'desc'     => __( 'Best FOMO Social Proof Plugin to boost your sales conversion. Create stunning Sales Popup & Notification Bar With Elementor Support', 'essential-addons-for-elementor-lite' ),
+		'desc'     => __( 'Best FOMO Social Proof Plugin to boost your sales conversion. Create stunning Sales Popup & Notification Bar With Elementor Support.', 'essential-addons-for-elementor-lite' ),
 	],
 	[
 		'slug'     => 'easyjobs',
@@ -40,7 +40,7 @@ $integrations = [
 		'basename' => 'wp-scheduled-posts/wp-scheduled-posts.php',
 		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/wscp.svg',
 		'title'    => __( 'SchedulePress', 'essential-addons-for-elementor-lite' ),
-		'desc'     => __( 'Best Content Marketing Tool For WordPress – Schedule, Organize, & Auto Share Blog Posts. Take a quick glance at your content planning with Schedule Calendar, Auto & Manual Scheduler and  more', 'essential-addons-for-elementor-lite' ),
+		'desc'     => __( 'Best Content Marketing Tool For WordPress – Schedule, Organize, & Auto Share Blog Posts. Take a quick glance at your content planning with Schedule Calendar, Auto & Manual Scheduler and  more.', 'essential-addons-for-elementor-lite' ),
 	],
 ];
 ?>
