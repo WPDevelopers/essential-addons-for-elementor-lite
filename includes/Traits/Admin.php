@@ -80,6 +80,8 @@ trait Admin {
                 'ajaxurl' => admin_url( 'admin-ajax.php' ),
                 'nonce'   => wp_create_nonce( 'essential-addons-elementor' ),
                 'i18n'    => $i18n,
+                'settings_save' => EAEL_PLUGIN_URL . 'assets/admin/images/settings-save.gif',
+                'assets_regenerated' => EAEL_PLUGIN_URL . 'assets/admin/images/assets-regenerated.gif',
             ) );
         }
     }
@@ -90,65 +92,39 @@ trait Admin {
      * @since 1.1.2
      */
     public function admin_settings_page() {
+        $a = 'manzur';
         ?>
-        <div class="eael-settings-wrap">
-            <form action="" method="POST" id="eael-settings" name="eael-settings">
-                <div class="eael-header-bar">
-                    <div class="eael-header-left">
-                        <div class="eael-admin-logo-inline">
-                            <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-logo.svg'; ?>"
-                                 alt="essential-addons-for-elementor">
-                        </div>
-                        <h2 class="title"><?php echo __( 'Essential Addons Settings', 'essential-addons-for-elementor-lite' ); ?></h2>
-                    </div>
-                    <div class="eael-header-right">
-                        <button type="submit"
-                                class="button eael-btn js-eael-settings-save"><?php echo __( 'Save settings', 'essential-addons-for-elementor-lite' ); ?></button>
+        <form action="" method="POST" id="eael-settings" name="eael-settings">
+            <div class="template__wrapper background__greyBg px30 py50">
+                <div class="eael-container">
+                    <div class="eael-main__tab mb45">
+                        <ul class="ls-none tab__menu">
+                            <li class="tab__list active"><a class="tab__item" href="#general"><i class="ea-admin-icon icon-gear-alt"></i><?php echo __( 'General', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#elements"><i class="ea-admin-icon icon-element"></i><?php echo __( 'Elements', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#extensions"><i class="ea-admin-icon icon-extension"></i><?php echo __( 'Extensions', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#tools"><i class="ea-admin-icon icon-tools"></i><?php echo __( 'Tools', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#integrations"><i class="ea-admin-icon icon-plug"></i><?php echo __( 'Integrations', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <?php  if ( !$this->pro_enabled ) { ?>
+                                <li class="tab__list"><a class="tab__item" href="#go-pro"><i class="ea-admin-icon icon-lock-alt"></i><?php echo __( 'Go Premium', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                             <?php } ?>
+                        </ul>
                     </div>
                 </div>
-                <div class="eael-settings-tabs">
-                    <ul class="eael-tabs">
-                        <li><a href="#general" class="active"><img
-                                        src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-general.svg'; ?>"
-                                        alt="essential-addons-general-settings"><span><?php echo __( 'General', 'essential-addons-for-elementor-lite' ); ?></span></a>
-                        </li>
-                        <li><a class="eael-elements-tab" href="#elements"><img
-                                        src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-elements.svg'; ?>"
-                                        alt="essential-addons-elements"><span><?php echo __( 'Elements', 'essential-addons-for-elementor-lite' ); ?></span></a>
-                        </li>
-                        <li><a href="#extensions"><img
-                                        src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-extensions.svg'; ?>"
-                                        alt="essential-addons-extensions"><span><?php echo __( 'Extensions', 'essential-addons-for-elementor-lite' ); ?></span></a>
-                        </li>
-                        <li><a href="#tools"><img
-                                        src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-tools.svg'; ?>"
-                                        alt="essential-addons-tools"><span><?php echo __( 'Tools', 'essential-addons-for-elementor-lite' ); ?></span></a>
-                        </li>
-                        <li><a href="#integrations"><img
-                                        src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-integrations.svg'; ?>"
-                                        alt="essential-addons-integrations"><span><?php echo __( 'Integrations', 'essential-addons-for-elementor-lite' ); ?></span></a>
-                        </li>
-                        <?php if ( !$this->pro_enabled ) { ?>
-                            <li><a href="#go-pro"><img
-                                            src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-upgrade.svg'; ?>"
-                                            alt="essential-addons-go-pro"><span><?php echo __( 'Go Premium', 'essential-addons-for-elementor-lite' ); ?></span></a>
-                            </li>
-                        <?php } ?>
-
-                    </ul>
-                    <?php
-                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
-                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
-                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
-                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
-                    if ( !$this->pro_enabled ) {
-                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
-                    }
-                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/integrations.php';
-                    ?>
+                <div class="eael-admin-setting-tabs">
+	                <?php
+	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
+	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
+	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
+	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
+	                if ( !$this->pro_enabled ) {
+		                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
+	                }
+	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/integrations.php';
+	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/popup.php';
+	                ?>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
         <?php
     }
 
@@ -197,6 +173,27 @@ trait Admin {
             wp_send_json_success( [ 'message' => __( 'Login | Register Settings updated', 'essential-addons-for-elementor-lite' ) ] );
         }
 
+        //Login-register data
+	    if ( isset( $settings[ 'lr_recaptcha_sitekey' ] ) ) {
+		    update_option( 'eael_recaptcha_sitekey', sanitize_text_field( $settings[ 'lr_recaptcha_sitekey' ] ) );
+	    }
+	    if ( isset( $settings[ 'lr_recaptcha_secret' ] ) ) {
+		    update_option( 'eael_recaptcha_secret', sanitize_text_field( $settings[ 'lr_recaptcha_secret' ] ) );
+	    }
+	    if ( isset( $settings[ 'lr_recaptcha_language' ] ) ) {
+		    update_option( 'eael_recaptcha_language', sanitize_text_field( $settings[ 'lr_recaptcha_language' ] ) );
+	    }
+
+	    //pro settings
+	    if ( isset( $settings[ 'lr_g_client_id' ] ) ) {
+		    update_option( 'eael_g_client_id', sanitize_text_field( $settings[ 'lr_g_client_id' ] ) );
+	    }
+	    if ( isset( $settings[ 'lr_fb_app_id' ] ) ) {
+		    update_option( 'eael_fb_app_id', sanitize_text_field( $settings[ 'lr_fb_app_id' ] ) );
+	    }
+	    if ( isset( $settings[ 'lr_fb_app_secret' ] ) ) {
+		    update_option( 'eael_fb_app_secret', sanitize_text_field( $settings[ 'lr_fb_app_secret' ] ) );
+	    }
 
         // Saving Google Map Api Key
         if ( isset( $settings[ 'google-map-api' ] ) ) {
@@ -300,9 +297,6 @@ trait Admin {
          * classes for wrapper,
          * Message message for showing.
          */
-        // $notice->classes('upsale', 'notice is-dismissible ');
-        // $notice->message('upsale', '<p>' . __('5,000+ People using <a href="https://betterdocs.co/wordpress-plugin" target="_blank">BetterDocs</a> to create better Documentation & Knowledge Base!', 'essential-addons-for-elementor-lite') . '</p>');
-        // $notice->thumbnail('upsale', plugins_url('assets/admin/images/icon-documentation.svg', EAEL_PLUGIN_BASENAME));
 
         // Update Notice For PRO Version
         if ( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '4.0.0', '<' ) ) {
@@ -311,16 +305,7 @@ trait Admin {
             $notice->thumbnail( 'update', plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ) );
         }
 
-        // $notice->upsale_args = array(
-        //     'slug' => 'betterdocs',
-        //     'page_slug' => 'betterdocs-setup',
-        //     'file' => 'betterdocs.php',
-        //     'btn_text' => __('Install Free', 'essential-addons-for-elementor-lite'),
-        //     'condition' => [
-        //         'by' => 'class',
-        //         'class' => 'BetterDocs',
-        //     ],
-        // );
+
         $notice->options_args = array(
             'notice_will_show' => [
                 'opt_in' => $notice->timestamp,
@@ -333,6 +318,4 @@ trait Admin {
 
         $notice->init();
     }
-
-
 }
