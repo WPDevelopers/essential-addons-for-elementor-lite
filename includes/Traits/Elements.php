@@ -519,7 +519,7 @@ trait Elements
             }
 
             .eael-toc-global.eael-sticky {
-                top:{$eael_toc['eael_ext_toc_sticky_offset']['size']};
+                top:{$eael_toc['eael_ext_toc_sticky_offset']['size']}px;
             }
             .eael-toc-global .eael-toc-header .eael-toc-title,
             .eael-toc-global.collapsed .eael-toc-button
