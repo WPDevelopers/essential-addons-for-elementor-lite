@@ -349,7 +349,7 @@
 	
 	$( document ).on( 'eael_after_active_plugin', function ( event, obj ) {
 		if ( obj.plugin == 'templately/templately.php' || obj.plugin == 'templately' ) {
-			if ( $( ".eael-settings-tabs" ).length > 0 ) {
+			if ( $( ".eael-container .eael-main__tab" ).length > 0 ) {
 				location.reload();
 			}
 		}
