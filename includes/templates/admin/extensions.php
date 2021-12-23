@@ -60,15 +60,15 @@ $extensions = [
 			[
 				'key'       => 'xd-copy',
 				'title'     => __( 'Cross-Domain Copy Paste', 'essential-addons-for-elementor-lite' ),
-				'demo_link' => 'https://essential-addons.com/elementor/xd-copy/',
-				'doc_link'  => 'https://essential-addons.com/elementor/docs/xd-copy/',
+				'demo_link' => 'https://essential-addons.com/elementor/cross-domain-copy-paste/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/cross-domain-copy-paste/',
 				'is_pro'    => true
 			],
 			[
 				'key'       => 'scroll-to-top',
 				'title'     => __( 'Scroll to Top', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/scroll-to-top/',
-				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-scroll-to-top/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/scroll-to-top/',
 			],
 		]
 	]
