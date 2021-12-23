@@ -187,13 +187,13 @@
 		    baseSelectro = $( event.target ).closest( "#eael-admn-setting-popup" ),
 		    modal        = $( "#eael-admn-setting-popup" );
 		if ( !modal.length ) {
-			return false;
+			return ;
 		}
-		
+
 		if ( 'block' == modal.css( 'display' ) && selector.length ) {
-			return false;
+			return ;
 		}
-		
+
 		if ( 'block' == modal.css( 'display' ) && baseSelectro.length ) {
 			modal.hide();
 			$( ".modal__content__popup" ).hide();
