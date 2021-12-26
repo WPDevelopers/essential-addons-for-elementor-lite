@@ -205,7 +205,7 @@ $elements = [
 			[
 				'key'       => 'dynamic-filter-gallery',
 				'title'     => __( 'Dynamic Gallery', 'essential-addons-for-elementor-lite' ),
-				'demo_link' => 'https://essential-addons.com/elementor/filterable-gallery/',
+				'demo_link' => 'https://essential-addons.com/elementor/dynamic-gallery/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/dynamic-filterable-gallery/',
 				'is_pro'    => true
 			]
