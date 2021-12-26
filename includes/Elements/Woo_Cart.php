@@ -101,7 +101,7 @@ class Woo_Cart extends Widget_Base {
 	}
 
 	public function get_custom_help_url() {
-		return 'https://essential-addons.com/elementor/docs/woo-cart/';
+		return 'https://essential-addons.com/elementor/docs/woocommerce-cart/';
 	}
 
 	protected function _register_controls() {

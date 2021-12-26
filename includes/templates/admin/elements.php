@@ -545,7 +545,7 @@ $elements = [
 				'key'       => 'woo-cart',
 				'title'     => __( 'Woo Cart', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woo-cart/',
-				'doc_link'  => 'https://essential-addons.com/elementor/docs/woo-cart/'
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/woocommerce-cart/'
 			],
 			[
 				'key'       => 'woo-product-compare',

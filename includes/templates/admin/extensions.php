@@ -121,11 +121,11 @@ $extensions = [
                                         <span class="tooltip-text"><?php esc_html_e( 'Setting', 'essential-addons-for-elementor-lite' ); ?></span>
                                     </a>
 	                            <?php endif; ?>
-                                <a href="<?php echo esc_url( $item[ 'doc_link' ] ); ?>" class="element__icon">
+                                <a target="_blank" href="<?php echo esc_url( $item[ 'doc_link' ] ); ?>" class="element__icon">
                                     <i class="ea-admin-icon icon-doc"></i>
                                     <span class="tooltip-text"><?php esc_html_e( 'Documentation', 'essential-addons-for-elementor-lite' ); ?></span>
                                 </a>
-                                <a href="<?php echo esc_url( $item[ 'demo_link' ] ); ?>" class="element__icon">
+                                <a target="_blank" href="<?php echo esc_url( $item[ 'demo_link' ] ); ?>" class="element__icon">
                                     <i class="ea-admin-icon icon-monitor"></i>
                                     <span class="tooltip-text"><?php esc_html_e( 'Demo', 'essential-addons-for-elementor-lite' ); ?></span>
                                 </a>

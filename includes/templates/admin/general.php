@@ -84,11 +84,11 @@
                 </div>
                 <div class="statistic__item">
                     <h2 id="eael-used-elements">00</h2>
-                    <p><?php _e('Used Elements','essential-addons-for-elementor-lite'); ?></p>
+                    <p><?php _e('Active Elements','essential-addons-for-elementor-lite'); ?></p>
                 </div>
                 <div class="statistic__item">
                     <h2 id="eael-unused-elements">00</h2>
-                    <p><?php _e('Unused Elements','essential-addons-for-elementor-lite'); ?></p>
+                    <p><?php _e('Inactive Elements','essential-addons-for-elementor-lite'); ?></p>
                 </div>
             </div>
             <a target="_blank" href="https://essential-addons.com/elementor/docs/"
