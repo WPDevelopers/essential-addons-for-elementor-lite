@@ -43,3 +43,4 @@ node_modules
 src
 build
 postcss.config.js
+.wordpress-org
