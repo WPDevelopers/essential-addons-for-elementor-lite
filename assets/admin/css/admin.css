@@ -1824,6 +1824,15 @@
     }
 }
 
+
+@media (max-width: 767px) {
+    :root {
+        --gutter-45: 25px;
+        --gutter-30: 20px;
+
+    }
+}
+
 .m60 {
     margin: 60px;
 }
@@ -2182,6 +2191,16 @@
 
 .pr5 {
     padding-right: 5px;
+}
+
+@media all and (max-width: 767px) {
+    .p45 {
+        padding: 25px;
+    }
+    .px45 {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
 }
 
 * {
@@ -3537,6 +3556,12 @@ button.button__greyBg:hover:disabled {
     background: #E1E6F4;
     border-radius: 10px;
 }
+@media all and (max-width: 991px) {
+    .eael-main__tab .tab__menu {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
 
 .eael-main__tab .tab__menu .tab__list.active .tab__item {
     color: #5E2EFF;
@@ -3544,6 +3569,7 @@ button.button__greyBg:hover:disabled {
     -webkit-box-shadow: 0px 6px 6px rgba(53, 66, 134, 0.1);
     box-shadow: 0px 6px 6px rgba(53, 66, 134, 0.1);
 }
+
 
 .eael-main__tab .tab__menu .tab__list.active .tab__item i {
     color: #5E2EFF;
@@ -3566,6 +3592,12 @@ button.button__greyBg:hover:disabled {
 @media (max-width: 1199.98px) {
     .eael-main__tab .tab__menu .tab__list .tab__item {
         padding: 9px 18px;
+    }
+}
+
+@media all and (max-width: 767px) {
+    .eael-main__tab .tab__menu .tab__list .tab__item {
+        font-size: 14px;
     }
 }
 
@@ -3621,7 +3653,26 @@ button.button__greyBg:hover:disabled {
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
 }
+@media all and (max-width: 767px) {
+    .eael-basic__card {
+        display: block;
+    }
+    .eael-basic__card .eael-button {
+        margin-top: 20px;
+    }
+}
 
+@media all and (max-width: 575px) {
+    .eael-basic__card .eael__flex {
+        display: block;
+    }
+    .eael-basic__card .eael__flex img {
+        margin-bottom: 15px;
+    }
+    .eael-basic__card .eael-button {
+        margin-top: 20px;
+    }
+}
 .eael-activate__license__block h3 {
     font-size: var(--h3-fontsize);
     font-weight: 500;
@@ -3630,6 +3681,16 @@ button.button__greyBg:hover:disabled {
 
 .eael-activate__license__block .eael__flex h3 {
     margin-right: 30px;
+}
+
+@media all and (max-width: 767px) {
+    .eael-activate__license__block .eael__flex {
+        display: block;
+    }
+    .eael-activate__license__block .eael__flex img {
+        max-width: 200px;
+        margin-top: 15px;
+    }
 }
 
 .eael-activate__license__block p {
@@ -3736,6 +3797,16 @@ button.button__greyBg:hover:disabled {
     position: absolute;
     top: 5px;
     right: 5px;
+}
+
+@media all and (max-width: 767px) {
+    .eael-activate__license__block .license__form__block .eael-license-form-block .eael-button, .eael-activate__license__block .license__form__block form button {
+        position: static;
+        margin-top: 15px;
+    }
+    .eael-activate__license__block .license__form__block .eael-license-form-block .eael-form__control {
+        padding-right: 15px;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1399.98px) {
@@ -3878,6 +3949,18 @@ button.button__greyBg:hover:disabled {
     .eael-element__wrap {
         -ms-grid-columns: (1fr) [ 3 ];
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 767px) {
+    .eael-element__wrap {
+        -ms-grid-columns: (1fr) [ 2 ];
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 575px) {
+    .eael-element__wrap {
+        -ms-grid-columns: (1fr) [ 1 ];
+        grid-template-columns: repeat(1, 1fr);
     }
 }
 
@@ -4157,6 +4240,39 @@ button.button__greyBg:hover:disabled {
     margin: 0 20px;
 }
 
+@media all and (max-width: 991px) {
+    .eael-global__control .global__control__content {
+        flex: 1 1 auto;
+    }
+    .eael-global__control .global__control__button {
+        flex: 1 0 auto;
+        margin-left: 15px;
+    }
+}
+
+@media all and (max-width: 991px) {
+    .eael-global__control {
+        display: block;
+    }
+    .eael-global__control .global__control__content {
+        margin-bottom: 15px;
+        padding-right: 0;
+    }
+    .eael-global__control .global__control__button {
+        margin-left: 0;
+        display: block;
+        margin-top: 25px;
+    }
+}
+@media all and (max-width: 575px) {
+    .eael-global__control .global__control__switch .eael-switch {
+        margin: 0 10px;
+    }
+    .eael-global__control .global__control__switch .switch__status {
+        font-size: 14px;
+    }
+}
+
 .eael-tool__card .content h3 {
     font-weight: 500;
     color: #041137;
@@ -4196,6 +4312,21 @@ button.button__greyBg:hover:disabled {
 .eael-tool__card--flex .content p {
     font-size: 15px;
     font-style: unset;
+}
+@media all and (max-width: 439px) {
+    .eael-tool__card--flex {
+        display: block;
+    }
+    .eael-tool__card--flex .icon {
+        margin-bottom: 15px;
+    }
+    .eael-tool__card .eael__flex {
+        display: block;
+    }
+    .eael-tool__card .eael__flex .eael-select {
+        margin-top: 15px;
+        display: inline-block;
+    }
 }
 
 .eael-welcome__card {
@@ -4333,6 +4464,14 @@ button.button__greyBg:hover:disabled {
     font-size: 15px;
     font-weight: 400;
     color: #727272;
+}
+@media all and (max-width: 575px) {
+    .icon__card {
+        display: block;
+    }
+    .icon__card .icon {
+        margin-bottom: 15px;
+    }
 }
 
 .eael-form__control {
@@ -4620,6 +4759,16 @@ button.button__greyBg:hover:disabled {
     color: #727272;
 }
 
+@media all and (max-width: 439px) {
+    .eael-statistic {
+        display: block;
+    }
+    .eael-statistic .statistic__item:not(:last-child) {
+        border-right: 0;
+        margin-bottom: 15px;
+    }
+}
+
 .eael-modal__wrap {
     position: fixed;
     top: 0;
@@ -4761,6 +4910,16 @@ button.button__greyBg:hover:disabled {
     margin-right: 14px;
 }
 
+@media all and (max-width: 575px) {
+    .eael-login__setup .eael-input__inline {
+        display: block;
+    }
+    .eael-login__setup .eael-input__inline label {
+        margin-bottom: 5px;
+        display: inline-block;
+    }
+}
+
 .eael-features {
     display: -ms-grid;
     display: grid;
@@ -4773,6 +4932,18 @@ button.button__greyBg:hover:disabled {
     .eael-features {
         -ms-grid-columns: (1fr) [ 3 ];
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 767px) {
+    .eael-features {
+        -ms-grid-columns: (1fr) [ 2 ];
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 575px) {
+    .eael-features {
+        -ms-grid-columns: (1fr) [ 1 ];
+        grid-template-columns: repeat(1, 1fr);
     }
 }
 
