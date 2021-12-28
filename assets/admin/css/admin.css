@@ -3556,7 +3556,7 @@ button.button__greyBg:hover:disabled {
     background: #E1E6F4;
     border-radius: 10px;
 }
-@media all and (max-width: 991px) {
+@media all and (max-width: 1024px) {
     .eael-main__tab .tab__menu {
         flex-wrap: wrap;
         justify-content: center;
