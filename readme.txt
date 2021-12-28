@@ -222,11 +222,21 @@ Your existing elements/content will work with premium version. So you won't lose
 
 1. Overview of few widgets
 2. Elements control panel
-3. Countdown widget
-4. Team Member widget
-5. Data Table preview
-6. Form widget
-7. Pricing Table preview 
+3. Introducing EA 5.0
+4. Advanced Google Map Widget
+5. Advanced Tooltip Extension
+6. Advanced Tabs Widget
+7. Fancy Text Widget
+8. Filterable Gallery Widget
+9. Feature List Widget
+10. Image Hotspots Widget
+11. Woo Product Grid Widget
+12. Team Member Carousel Widget
+13. Smart Post List Widget
+14. One Page Navigation Widget
+15. Protected Content Widget
+16. Flip Box Widget
+17. Creative Buttons Widget
 
 
 == Changelog ==
