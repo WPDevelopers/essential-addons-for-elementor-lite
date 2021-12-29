@@ -8144,7 +8144,7 @@ msgid "%s ago"
 msgstr ""
 
 #: ../includes/Traits/Helper.php:791
-msgid "1,000+ Stunning Templates"
+msgid "1,700+ Stunning Templates"
 msgstr ""
 
 #: ../includes/Traits/Helper.php:792
@@ -8152,7 +8152,7 @@ msgid "Supports Elementor & Gutenberg"
 msgstr ""
 
 #: ../includes/Traits/Helper.php:793
-msgid "Powering up 17,000+ Websites"
+msgid "Powering up 100,000+ Websites"
 msgstr ""
 
 #: ../includes/Traits/Helper.php:794
@@ -8754,13 +8754,10 @@ msgid "Get Started with Essential Addons for Elementor"
 msgstr ""
 
 #: ../includes/templates/admin/general.php:39
-msgid ""
-"Thank you for choosing Essential Addons for Elementor. Get ready to enhance your\n"
-"                                    Elementor site building experience by using 50+ Essential Addons elements for\n"
-"                                    FREE."
+msgid "Thank you for choosing Essential Addons for Elementor. Get ready to enhance your Elementor site building experience by using 80+ Essential Addons elements & extensions."
 msgstr ""
 
-#: ../includes/templates/admin/general.php:43
+#: ../includes/templates/admin/general.php:41
 msgid "YouTube Tutorials"
 msgstr ""
 
@@ -8775,55 +8772,55 @@ msgstr ""
 msgid "Get Access to amazing features and boost your Elementor page building experience with Templately"
 msgstr ""
 
-#: ../includes/templates/admin/general.php:69
+#: ../includes/templates/admin/general.php:67
 msgid "Manage your License for your sites from your WPDeveloper account"
 msgstr ""
 
-#: ../includes/templates/admin/general.php:73
+#: ../includes/templates/admin/general.php:71
 msgid "<a target=\"_blank\" class=\"eael-button button__themeColor\" href=\"https://wpdeveloper.com/in/upgrade-essential-addons-elementor\" >%s</a>"
 msgstr ""
 
-#: ../includes/templates/admin/general.php:85
+#: ../includes/templates/admin/general.php:83
 msgid "Total Elements"
 msgstr ""
 
-#: ../includes/templates/admin/general.php:89
-msgid "Used Elements"
+#: ../includes/templates/admin/general.php:87
+msgid "Active Elements"
 msgstr ""
 
-#: ../includes/templates/admin/general.php:93
-msgid "Unused Elements"
+#: ../includes/templates/admin/general.php:91
+msgid "Inactive Elements"
 msgstr ""
 
-#: ../includes/templates/admin/general.php:98
+#: ../includes/templates/admin/general.php:96
 msgid "View Knowledgebase"
 msgstr ""
 
-#: ../includes/templates/admin/general.php:99
+#: ../includes/templates/admin/general.php:97
 msgid "Get started by spending some time with the documentation to get familiar with Essential Addons."
 msgstr ""
 
-#: ../includes/templates/admin/general.php:103
+#: ../includes/templates/admin/general.php:101
 msgid "Show Your Love"
 msgstr ""
 
-#: ../includes/templates/admin/general.php:104
+#: ../includes/templates/admin/general.php:102
 msgid "Take your 2 minutes to review the plugin and spread the love to encourage us to keep it going."
 msgstr ""
 
-#: ../includes/templates/admin/general.php:107
+#: ../includes/templates/admin/general.php:105
 msgid " Need Help?"
 msgstr ""
 
-#: ../includes/templates/admin/general.php:108
+#: ../includes/templates/admin/general.php:106
 msgid "Stuck with something? Get help from live chat or submit a support ticket."
 msgstr ""
 
-#: ../includes/templates/admin/general.php:112
+#: ../includes/templates/admin/general.php:110
 msgid "Join the Community"
 msgstr ""
 
-#: ../includes/templates/admin/general.php:113
+#: ../includes/templates/admin/general.php:111
 msgid "Join the Facebook community and discuss with fellow developers & users."
 msgstr ""
 
