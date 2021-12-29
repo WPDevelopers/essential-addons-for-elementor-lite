@@ -15,6 +15,10 @@
     font-display: block;
 }
 
+.ea-admin-icon[class^="icon-"]:before, .ea-admin-icon[class*=" icon-"]:before {
+    font-family: 'ea-admin-icon' !important;
+}
+
 .ea-admin-icon {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'ea-admin-icon' !important;
