@@ -55,19 +55,19 @@
 
 @media only screen and (max-width: 767px) {
   .gform_wrapper .gf_progressbar {
-    width: 100% !important;
+    width: calc(100%) !important;
   }
 }
 
 @media only screen and (min-width: 768px) {
   .gform_wrapper .gf_progressbar {
-    width: 100% !important;
+    width: calc(100%) !important;
   }
 }
 
 @media only screen and (min-width: 641px) {
   .gform_wrapper.gform_validation_error .gform_body ul li.gfield.gfield_error:not(.gf_left_half):not(.gf_right_half) {
-    max-width: 100% !important;
+    max-width: calc(100%) !important;
   }
 }
 
