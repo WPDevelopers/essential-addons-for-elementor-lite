@@ -311,6 +311,14 @@ class Woo_Checkout extends Widget_Base {
 			]
 		);
 		$this->add_control(
+			'ea_woo_checkout_coupon_hide',
+			[
+				'label'        => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+			]
+		);
+		$this->add_control(
 			'ea_woo_checkout_coupon_icon',
 			[
 				'label' => __( 'Icon', 'elementor' ),

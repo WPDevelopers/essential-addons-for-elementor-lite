@@ -251,9 +251,9 @@ trait Woo_Checkout_Helper {
 	 */
 	public static function ea_coupon_template() {
         $settings = self::ea_get_woo_checkout_settings();
-        if(get_option('woocommerce_enable_coupons')==='no'){
-            return ;
-        }
+		if ( get_option( 'woocommerce_enable_coupons' ) === 'no' || $settings['ea_woo_checkout_coupon_hide'] === 'yes' ) {
+			return;
+		}
 		?>
 		<div class="woo-checkout-coupon">
 			<div class="ea-coupon-icon">
