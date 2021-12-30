@@ -1,4 +1,4 @@
-<div id="eael-admn-setting-popup" class="eael-modal__wrap show">
+<div id="eael-admn-setting-popup" class="eael-modal__wrap eael-modal-show">
     <div class="eael-modal__dialogue">
         <div class="eael-modal">
             <div class="modal__body">

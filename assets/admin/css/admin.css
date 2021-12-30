@@ -4784,11 +4784,11 @@ button.button__greyBg:hover:disabled {
     display: none;
 }
 
-.eael-modal__wrap.show {
+.eael-modal__wrap.eael-modal-show {
     display: block;
 }
 
-.eael-modal__wrap.show .eael-modal__dialogue {
+.eael-modal__wrap.eael-modal-show .eael-modal__dialogue {
     opacity: 1;
     visibility: visible;
 }
