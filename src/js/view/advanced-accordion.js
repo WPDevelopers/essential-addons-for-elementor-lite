@@ -72,13 +72,3 @@ ea.hooks.addAction("init", "ea", () => {
 		}
 	);
 });
-
-(function ($) {
-	$(document).on('click', '.eael-creative-button, .elementor-button', function (e) {
-		var hashURL = $(this).attr('href');
-
-		if (hashURL.startsWith('#')) {
-			$(hashURL).trigger('click');
-		}
-	})
-})(jQuery);
