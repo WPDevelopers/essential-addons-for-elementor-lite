@@ -497,7 +497,7 @@ class Image_Accordion extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-img-accordion .overlay .img-accordion-title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-img-accordion .overlay .img-accordion-title' => 'color: {{VALUE}} !important;',
                 ],
             ]
         );
