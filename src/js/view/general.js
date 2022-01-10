@@ -82,3 +82,13 @@ jQuery(window).on("elementor/frontend/init", function () {
 		ea.hooks.doAction("editMode.init");
 	}
 });
+
+(function ($) {
+	$(document).on('click', '.eael-creative-button, .elementor-button', function (e) {
+		var hashURL = $(this).attr('href');
+
+		if (hashURL.startsWith('#')) {
+			$(hashURL).trigger('click');
+		}
+	})
+})(jQuery);
