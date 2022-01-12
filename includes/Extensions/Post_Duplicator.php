@@ -110,19 +110,17 @@ class Post_Duplicator {
 			}
 
 			global $wpdb;
-			$post_meta = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d", intval( $post_id ) ) );
+			$post_meta = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d", $post_id ) );
 
 			if ( ! empty( $post_meta ) && is_array( $post_meta ) ) {
 
 				$duplicate_insert_query = "INSERT INTO $wpdb->postmeta ( post_id, meta_key, meta_value ) VALUES ";
-				$value_cells            = array();
 				$insert = '';
 
 				foreach ( $post_meta as $meta_info ) {
 
 					$meta_key      = sanitize_text_field( $meta_info->meta_key );
-					$meta_value    = wp_slash( $meta_info->meta_value );
-					$value_cells[] = "($duplicated_id, '$meta_key', '$meta_value')";
+					$meta_value    =  $meta_info->meta_value;
 
 					if ( ! empty( $insert ) ) {
 						$insert .= ', ';
