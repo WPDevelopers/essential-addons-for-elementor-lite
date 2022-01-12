@@ -670,6 +670,12 @@ trait Woo_Cart_Helper {
 		<?php
 	}
 
+	public function wc_empty_cart_message( $message ) {
+		$settings   = self::ea_get_woo_cart_settings();
+		$empty_text = $settings['eael_woo_cart_components_empty_cart_text'];
+
+		return empty( $empty_text ) ? $message : esc_html( $empty_text );
+	}
 }
 
 
