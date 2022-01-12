@@ -1108,6 +1108,15 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_woo_cart_components_empty_cart_text',
+			[
+				'label'   => esc_html__( 'Empty Cart Text', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => esc_html__( 'Your cart is currently empty.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**
@@ -2509,6 +2518,8 @@ class Woo_Cart extends Widget_Base {
 
 		$settings = $this->get_settings_for_display();
 		$this->ea_woo_cart_add_actions( $settings );
+
+		add_filter( 'wc_empty_cart_message', [ $this, 'wc_empty_cart_message' ] );
 
 		if ( in_array( $settings['ea_woo_cart_layout'], [ 'style-3', 'style-4', 'style-5' ] ) ) {
 			if ( ! apply_filters( 'eael/pro_enabled', false ) ) {
