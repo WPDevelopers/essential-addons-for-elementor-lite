@@ -174,12 +174,14 @@ trait Enqueue
                     $this->generate_script($this->uid, $elements, 'edit', 'css');
                 }
 
+	            $post_updated_at   = get_option( $this->uid . '_eael_updated_at' );
+
                 // enqueue
                 wp_enqueue_style(
                     $this->uid,
                     $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid . '.min.css'),
                     false,
-                    time()
+	                $post_updated_at
                 );
             }
 
@@ -195,12 +197,14 @@ trait Enqueue
                     $this->generate_script($this->uid, $elements, 'edit', 'js');
                 }
 
+	            $post_updated_at   = get_option( $this->uid . '_eael_updated_at' );
+
                 // enqueue
                 wp_enqueue_script(
                     $this->uid,
                     $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid . '.min.js'),
                     ['jquery'],
-                    time(),
+	                $post_updated_at,
                     true
                 );
 
@@ -236,12 +240,14 @@ trait Enqueue
                         $this->generate_script($tmp_uid, $elements, 'view', 'css');
                     }
 
+	                $post_updated_at   = get_option( $this->uid . '_eael_updated_at' );
+
                     // enqueue
                     wp_enqueue_style(
                         $this->uid,
                         $this->safe_url(EAEL_ASSET_URL . '/' . $tmp_uid . '.min.css'),
                         false,
-                        time()
+	                    $post_updated_at
                     );
                 } else {
                     // generate script if not exists
@@ -249,12 +255,14 @@ trait Enqueue
                         $this->generate_script($this->uid, $elements, 'view', 'css');
                     }
 
+	                $post_updated_at   = get_option( $this->uid . '_eael_updated_at' );
+
                     // enqueue
                     wp_enqueue_style(
                         $this->uid,
                         $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid . '.min.css'),
                         false,
-                        time()
+	                    $post_updated_at
                     );
                 }
             }
@@ -272,12 +280,14 @@ trait Enqueue
                         $this->generate_script($tmp_uid, $elements, 'view', 'js');
                     }
 
+	                $post_updated_at   = get_option( $this->uid . '_eael_updated_at' );
+
                     // enqueue
                     wp_enqueue_script(
                         $this->uid,
                         $this->safe_url(EAEL_ASSET_URL . '/' . $tmp_uid . '.min.js'),
                         ['jquery'],
-                        time(),
+	                    $post_updated_at,
                         true
                     );
                 } else {
@@ -286,12 +296,14 @@ trait Enqueue
                         $this->generate_script($this->uid, $elements, 'view', 'js');
                     }
 
+	                $post_updated_at   = get_option( $this->uid . '_eael_updated_at' );
+
                     // enqueue
                     wp_enqueue_script(
                         $this->uid,
                         $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid . '.min.js'),
                         ['jquery'],
-                        time(),
+	                    $post_updated_at,
                         true
                     );
                 }
