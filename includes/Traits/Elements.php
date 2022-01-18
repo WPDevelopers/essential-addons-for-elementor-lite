@@ -330,7 +330,7 @@ trait Elements
             return;
         }
 
-        if (!is_singular()) {
+        if (!is_singular() && !is_archive()) {
             return;
         }
 
