@@ -476,7 +476,7 @@ class Interactive_Circle extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-circle-btn .eael-circle-btn-txt' => 'color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon .eael-circle-icon-inner span.eael-circle-btn-txt' => 'color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -487,8 +487,8 @@ class Interactive_Circle extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				//			    'default' => '#333',
 				'selectors' => [
-					'{{WRAPPER}} .eael-circle-btn i'   => 'color: {{VALUE}}!important;',
-					'{{WRAPPER}} .eael-circle-btn svg' => 'fill: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon i'   => 'color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon svg' => 'fill: {{VALUE}}!important;',
 				],
 				'condition' => [
 					'eael_interactive_circle_btn_icon_show' => 'yes'
@@ -536,7 +536,8 @@ class Interactive_Circle extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				//			    'default' => '#fff',
 				'selectors' => [
-					'{{WRAPPER}} .eael-circle-btn:hover .eael-circle-btn-txt, {{WRAPPER}} .eael-circle-btn.active:hover .eael-circle-btn-txt' => 'color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn:hover .eael-circle-btn-icon .eael-circle-icon-inner span.eael-circle-btn-txt'        => 'color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active:hover .eael-circle-btn-icon .eael-circle-icon-inner span.eael-circle-btn-txt' => 'color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -545,10 +546,9 @@ class Interactive_Circle extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
-				//			    'default' => '#fff',
 				'selectors' => [
-					'{{WRAPPER}} .eael-circle-btn:hover i, {{WRAPPER}} .eael-circle-btn.active:hover i'     => 'color: {{VALUE}}!important;',
-					'{{WRAPPER}} .eael-circle-btn:hover svg, {{WRAPPER}} .eael-circle-btn.active:hover svg' => 'fill: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn:hover .eael-circle-btn-icon i, {{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active:hover .eael-circle-btn-icon i'     => 'color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn:hover .eael-circle-btn-icon svg, {{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active:hover .eael-circle-btn-icon svg'     => 'fill: {{VALUE}}!important;',
 				],
 				'condition' => [
 					'eael_interactive_circle_btn_icon_show' => 'yes'
@@ -602,7 +602,7 @@ class Interactive_Circle extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-circle-btn.active .eael-circle-btn-txt' => 'color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active .eael-circle-btn-icon .eael-circle-icon-inner span.eael-circle-btn-txt' => 'color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -615,6 +615,10 @@ class Interactive_Circle extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-circle-btn.active i'   => 'color: {{VALUE}}!important;',
 					'{{WRAPPER}} .eael-circle-btn.active svg' => 'fill: {{VALUE}}!important;',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active .eael-circle-btn-icon i'     => 'color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active .eael-circle-btn-icon svg'     => 'fill: {{VALUE}}!important;',
 				],
 				'condition' => [
 					'eael_interactive_circle_btn_icon_show' => 'yes'
