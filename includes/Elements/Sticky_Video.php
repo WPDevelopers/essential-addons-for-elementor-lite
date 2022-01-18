@@ -357,11 +357,12 @@ class Sticky_Video extends Widget_Base
             'eaelsv_overlay_options',
             [
                 'label' => __('Image Overlay', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_block' => false,
-                'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
-                'return_value' => 'yes',
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+	                '' => __('Default', 'essential-addons-for-elementor-lite'),
+	                'yes' => __('Custom', 'essential-addons-for-elementor-lite'),
+	                'transparent' => __('Transparent', 'essential-addons-for-elementor-lite'),
+                ],
                 'default' => '',
             ]
         );
@@ -703,6 +704,7 @@ class Sticky_Video extends Widget_Base
         $sticky = $settings['eaelsv_is_sticky'];
         $autoplay = ($settings['eaelsv_autopaly'] == 'yes') ? $settings['eaelsv_autopaly'] : 'no';
         $eaelsvPlayer = '';
+	    $eaelsv_overlay_visibility = $settings['eaelsv_overlay_options'];
 
         if ('youtube' == $settings['eael_video_source']) {
             $eaelsvPlayer = $this->eaelsv_load_player_youtube();
@@ -714,7 +716,7 @@ class Sticky_Video extends Widget_Base
             $eaelsvPlayer = $this->eaelsv_load_player_self_hosted();
         }
 
-        echo '<div class="eael-sticky-video-wrapper">';
+	    echo '<div class="eael-sticky-video-wrapper eaelsv-overlay-visibility-' . esc_attr( $eaelsv_overlay_visibility ) . '">';
         if ('yes' === $settings['eaelsv_overlay_options']) {
             // $autoplay = 'yes';
             $icon = '';
