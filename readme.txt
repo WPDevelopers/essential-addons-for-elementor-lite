@@ -154,7 +154,7 @@ More features and improvements are coming on regular updates. Want to unlock the
 **WP Mayor:** “If you use Elementor, Essential Addons is a great way to expand your library of available widgets without slowing your site down.” 
 **WP Pagebuilders:** “With 60+ additional widgets, Essential Addons is a great add-on to enhance your experience in building a website with WordPress+Elementor.” 
 **MonsterPost:** “Essential Addons for Elementor has the largest number of active users among all third-party extensions on the market. The widgets are tested in all popular web browsers to ensure full browser compatibility for all elements.” 
-**WPCrafer:** WordPress influencer Adam Preiser did a Speed Test & found Essential Addons for Elementor is the fastest solution out there 👇
+**WPCrafter:** WordPress influencer Adam Preiser did a Speed Test & found Essential Addons for Elementor is the fastest solution out there 👇
 
 https://www.youtube.com/watch?v=K9BssSV-KC8
 
