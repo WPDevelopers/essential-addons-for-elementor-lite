@@ -212,6 +212,7 @@
   font-weight: inherit;
   font-size: inherit;
   text-indent: initial;
+  border: none;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-remove a::before {
   content: none;
@@ -568,6 +569,7 @@
   font-weight: inherit;
   font-size: inherit;
   text-indent: initial;
+  border: none;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td.product-remove a::before {
   content: none;
