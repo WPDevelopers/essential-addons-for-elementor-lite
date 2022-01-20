@@ -84,10 +84,10 @@ jQuery(window).on("elementor/frontend/init", function () {
 });
 
 (function ($) {
-	$(document).on('click', '.eael-creative-button, .elementor-button', function (e) {
+	$(document).on('click', 'a', function (e) {
 		var hashURL = $(this).attr('href');
 
-		if (hashURL.startsWith('#')) {
+		if (hashURL.startsWith('#') && ($(hashURL).hasClass('eael-tab-item-trigger') || $(hashURL).hasClass('eael-accordion-header'))) {
 			$(hashURL).trigger('click');
 		}
 	})
