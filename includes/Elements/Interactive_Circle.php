@@ -466,7 +466,7 @@ class Interactive_Circle extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-btn .eael-circle-btn-icon, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-2 .eael-circle-btn .eael-circle-btn-icon'     => 'background-color: {{VALUE}}!important;',
-					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-btn .eael-circle-icon-inner, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-btn .eael-circle-icon-inner' => 'background-color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon .eael-circle-icon-inner, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-btn .eael-circle-icon-inner' => 'background-color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -477,6 +477,7 @@ class Interactive_Circle extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon .eael-circle-icon-inner span.eael-circle-btn-txt' => 'color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon .eael-circle-btn-icon-inner span.eael-circle-btn-txt' => 'color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -522,9 +523,9 @@ class Interactive_Circle extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-btn:hover .eael-circle-btn-icon, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-2 .eael-circle-btn:hover .eael-circle-btn-icon'                   => 'background-color: {{VALUE}}!important;',
-					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-btn:hover .eael-circle-icon-inner, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-btn:hover .eael-circle-icon-inner'               => 'background-color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn:hover .eael-circle-btn-icon .eael-circle-icon-inner, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-btn:hover .eael-circle-icon-inner'               => 'background-color: {{VALUE}}!important;',
 					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-btn.active:hover .eael-circle-btn-icon, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-2 .eael-circle-btn.active:hover .eael-circle-btn-icon'     => 'background-color: {{VALUE}}!important;',
-					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-btn.active:hover .eael-circle-icon-inner, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-btn.active:hover .eael-circle-icon-inner' => 'background-color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active:hover .eael-circle-btn-icon .eael-circle-icon-inner, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-btn.active:hover .eael-circle-icon-inner' => 'background-color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -590,7 +591,7 @@ class Interactive_Circle extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-btn.active .eael-circle-btn-icon, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-2 .eael-circle-btn.active .eael-circle-btn-icon'     => 'background-color: {{VALUE}}!important;',
-					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-btn.active .eael-circle-icon-inner, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-btn.active .eael-circle-icon-inner' => 'background-color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active .eael-circle-btn-icon .eael-circle-icon-inner, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-btn.active .eael-circle-icon-inner' => 'background-color: {{VALUE}}!important;',
 
 					'{{WRAPPER}} .eael-circle-btn.active .eael-circle-btn-icon' => 'background-color: {{VALUE}}!important;',
 				],
