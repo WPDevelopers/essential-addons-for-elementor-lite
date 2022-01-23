@@ -142,16 +142,17 @@ trait Enqueue
             EAEL_PLUGIN_VERSION
         );
 
-        // localize object
-        $this->localize_objects = apply_filters('eael/localize_objects', [
-            'ajaxurl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('essential-addons-elementor'),
-	        'i18n' => [
-	        	'added' => __('Added ', 'essential-addons-for-elementor-lite'),
-	        	'compare' => __('Compare', 'essential-addons-for-elementor-lite'),
-                'loading' => esc_html__('Loading...', 'essential-addons-for-elementor-lite')
-            ],
-        ]);
+	    // localize object
+	    $this->localize_objects = apply_filters( 'eael/localize_objects', [
+		    'ajaxurl'        => admin_url( 'admin-ajax.php' ),
+		    'nonce'          => wp_create_nonce( 'essential-addons-elementor' ),
+		    'i18n'           => [
+			    'added'   => __( 'Added ', 'essential-addons-for-elementor-lite' ),
+			    'compare' => __( 'Compare', 'essential-addons-for-elementor-lite' ),
+			    'loading' => esc_html__( 'Loading...', 'essential-addons-for-elementor-lite' )
+		    ],
+		    'page_permalink' => get_the_permalink(),
+	    ] );
 
         // edit mode
         if ($this->is_edit_mode()) {
