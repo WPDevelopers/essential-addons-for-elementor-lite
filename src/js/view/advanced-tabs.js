@@ -129,11 +129,6 @@ ea.hooks.addAction("init", "ea", () => {
 				if ($evCalendar.length) {
 					ea.hooks.doAction("eventCalendar.reinit");
 				}
-
-				// reinit swiper slider
-				setTimeout(function () {
-					window.dispatchEvent(new Event('resize'));
-				}, 100);
 			});
 		}
 	);

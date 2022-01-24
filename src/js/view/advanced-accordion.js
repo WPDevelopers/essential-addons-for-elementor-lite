@@ -68,11 +68,6 @@ ea.hooks.addAction("init", "ea", () => {
 					}
 				}
 				ea.hooks.doAction("widgets.reinit",$this.parent());
-
-                // reinit swiper slider
-                setTimeout(function () {
-                    window.dispatchEvent(new Event('resize'));
-                }, 100);
 			});
 		}
 	);
