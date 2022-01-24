@@ -62,6 +62,8 @@ ea.hooks.addAction("init", "ea", () => {
                     ? $contentTicker.data("pause-on-hover")
                     : "",
             $contentTickerOptions = {
+                observer: true,
+                observeParents: true,
                 direction: "horizontal",
                 loop: $loop,
                 speed: $speed,
