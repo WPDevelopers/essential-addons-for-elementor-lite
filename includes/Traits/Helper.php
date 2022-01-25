@@ -111,7 +111,8 @@ trait Helper
             'read_more_link_target_blank' => $settings['read_more_link_target_blank'] ? 'target="_blank"' : '',
         ];
 
-        $template_info = $_REQUEST['template_info'];
+	    $template_info = $_REQUEST['template_info'];
+	    $template_info = array_map( 'sanitize_text_field', $template_info );
 
         if ( $template_info ) {
 
