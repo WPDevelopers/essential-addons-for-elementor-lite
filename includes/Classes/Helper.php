@@ -336,23 +336,30 @@ class Helper
      *
      * @return array
      */
-    public static function get_authors_list()
-    {
-        $users = get_users([
-            'who' => 'authors',
-            'has_published_posts' => true,
-            'fields' => [
-                'ID',
-                'display_name',
-            ],
-        ]);
+	public static function get_authors_list() {
+		$args = [
+			'capability'          => array( 'edit_posts' ),
+			'has_published_posts' => true,
+			'fields'              => [
+				'ID',
+				'display_name',
+			],
+		];
 
-        if (!empty($users)) {
-            return wp_list_pluck($users, 'display_name', 'ID');
-        }
+		// Capability queries were only introduced in WP 5.9.
+		if ( version_compare( $GLOBALS['wp_version'], '5.9-alpha', '<' ) ) {
+			$args['who'] = 'authors';
+			unset( $args['capability'] );
+		}
 
-        return [];
-    }
+		$users = get_users( $args );
+
+		if ( ! empty( $users ) ) {
+			return wp_list_pluck( $users, 'display_name', 'ID' );
+		}
+
+		return [];
+	}
 
     /**
      * Get all Tags
