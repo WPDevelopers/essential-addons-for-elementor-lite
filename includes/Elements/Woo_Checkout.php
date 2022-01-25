@@ -311,6 +311,14 @@ class Woo_Checkout extends Widget_Base {
 			]
 		);
 		$this->add_control(
+			'ea_woo_checkout_coupon_hide',
+			[
+				'label'        => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+			]
+		);
+		$this->add_control(
 			'ea_woo_checkout_coupon_icon',
 			[
 				'label' => __( 'Icon', 'elementor' ),
@@ -2688,17 +2696,18 @@ class Woo_Checkout extends Widget_Base {
 		] );
 
 		global $wp;
-        $order_review_change_data = [
-            'ea_woo_checkout_layout' => $settings['ea_woo_checkout_layout'],
-            'ea_woo_checkout_table_product_text' => $settings['ea_woo_checkout_table_product_text'],
-            'ea_woo_checkout_table_quantity_text' => $settings['ea_woo_checkout_table_quantity_text'],
-            'ea_woo_checkout_table_price_text' => $settings['ea_woo_checkout_table_price_text'],
-            'ea_woo_checkout_shop_link' => $settings['ea_woo_checkout_shop_link'],
-            'ea_woo_checkout_shop_link_text' => $settings['ea_woo_checkout_shop_link_text'],
-            'ea_woo_checkout_table_subtotal_text' => $settings['ea_woo_checkout_table_subtotal_text'],
-            'ea_woo_checkout_table_shipping_text' => $settings['ea_woo_checkout_table_shipping_text'],
-            'ea_woo_checkout_table_total_text' => $settings['ea_woo_checkout_table_total_text'],
-        ];
+		$order_review_change_data = [
+			'ea_woo_checkout_layout'              => $settings['ea_woo_checkout_layout'],
+			'ea_woo_checkout_table_header_text'   => $settings['ea_woo_checkout_table_header_text'],
+			'ea_woo_checkout_table_product_text'  => $settings['ea_woo_checkout_table_product_text'],
+			'ea_woo_checkout_table_quantity_text' => $settings['ea_woo_checkout_table_quantity_text'],
+			'ea_woo_checkout_table_price_text'    => $settings['ea_woo_checkout_table_price_text'],
+			'ea_woo_checkout_shop_link'           => $settings['ea_woo_checkout_shop_link'],
+			'ea_woo_checkout_shop_link_text'      => $settings['ea_woo_checkout_shop_link_text'],
+			'ea_woo_checkout_table_subtotal_text' => $settings['ea_woo_checkout_table_subtotal_text'],
+			'ea_woo_checkout_table_shipping_text' => $settings['ea_woo_checkout_table_shipping_text'],
+			'ea_woo_checkout_table_total_text'    => $settings['ea_woo_checkout_table_total_text'],
+		];
         $this->ea_woo_checkout_add_actions($settings);
 
 		?>
