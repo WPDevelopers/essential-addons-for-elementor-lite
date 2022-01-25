@@ -82,3 +82,19 @@ jQuery(window).on("elementor/frontend/init", function () {
 		ea.hooks.doAction("editMode.init");
 	}
 });
+
+(function ($) {
+	$(document).on('click', 'a', function (e) {
+		var hashURL = $(this).attr('href'),
+			isStartWithHash = hashURL.startsWith('#');
+
+		if (!isStartWithHash) {
+			hashURL = hashURL.replace(localize.page_permalink, '');
+			isStartWithHash = hashURL.startsWith('#');
+		}
+
+		if (isStartWithHash && ($(hashURL).hasClass('eael-tab-item-trigger') || $(hashURL).hasClass('eael-accordion-header'))) {
+			$(hashURL).trigger('click');
+		}
+	});
+})(jQuery);
