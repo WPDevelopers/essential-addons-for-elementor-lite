@@ -242,13 +242,15 @@ $thumb-bg-1: #E5F6FC;
                             color: $icon-color;
 
                             a {
-                                color: $icon-color;
+                                color: $icon-color !important;
                                 display: block;
                                 width: auto;
                                 height: auto;
                                 line-height: inherit;
                                 font-weight: inherit;
+                                font-size: inherit;
                                 text-indent: initial;
+                                border: none;
 
                                 &::before {
                                     content: none;
@@ -644,13 +646,15 @@ $thumb-bg-1: #E5F6FC;
                                 flex: 1 1 0%;
 
                                 a {
-                                    color: $icon-color;
+                                    color: $icon-color !important;
                                     display: block;
                                     width: auto;
                                     height: auto;
                                     line-height: inherit;
                                     font-weight: inherit;
+                                    font-size: inherit;
                                     text-indent: initial;
+                                    border: none;
 
                                     &::before {
                                         content: none;

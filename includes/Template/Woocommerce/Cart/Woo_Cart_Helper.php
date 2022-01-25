@@ -34,7 +34,7 @@ trait Woo_Cart_Helper {
 	}
 
 	public static function woo_cart_style_one( $settings ) { ?>
-        <form class="woocommerce-cart-form eael-woo-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
+        <form class="woocommerce-cart-form eael-woo-cart-form woocommerce" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 			<?php do_action( 'woocommerce_before_cart_table' ); ?>
             <div class="eael-woo-cart-table-warp">
                 <table class="shop_table cart woocommerce-cart-form__contents eael-woo-cart-table">
@@ -360,7 +360,7 @@ trait Woo_Cart_Helper {
 	}
 
 	public static function woo_cart_style_two( $settings ) { ?>
-        <form class="woocommerce-cart-form eael-woo-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
+        <form class="woocommerce-cart-form eael-woo-cart-form woocommerce" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 			<?php do_action( 'woocommerce_before_cart_table' ); ?>
 
             <div class="shop_table cart woocommerce-cart-form__contents eael-woo-cart-table">
