@@ -42,6 +42,13 @@ $integrations = [
 		'title'    => __( 'SchedulePress', 'essential-addons-for-elementor-lite' ),
 		'desc'     => __( 'Best Content Marketing Tool For WordPress – Schedule, Organize, & Auto Share Blog Posts. Take a quick glance at your content planning with Schedule Calendar, Auto & Manual Scheduler and  more.', 'essential-addons-for-elementor-lite' ),
 	],
+	[
+		'slug'     => 'betterlinks',
+		'basename' => 'betterlinks/betterlinks.php',
+		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/btl.svg',
+		'title'    => __( 'BetterLinks', 'essential-addons-for-elementor-lite' ),
+		'desc'     => __( 'Best Link Shortening tool to create, shorten and manage any URL to help you cross-promote your brands & products. Gather analytics reports, run successfully marketing campaigns easily & many more.', 'essential-addons-for-elementor-lite' ),
+	],
 ];
 ?>
 

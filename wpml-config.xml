@@ -400,5 +400,29 @@
                 <field type="Login | Register Form: Required Note" editor_type="AREA">required_note</field>
             </fields-in-item>
         </widget>
+        <widget name="eael-interactive-circle">
+            <conditions>
+                <condition key="widgetType">eael-interactive-circle</condition>
+            </conditions>
+            <fields-in-item items_of="eael_interactive_circle_item">
+                <field type="Interactive Circle List: Title" editor_type="LINE">eael_interactive_circle_btn_title</field>
+                <field type="Interactive Circle List: Content" editor_type="AREA">eael_interactive_circle_item_content</field>
+            </fields-in-item>
+        </widget>
+        <widget name="eael-woo-cart">
+            <conditions>
+                <condition key="widgetType">eael-woo-cart</condition>
+            </conditions>
+            <fields-in-item items_of="table_items">
+                <field type="Woo Cart List: Title" editor_type="LINE">column_heading_title</field>
+            </fields-in-item>
+            <fields>
+                <field type="Woo Cart: Button Text" editor_type="LINE">eael_woo_cart_components_cart_update_button_text</field>
+                <field type="Woo Cart: Coupon Button Text" editor_type="LINE">eael_woo_cart_components_cart_coupon_button_text</field>
+                <field type="Woo Cart: Placeholder Text" editor_type="LINE">eael_woo_cart_components_cart_coupon_placeholder</field>
+                <field type="Woo Cart: Button Text" editor_type="LINE">eael_woo_cart_components_cart_checkout_button_text</field>
+                <field type="Woo Cart: Checkout Button Text" editor_type="AREA">eael_woo_cart_components_cart_checkout_button_text</field>
+            </fields>
+        </widget>
     </elementor-widgets>
 </wpml-config>

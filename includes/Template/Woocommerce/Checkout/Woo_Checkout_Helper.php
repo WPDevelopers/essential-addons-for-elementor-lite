@@ -440,7 +440,7 @@ trait Woo_Checkout_Helper {
 
 			<div class="ea-order-review-table-footer">
                 <!-- Show default text (from woocommerce) if change label control (ea_woo_checkout_table_header_text) is off  -->
-                <?php $woo_checkout_order_details_change_label_settings = CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_header_text'])  ?>
+                <?php $woo_checkout_order_details_change_label_settings = !empty($settings['ea_woo_checkout_table_header_text']) ? CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_header_text']) : '';  ?>
 
                 <?php
 				if($settings['ea_woo_checkout_shop_link'] == 'yes') { ?>
