@@ -204,13 +204,15 @@
   color: #BEC6D7;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-remove a {
-  color: #BEC6D7;
+  color: #BEC6D7 !important;
   display: block;
   width: auto;
   height: auto;
   line-height: inherit;
   font-weight: inherit;
+  font-size: inherit;
   text-indent: initial;
+  border: none;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td.product-remove a::before {
   content: none;
@@ -559,13 +561,15 @@
           flex: 1 1 0%;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td.product-remove a {
-  color: #BEC6D7;
+  color: #BEC6D7 !important;
   display: block;
   width: auto;
   height: auto;
   line-height: inherit;
   font-weight: inherit;
+  font-size: inherit;
   text-indent: initial;
+  border: none;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td.product-remove a::before {
   content: none;
