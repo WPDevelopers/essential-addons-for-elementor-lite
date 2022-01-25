@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, manzurahammed, sumaiyasiddika, rudlinkon, robinwpdeveloper
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 5.8
+Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 5.0.2
+Stable tag: 5.0.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -240,6 +240,16 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.0.3 - 25/01/2022 =
+
+- Fixed: Parameter sanitization in dynamic widgets
+- Fixed EA Advanced Accordion & Tabs | Custom ID Anchor not working with links on same page
+- Fixed: EA Interactive Card rear panel scrolling not working inside EA Advanced Tabs 
+- Fixed: EA Woo Cart | Last item not getting removed from Cart
+- Fixed: EA Interactive Circle | Global Color not working on Items
+- Added: EA Woo Checkout | Option for hiding the coupon code
+- Few minor bug fixes & improvements
 
 = 5.0.2 - 19/01/2022 =
 
