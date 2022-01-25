@@ -1183,15 +1183,15 @@ class Countdown extends Widget_Base {
         }
 
         // label view
-        $this->add_render_attribute( 'eael-countdown-container', [
-            'class' => [
-                'eael-countdown-container',
-                $settings['eael_countdown_label_view'],
-                $settings['eael_countdown_label_view_tablet'] . '-tablet',
-                $settings['eael_countdown_label_view_mobile'] . '-mobile',
-                $separator,
-            ],
-        ] );
+	    $this->add_render_attribute( 'eael-countdown-container', [
+		    'class' => [
+			    'eael-countdown-container',
+			    $settings['eael_countdown_label_view'],
+			    empty( $settings['eael_countdown_label_view_tablet'] ) ? '' : $settings['eael_countdown_label_view_tablet'] . '-tablet',
+			    empty( $settings['eael_countdown_label_view_mobile'] ) ? '' : $settings['eael_countdown_label_view_mobile'] . '-mobile',
+			    $separator,
+		    ],
+	    ] );
         ?>
 
 		<div <?php echo $this->get_render_attribute_string( 'eael-countdown' ); ?>>

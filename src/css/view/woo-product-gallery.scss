@@ -157,6 +157,10 @@
                 }
             }
 
+            li.product {
+                width: 100%;
+            }
+
             &.products[class*='columns-'] li.product {
                 width: 100%;
             }

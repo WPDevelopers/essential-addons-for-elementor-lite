@@ -1,7 +1,7 @@
 .eael-simple-menu-container {
   background-color: #54595f;
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1024px) {
   .eael-simple-menu-container {
     min-height: 50px;
     overflow: auto;
@@ -24,7 +24,7 @@
   display: block;
   border-color: #333;
 }
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1025px) {
   .eael-simple-menu-container .eael-simple-menu-toggle {
     display: none;
   }
@@ -41,7 +41,7 @@
   letter-spacing: 0 !important;
   color: #ffffff;
 }
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1025px) {
   .eael-simple-menu-container .eael-simple-menu-toggle-text {
     display: none;
   }
@@ -137,7 +137,7 @@
   position: relative;
   margin-left: 5px;
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1024px) {
   .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a span {
     display: none;
   }
@@ -178,7 +178,7 @@
   visibility: visible;
   opacity: 1;
 }
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1025px) {
   .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal.eael-simple-menu-dropdown-animate-fade li ul {
     -webkit-transition: all 300ms;
     -o-transition: all 300ms;
@@ -227,7 +227,7 @@
     display: none;
   }
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1024px) {
   .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal {
     position: absolute;
     top: 50px;
@@ -306,19 +306,19 @@
 .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li ul li:last-child > a {
   border-bottom-width: 1px;
 }
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1025px) {
   .eael-simple-menu-container.eael-simple-menu-align-center {
     text-align: center;
   }
 }
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1025px) {
   .eael-simple-menu-container.eael-simple-menu-align-center .eael-simple-menu.eael-simple-menu-horizontal {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
   }
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1024px) {
   .eael-simple-menu-container.eael-simple-menu-align-center .eael-simple-menu > li > a {
     text-align: center;
   }
@@ -326,19 +326,19 @@
 .eael-simple-menu-container.eael-simple-menu-align-center .eael-simple-menu.eael-simple-menu-vertical > li > a {
   text-align: center;
 }
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1025px) {
   .eael-simple-menu-container.eael-simple-menu-align-right {
     text-align: right;
   }
 }
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1025px) {
   .eael-simple-menu-container.eael-simple-menu-align-right .eael-simple-menu.eael-simple-menu-horizontal {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
   }
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1024px) {
   .eael-simple-menu-container.eael-simple-menu-align-right .eael-simple-menu.eael-simple-menu-horizontal > li > a {
     text-align: right;
   }
@@ -370,7 +370,7 @@
 .eael-simple-menu-container.preset-1 {
   background-color: #4E36A3;
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1024px) {
   .eael-simple-menu-container.preset-1 .eael-simple-menu.eael-simple-menu-horizontal {
     background-color: #4E36A3;
   }
@@ -394,7 +394,7 @@
 .eael-simple-menu-container.preset-3 {
   background-color: #15DBD5;
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1024px) {
   .eael-simple-menu-container.preset-3 .eael-simple-menu.eael-simple-menu-horizontal {
     background-color: #15DBD5;
   }
@@ -424,7 +424,7 @@
   background-color: #fff;
   border: 1px solid #1BC1FF;
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1024px) {
   .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal {
     background-color: #1BC1FF;
   }
@@ -461,7 +461,7 @@
 .eael-simple-menu-container.preset-2 .eael-simple-menu li ul li.current-menu-item > a {
   color: #1BC1FF;
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1024px) {
   .eael_simple_menu_hamburger_disable_selected_menu_hide .eael-simple-menu-toggle-text {
     display: none !important;
   }
@@ -469,7 +469,7 @@
 .eael-simple-menu-hamburger-align-left .eael-simple-menu-toggle-text {
   display: none;
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1024px) {
   .eael-simple-menu-hamburger-align-left .eael-simple-menu-toggle {
     top: 0;
     left: 0;
@@ -481,7 +481,7 @@
   left: calc(100% + 20px);
   white-space: nowrap;
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1024px) {
   .eael-simple-menu-hamburger-align-center .eael-simple-menu-toggle {
     left: 50%;
     right: auto;
