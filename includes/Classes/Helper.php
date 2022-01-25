@@ -338,7 +338,7 @@ class Helper
      */
 	public static function get_authors_list() {
 		$args = [
-			'capability'          => array( 'edit_posts' ),
+			'capability'          => [ 'edit_posts' ],
 			'has_published_posts' => true,
 			'fields'              => [
 				'ID',
