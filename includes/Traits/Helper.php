@@ -970,6 +970,7 @@ trait Helper
 		}
 
 		$template_info = $_REQUEST['template_info'];
+		$template_info = array_map( 'sanitize_text_field', $template_info );
 
 		if ( $template_info ) {
 
