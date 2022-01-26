@@ -59,7 +59,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
             if( $should_print_image_clickable ) {
 	            echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
             }?>
-            <?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ) );
+            <?php echo wp_kses_post( $product->get_image( $settings['eael_product_grid_image_size_size'], [ 'loading' => 'eager' ] ) );
             if ( $should_print_image_clickable ) {
 	            echo '</a>';
             }
@@ -101,7 +101,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
             if( $should_print_image_clickable ) {
 	            echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
             }
-            echo $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] );
+            echo $product->get_image( $settings['eael_product_grid_image_size_size'], [ 'loading' => 'eager' ] );
             if ( $should_print_image_clickable ) {
 	            echo '</a>';
             }
