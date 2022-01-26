@@ -328,22 +328,9 @@ class WPDeveloper_Notice {
      *
      * @return void
      */
-    private function redirect_to(){
-        $request_uri  = parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH );
-        $query_string = parse_url( $_SERVER['REQUEST_URI'], PHP_URL_QUERY );
-        parse_str( $query_string, $current_url );
-
+    private function redirect_to() {
         $unset_array = array( 'dismiss', 'plugin', '_wpnonce', 'later', 'plugin_action', 'marketing_optin' );
-
-        foreach( $unset_array as $value ) {
-            if( isset( $current_url[ $value ] ) ) {
-                unset( $current_url[ $value ] );
-            }
-        }
-
-        $current_url = http_build_query($current_url);
-        $redirect_url = $request_uri . '?' . $current_url;
-        return $redirect_url;
+        return esc_url_raw( remove_query_arg( $unset_array ) );
     }
     /**
      * Before Notice
