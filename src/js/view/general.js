@@ -93,8 +93,12 @@ jQuery(window).on("elementor/frontend/init", function () {
 			isStartWithHash = hashURL.startsWith('#');
 		}
 
-		if (isStartWithHash && ($(hashURL).hasClass('eael-tab-item-trigger') || $(hashURL).hasClass('eael-accordion-header'))) {
-			$(hashURL).trigger('click');
+		try {
+			if (isStartWithHash && ($(hashURL).hasClass('eael-tab-item-trigger') || $(hashURL).hasClass('eael-accordion-header'))) {
+				$(hashURL).trigger('click');
+			}
+		} catch (err) {
+			console.log(err);
 		}
 	});
 })(jQuery);
