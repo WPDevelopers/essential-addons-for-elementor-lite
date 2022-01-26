@@ -111,8 +111,7 @@ trait Helper
             'read_more_link_target_blank' => $settings['read_more_link_target_blank'] ? 'target="_blank"' : '',
         ];
 
-	    $template_info = $_REQUEST['template_info'];
-	    $template_info = array_map( 'sanitize_text_field', $template_info );
+	    $template_info = $this->eael_sanitize_template_param( $_REQUEST['template_info'] );
 
         if ( $template_info ) {
 
@@ -977,7 +976,7 @@ trait Helper
 			];
 		}
 
-		$template_info = $_REQUEST['template_info'];
+		$template_info = $this->eael_sanitize_template_param( $_REQUEST['template_info'] );
 
 		if ( $template_info ) {
 
@@ -1025,6 +1024,21 @@ trait Helper
 		    return apply_filters( 'wpml_object_id', $id, $postType, true );
 	    }
 	    return $id;
+    }
+
+	/**
+	 * eael_sanitize_template_param
+     * Removes special characters that are illegal in filenames
+     *
+	 * @param array $template_info
+	 *
+     * @access public
+	 * @return array
+     * @since 5.0.4
+	 */
+    public function eael_sanitize_template_param( $template_info ){
+	    $template_info = array_map( 'sanitize_text_field', $template_info );
+	    return array_map( 'sanitize_file_name', $template_info );
     }
 	
 }
