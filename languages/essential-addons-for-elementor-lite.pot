@@ -21,31 +21,31 @@ msgstr ""
 msgid "Unlock more possibilities"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:429
+#: ../includes/Classes/Helper.php:436
 msgid "Select a Contact Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:435, ../includes/Classes/Helper.php:461, ../includes/Classes/Helper.php:488, ../includes/Classes/Helper.php:515, ../includes/Classes/Helper.php:540, ../includes/Classes/Helper.php:570, ../includes/Elements/FluentForm.php:90
+#: ../includes/Classes/Helper.php:442, ../includes/Classes/Helper.php:468, ../includes/Classes/Helper.php:495, ../includes/Classes/Helper.php:522, ../includes/Classes/Helper.php:547, ../includes/Classes/Helper.php:577, ../includes/Elements/FluentForm.php:90
 msgid "Create a Form First"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:455
+#: ../includes/Classes/Helper.php:462
 msgid "Select Gravity Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:483, ../includes/Elements/WeForms.php:95
+#: ../includes/Classes/Helper.php:490, ../includes/Elements/WeForms.php:95
 msgid "Select weForm"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:508
+#: ../includes/Classes/Helper.php:515
 msgid "Select Ninja Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:534
+#: ../includes/Classes/Helper.php:541
 msgid "Select Caldera Form"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:564
+#: ../includes/Classes/Helper.php:571
 msgid "Select a WPForm"
 msgstr ""
 
@@ -61,7 +61,7 @@ msgstr ""
 msgid "Install Now!"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:187, ../includes/Classes/WPDeveloper_Setup_Wizard.php:517, ../includes/Classes/WPDeveloper_Setup_Wizard.php:543, ../includes/Traits/Admin.php:141, ../includes/Traits/Helper.php:842, ../includes/Traits/Library.php:158
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:187, ../includes/Classes/WPDeveloper_Setup_Wizard.php:517, ../includes/Classes/WPDeveloper_Setup_Wizard.php:543, ../includes/Traits/Admin.php:141, ../includes/Traits/Helper.php:841, ../includes/Traits/Library.php:158
 msgid "you are not allowed to do this action"
 msgstr ""
 
@@ -197,7 +197,7 @@ msgstr ""
 msgid "Upgrade to PRO"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:324, ../includes/Traits/Helper.php:818, ../includes/templates/admin/general.php:31
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:324, ../includes/Traits/Helper.php:817, ../includes/templates/admin/general.php:31
 msgid "Install Templately"
 msgstr ""
 
@@ -8135,63 +8135,63 @@ msgstr ""
 msgid "Post ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Helper.php:57, ../includes/Traits/Helper.php:954, ../includes/Traits/Login_Registration.php:62, ../includes/Traits/Login_Registration.php:227, ../includes/Traits/Woo_Product_Comparable.php:2133
+#: ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Helper.php:57, ../includes/Traits/Helper.php:953, ../includes/Traits/Login_Registration.php:62, ../includes/Traits/Login_Registration.php:227, ../includes/Traits/Woo_Product_Comparable.php:2133
 msgid "Widget ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:29, ../includes/Traits/Helper.php:926, ../includes/Traits/Login_Registration.php:79, ../includes/Traits/Login_Registration.php:200
+#: ../includes/Traits/Helper.php:29, ../includes/Traits/Helper.php:925, ../includes/Traits/Login_Registration.php:79, ../includes/Traits/Login_Registration.php:200
 msgid "Insecure form submitted without security token"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:37, ../includes/Traits/Helper.php:934, ../includes/Traits/Login_Registration.php:92, ../includes/Traits/Login_Registration.php:210, ../includes/Traits/Woo_Product_Comparable.php:2170
+#: ../includes/Traits/Helper.php:37, ../includes/Traits/Helper.php:933, ../includes/Traits/Login_Registration.php:92, ../includes/Traits/Login_Registration.php:210, ../includes/Traits/Woo_Product_Comparable.php:2170
 msgid "Security token did not match"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:47, ../includes/Traits/Helper.php:944, ../includes/Traits/Login_Registration.php:55, ../includes/Traits/Login_Registration.php:222, ../includes/Traits/Woo_Product_Comparable.php:2128
+#: ../includes/Traits/Helper.php:47, ../includes/Traits/Helper.php:943, ../includes/Traits/Login_Registration.php:55, ../includes/Traits/Login_Registration.php:222, ../includes/Traits/Woo_Product_Comparable.php:2128
 msgid "Page ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:67, ../includes/Traits/Helper.php:963
+#: ../includes/Traits/Helper.php:67, ../includes/Traits/Helper.php:962
 msgid "Widget settings are not found. Did you save the widget before using load more??"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:204
+#: ../includes/Traits/Helper.php:203
 msgid "Essential Addons for Elementor"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:383, ../includes/Traits/Twitter_Feed.php:125
+#: ../includes/Traits/Helper.php:382, ../includes/Traits/Twitter_Feed.php:125
 msgid "%s ago"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:800
+#: ../includes/Traits/Helper.php:799
 msgid "1,700+ Stunning Templates"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:801
+#: ../includes/Traits/Helper.php:800
 msgid "Supports Elementor & Gutenberg"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:802
+#: ../includes/Traits/Helper.php:801
 msgid "Powering up 100,000+ Websites"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:803
+#: ../includes/Traits/Helper.php:802
 msgid "Cloud Collaboration with Team"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:812
+#: ../includes/Traits/Helper.php:811
 msgid "Don’t Show This Again"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:824
+#: ../includes/Traits/Helper.php:823
 msgid "Activate Templately"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:821
+#: ../includes/Traits/Helper.php:820
 msgid "Activated Templately"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:827
+#: ../includes/Traits/Helper.php:826
 msgid "Submit"
 msgstr ""
 
