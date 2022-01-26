@@ -93,12 +93,13 @@ jQuery(window).on("elementor/frontend/init", function () {
 			isStartWithHash = hashURL.startsWith('#');
 		}
 
+		// we will try and catch the error but not show anything just do it if possible
 		try {
 			if (isStartWithHash && ($(hashURL).hasClass('eael-tab-item-trigger') || $(hashURL).hasClass('eael-accordion-header'))) {
 				$(hashURL).trigger('click');
 			}
 		} catch (err) {
-			console.log(err);
+			// nothing to do
 		}
 	});
 })(jQuery);
