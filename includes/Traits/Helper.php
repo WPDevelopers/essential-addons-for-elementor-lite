@@ -123,12 +123,12 @@ trait Helper
 		        $dir_path = sprintf("%sincludes",EAEL_PLUGIN_PATH);
             }
 
-            $file_path = sprintf(
-                '%s/Template/%s/%s',
-	            $dir_path,
-                $template_info[ 'name' ],
-                $template_info[ 'file_name' ]
-            );
+	        $file_path = realpath( sprintf(
+		        '%s/Template/%s/%s',
+		        $dir_path,
+		        $template_info['name'],
+		        $template_info['file_name']
+	        ) );
 
 	        if ( ! $file_path || 0 !== strpos( $file_path, $dir_path ) ) {
 		        wp_send_json_error( 'Invalid template', 'invalid_template', 400 );
@@ -615,9 +615,12 @@ trait Helper
 			$args['offset'] = $paginationOffsetValue;
 		}
 
-		$template_info = $_REQUEST['templateInfo'];
+
+		$template_info = $this->eael_sanitize_template_param( $_REQUEST['templateInfo'] );
+
         $this->set_widget_name( $template_info['name'] );
-        $template = $this->get_template( $template_info['file_name'] );
+        $template = realpath( $this->get_template( $template_info['file_name'] ) );
+
         ob_start();
         $query = new \WP_Query( $args );
         if ( $query->have_posts() ) {
@@ -992,12 +995,12 @@ trait Helper
 				$dir_path = sprintf("%sincludes",EAEL_PLUGIN_PATH);
 			}
 
-			$file_path = sprintf(
+			$file_path = realpath( sprintf(
 				'%s/Template/%s/%s',
 				$dir_path,
-				$template_info[ 'name' ],
-				$template_info[ 'file_name' ]
-			);
+				$template_info['name'],
+				$template_info['file_name']
+			) );
 
 			if ( ! $file_path || 0 !== strpos( $file_path, $dir_path ) ) {
 				wp_send_json_error( 'Invalid template', 'invalid_template', 400 );
