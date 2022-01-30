@@ -852,39 +852,44 @@ class Helper
 	public static function eael_pagination ($args, $settings) {
 		$args['posts_per_page'] = -1;
 
-		$pagination_Query = new \WP_Query($args);
-		$pagination_Count = count($pagination_Query->posts);
-		$paginationLimit = $settings['eael_product_grid_products_count'] ?: 4;
-		$pagination_Paginationlist = ceil($pagination_Count/$paginationLimit);
-		$last = ceil( $pagination_Paginationlist );
+		$pagination_Query          = new \WP_Query( $args );
+		$pagination_Count          = count( $pagination_Query->posts );
+		$paginationLimit           = intval( $settings['eael_product_grid_products_count'] ) ?: 4;
+		$pagination_Paginationlist = ceil( $pagination_Count / $paginationLimit );
+		$last                      = ceil( $pagination_Paginationlist );
+		$widget_id                 = sanitize_key( $settings['eael_widget_id'] );
+		$next_label                = $settings['pagination_next_label'];
+		$adjacents                 = "2";
+		$setPagination             = "";
 
-		$widget_id = $settings['eael_widget_id'];
-		$next_label = $settings['pagination_next_label'];
-		$prev_label = $settings['pagination_prev_label'];
-
-		$adjacents = "2";
-		$setPagination = "";
 		if( $pagination_Paginationlist > 0 ){
 
 			$setPagination .="<nav class='eael-woo-pagination'>";
 			$setPagination .="<ul class='page-numbers'>";
-//			$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers'
-// data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."'
-// data-pnumber='1' data-plimit='$paginationLimit'>$prev_label</a></li>";
 
 			if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
 
-				for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
+				for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
 
-					if( $pagination ==  0 || $pagination ==  1 ){ $active="current"; }else{ $active=""; }
+					if ( $pagination == 0 || $pagination == 1 ) {
+						$active = "current";
+					} else {
+						$active = "";
+					}
+
 					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
 
 				}
 
 			} else if ( $pagination_Paginationlist > 5 + ($adjacents * 2) ){
 
-				for( $pagination=1; $pagination <= 4 + ($adjacents * 2); $pagination++){
-					if( $pagination ==  0 || $pagination ==  1 ){ $active="current"; }else{ $active=""; }
+				for ( $pagination = 1; $pagination <= 4 + ( $adjacents * 2 ); $pagination ++ ) {
+
+					if ( $pagination == 0 || $pagination == 1 ) {
+						$active = "current";
+					} else {
+						$active = "";
+					}
 
 					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
 				}
@@ -894,15 +899,26 @@ class Helper
 
 			} else {
 
-				for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
-					if( $pagination ==  0 || $pagination ==  1 ){ $active="current"; }else{ $active=""; }
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+				for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
+
+					if ( $pagination == 0 || $pagination == 1 ) {
+						$active = "current";
+					} else {
+						$active = "";
+					}
+
+					$setPagination .= "<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='" . json_encode( [ 'dir'       => 'free',
+					                                                                                                                              'file_name' => $settings['eael_dynamic_template_Layout'],
+					                                                                                                                              'name'      => $settings['eael_widget_name']
+						], 1 ) . "' data-widgetid='$widget_id' data-args='" . http_build_query( $args ) . "' data-settings='" . http_build_query( $settings ) . "' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
 				}
 
 			}
+
 			if ($pagination_Paginationlist > 1) {
-				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='" . http_build_query( $args ) . "' data-settings='" . http_build_query( $settings ) . "' data-pnumber='2' data-plimit='$paginationLimit'>$next_label</a></li>";
+				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='" . http_build_query( $args ) . "' data-settings='" . http_build_query( $settings ) . "' data-pnumber='2' data-plimit='$paginationLimit'>".esc_html( $next_label )."</a></li>";
 			}
+
 			$setPagination .="</ul>";
 			$setPagination .="</nav>";
 
@@ -911,26 +927,28 @@ class Helper
 	}
 
 	public static function eael_product_quick_view ($product, $settings, $widget_id) {
-		$sale_badge_align = isset( $settings['eael_product_sale_badge_alignment'] ) ? $settings['eael_product_sale_badge_alignment'] : '';
-		$sale_badge_preset = isset($settings['eael_product_sale_badge_preset']) ? $settings['eael_product_sale_badge_preset'] : '';
-		$sale_text = !empty($settings['eael_product_carousel_sale_text']) ? $settings['eael_product_carousel_sale_text'] : 'Sale!';
-		$stockout_text = !empty($settings['eael_product_carousel_stockout_text']) ? $settings['eael_product_carousel_stockout_text'] : 'Stock Out';
-        $tag = !empty($settings['eael_product_quick_view_title_tag']) ? self::eael_validate_html_tag($settings['eael_product_quick_view_title_tag']) : 'h1';
+
+		$sale_badge_align  = isset( $settings['eael_product_sale_badge_alignment'] ) ? $settings['eael_product_sale_badge_alignment'] : '';
+		$sale_badge_preset = isset( $settings['eael_product_sale_badge_preset'] ) ? $settings['eael_product_sale_badge_preset'] : '';
+		$sale_text         = ! empty( $settings['eael_product_carousel_sale_text'] ) ? $settings['eael_product_carousel_sale_text'] : 'Sale!';
+		$stockout_text     = ! empty( $settings['eael_product_carousel_stockout_text'] ) ? $settings['eael_product_carousel_stockout_text'] : 'Stock Out';
+		$tag               = ! empty( $settings['eael_product_quick_view_title_tag'] ) ? self::eael_validate_html_tag( $settings['eael_product_quick_view_title_tag'] ) : 'h1';
         
         remove_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
         add_action( 'eael_woo_single_product_summary', function () use ( $tag ) {
             the_title( '<' . $tag . ' class="eael-product-quick-view-title product_title entry-title">', '</' . $tag . '>' );
         }, 5 );
-        
+
 	    ?>
-		<div id="eaproduct<?php echo $widget_id.$product->get_id(); ?>" class="eael-product-popup
+
+		<div id="eaproduct<?php echo esc_attr( $widget_id . $product->get_id() ); ?>" class="eael-product-popup
 		eael-product-zoom-in woocommerce">
 			<div class="eael-product-modal-bg"></div>
 			<div class="eael-product-popup-details">
-				<div id="product-<?php the_ID(); ?>" <?php post_class( 'product' ); ?>>
+				<div id="product-<?php esc_attr( get_the_ID() ); ?>" <?php post_class( 'product' ); ?>>
 					<div class="eael-product-image-wrap">
 						<?php
-						echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'. $stockout_text .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . $sale_text . '</span>' : '') );
+						echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.esc_attr( $sale_badge_preset ).' '.esc_attr( $sale_badge_align ).'">'. esc_html( $stockout_text ) .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.esc_attr( $sale_badge_preset ).' '.esc_attr( $sale_badge_align ).'">' . esc_html( $sale_text ) . '</span>' : '') );
 						do_action( 'eael_woo_single_product_image' );
 						?>
 					</div>
@@ -942,7 +960,8 @@ class Helper
 			</div>
 
 		</div>
-	<?php }
+	<?php
+	}
 
 	public static function eael_avoid_redirect_to_single_page() {
 		return '';

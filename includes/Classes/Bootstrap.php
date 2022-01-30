@@ -265,11 +265,11 @@ class Bootstrap
 	        add_action('admin_init', [$this, 'typeform_auth_handle']);
 
 
-            // On Editor - Register WooCommerce frontend hooks before the Editor init.
-            // Priority = 5, in order to allow plugins remove/add their wc hooks on init.
-            if (!empty($_REQUEST['action']) && 'elementor' === $_REQUEST['action']) {
-                add_action('init', [$this, 'register_wc_hooks'], 5);
-            }
+	        // On Editor - Register WooCommerce frontend hooks before the Editor init.
+	        // Priority = 5, in order to allow plugins remove/add their wc hooks on init.
+	        if ( ! empty( $_REQUEST['action'] ) && 'elementor' === $_REQUEST['action'] ) {
+		        add_action( 'init', [ $this, 'register_wc_hooks' ], 5 );
+	        }
         }
     }
 }
