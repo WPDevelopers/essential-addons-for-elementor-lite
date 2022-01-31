@@ -326,7 +326,7 @@ trait Enqueue
     {
         if ($this->is_edit_mode() || $this->is_preview_mode()) {
             if ($this->css_strings) {
-                echo '<style id="' . esc_attr( $this->uid ) . '">' . $this->css_strings . '</style>';
+	            printf( '<style id="%1$s">%2$s</style>', esc_attr( $this->uid ), $this->css_strings );
             }
         }
     }
@@ -337,8 +337,8 @@ trait Enqueue
         // view/edit mode mode
         if ($this->is_edit_mode() || $this->is_preview_mode()) {
             if ($this->js_strings) {
-                echo '<script>var localize =' . wp_json_encode($this->localize_objects) . '</script>';
-                echo '<script>' . $this->js_strings . '</script>';
+                printf('<script>%1$s</script>','var localize ='.wp_json_encode($this->localize_objects));
+	            printf( '<script id="%1$s">%2$s</script>', esc_attr( $this->uid ), $this->js_strings );
             }
         }
     }
