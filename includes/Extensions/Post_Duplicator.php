@@ -67,7 +67,7 @@ class Post_Duplicator {
 
 		$nonce   = isset( $_REQUEST['_wpnonce'] ) && ! empty( $_REQUEST['_wpnonce'] ) ? $_REQUEST['_wpnonce'] : null;
 		$post_id = isset( $_REQUEST['post'] ) && ! empty( $_REQUEST['post'] ) ? intval( $_REQUEST['post'] ) : null;
-		$action  = isset( $_REQUEST['action'] ) && ! empty( $_REQUEST['action'] ) ? trim( $_REQUEST['action'] ) : null;
+		$action  = isset( $_REQUEST['action'] ) && ! empty( $_REQUEST['action'] ) ? trim( sanitize_text_field( $_REQUEST['action'] ) ) : null;
 
 		if ( is_null( $nonce ) || is_null( $post_id ) || $action !== 'eae_duplicate' ) {
 			return; // Return if action is not eae_duplicate
