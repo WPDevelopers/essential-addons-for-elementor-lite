@@ -27,7 +27,7 @@
                         <h3><?php _e( 'Google Map API Key', 'essential-addons-for-elementor-lite' ); ?></h3>
                         <div class="modal__api__form">
                             <input name="google-map-api" id="google-map-api"
-                                   value="<?php echo get_option( 'eael_save_google_map_api' ); ?>" type="text"
+                                   value="<?php echo esc_attr( get_option( 'eael_save_google_map_api' ) ); ?>" type="text"
                                    class="eael-form__control" placeholder="Set API key">
                             <button type="button" class="eael-button button__themeColor eael-save-trigger eael-admin-popup-close"><i
                                         class="ea-admin-icon icon-long-arrow-right"></i></button>
@@ -44,7 +44,7 @@
                         <h3><?php _e( 'Mailchimp API Key', 'essential-addons-for-elementor-lite' ); ?></h3>
                         <div class="modal__api__form">
                             <input name="mailchimp-api" id="mailchimp-api" type="text" class="eael-form__control"
-                                   value="<?php echo get_option( 'eael_save_mailchimp_api' ); ?>"
+                                   value="<?php echo esc_attr( get_option( 'eael_save_mailchimp_api' ) ); ?>"
                                    placeholder="Set API key">
                             <button class="eael-button button__themeColor eael-save-trigger eael-admin-popup-close"><i
                                         class="ea-admin-icon icon-long-arrow-right"></i></button>
@@ -166,7 +166,7 @@
 								?>
                             </select>
                         </div>
-                        <button class="eael-button button__themeColor eael-save-trigger eael-admin-popup-close">Submit</button>
+                        <button class="eael-button button__themeColor eael-save-trigger eael-admin-popup-close"><?php _e('Submit','essential-addons-for-elementor-lite') ?></button>
                     </div>
                 </div>
 

@@ -597,14 +597,14 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                             </div>
 						<?php endif; ?>
                         <div class="element__content">
-                            <h4><?php echo $item[ 'title' ]; ?></h4>
+                            <h4><?php echo esc_html( $item[ 'title' ] ); ?></h4>
                             <div class="element__options">
 								<?php
 								if ( !empty( $item[ 'setting' ] ) ):
 									$link = !empty( $item[ 'setting' ][ 'link' ] ) ? $item[ 'setting' ][ 'link' ] : '#';
 									$id = !empty( $item[ 'setting' ][ 'id' ] ) ? $item[ 'setting' ][ 'id' ] : '';
 									?>
-                                    <a target="_blank" href="<?php echo $link; ?>" id="<?php echo $id; ?>" class="element__icon">
+                                    <a target="_blank" href="<?php echo esc_url( $link ); ?>" id="<?php echo esc_attr( $id ); ?>" class="element__icon">
                                         <i class="ea-admin-icon icon-gear"></i>
                                         <span class="tooltip-text"><?php esc_html_e( 'Setting', 'essential-addons-for-elementor-lite' ); ?></span>
                                     </a>
