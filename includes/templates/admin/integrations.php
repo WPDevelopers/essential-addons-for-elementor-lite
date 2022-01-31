@@ -66,14 +66,14 @@ $integrations = [
 						<?php if ( $this->installer->get_local_plugin_data( $plugin[ 'basename' ] ) === false ) { ?>
                             <a class="eael-button button__themeColor hover__shadow wpdeveloper-plugin-installer"
                                data-action="install"
-                               data-slug="<?php echo $plugin[ 'slug' ]; ?>"><?php _e( 'Install', 'essential-addons-for-elementor-lite' ); ?></a>
+                               data-slug="<?php echo esc_attr( $plugin[ 'slug' ] ); ?>"><?php _e( 'Install', 'essential-addons-for-elementor-lite' ); ?></a>
 						<?php } else { ?>
 							<?php if ( is_plugin_active( $plugin[ 'basename' ] ) ) { ?>
                                 <a class="eael-button button__white button__white-not-hover wpdeveloper-plugin-installer"><?php _e( 'Activated', 'essential-addons-for-elementor-lite' ); ?></a>
 							<?php } else { ?>
                                 <a class="eael-button button__themeColor hover__shadow wpdeveloper-plugin-installer"
                                    data-action="activate"
-                                   data-basename="<?php echo $plugin[ 'basename' ]; ?>"><?php _e( 'Activate', 'essential-addons-for-elementor-lite' ); ?></a>
+                                   data-basename="<?php echo esc_attr( $plugin[ 'basename' ] ); ?>"><?php _e( 'Activate', 'essential-addons-for-elementor-lite' ); ?></a>
 							<?php } ?>
 						<?php } ?>
                     </div>

@@ -108,7 +108,7 @@ $extensions = [
                             </div>
 						<?php endif; ?>
                         <div class="element__content">
-                            <h4><?php echo $item[ 'title' ]; ?></h4>
+                            <h4><?php echo esc_html( $item[ 'title' ] ); ?></h4>
                             <div class="element__options">
 
 	                            <?php
@@ -116,7 +116,7 @@ $extensions = [
 		                            $link = !empty( $item[ 'setting' ][ 'link' ] ) ? $item[ 'setting' ][ 'link' ] : '#';
 		                            $id = !empty( $item[ 'setting' ][ 'id' ] ) ? $item[ 'setting' ][ 'id' ] : '';
 		                            ?>
-                                    <a href="<?php echo $link; ?>" id="<?php echo $id; ?>" class="element__icon">
+                                    <a href="<?php echo esc_url( $link ); ?>" id="<?php echo esc_attr( $id ); ?>" class="element__icon">
                                         <i class="ea-admin-icon icon-gear"></i>
                                         <span class="tooltip-text"><?php esc_html_e( 'Setting', 'essential-addons-for-elementor-lite' ); ?></span>
                                     </a>
@@ -137,7 +137,7 @@ $extensions = [
                                            type="checkbox" %2$s>', $item[ 'key' ], $status );
 									?>
 
-                                    <span class="switch__box <?php echo $disabled; ?>"></span>
+                                    <span class="switch__box <?php echo esc_attr( $disabled ); ?>"></span>
                                 </label>
                             </div>
                         </div>
