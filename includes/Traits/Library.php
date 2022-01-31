@@ -187,7 +187,7 @@ trait Library
             return true;
         }
         
-        if (!empty($_REQUEST['action']) && !$this->check_background_action($_REQUEST['action'])) {
+        if (!empty($_REQUEST['action']) && !$this->check_background_action( sanitize_text_field( $_REQUEST['action'] ) )) {
             return true;
         }
 
@@ -219,7 +219,7 @@ trait Library
             return false;
         }
 
-        if (!empty($_REQUEST['action']) && !$this->check_background_action($_REQUEST['action'])) {
+        if (!empty($_REQUEST['action']) && !$this->check_background_action( sanitize_text_field( $_REQUEST['action'] ) )) {
             return false;
         }
 

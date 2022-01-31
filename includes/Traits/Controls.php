@@ -988,7 +988,6 @@ trait Controls
 
         if ( 'eael-post-carousel' === $wb->get_name() || 'eael-post-grid' === $wb->get_name() ) {
 
-//	        $eael_show_post_terms_condition = 'eael-post-grid' === $wb->get_name() ? ['eael_show_image' => 'yes'] : [];
 	        $eael_show_post_terms_condition = ['eael_show_image' => 'yes']; //Applicable for both elements: Post Carousel and Post Grid
 
             $wb->add_control(

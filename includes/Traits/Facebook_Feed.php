@@ -96,12 +96,12 @@ trait Facebook_Feed
                     <div class="eael-facebook-feed-item-inner">
                         <header class="eael-facebook-feed-item-header clearfix">
                             <div class="eael-facebook-feed-item-user clearfix">
-                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '"><img src="https://graph.facebook.com/v4.0/' . $page_id . '/picture" alt="' . $item['from']['name'] . '" class="eael-facebook-feed-avatar"></a>
-                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '"><p class="eael-facebook-feed-username">' . $item['from']['name'] . '</p></a>
+                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '"><img src="https://graph.facebook.com/v4.0/' . $page_id . '/picture" alt="' . esc_attr( $item['from']['name'] ) . '" class="eael-facebook-feed-avatar"></a>
+                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '"><p class="eael-facebook-feed-username">' . esc_html( $item['from']['name'] ) . '</p></a>
                             </div>';
 
                 if ($settings['eael_facebook_feed_date']) {
-                    $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date("d M Y", strtotime($item['created_time'])) . '</a>';
+                    $html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date("d M Y", strtotime($item['created_time'])) . '</a>';
                 }
                 $html .= '</header>';
 
@@ -117,12 +117,12 @@ trait Facebook_Feed
 
 		                    if( isset($settings['eael_facebook_feed_is_show_preview_thumbnail']) && 'yes' == $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) {
 
-			                    $html .= '<a href="' . $item['permalink_url'] . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">';
+			                    $html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">';
 			                    if ( $item['attachments']['data'][0]['media_type'] == 'video' ) {
-				                    $html .= '<img class="eael-facebook-feed-img" src="' . $photo . '">
+				                    $html .= '<img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">
 	                                                    <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>';
 			                    } else {
-				                    $html .= '<img class="eael-facebook-feed-img" src="' . $photo . '">';
+				                    $html .= '<img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">';
 			                    }
 			                    $html .= '</a>';
 		                    }
@@ -132,7 +132,7 @@ trait Facebook_Feed
 		                            $html .= '<p class="eael-facebook-feed-url-host">' . parse_url($item['attachments']['data'][0]['unshimmed_url'])['host'] . '</p>';
 	                            }
 		                        if( isset($settings['eael_facebook_feed_is_show_preview_title']) && 'yes' == $settings['eael_facebook_feed_is_show_preview_title'] ) {
-			                        $html .= '<h2 class="eael-facebook-feed-url-title">' . $item['attachments']['data'][0]['title'] . '</h2>';
+			                        $html .= '<h2 class="eael-facebook-feed-url-title">' . esc_html( $item['attachments']['data'][0]['title'] ) . '</h2>';
 	                            }
 
 			                    if( isset($settings['eael_facebook_feed_is_show_preview_description']) && 'yes' == $settings['eael_facebook_feed_is_show_preview_description'] ) {
@@ -144,16 +144,16 @@ trait Facebook_Feed
 	                    } else if ($item['status_type'] == 'added_video') {
 		                    if( isset($settings['eael_facebook_feed_is_show_preview_thumbnail']) && 'yes' == $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) {
 
-			                    $html .= '<a href="' . $item['permalink_url'] . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">
-	                                                <img class="eael-facebook-feed-img" src="' . $photo . '">
+			                    $html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">
+	                                                <img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">
 	                                                <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>
 	                                            </a>';
 		                    }
 	                    } else {
 		                    if( isset($settings['eael_facebook_feed_is_show_preview_thumbnail']) && 'yes' == $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) {
 
-			                    $html .= '<a href="' . $item['permalink_url'] . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">
-	                                                <img class="eael-facebook-feed-img" src="' . $photo . '">
+			                    $html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">
+	                                                <img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">
 	                                            </a>';
 
 		                    }
@@ -166,10 +166,10 @@ trait Facebook_Feed
                     $html .= '<footer class="eael-facebook-feed-item-footer">
                                 <div class="clearfix">';
                     if ($settings['eael_facebook_feed_likes']) {
-                        $html .= '<span class="eael-facebook-feed-post-likes"><i class="far fa-thumbs-up" aria-hidden="true"></i> ' . $likes . '</span>';
+                        $html .= '<span class="eael-facebook-feed-post-likes"><i class="far fa-thumbs-up" aria-hidden="true"></i> ' . esc_html( $likes ) . '</span>';
                     }
                     if ($settings['eael_facebook_feed_comments']) {
-                        $html .= '<span class="eael-facebook-feed-post-comments"><i class="far fa-comments" aria-hidden="true"></i> ' . $comments . '</span>';
+                        $html .= '<span class="eael-facebook-feed-post-comments"><i class="far fa-comments" aria-hidden="true"></i> ' . esc_html( $comments ) . '</span>';
                     }
                     $html .= '</div>
                             </footer>';
@@ -177,19 +177,19 @@ trait Facebook_Feed
                 $html .= '</div>
                 </div>';
             } else {
-                $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-item">
+                $html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-item">
                     <div class="eael-facebook-feed-item-inner">
-                        <img class="eael-facebook-feed-img" src="' . (empty($photo) ? EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg' : $photo) . '">';
+                        <img class="eael-facebook-feed-img" src="' . (empty($photo) ? EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg' : esc_url( $photo )) . '">';
 
                 if ($settings['eael_facebook_feed_likes'] || $settings['eael_facebook_feed_comments']) {
                     $html .= '<div class="eael-facebook-feed-item-overlay">
                                         <div class="eael-facebook-feed-item-overlay-inner">
                                             <div class="eael-facebook-feed-meta">';
                     if ($settings['eael_facebook_feed_likes']) {
-                        $html .= '<span class="eael-facebook-feed-post-likes"><i class="far fa-thumbs-up" aria-hidden="true"></i> ' . $likes . '</span>';
+                        $html .= '<span class="eael-facebook-feed-post-likes"><i class="far fa-thumbs-up" aria-hidden="true"></i> ' . esc_html( $likes ) . '</span>';
                     }
                     if ($settings['eael_facebook_feed_comments']) {
-                        $html .= '<span class="eael-facebook-feed-post-comments"><i class="far fa-comments" aria-hidden="true"></i> ' . $comments . '</span>';
+                        $html .= '<span class="eael-facebook-feed-post-comments"><i class="far fa-comments" aria-hidden="true"></i> ' . esc_html( $comments ) . '</span>';
                     }
                     $html .= '</div>
                                         </div>
@@ -236,11 +236,11 @@ trait Facebook_Feed
 				$poshttps = stripos(trim($explodeText[$st]), 'https');
 
 				if($pos !== false) {
-					$stringText .= '<a href="https://facebook.com/hashtag/' . str_replace('#', '', $explodeText[$st]) . '?source=feed_text" target="_blank"> ' . $explodeText[$st] . ' </a>';
+					$stringText .= '<a href="https://facebook.com/hashtag/' . str_replace('#', '', $explodeText[$st]) . '?source=feed_text" target="_blank"> ' . esc_html( $explodeText[$st] ) . ' </a>';
 				} elseif($pos1 !== false) {
-					$stringText .= '<a href="https://facebook.com/' . $explodeText[$st] . '/" target="_blank"> ' . $explodeText[$st] . ' </a>';
+					$stringText .= '<a href="https://facebook.com/' . $explodeText[$st] . '/" target="_blank"> ' . esc_html( $explodeText[$st] ) . ' </a>';
 				} elseif($poshttp !== false || $poshttps !== false) {
-					$stringText .= '<a href="' . $explodeText[$st] . '" target="_blank"> ' . $explodeText[$st] . ' </a>';
+					$stringText .= '<a href="' . esc_url( $explodeText[$st] ) . '" target="_blank"> ' . esc_html( $explodeText[$st] ) . ' </a>';
 				} else {
 					$stringText .= ' ' . $explodeText[$st];
 				}
