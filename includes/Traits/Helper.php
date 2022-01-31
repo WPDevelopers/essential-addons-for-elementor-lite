@@ -75,12 +75,12 @@ trait Helper
 
         if ( isset( $_REQUEST[ 'taxonomy' ] ) && isset($_REQUEST[ 'taxonomy' ][ 'taxonomy' ]) && $_REQUEST[ 'taxonomy' ][ 'taxonomy' ] != 'all' ) {
             $args[ 'tax_query' ] = [
-                $_REQUEST[ 'taxonomy' ],
+                sanitize_text_field( $_REQUEST[ 'taxonomy' ] ),
             ];
         }
 
         if ( $class == '\Essential_Addons_Elementor\Elements\Post_Grid' && $settings[ 'orderby' ] === 'rand' ) {
-            $args[ 'post__not_in' ] = array_unique( $_REQUEST[ 'post__not_in' ] );
+            $args[ 'post__not_in' ] = array_map( 'intval', array_unique( $_REQUEST[ 'post__not_in' ] ) );
 	        unset( $args['offset'] );
         }
 
@@ -371,7 +371,7 @@ trait Helper
 				    <div class="eael-twitter-feed-item-header clearfix">';
             if ( $settings[ 'eael_twitter_feed_show_avatar' ] == 'true' ) {
                 $html .= '<a class="eael-twitter-feed-item-avatar avatar-' . $settings[ 'eael_twitter_feed_avatar_style' ] . '" href="//twitter.com/' . $settings[ 'eael_twitter_feed_ac_name' ] . '" target="_blank">
-                                <img src="' . $item[ 'user' ][ 'profile_image_url_https' ] . '">
+                                <img src="' . esc_url( $item[ 'user' ][ 'profile_image_url_https' ] ) . '">
                             </a>';
             }
 
@@ -396,7 +396,7 @@ trait Helper
                 $html .= '<a href="//twitter.com/' . $item[ 'user' ][ 'screen_name' ] . '/status/' . $item[ 'id_str' ] . '" target="_blank" class="read-more-link">'.$settings['eael_twitter_feed_show_read_more_text'].' <i class="fas fa-angle-double-right"></i></a>';
             }
             $html .= '</div>
-                    ' . ( isset( $item[ 'extended_entities' ][ 'media' ][ 0 ] ) && $settings[ 'eael_twitter_feed_media' ] == 'true' ? ( $item[ 'extended_entities' ][ 'media' ][ 0 ][ 'type' ] == 'photo' ? '<img src="' . $item[ 'extended_entities' ][ 'media' ][ 0 ][ 'media_url_https' ] . '">' : '' ) : '' ) . '
+                    ' . ( isset( $item[ 'extended_entities' ][ 'media' ][ 0 ] ) && $settings[ 'eael_twitter_feed_media' ] == 'true' ? ( $item[ 'extended_entities' ][ 'media' ][ 0 ][ 'type' ] == 'photo' ? '<img src="' . esc_url( $item[ 'extended_entities' ][ 'media' ][ 0 ][ 'media_url_https' ] ) . '">' : '' ) : '' ) . '
                 </div>
 			</div>';
         }
@@ -600,11 +600,11 @@ trait Helper
 	}
 
 	public function eael_woo_pagination_product_ajax() {
-		parse_str($_REQUEST['args'], $args);
-		parse_str($_REQUEST['settings'], $settings);
+		wp_parse_str( $_REQUEST['args'], $args );
+		wp_parse_str( $_REQUEST['settings'], $settings );
 
-		$paginationNumber = absint($_POST['number']);
-		$paginationLimit  = absint($_POST['limit']);
+		$paginationNumber = absint( $_POST['number'] );
+		$paginationLimit  = absint( $_POST['limit'] );
 
 		$args['posts_per_page'] = $paginationLimit;
 
@@ -634,13 +634,15 @@ trait Helper
 	}
 
 	public function eael_woo_pagination_ajax() {
-		parse_str($_REQUEST['args'], $args);
-		parse_str($_REQUEST['settings'], $settings);
+
+		wp_parse_str( $_REQUEST['args'], $args );
+		wp_parse_str( $_REQUEST['settings'], $settings );
+
 		$class = '\Essential_Addons_Elementor\Elements\Product_Grid';
 
 		global $wpdb;
-		$paginationNumber = absint($_POST['number']);
-		$paginationLimit  = absint($_POST['limit']);
+		$paginationNumber = absint( $_POST['number'] );
+		$paginationLimit  = absint( $_POST['limit'] );
 
 		$pagination_args = $args;
 		$pagination_args['posts_per_page'] = -1;
@@ -655,9 +657,9 @@ trait Helper
 		if( $paginationNumber < $last ){ $paginationnext; }
 
 		$adjacents = "2";
-		$widget_id = $settings['eael_widget_id'];
-		$next_label = $settings['pagination_next_label'];
-		$prev_label = $settings['pagination_prev_label'];
+		$widget_id = sanitize_text_field( $settings['eael_widget_id'] );
+		$next_label = sanitize_text_field( $settings['pagination_next_label'] );
+		$prev_label = sanitize_text_field( $settings['pagination_prev_label'] );
 
 		$setPagination = "";
 		if( $pagination_Paginationlist > 0 ){
@@ -665,7 +667,7 @@ trait Helper
 			$setPagination .="<ul class='page-numbers'>";
 
 			if( 1< $paginationNumber ){
-				$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$paginationprev' data-plimit='$paginationLimit'>$prev_label</a></li>";
+				$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='".esc_attr( $widget_id )."' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$paginationprev' data-plimit='$paginationLimit'>$prev_label</a></li>";
 			}
 
 			if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
@@ -746,7 +748,7 @@ trait Helper
 		if(!empty($cart_items)){
 			foreach ($cart_items as $key => $value) {
 				if (preg_match("/^attribute*/", $value['name'])) {
-					$variation[$value['name']] = $value['value'];
+					$variation[$value['name']] = sanitize_text_field( $value['value'] );
 				}
 			}
 		}
@@ -800,7 +802,7 @@ trait Helper
                     </a>
                     <div class="eael-promo-temp--left">
                         <div class="eael-promo-temp__logo">
-                            <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg'; ?>" alt="">
+                            <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg' ); ?>" alt="">
                         </div>
                         <ul class="eael-promo-temp__feature__list">
                             <li><?php _e('1,700+ Stunning Templates','essential-addons-for-elementor-lite'); ?></li>
@@ -811,7 +813,7 @@ trait Helper
                         <form class="eael-promo-temp__form">
                             <label>
                                 <input type="radio" value="install" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio' checked>
-                                <span><?php echo $button_test; ?></span>
+                                <span><?php echo esc_html( $button_test ); ?></span>
                             </label>
                             <label>
                                 <input type="radio" value="dnd" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio'>
@@ -833,7 +835,7 @@ trait Helper
                         <button class="eael-prmo-status-submit" style="display: none"><?php _e('Submit','essential-addons-for-elementor-lite') ?></button>
                     </div>
                     <div class="eael-promo-temp--right">
-                        <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/templately/templates-edit.jpg'; ?>" alt="">
+                        <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/templately/templates-edit.jpg' ); ?>" alt="">
                     </div>
                 </div>
             </div>
@@ -926,7 +928,7 @@ trait Helper
 
 		$ajax   = wp_doing_ajax();
 
-		parse_str($_POST['args'], $args);
+		wp_parse_str( $_POST['args'], $args );
 
 		if ( empty( $_POST['nonce'] ) ) {
 			$err_msg = __( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' );
@@ -979,7 +981,7 @@ trait Helper
 
 		if ( isset( $_REQUEST[ 'taxonomy' ] ) && isset($_REQUEST[ 'taxonomy' ][ 'taxonomy' ]) && $_REQUEST[ 'taxonomy' ][ 'taxonomy' ] != 'all' ) {
 			$args[ 'tax_query' ] = [
-				$_REQUEST[ 'taxonomy' ],
+				sanitize_text_field( $_REQUEST[ 'taxonomy' ] ),
 			];
 		}
 

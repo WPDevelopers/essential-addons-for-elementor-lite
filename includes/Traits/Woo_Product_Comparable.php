@@ -2150,10 +2150,10 @@ trait Woo_Product_Comparable {
 			$p_exist = ! empty( $product_ids ) && is_array( $product_ids );
 			if ( ! empty( $_POST['remove_product'] ) && $p_exist ) {
 			    $product_ids = array_filter($product_ids, function ($id) use ($product_id){
-                    return $id != $product_id;
+                    return $id != intval( $product_id );
 			    });
 			} else {
-			    $product_ids[] = $product_id;
+			    $product_ids[] = intval( $product_id );
 			}
 		}
 

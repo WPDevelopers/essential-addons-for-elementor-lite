@@ -111,7 +111,7 @@ trait Core
             $button_text = __('Install Elementor', 'essential-addons-for-elementor-lite');
         }
 
-        $button = '<p><a href="' . $activation_url . '" class="button-primary">' . $button_text . '</a></p>';
+        $button = '<p><a href="' . esc_url( $activation_url ) . '" class="button-primary">' . esc_html( $button_text ) . '</a></p>';
 
         printf('<div class="error"><p>%1$s</p>%2$s</div>', __($message), $button);
     }

@@ -145,7 +145,7 @@ trait Admin {
             return;
         }
 
-        parse_str( $_POST[ 'fields' ], $settings );
+        wp_parse_str( $_POST[ 'fields' ], $settings );
 
         if ( !empty( $_POST[ 'is_login_register' ] ) ) {
             // Saving Login | Register Related Data
@@ -256,7 +256,7 @@ trait Admin {
                     'icon_class' => 'dashicons dashicons-external',
                 ),
                 'allready'         => array(
-                    'link'       => $url,
+                    'link'       => esc_url( $url ),
                     'label'      => __( 'I already did', 'essential-addons-for-elementor-lite' ),
                     'icon_class' => 'dashicons dashicons-smiley',
                     'data_args'  => [
@@ -264,7 +264,7 @@ trait Admin {
                     ],
                 ),
                 'maybe_later'      => array(
-                    'link'       => $url,
+                    'link'       => esc_url( $url ),
                     'label'      => __( 'Maybe Later', 'essential-addons-for-elementor-lite' ),
                     'icon_class' => 'dashicons dashicons-calendar-alt',
                     'data_args'  => [
@@ -277,7 +277,7 @@ trait Admin {
                     'icon_class' => 'dashicons dashicons-sos',
                 ),
                 'never_show_again' => array(
-                    'link'       => $url,
+                    'link'       => esc_url( $url ),
                     'label'      => __( 'Never show again', 'essential-addons-for-elementor-lite' ),
                     'icon_class' => 'dashicons dashicons-dismiss',
                     'data_args'  => [

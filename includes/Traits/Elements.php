@@ -457,15 +457,15 @@ trait Elements
                     $icon = $icon_check['value'];
                 }
 
-                $table_of_content_html = "<div data-eaelTocTag='{$support_tag}' data-contentSelector='{$content_selector}' data-excludeSelector='{$exclude_selector}' data-stickyScroll='{$sticky_scroll['size']}' data-titleUrl='{$title_url}' data-page_offset='{$page_offset}' id='eael-toc' class='{$el_class} '>
+                $table_of_content_html = "<div data-eaelTocTag='".esc_attr( $support_tag )."' data-contentSelector='".esc_attr( $content_selector )."' data-excludeSelector='".esc_attr( $exclude_selector )."' data-stickyScroll='".esc_attr( $sticky_scroll['size'] )."' data-titleUrl='".esc_attr( $title_url )."' data-page_offset='".esc_attr( $page_offset )."' id='eael-toc' class='".esc_attr( $el_class )." '>
                     <div class='eael-toc-header'>
                             <span class='eael-toc-close'>×</span>
                             <h2 class='eael-toc-title'>{$toc_title}</h2>
                     </div>
                     <div class='eael-toc-body'>
-                        <ul id='eael-toc-list' class='eael-toc-list {$toc_style_class}'></ul>
+                        <ul id='eael-toc-list' class='eael-toc-list ".esc_attr( $toc_style_class )."'></ul>
                     </div>
-                    <button class='eael-toc-button'><i class='{$icon}'></i><span>{$toc_title}</span></button>
+                    <button class='eael-toc-button'><i class='".esc_attr( $icon )."'></i><span>{$toc_title}</span></button>
                 </div>";
 
                 if ($this->get_extensions_value('eael_ext_table_of_content') != 'yes') {
