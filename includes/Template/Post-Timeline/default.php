@@ -20,7 +20,7 @@ echo '<article class="eael-timeline-post eael-timeline-column">
     <div class="eael-timeline-post-inner">
         <a class="eael-timeline-post-link" href="' . get_the_permalink() . '" title="' . esc_html(get_the_title()) . '"' . ($settings['timeline_link_nofollow'] ? 'rel="nofollow"' : '') .'' . ($settings['timeline_link_target_blank'] ? 'target="_blank"' : '') . '>
             <time datetime="' . get_the_date() . '">' . get_the_date() . '</time>
-            <div class="eael-timeline-post-image'.$image_class.'" ' . ($settings['eael_show_image'] == 'yes' ? 'style="background-image: url('.$post_timeline_image_url.');"' : null) . '></div>';
+            <div class="eael-timeline-post-image'.$image_class.'" ' . ($settings['eael_show_image'] == 'yes' ? 'style="background-image: url('.esc_url( $post_timeline_image_url ).');"' : null) . '></div>';
             if ($settings['eael_show_excerpt']) {
                 echo '<div class="eael-timeline-post-excerpt">';
                     if(empty($settings['eael_excerpt_length'])) {

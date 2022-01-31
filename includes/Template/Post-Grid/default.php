@@ -227,7 +227,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
         </div>
     </article>';
 } else {
-    echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . get_the_ID() . '">
+    echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_attr( get_the_ID() ) . '">
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
 
