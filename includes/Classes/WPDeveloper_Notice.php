@@ -568,7 +568,7 @@ class WPDeveloper_Notice {
                     $output .= '<li>';
                         if( isset( $link_value['link'] ) ) {
                             $link = $link_value['link'];
-                            $target = isset( $link_value['target'] ) ? 'target="'. $link_value['target'] .'"' : '';
+                            $target = isset( $link_value['target'] ) ? 'target="'. esc_attr( $link_value['target'] ) .'"' : '';
                             if( isset( $link_value['data_args'] ) && is_array( $link_value['data_args'] ) ) {
                                 $data_args = [];
                                 foreach( $link_value['data_args'] as $key => $args_value ) {
@@ -580,7 +580,7 @@ class WPDeveloper_Notice {
                             }
                             $class = '';
                             if( isset( $link_value['link_class'] ) ) {
-                                $class = 'class="' . implode( ' ', $link_value['link_class'] ) . '"';
+                                $class = 'class="' . sanitize_html_class( implode( ' ', $link_value['link_class'] ) )  . '"';
                             }
                             $output .= '<a '. $class .' href="'. esc_url( $link ) .'" '. $target .'>';
                         }

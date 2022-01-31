@@ -66,8 +66,8 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
             
             // printf('<%1$s class="woocommerce-loop-product__title"><a href="%3$s" class="woocommerce-LoopProduct-link woocommerce-loop-product__link woocommerce-loop-product__title_link woocommerce-loop-product__title_link_simple woocommerce-loop-product__title_link_reveal">%2$s</a></%1$s>', $title_tag, $product->get_title(), $product->get_permalink());
             echo '<div class="eael-product-title">
-            <a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
-            printf('<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, $product->get_title());
+            <a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+            printf('<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, esc_html( $product->get_title() ));
             echo '</a>
             </div>';
 
@@ -242,7 +242,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                     ?>
                     <div class="eael-product-title">
                         <?php 
-                        echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+                        echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
                         printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title());
                         echo '</a>';
                         ?>
@@ -306,7 +306,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                     ?>
                     <div class="eael-product-title">
                         <?php
-                            echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+                            echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
                             printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title());
                             echo '</a>';
                         ?>
@@ -343,7 +343,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                     <?php
                     if ($list_style_preset == 'eael-product-list-preset-2') {
                         echo '<div class="eael-product-title">
-                                                <a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+                                                <a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
                                                 printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title());
                                                 echo '</a>
                                               </div>';
@@ -373,7 +373,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                         echo '</div>
                             <div class="title-wrap">
                                 <div class="eael-product-title">
-                                  <a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+                                  <a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
                                   printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title());
                                   echo '</a>
                                 </div>';
@@ -392,7 +392,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                         }
 
                         echo '<div class="eael-product-title">
-                                    <a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+                                    <a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
                                     printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title());
                                     echo '</a>
                                     </div>';
@@ -408,7 +408,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 
                     } else {
                         echo '<div class="eael-product-title">
-                                    <a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+                                    <a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
                                     printf('<%1$s>%2$s</%1$s>', $title_tag, $product->get_title());
                                     echo '</a>
                                     </div>';
