@@ -130,7 +130,7 @@ trait Helper
 		        $template_info['file_name']
 	        ) );
 
-	        if ( ! $file_path || 0 !== strpos( $file_path, $dir_path ) ) {
+	        if ( ! $file_path || 0 !== strpos( $file_path, realpath( $dir_path ) ) ) {
 		        wp_send_json_error( 'Invalid template', 'invalid_template', 400 );
 	        }
 
@@ -1004,7 +1004,7 @@ trait Helper
 				$template_info['file_name']
 			) );
 
-			if ( ! $file_path || 0 !== strpos( $file_path, $dir_path ) ) {
+			if ( ! $file_path || 0 !== strpos( $file_path, realpath( $dir_path ) ) ) {
 				wp_send_json_error( 'Invalid template', 'invalid_template', 400 );
 			}
 
