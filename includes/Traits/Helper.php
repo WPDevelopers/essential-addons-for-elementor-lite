@@ -24,7 +24,7 @@ trait Helper
     {
         $ajax   = wp_doing_ajax();
 
-        parse_str($_POST['args'], $args);
+        wp_parse_str($_POST['args'], $args);
         if ( empty( $_POST['nonce'] ) ) {
             $err_msg = __( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' );
             if ( $ajax ) {
@@ -75,7 +75,7 @@ trait Helper
 
         if ( isset( $_REQUEST[ 'taxonomy' ] ) && isset($_REQUEST[ 'taxonomy' ][ 'taxonomy' ]) && $_REQUEST[ 'taxonomy' ][ 'taxonomy' ] != 'all' ) {
             $args[ 'tax_query' ] = [
-	            array_map( 'sanitize_text_field', $_REQUEST[ 'taxonomy' ] ),
+                $this->sanitize_taxonomy_data( $_REQUEST[ 'taxonomy' ] ),
             ];
         }
 
@@ -981,7 +981,7 @@ trait Helper
 
 		if ( isset( $_REQUEST[ 'taxonomy' ] ) && isset($_REQUEST[ 'taxonomy' ][ 'taxonomy' ]) && $_REQUEST[ 'taxonomy' ][ 'taxonomy' ] != 'all' ) {
 			$args[ 'tax_query' ] = [
-				array_map( 'sanitize_text_field', $_REQUEST[ 'taxonomy' ] ),
+				$this->sanitize_taxonomy_data( $_REQUEST[ 'taxonomy' ] ),
 			];
 		}
 
@@ -1052,6 +1052,22 @@ trait Helper
     public function eael_sanitize_template_param( $template_info ){
 	    $template_info = array_map( 'sanitize_text_field', $template_info );
 	    return array_map( 'sanitize_file_name', $template_info );
+    }
+
+	/**
+	 * sanitize_taxonomy_data
+     * Sanitize all value for tax query
+     *
+	 * @param array $tax_list taxonomy param list
+	 *
+     * @access protected
+	 * @return array|array[]|string[]
+	 * @since 5.0.4
+	 */
+    protected function sanitize_taxonomy_data( $tax_list ){
+	    return array_map( function ( $param ) {
+		    return is_array( $param ) ? array_map( 'sanitize_text_field', $param ) : sanitize_text_field( $param );
+	    }, $tax_list );
     }
 	
 }

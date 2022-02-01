@@ -220,8 +220,9 @@ trait Admin {
             update_option( 'eael_js_print_method', sanitize_text_field( $settings[ 'eael-js-print-method' ] ) );
         }
 
-        $defaults = array_fill_keys( array_keys( array_merge( $this->registered_elements, $this->registered_extensions ) ), false );
-        $elements = array_merge( $defaults, array_fill_keys( array_keys( array_intersect_key( $settings, $defaults ) ), true ) );
+	    $settings = array_map( 'sanitize_text_field', $settings );
+	    $defaults = array_fill_keys( array_keys( array_merge( $this->registered_elements, $this->registered_extensions ) ), false );
+	    $elements = array_merge( $defaults, array_fill_keys( array_keys( array_intersect_key( $settings, $defaults ) ), true ) );
 
         // update new settings
         $updated = update_option( 'eael_save_settings', $elements );
