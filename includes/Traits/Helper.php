@@ -75,7 +75,7 @@ trait Helper
 
         if ( isset( $_REQUEST[ 'taxonomy' ] ) && isset($_REQUEST[ 'taxonomy' ][ 'taxonomy' ]) && $_REQUEST[ 'taxonomy' ][ 'taxonomy' ] != 'all' ) {
             $args[ 'tax_query' ] = [
-                sanitize_text_field( $_REQUEST[ 'taxonomy' ] ),
+	            array_map( 'sanitize_text_field', $_REQUEST[ 'taxonomy' ] ),
             ];
         }
 
@@ -981,7 +981,7 @@ trait Helper
 
 		if ( isset( $_REQUEST[ 'taxonomy' ] ) && isset($_REQUEST[ 'taxonomy' ][ 'taxonomy' ]) && $_REQUEST[ 'taxonomy' ][ 'taxonomy' ] != 'all' ) {
 			$args[ 'tax_query' ] = [
-				sanitize_text_field( $_REQUEST[ 'taxonomy' ] ),
+				array_map( 'sanitize_text_field', $_REQUEST[ 'taxonomy' ] ),
 			];
 		}
 
