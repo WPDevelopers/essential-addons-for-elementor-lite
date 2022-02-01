@@ -26,20 +26,6 @@
 	-ms-transform: translate(-50%, -50%);
 }
 
-/* Plyr CSS Started  */
-.plyr__controls button {
-	box-shadow: none !important;
-}
-
-.plyr__controls button:hover {
-	box-shadow: none !important;
-}
-
-.plyr__controls {
-	display: none !important;
-}
-
-/* Plyr CSS Ended */
 .eael-sticky-video-wrapper {
 	position: relative;
 	width: 100%;
@@ -49,6 +35,20 @@
 	transition: 0.5s;
 	text-align: left;
 	overflow: hidden;
+
+	/* Plyr CSS Started  */
+	.plyr__controls button {
+		box-shadow: none !important;
+	}
+
+	.plyr__controls button:hover {
+		box-shadow: none !important;
+	}
+
+	.plyr__controls {
+		display: none !important;
+	}
+	/* Plyr CSS Ended */
 }
 
 .eael-sticky-video-player2 {
