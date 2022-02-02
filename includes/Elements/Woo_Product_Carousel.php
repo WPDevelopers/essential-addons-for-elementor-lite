@@ -3089,22 +3089,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	    }
 
 	    if ( $filter == 'sale-products' ) {
-		    $count                          = isset( $args[ 'meta_query' ] ) ? count( $args[ 'meta_query' ] ) : 0;
-		    $args[ 'meta_query' ][ $count ] = [
-			    'relation' => 'OR',
-			    [
-				    'key'     => '_sale_price',
-				    'value'   => 0,
-				    'compare' => '>',
-				    'type'    => 'numeric',
-			    ],
-			    [
-				    'key'     => '_min_variation_sale_price',
-				    'value'   => 0,
-				    'compare' => '>',
-				    'type'    => 'numeric',
-			    ],
-		    ];
+		    $args['post__in'] = array_merge( [ 0 ], wc_get_product_ids_on_sale() );
 	    }
 
 
