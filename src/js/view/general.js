@@ -86,7 +86,10 @@ jQuery(window).on("elementor/frontend/init", function () {
 (function ($) {
 	$(document).on('click', 'a', function (e) {
 		var hashURL = $(this).attr('href'),
-			isStartWithHash = hashURL.startsWith('#');
+			isStartWithHash;
+
+		hashURL = hashURL === undefined ? '' : hashURL;
+		isStartWithHash = hashURL.startsWith('#');
 
 		if (!isStartWithHash) {
 			hashURL = hashURL.replace(localize.page_permalink, '');
