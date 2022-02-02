@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 5.0.5
+Stable tag: 5.0.6
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -240,6 +240,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.0.6 - 02/02/2022 =
+
+- Improved: Data sanitization, validation & escaping for Security Enhancement
+- Fixed: JS error when Anchor tags are used without the href attribute
+- Fixed: EA Product Grid | Product Grid thumbnails not using the image size selected
+- Fixed: EA Woo Product Carousel | not fetching the variable products when Sale Items option is selected
+- Few minor bug fixes & improvements
 
 = 5.0.5 - 28/01/2022 =
 
