@@ -456,7 +456,8 @@ class WPDeveloper_Notice {
                 $output .= '<img src="'. esc_url( $this->data['thumbnail'][ $msg_for ] ) .'" alt="">';
             $output .= '</div>';
         }
-        echo $output;
+        echo wp_kses_post( $output );
+
     }
     /**
      * Has Thumbnail Check
@@ -598,7 +599,8 @@ class WPDeveloper_Notice {
                 }
             }
             $output .= '</ul>';
-            echo $output;
+
+            printf( '%1$s', $output );
         endif;
     }
     /**

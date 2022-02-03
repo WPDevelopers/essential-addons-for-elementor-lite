@@ -530,8 +530,7 @@ trait Elements
                 }
             }
         }
-
-        echo $html;
+        printf( '%1$s', $html );
     }
 
     /**

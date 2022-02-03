@@ -620,6 +620,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$output .= '</div>';
 
 			echo $output;
+			printf( '%1$s', $output );
 		}
 		/**
 		 * Set all notice options to customized notice.
@@ -846,7 +847,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							// Fade in spinner
 							$("#wpinsights-goodbye-form-<?php echo $class_plugin_name; ?> .deactivating-spinner").fadeIn();
 							e.preventDefault();
-							var checkedInput = $("input[name='wpinsights-<?php echo $class_plugin_name; ?>-goodbye-options']:checked"),
+							var checkedInput = $("input[name='wpinsights-<?php echo esc_attr( $class_plugin_name ); ?>-goodbye-options']:checked"),
 								checkedInputVal, details;
 							if( checkedInput.length > 0 ) {
 								checkedInputVal = checkedInput.val();
@@ -861,7 +862,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							}
 
 							var data = {
-								'action': 'deactivation_form_<?php echo $class_plugin_name; ?>',
+								'action': 'deactivation_form_<?php echo esc_attr( $class_plugin_name ); ?>',
 								'values': checkedInputVal,
 								'details': details,
 								'security': "<?php echo wp_create_nonce ( 'wpins_deactivation_nonce' ); ?>",
@@ -885,7 +886,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						// If we click outside the form, the form will close
 						$('.wpinsights-goodbye-form-bg').on('click',function(){
 							$("#wpinsights-goodbye-form").fadeOut();
-							$('body').removeClass('wpinsights-form-active-<?php echo $class_plugin_name; ?>');
+							$('body').removeClass('wpinsights-form-active-<?php echo esc_attr( $class_plugin_name ); ?>');
 						});
 					});
 				});
