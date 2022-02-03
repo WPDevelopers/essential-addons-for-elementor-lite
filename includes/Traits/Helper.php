@@ -174,9 +174,9 @@ trait Helper
             header( 'Content-Encoding: gzip' );
             header( 'Content-Length: ' . strlen( $response ) );
 
-            echo $response;
+            echo wp_kses_post( $response );
         } else {
-            echo $html;
+	        printf( '%1$s', $html );
         }
         wp_die();
     }
@@ -736,7 +736,8 @@ trait Helper
 
 			$setPagination .="</ul>";
 		}
-		echo $setPagination;
+
+		printf('%1$s', $setPagination);
 		wp_die();
 	}
 

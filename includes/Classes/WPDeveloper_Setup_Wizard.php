@@ -254,7 +254,7 @@ class WPDeveloper_Setup_Wizard {
                                         <input data-preferences="<?php echo esc_attr( $preferences ); ?>" type="checkbox"
                                                class="eael-element" id="<?php echo esc_attr( $element[ 'key' ] ); ?>"
                                                name="eael_element[<?php echo esc_attr( $element[ 'key' ] ); ?>]"
-											<?php echo $checked; ?> >
+											<?php echo esc_attr( $checked ); ?> >
                                         <span class="eael-quick-setup-toggler-icons"></span>
                                     </label>
                                 </div>
