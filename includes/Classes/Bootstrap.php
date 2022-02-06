@@ -113,11 +113,14 @@ class Bootstrap
             $this->start_plugin_tracking();
         }
 
+	    $this->eael_job_init();
+
         // register extensions
         $this->register_extensions();
 
         // register hooks
         $this->register_hooks();
+
 
     }
 
@@ -270,6 +273,7 @@ class Bootstrap
 	        if ( ! empty( $_REQUEST['action'] ) && 'elementor' === $_REQUEST['action'] ) {
 		        add_action( 'init', [ $this, 'register_wc_hooks' ], 5 );
 	        }
+
         }
     }
 }
