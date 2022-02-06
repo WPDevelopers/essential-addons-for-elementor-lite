@@ -619,7 +619,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$output .= "<script type='text/javascript'>jQuery('.wpinsights-". esc_attr( $this->plugin_name ) ."-collect').on('click', function(e) {e.preventDefault();jQuery('.wpinsights-data').slideToggle('fast');});</script>";
 			$output .= '</div>';
 
-			echo $output;
 			printf( '%1$s', $output );
 		}
 		/**
