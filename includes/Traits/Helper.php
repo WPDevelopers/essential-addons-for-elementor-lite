@@ -174,9 +174,9 @@ trait Helper
             header( 'Content-Encoding: gzip' );
             header( 'Content-Length: ' . strlen( $response ) );
 
-            echo wp_kses_post( $response );
+	        printf( '%1$s', $response );
         } else {
-	        printf( '%1$s', $html );
+	        echo wp_kses_post( $html );
         }
         wp_die();
     }
@@ -1019,7 +1019,7 @@ trait Helper
 						$query->the_post();
 						$html .= HelperClass::include_with_variable( $file_path, [ 'settings' => $settings ] );
 					}
-					print $html;
+					printf( '%1$s', $html );
 					wp_reset_postdata();
 				}
 			}

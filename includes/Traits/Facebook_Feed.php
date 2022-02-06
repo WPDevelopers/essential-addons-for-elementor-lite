@@ -215,7 +215,7 @@ trait Facebook_Feed {
 				header( 'Content-Encoding: gzip' );
 				header( 'Content-Length: ' . strlen( $response ) );
 
-				echo wp_kses_post( $response );
+				printf( '%1$s', $response );
 			} else {
 				wp_send_json( $data );
 			}
