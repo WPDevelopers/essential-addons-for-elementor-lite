@@ -2,7 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const wpPot = require('wp-pot');
+const wpPot = require("wp-pot");
+const { Z_FIXED } = require("zlib");
 const outputEntry = () => {
 	let paths = {};
 
@@ -48,26 +49,30 @@ const removeEntry = () => {
 };
 
 module.exports = (env, argv) => {
-    if(argv.mode === "production"){
-        // Generate .pot on production build only
-        wpPot({
-            destFile: 'languages/essential-addons-for-elementor-lite.pot',
-            domain: 'essential-addons-for-elementor-lite',
-            package: 'Essential Addons For Elementor Lite',
-            src: '**/*.php'
-        });
-    }
+	if (argv.mode === "production") {
+		// Generate .pot on production build only
+		wpPot({
+			destFile: "languages/essential-addons-for-elementor-lite.pot",
+			domain: "essential-addons-for-elementor-lite",
+			package: "Essential Addons For Elementor Lite",
+			src: "**/*.php",
+		});
+	}
 
 	return {
 		stats: "minimal",
 		entry: outputEntry(),
 		output: {
 			path: path.resolve(__dirname, "assets/front-end/"),
-			filename: argv.mode === "production" ? "[name].min.js" : "[name].js",
+			filename:
+				argv.mode === "production" ? "[name].min.js" : "[name].js",
 		},
 		plugins: [
 			new MiniCssExtractPlugin({
-				filename: argv.mode === "production" ? "[name].min.css" : "[name].css",
+				filename:
+					argv.mode === "production"
+						? "[name].min.css"
+						: "[name].css",
 			}),
 			{
 				apply(compiler) {
@@ -85,14 +90,22 @@ module.exports = (env, argv) => {
 			{
 				apply: (compiler) => {
 					compiler.hooks.afterEmit.tap("postBuild", (compilation) => {
-						const dir = "./../../uploads/essential-addons-elementor";
+						const dir =
+							"./../../uploads/essential-addons-elementor";
 
-						fs.readdir(dir, (err, files) => {
-							if (err) throw err;
-
-							for (let file of files) {
-								fs.unlink(path.join(dir, file), (err) => {
+						fs.stat(dir, (err, stats) => {
+							if (stats?.isDirectory()) {
+								fs.readdir(dir, (err, files) => {
 									if (err) throw err;
+
+									for (let file of files) {
+										fs.unlink(
+											path.join(dir, file),
+											(err) => {
+												if (err) throw err;
+											}
+										);
+									}
 								});
 							}
 						});

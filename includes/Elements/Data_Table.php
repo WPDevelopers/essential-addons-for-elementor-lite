@@ -79,6 +79,17 @@ class Data_Table extends Widget_Base {
         do_action('eael_section_data_table_enabled', $this);
 
         if (!apply_filters('eael/pro_enabled', false)) {
+
+	        $this->add_control(
+		        'eael_section_data_table_enabled', [
+		        'label'        => sprintf( __( 'Enable Table Sorting %s', 'essential-addons-for-elementor-lite' ), __( '<i class="eael-pro-labe eicon-pro-icon"></i>', 'essential-addons-for-elementor-lite' ) ),
+		        'type'         => Controls_Manager::SWITCHER,
+		        'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+		        'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+		        'return_value' => 'true',
+		        'classes'      => 'eael-pro-control',
+	        ] );
+
             $this->add_control(
                 'eael_pricing_table_style_pro_alert',
                 [
@@ -143,7 +154,7 @@ class Data_Table extends Widget_Base {
                     ],
                     'image'       => [
                         'title'   => esc_html__('Image', 'essential-addons-for-elementor-lite'),
-                        'icon'    => 'fa fa-picture-o',
+                        'icon'    => 'eicon-image-bold',
                     ],
                 ],
                 'default'               => 'icon',
@@ -484,7 +495,7 @@ class Data_Table extends Widget_Base {
 						],
 					],
 					'default' => '1',
-					'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
+					'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.com/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
 				]
 			);
 
@@ -765,15 +776,15 @@ class Data_Table extends Widget_Base {
 				'options' => [
 					'left' => [
 						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite'),
-						'icon' => 'fa fa-align-left',
+						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite'),
-						'icon' => 'fa fa-align-center',
+						'icon' => 'eicon-text-align-center',
 					],
 					'right' => [
 						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite'),
-						'icon' => 'fa fa-align-right',
+						'icon' => 'eicon-text-align-right',
 					],
 				],
 				'default' => 'left',
@@ -1014,15 +1025,15 @@ class Data_Table extends Widget_Base {
 				'options' => [
 					'left' => [
 						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite'),
-						'icon' => 'fa fa-align-left',
+						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite'),
-						'icon' => 'fa fa-align-center',
+						'icon' => 'eicon-text-align-center',
 					],
 					'right' => [
 						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite'),
-						'icon' => 'fa fa-align-right',
+						'icon' => 'eicon-text-align-right',
 					],
 				],
 				'toggle' => true,

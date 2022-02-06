@@ -29,7 +29,7 @@ var CountDown = function ($scope, $) {
 						window.location.href = $redirect_url;
 					}
 				} else if ($expire_type === "template") {
-					countDown.html($template);
+					countDown.html( $coundDown.find(".eael-countdown-expiry-template").html() );
 				} else {
 					//do nothing!
 				}

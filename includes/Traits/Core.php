@@ -45,7 +45,7 @@ trait Core
 
         // go pro
         if (!$this->pro_enabled) {
-            $links[] = sprintf('<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" style="color: #39b54a; font-weight: bold;">' . __('Go Pro', 'essential-addons-for-elementor-lite') . '</a>');
+            $links[] = sprintf('<a href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor" target="_blank" style="color: #39b54a; font-weight: bold;">' . __('Go Pro', 'essential-addons-for-elementor-lite') . '</a>');
         }
 
         return $links;
@@ -111,7 +111,7 @@ trait Core
             $button_text = __('Install Elementor', 'essential-addons-for-elementor-lite');
         }
 
-        $button = '<p><a href="' . $activation_url . '" class="button-primary">' . $button_text . '</a></p>';
+        $button = '<p><a href="' . esc_url( $activation_url ) . '" class="button-primary">' . esc_html( $button_text ) . '</a></p>';
 
         printf('<div class="error"><p>%1$s</p>%2$s</div>', __($message), $button);
     }
@@ -281,10 +281,76 @@ trait Core
             }
         }
 
+        //Scroll to Top global settings : updated on elementor/editor/after_save action
+        $global_settings['eael_ext_scroll_to_top'] = $this->get_ext_scroll_to_top_global_settings($post_id, $document, $global_settings);
+        
         // set editor time
         update_option('eael_editor_updated_at', strtotime('now'));
 
         // update options
         update_option('eael_global_settings', $global_settings);
+    }
+
+    /**
+     * Get global settings of Scroll to Top extension
+     * 
+     * @return array
+     * @since v5.0.0
+     */
+    public function get_ext_scroll_to_top_global_settings($post_id, $document, $global_settings){
+        
+        $global_settings_scroll_to_top = !empty($global_settings['eael_ext_scroll_to_top']) ? $global_settings['eael_ext_scroll_to_top'] : array();
+        $document_settings = $document->get_settings();
+        
+        if ($document->get_settings('eael_ext_scroll_to_top_global') == 'yes' && $document->get_settings('eael_ext_scroll_to_top') == 'yes') {
+            $global_settings_scroll_to_top = [
+                'post_id' => $post_id,
+                'enabled' => true,
+                'eael_ext_scroll_to_top_global_display_condition' => $document->get_settings('eael_ext_scroll_to_top_global_display_condition'),
+                'eael_ext_scroll_to_top_position_text' => $document->get_settings('eael_ext_scroll_to_top_position_text'),
+                'eael_ext_scroll_to_top_position_bottom' => $document->get_settings('eael_ext_scroll_to_top_position_bottom'),
+                'eael_ext_scroll_to_top_position_left' => $document->get_settings('eael_ext_scroll_to_top_position_left'),
+                'eael_ext_scroll_to_top_position_right' => $document->get_settings('eael_ext_scroll_to_top_position_right'),
+                'eael_ext_scroll_to_top_button_width' => $document->get_settings('eael_ext_scroll_to_top_button_width'),
+                'eael_ext_scroll_to_top_button_height' => $document->get_settings('eael_ext_scroll_to_top_button_height'),
+                'eael_ext_scroll_to_top_z_index' => $document->get_settings('eael_ext_scroll_to_top_z_index'),
+                'eael_ext_scroll_to_top_button_opacity' => $document->get_settings('eael_ext_scroll_to_top_button_opacity'),
+                'eael_ext_scroll_to_top_button_icon_image' => $document->get_settings('eael_ext_scroll_to_top_button_icon_image'),
+                'eael_ext_scroll_to_top_button_icon_size' => $document->get_settings('eael_ext_scroll_to_top_button_icon_size'),
+                'eael_ext_scroll_to_top_button_icon_svg_size' => $document->get_settings('eael_ext_scroll_to_top_button_icon_svg_size'),
+                'eael_ext_scroll_to_top_button_icon_color' => $this->eael_ext_stt_fetch_color_or_global_color($document_settings, 'eael_ext_scroll_to_top_button_icon_color'),
+                'eael_ext_scroll_to_top_button_bg_color' => $this->eael_ext_stt_fetch_color_or_global_color($document_settings, 'eael_ext_scroll_to_top_button_bg_color'),
+                'eael_ext_scroll_to_top_button_border_radius' => $document->get_settings('eael_ext_scroll_to_top_button_border_radius'),
+            ];
+        } else {
+            if (isset($global_settings['eael_ext_scroll_to_top']['post_id']) && $global_settings['eael_ext_scroll_to_top']['post_id'] == $post_id) {
+                $global_settings_scroll_to_top = [
+                    'post_id' => null,
+                    'enabled' => false,
+                ];
+            }
+        }
+
+        return $global_settings_scroll_to_top;
+    }
+    
+    public function eael_ext_stt_fetch_color_or_global_color($settings, $control_name=''){
+        if( !isset($settings[$control_name])) {
+            return '';
+        }
+
+        $color = $settings[$control_name];
+
+        if(!empty($settings['__globals__']) && !empty($settings['__globals__'][$control_name])){
+            $color = $settings['__globals__'][$control_name];
+            $color_arr = explode('?id=', $color); //E.x. 'globals/colors/?id=primary'
+
+            $color_name = count($color_arr) > 1 ? $color_arr[1] : '';
+            if( !empty($color_name) ) {
+                $color = "var( --e-global-color-$color_name )";
+            }
+        }
+
+        return $color;
     }
 }

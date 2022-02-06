@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) {
     exit();
 } // Exit if accessed directly
 
+use Elementor\Icons_Manager;
 use \Elementor\Plugin;
 
 trait Elements
@@ -305,6 +306,12 @@ trait Elements
 		        'icon' => 'eaicon-woo-product-collections',
 		        'categories' => '["essential-addons-elementor"]',
 	        ],
+            [
+	            'name' => 'eaicon-advanced-search',
+	            'title' => __('Advanced Search', 'essential-addons-for-elementor-lite'),
+	            'icon' => 'eaicon-advanced-search',
+	            'categories' => '["essential-addons-elementor"]',
+            ],
         ]);
 
         $config['promotionWidgets'] = $combine_array;
@@ -323,7 +330,7 @@ trait Elements
             return;
         }
 
-        if (!is_singular()) {
+        if (!is_singular() && !is_archive()) {
             return;
         }
 
@@ -331,7 +338,7 @@ trait Elements
         $html = '';
         $global_settings = $setting_data = $document = [];
 
-        if ($this->get_settings('reading-progress') || $this->get_settings('table-of-content')) {
+        if ($this->get_settings('reading-progress') || $this->get_settings('table-of-content') || $this->get_settings('scroll-to-top')) {
             $html = '';
             $global_settings = get_option('eael_global_settings');
             $document = Plugin::$instance->documents->get($post_id, false);
@@ -450,15 +457,15 @@ trait Elements
                     $icon = $icon_check['value'];
                 }
 
-                $table_of_content_html = "<div data-eaelTocTag='{$support_tag}' data-contentSelector='{$content_selector}' data-excludeSelector='{$exclude_selector}' data-stickyScroll='{$sticky_scroll['size']}' data-titleUrl='{$title_url}' data-page_offset='{$page_offset}' id='eael-toc' class='{$el_class} '>
+                $table_of_content_html = "<div data-eaelTocTag='".esc_attr( $support_tag )."' data-contentSelector='".esc_attr( $content_selector )."' data-excludeSelector='".esc_attr( $exclude_selector )."' data-stickyScroll='".esc_attr( $sticky_scroll['size'] )."' data-titleUrl='".esc_attr( $title_url )."' data-page_offset='".esc_attr( $page_offset )."' id='eael-toc' class='".esc_attr( $el_class )." '>
                     <div class='eael-toc-header'>
                             <span class='eael-toc-close'>×</span>
                             <h2 class='eael-toc-title'>{$toc_title}</h2>
                     </div>
                     <div class='eael-toc-body'>
-                        <ul id='eael-toc-list' class='eael-toc-list {$toc_style_class}'></ul>
+                        <ul id='eael-toc-list' class='eael-toc-list ".esc_attr( $toc_style_class )."'></ul>
                     </div>
-                    <button class='eael-toc-button'><i class='{$icon}'></i><span>{$toc_title}</span></button>
+                    <button class='eael-toc-button'><i class='".esc_attr( $icon )."'></i><span>{$toc_title}</span></button>
                 </div>";
 
                 if ($this->get_extensions_value('eael_ext_table_of_content') != 'yes') {
@@ -477,6 +484,49 @@ trait Elements
                     wp_enqueue_script('eael-table-of-content');
 
                     $html .= $table_of_content_html;
+                }
+            }
+        }
+
+        //Scroll to Top
+        if ($this->get_settings('scroll-to-top') == true) {
+            if (isset($document) && is_object($document)) {
+                $document_settings_data = $document->get_settings();
+            }
+
+            $scroll_to_top_status = $scroll_to_top_status_global = false;
+            
+            if (isset($document_settings_data['eael_ext_scroll_to_top']) && $document_settings_data['eael_ext_scroll_to_top'] == 'yes') {
+                $scroll_to_top_status = true;
+                $settings_data_scroll_to_top = $document_settings_data;
+            } elseif (isset($global_settings['eael_ext_scroll_to_top']['enabled']) && $global_settings['eael_ext_scroll_to_top']['enabled']) {
+                $scroll_to_top_status = true;
+                $scroll_to_top_status_global = true;
+                $settings_data_scroll_to_top = $global_settings['eael_ext_scroll_to_top'];
+            }
+            
+            if ($scroll_to_top_status) {
+                if($scroll_to_top_status_global){
+                    //global status is true only when locally scroll to top is disabled.
+                    $this->scroll_to_top_global_css($global_settings);
+                }
+                $scroll_to_top_icon_image = !empty($settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image']) 
+                                            ? $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image']['value'] : '';
+                
+                if (isset($scroll_to_top_icon_image['url'])) {
+                    ob_start();
+                    Icons_Manager::render_icon( $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image'], [ 'aria-hidden' => 'true' ] );
+                    $scroll_to_top_icon_html = ob_get_clean();
+                } else {
+                    $scroll_to_top_icon_html = "<i class='$scroll_to_top_icon_image'></i>";
+                }
+
+                $scroll_to_top_html = "<div class='eael-ext-scroll-to-top-wrap scroll-to-top-hide'><span class='eael-ext-scroll-to-top-button'>$scroll_to_top_icon_html</span></div>";
+                if (!empty($scroll_to_top_html)) {
+                    wp_enqueue_script('eael-scroll-to-top');
+                    wp_enqueue_style('eael-scroll-to-top');
+
+                    $html .= $scroll_to_top_html;
                 }
             }
         }
@@ -694,6 +744,75 @@ trait Elements
         }
 
         wp_add_inline_style('eael-table-of-content', $toc_global_css);
+    }
+
+    /**
+     * @return string|void
+     */
+    public function scroll_to_top_global_css($global_settings)
+    {
+        if(!is_array($global_settings)){
+            return false;
+        }
+        
+        if( empty($global_settings['eael_ext_scroll_to_top']) ){
+            return false;
+        }
+
+        $eael_scroll_to_top = $global_settings['eael_ext_scroll_to_top'];
+        $eael_stt_position =  $eael_scroll_to_top['eael_ext_scroll_to_top_position_text'];
+        $eael_stt_position_bottom_size =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_position_bottom']['size']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_position_bottom']['size'] : 5;
+        $eael_stt_position_bottom_unit =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_position_bottom']['unit']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_position_bottom']['unit'] : 'px';
+        $eael_stt_position_left_size =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_position_left']['size']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_position_left']['size'] : 15;
+        $eael_stt_position_left_unit =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_position_left']['unit']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_position_left']['unit'] : 'px';
+        $eael_stt_position_right_size =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_position_right']['size']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_position_right']['size'] : 15;
+        $eael_stt_position_right_unit =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_position_right']['unit']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_position_right']['unit'] : 'px';
+        
+        $eael_stt_button_width_size =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_button_width']['size']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_width']['size'] : 50;
+        $eael_stt_button_width_unit =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_button_width']['unit']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_width']['unit'] : 'px';
+        $eael_stt_button_height_size =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_button_height']['size']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_height']['size'] : 50;
+        $eael_stt_button_height_unit =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_button_height']['unit']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_height']['unit'] : 'px';
+        $eael_stt_z_index_size =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_z_index']['size']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_z_index']['size'] : 9999;
+        $eael_stt_z_index_unit =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_z_index']['unit']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_z_index']['unit'] : 'px';
+        $eael_stt_button_opacity_size =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_button_opacity']['size']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_opacity']['size'] : 0.7;
+        $eael_stt_button_opacity_unit =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_button_opacity']['unit']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_opacity']['unit'] : 'px';
+        $eael_stt_button_icon_size_size =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_size']['size']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_size']['size'] : 16;
+        $eael_stt_button_icon_size_unit =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_size']['unit']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_size']['unit'] : 'px';
+        $eael_stt_button_icon_svg_size_size =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_svg_size']['size']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_svg_size']['size'] : 32;
+        $eael_stt_button_icon_svg_size_unit =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_svg_size']['unit']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_svg_size']['unit'] : 'px';
+        $eael_stt_button_icon_color =  $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_color'];
+        $eael_stt_button_bg_color =  $eael_scroll_to_top['eael_ext_scroll_to_top_button_bg_color'];
+        $eael_stt_button_border_radius_size =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_button_border_radius']['size']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_border_radius']['size'] : 5;
+        $eael_stt_button_border_radius_unit =  isset($eael_scroll_to_top['eael_ext_scroll_to_top_button_border_radius']['unit']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_border_radius']['unit'] : 'px';
+        
+        $eael_stt_position_left_right_key = $eael_stt_position == 'bottom-left' ? 'left' : 'right';
+        $eael_stt_position_left_right_value = $eael_stt_position == 'bottom-left' ? $eael_stt_position_left_size . $eael_stt_position_left_unit : $eael_stt_position_right_size . $eael_stt_position_right_unit;
+
+        $scroll_to_top_global_css = "
+            .eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button {
+                bottom: {$eael_stt_position_bottom_size}{$eael_stt_position_bottom_unit};
+                {$eael_stt_position_left_right_key}: {$eael_stt_position_left_right_value};
+                width: {$eael_stt_button_width_size}{$eael_stt_button_width_unit};
+                height: {$eael_stt_button_height_size}{$eael_stt_button_height_unit};
+                z-index: {$eael_stt_z_index_size};
+                opacity: {$eael_stt_button_opacity_size};
+                background-color: {$eael_stt_button_bg_color};
+                border-radius: {$eael_stt_button_border_radius_size}{$eael_stt_button_border_radius_unit};
+            }
+
+            .eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button i {
+                color: {$eael_stt_button_icon_color};
+                font-size: {$eael_stt_button_icon_size_size}{$eael_stt_button_icon_size_unit};
+            }
+
+            .eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button svg {
+                fill: {$eael_stt_button_icon_color};
+                width: {$eael_stt_button_icon_svg_size_size}{$eael_stt_button_icon_svg_size_unit};
+                height: {$eael_stt_button_icon_svg_size_size}{$eael_stt_button_icon_svg_size_unit};
+            } 
+        ";
+
+        wp_add_inline_style('eael-scroll-to-top', $scroll_to_top_global_css);
     }
 
     /**

@@ -301,3 +301,24 @@
 .eaicon-simple-menu:before {
 	content: "\e959";
 }
+
+.eaicon-product-gallery:before {
+	content: "\e95a";
+}
+
+.eaicon-interactive-circle:before {
+	content: "\e95c";
+}
+
+.eaicon-woo-cart:before {
+	content: "\e95b";
+}
+
+.eaicon-advanced-search:before {
+	content: "\e95d";
+}
+
+.eaicon-better-payment:before {
+	content: "\e95e";
+}
+

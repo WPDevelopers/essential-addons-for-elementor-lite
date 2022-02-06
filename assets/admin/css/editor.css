@@ -41,9 +41,23 @@
 .elementor-control-eael_section_data_table_enabled_pro_alert .elementor-control-title,
 .elementor-control-eael_img_accordion_type_pro_alert .elementor-control-title,
 .elementor-control-eael_ticker_type_pro_alert .elementor-control-title,
-.elementor-control-eael_event_calendar_pro_enable_warning .elementor-control-title,
+.elementor-control-eael_event_calendar_pro_enable_warning .elementor-control-title a,
 .elementor-control-eael_team_members_preset_pro_alert .elementor-control-title,
-.elementor-control-eael_woo_checkout_pro_enable_warning .elementor-control-title {
+.elementor-control-eael_adv_data_table_pro_enable_warning .elementor-control-title a,
+.elementor-control-eael_woo_checkout_pro_enable_warning .elementor-control-title a{
+	color: #f54 !important;
+}
+
+.elementor-control-eael_pricing_table_style_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_section_countdown_style_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_fancy_text_style_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_section_data_table_enabled_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_img_accordion_type_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_ticker_type_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_event_calendar_pro_enable_warning .elementor-control-title a:hover,
+.elementor-control-eael_team_members_preset_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_adv_data_table_pro_enable_warning .elementor-control-title a:hover,
+.elementor-control-eael_woo_checkout_pro_enable_warning .elementor-control-title a:hover{
 	color: #f54;
 }
 
@@ -162,4 +176,29 @@
 	border-radius: 0 3px 3px 0;
 	-webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.07);
 	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.07);
+}
+
+.elementor-control.eael-pro-control::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: block;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 99;
+	background: transparent;
+}
+
+.elementor-control.eael-pro-control .eael-pro-label {
+	color: red;
+	font-weight: bold;
+	font-size: 11px;
+}
+.elementor-control.eael-pro-control .eicon-pro-icon:before {
+	color:#b4b5b7;
+	margin-left: 4px;
+	font-size: 14px;
 }

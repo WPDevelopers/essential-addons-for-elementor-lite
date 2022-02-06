@@ -27,10 +27,6 @@ class Migration
         // save default values
         $this->set_default_values();
 
-
-
-        // Redirect to options page - disabled temporarily
-        // set_transient('eael_do_activation_redirect', true, 60);
     }
 
     /**
@@ -70,6 +66,6 @@ class Migration
             // update plugin version
             update_option('eael_version', EAEL_PLUGIN_VERSION);
         }
-
+		$this->remove_old_options_cache();
     }
 }
