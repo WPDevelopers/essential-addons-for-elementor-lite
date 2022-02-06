@@ -22,6 +22,7 @@ class advancedDataTableEdit {
 		ea.hooks.addAction("advancedDataTable.updateFromView", "ea", this.updateFromView.bind(this));
 		ea.hooks.addAction("advancedDataTable.initInlineEdit", "ea", this.initInlineEdit.bind(this));
 		ea.hooks.addAction("advancedDataTable.initPanelAction", "ea", this.initPanelAction.bind(this));
+		ea.hooks.addAction("advancedDataTable.triggerTextChange", "ea", this.triggerTextChange.bind(this));
 
 		elementor.hooks.addFilter("elements/widget/contextMenuGroups", this.initContextMenu);
 		elementor.hooks.addAction("panel/open_editor/widget/eael-advanced-data-table", this.initPanel.bind(this));
@@ -117,7 +118,7 @@ class advancedDataTableEdit {
 
 			// parse table html
 			let origTable = this.parseHTML(this.table.cloneNode(true));
-
+			this.tableInnerHTML = origTable.innerHTML;
 			// update table
 			this.updateFromView(this.view, {
 				ea_adv_data_table_static_html: origTable.innerHTML,
@@ -355,7 +356,8 @@ class advancedDataTableEdit {
 		this.panel = panel;
 		this.model = model;
 		this.view = view;
-
+		const elClass = `.ea-advanced-data-table-${this.view.container.args.id}`;
+		const eaTable  = this.view.el.querySelector( ".ea-advanced-data-table" + elClass )
 		// init inline edit
 		ea.hooks.doAction("advancedDataTable.initInlineEdit");
 
@@ -364,15 +366,12 @@ class advancedDataTableEdit {
 
 		// after panel init hook
 		ea.hooks.doAction("advancedDataTable.afterInitPanel", panel, model, view);
-
+		
 		model.once("editor:close", () => {
 			// parse table html
-			let origTable = this.parseHTML(this.table.cloneNode(true));
-
-			if ( this.tableInnerHTML == null ) {
-				this.tableInnerHTML = origTable.innerHTML;
-			}
-
+			let origTable = this.parseHTML(eaTable.cloneNode(true));
+			this.tableInnerHTML = origTable.innerHTML;
+			
 			// update table
 			this.updateFromView(
 				this.view,
@@ -421,6 +420,9 @@ class advancedDataTableEdit {
 								ea.hooks.doAction("advancedDataTable.updateFromView", view, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
+
+								// trigger text-change event
+								ea.hooks.doAction("advancedDataTable.triggerTextChange", table);
 							}
 						},
 					},
@@ -451,6 +453,9 @@ class advancedDataTableEdit {
 								ea.hooks.doAction("advancedDataTable.updateFromView", view, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
+
+								// trigger text-change event
+								ea.hooks.doAction("advancedDataTable.triggerTextChange", table);
 							}
 						},
 					},
@@ -487,6 +492,9 @@ class advancedDataTableEdit {
 								ea.hooks.doAction("advancedDataTable.updateFromView", view, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
+
+								// trigger text-change event
+								ea.hooks.doAction("advancedDataTable.triggerTextChange", table);
 							}
 						},
 					},
@@ -523,6 +531,9 @@ class advancedDataTableEdit {
 								ea.hooks.doAction("advancedDataTable.updateFromView", view, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
+
+								// trigger text-change event
+								ea.hooks.doAction("advancedDataTable.triggerTextChange", table);
 							}
 						},
 					},
@@ -548,6 +559,9 @@ class advancedDataTableEdit {
 								ea.hooks.doAction("advancedDataTable.updateFromView", view, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
+
+								// trigger text-change event
+								ea.hooks.doAction("advancedDataTable.triggerTextChange", table);
 							}
 						},
 					},
@@ -575,6 +589,9 @@ class advancedDataTableEdit {
 								ea.hooks.doAction("advancedDataTable.updateFromView", view, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
+
+								// trigger text-change event
+								ea.hooks.doAction("advancedDataTable.triggerTextChange", table);
 							}
 						},
 					},
@@ -583,6 +600,19 @@ class advancedDataTableEdit {
 		}
 
 		return groups;
+	}
+
+	triggerTextChange(table) {
+		if (table.classList.contains("ea-advanced-data-table-static")) {
+			var cellSelector = jQuery('thead tr:first-child th:first-child .ql-editor p', table),
+				cellSelector = cellSelector.length ? cellSelector : jQuery('tbody tr:first-child td:first-child .ql-editor p', table),
+				cellData = cellSelector.html();
+			cellSelector.html(cellData + ' ');
+
+			setTimeout(() => {
+				cellSelector.html(cellData);
+			}, 1100);
+		}
 	}
 }
 

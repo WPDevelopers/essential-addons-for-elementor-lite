@@ -273,4 +273,21 @@ trait Template_Query {
         return strtolower( array_pop( $dt ) );
     }
 
+	/**
+	 * Get directory name based on given file name
+	 * @param $filename
+	 * @return int|string
+	 */
+    protected function get_temp_dir_name($filename){
+    	if(empty($filename)){
+    		return 'free';
+	    }
+	    $template_files = array_reverse($this->get_template_files());
+	    foreach ($template_files as $key => $handler) {
+		    if(in_array($filename,$handler)){
+				return $key;
+		    }
+	    }
+	    return 'free';
+    }
 }

@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
+use Elementor\Icons_Manager;
 use Elementor\Modules\DynamicTags\Module as TagsModule;
 use Elementor\Repeater;
 use \Elementor\Widget_Base;
@@ -673,11 +674,11 @@ class Pricing_Table extends Widget_Base
                 'options'   => [
                     'left'  => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'right' => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                 ],
                 'default'   => 'right',
@@ -710,7 +711,7 @@ class Pricing_Table extends Widget_Base
                         ],
                     ],
                     'default'     => '1',
-                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.com/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
                 ]
             );
 
@@ -813,15 +814,15 @@ class Pricing_Table extends Widget_Base
                 'options'      => [
                     'left'   => [
                         'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-center',
+                        'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
                         'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                 ],
                 'default'      => 'center',
@@ -838,15 +839,15 @@ class Pricing_Table extends Widget_Base
                 'options'      => [
                     'left'   => [
                         'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-center',
+                        'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
                         'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                 ],
                 'default'      => 'center',
@@ -1247,6 +1248,27 @@ class Pricing_Table extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-pricing-item .body ul li .li-icon img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-pricing-item .body ul li .li-icon i'   => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_pricing_table_list_item_icon_size_svg',
+            [
+                'label'     => esc_html__('SVG Icon Size', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::SLIDER,
+                'default'   => [
+                    'size' => 20,
+                    'unit' => 'px',
+                ],
+                'range'     => [
+                    'px' => [
+                        'max' => 50,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-pricing-item .body ul li .li-icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-pricing-item .body ul li .li-icon svg'   => 'font-size: {{SIZE}}{{UNIT}}; width: 1em; height: 1em;',
                 ],
             ]
         );
@@ -2074,10 +2096,11 @@ class Pricing_Table extends Widget_Base
             ?>
                 <li <?php echo $obj->get_render_attribute_string('pricing_feature_item' . $counter); ?>>
                     <?php if ('show' === $settings['eael_pricing_table_icon_enabled']) : ?>
-                        <span class="li-icon" style="color:<?php echo esc_attr($item['eael_pricing_table_list_icon_color']); ?>">
+                        <span class="li-icon" style="color:<?php echo esc_attr($item['eael_pricing_table_list_icon_color']); ?>;fill:<?php echo esc_attr($item['eael_pricing_table_list_icon_color']); ?>;" >
                             <?php if (isset($item['__fa4_migrated']['eael_pricing_table_list_icon_new']) || empty($item['eael_pricing_table_list_icon'])) { ?>
                                 <?php if (isset($item['eael_pricing_table_list_icon_new']['value']['url'])) : ?>
-                                    <img src="<?php echo $item['eael_pricing_table_list_icon_new']['value']['url']; ?>" alt="<?php echo esc_attr(get_post_meta($item['eael_pricing_table_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                                    <?php Icons_Manager::render_icon( $item['eael_pricing_table_list_icon_new'], [ 'aria-hidden' => 'true' ] ); ?>
+<!--                                    <img src="--><?php //echo $item['eael_pricing_table_list_icon_new']['value']['url']; ?><!--" alt="--><?php //echo esc_attr(get_post_meta($item['eael_pricing_table_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?><!--" />-->
                                 <?php else : ?>
                                     <i class="<?php echo $item['eael_pricing_table_list_icon_new']['value']; ?>"></i>
                                 <?php endif; ?>

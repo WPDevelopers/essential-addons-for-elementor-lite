@@ -454,7 +454,25 @@ class Post_Grid extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-entry-meta, .eael-entry-meta a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-entry-meta a' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+	                'eael_show_author_name' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_grid_meta_color_date',
+            [
+                'label' => __('Date Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-entry-meta .eael-posted-on' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+	                'eael_show_date' => 'yes',
                 ],
             ]
         );
@@ -467,15 +485,15 @@ class Post_Grid extends Widget_Base
                 'options' => [
                     'flex-start' => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'flex-end' => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'default' => 'flex-start',
@@ -622,15 +640,15 @@ class Post_Grid extends Widget_Base
                 'options' => [
                     'left' => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'selectors' => [
@@ -645,7 +663,7 @@ class Post_Grid extends Widget_Base
                 'name' => 'eael_post_grid_title_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Typography::TYPOGRAPHY_1,
-                'selector' => '{{WRAPPER}} .eael-entry-title',
+                'selector' => '{{WRAPPER}} .eael-entry-title, {{WRAPPER}} .eael-entry-title a',
             ]
         );
 
@@ -690,19 +708,19 @@ class Post_Grid extends Widget_Base
                 'options' => [
                     'left' => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                     'justify' => [
                         'title' => __('Justified', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-justify',
+                        'icon' => 'eicon-text-align-justify',
                     ],
                 ],
                 'selectors' => [
@@ -785,15 +803,15 @@ class Post_Grid extends Widget_Base
                 'options' => [
                     'flex-start' => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'flex-end' => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'default' => 'flex-start',
@@ -868,15 +886,15 @@ class Post_Grid extends Widget_Base
                 'options' => [
                     'left' => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'selectors' => [
@@ -1023,6 +1041,10 @@ class Post_Grid extends Widget_Base
         $args = HelperClass::get_query_args($settings);
         $args = HelperClass::get_dynamic_args($settings, $args);
 
+	    if ( ! in_array( $settings['post_type'], [ 'post', 'page', 'product', 'by_id', 'source_dynamic' ] ) ) {
+		    $settings['eael_post_terms'] = $settings["eael_{$settings['post_type']}_terms"];
+	    }
+
         $link_settings = [
             'image_link_nofollow' => $settings['image_link_nofollow'] ? 'rel="nofollow"' : '',
             'image_link_target_blank' => $settings['image_link_target_blank'] ? 'target="_blank"' : '',
@@ -1059,11 +1081,16 @@ class Post_Grid extends Widget_Base
 
         $template = $this->get_template($settings['eael_dynamic_template_Layout']);
         $settings['loadable_file_name'] = $this->get_filename_only($template);
+	    $dir_name = $this->get_temp_dir_name($settings['loadable_file_name']);
+	    $found_posts = 0;
 
         if(file_exists($template)){
             $query = new \WP_Query( $args );
 
             if ( $query->have_posts() ) {
+	            $found_posts      = $query->found_posts;
+	            $max_page         = ceil( $found_posts / absint( $args['posts_per_page'] ) );
+	            $args['max_page'] = $max_page;
 
                 while ( $query->have_posts() ) {
                     $query->the_post();
@@ -1082,7 +1109,9 @@ class Post_Grid extends Widget_Base
             <div class="clearfix"></div>
         </div>';
 
-        $this->print_load_more_button($settings, $args);
+	    if ( $found_posts > $args['posts_per_page'] ) {
+		    $this->print_load_more_button( $settings, $args, $dir_name );
+	    }
 
         if (Plugin::instance()->editor->is_edit_mode()) {?>
             <script type="text/javascript">

@@ -267,6 +267,9 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
+.eael-post-elements-readmore-btn {
+  display: block;
+}
 /*--- Gallery Column CSS ---*/
 @media only screen and (min-width: 1025px) {
   /* For Desktop: */
