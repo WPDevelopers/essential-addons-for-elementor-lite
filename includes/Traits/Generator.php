@@ -92,7 +92,7 @@ trait Generator {
 			update_option( 'eael_editor_updated_at', strtotime( 'now' ) );
 		}
 
-		if ( $elements === false ) {
+		if ( $elements === false && $post_updated_at === false ) {
 			return true;
 		}
 
