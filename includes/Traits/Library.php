@@ -17,7 +17,7 @@ trait Library
      * @todo filter output
      */
 
-	public $OPTION_CLEAR_HOOK = "remove_unused_options_data";
+	public $OPTION_CLEAR_HOOK = "eael_remove_unused_options_data";
 
     public function get_registered_elements()
     {
