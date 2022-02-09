@@ -33,7 +33,7 @@ ea.hooks.addAction("init", "ea", () => {
 			
 			var hashContent = false;
 			$($currentTabId + ' > .eael-tabs-content > div', $scope).each(function (index) {
-				if (hashTag && $(this).attr("id") == hashTag) {
+				if (hashTag && $(this).attr("id") == hashTag + '-tab') {
 					$($currentTabId + ' > .eael-tabs-content > div', $scope).removeClass("active");
 					let nestedLink = $(this).closest('.eael-tabs-content').closest('.eael-tab-content-item');
 					if (nestedLink.length) {
