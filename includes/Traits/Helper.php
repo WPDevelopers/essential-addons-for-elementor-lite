@@ -102,14 +102,14 @@ trait Helper
 
         }
 
-        $link_settings = [
-            'image_link_nofollow' => isset( $settings['image_link_nofollow'] ) ? 'rel="nofollow"' : '',
-            'image_link_target_blank' => isset( $settings['image_link_target_blank'] ) ? 'target="_blank"' : '',
-            'title_link_nofollow' => isset( $settings['title_link_nofollow'] ) ? 'rel="nofollow"' : '',
-            'title_link_target_blank' => isset( $settings['title_link_target_blank'] ) ? 'target="_blank"' : '',
-            'read_more_link_nofollow' => isset( $settings['read_more_link_nofollow'] ) ? 'rel="nofollow"' : '',
-            'read_more_link_target_blank' => isset( $settings['read_more_link_target_blank'] ) ? 'target="_blank"' : '',
-        ];
+	    $link_settings = [
+		    'image_link_nofollow'         => ! empty( $settings['image_link_nofollow'] ) ? 'rel="nofollow"' : '',
+		    'image_link_target_blank'     => ! empty( $settings['image_link_target_blank'] ) ? 'target="_blank"' : '',
+		    'title_link_nofollow'         => ! empty( $settings['title_link_nofollow'] ) ? 'rel="nofollow"' : '',
+		    'title_link_target_blank'     => ! empty( $settings['title_link_target_blank'] ) ? 'target="_blank"' : '',
+		    'read_more_link_nofollow'     => ! empty( $settings['read_more_link_nofollow'] ) ? 'rel="nofollow"' : '',
+		    'read_more_link_target_blank' => ! empty( $settings['read_more_link_target_blank'] ) ? 'target="_blank"' : '',
+	    ];
 
 	    $template_info = $this->eael_sanitize_template_param( $_REQUEST['template_info'] );
 
