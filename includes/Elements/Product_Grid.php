@@ -2978,6 +2978,12 @@ class Product_Grid extends Widget_Base
         $this->end_controls_section();
     }
 
+	function eael_customize_woo_prod_thumbnail_size( $size ) {
+		$settings = $this->get_settings_for_display();
+
+		return $settings['eael_product_grid_image_size_size'];
+	}
+
     protected function render()
     {
         if (!function_exists('WC')) {
@@ -3022,6 +3028,7 @@ class Product_Grid extends Widget_Base
             'data-nonce' => wp_create_nonce('eael_product_grid'),
         ]);
 
+	    add_filter( 'single_product_archive_thumbnail_size', [ $this, 'eael_customize_woo_prod_thumbnail_size' ] );
         add_filter('woocommerce_product_add_to_cart_text', [
             $this,
             'add_to_cart_button_custom_text',
@@ -3098,6 +3105,7 @@ class Product_Grid extends Widget_Base
             $this,
             'add_to_cart_button_custom_text',
         ]);
+	    remove_filter( 'single_product_archive_thumbnail_size', [ $this, 'eael_customize_woo_prod_thumbnail_size' ] );
     }
 
     /**
