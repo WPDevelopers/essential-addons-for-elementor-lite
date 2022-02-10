@@ -116,13 +116,13 @@ ea.hooks.addAction("init", "ea", () => {
     };
 
     const swiperLoader = (swiperElement, swiperConfig) => {
-        if ( 'undefined' === typeof Swiper ) {
+        if ('undefined' === typeof Swiper || 'function' === typeof Swiper) {
             const asyncSwiper = elementorFrontend.utils.swiper;
-            return new asyncSwiper( swiperElement, swiperConfig ).then( ( newSwiperInstance ) => {
-                return  newSwiperInstance;
-            } );
+            return new asyncSwiper(swiperElement, swiperConfig).then((newSwiperInstance) => {
+                return newSwiperInstance;
+            });
         } else {
-            return swiperPromise( swiperElement, swiperConfig );
+            return swiperPromise(swiperElement, swiperConfig);
         }
     }
 
