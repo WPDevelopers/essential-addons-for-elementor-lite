@@ -12,7 +12,7 @@ if (isset($content) && isset($link)) {
     echo '<div class="swiper-slide">
         <div class="ticker-content">';
         if (!empty($link['url'])) {
-            echo '<a href="' . $link['url'] . '" ';
+            echo '<a href="' . esc_url( $link['url'] ) . '" ';
 
             if ($link['is_external'] == 'on') {
                 echo 'target="_blank" ';

@@ -57,7 +57,7 @@ var SimpleMenu = function ($scope, $) {
         $('.eael-simple-menu-horizontal', $scope)
             .before('<span class="eael-simple-menu-toggle-text"></span>')
             .after(
-                '<button class="eael-simple-menu-toggle"><span class="eicon-menu-bar"></span></button>'
+                '<button class="eael-simple-menu-toggle"><span class="eicon-menu-bar"></span><span class="eael-simple-menu-toggle-text"></span></button>'
             )
         eael_menu_resize();
         
@@ -81,7 +81,7 @@ var SimpleMenu = function ($scope, $) {
     }
     
     function eael_menu_resize(){
-        if (window.matchMedia('(max-width: 991px)').matches) {
+        if (window.matchMedia('(max-width: 1024px)').matches) {
             $('.eael-simple-menu-container', $scope).addClass(
                 'eael-simple-menu-hamburger'
             )
