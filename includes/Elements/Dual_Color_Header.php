@@ -58,7 +58,7 @@ class Dual_Color_Header extends Widget_Base
 		return 'https://essential-addons.com/elementor/docs/dual-color-headline/';
 	}
 
-	protected function _register_controls()
+	protected function register_controls()
 	{
 		/**
 		 * Dual Color Heading Content Settings

@@ -60,7 +60,7 @@ class Cta_Box extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/call-to-action/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
 
         /**

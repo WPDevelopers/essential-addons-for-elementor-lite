@@ -63,7 +63,7 @@ class Adv_Tabs extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/advanced-tabs/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
         /**
          * Advance Tabs Settings

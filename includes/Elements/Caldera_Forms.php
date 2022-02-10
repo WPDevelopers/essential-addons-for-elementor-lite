@@ -55,7 +55,7 @@ class Caldera_Forms extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/caldera-forms/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
         /*-----------------------------------------------------------------------------------*/
         /*    Content Tab

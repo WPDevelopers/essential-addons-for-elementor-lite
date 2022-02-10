@@ -67,7 +67,7 @@ class Pricing_Table extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/pricing-table/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
 
         /**

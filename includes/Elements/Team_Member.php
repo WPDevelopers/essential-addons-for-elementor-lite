@@ -57,7 +57,7 @@ class Team_Member extends Widget_Base {
         return 'https://essential-addons.com/elementor/docs/team-members/';
     }
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 
   		$this->start_controls_section(

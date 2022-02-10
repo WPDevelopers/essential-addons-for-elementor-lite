@@ -81,7 +81,7 @@ class Sticky_Video extends Widget_Base
         ];
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
         /**
          * General

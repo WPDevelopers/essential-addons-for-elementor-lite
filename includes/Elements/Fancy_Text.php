@@ -55,7 +55,7 @@ class Fancy_Text extends Widget_Base {
         return 'https://essential-addons.com/elementor/docs/fancy-text/';
     }
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		// Content Controls
   		$this->start_controls_section(
