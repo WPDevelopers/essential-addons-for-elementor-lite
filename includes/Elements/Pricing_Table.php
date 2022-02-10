@@ -1293,6 +1293,9 @@ class Pricing_Table extends Widget_Base
             [
                 'label' => esc_html__('Ribbon', 'essential-addons-for-elementor-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_pricing_table_featured' => 'yes',
+                ],
             ]
         );
 
