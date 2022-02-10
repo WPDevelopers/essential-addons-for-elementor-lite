@@ -271,5 +271,8 @@ class Bootstrap
 		        add_action( 'init', [ $this, 'register_wc_hooks' ], 5 );
 	        }
         }
+
+	    // beehive theme compatibility
+	    add_filter( 'beehive_scripts', array( $this, 'beehive_theme_swiper_slider_compatibility' ), 999 );
     }
 }
