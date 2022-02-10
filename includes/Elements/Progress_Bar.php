@@ -59,7 +59,7 @@ class Progress_Bar extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/progress-bar/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
 
         /*-----------------------------------------------------------------------------------*/

@@ -51,7 +51,7 @@ class Image_Accordion extends Widget_Base {
         return 'https://essential-addons.com/elementor/docs/image-accordion/';
     }
 
-    protected function _register_controls() {
+    protected function register_controls() {
         /**
          * Image accordion Content Settings
          */

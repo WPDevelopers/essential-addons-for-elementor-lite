@@ -62,7 +62,7 @@ class Content_Ticker extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/content-ticker/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
         /**
          * Content Ticker Content Settings

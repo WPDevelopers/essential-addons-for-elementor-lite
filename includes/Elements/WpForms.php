@@ -59,7 +59,7 @@ class WpForms extends Widget_Base {
         return 'https://essential-addons.com/elementor/docs/wpforms/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
 
         if (!class_exists('\WPForms\WPForms')) {

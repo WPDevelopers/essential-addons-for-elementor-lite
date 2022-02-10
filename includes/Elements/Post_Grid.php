@@ -74,7 +74,7 @@ class Post_Grid extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/post-grid/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
         /**
          * Query And Layout Controls!

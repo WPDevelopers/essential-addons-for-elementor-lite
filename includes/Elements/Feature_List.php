@@ -55,7 +55,7 @@ class Feature_List extends Widget_Base {
         return 'https://essential-addons.com/elementor/docs/ea-feature-list/';
     }
 
-    protected function _register_controls() {
+    protected function register_controls() {
         /**
          * Feature List Settings
          */

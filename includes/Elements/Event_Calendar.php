@@ -72,7 +72,7 @@ class Event_Calendar extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/event-calendar/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
         /**
          * -------------------------------------------

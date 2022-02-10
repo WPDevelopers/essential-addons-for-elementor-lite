@@ -76,7 +76,7 @@ class Woo_Product_Compare extends Widget_Base {
 	/**
 	 * @inheritDoc
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
 		$this->init_content_wc_notice_controls();
 		if ( ! function_exists( 'WC' ) ) {
 			return;

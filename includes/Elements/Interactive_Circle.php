@@ -745,7 +745,7 @@ class Interactive_Circle extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		$this->eael_interactive_circle_general();
 		$this->eael_interactive_circle_item();
 		$this->eael_interactive_circle_additional();

@@ -146,7 +146,7 @@ class Formstack extends Widget_Base {
         return $keys;
     }
 
-    protected function _register_controls () {
+    protected function register_controls () {
 
         if (!apply_filters('eael/is_plugin_active', 'formstack/plugin.php')) {
             $this->formstack_not_activated();

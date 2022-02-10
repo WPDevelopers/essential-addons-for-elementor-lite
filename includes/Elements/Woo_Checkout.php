@@ -78,7 +78,7 @@ class Woo_Checkout extends Widget_Base {
 		return 'https://essential-addons.com/elementor/docs/woo-checkout/';
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 	    if( !class_exists( 'woocommerce' ) ) {
 		    $this->start_controls_section(
 			    'eael_global_warning',
