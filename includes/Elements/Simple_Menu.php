@@ -40,6 +40,16 @@ class Simple_Menu extends Widget_Base
         return 'eaicon-simple-menu';
     }
 
+    /**
+     * Forcefully enqueue elementor icon library
+     *
+     * @return string[]
+     */
+    public function get_style_depends()
+    {
+        return ['elementor-icons'];
+    }
+
     public function get_categories()
     {
         return ['essential-addons-elementor'];
