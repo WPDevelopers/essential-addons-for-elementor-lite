@@ -142,6 +142,10 @@ ea.hooks.addAction("init", "ea", () => {
 			}
 		}
 
+		if ($autoplay === 0) {
+			$carouselOptions.autoplay = false
+		}
+
 		swiperLoader($wooProductCarousel, $carouselOptions).then((eaelWooProductCarousel) => {
 			if ($autoplay === 0) {
 				eaelWooProductCarousel.autoplay.stop();
@@ -176,7 +180,7 @@ ea.hooks.addAction("init", "ea", () => {
 				});
 			}
 		});
-		
+
 		ea.hooks.doAction("quickViewPopupViewInit",$scope,$);
 
 		if (isEditMode) {
@@ -199,7 +203,17 @@ ea.hooks.addAction("init", "ea", () => {
                 </div>`;
 			$("body").append(markup);
 		}
-	}
+
+		var WooProductCarouselLoader = function ($src) {
+			if ($($src).find('.eael-woo-product-carousel').length) {
+				swiperLoader($wooProductCarousel, $carouselOptions);
+			}
+		}
+
+		ea.hooks.addAction("ea-lightbox-triggered", "ea", WooProductCarouselLoader);
+		ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", WooProductCarouselLoader);
+		ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", WooProductCarouselLoader);
+	};
 
 	const swiperLoader = (swiperElement, swiperConfig) => {
 		if ('undefined' === typeof Swiper || 'function' === typeof Swiper) {
