@@ -27,24 +27,6 @@
   -ms-transform: translate(-50%, -50%);
 }
 
-/* Plyr CSS Started  */
-
-.plyr__controls button {
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
-}
-
-.plyr__controls button:hover {
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
-}
-
-.plyr__controls {
-  display: none !important;
-}
-
-/* Plyr CSS Ended */
-
 .eael-sticky-video-wrapper {
   position: relative;
   width: 100%;
@@ -56,6 +38,22 @@
   transition: 0.5s;
   text-align: left;
   overflow: hidden;
+  /* Plyr CSS Started  */
+  /* Plyr CSS Ended */
+}
+
+.eael-sticky-video-wrapper .plyr__controls button {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.eael-sticky-video-wrapper .plyr__controls button:hover {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.eael-sticky-video-wrapper .plyr__controls {
+  display: none !important;
 }
 
 .eael-sticky-video-player2 {
