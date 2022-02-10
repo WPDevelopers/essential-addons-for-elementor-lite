@@ -357,11 +357,12 @@ class Sticky_Video extends Widget_Base
             'eaelsv_overlay_options',
             [
                 'label' => __('Image Overlay', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_block' => false,
-                'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
-                'return_value' => 'yes',
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+	                '' => __('Default', 'essential-addons-for-elementor-lite'),
+	                'yes' => __('Custom', 'essential-addons-for-elementor-lite'),
+	                'transparent' => __('Transparent', 'essential-addons-for-elementor-lite'),
+                ],
                 'default' => '',
             ]
         );
@@ -703,6 +704,7 @@ class Sticky_Video extends Widget_Base
         $sticky = $settings['eaelsv_is_sticky'];
         $autoplay = ($settings['eaelsv_autopaly'] == 'yes') ? $settings['eaelsv_autopaly'] : 'no';
         $eaelsvPlayer = '';
+	    $eaelsv_overlay_visibility = $settings['eaelsv_overlay_options'];
 
         if ('youtube' == $settings['eael_video_source']) {
             $eaelsvPlayer = $this->eaelsv_load_player_youtube();
@@ -714,7 +716,7 @@ class Sticky_Video extends Widget_Base
             $eaelsvPlayer = $this->eaelsv_load_player_self_hosted();
         }
 
-        echo '<div class="eael-sticky-video-wrapper">';
+	    echo '<div class="eael-sticky-video-wrapper eaelsv-overlay-visibility-' . esc_attr( $eaelsv_overlay_visibility ) . '">';
         if ('yes' === $settings['eaelsv_overlay_options']) {
             // $autoplay = 'yes';
             $icon = '';
@@ -847,15 +849,16 @@ class Sticky_Video extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
 
-        if ('youtube' === $settings['eael_video_source']) {
-            $url = $settings['eaelsv_link_youtube'];
-            $link = explode('=', parse_url($url, PHP_URL_QUERY));
-            $id = $link[1];
-        }
+	    if ( 'youtube' === $settings['eael_video_source'] ) {
+		    $url        = $settings['eaelsv_link_youtube'];
+		    $link       = explode( '=', parse_url( $url, PHP_URL_QUERY ) );
+		    $short_link = explode( '/', $url );
+		    $id         = isset( $link[1] ) ? $link[1] : ( isset( $short_link[3] ) ? $short_link[3] : '' );
+	    }
         if ('vimeo' === $settings['eael_video_source']) {
             $url = $settings['eaelsv_link_vimeo'];
             $link = explode('/', $url);
-            $id = $link[3];
+	        $id = isset( $link[3] ) ? $link[3] : '';
         }
         if ('self_hosted' === $settings['eael_video_source']) {
             $externalUrl = $settings['eaelsv_link_external'];

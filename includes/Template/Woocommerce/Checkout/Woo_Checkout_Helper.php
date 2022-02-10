@@ -251,9 +251,9 @@ trait Woo_Checkout_Helper {
 	 */
 	public static function ea_coupon_template() {
         $settings = self::ea_get_woo_checkout_settings();
-        if(get_option('woocommerce_enable_coupons')==='no'){
-            return ;
-        }
+		if ( get_option( 'woocommerce_enable_coupons' ) === 'no' || $settings['ea_woo_checkout_coupon_hide'] === 'yes' ) {
+			return;
+		}
 		?>
 		<div class="woo-checkout-coupon">
 			<div class="ea-coupon-icon">
@@ -439,18 +439,31 @@ trait Woo_Checkout_Helper {
 			</ul>
 
 			<div class="ea-order-review-table-footer">
-				<?php
+                <!-- Show default text (from woocommerce) if change label control (ea_woo_checkout_table_header_text) is off  -->
+                <?php $woo_checkout_order_details_change_label_settings = !empty($settings['ea_woo_checkout_table_header_text']) ? CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_header_text']) : '';  ?>
+
+                <?php
 				if($settings['ea_woo_checkout_shop_link'] == 'yes') { ?>
 					<div class="back-to-shop">
 						<a class="back-to-shopping" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
-							<i class="fas fa-long-arrow-alt-left"></i><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_shop_link_text']); ?>
+							<?php //if($woo_checkout_order_details_change_label_settings == 'yes') : ?>
+<!--                                <i class="fas fa-long-arrow-alt-left"></i>--><?php //echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_shop_link_text']); ?>
+                            <?php //else : ?>
+<!--                                <i class="fas fa-long-arrow-alt-left"></i>--><?php //esc_html_e( 'Continue Shopping', 'essential-addons-for-elementor-lite' ); ?>
+                            <?php //endif; ?>
+                            <i class="fas fa-long-arrow-alt-left"></i><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_shop_link_text']); ?>
 						</a>
 					</div>
 				<?php } ?>
 
 				<div class="footer-content">
 					<div class="cart-subtotal">
-						<div><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_subtotal_text']); ?></div>
+                        <?php if($woo_checkout_order_details_change_label_settings == 'yes') : ?>
+                            <div><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_subtotal_text']); ?></div>
+                        <?php else : ?>
+                            <?php esc_html_e( 'Subtotal', 'essential-addons-for-elementor-lite' ); ?>
+                        <?php endif; ?>
+
 						<div><?php wc_cart_totals_subtotal_html(); ?></div>
 					</div>
 
@@ -498,7 +511,12 @@ trait Woo_Checkout_Helper {
 					<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
 
 					<div class="order-total">
-						<div><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_total_text']); ?></div>
+                        <?php if($woo_checkout_order_details_change_label_settings == 'yes') : ?>
+                            <div><?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_table_total_text']); ?></div>
+                        <?php else : ?>
+                            <?php esc_html_e( 'Total', 'essential-addons-for-elementor-lite' ); ?>
+                        <?php endif; ?>
+
 						<div><?php wc_cart_totals_order_total_html(); ?></div>
 					</div>
 
@@ -699,6 +717,7 @@ trait Woo_Checkout_Helper {
 		?>
 
         <div class="woo-checkout-payment">
+	        <?php do_action('eael_wc_multistep_checkout_after_shipping'); ?>
             <h3 id="payment-title" class="woo-checkout-section-title">
 				<?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_payment_title']); ?>
             </h3>
@@ -713,6 +732,13 @@ trait Woo_Checkout_Helper {
 		); ?>
         </div>
 	<?php }
+
+    public function custom_shipping_package_name( $name ) {
+        if( ! empty( self::$setting_data[ 'ea_woo_checkout_table_shipping_text' ] ) ) {
+            $name = self::$setting_data['ea_woo_checkout_table_shipping_text'];
+        }
+        return $name;
+    }
 
 	/**
 	 * Added all actions
@@ -752,6 +778,7 @@ trait Woo_Checkout_Helper {
 		}
 
 		remove_action('woocommerce_checkout_billing', [ $wc_checkout_instance, 'checkout_form_shipping' ]);
+		add_filter('woocommerce_shipping_package_name', [ $this, 'custom_shipping_package_name' ], 10, 3);
 	}
 
 }

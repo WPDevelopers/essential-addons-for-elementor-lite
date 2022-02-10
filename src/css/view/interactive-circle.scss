@@ -1,0 +1,2405 @@
+@use 'sass:math';
+
+.eael-circle-wrapper {
+    $nav-circle-width: 500px;
+    $nav-circle-border-color: #f5f3ff;
+    $nav-circle-border-width: 6px;
+    $nav-circle-border-radius: 50%;
+    $nav-content-padding: 75px;
+    $nav-items: 6;
+    $nav-item-width: 85px;
+    $nav-item-border-radius: 50%;
+    $breakpoint: 600px;
+
+    display: flex;
+    justify-content: center;
+
+    .eael-circle-info {
+        display: inline-flex;
+
+        @media only screen and (max-width: $breakpoint) {
+            margin: 0 !important;
+        }
+    }
+    .eael-circle-inner {
+        width: $nav-circle-width;
+        height: $nav-circle-width;
+        border: $nav-circle-border-width solid $nav-circle-border-color;
+        border-radius: $nav-circle-border-radius;
+
+        @media only screen and (max-width: $breakpoint) {
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+
+    }
+
+    .eael-circle-btn {
+        cursor: pointer;
+        transition: all .2ms;
+    }
+
+    .eael-circle-btn-txt {
+        //color: $nav-item-initial-color;
+        font-size: 14px;
+        line-height: 1.5em;
+    }
+
+    .eael-circle-content {
+        @media only screen and (max-width: $breakpoint) {
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+
+        h1, h2, h3, h4, h5, h6, p, span, div {
+            margin: 0;
+        }
+    }
+
+    &.eael-interactive-circle-preset-1 {
+        .eael-circle-info {
+            $nav-item-border-color: #fff;
+            $nav-item-border-width: 4px;
+            $nav-item-box-shadow: 0px 5px 40px rgba(131, 100, 196, 0.2);
+            $nav-item-padding: 18px;
+            $nav-item-icon-width: 30px;
+            $nav-item-initial-background: #fff;
+            $nav-item-hover-background: #7a5bff;
+            $nav-item-initial-color: #7a5bff;
+            $nav-item-hover-color: #fff;
+
+            margin: 45px 0;
+
+            .eael-circle-inner {
+                position: relative;
+                .eael-circle-item {
+                    .eael-circle-btn {
+                        width: $nav-item-width;
+                        height: $nav-item-width;
+                        border-radius: $nav-item-border-radius;
+                        display: block;
+                        overflow: hidden;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background: $nav-item-initial-background;
+                        border: $nav-item-border-width solid $nav-item-border-color;
+                        box-shadow: $nav-item-box-shadow;
+                        z-index: 99;
+                        .eael-circle-icon-shapes {
+                            display: none;
+                        }
+                        .eael-circle-btn-icon {
+                            text-align: center;
+                            padding: $nav-item-padding;
+                            border-radius: $nav-item-border-radius;
+                            width: 100%;
+                            height: 100%;
+                            .eael-circle-icon-inner {
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                width: 100%;
+                                height: 100%;
+
+                                i {
+                                    color: #A195DC;
+                                    font-size: 22px;
+                                }
+                                svg {
+                                    width: $nav-item-icon-width;
+                                    min-width: $nav-item-icon-width;
+                                    height: $nav-item-icon-width;
+                                    min-height: $nav-item-icon-width;
+                                    fill: #A195DC;
+                                }
+                                .eael-circle-btn-txt {
+                                    color: $nav-item-initial-color;
+                                    //font-size: 14px;
+                                    //line-height: 1.5em;
+                                }
+                            }
+                        }
+                        &:hover,
+                        &.active {
+                            .eael-circle-btn-icon {
+                                background: $nav-item-hover-background;
+
+                                i {
+                                    color: $nav-item-hover-color;
+                                }
+                                svg {
+                                    fill: $nav-item-hover-color;
+                                }
+                                .eael-circle-btn-txt {
+                                    color: $nav-item-hover-color;
+                                }
+                            }
+                        }
+                    }
+                    .eael-circle-btn-content {
+                        overflow: hidden;
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        visibility: hidden;
+                        opacity: 0;
+                        border-radius: $nav-circle-border-radius;
+
+                        @media only screen and (max-width: $breakpoint) {
+                            border-radius: 0;
+                        }
+                        .eael-circle-content {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            padding: $nav-content-padding;
+                            text-align: center;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: $nav-circle-border-radius;
+                            overflow: hidden;
+
+                            @media only screen and (max-width: $breakpoint) {
+                                border-radius: 0;
+                                margin-top: 20px;
+                                height: auto;
+                            }
+                        }
+                        &.active {
+                            visibility: visible;
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+            &[data-items="1"] {
+                .eael-circle-item {
+                    #eael-circle-item-1 {
+                        top: 0;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+            &[data-items="2"] {
+                .eael-circle-item {
+                    #eael-circle-item-1 {
+                        top: 0;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-2 {
+                        top: 100%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+            &[data-items="3"] {
+                .eael-circle-item {
+                    #eael-circle-item-1 {
+                        top: 0;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-2 {
+                        top: 75%;
+                        left: 93%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-3 {
+                        top: 75%;
+                        left: 7%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+            &[data-items="4"] {
+                .eael-circle-item {
+                    #eael-circle-item-1 {
+                        top: 14.65%;
+                        left: 14.65%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-2 {
+                        top: 14.65%;
+                        left: 85.35%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-3 {
+                        top: 85.35%;
+                        left: 14.65%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-4 {
+                        top: 85.35%;
+                        left: 85.35%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+            &[data-items="5"] {
+                .eael-circle-item {
+                    #eael-circle-item-1 {
+                        top: 0%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-2 {
+                        top: 39%;
+                        left: 99%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-3 {
+                        top: 90%;
+                        left: 20%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-4 {
+                        top: 90%;
+                        left: 80%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-5 {
+                        top: 39%;
+                        left: 1%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+            &[data-items="6"] {
+                .eael-circle-item {
+                    #eael-circle-item-1 {
+                        top: 0;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-2 {
+                        top: 25%;
+                        left: 93%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-3 {
+                        top: 75%;
+                        left: 93%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-4 {
+                        top: 100%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-5 {
+                        top: 75%;
+                        left: 7%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-6 {
+                        top: 25%;
+                        left: 7%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+            &[data-items="7"] {
+                .eael-circle-item {
+                    #eael-circle-item-1 {
+                        top: 0%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-2 {
+                        top: 20%;
+                        left: 92%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-3 {
+                        top: 61%;
+                        left: 99%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-4 {
+                        top: 95%;
+                        left: 72%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-5 {
+                        top: 95%;
+                        left: 28%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-6 {
+                        top: 61%;
+                        left: 1%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-7 {
+                        top: 20%;
+                        left: 8%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+            &[data-items="8"] {
+                .eael-circle-item {
+                    #eael-circle-item-1 {
+                        top: 0%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-2 {
+                        top: 14.65%;
+                        left: 85.35%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-3 {
+                        top: 50%;
+                        left: 100%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-4 {
+                        top: 85.35%;
+                        left: 85.35%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-5 {
+                        top: 100%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-6 {
+                        top: 85.35%;
+                        left: 14.65%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-7 {
+                        top: 50%;
+                        left: 0%;
+                        transform: translate(-50%, -50%);
+                    }
+                    #eael-circle-item-8 {
+                        top: 14.65%;
+                        left: 14.65%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+        }
+        @media only screen and (min-width: $breakpoint + 1) {
+            &.eael-interactive-circle-animation-1 {
+                $animation-duration: 2s;
+                .eael-circle-inner {
+                    @keyframes eael-1-anim-1-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                        }
+                    }
+                    .eael-circle-btn {
+                        animation: eael-1-anim-1-btn-animation $animation-duration;
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-2 {
+                $animation-duration: 2s;
+                $animation-angle: 360deg;
+                .eael-circle-inner {
+                    @keyframes eael-1-anim-2-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                        }
+                    }
+                    @keyframes eael-1-anim-2-circle-animation {
+                        0% {
+                            height: 0;
+                            width: 0;
+                            margin-top: math.div($nav-circle-width, 2);
+                            margin-bottom: math.div($nav-circle-width, 2);
+                            transform: rotate(-$animation-angle);
+                        }
+                    }
+                    animation: eael-1-anim-2-circle-animation $animation-duration;
+                    .eael-circle-btn {
+                        animation: eael-1-anim-2-btn-animation $animation-duration;
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-3 {
+                $animation-duration: 2s;
+                $animation-angle: 360deg;
+                .eael-circle-inner {
+                    @keyframes eael-1-anim-3-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotate($animation-angle);
+                        }
+                    }
+                    @keyframes eael-1-anim-3-circle-animation {
+                        0% {
+                            transform: rotate(-$animation-angle);
+                        }
+                    }
+                    @keyframes eael-1-anim-3-circle-content-animation {
+                        0% {
+                            transform: rotate($animation-angle);
+                        }
+                    }
+                    animation: eael-1-anim-3-circle-animation $animation-duration;
+                    .eael-circle-btn-content {
+                        animation: eael-1-anim-3-circle-content-animation
+                        $animation-duration;
+                    }
+                    .eael-circle-btn {
+                        animation: eael-1-anim-3-btn-animation $animation-duration;
+                    }
+                }
+            }
+        }
+
+        @media only screen and (max-width: $breakpoint) {
+            .eael-circle-info {
+                width: 100%;
+                padding: 0 !important;
+            }
+            .eael-circle-inner {
+                display: grid;
+                width: 100% !important;
+                height: initial!important;
+                grid-template-columns: repeat(1, 1fr);
+                grid-gap: 20px;
+                border: none;
+            }
+            .eael-circle-item {
+                border: $nav-circle-border-width solid $nav-circle-border-color;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                .eael-circle-btn {
+                    position: initial !important;
+                    transform: none !important;
+                    .eael-circle-icon-shapes {
+                        display: none !important;
+                    }
+                }
+                .eael-circle-btn-content {
+                    position: initial !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                    display: block !important;
+                    .eael-circle-content {
+                        padding: 0 !important;
+                        background: transparent !important;
+                    }
+                }
+            }
+        }
+    }
+
+
+    &.eael-interactive-circle-preset-2 {
+        $nav-circle-2-width: 700px;
+        margin: 45px 0 0;
+
+        .eael-circle-info {
+            $nav-item-border-width: 10px;
+            $nav-item-icon-width: 35px;
+            $nav-item-initial-background: #fff;
+            $nav-item-hover-background: #f4fff9;
+            $nav-item-icon-initial-color: #7a5bff;
+            $nav-item-text-initial-color: #0d0c0e;
+            $nav-line-shape-width: 5px;
+            $nav-item-text-size: 16px;
+            $nav-item-text-weight: 500;
+            $nav-item-text-gap: 10px;
+            $nav-item-gap: 20px;
+            $nav-content-background: #fff;
+            $nav-content-text-size: 20px;
+            $nav-content-text-weight: 500;
+            $nav-content-text-color: #202b46;
+            $nav-content-margin: 10px;
+            $nav-content-padding: 0px 60px;
+            $nav-item-initial-color: #7a5bff;
+            $nav-item-hover-color: #fff;
+
+            padding: math.div($nav-item-width, 2) + $nav-item-gap math.div($nav-item-width, 2) + $nav-item-gap 0 math.div($nav-item-width, 2) + $nav-item-gap;
+            position: relative;
+            .eael-circle-inner {
+                width: $nav-circle-2-width;
+                height: math.div($nav-circle-2-width, 2);
+                border-radius: $nav-circle-2-width $nav-circle-2-width 0 0;
+                border: 5px solid #FFE6DC;
+                border-bottom: none!important;
+
+                @media only screen and (max-width: $breakpoint) {
+                    width: 100%;
+                    height: auto;
+                    border-radius: 0;
+                    border: 0;
+                }
+
+                .eael-circle-item {
+                    @media only screen and (max-width: $breakpoint) {
+
+                    }
+                    .eael-circle-btn {
+                        position: absolute;
+                        z-index: 99;
+                        height: $nav-item-width;
+                        width: $nav-item-width;
+                        border-radius: $nav-item-border-radius;
+                        box-shadow: 0px 5px 40px rgb(131 100 196 / 20%);
+                        background: #fff;
+                        top: 50%;
+                        left: 50%;
+                        .eael-circle-icon-shapes {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            z-index: -1;
+                            transform-origin: center center;
+                        }
+                        .eael-circle-btn-icon {
+                            padding: $nav-item-border-width;
+                            height: 100%;
+                            width: 100%;
+                            border-radius: $nav-item-border-radius;
+                            background: #fff;
+
+                            .eael-circle-btn-icon-inner {
+                                //background: $nav-item-initial-background;
+                                width: 100%;
+                                height: 100%;
+                                border-radius: $nav-item-border-radius;
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                text-align: center;
+
+                                h3 {
+                                    font-size: $nav-item-text-size;
+                                    font-weight: $nav-item-text-weight;
+                                    line-height: 1.1;
+                                    margin-bottom: 0;
+                                    margin-top: $nav-item-text-gap;
+                                    color: $nav-item-text-initial-color;
+                                }
+
+                                i {
+                                    color: #A195DC;
+                                    font-size: 22px;
+                                }
+                                svg {
+                                    width: $nav-item-icon-width;
+                                    min-width: $nav-item-icon-width;
+                                    height: $nav-item-icon-width;
+                                    min-height: $nav-item-icon-width;
+                                    fill: #A195DC;
+                                }
+                                .eael-circle-btn-txt {
+                                    color: $nav-item-initial-color;
+                                    //font-size: 14px;
+                                    //line-height: 1.5em;
+                                }
+                            }
+                        }
+                        &:hover,
+                        &.active {
+                            .eael-circle-btn-icon {
+                                background: #B977FC;
+
+                                i {
+                                    color: $nav-item-hover-color;
+                                }
+                                svg {
+                                    fill: $nav-item-hover-color;
+                                }
+                                .eael-circle-btn-txt {
+                                    color: $nav-item-hover-color;
+                                }
+                                .eael-circle-icon-inner {
+                                    background: $nav-item-hover-background;
+                                }
+                            }
+                        }
+                    }
+                    .eael-circle-btn-content {
+                        position: absolute;
+                        width: calc(100% - #{$nav-item-width + $nav-item-gap});
+                        bottom: 0px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        display: block;
+                        opacity: 0;
+                        visibility: hidden;
+                        text-align: center;
+                        height: math.div($nav-circle-2-width, 2);
+                        padding: $nav-circle-border-width;
+                        padding-bottom: 0;
+                        @media only screen and (max-width: $breakpoint) {
+                            width: 100%;
+                            transform: none;
+                            bottom: 0;
+                            height: auto!important;
+                            margin-top: 20px;
+                        }
+
+                        .eael-circle-content {
+                            overflow: hidden;
+                            border-top-left-radius: $nav-circle-width;
+                            border-top-right-radius: $nav-circle-width;
+                            height: math.div($nav-circle-2-width, 2) - $nav-circle-border-width;
+                            padding: $nav-content-padding;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: flex-end;
+
+                            @media only screen and (max-width: $breakpoint) {
+                                height: auto!important;
+                            }
+
+                            h2 {
+                                font-size: $nav-content-text-size;
+                                text-transform: uppercase;
+                                font-weight: $nav-content-text-weight;
+                                line-height: 2;
+                                color: $nav-content-text-color;
+                                margin-bottom: 0;
+                            }
+                        }
+                        &.active {
+                            visibility: visible;
+                            opacity: 1;
+                        }
+                    }
+                }
+
+                &[data-items="1"] {
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            top: 0%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    //background: radial-gradient(
+                            //    //                81.89% 82.54% at 48.96% 49.88%,
+                            //    //                #0956c6 3.76%,
+                            //    //                #07a9f0 55.38%,
+                            //    //                #93dcfc 100%
+                            //    //);
+                            //    svg {
+                            //        fill: #07a9f0;
+                            //    }
+                            //}
+                        }
+                    }
+                }
+                &[data-items="2"] {
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            top: 40%;
+                            left: 10%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    //background: radial-gradient(
+                            //    //                81.89% 82.54% at 48.96% 49.88%,
+                            //    //                #0956c6 3.76%,
+                            //    //                #07a9f0 55.38%,
+                            //    //                #93dcfc 100%
+                            //    //);
+                            //    svg {
+                            //        fill: #07a9f0;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-2 {
+                            top: 40%;
+                            left: 90%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    //background: radial-gradient(
+                            //    //                73.69% 72.33% at 51.12% 47.67%,
+                            //    //                #2b3894 3.76%,
+                            //    //                #364099 14.18%,
+                            //    //                #5356a8 32.43%,
+                            //    //                #8078bf 55.38%,
+                            //    //                #d2a8d1 100%
+                            //    //);
+                            //    svg {
+                            //        fill: #364099;
+                            //    }
+                            //}
+                        }
+                    }
+                }
+                &[data-items="3"] {
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            top: 72%;
+                            left: 2%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    //background: radial-gradient(
+                            //    //                81.89% 82.54% at 48.96% 49.88%,
+                            //    //                #0956c6 3.76%,
+                            //    //                #07a9f0 55.38%,
+                            //    //                #93dcfc 100%
+                            //    //);
+                            //    svg {
+                            //        fill: #07a9f0;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-2 {
+                            top: 0%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    //background: radial-gradient(
+                            //    //                65.76% 66.29% at 48.95% 49.57%,
+                            //    //                #b40042 3.76%,
+                            //    //                #c50048 48.92%,
+                            //    //                #ff5e93 100%
+                            //    //);
+                            //    svg {
+                            //        fill: #c50048;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-3 {
+                            top: 72%;
+                            left: 98%;
+                            transform: translate(-50%, -50%);
+                            //background: radial-gradient(
+                            //                94.25% 92.56% at 48.86% 49.71%,
+                            //                #199a8e 3.76%,
+                            //                #7af4ab 55.38%
+                            //);
+                            //svg {
+                            //    fill: #199a8e;
+                            //}
+                        }
+                    }
+                }
+                &[data-items="4"] {
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            top: 72%;
+                            left: 2%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    //background: radial-gradient(
+                            //    //                81.89% 82.54% at 48.96% 49.88%,
+                            //    //                #0956c6 3.76%,
+                            //    //                #07a9f0 55.38%,
+                            //    //                #93dcfc 100%
+                            //    //);
+                            //    svg {
+                            //        fill: #07a9f0;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-2 {
+                            top: 10.6%;
+                            left: 27.6%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    //background: radial-gradient(
+                            //    //                101.16% 101.7% at 47.77% 50.74%,
+                            //    //                #ff9100 3.76%,
+                            //    //                #ffb655 56.99%,
+                            //    //                #fff04a 100%
+                            //    //);
+                            //    svg {
+                            //        fill: #ffb655;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-3 {
+                            top: 10.6%;
+                            left: 72.4%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    //background: radial-gradient(
+                            //    //                94.25% 92.56% at 48.86% 49.71%,
+                            //    //                #199a8e 3.76%,
+                            //    //                #7af4ab 55.38%
+                            //    //);
+                            //    svg {
+                            //        fill: #7af4ab;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-4 {
+                            top: 72%;
+                            left: 98%;
+                            transform: translate(-50%, -50%);
+                            //background: radial-gradient(
+                            //                94.25% 92.56% at 48.86% 49.71%,
+                            //                #199a8e 3.76%,
+                            //                #7af4ab 55.38%
+                            //);
+                            //svg {
+                            //    fill: #199a8e;
+                            //}
+                        }
+                    }
+                }
+                &[data-items="5"] {
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            top: 72%;
+                            left: 2%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    81.89% 82.54% at 48.96% 49.88%,
+                            //                    #0956c6 3.76%,
+                            //                    #07a9f0 55.38%,
+                            //                    #93dcfc 100%
+                            //    );
+                            //    svg {
+                            //        fill: #07a9f0;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-2 {
+                            top: 20%;
+                            left: 20%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    101.16% 101.7% at 47.77% 50.74%,
+                            //                    #ff9100 3.76%,
+                            //                    #ffb655 56.99%,
+                            //                    #fff04a 100%
+                            //    );
+                            //    svg {
+                            //        fill: #ffb655;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-3 {
+                            top: 0%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    94.25% 92.56% at 48.86% 49.71%,
+                            //                    #199a8e 3.76%,
+                            //                    #7af4ab 55.38%
+                            //    );
+                            //    svg {
+                            //        fill: #7af4ab;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-4 {
+                            top: 20%;
+                            left: 80%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    65.76% 66.29% at 48.95% 49.57%,
+                            //                    #b40042 3.76%,
+                            //                    #c50048 48.92%,
+                            //                    #ff5e93 100%
+                            //    );
+                            //    svg {
+                            //        fill: #c50048;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-5 {
+                            top: 72%;
+                            left: 98%;
+                            transform: translate(-50%, -50%);
+                            //background: radial-gradient(
+                            //                94.25% 92.56% at 48.86% 49.71%,
+                            //                #199a8e 3.76%,
+                            //                #7af4ab 55.38%
+                            //);
+                            //svg {
+                            //    fill: #199a8e;
+                            //}
+                        }
+                    }
+                }
+                &[data-items="6"] {
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            top: 72%;
+                            left: 2%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    81.89% 82.54% at 48.96% 49.88%,
+                            //                    #0956c6 3.76%,
+                            //                    #07a9f0 55.38%,
+                            //                    #93dcfc 100%
+                            //    );
+                            //    svg {
+                            //        fill: #07a9f0;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-2 {
+                            top: 28.4%;
+                            left: 15%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    101.16% 101.7% at 47.77% 50.74%,
+                            //                    #ff9100 3.76%,
+                            //                    #ffb655 56.99%,
+                            //                    #fff04a 100%
+                            //    );
+                            //    svg {
+                            //        fill: #ffb655;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-3 {
+                            top: 3.6%;
+                            left: 36.6%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    94.25% 92.56% at 48.86% 49.71%,
+                            //                    #199a8e 3.76%,
+                            //                    #7af4ab 55.38%
+                            //    );
+                            //    svg {
+                            //        fill: #7af4ab;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-4 {
+                            top: 3.6%;
+                            left: 63.4%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    94.25% 92.56% at 48.86% 49.71%,
+                            //                    #199a8e 3.76%,
+                            //                    #7af4ab 55.38%
+                            //    );
+                            //    svg {
+                            //        fill: #7af4ab;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-5 {
+                            top: 28.4%;
+                            left: 85%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    65.76% 66.29% at 48.95% 49.57%,
+                            //                    #b40042 3.76%,
+                            //                    #c50048 48.92%,
+                            //                    #ff5e93 100%
+                            //    );
+                            //    svg {
+                            //        fill: #c50048;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-6 {
+                            top: 72%;
+                            left: 98%;
+                            transform: translate(-50%, -50%);
+                            //background: radial-gradient(
+                            //                94.25% 92.56% at 48.86% 49.71%,
+                            //                #199a8e 3.76%,
+                            //                #7af4ab 55.38%
+                            //);
+                            //svg {
+                            //    fill: #199a8e;
+                            //}
+                        }
+                    }
+                }
+                &[data-items="7"] {
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            top: 72%;
+                            left: 2%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    81.89% 82.54% at 48.96% 49.88%,
+                            //                    #0956c6 3.76%,
+                            //                    #07a9f0 55.38%,
+                            //                    #93dcfc 100%
+                            //    );
+                            //    svg {
+                            //        fill: #07a9f0;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-2 {
+                            top: 37.5%;
+                            left: 11%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    101.16% 101.7% at 47.77% 50.74%,
+                            //                    #ff9100 3.76%,
+                            //                    #ffb655 56.99%,
+                            //                    #fff04a 100%
+                            //    );
+                            //    svg {
+                            //        fill: #ffb655;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-3 {
+                            top: 10.9%;
+                            left: 27.3%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    65.76% 66.29% at 48.95% 49.57%,
+                            //                    #b40042 3.76%,
+                            //                    #c50048 48.92%,
+                            //                    #ff5e93 100%
+                            //    );
+                            //    svg {
+                            //        fill: #c50048;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-4 {
+                            top: 0%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    94.25% 92.56% at 48.86% 49.71%,
+                            //                    #199a8e 3.76%,
+                            //                    #7af4ab 55.38%
+                            //    );
+                            //    svg {
+                            //        fill: #7af4ab;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-5 {
+                            top: 10.9%;
+                            left: 72.7%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    65.76% 66.29% at 48.95% 49.57%,
+                            //                    #b40042 3.76%,
+                            //                    #c50048 48.92%,
+                            //                    #ff5e93 100%
+                            //    );
+                            //    svg {
+                            //        fill: #c50048;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-6 {
+                            top: 37.5%;
+                            left: 89%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    73.69% 72.33% at 51.12% 47.67%,
+                            //                    #2b3894 3.76%,
+                            //                    #364099 14.18%,
+                            //                    #5356a8 32.43%,
+                            //                    #8078bf 55.38%,
+                            //                    #d2a8d1 100%
+                            //    );
+                            //    svg {
+                            //        fill: #364099;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-7 {
+                            top: 72%;
+                            left: 98%;
+                            transform: translate(-50%, -50%);
+                            //background: radial-gradient(
+                            //                94.25% 92.56% at 48.86% 49.71%,
+                            //                #199a8e 3.76%,
+                            //                #7af4ab 55.38%
+                            //);
+                            //svg {
+                            //    fill: #199a8e;
+                            //}
+                        }
+                    }
+                }
+                &[data-items="8"] {
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            top: 72%;
+                            left: 2%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    81.89% 82.54% at 48.96% 49.88%,
+                            //                    #0956c6 3.76%,
+                            //                    #07a9f0 55.38%,
+                            //                    #93dcfc 100%
+                            //    );
+                            //    svg {
+                            //        fill: #07a9f0;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-2 {
+                            top: 40%;
+                            left: 10%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    64.96% 65.32% at 52.18% 47.01%,
+                            //                    #6f00ff 3.76%,
+                            //                    #533fff 55.38%,
+                            //                    #b9aaff 100%
+                            //    );
+                            //    svg {
+                            //        fill: #715eff;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-3 {
+                            top: 16%;
+                            left: 22.9%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    101.16% 101.7% at 47.77% 50.74%,
+                            //                    #ff9100 3.76%,
+                            //                    #ffb655 56.99%,
+                            //                    #fff04a 100%
+                            //    );
+                            //    svg {
+                            //        fill: #ffb655;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-4 {
+                            top: 1.9%;
+                            left: 40.6%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    65.76% 66.29% at 48.95% 49.57%,
+                            //                    #b40042 3.76%,
+                            //                    #c50048 48.92%,
+                            //                    #ff5e93 100%
+                            //    );
+                            //    svg {
+                            //        fill: #c50048;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-5 {
+                            top: 1.9%;
+                            left: 59.4%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    73.69% 72.33% at 51.12% 47.67%,
+                            //                    #2b3894 3.76%,
+                            //                    #364099 14.18%,
+                            //                    #5356a8 32.43%,
+                            //                    #8078bf 55.38%,
+                            //                    #d2a8d1 100%
+                            //    );
+                            //    svg {
+                            //        fill: #364099;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-6 {
+                            top: 16%;
+                            left: 77.1%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    94.25% 92.56% at 48.86% 49.71%,
+                            //                    #199a8e 3.76%,
+                            //                    #7af4ab 55.38%
+                            //    );
+                            //    svg {
+                            //        fill: #7af4ab;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-7 {
+                            top: 40%;
+                            left: 90%;
+                            transform: translate(-50%, -50%);
+                            //.eael-circle-btn-icon {
+                            //    background: radial-gradient(
+                            //                    73.69% 72.33% at 51.12% 47.67%,
+                            //                    #2b3894 3.76%,
+                            //                    #364099 14.18%,
+                            //                    #5356a8 32.43%,
+                            //                    #8078bf 55.38%,
+                            //                    #d2a8d1 100%
+                            //    );
+                            //    svg {
+                            //        fill: #364099;
+                            //    }
+                            //}
+                        }
+                        #eael-circle-item-8 {
+                            top: 72%;
+                            left: 98%;
+                            transform: translate(-50%, -50%);
+                            //background: radial-gradient(
+                            //                94.25% 92.56% at 48.86% 49.71%,
+                            //                #199a8e 3.76%,
+                            //                #7af4ab 55.38%
+                            //);
+                            //svg {
+                            //    fill: #199a8e;
+                            //}
+                        }
+                    }
+                }
+            }
+        }
+        @media only screen and (min-width: $breakpoint + 1) {
+            &.eael-interactive-circle-animation-1 {
+                $animation-duration: 2s;
+                .eael-circle-inner {
+                    @keyframes eael-2-anim-1-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                        }
+                    }
+                    .eael-circle-btn {
+                        animation: eael-2-anim-1-btn-animation $animation-duration;
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-2 {
+                $animation-duration: 2s;
+                $animation-angle: 700deg;
+                .eael-circle-info {
+                    @keyframes eael-2-anim-2-btn-animation {
+                        15% {
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                    }
+                    @keyframes eael-2-anim-2-content-animation {
+                        0% {
+                            transform: scale(0);
+                        }
+                        15% {
+                            transform: scale(0);
+                        }
+                    }
+                    .eael-circle-btn {
+                        transform-origin: center center;
+                        animation: eael-2-anim-2-btn-animation $animation-duration;
+                    }
+                    .eael-circle-btn-content {
+                        animation: eael-2-anim-2-content-animation $animation-duration;
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-3 {
+                $animation-duration: 2s;
+                $animation-angle: 700deg;
+                .eael-circle-info {
+                    @keyframes eael-2-anim-3-btn-animation {
+                        5% {
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+                        20% {
+                            top: 30%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+                    .eael-circle-btn {
+                        transform-origin: center center;
+                        animation: eael-2-anim-3-btn-animation $animation-duration;
+                    }
+                }
+            }
+        }
+
+        @media only screen and (max-width: $breakpoint) {
+            .eael-circle-info {
+                width: 100%;
+                padding: 0 !important;
+            }
+            .eael-circle-inner {
+                display: grid;
+                width: 100%;
+                height: initial;
+                grid-template-columns: repeat(1, 1fr);
+                grid-gap: 20px;
+                border: none;
+            }
+            .eael-circle-item {
+                border: $nav-circle-border-width solid $nav-circle-border-color;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                .eael-circle-btn {
+                    position: initial !important;
+                    transform: none !important;
+                    .eael-circle-icon-shapes {
+                        display: none !important;
+                    }
+                }
+                .eael-circle-btn-content {
+                    position: initial !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                    display: block !important;
+                    .eael-circle-content {
+                        padding: 0 !important;
+                        background: transparent !important;
+                    }
+                }
+            }
+        }
+    }
+
+    &.eael-interactive-circle-preset-3 {
+        margin: 45px;
+        
+        .eael-circle-info {
+            $nav-item-border-width: 10px;
+            $nav-item-icon-width: 35px;
+            $nav-item-initial-background: #fff;
+            $nav-item-hover-background: #f4fff9;
+            $nav-item-icon-initial-color: #7a5bff;
+            $nav-item-text-initial-color: #0d0c0e;
+            $nav-line-shape-width: 5px;
+            $nav-item-text-size: 16px;
+            $nav-item-text-weight: 500;
+            $nav-item-text-gap: 10px;
+            $nav-item-gap: 30px;
+            $dot-width: 20px;
+            $nav-content-background: #fff;
+            $nav-content-text-size: 30px;
+            $nav-content-text-weight: 500;
+            $nav-content-text-color: #202b46;
+            $nav-content-margin: 10px;
+            $nav-content-padding: 10px;
+            padding: math.div($nav-item-width, 2) + $nav-item-gap;
+            position: relative;
+            .eael-circle-inner {
+                width: 400px;
+                height: 400px;
+
+                @media only screen and (max-width: $breakpoint) {
+                    width: 100% !important;
+                    height: auto !important;
+                }
+
+                .eael-circle-item {
+                    .eael-circle-btn {
+                        position: absolute;
+                        z-index: 99;
+                        height: 100px;
+                        width: 100px;
+                        border-radius: $nav-item-border-radius;
+                        .eael-circle-icon-shapes {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            z-index: -1;
+                            transform-origin: center center;
+                            .eael-shape-1 {
+                                position: absolute;
+                                left: 50%;
+                                top: 50%;
+                                background: $nav-circle-border-color;
+                                height: $nav-line-shape-width;
+                                width: math.div($nav-item-width, 2) + $nav-item-gap;
+                                transform: translateY(-50%);
+                            }
+                            .eael-shape-2 {
+                                $content-position: math.div($nav-item-width, 2) + $nav-item-gap;
+                                position: absolute;
+                                left: calc(50% + #{$content-position} + #{math.div($nav-circle-border-width, 2)});
+                                top: 50%;
+                                border-radius: $nav-item-border-radius;
+                                background: $nav-circle-border-color;
+                                height: $dot-width;
+                                width: $dot-width;
+                                transform: translate(-50%, -50%);
+                            }
+                        }
+                        .eael-circle-btn-icon {
+                            padding: $nav-item-border-width;
+                            height: 100%;
+                            width: 100%;
+                            border-radius: $nav-item-border-radius;
+                            .eael-circle-icon-inner {
+                                background: $nav-item-initial-background;
+                                width: 100%;
+                                height: 100%;
+                                border-radius: $nav-item-border-radius;
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                text-align: center;
+                                img,
+                                svg {
+                                    width: $nav-item-icon-width;
+                                }
+                                h3 {
+                                    font-size: $nav-item-text-size;
+                                    font-weight: $nav-item-text-weight;
+                                    line-height: 1.1;
+                                    margin-bottom: 0;
+                                    margin-top: $nav-item-text-gap;
+                                    color: $nav-item-text-initial-color;
+                                }
+                            }
+                        }
+                        &.active {
+                            .eael-circle-btn-icon {
+                                .eael-circle-icon-inner {
+                                    background: $nav-item-hover-background;
+                                }
+                            }
+                        }
+                    }
+                    .eael-circle-btn-content {
+                        position: absolute;
+                        $content-position: math.div($nav-item-width, 2) + $nav-item-gap;
+                        top: $content-position;
+                        bottom: $content-position;
+                        left: $content-position;
+                        right: $content-position;
+                        display: block;
+                        opacity: 0;
+                        visibility: hidden;
+                        //padding: $nav-content-margin;
+                        padding: 50px;
+
+                        @media only screen and (max-width: $breakpoint) {
+                            padding: 0;
+                            border: 0!important;
+                            margin-top: 20px;
+                        }
+
+                        .eael-circle-content {
+                            border-radius: $nav-item-border-radius;
+                            overflow: hidden;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            text-align: center;
+                            height: 100%;
+                            padding: $nav-content-padding;
+                            border-radius: $nav-circle-border-radius;
+                            background: $nav-content-background;
+                            box-shadow: 0px 5px 40px rgba(131, 100, 196, 0.2);
+
+                            @media only screen and (max-width: $breakpoint) {
+                                box-shadow: none!important;
+                                background: transparent!important;
+                                border: 0!important;
+                                border-radius: 0!important;
+                            }
+
+                            h2 {
+                                font-size: $nav-content-text-size;
+                                text-transform: uppercase;
+                                font-weight: $nav-content-text-weight;
+                                line-height: 2;
+                                color: $nav-content-text-color;
+                            }
+                        }
+                        &.active {
+                            opacity: 1;
+                            visibility: visible;
+                        }
+                    }
+                }
+                .eael-circle-item {
+
+                    &:nth-child(8n+1) .eael-circle-btn-icon {
+                        background-image: radial-gradient(81.89% 82.54% at 48.96% 49.88%, #0956C6 3.76%, #07A9F0 55.38%, #93DCFC 100%);
+                    }
+                    &:nth-child(8n+2) .eael-circle-btn-icon {
+                        background-image: radial-gradient(64.96% 65.32% at 52.18% 47.01%, #6F00FF 3.76%, #533FFF 55.38%, #B9AAFF 100%);
+                    }
+                    &:nth-child(8n+3) .eael-circle-btn-icon {
+                        background-image: radial-gradient(101.16% 101.7% at 47.77% 50.74%, #FF9100 3.76%, #FFB655 56.99%, #FFF04A 100%);
+                    }
+                    &:nth-child(8n+4) .eael-circle-btn-icon {
+                        background-image: radial-gradient(65.76% 66.29% at 48.95% 49.57%, #B40042 3.76%, #C50048 48.92%, #FF5E93 100%);
+                    }
+                    &:nth-child(8n+5) .eael-circle-btn-icon {
+                        background-image: radial-gradient(73.69% 72.33% at 51.12% 47.67%, #2B3894 3.76%, #364099 14.18%, #5356A8 32.43%, #8078BF 55.38%, #D2A8D1 100%);
+                    }
+                    &:nth-child(8n+6) .eael-circle-btn-icon {
+                        background-image: radial-gradient(94.25% 92.56% at 48.86% 49.71%, #199A8E 3.76%, #7AF4AB 55.38%);
+                    }
+                    &:nth-child(8n+7) .eael-circle-btn-icon {
+                        background-image: radial-gradient(73.69% 72.33% at 51.12% 47.67%, #2B3894 3.76%, #364099 14.18%, #5356A8 32.43%, #8078BF 55.38%, #D2A8D1 100%);
+                    }
+                    &:nth-child(8n+8) .eael-circle-btn-icon {
+                        background-image: radial-gradient(94.25% 92.56% at 48.86% 49.71%, #199A8E 3.76%, #7AF4AB 55.38%);
+                    }
+
+                    #eael-circle-item-1 {
+                        top: 14.6%;
+                        left: 14.6%;
+                        transform: translate(-50%, -50%);
+                        //.eael-circle-btn-icon {
+                        //    background: radial-gradient(
+                        //                    81.89% 82.54% at 48.96% 49.88%,
+                        //                    #0956c6 3.76%,
+                        //                    #07a9f0 55.38%,
+                        //                    #93dcfc 100%
+                        //    );
+                        //    svg {
+                        //        fill: #07a9f0;
+                        //    }
+                        //}
+                        .eael-circle-icon-shapes {
+                            transform: rotate(45deg);
+                        }
+                    }
+                    #eael-circle-item-2 {
+                        top: 14.6%;
+                        left: 85.4%;
+                        transform: translate(-50%, -50%);
+                        //.eael-circle-btn-icon {
+                        //    background: radial-gradient(
+                        //                    64.96% 65.32% at 52.18% 47.01%,
+                        //                    #6f00ff 3.76%,
+                        //                    #533fff 55.38%,
+                        //                    #b9aaff 100%
+                        //    );
+                        //    svg {
+                        //        fill: #715eff;
+                        //    }
+                        //}
+                        .eael-circle-icon-shapes {
+                            transform: rotate(135deg);
+                        }
+                    }
+                    #eael-circle-item-3 {
+                        top: 85.4%;
+                        left: 14.6%;
+                        transform: translate(-50%, -50%);
+                        //.eael-circle-btn-icon {
+                        //    background: radial-gradient(
+                        //                    101.16% 101.7% at 47.77% 50.74%,
+                        //                    #ff9100 3.76%,
+                        //                    #ffb655 56.99%,
+                        //                    #fff04a 100%
+                        //    );
+                        //    svg {
+                        //        fill: #ffb655;
+                        //    }
+                        //}
+                        .eael-circle-icon-shapes {
+                            transform: rotate(-45deg);
+                        }
+                    }
+                    #eael-circle-item-4 {
+                        top: 85.4%;
+                        left: 85.4%;
+                        transform: translate(-50%, -50%);
+                        //.eael-circle-btn-icon {
+                        //    background: radial-gradient(
+                        //                    65.76% 66.29% at 48.95% 49.57%,
+                        //                    #b40042 3.76%,
+                        //                    #c50048 48.92%,
+                        //                    #ff5e93 100%
+                        //    );
+                        //    svg {
+                        //        fill: #c50048;
+                        //    }
+                        //}
+                        .eael-circle-icon-shapes {
+                            transform: rotate(-135deg);
+                        }
+                    }
+                    #eael-circle-item-5 {
+                        top: 50%;
+                        left: 0%;
+                        transform: translate(-50%, -50%);
+                        //.eael-circle-btn-icon {
+                        //    background: radial-gradient(
+                        //                    73.69% 72.33% at 51.12% 47.67%,
+                        //                    #2b3894 3.76%,
+                        //                    #364099 14.18%,
+                        //                    #5356a8 32.43%,
+                        //                    #8078bf 55.38%,
+                        //                    #d2a8d1 100%
+                        //    );
+                        //    svg {
+                        //        fill: #364099;
+                        //    }
+                        //}
+                    }
+                    #eael-circle-item-6 {
+                        top: 50%;
+                        left: 100%;
+                        transform: translate(-50%, -50%);
+                        //.eael-circle-btn-icon {
+                        //    background: radial-gradient(
+                        //                    94.25% 92.56% at 48.86% 49.71%,
+                        //                    #199a8e 3.76%,
+                        //                    #7af4ab 55.38%
+                        //    );
+                        //    svg {
+                        //        fill: #7af4ab;
+                        //    }
+                        //}
+                        .eael-circle-icon-shapes {
+                            transform: rotate(180deg);
+                        }
+                    }
+                    #eael-circle-item-7 {
+                        top: 0%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        //.eael-circle-btn-icon {
+                        //    background: radial-gradient(
+                        //                    73.69% 72.33% at 51.12% 47.67%,
+                        //                    #2b3894 3.76%,
+                        //                    #364099 14.18%,
+                        //                    #5356a8 32.43%,
+                        //                    #8078bf 55.38%,
+                        //                    #d2a8d1 100%
+                        //    );
+                        //    svg {
+                        //        fill: #364099;
+                        //    }
+                        //}
+                        .eael-circle-icon-shapes {
+                            transform: rotate(90deg);
+                        }
+                    }
+                    #eael-circle-item-8 {
+                        top: 100%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        //background: radial-gradient(
+                        //                94.25% 92.56% at 48.86% 49.71%,
+                        //                #199a8e 3.76%,
+                        //                #7af4ab 55.38%
+                        //);
+                        //svg {
+                        //    fill: #199a8e;
+                        //}
+                        .eael-circle-icon-shapes {
+                            transform: rotate(-90deg);
+                        }
+                    }
+                }
+            }
+        }
+
+        @media only screen and (min-width: $breakpoint + 1) {
+            &.eael-interactive-circle-animation-1 {
+                $animation-duration: 2s;
+                .eael-circle-inner {
+                    @keyframes eael-3-anim-1-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                        }
+                    }
+                    @keyframes eael-3-anim-1-shape-1-animation {
+                        0% {
+                            width: 0;
+                        }
+                    }
+                    @keyframes eael-3-anim-1-shape-2-animation {
+                        0% {
+                            left: 50%;
+                        }
+                    }
+                    .eael-circle-btn {
+                        animation: eael-3-anim-1-btn-animation $animation-duration;
+                        .eael-shape-1 {
+                            animation: eael-3-anim-1-shape-1-animation $animation-duration;
+                        }
+                        .eael-shape-2 {
+                            animation: eael-3-anim-1-shape-2-animation $animation-duration;
+                        }
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-2 {
+                $animation-duration: 2s;
+                $animation-angle: 360deg;
+                .eael-circle-info {
+                    @keyframes eael-3-anim-2-circle-animation {
+                        0% {
+                            transform: rotate(-$animation-angle);
+                        }
+                    }
+                    @keyframes eael-3-anim-2-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotate($animation-angle);
+                        }
+                    }
+                    @keyframes eael-3-anim-2-shape-1-animation {
+                        0% {
+                            width: 0;
+                        }
+                    }
+                    @keyframes eael-3-anim-2-shape-2-animation {
+                        0% {
+                            left: 50%;
+                        }
+                    }
+                    @keyframes eael-3-anim-2-circle-content-animation {
+                        0% {
+                            transform: rotate($animation-angle);
+                        }
+                    }
+                    animation: eael-3-anim-2-circle-animation $animation-duration;
+                    .eael-circle-btn-content {
+                        animation: eael-3-anim-2-circle-content-animation
+                        $animation-duration;
+                    }
+                    .eael-circle-btn {
+                        animation: eael-3-anim-2-btn-animation $animation-duration;
+                        .eael-shape-1 {
+                            animation: eael-3-anim-2-shape-1-animation $animation-duration;
+                        }
+                        .eael-shape-2 {
+                            animation: eael-3-anim-2-shape-2-animation $animation-duration;
+                        }
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-3 {
+                $animation-duration: 2s;
+                $animation-angle: 180deg;
+                .eael-circle-info {
+                    @keyframes eael-3-anim-3-circle-animation {
+                        30% {
+                            transform: rotate(-$animation-angle);
+                        }
+                    }
+                    @keyframes eael-3-anim-3-btn-animation {
+                        30% {
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotate($animation-angle);
+                        }
+                    }
+                    @keyframes eael-3-anim-3-shape-1-animation {
+                        30% {
+                            width: 0;
+                        }
+                    }
+                    @keyframes eael-3-anim-3-shape-2-animation {
+                        30% {
+                            left: 50%;
+                        }
+                    }
+                    @keyframes eael-3-anim-3-circle-content-animation {
+                        30% {
+                            transform: rotate($animation-angle);
+                        }
+                    }
+                    animation: eael-3-anim-3-circle-animation $animation-duration;
+                    .eael-circle-btn-content {
+                        animation: eael-3-anim-3-circle-content-animation
+                        $animation-duration;
+                    }
+                    .eael-circle-btn {
+                        animation: eael-3-anim-3-btn-animation $animation-duration;
+                        .eael-shape-1 {
+                            animation: eael-3-anim-3-shape-1-animation $animation-duration;
+                        }
+                        .eael-shape-2 {
+                            animation: eael-3-anim-3-shape-2-animation $animation-duration;
+                        }
+                    }
+                }
+            }
+        }
+
+        @media only screen and (max-width: $breakpoint) {
+            .eael-circle-info {
+                width: 100%;
+                padding: 0 !important;
+            }
+            .eael-circle-inner {
+                display: grid;
+                width: 100%;
+                height: initial;
+                grid-template-columns: repeat(1, 1fr);
+                grid-gap: 20px;
+                border: none;
+            }
+            .eael-circle-item {
+                border: $nav-circle-border-width solid $nav-circle-border-color;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                .eael-circle-btn {
+                    position: initial !important;
+                    transform: none !important;
+                    .eael-circle-icon-shapes {
+                        display: none !important;
+                    }
+                }
+                .eael-circle-btn-content {
+                    position: initial !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                    display: block !important;
+                    .eael-circle-content {
+                        padding: 0 !important;
+                        background: transparent !important;
+                    }
+                }
+            }
+        }
+    }
+
+    &.eael-interactive-circle-preset-4 {
+        @media only screen and (min-width: $breakpoint + 1) {
+            &.eael-interactive-circle-animation-1 {
+                $animation-duration: 2s;
+                .eael-circle-inner {
+                    @keyframes eael-4-anim-1-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                        }
+                    }
+                    .eael-circle-btn {
+                        animation: eael-4-anim-1-btn-animation $animation-duration;
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-2 {
+                $animation-duration: 2s;
+                $animation-angle: 180deg;
+                .eael-circle-inner {
+                    @keyframes eael-4-anim-2-btn-animation {
+                        40% {
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotate($animation-angle);
+                        }
+                    }
+                    .eael-circle-btn {
+                        animation: eael-4-anim-2-btn-animation $animation-duration;
+                    }
+                }
+            }
+            &.eael-interactive-circle-animation-3 {
+                $animation-duration: 2s;
+                $animation-angle: 360deg;
+                .eael-circle-info {
+                    @keyframes eael-4-anim-3-circle-animation {
+                        0% {
+                            transform: rotate(-$animation-angle);
+                        }
+                    }
+                    @keyframes eael-4-anim-3-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotate($animation-angle);
+                        }
+                    }
+                    @keyframes eael-4-anim-3-circle-content-animation {
+                        0% {
+                            transform: rotate($animation-angle);
+                        }
+                    }
+                    animation: eael-4-anim-3-circle-animation $animation-duration;
+                    .eael-circle-btn {
+                        animation: eael-4-anim-3-btn-animation $animation-duration;
+                    }
+                    .eael-circle-btn-content {
+                        animation: eael-4-anim-3-circle-content-animation
+                        $animation-duration;
+                    }
+                }
+            }
+        }
+
+        @media only screen and (max-width: $breakpoint) {
+            .eael-circle-info {
+                width: 100%;
+                padding: 0 !important;
+            }
+            .eael-circle-inner {
+                display: grid;
+                width: 100% !important;
+                height: auto!important;
+                grid-template-columns: repeat(1, 1fr);
+                grid-gap: 20px;
+                border: none!important;
+            }
+            .eael-circle-item {
+                border: $nav-circle-border-width solid $nav-circle-border-color;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                .eael-circle-btn {
+                    transform: none !important;
+                    position: relative !important;
+                    top: initial !important;
+                    left: initial !important;
+                    bottom: initial !important;
+                    right: initial !important;
+                    .eael-circle-icon-shapes {
+                        border-bottom-right-radius: $nav-item-border-radius;
+                    }
+                }
+                .eael-circle-btn-content {
+                    position: initial !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                    display: block !important;
+                    .eael-circle-content {
+                        padding: 0 !important;
+                        background: transparent !important;
+                    }
+                }
+            }
+        }
+
+        .eael-circle-info {
+            position: relative;
+            $nav-item-border-width: 10px;
+            $nav-item-icon-width: 35px;
+            $nav-item-initial-background: #fff;
+            $nav-item-hover-background: #f4fff9;
+            $nav-content-background: #fafaff;
+            $nav-content-title-size: 30px;
+            $nav-content-title-weight: 500;
+            $nav-content-title-color: #202b46;
+            $nav-content-title-case: uppercase;
+            $nav-content-text-size: 16px;
+            $nav-content-text-color: #737373;
+            $nav-content-margin: 15px;
+            $nav-content-padding: 30px;
+            $nav-item-gap: 15px;
+
+            padding: math.div($nav-item-width, 2) + $nav-item-gap + math.div($nav-item-width, 5 );
+            margin: 45px 0;
+
+            .eael-circle-inner {
+                width: 400px;
+                height: 400px;
+                border: 3px solid #DDDDEF;
+            }
+            .eael-circle-item {
+                .eael-circle-btn {
+                    position: absolute;
+                    z-index: 99;
+                    height: 95px;
+                    width: 95px;
+                    border-radius: $nav-item-border-radius;
+                    .eael-circle-btn-icon {
+                        padding: $nav-item-border-width;
+                        height: 100%;
+                        width: 100%;
+                        border-radius: $nav-item-border-radius;
+                        .eael-circle-icon-inner {
+                            background: $nav-item-initial-background;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: $nav-item-border-radius;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            text-align: center;
+                            img,
+                            svg {
+                                width: $nav-item-icon-width;
+                            }
+                        }
+                    }
+                    .eael-circle-icon-shapes {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        z-index: -1;
+                        transform-origin: center center;
+                        border-top-left-radius: $nav-item-border-radius;
+                        border-top-right-radius: $nav-item-border-radius;
+                        border-bottom-left-radius: $nav-item-border-radius;
+                    }
+                    &.active {
+                        .eael-circle-icon-inner {
+                            background: $nav-item-hover-background;
+                        }
+                    }
+                }
+                .eael-circle-btn-content {
+                    position: absolute;
+                    $content-position: math.div($nav-item-width, 2) + $nav-item-gap + $nav-circle-border-width + math.div($nav-item-width, 5 );
+                    top: $content-position;
+                    bottom: $content-position;
+                    left: $content-position;
+                    right: $content-position;
+                    display: block;
+                    visibility: hidden;
+                    opacity: 0;
+                    padding: $nav-content-margin;
+                    .eael-circle-content {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center;
+                        height: 100%;
+                        padding: $nav-content-padding;
+                        border-radius: $nav-circle-border-radius;
+                        background: $nav-content-background;
+                        overflow: hidden;
+                        h2 {
+                            font-size: $nav-content-title-size;
+                            text-transform: $nav-content-title-case;
+                            font-weight: $nav-content-title-weight;
+                            line-height: 1.3;
+                            color: $nav-content-title-color;
+                        }
+                        p {
+                            font-size: $nav-content-text-size;
+                            color: $nav-content-text-color;
+                            margin-top: 0;
+                        }
+                    }
+                    &.active {
+                        display: block;
+                        visibility: visible;
+                        opacity: 1;
+                    }
+                }
+            }
+            .eael-circle-item {
+                &:nth-child(8n+1) {
+                    .eael-circle-icon-shapes {
+                        transform: rotate(-45deg);
+                        background: radial-gradient(
+                                        94.25% 92.56% at 48.86% 49.71%,
+                                        #199a8e 3.76%,
+                                        #7af4ab 55.38%
+                        );
+                    }
+                    .eael-circle-btn-icon {
+                        svg {
+                            fill: #199a8e;
+                        }
+                    }
+                }
+                &:nth-child(8n+2) {
+                    .eael-circle-icon-shapes {
+                        transform: rotate(-90deg);
+                        background: linear-gradient(
+                                        144.3deg,
+                                        #476df8 15.07%,
+                                        #6a8aff 97.18%
+                        );
+                    }
+                    .eael-circle-btn-icon {
+                        svg {
+                            fill: #07a9f0;
+                        }
+                    }
+                }
+                &:nth-child(8n+3) {
+                    .eael-circle-icon-shapes {
+                        transform: rotate(-135deg);
+                        background: radial-gradient(
+                                        64.96% 65.32% at 52.18% 47.01%,
+                                        #6f00ff 3.76%,
+                                        #533fff 55.38%,
+                                        #b9aaff 100%
+                        );
+                    }
+                    .eael-circle-btn-icon {
+                        svg {
+                            fill: #715eff;
+                        }
+                    }
+                }
+                &:nth-child(8n+4) {
+                    .eael-circle-icon-shapes {
+                        transform: rotate(-180deg);
+                        background: radial-gradient(
+                                        101.16% 101.7% at 47.77% 50.74%,
+                                        #ff9100 3.76%,
+                                        #ffb655 56.99%,
+                                        #fff04a 100%
+                        );
+                    }
+                    .eael-circle-btn-icon {
+                        svg {
+                            fill: #ffae42;
+                        }
+                    }
+
+                }
+                &:nth-child(8n+5) {
+                    .eael-circle-icon-shapes {
+                        transform: rotate(135deg);
+                        background: radial-gradient(
+                                        65.76% 66.29% at 48.95% 49.57%,
+                                        #b40042 3.76%,
+                                        #c50048 48.92%,
+                                        #ff5e93 100%
+                        );
+                    }
+                    .eael-circle-btn-icon {
+                        svg {
+                            fill: #b40042;
+                        }
+                    }
+                }
+                &:nth-child(8n+6) {
+                    .eael-circle-icon-shapes {
+                        transform: rotate(90deg);
+                        background: radial-gradient(
+                                        73.69% 72.33% at 51.12% 47.67%,
+                                        #2b3894 3.76%,
+                                        #364099 14.18%,
+                                        #5356a8 32.43%,
+                                        #8078bf 55.38%,
+                                        #d2a8d1 100%
+                        );
+                    }
+                    .eael-circle-btn-icon {
+                        svg {
+                            fill: #2b3894;
+                        }
+                    }
+
+                }
+                &:nth-child(8n+7) {
+                    .eael-circle-icon-shapes {
+                        transform: rotate(45deg);
+                        background: radial-gradient(
+                                        94.25% 92.56% at 48.86% 49.71%,
+                                        #199a8e 3.76%,
+                                        #7af4ab 55.38%
+                        );
+                    }
+                    .eael-circle-btn-icon {
+                        svg {
+                            fill: #199a8e;
+                        }
+                    }
+
+                }
+                &:nth-child(8n+8) {
+                    .eael-circle-icon-shapes {
+                        background: radial-gradient(
+                                        73.69% 72.33% at 51.12% 47.67%,
+                                        #2b3894 3.76%,
+                                        #364099 14.18%,
+                                        #5356a8 32.43%,
+                                        #8078bf 55.38%,
+                                        #d2a8d1 100%
+                        );
+                    }
+                    .eael-circle-btn-icon {
+                        svg {
+                            fill: #2b3894;
+                        }
+                    }
+                }
+
+                #eael-circle-item-1 {
+                    top: 50%;
+                    left: 0%;
+                    transform: translate(-50%, -50%);
+                    //.eael-circle-icon-shapes {
+                    //    transform: rotate(-45deg);
+                    //    background: radial-gradient(
+                    //                    94.25% 92.56% at 48.86% 49.71%,
+                    //                    #199a8e 3.76%,
+                    //                    #7af4ab 55.38%
+                    //    );
+                    //}
+                    //.eael-circle-btn-icon {
+                    //    svg {
+                    //        fill: #199a8e;
+                    //    }
+                    //}
+                }
+                #eael-circle-item-2 {
+                    top: 85.4%;
+                    left: 14.6%;
+                    transform: translate(-50%, -50%);
+                    //.eael-circle-icon-shapes {
+                    //    transform: rotate(-90deg);
+                    //    background: linear-gradient(
+                    //                    144.3deg,
+                    //                    #476df8 15.07%,
+                    //                    #6a8aff 97.18%
+                    //    );
+                    //}
+                    //.eael-circle-btn-icon {
+                    //    svg {
+                    //        fill: #07a9f0;
+                    //    }
+                    //}
+                }
+                #eael-circle-item-3 {
+                    top: 100%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    //.eael-circle-icon-shapes {
+                    //    transform: rotate(-135deg);
+                    //    background: radial-gradient(
+                    //                    64.96% 65.32% at 52.18% 47.01%,
+                    //                    #6f00ff 3.76%,
+                    //                    #533fff 55.38%,
+                    //                    #b9aaff 100%
+                    //    );
+                    //}
+                    //.eael-circle-btn-icon {
+                    //    svg {
+                    //        fill: #715eff;
+                    //    }
+                    //}
+                }
+                #eael-circle-item-4 {
+                    top: 85.4%;
+                    left: 85.4%;
+                    transform: translate(-50%, -50%);
+                    //.eael-circle-icon-shapes {
+                    //    transform: rotate(-180deg);
+                    //    background: radial-gradient(
+                    //                    101.16% 101.7% at 47.77% 50.74%,
+                    //                    #ff9100 3.76%,
+                    //                    #ffb655 56.99%,
+                    //                    #fff04a 100%
+                    //    );
+                    //}
+                    //.eael-circle-btn-icon {
+                    //    svg {
+                    //        fill: #ffae42;
+                    //    }
+                    //}
+                }
+                #eael-circle-item-5 {
+                    top: 50%;
+                    left: 100%;
+                    transform: translate(-50%, -50%);
+                    //.eael-circle-icon-shapes {
+                    //    transform: rotate(135deg);
+                    //    background: radial-gradient(
+                    //                    65.76% 66.29% at 48.95% 49.57%,
+                    //                    #b40042 3.76%,
+                    //                    #c50048 48.92%,
+                    //                    #ff5e93 100%
+                    //    );
+                    //}
+                    //.eael-circle-btn-icon {
+                    //    svg {
+                    //        fill: #b40042;
+                    //    }
+                    //}
+                }
+                #eael-circle-item-6 {
+                    top: 14.6%;
+                    left: 85.4%;
+                    transform: translate(-50%, -50%);
+                    //.eael-circle-icon-shapes {
+                    //    transform: rotate(90deg);
+                    //    background: radial-gradient(
+                    //                    73.69% 72.33% at 51.12% 47.67%,
+                    //                    #2b3894 3.76%,
+                    //                    #364099 14.18%,
+                    //                    #5356a8 32.43%,
+                    //                    #8078bf 55.38%,
+                    //                    #d2a8d1 100%
+                    //    );
+                    //}
+                    //.eael-circle-btn-icon {
+                    //    svg {
+                    //        fill: #2b3894;
+                    //    }
+                    //}
+                }
+                #eael-circle-item-7 {
+                    top: 0%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    //.eael-circle-icon-shapes {
+                    //    transform: rotate(45deg);
+                    //    background: radial-gradient(
+                    //                    94.25% 92.56% at 48.86% 49.71%,
+                    //                    #199a8e 3.76%,
+                    //                    #7af4ab 55.38%
+                    //    );
+                    //}
+                    //.eael-circle-btn-icon {
+                    //    svg {
+                    //        fill: #199a8e;
+                    //    }
+                    //}
+                }
+                #eael-circle-item-8 {
+                    top: 14.6%;
+                    left: 14.6%;
+                    transform: translate(-50%, -50%);
+                    //.eael-circle-icon-shapes {
+                    //    background: radial-gradient(
+                    //                    73.69% 72.33% at 51.12% 47.67%,
+                    //                    #2b3894 3.76%,
+                    //                    #364099 14.18%,
+                    //                    #5356a8 32.43%,
+                    //                    #8078bf 55.38%,
+                    //                    #d2a8d1 100%
+                    //    );
+                    //}
+                    //.eael-circle-btn-icon {
+                    //    svg {
+                    //        fill: #2b3894;
+                    //    }
+                    //}
+                }
+            }
+        }
+    }
+}

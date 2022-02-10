@@ -394,26 +394,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			}
 
 			/**
-			 * Get our plugin options
-			 * @since 1.0.0
-			 */
-			// $options = $this->options;
-			// $plugin_options = array();
-			// if( ! empty( $options ) && is_array( $options ) ) {
-			// 	foreach( $options as $option ) {
-			// 		$fields = get_option( $option );
-			// 		// Check for permission to send this option
-			// 		if( isset( $fields['wpins_registered_setting'] ) ) {
-			// 			foreach( $fields as $key=>$value ) {
-			// 				$plugin_options[$key] = $value;
-			// 			}
-			// 		}
-			// 	}
-			// }
-			// $body['plugin_options'] = $this->options; // Returns array
-			// $body['plugin_options_fields'] = $plugin_options; // Returns object
-
-			/**
 			 * Get active theme name and version
 			 * @since 3.0.0
 			 */
@@ -565,7 +545,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			));
 			$request = wp_remote_post( esc_url( self::API_URL ), $args );
 			if( is_wp_error( $request ) || ( isset( $request['response'], $request['response']['code'] ) && $request['response']['code'] != 200 ) ) {
-				return new WP_Error( 500, 'Something went wrong.' );
+				return new \WP_Error( 500, 'Something went wrong.' );
 			}
 			return $request;
 		}
@@ -623,7 +603,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			) );
 
 			// Decide on notice text
-			$notice_text = $this->notice_options['notice'] . ' <a href="#" class="wpinsights-'. $this->plugin_name .'-collect">'. $this->notice_options['consent_button_text'] .'</a>';
+			$notice_text = $this->notice_options['notice'] . ' <a href="#" class="wpinsights-'. esc_attr( $this->plugin_name ) .'-collect">'. $this->notice_options['consent_button_text'] .'</a>';
 			$extra_notice_text = $this->notice_options['extra_notice'];
 
 			$output = '';
@@ -636,10 +616,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 					$output .= '<a href="'. esc_url( $url_yes ) .'" class="button-primary">'. $this->notice_options['yes'] .'</a>&nbsp;';
 					$output .= '<a href="'. esc_url( $url_no ) .'" class="button-secondary">'. $this->notice_options['no'] .'</a>';
 				$output .= '</p>';
-				$output .= "<script type='text/javascript'>jQuery('.wpinsights-". $this->plugin_name ."-collect').on('click', function(e) {e.preventDefault();jQuery('.wpinsights-data').slideToggle('fast');});</script>";
+				$output .= "<script type='text/javascript'>jQuery('.wpinsights-". esc_attr( $this->plugin_name ) ."-collect').on('click', function(e) {e.preventDefault();jQuery('.wpinsights-data').slideToggle('fast');});</script>";
 			$output .= '</div>';
 
-			echo $output;
+			printf( '%1$s', $output );
 		}
 		/**
 		 * Set all notice options to customized notice.
@@ -708,7 +688,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		public function deactivate_reasons_form_submit() {
 			check_ajax_referer( 'wpins_deactivation_nonce', 'security' );
 			if( isset( $_POST['values'] ) ) {
-				$values = $_POST['values'];
+				$values = sanitize_text_field( $_POST['values'] );
 				update_option( 'wpins_deactivation_reason_' . $this->plugin_name, $values );
 			}
 			if( isset( $_POST['details'] ) ) {
@@ -782,19 +762,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$id = strtolower( str_replace( " ", "_", esc_attr( $option['label'] ) ) );
 						$id = $id . '_' . $class_plugin_name;
 						$html .= '<li class="has-goodbye-extra">';
-						$html .= '<input type="radio" name="wpinsights-'. $class_plugin_name .'-goodbye-options" id="' . $id . '" value="' . esc_attr( $option['label'] ) . '">';
+						$html .= '<input type="radio" name="wpinsights-'. esc_attr( $class_plugin_name ) .'-goodbye-options" id="' . esc_attr( $id ) . '" value="' . esc_attr( $option['label'] ) . '">';
 						$html .= '<div><label for="' . $id . '">' . esc_attr( $option['label'] ) . '</label>';
 						if( isset( $option[ 'extra_field' ] ) && ! isset( $option['type'] )) {
-							$html .= '<input type="text" style="display: none" name="'. $id .'" id="' . str_replace( " ", "", esc_attr( $option['extra_field'] ) ) . '" placeholder="' . esc_attr( $option['extra_field'] ) . '">';
+							$html .= '<input type="text" style="display: none" name="'. esc_attr( $id ) .'" id="' . str_replace( " ", "", esc_attr( $option['extra_field'] ) ) . '" placeholder="' . esc_attr( $option['extra_field'] ) . '">';
 						}
 						if( isset( $option[ 'extra_field' ] ) && isset( $option['type'] )) {
-							$html .= '<'. $option['type'] .' style="display: none" type="text" name="'. $id .'" id="' . str_replace( " ", "", esc_attr( $option['extra_field'] ) ) . '" placeholder="' . esc_attr( $option['extra_field'] ) . '"></' . $option['type'] . '>';
+							$html .= '<'. $option['type'] .' style="display: none" type="text" name="'. esc_attr( $id ) .'" id="' . str_replace( " ", "", esc_attr( $option['extra_field'] ) ) . '" placeholder="' . esc_attr( $option['extra_field'] ) . '"></' . $option['type'] . '>';
 						}
 						$html .= '</div></li>';
 					} else {
 						$id = strtolower( str_replace( " ", "_", esc_attr( $option ) ) );
 						$id = $id . '_' . $class_plugin_name;
-						$html .= '<li><input type="radio" name="wpinsights-'. $class_plugin_name .'-goodbye-options" id="' . $id . '" value="' . esc_attr( $option ) . '"> <label for="' . $id . '">' . esc_attr( $option ) . '</label></li>';
+						$html .= '<li><input type="radio" name="wpinsights-'. $class_plugin_name .'-goodbye-options" id="' . esc_attr( $id ) . '" value="' . esc_attr( $option ) . '"> <label for="' . $id . '">' . esc_attr( $option ) . '</label></li>';
 					}
 				}
 				$html .= '</ul></div><!-- .wpinsights-'. $class_plugin_name .'-goodbye-options -->';
@@ -866,7 +846,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							// Fade in spinner
 							$("#wpinsights-goodbye-form-<?php echo $class_plugin_name; ?> .deactivating-spinner").fadeIn();
 							e.preventDefault();
-							var checkedInput = $("input[name='wpinsights-<?php echo $class_plugin_name; ?>-goodbye-options']:checked"),
+							var checkedInput = $("input[name='wpinsights-<?php echo esc_attr( $class_plugin_name ); ?>-goodbye-options']:checked"),
 								checkedInputVal, details;
 							if( checkedInput.length > 0 ) {
 								checkedInputVal = checkedInput.val();
@@ -881,7 +861,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							}
 
 							var data = {
-								'action': 'deactivation_form_<?php echo $class_plugin_name; ?>',
+								'action': 'deactivation_form_<?php echo esc_attr( $class_plugin_name ); ?>',
 								'values': checkedInputVal,
 								'details': details,
 								'security': "<?php echo wp_create_nonce ( 'wpins_deactivation_nonce' ); ?>",
@@ -905,7 +885,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						// If we click outside the form, the form will close
 						$('.wpinsights-goodbye-form-bg').on('click',function(){
 							$("#wpinsights-goodbye-form").fadeOut();
-							$('body').removeClass('wpinsights-form-active-<?php echo $class_plugin_name; ?>');
+							$('body').removeClass('wpinsights-form-active-<?php echo esc_attr( $class_plugin_name ); ?>');
 						});
 					});
 				});

@@ -23,10 +23,16 @@ class Select2 extends Base_Data_Control
         wp_localize_script(
             'eael-select2',
             'eael_select2_localize',
-            [
-                'ajaxurl' => admin_url('admin-ajax.php'),
-                'search_text' => esc_html__('Search', 'essential-addons-for-elementor-lite'),
-            ]
+	        [
+		        'ajaxurl'     => esc_url( admin_url( 'admin-ajax.php' ) ),
+		        'search_text' => esc_html__( 'Search', 'essential-addons-for-elementor-lite' ),
+		        'remove'      => __( 'Remove', 'essential-addons-for-elementor-lite' ),
+		        'thumbnail'   => __( 'Image', 'essential-addons-for-elementor-lite' ),
+		        'name'        => __( 'Title', 'essential-addons-for-elementor-lite' ),
+		        'price'       => __( 'Price', 'essential-addons-for-elementor-lite' ),
+		        'quantity'    => __( 'Quantity', 'essential-addons-for-elementor-lite' ),
+		        'subtotal'    => __( 'Subtotal', 'essential-addons-for-elementor-lite' ),
+	        ]
         );
         wp_enqueue_script('eael-select2');
     }
@@ -44,20 +50,20 @@ class Select2 extends Base_Data_Control
     {
         $control_uid = $this->get_control_uid();
         ?>
-        <# var controlUID = '<?php echo $control_uid; ?>'; #>
+        <# var controlUID = '<?php echo esc_html( $control_uid ); ?>'; #>
         <# var currentID = elementor.panel.currentView.currentPageView.model.attributes.settings.attributes[data.name]; #>
         <div class="elementor-control-field">
             <# if ( data.label ) { #>
-            <label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{data.label }}}</label>
+            <label for="<?php echo esc_attr( $control_uid ); ?>" class="elementor-control-title">{{{data.label }}}</label>
             <# } #>
             <div class="elementor-control-input-wrapper elementor-control-unit-5">
                 <# var multiple = ( data.multiple ) ? 'multiple' : ''; #>
-                <select id="<?php echo $control_uid; ?>" {{ multiple }} class="ea-select2" data-setting="{{ data.name }}"></select>
+                <select id="<?php echo esc_attr( $control_uid ); ?>" {{ multiple }} class="ea-select2" data-setting="{{ data.name }}"></select>
             </div>
         </div>
         <#
         ( function( $ ) {
-        $( document.body ).trigger( 'eael_select2_init',{currentID:currentID,data:data,controlUID:controlUID,multiple:data.multiple} );
+        $( document.body ).trigger( 'eael_select2_init',{currentID:data.controlValue,data:data,controlUID:controlUID,multiple:data.multiple} );
         }( jQuery ) );
         #>
         <?php

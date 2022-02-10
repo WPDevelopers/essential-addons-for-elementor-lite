@@ -635,7 +635,41 @@ $base-font-size: 14px;
 		.woo-checkout-payment {
 			clear: both;
 
+			.carrier-agents-postcode-search {
+				#carrier-agent-heading {
+					color: #fff;
+				}
+
+				.woo-carrier-agents-postcode-input-wrapper {
+					input {
+						padding: 0 15px;
+						line-height: 40px;
+						border: none;
+						border-radius: 5px;
+					}
+
+					#woo-carrier-agents-search-button {
+						background: #7866ff;
+						color: #fff;
+						line-height: 40px;
+						padding: 0 20px;
+						border-radius: 5px;
+					}
+				}
+
+				#woo-carrier-agents-container {
+					background: #fff;
+
+					#woo-carrier-agents .woo-carrier-agent {
+						border-radius: 5px;
+					}
+				}
+			}
+
 			#payment {
+				// Remove Border of Neve Theme
+				border: none;
+
 				.payment_methods {
 					padding: 0 0 20px 0!important;
 					margin: 0;

@@ -50,7 +50,13 @@ trait Enqueue
 
         // Compatibility: reCaptcha with login/register
         if (in_array('login-register', $widgets) && $site_key = get_option('eael_recaptcha_sitekey')) {
-            wp_register_script('eael-recaptcha', "https://www.google.com/recaptcha/api.js?render=explicit", false, EAEL_PLUGIN_VERSION, false);
+	        $recaptcha_api_args['render'] = 'explicit';
+	        if ( $recaptcha_language = get_option( 'eael_recaptcha_language' ) ) {
+		        $recaptcha_api_args['hl'] = $recaptcha_language;
+	        }
+	        $recaptcha_api_args = apply_filters( 'eael_lr_recaptcha_api_args', $recaptcha_api_args );
+	        $recaptcha_api_args = http_build_query( $recaptcha_api_args );
+            wp_register_script('eael-recaptcha', "https://www.google.com/recaptcha/api.js?{$recaptcha_api_args}", false, EAEL_PLUGIN_VERSION, false);
         }
     }
 
@@ -121,16 +127,32 @@ trait Enqueue
             EAEL_PLUGIN_VERSION
         );
 
-        // localize object
-        $this->localize_objects = apply_filters('eael/localize_objects', [
-            'ajaxurl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('essential-addons-elementor'),
-	        'i18n' => [
-	        	'added' => __('Added ', 'essential-addons-for-elementor-lite'),
-	        	'compare' => __('Compare', 'essential-addons-for-elementor-lite'),
-                'loading' => esc_html__('Loading...', 'essential-addons-for-elementor-lite')
-            ],
-        ]);
+        // register scroll to top assets
+        wp_register_style(
+            'eael-scroll-to-top',
+            EAEL_PLUGIN_URL . 'assets/front-end/css/view/scroll-to-top.min.css',
+            false,
+            EAEL_PLUGIN_VERSION
+        );
+
+        wp_register_script(
+            'eael-scroll-to-top',
+            EAEL_PLUGIN_URL . 'assets/front-end/js/view/scroll-to-top.min.js',
+            ['jquery'],
+            EAEL_PLUGIN_VERSION
+        );
+
+	    // localize object
+	    $this->localize_objects = apply_filters( 'eael/localize_objects', [
+		    'ajaxurl'        => admin_url( 'admin-ajax.php' ),
+		    'nonce'          => wp_create_nonce( 'essential-addons-elementor' ),
+		    'i18n'           => [
+			    'added'   => __( 'Added ', 'essential-addons-for-elementor-lite' ),
+			    'compare' => __( 'Compare', 'essential-addons-for-elementor-lite' ),
+			    'loading' => esc_html__( 'Loading...', 'essential-addons-for-elementor-lite' )
+		    ],
+		    'page_permalink' => get_the_permalink(),
+	    ] );
 
         // edit mode
         if ($this->is_edit_mode()) {
@@ -304,7 +326,7 @@ trait Enqueue
     {
         if ($this->is_edit_mode() || $this->is_preview_mode()) {
             if ($this->css_strings) {
-                echo '<style id="' . $this->uid . '">' . $this->css_strings . '</style>';
+	            printf( '<style id="%1$s">%2$s</style>', esc_attr( $this->uid ), $this->css_strings );
             }
         }
     }
@@ -315,8 +337,8 @@ trait Enqueue
         // view/edit mode mode
         if ($this->is_edit_mode() || $this->is_preview_mode()) {
             if ($this->js_strings) {
-                echo '<script>var localize =' . json_encode($this->localize_objects) . '</script>';
-                echo '<script>' . $this->js_strings . '</script>';
+                printf('<script>%1$s</script>','var localize ='.wp_json_encode($this->localize_objects));
+	            printf( '<script id="%1$s">%2$s</script>', esc_attr( $this->uid ), $this->js_strings );
             }
         }
     }

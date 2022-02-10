@@ -98,7 +98,7 @@ table.eael-data-table thead .sorting:after {
 	width: 100%;
 	height: auto;
 	margin: 0;
-	border-collapse: collapse;
+	border-collapse: separate;
 	border: none;
 }
 .eael-data-table tr {
@@ -215,6 +215,15 @@ table.eael-data-table thead .sorting:after {
 	.eael-data-table .td-content {
 		align-items: center;
 		display: flex;
+	}
+	.eael-dt-td-align-mobile-left .td-content {
+		justify-content: flex-start;
+	}
+	.eael-dt-td-align-mobile-center .td-content {
+		justify-content: center;
+	}
+	.eael-dt-td-align-mobile-right .td-content {
+		justify-content: flex-end;
 	}
 }
 table.eael-data-table thead .sorting:after {

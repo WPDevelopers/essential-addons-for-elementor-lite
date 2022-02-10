@@ -72,7 +72,8 @@ ea.hooks.addAction("init", "ea", () => {
                 paginationClickable: true,
                 autoHeight: true,
                 autoplay: {
-                    delay: $autoplay
+                    delay: $autoplay,
+                    disableOnInteraction: false
                 },
                 pagination: {
                     el: $pagination,

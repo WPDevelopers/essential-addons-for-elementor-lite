@@ -1511,15 +1511,15 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'options' => [
                         'left' => [
                             'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                            'icon' => 'fa fa-align-left',
+                            'icon' => 'eicon-text-align-left',
                         ],
                         'center' => [
                             'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                            'icon' => 'fa fa-align-center',
+                            'icon' => 'eicon-text-align-center',
                         ],
                         'right' => [
                             'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                            'icon' => 'fa fa-align-right',
+                            'icon' => 'eicon-text-align-right',
                         ],
                     ],
                     'selectors' => [
@@ -1536,15 +1536,15 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'options' => [
                         'left' => [
                             'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                            'icon' => 'fa fa-align-left',
+                            'icon' => 'eicon-text-align-left',
                         ],
                         'center' => [
                             'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                            'icon' => 'fa fa-align-center',
+                            'icon' => 'eicon-text-align-center',
                         ],
                         'right' => [
                             'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                            'icon' => 'fa fa-align-right',
+                            'icon' => 'eicon-text-align-right',
                         ],
                     ],
                     'selectors' => [
@@ -1604,6 +1604,14 @@ class Betterdocs_Category_Grid extends Widget_Base
 
         if($settings['exclude']) {
             $terms_object['exclude'] =  $settings['exclude'];
+        }
+
+        if ($settings['orderby'] == 'betterdocs_order') {
+            $terms_object['meta_key'] = 'doc_category_order';
+            $terms_object['orderby'] = 'meta_value_num';
+            $terms_object['order'] = 'ASC';
+        } else {
+            $terms_object['orderby'] = $settings['orderby'];
         }
 
         $default_multiple_kb = Helper::get_betterdocs_multiple_kb_status();

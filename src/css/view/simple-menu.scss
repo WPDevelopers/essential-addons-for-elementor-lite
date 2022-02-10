@@ -1,7 +1,7 @@
 .eael-simple-menu-container {
     background-color: #54595f;
 
-    @media screen and (max-width: 991px) {
+    @media screen and (max-width: 1024px) {
         min-height: 50px;
         overflow: auto;
     }
@@ -24,7 +24,11 @@
         display: block;
         border-color:#333;
 
-        @media screen and (min-width: 992px) {
+        @media screen and (min-width: 1025px) {
+            display: none;
+        }
+
+        .eael-simple-menu-toggle-text {
             display: none;
         }
     }
@@ -38,7 +42,7 @@
         letter-spacing: 0 !important;
         color: #ffffff;
 
-        @media screen and (min-width: 992px) {
+        @media screen and (min-width: 1025px) {
             display: none;
         }
     }
@@ -151,7 +155,7 @@
                         position: relative;
                         margin-left: 5px;
 
-                        @media screen and (max-width: 991px) {
+                        @media screen and (max-width: 1024px) {
                             display: none;
                         }
                     }
@@ -203,7 +207,7 @@
                 }
             }
 
-            @media screen and (min-width: 992px) {
+            @media screen and (min-width: 1025px) {
                 // animation
                 &.eael-simple-menu-dropdown-animate-fade {
                     li {
@@ -265,7 +269,7 @@
             }
 
             // Responsive menu
-            @media screen and (max-width: 991px) {
+            @media screen and (max-width: 1024px) {
                 position: absolute;
                 top: 50px;
                 background-color: #54595f;
@@ -378,20 +382,20 @@
 
     // alignment
     &.eael-simple-menu-align-center {
-        @media screen and (min-width: 992px) {
+        @media screen and (min-width: 1025px) {
             text-align: center;
         }
 
         .eael-simple-menu {
             &.eael-simple-menu-horizontal {
-                @media screen and (min-width: 992px) {
+                @media screen and (min-width: 1025px) {
                     display: inline-flex;
                 }
             }
 
             > li {
                 > a {
-                    @media screen and (max-width: 991px) {
+                    @media screen and (max-width: 1024px) {
                         text-align: center;
                     }
                 }
@@ -408,19 +412,19 @@
     }
 
     &.eael-simple-menu-align-right {
-        @media screen and (min-width: 992px) {
+        @media screen and (min-width: 1025px) {
             text-align: right;
         }
 
         .eael-simple-menu {
             &.eael-simple-menu-horizontal {
-                @media screen and (min-width: 992px) {
+                @media screen and (min-width: 1025px) {
                     display: inline-flex;
                 }
 
                 > li {
                     > a {
-                        @media screen and (max-width: 991px) {
+                        @media screen and (max-width: 1024px) {
                             text-align: right;
                         }
                     }
@@ -481,7 +485,7 @@
         background-color: #4E36A3;
 
         .eael-simple-menu {
-            @media screen and (max-width: 991px) {
+            @media screen and (max-width: 1024px) {
                 &.eael-simple-menu-horizontal {
                     background-color: #4E36A3;
                 }
@@ -514,7 +518,7 @@
         background-color: #15DBD5;
 
         .eael-simple-menu {
-            @media screen and (max-width: 991px) {
+            @media screen and (max-width: 1024px) {
                 &.eael-simple-menu-horizontal {
                     background-color: #15DBD5;
                 }
@@ -556,7 +560,7 @@
 
         .eael-simple-menu {
 
-            @media screen and (max-width: 991px) {
+            @media screen and (max-width: 1024px) {
                 &.eael-simple-menu-horizontal {
                     background-color: #1BC1FF;
 
@@ -605,32 +609,42 @@
     }
 }
 
-.eael_advanced_menu_hamburger_disable_selected_menu_hide{
+.eael_simple_menu_hamburger_disable_selected_menu_hide{
   .eael-simple-menu-toggle-text {
-    @media screen and (max-width: 991px) {
+    @media screen and (max-width: 1024px) {
+        display: none !important;
+    }
+  }
+}
+
+.eael-simple-menu-hamburger-align-left {
+    .eael-simple-menu-toggle-text {
         display: none;
     }
-  }
+
+    .eael-simple-menu-toggle {
+        @media screen and (max-width: 1024px) {
+            top: 0;
+            left: 0;
+            right: auto;
+        }
+
+        .eael-simple-menu-toggle-text {
+            display: block;
+            left: calc(100% + 20px);
+            white-space: nowrap;
+        }
+    }
 }
 
-.eael-simple-menu-hamburger-align-left{
-  .eael-simple-menu-toggle {
-    @media screen and (max-width: 991px) {
-        top: 0;
-        left: 0;
+.eael-simple-menu-hamburger-align-center {
+    .eael-simple-menu-toggle {
+        @media screen and (max-width: 1024px) {
+            left: 50%;
+            right: auto;
+            transform: translateX(-50%);
+        }
     }
-  }
-}
-
-.eael-simple-menu-hamburger-align-center{
-  .eael-simple-menu-toggle {
-    @media screen and (max-width: 991px) {
-      left: 0; 
-      right: 0; 
-      margin-left: auto; 
-      margin-right: auto; 
-    }
-  }
 }
 
 

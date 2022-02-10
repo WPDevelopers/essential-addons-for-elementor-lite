@@ -199,6 +199,11 @@ class Login_Register extends Widget_Base {
 		// Login Form Related---
 		$this->init_content_login_fields_controls();
 		$this->init_content_login_options_controls();
+
+		if(!$this->pro_enabled){
+			$this->social_login_promo();
+		}
+
 		do_action( 'eael/login-register/after-login-controls-section', $this );
 		// Registration For Related---
 		$this->init_content_register_fields_controls();
@@ -210,6 +215,10 @@ class Login_Register extends Widget_Base {
 		// Error Messages
 		$this->init_content_validation_messages_controls();
 		do_action( 'eael/login-register/after-content-controls', $this );
+
+		if(!$this->pro_enabled){
+			$this->show_pro_promotion();
+		}
 
 		/*----Style Tab----*/
 		do_action( 'eael/login-register/before-style-controls', $this );
@@ -264,6 +273,26 @@ class Login_Register extends Widget_Base {
 			'label'   => __( 'Hide all Forms from Logged-in Users', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SWITCHER,
 			'default' => 'yes',
+		] );
+		$this->add_control( 'redirect_for_logged_in_user', [
+			'label'   => __( 'Redirect for Logged-in Users', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::SWITCHER,
+			'default' => 'no',
+		] );
+		$this->add_control( 'redirect_url_for_logged_in_user', [
+			'type'          => Controls_Manager::URL,
+			'show_label'    => false,
+			'show_external' => false,
+			'placeholder'   => site_url(),
+			'description'   => __( 'Please note that only your current domain is allowed here to keep your site secure.', 'essential-addons-for-elementor-lite' ),
+			'condition'     => [
+				'redirect_for_logged_in_user' => 'yes',
+			],
+			'default'       => [
+				'url'         => site_url(),
+				'is_external' => false,
+				'nofollow'    => true,
+			],
 		] );
 		$this->add_control( 'gen_lgn_content_po_toggle', [
 			'label'        => __( 'Login Form General', 'essential-addons-for-elementor-lite' ),
@@ -509,6 +538,15 @@ class Login_Register extends Widget_Base {
 		}
 
 		do_action( 'eael/login-register/after-general-controls', $this );
+
+		if ( !$this->pro_enabled ) {
+			$this->add_control( 'enable_ajax', [
+				'label'   => sprintf( __( 'Submit Form via AJAX %s', 'essential-addons-for-elementor-lite' ), '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
+				'type'    => Controls_Manager::SWITCHER,
+				'classes' => 'eael-pro-control',
+			] );
+		}
+
 		$this->end_controls_section();
 	}
 
@@ -779,6 +817,28 @@ class Login_Register extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	protected function social_login_promo() {
+
+		$this->start_controls_section( 'section_content_social_login', [
+			'label'      => __( 'Social Login', 'essential-addons-elementor' ),
+			'conditions' => $this->get_form_controls_display_condition( 'login' ),
+		] );
+
+		$this->add_control( 'enable_google_login', [
+			'label'   => sprintf( __( 'Enable Login with Google %s', 'essential-addons-for-elementor-lite' ),  '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
+			'type'    => Controls_Manager::SWITCHER,
+			'classes' => 'eael-pro-control',
+		] );
+
+		$this->add_control( 'enable_fb_login', [
+			'label'   => sprintf( __( 'Enable Login with Facebook %s', 'essential-addons-for-elementor-lite' ),  '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
+			'type'    => Controls_Manager::SWITCHER,
+			'classes' => 'eael-pro-control',
+		] );
+
+		$this->end_controls_section();
+	}
+
 	protected function init_content_terms_controls() {
 		$this->start_controls_section( 'section_content_terms_conditions', [
 			'label'      => __( 'Terms & Conditions', 'essential-addons-for-elementor-lite' ),
@@ -970,6 +1030,35 @@ class Login_Register extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	protected function show_pro_promotion(){
+
+		$this->start_controls_section(
+			'eael_section_pro',
+			[
+				'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'eael_control_get_pro',
+			[
+				'label'       => __( 'Unlock more possibilities', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'1' => [
+						'title' => '',
+						'icon'  => 'fa fa-unlock-alt',
+					],
+				],
+				'default'     => '1',
+				'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.com/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+			]
+		);
+
+		$this->end_controls_section();
+
+	}
+
 	protected function init_content_register_fields_controls() {
 
 		$this->start_controls_section( 'section_content_register_fields', [
@@ -1155,13 +1244,13 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
-        if(current_user_can('create_users')){
-            $user_role = $this->get_user_roles();
-        }else{
-            $user_role = [
-                get_option( 'default_role' ) =>  ucfirst(get_option( 'default_role' ))
-            ];
-        }
+		if(current_user_can('create_users')){
+			$user_role = $this->get_user_roles();
+		}else{
+			$user_role = [
+				get_option( 'default_role' ) =>  ucfirst(get_option( 'default_role' ))
+			];
+		}
 
 		$this->add_control( 'register_user_role', [
 			'label'     => __( 'New User Role', 'essential-addons-for-elementor-lite' ),
@@ -2317,7 +2406,7 @@ class Login_Register extends Widget_Base {
 			'separator'    => 'before',
 		] );
 		$this->start_popover();
-		$this->add_control( "{$form_type}_form_subtitle_margin", [
+		$this->add_responsive_control( "{$form_type}_form_subtitle_margin", [
 			'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -2332,7 +2421,7 @@ class Login_Register extends Widget_Base {
 				"{$form_type}_form_subtitle_po_toggle" => 'yes',
 			],
 		] );
-		$this->add_control( "{$form_type}_form_subtitle_padding", [
+		$this->add_responsive_control( "{$form_type}_form_subtitle_padding", [
 			'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -3684,6 +3773,15 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function render() {
+		if ( ! is_admin() && 'yes' === $this->get_settings_for_display( 'redirect_for_logged_in_user' ) && is_user_logged_in() ) {
+			if ( $redirect = $this->get_settings_for_display( 'redirect_url_for_logged_in_user' )['url'] ) {
+				$redirect = wp_sanitize_redirect( $redirect );
+				$logged_in_location = wp_validate_redirect( $redirect, site_url() ); ?>
+                <div class="" data-logged-in-location="<?php echo empty( $logged_in_location ) ? '' : esc_url( $logged_in_location ); ?>"></div>
+				<?php
+			}
+		}
+
 		//Note. forms are handled in Login_Registration Trait used in the Bootstrap class.
 		if ( ! $this->in_editor && 'yes' === $this->get_settings_for_display( 'hide_for_logged_in_user' ) && is_user_logged_in() ) {
 			return; // do not show any form for already logged in user. but let edit on editor

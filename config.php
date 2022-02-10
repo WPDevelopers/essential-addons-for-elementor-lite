@@ -530,6 +530,11 @@ $config = [
                         'type' => 'self',
                         'context' => 'view',
                     ],
+	                [
+		                'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/quick-view.min.css',
+		                'type' => 'self',
+		                'context' => 'view',
+	                ],
                     [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/product-grid.min.css',
                         'type' => 'self',
@@ -551,6 +556,11 @@ $config = [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/load-more.min.js',
                         'type' => 'self',
                         'context' => 'view',
+                    ],
+                    [
+	                    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/quick-view.min.js',
+	                    'type' => 'self',
+	                    'context' => 'view',
                     ],
 	                [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/product-grid.min.js',
@@ -879,6 +889,25 @@ $config = [
                 ],
             ],
         ],
+        'woo-cart' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Cart',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-cart.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+                'js' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-cart.min.js',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
         'login-register' => [
             'class' => '\Essential_Addons_Elementor\Elements\Login_Register',
             'dependency' => [
@@ -931,12 +960,22 @@ $config = [
 		    'dependency' => [
 			    'css' => [
 				    [
+					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/quick-view.min.css',
+					    'type' => 'self',
+					    'context' => 'view',
+				    ],
+				    [
 					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-carousel.min.css',
 					    'type' => 'self',
 					    'context' => 'view',
 				    ],
 			    ],
 			    'js'  => [
+				    [
+					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/quick-view.min.js',
+					    'type' => 'self',
+					    'context' => 'view',
+				    ],
 				    [
 					    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-product-carousel.min.js',
 					    'type' => 'self',
@@ -963,6 +1002,82 @@ $config = [
 			        ],
 		        ],
 	        ],
+        ],
+        'woo-product-gallery' => [
+	        'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Gallery',
+	        'dependency' => [
+		        'css' => [
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/load-more.min.css',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/quick-view.min.css',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-gallery.min.css',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+		        'js'  => [
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
+				        'type' => 'lib',
+				        'context' => 'view',
+			        ],
+			        [
+				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js',
+				        'type'    => 'lib',
+				        'context' => 'view',
+			        ],
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/load-more.min.js',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/quick-view.min.js',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-product-gallery.min.js',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+	        ],
+        ],
+        'interactive-circle' => [
+	        'class' => '\Essential_Addons_Elementor\Elements\Interactive_Circle',
+	        'dependency' => [
+		        'css' => [
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/interactive-circle.min.css',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+		        'js'  => [
+			        [
+				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/interactive-circle.min.js',
+				        'type' => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+	        ],
+        ],
+        'better-payment' => [
+            'class' => '\Essential_Addons_Elementor\Elements\BetterPayment',
+            'condition' => [
+                'class_exists',
+                'BetterPayment',
+                true,
+            ],
         ],
     ],
     'extensions' => [
@@ -1017,6 +1132,18 @@ $config = [
         ],
         'post-duplicator' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Post_Duplicator',
+        ],
+        'scroll-to-top' => [
+            'class' => '\Essential_Addons_Elementor\Extensions\Scroll_to_Top',
+            'dependency' => [
+                'js' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/scroll-to-top.min.js',
+                        'type' => 'self',
+                        'context' => 'edit',
+                    ],
+                ],
+            ],
         ],
     ],
 ];

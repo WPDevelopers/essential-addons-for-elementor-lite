@@ -116,15 +116,15 @@ class Countdown extends Widget_Base {
                 'options'   => [
                     'left'   => [
                         'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
-                        'icon'  => 'fa fa-align-center',
+                        'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
                         'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                 ],
                 'default'   => 'center',
@@ -480,7 +480,7 @@ class Countdown extends Widget_Base {
                         ],
                     ],
                     'default'     => '1',
-                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.com/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
                 ]
             );
 
@@ -1028,15 +1028,15 @@ class Countdown extends Widget_Base {
                 'options'     => [
                     'left'   => [
                         'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
-                        'icon'  => 'fa fa-align-center',
+                        'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
                         'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                 ],
                 'default'     => 'left',
@@ -1183,15 +1183,15 @@ class Countdown extends Widget_Base {
         }
 
         // label view
-        $this->add_render_attribute( 'eael-countdown-container', [
-            'class' => [
-                'eael-countdown-container',
-                $settings['eael_countdown_label_view'],
-                $settings['eael_countdown_label_view_tablet'] . '-tablet',
-                $settings['eael_countdown_label_view_mobile'] . '-mobile',
-                $separator,
-            ],
-        ] );
+	    $this->add_render_attribute( 'eael-countdown-container', [
+		    'class' => [
+			    'eael-countdown-container',
+			    $settings['eael_countdown_label_view'],
+			    empty( $settings['eael_countdown_label_view_tablet'] ) ? '' : $settings['eael_countdown_label_view_tablet'] . '-tablet',
+			    empty( $settings['eael_countdown_label_view_mobile'] ) ? '' : $settings['eael_countdown_label_view_mobile'] . '-mobile',
+			    $separator,
+		    ],
+	    ] );
         ?>
 
 		<div <?php echo $this->get_render_attribute_string( 'eael-countdown' ); ?>>
