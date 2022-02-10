@@ -547,7 +547,7 @@
     height: initial !important;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 20px;
-    border: none;
+    border: none !important;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-item {
     border: 6px solid #f5f3ff;
@@ -1115,10 +1115,10 @@
     height: initial;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 20px;
-    border: none;
+    border: none !important;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-2 .eael-circle-item {
-    border: 6px solid #f5f3ff;
+    border: 6px solid #FFE6DC;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1652,7 +1652,7 @@
     height: initial;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 20px;
-    border: none;
+    border: none !important;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-item {
     border: 6px solid #f5f3ff;
@@ -2074,4 +2074,9 @@
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+}
+@media only screen and (min-width: 601px) {
+  .eael-circle-wrapper .eael-circle-info .eael-circle-inner .eael-circle-item {
+    border: none !important;
+  }
 }
