@@ -107,6 +107,32 @@ class Facebook_Feed extends Widget_Base
         );
 
 	    $this->add_control(
+		    'eael_facebook_feed_data_source',
+		    [
+			    'label' => esc_html__('Source', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SELECT,
+			    'label_block' => true,
+			    'options' => [
+				    'posts' => esc_html__('Posts', 'essential-addons-for-elementor-lite'),
+				    'feed' => esc_html__('Feed', 'essential-addons-for-elementor-lite'),
+			    ],
+			    'default' => 'posts',
+
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_facebook_feed_cache_limit',
+		    [
+			    'label' => __('Data Cache Time', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::NUMBER,
+			    'min' => 1,
+			    'default' => 60,
+			    'description' => __('Cache expiration time (Minutes)', 'essential-addons-for-elementor-lite')
+		    ]
+	    );
+
+	    $this->add_control(
 		    'eael_facebook_feed_cache_limit',
 		    [
 			    'label' => __('Data Cache Time', 'essential-addons-for-elementor-lite'),
@@ -991,7 +1017,7 @@ class Facebook_Feed extends Widget_Base
                 ],
                 'condition' => [
                     'eael_facebook_feed_layout' => 'card',
-                ],
+                ]
             ]
         );
 

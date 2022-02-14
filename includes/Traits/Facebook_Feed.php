@@ -56,15 +56,16 @@ trait Facebook_Feed {
 		$html    = '';
 		$page_id = $settings['eael_facebook_feed_page_id'];
 		$token   = $settings['eael_facebook_feed_access_token'];
+		$source    = $settings['eael_facebook_feed_data_source'];
 
 		if ( empty( $page_id ) || empty( $token ) ) {
 			return;
 		}
 
-		$key           = 'eael_facebook_feed_' . md5( str_rot13( str_replace( '.', '', $page_id . $token ) ) . $settings['eael_facebook_feed_cache_limit'] );
+		$key           = 'eael_facebook_feed_' . md5( str_rot13( str_replace( '.', '', $source . $page_id . $token ) ) . $settings['eael_facebook_feed_cache_limit'] );
 		$facebook_data = get_transient( $key );
 		if ( $facebook_data == false ) {
-			$facebook_data = wp_remote_retrieve_body( wp_remote_get( "https://graph.facebook.com/v8.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)&limit=99&access_token={$token}", [
+			$facebook_data = wp_remote_retrieve_body( wp_remote_get( $this->get_url($page_id, $token, $source), [
 				'timeout' => 70,
 			] ) );
 			$facebook_data = json_decode( $facebook_data, true );
@@ -249,5 +250,24 @@ trait Facebook_Feed {
 		}
 
 		return $stringText;
+	}
+
+	/**
+	 * get_url
+	 * Build and return api endpoint based on source type
+	 *
+	 * @param string $page_id string
+	 * @param string $token string
+	 * @param string $source string
+	 *
+	 * @return string
+	 */
+	public function get_url( $page_id = '', $token = '', $source = 'posts' ) {
+		$post_url = "https://graph.facebook.com/v8.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)&limit=99&access_token={$token}";
+		$feed_url = "https://graph.facebook.com/v8.0/{$page_id}/feed?fields=id,message,full_picture,status_type,created_time,attachments{title,description,type,url,media},from,permalink_url,shares,call_to_action,likes{username,name},privacy&access_token={$token}&limit=99&locale=en_US";
+		if ( 'posts' === $source ) {
+			return $post_url;
+		}
+		return $feed_url;
 	}
 }
