@@ -70,6 +70,12 @@ $extensions = [
 				'demo_link' => 'https://essential-addons.com/elementor/scroll-to-top/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/scroll-to-top/',
 			],
+			[
+				'key'       => 'conditional-logic',
+				'title'     => __( 'Conditional Logic', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/conditional-logic/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/conditional-logic/',
+			],
 		]
 	]
 ];

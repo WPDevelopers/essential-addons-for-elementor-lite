@@ -1145,6 +1145,9 @@ $config = [
                 ],
             ],
         ],
+        'conditional-logic' => [
+	        'class' => '\Essential_Addons_Elementor\Extensions\Conditional_Logic',
+        ],
     ],
 ];
 
