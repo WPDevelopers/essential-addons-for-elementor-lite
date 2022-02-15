@@ -113,8 +113,8 @@ class Conditional_Logic {
 				'fields'      => $repeater->get_controls(),
 				'default'     => [
 					[
-						'column_type'          => 'remove',
-						'column_heading_title' => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+						'logic_type'           => 'login_status',
+						'login_status_operand' => 'not_logged_in',
 					],
 				],
 				'title_field' => '{{{ ea_conditional_logic_type_title(logic_type) }}}',
@@ -132,9 +132,20 @@ class Conditional_Logic {
 		$arg = wp_parse_args( $arg, [
 			'eael_cl_enable'            => '',
 			'eael_cl_visibility_action' => '',
+			'eael_cl_logics'            => [],
 		] );
 
 		return $arg;
+	}
+
+	public function check_logics( $settings ) {
+		foreach ( $settings['eael_cl_logics'] as $cl_logic ) {
+			switch ( $cl_logic['logic_type'] ) {
+				case 'login_status':
+					return $cl_logic['login_status_operand'] === 'logged_in' ? is_user_logged_in() : ! is_user_logged_in();
+					break;
+			}
+		}
 	}
 
 	public function content_render( $should_render, Element_Base $element ) {
@@ -144,10 +155,10 @@ class Conditional_Logic {
 		if ( $settings['eael_cl_enable'] === 'yes' ) {
 			switch ( $settings['eael_cl_visibility_action'] ) {
 				case 'show':
-					return true;
+					return $this->check_logics( $settings ) ? true : false;
 					break;
 				case 'hide':
-					return false;
+					return $this->check_logics( $settings ) ? false : true;
 					break;
 				case 'forcefully_hide':
 					return false;
