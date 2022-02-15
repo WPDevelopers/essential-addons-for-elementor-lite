@@ -46,13 +46,17 @@ class Conditional_Logic {
 				'label'     => __( 'Visibility Action', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
-					'show' => [
+					'show'            => [
 						'title' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'fa fa-eye',
 					],
-					'hide' => [
+					'hide'            => [
 						'title' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'fa fa-eye-slash',
+					],
+					'forcefully-hide' => [
+						'title' => esc_html__( 'Hide without condition', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-ban',
 					],
 				],
 				'default'   => 'hide',
@@ -80,10 +84,15 @@ class Conditional_Logic {
 		$settings = $this->parse_arg( $settings );
 
 		if ( $settings['eael_cl_enable'] === 'yes' ) {
-			if ( $settings['eael_cl_visibility_action'] === 'show' ) {
-				return true;
-			} elseif ( $settings['eael_cl_visibility_action'] === 'hide' ) {
-				return false;
+			switch ( $settings['eael_cl_visibility_action'] ) {
+				case 'show':
+					return true;
+					break;
+				case 'hide':
+					return false;
+					break;
+				case 'forcefully-hide':
+					return false;
 			}
 		}
 
