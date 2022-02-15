@@ -82,19 +82,6 @@ class Conditional_Logic {
 			]
 		);
 
-//		$repeater->add_control(
-//			'logic_condition',
-//			[
-//				'label'   => __( 'Condition', 'essential-addons-for-elementor-lite' ),
-//				'type'    => Controls_Manager::SELECT,
-//				'default' => 'equal',
-//				'options' => [
-//					'equal'     => __( 'Is', 'essential-addons-for-elementor-lite' ),
-//					'not_equal' => __( 'Is Not', 'essential-addons-for-elementor-lite' ),
-//				],
-//			]
-//		);
-
 		$repeater->add_control(
 			'login_status_operand',
 			[
