@@ -102,6 +102,7 @@ class Conditional_Logic {
 				'default' => 'login_status',
 				'options' => [
 					'login_status' => __( 'Login Status', 'essential-addons-for-elementor-lite' ),
+					'boolean'      => __( 'Boolean', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);
@@ -125,6 +126,29 @@ class Conditional_Logic {
 				'toggle'    => false,
 				'condition' => [
 					'logic_type' => 'login_status',
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'boolean_operand',
+			[
+				'label'     => __( 'Boolean Type', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => [
+					'true'  => [
+						'title' => esc_html__( 'True', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-user',
+					],
+					'false' => [
+						'title' => esc_html__( 'False', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-user-slash',
+					],
+				],
+				'default'   => 'true',
+				'toggle'    => false,
+				'condition' => [
+					'logic_type' => 'boolean',
 				]
 			]
 		);
@@ -171,6 +195,15 @@ class Conditional_Logic {
 			switch ( $cl_logic['logic_type'] ) {
 				case 'login_status':
 					$return = $cl_logic['login_status_operand'] === 'logged_in' ? is_user_logged_in() : ! is_user_logged_in();
+					if ( $needed_any_logic_true && $return ) {
+						break( 2 );
+					}
+					if ( $needed_all_logic_true && ! $return ) {
+						break( 2 );
+					}
+					break;
+				case 'boolean':
+					$return = $cl_logic['boolean_operand'] === 'true' ? true : false;
 					if ( $needed_any_logic_true && $return ) {
 						break( 2 );
 					}
