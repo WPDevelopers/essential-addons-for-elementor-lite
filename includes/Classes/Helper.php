@@ -858,6 +858,7 @@ class Helper
 		$pagination_Paginationlist = ceil( $pagination_Count / $paginationLimit );
 		$last                      = ceil( $pagination_Paginationlist );
 		$widget_id                 = sanitize_key( $settings['eael_widget_id'] );
+		$page_id                   = intval( $settings['eael_page_id'] );
 		$next_label                = $settings['pagination_next_label'];
 		$adjacents                 = "2";
 		$setPagination             = "";
@@ -877,7 +878,7 @@ class Helper
 						$active = "";
 					}
 
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-pageid='".$page_id."' data-args='".http_build_query($args)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
 
 				}
 
@@ -891,11 +892,11 @@ class Helper
 						$active = "";
 					}
 
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-pageid='".$page_id."' data-args='".http_build_query($args)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
 				}
 
 				$setPagination .="<li class='pagitext dots'>...</li>";
-				$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+				$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-pageid='".$page_id."' data-args='".http_build_query($args)."'  data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
 
 			} else {
 
@@ -910,13 +911,13 @@ class Helper
 					$setPagination .= "<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='" . json_encode( [ 'dir'       => 'free',
 					                                                                                                                              'file_name' => $settings['eael_dynamic_template_Layout'],
 					                                                                                                                              'name'      => $settings['eael_widget_name']
-						], 1 ) . "' data-widgetid='$widget_id' data-args='" . http_build_query( $args ) . "' data-settings='" . http_build_query( $settings ) . "' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+						], 1 ) . "' data-widgetid='$widget_id' data-pageid='".$page_id."' data-args='" . http_build_query( $args ) . "' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
 				}
 
 			}
 
 			if ($pagination_Paginationlist > 1) {
-				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='" . http_build_query( $args ) . "' data-settings='" . http_build_query( $settings ) . "' data-pnumber='2' data-plimit='$paginationLimit'>".esc_html( $next_label )."</a></li>";
+				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-pageid='".$page_id."' data-args='" . http_build_query( $args ) . "' data-pnumber='2' data-plimit='$paginationLimit'>".esc_html( $next_label )."</a></li>";
 			}
 
 			$setPagination .="</ul>";
