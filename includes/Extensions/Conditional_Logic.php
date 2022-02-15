@@ -29,25 +29,62 @@ class Conditional_Logic {
 		);
 
 		$element->add_control(
-			'eael_should_render',
+			'eael_cl_enable',
 			[
-				'label'        => __( 'Should Render', 'essential-addons-for-elementor-lite' ),
+				'label'        => __( 'Enable Logic', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => '',
-				'label_on'     => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
+			]
+		);
+
+		$element->add_control(
+			'eael_cl_visibility_action',
+			[
+				'label'     => __( 'Visibility Action', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => [
+					'show' => [
+						'title' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-eye',
+					],
+					'hide' => [
+						'title' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-eye-slash',
+					],
+				],
+				'default'   => 'hide',
+				'toggle'    => false,
+				'condition' => [
+					'eael_cl_enable' => 'yes',
+				]
 			]
 		);
 
 		$element->end_controls_section();
 	}
 
+	public function parse_arg( $arg ) {
+		$arg = wp_parse_args( $arg, [
+			'eael_cl_enable'            => '',
+			'eael_cl_visibility_action' => '',
+		] );
+
+		return $arg;
+	}
+
 	public function content_render( $should_render, Element_Base $element ) {
 		$settings = $element->get_settings();
+		$settings = $this->parse_arg( $settings );
 
-		if ( isset( $settings['eael_should_render'] ) && $settings['eael_should_render'] === 'yes' ) {
-			return false;
+		if ( $settings['eael_cl_enable'] === 'yes' ) {
+			if ( $settings['eael_cl_visibility_action'] === 'show' ) {
+				return true;
+			} elseif ( $settings['eael_cl_visibility_action'] === 'hide' ) {
+				return false;
+			}
 		}
 
 		return $should_render;
