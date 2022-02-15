@@ -68,6 +68,30 @@ class Conditional_Logic {
 			]
 		);
 
+		$element->add_control(
+			'eael_cl_action_apply_if',
+			[
+				'label'     => __( 'Action Applicable if', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => [
+					'all' => [
+						'title' => esc_html__( 'True All Logic', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-dice-six',
+					],
+					'any' => [
+						'title' => esc_html__( 'True Any Logic', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-dice-one',
+					],
+				],
+				'default'   => 'any',
+				'toggle'    => false,
+				'condition' => [
+					'eael_cl_enable'             => 'yes',
+					'eael_cl_visibility_action!' => 'forcefully_hide',
+				]
+			]
+		);
+
 		$repeater = new Repeater();
 
 		$repeater->add_control(
@@ -133,19 +157,31 @@ class Conditional_Logic {
 			'eael_cl_enable'            => '',
 			'eael_cl_visibility_action' => '',
 			'eael_cl_logics'            => [],
+			'eael_cl_action_apply_if'   => '',
 		] );
 
 		return $arg;
 	}
 
 	public function check_logics( $settings ) {
+		$return                = false;
+		$needed_any_logic_true = $settings['eael_cl_action_apply_if'] === 'any';
+		$needed_all_logic_true = $settings['eael_cl_action_apply_if'] === 'all';
 		foreach ( $settings['eael_cl_logics'] as $cl_logic ) {
 			switch ( $cl_logic['logic_type'] ) {
 				case 'login_status':
-					return $cl_logic['login_status_operand'] === 'logged_in' ? is_user_logged_in() : ! is_user_logged_in();
+					$return = $cl_logic['login_status_operand'] === 'logged_in' ? is_user_logged_in() : ! is_user_logged_in();
+					if ( $needed_any_logic_true && $return ) {
+						break( 2 );
+					}
+					if ( $needed_all_logic_true && ! $return ) {
+						break( 2 );
+					}
 					break;
 			}
 		}
+
+		return $return;
 	}
 
 	public function content_render( $should_render, Element_Base $element ) {
