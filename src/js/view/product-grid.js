@@ -189,6 +189,7 @@ ea.hooks.addAction("init", "ea", () => {
 				args = $this.data("args"),
 				settings = $this.data("settings"),
 				widgetid = $this.data("widgetid"),
+				pageid = $this.data("pageid"),
 				widgetclass = ".elementor-element-" + widgetid,
 				template_info = $this.data("template");
 
@@ -200,8 +201,10 @@ ea.hooks.addAction("init", "ea", () => {
 					number: nth,
 					limit: lmt,
 					args: args,
+					widget_id: widgetid,
+					page_id: pageid,
+					security: localize.nonce,
 					templateInfo: template_info,
-					settings: settings,
 				},
 				beforeSend: function () {
 					$(widgetclass).addClass("eael-product-loader");
@@ -230,7 +233,10 @@ ea.hooks.addAction("init", "ea", () => {
 					number: nth,
 					limit: lmt,
 					args: args,
-					settings: settings,
+					widget_id: widgetid,
+					page_id: pageid,
+					security: localize.nonce,
+					template_name: template_info.name,
 				},
 				// beforeSend	: function(){
 				// 	$(widgetclass+" .eael-product-grid .products").html("<li style='text-align:center;'>Loading please " +
