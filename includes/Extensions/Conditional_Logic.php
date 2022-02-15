@@ -4,6 +4,7 @@ namespace Essential_Addons_Elementor\Extensions;
 
 use Elementor\Controls_Manager;
 use Elementor\Element_Base;
+use Elementor\Repeater;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -54,7 +55,7 @@ class Conditional_Logic {
 						'title' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'fa fa-eye-slash',
 					],
-					'forcefully-hide' => [
+					'forcefully_hide' => [
 						'title' => esc_html__( 'Hide without condition', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'fa fa-ban',
 					],
@@ -63,6 +64,76 @@ class Conditional_Logic {
 				'toggle'    => false,
 				'condition' => [
 					'eael_cl_enable' => 'yes',
+				]
+			]
+		);
+
+		$repeater = new Repeater();
+
+		$repeater->add_control(
+			'logic_type',
+			[
+				'label'   => __( 'Type', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'login_status',
+				'options' => [
+					'login_status' => __( 'Login Status', 'essential-addons-for-elementor-lite' ),
+				],
+			]
+		);
+
+//		$repeater->add_control(
+//			'logic_condition',
+//			[
+//				'label'   => __( 'Condition', 'essential-addons-for-elementor-lite' ),
+//				'type'    => Controls_Manager::SELECT,
+//				'default' => 'equal',
+//				'options' => [
+//					'equal'     => __( 'Is', 'essential-addons-for-elementor-lite' ),
+//					'not_equal' => __( 'Is Not', 'essential-addons-for-elementor-lite' ),
+//				],
+//			]
+//		);
+
+		$repeater->add_control(
+			'login_status_operand',
+			[
+				'label'     => __( 'Login Status', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => [
+					'logged_in'     => [
+						'title' => esc_html__( 'Logged In', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-user',
+					],
+					'not_logged_in' => [
+						'title' => esc_html__( 'Not Logged In', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-user-slash',
+					],
+				],
+				'default'   => 'not_logged_in',
+				'toggle'    => false,
+				'condition' => [
+					'logic_type' => 'login_status',
+				]
+			]
+		);
+
+		$element->add_control(
+			'eael_cl_logics',
+			[
+				'label'       => __( 'Logics', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::REPEATER,
+				'fields'      => $repeater->get_controls(),
+				'default'     => [
+					[
+						'column_type'          => 'remove',
+						'column_heading_title' => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+					],
+				],
+				'title_field' => '{{{ ea_conditional_logic_type_title(logic_type) }}}',
+				'condition'   => [
+					'eael_cl_enable'             => 'yes',
+					'eael_cl_visibility_action!' => 'forcefully_hide',
 				]
 			]
 		);
@@ -91,7 +162,7 @@ class Conditional_Logic {
 				case 'hide':
 					return false;
 					break;
-				case 'forcefully-hide':
+				case 'forcefully_hide':
 					return false;
 			}
 		}

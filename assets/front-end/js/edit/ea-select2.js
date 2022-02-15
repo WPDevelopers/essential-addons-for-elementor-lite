@@ -93,3 +93,11 @@ function ea_woo_cart_column_type_title(value) {
 
     return labelValues[value] ? labelValues[value] : '';
 }
+
+function ea_conditional_logic_type_title(value) {
+    const labelValues = {
+        login_status: eael_select2_localize.cl_login_status,
+    };
+
+    return labelValues[value] ? labelValues[value] : '';
+}
