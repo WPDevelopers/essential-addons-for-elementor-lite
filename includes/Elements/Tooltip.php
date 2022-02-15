@@ -703,7 +703,7 @@ class Tooltip extends Widget_Base {
 
 		$icon_migrated = isset($settings['__fa4_migrated']['eael_tooltip_icon_content_new']);
 		$icon_is_new = empty($settings['eael_tooltip_icon_content']);
-        $this->add_link_attributes( 'eael_tooltip_link', $settings['eael_tooltip_link'] );
+        $this->add_link_attributes( 'eael_tooltip_link', (array) $settings['eael_tooltip_link'] );
 	?>
 	<div class="eael-tooltip">
 		<?php if( $settings['eael_tooltip_type'] === 'text' ) : ?>
