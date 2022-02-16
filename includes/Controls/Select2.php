@@ -32,6 +32,7 @@ class Select2 extends Base_Data_Control
 				'quantity'        => __( 'Quantity', 'essential-addons-for-elementor-lite' ),
 				'subtotal'        => __( 'Subtotal', 'essential-addons-for-elementor-lite' ),
 				'cl_login_status' => __( 'Login Status', 'essential-addons-for-elementor-lite' ),
+				'cl_user_role'    => __( 'User Role', 'essential-addons-for-elementor-lite' ),
 				'cl_boolean'      => __( 'Boolean Type', 'essential-addons-for-elementor-lite' ),
 			]
 		);

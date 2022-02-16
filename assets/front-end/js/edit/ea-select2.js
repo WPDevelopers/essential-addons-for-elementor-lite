@@ -97,6 +97,7 @@ function ea_woo_cart_column_type_title(value) {
 function ea_conditional_logic_type_title(value) {
     const labelValues = {
         login_status: eael_select2_localize.cl_login_status,
+        user_role: eael_select2_localize.cl_user_role,
         boolean: eael_select2_localize.cl_boolean,
     };
 
