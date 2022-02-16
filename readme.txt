@@ -245,7 +245,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 - Improved: Optimized Options table for better performance
 - Fixed: Deprecated control error notices from Elementor
-- Fixed: Assets not loding if parameter is added in the link
+- Fixed: Assets not loading if parameter is added in the link
 - Fixed: EA Pricing Table | Ribbon style showing despite being deactivated
 - Fixed: EA Advanced Tabs | SVG icon height issue
 - Fixed: EA Product Grid | Image size not changing
