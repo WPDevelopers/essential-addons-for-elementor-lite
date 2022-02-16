@@ -649,6 +649,7 @@ trait Helper
                 $query->the_post();
                 include( $template );
             }
+	        wp_reset_postdata();
         }
         echo ob_get_clean();
         wp_die();
