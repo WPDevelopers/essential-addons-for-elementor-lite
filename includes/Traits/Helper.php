@@ -681,26 +681,23 @@ trait Helper
 		$settings['eael_page_id'] = $page_id;
 		wp_parse_str( $_REQUEST['args'], $args );
 
-		$paginationNumber = absint( $_POST['number'] );
-		$paginationLimit  = absint( $_POST['limit'] );
+		$paginationNumber          = absint( $_POST['number'] );
+		$paginationLimit           = absint( $_POST['limit'] );
+		$pagination_Count          = intval( $args['max_page'] );
+		$pagination_Paginationlist = ceil( $pagination_Count / $paginationLimit );
+		$last                      = ceil( $pagination_Paginationlist );
+		$paginationprev            = $paginationNumber - 1;
+		$paginationnext            = $paginationNumber + 1;
 
-		$pagination_args = $args;
-		$pagination_args['posts_per_page'] = -1;
-
-		$pagination_Query = new \WP_Query( $pagination_args );
-		$pagination_Count = count($pagination_Query->posts);
-		$pagination_Paginationlist = ceil($pagination_Count/$paginationLimit);
-		$last = ceil( $pagination_Paginationlist );
-		$paginationprev = $paginationNumber-1;
-		$paginationnext = $paginationNumber+1;
 		if( $paginationNumber>1 ){ $paginationprev;	}
 		if( $paginationNumber < $last ){ $paginationnext; }
 
-		$adjacents = "2";
-		$next_label = sanitize_text_field( $settings['pagination_next_label'] );
-		$prev_label = sanitize_text_field( $settings['pagination_prev_label'] );
+		$adjacents                    = "2";
+		$next_label                   = sanitize_text_field( $settings['pagination_next_label'] );
+		$prev_label                   = sanitize_text_field( $settings['pagination_prev_label'] );
 		$settings['eael_widget_name'] = realpath( sanitize_file_name( $_REQUEST['template_name'] ) );
-		$setPagination = "";
+		$setPagination                = "";
+
 		if( $pagination_Paginationlist > 0 ){
 
 			$setPagination .="<ul class='page-numbers'>";
@@ -712,10 +709,8 @@ trait Helper
 			if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
 
 				for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
-
-					if( $paginationNumber ==  $pagination ){ $active="current"; }else{ $active=""; }
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-pageid='".$page_id."' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
-
+					$active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+					$setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
 				}
 
 			} else if ( $pagination_Paginationlist > 5 + ($adjacents * 2) ){
@@ -724,53 +719,47 @@ trait Helper
 
 					for( $pagination=1; $pagination <=4 + ($adjacents * 2); $pagination++){
 
-						if( $paginationNumber ==  $pagination ){ $active="current"; }else{ $active=""; }
-						$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-pageid='".$page_id."' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+						$active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+						$setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
 					}
 					$setPagination .="<li class='pagitext dots'>...</li>";
-					$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-pageid='".$page_id."' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$last' data-plimit='$paginationLimit'>".$last."</a></li>";
+					$setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
 
 				} elseif( $pagination_Paginationlist - ($adjacents * 2) > $paginationNumber && $paginationNumber > ($adjacents * 2)) {
 					$active = '';
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-pageid='".$page_id."' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='1' data-plimit='$paginationLimit'>1</a></li>";
+					$setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,1);
 					$setPagination .="<li class='pagitext dots'>...</li>";
 
-					for( $pagination=$paginationNumber - $adjacents; $pagination<=$paginationNumber + $adjacents; $pagination++){
-
-						if( $paginationNumber ==  $pagination ){ $active="current"; }else{ $active=""; }
-						$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-pageid='".$page_id."' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
-
+					for ( $pagination = $paginationNumber - $adjacents; $pagination <= $paginationNumber + $adjacents; $pagination ++ ) {
+						$active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+						$setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
 					}
 
 					$setPagination .="<li class='pagitext dots'>...</li>";
-					$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-pageid='".$page_id."' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$last' data-plimit='$paginationLimit'>".$last."</a></li>";
+					$setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$last);
 
 				} else {
 					$active = '';
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-pageid='".$page_id."' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='1' data-plimit='$paginationLimit'>1</a></li>";
+					$setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,1);
 					$setPagination .="<li class='pagitext dots'>...</li>";
 
 					for ($pagination = $last - (2 + ($adjacents * 2)); $pagination <= $last; $pagination++){
-
-						if( $paginationNumber ==  $pagination ){ $active="current"; }else{ $active=""; }
-						$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-pageid='".$page_id."' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
-
+						$active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+						$setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
 					}
-
 				}
 
 			} else {
 
 				for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
-					if( $paginationNumber ==  $pagination ){ $active="current"; }else{ $active=""; }
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-pageid='".$page_id."' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+					$active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+					$setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
 				}
 
 			}
 
 			if ($paginationNumber < $pagination_Paginationlist){
-				$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-pageid='".$page_id."' data-args='"
-				                 .http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$paginationnext' data-plimit='$paginationLimit'>$next_label</a></li>";
+				$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-pnumber='$paginationnext' >$next_label</a></li>";
 			}
 
 			$setPagination .="</ul>";
