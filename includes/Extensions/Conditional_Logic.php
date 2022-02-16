@@ -171,10 +171,7 @@ class Conditional_Logic {
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT2,
 				'multiple'    => true,
-				'options'     => [
-					'guest'         => esc_html__( 'Guest', 'essential-addons-for-elementor-lite' ),
-					'administrator' => esc_html__( 'Administrator', 'essential-addons-for-elementor-lite' ),
-				],
+				'options'     => $this->get_editable_roles(),
 				'default'     => [ 'administrator' ],
 				'condition'   => [
 					'logic_type' => 'user_role',
