@@ -228,6 +228,20 @@ class Conditional_Logic {
 		$element->end_controls_section();
 	}
 
+	/**
+	 * Get All editable roles and return array with simple slug|name pare
+	 *
+	 * @return array
+	 */
+	public function get_editable_roles() {
+		$wp_roles = [];
+		foreach ( get_editable_roles() as $slug => $editable_role ) {
+			$wp_roles[ $slug ] = $editable_role['name'];
+		}
+
+		return $wp_roles;
+	}
+
 	public function parse_arg( $arg ) {
 		$arg = wp_parse_args( $arg, [
 			'eael_cl_enable'            => '',
