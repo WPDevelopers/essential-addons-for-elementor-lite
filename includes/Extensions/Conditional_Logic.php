@@ -321,25 +321,50 @@ class Conditional_Logic {
 		$return                = false;
 		$needed_any_logic_true = $settings['eael_cl_action_apply_if'] === 'any';
 		$needed_all_logic_true = $settings['eael_cl_action_apply_if'] === 'all';
+
 		foreach ( $settings['eael_cl_logics'] as $cl_logic ) {
 			switch ( $cl_logic['logic_type'] ) {
 				case 'login_status':
 					$return = $cl_logic['login_status_operand'] === 'logged_in' ? is_user_logged_in() : ! is_user_logged_in();
+
 					if ( $needed_any_logic_true && $return ) {
 						break( 2 );
 					}
+
 					if ( $needed_all_logic_true && ! $return ) {
 						break( 2 );
 					}
+
+					break;
+				case 'user_role':
+					$return = false;
+					if ( is_user_logged_in() ) {
+						$user_roles = get_userdata( get_current_user_id() )->roles;
+						$operand    = ( $cl_logic['user_role_logic'] === 'equal' || $cl_logic['user_role_logic'] === 'not_equal' ) ? $cl_logic['user_role_operand_single'] : $cl_logic['user_role_operand_multi'];
+						$result     = array_intersect( $user_roles, $operand );
+						$return     = count( $result ) > 0;
+					}
+
+					if ( $needed_any_logic_true && $return ) {
+						break( 2 );
+					}
+
+					if ( $needed_all_logic_true && ! $return ) {
+						break( 2 );
+					}
+
 					break;
 				case 'boolean':
 					$return = $cl_logic['boolean_operand'] === 'true' ? true : false;
+
 					if ( $needed_any_logic_true && $return ) {
 						break( 2 );
 					}
+
 					if ( $needed_all_logic_true && ! $return ) {
 						break( 2 );
 					}
+
 					break;
 			}
 		}
