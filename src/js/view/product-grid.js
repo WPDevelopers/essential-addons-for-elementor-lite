@@ -183,14 +183,15 @@ ea.hooks.addAction("init", "ea", () => {
 			e.preventDefault();
 
 			var $this = $(this),
+				navClass = $this.closest(".eael-woo-pagination"),
 				nth = $this.data("pnumber"),
 				lmt = $this.data("plimit"),
 				ajax_url = localize.ajaxurl,
-				args = $this.data("args"),
-				widgetid = $this.data("widgetid"),
-				pageid = $this.data("pageid"),
+				args = navClass.data("args"),
+				widgetid = navClass.data("widgetid"),
+				pageid = navClass.data("pageid"),
 				widgetclass = ".elementor-element-" + widgetid,
-				template_info = $this.data("template");
+				template_info = navClass.data("template");
 
 			$.ajax({
 				url: ajax_url,
