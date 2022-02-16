@@ -164,7 +164,40 @@ class Conditional_Logic {
 		);
 
 		$repeater->add_control(
-			'user_role_operand',
+			'user_role_operand_single',
+			[
+				'label'       => __( 'User Roles', 'essential-addons-for-elementor-lite' ),
+				'show_label'  => false,
+				'label_block' => true,
+				'type'        => Controls_Manager::SELECT,
+				'multiple'    => true,
+				'options'     => $this->get_editable_roles(),
+				'default'     => $this->get_editable_roles( true, 'string' ),
+				'conditions'  => [
+					'relation' => 'and',
+					'terms'    => [
+						[
+							'name'     => 'logic_type',
+							'operator' => '===',
+							'value'    => 'user_role',
+						],
+						[
+							'name'     => 'user_role_logic',
+							'operator' => '!==',
+							'value'    => 'between',
+						],
+						[
+							'name'     => 'user_role_logic',
+							'operator' => '!==',
+							'value'    => 'not_between',
+						],
+					],
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'user_role_operand_multi',
 			[
 				'label'       => __( 'User Roles', 'essential-addons-for-elementor-lite' ),
 				'show_label'  => false,
@@ -172,9 +205,26 @@ class Conditional_Logic {
 				'type'        => Controls_Manager::SELECT2,
 				'multiple'    => true,
 				'options'     => $this->get_editable_roles(),
-				'default'     => [ 'administrator' ],
-				'condition'   => [
-					'logic_type' => 'user_role',
+				'default'     => $this->get_editable_roles( true ),
+				'conditions'  => [
+					'relation' => 'and',
+					'terms'    => [
+						[
+							'name'     => 'logic_type',
+							'operator' => '===',
+							'value'    => 'user_role',
+						],
+						[
+							'name'     => 'user_role_logic',
+							'operator' => '!==',
+							'value'    => 'equal',
+						],
+						[
+							'name'     => 'user_role_logic',
+							'operator' => '!==',
+							'value'    => 'not_equal',
+						],
+					],
 				]
 			]
 		);
@@ -228,11 +278,21 @@ class Conditional_Logic {
 	/**
 	 * Get All editable roles and return array with simple slug|name pare
 	 *
-	 * @return array
+	 * @param $first_index
+	 * @param $output
+	 *
+	 * @return array|string
 	 */
-	public function get_editable_roles() {
-		$wp_roles = [];
-		foreach ( get_editable_roles() as $slug => $editable_role ) {
+	public function get_editable_roles( $first_index = false, $output = 'array' ) {
+		$wp_roles       = [];
+		$all_roles      = wp_roles()->roles;
+		$editable_roles = apply_filters( 'editable_roles', $all_roles );
+
+		foreach ( $editable_roles as $slug => $editable_role ) {
+			if ( $first_index ) {
+				return $output === 'array' ? [ $slug ] : $slug;
+			}
+
 			$wp_roles[ $slug ] = $editable_role['name'];
 		}
 
