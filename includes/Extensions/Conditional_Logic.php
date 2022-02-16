@@ -25,7 +25,7 @@ class Conditional_Logic {
 			'eael_conditional_logic_section',
 			[
 				'label' => __( '<i class="eaicon-logo"></i> Conditional Logic', 'essential-addons-for-elementor-lite' ),
-				'tab'   => Controls_Manager::TAB_ADVANCED
+				'tab'   => Controls_Manager::TAB_CONTENT
 			]
 		);
 
@@ -102,6 +102,7 @@ class Conditional_Logic {
 				'default' => 'login_status',
 				'options' => [
 					'login_status' => __( 'Login Status', 'essential-addons-for-elementor-lite' ),
+					'user_role'    => __( 'User Role', 'essential-addons-for-elementor-lite' ),
 					'boolean'      => __( 'Boolean', 'essential-addons-for-elementor-lite' ),
 				],
 			]
@@ -126,6 +127,57 @@ class Conditional_Logic {
 				'toggle'    => false,
 				'condition' => [
 					'logic_type' => 'login_status',
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'user_role_logic',
+			[
+				'label'       => __( 'User Role Logic', 'essential-addons-for-elementor-lite' ),
+				'show_label'  => false,
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'equal'       => [
+						'title' => esc_html__( 'Is', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-folder-open',
+					],
+					'not_equal'   => [
+						'title' => esc_html__( 'Is Not', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-folder-open',
+					],
+					'between'     => [
+						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-folder-open',
+					],
+					'not_between' => [
+						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-folder-open',
+					],
+				],
+				'default'     => 'between',
+				'toggle'      => false,
+				'condition'   => [
+					'logic_type' => 'user_role',
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'user_role_operand',
+			[
+				'label'       => __( 'User Roles', 'essential-addons-for-elementor-lite' ),
+				'show_label'  => false,
+				'label_block' => true,
+				'type'        => Controls_Manager::SELECT2,
+				'multiple'    => true,
+				'options'     => [
+					'guest'         => esc_html__( 'Guest', 'essential-addons-for-elementor-lite' ),
+					'administrator' => esc_html__( 'Administrator', 'essential-addons-for-elementor-lite' ),
+				],
+				'default'     => [ 'administrator' ],
+				'condition'   => [
+					'logic_type' => 'user_role',
 				]
 			]
 		);
@@ -187,6 +239,13 @@ class Conditional_Logic {
 		return $arg;
 	}
 
+	/**
+	 * Check all logics and return the final result
+	 *
+	 * @param $settings
+	 *
+	 * @return bool
+	 */
 	public function check_logics( $settings ) {
 		$return                = false;
 		$needed_any_logic_true = $settings['eael_cl_action_apply_if'] === 'any';
