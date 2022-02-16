@@ -187,7 +187,6 @@ ea.hooks.addAction("init", "ea", () => {
 				lmt = $this.data("plimit"),
 				ajax_url = localize.ajaxurl,
 				args = $this.data("args"),
-				settings = $this.data("settings"),
 				widgetid = $this.data("widgetid"),
 				pageid = $this.data("pageid"),
 				widgetclass = ".elementor-element-" + widgetid,
@@ -238,10 +237,7 @@ ea.hooks.addAction("init", "ea", () => {
 					security: localize.nonce,
 					template_name: template_info.name,
 				},
-				// beforeSend	: function(){
-				// 	$(widgetclass+" .eael-product-grid .products").html("<li style='text-align:center;'>Loading please " +
-				// 		"wait...!</li>");
-				// },
+
 				success: function (response) {
 					$(widgetclass + " .eael-product-grid .eael-woo-pagination").html(
 						response
