@@ -25,7 +25,7 @@ class Conditional_Logic {
 			'eael_conditional_logic_section',
 			[
 				'label' => __( '<i class="eaicon-logo"></i> Conditional Logic', 'essential-addons-for-elementor-lite' ),
-				'tab'   => Controls_Manager::TAB_CONTENT
+				'tab'   => Controls_Manager::TAB_ADVANCED
 			]
 		);
 
