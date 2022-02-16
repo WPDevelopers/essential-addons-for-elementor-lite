@@ -868,54 +868,39 @@ class Helper
 		$next_label                = $settings['pagination_next_label'];
 		$adjacents                 = "2";
 		$setPagination             = "";
+		$template_info             = [
+			'dir'       => 'free',
+			'file_name'  => $settings['eael_dynamic_template_Layout'],
+			'name'      => $settings['eael_widget_name']
+		];
 
 		if( $pagination_Paginationlist > 0 ){
 
-			$setPagination .="<nav id='{$widget_id}-eael-pagination' class='eael-woo-pagination' data-totalpage ='{$args['max_page']}' data-widgetid='{$widget_id}' data-pageid='$page_id' data-args='".http_build_query( $args )."'  data-template='".json_encode( [ 'dir'       => 'free',
-			                                                                                                                                                                                                                                                          'file_name' => $settings['eael_dynamic_template_Layout'],
-			                                                                                                                                                                                                                                                          'name'      => $settings['eael_widget_name']
-				], 1 )."'>";
+			$setPagination .="<nav id='{$widget_id}-eael-pagination' class='eael-woo-pagination' data-plimit='$paginationLimit' data-totalpage ='{$args['max_page']}' data-widgetid='{$widget_id}' data-pageid='$page_id' data-args='".http_build_query( $args )."'  data-template='".json_encode( $template_info, 1 )."'>";
 			    $setPagination .="<ul class='page-numbers'>";
 
-			if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
+                    if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
 
-				for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
-					$active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
-					$setPagination .= "<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
-				}
+                        for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
+                            $active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+                        }
 
-			} else if ( $pagination_Paginationlist > 5 + ($adjacents * 2) ){
+                    } else if ( $pagination_Paginationlist >= 5 + ($adjacents * 2) ){
+                        for ( $pagination = 1; $pagination <= 4 + ( $adjacents * 2 ); $pagination ++ ) {
+                            $active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+                        }
 
-				for ( $pagination = 1; $pagination <= 4 + ( $adjacents * 2 ); $pagination ++ ) {
+                        $setPagination .="<li class='pagitext dots'>...</li>";
+                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+                    }
 
-					$active = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+                    if ($pagination_Paginationlist > 1) {
+                        $setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-pnumber='2'>".esc_html( $next_label )."</a></li>";
+                    }
 
-					$setPagination .= "<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
-				}
-
-				$setPagination .="<li class='pagitext dots'>...</li>";
-				$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
-
-			} else {
-
-				for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
-
-					if ( $pagination == 0 || $pagination == 1 ) {
-						$active = "current";
-					} else {
-						$active = "";
-					}
-
-					$setPagination .= "<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
-				}
-
-			}
-
-			if ($pagination_Paginationlist > 1) {
-				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-pnumber='2' data-plimit='$paginationLimit'>".esc_html( $next_label )."</a></li>";
-			}
-
-			$setPagination .="</ul>";
+                $setPagination .="</ul>";
 			$setPagination .="</nav>";
 
 			return $setPagination;
