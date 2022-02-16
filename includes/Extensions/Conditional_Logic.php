@@ -134,10 +134,10 @@ class Conditional_Logic {
 		$repeater->add_control(
 			'user_role_logic',
 			[
-				'label'       => __( 'User Role Logic', 'essential-addons-for-elementor-lite' ),
-				'show_label'  => false,
-				'type'        => Controls_Manager::CHOOSE,
-				'options'     => [
+				'label'      => __( 'User Role Logic', 'essential-addons-for-elementor-lite' ),
+				'show_label' => false,
+				'type'       => Controls_Manager::CHOOSE,
+				'options'    => [
 					'equal'       => [
 						'title' => esc_html__( 'Is', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'fas fa-folder-open',
@@ -155,9 +155,9 @@ class Conditional_Logic {
 						'icon'  => 'fas fa-folder-open',
 					],
 				],
-				'default'     => 'between',
-				'toggle'      => false,
-				'condition'   => [
+				'default'    => 'between',
+				'toggle'     => false,
+				'condition'  => [
 					'logic_type' => 'user_role',
 				]
 			]
