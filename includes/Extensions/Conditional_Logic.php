@@ -231,6 +231,30 @@ class Conditional_Logic {
 		);
 
 		$repeater->add_control(
+			'user_logic',
+			[
+				'label'      => __( 'User Logic', 'essential-addons-for-elementor-lite' ),
+				'show_label' => false,
+				'type'       => Controls_Manager::CHOOSE,
+				'options'    => [
+					'between'     => [
+						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-folder-open',
+					],
+					'not_between' => [
+						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'far fa-folder-open',
+					],
+				],
+				'default'    => 'between',
+				'toggle'     => false,
+				'condition'  => [
+					'logic_type' => 'user',
+				]
+			]
+		);
+
+		$repeater->add_control(
 			'user_operand',
 			[
 				'label'       => esc_html__( 'Select Users', 'essential-addons-for-elementor-lite' ),
@@ -238,26 +262,10 @@ class Conditional_Logic {
 				'source_name' => 'user',
 				'source_type' => 'all',
 				'label_block' => true,
+				'show_label'  => false,
 				'multiple'    => true,
-				'conditions'  => [
-					'relation' => 'and',
-					'terms'    => [
-						[
-							'name'     => 'logic_type',
-							'operator' => '===',
-							'value'    => 'user',
-						],
-//						[
-//							'name'     => 'user_logic',
-//							'operator' => '!==',
-//							'value'    => 'equal',
-//						],
-//						[
-//							'name'     => 'user_logic',
-//							'operator' => '!==',
-//							'value'    => 'not_equal',
-//						],
-					],
+				'condition'   => [
+					'logic_type' => 'user',
 				]
 			]
 		);
