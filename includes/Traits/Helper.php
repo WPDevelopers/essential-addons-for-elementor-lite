@@ -684,7 +684,7 @@ trait Helper
 
 		$paginationNumber          = absint( $_POST['number'] );
 		$paginationLimit           = absint( $_POST['limit'] );
-		$pagination_Count          = intval( $args['max_page'] );
+		$pagination_Count          = intval( $args['total_post'] );
 		$pagination_Paginationlist = ceil( $pagination_Count / $paginationLimit );
 		$last                      = ceil( $pagination_Paginationlist );
 		$paginationprev            = $paginationNumber - 1;
@@ -710,17 +710,16 @@ trait Helper
 			if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
 
 				for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
-					$active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+					$active        = ( $paginationNumber ==  $pagination ) ? 'current' : '';
 					$setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
 				}
 
 			} else if ( $pagination_Paginationlist > 5 + ($adjacents * 2) ){
 
 				if( $paginationNumber < 1 + ($adjacents * 2) ){
-
 					for( $pagination=1; $pagination <=4 + ($adjacents * 2); $pagination++){
 
-						$active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+						$active        = ( $paginationNumber ==  $pagination ) ? 'current' : '';
 						$setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
 					}
 					$setPagination .="<li class='pagitext dots'>...</li>";
@@ -730,9 +729,8 @@ trait Helper
 					$active = '';
 					$setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,1);
 					$setPagination .="<li class='pagitext dots'>...</li>";
-
 					for ( $pagination = $paginationNumber - $adjacents; $pagination <= $paginationNumber + $adjacents; $pagination ++ ) {
-						$active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+						$active        = ( $paginationNumber ==  $pagination ) ? 'current' : '';
 						$setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
 					}
 
@@ -743,17 +741,15 @@ trait Helper
 					$active = '';
 					$setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,1);
 					$setPagination .="<li class='pagitext dots'>...</li>";
-
 					for ($pagination = $last - (2 + ($adjacents * 2)); $pagination <= $last; $pagination++){
-						$active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+						$active        = ( $paginationNumber ==  $pagination ) ? 'current' : '';
 						$setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
 					}
 				}
 
 			} else {
-
 				for( $pagination=1; $pagination<=$pagination_Paginationlist; $pagination++){
-					$active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+					$active        = ( $paginationNumber ==  $pagination ) ? 'current' : '';
 					$setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
 				}
 
