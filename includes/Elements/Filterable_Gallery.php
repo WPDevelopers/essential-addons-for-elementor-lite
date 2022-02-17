@@ -83,7 +83,7 @@ class Filterable_Gallery extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/filterable-gallery/';
     }
     
-    protected function _register_controls()
+    protected function register_controls()
     {
         /**
          * Filter Gallery Settings

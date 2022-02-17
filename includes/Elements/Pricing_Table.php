@@ -67,7 +67,7 @@ class Pricing_Table extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/pricing-table/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
 
         /**
@@ -1293,6 +1293,9 @@ class Pricing_Table extends Widget_Base
             [
                 'label' => esc_html__('Ribbon', 'essential-addons-for-elementor-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_pricing_table_featured' => 'yes',
+                ],
             ]
         );
 

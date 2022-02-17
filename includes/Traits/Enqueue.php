@@ -382,4 +382,19 @@ trait Enqueue
         }";
         wp_add_inline_style( 'elementor-icons', $css );
     }
+
+	// replace beehive theme's swiper slider lib file with elementor's swiper lib file
+	public function beehive_theme_swiper_slider_compatibility( $scripts ) {
+		unset( $scripts['swiper'] );
+		unset( $scripts['beehive-elements'] );
+
+		$scripts['beehive-elements'] = array(
+			'src'       => EAEL_PLUGIN_URL . 'assets/front-end/js/view/beehive-elements.min.js',
+			'deps'      => array( 'jquery' ),
+			'in_footer' => true,
+			'enqueue'   => true,
+		);
+
+		return $scripts;
+	}
 }

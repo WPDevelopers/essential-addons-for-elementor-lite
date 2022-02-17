@@ -130,7 +130,7 @@ class Woo_Product_Gallery extends Widget_Base {
 		] );
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		$this->init_content_wc_notice_controls();
 
 		if ( !function_exists( 'WC' ) ) {

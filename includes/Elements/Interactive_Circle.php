@@ -355,7 +355,7 @@ class Interactive_Circle extends Widget_Base {
 			[
 				'name'     => 'eael_interactive_circle_border',
 				'label'    => esc_html__( 'Border', 'essential-addons-for-elementor-lite' ),
-				'selector' => '{{WRAPPER}} .eael-circle-inner',
+				'selector' => '{{WRAPPER}} .eael-circle-inner, {{WRAPPER}} .eael-circle-inner .eael-circle-item',
 				'exclude'  => [ 'color' ],
 			]
 		);
@@ -366,7 +366,7 @@ class Interactive_Circle extends Widget_Base {
 				'label'     => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-circle-inner' => 'border-color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-inner, {{WRAPPER}} .eael-circle-inner .eael-circle-item' => 'border-color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -745,7 +745,7 @@ class Interactive_Circle extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		$this->eael_interactive_circle_general();
 		$this->eael_interactive_circle_item();
 		$this->eael_interactive_circle_additional();

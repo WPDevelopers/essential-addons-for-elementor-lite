@@ -62,7 +62,7 @@ class Creative_Button extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/creative-buttons/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
 
         if ( !apply_filters( 'eael/pro_enabled', false ) ) {

@@ -60,7 +60,7 @@ class WeForms extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/weforms/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
 
         if (!function_exists('WeForms')) {

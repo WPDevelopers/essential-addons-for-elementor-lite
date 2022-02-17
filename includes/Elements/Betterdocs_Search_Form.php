@@ -71,7 +71,7 @@ class Betterdocs_Search_Form extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/betterdocs-search-form/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
         /*-----------------------------------------------------------------------------------*/
         /*    Content Tab

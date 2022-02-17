@@ -113,7 +113,7 @@ class TypeForm extends Widget_Base {
         $this->end_controls_section();
     }
 
-    protected function _register_controls () {
+    protected function register_controls () {
 
         if ($this->get_personal_token() == '') {
             $this->no_token_set();

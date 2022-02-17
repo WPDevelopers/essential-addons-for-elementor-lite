@@ -74,7 +74,7 @@ class Betterdocs_Category_Box extends Widget_Base {
         return 'https://essential-addons.com/elementor/docs/betterdocs-category-box/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
         /*-----------------------------------------------------------------------------------*/
         /*    Content Tab

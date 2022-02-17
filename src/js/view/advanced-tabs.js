@@ -82,6 +82,8 @@ ea.hooks.addAction("init", "ea", () => {
 				.eq(currentTabIndex)
 				.addClass("active")
 				.removeClass("inactive");
+
+                ea.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
 				
 				$(tabsContent).each(function (index) {
 					$(this).removeClass("active-default");

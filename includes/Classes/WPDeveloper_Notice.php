@@ -241,7 +241,7 @@ class WPDeveloper_Notice {
      * @return integer
      */
     public function makeTime( $current, $time ) {
-        return intval( strtotime( date('Y-m-d h:i:s', $current) . " +$time" ) );
+	    return intval( strtotime( date( 'Y-m-d h:i:s', intval( $current ) ) . " +$time" ) );
     }
     /**
      * Automatice Maybe Later.

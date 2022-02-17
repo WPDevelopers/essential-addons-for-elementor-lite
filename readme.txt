@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 5.0.7
+Stable tag: 5.0.8
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -240,6 +240,23 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.0.8 - 16/02/2022 =
+
+- Improved: Optimized Options table for better performance
+- Fixed: Deprecated control error notices from Elementor
+- Fixed: Assets not loading if parameter is added in the link
+- Fixed: EA Pricing Table | Ribbon style showing despite being deactivated
+- Fixed: EA Advanced Tabs | SVG icon height issue
+- Fixed: EA Product Grid | Image size not changing
+- Fixed: EA Woo Product Slider | Some Style options not working properly
+- Fixed: EA Interactive Circle | Border style changing in mobile view
+- Fixed: EA Countdown | Showing different time in different time zones
+- Fixed: EA Woo Product Carousel | Compatibility issue with the Betheme
+- Fixed: EA Sticky Video | Conflict with Tutor LMS YouTube player
+- Fixed: EA Dual Color Heading | Global Color not working when the gradient color is selected
+- Fixed: EA Event Calendar | All Data not showing for The Event Calendar plugin
+- Few minor bug fixes & improvements
 
 = 5.0.7 - 07/02/2022 =
 

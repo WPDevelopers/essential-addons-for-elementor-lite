@@ -58,7 +58,7 @@ class Post_Timeline extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/post-timeline/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
 
         /**

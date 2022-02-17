@@ -78,7 +78,7 @@ class Betterdocs_Category_Grid extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/betterdocs-category-grid/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
         /*-----------------------------------------------------------------------------------*/
         /*    Content Tab
