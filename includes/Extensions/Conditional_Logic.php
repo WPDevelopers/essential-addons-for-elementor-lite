@@ -340,9 +340,9 @@ class Conditional_Logic {
 					$return = false;
 					if ( is_user_logged_in() ) {
 						$user_roles = get_userdata( get_current_user_id() )->roles;
-						$operand    = ( $cl_logic['user_role_logic'] === 'equal' || $cl_logic['user_role_logic'] === 'not_equal' ) ? $cl_logic['user_role_operand_single'] : $cl_logic['user_role_operand_multi'];
+						$operand    = ( $cl_logic['user_role_logic'] === 'equal' || $cl_logic['user_role_logic'] === 'not_equal' ) ? [ $cl_logic['user_role_operand_single'] ] : $cl_logic['user_role_operand_multi'];
 						$result     = array_intersect( $user_roles, $operand );
-						$return     = count( $result ) > 0;
+						$return     = ( $cl_logic['user_role_logic'] === 'equal' || $cl_logic['user_role_logic'] === 'between' ) ? count( $result ) > 0 : count( $result ) == 0;
 					}
 
 					if ( $needed_any_logic_true && $return ) {
