@@ -98,6 +98,7 @@ function ea_conditional_logic_type_title(value) {
     const labelValues = {
         login_status: eael_select2_localize.cl_login_status,
         user_role: eael_select2_localize.cl_user_role,
+        user: eael_select2_localize.cl_user,
         boolean: eael_select2_localize.cl_boolean,
     };
 

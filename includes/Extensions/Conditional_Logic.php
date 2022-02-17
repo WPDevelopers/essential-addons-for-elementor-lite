@@ -103,6 +103,7 @@ class Conditional_Logic {
 				'options' => [
 					'login_status' => __( 'Login Status', 'essential-addons-for-elementor-lite' ),
 					'user_role'    => __( 'User Role', 'essential-addons-for-elementor-lite' ),
+					'user'         => __( 'User', 'essential-addons-for-elementor-lite' ),
 					'boolean'      => __( 'Boolean', 'essential-addons-for-elementor-lite' ),
 				],
 			]
@@ -224,6 +225,38 @@ class Conditional_Logic {
 							'operator' => '!==',
 							'value'    => 'not_equal',
 						],
+					],
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'user_operand',
+			[
+				'label'       => esc_html__( 'Select Users', 'essential-addons-for-elementor-lite' ),
+				'type'        => 'eael-select2',
+				'source_name' => 'user',
+				'source_type' => 'all',
+				'label_block' => true,
+				'multiple'    => true,
+				'conditions'  => [
+					'relation' => 'and',
+					'terms'    => [
+						[
+							'name'     => 'logic_type',
+							'operator' => '===',
+							'value'    => 'user',
+						],
+//						[
+//							'name'     => 'user_logic',
+//							'operator' => '!==',
+//							'value'    => 'equal',
+//						],
+//						[
+//							'name'     => 'user_logic',
+//							'operator' => '!==',
+//							'value'    => 'not_equal',
+//						],
 					],
 				]
 			]

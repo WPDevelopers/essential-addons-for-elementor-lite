@@ -436,6 +436,17 @@ trait Helper
 
                 $post_list = wp_list_pluck( get_terms( $args ), 'name', 'term_id' );
                 break;
+	        case 'user':
+		        $users = [];
+
+		        foreach ( get_users() as $user ) {
+			        $user_id           = $user->ID;
+			        $user_name         = $user->display_name;
+			        $users[ $user_id ] = $user_name;
+		        }
+
+		        $post_list = $users;
+		        break;
             default:
                 $post_list = HelperClass::get_query_post_list( $post_type, 10, $search );
         }
