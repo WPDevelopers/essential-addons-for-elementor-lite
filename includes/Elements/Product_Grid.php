@@ -3019,9 +3019,10 @@ class Product_Grid extends Widget_Base
 	                $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
 	                $query                    = new \WP_Query( $args );
 	                if ( $query->have_posts() ) {
-		                $found_posts      = $query->found_posts;
-		                $max_page         = ceil( $found_posts / absint( $args['posts_per_page'] ) );
-		                $args['max_page'] = $max_page;
+		                $found_posts        = $query->found_posts;
+		                $max_page           = ceil( $found_posts / absint( $args['posts_per_page'] ) );
+		                $args['max_page']   = $max_page;
+		                $args['total_post'] = $found_posts;
 
 		                printf( '<ul class="products" data-layout-mode="%s">', esc_attr( $settings["eael_product_grid_layout"] ) );
 

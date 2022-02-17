@@ -860,7 +860,7 @@ class Helper
 	 */
 	public static function eael_pagination ($args, $settings) {
 
-		$pagination_Count          = intval( $args['max_page'] );
+		$pagination_Count          = intval( $args['total_post'] );
 		$paginationLimit           = intval( $settings['eael_product_grid_products_count'] ) ?: 4;
 		$pagination_Paginationlist = ceil( $pagination_Count / $paginationLimit );
 		$widget_id                 = sanitize_key( $settings['eael_widget_id'] );
@@ -876,11 +876,10 @@ class Helper
 
 		if( $pagination_Paginationlist > 0 ){
 
-			$setPagination .="<nav id='{$widget_id}-eael-pagination' class='eael-woo-pagination' data-plimit='$paginationLimit' data-totalpage ='{$args['max_page']}' data-widgetid='{$widget_id}' data-pageid='$page_id' data-args='".http_build_query( $args )."'  data-template='".json_encode( $template_info, 1 )."'>";
+			$setPagination .="<nav id='{$widget_id}-eael-pagination' class='eael-woo-pagination' data-plimit='$paginationLimit' data-totalpage ='{$args['total_post']}' data-widgetid='{$widget_id}' data-pageid='$page_id' data-args='".http_build_query( $args )."'  data-template='".json_encode( $template_info, 1 )."'>";
 			    $setPagination .="<ul class='page-numbers'>";
 
                     if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
-
                         for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
                             $active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
 	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
