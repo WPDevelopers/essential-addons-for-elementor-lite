@@ -6,6 +6,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Econdig: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"MIME-Version: 1.0\n"
+"Project-Id-Version: Essential Addons For Elementor Lite\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -1196,7 +1200,7 @@ msgstr ""
 msgid "Count"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:87, ../includes/Elements/Betterdocs_Category_Grid.php:90, ../includes/Elements/Betterdocs_Search_Form.php:83, ../includes/Elements/BetterPayment.php:44, ../includes/Elements/Caldera_Forms.php:67, ../includes/Elements/Career_Page.php:49, ../includes/Elements/Contact_Form_7.php:109, ../includes/Elements/Crowdfundly_All_Campaign.php:38, ../includes/Elements/Crowdfundly_Organization.php:38, ../includes/Elements/Crowdfundly_Single_Campaign.php:38, ../includes/Elements/EmbedPress.php:54, ../includes/Elements/FluentForm.php:107, ../includes/Elements/Formstack.php:75, ../includes/Elements/Formstack.php:96, ../includes/Elements/Formstack.php:117, ../includes/Elements/GravityForms.php:107, ../includes/Elements/NinjaForms.php:72, ../includes/Elements/TypeForm.php:99, ../includes/Elements/WeForms.php:70, ../includes/Elements/Woocommerce_Review.php:52, ../includes/Elements/Woo_Cart.php:114, ../includes/Elements/Woo_Checkout.php:86, ../includes/Elements/Woo_Product_Carousel.php:180, ../includes/Elements/Woo_Product_Gallery.php:95, ../includes/Elements/WpForms.php:69, ../includes/Traits/Woo_Product_Comparable.php:131
+#: ../includes/Elements/Betterdocs_Category_Box.php:87, ../includes/Elements/Betterdocs_Category_Grid.php:90, ../includes/Elements/Betterdocs_Search_Form.php:83, ../includes/Elements/Better_Payment.php:44, ../includes/Elements/Caldera_Forms.php:67, ../includes/Elements/Career_Page.php:49, ../includes/Elements/Contact_Form_7.php:109, ../includes/Elements/Crowdfundly_All_Campaign.php:38, ../includes/Elements/Crowdfundly_Organization.php:38, ../includes/Elements/Crowdfundly_Single_Campaign.php:38, ../includes/Elements/EmbedPress.php:54, ../includes/Elements/FluentForm.php:107, ../includes/Elements/Formstack.php:75, ../includes/Elements/Formstack.php:96, ../includes/Elements/Formstack.php:117, ../includes/Elements/GravityForms.php:107, ../includes/Elements/NinjaForms.php:72, ../includes/Elements/TypeForm.php:99, ../includes/Elements/WeForms.php:70, ../includes/Elements/Woocommerce_Review.php:52, ../includes/Elements/Woo_Cart.php:114, ../includes/Elements/Woo_Checkout.php:86, ../includes/Elements/Woo_Product_Carousel.php:180, ../includes/Elements/Woo_Product_Gallery.php:95, ../includes/Elements/WpForms.php:69, ../includes/Traits/Woo_Product_Comparable.php:131
 msgid "Warning!"
 msgstr ""
 
@@ -1356,11 +1360,11 @@ msgstr ""
 msgid "Item Color"
 msgstr ""
 
-#: ../includes/Elements/BetterPayment.php:19
+#: ../includes/Elements/Better_Payment.php:19
 msgid "Better Payment"
 msgstr ""
 
-#: ../includes/Elements/BetterPayment.php:52
+#: ../includes/Elements/Better_Payment.php:52
 msgid "<strong>Better Payment</strong> is not installed/activated on your site. Please install and activate <a href=\"plugin-install.php?s=better-payment&tab=search&type=tag\" target=\"_blank\">Better Payment</a> first."
 msgstr ""
 
