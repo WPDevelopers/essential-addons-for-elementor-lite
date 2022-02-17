@@ -439,7 +439,7 @@ trait Helper
 	        case 'user':
 		        $users = [];
 
-		        foreach ( get_users() as $user ) {
+		        foreach ( get_users( [ 'search' => "*{$search}*" ] ) as $user ) {
 			        $user_id           = $user->ID;
 			        $user_name         = $user->display_name;
 			        $users[ $user_id ] = $user_name;
