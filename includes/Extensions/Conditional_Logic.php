@@ -140,11 +140,11 @@ class Conditional_Logic {
 				'options'    => [
 					'equal'       => [
 						'title' => esc_html__( 'Is', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fas fa-folder-open',
+						'icon'  => 'fa fa-equals',
 					],
 					'not_equal'   => [
 						'title' => esc_html__( 'Is Not', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fas fa-folder-open',
+						'icon'  => 'fa fa-not-equal',
 					],
 					'between'     => [
 						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
@@ -152,7 +152,7 @@ class Conditional_Logic {
 					],
 					'not_between' => [
 						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fas fa-folder-open',
+						'icon'  => 'far fa-folder-open',
 					],
 				],
 				'default'    => 'between',
