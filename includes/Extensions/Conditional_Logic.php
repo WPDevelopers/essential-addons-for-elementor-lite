@@ -237,11 +237,11 @@ class Conditional_Logic {
 				'options'   => [
 					'true'  => [
 						'title' => esc_html__( 'True', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-user',
+						'icon'  => 'fa fa-check',
 					],
 					'false' => [
 						'title' => esc_html__( 'False', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-user-slash',
+						'icon'  => 'fa fa-times',
 					],
 				],
 				'default'   => 'true',
