@@ -846,80 +846,60 @@ class Helper
 
         return false;
     }
+
 	/**
-	 * Product grid
+	 * eael_pagination
+     * Generate post pagination
+     *
+	 * @param $args array wp_query param
+	 * @param $settings array Elementor widget setting data
+	 *
+     * @access public
+	 * @return string|void
+     * @since 3.3.0
 	 */
 	public static function eael_pagination ($args, $settings) {
-		$args['posts_per_page'] = -1;
 
-		$pagination_Query          = new \WP_Query( $args );
-		$pagination_Count          = count( $pagination_Query->posts );
+		$pagination_Count          = intval( $args['total_post'] );
 		$paginationLimit           = intval( $settings['eael_product_grid_products_count'] ) ?: 4;
 		$pagination_Paginationlist = ceil( $pagination_Count / $paginationLimit );
-		$last                      = ceil( $pagination_Paginationlist );
 		$widget_id                 = sanitize_key( $settings['eael_widget_id'] );
+		$page_id                   = intval( $settings['eael_page_id'] );
 		$next_label                = $settings['pagination_next_label'];
 		$adjacents                 = "2";
 		$setPagination             = "";
+		$template_info             = [
+			'dir'       => 'free',
+			'file_name'  => $settings['eael_dynamic_template_Layout'],
+			'name'      => $settings['eael_widget_name']
+		];
 
 		if( $pagination_Paginationlist > 0 ){
 
-			$setPagination .="<nav class='eael-woo-pagination'>";
-			$setPagination .="<ul class='page-numbers'>";
+			$setPagination .="<nav id='{$widget_id}-eael-pagination' class='eael-woo-pagination' data-plimit='$paginationLimit' data-totalpage ='{$args['total_post']}' data-widgetid='{$widget_id}' data-pageid='$page_id' data-args='".http_build_query( $args )."'  data-template='".json_encode( $template_info, 1 )."'>";
+			    $setPagination .="<ul class='page-numbers'>";
 
-			if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
+                    if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
+                        for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
+                            $active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+                        }
 
-				for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
+                    } else if ( $pagination_Paginationlist >= 5 + ($adjacents * 2) ){
+                        for ( $pagination = 1; $pagination <= 4 + ( $adjacents * 2 ); $pagination ++ ) {
+                            $active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
+	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+                        }
 
-					if ( $pagination == 0 || $pagination == 1 ) {
-						$active = "current";
-					} else {
-						$active = "";
-					}
+                        $setPagination .="<li class='pagitext dots'>...</li>";
+                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+                    }
 
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
+                    if ($pagination_Paginationlist > 1) {
+                        $setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-pnumber='2'>".esc_html( $next_label )."</a></li>";
+                    }
 
-				}
-
-			} else if ( $pagination_Paginationlist > 5 + ($adjacents * 2) ){
-
-				for ( $pagination = 1; $pagination <= 4 + ( $adjacents * 2 ); $pagination ++ ) {
-
-					if ( $pagination == 0 || $pagination == 1 ) {
-						$active = "current";
-					} else {
-						$active = "";
-					}
-
-					$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
-				}
-
-				$setPagination .="<li class='pagitext dots'>...</li>";
-				$setPagination .="<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
-
-			} else {
-
-				for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
-
-					if ( $pagination == 0 || $pagination == 1 ) {
-						$active = "current";
-					} else {
-						$active = "";
-					}
-
-					$setPagination .= "<li><a href='javascript:void(0);' id='post' class='page-numbers $active' data-template='" . json_encode( [ 'dir'       => 'free',
-					                                                                                                                              'file_name' => $settings['eael_dynamic_template_Layout'],
-					                                                                                                                              'name'      => $settings['eael_widget_name']
-						], 1 ) . "' data-widgetid='$widget_id' data-args='" . http_build_query( $args ) . "' data-settings='" . http_build_query( $settings ) . "' data-pnumber='$pagination' data-plimit='$paginationLimit'>$pagination</a></li>";
-				}
-
-			}
-
-			if ($pagination_Paginationlist > 1) {
-				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='$widget_id' data-args='" . http_build_query( $args ) . "' data-settings='" . http_build_query( $settings ) . "' data-pnumber='2' data-plimit='$paginationLimit'>".esc_html( $next_label )."</a></li>";
-			}
-
-			$setPagination .="</ul>";
+                $setPagination .="</ul>";
 			$setPagination .="</nav>";
 
 			return $setPagination;
