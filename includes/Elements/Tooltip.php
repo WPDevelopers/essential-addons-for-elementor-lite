@@ -700,18 +700,17 @@ class Tooltip extends Widget_Base {
 	protected function render( ) {
 
 		$settings = $this->get_settings_for_display();
-		
-   		$target = !empty($settings['eael_tooltip_link']['is_external']) ? 'target="_blank"' : '';
-		$nofollow = isset($settings['eael_tooltip_link']['nofollow']) ? 'rel="nofollow"' : '';
+
 		$icon_migrated = isset($settings['__fa4_migrated']['eael_tooltip_icon_content_new']);
 		$icon_is_new = empty($settings['eael_tooltip_icon_content']);
+        $this->add_link_attributes( 'eael_tooltip_link', (array) $settings['eael_tooltip_link'] );
 	?>
 	<div class="eael-tooltip">
 		<?php if( $settings['eael_tooltip_type'] === 'text' ) : ?>
-			<<?php echo esc_attr( Helper::eael_validate_html_tag($settings['eael_tooltip_content_tag']) ); ?> class="eael-tooltip-content"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a href="<?php echo esc_url( $settings['eael_tooltip_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> ><?php endif; ?><?php echo wp_kses_post($settings['eael_tooltip_content']); ?><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?></a><?php endif; ?></<?php echo esc_attr( Helper::eael_validate_html_tag($settings['eael_tooltip_content_tag']) ); ?>>
+			<<?php echo esc_attr( Helper::eael_validate_html_tag($settings['eael_tooltip_content_tag']) ); ?> class="eael-tooltip-content"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a <?php $this->print_render_attribute_string( 'eael_tooltip_link' ); ?>><?php endif; ?><?php echo wp_kses_post($settings['eael_tooltip_content']); ?><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?></a><?php endif; ?></<?php echo esc_attr( Helper::eael_validate_html_tag($settings['eael_tooltip_content_tag']) ); ?>>
   			<span class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>"><?php echo __( $settings['eael_tooltip_hover_content'] ); ?></span>
   		<?php elseif( $settings['eael_tooltip_type'] === 'icon' ) : ?>
-			<span class="eael-tooltip-content"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a href="<?php echo esc_url( $settings['eael_tooltip_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> ><?php endif; ?>
+			<span class="eael-tooltip-content"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a <?php $this->print_render_attribute_string( 'eael_tooltip_link' ); ?>><?php endif; ?>
 			<?php if ($icon_is_new || $icon_migrated) { ?>
 				<?php if( isset($settings['eael_tooltip_icon_content_new']['value']['url']) ) : ?>
 					<img class="ea-tooltip-svg-trigger" src="<?php echo esc_attr( $settings['eael_tooltip_icon_content_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_tooltip_icon_content_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
@@ -724,7 +723,7 @@ class Tooltip extends Widget_Base {
 			<?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?></a><?php endif; ?></span>
   			<span class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>"><?php echo __( $settings['eael_tooltip_hover_content'] ); ?></span>
   		<?php elseif( $settings['eael_tooltip_type'] === 'image' ) : ?>
-			<span class="eael-tooltip-content"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a href="<?php echo esc_url( $settings['eael_tooltip_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> ><?php endif; ?><img src="<?php echo esc_url( $settings['eael_tooltip_img_content']['url'] ); ?>" alt="<?php echo esc_attr( get_post_meta($settings['eael_tooltip_img_content']['id'], '_wp_attachment_image_alt', true) ); ?>"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?></a><?php endif; ?></span>
+			<span class="eael-tooltip-content"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a <?php $this->print_render_attribute_string( 'eael_tooltip_link' ); ?>><?php endif; ?><img src="<?php echo esc_url( $settings['eael_tooltip_img_content']['url'] ); ?>" alt="<?php echo esc_attr( get_post_meta($settings['eael_tooltip_img_content']['id'], '_wp_attachment_image_alt', true) ); ?>"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?></a><?php endif; ?></span>
   			<span class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>"><?php echo __( $settings['eael_tooltip_hover_content'] ); ?></span>
   		<?php elseif( $settings['eael_tooltip_type'] === 'shortcode' ) : ?>
 			<div class="eael-tooltip-content"><?php echo do_shortcode( $settings['eael_tooltip_shortcode_content'] ); ?></div>

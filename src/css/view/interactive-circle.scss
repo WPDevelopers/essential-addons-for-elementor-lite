@@ -475,7 +475,7 @@
                 height: initial!important;
                 grid-template-columns: repeat(1, 1fr);
                 grid-gap: 20px;
-                border: none;
+                border: none !important;
             }
             .eael-circle-item {
                 border: $nav-circle-border-width solid $nav-circle-border-color;
@@ -1357,10 +1357,10 @@
                 height: initial;
                 grid-template-columns: repeat(1, 1fr);
                 grid-gap: 20px;
-                border: none;
+                border: none !important;
             }
             .eael-circle-item {
-                border: $nav-circle-border-width solid $nav-circle-border-color;
+                border: $nav-circle-border-width solid #FFE6DC;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -1864,7 +1864,7 @@
                 height: initial;
                 grid-template-columns: repeat(1, 1fr);
                 grid-gap: 20px;
-                border: none;
+                border: none !important;
             }
             .eael-circle-item {
                 border: $nav-circle-border-width solid $nav-circle-border-color;
@@ -1969,7 +1969,7 @@
                 height: auto!important;
                 grid-template-columns: repeat(1, 1fr);
                 grid-gap: 20px;
-                border: none!important;
+                border: none !important;
             }
             .eael-circle-item {
                 border: $nav-circle-border-width solid $nav-circle-border-color;
@@ -2400,6 +2400,12 @@
                     //}
                 }
             }
+        }
+    }
+
+    @media only screen and (min-width: $breakpoint + 1) {
+        .eael-circle-info .eael-circle-inner .eael-circle-item {
+            border: none !important;
         }
     }
 }

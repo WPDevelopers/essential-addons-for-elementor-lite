@@ -60,7 +60,7 @@ class Info_Box extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/info-box/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
 
         /**

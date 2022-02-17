@@ -42,7 +42,7 @@ class Career_Page extends Widget_Base {
         return 'https://easy.jobs/docs/';
     }
 
-	protected function _register_controls() {
+	protected function register_controls() {
         $this->start_controls_section(
             'eael_global_warning',
             [

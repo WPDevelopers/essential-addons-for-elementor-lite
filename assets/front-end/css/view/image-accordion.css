@@ -53,6 +53,9 @@
   -webkit-transition: background-color 0.4s;
   -o-transition: background-color 0.4s;
   transition: background-color 0.4s;
+  opacity: 1;
+  visibility: visible;
+  background: transparent;
 }
 .eael-img-accordion-horizontal-align-left .overlay {
   -webkit-box-pack: start;

@@ -74,7 +74,7 @@ class Post_Grid extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/post-grid/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
         /**
          * Query And Layout Controls!
@@ -1043,6 +1043,8 @@ class Post_Grid extends Widget_Base
 
 	    if ( ! in_array( $settings['post_type'], [ 'post', 'page', 'product', 'by_id', 'source_dynamic' ] ) ) {
 		    $settings['eael_post_terms'] = $settings["eael_{$settings['post_type']}_terms"];
+	    } elseif ( $settings['post_type'] === 'product' ) {
+		    $settings['eael_post_terms'] = $settings['eael_post_terms'] === 'category' ? 'product_cat' : ( $settings['eael_post_terms'] === 'tags' ? 'product_tag' : $settings['eael_post_terms'] );
 	    }
 
         $link_settings = [

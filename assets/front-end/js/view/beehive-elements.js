@@ -81,19 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/view/advanced-accordion.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/view/beehive-elements.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/js/view/advanced-accordion.js":
-/*!*******************************************!*\
-  !*** ./src/js/view/advanced-accordion.js ***!
-  \*******************************************/
+/***/ "./src/js/view/beehive-elements.js":
+/*!*****************************************!*\
+  !*** ./src/js/view/beehive-elements.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("ea.hooks.addAction(\"init\", \"ea\", function () {\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/eael-adv-accordion.default\", function ($scope, $) {\n    var hashTag = window.location.hash.substr(1);\n    hashTag = hashTag === 'safari' ? 'eael-safari' : hashTag;\n    var hashTagExists = false;\n    var $advanceAccordion = $scope.find(\".eael-adv-accordion\"),\n        $accordionHeader = $scope.find(\".eael-accordion-header\"),\n        $accordionType = $advanceAccordion.data(\"accordion-type\"),\n        $accordionSpeed = $advanceAccordion.data(\"toogle-speed\"); // Open default actived tab\n\n    if (hashTag) {\n      $accordionHeader.each(function () {\n        if ($(this).attr(\"id\") == hashTag) {\n          hashTagExists = true;\n          $(this).addClass(\"show active\");\n          $(this).next().slideDown($accordionSpeed);\n        }\n      });\n    }\n\n    if (hashTagExists === false) {\n      $accordionHeader.each(function () {\n        if ($(this).hasClass(\"active-default\")) {\n          $(this).addClass(\"show active\");\n          $(this).next().slideDown($accordionSpeed);\n        }\n      });\n    } // Remove multiple click event for nested accordion\n\n\n    $accordionHeader.unbind(\"click\");\n    $accordionHeader.click(function (e) {\n      e.preventDefault();\n      var $this = $(this);\n\n      if ($accordionType === \"accordion\") {\n        if ($this.hasClass(\"show\")) {\n          $this.removeClass(\"show active\");\n          $this.next().slideUp($accordionSpeed);\n        } else {\n          $this.parent().parent().find(\".eael-accordion-header\").removeClass(\"show active\");\n          $this.parent().parent().find(\".eael-accordion-content\").slideUp($accordionSpeed);\n          $this.toggleClass(\"show active\");\n          $this.next().slideToggle($accordionSpeed);\n        }\n      } else {\n        // For acccordion type 'toggle'\n        if ($this.hasClass(\"show\")) {\n          $this.removeClass(\"show active\");\n          $this.next().slideUp($accordionSpeed);\n        } else {\n          $this.addClass(\"show active\");\n          $this.next().slideDown($accordionSpeed);\n        }\n      }\n\n      ea.hooks.doAction(\"widgets.reinit\", $this.parent());\n      ea.hooks.doAction(\"ea-advanced-accordion-triggered\", $this.next());\n    });\n  });\n});\n\n//# sourceURL=webpack:///./src/js/view/advanced-accordion.js?");
+eval("var beeHiveSwiper = function beeHiveSwiper($scope, $) {\n  var bhSwiper;\n\n  if ('undefined' === typeof Swiper) {\n    bhSwiper = elementorFrontend.utils.swiper;\n  } else {\n    bhSwiper = Swiper;\n  } // Init swiper slider\n\n\n  new bhSwiper('.swiper-slider-container', {\n    effect: 'fade',\n    autoplay: {\n      delay: 5000,\n      disableOnInteraction: false\n    },\n    navigation: {\n      nextEl: '.swiper-button-next',\n      prevEl: '.swiper-button-prev'\n    }\n  });\n};\n\njQuery(window).on(\"elementor/frontend/init\", function () {\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/beehive-image-slider.default\", beeHiveSwiper);\n});\n\n//# sourceURL=webpack:///./src/js/view/beehive-elements.js?");
 
 /***/ })
 
