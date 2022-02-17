@@ -61,7 +61,7 @@ msgstr ""
 msgid "Install Now!"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:188, ../includes/Classes/WPDeveloper_Setup_Wizard.php:517, ../includes/Classes/WPDeveloper_Setup_Wizard.php:543, ../includes/Traits/Admin.php:141, ../includes/Traits/Helper.php:890, ../includes/Traits/Library.php:158
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:188, ../includes/Classes/WPDeveloper_Setup_Wizard.php:517, ../includes/Classes/WPDeveloper_Setup_Wizard.php:543, ../includes/Traits/Admin.php:141, ../includes/Traits/Helper.php:876, ../includes/Traits/Library.php:158
 msgid "you are not allowed to do this action"
 msgstr ""
 
@@ -197,7 +197,7 @@ msgstr ""
 msgid "Upgrade to PRO"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:324, ../includes/Traits/Helper.php:866, ../includes/templates/admin/general.php:31
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:324, ../includes/Traits/Helper.php:852, ../includes/templates/admin/general.php:31
 msgid "Install Templately"
 msgstr ""
 
@@ -1208,7 +1208,7 @@ msgstr ""
 msgid "File Not Found"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:1185, ../includes/Elements/Betterdocs_Category_Box.php:1150, ../includes/Elements/Betterdocs_Category_Grid.php:1687, ../includes/Elements/Betterdocs_Category_Grid.php:1654, ../includes/Elements/Post_Grid.php:1100, ../includes/Elements/Post_Timeline.php:498, ../includes/Elements/Product_Grid.php:3037, ../includes/Elements/Woo_Product_Gallery.php:2390
+#: ../includes/Elements/Betterdocs_Category_Box.php:1185, ../includes/Elements/Betterdocs_Category_Box.php:1150, ../includes/Elements/Betterdocs_Category_Grid.php:1687, ../includes/Elements/Betterdocs_Category_Grid.php:1654, ../includes/Elements/Post_Grid.php:1100, ../includes/Elements/Post_Timeline.php:498, ../includes/Elements/Product_Grid.php:3038, ../includes/Elements/Woo_Product_Gallery.php:2390
 msgid "<p class=\"no-posts-found\">No posts found!</p>"
 msgstr ""
 
@@ -5295,7 +5295,7 @@ msgstr ""
 msgid "Date Text Color"
 msgstr ""
 
-#: ../includes/Elements/Post_Timeline.php:502, ../includes/Elements/Product_Grid.php:3041, ../includes/Elements/Woo_Product_Gallery.php:2393
+#: ../includes/Elements/Post_Timeline.php:502, ../includes/Elements/Product_Grid.php:3042, ../includes/Elements/Woo_Product_Gallery.php:2393
 msgid "<p class=\"no-posts-found\">No layout found!</p>"
 msgstr ""
 
@@ -8135,23 +8135,23 @@ msgstr ""
 msgid "Post ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Helper.php:57, ../includes/Traits/Helper.php:616, ../includes/Traits/Helper.php:671, ../includes/Traits/Helper.php:1002, ../includes/Traits/Login_Registration.php:62, ../includes/Traits/Login_Registration.php:227, ../includes/Traits/Woo_Product_Comparable.php:2133
+#: ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Helper.php:57, ../includes/Traits/Helper.php:616, ../includes/Traits/Helper.php:672, ../includes/Traits/Helper.php:988, ../includes/Traits/Login_Registration.php:62, ../includes/Traits/Login_Registration.php:227, ../includes/Traits/Woo_Product_Comparable.php:2133
 msgid "Widget ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:29, ../includes/Traits/Helper.php:974, ../includes/Traits/Login_Registration.php:79, ../includes/Traits/Login_Registration.php:200
+#: ../includes/Traits/Helper.php:29, ../includes/Traits/Helper.php:960, ../includes/Traits/Login_Registration.php:79, ../includes/Traits/Login_Registration.php:200
 msgid "Insecure form submitted without security token"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:37, ../includes/Traits/Helper.php:982, ../includes/Traits/Login_Registration.php:92, ../includes/Traits/Login_Registration.php:210, ../includes/Traits/Woo_Product_Comparable.php:2170
+#: ../includes/Traits/Helper.php:37, ../includes/Traits/Helper.php:968, ../includes/Traits/Login_Registration.php:92, ../includes/Traits/Login_Registration.php:210, ../includes/Traits/Woo_Product_Comparable.php:2170
 msgid "Security token did not match"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:47, ../includes/Traits/Helper.php:609, ../includes/Traits/Helper.php:664, ../includes/Traits/Helper.php:992, ../includes/Traits/Login_Registration.php:55, ../includes/Traits/Login_Registration.php:222, ../includes/Traits/Woo_Product_Comparable.php:2128
+#: ../includes/Traits/Helper.php:47, ../includes/Traits/Helper.php:609, ../includes/Traits/Helper.php:665, ../includes/Traits/Helper.php:978, ../includes/Traits/Login_Registration.php:55, ../includes/Traits/Login_Registration.php:222, ../includes/Traits/Woo_Product_Comparable.php:2128
 msgid "Page ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:67, ../includes/Traits/Helper.php:622, ../includes/Traits/Helper.php:678, ../includes/Traits/Helper.php:1011
+#: ../includes/Traits/Helper.php:67, ../includes/Traits/Helper.php:622, ../includes/Traits/Helper.php:679, ../includes/Traits/Helper.php:997
 msgid "Widget settings are not found. Did you save the widget before using load more??"
 msgstr ""
 
@@ -8163,35 +8163,35 @@ msgstr ""
 msgid "%s ago"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:848
+#: ../includes/Traits/Helper.php:834
 msgid "1,700+ Stunning Templates"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:849
+#: ../includes/Traits/Helper.php:835
 msgid "Supports Elementor & Gutenberg"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:850
+#: ../includes/Traits/Helper.php:836
 msgid "Powering up 100,000+ Websites"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:851
+#: ../includes/Traits/Helper.php:837
 msgid "Cloud Collaboration with Team"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:860
+#: ../includes/Traits/Helper.php:846
 msgid "Don’t Show This Again"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:872
+#: ../includes/Traits/Helper.php:858
 msgid "Activate Templately"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:869
+#: ../includes/Traits/Helper.php:855
 msgid "Activated Templately"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:875, ../includes/templates/admin/popup.php:169
+#: ../includes/Traits/Helper.php:861, ../includes/templates/admin/popup.php:169
 msgid "Submit"
 msgstr ""
 
