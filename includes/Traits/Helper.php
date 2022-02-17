@@ -704,7 +704,7 @@ trait Helper
 			$setPagination .="<ul class='page-numbers'>";
 
 			if( 1< $paginationNumber ){
-				$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-template='".json_encode([ 'dir'   => 'free', 'file_name' => $settings['eael_dynamic_template_Layout'], 'name' => $settings['eael_widget_name'] ], 1)."' data-widgetid='".esc_attr( $widget_id )."' data-pageid='".$page_id."' data-args='".http_build_query($args)."' data-settings='".http_build_query($settings)."' data-pnumber='$paginationprev' data-plimit='$paginationLimit'>$prev_label</a></li>";
+				$setPagination .="<li class='pagitext'><a href='javascript:void(0);' class='page-numbers'   data-pnumber='$paginationprev' >$prev_label</a></li>";
 			}
 
 			if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
