@@ -5,6 +5,7 @@ namespace Essential_Addons_Elementor\Extensions;
 use Elementor\Controls_Manager;
 use Elementor\Element_Base;
 use Elementor\Repeater;
+use \Essential_Addons_Elementor\Classes\Helper as ControlsHelper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -104,6 +105,7 @@ class Conditional_Logic {
 					'login_status' => __( 'Login Status', 'essential-addons-for-elementor-lite' ),
 					'user_role'    => __( 'User Role', 'essential-addons-for-elementor-lite' ),
 					'user'         => __( 'User', 'essential-addons-for-elementor-lite' ),
+					'post_type'    => __( 'Post Type', 'essential-addons-for-elementor-lite' ),
 					'boolean'      => __( 'Boolean', 'essential-addons-for-elementor-lite' ),
 				],
 			]
@@ -266,6 +268,105 @@ class Conditional_Logic {
 				'multiple'    => true,
 				'condition'   => [
 					'logic_type' => 'user',
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'post_type_logic',
+			[
+				'label'      => __( 'Post Type Logic', 'essential-addons-for-elementor-lite' ),
+				'show_label' => false,
+				'type'       => Controls_Manager::CHOOSE,
+				'options'    => [
+					'equal'       => [
+						'title' => esc_html__( 'Is', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-equals',
+					],
+					'not_equal'   => [
+						'title' => esc_html__( 'Is Not', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-not-equal',
+					],
+					'between'     => [
+						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-folder-open',
+					],
+					'not_between' => [
+						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'far fa-folder-open',
+					],
+				],
+				'default'    => 'equal',
+				'toggle'     => false,
+				'condition'  => [
+					'logic_type' => 'post_type',
+				]
+			]
+		);
+
+		$post_types = ControlsHelper::get_post_types();
+
+		$repeater->add_control(
+			'post_type_operand_multiple',
+			[
+				'label'       => esc_html__( 'Select Post Types', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::SELECT2,
+				'label_block' => true,
+				'show_label'  => false,
+				'multiple'    => true,
+				'options'     => $post_types,
+				'default'     => key( $post_types ),
+				'conditions'  => [
+					'relation' => 'and',
+					'terms'    => [
+						[
+							'name'     => 'logic_type',
+							'operator' => '===',
+							'value'    => 'post_type',
+						],
+						[
+							'name'     => 'post_type_logic',
+							'operator' => '!==',
+							'value'    => 'equal',
+						],
+						[
+							'name'     => 'post_type_logic',
+							'operator' => '!==',
+							'value'    => 'not_equal',
+						],
+					],
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'post_type_operand_single',
+			[
+				'label'       => esc_html__( 'Select Post Type', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::SELECT,
+				'label_block' => true,
+				'show_label'  => false,
+				'options'     => $post_types,
+				'default'     => key( $post_types ),
+				'conditions'  => [
+					'relation' => 'and',
+					'terms'    => [
+						[
+							'name'     => 'logic_type',
+							'operator' => '===',
+							'value'    => 'post_type',
+						],
+						[
+							'name'     => 'post_type_logic',
+							'operator' => '!==',
+							'value'    => 'between',
+						],
+						[
+							'name'     => 'post_type_logic',
+							'operator' => '!==',
+							'value'    => 'not_between',
+						],
+					],
 				]
 			]
 		);
