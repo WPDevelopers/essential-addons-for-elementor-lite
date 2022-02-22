@@ -368,6 +368,10 @@ class advancedDataTableEdit {
 		ea.hooks.doAction("advancedDataTable.afterInitPanel", panel, model, view);
 		
 		model.once("editor:close", () => {
+
+			if ( !eaTable ) {
+				return false;
+			}
 			// parse table html
 			let origTable = this.parseHTML(eaTable.cloneNode(true));
 			this.tableInnerHTML = origTable.innerHTML;
