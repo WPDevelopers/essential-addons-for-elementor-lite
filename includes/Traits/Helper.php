@@ -486,6 +486,17 @@ trait Helper
 
                 $response = wp_list_pluck( get_terms( $args ), 'name', 'term_id' );
                 break;
+	        case 'user':
+		        $users = [];
+
+		        foreach ( get_users( [ 'include' => $ids ] ) as $user ) {
+			        $user_id           = $user->ID;
+			        $user_name         = $user->display_name;
+			        $users[ $user_id ] = $user_name;
+		        }
+
+		        $response = $users;
+		        break;
             default:
                 $post_info = get_posts( [ 'post_type' => sanitize_text_field( $_POST[ 'post_type' ] ), 'include' => implode( ',', $ids ) ] );
                 $response  = wp_list_pluck( $post_info, 'post_title', 'ID' );
