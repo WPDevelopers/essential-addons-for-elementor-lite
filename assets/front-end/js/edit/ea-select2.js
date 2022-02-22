@@ -99,6 +99,7 @@ function ea_conditional_logic_type_title(value) {
         login_status: eael_select2_localize.cl_login_status,
         user_role: eael_select2_localize.cl_user_role,
         user: eael_select2_localize.cl_user,
+        post_type: eael_select2_localize.cl_post_type,
         boolean: eael_select2_localize.cl_boolean,
     };
 
