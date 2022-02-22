@@ -395,6 +395,23 @@ class Conditional_Logic {
 					}
 
 					break;
+				case 'user':
+					$return = false;
+					if ( is_user_logged_in() ) {
+						$user    = get_current_user_id();
+						$operand = array_map( 'intval', $cl_logic['user_operand'] );
+						$return  = $cl_logic['user_logic'] === 'between' ? in_array( $user, $operand ) : ! in_array( $user, $operand );
+					}
+
+					if ( $needed_any_logic_true && $return ) {
+						break( 2 );
+					}
+
+					if ( $needed_all_logic_true && ! $return ) {
+						break( 2 );
+					}
+
+					break;
 				case 'boolean':
 					$return = $cl_logic['boolean_operand'] === 'true' ? true : false;
 
