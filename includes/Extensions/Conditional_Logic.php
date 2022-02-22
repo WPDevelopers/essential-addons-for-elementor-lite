@@ -307,7 +307,7 @@ class Conditional_Logic {
 		$post_types = ControlsHelper::get_post_types();
 
 		$repeater->add_control(
-			'post_type_operand_multiple',
+			'post_type_operand_multi',
 			[
 				'label'       => esc_html__( 'Select Post Types', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::SELECT2,
@@ -503,6 +503,21 @@ class Conditional_Logic {
 						$operand = array_map( 'intval', $cl_logic['user_operand'] );
 						$return  = $cl_logic['user_logic'] === 'between' ? in_array( $user, $operand ) : ! in_array( $user, $operand );
 					}
+
+					if ( $needed_any_logic_true && $return ) {
+						break( 2 );
+					}
+
+					if ( $needed_all_logic_true && ! $return ) {
+						break( 2 );
+					}
+
+					break;
+				case 'post_type':
+					$ID        = get_the_ID();
+					$post_type = get_post_type( $ID );
+					$operand   = ( $cl_logic['post_type_logic'] === 'equal' || $cl_logic['post_type_logic'] === 'not_equal' ) ? [ $cl_logic['post_type_operand_single'] ] : $cl_logic['post_type_operand_multi'];
+					$return    = ( $cl_logic['post_type_logic'] === 'equal' || $cl_logic['post_type_logic'] === 'between' ) ? in_array( $post_type, $operand ) : ! in_array( $post_type, $operand );
 
 					if ( $needed_any_logic_true && $return ) {
 						break( 2 );
