@@ -106,6 +106,7 @@ class Conditional_Logic {
 					'user_role'    => __( 'User Role', 'essential-addons-for-elementor-lite' ),
 					'user'         => __( 'User', 'essential-addons-for-elementor-lite' ),
 					'post_type'    => __( 'Post Type', 'essential-addons-for-elementor-lite' ),
+					'post'         => __( 'Post', 'essential-addons-for-elementor-lite' ),
 					'boolean'      => __( 'Boolean', 'essential-addons-for-elementor-lite' ),
 				],
 			]
@@ -367,6 +368,46 @@ class Conditional_Logic {
 							'value'    => 'not_between',
 						],
 					],
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'post_logic',
+			[
+				'label'      => __( 'Post Logic', 'essential-addons-for-elementor-lite' ),
+				'show_label' => false,
+				'type'       => Controls_Manager::CHOOSE,
+				'options'    => [
+					'between'     => [
+						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-folder-open',
+					],
+					'not_between' => [
+						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'far fa-folder-open',
+					],
+				],
+				'default'    => 'between',
+				'toggle'     => false,
+				'condition'  => [
+					'logic_type' => 'post',
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'post_operand',
+			[
+				'label'       => esc_html__( 'Select Posts', 'essential-addons-for-elementor-lite' ),
+				'type'        => 'eael-select2',
+				'source_name' => 'post_type',
+				'source_type' => 'any',
+				'label_block' => true,
+				'show_label'  => false,
+				'multiple'    => true,
+				'condition'   => [
+					'logic_type' => 'post',
 				]
 			]
 		);
