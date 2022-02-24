@@ -540,6 +540,7 @@ class Conditional_Logic {
 			'mac_ie'    => __( 'Internet Explorer for Mac OS X', 'essential-addons-for-elementor-lite' ),
 			'netscape4' => __( 'Netscape 4', 'essential-addons-for-elementor-lite' ),
 			'lynx'      => __( 'Lynx', 'essential-addons-for-elementor-lite' ),
+			'others'     => __( 'Others', 'essential-addons-for-elementor-lite' ),
 		];
 	}
 
@@ -548,10 +549,10 @@ class Conditional_Logic {
 	 *
 	 * @return string
 	 */
-	public function current_browser() {
+	public function get_current_browser() {
 		global $is_lynx, $is_gecko, $is_winIE, $is_macIE, $is_opera, $is_NS4, $is_safari, $is_chrome, $is_iphone, $is_edge;
 
-		$browser = 'other';
+		$browser = 'others';
 
 		switch ( true ) {
 			case $is_chrome:
@@ -681,6 +682,20 @@ class Conditional_Logic {
 					$ID      = get_the_ID();
 					$operand = $cl_logic['post_operand'];
 					$return  = $cl_logic['post_logic'] === 'between' ? in_array( $ID, $operand ) : ! in_array( $ID, $operand );
+
+					if ( $needed_any_logic_true && $return ) {
+						break( 2 );
+					}
+
+					if ( $needed_all_logic_true && ! $return ) {
+						break( 2 );
+					}
+
+					break;
+				case 'browser':
+					$browser = $this->get_current_browser();
+					$operand = $cl_logic['browser_operand'];
+					$return  = $cl_logic['browser_logic'] === 'between' ? in_array( $browser, $operand ) : ! in_array( $browser, $operand );
 
 					if ( $needed_any_logic_true && $return ) {
 						break( 2 );
