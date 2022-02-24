@@ -414,6 +414,46 @@ class Conditional_Logic {
 		);
 
 		$repeater->add_control(
+			'browser_logic',
+			[
+				'label'      => __( 'Browser Logic', 'essential-addons-for-elementor-lite' ),
+				'show_label' => false,
+				'type'       => Controls_Manager::CHOOSE,
+				'options'    => [
+					'between'     => [
+						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-folder-open',
+					],
+					'not_between' => [
+						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'far fa-folder-open',
+					],
+				],
+				'default'    => 'between',
+				'toggle'     => false,
+				'condition'  => [
+					'logic_type' => 'browser',
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'browser_operand',
+			[
+				'label'       => __( 'Browser List', 'essential-addons-for-elementor-lite' ),
+				'show_label'  => false,
+				'label_block' => true,
+				'type'        => Controls_Manager::SELECT2,
+				'multiple'    => true,
+				'options'     => $this->get_browser_list(),
+				'default'     => key( $this->get_browser_list() ),
+				'condition'   => [
+					'logic_type' => 'browser',
+				]
+			]
+		);
+
+		$repeater->add_control(
 			'boolean_operand',
 			[
 				'label'     => __( 'Boolean Type', 'essential-addons-for-elementor-lite' ),
@@ -481,6 +521,26 @@ class Conditional_Logic {
 		}
 
 		return $wp_roles;
+	}
+
+	/**
+	 * Get all browser list and return array with simple slug|name pare
+	 *
+	 * @return array
+	 */
+	public function get_browser_list() {
+		return [
+			'chrome'    => __( 'Google Chrome', 'essential-addons-for-elementor-lite' ),
+			'firefox'   => __( 'Mozilla Firefox', 'essential-addons-for-elementor-lite' ),
+			'safari'    => __( 'Safari', 'essential-addons-for-elementor-lite' ),
+			'i_safari'  => __( 'Iphone Safari', 'essential-addons-for-elementor-lite' ),
+			'opera'     => __( 'Opera', 'essential-addons-for-elementor-lite' ),
+			'edge'      => __( 'Edge', 'essential-addons-for-elementor-lite' ),
+			'ie'        => __( 'Internet Explorer', 'essential-addons-for-elementor-lite' ),
+			'mac_ie'    => __( 'Internet Explorer for Mac OS X', 'essential-addons-for-elementor-lite' ),
+			'netscape4' => __( 'Netscape 4', 'essential-addons-for-elementor-lite' ),
+			'lynx'      => __( 'Lynx', 'essential-addons-for-elementor-lite' ),
+		];
 	}
 
 	public function parse_arg( $arg ) {
