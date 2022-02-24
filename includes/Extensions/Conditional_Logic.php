@@ -26,7 +26,7 @@ class Conditional_Logic {
 			'eael_conditional_logic_section',
 			[
 				'label' => __( '<i class="eaicon-logo"></i> Conditional Logic', 'essential-addons-for-elementor-lite' ),
-				'tab'   => Controls_Manager::TAB_ADVANCED
+				'tab'   => Controls_Manager::TAB_CONTENT
 			]
 		);
 
@@ -107,6 +107,7 @@ class Conditional_Logic {
 					'user'         => __( 'User', 'essential-addons-for-elementor-lite' ),
 					'post_type'    => __( 'Post Type', 'essential-addons-for-elementor-lite' ),
 					'post'         => __( 'Post', 'essential-addons-for-elementor-lite' ),
+					'browser'      => __( 'Browser', 'essential-addons-for-elementor-lite' ),
 					'boolean'      => __( 'Boolean', 'essential-addons-for-elementor-lite' ),
 				],
 			]
