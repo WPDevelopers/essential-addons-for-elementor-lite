@@ -26,7 +26,7 @@ class Conditional_Logic {
 			'eael_conditional_logic_section',
 			[
 				'label' => __( '<i class="eaicon-logo"></i> Conditional Logic', 'essential-addons-for-elementor-lite' ),
-				'tab'   => Controls_Manager::TAB_CONTENT
+				'tab'   => Controls_Manager::TAB_ADVANCED
 			]
 		);
 
@@ -541,6 +541,53 @@ class Conditional_Logic {
 			'netscape4' => __( 'Netscape 4', 'essential-addons-for-elementor-lite' ),
 			'lynx'      => __( 'Lynx', 'essential-addons-for-elementor-lite' ),
 		];
+	}
+
+	/**
+	 * Get current browser
+	 *
+	 * @return string
+	 */
+	public function current_browser() {
+		global $is_lynx, $is_gecko, $is_winIE, $is_macIE, $is_opera, $is_NS4, $is_safari, $is_chrome, $is_iphone, $is_edge;
+
+		$browser = 'other';
+
+		switch ( true ) {
+			case $is_chrome:
+				$browser = 'chrome';
+				break;
+			case $is_gecko:
+				$browser = 'firefox';
+				break;
+			case $is_safari:
+				$browser = 'safari';
+				break;
+			case $is_iphone:
+				$browser = 'i_safari';
+				break;
+			case $is_opera:
+				$browser = 'opera';
+				break;
+			case $is_edge:
+				$browser = 'edge';
+				break;
+			case $is_winIE:
+				$browser = 'ie';
+				break;
+			case $is_macIE:
+				$browser = 'mac_ie';
+				break;
+			case $is_NS4:
+				$browser = 'netscape4';
+				break;
+			case $is_lynx:
+				$browser = 'lynx';
+				break;
+
+		}
+
+		return $browser;
 	}
 
 	public function parse_arg( $arg ) {
