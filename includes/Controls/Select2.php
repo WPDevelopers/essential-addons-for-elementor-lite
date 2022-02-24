@@ -36,6 +36,7 @@ class Select2 extends Base_Data_Control
 				'cl_user'         => __( 'Current User', 'essential-addons-for-elementor-lite' ),
 				'cl_post_type'    => __( 'Post Type', 'essential-addons-for-elementor-lite' ),
 				'cl_post'         => __( 'Current Post', 'essential-addons-for-elementor-lite' ),
+				'cl_browser'      => __( 'Browser', 'essential-addons-for-elementor-lite' ),
 				'cl_boolean'      => __( 'Boolean Type', 'essential-addons-for-elementor-lite' ),
 			]
 		);

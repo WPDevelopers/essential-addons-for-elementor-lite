@@ -101,6 +101,7 @@ function ea_conditional_logic_type_title(value) {
         user: eael_select2_localize.cl_user,
         post_type: eael_select2_localize.cl_post_type,
         post: eael_select2_localize.cl_post,
+        browser: eael_select2_localize.cl_browser,
         boolean: eael_select2_localize.cl_boolean,
     };
 
