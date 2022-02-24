@@ -428,6 +428,31 @@ class Cta_Box extends Widget_Base
                 'default' => '#f4f4f4',
                 'selectors' => [
                     '{{WRAPPER}} .eael-call-to-action' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action.bg-img:after' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_cta_bg_color_opacity',
+            [
+                'label' => esc_html__('Background Color Opacity', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+					'px' => [
+						'max' => 1,
+						'min' => 0.10,
+						'step' => 0.01,
+					],
+				],
+                'default' => [
+					'size' => .8,
+				],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action.bg-img:after' => 'opacity: {{SIZE}};',
+                ],
+                'condition' => [
+                    'eael_cta_color_type!' => 'cta-bg-color',
                 ],
             ]
         );
