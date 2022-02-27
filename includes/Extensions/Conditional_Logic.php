@@ -18,7 +18,11 @@ class Conditional_Logic {
 	 */
 	public function __construct() {
 		add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'register_controls' ] );
+		add_action( 'elementor/element/column/section_advanced/after_section_end', [ $this, 'register_controls' ] );
+		add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'register_controls' ] );
 		add_filter( 'elementor/frontend/widget/should_render', [ $this, 'content_render' ], 10, 2 );
+		add_filter( 'elementor/frontend/column/should_render', [ $this, 'content_render' ], 10, 2 );
+		add_filter( 'elementor/frontend/section/should_render', [ $this, 'content_render' ], 10, 2 );
 	}
 
 	public function register_controls( $element ) {
