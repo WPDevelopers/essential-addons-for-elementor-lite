@@ -102,6 +102,7 @@ function ea_conditional_logic_type_title(value) {
         post_type: eael_select2_localize.cl_post_type,
         post: eael_select2_localize.cl_post,
         browser: eael_select2_localize.cl_browser,
+        date_time: eael_select2_localize.cl_date_time,
         boolean: eael_select2_localize.cl_boolean,
     };
 
