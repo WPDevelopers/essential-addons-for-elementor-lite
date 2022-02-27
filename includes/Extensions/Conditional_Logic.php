@@ -109,7 +109,6 @@ class Conditional_Logic {
 					'post'         => __( 'Post', 'essential-addons-for-elementor-lite' ),
 					'browser'      => __( 'Browser', 'essential-addons-for-elementor-lite' ),
 					'date_time'    => __( 'Date & Time', 'essential-addons-for-elementor-lite' ),
-					'boolean'      => __( 'Boolean', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);
@@ -589,29 +588,6 @@ class Conditional_Logic {
 			]
 		);
 
-		$repeater->add_control(
-			'boolean_operand',
-			[
-				'label'     => __( 'Boolean Type', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::CHOOSE,
-				'options'   => [
-					'true'  => [
-						'title' => esc_html__( 'True', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-check',
-					],
-					'false' => [
-						'title' => esc_html__( 'False', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-times',
-					],
-				],
-				'default'   => 'true',
-				'toggle'    => false,
-				'condition' => [
-					'logic_type' => 'boolean',
-				]
-			]
-		);
-
 		$element->add_control(
 			'eael_cl_logics',
 			[
@@ -847,18 +823,6 @@ class Conditional_Logic {
 					$from         = ( $cl_logic['date_time_logic'] === 'equal' || $cl_logic['date_time_logic'] === 'not_equal' ) ? strtotime( "{$cl_logic['single_date']} 00:00:00" ) : strtotime( $cl_logic['from_date'] );
 					$to           = ( $cl_logic['date_time_logic'] === 'equal' || $cl_logic['date_time_logic'] === 'not_equal' ) ? strtotime( "{$cl_logic['single_date']} 23:59:59" ) : strtotime( $cl_logic['to_date'] );
 					$return       = $cl_logic['date_time_logic'] === 'equal' || $cl_logic['date_time_logic'] === 'between' ? $from <= $current_time && $current_time <= $to : $from >= $current_time || $current_time >= $to;
-
-					if ( $needed_any_logic_true && $return ) {
-						break( 2 );
-					}
-
-					if ( $needed_all_logic_true && ! $return ) {
-						break( 2 );
-					}
-
-					break;
-				case 'boolean':
-					$return = $cl_logic['boolean_operand'] === 'true' ? true : false;
 
 					if ( $needed_any_logic_true && $return ) {
 						break( 2 );
