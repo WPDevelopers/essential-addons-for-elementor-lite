@@ -38,7 +38,6 @@ class Select2 extends Base_Data_Control
 				'cl_post'         => __( 'Current Post', 'essential-addons-for-elementor-lite' ),
 				'cl_browser'      => __( 'Browser', 'essential-addons-for-elementor-lite' ),
 				'cl_date_time'    => __( 'Date and Time', 'essential-addons-for-elementor-lite' ),
-				'cl_boolean'      => __( 'Boolean Type', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 		wp_enqueue_script( 'eael-select2' );
