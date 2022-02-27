@@ -842,6 +842,21 @@ class Conditional_Logic {
 					}
 
 					break;
+				case 'date_time':
+					$current_time = current_time( 'U' );
+					$from         = ( $cl_logic['date_time_logic'] === 'equal' || $cl_logic['date_time_logic'] === 'not_equal' ) ? strtotime( "{$cl_logic['single_date']} 00:00:00" ) : strtotime( $cl_logic['from_date'] );
+					$to           = ( $cl_logic['date_time_logic'] === 'equal' || $cl_logic['date_time_logic'] === 'not_equal' ) ? strtotime( "{$cl_logic['single_date']} 23:59:59" ) : strtotime( $cl_logic['to_date'] );
+					$return       = $cl_logic['date_time_logic'] === 'equal' || $cl_logic['date_time_logic'] === 'between' ? $from <= $current_time && $current_time <= $to : $from >= $current_time || $current_time >= $to;
+
+					if ( $needed_any_logic_true && $return ) {
+						break( 2 );
+					}
+
+					if ( $needed_all_logic_true && ! $return ) {
+						break( 2 );
+					}
+
+					break;
 				case 'boolean':
 					$return = $cl_logic['boolean_operand'] === 'true' ? true : false;
 
