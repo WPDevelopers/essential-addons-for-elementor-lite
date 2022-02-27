@@ -455,6 +455,141 @@ class Conditional_Logic {
 		);
 
 		$repeater->add_control(
+			'date_time_logic',
+			[
+				'label'      => __( 'Date and time', 'essential-addons-for-elementor-lite' ),
+				'show_label' => false,
+				'type'       => Controls_Manager::CHOOSE,
+				'options'    => [
+					'equal'       => [
+						'title' => esc_html__( 'Is', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-equals',
+					],
+					'not_equal'   => [
+						'title' => esc_html__( 'Is Not', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fa fa-not-equal',
+					],
+					'between'     => [
+						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-folder-open',
+					],
+					'not_between' => [
+						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'far fa-folder-open',
+					],
+				],
+				'default'    => 'between',
+				'toggle'     => false,
+				'condition'  => [
+					'logic_type' => 'date_time',
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'single_date',
+			[
+				'label'          => esc_html__( 'Date', 'plugin-name' ),
+				'label_block'    => false,
+				'type'           => Controls_Manager::DATE_TIME,
+				'picker_options' => [
+					'enableTime' => false,
+					'altInput'   => true,
+					'altFormat'  => 'M j, Y',
+					'dateFormat' => 'Y-n-j H:i:S'
+				],
+				'conditions'     => [
+					'relation' => 'and',
+					'terms'    => [
+						[
+							'name'     => 'logic_type',
+							'operator' => '===',
+							'value'    => 'date_time',
+						],
+						[
+							'name'     => 'date_time_logic',
+							'operator' => '!==',
+							'value'    => 'between',
+						],
+						[
+							'name'     => 'date_time_logic',
+							'operator' => '!==',
+							'value'    => 'not_between',
+						],
+					],
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'from_date',
+			[
+				'label'          => esc_html__( 'From', 'plugin-name' ),
+				'label_block'    => false,
+				'type'           => Controls_Manager::DATE_TIME,
+				'picker_options' => [
+					'altInput'   => true,
+					'altFormat'  => 'M j, Y h:i K',
+					'dateFormat' => 'Y-n-j H:i:S'
+				],
+				'conditions'     => [
+					'relation' => 'and',
+					'terms'    => [
+						[
+							'name'     => 'logic_type',
+							'operator' => '===',
+							'value'    => 'date_time',
+						],
+						[
+							'name'     => 'date_time_logic',
+							'operator' => '!==',
+							'value'    => 'equal',
+						],
+						[
+							'name'     => 'date_time_logic',
+							'operator' => '!==',
+							'value'    => 'not_equal',
+						],
+					],
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'to_date',
+			[
+				'label'          => esc_html__( 'To', 'plugin-name' ),
+				'label_block'    => false,
+				'type'           => Controls_Manager::DATE_TIME,
+				'picker_options' => [
+					'altInput'   => true,
+					'altFormat'  => 'M j, Y h:i K',
+					'dateFormat' => 'Y-n-j H:i:S'
+				],
+				'conditions'     => [
+					'relation' => 'and',
+					'terms'    => [
+						[
+							'name'     => 'logic_type',
+							'operator' => '===',
+							'value'    => 'date_time',
+						],
+						[
+							'name'     => 'date_time_logic',
+							'operator' => '!==',
+							'value'    => 'equal',
+						],
+						[
+							'name'     => 'date_time_logic',
+							'operator' => '!==',
+							'value'    => 'not_equal',
+						],
+					],
+				]
+			]
+		);
+
+		$repeater->add_control(
 			'boolean_operand',
 			[
 				'label'     => __( 'Boolean Type', 'essential-addons-for-elementor-lite' ),
@@ -541,7 +676,7 @@ class Conditional_Logic {
 			'mac_ie'    => __( 'Internet Explorer for Mac OS X', 'essential-addons-for-elementor-lite' ),
 			'netscape4' => __( 'Netscape 4', 'essential-addons-for-elementor-lite' ),
 			'lynx'      => __( 'Lynx', 'essential-addons-for-elementor-lite' ),
-			'others'     => __( 'Others', 'essential-addons-for-elementor-lite' ),
+			'others'    => __( 'Others', 'essential-addons-for-elementor-lite' ),
 		];
 	}
 
