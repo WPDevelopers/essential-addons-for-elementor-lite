@@ -496,7 +496,7 @@ class Conditional_Logic {
 					'enableTime' => false,
 					'altInput'   => true,
 					'altFormat'  => 'M j, Y',
-					'dateFormat' => 'Y-n-j H:i:S'
+					'dateFormat' => 'Y-m-d'
 				],
 				'conditions'     => [
 					'relation' => 'and',
@@ -530,7 +530,7 @@ class Conditional_Logic {
 				'picker_options' => [
 					'altInput'   => true,
 					'altFormat'  => 'M j, Y h:i K',
-					'dateFormat' => 'Y-n-j H:i:S'
+					'dateFormat' => 'Y-m-d H:i:S'
 				],
 				'conditions'     => [
 					'relation' => 'and',
@@ -564,7 +564,7 @@ class Conditional_Logic {
 				'picker_options' => [
 					'altInput'   => true,
 					'altFormat'  => 'M j, Y h:i K',
-					'dateFormat' => 'Y-n-j H:i:S'
+					'dateFormat' => 'Y-m-d H:i:S'
 				],
 				'conditions'     => [
 					'relation' => 'and',
