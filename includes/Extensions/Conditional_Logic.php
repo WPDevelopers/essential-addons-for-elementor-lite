@@ -108,6 +108,7 @@ class Conditional_Logic {
 					'post_type'    => __( 'Post Type', 'essential-addons-for-elementor-lite' ),
 					'post'         => __( 'Post', 'essential-addons-for-elementor-lite' ),
 					'browser'      => __( 'Browser', 'essential-addons-for-elementor-lite' ),
+					'date_time'    => __( 'Date & Time', 'essential-addons-for-elementor-lite' ),
 					'boolean'      => __( 'Boolean', 'essential-addons-for-elementor-lite' ),
 				],
 			]
