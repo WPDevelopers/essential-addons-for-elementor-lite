@@ -292,6 +292,48 @@ trait Core
     }
 
     /**
+     * Save default values to db while trashing a post
+     *
+     * @since 3.0.0
+     */
+    public function save_global_values_trashed_post($post_id)
+    {
+        if (wp_doing_cron()) {
+            return;
+        }
+
+        $document = Plugin::$instance->documents->get($post_id, false);
+        $global_settings = get_option('eael_global_settings');
+
+        // Reading Progress Bar
+        if ( isset($global_settings['reading_progress']['post_id']) && $global_settings['reading_progress']['post_id'] == $post_id ) {
+            $global_settings['reading_progress'] = [
+                'post_id' => null,
+                'enabled' => false,
+            ];
+        }
+
+        // Table of Contents
+        if ( isset($global_settings['eael_ext_table_of_content']['post_id']) && $global_settings['eael_ext_table_of_content']['post_id'] == $post_id ) {
+            $global_settings['eael_ext_table_of_content'] = [];
+        }
+
+        // Scroll to Top
+        if ( isset($global_settings['eael_ext_scroll_to_top']['post_id']) && $global_settings['eael_ext_scroll_to_top']['post_id'] == $post_id ) {
+            $global_settings['eael_ext_scroll_to_top'] = [
+                'post_id' => null,
+                'enabled' => false,
+            ];
+        }
+
+        // set editor time
+        update_option('eael_editor_updated_at', strtotime('now'));
+
+        // update options
+        update_option('eael_global_settings', $global_settings);
+    }
+
+    /**
      * Get global settings of Scroll to Top extension
      * 
      * @return array
