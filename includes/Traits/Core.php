@@ -325,8 +325,8 @@ trait Core
         } else {
             if (
                 ( isset($global_settings['eael_ext_scroll_to_top']['post_id']) && $global_settings['eael_ext_scroll_to_top']['post_id'] == $post_id )
-                // || 
-                // ( isset($global_settings['eael_ext_scroll_to_top']['post_id']) && 'publish' !== get_post_status($global_settings['eael_ext_scroll_to_top']['post_id']) )
+                || 
+                ( isset($global_settings['eael_ext_scroll_to_top']['post_id']) && 'publish' !== get_post_status($global_settings['eael_ext_scroll_to_top']['post_id']) )
                ) {
                 $global_settings_scroll_to_top = [
                     'post_id' => null,
