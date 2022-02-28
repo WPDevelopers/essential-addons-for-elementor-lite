@@ -133,6 +133,7 @@ class Bootstrap
 
         add_filter('eael/is_plugin_active', [$this, 'is_plugin_active'], 10, 1);
         add_action('elementor/editor/after_save', array($this, 'save_global_values'), 10, 2);
+        add_action('trashed_post', array($this, 'save_global_values_trashed_post'), 10, 1);
 
         // Enqueue
         add_action('eael/before_enqueue_styles', [$this, 'before_enqueue_styles']);
