@@ -54,15 +54,15 @@ class Conditional_Logic {
 				'options'   => [
 					'show'            => [
 						'title' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-eye',
+						'icon'  => 'eaicon-eye-solid',
 					],
 					'hide'            => [
 						'title' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-eye-slash',
+						'icon'  => 'eaicon-eye-slash-solid',
 					],
 					'forcefully_hide' => [
 						'title' => esc_html__( 'Hide without condition', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-ban',
+						'icon'  => 'eaicon-ban-solid',
 					],
 				],
 				'default'   => 'hide',
@@ -81,11 +81,11 @@ class Conditional_Logic {
 				'options'   => [
 					'all' => [
 						'title' => esc_html__( 'True All Logic', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-dice-six',
+						'icon'  => 'eaicon-dice-six-solid',
 					],
 					'any' => [
 						'title' => esc_html__( 'True Any Logic', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-dice-one',
+						'icon'  => 'eaicon-dice-one-solid',
 					],
 				],
 				'default'   => 'any',
@@ -125,11 +125,11 @@ class Conditional_Logic {
 				'options'   => [
 					'logged_in'     => [
 						'title' => esc_html__( 'Logged In', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-user',
+						'icon'  => 'eaicon-user-solid',
 					],
 					'not_logged_in' => [
 						'title' => esc_html__( 'Not Logged In', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-user-slash',
+						'icon'  => 'eaicon-user-slash-solid',
 					],
 				],
 				'default'   => 'not_logged_in',
@@ -149,19 +149,19 @@ class Conditional_Logic {
 				'options'    => [
 					'equal'       => [
 						'title' => esc_html__( 'Is', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-equals',
+						'icon'  => 'eaicon-equals-solid',
 					],
 					'not_equal'   => [
 						'title' => esc_html__( 'Is Not', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-not-equal',
+						'icon'  => 'eaicon-not-equal-solid',
 					],
 					'between'     => [
 						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fas fa-folder-open',
+						'icon'  => 'eaicon-folder-open-solid',
 					],
 					'not_between' => [
 						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'far fa-folder-open',
+						'icon'  => 'eaicon-folder-open-regular',
 					],
 				],
 				'default'    => 'between',
@@ -247,11 +247,11 @@ class Conditional_Logic {
 				'options'    => [
 					'between'     => [
 						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fas fa-folder-open',
+						'icon'  => 'eaicon-folder-open-solid',
 					],
 					'not_between' => [
 						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'far fa-folder-open',
+						'icon'  => 'eaicon-folder-open-regular',
 					],
 				],
 				'default'    => 'between',
@@ -287,19 +287,19 @@ class Conditional_Logic {
 				'options'    => [
 					'equal'       => [
 						'title' => esc_html__( 'Is', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-equals',
+						'icon'  => 'eaicon-equals-solid',
 					],
 					'not_equal'   => [
 						'title' => esc_html__( 'Is Not', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-not-equal',
+						'icon'  => 'eaicon-not-equal-solid',
 					],
 					'between'     => [
 						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fas fa-folder-open',
+						'icon'  => 'eaicon-folder-open-solid',
 					],
 					'not_between' => [
 						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'far fa-folder-open',
+						'icon'  => 'eaicon-folder-open-regular',
 					],
 				],
 				'default'    => 'equal',
@@ -386,11 +386,11 @@ class Conditional_Logic {
 				'options'    => [
 					'between'     => [
 						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fas fa-folder-open',
+						'icon'  => 'eaicon-folder-open-solid',
 					],
 					'not_between' => [
 						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'far fa-folder-open',
+						'icon'  => 'eaicon-folder-open-regular',
 					],
 				],
 				'default'    => 'between',
@@ -426,11 +426,11 @@ class Conditional_Logic {
 				'options'    => [
 					'between'     => [
 						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fas fa-folder-open',
+						'icon'  => 'eaicon-folder-open-solid',
 					],
 					'not_between' => [
 						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'far fa-folder-open',
+						'icon'  => 'eaicon-folder-open-regular',
 					],
 				],
 				'default'    => 'between',
@@ -466,19 +466,19 @@ class Conditional_Logic {
 				'options'    => [
 					'equal'       => [
 						'title' => esc_html__( 'Is', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-equals',
+						'icon'  => 'eaicon-equals-solid',
 					],
 					'not_equal'   => [
 						'title' => esc_html__( 'Is Not', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fa fa-not-equal',
+						'icon'  => 'eaicon-not-equal-solid',
 					],
 					'between'     => [
 						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fas fa-folder-open',
+						'icon'  => 'eaicon-folder-open-solid',
 					],
 					'not_between' => [
 						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'far fa-folder-open',
+						'icon'  => 'eaicon-folder-open-regular',
 					],
 				],
 				'default'    => 'between',
