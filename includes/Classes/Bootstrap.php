@@ -184,6 +184,8 @@ class Bootstrap
         add_action('wp_ajax_eael_select2_get_title', [$this, 'select2_ajax_get_posts_value_titles']);
         add_action('wp_ajax_nopriv_eael_select2_get_title', [$this, 'select2_ajax_get_posts_value_titles']);
 
+	    add_action( 'wp_ajax_eael_clear_widget_cache_data', [ $this, 'eael_clear_widget_cache_data' ] );
+
         // Elements
         add_action('elementor/controls/controls_registered', array($this, 'register_controls'));
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));

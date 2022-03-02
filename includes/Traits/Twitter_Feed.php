@@ -49,14 +49,6 @@ trait Twitter_Feed
                 }
             }
 
-            $args = array(
-                'httpversion' => '1.1',
-                'blocking' => true,
-                'headers' => array(
-                    'Authorization' => "Bearer $token",
-                ),
-            );
-
             add_filter('https_ssl_verify', '__return_false');
 
             $response = wp_remote_get('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' . $settings['eael_twitter_feed_ac_name'] . '&count=999&tweet_mode=extended', [
@@ -73,9 +65,9 @@ trait Twitter_Feed
             }
         }
 
-        if (empty($items)) {
-            return;
-        }
+	    if ( empty( $items ) ) {
+		    return $html;
+	    }
 
         if ($settings['eael_twitter_feed_hashtag_name']) {
             foreach ($items as $key => $item) {
