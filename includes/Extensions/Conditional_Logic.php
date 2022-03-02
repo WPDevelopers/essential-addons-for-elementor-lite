@@ -766,7 +766,7 @@ class Conditional_Logic {
 					$return = false;
 					if ( is_user_logged_in() ) {
 						$user    = get_current_user_id();
-						$operand = array_map( 'intval', $cl_logic['user_operand'] );
+						$operand = array_map( 'intval', (array) $cl_logic['user_operand'] );
 						$return  = $cl_logic['user_logic'] === 'between' ? in_array( $user, $operand ) : ! in_array( $user, $operand );
 					}
 
