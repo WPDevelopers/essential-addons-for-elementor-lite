@@ -796,7 +796,7 @@ class Conditional_Logic {
 					break;
 				case 'post':
 					$ID      = get_the_ID();
-					$operand = $cl_logic['post_operand'];
+					$operand = (array) $cl_logic['post_operand'];
 					$return  = $cl_logic['post_logic'] === 'between' ? in_array( $ID, $operand ) : ! in_array( $ID, $operand );
 
 					if ( $needed_any_logic_true && $return ) {
