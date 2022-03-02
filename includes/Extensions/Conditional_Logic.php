@@ -810,7 +810,7 @@ class Conditional_Logic {
 					break;
 				case 'browser':
 					$browser = $this->get_current_browser();
-					$operand = $cl_logic['browser_operand'];
+					$operand = (array) $cl_logic['browser_operand'];
 					$return  = $cl_logic['browser_logic'] === 'between' ? in_array( $browser, $operand ) : ! in_array( $browser, $operand );
 
 					if ( $needed_any_logic_true && $return ) {
