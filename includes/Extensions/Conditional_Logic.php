@@ -65,7 +65,7 @@ class Conditional_Logic {
 						'icon'  => 'eaicon-ban-solid',
 					],
 				],
-				'default'   => 'hide',
+				'default'   => 'show',
 				'toggle'    => false,
 				'condition' => [
 					'eael_cl_enable' => 'yes',
@@ -88,7 +88,7 @@ class Conditional_Logic {
 						'icon'  => 'eaicon-dice-one-solid',
 					],
 				],
-				'default'   => 'any',
+				'default'   => 'all',
 				'toggle'    => false,
 				'condition' => [
 					'eael_cl_enable'             => 'yes',
@@ -132,7 +132,7 @@ class Conditional_Logic {
 						'icon'  => 'eaicon-user-slash-solid',
 					],
 				],
-				'default'   => 'not_logged_in',
+				'default'   => 'logged_in',
 				'toggle'    => false,
 				'condition' => [
 					'logic_type' => 'login_status',
@@ -164,7 +164,7 @@ class Conditional_Logic {
 						'icon'  => 'eaicon-folder-open-regular',
 					],
 				],
-				'default'    => 'between',
+				'default'    => 'equal',
 				'toggle'     => false,
 				'condition'  => [
 					'logic_type' => 'user_role',
@@ -481,7 +481,7 @@ class Conditional_Logic {
 						'icon'  => 'eaicon-folder-open-regular',
 					],
 				],
-				'default'    => 'between',
+				'default'    => 'equal',
 				'toggle'     => false,
 				'condition'  => [
 					'logic_type' => 'date_time',
@@ -601,7 +601,7 @@ class Conditional_Logic {
 				'default'     => [
 					[
 						'logic_type'           => 'login_status',
-						'login_status_operand' => 'not_logged_in',
+						'login_status_operand' => 'logged_in',
 					],
 				],
 				'title_field' => '{{{ ea_conditional_logic_type_title(logic_type) }}}',
