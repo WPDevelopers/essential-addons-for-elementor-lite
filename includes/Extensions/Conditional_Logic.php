@@ -61,7 +61,7 @@ class Conditional_Logic {
 						'icon'  => 'eaicon-eye-slash-solid',
 					],
 					'forcefully_hide' => [
-						'title' => esc_html__( 'Hide without condition', 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html__( 'Hide Without Condition', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eaicon-ban-solid',
 					],
 				],
