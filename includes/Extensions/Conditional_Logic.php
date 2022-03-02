@@ -156,11 +156,11 @@ class Conditional_Logic {
 						'icon'  => 'eaicon-not-equal-solid',
 					],
 					'between'     => [
-						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html__( 'Include', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eaicon-folder-open-solid',
 					],
 					'not_between' => [
-						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html__( 'Exclude', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eaicon-folder-open-regular',
 					],
 				],
@@ -246,11 +246,11 @@ class Conditional_Logic {
 				'type'       => Controls_Manager::CHOOSE,
 				'options'    => [
 					'between'     => [
-						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html__( 'Include', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eaicon-folder-open-solid',
 					],
 					'not_between' => [
-						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html__( 'Exclude', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eaicon-folder-open-regular',
 					],
 				],
@@ -294,11 +294,11 @@ class Conditional_Logic {
 						'icon'  => 'eaicon-not-equal-solid',
 					],
 					'between'     => [
-						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html__( 'Include', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eaicon-folder-open-solid',
 					],
 					'not_between' => [
-						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html__( 'Exclude', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eaicon-folder-open-regular',
 					],
 				],
@@ -385,11 +385,11 @@ class Conditional_Logic {
 				'type'       => Controls_Manager::CHOOSE,
 				'options'    => [
 					'between'     => [
-						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html__( 'Include', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eaicon-folder-open-solid',
 					],
 					'not_between' => [
-						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html__( 'Exclude', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eaicon-folder-open-regular',
 					],
 				],
@@ -425,11 +425,11 @@ class Conditional_Logic {
 				'type'       => Controls_Manager::CHOOSE,
 				'options'    => [
 					'between'     => [
-						'title' => esc_html__( 'Between', 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html__( 'Include', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eaicon-folder-open-solid',
 					],
 					'not_between' => [
-						'title' => esc_html__( 'Not Between', 'essential-addons-for-elementor-lite' ),
+						'title' => esc_html__( 'Exclude', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eaicon-folder-open-regular',
 					],
 				],
