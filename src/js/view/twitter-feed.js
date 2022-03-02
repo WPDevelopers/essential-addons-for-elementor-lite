@@ -22,6 +22,7 @@ var TwitterFeedHandler = function($scope, $) {
     } else{
         elementor.hooks.addAction("panel/open_editor/widget/eael-twitter-feed", ( panel, model, view ) => {
             panel.content.el.onclick = (event) => {
+
                 if (event.target.dataset.event == "ea:cache:clear") {
                     let button = event.target;
                     button.innerHTML = "Clearing...";
@@ -38,7 +39,7 @@ var TwitterFeedHandler = function($scope, $) {
                             c_secret: model.attributes.settings.attributes.eael_twitter_feed_consumer_secret,
                         },
                         success(response) {
-                            if (response.clear_cache) {
+                            if (response.success) {
                                 button.innerHTML = "Clear";
 
                             } else {
