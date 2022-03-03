@@ -33,11 +33,11 @@ class Select2 extends Base_Data_Control
 				'subtotal'        => __( 'Subtotal', 'essential-addons-for-elementor-lite' ),
 				'cl_login_status' => __( 'Login Status', 'essential-addons-for-elementor-lite' ),
 				'cl_user_role'    => __( 'User Role', 'essential-addons-for-elementor-lite' ),
-				'cl_user'         => __( 'Current User', 'essential-addons-for-elementor-lite' ),
+				'cl_user'         => __( 'User', 'essential-addons-for-elementor-lite' ),
 				'cl_post_type'    => __( 'Post Type', 'essential-addons-for-elementor-lite' ),
-				'cl_post'         => __( 'Current Post', 'essential-addons-for-elementor-lite' ),
+				'cl_post'         => __( 'Post', 'essential-addons-for-elementor-lite' ),
 				'cl_browser'      => __( 'Browser', 'essential-addons-for-elementor-lite' ),
-				'cl_date_time'    => __( 'Date and Time', 'essential-addons-for-elementor-lite' ),
+				'cl_date_time'    => __( 'Date & Time', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 		wp_enqueue_script( 'eael-select2' );
