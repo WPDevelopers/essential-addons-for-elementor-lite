@@ -64,6 +64,7 @@ trait Facebook_Feed {
 
 		$key           = 'eael_facebook_feed_' . md5( str_rot13( str_replace( '.', '', $source . $page_id . $token ) ) . $settings['eael_facebook_feed_cache_limit'] );
 		$facebook_data = get_transient( $key );
+
 		if ( $facebook_data == false ) {
 			$facebook_data = wp_remote_retrieve_body( wp_remote_get( $this->get_url($page_id, $token, $source), [
 				'timeout' => 70,
@@ -264,7 +265,8 @@ trait Facebook_Feed {
 	 */
 	public function get_url( $page_id = '', $token = '', $source = 'posts' ) {
 		$post_url = "https://graph.facebook.com/v8.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)&limit=99&access_token={$token}";
-		$feed_url = "https://graph.facebook.com/v8.0/{$page_id}/feed?fields=id,message,full_picture,status_type,created_time,attachments{title,description,type,url,media},from,permalink_url,shares,call_to_action,likes{username,name},privacy&access_token={$token}&limit=99&locale=en_US";
+		$feed_url = "https://graph.facebook.com/v8.0/{$page_id}/feed?fields=id,message,full_picture,status_type,created_time,attachments{title,description,type,url,media},from,permalink_url,shares,call_to_action,comments.summary(total_count),reactions.summary(total_count),privacy&access_token={$token}&limit=99&locale=en_US";
+
 		if ( 'posts' === $source ) {
 			return $post_url;
 		}
