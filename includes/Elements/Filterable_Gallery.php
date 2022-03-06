@@ -2762,7 +2762,7 @@ class Filterable_Gallery extends Widget_Base
         $sorter_class = str_replace('"', 'apostrophe', $sorter_class);
         $sorter_class = str_replace(',-', ' eael-cf-', $sorter_class);
         $sorter_class = str_replace('.', '-', $sorter_class);
-        $sorter_class = str_replace(',', ' ', $sorter_class);
+        $sorter_class = str_replace(',', 'comma', $sorter_class);
         $sorter_class = str_replace('~', 'tilde', $sorter_class);
         $sorter_class = str_replace('!', 'exclamation', $sorter_class);
         $sorter_class = str_replace('@', 'at', $sorter_class);
