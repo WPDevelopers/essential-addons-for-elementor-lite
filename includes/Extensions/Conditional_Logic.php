@@ -172,6 +172,8 @@ class Conditional_Logic {
 			]
 		);
 
+		$roles = $this->get_editable_roles();
+
 		$repeater->add_control(
 			'user_role_operand_single',
 			[
@@ -179,9 +181,7 @@ class Conditional_Logic {
 				'show_label'  => false,
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT,
-				'multiple'    => true,
-				'options'     => $this->get_editable_roles(),
-				'default'     => $this->get_editable_roles( true, 'string' ),
+				'options'     => $roles,
 				'conditions'  => [
 					'relation' => 'and',
 					'terms'    => [
@@ -213,8 +213,7 @@ class Conditional_Logic {
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT2,
 				'multiple'    => true,
-				'options'     => $this->get_editable_roles(),
-				'default'     => $this->get_editable_roles( true ),
+				'options'     => $roles,
 				'conditions'  => [
 					'relation' => 'and',
 					'terms'    => [
@@ -623,16 +622,12 @@ class Conditional_Logic {
 	 *
 	 * @return array|string
 	 */
-	public function get_editable_roles( $first_index = false, $output = 'array' ) {
-		$wp_roles       = [];
+	public function get_editable_roles() {
+		$wp_roles       = [ '' => __( 'Select', 'essential-addons-for-elementor-lite' ) ];
 		$all_roles      = wp_roles()->roles;
 		$editable_roles = apply_filters( 'editable_roles', $all_roles );
 
 		foreach ( $editable_roles as $slug => $editable_role ) {
-			if ( $first_index ) {
-				return $output === 'array' ? [ $slug ] : $slug;
-			}
-
 			$wp_roles[ $slug ] = $editable_role['name'];
 		}
 
