@@ -605,25 +605,36 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Event Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#5725ff',  
-                // 'condition' => [
-                //     'eael_event_random_bg_color!' => 'yes',
-                //     'eael_event_calendar_type!' => 'manual',
-                // ],
+                'default' => '#5725ff',
                 'conditions' => [
-                    'relation' => 'and',
-                    'terms' => [
-                        [
-                            'name' => 'eael_event_random_bg_color',
-                            'operator' => '!=',
-                            'value' => 'yes'
-                        ],
-                        [
-                            'name' => 'eael_event_calendar_type',
-                            'operator' => '!=',
-                            'value' => 'manual'
-                        ]
-                    ]
+	                'relation' => 'or',
+	                'terms' => [
+		                [
+			                'relation' => 'and',
+			                'terms' => [
+								[
+									'name' => 'eael_event_calendar_type',
+									'operator' => '=',
+									'value' => 'google'
+								],
+								[
+									'name' => 'eael_event_random_bg_color',
+									'operator' => '=',
+									'value' => ''
+								]
+			                ],
+		                ],
+		                [
+			                'name' => 'eael_event_calendar_type',
+			                'operator' => '=',
+			                'value' => 'the_events_calendar'
+		                ],
+		                [
+			                'name' => 'eael_event_calendar_type',
+			                'operator' => '=',
+			                'value' => 'eventon'
+		                ]
+	                ]
                 ]
             ]
         );
@@ -634,10 +645,36 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Event Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
-                'condition' => [
-                    'eael_event_random_bg_color' => '',
-                    'eael_event_calendar_type!' => 'manual',
-                ],
+                'conditions' => [
+	                'relation' => 'or',
+	                'terms' => [
+		                [
+			                'relation' => 'and',
+			                'terms' => [
+				                [
+					                'name' => 'eael_event_calendar_type',
+					                'operator' => '=',
+					                'value' => 'google'
+				                ],
+				                [
+					                'name' => 'eael_event_random_bg_color',
+					                'operator' => '=',
+					                'value' => ''
+				                ]
+			                ],
+		                ],
+		                [
+			                'name' => 'eael_event_calendar_type',
+			                'operator' => '=',
+			                'value' => 'the_events_calendar'
+		                ],
+		                [
+			                'name' => 'eael_event_calendar_type',
+			                'operator' => '=',
+			                'value' => 'eventon'
+		                ]
+	                ]
+                ]
             ]
         );
         $this->add_control(
