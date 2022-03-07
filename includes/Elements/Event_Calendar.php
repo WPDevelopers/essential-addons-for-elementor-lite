@@ -595,7 +595,7 @@ class Event_Calendar extends Widget_Base
                 'return_value' => 'yes',
                 'default' => '',
                 'condition' => [
-                    'eael_event_calendar_type!' => 'manual',
+                    'eael_event_calendar_type' => 'google',
                 ],
             ]
         );
@@ -605,10 +605,26 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Event Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#5725ff',
-                'condition' => [
-                    'eael_event_random_bg_color!' => 'yes',
-                ],
+                'default' => '#5725ff',  
+                // 'condition' => [
+                //     'eael_event_random_bg_color!' => 'yes',
+                //     'eael_event_calendar_type!' => 'manual',
+                // ],
+                'conditions' => [
+                    'relation' => 'and',
+                    'terms' => [
+                        [
+                            'name' => 'eael_event_random_bg_color',
+                            'operator' => '!=',
+                            'value' => 'yes'
+                        ],
+                        [
+                            'name' => 'eael_event_calendar_type',
+                            'operator' => '!=',
+                            'value' => 'manual'
+                        ]
+                    ]
+                ]
             ]
         );
 
@@ -619,7 +635,8 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'condition' => [
-                    'eael_event_random_bg_color!' => 'yes',
+                    'eael_event_random_bg_color' => '',
+                    'eael_event_calendar_type!' => 'manual',
                 ],
             ]
         );
@@ -1890,7 +1907,7 @@ class Event_Calendar extends Widget_Base
 
 	    $calendar_data = [];
         $data = json_decode($data);
-        $random_colors = [ '#5725ff', '#9B25FF', '#FF255E', '#32a852', '#046b68', '#316b04' ];
+        $random_colors = [ '#5725ff', '#9B25FF', '#FF255E', '#32a852', '#046b68', '#316b04', '#0E185F', '#019267', '#533E85', '#051367', '#65C18C', '#361500', '#008E89', '#139487', '#00B4D8', '#6A5495', '#313552', '#1572A1', '#041562', '#11468F', '#24A19C' ];
         $random_color_enabled = isset( $settings['eael_event_random_bg_color'] ) && 'yes' == $settings['eael_event_random_bg_color'];
         $random_color_index = 0;
 
@@ -1920,7 +1937,8 @@ class Event_Calendar extends Widget_Base
                     $settings_eael_event_global_bg_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_bg_color');
                     $settings_eael_event_global_text_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_text_color');
                 }
-                    $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_popup_ribbon_color');                    
+                
+                $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_popup_ribbon_color');                    
 
 
                 $calendar_data[] = [
