@@ -202,6 +202,6 @@
 	margin-left: 4px;
 	font-size: 14px;
 }
-ul.select2-selection__rendered > li:nth-child(2).select2-search--inline > input.select2-search__field {
+[data-setting="user_role_operand_multi"] + .select2 ul.select2-selection__rendered > li:nth-child(2).select2-search--inline > input.select2-search__field {
 	width: auto !important;
 }
