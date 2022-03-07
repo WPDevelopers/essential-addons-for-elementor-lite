@@ -9,15 +9,17 @@ use Elementor\Controls_Manager;
 
 class Promotion
 {
-    public function __construct()
-    {
-        if (!apply_filters('eael/pro_enabled', false)) {
-            add_action('elementor/element/section/section_layout/after_section_end', [$this, 'section_parallax'], 10);
-            add_action('elementor/element/section/section_layout/after_section_end', [$this, 'section_particles'], 10);
-            add_action('elementor/element/common/_section_style/after_section_end', [$this, 'content_protection'], 10);
-            add_action('elementor/element/common/_section_style/after_section_end', [$this, 'section_tooltip'], 10);
-        }
-    }
+	public function __construct() {
+		if ( ! apply_filters( 'eael/pro_enabled', false ) ) {
+			add_action( 'elementor/element/section/section_layout/after_section_end', [ $this, 'section_parallax' ], 10 );
+			add_action( 'elementor/element/section/section_layout/after_section_end', [ $this, 'section_particles' ], 10 );
+			add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'content_protection' ], 10 );
+			add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'section_tooltip' ], 10 );
+			add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'conditional_logic' ] );
+			add_action( 'elementor/element/column/section_advanced/after_section_end', [ $this, 'conditional_logic' ] );
+			add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'conditional_logic' ] );
+		}
+	}
 
     public function teaser_template($texts)
     {
@@ -130,5 +132,28 @@ class Promotion
 
         $element->end_controls_section();
     }
+
+	public function conditional_logic( $element ) {
+		$element->start_controls_section(
+			'eael_conditional_logic_section',
+			[
+				'label' => __( '<i class="eaicon-logo"></i> Conditional Logic', 'essential-addons-for-elementor-lite' ),
+				'tab'   => Controls_Manager::TAB_ADVANCED
+			]
+		);
+
+		$element->add_control(
+			'eael_conditional_logic_section_pro_required',
+			[
+				'type' => Controls_Manager::RAW_HTML,
+				'raw'  => $this->teaser_template( [
+					'title'    => __( 'Meet EA Conditional Logic', 'essential-addons-for-elementor-lite' ),
+					'messages' => __( "Control any section, column, or widget's visibility with your own logic.", 'essential-addons-for-elementor-lite' ),
+				] ),
+			]
+		);
+
+		$element->end_controls_section();
+	}
 
 }
