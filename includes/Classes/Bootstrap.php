@@ -146,36 +146,13 @@ class Bootstrap
         add_filter('elementor/frontend/builder_content_data', [$this, 'collect_loaded_templates'], 10, 2);
         add_action('wp_print_footer_scripts', [$this, 'update_request_data']);
 
-
         // Ajax
-
-
-
-
-
-
-        //ajax add to cart fro product grid quick view
-
-
         add_action('wp_ajax_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
         add_action('wp_ajax_nopriv_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
 
         // Compare table
 	    add_action( 'wp_ajax_nopriv_eael_product_grid', [$this, 'get_compare_table']);
 	    add_action( 'wp_ajax_eael_product_grid', [$this, 'get_compare_table']);
-		//quick view popup
-
-
-	    //product gallery
-	    add_action( 'wp_ajax_nopriv_eael_product_gallery', [$this, 'ajax_eael_product_gallery']);
-	    add_action( 'wp_ajax_eael_product_gallery', [$this, 'ajax_eael_product_gallery']);
-
-//        handle select2 ajax search
-        add_action('wp_ajax_eael_select2_search_post', [$this, 'select2_ajax_posts_filter_autocomplete']);
-        add_action('wp_ajax_nopriv_eael_select2_search_post', [$this, 'select2_ajax_posts_filter_autocomplete']);
-
-        add_action('wp_ajax_eael_select2_get_title', [$this, 'select2_ajax_get_posts_value_titles']);
-        add_action('wp_ajax_nopriv_eael_select2_get_title', [$this, 'select2_ajax_get_posts_value_titles']);
 
         // Elements
         add_action('elementor/controls/controls_registered', array($this, 'register_controls'));
@@ -243,8 +220,6 @@ class Bootstrap
 
             add_action('admin_menu', array($this, 'admin_menu'));
             add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
-            add_action('wp_ajax_save_settings_with_ajax', array($this, 'save_settings'));
-            add_action('wp_ajax_clear_cache_files_with_ajax', array($this, 'clear_cache_files'));
 
             // Core
             add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'insert_plugin_links'));
