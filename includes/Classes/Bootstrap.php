@@ -148,30 +148,23 @@ class Bootstrap
 
 
         // Ajax
-        add_action('wp_ajax_load_more', array($this, 'ajax_load_more'));
-        add_action('wp_ajax_nopriv_load_more', array($this, 'ajax_load_more'));
 
-        add_action('wp_ajax_woo_product_pagination_product', array($this, 'eael_woo_pagination_product_ajax'));
-        add_action('wp_ajax_nopriv_woo_product_pagination_product', array($this, 'eael_woo_pagination_product_ajax'));
 
-        add_action('wp_ajax_woo_product_pagination', array($this, 'eael_woo_pagination_ajax'));
-        add_action('wp_ajax_nopriv_woo_product_pagination', array($this, 'eael_woo_pagination_ajax'));
+
+
+
 
         //ajax add to cart fro product grid quick view
-        add_action('wp_ajax_eael_product_add_to_cart', array($this, 'eael_product_add_to_cart'));
-        add_action('wp_ajax_nopriv_eael_product_add_to_cart', array($this, 'eael_product_add_to_cart'));
+
 
         add_action('wp_ajax_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
         add_action('wp_ajax_nopriv_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
 
-        add_action('wp_ajax_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
-        add_action('wp_ajax_nopriv_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
         // Compare table
 	    add_action( 'wp_ajax_nopriv_eael_product_grid', [$this, 'get_compare_table']);
 	    add_action( 'wp_ajax_eael_product_grid', [$this, 'get_compare_table']);
 		//quick view popup
-	    add_action( 'wp_ajax_nopriv_eael_product_quickview_popup', [$this, 'eael_product_quickview_popup']);
-	    add_action( 'wp_ajax_eael_product_quickview_popup', [$this, 'eael_product_quickview_popup']);
+
 
 	    //product gallery
 	    add_action( 'wp_ajax_nopriv_eael_product_gallery', [$this, 'ajax_eael_product_gallery']);
