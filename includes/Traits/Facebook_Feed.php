@@ -95,12 +95,13 @@ trait Facebook_Feed {
 			$comments = ( isset( $item['comments'] ) ? $item['comments']['summary']['total_count'] : 0 );
 
 			if ( $settings['eael_facebook_feed_layout'] == 'card' ) {
+				$item_form_name = !empty( $item['from']['name'] ) ? $item['from']['name']: '';
 				$html .= '<div class="eael-facebook-feed-item">
                     <div class="eael-facebook-feed-item-inner">
                         <header class="eael-facebook-feed-item-header clearfix">
                             <div class="eael-facebook-feed-item-user clearfix">
-                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v4.0/' . $page_id . '/picture" alt="' . esc_attr( $item['from']['name'] ) . '" class="eael-facebook-feed-avatar"></a>
-                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><p class="eael-facebook-feed-username">' . esc_html( $item['from']['name'] ) . '</p></a>
+                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v4.0/' . $page_id . '/picture" alt="' . esc_attr( $item_form_name ) . '" class="eael-facebook-feed-avatar"></a>
+                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><p class="eael-facebook-feed-username">' . esc_html( $item_form_name ) . '</p></a>
                             </div>';
 
 				if ( $settings['eael_facebook_feed_date'] ) {
@@ -121,7 +122,7 @@ trait Facebook_Feed {
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) {
 
 							$html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">';
-							if ( $item['attachments']['data'][0]['media_type'] == 'video' ) {
+							if ( !empty($item['attachments']['data'][0]['media_type']) && $item['attachments']['data'][0]['media_type'] == 'video' ) {
 								$html .= '<img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">
 	                                                    <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>';
 							} else {
@@ -131,7 +132,7 @@ trait Facebook_Feed {
 						}
 
 						$html .= '<div class="eael-facebook-feed-url-preview">';
-						if ( isset( $settings['eael_facebook_feed_is_show_preview_host'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_host'] ) {
+						if ( isset( $settings['eael_facebook_feed_is_show_preview_host'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_host'] && !empty($item['attachments']['data'][0]['unshimmed_url']) ) {
 							$html .= '<p class="eael-facebook-feed-url-host">' . parse_url( $item['attachments']['data'][0]['unshimmed_url'] )['host'] . '</p>';
 						}
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_title'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_title'] ) {
