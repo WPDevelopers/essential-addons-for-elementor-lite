@@ -131,10 +131,11 @@ class Twitter_Feed extends Widget_Base
 	    $this->add_control(
 		    'eael_clear_cache_control',
 		    [
-			    'label' => __( 'Clear Cache', 'essential-addons-for-elementor-lite' ),
-			    'type'  => Controls_Manager::BUTTON,
-			    'text'  => __( 'Clear', 'essential-addons-for-elementor-lite' ),
-			    'event' => 'ea:cache:clear',
+			    'label'       => __( 'Clear Cache', 'essential-addons-for-elementor-lite' ),
+			    'type'        => Controls_Manager::BUTTON,
+			    'text'        => __( 'Clear', 'essential-addons-for-elementor-lite' ),
+			    'event'       => 'ea:cache:clear',
+			    'description' => esc_html__( 'Note: This will refresh your feed and fetch the latest data from your Twitter account', 'essential-addons-for-elementor-lite' )
 		    ]
 	    );
 
