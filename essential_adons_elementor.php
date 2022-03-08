@@ -9,9 +9,9 @@
  * Text Domain: essential-addons-for-elementor-lite
  * Domain Path: /languages
  *
- * WC tested up to: 6.2.0
- * Elementor tested up to: 3.5.5
- * Elementor Pro tested up to: 3.6.2
+ * WC tested up to: 6.2.1
+ * Elementor tested up to: 3.5.6
+ * Elementor Pro tested up to: 3.6.3
  */
 
 if (!defined('ABSPATH')) {
