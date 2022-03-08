@@ -1139,3 +1139,7 @@
   display: -ms-flexbox;
   display: flex;
 }
+.theme-savoy .variations_form.nm-custom-select tr .value select {
+  opacity: 1;
+  border: 1px solid #ccc;
+}
