@@ -1325,44 +1325,6 @@ class Woo_Checkout extends Widget_Base {
 				'separator' => 'before',
 			]
 		);
-		$this->add_responsive_control(
-			'ea_woo_checkout_login_form_padding',
-			[
-				'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'default' => [
-					'top' => '20',
-					'right' => '20',
-					'bottom' => '20',
-					'left' => '20',
-					'unit' => 'px',
-					'isLinked' => true,
-				],
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors' => [
-					'.eael-woo-checkout {{WRAPPER}} .woocommerce form.checkout_coupon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-		$this->add_responsive_control(
-			'ea_woo_checkout_login_form_margin',
-			[
-				'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'default' => [
-					'top' => '20',
-					'right' => '20',
-					'bottom' => '20',
-					'left' => '20',
-					'unit' => 'px',
-					'isLinked' => true,
-				],
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors' => [
-					'.eael-woo-checkout {{WRAPPER}} .woocommerce form.checkout_coupon' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
