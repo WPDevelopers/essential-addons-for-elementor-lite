@@ -2963,6 +2963,10 @@ class Woo_Product_Carousel extends Widget_Base {
 			'class' => ['swiper-container eael-woo-product-carousel-gallary-pagination', $visibility]
 		]);
 
+		if ( $settings['direction'] == 'right' ) {
+			$this->add_render_attribute( 'eael_gallery_pagination_wrapper', 'dir', 'rtl' );
+		}
+
 
 		if ($settings['image_dots'] === 'yes') : ?>
 
