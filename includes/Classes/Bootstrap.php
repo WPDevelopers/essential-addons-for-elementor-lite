@@ -17,6 +17,7 @@ use Essential_Addons_Elementor\Traits\Login_Registration;
 use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
 use Essential_Addons_Elementor\Traits\Controls;
 use Essential_Addons_Elementor\Traits\Facebook_Feed;
+use Essential_Addons_Elementor\Traits\Ajax_Handler;
 
 
 class Bootstrap
@@ -32,6 +33,7 @@ class Bootstrap
     use Woo_Product_Comparable;
     use Controls;
     use Facebook_Feed;
+    use Ajax_Handler;
 
     // instance container
     private static $instance = null;
@@ -145,6 +147,8 @@ class Bootstrap
         add_action('wp', [$this, 'init_request_data']);
         add_filter('elementor/frontend/builder_content_data', [$this, 'collect_loaded_templates'], 10, 2);
         add_action('wp_print_footer_scripts', [$this, 'update_request_data']);
+
+	    $this->init_ajax_hooks();
 
         // Ajax
         add_action('wp_ajax_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
