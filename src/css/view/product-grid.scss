@@ -229,8 +229,31 @@
                                 content: "\f00c";
                             }
                         }
+                        //&.product_type_external {
+                        //    &:before {
+                        //        content: "\f00c";
+                        //    }
+                        //}
                         &:focus {
                             outline: none;
+                        }
+                    }
+
+                    &.button.product_type_external {
+                        padding: 0;
+                        margin: 0;
+                        font-size: 0px;
+
+                        &:before {
+                            content: "\f0c1";
+                            display: block;
+                            font-family: "Font Awesome 5 Free";
+                            font-size: 18px;
+                            font-weight: 900;
+                            transform: translate(-50%, -50%);
+                            top: 50%;
+                            left: 50%;
+                            position: absolute;
                         }
                     }
 
@@ -394,6 +417,11 @@
                                     content: "\f00c";
                                 }
                             }
+                            //&.product_type_external {
+                            //    &:after {
+                            //        content: "\f00c";
+                            //    }
+                            //}
 
                             &.loading {
                                 &:before {
@@ -434,6 +462,24 @@
                                 vertical-align: middle;
                                 margin: 0;
                                 padding: 0;
+                            }
+                        }
+
+                        &.button.product_type_external {
+                            padding: 0;
+                            margin: 0;
+                            font-size: 0px;
+
+                            &:before {
+                                content: "\f0c1";
+                                display: block;
+                                font-family: "Font Awesome 5 Free";
+                                font-size: 18px;
+                                font-weight: 900;
+                                transform: translate(-50%, -50%);
+                                top: 50%;
+                                left: 50%;
+                                position: absolute;
                             }
                         }
                     }
@@ -599,6 +645,29 @@
                 &:before {
                     content: "\f00c";
                 }
+            }
+            //&.product_type_external {
+            //    &:before {
+            //        content: "\f00c";
+            //    }
+            //}
+        }
+
+        &.button.product_type_external {
+            padding: 0;
+            margin: 0;
+            font-size: 0px;
+
+            &:before {
+                content: "\f0c1";
+                display: block;
+                font-family: "Font Awesome 5 Free";
+                font-size: 18px;
+                font-weight: 900;
+                transform: translate(-50%, -50%);
+                top: 50%;
+                left: 50%;
+                position: absolute;
             }
         }
     }
@@ -1670,7 +1739,31 @@
                                         content: "\f00c";
                                     }
                                 }
+
+                                //&.product_type_external {
+                                //    &:before {
+                                //        content: "\f00c";
+                                //    }
+                                //}
                             }
+                            &.button.product_type_external {
+                                padding: 0;
+                                margin: 0;
+                                font-size: 0px;
+
+                                &:before {
+                                    content: "\f0c1";
+                                    display: block;
+                                    font-family: "Font Awesome 5 Free";
+                                    font-size: 18px;
+                                    font-weight: 900;
+                                    transform: translate(-50%, -50%);
+                                    top: 50%;
+                                    left: 50%;
+                                    position: absolute;
+                                }
+                            }
+
                         }
                     }
                 }
@@ -1743,9 +1836,22 @@
                                 }
                             }
 
-                            &.product_type_external {
-                                width: auto;
-                                height: auto;
+                            &.button.product_type_external {
+                                padding: 0;
+                                margin: 0;
+                                font-size: 0px;
+
+                                &:before {
+                                    content: "\f0c1";
+                                    display: block;
+                                    font-family: "Font Awesome 5 Free";
+                                    font-size: 18px;
+                                    font-weight: 900;
+                                    transform: translate(-50%, -50%);
+                                    top: 50%;
+                                    left: 50%;
+                                    position: absolute;
+                                }
                             }
                         }
                     }
@@ -1814,6 +1920,24 @@
                                     &:before {
                                         content: "\f00c";
                                     }
+                                }
+                            }
+
+                            &.button.product_type_external {
+                                padding: 0;
+                                margin: 10px 2px 0;
+                                font-size: 0px;
+
+                                &:before {
+                                    content: "\f0c1";
+                                    display: block;
+                                    font-family: "Font Awesome 5 Free";
+                                    font-size: 18px;
+                                    font-weight: 900;
+                                    transform: translate(-50%, -50%);
+                                    top: 50%;
+                                    left: 50%;
+                                    position: absolute;
                                 }
                             }
 
@@ -1941,7 +2065,8 @@
         }
 
         .icons-wrap {
-            .button.product_type_grouped {
+            .button.product_type_grouped,
+            .button.product_type_external {
                 display: none;
             }
         }
