@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package     Essential-addons-for-elementor-lite\Traits
  */
 trait Ajax_Handler {
-
+	use Template_Query;
 	/**
 	 * init_ajax_hooks
 	 */
@@ -482,7 +482,7 @@ trait Ajax_Handler {
 	public function woo_checkout_update_order_review() {
 		$setting = $_POST['orderReviewData'];
 		ob_start();
-		Woo_Checkout::checkout_order_review_default( $setting );
+		Woo_Checkout_Helper::checkout_order_review_default( $setting );
 		$woo_checkout_update_order_review = ob_get_clean();
 
 		wp_send_json(
