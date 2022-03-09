@@ -447,6 +447,9 @@ class Product_Grid extends Widget_Base
                     'span' => __( 'span', 'essential-addons-for-elementor-lite' ),
                     'p'    => __( 'p', 'essential-addons-for-elementor-lite' ),
                 ],
+                'condition'=> [
+                    'eael_product_grid_style_preset!' => 'eael-product-default'
+                ]
             ]
         );
 

@@ -2476,3 +2476,7 @@
         transform: none;
     }
 }
+// Twenty Twenty One issue resolve
+.theme-twentytwentyone .eael-product-default .woocommerce ul.products li.product .button {
+    margin: 0 auto;
+}
