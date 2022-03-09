@@ -1266,6 +1266,58 @@ class Woo_Checkout extends Widget_Base {
 			]
 		);
 		$this->add_control(
+			'ea_woo_checkout_login_form',
+			[
+				'label' => __( 'Form', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+		$this->add_responsive_control(
+			'ea_woo_checkout_login_form_padding',
+			[
+				'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'default' => [
+					'top' => '20',
+					'right' => '20',
+					'bottom' => '20',
+					'left' => '20',
+					'unit' => 'px',
+					'isLinked' => true,
+				],
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+					'.eael-woo-checkout {{WRAPPER}} .woocommerce form.woocommerce-form-login' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'ea_woo_checkout_login_form_margin',
+			[
+				'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'default' => [
+					'top' => '20',
+					'right' => '20',
+					'bottom' => '20',
+					'left' => '20',
+					'unit' => 'px',
+					'isLinked' => true,
+				],
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+					'.eael-woo-checkout {{WRAPPER}} .woocommerce form.woocommerce-form-login' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(), [
+				'name' => 'ea_woo_checkout_login_form_border_color',
+				'selector' => '.eael-woo-checkout {{WRAPPER}} .woocommerce form.woocommerce-form-login',
+			]
+		);
+		$this->add_control(
 			'ea_woo_checkout_login_form_label',
 			[
 				'label' => __( 'Form Label', 'essential-addons-for-elementor-lite' ),
@@ -1578,15 +1630,48 @@ class Woo_Checkout extends Widget_Base {
 				'separator' => 'before',
 			]
 		);
-		$this->add_control(
-			'ea_woo_checkout_coupon_form_border_color',
+		$this->add_responsive_control(
+			'ea_woo_checkout_coupon_form_padding',
 			[
-				'label' => __( 'Border Color', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#404040',
-				'selectors' => [
-					'.eael-woo-checkout {{WRAPPER}} .woocommerce form.checkout_coupon' => 'border: 1px solid {{VALUE}};',
+				'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'default' => [
+					'top' => '20',
+					'right' => '20',
+					'bottom' => '20',
+					'left' => '20',
+					'unit' => 'px',
+					'isLinked' => true,
 				],
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+					'.eael-woo-checkout {{WRAPPER}} .woocommerce form.checkout_coupon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'ea_woo_checkout_coupon_form_margin',
+			[
+				'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'default' => [
+					'top' => '20',
+					'right' => '20',
+					'bottom' => '20',
+					'left' => '20',
+					'unit' => 'px',
+					'isLinked' => true,
+				],
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+					'.eael-woo-checkout {{WRAPPER}} .woocommerce form.checkout_coupon' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(), [
+				'name' => 'ea_woo_checkout_coupon_form_border_color',
+				'selector' => '.eael-woo-checkout {{WRAPPER}} .woocommerce form.checkout_coupon',
 			]
 		);
 

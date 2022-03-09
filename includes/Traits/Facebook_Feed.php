@@ -56,15 +56,17 @@ trait Facebook_Feed {
 		$html    = '';
 		$page_id = $settings['eael_facebook_feed_page_id'];
 		$token   = $settings['eael_facebook_feed_access_token'];
+		$source    = $settings['eael_facebook_feed_data_source'];
 
 		if ( empty( $page_id ) || empty( $token ) ) {
 			return;
 		}
 
-		$key           = 'eael_facebook_feed_' . md5( str_rot13( str_replace( '.', '', $page_id . $token ) ) . $settings['eael_facebook_feed_cache_limit'] );
+		$key           = 'eael_facebook_feed_' . md5( str_rot13( str_replace( '.', '', $source . $page_id . $token ) ) . $settings['eael_facebook_feed_cache_limit'] );
 		$facebook_data = get_transient( $key );
+
 		if ( $facebook_data == false ) {
-			$facebook_data = wp_remote_retrieve_body( wp_remote_get( "https://graph.facebook.com/v8.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)&limit=99&access_token={$token}", [
+			$facebook_data = wp_remote_retrieve_body( wp_remote_get( $this->get_url($page_id, $token, $source), [
 				'timeout' => 70,
 			] ) );
 			$facebook_data = json_decode( $facebook_data, true );
@@ -93,12 +95,13 @@ trait Facebook_Feed {
 			$comments = ( isset( $item['comments'] ) ? $item['comments']['summary']['total_count'] : 0 );
 
 			if ( $settings['eael_facebook_feed_layout'] == 'card' ) {
+				$item_form_name = !empty( $item['from']['name'] ) ? $item['from']['name']: '';
 				$html .= '<div class="eael-facebook-feed-item">
                     <div class="eael-facebook-feed-item-inner">
                         <header class="eael-facebook-feed-item-header clearfix">
                             <div class="eael-facebook-feed-item-user clearfix">
-                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v4.0/' . $page_id . '/picture" alt="' . esc_attr( $item['from']['name'] ) . '" class="eael-facebook-feed-avatar"></a>
-                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><p class="eael-facebook-feed-username">' . esc_html( $item['from']['name'] ) . '</p></a>
+                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v4.0/' . $page_id . '/picture" alt="' . esc_attr( $item_form_name ) . '" class="eael-facebook-feed-avatar"></a>
+                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><p class="eael-facebook-feed-username">' . esc_html( $item_form_name ) . '</p></a>
                             </div>';
 
 				if ( $settings['eael_facebook_feed_date'] ) {
@@ -119,7 +122,7 @@ trait Facebook_Feed {
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) {
 
 							$html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">';
-							if ( $item['attachments']['data'][0]['media_type'] == 'video' ) {
+							if ( !empty($item['attachments']['data'][0]['media_type']) && $item['attachments']['data'][0]['media_type'] == 'video' ) {
 								$html .= '<img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">
 	                                                    <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>';
 							} else {
@@ -129,7 +132,7 @@ trait Facebook_Feed {
 						}
 
 						$html .= '<div class="eael-facebook-feed-url-preview">';
-						if ( isset( $settings['eael_facebook_feed_is_show_preview_host'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_host'] ) {
+						if ( isset( $settings['eael_facebook_feed_is_show_preview_host'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_host'] && !empty($item['attachments']['data'][0]['unshimmed_url']) ) {
 							$html .= '<p class="eael-facebook-feed-url-host">' . parse_url( $item['attachments']['data'][0]['unshimmed_url'] )['host'] . '</p>';
 						}
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_title'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_title'] ) {
@@ -249,5 +252,25 @@ trait Facebook_Feed {
 		}
 
 		return $stringText;
+	}
+
+	/**
+	 * get_url
+	 * Build and return api endpoint based on source type
+	 *
+	 * @param string $page_id string
+	 * @param string $token string
+	 * @param string $source string
+	 *
+	 * @return string
+	 */
+	public function get_url( $page_id = '', $token = '', $source = 'posts' ) {
+		$post_url = "https://graph.facebook.com/v8.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)&limit=99&access_token={$token}";
+		$feed_url = "https://graph.facebook.com/v8.0/{$page_id}/feed?fields=id,message,full_picture,status_type,created_time,attachments{title,description,type,url,media},from,permalink_url,shares,call_to_action,comments.summary(total_count),reactions.summary(total_count),privacy&access_token={$token}&limit=99&locale=en_US";
+
+		if ( 'posts' === $source ) {
+			return $post_url;
+		}
+		return $feed_url;
 	}
 }

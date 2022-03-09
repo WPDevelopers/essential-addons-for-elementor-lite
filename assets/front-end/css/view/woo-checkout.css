@@ -99,7 +99,11 @@
 }
 .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login {
   max-width: 100%;
-  margin: 15px 0 0 !important;
+  margin: 15px 0 0;
+  padding: 20px;
+  text-align: left;
+  border: 1px solid inherit;
+  border-radius: 5px;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login p:first-child {
   margin-top: 0;
@@ -115,9 +119,9 @@
   width: 48.5%;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon {
-  margin: 15px 0 0 !important;
+  margin: 15px 0 0;
   padding: 20px;
-  width: 100%;
+  width: auto;
   text-align: left;
   border: 1px solid inherit;
   border-radius: 5px;

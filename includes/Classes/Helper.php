@@ -916,7 +916,7 @@ class Helper
         
         remove_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
         add_action( 'eael_woo_single_product_summary', function () use ( $tag ) {
-            the_title( '<' . $tag . ' class="eael-product-quick-view-title product_title entry-title">', '</' . $tag . '>' );
+            printf('<%1$s class="eael-product-quick-view-title product_title entry-title">%2$s</%1$s>',$tag,Helper::eael_wp_kses( get_the_title() ));
         }, 5 );
 
 	    ?>
