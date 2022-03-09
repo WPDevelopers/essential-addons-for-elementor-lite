@@ -106,7 +106,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
     <?php
 } else if ( $grid_style_preset == 'eael-product-overlay' ) {
     ?>
-    <li class="product">
+    <li <?php post_class( 'product' ); ?>>
         <div class="overlay">
             <?php
             if( $should_print_image_clickable ) {
