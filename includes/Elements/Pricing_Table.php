@@ -790,6 +790,8 @@ class Pricing_Table extends Widget_Base
                     ],
                 ],
                 'selectors' => [
+                    '{{WRAPPER}}' => 'border-radius: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-pricing' => 'border-radius: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-pricing .eael-pricing-item' => 'border-radius: {{SIZE}}px;',
                 ],
             ]
@@ -2061,7 +2063,7 @@ class Pricing_Table extends Widget_Base
 
                 if ('yes' === $item['eael_pricing_item_tooltip']) {
                     $obj->add_render_attribute(
-                        'pricing_feature_item' . $counter,
+                        'pricing_feature_item_tooltip' . $counter,
                         [
                             'class' => 'tooltip',
                             'title' => HelperClass::eael_wp_kses($item['eael_pricing_item_tooltip_content']),
@@ -2073,27 +2075,27 @@ class Pricing_Table extends Widget_Base
                 if ('yes' == $item['eael_pricing_item_tooltip']) {
 
                     if ($item['eael_pricing_item_tooltip_side']) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-side', $item['eael_pricing_item_tooltip_side']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-side', $item['eael_pricing_item_tooltip_side']);
                     }
 
                     if ($item['eael_pricing_item_tooltip_trigger']) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-trigger', $item['eael_pricing_item_tooltip_trigger']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-trigger', $item['eael_pricing_item_tooltip_trigger']);
                     }
 
                     if ($item['eael_pricing_item_tooltip_animation']) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-animation', $item['eael_pricing_item_tooltip_animation']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-animation', $item['eael_pricing_item_tooltip_animation']);
                     }
 
                     if (!empty($item['pricing_item_tooltip_animation_duration'])) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-animation_duration', $item['pricing_item_tooltip_animation_duration']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-animation_duration', $item['pricing_item_tooltip_animation_duration']);
                     }
 
                     if (!empty($item['eael_pricing_table_toolip_arrow'])) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-arrow', $item['eael_pricing_table_toolip_arrow']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-arrow', $item['eael_pricing_table_toolip_arrow']);
                     }
 
                     if (!empty($item['eael_pricing_item_tooltip_theme'])) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-theme', $item['eael_pricing_item_tooltip_theme']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-theme', $item['eael_pricing_item_tooltip_theme']);
                     }
                 }
             ?>
@@ -2114,7 +2116,7 @@ class Pricing_Table extends Widget_Base
                             <?php } ?>
                         </span>
                     <?php endif; ?>
-                    <?php echo HelperClass::eael_wp_kses($item['eael_pricing_table_item']); ?>
+                    <span <?php echo $obj->get_render_attribute_string('pricing_feature_item_tooltip' . $counter); ?>><?php echo HelperClass::eael_wp_kses($item['eael_pricing_table_item']); ?></span>
                 </li>
             <?php
                 $counter++;
