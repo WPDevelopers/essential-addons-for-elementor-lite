@@ -122,7 +122,11 @@ $base-font-size: 14px;
 
 			.woocommerce-form-login {
 				max-width: 100%;
-				margin: 15px 0 0!important;
+				margin: 15px 0 0;
+				padding: 20px;
+				text-align: left;
+				border: 1px solid inherit;
+				border-radius: 5px;
 
 				p:first-child {
 					margin-top: 0;
@@ -146,9 +150,10 @@ $base-font-size: 14px;
 			}
 
 			.checkout_coupon {
-				margin: 15px 0 0!important;
+				margin: 15px 0 0;
 				padding: 20px;
-				width: 100%;
+				// width: 100%;
+				width: auto;
 				text-align: left;
 				border: 1px solid inherit;
 				border-radius: 5px;
