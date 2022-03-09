@@ -80,7 +80,7 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
 		            if ( empty( $settings['eael_product_carousel_title_length'] ) ) {
 			            echo Helper::eael_wp_kses( $product->get_title() );
 		            } else {
-			            echo implode( " ", array_slice( explode( " ", $product->get_title() ), 0, $settings['eael_product_carousel_title_length'] ) );
+			            echo implode( " ", array_slice( explode( " ", Helper::eael_wp_kses($product->get_title()) ), 0, $settings['eael_product_carousel_title_length'] ) );
 		            }
 		            echo '</' . Helper::eael_validate_html_tag( $settings['eael_product_carousel_title_tag'] ) . '>';
 		            echo '</div>';
