@@ -642,4 +642,7 @@
             }
         }
     }
+    .eael-product-popup-ready ~ #elementor-lightbox-slideshow-single-img {
+        display: none !important;
+    }
 }
