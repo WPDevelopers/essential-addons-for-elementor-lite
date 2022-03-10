@@ -1224,23 +1224,3 @@
       -ms-transform: none;
           transform: none;
 }
-.theme-savoy .flex-control-nav {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-}
-.theme-savoy .nm-quantity-wrap {
-  width: auto;
-  border: none;
-}
-.theme-savoy .nm-quantity-wrap .quantity {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-.theme-savoy .variations_form.nm-custom-select tr .value select {
-  opacity: 1;
-  border: 1px solid #ccc;
-}
