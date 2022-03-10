@@ -1113,29 +1113,27 @@ class Adv_Accordion extends Widget_Base
         ?>
 
         <!-- FAQ Schema : Starts-->
-        <?php if( !empty( $settings['eael_adv_accordion_faq_schema_show'] ) && 'yes' === $settings['eael_adv_accordion_faq_schema_show'] ): ?>
-        <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-                <?php foreach( $settings['eael_adv_accordion_tab'] as $index => $tab ): ?>
-                {
-                    "@type": "Question",
-                    "name": "<?php echo Helper::eael_wp_kses($tab['eael_adv_accordion_tab_title']); ?>",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "<?php echo ('content' === $tab['eael_adv_accordion_text_type']) ? '<p>' . do_shortcode($tab['eael_adv_accordion_tab_content']) . '</p>' : ''; ?>"
-                    }
-                }
-                <?php if( count($settings['eael_adv_accordion_tab']) > $index + 1): ?>
-                ,
-                <?php endif; ?>
-                <?php endforeach; ?>
-            ]
-        }
-        </script>
-        <?php endif; ?>
+        <?php
+			if ( !empty( $settings['eael_adv_accordion_faq_schema_show'] ) && 'yes' === $settings['eael_adv_accordion_faq_schema_show'] ) {
+				$json = [
+					'@context' => 'https://schema.org',
+					'@type' => 'FAQPage',
+					'mainEntity' => [],
+				];
+
+				foreach ( $settings['eael_adv_accordion_tab'] as $index => $tab ) {
+					$json['mainEntity'][] = [
+						'@type' => 'Question',
+						'name' => Helper::eael_wp_kses( $tab['eael_adv_accordion_tab_title'] ),
+						'acceptedAnswer' => [
+							'@type' => 'Answer',
+							'text' => ('content' === $tab['eael_adv_accordion_text_type']) ? do_shortcode( $tab['eael_adv_accordion_tab_content'] ) : '',
+						],
+					];
+				}
+				?>
+				<script type="application/ld+json"><?php echo wp_json_encode( $json ); ?></script>
+			<?php } ?>
         <!-- FAQ Schema : Ends-->
 
         <?php 
