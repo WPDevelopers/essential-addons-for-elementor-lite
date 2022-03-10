@@ -338,6 +338,10 @@ class Pricing_Table extends Widget_Base
                 'label'   => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
                 'type'    => Controls_Manager::COLOR,
                 'default' => '#00C853',
+                'selectors' => [
+                    "{{WRAPPER}} {{CURRENT_ITEM}} .li-icon i" => 'color: {{VALUE}};',
+                    "{{WRAPPER}} {{CURRENT_ITEM}} .li-icon svg" => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
+                ],
             ]
         );
 
@@ -2056,6 +2060,13 @@ class Pricing_Table extends Widget_Base
         <ul>
             <?php
             foreach ($settings['eael_pricing_table_items'] as $item) :
+
+                $obj->add_render_attribute(
+                    'pricing_feature_item' . $counter, 
+                    [ 
+                        'class' => 'elementor-repeater-item-' . esc_attr( $item['_id'] ),
+                    ]
+                );
 
                 if ('yes' !== $item['eael_pricing_table_icon_mood']) {
                     $obj->add_render_attribute('pricing_feature_item' . $counter, 'class', 'disable-item');
