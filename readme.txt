@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 5.0.9
+Stable tag: 5.0.10
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -28,7 +28,7 @@ No extra resources or messy codes to slow down your website. Optimized for super
 Enable and disable individual elements to make your page loading faster and smoother. You can deactivate unnecessary widgets to keep the site lite.
 
 
-### 1700+ Ready Blocks and Templates through **Templately**
+### 2000+ Ready Blocks and Templates through **Templately**
 Use pre-made templates and sections which come with Essential Addons and design your website to stand out from the crowd.
 
 [Install Templately to get the premade blocks and templates](https://wordpress.org/plugins/templately/)
@@ -240,6 +240,16 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.0.10 - 08/03/2022 =
+
+- Fixed: EA Event Calendar | Event details text not showing
+- Fixed: EA Woo Product Grid & Carousel | HTML tags not working for Product Title
+- Fixed: EA Advanced Data Table | Elementor panel showing blank
+- Fixed: EA Twitter Feed | Added option to clear cache to refresh feed
+- Improved: EA Call to Action | Added Overlay color change options
+- Improved: EA Facebook Feed | Added option to fetch from both feed & posts
+- Few minor bug fixes & improvements
 
 = 5.0.9 - 17/02/2022 =
 
