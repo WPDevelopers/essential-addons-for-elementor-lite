@@ -516,6 +516,28 @@ trait Helper
 		    return is_array( $param ) ? array_map( 'sanitize_text_field', $param ) : sanitize_text_field( $param );
 	    }, $tax_list );
     }
+
+	/**
+	 * eael_clear_widget_cache_data
+     * Remove cache from transient which contains widget data
+     *
+     * @access public
+     * @return array
+     * @since 5.0.7
+	 */
+    public function eael_clear_widget_cache_data(){
+
+	    check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+	    $ac_name   = sanitize_text_field( $_POST['ac_name'] );
+	    $hastag    = sanitize_text_field( $_POST['hastag'] );
+	    $c_key     = sanitize_text_field( $_POST['c_key'] );
+	    $c_secret  = sanitize_text_field( $_POST['c_secret'] );
+	    $cache_key = $ac_name . '_' . md5( $hastag . $c_key . $c_secret ) . '_tf_cache';
+
+	    delete_transient( $cache_key );
+	    wp_send_json_success();
+    }
 	
 }
 
