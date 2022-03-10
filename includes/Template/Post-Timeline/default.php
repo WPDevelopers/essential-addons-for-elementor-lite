@@ -4,6 +4,7 @@
  */
 
 use Elementor\Group_Control_Image_Size;
+use Essential_Addons_Elementor\Classes\Helper;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -14,7 +15,6 @@ $post_timeline_image_url = Group_Control_Image_Size::get_attachment_image_src( g
 
 $image_size = sanitize_html_class( $settings['image_size'] );
 $image_class = " attachment-$image_size size-$image_size";
-$title_tag   = $settings['title_tag'];
 
 echo '<article class="eael-timeline-post eael-timeline-column">
     <div class="eael-timeline-bullet"></div>
@@ -34,7 +34,7 @@ echo '<article class="eael-timeline-post eael-timeline-column">
 
             if ($settings['eael_show_title']) {
                 echo '<div class="eael-timeline-post-title">
-                    <' . $title_tag . '>' . get_the_title() . '</' . $title_tag . '>
+                    <' . Helper::eael_validate_html_tag( $settings['title_tag'] ) . '>' . get_the_title() . '</' . Helper::eael_validate_html_tag( $settings['title_tag'] ) . '>
                 </div>';
             }
         echo '</a>
