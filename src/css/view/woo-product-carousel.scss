@@ -2098,3 +2098,25 @@ $theme-preset4: #ec3b75;
 //        100% { transform: rotate(360deg); }
 //    }
 //}
+
+
+// savoy theme conflicts
+.theme-savoy{
+    .flex-control-nav {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .nm-quantity-wrap {
+        width: auto;
+        border: none;
+    }
+    .nm-quantity-wrap {
+        .quantity {
+            display: flex;
+        }
+    }
+    .variations_form.nm-custom-select tr .value select{
+        opacity: 1;
+        border: 1px solid #ccc;
+    }
+}
