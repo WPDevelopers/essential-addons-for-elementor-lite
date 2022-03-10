@@ -2098,3 +2098,34 @@ $theme-preset4: #ec3b75;
 //        100% { transform: rotate(360deg); }
 //    }
 //}
+
+//theme savoy
+.theme-savoy {
+    .eael-woo-product-carousel-container {
+        .woocommerce {
+            ul {
+                &.products {
+                    .product {
+                        .star-rating {
+                            width: auto;
+                            height: 1.5rem;
+
+                            &:before {
+                                left: 0;
+                            }
+
+                            span {
+
+                                &:before {
+                                    letter-spacing: 14px;
+                                    font-size: 14px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
