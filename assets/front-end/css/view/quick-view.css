@@ -572,3 +572,6 @@
       -ms-flex-pack: start;
           justify-content: start;
 }
+.theme-savoy .eael-product-popup-ready ~ #elementor-lightbox-slideshow-single-img {
+  display: none !important;
+}
