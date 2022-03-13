@@ -372,6 +372,7 @@ span.fc-day-number {
   -webkit-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
+  display: none;
 }
 .eaelec-modal.eael-zoom-in .eaelec-modal-content {
   opacity: 0;
@@ -399,6 +400,11 @@ span.fc-day-number {
 }
 .eaelec-modal.eael-zoom-in.eael-ec-modal-removing .eael-ec-modal-bg {
   opacity: 0;
+}
+.eaelec-modal.eael-ec-popup-ready {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 @media (min-width: 768px) and (max-width: 1024px) {
   .eael-event-calendar-wrapper .fc-toolbar.fc-header-toolbar {
