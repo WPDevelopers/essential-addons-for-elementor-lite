@@ -634,6 +634,8 @@ trait Login_Registration {
 			$email_data['headers'] = self::$email_options['headers'];
 		}
 
+		$email_data['message'] = wpautop( $email_data['message'] );
+
 		return apply_filters( 'eael/login-register/new-user-email-data', $email_data, $user, $blogname );
 
 	}
@@ -665,6 +667,8 @@ trait Login_Registration {
 		if ( ! empty( self::$email_options['admin_headers'] ) ) {
 			$email_data['headers'] = self::$email_options['admin_headers'];
 		}
+
+		$email_data['message'] = wpautop( $email_data['message'] );
 
 		return apply_filters( 'eael/login-register/new-user-admin-email-data', $email_data, $user, $blogname );
 	}
