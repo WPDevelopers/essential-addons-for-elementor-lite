@@ -628,18 +628,13 @@ trait Login_Registration {
 
 		if ( ! empty( self::$email_options['message'] ) ) {
 			if ( isset( self::$email_options['password_reset_link'] ) && self::$email_options['password_reset_link'] != '' ) {
-				$_message = explode( '&', $email_data['message'] );
-				foreach ( $_message as $value) {
-					if ( strpos( $value, 'key=' ) !== false ) {
-						$_value = explode( '=', $value );
-
-						if ( $_value[1] && $_value[1] != '' ) {
-							$key = $_value[1];
-							self::$email_options['password_reset_link'] = network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user->user_login ), 'login' ) . "\r\n\r\n";
-						}
-
-						break;
-					}
+				$_message = $email_data['message'];
+				$start    = 'action=rp&key=';
+				$end      = '&login=';
+				$_message = substr( $_message, strpos( $_message, $start ) + strlen( $start ) );
+				$key      = substr( $_message, 0, strpos( $_message, $end ) );
+				if ( ! empty( $key ) ) {
+					self::$email_options['password_reset_link'] = network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user->user_login ), 'login' ) . "\r\n\r\n";
 				}
 			}
 			$email_data['message'] = $this->replace_placeholders( self::$email_options['message'], 'user' );
