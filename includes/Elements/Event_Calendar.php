@@ -2137,7 +2137,7 @@ class Event_Calendar extends Widget_Base
 
     public function get_random_colors()
     {
-        $colors = [ '#5725ff', '#9B25FF', '#FF255E', '#32a852', '#046b68', '#316b04', '#0E185F', '#019267', '#533E85', '#051367', '#65C18C', '#361500', '#008E89', '#139487', '#00B4D8', '#6A5495', '#313552', '#1572A1', '#041562', '#11468F', '#24A19C' ];
+        $colors = [ '#F43E3E', '#F46C3E', '#F4993E', '#F4C63E', '#F4F43E', '#C6F43E', '#99F43E', '#3EF43E', '#3EF499', '#3EF4C6', '#3EF4F4', '#3EC6F4', '#3E99F4', '#3E3EF4', '#6C3EF4', '#993EF4', '#C63EF4', '#F43EF4', '#F43E99', '#F43E6C', '#F43E3E'];
 
         return $colors;
     }
