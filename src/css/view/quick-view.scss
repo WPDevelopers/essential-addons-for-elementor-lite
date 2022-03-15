@@ -645,4 +645,15 @@
     .eael-product-popup-ready ~ #elementor-lightbox-slideshow-single-img {
         display: none !important;
     }
+
+    .eael-product-popup-details {
+        figure.woocommerce-product-gallery__wrapper > div {
+            opacity: 0 !important;
+        }
+
+        figure.woocommerce-product-gallery__wrapper > div:first-child,
+        figure.woocommerce-product-gallery__wrapper > div.flex-active-slide {
+            opacity: 1 !important;
+        }
+    }
 }
