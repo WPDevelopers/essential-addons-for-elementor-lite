@@ -640,6 +640,7 @@ class Team_Member extends Widget_Base {
 				'default' => '#272727',
 				'selectors' => [
 					'{{WRAPPER}} .eael-team-item .eael-team-content .eael-team-text' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-team-item .eael-team-image .eael-team-text.eael-team-text-overlay' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -648,7 +649,8 @@ class Team_Member extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
              'name' => 'eael_team_members_description_typography',
-				'selector' => '{{WRAPPER}} .eael-team-item .eael-team-content .eael-team-text',
+				'selector' => '{{WRAPPER}} .eael-team-item .eael-team-content .eael-team-text,
+								{{WRAPPER}} .eael-team-item .eael-team-image .eael-team-text.eael-team-text-overlay',
 			]
 		);
 
