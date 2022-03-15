@@ -60,6 +60,9 @@
   opacity: 0;
   padding: 10px;
   margin-bottom: 0;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .eael-team-members-simple.eael-team-item .eael-team-image:hover .eael-team-text.eael-team-text-overlay {
