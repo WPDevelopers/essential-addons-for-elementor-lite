@@ -227,18 +227,6 @@ class Simple_Menu extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_simple_menu_hamburger_icon_new',
-            [
-                'label'            => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
-                'type'             => Controls_Manager::ICONS,
-                'default'          => [
-                    'value'   => 'fas fa-bars',
-                    'library' => 'fa-solid',
-                ],
-            ]
-        );
-
         $this->end_controls_section();
 
         /**
