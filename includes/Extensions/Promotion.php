@@ -137,7 +137,7 @@ class Promotion
 		$element->start_controls_section(
 			'eael_conditional_logic_section',
 			[
-				'label' => __( '<i class="eaicon-logo"></i> Conditional Logic', 'essential-addons-for-elementor-lite' ),
+				'label' => __( '<i class="eaicon-logo"></i> Conditional Display', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_ADVANCED
 			]
 		);
@@ -147,7 +147,7 @@ class Promotion
 			[
 				'type' => Controls_Manager::RAW_HTML,
 				'raw'  => $this->teaser_template( [
-					'title'    => __( 'Meet EA Conditional Logic', 'essential-addons-for-elementor-lite' ),
+					'title'    => __( 'Meet EA Conditional Display', 'essential-addons-for-elementor-lite' ),
 					'messages' => __( "Control any section, column, or widget's visibility with your own logic.", 'essential-addons-for-elementor-lite' ),
 				] ),
 			]

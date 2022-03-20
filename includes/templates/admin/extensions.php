@@ -72,7 +72,7 @@ $extensions = [
 			],
 			[
 				'key'       => 'conditional-logic',
-				'title'     => __( 'Conditional Logic', 'essential-addons-for-elementor-lite' ),
+				'title'     => __( 'Conditional Display', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/conditional-logic/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/conditional-logic/',
 				'is_pro'    => true
