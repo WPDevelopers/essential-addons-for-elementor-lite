@@ -133,6 +133,7 @@ class Bootstrap
 
         add_filter('eael/is_plugin_active', [$this, 'is_plugin_active'], 10, 1);
         add_action('elementor/editor/after_save', array($this, 'save_global_values'), 10, 2);
+        add_action('trashed_post', array($this, 'save_global_values_trashed_post'), 10, 1);
 
         // Enqueue
         add_action('eael/before_enqueue_styles', [$this, 'before_enqueue_styles']);
@@ -183,6 +184,8 @@ class Bootstrap
 
         add_action('wp_ajax_eael_select2_get_title', [$this, 'select2_ajax_get_posts_value_titles']);
         add_action('wp_ajax_nopriv_eael_select2_get_title', [$this, 'select2_ajax_get_posts_value_titles']);
+
+	    add_action( 'wp_ajax_eael_clear_widget_cache_data', [ $this, 'eael_clear_widget_cache_data' ] );
 
         // Elements
         add_action('elementor/controls/controls_registered', array($this, 'register_controls'));

@@ -6,7 +6,7 @@
         let duration = 300;
 
         if ($(this).scrollTop() > offset) {
-            $('.eael-ext-scroll-to-top-wrap').removeClass('hide');
+            $('.eael-ext-scroll-to-top-wrap').removeClass('scroll-to-top-hide');
         }
 
         $(window).scroll(function () {
