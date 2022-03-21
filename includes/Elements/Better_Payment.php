@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
 use \Elementor\Controls_Manager;
 use \Elementor\Widget_Base;
 
-class BetterPayment extends Widget_Base {
+class Better_Payment extends Widget_Base {
 
 	public function get_name() {
 		return 'eael-better-payment';
