@@ -71,10 +71,10 @@ $extensions = [
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/scroll-to-top/',
 			],
 			[
-				'key'       => 'conditional-logic',
+				'key'       => 'conditional-display',
 				'title'     => __( 'Conditional Display', 'essential-addons-for-elementor-lite' ),
-				'demo_link' => 'https://essential-addons.com/elementor/conditional-logic/',
-				'doc_link'  => 'https://essential-addons.com/elementor/docs/conditional-logic/',
+				'demo_link' => 'https://essential-addons.com/elementor/conditional-display/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/conditional-display/',
 				'is_pro'    => true
 			],
 		]
