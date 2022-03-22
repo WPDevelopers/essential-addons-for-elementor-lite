@@ -571,7 +571,11 @@
 				height: 50%;
 			}
 		}
-		
+
+		time {
+			top: 50%;
+			transform: translateY(-50%);
+		}
 	}
 
 	&.eael-post-timeline-arrow-bottom {
@@ -603,7 +607,11 @@
 				height: calc(100% - 40px);
 			}
 		}
-		
+
+		time {
+			bottom: 10px;
+			top: auto;
+		}
 	}
 
 }
