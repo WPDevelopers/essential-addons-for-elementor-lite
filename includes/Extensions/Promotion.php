@@ -15,9 +15,9 @@ class Promotion
 			add_action( 'elementor/element/section/section_layout/after_section_end', [ $this, 'section_particles' ], 10 );
 			add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'content_protection' ], 10 );
 			add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'section_tooltip' ], 10 );
-			add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'conditional_logic' ] );
-			add_action( 'elementor/element/column/section_advanced/after_section_end', [ $this, 'conditional_logic' ] );
-			add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'conditional_logic' ] );
+			add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'conditional_display' ] );
+			add_action( 'elementor/element/column/section_advanced/after_section_end', [ $this, 'conditional_display' ] );
+			add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'conditional_display' ] );
 		}
 	}
 
@@ -133,9 +133,9 @@ class Promotion
         $element->end_controls_section();
     }
 
-	public function conditional_logic( $element ) {
+	public function conditional_display( $element ) {
 		$element->start_controls_section(
-			'eael_conditional_logic_section',
+			'eael_conditional_display_section',
 			[
 				'label' => __( '<i class="eaicon-logo"></i> Conditional Display', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_ADVANCED
@@ -143,7 +143,7 @@ class Promotion
 		);
 
 		$element->add_control(
-			'eael_conditional_logic_section_pro_required',
+			'eael_conditional_display_section_pro_required',
 			[
 				'type' => Controls_Manager::RAW_HTML,
 				'raw'  => $this->teaser_template( [
