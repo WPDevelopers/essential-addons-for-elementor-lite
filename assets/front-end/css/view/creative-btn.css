@@ -229,7 +229,8 @@
 }
 
 .eael-creative-button--tamaya::before {
-  top: 0;
+  height: 56%;
+  top: -3px;
   padding-top: 1em;
 }
 

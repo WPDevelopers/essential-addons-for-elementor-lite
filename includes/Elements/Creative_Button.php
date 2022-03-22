@@ -492,7 +492,7 @@ class Creative_Button extends Widget_Base
                 [
                     'name'     => 'eael_creative_button_typography',
                     'scheme'   => Typography::TYPOGRAPHY_1,
-                    'selector' => '{{WRAPPER}} .eael-creative-button .cretive-button-text, {{WRAPPER}} .eael-creative-button--winona::after, {{WRAPPER}} .eael-creative-button--rayen::before, {{WRAPPER}} .eael-creative-button--tamaya::after',
+                    'selector' => '{{WRAPPER}} .eael-creative-button .cretive-button-text, {{WRAPPER}} .eael-creative-button--winona::after, {{WRAPPER}} .eael-creative-button--rayen::before, {{WRAPPER}} .eael-creative-button--tamaya::after, {{WRAPPER}} .eael-creative-button--tamaya::before',
                 ]
             );
 
