@@ -95,7 +95,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
             }
             ?>
             <?php
-	    if ( $should_print_wishlist_btn ) {
+	    if ( ! empty( $should_print_wishlist_btn ) ) {
 		    echo '<div class="add-to-whishlist">';
 		    echo do_shortcode('[yith_wcwl_add_to_wishlist]');
 		    echo '</div>';
@@ -126,7 +126,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                 }
                 ?>
 	            <?php
-	            if ( $should_print_wishlist_btn ) {
+	            if ( ! empty( $should_print_wishlist_btn ) ) {
 		            echo '<div class="add-to-whishlist">';
 		            echo do_shortcode('[yith_wcwl_add_to_wishlist]');
 		            echo '</div>';
@@ -196,7 +196,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                 }
                                 ?>
 	                            <?php
-	                            if ( $should_print_wishlist_btn ) {
+	                            if ( ! empty( $should_print_wishlist_btn ) ) {
 		                            echo '<li class="add-to-whishlist">';
 		                            echo do_shortcode('[yith_wcwl_add_to_wishlist]');
 		                            echo '</li>';
@@ -217,7 +217,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                 }
                                 ?>
 	                            <?php
-	                            if ( $should_print_wishlist_btn ) {
+	                            if ( ! empty( $should_print_wishlist_btn ) ) {
 		                            echo '<li class="add-to-whishlist">';
 		                            echo do_shortcode('[yith_wcwl_add_to_wishlist]');
 		                            echo '</li>';
@@ -247,7 +247,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                                 }
                                 ?>
 	                            <?php
-	                            if ( $should_print_wishlist_btn ) {
+	                            if ( ! empty( $should_print_wishlist_btn ) ) {
 		                            echo '<li class="add-to-whishlist">';
 		                            echo do_shortcode('[yith_wcwl_add_to_wishlist]');
 		                            echo '</li>';
@@ -327,7 +327,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                             }
                             ?>
 	                        <?php
-	                        if ( $should_print_wishlist_btn ) {
+	                        if ( ! empty( $should_print_wishlist_btn ) ) {
 		                        echo '<li class="add-to-whishlist">';
 		                        echo do_shortcode('[yith_wcwl_add_to_wishlist]');
 		                        echo '</li>';
@@ -489,7 +489,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                             woocommerce_template_loop_add_to_cart(); ?></li>
 
 	                    <?php
-	                    if ( $should_print_wishlist_btn ) {
+	                    if ( ! empty( $should_print_wishlist_btn ) ) {
 		                    echo '<li class="add-to-whishlist">';
 		                    echo do_shortcode('[yith_wcwl_add_to_wishlist]');
 		                    echo '</li>';
