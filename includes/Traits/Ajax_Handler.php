@@ -209,7 +209,7 @@ trait Ajax_Handler {
 							'add_to_cart_external_product_button_text' => $settings['add_to_cart_external_product_button_text'],
 							'add_to_cart_default_product_button_text'  => $settings['add_to_cart_default_product_button_text'],
 						];
-						$this->change_add_to_cart_text( $add_to_cart_text );
+						$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
 					}
 
 
