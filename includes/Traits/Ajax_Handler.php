@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package     Essential-addons-for-elementor-lite\Traits
  */
 trait Ajax_Handler {
-	use Template_Query;
+	//use Template_Query;
 	/**
 	 * init_ajax_hooks
 	 */
