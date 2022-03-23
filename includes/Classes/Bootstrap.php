@@ -161,8 +161,13 @@ class Bootstrap
 
 	    add_action( 'wp_ajax_eael_clear_widget_cache_data', [ $this, 'eael_clear_widget_cache_data' ] );
 
+	    if ( version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ) {
+		    add_action( 'elementor/controls/register', array($this, 'register_controls') );
+	    } else {
+		    add_action('elementor/controls/controls_registered', array($this, 'register_controls'));
+	    }
+
         // Elements
-        add_action('elementor/controls/controls_registered', array($this, 'register_controls'));
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
         add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
         add_filter('elementor/editor/localize_settings', [$this, 'promote_pro_elements']);
