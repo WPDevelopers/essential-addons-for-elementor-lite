@@ -495,7 +495,8 @@ class GravityForms extends Widget_Base {
 				],
 				'default'               => '',
 				'selectors'             => [
-					'{{WRAPPER}} .eael-gravity-form .gform_wrapper .gform_heading' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .eael-gravity-form .gform_wrapper .gform_heading, {{WRAPPER}} .eael-gravity-form .eael-gravity-form-heading'
+                    => 'text-align: {{VALUE}};',
 				],
 			]
 		);
