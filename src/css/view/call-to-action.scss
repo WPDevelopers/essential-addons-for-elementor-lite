@@ -114,6 +114,9 @@
     padding-top: 22px;
     flex-basis: 22%;
 }
+.eael-call-to-action.cta-preset-2.cta-icon-flex .action {
+    flex-basis: 35%;
+}
 
 .eael-call-to-action.cta-icon-flex .content {
     flex-grow: 1;
@@ -131,6 +134,10 @@
     text-align: right;
     padding-top: 25px;
     flex-basis: 23%;
+}
+
+.cta-preset-2.eael-call-to-action.cta-flex .action {
+    flex-basis: 40%;
 }
 
 /*--- Cta Button ---*/
@@ -257,12 +264,136 @@
         font-size: 14px;
         line-height: 26px;
     }
-    .eael-call-to-action .cta-button {
+    .eael-call-to-action .cta-button:not(.cta-btn-preset-2) {
         padding: 4px 20px;
         font-size: 12px;
     }
     .eael-call-to-action .title {
         font-size: 20px;
         line-height: 30px;
+    }
+}
+
+
+.eael-call-to-action.cta-preset-2 {
+    padding: 77px 77px 100px 85px;
+    border-radius: 5px;
+    box-shadow: 0 25px 35px 0 rgb(0 9 78 / 18%);
+
+    @media all and (max-width: 767px) {
+        padding: 50px;
+    }
+
+    .sub-title {
+        font-family: "Poppins",Sans-serif;
+        color: #fff;
+        font-size: 25px;
+        font-weight: 400;
+        line-height: 1.2em;
+    }
+    .title {
+        color: #FFF;
+        font-family: "Poppins",Sans-serif;
+        font-size: 35px;
+        font-weight: 500;
+        line-height: 1.2em;
+    }
+
+    p {
+        color: #E9DEFF;
+        font-family: "Poppins",Sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5em;
+    }
+
+    .cta-button {
+        color: #4D4D4D;
+        background: #FFF;
+        border-radius: 100px;
+        box-shadow: 0 10px 20px 0 rgb(0 9 78 / 12%);
+        font-family: "Poppins",Sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 1.8em;
+
+        &.cta-secondary-button {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            box-shadow: none;
+
+            &:hover {
+                color: #000;
+                background: #fff;
+            }
+        }
+
+        &:hover {
+            background: #F92C8B;
+            color: #fff;
+        }
+
+        &.cta-btn-preset-2 {
+            border-bottom-right-radius: 0;
+            padding-left: 70px;
+
+            &:hover {
+                .btn-icon {
+                    background: #fff;
+                }
+
+                i {
+                    color: #F92C8B;
+                }
+                svg {
+                    fill: #F92C8B;
+                }
+            }
+
+            .btn-icon {
+                background: #F92C8B;
+                color: #fff;
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 50px;
+                text-align: center;
+                border-radius: 50%;
+                font-size: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            //i {
+            //    color: #fff;
+            //}
+
+            svg {
+                fill: #fff;
+            }
+        }
+    }
+
+    .icon {
+        color: #fff;
+    }
+
+    &.cta-basic {
+        background-color: #8B54FF;
+        //text-align: center;
+    }
+    &.cta-flex {
+        background-color: #22CBD0;
+
+        p {
+            color: #fff;
+        }
+
+    }
+    &.cta-icon-flex {
+        background-color: #8B54FF;
     }
 }

@@ -13,15 +13,18 @@ trait Elements
 {
     public $extensions_data = [];
 
-    /**
-     * Register custom controls
-     *
-     * @since v4.4.2
-     */
-    public function register_controls($controls_manager)
-    {
-        $controls_manager->register_control('eael-select2', new \Essential_Addons_Elementor\Controls\Select2());
-    }
+	/**
+	 * Register custom controls
+	 *
+	 * @since v4.4.2
+	 */
+	public function register_controls( $controls_manager ) {
+		if ( version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ) {
+			$controls_manager->register( new \Essential_Addons_Elementor\Controls\Select2() );
+		} else {
+			$controls_manager->register_control( 'eael-select2', new \Essential_Addons_Elementor\Controls\Select2() );
+		}
+	}
 
     /**
      * Add elementor category
