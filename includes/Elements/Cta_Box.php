@@ -883,9 +883,30 @@ class Cta_Box extends Widget_Base
                 'name' => 'eael_cat_btn_normal_border',
                 'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button:not(.cta-secondary-button)',
-                'condition' => [
-	                'eael_cta_btn_preset!' => 'cta-btn-preset-2',
-	                'eael_cta_preset!' => 'cta-preset-2',
+                'conditions' => [
+	                'relation' => 'or',
+	                'terms'    => [
+		                [
+			                'name'     => 'eael_cta_preset',
+			                'operator' => '==',
+			                'value'    => 'cta-preset-1',
+		                ],
+		                [
+			                'relation' => 'and',
+			                'terms'    => [
+				                [
+					                'name'     => 'eael_cta_preset',
+					                'operator' => '==',
+					                'value'    => 'cta-preset-2',
+				                ],
+				                [
+					                'name'     => 'eael_cta_btn_preset',
+					                'operator' => '==',
+					                'value'    => 'cta-btn-preset-1',
+				                ],
+			                ]
+		                ],
+	                ],
                 ]
             ]
         );
@@ -903,10 +924,31 @@ class Cta_Box extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-call-to-action .cta-button:not(.cta-secondary-button)' => 'border-radius: {{SIZE}}px;',
                 ],
-                'condition' => [
-	                'eael_cta_btn_preset!' => 'cta-btn-preset-2',
-	                'eael_cta_preset!' => 'cta-preset-2',
-                ]
+                'conditions' => [
+	                'relation' => 'or',
+	                'terms'    => [
+		                [
+			                'name'     => 'eael_cta_preset',
+			                'operator' => '==',
+			                'value'    => 'cta-preset-1',
+		                ],
+		                [
+			                'relation' => 'and',
+			                'terms'    => [
+				                [
+					                'name'     => 'eael_cta_preset',
+					                'operator' => '==',
+					                'value'    => 'cta-preset-2',
+				                ],
+				                [
+					                'name'     => 'eael_cta_btn_preset',
+					                'operator' => '==',
+					                'value'    => 'cta-btn-preset-1',
+				                ],
+			                ]
+		                ],
+	                ],
+                ],
             ]
         );
 
