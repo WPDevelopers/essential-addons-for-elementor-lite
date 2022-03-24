@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 5.0.10
+Stable tag: 5.0.11
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -240,6 +240,21 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.0.11 - 23/03/2022 =
+
+- Fixed: “_register_controls is deprecated” error
+- Added: Compatibility with Elementor 3.6.0
+- Improved: EA Advanced Tabs | Added Areal Label markup
+- Improved: EA Product Grid | YITH WooCommerce Wishlist support
+- Improved: Refactored AJAX requests for performance improvement
+- Fixed: EA Filterable Gallery | not working when special characters are used
+- Fixed: EA Woo Checkout | “Shipping” text not being translatable
+- Fixed: EA Reading Progress Bar | global color not working
+- Fixed: EA Event Calendar | Event Details popup not working with Jupiter X theme
+- Fixed: EA Gravity Forms | Title and Description alignment not working
+- Fixed: EA Post Timeline |  Title tag, image height & text color not working
+- Few minor bug fixes & improvements
 
 = 5.0.10 - 08/03/2022 =
 
