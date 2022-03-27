@@ -17,6 +17,7 @@ use Essential_Addons_Elementor\Traits\Login_Registration;
 use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
 use Essential_Addons_Elementor\Traits\Controls;
 use Essential_Addons_Elementor\Traits\Facebook_Feed;
+use Essential_Addons_Elementor\Classes\Asset_Builder;
 
 
 class Bootstrap
@@ -120,6 +121,8 @@ class Bootstrap
 
         // register hooks
         $this->register_hooks();
+
+        $this->asset = new Asset_Builder();
 
 
     }
@@ -281,5 +284,7 @@ class Bootstrap
 
 	    // beehive theme compatibility
 	    add_filter( 'beehive_scripts', array( $this, 'beehive_theme_swiper_slider_compatibility' ), 999 );
+
+
     }
 }
