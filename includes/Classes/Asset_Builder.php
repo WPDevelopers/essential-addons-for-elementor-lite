@@ -13,8 +13,12 @@ class Asset_Builder {
 	public $post_id;
 	const ELEMENT_KEY = '_eael_widget_elements';
 	const JS_KEY = '_eael_custom_js';
+	public $registered_elements;
+	public $registered_extensions;
 
-	public function __construct() {
+	public function __construct( $registered_elements, $registered_extensions) {
+		$this->registered_elements = $registered_elements;
+		$this->registered_extensions = $registered_extensions;
 		add_action( 'elementor/editor/after_save', array( $this, 'eael_elements_cache' ), 10, 2 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
 		add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ] );
@@ -39,17 +43,17 @@ class Asset_Builder {
 		$list = [];
 		if ( isset( $element['elType'] ) && $element['elType'] == 'section' ) {
 			if ( ! empty( $element['settings']['eael_particle_switch'] ) ) {
-				$list['eael-section-particles'] = 'eael-section-particles';
+				$list['section-particles'] = 'section-particles';
 			}
 			if ( ! empty( $element['settings']['eael_parallax_switcher'] ) ) {
-				$list['eael-section-parallax'] = 'eael-section-parallax';
+				$list['section-parallax'] = 'section-parallax';
 			}
 		} else {
 			if ( ! empty( $element['settings']['eael_tooltip_section_enable'] ) ) {
-				$list['eael-tooltip-section'] = 'eael-tooltip-section';
+				$list['tooltip-section'] = 'tooltip-section';
 			}
 			if ( ! empty( $element['settings']['eael_ext_content_protection'] ) ) {
-				$list['eael-content-protection'] = 'eael-content-protection';
+				$list['content-protection'] = 'content-protection';
 			}
 		}
 
@@ -67,8 +71,8 @@ class Asset_Builder {
 		}
 
 		$document = Plugin::$instance->documents->get( $this->post_id );
-		$data = $document ? $document->get_elements_data() : [];
-		$data = $this->get_widget_list( $data );
+		$data     = $document ? $document->get_elements_data() : [];
+		$data     = $this->get_widget_list( $data );
 		$this->save_elements_data( $this->post_id, $data );
 	}
 
@@ -83,6 +87,7 @@ class Asset_Builder {
 			}
 
 			if ( strpos( $type, 'eael-' ) !== false ) {
+				$type = str_replace( 'eael-', '', $type );
 				if ( ! isset( $widget_list[ $type ] ) ) {
 					$widget_list[ $type ] = $type;
 				}
@@ -99,6 +104,12 @@ class Asset_Builder {
 			return false;
 		}
 		update_post_meta( $post_id, self::ELEMENT_KEY, $list );
+		$this->remove_files_new( $post_id );
+
+		if ( ! empty( $list ) ) {
+			$this->generate_script_new( $post_id, $list, 'view', 'css' );
+			$this->generate_script_new( $post_id, $list, 'view', 'js' );
+		}
 	}
 
 	public function has_exist( $post_id ) {
@@ -108,5 +119,97 @@ class Asset_Builder {
 		}
 
 		return false;
+	}
+
+	public function cache_asset() {
+
+	}
+
+	public function enqueue_asset() {
+
+	}
+
+	public function has_asset() {
+
+	}
+
+	public function generate_script_new( $post_id, $elements, $context, $ext ) {
+		// if folder not exists, create new folder
+		if ( ! file_exists( EAEL_ASSET_PATH ) ) {
+			wp_mkdir_p( EAEL_ASSET_PATH );
+		}
+
+		// naming asset file
+		$file_name = 'eael-' . $post_id .'.'. $ext;
+
+		// output asset string
+		$output = $this->generate_strings_new( $elements, $context, $ext );
+
+		// write to file
+		$file_path = $this->safe_path_new( EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file_name );
+		file_put_contents( $file_path, $output );
+	}
+
+	public function generate_strings_new( $elements, $context, $ext ) {
+		$output = '';
+
+		$paths  = $this->generate_dependency_new( $elements, $context, $ext );
+
+		if ( ! empty( $paths ) ) {
+			foreach ( $paths as $path ) {
+				$output .= file_get_contents( $this->safe_path_new( $path ) );
+			}
+		}
+
+		return $output;
+	}
+
+	public function generate_dependency_new( array $elements, $context, $type ) {
+		$lib  = [ 'view' => [], 'edit' => [] ];
+		$self = [ 'general' => [], 'view' => [], 'edit' => [] ];
+
+		if ( $type == 'js' ) {
+			$self['general'][] = EAEL_PLUGIN_PATH . 'assets/front-end/js/view/general.min.js';
+			$self['edit'][]    = EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/promotion.min.js';
+		} else if ( $type == 'css' ) {
+			$self['view'][] = EAEL_PLUGIN_PATH . "assets/front-end/css/view/general.min.css";
+		}
+		foreach ( $elements as $element ) {
+
+			if ( isset( $this->registered_elements[ $element ] ) ) {
+				if ( ! empty( $this->registered_elements[ $element ]['dependency'][ $type ] ) ) {
+					foreach ( $this->registered_elements[ $element ]['dependency'][ $type ] as $file ) {
+						${$file['type']}[ $file['context'] ][] = $file['file'];
+					}
+				}
+			} elseif ( isset( $this->registered_extensions[ $element ] ) ) {
+				if ( ! empty( $this->registered_extensions[ $element ]['dependency'][ $type ] ) ) {
+					foreach ( $this->registered_extensions[ $element ]['dependency'][ $type ] as $file ) {
+						${$file['type']}[ $file['context'] ][] = $file['file'];
+					}
+				}
+			}
+		}
+
+		if ( $context == 'view' ) {
+			return array_unique( array_merge( $lib['view'], $self['general'], $self['view'] ) );
+		}
+
+		return array_unique( array_merge( $lib['view'], $lib['edit'], $self['general'], $self['edit'], $self['view'] ) );
+	}
+
+	public function safe_path_new( $path ) {
+		$path = str_replace( [ '//', '\\\\' ], [ '/', '\\' ], $path );
+
+		return str_replace( [ '/', '\\' ], DIRECTORY_SEPARATOR, $path );
+	}
+
+	public function remove_files_new( $post_id = null, $ext = [ 'css', 'js' ] ) {
+		foreach ( $ext as $e ) {
+			$path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id .'.'. $e;
+			if ( file_exists( $path ) ) {
+				unlink( $path );
+			}
+		}
 	}
 }
