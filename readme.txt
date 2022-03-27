@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 5.0.11
+Stable tag: 5.0.12
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -240,6 +240,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.0.12 - 27/03/2022 =
+
+- Fixed: EA Filterable Gallery | Filter options not working with Multiple Controls for items
+- Fixed: EA Call to Action | Border style and Border radius options not showing in the Primary button style
+- Few minor bug fixes & improvements
 
 = 5.0.11 - 23/03/2022 =
 
