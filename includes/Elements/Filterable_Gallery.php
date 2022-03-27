@@ -2752,8 +2752,9 @@ class Filterable_Gallery extends Widget_Base
 
 	public function sorter_class( $string ) {
 		$sorter_class = strtolower( $string );
-		$sorter_class = str_replace( ',', 'comma', $sorter_class );
 		$sorter_class = str_replace( ' ', '-', $sorter_class );
+		$sorter_class = str_replace( ',-', ' eael-cf-', $sorter_class );
+		$sorter_class = str_replace( ',', 'comma', $sorter_class );
 		$sorter_class = str_replace( '&', 'and', $sorter_class );
 		$sorter_class = str_replace( '+', 'plus', $sorter_class );
 		$sorter_class = str_replace( 'amp;', '', $sorter_class );
@@ -2784,7 +2785,6 @@ class Filterable_Gallery extends Widget_Base
 		$sorter_class = str_replace( '{', 'curlybracket', $sorter_class );
 		$sorter_class = str_replace( '}', 'curlybracket', $sorter_class );
 		$sorter_class = str_replace( '?', 'questionmark', $sorter_class );
-		$sorter_class = str_replace( ',-', ' eael-cf-', $sorter_class );
 		$sorter_class = utf8_encode( $sorter_class );
 
 		return $sorter_class;
