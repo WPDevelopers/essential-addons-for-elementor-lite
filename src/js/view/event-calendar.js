@@ -59,6 +59,12 @@ var EventCalendar = function ($scope, $) {
 					if (event.extendedProps.nofollow === "on") {
 						element.attr("rel", "nofollow");
 					}
+					
+					if (event.extendedProps.custom_attributes != '' ) {
+						$.each(event.extendedProps.custom_attributes, function(index,item){
+							element.attr(item.key, item.value);
+						});
+					}
 				}else {
 					element.attr("href", "javascript:void(0);");
 					element.click(function (e) {
@@ -197,12 +203,21 @@ var EventCalendar = function ($scope, $) {
 						if (event.extendedProps.nofollow === "on") {
 							$(".eaelec-modal-footer a").attr("rel", "nofollow");
 						}
+						if (event.extendedProps.custom_attributes != '' ) {
+							$.each(event.extendedProps.custom_attributes, function(index,item){
+								$(".eaelec-modal-footer a").attr(item.key, item.value);
+							});
+						}
 						if (event.url == "") {
 							$(".eaelec-modal-footer a").css("display", "none");
-						} else {
-							$(".eaelec-modal-footer a").css("display", "inline");
 						}
 						
+						// Popup color
+						$(".eaelec-modal-header").css(
+							"border-left",
+							"5px solid " + event.borderColor
+						);
+		
 						// Popup color
 						$(".eaelec-modal-header").css(
 							"border-left",
