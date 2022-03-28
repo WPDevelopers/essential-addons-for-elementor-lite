@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 } // Exit if accessed directly
 use Elementor\Core\Files\CSS\Post as Post_CSS;
 use Elementor\Plugin;
+use function GuzzleHttp\Promise\is_rejected;
 
 class Asset_Builder {
 
@@ -16,12 +17,12 @@ class Asset_Builder {
 	public $registered_elements;
 	public $registered_extensions;
 
-	public function __construct( $registered_elements, $registered_extensions) {
-		$this->registered_elements = $registered_elements;
+	public function __construct( $registered_elements, $registered_extensions ) {
+		$this->registered_elements   = $registered_elements;
 		$this->registered_extensions = $registered_extensions;
 		add_action( 'elementor/editor/after_save', array( $this, 'eael_elements_cache' ), 10, 2 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
-		add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ] );
+		add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ] ,100 );
 	}
 
 	public function eael_elements_cache( $post_id, $data ) {
@@ -37,6 +38,7 @@ class Asset_Builder {
 	public function post_asset_load( Post_CSS $css ) {
 		$this->post_id = $css->get_post_id();
 		$this->get_element_data();
+		$this->enqueue_asset( $this->post_id );
 	}
 
 	public function get_ext_name( $element ) {
@@ -85,8 +87,13 @@ class Asset_Builder {
 			} else {
 				$type = $element['widgetType'];
 			}
-
+			$replace = $this->replace_widget_name();
 			if ( strpos( $type, 'eael-' ) !== false ) {
+
+				if(isset( $replace[$type] )){
+					$type = $replace[$type];
+				}
+
 				$type = str_replace( 'eael-', '', $type );
 				if ( ! isset( $widget_list[ $type ] ) ) {
 					$widget_list[ $type ] = $type;
@@ -125,7 +132,26 @@ class Asset_Builder {
 
 	}
 
-	public function enqueue_asset() {
+	public function enqueue_asset( $post_id ) {
+
+		if(file_exists($this->safe_path_new( EAEL_ASSET_PATH . '/' . 'eael-' . $post_id . '.css' ))){
+
+			wp_enqueue_style(
+				'eael-' . $post_id,
+				$this->safe_url_new( EAEL_ASSET_URL . '/' . 'eael-' . $post_id . '.css' ),
+				[ 'elementor-frontend' ],
+				time()
+			);
+
+			wp_enqueue_script(
+				'eael-' . $post_id,
+				$this->safe_url_new( EAEL_ASSET_URL . '/' . 'eael-' . $post_id . '.js' ),
+				['wp-hooks','jquery'],
+				time(),
+				true
+			);
+		}
+
 
 	}
 
@@ -140,7 +166,7 @@ class Asset_Builder {
 		}
 
 		// naming asset file
-		$file_name = 'eael-' . $post_id .'.'. $ext;
+		$file_name = 'eael-' . $post_id . '.' . $ext;
 
 		// output asset string
 		$output = $this->generate_strings_new( $elements, $context, $ext );
@@ -153,7 +179,7 @@ class Asset_Builder {
 	public function generate_strings_new( $elements, $context, $ext ) {
 		$output = '';
 
-		$paths  = $this->generate_dependency_new( $elements, $context, $ext );
+		$paths = $this->generate_dependency_new( $elements, $context, $ext );
 
 		if ( ! empty( $paths ) ) {
 			foreach ( $paths as $path ) {
@@ -206,10 +232,59 @@ class Asset_Builder {
 
 	public function remove_files_new( $post_id = null, $ext = [ 'css', 'js' ] ) {
 		foreach ( $ext as $e ) {
-			$path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id .'.'. $e;
+			$path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.' . $e;
 			if ( file_exists( $path ) ) {
 				unlink( $path );
 			}
 		}
+	}
+
+	public function safe_url_new( $url ) {
+		if ( is_ssl() ) {
+			$url = wp_parse_url( $url );
+
+			if ( ! empty( $url['host'] ) ) {
+				$url['scheme'] = 'https';
+			}
+
+			return $this->unparse_url_new( $url );
+		}
+
+		return $url;
+	}
+
+	public function unparse_url_new( $parsed_url ) {
+		$scheme   = isset( $parsed_url['scheme'] ) ? $parsed_url['scheme'] . '://' : '';
+		$host     = isset( $parsed_url['host'] ) ? $parsed_url['host'] : '';
+		$port     = isset( $parsed_url['port'] ) ? ':' . $parsed_url['port'] : '';
+		$user     = isset( $parsed_url['user'] ) ? $parsed_url['user'] : '';
+		$pass     = isset( $parsed_url['pass'] ) ? ':' . $parsed_url['pass'] : '';
+		$pass     = ( $user || $pass ) ? "$pass@" : '';
+		$path     = isset( $parsed_url['path'] ) ? $parsed_url['path'] : '';
+		$query    = isset( $parsed_url['query'] ) ? '?' . $parsed_url['query'] : '';
+		$fragment = isset( $parsed_url['fragment'] ) ? '#' . $parsed_url['fragment'] : '';
+
+		return "$scheme$user$pass$host$port$path$query$fragment";
+	}
+
+	public function replace_widget_name(){
+		return $replace = [
+			'eicon-woocommerce'               => 'eael-product-grid',
+			'eael-countdown'                  => 'eael-count-down',
+			'eael-creative-button'            => 'eael-creative-btn',
+			'eael-team-member'                => 'eael-team-members',
+			'eael-testimonial'                => 'eael-testimonials',
+			'eael-weform'                     => 'eael-weforms',
+			'eael-cta-box'                    => 'eael-call-to-action',
+			'eael-dual-color-header'          => 'eael-dual-header',
+			'eael-pricing-table'              => 'eael-price-table',
+			'eael-filterable-gallery'         => 'eael-filter-gallery',
+			'eael-one-page-nav'               => 'eael-one-page-navigation',
+			'eael-interactive-card'           => 'eael-interactive-cards',
+			'eael-image-comparison'           => 'eael-img-comparison',
+			'eael-dynamic-filterable-gallery' => 'eael-dynamic-filter-gallery',
+			'eael-google-map'                 => 'eael-adv-google-map',
+			'eael-instafeed'                  => 'eael-instagram-gallery',
+		];
 	}
 }
