@@ -925,11 +925,26 @@ class Adv_Tabs extends Widget_Base
         <div <?php echo $this->get_render_attribute_string('eael_tab_wrapper'); ?>>
             <div class="eael-tabs-nav">
                 <ul <?php echo $this->get_render_attribute_string('eael_tab_icon_position'); ?>>
-                    <?php foreach ($settings['eael_adv_tabs_tab'] as $tab) :
+                    <?php foreach ($settings['eael_adv_tabs_tab'] as $index => $tab) :
 	                    $tab_id = $tab['eael_adv_tabs_tab_id'] ? $tab['eael_adv_tabs_tab_id'] : Helper::str_to_css_id( $tab['eael_adv_tabs_tab_title'] );
 	                    $tab_id = $tab_id === 'safari' ? 'eael-safari' : $tab_id;
+
+                        $tab_count = $index + 1;
+					    $tab_title_setting_key = $this->get_repeater_setting_key( 'eael_adv_tabs_tab_title', 'eael_adv_tabs_tab', $index );
+					    
+
+                        $this->add_render_attribute( $tab_title_setting_key, [
+                            'id' => $tab_id,
+                            'class' => [ $tab['eael_adv_tabs_tab_show_as_default'], 'eael-tab-item-trigger' ],
+                            'aria-selected' => 1 === $tab_count ? 'true' : 'false',
+                            'data-tab' => $tab_count,
+                            'role' => 'tab',
+                            'tabindex' => 1 === $tab_count ? '0' : '-1',
+                            'aria-controls' => $tab_id . '-tab',
+                            'aria-expanded' => 'false',
+                        ] );
                         ?>
-                        <li id="<?php echo esc_attr( $tab_id ); ?>" class="<?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?> eael-tab-item-trigger">
+                        <li <?php $this->print_render_attribute_string( $tab_title_setting_key ); ?>>
                             <?php if( $settings['eael_adv_tab_icon_position'] === 'eael-tab-inline-icon' && $settings['eael_adv_tabs_tab_icon_alignment'] === 'after' ) : ?>
                                 <span class="eael-tab-title title-before-icon"><?php echo Helper::eael_wp_kses($tab['eael_adv_tabs_tab_title']); ?></span>
                             <?php endif; ?>
