@@ -108,7 +108,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 })(jQuery);
 
 (function ($) {
-	$(document).on('click', '.theme-savoy .nm-qty-minus, .theme-savoy .nm-qty-plus', function(e) {
+	$(document).on('click', '.theme-savoy .eael-product-popup .nm-qty-minus, .theme-savoy .eael-product-popup .nm-qty-plus', function(e) {
 		// Get elements and values
 		var $this		= $(this),
 			$qty		= $this.closest('.quantity').find('.qty'),

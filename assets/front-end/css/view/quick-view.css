@@ -538,47 +538,47 @@
     padding: 10px 18px !important;
   }
 }
-.theme-savoy .flex-control-nav {
+.theme-savoy .eael-product-popup .flex-control-nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
-.theme-savoy .nm-quantity-wrap {
+.theme-savoy .eael-product-popup .nm-quantity-wrap {
   width: auto;
   border: none;
 }
-.theme-savoy .nm-quantity-wrap .quantity {
+.theme-savoy .eael-product-popup .nm-quantity-wrap .quantity {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
-.theme-savoy .variations_form.nm-custom-select tr .value select {
+.theme-savoy .eael-product-popup .variations_form.nm-custom-select tr .value select {
   opacity: 1;
   border: 1px solid #ccc;
 }
-.theme-savoy #nm-product-meta {
+.theme-savoy .eael-product-popup #nm-product-meta {
   padding-left: 0;
   text-align: left;
 }
-.theme-savoy #nm-product-meta .nm-row {
+.theme-savoy .eael-product-popup #nm-product-meta .nm-row {
   padding-left: 0;
 }
-.theme-savoy #nm-product-meta .nm-row .col-xs-12 {
+.theme-savoy .eael-product-popup #nm-product-meta .nm-row .col-xs-12 {
   padding-left: 0;
   display: grid;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: start;
 }
-.theme-savoy .eael-product-popup-ready ~ #elementor-lightbox-slideshow-single-img {
+.theme-savoy .eael-product-popup .eael-product-popup-ready ~ #elementor-lightbox-slideshow-single-img {
   display: none !important;
 }
-.theme-savoy .eael-product-popup-details figure.woocommerce-product-gallery__wrapper > div {
+.theme-savoy .eael-product-popup .eael-product-popup-details figure.woocommerce-product-gallery__wrapper > div {
   opacity: 0 !important;
 }
-.theme-savoy .eael-product-popup-details figure.woocommerce-product-gallery__wrapper > div:first-child,
-.theme-savoy .eael-product-popup-details figure.woocommerce-product-gallery__wrapper > div.flex-active-slide {
+.theme-savoy .eael-product-popup .eael-product-popup-details figure.woocommerce-product-gallery__wrapper > div:first-child,
+.theme-savoy .eael-product-popup .eael-product-popup-details figure.woocommerce-product-gallery__wrapper > div.flex-active-slide {
   opacity: 1 !important;
 }
