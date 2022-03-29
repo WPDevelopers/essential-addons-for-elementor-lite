@@ -15,7 +15,9 @@ ea.hooks.addAction("init", "ea", () => {
 					$($currentTabId + ' .eael-tabs-nav > ul li', $scope)
 					.removeClass("active")
 					.addClass("inactive");
+					
 					$(this).removeClass("inactive").addClass("active");
+
 					hashLink = true;
 				} else {
 					if ($(this).hasClass("active-default") && !hashLink) {
@@ -74,8 +76,9 @@ ea.hooks.addAction("init", "ea", () => {
 				
 				$(this).parent("li").addClass("active");
 				
-				$(tabsNav).removeClass("active active-default").addClass("inactive");
+				$(tabsNav).removeClass("active active-default").addClass("inactive").attr('aria-selected', 'false').attr('aria-expanded', 'false');
 				$(this).addClass("active").removeClass("inactive");
+				$(this).attr("aria-selected", 'true').attr("aria-expanded", 'true');
 				
 				$(tabsContent).removeClass("active").addClass("inactive");
 				$(tabsContent)
