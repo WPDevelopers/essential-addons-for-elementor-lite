@@ -450,6 +450,12 @@
                 <field type="Woo Checkout: Additional Info Title" editor_type="LINE">ea_woo_checkout_additional_info_title</field>
                 <field type="Woo Checkout: Payment Title" editor_type="LINE">ea_woo_checkout_payment_title</field>
                 <field type="Woo Checkout: Place Order Text" editor_type="LINE">ea_woo_checkout_place_order_text</field>
+                <field type="Woo Checkout: Tab Login Text" editor_type="LINE">ea_woo_checkout_tab_login_text</field>
+                <field type="Woo Checkout: Tab Coupon Text" editor_type="LINE">ea_woo_checkout_tab_coupon_text</field>
+                <field type="Woo Checkout: Tab Billing Shipping Text" editor_type="LINE">ea_woo_checkout_tab_billing_shipping_text</field>
+                <field type="Woo Checkout: Tab Payment Text" editor_type="LINE">ea_woo_checkout_tab_payment_text</field>
+                <field type="Woo Checkout: Tab Button Next Text" editor_type="LINE">ea_woo_checkout_tabs_btn_next_text</field>
+                <field type="Woo Checkout: Tab Button Previous Text" editor_type="LINE">ea_woo_checkout_tabs_btn_prev_text</field>
             </fields>
         </widget>
     </elementor-widgets>
