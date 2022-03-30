@@ -235,9 +235,9 @@ trait Generator {
 
 
 		// output custom js as fallback
-		if ( $this->custom_js_strings ) {
-			printf( '<script>%1$s</script>', $this->custom_js_strings );
-		}
+//		if ( $this->custom_js_strings ) {
+//			printf( '<script>%1$s</script>', $this->custom_js_strings );
+//		}
 	}
 
 	/**

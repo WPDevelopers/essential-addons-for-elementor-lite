@@ -16,6 +16,7 @@ class Asset_Builder {
 	const JS_KEY = '_eael_custom_js';
 	public $registered_elements;
 	public $registered_extensions;
+	public $custom_js = '';
 
 	public function __construct( $registered_elements, $registered_extensions ) {
 		$this->registered_elements   = $registered_elements;
@@ -23,16 +24,29 @@ class Asset_Builder {
 		add_action( 'elementor/editor/after_save', array( $this, 'eael_elements_cache' ), 10, 2 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
 		add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ], 100 );
+
+
+		add_action( 'wp_footer', [ $this, 'add_inline_js' ] );
+	}
+
+	public function add_inline_js(){
+		wp_add_inline_script( 'eael-load-js', $this->custom_js);
 	}
 
 	public function eael_elements_cache( $post_id, $data ) {
 		$widget_list = $this->get_widget_list( $data );
+		$page_setting = get_post_meta($post_id,'_elementor_page_settings',true);
+		$custom_js = isset( $page_setting['eael_custom_js'] )?trim( $page_setting['eael_custom_js'] ):'';
+
+		update_post_meta( $post_id, '_eael_custom_js', $custom_js );
 		$this->save_elements_data( $post_id, $widget_list );
 	}
 
 	public function frontend_asset_load() {
 		$this->post_id = get_the_ID();
 		$this->get_element_data();
+		wp_register_script( 'eael-load-js', '', array("jquery"), '', true );
+		wp_enqueue_script( 'eael-load-js'  );
 		wp_enqueue_script( 'eael-gent', EAEL_PLUGIN_URL . 'assets/front-end/js/view/general.min.js', [ 'jquery' ], 10, true );
 	}
 
@@ -76,6 +90,7 @@ class Asset_Builder {
 		$document = Plugin::$instance->documents->get( $this->post_id );
 		$data     = $document ? $document->get_elements_data() : [];
 		$data     = $this->get_widget_list( $data );
+		update_post_meta( $this->post_id, '_eael_custom_js', $document->get_settings( 'eael_custom_js' ) );
 		$this->save_elements_data( $this->post_id, $data );
 	}
 
@@ -155,6 +170,7 @@ class Asset_Builder {
 			);
 		}
 
+		$this->load_custom_js( $post_id );
 
 	}
 
@@ -294,5 +310,13 @@ class Asset_Builder {
 			'eael-google-map'                 => 'eael-adv-google-map',
 			'eael-instafeed'                  => 'eael-instagram-gallery',
 		];
+	}
+
+	public function load_custom_js( $post_id ){
+		$custom_js = get_post_meta( $post_id,'_eael_custom_js',true );
+		if ( $custom_js ) {
+			$this->custom_js .= $custom_js;
+			//printf( '<script id="eael-%1$s-custom-js" >%2$s</script>',$post_id, $custom_js );
+		}
 	}
 }
