@@ -53,17 +53,28 @@ var EventCalendar = function ($scope, $) {
 
 				if ( event.extendedProps.is_redirect == 'yes' ) {
 					element.attr("href", event.url);
+					
 					if (event.extendedProps.external === "on") {
 						element.attr("target", "_blank");
+						element.find("td.fc-list-item-title a").attr("target", "_blank");
 					}
+
 					if (event.extendedProps.nofollow === "on") {
 						element.attr("rel", "nofollow");
+						element.find("td.fc-list-item-title a").attr("rel", "nofollow");
 					}
-					
+
 					if (event.extendedProps.custom_attributes != '' ) {
 						$.each(event.extendedProps.custom_attributes, function(index,item){
 							element.attr(item.key, item.value);
+							element.find("td.fc-list-item-title a").attr(item.key, item.value);
 						});
+					}
+					
+					if (element.hasClass('fc-list-item')) {
+						element.removeAttr("href target rel");
+						element.removeClass("fc-has-url");
+						element.css('cursor', 'default');
 					}
 				}else {
 					element.attr("href", "javascript:void(0);");
