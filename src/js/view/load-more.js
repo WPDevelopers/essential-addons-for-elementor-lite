@@ -17,8 +17,10 @@
 			$layout = $this.data("layout"),
 			$template_info = $this.data("template"),
 			$page = parseInt($this.data("page")) + 1,
-			$max_page = $this.data("max-page") != undefined ? parseInt($this.data("max-page")) : false;
-
+			$max_page = $this.data("max-page") != undefined ? parseInt($this.data("max-page")) : false,
+			$exclude_ids = [],
+			$active_term_id = 0,
+			$active_taxonomy = '';
 		if (typeof $widget_id == "undefined" || typeof $args == "undefined") {
 			return;
 		}
@@ -54,6 +56,20 @@
 
 			$data.taxonomy = $taxonomy;
 			$data.page = $gallery_page;
+		}
+
+		if ( $data.class === "Essential_Addons_Elementor\\Pro\\Elements\\Dynamic_Filterable_Gallery" ) {
+			$('.dynamic-gallery-item-inner').each(function() {
+				$exclude_ids.push($(this).data('itemid'));
+			});
+			
+			$active_term_id = $('.dynamic-gallery-category.active').data('termid');
+			$active_taxonomy = $('.dynamic-gallery-category.active').data('taxonomy');
+
+			$data.page = 1; //page flag is not needed since we are using exclude ids
+			$data.exclude_ids = JSON.stringify($exclude_ids);
+			$data.active_term_id = typeof $active_term_id === 'undefined' ? 0 : $active_term_id;
+			$data.active_taxonomy = typeof $active_taxonomy === 'undefined' ? '' : $active_taxonomy;
 		}
 
 		String($args)
