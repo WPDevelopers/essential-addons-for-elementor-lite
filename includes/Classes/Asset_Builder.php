@@ -7,7 +7,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 } // Exit if accessed directly
 use Elementor\Core\Files\CSS\Post as Post_CSS;
 use Elementor\Plugin;
-use function GuzzleHttp\Promise\is_rejected;
 
 class Asset_Builder {
 
@@ -25,6 +24,7 @@ class Asset_Builder {
 		add_action( 'elementor/editor/after_save', array( $this, 'eael_elements_cache' ), 10, 2 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
 		add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ], 100 );
+
 
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ],100 );
 	}
