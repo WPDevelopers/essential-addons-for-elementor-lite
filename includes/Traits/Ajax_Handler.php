@@ -160,6 +160,21 @@ trait Ajax_Handler {
 			$settings['show_load_more_text']       = $settings['eael_fg_loadmore_btn_text'];
 			$settings['layout_mode']               = isset( $settings['layout_mode'] ) ? $settings['layout_mode'] : 'masonry';
 
+			$exclude_ids = json_decode( html_entity_decode( stripslashes ( $_POST['exclude_ids'] ) ) );
+			$args['post__not_in'] = ( !empty( $_POST['exclude_ids'] ) ) ? array_map( 'intval', array_unique($exclude_ids) ) : array();
+			$active_term_id = ( !empty( $_POST['active_term_id'] ) ) ? intval( $_POST['active_term_id'] ) : 0;
+			$active_taxonomy = ( !empty( $_POST['active_taxonomy'] ) ) ? sanitize_text_field( $_POST['active_taxonomy'] ) : '';
+			
+			if( 0 < $active_term_id && 
+				!empty( $active_taxonomy ) && 
+				!empty($args['tax_query']) 
+			) {
+				foreach ($args['tax_query'] as $key => $taxonomy) {
+					if (isset($taxonomy['taxonomy']) && $taxonomy['taxonomy'] === $active_taxonomy) {
+						$args['tax_query'][$key]['terms'] = [$active_term_id];
+					}
+				}
+			}
 		}
 
 		$link_settings = [
