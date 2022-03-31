@@ -25,7 +25,6 @@ class Asset_Builder {
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
 		add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ], 100 );
 
-
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ] );
 	}
 
@@ -47,10 +46,18 @@ class Asset_Builder {
 		$this->get_element_data();
 		wp_register_script( 'eael-load-js', '', array("jquery"), '', true );
 		wp_enqueue_script( 'eael-load-js'  );
-		wp_enqueue_script( 'eael-gent', EAEL_PLUGIN_URL . 'assets/front-end/js/view/general.min.js', [ 'jquery' ], 10, true );
+		if ( !$this->is_edit() ) {
+			wp_enqueue_script( 'eael-gent', EAEL_PLUGIN_URL . 'assets/front-end/js/view/general.min.js', [ 'jquery' ], 10, true );
+		}
+
 	}
 
 	public function post_asset_load( Post_CSS $css ) {
+
+		if ( $this->is_edit() ) {
+			return false;
+		}
+
 		$this->post_id = $css->get_post_id();
 		$this->get_element_data();
 		$this->enqueue_asset( $this->post_id );
@@ -316,7 +323,14 @@ class Asset_Builder {
 		$custom_js = get_post_meta( $post_id,'_eael_custom_js',true );
 		if ( $custom_js ) {
 			$this->custom_js .= $custom_js;
-			//printf( '<script id="eael-%1$s-custom-js" >%2$s</script>',$post_id, $custom_js );
 		}
+	}
+
+	public function is_edit(){
+		return (
+			Plugin::instance()->editor->is_edit_mode() ||
+			Plugin::instance()->preview->is_preview_mode() ||
+			is_preview()
+		);
 	}
 }
