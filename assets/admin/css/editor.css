@@ -210,9 +210,3 @@
 	pointer-events: none;
 	touch-action: none;
 }
-.elementor-control-date_time_logic .elementor-control-field,
-.elementor-control-logic_operator_between .elementor-control-field,
-.elementor-control-logic_operator_equal .elementor-control-field {
-	margin-left: auto;
-	margin-right: auto;
-}
