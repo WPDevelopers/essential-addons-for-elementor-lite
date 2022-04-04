@@ -122,7 +122,7 @@ class Bootstrap
         // register hooks
         $this->register_hooks();
 
-        $this->asset = new Asset_Builder($this->registered_elements,$this->registered_extensions);
+        new Asset_Builder( $this->registered_elements, $this->registered_extensions );
 
 
     }
