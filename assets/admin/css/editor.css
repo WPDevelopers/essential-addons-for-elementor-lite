@@ -202,6 +202,17 @@
 	margin-left: 4px;
 	font-size: 14px;
 }
-[data-setting="user_role_operand_multi"] + .select2 ul.select2-selection__rendered > li:nth-child(2).select2-search--inline > input.select2-search__field {
+.elementor-control-eael_cl_logics [data-setting="user_role_operand_multi"] + .select2 ul.select2-selection__rendered > li:nth-child(2).select2-search--inline > input.select2-search__field {
 	width: auto !important;
+}
+.elementor-control-eael_cl_logics .elementor-control-dynamic_field label.elementor-control-title,
+.elementor-control-eael_cl_logics .elementor-control-dynamic_field input[data-setting="dynamic_field"] {
+	pointer-events: none;
+	touch-action: none;
+}
+.elementor-control-date_time_logic .elementor-control-field,
+.elementor-control-logic_operator_between .elementor-control-field,
+.elementor-control-logic_operator_equal .elementor-control-field {
+	margin-left: auto;
+	margin-right: auto;
 }
