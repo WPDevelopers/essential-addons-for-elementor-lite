@@ -18,11 +18,10 @@ class Asset_Builder {
 
 	public function __construct( $registered_elements, $registered_extensions ) {
 
-		$elements_manager = new Elements_Manager( $registered_elements, $registered_extensions );
+		$this->elements_manager = new Elements_Manager( $registered_elements, $registered_extensions );
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
 		add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ], 100 );
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
-
 	}
 
 	public function add_inline_js(){
@@ -36,9 +35,7 @@ class Asset_Builder {
 
 	public function frontend_asset_load() {
 		$this->post_id = get_the_ID();
-		wp_register_script( 'eael-load-js', '', array("jquery"), '', true );
-		wp_enqueue_script( 'eael-load-js'  );
-		//$this->elements_manager->get_element_data();
+		$this->elements_manager->get_element_list( $this->post_id );
 
 		if ( !$this->is_edit() ) {
 			wp_enqueue_script( 'eael-gent', EAEL_PLUGIN_URL . 'assets/front-end/js/view/general.min.js', [ 'jquery' ], 10, true );
@@ -53,20 +50,11 @@ class Asset_Builder {
 		}
 
 		$this->post_id = $css->get_post_id();
-		//$this->elements_manager->get_element_data();
-		$this->enqueue_asset( $this->post_id );
+		$this->elements_manager->get_element_list( $this->post_id );
+		//$this->enqueue_asset( $this->post_id );
 	}
 
-	public function has_exist( $post_id ) {
-		$status = get_post_meta( $post_id, self::ELEMENT_KEY, true );
-		if ( ! empty( $status ) ) {
-			$this->has_asset( $post_id, $status );
 
-			return true;
-		}
-
-		return false;
-	}
 
 	public function cache_asset() {
 
@@ -201,14 +189,6 @@ class Asset_Builder {
 		return str_replace( [ '/', '\\' ], DIRECTORY_SEPARATOR, $path );
 	}
 
-	public function remove_files_new( $post_id = null, $ext = [ 'css', 'js' ] ) {
-		foreach ( $ext as $e ) {
-			$path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.' . $e;
-			if ( file_exists( $path ) ) {
-				unlink( $path );
-			}
-		}
-	}
 
 	public function safe_url_new( $url ) {
 		if ( is_ssl() ) {
