@@ -7,8 +7,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 } // Exit if accessed directly
 
 use Elementor\Plugin;
+use Essential_Addons_Elementor\Traits\Library;
 
 class Elements_Manager {
+	use Library;
+
 	public $post_id;
 
 	const ELEMENT_KEY = '_eael_widget_elements';
@@ -30,56 +33,68 @@ class Elements_Manager {
 		$page_setting = get_post_meta( $post_id, '_elementor_page_settings', true );
 		$custom_js    = isset( $page_setting['eael_custom_js'] ) ? trim( $page_setting['eael_custom_js'] ) : '';
 
-		update_post_meta( $post_id, '_eael_custom_js', $custom_js );
-		$this->save_elements_data( $post_id, $widget_list );
+		$this->save_widgets_list( $post_id, $widget_list, $custom_js );
 	}
 
 	public function get_widget_list( $data ) {
 		$widget_list = [];
-		Plugin::$instance->db->iterate_data( $data, function ( $element ) use ( &$widget_list ) {
+		$replace = $this->replace_widget_name();
+		Plugin::$instance->db->iterate_data( $data, function ( $element ) use ( &$widget_list, $replace ) {
 
 			if ( empty( $element['widgetType'] ) ) {
 				$type = $element['elType'];
 			} else {
 				$type = $element['widgetType'];
 			}
-			$replace = $this->replace_widget_name();
-			if ( strpos( $type, 'eael-' ) !== false ) {
 
-				if ( isset( $replace[ $type ] ) ) {
-					$type = $replace[ $type ];
-				}
+			if ( ! empty( $element['widgetType'] ) && $element['widgetType'] === 'global' ) {
+				$document = Plugin::$instance->documents->get( $element['templateID'] );
+				$type = current( $this->get_widget_list( $document->get_elements_data() ) );
 
-				$type = str_replace( 'eael-', '', $type );
-				if ( ! isset( $widget_list[ $type ] ) ) {
-					$widget_list[ $type ] = $type;
+				if ( ! empty( $type ) ) {
+					$type = 'eael-' . $type;
 				}
 			}
 
-			$widget_list += $this->get_ext_name( $element );
+			if ( ! empty( $type ) && !is_array($type)  ) {
+				if ( strpos( $type, 'eael-' ) !== false ) {
+
+					if ( isset( $replace[ $type ] ) ) {
+						$type = $replace[ $type ];
+					}
+
+					$type = str_replace( 'eael-', '', $type );
+					if ( ! isset( $widget_list[ $type ] ) ) {
+						$widget_list[ $type ] = $type;
+					}
+				}
+
+				$widget_list += $this->get_extension_list( $element );
+			}
+
 		} );
 
 		return $widget_list;
 	}
 
-	public function get_element_data(  ) {
+	public function get_element_list( $post_id ) {
 
 		if ( Plugin::instance()->editor->is_edit_mode() ) {
 			return false;
 		}
 
-		if ( $this->has_exist( $this->post_id ) ) {
+		if ( $this->has_exist( $post_id ) ) {
 			return false;
 		}
 
-		$document = Plugin::$instance->documents->get( $this->post_id );
+		$document = Plugin::$instance->documents->get( $post_id );
 		$data     = $document ? $document->get_elements_data() : [];
 		$data     = $this->get_widget_list( $data );
-		update_post_meta( $this->post_id, '_eael_custom_js', $document->get_settings( 'eael_custom_js' ) );
-		$this->save_widgets_meta( $this->post_id, $data );
+		$this->save_widgets_list( $post_id, $data, $document->get_settings( 'eael_custom_js' ) );
+		return true;
 	}
 
-	public function get_ext_name( $element ) {
+	public function get_extension_list( $element ) {
 		$list = [];
 		if ( isset( $element['elType'] ) && $element['elType'] == 'section' ) {
 			if ( ! empty( $element['settings']['eael_particle_switch'] ) ) {
@@ -101,7 +116,7 @@ class Elements_Manager {
 	}
 
 	public function replace_widget_name() {
-		return $replace = [
+		return [
 			'eicon-woocommerce'               => 'eael-product-grid',
 			'eael-countdown'                  => 'eael-count-down',
 			'eael-creative-button'            => 'eael-creative-btn',
@@ -121,28 +136,47 @@ class Elements_Manager {
 		];
 	}
 
-	public function save_widgets_meta( $post_id, $list ) {
+	public function save_widgets_list( $post_id, $list, $custom_js = '' ) {
+
+		if ( \defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return $post_id;
+		}
+
 		if ( get_post_status( $post_id ) !== 'publish' || ! Plugin::$instance->documents->get( $post_id )->is_built_with_elementor() ) {
 			return false;
 		}
-		update_post_meta( $post_id, self::ELEMENT_KEY, $list );
-		$this->remove_files_new( $post_id );
 
-		if ( ! empty( $list ) ) {
-			if ( get_option( 'eael_js_print_method' ) == 'internal' ) {
-				$this->custom_js .= $this->generate_strings_new( $list, 'view', 'js' );
-			} else {
-				$this->generate_script_new( $post_id, $list, 'view', 'js' );
-			}
-
-			$this->generate_script_new( $post_id, $list, 'view', 'css' );
-
-			if ( get_option( 'elementor_css_print_method' ) == 'internal' ) {
-				$this->custom_css .= $this->generate_strings_new( $list, 'view', 'css' );
-			} else {
-				$this->generate_script_new( $post_id, $list, 'view', 'css' );
-			}
-
+		if ( in_array( get_post_meta( $post_id, '_elementor_template_type', true ), $this->excluded_template_type() ) ) {
+			return false;
 		}
+
+		update_post_meta( $post_id, '_eael_custom_js', $custom_js );
+
+		if ( md5( implode('', (array) $list) ) == md5( implode('', (array) get_post_meta( $post_id, self::ELEMENT_KEY, true )) ) ) {
+			return false;
+		}
+
+		try {
+			update_post_meta( $post_id, self::ELEMENT_KEY, $list );
+			$this->remove_files( $post_id );
+
+			return true;
+		} catch ( \Exception $e ) {
+			return false;
+		}
+
+	}
+
+	public function has_exist( $post_id ) {
+		$status = get_post_meta( $post_id, self::ELEMENT_KEY, true );
+
+		return ! empty( $status );
+	}
+
+	public function excluded_template_type() {
+		return [
+			'kit',
+			'search-results'
+		];
 	}
 }

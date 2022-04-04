@@ -111,22 +111,20 @@ trait Library
         return true;
     }
 
-    /**
-     * Remove files
-     *
-     * @since 3.0.0
-     */
-    public function remove_files($uid = null, $ext = ['css', 'js'])
-    {
-        foreach ($ext as $e) {
-            $path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.' . $e;
-
-            if (file_exists($path)) {
-                unlink($path);
-            }
-        }
-	    do_action( 'eael_remove_assets', $uid, $ext );
-    }
+	/**
+	 * Remove files
+	 *
+	 * @since 3.0.0
+	 */
+	public function remove_files( $post_id = null, $ext = [ 'css', 'js' ] ) {
+		foreach ( $ext as $e ) {
+			$path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael' . ( $post_id ? '-' . $post_id : '' ) . '.' . $e;
+			if ( file_exists( $path ) ) {
+				unlink( $path );
+			}
+		}
+		do_action( 'eael_remove_assets', $post_id, $ext );
+	}
 
     /**
      * Remove files in dir
