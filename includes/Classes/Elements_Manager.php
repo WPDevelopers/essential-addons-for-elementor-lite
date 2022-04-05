@@ -126,11 +126,11 @@ class Elements_Manager {
 			'eael-cta-box'                    => 'eael-call-to-action',
 			'eael-dual-color-header'          => 'eael-dual-header',
 			'eael-pricing-table'              => 'eael-price-table',
-			'eael-filterable-gallery'         => 'eael-filter-gallery',
+			'eael-filterable-gallery'          => 'eael-filter-gallery',
 			'eael-one-page-nav'               => 'eael-one-page-navigation',
 			'eael-interactive-card'           => 'eael-interactive-cards',
 			'eael-image-comparison'           => 'eael-img-comparison',
-			'eael-dynamic-filterable-gallery' => 'eael-dynamic-filter-gallery',
+			'eael-dynamic-filterable-gallery'  => 'eael-dynamic-filter-gallery',
 			'eael-google-map'                 => 'eael-adv-google-map',
 			'eael-instafeed'                  => 'eael-instagram-gallery',
 		];
@@ -164,7 +164,6 @@ class Elements_Manager {
 		} catch ( \Exception $e ) {
 			return false;
 		}
-
 	}
 
 	public function has_exist( $post_id ) {

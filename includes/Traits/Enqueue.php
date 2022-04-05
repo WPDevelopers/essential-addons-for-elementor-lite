@@ -155,60 +155,60 @@ trait Enqueue
 	    ] );
 
         // edit mode
-        if ($this->is_edit_mode()) {
-            $elements = $this->get_settings();
-
-            // if no widget in page, return
-            if (empty($elements)) {
-                return;
-            }
-
-            // run hook before enqueue styles
-            do_action('eael/before_enqueue_styles', $elements);
-
-            // css
-            if (get_option('elementor_css_print_method') == 'internal') {
-                $this->css_strings = $this->generate_strings($elements, 'edit', 'css');
-            } else {
-                // generate editor style
-                if (!$this->has_assets_files($this->uid, 'css')) {
-                    $this->generate_script($this->uid, $elements, 'edit', 'css');
-                }
-
-                // enqueue
-                wp_enqueue_style(
-                    $this->uid,
-                    $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid . '.min.css'),
-                    false,
-                    time()
-                );
-            }
-
-            // run hook before enqueue scripts
-            do_action('eael/before_enqueue_scripts', $elements);
-
-            // js
-            if (get_option('eael_js_print_method') == 'internal') {
-                $this->js_strings = $this->generate_strings($elements, 'edit', 'js');
-            } else {
-                // generate editor script
-                if (!$this->has_assets_files($this->uid, 'js')) {
-                    $this->generate_script($this->uid, $elements, 'edit', 'js');
-                }
-
-                // enqueue
-                wp_enqueue_script(
-                    $this->uid,
-                    $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid . '.min.js'),
-                    ['jquery'],
-                    time(),
-                    true
-                );
-
-                // localize
-                wp_localize_script($this->uid, 'localize', $this->localize_objects);
-            }
-        }
+//        if ($this->is_edit_mode()) {
+//            $elements = $this->get_settings();
+//
+//            // if no widget in page, return
+//            if (empty($elements)) {
+//                return;
+//            }
+//
+//            // run hook before enqueue styles
+//            do_action('eael/before_enqueue_styles', $elements);
+//
+//            // css
+//            if (get_option('elementor_css_print_method') == 'internal') {
+//                $this->css_strings = $this->generate_strings($elements, 'edit', 'css');
+//            } else {
+//                // generate editor style
+//                if (!$this->has_assets_files($this->uid, 'css')) {
+//                    $this->generate_script($this->uid, $elements, 'edit', 'css');
+//                }
+//
+//                // enqueue
+//                wp_enqueue_style(
+//                    $this->uid,
+//                    $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid . '.min.css'),
+//                    false,
+//                    time()
+//                );
+//            }
+//
+//            // run hook before enqueue scripts
+//            do_action('eael/before_enqueue_scripts', $elements);
+//
+//            // js
+//            if (get_option('eael_js_print_method') == 'internal') {
+//                $this->js_strings = $this->generate_strings($elements, 'edit', 'js');
+//            } else {
+//                // generate editor script
+//                if (!$this->has_assets_files($this->uid, 'js')) {
+//                    $this->generate_script($this->uid, $elements, 'edit', 'js');
+//                }
+//
+//                // enqueue
+//                wp_enqueue_script(
+//                    $this->uid,
+//                    $this->safe_url(EAEL_ASSET_URL . '/' . $this->uid . '.min.js'),
+//                    ['jquery'],
+//                    time(),
+//                    true
+//                );
+//
+//                // localize
+//                wp_localize_script($this->uid, 'localize', $this->localize_objects);
+//            }
+//        }
 
         // view mode
 //        if ($this->is_preview_mode()) {
