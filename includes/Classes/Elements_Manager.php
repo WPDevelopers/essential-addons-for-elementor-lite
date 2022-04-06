@@ -38,7 +38,7 @@ class Elements_Manager {
 
 	public function get_widget_list( $data ) {
 		$widget_list = [];
-		$replace = $this->replace_widget_name();
+		$replace     = $this->replace_widget_name();
 		Plugin::$instance->db->iterate_data( $data, function ( $element ) use ( &$widget_list, $replace ) {
 
 			if ( empty( $element['widgetType'] ) ) {
@@ -49,14 +49,14 @@ class Elements_Manager {
 
 			if ( ! empty( $element['widgetType'] ) && $element['widgetType'] === 'global' ) {
 				$document = Plugin::$instance->documents->get( $element['templateID'] );
-				$type = current( $this->get_widget_list( $document->get_elements_data() ) );
+				$type     = current( $this->get_widget_list( $document->get_elements_data() ) );
 
 				if ( ! empty( $type ) ) {
 					$type = 'eael-' . $type;
 				}
 			}
 
-			if ( ! empty( $type ) && !is_array($type)  ) {
+			if ( ! empty( $type ) && ! is_array( $type ) ) {
 				if ( strpos( $type, 'eael-' ) !== false ) {
 
 					if ( isset( $replace[ $type ] ) ) {
@@ -91,6 +91,7 @@ class Elements_Manager {
 		$data     = $document ? $document->get_elements_data() : [];
 		$data     = $this->get_widget_list( $data );
 		$this->save_widgets_list( $post_id, $data, $document->get_settings( 'eael_custom_js' ) );
+
 		return true;
 	}
 
@@ -126,11 +127,11 @@ class Elements_Manager {
 			'eael-cta-box'                    => 'eael-call-to-action',
 			'eael-dual-color-header'          => 'eael-dual-header',
 			'eael-pricing-table'              => 'eael-price-table',
-			'eael-filterable-gallery'          => 'eael-filter-gallery',
+			'eael-filterable-gallery'         => 'eael-filter-gallery',
 			'eael-one-page-nav'               => 'eael-one-page-navigation',
 			'eael-interactive-card'           => 'eael-interactive-cards',
 			'eael-image-comparison'           => 'eael-img-comparison',
-			'eael-dynamic-filterable-gallery'  => 'eael-dynamic-filter-gallery',
+			'eael-dynamic-filterable-gallery' => 'eael-dynamic-filter-gallery',
 			'eael-google-map'                 => 'eael-adv-google-map',
 			'eael-instafeed'                  => 'eael-instagram-gallery',
 		];
@@ -152,7 +153,7 @@ class Elements_Manager {
 
 		update_post_meta( $post_id, '_eael_custom_js', $custom_js );
 
-		if ( md5( implode('', (array) $list) ) == md5( implode('', (array) get_post_meta( $post_id, self::ELEMENT_KEY, true )) ) ) {
+		if ( md5( implode( '', (array) $list ) ) == md5( implode( '', (array) get_post_meta( $post_id, self::ELEMENT_KEY, true ) ) ) ) {
 			return false;
 		}
 
