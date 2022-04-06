@@ -44,7 +44,6 @@ class Asset_Builder {
 		add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ], 100 );
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
 		add_action( 'wp_head', [ $this, 'add_inline_css' ], 100 );
-
 	}
 
 	public function add_inline_js() {
@@ -202,10 +201,10 @@ class Asset_Builder {
 		$dynamic_asset_id = ( $post_id ? '-' . $post_id : '' );
 
 		if ( $this->css_print_method == 'internal' ) {
-			$this->css_strings .= $this->generate_strings( $elements, 'view', 'css' );
+			$this->css_strings .= $this->elements_manager->generate_strings( $elements, 'view', 'css' );
 		} else {
 			if ( ! $this->has_asset( $post_id, 'css' ) ) {
-				$this->generate_script( $post_id, $elements, 'view', 'css' );
+				$this->elements_manager->generate_script( $post_id, $elements, 'view', 'css' );
 			}
 
 			wp_enqueue_style(
@@ -217,10 +216,10 @@ class Asset_Builder {
 		}
 
 		if ( $this->js_print_method == 'internal' ) {
-			$this->custom_js .= $this->generate_strings( $elements, 'view', 'js' );
+			$this->custom_js .= $this->elements_manager->generate_strings( $elements, 'view', 'js' );
 		} else {
 			if ( ! $this->has_asset( $post_id, 'js' ) ) {
-				$this->generate_script( $post_id, $elements, 'view', 'js' );
+				$this->elements_manager->generate_script( $post_id, $elements, 'view', 'js' );
 			}
 
 			wp_enqueue_script(
@@ -242,71 +241,6 @@ class Asset_Builder {
 		}
 
 		return false;
-	}
-
-	public function generate_script( $post_id, $elements, $context, $ext ) {
-		// if folder not exists, create new folder
-		if ( ! file_exists( EAEL_ASSET_PATH ) ) {
-			wp_mkdir_p( EAEL_ASSET_PATH );
-		}
-
-		// naming asset file
-		$file_name = 'eael' . ( $post_id ? '-' . $post_id : '' ) . '.' . $ext;
-
-		// output asset string
-		$output = $this->generate_strings( $elements, $context, $ext );
-
-		// write to file
-		$file_path = $this->safe_path( EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file_name );
-		file_put_contents( $file_path, $output );
-	}
-
-	public function generate_strings( $elements, $context, $ext ) {
-		$output = '';
-
-		$paths = $this->generate_dependency( $elements, $context, $ext );
-
-		if ( ! empty( $paths ) ) {
-			foreach ( $paths as $path ) {
-				$output .= file_get_contents( $this->safe_path( $path ) );
-			}
-		}
-
-		return $output;
-	}
-
-	public function generate_dependency( $elements, $context, $type ) {
-		$lib  = [ 'view' => [], 'edit' => [] ];
-		$self = [ 'general' => [], 'view' => [], 'edit' => [] ];
-
-		if ( $type == 'js' ) {
-			$self['general'][] = EAEL_PLUGIN_PATH . 'assets/front-end/js/view/general.min.js';
-			$self['edit'][]    = EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/promotion.min.js';
-		} else if ( $type == 'css' && ! $this->is_edit() ) {
-			$self['view'][] = EAEL_PLUGIN_PATH . "assets/front-end/css/view/general.min.css";
-		}
-		foreach ( $elements as $element ) {
-
-			if ( isset( $this->registered_elements[ $element ] ) ) {
-				if ( ! empty( $this->registered_elements[ $element ]['dependency'][ $type ] ) ) {
-					foreach ( $this->registered_elements[ $element ]['dependency'][ $type ] as $file ) {
-						${$file['type']}[ $file['context'] ][] = $file['file'];
-					}
-				}
-			} elseif ( isset( $this->registered_extensions[ $element ] ) ) {
-				if ( ! empty( $this->registered_extensions[ $element ]['dependency'][ $type ] ) ) {
-					foreach ( $this->registered_extensions[ $element ]['dependency'][ $type ] as $file ) {
-						${$file['type']}[ $file['context'] ][] = $file['file'];
-					}
-				}
-			}
-		}
-
-		if ( $context == 'view' ) {
-			return array_unique( array_merge( $lib['view'], $self['view'] ) );
-		}
-
-		return array_unique( array_merge( $lib['view'], $lib['edit'], $self['edit'], $self['view'] ) );
 	}
 
 	public function load_custom_js( $post_id ) {
