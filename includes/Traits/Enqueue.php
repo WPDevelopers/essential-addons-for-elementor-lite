@@ -76,83 +76,83 @@ trait Enqueue
 		//fix asset loading issue if no custom elementor css is not used.
 	    $this->loaded_templates[] = get_the_ID();
         // register fontawesome as fallback
-        wp_register_style(
-            'font-awesome-5-all',
-            ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/all.min.css',
-            false,
-            EAEL_PLUGIN_VERSION
-        );
-
-        wp_register_style(
-            'font-awesome-4-shim',
-            ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/v4-shims.min.css',
-            false,
-            EAEL_PLUGIN_VERSION
-        );
-
-        wp_register_script(
-            'font-awesome-4-shim',
-            ELEMENTOR_ASSETS_URL . 'lib/font-awesome/js/v4-shims.min.js',
-            false,
-            EAEL_PLUGIN_VERSION
-        );
-
-        // register reading progress assets
-        wp_register_style(
-            'eael-reading-progress',
-            EAEL_PLUGIN_URL . 'assets/front-end/css/view/reading-progress.min.css',
-            false,
-            EAEL_PLUGIN_VERSION
-        );
-
-        wp_register_script(
-            'eael-reading-progress',
-            EAEL_PLUGIN_URL . 'assets/front-end/js/view/reading-progress.min.js',
-            ['jquery'],
-            EAEL_PLUGIN_VERSION
-        );
-
-        // register Table of contents assets
-        wp_register_style(
-            'eael-table-of-content',
-            EAEL_PLUGIN_URL . 'assets/front-end/css/view/table-of-content.min.css',
-            false,
-            EAEL_PLUGIN_VERSION
-        );
-
-        wp_register_script(
-            'eael-table-of-content',
-            EAEL_PLUGIN_URL . 'assets/front-end/js/view/table-of-content.min.js',
-            ['jquery'],
-            EAEL_PLUGIN_VERSION
-        );
-
-        // register scroll to top assets
-        wp_register_style(
-            'eael-scroll-to-top',
-            EAEL_PLUGIN_URL . 'assets/front-end/css/view/scroll-to-top.min.css',
-            false,
-            EAEL_PLUGIN_VERSION
-        );
-
-        wp_register_script(
-            'eael-scroll-to-top',
-            EAEL_PLUGIN_URL . 'assets/front-end/js/view/scroll-to-top.min.js',
-            ['jquery'],
-            EAEL_PLUGIN_VERSION
-        );
-
-	    // localize object
-	    $this->localize_objects = apply_filters( 'eael/localize_objects', [
-		    'ajaxurl'        => admin_url( 'admin-ajax.php' ),
-		    'nonce'          => wp_create_nonce( 'essential-addons-elementor' ),
-		    'i18n'           => [
-			    'added'   => __( 'Added ', 'essential-addons-for-elementor-lite' ),
-			    'compare' => __( 'Compare', 'essential-addons-for-elementor-lite' ),
-			    'loading' => esc_html__( 'Loading...', 'essential-addons-for-elementor-lite' )
-		    ],
-		    'page_permalink' => get_the_permalink(),
-	    ] );
+//        wp_register_style(
+//            'font-awesome-5-all',
+//            ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/all.min.css',
+//            false,
+//            EAEL_PLUGIN_VERSION
+//        );
+//
+//        wp_register_style(
+//            'font-awesome-4-shim',
+//            ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/v4-shims.min.css',
+//            false,
+//            EAEL_PLUGIN_VERSION
+//        );
+//
+//        wp_register_script(
+//            'font-awesome-4-shim',
+//            ELEMENTOR_ASSETS_URL . 'lib/font-awesome/js/v4-shims.min.js',
+//            false,
+//            EAEL_PLUGIN_VERSION
+//        );
+//
+//        // register reading progress assets
+//        wp_register_style(
+//            'eael-reading-progress',
+//            EAEL_PLUGIN_URL . 'assets/front-end/css/view/reading-progress.min.css',
+//            false,
+//            EAEL_PLUGIN_VERSION
+//        );
+//
+//        wp_register_script(
+//            'eael-reading-progress',
+//            EAEL_PLUGIN_URL . 'assets/front-end/js/view/reading-progress.min.js',
+//            ['jquery'],
+//            EAEL_PLUGIN_VERSION
+//        );
+//
+//        // register Table of contents assets
+//        wp_register_style(
+//            'eael-table-of-content',
+//            EAEL_PLUGIN_URL . 'assets/front-end/css/view/table-of-content.min.css',
+//            false,
+//            EAEL_PLUGIN_VERSION
+//        );
+//
+//        wp_register_script(
+//            'eael-table-of-content',
+//            EAEL_PLUGIN_URL . 'assets/front-end/js/view/table-of-content.min.js',
+//            ['jquery'],
+//            EAEL_PLUGIN_VERSION
+//        );
+//
+//        // register scroll to top assets
+//        wp_register_style(
+//            'eael-scroll-to-top',
+//            EAEL_PLUGIN_URL . 'assets/front-end/css/view/scroll-to-top.min.css',
+//            false,
+//            EAEL_PLUGIN_VERSION
+//        );
+//
+//        wp_register_script(
+//            'eael-scroll-to-top',
+//            EAEL_PLUGIN_URL . 'assets/front-end/js/view/scroll-to-top.min.js',
+//            ['jquery'],
+//            EAEL_PLUGIN_VERSION
+//        );
+//
+//	    // localize object
+//	    $this->localize_objects = apply_filters( 'eael/localize_objects', [
+//		    'ajaxurl'        => admin_url( 'admin-ajax.php' ),
+//		    'nonce'          => wp_create_nonce( 'essential-addons-elementor' ),
+//		    'i18n'           => [
+//			    'added'   => __( 'Added ', 'essential-addons-for-elementor-lite' ),
+//			    'compare' => __( 'Compare', 'essential-addons-for-elementor-lite' ),
+//			    'loading' => esc_html__( 'Loading...', 'essential-addons-for-elementor-lite' )
+//		    ],
+//		    'page_permalink' => get_the_permalink(),
+//	    ] );
 
         // edit mode
 //        if ($this->is_edit_mode()) {
@@ -324,23 +324,23 @@ trait Enqueue
     // inline enqueue styles
     public function enqueue_inline_styles()
     {
-        if ($this->is_edit_mode() || $this->is_preview_mode()) {
-            if ($this->css_strings) {
-	            printf( '<style id="%1$s">%2$s</style>', esc_attr( $this->uid ), $this->css_strings );
-            }
-        }
+//        if ($this->is_edit_mode() || $this->is_preview_mode()) {
+//            if ($this->css_strings) {
+//	            printf( '<style id="%1$s">%2$s</style>', esc_attr( $this->uid ), $this->css_strings );
+//            }
+//        }
     }
 
     // inline enqueue scripts
     public function enqueue_inline_scripts()
     {
         // view/edit mode mode
-        if ($this->is_edit_mode() || $this->is_preview_mode()) {
-            if ($this->js_strings) {
-                printf('<script>%1$s</script>','var localize ='.wp_json_encode($this->localize_objects));
-	            printf( '<script id="%1$s">%2$s</script>', esc_attr( $this->uid ), $this->js_strings );
-            }
-        }
+//        if ($this->is_edit_mode() || $this->is_preview_mode()) {
+//            if ($this->js_strings) {
+//                printf('<script>%1$s</script>','var localize ='.wp_json_encode($this->localize_objects));
+//	            printf( '<script id="%1$s">%2$s</script>', esc_attr( $this->uid ), $this->js_strings );
+//            }
+//        }
     }
 
     // templately promo enqueue scripts

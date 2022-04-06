@@ -30,31 +30,47 @@ class Asset_Builder {
 
 	public $registered_extensions;
 
+	public $localize_objects;
+
 	public function __construct( $registered_elements, $registered_extensions ) {
 
 		$this->registered_elements   = $registered_elements;
 		$this->registered_extensions = $registered_extensions;
-		$this->elements_manager = new Elements_Manager( $this->registered_elements, $this->registered_extensions );
-		$this->css_print_method = get_option( 'elementor_css_print_method' );
-		$this->js_print_method  = get_option( 'eael_js_print_method' );
+		$this->elements_manager      = new Elements_Manager( $this->registered_elements, $this->registered_extensions );
+		$this->css_print_method      = get_option( 'elementor_css_print_method' );
+		$this->js_print_method       = get_option( 'eael_js_print_method' );
+
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
 		add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ], 100 );
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
+		add_action( 'wp_head', [ $this, 'add_inline_css' ], 100 );
 
 	}
 
-	public function add_inline_js(){
-		wp_add_inline_script( 'eael-load-js', $this->custom_js);
+	public function add_inline_js() {
 
-		printf( '<script id="eael-inline-js">%s</script>', $this->custom_js );
-		printf( '<style id="eael-inline-css">%s</style>', $this->css_strings );
+		if ( $this->is_edit_mode() || $this->is_preview_mode() ) {
+			if ( $this->custom_js ) {
+				printf( '<script>%1$s</script>', 'var localize =' . wp_json_encode( $this->localize_objects ) );
+				printf( '<script id="eael-inline-js">%s</script>', $this->custom_js );
+			}
+		}
 	}
 
-	public function register_script(){
+	public function add_inline_css() {
+		if ( $this->is_edit_mode() || $this->is_preview_mode() ) {
+			if ( $this->css_strings ) {
+				printf( '<style id="eael-inline-css">%s</style>', $this->css_strings );
+			}
+		}
+	}
+
+	public function register_script() {
 		wp_register_script( 'eael-general', EAEL_PLUGIN_URL . 'assets/front-end/js/view/general.min.js', [ 'jquery' ], 10, true );
+		wp_register_style( 'eael-general', EAEL_PLUGIN_PATH . "assets/front-end/css/view/general.min.css", [ 'elementor-frontend' ], 10, true );
 	}
 
-	public function load_commnon_asset(){
+	public function load_commnon_asset() {
 		wp_register_style(
 			'font-awesome-5-all',
 			ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/all.min.css',
@@ -87,7 +103,7 @@ class Asset_Builder {
 		wp_register_script(
 			'eael-reading-progress',
 			EAEL_PLUGIN_URL . 'assets/front-end/js/view/reading-progress.min.js',
-			['jquery'],
+			[ 'jquery' ],
 			EAEL_PLUGIN_VERSION
 		);
 
@@ -102,7 +118,7 @@ class Asset_Builder {
 		wp_register_script(
 			'eael-table-of-content',
 			EAEL_PLUGIN_URL . 'assets/front-end/js/view/table-of-content.min.js',
-			['jquery'],
+			[ 'jquery' ],
 			EAEL_PLUGIN_VERSION
 		);
 
@@ -117,7 +133,7 @@ class Asset_Builder {
 		wp_register_script(
 			'eael-scroll-to-top',
 			EAEL_PLUGIN_URL . 'assets/front-end/js/view/scroll-to-top.min.js',
-			['jquery'],
+			[ 'jquery' ],
 			EAEL_PLUGIN_VERSION
 		);
 
@@ -135,18 +151,28 @@ class Asset_Builder {
 	}
 
 	public function frontend_asset_load() {
+		$handle = 'eael';
 		$this->post_id = get_the_ID();
 		$this->elements_manager->get_element_list( $this->post_id );
+		$this->load_commnon_asset();
 		$this->register_script();
 
 		if ( ! $this->is_edit() ) {
 			wp_enqueue_script( 'eael-general' );
+			wp_enqueue_style( 'eael-general' );
+			$handle = 'eael-general';
 		} else {
 			$elements = $this->get_settings();
-			if( empty( $elements ) ){
+			if ( empty( $elements ) ) {
 				return false;
 			}
-			$this->enqueue_asset( null, $elements );
+
+			do_action( 'eael/before_enqueue_styles', $elements );
+			do_action( 'eael/before_enqueue_scripts', $elements );
+
+			$this->post_id = null;
+			$this->enqueue_asset( $this->post_id, $elements );
+			wp_localize_script( $handle, 'localize', $this->localize_objects );
 		}
 	}
 
@@ -158,13 +184,14 @@ class Asset_Builder {
 
 		$this->post_id = $css->get_post_id();
 		$this->elements_manager->get_element_list( $this->post_id );
-		$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true);
+		$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
 
-		if(!empty( $elements )){
+		if ( ! empty( $elements ) ) {
+			do_action( 'eael/before_enqueue_styles', $elements );
+			do_action( 'eael/before_enqueue_scripts', $elements );
 			$this->enqueue_asset( $this->post_id, $elements );
 		}
 	}
-
 
 
 	public function cache_asset() {
@@ -175,29 +202,29 @@ class Asset_Builder {
 		$dynamic_asset_id = ( $post_id ? '-' . $post_id : '' );
 
 		if ( $this->css_print_method == 'internal' ) {
-			$this->css_strings .= $this->generate_strings_new( $elements, 'view', 'css' );
+			$this->css_strings .= $this->generate_strings( $elements, 'view', 'css' );
 		} else {
 			if ( ! $this->has_asset( $post_id, 'css' ) ) {
-				$this->generate_script_new( $post_id, $elements, 'view', 'css' );
+				$this->generate_script( $post_id, $elements, 'view', 'css' );
 			}
 
 			wp_enqueue_style(
 				'eael' . $dynamic_asset_id,
 				$this->safe_url( EAEL_ASSET_URL . '/' . 'eael' . $dynamic_asset_id . '.css' ),
-				[ 'elementor-frontend' ],
+				[ 'eael-general' ],
 				get_post_modified_time()
 			);
 		}
 
 		if ( $this->js_print_method == 'internal' ) {
-			$this->custom_js .= $this->generate_strings_new( $elements, 'view', 'js' );
+			$this->custom_js .= $this->generate_strings( $elements, 'view', 'js' );
 		} else {
 			if ( ! $this->has_asset( $post_id, 'js' ) ) {
-				$this->generate_script_new( $post_id, $elements, 'view', 'js' );
+				$this->generate_script( $post_id, $elements, 'view', 'js' );
 			}
 
 			wp_enqueue_script(
-				'eael' .$dynamic_asset_id,
+				'eael' . $dynamic_asset_id,
 				$this->safe_url( EAEL_ASSET_URL . '/' . 'eael' . $dynamic_asset_id . '.js' ),
 				[ 'eael-general' ],
 				get_post_modified_time(),
@@ -217,7 +244,7 @@ class Asset_Builder {
 		return false;
 	}
 
-	public function generate_script_new( $post_id, $elements, $context, $ext ) {
+	public function generate_script( $post_id, $elements, $context, $ext ) {
 		// if folder not exists, create new folder
 		if ( ! file_exists( EAEL_ASSET_PATH ) ) {
 			wp_mkdir_p( EAEL_ASSET_PATH );
@@ -227,17 +254,17 @@ class Asset_Builder {
 		$file_name = 'eael' . ( $post_id ? '-' . $post_id : '' ) . '.' . $ext;
 
 		// output asset string
-		$output = $this->generate_strings_new( $elements, $context, $ext );
+		$output = $this->generate_strings( $elements, $context, $ext );
 
 		// write to file
 		$file_path = $this->safe_path( EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file_name );
 		file_put_contents( $file_path, $output );
 	}
 
-	public function generate_strings_new( $elements, $context, $ext ) {
+	public function generate_strings( $elements, $context, $ext ) {
 		$output = '';
 
-		$paths = $this->generate_dependency_new( $elements, $context, $ext );
+		$paths = $this->generate_dependency( $elements, $context, $ext );
 
 		if ( ! empty( $paths ) ) {
 			foreach ( $paths as $path ) {
@@ -248,14 +275,14 @@ class Asset_Builder {
 		return $output;
 	}
 
-	public function generate_dependency_new( $elements, $context, $type ) {
+	public function generate_dependency( $elements, $context, $type ) {
 		$lib  = [ 'view' => [], 'edit' => [] ];
 		$self = [ 'general' => [], 'view' => [], 'edit' => [] ];
 
 		if ( $type == 'js' ) {
 			$self['general'][] = EAEL_PLUGIN_PATH . 'assets/front-end/js/view/general.min.js';
 			$self['edit'][]    = EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/promotion.min.js';
-		} else if ( $type == 'css' ) {
+		} else if ( $type == 'css' && ! $this->is_edit() ) {
 			$self['view'][] = EAEL_PLUGIN_PATH . "assets/front-end/css/view/general.min.css";
 		}
 		foreach ( $elements as $element ) {
@@ -282,14 +309,14 @@ class Asset_Builder {
 		return array_unique( array_merge( $lib['view'], $lib['edit'], $self['edit'], $self['view'] ) );
 	}
 
-	public function load_custom_js( $post_id ){
-		$custom_js = get_post_meta( $post_id,'_eael_custom_js',true );
+	public function load_custom_js( $post_id ) {
+		$custom_js = get_post_meta( $post_id, '_eael_custom_js', true );
 		if ( $custom_js ) {
 			$this->custom_js .= $custom_js;
 		}
 	}
 
-	public function is_edit(){
+	public function is_edit() {
 		return (
 			Plugin::instance()->editor->is_edit_mode() ||
 			Plugin::instance()->preview->is_preview_mode() ||
