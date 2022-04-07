@@ -41,7 +41,7 @@ class Asset_Builder {
 		$this->js_print_method       = get_option( 'eael_js_print_method' );
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
-		add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ], 100 );
+		add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ] );
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
 		add_action( 'wp_head', [ $this, 'add_inline_css' ], 100 );
 	}
@@ -171,8 +171,8 @@ class Asset_Builder {
 
 			$this->post_id = null;
 			$this->enqueue_asset( $this->post_id, $elements );
-			wp_localize_script( $handle, 'localize', $this->localize_objects );
 		}
+		wp_localize_script( $handle, 'localize', $this->localize_objects );
 	}
 
 	public function post_asset_load( Post_CSS $css ) {
@@ -190,11 +190,6 @@ class Asset_Builder {
 			do_action( 'eael/before_enqueue_scripts', $elements );
 			$this->enqueue_asset( $this->post_id, $elements );
 		}
-	}
-
-
-	public function cache_asset() {
-
 	}
 
 	public function enqueue_asset( $post_id = null, $elements ) {
