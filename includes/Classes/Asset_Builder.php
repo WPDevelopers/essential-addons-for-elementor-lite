@@ -161,9 +161,9 @@ class Asset_Builder {
 			wp_enqueue_script( 'eael-general' );
 			wp_enqueue_style( 'eael-general' );
 			$handle = 'eael-general';
-			$context = 'view';
 		} else {
 			$elements = $this->get_settings();
+
 			if ( empty( $elements ) ) {
 				return false;
 			}
@@ -171,8 +171,7 @@ class Asset_Builder {
 			do_action( 'eael/before_enqueue_styles', $elements );
 			do_action( 'eael/before_enqueue_scripts', $elements );
 
-			$this->post_id = null;
-			$this->enqueue_asset( $this->post_id, $elements,'edit' );
+			$this->enqueue_asset( null, $elements,'edit' );
 		}
 		wp_localize_script( $handle, 'localize', $this->localize_objects );
 	}
