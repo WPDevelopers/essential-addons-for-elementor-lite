@@ -365,3 +365,9 @@
 .eaicon-user-slash-solid:before {
 	content: "\e969";
 }
+.eaicon-xmark-solid:before {
+	content: "\e96a";
+}
+.eaicon-check-solid:before {
+	content: "\e96b";
+}
