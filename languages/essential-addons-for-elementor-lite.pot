@@ -13,6 +13,18 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: ../includes/Classes/Asset_Builder.php:144
+msgid "Added "
+msgstr ""
+
+#: ../includes/Classes/Asset_Builder.php:145, ../includes/Traits/Woo_Product_Comparable.php:2112
+msgid "Compare"
+msgstr ""
+
+#: ../includes/Classes/Asset_Builder.php:146
+msgid "Loading..."
+msgstr ""
+
 #: ../includes/Classes/Helper.php:205, ../includes/Elements/Adv_Accordion.php:325, ../includes/Elements/Adv_Tabs.php:298, ../includes/Elements/Contact_Form_7.php:270, ../includes/Elements/Content_Ticker.php:306, ../includes/Elements/Countdown.php:467, ../includes/Elements/Creative_Button.php:188, ../includes/Elements/Cta_Box.php:397, ../includes/Elements/Data_Table.php:482, ../includes/Elements/Dual_Color_Header.php:214, ../includes/Elements/Fancy_Text.php:269, ../includes/Elements/Filterable_Gallery.php:796, ../includes/Elements/Flip_Box.php:733, ../includes/Elements/Info_Box.php:493, ../includes/Elements/Login_Register.php:1038, ../includes/Elements/Pricing_Table.php:698, ../includes/Elements/Progress_Bar.php:271, ../includes/Elements/Team_Member.php:237, ../includes/Elements/Testimonial.php:214, ../includes/Elements/Tooltip.php:513, ../includes/Elements/Twitter_Feed.php:308, ../includes/Elements/WeForms.php:110
 msgid "Go Premium for More Features"
 msgstr ""
@@ -8189,18 +8201,6 @@ msgstr ""
 
 #: ../includes/Traits/Elements.php:314
 msgid "Advanced Search"
-msgstr ""
-
-#: ../includes/Traits/Enqueue.php:150
-msgid "Added "
-msgstr ""
-
-#: ../includes/Traits/Enqueue.php:151, ../includes/Traits/Woo_Product_Comparable.php:2112
-msgid "Compare"
-msgstr ""
-
-#: ../includes/Traits/Enqueue.php:152
-msgid "Loading..."
 msgstr ""
 
 #: ../includes/Traits/Facebook_Feed.php:31

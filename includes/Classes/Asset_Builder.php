@@ -151,6 +151,7 @@ class Asset_Builder {
 
 	public function frontend_asset_load() {
 		$handle = 'eael';
+		$context = 'edit';
 		$this->post_id = get_the_ID();
 		$this->elements_manager->get_element_list( $this->post_id );
 		$this->load_commnon_asset();
@@ -160,6 +161,7 @@ class Asset_Builder {
 			wp_enqueue_script( 'eael-general' );
 			wp_enqueue_style( 'eael-general' );
 			$handle = 'eael-general';
+			$context = 'view';
 		} else {
 			$elements = $this->get_settings();
 			if ( empty( $elements ) ) {
@@ -170,7 +172,7 @@ class Asset_Builder {
 			do_action( 'eael/before_enqueue_scripts', $elements );
 
 			$this->post_id = null;
-			$this->enqueue_asset( $this->post_id, $elements );
+			$this->enqueue_asset( $this->post_id, $elements,'edit' );
 		}
 		wp_localize_script( $handle, 'localize', $this->localize_objects );
 	}
@@ -192,14 +194,14 @@ class Asset_Builder {
 		}
 	}
 
-	public function enqueue_asset( $post_id = null, $elements ) {
+	public function enqueue_asset( $post_id = null, $elements, $context = 'view' ) {
 		$dynamic_asset_id = ( $post_id ? '-' . $post_id : '' );
 
 		if ( $this->css_print_method == 'internal' ) {
-			$this->css_strings .= $this->elements_manager->generate_strings( $elements, 'view', 'css' );
+			$this->css_strings .= $this->elements_manager->generate_strings( $elements, $context, 'css' );
 		} else {
 			if ( ! $this->has_asset( $post_id, 'css' ) ) {
-				$this->elements_manager->generate_script( $post_id, $elements, 'view', 'css' );
+				$this->elements_manager->generate_script( $post_id, $elements, $context, 'css' );
 			}
 
 			wp_enqueue_style(
@@ -211,10 +213,10 @@ class Asset_Builder {
 		}
 
 		if ( $this->js_print_method == 'internal' ) {
-			$this->custom_js .= $this->elements_manager->generate_strings( $elements, 'view', 'js' );
+			$this->custom_js .= $this->elements_manager->generate_strings( $elements, $context, 'js' );
 		} else {
 			if ( ! $this->has_asset( $post_id, 'js' ) ) {
-				$this->elements_manager->generate_script( $post_id, $elements, 'view', 'js' );
+				$this->elements_manager->generate_script( $post_id, $elements, $context, 'js' );
 			}
 
 			wp_enqueue_script(
