@@ -18,8 +18,7 @@ use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
 use Essential_Addons_Elementor\Traits\Controls;
 use Essential_Addons_Elementor\Traits\Facebook_Feed;
 use Essential_Addons_Elementor\Classes\Asset_Builder;
-
-
+use Essential_Addons_Elementor\Traits\Ajax_Handler;
 class Bootstrap
 {
     use Library;
@@ -33,6 +32,7 @@ class Bootstrap
     use Woo_Product_Comparable;
     use Controls;
     use Facebook_Feed;
+    use Ajax_Handler;
 
     // instance container
     private static $instance = null;
@@ -150,48 +150,25 @@ class Bootstrap
         add_filter('elementor/frontend/builder_content_data', [$this, 'collect_loaded_templates'], 10, 2);
         add_action('wp_print_footer_scripts', [$this, 'update_request_data']);
 
+	    $this->init_ajax_hooks();
 
         // Ajax
-        add_action('wp_ajax_load_more', array($this, 'ajax_load_more'));
-        add_action('wp_ajax_nopriv_load_more', array($this, 'ajax_load_more'));
-
-        add_action('wp_ajax_woo_product_pagination_product', array($this, 'eael_woo_pagination_product_ajax'));
-        add_action('wp_ajax_nopriv_woo_product_pagination_product', array($this, 'eael_woo_pagination_product_ajax'));
-
-        add_action('wp_ajax_woo_product_pagination', array($this, 'eael_woo_pagination_ajax'));
-        add_action('wp_ajax_nopriv_woo_product_pagination', array($this, 'eael_woo_pagination_ajax'));
-
-        //ajax add to cart fro product grid quick view
-        add_action('wp_ajax_eael_product_add_to_cart', array($this, 'eael_product_add_to_cart'));
-        add_action('wp_ajax_nopriv_eael_product_add_to_cart', array($this, 'eael_product_add_to_cart'));
-
         add_action('wp_ajax_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
         add_action('wp_ajax_nopriv_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
 
-        add_action('wp_ajax_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
-        add_action('wp_ajax_nopriv_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
         // Compare table
 	    add_action( 'wp_ajax_nopriv_eael_product_grid', [$this, 'get_compare_table']);
 	    add_action( 'wp_ajax_eael_product_grid', [$this, 'get_compare_table']);
-		//quick view popup
-	    add_action( 'wp_ajax_nopriv_eael_product_quickview_popup', [$this, 'eael_product_quickview_popup']);
-	    add_action( 'wp_ajax_eael_product_quickview_popup', [$this, 'eael_product_quickview_popup']);
-
-	    //product gallery
-	    add_action( 'wp_ajax_nopriv_eael_product_gallery', [$this, 'ajax_eael_product_gallery']);
-	    add_action( 'wp_ajax_eael_product_gallery', [$this, 'ajax_eael_product_gallery']);
-
-//        handle select2 ajax search
-        add_action('wp_ajax_eael_select2_search_post', [$this, 'select2_ajax_posts_filter_autocomplete']);
-        add_action('wp_ajax_nopriv_eael_select2_search_post', [$this, 'select2_ajax_posts_filter_autocomplete']);
-
-        add_action('wp_ajax_eael_select2_get_title', [$this, 'select2_ajax_get_posts_value_titles']);
-        add_action('wp_ajax_nopriv_eael_select2_get_title', [$this, 'select2_ajax_get_posts_value_titles']);
 
 	    add_action( 'wp_ajax_eael_clear_widget_cache_data', [ $this, 'eael_clear_widget_cache_data' ] );
 
+	    if ( version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ) {
+		    add_action( 'elementor/controls/register', array($this, 'register_controls') );
+	    } else {
+		    add_action('elementor/controls/controls_registered', array($this, 'register_controls'));
+	    }
+
         // Elements
-        add_action('elementor/controls/controls_registered', array($this, 'register_controls'));
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
         add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
         add_filter('elementor/editor/localize_settings', [$this, 'promote_pro_elements']);
@@ -256,8 +233,6 @@ class Bootstrap
 
             add_action('admin_menu', array($this, 'admin_menu'));
             add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
-            add_action('wp_ajax_save_settings_with_ajax', array($this, 'save_settings'));
-            add_action('wp_ajax_clear_cache_files_with_ajax', array($this, 'clear_cache_files'));
 
             // Core
             add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'insert_plugin_links'));

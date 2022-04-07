@@ -191,6 +191,10 @@ $quick_view_setting = [
                                     </a>
                                 </li>
                             <?php } ?>
+	                        <?php if( $should_print_link ){?>
+                                <li class="view-details"><?php echo '<a href="' . $product->get_permalink
+				                        () . '"><i class="fas fa-link"></i></a>'; ?></li>
+	                        <?php } ?>
                         </ul>
                     </div>
                 </div>
