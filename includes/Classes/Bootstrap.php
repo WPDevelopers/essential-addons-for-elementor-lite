@@ -246,8 +246,14 @@ class Bootstrap
                 add_action('admin_notices', array($this, 'elementor_not_loaded'));
             }
 
+
+
+	        add_action( 'in_admin_header', [ $this, 'remove_admin_notice' ] );
+
 	        //handle typeform auth token
 	        add_action('admin_init', [$this, 'typeform_auth_handle']);
+
+
 
 
 	        // On Editor - Register WooCommerce frontend hooks before the Editor init.

@@ -5178,3 +5178,20 @@ button.button__greyBg:hover:disabled {
     border-color: #C8D3E9 !important;
     text-shadow: none !important;
 }
+
+.eael-admin-promotion-message {
+    background: #5E2EFF;
+    color: white;
+    padding: 15px 10px;
+}
+
+.eael-admin-promotion-message p {
+    font-size:14px;
+}
+
+.eael-admin-promotion-message i:before {
+    color:white;
+}
+.toplevel_page_eael-settings #wpcontent {
+    padding-left:0;
+}
