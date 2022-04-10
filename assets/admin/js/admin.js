@@ -528,5 +528,24 @@
 			       },
 		       });
 	});
+
+	$(".eael-admin-promotion-close").on('click',function(event){
+		event.preventDefault();
+		$.ajax({
+			url: localize.ajaxurl,
+			type: "POST",
+			data: {
+				action: "eael_admin_promotion",
+				security: localize.nonce,
+			},
+
+			success: function (response) {
+				$("#eael-admin-promotion-message").remove();
+			},
+			error: function (err) {
+
+			},
+		});
+	});
 	
 } )( jQuery );
