@@ -59,11 +59,11 @@ trait Twitter_Feed
                 ],
             ]);
 
-            if(!empty($response['response']) && $response['response']['code']==200){
-	            $items = json_decode(wp_remote_retrieve_body($response), true);
-                $expiration = isset( $settings['eael_auto_clear_cache'] ) && $settings['eael_auto_clear_cache'] == 'yes' && isset( $settings['eael_twitter_feed_cache_limit'] ) && $settings['eael_twitter_feed_cache_limit'] != '' ? $settings['eael_twitter_feed_cache_limit'] : 0;
-	            set_transient( $cache_key, $items, $expiration);
-            }
+	        if ( ! empty( $response['response'] ) && $response['response']['code'] == 200 ) {
+		        $items      = json_decode( wp_remote_retrieve_body( $response ), true );
+		        $expiration = ! empty( $settings['eael_auto_clear_cache'] ) && ! empty( $settings['eael_twitter_feed_cache_limit'] ) ? absint( $settings['eael_twitter_feed_cache_limit'] ) * MINUTE_IN_SECONDS : 0;
+		        set_transient( $cache_key, $items, $expiration );
+	        }
         }
 
 	    if ( empty( $items ) ) {
