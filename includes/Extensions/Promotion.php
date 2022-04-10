@@ -148,7 +148,7 @@ class Promotion
 				'type' => Controls_Manager::RAW_HTML,
 				'raw'  => $this->teaser_template( [
 					'title'    => __( 'Meet EA Conditional Display', 'essential-addons-for-elementor-lite' ),
-					'messages' => __( "Control any section, column, or widget's visibility with your own logic.", 'essential-addons-for-elementor-lite' ),
+					'messages' => __( "Control any section, column, container or widget’s visibility with your own logic.", 'essential-addons-for-elementor-lite' ),
 				] ),
 			]
 		);
