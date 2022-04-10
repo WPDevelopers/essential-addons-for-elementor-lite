@@ -128,6 +128,32 @@ class Twitter_Feed extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_auto_clear_cache',
+            [
+                'label' => esc_html__('Auto Cache Clear', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('no', 'essential-addons-for-elementor-lite'),
+                'default' => 'yes',
+                'return_value' => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'eael_twitter_feed_cache_limit',
+            [
+                'label' => __('Data Cache Time', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::NUMBER,
+                'min' => 1,
+                'default' => 60,
+                'description' => __('Cache expiration time (Minutes)', 'essential-addons-for-elementor-lite'),
+                'condition'   => [
+                    'eael_auto_clear_cache' => 'yes'
+                ] 
+            ]
+        );
+
 	    $this->add_control(
 		    'eael_clear_cache_control',
 		    [
@@ -135,7 +161,10 @@ class Twitter_Feed extends Widget_Base
 			    'type'        => Controls_Manager::BUTTON,
 			    'text'        => __( 'Clear', 'essential-addons-for-elementor-lite' ),
 			    'event'       => 'ea:cache:clear',
-			    'description' => esc_html__( 'Note: This will refresh your feed and fetch the latest data from your Twitter account', 'essential-addons-for-elementor-lite' )
+			    'description' => esc_html__( 'Note: This will refresh your feed and fetch the latest data from your Twitter account', 'essential-addons-for-elementor-lite' ),
+                'condition'   => [
+                    'eael_auto_clear_cache' => ''
+                ] 
 		    ]
 	    );
 
