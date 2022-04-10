@@ -538,6 +538,26 @@ trait Helper
 	    delete_transient( $cache_key );
 	    wp_send_json_success();
     }
+
+	public function promotion_message_on_admin_screen() {
+        ?>
+            <div class="eael-admin-promotion-message">
+                <i class="e-notice__dismiss" role="button" aria-label="Dismiss" tabindex="0"></i>
+                <p>Did you know Essential Addons offers a free library of 2,000+ Amazing Templates ? Choose from over 2,000 beautiful templates and kickstart your works!
+                    <a href="#">Check The Link</a></p>
+
+            </div>
+        <?php
+	}
+
+	public function remove_admin_notice() {
+		$current_screen = get_current_screen();
+		if ( $current_screen->id == 'toplevel_page_eael-settings' ) {
+			remove_all_actions( 'user_admin_notices' );
+			remove_all_actions( 'admin_notices' );
+			add_action( 'admin_notices', array( $this, 'promotion_message_on_admin_screen' ) );
+		}
+	}
 	
 }
 
