@@ -74,6 +74,8 @@ class Bootstrap
     // modules
     protected $installer;
 
+
+    const EAEL_PROMOTION_FLAG = 2;
     /**
      * Singleton instance
      *

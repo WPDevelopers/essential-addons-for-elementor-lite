@@ -64,6 +64,7 @@ trait Ajax_Handler {
 		if ( is_admin() ) {
 			add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'save_settings' ) );
 			add_action( 'wp_ajax_clear_cache_files_with_ajax', array( $this, 'clear_cache_files' ) );
+			add_action( 'wp_ajax_eael_admin_promotion', array( $this, 'eael_admin_promotion' ) );
 		}
 	}
 
@@ -884,5 +885,15 @@ trait Ajax_Handler {
 		}
 
 		wp_send_json( true );
+	}
+
+	public function eael_admin_promotion(){
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		update_option( 'eael_admin_promotion', self::EAEL_PROMOTION_FLAG );
 	}
 }

@@ -5189,6 +5189,12 @@ button.button__greyBg:hover:disabled {
     font-size:14px;
 }
 
+.eael-admin-promotion-message p a:focus {
+    color:inherit;
+    outline:none;
+    box-showdow:none;
+}
+
 .eael-admin-promotion-message i:before {
     color:white;
 }
