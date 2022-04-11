@@ -402,19 +402,30 @@ trait Helper
      * @return array
      * @since 5.0.7
 	 */
-    public function eael_clear_widget_cache_data(){
+	public function eael_clear_widget_cache_data() {
+		global $wpdb;
 
-	    check_ajax_referer( 'essential-addons-elementor', 'security' );
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
 
-	    $ac_name   = sanitize_text_field( $_POST['ac_name'] );
-	    $hastag    = sanitize_text_field( $_POST['hastag'] );
-	    $c_key     = sanitize_text_field( $_POST['c_key'] );
-	    $c_secret  = sanitize_text_field( $_POST['c_secret'] );
-	    $cache_key = $ac_name . '_' . md5( $hastag . $c_key . $c_secret ) . '_tf_cache';
+		$ac_name     = sanitize_text_field( $_POST['ac_name'] );
+		$hastag      = sanitize_text_field( $_POST['hastag'] );
+		$c_key       = sanitize_text_field( $_POST['c_key'] );
+		$c_secret    = sanitize_text_field( $_POST['c_secret'] );
+		$key_pattern = '_transient_' . $ac_name . '%' . md5( $hastag . $c_key . $c_secret ) . '_tf_cache';
 
-	    delete_transient( $cache_key );
-	    wp_send_json_success();
-    }
+		$sql     = "SELECT `option_name` AS `name`
+            FROM  $wpdb->options
+            WHERE `option_name` LIKE '$key_pattern'
+            ORDER BY `option_name`";
+		$results = $wpdb->get_results( $sql );
+
+		foreach ( $results as $transient ) {
+			$cache_key = substr( $transient->name, 11 );
+			delete_transient( $cache_key );
+		}
+
+		wp_send_json_success();
+	}
 	
 }
 
