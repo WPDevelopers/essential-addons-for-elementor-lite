@@ -1861,3 +1861,31 @@
         transform: none;
     }
 }
+
+//savoy theme conflicts
+.theme-savoy {
+    .eael-product-gallery .woocommerce ul.products li.product {
+        .star-rating {
+            font-size: 12px;
+            letter-spacing: 2px;
+
+            &:before {
+                font-size: 12px;
+                letter-spacing: 2px;
+                line-height: 18px;
+            }
+
+            span{
+               font-size: 12px;
+               letter-spacing: 2px;
+
+               &:before {
+                   font-size: 12px;
+                   letter-spacing: 2px;
+                   left: 9px;
+                    line-height: 18px;
+               } 
+            }
+        } 
+    }
+}
