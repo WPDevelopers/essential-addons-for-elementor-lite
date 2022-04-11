@@ -5205,10 +5205,15 @@ button.button__greyBg:hover:disabled {
 .eael-element__wrap .eael-element__item[class*=" eael-promotion-"]:after {
     position: absolute;
     bottom: 55px;
-    padding: 1px 6px;
     font-size: 12px;
     color: white;
-    left: 0px;
+    left: 16px;
+    font-weight: 600;
+    border-radius: 4px;
+    width: 65px;
+    text-align: center;
+    height: 26px;
+    line-height: 25px;
 }
 .eael-element__wrap .eael-element__item.eael-promotion-isupdated:after {
     content: "Update";

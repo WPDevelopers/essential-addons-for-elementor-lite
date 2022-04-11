@@ -597,9 +597,9 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
 				<?php foreach ( $element[ 'elements' ] as $item ): ?>
                     <?php
 					$promotion_class = ! empty( $item['promotion'] ) ? sprintf( "eael-promotion-is%s", $item['promotion'] ) : "";
-					if(!empty( $item[ 'is_pro' ] ) && !$this->pro_enabled){
+					if ( ! empty( $item['is_pro'] ) && ! $this->pro_enabled ) {
 						$promotion_class = 'eael-promotion-ispro';
-                    }
+					}
                     ?>
                     <div class="eael-element__item <?php esc_attr_e($promotion_class); ?>">
 
