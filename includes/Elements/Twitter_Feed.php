@@ -133,8 +133,8 @@ class Twitter_Feed extends Widget_Base
 		    [
 			    'label'        => esc_html__( 'Auto Cache Clear', 'essential-addons-for-elementor-lite' ),
 			    'type'         => Controls_Manager::SWITCHER,
-			    'label_on'     => __( 'yes', 'essential-addons-for-elementor-lite' ),
-			    'label_off'    => __( 'no', 'essential-addons-for-elementor-lite' ),
+			    'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			    'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 			    'default'      => 'yes',
 			    'return_value' => 'yes',
 		    ]
