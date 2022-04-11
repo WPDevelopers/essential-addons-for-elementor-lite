@@ -371,3 +371,9 @@
 .eaicon-check-solid:before {
 	content: "\e96b";
 }
+.eaicon-users-solid:before {
+	content: "\e96c";
+}
+.eaicon-user-plus-solid:before {
+	content: "\e96d";
+}
