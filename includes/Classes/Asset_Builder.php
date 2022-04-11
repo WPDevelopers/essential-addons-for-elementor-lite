@@ -44,6 +44,7 @@ class Asset_Builder {
 		add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ] );
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
 		add_action( 'wp_head', [ $this, 'add_inline_css' ], 100 );
+		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ] );
 	}
 
 	public function add_inline_js() {
@@ -226,8 +227,15 @@ class Asset_Builder {
 				true
 			);
 		}
-
 		$this->load_custom_js( $post_id );
+
+	}
+
+	public function delete_cache_data(  $post_id, $post ){
+		$this->elements_manager->remove_files( $post_id );
+
+		delete_post_meta( $post_id, '_eael_custom_js' );
+		delete_post_meta( $post_id, '_eael_widget_elements' );
 
 	}
 
