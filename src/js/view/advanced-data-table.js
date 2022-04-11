@@ -198,7 +198,7 @@ class advancedDataTable {
         });
 
         // collect table cells value
-        for (let i = startIndex; i <= endIndex; i++) {
+        for (let i = 1; i <= table.rows.length-1; i++) {
           let value;
           let cell = table.rows[i].cells[index];
 
@@ -238,7 +238,7 @@ class advancedDataTable {
 
         // sort table
         collection.forEach((row, index) => {
-          table.rows[startIndex + index].innerHTML =
+          table.rows[1 + index].innerHTML =
             origTable.rows[row.index].innerHTML;
         });
       });
@@ -261,8 +261,8 @@ class advancedDataTable {
       let maxPages = Math.ceil(
         (table.rows.length - 1) / table.dataset.itemsPerPage
       );
-
-      // insert pagination
+      pagination.insertAdjacentHTML(
+            "beforeend", '');      // insert pagination
       if (maxPages > 1) {
         if (paginationType == "button") {
           for (let i = 1; i <= maxPages; i++) {
