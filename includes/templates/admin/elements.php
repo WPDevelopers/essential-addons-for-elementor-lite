@@ -9,18 +9,21 @@ $elements = [
 				'title'     => __( 'Creative Button', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/creative-buttons/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/content-elements/creative-buttons/',
+                'promotion' => 'updated'
 			],
 			[
 				'key'       => 'team-members',
 				'title'     => __( 'Team Member', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/team-members/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/team-members/',
+				'promotion' => 'new'
 			],
 			[
 				'key'       => 'testimonials',
 				'title'     => __( 'Testimonial', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/testimonials/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/testimonials/',
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'flip-box',
@@ -69,7 +72,8 @@ $elements = [
 				'title'     => __( 'Offcanvas', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/offcanvas-content/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/essential-addons-elementor-offcanvas/',
-				'is_pro'    => true
+				'is_pro'    => true,
+				'promotion' => 'new'
 			],
 			[
 				'key'       => 'advanced-menu',
@@ -207,6 +211,7 @@ $elements = [
 				'title'     => __( 'Dynamic Gallery', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/dynamic-gallery/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/dynamic-filterable-gallery/',
+                'promotion' => 'new',
 				'is_pro'    => true
 			]
 		]
@@ -590,12 +595,14 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
             <h3 class="eael-section__header"><?php echo esc_html( $element[ 'title' ] ) ?></h3>
             <div class="eael-element__wrap">
 				<?php foreach ( $element[ 'elements' ] as $item ): ?>
-                    <div class="eael-element__item">
-						<?php if ( !empty( $item[ 'is_pro' ] ) && !$this->pro_enabled ): ?>
-                            <div class="isPro">
-                                <span><?php _e( 'Pro', 'essential-addons-for-elementor-lite' ); ?></span>
-                            </div>
-						<?php endif; ?>
+                    <?php
+					$promotion_class = ! empty( $item['promotion'] ) ? sprintf( "eael-promotion-is%s", $item['promotion'] ) : "";
+					if(!empty( $item[ 'is_pro' ] ) && !$this->pro_enabled){
+						$promotion_class = 'eael-promotion-ispro';
+                    }
+                    ?>
+                    <div class="eael-element__item <?php esc_attr_e($promotion_class); ?>">
+
                         <div class="element__content">
                             <h4><?php echo esc_html( $item[ 'title' ] ); ?></h4>
                             <div class="element__options">
