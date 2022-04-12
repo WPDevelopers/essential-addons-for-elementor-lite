@@ -57,11 +57,12 @@ class Elements_Manager {
 			}
 
 			if ( ! empty( $type ) && ! is_array( $type ) ) {
-				if ( strpos( $type, 'eael-' ) !== false ) {
 
-					if ( isset( $replace[ $type ] ) ) {
-						$type = $replace[ $type ];
-					}
+				if ( isset( $replace[ $type ] ) ) {
+					$type = $replace[ $type ];
+				}
+
+				if ( strpos( $type, 'eael-' ) !== false ) {
 
 					$type = str_replace( 'eael-', '', $type );
 					if ( ! isset( $widget_list[ $type ] ) ) {
