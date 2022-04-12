@@ -13,15 +13,15 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../includes/Classes/Asset_Builder.php:144
+#: ../includes/Classes/Asset_Builder.php:145
 msgid "Added "
 msgstr ""
 
-#: ../includes/Classes/Asset_Builder.php:145, ../includes/Traits/Woo_Product_Comparable.php:2112
+#: ../includes/Classes/Asset_Builder.php:146, ../includes/Traits/Woo_Product_Comparable.php:2112
 msgid "Compare"
 msgstr ""
 
-#: ../includes/Classes/Asset_Builder.php:146
+#: ../includes/Classes/Asset_Builder.php:147
 msgid "Loading..."
 msgstr ""
 
