@@ -609,7 +609,16 @@
 }
 
 // savoy theme conflicts
-.theme-savoy .eael-product-popup{    
+.theme-savoy .eael-product-popup{   
+    &.woocommerce {
+        .nm-quantity-wrap {
+            .quantity {
+                .input-text {
+                    height: 42px;
+                }
+            }
+        }
+    } 
     .flex-control-nav {
         display: flex;
         flex-wrap: wrap;
