@@ -609,49 +609,54 @@
 }
 
 // savoy theme conflicts
-.theme-savoy .eael-product-popup{   
-    &.woocommerce {
+.theme-savoy {
+    #elementor-lightbox-slideshow-single-img {
+        display: none !important;
+    }
+    .eael-product-popup{  
+        &.woocommerce {
+            .nm-quantity-wrap {
+                .quantity {
+                    .input-text {
+                        height: 42px;
+                    }
+                }
+            }
+        } 
+        .flex-control-nav {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .nm-quantity-wrap {
+            width: auto;
+            border: none;
+        }
         .nm-quantity-wrap {
             .quantity {
-                .input-text {
-                    height: 42px;
+                display: flex;
+            }
+        }
+        .variations_form.nm-custom-select tr .value select{
+            opacity: 1;
+            border: 1px solid #ccc;
+        }
+
+        #nm-product-meta {
+            padding-left: 0;
+            text-align: left;
+
+            .nm-row {
+                padding-left: 0;
+
+                .col-xs-12 {
+                    padding-left: 0;
+                    display: grid;
+                    justify-content: start;
                 }
             }
         }
-    } 
-    .flex-control-nav {
-        display: flex;
-        flex-wrap: wrap;
-    }
-    .nm-quantity-wrap {
-        width: auto;
-        border: none;
-    }
-    .nm-quantity-wrap {
-        .quantity {
-            display: flex;
+        .eael-product-popup-ready ~ #elementor-lightbox-slideshow-single-img {
+            display: none !important;
         }
-    }
-    .variations_form.nm-custom-select tr .value select{
-        opacity: 1;
-        border: 1px solid #ccc;
-    }
-
-    #nm-product-meta {
-        padding-left: 0;
-        text-align: left;
-
-        .nm-row {
-            padding-left: 0;
-
-            .col-xs-12 {
-                padding-left: 0;
-                display: grid;
-                justify-content: start;
-            }
-        }
-    }
-    .eael-product-popup-ready ~ #elementor-lightbox-slideshow-single-img {
-        display: none !important;
     }
 }
