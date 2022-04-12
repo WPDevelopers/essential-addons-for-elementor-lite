@@ -32,7 +32,6 @@ class Elements_Manager {
 		$widget_list  = $this->get_widget_list( $data );
 		$page_setting = get_post_meta( $post_id, '_elementor_page_settings', true );
 		$custom_js    = isset( $page_setting['eael_custom_js'] ) ? trim( $page_setting['eael_custom_js'] ) : '';
-
 		$this->save_widgets_list( $post_id, $widget_list, $custom_js );
 	}
 
@@ -88,9 +87,9 @@ class Elements_Manager {
 			return false;
 		}
 
-		$document = Plugin::$instance->documents->get( $post_id );
-		$data     = $document ? $document->get_elements_data() : [];
-		$data     = $this->get_widget_list( $data );
+		$document  = Plugin::$instance->documents->get( $post_id );
+		$data      = $document ? $document->get_elements_data() : [];
+		$data      = $this->get_widget_list( $data );
 		$custom_js = $document ? $document->get_settings( 'eael_custom_js' ) : '';
 		$this->save_widgets_list( $post_id, $data, $custom_js );
 
@@ -245,8 +244,15 @@ class Elements_Manager {
 	}
 
 	public function update_asset( $post_id, $elements ) {
-		$this->generate_script( $post_id, $elements, 'view', 'css' );
-		$this->generate_script( $post_id, $elements, 'view', 'js' );
+
+		if ( $this->css_print_method != 'internal' ) {
+			$this->generate_script( $post_id, $elements, 'view', 'css' );
+		}
+
+		if ( $this->js_print_method != 'internal' ) {
+			$this->generate_script( $post_id, $elements, 'view', 'js' );
+		}
+
 	}
 
 	public function excluded_template_type() {

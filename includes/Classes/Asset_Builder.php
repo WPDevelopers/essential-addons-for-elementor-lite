@@ -34,11 +34,11 @@ class Asset_Builder {
 
 	public function __construct( $registered_elements, $registered_extensions ) {
 
-		$this->registered_elements   = $registered_elements;
-		$this->registered_extensions = $registered_extensions;
-		$this->elements_manager      = new Elements_Manager( $this->registered_elements, $this->registered_extensions );
-		$this->css_print_method      = get_option( 'elementor_css_print_method' );
-		$this->js_print_method       = get_option( 'eael_js_print_method' );
+		$this->registered_elements                = $registered_elements;
+		$this->registered_extensions              = $registered_extensions;
+		$this->elements_manager                   = new Elements_Manager( $this->registered_elements, $this->registered_extensions );
+		$this->elements_manager->css_print_method = $this->css_print_method = get_option( 'elementor_css_print_method' );
+		$this->elements_manager->js_print_method  = $this->js_print_method = get_option( 'eael_js_print_method' );
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
 		add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ] );
@@ -151,8 +151,8 @@ class Asset_Builder {
 	}
 
 	public function frontend_asset_load() {
-		$handle = 'eael';
-		$context = 'edit';
+		$handle        = 'eael';
+		$context       = 'edit';
 		$this->post_id = get_the_ID();
 		$this->elements_manager->get_element_list( $this->post_id );
 		$this->load_commnon_asset();
@@ -180,7 +180,7 @@ class Asset_Builder {
 			do_action( 'eael/before_enqueue_styles', $elements );
 			do_action( 'eael/before_enqueue_scripts', $elements );
 
-			$this->enqueue_asset( null, $elements,'edit' );
+			$this->enqueue_asset( null, $elements, 'edit' );
 		}
 		wp_localize_script( $handle, 'localize', $this->localize_objects );
 	}
@@ -239,7 +239,7 @@ class Asset_Builder {
 
 	}
 
-	public function delete_cache_data(  $post_id, $post ){
+	public function delete_cache_data( $post_id, $post ) {
 		$this->elements_manager->remove_files( $post_id );
 
 		delete_post_meta( $post_id, '_eael_custom_js' );
