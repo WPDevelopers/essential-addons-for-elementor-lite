@@ -538,6 +538,9 @@
     padding: 10px 18px !important;
   }
 }
+.theme-savoy .eael-product-popup.woocommerce .nm-quantity-wrap .quantity .input-text {
+  height: 42px;
+}
 .theme-savoy .eael-product-popup .flex-control-nav {
   display: -webkit-box;
   display: -ms-flexbox;
