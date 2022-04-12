@@ -169,6 +169,14 @@ class Asset_Builder {
 				return false;
 			}
 
+			if ( $this->js_print_method == 'internal' ) {
+				wp_enqueue_script( 'eael-general' );
+			}
+
+			if ( $this->css_print_method == 'internal' ) {
+				wp_enqueue_style( 'eael-general' );
+			}
+
 			do_action( 'eael/before_enqueue_styles', $elements );
 			do_action( 'eael/before_enqueue_scripts', $elements );
 
