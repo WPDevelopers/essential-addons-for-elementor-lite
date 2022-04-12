@@ -1126,6 +1126,15 @@
       -ms-transform: none;
           transform: none;
 }
+.theme-savoy .eael-product-gallery.eael-product-preset-4 .woocommerce ul.products li.product .star-rating {
+  width: 85px;
+}
+.theme-savoy .eael-product-gallery.eael-product-preset-4 .woocommerce ul.products li.product .star-rating:before {
+  line-height: 13px;
+}
+.theme-savoy .eael-product-gallery.eael-product-preset-4 .woocommerce ul.products li.product .star-rating span:before {
+  line-height: 11px;
+}
 .theme-savoy .eael-product-gallery .woocommerce ul.products li.product .star-rating {
   font-size: 12px;
   letter-spacing: 2px;
