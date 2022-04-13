@@ -9,21 +9,19 @@ $elements = [
 				'title'     => __( 'Creative Button', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/creative-buttons/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/content-elements/creative-buttons/',
-                'promotion' => 'updated'
 			],
 			[
 				'key'       => 'team-members',
 				'title'     => __( 'Team Member', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/team-members/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/team-members/',
-				'promotion' => 'new'
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'testimonials',
 				'title'     => __( 'Testimonial', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/testimonials/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/testimonials/',
-				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'flip-box',
@@ -54,12 +52,14 @@ $elements = [
 				'title'     => __( 'Advanced Accordion', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/advanced-accordion/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/advanced-accordion/',
+				'promotion' => 'updated'
 			],
 			[
 				'key'       => 'adv-tabs',
 				'title'     => __( 'Advanced Tabs', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/advanced-tabs/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/advanced-tabs/',
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'feature-list',
@@ -73,7 +73,7 @@ $elements = [
 				'demo_link' => 'https://essential-addons.com/elementor/offcanvas-content/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/essential-addons-elementor-offcanvas/',
 				'is_pro'    => true,
-				'promotion' => 'new'
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'advanced-menu',
@@ -108,19 +108,22 @@ $elements = [
 				'title'     => __( 'Team Member Carousel', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/team-members-carousel/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/team-member-carousel/',
-				'is_pro'    => true
+				'is_pro'    => true,
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'sticky-video',
 				'title'     => __( 'Sticky Video', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/sticky-video/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/sticky-video/',
+				'promotion' => 'new'
 			],
 			[
 				'key'       => 'event-calendar',
 				'title'     => __( 'Event Calendar', 'essential-addons-elementor' ),
 				'demo_link' => 'https://essential-addons.com/elementor/event-calendar/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/event-calendar/',
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'simple-menu',
@@ -133,7 +136,8 @@ $elements = [
 				'title' => __( 'Advanced Search', 'essential-addons-elementor' ),
 				'demo_link' => 'https://essential-addons.com/elementor/advanced-search/',
 				'doc_link' => 'https://essential-addons.com/elementor/docs/advanced-search/',
-				'is_pro' => true
+				'is_pro' => true,
+				'promotion' => 'new'
 			],
 		]
 	],
@@ -145,6 +149,7 @@ $elements = [
 				'title'     => __( 'Post Grid', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/post-grid/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/post-grid/',
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'post-timeline',
@@ -163,6 +168,7 @@ $elements = [
 				'title'     => __( 'Advanced Data Table', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/advanced-data-table/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/advanced-data-table/',
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'content-ticker',
@@ -176,7 +182,8 @@ $elements = [
 				'demo_link' => 'https://essential-addons.com/elementor/advanced-google-map/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/advanced-google-map/',
 				'is_pro'    => true,
-				'setting'   => $this->pro_enabled ? [ 'id' => 'eael-googl-map-setting' ] : []
+				'setting'   => $this->pro_enabled ? [ 'id' => 'eael-googl-map-setting' ] : [],
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'post-block',
@@ -197,21 +204,23 @@ $elements = [
 				'title'     => __( 'Smart Post List', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/post-list/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/smart-post-list/',
-				'is_pro'    => true
+				'is_pro'    => true,
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'content-timeline',
 				'title'     => __( 'Content Timeline', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/content-timeline/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/content-timeline/',
-				'is_pro'    => true
+				'is_pro'    => true,
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'dynamic-filter-gallery',
 				'title'     => __( 'Dynamic Gallery', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/dynamic-gallery/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/dynamic-filterable-gallery/',
-                'promotion' => 'new',
+				'promotion' => 'popular',
 				'is_pro'    => true
 			]
 		]
@@ -230,12 +239,14 @@ $elements = [
 				'title'     => __( 'Fancy Text', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/fancy-text/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/fancy-text/',
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'filter-gallery',
 				'title'     => __( 'Filterable Gallery', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/filterable-gallery/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/filterable-gallery/',
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'image-accordion',
@@ -248,6 +259,7 @@ $elements = [
 				'title'     => __( 'Progress Bar', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/progress-bar/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/progress-bar/',
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'interactive-promo',
@@ -268,14 +280,16 @@ $elements = [
 				'title'     => __( 'Lightbox & Modal', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/lightbox-modal/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/lightbox-modal/',
-				'is_pro'    => true
+				'is_pro'    => true,
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'protected-content',
 				'title'     => __( 'Protected Content', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/protected-content/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-protected-content/',
-				'is_pro'    => true
+				'is_pro'    => true,
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'img-comparison',
@@ -289,14 +303,15 @@ $elements = [
 				'title'     => __( 'Flip Carousel', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/flip-carousel/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/flip-carousel/',
-				'is_pro'    => true
+				'is_pro'    => true,
 			],
 			[
 				'key'       => 'logo-carousel',
 				'title'     => __( 'Logo Carousel', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/logo-carousel/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/logo-carousel/',
-				'is_pro'    => true
+				'is_pro'    => true,
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'interactive-cards',
@@ -310,7 +325,8 @@ $elements = [
 				'title'     => __( 'One Page Navigation', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/one-page-nav/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/one-page-navigation/',
-				'is_pro'    => true
+				'is_pro'    => true,
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'image-hotspots',
@@ -338,6 +354,7 @@ $elements = [
 				'title'     => __( 'Interactive Circle', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/interactive-circle/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/interactive-circle/',
+				'promotion' => 'new'
 			]
 		]
 	],
@@ -355,6 +372,7 @@ $elements = [
 				'title'     => __( 'Pricing Table', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/pricing-table/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/pricing-table/',
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'price-menu',
@@ -391,6 +409,7 @@ $elements = [
 				'title'     => __( 'Gravity Form', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/gravity-forms/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/gravity-forms/',
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'caldera-form',
@@ -434,14 +453,16 @@ $elements = [
 				'demo_link' => 'https://essential-addons.com/elementor/mailchimp/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/mailchimp/',
 				'is_pro'    => true,
-				'setting'   => $this->pro_enabled ? [ 'id' => 'eael-mailchimp-setting' ] : []
+				'setting'   => $this->pro_enabled ? [ 'id' => 'eael-mailchimp-setting' ] : [],
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'login-register',
 				'title'     => __( 'Login Register Form', 'essential-addons-elementor' ),
 				'demo_link' => 'https://essential-addons.com/elementor/login-register-form',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/login-register-form/',
-				'setting'   => [ 'id' => 'eael-login-register-setting' ]
+				'setting'   => [ 'id' => 'eael-login-register-setting' ],
+				'promotion' => 'popular'
 			],
 		]
 	],
@@ -453,6 +474,7 @@ $elements = [
 				'title'     => __( 'Twitter Feed', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/twitter-feed/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/twitter-feed/',
+				'promotion' => 'updated'
 			],
 			[
 				'key'       => 'twitter-feed-carousel',
@@ -466,13 +488,15 @@ $elements = [
 				'title'     => __( 'Instagram Feed', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/instagram-feed/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/instagram-feed/',
-				'is_pro'    => true
+				'is_pro'    => true,
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'facebook-feed',
 				'title'     => __( 'Facebook Feed', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/facebook-feed/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/facebook-feed/',
+				'promotion' => 'updated'
 			],
 		]
 	],
@@ -519,6 +543,7 @@ $elements = [
 				'title'     => __( 'Product Grid', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woo-product-grid/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/woocommerce-product-grid/',
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'woo-collections',
@@ -538,19 +563,22 @@ $elements = [
 				'key'       => 'woo-product-carousel',
 				'title'     => __( 'Woo Product Carousel', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woo-product-carousel/',
-				'doc_link'  => 'https://essential-addons.com/elementor/docs/woo-product-carousel/'
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/woo-product-carousel/',
+				'promotion' => 'new'
 			],
 			[
 				'key'       => 'woo-checkout',
 				'title'     => __( 'Woo Checkout', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woo-checkout/',
-				'doc_link'  => 'https://essential-addons.com/elementor/docs/woo-checkout/'
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/woo-checkout/',
+				'promotion' => 'updated'
 			],
 			[
 				'key'       => 'woo-cart',
 				'title'     => __( 'Woo Cart', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woo-cart/',
-				'doc_link'  => 'https://essential-addons.com/elementor/docs/woocommerce-cart/'
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/woocommerce-cart/',
+				'promotion' => 'new'
 			],
 			[
 				'key'       => 'woo-product-compare',
@@ -595,14 +623,13 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
             <h3 class="eael-section__header"><?php echo esc_html( $element[ 'title' ] ) ?></h3>
             <div class="eael-element__wrap">
 				<?php foreach ( $element[ 'elements' ] as $item ): ?>
-                    <?php
+					<?php
 					$promotion_class = ! empty( $item['promotion'] ) ? sprintf( "eael-promotion-is%s", $item['promotion'] ) : "";
-					if ( ! empty( $item['is_pro'] ) && ! $this->pro_enabled ) {
+					if(!empty( $item[ 'is_pro' ] ) && !$this->pro_enabled){
 						$promotion_class = 'eael-promotion-ispro';
 					}
-                    ?>
+					?>
                     <div class="eael-element__item <?php esc_attr_e($promotion_class); ?>">
-
                         <div class="element__content">
                             <h4><?php echo esc_html( $item[ 'title' ] ); ?></h4>
                             <div class="element__options">
