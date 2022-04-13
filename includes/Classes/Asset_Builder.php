@@ -43,7 +43,7 @@ class Asset_Builder {
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
 		add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ] );
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
-		add_action( 'wp_head', [ $this, 'add_inline_css' ], 100 );
+		add_action( 'wp_footer', [ $this, 'add_inline_css' ] );
 		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ] );
 	}
 
