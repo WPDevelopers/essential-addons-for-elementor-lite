@@ -310,7 +310,8 @@ trait Enqueue
         wp_enqueue_style(
             'ea-icon',
             $this->safe_url(EAEL_PLUGIN_URL . 'assets/admin/css/eaicon.css'),
-            false
+            false,
+	        EAEL_PLUGIN_VERSION
         );
 
         // editor style
