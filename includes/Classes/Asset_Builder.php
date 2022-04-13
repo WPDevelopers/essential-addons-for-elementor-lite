@@ -32,6 +32,8 @@ class Asset_Builder {
 
 	public $localize_objects;
 
+	public $custom_js_enable;
+
 	public function __construct( $registered_elements, $registered_extensions ) {
 
 		$this->registered_elements                = $registered_elements;
@@ -45,6 +47,9 @@ class Asset_Builder {
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
 		add_action( 'wp_footer', [ $this, 'add_inline_css' ] );
 		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ] );
+
+		$this->custom_js_enable = $this->get_settings('custom-js');
+
 	}
 
 	public function add_inline_js() {
@@ -162,6 +167,7 @@ class Asset_Builder {
 			wp_enqueue_script( 'eael-general' );
 			wp_enqueue_style( 'eael-general' );
 			$handle = 'eael-general';
+			$this->load_custom_js( $this->post_id );
 		} else {
 			$elements = $this->get_settings();
 
@@ -182,6 +188,7 @@ class Asset_Builder {
 
 			$this->enqueue_asset( null, $elements, 'edit' );
 		}
+
 		wp_localize_script( $handle, 'localize', $this->localize_objects );
 	}
 
@@ -200,6 +207,8 @@ class Asset_Builder {
 			do_action( 'eael/before_enqueue_scripts', $elements );
 			$this->enqueue_asset( $this->post_id, $elements );
 		}
+
+		$this->load_custom_js( $this->post_id );
 	}
 
 	public function enqueue_asset( $post_id = null, $elements, $context = 'view' ) {
@@ -235,8 +244,6 @@ class Asset_Builder {
 				true
 			);
 		}
-		$this->load_custom_js( $post_id );
-
 	}
 
 	public function delete_cache_data( $post_id, $post ) {
@@ -256,6 +263,11 @@ class Asset_Builder {
 	}
 
 	public function load_custom_js( $post_id ) {
+
+		if(!$this->custom_js_enable){
+			return false;
+		}
+
 		$custom_js = get_post_meta( $post_id, '_eael_custom_js', true );
 		if ( $custom_js ) {
 			$this->custom_js .= $custom_js;
