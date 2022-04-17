@@ -117,9 +117,6 @@ $extensions = [
 	            <?php foreach ( $element[ 'extensions' ] as $item ): ?>
 		            <?php
 		            $promotion_class = ! empty( $item['promotion'] ) ? sprintf( "eael-promotion-is%s", $item['promotion'] ) : "";
-		            if(!empty( $item[ 'is_pro' ] ) && !$this->pro_enabled){
-			            $promotion_class = 'eael-promotion-ispro';
-		            }
 		            ?>
                     <div class="eael-element__item <?php esc_attr_e($promotion_class); ?>">
                         <div class="element__content">
@@ -154,6 +151,7 @@ $extensions = [
 
                                     <span class="switch__box <?php echo esc_attr( $disabled ); ?>"></span>
                                 </label>
+	                            <?php printf( "%s", ( $disabled == 'disabled') ? '<i class="ea-admin-icon icon-lock-alt eael-lock-style"></i>' : '' ); ?>
                             </div>
                         </div>
                     </div>
