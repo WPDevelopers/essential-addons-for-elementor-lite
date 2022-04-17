@@ -52,10 +52,8 @@ const QuickView = {
 					       }
 						   setTimeout(function () {
 							   product_gallery.wc_product_gallery();
-						   }, 1000);
-						   setTimeout(function () {
-							   product_gallery.css("opacity", 1);
-						   }, 1500);
+							   product_gallery.closest('.eael-product-image-wrap').css('background', 'none');
+						   }, 500);
 				       }
 			       },
 		       });
