@@ -146,9 +146,6 @@ class Bootstrap
         add_action('wp_footer', [$this, 'enqueue_inline_scripts']);
 
         // Generator
-        add_action('wp', [$this, 'init_request_data']);
-        add_filter('elementor/frontend/builder_content_data', [$this, 'collect_loaded_templates'], 10, 2);
-        add_action('wp_print_footer_scripts', [$this, 'update_request_data']);
 
 	    $this->init_ajax_hooks();
 
