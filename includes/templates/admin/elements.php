@@ -625,9 +625,6 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
 				<?php foreach ( $element[ 'elements' ] as $item ): ?>
 					<?php
 					$promotion_class = ! empty( $item['promotion'] ) ? sprintf( "eael-promotion-is%s", $item['promotion'] ) : "";
-					if(!empty( $item[ 'is_pro' ] ) && !$this->pro_enabled){
-						$promotion_class = 'eael-promotion-ispro';
-					}
 					?>
                     <div class="eael-element__item <?php esc_attr_e($promotion_class); ?>">
                         <div class="element__content">
@@ -660,6 +657,7 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
 									?>
                                     <span class="switch__box <?php echo $disabled; ?>"></span>
                                 </label>
+                                <?php printf( "%s", ( $disabled == 'disabled') ? '<i class="ea-admin-icon icon-lock-alt eael-lock-style"></i>' : '' ); ?>
                             </div>
                         </div>
                     </div>

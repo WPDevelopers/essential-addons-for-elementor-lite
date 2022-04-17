@@ -543,8 +543,7 @@ trait Helper
         ?>
             <div id="eael-admin-promotion-message" class="eael-admin-promotion-message">
                 <i class="e-notice__dismiss eael-admin-promotion-close" role="button" aria-label="Dismiss" tabindex="0"></i>
-                <p>Did you know Essential Addons offers a free library of 2,000+ Amazing Templates ? Choose from over 2,000 beautiful templates and kickstart your works!
-                    <a href="#">Check The Link</a></p>
+	            <?php printf( __( "<p> <i>📣</i> NEW: Essential Addons 5.1.0 is here, with new '<a target='_blank' href='%s'>Conditional Display</a>' extension, FAQ Schema for Advanced Accordion & more! Check out the <a target='_blank' href=''>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/conditional-display/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
             </div>
         <?php
 	}
