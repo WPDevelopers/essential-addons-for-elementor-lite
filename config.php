@@ -1063,6 +1063,11 @@ $config = [
 			        ],
 		        ],
 		        'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/waypoint/waypoints.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
 			        [
 				        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/interactive-circle.min.js',
 				        'type' => 'self',
