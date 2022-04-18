@@ -107,9 +107,11 @@
 					$content.hasClass("no-posts-found") ||
 					$content.length === 0
 				) {
-					if ( $data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery" ) {
+					if ($data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery") {
 						$this.removeClass('button--loading').addClass('hide-load-more');
-						$LoaderSpan.html($text)
+						$LoaderSpan.html($text);
+					} else if ($data.class == "Essential_Addons_Elementor\\Pro\\Elements\\Dynamic_Filterable_Gallery") {
+						$this.addClass('hide');
 					} else {
 						$this.remove();
 					}
@@ -189,8 +191,16 @@
 						$this.data("page", $page);
 					}
 
-					if ($max_page && $data.page >= $max_page) {
-						$this.remove();
+					if ($data.class == "Essential_Addons_Elementor\\Pro\\Elements\\Dynamic_Filterable_Gallery") {
+						let found_posts = $($content[0]);
+
+						if (found_posts.hasClass('found_posts') && found_posts.text() - obj.posts_per_page < 1) {
+							$this.addClass('hide');
+						}
+					} else {
+						if ($max_page && $data.page >= $max_page) {
+							$this.remove();
+						}
 					}
 				}
 			},
