@@ -96,6 +96,23 @@
 		$this.addClass("button--loading");
 		$LoaderSpan.html(localize.i18n.loading);
 
+		var filterable_gallery_load_more_btn = ($this) => {
+			let active_tab = $this.closest('.eael-filter-gallery-wrapper').find('.dynamic-gallery-category.active'),
+				active_filter = active_tab.data('filter'),
+				rest_filter = active_tab.siblings().not('.no-more-posts');
+
+			$this.addClass('hide');
+			active_tab.addClass('no-more-posts');
+
+			if (rest_filter.length === 1 && rest_filter.data('filter') === '*') {
+				rest_filter.addClass('no-more-posts')
+			}
+
+			if (active_filter === '*') {
+				active_tab.siblings().addClass('no-more-posts');
+			}
+		}
+
 		$.ajax({
 			url: localize.ajaxurl,
 			type: "post",
@@ -111,24 +128,10 @@
 						$this.removeClass('button--loading').addClass('hide-load-more');
 						$LoaderSpan.html($text);
 					} else if ($data.class == "Essential_Addons_Elementor\\Pro\\Elements\\Dynamic_Filterable_Gallery") {
-						let active_tab = $this.closest('.eael-filter-gallery-wrapper').find('.dynamic-gallery-category.active'),
-							active_filter = active_tab.data('filter');
-
-						$this.removeClass('button--loading').addClass('hide');
+						$this.removeClass('button--loading');
 						$LoaderSpan.html($text);
-						active_tab.addClass('no-more-posts');
 
-						if (active_tab.siblings().not('.no-more-posts').length === 1) {
-							let rest_filter = active_tab.siblings().not('.no-more-posts');
-
-							if (rest_filter.data('filter') === '*') {
-								rest_filter.addClass('no-more-posts')
-							}
-						}
-
-						if (active_filter === '*') {
-							active_tab.siblings().addClass('no-more-posts');
-						}
+						filterable_gallery_load_more_btn($this);
 					} else {
 						$this.remove();
 					}
@@ -212,23 +215,7 @@
 						let found_posts = $($content[0]);
 
 						if (found_posts.hasClass('found_posts') && found_posts.text() - obj.posts_per_page < 1) {
-							let active_tab = $this.closest('.eael-filter-gallery-wrapper').find('.dynamic-gallery-category.active'),
-								active_filter = active_tab.data('filter');
-
-							$this.addClass('hide');
-							active_tab.addClass('no-more-posts');
-
-							if (active_tab.siblings().not('.no-more-posts').length === 1) {
-								let rest_filter = active_tab.siblings().not('.no-more-posts');
-
-								if (rest_filter.data('filter') === '*') {
-									rest_filter.addClass('no-more-posts')
-								}
-							}
-
-							if (active_filter === '*') {
-								active_tab.siblings().addClass('no-more-posts');
-							}
+							filterable_gallery_load_more_btn($this);
 						}
 					} else {
 						if ($max_page && $data.page >= $max_page) {
