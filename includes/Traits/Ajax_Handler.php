@@ -211,7 +211,7 @@ trait Ajax_Handler {
 
 			if ( $file_path ) {
 				$query = new \WP_Query( $args );
-
+				$found_posts = $query->found_posts;
 				$iterator = 0;
 
 				if ( $query->have_posts() ) {
@@ -227,6 +227,9 @@ trait Ajax_Handler {
 						$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
 					}
 
+					if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Dynamic_Filterable_Gallery' ) {
+						$html .= "<div class='found_posts' style='display: none;'>{$found_posts}</div>";
+					}
 
 					while ( $query->have_posts() ) {
 						$query->the_post();
