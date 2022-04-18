@@ -117,6 +117,15 @@
 						$this.removeClass('button--loading').addClass('hide');
 						$LoaderSpan.html($text);
 						active_tab.addClass('no-more-posts');
+
+						if (active_tab.siblings().not('.no-more-posts').length === 1) {
+							let rest_filter = active_tab.siblings().not('.no-more-posts');
+
+							if (rest_filter.data('filter') === '*') {
+								rest_filter.addClass('no-more-posts')
+							}
+						}
+
 						if (active_filter === '*') {
 							active_tab.siblings().addClass('no-more-posts');
 						}
@@ -208,6 +217,15 @@
 
 							$this.addClass('hide');
 							active_tab.addClass('no-more-posts');
+
+							if (active_tab.siblings().not('.no-more-posts').length === 1) {
+								let rest_filter = active_tab.siblings().not('.no-more-posts');
+
+								if (rest_filter.data('filter') === '*') {
+									rest_filter.addClass('no-more-posts')
+								}
+							}
+
 							if (active_filter === '*') {
 								active_tab.siblings().addClass('no-more-posts');
 							}
