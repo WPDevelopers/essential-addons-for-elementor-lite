@@ -196,8 +196,14 @@
 						let found_posts = $($content[0]);
 
 						if (found_posts.hasClass('found_posts') && found_posts.text() - obj.posts_per_page < 1) {
+							let active_tab = $this.closest('.eael-filter-gallery-wrapper').find('.dynamic-gallery-category.active'),
+								active_filter = active_tab.data('filter');
+
 							$this.addClass('hide');
-							$this.closest('.eael-filter-gallery-wrapper').find('.dynamic-gallery-category.active').addClass('no-more-posts');
+							active_tab.addClass('no-more-posts');
+							if (active_filter === '*') {
+								active_tab.siblings().addClass('no-more-posts');
+							}
 						}
 					} else {
 						if ($max_page && $data.page >= $max_page) {
