@@ -16,7 +16,8 @@ trait Twitter_Feed
     public function twitter_feed_render_items($id, $settings, $class = '')
     {
         $token = get_option($id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_token');
-	    $cache_key = $settings['eael_twitter_feed_ac_name'] . '_' . md5( $settings['eael_twitter_feed_hashtag_name'] . $settings['eael_twitter_feed_consumer_key'] . $settings['eael_twitter_feed_consumer_secret'] ) . '_tf_cache';
+	    $expiration = ! empty( $settings['eael_auto_clear_cache'] ) && ! empty( $settings['eael_twitter_feed_cache_limit'] ) ? absint( $settings['eael_twitter_feed_cache_limit'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
+	    $cache_key = $settings['eael_twitter_feed_ac_name'] . '_' . $expiration . '_' . md5( $settings['eael_twitter_feed_hashtag_name'] . $settings['eael_twitter_feed_consumer_key'] . $settings['eael_twitter_feed_consumer_secret'] ) . '_tf_cache';
         $items = get_transient( $cache_key );
         $html = '';
 
@@ -59,10 +60,10 @@ trait Twitter_Feed
                 ],
             ]);
 
-            if(!empty($response['response']) && $response['response']['code']==200){
-	            $items = json_decode(wp_remote_retrieve_body($response), true);
-	            set_transient( $cache_key, $items);
-            }
+	        if ( ! empty( $response['response'] ) && $response['response']['code'] == 200 ) {
+		        $items      = json_decode( wp_remote_retrieve_body( $response ), true );
+		        set_transient( $cache_key, $items, $expiration );
+	        }
         }
 
 	    if ( empty( $items ) ) {
