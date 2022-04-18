@@ -5,6 +5,7 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly.
 
+use Essential_Addons_Elementor\Classes\Helper;
 use Essential_Addons_Elementor\Classes\WPDeveloper_Core_Installer;
 
 class WPDeveloper_Notice {
@@ -441,7 +442,7 @@ class WPDeveloper_Notice {
         if( empty( $plugin_slug ) ) {
             return;
         }
-        echo '<button data-slug="'. esc_attr( $plugin_slug ) .'" id="plugin-install-core-'. $this->plugin_name .'" class="button button-primary">'. esc_html( $btn_text ) .'</button>';
+        echo '<button data-slug="'. esc_attr( $plugin_slug ) .'" id="plugin-install-core-'. $this->plugin_name .'" class="button button-primary">'. Helper::eael_wp_kses( $btn_text ) .'</button>';
     }
     /**
      * This methods is responsible for get notice image.
@@ -483,7 +484,7 @@ class WPDeveloper_Notice {
     protected function get_message( $msg_for ){
         if( isset( $this->data['message'] ) && isset( $this->data['message'][ $msg_for ] ) ) {
             echo '<div class="wpdeveloper-notice-message">';
-                echo esc_html( $this->data['message'][ $msg_for ] );
+	        echo Helper::eael_wp_kses( $this->data['message'][ $msg_for ] );
                 if( $msg_for === 'upsale' ) {
                     $this->upsale_button();
                 }
