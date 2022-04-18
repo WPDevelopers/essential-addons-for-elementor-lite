@@ -111,8 +111,15 @@
 						$this.removeClass('button--loading').addClass('hide-load-more');
 						$LoaderSpan.html($text);
 					} else if ($data.class == "Essential_Addons_Elementor\\Pro\\Elements\\Dynamic_Filterable_Gallery") {
-						$this.addClass('hide');
-						$this.closest('.eael-filter-gallery-wrapper').find('.dynamic-gallery-category.active').addClass('no-more-posts');
+						let active_tab = $this.closest('.eael-filter-gallery-wrapper').find('.dynamic-gallery-category.active'),
+							active_filter = active_tab.data('filter');
+
+						$this.removeClass('button--loading').addClass('hide');
+						$LoaderSpan.html($text);
+						active_tab.addClass('no-more-posts');
+						if (active_filter === '*') {
+							active_tab.siblings().addClass('no-more-posts');
+						}
 					} else {
 						$this.remove();
 					}
