@@ -112,6 +112,7 @@
 						$LoaderSpan.html($text);
 					} else if ($data.class == "Essential_Addons_Elementor\\Pro\\Elements\\Dynamic_Filterable_Gallery") {
 						$this.addClass('hide');
+						$this.closest('.eael-filter-gallery-wrapper').find('.dynamic-gallery-category.active').addClass('no-more-posts');
 					} else {
 						$this.remove();
 					}
@@ -196,6 +197,7 @@
 
 						if (found_posts.hasClass('found_posts') && found_posts.text() - obj.posts_per_page < 1) {
 							$this.addClass('hide');
+							$this.closest('.eael-filter-gallery-wrapper').find('.dynamic-gallery-category.active').addClass('no-more-posts');
 						}
 					} else {
 						if ($max_page && $data.page >= $max_page) {
