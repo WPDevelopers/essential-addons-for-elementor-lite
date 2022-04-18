@@ -26,12 +26,15 @@
         height: $nav-circle-width;
         border: $nav-circle-border-width solid $nav-circle-border-color;
         border-radius: $nav-circle-border-radius;
+    }
 
-        @media only screen and (max-width: $breakpoint) {
-            border-radius: 0 !important;
-            box-shadow: none !important;
+    &.eael-circle-responsive-view {
+        .eael-circle-inner {
+            @media only screen and (max-width: $breakpoint) {
+                border-radius: 0 !important;
+                box-shadow: none !important;
+            }
         }
-
     }
 
     .eael-circle-btn {
@@ -167,7 +170,6 @@
 
                             @media only screen and (max-width: $breakpoint) {
                                 border-radius: 0;
-                                margin-top: 20px;
                                 height: auto;
                             }
                         }
@@ -475,29 +477,44 @@
                 height: initial!important;
                 grid-template-columns: repeat(1, 1fr);
                 grid-gap: 20px;
-                border: none !important;
             }
             .eael-circle-item {
-                border: $nav-circle-border-width solid $nav-circle-border-color;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 padding: 20px;
-                .eael-circle-btn {
-                    position: initial !important;
-                    transform: none !important;
-                    .eael-circle-icon-shapes {
-                        display: none !important;
-                    }
+            }
+
+            &.eael-circle-responsive-view {
+                .eael-circle-inner {
+                    display: grid;
+                    width: 100% !important;
+                    height: initial!important;
+                    grid-template-columns: repeat(1, 1fr);
+                    grid-gap: 20px;
+                    border: none !important;
                 }
-                .eael-circle-btn-content {
-                    position: initial !important;
-                    visibility: visible !important;
-                    opacity: 1 !important;
-                    display: block !important;
-                    .eael-circle-content {
-                        padding: 0 !important;
-                        background: transparent !important;
+
+                .eael-circle-item {
+                    border: $nav-circle-border-width solid $nav-circle-border-color;
+                    
+                    .eael-circle-btn {
+                        position: initial !important;
+                        transform: none !important;
+                        .eael-circle-icon-shapes {
+                            display: none !important;
+                        }
+                    }
+                    .eael-circle-btn-content {
+                        position: initial !important;
+                        visibility: visible !important;
+                        opacity: 1 !important;
+                        display: block !important;
+                        .eael-circle-content {
+                            padding: 0 !important;
+                            background: transparent !important;
+                            margin-top: 20px;
+                        }
                     }
                 }
             }
@@ -547,9 +564,6 @@
                 }
 
                 .eael-circle-item {
-                    @media only screen and (max-width: $breakpoint) {
-
-                    }
                     .eael-circle-btn {
                         position: absolute;
                         z-index: 99;
