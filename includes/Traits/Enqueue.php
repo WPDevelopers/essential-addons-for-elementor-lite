@@ -60,11 +60,6 @@ trait Enqueue
         }
     }
 
-    public function enqueue_scripts()
-    {
-
-    }
-
     // editor styles
     public function editor_enqueue_scripts()
     {
@@ -81,18 +76,6 @@ trait Enqueue
             $this->safe_url(EAEL_PLUGIN_URL . 'assets/admin/css/editor.css'),
             false
         );
-    }
-
-    // inline enqueue styles
-    public function enqueue_inline_styles()
-    {
-
-    }
-
-    // inline enqueue scripts
-    public function enqueue_inline_scripts()
-    {
-
     }
 
     // templately promo enqueue scripts
