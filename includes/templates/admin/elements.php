@@ -116,7 +116,7 @@ $elements = [
 				'title'     => __( 'Sticky Video', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/sticky-video/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/sticky-video/',
-				'promotion' => 'new'
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'event-calendar',

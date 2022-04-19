@@ -23,8 +23,7 @@ $extensions = [
 				'title'     => __( 'Advanced Tooltip', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/advanced-tooltip/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-advanced-tooltip/',
-				'is_pro'    => true,
-				'promotion' => 'popular'
+				'is_pro'    => true
 			],
 			[
 				'key'       => 'content-protection',
@@ -32,7 +31,7 @@ $extensions = [
 				'demo_link' => 'https://essential-addons.com/elementor/content-protection/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-content-protection/',
 				'is_pro'    => true,
-				'promotion' => 'new'
+				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'reading-progress',
