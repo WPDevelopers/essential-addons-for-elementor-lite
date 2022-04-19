@@ -61,7 +61,7 @@ msgstr ""
 msgid "Install Now!"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:188, ../includes/Classes/WPDeveloper_Setup_Wizard.php:517, ../includes/Classes/WPDeveloper_Setup_Wizard.php:543, ../includes/Traits/Ajax_Handler.php:765, ../includes/Traits/Ajax_Handler.php:872, ../includes/Traits/Helper.php:305
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:188, ../includes/Classes/WPDeveloper_Setup_Wizard.php:517, ../includes/Classes/WPDeveloper_Setup_Wizard.php:543, ../includes/Traits/Ajax_Handler.php:776, ../includes/Traits/Ajax_Handler.php:883, ../includes/Traits/Helper.php:305
 msgid "you are not allowed to do this action"
 msgstr ""
 
@@ -593,30 +593,22 @@ msgid "Subtotal"
 msgstr ""
 
 #: ../includes/Controls/Select2.php:34
-msgid "Login Status"
+msgid "User Status"
 msgstr ""
 
 #: ../includes/Controls/Select2.php:35
-msgid "User Role"
-msgstr ""
-
-#: ../includes/Controls/Select2.php:36
-msgid "User"
-msgstr ""
-
-#: ../includes/Controls/Select2.php:37
 msgid "Post Type"
 msgstr ""
 
-#: ../includes/Controls/Select2.php:38
+#: ../includes/Controls/Select2.php:36
 msgid "Browser"
 msgstr ""
 
-#: ../includes/Controls/Select2.php:39
+#: ../includes/Controls/Select2.php:37
 msgid "Date & Time"
 msgstr ""
 
-#: ../includes/Controls/Select2.php:40
+#: ../includes/Controls/Select2.php:38
 msgid "Dynamic Field"
 msgstr ""
 
@@ -7883,7 +7875,7 @@ msgstr ""
 msgid "Widget settings are not found. Did you save the widget before using load more??"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:797
+#: ../includes/Traits/Ajax_Handler.php:808
 msgid "Login | Register Settings updated"
 msgstr ""
 
