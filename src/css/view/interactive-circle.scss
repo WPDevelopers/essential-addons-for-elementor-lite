@@ -559,8 +559,6 @@
                 @media only screen and (max-width: $breakpoint) {
                     width: 100%;
                     height: auto;
-                    border-radius: 0;
-                    border: 0;
                 }
 
                 .eael-circle-item {
@@ -667,6 +665,7 @@
                             bottom: 0;
                             height: auto!important;
                             margin-top: 20px;
+                            left: 0;
                         }
 
                         .eael-circle-content {
@@ -680,7 +679,8 @@
                             justify-content: flex-end;
 
                             @media only screen and (max-width: $breakpoint) {
-                                height: auto!important;
+                                height: 280px;
+                                overflow: hidden;
                             }
 
                             h2 {
@@ -1371,29 +1371,44 @@
                 height: initial;
                 grid-template-columns: repeat(1, 1fr);
                 grid-gap: 20px;
-                border: none !important;
             }
             .eael-circle-item {
-                border: $nav-circle-border-width solid #FFE6DC;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 padding: 20px;
-                .eael-circle-btn {
-                    position: initial !important;
-                    transform: none !important;
-                    .eael-circle-icon-shapes {
-                        display: none !important;
-                    }
+            }
+
+            &.eael-circle-responsive-view {
+
+                .eael-circle-inner {
+                    border: none !important;
+                    border-radius: 0;
+                    border: 0;
                 }
-                .eael-circle-btn-content {
-                    position: initial !important;
-                    visibility: visible !important;
-                    opacity: 1 !important;
-                    display: block !important;
-                    .eael-circle-content {
-                        padding: 0 !important;
-                        background: transparent !important;
+
+                .eael-circle-item {
+                    border: $nav-circle-border-width solid #FFE6DC;
+                }
+                .eael-circle-item {
+                    .eael-circle-btn {
+                        position: initial !important;
+                        transform: none !important;
+                        .eael-circle-icon-shapes {
+                            display: none !important;
+                        }
+                    }
+
+                    .eael-circle-btn-content {
+                        position: initial !important;
+                        visibility: visible !important;
+                        opacity: 1 !important;
+                        display: block !important;
+                        .eael-circle-content {
+                            height: auto!important;
+                            padding: 0 !important;
+                            background: transparent !important;
+                        }
                     }
                 }
             }
