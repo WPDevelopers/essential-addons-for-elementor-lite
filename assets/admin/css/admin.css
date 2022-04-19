@@ -166,6 +166,9 @@
 .icon-style-lock:before {
     content: "\e92a";
 }
+.icon-lock:before {
+    content: "\e92a";
+}
 /* Start Setup Wizard */
 
 .eael-quick-setup-wizard-wrap {
@@ -5213,9 +5216,9 @@ button.button__greyBg:hover:disabled {
 }
 .eael-lock-style {
     position: absolute;
-    right: 20px;
-    color: #6f7893;
-    font-size: 12px
+    right: 21px;
+    color: #FFC02B;
+    font-size: 12px;
 }
 
 
@@ -5241,14 +5244,14 @@ button.button__greyBg:hover:disabled {
 }
 .eael-element__wrap .eael-element__item.eael-promotion-isupdated:after {
     content: "Updated";
-    background: #40CDDA;
+    background: #6C757D;
 }
 .eael-element__wrap .eael-element__item.eael-promotion-isnew:after {
     content: "New";
-    background: #8EA6FE;
+    background: #059862;
 }
 .eael-element__wrap .eael-element__item.eael-promotion-ispopular:after {
     content: "Popular";
-    background: #B795FF;
+    background: #0064FF;
 }
 
