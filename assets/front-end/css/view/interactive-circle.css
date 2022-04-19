@@ -1667,11 +1667,8 @@
     width: 100%;
     height: initial;
     grid-template-columns: repeat(1, 1fr);
-    grid-gap: 20px;
-    border: none !important;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-item {
-    border: 6px solid #f5f3ff;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1685,21 +1682,50 @@
     padding: 20px;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-item .eael-circle-btn {
+    height: 80px;
+    width: 80px;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-3.eael-circle-desktop-view .eael-circle-btn-txt {
+    font-size: 12px;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-3.eael-circle-desktop-view .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn {
+    height: 80px;
+    width: 80px;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-3.eael-circle-desktop-view .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-icon-shapes {
+    display: none;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-3.eael-circle-desktop-view .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn-content {
+    top: 20px;
+    left: 20px;
+    bottom: 45px;
+    right: 20px;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-3.eael-circle-responsive-view .eael-circle-inner {
+    border: none !important;
+    grid-gap: 20px;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-3.eael-circle-responsive-view .eael-circle-item {
+    border: 6px solid #f5f3ff;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-3.eael-circle-responsive-view .eael-circle-item .eael-circle-btn {
     position: initial !important;
     -webkit-transform: none !important;
         -ms-transform: none !important;
             transform: none !important;
+    height: 100px;
+    width: 100px;
   }
-  .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-item .eael-circle-btn .eael-circle-icon-shapes {
+  .eael-circle-wrapper.eael-interactive-circle-preset-3.eael-circle-responsive-view .eael-circle-item .eael-circle-btn .eael-circle-icon-shapes {
     display: none !important;
   }
-  .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-item .eael-circle-btn-content {
+  .eael-circle-wrapper.eael-interactive-circle-preset-3.eael-circle-responsive-view .eael-circle-item .eael-circle-btn-content {
     position: initial !important;
     visibility: visible !important;
     opacity: 1 !important;
     display: block !important;
   }
-  .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-item .eael-circle-btn-content .eael-circle-content {
+  .eael-circle-wrapper.eael-interactive-circle-preset-3.eael-circle-responsive-view .eael-circle-item .eael-circle-btn-content .eael-circle-content {
     padding: 0 !important;
     background: transparent !important;
   }
