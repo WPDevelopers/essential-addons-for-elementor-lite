@@ -1380,7 +1380,6 @@
             }
 
             &.eael-circle-responsive-view {
-
                 .eael-circle-inner {
                     border: none !important;
                     border-radius: 0;
@@ -1892,30 +1891,67 @@
                 width: 100%;
                 height: initial;
                 grid-template-columns: repeat(1, 1fr);
-                grid-gap: 20px;
-                border: none !important;
             }
             .eael-circle-item {
-                border: $nav-circle-border-width solid $nav-circle-border-color;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 padding: 20px;
                 .eael-circle-btn {
-                    position: initial !important;
-                    transform: none !important;
-                    .eael-circle-icon-shapes {
-                        display: none !important;
+                    height: 80px;
+                    width: 80px;
+                }
+            }
+            &.eael-circle-desktop-view {
+                .eael-circle-btn-txt {
+                    font-size: 12px;
+                }
+                .eael-circle-info {
+                    .eael-circle-inner {
+                        .eael-circle-item {
+                            .eael-circle-btn {
+                                height: 80px;
+                                width: 80px;
+                            }
+                            .eael-circle-icon-shapes {
+                                display: none;
+                            }
+                            .eael-circle-btn-content {
+                                top: 20px;
+                                left: 20px;
+                                bottom: 45px;
+                                right: 20px;
+                            }
+                        }
                     }
                 }
-                .eael-circle-btn-content {
-                    position: initial !important;
-                    visibility: visible !important;
-                    opacity: 1 !important;
-                    display: block !important;
-                    .eael-circle-content {
-                        padding: 0 !important;
-                        background: transparent !important;
+            }
+
+            &.eael-circle-responsive-view {
+                .eael-circle-inner {
+                    border: none !important;
+                    grid-gap: 20px;
+                }
+                .eael-circle-item {
+                    border: $nav-circle-border-width solid $nav-circle-border-color;
+                    .eael-circle-btn {
+                        position: initial !important;
+                        transform: none !important;
+                        height: 100px;
+                        width: 100px;
+                        .eael-circle-icon-shapes {
+                            display: none !important;
+                        }
+                    }
+                    .eael-circle-btn-content {
+                        position: initial !important;
+                        visibility: visible !important;
+                        opacity: 1 !important;
+                        display: block !important;
+                        .eael-circle-content {
+                            padding: 0 !important;
+                            background: transparent !important;
+                        }
                     }
                 }
             }
