@@ -2033,19 +2033,71 @@
                 width: 100% !important;
                 height: auto!important;
                 grid-template-columns: repeat(1, 1fr);
-                grid-gap: 20px;
             }
             .eael-circle-item {
                 flex-direction: column;
                 align-items: center;
                 padding: 20px;
+            }
+            &.eael-circle-desktop-view {
+                margin: 40px 25px;
+                .eael-circle-btn-txt {
+                    font-size: 12px;
+                }
+                .eael-circle-info {
+                    padding: 48px !important;
+                    height: 300px;
+                    width: 300px;
+                    .eael-circle-item {
+                        .eael-circle-btn-content {
+                            top: 50px;
+                            bottom: 50px;
+                            left: 50px;
+                            right: 50px;
+                            padding: 10px;
+                        }
+                        .eael-circle-btn {
+                            height: 60px;
+                            width: 60px;
+                            .eael-circle-btn-icon {
+                                padding: 5px;
+                            }
+                        }
+                    }
+                    .eael-circle-content {
+                        border-radius: 50% !important;
+                    }
+                }
+            }
+
+            &.eael-circle-responsive-view {
+                .eael-circle-item {
+                    border: $nav-circle-border-width solid $nav-circle-border-color;
+                    display: flex;
+                    .eael-circle-btn {
+                        transform: none !important;
+                        position: relative !important;
+                        top: initial !important;
+                        left: initial !important;
+                        bottom: initial !important;
+                        right: initial !important;
+                    }
+                }
+                .eael-circle-inner {
+                    border: none !important;
+                    grid-gap: 20px;
+                }
+                .eael-circle-btn-content {
+                    position: initial !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                    display: block !important;
+                    .eael-circle-content {
+                        padding: 0 !important;
+                        background: transparent !important;
+                    }
+                }
                 .eael-circle-btn {
-                    transform: none !important;
-                    position: relative !important;
-                    top: initial !important;
-                    left: initial !important;
-                    bottom: initial !important;
-                    right: initial !important;
                     .eael-circle-icon-shapes {
                         border-bottom-right-radius: $nav-item-border-radius;
                     }
@@ -2450,25 +2502,6 @@
                     //        fill: #2b3894;
                     //    }
                     //}
-                }
-            }
-        }
-        &.eael-circle-responsive-view {
-            .eael-circle-item {
-                border: $nav-circle-border-width solid $nav-circle-border-color;
-                display: flex;
-            }
-            .eael-circle-inner {
-                border: none !important;
-            }
-            .eael-circle-btn-content {
-                position: initial !important;
-                visibility: visible !important;
-                opacity: 1 !important;
-                display: block !important;
-                .eael-circle-content {
-                    padding: 0 !important;
-                    background: transparent !important;
                 }
             }
         }
