@@ -202,3 +202,11 @@
 	margin-left: 4px;
 	font-size: 14px;
 }
+.elementor-control-eael_cl_logics [data-setting="user_role_operand_multi"] + .select2 ul.select2-selection__rendered > li:nth-child(2).select2-search--inline > input.select2-search__field {
+	width: auto !important;
+}
+.elementor-control-eael_cl_logics .elementor-control-dynamic_field label.elementor-control-title,
+.elementor-control-eael_cl_logics .elementor-control-dynamic_field input[data-setting="dynamic_field"] {
+	pointer-events: none;
+	touch-action: none;
+}

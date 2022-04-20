@@ -1,10 +1,10 @@
 @font-face {
 	font-family: "eaicon";
-	src: url("../fonts/eaicon.eot?krajj6");
-	src: url("../fonts/eaicon.eot?krajj6#iefix") format("embedded-opentype"),
-		url("../fonts/eaicon.ttf?krajj6") format("truetype"),
-		url("../fonts/eaicon.woff?krajj6") format("woff"),
-		url("../fonts/eaicon.svg?krajj6#eaicon") format("svg");
+	src: url("../fonts/eaicon.eot?hfbot0");
+	src: url("../fonts/eaicon.eot?hfbot0#iefix") format("embedded-opentype"),
+	url("../fonts/eaicon.ttf?hfbot0") format("truetype"),
+	url("../fonts/eaicon.woff?hfbot0") format("woff"),
+	url("../fonts/eaicon.svg?hfbot0#eaicon") format("svg");
 	font-weight: normal;
 	font-style: normal;
 	font-display: block;
@@ -322,3 +322,58 @@
 	content: "\e95e";
 }
 
+.eaicon-eye-solid:before {
+	content: "\e95f";
+}
+
+.eaicon-eye-slash-solid:before {
+	content: "\e960";
+}
+
+.eaicon-ban-solid:before {
+	content: "\e961";
+}
+
+.eaicon-dice-six-solid:before {
+	content: "\e962";
+}
+
+.eaicon-dice-one-solid:before {
+	content: "\e963";
+}
+
+.eaicon-equals-solid:before {
+	content: "\e964";
+}
+
+.eaicon-not-equal-solid:before {
+	content: "\e965";
+}
+
+.eaicon-folder-open-solid:before {
+	content: "\e966";
+}
+
+.eaicon-folder-open-regular:before {
+	content: "\e967";
+}
+
+.eaicon-user-solid:before {
+	content: "\e968";
+}
+
+.eaicon-user-slash-solid:before {
+	content: "\e969";
+}
+.eaicon-xmark-solid:before {
+	content: "\e96a";
+}
+.eaicon-check-solid:before {
+	content: "\e96b";
+}
+.eaicon-users-solid:before {
+	content: "\e96c";
+}
+.eaicon-user-plus-solid:before {
+	content: "\e96d";
+}
