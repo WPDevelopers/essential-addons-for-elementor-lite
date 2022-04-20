@@ -1831,13 +1831,8 @@
     height: auto !important;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 20px;
-    border: none !important;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-item {
-    border: 6px solid #f5f3ff;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -1859,16 +1854,6 @@
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-item .eael-circle-btn .eael-circle-icon-shapes {
     border-bottom-right-radius: 50%;
-  }
-  .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-item .eael-circle-btn-content {
-    position: initial !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    display: block !important;
-  }
-  .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-item .eael-circle-btn-content .eael-circle-content {
-    padding: 0 !important;
-    background: transparent !important;
   }
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info {
@@ -2116,6 +2101,25 @@
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-responsive-view .eael-circle-item {
+  border: 6px solid #f5f3ff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-responsive-view .eael-circle-inner {
+  border: none !important;
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-responsive-view .eael-circle-btn-content {
+  position: initial !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-responsive-view .eael-circle-btn-content .eael-circle-content {
+  padding: 0 !important;
+  background: transparent !important;
 }
 @media only screen and (min-width: 601px) {
   .eael-circle-wrapper .eael-circle-info .eael-circle-inner .eael-circle-item {
