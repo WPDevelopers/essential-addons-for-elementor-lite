@@ -1830,7 +1830,6 @@
     width: 100% !important;
     height: auto !important;
     grid-template-columns: repeat(1, 1fr);
-    grid-gap: 20px;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-item {
     -webkit-box-orient: vertical;
@@ -1842,7 +1841,41 @@
             align-items: center;
     padding: 20px;
   }
-  .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-item .eael-circle-btn {
+  .eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-desktop-view {
+    margin: 40px 25px;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-desktop-view .eael-circle-btn-txt {
+    font-size: 12px;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-desktop-view .eael-circle-info {
+    padding: 48px !important;
+    height: 300px;
+    width: 300px;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-desktop-view .eael-circle-info .eael-circle-item .eael-circle-btn-content {
+    top: 50px;
+    bottom: 50px;
+    left: 50px;
+    right: 50px;
+    padding: 10px;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-desktop-view .eael-circle-info .eael-circle-item .eael-circle-btn {
+    height: 60px;
+    width: 60px;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-desktop-view .eael-circle-info .eael-circle-item .eael-circle-btn .eael-circle-btn-icon {
+    padding: 5px;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-desktop-view .eael-circle-info .eael-circle-content {
+    border-radius: 50% !important;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-responsive-view .eael-circle-item {
+    border: 6px solid #f5f3ff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-responsive-view .eael-circle-item .eael-circle-btn {
     -webkit-transform: none !important;
         -ms-transform: none !important;
             transform: none !important;
@@ -1852,7 +1885,21 @@
     bottom: initial !important;
     right: initial !important;
   }
-  .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-item .eael-circle-btn .eael-circle-icon-shapes {
+  .eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-responsive-view .eael-circle-inner {
+    border: none !important;
+    grid-gap: 20px;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-responsive-view .eael-circle-btn-content {
+    position: initial !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: block !important;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-responsive-view .eael-circle-btn-content .eael-circle-content {
+    padding: 0 !important;
+    background: transparent !important;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-responsive-view .eael-circle-btn .eael-circle-icon-shapes {
     border-bottom-right-radius: 50%;
   }
 }
@@ -2101,25 +2148,6 @@
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-}
-.eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-responsive-view .eael-circle-item {
-  border: 6px solid #f5f3ff;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-.eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-responsive-view .eael-circle-inner {
-  border: none !important;
-}
-.eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-responsive-view .eael-circle-btn-content {
-  position: initial !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-}
-.eael-circle-wrapper.eael-interactive-circle-preset-4.eael-circle-responsive-view .eael-circle-btn-content .eael-circle-content {
-  padding: 0 !important;
-  background: transparent !important;
 }
 @media only screen and (min-width: 601px) {
   .eael-circle-wrapper .eael-circle-info .eael-circle-inner .eael-circle-item {
