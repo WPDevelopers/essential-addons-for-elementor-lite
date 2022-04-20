@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 5.0.13
+Stable tag: 5.1.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -143,7 +143,8 @@ Extensions (Pro):
 2. [Particles](https://essential-addons.com/elementor/particle-effect/) - Add animated particle effects to your content
 3. [Advanced Tooltip](https://essential-addons.com/elementor/advanced-tooltip/) - Make any widget more informative with tooltip
 4. [Content Protection](https://essential-addons.com/elementor/content-protection/) - Hide your content with password protection
-5. [Cross-Domain Copy Paste](https://essential-addons.com/elementor/cross-domain-copy-paste/)- Copy any section in Elementor from one website and paste it on another 
+5. [Cross-Domain Copy Paste](https://essential-addons.com/elementor/cross-domain-copy-paste/)- Copy any section in Elementor from one website and paste it on another
+6. [Conditional Display](https://essential-addons.com/elementor/conditional-display/)- Display your preferred content based on the logic conditions you have set  
 
 
 More features and improvements are coming on regular updates. Want to unlock the advanced elements? [Upgrade to our Pro version](https://essential-addons.com/elementor/#pricing)
@@ -240,6 +241,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.1.0 - 19/04/2022 =
+
+- Added: FAQ Schema for EA Advanced Accordion
+- Few minor bug fixes & improvements
 
 = 5.0.13 - 12/04/2022 =
 

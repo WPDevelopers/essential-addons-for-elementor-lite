@@ -159,6 +159,16 @@
 .icon-settings-loader:before {
     content: "\e920";
 }
+
+.icon-settings-loader:before {
+    content: "\e920";
+}
+.icon-style-lock:before {
+    content: "\e92a";
+}
+.icon-lock:before {
+    content: "\e92a";
+}
 /* Start Setup Wizard */
 
 .eael-quick-setup-wizard-wrap {
@@ -5178,3 +5188,70 @@ button.button__greyBg:hover:disabled {
     border-color: #C8D3E9 !important;
     text-shadow: none !important;
 }
+
+.eael-admin-promotion-message {
+    background: #5E2EFF;
+    color: white;
+    padding: 15px 10px;
+}
+
+.eael-admin-promotion-message p {
+    font-size:14px;
+    text-align:center;
+}
+
+.eael-admin-promotion-message p a {
+    font-weight: bold;
+}
+
+.eael-admin-promotion-message p i {
+    font-size: 15px;
+    margin-right: 5px;
+}
+
+.eael-admin-promotion-message p a:focus {
+    color:inherit;
+    outline:none;
+    box-showdow:none;
+}
+.eael-lock-style {
+    position: absolute;
+    right: 21px;
+    color: #E8AA17;
+    font-size: 12px;
+}
+
+
+.eael-admin-promotion-message i:before {
+    color:white;
+}
+.toplevel_page_eael-settings #wpcontent {
+    padding-left:0;
+}
+.eael-element__wrap .eael-element__item[class^="eael-promotion-"]:after ,
+.eael-element__wrap .eael-element__item[class*=" eael-promotion-"]:after {
+    position: absolute;
+    bottom: 55px;
+    font-size: 12px;
+    color: white;
+    left: 16px;
+    font-weight: 600;
+    border-radius: 4px;
+    width: 65px;
+    text-align: center;
+    height: 26px;
+    line-height: 25px;
+}
+.eael-element__wrap .eael-element__item.eael-promotion-isupdated:after {
+    content: "Updated";
+    background: #6C757D;
+}
+.eael-element__wrap .eael-element__item.eael-promotion-isnew:after {
+    content: "New";
+    background: #059862;
+}
+.eael-element__wrap .eael-element__item.eael-promotion-ispopular:after {
+    content: "Popular";
+    background: #0064FF;
+}
+

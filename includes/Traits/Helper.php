@@ -426,6 +426,28 @@ trait Helper
 
 		wp_send_json_success();
 	}
+
+    public function promotion_message_on_admin_screen() {
+        ?>
+            <div id="eael-admin-promotion-message" class="eael-admin-promotion-message">
+                <i class="e-notice__dismiss eael-admin-promotion-close" role="button" aria-label="Dismiss" tabindex="0"></i>
+	            <?php printf( __( "<p> <i>📣</i> NEW: Essential Addons 5.1.0 is here, with new '<a target='_blank' href='%s'>EA Conditional Display</a>' extension, <b>'FAQ Schema'</b> for EA Advanced Accordion & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/conditional-display/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
+            </div>
+        <?php
+	}
+
+	public function remove_admin_notice() {
+		$current_screen = get_current_screen();
+		if ( $current_screen->id == 'toplevel_page_eael-settings' ) {
+
+			remove_all_actions( 'user_admin_notices' );
+			remove_all_actions( 'admin_notices' );
+
+			if ( get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG ) {
+				add_action( 'admin_notices', array( $this, 'promotion_message_on_admin_screen' ) );
+			}
+		}
+	}
 	
 }
 
