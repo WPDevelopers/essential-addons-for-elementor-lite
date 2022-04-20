@@ -484,6 +484,34 @@
                 align-items: center;
                 padding: 20px;
             }
+            &.eael-circle-desktop-view {
+                margin: 40px 25px;
+                .eael-circle-btn-txt {
+                    font-size: 12px;
+                }
+                .eael-circle-info {
+                    height: 300px;
+                    width: 300px;
+                    .eael-circle-item {
+                        .eael-circle-btn-content {
+                            top: -28px;
+                            bottom: 0px;
+                            left: 0px;
+                            right: 0px;
+                        }
+                        .eael-circle-btn {
+                            height: 60px;
+                            width: 60px;
+                            .eael-circle-btn-icon {
+                                padding: 5px;
+                            }
+                        }
+                    }
+                    .eael-circle-content {
+                        border-radius: 50% !important;
+                    }
+                }
+            }
 
             &.eael-circle-responsive-view {
                 .eael-circle-inner {
@@ -1908,6 +1936,8 @@
                 }
                 .eael-circle-info {
                     .eael-circle-inner {
+                        width: 300px !important;
+                        height: 265px !important;
                         .eael-circle-item {
                             .eael-circle-btn {
                                 height: 80px;
