@@ -34,6 +34,8 @@ class Asset_Builder {
 
 	public $custom_js_enable;
 
+	protected $main_page;
+
 	public function __construct( $registered_elements, $registered_extensions ) {
 
 		$this->registered_elements                = $registered_elements;
@@ -46,9 +48,9 @@ class Asset_Builder {
 		add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ] );
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
 		add_action( 'wp_footer', [ $this, 'add_inline_css' ] );
-		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ],10,2 );
+		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ], 10, 2 );
 
-		$this->custom_js_enable = $this->get_settings('custom-js');
+		$this->custom_js_enable = $this->get_settings( 'custom-js' );
 
 	}
 
@@ -199,6 +201,7 @@ class Asset_Builder {
 		}
 
 		$this->post_id = $css->get_post_id();
+		$this->set_main_page( $this->post_id );
 		$this->elements_manager->get_element_list( $this->post_id );
 		$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
 
@@ -208,7 +211,9 @@ class Asset_Builder {
 			$this->enqueue_asset( $this->post_id, $elements );
 		}
 
-		$this->load_custom_js( $this->post_id );
+		if ( ! $this->main_page ) {
+			$this->load_custom_js( $this->post_id );
+		}
 	}
 
 	public function enqueue_asset( $post_id = null, $elements, $context = 'view' ) {
@@ -264,7 +269,7 @@ class Asset_Builder {
 
 	public function load_custom_js( $post_id ) {
 
-		if(!$this->custom_js_enable){
+		if ( ! $this->custom_js_enable ) {
 			return false;
 		}
 
@@ -280,6 +285,10 @@ class Asset_Builder {
 			Plugin::instance()->preview->is_preview_mode() ||
 			is_preview()
 		);
+	}
+
+	protected function set_main_page( $post_id ) {
+		$this->main_page = get_post_meta( $post_id, '_elementor_template_type', true ) == 'wp-page';
 	}
 
 }
