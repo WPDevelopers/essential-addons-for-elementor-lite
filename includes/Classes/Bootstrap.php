@@ -124,7 +124,10 @@ class Bootstrap
         // register hooks
         $this->register_hooks();
 
-        new Asset_Builder( $this->registered_elements, $this->registered_extensions );
+	    if ( defined( 'ELEMENTOR_VERSION' ) ) {
+		    new Asset_Builder( $this->registered_elements, $this->registered_extensions );
+	    }
+
 
 
     }
