@@ -232,6 +232,20 @@ class Adv_Accordion extends Widget_Base
         );
 
         $repeater->add_control(
+            'eael_adv_accordion_tab_title_icon_new_active',
+            [
+                'label' => esc_html__('Opened Tab Icon?', 'essential-addons-for-elementor-lite'),
+                'description' => esc_html__('Set icon by tab type (opened or closed)!', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => 'closed',
+                'return_value' => 'opened',
+                'condition' => [
+                    'eael_adv_accordion_tab_icon_show' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
             'eael_adv_accordion_tab_title_icon_new',
             [
                 'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
@@ -243,6 +257,24 @@ class Adv_Accordion extends Widget_Base
                 ],
                 'condition' => [
                     'eael_adv_accordion_tab_icon_show' => 'yes',
+                    'eael_adv_accordion_tab_title_icon_new_active!' => 'opened'
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_adv_accordion_tab_title_icon_new_opened',
+            [
+                'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::ICONS,
+                'fa4compatibility' => 'eael_adv_accordion_tab_title_icon_opened',
+                'default' => [
+                    'value' => 'fas fa-minus',
+                    'library' => 'fa-solid',
+                ],
+                'condition' => [
+                    'eael_adv_accordion_tab_icon_show' => 'yes',
+                    'eael_adv_accordion_tab_title_icon_new_active' => 'opened'
                 ],
             ]
         );
@@ -1076,16 +1108,27 @@ class Adv_Accordion extends Widget_Base
             if ($tab['eael_adv_accordion_tab_icon_show'] === 'yes') {
                 if ($tab_icon_is_new || $tab_icon_migrated) {
                     if ( 'svg' === $tab['eael_adv_accordion_tab_title_icon_new']['library'] ) {
-                        echo '<span class="fa-accordion-icon fa-accordion-icon-svg eaa-svg">';
+                        echo '<span class="fa-accordion-icon fa-accordion-icon-svg eaa-svg eael-advanced-accordion-icon-closed">';
                         Icons_Manager::render_icon( $tab['eael_adv_accordion_tab_title_icon_new'] );
                         echo '</span>';
+
+                        echo '<span class="fa-accordion-icon fa-accordion-icon-svg eaa-svg eael-advanced-accordion-icon-opened">';
+                        Icons_Manager::render_icon( $tab['eael_adv_accordion_tab_title_icon_new_opened'] );
+                        echo '</span>';
                     }else{
+                        echo '<span class="eael-advanced-accordion-icon-closed">';
                         Icons_Manager::render_icon( $tab['eael_adv_accordion_tab_title_icon_new'], [ 'aria-hidden' => 'true', 'class' => "fa-accordion-icon" ] );
+                        echo '</span>';
+
+                        echo '<span class="eael-advanced-accordion-icon-opened">';
+                        Icons_Manager::render_icon( $tab['eael_adv_accordion_tab_title_icon_new_opened'], [ 'aria-hidden' => 'true', 'class' => "fa-accordion-icon" ] );
+                        echo '</span>';
                     }
 
 
                 } else {
-                    echo '<i class="' . $tab['eael_adv_accordion_tab_title_icon'] . ' fa-accordion-icon"></i>';
+                    echo '<span class="eael-advanced-accordion-icon-closed"><i class="' . $tab['eael_adv_accordion_tab_title_icon'] . ' fa-accordion-icon"></i></span>';
+                    echo '<span class="eael-advanced-accordion-icon-opened"><i class="' . !empty($tab['eael_adv_accordion_tab_title_icon_opened']) ? $tab['eael_adv_accordion_tab_title_icon_opened'] : ' fa fa-minus ' . ' fa-accordion-icon"></i></span>';
                 }
             }
             // tab title
