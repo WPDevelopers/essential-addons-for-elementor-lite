@@ -298,6 +298,7 @@
                 <condition key="widgetType">eael-advanced-data-table</condition>
             </conditions>
             <fields>
+                <field type="Adv Data Table: Table Content" editor_type="LINE">ea_adv_data_table_static_html</field>
                 <field type="Adv Data Table: Search Placeholder" editor_type="LINE">ea_adv_data_table_search_placeholder</field>
             </fields>
         </widget>
