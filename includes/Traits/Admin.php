@@ -42,7 +42,7 @@ trait Admin {
 
         if ( isset( $hook ) && $hook == 'toplevel_page_eael-settings' ) {
             wp_enqueue_style( 'essential_addons_elementor-admin-css', EAEL_PLUGIN_URL . 'assets/admin/css/admin.css', false, EAEL_PLUGIN_VERSION );
-            if ( $this->pro_enabled ) {
+            if ( $this->pro_enabled && defined( 'EAEL_PRO_PLUGIN_URL' ) && defined( 'EAEL_PRO_PLUGIN_VERSION' ) ) {
                 wp_enqueue_style( 'eael_pro-admin-css', EAEL_PRO_PLUGIN_URL . 'assets/admin/css/admin.css', false, EAEL_PRO_PLUGIN_VERSION );
             }
             wp_enqueue_style( 'sweetalert2-css', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/css/sweetalert2.min.css', false, EAEL_PLUGIN_VERSION );
@@ -203,7 +203,7 @@ trait Admin {
          */
 
         // Update Notice For PRO Version
-        if ( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '4.0.0', '<' ) ) {
+        if ( $this->pro_enabled && defined( 'EAEL_PRO_PLUGIN_VERSION' ) && \version_compare( EAEL_PRO_PLUGIN_VERSION, '4.0.0', '<' ) ) {
             $notice->classes( 'update', 'notice is-dismissible ' );
             $notice->message( 'update', '<p>' . __( 'You are using an incompatible version of Essential Addons PRO. Please update to v4.0.0+. If you do not see automatic update, <a href="https://essential-addons.com/elementor/docs/manually-update-essential-addons-pro/" target="_blank">Follow manual update guide.</a>', 'essential-addons-for-elementor-lite' ) . '</p>' );
             $notice->thumbnail( 'update', plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ) );
@@ -216,7 +216,7 @@ trait Admin {
                 'review' => $notice->makeTime( $notice->timestamp, '7 Day' ), // after 3 days
             ],
         );
-        if ( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '4.0.0', '<' ) ) {
+        if ( $this->pro_enabled && defined( 'EAEL_PRO_PLUGIN_VERSION' ) && \version_compare( EAEL_PRO_PLUGIN_VERSION, '4.0.0', '<' ) ) {
             $notice->options_args[ 'notice_will_show' ][ 'update' ] = $notice->timestamp;
         }
 

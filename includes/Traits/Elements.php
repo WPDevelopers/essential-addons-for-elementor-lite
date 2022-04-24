@@ -73,7 +73,7 @@ trait Elements
                 }
             }
 
-            if ($this->pro_enabled && \version_compare(EAEL_PRO_PLUGIN_VERSION, '3.3.0', '<')) {
+            if ($this->pro_enabled && defined( 'EAEL_PRO_PLUGIN_VERSION' ) && \version_compare(EAEL_PRO_PLUGIN_VERSION, '3.3.0', '<')) {
                 if (in_array($active_element, ['content-timeline', 'dynamic-filter-gallery', 'post-block', 'post-carousel', 'post-list'])) {
                     continue;
                 }
