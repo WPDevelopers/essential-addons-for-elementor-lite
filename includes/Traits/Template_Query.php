@@ -98,7 +98,7 @@ trait Template_Query {
      * @return  string  templates directory path of pro version.
      */
 	private function get_pro_template_dir() {
-		if ( ! apply_filters( 'eael/is_plugin_active', 'essential-addons-elementor/essential_adons_elementor.php' ) || ! defined( EAEL_PRO_PLUGIN_PATH ) ) {
+		if ( ! apply_filters( 'eael/is_plugin_active', 'essential-addons-elementor/essential_adons_elementor.php' ) || ! defined( 'EAEL_PRO_PLUGIN_PATH' ) ) {
 			return false;
 		}
 

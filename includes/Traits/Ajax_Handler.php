@@ -178,7 +178,7 @@ trait Ajax_Handler {
 
 			if ( $template_info['dir'] === 'theme' ) {
 				$dir_path = $this->retrive_theme_path();
-			} else if ( $template_info['dir'] === 'pro' && defined( EAEL_PRO_PLUGIN_PATH ) ) {
+			} else if ( $template_info['dir'] === 'pro' && defined( 'EAEL_PRO_PLUGIN_PATH' ) ) {
 				$dir_path = sprintf( "%sincludes", EAEL_PRO_PLUGIN_PATH );
 			} else {
 				$dir_path = sprintf( "%sincludes", EAEL_PLUGIN_PATH );
@@ -605,7 +605,7 @@ trait Ajax_Handler {
 
 			if ( $template_info['dir'] === 'theme' ) {
 				$dir_path = $this->retrive_theme_path();
-			} else if ( $template_info['dir'] === 'pro' && defined( EAEL_PRO_PLUGIN_PATH ) ) {
+			} else if ( $template_info['dir'] === 'pro' && defined( 'EAEL_PRO_PLUGIN_PATH' ) ) {
 				$dir_path = sprintf( "%sincludes", EAEL_PRO_PLUGIN_PATH );
 			} else {
 				$dir_path = sprintf( "%sincludes", EAEL_PLUGIN_PATH );
