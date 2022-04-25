@@ -17,9 +17,12 @@ trait Admin {
      * @since 1.1.2
      */
     public function admin_menu() {
+
+	    $menu_notice = ( get_option( 'eael_admin_menu_notice' ) < self::EAEL_PROMOTION_FLAG && get_option( 'eael_admin_promotion' ) < self::EAEL_ADMIN_MENU_FLAG ) ?'<span class="eael-menu-notice">1</span>':'';
+
         add_menu_page(
-            __( 'Essential Addons', 'essential-addons-for-elementor-lite' ),
-            __( 'Essential Addons', 'essential-addons-for-elementor-lite' ),
+            __( 'Essential Addons a', 'essential-addons-for-elementor-lite' ),
+            sprintf(__( 'Essential Addons %s', 'essential-addons-for-elementor-lite' ), $menu_notice ),
             'manage_options',
             'eael-settings',
             [$this, 'admin_settings_page'],
@@ -233,7 +236,7 @@ trait Admin {
      * @since 5.1.0
 	 */
 	public function eael_admin_inline_css() {
-		if ( get_option( 'eael_admin_menu_notice' ) < self::EAEL_ADMIN_MENU_FLAG ) {
+		if ( $this->menu_notice_should_show() ) {
 			$custom_css = "
                 #toplevel_page_eael-settings,
                 #toplevel_page_eael-settings:hover {
@@ -244,6 +247,19 @@ trait Admin {
                 }";
 			wp_add_inline_style( 'admin-bar', $custom_css );
 		}
+	}
+
+	/**
+	 * menu_notice_should_show
+     *
+     * Check two flags status (eael_admin_menu_notice and eael_admin_promotion),
+     * if both true this display menu notice. it's prevent to display menu notice multiple time
+     *
+	 * @return bool
+     * @since 5.1.0
+	 */
+	public function menu_notice_should_show() {
+		return ( get_option( 'eael_admin_menu_notice' ) < self::EAEL_PROMOTION_FLAG && get_option( 'eael_admin_promotion' ) < self::EAEL_ADMIN_MENU_FLAG );
 	}
 
 }
