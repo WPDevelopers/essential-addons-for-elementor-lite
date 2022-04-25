@@ -436,6 +436,13 @@ trait Helper
         <?php
 	}
 
+	/**
+	 * remove_admin_notice
+     *
+     * Added admin notice which is basically uses for display new promotion message
+     *
+     * @return void
+	 */
 	public function remove_admin_notice() {
 		$current_screen = get_current_screen();
 		if ( $current_screen->id == 'toplevel_page_eael-settings' ) {
@@ -446,6 +453,19 @@ trait Helper
 			if ( get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG ) {
 				add_action( 'admin_notices', array( $this, 'promotion_message_on_admin_screen' ) );
 			}
+		}
+	}
+
+	/**
+	 * eael_show_admin_menu_notice
+     *
+     * Update flag if user visit Essential Addons setting page only first time
+     * @return void
+     * @since 5.1.0
+	 */
+	public function eael_show_admin_menu_notice() {
+		if ( get_option( 'eael_admin_menu_notice' ) < self::EAEL_ADMIN_MENU_FLAG ) {
+            update_option( 'eael_admin_menu_notice',self::EAEL_ADMIN_MENU_FLAG );
 		}
 	}
 	

@@ -84,6 +84,8 @@ trait Admin {
                 'assets_regenerated' => EAEL_PLUGIN_URL . 'assets/admin/images/assets-regenerated.gif',
             ) );
         }
+
+        $this->eael_admin_inline_css();
     }
 
     /**
@@ -92,7 +94,6 @@ trait Admin {
      * @since 1.1.2
      */
     public function admin_settings_page() {
-        $a = 'manzur';
         ?>
         <form action="" method="POST" id="eael-settings" name="eael-settings">
             <div class="template__wrapper background__greyBg px30 py50">
@@ -126,6 +127,7 @@ trait Admin {
             </div>
         </form>
         <?php
+	    do_action( 'eael_admin_page_setting' );
     }
 
     /**
@@ -222,4 +224,26 @@ trait Admin {
 
         $notice->init();
     }
+
+	/**
+	 * eael_admin_inline_css
+     *
+     * Admin Menu highlighted
+     * @return void
+     * @since 5.1.0
+	 */
+	public function eael_admin_inline_css() {
+		if ( get_option( 'eael_admin_menu_notice' ) < self::EAEL_ADMIN_MENU_FLAG ) {
+			$custom_css = "
+                #toplevel_page_eael-settings,
+                #toplevel_page_eael-settings:hover {
+                        background: #7D55FF !important;
+                }
+                #toplevel_page_eael-settings a:hover {
+                    color:#f0f0f1 !important;
+                }";
+			wp_add_inline_style( 'admin-bar', $custom_css );
+		}
+	}
+
 }
