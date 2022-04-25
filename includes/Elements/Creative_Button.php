@@ -373,6 +373,7 @@ class Creative_Button extends Widget_Base
                     'selectors' => [
                         '{{WRAPPER}} .eael-creative-button:hover .cretive-button-text' => 'color: {{VALUE}};',
                         '{{WRAPPER}} .eael-creative-button.eael-creative-button--winona::after' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .eael-creative-button.eael-creative-button--rayen:hover::before' => 'color: {{VALUE}};',
                     ],
                 ]
             );
@@ -389,6 +390,7 @@ class Creative_Button extends Widget_Base
                         '{{WRAPPER}} .eael-creative-button.eael-creative-button--wayra:hover::before' => 'background-color: {{VALUE}};',
                         '{{WRAPPER}} .eael-creative-button.eael-creative-button--tamaya:hover'        => 'background-color: {{VALUE}};',
                         '{{WRAPPER}} .eael-creative-button.eael-creative-button--rayen::before'       => 'background-color: {{VALUE}};',
+                        '{{WRAPPER}} .eael-creative-button.eael-creative-button--rayen:hover::before'       => 'background-color: {{VALUE}};',
                     ],
                     'condition' => [
                         'use_gradient_background' => '',
@@ -407,6 +409,7 @@ class Creative_Button extends Widget_Base
 						{{WRAPPER}} .eael-creative-button.eael-creative-button--wayra:hover::before,
 						{{WRAPPER}} .eael-creative-button.eael-creative-button--tamaya:hover,
 						{{WRAPPER}} .eael-creative-button.eael-creative-button--rayen::before
+                        {{WRAPPER}} .eael-creative-button.eael-creative-button--rayen:hover::before
 					',
                     'condition' => [
                         'use_gradient_background' => 'yes',
@@ -489,7 +492,7 @@ class Creative_Button extends Widget_Base
                 [
                     'name'     => 'eael_creative_button_typography',
                     'scheme'   => Typography::TYPOGRAPHY_1,
-                    'selector' => '{{WRAPPER}} .eael-creative-button .cretive-button-text, {{WRAPPER}} .eael-creative-button--winona::after',
+                    'selector' => '{{WRAPPER}} .eael-creative-button .cretive-button-text, {{WRAPPER}} .eael-creative-button--winona::after, {{WRAPPER}} .eael-creative-button--rayen::before, {{WRAPPER}} .eael-creative-button--tamaya::after, {{WRAPPER}} .eael-creative-button--tamaya::before',
                 ]
             );
 
