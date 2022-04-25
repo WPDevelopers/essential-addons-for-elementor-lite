@@ -534,7 +534,7 @@ class Event_Calendar extends Widget_Base
 	    $this->add_control(
 		    'eael_event_calendar_default_date',
 		    [
-			    'label' => __('Calendar Default Date', 'essential-addons-for-elementor-lite'),
+			    'label' => __('Calendar Default Start Date', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::DATE_TIME,
 			    'label_block' => true,
 			    'picker_options' => [
