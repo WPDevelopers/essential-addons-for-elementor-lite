@@ -530,6 +530,21 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        $default_date = date('Y-m-d');
+	    $this->add_control(
+		    'eael_event_calendar_default_date',
+		    [
+			    'label' => __('Calendar Default Start Date', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::DATE_TIME,
+			    'label_block' => true,
+			    'picker_options' => [
+				    'enableTime'	=> false,
+				    'dateFormat' 	=> 'Y-m-d',
+			    ],
+			    'default' => $default_date,
+		    ]
+	    );
+
         $this->add_control(
             'eael_event_calendar_first_day',
             [
@@ -1730,6 +1745,7 @@ class Event_Calendar extends Widget_Base
 
         $local = $settings['eael_event_calendar_language'];
         $default_view = $settings['eael_event_calendar_default_view'];
+        $default_date = $settings['eael_event_calendar_default_date'];
         $time_format = $settings['eael_event_time_format'];
         $translate_date = [
             'today' => __('Today', 'essential-addons-for-elementor-lite'),
@@ -1743,6 +1759,7 @@ class Event_Calendar extends Widget_Base
             data-locale = "' . $local . '"
             data-translate = "' . htmlspecialchars(json_encode($translate_date), ENT_QUOTES, 'UTF-8') . '"
             data-defaultview = "' . $default_view . '"
+            data-defaultdate = "' . $default_date . '"
             data-time_format = "' . $time_format . '"
             data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"
             data-first_day="' . $settings['eael_event_calendar_first_day'] . '"></div>
