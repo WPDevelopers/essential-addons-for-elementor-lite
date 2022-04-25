@@ -465,7 +465,7 @@ trait Helper
 	 */
 	public function eael_show_admin_menu_notice() {
 		if ( get_option( 'eael_admin_menu_notice' ) < self::EAEL_ADMIN_MENU_FLAG ) {
-            update_option( 'eael_admin_menu_notice',self::EAEL_ADMIN_MENU_FLAG );
+            update_option( 'eael_admin_menu_notice',self::EAEL_ADMIN_MENU_FLAG,'no' );
 		}
 	}
 	

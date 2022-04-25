@@ -165,4 +165,7 @@ span.coupon-code {
     line-height: 1.6;
     text-align: center;
     z-index: 26;
+    display:none;
 }
+
+
