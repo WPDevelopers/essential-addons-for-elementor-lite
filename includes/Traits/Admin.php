@@ -18,7 +18,7 @@ trait Admin {
      */
     public function admin_menu() {
 
-	    $menu_notice = ( get_option( 'eael_admin_menu_notice' ) < self::EAEL_PROMOTION_FLAG && get_option( 'eael_admin_promotion' ) < self::EAEL_ADMIN_MENU_FLAG ) ?'<span class="eael-menu-notice">1</span>':'';
+	    $menu_notice = ( $this->menu_notice_should_show() ) ?'<span class="eael-menu-notice">1</span>':'';
 
         add_menu_page(
             __( 'Essential Addons a', 'essential-addons-for-elementor-lite' ),
@@ -232,19 +232,27 @@ trait Admin {
 	 * eael_admin_inline_css
      *
      * Admin Menu highlighted
-     * @return void
-     * @since 5.1.0
+     * @return false
+	 * @since 5.1.0
 	 */
 	public function eael_admin_inline_css() {
+
+	    $screen = get_current_screen();
+		if ( ! empty( $screen->id ) && $screen->id == 'toplevel_page_eael-settings' ) {
+			return false;
+		}
+
 		if ( $this->menu_notice_should_show() ) {
 			$custom_css = "
-                #toplevel_page_eael-settings,
-                #toplevel_page_eael-settings:hover {
-                        background: #7D55FF !important;
-                }
+                #toplevel_page_eael-settings a ,
                 #toplevel_page_eael-settings a:hover {
                     color:#f0f0f1 !important;
-                }";
+                    background: #7D55FF !important;
+                }
+				#toplevel_page_eael-settings .eael-menu-notice {
+                    display:block !important;
+                }"
+            ;
 			wp_add_inline_style( 'admin-bar', $custom_css );
 		}
 	}
