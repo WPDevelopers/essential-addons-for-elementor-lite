@@ -17,9 +17,12 @@ trait Admin {
      * @since 1.1.2
      */
     public function admin_menu() {
+
+	    $menu_notice = ( $this->menu_notice_should_show() ) ?'<span class="eael-menu-notice">1</span>':'';
+
         add_menu_page(
-            __( 'Essential Addons', 'essential-addons-for-elementor-lite' ),
-            __( 'Essential Addons', 'essential-addons-for-elementor-lite' ),
+            __( 'Essential Addons a', 'essential-addons-for-elementor-lite' ),
+            sprintf(__( 'Essential Addons %s', 'essential-addons-for-elementor-lite' ), $menu_notice ),
             'manage_options',
             'eael-settings',
             [$this, 'admin_settings_page'],
@@ -84,6 +87,8 @@ trait Admin {
                 'assets_regenerated' => EAEL_PLUGIN_URL . 'assets/admin/images/assets-regenerated.gif',
             ) );
         }
+
+        $this->eael_admin_inline_css();
     }
 
     /**
@@ -92,7 +97,6 @@ trait Admin {
      * @since 1.1.2
      */
     public function admin_settings_page() {
-        $a = 'manzur';
         ?>
         <form action="" method="POST" id="eael-settings" name="eael-settings">
             <div class="template__wrapper background__greyBg px30 py50">
@@ -126,6 +130,7 @@ trait Admin {
             </div>
         </form>
         <?php
+	    do_action( 'eael_admin_page_setting' );
     }
 
     /**
@@ -222,4 +227,47 @@ trait Admin {
 
         $notice->init();
     }
+
+	/**
+	 * eael_admin_inline_css
+     *
+     * Admin Menu highlighted
+     * @return false
+	 * @since 5.1.0
+	 */
+	public function eael_admin_inline_css() {
+
+	    $screen = get_current_screen();
+		if ( ! empty( $screen->id ) && $screen->id == 'toplevel_page_eael-settings' ) {
+			return false;
+		}
+
+		if ( $this->menu_notice_should_show() ) {
+			$custom_css = "
+                #toplevel_page_eael-settings a ,
+                #toplevel_page_eael-settings a:hover {
+                    color:#f0f0f1 !important;
+                    background: #7D55FF !important;
+                }
+				#toplevel_page_eael-settings .eael-menu-notice {
+                    display:block !important;
+                }"
+            ;
+			wp_add_inline_style( 'admin-bar', $custom_css );
+		}
+	}
+
+	/**
+	 * menu_notice_should_show
+     *
+     * Check two flags status (eael_admin_menu_notice and eael_admin_promotion),
+     * if both true this display menu notice. it's prevent to display menu notice multiple time
+     *
+	 * @return bool
+     * @since 5.1.0
+	 */
+	public function menu_notice_should_show() {
+		return ( get_option( 'eael_admin_menu_notice' ) < self::EAEL_PROMOTION_FLAG && get_option( 'eael_admin_promotion' ) < self::EAEL_ADMIN_MENU_FLAG );
+	}
+
 }
