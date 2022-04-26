@@ -64,6 +64,7 @@ trait Ajax_Handler {
 		if ( is_admin() ) {
 			add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'save_settings' ) );
 			add_action( 'wp_ajax_clear_cache_files_with_ajax', array( $this, 'clear_cache_files' ) );
+			add_action( 'wp_ajax_eael_admin_promotion', array( $this, 'eael_admin_promotion' ) );
 		}
 	}
 
@@ -677,6 +678,17 @@ trait Ajax_Handler {
 
 				$post_list = wp_list_pluck( get_terms( $args ), 'name', 'term_id' );
 				break;
+			case 'user':
+				$users = [];
+
+				foreach ( get_users( [ 'search' => "*{$search}*" ] ) as $user ) {
+					$user_id           = $user->ID;
+					$user_name         = $user->display_name;
+					$users[ $user_id ] = $user_name;
+				}
+
+				$post_list = $users;
+				break;
 			default:
 				$post_list = HelperClass::get_query_post_list( $post_type, 10, $search );
 		}
@@ -723,6 +735,17 @@ trait Ajax_Handler {
 				}
 
 				$response = wp_list_pluck( get_terms( $args ), 'name', 'term_id' );
+				break;
+			case 'user':
+				$users = [];
+
+				foreach ( get_users( [ 'include' => $ids ] ) as $user ) {
+					$user_id           = $user->ID;
+					$user_name         = $user->display_name;
+					$users[ $user_id ] = $user_name;
+				}
+
+				$response = $users;
 				break;
 			default:
 				$post_info = get_posts( [
@@ -873,5 +896,15 @@ trait Ajax_Handler {
 		}
 
 		wp_send_json( true );
+	}
+
+	public function eael_admin_promotion(){
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		update_option( 'eael_admin_promotion', self::EAEL_PROMOTION_FLAG );
 	}
 }
