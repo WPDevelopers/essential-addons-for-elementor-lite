@@ -51,9 +51,14 @@ const QuickView = {
 						       popup_details.css("height", "auto");
 					       }
 						   setTimeout(function () {
+							   var setHeight = product_gallery.find('.woocommerce-product-gallery__image').height();
+							   $('body').prepend('<style class="eael-quick-view-dynamic-css">.woocommerce-product-gallery .flex-viewport { height: ' + setHeight + 'px; }</style>');
 							   product_gallery.wc_product_gallery();
 							   product_gallery.closest('.eael-product-image-wrap').css('background', 'none');
 						   }, 500);
+						   setTimeout(function () {
+							   $('.eael-quick-view-dynamic-css').remove();
+						   }, 1500);
 				       }
 			       },
 		       });
