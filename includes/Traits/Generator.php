@@ -22,7 +22,7 @@ trait Generator {
 			return;
 		}
 
-		$uid = null;
+		$uid = apply_filters( 'eael_uid_update', null );
 
 		if ( $this->is_preview_mode() ) {
 			if ( is_front_page() ) {
