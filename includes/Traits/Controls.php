@@ -678,6 +678,31 @@ trait Controls
             );
 
             if( 'eael-post-block' === $wb->get_name() ) {
+                $wb->add_responsive_control(
+                    'post_block_image_ratio',
+                    [
+                        'label'      => __('Image Ratio', 'essential-addons-for-elementor-lite'),
+                        'type'       => Controls_Manager::SLIDER,
+                        'range'      => [
+                            'px' => [
+                                'min'  => 0.1,
+                                'max'  => 2,
+                                'step' => 0.01,
+                            ],
+                        ],
+                        'default' => [
+                            'unit' => 'px',
+                            'size' => 0.66,
+                        ],
+                        'size_units' => ['px'],
+                        'selectors'  => [
+                            '{{WRAPPER}} .eael-entry-thumbnail' => 'padding-bottom: calc({{SIZE}} * 100%);',
+                        ],
+                        'condition' => [
+                            'eael_show_image' => 'yes',
+                        ],
+                    ]
+                );
                 $wb->add_control(
                     'post_block_image_height',
                     [
