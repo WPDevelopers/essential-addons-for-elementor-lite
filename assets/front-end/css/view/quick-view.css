@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .eael-popup-details-render {
   width: 80%;
   max-width: 900px;
@@ -119,7 +120,7 @@
 }
 .eael-product-popup .eael-product-popup-details .single_add_to_cart_button.eael-addtocart-added:after {
   font-family: "Font Awesome 5 Free";
-  content: "\f00c";
+  content: "";
   font-weight: 900;
   display: inline-block;
   position: absolute;
@@ -127,7 +128,7 @@
 }
 .eael-product-popup .eael-product-popup-details .single_add_to_cart_button.eael-addtocart-loading:after {
   font-family: "Font Awesome 5 Free";
-  content: "\f110";
+  content: "";
   font-weight: 900;
   position: absolute;
   right: 12px;
@@ -166,7 +167,7 @@
   margin-right: 0;
 }
 .eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-4 .flex-control-thumbs li {
-  width: calc(25% - 0.75em);
+  width: calc(25% - .75em);
   margin-right: 1em;
   margin-bottom: 1em;
 }
