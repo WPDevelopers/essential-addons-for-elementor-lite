@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 5.1.1
+Stable tag: 5.1.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -241,6 +241,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.1.2 - 10/05/2022 =
+
+- Fixed: EA Woo Product Gallery | Quick view not working properly on responsive devices
+- Few minor bug fixes & improvements
 
 = 5.1.1 - 26/04/2022 =
 
