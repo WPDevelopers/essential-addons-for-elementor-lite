@@ -26,6 +26,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.eael-creative-button-wrapper .eael-creative-button {
+  text-decoration: none !important;
+}
+
 .eael-creative-button:focus {
   outline: none;
 }
