@@ -231,14 +231,53 @@ class Adv_Accordion extends Widget_Base
             ]
         );
 
+        // $repeater->add_control(
+        //     'eael_adv_accordion_tab_title_icon_new_active',
+        //     [
+        //         'label' => esc_html__('Opened Tab Icon?', 'essential-addons-for-elementor-lite'),
+        //         'description' => esc_html__('Set icon by tab type (opened or closed)!', 'essential-addons-for-elementor-lite'),
+        //         'type' => Controls_Manager::SWITCHER,
+        //         'default' => 'closed',
+        //         'return_value' => 'opened',
+        //         'condition' => [
+        //             'eael_adv_accordion_tab_icon_show' => 'yes',
+        //         ],
+        //     ]
+        // );
+
+		$repeater->start_controls_tabs( 'tab_icons_repeater' );
+
+		$repeater->start_controls_tab( 'opened_tab', 
+            [ 
+                'label' => esc_html__( 'Opened Tab', 'essential-addons-for-elementor-lite' ),
+                'condition' => [
+                    'eael_adv_accordion_tab_icon_show' => 'yes',
+                ],
+             ]
+     );
+
         $repeater->add_control(
-            'eael_adv_accordion_tab_title_icon_new_active',
+            'eael_adv_accordion_tab_title_icon_new_opened',
             [
-                'label' => esc_html__('Opened Tab Icon?', 'essential-addons-for-elementor-lite'),
-                'description' => esc_html__('Set icon by tab type (opened or closed)!', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'default' => 'closed',
-                'return_value' => 'opened',
+                'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::ICONS,
+                'fa4compatibility' => 'eael_adv_accordion_tab_title_icon_opened',
+                'default' => [
+                    'value' => 'fas fa-minus',
+                    'library' => 'fa-solid',
+                ],
+                'condition' => [
+                    'eael_adv_accordion_tab_icon_show' => 'yes',
+                    // 'eael_adv_accordion_tab_title_icon_new_active' => 'opened'
+                ],
+            ]
+        );
+
+		$repeater->end_controls_tab();
+
+        $repeater->start_controls_tab( 'closed_tab', 
+            [ 
+                'label' => esc_html__( 'Closed Tab', 'essential-addons-for-elementor-lite' ),
                 'condition' => [
                     'eael_adv_accordion_tab_icon_show' => 'yes',
                 ],
@@ -257,27 +296,14 @@ class Adv_Accordion extends Widget_Base
                 ],
                 'condition' => [
                     'eael_adv_accordion_tab_icon_show' => 'yes',
-                    'eael_adv_accordion_tab_title_icon_new_active!' => 'opened'
+                    // 'eael_adv_accordion_tab_title_icon_new_active!' => 'opened'
                 ],
             ]
         );
 
-        $repeater->add_control(
-            'eael_adv_accordion_tab_title_icon_new_opened',
-            [
-                'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::ICONS,
-                'fa4compatibility' => 'eael_adv_accordion_tab_title_icon_opened',
-                'default' => [
-                    'value' => 'fas fa-minus',
-                    'library' => 'fa-solid',
-                ],
-                'condition' => [
-                    'eael_adv_accordion_tab_icon_show' => 'yes',
-                    'eael_adv_accordion_tab_title_icon_new_active' => 'opened'
-                ],
-            ]
-        );
+		$repeater->end_controls_tab();
+
+		$repeater->end_controls_tabs();
 
         $repeater->add_control(
             'eael_adv_accordion_tab_title',
@@ -287,6 +313,7 @@ class Adv_Accordion extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'default' => esc_html__('Tab Title', 'essential-addons-for-elementor-lite'),
                 'dynamic' => ['active' => true],
+                'separator' => 'before',
             ]
         );
 
