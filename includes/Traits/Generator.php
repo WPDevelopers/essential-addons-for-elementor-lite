@@ -338,15 +338,19 @@ trait Generator {
 
 		foreach ( $elements as $element ) {
 			if ( isset( $this->registered_elements[ $element ] ) ) {
-				if ( !empty( $this->registered_elements[ $element ][ 'dependency' ][ $type ] ) ) {
-					foreach ( $this->registered_elements[ $element ][ 'dependency' ][ $type ] as $file ) {
-						${$file[ 'type' ]}[ $file[ 'context' ] ][] = $file[ 'file' ];
+				if ( ! empty( $this->registered_elements[ $element ]['dependency'][ $type ] ) ) {
+					foreach ( (array) $this->registered_elements[ $element ]['dependency'][ $type ] as $file ) {
+						if ( ! empty( $file['type'] ) && ! empty( $file['context'] ) && ! empty( $file['file'] ) ) {
+							${$file['type']}[ $file['context'] ][] = $file['file'];
+						}
 					}
 				}
 			} elseif ( isset( $this->registered_extensions[ $element ] ) ) {
-				if ( !empty( $this->registered_extensions[ $element ][ 'dependency' ][ $type ] ) ) {
-					foreach ( $this->registered_extensions[ $element ][ 'dependency' ][ $type ] as $file ) {
-						${$file[ 'type' ]}[ $file[ 'context' ] ][] = $file[ 'file' ];
+				if ( ! empty( $this->registered_extensions[ $element ]['dependency'][ $type ] ) ) {
+					foreach ( (array) $this->registered_extensions[ $element ]['dependency'][ $type ] as $file ) {
+						if ( ! empty( $file['type'] ) && ! empty( $file['context'] ) && ! empty( $file['file'] ) ) {
+							${$file['type']}[ $file['context'] ][] = $file['file'];
+						}
 					}
 				}
 			}
