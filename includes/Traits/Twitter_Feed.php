@@ -94,7 +94,7 @@ trait Twitter_Feed
 
         foreach ($items as $item) {
             $is_reply = !empty($item['in_reply_to_status_id']) ? true : false;
-            $show_reply = ( 'true' === $settings['eael_twitter_feed_show_replies'] ) ? true : false;
+            $show_reply = ( !empty($settings['eael_twitter_feed_show_replies']) && 'true' === $settings['eael_twitter_feed_show_replies'] ) ? true : false;
 
             if($is_reply && !$show_reply){
                 continue;
