@@ -1861,3 +1861,50 @@
         transform: none;
     }
 }
+
+//savoy theme conflicts
+.theme-savoy {
+    .eael-product-gallery {
+        &.eael-product-preset-4{
+            .woocommerce ul.products li.product {
+                .star-rating {
+                    width: 85px;
+
+                    &:before {
+                        line-height: 13px;
+                    }
+                    span {
+                        &:before {
+                            line-height: 11px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .woocommerce ul.products li.product {
+            .star-rating {
+                font-size: 12px;
+                letter-spacing: 2px;
+
+                &:before {
+                    font-size: 12px;
+                    letter-spacing: 2px;
+                    line-height: 18px;
+                }
+
+                span{
+                   font-size: 12px;
+                   letter-spacing: 2px;
+
+                   &:before {
+                       font-size: 12px;
+                       letter-spacing: 2px;
+                       left: 9px;
+                        line-height: 18px;
+                   } 
+                }
+            } 
+        }
+    }
+}
