@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .eael-product-gallery {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -125,7 +124,7 @@
   line-height: 1em;
 }
 .eael-product-gallery .woocommerce ul.products .product .star-rating:before {
-  content: "";
+  content: "\f005\f005\f005\f005\f005";
   font-family: "Font Awesome 5 Free";
   font-weight: 400;
   opacity: 1;
@@ -134,7 +133,7 @@
   display: inline-block;
 }
 .eael-product-gallery .woocommerce ul.products .product .star-rating span:before {
-  content: "";
+  content: "\f005\f005\f005\f005\f005";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
@@ -278,14 +277,14 @@
 }
 .eael-product-gallery.eael-product-preset-4 .woocommerce ul.products li.product .button::before,
 .eael-product-gallery.eael-product-preset-4 .woocommerce ul.products li.product .button.add_to_cart_button::before {
-  content: "";
+  content: "\f07a";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   padding-right: 8px;
 }
 .eael-product-gallery.eael-product-preset-4 .woocommerce ul.products li.product .button.product_type_variable:before,
 .eael-product-gallery.eael-product-preset-4 .woocommerce ul.products li.product .button.add_to_cart_button.product_type_variable:before {
-  content: "";
+  content: "\f00c";
 }
 .eael-product-gallery.eael-product-preset-4 .woocommerce ul.products li.product .button:focus,
 .eael-product-gallery.eael-product-preset-4 .woocommerce ul.products li.product .button.add_to_cart_button:focus {
@@ -374,7 +373,7 @@
   line-height: 1em;
 }
 .eael-product-gallery .woocommerce ul.products li.product .star-rating:before {
-  content: "";
+  content: "\f005\f005\f005\f005\f005";
   font-family: "Font Awesome 5 Free";
   font-weight: 400;
   opacity: 1;
@@ -383,7 +382,7 @@
   display: inline-block;
 }
 .eael-product-gallery .woocommerce ul.products li.product .star-rating span:before {
-  content: "";
+  content: "\f005\f005\f005\f005\f005";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
@@ -677,7 +676,7 @@
   font-size: 0 !important;
 }
 .eael-product-gallery .eael-product-wrap .icons-wrap.box-style li a.added_to_cart:after {
-  content: "";
+  content: "\f217";
   font-weight: 900;
   font-family: "Font Awesome 5 Free";
   font-size: 18px;
@@ -693,7 +692,7 @@
   font-size: 0px !important;
 }
 .eael-product-gallery .eael-product-wrap .icons-wrap.box-style li a.button.add_to_cart_button:before {
-  content: "";
+  content: "\f07a";
   display: block;
   font-family: "Font Awesome 5 Free";
   font-size: 18px;
@@ -706,7 +705,7 @@
   position: absolute;
 }
 .eael-product-gallery .eael-product-wrap .icons-wrap.box-style li a.button.add_to_cart_button.product_type_variable:before {
-  content: "";
+  content: "\f00c";
 }
 .eael-product-gallery .eael-product-wrap .icons-wrap.over-box-style {
   display: -webkit-box;
@@ -753,7 +752,7 @@
   font-size: 0 !important;
 }
 .eael-product-gallery .eael-product-wrap .icons-wrap.over-box-style li a.added_to_cart:after {
-  content: "";
+  content: "\f217";
   font-weight: 900;
   font-family: "Font Awesome 5 Free";
   font-size: 18px;
@@ -770,7 +769,7 @@
   font-size: 0px !important;
 }
 .eael-product-gallery .eael-product-wrap .icons-wrap.over-box-style li a.button.add_to_cart_button:before {
-  content: "";
+  content: "\f07a";
   display: block;
   font-family: "Font Awesome 5 Free";
   font-size: 18px;
@@ -783,7 +782,7 @@
   position: absolute;
 }
 .eael-product-gallery .eael-product-wrap .icons-wrap.over-box-style li a.button.add_to_cart_button.product_type_variable:before {
-  content: "";
+  content: "\f00c";
 }
 .eael-product-gallery .eael-product-wrap .icons-wrap.over-box-style li a.product_type_external {
   width: auto;
@@ -831,7 +830,7 @@
   font-size: 0 !important;
 }
 .eael-product-gallery .eael-product-wrap .icons-wrap.block-box-style li a.added_to_cart:after {
-  content: "";
+  content: "\f217";
   font-weight: 900;
   font-family: "Font Awesome 5 Free";
   font-size: 18px;
@@ -847,7 +846,7 @@
   font-size: 0px !important;
 }
 .eael-product-gallery .eael-product-wrap .icons-wrap.block-box-style li a.button.add_to_cart_button:before {
-  content: "";
+  content: "\f07a";
   display: block;
   font-family: "Font Awesome 5 Free";
   font-size: 18px;
@@ -860,7 +859,7 @@
   position: absolute;
 }
 .eael-product-gallery .eael-product-wrap .icons-wrap.block-box-style li a.button.add_to_cart_button.product_type_variable:before {
-  content: "";
+  content: "\f00c";
 }
 .eael-product-gallery .eael-product-wrap .icons-wrap li {
   display: inline-block;
@@ -1126,4 +1125,32 @@
   -webkit-transform: none;
       -ms-transform: none;
           transform: none;
+}
+.theme-savoy .eael-product-gallery.eael-product-preset-4 .woocommerce ul.products li.product .star-rating {
+  width: 85px;
+}
+.theme-savoy .eael-product-gallery.eael-product-preset-4 .woocommerce ul.products li.product .star-rating:before {
+  line-height: 13px;
+}
+.theme-savoy .eael-product-gallery.eael-product-preset-4 .woocommerce ul.products li.product .star-rating span:before {
+  line-height: 11px;
+}
+.theme-savoy .eael-product-gallery .woocommerce ul.products li.product .star-rating {
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+.theme-savoy .eael-product-gallery .woocommerce ul.products li.product .star-rating:before {
+  font-size: 12px;
+  letter-spacing: 2px;
+  line-height: 18px;
+}
+.theme-savoy .eael-product-gallery .woocommerce ul.products li.product .star-rating span {
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+.theme-savoy .eael-product-gallery .woocommerce ul.products li.product .star-rating span:before {
+  font-size: 12px;
+  letter-spacing: 2px;
+  left: 9px;
+  line-height: 18px;
 }
