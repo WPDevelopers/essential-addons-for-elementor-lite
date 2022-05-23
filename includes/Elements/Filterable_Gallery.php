@@ -214,6 +214,7 @@ class Filterable_Gallery extends Widget_Base
                     '{{WRAPPER}} .gallery-item-caption-wrap' => 'transition: {{SIZE}}ms;',
                 ],
                 'condition' => [
+                    'eael_fg_caption_style' => 'hoverer',
                     'eael_fg_grid_hover_style!' => 'eael-none',
                 ],
             ]
