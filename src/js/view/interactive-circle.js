@@ -3,6 +3,21 @@ ea.hooks.addAction( "init", "ea", () => {
 		
 		var $circleWrap = $scope.find( ".eael-circle-wrapper" );
 		var $eventType  = "mouseenter";
+		var $animation  = $circleWrap.data('animation');
+
+		if ( $animation != 'eael-interactive-circle-animation-0' ) {
+			var $circleContent = $scope.find( ".eael-circle-content" );
+
+			$($circleContent).waypoint(
+				function() {
+					$circleWrap.addClass($animation);
+				},
+				{
+					offset: "80%",
+					triggerOnce: true
+				}
+			);	
+		}
 		
 		if ( $circleWrap.hasClass( 'eael-interactive-circle-event-click' ) ) {
 			$eventType = "click";
