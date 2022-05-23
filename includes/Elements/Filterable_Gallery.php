@@ -2981,18 +2981,11 @@ class Filterable_Gallery extends Widget_Base
         }
 
         if ($settings['eael_section_fg_full_image_action'] === 'link') {
-            $item_link_url = ( !empty($item['link']) && !empty($item['link']['url']) ) ? esc_url($item['link']['url']) : '#';
-            $fia_string = 'href="' . $item_link_url . '"';
+            static $ea_link_repeater_index = 0;
+            $link_key = 'link_' . $ea_link_repeater_index++;
+            $this->add_link_attributes( $link_key, $item['link'] );
 
-            if ( !empty($item['link']) && !empty($item['link']['nofollow']) ) {
-                $fia_string .= 'rel="nofollow"';
-            }
-
-            if ( !empty($item['link']) && !empty($item['link']['is_external']) ) {
-                $fia_string .= 'target="_blank"';
-            }
-
-            $html .= '<a ' . $fia_string . '>';
+            $html .= '<a ' . $this->get_render_attribute_string( $link_key ) . '>';
         }
 
         return $html;
@@ -3130,7 +3123,7 @@ class Filterable_Gallery extends Widget_Base
             if ( !empty( $item['link']['url'] ) ) {
                 static $ea_link_repeater_index = 0;
 	            $link_key = 'link_' . $ea_link_repeater_index++;
-                
+
 	            $this->add_link_attributes( $link_key, $item['link'] ); ?>
                 <a <?php $this->print_render_attribute_string( $link_key ); ?>> <?php
                 echo '<span class="fg-item-icon-inner">';
