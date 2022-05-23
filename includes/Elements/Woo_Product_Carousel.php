@@ -418,6 +418,17 @@ class Woo_Product_Carousel extends Widget_Base {
 		    ]
 	    );
 
+
+        $this->add_control(
+            'eael_product_carousel_title_clickable',
+            [
+                'label' => esc_html__('Title Clickable?', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default' => 'no',
+            ]
+        );
+
         $this->end_controls_section();
     }
     
