@@ -84,7 +84,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 });
 
 (function ($) {
-	$(document).on('click', 'a', function (e) {
+	$('a').on('click', function (e) {
 		var hashURL = $(this).attr('href'),
 			isStartWithHash;
 
