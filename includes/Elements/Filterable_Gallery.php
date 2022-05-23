@@ -3267,9 +3267,7 @@ class Filterable_Gallery extends Widget_Base
 
 
             if ($item['video_gallery_switch'] != 'true' || $settings['eael_fg_caption_style'] == 'card') {
-                if ($settings['eael_fg_grid_hover_style'] !== 'eael-none') {
-                    $html .= $this->gallery_item_caption_content($settings, $item, $caption_style);
-                }
+                $html .= $this->gallery_item_caption_content($settings, $item, $caption_style);
             }
 
             if ($settings['eael_fg_show_popup'] == 'media') {
