@@ -3127,18 +3127,10 @@ class Filterable_Gallery extends Widget_Base
         }
         
         if ($item['maybe_link'] == 'true') {
-            $a_string = 'href="' . esc_url($item['link']['url']) . '"';
-            
-            if ($item['link']['nofollow']) {
-                $a_string .= 'rel="nofollow"';
-            }
-            
-            if ($item['link']['is_external']) {
-                $a_string .= 'target="_blank"';
-            }
-            
-            if (!empty($item['link']['url'])) {
-                echo '<a ' . $a_string . '>';
+            if ( !empty( $item['link']['url'] ) ) {
+                $link_key = 'link_' . rand();
+	            $this->add_link_attributes( $link_key, $item['link'] ); ?>
+                <a <?php $this->print_render_attribute_string( $link_key ); ?>> <?php
                 echo '<span class="fg-item-icon-inner">';
                 
                 if ($link_icon_is_new || $link_icon_migrated) {
