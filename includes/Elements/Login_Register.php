@@ -4242,6 +4242,8 @@ class Login_Register extends Widget_Base {
 								<?php } ?>
                             </div>
 
+							<?php do_action( 'eael/login-register/after-register-footer', $this ); ?>
+
                             <div class="eael-form-validation-container">
 								<?php $this->print_validation_message(); ?>
                             </div>
