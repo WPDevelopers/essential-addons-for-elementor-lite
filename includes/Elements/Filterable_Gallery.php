@@ -3252,7 +3252,12 @@ class Filterable_Gallery extends Widget_Base
                 $html .= $this->gallery_item_full_image_clickable_content($settings, $item);
             }
             
-            $html .= '<div class="gallery-item-thumbnail-wrap">';
+            if (isset($item['video_gallery_switch']) && ($item['video_gallery_switch'] === 'true') 
+            && isset($settings['eael_section_fg_full_image_clickable']) && $settings['eael_section_fg_full_image_clickable'] === 'yes') {
+                $html .= '<div class="gallery-item-thumbnail-wrap video_gallery_switch_on">';
+            } else {
+                $html .= '<div class="gallery-item-thumbnail-wrap">';
+            }
 
             $html .= $this->gallery_item_thumbnail_content($settings, $item);
 
