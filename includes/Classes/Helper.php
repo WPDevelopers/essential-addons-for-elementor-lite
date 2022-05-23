@@ -673,7 +673,7 @@ class Helper
 
     public static function get_dynamic_args(array $settings, array $args)
     {
-        if ($settings['post_type'] === 'source_dynamic' && is_archive()) {
+	    if ( $settings['post_type'] === 'source_dynamic' && ( is_archive() || is_search() ) ) {
             $data = get_queried_object();
 
             if (isset($data->post_type)) {
