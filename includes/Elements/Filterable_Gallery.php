@@ -3128,7 +3128,9 @@ class Filterable_Gallery extends Widget_Base
         
         if ($item['maybe_link'] == 'true') {
             if ( !empty( $item['link']['url'] ) ) {
-                $link_key = 'link_' . rand();
+                static $ea_link_repeater_index = 0;
+	            $link_key = 'link_' . $ea_link_repeater_index++;
+                
 	            $this->add_link_attributes( $link_key, $item['link'] ); ?>
                 <a <?php $this->print_render_attribute_string( $link_key ); ?>> <?php
                 echo '<span class="fg-item-icon-inner">';
