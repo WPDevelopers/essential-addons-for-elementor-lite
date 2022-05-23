@@ -448,6 +448,7 @@ class Event_Calendar extends Widget_Base
                     'af' => 'Afrikaans',
                     'sq' => 'Albanian',
                     'ar' => 'Arabic',
+                    'az' => 'Azerbaijani',
                     'eu' => 'Basque',
                     'bn' => 'Bengali',
                     'bs' => 'Bosnian',
