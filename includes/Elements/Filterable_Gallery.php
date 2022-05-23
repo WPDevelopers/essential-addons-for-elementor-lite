@@ -3175,7 +3175,12 @@ class Filterable_Gallery extends Widget_Base
                 $html .= $this->gallery_item_full_image_clickable_content($settings, $item, false);
             }
             
-            $html .= '<div class="gallery-item-thumbnail-wrap fg-layout-3-item-thumb">';
+            if (isset($item['video_gallery_switch']) && ($item['video_gallery_switch'] === 'true') 
+            && isset($settings['eael_section_fg_full_image_clickable']) && $settings['eael_section_fg_full_image_clickable'] === 'yes') {
+                $html .= '<div class="gallery-item-thumbnail-wrap fg-layout-3-item-thumb video_gallery_switch_on">';
+            } else {
+                $html .= '<div class="gallery-item-thumbnail-wrap fg-layout-3-item-thumb">';
+            }
             
             $html .= '<img src="' . $item['image'] . '" data-lazy-src="' . $item['image'] . '" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '" class="gallery-item-thumbnail">';
             
