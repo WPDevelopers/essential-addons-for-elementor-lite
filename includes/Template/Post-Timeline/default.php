@@ -7,7 +7,6 @@ use \Essential_Addons_Elementor\Classes\Helper;
  */
 
 use Elementor\Group_Control_Image_Size;
-use Essential_Addons_Elementor\Classes\Helper;
 
 if (!defined('ABSPATH')) {
     exit;
