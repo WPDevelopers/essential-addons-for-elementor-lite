@@ -184,7 +184,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_image_render_type',
             [
-                'label' => esc_html__('Sort By', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Render Type', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'fill' => esc_html__('Stretched', 'essential-addons-for-elementor-lite'),
@@ -200,7 +200,7 @@ class Facebook_Feed extends Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'eael_facebook_feed_image_dimension',
             [
                 'label' => esc_html__('Image Dimension(px)', 'essential-addons-for-elementor-lite'),
