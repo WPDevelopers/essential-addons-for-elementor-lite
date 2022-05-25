@@ -875,9 +875,9 @@ class Feature_List extends Widget_Base {
             $connector_mobile = 'right: calc(100% - ' . $connector_width . 'px); left: 0;';
         }
         // icon position for all mode
-        $eael_feature_list_icon_position_setting = ( !empty($settings['eael_feature_list_icon_position']) && $settings['eael_feature_list_icon_position'] ) ? $settings['eael_feature_list_icon_position'] : '';
-        $eael_feature_list_icon_position_tablet_setting = ( !empty($settings['eael_feature_list_icon_position_tablet']) && $settings['eael_feature_list_icon_position_tablet'] ) ? $settings['eael_feature_list_icon_position_tablet'] : '';
-        $eael_feature_list_icon_position_mobile_setting = ( !empty($settings['eael_feature_list_icon_position_mobile']) && $settings['eael_feature_list_icon_position_mobile'] ) ? $settings['eael_feature_list_icon_position_mobile'] : '';
+        $eael_feature_list_icon_position_setting = ( !empty($settings['eael_feature_list_icon_position']) && $settings['eael_feature_list_icon_position'] ) ? $settings['eael_feature_list_icon_position'] : 'left';
+        $eael_feature_list_icon_position_tablet_setting = ( !empty($settings['eael_feature_list_icon_position_tablet']) && $settings['eael_feature_list_icon_position_tablet'] ) ? $settings['eael_feature_list_icon_position_tablet'] : 'left';
+        $eael_feature_list_icon_position_mobile_setting = ( !empty($settings['eael_feature_list_icon_position_mobile']) && $settings['eael_feature_list_icon_position_mobile'] ) ? $settings['eael_feature_list_icon_position_mobile'] : 'left';
         $this->add_render_attribute(
             'eael_feature_list_wrapper',
             [

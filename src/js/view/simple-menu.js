@@ -2,6 +2,9 @@ var SimpleMenu = function ($scope, $) {
     var $indicator_class = $('.eael-simple-menu-container', $scope).data(
         'indicator-class'
     )
+    var $hamburger_icon = $('.eael-simple-menu-container', $scope).data(
+        'hamburger-icon'
+    )
     var $indicator_icon = $('.eael-simple-menu-container', $scope).data('indicator')
     var $dropdown_indicator_icon = $('.eael-simple-menu-container', $scope).data('dropdown-indicator')
 
@@ -57,7 +60,7 @@ var SimpleMenu = function ($scope, $) {
         $('.eael-simple-menu-horizontal', $scope)
             .before('<span class="eael-simple-menu-toggle-text"></span>')
             .after(
-                '<button class="eael-simple-menu-toggle"><span class="eicon-menu-bar"></span><span class="eael-simple-menu-toggle-text"></span></button>'
+                '<button class="eael-simple-menu-toggle">'+$hamburger_icon+'<span class="eael-simple-menu-toggle-text"></span></button>'
             )
         eael_menu_resize();
         
