@@ -448,6 +448,7 @@ class Event_Calendar extends Widget_Base
                     'af' => 'Afrikaans',
                     'sq' => 'Albanian',
                     'ar' => 'Arabic',
+                    'az' => 'Azerbaijani',
                     'eu' => 'Basque',
                     'bn' => 'Bengali',
                     'bs' => 'Bosnian',
@@ -1795,7 +1796,6 @@ class Event_Calendar extends Widget_Base
         $data = [];
         if ($events) {
             $i = 0;
-
             foreach ($events as $event) {
 
                 if ($event['eael_event_all_day'] == 'yes') {
@@ -1810,6 +1810,22 @@ class Event_Calendar extends Widget_Base
                 $settings_eael_event_global_text_color = $this->fetch_color_or_global_color($event, 'eael_event_text_color');
                 $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($event, 'eael_event_border_color');
 
+                $_custom_attributes = $event['eael_event_link']['custom_attributes'];
+                $_custom_attributes = explode(',', $_custom_attributes );
+                $custom_attributes  = [];
+
+                if ( $_custom_attributes ) {
+                    foreach ( $_custom_attributes as $attribute ) {
+                        if ( $attribute ) {
+                            $attribute_set = explode( '|', $attribute );
+                            $custom_attributes[] = [
+                                'key'   => sanitize_text_field($attribute_set[0]),
+                                'value' => isset( $attribute_set[1] ) ? sanitize_text_field($attribute_set[1]) : ''
+                            ];
+                        }
+                    }
+                }
+
                 $data[] = [
                     'id' => $i,
                     'title' => !empty($event["eael_event_title"]) ? $event["eael_event_title"] : 'No Title',
@@ -1823,6 +1839,7 @@ class Event_Calendar extends Widget_Base
                     'allDay' => $event['eael_event_all_day'],
                     'external' => $event['eael_event_link']['is_external'],
                     'nofollow' => $event['eael_event_link']['nofollow'],
+                    'custom_attributes' => $custom_attributes,
                 ];
 
                 $i++;

@@ -211,7 +211,7 @@ trait Helper
 	public function eael_rating_markup( $html, $rating, $count ) {
 
 		if ( 0 == $rating ) {
-			$html  = '<div class="star-rating">';
+			$html  = '<div class="eael-star-rating star-rating">';
 			$html .= wc_get_star_rating_html( $rating, $count );
 			$html .= '</div>';
 		}

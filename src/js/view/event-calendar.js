@@ -189,6 +189,11 @@ var EventCalendar = function ($scope, $) {
 					if (event.extendedProps.nofollow === "on") {
 						$(".eaelec-modal-footer a").attr("rel", "nofollow");
 					}
+					if (event.extendedProps.custom_attributes != '' ) {
+						$.each(event.extendedProps.custom_attributes, function(index,item){
+							$(".eaelec-modal-footer a").attr(item.key, item.value);
+						});
+					}
 					if (event.url == "") {
 						$(".eaelec-modal-footer a").css("display", "none");
 					} else {

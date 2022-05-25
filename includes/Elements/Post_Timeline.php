@@ -301,7 +301,7 @@ class Post_Timeline extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-timeline-post-title *' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-timeline-post-title .eael-timeline-post-title-text' => 'color: {{VALUE}};',
                 ],
 
             ]
@@ -327,7 +327,7 @@ class Post_Timeline extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-timeline-post-title *' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .eael-timeline-post-title .eael-timeline-post-title-text' => 'text-align: {{VALUE}};',
                 ],
             ]
         );
@@ -340,7 +340,7 @@ class Post_Timeline extends Widget_Base
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
-                'selector' => '{{WRAPPER}} .eael-timeline-post-title *',
+                'selector' => '{{WRAPPER}} .eael-timeline-post-title .eael-timeline-post-title-text',
             ]
         );
 

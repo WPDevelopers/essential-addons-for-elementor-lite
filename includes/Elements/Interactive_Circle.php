@@ -465,8 +465,8 @@ class Interactive_Circle extends Widget_Base {
 				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-btn .eael-circle-btn-icon, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-2 .eael-circle-btn .eael-circle-btn-icon'     => 'background-color: {{VALUE}}!important;',
-					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon .eael-circle-icon-inner, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-btn .eael-circle-icon-inner' => 'background-color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-item .eael-circle-btn .eael-circle-btn-icon, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-2 .eael-circle-item .eael-circle-btn .eael-circle-btn-icon'     => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon .eael-circle-icon-inner, {{WRAPPER}} .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-btn .eael-circle-icon-inner' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -774,11 +774,12 @@ class Interactive_Circle extends Widget_Base {
 				'class' => [
 					'eael-circle-wrapper',
 					$settings['eael_interactive_circle_preset'],
-					$settings['eael_interactive_circle_animation'],
 					$settings['eael_interactive_circle_event']
 				],
 			]
 		);
+
+		$this->add_render_attribute( 'eael_circle_wrapper', 'data-animation', $settings['eael_interactive_circle_animation'] );
 
 		$item_count     = count( $settings['eael_interactive_circle_item'] );
 		$show_btn_icon  = isset( $settings['eael_interactive_circle_btn_icon_show'] ) && 'yes' === $settings['eael_interactive_circle_btn_icon_show'];

@@ -394,6 +394,7 @@
                 <field type="Login | Register Form: Register Link Text" editor_type="AREA">registration_link_text</field>
                 <field type="Login | Register Form: Redirect URL" key_of="redirect_url" editor_type="LINE">url</field>
                 <field type="Login | Register Form: Register Link" key_of="custom_register_url" editor_type="LINE">url</field>
+                <field type="Login | Register Form: Sign in Link Text" editor_type="AREA">login_link_text</field>
             </fields>
             <fields-in-item items_of="register_fields">
                 <field type="Login | Register Form: Field Label" editor_type="LINE">field_label</field>
@@ -423,6 +424,40 @@
                 <field type="Woo Cart: Placeholder Text" editor_type="LINE">eael_woo_cart_components_cart_coupon_placeholder</field>
                 <field type="Woo Cart: Button Text" editor_type="LINE">eael_woo_cart_components_cart_checkout_button_text</field>
                 <field type="Woo Cart: Checkout Button Text" editor_type="AREA">eael_woo_cart_components_cart_checkout_button_text</field>
+            </fields>
+        </widget>
+        <widget name="eael-woo-checkout">
+            <conditions>
+                <condition key="widgetType">eael-woo-checkout</condition>
+            </conditions>
+            <fields>
+                <field type="Woo Checkout: Order Table Heading" editor_type="LINE">ea_woo_checkout_order_details_title</field>
+                <field type="Woo Checkout: Product Text" editor_type="LINE">ea_woo_checkout_table_product_text</field>
+                <field type="Woo Checkout: Quantity Text" editor_type="LINE">ea_woo_checkout_table_quantity_text</field>
+                <field type="Woo Checkout: Price Text" editor_type="LINE">ea_woo_checkout_table_price_text</field>
+                <field type="Woo Checkout: Subtotal Text" editor_type="LINE">ea_woo_checkout_table_subtotal_text</field>
+                <field type="Woo Checkout: Shipping Text" editor_type="LINE">ea_woo_checkout_table_shipping_text</field>
+                <field type="Woo Checkout: Total Text" editor_type="LINE">ea_woo_checkout_table_total_text</field>
+                <field type="Woo Checkout: Shop Link Text" editor_type="LINE">ea_woo_checkout_shop_link_text</field>
+                <field type="Woo Checkout: Coupon Title" editor_type="LINE">ea_woo_checkout_coupon_title</field>
+                <field type="Woo Checkout: Coupon Link Text" editor_type="LINE">ea_woo_checkout_coupon_link_text</field>
+                <field type="Woo Checkout: Coupon Form Content" editor_type="LINE">ea_woo_checkout_coupon_form_content</field>
+                <field type="Woo Checkout: Coupon Placeholder Text" editor_type="LINE">ea_woo_checkout_coupon_placeholder_text</field>
+                <field type="Woo Checkout: Coupon Button Text" editor_type="LINE">ea_woo_checkout_coupon_button_text</field>
+                <field type="Woo Checkout: Login Title" editor_type="LINE">ea_woo_checkout_login_title</field>
+                <field type="Woo Checkout: Login Message" editor_type="AREA">ea_woo_checkout_login_message</field>
+                <field type="Woo Checkout: Login Link Text" editor_type="LINE">ea_woo_checkout_login_link_text</field>
+                <field type="Woo Checkout: Billing Title" editor_type="LINE">ea_woo_checkout_billing_title</field>
+                <field type="Woo Checkout: Shipping Title" editor_type="LINE">ea_woo_checkout_shipping_title</field>
+                <field type="Woo Checkout: Additional Info Title" editor_type="LINE">ea_woo_checkout_additional_info_title</field>
+                <field type="Woo Checkout: Payment Title" editor_type="LINE">ea_woo_checkout_payment_title</field>
+                <field type="Woo Checkout: Place Order Text" editor_type="LINE">ea_woo_checkout_place_order_text</field>
+                <field type="Woo Checkout: Tab Login Text" editor_type="LINE">ea_woo_checkout_tab_login_text</field>
+                <field type="Woo Checkout: Tab Coupon Text" editor_type="LINE">ea_woo_checkout_tab_coupon_text</field>
+                <field type="Woo Checkout: Tab Billing Shipping Text" editor_type="LINE">ea_woo_checkout_tab_billing_shipping_text</field>
+                <field type="Woo Checkout: Tab Payment Text" editor_type="LINE">ea_woo_checkout_tab_payment_text</field>
+                <field type="Woo Checkout: Tab Button Next Text" editor_type="LINE">ea_woo_checkout_tabs_btn_next_text</field>
+                <field type="Woo Checkout: Tab Button Previous Text" editor_type="LINE">ea_woo_checkout_tabs_btn_prev_text</field>
             </fields>
         </widget>
     </elementor-widgets>

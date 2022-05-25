@@ -141,6 +141,10 @@ const QuickView = {
 							       $(document.body).trigger("wc_fragment_refresh");
 							       $this.removeClass("eael-addtocart-loading");
 							       $this.addClass("eael-addtocart-added");
+
+							       if(localize.cart_redirectition=='yes'){
+							       	 window.location.href=localize.cart_page_url;
+							       }
 						       }
 					       },
 				       });
