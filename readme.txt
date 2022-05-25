@@ -248,20 +248,20 @@ Your existing elements/content will work with premium version. So you won't lose
 - Improved: Sanitized HTML Tags in the WooCommerce Widgets
 - Improved: EA Woo Product Carousel | Options to make product title clickable
 - Improved: EA Interactive Circle | Animation starting after scrolling to a definite section
-- Added: EA Login/Regsiter Form| Social Login option for Register Form
+- Added: EA Login/Register Form| Social Login option for Register Form
 - Added: EA Facebook Feed | Force square image option
-- Added: EA Simple Menu | Customised Icon for the hamburger menu
+- Added: EA Simple Menu | Customized Icon for the hamburger menu
 - Fixed: EA Scroll to Top | being visible on all pages and posts despite only selected only All posts
 - Fixed: EA Pricing Table | Feature List icon color not changing when using global color
 - Fixed: Conflict with Elementor Product Grid when Martfury theme is used
 - Fixed: EA Woo Checkout | some of the strings not being translatable
-- Fixed: EA Woo Product Gallery | Shwoing No categories found error despite categories option being disabled
+- Fixed: EA Woo Product Gallery | Showing No categories found error despite categories option being disabled
 - Fixed: EA Feature List | Images looking blurry regardless of the resolution and size
 - Fixed: EA Flip Box | Title & Button links not working without "https://"
 - Fixed: EA Product Grid | Sale text not changing in the Quick View pop up 
-- Fixed: EA Product Grid | Quick View style changeing when going to next page through pagination
-- Fixed: EA Product Grid | Add to Cart behaviour to Cart Page not working from Quick View screen
-- Fixed: EA Post Grid | Trhwoing error when posts per page is blank
+- Fixed: EA Product Grid | Quick View style changing when going to next page through pagination
+- Fixed: EA Product Grid | Add to Cart behavior to Cart Page not working from Quick View screen
+- Fixed: EA Post Grid | Throwing error when posts per page is blank
 - Fixed: EA Login/Register Form | Custom Email Formatting and Reset Password link not working
 - Fixed: WooCommerce Quick View being broken when Savoy theme is used
 - Fixed: EA Advanced Data Table | Google sheet merged cell not formatting properly
