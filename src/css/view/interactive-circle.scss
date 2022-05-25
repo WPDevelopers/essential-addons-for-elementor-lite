@@ -494,10 +494,14 @@
                     width: 300px;
                     .eael-circle-item {
                         .eael-circle-btn-content {
-                            top: -28px;
+                            .eael-circle-content {
+                                padding: 50px;
+                            }
+                            top: 0px;
                             bottom: 0px;
                             left: 0px;
                             right: 0px;
+                            border-radius: 100%;
                         }
                         .eael-circle-btn {
                             height: 60px;
@@ -1418,6 +1422,7 @@
                                 }
                             }
                             .eael-circle-btn-content {
+                                border-radius: 100% 100% 0 0;
                                 .eael-circle-content {
                                     padding: 0px 20px;
                                 }
