@@ -2036,16 +2036,19 @@
                                 display: none;
                             }
                             .eael-circle-btn-content {
-                                top: 20px;
+                                top: 0px;
                                 left: 20px;
                                 bottom: 45px;
                                 right: 20px;
+                                .eael-circle-content {
+                                    border-radius: 500px !important;
+                                    height: 221px;
+                                }
                             }
                         }
                     }
                 }
             }
-
             &.eael-circle-responsive-view {
                 .eael-circle-inner {
                     border: none !important;

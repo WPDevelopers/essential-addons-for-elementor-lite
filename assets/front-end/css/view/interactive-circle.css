@@ -1791,10 +1791,14 @@
     display: none;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-3.eael-circle-desktop-view .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn-content {
-    top: 20px;
+    top: 0px;
     left: 20px;
     bottom: 45px;
     right: 20px;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-3.eael-circle-desktop-view .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn-content .eael-circle-content {
+    border-radius: 500px !important;
+    height: 221px;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-3.eael-circle-responsive-view .eael-circle-inner {
     border: none !important;
