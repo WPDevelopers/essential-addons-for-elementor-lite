@@ -625,6 +625,13 @@
 .eael-circle-wrapper.eael-interactive-circle-preset-2 {
   margin: 45px 0 0;
 }
+.eael-circle-wrapper.eael-interactive-circle-preset-2.eael-circle-desktop-view .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn-content {
+  border-radius: 500px 500px 0 0;
+  width: calc(100% - 125px);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-2.eael-circle-desktop-view .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn-content .eael-circle-content {
+  margin-top: -30px;
+}
 .eael-circle-wrapper.eael-interactive-circle-preset-2 .eael-circle-info {
   padding: 62.5px 62.5px 0 62.5px;
   position: relative;
@@ -751,7 +758,6 @@
         -ms-transform: none;
             transform: none;
     bottom: 0;
-    height: auto !important;
     margin-top: 20px;
     left: 0;
   }
@@ -1170,6 +1176,9 @@
   .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-circle-desktop-view {
     margin: 20px 20px 0px 20px;
   }
+  .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-circle-desktop-view .eael-circle-info .eael-circle-inner .eael-circle-item {
+    padding: 29px;
+  }
   .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-circle-desktop-view .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn {
     height: 65px;
     width: 65px;
@@ -1178,7 +1187,7 @@
     font-size: 12px;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-circle-desktop-view .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn-content {
-    border-radius: 100% 100% 0 0;
+    width: 100%;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-circle-desktop-view .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn-content .eael-circle-content {
     padding: 0px 20px;
@@ -1240,6 +1249,7 @@
     position: initial !important;
     visibility: visible !important;
     opacity: 1 !important;
+    height: auto !important;
     display: block !important;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-circle-responsive-view .eael-circle-item .eael-circle-btn-content .eael-circle-content {
