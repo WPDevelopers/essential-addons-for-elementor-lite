@@ -1489,7 +1489,7 @@ class Flip_Box extends Widget_Base
                         'flipbox-title-container',
                         [
                             'class' => 'flipbox-linked-title',
-                            'href'  => $settings['flipbox_link']['url'],
+                            'href'  => esc_url( $settings['flipbox_link']['url'] ),
                         ]
                     );
 
@@ -1505,7 +1505,7 @@ class Flip_Box extends Widget_Base
                         'flipbox-button-container',
                         [
                             'class' => 'flipbox-button',
-                            'href'  => $settings['flipbox_link']['url'],
+                            'href'  => esc_url( $settings['flipbox_link']['url'] ),
                         ]
                     );
 

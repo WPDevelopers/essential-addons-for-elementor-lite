@@ -227,6 +227,18 @@ class Simple_Menu extends Widget_Base
             ]
         );
 
+        $this->add_control(
+	       'eael_simple_menu_hamburger_icon',
+	       [
+	           'label'       => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
+	           'type'        => Controls_Manager::ICONS,
+	           'default'     => [
+	               'value'   => 'fas fa-bars',
+	               'library' => 'fa-solid',
+	           ],
+	       ]
+	   );
+
         $this->end_controls_section();
 
         /**
@@ -294,19 +306,20 @@ class Simple_Menu extends Widget_Base
 				    ],
 			    ],
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-simple-menu-container .eael-simple-menu-toggle .eicon-menu-bar' => 'font-size: {{SIZE}}{{UNIT}};',
+				    '{{WRAPPER}} .eael-simple-menu-container .eael-simple-menu-toggle i' => 'font-size: {{SIZE}}{{UNIT}};',
+				    '{{WRAPPER}} .eael-simple-menu-container .eael-simple-menu-toggle svg' => 'width: {{SIZE}}{{UNIT}};',
 			    ],
 		    ]
 	    );
 
 	    $this->add_control(
-            'eael_simple_menu_hamburger_icon',
+            'eael_simple_menu_hamburger_icon_color',
             [
                 'label'     => __('Icon Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#ffffff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-simple-menu-container .eael-simple-menu-toggle .eicon-menu-bar' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-simple-menu-container .eael-simple-menu-toggle i' => 'color: {{VALUE}}',
                 ],
 
             ]
@@ -1412,6 +1425,13 @@ class Simple_Menu extends Widget_Base
 
         if (isset($settings['eael_simple_menu_item_dropdown_indicator']) && $settings['eael_simple_menu_item_dropdown_indicator'] == 'yes') {
             $menu_classes[] = 'eael-simple-menu-indicator';
+        }
+
+        if (isset($settings['eael_simple_menu_hamburger_icon'])) {
+            ob_start();
+            Icons_Manager::render_icon( $settings['eael_simple_menu_hamburger_icon'], [ 'aria-hidden' => 'true' ] );
+            $hamburger_icon = ob_get_clean();
+            $this->add_render_attribute( 'eael-simple-menu', 'data-hamburger-icon', $hamburger_icon );
         }
 
         if ($settings['eael_simple_menu_item_indicator']['library'] == 'svg'){

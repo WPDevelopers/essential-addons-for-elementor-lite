@@ -41,7 +41,7 @@ const QuickView = {
 					
 					       popup_view.find(".eael-popup-details-render").html(popup_details);
 					       const product_gallery = popup_view.find(".woocommerce-product-gallery");
-					       product_gallery.css("opacity",1);
+
 					       popup_view_render.addClass("elementor-" + quickview_setting.page_id)
 					       popup_view_render.children().addClass("elementor-element elementor-element-" + quickview_setting.widget_id)
 					
@@ -50,7 +50,15 @@ const QuickView = {
 					       } else {
 						       popup_details.css("height", "auto");
 					       }
-					       setTimeout(function(){ product_gallery.wc_product_gallery(); }, 1000);
+						   setTimeout(function () {
+							   var setHeight = product_gallery.find('.woocommerce-product-gallery__image').height();
+							   $('body').prepend('<style class="eael-quick-view-dynamic-css">.woocommerce-product-gallery .flex-viewport { height: ' + setHeight + 'px; }</style>');
+							   product_gallery.wc_product_gallery();
+							   product_gallery.closest('.eael-product-image-wrap').css('background', 'none');
+						   }, 500);
+						   setTimeout(function () {
+							   $('.eael-quick-view-dynamic-css').remove();
+						   }, 1500);
 				       }
 			       },
 		       });
@@ -133,6 +141,10 @@ const QuickView = {
 							       $(document.body).trigger("wc_fragment_refresh");
 							       $this.removeClass("eael-addtocart-loading");
 							       $this.addClass("eael-addtocart-added");
+
+							       if(localize.cart_redirectition=='yes'){
+							       	 window.location.href=localize.cart_page_url;
+							       }
 						       }
 					       },
 				       });

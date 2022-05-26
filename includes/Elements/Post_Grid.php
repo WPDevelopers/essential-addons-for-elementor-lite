@@ -1085,13 +1085,14 @@ class Post_Grid extends Widget_Base
         $settings['loadable_file_name'] = $this->get_filename_only($template);
 	    $dir_name = $this->get_temp_dir_name($settings['loadable_file_name']);
 	    $found_posts = 0;
+        $posts_per_page = isset($args['posts_per_page']) && $args['posts_per_page'] > 0 ? $args['posts_per_page'] : -1 ;
 
         if(file_exists($template)){
             $query = new \WP_Query( $args );
 
             if ( $query->have_posts() ) {
 	            $found_posts      = $query->found_posts;
-	            $max_page         = ceil( $found_posts / absint( $args['posts_per_page'] ) );
+	            $max_page         = ceil( $found_posts / absint( $posts_per_page ) );
 	            $args['max_page'] = $max_page;
 
                 while ( $query->have_posts() ) {
@@ -1111,7 +1112,7 @@ class Post_Grid extends Widget_Base
             <div class="clearfix"></div>
         </div>';
 
-	    if ( $found_posts > $args['posts_per_page'] ) {
+	    if ( $found_posts > $posts_per_page ) {
 		    $this->print_load_more_button( $settings, $args, $dir_name );
 	    }
 

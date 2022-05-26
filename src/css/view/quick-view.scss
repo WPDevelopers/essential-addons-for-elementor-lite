@@ -328,6 +328,9 @@
 
     .eael-product-image-wrap {
         width: 40%;
+        background-image: url('../../../wp-admin/images/spinner.gif');
+        background-repeat: no-repeat;
+        background-position: center center;
 
         @media (max-width: 767px) {
             width: 100%;
@@ -604,6 +607,59 @@
 
         .eael-product-popup.woocommerce div.product form.cart .button.single_add_to_cart_button{
             padding: 10px 18px !important;
+        }
+    }
+}
+
+// savoy theme conflicts
+.theme-savoy {
+    #elementor-lightbox-slideshow-single-img {
+        display: none !important;
+    }
+    .eael-product-popup{  
+        &.woocommerce {
+            .nm-quantity-wrap {
+                .quantity {
+                    .input-text {
+                        height: 42px;
+                    }
+                }
+            }
+        } 
+        .flex-control-nav {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .nm-quantity-wrap {
+            width: auto;
+            border: none;
+        }
+        .nm-quantity-wrap {
+            .quantity {
+                display: flex;
+            }
+        }
+        .variations_form.nm-custom-select tr .value select{
+            opacity: 1;
+            border: 1px solid #ccc;
+        }
+
+        #nm-product-meta {
+            padding-left: 0;
+            text-align: left;
+
+            .nm-row {
+                padding-left: 0;
+
+                .col-xs-12 {
+                    padding-left: 0;
+                    display: grid;
+                    justify-content: start;
+                }
+            }
+        }
+        .eael-product-popup-ready ~ #elementor-lightbox-slideshow-single-img {
+            display: none !important;
         }
     }
 }
