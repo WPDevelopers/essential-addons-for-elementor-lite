@@ -37,7 +37,7 @@ echo '<article class="eael-timeline-post eael-timeline-column">
 
             if ($settings['eael_show_title']) {
                 echo '<div class="eael-timeline-post-title">
-                    <'.$title_tag.'>' . get_the_title() . '</'.$title_tag.'>
+                    <' . Helper::eael_validate_html_tag( $settings['title_tag'] ) . ' class="eael-timeline-post-title-text">' . get_the_title() . '</' . Helper::eael_validate_html_tag( $settings['title_tag'] ) . '>
                 </div>';
             }
         echo '</a>

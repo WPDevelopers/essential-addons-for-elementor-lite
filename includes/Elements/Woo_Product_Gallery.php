@@ -2565,6 +2565,10 @@ class Woo_Product_Gallery extends Widget_Base {
 		$get_product_cats = $settings[ 'eael_product_gallery_categories' ];
 		$product_cats     = str_replace( ' ', '', $get_product_cats );
 
+		if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == '' && empty( $get_product_cats ) ) {
+			return;
+		}
+
 		$template       = $this->get_template( $this->get_settings( 'eael_product_gallery_dynamic_template' ) );
 		$dir_name       = method_exists( $this, 'get_temp_dir_name' ) ? $this->get_temp_dir_name( $this->get_filename_only( $template ) ) : "pro";
 		$show_cat_thumb = isset( $settings[ 'eael_woo_product_gallery_terms_thumb' ] ) && 'yes' === $settings[ 'eael_woo_product_gallery_terms_thumb' ];
@@ -2589,8 +2593,6 @@ class Woo_Product_Gallery extends Widget_Base {
 			echo '<li><a href="javascript:;" data-taxonomy="' . $all_taxonomy . '" data-page="1" data-id=' . json_encode( $product_cats ) .
 			     ' class="active post-list-filter-item post-list-cat-'
 			     . $this->get_id() . '">' .$show_all_cat_thumb. '' . __( $settings[ 'eael_woo_product_gallery_terms_all_text' ], 'essential-addons-for-elementor-lite' ) . '</a></li>';
-		} elseif ( ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == '' ) && empty( $get_product_cats ) ) {
-			_e( '<p class="no-posts-found">No Category Found!</p>', 'essential-addons-for-elementor-lite' );
 		}
 
 		// Category retrieve

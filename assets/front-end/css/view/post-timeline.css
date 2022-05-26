@@ -132,7 +132,7 @@
   width: 100%;
 }
 
-.eael-timeline-post-title * {
+.eael-timeline-post-title .eael-timeline-post-title-text {
   color: #fff;
   font-size: 20px;
   font-weight: bold;
@@ -242,7 +242,7 @@
 /*--- Responsive Style for Post Timeline ---*/
 
 @media only screen and (max-width: 1366px) {
-  .eael-timeline-post-title h2 {
+  .eael-timeline-post-title .eael-timeline-post-title-text {
     font-size: 0.8em;
   }
 
@@ -285,7 +285,7 @@
     bottom: 50px;
   }
 
-  .eael-timeline-post-title * {
+  .eael-timeline-post-title .eael-timeline-post-title-text {
     font-size: 0.8em;
     line-height: 1.2em;
   }

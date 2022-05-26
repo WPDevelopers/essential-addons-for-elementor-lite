@@ -2783,3 +2783,24 @@
 .theme-twentytwentyone .eael-product-default .woocommerce ul.products li.product .button {
   margin: 0 auto;
 }
+.theme-savoy .eael-product-grid .woocommerce ul.products li.product .star-rating {
+  font-size: 12px;
+  letter-spacing: 2px;
+  width: 75px;
+}
+.theme-savoy .eael-product-grid .woocommerce ul.products li.product .star-rating:before {
+  font-size: 12px;
+  letter-spacing: 2px;
+  line-height: 12px;
+  left: 0px;
+}
+.theme-savoy .eael-product-grid .woocommerce ul.products li.product .star-rating span {
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+.theme-savoy .eael-product-grid .woocommerce ul.products li.product .star-rating span:before {
+  font-size: 12px;
+  letter-spacing: 2px;
+  left: 0px;
+  line-height: 12px;
+}
