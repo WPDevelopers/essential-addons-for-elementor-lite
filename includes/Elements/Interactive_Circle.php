@@ -741,7 +741,10 @@ class Interactive_Circle extends Widget_Base {
 				'name'     => 'eael_interactive_circle_content_border',
 				'label'    => esc_html__( 'Border', 'essential-addons-for-elementor-lite' ),
 				'selector' => '{{WRAPPER}} .eael-circle-responsive-view .eael-circle-content,
-				{{WRAPPER}} .eael-circle-desktop-view .eael-circle-btn-content',
+				{{WRAPPER}} .eael-circle-desktop-view.eael-interactive-circle-preset-1 .eael-circle-btn-content,
+				{{WRAPPER}} .eael-circle-desktop-view.eael-interactive-circle-preset-2 .eael-circle-btn-content,
+				{{WRAPPER}} .eael-circle-desktop-view.eael-interactive-circle-preset-3 .eael-circle-content,
+				{{WRAPPER}} .eael-circle-desktop-view.eael-interactive-circle-preset-4 .eael-circle-content',
 			]
 		);
 
