@@ -557,6 +557,21 @@
     &.eael-interactive-circle-preset-2 {
         $nav-circle-2-width: 700px;
         margin: 45px 0 0;
+        &.eael-circle-desktop-view {
+            .eael-circle-info {
+                .eael-circle-inner {
+                    .eael-circle-item {
+                        .eael-circle-btn-content {
+                            border-radius: 500px 500px 0 0;
+                            width: calc(100% - 125px);
+                            .eael-circle-content {
+                                margin-top: -30px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         .eael-circle-info {
             $nav-item-border-width: 10px;
@@ -695,7 +710,6 @@
                             width: 100%;
                             transform: none;
                             bottom: 0;
-                            height: auto!important;
                             margin-top: 20px;
                             left: 0;
                         }
@@ -1414,6 +1428,7 @@
                 .eael-circle-info {
                     .eael-circle-inner {
                         .eael-circle-item {
+                            padding: 29px;
                             .eael-circle-btn {
                                 height: 65px;
                                 width: 65px;
@@ -1422,7 +1437,7 @@
                                 }
                             }
                             .eael-circle-btn-content {
-                                border-radius: 100% 100% 0 0;
+                                width: 100%;
                                 .eael-circle-content {
                                     padding: 0px 20px;
                                 }
@@ -1503,6 +1518,7 @@
                         position: initial !important;
                         visibility: visible !important;
                         opacity: 1 !important;
+                        height: auto!important;
                         display: block !important;
                         .eael-circle-content {
                             height: auto!important;
