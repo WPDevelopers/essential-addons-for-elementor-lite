@@ -1473,15 +1473,7 @@ class Flip_Box extends Widget_Base
                 if ($settings['flipbox_link_type'] == 'box') {
                     $flipbox_if_html_tag = 'a';
 
-                    $this->add_render_attribute('flipbox-container', 'href', esc_url($settings['flipbox_link']['url']));
-
-                    if ($settings['flipbox_link']['is_external']) {
-                        $this->add_render_attribute('flipbox-container', 'target', '_blank');
-                    }
-
-                    if ($settings['flipbox_link']['nofollow']) {
-                        $this->add_render_attribute('flipbox-container', 'rel', 'nofollow');
-                    }
+	                $this->add_link_attributes( 'flipbox-container', $settings['flipbox_link'] );
                 } elseif ($settings['flipbox_link_type'] == 'title') {
                     $flipbox_if_html_title_tag = 'a';
 
@@ -1489,33 +1481,19 @@ class Flip_Box extends Widget_Base
                         'flipbox-title-container',
                         [
                             'class' => 'flipbox-linked-title',
-                            'href'  => esc_url( $settings['flipbox_link']['url'] ),
                         ]
                     );
 
-                    if ($settings['flipbox_link']['is_external']) {
-                        $this->add_render_attribute('flipbox-title-container', 'target', '_blank');
-                    }
-
-                    if ($settings['flipbox_link']['nofollow']) {
-                        $this->add_render_attribute('flipbox-title-container', 'rel', 'nofollow');
-                    }
+	                $this->add_link_attributes( 'flipbox-title-container', $settings['flipbox_link'] );
                 } elseif ($settings['flipbox_link_type'] == 'button') {
                     $this->add_render_attribute(
                         'flipbox-button-container',
                         [
                             'class' => 'flipbox-button',
-                            'href'  => esc_url( $settings['flipbox_link']['url'] ),
                         ]
                     );
 
-                    if ($settings['flipbox_link']['is_external']) {
-                        $this->add_render_attribute('flipbox-button-container', 'target', '_blank');
-                    }
-
-                    if ($settings['flipbox_link']['nofollow']) {
-                        $this->add_render_attribute('flipbox-button-container', 'rel', 'nofollow');
-                    }
+	                $this->add_link_attributes( 'flipbox-button-container', $settings['flipbox_link'] );
                 }
             }
         }

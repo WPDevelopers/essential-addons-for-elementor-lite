@@ -2780,7 +2780,7 @@ msgstr ""
 msgid "Feed Settings"
 msgstr ""
 
-#: ../includes/Elements/Facebook_Feed.php:147, ../includes/Elements/Facebook_Feed.php:187
+#: ../includes/Elements/Facebook_Feed.php:147
 msgid "Sort By"
 msgstr ""
 
@@ -2800,6 +2800,10 @@ msgstr ""
 msgid "Force Square Image ?"
 msgstr ""
 
+#: ../includes/Elements/Facebook_Feed.php:187
+msgid "Image Render Type"
+msgstr ""
+
 #: ../includes/Elements/Facebook_Feed.php:190
 msgid "Stretched"
 msgstr ""
@@ -2809,7 +2813,7 @@ msgid "Cropped"
 msgstr ""
 
 #: ../includes/Elements/Facebook_Feed.php:206
-msgid "Image Dimension(px)"
+msgid "Image Dimension (px)"
 msgstr ""
 
 #: ../includes/Elements/Facebook_Feed.php:239, ../includes/Elements/Twitter_Feed.php:176, ../includes/Elements/Woo_Product_Carousel.php:202, ../includes/Traits/Controls.php:423
