@@ -183,23 +183,18 @@ jQuery(window).on("elementor/frontend/init", function () {
 				let item_found = 0;
 				let index_list = []
 				for (const [index, item] of fg_items.entries()){
-					if (filter_name !== '' && filter_name !== '*' && filter_enable) {
-						let element = $($(item)[0]);
-						if (element.is(filter_name)) {
-							++item_found;
-							$items.push($(item)[0]);
-							index_list.push(index);
-						}
-						if((fg_items.length-1)===index){
-							$(".eael-filter-gallery-control li.active", $scope).data('load-more-status',1)
-							$this.hide()
-						}
-					}else {
+
+					let element = $($(item)[0]);
+					if (element.is(filter_name)) {
 						++item_found;
 						$items.push($(item)[0]);
 						index_list.push(index);
 					}
 
+					if (filter_name !== '' && filter_name !== '*' && filter_enable && (fg_items.length-1)===index) {
+						$(".eael-filter-gallery-control li.active", $scope).data('load-more-status',1)
+						$this.hide();
+					}
 					if (item_found === $images_per_page) {
 						break;
 					}
