@@ -59,7 +59,9 @@ $quick_view_setting = [
 	        if( $should_print_image_clickable ) {
 		        echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
 	        }?>
-                <?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ) );
+                <?php 
+                // echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail', ['loading' => 'eager'] ) );
+                echo wp_kses_post( $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager'] ) );
                 if ( $should_print_image_clickable ) {
 	                echo '</a>';
                 }
