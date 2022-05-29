@@ -191,10 +191,9 @@ jQuery(window).on("elementor/frontend/init", function () {
 						index_list.push(index);
 					}
 
-					if (filter_name !== '' && filter_name !== '*' && filter_enable && (fg_items.length-1)===index) {
-						$(".eael-filter-gallery-control li.active", $scope).data('load-more-status',1)
-						$this.hide();
-					}
+					$(".eael-filter-gallery-control li.active", $scope).data('load-more-status',1)
+					$this.hide();
+					
 					if (item_found === $images_per_page) {
 						break;
 					}
