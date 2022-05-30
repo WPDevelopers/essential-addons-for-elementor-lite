@@ -173,7 +173,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 					// $init_show       = $(".eael-filter-gallery-container", $scope).children(".eael-filterable-gallery-item-wrap").length,
 					// $total_items     = $gallery.data("total-gallery-items"),
 					$nomore_text     = $gallery.data("nomore-item-text"),
-					filter_enable = $(".eael-filter-gallery-control",$scope).length,
+					filter_enable 	= $(".eael-filter-gallery-control",$scope).length,
 					$items           = [];
 				var filter_name      = $(".eael-filter-gallery-control li.active", $scope).data('filter');
 				if(filterControls.length>0){
@@ -190,10 +190,11 @@ jQuery(window).on("elementor/frontend/init", function () {
 						$items.push($(item)[0]);
 						index_list.push(index);
 					}
-
-					$(".eael-filter-gallery-control li.active", $scope).data('load-more-status',1)
-					$this.hide();
-					
+					if (filter_name !== '' && filter_name !== '*' && (fg_items.length-1)===index) {
+							$(".eael-filter-gallery-control li.active", $scope).data('load-more-status',1)
+							$this.hide();
+					}
+					console.log(filter_name,filter_enable,fg_items);
 					if (item_found === $images_per_page) {
 						break;
 					}
