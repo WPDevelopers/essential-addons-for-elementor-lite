@@ -176,7 +176,7 @@ trait Helper
 	    }
 
         if ( $args['posts_per_page'] != '-1' ) {
-            $show_or_hide = ('true' == $settings['show_load_more'] || 1 == $settings['show_load_more'] || 'yes' == $settings['show_load_more']) ? '' : 'eael-force-hide';
+            $show_or_hide = ('true' == $settings['show_load_more'] || 1 == $settings['show_load_more'] || 'yes' == $settings['show_load_more']) ? '' : ' eael-force-hide';
             ?>
             <div class="eael-load-more-button-wrap<?php echo "eael-dynamic-filterable-gallery" == $this->get_name() ? " dynamic-filter-gallery-loadmore" : ""; echo esc_attr( $show_or_hide ); ?>">
                 <button <?php $this->print_render_attribute_string( 'load-more' ); ?>>
