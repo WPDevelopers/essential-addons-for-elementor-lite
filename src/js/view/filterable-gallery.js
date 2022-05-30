@@ -194,7 +194,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 							$(".eael-filter-gallery-control li.active", $scope).data('load-more-status',1)
 							$this.hide();
 					}
-					console.log(filter_name,filter_enable,fg_items);
+
 					if (item_found === $images_per_page) {
 						break;
 					}
