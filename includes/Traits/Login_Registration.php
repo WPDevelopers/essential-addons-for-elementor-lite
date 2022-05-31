@@ -285,6 +285,10 @@ trait Login_Registration {
 		if ( isset( $_POST['g-recaptcha-enabled'] ) && ! $this->lr_validate_recaptcha() ) {
 			$errors['recaptcha'] = isset( $settings['err_recaptcha'] ) ? $settings['err_recaptcha'] : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
 		}
+		
+		if ( !empty( $_POST['eael_phone_number'] ) && ! $this->eael_is_phone( sanitize_text_field( $_POST['eael_phone_number'] )) ) {
+			$errors['eael_phone_number'] =  __( 'Invalid phone number provided.', 'essential-addons-for-elementor-lite' );
+		}
 
 		if ( ! empty( $_POST['email'] ) && is_email( $_POST['email'] ) ) {
 			$email = sanitize_email( $_POST['email'] );
@@ -814,5 +818,13 @@ trait Login_Registration {
 			return false; 
 		}
 		update_user_meta( $user_id, 'eael_phone_number', $_POST['eael_phone_number'] );
+	}
+
+	public function eael_is_phone($phone){
+		if ( 0 < strlen( trim( preg_replace( '/[\s\#0-9_\-\+\/\(\)\.]/', '', $phone ) ) ) ) {
+			return false;
+		}
+
+		return true;
 	}
 }
