@@ -189,7 +189,7 @@ class Login_Register extends Widget_Base {
 		];
 
 		if( 'on' === get_option( 'eael_custom_profile_fields' ) ){
-			$eael_form_field_types['eael_billing_phone'] = __( 'Phone', 'essential-addons-for-elementor-lite' );
+			$eael_form_field_types['eael_phone_number'] = __( 'Phone', 'essential-addons-for-elementor-lite' );
 		}
 		
 		return apply_filters( 'eael/registration-form-fields', $eael_form_field_types );
@@ -1074,7 +1074,7 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->add_control( 'register_form_field_note', [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => __( 'Select the type of fields you want to show in the registration form', 'essential-addons-for-elementor-lite' ),
+			'raw'             => __( sprintf( 'Select the type of fields you want to show in the registration form. You can enable custom fields from EA Dashboard » Elements » <a href="%s">Login Register Form Settings</a>.', esc_attr( site_url('/wp-admin/admin.php?page=eael-settings') ) ), 'essential-addons-for-elementor-lite' ),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 		] );
 		$repeater = new Repeater();
@@ -4056,7 +4056,7 @@ class Login_Register extends Widget_Base {
 			$first_name_exists   = 0;
 			$last_name_exists    = 0;
 			$website_exists      = 0;
-			$eael_billing_phone_exists = 0;
+			$eael_phone_number_exists = 0;
 			$f_labels            = [
 				'email'            => __( 'Email', 'essential-addons-for-elementor-lite' ),
 				'password'         => __( 'Password', 'essential-addons-for-elementor-lite' ),
@@ -4065,7 +4065,7 @@ class Login_Register extends Widget_Base {
 				'first_name'       => __( 'First Name', 'essential-addons-for-elementor-lite' ),
 				'last_name'        => __( 'Last Name', 'essential-addons-for-elementor-lite' ),
 				'website'          => __( 'Website', 'essential-addons-for-elementor-lite' ),
-				'eael_billing_phone'          => __( 'Phone', 'essential-addons-for-elementor-lite' ),
+				'eael_phone_number'          => __( 'Phone', 'essential-addons-for-elementor-lite' ),
 			];
 			$repeated_f_labels   = [];
 
@@ -4149,7 +4149,7 @@ class Login_Register extends Widget_Base {
 
 								// determine proper input tag type
 								switch ( $field_type ) {
-									case 'eael_billing_phone':
+									case 'eael_phone_number':
 									case 'user_name':
 									case 'first_name':
 									case 'last_name':

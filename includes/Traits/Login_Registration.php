@@ -349,7 +349,7 @@ trait Login_Registration {
 		self::$email_options['lastname']            = '';
 		self::$email_options['website']             = '';
 		self::$email_options['password_reset_link'] = '';
-		self::$email_options['eael_billing_phone'] = '';
+		self::$email_options['eael_phone_number'] = '';
 
 		// handle registration...
 		$user_data = [
@@ -367,8 +367,8 @@ trait Login_Registration {
 		if ( ! empty( $_POST['website'] ) ) {
 			$user_data['user_url'] = self::$email_options['website'] = esc_url_raw( $_POST['website'] );
 		}
-		if ( ! empty( $_POST['eael_billing_phone'] ) ) {
-			$user_data['eael_billing_phone'] = self::$email_options['eael_billing_phone'] = sanitize_text_field( $_POST['eael_billing_phone'] );
+		if ( ! empty( $_POST['eael_phone_number'] ) ) {
+			$user_data['eael_phone_number'] = self::$email_options['eael_phone_number'] = sanitize_text_field( $_POST['eael_phone_number'] );
 		}
 
 		$register_actions    = [];
@@ -426,8 +426,8 @@ trait Login_Registration {
 
 		$user_id = wp_insert_user( $user_data );
 
-		if ( ! empty( $user_data['eael_billing_phone'] ) ) {
-			update_user_meta( $user_id, 'eael_billing_phone', $user_data['eael_billing_phone'] );
+		if ( ! empty( $user_data['eael_phone_number'] ) ) {
+			update_user_meta( $user_id, 'eael_phone_number', $user_data['eael_phone_number'] );
 		}
 
 		do_action( 'eael/login-register/after-insert-user', $user_id, $user_data );
@@ -790,10 +790,10 @@ trait Login_Registration {
 
 		<table class="form-table">
 		<tr>
-			<th><label for="eael_billing_phone"><?php _e("Phone"); ?></label></th>
+			<th><label for="eael_phone_number"><?php _e("Phone"); ?></label></th>
 			<td>
-				<input type="text" name="eael_billing_phone" id="eael_billing_phone" value="<?php echo esc_attr( get_the_author_meta( 'eael_billing_phone', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php esc_html_e("Please enter your phone."); ?></span>
+				<input type="text" name="eael_phone_number" id="eael_phone_number" value="<?php echo esc_attr( get_the_author_meta( 'eael_phone_number', $user->ID ) ); ?>" class="regular-text" /><br />
+				<p class="description"><?php esc_html_e("Please enter your phone number."); ?></p>
 			</td>
 		</tr>
 		</table>
@@ -813,6 +813,6 @@ trait Login_Registration {
 		if ( !current_user_can( 'edit_user', $user_id ) ) { 
 			return false; 
 		}
-		update_user_meta( $user_id, 'eael_billing_phone', $_POST['eael_billing_phone'] );
+		update_user_meta( $user_id, 'eael_phone_number', $_POST['eael_phone_number'] );
 	}
 }
