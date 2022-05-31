@@ -349,6 +349,7 @@ trait Login_Registration {
 		self::$email_options['lastname']            = '';
 		self::$email_options['website']             = '';
 		self::$email_options['password_reset_link'] = '';
+		self::$email_options['eael_billing_phone'] = '';
 
 		// handle registration...
 		$user_data = [
@@ -366,6 +367,10 @@ trait Login_Registration {
 		if ( ! empty( $_POST['website'] ) ) {
 			$user_data['user_url'] = self::$email_options['website'] = esc_url_raw( $_POST['website'] );
 		}
+		if ( ! empty( $_POST['eael_billing_phone'] ) ) {
+			$user_data['eael_billing_phone'] = self::$email_options['eael_billing_phone'] = sanitize_text_field( $_POST['eael_billing_phone'] );
+		}
+
 		$register_actions    = [];
 		$custom_redirect_url = '';
 		if ( !empty( $settings) ) {
@@ -420,6 +425,11 @@ trait Login_Registration {
         }
 
 		$user_id = wp_insert_user( $user_data );
+
+		if ( ! empty( $user_data['eael_billing_phone'] ) ) {
+			update_user_meta( $user_id, 'eael_billing_phone', $user_data['eael_billing_phone'] );
+		}
+
 		do_action( 'eael/login-register/after-insert-user', $user_id, $user_data );
 
 		if ( is_wp_error( $user_id ) ) {
@@ -767,5 +777,42 @@ trait Login_Registration {
     {
         delete_option('eael_register_success_' . $widget_id);
         delete_option('eael_register_errors_' . $widget_id);
+	}
+
+	/**
+	 * Add extra custom fields on user profile (e.x. edit page and Registration form).
+	 * @param \WP_User $user
+	 * 
+	 * @since 5.1.4
+	 */
+	public function eael_extra_user_profile_fields( $user ){ ?>
+		<h3><?php _e("EA Login | Register Form", "blank"); ?></h3>
+
+		<table class="form-table">
+		<tr>
+			<th><label for="eael_billing_phone"><?php _e("Phone"); ?></label></th>
+			<td>
+				<input type="text" name="eael_billing_phone" id="eael_billing_phone" value="<?php echo esc_attr( get_the_author_meta( 'eael_billing_phone', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description"><?php esc_html_e("Please enter your phone."); ?></span>
+			</td>
+		</tr>
+		</table>
+	<?php }
+
+	/**
+	 * Save extra custom fields of user profile
+	 * @param int $user_id
+	 * 
+	 * @since 5.1.4
+	 */
+	public function eael_save_extra_user_profile_fields( $user_id ){
+		if ( empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'update-user_' . $user_id ) ) {
+			return;
+		}
+		
+		if ( !current_user_can( 'edit_user', $user_id ) ) { 
+			return false; 
+		}
+		update_user_meta( $user_id, 'eael_billing_phone', $_POST['eael_billing_phone'] );
 	}
 }
