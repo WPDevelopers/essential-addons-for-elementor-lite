@@ -573,6 +573,18 @@
                 }
             }
         }
+        &.eael-circle-responsive-view{
+            .eael-circle-info {
+                .eael-circle-inner {
+                    .eael-circle-item {
+                        .eael-circle-btn-content {
+                            width: calc(100% - 112px);
+                            bottom: 6px;
+                        }
+                    }
+                }
+            }
+        }
 
         .eael-circle-info {
             $nav-item-border-width: 10px;
