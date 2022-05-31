@@ -743,7 +743,7 @@ class Interactive_Circle extends Widget_Base {
 				'selector' => '{{WRAPPER}} .eael-circle-responsive-view .eael-circle-content,
 				{{WRAPPER}} .eael-circle-desktop-view.eael-interactive-circle-preset-1 .eael-circle-btn-content,
 				{{WRAPPER}} .eael-circle-desktop-view.eael-interactive-circle-preset-2 .eael-circle-btn-content,
-				{{WRAPPER}} .eael-circle-desktop-view.eael-interactive-circle-preset-3 .eael-circle-content,
+				{{WRAPPER}} .eael-interactive-circle-preset-3 .eael-circle-content,
 				{{WRAPPER}} .eael-circle-desktop-view.eael-interactive-circle-preset-4 .eael-circle-content',
 			]
 		);
