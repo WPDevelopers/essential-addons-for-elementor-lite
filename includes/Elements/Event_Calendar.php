@@ -508,11 +508,10 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_event_time_format',
             [
-                'label' => __('24-hour Time format', 'essential-addons-for-elementor-lite'),
+                'label' => __('24-Hour Time Format', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_block' => false,
                 'return_value' => 'yes',
-                'description' => __('Hide Event Details link in event popup', 'essential-addons-for-elementor-lite'),
             ]
         );
 
@@ -572,6 +571,16 @@ class Event_Calendar extends Widget_Base
                 'label_block' => false,
                 'return_value' => 'yes',
                 'description' => __('Hide Event Details link in event popup', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $this->add_control(
+            'eael_old_events_hide',
+            [
+                'label' => __('Hide Old Events', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_block' => false,
+                'return_value' => 'yes',
             ]
         );
 
@@ -1806,6 +1815,13 @@ class Event_Calendar extends Widget_Base
                     $end = date('Y-m-d H:i', strtotime($event["eael_event_end_date"])) . ":01";
                 }
 
+                if( !empty( $settings['eael_old_events_hide'] ) && 'yes' === $settings['eael_old_events_hide'] ){
+                    $is_old_event = $this->is_old_event($start);
+                    if($is_old_event) {
+                        continue;
+                    }
+                }
+
                 $settings_eael_event_global_bg_color = $this->fetch_color_or_global_color($event, 'eael_event_bg_color');
                 $settings_eael_event_global_text_color = $this->fetch_color_or_global_color($event, 'eael_event_text_color');
                 $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($event, 'eael_event_border_color');
@@ -1925,6 +1941,13 @@ class Event_Calendar extends Widget_Base
                     $ev_end_date = $item->end->dateTime;
                 }
 
+                if( !empty( $settings['eael_old_events_hide'] ) && 'yes' === $settings['eael_old_events_hide'] ){
+                    $is_old_event = $this->is_old_event($ev_start_date);
+                    if($is_old_event) {
+                        continue;
+                    }
+                }
+                
                 $settings_eael_event_global_bg_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_bg_color');
                 $settings_eael_event_global_text_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_text_color');
                 $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_popup_ribbon_color');
@@ -1946,7 +1969,7 @@ class Event_Calendar extends Widget_Base
             }
 
         }
-
+        
         return $calendar_data;
     }
 
@@ -1998,6 +2021,15 @@ class Event_Calendar extends Widget_Base
               $end = date('Y-m-d H:i', strtotime(tribe_get_end_date($event->ID, true, $date_format))) . ":01";
             }
 
+            $start = tribe_get_start_date($event->ID, true, $date_format);
+
+            if( !empty( $settings['eael_old_events_hide'] ) && 'yes' === $settings['eael_old_events_hide'] ){
+                $is_old_event = $this->is_old_event($start);
+                if($is_old_event) {
+                    continue;
+                }
+            }
+
             $settings_eael_event_global_bg_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_bg_color');
             $settings_eael_event_global_text_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_text_color');
             $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_popup_ribbon_color');
@@ -2007,7 +2039,7 @@ class Event_Calendar extends Widget_Base
                 'title' => !empty($event->post_title) ? $event->post_title : __('No Title',
                     'essential-addons-for-elementor-lite'),
                 'description' => do_shortcode($event->post_content),
-                'start' => tribe_get_start_date($event->ID, true, $date_format),
+                'start' => $start,
                 'end' => $end,
                 'borderColor' => !empty($settings_eael_event_global_popup_ribbon_color) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
                 'textColor' => $settings_eael_event_global_text_color,
@@ -2019,6 +2051,16 @@ class Event_Calendar extends Widget_Base
             ];
         }
         return $calendar_data;
+    }
+
+    public function is_old_event($start_date){
+        $today    = strtotime(current_time( 'Y-m-d' ));
+        $start_date_timestamp = strtotime($start_date);
+
+        if($start_date_timestamp < $today){
+            return true;
+        }
+        return false;
     }
 
     public function fetch_color_or_global_color($settings, $control_name=''){
