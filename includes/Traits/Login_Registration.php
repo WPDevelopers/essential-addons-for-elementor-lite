@@ -244,7 +244,6 @@ trait Login_Registration {
 
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
-
 		if ( is_user_logged_in() ) {
 			$err_msg = isset( $settings['err_loggedin'] ) ? $settings['err_loggedin'] : __( 'You are already logged in.', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
@@ -277,7 +276,25 @@ trait Login_Registration {
 			exit();
 		}
 		// prepare vars and flag errors
+		
+		$settings_register_fields = isset($settings['register_fields']) ? $settings['register_fields'] : array();
+		if( count($settings_register_fields) ){
+			foreach($settings_register_fields as $register_field){
+				if( isset( $register_field['field_type'] ) && 'eael_phone_number' === $register_field['field_type']	){
+					//Phone number field
+					if( !empty( $register_field['required'] ) && 'yes' === $register_field['required'] && empty( $_POST['eael_phone_number'] ) ) {
+						$errors['eael_phone_number'] = isset( $settings['err_phone_number_missing'] ) ? $settings['err_phone_number_missing'] : __( 'Phone number is required', 'essential-addons-for-elementor-lite' );
+					}
+				}
 
+				//Validate HTML tags on input fields; Throw error if found (Although we are sanitizing before saving)
+				if( isset( $register_field['field_type'] ) && !empty( $_POST[$register_field['field_type']] ) ){
+					if( preg_match('/<[^<]+>/', $_POST[ $register_field['field_type'] ] ) ){
+						$errors[ sanitize_text_field( $register_field['field_type'] ) ] = __( sprintf('%s can not contain HTML tags', sanitize_text_field( $register_field['field_label'] ) ), 'essential-addons-for-elementor-lite' );
+					}
+				}
+			}
+		}
 
 		if ( isset( $_POST['eael_tnc_active'] ) && empty( $_POST['eael_accept_tnc'] ) ) {
 			$errors['terms_conditions'] =  isset( $settings['err_tc'] ) ? $settings['err_tc'] : __( 'You did not accept the Terms and Conditions. Please accept it and try again.', 'essential-addons-for-elementor-lite' );
@@ -287,7 +304,7 @@ trait Login_Registration {
 		}
 		
 		if ( !empty( $_POST['eael_phone_number'] ) && ! $this->eael_is_phone( sanitize_text_field( $_POST['eael_phone_number'] )) ) {
-			$errors['eael_phone_number'] =  __( 'Invalid phone number provided.', 'essential-addons-for-elementor-lite' );
+			$errors['eael_phone_number'] =  isset( $settings['err_phone_number_invalid'] ) ? $settings['err_phone_number_invalid'] : __( 'Invalid phone number provided', 'essential-addons-for-elementor-lite' );
 		}
 
 		if ( ! empty( $_POST['email'] ) && is_email( $_POST['email'] ) ) {
@@ -822,6 +839,15 @@ trait Login_Registration {
 
 	public function eael_is_phone($phone){
 		if ( 0 < strlen( trim( preg_replace( '/[\s\#0-9_\-\+\/\(\)\.]/', '', $phone ) ) ) ) {
+			return false;
+		}
+
+		if( strlen( str_replace(['+', '00', ' ', '(', ')', '-', '.', '_', '/'], '', $phone) ) === 0 ) {
+			return false;
+		}
+
+		//Phone number length can't be more than 15
+		if( strlen( str_replace(['+', '00', ' ', '(', ')', '-', '.', '_', '/'], '', $phone) ) > 15 ) {
 			return false;
 		}
 

@@ -1014,6 +1014,22 @@ class Login_Register extends Widget_Base {
 			'default'     => __( "Something went wrong!", 'essential-addons-for-elementor-lite' ),
 		] );
 
+		$this->add_control( 'err_phone_number_missing', [
+			'label'       => __( 'Phone number is missing', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Phone number is missing', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( 'Phone number is missing', 'essential-addons-for-elementor-lite' ),
+		] );
+
+		$this->add_control( 'err_phone_number_invalid', [
+			'label'       => __( 'Invalid phone number provided', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Invalid phone number provided', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( 'Invalid phone number provided', 'essential-addons-for-elementor-lite' ),
+		] );
+
 		$this->add_control( 'success_message_heading', [
 			'label'     => esc_html__( 'Success Messages', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
@@ -1074,7 +1090,7 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->add_control( 'register_form_field_note', [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => __( sprintf( 'Select the type of fields you want to show in the registration form. You can enable custom fields from EA Dashboard » Elements » <a href="%s">Login Register Form Settings</a>.', esc_attr( site_url('/wp-admin/admin.php?page=eael-settings') ) ), 'essential-addons-for-elementor-lite' ),
+			'raw'             => __( sprintf( 'Select the type of fields you want to show in the registration form. You can enable custom fields from EA Dashboard » Elements » <a href="%s" target="_blank">Login Register Form Settings</a>.', esc_attr( site_url('/wp-admin/admin.php?page=eael-settings') ) ), 'essential-addons-for-elementor-lite' ),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 		] );
 		$repeater = new Repeater();
