@@ -531,7 +531,20 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
         ] );
     }
 
+    $thumb_size = isset($settings['eael_product_grid_image_size_size']) ? $settings['eael_product_grid_image_size_size'] : '';
+    global $eael_thumb_default;
+    add_filter( 'single_product_archive_thumbnail_size', function($size)use($thumb_size){
+        global $eael_thumb_default;
+        $eael_thumb_default = $size;
+        return $thumb_size != '' ? $thumb_size : $size ;
+    });
+
     wc_get_template_part( 'content', 'product' );
+
+    add_filter( 'single_product_archive_thumbnail_size', function($size){
+        global $eael_thumb_default;
+        return !empty($eael_thumb_default) ? $eael_thumb_default : $size;
+    });
 
     if ( $should_print_compare_btn ) {
         remove_action( 'woocommerce_after_shop_loop_item', [

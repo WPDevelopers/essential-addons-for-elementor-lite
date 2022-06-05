@@ -627,12 +627,24 @@ trait Login_Registration {
 		}
 
 		if ( ! empty( self::$email_options['message'] ) ) {
+			if ( isset( self::$email_options['password_reset_link'] ) && self::$email_options['password_reset_link'] != '' ) {
+				$_message = $email_data['message'];
+				$start    = 'action=rp&key=';
+				$end      = '&login=';
+				$_message = substr( $_message, strpos( $_message, $start ) + strlen( $start ) );
+				$key      = substr( $_message, 0, strpos( $_message, $end ) );
+				if ( ! empty( $key ) ) {
+					self::$email_options['password_reset_link'] = network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user->user_login ), 'login' ) . "\r\n\r\n";
+				}
+			}
 			$email_data['message'] = $this->replace_placeholders( self::$email_options['message'], 'user' );
 		}
 
 		if ( ! empty( self::$email_options['headers'] ) ) {
 			$email_data['headers'] = self::$email_options['headers'];
 		}
+
+		$email_data['message'] = wpautop( $email_data['message'] );
 
 		return apply_filters( 'eael/login-register/new-user-email-data', $email_data, $user, $blogname );
 
@@ -665,6 +677,8 @@ trait Login_Registration {
 		if ( ! empty( self::$email_options['admin_headers'] ) ) {
 			$email_data['headers'] = self::$email_options['admin_headers'];
 		}
+
+		$email_data['message'] = wpautop( $email_data['message'] );
 
 		return apply_filters( 'eael/login-register/new-user-admin-email-data', $email_data, $user, $blogname );
 	}

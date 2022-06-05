@@ -40,6 +40,10 @@
   font-size: 16px;
   overflow: hidden;
 }
+.eael-button.hide,
+.eael-load-more-button.hide {
+  display: none !important;
+}
 .eael-button.button--loading .eael-btn-loader,
 .eael-load-more-button.button--loading .eael-btn-loader {
   display: block;

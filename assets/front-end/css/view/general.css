@@ -140,3 +140,11 @@
 .elementor-widget-eael-weform.eael-contact-form-align-right .eael-weform-container {
   margin: 0 0 0 auto;
 }
+
+.theme-martfury .elementor-wc-products .woocommerce ul.products li.product .product-inner .mf-rating .eael-star-rating.star-rating {
+  display: none;
+}
+
+.theme-martfury .elementor-wc-products .woocommerce ul.products li.product .product-inner .mf-rating .eael-star-rating.star-rating ~ .count {
+  display: none;
+}

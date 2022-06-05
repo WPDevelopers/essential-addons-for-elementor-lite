@@ -875,9 +875,9 @@ class Feature_List extends Widget_Base {
             $connector_mobile = 'right: calc(100% - ' . $connector_width . 'px); left: 0;';
         }
         // icon position for all mode
-        $eael_feature_list_icon_position_setting = ( !empty($settings['eael_feature_list_icon_position']) && $settings['eael_feature_list_icon_position'] ) ? $settings['eael_feature_list_icon_position'] : '';
-        $eael_feature_list_icon_position_tablet_setting = ( !empty($settings['eael_feature_list_icon_position_tablet']) && $settings['eael_feature_list_icon_position_tablet'] ) ? $settings['eael_feature_list_icon_position_tablet'] : '';
-        $eael_feature_list_icon_position_mobile_setting = ( !empty($settings['eael_feature_list_icon_position_mobile']) && $settings['eael_feature_list_icon_position_mobile'] ) ? $settings['eael_feature_list_icon_position_mobile'] : '';
+        $eael_feature_list_icon_position_setting = ( !empty($settings['eael_feature_list_icon_position']) && $settings['eael_feature_list_icon_position'] ) ? $settings['eael_feature_list_icon_position'] : 'left';
+        $eael_feature_list_icon_position_tablet_setting = ( !empty($settings['eael_feature_list_icon_position_tablet']) && $settings['eael_feature_list_icon_position_tablet'] ) ? $settings['eael_feature_list_icon_position_tablet'] : 'left';
+        $eael_feature_list_icon_position_mobile_setting = ( !empty($settings['eael_feature_list_icon_position_mobile']) && $settings['eael_feature_list_icon_position_mobile'] ) ? $settings['eael_feature_list_icon_position_mobile'] : 'left';
         $this->add_render_attribute(
             'eael_feature_list_wrapper',
             [
@@ -907,15 +907,7 @@ class Feature_List extends Widget_Base {
             $feat_title_tag = Helper::eael_validate_html_tag($settings['eael_feature_list_title_size']);
 
             if ( $item['eael_feature_list_link']['url'] ) {
-                $this->add_render_attribute( 'eael_feature_list_title_anchor' . $index, 'href', esc_url( $item['eael_feature_list_link']['url'] ) );
-
-                if ( $item['eael_feature_list_link']['is_external'] ) {
-                    $this->add_render_attribute( 'eael_feature_list_title_anchor' . $index, 'target', '_blank' );
-                }
-
-                if ( $item['eael_feature_list_link']['nofollow'] ) {
-                    $this->add_render_attribute( 'eael_feature_list_title_anchor' . $index, 'rel', 'nofollow' );
-                }
+                $this->add_link_attributes( 'eael_feature_list_title_anchor' . $index, $item['eael_feature_list_link'] );
             }
 
             $feature_icon_tag = 'span';
@@ -923,15 +915,8 @@ class Feature_List extends Widget_Base {
             $feature_has_icon = ( !empty( $item['eael_feature_list_icon'] ) || !empty( $item['eael_feature_list_icon_new'] ) );
 
             if ( $item['eael_feature_list_link']['url'] ) {
-                $this->add_render_attribute( 'eael_feature_list_link' . $index, 'href', $item['eael_feature_list_link']['url'] );
+                $this->add_link_attributes( 'eael_feature_list_link' . $index, $item['eael_feature_list_link'] );
 
-                if ( $item['eael_feature_list_link']['is_external'] ) {
-                    $this->add_render_attribute( 'eael_feature_list_link' . $index, 'target', '_blank' );
-                }
-
-                if ( $item['eael_feature_list_link']['nofollow'] ) {
-                    $this->add_render_attribute( 'eael_feature_list_link' . $index, 'rel', 'nofollow' );
-                }
                 $feature_icon_tag = 'a';
             }
             ?>

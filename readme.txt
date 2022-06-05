@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, manzurahammed, sumaiyasiddika, rudlinkon, robinwpdeveloper
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 5.9
+Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 5.1.0
+Stable tag: 5.1.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -241,6 +241,49 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.1.4 - 26/05/2022 =
+
+- Improved: Data escaping for Security Enhancement
+- Few minor bug fixes & improvements
+
+= 5.1.3 - 25/05/2022 =
+
+- Added: WordPress 6.0 Compatibility
+- Improved: Sanitized HTML Tags in the WooCommerce Widgets
+- Improved: EA Woo Product Carousel | Options to make product title clickable
+- Improved: EA Interactive Circle | Animation starting after scrolling to a definite section
+- Added: EA Login/Register Form| Social Login option for Register Form
+- Added: EA Facebook Feed | Force square image option
+- Added: EA Simple Menu | Customized Icon for the hamburger menu
+- Fixed: EA Scroll to Top | being visible on all pages and posts despite only selected only All posts
+- Fixed: EA Pricing Table | Feature List icon color not changing when using global color
+- Fixed: Conflict with Elementor Product Grid when Martfury theme is used
+- Fixed: EA Woo Checkout | some of the strings not being translatable
+- Fixed: EA Woo Product Gallery | Showing No categories found error despite categories option being disabled
+- Fixed: EA Feature List | Images looking blurry regardless of the resolution and size
+- Fixed: EA Flip Box | Title & Button links not working without "https://"
+- Fixed: EA Product Grid | Sale text not changing in the Quick View pop up 
+- Fixed: EA Product Grid | Quick View style changing when going to next page through pagination
+- Fixed: EA Product Grid | Add to Cart behavior to Cart Page not working from Quick View screen
+- Fixed: EA Post Grid | Throwing error when posts per page is blank
+- Fixed: EA Login/Register Form | Custom Email Formatting and Reset Password link not working
+- Fixed: WooCommerce Quick View being broken when Savoy theme is used
+- Fixed: EA Advanced Data Table | Google sheet merged cell not formatting properly
+- Few minor bug fixes & improvements
+
+= 5.1.2 - 10/05/2022 =
+
+- Fixed: EA Woo Product Gallery | Quick view not working properly on responsive devices
+- Few minor bug fixes & improvements
+
+= 5.1.1 - 26/04/2022 =
+
+- Fixed: EA Advanced Data Table | WPML Translation not working
+- Fixed: EA Creative Button | Style settings not apply on secondary button texts
+- Fixed: EA Advanced Data Table | Sorting order only working on the current page
+- Improved: EA Event Calendar | Added an option to specify default start date
+- Few minor bug fixes & improvements
 
 = 5.1.0 - 19/04/2022 =
 
