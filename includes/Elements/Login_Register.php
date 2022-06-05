@@ -527,6 +527,7 @@ class Login_Register extends Widget_Base {
 					],
 				] );
 			}
+			do_action( 'eael/login-register/mailchimp-integration', $this );
 			$this->end_popover();
 
 		} else {
