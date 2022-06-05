@@ -5214,6 +5214,9 @@ button.button__greyBg:hover:disabled {
     outline:none;
     box-showdow:none;
 }
+.eael-admin-promotion-close {
+    top: 7px !important;
+}
 .eael-lock-style {
     position: absolute;
     right: 21px;

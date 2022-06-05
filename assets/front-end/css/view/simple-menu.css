@@ -503,6 +503,10 @@
   z-index: 9999;
   max-height: 100vh;
 }
+.eael-simple-menu-container .eael-simple-menu-toggle svg {
+  width: 35px;
+  height: auto;
+}
 .eael-simple-menu-container .eael-simple-menu-responsive.eael-hamburger-center li .eael-simple-menu-indicator {
   left: initial !important;
   right: 10px !important;

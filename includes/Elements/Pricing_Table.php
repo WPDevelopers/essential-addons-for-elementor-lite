@@ -338,6 +338,10 @@ class Pricing_Table extends Widget_Base
                 'label'   => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
                 'type'    => Controls_Manager::COLOR,
                 'default' => '#00C853',
+                'selectors' => [
+                    "{{WRAPPER}} {{CURRENT_ITEM}} .li-icon i" => 'color: {{VALUE}};',
+                    "{{WRAPPER}} {{CURRENT_ITEM}} .li-icon svg" => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
+                ],
             ]
         );
 
@@ -790,6 +794,8 @@ class Pricing_Table extends Widget_Base
                     ],
                 ],
                 'selectors' => [
+                    '{{WRAPPER}}' => 'border-radius: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-pricing' => 'border-radius: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-pricing .eael-pricing-item' => 'border-radius: {{SIZE}}px;',
                 ],
             ]
@@ -2055,13 +2061,20 @@ class Pricing_Table extends Widget_Base
             <?php
             foreach ($settings['eael_pricing_table_items'] as $item) :
 
+                $obj->add_render_attribute(
+                    'pricing_feature_item' . $counter, 
+                    [ 
+                        'class' => 'elementor-repeater-item-' . esc_attr( $item['_id'] ),
+                    ]
+                );
+
                 if ('yes' !== $item['eael_pricing_table_icon_mood']) {
                     $obj->add_render_attribute('pricing_feature_item' . $counter, 'class', 'disable-item');
                 }
 
                 if ('yes' === $item['eael_pricing_item_tooltip']) {
                     $obj->add_render_attribute(
-                        'pricing_feature_item' . $counter,
+                        'pricing_feature_item_tooltip' . $counter,
                         [
                             'class' => 'tooltip',
                             'title' => HelperClass::eael_wp_kses($item['eael_pricing_item_tooltip_content']),
@@ -2073,33 +2086,35 @@ class Pricing_Table extends Widget_Base
                 if ('yes' == $item['eael_pricing_item_tooltip']) {
 
                     if ($item['eael_pricing_item_tooltip_side']) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-side', $item['eael_pricing_item_tooltip_side']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-side', $item['eael_pricing_item_tooltip_side']);
                     }
 
                     if ($item['eael_pricing_item_tooltip_trigger']) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-trigger', $item['eael_pricing_item_tooltip_trigger']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-trigger', $item['eael_pricing_item_tooltip_trigger']);
                     }
 
                     if ($item['eael_pricing_item_tooltip_animation']) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-animation', $item['eael_pricing_item_tooltip_animation']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-animation', $item['eael_pricing_item_tooltip_animation']);
                     }
 
                     if (!empty($item['pricing_item_tooltip_animation_duration'])) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-animation_duration', $item['pricing_item_tooltip_animation_duration']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-animation_duration', $item['pricing_item_tooltip_animation_duration']);
                     }
 
                     if (!empty($item['eael_pricing_table_toolip_arrow'])) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-arrow', $item['eael_pricing_table_toolip_arrow']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-arrow', $item['eael_pricing_table_toolip_arrow']);
                     }
 
                     if (!empty($item['eael_pricing_item_tooltip_theme'])) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-theme', $item['eael_pricing_item_tooltip_theme']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-theme', $item['eael_pricing_item_tooltip_theme']);
                     }
                 }
             ?>
                 <li <?php echo $obj->get_render_attribute_string('pricing_feature_item' . $counter); ?>>
                     <?php if ('show' === $settings['eael_pricing_table_icon_enabled']) : ?>
-                        <span class="li-icon" style="color:<?php echo esc_attr($item['eael_pricing_table_list_icon_color']); ?>;fill:<?php echo esc_attr($item['eael_pricing_table_list_icon_color']); ?>;" >
+                        <?php $eael_pricing_table_list_icon_color = HelperClass::eael_fetch_color_or_global_color($item, 'eael_pricing_table_list_icon_color'); ?>
+                        
+                        <span class="li-icon" style="color:<?php echo esc_attr($eael_pricing_table_list_icon_color); ?>;fill:<?php echo esc_attr($eael_pricing_table_list_icon_color); ?>;" >
                             <?php if (isset($item['__fa4_migrated']['eael_pricing_table_list_icon_new']) || empty($item['eael_pricing_table_list_icon'])) { ?>
                                 <?php if (isset($item['eael_pricing_table_list_icon_new']['value']['url'])) : ?>
                                     <?php Icons_Manager::render_icon( $item['eael_pricing_table_list_icon_new'], [ 'aria-hidden' => 'true' ] ); ?>
@@ -2112,7 +2127,7 @@ class Pricing_Table extends Widget_Base
                             <?php } ?>
                         </span>
                     <?php endif; ?>
-                    <?php echo HelperClass::eael_wp_kses($item['eael_pricing_table_item']); ?>
+                    <span <?php echo $obj->get_render_attribute_string('pricing_feature_item_tooltip' . $counter); ?>><?php echo HelperClass::eael_wp_kses($item['eael_pricing_table_item']); ?></span>
                 </li>
             <?php
                 $counter++;

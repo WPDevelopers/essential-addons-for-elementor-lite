@@ -75,6 +75,7 @@ class Bootstrap
 
 
     const EAEL_PROMOTION_FLAG = 2;
+    const EAEL_ADMIN_MENU_FLAG = 2;
     /**
      * Singleton instance
      *
@@ -261,6 +262,8 @@ class Bootstrap
 	        if ( ! empty( $_REQUEST['action'] ) && 'elementor' === $_REQUEST['action'] ) {
 		        add_action( 'init', [ $this, 'register_wc_hooks' ], 5 );
 	        }
+
+	        add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
 
         }
 

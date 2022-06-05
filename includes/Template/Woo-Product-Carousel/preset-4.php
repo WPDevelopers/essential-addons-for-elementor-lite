@@ -28,6 +28,7 @@ $stockout_text = !empty($settings['eael_product_carousel_stockout_text']) ? $set
 $should_print_rating = isset( $settings['eael_product_carousel_rating'] ) && 'yes' === $settings['eael_product_carousel_rating'];
 $should_print_quick_view = isset( $settings['eael_product_carousel_quick_view'] ) && 'yes' === $settings['eael_product_carousel_quick_view'];
 $should_print_image_clickable = isset( $settings['eael_product_carousel_image_clickable'] ) && 'yes' === $settings['eael_product_carousel_image_clickable'];
+$should_print_title_clickable = isset( $settings['eael_product_carousel_title_clickable'] ) && 'yes' === $settings['eael_product_carousel_title_clickable'];
 $should_print_price = isset( $settings['eael_product_carousel_price'] ) && 'yes' === $settings['eael_product_carousel_price'];
 $should_print_excerpt = isset( $settings['eael_product_carousel_excerpt'] ) && ('yes' === $settings['eael_product_carousel_excerpt'] && has_excerpt());
 $widget_id = isset($settings['eael_widget_id']) ? $settings['eael_widget_id'] : null;
@@ -63,14 +64,21 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                         <div class="eael-product-title-wrap">
 	                        <?php
 	                        if ( $settings['eael_product_carousel_show_title'] ) {
-		                        echo '<div class="eael-product-title">';
+		                        echo '<div class="eael-product-title">';		                        
+		                        if( $should_print_title_clickable ) {
+		                            echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+		                        }
 		                        echo '<' . Helper::eael_validate_html_tag( $settings['eael_product_carousel_title_tag'] ) . '>';
 		                        if ( empty( $settings['eael_product_carousel_title_length'] ) ) {
 			                        echo Helper::eael_wp_kses( $product->get_title() );
 		                        } else {
-			                        echo implode( " ", array_slice( explode( " ", $product->get_title() ), 0, $settings['eael_product_carousel_title_length'] ) );
+			                        echo implode( " ", array_slice( explode( " ", Helper::eael_wp_kses($product->get_title()) ), 0, $settings['eael_product_carousel_title_length'] ) );
 		                        }
 		                        echo '</' . Helper::eael_validate_html_tag( $settings['eael_product_carousel_title_tag'] )  . '>';
+
+		                        if( $should_print_title_clickable ) {
+		                            echo '</a>';
+		                        }
 		                        echo '</div>';
 	                        }
 	                        ?>

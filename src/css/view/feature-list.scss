@@ -148,6 +148,7 @@ $enable-prefers-reduced-motion-media-query: true !default;
                     font-size: 8px;
                     line-height: 1;
                     max-width: inherit;
+                    image-rendering: pixelated;
                 }
             }
 

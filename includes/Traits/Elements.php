@@ -523,8 +523,21 @@ trait Elements
                 } else {
                     $scroll_to_top_icon_html = "<i class='$scroll_to_top_icon_image'></i>";
                 }
-
+    
                 $scroll_to_top_html = "<div class='eael-ext-scroll-to-top-wrap scroll-to-top-hide'><span class='eael-ext-scroll-to-top-button'>$scroll_to_top_icon_html</span></div>";
+
+                $scroll_to_top_global_display_condition = isset($settings_data_scroll_to_top['eael_ext_scroll_to_top_global_display_condition']) ? $settings_data_scroll_to_top['eael_ext_scroll_to_top_global_display_condition'] : 'all';
+                
+                if(isset($settings_data_scroll_to_top['post_id']) && $settings_data_scroll_to_top['post_id'] != get_the_ID()){
+                    if (get_post_status($settings_data_scroll_to_top['post_id']) != 'publish') {
+                        $scroll_to_top_html = '';
+                    } else if ($scroll_to_top_global_display_condition == 'pages' && !is_page()) {
+                            $scroll_to_top_html = '';                    
+                    } else if ($scroll_to_top_global_display_condition == 'posts' && !is_single()) {
+                            $scroll_to_top_html = '';
+                    }
+                }
+                
                 if (!empty($scroll_to_top_html)) {
                     wp_enqueue_script('eael-scroll-to-top');
                     wp_enqueue_style('eael-scroll-to-top');

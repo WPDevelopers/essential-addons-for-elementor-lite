@@ -17,8 +17,10 @@
 			$layout = $this.data("layout"),
 			$template_info = $this.data("template"),
 			$page = parseInt($this.data("page")) + 1,
-			$max_page = $this.data("max-page") != undefined ? parseInt($this.data("max-page")) : false;
-
+			$max_page = $this.data("max-page") != undefined ? parseInt($this.data("max-page")) : false,
+			$exclude_ids = [],
+			$active_term_id = 0,
+			$active_taxonomy = '';
 		if (typeof $widget_id == "undefined" || typeof $args == "undefined") {
 			return;
 		}
@@ -56,6 +58,20 @@
 			$data.page = $gallery_page;
 		}
 
+		if ( $data.class === "Essential_Addons_Elementor\\Pro\\Elements\\Dynamic_Filterable_Gallery" ) {
+			$('.dynamic-gallery-item-inner').each(function() {
+				$exclude_ids.push($(this).data('itemid'));
+			});
+			
+			$active_term_id = $('.dynamic-gallery-category.active').data('termid');
+			$active_taxonomy = $('.dynamic-gallery-category.active').data('taxonomy');
+
+			$data.page = 1; //page flag is not needed since we are using exclude ids
+			$data.exclude_ids = JSON.stringify($exclude_ids);
+			$data.active_term_id = typeof $active_term_id === 'undefined' ? 0 : $active_term_id;
+			$data.active_taxonomy = typeof $active_taxonomy === 'undefined' ? '' : $active_taxonomy;
+		}
+
 		String($args)
 			.split("&")
 			.forEach(function (item, index) {
@@ -80,6 +96,23 @@
 		$this.addClass("button--loading");
 		$LoaderSpan.html(localize.i18n.loading);
 
+		var filterable_gallery_load_more_btn = ($this) => {
+			let active_tab = $this.closest('.eael-filter-gallery-wrapper').find('.dynamic-gallery-category.active'),
+				active_filter = active_tab.data('filter'),
+				rest_filter = active_tab.siblings().not('.no-more-posts');
+
+			$this.addClass('hide');
+			active_tab.addClass('no-more-posts');
+
+			if (rest_filter.length === 1 && rest_filter.data('filter') === '*') {
+				rest_filter.addClass('no-more-posts')
+			}
+
+			if (active_filter === '*') {
+				active_tab.siblings().addClass('no-more-posts');
+			}
+		}
+
 		$.ajax({
 			url: localize.ajaxurl,
 			type: "post",
@@ -91,9 +124,14 @@
 					$content.hasClass("no-posts-found") ||
 					$content.length === 0
 				) {
-					if ( $data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery" ) {
+					if ($data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery") {
 						$this.removeClass('button--loading').addClass('hide-load-more');
-						$LoaderSpan.html($text)
+						$LoaderSpan.html($text);
+					} else if ($data.class == "Essential_Addons_Elementor\\Pro\\Elements\\Dynamic_Filterable_Gallery") {
+						$this.removeClass('button--loading');
+						$LoaderSpan.html($text);
+
+						filterable_gallery_load_more_btn($this);
 					} else {
 						$this.remove();
 					}
@@ -173,8 +211,16 @@
 						$this.data("page", $page);
 					}
 
-					if ($max_page && $data.page >= $max_page) {
-						$this.remove();
+					if ($data.class == "Essential_Addons_Elementor\\Pro\\Elements\\Dynamic_Filterable_Gallery") {
+						let found_posts = $($content[0]);
+
+						if (found_posts.hasClass('found_posts') && found_posts.text() - obj.posts_per_page < 1) {
+							filterable_gallery_load_more_btn($this);
+						}
+					} else {
+						if ($max_page && $data.page >= $max_page) {
+							$this.remove();
+						}
 					}
 				}
 			},

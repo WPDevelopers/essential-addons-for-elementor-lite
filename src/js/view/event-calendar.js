@@ -9,8 +9,9 @@ var EventCalendar = function ($scope, $) {
 		locale = element.data("locale"),
 		translate = element.data("translate"),
 		defaultView = element.data("defaultview"),
+		defaultDate = element.data("defaultdate"),
 		time_format = element.data("time_format") == "yes" ? true : false;
-	
+
 	var calendar = new Calendar(
 		$scope[0].querySelector(".eael-event-calendar-cls"), {
 			plugins: ["dayGrid", "timeGrid", "list"],
@@ -34,6 +35,7 @@ var EventCalendar = function ($scope, $) {
 			locale: locale,
 			eventLimit: 3,
 			defaultView: defaultView,
+			defaultDate: defaultDate,
 			eventRender: function (info) {
 				var element = $(info.el),
 					event = info.event;
@@ -186,6 +188,11 @@ var EventCalendar = function ($scope, $) {
 					}
 					if (event.extendedProps.nofollow === "on") {
 						$(".eaelec-modal-footer a").attr("rel", "nofollow");
+					}
+					if (event.extendedProps.custom_attributes != '' ) {
+						$.each(event.extendedProps.custom_attributes, function(index,item){
+							$(".eaelec-modal-footer a").attr(item.key, item.value);
+						});
 					}
 					if (event.url == "") {
 						$(".eaelec-modal-footer a").css("display", "none");
