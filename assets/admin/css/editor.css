@@ -210,3 +210,7 @@
 	pointer-events: none;
 	touch-action: none;
 }
+.elementor-context-menu-list__item.elementor-context-menu-list__item-ea_copy_all,
+.elementor-context-menu-list__item.elementor-context-menu-list__item-ea_paste_all {
+	padding-right: 10px;
+}
