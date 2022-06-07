@@ -218,11 +218,41 @@ trait Helper
 		return $html;
 	}
 
+    /**
+	 * Update Checkout Cart Quantity via ajax call.
+	 */
+	public function eael_checkout_cart_qty_update() {
+        if ( ! wp_verify_nonce( $_POST['nonce'], 'essential-addons-elementor' ) ) {
+            die( __('Permission Denied!') );
+        }
 
+        $cart_item_key = $_POST['cart_item_key'];
+		$cart_item = WC()->cart->get_cart_item( $cart_item_key );
+		$cart_item_quantity = apply_filters( 'woocommerce_stock_amount_cart_item', apply_filters( 'woocommerce_stock_amount', preg_replace( "/[^0-9\.]/", '', filter_var($_POST['quantity'], FILTER_SANITIZE_NUMBER_INT)) ), $cart_item_key );
 
+		$passed_validation  = apply_filters( 'woocommerce_update_cart_validation', true, $cart_item_key, $cart_item, $cart_item_quantity );
+		if ( $passed_validation ) {
+			WC()->cart->set_quantity( $cart_item_key, $cart_item_quantity, true );
+			wp_send_json_success(
+                array(
+                    'message' => __( 'Quantity updated successfully.', 'essential-addons-elementor' ),
+                    // 'cart_item_key' => $cart_item_key,
+                    'cart_item_quantity' => $cart_item_quantity,
+                    'cart_item_subtotal' => WC()->cart->get_product_subtotal( $cart_item['data'], $cart_item_quantity ),
+                    'cart_subtotal' => WC()->cart->get_cart_subtotal(),
+                    'cart_total' => WC()->cart->get_cart_total()
+                )
+            );
+		} else {
+    		wp_send_json_error(
+                array(
+                    'message' => __( 'Quantity update failed.', 'essential-addons-elementor' ),
+                )
+            );
+        }
 
-
-
+		die();
+	}
 
 	public function change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text ) {
 		add_filter( 'woocommerce_product_add_to_cart_text', function ( $default ) use ( $add_to_cart_text ) {
