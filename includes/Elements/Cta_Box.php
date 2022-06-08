@@ -1440,8 +1440,10 @@ class Cta_Box extends Widget_Base
         if(!empty($sub_title)){
             $headingMarkup .='<h4 class="sub-title">'.$sub_title.'</h4>';
         }
-        $headingMarkup .='<'.Helper::eael_validate_html_tag($settings['title_tag']).' class="title">'.Helper::eael_wp_kses($settings['eael_cta_title']).'</'.Helper::eael_validate_html_tag($settings['title_tag']).'>';
 
+        if (!empty($settings['eael_cta_title'])){
+            $headingMarkup .='<'.Helper::eael_validate_html_tag($settings['title_tag']).' class="title">'.Helper::eael_wp_kses($settings['eael_cta_title']).'</'.Helper::eael_validate_html_tag($settings['title_tag']).'>';
+        }
         // content markup
         $contentMarkup = '';
         if ('content' == $settings['eael_cta_title_content_type']) {
