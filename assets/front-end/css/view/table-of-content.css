@@ -187,6 +187,10 @@ html {
   list-style: none;
 }
 
+.eael-toc .eael-toc-body ul.eael-toc-list .eael-toc-link.eael-highlight-active:first-child {
+  color: #ff7d50;
+}
+
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-bullet li:before {
   content: "";
   position: relative;
