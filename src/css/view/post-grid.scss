@@ -54,6 +54,10 @@
 	width: 100%;
 	max-width: 100%;
 	vertical-align: middle;
+	position: absolute;
+	top: calc(50% + 1px);
+	left: calc(50% + 1px);
+	transform: scale(1.01) translate(-50%,-50%);
 }
 
 .eael-entry-thumbnail > img {
