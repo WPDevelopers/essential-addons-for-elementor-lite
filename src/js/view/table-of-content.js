@@ -214,9 +214,54 @@
 				!eaelToc.classList.contains("eael-toc-disable")
 			) {
 				eaelToc.classList.add("eael-sticky");
+				
+				if($('#eael-toc-list').hasClass('eael-toc-auto-highlight')) {
+					highlightCurrentHeading();
+				}
 			} else {
 				eaelToc.classList.remove("eael-sticky");
 			}
+		}
+
+		function highlightCurrentHeading(){
+			var allHeadings = document.querySelectorAll("#eael-toc-list .eael-toc-link");
+			$('#eael-toc-list .eael-toc-link').removeClass('eael-highlight-active');
+			let showSinlgeHeadingOnly = $('#eael-toc').hasClass('eael-toc-auto-highlight.eael-toc-highlight-single-item') ? true : false;
+
+			for(let i=0; i < allHeadings.length; i++) {
+				let headingElement = allHeadings[i];
+				let headingTarget = headingElement.getAttribute("href");
+				let headingTargettedElement = document.getElementById( headingTarget.substring(1) ); //removes # and fetch element
+				
+				if(isElementInViewport(headingTargettedElement)){
+					$(headingElement).addClass("eael-highlight-active");
+					if(showSinlgeHeadingOnly){
+						break;
+					}
+				}
+			}
+		}
+
+		/**
+		 * Determine if the element is in the viewport.
+		 * @param {*} el 
+		 * @returns 
+		 */
+		function isElementInViewport (el) {
+
+			// Special bonus for those using jQuery
+			if (typeof jQuery === "function" && el instanceof jQuery) {
+				el = el[0];
+			}
+		
+			var rect = el.getBoundingClientRect();
+		
+			return (
+				rect.top >= 0 &&
+				rect.left >= 0 &&
+				rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /* or $(window).height() */
+				rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
+			);
 		}
 
 		/**
