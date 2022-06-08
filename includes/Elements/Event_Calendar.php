@@ -164,6 +164,16 @@ class Event_Calendar extends Widget_Base
         );
 
         $repeater->add_control(
+            'eael_event_redirection',
+            [
+                'label' => __('Redirect to Page', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_block' => false,
+                'return_value' => 'yes',
+            ]
+        );
+
+        $repeater->add_control(
             'eael_event_all_day',
             [
                 'label' => __('All Day', 'essential-addons-for-elementor-lite'),
@@ -247,6 +257,9 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Popup Ribbon Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#E8E6ED',
+                'condition' => [
+                    'eael_event_redirection!' => 'yes'
+                ]
             ]
         );
 
@@ -256,6 +269,9 @@ class Event_Calendar extends Widget_Base
             'eaelec_event_content_tab',
             [
                 'label' => __('Content', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'eael_event_redirection!' => 'yes'
+                ]
             ]
         );
 
@@ -1936,10 +1952,11 @@ class Event_Calendar extends Widget_Base
                     'borderColor' => !empty($settings_eael_event_global_popup_ribbon_color) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
                     'textColor' => $settings_eael_event_global_text_color,
                     'color' => $settings_eael_event_global_bg_color,
-                    'url' => ($settings['eael_event_details_link_hide'] !== 'yes') ? $event["eael_event_link"]["url"] : '',
+                    'url' => ($settings['eael_event_details_link_hide'] !== 'yes') ? esc_url($event["eael_event_link"]["url"]) : '',
                     'allDay' => $event['eael_event_all_day'],
                     'external' => $event['eael_event_link']['is_external'],
                     'nofollow' => $event['eael_event_link']['nofollow'],
+                    'is_redirect' => $event['eael_event_redirection'],
                     'custom_attributes' => $custom_attributes,
                 ];
 
