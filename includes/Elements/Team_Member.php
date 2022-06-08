@@ -339,6 +339,19 @@ class Team_Member extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_team_members_enable_text_overlay',
+			[
+				'label' => esc_html__( 'Enable Description Overlay', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SWITCHER,
+				'default' => 'no',
+				'return_value' => 'yes',
+				'condition' => [
+					'eael_team_members_preset' => 'eael-team-members-simple'
+				]
+			]
+		);
+
+		$this->add_control(
 			'eael_team_members_overlay_background',
 			[
 				'label' => esc_html__( 'Overlay Color', 'essential-addons-for-elementor-lite'),
@@ -346,9 +359,22 @@ class Team_Member extends Widget_Base {
 				'default' => 'rgba(255,255,255,0.8)',
 				'selectors' => [
 					'{{WRAPPER}} .eael-team-members-overlay .eael-team-content' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-team-image .eael-team-text-overlay' => 'background-color: {{VALUE}};',
 				],
-				'condition' => [
-					'eael_team_members_preset' => 'eael-team-members-overlay',
+				'conditions' => [
+					'relation' 	=> 'or',
+					'terms' 	=> [
+						[
+							'name' 	=> 'eael_team_members_preset',
+							'operator' => '=',
+							'value' => 'eael-team-members-overlay'
+						],
+						[
+							'name' 	=> 'eael_team_members_enable_text_overlay',
+							'operator' => '=',
+							'value' => 'yes'
+						]
+					]
 				],
 			]
 		);
@@ -361,6 +387,7 @@ class Team_Member extends Widget_Base {
 				'default' => '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-team-item .eael-team-content' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-team-item .eael-team-image .eael-team-text-overlay' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -613,6 +640,7 @@ class Team_Member extends Widget_Base {
 				'default' => '#272727',
 				'selectors' => [
 					'{{WRAPPER}} .eael-team-item .eael-team-content .eael-team-text' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-team-item .eael-team-image .eael-team-text.eael-team-text-overlay' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -621,7 +649,8 @@ class Team_Member extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
              'name' => 'eael_team_members_description_typography',
-				'selector' => '{{WRAPPER}} .eael-team-item .eael-team-content .eael-team-text',
+				'selector' => '{{WRAPPER}} .eael-team-item .eael-team-content .eael-team-text,
+								{{WRAPPER}} .eael-team-item .eael-team-image .eael-team-text.eael-team-text-overlay',
 			]
 		);
 
@@ -859,6 +888,12 @@ class Team_Member extends Widget_Base {
 		if( empty( $team_member_image_url ) ) : $team_member_image_url = $team_member_image['url']; else: $team_member_image_url = $team_member_image_url; endif;
 		$team_member_classes = $this->get_settings('eael_team_members_preset') . " " . $this->get_settings('eael_team_members_image_rounded');
 
+		$this->add_render_attribute( 'eael_team_text', 'class', 'eael-team-text' );
+
+		if ( isset( $settings['eael_team_members_enable_text_overlay'] ) && $settings['eael_team_members_enable_text_overlay'] == 'yes' ) {
+			$this->add_render_attribute( 'eael_team_text', 'class', 'eael-team-text-overlay' );
+		}
+
 	?>
 
 
@@ -871,6 +906,15 @@ class Team_Member extends Widget_Base {
 				<?php if( 'eael-team-members-social-right' === $settings['eael_team_members_preset'] ) : ?>
 					<?php do_action( 'eael/team_member_social_right_markup', $settings, $this ); ?>
 				<?php endif; ?>
+
+				<?php 
+					if ( isset( $settings['eael_team_members_enable_text_overlay'] ) && $settings['eael_team_members_enable_text_overlay'] == 'yes' ) {
+						?>
+						<p <?php echo $this->get_render_attribute_string('eael_team_text'); ?>><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_description']); ?></p>
+						<?php
+					}
+				?>
+
 			</div>
 
 			<div class="eael-team-content">
@@ -904,7 +948,7 @@ class Team_Member extends Widget_Base {
 							<?php endforeach; ?>
 						</ul>
 					<?php endif; ?>
-					<p class="eael-team-text"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_description']); ?></p>
+					<p <?php echo $this->get_render_attribute_string('eael_team_text'); ?>><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_description']); ?></p>
 				<?php endif; ?>
 			</div>
 		</div>
