@@ -1008,9 +1008,16 @@ trait Controls
             );
         }
 
-        if ( 'eael-post-carousel' === $wb->get_name() || 'eael-post-grid' === $wb->get_name() ) {
+        if ( 'eael-post-carousel' === $wb->get_name() 
+            || 'eael-post-grid' === $wb->get_name()
+            || 'eael-post-block' === $wb->get_name()
+            ) {
 
 	        $eael_show_post_terms_condition = ['eael_show_image' => 'yes']; //Applicable for both elements: Post Carousel and Post Grid
+
+            if( 'eael-post-block' === $wb->get_name() ){
+                $eael_show_post_terms_condition = [];
+            }
 
             $wb->add_control(
                 'eael_show_post_terms',
@@ -1025,6 +1032,10 @@ trait Controls
             );
 
             $eael_show_post_terms_child_condition = ['eael_show_image' => 'yes', 'eael_show_post_terms' => 'yes'];
+
+            if( 'eael-post-block' === $wb->get_name() ){
+                $eael_show_post_terms_child_condition = [ 'eael_show_post_terms' => 'yes' ];
+            }
 
 	        $post_types = ControlsHelper::get_post_types();
 	        unset(
