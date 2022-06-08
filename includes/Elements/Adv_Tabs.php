@@ -136,6 +136,19 @@ class Adv_Tabs extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_adv_tabs_default_active_tab',
+            [
+                'label' => esc_html__('Tab Auto Active?', 'essential-addons-for-elementor-lite'), 
+                'type' => Controls_Manager::SWITCHER,
+                'description' => esc_html__('If no tab is selected as default active tab, then we display first tab as active. Turn on/off this default behaviour.', 'essential-addons-for-elementor-lite'),
+                'default' => 'yes',
+                'return_value' => 'yes',
+                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
         $this->end_controls_section();
 
         /**
@@ -926,12 +939,13 @@ class Adv_Tabs extends Widget_Base
         $eael_adv_tab_content_id = 1;
         $tab_icon_migrated = isset($settings['__fa4_migrated']['eael_adv_tabs_tab_title_icon_new']);
         $tab_icon_is_new = empty($settings['eael_adv_tabs_tab_title_icon']);
+        $tab_auto_active =  'yes' === $settings['eael_adv_tabs_default_active_tab'] ? esc_attr('eael-tab-auto-active') : '';
 
         $this->add_render_attribute(
             'eael_tab_wrapper',
             [
                 'id' => "eael-advance-tabs-{$this->get_id()}",
-                'class' => ['eael-advance-tabs', $settings['eael_adv_tab_layout']],
+                'class' => ['eael-advance-tabs', $settings['eael_adv_tab_layout'], $tab_auto_active],
                 'data-tabid' => $this->get_id(),
             ]
         );
@@ -1028,6 +1042,7 @@ class Adv_Tabs extends Widget_Base
                     <?php endforeach; ?>
                 </ul>
             </div>
+            
             <div class="eael-tabs-content">
 		        <?php foreach ($settings['eael_adv_tabs_tab'] as $tab) :
 			        $eael_find_default_tab[] = $tab['eael_adv_tabs_tab_show_as_default'];
