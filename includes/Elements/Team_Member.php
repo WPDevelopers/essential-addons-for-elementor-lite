@@ -851,7 +851,6 @@ class Team_Member extends Widget_Base {
 
 	}
 
-
 	protected function render( ) {
 
         $settings = $this->get_settings_for_display();
@@ -870,7 +869,7 @@ class Team_Member extends Widget_Base {
 					<img src="<?php echo esc_url($team_member_image_url);?>" alt="<?php echo esc_attr( get_post_meta($team_member_image['id'], '_wp_attachment_image_alt', true) ); ?>">
 				</figure>
 				<?php if( 'eael-team-members-social-right' === $settings['eael_team_members_preset'] ) : ?>
-					<?php do_action('eael/team_member_social_right_markup', $settings); ?>
+					<?php do_action( 'eael/team_member_social_right_markup', $settings, $this ); ?>
 				<?php endif; ?>
 			</div>
 
@@ -879,17 +878,17 @@ class Team_Member extends Widget_Base {
 				<h4 class="eael-team-member-position"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_job_title']); ?></h4>
 
 				<?php if( 'eael-team-members-social-bottom' === $settings['eael_team_members_preset'] ) : ?>
-					<?php do_action('eael/team_member_social_botton_markup', $settings); ?>
+					<?php do_action( 'eael/team_member_social_botton_markup', $settings, $this ); ?>
 				<?php else: ?>
 					<?php if ( ! empty( $settings['eael_team_member_enable_social_profiles'] ) && 'eael-team-members-social-right' !== $settings['eael_team_members_preset'] ): ?>
 						<ul class="eael-team-member-social-profiles">
-							<?php foreach ( $settings['eael_team_member_social_profile_links'] as $item ) : ?>
+							<?php foreach ( $settings['eael_team_member_social_profile_links'] as $index => $item ) : ?>
 								<?php $icon_migrated = isset($item['__fa4_migrated']['social_new']);
 								$icon_is_new = empty($item['social']); ?>
 								<?php if ( ! empty( $item['social'] ) || !empty($item['social_new'])) : ?>
-									<?php $target = $item['link']['is_external'] ? ' target="_blank"' : ''; ?>
+									<?php $this->add_link_attributes( 'social_link_' . $index, $item['link'] ); ?>
 									<li class="eael-team-member-social-link">
-										<a href="<?php echo esc_attr( $item['link']['url'] ); ?>" <?php echo $target; ?>>
+										<a <?php $this->print_render_attribute_string( 'social_link_' . $index ); ?>>
 											<?php if ($icon_is_new || $icon_migrated) { ?>
 												<?php if( isset( $item['social_new']['value']['url'] ) ) : ?>
 													<img src="<?php echo esc_attr($item['social_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($item['social_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
