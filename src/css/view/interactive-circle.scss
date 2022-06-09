@@ -577,8 +577,13 @@
                 .eael-circle-inner {
                     .eael-circle-item {
                         .eael-circle-btn-content {
-                            width: calc(100% - 112px);
+                            width: calc(100% - 113px);
                             bottom: 6px;
+                            .eael-circle-content {
+                                @media only screen and (min-width: $breakpoint + 1) {
+                                    border: none !important;
+                                }
+                            }
                         }
                     }
                 }
