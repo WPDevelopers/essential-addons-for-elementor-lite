@@ -118,17 +118,22 @@ trait Login_Registration {
 		do_action( 'eael/login-register/before-login' );
 
 		$widget_id = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( $_POST['widget_id'] ) : '';
-		if ( isset( $_POST['g-recaptcha-enabled'] ) && ! $this->lr_validate_recaptcha() ) {
-			$err_msg = isset( $settings['err_recaptcha'] ) ? $settings['err_recaptcha'] : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
-			if ( $ajax ) {
-				wp_send_json_error( $err_msg );
-			}
-			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
+		//v2 or v3 
+		if ( isset( $_POST['g-recaptcha-enabled'] ) ) {
+			$ld_recaptcha_version = ( isset( $settings['login_recaptcha_version'] ) && 'v3' === $settings['login_recaptcha_version'] ) ? 'v3' : 'v2';
+			
+			if( ! $this->lr_validate_recaptcha($ld_recaptcha_version) ) {
+				$err_msg = isset( $settings['err_recaptcha'] ) ? $settings['err_recaptcha'] : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
+				if ( $ajax ) {
+					wp_send_json_error( $err_msg );
+				}
+				update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
 
-            if (isset($_SERVER['HTTP_REFERER'])) {
-                wp_safe_redirect($_SERVER['HTTP_REFERER']);
-                exit();
-            } // vail early if recaptcha failed
+				if (isset($_SERVER['HTTP_REFERER'])) {
+					wp_safe_redirect($_SERVER['HTTP_REFERER']);
+					exit();
+				} // fail early if recaptcha failed
+			}
 		}
 
 		$user_login = ! empty( $_POST['eael-user-login'] ) ? sanitize_text_field( $_POST['eael-user-login'] ) : '';
@@ -282,8 +287,13 @@ trait Login_Registration {
 		if ( isset( $_POST['eael_tnc_active'] ) && empty( $_POST['eael_accept_tnc'] ) ) {
 			$errors['terms_conditions'] =  isset( $settings['err_tc'] ) ? $settings['err_tc'] : __( 'You did not accept the Terms and Conditions. Please accept it and try again.', 'essential-addons-for-elementor-lite' );
 		}
-		if ( isset( $_POST['g-recaptcha-enabled'] ) && ! $this->lr_validate_recaptcha() ) {
-			$errors['recaptcha'] = isset( $settings['err_recaptcha'] ) ? $settings['err_recaptcha'] : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
+		//v2 or v3 
+		if ( isset( $_POST['g-recaptcha-enabled'] ) ) {
+			$ld_recaptcha_version = ( isset( $settings['register_recaptcha_version'] ) && 'v3' === $settings['register_recaptcha_version'] ) ? 'v3' : 'v2';
+			
+			if( ! $this->lr_validate_recaptcha($ld_recaptcha_version) ) {
+				$errors['recaptcha'] = isset( $settings['err_recaptcha'] ) ? $settings['err_recaptcha'] : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
+			}
 		}
 
 		if ( ! empty( $_POST['email'] ) && is_email( $_POST['email'] ) ) {
@@ -726,13 +736,13 @@ trait Login_Registration {
 		return preg_replace( $placeholders, $replacement, $message );
 	}
 
-	public function lr_validate_recaptcha() {
+	public function lr_validate_recaptcha($version = 'v2') {
 		if ( ! isset( $_REQUEST['g-recaptcha-response'] ) ) {
 			return false;
 		}
 		$endpoint = 'https://www.google.com/recaptcha/api/siteverify';
 		$data     = [
-			'secret'   => get_option( 'eael_recaptcha_secret' ),
+			'secret'   => 'v3' === $version ? get_option( 'eael_recaptcha_secret_v3' ) : get_option( 'eael_recaptcha_secret' ),
 			'response' => sanitize_text_field( $_REQUEST['g-recaptcha-response'] ),
 			'ip'       => $_SERVER['REMOTE_ADDR'],
 		];
