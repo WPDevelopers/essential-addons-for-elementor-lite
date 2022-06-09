@@ -433,8 +433,8 @@ trait Elements
                 $page_offset = !empty($settings_data['eael_ext_toc_main_page_offset']) ? $settings_data['eael_ext_toc_main_page_offset']['size'] : 0 ;
                 $close_bt_text_style = $settings_data['eael_ext_toc_close_button_text_style'];
                 $auto_collapse = $settings_data['eael_ext_toc_auto_collapse'];
-                $auto_highlight = $settings_data['eael_ext_toc_auto_highlight'];
-                $auto_highlight_single_item_only = $settings_data['eael_ext_toc_auto_highlight_single_item_only'];
+                $auto_highlight = !empty($settings_data['eael_ext_toc_auto_highlight']) ? $settings_data['eael_ext_toc_auto_highlight'] : '';
+                $auto_highlight_single_item_only = !empty($settings_data['eael_ext_toc_auto_highlight_single_item_only']) ? $settings_data['eael_ext_toc_auto_highlight_single_item_only'] : '';
                 $title_to_url = $settings_data['eael_ext_toc_use_title_in_url'];
                 $toc_style = $settings_data['eael_ext_table_of_content_list_style'];
                 $toc_word_wrap = $settings_data['eael_ext_toc_word_wrap'];

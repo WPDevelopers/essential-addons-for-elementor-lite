@@ -142,7 +142,7 @@
                                         <?php if( 'on' === get_option( 'eael_custom_profile_fields' ) ) : ?> checked <?php endif; ?>
                                         class="eael-form__control" type="checkbox">
                                 
-                                <label for="lr_custom_profile_fields" title="<?php esc_attr_e('Eanble extra custom fields on user profile. Fields will be available on edit profile page as well as EA Login | Register Form', 'essential-addons-for-elementor-lite') ?>" > <?php esc_html_e( 'Enable Custom Profile Fields', 'essential-addons-for-elementor-lite' ); ?> </label>
+                                <label for="lr_custom_profile_fields" title="<?php esc_attr_e('Eanble extra custom fields on user profile. Fields will be available on edit profile page as well as EA Login | Register Form', 'essential-addons-for-elementor-lite') ?>" > <?php esc_html_e( 'Enable Custom Fields', 'essential-addons-for-elementor-lite' ); ?> </label>
                             </div>
                         </div>
                     </div>
