@@ -12,6 +12,8 @@ ea.hooks.addAction("init", "ea", () => {
         const $regFormWrapper = $scope.find("#eael-register-form-wrapper");
         const regRcTheme = $regFormWrapper.data('recaptcha-theme');
         const regRcSize = $regFormWrapper.data('recaptcha-size');
+        const loginRecaptchaVersion = $wrap.data('login-recaptcha-version');
+        const registerRecaptchaVersion = $wrap.data('register-recaptcha-version');
         const $regLinkAction = $scope.find('#eael-lr-reg-toggle');
         const $loginLinkAction = $scope.find('#eael-lr-login-toggle');
         const $passField = $loginFormWrapper.find('#eael-user-password');
@@ -76,11 +78,24 @@ ea.hooks.addAction("init", "ea", () => {
                 });
             }
             if (registerRecaptchaNode) {
-                grecaptcha.render(registerRecaptchaNode, {
-                    'sitekey': recaptchaSiteKey,
-                    'theme': regRcTheme,
-                    'size': regRcSize,
-                });
+                if(registerRecaptchaVersion == 'v3'){
+                    grecaptcha.ready(function() {
+                        // do request for recaptcha token
+                        // response is promise with passed token
+                            grecaptcha.execute(recaptchaSiteKeyV3, {action:'eael-login-register-form'})
+                                      .then(function(token) {
+                                // add token value to form
+                                console.log(token);
+                                // document.getElementById('g-recaptcha-response').value = token;
+                            });
+                        });
+                }else {
+                    grecaptcha.render(registerRecaptchaNode, {
+                        'sitekey': recaptchaSiteKey,
+                        'theme': regRcTheme,
+                        'size': regRcSize,
+                    });
+                }
             }
         }
 
