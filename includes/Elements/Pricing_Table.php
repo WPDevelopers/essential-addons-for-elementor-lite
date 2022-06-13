@@ -1253,6 +1253,7 @@ class Pricing_Table extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-pricing-item .body ul li .li-icon img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-pricing-item .body ul li .li-icon svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-pricing-item .body ul li .li-icon i'   => 'font-size: {{SIZE}}{{UNIT}};',
                 ],
             ]
@@ -1274,7 +1275,7 @@ class Pricing_Table extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-pricing-item .body ul li .li-icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-pricing-item .body ul li .li-icon svg'   => 'font-size: {{SIZE}}{{UNIT}}; width: 1em; height: 1em;',
+                    '{{WRAPPER}} .eael-pricing-item .body ul li .li-icon svg'   => 'font-size: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -2119,9 +2120,9 @@ class Pricing_Table extends Widget_Base
                                 <?php if (isset($item['eael_pricing_table_list_icon_new']['value']['url'])) : ?>
                                     <?php Icons_Manager::render_icon( $item['eael_pricing_table_list_icon_new'], [ 'aria-hidden' => 'true' ] ); ?>
 <!--                                    <img src="--><?php //echo $item['eael_pricing_table_list_icon_new']['value']['url']; ?><!--" alt="--><?php //echo esc_attr(get_post_meta($item['eael_pricing_table_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?><!--" />-->
-                                <?php else : ?>
-                                    <i class="<?php echo $item['eael_pricing_table_list_icon_new']['value']; ?>"></i>
-                                <?php endif; ?>
+                                <?php else :
+                                    Icons_Manager::render_icon( $item['eael_pricing_table_list_icon_new'], [ 'aria-hidden' => 'true' ] );
+                                endif; ?>
                             <?php } else { ?>
                                 <i class="<?php echo $item['eael_pricing_table_list_icon']; ?>"></i>
                             <?php } ?>
