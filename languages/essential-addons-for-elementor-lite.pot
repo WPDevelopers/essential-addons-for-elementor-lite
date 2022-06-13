@@ -5239,7 +5239,7 @@ msgstr ""
 msgid "Target Blank"
 msgstr ""
 
-#: ../includes/Elements/Post_Grid.php:200, ../includes/Elements/Product_Grid.php:649, ../includes/Elements/Twitter_Feed.php:312, ../includes/Traits/Controls.php:1065, ../includes/Traits/Controls.php:1096, ../includes/Traits/Twitter_Feed.php:135
+#: ../includes/Elements/Post_Grid.php:200, ../includes/Elements/Product_Grid.php:649, ../includes/Elements/Twitter_Feed.php:312, ../includes/Traits/Controls.php:1065, ../includes/Traits/Controls.php:1096, ../includes/Traits/Twitter_Feed.php:139
 msgid "Read More"
 msgstr ""
 
@@ -8451,7 +8451,7 @@ msgstr ""
 msgid "Your registration completed successfully."
 msgstr ""
 
-#: ../includes/Traits/Twitter_Feed.php:127
+#: ../includes/Traits/Twitter_Feed.php:131
 msgid "%s ago"
 msgstr ""
 
@@ -9149,7 +9149,7 @@ msgid "Eanble extra custom fields on user profile. Fields will be available on e
 msgstr ""
 
 #: ../includes/templates/admin/popup.php:145
-msgid "Enable Custom Profile Fields"
+msgid "Enable Custom Fields"
 msgstr ""
 
 #: ../includes/templates/admin/popup.php:168
