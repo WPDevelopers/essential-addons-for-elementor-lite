@@ -190,19 +190,19 @@
                     break;
 
                 case "seconds":
-                    this.$seconds.text(this.seconds);
+                    this.$seconds.text( this.seconds < 10 ? "0" + this.seconds : this.seconds );
                     break;
 
                 case "minutes":
-                    this.$minutes.text(this.minutes);
+                    this.$minutes.text( this.minutes < 10 ? "0" + this.minutes : this.minutes );
                     break;
 
                 case "hours":
-                    this.$hours.text(this.hours);
+                    this.$hours.text( this.hours < 10 ? "0" + this.hours : this.hours );
                     break;
 
                 case "days":
-                    this.$days.text(this.days);
+                    this.$days.text( this.days < 10 ? "0" + this.days : this.days );
                     break;
 
                 // No default
@@ -218,7 +218,11 @@
         },
 
         getSecondsText: function () {
-            return this.active && this.defaults.fast ? (this.seconds + "." + this.deciseconds) : this.seconds;
+            if(this.seconds < 10) {
+                return this.active && this.defaults.fast ? ("0" + this.seconds + "." + this.deciseconds) : "0" + this.seconds;
+            }else {
+                return this.active && this.defaults.fast ? (this.seconds + "." + this.deciseconds) : this.seconds;
+            }
         }
     };
 
