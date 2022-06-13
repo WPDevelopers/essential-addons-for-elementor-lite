@@ -987,6 +987,19 @@ trait Controls
 				    ],
 			    ]
 		    );
+
+		    $wb->add_group_control(
+			    Group_Control_Image_Size::get_type(),
+			    [
+				    'name'      => 'image',
+				    'exclude'   => [ 'custom' ],
+				    'default'   => 'medium',
+				    'condition' => [
+					    'eael_show_image'              => 'yes',
+					    'eael_content_timeline_choose' => 'dynamic',
+				    ],
+			    ]
+		    );
 	    }
 
         $wb->add_control(
