@@ -4001,6 +4001,9 @@ class Login_Register extends Widget_Base {
                                            id="eael-login-submit"
                                            class="g-recaptcha eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>"
                                            value="<?php echo esc_attr( $btn_text ); ?>"/>
+									<div class="eael-lr-form-loader d-none">
+										<i class="eicon-spinner eicon-animation-spin"></i>
+									</div>
 									<?php if ( $show_reg_link ) { ?>
                                         <div class="eael-sign-wrapper <?php echo esc_attr( $link_align ); ?>">
 											<?php echo $reg_link; // XSS ok. already escaped ?>
@@ -4235,6 +4238,9 @@ class Login_Register extends Widget_Base {
                                        id="eael-register-submit"
                                        class="eael-lr-btn eael-lr-btn-block<?php echo esc_attr( $btn_align ); ?>"
                                        value="<?php echo esc_attr( $btn_text ); ?>"/>
+								<div class="eael-lr-form-loader d-none">
+									<i class="eicon-spinner eicon-animation-spin"></i>
+								</div>
 								<?php if ( $show_lgn_link ) { ?>
                                     <div class="eael-sign-wrapper  <?php echo esc_attr( $link_align ); ?>">
 										<?php echo $lgn_link; ?>
