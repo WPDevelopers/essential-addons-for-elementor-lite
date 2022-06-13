@@ -155,7 +155,7 @@ class Event_Calendar extends Widget_Base
         $repeater->add_control(
             'eael_event_link',
             [
-                'label'         => __('Link', 'essential-addons-for-elementor-lite'),
+                'label'         => __('Event Link', 'essential-addons-for-elementor-lite'),
                 'type'          => Controls_Manager::URL,
                 'dynamic'   => ['active' => true],
                 'placeholder'   => __('https://sample-domain.com', 'essential-addons-for-elementor-lite'),
@@ -166,10 +166,11 @@ class Event_Calendar extends Widget_Base
         $repeater->add_control(
             'eael_event_redirection',
             [
-                'label' => __('Redirect to Page', 'essential-addons-for-elementor-lite'),
+                'label' => __('Redirect to Event Link', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_block' => false,
                 'return_value' => 'yes',
+                'description' => __('The popup will not appear and you will be redirected to the Event Link page instead.', 'essential-addons-for-elementor-lite')
             ]
         );
 
