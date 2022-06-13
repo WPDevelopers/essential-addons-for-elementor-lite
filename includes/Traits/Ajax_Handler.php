@@ -838,12 +838,6 @@ trait Ajax_Handler {
 		if ( isset( $settings['lr_recaptcha_language'] ) ) {
 			update_option( 'eael_recaptcha_language', sanitize_text_field( $settings['lr_recaptcha_language'] ) );
 		}
-		
-		if ( isset( $settings['lr_custom_profile_fields'] ) ) {
-			update_option( 'eael_custom_profile_fields', sanitize_text_field( $settings['lr_custom_profile_fields'] ) );
-		} else {
-			update_option( 'eael_custom_profile_fields', '' );
-		}
 
 		//pro settings
 		if ( isset( $settings['lr_g_client_id'] ) ) {
