@@ -135,18 +135,6 @@
 
                     <div class="border__line"><span></span></div>
 
-                    <div class="modal__content">
-                        <div class="eael-login__setup">
-                            <div class="eael-input__inline1 mb15">
-                                <input name="lr_custom_profile_fields" id="lr_custom_profile_fields"
-                                        <?php if( 'on' === get_option( 'eael_custom_profile_fields' ) ) : ?> checked <?php endif; ?>
-                                        class="eael-form__control" type="checkbox">
-                                
-                                <label for="lr_custom_profile_fields" title="<?php esc_attr_e('Eanble extra custom fields on user profile. Fields will be available on edit profile page as well as EA Login | Register Form', 'essential-addons-for-elementor-lite') ?>" > <?php esc_html_e( 'Enable Custom Fields', 'essential-addons-for-elementor-lite' ); ?> </label>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <!-- <div class="border__line"><span></span></div> -->
                     <div class="modal__content">
                         <div class="eael__flex align__center justify__center">
