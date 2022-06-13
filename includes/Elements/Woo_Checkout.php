@@ -1542,6 +1542,25 @@ class Woo_Checkout extends Widget_Base {
 				],
 			]
 		);
+        $this->add_control(
+            'ea_woo_checkout_coupon_icon_size',
+            [
+                'label'       => __( 'Icon Size', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::SLIDER,
+                'default'     => ['size' => 16, 'unit'=>'px'],
+                'range'       => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .ea-woo-checkout .ea-coupon-icon svg' => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};line-height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-woo-checkout .ea-coupon-icon i' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 		$this->add_control(
 			'ea_woo_checkout_coupon_links_color',
 			[
