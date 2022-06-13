@@ -116,6 +116,7 @@ class Post_Duplicator {
 
 				$duplicate_insert_query = "INSERT INTO $wpdb->postmeta ( post_id, meta_key, meta_value ) VALUES ";
 				$insert = '';
+				delete_post_meta( $duplicated_id, '_elementor_template_type' );
 
 				foreach ( $post_meta as $meta_info ) {
 
