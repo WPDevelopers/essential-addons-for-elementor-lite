@@ -3996,13 +3996,16 @@ class Login_Register extends Widget_Base {
 
 
                                 <div class="eael-lr-footer">
-                                    <input type="submit"
+									<div class="eael-lr-form-loader-wrapper">
+                                    	<input type="submit"
                                            name="eael-login-submit"
                                            id="eael-login-submit"
                                            class="g-recaptcha eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>"
                                            value="<?php echo esc_attr( $btn_text ); ?>"/>
-									<div class="eael-lr-form-loader d-none">
-										<i class="eicon-spinner eicon-animation-spin"></i>
+										
+										<span class="eael-lr-form-loader d-none">
+											<i class="eicon-spinner eicon-animation-spin"></i>
+										</span>
 									</div>
 									<?php if ( $show_reg_link ) { ?>
                                         <div class="eael-sign-wrapper <?php echo esc_attr( $link_align ); ?>">
@@ -4233,13 +4236,16 @@ class Login_Register extends Widget_Base {
 							?>
 
                             <div class="eael-lr-footer">
-                                <input type="submit"
+								<div class="eael-lr-form-loader-wrapper">
+                                	<input type="submit"
                                        name="eael-register-submit"
                                        id="eael-register-submit"
                                        class="eael-lr-btn eael-lr-btn-block<?php echo esc_attr( $btn_align ); ?>"
                                        value="<?php echo esc_attr( $btn_text ); ?>"/>
-								<div class="eael-lr-form-loader d-none">
-									<i class="eicon-spinner eicon-animation-spin"></i>
+									
+									<span class="eael-lr-form-loader d-none">
+										<i class="eicon-spinner eicon-animation-spin"></i>
+									</span>
 								</div>
 								<?php if ( $show_lgn_link ) { ?>
                                     <div class="eael-sign-wrapper  <?php echo esc_attr( $link_align ); ?>">
