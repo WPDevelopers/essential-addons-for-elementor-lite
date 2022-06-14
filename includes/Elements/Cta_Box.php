@@ -786,6 +786,7 @@ class Cta_Box extends Widget_Base
 		    [
 			    'label' => esc_html__('Icon Size', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::SLIDER,
+                'default' => [ 'unit' => 'px', 'size' => 20 ],
 			    'range' => [
 				    'px' => [
 					    'max' => 50,
