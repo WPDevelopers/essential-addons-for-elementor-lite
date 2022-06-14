@@ -355,7 +355,7 @@ class Interactive_Circle extends Widget_Base {
 			[
 				'name'     => 'eael_interactive_circle_border',
 				'label'    => esc_html__( 'Border', 'essential-addons-for-elementor-lite' ),
-				'selector' => '{{WRAPPER}} .eael-circle-inner, {{WRAPPER}} .eael-circle-inner .eael-circle-item',
+				'selector' => '{{WRAPPER}} .eael-circle-inner, {{WRAPPER}} .eael-circle-responsive-view .eael-circle-inner .eael-circle-item',
 				'exclude'  => [ 'color' ],
 			]
 		);
@@ -366,7 +366,7 @@ class Interactive_Circle extends Widget_Base {
 				'label'     => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-circle-inner, {{WRAPPER}} .eael-circle-inner .eael-circle-item' => 'border-color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-inner, {{WRAPPER}} .eael-circle-responsive-view .eael-circle-inner .eael-circle-item' => 'border-color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -392,6 +392,18 @@ class Interactive_Circle extends Widget_Base {
 				'condition' => [
 					'eael_interactive_circle_preset' => 'eael-interactive-circle-preset-3'
 				],
+			]
+		);
+
+		$this->add_control(
+			'eael_interactive_circle_desktop_view',
+			[
+				'label'        	=> esc_html__( 'Desktop view for mobile', 'essential-addons-for-elementor-lite' ),
+				'type'         	=> Controls_Manager::SWITCHER,
+				'label_on' 		=> esc_html__( 'Enable', 'essential-addons-for-elementor-lite' ),
+				'label_off'		=> esc_html__( 'Disable', 'essential-addons-for-elementor-lite' ),
+				'default'      	=> '',
+				'return_value' 	=> 'yes',
 			]
 		);
 
@@ -728,7 +740,11 @@ class Interactive_Circle extends Widget_Base {
 			[
 				'name'     => 'eael_interactive_circle_content_border',
 				'label'    => esc_html__( 'Border', 'essential-addons-for-elementor-lite' ),
-				'selector' => '{{WRAPPER}} .eael-circle-content',
+				'selector' => '{{WRAPPER}} .eael-circle-responsive-view .eael-circle-content,
+				{{WRAPPER}} .eael-circle-desktop-view.eael-interactive-circle-preset-1 .eael-circle-btn-content,
+				{{WRAPPER}} .eael-circle-desktop-view.eael-interactive-circle-preset-2 .eael-circle-btn-content,
+				{{WRAPPER}} .eael-interactive-circle-preset-3 .eael-circle-content,
+				{{WRAPPER}} .eael-circle-desktop-view.eael-interactive-circle-preset-4 .eael-circle-content',
 			]
 		);
 
@@ -784,6 +800,9 @@ class Interactive_Circle extends Widget_Base {
 		$item_count     = count( $settings['eael_interactive_circle_item'] );
 		$show_btn_icon  = isset( $settings['eael_interactive_circle_btn_icon_show'] ) && 'yes' === $settings['eael_interactive_circle_btn_icon_show'];
 		$show_btn_title = isset( $settings['eael_interactive_circle_btn_text_show'] ) && 'yes' === $settings['eael_interactive_circle_btn_text_show'];
+		$mobile_view 	= isset( $settings['eael_interactive_circle_desktop_view'] ) && 'yes' === $settings['eael_interactive_circle_desktop_view'] ? 'eael-circle-desktop-view' : 'eael-circle-responsive-view';
+
+		$this->add_render_attribute( 'eael_circle_wrapper', 'class', $mobile_view );
 
 
 		?>

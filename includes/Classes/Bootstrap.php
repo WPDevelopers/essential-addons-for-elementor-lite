@@ -195,7 +195,7 @@ class Bootstrap
         add_action('init', [$this, 'login_or_register_user']);
         add_filter('wp_new_user_notification_email', array($this, 'new_user_notification_email'), 10, 3);
         add_filter('wp_new_user_notification_email_admin', array($this, 'new_user_notification_email_admin'), 10, 3);
-
+        
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'toc_rank_math_support']);
 
