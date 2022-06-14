@@ -59,7 +59,7 @@
 		}
 
 		if ( $data.class === "Essential_Addons_Elementor\\Pro\\Elements\\Dynamic_Filterable_Gallery" ) {
-			$('.dynamic-gallery-item-inner').each(function() {
+			$('.dynamic-gallery-item-inner', $scope).each(function() {
 				$exclude_ids.push($(this).data('itemid'));
 			});
 			
