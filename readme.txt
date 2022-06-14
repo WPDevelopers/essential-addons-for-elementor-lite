@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 5.1.4
+Stable tag: 5.1.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -241,6 +241,26 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.1.5 - 14/06/2022 =
+
+- Improved: EA Team Member | Added option to show description on hover
+- Improved: EA Event Calendar | Added option to use different colors for different events
+- Improved: EA Event Calendar | Added option to hide old events
+- Improved: EA Event Calendar | Added "Custom Event URL" option for individual events
+- Improved: EA Advanced Tabs | Added heading tags for Tab titles 
+- Improved: EA Advanced Accordion | Added icon controls when the tab expands
+- Improved: EA Tooltip | Added sticky option on the Top when scrolling down
+- Improved: EA Table of Contents | Added option to highlight current position
+- Improved: EA Pricing Table | Added controls to change the font styles of the tooltip
+- Fixed: EA Filterable Gallery | Load more not working properly for "Search & Filter" layout
+- Fixed: EA Post Grid | Dynamic option not working inside Elementor Theme Builder Search archive pages
+- Fixed: EA Woo Product Gallery | Showing blurry product images for Preset 4
+- Fixed: EA Team Member | Social Profile nofollow not working
+- Fixed: EA Advanced Tabs | Anchor link not working with Custom ID
+- Fixed: EA Data Table | Sorting not working when setting column span greater than 1 
+- Fixed: EA Interactive Circle | Turning into rectangle shape in responsive devices
+- Few minor bug fixes & improvements
 
 = 5.1.4 - 26/05/2022 =
 
