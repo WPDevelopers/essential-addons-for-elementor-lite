@@ -563,6 +563,13 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   position: relative;
 }
 
+.gallery-item-thumbnail-wrap.video_gallery_switch_on .gallery-item-thumbnail {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .video-popup,
 .video-popup-bg {
   position: absolute;

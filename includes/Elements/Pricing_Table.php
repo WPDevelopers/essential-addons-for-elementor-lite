@@ -1497,6 +1497,14 @@ class Pricing_Table extends Widget_Base
             ]
         );
 
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_pricing_table_tooltip_typography',
+                'selector' => '.tooltipster-base.tooltipster-sidetip .tooltipster-content',
+            ]
+        );
+
         $this->add_control(
             'eael_pricing_table_tooltip_bg_color',
             [
