@@ -1635,7 +1635,7 @@ if ('yes' == $settings['eael_show_infobox_clickable']): ?></a><?php endif;
         ?>
         <div <?php echo $this->get_render_attribute_string('infobox_content'); ?>>
             <?php if ( !empty( $settings['eael_infobox_title'] ) ): ?>
-                <<?php echo Helper::eael_validate_html_tag( $settings['eael_infobox_title_tag'] ); ?> class="title"><?php echo esc_html__($settings['eael_infobox_title']); ?></<?php echo Helper::eael_validate_html_tag( $settings['eael_infobox_title_tag'] ); ?>>
+                <<?php echo Helper::eael_validate_html_tag( $settings['eael_infobox_title_tag'] ); ?> class="title"><?php echo Helper::eael_wp_kses($settings['eael_infobox_title']); ?></<?php echo Helper::eael_validate_html_tag( $settings['eael_infobox_title_tag'] ); ?>>
             <?php
                 endif;
             if ('yes' == $settings['eael_show_infobox_content']): ?>
