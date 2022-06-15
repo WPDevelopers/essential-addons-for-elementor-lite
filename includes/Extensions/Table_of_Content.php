@@ -263,6 +263,38 @@ class Table_of_Content
         );
 
         $element->add_control(
+            'eael_ext_toc_auto_highlight',
+            [
+                'label' => __('TOC Auto Highlight', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => 'no',
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_ext_toc_auto_highlight_single_item_only',
+            [
+                'label' => __('Single or All Visible Headings?', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => 'yes',
+                'label_on' => __('Single', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('All', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'description' => __('If you select "Single", only the first visible heading will be highlighted. If you select "All", all visible headings will be highlighted.', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                    'eael_ext_toc_auto_highlight' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
             'eael_ext_toc_hide_in_mobile',
             [
                 'label' => __('Hide TOC in mobile', 'essential-addons-for-elementor-lite'),
