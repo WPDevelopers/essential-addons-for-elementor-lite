@@ -3403,7 +3403,7 @@ class Login_Register extends Widget_Base {
 
 		//Show spinner
 		$this->add_control( "{$button_type}_btn_show_spinner", [
-			'label'        => __( 'Show Spinner', 'essential-addons-for-elementor-lite' ),
+			'label'        => esc_html__( 'Show Spinner', 'essential-addons-for-elementor-lite' ),
 			'type'         => Controls_Manager::SWITCHER,
 			'return_value' => 'true',
 			'default'      => '',
@@ -3411,10 +3411,18 @@ class Login_Register extends Widget_Base {
 			'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 		] );
 
+		$this->add_control( "{$button_type}_btn_spinner_note", [
+			'type'            => Controls_Manager::RAW_HTML,
+			'content_classes' => 'elementor-descriptor',
+			'raw'             => esc_html__( 'In preview, Spinner is only visible after clicking on the button.', 'essential-addons-for-elementor-lite' ),
+			'condition'       => [
+				"{$button_type}_btn_show_spinner" => 'true',
+			],
+		] );
+
 		$this->add_control( "{$button_type}_btn_spinner_position", [
-			'label'     => __( 'Spinner Position', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Position', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::SLIDER,
-			'description' => __( 'Select the position of spinner - from right to left', 'essential-addons-for-elementor-lite' ),
 			'size_units' => [
 				'px',
 				'%',
@@ -3435,6 +3443,17 @@ class Login_Register extends Widget_Base {
 			],
 			'selectors' => [
 				"{{WRAPPER}} .eael-lr-form-loader-wrapper .eael-lr-form-loader.eael-lr-{$button_type}-form-loader" => 'right: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_control( "{$button_type}_btn_spinner_color", [
+			'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'condition' => [
+				"{$button_type}_btn_show_spinner" => 'true',
+			],
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-loader-wrapper .eael-lr-form-loader.eael-lr-{$button_type}-form-loader" => 'color: {{VALUE}};',
 			],
 		] );
 
@@ -4047,7 +4066,7 @@ class Login_Register extends Widget_Base {
                                            value="<?php echo esc_attr( $btn_text ); ?>"/>
 										
 										<?php if( !empty( $show_login_spinner ) && 'true' === $show_login_spinner ): ?>
-										<span class="eael-lr-form-loader eael-lr-login-form-loader d-none">
+										<span class="eael-lr-form-loader eael-lr-login-form-loader d-none<?php esc_attr_e($this->in_editor ? '-editor' : '') ?>">
 											<i class="eicon-spinner eicon-animation-spin"></i>
 										</span>
 										<?php endif; ?>
@@ -4293,7 +4312,7 @@ class Login_Register extends Widget_Base {
                                        value="<?php echo esc_attr( $btn_text ); ?>"/>
 										
 									<?php if( !empty( $show_register_spinner ) && 'true' === $show_register_spinner ): ?>
-									<span class="eael-lr-form-loader eael-lr-register-form-loader d-none">
+									<span class="eael-lr-form-loader eael-lr-register-form-loader d-none<?php esc_attr_e($this->in_editor ? '-editor' : '') ?>">
 										<i class="eicon-spinner eicon-animation-spin"></i>
 									</span>
 									<?php endif; ?>
