@@ -2980,7 +2980,7 @@ class Filterable_Gallery extends Widget_Base
             }
         }
 
-        if ($settings['eael_section_fg_full_image_action'] === 'link') {
+        if ( $settings['eael_section_fg_full_image_action'] === 'link' && ! empty( $item['link'] ) ) {
             static $ea_link_repeater_index = 0;
             $link_key = 'link_' . $ea_link_repeater_index++;
 
