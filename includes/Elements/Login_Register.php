@@ -3397,6 +3397,44 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'height: {{SIZE}}{{UNIT}};',
 			],
 		] );
+
+		//Show spinner
+		$this->add_control( "{$button_type}_btn_show_spinner", [
+			'label'        => __( 'Show Spinner', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'return_value' => 'true',
+			'default'      => '',
+			'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+		] );
+
+		$this->add_control( "{$button_type}_btn_spinner_position", [
+			'label'     => __( 'Spinner Position', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::SLIDER,
+			'description' => __( 'Select the position of spinner - from right to left', 'essential-addons-for-elementor-lite' ),
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+				],
+				'%'  => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'condition' => [
+				"{$button_type}_btn_show_spinner" => 'true',
+			],
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-loader-wrapper .eael-lr-form-loader.eael-lr-{$button_type}-form-loader" => 'right: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
 		$this->end_controls_section();
 	}
 
@@ -3899,6 +3937,8 @@ class Login_Register extends Widget_Base {
 			// input icons
 			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_login_icon'] ) && 'yes' === $this->ds['show_login_icon'] );
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
+
+			$show_login_spinner  = !empty( $this->ds['login_btn_show_spinner'] ) ? $this->ds['login_btn_show_spinner'] : '';
 			?>
             <section
                     id="eael-login-form-wrapper"
@@ -4003,9 +4043,12 @@ class Login_Register extends Widget_Base {
                                            class="g-recaptcha eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>"
                                            value="<?php echo esc_attr( $btn_text ); ?>"/>
 										
-										<span class="eael-lr-form-loader d-none">
+										<?php if( !empty( $show_login_spinner ) && 'true' === $show_login_spinner ): ?>
+										<span class="eael-lr-form-loader eael-lr-login-form-loader d-none">
 											<i class="eicon-spinner eicon-animation-spin"></i>
 										</span>
+										<?php endif; ?>
+
 									</div>
 									<?php if ( $show_reg_link ) { ?>
                                         <div class="eael-sign-wrapper <?php echo esc_attr( $link_align ); ?>">
@@ -4078,6 +4121,8 @@ class Login_Register extends Widget_Base {
 			$lgn_message          = array_shift( $parts );
 			$lgn_link_placeholder = '<span class="d-ib">%1$s</span> <a href="%2$s" id="eael-lr-login-toggle" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
 			$lgn_url              = $lgn_atts = '';
+
+			$show_register_spinner  = !empty( $this->ds['register_btn_show_spinner'] ) ? $this->ds['register_btn_show_spinner'] : '';
 
 			switch ( $lgn_link_action ) {
 				case 'custom':
@@ -4242,10 +4287,13 @@ class Login_Register extends Widget_Base {
                                        id="eael-register-submit"
                                        class="eael-lr-btn eael-lr-btn-block<?php echo esc_attr( $btn_align ); ?>"
                                        value="<?php echo esc_attr( $btn_text ); ?>"/>
-									
-									<span class="eael-lr-form-loader d-none">
+										
+									<?php if( !empty( $show_register_spinner ) && 'true' === $show_register_spinner ): ?>
+									<span class="eael-lr-form-loader eael-lr-register-form-loader d-none">
 										<i class="eicon-spinner eicon-animation-spin"></i>
 									</span>
+									<?php endif; ?>
+
 								</div>
 								<?php if ( $show_lgn_link ) { ?>
                                     <div class="eael-sign-wrapper  <?php echo esc_attr( $link_align ); ?>">
