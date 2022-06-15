@@ -3413,7 +3413,7 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( "{$button_type}_btn_spinner_note", [
 			'type'            => Controls_Manager::RAW_HTML,
-			'content_classes' => 'elementor-descriptor',
+			'content_classes' => 'elementor-control-raw-html elementor-panel-alert elementor-panel-alert-info',
 			'raw'             => esc_html__( 'In preview, Spinner is only visible after clicking on the button.', 'essential-addons-for-elementor-lite' ),
 			'condition'       => [
 				"{$button_type}_btn_show_spinner" => 'true',
