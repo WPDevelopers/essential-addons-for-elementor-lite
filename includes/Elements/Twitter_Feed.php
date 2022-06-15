@@ -247,9 +247,9 @@ class Twitter_Feed extends Widget_Base
         );
 
         $this->add_control(
-            'eael_twitter_feed_media',
+            'eael_twitter_feed_show_replies',
             [
-                'label' => esc_html__('Show Media Elements', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Show Replies', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('yes', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('no', 'essential-addons-for-elementor-lite'),
@@ -320,6 +320,18 @@ class Twitter_Feed extends Widget_Base
             'eael_twitter_feed_show_icon',
             [
                 'label' => esc_html__('Show Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('no', 'essential-addons-for-elementor-lite'),
+                'default' => 'true',
+                'return_value' => 'true',
+            ]
+        );
+
+        $this->add_control(
+            'eael_twitter_feed_media',
+            [
+                'label' => esc_html__('Show Media', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('yes', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('no', 'essential-addons-for-elementor-lite'),
