@@ -1478,9 +1478,11 @@ class Caldera_Forms extends Widget_Base
 
     protected function render()
     {
-        if (!class_exists('\Caldera_Forms')) {
-            return;
-        }
+	    if ( ! class_exists( '\Caldera_Forms' ) ) {
+		    printf( '<center>%s</center>', __( 'This plugin has been closed as of April 5, 2022 and is not available for download. You can try the other Form plugins instead', 'essential-addons-for-elementor-lite' ) );
+
+		    return;
+	    }
 
         $settings = $this->get_settings_for_display();
 
