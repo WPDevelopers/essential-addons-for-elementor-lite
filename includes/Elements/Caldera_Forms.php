@@ -60,25 +60,7 @@ class Caldera_Forms extends Widget_Base
         /*-----------------------------------------------------------------------------------*/
         /*    Content Tab
         /*-----------------------------------------------------------------------------------*/
-        if (!class_exists('\Caldera_Forms')) {
-            $this->start_controls_section(
-                'eael_global_warning',
-                [
-                    'label' => __('Warning!', 'essential-addons-for-elementor-lite'),
-                ]
-            );
-
-            $this->add_control(
-                'eael_global_warning_text',
-                [
-                    'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('<strong>Caldera Forms</strong> is not installed/activated on your site. Please install and activate <strong>Caldera Forms</strong> first.', 'essential-addons-for-elementor-lite'),
-                    'content_classes' => 'eael-warning',
-                ]
-            );
-
-            $this->end_controls_section();
-        } else {
+	    if ( class_exists( '\Caldera_Forms' ) ) {
             /**
              * Content Tab: Caldera Forms
              * -------------------------------------------------
