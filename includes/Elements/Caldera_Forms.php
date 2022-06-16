@@ -60,7 +60,9 @@ class Caldera_Forms extends Widget_Base
         /*-----------------------------------------------------------------------------------*/
         /*    Content Tab
         /*-----------------------------------------------------------------------------------*/
-	    if ( class_exists( '\Caldera_Forms' ) ) {
+	    if ( ! class_exists( '\Caldera_Forms' ) ) {
+		    return;
+	    } else {
             /**
              * Content Tab: Caldera Forms
              * -------------------------------------------------
