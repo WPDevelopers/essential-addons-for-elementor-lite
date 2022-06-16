@@ -3402,60 +3402,15 @@ class Login_Register extends Widget_Base {
 		] );
 
 		//Show spinner
-		$this->add_control( "{$button_type}_btn_show_spinner", [
-			'label'        => esc_html__( 'Show Spinner', 'essential-addons-for-elementor-lite' ),
-			'type'         => Controls_Manager::SWITCHER,
-			'return_value' => 'true',
-			'default'      => '',
-			'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-			'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-		] );
-
-		$this->add_control( "{$button_type}_btn_spinner_note", [
-			'type'            => Controls_Manager::RAW_HTML,
-			'content_classes' => 'elementor-control-raw-html elementor-panel-alert elementor-panel-alert-info',
-			'raw'             => esc_html__( 'In preview, Spinner is only visible after clicking on the button.', 'essential-addons-for-elementor-lite' ),
-			'condition'       => [
-				"{$button_type}_btn_show_spinner" => 'true',
-			],
-		] );
-
-		$this->add_control( "{$button_type}_btn_spinner_position", [
-			'label'     => __( 'Position', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::SLIDER,
-			'size_units' => [
-				'px',
-				'%',
-			],
-			'range'      => [
-				'px' => [
-					'min'  => 0,
-					'max'  => 100,
-					'step' => 1,
-				],
-				'%'  => [
-					'min' => 0,
-					'max' => 100,
-				],
-			],
-			'condition' => [
-				"{$button_type}_btn_show_spinner" => 'true',
-			],
-			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-loader-wrapper .eael-lr-form-loader.eael-lr-{$button_type}-form-loader" => 'right: {{SIZE}}{{UNIT}};',
-			],
-		] );
-
-		$this->add_control( "{$button_type}_btn_spinner_color", [
-			'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::COLOR,
-			'condition' => [
-				"{$button_type}_btn_show_spinner" => 'true',
-			],
-			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-loader-wrapper .eael-lr-form-loader.eael-lr-{$button_type}-form-loader" => 'color: {{VALUE}};',
-			],
-		] );
+		do_action( "eael/login-register/after-init-{$button_type}-button-style", $this, $button_type );
+		
+		if ( !$this->pro_enabled ) {
+			$this->add_control( "{$button_type}_btn_show_spinner", [
+				'label'   => sprintf( __( 'Show Spinner %s', 'essential-addons-for-elementor-lite' ), '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
+				'type'    => Controls_Manager::SWITCHER,
+				'classes' => 'eael-pro-control',
+			] );
+		}
 
 		$this->end_controls_section();
 	}
