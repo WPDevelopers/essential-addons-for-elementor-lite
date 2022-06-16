@@ -1203,6 +1203,13 @@ class Login_Register extends Widget_Base {
 			'default' => 'yes',
 		] );
 
+		$this->add_control( 'show_custom_fields', [
+			'label'   => __( 'Show Custom Fields', 'essential-addons-for-elementor-lite' ),
+			'description' => __( 'Enabling this will add extra field types (e.x. Phone) to the above repeater', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::SWITCHER,
+			'default' => '',
+		] );
+
 		$this->add_control( 'mark_required', [
 			'label'     => __( 'Show Required Mark', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::SWITCHER,
@@ -3832,6 +3839,12 @@ class Login_Register extends Widget_Base {
 		if ( ! empty( $this->ds['redirect_after_login'] ) && 'yes' === $this->ds['redirect_after_login'] ) {
 			$login_redirect_url = !empty( $this->ds[ 'redirect_url' ][ 'url' ] ) ? esc_url( $this->ds[ 'redirect_url' ][ 'url' ] ) : '';
 		}
+
+		// if ( ! empty( $this->ds['lr_custom_profile_fields'] ) && 'on' === $this->ds['lr_custom_profile_fields'] ) {
+		// 	update_option( 'eael_custom_profile_fields', sanitize_text_field( $this->ds['lr_custom_profile_fields'] ) );
+		// } else {
+		// 	update_option( 'eael_custom_profile_fields', '' );
+		// }
 		?>
         <div class="eael-login-registration-wrapper <?php echo empty( $form_image_id ) ? '' : esc_attr( 'has-illustration' ); ?>"
              data-is-ajax="<?php echo esc_attr( $this->get_settings_for_display( 'enable_ajax' ) ); ?>"
