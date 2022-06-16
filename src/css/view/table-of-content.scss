@@ -169,6 +169,10 @@ html {
 				}
 			}
 
+			.eael-toc-link.eael-highlight-active:first-child{
+				color: #ff7d50;
+			}
+
 			// list-style - bullet
 			&.eael-toc-bullet {
 				li {
