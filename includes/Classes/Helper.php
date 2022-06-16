@@ -1173,6 +1173,11 @@ class Helper
                 'id' => [],
                 'style' => [],
             ],
+            'center' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+            ],
         ];
     }
 

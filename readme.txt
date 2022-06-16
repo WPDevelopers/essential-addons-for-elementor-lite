@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 5.1.5
+Stable tag: 5.1.6
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -241,6 +241,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.1.6 - 15/06/2022 =
+
+- Fixed: EA Info Box | HTML tag not working inside Infobox Title
+- Fixed: EA Flip Box | <div> tag being closed incorrectly
+- Few minor bug fixes & improvements
 
 = 5.1.5 - 14/06/2022 =
 
