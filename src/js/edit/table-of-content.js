@@ -114,6 +114,32 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 		}
 	);
 
+	elementor.settings.page.addChangeCallback(
+		"eael_ext_toc_auto_highlight",
+		function (newValue) {
+			let tocList = jQuery("#eael-toc-list");
+			if (newValue === "yes") {
+				tocList.addClass("eael-toc-auto-highlight");
+			} else {
+				tocList.removeClass("eael-toc-auto-highlight");
+			}
+		}
+	);
+
+	elementor.settings.page.addChangeCallback(
+		"eael_ext_toc_auto_highlight_single_item_only",
+		function (newValue) {
+			let tocList = jQuery("#eael-toc-list");
+			if (newValue === "yes") {
+				if(tocList.hasClass("eael-toc-auto-highlight")){
+					tocList.addClass("eael-toc-highlight-single-item");
+				}
+			} else {
+				tocList.removeClass("eael-toc-highlight-single-item");
+			}
+		}
+	);
+
 	elementor.settings.page.addChangeCallback("eael_ext_toc_title", function (
 		newValue
 	) {
