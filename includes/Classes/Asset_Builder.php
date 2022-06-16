@@ -45,7 +45,9 @@ class Asset_Builder {
 		$this->elements_manager->js_print_method  = $this->js_print_method = get_option( 'eael_js_print_method' );
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
-		add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ] );
+		add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'ea_before_enqueue_styles' ] );
+		add_action( 'elementor/theme/register_locations', [ $this, 'post_asset_load_test' ],100 );
+		//add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ] );
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
 		add_action( 'wp_footer', [ $this, 'add_inline_css' ],15 );
 		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ], 10, 2 );
@@ -194,13 +196,13 @@ class Asset_Builder {
 		wp_localize_script( $handle, 'localize', $this->localize_objects );
 	}
 
-	public function post_asset_load( Post_CSS $css ) {
+	public function ea_before_enqueue_styles() {
 
 		if ( $this->is_edit() ) {
 			return false;
 		}
 
-		$this->post_id = $css->get_post_id();
+		$this->post_id = get_the_ID();
 		$this->set_main_page( $this->post_id );
 		$this->elements_manager->get_element_list( $this->post_id );
 		$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
@@ -213,6 +215,31 @@ class Asset_Builder {
 
 		if ( ! $this->main_page ) {
 			$this->load_custom_js( $this->post_id );
+		}
+	}
+
+	public function post_asset_load_test( $test ){
+		$locations = $test->get_locations();
+		foreach ( $locations as $location => $settings ) {
+			//error_log(print_r($location,1));
+			$documents = \ElementorPro\Modules\ThemeBuilder\Module::instance()->get_conditions_manager()->get_documents_for_location( $location );
+			foreach ( $documents as $document ) {
+				$post_id = $document->get_post()->ID;
+				$this->post_id = $post_id;
+				$this->set_main_page( $this->post_id );
+				$this->elements_manager->get_element_list( $this->post_id );
+				$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
+
+				if ( ! empty( $elements ) ) {
+					do_action( 'eael/before_enqueue_styles', $elements );
+					do_action( 'eael/before_enqueue_scripts', $elements );
+					$this->enqueue_asset( $this->post_id, $elements );
+				}
+
+				if ( ! $this->main_page ) {
+					$this->load_custom_js( $this->post_id );
+				}
+			}
 		}
 	}
 
