@@ -2032,15 +2032,15 @@ class Event_Calendar extends Widget_Base
             unset($arg['calendar_id']);
         }
 
-        if (empty($data)) {
-            $data = wp_remote_retrieve_body(wp_remote_get(add_query_arg($arg, $base_url)));
-            $check_error = json_decode($data);
+	    if ( empty( $data ) ) {
+		    $data        = wp_remote_retrieve_body( wp_remote_get( esc_url( add_query_arg( $arg, $base_url ) ) ) );
+		    $check_error = json_decode( $data );
 
-	        if(!empty($check_error->error)){
-	        	return [];
-	        }
-            set_transient($transient_key, $data, $settings['eael_event_calendar_data_cache_limit'] * MINUTE_IN_SECONDS);
-        }
+		    if ( ! empty( $check_error->error ) ) {
+			    return [];
+		    }
+		    set_transient( $transient_key, $data, $settings['eael_event_calendar_data_cache_limit'] * MINUTE_IN_SECONDS );
+	    }
 
 	    $calendar_data = [];
         $data = json_decode($data);
