@@ -10,7 +10,6 @@ use Essential_Addons_Elementor\Traits\Admin;
 use Essential_Addons_Elementor\Traits\Core;
 use Essential_Addons_Elementor\Traits\Elements;
 use Essential_Addons_Elementor\Traits\Enqueue;
-use Essential_Addons_Elementor\Traits\Generator;
 use Essential_Addons_Elementor\Traits\Helper;
 use Essential_Addons_Elementor\Traits\Library;
 use Essential_Addons_Elementor\Traits\Login_Registration;
@@ -24,7 +23,6 @@ class Bootstrap
     use Library;
     use Core;
     use Helper;
-    use Generator;
     use Enqueue;
     use Admin;
     use Elements;
