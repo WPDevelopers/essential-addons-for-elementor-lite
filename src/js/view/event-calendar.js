@@ -201,7 +201,7 @@ var EventCalendar = function ($scope, $) {
 						startSelector.html('<i class="eicon-calendar"></i> ' + startView);
 						
 						$(".eaelec-modal-header h2").html(event.title);
-						$(".eaelec-modal-body p").html(event.extendedProps.description);
+						$(".eaelec-modal-body").html(event.extendedProps.description);
 						if (event.extendedProps.description.length < 1) {
 							$(".eaelec-modal-body").css("height", "auto");
 						} else {
