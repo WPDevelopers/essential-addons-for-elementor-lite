@@ -324,7 +324,7 @@ class Login_Register extends Widget_Base {
 			'dynamic'     => [
 				'active' => true,
 			],
-			'default'     => __( 'Forgot password?', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( 'Forgot Password?', 'essential-addons-for-elementor-lite' ),
 			'condition'   => [
 				'show_lost_password' => 'yes',
 			],
@@ -3140,11 +3140,11 @@ class Login_Register extends Widget_Base {
 		//Forget Password Style
 		$this->add_control( 'eael_form_forget_pass_fields_heading', [
 			'type'      => Controls_Manager::HEADING,
-			'label'     => __( 'Forget Password', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Forgot Password', 'essential-addons-for-elementor-lite' ),
 			'separator' => 'before',
 		] );
 		$this->add_control( 'forget_pass_style_pot', [
-			'label'        => __( 'Forget Password Style', 'essential-addons-for-elementor-lite' ),
+			'label'        => __( 'Forgot Password Style', 'essential-addons-for-elementor-lite' ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
 			'label_off'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
 			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
@@ -3261,9 +3261,9 @@ class Login_Register extends Widget_Base {
 
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-			'label'    => __( 'Forget Password Typography', 'essential-addons-for-elementor-lite' ),
+			'label'    => __( 'Forgot Password Typography', 'essential-addons-for-elementor-lite' ),
 			'name'     => "eael_forget_pass_label_typography",
-			'selector' => "{{WRAPPER}} .lr-form-wrapper .forget-pass",
+			'selector' => "{{WRAPPER}} .lr-form-wrapper .forget-pass a",
 		] );
 		$this->end_controls_section();
 	}
@@ -4013,7 +4013,7 @@ class Login_Register extends Widget_Base {
 
 			//Loss password
 			$show_lp = ( ! empty( $this->ds['show_lost_password'] ) && 'yes' === $this->ds['show_lost_password'] );
-			$lp_text = ! empty( $this->ds['lost_password_text'] ) ? HelperCLass::eael_wp_kses($this->ds['lost_password_text']) : __( 'Forgot password?', 'essential-addons-for-elementor-lite' );
+			$lp_text = ! empty( $this->ds['lost_password_text'] ) ? HelperCLass::eael_wp_kses($this->ds['lost_password_text']) : __( 'Forgot Password?', 'essential-addons-for-elementor-lite' );
 			$lp_link = sprintf( '<a href="%s">%s</a>', esc_attr( wp_lostpassword_url() ), $lp_text );
 			if ( ! empty( $this->ds['lost_password_link_type'] ) && 'custom' === $this->ds['lost_password_link_type'] ) {
 				$lp_url  = ! empty( $this->ds['lost_password_url']['url'] ) ? $this->ds['lost_password_url']['url'] : wp_lostpassword_url();
