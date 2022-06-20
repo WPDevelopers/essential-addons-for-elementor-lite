@@ -14,25 +14,25 @@ class Asset_Builder {
 
 	use Library;
 
-	public $post_id;
+	protected $post_id;
 
-	public $custom_js = '';
+	protected $custom_js = '';
 
-	public $css_strings = '';
+	protected $css_strings = '';
 
-	public $elements_manager;
+	protected $elements_manager;
 
-	public $css_print_method = '';
+	protected $css_print_method = '';
 
-	public $js_print_method = '';
+	protected $js_print_method = '';
 
-	public $registered_elements;
+	protected $registered_elements;
 
-	public $registered_extensions;
+	protected $registered_extensions;
 
-	public $localize_objects;
+	protected $localize_objects;
 
-	public $custom_js_enable;
+	protected $custom_js_enable;
 
 	protected $main_page;
 
@@ -44,16 +44,20 @@ class Asset_Builder {
 		$this->elements_manager->css_print_method = $this->css_print_method = get_option( 'elementor_css_print_method' );
 		$this->elements_manager->js_print_method  = $this->js_print_method = get_option( 'eael_js_print_method' );
 
+		$this->init_hook();
+
+		$this->custom_js_enable = $this->get_settings( 'custom-js' );
+
+	}
+
+	protected function init_hook(){
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
 		add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'ea_before_enqueue_styles' ] );
-		add_action( 'elementor/theme/register_locations', [ $this, 'post_asset_load_test' ],100 );
+		add_action( 'elementor/theme/register_locations', [ $this, 'post_asset_load' ],100 );
 		//add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ] );
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
 		add_action( 'wp_footer', [ $this, 'add_inline_css' ],15 );
 		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ], 10, 2 );
-
-		$this->custom_js_enable = $this->get_settings( 'custom-js' );
-
 	}
 
 	public function add_inline_js() {
@@ -218,10 +222,9 @@ class Asset_Builder {
 		}
 	}
 
-	public function post_asset_load_test( $test ){
+	public function post_asset_load( $test ){
 		$locations = $test->get_locations();
 		foreach ( $locations as $location => $settings ) {
-			//error_log(print_r($location,1));
 			$documents = \ElementorPro\Modules\ThemeBuilder\Module::instance()->get_conditions_manager()->get_documents_for_location( $location );
 			foreach ( $documents as $document ) {
 				$post_id = $document->get_post()->ID;

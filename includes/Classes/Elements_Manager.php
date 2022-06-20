@@ -12,15 +12,15 @@ use Essential_Addons_Elementor\Traits\Library;
 class Elements_Manager {
 	use Library;
 
-	public $post_id;
-
 	const ELEMENT_KEY = '_eael_widget_elements';
 
 	const JS_KEY = '_eael_custom_js';
 
-	public $registered_elements;
+	protected $post_id;
 
-	public $registered_extensions;
+	protected $registered_elements;
+
+	protected $registered_extensions;
 
 	public function __construct( $registered_elements, $registered_extensions ) {
 		$this->registered_elements   = $registered_elements;
