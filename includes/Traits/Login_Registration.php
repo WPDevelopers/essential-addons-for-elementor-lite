@@ -316,6 +316,7 @@ trait Login_Registration {
 			$password               = wp_generate_password();
 			$is_pass_auto_generated = true;
 		}
+
 		if ( isset( $_POST['confirm_pass'] ) ) {
 			$confirm_pass = sanitize_text_field( $_POST['confirm_pass'] );
 			if ( $confirm_pass !== $password ) {
@@ -323,6 +324,8 @@ trait Login_Registration {
 			}
 		}
 
+		$errors = apply_filters( 'eael/login-register/register-user-password-validation', $errors, $settings, $password );
+		
 		// if any error found, abort
 		if ( ! empty( $errors ) ) {
 			if ( $ajax ) {
