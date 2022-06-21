@@ -116,12 +116,15 @@ class Post_Duplicator {
 
 				$duplicate_insert_query = "INSERT INTO $wpdb->postmeta ( post_id, meta_key, meta_value ) VALUES ";
 				$insert = '';
-				delete_post_meta( $duplicated_id, '_elementor_template_type' );
 
 				foreach ( $post_meta as $meta_info ) {
 
 					$meta_key      = sanitize_text_field( $meta_info->meta_key );
 					$meta_value    =  $meta_info->meta_value;
+
+					if ( $meta_key === '_elementor_template_type' ) {
+						delete_post_meta( $duplicated_id, '_elementor_template_type' );
+					}
 
 					if ( ! empty( $insert ) ) {
 						$insert .= ', ';
