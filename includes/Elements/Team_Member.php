@@ -828,7 +828,8 @@ class Team_Member extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ad8647',
 				'selectors' => [
-					'{{WRAPPER}} .eael-team-member-social-link > a:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-team-member-social-link > a:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-team-member-social-link > a:hover svg' => 'fill: {{VALUE}};',
 				],
 			]
 		);
