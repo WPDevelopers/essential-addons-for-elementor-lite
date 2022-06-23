@@ -996,8 +996,8 @@ class Adv_Accordion extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header .fa-toggle'  => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header .fa-toggle-svg svg'  => 'color: {{VALUE}}; fill: {{VALUE}};',
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header svg.fa-toggle-svg'  => 'fill: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header .fa-toggle svg'  => 'color: {{VALUE}}; fill: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header svg.fa-toggle'  => 'fill: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_accordion_icon_show' => 'yes',
