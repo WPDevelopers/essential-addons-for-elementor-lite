@@ -73,7 +73,7 @@ jQuery(window).on("elementor/frontend/init", function () {
       if( autoplay ) {
         configForAutoPlay = {
           storage: { enabled: false, key: 'plyr' },
-          muted: false,
+          muted: true,
           autoplay: true,
           volume: 0
         };
