@@ -802,7 +802,7 @@ class Sticky_Video extends Widget_Base
 
         $am = '';
         $am .= ($autoplay == 'yes' ? '"autoplay":1' : '"autoplay":0');
-        $am .= ($mute == 'yes' ? ', "muted":1' : ', "muted":0');
+        $am .= ($mute == 'yes' ? '; "muted":1' : ', "muted":0');
 
         if ('yes' == $loop) {
             $lp = '"loop": {"active": true}';
