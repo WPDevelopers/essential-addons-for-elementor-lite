@@ -68,8 +68,18 @@ jQuery(window).on("elementor/frontend/init", function () {
       scrollHeight = element.data("scroll_height");
 
       PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
+      
+      let configForAutoPlay = {};
+      if( autoplay ) {
+        configForAutoPlay = {
+          storage: { enabled: false, key: 'plyr' },
+          muted: false,
+          autoplay: true,
+          volume: 0
+        };
+      }
 
-      var playerAbc = new Plyr("#eaelsv-player-" + $scope.data("id"));
+      var playerAbc = new Plyr( "#eaelsv-player-" + $scope.data("id"), configForAutoPlay );
 
       // If element is Sticky video
       if (overlay === "no") {
