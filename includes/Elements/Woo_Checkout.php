@@ -73,6 +73,13 @@ class Woo_Checkout extends Widget_Base {
 	public function get_keywords() {
 		return [ 'ea woo checkout', 'woocommerce', 'checkout', 'woocommerce checkout', 'woocommerce split checkout', 'split checkout', 'multi steps checkout', 'ea', 'essential addons' ];
 	}
+    
+    public function get_style_depends() {
+        return [
+            'font-awesome-5-all',
+            'font-awesome-4-shim',
+        ];
+    }
 
 	public function get_custom_help_url() {
 		return 'https://essential-addons.com/elementor/docs/woo-checkout/';
