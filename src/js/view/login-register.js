@@ -5,6 +5,7 @@ ea.hooks.addAction("init", "ea", () => {
         const widgetId = $wrap.data('widget-id');
         const recaptchaSiteKey = $wrap.data('recaptcha-sitekey');
         const recaptchaSiteKeyV3 = $wrap.data('recaptcha-sitekey-v3');
+        const isProAndAjaxEnabled = typeof $wrap.data('is-ajax') !== 'undefined' && $wrap.data('is-ajax') == 'yes';
         const loggedInLocation = $scope.find('[data-logged-in-location]').data('logged-in-location');
         const $loginFormWrapper = $scope.find("#eael-login-form-wrapper");
         const loginRcTheme = $loginFormWrapper.data('recaptcha-theme');
@@ -61,18 +62,24 @@ ea.hooks.addAction("init", "ea", () => {
             }
         });
 
-        // trigger recaptcha v3 when register form is submitted
         $('form input[type="submit"]', $scope).on('click', function (e) {
-            if (recaptchaAvailable && registerRecaptchaVersion === 'v3') {
-                grecaptcha.execute(recaptchaSiteKeyV3, { 
-                    action: 'eael_login_register_form' 
-                }).then(function (token) {
-                    if ($('form input[name="g-recaptcha-response"]', $scope).length === 0) {
-                        $('form', $scope).append('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
-                    } else {
-                        $('form input[name="g-recaptcha-response"]', $scope).val(token);
-                    }
-                });
+            if(!isProAndAjaxEnabled){
+                let loginRecaptchaNodeV3 = document.getElementById('login-recaptcha-node-' + widgetId);
+                let registerRecaptchaNodeV3 = document.getElementById('register-recaptcha-node-' + widgetId);
+                let isRecaptchaVersion3 = false;
+                isRecaptchaVersion3 = loginRecaptchaNodeV3 ? loginRecaptchaVersion === 'v3' : registerRecaptchaVersion === 'v3' ;
+                
+                if (recaptchaAvailable && isRecaptchaVersion3) {
+                    grecaptcha.execute(recaptchaSiteKeyV3, { 
+                        action: 'eael_login_register_form' 
+                    }).then(function (token) {
+                        if ($('form input[name="g-recaptcha-response"]', $scope).length === 0) {
+                            $('form', $scope).append('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
+                        } else {
+                            $('form input[name="g-recaptcha-response"]', $scope).val(token);
+                        }
+                    });
+                }
             }
         });
 
@@ -85,27 +92,16 @@ ea.hooks.addAction("init", "ea", () => {
                 return false;
             }
             if (loginRecaptchaNode) {
-                grecaptcha.render(loginRecaptchaNode, {
-                    'sitekey': recaptchaSiteKey,
-                    'theme': loginRcTheme,
-                    'size': loginRcSize,
-                });
+                if(registerRecaptchaVersion !== 'v3'){
+                    grecaptcha.render(loginRecaptchaNode, {
+                        'sitekey': recaptchaSiteKey,
+                        'theme': loginRcTheme,
+                        'size': loginRcSize,
+                    });
+                }
             }
             if (registerRecaptchaNode) {
-                if(registerRecaptchaVersion == 'v3'){
-                    // grecaptcha.ready(function() {
-                    //     console.log('okk');
-
-                    //     // do request for recaptcha token
-                    //     // response is promise with passed token
-                    //         grecaptcha.execute(recaptchaSiteKeyV3, {action:'eael-login-register-form'})
-                    //                   .then(function(token) {
-                    //             // add token value to form
-                    //             console.log(token);
-                    //             // document.getElementById('g-recaptcha-response').value = token;
-                    //         });
-                    //     });
-                }else {
+                if(registerRecaptchaVersion !== 'v3'){
                     grecaptcha.render(registerRecaptchaNode, {
                         'sitekey': recaptchaSiteKey,
                         'theme': regRcTheme,
