@@ -700,6 +700,31 @@ trait Controls
             );
 
             if( 'eael-post-block' === $wb->get_name() ) {
+                $wb->add_responsive_control(
+                    'post_block_image_ratio',
+                    [
+                        'label'      => __('Image Ratio', 'essential-addons-for-elementor-lite'),
+                        'type'       => Controls_Manager::SLIDER,
+                        'range'      => [
+                            'px' => [
+                                'min'  => 0.1,
+                                'max'  => 2,
+                                'step' => 0.01,
+                            ],
+                        ],
+                        'default' => [
+                            'unit' => 'px',
+                            'size' => 0.66,
+                        ],
+                        'size_units' => ['px'],
+                        'selectors'  => [
+                            '{{WRAPPER}} .eael-entry-thumbnail' => 'padding-bottom: calc({{SIZE}} * 100%);',
+                        ],
+                        'condition' => [
+                            'eael_show_image' => 'yes',
+                        ],
+                    ]
+                );
                 $wb->add_control(
                     'post_block_image_height',
                     [
@@ -724,6 +749,31 @@ trait Controls
             }
 
             if( 'eael-post-grid' === $wb->get_name() ) {
+                $wb->add_responsive_control(
+                    'postgrid_image_ratio',
+                    [
+                        'label'      => __('Image Ratio', 'essential-addons-for-elementor-lite'),
+                        'type'       => Controls_Manager::SLIDER,
+                        'range'      => [
+                            'px' => [
+                                'min'  => 0.1,
+                                'max'  => 2,
+                                'step' => 0.01,
+                            ],
+                        ],
+                        'default' => [
+                            'unit' => 'px',
+                            'size' => 0.66,
+                        ],
+                        'size_units' => ['px'],
+                        'selectors'  => [
+                            '{{WRAPPER}} .eael-entry-thumbnail' => 'padding-bottom: calc({{SIZE}} * 100%);',
+                        ],
+                        'condition' => [
+                            'eael_show_image' => 'yes',
+                        ],
+                    ]
+                );
                 $wb->add_responsive_control(
                     'postgrid_image_height',
                     [
@@ -831,6 +881,49 @@ trait Controls
 
         }
 
+        if( 'eael-post-carousel' === $wb->get_name() ) {
+            $wb->add_control(
+                'enable_post_carousel_image_ratio',
+                [
+                    'label' => __('Enable Image Ratio', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                    'return_value' => 'yes',
+                    'default' => '',
+                    'condition' => [
+                        'eael_show_image' => 'yes',
+                    ],
+                ]
+            );
+            $wb->add_responsive_control(
+                'post_carousel_image_ratio',
+                [
+                    'label'      => __('Image Ratio', 'essential-addons-for-elementor-lite'),
+                    'type'       => Controls_Manager::SLIDER,
+                    'range'      => [
+                        'px' => [
+                            'min'  => 0.1,
+                            'max'  => 2,
+                            'step' => 0.01,
+                        ],
+                    ],
+                    'default' => [
+                        'unit' => 'px',
+                        'size' => 0.66,
+                    ],
+                    'size_units' => ['px'],
+                    'selectors'  => [
+                        '{{WRAPPER}} div.eael-entry-thumbnail' => 'padding-bottom: calc({{SIZE}} * 100%);height: auto !important;',
+                    ],
+                    'condition' => [
+                        'eael_show_image' => 'yes',
+                        'enable_post_carousel_image_ratio' => 'yes',
+                    ],
+                ]
+            );
+        }
+
         $wb->add_control(
             'eael_show_title',
             [
@@ -878,6 +971,36 @@ trait Controls
                 ]
             );
         }
+
+	    if ( 'eael-content-timeline' === $wb->get_name() ) {
+		    $wb->add_control(
+			    'eael_show_image',
+			    [
+				    'label'        => __( 'Show Image', 'essential-addons-for-elementor-lite' ),
+				    'type'         => Controls_Manager::SWITCHER,
+				    'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				    'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				    'return_value' => 'yes',
+				    'default'      => '',
+				    'condition'    => [
+					    'eael_content_timeline_choose' => 'dynamic',
+				    ],
+			    ]
+		    );
+
+		    $wb->add_group_control(
+			    Group_Control_Image_Size::get_type(),
+			    [
+				    'name'      => 'image',
+				    'exclude'   => [ 'custom' ],
+				    'default'   => 'medium',
+				    'condition' => [
+					    'eael_show_image'              => 'yes',
+					    'eael_content_timeline_choose' => 'dynamic',
+				    ],
+			    ]
+		    );
+	    }
 
         $wb->add_control(
             'eael_show_excerpt',
@@ -1008,9 +1131,16 @@ trait Controls
             );
         }
 
-        if ( 'eael-post-carousel' === $wb->get_name() || 'eael-post-grid' === $wb->get_name() ) {
+        if ( 'eael-post-carousel' === $wb->get_name() 
+            || 'eael-post-grid' === $wb->get_name()
+            || 'eael-post-block' === $wb->get_name()
+            ) {
 
 	        $eael_show_post_terms_condition = ['eael_show_image' => 'yes']; //Applicable for both elements: Post Carousel and Post Grid
+
+            if( 'eael-post-block' === $wb->get_name() ){
+                $eael_show_post_terms_condition = [];
+            }
 
             $wb->add_control(
                 'eael_show_post_terms',
@@ -1025,6 +1155,10 @@ trait Controls
             );
 
             $eael_show_post_terms_child_condition = ['eael_show_image' => 'yes', 'eael_show_post_terms' => 'yes'];
+
+            if( 'eael-post-block' === $wb->get_name() ){
+                $eael_show_post_terms_child_condition = [ 'eael_show_post_terms' => 'yes' ];
+            }
 
 	        $post_types = ControlsHelper::get_post_types();
 	        unset(

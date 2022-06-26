@@ -313,6 +313,10 @@ span.fc-day-number {
   padding-bottom: 10px;
   padding-top: 10px;
 }
+.fc-unthemed .fc-listWeek-view .fc-list-table tr.fc-list-item .fc-list-item-title a,
+.fc-unthemed .fc-listMonth-view .fc-list-table tr.fc-list-item .fc-list-item-title a {
+  text-decoration: none;
+}
 .fc-unthemed .fc-dayGridMonth-view .fc-day-grid-event .fc-time {
   font-weight: 400;
 }
