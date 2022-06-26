@@ -186,7 +186,7 @@ class Login_Register extends Widget_Base {
 	 * @return array
 	 */
 	protected function get_form_field_types() {
-		return apply_filters( 'eael/registration-form-fields', [
+		$eael_form_field_types = [
 			'user_name'    => __( 'Username', 'essential-addons-for-elementor-lite' ),
 			'email'        => __( 'Email', 'essential-addons-for-elementor-lite' ),
 			'password'     => __( 'Password', 'essential-addons-for-elementor-lite' ),
@@ -194,7 +194,10 @@ class Login_Register extends Widget_Base {
 			'first_name'   => __( 'First Name', 'essential-addons-for-elementor-lite' ),
 			'last_name'    => __( 'Last Name', 'essential-addons-for-elementor-lite' ),
 			'website'      => __( 'Website', 'essential-addons-for-elementor-lite' ),
-		] );
+			
+		];
+		
+		return apply_filters( 'eael/registration-form-fields', $eael_form_field_types );
 	}
 
 	/**
@@ -1127,7 +1130,7 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->add_control( 'register_form_field_note', [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => __( 'Select the type of fields you want to show in the registration form', 'essential-addons-for-elementor-lite' ),
+			'raw'             => __( 'Select the type of fields you want to show in the registration form' , 'essential-addons-for-elementor-lite' ),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 		] );
 		$repeater = new Repeater();
@@ -4116,6 +4119,7 @@ class Login_Register extends Widget_Base {
 			$first_name_exists   = 0;
 			$last_name_exists    = 0;
 			$website_exists      = 0;
+			
 			$f_labels            = [
 				'email'            => __( 'Email', 'essential-addons-for-elementor-lite' ),
 				'password'         => __( 'Password', 'essential-addons-for-elementor-lite' ),
