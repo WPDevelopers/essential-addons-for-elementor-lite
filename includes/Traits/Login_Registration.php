@@ -30,6 +30,12 @@ trait Login_Registration {
 	 */
 	public static $email_options = [];
 
+	public static $recaptcha_v3_default_action = 'eael_login_register_form';
+
+	public static function get_recaptcha_threshold() {
+		return apply_filters( 'eael_recaptcha_threshold', 0.5 );
+	}
+
 	public function login_or_register_user() {
 		do_action( 'eael/login-register/before-processing-login-register', $_POST );
 		// login or register form?
@@ -748,8 +754,15 @@ trait Login_Registration {
 		];
 
 		$res = json_decode( wp_remote_retrieve_body( wp_remote_post( $endpoint, [ 'body' => $data ] ) ), 1 );
+		
 		if ( isset( $res['success'] ) ) {
-			return $res['success'];
+			if('v3' === $version ) {
+				$action = self::$recaptcha_v3_default_action;
+				$action_ok = ! isset( $res['action'] ) ? true : $action === $res['action'];
+				return $action_ok && ( $res['score'] > self::get_recaptcha_threshold() );
+			}else {
+				return $res['success'];				
+			}
 		}
 
 		return false;

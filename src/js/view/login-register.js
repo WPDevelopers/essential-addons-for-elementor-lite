@@ -61,6 +61,20 @@ ea.hooks.addAction("init", "ea", () => {
             }
         });
 
+        // trigger recaptcha v3 when register form is submitted
+        $('form input[type="submit"]', $scope).on('click', function (e) {
+            if (recaptchaAvailable && registerRecaptchaVersion === 'v3') {
+                grecaptcha.execute(recaptchaSiteKeyV3, { 
+                    action: 'eael_login_register_form' 
+                }).then(function (token) {
+                    if ($('form input[name="g-recaptcha-response"]', $scope).length === 0) {
+                        $('form', $scope).append('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
+                    } else {
+                        $('form input[name="g-recaptcha-response"]', $scope).val(token);
+                    }
+                });
+            }
+        });
 
         // reCAPTCHA
         function onloadLRcb() {
@@ -79,16 +93,18 @@ ea.hooks.addAction("init", "ea", () => {
             }
             if (registerRecaptchaNode) {
                 if(registerRecaptchaVersion == 'v3'){
-                    grecaptcha.ready(function() {
-                        // do request for recaptcha token
-                        // response is promise with passed token
-                            grecaptcha.execute(recaptchaSiteKeyV3, {action:'eael-login-register-form'})
-                                      .then(function(token) {
-                                // add token value to form
-                                console.log(token);
-                                // document.getElementById('g-recaptcha-response').value = token;
-                            });
-                        });
+                    // grecaptcha.ready(function() {
+                    //     console.log('okk');
+
+                    //     // do request for recaptcha token
+                    //     // response is promise with passed token
+                    //         grecaptcha.execute(recaptchaSiteKeyV3, {action:'eael-login-register-form'})
+                    //                   .then(function(token) {
+                    //             // add token value to form
+                    //             console.log(token);
+                    //             // document.getElementById('g-recaptcha-response').value = token;
+                    //         });
+                    //     });
                 }else {
                     grecaptcha.render(registerRecaptchaNode, {
                         'sitekey': recaptchaSiteKey,

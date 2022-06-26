@@ -66,7 +66,7 @@ trait Enqueue
 		        $recaptcha_api_args1['hl'] = $recaptcha_language;
 	        }
 
-            $recaptcha_api_args1['sitekey'] = $site_key;
+            $recaptcha_api_args1['render'] = $site_key;
             
 	        $recaptcha_api_args1 = apply_filters( 'eael_lr_recaptcha_api_args_v3', $recaptcha_api_args1 );
 	        $recaptcha_api_args1 = http_build_query( $recaptcha_api_args1 );
