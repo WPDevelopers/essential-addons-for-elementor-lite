@@ -754,7 +754,6 @@ trait Login_Registration {
 		];
 
 		$res = json_decode( wp_remote_retrieve_body( wp_remote_post( $endpoint, [ 'body' => $data ] ) ), 1 );
-		
 		if ( isset( $res['success'] ) ) {
 			if('v3' === $version ) {
 				$action = self::$recaptcha_v3_default_action;
