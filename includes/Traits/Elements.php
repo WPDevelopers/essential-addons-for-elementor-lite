@@ -519,14 +519,9 @@ trait Elements
                 }
                 $scroll_to_top_icon_image = !empty($settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image']) 
                                             ? $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image']['value'] : '';
-                
-                if (isset($scroll_to_top_icon_image['url'])) {
-                    ob_start();
-                    Icons_Manager::render_icon( $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image'], [ 'aria-hidden' => 'true' ] );
-                    $scroll_to_top_icon_html = ob_get_clean();
-                } else {
-                    $scroll_to_top_icon_html = "<i class='$scroll_to_top_icon_image'></i>";
-                }
+
+                $scroll_to_top_icon_html = \Essential_Addons_Elementor\Classes\Helper::get_render_icon( $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image'] );
+
     
                 $scroll_to_top_html = "<div class='eael-ext-scroll-to-top-wrap scroll-to-top-hide'><span class='eael-ext-scroll-to-top-button'>$scroll_to_top_icon_html</span></div>";
 

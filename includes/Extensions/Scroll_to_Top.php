@@ -373,6 +373,7 @@ class Scroll_to_Top
                 ],
                 'selectors' => [
                     '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button i' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button svg' => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};',
                 ],
                 'condition' => [
                     'eael_ext_scroll_to_top' => 'yes',
@@ -386,7 +387,7 @@ class Scroll_to_Top
                 'label' => __('SVG Size', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default'    => [
-                    'size' => 32,
+                    'size' => 16,
                     'unit' => 'px',
                 ],
                 'size_units' => ['px'],
