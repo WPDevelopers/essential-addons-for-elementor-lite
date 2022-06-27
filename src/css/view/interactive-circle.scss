@@ -622,7 +622,7 @@
 
                 @media only screen and (max-width: $breakpoint) {
                     width: 100%;
-                    height: auto;
+                    height: auto !important;
                 }
 
                 .eael-circle-item {
