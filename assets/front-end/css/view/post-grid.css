@@ -56,6 +56,9 @@
   width: 100%;
   max-width: 100%;
   vertical-align: middle;
+}
+
+.eael-entry-thumbnail.eael-image-ratio img {
   position: absolute;
   top: calc(50% + 1px);
   left: calc(50% + 1px);
