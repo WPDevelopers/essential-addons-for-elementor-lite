@@ -655,7 +655,7 @@
 @media only screen and (max-width: 600px) {
   .eael-circle-wrapper.eael-interactive-circle-preset-2 .eael-circle-info .eael-circle-inner {
     width: 100%;
-    height: auto;
+    height: auto !important;
   }
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-2 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn {
