@@ -621,7 +621,7 @@
                 border-bottom: none!important;
 
                 @media only screen and (max-width: $breakpoint) {
-                    width: 100%;
+                    width: 100% !important;
                     height: auto !important;
                 }
 
@@ -724,7 +724,7 @@
                         padding: $nav-circle-border-width;
                         padding-bottom: 0;
                         @media only screen and (max-width: $breakpoint) {
-                            width: 100%;
+                            width: 100% !important;
                             transform: none;
                             bottom: 0;
                             margin-top: 20px;
