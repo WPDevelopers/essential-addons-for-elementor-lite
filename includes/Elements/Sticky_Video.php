@@ -309,6 +309,18 @@ class Sticky_Video extends Widget_Base
         );
 
         $this->add_control(
+            'eaelsv_autopaly_description',
+            [
+                'raw' => __('Autoplay requires mute volume.', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::RAW_HTML,
+                'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+                'condition' => [
+                    'eaelsv_autopaly' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'eaelsv_mute',
             [
                 'label' => __('Mute', 'essential-addons-for-elementor-lite'),
@@ -316,6 +328,9 @@ class Sticky_Video extends Widget_Base
                 'label_block' => false,
                 'return_value' => 'yes',
                 'default' => '',
+                'condition' => [
+                    'eaelsv_autopaly!' => 'yes',
+                ],
             ]
         );
 
