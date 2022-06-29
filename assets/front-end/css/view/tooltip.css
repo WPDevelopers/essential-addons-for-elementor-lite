@@ -91,7 +91,7 @@
 /*--- Top ---*/
 
 .eael-tooltip .eael-tooltip-text.eael-tooltip-top {
-  bottom: calc(100%);
+  bottom: 100%;
   left: 0;
   right: 0;
   margin: 0 auto 10px auto;
@@ -100,7 +100,7 @@
 .eael-tooltip .eael-tooltip-text.eael-tooltip-top::after {
   margin-top: 0px;
   top: 100%;
-  left: calc( 50% - 5px);
+  left: calc(50% - 5px);
   border-color: black transparent transparent transparent;
 }
 
@@ -121,7 +121,7 @@
 .eael-tooltip .eael-tooltip-text.eael-tooltip-bottom::after {
   margin-top: 0px;
   bottom: 100%;
-  left: calc( 50% - 5px);
+  left: calc(50% - 5px);
   border-color: transparent transparent black transparent;
 }
 
@@ -160,15 +160,12 @@
   .eael-tooltip-align-tablet-left {
     text-align: left;
   }
-
   .eael-tooltip-align-tablet-right {
     text-align: right;
   }
-
   .eael-tooltip-align-tablet-center {
     text-align: center;
   }
-
   .eael-tooltip-align-tablet-justify .eael-tooltip {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -186,15 +183,12 @@
   .eael-tooltip-align-mobile-left {
     text-align: left;
   }
-
   .eael-tooltip-align-mobile-right {
     text-align: right;
   }
-
   .eael-tooltip-align-mobile-center {
     text-align: center;
   }
-
   .eael-tooltip-align-mobile-justify .eael-tooltip {
     display: -webkit-box;
     display: -ms-flexbox;
