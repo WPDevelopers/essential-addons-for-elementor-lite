@@ -6,7 +6,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-06-27 11:04+0000\n"
+"Content-Transfer-Econdig: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"MIME-Version: 1.0\n"
+"Project-Id-Version: Essential Addons For Elementor Lite\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -62,7 +65,7 @@ msgstr ""
 msgid "Install Now!"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:188, ../includes/Classes/WPDeveloper_Setup_Wizard.php:517, ../includes/Classes/WPDeveloper_Setup_Wizard.php:543, ../includes/Traits/Ajax_Handler.php:796, ../includes/Traits/Ajax_Handler.php:903, ../includes/Traits/Ajax_Handler.php:924, ../includes/Traits/Helper.php:307
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:188, ../includes/Classes/WPDeveloper_Setup_Wizard.php:517, ../includes/Classes/WPDeveloper_Setup_Wizard.php:543, ../includes/Traits/Ajax_Handler.php:799, ../includes/Traits/Ajax_Handler.php:906, ../includes/Traits/Ajax_Handler.php:927, ../includes/Traits/Ajax_Handler.php:944, ../includes/Traits/Helper.php:307
 msgid "you are not allowed to do this action"
 msgstr ""
 
@@ -1253,7 +1256,7 @@ msgstr ""
 msgid "File Not Found"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:1185, ../includes/Elements/Betterdocs_Category_Box.php:1150, ../includes/Elements/Betterdocs_Category_Grid.php:1687, ../includes/Elements/Betterdocs_Category_Grid.php:1654, ../includes/Elements/Post_Grid.php:1103, ../includes/Elements/Post_Timeline.php:781, ../includes/Elements/Product_Grid.php:3070, ../includes/Elements/Woo_Product_Gallery.php:2389, ../includes/Traits/Ajax_Handler.php:246
+#: ../includes/Elements/Betterdocs_Category_Box.php:1185, ../includes/Elements/Betterdocs_Category_Box.php:1150, ../includes/Elements/Betterdocs_Category_Grid.php:1687, ../includes/Elements/Betterdocs_Category_Grid.php:1654, ../includes/Elements/Post_Grid.php:1103, ../includes/Elements/Post_Timeline.php:781, ../includes/Elements/Product_Grid.php:3070, ../includes/Elements/Woo_Product_Gallery.php:2389, ../includes/Traits/Ajax_Handler.php:249
 msgid "<p class=\"no-posts-found\">No posts found!</p>"
 msgstr ""
 
@@ -7960,27 +7963,27 @@ msgstr ""
 msgid "You are using an incompatible version of Essential Addons PRO. Please update to v4.0.0+. If you do not see automatic update, <a href=\"https://essential-addons.com/elementor/docs/manually-update-essential-addons-pro/\" target=\"_blank\">Follow manual update guide.</a>"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:86, ../includes/Traits/Ajax_Handler.php:563, ../includes/Traits/Login_Registration.php:79, ../includes/Traits/Login_Registration.php:200
+#: ../includes/Traits/Ajax_Handler.php:89, ../includes/Traits/Ajax_Handler.php:566, ../includes/Traits/Login_Registration.php:79, ../includes/Traits/Login_Registration.php:200
 msgid "Insecure form submitted without security token"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:95, ../includes/Traits/Ajax_Handler.php:572, ../includes/Traits/Login_Registration.php:92, ../includes/Traits/Login_Registration.php:210, ../includes/Traits/Woo_Product_Comparable.php:2170
+#: ../includes/Traits/Ajax_Handler.php:98, ../includes/Traits/Ajax_Handler.php:575, ../includes/Traits/Login_Registration.php:92, ../includes/Traits/Login_Registration.php:210, ../includes/Traits/Woo_Product_Comparable.php:2170
 msgid "Security token did not match"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:106, ../includes/Traits/Ajax_Handler.php:284, ../includes/Traits/Ajax_Handler.php:349, ../includes/Traits/Ajax_Handler.php:583, ../includes/Traits/Login_Registration.php:55, ../includes/Traits/Login_Registration.php:222, ../includes/Traits/Woo_Product_Comparable.php:2128
+#: ../includes/Traits/Ajax_Handler.php:109, ../includes/Traits/Ajax_Handler.php:287, ../includes/Traits/Ajax_Handler.php:352, ../includes/Traits/Ajax_Handler.php:586, ../includes/Traits/Login_Registration.php:55, ../includes/Traits/Login_Registration.php:222, ../includes/Traits/Woo_Product_Comparable.php:2128
 msgid "Page ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:117, ../includes/Traits/Ajax_Handler.php:291, ../includes/Traits/Ajax_Handler.php:356, ../includes/Traits/Ajax_Handler.php:594, ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Login_Registration.php:62, ../includes/Traits/Login_Registration.php:227, ../includes/Traits/Woo_Product_Comparable.php:2133
+#: ../includes/Traits/Ajax_Handler.php:120, ../includes/Traits/Ajax_Handler.php:294, ../includes/Traits/Ajax_Handler.php:359, ../includes/Traits/Ajax_Handler.php:597, ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Login_Registration.php:62, ../includes/Traits/Login_Registration.php:227, ../includes/Traits/Woo_Product_Comparable.php:2133
 msgid "Widget ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:128, ../includes/Traits/Ajax_Handler.php:297, ../includes/Traits/Ajax_Handler.php:363, ../includes/Traits/Ajax_Handler.php:604
+#: ../includes/Traits/Ajax_Handler.php:131, ../includes/Traits/Ajax_Handler.php:300, ../includes/Traits/Ajax_Handler.php:366, ../includes/Traits/Ajax_Handler.php:607
 msgid "Widget settings are not found. Did you save the widget before using load more??"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:828
+#: ../includes/Traits/Ajax_Handler.php:831
 msgid "Login | Register Settings updated"
 msgstr ""
 
