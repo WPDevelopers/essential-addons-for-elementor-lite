@@ -81,6 +81,14 @@ jQuery(window).on("elementor/frontend/init", function () {
 	if (ea.isEditMode) {
 		ea.hooks.doAction("editMode.init");
 	}
+	ea.elementStatusCheck = (name) => {
+		if (window.eaElementList && name in window.eaElementList) {
+			return true;
+		} else {
+			window.eaElementList = {...window.eaElementList, [name]: true}
+		}
+		return false;
+	}
 });
 
 (function ($) {

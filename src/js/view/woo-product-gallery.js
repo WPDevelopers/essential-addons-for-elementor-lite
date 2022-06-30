@@ -107,6 +107,10 @@ ea.hooks.addAction("init", "ea", () => {
 		}
 	};
 
+    if (ea.elementStatusCheck('productGalleryLoad')) {
+        return false;
+    }
+
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eael-woo-product-gallery.default",
 		wooProductGallery
