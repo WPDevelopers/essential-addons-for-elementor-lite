@@ -70,8 +70,6 @@ ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	}
 });
 
-
-
 jQuery(window).on("elementor/frontend/init", function () {
 	window.isEditMode = elementorFrontend.isEditMode();
 	window.ea.isEditMode = elementorFrontend.isEditMode();
@@ -85,29 +83,8 @@ jQuery(window).on("elementor/frontend/init", function () {
 	}
 });
 
-
-
 (function ($) {
-
-	ea.getToken = () => {
-		if (localize.nonce && !ea.noncegenerated) {
-			ea.noncegenerated = true;
-			$.ajax({
-				url: localize.ajaxurl,
-				type: "post",
-				data: {
-					action: "eael_get_token",
-				},
-				success: function (response) {
-					if (response.success) {
-						localize.nonce = response.data.nonce
-					}
-				}
-			});
-		}
-	}
-
-	$(document).on('click', 'a', function (e) {
+	$('a').on('click', function (e) {
 		var hashURL = $(this).attr('href'),
 			isStartWithHash;
 

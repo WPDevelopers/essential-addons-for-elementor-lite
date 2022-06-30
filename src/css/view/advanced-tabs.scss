@@ -25,6 +25,15 @@
 	background-color: #f1f1f1;
 }
 
+.eael-advance-tabs .eael-tabs-nav > ul li .eael-tab-title {
+	margin: unset;
+	font-size: unset;
+	line-height: unset;
+	font-family: unset;
+	font-weight: unset;
+	color: unset;
+}
+
 .eael-advance-tabs .eael-tabs-nav > ul li:after {
 	content: "";
 	position: absolute;
