@@ -44,6 +44,31 @@
   line-height: 1.5;
 }
 
+.eael-team-members-simple.eael-team-item .eael-team-content .eael-team-text.eael-team-text-overlay {
+  display: none;
+}
+
+.eael-team-members-simple.eael-team-item .eael-team-image {
+  position: relative;
+}
+
+.eael-team-members-simple.eael-team-item .eael-team-image .eael-team-text.eael-team-text-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  padding: 10px;
+  margin-bottom: 0;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.eael-team-members-simple.eael-team-item .eael-team-image:hover .eael-team-text.eael-team-text-overlay {
+  opacity: 1;
+}
+
 .eael-team-content > ul {
   margin: 0;
   padding: 0;
