@@ -1,4 +1,5 @@
 ea.hooks.addAction("init", "ea", () => {
+
 	const wooProductGallery = function ($scope, $) {
 		// category
 		ea.hooks.doAction("quickViewAddMarkup",$scope,$);

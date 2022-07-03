@@ -4,8 +4,15 @@ window.isEditMode = false;
 window.ea = {
 	hooks: createHooks(),
 	isEditMode: false,
+	elementStatusCheck:function(name){
+		if (window.eaElementList && name in window.eaElementList) {
+			return true;
+		} else {
+			window.eaElementList = {...window.eaElementList, [name]: true}
+		}
+		return false;
+	}
 };
-
 ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	let filterGallery = jQuery(".eael-filter-gallery-container", $content);
 	let postGridGallery = jQuery(
@@ -80,14 +87,6 @@ jQuery(window).on("elementor/frontend/init", function () {
 	// init edit mode hook
 	if (ea.isEditMode) {
 		ea.hooks.doAction("editMode.init");
-	}
-	ea.elementStatusCheck = (name) => {
-		if (window.eaElementList && name in window.eaElementList) {
-			return true;
-		} else {
-			window.eaElementList = {...window.eaElementList, [name]: true}
-		}
-		return false;
 	}
 });
 
