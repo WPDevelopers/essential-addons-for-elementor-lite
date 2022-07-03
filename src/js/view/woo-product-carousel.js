@@ -1,4 +1,5 @@
 ea.hooks.addAction("init", "ea", () => {
+
 	const wooProductCarousel = function ($scope, $) {
 		ea.hooks.doAction("quickViewAddMarkup",$scope,$);
 		var $wooProductCarousel = $scope.find(".eael-woo-product-carousel").eq(0),
