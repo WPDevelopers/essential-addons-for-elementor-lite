@@ -233,6 +233,10 @@ ea.hooks.addAction("init", "ea", () => {
 		});
 	}
 
+	if (ea.elementStatusCheck('eaelWooProductSliderLoad')) {
+		return false;
+	}
+
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eael-woo-product-carousel.default",
 		wooProductCarousel
