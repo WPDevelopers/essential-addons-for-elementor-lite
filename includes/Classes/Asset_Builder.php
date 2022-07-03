@@ -12,30 +12,72 @@ use Essential_Addons_Elementor\Traits\Library;
 
 class Asset_Builder {
 
+	/**
+	 * @theTraitAnnotation Library
+	 */
 	use Library;
 
+	/**
+	 * Post ID
+	 * @var int
+	 */
 	protected $post_id;
 
+	/**
+	 * @var string
+	 */
 	protected $custom_js = '';
 
+	/**
+	 * @var string
+	 */
 	protected $css_strings = '';
 
+	/**
+	 * @var \Essential_Addons_Elementor\Classes\Elements_Manager
+	 */
 	protected $elements_manager;
 
+	/**
+	 * @var false|mixed|string|void
+	 */
 	protected $css_print_method = '';
 
+	/**
+	 * @var false|mixed|string|void
+	 */
 	protected $js_print_method = '';
 
+	/**
+	 * @var array
+	 */
 	protected $registered_elements;
 
+	/**
+	 * @var array
+	 */
 	protected $registered_extensions;
 
+	/**
+	 * @var object
+	 */
 	protected $localize_objects;
 
+	/**
+	 * @var int|int[]|mixed|string[]
+	 */
 	protected $custom_js_enable;
 
+	/**
+	 * @var bool
+	 */
 	protected $main_page;
 
+	/**
+	 * construct
+	 * @param array $registered_elements
+	 * @param array $registered_extensions
+	 */
 	public function __construct( $registered_elements, $registered_extensions ) {
 
 		$this->registered_elements                = $registered_elements;
@@ -50,6 +92,10 @@ class Asset_Builder {
 
 	}
 
+	/**
+	 * init_hook
+	 * Load Hook
+	 */
 	protected function init_hook(){
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
 		add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'ea_before_enqueue_styles' ] );
@@ -60,6 +106,10 @@ class Asset_Builder {
 		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ], 10, 2 );
 	}
 
+	/**
+	 * add_inline_js
+	 * Load inline js data
+	 */
 	public function add_inline_js() {
 
 		if ( $this->is_edit_mode() || $this->is_preview_mode() ) {
@@ -70,6 +120,10 @@ class Asset_Builder {
 		}
 	}
 
+	/**
+	 * add_inline_css
+	 * Load inline css file
+	 */
 	public function add_inline_css() {
 		if ( $this->is_edit_mode() || $this->is_preview_mode() ) {
 			if ( $this->css_strings ) {
@@ -83,6 +137,10 @@ class Asset_Builder {
 		wp_register_style( 'eael-general', EAEL_PLUGIN_PATH . "assets/front-end/css/view/general.min.css", [ 'elementor-frontend' ], 10, true );
 	}
 
+	/**
+	 * load_common_asset
+	 * Load common asset file
+	 */
 	public function load_commnon_asset() {
 		wp_register_style(
 			'font-awesome-5-all',
@@ -163,6 +221,11 @@ class Asset_Builder {
 		] );
 	}
 
+	/**
+	 * frontend_asset_load
+	 * Load asset as per condition
+	 * @return false|void
+	 */
 	public function frontend_asset_load() {
 		$handle        = 'eael';
 		$context       = 'edit';
@@ -200,6 +263,10 @@ class Asset_Builder {
 		wp_localize_script( $handle, 'localize', $this->localize_objects );
 	}
 
+	/**
+	 * ea_before_enqueue_styles
+	 * @return false|void
+	 */
 	public function ea_before_enqueue_styles() {
 
 		if ( $this->is_edit() ) {
@@ -222,8 +289,12 @@ class Asset_Builder {
 		}
 	}
 
-	public function post_asset_load( $test ){
-		$locations = $test->get_locations();
+	/**
+	 * post_asset_load
+	 * @param $instance
+	 */
+	public function post_asset_load( $instance ){
+		$locations = $instance->get_locations();
 		foreach ( $locations as $location => $settings ) {
 			$documents = \ElementorPro\Modules\ThemeBuilder\Module::instance()->get_conditions_manager()->get_documents_for_location( $location );
 			foreach ( $documents as $document ) {
@@ -246,6 +317,12 @@ class Asset_Builder {
 		}
 	}
 
+	/**
+	 * enqueue_asset
+	 * @param int $post_id
+	 * @param array $elements
+	 * @param string $context
+	 */
 	public function enqueue_asset( $post_id = null, $elements, $context = 'view' ) {
 		$dynamic_asset_id = ( $post_id ? '-' . $post_id : '' );
 
@@ -281,6 +358,11 @@ class Asset_Builder {
 		}
 	}
 
+	/**
+	 * delete_cache_data
+	 * @param int $post_id
+	 * @param array $post
+	 */
 	public function delete_cache_data( $post_id, $post ) {
 		$this->elements_manager->remove_files( $post_id );
 
@@ -289,6 +371,13 @@ class Asset_Builder {
 
 	}
 
+	/**
+	 * has_asset
+	 * @param int $post_id
+	 * @param string $file
+	 *
+	 * @return bool
+	 */
 	public function has_asset( $post_id, $file = 'css' ) {
 		if ( file_exists( $this->safe_path( EAEL_ASSET_PATH . '/' . 'eael' . ( $post_id ? '-' . $post_id : '' ) . '.' . $file ) ) ) {
 			return true;
@@ -309,6 +398,11 @@ class Asset_Builder {
 		}
 	}
 
+	/**
+	 * is_edit
+	 * check is edit page
+	 * @return bool
+	 */
 	public function is_edit() {
 		return (
 			Plugin::instance()->editor->is_edit_mode() ||
@@ -317,6 +411,10 @@ class Asset_Builder {
 		);
 	}
 
+	/**
+	 * set_main_page
+	 * @param $post_id
+	 */
 	protected function set_main_page( $post_id ) {
 		$this->main_page = get_post_meta( $post_id, '_elementor_template_type', true ) == 'wp-page';
 	}

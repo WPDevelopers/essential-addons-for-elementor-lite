@@ -12,22 +12,51 @@ use Essential_Addons_Elementor\Traits\Library;
 class Elements_Manager {
 	use Library;
 
+	/**
+	 * custom key name which are used for store widget list in option tabel
+	 */
 	const ELEMENT_KEY = '_eael_widget_elements';
 
+	/**
+	 * This is hold custom js data in option table
+	 */
 	const JS_KEY = '_eael_custom_js';
 
+	/**
+	 * Post id
+	 * @var string
+	 */
 	protected $post_id;
 
+	/**
+	 * registered element list from essential addons settings
+	 * @var array
+	 */
 	protected $registered_elements;
 
+	/**
+	 * registered extensions list from essential addons settings
+	 * @var array
+	 */
 	protected $registered_extensions;
 
+	/**
+	 * __construct
+	 * @param array $registered_elements
+	 * @param array $registered_extensions
+	 */
 	public function __construct( $registered_elements, $registered_extensions ) {
 		$this->registered_elements   = $registered_elements;
 		$this->registered_extensions = $registered_extensions;
 		add_action( 'elementor/editor/after_save', array( $this, 'eael_elements_cache' ), 10, 2 );
 	}
 
+	/**
+	 * eael_elements_cache
+	 * Save widget name list in option table for improve performance.
+	 * @param int $post_id
+	 * @param array $data
+	 */
 	public function eael_elements_cache( $post_id, $data ) {
 		$widget_list  = $this->get_widget_list( $data );
 		$page_setting = get_post_meta( $post_id, '_elementor_page_settings', true );
@@ -35,6 +64,13 @@ class Elements_Manager {
 		$this->save_widgets_list( $post_id, $widget_list, $custom_js );
 	}
 
+	/**
+	 * get_widget_list
+	 * get widget names
+	 * @param array $data
+	 *
+	 * @return array
+	 */
 	public function get_widget_list( $data ) {
 		$widget_list = [];
 		$replace     = $this->replace_widget_name();
@@ -77,6 +113,13 @@ class Elements_Manager {
 		return $widget_list;
 	}
 
+	/**
+	 * get_element_list
+	 * get cached widget list
+	 * @param $post_id
+	 *
+	 * @return bool
+	 */
 	public function get_element_list( $post_id ) {
 
 		if ( Plugin::instance()->editor->is_edit_mode() ) {
@@ -96,6 +139,13 @@ class Elements_Manager {
 		return true;
 	}
 
+	/**
+	 * get_extension_list
+	 * get extension name those name had been changed for some reason.
+	 * @param array $element
+	 *
+	 * @return array
+	 */
 	public function get_extension_list( $element ) {
 		$list = [];
 		if ( isset( $element['elType'] ) && $element['elType'] == 'section' ) {
@@ -117,6 +167,10 @@ class Elements_Manager {
 		return $list;
 	}
 
+	/*
+	 * replace_widget_name
+	 * Added backward compatibility
+	 */
 	public function replace_widget_name() {
 		return [
 			'eicon-woocommerce'               => 'eael-product-grid',
@@ -138,6 +192,15 @@ class Elements_Manager {
 		];
 	}
 
+	/**
+	 * save_widgets_list
+	 * save widget list and custom js data in option table
+	 * @param int $post_id
+	 * @param array $list
+	 * @param string $custom_js
+	 *
+	 * @return bool|mixed
+	 */
 	public function save_widgets_list( $post_id, $list, $custom_js = '' ) {
 
 		if ( \defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
@@ -172,6 +235,14 @@ class Elements_Manager {
 		}
 	}
 
+	/**
+	 * generate_script
+	 * create js/css file as per widget loaded in page
+	 * @param int $post_id
+	 * @param array $elements
+	 * @param string $context
+	 * @param string $ext
+	 */
 	public function generate_script( $post_id, $elements, $context, $ext ) {
 		// if folder not exists, create new folder
 		if ( ! file_exists( EAEL_ASSET_PATH ) ) {
@@ -189,6 +260,15 @@ class Elements_Manager {
 		file_put_contents( $file_path, $output );
 	}
 
+	/**
+	 * generate_strings
+	 * Load assets for inline loading
+	 * @param string $elements
+	 * @param string $context
+	 * @param string $ext
+	 *
+	 * @return string
+	 */
 	public function generate_strings( $elements, $context, $ext ) {
 		$output = '';
 
@@ -203,6 +283,15 @@ class Elements_Manager {
 		return $output;
 	}
 
+	/**
+	 * generate_dependency
+	 * Load core library for widget list which are defined on config.php file
+	 * @param array $elements
+	 * @param string $context
+	 * @param string $type
+	 *
+	 * @return array
+	 */
 	public function generate_dependency( $elements, $context, $type ) {
 		$lib  = [ 'view' => [], 'edit' => [] ];
 		$self = [ 'general' => [], 'view' => [], 'edit' => [] ];
@@ -237,12 +326,23 @@ class Elements_Manager {
 		return array_unique( array_merge( $lib['view'], $lib['edit'], $self['edit'], $self['view'] ) );
 	}
 
+	/**
+	 * has_exist
+	 * @param $post_id
+	 * check widget list already saved in option table weather load or not
+	 * @return bool
+	 */
 	public function has_exist( $post_id ) {
 		$status = get_post_meta( $post_id, self::ELEMENT_KEY, true );
 
 		return ! empty( $status );
 	}
 
+	/**
+	 * update_asset
+	 * @param int $post_id
+	 * @param  $elements
+	 */
 	public function update_asset( $post_id, $elements ) {
 
 		if ( $this->css_print_method != 'internal' ) {
@@ -255,6 +355,10 @@ class Elements_Manager {
 
 	}
 
+	/**
+	 * excluded_template_type
+	 * @return string[]
+	 */
 	public function excluded_template_type() {
 		return [
 			'kit',
