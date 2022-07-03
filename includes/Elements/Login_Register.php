@@ -258,6 +258,7 @@ class Login_Register extends Widget_Base {
 			'options' => [
 				'login'    => __( 'Login', 'essential-addons-for-elementor-lite' ),
 				'register' => __( 'Registration', 'essential-addons-for-elementor-lite' ),
+				'lost-password' => __( 'Lost Password', 'essential-addons-for-elementor-lite' ),
 			],
 			'default' => 'login',
 		] );
@@ -336,6 +337,7 @@ class Login_Register extends Widget_Base {
 			'options'     => [
 				'default' => __( 'Default WordPress Page', 'essential-addons-for-elementor-lite' ),
 				'custom'  => __( 'Custom URL', 'essential-addons-for-elementor-lite' ),
+				'form'  => __( 'Show Lost Password Form', 'essential-addons-for-elementor-lite' ),
 			],
 			'default'     => 'default',
 			'condition'   => [
@@ -539,6 +541,83 @@ class Login_Register extends Widget_Base {
 				'default' => 'no',
 			] );
 		}
+
+		// Lost Password Form general settings starts
+		$this->add_control( 'gen_lostpass_content_po_toggle', [
+			'label'        => __( 'Lost Password Form General', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Controls', 'essential-addons-for-elementor-lite' ),
+			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'default'      => 'yes',
+		] );
+		$this->start_popover();
+		$this->add_control( 'show_login_link_lostpass', [
+			'label'   => __( 'Show Login Link', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::SWITCHER,
+			'default' => 'yes',
+		] );
+		$this->add_control( 'login_link_text_lostpass', [
+			'label'       => __( 'Login Link Text', 'essential-addons-for-elementor-lite' ),
+			'label_block' => true,
+			'description' => __( 'You can put text in two lines to make the last line linkable. Pro Tip: You can keep the first line empty and put the text only in the second line to get a link only.', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXTAREA,
+			'rows'        => 2,
+			'dynamic'     => [
+				'active' => true,
+			],
+			'default'     => __( " \nSign In", 'essential-addons-for-elementor-lite' ),
+			'condition'   => [
+				'show_login_link' => 'yes',
+			],
+		] );
+		$this->add_control( 'login_link_action', [
+			'label'       => __( 'Login Link Action', 'essential-addons-for-elementor-lite' ),
+			'label_block' => true,
+			'type'        => Controls_Manager::SELECT,
+			'options'     => [
+				'default' => __( 'Default WordPress Page', 'essential-addons-for-elementor-lite' ),
+				'custom'  => __( 'Custom URL', 'essential-addons-for-elementor-lite' ),
+				'form'    => __( 'Show Login Form', 'essential-addons-for-elementor-lite' ),
+			],
+			'default'     => 'form',
+			'condition'   => [
+				'show_login_link' => 'yes',
+			],
+		] );
+		$this->add_control( 'custom_login_url', [
+			'label'         => __( 'Custom Login URL', 'essential-addons-for-elementor-lite' ),
+			'label_block'   => true,
+			'show_external' => false,
+			'type'          => Controls_Manager::URL,
+			'dynamic'       => [
+				'active' => true,
+			],
+			'condition'     => [
+				'login_link_action' => 'custom',
+				'show_login_link'   => 'yes',
+			],
+		] );
+		$this->add_control( 'enable_register_recaptcha', [
+			'label'        => __( 'Enable Google reCAPTCHA', 'essential-addons-for-elementor-lite' ),
+			'description'  => __( 'reCAPTCHA will prevent spam registration from bots.', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+		] );
+		if ( empty( $this->recaptcha_sitekey ) ) {
+			$this->add_control( 'eael_recaptcha_keys_missing', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => sprintf( __( 'reCAPTCHA API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
+				'content_classes' => 'eael-warning',
+				'condition'       => [
+					'enable_register_recaptcha' => 'yes',
+				],
+			] );
+		}
+		$this->end_popover();
+		// Lost Password Form general settings ends
 
 		do_action( 'eael/login-register/after-general-controls', $this );
 
@@ -3822,6 +3901,7 @@ class Login_Register extends Widget_Base {
 			<?php
 			$this->print_login_form();
 			$this->print_register_form();
+			$this->print_lost_password_form();
 			?>
         </div>
 
@@ -4278,6 +4358,10 @@ class Login_Register extends Widget_Base {
 				echo $form_markup; //XSS OK, data sanitized already.
 			}
 		}
+	}
+
+	protected function print_lost_password_form(){
+
 	}
 
 	protected function print_form_illustration() {
