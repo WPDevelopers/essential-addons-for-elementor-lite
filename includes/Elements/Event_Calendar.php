@@ -2033,7 +2033,7 @@ class Event_Calendar extends Widget_Base
         }
 
 	    if ( empty( $data ) ) {
-		    $data        = wp_remote_retrieve_body( wp_remote_get( esc_url( add_query_arg( $arg, $base_url ) ) ) );
+		    $data        = wp_remote_retrieve_body( wp_remote_get( esc_url_raw( add_query_arg( $arg, $base_url ) ) ) );
 		    $check_error = json_decode( $data );
 
 		    if ( ! empty( $check_error->error ) ) {
