@@ -324,7 +324,9 @@ trait Login_Registration {
 			}
 		}
 
-		$errors = apply_filters( 'eael/login-register/register-user-password-validation', $errors, $settings, $password );
+		if(!$is_pass_auto_generated){
+			$errors = apply_filters( 'eael/login-register/register-user-password-validation', $errors, $settings, $password );
+		}
 		
 		// if any error found, abort
 		if ( ! empty( $errors ) ) {
