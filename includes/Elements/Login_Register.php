@@ -4098,13 +4098,32 @@ class Login_Register extends Widget_Base {
 			// input icons
 			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_register_icon'] ) && 'yes' === $this->ds['show_register_icon'] );
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
+
+			$use_weak_password = true;
+			if( isset( $this->ds['use_weak_password'] ) ){
+				$use_weak_password = !empty( $this->ds['use_weak_password'] ) ? 1 : 0;
+			}
+
+			$password_min_length = !empty( $this->ds['weak_pass_min_char'] ) ? intval( $this->ds['weak_pass_min_char'] ) : '';
+			$password_one_uppercase = !empty( $this->ds['weak_pass_one_uppercase'] ) ? true : false;
+			$password_one_lowercase = !empty( $this->ds['weak_pass_one_lowercase'] ) ? true : false;
+			$password_one_number = !empty( $this->ds['weak_pass_one_number'] ) ? true : false;
+			$password_one_special = !empty( $this->ds['weak_pass_one_special'] ) ? true : false;
+
 			ob_start();
 			?>
             <section
                     id="eael-register-form-wrapper"
                     class="<?php echo esc_attr( $default_hide_class ); ?>"
                     data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>"
-                    data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>">
+                    data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>"
+                    data-use-weak-password="<?php echo esc_attr( $use_weak_password ); ?>"
+                    data-password-min-length="<?php echo esc_attr( $password_min_length ); ?>"
+                    data-password-one-uppercase="<?php echo esc_attr( $password_one_uppercase ); ?>"
+                    data-password-one-lowercase="<?php echo esc_attr( $password_one_lowercase ); ?>"
+                    data-password-one-number="<?php echo esc_attr( $password_one_number ); ?>"
+                    data-password-one-special="<?php echo esc_attr( $password_one_special ); ?>"
+					>
                 <div class="eael-register-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr( $icon_class ); ?>">
 					<?php if ( 'left' === $this->form_illustration_pos ) {
 						$this->print_form_illustration();
