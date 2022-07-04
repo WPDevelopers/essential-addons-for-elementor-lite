@@ -957,6 +957,20 @@ class Login_Register extends Widget_Base {
 			'placeholder' => __( 'Create an account to enjoy awesome features.', 'essential-addons-for-elementor-lite' ),
 		] );
 
+		$this->add_control( 'lostpassword_form_title', [
+			'label'       => __( 'Lost Password Form Title', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'dynamic'     => [ 'active' => true, ],
+			'placeholder' => __( 'Get New Password', 'essential-addons-for-elementor-lite' ),
+			'separator'   => 'before',
+		] );
+		$this->add_control( 'lostpassword_form_subtitle', [
+			'label'       => __( 'Lost Password Form Sub Title', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXTAREA,
+			'dynamic'     => [ 'active' => true, ],
+			'placeholder' => __( 'Please enter your username or email address. You will receive an email message with instructions on how to reset your password.', 'essential-addons-for-elementor-lite' ),
+		] );
+
 		$this->end_controls_section();
 	}
 
@@ -4567,7 +4581,7 @@ class Login_Register extends Widget_Base {
 			$login_link_text_lostpassword   = array_pop( $parts );
 			$login_message_lostpassword     = array_shift( $parts );
 
-			$login_link_placeholder_lostpassword = '<span class="d-ib">%1$s</span> <a href="%2$s" id="eael-lr-reg-toggle" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
+			$login_link_placeholder_lostpassword = '<span class="d-ib">%1$s</span> <a href="%2$s" id="eael-lr-lostpassword-toggle" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
 			$login_atts_lostpassword             = $login_url_lostpassword = '';
 			switch ( $login_link_action_lostpassword ) {
 				case 'custom':
@@ -4580,8 +4594,7 @@ class Login_Register extends Widget_Base {
 					break;
 			}
 
-			$reg_link = sprintf( $login_link_placeholder_lostpassword, $login_message_lostpassword, esc_attr( $login_url_lostpassword ), esc_attr( $login_link_action_lostpassword ), $login_link_text_lostpassword, $login_atts_lostpassword );
-
+			$login_link_lostpassword = sprintf( $login_link_placeholder_lostpassword, $login_message_lostpassword, esc_attr( $login_url_lostpassword ), esc_attr( $login_link_action_lostpassword ), $login_link_text_lostpassword, $login_atts_lostpassword );
 
 			// lost password form fields related
 			$label_type      = ! empty( $this->ds['lostpassword_label_types'] ) ? $this->ds['lostpassword_label_types'] : 'default';
@@ -4644,7 +4657,6 @@ class Login_Register extends Widget_Base {
 							</div>
 
 							<?php
-							$this->print_recaptcha_node( 'lostpassword' );
 							do_action( 'eael/login-register/before-lostpassword-footer', $this );
 							?>
 
@@ -4656,7 +4668,7 @@ class Login_Register extends Widget_Base {
 									   value="<?php echo esc_attr( $btn_text ); ?>"/>
 								<?php if ( $show_login_link_lostpassword ) { ?>
 									<div class="eael-sign-wrapper <?php echo esc_attr( $link_align ); ?>">
-										<?php echo $login_link_text_lostpassword; // XSS ok. already escaped ?>
+										<?php echo $login_link_lostpassword; // XSS ok. already escaped ?>
 									</div>
 								<?php } ?>
 
@@ -4810,6 +4822,21 @@ class Login_Register extends Widget_Base {
             </p>
 			<?php
 			do_action( 'eael/login-register/after-showing-login-error', $login_error, $this );
+
+			delete_option( $error_key );
+		}
+	}
+
+	protected function print_lostpassword_validation_errors() {
+		$error_key = 'eael_lostpassword_error_' . $this->get_id();
+		if ( $lostpassword_error = apply_filters( 'eael/login-register/lostpassword-error-message', get_option( $error_key ) ) ) {
+			do_action( 'eael/login-register/before-showing-lostpassword-error', $lostpassword_error, $this );
+			?>
+            <p class="eael-form-msg invalid">
+				<?php echo esc_html( $lostpassword_error ); ?>
+            </p>
+			<?php
+			do_action( 'eael/login-register/after-showing-login-error', $lostpassword_error, $this );
 
 			delete_option( $error_key );
 		}

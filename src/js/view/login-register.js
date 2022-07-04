@@ -6,6 +6,7 @@ ea.hooks.addAction("init", "ea", () => {
         const recaptchaSiteKey = $wrap.data('recaptcha-sitekey');
         const loggedInLocation = $scope.find('[data-logged-in-location]').data('logged-in-location');
         const $loginFormWrapper = $scope.find("#eael-login-form-wrapper");
+        const $lostpasswordFormWrapper = $scope.find("#eael-lostpassword-form-wrapper");
         const loginRcTheme = $loginFormWrapper.data('recaptcha-theme');
         const loginRcSize = $loginFormWrapper.data('recaptcha-size');
         const $regFormWrapper = $scope.find("#eael-register-form-wrapper");
@@ -13,6 +14,7 @@ ea.hooks.addAction("init", "ea", () => {
         const regRcSize = $regFormWrapper.data('recaptcha-size');
         const $regLinkAction = $scope.find('#eael-lr-reg-toggle');
         const $loginLinkAction = $scope.find('#eael-lr-login-toggle');
+        const $lostpasswordLinkAction = $scope.find('#eael-lr-lostpassword-toggle');
         const $passField = $loginFormWrapper.find('#eael-user-password');
         const recaptchaAvailable = (typeof grecaptcha !== 'undefined' && grecaptcha !== null);
         const params = new URLSearchParams(location.search);
@@ -39,6 +41,18 @@ ea.hooks.addAction("init", "ea", () => {
                 window.history.replaceState({}, '', `${location.pathname}?${params}`);
                 e.preventDefault();
                 $regFormWrapper.hide();
+                $loginFormWrapper.fadeIn();
+            });
+        }
+        if ('form' === $lostpasswordLinkAction.data('action')) {
+            $lostpasswordLinkAction.on('click', function (e) {
+                e.preventDefault();
+                if (!params.has('eael-lostpassword')){
+                    params.append('eael-lostpassword',1);
+                }
+                window.history.replaceState({}, '', `${location.pathname}?${params}`);
+                $regFormWrapper.hide();
+                $lostpasswordFormWrapper.hide();
                 $loginFormWrapper.fadeIn();
             });
         }
