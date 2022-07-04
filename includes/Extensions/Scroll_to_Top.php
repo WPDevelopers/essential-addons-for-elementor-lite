@@ -353,6 +353,8 @@ class Scroll_to_Top
                 ],
             ]
         );
+        $is_svg_active = get_option( 'elementor_experiment-e_font_icon_svg' );
+        $scroll_to_top_button_icon_size_description = $is_svg_active == 'active' ? 'If the <b>Inline Font Icons</b> experiment is active use SVG Size instead of Icon Size.' :'';
 
         $element->add_control(
             'eael_ext_scroll_to_top_button_icon_size',
@@ -378,6 +380,7 @@ class Scroll_to_Top
                 'condition' => [
                     'eael_ext_scroll_to_top' => 'yes',
                 ],
+                'description' => $scroll_to_top_button_icon_size_description
             ]
         );
 
