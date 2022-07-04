@@ -332,6 +332,10 @@ trait Login_Registration {
 		if ( ! empty( $errors ) ) {
 			if ( $ajax ) {
 				$err_msg = '<ol>';
+				if ( count( $errors ) === 1 ) {
+					$err_msg = '<ol class="'. esc_attr('eael-list-style-none-wrap').'">';
+				}
+				
 				foreach ( $errors as $error ) {
 					$err_msg .= "<li>{$error}</li>";
 				}
