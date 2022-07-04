@@ -353,8 +353,6 @@ class Scroll_to_Top
                 ],
             ]
         );
-        $is_svg_active = get_option( 'elementor_experiment-e_font_icon_svg' );
-        $scroll_to_top_button_icon_size_description = $is_svg_active == 'active' ? 'If the <b>Inline Font Icons</b> experiment is active use SVG Size instead of Icon Size.' :'';
 
         $element->add_control(
             'eael_ext_scroll_to_top_button_icon_size',
@@ -375,33 +373,6 @@ class Scroll_to_Top
                 ],
                 'selectors' => [
                     '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button i' => 'font-size: {{SIZE}}{{UNIT}};',
-                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button svg' => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'eael_ext_scroll_to_top' => 'yes',
-                ],
-                'description' => $scroll_to_top_button_icon_size_description
-            ]
-        );
-
-        $element->add_control(
-            'eael_ext_scroll_to_top_button_icon_svg_size',
-            [
-                'label' => __('SVG Size', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SLIDER,
-                'default'    => [
-                    'size' => 16,
-                    'unit' => 'px',
-                ],
-                'size_units' => ['px'],
-                'range'      => [
-                    'px' => [
-                        'min'  => 0,
-                        'max'  => 500,
-                        'step' => 1,
-                    ],
-                ],
-                'selectors' => [
                     '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
                 ],
                 'condition' => [
