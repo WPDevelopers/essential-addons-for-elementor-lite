@@ -761,7 +761,19 @@ class Login_Register extends Widget_Base {
 	protected function init_content_lost_password_fields_controls() {
 		$this->start_controls_section( 'section_content_lostpass_fields', [
 			'label'      => __( 'Lost Password Form Fields', 'essential-addons-for-elementor-lite' ),
-			'conditions' => $this->get_form_controls_display_condition( 'lostpassword' ),
+			'conditions' => [
+				'relation' => 'or',
+				'terms'    => [
+					[
+						'name'  => "show_lost_password",
+						'value' => 'yes',
+					],
+					[
+						'name'  => 'default_form_type',
+						'value' => 'lostpassword',
+					]
+				],
+			],
 		] );
 
 		$this->add_control( 'lostpassword_label_types', [
@@ -4029,7 +4041,6 @@ class Login_Register extends Widget_Base {
 		$form_type = in_array( $type, [
 			'login',
 			'register',
-			'lostpassword',
 		] ) ? $type : 'login';
 
 		$terms_relation_conditions = [
@@ -4045,18 +4056,6 @@ class Login_Register extends Widget_Base {
 				]
 			],
 		];
-		
-		if( 'lostpassword' === $form_type ){
-			$terms_relation_conditions['terms'][] = [
-				'name'  => 'show_login_link_lostpassword',
-				'value' => 'yes',
-			];
-			
-			$terms_relation_conditions['terms'][] = [
-				'name'  => 'show_lost_password',
-				'value' => 'yes',
-			];
-		}
 
 		return $terms_relation_conditions;
 	}
@@ -4178,8 +4177,9 @@ class Login_Register extends Widget_Base {
 				$lp_atts = ! empty( $this->ds['lost_password_url']['is_external'] ) ? ' target="_blank"' : '';
 				$lp_atts .= ! empty( $this->ds['lost_password_url']['nofollow'] ) ? ' rel="nofollow"' : '';
 				$lp_link = sprintf( '<a href="%s" %s >%s</a>', esc_attr( $lp_url ), $lp_atts, $lp_text );
+			} else if ( ! empty( $this->ds['lost_password_link_type'] ) && 'form' === $this->ds['lost_password_link_type'] ){
+				$lp_link = sprintf( '<a id="eael-lr-lostpassword-toggle" href="" data-action="%s">%s</a>', esc_attr('form'), $lp_text );
 			}
-
 			// btn alignment
 			$btn_align = isset( $this->ds['login_btn_align'] ) ? $this->ds['login_btn_align'] : '';
 			// btn alignment
@@ -4581,7 +4581,7 @@ class Login_Register extends Widget_Base {
 			$login_link_text_lostpassword   = array_pop( $parts );
 			$login_message_lostpassword     = array_shift( $parts );
 
-			$login_link_placeholder_lostpassword = '<span class="d-ib">%1$s</span> <a href="%2$s" id="eael-lr-lostpassword-toggle" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
+			$login_link_placeholder_lostpassword = '<span class="d-ib">%1$s</span> <a href="%2$s" id="eael-lr-login-toggle-lostpassword" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
 			$login_atts_lostpassword             = $login_url_lostpassword = '';
 			switch ( $login_link_action_lostpassword ) {
 				case 'custom':
