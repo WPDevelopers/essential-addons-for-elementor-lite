@@ -15,6 +15,7 @@ ea.hooks.addAction("init", "ea", () => {
         const $regLinkAction = $scope.find('#eael-lr-reg-toggle');
         const $loginLinkAction = $scope.find('#eael-lr-login-toggle');
         const $lostpasswordLinkAction = $scope.find('#eael-lr-lostpassword-toggle');
+        const $lostpasswordLoginLinkAction = $scope.find('#eael-lr-login-toggle-lostpassword');
         const $passField = $loginFormWrapper.find('#eael-user-password');
         const recaptchaAvailable = (typeof grecaptcha !== 'undefined' && grecaptcha !== null);
         const params = new URLSearchParams(location.search);
@@ -25,11 +26,15 @@ ea.hooks.addAction("init", "ea", () => {
         if ('form' === $regLinkAction.data('action')) {
             $regLinkAction.on('click', function (e) {
                 e.preventDefault();
+                if (params.has('eael-lostpassword')){
+                    params.delete('eael-lostpassword');
+                }
                 if (!params.has('eael-register')){
                     params.append('eael-register',1);
                 }
                 window.history.replaceState({}, '', `${location.pathname}?${params}`);
                 $loginFormWrapper.hide();
+                $lostpasswordFormWrapper.hide();
                 $regFormWrapper.fadeIn();
             });
         }
@@ -37,9 +42,26 @@ ea.hooks.addAction("init", "ea", () => {
             $loginLinkAction.on('click', function (e) {
                 if (params.has('eael-register')){
                     params.delete('eael-register');
+                }else if (params.has('eael-lostpassword')){
+                    params.delete('eael-lostpassword');
                 }
                 window.history.replaceState({}, '', `${location.pathname}?${params}`);
                 e.preventDefault();
+                $regFormWrapper.hide();
+                $lostpasswordFormWrapper.hide();
+                $loginFormWrapper.fadeIn();
+            });
+        }
+        if ('form' === $lostpasswordLoginLinkAction.data('action')) {
+            $lostpasswordLoginLinkAction.on('click', function (e) {
+                if (params.has('eael-register')){
+                    params.delete('eael-register');
+                } else if (params.has('eael-lostpassword')){
+                    params.delete('eael-lostpassword');
+                }
+                window.history.replaceState({}, '', `${location.pathname}?${params}`);
+                e.preventDefault();
+                $lostpasswordFormWrapper.hide();
                 $regFormWrapper.hide();
                 $loginFormWrapper.fadeIn();
             });
@@ -52,8 +74,8 @@ ea.hooks.addAction("init", "ea", () => {
                 }
                 window.history.replaceState({}, '', `${location.pathname}?${params}`);
                 $regFormWrapper.hide();
-                $lostpasswordFormWrapper.hide();
-                $loginFormWrapper.fadeIn();
+                $loginFormWrapper.hide();
+                $lostpasswordFormWrapper.fadeIn();
             });
         }
 
