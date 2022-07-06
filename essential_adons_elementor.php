@@ -14,8 +14,8 @@
  * Elementor Pro tested up to: 3.7.2
  */
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 } // Exit if accessed directly
 
 /**
@@ -23,13 +23,13 @@ if (!defined('ABSPATH')) {
  *
  * @since 3.0.0
  */
-define('EAEL_PLUGIN_FILE', __FILE__);
-define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
-define('EAEL_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));
-define('EAEL_PLUGIN_URL', trailingslashit(plugins_url('/', __FILE__)));
-define('EAEL_PLUGIN_VERSION', '5.1.8');
-define('EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . '/essential-addons-elementor');
-define('EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-elementor');
+define( 'EAEL_PLUGIN_FILE', __FILE__ );
+define( 'EAEL_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+define( 'EAEL_PLUGIN_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
+define( 'EAEL_PLUGIN_URL', trailingslashit( plugins_url( '/', __FILE__ ) ) );
+define( 'EAEL_PLUGIN_VERSION', '5.1.8' );
+define( 'EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . '/essential-addons-elementor' );
+define( 'EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-elementor' );
 /**
  * Including composer autoloader globally.
  *
@@ -49,58 +49,78 @@ $GLOBALS['eael_config'] = require_once EAEL_PLUGIN_PATH . 'config.php';
  *
  * @since 3.0.0
  */
-add_action('plugins_loaded', function () {
-    \Essential_Addons_Elementor\Classes\Bootstrap::instance();
-});
+add_action(
+	'plugins_loaded',
+	function () {
+		\Essential_Addons_Elementor\Classes\Bootstrap::instance();
+	}
+);
 
 /**
  * Plugin migrator
  *
  * @since v3.0.0
  */
-add_action('wp_loaded', function () {
-    $migration = new \Essential_Addons_Elementor\Classes\Migration;
-    $migration->migrator();
-});
+add_action(
+	'wp_loaded',
+	function () {
+		$migration = new \Essential_Addons_Elementor\Classes\Migration;
+		$migration->migrator();
+	}
+);
 
 /**
  * Activation hook
  *
  * @since v3.0.0
  */
-register_activation_hook(__FILE__, function () {
-    $migration = new \Essential_Addons_Elementor\Classes\Migration;
-    $migration->plugin_activation_hook();
-});
+register_activation_hook(
+	__FILE__,
+	function () {
+		$migration = new \Essential_Addons_Elementor\Classes\Migration;
+		$migration->plugin_activation_hook();
+	}
+);
 
 /**
  * Deactivation hook
  *
  * @since v3.0.0
  */
-register_deactivation_hook(__FILE__, function () {
-    $migration = new \Essential_Addons_Elementor\Classes\Migration;
-    $migration->plugin_deactivation_hook();
-});
+register_deactivation_hook(
+	__FILE__,
+	function () {
+		$migration = new \Essential_Addons_Elementor\Classes\Migration;
+		$migration->plugin_deactivation_hook();
+	}
+);
 
 /**
  * Upgrade hook
  *
  * @since v3.0.0
  */
-add_action('upgrader_process_complete', function ($upgrader_object, $options) {
-    $migration = new \Essential_Addons_Elementor\Classes\Migration;
-    $migration->plugin_upgrade_hook($upgrader_object, $options);
-}, 10, 2);
+add_action(
+	'upgrader_process_complete',
+	function ( $upgrader_object, $options ) {
+		$migration = new \Essential_Addons_Elementor\Classes\Migration;
+		$migration->plugin_upgrade_hook( $upgrader_object, $options );
+	},
+	10,
+	2
+);
 
-add_action( 'wp_loaded', function () {
-    $setup_wizard = get_option( 'eael_setup_wizard' );
-    if ( $setup_wizard == 'redirect' ) {
-        \Essential_Addons_Elementor\Classes\WPDeveloper_Setup_Wizard::redirect();
-    }
+add_action(
+	'wp_loaded',
+	function () {
+		$setup_wizard = get_option( 'eael_setup_wizard' );
+		if ( $setup_wizard == 'redirect' ) {
+			\Essential_Addons_Elementor\Classes\WPDeveloper_Setup_Wizard::redirect();
+		}
 
-    if ( $setup_wizard == 'init' ) {
-        new \Essential_Addons_Elementor\Classes\WPDeveloper_Setup_Wizard();
-    }
-} );
+		if ( $setup_wizard == 'init' ) {
+			new \Essential_Addons_Elementor\Classes\WPDeveloper_Setup_Wizard();
+		}
+	}
+);
 

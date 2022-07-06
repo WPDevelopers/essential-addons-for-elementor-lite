@@ -1,203 +1,197 @@
 <?php
 namespace Essential_Addons_Elementor\Classes;
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 } // Exit if accessed directly.
 
 use \WP_Error;
 
-class WPDeveloper_Plugin_Installer
-{
-    public function __construct()
-    {
-        add_action('wp_ajax_wpdeveloper_install_plugin', [$this, 'ajax_install_plugin']);
-        add_action('wp_ajax_wpdeveloper_upgrade_plugin', [$this, 'ajax_upgrade_plugin']);
-        add_action('wp_ajax_wpdeveloper_activate_plugin', [$this, 'ajax_activate_plugin']);
-    }
+class WPDeveloper_Plugin_Installer {
 
-    /**
-     * get_local_plugin_data
-     *
-     * @param  mixed $basename
-     * @return array|false
-     */
-    public function get_local_plugin_data($basename = '')
-    {
-        if (empty($basename)) {
-            return false;
-        }
+	public function __construct() {
+		add_action( 'wp_ajax_wpdeveloper_install_plugin', array( $this, 'ajax_install_plugin' ) );
+		add_action( 'wp_ajax_wpdeveloper_upgrade_plugin', array( $this, 'ajax_upgrade_plugin' ) );
+		add_action( 'wp_ajax_wpdeveloper_activate_plugin', array( $this, 'ajax_activate_plugin' ) );
+	}
 
-        if (!function_exists('get_plugins')) {
-            include_once ABSPATH . 'wp-admin/includes/plugin.php';
-        }
+	/**
+	 * get_local_plugin_data
+	 *
+	 * @param  mixed $basename
+	 * @return array|false
+	 */
+	public function get_local_plugin_data( $basename = '' ) {
+		if ( empty( $basename ) ) {
+			return false;
+		}
 
-        $plugins = get_plugins();
+		if ( ! function_exists( 'get_plugins' ) ) {
+			include_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
 
-        if (!isset($plugins[$basename])) {
-            return false;
-        }
+		$plugins = get_plugins();
 
-        return $plugins[$basename];
-    }
+		if ( ! isset( $plugins[ $basename ] ) ) {
+			return false;
+		}
 
-    /**
-     * get_remote_plugin_data
-     *
-     * @param  mixed $slug
-     * @return mixed array|WP_Error
-     */
-    public function get_remote_plugin_data($slug = '')
-    {
-        if (empty($slug)) {
-            return new WP_Error('empty_arg', __('Argument should not be empty.'));
-        }
+		return $plugins[ $basename ];
+	}
 
-        $response = wp_remote_post(
-            'http://api.wordpress.org/plugins/info/1.0/',
-            [
-                'body' => [
-                    'action' => 'plugin_information',
-                    'request' => serialize((object) [
-                        'slug' => $slug,
-                        'fields' => [
-                            'version' => false,
-                        ],
-                    ]),
-                ],
-            ]
-        );
+	/**
+	 * get_remote_plugin_data
+	 *
+	 * @param  mixed $slug
+	 * @return mixed array|WP_Error
+	 */
+	public function get_remote_plugin_data( $slug = '' ) {
+		if ( empty( $slug ) ) {
+			return new WP_Error( 'empty_arg', __( 'Argument should not be empty.' ) );
+		}
 
-        if (is_wp_error($response)) {
-            return $response;
-        }
+		$response = wp_remote_post(
+			'http://api.wordpress.org/plugins/info/1.0/',
+			array(
+				'body' => array(
+					'action'  => 'plugin_information',
+					'request' => serialize(
+						(object) array(
+							'slug'   => $slug,
+							'fields' => array(
+								'version' => false,
+							),
+						)
+					),
+				),
+			)
+		);
 
-        return unserialize(wp_remote_retrieve_body($response));
-    }
+		if ( is_wp_error( $response ) ) {
+			return $response;
+		}
 
-    /**
-     * install_plugin
-     *
-     * @param  mixed $slug
-     * @param  bool $active
-     * @return mixed bool|WP_Error
-     */
-    public function install_plugin($slug = '', $active = true)
-    {
-        if (empty($slug)) {
-            return new WP_Error('empty_arg', __('Argument should not be empty.'));
-        }
+		return unserialize( wp_remote_retrieve_body( $response ) );
+	}
 
-        include_once ABSPATH . 'wp-admin/includes/file.php';
-        include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-        include_once ABSPATH . 'wp-admin/includes/class-automatic-upgrader-skin.php';
+	/**
+	 * install_plugin
+	 *
+	 * @param  mixed $slug
+	 * @param  bool  $active
+	 * @return mixed bool|WP_Error
+	 */
+	public function install_plugin( $slug = '', $active = true ) {
+		if ( empty( $slug ) ) {
+			return new WP_Error( 'empty_arg', __( 'Argument should not be empty.' ) );
+		}
 
-        $plugin_data = $this->get_remote_plugin_data($slug);
+		include_once ABSPATH . 'wp-admin/includes/file.php';
+		include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+		include_once ABSPATH . 'wp-admin/includes/class-automatic-upgrader-skin.php';
 
-        if (is_wp_error($plugin_data)) {
-            return $plugin_data;
-        }
+		$plugin_data = $this->get_remote_plugin_data( $slug );
 
-        $upgrader = new \Plugin_Upgrader(new \Automatic_Upgrader_Skin());
+		if ( is_wp_error( $plugin_data ) ) {
+			return $plugin_data;
+		}
 
-        // install plugin
-        $install = $upgrader->install($plugin_data->download_link);
+		$upgrader = new \Plugin_Upgrader( new \Automatic_Upgrader_Skin() );
 
-        if (is_wp_error($install)) {
-            return $install;
-        }
+		// install plugin
+		$install = $upgrader->install( $plugin_data->download_link );
 
-        // activate plugin
-        if ($install === true && $active) {
-            $active = activate_plugin($upgrader->plugin_info(), '', false, true);
+		if ( is_wp_error( $install ) ) {
+			return $install;
+		}
 
-            if (is_wp_error($active)) {
-                return $active;
-            }
+		// activate plugin
+		if ( $install === true && $active ) {
+			$active = activate_plugin( $upgrader->plugin_info(), '', false, true );
 
-            return $active === null;
-        }
+			if ( is_wp_error( $active ) ) {
+				return $active;
+			}
 
-        return $install;
-    }
+			return $active === null;
+		}
 
-    /**
-     * upgrade_plugin
-     *
-     * @param  mixed $basename
-     * @return mixed bool|WP_Error
-     */
-    public function upgrade_plugin($basename = '')
-    {
-        if (empty($slug)) {
-            return new WP_Error('empty_arg', __('Argument should not be empty.'));
-        }
+		return $install;
+	}
 
-        include_once ABSPATH . 'wp-admin/includes/file.php';
-        include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-        include_once ABSPATH . 'wp-admin/includes/class-automatic-upgrader-skin.php';
+	/**
+	 * upgrade_plugin
+	 *
+	 * @param  mixed $basename
+	 * @return mixed bool|WP_Error
+	 */
+	public function upgrade_plugin( $basename = '' ) {
+		if ( empty( $slug ) ) {
+			return new WP_Error( 'empty_arg', __( 'Argument should not be empty.' ) );
+		}
 
-        $upgrader = new \Plugin_Upgrader(new \Automatic_Upgrader_Skin());
+		include_once ABSPATH . 'wp-admin/includes/file.php';
+		include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+		include_once ABSPATH . 'wp-admin/includes/class-automatic-upgrader-skin.php';
 
-        // upgrade plugin
-        return $upgrader->upgrade($basename);
-    }
+		$upgrader = new \Plugin_Upgrader( new \Automatic_Upgrader_Skin() );
 
-    public function ajax_install_plugin()
-    {
-        check_ajax_referer('essential-addons-elementor', 'security');
+		// upgrade plugin
+		return $upgrader->upgrade( $basename );
+	}
 
-        if(!current_user_can( 'install_plugins' )) {
-            wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
-        }
+	public function ajax_install_plugin() {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
 
-	    $slug   = isset( $_POST['slug'] ) ? sanitize_text_field( $_POST['slug'] ) : '';
-	    $result = $this->install_plugin( $slug );
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+		}
 
-	    if ( is_wp_error( $result ) ) {
-		    wp_send_json_error( $result->get_error_message() );
-	    }
+		$slug   = isset( $_POST['slug'] ) ? sanitize_text_field( $_POST['slug'] ) : '';
+		$result = $this->install_plugin( $slug );
 
-        wp_send_json_success(__('Plugin is installed successfully!', 'essential-addons-for-elementor-lite'));
-    }
+		if ( is_wp_error( $result ) ) {
+			wp_send_json_error( $result->get_error_message() );
+		}
 
-    public function ajax_upgrade_plugin()
-    {
-        check_ajax_referer('essential-addons-elementor', 'security');
-        //check user capabilities
-        if(!current_user_can( 'update_plugins' )) {
-            wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
-        }
+		wp_send_json_success( __( 'Plugin is installed successfully!', 'essential-addons-for-elementor-lite' ) );
+	}
 
-	    $basename = isset( $_POST['basename'] ) ? sanitize_text_field( $_POST['basename'] ) : '';
-	    $result   = $this->upgrade_plugin( $basename );
+	public function ajax_upgrade_plugin() {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+		// check user capabilities
+		if ( ! current_user_can( 'update_plugins' ) ) {
+			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+		}
 
-        if (is_wp_error($result)) {
-            wp_send_json_error($result->get_error_message());
-        }
+		$basename = isset( $_POST['basename'] ) ? sanitize_text_field( $_POST['basename'] ) : '';
+		$result   = $this->upgrade_plugin( $basename );
 
-        wp_send_json_success(__('Plugin is updated successfully!', 'essential-addons-for-elementor-lite'));
-    }
+		if ( is_wp_error( $result ) ) {
+			wp_send_json_error( $result->get_error_message() );
+		}
 
-    public function ajax_activate_plugin()
-    {
-        check_ajax_referer('essential-addons-elementor', 'security');
+		wp_send_json_success( __( 'Plugin is updated successfully!', 'essential-addons-for-elementor-lite' ) );
+	}
 
-        //check user capabilities
-        if(!current_user_can( 'activate_plugins' )) {
-            wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
-        }
+	public function ajax_activate_plugin() {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
 
-	    $basename = isset( $_POST['basename'] ) ? sanitize_text_field( $_POST['basename'] ) : '';
-	    $result   = activate_plugin( $basename, '', false, true );
+		// check user capabilities
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+		}
 
-	    if ( is_wp_error( $result ) ) {
-		    wp_send_json_error( $result->get_error_message() );
-	    }
+		$basename = isset( $_POST['basename'] ) ? sanitize_text_field( $_POST['basename'] ) : '';
+		$result   = activate_plugin( $basename, '', false, true );
 
-        if ($result === false) {
-            wp_send_json_error(__('Plugin couldn\'t be activated.', 'essential-addons-for-elementor-lite'));
-        }
-        wp_send_json_success(__('Plugin is activated successfully!', 'essential-addons-for-elementor-lite'));
-    }
+		if ( is_wp_error( $result ) ) {
+			wp_send_json_error( $result->get_error_message() );
+		}
+
+		if ( $result === false ) {
+			wp_send_json_error( __( 'Plugin couldn\'t be activated.', 'essential-addons-for-elementor-lite' ) );
+		}
+		wp_send_json_success( __( 'Plugin is activated successfully!', 'essential-addons-for-elementor-lite' ) );
+	}
 }
