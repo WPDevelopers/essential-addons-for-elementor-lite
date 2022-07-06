@@ -244,6 +244,7 @@ class Login_Register extends Widget_Base {
 		$this->init_style_register_button_controls();
 		$this->init_style_login_link_controls();
 		$this->init_style_register_link_controls();
+		$this->init_style_lostpassword_link_controls();
 		$this->init_style_login_recaptcha_controls();
 		$this->init_style_register_recaptcha_controls();
 		do_action( 'eael/login-register/after-style-controls', $this );
@@ -861,8 +862,8 @@ class Login_Register extends Widget_Base {
 			'label'       => __( 'Button Text', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::TEXT,
 			'dynamic'     => [ 'active' => true, ],
-			'default'     => __( 'Get New Password', 'essential-addons-for-elementor-lite' ),
-			'placeholder' => __( 'Get New Password', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( 'Reset Password', 'essential-addons-for-elementor-lite' ),
+			'placeholder' => __( 'Reset Password', 'essential-addons-for-elementor-lite' ),
 		] );
 
 		$this->end_controls_section();
@@ -3437,6 +3438,10 @@ class Login_Register extends Widget_Base {
 		$this->_init_link_style( 'register' );
 	}
 
+	protected function init_style_lostpassword_link_controls() {
+		$this->_init_link_style( 'lostpassword' );
+	}
+
 	protected function init_style_login_recaptcha_controls() {
 		$this->_init_recaptcha_style( 'login' );
 	}
@@ -3743,16 +3748,27 @@ class Login_Register extends Widget_Base {
 	 */
 	protected function _init_link_style( $form_type = 'login' ) {
 		$form_name = 'login' === $form_type ? __( 'Register', 'essential-addons-for-elementor-lite' ) : __( 'Login', 'essential-addons-for-elementor-lite' );
+		$form_name = 'lostpassword' === $form_type ? __( 'Login (Lost Password)', 'essential-addons-for-elementor-lite' ) : $form_name;
+		
+		$link_section_condition = [
+			"show_{$form_type}_link" => 'yes',
+		];
+
+		if( 'lostpassword' === $form_type ){
+			$link_section_condition = [
+				"show_login_link_lostpassword" => 'yes',
+			];
+		}
+
 		$this->start_controls_section( "section_style_{$form_type}_link", [
 			'label'     => sprintf( __( '%s Link', 'essential-addons-for-elementor-lite' ), ucfirst( $form_name ) ),
 			'tab'       => Controls_Manager::TAB_STYLE,
-			'condition' => [
-				"show_{$form_type}_link" => 'yes',
-			],
+			'condition' => $link_section_condition,
 		] );
+
 		$this->add_control( "{$form_type}_link_style_notice", [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => sprintf( __( 'Here you can style the %s link displayed on the %s Form', 'essential-addons-for-elementor-lite' ), $form_name, ucfirst( $form_type ) ),
+			'raw'             => sprintf( __( 'Here you can style the %s link displayed on the %s Form', 'essential-addons-for-elementor-lite' ), $form_name, ucfirst( $form_name ) ),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 		] );
 		$this->add_control( "{$form_type}_link_pot", [
