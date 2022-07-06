@@ -19,6 +19,7 @@ class Asset_Builder {
 
 	/**
 	 * Post ID
+	 *
 	 * @var int
 	 */
 	protected $post_id;
@@ -75,6 +76,7 @@ class Asset_Builder {
 
 	/**
 	 * construct
+	 *
 	 * @param array $registered_elements
 	 * @param array $registered_extensions
 	 */
@@ -96,14 +98,14 @@ class Asset_Builder {
 	 * init_hook
 	 * Load Hook
 	 */
-	protected function init_hook(){
-		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
-		add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'ea_before_enqueue_styles' ] );
-		add_action( 'elementor/theme/register_locations', [ $this, 'post_asset_load' ],100 );
-		//add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ] );
-		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
-		add_action( 'wp_footer', [ $this, 'add_inline_css' ],15 );
-		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ], 10, 2 );
+	protected function init_hook() {
+		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_asset_load' ) );
+		add_action( 'elementor/frontend/before_enqueue_styles', array( $this, 'ea_before_enqueue_styles' ) );
+		add_action( 'elementor/theme/register_locations', array( $this, 'post_asset_load' ), 100 );
+		// add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ] );
+		add_action( 'wp_footer', array( $this, 'add_inline_js' ), 100 );
+		add_action( 'wp_footer', array( $this, 'add_inline_css' ), 15 );
+		add_action( 'after_delete_post', array( $this, 'delete_cache_data' ), 10, 2 );
 	}
 
 	/**
@@ -133,8 +135,8 @@ class Asset_Builder {
 	}
 
 	public function register_script() {
-		wp_register_script( 'eael-general', EAEL_PLUGIN_URL . 'assets/front-end/js/view/general.min.js', [ 'jquery' ], 10, true );
-		wp_register_style( 'eael-general', EAEL_PLUGIN_PATH . "assets/front-end/css/view/general.min.css", [ 'elementor-frontend' ], 10, true );
+		wp_register_script( 'eael-general', EAEL_PLUGIN_URL . 'assets/front-end/js/view/general.min.js', array( 'jquery' ), 10, true );
+		wp_register_style( 'eael-general', EAEL_PLUGIN_PATH . 'assets/front-end/css/view/general.min.css', array( 'elementor-frontend' ), 10, true );
 	}
 
 	/**
@@ -174,7 +176,7 @@ class Asset_Builder {
 		wp_register_script(
 			'eael-reading-progress',
 			EAEL_PLUGIN_URL . 'assets/front-end/js/view/reading-progress.min.js',
-			[ 'jquery' ],
+			array( 'jquery' ),
 			EAEL_PLUGIN_VERSION
 		);
 
@@ -189,7 +191,7 @@ class Asset_Builder {
 		wp_register_script(
 			'eael-table-of-content',
 			EAEL_PLUGIN_URL . 'assets/front-end/js/view/table-of-content.min.js',
-			[ 'jquery' ],
+			array( 'jquery' ),
 			EAEL_PLUGIN_VERSION
 		);
 
@@ -204,26 +206,30 @@ class Asset_Builder {
 		wp_register_script(
 			'eael-scroll-to-top',
 			EAEL_PLUGIN_URL . 'assets/front-end/js/view/scroll-to-top.min.js',
-			[ 'jquery' ],
+			array( 'jquery' ),
 			EAEL_PLUGIN_VERSION
 		);
 
 		// localize object
-		$this->localize_objects = apply_filters( 'eael/localize_objects', [
-			'ajaxurl'        => admin_url( 'admin-ajax.php' ),
-			'nonce'          => wp_create_nonce( 'essential-addons-elementor' ),
-			'i18n'           => [
-				'added'   => __( 'Added ', 'essential-addons-for-elementor-lite' ),
-				'compare' => __( 'Compare', 'essential-addons-for-elementor-lite' ),
-				'loading' => esc_html__( 'Loading...', 'essential-addons-for-elementor-lite' )
-			],
-			'page_permalink' => get_the_permalink(),
-		] );
+		$this->localize_objects = apply_filters(
+			'eael/localize_objects',
+			array(
+				'ajaxurl'        => admin_url( 'admin-ajax.php' ),
+				'nonce'          => wp_create_nonce( 'essential-addons-elementor' ),
+				'i18n'           => array(
+					'added'   => __( 'Added ', 'essential-addons-for-elementor-lite' ),
+					'compare' => __( 'Compare', 'essential-addons-for-elementor-lite' ),
+					'loading' => esc_html__( 'Loading...', 'essential-addons-for-elementor-lite' ),
+				),
+				'page_permalink' => get_the_permalink(),
+			)
+		);
 	}
 
 	/**
 	 * frontend_asset_load
 	 * Load asset as per condition
+	 *
 	 * @return false|void
 	 */
 	public function frontend_asset_load() {
@@ -265,6 +271,7 @@ class Asset_Builder {
 
 	/**
 	 * ea_before_enqueue_styles
+	 *
 	 * @return false|void
 	 */
 	public function ea_before_enqueue_styles() {
@@ -291,14 +298,15 @@ class Asset_Builder {
 
 	/**
 	 * post_asset_load
+	 *
 	 * @param $instance
 	 */
-	public function post_asset_load( $instance ){
+	public function post_asset_load( $instance ) {
 		$locations = $instance->get_locations();
 		foreach ( $locations as $location => $settings ) {
 			$documents = \ElementorPro\Modules\ThemeBuilder\Module::instance()->get_conditions_manager()->get_documents_for_location( $location );
 			foreach ( $documents as $document ) {
-				$post_id = $document->get_post()->ID;
+				$post_id       = $document->get_post()->ID;
 				$this->post_id = $post_id;
 				$this->set_main_page( $this->post_id );
 				$this->elements_manager->get_element_list( $this->post_id );
@@ -319,8 +327,9 @@ class Asset_Builder {
 
 	/**
 	 * enqueue_asset
-	 * @param int $post_id
-	 * @param array $elements
+	 *
+	 * @param int    $post_id
+	 * @param array  $elements
 	 * @param string $context
 	 */
 	public function enqueue_asset( $post_id = null, $elements, $context = 'view' ) {
@@ -336,7 +345,7 @@ class Asset_Builder {
 			wp_enqueue_style(
 				'eael' . $dynamic_asset_id,
 				$this->safe_url( EAEL_ASSET_URL . '/' . 'eael' . $dynamic_asset_id . '.css' ),
-				[ 'eael-general' ],
+				array( 'eael-general' ),
 				get_post_modified_time()
 			);
 		}
@@ -351,7 +360,7 @@ class Asset_Builder {
 			wp_enqueue_script(
 				'eael' . $dynamic_asset_id,
 				$this->safe_url( EAEL_ASSET_URL . '/' . 'eael' . $dynamic_asset_id . '.js' ),
-				[ 'eael-general' ],
+				array( 'eael-general' ),
 				get_post_modified_time(),
 				true
 			);
@@ -360,7 +369,8 @@ class Asset_Builder {
 
 	/**
 	 * delete_cache_data
-	 * @param int $post_id
+	 *
+	 * @param int   $post_id
 	 * @param array $post
 	 */
 	public function delete_cache_data( $post_id, $post ) {
@@ -373,7 +383,8 @@ class Asset_Builder {
 
 	/**
 	 * has_asset
-	 * @param int $post_id
+	 *
+	 * @param int    $post_id
 	 * @param string $file
 	 *
 	 * @return bool
@@ -401,6 +412,7 @@ class Asset_Builder {
 	/**
 	 * is_edit
 	 * check is edit page
+	 *
 	 * @return bool
 	 */
 	public function is_edit() {
@@ -413,6 +425,7 @@ class Asset_Builder {
 
 	/**
 	 * set_main_page
+	 *
 	 * @param $post_id
 	 */
 	protected function set_main_page( $post_id ) {

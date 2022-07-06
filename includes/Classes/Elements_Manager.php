@@ -24,24 +24,28 @@ class Elements_Manager {
 
 	/**
 	 * Post id
+	 *
 	 * @var string
 	 */
 	protected $post_id;
 
 	/**
 	 * registered element list from essential addons settings
+	 *
 	 * @var array
 	 */
 	protected $registered_elements;
 
 	/**
 	 * registered extensions list from essential addons settings
+	 *
 	 * @var array
 	 */
 	protected $registered_extensions;
 
 	/**
 	 * __construct
+	 *
 	 * @param array $registered_elements
 	 * @param array $registered_extensions
 	 */
@@ -54,7 +58,8 @@ class Elements_Manager {
 	/**
 	 * eael_elements_cache
 	 * Save widget name list in option table for improve performance.
-	 * @param int $post_id
+	 *
+	 * @param int   $post_id
 	 * @param array $data
 	 */
 	public function eael_elements_cache( $post_id, $data ) {
@@ -67,48 +72,52 @@ class Elements_Manager {
 	/**
 	 * get_widget_list
 	 * get widget names
+	 *
 	 * @param array $data
 	 *
 	 * @return array
 	 */
 	public function get_widget_list( $data ) {
-		$widget_list = [];
+		$widget_list = array();
 		$replace     = $this->replace_widget_name();
-		Plugin::$instance->db->iterate_data( $data, function ( $element ) use ( &$widget_list, $replace ) {
+		Plugin::$instance->db->iterate_data(
+			$data,
+			function ( $element ) use ( &$widget_list, $replace ) {
 
-			if ( empty( $element['widgetType'] ) ) {
-				$type = $element['elType'];
-			} else {
-				$type = $element['widgetType'];
-			}
-
-			if ( ! empty( $element['widgetType'] ) && $element['widgetType'] === 'global' ) {
-				$document = Plugin::$instance->documents->get( $element['templateID'] );
-				$type     = current( $this->get_widget_list( $document->get_elements_data() ) );
-
-				if ( ! empty( $type ) ) {
-					$type = 'eael-' . $type;
-				}
-			}
-
-			if ( ! empty( $type ) && ! is_array( $type ) ) {
-
-				if ( isset( $replace[ $type ] ) ) {
-					$type = $replace[ $type ];
+				if ( empty( $element['widgetType'] ) ) {
+					$type = $element['elType'];
+				} else {
+					$type = $element['widgetType'];
 				}
 
-				if ( strpos( $type, 'eael-' ) !== false ) {
+				if ( ! empty( $element['widgetType'] ) && $element['widgetType'] === 'global' ) {
+					$document = Plugin::$instance->documents->get( $element['templateID'] );
+					$type     = current( $this->get_widget_list( $document->get_elements_data() ) );
 
-					$type = str_replace( 'eael-', '', $type );
-					if ( ! isset( $widget_list[ $type ] ) ) {
-						$widget_list[ $type ] = $type;
+					if ( ! empty( $type ) ) {
+						$type = 'eael-' . $type;
 					}
 				}
 
-				$widget_list += $this->get_extension_list( $element );
-			}
+				if ( ! empty( $type ) && ! is_array( $type ) ) {
 
-		} );
+					if ( isset( $replace[ $type ] ) ) {
+						$type = $replace[ $type ];
+					}
+
+					if ( strpos( $type, 'eael-' ) !== false ) {
+
+						$type = str_replace( 'eael-', '', $type );
+						if ( ! isset( $widget_list[ $type ] ) ) {
+							$widget_list[ $type ] = $type;
+						}
+					}
+
+					$widget_list += $this->get_extension_list( $element );
+				}
+
+			}
+		);
 
 		return $widget_list;
 	}
@@ -116,6 +125,7 @@ class Elements_Manager {
 	/**
 	 * get_element_list
 	 * get cached widget list
+	 *
 	 * @param $post_id
 	 *
 	 * @return bool
@@ -131,7 +141,7 @@ class Elements_Manager {
 		}
 
 		$document  = Plugin::$instance->documents->get( $post_id );
-		$data      = $document ? $document->get_elements_data() : [];
+		$data      = $document ? $document->get_elements_data() : array();
 		$data      = $this->get_widget_list( $data );
 		$custom_js = $document ? $document->get_settings( 'eael_custom_js' ) : '';
 		$this->save_widgets_list( $post_id, $data, $custom_js );
@@ -142,12 +152,13 @@ class Elements_Manager {
 	/**
 	 * get_extension_list
 	 * get extension name those name had been changed for some reason.
+	 *
 	 * @param array $element
 	 *
 	 * @return array
 	 */
 	public function get_extension_list( $element ) {
-		$list = [];
+		$list = array();
 		if ( isset( $element['elType'] ) && $element['elType'] == 'section' ) {
 			if ( ! empty( $element['settings']['eael_particle_switch'] ) ) {
 				$list['section-particles'] = 'section-particles';
@@ -172,7 +183,7 @@ class Elements_Manager {
 	 * Added backward compatibility
 	 */
 	public function replace_widget_name() {
-		return [
+		return array(
 			'eicon-woocommerce'               => 'eael-product-grid',
 			'eael-countdown'                  => 'eael-count-down',
 			'eael-creative-button'            => 'eael-creative-btn',
@@ -189,14 +200,15 @@ class Elements_Manager {
 			'eael-dynamic-filterable-gallery' => 'eael-dynamic-filter-gallery',
 			'eael-google-map'                 => 'eael-adv-google-map',
 			'eael-instafeed'                  => 'eael-instagram-gallery',
-		];
+		);
 	}
 
 	/**
 	 * save_widgets_list
 	 * save widget list and custom js data in option table
-	 * @param int $post_id
-	 * @param array $list
+	 *
+	 * @param int    $post_id
+	 * @param array  $list
 	 * @param string $custom_js
 	 *
 	 * @return bool|mixed
@@ -238,8 +250,9 @@ class Elements_Manager {
 	/**
 	 * generate_script
 	 * create js/css file as per widget loaded in page
-	 * @param int $post_id
-	 * @param array $elements
+	 *
+	 * @param int    $post_id
+	 * @param array  $elements
 	 * @param string $context
 	 * @param string $ext
 	 */
@@ -263,6 +276,7 @@ class Elements_Manager {
 	/**
 	 * generate_strings
 	 * Load assets for inline loading
+	 *
 	 * @param string $elements
 	 * @param string $context
 	 * @param string $ext
@@ -286,21 +300,29 @@ class Elements_Manager {
 	/**
 	 * generate_dependency
 	 * Load core library for widget list which are defined on config.php file
-	 * @param array $elements
+	 *
+	 * @param array  $elements
 	 * @param string $context
 	 * @param string $type
 	 *
 	 * @return array
 	 */
 	public function generate_dependency( $elements, $context, $type ) {
-		$lib  = [ 'view' => [], 'edit' => [] ];
-		$self = [ 'general' => [], 'view' => [], 'edit' => [] ];
+		$lib  = array(
+			'view' => array(),
+			'edit' => array(),
+		);
+		$self = array(
+			'general' => array(),
+			'view'    => array(),
+			'edit'    => array(),
+		);
 
 		if ( $type == 'js' ) {
 			$self['general'][] = EAEL_PLUGIN_PATH . 'assets/front-end/js/view/general.min.js';
 			$self['edit'][]    = EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/promotion.min.js';
-		} else if ( $type == 'css' && ! $this->is_edit_mode() ) {
-			$self['view'][] = EAEL_PLUGIN_PATH . "assets/front-end/css/view/general.min.css";
+		} elseif ( $type == 'css' && ! $this->is_edit_mode() ) {
+			$self['view'][] = EAEL_PLUGIN_PATH . 'assets/front-end/css/view/general.min.css';
 		}
 		foreach ( $elements as $element ) {
 
@@ -328,6 +350,7 @@ class Elements_Manager {
 
 	/**
 	 * has_exist
+	 *
 	 * @param $post_id
 	 * check widget list already saved in option table weather load or not
 	 * @return bool
@@ -340,7 +363,8 @@ class Elements_Manager {
 
 	/**
 	 * update_asset
-	 * @param int $post_id
+	 *
+	 * @param int      $post_id
 	 * @param  $elements
 	 */
 	public function update_asset( $post_id, $elements ) {
@@ -357,12 +381,13 @@ class Elements_Manager {
 
 	/**
 	 * excluded_template_type
+	 *
 	 * @return string[]
 	 */
 	public function excluded_template_type() {
-		return [
+		return array(
 			'kit',
-			'search-results'
-		];
+			'search-results',
+		);
 	}
 }
