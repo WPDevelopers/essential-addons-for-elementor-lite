@@ -242,6 +242,7 @@ class Login_Register extends Widget_Base {
 		$this->init_style_input_labels_controls();
 		$this->init_style_login_button_controls();
 		$this->init_style_register_button_controls();
+		$this->init_style_lostpassword_button_controls();
 		$this->init_style_login_link_controls();
 		$this->init_style_register_link_controls();
 		$this->init_style_lostpassword_link_controls();
@@ -3430,6 +3431,10 @@ class Login_Register extends Widget_Base {
 		$this->_init_button_style( 'register' );
 	}
 
+	protected function init_style_lostpassword_button_controls() {
+		$this->_init_button_style( 'lostpassword' );
+	}
+
 	protected function init_style_login_link_controls() {
 		$this->_init_link_style( 'login' );
 	}
@@ -3457,7 +3462,7 @@ class Login_Register extends Widget_Base {
 	 */
 	protected function _init_button_style( $button_type = 'login' ) {
 		$this->start_controls_section( "section_style_{$button_type}_btn", [
-			'label'      => sprintf( __( '%s Button', 'essential-addons-for-elementor-lite' ), ucfirst( $button_type ) ),
+			'label'      => sprintf( __( '%s Button', 'essential-addons-for-elementor-lite' ), 'lostpassword' === $button_type ? __('Lost Password', 'essential-addons-for-elementor-lite') : ucfirst( $button_type ) ),
 			'tab'        => Controls_Manager::TAB_STYLE,
 			'conditions' => $this->get_form_controls_display_condition( $button_type ),
 		] );
@@ -3749,7 +3754,6 @@ class Login_Register extends Widget_Base {
 	protected function _init_link_style( $form_type = 'login' ) {
 		$form_name = 'login' === $form_type ? __( 'Register', 'essential-addons-for-elementor-lite' ) : __( 'Login', 'essential-addons-for-elementor-lite' );
 		$form_name = 'lostpassword' === $form_type ? __( 'Login (Lost Password)', 'essential-addons-for-elementor-lite' ) : $form_name;
-		
 		$link_section_condition = [
 			"show_{$form_type}_link" => 'yes',
 		];
@@ -3768,7 +3772,10 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( "{$form_type}_link_style_notice", [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => sprintf( __( 'Here you can style the %s link displayed on the %s Form', 'essential-addons-for-elementor-lite' ), $form_name, ucfirst( $form_name ) ),
+			'raw'             => sprintf( __( 'Here you can style the %s link displayed on the %s Form', 'essential-addons-for-elementor-lite' ), 
+										'lostpassword' === $form_type ? __('Login', 'essential-addons-for-elementor-lite') : $form_name, 
+										'lostpassword' === $form_type ? __('Lost Password', 'essential-addons-for-elementor-lite') : ucfirst( $form_type ) 
+									),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 		] );
 		$this->add_control( "{$form_type}_link_pot", [
@@ -4057,20 +4064,35 @@ class Login_Register extends Widget_Base {
 		$form_type = in_array( $type, [
 			'login',
 			'register',
+			'lostpassword'
 		] ) ? $type : 'login';
 
+		$terms_condition = [
+			[
+				'name'  => 'default_form_type',
+				'value' => $form_type,
+			]
+		];
+
+		if('lostpassword' === $form_type){
+			$terms_condition[] = [
+				'name'  => 'show_login_link_lostpassword',
+				'value' => 'yes',
+			];
+			$terms_condition[] = [
+				'name'  => 'show_lost_password',
+				'value' => 'yes',
+			];
+		}else {
+			$terms_condition[] = [
+				'name'  => "show_{$form_type}_link",
+				'value' => 'yes',
+			];
+		}
+		
 		$terms_relation_conditions = [
 			'relation' => 'or',
-			'terms'    => [
-				[
-					'name'  => "show_{$form_type}_link",
-					'value' => 'yes',
-				],
-				[
-					'name'  => 'default_form_type',
-					'value' => $form_type,
-				]
-			],
+			'terms'    => $terms_condition,
 		];
 
 		return $terms_relation_conditions;
@@ -4587,7 +4609,7 @@ class Login_Register extends Widget_Base {
 	protected function print_lost_password_form(){
 		if ( $this->should_print_lostpassword_form ) {
 			// prepare all lostpassword form related vars
-			$default_hide_class = ( 'register' === $this->default_form || 'login' === $this->default_form || isset($_GET['eael-register']) ) ? 'eael-lr-d-none' : '';
+			$default_hide_class = ( 'register' === $this->default_form || 'login' === $this->default_form || isset($_GET['eael-register']) ) && !isset($_GET['eael-lostpassword']) ? 'eael-lr-d-none' : '';
 
 			//Login link related
 			$login_link_action_lostpassword = ! empty( $this->ds['login_link_action_lostpassword'] ) ? $this->ds['login_link_action_lostpassword'] : 'form';
