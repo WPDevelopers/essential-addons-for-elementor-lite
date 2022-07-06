@@ -1710,7 +1710,7 @@ class Login_Register extends Widget_Base {
 			'render_type' => 'none',
 			'options'     => [
 				'default' => __( 'WordPres Default', 'essential-addons-for-elementor-lite' ),
-				'custom'  => __( 'Custom', 'essential-addons-for-elementor-lite' ),
+				// 'custom'  => __( 'Custom', 'essential-addons-for-elementor-lite' ),
 			],
 		] );
 

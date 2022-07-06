@@ -35,8 +35,10 @@ trait Login_Registration {
 		// login or register form?
 		if ( isset( $_POST['eael-login-submit'] ) ) {
 			$this->log_user_in();
-		} elseif ( isset( $_POST['eael-register-submit'] ) ) {
+		} else if ( isset( $_POST['eael-register-submit'] ) ) {
 			$this->register_user();
+		} else if ( isset( $_POST['eael-lostpassword-submit'] ) ) {
+			$this->send_password_reset();
 		}
 		do_action( 'eael/login-register/after-processing-login-register', $_POST );
 
@@ -509,6 +511,123 @@ trait Login_Registration {
             exit();
         }
 
+	}
+
+	/**
+	 * It sends the user an email with reset password link. Lost Password form is submitted normally without AJAX.
+	 */
+	public function send_password_reset() {
+		$ajax   = wp_doing_ajax();
+		// before even thinking about sending mail, check security and exit early if something is not right.
+		$page_id = 0;
+		if ( ! empty( $_POST['page_id'] ) ) {
+			$page_id = intval( $_POST['page_id'], 10 );
+		} else {
+			$err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
+		}
+
+		$widget_id = 0;
+		if ( ! empty( $_POST['widget_id'] ) ) {
+			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+		} else {
+			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
+		}
+
+		if (!empty( $err_msg )){
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			update_option( 'eael_losstpassword_error_' . $widget_id, $err_msg, false );
+
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            }
+		}
+
+
+		if ( empty( $_POST['eael-lostpassword-nonce'] ) ) {
+			$err_msg = __( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
+
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            }
+		}
+
+		if ( ! wp_verify_nonce( $_POST['eael-lostpassword-nonce'], 'eael-lostpassword-action' ) ) {
+			$err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
+
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            }
+		}
+		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
+
+		if ( is_user_logged_in() ) {
+			$err_msg = isset( $settings['err_loggedin'] ) ? $settings['err_loggedin'] : __( 'You are already logged in', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
+
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            }
+		}
+
+		do_action( 'eael/login-register/before-lostpassword-email' );
+
+		$widget_id = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( $_POST['widget_id'] ) : '';
+
+		$user_login = ! empty( $_POST['eael-user-lostpassword'] ) ? sanitize_text_field( $_POST['eael-user-lostpassword'] ) : '';
+		if ( is_email( $user_login ) ) {
+			$user_login = sanitize_email( $user_login );
+		}
+
+		$results = retrieve_password( $user_login );
+		
+		if ( is_wp_error( $results ) ) {
+			$err_msg = '';
+			if ( isset( $results->errors['invalidcombo'][0] ) ) {
+				$err_msg = __( 'There is no account with that username or email address.', 'essential-addons-for-elementor-lite' );
+			}
+
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
+		} else {
+			if ( $ajax ) {
+
+				$data = [
+					'message' => __( 'Check your email for the confirmation link.', 'essential-addons-for-elementor-lite' ),
+				];
+				if ( ! empty( $_POST['redirect_to'] ) ) {
+					$data['redirect_to'] = esc_url_raw( $_POST['redirect_to'] );
+				}
+				wp_send_json_success( $data );
+			}
+
+			if ( ! empty( $_POST['redirect_to'] ) ) {
+				wp_safe_redirect( esc_url_raw( $_POST['redirect_to'] ) );
+				exit();
+			}
+		}
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            wp_safe_redirect($_SERVER['HTTP_REFERER']);
+            exit();
+        }
 	}
 
 	public function generate_username_from_email( $email, $suffix = '' ) {
