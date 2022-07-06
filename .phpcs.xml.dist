@@ -57,4 +57,13 @@
     <rule ref="Squiz.Commenting.FunctionCommentThrowTag.Missing">
         <exclude-pattern>tests/*</exclude-pattern>
     </rule>
+    <rule  ref="WordPress.Files.FileName.NotHyphenatedLowercase">
+        <exclude-pattern>includes/*</exclude-pattern>
+    </rule>
+    <rule  ref="WordPress.Files.FileName.InvalidClassFileName">
+        <exclude-pattern>includes/*</exclude-pattern>
+    </rule>
+    <rule  ref="WordPress.NamingConventions.ValidHookName.UseUnderscores">
+        <exclude-pattern>includes/*</exclude-pattern>
+    </rule>
 </ruleset>

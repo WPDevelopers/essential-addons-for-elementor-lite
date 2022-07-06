@@ -1,4 +1,10 @@
 <?php
+/**
+ * Asset_Builder
+ *
+ * @package Essential_Addons_Elementor
+ * @since   1.0.0
+ */
 
 namespace Essential_Addons_Elementor\Classes;
 
@@ -10,84 +16,112 @@ use Elementor\Plugin;
 use Essential_Addons_Elementor\Classes\Elements_Manager;
 use Essential_Addons_Elementor\Traits\Library;
 
+/**
+ * Asset Builder Class.
+ *
+ * @class Asset_Builder
+ */
 class Asset_Builder {
 
 	/**
+	 * Trait Library.
+	 *
 	 * @theTraitAnnotation Library
 	 */
 	use Library;
 
 	/**
-	 * Post ID
+	 * Post ID.
 	 *
 	 * @var int
 	 */
 	protected $post_id;
 
 	/**
+	 * Keep inline js.
+	 *
 	 * @var string
 	 */
 	protected $custom_js = '';
 
 	/**
+	 * Keep inline js.
+	 *
 	 * @var string
 	 */
 	protected $css_strings = '';
 
 	/**
+	 * Manage Elements.
+	 *
 	 * @var \Essential_Addons_Elementor\Classes\Elements_Manager
 	 */
 	protected $elements_manager;
 
 	/**
+	 * CSS Print Method.
+	 *
 	 * @var false|mixed|string|void
 	 */
 	protected $css_print_method = '';
 
 	/**
+	 * JS Print Method.
+	 *
 	 * @var false|mixed|string|void
 	 */
 	protected $js_print_method = '';
 
 	/**
+	 * Registered Elements.
+	 *
 	 * @var array
 	 */
 	protected $registered_elements;
 
 	/**
+	 * Registered Extensions.
+	 *
 	 * @var array
 	 */
 	protected $registered_extensions;
 
 	/**
+	 * Localize Objects.
+	 *
 	 * @var object
 	 */
 	protected $localize_objects;
 
 	/**
+	 * Custom JS Enable.
+	 *
 	 * @var int|int[]|mixed|string[]
 	 */
 	protected $custom_js_enable;
 
 	/**
+	 * Main Page.
+	 *
 	 * @var bool
 	 */
 	protected $main_page;
 
 	/**
-	 * construct
+	 * Construct.
 	 *
-	 * @param array $registered_elements
-	 * @param array $registered_extensions
+	 * @param array $registered_elements EA widget list.
+	 * @param array $registered_extensions EA extension list.
 	 */
 	public function __construct( $registered_elements, $registered_extensions ) {
 
 		$this->registered_elements                = $registered_elements;
 		$this->registered_extensions              = $registered_extensions;
 		$this->elements_manager                   = new Elements_Manager( $this->registered_elements, $this->registered_extensions );
-		$this->elements_manager->css_print_method = $this->css_print_method = get_option( 'elementor_css_print_method' );
-		$this->elements_manager->js_print_method  = $this->js_print_method = get_option( 'eael_js_print_method' );
-
+		$this->css_print_method                   = get_option( 'elementor_css_print_method' );
+		$this->js_print_method                    = get_option( 'eael_js_print_method' );
+		$this->elements_manager->css_print_method = $this->css_print_method;
+		$this->elements_manager->js_print_method  = $this->js_print_method;
 		$this->init_hook();
 
 		$this->custom_js_enable = $this->get_settings( 'custom-js' );
@@ -95,22 +129,21 @@ class Asset_Builder {
 	}
 
 	/**
-	 * init_hook
-	 * Load Hook
+	 * Init_hook.
+	 * Load Hook.
 	 */
 	protected function init_hook() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_asset_load' ) );
 		add_action( 'elementor/frontend/before_enqueue_styles', array( $this, 'ea_before_enqueue_styles' ) );
 		add_action( 'elementor/theme/register_locations', array( $this, 'post_asset_load' ), 100 );
-		// add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ] );
 		add_action( 'wp_footer', array( $this, 'add_inline_js' ), 100 );
 		add_action( 'wp_footer', array( $this, 'add_inline_css' ), 15 );
 		add_action( 'after_delete_post', array( $this, 'delete_cache_data' ), 10, 2 );
 	}
 
 	/**
-	 * add_inline_js
-	 * Load inline js data
+	 * Load inline js data.
+	 * Add_inline_js
 	 */
 	public function add_inline_js() {
 
@@ -123,8 +156,8 @@ class Asset_Builder {
 	}
 
 	/**
+	 * Load inline css file.
 	 * add_inline_css
-	 * Load inline css file
 	 */
 	public function add_inline_css() {
 		if ( $this->is_edit_mode() || $this->is_preview_mode() ) {
@@ -134,14 +167,18 @@ class Asset_Builder {
 		}
 	}
 
+	/**
+	 * Register general script.
+	 * register_script
+	 */
 	public function register_script() {
 		wp_register_script( 'eael-general', EAEL_PLUGIN_URL . 'assets/front-end/js/view/general.min.js', array( 'jquery' ), 10, true );
 		wp_register_style( 'eael-general', EAEL_PLUGIN_PATH . 'assets/front-end/css/view/general.min.css', array( 'elementor-frontend' ), 10, true );
 	}
 
 	/**
+	 * Load common asset file.
 	 * load_common_asset
-	 * Load common asset file
 	 */
 	public function load_commnon_asset() {
 		wp_register_style(
@@ -165,7 +202,7 @@ class Asset_Builder {
 			EAEL_PLUGIN_VERSION
 		);
 
-		// register reading progress assets
+		// register reading progress assets.
 		wp_register_style(
 			'eael-reading-progress',
 			EAEL_PLUGIN_URL . 'assets/front-end/css/view/reading-progress.min.css',
@@ -180,7 +217,7 @@ class Asset_Builder {
 			EAEL_PLUGIN_VERSION
 		);
 
-		// register Table of contents assets
+		// register Table of contents assets.
 		wp_register_style(
 			'eael-table-of-content',
 			EAEL_PLUGIN_URL . 'assets/front-end/css/view/table-of-content.min.css',
@@ -195,7 +232,7 @@ class Asset_Builder {
 			EAEL_PLUGIN_VERSION
 		);
 
-		// register scroll to top assets
+		// register scroll to top assets.
 		wp_register_style(
 			'eael-scroll-to-top',
 			EAEL_PLUGIN_URL . 'assets/front-end/css/view/scroll-to-top.min.css',
@@ -210,7 +247,7 @@ class Asset_Builder {
 			EAEL_PLUGIN_VERSION
 		);
 
-		// localize object
+		// localize object.
 		$this->localize_objects = apply_filters(
 			'eael/localize_objects',
 			array(
@@ -227,8 +264,8 @@ class Asset_Builder {
 	}
 
 	/**
+	 * Load asset as per condition.
 	 * frontend_asset_load
-	 * Load asset as per condition
 	 *
 	 * @return false|void
 	 */
@@ -252,11 +289,11 @@ class Asset_Builder {
 				return false;
 			}
 
-			if ( $this->js_print_method == 'internal' ) {
+			if ( 'internal' === $this->js_print_method ) {
 				wp_enqueue_script( 'eael-general' );
 			}
 
-			if ( $this->css_print_method == 'internal' ) {
+			if ( 'internal' === $this->css_print_method ) {
 				wp_enqueue_style( 'eael-general' );
 			}
 
@@ -270,6 +307,7 @@ class Asset_Builder {
 	}
 
 	/**
+	 * Load EA asset before elementor asset loading.
 	 * ea_before_enqueue_styles
 	 *
 	 * @return false|void
@@ -297,9 +335,10 @@ class Asset_Builder {
 	}
 
 	/**
+	 * Load asset for each post ID.
 	 * post_asset_load
 	 *
-	 * @param $instance
+	 * @param object $instance Elementor PRO location class.
 	 */
 	public function post_asset_load( $instance ) {
 		$locations = $instance->get_locations();
@@ -326,16 +365,17 @@ class Asset_Builder {
 	}
 
 	/**
+	 * Enqueue Asset.
 	 * enqueue_asset
 	 *
-	 * @param int    $post_id
-	 * @param array  $elements
-	 * @param string $context
+	 * @param int    $post_id post ID.
+	 * @param array  $elements Widget list.
+	 * @param string $context Request fields.
 	 */
 	public function enqueue_asset( $post_id = null, $elements, $context = 'view' ) {
 		$dynamic_asset_id = ( $post_id ? '-' . $post_id : '' );
 
-		if ( $this->css_print_method == 'internal' ) {
+		if ( 'internal' === $this->css_print_method ) {
 			$this->css_strings .= $this->elements_manager->generate_strings( $elements, $context, 'css' );
 		} else {
 			if ( ! $this->has_asset( $post_id, 'css' ) ) {
@@ -350,7 +390,7 @@ class Asset_Builder {
 			);
 		}
 
-		if ( $this->js_print_method == 'internal' ) {
+		if ( 'internal' === $this->js_print_method ) {
 			$this->custom_js .= $this->elements_manager->generate_strings( $elements, $context, 'js' );
 		} else {
 			if ( ! $this->has_asset( $post_id, 'js' ) ) {
@@ -368,10 +408,11 @@ class Asset_Builder {
 	}
 
 	/**
+	 * Delete Asset.
 	 * delete_cache_data
 	 *
-	 * @param int   $post_id
-	 * @param array $post
+	 * @param int   $post_id post ID.
+	 * @param array $post post object.
 	 */
 	public function delete_cache_data( $post_id, $post ) {
 		$this->elements_manager->remove_files( $post_id );
@@ -382,10 +423,11 @@ class Asset_Builder {
 	}
 
 	/**
+	 * Check asset availability.
 	 * has_asset
 	 *
-	 * @param int    $post_id
-	 * @param string $file
+	 * @param int    $post_id post ID.
+	 * @param string $file file name .
 	 *
 	 * @return bool
 	 */
@@ -397,6 +439,14 @@ class Asset_Builder {
 		return false;
 	}
 
+	/**
+	 * Load JS.
+	 * load_custom_js
+	 *
+	 * @param int $post_id post ID.
+	 *
+	 * @return false|void
+	 */
 	public function load_custom_js( $post_id ) {
 
 		if ( ! $this->custom_js_enable ) {
@@ -410,8 +460,8 @@ class Asset_Builder {
 	}
 
 	/**
+	 * Check is edit page.
 	 * is_edit
-	 * check is edit page
 	 *
 	 * @return bool
 	 */
@@ -424,12 +474,13 @@ class Asset_Builder {
 	}
 
 	/**
+	 * Set Main Page.
 	 * set_main_page
 	 *
-	 * @param $post_id
+	 * @param int $post_id post ID.
 	 */
 	protected function set_main_page( $post_id ) {
-		$this->main_page = get_post_meta( $post_id, '_elementor_template_type', true ) == 'wp-page';
+		$this->main_page = 'wp-page' === get_post_meta( $post_id, '_elementor_template_type', true );
 	}
 
 }

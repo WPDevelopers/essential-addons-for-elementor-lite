@@ -1,4 +1,10 @@
 <?php
+/**
+ * Elements_Manager
+ *
+ * @package Essential_Addons_Elementor
+ * @since   1.0.0
+ */
 
 namespace Essential_Addons_Elementor\Classes;
 
@@ -8,12 +14,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Elementor\Plugin;
 use Essential_Addons_Elementor\Traits\Library;
-
+/**
+ * Elements Manager Class.
+ *
+ * @class Elements_Manager
+ */
 class Elements_Manager {
 	use Library;
 
 	/**
-	 * custom key name which are used for store widget list in option tabel
+	 * Custom key name which are used for store widget list in option table.
 	 */
 	const ELEMENT_KEY = '_eael_widget_elements';
 
@@ -30,24 +40,24 @@ class Elements_Manager {
 	protected $post_id;
 
 	/**
-	 * registered element list from essential addons settings
+	 * Registered element list from essential addons settings.
 	 *
 	 * @var array
 	 */
 	protected $registered_elements;
 
 	/**
-	 * registered extensions list from essential addons settings
+	 * Registered extensions list from essential addons settings.
 	 *
 	 * @var array
 	 */
 	protected $registered_extensions;
 
 	/**
-	 * __construct
+	 * Construct
 	 *
-	 * @param array $registered_elements
-	 * @param array $registered_extensions
+	 * @param array $registered_elements widget list.
+	 * @param array $registered_extensions extension list.
 	 */
 	public function __construct( $registered_elements, $registered_extensions ) {
 		$this->registered_elements   = $registered_elements;
@@ -56,11 +66,11 @@ class Elements_Manager {
 	}
 
 	/**
-	 * eael_elements_cache
 	 * Save widget name list in option table for improve performance.
+	 * eael_elements_cache
 	 *
-	 * @param int   $post_id
-	 * @param array $data
+	 * @param int   $post_id post ID.
+	 * @param array $data page data.
 	 */
 	public function eael_elements_cache( $post_id, $data ) {
 		$widget_list  = $this->get_widget_list( $data );
@@ -70,10 +80,10 @@ class Elements_Manager {
 	}
 
 	/**
+	 * Get widget names.
 	 * get_widget_list
-	 * get widget names
 	 *
-	 * @param array $data
+	 * @param array $data page data.
 	 *
 	 * @return array
 	 */
@@ -90,7 +100,7 @@ class Elements_Manager {
 					$type = $element['widgetType'];
 				}
 
-				if ( ! empty( $element['widgetType'] ) && $element['widgetType'] === 'global' ) {
+				if ( ! empty( $element['widgetType'] ) && 'global' === $element['widgetType'] ) {
 					$document = Plugin::$instance->documents->get( $element['templateID'] );
 					$type     = current( $this->get_widget_list( $document->get_elements_data() ) );
 
@@ -123,10 +133,10 @@ class Elements_Manager {
 	}
 
 	/**
+	 * Get cached widget list.
 	 * get_element_list
-	 * get cached widget list
 	 *
-	 * @param $post_id
+	 * @param int $post_id post ID.
 	 *
 	 * @return bool
 	 */
@@ -150,16 +160,16 @@ class Elements_Manager {
 	}
 
 	/**
+	 * Get extension name those name had been changed for some reason.
 	 * get_extension_list
-	 * get extension name those name had been changed for some reason.
 	 *
-	 * @param array $element
+	 * @param array $element widget list.
 	 *
 	 * @return array
 	 */
 	public function get_extension_list( $element ) {
 		$list = array();
-		if ( isset( $element['elType'] ) && $element['elType'] == 'section' ) {
+		if ( isset( $element['elType'] ) && 'section' === $element['elType'] ) {
 			if ( ! empty( $element['settings']['eael_particle_switch'] ) ) {
 				$list['section-particles'] = 'section-particles';
 			}
@@ -178,9 +188,11 @@ class Elements_Manager {
 		return $list;
 	}
 
-	/*
+	/**
+	 * Added backward compatibility.
 	 * replace_widget_name
-	 * Added backward compatibility
+	 *
+	 * @return string[]
 	 */
 	public function replace_widget_name() {
 		return array(
@@ -204,12 +216,12 @@ class Elements_Manager {
 	}
 
 	/**
+	 * Save widget list and custom js data in option table.
 	 * save_widgets_list
-	 * save widget list and custom js data in option table
 	 *
-	 * @param int    $post_id
-	 * @param array  $list
-	 * @param string $custom_js
+	 * @param int    $post_id post ID.
+	 * @param array  $list widget list.
+	 * @param string $custom_js custom js.
 	 *
 	 * @return bool|mixed
 	 */
@@ -219,17 +231,17 @@ class Elements_Manager {
 			return $post_id;
 		}
 
-		if ( get_post_status( $post_id ) !== 'publish' || ! Plugin::$instance->documents->get( $post_id )->is_built_with_elementor() ) {
+		if ( 'publish' !== get_post_status( $post_id ) || ! Plugin::$instance->documents->get( $post_id )->is_built_with_elementor() ) {
 			return false;
 		}
 
-		if ( in_array( get_post_meta( $post_id, '_elementor_template_type', true ), $this->excluded_template_type() ) ) {
+		if ( in_array( get_post_meta( $post_id, '_elementor_template_type', true ), $this->excluded_template_type(), true ) ) {
 			return false;
 		}
 
 		update_post_meta( $post_id, '_eael_custom_js', $custom_js );
 
-		if ( md5( implode( '', (array) $list ) ) == md5( implode( '', (array) get_post_meta( $post_id, self::ELEMENT_KEY, true ) ) ) ) {
+		if ( md5( implode( '', (array) $list ) ) === md5( implode( '', (array) get_post_meta( $post_id, self::ELEMENT_KEY, true ) ) ) ) {
 			return false;
 		}
 
@@ -248,38 +260,38 @@ class Elements_Manager {
 	}
 
 	/**
+	 * Create js/css file as per widget loaded in page.
 	 * generate_script
-	 * create js/css file as per widget loaded in page
 	 *
-	 * @param int    $post_id
-	 * @param array  $elements
-	 * @param string $context
-	 * @param string $ext
+	 * @param int    $post_id post ID.
+	 * @param array  $elements Widget List.
+	 * @param string $context Request fields.
+	 * @param string $ext file extension.
 	 */
 	public function generate_script( $post_id, $elements, $context, $ext ) {
-		// if folder not exists, create new folder
+		// if folder not exists, create new folder.
 		if ( ! file_exists( EAEL_ASSET_PATH ) ) {
 			wp_mkdir_p( EAEL_ASSET_PATH );
 		}
 
-		// naming asset file
+		// naming asset file.
 		$file_name = 'eael' . ( $post_id ? '-' . $post_id : '' ) . '.' . $ext;
 
-		// output asset string
+		// output asset string.
 		$output = $this->generate_strings( $elements, $context, $ext );
 
-		// write to file
+		// write to file.
 		$file_path = $this->safe_path( EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file_name );
 		file_put_contents( $file_path, $output );
 	}
 
 	/**
+	 * Load assets for inline loading.
 	 * generate_strings
-	 * Load assets for inline loading
 	 *
-	 * @param string $elements
-	 * @param string $context
-	 * @param string $ext
+	 * @param string $elements widget list.
+	 * @param string $context Request fields.
+	 * @param string $ext file extension.
 	 *
 	 * @return string
 	 */
@@ -298,12 +310,12 @@ class Elements_Manager {
 	}
 
 	/**
+	 * Load core library for widget list which are defined on config.php file.
 	 * generate_dependency
-	 * Load core library for widget list which are defined on config.php file
 	 *
-	 * @param array  $elements
-	 * @param string $context
-	 * @param string $type
+	 * @param array  $elements widget list.
+	 * @param string $context request field.
+	 * @param string $type file type.
 	 *
 	 * @return array
 	 */
@@ -318,10 +330,10 @@ class Elements_Manager {
 			'edit'    => array(),
 		);
 
-		if ( $type == 'js' ) {
+		if ( 'js' === $type ) {
 			$self['general'][] = EAEL_PLUGIN_PATH . 'assets/front-end/js/view/general.min.js';
 			$self['edit'][]    = EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/promotion.min.js';
-		} elseif ( $type == 'css' && ! $this->is_edit_mode() ) {
+		} elseif ( 'css' === $type && ! $this->is_edit_mode() ) {
 			$self['view'][] = EAEL_PLUGIN_PATH . 'assets/front-end/css/view/general.min.css';
 		}
 		foreach ( $elements as $element ) {
@@ -341,7 +353,7 @@ class Elements_Manager {
 			}
 		}
 
-		if ( $context == 'view' ) {
+		if ( 'view' === $context ) {
 			return array_unique( array_merge( $lib['view'], $self['view'] ) );
 		}
 
@@ -349,10 +361,11 @@ class Elements_Manager {
 	}
 
 	/**
+	 * Check widget list already saved in option table weather load or not
 	 * has_exist
 	 *
-	 * @param $post_id
-	 * check widget list already saved in option table weather load or not
+	 * @param int $post_id post ID.
+	 *
 	 * @return bool
 	 */
 	public function has_exist( $post_id ) {
@@ -362,24 +375,26 @@ class Elements_Manager {
 	}
 
 	/**
+	 * Update Asset.
 	 * update_asset
 	 *
-	 * @param int      $post_id
-	 * @param  $elements
+	 * @param int   $post_id post ID.
+	 * @param array $elements widget list.
 	 */
 	public function update_asset( $post_id, $elements ) {
 
-		if ( $this->css_print_method != 'internal' ) {
+		if ( 'internal' !== $this->css_print_method ) {
 			$this->generate_script( $post_id, $elements, 'view', 'css' );
 		}
 
-		if ( $this->js_print_method != 'internal' ) {
+		if ( 'internal' !== $this->js_print_method ) {
 			$this->generate_script( $post_id, $elements, 'view', 'js' );
 		}
 
 	}
 
 	/**
+	 * Excluded template.
 	 * excluded_template_type
 	 *
 	 * @return string[]
