@@ -1,0 +1,16 @@
+{
+  "plugins": [
+    "https://downloads.wordpress.org/plugin/elementor.zip",
+    "https://downloads.wordpress.org/plugin/woocommerce.zip"
+  ],
+  "port": 8082,
+  "env": {
+    "tests": {
+      "port": 8083
+    }
+  },
+  "mappings": {
+    "wp-content/plugins/essential-addons-for-elementor-lite": "."
+  },
+  "phpVersion": "7.4"
+}

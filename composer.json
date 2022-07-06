@@ -1,0 +1,36 @@
+{
+    "name": "wpdevelopers/essential-addons-for-elementor-lite",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "WPDevelopers",
+            "email": "info@wpdeveloper.com"
+        }
+    ],
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+        "squizlabs/php_codesniffer": "^3.6",
+        "wp-coding-standards/wpcs": "^2.3",
+        "phpcompatibility/phpcompatibility-wp": "*",
+        "yoast/phpunit-polyfills": "^1.0",
+        "phpunit/phpunit": "^8.5",
+        "wp-phpunit/wp-phpunit": "^5.9"
+    },
+    "require": {
+        "composer/installers": "~1.0"
+    },
+    "scripts": {
+        "format": "phpcbf --report-summary --report-source",
+        "lint": "phpcs"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "composer/installers": true
+        },
+        "platform": {
+            "php": "7.4"
+        }
+    }
+}
