@@ -18,6 +18,7 @@ trait Login_Registration {
 	 */
 	public static $send_custom_email = false;
 	public static $send_custom_email_admin = false;
+	public static $send_custom_email_lostpassword = false;
 	/**
 	 * It will contain all email related options like email subject, content, email content type etc.
 	 * @var array   $email_options {
@@ -29,6 +30,7 @@ trait Login_Registration {
 	 * }
 	 */
 	public static $email_options = [];
+	public static $email_options_lostpassword = [];
 
 	public function login_or_register_user() {
 		do_action( 'eael/login-register/before-processing-login-register', $_POST );
@@ -595,6 +597,22 @@ trait Login_Registration {
 			$user_login = sanitize_email( $user_login );
 		}
 
+		// set email related stuff
+		if ( 'custom' === $settings['lostpassword_email_template_type'] ) {
+			self::$send_custom_email_lostpassword = true;
+		}
+		if ( isset( $settings['lostpassword_email_subject'] ) ) {
+			self::$email_options_lostpassword['subject'] = $settings['lostpassword_email_subject'];
+		}
+		if ( isset( $settings['lostpassword_email_message'] ) ) {
+			self::$email_options_lostpassword['message'] = $settings['lostpassword_email_message'];
+		}
+		if ( isset( $settings['lostpassword_email_content_type'] ) ) {
+			self::$email_options_lostpassword['headers'] = 'Content-Type: text/' . $settings['lostpassword_email_content_type'] . '; charset=UTF-8' . "\r\n";
+		}
+
+		add_filter( 'retrieve_password_notification_email', [ $this, 'eael_retrieve_password_notification_email' ], 10, 4 );
+		
 		$results = retrieve_password( $user_login );
 		
 		if ( is_wp_error( $results ) ) {
@@ -628,6 +646,40 @@ trait Login_Registration {
             wp_safe_redirect($_SERVER['HTTP_REFERER']);
             exit();
         }
+	}
+
+	public function eael_retrieve_password_notification_email( $defaults, $key, $user_login, $user_data ){
+		if ( ! self::$send_custom_email_lostpassword ) {
+			return $defaults;
+		}
+
+		if ( ! empty( self::$email_options_lostpassword['subject'] ) ) {
+			$defaults['subject'] = self::$email_options_lostpassword['subject'];
+		}
+
+		if ( ! empty( self::$email_options_lostpassword['message'] ) ) {
+			if ( ! empty( $key ) ) {
+				$locale = get_user_locale( $user_data );
+				self::$email_options_lostpassword['password_reset_link'] = network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' ) . '&wp_lang=' . $locale . "\r\n\r\n";
+			}
+
+			if( is_object($user_data) ) {
+				self::$email_options_lostpassword['username'] = $user_login;
+				self::$email_options_lostpassword['firstname'] = $user_data->first_name;
+				self::$email_options_lostpassword['lastname'] = $user_data->last_name;
+				self::$email_options_lostpassword['email'] = $user_data->email;
+				self::$email_options_lostpassword['website'] = $user_data->website;				
+			}
+			$defaults['message'] = $this->replace_placeholders_lostpassword( self::$email_options_lostpassword['message'] );
+		}
+
+		if ( ! empty( self::$email_options_lostpassword['headers'] ) ) {
+			$defaults['headers'] = self::$email_options_lostpassword['headers'];
+		}
+
+		$defaults['message'] = wpautop( $defaults['message'] );
+		
+		return $defaults;
 	}
 
 	public function generate_username_from_email( $email, $suffix = '' ) {
@@ -840,6 +892,46 @@ trait Login_Registration {
 			unset( $replacement[0] );
 			unset( $replacement[1] );
 		}
+
+		return preg_replace( $placeholders, $replacement, $message );
+	}
+
+	/**
+	 * It replaces placeholders with dynamic value and returns it.
+	 *
+	 * @param        $message
+	 * @param string $receiver
+	 *
+	 * @return null|string|string[]
+	 */
+	public function replace_placeholders_lostpassword( $message ) {
+		$password_reset_link = !empty( self::$email_options_lostpassword['password_reset_link'] ) ? '<a href="'.esc_url( self::$email_options_lostpassword['password_reset_link'] ).'">' . esc_url( self::$email_options_lostpassword['password_reset_link'] ) . '</a>' : '';
+		$username 		   = !empty( self::$email_options_lostpassword['username'] ) ? self::$email_options_lostpassword['username'] : '';
+		$email 			   = !empty( self::$email_options_lostpassword['email'] ) ? self::$email_options_lostpassword['email'] : '';
+		$firstname 		   = !empty( self::$email_options_lostpassword['firstname'] ) ? self::$email_options_lostpassword['firstname'] : '';
+		$lastname 		   = !empty( self::$email_options_lostpassword['lastname'] ) ? self::$email_options_lostpassword['lastname'] : '';
+		$website 		   = !empty( self::$email_options_lostpassword['website'] ) ? self::$email_options_lostpassword['website'] : '';
+
+		$placeholders = [
+			'/\[password_reset_link\]/',
+			'/\[username\]/',
+			'/\[email\]/',
+			'/\[firstname\]/',
+			'/\[lastname\]/',
+			'/\[website\]/',
+			'/\[loginurl\]/',
+			'/\[sitetitle\]/',
+		];
+		$replacement  = [
+			$password_reset_link,
+			$username,
+			$email,
+			$firstname,
+			$lastname,
+			$website,
+			wp_login_url(),
+			get_option( 'blogname' ),
+		];
 
 		return preg_replace( $placeholders, $replacement, $message );
 	}
