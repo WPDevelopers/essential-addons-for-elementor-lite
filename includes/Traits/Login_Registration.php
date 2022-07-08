@@ -611,6 +611,10 @@ trait Login_Registration {
 			self::$email_options_lostpassword['headers'] = 'Content-Type: text/' . $settings['lostpassword_email_content_type'] . '; charset=UTF-8' . "\r\n";
 		}
 
+		if ( isset($_SERVER['HTTP_REFERER']) ) {
+			self::$email_options_lostpassword['http_referer'] = strtok( $_SERVER['HTTP_REFERER'], '?' );
+		}
+
 		add_filter( 'retrieve_password_notification_email', [ $this, 'eael_retrieve_password_notification_email' ], 10, 4 );
 		
 		$results = retrieve_password( $user_login );
@@ -660,7 +664,11 @@ trait Login_Registration {
 		if ( ! empty( self::$email_options_lostpassword['message'] ) ) {
 			if ( ! empty( $key ) ) {
 				$locale = get_user_locale( $user_data );
-				self::$email_options_lostpassword['password_reset_link'] = network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' ) . '&wp_lang=' . $locale . "\r\n\r\n";
+				if( ! empty( self::$email_options_lostpassword['http_referer'] ) ){
+					self::$email_options_lostpassword['password_reset_link'] = self::$email_options_lostpassword['http_referer'] . "?eael-resetpassword=1&key=$key&login=" . rawurlencode( $user_login ) . '&wp_lang=' . $locale . "\r\n\r\n";
+				} else {
+					self::$email_options_lostpassword['password_reset_link'] = network_site_url( "wp-login.php?eael-resetpassword=1&key=$key&login=" . rawurlencode( $user_login ), 'login' ) . '&wp_lang=' . $locale . "\r\n\r\n";
+				}
 			}
 
 			if( is_object($user_data) ) {
