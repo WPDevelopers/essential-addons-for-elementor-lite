@@ -1682,8 +1682,14 @@ class Login_Register extends Widget_Base {
 
 	protected function init_content_lostpassword_user_email_controls() {
 		/* translators: %s: Site Name */
-		$default_subject = __( 'Thank You!', 'essential-addons-for-elementor-lite' );
-		$default_message = __( 'Default Message!', 'essential-addons-for-elementor-lite' );
+		$default_subject = __( 'Password Reset Confirmation', 'essential-addons-for-elementor-lite' );
+		$default_message = __( 'Someone has requested a password reset for the following account:', 'essential-addons-for-elementor-lite' ) . "\r\n\r\n";
+		$default_message .= __( 'Sitename: [sitetitle]', 'essential-addons-for-elementor-lite' ) . "\r\n\r\n";
+		$default_message .= __( 'Username: [username]', 'essential-addons-for-elementor-lite' ) . "\r\n\r\n";
+		$default_message .= __( 'If this was a mistake, ignore this email and nothing will happen.', 'essential-addons-for-elementor-lite' ) . "\r\n\r\n";
+		$default_message .= __( 'To reset your password, visit the following address:', 'essential-addons-for-elementor-lite' ) . "\r\n\r\n";
+		$default_message .= '[password_reset_link]' . "\r\n\r\n";
+		$default_message .= __( 'Thanks!', 'essential-addons-for-elementor-lite' );
 
 		$this->start_controls_section( 'section_content_lostpassword_email', [
 			'label'      => __( 'Lost Password Email Options', 'essential-addons-for-elementor-lite' ),
@@ -1710,7 +1716,7 @@ class Login_Register extends Widget_Base {
 			'render_type' => 'none',
 			'options'     => [
 				'default' => __( 'WordPres Default', 'essential-addons-for-elementor-lite' ),
-				// 'custom'  => __( 'Custom', 'essential-addons-for-elementor-lite' ),
+				'custom'  => __( 'Custom', 'essential-addons-for-elementor-lite' ),
 			],
 		] );
 
@@ -1729,7 +1735,7 @@ class Login_Register extends Widget_Base {
 		$this->add_control( 'lostpassword_email_message', [
 			'label'       => __( 'Email Message', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::WYSIWYG,
-			'placeholder' => __( 'Enter Your Custom Email Message..', 'essential-addons-for-elementor-lite' ),
+			'placeholder' => $default_message,
 			'default'     => $default_message,
 			'label_block' => true,
 			'render_type' => 'none',
