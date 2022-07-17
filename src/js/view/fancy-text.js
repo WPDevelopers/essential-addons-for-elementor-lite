@@ -14,7 +14,7 @@ var FancyText = function ($scope, $) {
 			strings: $fancy_text,
 			typeSpeed: $fancy_text_speed,
 			backSpeed: 0,
-			startDelay: 300,
+			startDelay: 2000,
 			backDelay: $fancy_text_delay,
 			showCursor: $fancy_text_cursor,
 			loop: $fancy_text_loop,
