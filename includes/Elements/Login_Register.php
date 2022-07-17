@@ -4916,8 +4916,9 @@ class Login_Register extends Widget_Base {
 		$default_hide_class = $this->should_print_resetpassword_form_editor ? '' : $default_hide_class;
 		
 		if ( $this->should_print_resetpassword_form_editor || ( ! empty( $_GET['eael-resetpassword'] ) ) ) {
+			$rp_data = array();
 			if( ! $this->should_print_resetpassword_form_editor ){
-				$this->eael_redirect_reset_password_when_expired();
+				$rp_data = $this->eael_redirect_reset_password_when_expired();
 			}
 
 			// lost password form fields related
@@ -4993,6 +4994,8 @@ class Login_Register extends Widget_Base {
 							?>
 
 							<div class="eael-lr-footer">
+								<input type="hidden" name="rp_key" value="<?php echo esc_attr( !empty( $rp_data['rp_key'] ) ? $rp_data['rp_key'] : '' ); ?>" />
+
 								<input type="submit"
 									   name="eael-resetpassword-submit"
 									   id="eael-resetpassword-submit"
@@ -5140,6 +5143,8 @@ class Login_Register extends Widget_Base {
 
 	protected function print_login_validation_errors() {
 		$error_key = 'eael_login_error_' . $this->get_id();
+		$resetpassword_success = isset( $_GET['eael-resetpassword-success'] ) && 1 === intval( $_GET['eael-resetpassword-success'] );
+		
 		if ( $login_error = apply_filters( 'eael/login-register/login-error-message', get_option( $error_key ) ) ) {
 			do_action( 'eael/login-register/before-showing-login-error', $login_error, $this );
 			?>
@@ -5150,6 +5155,8 @@ class Login_Register extends Widget_Base {
 			do_action( 'eael/login-register/after-showing-login-error', $login_error, $this );
 
 			delete_option( $error_key );
+		} else if( ! empty( $resetpassword_success ) && 'register' !== $this->ds['default_form_type'] ){
+			$this->print_resetpassword_success_message();
 		}
 	}
 
@@ -5170,12 +5177,26 @@ class Login_Register extends Widget_Base {
 
 	protected function print_resetpassword_validation_errors() {
 		$error_key = 'eael_resetpassword_error_' . $this->get_id();
-		if ( $resetpassword_error = apply_filters( 'eael/login-register/resetpassword-error-message', get_option( $error_key ) ) ) {
+		$success_key = 'eael_register_success_' . $this->get_id();
+
+		if ( $resetpassword_error = apply_filters( 'eael/login-register/resetpassword-error-message', maybe_unserialize( get_option( $error_key ) ) ) ) {
 			do_action( 'eael/login-register/before-showing-resetpassword-error', $resetpassword_error, $this );
 			?>
-            <p class="eael-form-msg invalid">
-				<?php echo esc_html( $resetpassword_error ); ?>
-            </p>
+            <div class="eael-form-msg invalid">
+				<?php 
+					if( is_array( $resetpassword_error ) ) {
+						if( count( $resetpassword_error ) ){
+							echo "<ol>";
+							foreach( $resetpassword_error as $error ) {
+								echo "<li>" . esc_html( $error ) . "</li>";
+							}
+							echo "</ol>";
+						}
+					} else {
+						echo esc_html( $resetpassword_error );
+					}
+				?>
+            </div>
 			<?php
 			do_action( 'eael/login-register/after-showing-login-error', $resetpassword_error, $this );
 
@@ -5250,14 +5271,17 @@ class Login_Register extends Widget_Base {
 	protected function print_validation_message() {
 		$errors  = get_option( 'eael_register_errors_' . $this->get_id() );
 		$success = get_option( 'eael_register_success_' . $this->get_id() );
-		if ( empty( $errors ) && empty( $success ) ) {
+		$resetpassword_success = isset( $_GET['eael-resetpassword-success'] ) && 1 === intval( $_GET['eael-resetpassword-success'] );
+		if ( empty( $errors ) && empty( $success ) && empty( $resetpassword_success ) ) {
 			return;
 		}
 		if ( ! empty( $errors ) && is_array( $errors ) ) {
 			$this->print_registration_errors_message( $errors );
-		} else {
+		} else if( ! empty ( $success ) ) {
 			$this->print_registration_success_message( $success );
-		}
+		} else if( !empty( $resetpassword_success ) && 'register' === $this->ds['default_form_type'] ){
+			$this->print_resetpassword_success_message();
+		} 
 	}
 
 	protected function print_registration_errors_message( $errors ) {
@@ -5292,6 +5316,17 @@ class Login_Register extends Widget_Base {
 		}
 
 		return false;
+	}
+	
+	protected function print_resetpassword_success_message() {
+		?>
+		<div class="eael-form-msg valid">
+			<?php
+				$resetpassword_success = isset( $this->ds['success_resetpassword'] ) ? $this->ds['success_resetpassword'] : __( 'Your password has been reset.', 'essential-addons-for-elementor-lite' ); 
+				echo esc_html( $resetpassword_success ); 
+			?>
+		</div>
+		<?php
 	}
 
 	/**

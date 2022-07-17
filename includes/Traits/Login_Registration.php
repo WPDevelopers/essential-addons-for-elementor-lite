@@ -731,24 +731,24 @@ trait Login_Registration {
 
 		// Check if password is one or all empty spaces.
 		$errors = [];
-		if ( ! empty( $_POST['eael_pass1'] ) ) {
-			$_POST['eael_pass1'] = trim( $_POST['eael_pass1'] );
+		if ( ! empty( $_POST['eael-pass1'] ) ) {
+			$_POST['eael-pass1'] = trim( $_POST['eael-pass1'] );
 
-			if ( empty( $_POST['eael_pass1'] ) ) {
+			if ( empty( $_POST['eael-pass1'] ) ) {
 				$errors['password_reset_empty_space'] = isset( $settings['err_pass'] ) ? $settings['err_pass'] : __( 'The password cannot be a space or all spaces.', 'essential-addons-for-elementor-lite' );
 			}
 		} else {
-			if ( empty( $_POST['eael_pass1'] ) ) {
+			if ( empty( $_POST['eael-pass1'] ) ) {
 				$errors['password_reset_empty_space'] = isset( $settings['err_pass'] ) ? $settings['err_pass'] : __( 'The password cannot be a space or all spaces.', 'essential-addons-for-elementor-lite' );
 			}
 		}
 
-		if( ! empty( $_POST['eael_pass1'] ) && strlen( trim( $_POST['eael_pass1'] ) ) == 0 ){
+		if( ! empty( $_POST['eael-pass1'] ) && strlen( trim( $_POST['eael-pass1'] ) ) == 0 ){
 			$errors['password_reset_empty'] = __( 'The password cannot be empty.', 'essential-addons-for-elementor-lite' );
 		}
-
+		
 		// Check if password fields do not match.
-		if ( ! empty( $_POST['eael_pass1'] ) && trim( $_POST['eael_pass2'] ) !== $_POST['eael_pass1'] ) {
+		if ( ! empty( $_POST['eael-pass1'] ) && trim( $_POST['eael-pass2'] ) !== $_POST['eael-pass1'] ) {
 			$errors['password_reset_mismatch'] = isset( $settings['err_conf_pass'] ) ? $settings['err_conf_pass'] : __( 'The passwords do not match.', 'essential-addons-for-elementor-lite' );
 		}
 		
@@ -761,18 +761,21 @@ trait Login_Registration {
 			$errors['password_reset_expired'] = isset( $settings['err_reset_password_key_expired'] ) ? $settings['err_reset_password_key_expired'] : __( 'This key is expired.', 'essential-addons-for-elementor-lite' );
 		}
 
-		if ( ( ! count( $errors ) ) && isset( $_POST['eael_pass1'] ) && ! empty( $_POST['eael_pass1'] ) ) {
-			reset_password( $user, $_POST['eael_pass1'] );
+		if ( ( ! count( $errors ) ) && isset( $_POST['eael-pass1'] ) && ! empty( $_POST['eael-pass1'] ) ) {
+			reset_password( $user, $_POST['eael-pass1'] );
 			setcookie( $rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
 
 			$data['message'] = isset( $settings['success_resetpassword'] ) ? $settings['success_resetpassword'] : __( 'Your password has been reset.', 'essential-addons-for-elementor-lite' );
-			
+
+			$error_key = 'eael_resetpassword_error_' . esc_attr( $widget_id );
+			delete_option( $error_key );
+
 			if($ajax){
 				wp_send_json_success( $data );
 			}
-
+			
 			if (isset($_SERVER['HTTP_REFERER'])) {
-				wp_safe_redirect($_SERVER['HTTP_REFERER']);
+				wp_safe_redirect( strtok( $_SERVER['HTTP_REFERER'], '?' ) . '?eael-resetpassword-success=1' );
 				exit();
 			}
 		} else {
@@ -786,11 +789,15 @@ trait Login_Registration {
 					$err_msg .= '</ol>';
 					wp_send_json_error( $err_msg );
 				}
-				update_option( 'eael_resetpassword_errors_' . $widget_id, $err_msg, false );
-				wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
-				exit();
+				update_option( 'eael_resetpassword_error_' . $widget_id, maybe_serialize( $errors ), false );
+				
+				if (isset( $_SERVER['HTTP_REFERER'] )) {
+					wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
+					exit();
+				}
 			}
 		}
+
 	}
 
 	public function eael_redirect_reset_password_when_expired(){
@@ -810,7 +817,7 @@ trait Login_Registration {
 
 			$user = check_password_reset_key( $rp_key, $rp_login );
 
-			if ( isset( $_POST['eael_pass1'] ) && ! hash_equals( $rp_key, $_POST['rp_key'] ) ) {
+			if ( isset( $_POST['eael-pass1'] ) && isset( $_POST['rp_key'] ) && ! hash_equals( $rp_key, $_POST['rp_key'] ) ) {
 				$user = false;
 			}
 		} else {
@@ -834,6 +841,7 @@ trait Login_Registration {
 		}
 
 		$rp_data = [
+			'rp_key' => !empty( $rp_key ) ? $rp_key : '',
 			'rp_path' => $rp_path,
 			'rp_cookie' => $rp_cookie,
 			'user' => $user,
