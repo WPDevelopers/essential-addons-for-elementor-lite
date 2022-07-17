@@ -1333,6 +1333,14 @@ class Login_Register extends Widget_Base {
 			'default'     => __( "You did not pass reCAPTCHA challenge.", 'essential-addons-for-elementor-lite' ),
 		] );
 
+		$this->add_control( 'err_reset_password_key_expired', [
+			'label'       => __( 'Reset Password Expired Error', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. Your password reset link appears to be invalid. Please request a new link.', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( 'Your password reset link appears to be invalid. Please request a new link.', 'essential-addons-for-elementor-lite' ),
+		] );
+		
 		$this->add_control( 'err_tc', [
 			'label'       => __( 'Terms & Condition Error', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::TEXT,
@@ -1367,6 +1375,12 @@ class Login_Register extends Widget_Base {
 			'type'        => Controls_Manager::TEXTAREA,
 			'default'     => __( 'Registration completed successfully, Check your inbox for password if you did not provided while registering.', 'essential-addons-for-elementor-lite' ),
 			'placeholder' => __( 'eg. Registration completed successfully', 'essential-addons-for-elementor-lite' ),
+		] );
+		$this->add_control( 'success_resetpassword', [
+			'label'       => __( 'Successful Password Reset', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXTAREA,
+			'default'     => __( 'Your password has been reset.', 'essential-addons-for-elementor-lite' ),
+			'placeholder' => __( 'eg. Your password has been reset.', 'essential-addons-for-elementor-lite' ),
 		] );
 
 		$this->end_controls_section();
@@ -4902,6 +4916,10 @@ class Login_Register extends Widget_Base {
 		$default_hide_class = $this->should_print_resetpassword_form_editor ? '' : $default_hide_class;
 		
 		if ( $this->should_print_resetpassword_form_editor || ( ! empty( $_GET['eael-resetpassword'] ) ) ) {
+			if( ! $this->should_print_resetpassword_form_editor ){
+				$this->eael_redirect_reset_password_when_expired();
+			}
+
 			// lost password form fields related
 			$label_type      = ! empty( $this->ds['resetpassword_label_types'] ) ? $this->ds['resetpassword_label_types'] : 'default';
 			$is_custom_label = ( 'custom' === $label_type );
@@ -4942,16 +4960,31 @@ class Login_Register extends Widget_Base {
 							<?php do_action( 'eael/login-register/after-resetpassword-form-open', $this ); ?>
 							<div class="eael-lr-form-group">
 								<?php if ( $display_label && $password_label ) {
-									printf( '<label for="eael-password-resetpassword" class="eael-field-label">%s</label>', $password_label );
+									printf( '<label for="eael-pass1" class="eael-field-label">%s</label>', $password_label );
 								} ?>
 								<input type="text"
-									   name="eael-password-resetpassword"
-									   id="eael-password-resetpassword"
+									   name="eael-pass1"
+									   id="eael-pass1"
 									   class="eael-lr-form-control"
 									   required>
 								<?php
 								if ( $show_icon ) {
-									echo '<i class="fas fa-user"></i>';
+									echo '<i class="fas fa-lock"></i>';
+								} ?>
+							</div>
+							
+							<div class="eael-lr-form-group">
+								<?php if ( $display_label && $password_label ) {
+									printf( '<label for="eael-pass1" class="eael-field-label">Confirm %s</label>', $password_label );
+								} ?>
+								<input type="text"
+									   name="eael-pass2"
+									   id="eael-pass2"
+									   class="eael-lr-form-control"
+									   required>
+								<?php
+								if ( $show_icon ) {
+									echo '<i class="fas fa-lock"></i>';
 								} ?>
 							</div>
 
