@@ -166,7 +166,7 @@ class Bootstrap
 
 	    if ( defined( 'ELEMENTOR_VERSION' ) ) {
 		    if ( version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ) {
-			    add_action( 'elementor/controls/register', array( $this, 'register_controls' ) );
+                add_action( 'elementor/controls/register', array( $this, 'register_controls' ) );
 		    } else {
 			    add_action( 'elementor/controls/controls_registered', array( $this, 'register_controls' ) );
 		    }
