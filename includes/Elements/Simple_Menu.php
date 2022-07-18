@@ -8,8 +8,8 @@ use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Icons_Manager;
+use Elementor\Plugin;
 use Elementor\Widget_Base;
-
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Traits\Helper;
 
@@ -52,7 +52,7 @@ class Simple_Menu extends Widget_Base
 
     public function get_categories()
     {
-        return ['essential-addons-elementor'];
+        return ['essential-addons-for-elementor-lite'];
     }
 
     public function get_keywords()
@@ -239,6 +239,57 @@ class Simple_Menu extends Widget_Base
 	       ]
 	   );
 
+       $this->add_control(
+            'eael_simple_menu_heading_mobile_dropdown',
+            [
+                'label' => esc_html__( 'Mobile Dropdown', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $breakpoints = Plugin::$instance->breakpoints->get_active_breakpoints();
+
+        $dropdown_options = [];
+        $excluded_breakpoints = [
+            'laptop',
+            'widescreen',
+        ];
+
+        $default_value = '991';
+        
+        foreach ( $breakpoints as $breakpoint_key => $breakpoint_instance ) {
+            // Do not include laptop and widscreen in the options since this feature is for mobile devices.
+            if ( in_array( $breakpoint_key, $excluded_breakpoints, true ) ) {
+                continue;
+            }
+
+            if ( 'tablet' === $breakpoint_key ) {
+                $default_value = $breakpoint_instance->get_value();
+            }
+
+            $dropdown_options[ $breakpoint_instance->get_value() ] = sprintf(
+                /* translators: 1: Breakpoint label, 2: `>` character, 3: Breakpoint value */
+                esc_html__( '%1$s (%2$s %3$dpx)', 'essential-addons-for-elementor-lite' ),
+                $breakpoint_instance->get_label(),
+                '>',
+                $breakpoint_instance->get_value()
+            );
+        }
+
+        $dropdown_options['0'] = esc_html__( 'None', 'essential-addons-for-elementor-lite' );
+
+        $this->add_control(
+            'eael_simple_menu_dropdown',
+            [
+                'label' => esc_html__( 'Breakpoint', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SELECT,
+                'default' => floatval( $default_value ),
+                'options' => $dropdown_options,
+                'prefix_class' => 'elementor-nav-menu--dropdown-',
+            ]
+        );
+
         $this->end_controls_section();
 
         /**
@@ -268,7 +319,7 @@ class Simple_Menu extends Widget_Base
 	    $this->add_responsive_control(
 		    'eael_simple_menu_hamburger_min_height',
 		    [
-			    'label' => esc_html__( 'Min Height', 'essential-addons-elementor' ),
+			    'label' => esc_html__( 'Min Height', 'essential-addons-for-elementor-lite' ),
 			    'type' => Controls_Manager::SLIDER,
 //			    'devices' => [ 'tablet', 'mobile' ],
 //			    'devices' => [ 'desktop', 'mobile' ],
@@ -298,7 +349,7 @@ class Simple_Menu extends Widget_Base
 	    $this->add_control(
 		    'eael_simple_menu_hamburger_size',
 		    [
-			    'label' => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
+			    'label' => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite' ),
 			    'type' => Controls_Manager::SLIDER,
 			    'range' => [
 				    'px' => [
@@ -580,7 +631,7 @@ class Simple_Menu extends Widget_Base
 	    $this->add_control(
 		    'eael_simple_menu_hamburger_indicator_possition',
 		    [
-			    'label' => esc_html__( 'Top Position', 'essential-addons-elementor' ),
+			    'label' => esc_html__( 'Top Position', 'essential-addons-for-elementor-lite' ),
 			    'type' => Controls_Manager::SLIDER,
 //			    'range' => [
 //				    'px' => [
@@ -921,7 +972,7 @@ class Simple_Menu extends Widget_Base
 	    $this->add_control(
 		    'eael_simple_menu_item_indicator_size',
 		    [
-			    'label' => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
+			    'label' => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite' ),
 			    'type' => Controls_Manager::SLIDER,
 			    'default' => [
 				    'size' => '15'
@@ -1230,7 +1281,7 @@ class Simple_Menu extends Widget_Base
 	    $this->add_control(
 		    'eael_simple_menu_dropdown_item_indicator_size',
 		    [
-			    'label' => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
+			    'label' => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite' ),
 			    'type' => Controls_Manager::SLIDER,
 			    'default' => [
 				    'size' => '12'
@@ -1399,6 +1450,7 @@ class Simple_Menu extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings();
+        $hamburger_max_width = isset( $settings['eael_simple_menu_dropdown'] ) ? intval( $settings['eael_simple_menu_dropdown'] ) : intval( '991' ) ;
 
         if ($settings['eael_simple_menu_preset'] == 'preset-2') {
             $align = $settings['eael_simple_menu_item_alignment_center'];
@@ -1458,6 +1510,7 @@ class Simple_Menu extends Widget_Base
             'class'                         => implode(' ', array_filter($container_classes)),
 //            'data-indicator-class'          => $settings['eael_simple_menu_item_indicator'],
 //            'data-dropdown-indicator-class' => $settings['eael_simple_menu_dropdown_item_indicator'],
+            'data-hamburger-max-width' => $hamburger_max_width,
         ]);
 
         if ($settings['eael_simple_menu_menu']) {

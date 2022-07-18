@@ -1,9 +1,12 @@
+.eael-simple-menu-container.is-hamburger {
+    min-height: 50px;
+    overflow: auto;
+}
 .eael-simple-menu-container {
     background-color: #54595f;
 
-    @media screen and (max-width: 1024px) {
-        min-height: 50px;
-        overflow: auto;
+    .eael-simple-menu-toggle.is-not-hamburger {
+        display: none;
     }
 
     .eael-simple-menu-toggle {
@@ -24,13 +27,13 @@
         display: block;
         border-color:#333;
 
-        @media screen and (min-width: 1025px) {
-            display: none;
-        }
-
         .eael-simple-menu-toggle-text {
             display: none;
         }
+    }
+
+    .eael-simple-menu-toggle-text.is-not-hamburger {
+        display: none;
     }
 
     .eael-simple-menu-toggle-text {
@@ -41,10 +44,6 @@
         line-height: 50px !important;
         letter-spacing: 0 !important;
         color: #ffffff;
-
-        @media screen and (min-width: 1025px) {
-            display: none;
-        }
     }
 
     .eael-simple-menu {
@@ -139,6 +138,124 @@
             }
         }
 
+        &.eael-simple-menu-horizontal.is-not-hamburger {
+            &.eael-simple-menu-dropdown-animate-fade {
+                li {
+                    ul {
+                        transition: all 300ms;
+                    }
+                }
+            }
+
+            &.eael-simple-menu-dropdown-animate-to-top {
+                li {
+                    ul {
+                        transform: translateY(20px);
+                        transition: all 300ms;
+                    }
+
+                    &:hover {
+                        > ul {
+                            transform: translateY(0);
+                        }
+                    }
+                }
+            }
+
+            &.eael-simple-menu-dropdown-animate-zoom-in {
+                li {
+                    ul {
+                        transform: scale(0.8);
+                        transition: all 300ms;
+                    }
+
+                    &:hover {
+                        > ul {
+                            transform: scale(1);
+                        }
+                    }
+                }
+            }
+
+            &.eael-simple-menu-dropdown-animate-zoom-out {
+                li {
+                    ul {
+                        transform: scale(1.2);
+                        transition: all 300ms;
+                    }
+
+                    &:hover {
+                        > ul {
+                            transform: scale(1);
+                        }
+                    }
+                }
+            }
+
+            // hide indicator
+            .eael-simple-menu-indicator {
+                display: none;
+            }
+        }
+
+        &.eael-simple-menu-horizontal.is-hamburger {
+            position: absolute;
+            top: 50px;
+            background-color: #54595f;
+            width: 100%;
+            z-index: 9;
+            display: none;
+
+            li {
+                float: none;
+                display: block;
+
+                a {
+                    display: block;
+                    text-align: inherit;
+                }
+
+                ul {
+                    position: relative;
+                    top: unset;
+                    left: unset;
+                    width: 100%;
+                    box-shadow: none;
+                    visibility: visible;
+                    opacity: 1;
+                    display: none;
+
+                    li {
+                        position: relative;
+                        display: block;
+
+                        .eael-simple-menu-indicator {
+                            border: 1px solid #00000080;
+
+                            &:before {
+                                color: #000000;
+                            }
+                        }
+
+                        ul {
+                            position: relative;
+                            width: 100%;
+                            top: unset;
+                            left: unset;
+
+                            li {
+                                &:last-child {
+                                    > a {
+                                        border-bottom-width: 1px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         &.eael-simple-menu-horizontal {
             li {
                 position: relative;
@@ -151,13 +268,13 @@
                     display: inline-block;
 
                     // indicator
+                    span.is-hamburger {
+                        display: none;
+                    }
+
                     span {
                         position: relative;
                         margin-left: 5px;
-
-                        @media screen and (max-width: 1024px) {
-                            display: none;
-                        }
                     }
                 }
 
@@ -203,126 +320,6 @@
                     > ul {
                         visibility: visible;
                         opacity: 1;
-                    }
-                }
-            }
-
-            @media screen and (min-width: 1025px) {
-                // animation
-                &.eael-simple-menu-dropdown-animate-fade {
-                    li {
-                        ul {
-                            transition: all 300ms;
-                        }
-                    }
-                }
-
-                &.eael-simple-menu-dropdown-animate-to-top {
-                    li {
-                        ul {
-                            transform: translateY(20px);
-                            transition: all 300ms;
-                        }
-
-                        &:hover {
-                            > ul {
-                                transform: translateY(0);
-                            }
-                        }
-                    }
-                }
-
-                &.eael-simple-menu-dropdown-animate-zoom-in {
-                    li {
-                        ul {
-                            transform: scale(0.8);
-                            transition: all 300ms;
-                        }
-
-                        &:hover {
-                            > ul {
-                                transform: scale(1);
-                            }
-                        }
-                    }
-                }
-
-                &.eael-simple-menu-dropdown-animate-zoom-out {
-                    li {
-                        ul {
-                            transform: scale(1.2);
-                            transition: all 300ms;
-                        }
-
-                        &:hover {
-                            > ul {
-                                transform: scale(1);
-                            }
-                        }
-                    }
-                }
-
-                // hide indicator
-                .eael-simple-menu-indicator {
-                    display: none;
-                }
-            }
-
-            // Responsive menu
-            @media screen and (max-width: 1024px) {
-                position: absolute;
-                top: 50px;
-                background-color: #54595f;
-                width: 100%;
-                z-index: 9;
-                display: none;
-
-                li {
-                    float: none;
-                    display: block;
-
-                    a {
-                        display: block;
-                        text-align: inherit;
-                    }
-
-                    ul {
-                        position: relative;
-                        top: unset;
-                        left: unset;
-                        width: 100%;
-                        box-shadow: none;
-                        visibility: visible;
-                        opacity: 1;
-                        display: none;
-
-                        li {
-                            position: relative;
-                            display: block;
-
-                            .eael-simple-menu-indicator {
-                                border: 1px solid #00000080;
-
-                                &:before {
-                                    color: #000000;
-                                }
-                            }
-
-                            ul {
-                                position: relative;
-                                width: 100%;
-                                top: unset;
-                                left: unset;
-
-                                li {
-                                    &:last-child {
-                                        > a {
-                                            border-bottom-width: 1px;
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -381,23 +378,19 @@
     }
 
     // alignment
-    &.eael-simple-menu-align-center {
-        @media screen and (min-width: 1025px) {
-            text-align: center;
-        }
+    &.eael-simple-menu-align-center.is-not-hamburger {
+        text-align: center;
+    }
 
+    &.eael-simple-menu-align-center {
         .eael-simple-menu {
-            &.eael-simple-menu-horizontal {
-                @media screen and (min-width: 1025px) {
-                    display: inline-flex;
-                }
+            &.eael-simple-menu-horizontal.is-not-hamburger {
+                display: inline-flex;
             }
 
             > li {
-                > a {
-                    @media screen and (max-width: 1024px) {
-                        text-align: center;
-                    }
+                > a.is-hamburger {
+                    text-align: center;
                 }
             }
 
@@ -411,22 +404,20 @@
         }
     }
 
+    &.eael-simple-menu-align-right.is-not-hamburger {
+        text-align: right;
+    }
+
     &.eael-simple-menu-align-right {
-        @media screen and (min-width: 1025px) {
-            text-align: right;
-        }
-
         .eael-simple-menu {
-            &.eael-simple-menu-horizontal {
-                @media screen and (min-width: 1025px) {
-                    display: inline-flex;
-                }
+            &.eael-simple-menu-horizontal.is-not-hamburger{
+                display: inline-flex;
+            }
 
+            &.eael-simple-menu-horizontal {
                 > li {
-                    > a {
-                        @media screen and (max-width: 1024px) {
-                            text-align: right;
-                        }
+                    > a .is-hamburger {
+                        text-align: right;
                     }
 
                     > .eael-simple-menu-indicator {
@@ -484,13 +475,13 @@
     &.preset-1 {
         background-color: #4E36A3;
 
-        .eael-simple-menu {
-            @media screen and (max-width: 1024px) {
-                &.eael-simple-menu-horizontal {
-                    background-color: #4E36A3;
-                }
+        .eael-simple-menu.is-hamburger{
+            &.eael-simple-menu-horizontal {
+                background-color: #4E36A3;
             }
-            
+        }
+
+        .eael-simple-menu {
             li > a {
                 color: #fff;
             }
@@ -517,13 +508,13 @@
     &.preset-3 {
         background-color: #15DBD5;
 
-        .eael-simple-menu {
-            @media screen and (max-width: 1024px) {
-                &.eael-simple-menu-horizontal {
-                    background-color: #15DBD5;
-                }
+        .eael-simple-menu.is-hamburger {
+            &.eael-simple-menu-horizontal {
+                background-color: #15DBD5;
             }
+        }
 
+        .eael-simple-menu {
             li > a {
                 color: #2A1A6C;
             }
@@ -558,20 +549,19 @@
         border: 1px solid #1BC1FF;
         //text-align: right;
 
-        .eael-simple-menu {
+        .eael-simple-menu.is-hamburger {
+            &.eael-simple-menu-horizontal {
+                background-color: #1BC1FF;
 
-            @media screen and (max-width: 1024px) {
-                &.eael-simple-menu-horizontal {
-                    background-color: #1BC1FF;
-
-                    li.current-menu-ancestor>a,
-                    li:hover > a,
-                    li.current-menu-item > a {
-                        color: #fff;
-                    }
+                li.current-menu-ancestor>a,
+                li:hover > a,
+                li.current-menu-item > a {
+                    color: #fff;
                 }
             }
-
+        }
+        
+        .eael-simple-menu {
             li > a {
                 color: #5D5E61;
             }
@@ -610,11 +600,9 @@
 }
 
 .eael_simple_menu_hamburger_disable_selected_menu_hide{
-  .eael-simple-menu-toggle-text {
-    @media screen and (max-width: 1024px) {
+    .eael-simple-menu-toggle-text.is-hamburger {
         display: none !important;
     }
-  }
 }
 
 .eael-simple-menu-hamburger-align-left {
@@ -622,13 +610,13 @@
         display: none;
     }
 
-    .eael-simple-menu-toggle {
-        @media screen and (max-width: 1024px) {
-            top: 0;
-            left: 0;
-            right: auto;
-        }
+    .eael-simple-menu-toggle.is-hamburger {
+        top: 0;
+        left: 0;
+        right: auto;
+    }
 
+    .eael-simple-menu-toggle {
         .eael-simple-menu-toggle-text {
             display: block;
             left: calc(100% + 20px);
@@ -638,12 +626,10 @@
 }
 
 .eael-simple-menu-hamburger-align-center {
-    .eael-simple-menu-toggle {
-        @media screen and (max-width: 1024px) {
-            left: 50%;
-            right: auto;
-            transform: translateX(-50%);
-        }
+    .eael-simple-menu-toggle.is-hamburger {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
     }
 }
 
