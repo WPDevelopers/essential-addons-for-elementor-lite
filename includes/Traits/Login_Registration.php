@@ -770,12 +770,14 @@ trait Login_Registration {
 			$error_key = 'eael_resetpassword_error_' . esc_attr( $widget_id );
 			delete_option( $error_key );
 
+			update_option( 'eael_resetpassword_success_' . $widget_id, $data['message'], false );
+
 			if($ajax){
 				wp_send_json_success( $data );
 			}
 			
 			if (isset($_SERVER['HTTP_REFERER'])) {
-				wp_safe_redirect( strtok( $_SERVER['HTTP_REFERER'], '?' ) . '?eael-resetpassword-success=1' );
+				wp_safe_redirect( strtok( $_SERVER['HTTP_REFERER'], '?' ) );
 				exit();
 			}
 		} else {
