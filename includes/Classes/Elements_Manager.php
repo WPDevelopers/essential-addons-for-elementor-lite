@@ -13,7 +13,7 @@ class Elements_Manager {
 	use Library;
 
 	/**
-	 * custom key name which are used for store widget list in option tabel
+	 * custom key name which are used for store widget list in option table
 	 */
 	const ELEMENT_KEY = '_eael_widget_elements';
 

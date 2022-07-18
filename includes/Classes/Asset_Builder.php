@@ -100,7 +100,6 @@ class Asset_Builder {
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
 		add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'ea_before_enqueue_styles' ] );
 		add_action( 'elementor/theme/register_locations', [ $this, 'post_asset_load' ],100 );
-		//add_action( 'elementor/css-file/post/enqueue', [ $this, 'post_asset_load' ] );
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
 		add_action( 'wp_footer', [ $this, 'add_inline_css' ],15 );
 		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ], 10, 2 );
