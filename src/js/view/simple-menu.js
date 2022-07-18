@@ -16,6 +16,10 @@ var SimpleMenu = function ($scope, $) {
         'eael-simple-menu-horizontal'
     )
     
+    let $hamburger_max_width = $('.eael-simple-menu-container', $scope).data(
+        'hamburger-max-width'
+    )
+
     var $fullWidth = $('.eael-simple-menu--stretch');
     
     if ($horizontal) {
@@ -84,7 +88,7 @@ var SimpleMenu = function ($scope, $) {
     }
     
     function eael_menu_resize(){
-        if (window.matchMedia('(max-width: 1024px)').matches) {
+        if (window.matchMedia('(max-width: '+ $hamburger_max_width +'px)').matches) {
             $('.eael-simple-menu-container', $scope).addClass(
                 'eael-simple-menu-hamburger'
             )
@@ -99,6 +103,19 @@ var SimpleMenu = function ($scope, $) {
                 .eq(0)
                 .text()
             )
+
+            // Mobile dropdown based on control settings : breakpoint
+            // At first remove existing is-not-hamburger classes
+            $('.eael-simple-menu-toggle, .eael-simple-menu-toggle-text, .eael-simple-menu-horizontal, .eael-simple-menu-align-center', 
+                $scope).removeClass('is-not-hamburger');
+            $('.eael-simple-menu-align-center .eael-simple-menu-horizontal, .eael-simple-menu-align-right, .eael-simple-menu-align-right .eael-simple-menu-horizontal', 
+                $scope).removeClass('is-not-hamburger');
+            
+            // Now add is-hamburger classes
+            $('.eael-simple-menu-container, .eael-simple-menu-horizontal, .eael-simple-menu-horizontal li a span, .eael-simple-menu-align-center .eael-simple-menu > li > a', 
+                $scope).removeClass('is-not-hamburger').addClass('is-hamburger');
+            $('.eael-simple-menu-align-right eael-simple-menu-horizontal > li > a, .preset-1 .eael-simple-menu, .preset-3 .eael-simple-menu, .preset-2 .eael-simple-menu, .eael_advanced_menu_hamburger_disable_selected_menu_hide .eael-simple-menu-toggle-text, .eael-simple-menu-hamburger-align-left .eael-simple-menu-toggle, .eael-simple-menu-hamburger-align-center .eael-simple-menu-toggle', 
+                $scope).removeClass('is-not-hamburger').addClass('is-hamburger');
 
             if ($('.eael-simple-menu-container', $scope).hasClass('eael-simple-menu--stretch')){
                 const css = {}
@@ -139,6 +156,19 @@ var SimpleMenu = function ($scope, $) {
                 $scope
             ).css('display', '')
             $(".eael-simple-menu-container nav",$scope).removeAttr( 'style' );
+
+            // Mobile dropdown based on control settings : breakpoint
+            // At first remove existing is-hamburger classes
+            $('.eael-simple-menu-container, .eael-simple-menu-horizontal, .eael-simple-menu-horizontal li a span, .eael-simple-menu-align-center .eael-simple-menu > li > a', 
+                $scope).removeClass('is-hamburger');
+            $('.eael-simple-menu-align-right eael-simple-menu-horizontal > li > a, .preset-1 .eael-simple-menu, .preset-3 .eael-simple-menu, .preset-2 .eael-simple-menu, .eael_advanced_menu_hamburger_disable_selected_menu_hide .eael-simple-menu-toggle-text, .eael-simple-menu-hamburger-align-left .eael-simple-menu-toggle, .eael-simple-menu-hamburger-align-center .eael-simple-menu-toggle', 
+                $scope).removeClass('is-hamburger');
+
+            // Now add is-not-hamburger classes
+            $('.eael-simple-menu-toggle, .eael-simple-menu-toggle-text, .eael-simple-menu-horizontal, .eael-simple-menu-align-center', 
+                $scope).removeClass('is-hamburger').addClass('is-not-hamburger');
+            $('.eael-simple-menu-align-center .eael-simple-menu-horizontal, .eael-simple-menu-align-right, .eael-simple-menu-align-right .eael-simple-menu-horizontal', 
+                $scope).removeClass('is-hamburger').addClass('is-not-hamburger');
         }
     }
 
