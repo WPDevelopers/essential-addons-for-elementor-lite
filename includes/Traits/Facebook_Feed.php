@@ -87,6 +87,7 @@ trait Facebook_Feed {
 				break;
 		}
 		$items = array_splice( $facebook_data, ( $page * $settings['eael_facebook_feed_image_count']['size'] ), $settings['eael_facebook_feed_image_count']['size'] );
+		$bg_style = "background-size: cover;background-repeat: no-repeat;";
 		foreach ( $items as $item ) {
 			$t        = 'eael_facebook_feed_message_max_length'; // short it
 			$limit    = isset( $settings[ $t ] ) && isset( $settings[ $t ]['size'] ) ? $settings[ $t ]['size'] : null;
@@ -128,10 +129,12 @@ trait Facebook_Feed {
 
 							$html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">';
 							if ( !empty($item['attachments']['data'][0]['media_type']) && $item['attachments']['data'][0]['media_type'] == 'video' ) {
-								$html .= '<img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">
+								$html .= '<div class="eael-facebook-feed-img-container" style="background:url(' . esc_url( $photo ) . ');' . esc_attr( $bg_style ) . '">
+								<img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '"></div>
 	                                                    <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>';
 							} else {
-								$html .= '<img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">';
+								$html .= '<div class="eael-facebook-feed-img-container" style="background:url(' . esc_url( $photo ) . '); background-size: cover;background-repeat: no-repeat;">
+								<img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '"></div>';
 							}
 							$html .= '</a>';
 						}
@@ -154,7 +157,9 @@ trait Facebook_Feed {
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) {
 
 							$html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">
-	                                                <img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">
+	                                                <div class="eael-facebook-feed-img-container" style="background:url(' . esc_url( $photo ) . '); ' . esc_attr( $bg_style ) . '">
+	                                                    <img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">
+	                                                </div>
 	                                                <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>
 	                                            </a>';
 						}
@@ -162,7 +167,9 @@ trait Facebook_Feed {
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) {
 
 							$html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">
-	                                                <img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">
+	                                                <div class="eael-facebook-feed-img-container" style="background:url(' . esc_url( $photo ) . '); ' . esc_attr( $bg_style ) . '">
+	                                                    <img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">
+	                                                </div>
 	                                            </a>';
 
 						}
@@ -188,7 +195,9 @@ trait Facebook_Feed {
 			} else {
 				$html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '" class="eael-facebook-feed-item">
                     <div class="eael-facebook-feed-item-inner">
-                        <img class="eael-facebook-feed-img" src="' . ( empty( $photo ) ? EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg' : esc_url( $photo ) ) . '">';
+                    	<div class="eael-facebook-feed-img-container" style="background:url(' . ( empty( $photo ) ? EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg' : esc_url( $photo ) ) . '); ' . esc_attr( $bg_style ) . '">
+                            <img class="eael-facebook-feed-img" src="' . ( empty( $photo ) ? EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg' : esc_url( $photo ) ) . '">
+                        </div>';
 
 				if ( $settings['eael_facebook_feed_likes'] || $settings['eael_facebook_feed_comments'] ) {
 					$html .= '<div class="eael-facebook-feed-item-overlay">
