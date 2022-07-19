@@ -371,6 +371,7 @@ class Simple_Menu extends Widget_Base
                 'default'   => '#ffffff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-simple-menu-container .eael-simple-menu-toggle i' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-simple-menu-container .eael-simple-menu-toggle svg' => 'fill: {{VALUE}}',
                 ],
 
             ]
