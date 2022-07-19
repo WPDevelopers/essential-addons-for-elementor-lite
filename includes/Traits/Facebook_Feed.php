@@ -95,6 +95,10 @@ trait Facebook_Feed {
 			$likes    = ( isset( $item['reactions'] ) ? $item['reactions']['summary']['total_count'] : 0 );
 			$comments = ( isset( $item['comments'] ) ? $item['comments']['summary']['total_count'] : 0 );
 
+			if ( empty( $photo ) ) {
+				$photo = isset( $item['attachments']['data'][0]['media']['image']['src'] ) ? esc_url( $item['attachments']['data'][0]['media']['image']['src'] ) : $photo;
+			}
+
 			if ( $settings['eael_facebook_feed_layout'] == 'card' ) {
 				$item_form_name = !empty( $item['from']['name'] ) ? $item['from']['name']: '';
 				$html .= '<div class="eael-facebook-feed-item">
@@ -267,7 +271,7 @@ trait Facebook_Feed {
 	 */
 	public function get_url( $page_id = '', $token = '', $source = 'posts', $display_comment = '' ) {
         $comment_count = $display_comment == 'yes' ? ',comments.summary(total_count)' : '';
-		$post_url = "https://graph.facebook.com/v8.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url}{$comment_count},reactions.summary(total_count)&limit=99&access_token={$token}";
+		$post_url = "https://graph.facebook.com/v8.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url,media}{$comment_count},reactions.summary(total_count)&limit=99&access_token={$token}";
 		$feed_url = "https://graph.facebook.com/v8.0/{$page_id}/feed?fields=id,message,full_picture,status_type,created_time,attachments{title,description,type,url,media},from,permalink_url,shares,call_to_action{$comment_count},reactions.summary(total_count),privacy&access_token={$token}&limit=99&locale=en_US";
 
 		if ( 'posts' === $source ) {
