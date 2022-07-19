@@ -75,6 +75,7 @@ class Asset_Builder {
 
 	/**
 	 * construct
+	 *
 	 * @param array $registered_elements
 	 * @param array $registered_extensions
 	 */
@@ -96,13 +97,31 @@ class Asset_Builder {
 	 * init_hook
 	 * Load Hook
 	 */
-	protected function init_hook(){
+	protected function init_hook() {
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
 		add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'ea_before_enqueue_styles' ] );
-		add_action( 'elementor/theme/register_locations', [ $this, 'post_asset_load' ],100 );
+		add_action( 'elementor/theme/register_locations', [ $this, 'post_asset_load' ], 100 );
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
-		add_action( 'wp_footer', [ $this, 'add_inline_css' ],15 );
+		add_action( 'wp_footer', [ $this, 'add_inline_css' ], 15 );
 		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ], 10, 2 );
+		add_action( 'elementor/element/before_parse_css', [ $this, 'save_template_asset' ], 10, 2 );
+	}
+
+	/**
+	 * save_template_asset
+	 * 
+	 */
+	public function save_template_asset( $object, $data ) {
+		$this->post_id = $object->get_post_id();
+		$this->set_main_page( $this->post_id );
+		$this->elements_manager->get_element_list( $this->post_id );
+		$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
+
+		if ( ! empty( $elements ) ) {
+			do_action( 'eael/before_enqueue_styles', $elements );
+			do_action( 'eael/before_enqueue_scripts', $elements );
+			$this->enqueue_asset( $this->post_id, $elements );
+		}
 	}
 
 	/**
@@ -290,14 +309,15 @@ class Asset_Builder {
 
 	/**
 	 * post_asset_load
+	 *
 	 * @param $instance
 	 */
-	public function post_asset_load( $instance ){
+	public function post_asset_load( $instance ) {
 		$locations = $instance->get_locations();
 		foreach ( $locations as $location => $settings ) {
 			$documents = \ElementorPro\Modules\ThemeBuilder\Module::instance()->get_conditions_manager()->get_documents_for_location( $location );
 			foreach ( $documents as $document ) {
-				$post_id = $document->get_post()->ID;
+				$post_id       = $document->get_post()->ID;
 				$this->post_id = $post_id;
 				$this->set_main_page( $this->post_id );
 				$this->elements_manager->get_element_list( $this->post_id );
@@ -318,6 +338,7 @@ class Asset_Builder {
 
 	/**
 	 * enqueue_asset
+	 *
 	 * @param int $post_id
 	 * @param array $elements
 	 * @param string $context
@@ -359,6 +380,7 @@ class Asset_Builder {
 
 	/**
 	 * delete_cache_data
+	 *
 	 * @param int $post_id
 	 * @param array $post
 	 */
@@ -372,6 +394,7 @@ class Asset_Builder {
 
 	/**
 	 * has_asset
+	 *
 	 * @param int $post_id
 	 * @param string $file
 	 *
@@ -412,6 +435,7 @@ class Asset_Builder {
 
 	/**
 	 * set_main_page
+	 *
 	 * @param $post_id
 	 */
 	protected function set_main_page( $post_id ) {
