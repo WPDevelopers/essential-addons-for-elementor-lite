@@ -87,7 +87,7 @@ trait Facebook_Feed {
 				break;
 		}
 		$items = array_splice( $facebook_data, ( $page * $settings['eael_facebook_feed_image_count']['size'] ), $settings['eael_facebook_feed_image_count']['size'] );
-		$bg_style = "background-size: cover;background-repeat: no-repeat;";
+		$bg_style = isset( $settings['eael_facebook_feed_image_render_type'] ) && $settings['eael_facebook_feed_image_render_type'] == 'cover' ? "background-size: cover;background-position: center;background-repeat: no-repeat;" : "background-size: 100% 100%;background-repeat: no-repeat;";
 		foreach ( $items as $item ) {
 			$t        = 'eael_facebook_feed_message_max_length'; // short it
 			$limit    = isset( $settings[ $t ] ) && isset( $settings[ $t ]['size'] ) ? $settings[ $t ]['size'] : null;
@@ -133,7 +133,7 @@ trait Facebook_Feed {
 								<img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '"></div>
 	                                                    <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>';
 							} else {
-								$html .= '<div class="eael-facebook-feed-img-container" style="background:url(' . esc_url( $photo ) . '); background-size: cover;background-repeat: no-repeat;">
+								$html .= '<div class="eael-facebook-feed-img-container" style="background:url(' . esc_url( $photo ) . ');' . esc_attr( $bg_style ) . '">
 								<img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '"></div>';
 							}
 							$html .= '</a>';
