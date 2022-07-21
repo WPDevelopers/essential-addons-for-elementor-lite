@@ -136,7 +136,6 @@ class Login_Register extends Widget_Base {
 	public function get_script_depends() {
 		$scripts   = parent::get_script_depends();
 		$scripts[] = 'eael-recaptcha';
-		$scripts[] = 'eael-recaptcha-v3';
 
 		return apply_filters( 'eael/login-register/scripts', $scripts );
 	}
@@ -453,6 +452,7 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->add_control( 'login_recaptcha_version', [
 			'label'       => __( 'reCAPTCHA version', 'essential-addons-for-elementor-lite' ),
+			'description' => __( 'If v3 selected, then it will be applied to both forms. Reload preview after saving to see changes.', 'essential-addons-for-elementor-lite' ),
 			'label_block' => false,
 			'type'        => Controls_Manager::SELECT,
 			'options'     => [
@@ -471,7 +471,7 @@ class Login_Register extends Widget_Base {
 				'content_classes' => 'eael-warning',
 				'condition'       => [
 					'enable_login_recaptcha' => 'yes',
-					'login_recaptcha_version' => 'v3',
+					'login_recaptcha_version' => 'v2',
 				],
 			] );
 		}
@@ -557,6 +557,7 @@ class Login_Register extends Widget_Base {
 			$this->add_control( 'register_recaptcha_version', [
 				'label'       => __( 'reCAPTCHA version', 'essential-addons-for-elementor-lite' ),
 				'label_block' => false,
+				'description' => __( 'If v3 selected, then it will be applied to both forms. Reload preview after saving to see changes.', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
 					'v2' => __( 'v2', 'essential-addons-for-elementor-lite' ),
@@ -3859,7 +3860,6 @@ class Login_Register extends Widget_Base {
 			$this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
 		}
 
-
 		//handle form illustration
 		$form_image_id               = ! empty( $this->ds['lr_form_image']['id'] ) ? $this->ds['lr_form_image']['id'] : '';
 		$this->form_illustration_pos = ! empty( $this->ds['lr_form_image_position'] ) ? $this->ds['lr_form_image_position'] : 'left';
@@ -3875,6 +3875,22 @@ class Login_Register extends Widget_Base {
 
 		$login_recaptcha_version = ! empty( $this->ds['login_recaptcha_version'] ) ? $this->ds['login_recaptcha_version'] : 'v2';
 		$register_recaptcha_version = ! empty( $this->ds['register_recaptcha_version'] ) ? $this->ds['register_recaptcha_version'] : 'v2';
+
+		if ( get_option('eael_recaptcha_sitekey_v3') && ( 'v3' === $login_recaptcha_version || 'v3' === $register_recaptcha_version)  ) {
+			$site_key = esc_html( get_option('eael_recaptcha_sitekey_v3') );
+			
+	        if ( $recaptcha_language = esc_html( get_option( 'eael_recaptcha_language_v3' ) ) ) {
+		        $recaptcha_api_args1['hl'] = $recaptcha_language;
+	        }
+
+            $recaptcha_api_args1['render'] = $site_key;
+            
+	        $recaptcha_api_args1 = apply_filters( 'eael_lr_recaptcha_api_args_v3', $recaptcha_api_args1 );
+	        $recaptcha_api_args1 = http_build_query( $recaptcha_api_args1 );
+            wp_register_script('eael-recaptcha-v3', "https://www.google.com/recaptcha/api.js?{$recaptcha_api_args1}", false, EAEL_PLUGIN_VERSION, false);
+			wp_enqueue_script('eael-recaptcha-v3');
+			wp_dequeue_script('eael-recaptcha');
+        }
 
 		?>
         <div class="eael-login-registration-wrapper <?php echo empty( $form_image_id ) ? '' : esc_attr( 'has-illustration' ); ?>"
@@ -4475,7 +4491,7 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_recaptcha_node( $form_type = 'login' ) {
-		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) ) {
+		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) && 'v3' !== $this->ds["{$form_type}_recaptcha_version"] ) {
 			$id = "{$form_type}-recaptcha-node-" . $this->get_id();
 			echo "<input type='hidden' name='g-recaptcha-enabled' value='1'/><div id='{$id}' class='eael-recaptcha-wrapper'></div>";
 		}

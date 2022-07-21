@@ -21,6 +21,9 @@ ea.hooks.addAction("init", "ea", () => {
         const recaptchaAvailable = (typeof grecaptcha !== 'undefined' && grecaptcha !== null);
         const params = new URLSearchParams(location.search);
 
+        let loginRecaptchaNode = document.getElementById('login-recaptcha-node-' + widgetId);
+        let registerRecaptchaNode = document.getElementById('register-recaptcha-node-' + widgetId);
+                
         if ( loggedInLocation !== undefined && loggedInLocation !== '' ) {
             location.replace(loggedInLocation);
         }
@@ -64,10 +67,8 @@ ea.hooks.addAction("init", "ea", () => {
 
         $('form input[type="submit"]', $scope).on('click', function (e) {
             if(!isProAndAjaxEnabled){
-                let loginRecaptchaNodeV3 = document.getElementById('login-recaptcha-node-' + widgetId);
-                let registerRecaptchaNodeV3 = document.getElementById('register-recaptcha-node-' + widgetId);
                 let isRecaptchaVersion3 = false;
-                isRecaptchaVersion3 = loginRecaptchaNodeV3 ? loginRecaptchaVersion === 'v3' : registerRecaptchaVersion === 'v3' ;
+                isRecaptchaVersion3 = loginRecaptchaVersion === 'v3' || registerRecaptchaVersion === 'v3' ;
                 
                 if (recaptchaAvailable && isRecaptchaVersion3) {
                     grecaptcha.execute(recaptchaSiteKeyV3, { 
@@ -85,14 +86,11 @@ ea.hooks.addAction("init", "ea", () => {
 
         // reCAPTCHA
         function onloadLRcb() {
-            let loginRecaptchaNode = document.getElementById('login-recaptcha-node-' + widgetId);
-            let registerRecaptchaNode = document.getElementById('register-recaptcha-node-' + widgetId);
-
             if(typeof grecaptcha.render !="function"){
                 return false;
             }
             if (loginRecaptchaNode) {
-                if(registerRecaptchaVersion !== 'v3'){
+                if( registerRecaptchaVersion !== 'v3' ){
                     grecaptcha.render(loginRecaptchaNode, {
                         'sitekey': recaptchaSiteKey,
                         'theme': loginRcTheme,
@@ -101,7 +99,7 @@ ea.hooks.addAction("init", "ea", () => {
                 }
             }
             if (registerRecaptchaNode) {
-                if(registerRecaptchaVersion !== 'v3'){
+                if( loginRecaptchaVersion !== 'v3' ){
                     grecaptcha.render(registerRecaptchaNode, {
                         'sitekey': recaptchaSiteKey,
                         'theme': regRcTheme,
