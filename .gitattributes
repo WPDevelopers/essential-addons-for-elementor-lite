@@ -15,7 +15,7 @@
 Thumbs.db               export-ignore
 behat.yml               export-ignore
 bitbucket-pipelines.yml export-ignore
-bin                     export-ignore
+bin/                    export-ignore
 .circleci/config.yml    export-ignore
 composer.json           export-ignore
 composer.lock           export-ignore
@@ -35,11 +35,11 @@ README.md               export-ignore
 webpack.config.js       export-ignore
 wp-cli.local.yml        export-ignore
 yarn.lock               export-ignore
-tests                   export-ignore
-node_modules            export-ignore
+tests/                  export-ignore
+node_modules/           export-ignore
 *.sql                   export-ignore
 *.tar.gz                export-ignore
 *.zip                   export-ignore
-src                     export-ignore
-build                   export-ignore
+/src/                   export-ignore
+build/                  export-ignore
 postcss.config.js       export-ignore

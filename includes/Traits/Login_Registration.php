@@ -244,7 +244,6 @@ trait Login_Registration {
 
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
-
 		if ( is_user_logged_in() ) {
 			$err_msg = isset( $settings['err_loggedin'] ) ? $settings['err_loggedin'] : __( 'You are already logged in.', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
@@ -277,8 +276,6 @@ trait Login_Registration {
 			exit();
 		}
 		// prepare vars and flag errors
-
-
 		if ( isset( $_POST['eael_tnc_active'] ) && empty( $_POST['eael_accept_tnc'] ) ) {
 			$errors['terms_conditions'] =  isset( $settings['err_tc'] ) ? $settings['err_tc'] : __( 'You did not accept the Terms and Conditions. Please accept it and try again.', 'essential-addons-for-elementor-lite' );
 		}
@@ -366,6 +363,7 @@ trait Login_Registration {
 		if ( ! empty( $_POST['website'] ) ) {
 			$user_data['user_url'] = self::$email_options['website'] = esc_url_raw( $_POST['website'] );
 		}
+
 		$register_actions    = [];
 		$custom_redirect_url = '';
 		if ( !empty( $settings) ) {
@@ -420,6 +418,7 @@ trait Login_Registration {
         }
 
 		$user_id = wp_insert_user( $user_data );
+
 		do_action( 'eael/login-register/after-insert-user', $user_id, $user_data );
 
 		if ( is_wp_error( $user_id ) ) {
@@ -768,4 +767,5 @@ trait Login_Registration {
         delete_option('eael_register_success_' . $widget_id);
         delete_option('eael_register_errors_' . $widget_id);
 	}
+
 }
