@@ -144,16 +144,16 @@ trait Enqueue
 
 	    // localize object
 	    $this->localize_objects = apply_filters( 'eael/localize_objects', [
-		    'ajaxurl'        => admin_url( 'admin-ajax.php' ),
-		    'nonce'          => wp_create_nonce( 'essential-addons-elementor' ),
-		    'i18n'           => [
+		    'ajaxurl'            => admin_url( 'admin-ajax.php' ),
+		    'nonce'              => wp_create_nonce( 'essential-addons-elementor' ),
+		    'i18n'               => [
 			    'added'   => __( 'Added ', 'essential-addons-for-elementor-lite' ),
 			    'compare' => __( 'Compare', 'essential-addons-for-elementor-lite' ),
 			    'loading' => esc_html__( 'Loading...', 'essential-addons-for-elementor-lite' )
 		    ],
-		    'page_permalink' => get_the_permalink(),
-            'cart_redirectition' => get_option( 'woocommerce_cart_redirect_after_add' ),
-            'cart_page_url' =>  apply_filters('eael/is_plugin_active', 'woocommerce/woocommerce.php') ? wc_get_cart_url():'',
+		    'page_permalink'     => get_the_permalink(),
+		    'cart_redirectition' => get_option( 'woocommerce_cart_redirect_after_add' ),
+		    'cart_page_url'      => function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '',
 	    ] );
 
         // edit mode
