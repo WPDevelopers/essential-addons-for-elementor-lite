@@ -13,7 +13,7 @@ html {
 }
 
 .eael-toc .eael-toc-not-found {
-  color: #a94442;
+  color: rgb(169, 68, 66);
 }
 
 .eael-toc.eael-toc-disable {
@@ -185,6 +185,10 @@ html {
   padding: 0;
   margin-left: 20px;
   list-style: none;
+}
+
+.eael-toc .eael-toc-body ul.eael-toc-list .eael-toc-link.eael-highlight-active:first-child {
+  color: #ff7d50;
 }
 
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-bullet li:before {
