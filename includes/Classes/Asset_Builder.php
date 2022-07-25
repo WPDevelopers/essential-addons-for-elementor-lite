@@ -100,19 +100,47 @@ class Asset_Builder {
 	protected function init_hook() {
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
 		add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'ea_before_enqueue_styles' ] );
-		add_action( 'elementor/theme/register_locations', [ $this, 'post_asset_load' ], 100 );
+		add_action( 'elementor/theme/register_locations', [ $this, 'post_asset_load' ], 20 );
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
 		add_action( 'wp_footer', [ $this, 'add_inline_css' ], 15 );
 		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ], 10, 2 );
-		add_action( 'elementor/element/before_parse_css', [ $this, 'save_template_asset' ], 10, 2 );
+		add_action( 'elementor/element/before_parse_css', [ $this, 'save_template_asset' ] );
+		add_filter( 'elementor/files/file_name', [ $this, 'parse_file_name' ] );
+	}
+
+	public function parse_file_name( $file_name ) {
+
+		if( empty( $file_name ) ){
+			return $file_name;
+		}
+
+		$post_id  = preg_replace( '/[^0-9]/', '', $file_name );
+		$this->post_id = $post_id;
+		$type = get_post_meta( $this->post_id, '_elementor_template_type', true );
+		$template_list = ['popup'];
+
+		if ( ! in_array( $type, $template_list ) ){
+			return $file_name;
+		}
+
+		$this->set_main_page( $this->post_id );
+		$this->elements_manager->get_element_list( $this->post_id );
+		$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
+
+		if ( ! empty( $elements ) ) {
+			$this->enqueue_asset( $this->post_id, $elements );
+		}
+
+		return $file_name;
 	}
 
 	/**
 	 * save_template_asset
-	 * 
+	 *
 	 */
-	public function save_template_asset( $object, $data ) {
+	public function save_template_asset( $object ) {
 		$this->post_id = $object->get_post_id();
+
 		$this->set_main_page( $this->post_id );
 		$this->elements_manager->get_element_list( $this->post_id );
 		$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
@@ -248,6 +276,7 @@ class Asset_Builder {
 		$handle        = 'eael';
 		$context       = 'edit';
 		$this->post_id = get_the_ID();
+
 		$this->elements_manager->get_element_list( $this->post_id );
 		$this->load_commnon_asset();
 		$this->register_script();
@@ -292,6 +321,7 @@ class Asset_Builder {
 		}
 
 		$this->post_id = get_the_ID();
+
 		$this->set_main_page( $this->post_id );
 		$this->elements_manager->get_element_list( $this->post_id );
 		$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
@@ -314,10 +344,13 @@ class Asset_Builder {
 	 */
 	public function post_asset_load( $instance ) {
 		$locations = $instance->get_locations();
+
 		foreach ( $locations as $location => $settings ) {
+
 			$documents = \ElementorPro\Modules\ThemeBuilder\Module::instance()->get_conditions_manager()->get_documents_for_location( $location );
 			foreach ( $documents as $document ) {
-				$post_id       = $document->get_post()->ID;
+				$post_id = $document->get_post()->ID;
+
 				$this->post_id = $post_id;
 				$this->set_main_page( $this->post_id );
 				$this->elements_manager->get_element_list( $this->post_id );
