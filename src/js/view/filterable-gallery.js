@@ -180,6 +180,10 @@ jQuery(window).on("elementor/frontend/init", function () {
 					filter_name = $(".fg-layout-3-filter-controls li.active", $scope).data('filter');
 				}
 
+				if (filter_name === undefined) {
+					filter_name = '*';
+				}
+
 				let item_found = 0;
 				let index_list = []
 				for (const [index, item] of fg_items.entries()){
