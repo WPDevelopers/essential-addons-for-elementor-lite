@@ -101,14 +101,145 @@ class Asset_Builder {
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
 		add_action( 'wp_footer', [ $this, 'add_inline_css' ], 15 );
 		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ], 10, 2 );
+
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
 		add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'ea_before_enqueue_styles' ] );
 		add_action( 'elementor/theme/register_locations', [ $this, 'post_asset_load' ], 20 );
 		add_action( 'elementor/element/before_parse_css', [ $this, 'save_template_asset' ] );
-		add_filter( 'elementor/files/file_name', [ $this, 'parse_file_name' ] );
+		add_filter( 'elementor/files/file_name', [ $this, 'load_asset_per_file' ] );
 	}
 
-	public function parse_file_name( $file_name ) {
+	/**
+	 * frontend_asset_load
+	 * Load asset as per condition
+	 * @return false|void
+	 */
+	public function frontend_asset_load() {
+		$handle        = 'eael';
+		$this->post_id = get_the_ID();
+
+		$this->elements_manager->get_element_list( $this->post_id );
+		$this->load_commnon_asset();
+		$this->register_script();
+
+		if ( ! $this->is_edit() ) {
+			wp_enqueue_script( 'eael-general' );
+			wp_enqueue_style( 'eael-general' );
+			$handle = 'eael-general';
+			$this->load_custom_js( $this->post_id );
+		} else {
+			$elements = $this->get_settings();
+
+			if ( empty( $elements ) ) {
+				return false;
+			}
+
+			if ( $this->js_print_method == 'internal' ) {
+				wp_enqueue_script( 'eael-general' );
+			}
+
+			if ( $this->css_print_method == 'internal' ) {
+				wp_enqueue_style( 'eael-general' );
+			}
+
+			do_action( 'eael/before_enqueue_styles', $elements );
+			do_action( 'eael/before_enqueue_scripts', $elements );
+
+			$this->enqueue_asset( null, $elements, 'edit' );
+		}
+
+		wp_localize_script( $handle, 'localize', $this->localize_objects );
+	}
+
+	/**
+	 * ea_before_enqueue_styles
+	 * @return false|void
+	 */
+	public function ea_before_enqueue_styles() {
+
+		if ( $this->is_edit() ) {
+			return false;
+		}
+
+		$this->post_id = get_the_ID();
+
+		$this->set_main_page( $this->post_id );
+		$this->elements_manager->get_element_list( $this->post_id );
+		$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
+
+		if ( ! empty( $elements ) ) {
+			do_action( 'eael/before_enqueue_styles', $elements );
+			do_action( 'eael/before_enqueue_scripts', $elements );
+			$this->enqueue_asset( $this->post_id, $elements );
+		}
+
+		if ( ! $this->main_page ) {
+			$this->load_custom_js( $this->post_id );
+		}
+	}
+
+	/**
+	 * post_asset_load
+	 *
+	 * @param $instance
+	 */
+	public function post_asset_load( $instance ) {
+
+		if( is_admin() ){
+			return false;
+		}
+
+		$locations = $instance->get_locations();
+
+		foreach ( $locations as $location => $settings ) {
+
+			$documents = \ElementorPro\Modules\ThemeBuilder\Module::instance()->get_conditions_manager()->get_documents_for_location( $location );
+			foreach ( $documents as $document ) {
+				$post_id = $document->get_post()->ID;
+
+				$this->post_id = $post_id;
+				$this->set_main_page( $this->post_id );
+				$this->elements_manager->get_element_list( $this->post_id );
+				$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
+
+				if ( ! empty( $elements ) ) {
+					do_action( 'eael/before_enqueue_styles', $elements );
+					do_action( 'eael/before_enqueue_scripts', $elements );
+					$this->enqueue_asset( $this->post_id, $elements );
+				}
+
+				if ( ! $this->main_page ) {
+					$this->load_custom_js( $this->post_id );
+				}
+			}
+		}
+	}
+
+	/**
+	 * save_template_asset
+	 *
+	 */
+	public function save_template_asset( $object ) {
+		$this->post_id = $object->get_post_id();
+
+		$this->set_main_page( $this->post_id );
+		$this->elements_manager->get_element_list( $this->post_id );
+		$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
+
+		if ( ! empty( $elements ) ) {
+			do_action( 'eael/before_enqueue_styles', $elements );
+			do_action( 'eael/before_enqueue_scripts', $elements );
+			$this->enqueue_asset( $this->post_id, $elements );
+		}
+	}
+
+	/**
+	 * load_asset_per_file
+	 * @param $file_name
+	 *
+	 * @return mixed
+	 */
+	public function load_asset_per_file( $file_name ) {
 
 		if( empty( $file_name ) ){
 			return $file_name;
@@ -132,24 +263,6 @@ class Asset_Builder {
 		}
 
 		return $file_name;
-	}
-
-	/**
-	 * save_template_asset
-	 *
-	 */
-	public function save_template_asset( $object ) {
-		$this->post_id = $object->get_post_id();
-
-		$this->set_main_page( $this->post_id );
-		$this->elements_manager->get_element_list( $this->post_id );
-		$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
-
-		if ( ! empty( $elements ) ) {
-			do_action( 'eael/before_enqueue_styles', $elements );
-			do_action( 'eael/before_enqueue_scripts', $elements );
-			$this->enqueue_asset( $this->post_id, $elements );
-		}
 	}
 
 	/**
@@ -267,112 +380,9 @@ class Asset_Builder {
 		] );
 	}
 
-	/**
-	 * frontend_asset_load
-	 * Load asset as per condition
-	 * @return false|void
-	 */
-	public function frontend_asset_load() {
-		$handle        = 'eael';
-		$context       = 'edit';
-		$this->post_id = get_the_ID();
 
-		$this->elements_manager->get_element_list( $this->post_id );
-		$this->load_commnon_asset();
-		$this->register_script();
 
-		if ( ! $this->is_edit() ) {
-			wp_enqueue_script( 'eael-general' );
-			wp_enqueue_style( 'eael-general' );
-			$handle = 'eael-general';
-			$this->load_custom_js( $this->post_id );
-		} else {
-			$elements = $this->get_settings();
 
-			if ( empty( $elements ) ) {
-				return false;
-			}
-
-			if ( $this->js_print_method == 'internal' ) {
-				wp_enqueue_script( 'eael-general' );
-			}
-
-			if ( $this->css_print_method == 'internal' ) {
-				wp_enqueue_style( 'eael-general' );
-			}
-
-			do_action( 'eael/before_enqueue_styles', $elements );
-			do_action( 'eael/before_enqueue_scripts', $elements );
-
-			$this->enqueue_asset( null, $elements, 'edit' );
-		}
-
-		wp_localize_script( $handle, 'localize', $this->localize_objects );
-	}
-
-	/**
-	 * ea_before_enqueue_styles
-	 * @return false|void
-	 */
-	public function ea_before_enqueue_styles() {
-
-		if ( $this->is_edit() ) {
-			return false;
-		}
-
-		$this->post_id = get_the_ID();
-
-		$this->set_main_page( $this->post_id );
-		$this->elements_manager->get_element_list( $this->post_id );
-		$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
-
-		if ( ! empty( $elements ) ) {
-			do_action( 'eael/before_enqueue_styles', $elements );
-			do_action( 'eael/before_enqueue_scripts', $elements );
-			$this->enqueue_asset( $this->post_id, $elements );
-		}
-
-		if ( ! $this->main_page ) {
-			$this->load_custom_js( $this->post_id );
-		}
-	}
-
-	/**
-	 * post_asset_load
-	 *
-	 * @param $instance
-	 */
-	public function post_asset_load( $instance ) {
-
-		if( is_admin() ){
-			return false;
-		}
-
-		$locations = $instance->get_locations();
-
-		foreach ( $locations as $location => $settings ) {
-
-			$documents = \ElementorPro\Modules\ThemeBuilder\Module::instance()->get_conditions_manager()->get_documents_for_location( $location );
-			foreach ( $documents as $document ) {
-				$post_id = $document->get_post()->ID;
-
-				$this->post_id = $post_id;
-				$this->set_main_page( $this->post_id );
-				$this->elements_manager->get_element_list( $this->post_id );
-				$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
-
-				if ( ! empty( $elements ) ) {
-					do_action( 'eael/before_enqueue_styles', $elements );
-					do_action( 'eael/before_enqueue_scripts', $elements );
-					$this->enqueue_asset( $this->post_id, $elements );
-				}
-
-				if ( ! $this->main_page ) {
-					$this->load_custom_js( $this->post_id );
-				}
-			}
-		}
-	}
 
 	/**
 	 * enqueue_asset
