@@ -19,6 +19,10 @@ var SimpleMenu = function ($scope, $) {
     let $hamburger_max_width = $('.eael-simple-menu-container', $scope).data(
         'hamburger-max-width'
     )
+    
+    let $hamburger_device = $('.eael-simple-menu-container', $scope).data(
+        'hamburger-device'
+    )
 
     var $fullWidth = $('.eael-simple-menu--stretch');
     
@@ -105,8 +109,7 @@ var SimpleMenu = function ($scope, $) {
             )
 
             // Mobile Dropdown Breakpoints
-            $('.eael-simple-menu-container', $scope).removeClass('is-not-hamburger').addClass('is-hamburger');
-            $('.eael-simple-menu-container', $scope).closest('.eael_simple_menu_hamburger_disable_selected_menu_hide, .eael-simple-menu-hamburger-align-left, .eael-simple-menu-hamburger-align-center').removeClass('is-not-hamburger').addClass('is-hamburger');
+            // $('.eael-simple-menu-container', $scope).closest('.elementor-widget-eael-simple-menu').removeClass('eael-hamburger--none').addClass('eael-hamburger--mobile eael-hamburger--tablet');
 
             if ($('.eael-simple-menu-container', $scope).hasClass('eael-simple-menu--stretch')){
                 const css = {}
@@ -149,8 +152,7 @@ var SimpleMenu = function ($scope, $) {
             $(".eael-simple-menu-container nav",$scope).removeAttr( 'style' );
 
             // Mobile Dropdown Breakpoints
-            $('.eael-simple-menu-container', $scope).closest('.eael_simple_menu_hamburger_disable_selected_menu_hide, .eael-simple-menu-hamburger-align-left, .eael-simple-menu-hamburger-align-center').removeClass('is-hamburger');
-            $('.eael-simple-menu-container', $scope).removeClass('is-hamburger').addClass('is-not-hamburger');
+            $('.eael-simple-menu-container', $scope).closest('.elementor-widget-eael-simple-menu').removeClass('eael-hamburger--mobile ').removeClass('eael-hamburger--tablet').addClass('eael-hamburger--none');
         }
     }
 

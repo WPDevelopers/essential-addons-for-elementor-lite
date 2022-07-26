@@ -256,7 +256,7 @@ class Simple_Menu extends Widget_Base
             'widescreen',
         ];
 
-        $default_value = '991';
+        $default_value = 'tablet';
         
         foreach ( $breakpoints as $breakpoint_key => $breakpoint_instance ) {
             // Do not include laptop and widscreen in the options since this feature is for mobile devices.
@@ -264,11 +264,7 @@ class Simple_Menu extends Widget_Base
                 continue;
             }
 
-            if ( 'tablet' === $breakpoint_key ) {
-                $default_value = $breakpoint_instance->get_value();
-            }
-
-            $dropdown_options[ $breakpoint_instance->get_value() ] = sprintf(
+            $dropdown_options[ $breakpoint_key ] = sprintf(
                 /* translators: 1: Breakpoint label, 2: `>` character, 3: Breakpoint value */
                 esc_html__( '%1$s (%2$s %3$dpx)', 'essential-addons-for-elementor-lite' ),
                 $breakpoint_instance->get_label(),
@@ -277,16 +273,16 @@ class Simple_Menu extends Widget_Base
             );
         }
 
-        $dropdown_options['0'] = esc_html__( 'None', 'essential-addons-for-elementor-lite' );
+        $dropdown_options['none'] = esc_html__( 'None', 'essential-addons-for-elementor-lite' );
 
         $this->add_control(
             'eael_simple_menu_dropdown',
             [
                 'label' => esc_html__( 'Breakpoint', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SELECT,
-                'default' => floatval( $default_value ),
+                'default' => esc_html( $default_value ),
                 'options' => $dropdown_options,
-                'prefix_class' => 'elementor-nav-menu--dropdown-',
+                'prefix_class' => 'eael-hamburger--',
             ]
         );
 
@@ -1448,10 +1444,20 @@ class Simple_Menu extends Widget_Base
         $this->end_controls_section();
     }
 
+    protected function get_breakpoint_value_by_key( $key = 'none' ){
+        $breakpoints = Plugin::$instance->breakpoints->get_active_breakpoints();
+        $breakpoint_value = 0;
+        if( isset( $breakpoints[$key] ) ){
+            $breakpoint_value = $breakpoints[$key]->get_value();
+        }
+        return $breakpoint_value;
+    }
+
     protected function render()
     {
         $settings = $this->get_settings();
-        $hamburger_max_width = isset( $settings['eael_simple_menu_dropdown'] ) ? intval( $settings['eael_simple_menu_dropdown'] ) : intval( '991' ) ;
+        $hamburger_max_width = isset( $settings['eael_simple_menu_dropdown'] ) ? intval( $this->get_breakpoint_value_by_key( $settings['eael_simple_menu_dropdown'] ) ) : intval( '991' ) ;
+        $hamburger_device = esc_html( $settings['eael_simple_menu_dropdown'] );
 
         if ($settings['eael_simple_menu_preset'] == 'preset-2') {
             $align = $settings['eael_simple_menu_item_alignment_center'];
@@ -1512,6 +1518,7 @@ class Simple_Menu extends Widget_Base
 //            'data-indicator-class'          => $settings['eael_simple_menu_item_indicator'],
 //            'data-dropdown-indicator-class' => $settings['eael_simple_menu_dropdown_item_indicator'],
             'data-hamburger-max-width' => $hamburger_max_width,
+            'data-hamburger-device' => $hamburger_device,
         ]);
 
         if ($settings['eael_simple_menu_menu']) {
