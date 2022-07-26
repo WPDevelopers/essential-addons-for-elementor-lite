@@ -66,8 +66,8 @@ ea.hooks.addAction("init", "ea", () => {
 							' .eael-post-appender')
 							.empty()
 							.append($content);
-
-						$('.eael-load-more-button', $scope).removeClass('hide-load-more');
+						var $max_page = $('.eael-post-found',$scope).html();
+						$('.eael-load-more-button', $scope).removeClass('hide-load-more').data('max-page', $max_page);
 
 						if ($layout === 'masonry') {
 							var $products = $('.eael-product-gallery .products', $scope);
