@@ -39,11 +39,9 @@
   .elementor-widget-eael-cta-box.content-align--tabletcta-right {
     text-align: right;
   }
-
   .elementor-widget-eael-cta-box.content-align--tabletcta-center {
     text-align: center;
   }
-
   .elementor-widget-eael-cta-box.content-align--tabletcta-default {
     text-align: left;
   }
@@ -53,11 +51,9 @@
   .elementor-widget-eael-cta-box.content-align--mobilecta-center {
     text-align: center;
   }
-
   .elementor-widget-eael-cta-box.content-align--mobilecta-right {
     text-align: right;
   }
-
   .elementor-widget-eael-cta-box.content-align--mobilecta-default {
     text-align: left;
   }
@@ -273,13 +269,11 @@
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
   }
-
   .eael-call-to-action .title {
     font-size: 28px;
     line-height: 36px;
     margin-top: 0px;
   }
-
   .eael-call-to-action.cta-icon-flex .icon {
     -webkit-box-flex: 1;
         -ms-flex-positive: 1;
@@ -288,7 +282,6 @@
     line-height: 90px;
     text-align: center;
   }
-
   .eael-call-to-action.cta-flex .content,
 .eael-call-to-action.cta-icon-flex .content {
     -webkit-box-flex: 1;
@@ -297,13 +290,11 @@
     text-align: center;
     padding: 0px;
   }
-
   .eael-call-to-action.cta-flex .action,
 .eael-call-to-action.cta-icon-flex .action {
     text-align: center;
     padding-top: 0px;
   }
-
   .eael-call-to-action .cta-button {
     padding: 12px 25px;
   }
@@ -314,12 +305,10 @@
     font-size: 14px;
     line-height: 26px;
   }
-
   .eael-call-to-action .cta-button:not(.cta-btn-preset-2) {
     padding: 4px 20px;
     font-size: 12px;
   }
-
   .eael-call-to-action .title {
     font-size: 20px;
     line-height: 30px;

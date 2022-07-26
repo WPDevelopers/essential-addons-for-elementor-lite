@@ -1260,12 +1260,11 @@ class Data_Table extends Widget_Base {
 	  			$nofollow = !empty($content_row['eael_data_table_content_row_title_link']['nofollow']) ? 'rel="nofollow"' : '';
 
 	  			$table_tr_keys = array_keys( $table_tr );
-				  $last_key = end( $table_tr_keys );
-
+	  			$last_key = end( $table_tr_keys );
 				$tbody_content = ($content_row['eael_data_table_content_type'] == 'editor') ? $content_row['eael_data_table_content_row_content'] : Helper::eael_wp_kses($content_row['eael_data_table_content_row_title']);
 
 	  			$table_td[] = [
-	  				'row_id'		=> $table_tr[$last_key]['id'],
+	  				'row_id'		=> !empty( $table_tr[$last_key]['id'] ) ? $table_tr[$last_key]['id'] : $row_id,
 	  				'type'			=> $content_row['eael_data_table_content_row_type'],
 					'content_type'	=> $content_row['eael_data_table_content_type'],
 					'template'		=> $content_row['eael_primary_templates_for_tables'],
