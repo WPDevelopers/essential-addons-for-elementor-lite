@@ -105,7 +105,6 @@ class Asset_Builder {
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
 		add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'ea_before_enqueue_styles' ] );
 		add_action( 'elementor/theme/register_locations', [ $this, 'post_asset_load' ], 20 );
-		add_action( 'elementor/element/before_parse_css', [ $this, 'save_template_asset' ] );
 		add_filter( 'elementor/files/file_name', [ $this, 'load_asset_per_file' ] );
 	}
 
@@ -216,24 +215,6 @@ class Asset_Builder {
 	}
 
 	/**
-	 * save_template_asset
-	 *
-	 */
-	public function save_template_asset( $object ) {
-		$this->post_id = $object->get_post_id();
-
-		$this->set_main_page( $this->post_id );
-		$this->elements_manager->get_element_list( $this->post_id );
-		$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
-
-		if ( ! empty( $elements ) ) {
-			do_action( 'eael/before_enqueue_styles', $elements );
-			do_action( 'eael/before_enqueue_scripts', $elements );
-			$this->enqueue_asset( $this->post_id, $elements );
-		}
-	}
-
-	/**
 	 * load_asset_per_file
 	 * @param $file_name
 	 *
@@ -246,13 +227,14 @@ class Asset_Builder {
 		}
 
 		$post_id  = preg_replace( '/[^0-9]/', '', $file_name );
+
+		if ( $post_id < 1 ) {
+			return $file_name;
+		}
+
 		$this->post_id = $post_id;
 		$type = get_post_meta( $this->post_id, '_elementor_template_type', true );
 		$template_list = ['popup'];
-
-		if ( ! in_array( $type, $template_list ) ){
-			return $file_name;
-		}
 
 		$this->set_main_page( $this->post_id );
 		$this->elements_manager->get_element_list( $this->post_id );
