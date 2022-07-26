@@ -120,10 +120,7 @@
 			success: function (response) {
 				var $content = $(response);
 
-				if (
-					$content.hasClass("no-posts-found") ||
-					$content.length === 0
-				) {
+				if ( $content.hasClass("no-posts-found") || $content.length === 0 ) {
 					if ($data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery") {
 						$this.removeClass('button--loading').addClass('hide-load-more');
 						$LoaderSpan.html($text);
@@ -137,10 +134,7 @@
 					}
 
 				} else {
-					if (
-						$data.class ==
-						"Essential_Addons_Elementor\\Elements\\Product_Grid"
-					) {
+					if ( $data.class == "Essential_Addons_Elementor\\Elements\\Product_Grid" ) {
 						$content = $content.filter("li");
 
 						$(".eael-product-grid .products", $scope).append(
@@ -219,7 +213,7 @@
 						}
 					} else {
 						if ($max_page && $data.page >= $max_page) {
-							$this.remove();
+							$this.addClass('hide-load-more');
 						}
 					}
 				}
