@@ -464,7 +464,8 @@ class Asset_Builder {
 
 		$custom_js = get_post_meta( $post_id, '_eael_custom_js', true );
 		if ( $custom_js ) {
-			$this->custom_js .= $custom_js;
+			// add semicolon if someone misses adding this in custom js code .
+			$this->custom_js .= $custom_js.';';
 		}
 	}
 
