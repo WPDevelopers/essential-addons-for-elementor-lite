@@ -651,7 +651,7 @@ trait Ajax_Handler {
 						$query->the_post();
 						$html .= HelperClass::include_with_variable( $file_path, [ 'settings' => $settings ] );
 					}
-					$html .= '<div class="eael-post-found" style="display:none;">'. ceil($query->found_posts/(int) $args['posts_per_page']) . '</div>';
+					$html .= '<div class="eael-max-page" style="display:none;">'. ceil($query->found_posts / absint( $args['posts_per_page'] ) ) . '</div>';
 					printf( '%1$s', $html );
 					wp_reset_postdata();
 				}
