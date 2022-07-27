@@ -442,50 +442,6 @@ class Login_Register extends Widget_Base {
 				'separator' => 'before',
 			] );
 		}
-		$this->add_control( 'enable_login_recaptcha', [
-			'label'        => __( 'Enable Google reCAPTCHA', 'essential-addons-for-elementor-lite' ),
-			'description'  => __( 'reCAPTCHA will prevent spam login from bots.', 'essential-addons-for-elementor-lite' ),
-			'type'         => Controls_Manager::SWITCHER,
-			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
-			'return_value' => 'yes',
-		] );
-		$this->add_control( 'login_recaptcha_version', [
-			'label'       => __( 'reCAPTCHA version', 'essential-addons-for-elementor-lite' ),
-			'description' => __( 'If v3 selected, then it will be applied to both forms. Reload preview after saving to see changes.', 'essential-addons-for-elementor-lite' ),
-			'label_block' => false,
-			'type'        => Controls_Manager::SELECT,
-			'options'     => [
-				'v2' => __( 'v2', 'essential-addons-for-elementor-lite' ),
-				'v3'  => __( 'v3', 'essential-addons-for-elementor-lite' ),
-			],
-			'default'     => 'v2',
-			'condition'   => [
-				'enable_login_recaptcha' => 'yes',
-			],
-		] );
-		if ( empty( $this->recaptcha_sitekey ) ) {
-			$this->add_control( 'eael_login_recaptcha_keys_missing', [
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => sprintf( __( 'reCAPTCHA API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
-				'content_classes' => 'eael-warning',
-				'condition'       => [
-					'enable_login_recaptcha' => 'yes',
-					'login_recaptcha_version' => 'v2',
-				],
-			] );
-		}
-		if ( empty( $this->recaptcha_sitekey_v3 ) ) {
-			$this->add_control( 'eael_login_recaptcha_keys_missing_v3', [
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => sprintf( __( 'reCAPTCHA v3 API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
-				'content_classes' => 'eael-warning',
-				'condition'       => [
-					'enable_login_recaptcha' => 'yes',
-					'login_recaptcha_version' => 'v3',
-				],
-			] );
-		}
 		$this->end_popover();
 
 
@@ -546,51 +502,6 @@ class Login_Register extends Widget_Base {
 					'show_login_link'   => 'yes',
 				],
 			] );
-			$this->add_control( 'enable_register_recaptcha', [
-				'label'        => __( 'Enable Google reCAPTCHA', 'essential-addons-for-elementor-lite' ),
-				'description'  => __( 'reCAPTCHA will prevent spam registration from bots.', 'essential-addons-for-elementor-lite' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
-			] );
-			$this->add_control( 'register_recaptcha_version', [
-				'label'       => __( 'reCAPTCHA version', 'essential-addons-for-elementor-lite' ),
-				'label_block' => false,
-				'description' => __( 'If v3 selected, then it will be applied to both forms. Reload preview after saving to see changes.', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::SELECT,
-				'options'     => [
-					'v2' => __( 'v2', 'essential-addons-for-elementor-lite' ),
-					'v3'  => __( 'v3', 'essential-addons-for-elementor-lite' ),
-				],
-				'default'     => 'v2',
-				'condition'   => [
-					'enable_register_recaptcha' => 'yes',
-				],
-			] );
-			if ( empty( $this->recaptcha_sitekey ) ) {
-				$this->add_control( 'eael_recaptcha_keys_missing', [
-					'type'            => Controls_Manager::RAW_HTML,
-					'raw'             => sprintf( __( 'reCAPTCHA v2 API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
-					'content_classes' => 'eael-warning',
-					'condition'       => [
-						'enable_register_recaptcha' => 'yes',
-						'register_recaptcha_version' => 'v2',
-					],
-				] );
-			}
-
-			if ( empty( $this->recaptcha_sitekey_v3 ) ) {
-				$this->add_control( 'eael_recaptcha_keys_missing_v3', [
-					'type'            => Controls_Manager::RAW_HTML,
-					'raw'             => sprintf( __( 'reCAPTCHA v3 API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
-					'content_classes' => 'eael-warning',
-					'condition'       => [
-						'enable_register_recaptcha' => 'yes',
-						'register_recaptcha_version' => 'v3',
-					],
-				] );
-			}
 			$this->end_popover();
 
 		} else {
@@ -598,6 +509,81 @@ class Login_Register extends Widget_Base {
 				'label'   => __( 'Show Login Link', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::HIDDEN,
 				'default' => 'no',
+			] );
+		}
+
+		$this->add_control( 'enable_login_register_recaptcha', [
+			'label'        => __( 'Enable Google reCAPTCHA', 'essential-addons-for-elementor-lite' ),
+			'description'  => __( 'reCAPTCHA will prevent spam login from bots.', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'default'      => 'yes',
+		] );
+
+		$this->add_control( 'login_register_recaptcha_version', [
+			'label'       => __( 'reCAPTCHA version', 'essential-addons-for-elementor-lite' ),
+			'label_block' => false,
+			'description' => __( 'If v3 selected, then it will be applied to both forms. Reload preview after saving to see changes.', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::SELECT,
+			'options'     => [
+				'v2' => __( 'v2', 'essential-addons-for-elementor-lite' ),
+				'v3'  => __( 'v3', 'essential-addons-for-elementor-lite' ),
+			],
+			'default'     => 'v2',
+			'condition'   => [
+				'enable_login_register_recaptcha' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'enable_login_recaptcha', [
+			'label'        => __( 'Apply on Login Form', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'condition'    => [
+				'enable_login_register_recaptcha' => 'yes',
+				'login_register_recaptcha_version' => 'v2',
+			],
+		] );
+
+		if( $this->user_can_register ) {
+			$this->add_control( 'enable_register_recaptcha', [
+				'label'        => __( 'Apply on Registration Form', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'condition'    => [
+					'enable_login_register_recaptcha' => 'yes',
+					'login_register_recaptcha_version' => 'v2',
+				],
+			] );
+		}
+		
+		if ( empty( $this->recaptcha_sitekey ) ) {
+			$this->add_control( 'eael_recaptcha_keys_missing', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => sprintf( __( 'reCAPTCHA v2 API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
+				'content_classes' => 'eael-warning',
+				'condition'       => [
+					'enable_login_register_recaptcha' => 'yes',
+					'login_register_recaptcha_version' => 'v2',
+				],
+			] );
+		}
+
+		if ( empty( $this->recaptcha_sitekey_v3 ) ) {
+			$this->add_control( 'eael_recaptcha_keys_missing_v3', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => sprintf( __( 'reCAPTCHA v3 API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
+				'content_classes' => 'eael-warning',
+				'condition'       => [
+					'enable_login_register_recaptcha' => 'yes',
+					'login_register_recaptcha_version' => 'v3',
+				],
 			] );
 		}
 
@@ -3873,8 +3859,7 @@ class Login_Register extends Widget_Base {
 			$login_redirect_url = !empty( $this->ds[ 'redirect_url' ][ 'url' ] ) ? esc_url( $this->ds[ 'redirect_url' ][ 'url' ] ) : '';
 		}
 
-		$login_recaptcha_version = ! empty( $this->ds['login_recaptcha_version'] ) ? $this->ds['login_recaptcha_version'] : 'v2';
-		$register_recaptcha_version = ! empty( $this->ds['register_recaptcha_version'] ) ? $this->ds['register_recaptcha_version'] : 'v2';
+		$login_recaptcha_version = $register_recaptcha_version = ! empty( $this->ds['login_register_recaptcha_version'] ) ? $this->ds['login_register_recaptcha_version'] : 'v2';
 
 		if ( get_option('eael_recaptcha_sitekey_v3') && ( 'v3' === $login_recaptcha_version || 'v3' === $register_recaptcha_version)  ) {
 			$site_key = esc_html( get_option('eael_recaptcha_sitekey_v3') );
@@ -4491,7 +4476,7 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_recaptcha_node( $form_type = 'login' ) {
-		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) && 'v3' !== $this->ds["{$form_type}_recaptcha_version"] ) {
+		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) && 'v3' !== $this->ds["login_register_recaptcha_version"] ) {
 			$id = "{$form_type}-recaptcha-node-" . $this->get_id();
 			echo "<input type='hidden' name='g-recaptcha-enabled' value='1'/><div id='{$id}' class='eael-recaptcha-wrapper'></div>";
 		}
