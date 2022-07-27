@@ -84,6 +84,24 @@ jQuery(window).on("elementor/frontend/init", function () {
 });
 
 (function ($) {
+	ea.getToken = () => {
+		if (localize.nonce && !ea.noncegenerated) {
+			ea.noncegenerated = true;
+			$.ajax({
+				url: localize.ajaxurl,
+				type: "post",
+				data: {
+					action: "eael_get_token",
+				},
+				success: function (response) {
+					if (response.success) {
+						localize.nonce = response.data.nonce
+					}
+				}
+			});
+		}
+	}
+
 	$('a').on('click', function (e) {
 		var hashURL = $(this).attr('href'),
 			isStartWithHash;
