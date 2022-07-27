@@ -98,6 +98,13 @@
         position: relative;
         overflow: hidden;
     }
+    .eael-facebook-feed-img-container {
+        height: auto;
+        width: 100%;
+        .eael-facebook-feed-img{
+            visibility: hidden;
+        }
+    }
 }
 
 .eael-facebook-feed-overlay {
