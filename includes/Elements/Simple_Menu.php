@@ -1447,15 +1447,6 @@ class Simple_Menu extends Widget_Base
         $this->end_controls_section();
     }
 
-    protected function get_breakpoint_value_by_key( $key = 'none' ){
-        $breakpoints = Plugin::$instance->breakpoints->get_active_breakpoints();
-        $breakpoint_value = 0;
-        if( isset( $breakpoints[$key] ) ){
-            $breakpoint_value = $breakpoints[$key]->get_value();
-        }
-        return $breakpoint_value;
-    }
-
     protected function render()
     {
         $settings = $this->get_settings();
