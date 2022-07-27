@@ -25,6 +25,8 @@ class Simple_Menu extends Widget_Base
 
     protected $_has_template_content = false;
 
+    protected $dropdown_options = [];
+
     public function get_name()
     {
         return 'eael-simple-menu';
@@ -274,6 +276,7 @@ class Simple_Menu extends Widget_Base
         }
 
         $dropdown_options['none'] = esc_html__( 'None', 'essential-addons-for-elementor-lite' );
+        $this->dropdown_options = $dropdown_options;
 
         $this->add_control(
             'eael_simple_menu_dropdown',
@@ -281,7 +284,7 @@ class Simple_Menu extends Widget_Base
                 'label' => esc_html__( 'Breakpoint', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SELECT,
                 'default' => esc_html( $default_value ),
-                'options' => $dropdown_options,
+                'options' => $this->dropdown_options,
                 'prefix_class' => 'eael-hamburger--',
             ]
         );
@@ -1456,7 +1459,6 @@ class Simple_Menu extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings();
-        $hamburger_max_width = isset( $settings['eael_simple_menu_dropdown'] ) ? intval( $this->get_breakpoint_value_by_key( $settings['eael_simple_menu_dropdown'] ) ) : intval( '991' ) ;
         $hamburger_device = esc_html( $settings['eael_simple_menu_dropdown'] );
 
         if ($settings['eael_simple_menu_preset'] == 'preset-2') {
@@ -1512,15 +1514,15 @@ class Simple_Menu extends Widget_Base
 	    } else {
 		    $this->add_render_attribute( 'eael-simple-menu', 'data-dropdown-indicator-class', $settings['eael_simple_menu_dropdown_item_indicator']['value'] );
 	    }
-
+        
         $this->add_render_attribute('eael-simple-menu', [
             'class'                         => implode(' ', array_filter($container_classes)),
 //            'data-indicator-class'          => $settings['eael_simple_menu_item_indicator'],
 //            'data-dropdown-indicator-class' => $settings['eael_simple_menu_dropdown_item_indicator'],
-            'data-hamburger-max-width' => $hamburger_max_width,
+            'data-hamburger-breakpoints' => wp_json_encode( $this->dropdown_options ),
             'data-hamburger-device' => $hamburger_device,
         ]);
-
+        
         if ($settings['eael_simple_menu_menu']) {
             $args = [
                 'menu'        => $settings['eael_simple_menu_menu'],
