@@ -66,7 +66,7 @@ ea.hooks.addAction("init", "ea", () => {
 							' .eael-post-appender')
 							.empty()
 							.append($content);
-						var $max_page = $('.eael-post-found',$scope).html();
+						var $max_page = $('<div>' + response + '</div>').find('.eael-max-page').text();
 						$('.eael-load-more-button', $scope).removeClass('hide-load-more').data('max-page', $max_page);
 
 						if ($layout === 'masonry') {
