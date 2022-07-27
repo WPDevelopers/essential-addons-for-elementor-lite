@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-07-26 08:53+0000\n"
+"POT-Creation-Date: 2022-07-27 04:51+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -14,15 +14,15 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../includes/Classes/Asset_Builder.php:375
+#: ../includes/Classes/Asset_Builder.php:357
 msgid "Added "
 msgstr ""
 
-#: ../includes/Classes/Asset_Builder.php:376, ../includes/Traits/Woo_Product_Comparable.php:2112
+#: ../includes/Classes/Asset_Builder.php:358, ../includes/Traits/Woo_Product_Comparable.php:2112
 msgid "Compare"
 msgstr ""
 
-#: ../includes/Classes/Asset_Builder.php:377
+#: ../includes/Classes/Asset_Builder.php:359
 msgid "Loading..."
 msgstr ""
 
