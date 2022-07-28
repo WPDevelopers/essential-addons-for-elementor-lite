@@ -88,7 +88,7 @@ trait Admin {
             ) );
         }
 
-        $this->eael_admin_inline_css();
+        //$this->eael_admin_inline_css();
     }
 
     /**
