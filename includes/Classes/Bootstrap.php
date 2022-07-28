@@ -252,7 +252,7 @@ class Bootstrap
 
 
 
-	        add_action( 'in_admin_header', [ $this, 'remove_admin_notice' ] );
+	        //add_action( 'in_admin_header', [ $this, 'remove_admin_notice' ] );
 
 	        //handle typeform auth token
 	        add_action('admin_init', [$this, 'typeform_auth_handle']);
@@ -266,7 +266,7 @@ class Bootstrap
 		        add_action( 'init', [ $this, 'register_wc_hooks' ], 5 );
 	        }
 
-	        add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
+	        //add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
 
         }
 
