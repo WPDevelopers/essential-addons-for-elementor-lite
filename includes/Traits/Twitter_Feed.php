@@ -97,10 +97,10 @@ trait Twitter_Feed
         $items = array_splice($items, 0, $settings['eael_twitter_feed_post_limit']);
         $post_per_page = ! empty($settings['eael_twitter_feed_posts_per_page']) ? $settings['eael_twitter_feed_posts_per_page'] : 10;
         $counter = 0;
-
+        $current_page = 1;
+            
         foreach ($items as $item) {
             $counter++;
-            $current_page = 1;
             if ($post_per_page > 0) {
                 $current_page = ceil($counter / $post_per_page);
             }
@@ -119,7 +119,20 @@ trait Twitter_Feed
 			        ( isset( $item['quoted_status']['entities']['media'] ) ? $item['quoted_status']['entities']['media'] :
 				        [] ) );
 
-            $html .= '<div class="eael-twitter-feed-item ' . $class . '" data-current-page="' . esc_attr( $current_page ) . '">
+            $show_pagination = ! empty($settings['pagination']) && 'yes' === $settings['pagination'] ? true : false;
+            
+            if($show_pagination){
+                $pagination_class = ' page-' . $current_page;
+                $pagination_class .= 1 === intval( $current_page ) ? ' eael-d-block' : ' eael-d-none';
+            } else {
+                $pagination_class = 'page-1 eael-d-block';
+            }
+
+            if ($counter == count($items)) {
+                $pagination_class .= ' eael-last-twitter-feed-item';
+            }
+
+            $html .= '<div class="eael-twitter-feed-item ' . esc_attr( $class ) . ' ' . esc_attr( $pagination_class ) . ' ">
 				<div class="eael-twitter-feed-item-inner">
 				    <div class="eael-twitter-feed-item-header clearfix">';
                         if ($settings['eael_twitter_feed_show_avatar'] == 'true') {
