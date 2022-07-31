@@ -22,6 +22,11 @@ var SimpleMenu = function ($scope, $) {
     let $hamburger_device = $('.eael-simple-menu-container', $scope).data(
         'hamburger-device'
     )
+
+    if( typeof $hamburger_device === 'undefined' || $hamburger_device === '' || $hamburger_device === null ) {
+        $hamburger_device = 'tablet';
+    }
+
     let $hamburger_max_width = getHamburgerMaxWidth($hamburger_breakpoints, $hamburger_device)
 
     var $fullWidth = $('.eael-simple-menu--stretch');
@@ -171,7 +176,7 @@ var SimpleMenu = function ($scope, $) {
 
     function getHamburgerMaxWidth($breakpoints, $device) {
         let $max_width = 0;
-        if( $device === 'none' ){
+        if( $device === 'none' || typeof $device === 'undefined' || $device === '' || $device === null ){
             return $max_width;
         }
 
