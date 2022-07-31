@@ -472,7 +472,7 @@ class Twitter_Feed extends Widget_Base
                 ],
                 'default' => 'center',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-loadmore' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .eael-twitter-feed-loadmore-wrap' => 'text-align: {{VALUE}};',
                 ],
                 'condition' => [
                     'pagination' => 'yes',
@@ -1495,16 +1495,20 @@ class Twitter_Feed extends Widget_Base
             'data-posts-per-page' => $settings['eael_twitter_feed_posts_per_page'],
             'data-total-posts' => $post_limit,
             'data-nomore-item-text' => $no_more_items_text,
+            'data-next-page' => 2,
         ]);
 
-        echo '<div ' . $this->get_render_attribute_string('twitter-feed-wrap') . ' >
-			' . $this->twitter_feed_render_items($this->get_id(), $settings) . '
-        </div>';
+        ?> 
+        <div>
+            <div <?php echo $this->get_render_attribute_string('twitter-feed-wrap') ?> >
+                <?php echo $this->twitter_feed_render_items($this->get_id(), $settings) ?>
+            </div>
+            <div class="clearfix">
+                <?php echo $this->render_loadmore_button() ?>
+            </div>
+        </div>
 
-        // $this->render_loadmore_button();
-
-        
-
+        <?php 
         echo '<style>
             .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-2 .eael-twitter-feed-item {
                 width: calc(50% - ' . ceil($feedcolumnspacing / 2) . 'px);

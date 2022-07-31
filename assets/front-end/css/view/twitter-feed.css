@@ -25,6 +25,10 @@
   }
 }
 
+.eael-twitter-feed-item .page-1 {
+  display: block;
+}
+
 .eael-twitter-feed-item .eael-twitter-feed-item-inner {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
