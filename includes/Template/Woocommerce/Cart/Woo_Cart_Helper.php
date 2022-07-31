@@ -653,6 +653,9 @@ trait Woo_Cart_Helper {
 				 * @hooked woocommerce_cross_sell_display
 				 * @hooked woocommerce_cart_totals - 10
 				 */
+
+				do_action( 'eael_woocommerce_before_cart_collaterals', $settings );
+
 				if ( $settings['eael_woo_cart_components_cart_totals'] === 'yes' ) {
 					do_action( 'woocommerce_cart_collaterals', $settings );
 				} else {
