@@ -168,3 +168,11 @@
 .eael-twitter-feed-carousel.swiper-container .swiper-button-next:after {
   content: none;
 }
+
+.eael-d-block {
+  display: block;
+}
+
+.eael-d-none {
+  display: none;
+}
