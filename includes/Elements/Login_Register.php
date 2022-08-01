@@ -525,7 +525,6 @@ class Login_Register extends Widget_Base {
 		$this->add_control( 'login_register_recaptcha_version', [
 			'label'       => __( 'reCAPTCHA version', 'essential-addons-for-elementor-lite' ),
 			'label_block' => false,
-			'description' => __( 'If v3 selected, then it will be applied to both forms. Reload preview after saving to see changes.', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::SELECT,
 			'options'     => [
 				'v2' => __( 'v2', 'essential-addons-for-elementor-lite' ),
@@ -534,6 +533,16 @@ class Login_Register extends Widget_Base {
 			'default'     => 'v2',
 			'condition'   => [
 				'enable_login_register_recaptcha' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'login_register_recaptcha_v3_description', [
+			'type'      => Controls_Manager::RAW_HTML,
+			'content_classes' => 'elementor-control-field-description',
+			'raw'       => __( '<p style="margin-top:-15px">v3 will be applied to both forms. After saving, reload the preview to see the changes.</p>', 'essential-addons-for-elementor-lite' ),
+			'condition' => [
+				'login_register_recaptcha_version' => 'v3',
+				'enable_login_register_recaptcha'   => 'yes',
 			],
 		] );
 
