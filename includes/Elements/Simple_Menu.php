@@ -25,8 +25,6 @@ class Simple_Menu extends Widget_Base
 
     protected $_has_template_content = false;
 
-    protected $dropdown_options = [];
-
     public function get_name()
     {
         return 'eael-simple-menu';
@@ -250,33 +248,7 @@ class Simple_Menu extends Widget_Base
             ]
         );
 
-        $breakpoints = Plugin::$instance->breakpoints->get_active_breakpoints();
-
-        $dropdown_options = [];
-        $excluded_breakpoints = [
-            'laptop',
-            'widescreen',
-        ];
-
         $default_value = 'tablet';
-        
-        foreach ( $breakpoints as $breakpoint_key => $breakpoint_instance ) {
-            // Do not include laptop and widscreen in the options since this feature is for mobile devices.
-            if ( in_array( $breakpoint_key, $excluded_breakpoints, true ) ) {
-                continue;
-            }
-
-            $dropdown_options[ $breakpoint_key ] = sprintf(
-                /* translators: 1: Breakpoint label, 2: `>` character, 3: Breakpoint value */
-                esc_html__( '%1$s (%2$s %3$dpx)', 'essential-addons-for-elementor-lite' ),
-                $breakpoint_instance->get_label(),
-                '>',
-                $breakpoint_instance->get_value()
-            );
-        }
-
-        $dropdown_options['none'] = esc_html__( 'None', 'essential-addons-for-elementor-lite' );
-        $this->dropdown_options = $dropdown_options;
 
         $this->add_control(
             'eael_simple_menu_dropdown',
@@ -284,7 +256,7 @@ class Simple_Menu extends Widget_Base
                 'label' => esc_html__( 'Breakpoint', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SELECT,
                 'default' => esc_html( $default_value ),
-                'options' => $this->dropdown_options,
+                'options' => $this->get_dropdown_options(),
                 'prefix_class' => 'eael-hamburger--',
             ]
         );
@@ -1447,11 +1419,40 @@ class Simple_Menu extends Widget_Base
         $this->end_controls_section();
     }
 
+    public function get_dropdown_options(){
+        $breakpoints = Plugin::$instance->breakpoints->get_active_breakpoints();
+
+        $dropdown_options = [];
+        $excluded_breakpoints = [
+            'laptop',
+            'widescreen',
+        ];
+
+        foreach ( $breakpoints as $breakpoint_key => $breakpoint_instance ) {
+            // Do not include laptop and widscreen in the options since this feature is for mobile devices.
+            if ( in_array( $breakpoint_key, $excluded_breakpoints, true ) ) {
+                continue;
+            }
+
+            $dropdown_options[ $breakpoint_key ] = sprintf(
+                /* translators: 1: Breakpoint label, 2: `>` character, 3: Breakpoint value */
+                esc_html__( '%1$s (%2$s %3$dpx)', 'essential-addons-for-elementor-lite' ),
+                $breakpoint_instance->get_label(),
+                '>',
+                $breakpoint_instance->get_value()
+            );
+        }
+
+        $dropdown_options['none'] = esc_html__( 'None', 'essential-addons-for-elementor-lite' );
+        
+        return $dropdown_options;
+    }
+
     protected function render()
     {
         $settings = $this->get_settings();
-        $hamburger_device = esc_html( $settings['eael_simple_menu_dropdown'] );
-
+        $hamburger_device = !empty( $settings['eael_simple_menu_dropdown'] ) ? esc_html( $settings['eael_simple_menu_dropdown'] ) : esc_html( 'tablet' );
+        
         if ($settings['eael_simple_menu_preset'] == 'preset-2') {
             $align = $settings['eael_simple_menu_item_alignment_center'];
         } elseif ($settings['eael_simple_menu_preset'] == 'preset-3') {
@@ -1510,7 +1511,7 @@ class Simple_Menu extends Widget_Base
             'class'                         => implode(' ', array_filter($container_classes)),
 //            'data-indicator-class'          => $settings['eael_simple_menu_item_indicator'],
 //            'data-dropdown-indicator-class' => $settings['eael_simple_menu_dropdown_item_indicator'],
-            'data-hamburger-breakpoints' => wp_json_encode( $this->dropdown_options ),
+            'data-hamburger-breakpoints' => wp_json_encode( $this->get_dropdown_options() ),
             'data-hamburger-device' => $hamburger_device,
         ]);
         
