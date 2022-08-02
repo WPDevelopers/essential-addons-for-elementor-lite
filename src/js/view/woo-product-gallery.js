@@ -1,5 +1,6 @@
 ea.hooks.addAction("init", "ea", () => {
 	const wooProductGallery = function ($scope, $) {
+		let showSecondaryImageOnHover = $scope.find(".products.eael-post-appender").data("show-secondary-image");
 		// category
 		ea.hooks.doAction("quickViewAddMarkup",$scope,$);
 		const $post_cat_wrap = $('.eael-cat-tab', $scope)
@@ -104,6 +105,14 @@ ea.hooks.addAction("init", "ea", () => {
 				"opacity",
 				"1"
 			);
+		}
+
+		if( showSecondaryImageOnHover ){
+			$(".eael-product-wrap", $scope).mouseover(function () {
+				$(this).find('img').attr('src', $(this).data("src-hover")).fadeIn('3000');
+			  }).mouseout(function () {
+				$(this).find('img').attr('src', $(this).data("src")).fadeIn('slow');
+			  });
 		}
 	};
 
