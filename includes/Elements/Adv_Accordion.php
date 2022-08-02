@@ -1180,33 +1180,23 @@ class Adv_Accordion extends Widget_Base
                 </div>';
         }
         echo '</div>';
-        ?>
+        
+        // FAQ Schema
+        if ( !empty( $settings['eael_adv_accordion_faq_schema_show'] ) && 'yes' === $settings['eael_adv_accordion_faq_schema_show'] ) {
+            foreach ( $settings['eael_adv_accordion_tab'] as $index => $tab ) {
+                $faq = [
+                    '@type' => 'Question',
+                    'name' => Helper::eael_wp_kses( $tab['eael_adv_accordion_tab_title'] ),
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => ('content' === $tab['eael_adv_accordion_text_type']) ? do_shortcode( $tab['eael_adv_accordion_tab_content'] ) : '',
+                    ],
+                ];
 
-        <!-- FAQ Schema : Starts-->
-        <?php
-			if ( !empty( $settings['eael_adv_accordion_faq_schema_show'] ) && 'yes' === $settings['eael_adv_accordion_faq_schema_show'] ) {
-				$json = [
-					'@context' => 'https://schema.org',
-					'@type' => 'FAQPage',
-					'mainEntity' => [],
-				];
+                Helper::set_eael_advanced_accordion_faq($faq);
+            }	
+        }
 
-				foreach ( $settings['eael_adv_accordion_tab'] as $index => $tab ) {
-					$json['mainEntity'][] = [
-						'@type' => 'Question',
-						'name' => Helper::eael_wp_kses( $tab['eael_adv_accordion_tab_title'] ),
-						'acceptedAnswer' => [
-							'@type' => 'Answer',
-							'text' => ('content' === $tab['eael_adv_accordion_text_type']) ? do_shortcode( $tab['eael_adv_accordion_tab_content'] ) : '',
-						],
-					];
-				}
-				?>
-				<script type="application/ld+json"><?php echo wp_json_encode( $json ); ?></script>
-			<?php } ?>
-        <!-- FAQ Schema : Ends-->
-
-        <?php 
     }
 
     protected function print_toggle_icon($settings)
