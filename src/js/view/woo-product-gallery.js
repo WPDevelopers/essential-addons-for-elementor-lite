@@ -107,11 +107,25 @@ ea.hooks.addAction("init", "ea", () => {
 			);
 		}
 
+		let dataSrc = dataSrcHover = srcset = srcsetHover = ''; 
+
 		if( showSecondaryImageOnHover ){
 			$(".eael-product-wrap", $scope).mouseover(function () {
-				$(this).find('img').attr('src', $(this).data("src-hover")).fadeIn('3000');
+				dataSrc = $(this).data("src");
+				dataSrcHover = $(this).data("src-hover");
+				srcset = $(this).find('img').attr('srcset');
+				$(this).find('img').attr('srcset-hover', srcset);
+
+				$(this).find('img').attr( 'src', dataSrcHover );
+				$(this).find('img').attr('srcset', dataSrcHover );
 			  }).mouseout(function () {
-				$(this).find('img').attr('src', $(this).data("src")).fadeIn('slow');
+				dataSrc = $(this).data("src");
+				dataSrcHover = $(this).data("src-hover")
+				srcsetHover = $(this).find('img').attr('srcset-hover');
+
+				$(this).find('img').attr( 'src', dataSrc );
+				$(this).find('img').attr('srcset', srcsetHover );
+				$(this).find('img').attr('srcset-hover', '' );
 			  });
 		}
 	};
