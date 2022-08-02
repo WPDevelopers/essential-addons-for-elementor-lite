@@ -98,9 +98,10 @@ $image_sources = [
             if( $show_secondary_image ){
                 $image_sources = Helper::eael_get_woo_product_gallery_image_srcs( $product, $settings['eael_product_gallery_image_size_size'] );
             }
+            
             ?>
-            <div class="eael-product-wrap" data-src="<?php echo esc_attr( $image_sources['src'] ) ?>" data-src-hover="<?php echo esc_attr( $image_sources['src_hover'] ) ?>" >
-                <div class="product-image-wrap">
+            <div class="eael-product-wrap" data-src="<?php echo esc_attr( $image_sources['src'] ) ?>" data-src-hover="<?php echo esc_attr( $image_sources['src_hover'] ) ?>" >    
+            <div class="product-image-wrap">
                     <div class="image-wrap">
 	                    <?php if( $should_print_image_clickable ) {
 		                    echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
