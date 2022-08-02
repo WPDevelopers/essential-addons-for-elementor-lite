@@ -866,7 +866,7 @@ trait Elements
             <script type="application/ld+json">
                 <?php echo json_encode( Helper::get_eael_advanced_accordion_faq() ); ?>
             </script>
-            <!-- EA FAQ Schema : Starts-->
+            <!-- EA FAQ Schema : Ends-->
         <?php endif;
     }
 }
