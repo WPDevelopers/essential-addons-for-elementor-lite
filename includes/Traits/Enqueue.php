@@ -153,7 +153,7 @@ trait Enqueue
 		    ],
 		    'page_permalink'     => get_the_permalink(),
 		    'cart_redirectition' => get_option( 'woocommerce_cart_redirect_after_add' ),
-		    'cart_page_url'      => apply_filters( 'eael/is_plugin_active', 'woocommerce/woocommerce.php' ) ? wc_get_cart_url() : '',
+		    'cart_page_url'      => function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '',
 		    'el_breakpoints'     => \Elementor\Plugin::$instance->breakpoints->get_breakpoints_config(),
 	    ] );
 
