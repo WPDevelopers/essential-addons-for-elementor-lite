@@ -167,14 +167,15 @@ class Bootstrap
 	    if ( defined( 'ELEMENTOR_VERSION' ) ) {
 		    if ( version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ) {
 			    add_action( 'elementor/controls/register', array( $this, 'register_controls' ) );
+			    add_action('elementor/widgets/register', array($this, 'register_elements'));
 		    } else {
 			    add_action( 'elementor/controls/controls_registered', array( $this, 'register_controls' ) );
+			    add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
 		    }
 	    }
 
         // Elements
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
-        add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
         add_filter('elementor/editor/localize_settings', [$this, 'promote_pro_elements']);
         add_action('wp_footer', [$this, 'render_global_html']);
 
@@ -251,7 +252,7 @@ class Bootstrap
 
 
 
-	        add_action( 'in_admin_header', [ $this, 'remove_admin_notice' ] );
+	        //add_action( 'in_admin_header', [ $this, 'remove_admin_notice' ] );
 
 	        //handle typeform auth token
 	        add_action('admin_init', [$this, 'typeform_auth_handle']);
@@ -265,7 +266,7 @@ class Bootstrap
 		        add_action( 'init', [ $this, 'register_wc_hooks' ], 5 );
 	        }
 
-	        add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
+	        //add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
 
         }
 
