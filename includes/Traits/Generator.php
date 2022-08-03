@@ -135,7 +135,7 @@ trait Generator {
 
 		foreach ( $elements as $element ) {
 			// collect extensions for section
-			if ( isset( $element[ 'elType' ] ) && $element[ 'elType' ] == 'section' ) {
+			if ( isset( $element['elType'] ) && ( $element['elType'] == 'section' || $element['elType'] == 'container' ) ) {
 				if ( isset( $element[ 'settings' ][ 'eael_particle_switch' ] ) && $element[ 'settings' ][ 'eael_particle_switch' ] == 'yes' ) {
 					$collections[] = 'eael-section-particles';
 				}
