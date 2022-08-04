@@ -10,6 +10,7 @@ if (!defined('ABSPATH')) {
 
 trait Twitter_Feed
 {
+    public static $twitter_feed_fetched_count = 0;
     /**
      * Twitter Feed
      *
@@ -98,6 +99,7 @@ trait Twitter_Feed
         $post_per_page = ! empty($settings['eael_twitter_feed_posts_per_page']) ? $settings['eael_twitter_feed_posts_per_page'] : 10;
         $counter = 0;
         $current_page = 1;
+        self::$twitter_feed_fetched_count = count($items);
             
         foreach ($items as $item) {
             $counter++;

@@ -1441,7 +1441,7 @@ class Twitter_Feed extends Widget_Base
             'elementor-size-' . $settings['button_size'],
         ]);
         
-        if ($settings['pagination'] == 'yes') { ?>
+        if ($settings['pagination'] == 'yes' && self::$twitter_feed_fetched_count > $post_per_page ) { ?>
             <div class="eael-twitter-feed-loadmore-wrap">
                 <a href="#" <?php echo $this->get_render_attribute_string('load-more-button'); ?>>
                     <span class="eael-btn-loader"></span>
