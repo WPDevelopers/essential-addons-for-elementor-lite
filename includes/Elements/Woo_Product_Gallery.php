@@ -489,7 +489,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
-				'description'  => __( 'Enable to show secondary image (from product gallery) on hover of the product wrap.', 'essential-addons-for-elementor-lite' ),
+				'description'  => __( 'Enable to show a secondary image from the product gallery on hover.', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
