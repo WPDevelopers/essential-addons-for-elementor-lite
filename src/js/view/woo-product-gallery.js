@@ -114,18 +114,23 @@ ea.hooks.addAction("init", "ea", () => {
 				dataSrc = $(this).data("src");
 				dataSrcHover = $(this).data("src-hover");
 				srcset = $(this).find('img').attr('srcset');
-				$(this).find('img').attr('srcset-hover', srcset);
+				
+				if( dataSrcHover ){
+					$(this).find('img').attr('srcset-hover', srcset);
 
-				$(this).find('img').attr( 'src', dataSrcHover );
-				$(this).find('img').attr('srcset', dataSrcHover );
+					$(this).find('img').attr( 'src', dataSrcHover );
+					$(this).find('img').attr('srcset', dataSrcHover );
+				}
 			  }).on( "mouseout", ".eael-product-wrap", function () {
 				dataSrc = $(this).data("src");
 				dataSrcHover = $(this).data("src-hover")
 				srcsetHover = $(this).find('img').attr('srcset-hover');
 
-				$(this).find('img').attr( 'src', dataSrc );
-				$(this).find('img').attr('srcset', srcsetHover );
-				$(this).find('img').attr('srcset-hover', '' );
+				if( dataSrcHover ){
+					$(this).find('img').attr( 'src', dataSrc );
+					$(this).find('img').attr('srcset', srcsetHover );
+					$(this).find('img').attr('srcset-hover', '' );
+				}
 			  });
 		}
 	};

@@ -1217,7 +1217,7 @@ class Helper
             $src = is_array($src) ? $src[0] : $src;
         }
 
-        $src_hover = count( $image_gallery_ids ) ? wp_get_attachment_image_src( $image_gallery_ids[0], $image_size ) : $src;
+        $src_hover = count( $image_gallery_ids ) ? wp_get_attachment_image_src( $image_gallery_ids[0], $image_size ) : '';
         $src_hover = is_array($src_hover) ? $src_hover[0] : $src_hover;
         
         return [
