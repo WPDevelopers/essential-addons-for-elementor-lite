@@ -915,6 +915,9 @@ trait Ajax_Handler {
 		} else {
 			// clear cache files
 			$this->empty_dir( EAEL_ASSET_PATH );
+			if ( defined( 'ELEMENTOR_VERSION' ) ) {
+				\Elementor\Plugin::$instance->files_manager->clear_cache();
+			}
 		}
 
 		wp_send_json( true );
