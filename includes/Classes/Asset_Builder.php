@@ -104,7 +104,7 @@ class Asset_Builder {
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
 		add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'ea_before_enqueue_styles' ] );
-		add_action( 'elementor/theme/register_locations', [ $this, 'post_asset_load' ], 20 );
+		add_action( 'elementor/theme/register_locations', [ $this, 'load_asset_per_location' ], 20 );
 		add_filter( 'elementor/files/file_name', [ $this, 'load_asset_per_file' ] );
 	}
 
@@ -162,13 +162,10 @@ class Asset_Builder {
 
 		$this->post_id = get_the_ID();
 
-		$this->set_main_page( $this->post_id );
 		$this->elements_manager->get_element_list( $this->post_id );
 		$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
 
 		if ( ! empty( $elements ) ) {
-			do_action( 'eael/before_enqueue_styles', $elements );
-			do_action( 'eael/before_enqueue_scripts', $elements );
 			$this->enqueue_asset( $this->post_id, $elements );
 		}
 
@@ -178,11 +175,13 @@ class Asset_Builder {
 	}
 
 	/**
-	 * post_asset_load
+	 * load_asset_per_location
 	 *
 	 * @param $instance
+	 *
+	 * @return false|void
 	 */
-	public function post_asset_load( $instance ) {
+	public function load_asset_per_location( $instance ) {
 
 		if( is_admin() ){
 			return false;
@@ -197,13 +196,10 @@ class Asset_Builder {
 				$post_id = $document->get_post()->ID;
 
 				$this->post_id = $post_id;
-				$this->set_main_page( $this->post_id );
 				$this->elements_manager->get_element_list( $this->post_id );
 				$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
 
 				if ( ! empty( $elements ) ) {
-					do_action( 'eael/before_enqueue_styles', $elements );
-					do_action( 'eael/before_enqueue_scripts', $elements );
 					$this->enqueue_asset( $this->post_id, $elements );
 				}
 
