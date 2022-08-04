@@ -110,7 +110,7 @@ ea.hooks.addAction("init", "ea", () => {
 		let dataSrc = dataSrcHover = srcset = srcsetHover = ''; 
 
 		if( showSecondaryImageOnHover ){
-			$(".eael-product-wrap", $scope).mouseover(function () {
+			$(document).on("mouseover", ".eael-product-wrap", function () {
 				dataSrc = $(this).data("src");
 				dataSrcHover = $(this).data("src-hover");
 				srcset = $(this).find('img').attr('srcset');
@@ -118,7 +118,7 @@ ea.hooks.addAction("init", "ea", () => {
 
 				$(this).find('img').attr( 'src', dataSrcHover );
 				$(this).find('img').attr('srcset', dataSrcHover );
-			  }).mouseout(function () {
+			  }).on( "mouseout", ".eael-product-wrap", function () {
 				dataSrc = $(this).data("src");
 				dataSrcHover = $(this).data("src-hover")
 				srcsetHover = $(this).find('img').attr('srcset-hover');
