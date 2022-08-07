@@ -2860,6 +2860,12 @@ class Woo_Checkout extends Widget_Base {
 	    return $fields;
     }
 
+    public function ea_checkout_fields( $fields ){
+        $fields['billing'] = $this->reorder_checkout_fields( $fields['billing'], 'billing' );
+        $fields['shipping'] = $this->reorder_checkout_fields( $fields['shipping'], 'shipping' );
+        return $fields;
+    }
+
     public function eael_woocheckout_recurring(){
         if( class_exists('WC_Subscriptions_Cart') ) {
           remove_action('woocommerce_review_order_after_order_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals' ), 10);
@@ -2886,11 +2892,7 @@ class Woo_Checkout extends Widget_Base {
 		}
 
         $settings = $this->get_settings_for_display();
-        add_filter( 'woocommerce_checkout_fields', function ($fields){
-	        $fields['billing'] = $this->reorder_checkout_fields( $fields['billing'], 'billing' );
-	        $fields['shipping'] = $this->reorder_checkout_fields( $fields['shipping'], 'shipping' );
-            return $fields;
-        } );
+        add_filter( 'woocommerce_checkout_fields', [ $this, 'ea_checkout_fields' ], 99999 );
 
 		if ( in_array( $settings[ 'ea_woo_checkout_layout' ], [ 'multi-steps', 'split' ] ) ) {
 			if ( !apply_filters( 'eael/pro_enabled', false ) ) {
