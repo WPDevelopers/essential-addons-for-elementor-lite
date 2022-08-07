@@ -362,7 +362,6 @@ class Elements_Manager {
 	public function excluded_template_type() {
 		return [
 			'kit',
-			'search-results'
 		];
 	}
 }
