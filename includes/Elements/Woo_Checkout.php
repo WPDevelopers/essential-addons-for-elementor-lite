@@ -580,7 +580,7 @@ class Woo_Checkout extends Widget_Base {
 		$billing_fields = $WC_Checkout->get_checkout_fields('billing');
 
 		$this->add_control(
-			'billing_fields_list',
+			'ea_billing_fields_list',
 			[
 				'label' => esc_html__( 'Fields List', 'plugin-name' ),
 				'type' => Controls_Manager::REPEATER,
@@ -598,7 +598,7 @@ class Woo_Checkout extends Widget_Base {
 		$shipping_fields = $WC_Checkout->get_checkout_fields('shipping');
 
 		$this->add_control(
-			'shipping_fields_list',
+			'ea_shipping_fields_list',
 			[
 				'label' => esc_html__( 'Fields List', 'plugin-name' ),
 				'type' => Controls_Manager::REPEATER,
@@ -2846,7 +2846,7 @@ class Woo_Checkout extends Widget_Base {
 
     public function reorder_checkout_fields( $fields, $field_type ){
 	    $settings = $this->get_settings_for_display();
-	    $checkout_fields = $settings[$field_type.'_fields_list'];
+	    $checkout_fields = $settings['ea_' . $field_type . '_fields_list'];
 	    $classes = [ 'form-row-first', 'form-row-last', 'form-row-wide' ];
 	    foreach ( $checkout_fields as $key => $field_set ){
 		    $field_key = $field_set['field_key'];
