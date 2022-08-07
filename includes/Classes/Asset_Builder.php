@@ -161,7 +161,7 @@ class Asset_Builder {
 		}
 
 		$this->post_id = get_the_ID();
-
+		$this->set_main_page( $this->post_id );
 		$this->elements_manager->get_element_list( $this->post_id );
 		$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
 
@@ -196,6 +196,7 @@ class Asset_Builder {
 				$post_id = $document->get_post()->ID;
 
 				$this->post_id = $post_id;
+				$this->set_main_page( $this->post_id );
 				$this->elements_manager->get_element_list( $this->post_id );
 				$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
 
