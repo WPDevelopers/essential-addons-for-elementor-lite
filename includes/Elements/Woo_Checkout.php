@@ -2844,6 +2844,22 @@ class Woo_Checkout extends Widget_Base {
         return $_fields;
     }
 
+    public function reorder_checkout_fields( $fields, $field_type ){
+	    $settings = $this->get_settings_for_display();
+	    $checkout_fields = $settings[$field_type.'_fields_list'];
+	    $classes = [ 'form-row-first', 'form-row-last', 'form-row-wide' ];
+	    foreach ( $checkout_fields as $key => $field_set ){
+		    $field_key = $field_set['field_key'];
+		    if ( isset( $fields[$field_key] ) ){
+			    $fields[$field_key]['label'] = $field_set['field_label'];
+			    $fields[$field_key]['priority'] = ($key+1)*10;
+			    $fields[$field_key]['class'] = array_diff( $fields[$field_key]['class'], $classes) + [ $field_set['field_class'] ];
+		    }
+	    }
+
+	    return $fields;
+    }
+
     public function eael_woocheckout_recurring(){
         if( class_exists('WC_Subscriptions_Cart') ) {
           remove_action('woocommerce_review_order_after_order_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals' ), 10);
@@ -2870,36 +2886,11 @@ class Woo_Checkout extends Widget_Base {
 		}
 
         $settings = $this->get_settings_for_display();
-		$billing_fields = $settings['billing_fields_list'];
-
-		add_filter( 'woocommerce_billing_fields', function ($fields)use( $billing_fields ){
-			$classes = [ 'form-row-first', 'form-row-last', 'form-row-wide' ];
-			foreach ( $billing_fields as $key => $field_set ){
-				$field_key = $field_set['field_key'];
-				if ( isset( $fields[$field_key] ) ){
-					$fields[$field_key]['label'] = $field_set['field_label'];
-					$fields[$field_key]['priority'] = ($key+1)*10;
-					$fields[$field_key]['class'] = array_diff( $fields[$field_key]['class'], $classes) + [ $field_set['field_class'] ];
-				}
-			}
-
-			return $fields;
-		});
-		$shipping_fields = $settings['shipping_fields_list'];
-
-		add_filter( 'woocommerce_shipping_fields', function ($fields)use( $shipping_fields ){
-			$classes = [ 'form-row-first', 'form-row-last', 'form-row-wide' ];
-			foreach ( $shipping_fields as $key => $field_set ){
-				$field_key = $field_set['field_key'];
-				if ( isset( $fields[$field_key] ) ){
-					$fields[$field_key]['label'] = $field_set['field_label'];
-					$fields[$field_key]['priority'] = ($key+1)*10;
-					$fields[$field_key]['class'] = array_diff( $fields[$field_key]['class'], $classes) + [ $field_set['field_class'] ];
-				}
-			}
-
-			return $fields;
-		});
+        add_filter( 'woocommerce_checkout_fields', function ($fields){
+	        $fields['billing'] = $this->reorder_checkout_fields( $fields['billing'], 'billing' );
+	        $fields['shipping'] = $this->reorder_checkout_fields( $fields['shipping'], 'shipping' );
+            return $fields;
+        } );
 
 		if ( in_array( $settings[ 'ea_woo_checkout_layout' ], [ 'multi-steps', 'split' ] ) ) {
 			if ( !apply_filters( 'eael/pro_enabled', false ) ) {
