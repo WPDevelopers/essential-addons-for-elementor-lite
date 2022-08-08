@@ -525,7 +525,7 @@ class Woo_Checkout extends Widget_Base {
 
 		/**
 		 * -------------------------------------------
-		 * Customer Details Settings
+		 * Re ordering Shipping and billing fields
 		 * -------------------------------------------
 		 */
 		$this->start_controls_section(
@@ -582,7 +582,7 @@ class Woo_Checkout extends Widget_Base {
 		$this->add_control(
 			'ea_billing_fields_list',
 			[
-				'label' => esc_html__( 'Fields List', 'plugin-name' ),
+				'label' => '',
 				'type' => Controls_Manager::REPEATER,
 				'fields' => $repeater->get_controls(),
 				'default' => $this->get_default_checkout_fields( $billing_fields ),
@@ -600,7 +600,7 @@ class Woo_Checkout extends Widget_Base {
 		$this->add_control(
 			'ea_shipping_fields_list',
 			[
-				'label' => esc_html__( 'Fields List', 'plugin-name' ),
+				'label' => '',
 				'type' => Controls_Manager::REPEATER,
 				'fields' => $repeater->get_controls(),
 				'default' => $this->get_default_checkout_fields( $shipping_fields ),
@@ -2856,7 +2856,6 @@ class Woo_Checkout extends Widget_Base {
 			    $fields[$field_key]['class'] = array_diff( $fields[$field_key]['class'], $classes) + [ $field_set['field_class'] ];
 		    }
 	    }
-
 	    return $fields;
     }
 
