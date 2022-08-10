@@ -920,6 +920,9 @@ trait Ajax_Handler {
 			}
 		}
 
+		// Purge All LS Cache
+		do_action( 'litespeed_purge_all', '3rd Essential Addons for Elementor' );
+
 		wp_send_json( true );
 	}
 
