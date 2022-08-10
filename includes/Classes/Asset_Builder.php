@@ -201,6 +201,7 @@ class Asset_Builder {
 				$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
 
 				if ( ! empty( $elements ) ) {
+					do_action( 'eael/before_enqueue_styles', $elements );
 					do_action( 'eael/before_enqueue_scripts', $elements );
 					$this->enqueue_asset( $this->post_id, $elements );
 				}
@@ -239,6 +240,7 @@ class Asset_Builder {
 		$elements = get_post_meta( $this->post_id, '_eael_widget_elements', true );
 
 		if ( ! empty( $elements ) ) {
+			do_action( 'eael/before_enqueue_styles', $elements );
 			do_action( 'eael/before_enqueue_scripts', $elements );
 			$this->enqueue_asset( $this->post_id, $elements );
 		}
