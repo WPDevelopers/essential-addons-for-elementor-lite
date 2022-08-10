@@ -4,13 +4,13 @@
  * Description: The Essential plugin you install after Elementor! Packed with 40+ stunning free elements including Advanced Data Table, Event Calendar, Filterable Gallery, WooCommerce, and many more.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
- * Version: 5.1.9
+ * Version: 5.2.0
  * Author URI: https://wpdeveloper.com/
  * Text Domain: essential-addons-for-elementor-lite
  * Domain Path: /languages
  *
- * WC tested up to: 6.7.0
- * Elementor tested up to: 3.6.8
+ * WC tested up to: 6.8.0
+ * Elementor tested up to: 3.7.0
  * Elementor Pro tested up to: 3.7.3
  */
 
