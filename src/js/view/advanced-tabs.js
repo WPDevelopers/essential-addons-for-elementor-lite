@@ -28,7 +28,9 @@ ea.hooks.addAction("init", "ea", () => {
 						$(this).removeClass("inactive").addClass('active');
 					} else {
 						if (index == 0) {
-							$(this).removeClass("inactive").addClass("active");
+							if( $currentTab.hasClass('eael-tab-auto-active') ) {
+								$(this).removeClass("inactive").addClass("active");
+							}
 						}
 					}
 				}
@@ -56,7 +58,9 @@ ea.hooks.addAction("init", "ea", () => {
 						$(this).removeClass("inactive").addClass("active");
 					} else {
 						if (index == 0) {
-							$(this).removeClass("inactive").addClass("active");
+							if( $currentTab.hasClass('eael-tab-auto-active') ) {
+								$(this).removeClass("inactive").addClass("active");
+							}
 						}
 					}
 				}
