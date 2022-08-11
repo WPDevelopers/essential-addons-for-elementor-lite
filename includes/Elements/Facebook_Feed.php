@@ -194,9 +194,6 @@ class Facebook_Feed extends Widget_Base
                 'condition' => [
                     'eael_facebook_feed_force_square_img' => 'yes'
                 ],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-facebook-feed-square-image .eael-facebook-feed-item img.eael-facebook-feed-img' => 'object-fit: {{VALUE}};'
-                ]
             ]
         );
 
@@ -219,7 +216,8 @@ class Facebook_Feed extends Widget_Base
                     'eael_facebook_feed_force_square_img' => 'yes'
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-facebook-feed-square-image .eael-facebook-feed-item img.eael-facebook-feed-img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
+	                '{{WRAPPER}} .eael-facebook-feed-square-image .eael-facebook-feed-item img.eael-facebook-feed-img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-facebook-feed-square-image .eael-facebook-feed-item .eael-facebook-feed-img-container' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
                 ]
             ]
         );
@@ -605,7 +603,8 @@ class Facebook_Feed extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-facebook-feed-item .eael-facebook-feed-img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	                '{{WRAPPER}} .eael-facebook-feed-item .eael-facebook-feed-img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	                '{{WRAPPER}} .eael-facebook-feed-item .eael-facebook-feed-img-container' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
