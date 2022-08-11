@@ -79,7 +79,12 @@ trait Elements
                 }
             }
 
-            $widgets_manager->register_widget_type(new $this->registered_elements[$active_element]['class']);
+	        if ( defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ) {
+		        $widgets_manager->register( new $this->registered_elements[ $active_element ]['class'] );
+	        } else {
+		        $widgets_manager->register_widget_type( new $this->registered_elements[ $active_element ]['class'] );
+	        }
+
         }
     }
 
