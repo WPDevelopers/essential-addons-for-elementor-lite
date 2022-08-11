@@ -304,6 +304,10 @@ trait Core
             return;
         }
 
+	    if ( !defined( 'ELEMENTOR_VERSION' ) ) {
+	    	return false;
+	    }
+
         $document = Plugin::$instance->documents->get($post_id, false);
         $global_settings = get_option('eael_global_settings');
 
