@@ -84,7 +84,7 @@ class Elements_Manager {
 
 			if ( ! empty( $element['widgetType'] ) && $element['widgetType'] === 'global' ) {
 				$document = Plugin::$instance->documents->get( $element['templateID'] );
-				$type     = current( $this->get_widget_list( $document->get_elements_data() ) );
+				$type     = is_object( $document ) ? current( $this->get_widget_list( $document->get_elements_data() ) ) : $type;
 
 				if ( ! empty( $type ) ) {
 					$type = 'eael-' . $type;
