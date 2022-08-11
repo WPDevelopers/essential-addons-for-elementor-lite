@@ -4,8 +4,15 @@ window.isEditMode = false;
 window.ea = {
 	hooks: createHooks(),
 	isEditMode: false,
+	elementStatusCheck:function(name){
+		if (window.eaElementList && name in window.eaElementList) {
+			return true;
+		} else {
+			window.eaElementList = {...window.eaElementList, [name]: true}
+		}
+		return false;
+	}
 };
-
 ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	let filterGallery = jQuery(".eael-filter-gallery-container", $content);
 	let postGridGallery = jQuery(
@@ -84,7 +91,25 @@ jQuery(window).on("elementor/frontend/init", function () {
 });
 
 (function ($) {
-	$(document).on('click', 'a', function (e) {
+	ea.getToken = () => {
+		if (localize.nonce && !ea.noncegenerated) {
+			ea.noncegenerated = true;
+			$.ajax({
+				url: localize.ajaxurl,
+				type: "post",
+				data: {
+					action: "eael_get_token",
+				},
+				success: function (response) {
+					if (response.success) {
+						localize.nonce = response.data.nonce
+					}
+				}
+			});
+		}
+	}
+
+	$('a').on('click', function (e) {
 		var hashURL = $(this).attr('href'),
 			isStartWithHash;
 

@@ -50,10 +50,20 @@
 	font-size: 1.2em;
 }
 
-.eael-entry-thumbnail img {
-	width: 100%;
-	max-width: 100%;
-	vertical-align: middle;
+.eael-entry-thumbnail {
+	img {
+		width: 100%;
+		max-width: 100%;
+		vertical-align: middle;
+	}
+	&.eael-image-ratio {
+		img {
+			position: absolute;
+			top: calc(50% + 1px);
+			left: calc(50% + 1px);
+			transform: scale(1.01) translate(-50%, -50%);
+		}
+	}
 }
 
 .eael-entry-thumbnail > img {
