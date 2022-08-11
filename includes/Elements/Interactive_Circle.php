@@ -322,9 +322,10 @@ class Interactive_Circle extends Widget_Base {
 				'selectors'  => [
 					'{{WRAPPER}} .eael-circle-inner'                                         => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .eael-interactive-circle-preset-2 .eael-circle-inner'       => 'width: {{SIZE}}{{UNIT}}; height: calc({{SIZE}}{{UNIT}} / 2);',
-					'{{WRAPPER}} .eael-interactive-circle-preset-2 .eael-circle-content'     => 'height: calc({{SIZE}}{{UNIT}} / 2)!important;',
-					'{{WRAPPER}} .eael-interactive-circle-preset-2 .eael-circle-btn-content' => 'height: calc({{SIZE}}{{UNIT}} / 2)!important;',
+					'{{WRAPPER}} .eael-interactive-circle-preset-2 .eael-circle-content'     => 'height: calc({{SIZE}}{{UNIT}} / 2);',
+					'{{WRAPPER}} .eael-interactive-circle-preset-2 .eael-circle-btn-content' => 'height: calc({{SIZE}}{{UNIT}} / 2);',
 				],
+				'devices'   => [ 'desktop', 'tablet' ],
 			]
 		);
 

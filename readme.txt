@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 5.1.6
+Stable tag: 5.2.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -242,10 +242,41 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 5.2.0 - 11/08/2022 =
+
+- Improved: Asset loading mechanism for better performance
+- Few minor bug fixes & improvements
+
+
+= 5.1.9 - 01/08/2022 =
+
+- Fixed: Throwing wc_get_cart_url deprecated error after activating Essential Addons
+- Fixed: o.imagesLoaded is not a function error when Masonry layout is used
+- Fixed: tippy is not defined error
+- Fixed: EA Facebook Feed | Thumbnail images not showing for all posts
+- Fixed: EA Login/Register Form | Added WPML Support for the missing strings
+- Few minor bug fixes & improvements
+
+= 5.1.8 - 05/07/2022 =
+
+- Fixed: EA Event Calendar | Not working properly for Google Calendar recurring events
+- Fixed: EA Interactive Circle | Responsive issue in Preset Layout 2
+- Fixed: EA Data Table | Throwing PHP error if heading is null
+- Few minor bug fixes & improvements
+
+= 5.1.7 - 27/06/2022 =
+
+- Fixed: EA Filterable Gallery | Load More not working when filter control is disabled
+- Fixed: EA Filterable Gallery | Throwing fatal error when full image clickable option is enabled and gallery link button is disabled
+- Fixed: EA Post Grid | Image Sizes being changed because of the image ratio option
+- Fixed: EA Duplicator | Section type templates duplication not working properly
+- Improved: EA Event Calendar | Link escaping for security enhancement
+- Few minor bug fixes & improvements
+
 = 5.1.6 - 15/06/2022 =
 
 - Fixed: EA Info Box | HTML tag not working inside Infobox Title
-- Fixed: EA Flip Box | <div> tag being closed incorrectly
+- Fixed: EA Flip Box | `<div>` tag being closed incorrectly
 - Few minor bug fixes & improvements
 
 = 5.1.5 - 14/06/2022 =
