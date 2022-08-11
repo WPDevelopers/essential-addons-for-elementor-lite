@@ -2032,15 +2032,15 @@ class Event_Calendar extends Widget_Base
             unset($arg['calendar_id']);
         }
 
-        if (empty($data)) {
-            $data = wp_remote_retrieve_body(wp_remote_get(add_query_arg($arg, $base_url)));
-            $check_error = json_decode($data);
+	    if ( empty( $data ) ) {
+		    $data        = wp_remote_retrieve_body( wp_remote_get( esc_url_raw( add_query_arg( $arg, $base_url ) ) ) );
+		    $check_error = json_decode( $data );
 
-	        if(!empty($check_error->error)){
-	        	return [];
-	        }
-            set_transient($transient_key, $data, $settings['eael_event_calendar_data_cache_limit'] * MINUTE_IN_SECONDS);
-        }
+		    if ( ! empty( $check_error->error ) ) {
+			    return [];
+		    }
+		    set_transient( $transient_key, $data, $settings['eael_event_calendar_data_cache_limit'] * MINUTE_IN_SECONDS );
+	    }
 
 	    $calendar_data = [];
         $data = json_decode($data);
@@ -2093,7 +2093,7 @@ class Event_Calendar extends Widget_Base
                     'borderColor' => !empty($settings_eael_event_global_popup_ribbon_color) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
                     'textColor' => $settings_eael_event_global_text_color,
                     'color' => $settings_eael_event_global_bg_color,
-                    'url' => ($settings['eael_event_details_link_hide'] !== 'yes') ? $item->htmlLink : '',
+                    'url' => ($settings['eael_event_details_link_hide'] !== 'yes') ? esc_url( $item->htmlLink ) : '',
                     'allDay' => $all_day,
                     'external' => 'on',
                     'nofollow' => 'on',
@@ -2189,7 +2189,7 @@ class Event_Calendar extends Widget_Base
                 'borderColor' => !empty($settings_eael_event_global_popup_ribbon_color) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
                 'textColor' => $settings_eael_event_global_text_color,
                 'color' => $settings_eael_event_global_bg_color,
-                'url' => ($settings['eael_event_details_link_hide'] !== 'yes') ? get_the_permalink($event->ID) : '',
+                'url' => ($settings['eael_event_details_link_hide'] !== 'yes') ? esc_url( get_the_permalink($event->ID) ) : '',
                 'allDay' => $all_day,
                 'external' => 'on',
                 'nofollow' => 'on',
