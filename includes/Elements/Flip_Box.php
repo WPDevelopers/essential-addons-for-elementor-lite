@@ -1579,7 +1579,6 @@ class Flip_Box extends Widget_Base
                                             } ?>
                                         </div>
                                     <?php } ?>
-                                    >
                                     <?php if ( !empty( $settings['eael_flipbox_back_title'] ) ): ?>
                                     <<?php echo $flipbox_if_html_title_tag, ' ', $this->get_render_attribute_string('flipbox-title-container'); ?>><?php echo esc_html__($settings['eael_flipbox_back_title'], 'essential-addons-for-elementor-lite'); ?></<?php echo $flipbox_if_html_title_tag; ?>>
                                     <?php endif; ?>

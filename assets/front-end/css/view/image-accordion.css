@@ -148,13 +148,11 @@
         -ms-flex-direction: column;
             flex-direction: column;
   }
-
   .eael-img-accordion .eael-image-accordion-hover:hover {
     -webkit-box-flex: 1;
         -ms-flex: 1;
             flex: 1;
   }
-
   .eael-img-accordion .eael-image-accordion-hover:hover .overlay {
     background-color: transparent;
   }
