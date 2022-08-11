@@ -296,6 +296,11 @@ var SimpleMenu = function ($scope, $) {
 }
 
 jQuery(window).on('elementor/frontend/init', function () {
+
+    if (ea.elementStatusCheck('eaelSimpleMenu')) {
+        return false;
+    }
+
     elementorFrontend.hooks.addAction(
         'frontend/element_ready/eael-simple-menu.default',
         SimpleMenu
