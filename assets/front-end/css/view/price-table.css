@@ -478,7 +478,6 @@
   .eael-pricing {
     display: block;
   }
-
   .eael-pricing .eael-pricing-item,
 .eael-pricing.style-2 .eael-pricing-item,
 .eael-pricing.style-4 .eael-pricing-item {
@@ -491,11 +490,9 @@
   .eael-pricing {
     display: block;
   }
-
   .eael-pricing .eael-pricing-item {
     width: 100%;
   }
-
   .eael-pricing .eael-pricing-item,
 .eael-pricing.style-2 .eael-pricing-item,
 .eael-pricing.style-4 .eael-pricing-item {

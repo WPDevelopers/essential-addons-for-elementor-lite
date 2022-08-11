@@ -245,7 +245,6 @@
   .eael-timeline-post-title .eael-timeline-post-title-text {
     font-size: 0.8em;
   }
-
   .eael-timeline-post-excerpt p {
     font-size: 13px;
   }
@@ -261,53 +260,43 @@
   .eael-post-timeline {
     margin-left: 0;
   }
-
   .eael-timeline-bullet,
 .eael-timeline-post:after,
 .eael-timeline-post:before,
 .eael-timeline-post-inner:after {
     display: none;
   }
-
   .eael-timeline-post {
     display: inline-block;
     float: left !important;
     width: 50% !important;
     margin: 15px auto;
   }
-
   .eael-timeline-post-inner {
     height: 320px;
     padding-bottom: 30px;
   }
-
   .eael-timeline-post-title {
     bottom: 50px;
   }
-
   .eael-timeline-post-title .eael-timeline-post-title-text {
     font-size: 0.8em;
     line-height: 1.2em;
   }
-
   .eael-timeline-post .eael-timeline-post-inner {
     margin: 0 10px auto 0;
     width: 90%;
   }
-
   .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner {
     margin: 0 auto 0 10px;
     width: 90%;
   }
-
   .eael-timeline-post-excerpt {
     opacity: 0 !important;
   }
-
   .eael-timeline-post-image {
     opacity: 0.3;
   }
-
   .eael-timeline-post time,
 .eael-timeline-post:nth-child(2n) time {
     background-color: #fff;
@@ -321,7 +310,6 @@
     top: 275px;
     width: 100%;
   }
-
   time:before {
     display: none;
   }
@@ -334,7 +322,6 @@
     margin: 20px auto;
     width: 100% !important;
   }
-
   .eael-timeline-post .eael-timeline-post-inner,
 .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner {
     display: block;
@@ -350,7 +337,6 @@
     margin: 0 auto;
     width: 95%;
   }
-
   .eael-timeline-post time,
 .eael-timeline-post:nth-child(2n) time {
     top: 205px;
