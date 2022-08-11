@@ -66,6 +66,22 @@
   transition: all 0.3s ease-in-out;
 }
 
+.eael-accordion-header .eael-advanced-accordion-icon-closed {
+  display: block;
+}
+
+.eael-accordion-header .eael-advanced-accordion-icon-opened {
+  display: none;
+}
+
+.eael-accordion-header.active .eael-advanced-accordion-icon-closed {
+  display: none;
+}
+
+.eael-accordion-header.active .eael-advanced-accordion-icon-opened {
+  display: block;
+}
+
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
   -webkit-transform: rotate(90deg);
       -ms-transform: rotate(90deg);

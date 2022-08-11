@@ -724,7 +724,6 @@ body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper .cart-totals-inner {
   .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td::before {
     content: none;
   }
-
   .woocommerce-page #content table.cart.eael-woo-cart-table .product-thumbnail,
 .woocommerce-page table.cart.eael-woo-cart-table .product-thumbnail {
     display: table-cell;

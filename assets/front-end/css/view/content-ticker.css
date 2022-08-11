@@ -63,7 +63,6 @@
         -ms-flex-flow: row wrap;
             flex-flow: row wrap;
   }
-
   .content-ticker-pagination {
     display: none;
   }

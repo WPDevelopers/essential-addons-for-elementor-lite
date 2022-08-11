@@ -173,31 +173,30 @@ jQuery(window).on("elementor/frontend/init", function () {
 					// $init_show       = $(".eael-filter-gallery-container", $scope).children(".eael-filterable-gallery-item-wrap").length,
 					// $total_items     = $gallery.data("total-gallery-items"),
 					$nomore_text     = $gallery.data("nomore-item-text"),
-					filter_enable = $(".eael-filter-gallery-control",$scope).length,
+					filter_enable 	= $(".eael-filter-gallery-control",$scope).length,
 					$items           = [];
 				var filter_name      = $(".eael-filter-gallery-control li.active", $scope).data('filter');
 				if(filterControls.length>0){
 					filter_name = $(".fg-layout-3-filter-controls li.active", $scope).data('filter');
 				}
 
+				if (filter_name === undefined) {
+					filter_name = '*';
+				}
+
 				let item_found = 0;
 				let index_list = []
 				for (const [index, item] of fg_items.entries()){
-					if (filter_name !== '' && filter_name !== '*' && filter_enable) {
-						let element = $($(item)[0]);
-						if (element.is(filter_name)) {
-							++item_found;
-							$items.push($(item)[0]);
-							index_list.push(index);
-						}
-						if((fg_items.length-1)===index){
-							$(".eael-filter-gallery-control li.active", $scope).data('load-more-status',1)
-							$this.hide()
-						}
-					}else {
+
+					let element = $($(item)[0]);
+					if (element.is(filter_name)) {
 						++item_found;
 						$items.push($(item)[0]);
 						index_list.push(index);
+					}
+					if (filter_name !== '' && filter_name !== '*' && (fg_items.length-1)===index) {
+							$(".eael-filter-gallery-control li.active", $scope).data('load-more-status',1)
+							$this.hide();
 					}
 
 					if (item_found === $images_per_page) {

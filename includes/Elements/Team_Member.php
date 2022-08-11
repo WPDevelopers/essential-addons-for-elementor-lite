@@ -339,6 +339,19 @@ class Team_Member extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_team_members_enable_text_overlay',
+			[
+				'label' => esc_html__( 'Enable Description Overlay', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SWITCHER,
+				'default' => 'no',
+				'return_value' => 'yes',
+				'condition' => [
+					'eael_team_members_preset' => 'eael-team-members-simple'
+				]
+			]
+		);
+
+		$this->add_control(
 			'eael_team_members_overlay_background',
 			[
 				'label' => esc_html__( 'Overlay Color', 'essential-addons-for-elementor-lite'),
@@ -346,9 +359,22 @@ class Team_Member extends Widget_Base {
 				'default' => 'rgba(255,255,255,0.8)',
 				'selectors' => [
 					'{{WRAPPER}} .eael-team-members-overlay .eael-team-content' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-team-image .eael-team-text-overlay' => 'background-color: {{VALUE}};',
 				],
-				'condition' => [
-					'eael_team_members_preset' => 'eael-team-members-overlay',
+				'conditions' => [
+					'relation' 	=> 'or',
+					'terms' 	=> [
+						[
+							'name' 	=> 'eael_team_members_preset',
+							'operator' => '=',
+							'value' => 'eael-team-members-overlay'
+						],
+						[
+							'name' 	=> 'eael_team_members_enable_text_overlay',
+							'operator' => '=',
+							'value' => 'yes'
+						]
+					]
 				],
 			]
 		);
@@ -361,6 +387,7 @@ class Team_Member extends Widget_Base {
 				'default' => '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-team-item .eael-team-content' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-team-item .eael-team-image .eael-team-text-overlay' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -613,6 +640,7 @@ class Team_Member extends Widget_Base {
 				'default' => '#272727',
 				'selectors' => [
 					'{{WRAPPER}} .eael-team-item .eael-team-content .eael-team-text' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-team-item .eael-team-image .eael-team-text.eael-team-text-overlay' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -621,7 +649,8 @@ class Team_Member extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
              'name' => 'eael_team_members_description_typography',
-				'selector' => '{{WRAPPER}} .eael-team-item .eael-team-content .eael-team-text',
+				'selector' => '{{WRAPPER}} .eael-team-item .eael-team-content .eael-team-text,
+								{{WRAPPER}} .eael-team-item .eael-team-image .eael-team-text.eael-team-text-overlay',
 			]
 		);
 
@@ -851,7 +880,6 @@ class Team_Member extends Widget_Base {
 
 	}
 
-
 	protected function render( ) {
 
         $settings = $this->get_settings_for_display();
@@ -859,6 +887,12 @@ class Team_Member extends Widget_Base {
 		$team_member_image_url = Group_Control_Image_Size::get_attachment_image_src( $team_member_image['id'], 'thumbnail', $settings );
 		if( empty( $team_member_image_url ) ) : $team_member_image_url = $team_member_image['url']; else: $team_member_image_url = $team_member_image_url; endif;
 		$team_member_classes = $this->get_settings('eael_team_members_preset') . " " . $this->get_settings('eael_team_members_image_rounded');
+
+		$this->add_render_attribute( 'eael_team_text', 'class', 'eael-team-text' );
+
+		if ( isset( $settings['eael_team_members_enable_text_overlay'] ) && $settings['eael_team_members_enable_text_overlay'] == 'yes' ) {
+			$this->add_render_attribute( 'eael_team_text', 'class', 'eael-team-text-overlay' );
+		}
 
 	?>
 
@@ -870,8 +904,17 @@ class Team_Member extends Widget_Base {
 					<img src="<?php echo esc_url($team_member_image_url);?>" alt="<?php echo esc_attr( get_post_meta($team_member_image['id'], '_wp_attachment_image_alt', true) ); ?>">
 				</figure>
 				<?php if( 'eael-team-members-social-right' === $settings['eael_team_members_preset'] ) : ?>
-					<?php do_action('eael/team_member_social_right_markup', $settings); ?>
+					<?php do_action( 'eael/team_member_social_right_markup', $settings, $this ); ?>
 				<?php endif; ?>
+
+				<?php 
+					if ( isset( $settings['eael_team_members_enable_text_overlay'] ) && $settings['eael_team_members_enable_text_overlay'] == 'yes' ) {
+						?>
+						<p <?php echo $this->get_render_attribute_string('eael_team_text'); ?>><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_description']); ?></p>
+						<?php
+					}
+				?>
+
 			</div>
 
 			<div class="eael-team-content">
@@ -879,17 +922,17 @@ class Team_Member extends Widget_Base {
 				<h4 class="eael-team-member-position"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_job_title']); ?></h4>
 
 				<?php if( 'eael-team-members-social-bottom' === $settings['eael_team_members_preset'] ) : ?>
-					<?php do_action('eael/team_member_social_botton_markup', $settings); ?>
+					<?php do_action( 'eael/team_member_social_botton_markup', $settings, $this ); ?>
 				<?php else: ?>
 					<?php if ( ! empty( $settings['eael_team_member_enable_social_profiles'] ) && 'eael-team-members-social-right' !== $settings['eael_team_members_preset'] ): ?>
 						<ul class="eael-team-member-social-profiles">
-							<?php foreach ( $settings['eael_team_member_social_profile_links'] as $item ) : ?>
+							<?php foreach ( $settings['eael_team_member_social_profile_links'] as $index => $item ) : ?>
 								<?php $icon_migrated = isset($item['__fa4_migrated']['social_new']);
 								$icon_is_new = empty($item['social']); ?>
 								<?php if ( ! empty( $item['social'] ) || !empty($item['social_new'])) : ?>
-									<?php $target = $item['link']['is_external'] ? ' target="_blank"' : ''; ?>
+									<?php $this->add_link_attributes( 'social_link_' . $index, $item['link'] ); ?>
 									<li class="eael-team-member-social-link">
-										<a href="<?php echo esc_attr( $item['link']['url'] ); ?>" <?php echo $target; ?>>
+										<a <?php $this->print_render_attribute_string( 'social_link_' . $index ); ?>>
 											<?php if ($icon_is_new || $icon_migrated) { ?>
 												<?php if( isset( $item['social_new']['value']['url'] ) ) : ?>
 													<img src="<?php echo esc_attr($item['social_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($item['social_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
@@ -905,7 +948,7 @@ class Team_Member extends Widget_Base {
 							<?php endforeach; ?>
 						</ul>
 					<?php endif; ?>
-					<p class="eael-team-text"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_description']); ?></p>
+					<p <?php echo $this->get_render_attribute_string('eael_team_text'); ?>><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_description']); ?></p>
 				<?php endif; ?>
 			</div>
 		</div>
