@@ -57,6 +57,7 @@ trait Facebook_Feed {
 		$page_id = $settings['eael_facebook_feed_page_id'];
 		$token   = $settings['eael_facebook_feed_access_token'];
 		$source    = $settings['eael_facebook_feed_data_source'];
+        $display_comment = isset( $settings['eael_facebook_feed_comments'] ) ? $settings['eael_facebook_feed_comments'] : '';
 
 		if ( empty( $page_id ) || empty( $token ) ) {
 			return;
@@ -66,7 +67,7 @@ trait Facebook_Feed {
 		$facebook_data = get_transient( $key );
 
 		if ( $facebook_data == false ) {
-			$facebook_data = wp_remote_retrieve_body( wp_remote_get( $this->get_url($page_id, $token, $source), [
+			$facebook_data = wp_remote_retrieve_body( wp_remote_get( $this->get_url($page_id, $token, $source, $display_comment), [
 				'timeout' => 70,
 			] ) );
 			$facebook_data = json_decode( $facebook_data, true );
@@ -86,6 +87,7 @@ trait Facebook_Feed {
 				break;
 		}
 		$items = array_splice( $facebook_data, ( $page * $settings['eael_facebook_feed_image_count']['size'] ), $settings['eael_facebook_feed_image_count']['size'] );
+		$bg_style = isset( $settings['eael_facebook_feed_image_render_type'] ) && $settings['eael_facebook_feed_image_render_type'] == 'cover' ? "background-size: cover;background-position: center;background-repeat: no-repeat;" : "background-size: 100% 100%;background-repeat: no-repeat;";
 		foreach ( $items as $item ) {
 			$t        = 'eael_facebook_feed_message_max_length'; // short it
 			$limit    = isset( $settings[ $t ] ) && isset( $settings[ $t ]['size'] ) ? $settings[ $t ]['size'] : null;
@@ -93,6 +95,10 @@ trait Facebook_Feed {
 			$photo    = ( isset( $item['full_picture'] ) ? esc_url( $item['full_picture'] ) : '' );
 			$likes    = ( isset( $item['reactions'] ) ? $item['reactions']['summary']['total_count'] : 0 );
 			$comments = ( isset( $item['comments'] ) ? $item['comments']['summary']['total_count'] : 0 );
+
+			if ( empty( $photo ) ) {
+				$photo = isset( $item['attachments']['data'][0]['media']['image']['src'] ) ? esc_url( $item['attachments']['data'][0]['media']['image']['src'] ) : $photo;
+			}
 
 			if ( $settings['eael_facebook_feed_layout'] == 'card' ) {
 				$item_form_name = !empty( $item['from']['name'] ) ? $item['from']['name']: '';
@@ -123,10 +129,12 @@ trait Facebook_Feed {
 
 							$html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">';
 							if ( !empty($item['attachments']['data'][0]['media_type']) && $item['attachments']['data'][0]['media_type'] == 'video' ) {
-								$html .= '<img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">
+								$html .= '<div class="eael-facebook-feed-img-container" style="background:url(' . esc_url( $photo ) . ');' . esc_attr( $bg_style ) . '">
+								<img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '"></div>
 	                                                    <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>';
 							} else {
-								$html .= '<img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">';
+								$html .= '<div class="eael-facebook-feed-img-container" style="background:url(' . esc_url( $photo ) . ');' . esc_attr( $bg_style ) . '">
+								<img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '"></div>';
 							}
 							$html .= '</a>';
 						}
@@ -149,7 +157,9 @@ trait Facebook_Feed {
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) {
 
 							$html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">
-	                                                <img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">
+	                                                <div class="eael-facebook-feed-img-container" style="background:url(' . esc_url( $photo ) . '); ' . esc_attr( $bg_style ) . '">
+	                                                    <img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">
+	                                                </div>
 	                                                <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>
 	                                            </a>';
 						}
@@ -157,7 +167,9 @@ trait Facebook_Feed {
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_thumbnail'] ) {
 
 							$html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">
-	                                                <img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">
+	                                                <div class="eael-facebook-feed-img-container" style="background:url(' . esc_url( $photo ) . '); ' . esc_attr( $bg_style ) . '">
+	                                                    <img class="eael-facebook-feed-img" src="' . esc_url( $photo ) . '">
+	                                                </div>
 	                                            </a>';
 
 						}
@@ -183,7 +195,9 @@ trait Facebook_Feed {
 			} else {
 				$html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '" class="eael-facebook-feed-item">
                     <div class="eael-facebook-feed-item-inner">
-                        <img class="eael-facebook-feed-img" src="' . ( empty( $photo ) ? EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg' : esc_url( $photo ) ) . '">';
+                    	<div class="eael-facebook-feed-img-container" style="background:url(' . ( empty( $photo ) ? EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg' : esc_url( $photo ) ) . '); ' . esc_attr( $bg_style ) . '">
+                            <img class="eael-facebook-feed-img" src="' . ( empty( $photo ) ? EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg' : esc_url( $photo ) ) . '">
+                        </div>';
 
 				if ( $settings['eael_facebook_feed_likes'] || $settings['eael_facebook_feed_comments'] ) {
 					$html .= '<div class="eael-facebook-feed-item-overlay">
@@ -264,9 +278,10 @@ trait Facebook_Feed {
 	 *
 	 * @return string
 	 */
-	public function get_url( $page_id = '', $token = '', $source = 'posts' ) {
-		$post_url = "https://graph.facebook.com/v8.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)&limit=99&access_token={$token}";
-		$feed_url = "https://graph.facebook.com/v8.0/{$page_id}/feed?fields=id,message,full_picture,status_type,created_time,attachments{title,description,type,url,media},from,permalink_url,shares,call_to_action,comments.summary(total_count),reactions.summary(total_count),privacy&access_token={$token}&limit=99&locale=en_US";
+	public function get_url( $page_id = '', $token = '', $source = 'posts', $display_comment = '' ) {
+        $comment_count = $display_comment == 'yes' ? ',comments.summary(total_count)' : '';
+		$post_url = "https://graph.facebook.com/v8.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url,media}{$comment_count},reactions.summary(total_count)&limit=99&access_token={$token}";
+		$feed_url = "https://graph.facebook.com/v8.0/{$page_id}/feed?fields=id,message,full_picture,status_type,created_time,attachments{title,description,type,url,media},from,permalink_url,shares,call_to_action{$comment_count},reactions.summary(total_count),privacy&access_token={$token}&limit=99&locale=en_US";
 
 		if ( 'posts' === $source ) {
 			return $post_url;

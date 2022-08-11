@@ -45,5 +45,10 @@ var FancyText = function ($scope, $) {
 	}
 };
 jQuery(window).on("elementor/frontend/init", function () {
+
+	if (ea.elementStatusCheck('eaelFancyTextLoad')) {
+		return false;
+	}
+
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-fancy-text.default", FancyText);
 });
