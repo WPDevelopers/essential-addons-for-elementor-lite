@@ -59,6 +59,7 @@
 				$eael_g_client_id        = get_option( 'eael_g_client_id' );
 				$eael_fb_app_id          = get_option( 'eael_fb_app_id' );
 				$eael_fb_app_secret      = get_option( 'eael_fb_app_secret' );
+				$eael_lr_mailchimp_api_key      = get_option( 'eael_lr_mailchimp_api_key' );
 				?>
                 <div id="eael-login-register-popup" class="modal__content__popup">
                     <div class="modal__head">
@@ -115,7 +116,7 @@
                                 <span class="login__setup__header">
                                     <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/facebook.svg' ); ?>"
                                          alt="">
-                                    <?php _e( 'facebook Login', 'essential-addons-for-elementor-lite' ); ?>
+                                    <?php _e( 'Facebook Login', 'essential-addons-for-elementor-lite' ); ?>
                                 </span>
                                 <div class="eael-input__inline mb15">
                                     <label><?php _e( 'Facebook App ID:', 'essential-addons-for-elementor-lite' ); ?></label>
@@ -128,6 +129,24 @@
                                     <input name="lr_fb_app_secret" id="lr_fb_app_secret"
                                            value="<?php echo esc_attr( get_option( 'eael_fb_app_secret' ) ); ?>"
                                            class="eael-form__control" type="text" placeholder="Facebook App Secret:">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border__line"><span></span></div>
+
+                        <div class="modal__content">
+                            <div class="eael-login__setup">
+                                <span class="login__setup__header">
+                                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/mailchimp.svg' ); ?>"
+                                         alt=""  width="20">
+                                    <?php _e( 'Mailchimp Integration', 'essential-addons-for-elementor-lite' ); ?>
+                                </span>
+                                <div class="eael-input__inline mb15">
+                                    <label><?php _e( 'Mailchimp API Key:', 'essential-addons-for-elementor-lite' ); ?></label>
+                                    <input name="lr_mailchimp_api_key" id="lr_mailchimp_api_key"
+                                           value="<?php echo esc_attr( get_option( 'eael_lr_mailchimp_api_key' ) ); ?>"
+                                           class="eael-form__control" type="text" placeholder="Mailchimp API">
                                 </div>
                             </div>
                         </div>

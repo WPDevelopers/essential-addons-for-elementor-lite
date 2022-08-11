@@ -862,6 +862,11 @@ trait Ajax_Handler {
 		if ( isset( $settings['mailchimp-api'] ) ) {
 			update_option( 'eael_save_mailchimp_api', sanitize_text_field( $settings['mailchimp-api'] ) );
 		}
+		
+		// Saving Mailchimp Api Key for EA Login | Register Form
+		if ( isset( $settings['lr_mailchimp_api_key'] ) ) {
+			update_option( 'eael_lr_mailchimp_api_key', sanitize_text_field( $settings['lr_mailchimp_api_key'] ) );
+		}
 
 		// Saving TYpeForm token
 		if ( isset( $settings['typeform-personal-token'] ) ) {
