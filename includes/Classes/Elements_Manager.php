@@ -207,7 +207,9 @@ class Elements_Manager {
 			return $post_id;
 		}
 
-		if ( get_post_status( $post_id ) !== 'publish' || ! Plugin::$instance->documents->get( $post_id )->is_built_with_elementor() ) {
+		$documents = Plugin::$instance->documents->get( $post_id );
+
+		if ( get_post_status( $post_id ) !== 'publish' || ( is_object( $documents ) && ! $documents->is_built_with_elementor() ) ) {
 			return false;
 		}
 
