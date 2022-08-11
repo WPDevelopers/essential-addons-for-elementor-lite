@@ -700,6 +700,20 @@ trait Controls
             );
 
             if( 'eael-post-block' === $wb->get_name() ) {
+	            $wb->add_control(
+		            'enable_post_block_image_ratio',
+		            [
+			            'label' => __('Enable Image Ratio', 'essential-addons-for-elementor-lite'),
+			            'type' => Controls_Manager::SWITCHER,
+			            'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+			            'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+			            'return_value' => 'yes',
+			            'default' => 'no',
+			            'condition' => [
+				            'eael_show_image' => 'yes',
+			            ],
+		            ]
+	            );
                 $wb->add_responsive_control(
                     'post_block_image_ratio',
                     [
@@ -721,7 +735,8 @@ trait Controls
                             '{{WRAPPER}} .eael-entry-thumbnail' => 'padding-bottom: calc({{SIZE}} * 100%);',
                         ],
                         'condition' => [
-                            'eael_show_image' => 'yes',
+	                        'enable_post_block_image_ratio' => 'yes',
+	                        'eael_show_image'               => 'yes',
                         ],
                     ]
                 );
@@ -749,6 +764,20 @@ trait Controls
             }
 
             if( 'eael-post-grid' === $wb->get_name() ) {
+	            $wb->add_control(
+		            'enable_postgrid_image_ratio',
+		            [
+			            'label' => __('Enable Image Ratio', 'essential-addons-for-elementor-lite'),
+			            'type' => Controls_Manager::SWITCHER,
+			            'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+			            'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+			            'return_value' => 'yes',
+			            'default' => 'no',
+			            'condition' => [
+				            'eael_show_image' => 'yes',
+			            ],
+		            ]
+	            );
                 $wb->add_responsive_control(
                     'postgrid_image_ratio',
                     [
@@ -770,7 +799,8 @@ trait Controls
                             '{{WRAPPER}} .eael-entry-thumbnail' => 'padding-bottom: calc({{SIZE}} * 100%);',
                         ],
                         'condition' => [
-                            'eael_show_image' => 'yes',
+	                        'enable_postgrid_image_ratio' => 'yes',
+	                        'eael_show_image'             => 'yes',
                         ],
                     ]
                 );

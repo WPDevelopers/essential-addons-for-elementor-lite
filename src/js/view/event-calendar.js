@@ -223,6 +223,8 @@ var EventCalendar = function ($scope, $) {
 						}
 						if (event.url == "") {
 							$(".eaelec-modal-footer a").css("display", "none");
+						} else {
+							$(".eaelec-modal-footer a").css("display", "block");
 						}
 						
 						// Popup color
@@ -265,6 +267,11 @@ var EventCalendar = function ($scope, $) {
 };
 
 jQuery(window).on("elementor/frontend/init", function () {
+
+	if (ea.elementStatusCheck('eaelEventCalendar')) {
+		return false;
+	}
+
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eael-event-calendar.default",
 		EventCalendar
