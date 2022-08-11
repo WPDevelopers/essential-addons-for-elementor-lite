@@ -361,6 +361,7 @@
                 <condition key="widgetType">eael-login-register</condition>
             </conditions>
             <fields>
+                <field type="Login | Register Form: Redirect Link for Logged-in Users" key_of="redirect_url_for_logged_in_user" editor_type="LINE">url</field>
                 <field type="Login | Register Form: Lost Password Text" editor_type="LINE">lost_password_text</field>
                 <field type="Login | Register Form: Lost Password Link" key_of="lost_password_url" editor_type="LINE">url</field>
                 <field type="Login | Register Form: Remember Text" editor_type="LINE">remember_text</field>
