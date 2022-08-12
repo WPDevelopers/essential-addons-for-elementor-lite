@@ -122,7 +122,7 @@ class Elements_Manager {
 	 */
 	public function get_element_list( $post_id ) {
 
-		if ( Plugin::instance()->editor->is_edit_mode() ) {
+		if ( is_object( Plugin::instance()->editor ) && Plugin::instance()->editor->is_edit_mode() ) {
 			return false;
 		}
 
