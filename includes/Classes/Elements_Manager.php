@@ -84,7 +84,7 @@ class Elements_Manager {
 
 			if ( ! empty( $element['widgetType'] ) && $element['widgetType'] === 'global' ) {
 				$document = Plugin::$instance->documents->get( $element['templateID'] );
-				$type     = current( $this->get_widget_list( $document->get_elements_data() ) );
+				$type     = is_object( $document ) ? current( $this->get_widget_list( $document->get_elements_data() ) ) : $type;
 
 				if ( ! empty( $type ) ) {
 					$type = 'eael-' . $type;
@@ -131,9 +131,9 @@ class Elements_Manager {
 		}
 
 		$document  = Plugin::$instance->documents->get( $post_id );
-		$data      = $document ? $document->get_elements_data() : [];
+		$data      = is_object( $document ) ? $document->get_elements_data() : [];
 		$data      = $this->get_widget_list( $data );
-		$custom_js = $document ? $document->get_settings( 'eael_custom_js' ) : '';
+		$custom_js = is_object( $document ) ? $document->get_settings( 'eael_custom_js' ) : '';
 		$this->save_widgets_list( $post_id, $data, $custom_js );
 
 		return true;
