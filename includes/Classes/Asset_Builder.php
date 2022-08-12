@@ -374,7 +374,7 @@ class Asset_Builder {
 	 * @param array $elements
 	 * @param string $context
 	 */
-	public function enqueue_asset( $post_id = null, $elements, $context = 'view' ) {
+	public function enqueue_asset( $post_id = null, $elements = [], $context = 'view' ) {
 		$dynamic_asset_id = ( $post_id ? '-' . $post_id : '' );
 
 		if ( $this->css_print_method == 'internal' ) {
