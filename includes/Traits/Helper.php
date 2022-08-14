@@ -470,6 +470,14 @@ trait Helper
             update_option( 'eael_admin_menu_notice',self::EAEL_ADMIN_MENU_FLAG,'no' );
 		}
 	}
-	
+
+	/**
+	 * Checking that is actually elementor activated and works
+     *
+	 * @return bool
+	 */
+	public function is_activate_elementor() {
+		return defined( 'ELEMENTOR_VERSION' ) && class_exists( 'Elementor\Plugin' );
+	}
 }
 
