@@ -677,7 +677,7 @@ trait Controls
                         ],
                         'condition' => [
                             'eael_dynamic_template_Layout' => 'horizontal',
-                            'content_timeline_layout!' => 'middle',
+                            'content_timeline_layout_horizontal!' => 'middle',
                         ],
                     ]
                 );
@@ -926,6 +926,7 @@ trait Controls
                     ],
                     'selectors' => [
                         '{{WRAPPER}} .eael-content-timeline-img img' => 'width: {{SIZE}}px;',
+                        '{{WRAPPER}} .eael-horizontal-timeline-item__point-content .eael-elements-icon img' => 'width: {{SIZE}}px;',
                     ],
                 ]
             );
