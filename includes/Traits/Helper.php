@@ -477,7 +477,7 @@ trait Helper
 	 * @return bool
 	 */
 	public function is_activate_elementor() {
-		return defined( 'ELEMENTOR_VERSION' ) && class_exists( 'Plugin' );
+		return defined( 'ELEMENTOR_VERSION' ) && class_exists( 'Elementor\Plugin' );
 	}
 }
 
