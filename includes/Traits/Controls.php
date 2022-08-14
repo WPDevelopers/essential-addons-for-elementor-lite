@@ -659,7 +659,25 @@ trait Controls
                             'outside' => esc_html__('Outside', 'essential-addons-for-elementor-lite'),
                         ],
                         'condition' => [
+                            'eael_dynamic_template_Layout' => 'default',
                             'content_timeline_layout!' => 'center',
+                        ],
+                    ]
+                );
+                
+                $wb->add_control(
+                    'date_position_horizontal',
+                    [
+                        'label' => esc_html__('Date Position', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::SELECT,
+                        'default' => 'inside',
+                        'options' => [
+                            'inside' => esc_html__('Inside', 'essential-addons-for-elementor-lite'),
+                            'outside' => esc_html__('Outside', 'essential-addons-for-elementor-lite'),
+                        ],
+                        'condition' => [
+                            'eael_dynamic_template_Layout' => 'horizontal',
+                            'content_timeline_layout!' => 'middle',
                         ],
                     ]
                 );
