@@ -84,7 +84,7 @@ class Elements_Manager {
 
 			if ( ! empty( $element['widgetType'] ) && $element['widgetType'] === 'global' ) {
 				$document = Plugin::$instance->documents->get( $element['templateID'] );
-				$type     = current( $this->get_widget_list( $document->get_elements_data() ) );
+				$type     = is_object( $document ) ? current( $this->get_widget_list( $document->get_elements_data() ) ) : $type;
 
 				if ( ! empty( $type ) ) {
 					$type = 'eael-' . $type;
@@ -122,7 +122,7 @@ class Elements_Manager {
 	 */
 	public function get_element_list( $post_id ) {
 
-		if ( Plugin::instance()->editor->is_edit_mode() ) {
+		if ( is_object( Plugin::instance()->editor ) && Plugin::instance()->editor->is_edit_mode() ) {
 			return false;
 		}
 
@@ -131,9 +131,9 @@ class Elements_Manager {
 		}
 
 		$document  = Plugin::$instance->documents->get( $post_id );
-		$data      = $document ? $document->get_elements_data() : [];
+		$data      = is_object( $document ) ? $document->get_elements_data() : [];
 		$data      = $this->get_widget_list( $data );
-		$custom_js = $document ? $document->get_settings( 'eael_custom_js' ) : '';
+		$custom_js = is_object( $document ) ? $document->get_settings( 'eael_custom_js' ) : '';
 		$this->save_widgets_list( $post_id, $data, $custom_js );
 
 		return true;
@@ -207,7 +207,9 @@ class Elements_Manager {
 			return $post_id;
 		}
 
-		if ( get_post_status( $post_id ) !== 'publish' || ! Plugin::$instance->documents->get( $post_id )->is_built_with_elementor() ) {
+		$documents = Plugin::$instance->documents->get( $post_id );
+
+		if ( get_post_status( $post_id ) !== 'publish' || ( is_object( $documents ) && ! $documents->is_built_with_elementor() ) ) {
 			return false;
 		}
 
