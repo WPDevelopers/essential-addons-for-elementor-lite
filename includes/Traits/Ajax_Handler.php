@@ -94,7 +94,7 @@ trait Ajax_Handler {
 			return false;
 		}
 
-		if ( ! wp_verify_nonce( $_POST['nonce'], 'load_more' ) ) {
+		if ( ! wp_verify_nonce( $_POST['nonce'], 'load_more' ) && ! wp_verify_nonce( $_POST['nonce'], 'essential-addons-elementor' ) ) {
 			$err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
@@ -915,7 +915,13 @@ trait Ajax_Handler {
 		} else {
 			// clear cache files
 			$this->empty_dir( EAEL_ASSET_PATH );
+			if ( $this->is_activate_elementor() ) {
+				\Elementor\Plugin::$instance->files_manager->clear_cache();
+			}
 		}
+
+		// Purge All LS Cache
+		do_action( 'litespeed_purge_all', '3rd Essential Addons for Elementor' );
 
 		wp_send_json( true );
 	}

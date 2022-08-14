@@ -95,6 +95,13 @@
   position: relative;
   overflow: hidden;
 }
+.eael-facebook-feed .eael-facebook-feed-img-container {
+  height: auto;
+  width: 100%;
+}
+.eael-facebook-feed .eael-facebook-feed-img-container .eael-facebook-feed-img {
+  visibility: hidden;
+}
 .eael-facebook-feed-overlay .eael-facebook-feed-item .eael-facebook-feed-item-overlay {
   display: -webkit-box;
   display: -ms-flexbox;
