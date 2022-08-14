@@ -625,6 +625,26 @@ trait Controls
                             'center' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
                             'right' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
                         ],
+                        'condition' => [
+                            'eael_dynamic_template_Layout' => 'default',
+                        ],
+                    ]
+                );
+
+                $wb->add_control(
+                    'content_timeline_layout_horizontal',
+                    [
+                        'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::SELECT,
+                        'default' => 'middle',
+                        'options' => [
+                            'top' => esc_html__('Top', 'essential-addons-for-elementor-lite'),
+                            'middle' => esc_html__('Middle', 'essential-addons-for-elementor-lite'),
+                            'bottom' => esc_html__('Bottom', 'essential-addons-for-elementor-lite'),
+                        ],
+                        'condition' => [
+                            'eael_dynamic_template_Layout' => 'horizontal',
+                        ],
                     ]
                 );
 
