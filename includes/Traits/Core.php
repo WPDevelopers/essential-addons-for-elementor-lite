@@ -224,6 +224,8 @@ trait Core
                 'eael_ext_toc_word_wrap' => $document->get_settings('eael_ext_toc_word_wrap'),
                 'eael_ext_toc_table_box_shadow_box_shadow' => $document->get_settings('eael_ext_toc_table_box_shadow_box_shadow'),
                 'eael_ext_toc_auto_collapse' => $document->get_settings('eael_ext_toc_auto_collapse'),
+                'eael_ext_toc_auto_highlight' => $document->get_settings('eael_ext_toc_auto_highlight'),
+                'eael_ext_toc_auto_highlight_single_item_only' => $document->get_settings('eael_ext_toc_auto_highlight_single_item_only'),
                 'eael_ext_toc_hide_in_mobile' => $document->get_settings('eael_ext_toc_hide_in_mobile'),
                 'eael_ext_toc_border_border' => $document->get_settings('eael_ext_toc_border_border'),
                 'eael_ext_toc_border_width' => $document->get_settings('eael_ext_toc_border_width'),
@@ -301,6 +303,10 @@ trait Core
         if (wp_doing_cron()) {
             return;
         }
+
+	    if ( ! $this->is_activate_elementor() ) {
+		    return false;
+	    }
 
         $document = Plugin::$instance->documents->get($post_id, false);
         $global_settings = get_option('eael_global_settings');

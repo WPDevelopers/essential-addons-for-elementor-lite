@@ -134,6 +134,8 @@
 					<?php endif; ?>
 
                     <div class="border__line"><span></span></div>
+
+                    <!-- <div class="border__line"><span></span></div> -->
                     <div class="modal__content">
                         <div class="eael__flex align__center justify__center">
                             <button class="eael-button button__themeColor mr15 eael-save-trigger eael-admin-popup-close">

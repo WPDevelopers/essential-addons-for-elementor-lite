@@ -39,6 +39,15 @@
   background-color: #f1f1f1;
 }
 
+.eael-advance-tabs .eael-tabs-nav > ul li .eael-tab-title {
+  margin: unset;
+  font-size: unset;
+  line-height: unset;
+  font-family: unset;
+  font-weight: unset;
+  color: unset;
+}
+
 .eael-advance-tabs .eael-tabs-nav > ul li:after {
   content: "";
   position: absolute;
@@ -178,42 +187,35 @@
         -ms-flex-flow: row wrap;
             flex-flow: row wrap;
   }
-
   .eael-advance-tabs .eael-tabs-nav > ul li {
     -webkit-box-flex: 1;
         -ms-flex: 1 1 auto;
             flex: 1 1 auto;
   }
-
   .responsive-vertical-layout.eael-advance-tabs .eael-tabs-nav > ul li {
     -webkit-box-flex: 1;
         -ms-flex: 1 1 100%;
             flex: 1 1 100%;
   }
-
   .eael-advance-tabs.eael-tabs-vertical {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
   }
-
   .eael-advance-tabs.eael-tabs-vertical div.eael-tabs-nav {
     -webkit-box-flex: 1;
         -ms-flex: 1 100%;
             flex: 1 100%;
   }
-
   .eael-advance-tabs.eael-tabs-vertical ul {
     -webkit-box-flex: 1;
         -ms-flex: 1 100%;
             flex: 1 100%;
   }
-
   .eael-advance-tabs.eael-tabs-vertical ul li {
     -webkit-box-flex: 1;
         -ms-flex: 1 100%;
             flex: 1 100%;
   }
-
   div.eael-advance-tabs.eael-tabs-vertical div.eael-tabs-nav > ul li::after {
     border-left-color: transparent !important;
     bottom: -20px !important;
