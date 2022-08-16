@@ -279,7 +279,7 @@ class Asset_Builder {
 
 	public function register_script() {
 		wp_register_script( 'eael-general', EAEL_PLUGIN_URL . 'assets/front-end/js/view/general.min.js', [ 'jquery' ], 10, true );
-		wp_register_style( 'eael-general', EAEL_PLUGIN_URL . "assets/front-end/css/view/general.min.css", [ 'elementor-frontend' ], 10, true );
+		wp_register_style( 'eael-general', EAEL_PLUGIN_URL . "assets/front-end/css/view/general.min.css", [ 'hello-elementor-theme-style', 'elementor-frontend' ], 10, true );
 	}
 
 	/**
