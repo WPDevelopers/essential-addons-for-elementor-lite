@@ -248,6 +248,10 @@ class Asset_Builder {
 			$this->enqueue_asset( $this->post_id, $elements );
 		}
 
+		if ( ! $this->main_page ) {
+			$this->load_custom_js( $this->post_id );
+		}
+
 		return $file_name;
 	}
 
