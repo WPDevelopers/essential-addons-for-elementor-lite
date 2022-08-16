@@ -447,6 +447,13 @@ class Asset_Builder {
 	}
 
 	public function load_custom_js( $post_id ) {
+		static $post_ids_array = [];
+
+		if ( in_array( $post_id, $post_ids_array ) ) {
+			return false;
+		}
+
+		$post_ids_array[] = $post_id;
 
 		if ( ! $this->custom_js_enable ) {
 			return false;
