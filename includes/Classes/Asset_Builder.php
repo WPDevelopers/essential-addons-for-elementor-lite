@@ -102,7 +102,7 @@ class Asset_Builder {
 		add_action( 'wp_footer', [ $this, 'add_inline_css' ], 15 );
 		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ], 10, 2 );
 
-		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ], 100 );
 		add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'ea_before_enqueue_styles' ] );
 		add_action( 'elementor/theme/register_locations', [ $this, 'load_asset_per_location' ], 20 );
 		add_filter( 'elementor/files/file_name', [ $this, 'load_asset_per_file' ] );
@@ -278,8 +278,8 @@ class Asset_Builder {
 	}
 
 	public function register_script() {
-		wp_register_script( 'eael-general', EAEL_PLUGIN_URL . 'assets/front-end/js/view/general.min.js', [ 'jquery' ], 10, true );
-		wp_register_style( 'eael-general', EAEL_PLUGIN_URL . "assets/front-end/css/view/general.min.css", [ 'hello-elementor-theme-style', 'elementor-frontend' ], 10, true );
+		wp_register_script( 'eael-general', EAEL_PLUGIN_URL . 'assets/front-end/js/view/general.min.js', [ 'jquery' ], EAEL_PLUGIN_VERSION, true );
+		wp_register_style( 'eael-general', EAEL_PLUGIN_URL . "assets/front-end/css/view/general.min.css", [ 'elementor-frontend' ], EAEL_PLUGIN_VERSION );
 	}
 
 	/**
