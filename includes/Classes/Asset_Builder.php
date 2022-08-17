@@ -282,8 +282,14 @@ class Asset_Builder {
 	}
 
 	public function register_script() {
+		$css_deps = [ 'elementor-frontend' ];
+		$theme    = wp_get_theme(); // gets the current theme
+		if ( in_array( 'Hello Elementor', [ $theme->name, $theme->parent_theme ] ) ) {
+			array_unshift( $css_deps, 'hello-elementor-theme-style' );
+		}
+
 		wp_register_script( 'eael-general', EAEL_PLUGIN_URL . 'assets/front-end/js/view/general.min.js', [ 'jquery' ], EAEL_PLUGIN_VERSION, true );
-		wp_register_style( 'eael-general', EAEL_PLUGIN_URL . "assets/front-end/css/view/general.min.css", [ 'hello-elementor-theme-style', 'elementor-frontend' ], EAEL_PLUGIN_VERSION );
+		wp_register_style( 'eael-general', EAEL_PLUGIN_URL . "assets/front-end/css/view/general.min.css", $css_deps, EAEL_PLUGIN_VERSION );
 	}
 
 	/**
