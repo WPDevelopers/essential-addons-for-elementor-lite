@@ -187,9 +187,6 @@ class Asset_Builder {
 			return false;
 		}
 
-		// Added Elementor Pro Feature Support to Every Theme
-		$instance->register_all_core_location();
-
 		$locations = $instance->get_locations();
 
 		foreach ( $locations as $location => $settings ) {
