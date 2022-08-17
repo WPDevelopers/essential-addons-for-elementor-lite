@@ -123,7 +123,7 @@ class Bootstrap
         // register hooks
         $this->register_hooks();
 
-	    if ( defined( 'ELEMENTOR_VERSION' ) ) {
+	    if ( $this->is_activate_elementor() ) {
 		    new Asset_Builder( $this->registered_elements, $this->registered_extensions );
 	    }
 
