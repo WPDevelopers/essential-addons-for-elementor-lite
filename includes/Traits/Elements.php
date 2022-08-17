@@ -335,9 +335,9 @@ trait Elements
      */
     public function render_global_html()
     {
-        if (!apply_filters('eael/is_plugin_active', 'elementor/elementor.php')) {
-            return;
-        }
+	    if ( ! apply_filters( 'eael/is_plugin_active', 'elementor/elementor.php' ) || ! $this->is_activate_elementor() ) {
+		    return;
+	    }
 
         if (!is_singular() && !is_archive()) {
             return;
