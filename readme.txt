@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 5.1.8
+Stable tag: 5.2.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -241,6 +241,39 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+
+= 5.2.3 - 18/08/2022 =
+
+- Fixed: Elementor PRO Header & Footer not showing in some themes
+- Few minor bug fixes & improvements
+
+= 5.2.2 - 17/08/2022 =
+
+- Fixed: Widgets with Links being underlined when Hello Elementor theme is active
+- Fixed: Custom JS not working inside Elementor Header, Footer & Popup
+- Few minor bug fixes & improvements
+
+
+= 5.2.1 - 14/08/2022 =
+
+- Fixed: Fatal Error in different PHP Versions 
+- Few minor bug fixes & improvements
+
+= 5.2.0 - 11/08/2022 =
+
+- Improved: Asset loading mechanism for better performance
+- Few minor bug fixes & improvements
+
+
+= 5.1.9 - 01/08/2022 =
+
+- Fixed: Throwing wc_get_cart_url deprecated error after activating Essential Addons
+- Fixed: o.imagesLoaded is not a function error when Masonry layout is used
+- Fixed: tippy is not defined error
+- Fixed: EA Facebook Feed | Thumbnail images not showing for all posts
+- Fixed: EA Login/Register Form | Added WPML Support for the missing strings
+- Few minor bug fixes & improvements
 
 = 5.1.8 - 05/07/2022 =
 
