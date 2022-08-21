@@ -915,7 +915,13 @@ trait Ajax_Handler {
 		} else {
 			// clear cache files
 			$this->empty_dir( EAEL_ASSET_PATH );
+			if ( $this->is_activate_elementor() ) {
+				\Elementor\Plugin::$instance->files_manager->clear_cache();
+			}
 		}
+
+		// Purge All LS Cache
+		do_action( 'litespeed_purge_all', '3rd Essential Addons for Elementor' );
 
 		wp_send_json( true );
 	}

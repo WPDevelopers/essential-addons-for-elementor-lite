@@ -1,4 +1,5 @@
 ea.hooks.addAction("init", "ea", () => {
+
 	const wooProductGallery = function ($scope, $) {
 		// category
 		ea.hooks.doAction("quickViewAddMarkup",$scope,$);
@@ -106,6 +107,10 @@ ea.hooks.addAction("init", "ea", () => {
 			);
 		}
 	};
+
+    if (ea.elementStatusCheck('productGalleryLoad')) {
+        return false;
+    }
 
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eael-woo-product-gallery.default",
