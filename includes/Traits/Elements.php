@@ -79,7 +79,12 @@ trait Elements
                 }
             }
 
-            $widgets_manager->register_widget_type(new $this->registered_elements[$active_element]['class']);
+	        if ( defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ) {
+		        $widgets_manager->register( new $this->registered_elements[ $active_element ]['class'] );
+	        } else {
+		        $widgets_manager->register_widget_type( new $this->registered_elements[ $active_element ]['class'] );
+	        }
+
         }
     }
 
@@ -329,9 +334,9 @@ trait Elements
      */
     public function render_global_html()
     {
-        if (!apply_filters('eael/is_plugin_active', 'elementor/elementor.php')) {
-            return;
-        }
+	    if ( ! apply_filters( 'eael/is_plugin_active', 'elementor/elementor.php' ) || ! $this->is_activate_elementor() ) {
+		    return;
+	    }
 
         if (!is_singular() && !is_archive()) {
             return;
