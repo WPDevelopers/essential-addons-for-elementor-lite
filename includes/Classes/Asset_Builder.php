@@ -283,6 +283,8 @@ class Asset_Builder {
 		$theme    = wp_get_theme(); // gets the current theme
 		if ( in_array( 'Hello Elementor', [ $theme->name, $theme->parent_theme ] ) ) {
 			array_unshift( $css_deps, 'hello-elementor-theme-style' );
+		} elseif ( in_array( 'Astra', [ $theme->name, $theme->parent_theme ] ) ) {
+			array_unshift( $css_deps, 'astra-theme-css' );
 		}
 
 		wp_register_script( 'eael-general', EAEL_PLUGIN_URL . 'assets/front-end/js/view/general.min.js', [ 'jquery' ], EAEL_PLUGIN_VERSION, true );
