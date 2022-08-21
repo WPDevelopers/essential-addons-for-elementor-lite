@@ -817,6 +817,21 @@ body.oceanwp-theme.eael-woo-cart .eael-woo-cart-wrapper {
     .quantity .plus {
         display: none;
     }
+
+    form.eael-woo-cart-form .eael-woo-cart-table {
+        thead {
+            display: table-header-group;
+        }
+
+        tbody tr td {
+            display: table-cell;
+            width: inherit;
+
+            &:before {
+                content: none;
+            }
+        }
+    }
 }
 
 // Storefront Theme Compatibility
