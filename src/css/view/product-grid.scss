@@ -872,10 +872,12 @@
 .theme-astra {
     .eael-product-grid,
     .eael-post-grid {
-        .woocommerce {
-            ul.products {
-                li.product {
-                    width: 100% !important;
+        &.list ,&.grid {
+            .woocommerce {
+                ul.products {
+                    li.product {
+                        width: 100% !important;
+                    }
                 }
             }
         }
