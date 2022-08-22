@@ -10,22 +10,19 @@ use Essential_Addons_Elementor\Traits\Admin;
 use Essential_Addons_Elementor\Traits\Core;
 use Essential_Addons_Elementor\Traits\Elements;
 use Essential_Addons_Elementor\Traits\Enqueue;
-use Essential_Addons_Elementor\Traits\Generator;
 use Essential_Addons_Elementor\Traits\Helper;
 use Essential_Addons_Elementor\Traits\Library;
 use Essential_Addons_Elementor\Traits\Login_Registration;
 use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
 use Essential_Addons_Elementor\Traits\Controls;
 use Essential_Addons_Elementor\Traits\Facebook_Feed;
+use Essential_Addons_Elementor\Classes\Asset_Builder;
 use Essential_Addons_Elementor\Traits\Ajax_Handler;
-
-
 class Bootstrap
 {
     use Library;
     use Core;
     use Helper;
-    use Generator;
     use Enqueue;
     use Admin;
     use Elements;
@@ -126,6 +123,11 @@ class Bootstrap
         // register hooks
         $this->register_hooks();
 
+	    if ( $this->is_activate_elementor() ) {
+		    new Asset_Builder( $this->registered_elements, $this->registered_extensions );
+	    }
+
+
 
     }
 
@@ -142,15 +144,9 @@ class Bootstrap
 
         // Enqueue
         add_action('eael/before_enqueue_styles', [$this, 'before_enqueue_styles']);
-        add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
         add_action('elementor/editor/before_enqueue_scripts', [$this, 'editor_enqueue_scripts']);
-        add_action('wp_head', [$this, 'enqueue_inline_styles']);
-        add_action('wp_footer', [$this, 'enqueue_inline_scripts']);
 
         // Generator
-        add_action('wp', [$this, 'init_request_data']);
-        add_filter('elementor/frontend/builder_content_data', [$this, 'collect_loaded_templates'], 10, 2);
-        add_action('wp_print_footer_scripts', [$this, 'update_request_data']);
 
 	    $this->init_ajax_hooks();
 
@@ -167,14 +163,15 @@ class Bootstrap
 	    if ( defined( 'ELEMENTOR_VERSION' ) ) {
 		    if ( version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ) {
 			    add_action( 'elementor/controls/register', array( $this, 'register_controls' ) );
+			    add_action('elementor/widgets/register', array($this, 'register_elements'));
 		    } else {
 			    add_action( 'elementor/controls/controls_registered', array( $this, 'register_controls' ) );
+			    add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
 		    }
 	    }
 
         // Elements
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
-        add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
         add_filter('elementor/editor/localize_settings', [$this, 'promote_pro_elements']);
         add_action('wp_footer', [$this, 'render_global_html']);
 
@@ -251,7 +248,7 @@ class Bootstrap
 
 
 
-	        add_action( 'in_admin_header', [ $this, 'remove_admin_notice' ] );
+	        //add_action( 'in_admin_header', [ $this, 'remove_admin_notice' ] );
 
 	        //handle typeform auth token
 	        add_action('admin_init', [$this, 'typeform_auth_handle']);
@@ -265,11 +262,13 @@ class Bootstrap
 		        add_action( 'init', [ $this, 'register_wc_hooks' ], 5 );
 	        }
 
-	        add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
+	        //add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
 
         }
 
 	    // beehive theme compatibility
 	    add_filter( 'beehive_scripts', array( $this, 'beehive_theme_swiper_slider_compatibility' ), 999 );
+
+
     }
 }
