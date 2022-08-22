@@ -74,11 +74,7 @@ class Migration
     private function reduce_options_data(){
 
 	    $status = get_option( 'eael_reduce_op_table_data' );
-	    if ( $status || version_compare( EAEL_PLUGIN_VERSION, '5.2.0', '<' ) ) {
-		    return false;
-	    }
-
-	    if ( wp_doing_ajax() ) {
+	    if ( $status || wp_doing_ajax()  ) {
 		    return false;
 	    }
 
