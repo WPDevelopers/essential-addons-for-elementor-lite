@@ -276,11 +276,34 @@ trait Login_Registration {
 			exit();
 		}
 		// prepare vars and flag errors
+		$settings_register_fields = isset($settings['register_fields']) ? $settings['register_fields'] : array();
+		if( count($settings_register_fields) ){
+			foreach($settings_register_fields as $register_field){
+				if( isset( $register_field['field_type'] ) && 'eael_phone_number' === $register_field['field_type']	){
+					//Phone number field
+					if( !empty( $register_field['required'] ) && 'yes' === $register_field['required'] && empty( $_POST['eael_phone_number'] ) ) {
+						$errors['eael_phone_number'] = isset( $settings['err_phone_number_missing'] ) ? $settings['err_phone_number_missing'] : __( 'Phone number is required', 'essential-addons-for-elementor-lite' );
+					}
+				}
+
+				//Validate HTML tags on input fields; Throw error if found (Although we are sanitizing before saving)
+				if( isset( $register_field['field_type'] ) && !empty( $_POST[$register_field['field_type']] ) ){
+					if( preg_match('/<[^<]+>/', $_POST[ $register_field['field_type'] ] ) ){
+						$errors[ sanitize_text_field( $register_field['field_type'] ) ] = __( sprintf('%s can not contain HTML tags', sanitize_text_field( $register_field['field_label'] ) ), 'essential-addons-for-elementor-lite' );
+					}
+				}
+			}
+		}
+
 		if ( isset( $_POST['eael_tnc_active'] ) && empty( $_POST['eael_accept_tnc'] ) ) {
 			$errors['terms_conditions'] =  isset( $settings['err_tc'] ) ? $settings['err_tc'] : __( 'You did not accept the Terms and Conditions. Please accept it and try again.', 'essential-addons-for-elementor-lite' );
 		}
 		if ( isset( $_POST['g-recaptcha-enabled'] ) && ! $this->lr_validate_recaptcha() ) {
 			$errors['recaptcha'] = isset( $settings['err_recaptcha'] ) ? $settings['err_recaptcha'] : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
+		}
+
+		if ( !empty( $_POST['eael_phone_number'] ) && ! $this->eael_is_phone( sanitize_text_field( $_POST['eael_phone_number'] )) ) {
+			$errors['eael_phone_number'] =  isset( $settings['err_phone_number_invalid'] ) ? $settings['err_phone_number_invalid'] : __( 'Invalid phone number provided', 'essential-addons-for-elementor-lite' );
 		}
 
 		if ( ! empty( $_POST['email'] ) && is_email( $_POST['email'] ) ) {
@@ -346,6 +369,7 @@ trait Login_Registration {
 		self::$email_options['lastname']            = '';
 		self::$email_options['website']             = '';
 		self::$email_options['password_reset_link'] = '';
+		self::$email_options['eael_phone_number'] = '';
 
 		// handle registration...
 		$user_data = [
@@ -362,6 +386,10 @@ trait Login_Registration {
 		}
 		if ( ! empty( $_POST['website'] ) ) {
 			$user_data['user_url'] = self::$email_options['website'] = esc_url_raw( $_POST['website'] );
+		}
+
+		if ( ! empty( $_POST['eael_phone_number'] ) ) {
+			$user_data['eael_phone_number'] = self::$email_options['eael_phone_number'] = sanitize_text_field( $_POST['eael_phone_number'] );
 		}
 
 		$register_actions    = [];
@@ -418,6 +446,10 @@ trait Login_Registration {
         }
 
 		$user_id = wp_insert_user( $user_data );
+
+		if ( ! empty( $user_data['eael_phone_number'] ) ) {
+			update_user_meta( $user_id, 'eael_phone_number', $user_data['eael_phone_number'] );
+		}
 
 		do_action( 'eael/login-register/after-insert-user', $user_id, $user_data );
 
@@ -766,6 +798,60 @@ trait Login_Registration {
     {
         delete_option('eael_register_success_' . $widget_id);
         delete_option('eael_register_errors_' . $widget_id);
+	}
+
+	/**
+	 * Add extra custom fields on user profile (e.x. edit page and Registration form).
+	 * @param \WP_User $user
+	 * 
+	 * @since 5.1.4
+	 */
+	public function eael_extra_user_profile_fields( $user ){ ?>
+		<h3><?php _e("EA Login | Register Form", "blank"); ?></h3>
+
+		<table class="form-table">
+		<tr>
+			<th><label for="eael_phone_number"><?php _e("Phone"); ?></label></th>
+			<td>
+				<input type="text" name="eael_phone_number" id="eael_phone_number" value="<?php echo esc_attr( get_the_author_meta( 'eael_phone_number', $user->ID ) ); ?>" class="regular-text" /><br />
+				<p class="description"><?php esc_html_e("Please enter your phone number."); ?></p>
+			</td>
+		</tr>
+		</table>
+	<?php }
+
+	/**
+	 * Save extra custom fields of user profile
+	 * @param int $user_id
+	 * 
+	 * @since 5.1.4
+	 */
+	public function eael_save_extra_user_profile_fields( $user_id ){
+		if ( empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'update-user_' . $user_id ) ) {
+			return;
+		}
+
+		if ( !current_user_can( 'edit_user', $user_id ) ) { 
+			return false; 
+		}
+		update_user_meta( $user_id, 'eael_phone_number', $_POST['eael_phone_number'] );
+	}
+
+	public function eael_is_phone($phone){
+		if ( 0 < strlen( trim( preg_replace( '/[\s\#0-9_\-\+\/\(\)\.]/', '', $phone ) ) ) ) {
+			return false;
+		}
+
+		if( strlen( str_replace(['+', '00', ' ', '(', ')', '-', '.', '_', '/'], '', $phone) ) === 0 ) {
+			return false;
+		}
+
+		//Phone number length can't be more than 15
+		if( strlen( str_replace(['+', '00', ' ', '(', ')', '-', '.', '_', '/'], '', $phone) ) > 15 ) {
+			return false;
+		}
+
+		return true;
 	}
 
 }
