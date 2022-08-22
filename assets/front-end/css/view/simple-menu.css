@@ -102,7 +102,7 @@
   width: 28px;
   height: 28px;
   display: block;
-  border: 1px solid #ffffff80;
+  border: 1px solid rgba(255, 255, 255, 0.5019607843);
   border-radius: 2px;
   text-align: center;
   cursor: pointer;
@@ -150,8 +150,8 @@
   visibility: hidden;
   opacity: 0;
   background-color: #ffffff;
-  -webkit-box-shadow: 1px 1px 5px #0000001a;
-          box-shadow: 1px 1px 5px #0000001a;
+  -webkit-box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1019607843);
+          box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1019607843);
   z-index: 1;
 }
 .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li {
@@ -260,7 +260,7 @@
     display: block;
   }
   .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li .eael-simple-menu-indicator {
-    border: 1px solid #00000080;
+    border: 1px solid rgba(0, 0, 0, 0.5019607843);
   }
   .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li .eael-simple-menu-indicator:before {
     color: #000000;
@@ -298,7 +298,7 @@
   border-bottom-width: 0;
 }
 .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li .eael-simple-menu-indicator {
-  border: 1px solid #00000080;
+  border: 1px solid rgba(0, 0, 0, 0.5019607843);
 }
 .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li .eael-simple-menu-indicator:before {
   color: #000000;

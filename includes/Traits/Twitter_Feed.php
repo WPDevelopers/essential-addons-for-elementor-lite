@@ -2,6 +2,8 @@
 
 namespace Essential_Addons_Elementor\Traits;
 
+use function Better_Payment\Lite\Classes\better_payment_dd;
+
 if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
@@ -60,6 +62,10 @@ trait Twitter_Feed
                 ],
             ]);
 
+	        if ( is_wp_error( $response ) ) {
+		        return $html;
+	        }
+
 	        if ( ! empty( $response['response'] ) && $response['response']['code'] == 200 ) {
 		        $items      = json_decode( wp_remote_retrieve_body( $response ), true );
 		        set_transient( $cache_key, $items, $expiration );
@@ -91,6 +97,13 @@ trait Twitter_Feed
         $items = array_splice($items, 0, $settings['eael_twitter_feed_post_limit']);
 
         foreach ($items as $item) {
+            $is_reply = !empty($item['in_reply_to_status_id']) ? true : false;
+            $show_reply = ( !empty($settings['eael_twitter_feed_show_replies']) && 'true' === $settings['eael_twitter_feed_show_replies'] ) ? true : false;
+
+            if($is_reply && !$show_reply){
+                continue;
+            }
+
             $delimeter = strlen($item['full_text']) > $settings['eael_twitter_feed_content_length'] ? '...' : '';
 
 	        $media = isset( $item['extended_entities']['media'] ) ? $item['extended_entities']['media'] :
@@ -106,14 +119,14 @@ trait Twitter_Feed
                                 <img src="' . $item['user']['profile_image_url_https'] . '">
                             </a>';
                         }
-                        
+
                         $html .= '<a class="eael-twitter-feed-item-meta" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">';
                             if ($settings['eael_twitter_feed_show_icon'] == 'true') {
                                 $html .= '<i class="fab fa-twitter eael-twitter-feed-item-icon"></i>';
                             }
                             $html .= '<span class="eael-twitter-feed-item-author">' . $item['user']['name'] . '</span>
                         </a>';
-            
+
                         if ($settings['eael_twitter_feed_show_date'] == 'true') {
                             $html .= '<span class="eael-twitter-feed-item-date">' . sprintf(__('%s ago', 'essential-addons-for-elementor-lite'), human_time_diff(strtotime($item['created_at']))) . '</span>';
                         }
