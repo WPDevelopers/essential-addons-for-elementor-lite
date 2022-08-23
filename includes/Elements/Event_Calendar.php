@@ -320,7 +320,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_event_google_api_key',
             [
-                'label' => __('APi Key', 'essential-addons-for-elementor-lite'),
+                'label' => __('API Key', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
                 'description' => sprintf(__('<a href="https://essential-addons.com/elementor/docs/google-api-key/" class="eael-btn" target="_blank">%s</a>',
