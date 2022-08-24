@@ -6,13 +6,25 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-07-28 05:16+0000\n"
+"POT-Creation-Date: 2022-08-16 12:44+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../includes/Classes/Asset_Builder.php:365
+msgid "Added "
+msgstr ""
+
+#: ../includes/Classes/Asset_Builder.php:366, ../includes/Traits/Woo_Product_Comparable.php:2112
+msgid "Compare"
+msgstr ""
+
+#: ../includes/Classes/Asset_Builder.php:367
+msgid "Loading..."
+msgstr ""
 
 #: ../includes/Classes/Helper.php:205, ../includes/Elements/Adv_Accordion.php:397, ../includes/Elements/Adv_Tabs.php:333, ../includes/Elements/Contact_Form_7.php:270, ../includes/Elements/Content_Ticker.php:306, ../includes/Elements/Countdown.php:467, ../includes/Elements/Creative_Button.php:188, ../includes/Elements/Cta_Box.php:397, ../includes/Elements/Data_Table.php:482, ../includes/Elements/Dual_Color_Header.php:214, ../includes/Elements/Fancy_Text.php:269, ../includes/Elements/Filterable_Gallery.php:797, ../includes/Elements/Flip_Box.php:733, ../includes/Elements/Info_Box.php:493, ../includes/Elements/Login_Register.php:1041, ../includes/Elements/Pricing_Table.php:702, ../includes/Elements/Progress_Bar.php:271, ../includes/Elements/Team_Member.php:237, ../includes/Elements/Testimonial.php:214, ../includes/Elements/Tooltip.php:513, ../includes/Elements/Twitter_Feed.php:349, ../includes/Elements/WeForms.php:110
 msgid "Go Premium for More Features"
@@ -62,7 +74,7 @@ msgstr ""
 msgid "Install Now!"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:188, ../includes/Classes/WPDeveloper_Setup_Wizard.php:517, ../includes/Classes/WPDeveloper_Setup_Wizard.php:543, ../includes/Traits/Ajax_Handler.php:799, ../includes/Traits/Ajax_Handler.php:906, ../includes/Traits/Ajax_Handler.php:927, ../includes/Traits/Ajax_Handler.php:944, ../includes/Traits/Helper.php:307
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:188, ../includes/Classes/WPDeveloper_Setup_Wizard.php:517, ../includes/Classes/WPDeveloper_Setup_Wizard.php:543, ../includes/Traits/Ajax_Handler.php:799, ../includes/Traits/Ajax_Handler.php:906, ../includes/Traits/Ajax_Handler.php:933, ../includes/Traits/Ajax_Handler.php:950, ../includes/Traits/Helper.php:307
 msgid "you are not allowed to do this action"
 msgstr ""
 
@@ -8346,18 +8358,6 @@ msgstr ""
 
 #: ../includes/Traits/Elements.php:319
 msgid "Advanced Search"
-msgstr ""
-
-#: ../includes/Traits/Enqueue.php:150
-msgid "Added "
-msgstr ""
-
-#: ../includes/Traits/Enqueue.php:151, ../includes/Traits/Woo_Product_Comparable.php:2112
-msgid "Compare"
-msgstr ""
-
-#: ../includes/Traits/Enqueue.php:152
-msgid "Loading..."
 msgstr ""
 
 #: ../includes/Traits/Facebook_Feed.php:31
