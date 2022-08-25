@@ -164,58 +164,72 @@
     color: #37474f;
     border-color: #37474f;
 }
-.eael-creative-button--tamaya::before,
-.eael-creative-button--tamaya::after {
-    content: attr(data-text);
+.eael-creative-button--tamaya-before,
+.eael-creative-button--tamaya-after {
     position: absolute;
     width: 100%;
-    height: 50%;
     left: 0;
-    background: #7986cb;
+    background: transparent;
     color: #fff;
     overflow: hidden;
-    -webkit-transition: -webkit-transform 0.3s;
     transition: transform 0.3s;
-    -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-    transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
-.eael-creative-button--tamaya.button--inverted::before,
-.eael-creative-button--tamaya.button--inverted::after {
-    background: #fff;
-    color: #37474f;
+.eael-creative-button--tamaya.button--inverted {
+    .eael-creative-button--tamaya-before,
+    .eael-creative-button--tamaya-after {
+        background: #fff;
+        color: #37474f;
+    }
 }
-.eael-creative-button--tamaya::before {
-    height: 56%;
-    top: 0;
-    padding-top: 1em;
+.eael-creative-button--tamaya {
+
+    .eael-creative-button--tamaya-before {
+        bottom: 50%;
+        span {
+            transform: translateY(50%);
+            display: block;
+            opacity: 1 !important;
+        }
+    }
+    .eael-creative-button--tamaya-after {
+        top: 50%;
+        span {
+            transform: translateY(-50%);
+            display: block;
+            opacity: 1 !important;
+        }
+    }
+    span{
+        display: block;
+        transform: scale3d(0.2, 0.2, 1);
+        opacity: 0;
+        transition: transform 0.3s, opacity 0.3s;
+        transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+    }
 }
-.eael-creative-button--tamaya::after {
-    bottom: 0;
-    line-height: 0;
+.eael-creative-button--tamaya:hover {
+    .eael-creative-button--tamaya-before{
+        transform: translate3d(0, -100%, 0);
+    }
+
+    .eael-creative-button--tamaya-after{
+        transform: translate3d(0, 100%, 0);
+    }
 }
-.eael-creative-button--tamaya span {
-    display: block;
-    -webkit-transform: scale3d(0.2, 0.2, 1);
-    transform: scale3d(0.2, 0.2, 1);
-    opacity: 0;
-    -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
-    transition: transform 0.3s, opacity 0.3s;
-    -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-    transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-.eael-creative-button--tamaya:hover::before {
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-}
-.eael-creative-button--tamaya:hover::after {
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-}
-.eael-creative-button--tamaya:hover span {
-    opacity: 1;
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-    content: 'Bangladesh';
+.eael-creative-button--tamaya:hover {
+    .eael-creative-button--tamaya-before {
+        bottom: 50%;
+        transform: translateY(-750%);
+    }
+    .eael-creative-button--tamaya-after {
+        top: 50%;
+        transform: translateY(750%);
+    }
+    span{
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+        content: 'Bangladesh';
+    }
 }
 
 /*--- Rayen ---*/
