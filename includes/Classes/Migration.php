@@ -92,7 +92,8 @@ class Migration
 	    if ( $results > 0 ) {
 		    $deletiation_sql = "delete options_tb " . $sql;
 		    $wpdb->query( $deletiation_sql );
-		    update_option( 'eael_reduce_op_table_data', 1 );
 	    }
+
+	    update_option( 'eael_reduce_op_table_data', 1 );
     }
 }
