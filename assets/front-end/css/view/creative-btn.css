@@ -84,10 +84,18 @@
   transform: translate3d(0, 0, 0);
 }
 
+.eael-creative-button--winona:hover .eael-creative-button-icon-left,
+.eael-creative-button--winona:hover .eael-creative-button-icon-right {
+  opacity: 1;
+}
+
 .eael-creative-button--winona:hover > .creative-button-inner {
-  opacity: 0;
   -webkit-transform: translate3d(0, -25%, 0);
   transform: translate3d(0, 0%, 0);
+}
+
+.eael-creative-button--winona:hover .cretive-button-text {
+  opacity: 0;
 }
 
 /*--- Ujarak ---*/
