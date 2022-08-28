@@ -4914,12 +4914,41 @@ class Login_Register extends Widget_Base {
 	protected function print_reset_password_form(){
 		$default_hide_class = ( 'register' === $this->default_form || 'login' === $this->default_form || 'lostpassword' === $this->default_form || isset($_GET['eael-register']) || isset($_GET['eael-lostpassword']) ) && !isset($_GET['eael-resetpassword']) ? 'eael-lr-d-none' : '';
 		$default_hide_class = $this->should_print_resetpassword_form_editor ? '' : $default_hide_class;
-		
+		$rp_page_url = get_permalink( $this->page_id ); 
+
 		if ( $this->should_print_resetpassword_form_editor || ( ! empty( $_GET['eael-resetpassword'] ) ) ) {
-			$rp_data = array();
-			if( ! $this->should_print_resetpassword_form_editor ){
-				$rp_data = $this->eael_redirect_reset_password_when_expired();
+			$rp_data = get_option('eael_resetpassword_rp_data_' . $this->get_id());
+			$show_resetpassword_on_form_submit = get_option('eael_show_reset_password_on_form_submit_' . $this->get_id());
+			
+			$validation_required = true;
+			if( $this->should_print_resetpassword_form_editor || $show_resetpassword_on_form_submit ){
+				$validation_required = false;
 			}
+
+			$rp_data = !empty( $rp_data ) ? maybe_unserialize($rp_data) : [];
+			
+			if( $validation_required ){
+				$rp_data['rp_key'] = ! empty( $rp_data['rp_key'] ) ? $rp_data['rp_key'] : '';
+				$rp_data['rp_login'] = ! empty( $rp_data['rp_login'] ) ? $rp_data['rp_login'] : '';
+
+				$user = check_password_reset_key( $rp_data['rp_key'], $rp_data['rp_login'] );
+
+				if ( empty( $rp_data['rp_key'] ) || ! $user || is_wp_error( $user ) ) {
+					$rp_err_msg = ! empty( $this->ds['err_reset_password_key_expired'] ) ? $this->ds['err_reset_password_key_expired'] : __( 'Your password reset link appears to be invalid. Please request a new link.', 'essential-addons-for-elementor-lite' );
+					update_option( 'eael_lostpassword_error_' . esc_attr( $this->get_id() ), $rp_err_msg, false );
+		
+					wp_redirect( $rp_page_url . '?eael-lostpassword=1&error=expiredkey' );
+					exit;
+				}
+				
+				delete_option('eael_resetpassword_rp_data_' . esc_attr( $this->get_id() ) );
+			}
+
+			if( $show_resetpassword_on_form_submit ){
+				delete_option('eael_resetpassword_rp_data_' . esc_attr( $this->get_id() ) );
+			}
+			
+			delete_option('eael_show_reset_password_on_form_submit_' . $this->get_id());
 
 			// lost password form fields related
 			$label_type      = ! empty( $this->ds['resetpassword_label_types'] ) ? $this->ds['resetpassword_label_types'] : 'default';
@@ -4995,6 +5024,7 @@ class Login_Register extends Widget_Base {
 
 							<div class="eael-lr-footer">
 								<input type="hidden" name="rp_key" value="<?php echo esc_attr( !empty( $rp_data['rp_key'] ) ? $rp_data['rp_key'] : '' ); ?>" />
+								<input type="hidden" name="rp_login" value="<?php echo esc_attr( !empty( $rp_data['rp_login'] ) ? $rp_data['rp_login'] : '' ); ?>" />
 
 								<input type="submit"
 									   name="eael-resetpassword-submit"
@@ -5162,7 +5192,9 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_lostpassword_validation_errors() {
-		$error_key = 'eael_lostpassword_error_' . $this->get_id();
+		$error_key = 'eael_lostpassword_error_' . esc_attr( $this->get_id() );
+		$success_key = 'eael_lostpassword_success_' . esc_attr( $this->get_id() );
+		
 		if ( $lostpassword_error = apply_filters( 'eael/login-register/lostpassword-error-message', get_option( $error_key ) ) ) {
 			do_action( 'eael/login-register/before-showing-lostpassword-error', $lostpassword_error, $this );
 			?>
@@ -5173,6 +5205,18 @@ class Login_Register extends Widget_Base {
 			do_action( 'eael/login-register/after-showing-login-error', $lostpassword_error, $this );
 
 			delete_option( $error_key );
+		}
+
+		if ( $lostpassword_success = apply_filters( 'eael/login-register/lostpassword-success-message', get_option( $success_key ) ) ) {
+			do_action( 'eael/login-register/before-showing-lostpassword-success', $lostpassword_success, $this );
+			?>
+            <p class="eael-form-msg valid">
+				<?php echo esc_html( $lostpassword_success ); ?>
+            </p>
+			<?php
+			do_action( 'eael/login-register/after-showing-login-success', $lostpassword_success, $this );
+
+			delete_option( $success_key );
 		}
 	}
 
