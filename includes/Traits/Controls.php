@@ -617,7 +617,7 @@ trait Controls
                 $wb->add_control(
                     'content_timeline_layout',
                     [
-                        'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+                        'label' => esc_html__('Position', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::SELECT,
                         'default' => 'center',
                         'options' => [
@@ -634,12 +634,12 @@ trait Controls
                 $wb->add_control(
                     'content_timeline_layout_horizontal',
                     [
-                        'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+                        'label' => esc_html__('Position', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::SELECT,
                         'default' => 'middle',
                         'options' => [
                             'top' => esc_html__('Top', 'essential-addons-for-elementor-lite'),
-                            'middle' => esc_html__('Middle', 'essential-addons-for-elementor-lite'),
+                            'middle' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
                             'bottom' => esc_html__('Bottom', 'essential-addons-for-elementor-lite'),
                         ],
                         'condition' => [
@@ -670,7 +670,7 @@ trait Controls
                     [
                         'label' => esc_html__('Date Position', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::SELECT,
-                        'default' => 'inside',
+                        'default' => 'outside',
                         'options' => [
                             'inside' => esc_html__('Inside', 'essential-addons-for-elementor-lite'),
                             'outside' => esc_html__('Outside', 'essential-addons-for-elementor-lite'),
