@@ -304,8 +304,8 @@ trait Core
             return;
         }
 
-	    if ( !defined( 'ELEMENTOR_VERSION' ) ) {
-	    	return false;
+	    if ( ! $this->is_activate_elementor() ) {
+		    return false;
 	    }
 
         $document = Plugin::$instance->documents->get($post_id, false);
