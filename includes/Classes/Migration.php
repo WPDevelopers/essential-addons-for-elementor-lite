@@ -66,5 +66,34 @@ class Migration
             // update plugin version
             update_option('eael_version', EAEL_PLUGIN_VERSION);
         }
+
+        $this->reduce_options_data();
+    }
+
+
+    private function reduce_options_data(){
+
+	    $status = get_option( 'eael_reduce_op_table_data' );
+	    if ( $status || wp_doing_ajax()  ) {
+		    return false;
+	    }
+
+	    global $wpdb;
+	    $sql           = "from {$wpdb->options} as options_tb 
+                inner join (SELECT option_id FROM {$wpdb->options} 
+                WHERE ((option_name like '%\_eael_elements' and LENGTH(option_name) = 23 ) 
+                           or (option_name like '%\_eael_custom_js' and LENGTH(option_name) = 24)
+                           or (option_name like '%\_eael_updated_at' and LENGTH(option_name) = 25))
+                  ) AS options_tb2 
+                    ON options_tb2.option_id = options_tb.option_id";
+	    $selection_sql = "select count(options_tb.option_id) as total " . $sql;
+
+	    $results       = $wpdb->get_var( $selection_sql );
+	    if ( $results > 0 ) {
+		    $deletiation_sql = "delete options_tb " . $sql;
+		    $wpdb->query( $deletiation_sql );
+	    }
+
+	    update_option( 'eael_reduce_op_table_data', 1 );
     }
 }
