@@ -115,15 +115,13 @@ class Bootstrap
             $this->start_plugin_tracking();
         }
 
-	    $this->eael_job_init();
-
         // register extensions
         $this->register_extensions();
 
         // register hooks
         $this->register_hooks();
 
-	    if ( defined( 'ELEMENTOR_VERSION' ) ) {
+	    if ( $this->is_activate_elementor() ) {
 		    new Asset_Builder( $this->registered_elements, $this->registered_extensions );
 	    }
 
