@@ -24,6 +24,10 @@
   display: -ms-flexbox;
   display: flex;
 }
+.eael-button-wrap.eael-force-hide,
+.eael-load-more-button-wrap.eael-force-hide {
+  display: none !important;
+}
 .eael-button,
 .eael-load-more-button {
   display: -webkit-box !important;
