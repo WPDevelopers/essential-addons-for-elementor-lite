@@ -869,6 +869,21 @@
     }
 }
 
+.theme-astra {
+    .eael-product-grid,
+    .eael-post-grid {
+        &.list ,&.grid {
+            .woocommerce {
+                ul.products {
+                    li.product {
+                        width: 100% !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
 // product compare
 .eael-wcpc-modal {
     position: fixed;
