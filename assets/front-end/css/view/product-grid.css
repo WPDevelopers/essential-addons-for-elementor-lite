@@ -1341,6 +1341,11 @@
   margin: 0;
   padding: 0;
 }
+.theme-astra .eael-product-grid.list .woocommerce ul.products li.product, .theme-astra .eael-product-grid.grid .woocommerce ul.products li.product,
+.theme-astra .eael-post-grid.list .woocommerce ul.products li.product,
+.theme-astra .eael-post-grid.grid .woocommerce ul.products li.product {
+  width: 100% !important;
+}
 .eael-wcpc-modal {
   position: fixed;
   top: 50px;
