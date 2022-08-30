@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 5.2.1
+Stable tag: 5.2.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -241,6 +241,22 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.2.4 - 29/08/2022 =
+
+- Fixed: EA Woo Product Grid CSS not Loading with Astra Theme in some cases
+- Few minor bug fixes & improvements
+
+= 5.2.3 - 18/08/2022 =
+
+- Fixed: Elementor PRO Header & Footer not showing in some themes
+- Few minor bug fixes & improvements
+
+= 5.2.2 - 17/08/2022 =
+
+- Fixed: Widgets with Links being underlined when Hello Elementor theme is active
+- Fixed: Custom JS not working inside Elementor Header, Footer & Popup
+- Few minor bug fixes & improvements
 
 
 = 5.2.1 - 14/08/2022 =
