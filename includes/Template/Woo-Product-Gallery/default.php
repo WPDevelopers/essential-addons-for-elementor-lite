@@ -48,11 +48,21 @@ $quick_view_setting = [
 	'page_id' => $settings['eael_page_id'],
 ];
 
+$show_secondary_image = isset( $settings['eael_product_gallery_show_secondary_image'] ) && 'yes' === $settings['eael_product_gallery_show_secondary_image'];
+$image_sources = [
+    'src' => '',
+    'src_hover' => ''
+];
 //if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
 
     if ( $gallery_style_preset == 'eael-product-preset-4' ) { ?>
         <li class="product">
-            <div class="eael-product-wrap">
+            <?php 
+            if($show_secondary_image){
+                $image_sources = Helper::eael_get_woo_product_gallery_image_srcs( $product, $settings['eael_product_gallery_image_size_size'] );
+            }
+            ?>
+            <div class="eael-product-wrap" data-src="<?php echo esc_attr( $image_sources['src'] ) ?>" data-src-hover="<?php echo esc_attr( $image_sources['src_hover'] ) ?>" >
 	        <?php
 	        echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'. $stockout_text .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . $sale_text . '</span>' : '') );
 
@@ -84,8 +94,14 @@ $quick_view_setting = [
     } else if (($gallery_style_preset == 'eael-product-preset-3') || ($gallery_style_preset == 'eael-product-preset-2')) {
         ?>
         <li <?php post_class( 'product' ); ?>>
-            <div class="eael-product-wrap">
-                <div class="product-image-wrap">
+            <?php 
+            if( $show_secondary_image ){
+                $image_sources = Helper::eael_get_woo_product_gallery_image_srcs( $product, $settings['eael_product_gallery_image_size_size'] );
+            }
+            
+            ?>
+            <div class="eael-product-wrap" data-src="<?php echo esc_attr( $image_sources['src'] ) ?>" data-src-hover="<?php echo esc_attr( $image_sources['src_hover'] ) ?>" >    
+            <div class="product-image-wrap">
                     <div class="image-wrap">
 	                    <?php if( $should_print_image_clickable ) {
 		                    echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
@@ -165,7 +181,12 @@ $quick_view_setting = [
     } else if ($gallery_style_preset == 'eael-product-preset-1') {
         ?>
         <li <?php post_class( 'product' ); ?>>
-            <div class="eael-product-wrap">
+            <?php 
+            if( $show_secondary_image ){
+                $image_sources = Helper::eael_get_woo_product_gallery_image_srcs( $product, $settings['eael_product_gallery_image_size_size'] );
+            }
+            ?>
+            <div class="eael-product-wrap" data-src="<?php echo esc_attr( $image_sources['src'] ) ?>" data-src-hover="<?php echo esc_attr( $image_sources['src_hover'] ) ?>" >
                 <div class="product-image-wrap">
                     <div class="image-wrap">
                         <?php if( $should_print_image_clickable ) {

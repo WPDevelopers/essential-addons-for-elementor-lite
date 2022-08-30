@@ -481,6 +481,19 @@ class Woo_Product_Gallery extends Widget_Base {
 		] );
 
 		$this->add_control(
+			'eael_product_gallery_show_secondary_image',
+			[
+				'label'        => __( 'Show Secondary Image on Hover', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => 'no',
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'description'  => __( 'Enable to show a secondary image from the product gallery on hover.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
 			'eael_product_gallery_price',
 			[
 				'label'        => esc_html__( 'Show Product Price?', 'essential-addons-for-elementor-lite' ),
@@ -2377,8 +2390,10 @@ class Woo_Product_Gallery extends Widget_Base {
 						$found_posts      = $query->found_posts;
 						$max_page         = ceil( $found_posts / absint( $args['posts_per_page'] ) );
 						$args['max_page'] = $max_page;
+						
+						$show_secondary_image = isset( $settings['eael_product_gallery_show_secondary_image'] ) && 'yes' === $settings['eael_product_gallery_show_secondary_image'];
 
-						echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="' . $settings[ "eael_product_gallery_items_layout" ] . '">';
+						echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="' . $settings[ "eael_product_gallery_items_layout" ] . '" data-show-secondary-image="' . intval($show_secondary_image) . '" >';
 						while ( $query->have_posts() ) {
 							$query->the_post();
 							include( $template );
