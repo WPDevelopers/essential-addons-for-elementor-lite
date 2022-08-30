@@ -11,6 +11,10 @@
 .eael-button-wrap,
 .eael-load-more-button-wrap {
 	display: flex;
+
+	&.eael-force-hide {
+		display: none !important;
+	}
 }
 
 .eael-button,
