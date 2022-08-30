@@ -34,6 +34,40 @@ class Helper
 	];
 
     /**
+     * It stores all faqs data for all ea elements
+     * @since 5.1.9
+     */
+    public static $eael_advanced_accordion_faq = [];
+    
+    /**
+     * Returns all the faqs in one instance
+     *
+     * @since 5.1.9
+     * @return array
+     */
+    public static function get_eael_advanced_accordion_faq(){
+        $json = [];
+        if( count( self::$eael_advanced_accordion_faq ) ) {
+            $json = [
+                '@context' => 'https://schema.org',
+                '@type' => 'FAQPage',
+                'mainEntity' => self::$eael_advanced_accordion_faq,
+            ];
+        }
+        
+        return $json;
+    }
+
+    /**
+     * Adds faq to the faq list
+     * @since 5.1.9
+     * @param array $faq single faq data - question and answer
+     */
+    public static function set_eael_advanced_accordion_faq( $faq ){
+        return self::$eael_advanced_accordion_faq[] = $faq;
+    }
+
+    /**
      * Include a file with variables
      *
      * @param $file_path

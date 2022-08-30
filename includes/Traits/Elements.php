@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
 
 use Elementor\Icons_Manager;
 use \Elementor\Plugin;
+use Essential_Addons_Elementor\Classes\Helper;
 
 trait Elements
 {
@@ -852,5 +853,20 @@ trait Elements
     public function get_extensions_value($key = '')
     {
         return isset($this->extensions_data[$key]) ? $this->extensions_data[$key] : '';
+    }
+
+    /**
+     * Single instance for all advanced accordion faqs
+     *
+     * @return void
+     */
+    public function render_advanced_accordion_global_faq(){
+        if( count( Helper::get_eael_advanced_accordion_faq() )) : ?>
+            <!-- EA FAQ Schema : Starts-->
+            <script type="application/ld+json">
+                <?php echo json_encode( Helper::get_eael_advanced_accordion_faq() ); ?>
+            </script>
+            <!-- EA FAQ Schema : Ends-->
+        <?php endif;
     }
 }
