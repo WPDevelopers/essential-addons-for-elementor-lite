@@ -851,8 +851,8 @@ $config = [
         'crowdfundly-organization' => [
 	        'class' => '\Essential_Addons_Elementor\Elements\Crowdfundly_Organization',
 	        'condition' => [
-		        'class_exists',
-		        'Crowdfundly',
+		        'defined',
+		        'CROWDFUNDLY_VERSION',
 		        true,
 	        ],
         ],
@@ -860,8 +860,8 @@ $config = [
         'crowdfundly-all-campaign' => [
 	        'class' => '\Essential_Addons_Elementor\Elements\Crowdfundly_All_Campaign',
 	        'condition' => [
-		        'class_exists',
-		        'Crowdfundly',
+		        'defined',
+		        'CROWDFUNDLY_VERSION',
 		        true,
 	        ],
         ],
@@ -869,8 +869,8 @@ $config = [
         'crowdfundly-single-campaign' => [
 	        'class' => '\Essential_Addons_Elementor\Elements\Crowdfundly_Single_Campaign',
 	        'condition' => [
-		        'class_exists',
-		        'Crowdfundly',
+		        'defined',
+		        'CROWDFUNDLY_VERSION',
 		        true,
 	        ],
         ],
