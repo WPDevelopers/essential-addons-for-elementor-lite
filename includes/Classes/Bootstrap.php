@@ -115,8 +115,6 @@ class Bootstrap
             $this->start_plugin_tracking();
         }
 
-	    $this->eael_job_init();
-
         // register extensions
         $this->register_extensions();
 
