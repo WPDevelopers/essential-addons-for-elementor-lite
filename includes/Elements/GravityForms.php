@@ -2004,6 +2004,7 @@ class GravityForms extends Widget_Base {
                 'selectors'             => [
                     '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'width: {{SIZE}}{{UNIT}}',
                     '{{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]' => 'width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button' => 'width: {{SIZE}}{{UNIT}}'
                 ],
                 'condition'             => [
                     'button_width_type' => 'custom',
@@ -2029,6 +2030,7 @@ class GravityForms extends Widget_Base {
                 'selectors'             => [
                     '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -2042,6 +2044,7 @@ class GravityForms extends Widget_Base {
                 'selectors'             => [
                     '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -2053,7 +2056,7 @@ class GravityForms extends Widget_Base {
 				'label'                 => __( 'Border', 'essential-addons-for-elementor-lite'),
 				'placeholder'           => '1px',
 				'default'               => '1px',
-				'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"], {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]',
+				'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"], {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"], {{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button',
 			]
 		);
 
@@ -2066,6 +2069,7 @@ class GravityForms extends Widget_Base {
 				'selectors'             => [
 					'{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
 			]
 		);
@@ -2079,6 +2083,7 @@ class GravityForms extends Widget_Base {
 				'selectors'             => [
 					'{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                 ],
 			]
 		);
@@ -2099,6 +2104,7 @@ class GravityForms extends Widget_Base {
                 'selectors'             => [
                     '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'margin-top: {{SIZE}}{{UNIT}}',
                     '{{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]' => 'margin-top: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button' => 'margin-top: {{SIZE}}{{UNIT}}'
                 ],
             ]
         );
@@ -2120,7 +2126,8 @@ class GravityForms extends Widget_Base {
                 'default'               => '',
                 'selectors'             => [
                     '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]:hover' => 'background-color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]:hover' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button:hover' => 'background-color: {{VALUE}}'
                 ],
             ]
         );
@@ -2134,6 +2141,7 @@ class GravityForms extends Widget_Base {
                 'selectors'             => [
                     '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]:hover' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]:hover' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button:hover' => 'color: {{VALUE}}'
                 ],
             ]
         );
@@ -2147,6 +2155,7 @@ class GravityForms extends Widget_Base {
                 'selectors'             => [
                     '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]:hover' => 'border-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]:hover' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button:hover' => 'border-color: {{VALUE}}'
                 ],
             ]
         );
@@ -2161,7 +2170,7 @@ class GravityForms extends Widget_Base {
                 'name'                  => 'button_typography',
                 'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
                 'scheme'                => Typography::TYPOGRAPHY_4,
-                'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"], {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]',
+                'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"], {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"],{{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button:hover',
 				'separator'             => 'before',
             ]
         );
@@ -2170,7 +2179,7 @@ class GravityForms extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'                  => 'button_box_shadow',
-				'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"], {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]',
+				'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"], {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"],{{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button:hover',
 				'separator'             => 'before',
 			]
 		);
