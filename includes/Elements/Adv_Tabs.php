@@ -1053,8 +1053,8 @@ class Adv_Tabs extends Widget_Base
 				        <?php if ('content' == $tab['eael_adv_tabs_text_type']) : ?>
 					        <?php echo do_shortcode($tab['eael_adv_tabs_tab_content']); ?>
 				        <?php elseif ('template' == $tab['eael_adv_tabs_text_type']) : ?>
-					        <?php if (!empty($tab['eael_primary_templates'])) {
-						        echo Plugin::$instance->frontend->get_builder_content($tab['eael_primary_templates'], true);
+					        <?php if ( ! empty( $tab['eael_primary_templates'] ) ) {
+						        echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'] );
 					        } ?>
 				        <?php endif; ?>
                     </div>
