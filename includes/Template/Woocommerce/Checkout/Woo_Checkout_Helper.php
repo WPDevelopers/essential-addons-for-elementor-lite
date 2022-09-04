@@ -379,6 +379,9 @@ trait Woo_Checkout_Helper {
 		<?php do_action('woocommerce_checkout_after_order_review'); ?>
 	<?php }
 
+	public function remove_woocommerce_display_recurring_totals( $settings ){
+		remove_action('woocommerce_review_order_after_order_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals' ), 10);
+	}
 	/**
 	 * Show the order review.
 	 */
