@@ -595,6 +595,20 @@ trait Login_Registration {
 
 		$widget_id = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( $_POST['widget_id'] ) : '';
 
+		if( $_POST['eael-user-lostpassword'] != wp_strip_all_tags( $_POST['eael-user-lostpassword'] ) ){
+			// contains html tag
+			$err_msg = esc_html__( 'There is no account with that username or email address.', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
+
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                wp_safe_redirect($_SERVER['HTTP_REFERER']);
+                exit();
+            }
+		}
+
 		$user_login = ! empty( $_POST['eael-user-lostpassword'] ) ? sanitize_text_field( $_POST['eael-user-lostpassword'] ) : '';
 		if ( is_email( $user_login ) ) {
 			$user_login = sanitize_email( $user_login );
@@ -633,6 +647,8 @@ trait Login_Registration {
 		if ( is_wp_error( $results ) ) {
 			$err_msg = '';
 			if ( isset( $results->errors['invalidcombo'][0] ) ) {
+				$err_msg = esc_html__( 'There is no account with that username or email address.', 'essential-addons-for-elementor-lite' );
+			}else if( isset( $results->errors ) && count( $results->errors ) ) {
 				$err_msg = esc_html__( 'There is no account with that username or email address.', 'essential-addons-for-elementor-lite' );
 			}
 
