@@ -608,7 +608,7 @@ trait Login_Registration {
 			self::$email_options_lostpassword['subject'] = __( wp_strip_all_tags( $settings['lostpassword_email_subject'] ), 'essential-addons-for-elementor-lite' );
 		}
 		if ( isset( $settings['lostpassword_email_message'] ) ) {
-			self::$email_options_lostpassword['message'] = __( wp_strip_all_tags( $settings['lostpassword_email_message'] ), 'essential-addons-for-elementor-lite' );
+			self::$email_options_lostpassword['message'] = __( $settings['lostpassword_email_message'], 'essential-addons-for-elementor-lite' );
 		}
 		if ( isset( $settings['lostpassword_email_content_type'] ) ) {
 			self::$email_options_lostpassword['headers'] = 'Content-Type: text/' . wp_strip_all_tags( $settings['lostpassword_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
@@ -909,11 +909,12 @@ trait Login_Registration {
 			}
 
 			if( is_object($user_data) ) {
+				$user_meta = get_user_meta( $user_data->ID );
 				self::$email_options_lostpassword['username'] = $user_login;
-				self::$email_options_lostpassword['firstname'] = $user_data->first_name;
-				self::$email_options_lostpassword['lastname'] = $user_data->last_name;
-				self::$email_options_lostpassword['email'] = $user_data->email;
-				self::$email_options_lostpassword['website'] = $user_data->website;				
+				self::$email_options_lostpassword['firstname'] = !empty( $user_meta['first_name'][0] ) ? $user_meta['first_name'][0] : '';
+				self::$email_options_lostpassword['lastname'] = !empty( $user_meta['last_name'][0] ) ? $user_meta['last_name'][0] : '';
+				self::$email_options_lostpassword['email'] = $user_data->user_email;
+				self::$email_options_lostpassword['website'] = $user_data->user_url;				
 			}
 			$defaults['message'] = $this->replace_placeholders_lostpassword( self::$email_options_lostpassword['message'] );
 		}
@@ -1150,13 +1151,13 @@ trait Login_Registration {
 	 * @return null|string|string[]
 	 */
 	public function replace_placeholders_lostpassword( $message ) {
-		$password_reset_link = !empty( self::$email_options_lostpassword['password_reset_link'] ) ? '<a href="'.esc_url( self::$email_options_lostpassword['password_reset_link'] ).'">' . esc_url( self::$email_options_lostpassword['password_reset_link'] ) . '</a>' : '';
+		$password_reset_link = !empty( self::$email_options_lostpassword['password_reset_link'] ) ? '<a href="'.esc_url_raw( self::$email_options_lostpassword['password_reset_link'] ).'">' . esc_url_raw( self::$email_options_lostpassword['password_reset_link'] ) . '</a>' : '';
 		$username 		   = !empty( self::$email_options_lostpassword['username'] ) ? self::$email_options_lostpassword['username'] : '';
 		$email 			   = !empty( self::$email_options_lostpassword['email'] ) ? self::$email_options_lostpassword['email'] : '';
 		$firstname 		   = !empty( self::$email_options_lostpassword['firstname'] ) ? self::$email_options_lostpassword['firstname'] : '';
 		$lastname 		   = !empty( self::$email_options_lostpassword['lastname'] ) ? self::$email_options_lostpassword['lastname'] : '';
 		$website 		   = !empty( self::$email_options_lostpassword['website'] ) ? self::$email_options_lostpassword['website'] : '';
-
+		
 		$placeholders = [
 			'/\[password_reset_link\]/',
 			'/\[username\]/',
