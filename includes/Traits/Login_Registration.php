@@ -752,9 +752,9 @@ trait Login_Registration {
 		// Check if password is one or all empty spaces.
 		$errors = [];
 		if ( ! empty( $_POST['eael-pass1'] ) ) {
-			$_POST['eael-pass1'] = trim( $_POST['eael-pass1'] );
+			$post_eael_pass1 = trim( $_POST['eael-pass1'] );
 
-			if ( empty( $_POST['eael-pass1'] ) ) {
+			if ( empty( $post_eael_pass1 ) ) {
 				$errors['password_reset_empty_space'] = isset( $settings['err_pass'] ) ? __( wp_strip_all_tags( $settings['err_pass'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'The password cannot be a space or all spaces.', 'essential-addons-for-elementor-lite' );
 			}
 		} else {
@@ -768,7 +768,7 @@ trait Login_Registration {
 		}
 		
 		// Check if password fields do not match.
-		if ( ! empty( $_POST['eael-pass1'] ) && trim( $_POST['eael-pass2'] ) !== $_POST['eael-pass1'] ) {
+		if ( ! empty( $_POST['eael-pass1'] ) && $_POST['eael-pass2'] !== $_POST['eael-pass1'] ) {
 			$errors['password_reset_mismatch'] = isset( $settings['err_conf_pass'] ) ? __( wp_strip_all_tags( $settings['err_conf_pass'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'The passwords do not match.', 'essential-addons-for-elementor-lite' );
 		}
 
@@ -777,7 +777,7 @@ trait Login_Registration {
 			$user = get_user_by( 'login', $rp_login );
 			
 			if( $user || ! is_wp_error( $user ) ){
-				reset_password( $user, $_POST['eael-pass1'] );
+				reset_password( $user, sanitize_text_field( $_POST['eael-pass1'] ) );
 				$data['message'] = isset( $settings['success_resetpassword'] ) ? __( wp_strip_all_tags( $settings['success_resetpassword'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'Your password has been reset.', 'essential-addons-for-elementor-lite' );
 
 				$error_key = 'eael_resetpassword_error_' . esc_attr( $widget_id );

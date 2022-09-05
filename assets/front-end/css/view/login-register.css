@@ -431,6 +431,12 @@
     opacity: 0.6;
   }
 }
+.eael-lr-form-wrapper .eael-lostpassword-form .eael-lr-btn {
+  width: unset;
+}
+.eael-lr-form-wrapper .eael-resetpassword-form .eael-lr-btn {
+  width: unset;
+}
 .has-illustration .eael-lr-form-wrapper.style-2 {
   width: 100%;
 }
