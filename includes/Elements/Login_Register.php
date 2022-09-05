@@ -948,7 +948,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'resetpassword_label_types', [
-			'label'   => __( 'Labels', 'essential-addons-for-elementor-lite' ),
+			'label'   => __( 'Labels & Placeholders', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SELECT,
 			'options' => [
 				'default' => __( 'Default', 'essential-addons-for-elementor-lite' ),
@@ -969,6 +969,43 @@ class Login_Register extends Widget_Base {
 			'label'       => __( 'Password Label', 'essential-addons-for-elementor-lite' ),
 			'placeholder' => __( 'New Password', 'essential-addons-for-elementor-lite' ),
 			'default'     => __( 'New Password', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'dynamic'     => [ 'active' => true, ],
+			'label_block' => true,
+			'condition'   => [ 'resetpassword_label_types' => 'custom', ],
+		] );
+
+		$this->add_control( 'resetpassword_confirm_password_label', [
+			'label'       => __( 'Confirm Password Label', 'essential-addons-for-elementor-lite' ),
+			'placeholder' => __( 'Confirm New Password', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( 'Confirm New Password', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'dynamic'     => [ 'active' => true, ],
+			'label_block' => true,
+			'condition'   => [ 'resetpassword_label_types' => 'custom', ],
+		] );
+
+		$this->add_control( 'resetpassword_placeholders_heading', [
+			'label'     => esc_html__( 'Placeholders', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'condition' => [ 'resetpassword_label_types' => 'custom', ],
+			'separator' => 'before',
+		] );
+
+		$this->add_control( 'resetpassword_password_placeholder', [
+			'label'       => __( 'Password Placeholder', 'essential-addons-for-elementor-lite' ),
+			'placeholder' => __( 'New Password', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( 'New Password', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'dynamic'     => [ 'active' => true, ],
+			'label_block' => true,
+			'condition'   => [ 'resetpassword_label_types' => 'custom', ],
+		] );
+
+		$this->add_control( 'resetpassword_confirm_password_placeholder', [
+			'label'       => __( 'Confirm Password Placeholder', 'essential-addons-for-elementor-lite' ),
+			'placeholder' => __( 'Confirm New Password', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( 'Confirm New Password', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::TEXT,
 			'dynamic'     => [ 'active' => true, ],
 			'label_block' => true,
@@ -4838,9 +4875,9 @@ class Login_Register extends Widget_Base {
 			$login_atts_lostpassword             = $login_url_lostpassword = '';
 			switch ( $login_link_action_lostpassword ) {
 				case 'custom':
-					$login_url_lostpassword  = ! empty( $this->ds['custom_login_url_lostpassword']['url'] ) ? esc_url_raw( $this->ds['custom_login_url_lostpassword']['url'] ) : '';
-					$login_atts_lostpassword = ! empty( $this->ds['custom_login_url_lostpassword']['is_external'] ) ? ' target="_blank"' : '';
-					$login_atts_lostpassword .= ! empty( $this->ds['custom_login_url_lostpassword']['nofollow'] ) ? ' rel="nofollow"' : '';
+					$login_url_lostpassword  = ! empty( $this->ds['custom_login_url_lostpass']['url'] ) ? esc_url_raw( $this->ds['custom_login_url_lostpass']['url'] ) : '';
+					$login_atts_lostpassword = ! empty( $this->ds['custom_login_url_lostpass']['is_external'] ) ? ' target="_blank"' : '';
+					$login_atts_lostpassword .= ! empty( $this->ds['custom_login_url_lostpass']['nofollow'] ) ? ' rel="nofollow"' : '';
 					break;
 				case 'default':
 					$login_url_lostpassword = wp_login_url();
@@ -4998,10 +5035,18 @@ class Login_Register extends Widget_Base {
 
 			//Default label
 			$password_label = __( 'New Password', 'essential-addons-for-elementor-lite' );
+			$confirm_password_label = __( 'Confirm New Password', 'essential-addons-for-elementor-lite' );
+			
+			$password_placeholder = __( 'New Password', 'essential-addons-for-elementor-lite' );
+			$confirm_password_placeholder = __( 'Confirm New Password', 'essential-addons-for-elementor-lite' );
 			
 			// custom label n placeholder
 			if ( $is_custom_label ) {
 				$password_label = isset( $this->ds['resetpassword_password_label'] ) ? __( $this->ds['resetpassword_password_label'], 'essential-addons-for-elementor-lite' ) : '';
+				$confirm_password_label = isset( $this->ds['resetpassword_confirm_password_label'] ) ? __( $this->ds['resetpassword_confirm_password_label'], 'essential-addons-for-elementor-lite' ) : '';
+				
+				$password_placeholder = isset( $this->ds['resetpassword_password_placeholder'] ) ? __( $this->ds['resetpassword_password_placeholder'], 'essential-addons-for-elementor-lite' ) : '';
+				$confirm_password_placeholder = isset( $this->ds['resetpassword_confirm_password_placeholder'] ) ? __( $this->ds['resetpassword_confirm_password_placeholder'], 'essential-addons-for-elementor-lite' ) : '';
 			}
 
 			$btn_text         = ! empty( $this->ds['resetpassword_button_text'] ) ? __( $this->ds['resetpassword_button_text'], 'essential-addons-for-elementor-lite' ) : '';
@@ -5037,6 +5082,7 @@ class Login_Register extends Widget_Base {
 									   name="eael-pass1"
 									   id="eael-pass1"
 									   class="eael-lr-form-control"
+									   placeholder="<?php esc_html_e( wp_strip_all_tags( $password_placeholder ), 'essential-addons-for-elementor-lite' ); ?>"
 									   required>
 								<?php
 								if ( $show_icon ) {
@@ -5045,13 +5091,14 @@ class Login_Register extends Widget_Base {
 							</div>
 							
 							<div class="eael-lr-form-group">
-								<?php if ( $display_label && $password_label ) {
-									printf( '<label for="eael-pass1" class="eael-field-label">Confirm %s</label>', esc_html( wp_strip_all_tags( $password_label ) ) );
+								<?php if ( $display_label && $confirm_password_label ) {
+									printf( '<label for="eael-pass1" class="eael-field-label">%s</label>', esc_html( wp_strip_all_tags( $confirm_password_label ) ) );
 								} ?>
 								<input type="text"
 									   name="eael-pass2"
 									   id="eael-pass2"
 									   class="eael-lr-form-control"
+									   placeholder="<?php esc_html_e( wp_strip_all_tags( $confirm_password_placeholder ), 'essential-addons-for-elementor-lite' ); ?>"
 									   required>
 								<?php
 								if ( $show_icon ) {
