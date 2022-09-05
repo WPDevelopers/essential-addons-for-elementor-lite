@@ -527,14 +527,14 @@ trait Login_Registration {
 		if ( ! empty( $_POST['page_id'] ) ) {
 			$page_id = intval( $_POST['page_id'], 10 );
 		} else {
-			$err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
+			$err_msg = esc_html__( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
 		}
 
 		$widget_id = 0;
 		if ( ! empty( $_POST['widget_id'] ) ) {
 			$widget_id = sanitize_text_field( $_POST['widget_id'] );
 		} else {
-			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
+			$err_msg = esc_html__( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
 		}
 
 		if (!empty( $err_msg )){
@@ -551,7 +551,7 @@ trait Login_Registration {
 
 
 		if ( empty( $_POST['eael-lostpassword-nonce'] ) ) {
-			$err_msg = __( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' );
+			$err_msg = esc_html__( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
@@ -564,7 +564,7 @@ trait Login_Registration {
 		}
 
 		if ( ! wp_verify_nonce( $_POST['eael-lostpassword-nonce'], 'eael-lostpassword-action' ) ) {
-			$err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
+			$err_msg = esc_html__( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
@@ -579,7 +579,7 @@ trait Login_Registration {
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
 		if ( is_user_logged_in() ) {
-			$err_msg = isset( $settings['err_loggedin'] ) ? $settings['err_loggedin'] : __( 'You are already logged in', 'essential-addons-for-elementor-lite' );
+			$err_msg = isset( $settings['err_loggedin'] ) ? __( wp_strip_all_tags( $settings['err_loggedin'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'You are already logged in', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
@@ -605,17 +605,17 @@ trait Login_Registration {
 			self::$send_custom_email_lostpassword = true;
 		}
 		if ( isset( $settings['lostpassword_email_subject'] ) ) {
-			self::$email_options_lostpassword['subject'] = $settings['lostpassword_email_subject'];
+			self::$email_options_lostpassword['subject'] = __( wp_strip_all_tags( $settings['lostpassword_email_subject'] ), 'essential-addons-for-elementor-lite' );
 		}
 		if ( isset( $settings['lostpassword_email_message'] ) ) {
-			self::$email_options_lostpassword['message'] = $settings['lostpassword_email_message'];
+			self::$email_options_lostpassword['message'] = __( wp_strip_all_tags( $settings['lostpassword_email_message'] ), 'essential-addons-for-elementor-lite' );
 		}
 		if ( isset( $settings['lostpassword_email_content_type'] ) ) {
-			self::$email_options_lostpassword['headers'] = 'Content-Type: text/' . $settings['lostpassword_email_content_type'] . '; charset=UTF-8' . "\r\n";
+			self::$email_options_lostpassword['headers'] = 'Content-Type: text/' . wp_strip_all_tags( $settings['lostpassword_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
 		}
 
 		if ( isset($_SERVER['HTTP_REFERER']) ) {
-			self::$email_options_lostpassword['http_referer'] = strtok( $_SERVER['HTTP_REFERER'], '?' );
+			self::$email_options_lostpassword['http_referer'] = esc_url_raw( strtok( $_SERVER['HTTP_REFERER'], '?' ) );
 		}
 		
 		if ( isset($page_id) ) {
@@ -633,7 +633,7 @@ trait Login_Registration {
 		if ( is_wp_error( $results ) ) {
 			$err_msg = '';
 			if ( isset( $results->errors['invalidcombo'][0] ) ) {
-				$err_msg = __( 'There is no account with that username or email address.', 'essential-addons-for-elementor-lite' );
+				$err_msg = esc_html__( 'There is no account with that username or email address.', 'essential-addons-for-elementor-lite' );
 			}
 
 			if ( $ajax ) {
@@ -642,7 +642,7 @@ trait Login_Registration {
 			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
 		} else {
 			$data = [
-				'message' => __( 'Check your email for the confirmation link.', 'essential-addons-for-elementor-lite' ),
+				'message' => esc_html__( 'Check your email for the confirmation link.', 'essential-addons-for-elementor-lite' ),
 			];
 
 			if ( $ajax ) {
@@ -674,14 +674,14 @@ trait Login_Registration {
 		if ( ! empty( $_POST['page_id'] ) ) {
 			$page_id = intval( $_POST['page_id'], 10 );
 		} else {
-			$err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
+			$err_msg = esc_html__( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
 		}
 
 		$widget_id = 0;
 		if ( ! empty( $_POST['widget_id'] ) ) {
 			$widget_id = sanitize_text_field( $_POST['widget_id'] );
 		} else {
-			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
+			$err_msg = esc_html__( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
 		}
 
 		$rp_data = [
@@ -706,7 +706,7 @@ trait Login_Registration {
 		}
 
 		if ( empty( $_POST['eael-resetpassword-nonce'] ) ) {
-			$err_msg = __( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' );
+			$err_msg = esc_html__( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
@@ -719,7 +719,7 @@ trait Login_Registration {
 		}
 
 		if ( ! wp_verify_nonce( $_POST['eael-resetpassword-nonce'], 'eael-resetpassword-action' ) ) {
-			$err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
+			$err_msg = esc_html__( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
@@ -733,7 +733,7 @@ trait Login_Registration {
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
 		if ( is_user_logged_in() ) {
-			$err_msg = isset( $settings['err_loggedin'] ) ? $settings['err_loggedin'] : __( 'You are already logged in', 'essential-addons-for-elementor-lite' );
+			$err_msg = isset( $settings['err_loggedin'] ) ? __( wp_strip_all_tags( $settings['err_loggedin'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'You are already logged in', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
@@ -755,21 +755,21 @@ trait Login_Registration {
 			$_POST['eael-pass1'] = trim( $_POST['eael-pass1'] );
 
 			if ( empty( $_POST['eael-pass1'] ) ) {
-				$errors['password_reset_empty_space'] = isset( $settings['err_pass'] ) ? $settings['err_pass'] : __( 'The password cannot be a space or all spaces.', 'essential-addons-for-elementor-lite' );
+				$errors['password_reset_empty_space'] = isset( $settings['err_pass'] ) ? __( wp_strip_all_tags( $settings['err_pass'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'The password cannot be a space or all spaces.', 'essential-addons-for-elementor-lite' );
 			}
 		} else {
 			if ( empty( $_POST['eael-pass1'] ) ) {
-				$errors['password_reset_empty_space'] = isset( $settings['err_pass'] ) ? $settings['err_pass'] : __( 'The password cannot be a space or all spaces.', 'essential-addons-for-elementor-lite' );
+				$errors['password_reset_empty_space'] = isset( $settings['err_pass'] ) ? __( wp_strip_all_tags( $settings['err_pass'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'The password cannot be a space or all spaces.', 'essential-addons-for-elementor-lite' );
 			}
 		}
 
 		if( ! empty( $_POST['eael-pass1'] ) && strlen( trim( $_POST['eael-pass1'] ) ) == 0 ){
-			$errors['password_reset_empty'] = __( 'The password cannot be empty.', 'essential-addons-for-elementor-lite' );
+			$errors['password_reset_empty'] = esc_html__( 'The password cannot be empty.', 'essential-addons-for-elementor-lite' );
 		}
 		
 		// Check if password fields do not match.
 		if ( ! empty( $_POST['eael-pass1'] ) && trim( $_POST['eael-pass2'] ) !== $_POST['eael-pass1'] ) {
-			$errors['password_reset_mismatch'] = isset( $settings['err_conf_pass'] ) ? $settings['err_conf_pass'] : __( 'The passwords do not match.', 'essential-addons-for-elementor-lite' );
+			$errors['password_reset_mismatch'] = isset( $settings['err_conf_pass'] ) ? __( wp_strip_all_tags( $settings['err_conf_pass'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'The passwords do not match.', 'essential-addons-for-elementor-lite' );
 		}
 
 		if ( ( ! count( $errors ) ) && isset( $_POST['eael-pass1'] ) && ! empty( $_POST['eael-pass1'] ) ) {
@@ -778,7 +778,7 @@ trait Login_Registration {
 			
 			if( $user || ! is_wp_error( $user ) ){
 				reset_password( $user, $_POST['eael-pass1'] );
-				$data['message'] = isset( $settings['success_resetpassword'] ) ? $settings['success_resetpassword'] : __( 'Your password has been reset.', 'essential-addons-for-elementor-lite' );
+				$data['message'] = isset( $settings['success_resetpassword'] ) ? __( wp_strip_all_tags( $settings['success_resetpassword'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'Your password has been reset.', 'essential-addons-for-elementor-lite' );
 
 				$error_key = 'eael_resetpassword_error_' . esc_attr( $widget_id );
 				delete_option( $error_key );				
@@ -790,7 +790,7 @@ trait Login_Registration {
 					update_option( 'eael_resetpassword_success_' . $widget_id, $data['message'], false );
 				}
 			} else {
-				$data['message'] = isset( $settings['error_resetpassword'] ) ? $settings['error_resetpassword'] : __( 'Invalid user name found!', 'essential-addons-for-elementor-lite' );
+				$data['message'] = isset( $settings['error_resetpassword'] ) ? __( wp_strip_all_tags( $settings['error_resetpassword'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'Invalid user name found!', 'essential-addons-for-elementor-lite' );
 				
 				$success_key = 'eael_resetpassword_success_' . esc_attr( $widget_id );
 				delete_option( $success_key );
@@ -863,8 +863,8 @@ trait Login_Registration {
 		if ( ! $user || is_wp_error( $user ) ) {
 			setcookie( $rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
 
-			$rp_err_msg = isset( $this->ds['err_reset_password_key_expired'] ) ? $this->ds['err_reset_password_key_expired'] : __( 'Your password reset link appears to be invalid. Please request a new link.', 'essential-addons-for-elementor-lite' );
-			update_option( 'eael_lostpassword_error_' . esc_attr( $this->widget_id ), $rp_err_msg, false );
+			$rp_err_msg = isset( $this->ds['err_reset_password_key_expired'] ) ? esc_html__( $this->ds['err_reset_password_key_expired'] ) : esc_html__( 'Your password reset link appears to be invalid. Please request a new link.', 'essential-addons-for-elementor-lite' );
+			update_option( 'eael_lostpassword_error_' . esc_attr( $this->widget_id ) . '_show', 1, false );
 
 			if ( $user && $user->get_error_code() === 'expired_key' ) {
 				wp_redirect( $rp_page_url . '?eael-lostpassword=1&error=expiredkey' );

@@ -3628,8 +3628,8 @@ class Login_Register extends Widget_Base {
 	 * @param string $button_type the type of the button. accepts login or register.
 	 */
 	protected function _init_button_style( $button_type = 'login' ) {
-		$button_text = 'lostpassword' === $button_type ? __('Lost Password', 'essential-addons-for-elementor-lite') : ucfirst( $button_type );
-		$button_text = 'resetpassword' === $button_type ? __('Reset Password', 'essential-addons-for-elementor-lite') : $button_text;
+		$button_text = 'lostpassword' === $button_type ? esc_html__('Lost Password', 'essential-addons-for-elementor-lite') : ucfirst( $button_type );
+		$button_text = 'resetpassword' === $button_type ? esc_html__('Reset Password', 'essential-addons-for-elementor-lite') : $button_text;
 
 		$this->start_controls_section( "section_style_{$button_type}_btn", [
 			'label'      => sprintf( __( '%s Button', 'essential-addons-for-elementor-lite' ), esc_html( $button_text ) ),
@@ -4412,7 +4412,7 @@ class Login_Register extends Widget_Base {
 					if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor ) {
 						/* translators: %s user display name */
 						$logged_in_msg = sprintf( __( 'You are already logged in as %s. ', 'essential-addons-for-elementor-lite' ), wp_get_current_user()->display_name );
-						printf( '%1$s   (<a href="%2$s">%3$s</a>)', $logged_in_msg, esc_url( wp_logout_url() ), __( 'Logout', 'essential-addons-for-elementor-lite' ) );
+						printf( '%1$s   (<a href="%2$s">%3$s</a>)', esc_html( $logged_in_msg ), esc_url( wp_logout_url() ), __( 'Logout', 'essential-addons-for-elementor-lite' ) );
 					} else {
 						if ( 'left' === $this->form_illustration_pos ) {
 							$this->print_form_illustration();
@@ -4427,7 +4427,7 @@ class Login_Register extends Widget_Base {
 								<?php do_action( 'eael/login-register/after-login-form-open', $this ); ?>
                                 <div class="eael-lr-form-group">
 									<?php if ( $display_label && $u_label ) {
-										printf( '<label for="eael-user-login" class="eael-field-label">%s</label>', $u_label );
+										printf( '<label for="eael-user-login" class="eael-field-label">%s</label>', esc_html__( $u_label, 'essential-addons-for-elementor-lite' ) );
 									} ?>
                                     <input type="text"
                                            name="eael-user-login"
@@ -4589,11 +4589,11 @@ class Login_Register extends Widget_Base {
 			$lgn_link = sprintf( $lgn_link_placeholder, $lgn_message, esc_attr( $lgn_url ), esc_attr( $lgn_link_action ), $lgn_link_text, $lgn_atts );
 
 			// btn alignment
-			$btn_align  = isset( $this->ds['register_btn_align'] ) ? $this->ds['register_btn_align'] : '';
-			$link_align = isset( $this->ds['register_link_align'] ) ? $this->ds['register_link_align'] : '';
+			$btn_align  = isset( $this->ds['register_btn_align'] ) ? esc_html( $this->ds['register_btn_align'] ) : '';
+			$link_align = isset( $this->ds['register_link_align'] ) ? esc_html( $this->ds['register_link_align'] ) : '';
 			// reCAPTCHA style
-			$rc_theme = isset( $this->ds['register_rc_theme'] ) ? $this->ds['register_rc_theme'] : 'light';
-			$rc_size  = isset( $this->ds['register_rc_size'] ) ? $this->ds['register_rc_size'] : 'normal';
+			$rc_theme = isset( $this->ds['register_rc_theme'] ) ? esc_html( $this->ds['register_rc_theme'] ) : 'light';
+			$rc_size  = isset( $this->ds['register_rc_size'] ) ? esc_html( $this->ds['register_rc_size'] ) : 'normal';
 			// input icons
 			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_register_icon'] ) && 'yes' === $this->ds['show_register_icon'] );
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
@@ -4785,7 +4785,7 @@ class Login_Register extends Widget_Base {
 			$default_hide_class = ( 'register' === $this->default_form || 'login' === $this->default_form || $this->should_print_resetpassword_form_editor || isset($_GET['eael-register']) || isset($_GET['eael-resetpassword']) ) && !isset($_GET['eael-lostpassword']) ? 'eael-lr-d-none' : '';
 
 			//Login link related
-			$login_link_action_lostpassword = ! empty( $this->ds['login_link_action_lostpassword'] ) ? $this->ds['login_link_action_lostpassword'] : 'form';
+			$login_link_action_lostpassword = ! empty( $this->ds['login_link_action_lostpassword'] ) ? esc_html( $this->ds['login_link_action_lostpassword'] ) : 'form';
 			$show_login_link_lostpassword   = ( 'yes' === $this->get_settings( 'show_login_link_lostpassword' ) );
 			$login_link_text_lostpassword   = ! empty( $this->get_settings( 'login_link_text_lostpassword' ) ) ? HelperCLass::eael_wp_kses($this->get_settings( 'login_link_text_lostpassword' )) : __( 'Login', 'essential-addons-for-elementor-lite' );
 			$parts           = explode( "\n", $login_link_text_lostpassword );
@@ -4796,7 +4796,7 @@ class Login_Register extends Widget_Base {
 			$login_atts_lostpassword             = $login_url_lostpassword = '';
 			switch ( $login_link_action_lostpassword ) {
 				case 'custom':
-					$login_url_lostpassword  = ! empty( $this->ds['custom_login_url_lostpassword']['url'] ) ? $this->ds['custom_login_url_lostpassword']['url'] : '';
+					$login_url_lostpassword  = ! empty( $this->ds['custom_login_url_lostpassword']['url'] ) ? esc_url_raw( $this->ds['custom_login_url_lostpassword']['url'] ) : '';
 					$login_atts_lostpassword = ! empty( $this->ds['custom_login_url_lostpassword']['is_external'] ) ? ' target="_blank"' : '';
 					$login_atts_lostpassword .= ! empty( $this->ds['custom_login_url_lostpassword']['nofollow'] ) ? ' rel="nofollow"' : '';
 					break;
@@ -4808,27 +4808,26 @@ class Login_Register extends Widget_Base {
 			$login_link_lostpassword = sprintf( $login_link_placeholder_lostpassword, $login_message_lostpassword, esc_attr( $login_url_lostpassword ), esc_attr( $login_link_action_lostpassword ), $login_link_text_lostpassword, $login_atts_lostpassword );
 
 			// lost password form fields related
-			$label_type      = ! empty( $this->ds['lostpassword_label_types'] ) ? $this->ds['lostpassword_label_types'] : 'default';
+			$label_type      = ! empty( $this->ds['lostpassword_label_types'] ) ? esc_html( $this->ds['lostpassword_label_types'] ) : 'default';
 			$is_custom_label = ( 'custom' === $label_type );
 			$display_label   = ( 'none' !== $label_type );
 
 			//Default label n placeholder
-			$u_label = $u_ph = __( 'Username or Email Address', 'essential-addons-for-elementor-lite' );
+			$u_label = $u_ph = esc_html__( 'Username or Email Address', 'essential-addons-for-elementor-lite' );
 			
 			// custom label n placeholder
 			if ( $is_custom_label ) {
-				$u_label = isset( $this->ds['lostpassword_user_label'] ) ? $this->ds['lostpassword_user_label'] : '';
-				$u_ph    = isset( $this->ds['lostpassword_user_placeholder'] ) ? $this->ds['lostpassword_user_placeholder'] : '';
+				$u_label = isset( $this->ds['lostpassword_user_label'] ) ? esc_html__( wp_strip_all_tags( $this->ds['lostpassword_user_label'] ), 'essential-addons-for-elementor-lite' ) : '';
+				$u_ph    = isset( $this->ds['lostpassword_user_placeholder'] ) ? esc_html__( wp_strip_all_tags( $this->ds['lostpassword_user_placeholder'] ), 'essential-addons-for-elementor-lite' ) : '';
 			}
-
 			$btn_text         = ! empty( $this->ds['lostpassword_button_text'] ) ? $this->ds['lostpassword_button_text'] : '';
 
 			// btn alignment
-			$btn_align = isset( $this->ds['lostpassword_btn_align'] ) ? $this->ds['lostpassword_btn_align'] : '';
+			$btn_align = isset( $this->ds['lostpassword_btn_align'] ) ? esc_html( $this->ds['lostpassword_btn_align'] ) : '';
 			// btn alignment
-			$link_align = isset( $this->ds['lostpassword_link_align'] ) ? $this->ds['lostpassword_link_align'] : '';
+			$link_align = isset( $this->ds['lostpassword_link_align'] ) ? esc_html( $this->ds['lostpassword_link_align'] ) : '';
 			// input icons
-			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_lostpassword_icon'] ) && 'yes' === $this->ds['show_lostpassword_icon'] );
+			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_lostpassword_icon'] ) && 'yes' === esc_html( $this->ds['show_lostpassword_icon'] ) );
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
 			?>
             <section
@@ -4850,7 +4849,7 @@ class Login_Register extends Widget_Base {
 							<?php do_action( 'eael/login-register/after-lostpassword-form-open', $this ); ?>
 							<div class="eael-lr-form-group">
 								<?php if ( $display_label && $u_label ) {
-									printf( '<label for="eael-user-lostpassword" class="eael-field-label">%s</label>', $u_label );
+									printf( '<label for="eael-user-lostpassword" class="eael-field-label">%s</label>', esc_html__( $u_label, 'essential-addons-for-elementor-lite' ) );
 								} ?>
 								<input type="text"
 									   name="eael-user-lostpassword"
@@ -4876,7 +4875,7 @@ class Login_Register extends Widget_Base {
 									   name="eael-lostpassword-submit"
 									   id="eael-lostpassword-submit"
 									   class="eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>"
-									   value="<?php echo esc_attr( $btn_text ); ?>"/>
+									   value="<?php echo wp_strip_all_tags( $btn_text ); ?>"/>
 								<?php if ( $show_login_link_lostpassword ) { ?>
 									<div class="eael-sign-wrapper <?php echo esc_attr( $link_align ); ?>">
 										<?php echo $login_link_lostpassword; // XSS ok. already escaped ?>
@@ -4934,7 +4933,7 @@ class Login_Register extends Widget_Base {
 				$user = check_password_reset_key( $rp_data['rp_key'], $rp_data['rp_login'] );
 
 				if ( empty( $rp_data['rp_key'] ) || ! $user || is_wp_error( $user ) ) {
-					$rp_err_msg = ! empty( $this->ds['err_reset_password_key_expired'] ) ? $this->ds['err_reset_password_key_expired'] : __( 'Your password reset link appears to be invalid. Please request a new link.', 'essential-addons-for-elementor-lite' );
+					$rp_err_msg = ! empty( $this->ds['err_reset_password_key_expired'] ) ? esc_html( $this->ds['err_reset_password_key_expired'] ) : __( 'Your password reset link appears to be invalid. Please request a new link.', 'essential-addons-for-elementor-lite' );
 					update_option( 'eael_lostpassword_error_' . esc_attr( $this->get_id() ), $rp_err_msg, false );
 		
 					wp_redirect( $rp_page_url . '?eael-lostpassword=1&error=expiredkey' );
@@ -4951,7 +4950,7 @@ class Login_Register extends Widget_Base {
 			delete_option('eael_show_reset_password_on_form_submit_' . $this->get_id());
 
 			// lost password form fields related
-			$label_type      = ! empty( $this->ds['resetpassword_label_types'] ) ? $this->ds['resetpassword_label_types'] : 'default';
+			$label_type      = ! empty( $this->ds['resetpassword_label_types'] ) ? esc_html( $this->ds['resetpassword_label_types'] ) : 'default';
 			$is_custom_label = ( 'custom' === $label_type );
 			$display_label   = ( 'none' !== $label_type );
 
@@ -4960,15 +4959,15 @@ class Login_Register extends Widget_Base {
 			
 			// custom label n placeholder
 			if ( $is_custom_label ) {
-				$password_label = isset( $this->ds['resetpassword_password_label'] ) ? $this->ds['resetpassword_password_label'] : '';
+				$password_label = isset( $this->ds['resetpassword_password_label'] ) ? __( $this->ds['resetpassword_password_label'], 'essential-addons-for-elementor-lite' ) : '';
 			}
 
-			$btn_text         = ! empty( $this->ds['resetpassword_button_text'] ) ? $this->ds['resetpassword_button_text'] : '';
+			$btn_text         = ! empty( $this->ds['resetpassword_button_text'] ) ? __( $this->ds['resetpassword_button_text'], 'essential-addons-for-elementor-lite' ) : '';
 
 			// btn alignment
-			$btn_align = isset( $this->ds['resetpassword_btn_align'] ) ? $this->ds['resetpassword_btn_align'] : '';
+			$btn_align = isset( $this->ds['resetpassword_btn_align'] ) ? esc_html( $this->ds['resetpassword_btn_align'] ) : '';
 			// input icons
-			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_resetpassword_icon'] ) && 'yes' === $this->ds['show_resetpassword_icon'] );
+			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_resetpassword_icon'] ) && 'yes' === esc_html( $this->ds['show_resetpassword_icon'] ) );
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
 			?>
             <section
@@ -4990,7 +4989,7 @@ class Login_Register extends Widget_Base {
 							<?php do_action( 'eael/login-register/after-resetpassword-form-open', $this ); ?>
 							<div class="eael-lr-form-group">
 								<?php if ( $display_label && $password_label ) {
-									printf( '<label for="eael-pass1" class="eael-field-label">%s</label>', $password_label );
+									printf( '<label for="eael-pass1" class="eael-field-label">%s</label>', esc_html( wp_strip_all_tags( $password_label ) ) );
 								} ?>
 								<input type="text"
 									   name="eael-pass1"
@@ -5005,7 +5004,7 @@ class Login_Register extends Widget_Base {
 							
 							<div class="eael-lr-form-group">
 								<?php if ( $display_label && $password_label ) {
-									printf( '<label for="eael-pass1" class="eael-field-label">Confirm %s</label>', $password_label );
+									printf( '<label for="eael-pass1" class="eael-field-label">Confirm %s</label>', esc_html( wp_strip_all_tags( $password_label ) ) );
 								} ?>
 								<input type="text"
 									   name="eael-pass2"
@@ -5023,14 +5022,14 @@ class Login_Register extends Widget_Base {
 							?>
 
 							<div class="eael-lr-footer">
-								<input type="hidden" name="rp_key" value="<?php echo esc_attr( !empty( $rp_data['rp_key'] ) ? $rp_data['rp_key'] : '' ); ?>" />
-								<input type="hidden" name="rp_login" value="<?php echo esc_attr( !empty( $rp_data['rp_login'] ) ? $rp_data['rp_login'] : '' ); ?>" />
+								<input type="hidden" name="rp_key" value="<?php echo esc_attr( !empty( $rp_data['rp_key'] ) ? esc_html( $rp_data['rp_key'] ) : '' ); ?>" />
+								<input type="hidden" name="rp_login" value="<?php echo esc_attr( !empty( $rp_data['rp_login'] ) ? esc_html( $rp_data['rp_login'] ) : '' ); ?>" />
 
 								<input type="submit"
 									   name="eael-resetpassword-submit"
 									   id="eael-resetpassword-submit"
 									   class="eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>"
-									   value="<?php echo esc_attr( $btn_text ); ?>"/>
+									   value="<?php echo esc_html( wp_strip_all_tags( $btn_text ) ); ?>"/>
 							</div>
 							<?php do_action( 'eael/login-register/after-resetpassword-footer', $this );
 							?>
@@ -5070,8 +5069,8 @@ class Login_Register extends Widget_Base {
 	 * @param string $form_type the type of form. Available values: login and register
 	 */
 	protected function print_form_header( $form_type = 'login' ) {
-		$title    = ! empty( $this->ds["{$form_type}_form_title"] ) ?  $this->ds["{$form_type}_form_title"]  : '';
-		$subtitle = ! empty( $this->ds["{$form_type}_form_subtitle"] ) ? esc_html( $this->ds["{$form_type}_form_subtitle"] ) : '';
+		$title    = ! empty( $this->ds["{$form_type}_form_title"] ) ?  esc_html__( $this->ds["{$form_type}_form_title"], 'essential-addons-for-elementor-lite' )  : '';
+		$subtitle = ! empty( $this->ds["{$form_type}_form_subtitle"] ) ? esc_html__( $this->ds["{$form_type}_form_subtitle"], 'essential-addons-for-elementor-lite' ) : '';
 		if ( empty( $this->form_logo ) && empty( $title ) && empty( $subtitle ) ) {
 			return;
 		}
@@ -5193,7 +5192,19 @@ class Login_Register extends Widget_Base {
 
 	protected function print_lostpassword_validation_errors() {
 		$error_key = 'eael_lostpassword_error_' . esc_attr( $this->get_id() );
+		$error_key_show = $error_key . '_show';
+		
 		$success_key = 'eael_lostpassword_success_' . esc_attr( $this->get_id() );
+		
+		if ( intval( get_option( $error_key_show ) ) ) {
+			$rp_err_msg = isset( $this->ds['err_reset_password_key_expired'] ) ? esc_html__( $this->ds['err_reset_password_key_expired'], 'essential-addons-for-elementor-lite' ) : esc_html__( 'Hey Your password reset link appears to be invalid. Please request a new link.', 'essential-addons-for-elementor-lite' );
+			?>
+            <p class="eael-form-msg invalid">
+				<?php echo esc_html__( $rp_err_msg ); ?>
+            </p>
+			<?php
+			delete_option( $error_key_show );
+		}
 		
 		if ( $lostpassword_error = apply_filters( 'eael/login-register/lostpassword-error-message', get_option( $error_key ) ) ) {
 			do_action( 'eael/login-register/before-showing-lostpassword-error', $lostpassword_error, $this );
