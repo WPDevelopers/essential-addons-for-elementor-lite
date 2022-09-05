@@ -386,6 +386,14 @@ class Login_Register extends Widget_Base {
 				'show_lost_password' => 'yes',
 			],
 		] );
+		$this->add_control( 'lost_password_link_type_notice', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( "Note: To use the Reset Password Form select 'Custom' from Content > Lost Password Email Options > Email Template Type.", 'essential-addons-for-elementor-lite' ),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+			'condition'		  => [
+				'lost_password_link_type' => 'form'
+			]
+		] );
 		$this->add_control( 'lost_password_url', [
 			'label'         => __( 'Custom Lost Password URL', 'essential-addons-for-elementor-lite' ),
 			'label_block'   => true,
@@ -797,8 +805,17 @@ class Login_Register extends Widget_Base {
 				'relation' => 'or',
 				'terms'    => [
 					[
-						'name'  => "show_lost_password",
-						'value' => 'yes',
+						'relation' => 'and',
+						'terms' => [
+							[
+								'name' => 'show_lost_password',
+								'value' => 'yes'
+							],
+							[
+								'name' => 'lost_password_link_type',
+								'value' => 'form',
+							]
+						]
 					],
 					[
 						'name'  => 'default_form_type',
@@ -809,7 +826,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'lostpassword_label_types', [
-			'label'   => __( 'Labels & Placeholders', 'essential-addons-for-elementor-lite' ),
+			'label'   => __( 'Label & Placeholder', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SELECT,
 			'options' => [
 				'default' => __( 'Default', 'essential-addons-for-elementor-lite' ),
@@ -820,7 +837,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'lostpassword_labels_heading', [
-			'label'     => __( 'Labels', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Label', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
 			'condition' => [ 'lostpassword_label_types' => 'custom', ],
@@ -838,7 +855,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'lostpassword_placeholders_heading', [
-			'label'     => esc_html__( 'Placeholders', 'essential-addons-for-elementor-lite' ),
+			'label'     => esc_html__( 'Placeholder', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
 			'condition' => [ 'lostpassword_label_types' => 'custom', ],
 			'separator' => 'before',
@@ -855,7 +872,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_responsive_control( 'lostpassword_field_width', [
-			'label'      => esc_html__( 'Input Fields width', 'essential-addons-for-elementor-lite' ),
+			'label'      => esc_html__( 'Input Field width', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [
 				'px',
@@ -910,8 +927,17 @@ class Login_Register extends Widget_Base {
 				'relation' => 'or',
 				'terms'    => [
 					[
-						'name'  => "show_lost_password",
-						'value' => 'yes',
+						'relation' => 'and',
+						'terms' => [
+							[
+								'name' => 'show_lost_password',
+								'value' => 'yes'
+							],
+							[
+								'name' => 'lost_password_link_type',
+								'value' => 'form',
+							]
+						]
 					],
 					[
 						'name'  => 'default_form_type',
@@ -1850,8 +1876,17 @@ class Login_Register extends Widget_Base {
 				'relation' => 'or',
 				'terms'    => [
 					[
-						'name'  => 'show_lost_password',
-						'value' => 'yes',
+						'relation' => 'and',
+						'terms' => [
+							[
+								'name' => 'show_lost_password',
+								'value' => 'yes'
+							],
+							[
+								'name' => 'lost_password_link_type',
+								'value' => 'form',
+							]
+						]
 					],
 					[
 						'name'  => 'default_form_type',
@@ -3930,7 +3965,9 @@ class Login_Register extends Widget_Base {
 
 		if( 'lostpassword' === $form_type ){
 			$link_section_condition = [
-				"show_login_link_lostpassword" => 'yes',
+				'show_lost_password' => 'yes',
+				'lost_password_link_type' => 'form',
+				'show_login_link_lostpassword' => 'yes',
 			];
 		}
 
@@ -4248,12 +4285,17 @@ class Login_Register extends Widget_Base {
 
 		if('lostpassword' === $form_type){
 			$terms_condition[] = [
-				'name'  => 'show_login_link_lostpassword',
-				'value' => 'yes',
-			];
-			$terms_condition[] = [
-				'name'  => 'show_lost_password',
-				'value' => 'yes',
+				'relation' => 'and',
+				'terms' => [
+					[
+						'name' => 'show_lost_password',
+						'value' => 'yes'
+					],
+					[
+						'name' => 'lost_password_link_type',
+						'value' => 'form',
+					]
+				]
 			];
 		}else {
 			$terms_condition[] = [
@@ -4933,7 +4975,7 @@ class Login_Register extends Widget_Base {
 				$user = check_password_reset_key( $rp_data['rp_key'], $rp_data['rp_login'] );
 
 				if ( empty( $rp_data['rp_key'] ) || ! $user || is_wp_error( $user ) ) {
-					$rp_err_msg = ! empty( $this->ds['err_reset_password_key_expired'] ) ? esc_html( $this->ds['err_reset_password_key_expired'] ) : __( 'Your password reset link appears to be invalid. Please request a new link.', 'essential-addons-for-elementor-lite' );
+					$rp_err_msg = ! empty( $this->ds['err_reset_password_key_expired'] ) ? esc_html__( wp_strip_all_tags( $this->ds['err_reset_password_key_expired'] ), 'essential-addons-for-elementor-lite' ) : __( 'Your password reset link appears to be invalid. Please request a new link.', 'essential-addons-for-elementor-lite' );
 					update_option( 'eael_lostpassword_error_' . esc_attr( $this->get_id() ), $rp_err_msg, false );
 		
 					wp_redirect( $rp_page_url . '?eael-lostpassword=1&error=expiredkey' );
@@ -5200,7 +5242,7 @@ class Login_Register extends Widget_Base {
 			$rp_err_msg = isset( $this->ds['err_reset_password_key_expired'] ) ? esc_html__( $this->ds['err_reset_password_key_expired'], 'essential-addons-for-elementor-lite' ) : esc_html__( 'Hey Your password reset link appears to be invalid. Please request a new link.', 'essential-addons-for-elementor-lite' );
 			?>
             <p class="eael-form-msg invalid">
-				<?php echo esc_html__( $rp_err_msg ); ?>
+				<?php echo esc_html__( $rp_err_msg, 'essential-addons-for-elementor-lite' ); ?>
             </p>
 			<?php
 			delete_option( $error_key_show );
