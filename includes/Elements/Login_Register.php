@@ -5159,8 +5159,8 @@ class Login_Register extends Widget_Base {
 	 * @param string $form_type the type of form. Available values: login and register
 	 */
 	protected function print_form_header( $form_type = 'login' ) {
-		$title    = ! empty( $this->ds["{$form_type}_form_title"] ) ?  esc_html__( $this->ds["{$form_type}_form_title"], 'essential-addons-for-elementor-lite' )  : '';
-		$subtitle = ! empty( $this->ds["{$form_type}_form_subtitle"] ) ? esc_html__( $this->ds["{$form_type}_form_subtitle"], 'essential-addons-for-elementor-lite' ) : '';
+		$title    = ! empty( $this->ds["{$form_type}_form_title"] ) ?  esc_html__( wp_strip_all_tags( $this->ds["{$form_type}_form_title"] ), 'essential-addons-for-elementor-lite' )  : '';
+		$subtitle = ! empty( $this->ds["{$form_type}_form_subtitle"] ) ? esc_html__( wp_strip_all_tags( $this->ds["{$form_type}_form_subtitle"] ), 'essential-addons-for-elementor-lite' ) : '';
 		if ( empty( $this->form_logo ) && empty( $title ) && empty( $subtitle ) ) {
 			return;
 		}
