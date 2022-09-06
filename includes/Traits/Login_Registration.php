@@ -657,8 +657,9 @@ trait Login_Registration {
 			}
 			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
 		} else {
+			$lostpassword_success_message = ! empty( $settings['success_lostpassword'] ) ? wp_strip_all_tags( $settings['success_lostpassword'] ) : wp_strip_all_tags( 'Check your email for the confirmation link.' ); 
 			$data = [
-				'message' => esc_html__( 'Check your email for the confirmation link.', 'essential-addons-for-elementor-lite' ),
+				'message' => esc_html__( $lostpassword_success_message, 'essential-addons-for-elementor-lite' ),
 			];
 
 			if ( $ajax ) {

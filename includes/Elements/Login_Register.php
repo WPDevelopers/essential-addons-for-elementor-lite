@@ -256,7 +256,6 @@ class Login_Register extends Widget_Base {
 		$this->init_style_resetpassword_button_controls();
 		$this->init_style_login_link_controls();
 		$this->init_style_register_link_controls();
-		$this->init_style_lostpassword_link_controls();
 		$this->init_style_login_recaptcha_controls();
 		$this->init_style_register_recaptcha_controls();
 		do_action( 'eael/login-register/after-style-controls', $this );
@@ -1476,6 +1475,12 @@ class Login_Register extends Widget_Base {
 			'type'        => Controls_Manager::TEXTAREA,
 			'default'     => __( 'Registration completed successfully, Check your inbox for password if you did not provided while registering.', 'essential-addons-for-elementor-lite' ),
 			'placeholder' => __( 'eg. Registration completed successfully', 'essential-addons-for-elementor-lite' ),
+		] );
+		$this->add_control( 'success_lostpassword', [
+			'label'       => __( 'Lost Password Form Success', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXTAREA,
+			'default'     => __( 'Check your email for the confirmation link.', 'essential-addons-for-elementor-lite' ),
+			'placeholder' => __( 'eg. Check your email for the confirmation link.', 'essential-addons-for-elementor-lite' ),
 		] );
 		$this->add_control( 'success_resetpassword', [
 			'label'       => __( 'Successful Password Reset', 'essential-addons-for-elementor-lite' ),
@@ -3717,11 +3722,32 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function init_style_register_link_controls() {
-		$this->_init_link_style( 'register' );
-	}
+		$link_section_condition = [
+			"show_register_link" => 'yes',
+		];
 
-	protected function init_style_lostpassword_link_controls() {
-		$this->_init_link_style( 'lostpassword' );
+		// To Display lostpassword tab
+		$link_section_condition_lostpassword = [
+			'show_lost_password' => 'yes',
+			'lost_password_link_type' => 'form',
+			'show_login_link_lostpassword' => 'yes',
+		];
+
+		$this->start_controls_section( "section_style_register_link", [
+			'label'     => sprintf( __( '%s Link', 'essential-addons-for-elementor-lite' ), ucfirst( 'Login' ) ),
+			'tab'       => Controls_Manager::TAB_STYLE,
+			'condition' => $link_section_condition,
+		] );
+
+		$this->_init_link_style( 'register', 0 );
+		$this->add_control('separator_login_link_for_two_forms',
+		[
+			'type' => Controls_Manager::RAW_HTML,
+			'separator' => 'before'
+		]);
+		$this->_init_link_style( 'lostpassword', 0 );
+
+		$this->end_controls_section();
 	}
 
 	protected function init_style_login_recaptcha_controls() {
@@ -4031,7 +4057,7 @@ class Login_Register extends Widget_Base {
 	 *
 	 * @param string $form_type the type of form where the link is being shown. accepts login or register.
 	 */
-	protected function _init_link_style( $form_type = 'login' ) {
+	protected function _init_link_style( $form_type = 'login', $show_as_section = 1 ) {
 		$form_name = 'login' === $form_type ? __( 'Register', 'essential-addons-for-elementor-lite' ) : __( 'Login', 'essential-addons-for-elementor-lite' );
 		$form_name = 'lostpassword' === $form_type ? __( 'Login (Lost Password)', 'essential-addons-for-elementor-lite' ) : $form_name;
 		$link_section_condition = [
@@ -4046,11 +4072,13 @@ class Login_Register extends Widget_Base {
 			];
 		}
 
-		$this->start_controls_section( "section_style_{$form_type}_link", [
-			'label'     => sprintf( __( '%s Link', 'essential-addons-for-elementor-lite' ), ucfirst( $form_name ) ),
-			'tab'       => Controls_Manager::TAB_STYLE,
-			'condition' => $link_section_condition,
-		] );
+		if( $show_as_section ){
+			$this->start_controls_section( "section_style_{$form_type}_link", [
+				'label'     => sprintf( __( '%s Link', 'essential-addons-for-elementor-lite' ), ucfirst( $form_name ) ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => $link_section_condition,
+			] );
+		}
 
 		$this->add_control( "{$form_type}_link_style_notice", [
 			'type'            => Controls_Manager::RAW_HTML,
@@ -4332,7 +4360,9 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
-		$this->end_controls_section();
+		if( $show_as_section ){
+			$this->end_controls_section();
+		}
 	}
 
 	/**
