@@ -4872,6 +4872,10 @@ class Login_Register extends Widget_Base {
 			$login_link_text_lostpassword   = array_pop( $parts );
 			$login_message_lostpassword     = array_shift( $parts );
 
+			$success_key = 'eael_lostpassword_success_' . esc_attr( $this->get_id() );
+			$lostpassword_success = apply_filters( 'eael/login-register/lostpassword-success-message', get_option( $success_key ) );
+			$hide_class_after_submission = ! empty( $lostpassword_success ) ? 'eael-d-none' : ''; 
+
 			$login_link_placeholder_lostpassword = '<span class="d-ib">%1$s</span> <a href="%2$s" id="eael-lr-login-toggle-lostpassword" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
 			$login_atts_lostpassword             = $login_url_lostpassword = '';
 			switch ( $login_link_action_lostpassword ) {
@@ -4927,7 +4931,7 @@ class Login_Register extends Widget_Base {
 							  id="eael-lostpassword-form"
 							  method="post">
 							<?php do_action( 'eael/login-register/after-lostpassword-form-open', $this ); ?>
-							<div class="eael-lr-form-group">
+							<div class="eael-lr-form-group <?php echo esc_attr( $hide_class_after_submission ); ?>">
 								<?php if ( $display_label && $u_label ) {
 									printf( '<label for="eael-user-lostpassword" class="eael-field-label">%s</label>', esc_html__( $u_label, 'essential-addons-for-elementor-lite' ) );
 								} ?>
@@ -4954,7 +4958,7 @@ class Login_Register extends Widget_Base {
 								<input type="submit"
 									   name="eael-lostpassword-submit"
 									   id="eael-lostpassword-submit"
-									   class="eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>"
+									   class="eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>  <?php echo esc_attr( $hide_class_after_submission ); ?>"
 									   value="<?php echo wp_strip_all_tags( $btn_text ); ?>"/>
 								<?php if ( $show_login_link_lostpassword ) { ?>
 									<div class="eael-sign-wrapper <?php echo esc_attr( $link_align ); ?>">
@@ -5034,6 +5038,10 @@ class Login_Register extends Widget_Base {
 			$is_custom_label = ( 'custom' === $label_type );
 			$display_label   = ( 'none' !== $label_type );
 
+			$success_key = 'eael_resetpassword_success_' . esc_attr( $this->get_id() );
+			$resetpassword_success = apply_filters( 'eael/login-register/resetpassword-success-message', get_option( $success_key ) );
+			$hide_class_after_submission = ! empty( $resetpassword_success ) ? 'eael-d-none' : ''; 
+
 			//Default label
 			$password_label = __( 'New Password', 'essential-addons-for-elementor-lite' );
 			$confirm_password_label = __( 'Confirm New Password', 'essential-addons-for-elementor-lite' );
@@ -5075,7 +5083,7 @@ class Login_Register extends Widget_Base {
 							  id="eael-resetpassword-form"
 							  method="post">
 							<?php do_action( 'eael/login-register/after-resetpassword-form-open', $this ); ?>
-							<div class="eael-lr-form-group">
+							<div class="eael-lr-form-group <?php echo esc_attr( $hide_class_after_submission ); ?>">
 								<?php if ( $display_label && $password_label ) {
 									printf( '<label for="eael-pass1" class="eael-field-label">%s</label>', esc_html( wp_strip_all_tags( $password_label ) ) );
 								} ?>
@@ -5091,7 +5099,7 @@ class Login_Register extends Widget_Base {
 								} ?>
 							</div>
 							
-							<div class="eael-lr-form-group">
+							<div class="eael-lr-form-group <?php echo esc_attr( $hide_class_after_submission ); ?>">
 								<?php if ( $display_label && $confirm_password_label ) {
 									printf( '<label for="eael-pass1" class="eael-field-label">%s</label>', esc_html( wp_strip_all_tags( $confirm_password_label ) ) );
 								} ?>
@@ -5118,7 +5126,7 @@ class Login_Register extends Widget_Base {
 								<input type="submit"
 									   name="eael-resetpassword-submit"
 									   id="eael-resetpassword-submit"
-									   class="eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>"
+									   class="eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?> <?php echo esc_attr( $hide_class_after_submission ); ?>"
 									   value="<?php echo esc_html( wp_strip_all_tags( $btn_text ) ); ?>"/>
 							</div>
 							<?php do_action( 'eael/login-register/after-resetpassword-footer', $this );

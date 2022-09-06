@@ -801,6 +801,12 @@ trait Login_Registration {
 				delete_option( 'eael_show_reset_password_on_form_submit_' . $widget_id );
 
 				if($ajax){
+					// $custom_redirect_url = ! empty( $settings['resetpassword_redirect_url']['url'] ) ? $settings['resetpassword_redirect_url']['url'] : '/';
+					$custom_redirect_url = isset($_SERVER['HTTP_REFERER']) ? strtok( $_SERVER['HTTP_REFERER'], '?' ) : '/';
+					if( ! empty( $custom_redirect_url ) ){
+						$data['redirect_to'] = esc_url_raw( $custom_redirect_url );
+					}
+					
 					wp_send_json_success( $data );
 				} else {
 					update_option( 'eael_resetpassword_success_' . $widget_id, $data['message'], false );
