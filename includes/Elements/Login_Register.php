@@ -4350,7 +4350,8 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function render() {
-		if ( ! is_admin() && 'yes' === $this->get_settings_for_display( 'redirect_for_logged_in_user' ) && is_user_logged_in() ) {
+
+		if ( ! current_user_can( 'manage_options' ) && 'yes' === $this->get_settings_for_display( 'redirect_for_logged_in_user' ) && is_user_logged_in() ) {
 			if ( $redirect = $this->get_settings_for_display( 'redirect_url_for_logged_in_user' )['url'] ) {
 				$redirect = wp_sanitize_redirect( $redirect );
 				$logged_in_location = wp_validate_redirect( $redirect, site_url() ); ?>
