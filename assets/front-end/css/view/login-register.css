@@ -50,6 +50,9 @@
 .eael-lr-d-none {
   display: none;
 }
+.eael-d-none {
+  display: none;
+}
 .d-ib {
   display: inline-block;
 }

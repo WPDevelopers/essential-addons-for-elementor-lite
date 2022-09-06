@@ -1095,6 +1095,25 @@ class Login_Register extends Widget_Base {
 				],
 			],
 			'default'   => 'left',
+		] );
+
+		$this->add_control( 'show_image_on_lostpassword_form', [
+			'label'   => __( 'Show on Lost Password Form', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::SWITCHER,
+			'default' => 'yes',
+			'conditions' => [
+				'relation' => 'or',
+				'terms'    => [
+					[
+						'name'  => "show_lost_password",
+						'value' => 'yes',
+					],
+					[
+						'name'  => 'default_form_type',
+						'value' => 'lostpassword',
+					]
+				],
+			],
 			'separator' => 'after',
 		] );
 
@@ -1128,6 +1147,25 @@ class Login_Register extends Widget_Base {
 				],
 			],
 			'default'   => 'left',
+		] );
+
+		$this->add_control( 'show_logo_on_lostpassword_form', [
+			'label'   => __( 'Show on Lost Password Form', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::SWITCHER,
+			'default' => 'yes',
+			'conditions' => [
+				'relation' => 'or',
+				'terms'    => [
+					[
+						'name'  => "show_lost_password",
+						'value' => 'yes',
+					],
+					[
+						'name'  => 'default_form_type',
+						'value' => 'lostpassword',
+					]
+				],
+			],
 			'separator' => 'after',
 		] );
 
@@ -4921,7 +4959,7 @@ class Login_Register extends Widget_Base {
                 <div class="eael-lostpassword-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr( $icon_class ); ?>">
 					<?php
 					if ( 'left' === $this->form_illustration_pos ) {
-						$this->print_form_illustration();
+						$this->print_form_illustration('lostpassword');
 					}
 					?>
 					<div class="lr-form-wrapper">
@@ -4984,7 +5022,7 @@ class Login_Register extends Widget_Base {
 					</div>
 					<?php
 					if ( 'right' === $this->form_illustration_pos ) {
-						$this->print_form_illustration();
+						$this->print_form_illustration('lostpassword');
 					}
 					?>
                 </div>
@@ -5073,7 +5111,7 @@ class Login_Register extends Widget_Base {
                 <div class="eael-resetpassword-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr( $icon_class ); ?>">
 					<?php
 					if ( 'left' === $this->form_illustration_pos ) {
-						$this->print_form_illustration();
+						$this->print_form_illustration('resetpassword');
 					}
 					?>
 					<div class="lr-form-wrapper">
@@ -5146,7 +5184,7 @@ class Login_Register extends Widget_Base {
 					</div>
 					<?php
 					if ( 'right' === $this->form_illustration_pos ) {
-						$this->print_form_illustration();
+						$this->print_form_illustration('resetpassword');
 					}
 					?>
                 </div>
@@ -5156,9 +5194,14 @@ class Login_Register extends Widget_Base {
 		}
 	}
 
-	protected function print_form_illustration() {
+	protected function print_form_illustration($form_type = 'login') {
+		$show_form_image_class = '';
+		if( 'lostpassword' === $form_type || 'resetpassword' === $form_type ){
+			$show_form_image_class = ! empty( $this->ds['show_image_on_lostpassword_form'] ) && 'yes' === $this->ds['show_image_on_lostpassword_form'] ? '' : 'eael-d-none';
+		}
+
 		if ( ! empty( $this->form_illustration_url ) ) { ?>
-            <div class="lr-form-illustration lr-img-pos-<?php echo esc_attr( $this->form_illustration_pos ); ?>"
+            <div class="lr-form-illustration lr-img-pos-<?php echo esc_attr( $this->form_illustration_pos ); ?>  <?php echo esc_attr( $show_form_image_class ); ?>"
                  style="background-image: url('<?php echo esc_attr( esc_url( $this->form_illustration_url ) ); ?>');"></div>
 		<?php }
 	}
@@ -5169,6 +5212,12 @@ class Login_Register extends Widget_Base {
 	protected function print_form_header( $form_type = 'login' ) {
 		$title    = ! empty( $this->ds["{$form_type}_form_title"] ) ?  esc_html__( wp_strip_all_tags( $this->ds["{$form_type}_form_title"] ), 'essential-addons-for-elementor-lite' )  : '';
 		$subtitle = ! empty( $this->ds["{$form_type}_form_subtitle"] ) ? esc_html__( wp_strip_all_tags( $this->ds["{$form_type}_form_subtitle"] ), 'essential-addons-for-elementor-lite' ) : '';
+		
+		$show_form_logo_class = '';
+		if( 'lostpassword' === $form_type || 'resetpassword' === $form_type ){
+			$show_form_logo_class = ! empty( $this->ds['show_logo_on_lostpassword_form'] ) && 'yes' === $this->ds['show_logo_on_lostpassword_form'] ? '' : 'eael-d-none';
+		}
+		
 		if ( empty( $this->form_logo ) && empty( $title ) && empty( $subtitle ) ) {
 			return;
 		}
@@ -5176,7 +5225,7 @@ class Login_Register extends Widget_Base {
 		?>
         <div class="lr-form-header header-<?php echo esc_attr( $this->form_logo_pos ); ?>">
 			<?php if ( ! empty( $this->form_logo ) ) { ?>
-                <div class="form-logo">
+                <div class="form-logo <?php echo esc_attr( $show_form_logo_class ); ?>">
                     <img src="<?php echo esc_attr( esc_url( $this->form_logo ) ); ?>"
                          alt="<?php esc_attr_e( 'Form Logo Image', 'essential-addons-for-elementor-lite' ); ?>">
                 </div>
