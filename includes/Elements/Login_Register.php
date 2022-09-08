@@ -4944,20 +4944,21 @@ class Login_Register extends Widget_Base {
 			$lostpassword_success = apply_filters( 'eael/login-register/lostpassword-success-message', get_option( $success_key ) );
 			$hide_class_after_submission = ! empty( $lostpassword_success ) ? 'eael-d-none' : ''; 
 
-			$login_link_placeholder_lostpassword = '<span class="d-ib">%1$s</span> <a href="%2$s" id="eael-lr-login-toggle-lostpassword" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
+			$login_link_placeholder_lostpassword = '<span class="d-ib">%1$s</span> <a href="%2$s" id="eael-lr-login-toggle-lostpassword" class="eael-lr-link" data-action="%3$s" %5$s %6$s>%4$s</a>';
 			$login_atts_lostpassword             = $login_url_lostpassword = '';
 			switch ( $login_link_action_lostpassword ) {
 				case 'custom':
 					$login_url_lostpassword  = ! empty( $this->ds['custom_login_url_lostpass']['url'] ) ? esc_url_raw( $this->ds['custom_login_url_lostpass']['url'] ) : '';
 					$login_atts_lostpassword = ! empty( $this->ds['custom_login_url_lostpass']['is_external'] ) ? ' target="_blank"' : '';
 					$login_atts_lostpassword .= ! empty( $this->ds['custom_login_url_lostpass']['nofollow'] ) ? ' rel="nofollow"' : '';
+					$this->add_link_attributes( 'login_button_lostpassword', $this->ds['custom_login_url_lostpass'] );
 					break;
 				case 'default':
 					$login_url_lostpassword = wp_login_url();
 					break;
 			}
 
-			$login_link_lostpassword = sprintf( $login_link_placeholder_lostpassword, $login_message_lostpassword, esc_attr( $login_url_lostpassword ), esc_attr( $login_link_action_lostpassword ), $login_link_text_lostpassword, $login_atts_lostpassword );
+			$login_link_lostpassword = sprintf( $login_link_placeholder_lostpassword, $login_message_lostpassword, esc_attr( $login_url_lostpassword ), esc_attr( $login_link_action_lostpassword ), $login_link_text_lostpassword, $login_atts_lostpassword, $this->get_render_attribute_string( 'login_button_lostpassword' ) );
 
 			// lost password form fields related
 			$label_type      = ! empty( $this->ds['lostpassword_label_types'] ) ? esc_html( $this->ds['lostpassword_label_types'] ) : 'default';
