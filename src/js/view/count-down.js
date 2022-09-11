@@ -5,36 +5,42 @@ var CountDown = function ($scope, $) {
 		$expiry_text = $coundDown.data("expiry-text") !== undefined ? $coundDown.data("expiry-text") : "",
 		$expiry_title = $coundDown.data("expiry-title") !== undefined ? $coundDown.data("expiry-title") : "",
 		$redirect_url = $coundDown.data("redirect-url") !== undefined ? $coundDown.data("redirect-url") : "",
-		$template = $coundDown.data("template") !== undefined ? $coundDown.data("template") : "";
+		$template = $coundDown.data("template") !== undefined ? $coundDown.data("template") : "",
+		$countdown_type = $coundDown.data("countdown-type") !== undefined ? $coundDown.data("countdown-type") : "";
 
 	jQuery(document).ready(function ($) {
 		"use strict";
-		var countDown = $("#eael-countdown-" + $countdown_id);
-
-		countDown.countdown({
-			end: function () {
-				if ($expire_type == "text") {
-					countDown.html(
-						'<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
-						$expiry_title +
-						"</h4>" +
-						'<div class="eael-countdown-finish-text">' +
-						$expiry_text +
-						"</div></div>"
-					);
-				} else if ($expire_type === "url") {
-					if (isEditMode) {
-						countDown.html("Your Page will be redirected to given URL (only on Frontend).");
+		var countDown = $("#eael-countdown-" + $countdown_id),
+			eael_countdown_options = {
+				end: function () {
+					if ($expire_type == "text") {
+						countDown.html(
+							'<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
+							$expiry_title +
+							"</h4>" +
+							'<div class="eael-countdown-finish-text">' +
+							$expiry_text +
+							"</div></div>"
+						);
+					} else if ($expire_type === "url") {
+						if (isEditMode) {
+							countDown.html("Your Page will be redirected to given URL (only on Frontend).");
+						} else {
+							window.location.href = $redirect_url;
+						}
+					} else if ($expire_type === "template") {
+						countDown.html($coundDown.find(".eael-countdown-expiry-template").html());
 					} else {
-						window.location.href = $redirect_url;
+						//do nothing!
 					}
-				} else if ($expire_type === "template") {
-					countDown.html( $coundDown.find(".eael-countdown-expiry-template").html() );
-				} else {
-					//do nothing!
-				}
-			},
-		});
+				},
+			};
+
+		if ($countdown_type === 'evergreen') {
+			eael_countdown_options.date = new Date(2022, 8, 13);
+		}
+
+		countDown.countdown(eael_countdown_options);
 	});
 };
 jQuery(window).on("elementor/frontend/init", function () {
