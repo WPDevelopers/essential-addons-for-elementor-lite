@@ -64,6 +64,51 @@ class Countdown extends Widget_Base {
             ]
         );
 
+	    $this->add_control(
+		    'eael_countdown_type',
+		    [
+			    'label' => esc_html__( 'Type', 'essential-addons-for-elementor-lite' ),
+			    'type' => Controls_Manager::SELECT,
+			    'options' => [
+				    'due_date' => esc_html__( 'Due Date', 'essential-addons-for-elementor-lite' ),
+				    'evergreen' => esc_html__( 'Evergreen Timer', 'essential-addons-for-elementor-lite' ),
+			    ],
+			    'default' => 'due_date',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_evergreen_counter_hours',
+		    [
+			    'label' => esc_html__( 'Hours', 'essential-addons-for-elementor-lite' ),
+			    'type' => Controls_Manager::NUMBER,
+			    'default' => 11,
+			    'placeholder' => esc_html__( 'Hours', 'essential-addons-for-elementor-lite' ),
+			    'condition' => [
+				    'eael_countdown_type' => 'evergreen',
+			    ],
+			    'dynamic' => [
+				    'active' => true,
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_evergreen_counter_minutes',
+		    [
+			    'label' => esc_html__( 'Minutes', 'essential-addons-for-elementor-lite' ),
+			    'type' => Controls_Manager::NUMBER,
+			    'default' => 59,
+			    'placeholder' => esc_html__( 'Minutes', 'essential-addons-for-elementor-lite' ),
+			    'condition' => [
+				    'eael_countdown_type' => 'evergreen',
+			    ],
+			    'dynamic' => [
+				    'active' => true,
+			    ],
+		    ]
+	    );
+
         $this->add_control(
             'eael_countdown_due_time',
             [
@@ -71,6 +116,9 @@ class Countdown extends Widget_Base {
                 'type'        => Controls_Manager::DATE_TIME,
                 'default'     => date( "Y-m-d", strtotime( "+ 1 day" ) ),
                 'description' => esc_html__( 'Set the due date and time', 'essential-addons-for-elementor-lite' ),
+                'condition' => [
+	                'eael_countdown_type' => 'due_date',
+                ],
             ]
         );
 
