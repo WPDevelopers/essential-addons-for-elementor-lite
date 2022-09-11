@@ -1209,6 +1209,7 @@ class Countdown extends Widget_Base {
         $this->add_render_attribute( 'eael-countdown', 'class', 'eael-countdown-wrapper' );
         $this->add_render_attribute( 'eael-countdown', 'data-countdown-id', esc_attr( $this->get_id() ) );
         $this->add_render_attribute( 'eael-countdown', 'data-expire-type', $settings['countdown_expire_type'] );
+        $this->add_render_attribute( 'eael-countdown', 'data-countdown-type', $settings['eael_countdown_type'] );
 
         if ( $settings['countdown_expire_type'] == 'text' ) {
             if ( !empty( $settings['countdown_expiry_text'] ) ) {
