@@ -40,7 +40,7 @@ class Woo_Checkout extends Widget_Base {
 			}
 
 			add_filter('body_class' , [$this, 'add_checkout_body_class']);
-      $this->eael_woocheckout_recurring();
+            $this->eael_woocheckout_recurring();
 		}
 	}
 
@@ -2865,13 +2865,12 @@ class Woo_Checkout extends Widget_Base {
         return $fields;
     }
 
-    public function eael_woocheckout_recurring(){
-        if( class_exists('WC_Subscriptions_Cart') ) {
-          remove_action('woocommerce_review_order_after_order_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals' ), 10);
-          add_action('eael_display_recurring_total_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals'
-          ), 10);
-        }
-      }
+	public function eael_woocheckout_recurring() {
+		if ( class_exists( 'WC_Subscriptions_Cart' ) ) {
+			add_action( 'eael_woo_checkout_before_render', [ $this, 'remove_woocommerce_display_recurring_totals' ] );
+			add_action( 'eael_display_recurring_total_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals' ), 10 );
+		}
+	}
 
 	protected function render() {
 	    if( !class_exists('woocommerce') ) {
@@ -2892,6 +2891,7 @@ class Woo_Checkout extends Widget_Base {
 
         $settings = $this->get_settings_for_display();
         add_filter( 'woocommerce_checkout_fields', [ $this, 'ea_checkout_fields' ], 99999 );
+		do_action( 'eael_woo_checkout_before_render', $settings );
 
 		if ( in_array( $settings[ 'ea_woo_checkout_layout' ], [ 'multi-steps', 'split' ] ) ) {
 			if ( !apply_filters( 'eael/pro_enabled', false ) ) {
