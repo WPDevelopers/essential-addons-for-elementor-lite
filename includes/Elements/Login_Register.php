@@ -3401,6 +3401,18 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'height: {{SIZE}}{{UNIT}};',
 			],
 		] );
+
+		//Show spinner
+		do_action( "eael/login-register/after-init-{$button_type}-button-style", $this, $button_type );
+		
+		if ( !$this->pro_enabled ) {
+			$this->add_control( "{$button_type}_btn_show_spinner", [
+				'label'   => sprintf( __( 'Show Spinner %s', 'essential-addons-for-elementor-lite' ), '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
+				'type'    => Controls_Manager::SWITCHER,
+				'classes' => 'eael-pro-control',
+			] );
+		}
+
 		$this->end_controls_section();
 	}
 
@@ -3903,6 +3915,8 @@ class Login_Register extends Widget_Base {
 			// input icons
 			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_login_icon'] ) && 'yes' === $this->ds['show_login_icon'] );
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
+
+			$show_login_spinner  = !empty( $this->ds['login_btn_show_spinner'] ) ? $this->ds['login_btn_show_spinner'] : '';
 			?>
             <section
                     id="eael-login-form-wrapper"
@@ -4000,11 +4014,20 @@ class Login_Register extends Widget_Base {
 
 
                                 <div class="eael-lr-footer">
-                                    <input type="submit"
+									<div class="eael-lr-form-loader-wrapper">
+                                    	<input type="submit"
                                            name="eael-login-submit"
                                            id="eael-login-submit"
                                            class="g-recaptcha eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>"
                                            value="<?php echo esc_attr( $btn_text ); ?>"/>
+										
+										<?php if( !empty( $show_login_spinner ) && 'true' === $show_login_spinner ): ?>
+										<span class="eael-lr-form-loader eael-lr-login-form-loader d-none<?php esc_attr_e($this->in_editor ? '-editor' : '') ?>">
+											<i class="eicon-spinner eicon-animation-spin"></i>
+										</span>
+										<?php endif; ?>
+
+									</div>
 									<?php if ( $show_reg_link ) { ?>
                                         <div class="eael-sign-wrapper <?php echo esc_attr( $link_align ); ?>">
 											<?php echo $reg_link; // XSS ok. already escaped ?>
@@ -4077,6 +4100,8 @@ class Login_Register extends Widget_Base {
 			$lgn_message          = array_shift( $parts );
 			$lgn_link_placeholder = '<span class="d-ib">%1$s</span> <a href="%2$s" id="eael-lr-login-toggle" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
 			$lgn_url              = $lgn_atts = '';
+
+			$show_register_spinner  = !empty( $this->ds['register_btn_show_spinner'] ) ? $this->ds['register_btn_show_spinner'] : '';
 
 			switch ( $lgn_link_action ) {
 				case 'custom':
@@ -4254,11 +4279,20 @@ class Login_Register extends Widget_Base {
 							?>
 
                             <div class="eael-lr-footer">
-                                <input type="submit"
+								<div class="eael-lr-form-loader-wrapper">
+                                	<input type="submit"
                                        name="eael-register-submit"
                                        id="eael-register-submit"
                                        class="eael-lr-btn eael-lr-btn-block<?php echo esc_attr( $btn_align ); ?>"
                                        value="<?php echo esc_attr( $btn_text ); ?>"/>
+										
+									<?php if( !empty( $show_register_spinner ) && 'true' === $show_register_spinner ): ?>
+									<span class="eael-lr-form-loader eael-lr-register-form-loader d-none<?php esc_attr_e($this->in_editor ? '-editor' : '') ?>">
+										<i class="eicon-spinner eicon-animation-spin"></i>
+									</span>
+									<?php endif; ?>
+
+								</div>
 								<?php if ( $show_lgn_link ) { ?>
                                     <div class="eael-sign-wrapper  <?php echo esc_attr( $link_align ); ?>">
 										<?php echo $lgn_link; ?>
