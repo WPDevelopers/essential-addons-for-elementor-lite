@@ -346,6 +346,11 @@ trait Woo_Cart_Helper {
 		}
 	}
 
+	public function remove_woocommerce_cross_sell_display( $settings ) {
+		// Remove default 'woocommerce_cross_sell_display' callback from 'woocommerce_cart_collaterals'
+		remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' );
+	}
+
 	public static function eael_cart_button_proceed_to_checkout( $settings ) {
 		if ( ! empty( $settings['ea_woo_cart_layout'] ) ) {
 			$button_text = apply_filters( 'eael_woo_cart_checkout_button_text', $settings['eael_woo_cart_components_cart_checkout_button_text'] );
@@ -653,6 +658,9 @@ trait Woo_Cart_Helper {
 				 * @hooked woocommerce_cross_sell_display
 				 * @hooked woocommerce_cart_totals - 10
 				 */
+
+				do_action( 'eael_woocommerce_before_cart_collaterals', $settings );
+
 				if ( $settings['eael_woo_cart_components_cart_totals'] === 'yes' ) {
 					do_action( 'woocommerce_cart_collaterals', $settings );
 				} else {
