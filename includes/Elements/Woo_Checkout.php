@@ -165,6 +165,17 @@ class Woo_Checkout extends Widget_Base {
 			]
 		);
 
+		// Update Cart  Button
+		$this->add_control(
+			'ea_woo_checkout_cart_update_enable',
+			[
+				'label' => esc_html__( 'Enable Cart Update', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default' => '',
+			]
+		);
+
 		// Table Header
 		$this->add_control(
 			'ea_woo_checkout_table_header_text',
