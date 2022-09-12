@@ -1,6 +1,16 @@
 .eael-woo-cart .eael-woo-cart-wrapper {
   background: #f9fbff;
 }
+.eael-woo-cart .eael-woo-cart-wrapper .sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
 .eael-woo-cart .eael-woo-cart-wrapper p {
   margin: 0;
 }

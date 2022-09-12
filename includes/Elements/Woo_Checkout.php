@@ -73,6 +73,13 @@ class Woo_Checkout extends Widget_Base {
 	public function get_keywords() {
 		return [ 'ea woo checkout', 'woocommerce', 'checkout', 'woocommerce checkout', 'woocommerce split checkout', 'split checkout', 'multi steps checkout', 'ea', 'essential addons' ];
 	}
+    
+    public function get_style_depends() {
+        return [
+            'font-awesome-5-all',
+            'font-awesome-4-shim',
+        ];
+    }
 
 	public function get_custom_help_url() {
 		return 'https://essential-addons.com/elementor/docs/woo-checkout/';
@@ -1643,6 +1650,25 @@ class Woo_Checkout extends Widget_Base {
 				],
 			]
 		);
+        $this->add_control(
+            'ea_woo_checkout_coupon_icon_size',
+            [
+                'label'       => __( 'Icon Size', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::SLIDER,
+                'default'     => ['size' => 16, 'unit'=>'px'],
+                'range'       => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .ea-woo-checkout .ea-coupon-icon svg' => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};line-height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-woo-checkout .ea-coupon-icon i' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 		$this->add_control(
 			'ea_woo_checkout_coupon_links_color',
 			[
