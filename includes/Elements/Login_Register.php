@@ -324,7 +324,7 @@ class Login_Register extends Widget_Base {
 			'dynamic'     => [
 				'active' => true,
 			],
-			'default'     => __( 'Forgot password?', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( 'Forgot Password?', 'essential-addons-for-elementor-lite' ),
 			'condition'   => [
 				'show_lost_password' => 'yes',
 			],
@@ -3125,6 +3125,7 @@ class Login_Register extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .lr-form-wrapper .forget-menot  input[type=checkbox]:checked" => 'border-color: {{VALUE}};background: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper input[type=checkbox]:hover:not(:checked):not(:disabled)" => 'border-color: {{VALUE}};',
 			],
 			'condition' => [
 				'remember_me_style_pot' => 'yes',
@@ -3135,6 +3136,135 @@ class Login_Register extends Widget_Base {
 			'label'    => __( 'Remember Me Typography', 'essential-addons-for-elementor-lite' ),
 			'name'     => "eael_rm_label_typography",
 			'selector' => "{{WRAPPER}} .lr-form-wrapper .forget-menot",
+		] );
+
+		//Forget Password Style
+		$this->add_control( 'eael_form_forget_pass_fields_heading', [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Forgot Password', 'essential-addons-for-elementor-lite' ),
+			'separator' => 'before',
+		] );
+		$this->add_control( 'forget_pass_style_pot', [
+			'label'        => __( 'Forgot Password Style', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
+			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+		] );
+
+		$this->start_popover();
+
+		$this->add_responsive_control( "eael_form_forget_pass_field_margin", [
+			'label'      => __( 'Container Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael-forever-forget" => $this->apply_dim( 'margin' ),
+			],
+			'condition'  => [
+				'forget_pass_style_pot' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_forget_pass_field_padding", [
+			'label'      => __( 'Container Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael-forever-forget" => $this->apply_dim( 'padding' ),
+			],
+			'condition'  => [
+				'forget_pass_style_pot' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_forget_pass_lbl_margin", [
+			'label'      => __( 'Label Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-pass" => $this->apply_dim( 'margin' ),
+			],
+			'condition'  => [
+				'forget_pass_style_pot' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_forget_pass_lbl_padding", [
+			'label'      => __( 'Label Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-pass" => $this->apply_dim( 'padding' ),
+			],
+			'condition'  => [
+				'forget_pass_style_pot' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'eael_forget_pass_label_color_normal', [
+			'label'     => __( 'Text Color - Normal', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-pass a" => 'color: {{VALUE}};',
+			],
+			'separator' => 'before',
+			'condition' => [
+				'forget_pass_style_pot' => 'yes',
+			],
+		] );
+		$this->add_control( 'eael_forget_pass_label_bg_color_normal', [
+			'label'     => __( 'Text Background - Normal', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#ffffff',
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-pass" => 'background-color: {{VALUE}};',
+			],
+			'condition' => [
+				'forget_pass_style_pot' => 'yes',
+			],
+		] );
+		
+		$this->add_control( 'eael_forget_pass_label_color_hover', [
+			'label'     => __( 'Text Color - Hover', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-pass:hover a" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'forget_pass_style_pot' => 'yes',
+			],
+		] );
+		$this->add_control( 'eael_forget_pass_label_bg_color_hover', [
+			'label'     => __( 'Text Background - Hover', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#ffffff',
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-pass:hover" => 'background-color: {{VALUE}};',
+			],
+			'condition' => [
+				'forget_pass_style_pot' => 'yes',
+			],
+		] );
+
+		$this->end_popover();
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'label'    => __( 'Forgot Password Typography', 'essential-addons-for-elementor-lite' ),
+			'name'     => "eael_forget_pass_label_typography",
+			'selector' => "{{WRAPPER}} .lr-form-wrapper .forget-pass a",
 		] );
 		$this->end_controls_section();
 	}
@@ -3896,7 +4026,7 @@ class Login_Register extends Widget_Base {
 
 			//Loss password
 			$show_lp = ( ! empty( $this->ds['show_lost_password'] ) && 'yes' === $this->ds['show_lost_password'] );
-			$lp_text = ! empty( $this->ds['lost_password_text'] ) ? HelperCLass::eael_wp_kses($this->ds['lost_password_text']) : __( 'Forgot password?', 'essential-addons-for-elementor-lite' );
+			$lp_text = ! empty( $this->ds['lost_password_text'] ) ? HelperCLass::eael_wp_kses($this->ds['lost_password_text']) : __( 'Forgot Password?', 'essential-addons-for-elementor-lite' );
 			$lp_link = sprintf( '<a href="%s">%s</a>', esc_attr( wp_lostpassword_url() ), $lp_text );
 			if ( ! empty( $this->ds['lost_password_link_type'] ) && 'custom' === $this->ds['lost_password_link_type'] ) {
 				$lp_url  = ! empty( $this->ds['lost_password_url']['url'] ) ? $this->ds['lost_password_url']['url'] : wp_lostpassword_url();
