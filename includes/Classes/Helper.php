@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use \Elementor\Controls_Manager;
+use Elementor\Icons_Manager;
 use \Elementor\Utils;
 use Elementor\Plugin;
 
@@ -1233,4 +1234,34 @@ class Helper
 
         return $color;
     }
+
+	/**
+	 * Get Render Icon
+	 *
+	 * Used to get render Icon for \Elementor\Controls_Manager::ICONS
+	 * @param array $icon             Icon Type, Icon value
+	 * @param array $attributes       Icon HTML Attributes
+	 * @param string $tag             Icon HTML tag, defaults to <i>
+	 *
+	 * @return mixed|string
+	 */
+	public static function get_render_icon( $icon, $attributes = [], $tag = 'i' ) {
+		if ( empty( $icon['library'] ) ) {
+			return false;
+		}
+
+		$output = '';
+
+		/**
+		 * When the library value is svg it means that it's a SVG media attachment uploaded by the user.
+		 * Otherwise, it's the name of the font family that the icon belongs to.
+		 */
+		if ( 'svg' === $icon['library'] ) {
+			$output = Icons_Manager::render_uploaded_svg_icon( $icon['value'] );
+		} else {
+			$output = Icons_Manager::render_font_icon( $icon, $attributes, $tag );
+		}
+
+		return $output;
+	}
 }
