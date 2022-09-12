@@ -238,9 +238,16 @@ var SimpleMenu = function ($scope, $) {
         'click',
         '.eael-simple-menu-responsive li a',
         function (e) {
-            $(this).parents('.eael-simple-menu-horizontal').slideUp(300)
+            if ($(this).attr('href') !== '#') {
+                $(this).parents('.eael-simple-menu-horizontal').slideUp(300);
+            }
         }
     )
+
+    $('.eael-simple-menu', $scope).on('click', 'a[href="#"]', function (e) {
+        e.preventDefault();
+        $(this).siblings('.eael-simple-menu-indicator').click();
+    });
 }
 
 jQuery(window).on('elementor/frontend/init', function () {
