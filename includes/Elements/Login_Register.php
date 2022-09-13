@@ -85,6 +85,13 @@ class Login_Register extends Widget_Base {
 	 * @var string|false
 	 */
 	protected $recaptcha_sitekey;
+
+	/**
+	 * Google reCAPTCHA v3 Site key
+	 * @var string|false
+	 */
+	protected $recaptcha_sitekey_v3;
+
 	/**
 	 * @var mixed|void
 	 */
@@ -99,6 +106,7 @@ class Login_Register extends Widget_Base {
 		parent::__construct( $data, $args );
 		$this->user_can_register = get_option( 'users_can_register' );
 		$this->recaptcha_sitekey = get_option( 'eael_recaptcha_sitekey' );
+		$this->recaptcha_sitekey_v3 = get_option( 'eael_recaptcha_sitekey_v3' );
 		$this->in_editor         = Plugin::instance()->editor->is_edit_mode();
 		$this->pro_enabled       = apply_filters( 'eael/pro_enabled', false );
 
@@ -434,24 +442,6 @@ class Login_Register extends Widget_Base {
 				'separator' => 'before',
 			] );
 		}
-		$this->add_control( 'enable_login_recaptcha', [
-			'label'        => __( 'Enable Google reCAPTCHA', 'essential-addons-for-elementor-lite' ),
-			'description'  => __( 'reCAPTCHA will prevent spam login from bots.', 'essential-addons-for-elementor-lite' ),
-			'type'         => Controls_Manager::SWITCHER,
-			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
-			'return_value' => 'yes',
-		] );
-		if ( empty( $this->recaptcha_sitekey ) ) {
-			$this->add_control( 'eael_login_recaptcha_keys_missing', [
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => sprintf( __( 'reCAPTCHA API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
-				'content_classes' => 'eael-warning',
-				'condition'       => [
-					'enable_login_recaptcha' => 'yes',
-				],
-			] );
-		}
 		$this->end_popover();
 
 
@@ -512,24 +502,6 @@ class Login_Register extends Widget_Base {
 					'show_login_link'   => 'yes',
 				],
 			] );
-			$this->add_control( 'enable_register_recaptcha', [
-				'label'        => __( 'Enable Google reCAPTCHA', 'essential-addons-for-elementor-lite' ),
-				'description'  => __( 'reCAPTCHA will prevent spam registration from bots.', 'essential-addons-for-elementor-lite' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
-			] );
-			if ( empty( $this->recaptcha_sitekey ) ) {
-				$this->add_control( 'eael_recaptcha_keys_missing', [
-					'type'            => Controls_Manager::RAW_HTML,
-					'raw'             => sprintf( __( 'reCAPTCHA API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
-					'content_classes' => 'eael-warning',
-					'condition'       => [
-						'enable_register_recaptcha' => 'yes',
-					],
-				] );
-			}
 			do_action( 'eael/login-register/mailchimp-integration', $this );
 			$this->end_popover();
 
@@ -538,6 +510,90 @@ class Login_Register extends Widget_Base {
 				'label'   => __( 'Show Login Link', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::HIDDEN,
 				'default' => 'no',
+			] );
+		}
+
+		$this->add_control( 'enable_login_register_recaptcha', [
+			'label'        => __( 'Enable Google reCAPTCHA', 'essential-addons-for-elementor-lite' ),
+			'description'  => __( 'reCAPTCHA will prevent spam login from bots.', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'default'      => 'yes',
+		] );
+
+		$this->add_control( 'login_register_recaptcha_version', [
+			'label'       => __( 'reCAPTCHA version', 'essential-addons-for-elementor-lite' ),
+			'label_block' => false,
+			'type'        => Controls_Manager::SELECT,
+			'options'     => [
+				'v2' => __( 'v2', 'essential-addons-for-elementor-lite' ),
+				'v3'  => __( 'v3', 'essential-addons-for-elementor-lite' ),
+			],
+			'default'     => 'v2',
+			'condition'   => [
+				'enable_login_register_recaptcha' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'login_register_recaptcha_v3_description', [
+			'type'      => Controls_Manager::RAW_HTML,
+			'content_classes' => 'elementor-control-field-description',
+			'raw'       => __( '<p style="margin-top:-15px">v3 will be applied to both forms. After saving, reload the preview to see the changes.</p>', 'essential-addons-for-elementor-lite' ),
+			'condition' => [
+				'login_register_recaptcha_version' => 'v3',
+				'enable_login_register_recaptcha'   => 'yes',
+			],
+		] );
+
+		$this->add_control( 'enable_login_recaptcha', [
+			'label'        => __( 'Apply on Login Form', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'condition'    => [
+				'enable_login_register_recaptcha' => 'yes',
+				'login_register_recaptcha_version' => 'v2',
+			],
+		] );
+
+		if( $this->user_can_register ) {
+			$this->add_control( 'enable_register_recaptcha', [
+				'label'        => __( 'Apply on Registration Form', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'condition'    => [
+					'enable_login_register_recaptcha' => 'yes',
+					'login_register_recaptcha_version' => 'v2',
+				],
+			] );
+		}
+		
+		if ( empty( $this->recaptcha_sitekey ) ) {
+			$this->add_control( 'eael_recaptcha_keys_missing', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => sprintf( __( 'reCAPTCHA v2 API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
+				'content_classes' => 'eael-warning',
+				'condition'       => [
+					'enable_login_register_recaptcha' => 'yes',
+					'login_register_recaptcha_version' => 'v2',
+				],
+			] );
+		}
+
+		if ( empty( $this->recaptcha_sitekey_v3 ) ) {
+			$this->add_control( 'eael_recaptcha_keys_missing_v3', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => sprintf( __( 'reCAPTCHA v3 API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
+				'content_classes' => 'eael-warning',
+				'condition'       => [
+					'enable_login_register_recaptcha' => 'yes',
+					'login_register_recaptcha_version' => 'v3',
+				],
 			] );
 		}
 
@@ -3942,7 +3998,6 @@ class Login_Register extends Widget_Base {
 			$this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
 		}
 
-
 		//handle form illustration
 		$form_image_id               = ! empty( $this->ds['lr_form_image']['id'] ) ? $this->ds['lr_form_image']['id'] : '';
 		$this->form_illustration_pos = ! empty( $this->ds['lr_form_image_position'] ) ? $this->ds['lr_form_image_position'] : 'left';
@@ -3955,11 +4010,33 @@ class Login_Register extends Widget_Base {
 		if ( ! empty( $this->ds['redirect_after_login'] ) && 'yes' === $this->ds['redirect_after_login'] ) {
 			$login_redirect_url = !empty( $this->ds[ 'redirect_url' ][ 'url' ] ) ? esc_url( $this->ds[ 'redirect_url' ][ 'url' ] ) : '';
 		}
+
+		$login_recaptcha_version = $register_recaptcha_version = ! empty( $this->ds['login_register_recaptcha_version'] ) ? $this->ds['login_register_recaptcha_version'] : 'v2';
+
+		if ( get_option('eael_recaptcha_sitekey_v3') && ( 'v3' === $login_recaptcha_version || 'v3' === $register_recaptcha_version)  ) {
+			$site_key = esc_html( get_option('eael_recaptcha_sitekey_v3') );
+			
+	        if ( $recaptcha_language = esc_html( get_option( 'eael_recaptcha_language_v3' ) ) ) {
+		        $recaptcha_api_args1['hl'] = $recaptcha_language;
+	        }
+
+            $recaptcha_api_args1['render'] = $site_key;
+            
+	        $recaptcha_api_args1 = apply_filters( 'eael_lr_recaptcha_api_args_v3', $recaptcha_api_args1 );
+	        $recaptcha_api_args1 = http_build_query( $recaptcha_api_args1 );
+            wp_register_script('eael-recaptcha-v3', "https://www.google.com/recaptcha/api.js?{$recaptcha_api_args1}", false, EAEL_PLUGIN_VERSION, false);
+			wp_enqueue_script('eael-recaptcha-v3');
+			wp_dequeue_script('eael-recaptcha');
+        }
+
 		?>
         <div class="eael-login-registration-wrapper <?php echo empty( $form_image_id ) ? '' : esc_attr( 'has-illustration' ); ?>"
              data-is-ajax="<?php echo esc_attr( $this->get_settings_for_display( 'enable_ajax' ) ); ?>"
              data-widget-id="<?php echo esc_attr( $this->get_id() ); ?>"
              data-recaptcha-sitekey="<?php echo esc_attr( get_option( 'eael_recaptcha_sitekey' ) ); ?>"
+			 data-recaptcha-sitekey-v3="<?php echo esc_attr( get_option( 'eael_recaptcha_sitekey_v3' ) ); ?>"
+			 data-login-recaptcha-version="<?php echo esc_attr( $login_recaptcha_version ); ?>"
+			 data-register-recaptcha-version="<?php echo esc_attr( $register_recaptcha_version ); ?>"
              data-redirect-to="<?php echo esc_attr( $login_redirect_url ); ?>"
         >
 			<?php
@@ -4592,7 +4669,7 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_recaptcha_node( $form_type = 'login' ) {
-		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) ) {
+		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) && 'v3' !== $this->ds["login_register_recaptcha_version"] ) {
 			$id = "{$form_type}-recaptcha-node-" . $this->get_id();
 			echo "<input type='hidden' name='g-recaptcha-enabled' value='1'/><div id='{$id}' class='eael-recaptcha-wrapper'></div>";
 		}
