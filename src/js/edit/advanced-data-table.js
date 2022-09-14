@@ -401,11 +401,16 @@ class advancedDataTableEdit {
 						title: "Add Row Above",
 						callback() {
 							const { view, table, activeCell } = ea.hooks.applyFilters("advancedDataTable.getClassProps");
+							// remove blank tr if any
+							jQuery(table).find('tr:empty').each(function() {
+								if(jQuery(this).find('td').length == 0) {
+									this.remove();
+								}
+							});
 
-							if (activeCell !== null && activeCell.tagName.toLowerCase() != "th") {
+							if ( activeCell !== null && activeCell.tagName.toLowerCase() != "th" && activeCell.parentNode.rowIndex ) {
 								let index = activeCell.parentNode.rowIndex;
 								let row = table.insertRow(index);
-
 								// insert cells in row
 								for (let i = 0; i < table.rows[0].cells.length; i++) {
 									let cell = row.insertCell(i);
