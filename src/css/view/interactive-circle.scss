@@ -396,6 +396,50 @@
         @media only screen and (min-width: $breakpoint + 1) {
             &.eael-interactive-circle-animation-1 {
                 $animation-duration: 2s;
+
+                [data-items="3"] {
+                    @keyframes eael-1-a1p1di3-item-1-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 0%;
+                            left: 50%;
+                        }
+                    }
+                    @keyframes eael-1-a1p1di3-item-2-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 75%;
+                            left: 93%;
+                        }
+                    }
+                    @keyframes eael-1-a1p1di3-item-3-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 75%;
+                            left: 7%;
+                        }
+                    }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            animation: eael-1-a1p1di3-item-1-btn-animation $animation-duration;
+                        }
+                        #eael-circle-item-2 {
+                            animation: eael-1-a1p1di3-item-2-btn-animation $animation-duration;
+                        }
+                        #eael-circle-item-3 {
+                            animation: eael-1-a1p1di3-item-3-btn-animation $animation-duration;
+                        }
+                    }
+                }
                 [data-items="4"] {
                     @keyframes eael-1-a1p1di4-item-1-btn-animation {
                         0% {
