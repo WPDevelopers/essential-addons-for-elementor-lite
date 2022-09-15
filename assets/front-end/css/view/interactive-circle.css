@@ -426,6 +426,126 @@
           transform: translate(-50%, -50%);
 }
 @media only screen and (min-width: 601px) {
+  @-webkit-keyframes eael-1-a1p1di5-item-1-btn-animation {
+    0% {
+      top: 50%;
+      left: 50%;
+    }
+    100% {
+      top: 0%;
+      left: 50%;
+    }
+  }
+  @keyframes eael-1-a1p1di5-item-1-btn-animation {
+    0% {
+      top: 50%;
+      left: 50%;
+    }
+    100% {
+      top: 0%;
+      left: 50%;
+    }
+  }
+  @-webkit-keyframes eael-1-a1p1di5-item-2-btn-animation {
+    0% {
+      top: 50%;
+      left: 50%;
+    }
+    100% {
+      top: 39%;
+      left: 99%;
+    }
+  }
+  @keyframes eael-1-a1p1di5-item-2-btn-animation {
+    0% {
+      top: 50%;
+      left: 50%;
+    }
+    100% {
+      top: 39%;
+      left: 99%;
+    }
+  }
+  @-webkit-keyframes eael-1-a1p1di5-item-3-btn-animation {
+    0% {
+      top: 50%;
+      left: 50%;
+    }
+    100% {
+      top: 90%;
+      left: 20%;
+    }
+  }
+  @keyframes eael-1-a1p1di5-item-3-btn-animation {
+    0% {
+      top: 50%;
+      left: 50%;
+    }
+    100% {
+      top: 90%;
+      left: 20%;
+    }
+  }
+  @-webkit-keyframes eael-1-a1p1di5-item-4-btn-animation {
+    0% {
+      top: 50%;
+      left: 50%;
+    }
+    100% {
+      top: 90%;
+      left: 80%;
+    }
+  }
+  @keyframes eael-1-a1p1di5-item-4-btn-animation {
+    0% {
+      top: 50%;
+      left: 50%;
+    }
+    100% {
+      top: 90%;
+      left: 80%;
+    }
+  }
+  @-webkit-keyframes eael-1-a1p1di5-item-5-btn-animation {
+    0% {
+      top: 50%;
+      left: 50%;
+    }
+    100% {
+      top: 39%;
+      left: 1%;
+    }
+  }
+  @keyframes eael-1-a1p1di5-item-5-btn-animation {
+    0% {
+      top: 50%;
+      left: 50%;
+    }
+    100% {
+      top: 39%;
+      left: 1%;
+    }
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-1.eael-interactive-circle-animation-1 [data-items="5"] .eael-circle-item #eael-circle-item-1 {
+    -webkit-animation: eael-1-a1p1di5-item-1-btn-animation 2s;
+            animation: eael-1-a1p1di5-item-1-btn-animation 2s;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-1.eael-interactive-circle-animation-1 [data-items="5"] .eael-circle-item #eael-circle-item-2 {
+    -webkit-animation: eael-1-a1p1di5-item-2-btn-animation 2s;
+            animation: eael-1-a1p1di5-item-2-btn-animation 2s;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-1.eael-interactive-circle-animation-1 [data-items="5"] .eael-circle-item #eael-circle-item-3 {
+    -webkit-animation: eael-1-a1p1di5-item-3-btn-animation 2s;
+            animation: eael-1-a1p1di5-item-3-btn-animation 2s;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-1.eael-interactive-circle-animation-1 [data-items="5"] .eael-circle-item #eael-circle-item-4 {
+    -webkit-animation: eael-1-a1p1di5-item-4-btn-animation 2s;
+            animation: eael-1-a1p1di5-item-4-btn-animation 2s;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-preset-1.eael-interactive-circle-animation-1 [data-items="5"] .eael-circle-item #eael-circle-item-5 {
+    -webkit-animation: eael-1-a1p1di5-item-5-btn-animation 2s;
+            animation: eael-1-a1p1di5-item-5-btn-animation 2s;
+  }
   @-webkit-keyframes eael-1-a1p1di6-item-1-btn-animation {
     0% {
       top: 50%;
