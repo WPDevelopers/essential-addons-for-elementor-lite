@@ -396,7 +396,53 @@
         @media only screen and (min-width: $breakpoint + 1) {
             &.eael-interactive-circle-animation-1 {
                 $animation-duration: 2s;
-
+                [data-items="1"] {
+                    @keyframes eael-1-a1p1di1-item-1-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 0%;
+                            left: 50%;
+                        }
+                    }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            animation: eael-1-a1p1di1-item-1-btn-animation $animation-duration;
+                        }
+                    }
+                }
+                [data-items="2"] {
+                    @keyframes eael-1-a1p1di2-item-1-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 0%;
+                            left: 50%;
+                        }
+                    }
+                    @keyframes eael-1-a1p1di2-item-2-btn-animation {
+                        0% {
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 100%;
+                            left: 50%;
+                        }
+                    }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            animation: eael-1-a1p1di2-item-1-btn-animation $animation-duration;
+                        }
+                        #eael-circle-item-2 {
+                            animation: eael-1-a1p1di2-item-2-btn-animation $animation-duration;
+                        }
+                    }
+                }
                 [data-items="3"] {
                     @keyframes eael-1-a1p1di3-item-1-btn-animation {
                         0% {
@@ -447,8 +493,8 @@
                             left: 50%;
                         }
                         100%{
-                            top: 0%;
-                            left: 50%;
+                            top: 14.65%;
+                            left: 14.65%;
                         }
                     }
                     @keyframes eael-1-a1p1di4-item-2-btn-animation {
