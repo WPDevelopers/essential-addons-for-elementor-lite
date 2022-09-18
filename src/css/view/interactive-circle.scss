@@ -3333,14 +3333,580 @@
             &.eael-interactive-circle-animation-2 {
                 $animation-duration: 2s;
                 $animation-angle: 700deg;
-                .eael-circle-info {
-                    @keyframes eael-2-anim-2-btn-animation {
-                        15% {
+                [data-items="1"] {
+                    @keyframes eael-a2p2di1-item-1-animation{
+                        0%{
                             top: 50%;
                             left: 50%;
-                            transform: translate(-50%, -50%) rotate(-$animation-angle);
+                            transform: rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 0%;
+                            left: 50%;
+                            transform: rotate(0);
                         }
                     }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            transform: translate(-50%, -50%);
+                            animation: eael-a2p2di1-item-1-animation $animation-duration;
+                        }
+                    }
+                }
+                [data-items="2"] {
+                    @keyframes eael-a2p2di2-item-1-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 40%;
+                            left: 10%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di2-item-2-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 40%;
+                            left: 90%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            animation: eael-a2p2di2-item-1-animation $animation-duration;
+                        }
+                        #eael-circle-item-2 {
+                            animation: eael-a2p2di2-item-2-animation $animation-duration;
+                        }
+                    }
+                }
+                [data-items="3"] {
+                    @keyframes eael-a2p2di3-item-1-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 72%;
+                            left: 2%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di3-item-2-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 0%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di3-item-3-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 72%;
+                            left: 98%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            animation: eael-a2p2di3-item-1-animation $animation-duration;
+                        }
+                        #eael-circle-item-2 {
+                            animation: eael-a2p2di3-item-2-animation $animation-duration;
+                        }
+                        #eael-circle-item-3 {
+                            animation: eael-a2p2di3-item-3-animation $animation-duration;
+                        }
+                    }
+                }
+                [data-items="4"] {
+                    @keyframes eael-a2p2di4-item-1-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 72%;
+                            left: 2%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di4-item-2-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 10.6%;
+                            left: 27.6%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di4-item-3-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 10.6%;
+                            left: 72.4%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di4-item-4-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 72%;
+                            left: 98%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            animation: eael-a2p2di4-item-1-animation $animation-duration;
+                        }
+                        #eael-circle-item-2 {
+                            animation: eael-a2p2di4-item-2-animation $animation-duration;
+                        }
+                        #eael-circle-item-3 {
+                            animation: eael-a2p2di4-item-3-animation $animation-duration;
+                        }
+                        #eael-circle-item-4 {
+                            animation: eael-a2p2di4-item-4-animation $animation-duration;
+                        }
+                    }
+                }
+                [data-items="5"] {
+                    @keyframes eael-a2p2di5-item-1-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 72%;
+                            left: 2%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di5-item-2-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 20%;
+                            left: 20%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di5-item-3-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 0%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di5-item-4-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 20%;
+                            left: 80%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di5-item-5-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 72%;
+                            left: 98%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            animation: eael-a2p2di5-item-1-animation $animation-duration;
+                        }
+                        #eael-circle-item-2 {
+                            animation: eael-a2p2di5-item-2-animation $animation-duration;
+                        }
+                        #eael-circle-item-3 {
+                            animation: eael-a2p2di5-item-3-animation $animation-duration;
+                        }
+                        #eael-circle-item-4 {
+                            animation: eael-a2p2di5-item-4-animation $animation-duration;
+                        }
+                        #eael-circle-item-5 {
+                            animation: eael-a2p2di5-item-5-animation $animation-duration;
+                        }
+                    }
+                }
+                [data-items="6"] {
+                    @keyframes eael-a2p2di6-item-1-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 72%;
+                            left: 2%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di6-item-2-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 28.4%;
+                            left: 15%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di6-item-3-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 3.6%;
+                            left: 36.6%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di6-item-4-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 3.6%;
+                            left: 63.4%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di6-item-5-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 28.4%;
+                            left: 85%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di6-item-6-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 72%;
+                            left: 98%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            animation: eael-a2p2di6-item-1-animation $animation-duration;
+                        }
+                        #eael-circle-item-2 {
+                            animation: eael-a2p2di6-item-2-animation $animation-duration;
+                        }
+                        #eael-circle-item-3 {
+                            animation: eael-a2p2di6-item-3-animation $animation-duration;
+                        }
+                        #eael-circle-item-4 {
+                            animation: eael-a2p2di6-item-4-animation $animation-duration;
+                        }
+                        #eael-circle-item-5 {
+                            animation: eael-a2p2di6-item-5-animation $animation-duration;
+                        }
+                        #eael-circle-item-6 {
+                            animation: eael-a2p2di6-item-6-animation $animation-duration;
+                        }
+                    }
+                }
+                [data-items="7"] {
+                    @keyframes eael-a2p2di7-item-1-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 72%;
+                            left: 2%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di7-item-2-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 37.5%;
+                            left: 11%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di7-item-3-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 10.9%;
+                            left: 27.3%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di7-item-4-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 0;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di7-item-5-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 10.9%;
+                            left: 72.7%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di7-item-6-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 37.5%;
+                            left: 89%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di7-item-7-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 72%;
+                            left: 98%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            animation: eael-a2p2di7-item-1-animation $animation-duration;
+                        }
+                        #eael-circle-item-2 {
+                            animation: eael-a2p2di7-item-2-animation $animation-duration;
+                        }
+                        #eael-circle-item-3 {
+                            animation: eael-a2p2di7-item-3-animation $animation-duration;
+                        }
+                        #eael-circle-item-4 {
+                            animation: eael-a2p2di7-item-4-animation $animation-duration;
+                        }
+                        #eael-circle-item-5 {
+                            animation: eael-a2p2di7-item-5-animation $animation-duration;
+                        }
+                        #eael-circle-item-6 {
+                            animation: eael-a2p2di7-item-6-animation $animation-duration;
+                        }
+                        #eael-circle-item-7 {
+                            animation: eael-a2p2di7-item-7-animation $animation-duration;
+                        }
+                    }
+                }
+                [data-items="8"] {
+                    @keyframes eael-a2p2di8-item-1-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 72%;
+                            left: 2%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di8-item-2-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 40%;
+                            left: 10%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di8-item-3-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 16%;
+                            left: 22.9%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di8-item-4-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 1.9%;
+                            left: 40.6%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di8-item-5-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 1.9%;
+                            left: 59.4%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di8-item-6-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 16%;
+                            left: 77.1%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di8-item-7-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 40%;
+                            left: 90%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    @keyframes eael-a2p2di8-item-8-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                            transform:translate(-50%, -50%) rotate(-$animation-angle);
+                        }
+                        100%{
+                            top: 72%;
+                            left: 98%;
+                            transform:translate(-50%, -50%) rotate(0);
+                        }
+                    }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            animation: eael-a2p2di8-item-1-animation $animation-duration;
+                        }
+                        #eael-circle-item-2 {
+                            animation: eael-a2p2di8-item-2-animation $animation-duration;
+                        }
+                        #eael-circle-item-3 {
+                            animation: eael-a2p2di8-item-3-animation $animation-duration;
+                        }
+                        #eael-circle-item-4 {
+                            animation: eael-a2p2di8-item-4-animation $animation-duration;
+                        }
+                        #eael-circle-item-5 {
+                            animation: eael-a2p2di8-item-5-animation $animation-duration;
+                        }
+                        #eael-circle-item-6 {
+                            animation: eael-a2p2di8-item-6-animation $animation-duration;
+                        }
+                        #eael-circle-item-7 {
+                            animation: eael-a2p2di8-item-7-animation $animation-duration;
+                        }
+                        #eael-circle-item-8 {
+                            animation: eael-a2p2di8-item-8-animation $animation-duration;
+                        }
+                    }
+                }
+                .eael-circle-info {
                     @keyframes eael-2-anim-2-content-animation {
                         0% {
                             transform: scale(0);
@@ -3351,7 +3917,6 @@
                     }
                     .eael-circle-btn {
                         transform-origin: center center;
-                        animation: eael-2-anim-2-btn-animation $animation-duration;
                     }
                     .eael-circle-btn-content {
                         animation: eael-2-anim-2-content-animation $animation-duration;
