@@ -284,6 +284,19 @@ class Login_Register extends Widget_Base {
 			],
 			'default' => 'login',
 		] );
+		
+		if ( ! $this->user_can_register ) {
+			$this->add_control( 'registration_off_notice', [
+				'type'            => Controls_Manager::RAW_HTML,
+				/* translators: %1$s is settings page link open tag, %2$s is link closing tag */
+				'raw'             => sprintf( __( 'Registration is disabled on your site. Please enable it to use registration form. You can enable it from Dashboard » Settings » General » %1$sMembership%2$s.', 'essential-addons-for-elementor-lite' ), '<a href="' . esc_attr( esc_url( admin_url( 'options-general.php' ) ) ) . '" target="_blank">', '</a>' ),
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
+				'condition'       => [
+					'default_form_type' => 'register',
+				],
+			] );
+		}
+
 		// preview reset password form
 		$this->add_control( 'preview_reset_password', [
 			'label'   => __( 'Preview Reset Password in Editor?', 'essential-addons-for-elementor-lite' ),
@@ -304,17 +317,7 @@ class Login_Register extends Widget_Base {
 				],
 			],
 		] );
-		if ( ! $this->user_can_register ) {
-			$this->add_control( 'registration_off_notice', [
-				'type'            => Controls_Manager::RAW_HTML,
-				/* translators: %1$s is settings page link open tag, %2$s is link closing tag */
-				'raw'             => sprintf( __( 'Registration is disabled on your site. Please enable it to use registration form. You can enable it from Dashboard » Settings » General » %1$sMembership%2$s.', 'essential-addons-for-elementor-lite' ), '<a href="' . esc_attr( esc_url( admin_url( 'options-general.php' ) ) ) . '" target="_blank">', '</a>' ),
-				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
-				'condition'       => [
-					'default_form_type' => 'register',
-				],
-			] );
-		}
+		
 		$this->add_control( 'hide_for_logged_in_user', [
 			'label'   => __( 'Hide all Forms from Logged-in Users', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SWITCHER,
