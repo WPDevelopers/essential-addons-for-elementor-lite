@@ -7,7 +7,9 @@ var CountDown = function ($scope, $) {
 		$redirect_url = $coundDown.data("redirect-url") !== undefined ? $coundDown.data("redirect-url") : "",
 		$template = $coundDown.data("template") !== undefined ? $coundDown.data("template") : "",
 		$countdown_type = $coundDown.data("countdown-type") !== undefined ? $coundDown.data("countdown-type") : "",
-		$evergreen_time = $coundDown.data("evergreen-time") !== undefined ? $coundDown.data("evergreen-time") : "";
+		$evergreen_time = $coundDown.data("evergreen-time") !== undefined ? $coundDown.data("evergreen-time") : "",
+		$recurring = $coundDown.data("evergreen-recurring") !== undefined ? $coundDown.data("evergreen-recurring") : false,
+		$recurring_stop_time = $coundDown.data("evergreen-recurring-stop") !== undefined ? $coundDown.data("evergreen-recurring-stop") : "";
 
 	jQuery(document).ready(function ($) {
 		"use strict";
@@ -41,12 +43,27 @@ var CountDown = function ($scope, $) {
 			let $evergreen_interval = `eael_countdown_evergreen_interval_${$countdown_id}`,
 				$evergreen_time_key = `eael_countdown_evergreen_time_${$countdown_id}`,
 				$interval = localStorage.getItem($evergreen_interval),
-				$date = localStorage.getItem($evergreen_time_key);
+				$date = localStorage.getItem($evergreen_time_key),
+				HOUR_IN_MILISECONDS = 60 * 60 * 1000;
 
 			if ($date === null || $interval === null || $interval != $evergreen_time) {
 				$date = Date.now() + parseInt($evergreen_time) * 1000;
 				localStorage.setItem($evergreen_interval, $evergreen_time.toString());
 				localStorage.setItem($evergreen_time_key, $date.toString());
+			}
+
+			if ($recurring !== false) {
+				$recurring_stop_time = new Date($recurring_stop_time);
+				let $recurring_after = parseFloat($recurring) * HOUR_IN_MILISECONDS;
+
+				if (parseInt($date) + $recurring_after < Date.now()) {
+					$date = Date.now() + parseInt($evergreen_time) * 1000;
+					localStorage.setItem($evergreen_time_key, $date.toString());
+				}
+
+				if ($recurring_stop_time.getTime() < $date) {
+					$date = $recurring_stop_time.getTime();
+				}
 			}
 
 			eael_countdown_options.date = new Date(parseInt($date));
