@@ -38,8 +38,18 @@ var CountDown = function ($scope, $) {
 			};
 
 		if ($countdown_type === 'evergreen') {
-			let $date = Date.now() + parseInt($evergreen_time) * 1000;
-			eael_countdown_options.date = new Date($date);
+			let $evergreen_interval = `eael_countdown_evergreen_interval_${$countdown_id}`,
+				$evergreen_time_key = `eael_countdown_evergreen_time_${$countdown_id}`,
+				$interval = localStorage.getItem($evergreen_interval),
+				$date = localStorage.getItem($evergreen_time_key);
+
+			if ($date === null || $interval === null || $interval != $evergreen_time) {
+				$date = Date.now() + parseInt($evergreen_time) * 1000;
+				localStorage.setItem($evergreen_interval, $evergreen_time.toString());
+				localStorage.setItem($evergreen_time_key, $date.toString());
+			}
+
+			eael_countdown_options.date = new Date(parseInt($date));
 		}
 
 		countDown.countdown(eael_countdown_options);
