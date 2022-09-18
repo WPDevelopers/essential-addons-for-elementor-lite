@@ -317,7 +317,7 @@ class Login_Register extends Widget_Base {
 				],
 			],
 		] );
-		
+
 		$this->add_control( 'hide_for_logged_in_user', [
 			'label'   => __( 'Hide all Forms from Logged-in Users', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SWITCHER,
@@ -3726,20 +3726,50 @@ class Login_Register extends Widget_Base {
 
 	protected function init_style_register_link_controls() {
 		$link_section_condition = [
-			"show_register_link" => 'yes',
-		];
-
-		// To Display lostpassword tab
-		$link_section_condition_lostpassword = [
-			'show_lost_password' => 'yes',
-			'lost_password_link_type' => 'form',
-			'show_login_link_lostpassword' => 'yes',
+			'relation' => 'or',
+			'terms' => [
+				[
+					'name' => 'show_register_link',
+					'value' => 'yes',
+				],
+				[
+					'relation' => 'and',
+					'terms' => [
+						[
+							'name'  => 'show_lost_password',
+							'value' => 'yes',
+						],
+						[
+							'name'  => 'lost_password_link_type',
+							'value' => 'form',
+						],
+						[
+							'name'  => 'show_login_link_lostpassword',
+							'value' => 'yes',
+						],
+					]
+				],
+				[
+					'relation' => 'and',
+					'terms' => [
+						[
+							'name'  => 'default_form_type',
+							'value' => 'lostpassword',
+						],
+						[
+							'name'  => 'show_login_link_lostpassword',
+							'value' => 'yes',
+						],
+					]
+				],
+				
+			],
 		];
 
 		$this->start_controls_section( "section_style_register_link", [
 			'label'     => sprintf( __( '%s Link', 'essential-addons-for-elementor-lite' ), ucfirst( 'Login' ) ),
 			'tab'       => Controls_Manager::TAB_STYLE,
-			'condition' => $link_section_condition,
+			'conditions' => $link_section_condition,
 		] );
 
 		$this->_init_link_style( 'register', 0 );
