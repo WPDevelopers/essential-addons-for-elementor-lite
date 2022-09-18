@@ -70,7 +70,7 @@ class Countdown extends Widget_Base {
 			    'label' => esc_html__( 'Type', 'essential-addons-for-elementor-lite' ),
 			    'type' => Controls_Manager::SELECT,
 			    'options' => [
-				    'due_date' => esc_html__( 'Due Date', 'essential-addons-for-elementor-lite' ),
+				    'due_date' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
 				    'evergreen' => esc_html__( 'Evergreen Timer', 'essential-addons-for-elementor-lite' ),
 			    ],
 			    'default' => 'due_date',
@@ -1210,6 +1210,12 @@ class Countdown extends Widget_Base {
         $this->add_render_attribute( 'eael-countdown', 'data-countdown-id', esc_attr( $this->get_id() ) );
         $this->add_render_attribute( 'eael-countdown', 'data-expire-type', $settings['countdown_expire_type'] );
         $this->add_render_attribute( 'eael-countdown', 'data-countdown-type', $settings['eael_countdown_type'] );
+
+	    if ( $settings['eael_countdown_type'] === 'evergreen' ) {
+		    $hour   = absint( $settings['eael_evergreen_counter_hours'] ) * HOUR_IN_SECONDS;
+		    $minute = absint( $settings['eael_evergreen_counter_minutes'] ) * MINUTE_IN_SECONDS;
+		    $this->add_render_attribute( 'eael-countdown', 'data-evergreen-time', absint( $hour + $minute ) );
+	    }
 
         if ( $settings['countdown_expire_type'] == 'text' ) {
             if ( !empty( $settings['countdown_expiry_text'] ) ) {

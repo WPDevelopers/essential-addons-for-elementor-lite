@@ -6,7 +6,8 @@ var CountDown = function ($scope, $) {
 		$expiry_title = $coundDown.data("expiry-title") !== undefined ? $coundDown.data("expiry-title") : "",
 		$redirect_url = $coundDown.data("redirect-url") !== undefined ? $coundDown.data("redirect-url") : "",
 		$template = $coundDown.data("template") !== undefined ? $coundDown.data("template") : "",
-		$countdown_type = $coundDown.data("countdown-type") !== undefined ? $coundDown.data("countdown-type") : "";
+		$countdown_type = $coundDown.data("countdown-type") !== undefined ? $coundDown.data("countdown-type") : "",
+		$evergreen_time = $coundDown.data("evergreen-time") !== undefined ? $coundDown.data("evergreen-time") : "";
 
 	jQuery(document).ready(function ($) {
 		"use strict";
@@ -37,7 +38,8 @@ var CountDown = function ($scope, $) {
 			};
 
 		if ($countdown_type === 'evergreen') {
-			eael_countdown_options.date = new Date(2022, 8, 13);
+			let $date = Date.now() + parseInt($evergreen_time) * 1000;
+			eael_countdown_options.date = new Date($date);
 		}
 
 		countDown.countdown(eael_countdown_options);
