@@ -5059,13 +5059,113 @@
         @media only screen and (min-width: $breakpoint + 1) {
             &.eael-interactive-circle-animation-1 {
                 $animation-duration: 2s;
-                .eael-circle-inner {
-                    @keyframes eael-3-anim-1-btn-animation {
-                        0% {
-                            top: 50%;
-                            left: 50%;
-                        }
+                @keyframes eael-a1p3di8-item-1-animation{
+                    0%{
+                        top: 50%;
+                        left: 50%;
                     }
+                    100%{
+                        top: 14.6%;
+                        left: 14.6%;
+                    }
+                }
+                @keyframes eael-a1p3di8-item-2-animation{
+                    0%{
+                        top: 50%;
+                        left: 50%;
+                    }
+                    100%{
+                        top: 14.6%;
+                        left: 85.4%;
+                    }
+                }
+                @keyframes eael-a1p3di8-item-3-animation{
+                    0%{
+                        top: 50%;
+                        left: 50%;
+                    }
+                    100%{
+                        top: 85.4%;
+                        left: 14.6%;
+                    }
+                }
+                @keyframes eael-a1p3di8-item-4-animation{
+                    0%{
+                        top: 50%;
+                        left: 50%;
+                    }
+                    100%{
+                        top: 85.4%;
+                        left: 85.4%;
+                    }
+                }
+                @keyframes eael-a1p3di8-item-5-animation{
+                    0%{
+                        top: 50%;
+                        left: 50%;
+                    }
+                    100%{
+                        top: 50%;
+                        left: 0%;
+                    }
+                }
+                @keyframes eael-a1p3di8-item-6-animation{
+                    0%{
+                        top: 50%;
+                        left: 50%;
+                    }
+                    100%{
+                        top: 50%;
+                        left: 100%;
+                    }
+                }
+                @keyframes eael-a1p3di8-item-7-animation{
+                    0%{
+                        top: 50%;
+                        left: 50%;
+                    }
+                    100%{
+                        top: 0%;
+                        left: 50%;
+                    }
+                }
+                @keyframes eael-a1p3di8-item-8-animation{
+                    0%{
+                        top: 50%;
+                        left: 50%;
+                    }
+                    100%{
+                        top: 100%;
+                        left: 50%;
+                    }
+                }
+                .eael-circle-item {
+                    #eael-circle-item-1 {
+                        animation: eael-a1p3di8-item-1-animation $animation-duration;
+                    }
+                    #eael-circle-item-2 {
+                        animation: eael-a1p3di8-item-2-animation $animation-duration;
+                    }
+                    #eael-circle-item-3 {
+                        animation: eael-a1p3di8-item-3-animation $animation-duration;
+                    }
+                    #eael-circle-item-4 {
+                        animation: eael-a1p3di8-item-4-animation $animation-duration;
+                    }
+                    #eael-circle-item-5 {
+                        animation: eael-a1p3di8-item-5-animation $animation-duration;
+                    }
+                    #eael-circle-item-6 {
+                        animation: eael-a1p3di8-item-6-animation $animation-duration;
+                    }
+                    #eael-circle-item-7 {
+                        animation: eael-a1p3di8-item-7-animation $animation-duration;
+                    }
+                    #eael-circle-item-8 {
+                        animation: eael-a1p3di8-item-8-animation $animation-duration;
+                    }
+                }
+                .eael-circle-inner {
                     @keyframes eael-3-anim-1-shape-1-animation {
                         0% {
                             width: 0;
@@ -5077,7 +5177,6 @@
                         }
                     }
                     .eael-circle-btn {
-                        animation: eael-3-anim-1-btn-animation $animation-duration;
                         .eael-shape-1 {
                             animation: eael-3-anim-1-shape-1-animation $animation-duration;
                         }
