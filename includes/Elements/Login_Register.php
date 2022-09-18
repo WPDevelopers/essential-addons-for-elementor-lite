@@ -317,7 +317,6 @@ class Login_Register extends Widget_Base {
 				],
 			],
 		] );
-
 		$this->add_control( 'hide_for_logged_in_user', [
 			'label'   => __( 'Hide all Forms from Logged-in Users', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SWITCHER,
@@ -3725,7 +3724,7 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function init_style_register_link_controls() {
-		$link_section_condition = [
+		$link_section_conditions = [
 			'relation' => 'or',
 			'terms' => [
 				[
@@ -3769,7 +3768,7 @@ class Login_Register extends Widget_Base {
 		$this->start_controls_section( "section_style_register_link", [
 			'label'     => sprintf( __( '%s Link', 'essential-addons-for-elementor-lite' ), ucfirst( 'Login' ) ),
 			'tab'       => Controls_Manager::TAB_STYLE,
-			'conditions' => $link_section_condition,
+			'conditions' => $link_section_conditions,
 		] );
 
 		$this->_init_link_style( 'register', 0 );
