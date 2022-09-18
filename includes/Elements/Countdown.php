@@ -109,6 +109,51 @@ class Countdown extends Widget_Base {
 		    ]
 	    );
 
+	    $this->add_control(
+		    'eael_evergreen_counter_recurring',
+		    [
+			    'label'        => esc_html__( 'Recurring', 'essential-addons-for-elementor-lite' ),
+			    'type'         => Controls_Manager::SWITCHER,
+			    'return_value' => 'yes',
+			    'default'      => '',
+			    'condition'    => [
+				    'eael_countdown_type' => 'evergreen',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_evergreen_counter_recurring_restart_after',
+		    [
+			    'label'       => esc_html__( 'Restart After (Hours)', 'essential-addons-for-elementor-lite' ),
+			    'type'        => Controls_Manager::NUMBER,
+			    'default'     => 0,
+			    'description' => esc_html__( 'Please mention here how much the hour will be taken to restart the countdown again. if you set 0 it means the countdown will be restarted immediately.', 'essential-addons-for-elementor-lite' ),
+			    'placeholder' => esc_html__( 'Hours', 'essential-addons-for-elementor-lite' ),
+			    'condition'   => [
+				    'eael_countdown_type'              => 'evergreen',
+				    'eael_evergreen_counter_recurring' => 'yes',
+			    ],
+			    'dynamic'     => [
+				    'active' => true,
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_evergreen_counter_recurring_stop_time',
+		    [
+			    'label'       => esc_html__( 'Countdown Recurring Stop Date', 'essential-addons-for-elementor-lite' ),
+			    'type'        => Controls_Manager::DATE_TIME,
+			    'default'     => date( "Y-m-d", strtotime( "+ 7 day" ) ),
+			    'description' => esc_html__( 'Set the countdown end time', 'essential-addons-for-elementor-lite' ),
+			    'condition'   => [
+				    'eael_countdown_type'              => 'evergreen',
+				    'eael_evergreen_counter_recurring' => 'yes',
+			    ],
+		    ]
+	    );
+
         $this->add_control(
             'eael_countdown_due_time',
             [
