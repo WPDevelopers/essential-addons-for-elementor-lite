@@ -2829,6 +2829,303 @@
         @media only screen and (min-width: $breakpoint + 1) {
             &.eael-interactive-circle-animation-1 {
                 $animation-duration: 2s;
+                [data-items="1"] {
+                    @keyframes eael-a1p2di1-item-1-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 0%;
+                            left: 50%;
+                        }
+                    }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            animation: eael-a1p2di1-item-1-animation $animation-duration;
+                        }
+                    }
+                }
+                [data-items="2"] {
+                    @keyframes eael-a1p2di2-item-1-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 40%;
+                            left: 10%;
+                        }
+                    }
+                    @keyframes eael-a1p2di2-item-2-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 40%;
+                            left: 90%;
+                        }
+                    }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            animation: eael-a1p2di2-item-1-animation $animation-duration;
+                        }
+                        #eael-circle-item-2 {
+                            animation: eael-a1p2di2-item-2-animation $animation-duration;
+                        }
+                    }
+                }
+                [data-items="3"] {
+                    @keyframes eael-a1p2di3-item-1-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 72%;
+                            left: 2%;
+                        }
+                    }
+                    @keyframes eael-a1p2di3-item-2-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 0%;
+                            left: 50%;
+                        }
+                    }
+                    @keyframes eael-a1p2di3-item-3-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 72%;
+                            left: 98%;
+                        }
+                    }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            animation: eael-a1p2di3-item-1-animation $animation-duration;
+                        }
+                        #eael-circle-item-2 {
+                            animation: eael-a1p2di3-item-2-animation $animation-duration;
+                        }
+                        #eael-circle-item-3 {
+                            animation: eael-a1p2di3-item-3-animation $animation-duration;
+                        }
+                    }
+                }
+                [data-items="4"] {
+                    @keyframes eael-a1p2di4-item-1-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 72%;
+                            left: 2%;
+                        }
+                    }
+                    @keyframes eael-a1p2di4-item-2-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 10.6%;
+                            left: 27.6%;
+                        }
+                    }
+                    @keyframes eael-a1p2di4-item-3-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 10.6%;
+                            left: 72.4%;
+                        }
+                    }
+                    @keyframes eael-a1p2di4-item-4-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 72%;
+                            left: 98%;
+                        }
+                    }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            animation: eael-a1p2di4-item-1-animation $animation-duration;
+                        }
+                        #eael-circle-item-2 {
+                            animation: eael-a1p2di4-item-2-animation $animation-duration;
+                        }
+                        #eael-circle-item-3 {
+                            animation: eael-a1p2di4-item-3-animation $animation-duration;
+                        }
+                        #eael-circle-item-4 {
+                            animation: eael-a1p2di4-item-4-animation $animation-duration;
+                        }
+                    }
+                }
+                [data-items="5"] {
+                    @keyframes eael-a1p2di5-item-1-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 72%;
+                            left: 2%;
+                        }
+                    }
+                    @keyframes eael-a1p2di5-item-2-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 20%;
+                            left: 20%;
+                        }
+                    }
+                    @keyframes eael-a1p2di5-item-3-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 0%;
+                            left: 50%;
+                        }
+                    }
+                    @keyframes eael-a1p2di5-item-4-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 20%;
+                            left: 80%;
+                        }
+                    }
+                    @keyframes eael-a1p2di5-item-5-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 72%;
+                            left: 98%;
+                        }
+                    }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            animation: eael-a1p2di5-item-1-animation $animation-duration;
+                        }
+                        #eael-circle-item-2 {
+                            animation: eael-a1p2di5-item-2-animation $animation-duration;
+                        }
+                        #eael-circle-item-3 {
+                            animation: eael-a1p2di5-item-3-animation $animation-duration;
+                        }
+                        #eael-circle-item-4 {
+                            animation: eael-a1p2di5-item-4-animation $animation-duration;
+                        }
+                        #eael-circle-item-5 {
+                            animation: eael-a1p2di5-item-5-animation $animation-duration;
+                        }
+                    }
+                }
+                [data-items="6"] {
+                    @keyframes eael-a1p2di6-item-1-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 72%;
+                            left: 2%;
+                        }
+                    }
+                    @keyframes eael-a1p2di6-item-2-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 28.4%;
+                            left: 15%;
+                        }
+                    }
+                    @keyframes eael-a1p2di6-item-3-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 3.6%;
+                            left: 36.6%;
+                        }
+                    }
+                    @keyframes eael-a1p2di6-item-4-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 3.6%;
+                            left: 63.4%;
+                        }
+                    }
+                    @keyframes eael-a1p2di6-item-5-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 28.4%;
+                            left: 85%;
+                        }
+                    }
+                    @keyframes eael-a1p2di6-item-6-animation{
+                        0%{
+                            top: 50%;
+                            left: 50%;
+                        }
+                        100%{
+                            top: 72%;
+                            left: 98%;
+                        }
+                    }
+                    .eael-circle-item {
+                        #eael-circle-item-1 {
+                            animation: eael-a1p2di6-item-1-animation $animation-duration;
+                        }
+                        #eael-circle-item-2 {
+                            animation: eael-a1p2di6-item-2-animation $animation-duration;
+                        }
+                        #eael-circle-item-3 {
+                            animation: eael-a1p2di6-item-3-animation $animation-duration;
+                        }
+                        #eael-circle-item-4 {
+                            animation: eael-a1p2di6-item-4-animation $animation-duration;
+                        }
+                        #eael-circle-item-5 {
+                            animation: eael-a1p2di6-item-5-animation $animation-duration;
+                        }
+                        #eael-circle-item-6 {
+                            animation: eael-a1p2di6-item-6-animation $animation-duration;
+                        }
+                    }
+                }
                 [data-items="7"] {
                     @keyframes eael-a1p2di7-item-1-animation{
                         0%{
@@ -2902,7 +3199,8 @@
                     }
                     .eael-circle-item {
                         #eael-circle-item-1 {
-                            animation: eael-a1p2di7-item-1-animation $animation-duration;                        }
+                            animation: eael-a1p2di7-item-1-animation $animation-duration;
+                        }
                         #eael-circle-item-2 {
                             animation: eael-a1p2di7-item-2-animation $animation-duration;
                         }
@@ -3006,7 +3304,8 @@
                     }
                     .eael-circle-item {
                         #eael-circle-item-1 {
-                            animation: eael-a1p2di8-item-1-animation $animation-duration;                        }
+                            animation: eael-a1p2di8-item-1-animation $animation-duration;
+                        }
                         #eael-circle-item-2 {
                             animation: eael-a1p2di8-item-2-animation $animation-duration;
                         }
