@@ -1260,6 +1260,11 @@ class Countdown extends Widget_Base {
 		    $hour   = absint( $settings['eael_evergreen_counter_hours'] ) * HOUR_IN_SECONDS;
 		    $minute = absint( $settings['eael_evergreen_counter_minutes'] ) * MINUTE_IN_SECONDS;
 		    $this->add_render_attribute( 'eael-countdown', 'data-evergreen-time', absint( $hour + $minute ) );
+
+		    if ( $settings['eael_evergreen_counter_recurring'] === 'yes' ) {
+			    $this->add_render_attribute( 'eael-countdown', 'data-evergreen-recurring', $settings['eael_evergreen_counter_recurring_restart_after'] );
+			    $this->add_render_attribute( 'eael-countdown', 'data-evergreen-recurring-stop', date( "M d Y G:i:s", strtotime( $settings['eael_evergreen_counter_recurring_stop_time'] ) ) . " {$gmt_offset}" );
+		    }
 	    }
 
         if ( $settings['countdown_expire_type'] == 'text' ) {
