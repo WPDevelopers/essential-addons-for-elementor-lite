@@ -549,7 +549,7 @@ class Woo_Checkout extends Widget_Base {
 		$this->start_controls_section(
 			'ea_section_woo_reordering_fields',
 			[
-				'label' => esc_html__( 'Re-ordering Billing/Shipping Fields', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Billing/Shipping Fields', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
