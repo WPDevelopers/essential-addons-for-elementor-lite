@@ -2150,6 +2150,7 @@ class Login_Register extends Widget_Base {
 			],
 			'selectors'       => [
 				"{{WRAPPER}} .eael-lr-form-wrapper.eael-lostpassword-form-wrapper" => 'width: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-resetpassword-form-wrapper" => 'width: {{SIZE}}{{UNIT}};',
 			],
 			'condition'       => [
 				'form_form_wrap_po_toggle' => 'yes',
