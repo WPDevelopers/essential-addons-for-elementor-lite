@@ -481,7 +481,7 @@ class WPDeveloper_Setup_Wizard {
 			[
 				'slug'     => 'essential-blocks',
 				'basename' => 'essential-blocks/essential-blocks.php',
-				'logo'     => '',
+				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/eb.svg',
 				'title'    => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
 				'desc'     => __( 'Enhance your Gutenberg experience with 35+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or posts design easier and prettier than ever before.', 'essential-addons-for-elementor-lite' ),
 			],
