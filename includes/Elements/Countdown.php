@@ -87,9 +87,6 @@ class Countdown extends Widget_Base {
 			    'condition' => [
 				    'eael_countdown_type' => 'evergreen',
 			    ],
-			    'dynamic' => [
-				    'active' => true,
-			    ],
 		    ]
 	    );
 
@@ -102,9 +99,6 @@ class Countdown extends Widget_Base {
 			    'placeholder' => esc_html__( 'Minutes', 'essential-addons-for-elementor-lite' ),
 			    'condition' => [
 				    'eael_countdown_type' => 'evergreen',
-			    ],
-			    'dynamic' => [
-				    'active' => true,
 			    ],
 		    ]
 	    );
@@ -133,9 +127,6 @@ class Countdown extends Widget_Base {
 			    'condition'   => [
 				    'eael_countdown_type'              => 'evergreen',
 				    'eael_evergreen_counter_recurring' => 'yes',
-			    ],
-			    'dynamic'     => [
-				    'active' => true,
 			    ],
 		    ]
 	    );
