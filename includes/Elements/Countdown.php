@@ -122,7 +122,7 @@ class Countdown extends Widget_Base {
 			    'label'       => esc_html__( 'Restart After (Hours)', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::NUMBER,
 			    'default'     => 0,
-			    'description' => esc_html__( 'Please mention here how much the hour will be taken to restart the countdown again. if you set 0 it means the countdown will be restarted immediately.', 'essential-addons-for-elementor-lite' ),
+			    'description' => esc_html__( 'Specify how much time it will take to restart the countdown. If you enter 0, the countdown will restart immediately.', 'essential-addons-for-elementor-lite' ),
 			    'placeholder' => esc_html__( 'Hours', 'essential-addons-for-elementor-lite' ),
 			    'condition'   => [
 				    'eael_countdown_type'              => 'evergreen',
