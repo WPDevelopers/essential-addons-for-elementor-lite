@@ -158,6 +158,8 @@ trait Login_Registration {
 
 			}
 
+			$err_msg = apply_filters('eael/login-register/login-validatiob-error-message', $err_msg, $user_data);
+
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
