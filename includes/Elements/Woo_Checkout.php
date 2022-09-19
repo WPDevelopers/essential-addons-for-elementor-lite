@@ -560,6 +560,14 @@ class Woo_Checkout extends Widget_Base {
             ]
         );
 
+		$this->add_control(
+			'ea_woo_checkout_reorder_billing_fields_tab_description', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => esc_html__( 'Here you can reorder the fields by drag and drop.', 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'elementor-control-field-description'
+			]
+		);
+
 		$repeater = new \Elementor\Repeater();
 
 		$repeater->add_control(
@@ -612,6 +620,14 @@ class Woo_Checkout extends Widget_Base {
 		    [
 		        'label' => __( 'Shipping', 'essential-addons-for-elementor-lite' )
             ]);
+
+		$this->add_control(
+			'ea_woo_checkout_reorder_shipping_fields_tab_description', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => esc_html__( 'Here you can reorder the fields by drag and drop.', 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'elementor-control-field-description'
+			]
+		);
 
 		$shipping_fields = $WC_Checkout->get_checkout_fields('shipping');
 
