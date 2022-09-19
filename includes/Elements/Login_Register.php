@@ -2058,6 +2058,15 @@ class Login_Register extends Widget_Base {
 			'return_value' => 'yes',
 		] );
 		$this->start_popover();
+		$this->add_control( 'eael_form_wrap_width_form_type', [
+			'label'   => __( 'Apply Width on', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::SELECT,
+			'options' => [
+				'default' => __( 'All Forms', 'essential-addons-for-elementor-lite' ),
+				'lostpassword'  => __( 'Lost Password', 'essential-addons-for-elementor-lite' ),
+			],
+			'default' => 'default',
+		] );
 		$this->add_responsive_control( "eael_form_wrap_width", [
 			'label'           => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
 			'type'            => Controls_Manager::SLIDER,
@@ -2099,6 +2108,52 @@ class Login_Register extends Widget_Base {
 			],
 			'condition'       => [
 				'form_form_wrap_po_toggle' => 'yes',
+				'eael_form_wrap_width_form_type' => 'default'
+			],
+		] );
+
+		$this->add_responsive_control( "eael_form_wrap_width_lostpassword", [
+			'label'           => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+			'type'            => Controls_Manager::SLIDER,
+			'size_units'      => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'           => [
+				'px'  => [
+					'min'  => 0,
+					'max'  => 1000,
+					'step' => 5,
+				],
+				'rem' => [
+					'min'  => 0,
+					'max'  => 10,
+					'step' => .5,
+				],
+				'%'   => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'desktop_default' => [
+				'unit' => '%',
+				'size' => 65,
+			],
+			'tablet_default'  => [
+				'unit' => '%',
+				'size' => 75,
+			],
+			'mobile_default'  => [
+				'unit' => '%',
+				'size' => 100,
+			],
+			'selectors'       => [
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-lostpassword-form-wrapper" => 'width: {{SIZE}}{{UNIT}};',
+			],
+			'condition'       => [
+				'form_form_wrap_po_toggle' => 'yes',
+				'eael_form_wrap_width_form_type' => 'lostpassword'
 			],
 		] );
 
