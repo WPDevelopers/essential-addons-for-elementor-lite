@@ -270,4 +270,19 @@ trait Admin {
 		return ( get_option( 'eael_admin_menu_notice' ) < self::EAEL_PROMOTION_FLAG && get_option( 'eael_admin_promotion' ) < self::EAEL_ADMIN_MENU_FLAG );
 	}
 
+	public function essential_block_integration() {
+		?>
+        <div class="wpnotice-wrapper notice  notice-info is-dismissible">
+            <div class="wpnotice-content-wrapper">
+                <div class="wpsp-optin">
+                    <p>Howdy, there 👋🏻 Seems like you are using Gutenberg Editor on your website. Do you know you can get access to all the Essential Addons widgets for Gutenberg as well?</p>
+                    <p>
+                        <a href="#" class="button-primary">Install Essential Blocks</a>
+                        <a href="" class="button-secondary">Check out Demo</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+		<?php
+	}
 }
