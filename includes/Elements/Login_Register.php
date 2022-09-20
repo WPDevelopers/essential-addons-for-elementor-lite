@@ -1041,6 +1041,14 @@ class Login_Register extends Widget_Base {
 			'separator'  => 'before',
 		] );
 
+		$this->add_control( 'password_toggle_resetpassword', [
+			'label'     => __( 'Password Visibility Icon', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::SWITCHER,
+			'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+			'label_on'  => __( 'Show', 'essential-addons-for-elementor-lite' ),
+			'default'   => 'yes',
+		] );
+
 		/*--Reset Password Fields Button--*/
 		$this->add_control( 'resetpassword_button_heading', [
 			'label'     => esc_html__( 'Reset Password Button', 'essential-addons-for-elementor-lite' ),
@@ -3554,7 +3562,7 @@ class Login_Register extends Widget_Base {
 				],
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .dashicons" => 'font-size: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-login-form-wrapper .eael-lr-form-group .dashicons" => 'font-size: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
 			],
 			'condition'  => [
 				'lpv_po_toggle' => 'yes',
@@ -3564,7 +3572,7 @@ class Login_Register extends Widget_Base {
 			'label'     => __( 'Open Eye Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .dashicons-visibility" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-login-form-wrapper .eael-lr-form-group .dashicons-visibility" => 'color: {{VALUE}};',
 			],
 			'condition' => [
 				'lpv_po_toggle' => 'yes',
@@ -3574,7 +3582,7 @@ class Login_Register extends Widget_Base {
 			'label'     => __( 'Close Eye Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .dashicons-hidden" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-login-form-wrapper .eael-lr-form-group .dashicons-hidden" => 'color: {{VALUE}};',
 			],
 			'condition' => [
 				'lpv_po_toggle' => 'yes',
@@ -3596,7 +3604,7 @@ class Login_Register extends Widget_Base {
 				'size' => 0.73,
 			],
 			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'top: {{SIZE}}px;',
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-login-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'top: {{SIZE}}px;',
 			],
 			'condition' => [
 				'lpv_po_toggle' => 'yes',
@@ -3617,10 +3625,107 @@ class Login_Register extends Widget_Base {
 				'size' => - 27,
 			],
 			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'right: {{SIZE}}px;',
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-login-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'right: {{SIZE}}px;',
 			],
 			'condition' => [
 				'lpv_po_toggle' => 'yes',
+			],
+		] );
+
+		$this->end_popover();
+
+		$this->add_control( 'lpv_po_toggle_resetpassword', [
+			'label'     => __( 'Reset Password Visibility Style', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::POPOVER_TOGGLE,
+			'condition' => [
+				'password_toggle_resetpassword' => 'yes',
+			],
+		] );
+		$this->start_popover();
+
+		$this->add_responsive_control( "lpv_size_resetpassword", [
+			'label'      => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-resetpassword-form-wrapper .eael-lr-form-group .dashicons" => 'font-size: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
+			],
+			'condition'  => [
+				'lpv_po_toggle_resetpassword' => 'yes',
+			],
+		] );
+		$this->add_control( "lvp_open_color_resetpassword", [
+			'label'     => __( 'Open Eye Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-resetpassword-form-wrapper .eael-lr-form-group .dashicons-visibility" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'lpv_po_toggle_resetpassword' => 'yes',
+			],
+		] );
+		$this->add_control( "lvp_close_color_resetpassword", [
+			'label'     => __( 'Close Eye Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-resetpassword-form-wrapper .eael-lr-form-group .dashicons-hidden" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'lpv_po_toggle_resetpassword' => 'yes',
+			],
+		] );
+
+		$this->add_responsive_control( "lpv_valign_resetpassword", [
+			'label'     => esc_html__( 'Vertical Alignment', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::SLIDER,
+			'range'     => [
+				'px' => [
+					'min'  => - 50,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'default'   => [
+				'unit' => 'px',
+				'size' => 0.73,
+			],
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-resetpassword-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'top: {{SIZE}}px;',
+			],
+			'condition' => [
+				'lpv_po_toggle_resetpassword' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "lpv_halign_resetpassword", [
+			'label'     => esc_html__( 'Horizontal Alignment', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::SLIDER,
+			'range'     => [
+				'px' => [
+					'min'  => - 50,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'default'   => [
+				'unit' => 'px',
+				'size' => - 27,
+			],
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-resetpassword-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'right: {{SIZE}}px;',
+			],
+			'condition' => [
+				'lpv_po_toggle_resetpassword' => 'yes',
 			],
 		] );
 
@@ -5227,6 +5332,8 @@ class Login_Register extends Widget_Base {
 			// input icons
 			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_resetpassword_icon'] ) && 'yes' === esc_html( $this->ds['show_resetpassword_icon'] ) );
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
+
+			$show_pv_icon     = ( ! empty( $this->ds['password_toggle'] ) && 'yes' === $this->ds['password_toggle'] );
 			?>
             <section
                     id="eael-resetpassword-form-wrapper"
@@ -5249,32 +5356,58 @@ class Login_Register extends Widget_Base {
 								<?php if ( $display_label && $password_label ) {
 									printf( '<label for="eael-pass1" class="eael-field-label">%s</label>', esc_html( wp_strip_all_tags( $password_label ) ) );
 								} ?>
-								<input type="text"
-									   name="eael-pass1"
-									   id="eael-pass1"
-									   class="eael-lr-form-control"
-									   placeholder="<?php esc_html_e( wp_strip_all_tags( $password_placeholder ), 'essential-addons-for-elementor-lite' ); ?>"
-									   required>
-								<?php
-								if ( $show_icon ) {
-									echo '<i class="fas fa-lock"></i>';
-								} ?>
+								<div class="eael-lr-password-wrapper eael-lr-resetpassword-wrapper eael-lr-resetpassword1-wrapper">
+									<input type="password"
+										name="eael-pass1"
+										id="eael-pass1"
+										class="eael-lr-form-control"
+										placeholder="<?php esc_html_e( wp_strip_all_tags( $password_placeholder ), 'essential-addons-for-elementor-lite' ); ?>"
+										required>
+
+									<?php if ( $show_pv_icon ) { ?>
+										<button type="button"
+												id="wp-hide-pw1"
+												class="wp-hide-pw hide-if-no-js"
+												aria-label="Show password">
+											<span class="dashicons dashicons-visibility"
+												aria-hidden="true"></span>
+										</button>
+									<?php } ?>
+									
+									<?php
+									if ( $show_icon ) {
+										echo '<i class="fas fa-lock"></i>';
+									} ?>
+								</div>
 							</div>
 							
 							<div class="eael-lr-form-group <?php echo esc_attr( $hide_class_after_submission ); ?>">
 								<?php if ( $display_label && $confirm_password_label ) {
 									printf( '<label for="eael-pass1" class="eael-field-label">%s</label>', esc_html( wp_strip_all_tags( $confirm_password_label ) ) );
 								} ?>
-								<input type="text"
-									   name="eael-pass2"
-									   id="eael-pass2"
-									   class="eael-lr-form-control"
-									   placeholder="<?php esc_html_e( wp_strip_all_tags( $confirm_password_placeholder ), 'essential-addons-for-elementor-lite' ); ?>"
-									   required>
-								<?php
-								if ( $show_icon ) {
-									echo '<i class="fas fa-lock"></i>';
-								} ?>
+								<div class="eael-lr-password-wrapper eael-lr-resetpassword-wrapper eael-lr-resetpassword2-wrapper">
+									<input type="password"
+										name="eael-pass2"
+										id="eael-pass2"
+										class="eael-lr-form-control"
+										placeholder="<?php esc_html_e( wp_strip_all_tags( $confirm_password_placeholder ), 'essential-addons-for-elementor-lite' ); ?>"
+										required>
+
+									<?php if ( $show_pv_icon ) { ?>
+										<button type="button"
+												id="wp-hide-pw2"
+												class="wp-hide-pw hide-if-no-js"
+												aria-label="Show password">
+											<span class="dashicons dashicons-visibility"
+												aria-hidden="true"></span>
+										</button>
+									<?php } ?>
+
+									<?php
+									if ( $show_icon ) {
+										echo '<i class="fas fa-lock"></i>';
+									} ?>
+								</div>
 							</div>
 
 							<?php
