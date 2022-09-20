@@ -3272,7 +3272,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'eael_forget_pass_label_color_normal', [
-			'label'     => __( 'Text Color - Normal', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .lr-form-wrapper .forget-pass a" => 'color: {{VALUE}};',
@@ -3283,7 +3283,7 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 		$this->add_control( 'eael_forget_pass_label_bg_color_normal', [
-			'label'     => __( 'Text Background - Normal', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'default'   => '#ffffff',
 			'selectors' => [
@@ -3295,7 +3295,7 @@ class Login_Register extends Widget_Base {
 		] );
 		
 		$this->add_control( 'eael_forget_pass_label_color_hover', [
-			'label'     => __( 'Text Color - Hover', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Hover Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .lr-form-wrapper .forget-pass:hover a" => 'color: {{VALUE}};',
@@ -3305,7 +3305,7 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 		$this->add_control( 'eael_forget_pass_label_bg_color_hover', [
-			'label'     => __( 'Text Background - Hover', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Background Hover Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'default'   => '#ffffff',
 			'selectors' => [
