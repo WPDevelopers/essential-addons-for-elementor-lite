@@ -230,6 +230,8 @@ class Bootstrap
                 new WPDeveloper_Core_Installer( basename( EAEL_PLUGIN_BASENAME, '.php' ) );
             }
 
+	        add_action( 'admin_notices', [ $this, 'essential_block_integration' ] );
+
             add_action('admin_menu', array($this, 'admin_menu'));
             add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
 
