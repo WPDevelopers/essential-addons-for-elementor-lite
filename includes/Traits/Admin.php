@@ -271,11 +271,15 @@ trait Admin {
 	}
 
 	public function essential_block_integration() {
+		$screen = get_current_screen();
+		if ( $screen->parent_base !== 'edit' ) {
+			return;
+		}
 		?>
         <div class="wpnotice-wrapper notice  notice-info is-dismissible">
             <div class="wpnotice-content-wrapper">
                 <div class="wpsp-optin">
-                    <p><?php esc_html_e( 'Howdy, there 👋🏻 Seems like you are using Gutenberg Editor on your website. Do you know you can get access to all the Essential Addons widgets for Gutenberg as well?', 'essential-addons-for-elementor-lite' ); ?></p>
+                    <p><?php esc_html_e( 'Howdy, there 👋 Seems like you are using Gutenberg Editor on your website. Do you know you can get access to all the Essential Addons widgets for Gutenberg as well?', 'essential-addons-for-elementor-lite' ); ?></p>
                     <p><?php esc_html_e( 'Try Essential Blocks for Gutenberg to make your WordPress design experience even more powerful.', 'essential-addons-for-elementor-lite' ); ?></p>
                     <p>
                         <a href="#" class="button-primary"><?php esc_html_e( 'Install Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></a>
