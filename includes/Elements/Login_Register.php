@@ -4552,10 +4552,10 @@ class Login_Register extends Widget_Base {
              data-redirect-to="<?php echo esc_attr( $login_redirect_url ); ?>"
         >
 			<?php
+			$this->print_reset_password_form(); // set a new password; user will land on this form via email reset password link.
 			$this->print_login_form();
 			$this->print_register_form();
 			$this->print_lost_password_form(); //request for a new password.
-			$this->print_reset_password_form(); // set a new password; user will land on this form via email reset password link.
 			?>
         </div>
 
@@ -5177,7 +5177,12 @@ class Login_Register extends Widget_Base {
 					$rp_err_msg = ! empty( $this->ds['err_reset_password_key_expired'] ) ? esc_html__( wp_strip_all_tags( $this->ds['err_reset_password_key_expired'] ), 'essential-addons-for-elementor-lite' ) : __( 'Your password reset link appears to be invalid. Please request a new link.', 'essential-addons-for-elementor-lite' );
 					update_option( 'eael_lostpassword_error_' . esc_attr( $this->get_id() ), $rp_err_msg, false );
 		
-					wp_redirect( $rp_page_url . '?eael-lostpassword=1&error=expiredkey' );
+					$resetpassword_redirect_url = esc_url_raw( $rp_page_url . '?eael-lostpassword=1&error=expiredkey' );
+					?>
+					<script type="text/javascript">
+						document.location.href = <?php echo json_encode( $resetpassword_redirect_url ); ?>;
+					</script>
+					<?php
 					exit;
 				}
 				
