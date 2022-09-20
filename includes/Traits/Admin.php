@@ -279,11 +279,10 @@ trait Admin {
         <div class="wpnotice-wrapper notice  notice-info is-dismissible">
             <div class="wpnotice-content-wrapper">
                 <div class="wpsp-optin">
-                    <p><?php esc_html_e( 'Howdy, there 👋 Seems like you are using Gutenberg Editor on your website. Do you know you can get access to all the Essential Addons widgets for Gutenberg as well?', 'essential-addons-for-elementor-lite' ); ?></p>
-                    <p><?php esc_html_e( 'Try Essential Blocks for Gutenberg to make your WordPress design experience even more powerful.', 'essential-addons-for-elementor-lite' ); ?></p>
+                    <p><?php _e( 'Howdy, there 👋 Seems like you are using Gutenberg Editor on your website. Do you know you can get access to all the <strong>Essential Addons</strong> widgets for Gutenberg as well?', 'essential-addons-for-elementor-lite' ); ?></p>
+                    <p><?php _e( 'Try <strong>Essential Blocks for Gutenberg</strong> to make your WordPress design experience even more powerful 🚀 For more info, <a href="https://essential-blocks.com/demo">check out the demo</a>', 'essential-addons-for-elementor-lite' ); ?></p>
                     <p>
                         <a href="#" class="button-primary"><?php esc_html_e( 'Install Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></a>
-                        <a href="#" class="button-secondary"><?php esc_html_e( 'Check out Demo', 'essential-addons-for-elementor-lite' ); ?></a>
                     </p>
                 </div>
             </div>
