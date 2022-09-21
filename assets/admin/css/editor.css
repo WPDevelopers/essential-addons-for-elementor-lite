@@ -210,3 +210,18 @@
 	pointer-events: none;
 	touch-action: none;
 }
+
+/*Hide repeater duplicate and remove options*/
+
+.elementor-control-ea_billing_fields_list.elementor-control-type-repeater .elementor-repeater-row-tools .elementor-repeater-tool-duplicate,
+.elementor-control-ea_shipping_fields_list.elementor-control-type-repeater .elementor-repeater-row-tools .elementor-repeater-tool-duplicate,
+.elementor-control-ea_billing_fields_list.elementor-control-type-repeater .elementor-repeater-row-tools .elementor-repeater-tool-remove,
+.elementor-control-ea_shipping_fields_list.elementor-control-type-repeater .elementor-repeater-row-tools .elementor-repeater-tool-remove,
+.elementor-control-ea_billing_fields_list.elementor-control-type-repeater .elementor-repeater-add,
+.elementor-control-ea_shipping_fields_list.elementor-control-type-repeater .elementor-repeater-add {
+	display: none !important;
+}
+.elementor-context-menu-list__item.elementor-context-menu-list__item-ea_copy_all,
+.elementor-context-menu-list__item.elementor-context-menu-list__item-ea_paste_all {
+	padding-right: 10px;
+}

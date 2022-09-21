@@ -513,6 +513,7 @@ class Adv_Accordion extends Widget_Base
                 ],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-accordion-icon'   => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header svg.fa-accordion-icon'   => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};line-height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -635,6 +636,7 @@ class Adv_Accordion extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-accordion-icon' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-accordion-icon-svg svg' => 'color: {{VALUE}}; fill: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header svg' => 'fill: {{VALUE}};',
                 ]
             ]
         );
@@ -695,6 +697,7 @@ class Adv_Accordion extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover .fa-accordion-icon' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover .fa-accordion-icon svg' => 'color: {{VALUE}}; fill: {{VALUE}}',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover svg.fa-accordion-icon' => 'fill: {{VALUE}}',
                 ]
             ]
         );
@@ -756,6 +759,7 @@ class Adv_Accordion extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-accordion-icon' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-accordion-icon svg' => 'color: {{VALUE}};fill: {{VALUE}}',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active svg.fa-accordion-icon' => 'fill: {{VALUE}}',
                 ],
             ]
         );
@@ -890,6 +894,7 @@ class Adv_Accordion extends Widget_Base
                 ],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle, {{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header > .fa-toggle-svg' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header svg.fa-toggle' => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};line-height: {{SIZE}}{{UNIT}};',
                 ],
                 'condition'  => [
                     'eael_adv_accordion_icon_show' => 'yes',
@@ -945,6 +950,7 @@ class Adv_Accordion extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle svg' => 'color: {{VALUE}}; fill:{{VALUE}}',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header svg.fa-toggle' => 'fill:{{VALUE}}',
                 ],
                 'condition' => [
                     'eael_adv_accordion_icon_show' => 'yes',
@@ -990,7 +996,8 @@ class Adv_Accordion extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header .fa-toggle'  => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header .fa-toggle-svg svg'  => 'color: {{VALUE}}; fill: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header .fa-toggle svg'  => 'color: {{VALUE}}; fill: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header svg.fa-toggle'  => 'fill: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_accordion_icon_show' => 'yes',
@@ -1037,6 +1044,7 @@ class Adv_Accordion extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle svg' => 'color: {{VALUE}}; fill: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active svg.fa-toggle' => 'fill: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_accordion_icon_show' => 'yes',
@@ -1180,33 +1188,23 @@ class Adv_Accordion extends Widget_Base
                 </div>';
         }
         echo '</div>';
-        ?>
+        
+        // FAQ Schema
+        if ( !empty( $settings['eael_adv_accordion_faq_schema_show'] ) && 'yes' === $settings['eael_adv_accordion_faq_schema_show'] ) {
+            foreach ( $settings['eael_adv_accordion_tab'] as $index => $tab ) {
+                $faq = [
+                    '@type' => 'Question',
+                    'name' => Helper::eael_wp_kses( $tab['eael_adv_accordion_tab_title'] ),
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => ('content' === $tab['eael_adv_accordion_text_type']) ? do_shortcode( $tab['eael_adv_accordion_tab_content'] ) : '',
+                    ],
+                ];
 
-        <!-- FAQ Schema : Starts-->
-        <?php
-			if ( !empty( $settings['eael_adv_accordion_faq_schema_show'] ) && 'yes' === $settings['eael_adv_accordion_faq_schema_show'] ) {
-				$json = [
-					'@context' => 'https://schema.org',
-					'@type' => 'FAQPage',
-					'mainEntity' => [],
-				];
+                Helper::set_eael_advanced_accordion_faq($faq);
+            }	
+        }
 
-				foreach ( $settings['eael_adv_accordion_tab'] as $index => $tab ) {
-					$json['mainEntity'][] = [
-						'@type' => 'Question',
-						'name' => Helper::eael_wp_kses( $tab['eael_adv_accordion_tab_title'] ),
-						'acceptedAnswer' => [
-							'@type' => 'Answer',
-							'text' => ('content' === $tab['eael_adv_accordion_text_type']) ? do_shortcode( $tab['eael_adv_accordion_tab_content'] ) : '',
-						],
-					];
-				}
-				?>
-				<script type="application/ld+json"><?php echo wp_json_encode( $json ); ?></script>
-			<?php } ?>
-        <!-- FAQ Schema : Ends-->
-
-        <?php 
     }
 
     protected function print_toggle_icon($settings)

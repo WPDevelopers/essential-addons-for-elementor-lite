@@ -685,7 +685,8 @@ class Team_Member extends Widget_Base {
 					// '{{WRAPPER}} .eael-team-member-social-link > a' => 'width: {{SIZE}}px; height: {{SIZE}}px; line-height: {{SIZE}}px;',
 					'{{WRAPPER}} .eael-team-member-social-link > a i' => 'font-size: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .eael-team-member-social-link > a img' => 'width: {{SIZE}}px; height: {{SIZE}}px; line-height: {{SIZE}}px;',
-				],
+                    '{{WRAPPER}} .eael-team-member-social-link > a svg' => 'width: {{SIZE}}px; height: {{SIZE}}px; line-height: {{SIZE}}px;',
+                ],
 			]
 		);
 
@@ -750,7 +751,8 @@ class Team_Member extends Widget_Base {
 				'default' => '#f1ba63',
 				'selectors' => [
 					'{{WRAPPER}} .eael-team-member-social-link > a' => 'color: {{VALUE}};',
-				],
+                    '{{WRAPPER}} .eael-team-member-social-link > a svg' => 'fill: {{VALUE}};',
+                ],
 			]
 		);
 
@@ -826,7 +828,8 @@ class Team_Member extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ad8647',
 				'selectors' => [
-					'{{WRAPPER}} .eael-team-member-social-link > a:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-team-member-social-link > a:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-team-member-social-link > a:hover svg' => 'fill: {{VALUE}};',
 				],
 			]
 		);
@@ -936,9 +939,9 @@ class Team_Member extends Widget_Base {
 											<?php if ($icon_is_new || $icon_migrated) { ?>
 												<?php if( isset( $item['social_new']['value']['url'] ) ) : ?>
 													<img src="<?php echo esc_attr($item['social_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($item['social_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
-												<?php else : ?>
-													<i class="<?php echo esc_attr($item['social_new']['value'] ); ?>"></i>
-												<?php endif; ?>
+												<?php else :
+                                                    \Elementor\Icons_Manager::render_icon( $item['social_new'], [ 'aria-hidden' => 'true' ] );
+                                                endif; ?>
 											<?php } else { ?>
 												<i class="<?php echo esc_attr($item['social'] ); ?>"></i>
 											<?php } ?>
