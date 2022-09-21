@@ -3969,6 +3969,16 @@ class Login_Register extends Widget_Base {
 			'tab'        => Controls_Manager::TAB_STYLE,
 			'conditions' => $this->get_form_controls_display_condition( $button_type ),
 		] );
+
+		$this->add_control( "{$button_type}_link_style_notice", [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => sprintf( __( 'Here you can style the button displayed on the %s Form', 'essential-addons-for-elementor-lite' ), 
+										esc_html( $button_text ), 
+										esc_html( $button_text ) 
+									),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+		] );
+		
 		$this->add_control( "{$button_type}_btn_pot", [
 			'label'        => __( 'Spacing', 'essential-addons-for-elementor-lite' ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
