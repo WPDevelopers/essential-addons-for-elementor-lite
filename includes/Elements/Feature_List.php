@@ -121,6 +121,7 @@ class Feature_List extends Widget_Base {
             [
                 'label'            => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
                 'type'             => Controls_Manager::COLOR,
+                'default'          => '#fff',
                 'selectors' => [
                     "{{WRAPPER}} {{CURRENT_ITEM}} .eael-feature-list-icon i" => 'color: {{VALUE}};',
                     "{{WRAPPER}} {{CURRENT_ITEM}} .eael-feature-list-icon svg" => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
@@ -540,7 +541,7 @@ class Feature_List extends Widget_Base {
             [
                 'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '',
+                'default'   => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-feature-list-items .eael-feature-list-icon' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-feature-list-items .eael-feature-list-icon svg' => 'fill: {{VALUE}};',

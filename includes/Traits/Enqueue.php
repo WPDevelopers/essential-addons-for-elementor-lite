@@ -75,7 +75,8 @@ trait Enqueue
         wp_enqueue_style(
             'eael-editor',
             $this->safe_url(EAEL_PLUGIN_URL . 'assets/admin/css/editor.css'),
-            false
+            false,
+	        EAEL_PLUGIN_VERSION
         );
     }
 
