@@ -444,6 +444,16 @@
                 a {
                     display: block;
                     text-align: left;
+
+                    // indicator : Added below code while converting vertical menu responsive
+                    // span {
+                    //     position: relative;
+                    //     margin-left: 5px;
+
+                    //     @media screen and (max-width: 1024px) {
+                    //         display: none;
+                    //     }
+                    // }
                 }
 
                 ul {
@@ -478,6 +488,65 @@
                                 &:last-child {
                                     > a {
                                         border-bottom-width: 1px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Responsive menu
+            @media screen and (max-width: 1024px) {
+                position: absolute;
+                top: 50px;
+                background-color: #54595f;
+                width: 100%;
+                z-index: 9;
+                display: none;
+
+                li {
+                    float: none;
+                    display: block;
+
+                    a {
+                        display: block;
+                        text-align: inherit;
+                    }
+
+                    ul {
+                        position: relative;
+                        top: unset;
+                        left: unset;
+                        width: 100%;
+                        box-shadow: none;
+                        visibility: visible;
+                        opacity: 1;
+                        display: none;
+
+                        li {
+                            position: relative;
+                            display: block;
+
+                            .eael-simple-menu-indicator {
+                                border: 1px solid #00000080;
+
+                                &:before {
+                                    color: #000000;
+                                }
+                            }
+
+                            ul {
+                                position: relative;
+                                width: 100%;
+                                top: unset;
+                                left: unset;
+
+                                li {
+                                    &:last-child {
+                                        > a {
+                                            border-bottom-width: 1px;
+                                        }
                                     }
                                 }
                             }

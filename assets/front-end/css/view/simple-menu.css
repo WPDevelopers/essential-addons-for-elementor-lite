@@ -381,6 +381,54 @@
 .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li ul li:last-child > a {
   border-bottom-width: 1px;
 }
+@media screen and (max-width: 1024px) {
+  .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical {
+    position: absolute;
+    top: 50px;
+    background-color: #54595f;
+    width: 100%;
+    z-index: 9;
+    display: none;
+  }
+  .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li {
+    float: none;
+    display: block;
+  }
+  .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a {
+    display: block;
+    text-align: inherit;
+  }
+  .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul {
+    position: relative;
+    top: unset;
+    left: unset;
+    width: 100%;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    visibility: visible;
+    opacity: 1;
+    display: none;
+  }
+  .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li {
+    position: relative;
+    display: block;
+  }
+  .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li .eael-simple-menu-indicator {
+    border: 1px solid rgba(0, 0, 0, 0.5019607843);
+  }
+  .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li .eael-simple-menu-indicator:before {
+    color: #000000;
+  }
+  .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li ul {
+    position: relative;
+    width: 100%;
+    top: unset;
+    left: unset;
+  }
+  .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li ul li:last-child > a {
+    border-bottom-width: 1px;
+  }
+}
 .eael-simple-menu-container.eael-simple-menu-align-center .eael-simple-menu.eael-simple-menu-vertical > li > a {
   text-align: center;
 }
