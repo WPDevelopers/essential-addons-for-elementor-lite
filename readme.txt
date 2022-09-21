@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 5.2.4
+Stable tag: 5.2.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -241,6 +241,20 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.2.5 - 21/09/2022 =
+
+- Added: Flex Container support for EA Widgets
+- Fixed: Font Awesome icons not loading when Elementor's Font awesome inline experiment is active
+- Fixed: EA Advanced Accordion | FAQ Schema not working properly
+- Fixed: EA Simple Menu | Sub menu not expanding properly
+- Fixed: EA Creative Button | Winona hover effect not displaying icon on the secondary button
+- Fixed: EA Sticky Video | Videos from Vimeo auto play and mute not working
+- Fixed: EA Advanced Tabs | Shape of the caret getting changed when global color is applied
+- Fixed: EA Woo Cart | mobile layout not working properly for OceanWP Theme
+- Improved: EA Woo Checkout | Customize the ordering system of Billing Details fields 
+- Improved: EA Login/Register Form | Added option to change color of Remember me and forgot password fields
+- Few minor bug fixes & improvements
 
 = 5.2.4 - 29/08/2022 =
 
