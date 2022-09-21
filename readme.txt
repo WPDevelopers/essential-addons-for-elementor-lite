@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 5.2.5
+Stable tag: 5.3.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -242,7 +242,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 5.2.5 - 21/09/2022 =
+= 5.3.0 - 21/09/2022 =
 
 - Added: Flex Container support for EA Widgets
 - Fixed: Font Awesome icons not loading when Elementor's Font awesome inline experiment is active
@@ -256,7 +256,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Improved: EA Woo Checkout | Customize the ordering system of Billing Details fields 
 - Improved: EA Login/Register Form | Added option to change color of Remember me and forgot password fields
 - Improved: EA Simple Menu | Added Custom breakpoints for responsive devices
-- Improved: EA Woo Checkout | Added option to change the quanity of the ordered products
+- Improved: EA Woo Checkout | Added option to change the quantity of the ordered products
 - Few minor bug fixes & improvements
 
 = 5.2.4 - 29/08/2022 =
