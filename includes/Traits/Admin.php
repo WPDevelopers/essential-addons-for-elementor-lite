@@ -272,7 +272,8 @@ trait Admin {
 
 	public function essential_block_integration() {
 		$screen = get_current_screen();
-		if ( $screen->parent_base !== 'edit' ) {
+        $is_elementor_library = ! empty( $_GET['post_type'] ) && $_GET['post_type'] === 'elementor_library';
+		if ( $screen->parent_base !== 'edit' || $is_elementor_library ) {
 			return;
 		}
 		?>
