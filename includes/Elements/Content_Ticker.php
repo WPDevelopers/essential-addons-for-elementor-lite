@@ -540,6 +540,7 @@ class Content_Ticker extends Widget_Base
                 'selectors'  => [
                     '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev'         => 'font-size: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .swiper-container-wrap .swiper-button-next img, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next svg, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -611,6 +612,7 @@ class Content_Ticker extends Widget_Base
                 'default'   => '',
                 'selectors' => [
                     '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next svg, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev svg' => 'fill: {{VALUE}};',
                 ],
             ]
         );
@@ -667,6 +669,7 @@ class Content_Ticker extends Widget_Base
                 'default'   => '',
                 'selectors' => [
                     '{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover svg, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover svg' => 'fill: {{VALUE}};',
                 ],
             ]
         );
@@ -804,9 +807,9 @@ class Content_Ticker extends Widget_Base
 
         if ($settings['arrows'] == 'yes') {
             if (isset($settings['__fa4_migrated']['arrow_new']) || empty($settings['arrow'])) {
-                $arrow = $settings['arrow_new']['value'];
+                $arrow = Helper::get_render_icon( $settings['arrow_new'] );
             } else {
-                $arrow = $settings['arrow'];
+                $arrow = '<i class="' . $settings['arrow'] . '"></i>';
             }
 
             $html = '<div class="content-ticker-pagination">';
@@ -815,7 +818,7 @@ class Content_Ticker extends Widget_Base
             if (isset($arrow['url'])) {
                 $html .= '<img src="' . esc_url($arrow['url']) . '" alt="' . esc_attr(get_post_meta($arrow['id'], '_wp_attachment_image_alt', true)) . '" />';
             } else {
-                $html .= '<i class="' . $arrow . '"></i>';
+                $html .= $arrow;
             }
             $html .= '</div>';
 
@@ -823,7 +826,7 @@ class Content_Ticker extends Widget_Base
             if (isset($settings['prev_arrow']['value']['url'])) {
                 $html .= '<img src="' . esc_url($settings['prev_arrow']['value']['url']) . '" alt="' . esc_attr(get_post_meta($settings['prev_arrow']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
             } else {
-                $html .= '<i class="' . esc_attr($settings['prev_arrow']['value']) . '"></i>';
+                $html .= Helper::get_render_icon( $settings['prev_arrow'] );
             }
             $html .= '</div>';
 
