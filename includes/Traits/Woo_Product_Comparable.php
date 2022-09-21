@@ -1483,6 +1483,7 @@ trait Woo_Product_Comparable {
 		$this->add_control( 'field_icon_color', [
 			'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
+            'default'   => '#dcdcdc',
 			'selectors' => [
 			        $icon => 'color:{{VALUE}} !important;',
 			        $icon. ' i' => 'color:{{VALUE}} !important;',
