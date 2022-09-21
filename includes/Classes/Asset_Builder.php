@@ -100,7 +100,7 @@ class Asset_Builder {
 	protected function init_hook() {
 		add_action( 'wp_footer', [ $this, 'add_inline_js' ], 100 );
 		add_action( 'wp_footer', [ $this, 'add_inline_css' ], 15 );
-		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ], 10, 2 );
+		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ] );
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ], 100 );
 		add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'ea_before_enqueue_styles' ] );
@@ -283,6 +283,8 @@ class Asset_Builder {
 		$theme    = wp_get_theme(); // gets the current theme
 		if ( in_array( 'Hello Elementor', [ $theme->name, $theme->parent_theme ] ) ) {
 			array_unshift( $css_deps, 'hello-elementor-theme-style' );
+		} elseif ( in_array( 'Astra', [ $theme->name, $theme->parent_theme ] ) ) {
+			array_unshift( $css_deps, 'astra-theme-css' );
 		}
 
 		wp_register_script( 'eael-general', EAEL_PLUGIN_URL . 'assets/front-end/js/view/general.min.js', [ 'jquery' ], EAEL_PLUGIN_VERSION, true );
@@ -362,14 +364,17 @@ class Asset_Builder {
 
 		// localize object
 		$this->localize_objects = apply_filters( 'eael/localize_objects', [
-			'ajaxurl'        => admin_url( 'admin-ajax.php' ),
-			'nonce'          => wp_create_nonce( 'essential-addons-elementor' ),
-			'i18n'           => [
+			'ajaxurl'            => admin_url( 'admin-ajax.php' ),
+			'nonce'              => wp_create_nonce( 'essential-addons-elementor' ),
+			'i18n'               => [
 				'added'   => __( 'Added ', 'essential-addons-for-elementor-lite' ),
 				'compare' => __( 'Compare', 'essential-addons-for-elementor-lite' ),
 				'loading' => esc_html__( 'Loading...', 'essential-addons-for-elementor-lite' )
 			],
-			'page_permalink' => get_the_permalink(),
+			'page_permalink'     => get_the_permalink(),
+			'cart_redirectition' => get_option( 'woocommerce_cart_redirect_after_add' ),
+			'cart_page_url'      => function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '',
+			'el_breakpoints'     => method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) ? Plugin::$instance->breakpoints->get_breakpoints_config() : '',
 		] );
 	}
 
@@ -423,14 +428,12 @@ class Asset_Builder {
 	 * delete_cache_data
 	 *
 	 * @param int $post_id
-	 * @param array $post
 	 */
-	public function delete_cache_data( $post_id, $post ) {
+	public function delete_cache_data( $post_id ) {
 		$this->elements_manager->remove_files( $post_id );
 
 		delete_post_meta( $post_id, '_eael_custom_js' );
 		delete_post_meta( $post_id, '_eael_widget_elements' );
-
 	}
 
 	/**

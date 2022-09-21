@@ -69,7 +69,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 
       PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
 
-      var playerAbc = new Plyr("#eaelsv-player-" + $scope.data("id"));
+      var playerAbc = new Plyr( "#eaelsv-player-" + $scope.data("id") );
 
       // If element is Sticky video
       if (overlay === "no") {
