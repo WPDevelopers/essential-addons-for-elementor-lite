@@ -252,8 +252,11 @@ Your existing elements/content will work with premium version. So you won't lose
 - Fixed: EA Sticky Video | Videos from Vimeo auto play and mute not working
 - Fixed: EA Advanced Tabs | Shape of the caret getting changed when global color is applied
 - Fixed: EA Woo Cart | mobile layout not working properly for OceanWP Theme
+- Fixed: 'Invalid recurring shipping method' Error when WooCommerce Subscriptions is enabled
 - Improved: EA Woo Checkout | Customize the ordering system of Billing Details fields 
 - Improved: EA Login/Register Form | Added option to change color of Remember me and forgot password fields
+- Improved: EA Simple Menu | Added Custom breakpoints for responsive devices
+- Improved: EA Woo Checkout | Added option to change the quanity of the ordered products
 - Few minor bug fixes & improvements
 
 = 5.2.4 - 29/08/2022 =
