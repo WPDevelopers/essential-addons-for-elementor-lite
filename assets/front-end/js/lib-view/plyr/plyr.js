@@ -5761,7 +5761,7 @@ typeof navigator === "object" && (function (global, factory) {
       var src = format(player.config.urls.vimeo.iframe, id, params);
       iframe.setAttribute('src', src);
       iframe.setAttribute('allowfullscreen', '');
-      iframe.setAttribute('allow', 'autoplay,fullscreen,picture-in-picture'); // Set the referrer policy if required
+      iframe.setAttribute('allow', 'autoplay;fullscreen;picture-in-picture'); // Set the referrer policy if required
 
       if (!is$1.empty(referrerPolicy)) {
         iframe.setAttribute('referrerPolicy', referrerPolicy);
