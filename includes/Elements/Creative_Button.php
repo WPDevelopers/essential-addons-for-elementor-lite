@@ -584,6 +584,10 @@ class Creative_Button extends Widget_Base
 
             <a <?php echo $this->get_render_attribute_string('eael_creative_button'); ?>>
 
+	    <?php if ($settings['creative_button_effect'] === 'eael-creative-button--tamaya' ) : ?>
+            <div class="eael-creative-button--tamaya-secondary eael-creative-button--tamaya-before"><span><?php echo Helper::eael_wp_kses($settings['creative_button_secondary_text']); ?></span></div>
+        <?php endif; ?>
+
                 <div class="creative-button-inner">
 
                     <?php if ($settings['creative_button_effect'] !== 'eael-creative-button--tamaya' && $settings['eael_creative_button_icon_alignment'] == 'left') : ?>
@@ -608,6 +612,9 @@ class Creative_Button extends Widget_Base
                         <?php } ?>
                     <?php endif; ?>
                 </div>
+	            <?php if ($settings['creative_button_effect'] === 'eael-creative-button--tamaya' ) : ?>
+                    <div class="eael-creative-button--tamaya-secondary eael-creative-button--tamaya-after"><span><?php echo Helper::eael_wp_kses($settings['creative_button_secondary_text']); ?></span></div>
+	            <?php endif; ?>
             </a>
         </div>
 <?php
