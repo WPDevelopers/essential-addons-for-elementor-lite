@@ -234,5 +234,9 @@ jQuery(window).on("elementor/frontend/init", function () {
 		}
 	};
 
+	if (ea.elementStatusCheck('eaelFilterableGallery')) {
+		return false;
+	}
+
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-filterable-gallery.default", filterableGalleryHandler);
 });
