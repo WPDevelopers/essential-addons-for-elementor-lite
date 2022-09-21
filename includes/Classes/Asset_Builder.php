@@ -374,7 +374,7 @@ class Asset_Builder {
 			'page_permalink'     => get_the_permalink(),
 			'cart_redirectition' => get_option( 'woocommerce_cart_redirect_after_add' ),
 			'cart_page_url'      => function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '',
-			'el_breakpoints'     => Plugin::$instance->breakpoints->get_breakpoints_config(),
+			'el_breakpoints'     => method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) ? Plugin::$instance->breakpoints->get_breakpoints_config() : '',
 		] );
 	}
 
