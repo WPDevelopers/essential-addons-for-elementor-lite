@@ -172,6 +172,7 @@ class Bootstrap
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
         add_filter('elementor/editor/localize_settings', [$this, 'promote_pro_elements']);
         add_action('wp_footer', [$this, 'render_global_html']);
+        add_action('wp_footer', [$this, 'render_advanced_accordion_global_faq']);
 
         // Controls
         add_action('eael/controls/query', [$this, 'query'], 10, 1);
@@ -218,6 +219,9 @@ class Bootstrap
 		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_meta', 30 );
 
 		    add_filter( 'woocommerce_product_get_rating_html', [ $this, 'eael_rating_markup' ], 10, 3 );
+
+            add_action('wp_ajax_eael_checkout_cart_qty_update', [$this, 'eael_checkout_cart_qty_update'] );
+    		add_action('wp_ajax_nopriv_eael_checkout_cart_qty_update', [$this, 'eael_checkout_cart_qty_update'] );
 	    }
 
 

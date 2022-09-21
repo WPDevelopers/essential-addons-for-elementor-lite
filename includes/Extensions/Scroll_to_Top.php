@@ -373,31 +373,6 @@ class Scroll_to_Top
                 ],
                 'selectors' => [
                     '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button i' => 'font-size: {{SIZE}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'eael_ext_scroll_to_top' => 'yes',
-                ],
-            ]
-        );
-
-        $element->add_control(
-            'eael_ext_scroll_to_top_button_icon_svg_size',
-            [
-                'label' => __('SVG Size', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SLIDER,
-                'default'    => [
-                    'size' => 32,
-                    'unit' => 'px',
-                ],
-                'size_units' => ['px'],
-                'range'      => [
-                    'px' => [
-                        'min'  => 0,
-                        'max'  => 500,
-                        'step' => 1,
-                    ],
-                ],
-                'selectors' => [
                     '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
                 ],
                 'condition' => [
