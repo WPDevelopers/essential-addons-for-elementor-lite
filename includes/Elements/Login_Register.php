@@ -3931,13 +3931,17 @@ class Login_Register extends Widget_Base {
 			'tab'       => Controls_Manager::TAB_STYLE,
 			'conditions' => $link_section_conditions,
 		] );
-
-		$this->_init_link_style( 'register', 0 );
-		$this->add_control('separator_login_link_for_two_forms',
-		[
-			'type' => Controls_Manager::RAW_HTML,
-			'separator' => 'before'
-		]);
+		
+		if( $this->user_can_register ) {
+			$this->_init_link_style( 'register', 0 );
+			
+			$this->add_control('separator_login_link_for_two_forms',
+			[
+				'type' => Controls_Manager::RAW_HTML,
+				'separator' => 'before'
+			]);
+		}
+		
 		$this->_init_link_style( 'lostpassword', 0 );
 
 		$this->end_controls_section();
