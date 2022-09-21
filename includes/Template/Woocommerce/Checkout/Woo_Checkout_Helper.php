@@ -379,6 +379,9 @@ trait Woo_Checkout_Helper {
 		<?php do_action('woocommerce_checkout_after_order_review'); ?>
 	<?php }
 
+	public function remove_woocommerce_display_recurring_totals( $settings ){
+		remove_action('woocommerce_review_order_after_order_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals' ), 10);
+	}
 	/**
 	 * Show the order review.
 	 */
@@ -418,17 +421,27 @@ trait Woo_Checkout_Helper {
 									echo CheckoutHelperCLass::eael_wp_kses( $name );
 									?>
 									<?php if( $settings['ea_woo_checkout_layout'] == 'split' || $settings['ea_woo_checkout_layout'] == 'multi-steps' ) {
-									    echo apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $cart_item['quantity'] ) . '</strong>', $cart_item, $cart_item_key );
+										if( !empty( $settings['ea_woo_checkout_cart_update_enable'] ) && 'yes' === $settings['ea_woo_checkout_cart_update_enable'] ) {
+											static::eael_checkout_cart_quantity_input_print( $_product, $cart_item_key, $cart_item ); 
+										}else {
+											echo apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $cart_item['quantity'] ) . '</strong>', $cart_item, $cart_item_key );
+										}
 									} // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 									<?php echo wc_get_formatted_cart_item_data( $cart_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 								</div>
 							</div>
                             <?php if( $settings['ea_woo_checkout_layout'] == 'default' ) { ?>
 							<div class="table-col-2 product-quantity">
-								<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', $cart_item['quantity'], $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								<?php 
+								if( !empty( $settings['ea_woo_checkout_cart_update_enable'] ) && 'yes' === $settings['ea_woo_checkout_cart_update_enable'] ) {
+									static::eael_checkout_cart_quantity_input_print( $_product, $cart_item_key, $cart_item ); 
+								} else {
+									echo apply_filters( 'woocommerce_checkout_cart_item_quantity', $cart_item['quantity'], $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+								}
+								?>
 							</div>
                             <?php } ?>
-							<div class="table-col-3 product-total">
+							<div class="table-col-3 product-total eael-checkout-cart-item-total">
 								<?php echo apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
 						</li>
@@ -457,7 +470,7 @@ trait Woo_Checkout_Helper {
 						</a>
 					</div>
 				<?php } ?>
-
+					
 				<div class="footer-content">
 					<div class="cart-subtotal">
                         <?php if($woo_checkout_order_details_change_label_settings == 'yes') : ?>
@@ -466,7 +479,7 @@ trait Woo_Checkout_Helper {
                             <?php esc_html_e( 'Subtotal', 'essential-addons-for-elementor-lite' ); ?>
                         <?php endif; ?>
 
-						<div><?php wc_cart_totals_subtotal_html(); ?></div>
+						<div class="eael-checkout-cart-subtotal"><?php wc_cart_totals_subtotal_html(); ?></div>
 					</div>
 
 					<?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
@@ -519,7 +532,7 @@ trait Woo_Checkout_Helper {
                             <?php esc_html_e( 'Total', 'essential-addons-for-elementor-lite' ); ?>
                         <?php endif; ?>
 
-						<div><?php wc_cart_totals_order_total_html(); ?></div>
+						<div class="eael-checkout-cart-total"><?php wc_cart_totals_order_total_html(); ?></div>
 					</div>
 
                     <?php
@@ -783,6 +796,34 @@ trait Woo_Checkout_Helper {
 		add_filter('woocommerce_shipping_package_name', [ $this, 'custom_shipping_package_name' ], 10, 3);
 	}
 
+	/**
+	 * Print quantity input field
+	 * @return void
+	 * 
+	 * @since 5.1.4
+	 */
+	public static function eael_checkout_cart_quantity_input_print($_product, $cart_item_key, $cart_item){
+
+		if ( $_product->is_sold_individually() ) {
+			$product_quantity = sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key );
+		} else {
+			$product_quantity = woocommerce_quantity_input(
+				[
+					'input_name'   => "cart[{$cart_item_key}][qty]",
+					'input_value'  => $cart_item['quantity'],
+					'max_value'    => $_product->get_max_purchase_quantity(),
+					'min_value'    => '0',
+					'product_name' => $_product->get_name(),
+					'classes'	   => array('eael-checkout-cart-qty-input', 'input-text', 'qty', 'text'),
+				],
+				$_product,
+				false
+			);
+		}
+
+		echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity,
+			$cart_item_key, $cart_item ); // PHPCS: XSS ok.
+	}
 }
 
 
