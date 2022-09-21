@@ -85,6 +85,13 @@ class Login_Register extends Widget_Base {
 	 * @var string|false
 	 */
 	protected $recaptcha_sitekey;
+
+	/**
+	 * Google reCAPTCHA v3 Site key
+	 * @var string|false
+	 */
+	protected $recaptcha_sitekey_v3;
+
 	/**
 	 * @var mixed|void
 	 */
@@ -99,6 +106,7 @@ class Login_Register extends Widget_Base {
 		parent::__construct( $data, $args );
 		$this->user_can_register = get_option( 'users_can_register' );
 		$this->recaptcha_sitekey = get_option( 'eael_recaptcha_sitekey' );
+		$this->recaptcha_sitekey_v3 = get_option( 'eael_recaptcha_sitekey_v3' );
 		$this->in_editor         = Plugin::instance()->editor->is_edit_mode();
 		$this->pro_enabled       = apply_filters( 'eael/pro_enabled', false );
 
@@ -324,7 +332,7 @@ class Login_Register extends Widget_Base {
 			'dynamic'     => [
 				'active' => true,
 			],
-			'default'     => __( 'Forgot password?', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( 'Forgot Password?', 'essential-addons-for-elementor-lite' ),
 			'condition'   => [
 				'show_lost_password' => 'yes',
 			],
@@ -434,24 +442,6 @@ class Login_Register extends Widget_Base {
 				'separator' => 'before',
 			] );
 		}
-		$this->add_control( 'enable_login_recaptcha', [
-			'label'        => __( 'Enable Google reCAPTCHA', 'essential-addons-for-elementor-lite' ),
-			'description'  => __( 'reCAPTCHA will prevent spam login from bots.', 'essential-addons-for-elementor-lite' ),
-			'type'         => Controls_Manager::SWITCHER,
-			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
-			'return_value' => 'yes',
-		] );
-		if ( empty( $this->recaptcha_sitekey ) ) {
-			$this->add_control( 'eael_login_recaptcha_keys_missing', [
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => sprintf( __( 'reCAPTCHA API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
-				'content_classes' => 'eael-warning',
-				'condition'       => [
-					'enable_login_recaptcha' => 'yes',
-				],
-			] );
-		}
 		$this->end_popover();
 
 
@@ -512,24 +502,7 @@ class Login_Register extends Widget_Base {
 					'show_login_link'   => 'yes',
 				],
 			] );
-			$this->add_control( 'enable_register_recaptcha', [
-				'label'        => __( 'Enable Google reCAPTCHA', 'essential-addons-for-elementor-lite' ),
-				'description'  => __( 'reCAPTCHA will prevent spam registration from bots.', 'essential-addons-for-elementor-lite' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
-			] );
-			if ( empty( $this->recaptcha_sitekey ) ) {
-				$this->add_control( 'eael_recaptcha_keys_missing', [
-					'type'            => Controls_Manager::RAW_HTML,
-					'raw'             => sprintf( __( 'reCAPTCHA API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
-					'content_classes' => 'eael-warning',
-					'condition'       => [
-						'enable_register_recaptcha' => 'yes',
-					],
-				] );
-			}
+			do_action( 'eael/login-register/mailchimp-integration', $this );
 			$this->end_popover();
 
 		} else {
@@ -537,6 +510,90 @@ class Login_Register extends Widget_Base {
 				'label'   => __( 'Show Login Link', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::HIDDEN,
 				'default' => 'no',
+			] );
+		}
+
+		$this->add_control( 'enable_login_register_recaptcha', [
+			'label'        => __( 'Enable Google reCAPTCHA', 'essential-addons-for-elementor-lite' ),
+			'description'  => __( 'reCAPTCHA will prevent spam login from bots.', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'default'      => 'yes',
+		] );
+
+		$this->add_control( 'login_register_recaptcha_version', [
+			'label'       => __( 'reCAPTCHA version', 'essential-addons-for-elementor-lite' ),
+			'label_block' => false,
+			'type'        => Controls_Manager::SELECT,
+			'options'     => [
+				'v2' => __( 'v2', 'essential-addons-for-elementor-lite' ),
+				'v3'  => __( 'v3', 'essential-addons-for-elementor-lite' ),
+			],
+			'default'     => 'v2',
+			'condition'   => [
+				'enable_login_register_recaptcha' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'login_register_recaptcha_v3_description', [
+			'type'      => Controls_Manager::RAW_HTML,
+			'content_classes' => 'elementor-control-field-description',
+			'raw'       => __( '<p style="margin-top:-15px">v3 will be applied to both forms. After saving, reload the preview to see the changes.</p>', 'essential-addons-for-elementor-lite' ),
+			'condition' => [
+				'login_register_recaptcha_version' => 'v3',
+				'enable_login_register_recaptcha'   => 'yes',
+			],
+		] );
+
+		$this->add_control( 'enable_login_recaptcha', [
+			'label'        => __( 'Apply on Login Form', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'condition'    => [
+				'enable_login_register_recaptcha' => 'yes',
+				'login_register_recaptcha_version' => 'v2',
+			],
+		] );
+
+		if( $this->user_can_register ) {
+			$this->add_control( 'enable_register_recaptcha', [
+				'label'        => __( 'Apply on Registration Form', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'condition'    => [
+					'enable_login_register_recaptcha' => 'yes',
+					'login_register_recaptcha_version' => 'v2',
+				],
+			] );
+		}
+		
+		if ( empty( $this->recaptcha_sitekey ) ) {
+			$this->add_control( 'eael_recaptcha_keys_missing', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => sprintf( __( 'reCAPTCHA v2 API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
+				'content_classes' => 'eael-warning',
+				'condition'       => [
+					'enable_login_register_recaptcha' => 'yes',
+					'login_register_recaptcha_version' => 'v2',
+				],
+			] );
+		}
+
+		if ( empty( $this->recaptcha_sitekey_v3 ) ) {
+			$this->add_control( 'eael_recaptcha_keys_missing_v3', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => sprintf( __( 'reCAPTCHA v3 API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
+				'content_classes' => 'eael-warning',
+				'condition'       => [
+					'enable_login_register_recaptcha' => 'yes',
+					'login_register_recaptcha_version' => 'v3',
+				],
 			] );
 		}
 
@@ -3124,6 +3181,7 @@ class Login_Register extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .lr-form-wrapper .forget-menot  input[type=checkbox]:checked" => 'border-color: {{VALUE}};background: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper input[type=checkbox]:hover:not(:checked):not(:disabled)" => 'border-color: {{VALUE}};',
 			],
 			'condition' => [
 				'remember_me_style_pot' => 'yes',
@@ -3134,6 +3192,135 @@ class Login_Register extends Widget_Base {
 			'label'    => __( 'Remember Me Typography', 'essential-addons-for-elementor-lite' ),
 			'name'     => "eael_rm_label_typography",
 			'selector' => "{{WRAPPER}} .lr-form-wrapper .forget-menot",
+		] );
+
+		//Forget Password Style
+		$this->add_control( 'eael_form_forget_pass_fields_heading', [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Forgot Password', 'essential-addons-for-elementor-lite' ),
+			'separator' => 'before',
+		] );
+		$this->add_control( 'forget_pass_style_pot', [
+			'label'        => __( 'Forgot Password Style', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
+			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+		] );
+
+		$this->start_popover();
+
+		$this->add_responsive_control( "eael_form_forget_pass_field_margin", [
+			'label'      => __( 'Container Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael-forever-forget" => $this->apply_dim( 'margin' ),
+			],
+			'condition'  => [
+				'forget_pass_style_pot' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_forget_pass_field_padding", [
+			'label'      => __( 'Container Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael-forever-forget" => $this->apply_dim( 'padding' ),
+			],
+			'condition'  => [
+				'forget_pass_style_pot' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_forget_pass_lbl_margin", [
+			'label'      => __( 'Label Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-pass" => $this->apply_dim( 'margin' ),
+			],
+			'condition'  => [
+				'forget_pass_style_pot' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_forget_pass_lbl_padding", [
+			'label'      => __( 'Label Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-pass" => $this->apply_dim( 'padding' ),
+			],
+			'condition'  => [
+				'forget_pass_style_pot' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'eael_forget_pass_label_color_normal', [
+			'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-pass a" => 'color: {{VALUE}};',
+			],
+			'separator' => 'before',
+			'condition' => [
+				'forget_pass_style_pot' => 'yes',
+			],
+		] );
+		$this->add_control( 'eael_forget_pass_label_bg_color_normal', [
+			'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#ffffff',
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-pass" => 'background-color: {{VALUE}};',
+			],
+			'condition' => [
+				'forget_pass_style_pot' => 'yes',
+			],
+		] );
+		
+		$this->add_control( 'eael_forget_pass_label_color_hover', [
+			'label'     => __( 'Hover Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-pass:hover a" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'forget_pass_style_pot' => 'yes',
+			],
+		] );
+		$this->add_control( 'eael_forget_pass_label_bg_color_hover', [
+			'label'     => __( 'Background Hover Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#ffffff',
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-pass:hover" => 'background-color: {{VALUE}};',
+			],
+			'condition' => [
+				'forget_pass_style_pot' => 'yes',
+			],
+		] );
+
+		$this->end_popover();
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'label'    => __( 'Forgot Password Typography', 'essential-addons-for-elementor-lite' ),
+			'name'     => "eael_forget_pass_label_typography",
+			'selector' => "{{WRAPPER}} .lr-form-wrapper .forget-pass a",
 		] );
 		$this->end_controls_section();
 	}
@@ -3400,6 +3587,18 @@ class Login_Register extends Widget_Base {
 				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'height: {{SIZE}}{{UNIT}};',
 			],
 		] );
+
+		//Show spinner
+		do_action( "eael/login-register/after-init-{$button_type}-button-style", $this, $button_type );
+		
+		if ( !$this->pro_enabled ) {
+			$this->add_control( "{$button_type}_btn_show_spinner", [
+				'label'   => sprintf( __( 'Show Spinner %s', 'essential-addons-for-elementor-lite' ), '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
+				'type'    => Controls_Manager::SWITCHER,
+				'classes' => 'eael-pro-control',
+			] );
+		}
+
 		$this->end_controls_section();
 	}
 
@@ -3799,7 +3998,6 @@ class Login_Register extends Widget_Base {
 			$this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
 		}
 
-
 		//handle form illustration
 		$form_image_id               = ! empty( $this->ds['lr_form_image']['id'] ) ? $this->ds['lr_form_image']['id'] : '';
 		$this->form_illustration_pos = ! empty( $this->ds['lr_form_image_position'] ) ? $this->ds['lr_form_image_position'] : 'left';
@@ -3812,11 +4010,33 @@ class Login_Register extends Widget_Base {
 		if ( ! empty( $this->ds['redirect_after_login'] ) && 'yes' === $this->ds['redirect_after_login'] ) {
 			$login_redirect_url = !empty( $this->ds[ 'redirect_url' ][ 'url' ] ) ? esc_url( $this->ds[ 'redirect_url' ][ 'url' ] ) : '';
 		}
+
+		$login_recaptcha_version = $register_recaptcha_version = ! empty( $this->ds['login_register_recaptcha_version'] ) ? $this->ds['login_register_recaptcha_version'] : 'v2';
+
+		if ( get_option('eael_recaptcha_sitekey_v3') && ( 'v3' === $login_recaptcha_version || 'v3' === $register_recaptcha_version)  ) {
+			$site_key = esc_html( get_option('eael_recaptcha_sitekey_v3') );
+			
+	        if ( $recaptcha_language = esc_html( get_option( 'eael_recaptcha_language_v3' ) ) ) {
+		        $recaptcha_api_args1['hl'] = $recaptcha_language;
+	        }
+
+            $recaptcha_api_args1['render'] = $site_key;
+            
+	        $recaptcha_api_args1 = apply_filters( 'eael_lr_recaptcha_api_args_v3', $recaptcha_api_args1 );
+	        $recaptcha_api_args1 = http_build_query( $recaptcha_api_args1 );
+            wp_register_script('eael-recaptcha-v3', "https://www.google.com/recaptcha/api.js?{$recaptcha_api_args1}", false, EAEL_PLUGIN_VERSION, false);
+			wp_enqueue_script('eael-recaptcha-v3');
+			wp_dequeue_script('eael-recaptcha');
+        }
+
 		?>
         <div class="eael-login-registration-wrapper <?php echo empty( $form_image_id ) ? '' : esc_attr( 'has-illustration' ); ?>"
              data-is-ajax="<?php echo esc_attr( $this->get_settings_for_display( 'enable_ajax' ) ); ?>"
              data-widget-id="<?php echo esc_attr( $this->get_id() ); ?>"
              data-recaptcha-sitekey="<?php echo esc_attr( get_option( 'eael_recaptcha_sitekey' ) ); ?>"
+			 data-recaptcha-sitekey-v3="<?php echo esc_attr( get_option( 'eael_recaptcha_sitekey_v3' ) ); ?>"
+			 data-login-recaptcha-version="<?php echo esc_attr( $login_recaptcha_version ); ?>"
+			 data-register-recaptcha-version="<?php echo esc_attr( $register_recaptcha_version ); ?>"
              data-redirect-to="<?php echo esc_attr( $login_redirect_url ); ?>"
         >
 			<?php
@@ -3883,7 +4103,7 @@ class Login_Register extends Widget_Base {
 
 			//Loss password
 			$show_lp = ( ! empty( $this->ds['show_lost_password'] ) && 'yes' === $this->ds['show_lost_password'] );
-			$lp_text = ! empty( $this->ds['lost_password_text'] ) ? HelperCLass::eael_wp_kses($this->ds['lost_password_text']) : __( 'Forgot password?', 'essential-addons-for-elementor-lite' );
+			$lp_text = ! empty( $this->ds['lost_password_text'] ) ? HelperCLass::eael_wp_kses($this->ds['lost_password_text']) : __( 'Forgot Password?', 'essential-addons-for-elementor-lite' );
 			$lp_link = sprintf( '<a href="%s">%s</a>', esc_attr( wp_lostpassword_url() ), $lp_text );
 			if ( ! empty( $this->ds['lost_password_link_type'] ) && 'custom' === $this->ds['lost_password_link_type'] ) {
 				$lp_url  = ! empty( $this->ds['lost_password_url']['url'] ) ? $this->ds['lost_password_url']['url'] : wp_lostpassword_url();
@@ -3902,6 +4122,8 @@ class Login_Register extends Widget_Base {
 			// input icons
 			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_login_icon'] ) && 'yes' === $this->ds['show_login_icon'] );
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
+
+			$show_login_spinner  = !empty( $this->ds['login_btn_show_spinner'] ) ? $this->ds['login_btn_show_spinner'] : '';
 			?>
             <section
                     id="eael-login-form-wrapper"
@@ -3999,11 +4221,20 @@ class Login_Register extends Widget_Base {
 
 
                                 <div class="eael-lr-footer">
-                                    <input type="submit"
+									<div class="eael-lr-form-loader-wrapper">
+                                    	<input type="submit"
                                            name="eael-login-submit"
                                            id="eael-login-submit"
                                            class="g-recaptcha eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>"
                                            value="<?php echo esc_attr( $btn_text ); ?>"/>
+										
+										<?php if( !empty( $show_login_spinner ) && 'true' === $show_login_spinner ): ?>
+										<span class="eael-lr-form-loader eael-lr-login-form-loader d-none<?php esc_attr_e($this->in_editor ? '-editor' : '') ?>">
+											<i class="eicon-spinner eicon-animation-spin"></i>
+										</span>
+										<?php endif; ?>
+
+									</div>
 									<?php if ( $show_reg_link ) { ?>
                                         <div class="eael-sign-wrapper <?php echo esc_attr( $link_align ); ?>">
 											<?php echo $reg_link; // XSS ok. already escaped ?>
@@ -4077,6 +4308,8 @@ class Login_Register extends Widget_Base {
 			$lgn_link_placeholder = '<span class="d-ib">%1$s</span> <a href="%2$s" id="eael-lr-login-toggle" class="eael-lr-link" data-action="%3$s" %5$s>%4$s</a>';
 			$lgn_url              = $lgn_atts = '';
 
+			$show_register_spinner  = !empty( $this->ds['register_btn_show_spinner'] ) ? $this->ds['register_btn_show_spinner'] : '';
+
 			switch ( $lgn_link_action ) {
 				case 'custom':
 					$lgn_url  = ! empty( $this->ds['custom_login_url']['url'] ) ? $this->ds['custom_login_url']['url'] : '';
@@ -4098,13 +4331,32 @@ class Login_Register extends Widget_Base {
 			// input icons
 			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_register_icon'] ) && 'yes' === $this->ds['show_register_icon'] );
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
+
+			$use_weak_password = true;
+			if( isset( $this->ds['use_weak_password'] ) ){
+				$use_weak_password = !empty( $this->ds['use_weak_password'] ) ? 1 : 0;
+			}
+
+			$password_min_length = !empty( $this->ds['weak_pass_min_char'] ) ? intval( $this->ds['weak_pass_min_char'] ) : '';
+			$password_one_uppercase = !empty( $this->ds['weak_pass_one_uppercase'] ) ? true : false;
+			$password_one_lowercase = !empty( $this->ds['weak_pass_one_lowercase'] ) ? true : false;
+			$password_one_number = !empty( $this->ds['weak_pass_one_number'] ) ? true : false;
+			$password_one_special = !empty( $this->ds['weak_pass_one_special'] ) ? true : false;
+
 			ob_start();
 			?>
             <section
                     id="eael-register-form-wrapper"
                     class="<?php echo esc_attr( $default_hide_class ); ?>"
                     data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>"
-                    data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>">
+                    data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>"
+                    data-use-weak-password="<?php echo esc_attr( $use_weak_password ); ?>"
+                    data-password-min-length="<?php echo esc_attr( $password_min_length ); ?>"
+                    data-password-one-uppercase="<?php echo esc_attr( $password_one_uppercase ); ?>"
+                    data-password-one-lowercase="<?php echo esc_attr( $password_one_lowercase ); ?>"
+                    data-password-one-number="<?php echo esc_attr( $password_one_number ); ?>"
+                    data-password-one-special="<?php echo esc_attr( $password_one_special ); ?>"
+					>
                 <div class="eael-register-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr( $icon_class ); ?>">
 					<?php if ( 'left' === $this->form_illustration_pos ) {
 						$this->print_form_illustration();
@@ -4234,11 +4486,20 @@ class Login_Register extends Widget_Base {
 							?>
 
                             <div class="eael-lr-footer">
-                                <input type="submit"
+								<div class="eael-lr-form-loader-wrapper">
+                                	<input type="submit"
                                        name="eael-register-submit"
                                        id="eael-register-submit"
                                        class="eael-lr-btn eael-lr-btn-block<?php echo esc_attr( $btn_align ); ?>"
                                        value="<?php echo esc_attr( $btn_text ); ?>"/>
+										
+									<?php if( !empty( $show_register_spinner ) && 'true' === $show_register_spinner ): ?>
+									<span class="eael-lr-form-loader eael-lr-register-form-loader d-none<?php esc_attr_e($this->in_editor ? '-editor' : '') ?>">
+										<i class="eicon-spinner eicon-animation-spin"></i>
+									</span>
+									<?php endif; ?>
+
+								</div>
 								<?php if ( $show_lgn_link ) { ?>
                                     <div class="eael-sign-wrapper  <?php echo esc_attr( $link_align ); ?>">
 										<?php echo $lgn_link; ?>
@@ -4408,7 +4669,7 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_recaptcha_node( $form_type = 'login' ) {
-		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) ) {
+		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) && 'v3' !== $this->ds["login_register_recaptcha_version"] ) {
 			$id = "{$form_type}-recaptcha-node-" . $this->get_id();
 			echo "<input type='hidden' name='g-recaptcha-enabled' value='1'/><div id='{$id}' class='eael-recaptcha-wrapper'></div>";
 		}
