@@ -40,7 +40,7 @@ class Woo_Checkout extends Widget_Base {
 			}
 
 			add_filter('body_class' , [$this, 'add_checkout_body_class']);
-      $this->eael_woocheckout_recurring();
+            $this->eael_woocheckout_recurring();
 		}
 	}
 
@@ -73,6 +73,13 @@ class Woo_Checkout extends Widget_Base {
 	public function get_keywords() {
 		return [ 'ea woo checkout', 'woocommerce', 'checkout', 'woocommerce checkout', 'woocommerce split checkout', 'split checkout', 'multi steps checkout', 'ea', 'essential addons' ];
 	}
+    
+    public function get_style_depends() {
+        return [
+            'font-awesome-5-all',
+            'font-awesome-4-shim',
+        ];
+    }
 
 	public function get_custom_help_url() {
 		return 'https://essential-addons.com/elementor/docs/woo-checkout/';
@@ -162,6 +169,17 @@ class Woo_Checkout extends Widget_Base {
 				'dynamic' => [
 					'active' => true,
 				],
+			]
+		);
+
+		// Update Cart  Button
+		$this->add_control(
+			'ea_woo_checkout_cart_update_enable',
+			[
+				'label' => esc_html__( 'Enable Cart Update', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default' => '',
 			]
 		);
 
@@ -520,6 +538,112 @@ class Woo_Checkout extends Widget_Base {
 				],
 			]
 		);
+		$this->end_controls_section();
+
+
+		/**
+		 * -------------------------------------------
+		 * Re ordering Shipping and billing fields
+		 * -------------------------------------------
+		 */
+		$this->start_controls_section(
+			'ea_section_woo_reordering_fields',
+			[
+				'label' => esc_html__( 'Billing/Shipping Fields', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->start_controls_tabs( 'ea_woo_checkout_reorder_fields');
+		$this->start_controls_tab( 'ea_woo_checkout_reorder_billing_fields_tab',
+            [
+                    'label' => __( 'Billing', 'essential-addons-for-elementor-lite' )
+            ]
+        );
+
+		$this->add_control(
+			'ea_woo_checkout_reorder_billing_fields_tab_description', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => esc_html__( 'Here you can reorder the fields by drag and drop.', 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'elementor-control-field-description'
+			]
+		);
+
+		$repeater = new \Elementor\Repeater();
+
+		$repeater->add_control(
+			'field_label', [
+				'label' => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => esc_html__( 'List Title' , 'essential-addons-for-elementor-lite' ),
+				'label_block' => true,
+			]
+		);
+
+		$repeater->add_control(
+			'field_key', [
+				'label' => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HIDDEN,
+				'default' => esc_html__( 'List Title' , 'essential-addons-for-elementor-lite' ),
+				'label_block' => true,
+			]
+		);
+
+		$repeater->add_control(
+			'field_class', [
+				'label' => esc_html__( 'Field Spacing', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'form-row-first' => __( 'First Half', 'essential-addons-for-elementor-lite' ),
+                    'form-row-last' => __( 'Last Half', 'essential-addons-for-elementor-lite' ),
+                    'form-row-wide' => __( 'Full Width', 'essential-addons-for-elementor-lite' )
+                ],
+				'label_block' => true,
+			]
+		);
+		$WC_Checkout = new \WC_Checkout();
+		$WC_Checkout->get_checkout_fields();
+
+		$billing_fields = $WC_Checkout->get_checkout_fields('billing');
+
+		$this->add_control(
+			'ea_billing_fields_list',
+			[
+				'label' => '',
+				'type' => Controls_Manager::REPEATER,
+				'fields' => $repeater->get_controls(),
+				'default' => $this->get_default_checkout_fields( $billing_fields ),
+				'title_field' => '{{{ field_label }}}',
+			]
+		);
+		$this->end_controls_tab();
+		$this->start_controls_tab( 'ea_woo_checkout_reorder_shipping_fields_tab',
+		    [
+		        'label' => __( 'Shipping', 'essential-addons-for-elementor-lite' )
+            ]);
+
+		$this->add_control(
+			'ea_woo_checkout_reorder_shipping_fields_tab_description', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => esc_html__( 'Here you can reorder the fields by drag and drop.', 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'elementor-control-field-description'
+			]
+		);
+
+		$shipping_fields = $WC_Checkout->get_checkout_fields('shipping');
+
+		$this->add_control(
+			'ea_shipping_fields_list',
+			[
+				'label' => '',
+				'type' => Controls_Manager::REPEATER,
+				'fields' => $repeater->get_controls(),
+				'default' => $this->get_default_checkout_fields( $shipping_fields ),
+				'title_field' => '{{{ field_label }}}',
+			]
+		);
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+
 		$this->end_controls_section();
 
 		/**
@@ -1542,6 +1666,25 @@ class Woo_Checkout extends Widget_Base {
 				],
 			]
 		);
+        $this->add_control(
+            'ea_woo_checkout_coupon_icon_size',
+            [
+                'label'       => __( 'Icon Size', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::SLIDER,
+                'default'     => ['size' => 16, 'unit'=>'px'],
+                'range'       => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .ea-woo-checkout .ea-coupon-icon svg' => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};line-height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-woo-checkout .ea-coupon-icon i' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 		$this->add_control(
 			'ea_woo_checkout_coupon_links_color',
 			[
@@ -2741,14 +2884,46 @@ class Woo_Checkout extends Widget_Base {
 		return $classes;
 	}
 
-
-  public function eael_woocheckout_recurring(){
-    if( class_exists('WC_Subscriptions_Cart') ) {
-      remove_action('woocommerce_review_order_after_order_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals' ), 10);
-      add_action('eael_display_recurring_total_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals'
-      ), 10);
+    public function get_default_checkout_fields( $fields ){
+	    $_fields = [];
+        $classes = [ 'form-row-first', 'form-row-last', 'form-row-wide' ];
+	    foreach ( $fields as $key => $field_set ){
+		    $_fields[] = [
+			    'field_label' => $field_set['label'],
+                'field_key'   => $key,
+			    'field_class' => implode('', array_intersect( $classes, $field_set['class'] )),
+		    ];
+	    }
+        return $_fields;
     }
-  }
+
+    public function reorder_checkout_fields( $fields, $field_type ){
+	    $settings = $this->get_settings_for_display();
+	    $checkout_fields = $settings['ea_' . $field_type . '_fields_list'];
+	    $classes = [ 'form-row-first', 'form-row-last', 'form-row-wide' ];
+	    foreach ( $checkout_fields as $key => $field_set ){
+		    $field_key = $field_set['field_key'];
+		    if ( isset( $fields[$field_key] ) ){
+			    $fields[$field_key]['label'] = $field_set['field_label'];
+			    $fields[$field_key]['priority'] = ($key+1)*10;
+			    $fields[$field_key]['class'] = array_diff( $fields[$field_key]['class'], $classes) + [ $field_set['field_class'] ];
+		    }
+	    }
+	    return $fields;
+    }
+
+    public function ea_checkout_fields( $fields ){
+        $fields['billing'] = $this->reorder_checkout_fields( $fields['billing'], 'billing' );
+        $fields['shipping'] = $this->reorder_checkout_fields( $fields['shipping'], 'shipping' );
+        return $fields;
+    }
+
+	public function eael_woocheckout_recurring() {
+		if ( class_exists( 'WC_Subscriptions_Cart' ) ) {
+			add_action( 'eael_woo_checkout_before_render', [ $this, 'remove_woocommerce_display_recurring_totals' ] );
+			add_action( 'eael_display_recurring_total_total', array( 'WC_Subscriptions_Cart', 'display_recurring_totals' ), 10 );
+		}
+	}
 
 	protected function render() {
 	    if( !class_exists('woocommerce') ) {
@@ -2768,6 +2943,8 @@ class Woo_Checkout extends Widget_Base {
 		}
 
         $settings = $this->get_settings_for_display();
+        add_filter( 'woocommerce_checkout_fields', [ $this, 'ea_checkout_fields' ], 99999 );
+		do_action( 'eael_woo_checkout_before_render', $settings );
 
 		if ( in_array( $settings[ 'ea_woo_checkout_layout' ], [ 'multi-steps', 'split' ] ) ) {
 			if ( !apply_filters( 'eael/pro_enabled', false ) ) {
