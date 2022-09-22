@@ -458,7 +458,7 @@ $elements = [
 			],
 			[
 				'key'       => 'login-register',
-				'title'     => __( 'Login Register Form', 'essential-addons-elementor' ),
+				'title'     => __( 'Login | Register Form', 'essential-addons-elementor' ),
 				'demo_link' => 'https://essential-addons.com/elementor/login-register-form',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/login-register-form/',
 				'setting'   => [ 'id' => 'eael-login-register-setting' ],

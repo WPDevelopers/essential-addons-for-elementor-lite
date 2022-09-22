@@ -148,7 +148,7 @@ class Elements_Manager {
 	 */
 	public function get_extension_list( $element ) {
 		$list = [];
-		if ( isset( $element['elType'] ) && $element['elType'] == 'section' ) {
+		if ( isset( $element['elType'] ) && ( $element['elType'] == 'section' || $element['elType'] == 'container' ) ) {
 			if ( ! empty( $element['settings']['eael_particle_switch'] ) ) {
 				$list['section-particles'] = 'section-particles';
 			}

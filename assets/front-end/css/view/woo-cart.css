@@ -1,6 +1,16 @@
 .eael-woo-cart .eael-woo-cart-wrapper {
   background: #f9fbff;
 }
+.eael-woo-cart .eael-woo-cart-wrapper .sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
 .eael-woo-cart .eael-woo-cart-wrapper p {
   margin: 0;
 }
@@ -682,6 +692,16 @@ body.oceanwp-theme.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-co
 body.oceanwp-theme.eael-woo-cart .eael-woo-cart-wrapper .quantity .minus,
 body.oceanwp-theme.eael-woo-cart .eael-woo-cart-wrapper .quantity .plus {
   display: none;
+}
+body.oceanwp-theme.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table thead {
+  display: table-header-group;
+}
+body.oceanwp-theme.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td {
+  display: table-cell;
+  width: inherit;
+}
+body.oceanwp-theme.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr td:before {
+  content: none;
 }
 body.theme-storefront.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .shipping input {
   background: transparent;
