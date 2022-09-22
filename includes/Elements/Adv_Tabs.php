@@ -482,7 +482,7 @@ class Adv_Tabs extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li i' => 'font-size: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li img' => 'width: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li svg' => 'width: {{SIZE}}{{UNIT}}; height: auto;',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -892,8 +892,8 @@ class Adv_Tabs extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#444',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:after' => 'border-top-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-advance-tabs.eael-tabs-vertical > .eael-tabs-nav > ul li:after' => 'border-top-color: transparent; border-left-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs:not(.eael-tabs-vertical) .eael-tabs-nav > ul li:after' => 'border-top-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs.eael-tabs-vertical > .eael-tabs-nav > ul li:after' => 'border-left-color: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_tabs_tab_caret_show' => 'yes',
@@ -1053,8 +1053,8 @@ class Adv_Tabs extends Widget_Base
 				        <?php if ('content' == $tab['eael_adv_tabs_text_type']) : ?>
 					        <?php echo do_shortcode($tab['eael_adv_tabs_tab_content']); ?>
 				        <?php elseif ('template' == $tab['eael_adv_tabs_text_type']) : ?>
-					        <?php if (!empty($tab['eael_primary_templates'])) {
-						        echo Plugin::$instance->frontend->get_builder_content($tab['eael_primary_templates'], true);
+					        <?php if ( ! empty( $tab['eael_primary_templates'] ) ) {
+						        echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'] );
 					        } ?>
 				        <?php endif; ?>
                     </div>
