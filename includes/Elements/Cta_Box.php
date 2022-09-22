@@ -786,6 +786,7 @@ class Cta_Box extends Widget_Base
 		    [
 			    'label' => esc_html__('Icon Size', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::SLIDER,
+                'default' => [ 'unit' => 'px', 'size' => 20 ],
 			    'range' => [
 				    'px' => [
 					    'max' => 50,
@@ -1365,6 +1366,7 @@ class Cta_Box extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-call-to-action.cta-icon-flex .icon' => 'font-size: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-call-to-action.cta-icon-flex .icon img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-call-to-action.cta-icon-flex .icon svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -1377,6 +1379,7 @@ class Cta_Box extends Widget_Base
                 'default' => '#444',
                 'selectors' => [
                     '{{WRAPPER}} .eael-call-to-action.cta-icon-flex .icon' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action.cta-icon-flex .icon svg' => 'fill: {{VALUE}};',
                 ],
                 'condition' => [
 	                'eael_cta_preset' => 'cta-preset-1',
@@ -1391,6 +1394,7 @@ class Cta_Box extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-call-to-action.cta-icon-flex .icon' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action.cta-icon-flex .icon svg' => 'fill: {{VALUE}};',
                 ],
                 'condition' => [
 	                'eael_cta_preset' => 'cta-preset-2',
@@ -1521,10 +1525,11 @@ class Cta_Box extends Widget_Base
 			<?php if ($icon_is_new || $icon_migrated) {?>
 				<?php if (isset($settings['eael_cta_flex_grid_icon_new']['value']['url'])): ?>
 					<img src="<?php echo esc_attr($settings['eael_cta_flex_grid_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_cta_flex_grid_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
-				<?php else: ?>
-					<i class="<?php echo esc_attr($settings['eael_cta_flex_grid_icon_new']['value']); ?>"></i>
-				<?php endif;?>
-			<?php } else {?>
+				<?php else:
+                    Icons_Manager::render_icon( $settings['eael_cta_flex_grid_icon_new'] );
+
+                endif;
+            } else {?>
 				<i class="<?php echo esc_attr($settings['eael_cta_flex_grid_icon']); ?>"></i>
 			<?php }?>
 	    </div>

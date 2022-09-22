@@ -16,6 +16,19 @@ var SimpleMenu = function ($scope, $) {
         'eael-simple-menu-horizontal'
     )
     
+    let $hamburger_breakpoints = $('.eael-simple-menu-container', $scope).data(
+        'hamburger-breakpoints'
+    )
+    let $hamburger_device = $('.eael-simple-menu-container', $scope).data(
+        'hamburger-device'
+    )
+
+    if( typeof $hamburger_device === 'undefined' || $hamburger_device === '' || $hamburger_device === null ) {
+        $hamburger_device = 'tablet';
+    }
+
+    let $hamburger_max_width = getHamburgerMaxWidth($hamburger_breakpoints, $hamburger_device)
+
     var $fullWidth = $('.eael-simple-menu--stretch');
     
     if ($horizontal) {
@@ -60,9 +73,9 @@ var SimpleMenu = function ($scope, $) {
         $('.eael-simple-menu-horizontal', $scope)
             .before('<span class="eael-simple-menu-toggle-text"></span>')
             .after(
-                '<button class="eael-simple-menu-toggle">'+$hamburger_icon+'<span class="eael-simple-menu-toggle-text"></span></button>'
+                '<button class="eael-simple-menu-toggle">' + $hamburger_icon + '<span class="eael-simple-menu-toggle-text"></span></button>'
             )
-        eael_menu_resize();
+        eael_menu_resize($hamburger_max_width);
         
         // responsive menu slide
         $('.eael-simple-menu-container', $scope).on(
@@ -79,12 +92,12 @@ var SimpleMenu = function ($scope, $) {
 
         // clear responsive props
         $(window).on('resize load', function () {
-            eael_menu_resize();
+            eael_menu_resize($hamburger_max_width);
         })
     }
     
-    function eael_menu_resize(){
-        if (window.matchMedia('(max-width: 1024px)').matches) {
+    function eael_menu_resize( max_width_value = 0 ) {
+        if (window.matchMedia('(max-width: '+ max_width_value +'px)').matches) {
             $('.eael-simple-menu-container', $scope).addClass(
                 'eael-simple-menu-hamburger'
             )
@@ -99,6 +112,11 @@ var SimpleMenu = function ($scope, $) {
                 .eq(0)
                 .text()
             )
+
+            // Mobile Dropdown Breakpoints
+            $('.eael-simple-menu-container', $scope).closest('.elementor-widget-eael-simple-menu')
+                .removeClass('eael-hamburger--not-responsive')
+                .addClass('eael-hamburger--responsive');
 
             if ($('.eael-simple-menu-container', $scope).hasClass('eael-simple-menu--stretch')){
                 const css = {}
@@ -139,6 +157,12 @@ var SimpleMenu = function ($scope, $) {
                 $scope
             ).css('display', '')
             $(".eael-simple-menu-container nav",$scope).removeAttr( 'style' );
+
+            // Mobile Dropdown Breakpoints
+            $('.eael-simple-menu-container', $scope).closest('.elementor-widget-eael-simple-menu')
+                .removeClass('eael-hamburger--responsive')
+                .addClass('eael-hamburger--not-responsive');
+
         }
     }
 
@@ -148,6 +172,22 @@ var SimpleMenu = function ($scope, $) {
         css.left = '';
         css.position = 'inherit';
         selector.css(css);
+    }
+
+    function getHamburgerMaxWidth($breakpoints, $device) {
+        let $max_width = 0;
+        if( $device === 'none' || typeof $device === 'undefined' || $device === '' || $device === null ){
+            return $max_width;
+        }
+
+        for (let $key in $breakpoints) {
+            if ($key == $device) {
+                $max_width = $breakpoints[$key];
+            }
+        }
+        // fetch max width value from string like 'Mobile (> 767px)' to 767
+        $max_width = $max_width.replace(/[^0-9]/g, '');
+        return $max_width;
     }
 
     $('.eael-simple-menu > li.menu-item-has-children', $scope).each(
@@ -238,9 +278,28 @@ var SimpleMenu = function ($scope, $) {
         'click',
         '.eael-simple-menu-responsive li a',
         function (e) {
-            $(this).parents('.eael-simple-menu-horizontal').slideUp(300)
+            if ($(this).attr('href') !== '#') {
+                $(this).parents('.eael-simple-menu-horizontal').slideUp(300);
+            }
         }
     )
+
+    $('.eael-simple-menu', $scope).on('click', 'a[href="#"]', function (e) {
+        e.preventDefault();
+        $(this).siblings('.eael-simple-menu-indicator').click();
+    });
+
+    if ( elementorFrontend.isEditMode() ) {
+		elementor.channels.editor.on( 'change', function( view ) {
+			let changed = view.elementSettingsModel.changed;
+			if ( changed.eael_simple_menu_dropdown ) {
+                let updated_max_width = getHamburgerMaxWidth( $hamburger_breakpoints, changed.eael_simple_menu_dropdown );
+				eael_menu_resize( updated_max_width );
+
+                $hamburger_max_width = updated_max_width;
+			}
+		});
+	}
 }
 
 jQuery(window).on('elementor/frontend/init', function () {
