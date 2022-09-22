@@ -1259,13 +1259,6 @@ class Login_Register extends Widget_Base {
 			'default' => 'yes',
 		] );
 
-		$this->add_control( 'show_custom_fields', [
-			'label'   => __( 'Show Custom Fields', 'essential-addons-for-elementor-lite' ),
-			'description' => __( 'Enabling this will add extra field types (e.x. Phone) to the above repeater', 'essential-addons-for-elementor-lite' ),
-			'type'    => Controls_Manager::SWITCHER,
-			'default' => '',
-		] );
-
 		$this->add_control( 'mark_required', [
 			'label'     => __( 'Show Required Mark', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::SWITCHER,
