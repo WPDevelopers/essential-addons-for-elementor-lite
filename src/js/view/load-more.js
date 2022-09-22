@@ -59,12 +59,12 @@
 		}
 
 		if ( $data.class === "Essential_Addons_Elementor\\Pro\\Elements\\Dynamic_Filterable_Gallery" ) {
-			$('.dynamic-gallery-item-inner').each(function() {
+			$('.dynamic-gallery-item-inner', $scope).each(function() {
 				$exclude_ids.push($(this).data('itemid'));
 			});
 			
-			$active_term_id = $('.dynamic-gallery-category.active').data('termid');
-			$active_taxonomy = $('.dynamic-gallery-category.active').data('taxonomy');
+			$active_term_id = $(".elementor-element-" + $widget_id + ' .dynamic-gallery-category.active').data('termid');
+			$active_taxonomy = $(".elementor-element-" + $widget_id + ' .dynamic-gallery-category.active').data('taxonomy');
 
 			$data.page = 1; //page flag is not needed since we are using exclude ids
 			$data.exclude_ids = JSON.stringify($exclude_ids);
