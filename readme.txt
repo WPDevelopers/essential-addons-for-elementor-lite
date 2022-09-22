@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 5.3.0
+Stable tag: 5.3.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -241,6 +241,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.3.1 - 21/09/2022 =
+
+- Fixed: Throwing fatal error due to conflict with custom breakpoints & older Elementor versions
+- Few minor bug fixes & improvements
 
 = 5.3.0 - 21/09/2022 =
 
