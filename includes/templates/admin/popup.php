@@ -187,7 +187,7 @@
 
                     <div class="border__line"><span></span></div>
 
-                    <div class="modal__content">
+                    <div class="modal__content eael-pb-0">
                         <div class="eael-login__setup">
                             <div class="eael-input__inline1 mb15">
                                 <input name="lr_custom_profile_fields" id="lr_custom_profile_fields"

@@ -4859,6 +4859,10 @@ button.button__greyBg:hover:disabled {
     color: #9FAECB;
 }
 
+.eael-pb-0 {
+    padding-bottom: 0 !important;
+}
+
 .eael-modal__wrap .eael-modal__dialogue .eael-modal .modal__content {
     padding: 30px;
 }
