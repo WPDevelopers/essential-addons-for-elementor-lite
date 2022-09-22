@@ -2767,3 +2767,15 @@
   left: 0px;
   line-height: 12px;
 }
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid .woocommerce ul.products li.product,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid .woocommerce ul.products li.product {
+  max-width: 100%;
+}
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid .woocommerce ul.products li.product .eael-product-wrap .onsale,
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid .woocommerce ul.products li.product .eael-product-wrap .stockout,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid .woocommerce ul.products li.product .eael-product-wrap .onsale,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid .woocommerce ul.products li.product .eael-product-wrap .stockout {
+  height: auto;
+  top: 25px;
+  left: -55px;
+}

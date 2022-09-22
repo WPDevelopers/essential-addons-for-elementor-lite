@@ -3114,3 +3114,28 @@
         } 
     }
 }
+//Buddyboss theme conflicts
+.buddyboss-theme{
+    #content {
+        .elementor-widget-container{
+            .eael-product-grid,
+            .eael-post-grid{
+                .woocommerce {
+                    ul.products{
+                        li.product{
+                            max-width: 100%;
+                            .eael-product-wrap {
+                                .onsale,
+                                .stockout{
+                                    height: auto;
+                                    top: 25px;
+                                    left: -55px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
