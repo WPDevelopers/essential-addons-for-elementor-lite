@@ -2779,3 +2779,11 @@
   top: 25px;
   left: -55px;
 }
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid .woocommerce ul.products li.product .eael-product-wrap .eael-star-rating.star-rating,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid .woocommerce ul.products li.product .eael-product-wrap .eael-star-rating.star-rating {
+  width: 7em;
+}
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid .woocommerce ul.products li.product .eael-product-wrap .button,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid .woocommerce ul.products li.product .eael-product-wrap .button {
+  margin: 0;
+}
