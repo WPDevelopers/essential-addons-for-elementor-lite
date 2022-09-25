@@ -106,7 +106,7 @@ class Countdown extends Widget_Base {
 	    $this->add_control(
 		    'eael_evergreen_counter_recurring',
 		    [
-			    'label'        => esc_html__( 'Recurring', 'essential-addons-for-elementor-lite' ),
+			    'label'        => esc_html__( 'Recurring Countdown', 'essential-addons-for-elementor-lite' ),
 			    'type'         => Controls_Manager::SWITCHER,
 			    'return_value' => 'yes',
 			    'default'      => '',
@@ -134,7 +134,7 @@ class Countdown extends Widget_Base {
 	    $this->add_control(
 		    'eael_evergreen_counter_recurring_stop_time',
 		    [
-			    'label'       => esc_html__( 'Countdown Recurring Stop Date', 'essential-addons-for-elementor-lite' ),
+			    'label'       => esc_html__( 'Recurring Countdown End Date', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::DATE_TIME,
 			    'default'     => date( "Y-m-d", strtotime( "+ 7 day" ) ),
 			    'description' => esc_html__( 'Set the countdown end time', 'essential-addons-for-elementor-lite' ),
