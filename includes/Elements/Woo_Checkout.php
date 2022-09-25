@@ -2888,10 +2888,11 @@ class Woo_Checkout extends Widget_Base {
 	    $_fields = [];
         $classes = [ 'form-row-first', 'form-row-last', 'form-row-wide' ];
 	    foreach ( $fields as $key => $field_set ){
+		    $field_set_class = is_array( $field_set['class'] ) ? $field_set['class'] : [];
 		    $_fields[] = [
 			    'field_label' => $field_set['label'],
                 'field_key'   => $key,
-			    'field_class' => implode('', array_intersect( $classes, $field_set['class'] )),
+			    'field_class' => implode('', array_intersect( $classes, $field_set_class )),
 		    ];
 	    }
         return $_fields;
@@ -2904,9 +2905,10 @@ class Woo_Checkout extends Widget_Base {
 	    foreach ( $checkout_fields as $key => $field_set ){
 		    $field_key = $field_set['field_key'];
 		    if ( isset( $fields[$field_key] ) ){
+			    $field_set_class = is_array( $fields[ $field_key ]['class'] ) ? $fields[ $field_key ]['class'] : [];
 			    $fields[$field_key]['label'] = $field_set['field_label'];
 			    $fields[$field_key]['priority'] = ($key+1)*10;
-			    $fields[$field_key]['class'] = array_diff( $fields[$field_key]['class'], $classes) + [ $field_set['field_class'] ];
+			    $fields[$field_key]['class'] = array_diff( $field_set_class, $classes) + [ $field_set['field_class'] ];
 		    }
 	    }
 	    return $fields;
