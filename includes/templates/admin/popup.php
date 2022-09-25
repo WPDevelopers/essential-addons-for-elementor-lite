@@ -187,14 +187,23 @@
 
                     <div class="border__line"><span></span></div>
 
-                    <div class="modal__content eael-pb-0">
-                        <div class="eael-login__setup">
-                            <div class="eael-input__inline1 mb15">
-                                <input name="lr_custom_profile_fields" id="lr_custom_profile_fields"
-                                        <?php if( 'on' === get_option( 'eael_custom_profile_fields' ) ) : ?> checked <?php endif; ?>
-                                        class="eael-form__control" type="checkbox">
+                    <div class="modal__content eael-pb-0 eael-element__wrap">
+                        <div class="eael-login__setup eael-element__item eael-promotion-isupdated">
+                            <div class="eael-input__inline1 mb15 element-content">
+                                <!-- <input name="lr_custom_profile_fields" id="lr_custom_profile_fields"
+                                        <?php //if( 'on' === get_option( 'eael_custom_profile_fields' ) ) : ?> checked <?php //endif; ?>
+                                        class="eael-form__control" type="checkbox"> -->
 
-                                <label for="lr_custom_profile_fields" title="<?php esc_attr_e('Eanble extra custom fields on user profile. Fields will be available on edit profile page as well as EA Login | Register Form', 'essential-addons-for-elementor-lite') ?>" > <?php esc_html_e( 'Enable Custom Fields', 'essential-addons-for-elementor-lite' ); ?> </label>
+                                <!-- <label for="lr_custom_profile_fields"  >  </label> -->
+                                <h4><?php esc_html_e( 'Enable Custom Fields', 'essential-addons-for-elementor-lite' ); ?></h4>
+                                <div class="element-options">
+                                    <label class="eael-switch" title="<?php esc_attr_e('Eanble extra custom fields on user profile. Fields will be available on edit profile page as well as EA Login | Register Form', 'essential-addons-for-elementor-lite') ?>">
+                                        <input name="lr_custom_profile_fields" id="lr_custom_profile_fields"
+                                                <?php if( 'on' === get_option( 'eael_custom_profile_fields' ) ) : ?> checked <?php endif; ?>
+                                                class="eael-form__control eael-widget-item eael-elements-list" type="checkbox">
+                                        <!-- <input class="eael-widget-item eael-elements-list" id="team-members" name="team-members" type="checkbox" checked="checked">                                    <span class="switch__box "></span> -->
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
