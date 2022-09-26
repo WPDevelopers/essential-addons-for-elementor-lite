@@ -833,14 +833,20 @@ trait Login_Registration {
 				if($ajax){
 					// $custom_redirect_url = ! empty( $settings['resetpassword_redirect_url']['url'] ) ? $settings['resetpassword_redirect_url']['url'] : '/';
 					$custom_redirect_url = isset($_SERVER['HTTP_REFERER']) ? strtok( $_SERVER['HTTP_REFERER'], '?' ) : '/';
-					if( ! empty( $custom_redirect_url ) ){
-						$data['redirect_to'] = esc_url_raw( $custom_redirect_url );
+					if( ! empty( $_POST['resetpassword_redirect_to'] ) ){
+						$data['redirect_to'] = esc_url_raw( $_POST['resetpassword_redirect_to'] );
 					}
-					
+
 					wp_send_json_success( $data );
 				} else {
 					update_option( 'eael_resetpassword_success_' . $widget_id, $data['message'], false );
 				}
+
+				if ( ! empty( $_POST['resetpassword_redirect_to'] ) ) {
+					wp_safe_redirect( esc_url_raw( $_POST['resetpassword_redirect_to'] ) );
+					exit();
+				}
+
 			} else {
 				$data['message'] = isset( $settings['error_resetpassword'] ) ? __( wp_strip_all_tags( $settings['error_resetpassword'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'Invalid user name found!', 'essential-addons-for-elementor-lite' );
 				
