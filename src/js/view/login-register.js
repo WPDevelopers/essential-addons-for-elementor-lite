@@ -111,7 +111,7 @@ ea.hooks.addAction("init", "ea", () => {
             let fieldType = $selector.attr('type') === 'text' ? 'password' : 'text';
             $selector.attr('type', fieldType);
             
-            $icon = $(this).find('span');
+            $icon = $selector.parent().find('span');
             if( fieldType === 'password' ){
                 $icon.removeClass('dashicons-hidden').addClass('dashicons-visibility');
             }else {
