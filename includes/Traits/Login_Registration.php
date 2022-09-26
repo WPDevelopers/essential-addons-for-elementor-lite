@@ -1200,7 +1200,7 @@ trait Login_Registration {
 	 * @return null|string|string[]
 	 */
 	public function replace_placeholders_lostpassword( $message ) {
-		$password_reset_link = !empty( self::$email_options_lostpassword['password_reset_link'] ) ? '<a href="'.esc_url_raw( self::$email_options_lostpassword['password_reset_link'] ).'">' . esc_url_raw( self::$email_options_lostpassword['password_reset_link'] ) . '</a>' : '';
+		$password_reset_link = !empty( self::$email_options_lostpassword['password_reset_link'] ) ? '<a href="'.esc_url_raw( self::$email_options_lostpassword['password_reset_link'] ).'">' . esc_html__('Click here to reset your password', 'essential-addons-for-elementor-lite') . '</a>' : '';
 		$username 		   = !empty( self::$email_options_lostpassword['username'] ) ? self::$email_options_lostpassword['username'] : '';
 		$email 			   = !empty( self::$email_options_lostpassword['email'] ) ? self::$email_options_lostpassword['email'] : '';
 		$firstname 		   = !empty( self::$email_options_lostpassword['firstname'] ) ? self::$email_options_lostpassword['firstname'] : '';
