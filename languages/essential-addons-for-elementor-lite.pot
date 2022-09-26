@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-09-20 06:24+0000\n"
+"POT-Creation-Date: 2022-09-26 09:15+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -601,7 +601,7 @@ msgstr ""
 msgid "Quantity"
 msgstr ""
 
-#: ../includes/Controls/Select2.php:33, ../includes/Elements/Woo_Cart.php:200, ../includes/Elements/Woo_Cart.php:708, ../includes/Elements/Woo_Cart.php:723, ../includes/Elements/Woo_Checkout.php:252, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:231, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:479
+#: ../includes/Controls/Select2.php:33, ../includes/Elements/Woo_Cart.php:200, ../includes/Elements/Woo_Cart.php:708, ../includes/Elements/Woo_Cart.php:723, ../includes/Elements/Woo_Checkout.php:252, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:232, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:479
 msgid "Subtotal"
 msgstr ""
 
@@ -7105,7 +7105,7 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
-#: ../includes/Elements/Woo_Cart.php:404, ../includes/Elements/Woo_Cart.php:1096, ../includes/Elements/Woo_Checkout.php:280, ../includes/Elements/Woo_Checkout.php:1170, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:319, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:532
+#: ../includes/Elements/Woo_Cart.php:404, ../includes/Elements/Woo_Cart.php:1096, ../includes/Elements/Woo_Checkout.php:280, ../includes/Elements/Woo_Checkout.php:1170, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:320, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:532
 msgid "Total"
 msgstr ""
 
@@ -7161,7 +7161,7 @@ msgstr ""
 msgid "Coupons"
 msgstr ""
 
-#: ../includes/Elements/Woo_Cart.php:1051, ../includes/Elements/Woo_Checkout.php:266, ../includes/Elements/Woo_Checkout.php:621, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:262
+#: ../includes/Elements/Woo_Cart.php:1051, ../includes/Elements/Woo_Checkout.php:266, ../includes/Elements/Woo_Checkout.php:621, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:263
 msgid "Shipping"
 msgstr ""
 
@@ -9291,20 +9291,20 @@ msgstr ""
 msgid "Use internal JS that is embedded in the head of the page. For troubleshooting server configuration conflicts and managing development environments."
 msgstr ""
 
-#: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:91, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:473, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:578
+#: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:92, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:474, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:579
 msgid "Remove this item"
 msgstr ""
 
-#: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:141, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:509
+#: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:142, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:510
 msgid "Available on backorder"
 msgstr ""
 
 #. translators: %s location.
-#: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:292
+#: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:293
 msgid "(estimated for %s)"
 msgstr ""
 
-#: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:615
+#: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:616
 msgid "Coupon:"
 msgstr ""
 
