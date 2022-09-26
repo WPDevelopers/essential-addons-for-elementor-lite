@@ -157,16 +157,19 @@
                 this.output("seconds");
             } else {
                 this.seconds = 59;
+                this.output("seconds");
 
                 if (--this.minutes >= 0) {
                     this.output("minutes");
                 } else {
                     this.minutes = 59;
+                    this.output("minutes");
 
                     if (--this.hours >= 0) {
                         this.output("hours");
                     } else {
                         this.hours = 23;
+                        this.output("hours");
 
                         if (--this.days >= 0) {
                             this.output("days");
