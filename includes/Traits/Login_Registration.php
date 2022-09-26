@@ -832,7 +832,6 @@ trait Login_Registration {
 
 				if($ajax){
 					// $custom_redirect_url = ! empty( $settings['resetpassword_redirect_url']['url'] ) ? $settings['resetpassword_redirect_url']['url'] : '/';
-					$custom_redirect_url = isset($_SERVER['HTTP_REFERER']) ? strtok( $_SERVER['HTTP_REFERER'], '?' ) : '/';
 					if( ! empty( $_POST['resetpassword_redirect_to'] ) ){
 						$data['redirect_to'] = esc_url_raw( $_POST['resetpassword_redirect_to'] );
 					}
