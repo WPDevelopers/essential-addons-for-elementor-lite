@@ -647,6 +647,9 @@ trait Login_Registration {
 		if ( isset( $settings['lostpassword_email_subject'] ) ) {
 			self::$email_options_lostpassword['subject'] = __( wp_strip_all_tags( $settings['lostpassword_email_subject'] ), 'essential-addons-for-elementor-lite' );
 		}
+		if ( isset( $settings['lostpassword_email_message_reset_link_text'] ) ) {
+			self::$email_options_lostpassword['reset_link_text'] = __( wp_strip_all_tags( $settings['lostpassword_email_message_reset_link_text'] ), 'essential-addons-for-elementor-lite' );
+		}
 		if ( isset( $settings['lostpassword_email_message'] ) ) {
 			self::$email_options_lostpassword['message'] = __( $settings['lostpassword_email_message'], 'essential-addons-for-elementor-lite' );
 		}
@@ -1200,7 +1203,8 @@ trait Login_Registration {
 	 * @return null|string|string[]
 	 */
 	public function replace_placeholders_lostpassword( $message ) {
-		$password_reset_link = !empty( self::$email_options_lostpassword['password_reset_link'] ) ? '<a href="'.esc_url_raw( self::$email_options_lostpassword['password_reset_link'] ).'">' . esc_html__('Click here to reset your password', 'essential-addons-for-elementor-lite') . '</a>' : '';
+		$reset_link_text   = !empty( self::$email_options_lostpassword['reset_link_text'] ) ? self::$email_options_lostpassword['reset_link_text'] : esc_html__('Click here to reset your password', 'essential-addons-for-elementor-lite');
+		$password_reset_link = !empty( self::$email_options_lostpassword['password_reset_link'] ) ? '<a href="'.esc_url_raw( self::$email_options_lostpassword['password_reset_link'] ).'">' . esc_html( $reset_link_text ) . '</a>' : '';
 		$username 		   = !empty( self::$email_options_lostpassword['username'] ) ? self::$email_options_lostpassword['username'] : '';
 		$email 			   = !empty( self::$email_options_lostpassword['email'] ) ? self::$email_options_lostpassword['email'] : '';
 		$firstname 		   = !empty( self::$email_options_lostpassword['firstname'] ) ? self::$email_options_lostpassword['firstname'] : '';

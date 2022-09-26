@@ -2088,6 +2088,18 @@ class Login_Register extends Widget_Base {
 			'render_type'     => 'none',
 		] );
 
+		$this->add_control( 'lostpassword_email_message_reset_link_text', [
+			'label'       => __( 'Reset Link Text', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'placeholder' => __( 'Enter Reset Link Text', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( 'Click here to reset your password', 'essential-addons-for-elementor-lite'),
+			'label_block' => false,
+			'render_type' => 'none',
+			'condition'   => [
+				'lostpassword_email_template_type' => 'custom',
+			],
+		] );
+
 		$this->add_control( 'lostpassword_email_content_type', [
 			'label'       => __( 'Email Content Type', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::SELECT,
@@ -5608,7 +5620,7 @@ class Login_Register extends Widget_Base {
 			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_resetpassword_icon'] ) && 'yes' === esc_html( $this->ds['show_resetpassword_icon'] ) );
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
 
-			$show_pv_icon     = ( ! empty( $this->ds['password_toggle'] ) && 'yes' === $this->ds['password_toggle'] );
+			$show_pv_icon     = ( ! empty( $this->ds['password_toggle_resetpassword'] ) && 'yes' === $this->ds['password_toggle_resetpassword'] );
 			?>
             <section
                     id="eael-resetpassword-form-wrapper"
