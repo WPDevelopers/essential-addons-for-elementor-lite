@@ -5683,7 +5683,7 @@ class Login_Register extends Widget_Base {
 									<?php if ( $show_pv_icon ) { ?>
 										<button type="button"
 												id="wp-hide-pw2"
-												class="wp-hide-pw hide-if-no-js"
+												class="wp-hide-pw hide-if-no-js eael-d-none"
 												aria-label="Show password">
 											<span class="dashicons dashicons-visibility"
 												aria-hidden="true"></span>
