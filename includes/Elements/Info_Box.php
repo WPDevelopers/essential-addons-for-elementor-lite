@@ -1192,6 +1192,7 @@ class Info_Box extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-infobox .infobox-button .eael-infobox-button i' => 'font-size: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-infobox .infobox-button .eael-infobox-button img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-infobox .infobox-button .eael-infobox-button svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -1238,6 +1239,7 @@ class Info_Box extends Widget_Base
                 'default' => '#ffffff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-infobox .eael-infobox-button' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-infobox .eael-infobox-button svg' => 'fill: {{VALUE}};',
                 ],
             ]
         );
@@ -1284,6 +1286,7 @@ class Info_Box extends Widget_Base
                 'default' => '#ffffff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-infobox .eael-infobox-button:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-infobox .eael-infobox-button:hover svg' => 'fill: {{VALUE}};',
                 ],
             ]
         );
@@ -1607,7 +1610,7 @@ if ('yes' == $settings['eael_show_infobox_clickable']): ?></a><?php endif;
 
             <?php if ('icon' == $settings['eael_infobox_img_or_icon']): ?>
                 <div class="infobox-icon-wrap">
-                    <?php echo $icon_tag; ?>
+                    <?php Icons_Manager::render_icon( $settings['eael_infobox_icon_new'], [ 'aria-hidden' => 'true' ] ); ?>
                 </div>
             <?php endif;?>
 
@@ -1691,21 +1694,21 @@ if ('yes' == $settings['eael_show_infobox_clickable']): ?></a><?php endif;
                     <?php if ($button_icon_is_new || $button_icon_migrated) {?>
                         <?php if (isset($settings['eael_infobox_button_icon_new']['value']['url'])) {?>
                             <img class="eael_infobox_button_icon_left" src="<?php echo esc_attr($settings['eael_infobox_button_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_infobox_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
-                        <?php } else {?>
-                            <i class="<?php echo esc_attr($settings['eael_infobox_button_icon_new']['value']); ?> eael_infobox_button_icon_left"></i>
-                        <?php }?>
-                    <?php } else {?>
-                        <i class="<?php echo esc_attr($settings['eael_infobox_button_icon']); ?>"></i>
-                    <?php }?>
+                        <?php } else {
+                            Icons_Manager::render_icon( $settings['eael_infobox_button_icon_new'], [ 'aria-hidden' => 'true', 'class' => 'eael_infobox_button_icon_left' ] );
+                        }?>
+                    <?php } else {
+                        Icons_Manager::render_icon( $settings['eael_infobox_button_icon'], [ 'aria-hidden' => 'true' ] );
+                        }?>
                 <?php endif;?>
                 <span class="infobox-button-text"><?php echo esc_attr($settings['infobox_button_text']); ?></span>
                 <?php if ('right' == $settings['eael_infobox_button_icon_alignment']): ?>
                     <?php if ($button_icon_is_new || $button_icon_migrated) {?>
                         <?php if (isset($settings['eael_infobox_button_icon_new']['value']['url'])) {?>
                             <img class="eael_infobox_button_icon_right" src="<?php echo esc_attr($settings['eael_infobox_button_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_infobox_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
-                        <?php } else {?>
-                            <i class="<?php echo esc_attr($settings['eael_infobox_button_icon_new']['value']); ?> eael_infobox_button_icon_right"></i>
-                        <?php }?>
+                        <?php } else {
+                            Icons_Manager::render_icon( $settings['eael_infobox_button_icon_new'], [ 'aria-hidden' => 'true', 'class' => 'eael_infobox_button_icon_right' ] );
+                        }?>
                     <?php } else {
 
             if ('left' == $settings['eael_infobox_button_icon_alignment']) {

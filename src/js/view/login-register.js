@@ -4,6 +4,8 @@ ea.hooks.addAction("init", "ea", () => {
         const $wrap = $scope.find('.eael-login-registration-wrapper');// cache wrapper
         const widgetId = $wrap.data('widget-id');
         const recaptchaSiteKey = $wrap.data('recaptcha-sitekey');
+        const recaptchaSiteKeyV3 = $wrap.data('recaptcha-sitekey-v3');
+        const isProAndAjaxEnabled = typeof $wrap.data('is-ajax') !== 'undefined' && $wrap.data('is-ajax') == 'yes';
         const loggedInLocation = $scope.find('[data-logged-in-location]').data('logged-in-location');
         const $loginFormWrapper = $scope.find("#eael-login-form-wrapper");
         const $lostpasswordFormWrapper = $scope.find("#eael-lostpassword-form-wrapper");
@@ -13,6 +15,8 @@ ea.hooks.addAction("init", "ea", () => {
         const $regFormWrapper = $scope.find("#eael-register-form-wrapper");
         const regRcTheme = $regFormWrapper.data('recaptcha-theme');
         const regRcSize = $regFormWrapper.data('recaptcha-size');
+        const loginRecaptchaVersion = $wrap.data('login-recaptcha-version');
+        const registerRecaptchaVersion = $wrap.data('register-recaptcha-version');
         const $regLinkAction = $scope.find('#eael-lr-reg-toggle');
         const $loginLinkAction = $scope.find('#eael-lr-login-toggle');
         const $lostpasswordLinkAction = $scope.find('#eael-lr-lostpassword-toggle');
@@ -23,6 +27,9 @@ ea.hooks.addAction("init", "ea", () => {
         const recaptchaAvailable = (typeof grecaptcha !== 'undefined' && grecaptcha !== null);
         const params = new URLSearchParams(location.search);
 
+        let loginRecaptchaNode = document.getElementById('login-recaptcha-node-' + widgetId);
+        let registerRecaptchaNode = document.getElementById('register-recaptcha-node-' + widgetId);
+                
         if ( loggedInLocation !== undefined && loggedInLocation !== '' ) {
             location.replace(loggedInLocation);
         }
@@ -110,28 +117,48 @@ ea.hooks.addAction("init", "ea", () => {
                 $icon.removeClass('dashicons-visibility').addClass('dashicons-hidden');
             }
         }
+        
+        $('form input[type="submit"]', $scope).on('click', function (e) {
+            if(!isProAndAjaxEnabled){
+                let isRecaptchaVersion3 = false;
+                isRecaptchaVersion3 = loginRecaptchaVersion === 'v3' || registerRecaptchaVersion === 'v3' ;
+                
+                if (recaptchaAvailable && isRecaptchaVersion3) {
+                    grecaptcha.execute(recaptchaSiteKeyV3, { 
+                        action: 'eael_login_register_form' 
+                    }).then(function (token) {
+                        if ($('form input[name="g-recaptcha-response"]', $scope).length === 0) {
+                            $('form', $scope).append('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
+                        } else {
+                            $('form input[name="g-recaptcha-response"]', $scope).val(token);
+                        }
+                    });
+                }
+            }
+        });
 
         // reCAPTCHA
         function onloadLRcb() {
-            let loginRecaptchaNode = document.getElementById('login-recaptcha-node-' + widgetId);
-            let registerRecaptchaNode = document.getElementById('register-recaptcha-node-' + widgetId);
-
             if(typeof grecaptcha.render !="function"){
                 return false;
             }
             if (loginRecaptchaNode) {
-                grecaptcha.render(loginRecaptchaNode, {
-                    'sitekey': recaptchaSiteKey,
-                    'theme': loginRcTheme,
-                    'size': loginRcSize,
-                });
+                if( registerRecaptchaVersion !== 'v3' ){
+                    grecaptcha.render(loginRecaptchaNode, {
+                        'sitekey': recaptchaSiteKey,
+                        'theme': loginRcTheme,
+                        'size': loginRcSize,
+                    });
+                }
             }
             if (registerRecaptchaNode) {
-                grecaptcha.render(registerRecaptchaNode, {
-                    'sitekey': recaptchaSiteKey,
-                    'theme': regRcTheme,
-                    'size': regRcSize,
-                });
+                if( loginRecaptchaVersion !== 'v3' ){
+                    grecaptcha.render(registerRecaptchaNode, {
+                        'sitekey': recaptchaSiteKey,
+                        'theme': regRcTheme,
+                        'size': regRcSize,
+                    });
+                }
             }
         }
 
