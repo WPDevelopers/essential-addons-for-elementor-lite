@@ -575,6 +575,10 @@ trait Ajax_Handler {
 
 		wp_parse_str( $_POST['args'], $args );
 
+		if ( isset( $args['date_query']['relation'] ) ) {
+			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
+		}
+
 		if ( empty( $_POST['nonce'] ) ) {
 			$err_msg = __( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
