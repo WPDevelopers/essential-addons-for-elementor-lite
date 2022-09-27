@@ -303,6 +303,10 @@ trait Ajax_Handler {
 		$settings['eael_widget_id'] = $widget_id;
 		wp_parse_str( $_REQUEST['args'], $args );
 
+		if ( isset( $args['date_query']['relation'] ) ) {
+			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
+		}
+
 		$paginationNumber = absint( $_POST['number'] );
 		$paginationLimit  = absint( $_POST['limit'] );
 
