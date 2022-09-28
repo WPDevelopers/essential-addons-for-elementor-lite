@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 5.3.1
+Stable tag: 5.3.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -28,7 +28,7 @@ No extra resources or messy codes to slow down your website. Optimized for super
 Enable and disable individual elements to make your page loading faster and smoother. You can deactivate unnecessary widgets to keep the site lite.
 
 
-### 2000+ Ready Blocks and Templates through **Templately**
+### 2500+ Ready Blocks and Templates through **Templately**
 Use pre-made templates and sections which come with Essential Addons and design your website to stand out from the crowd.
 
 [Install Templately to get the premade blocks and templates](https://wordpress.org/plugins/templately/)
@@ -165,7 +165,7 @@ https://www.youtube.com/watch?v=K9BssSV-KC8
 Check [Flexia](https://wordpress.org/themes/flexia/), the best friend of Elementor and Essential Addons. A modern lightweight and versatile theme for WordPress with endless customization options. **And fully Free.** 
 
 ### BACKED BY A TRUSTED TEAM
-Essential Addons for Elementor is brought to you by [WPDeveloper](https://wpdeveloper.com/), a dedicated WordPress product company, trusted by 3 million+ happy users.
+Essential Addons for Elementor is brought to you by [WPDeveloper](https://wpdeveloper.com/), a dedicated WordPress product company, trusted by 5 million+ happy users.
 
 ### Documentation and Support
 
@@ -241,6 +241,15 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.3.2 - 28/09/2022 =
+
+- Improved: EA Countdown | Added Evergreen & Recurring Options
+- Fixed: EA Woo Checkout | PHP Fatal error
+- Fixed: EA Advanced Data Table | Showing repeated pagination
+- Fixed: EA Advanced Data table | Not able to add new row or column if table was imported without table header
+- Fixed: EA Advanced Accordion | If svg used in open tab and no icon is used in closed tab, then svg icon is not showing
+- Few minor bug fixes & improvements
 
 = 5.3.1 - 21/09/2022 =
 
