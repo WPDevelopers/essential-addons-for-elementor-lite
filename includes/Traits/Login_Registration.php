@@ -176,6 +176,7 @@ trait Login_Registration {
 			}
 
 			$err_msg = apply_filters('eael/login-register/login-validatiob-error-message', $err_msg, $user_data);
+			$err_msg = is_array( $err_msg ) && ! empty( $err_msg[0] ) ? Helper::eael_wp_kses( $err_msg[0] ) : Helper::eael_wp_kses( $err_msg );
 
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
