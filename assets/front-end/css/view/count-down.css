@@ -84,8 +84,6 @@
     display: block !important;
   }
   .eael-countdown-container .eael-countdown-item > div {
-    margin-right: 0px !important;
-    margin-left: 0px !important;
     padding: 10px;
   }
 }
