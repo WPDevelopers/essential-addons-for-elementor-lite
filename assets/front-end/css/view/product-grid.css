@@ -2787,6 +2787,21 @@
 .buddyboss-theme #content .elementor-widget-container .eael-post-grid li.product .eael-product-wrap .button {
   margin: 0;
 }
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid.eael-product-default li.product,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid.eael-product-default li.product {
+  display: block;
+}
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid.eael-product-default li.product .added_to_cart,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid.eael-product-default li.product .added_to_cart {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  border: none;
+  border-radius: 0;
+  background: #333;
+  color: #fff;
+  height: 100%;
+}
 .buddyboss-theme #content .elementor-widget-container .eael-product-grid.eael-product-preset-5 li.product .eael-product-wrap .added_to_cart,
 .buddyboss-theme #content .elementor-widget-container .eael-post-grid.eael-product-preset-5 li.product .eael-product-wrap .added_to_cart {
   border: none;

@@ -3120,9 +3120,6 @@
         .elementor-widget-container{
             .eael-product-grid,
             .eael-post-grid{
-                &.eael-product-overlay{
-
-                }
                 li.product{
                     max-width: 100%;
                     .eael-product-wrap {
@@ -3139,6 +3136,25 @@
                             margin: 0;
                         }
                     }
+                }
+                &.eael-product-default{
+                    li.product{
+                        display: block;
+
+                        .added_to_cart{
+                            width: 100%;
+                            position: absolute;
+                            bottom: 0;
+                            border: none;
+                            border-radius: 0;
+                            background: #333;
+                            color: #fff;
+                            height: 100%;
+                        }
+                    }
+                }
+                &.eael-product-overlay{
+
                 }
                 &.eael-product-preset-5{
                     li.product{
