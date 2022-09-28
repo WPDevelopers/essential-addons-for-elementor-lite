@@ -2816,3 +2816,12 @@
   width: 42px;
   height: 42px;
 }
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid.list li.product .add-to-cart .add_to_cart_button,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid.list li.product .add-to-cart .add_to_cart_button {
+  margin: 2px;
+  border-radius: 3px;
+}
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid.masonry li.product .add-to-cart .add_to_cart_button,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid.masonry li.product .add-to-cart .add_to_cart_button {
+  margin: 10px 2px 0;
+}
