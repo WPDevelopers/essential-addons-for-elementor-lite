@@ -171,6 +171,7 @@ trait Login_Registration {
 				if( ! empty( $user_data->errors ) ){
 					foreach( $user_data->errors as $error ) {
 						$err_msg = is_array( $error ) && ! empty( $error[0] ) ? Helper::eael_wp_kses( $error[0] ) : __('Something went wrong!', 'essential-addons-for-elementor-lite');
+						break;
 					}
 				}
 			}
