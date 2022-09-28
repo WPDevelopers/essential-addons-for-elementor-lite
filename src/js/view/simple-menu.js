@@ -29,73 +29,70 @@ var SimpleMenu = function ($scope, $) {
 
     let selectorByType = $horizontal ? '.eael-simple-menu-horizontal' : '.eael-simple-menu-vertical';
     let $hamburger_max_width = getHamburgerMaxWidth($hamburger_breakpoints, $hamburger_device)
-
     var $fullWidth = $('.eael-simple-menu--stretch');
     
-    // if ($horizontal) {
-        // insert indicator
-        if($indicator_icon == 'svg') {
-            $('.eael-simple-menu > li.menu-item-has-children', $scope).each(
-                function () {
-                    $('> a', $(this)).append(
-                        '<span class="indicator-svg">' + $indicator_class + '</span>'
-                    )
-                }
-            )
-        } else {
-            $('.eael-simple-menu > li.menu-item-has-children', $scope).each(
-                function () {
-                    $('> a', $(this)).append(
-                        '<span class="' + $indicator_class + '"></span>'
-                    )
-                }
-            )
-        }
-
-        if($dropdown_indicator_icon == 'svg') {
-            $('.eael-simple-menu > li ul li.menu-item-has-children', $scope).each(
-                function () {
-                    $('> a', $(this)).append(
-                        '<span class="dropdown-indicator-svg">' + $dropdown_indicator_class + '</span>'
-                    )
-                }
-            )
-        }else {
-            $('.eael-simple-menu > li ul li.menu-item-has-children', $scope).each(
-                function () {
-                    $('> a', $(this)).append(
-                        '<span class="' + $dropdown_indicator_class + '"></span>'
-                    )
-                }
-            )
-        }
-
-        // insert responsive menu toggle, text
-        $(selectorByType, $scope)
-            .before('<span class="eael-simple-menu-toggle-text"></span>')
-            .after(
-                '<button class="eael-simple-menu-toggle">' + $hamburger_icon + '<span class="eael-simple-menu-toggle-text"></span></button>'
-            )
-        eael_menu_resize( $hamburger_max_width );
-        
-        // responsive menu slide
-        $('.eael-simple-menu-container', $scope).on(
-            'click',
-            '.eael-simple-menu-toggle',
-            function (e) {
-                e.preventDefault();
-                const $siblings = $(this).siblings('nav').children( selectorByType );
-                $siblings.css('display') == 'none'
-                    ? $siblings.slideDown(300)
-                    : $siblings.slideUp(300)
+    // insert indicator
+    if($indicator_icon == 'svg') {
+        $('.eael-simple-menu > li.menu-item-has-children', $scope).each(
+            function () {
+                $('> a', $(this)).append(
+                    '<span class="indicator-svg">' + $indicator_class + '</span>'
+                )
             }
         )
+    } else {
+        $('.eael-simple-menu > li.menu-item-has-children', $scope).each(
+            function () {
+                $('> a', $(this)).append(
+                    '<span class="' + $indicator_class + '"></span>'
+                )
+            }
+        )
+    }
 
-        // clear responsive props
-        $(window).on('resize load', function () {
-            eael_menu_resize( $hamburger_max_width );
-        })
-    // }
+    if($dropdown_indicator_icon == 'svg') {
+        $('.eael-simple-menu > li ul li.menu-item-has-children', $scope).each(
+            function () {
+                $('> a', $(this)).append(
+                    '<span class="dropdown-indicator-svg">' + $dropdown_indicator_class + '</span>'
+                )
+            }
+        )
+    }else {
+        $('.eael-simple-menu > li ul li.menu-item-has-children', $scope).each(
+            function () {
+                $('> a', $(this)).append(
+                    '<span class="' + $dropdown_indicator_class + '"></span>'
+                )
+            }
+        )
+    }
+
+    // insert responsive menu toggle, text
+    $(selectorByType, $scope)
+        .before('<span class="eael-simple-menu-toggle-text"></span>')
+        .after(
+            '<button class="eael-simple-menu-toggle">' + $hamburger_icon + '<span class="eael-simple-menu-toggle-text"></span></button>'
+        )
+    eael_menu_resize( $hamburger_max_width );
+    
+    // responsive menu slide
+    $('.eael-simple-menu-container', $scope).on(
+        'click',
+        '.eael-simple-menu-toggle',
+        function (e) {
+            e.preventDefault();
+            const $siblings = $(this).siblings('nav').children( selectorByType );
+            $siblings.css('display') == 'none'
+                ? $siblings.slideDown(300)
+                : $siblings.slideUp(300)
+        }
+    )
+
+    // clear responsive props
+    $(window).on('resize load', function () {
+        eael_menu_resize( $hamburger_max_width );
+    });
     
     function eael_menu_resize( max_width_value = 0 ) {
         if (window.matchMedia('(max-width: '+ max_width_value +'px)').matches) {
