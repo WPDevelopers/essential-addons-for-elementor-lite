@@ -1146,20 +1146,21 @@ class Adv_Accordion extends Widget_Base
                         echo '<span class="fa-accordion-icon fa-accordion-icon-svg eaa-svg eael-advanced-accordion-icon-closed">';
                         Icons_Manager::render_icon( $tab['eael_adv_accordion_tab_title_icon_new'] );
                         echo '</span>';
-
-                        echo '<span class="fa-accordion-icon fa-accordion-icon-svg eaa-svg eael-advanced-accordion-icon-opened">';
-                        Icons_Manager::render_icon( $tab['eael_adv_accordion_tab_title_icon_new_opened'] );
-                        echo '</span>';
                     }else{
                         echo '<span class="eael-advanced-accordion-icon-closed">';
                         Icons_Manager::render_icon( $tab['eael_adv_accordion_tab_title_icon_new'], [ 'aria-hidden' => 'true', 'class' => "fa-accordion-icon" ] );
                         echo '</span>';
+                    }
 
+                    if ( 'svg' === $tab['eael_adv_accordion_tab_title_icon_new_opened']['library'] ) {
+                        echo '<span class="fa-accordion-icon fa-accordion-icon-svg eaa-svg eael-advanced-accordion-icon-opened">';
+                        Icons_Manager::render_icon( $tab['eael_adv_accordion_tab_title_icon_new_opened'] );
+                        echo '</span>';
+                    }else{
                         echo '<span class="eael-advanced-accordion-icon-opened">';
                         Icons_Manager::render_icon( $tab['eael_adv_accordion_tab_title_icon_new_opened'], [ 'aria-hidden' => 'true', 'class' => "fa-accordion-icon" ] );
                         echo '</span>';
                     }
-
 
                 } else {
                     echo '<span class="eael-advanced-accordion-icon-closed"><i class="' . $tab['eael_adv_accordion_tab_title_icon'] . ' fa-accordion-icon"></i></span>';
