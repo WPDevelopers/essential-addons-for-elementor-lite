@@ -29,6 +29,7 @@ var SimpleMenu = function ($scope, $) {
 
     let $hamburger_max_width = getHamburgerMaxWidth($hamburger_breakpoints, $hamburger_device)
 
+    let selectorByType = $horizontal ? '.eael-simple-menu-horizontal' : '.eael-simple-menu-vertical';
     var $fullWidth = $('.eael-simple-menu--stretch');
     
     // if ($horizontal) {
@@ -75,7 +76,7 @@ var SimpleMenu = function ($scope, $) {
             .after(
                 '<button class="eael-simple-menu-toggle">' + $hamburger_icon + '<span class="eael-simple-menu-toggle-text"></span></button>'
             )
-        eael_menu_resize($hamburger_max_width);
+        eael_menu_resize( $hamburger_max_width );
         
         // responsive menu slide
         $('.eael-simple-menu-container', $scope).on(
@@ -92,7 +93,7 @@ var SimpleMenu = function ($scope, $) {
 
         // clear responsive props
         $(window).on('resize load', function () {
-            eael_menu_resize($hamburger_max_width);
+            eael_menu_resize( $hamburger_max_width );
         })
     // }
     
@@ -155,7 +156,7 @@ var SimpleMenu = function ($scope, $) {
             $(
                 selectorByType + ', '+ selectorByType +' ul',
                 $scope
-            ).css('display', '')
+            ).css('display', 'inherit')
             $(".eael-simple-menu-container nav",$scope).removeAttr( 'style' );
 
             // Mobile Dropdown Breakpoints
@@ -279,7 +280,7 @@ var SimpleMenu = function ($scope, $) {
         '.eael-simple-menu-responsive li a',
         function (e) {
             if ($(this).attr('href') !== '#') {
-                $(this).parents('.eael-simple-menu-horizontal').slideUp(300);
+                $(this).parents( selectorByType ).slideUp(300);
             }
         }
     )
