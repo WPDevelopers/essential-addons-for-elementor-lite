@@ -1648,9 +1648,9 @@ if ('yes' == $settings['eael_show_infobox_clickable']): ?></a><?php endif;
                     <?php endif;?>
                     <?php $this->render_infobox_button();?>
                 <?php elseif ('template' === $settings['eael_infobox_text_type']):
-            if (!empty($settings['eael_primary_templates'])) {
-                echo Plugin::$instance->frontend->get_builder_content($settings['eael_primary_templates'], true);
-            }
+		            if ( ! empty( $settings['eael_primary_templates'] ) ) {
+			            echo Plugin::$instance->frontend->get_builder_content( $settings['eael_primary_templates'] );
+		            }
         endif;?>
             <?php endif;?>
         </div>
