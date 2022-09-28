@@ -1558,9 +1558,9 @@ class Flip_Box extends Widget_Base
 
                     <?php
                     if ( $settings['eael_flipbox_front_content_type'] == 'template' ) {
-                        if ( !empty( $settings['eael_flipbox_front_templates'] ) ) {
-                            echo Plugin::$instance->frontend->get_builder_content($settings['eael_flipbox_front_templates'], true);
-                        }
+	                    if ( ! empty( $settings['eael_flipbox_front_templates'] ) ) {
+		                    echo Plugin::$instance->frontend->get_builder_content( $settings['eael_flipbox_front_templates'] );
+	                    }
                     } else { ?>
 
                         <div class="eael-elements-slider-display-table">
@@ -1589,9 +1589,9 @@ class Flip_Box extends Widget_Base
 
                     <?php
                     if ( $settings['eael_flipbox_back_content_type'] == 'template' ) {
-                        if ( !empty( $settings['eael_flipbox_back_templates'] ) ) {
-                            echo Plugin::$instance->frontend->get_builder_content($settings['eael_flipbox_back_templates'], true);
-                        }
+	                    if ( ! empty( $settings['eael_flipbox_back_templates'] ) ) {
+		                    echo Plugin::$instance->frontend->get_builder_content( $settings['eael_flipbox_back_templates'] );
+	                    }
                     } else { ?>
                         <div class="eael-elements-slider-display-table">
                             <div class="eael-elements-flip-box-vertical-align">
