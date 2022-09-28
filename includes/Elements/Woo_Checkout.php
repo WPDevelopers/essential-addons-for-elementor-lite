@@ -2884,33 +2884,37 @@ class Woo_Checkout extends Widget_Base {
 		return $classes;
 	}
 
-    public function get_default_checkout_fields( $fields ){
-	    $_fields = [];
-        $classes = [ 'form-row-first', 'form-row-last', 'form-row-wide' ];
-	    foreach ( $fields as $key => $field_set ){
-		    $_fields[] = [
-			    'field_label' => $field_set['label'],
-                'field_key'   => $key,
-			    'field_class' => implode('', array_intersect( $classes, $field_set['class'] )),
-		    ];
-	    }
-        return $_fields;
-    }
+	public function get_default_checkout_fields( $fields ) {
+		$_fields = [];
+		$classes = [ 'form-row-first', 'form-row-last', 'form-row-wide' ];
+		foreach ( $fields as $key => $field_set ) {
+			$field_set_class = is_array( $field_set['class'] ) ? $field_set['class'] : [];
+			$_fields[]       = [
+				'field_label' => $field_set['label'],
+				'field_key'   => $key,
+				'field_class' => implode( '', array_intersect( $classes, $field_set_class ) ),
+			];
+		}
 
-    public function reorder_checkout_fields( $fields, $field_type ){
-	    $settings = $this->get_settings_for_display();
-	    $checkout_fields = $settings['ea_' . $field_type . '_fields_list'];
-	    $classes = [ 'form-row-first', 'form-row-last', 'form-row-wide' ];
-	    foreach ( $checkout_fields as $key => $field_set ){
-		    $field_key = $field_set['field_key'];
-		    if ( isset( $fields[$field_key] ) ){
-			    $fields[$field_key]['label'] = $field_set['field_label'];
-			    $fields[$field_key]['priority'] = ($key+1)*10;
-			    $fields[$field_key]['class'] = array_diff( $fields[$field_key]['class'], $classes) + [ $field_set['field_class'] ];
-		    }
-	    }
-	    return $fields;
-    }
+		return $_fields;
+	}
+
+	public function reorder_checkout_fields( $fields, $field_type ) {
+		$settings        = $this->get_settings_for_display();
+		$checkout_fields = $settings[ 'ea_' . $field_type . '_fields_list' ];
+		$classes         = [ 'form-row-first', 'form-row-last', 'form-row-wide' ];
+		foreach ( $checkout_fields as $key => $field_set ) {
+			$field_key = $field_set['field_key'];
+			if ( isset( $fields[ $field_key ] ) ) {
+				$field_set_class                  = is_array( $fields[ $field_key ]['class'] ) ? $fields[ $field_key ]['class'] : [];
+				$fields[ $field_key ]['label']    = $field_set['field_label'];
+				$fields[ $field_key ]['priority'] = ( $key + 1 ) * 10;
+				$fields[ $field_key ]['class']    = array_diff( $field_set_class, $classes ) + [ $field_set['field_class'] ];
+			}
+		}
+
+		return $fields;
+	}
 
     public function ea_checkout_fields( $fields ){
         $fields['billing'] = $this->reorder_checkout_fields( $fields['billing'], 'billing' );
