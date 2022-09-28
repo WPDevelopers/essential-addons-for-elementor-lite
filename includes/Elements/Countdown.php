@@ -1303,7 +1303,7 @@ class Countdown extends Widget_Base {
 					<?php
 					if ( 'template' == $settings['countdown_expire_type'] ) {
 						if ( ! empty( $settings['countdown_expiry_templates'] ) ) {
-							echo Plugin::$instance->frontend->get_builder_content( $settings['countdown_expiry_templates'], true );
+							echo Plugin::$instance->frontend->get_builder_content( $settings['countdown_expiry_templates'] );
 						}
 					}
 					?>
