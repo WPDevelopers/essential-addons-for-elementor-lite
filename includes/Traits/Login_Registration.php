@@ -109,7 +109,7 @@ trait Login_Registration {
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
 		if ( is_user_logged_in() ) {
-			$err_msg = isset( $settings['err_loggedin'] ) ? $settings['err_loggedin'] : __( 'You are already logged in', 'essential-addons-for-elementor-lite' );
+			$err_msg = isset( $settings['err_loggedin'] ) ? wp_strip_all_tags( $settings['err_loggedin'] ) : __( 'You are already logged in', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
@@ -129,7 +129,7 @@ trait Login_Registration {
 			$ld_recaptcha_version = ( isset( $settings['login_recaptcha_version'] ) && 'v3' === $settings['login_recaptcha_version'] ) ? 'v3' : 'v2';
 			
 			if( ! $this->lr_validate_recaptcha($ld_recaptcha_version) ) {
-				$err_msg = isset( $settings['err_recaptcha'] ) ? $settings['err_recaptcha'] : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
+				$err_msg = isset( $settings['err_recaptcha'] ) ? wp_strip_all_tags( $settings['err_recaptcha'] ) : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
 				if ( $ajax ) {
 					wp_send_json_error( $err_msg );
 				}
@@ -160,12 +160,12 @@ trait Login_Registration {
 		if ( is_wp_error( $user_data ) ) {
 			$err_msg = '';
 			if ( isset( $user_data->errors['invalid_email'][0] ) ) {
-				$err_msg = isset( $settings['err_email'] ) ? $settings['err_email'] : __( 'Invalid Email. Please check your email or try again with your username.', 'essential-addons-for-elementor-lite' );
+				$err_msg = isset( $settings['err_email'] ) ? wp_strip_all_tags( $settings['err_email'] ) : __( 'Invalid Email. Please check your email or try again with your username.', 'essential-addons-for-elementor-lite' );
 			} elseif ( isset( $user_data->errors['invalid_username'][0] )) {
-				$err_msg = isset( $settings['err_username'] ) ? $settings['err_username'] : __( 'Invalid Username. Please check your username or try again with your email.', 'essential-addons-for-elementor-lite' );
+				$err_msg = isset( $settings['err_username'] ) ? wp_strip_all_tags( $settings['err_username'] ) : __( 'Invalid Username. Please check your username or try again with your email.', 'essential-addons-for-elementor-lite' );
 
 			} elseif ( isset( $user_data->errors['incorrect_password'][0] ) || isset( $user_data->errors['empty_password'][0] ) ) {
-				$err_msg = isset( $settings['err_pass'] ) ? $settings['err_pass'] : __( 'Invalid Password', 'essential-addons-for-elementor-lite' );
+				$err_msg = isset( $settings['err_pass'] ) ? wp_strip_all_tags( $settings['err_pass'] ) : __( 'Invalid Password', 'essential-addons-for-elementor-lite' );
 
 			}
 
@@ -180,7 +180,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 
 				$data = [
-					'message' => isset( $settings['success_login'] ) ? $settings['success_login'] : __( 'You are logged in successfully', 'essential-addons-for-elementor-lite' ),
+					'message' => isset( $settings['success_login'] ) ? wp_strip_all_tags( $settings['success_login'] ) : __( 'You are logged in successfully', 'essential-addons-for-elementor-lite' ),
 				];
 				if ( ! empty( $_POST['redirect_to'] ) ) {
 					$data['redirect_to'] = esc_url_raw( $_POST['redirect_to'] );
@@ -256,7 +256,7 @@ trait Login_Registration {
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
 		if ( is_user_logged_in() ) {
-			$err_msg = isset( $settings['err_loggedin'] ) ? $settings['err_loggedin'] : __( 'You are already logged in.', 'essential-addons-for-elementor-lite' );
+			$err_msg = isset( $settings['err_loggedin'] ) ? wp_strip_all_tags( $settings['err_loggedin'] ) : __( 'You are already logged in.', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
@@ -288,33 +288,33 @@ trait Login_Registration {
 		}
 		// prepare vars and flag errors
 		if ( isset( $_POST['eael_tnc_active'] ) && empty( $_POST['eael_accept_tnc'] ) ) {
-			$errors['terms_conditions'] =  isset( $settings['err_tc'] ) ? $settings['err_tc'] : __( 'You did not accept the Terms and Conditions. Please accept it and try again.', 'essential-addons-for-elementor-lite' );
+			$errors['terms_conditions'] =  isset( $settings['err_tc'] ) ? wp_strip_all_tags( $settings['err_tc'] ) : __( 'You did not accept the Terms and Conditions. Please accept it and try again.', 'essential-addons-for-elementor-lite' );
 		}
 		//v2 or v3 
 		if ( isset( $_POST['g-recaptcha-enabled'] ) ) {
 			$ld_recaptcha_version = ( isset( $settings['register_recaptcha_version'] ) && 'v3' === $settings['register_recaptcha_version'] ) ? 'v3' : 'v2';
 			
 			if( ! $this->lr_validate_recaptcha($ld_recaptcha_version) ) {
-				$errors['recaptcha'] = isset( $settings['err_recaptcha'] ) ? $settings['err_recaptcha'] : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
+				$errors['recaptcha'] = isset( $settings['err_recaptcha'] ) ? wp_strip_all_tags( $settings['err_recaptcha'] ) : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
 			}
 		}
 
 		if ( ! empty( $_POST['email'] ) && is_email( $_POST['email'] ) ) {
 			$email = sanitize_email( $_POST['email'] );
 			if ( email_exists( $email ) ) {
-				$errors['email'] = isset( $settings['err_email_used'] ) ? $settings['err_email_used'] : __( 'The provided email is already registered with other account. Please login or reset password or use another email.', 'essential-addons-for-elementor-lite' );
+				$errors['email'] = isset( $settings['err_email_used'] ) ? wp_strip_all_tags( $settings['err_email_used'] ) : __( 'The provided email is already registered with other account. Please login or reset password or use another email.', 'essential-addons-for-elementor-lite' );
 			}
 		} else {
-			$errors['email'] = isset( $settings['err_email_missing'] ) ? $settings['err_email_missing'] : __( 'Email is missing or Invalid', 'essential-addons-for-elementor-lite' );
+			$errors['email'] = isset( $settings['err_email_missing'] ) ? wp_strip_all_tags( $settings['err_email_missing'] ) : __( 'Email is missing or Invalid', 'essential-addons-for-elementor-lite' );
 		}
 
 		// if user provided user name, validate & sanitize it
 		if ( isset( $_POST['user_name'] ) ) {
 			$username = sanitize_user( $_POST['user_name'] );
 			if ( ! validate_username( $username ) || mb_strlen( $username ) > 60 ) {
-				$errors['user_name'] = isset( $settings['err_username'] ) ? $settings['err_username'] : __( 'Invalid username provided.', 'essential-addons-for-elementor-lite' );
+				$errors['user_name'] = isset( $settings['err_username'] ) ? wp_strip_all_tags( $settings['err_username'] ) : __( 'Invalid username provided.', 'essential-addons-for-elementor-lite' );
 			}elseif(username_exists( $username )){
-				$errors['user_name'] = isset( $settings['err_username_used'] ) ? $settings['err_username_used'] : __( 'The username already registered.', 'essential-addons-for-elementor-lite' );
+				$errors['user_name'] = isset( $settings['err_username_used'] ) ? wp_strip_all_tags( $settings['err_username_used'] ) : __( 'The username already registered.', 'essential-addons-for-elementor-lite' );
 
 			}
 		} else {
@@ -336,7 +336,7 @@ trait Login_Registration {
 		if ( isset( $_POST['confirm_pass'] ) ) {
 			$confirm_pass = sanitize_text_field( $_POST['confirm_pass'] );
 			if ( $confirm_pass !== $password ) {
-				$errors['confirm_pass'] = isset( $settings['err_conf_pass'] ) ? $settings['err_conf_pass'] : __( 'The confirmed password did not match.', 'essential-addons-for-elementor-lite' );
+				$errors['confirm_pass'] = isset( $settings['err_conf_pass'] ) ? wp_strip_all_tags( $settings['err_conf_pass'] ) : __( 'The confirmed password did not match.', 'essential-addons-for-elementor-lite' );
 			}
 		}
 
@@ -393,7 +393,7 @@ trait Login_Registration {
 		$custom_redirect_url = '';
 		if ( !empty( $settings) ) {
 			$register_actions    = ! empty( $settings['register_action'] ) ? (array) $settings['register_action'] : [];
-			$custom_redirect_url = ! empty( $settings['register_redirect_url']['url'] ) ? $settings['register_redirect_url']['url'] : '/';
+			$custom_redirect_url = ! empty( $settings['register_redirect_url']['url'] ) ? esc_url_raw( $settings['register_redirect_url']['url'] ) : '/';
 			if ( ! empty( $settings['register_user_role'] ) ) {
 				$user_data['role'] = sanitize_text_field( $settings['register_user_role'] );
 			}
@@ -405,26 +405,26 @@ trait Login_Registration {
 				self::$send_custom_email = true;
 			}
 			if ( isset( $settings['reg_email_subject'] ) ) {
-				self::$email_options['subject'] = $settings['reg_email_subject'];
+				self::$email_options['subject'] = wp_strip_all_tags( $settings['reg_email_subject'] );
 			}
 			if ( isset( $settings['reg_email_message'] ) ) {
-				self::$email_options['message'] = $settings['reg_email_message'];
+				self::$email_options['message'] = wp_strip_all_tags( $settings['reg_email_message'] );
 			}
 			if ( isset( $settings['reg_email_content_type'] ) ) {
-				self::$email_options['headers'] = 'Content-Type: text/' . $settings['reg_email_content_type'] . '; charset=UTF-8' . "\r\n";
+				self::$email_options['headers'] = 'Content-Type: text/' . wp_strip_all_tags( $settings['reg_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
 			}
 
 
 			/*------Admin Mail Related Stuff------*/
 			self::$send_custom_email_admin = ( ! empty( $settings['reg_admin_email_template_type'] ) && 'custom' === $settings['reg_admin_email_template_type'] );
 			if ( isset( $settings['reg_admin_email_subject'] ) ) {
-				self::$email_options['admin_subject'] = $settings['reg_admin_email_subject'];
+				self::$email_options['admin_subject'] = wp_strip_all_tags( $settings['reg_admin_email_subject'] );
 			}
 			if ( isset( $settings['reg_admin_email_message'] ) ) {
-				self::$email_options['admin_message'] = $settings['reg_admin_email_message'];
+				self::$email_options['admin_message'] = wp_strip_all_tags( $settings['reg_admin_email_message'] );
 			}
 			if ( isset( $settings['reg_admin_email_content_type'] ) ) {
-				self::$email_options['admin_headers'] = 'Content-Type: text/' . $settings['reg_admin_email_content_type'] . '; charset=UTF-8' . "\r\n";
+				self::$email_options['admin_headers'] = 'Content-Type: text/' . wp_strip_all_tags( $settings['reg_admin_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
 			}
 		}
 
@@ -439,7 +439,7 @@ trait Login_Registration {
         }
 
         if ('administrator' == strtolower($user_data['role'])) {
-            $user_data['role'] = !empty($settings['register_user_role']) ? $settings['register_user_role'] : get_option('default_role');
+            $user_data['role'] = !empty($settings['register_user_role']) ? wp_strip_all_tags( $settings['register_user_role'] ) : get_option('default_role');
         }
 
 		$user_id = wp_insert_user( $user_data );
@@ -448,7 +448,7 @@ trait Login_Registration {
 
 		if ( is_wp_error( $user_id ) ) {
 			// error happened during user creation
-			$errors['user_create'] = isset( $settings['err_unknown'] ) ? $settings['err_unknown'] :  __( 'Sorry, something went wrong. User could not be registered.', 'essential-addons-for-elementor-lite' );
+			$errors['user_create'] = isset( $settings['err_unknown'] ) ? wp_strip_all_tags( $settings['err_unknown'] ) :  __( 'Sorry, something went wrong. User could not be registered.', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $errors['user_create'] );
 			}
@@ -492,7 +492,7 @@ trait Login_Registration {
 
 		// Handle after registration action
 		$data = [
-			'message' => isset( $settings['success_register'] ) ? $settings['success_register'] : __( 'Your registration completed successfully.', 'essential-addons-for-elementor-lite' ),
+			'message' => isset( $settings['success_register'] ) ? wp_strip_all_tags( $settings['success_register'] ) : __( 'Your registration completed successfully.', 'essential-addons-for-elementor-lite' ),
 		];
 		// should user be auto logged in?
 		if ( in_array( 'auto_login', $register_actions ) && ! is_user_logged_in() ) {
