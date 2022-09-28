@@ -27,9 +27,9 @@ var SimpleMenu = function ($scope, $) {
         $hamburger_device = 'tablet';
     }
 
+    let selectorByType = $horizontal ? '.eael-simple-menu-horizontal' : '.eael-simple-menu-vertical';
     let $hamburger_max_width = getHamburgerMaxWidth($hamburger_breakpoints, $hamburger_device)
 
-    let selectorByType = $horizontal ? '.eael-simple-menu-horizontal' : '.eael-simple-menu-vertical';
     var $fullWidth = $('.eael-simple-menu--stretch');
     
     // if ($horizontal) {
@@ -107,7 +107,7 @@ var SimpleMenu = function ($scope, $) {
             )
             $('.eael-simple-menu-toggle-text', $scope).text(
                 $(
-                    selectorByType + ' .current-menu-item a',
+                    '.eael-simple-menu-horizontal .current-menu-item a',
                     $scope
                 )
                 .eq(0)
@@ -154,9 +154,9 @@ var SimpleMenu = function ($scope, $) {
                 'eael-simple-menu-responsive'
             )
             $(
-                selectorByType + ', '+ selectorByType +' ul',
+                '.eael-simple-menu-horizontal, .eael-simple-menu-horizontal ul',
                 $scope
-            ).css('display', 'inherit')
+            ).css('display', '')
             $(".eael-simple-menu-container nav",$scope).removeAttr( 'style' );
 
             // Mobile Dropdown Breakpoints
