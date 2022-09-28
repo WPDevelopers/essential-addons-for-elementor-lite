@@ -395,5 +395,8 @@ class advancedDataTable {
 }
 
 ea.hooks.addAction("init", "ea", () => {
+  if (ea.elementStatusCheck('eaelAdvancedDataTable')) {
+    return false;
+  }
   new advancedDataTable();
 });
