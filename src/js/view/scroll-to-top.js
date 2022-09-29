@@ -9,13 +9,15 @@
             $('.eael-ext-scroll-to-top-wrap').removeClass('scroll-to-top-hide');
         }
 
-        $(window).scroll(function () {
+        elementorFrontend.elements.$body[0].addEventListener('scroll', eaelScrollToTop);
+
+        function eaelScrollToTop(){
             if ($(this).scrollTop() < offset) {
                 $('.eael-ext-scroll-to-top-wrap').fadeOut(duration);
             } else {
                 $('.eael-ext-scroll-to-top-wrap').fadeIn(duration);
             }
-        });
+        }
 
         $('.eael-ext-scroll-to-top-wrap').on('click', function () {
             $('html, body').animate({ scrollTop: 0 }, speed);
