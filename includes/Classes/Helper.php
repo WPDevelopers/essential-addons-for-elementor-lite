@@ -1257,11 +1257,28 @@ class Helper
 		 * Otherwise, it's the name of the font family that the icon belongs to.
 		 */
 		if ( 'svg' === $icon['library'] ) {
-			$output = Icons_Manager::render_uploaded_svg_icon( $icon['value'] );
+			$output = method_exists( 'Elementor\Icons_Manager', 'render_uploaded_svg_icon' ) ? Icons_Manager::render_uploaded_svg_icon( $icon['value'] ) : '';
 		} else {
-			$output = Icons_Manager::render_font_icon( $icon, $attributes, $tag );
+			$output = method_exists( 'Elementor\Icons_Manager', 'render_font_icon' ) ? Icons_Manager::render_font_icon( $icon, $attributes, $tag ) : '';
 		}
 
 		return $output;
+	}
+
+	/**
+	 * Sanitize a 'relation' operator.
+	 *
+	 * @param string $relation Raw relation key from the query argument.
+	 *
+	 * @return string Sanitized relation ('AND' or 'OR').
+	 * @since 5.3.2
+	 *
+	 */
+	public static function eael_sanitize_relation( $relation ) {
+		if ( 'OR' === strtoupper( $relation ) ) {
+			return 'OR';
+		} else {
+			return 'AND';
+		}
 	}
 }

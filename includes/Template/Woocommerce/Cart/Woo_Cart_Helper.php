@@ -3,6 +3,7 @@
 namespace Essential_Addons_Elementor\Template\Woocommerce\Cart;
 
 use Elementor\Icons_Manager;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -91,7 +92,7 @@ trait Woo_Cart_Helper {
 													        esc_html__( 'Remove this item', 'essential-addons-for-elementor-lite' ),
 													        esc_attr( $product_id ),
 													        esc_attr( $_product->get_sku() ),
-													        Icons_Manager::render_font_icon( $column_data['item_remove_icon'], [ 'aria-hidden' => 'true' ] )
+													        Helper::get_render_icon( $column_data['item_remove_icon'], [ 'aria-hidden' => 'true' ] )
 												        ),
 												        $cart_item_key
 											        );
@@ -473,7 +474,7 @@ trait Woo_Cart_Helper {
 																esc_html__( 'Remove this item', 'essential-addons-for-elementor-lite' ),
 																esc_attr( $product_id ),
 																esc_attr( $_product->get_sku() ),
-																Icons_Manager::render_font_icon( $settings['eael_woo_cart_table_components_remove_icon'], [ 'aria-hidden' => 'true' ] )
+																Helper::get_render_icon( $settings['eael_woo_cart_table_components_remove_icon'], [ 'aria-hidden' => 'true' ] )
 															),
 															$cart_item_key
 														);
@@ -578,7 +579,7 @@ trait Woo_Cart_Helper {
 															esc_html__( 'Remove this item', 'essential-addons-for-elementor-lite' ),
 															esc_attr( $product_id ),
 															esc_attr( $_product->get_sku() ),
-															Icons_Manager::render_font_icon( $settings['eael_woo_cart_table_components_remove_icon'], [ 'aria-hidden' => 'true' ] )
+															Helper::get_render_icon( $settings['eael_woo_cart_table_components_remove_icon'], [ 'aria-hidden' => 'true' ] )
 														),
 														$cart_item_key
 													);
@@ -628,7 +629,7 @@ trait Woo_Cart_Helper {
 					$continue_shopping_text = apply_filters( 'eael_woo_cart_continue_shopping_text', $settings['eael_woo_cart_components_continue_shopping_text'] );
 					printf( '<a class="eael-woo-cart-back-to-shop" href="%s">%s %s</a>',
 						get_permalink( wc_get_page_id( 'shop' ) ),
-						Icons_Manager::render_font_icon( $settings['eael_woo_cart_components_continue_shopping_icon'], [ 'aria-hidden' => 'true' ] ),
+						Helper::get_render_icon( $settings['eael_woo_cart_components_continue_shopping_icon'], [ 'aria-hidden' => 'true' ] ),
 						esc_html( $continue_shopping_text )
 					);
 				}
