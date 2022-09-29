@@ -3157,7 +3157,11 @@
                     }
                 }
                 &.eael-product-overlay{
-
+                    li.product a.button.add_to_cart_button{
+                        flex: inherit;
+                        width: auto;
+                        border-radius: 50%;
+                    }
                 }
                 &.eael-product-preset-5{
                     li.product{
