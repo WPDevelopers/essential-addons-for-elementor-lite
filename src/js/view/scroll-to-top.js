@@ -13,6 +13,10 @@
             elementorFrontend.elements.$body[0].addEventListener('scroll', eaelScrollToTop);
         }
 
+        $(window).scroll(function () {
+            eaelScrollToTop();
+        });
+
         function eaelScrollToTop(){
             if ($(this).scrollTop() < offset) {
                 $('.eael-ext-scroll-to-top-wrap').fadeOut(duration);
