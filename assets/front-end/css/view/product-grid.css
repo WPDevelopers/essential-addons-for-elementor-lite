@@ -2821,7 +2821,41 @@
   margin: 2px;
   border-radius: 3px;
 }
-.buddyboss-theme #content .elementor-widget-container .eael-product-grid.masonry li.product .add-to-cart .add_to_cart_button,
-.buddyboss-theme #content .elementor-widget-container .eael-post-grid.masonry li.product .add-to-cart .add_to_cart_button {
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid.masonry.eael-product-simple li.product .add_to_cart_button.added,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid.masonry.eael-product-simple li.product .add_to_cart_button.added {
+  display: block !important;
+}
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid.masonry.eael-product-simple li.product .added_to_cart,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid.masonry.eael-product-simple li.product .added_to_cart {
+  width: 100%;
+  border-radius: 0;
+  padding: 12px 10px;
+  color: #fff;
+  background-color: #333;
+  position: absolute;
+  border: none;
+  margin: 10px auto;
+}
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid.masonry.eael-product-reveal li.product .eael-product-wrap .add_to_cart_button.added,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid.masonry.eael-product-reveal li.product .eael-product-wrap .add_to_cart_button.added {
+  display: block !important;
+}
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid.masonry.eael-product-reveal li.product .eael-product-wrap:hover.add_to_cart_button.added,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid.masonry.eael-product-reveal li.product .eael-product-wrap:hover.add_to_cart_button.added {
+  visibility: visible;
+}
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid.masonry.eael-product-reveal li.product .eael-product-wrap .added_to_cart,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid.masonry.eael-product-reveal li.product .eael-product-wrap .added_to_cart {
+  width: 100%;
+  border-radius: 0;
+  padding: 12px 10px;
+  color: #fff;
+  background-color: #333;
+  position: absolute;
+  border: none;
+  margin: 10px auto;
+}
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid.masonry.eael-product-preset-7 li.product .add-to-cart .add_to_cart_button,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid.masonry.eael-product-preset-7 li.product .add-to-cart .add_to_cart_button {
   margin: 10px 2px 0;
 }
