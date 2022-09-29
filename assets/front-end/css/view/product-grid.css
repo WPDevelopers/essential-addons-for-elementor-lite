@@ -2767,6 +2767,9 @@
   left: 0px;
   line-height: 12px;
 }
+.buddyboss-theme .eael-product-popup.woocommerce div.product .button {
+  line-height: 0;
+}
 .buddyboss-theme #content .elementor-widget-container .eael-product-grid li.product,
 .buddyboss-theme #content .elementor-widget-container .eael-post-grid li.product {
   max-width: 100%;
