@@ -4750,7 +4750,7 @@ class Login_Register extends Widget_Base {
         <div class="eael-form-msg invalid">
 			<?php
 			if ( ! empty( $this->ds['err_unknown'] ) ) {
-				printf( '<p>%s</p>', esc_html( $this->ds['err_unknown'] ) );
+				// printf( '<p>%s</p>', esc_html( $this->ds['err_unknown'] ) );
 			}
 			?>
             <ol>
