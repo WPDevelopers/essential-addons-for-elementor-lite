@@ -9,7 +9,9 @@
             $('.eael-ext-scroll-to-top-wrap').removeClass('scroll-to-top-hide');
         }
 
-        elementorFrontend.elements.$body[0].addEventListener('scroll', eaelScrollToTop);
+        if( elementorFrontend ){
+            elementorFrontend.elements.$body[0].addEventListener('scroll', eaelScrollToTop);
+        }
 
         function eaelScrollToTop(){
             if ($(this).scrollTop() < offset) {
