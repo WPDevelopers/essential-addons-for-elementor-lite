@@ -2805,6 +2805,14 @@
   color: #fff;
   height: 100%;
 }
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid.eael-product-overlay li.product a.button.add_to_cart_button,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid.eael-product-overlay li.product a.button.add_to_cart_button {
+  -webkit-box-flex: inherit;
+      -ms-flex: inherit;
+          flex: inherit;
+  width: auto;
+  border-radius: 50%;
+}
 .buddyboss-theme #content .elementor-widget-container .eael-product-grid.eael-product-preset-5 li.product .eael-product-wrap .added_to_cart,
 .buddyboss-theme #content .elementor-widget-container .eael-post-grid.eael-product-preset-5 li.product .eael-product-wrap .added_to_cart {
   border: none;
