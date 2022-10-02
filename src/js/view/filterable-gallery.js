@@ -102,8 +102,8 @@ jQuery(window).on("elementor/frontend/init", function () {
 								index_list.push(index);
 							}
 						}
-						
-						if (item_found === $images_per_page) {
+
+						if (item_found >= $images_per_page) {
 							break;
 						}
 					}
