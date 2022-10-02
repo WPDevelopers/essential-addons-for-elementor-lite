@@ -641,7 +641,7 @@ trait Login_Registration {
 		}
 
 		// set email related stuff
-		if ( 'custom' === $settings['lostpassword_email_template_type'] ) {
+		if ( ! empty( $settings['enable_reset_password'] ) && 'yes' === $settings['enable_reset_password'] ) {
 			self::$send_custom_email_lostpassword = true;
 		}
 		if ( isset( $settings['lostpassword_email_subject'] ) ) {
