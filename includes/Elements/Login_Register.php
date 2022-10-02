@@ -2071,39 +2071,8 @@ class Login_Register extends Widget_Base {
 
 		$this->start_controls_section( 'section_content_lostpassword_email', [
 			'label'      => __( 'Lost Password Email Options', 'essential-addons-for-elementor-lite' ),
-			'conditions' => [
-				'relation' => 'or',
-				'terms'    => [
-					[
-						'relation' => 'and',
-						'terms' => [
-							[
-								'name' => 'show_lost_password',
-								'value' => 'yes'
-							],
-							[
-								'name' => 'lost_password_link_type',
-								'value' => 'form',
-							]
-						]
-					],
-					[
-						'name'  => 'default_form_type',
-						'value' => 'lostpassword',
-					],
-				],
-			],
-		] );
-
-		$this->add_control( 'lostpassword_email_template_type', [
-			'label'       => __( 'Email Template Type', 'essential-addons-for-elementor-lite' ),
-			'description' => __( 'Default template uses WordPress Default email template. So, please select the Custom Option to send the user proper information if you used any username field.', 'essential-addons-for-elementor-lite' ),
-			'type'        => Controls_Manager::SELECT,
-			'default'     => 'default',
-			'render_type' => 'none',
-			'options'     => [
-				'default' => __( 'WordPres Default', 'essential-addons-for-elementor-lite' ),
-				'custom'  => __( 'Custom', 'essential-addons-for-elementor-lite' ),
+			'condition' => [
+				'enable_reset_password' => 'yes'
 			],
 		] );
 
