@@ -511,9 +511,10 @@ trait Helper
 	}
 
 	public function essential_blocks_promo_admin_js_template() {
+		$eb_logo = EAEL_PLUGIN_URL . 'assets/admin/images/eb.svg';
 		?>
         <script id="eael-gb-eb-button-template" type="text/html">
-            <button id="eael-eb-button" type="button" class="button button-primary button-large">EB</button>
+            <button id="eael-eb-button" type="button" class="components-button"><img width="20" src="<?php echo esc_url( $eb_logo ); ?>" alt=""></button>
         </script>
 		<?php
 	}
