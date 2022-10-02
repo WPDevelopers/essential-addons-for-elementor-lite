@@ -12,4 +12,8 @@
             $gb_editor_panel.find('.edit-post-header__settings').prepend($('#eael-gb-eb-button-template').html());
         }
     }
+
+    $(document).on('click', '#eael-eb-button', function () {
+        $('body').append($('#eael-gb-eb-popup-template').html());
+    });
 })(jQuery);

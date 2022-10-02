@@ -516,6 +516,12 @@ trait Helper
         <script id="eael-gb-eb-button-template" type="text/html">
             <button id="eael-eb-button" type="button" class="components-button"><img width="20" src="<?php echo esc_url( $eb_logo ); ?>" alt=""></button>
         </script>
+
+        <script id="eael-gb-eb-popup-template" type="text/html">
+            <div class="eael-gb-eb-popup">
+                Essential Block Popup
+            </div>
+        </script>
 		<?php
 	}
 }
