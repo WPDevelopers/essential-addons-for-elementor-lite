@@ -306,18 +306,25 @@ class Login_Register extends Widget_Base {
 			] );
 		}
 
-		// preview reset password form
-		$this->add_control( 'preview_reset_password', [
-			'label'   => __( 'Preview Reset Password in Editor?', 'essential-addons-for-elementor-lite' ),
-			'description' => __( 'This will show a preview of the reset password form in the editor.', 'essential-addons-for-elementor-lite' ),
+		$this->add_control( 'enable_reset_password', [
+			'label'   => __( 'Enable Reset Password', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SWITCHER,
 			'default' => 'no',
 			'conditions' => [
 				'relation' => 'or',
 				'terms'    => [
 					[
-						'name'  => "show_lost_password",
-						'value' => 'yes',
+						'relation' => 'and',
+						'terms' => [
+							[
+								'name' => 'show_lost_password',
+								'value' => 'yes'
+							],
+							[
+								'name' => 'lost_password_link_type',
+								'value' => 'form',
+							]
+						]
 					],
 					[
 						'name'  => 'default_form_type',
@@ -326,6 +333,18 @@ class Login_Register extends Widget_Base {
 				],
 			],
 		] );
+
+		// preview reset password form
+		$this->add_control( 'preview_reset_password', [
+			'label'   => __( 'Preview Reset Password in Editor?', 'essential-addons-for-elementor-lite' ),
+			'description' => __( 'This will show a preview of the reset password form in the editor.', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::SWITCHER,
+			'default' => 'no',
+			'condition' => [
+				'enable_reset_password' => 'yes'
+			],
+		] );
+
 		$this->add_control( 'hide_for_logged_in_user', [
 			'label'   => __( 'Hide all Forms from Logged-in Users', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SWITCHER,
@@ -398,7 +417,7 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->add_control( 'lost_password_link_type_notice', [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => __( "Note: To use the Reset Password Form select 'Custom' from Content > Lost Password Email Options > Email Template Type.", 'essential-addons-for-elementor-lite' ),
+			'raw'             => __( "Note: To use the Reset Password Form enable it from Content » General » Enabled Reset Password Form.", 'essential-addons-for-elementor-lite' ),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 			'condition'		  => [
 				'lost_password_link_type' => 'form'
