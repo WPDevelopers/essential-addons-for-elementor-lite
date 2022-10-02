@@ -120,6 +120,11 @@ trait Enqueue
         wp_add_inline_style( 'elementor-icons', $css );
     }
 
+	public function essential_blocks_promo_enqueue_scripts() {
+		add_action( 'admin_footer', [$this, 'essential_blocks_promo_admin_js_template'] );
+		wp_enqueue_script( 'eael-gutenberg', $this->safe_url( EAEL_PLUGIN_URL . 'assets/admin/js/eael-essential-blocks-promo.js' ), [ 'jquery' ], EAEL_PLUGIN_VERSION, true );
+	}
+
 	// replace beehive theme's swiper slider lib file with elementor's swiper lib file
 	public function beehive_theme_swiper_slider_compatibility( $scripts ) {
 		unset( $scripts['swiper'] );

@@ -208,6 +208,11 @@ class Bootstrap
             add_action( 'wp_ajax_templately_promo_status', array($this, 'templately_promo_status'));
         }
 
+		//Essential Blocks Promo
+	    if ( true ) {
+		    add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_promo_enqueue_scripts' ] );
+	    }
+
 	    if( class_exists( 'woocommerce' ) ) {
 		    // quick view
 		    add_action( 'eael_woo_single_product_image', 'woocommerce_show_product_images', 20 );

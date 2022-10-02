@@ -509,5 +509,13 @@ trait Helper
 	public function is_activate_elementor() {
 		return defined( 'ELEMENTOR_VERSION' ) && class_exists( 'Elementor\Plugin' );
 	}
+
+	public function essential_blocks_promo_admin_js_template() {
+		?>
+        <script id="eael-gb-eb-button-template" type="text/html">
+            <button id="eael-eb-button" type="button" class="button button-primary button-large">EB</button>
+        </script>
+		<?php
+	}
 }
 
