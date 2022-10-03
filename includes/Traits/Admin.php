@@ -338,6 +338,31 @@ trait Admin {
                                 console.log(err.responseJSON);
                             },
                         });
+                    } else if (action === "activate" && !$.active) {
+                        button.text("Activating...").attr("disabled", true);
+
+                        $.ajax({
+                            url: "<?php echo esc_html( $ajax_url ); ?>",
+                            type: "POST",
+                            data: {
+                                action: "wpdeveloper_activate_plugin",
+                                security: "<?php echo esc_html( $nonce ); ?>",
+                                basename: basename,
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    button.text("Activated");
+                                    button.data("action", null);
+                                } else {
+                                    button.text("Activate");
+                                }
+
+                                button.attr("disabled", false);
+                            },
+                            error: function (err) {
+                                console.log(err.responseJSON);
+                            },
+                        });
                     }
                 });
             })(jQuery);
