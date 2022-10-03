@@ -273,6 +273,8 @@ trait Admin {
 	public function essential_block_integration() {
 		$screen = get_current_screen();
         $is_elementor_library = ! empty( $_GET['post_type'] ) && $_GET['post_type'] === 'elementor_library';
+        $ajax_url = admin_url( 'admin-ajax.php' );
+        $nonce = wp_create_nonce( 'essential-addons-elementor' );
 		if ( $screen->parent_base !== 'edit' || $is_elementor_library ) {
 			return;
 		}
@@ -283,11 +285,63 @@ trait Admin {
                     <p><?php _e( 'Howdy, there 👋 Seems like you are using Gutenberg Editor on your website. Do you know you can get access to all the <strong>Essential Addons</strong> widgets for Gutenberg as well?', 'essential-addons-for-elementor-lite' ); ?></p>
                     <p><?php _e( 'Try <strong>Essential Blocks for Gutenberg</strong> to make your WordPress design experience even more powerful 🚀 For more info, <a href="https://essential-blocks.com/demo">check out the demo</a>', 'essential-addons-for-elementor-lite' ); ?></p>
                     <p>
-                        <a href="#" class="button-primary"><?php esc_html_e( 'Install Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></a>
+                        <a href="#" class="button-primary wpdeveloper-eb-plugin-installer" data-action="install"
+                           data-slug="essential-blocks"><?php esc_html_e( 'Install Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></a>
                     </p>
                 </div>
             </div>
         </div>
+
+        <script>
+            // install/activate plugin
+            (function ($) {
+                $(document).on("click", ".wpdeveloper-eb-plugin-installer", function (ev) {
+                    ev.preventDefault();
+
+                    var button = $(this),
+                        action = button.data("action"),
+                        slug = button.data("slug"),
+                        basename = button.data("basename");
+
+                    if ($.active && typeof action != "undefined") {
+                        button.text("Waiting...").attr("disabled", true);
+
+                        setInterval(function () {
+                            if (!$.active) {
+                                button.attr("disabled", false).trigger("click");
+                            }
+                        }, 1000);
+                    }
+
+                    if (action === "install" && !$.active) {
+                        button.text("Installing...").attr("disabled", true);
+
+                        $.ajax({
+                            url: "<?php echo esc_html( $ajax_url ); ?>",
+                            type: "POST",
+                            data: {
+                                action: "wpdeveloper_install_plugin",
+                                security: "<?php echo esc_html( $nonce ); ?>",
+                                slug: slug,
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    button.text("Activated");
+                                    button.data("action", null);
+                                } else {
+                                    button.text("Install");
+                                }
+
+                                button.attr("disabled", false);
+                            },
+                            error: function (err) {
+                                console.log(err.responseJSON);
+                            },
+                        });
+                    }
+                });
+            })(jQuery);
+        </script>
 		<?php
 	}
 }
