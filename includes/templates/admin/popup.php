@@ -194,7 +194,7 @@
                                 <div class="element__options">
                                     <p class="element__icon">
                                         <i class="ea-admin-icon icon-doc"></i>
-                                        <span class="tooltip-text"><?php esc_attr_e('Eanble extra custom fields on user profile. Fields will be available on edit profile page as well as EA Login | Register Form', 'essential-addons-for-elementor-lite') ?></span>
+                                        <span class="tooltip-text"><?php esc_attr_e('Fields will be available on both the edit profile page and the EA Login | Register Form.', 'essential-addons-for-elementor-lite') ?></span>
                                     </p>
                                     <label class="eael-switch">
                                         <input name="lr_custom_profile_fields" id="lr_custom_profile_fields" <?php if( 'on' === get_option( 'eael_custom_profile_fields' ) ) : ?> checked <?php endif; ?> class="eael-form__control eael-widget-item eael-elements-list" type="checkbox">  <span class="switch__box "></span>
