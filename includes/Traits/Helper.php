@@ -514,7 +514,7 @@ trait Helper
 		$eb_logo = EAEL_PLUGIN_URL . 'assets/admin/images/eb-white.svg';
 		?>
         <script id="eael-gb-eb-button-template" type="text/html">
-            <button id="eael-eb-button" type="button" class="components-button is-primary"><img width="20" src="<?php echo esc_url( $eb_logo ); ?>" alt=""> Essential Blocks</button>
+            <button id="eael-eb-button" type="button" class="components-button is-primary"><img width="20" src="<?php echo esc_url( $eb_logo ); ?>" alt="">Try Essential Blocks</button>
         </script>
 
         <script id="eael-gb-eb-popup-template" type="text/html">

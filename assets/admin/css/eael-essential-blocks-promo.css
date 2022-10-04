@@ -1,6 +1,11 @@
+#eael-eb-button {
+    background: #2673FF;
+}
+
 #eael-eb-button img {
     margin-right: 5px;
 }
+
 .eael-gb-eb-popup {
     position: fixed;
     top: 50%;
