@@ -162,7 +162,9 @@ var SimpleMenu = function ($scope, $) {
             $('.eael-simple-menu-container', $scope).closest('.elementor-widget-eael-simple-menu')
                 .removeClass('eael-hamburger--responsive')
                 .addClass('eael-hamburger--not-responsive');
-
+            if(!isEditMode){
+                $('.eael-simple-menu-container .eael-simple-menu', $scope).css('display', 'block');
+            }
         }
     }
 

@@ -243,6 +243,10 @@
     }
 }
 
+.elementor-editor-active .eael-simple-menu-container .eael-simple-menu {
+    display: inherit;
+}
+
 .eael-simple-menu-container {
     background-color: #54595f;
 
@@ -283,6 +287,7 @@
         margin: 0;
         padding: 0;
         list-style: none;
+        display: none;
 
         &:after {
             content: "";
