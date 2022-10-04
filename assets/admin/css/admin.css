@@ -3965,9 +3965,9 @@ button.button__greyBg:hover:disabled {
 }
 
 .eael-element__wrap.eael-element__wrap-popup .eael-element__item .element__content .element__options .element__icon .tooltip-text {
-    width: 400px;
-    max-width: 400px;
-    transform: translateX(-350px);
+    width: 390px;
+    max-width: 390px;
+    transform: translateX(-330px);
     bottom: 150%;
 }
 
@@ -3977,7 +3977,7 @@ button.button__greyBg:hover:disabled {
 }
 
 .eael-element__wrap.eael-element__wrap-popup .eael-element__item .element__content .element__options .element__icon .tooltip-text::before {
-    left: 87%;
+    left: 85%;
 }
 
 @media (max-width: 1599.98px) {
