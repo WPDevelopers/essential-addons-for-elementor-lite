@@ -8,6 +8,7 @@ if ( !defined( 'ABSPATH' ) ) {
 
 // Exit if accessed directly
 
+use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Classes\WPDeveloper_Notice;
 
 trait Admin {
@@ -271,11 +272,19 @@ trait Admin {
 	}
 
 	public function essential_block_integration() {
-		$screen = get_current_screen();
-        $is_elementor_library = ! empty( $_GET['post_type'] ) && $_GET['post_type'] === 'elementor_library';
-        $ajax_url = admin_url( 'admin-ajax.php' );
-        $nonce = wp_create_nonce( 'essential-addons-elementor' );
-		if ( $screen->parent_base !== 'edit' || $is_elementor_library ) {
+		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) ) {
+			return;
+		}
+
+		$screen           = get_current_screen();
+		$is_el_library    = ! empty( $_GET['post_type'] ) && $_GET['post_type'] === 'elementor_library';
+		$ajax_url         = admin_url( 'admin-ajax.php' );
+		$nonce            = wp_create_nonce( 'essential-addons-elementor' );
+		$eb_not_installed = HelperClass::get_local_plugin_data( 'essential-blocks/essential-blocks.php' ) === false;
+		$action           = $eb_not_installed ? 'install' : 'activate';
+		$button_title     = $eb_not_installed ? esc_html__( 'Install Essential Blocks', 'essential-addons-for-elementor-lite' ) : esc_html__( 'Activate', 'essential-addons-for-elementor-lite' );
+
+		if ( $screen->parent_base !== 'edit' || $is_el_library ) {
 			return;
 		}
 		?>
@@ -285,8 +294,8 @@ trait Admin {
                     <p><?php _e( 'Howdy, there 👋 Seems like you are using Gutenberg Editor on your website. Do you know you can get access to all the <strong>Essential Addons</strong> widgets for Gutenberg as well?', 'essential-addons-for-elementor-lite' ); ?></p>
                     <p><?php _e( 'Try <strong>Essential Blocks for Gutenberg</strong> to make your WordPress design experience even more powerful 🚀 For more info, <a href="https://essential-blocks.com/demo">check out the demo</a>', 'essential-addons-for-elementor-lite' ); ?></p>
                     <p>
-                        <a href="#" class="button-primary wpdeveloper-eb-plugin-installer" data-action="install"
-                           data-slug="essential-blocks"><?php esc_html_e( 'Install Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></a>
+                        <a href="#" class="button-primary wpdeveloper-eb-plugin-installer"
+                           data-action="<?php echo esc_attr( $action ); ?>"><?php echo esc_html( $button_title ); ?></a>
                     </p>
                 </div>
             </div>
@@ -322,12 +331,16 @@ trait Admin {
                             data: {
                                 action: "wpdeveloper_install_plugin",
                                 security: "<?php echo esc_html( $nonce ); ?>",
-                                slug: slug,
+                                slug: "essential-blocks",
                             },
                             success: function (response) {
                                 if (response.success) {
                                     button.text("Activated");
                                     button.data("action", null);
+
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 1000);
                                 } else {
                                     button.text("Install");
                                 }
@@ -347,12 +360,16 @@ trait Admin {
                             data: {
                                 action: "wpdeveloper_activate_plugin",
                                 security: "<?php echo esc_html( $nonce ); ?>",
-                                basename: basename,
+                                basename: "essential-blocks/essential-blocks.php",
                             },
                             success: function (response) {
                                 if (response.success) {
                                     button.text("Activated");
                                     button.data("action", null);
+
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 1000);
                                 } else {
                                     button.text("Activate");
                                 }
