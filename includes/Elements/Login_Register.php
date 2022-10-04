@@ -5531,7 +5531,7 @@ class Login_Register extends Widget_Base {
 							do_action( 'eael/login-register/before-lostpassword-footer', $this );
 							?>
 
-							<div class="eael-lr-footer <?php echo esc_attr( $hide_class_after_submission ); ?>">
+							<div class="eael-lr-footer">
 								<input type="submit"
 									   name="eael-lostpassword-submit"
 									   id="eael-lostpassword-submit"
