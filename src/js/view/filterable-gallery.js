@@ -93,18 +93,21 @@ jQuery(window).on("elementor/frontend/init", function () {
 					$this.data('first-init', 1);
 					let item_found = initData;
 					let index_list = $items =  [];
-					for (const [index, item] of fg_items.entries()){
-						if (buttonFilter !== '' && buttonFilter !== '*') {
-							let element = $($(item)[0]);
-							if (element.is(buttonFilter)) {
-								++item_found;
-								$items.push($(item)[0]);
-								index_list.push(index);
-							}
-						}
 
-						if (item_found >= $images_per_page) {
-							break;
+					if (item_found === 0) {
+						for (const [index, item] of fg_items.entries()){
+							if (buttonFilter !== '' && buttonFilter !== '*') {
+								let element = $($(item)[0]);
+								if (element.is(buttonFilter)) {
+									++item_found;
+									$items.push($(item)[0]);
+									index_list.push(index);
+								}
+							}
+
+							if (item_found >= $images_per_page) {
+								break;
+							}
 						}
 					}
 					
