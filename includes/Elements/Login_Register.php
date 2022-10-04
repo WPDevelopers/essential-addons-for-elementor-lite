@@ -307,7 +307,7 @@ class Login_Register extends Widget_Base {
 		}
 
 		$this->add_control( 'enable_reset_password', [
-			'label'   => __( 'Enable Reset Password', 'essential-addons-for-elementor-lite' ),
+			'label'   => __( 'Enable Reset Password Form', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SWITCHER,
 			'default' => 'no',
 			'conditions' => [
@@ -336,7 +336,7 @@ class Login_Register extends Widget_Base {
 
 		// preview reset password form
 		$this->add_control( 'preview_reset_password', [
-			'label'   => __( 'Preview Reset Password in Editor?', 'essential-addons-for-elementor-lite' ),
+			'label'   => __( 'Preview Reset Password Form', 'essential-addons-for-elementor-lite' ),
 			'description' => __( 'This will show a preview of the reset password form in the editor.', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SWITCHER,
 			'default' => 'no',
