@@ -2083,9 +2083,6 @@ class Login_Register extends Widget_Base {
 			'default'     => $default_subject,
 			'label_block' => true,
 			'render_type' => 'none',
-			'condition'   => [
-				'lostpassword_email_template_type' => 'custom',
-			],
 		] );
 
 		$this->add_control( 'lostpassword_email_message', [
@@ -2095,18 +2092,12 @@ class Login_Register extends Widget_Base {
 			'default'     => $default_message,
 			'label_block' => true,
 			'render_type' => 'none',
-			'condition'   => [
-				'lostpassword_email_template_type' => 'custom',
-			],
 		] );
 
 		$this->add_control( 'lostpassword_email_content_note', [
 			'type'            => Controls_Manager::RAW_HTML,
 			'raw'             => __( '<strong>Note:</strong> You can use dynamic content in the email body like [fieldname]. For example [username] will be replaced by user-typed username. Available tags are: [username], [email], [firstname],[lastname], [website], [password_reset_link] and [sitetitle] ', 'essential-addons-for-elementor-lite' ),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
-			'condition'       => [
-				'lostpassword_email_template_type' => 'custom',
-			],
 			'render_type'     => 'none',
 		] );
 
@@ -2117,9 +2108,6 @@ class Login_Register extends Widget_Base {
 			'default'     => __( 'Click here to reset your password', 'essential-addons-for-elementor-lite'),
 			'label_block' => false,
 			'render_type' => 'none',
-			'condition'   => [
-				'lostpassword_email_template_type' => 'custom',
-			],
 		] );
 
 		$this->add_control( 'lostpassword_email_content_type', [
@@ -2130,9 +2118,6 @@ class Login_Register extends Widget_Base {
 			'options'     => [
 				'html'  => __( 'HTML', 'essential-addons-for-elementor-lite' ),
 				'plain' => __( 'Plain', 'essential-addons-for-elementor-lite' ),
-			],
-			'condition'   => [
-				'lostpassword_email_template_type' => 'custom',
 			],
 		] );
 
