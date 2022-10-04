@@ -5683,7 +5683,7 @@ class Login_Register extends Widget_Base {
 							
 							<div class="eael-lr-form-group <?php echo esc_attr( $hide_class_after_submission ); ?>">
 								<?php if ( $display_label && $confirm_password_label ) {
-									printf( '<label for="eael-pass1" class="eael-field-label">%s</label>', esc_html( wp_strip_all_tags( $confirm_password_label ) ) );
+									printf( '<label for="eael-pass2" class="eael-field-label">%s</label>', esc_html( wp_strip_all_tags( $confirm_password_label ) ) );
 								} ?>
 								<div class="eael-lr-password-wrapper eael-lr-resetpassword-wrapper eael-lr-resetpassword2-wrapper">
 									<input type="password"
