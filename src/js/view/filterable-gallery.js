@@ -95,7 +95,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 					let index_list = $items =  [];
 
 					if (item_found === 0) {
-						for (const [index, item] of fg_items.entries()){
+						for (const [index, item] of fg_items.entries()) {
 							if (buttonFilter !== '' && buttonFilter !== '*') {
 								let element = $($(item)[0]);
 								if (element.is(buttonFilter)) {
