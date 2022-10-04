@@ -208,9 +208,10 @@ class Bootstrap
             add_action( 'wp_ajax_templately_promo_status', array($this, 'templately_promo_status'));
         }
 
-		//Essential Blocks Promo
+	    //Essential Blocks Promo
 	    if ( true ) {
 		    add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_promo_enqueue_scripts' ] );
+		    add_action( 'admin_notices', [ $this, 'essential_block_integration' ] );
 	    }
 
 	    if( class_exists( 'woocommerce' ) ) {
@@ -238,8 +239,6 @@ class Bootstrap
             } else {
                 new WPDeveloper_Core_Installer( basename( EAEL_PLUGIN_BASENAME, '.php' ) );
             }
-
-	        add_action( 'admin_notices', [ $this, 'essential_block_integration' ] );
 
             add_action('admin_menu', array($this, 'admin_menu'));
             add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
