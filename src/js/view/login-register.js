@@ -96,7 +96,7 @@ ea.hooks.addAction("init", "ea", () => {
             switch ($buttonId) {
                 case 'wp-hide-pw1':
                     togglePasswordVisibility( $pass1Field );
-                    $('#wp-hide-pw2').trigger('click');
+                    togglePasswordVisibility( $pass2Field );
                     break;
                 case 'wp-hide-pw2':
                     togglePasswordVisibility( $pass2Field );
