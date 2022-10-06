@@ -225,3 +225,8 @@
 .elementor-context-menu-list__item.elementor-context-menu-list__item-ea_paste_all {
 	padding-right: 10px;
 }
+.elementor-control-unit-2[data-setting="eael_evergreen_counter_hours"],
+.elementor-control-unit-2[data-setting="eael_evergreen_counter_minutes"],
+.elementor-control-unit-2[data-setting="eael_evergreen_counter_recurring_restart_after"] {
+	width: 70px;
+}
