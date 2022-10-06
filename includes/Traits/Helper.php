@@ -511,7 +511,9 @@ trait Helper
 	}
 
 	public function essential_blocks_promo_admin_js_template() {
-		$eb_logo = EAEL_PLUGIN_URL . 'assets/admin/images/eb-white.svg';
+		$eb_logo        = EAEL_PLUGIN_URL . 'assets/admin/images/eb-white.svg';
+		$eb_promo_cross = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/cross.svg';
+		$eb_promo_img2  = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img2.gif';
 		?>
         <script id="eael-gb-eb-button-template" type="text/html">
             <button id="eael-eb-button" type="button" class="components-button is-primary"><img width="20" src="<?php echo esc_url( $eb_logo ); ?>" alt="">Try Essential Blocks</button>
@@ -519,7 +521,24 @@ trait Helper
 
         <script id="eael-gb-eb-popup-template" type="text/html">
             <div class="eael-gb-eb-popup">
-                Essential Block Popup
+                <div class="eael-gb-eb-popup-content">
+                    <div class="eael-gb-eb-header">
+                        <img src="<?php echo esc_url( $eb_promo_cross ); ?>" alt="">
+                    </div>
+                    <div class="eael-gb-eb-content">
+                        <div class="eael-gb-eb-content-image">
+                            <img src="<?php echo esc_url( $eb_promo_img2 ); ?>" alt="">
+                        </div>
+                        <div class="eael-gb-eb-content-pagination"></div>
+                        <div class="eael-gb-eb-content-info">
+                            <h3>Supercharge Your Gutenberg Experience With Essential Blocks</h3>
+                            <p>If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg, and build powerful websites with ease without any coding.</p>
+                        </div>
+                    </div>
+                    <div class="eael-gb-eb-footer">
+
+                    </div>
+                </div>
             </div>
         </script>
 		<?php

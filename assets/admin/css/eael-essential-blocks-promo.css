@@ -10,6 +10,51 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    background: red;
+    width: 312px;
+    height: 80vh;
+    max-height: 575px;
+    background: #fff;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, .25);
+    overflow: hidden;
     transform: translate(-50%, -50%);
+    border-radius: 3px;
+}
+
+.eael-gb-eb-popup img {
+    max-width: 100%;
+    display: block;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-popup-content {
+    height: 100%;
+    overflow: auto;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-header {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-image {
+    background: linear-gradient(223.65deg, #2673FF -9.93%, #A383F8 107.17%);
+    display: flex;
+    align-items: center;
+    height: 240px;
+    padding: 0 35px;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-info {
+    padding: 0 32px;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-info h3 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-info p {
+    font-size: 13px;
+    line-height: 1.4;
 }
