@@ -212,6 +212,7 @@ class Bootstrap
 	    if ( true ) {
 		    add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_promo_enqueue_scripts' ] );
 		    add_action( 'admin_notices', [ $this, 'essential_block_integration' ] );
+		    add_action( 'wp_ajax_eael_eb_optin_notice_dismiss', [ $this, 'eael_eb_optin_notice_dismiss' ] );
 	    }
 
 	    if( class_exists( 'woocommerce' ) ) {

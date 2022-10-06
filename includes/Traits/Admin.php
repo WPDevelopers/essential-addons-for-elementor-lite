@@ -272,7 +272,7 @@ trait Admin {
 	}
 
 	public function essential_block_integration() {
-		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) ) {
+		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) || get_option( 'eael_eb_optin_hide' ) ) {
 			return;
 		}
 
@@ -288,9 +288,9 @@ trait Admin {
 			return;
 		}
 		?>
-        <div class="wpnotice-wrapper notice  notice-info is-dismissible">
+        <div class="wpnotice-wrapper notice  notice-info is-dismissible eael-eb-optin-notice">
             <div class="wpnotice-content-wrapper">
-                <div class="wpsp-optin">
+                <div class="eael-eb-optin">
                     <p><?php _e( 'Howdy, there 👋 Seems like you are using Gutenberg Editor on your website. Do you know you can get access to all the <strong>Essential Addons</strong> widgets for Gutenberg as well?', 'essential-addons-for-elementor-lite' ); ?></p>
                     <p><?php _e( 'Try <strong>Essential Blocks for Gutenberg</strong> to make your WordPress design experience even more powerful 🚀 For more info, <a href="https://essential-blocks.com/demo">check out the demo</a>', 'essential-addons-for-elementor-lite' ); ?></p>
                     <p>
@@ -381,9 +381,43 @@ trait Admin {
                             },
                         });
                     }
+                }).on('click', '.eael-eb-optin-notice button.notice-dismiss', function (e) {
+                    e.preventDefault();
+
+                    var $notice_wrapper = $(this).closest('.eael-eb-optin-notice');
+
+                    $.ajax({
+                        url: "<?php echo esc_html( $ajax_url ); ?>",
+                        type: "POST",
+                        data: {
+                            action: "eael_eb_optin_notice_dismiss",
+                            security: "<?php echo esc_html( $nonce ); ?>",
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                $notice_wrapper.remove();
+                            } else {
+                                console.log(response.data);
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err.responseText);
+                        },
+                    });
                 });
             })(jQuery);
         </script>
 		<?php
+	}
+
+	public function eael_eb_optin_notice_dismiss() {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		update_option( 'eael_eb_optin_hide', true );
+		wp_send_json_success();
 	}
 }
