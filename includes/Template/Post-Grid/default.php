@@ -93,7 +93,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                         if ($settings['eael_show_read_more_button']) {
                             echo '<a
                                         href="' . get_the_permalink() . '"
-                                        class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . esc_attr($settings['read_more_button_text']) . '</a>';
+                                        class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . Helper::eael_wp_kses($settings['read_more_button_text']) . '</a>';
                         }
                         echo '</div>
                                 </div>';
@@ -220,7 +220,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             if ($settings['eael_show_read_more_button']) {
                 echo '<a
                             href="' . get_the_permalink() . '"
-                            class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . esc_attr($settings['read_more_button_text']) . '</a>';
+                            class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . Helper::eael_wp_kses($settings['read_more_button_text']) . '</a>';
             }
             echo '</div>
                     </div>';
@@ -307,7 +307,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             if ($settings['eael_show_read_more_button']) {
                 echo '<a
                             href="' . get_the_permalink() . '"
-                            class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . esc_attr($settings['read_more_button_text']) . '</a>';
+                            class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . Helper::eael_wp_kses($settings['read_more_button_text']) . '</a>';
             }
             echo '</div>
                     </div>';
