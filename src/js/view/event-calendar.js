@@ -240,6 +240,16 @@ var EventCalendar = function ($scope, $) {
 						);
 					});
 				}
+
+				console.log(element);
+				// Background Image and Event Image
+				if (event.extendedProps.image) {
+					element.find("div.fc-content").prepend("<img class='eael-event-image' src='" + event.extendedProps.image +"' width='auto' height='auto'>");
+				}
+				
+				if (event.extendedProps.backgroundImage) {
+					element.css({"background": "url(" + event.extendedProps.backgroundImage + ")", "background-repeat": "none", "background-size": "cover"});
+				}			
 			},
 		});
 	

@@ -11,6 +11,7 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
+use Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Repeater;
 use \Elementor\Widget_Base;
@@ -235,11 +236,68 @@ class Event_Calendar extends Widget_Base
         );
 
         $repeater->add_control(
+            'eael_event_image_show',
+            [
+                'label' => __('Show Image', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_block' => false,
+                'return_value' => 'yes',
+            ]
+        );
+
+        $repeater->add_control( 'eael_event_image', [
+			'label'   => __( 'Event Image', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::MEDIA,
+            'condition' => [
+                'eael_event_image_show' => 'yes'
+            ]
+		] );
+
+        $repeater->add_group_control( Group_Control_Image_Size::get_type(), [
+			'name'      => 'eael_event_image',
+			// Usage: `{name}_size` and `{name}_custom_dimension`, in this case `image_size` and `image_custom_dimension`.
+			'default'   => 'full',
+			'condition' => [
+                'eael_event_image_show' => 'yes'
+            ]
+		] );
+
+        $repeater->add_control(
+            'eael_event_background_image_show',
+            [
+                'label' => __('Show Background Image', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_block' => false,
+                'return_value' => 'yes',
+            ]
+        );
+
+        $repeater->add_control( 'eael_event_background_image', [
+			'label'   => __( 'Event Background Image', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::MEDIA,
+            'condition' => [
+                'eael_event_background_image_show' => 'yes'
+            ]
+		] );
+
+        $repeater->add_group_control( Group_Control_Image_Size::get_type(), [
+			'name'      => 'eael_event_background_image',
+			// Usage: `{name}_size` and `{name}_custom_dimension`, in this case `image_size` and `image_custom_dimension`.
+			'default'   => 'full',
+            'condition' => [
+                'eael_event_background_image_show' => 'yes'
+            ]
+		] );
+
+        $repeater->add_control(
             'eael_event_bg_color',
             [
                 'label' => __('Event Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#5725ff',
+                'condition' => [
+                    'eael_event_background_image_show!' => 'yes'
+                ]
             ]
         );
 
@@ -1515,6 +1573,18 @@ class Event_Calendar extends Widget_Base
                 ],
             ]
         );
+        
+        $this->add_responsive_control(
+            'day_event_image_border_radius',
+            [
+                'label' => esc_html__('Image Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .fc-day-grid-event img.eael-event-image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
 
         $this->end_controls_section();
 
@@ -1944,6 +2014,12 @@ class Event_Calendar extends Widget_Base
                 $settings_eael_event_global_text_color = $this->fetch_color_or_global_color($event, 'eael_event_text_color');
                 $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($event, 'eael_event_border_color');
 
+                $event_background_image_id = !empty( $event['eael_event_background_image_show'] ) && ! empty( $event['eael_event_background_image']['id'] ) ? $event['eael_event_background_image']['id'] : '';
+                $event_background_image     = Group_Control_Image_Size::get_attachment_image_src( $event_background_image_id, 'eael_event_background_image', $event );
+
+                $event_image_id = !empty( $event['eael_event_image_show'] ) && ! empty( $event['eael_event_image']['id'] ) ? $event['eael_event_image']['id'] : '';
+                $event_image     = Group_Control_Image_Size::get_attachment_image_src( $event_image_id, 'eael_event_image', $event );
+
                 $_custom_attributes = $event['eael_event_link']['custom_attributes'];
                 $_custom_attributes = explode(',', $_custom_attributes );
                 $custom_attributes  = [];
@@ -1969,6 +2045,8 @@ class Event_Calendar extends Widget_Base
                     'borderColor' => !empty($settings_eael_event_global_popup_ribbon_color) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
                     'textColor' => $settings_eael_event_global_text_color,
                     'color' => $settings_eael_event_global_bg_color,
+                    'image' => esc_url( $event_image ),
+                    'backgroundImage' => esc_url( $event_background_image ),
                     'url' => ($settings['eael_event_details_link_hide'] !== 'yes') ? esc_url($event["eael_event_link"]["url"]) : '',
                     'allDay' => $event['eael_event_all_day'],
                     'external' => $event['eael_event_link']['is_external'],
