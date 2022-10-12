@@ -543,7 +543,8 @@ trait Helper
                         </div>
                     </div>
                     <div class="eael-gb-eb-footer">
-
+                        <button class="eael-gb-eb-prev">Previous</button>
+                        <button class="eael-gb-eb-next">Next</button>
                     </div>
                 </div>
             </div>
