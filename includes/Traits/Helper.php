@@ -513,6 +513,7 @@ trait Helper
 	public function essential_blocks_promo_admin_js_template() {
 		$eb_logo        = EAEL_PLUGIN_URL . 'assets/admin/images/eb-white.svg';
 		$eb_promo_cross = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/cross.svg';
+		$eb_promo_img1  = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img1.gif';
 		$eb_promo_img2  = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img2.gif';
 		?>
         <script id="eael-gb-eb-button-template" type="text/html">
@@ -523,7 +524,7 @@ trait Helper
             <div class="eael-gb-eb-popup">
                 <div class="eael-gb-eb-popup-content">
                     <div class="eael-gb-eb-header">
-                        <img src="<?php echo esc_url( $eb_promo_cross ); ?>" alt="">
+                        <img src="<?php echo esc_url( $eb_promo_cross ); ?>" class="eael-gb-eb-dismiss" alt="">
                     </div>
                     <div class="eael-gb-eb-content">
                         <div class="eael-gb-eb-content-image">

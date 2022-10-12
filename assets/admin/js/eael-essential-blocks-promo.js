@@ -15,5 +15,7 @@
 
     $(document).on('click', '#eael-eb-button', function () {
         $('body').append($('#eael-gb-eb-popup-template').html());
+    }).on('click', '.eael-gb-eb-dismiss', function () {
+        $('.eael-gb-eb-popup').remove();
     });
 })(jQuery);
