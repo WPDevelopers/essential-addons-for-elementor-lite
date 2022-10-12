@@ -530,7 +530,13 @@ trait Helper
                         <div class="eael-gb-eb-content-image">
                             <img src="<?php echo esc_url( $eb_promo_img2 ); ?>" alt="">
                         </div>
-                        <div class="eael-gb-eb-content-pagination"></div>
+                        <div class="eael-gb-eb-content-pagination">
+                            <span class="active" data-page="1"></span>
+                            <span data-page="2"></span>
+                            <span data-page="3"></span>
+                            <span data-page="4"></span>
+                            <span data-page="5"></span>
+                        </div>
                         <div class="eael-gb-eb-content-info">
                             <h3>Supercharge Your Gutenberg Experience With Essential Blocks</h3>
                             <p>If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg, and build powerful websites with ease without any coding.</p>

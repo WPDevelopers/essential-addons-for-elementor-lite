@@ -48,6 +48,27 @@
     padding: 0 35px;
 }
 
+.eael-gb-eb-popup .eael-gb-eb-content-pagination {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-pagination span {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #2673FF;
+    cursor: pointer;
+    opacity: .4;
+    margin: 0 5px;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-pagination span.active {
+    opacity: 1;
+}
+
 .eael-gb-eb-popup .eael-gb-eb-content-info {
     padding: 0 32px;
 }
