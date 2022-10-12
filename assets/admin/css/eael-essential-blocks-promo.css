@@ -56,13 +56,13 @@
 
 .eael-gb-eb-popup .eael-gb-eb-content-pagination span {
     display: block;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: #2673FF;
     cursor: pointer;
     opacity: .4;
-    margin: 0 5px;
+    margin: 0 6px;
 }
 
 .eael-gb-eb-popup .eael-gb-eb-content-pagination span.active {
@@ -70,16 +70,41 @@
 }
 
 .eael-gb-eb-popup .eael-gb-eb-content-info {
-    padding: 0 32px;
+    padding: 0 30px;
 }
 
 .eael-gb-eb-popup .eael-gb-eb-content-info h3 {
     font-size: 24px;
     font-weight: 600;
     line-height: 1.4;
+    margin: 16px 0;
 }
 
 .eael-gb-eb-popup .eael-gb-eb-content-info p {
     font-size: 13px;
     line-height: 1.4;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-footer {
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-footer button {
+    background: transparent;
+    border: transparent;
+    font-size: 13px;
+    color: #6A72A5;
+    cursor: pointer;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-footer button.eael-gb-eb-next {
+    color: #2673FF;
+    font-weight: 700;
+
+}
+
+.eael-gb-eb-popup .eael-gb-eb-footer button:hover {
+    text-decoration: underline;
 }
