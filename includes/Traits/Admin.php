@@ -420,4 +420,15 @@ trait Admin {
 		update_option( 'eael_eb_optin_hide', true );
 		wp_send_json_success();
 	}
+
+	public function eael_gb_eb_popup_dismiss() {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		update_option( 'eael_gb_eb_popup_hide', true );
+		wp_send_json_success();
+	}
 }
