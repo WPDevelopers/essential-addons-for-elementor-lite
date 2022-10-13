@@ -546,8 +546,10 @@ trait Helper
                         </div>
                     </div>
                     <div class="eael-gb-eb-footer">
+                        <button class="eael-gb-eb-never-show">Never Show Again</button>
                         <button class="eael-gb-eb-prev">Previous</button>
                         <button class="eael-gb-eb-next">Next</button>
+                        <button class="eael-gb-eb-install">Try Essential Blocks</button>
                     </div>
                 </div>
             </div>

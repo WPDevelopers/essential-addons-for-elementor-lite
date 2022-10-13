@@ -120,9 +120,11 @@
     font-size: 13px;
     color: #6A72A5;
     cursor: pointer;
+    padding: 0;
 }
 
-.eael-gb-eb-popup .eael-gb-eb-footer button.eael-gb-eb-next {
+.eael-gb-eb-popup .eael-gb-eb-footer button.eael-gb-eb-next,
+.eael-gb-eb-popup .eael-gb-eb-footer button.eael-gb-eb-install {
     color: #2673FF;
     font-weight: 700;
 
@@ -132,11 +134,20 @@
     text-decoration: underline;
 }
 
+.eael-gb-eb-popup .eael-gb-eb-footer button.eael-gb-eb-never-show,
+.eael-gb-eb-popup .eael-gb-eb-footer button.eael-gb-eb-install,
 .eael-gb-eb-popup .--page-1 .eael-gb-eb-footer button.eael-gb-eb-prev,
+.eael-gb-eb-popup .--page-5 .eael-gb-eb-footer button.eael-gb-eb-prev,
 .eael-gb-eb-popup .--page-5 .eael-gb-eb-footer button.eael-gb-eb-next {
     display: none;
 }
 
-.eael-gb-eb-popup .--page-1 .eael-gb-eb-footer {
-    justify-content: end;
+.eael-gb-eb-popup .--page-1 .eael-gb-eb-footer button.eael-gb-eb-never-show,
+.eael-gb-eb-popup .--page-5 .eael-gb-eb-footer button.eael-gb-eb-never-show,
+.eael-gb-eb-popup .--page-5 .eael-gb-eb-footer button.eael-gb-eb-install {
+    display: block;
 }
+
+/*.eael-gb-eb-popup .--page-1 .eael-gb-eb-footer {*/
+/*    justify-content: end;*/
+/*}*/
