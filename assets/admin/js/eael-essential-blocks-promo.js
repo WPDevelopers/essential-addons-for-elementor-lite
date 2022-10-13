@@ -26,5 +26,16 @@
             .removeClass('--page-1 --page-2 --page-3 --page-4 --page-5').addClass(`--page-${page_id}`);
         $('.eael-gb-eb-popup .eael-gb-eb-content-image').html($(page_content).find('.eael-gb-eb-content-image').html());
         $('.eael-gb-eb-popup .eael-gb-eb-content-info').html($(page_content).find('.eael-gb-eb-content-info').html());
+    }).on('click', '.eael-gb-eb-prev, .eael-gb-eb-next', function () {
+        let $this = $(this),
+            isNext = $this.hasClass('eael-gb-eb-next'),
+            isPrev = $this.hasClass('eael-gb-eb-prev'),
+            currentPage = $('.eael-gb-eb-content-pagination span.active');
+
+        if (isNext) {
+            currentPage.next().trigger('click');
+        } else if (isPrev) {
+            currentPage.prev().trigger('click');
+        }
     });
 })(jQuery);
