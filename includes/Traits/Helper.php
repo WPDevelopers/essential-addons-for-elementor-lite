@@ -520,13 +520,13 @@ trait Helper
 		$eb_promo_img5  = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img5.gif';
 		?>
         <script id="eael-gb-eb-button-template" type="text/html">
-            <button id="eael-eb-button" type="button" class="components-button is-primary"><img width="20" src="<?php echo esc_url( $eb_logo ); ?>" alt="">Try Essential Blocks</button>
+            <button id="eael-eb-button" type="button" class="components-button is-primary"><img width="20" src="<?php echo esc_url( $eb_logo ); ?>" alt=""><?php esc_html_e( 'Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></button>
         </script>
 
         <script id="eael-gb-eb-popup-template" type="text/html">
             <div class="eael-gb-eb-popup">
                 <div class="eael-gb-eb-header">
-                    <img src="<?php echo esc_url( $eb_promo_cross ); ?>" class="eael-gb-eb-dismiss" alt="Close dialog" aria-label="Close dialog test">
+                    <img src="<?php echo esc_url( $eb_promo_cross ); ?>" class="eael-gb-eb-dismiss" alt="">
                 </div>
                 <div class="eael-gb-eb-popup-content --page-1">
                     <div class="eael-gb-eb-content">
@@ -541,15 +541,15 @@ trait Helper
                             <span data-page="5"></span>
                         </div>
                         <div class="eael-gb-eb-content-info">
-                            <h3>Supercharge Your Gutenberg Experience With Essential Blocks</h3>
-                            <p>If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg, and build powerful websites with ease without any coding.</p>
+                            <h3><?php esc_html_e( 'Supercharge Your Gutenberg Experience With Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
+                            <p><?php esc_html_e( 'If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg, and build powerful websites with ease without any coding.', 'essential-addons-for-elementor-lite' ); ?></p>
                         </div>
                     </div>
                     <div class="eael-gb-eb-footer">
-                        <button class="eael-gb-eb-never-show">Never Show Again</button>
-                        <button class="eael-gb-eb-prev">Previous</button>
-                        <button class="eael-gb-eb-next">Next</button>
-                        <button class="eael-gb-eb-install">Try Essential Blocks</button>
+                        <button class="eael-gb-eb-never-show"><?php esc_html_e( 'Never Show Again', 'essential-addons-for-elementor-lite' ); ?></button>
+                        <button class="eael-gb-eb-prev"><?php esc_html_e( 'Previous', 'essential-addons-for-elementor-lite' ); ?></button>
+                        <button class="eael-gb-eb-next"><?php esc_html_e( 'Next', 'essential-addons-for-elementor-lite' ); ?></button>
+                        <button class="eael-gb-eb-install"><?php esc_html_e( 'Try Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></button>
                     </div>
                 </div>
             </div>
