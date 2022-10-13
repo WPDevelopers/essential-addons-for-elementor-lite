@@ -37,5 +37,28 @@
         } else if (isPrev) {
             currentPage.prev().trigger('click');
         }
+    }).on('click', '.eael-gb-eb-never-show', function () {
+        let $this = $(this),
+            nonce = $this.data('nonce');
+
+        $.ajax({
+            url: "admin-ajax.php",
+            type: "POST",
+            data: {
+                action: "eael_gb_eb_popup_dismiss",
+                security: nonce,
+            },
+            success: function (response) {
+                if (response.success) {
+                    $('.eael-gb-eb-popup').remove();
+                    $('#eael-eb-button').remove();
+                } else {
+                    console.log(response.data);
+                }
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            },
+        });
     });
 })(jQuery);

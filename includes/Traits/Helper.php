@@ -520,7 +520,9 @@ trait Helper
 		$eb_promo_img5  = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img5.gif';
 		?>
         <script id="eael-gb-eb-button-template" type="text/html">
-            <button id="eael-eb-button" type="button" class="components-button is-primary"><img width="20" src="<?php echo esc_url( $eb_logo ); ?>" alt=""><?php esc_html_e( 'Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></button>
+            <button id="eael-eb-button" type="button" class="components-button is-primary">
+                <img width="20" src="<?php echo esc_url( $eb_logo ); ?>" alt=""><?php esc_html_e( 'Essential Blocks', 'essential-addons-for-elementor-lite' ); ?>
+            </button>
         </script>
 
         <script id="eael-gb-eb-popup-template" type="text/html">
@@ -546,7 +548,7 @@ trait Helper
                         </div>
                     </div>
                     <div class="eael-gb-eb-footer">
-                        <button class="eael-gb-eb-never-show"><?php esc_html_e( 'Never Show Again', 'essential-addons-for-elementor-lite' ); ?></button>
+                        <button class="eael-gb-eb-never-show" data-nonce="<?php echo esc_attr( wp_create_nonce( 'essential-addons-elementor' ) ); ?>"><?php esc_html_e( 'Never Show Again', 'essential-addons-for-elementor-lite' ); ?></button>
                         <button class="eael-gb-eb-prev"><?php esc_html_e( 'Previous', 'essential-addons-for-elementor-lite' ); ?></button>
                         <button class="eael-gb-eb-next"><?php esc_html_e( 'Next', 'essential-addons-for-elementor-lite' ); ?></button>
                     </div>
