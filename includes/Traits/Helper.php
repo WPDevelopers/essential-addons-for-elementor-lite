@@ -525,10 +525,10 @@ trait Helper
 
         <script id="eael-gb-eb-popup-template" type="text/html">
             <div class="eael-gb-eb-popup">
+                <div class="eael-gb-eb-header">
+                    <img src="<?php echo esc_url( $eb_promo_cross ); ?>" class="eael-gb-eb-dismiss" alt="Close dialog" aria-label="Close dialog test">
+                </div>
                 <div class="eael-gb-eb-popup-content --page-1">
-                    <div class="eael-gb-eb-header">
-                        <img src="<?php echo esc_url( $eb_promo_cross ); ?>" class="eael-gb-eb-dismiss" alt="">
-                    </div>
                     <div class="eael-gb-eb-content">
                         <div class="eael-gb-eb-content-image">
                             <img src="<?php echo esc_url( $eb_promo_img1 ); ?>" alt="">

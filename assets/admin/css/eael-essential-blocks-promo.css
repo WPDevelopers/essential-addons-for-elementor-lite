@@ -28,12 +28,16 @@
 .eael-gb-eb-popup .eael-gb-eb-popup-content {
     height: 100%;
     overflow: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 .eael-gb-eb-popup .eael-gb-eb-header {
     position: absolute;
     top: 5px;
     right: 5px;
+    z-index: 9;
 }
 
 .eael-gb-eb-popup .eael-gb-eb-header img {
