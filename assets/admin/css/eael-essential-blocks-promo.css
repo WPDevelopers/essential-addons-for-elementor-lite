@@ -109,6 +109,13 @@
     line-height: 1.4;
 }
 
+.eael-gb-eb-popup .eael-gb-eb-content-info button {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2673FF;
+}
+
 .eael-gb-eb-popup .eael-gb-eb-footer {
     padding: 25px 30px;
     display: flex;
