@@ -41,11 +41,30 @@
 }
 
 .eael-gb-eb-popup .eael-gb-eb-content-image {
-    background: linear-gradient(206.26deg, #A181F7 -16.35%, #1C3AA7 102.55%);
     display: flex;
     align-items: center;
     height: 240px;
     padding: 0 35px;
+}
+
+.eael-gb-eb-popup .--page-1 .eael-gb-eb-content-image {
+    background: linear-gradient(206.26deg, #A181F7 -16.35%, #1C3AA7 102.55%);
+}
+
+.eael-gb-eb-popup .--page-2 .eael-gb-eb-content-image {
+    background: linear-gradient(212.59deg, #AF7381 -13.93%, #435193 30.64%, #4E328D 72.14%, #A24485 122.52%, #AA7082 160.1%);
+}
+
+.eael-gb-eb-popup .--page-3 .eael-gb-eb-content-image {
+    background: linear-gradient(218.13deg, #5737A8 -11.9%, #2F2F91 107.64%);
+}
+
+.eael-gb-eb-popup .--page-4 .eael-gb-eb-content-image {
+    background: linear-gradient(223.65deg, #2673FF -9.93%, #A383F8 107.17%);
+}
+
+.eael-gb-eb-popup .--page-5 .eael-gb-eb-content-image {
+    background: linear-gradient(223.71deg, #8437A8 -9.91%, #2673FF 127.03%);
 }
 
 .eael-gb-eb-popup .eael-gb-eb-content-pagination {
