@@ -53,6 +53,7 @@
 
 .eael-gb-eb-popup .--page-1 .eael-gb-eb-content-image {
     background: linear-gradient(206.26deg, #A181F7 -16.35%, #1C3AA7 102.55%);
+    padding: 0;
 }
 
 .eael-gb-eb-popup .--page-2 .eael-gb-eb-content-image {
@@ -147,7 +148,3 @@
 .eael-gb-eb-popup .--page-5 .eael-gb-eb-footer button.eael-gb-eb-install {
     display: block;
 }
-
-/*.eael-gb-eb-popup .--page-1 .eael-gb-eb-footer {*/
-/*    justify-content: end;*/
-/*}*/
