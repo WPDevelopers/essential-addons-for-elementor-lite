@@ -127,3 +127,12 @@
 .eael-gb-eb-popup .eael-gb-eb-footer button:hover {
     text-decoration: underline;
 }
+
+.eael-gb-eb-popup .--page-1 .eael-gb-eb-footer button.eael-gb-eb-prev,
+.eael-gb-eb-popup .--page-5 .eael-gb-eb-footer button.eael-gb-eb-next {
+    display: none;
+}
+
+.eael-gb-eb-popup .--page-1 .eael-gb-eb-footer {
+    justify-content: end;
+}
