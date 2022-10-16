@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
 
 use Elementor\Icons_Manager;
 use \Elementor\Plugin;
+use Essential_Addons_Elementor\Classes\Helper;
 
 trait Elements
 {
@@ -524,14 +525,9 @@ trait Elements
                 }
                 $scroll_to_top_icon_image = !empty($settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image']) 
                                             ? $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image']['value'] : '';
-                
-                if (isset($scroll_to_top_icon_image['url'])) {
-                    ob_start();
-                    Icons_Manager::render_icon( $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image'], [ 'aria-hidden' => 'true' ] );
-                    $scroll_to_top_icon_html = ob_get_clean();
-                } else {
-                    $scroll_to_top_icon_html = "<i class='$scroll_to_top_icon_image'></i>";
-                }
+
+                $scroll_to_top_icon_html = \Essential_Addons_Elementor\Classes\Helper::get_render_icon( $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image'] );
+
     
                 $scroll_to_top_html = "<div class='eael-ext-scroll-to-top-wrap scroll-to-top-hide'><span class='eael-ext-scroll-to-top-button'>$scroll_to_top_icon_html</span></div>";
 
@@ -852,5 +848,20 @@ trait Elements
     public function get_extensions_value($key = '')
     {
         return isset($this->extensions_data[$key]) ? $this->extensions_data[$key] : '';
+    }
+
+    /**
+     * Single instance for all advanced accordion faqs
+     *
+     * @return void
+     */
+    public function render_advanced_accordion_global_faq(){
+        if( count( Helper::get_eael_advanced_accordion_faq() )) : ?>
+            <!-- EA FAQ Schema : Starts-->
+            <script type="application/ld+json">
+                <?php echo json_encode( Helper::get_eael_advanced_accordion_faq() ); ?>
+            </script>
+            <!-- EA FAQ Schema : Ends-->
+        <?php endif;
     }
 }

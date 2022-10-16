@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 5.2.1
+Stable tag: 5.3.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -28,7 +28,7 @@ No extra resources or messy codes to slow down your website. Optimized for super
 Enable and disable individual elements to make your page loading faster and smoother. You can deactivate unnecessary widgets to keep the site lite.
 
 
-### 2000+ Ready Blocks and Templates through **Templately**
+### 2500+ Ready Blocks and Templates through **Templately**
 Use pre-made templates and sections which come with Essential Addons and design your website to stand out from the crowd.
 
 [Install Templately to get the premade blocks and templates](https://wordpress.org/plugins/templately/)
@@ -165,7 +165,7 @@ https://www.youtube.com/watch?v=K9BssSV-KC8
 Check [Flexia](https://wordpress.org/themes/flexia/), the best friend of Elementor and Essential Addons. A modern lightweight and versatile theme for WordPress with endless customization options. **And fully Free.** 
 
 ### BACKED BY A TRUSTED TEAM
-Essential Addons for Elementor is brought to you by [WPDeveloper](https://wpdeveloper.com/), a dedicated WordPress product company, trusted by 3 million+ happy users.
+Essential Addons for Elementor is brought to you by [WPDeveloper](https://wpdeveloper.com/), a dedicated WordPress product company, trusted by 5 million+ happy users.
 
 ### Documentation and Support
 
@@ -241,6 +241,53 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.3.2 - 28/09/2022 =
+
+- Improved: EA Countdown | Added Evergreen & Recurring Options
+- Fixed: EA Woo Checkout | PHP Fatal error
+- Fixed: EA Advanced Data Table | Showing repeated pagination
+- Fixed: EA Advanced Data table | Not able to add new row or column if table was imported without table header
+- Fixed: EA Advanced Accordion | If svg used in open tab and no icon is used in closed tab, then svg icon is not showing
+- Few minor bug fixes & improvements
+
+= 5.3.1 - 21/09/2022 =
+
+- Fixed: Throwing fatal error due to conflict with custom breakpoints & older Elementor versions
+- Few minor bug fixes & improvements
+
+= 5.3.0 - 21/09/2022 =
+
+- Added: Flex Container support for EA Widgets
+- Fixed: Font Awesome icons not loading when Elementor's Font awesome inline experiment is active
+- Fixed: EA Advanced Accordion | FAQ Schema not working properly
+- Fixed: EA Simple Menu | Sub menu not expanding properly
+- Fixed: EA Creative Button | Winona hover effect not displaying icon on the secondary button
+- Fixed: EA Sticky Video | Videos from Vimeo auto play and mute not working
+- Fixed: EA Advanced Tabs | Shape of the caret getting changed when global color is applied
+- Fixed: EA Woo Cart | mobile layout not working properly for OceanWP Theme
+- Fixed: 'Invalid recurring shipping method' Error when WooCommerce Subscriptions is enabled
+- Improved: EA Woo Checkout | Customize the ordering system of Billing Details fields 
+- Improved: EA Login/Register Form | Added option to change color of Remember me and forgot password fields
+- Improved: EA Simple Menu | Added Custom breakpoints for responsive devices
+- Improved: EA Woo Checkout | Added option to change the quantity of the ordered products
+- Few minor bug fixes & improvements
+
+= 5.2.4 - 29/08/2022 =
+
+- Fixed: EA Woo Product Grid CSS not Loading with Astra Theme in some cases
+- Few minor bug fixes & improvements
+
+= 5.2.3 - 18/08/2022 =
+
+- Fixed: Elementor PRO Header & Footer not showing in some themes
+- Few minor bug fixes & improvements
+
+= 5.2.2 - 17/08/2022 =
+
+- Fixed: Widgets with Links being underlined when Hello Elementor theme is active
+- Fixed: Custom JS not working inside Elementor Header, Footer & Popup
+- Few minor bug fixes & improvements
 
 
 = 5.2.1 - 14/08/2022 =

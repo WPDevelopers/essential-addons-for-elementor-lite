@@ -309,6 +309,18 @@ class Sticky_Video extends Widget_Base
         );
 
         $this->add_control(
+            'eaelsv_autopaly_description',
+            [
+                'raw' => __('Autoplay requires mute volume.', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::RAW_HTML,
+                'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+                'condition' => [
+                    'eaelsv_autopaly' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'eaelsv_mute',
             [
                 'label' => __('Mute', 'essential-addons-for-elementor-lite'),
@@ -316,6 +328,9 @@ class Sticky_Video extends Widget_Base
                 'label_block' => false,
                 'return_value' => 'yes',
                 'default' => '',
+                'condition' => [
+                    'eaelsv_autopaly!' => 'yes',
+                ],
             ]
         );
 
@@ -797,12 +812,12 @@ class Sticky_Video extends Widget_Base
         $settings = $this->get_settings_for_display();
         $id = $this->eaelsv_get_url_id();
         $autoplay = $settings['eaelsv_autopaly'];
-        $mute = $settings['eaelsv_mute'];
+        $mute = $autoplay == 'yes' ? 'yes' : $settings['eaelsv_mute'];
         $loop = $settings['eaelsv_loop'];
 
-        $am = '';
-        $am .= ($autoplay == 'yes' ? '"autoplay":1' : '"autoplay":0');
-        $am .= ($mute == 'yes' ? ', "muted":1' : ', "muted":0');
+        $am = '"storage": {"enabled": false, "key": "plyr"}';
+        $am .= ($autoplay == 'yes' ? ', "autoplay":1' : ', "autoplay":0');
+        $am .= ($mute == 'yes' ? ', "muted":1, "volume":0' : ', "muted":0');
 
         if ('yes' == $loop) {
             $lp = '"loop": {"active": true}';
