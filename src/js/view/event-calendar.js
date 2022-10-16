@@ -10,6 +10,7 @@ var EventCalendar = function ($scope, $) {
 		translate = element.data("translate"),
 		defaultView = element.data("defaultview"),
 		defaultDate = element.data("defaultdate"),
+		eventLimit = element.data("event_limit"),
 		time_format = element.data("time_format") == "yes" ? true : false;
 
 	var calendar = new Calendar(
@@ -33,7 +34,7 @@ var EventCalendar = function ($scope, $) {
 			events: eventAll,
 			selectHelper: true,
 			locale: locale,
-			eventLimit: 3,
+			eventLimit: typeof eventLimit !== "undefined" && eventLimit > 0 ? parseInt( eventLimit ) : 3,
 			defaultView: defaultView,
 			defaultDate: defaultDate,
 			eventRender: function (info) {
