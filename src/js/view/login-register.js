@@ -91,20 +91,28 @@ ea.hooks.addAction("init", "ea", () => {
             }
             if (loginRecaptchaNode) {
                 if( registerRecaptchaVersion !== 'v3' ){
-                    grecaptcha.render(loginRecaptchaNode, {
-                        'sitekey': recaptchaSiteKey,
-                        'theme': loginRcTheme,
-                        'size': loginRcSize,
-                    });
+                    try {
+                        grecaptcha.render(loginRecaptchaNode, {
+                            'sitekey': recaptchaSiteKey,
+                            'theme': loginRcTheme,
+                            'size': loginRcSize,
+                        });
+                    } catch ( error ){
+                        // duplicate instance
+                    }
                 }
             }
             if (registerRecaptchaNode) {
                 if( loginRecaptchaVersion !== 'v3' ){
-                    grecaptcha.render(registerRecaptchaNode, {
-                        'sitekey': recaptchaSiteKey,
-                        'theme': regRcTheme,
-                        'size': regRcSize,
-                    });
+                    try {
+                        grecaptcha.render(registerRecaptchaNode, {
+                            'sitekey': recaptchaSiteKey,
+                            'theme': regRcTheme,
+                            'size': regRcSize,
+                        });
+                    } catch ( error ) {
+                        // duplicate instance
+                    }
                 }
             }
         }
