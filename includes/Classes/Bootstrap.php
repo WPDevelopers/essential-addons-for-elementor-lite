@@ -192,6 +192,14 @@ class Bootstrap
         add_filter('wp_new_user_notification_email', array($this, 'new_user_notification_email'), 10, 3);
         add_filter('wp_new_user_notification_email_admin', array($this, 'new_user_notification_email_admin'), 10, 3);
         
+        if( 'on' === get_option( 'eael_custom_profile_fields' ) ){
+            add_action( 'show_user_profile', [ $this, 'eael_extra_user_profile_fields' ] );
+            add_action( 'edit_user_profile', [ $this, 'eael_extra_user_profile_fields' ] );
+
+            add_action( 'personal_options_update', [ $this, 'eael_save_extra_user_profile_fields' ] );
+            add_action( 'edit_user_profile_update', [ $this, 'eael_save_extra_user_profile_fields' ] );
+        }
+        
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'toc_rank_math_support']);
 
