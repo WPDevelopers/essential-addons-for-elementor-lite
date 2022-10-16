@@ -336,7 +336,7 @@
   -o-transition: all 0.2s;
   transition: all 0.2s;
 }
-.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .order-total, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .cart-subtotal, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .cart-discount, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .tax-rate {
+.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .order-total, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .cart-subtotal, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .cart-discount, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .tax-rate, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .fee {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
