@@ -67,9 +67,14 @@ ea.hooks.addAction("init", "ea", () => {
 							' .eael-post-appender')
 							.empty()
 							.append($content);
-
-						$('.eael-load-more-button', $scope).removeClass('hide-load-more');
-
+						var $max_page = $('<div>' + response + '</div>').find('.eael-max-page').text();
+						var load_more = $('.eael-load-more-button', $scope);
+						if ($max_page && load_more.data('page') >= $max_page) {
+							load_more.addClass('hide-load-more');
+						}else {
+							load_more.removeClass('hide-load-more');
+						}
+						load_more.data('max-page', $max_page);
 						if ($layout === 'masonry') {
 							var $products = $('.eael-product-gallery .products', $scope);
 
