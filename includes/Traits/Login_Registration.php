@@ -3,6 +3,7 @@
 namespace Essential_Addons_Elementor\Traits;
 
 use Elementor\Plugin;
+use Essential_Addons_Elementor\Classes\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -166,8 +167,17 @@ trait Login_Registration {
 
 			} elseif ( isset( $user_data->errors['incorrect_password'][0] ) || isset( $user_data->errors['empty_password'][0] ) ) {
 				$err_msg = isset( $settings['err_pass'] ) ? wp_strip_all_tags( $settings['err_pass'] ) : __( 'Invalid Password', 'essential-addons-for-elementor-lite' );
-
+			} else {
+				if( ! empty( $user_data->errors ) ){
+					foreach( $user_data->errors as $error ) {
+						$err_msg = is_array( $error ) && ! empty( $error[0] ) ? Helper::eael_wp_kses( $error[0] ) : __('Something went wrong!', 'essential-addons-for-elementor-lite');
+						break;
+					}
+				}
 			}
+
+			$err_msg = apply_filters('eael/login-register/login-validatiob-error-message', $err_msg, $user_data);
+			$err_msg = is_array( $err_msg ) && ! empty( $err_msg[0] ) ? Helper::eael_wp_kses( $err_msg[0] ) : Helper::eael_wp_kses( $err_msg );
 
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );

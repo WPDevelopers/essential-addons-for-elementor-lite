@@ -4681,7 +4681,7 @@ class Login_Register extends Widget_Base {
 			do_action( 'eael/login-register/before-showing-login-error', $login_error, $this );
 			?>
             <p class="eael-form-msg invalid">
-				<?php echo esc_html( $login_error ); ?>
+				<?php echo HelperCLass::eael_wp_kses( $login_error ); ?>
             </p>
 			<?php
 			do_action( 'eael/login-register/after-showing-login-error', $login_error, $this );
@@ -4772,7 +4772,7 @@ class Login_Register extends Widget_Base {
         <div class="eael-form-msg invalid">
 			<?php
 			if ( ! empty( $this->ds['err_unknown'] ) ) {
-				printf( '<p>%s</p>', esc_html( $this->ds['err_unknown'] ) );
+				// printf( '<p>%s</p>', esc_html( $this->ds['err_unknown'] ) );
 			}
 			?>
             <ol>
