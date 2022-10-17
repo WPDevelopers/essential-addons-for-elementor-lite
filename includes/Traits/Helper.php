@@ -532,6 +532,7 @@ trait Helper
             <div class="eael-gb-eb-popup">
                 <div class="eael-gb-eb-header">
                     <img src="<?php echo esc_url( $eb_promo_cross ); ?>" class="eael-gb-eb-dismiss" alt="">
+                    <div class="eael-gb-eb-tooltip"><?php esc_html_e( 'Close dialog', 'essential-addons-for-elementor-lite' ); ?></div>
                 </div>
                 <div class="eael-gb-eb-popup-content --page-1">
                     <div class="eael-gb-eb-content">

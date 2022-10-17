@@ -4,7 +4,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0,0,0,.35);
+    background-color: rgba(0, 0, 0, .35);
     z-index: 100000;
 }
 
@@ -25,7 +25,6 @@
     max-height: 575px;
     background: #fff;
     box-shadow: 0 10px 10px rgba(0, 0, 0, .25);
-    overflow: hidden;
     transform: translate(-50%, -50%);
     border-radius: 3px;
     z-index: 100001;
@@ -55,11 +54,30 @@
     cursor: pointer;
 }
 
+.eael-gb-eb-popup .eael-gb-eb-header .eael-gb-eb-tooltip {
+    background: #000;
+    color: #fff;
+    position: absolute;
+    white-space: nowrap;
+    padding: 3px 7px;
+    border-radius: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: .5s;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-header:hover .eael-gb-eb-tooltip {
+    opacity: 1;
+}
+
 .eael-gb-eb-popup .eael-gb-eb-content-image {
     display: flex;
     align-items: center;
     height: 240px;
     padding: 0 35px;
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
 }
 
 .eael-gb-eb-popup .--page-1 .eael-gb-eb-content-image {
