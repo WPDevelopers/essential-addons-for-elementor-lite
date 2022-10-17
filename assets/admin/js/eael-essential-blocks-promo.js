@@ -8,12 +8,12 @@
     });
 
     function essential_block_button_init() {
-        if (!$('#eael-eb-button').length) {
+        if (!$('#eael-eb-popup-button').length) {
             $gb_editor_panel.find('.edit-post-header__settings').prepend($('#eael-gb-eb-button-template').html());
         }
     }
 
-    $(document).on('click', '#eael-eb-button', function () {
+    $(document).on('click', '#eael-eb-popup-button', function () {
         $('body').append($('#eael-gb-eb-popup-template').html());
     }).on('click', '.eael-gb-eb-dismiss', function () {
         $('.eael-gb-eb-popup').remove();
@@ -51,7 +51,7 @@
             success: function (response) {
                 if (response.success) {
                     $('.eael-gb-eb-popup').remove();
-                    $('#eael-eb-button').remove();
+                    $('#eael-eb-popup-button').remove();
                 } else {
                     console.log(response.data);
                 }

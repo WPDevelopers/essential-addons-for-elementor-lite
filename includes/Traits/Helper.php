@@ -523,7 +523,7 @@ trait Helper
 		$action           = $eb_not_installed ? 'install' : 'activate';
 		?>
         <script id="eael-gb-eb-button-template" type="text/html">
-            <button id="eael-eb-button" type="button" class="components-button is-primary">
+            <button id="eael-eb-popup-button" type="button" class="components-button is-primary">
                 <img width="20" src="<?php echo esc_url( $eb_logo ); ?>" alt=""><?php esc_html_e( 'Essential Blocks', 'essential-addons-for-elementor-lite' ); ?>
             </button>
         </script>
