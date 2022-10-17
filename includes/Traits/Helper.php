@@ -611,7 +611,7 @@ trait Helper
                 </div>
                 <div class="eael-gb-eb-content-info">
                     <h3><?php esc_html_e( 'Try Essential Blocks Today!', 'essential-addons-for-elementor-lite' ); ?></h3>
-                    <p><?php esc_html_e( 'Want to get started with Essential Blocks now? Check out complete guides for each blocks to learn more about this ultimate block library for Gutenberg.', 'essential-addons-for-elementor-lite' ) ?></p>
+                    <p><?php printf( __( 'Want to get started with Essential Blocks now? Check out %s complete guides for each blocks %s to learn more about this ultimate block library for Gutenberg.', 'essential-addons-for-elementor-lite' ), '<a href="https://essential-blocks.com/demo" target="_blank">', '</a>' ) ?></p>
                     <button class="eael-gb-eb-install components-button is-primary"><?php esc_html_e( 'Try Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></button>
                 </div>
             </div>
