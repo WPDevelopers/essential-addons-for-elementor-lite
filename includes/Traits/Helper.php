@@ -517,7 +517,7 @@ trait Helper
 		$eb_promo_img2  = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img2.gif';
 		$eb_promo_img3  = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img3.gif';
 		$eb_promo_img4  = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img4.gif';
-		$eb_promo_img5  = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img5.gif';
+		$eb_promo_img5  = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img5.png';
 		?>
         <script id="eael-gb-eb-button-template" type="text/html">
             <button id="eael-eb-button" type="button" class="components-button is-primary">
