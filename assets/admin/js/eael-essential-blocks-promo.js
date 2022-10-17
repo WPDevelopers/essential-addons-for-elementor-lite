@@ -60,5 +60,81 @@
                 console.log(err.responseText);
             },
         });
+    }).on('click', 'button.eael-gb-eb-install', function (ev) {
+        ev.preventDefault();
+
+        let button = $(this),
+            action = button.data("action"),
+            nonce = button.data("nonce");
+
+        if ($.active && typeof action != "undefined") {
+            button.text("Waiting...").attr("disabled", true);
+
+            setInterval(function () {
+                if (!$.active) {
+                    button.attr("disabled", false).trigger("click");
+                }
+            }, 1000);
+        }
+
+        if (action === "install" && !$.active) {
+            button.text("Installing...").attr("disabled", true);
+
+            $.ajax({
+                url: "admin-ajax.php",
+                type: "POST",
+                data: {
+                    action: "wpdeveloper_install_plugin",
+                    security: nonce,
+                    slug: "essential-blocks",
+                },
+                success: function (response) {
+                    if (response.success) {
+                        button.text("Activated");
+                        button.data("action", null);
+
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
+                    } else {
+                        button.text("Try Essential Blocks");
+                    }
+
+                    button.attr("disabled", false);
+                },
+                error: function (err) {
+                    console.log(err.responseJSON);
+                },
+            });
+        } else if (action === "activate" && !$.active) {
+            button.text("Activating...").attr("disabled", true);
+
+            $.ajax({
+                url: "admin-ajax.php",
+                type: "POST",
+                data: {
+                    action: "wpdeveloper_activate_plugin",
+                    security: nonce,
+                    basename: "essential-blocks/essential-blocks.php",
+                },
+                success: function (response) {
+                    if (response.success) {
+                        button.text("Activated");
+                        button.data("action", null);
+
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
+                    } else {
+                        button.text("Try Essential Blocks");
+                    }
+
+                    button.attr("disabled", false);
+                },
+                error: function (err) {
+                    console.log(err.responseJSON);
+                },
+            });
+        }
     });
 })(jQuery);
