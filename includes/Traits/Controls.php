@@ -1257,6 +1257,21 @@ trait Controls
                 ]
             );
 
+            if ( 'eael-post-grid' === $wb->get_name() ){
+                $wb->add_control(
+                    'eael_post_terms_separator',
+                    [
+                        'label' => esc_html__('Terms Separator', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::TEXT,
+                        'label_block' => false,
+                        'default' => esc_html__('', 'essential-addons-for-elementor-lite'),
+                        'condition' => [
+                            'eael_show_post_terms' => 'yes',
+                        ],
+                    ]
+                );
+            }
+
         }
 
         if ('eael-post-grid' === $wb->get_name() || 'eael-post-block' === $wb->get_name() || 'eael-post-carousel' === $wb->get_name()) {

@@ -114,6 +114,8 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                             if (!empty($terms)) {
                                 $html = '<ul class="post-meta-categories">';
                                 $count = 0;
+                                
+                                $eael_post_terms_separator = ! empty( $settings['eael_post_terms_separator'] ) ? wp_strip_all_tags( $settings['eael_post_terms_separator'] ) : '';
                                 foreach ($terms as $term) {
                                     if ($count === intval($settings['eael_post_terms_max_length'])) {
                                         break;
@@ -121,10 +123,14 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                                     if ($count === 0) {
                                         $html .= '<li class="meta-cat-icon"><i class="far fa-folder-open"></i></li>';
                                     }
+
+                                    $is_last_item = $count + 1 === intval($settings['eael_post_terms_max_length']) || $count + 1 === count($terms);
+                                    $eael_post_terms_separator = $is_last_item  ? '' : $eael_post_terms_separator; 
+                                
                                     $link = ($settings['eael_post_terms'] === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
                                     $html .= '<li>';
                                     $html .= '<a href="' . esc_url($link) . '">';
-                                    $html .= $term->name;
+                                    $html .= $term->name . esc_html( $eael_post_terms_separator );
                                     $html .= '</a>';
                                     $html .= '</li>';
                                     $count++;
