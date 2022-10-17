@@ -817,21 +817,6 @@ $config = [
                         'context' => 'view',
                     ],
                     [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/full-calendar/daygrid.min.js',
-                        'type' => 'lib',
-                        'context' => 'view',
-                    ],
-                    [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/full-calendar/timegrid.min.js',
-                        'type' => 'lib',
-                        'context' => 'view',
-                    ],
-                    [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/full-calendar/listgrid.min.js',
-                        'type' => 'lib',
-                        'context' => 'view',
-                    ],
-                    [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/event-calendar.min.js',
                         'type' => 'self',
                         'context' => 'view',
