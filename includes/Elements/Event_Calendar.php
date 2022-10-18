@@ -464,7 +464,7 @@ class Event_Calendar extends Widget_Base
                 'options' => [
                     'af' => 'Afrikaans',
                     'sq' => 'Albanian',
-                    'hy' => 'Armenian',
+                    'hy-am' => 'Armenian',
                     'ar' => 'Arabic',
                     'az' => 'Azerbaijani',
                     'eu' => 'Basque',
