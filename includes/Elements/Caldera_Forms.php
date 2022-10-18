@@ -72,7 +72,7 @@ class Caldera_Forms extends Widget_Base
 			    'eael_global_warning_text',
 			    [
 				    'type' => Controls_Manager::RAW_HTML,
-				    'raw' => __( '<strong>Caldera Forms</strong> is not installed/activated on your site. Please install and activate <strong>Caldera Forms</strong> first.', 'essential-addons-for-elementor-lite'),
+				    'raw' => __( '<strong>Caldera Forms</strong> has been closed as of April 5, 2022 and is not available for download. You can try the other Form plugins instead', 'essential-addons-for-elementor-lite'),
 				    'content_classes' => 'eael-warning',
 			    ]
 		    );
