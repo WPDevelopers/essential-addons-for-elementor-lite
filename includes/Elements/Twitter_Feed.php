@@ -370,7 +370,7 @@ class Twitter_Feed extends Widget_Base
                 'label' => __('Posts Per Page', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic'   => ['active' => true],
-                'default' => 10,
+                'default' => 6,
                 'condition' => [
                     'pagination' => 'yes',
                 ],
