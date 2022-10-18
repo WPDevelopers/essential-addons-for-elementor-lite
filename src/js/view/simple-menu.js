@@ -153,7 +153,7 @@ var SimpleMenu = function ($scope, $) {
                 'eael-simple-menu-responsive'
             )
             $(
-                '.eael-simple-menu-horizontal, .eael-simple-menu-horizontal ul',
+                selectorByType + ', ' + selectorByType + ' ul',
                 $scope
             ).css('display', '')
             $(".eael-simple-menu-container nav",$scope).removeAttr( 'style' );
