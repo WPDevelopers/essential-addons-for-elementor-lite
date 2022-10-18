@@ -71,11 +71,13 @@
   height: 100%;
 }
 
-.eael-entry-footer .eael-author-avatar {
+.eael-entry-footer .eael-author-avatar,
+.eael-entry-header-after .eael-author-avatar {
   width: 50px;
 }
 
-.eael-entry-footer .eael-author-avatar .avatar {
+.eael-entry-footer .eael-author-avatar .avatar,
+.eael-entry-header-after .eael-author-avatar .avatar {
   border-radius: 50%;
 }
 
@@ -122,11 +124,13 @@
   padding: 15px;
 }
 
-.eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-on {
+.eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-on,
+.eael-post-grid .eael-entry-wrapper > .eael-entry-header-after .eael-entry-meta span.eael-posted-on {
   padding-left: 5px;
 }
 
-.eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-on::before {
+.eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-on::before,
+.eael-post-grid .eael-entry-wrapper > .eael-entry-header-after .eael-entry-meta span.eael-posted-on::before {
   content: "\f111";
   font-family: "Font Awesome 5 Free";
   font-weight: 700;
