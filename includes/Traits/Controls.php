@@ -1315,7 +1315,6 @@ trait Controls
                         'return_value' => 'yes',
                         'default' => 'yes',
                         'condition' => [
-                            'meta_position' => 'meta-entry-footer',
                             'eael_show_meta' => 'yes',
                             'eael_post_grid_preset_style' => '',
                         ],
@@ -1349,7 +1348,6 @@ trait Controls
                         'return_value' => 'yes',
                         'default' => '',
                         'condition' => [
-                            'meta_position' => 'meta-entry-footer',
                             'eael_show_meta' => 'yes',
                             'eael_post_grid_preset_style' => 'two',
                         ],
@@ -1366,7 +1364,6 @@ trait Controls
                         'return_value' => 'yes',
                         'default' => '',
                         'condition' => [
-                            'meta_position' => 'meta-entry-footer',
                             'eael_show_meta' => 'yes',
                             'eael_post_grid_preset_style' => 'three',
                         ],
