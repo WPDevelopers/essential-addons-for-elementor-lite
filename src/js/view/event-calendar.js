@@ -17,7 +17,6 @@ var EventCalendar = function ($scope, $) {
 		$scope[0].querySelector(".eael-event-calendar-cls"), {
 			editable: false,
 			selectable: false,
-			draggable: false,
 			firstDay: firstDay,
 			eventTimeFormat: {
 				hour: "2-digit",
@@ -31,20 +30,12 @@ var EventCalendar = function ($scope, $) {
 				end: "timeGridDay,timeGridWeek,dayGridMonth,listMonth",
 			},
 			events: eventAll,
-			selectHelper: true,
 			locale: locale,
-			eventLimit: 3,
+			dayMaxEventRows: 3,
 			initialView: defaultView,
 			initialDate: defaultDate,
-			eventClassNames: function(arg) {
-				console.log(arg, 'eventClassNames');
-				if (arg.event.extendedProps.isUrgent) {
-					return [ 'urgent sssss' ]
-				}
-			},
-			eventContent: function(arg) {
-				console.log(arg, 'eventContent');
-			},
+			eventClassNames: function(info) {},
+			eventContent: function(info) {},
 			eventDidMount: function(info) {
 				var element = $(info.el),
 					event = info.event;
@@ -54,29 +45,25 @@ var EventCalendar = function ($scope, $) {
 					event.extendedProps.eventHasComplete !== undefined &&
 					event.extendedProps.eventHasComplete === "yes"
 				) {
-					element
-						.find("div.fc-content .fc-title")
-						.addClass("eael-event-completed");
+					element.find("div.fc-content .fc-title").addClass("eael-event-completed");
 					element.find("td.fc-list-item-title").addClass("eael-event-completed");
 				}
-				translate.today =
-					info.event._context.dateEnv.locale.options.buttonText.today;
-				if ( event.extendedProps.is_redirect == 'yes' ) {
-					element.attr("href", event.url);
+				translate.today = info.event._context.dateEnv.locale.options.buttonText.today;
 
-					console.log(info,info.event.extendedProps, 'eventDidMount');
-					if (event.extendedProps.external === "on") {
+				if ( event._def.extendedProps.is_redirect == 'yes' ) {
+					element.attr("href", event.url);
+					if (event._def.extendedProps.external === "on") {
 						element.attr("target", "_blank");
 						element.find("td.fc-list-item-title a").attr("target", "_blank");
 					}
 
-					if (event.extendedProps.nofollow === "on") {
+					if (event._def.extendedProps.nofollow === "on") {
 						element.attr("rel", "nofollow");
 						element.find("td.fc-list-item-title a").attr("rel", "nofollow");
 					}
 
-					if (event.extendedProps.custom_attributes != '' ) {
-						$.each(event.extendedProps.custom_attributes, function(index,item){
+					if (event._def.extendedProps.custom_attributes != '' ) {
+						$.each(event._def.extendedProps.custom_attributes, function(index,item){
 							element.attr(item.key, item.value);
 							element.find("td.fc-list-item-title a").attr(item.key, item.value);
 						});
@@ -251,9 +238,7 @@ var EventCalendar = function ($scope, $) {
 					});
 				}
 			},
-			eventWillUnmount: function(arg) {
-				console.log(arg, 'eventWillUnmount');
-			}
+			eventWillUnmount: function(arg) {}
 		});
 
 	CloseButton.on("click", function (event) {
