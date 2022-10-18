@@ -350,7 +350,7 @@ class Twitter_Feed extends Widget_Base
         $this->start_controls_section(
             'section_pagination',
             [
-                'label' => __('Load More', 'essential-addons-for-elementor-lite'),
+                'label' => __('Load More Button', 'essential-addons-for-elementor-lite'),
             ]
         );
         
@@ -370,7 +370,7 @@ class Twitter_Feed extends Widget_Base
                 'label' => __('Posts Per Page', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic'   => ['active' => true],
-                'default' => 10,
+                'default' => 6,
                 'condition' => [
                     'pagination' => 'yes',
                 ],
