@@ -67,6 +67,11 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                     }
 
                     if ($settings['meta_position'] == 'meta-entry-header') {
+                        echo '<div class="eael-entry-header-after">';
+                        if ($settings['eael_show_avatar'] === 'yes') {
+                            echo '<div class="eael-author-avatar"><a href="' . get_author_posts_url(get_the_author_meta('ID')) . '">' . get_avatar(get_the_author_meta('ID'), 96) . '</a></div>';
+                        }
+
                         if ($settings['eael_show_meta']) {
                             echo '<div class="eael-entry-meta">';
                             if ($settings['eael_show_author'] === 'yes') {
@@ -77,6 +82,8 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                             }
                             echo '</div>';
                         }
+
+                        echo '</div>';
                     }
 
                     if ($settings['eael_show_excerpt'] || $settings['eael_show_read_more_button']) {
@@ -287,6 +294,11 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             echo '</' . $title_tag . '></header>';
         }
         if ($settings['meta_position'] == 'meta-entry-header') {
+            echo '<div class="eael-entry-header-after">';
+            if ($settings['eael_show_avatar'] === 'yes') {
+                echo '<div class="eael-author-avatar"><a href="' . get_author_posts_url(get_the_author_meta('ID')) . '">' . get_avatar(get_the_author_meta('ID'), 96) . '</a></div>';
+            }
+
             if ($settings['eael_show_meta']) {
                 echo '<div class="eael-entry-meta">';
                 if ($settings['eael_show_author'] === 'yes') {
@@ -297,6 +309,8 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                 }
                 echo '</div>';
             }
+
+            echo '</div>';
         }
 
         if ($settings['eael_show_excerpt'] || $settings['eael_show_read_more_button']) {
