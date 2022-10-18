@@ -31,41 +31,43 @@ var SimpleMenu = function ($scope, $) {
     let $hamburger_max_width = getHamburgerMaxWidth($hamburger_breakpoints, $hamburger_device)
     var $fullWidth = $('.eael-simple-menu--stretch');
     
-    // insert indicator
-    if($indicator_icon == 'svg') {
-        $('.eael-simple-menu > li.menu-item-has-children', $scope).each(
-            function () {
-                $('> a', $(this)).append(
-                    '<span class="indicator-svg">' + $indicator_class + '</span>'
-                )
-            }
-        )
-    } else {
-        $('.eael-simple-menu > li.menu-item-has-children', $scope).each(
-            function () {
-                $('> a', $(this)).append(
-                    '<span class="' + $indicator_class + '"></span>'
-                )
-            }
-        )
-    }
+    if($horizontal){
+        // insert indicator
+        if($indicator_icon == 'svg') {
+            $('.eael-simple-menu > li.menu-item-has-children', $scope).each(
+                function () {
+                    $('> a', $(this)).append(
+                        '<span class="indicator-svg">' + $indicator_class + '</span>'
+                    )
+                }
+            )
+        } else {
+            $('.eael-simple-menu > li.menu-item-has-children', $scope).each(
+                function () {
+                    $('> a', $(this)).append(
+                        '<span class="' + $indicator_class + '"></span>'
+                    )
+                }
+            )
+        }
 
-    if($dropdown_indicator_icon == 'svg') {
-        $('.eael-simple-menu > li ul li.menu-item-has-children', $scope).each(
-            function () {
-                $('> a', $(this)).append(
-                    '<span class="dropdown-indicator-svg">' + $dropdown_indicator_class + '</span>'
-                )
-            }
-        )
-    }else {
-        $('.eael-simple-menu > li ul li.menu-item-has-children', $scope).each(
-            function () {
-                $('> a', $(this)).append(
-                    '<span class="' + $dropdown_indicator_class + '"></span>'
-                )
-            }
-        )
+        if($dropdown_indicator_icon == 'svg') {
+            $('.eael-simple-menu > li ul li.menu-item-has-children', $scope).each(
+                function () {
+                    $('> a', $(this)).append(
+                        '<span class="dropdown-indicator-svg">' + $dropdown_indicator_class + '</span>'
+                    )
+                }
+            )
+        }else {
+            $('.eael-simple-menu > li ul li.menu-item-has-children', $scope).each(
+                function () {
+                    $('> a', $(this)).append(
+                        '<span class="' + $dropdown_indicator_class + '"></span>'
+                    )
+                }
+            )
+        }
     }
 
     // insert responsive menu toggle, text
