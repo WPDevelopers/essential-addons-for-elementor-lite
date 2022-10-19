@@ -37,7 +37,7 @@
         } else if (isPrev) {
             currentPage.prev().trigger('click');
         }
-    }).on('click', '.eael-gb-eb-never-show', function () {
+    }).on('click', 'button.eael-gb-eb-never-show', function () {
         let $this = $(this),
             nonce = $this.data('nonce');
 
