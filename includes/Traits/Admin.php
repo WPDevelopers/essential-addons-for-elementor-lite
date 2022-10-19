@@ -277,14 +277,14 @@ trait Admin {
 		}
 
 		$screen           = get_current_screen();
-		$is_el_library    = ! empty( $_GET['post_type'] ) && $_GET['post_type'] === 'elementor_library';
+		$is_exclude       = ! empty( $_GET['post_type'] ) && in_array( $_GET['post_type'], [ 'elementor_library', 'product' ] );
 		$ajax_url         = admin_url( 'admin-ajax.php' );
 		$nonce            = wp_create_nonce( 'essential-addons-elementor' );
 		$eb_not_installed = HelperClass::get_local_plugin_data( 'essential-blocks/essential-blocks.php' ) === false;
 		$action           = $eb_not_installed ? 'install' : 'activate';
 		$button_title     = $eb_not_installed ? esc_html__( 'Install Essential Blocks', 'essential-addons-for-elementor-lite' ) : esc_html__( 'Activate', 'essential-addons-for-elementor-lite' );
 
-		if ( $screen->parent_base !== 'edit' || $is_el_library ) {
+		if ( $screen->parent_base !== 'edit' || $is_exclude ) {
 			return;
 		}
 		?>
