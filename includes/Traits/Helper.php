@@ -471,7 +471,6 @@ trait Helper
 	/**
 	 * remove_admin_notice
      *
-     * Added admin notice which is basically uses for display new promotion message
      *
      * @return void
 	 */
@@ -482,9 +481,14 @@ trait Helper
 			remove_all_actions( 'user_admin_notices' );
 			remove_all_actions( 'admin_notices' );
 
-			if ( get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG ) {
-				add_action( 'admin_notices', array( $this, 'promotion_message_on_admin_screen' ) );
+			if ( ! did_action( 'elementor/loaded' ) ) {
+				add_action( 'admin_notices', array( $this, 'elementor_not_loaded' ) );
 			}
+
+//			/*Added admin notice which is basically uses for display new promotion message*/
+//			if ( get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG ) {
+//				add_action( 'admin_notices', array( $this, 'promotion_message_on_admin_screen' ) );
+//			}
 		}
 	}
 
