@@ -139,16 +139,31 @@
 }
 
 .eael-gb-eb-popup .eael-gb-eb-content-info button {
+    display: block;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
     background: #2673FF;
 }
 
+.eael-gb-eb-popup .eael-gb-eb-content-info button.eael-gb-eb-never-show {
+    background: transparent;
+    border: transparent;
+    font-size: 13px;
+    color: #6A72A5;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 10px;
+}
+
 .eael-gb-eb-popup .eael-gb-eb-footer {
     padding: 25px 30px;
     display: flex;
     justify-content: space-between;
+}
+
+.eael-gb-eb-popup .--page-1 .eael-gb-eb-footer {
+    justify-content: flex-end;
 }
 
 .eael-gb-eb-popup .eael-gb-eb-footer button {
@@ -171,7 +186,6 @@
     text-decoration: underline;
 }
 
-.eael-gb-eb-popup .eael-gb-eb-footer button.eael-gb-eb-never-show,
 .eael-gb-eb-popup .eael-gb-eb-footer button.eael-gb-eb-install,
 .eael-gb-eb-popup .--page-1 .eael-gb-eb-footer button.eael-gb-eb-prev,
 .eael-gb-eb-popup .--page-5 .eael-gb-eb-footer button.eael-gb-eb-prev,
@@ -179,8 +193,6 @@
     display: none;
 }
 
-.eael-gb-eb-popup .--page-1 .eael-gb-eb-footer button.eael-gb-eb-never-show,
-.eael-gb-eb-popup .--page-5 .eael-gb-eb-footer button.eael-gb-eb-never-show,
 .eael-gb-eb-popup .--page-5 .eael-gb-eb-footer button.eael-gb-eb-install {
     display: block;
 }

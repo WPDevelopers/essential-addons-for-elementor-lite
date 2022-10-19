@@ -511,16 +511,16 @@ trait Helper
 	}
 
 	public function essential_blocks_promo_admin_js_template() {
-		$eb_logo        = EAEL_PLUGIN_URL . 'assets/admin/images/eb-white.svg';
-		$eb_promo_cross = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/cross.svg';
-		$eb_promo_img1  = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img1.gif';
-		$eb_promo_img2  = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img2.gif';
-		$eb_promo_img3  = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img3.gif';
-		$eb_promo_img4  = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img4.gif';
-		$eb_promo_img5  = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img5.png';
-
+		$eb_logo          = EAEL_PLUGIN_URL . 'assets/admin/images/eb-white.svg';
+		$eb_promo_cross   = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/cross.svg';
+		$eb_promo_img1    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img1.gif';
+		$eb_promo_img2    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img2.gif';
+		$eb_promo_img3    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img3.gif';
+		$eb_promo_img4    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img4.gif';
+		$eb_promo_img5    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img5.png';
 		$eb_not_installed = HelperClass::get_local_plugin_data( 'essential-blocks/essential-blocks.php' ) === false;
 		$action           = $eb_not_installed ? 'install' : 'activate';
+		$nonce            = wp_create_nonce( 'essential-addons-elementor' );
 		?>
         <script id="eael-gb-eb-button-template" type="text/html">
             <button id="eael-eb-popup-button" type="button" class="components-button is-primary">
@@ -552,7 +552,6 @@ trait Helper
                         </div>
                     </div>
                     <div class="eael-gb-eb-footer">
-                        <button class="eael-gb-eb-never-show" data-nonce="<?php echo esc_attr( wp_create_nonce( 'essential-addons-elementor' ) ); ?>"><?php esc_html_e( 'Never Show Again', 'essential-addons-for-elementor-lite' ); ?></button>
                         <button class="eael-gb-eb-prev"><?php esc_html_e( 'Previous', 'essential-addons-for-elementor-lite' ); ?></button>
                         <button class="eael-gb-eb-next"><?php esc_html_e( 'Next', 'essential-addons-for-elementor-lite' ); ?></button>
                     </div>
@@ -616,7 +615,8 @@ trait Helper
                 <div class="eael-gb-eb-content-info">
                     <h3><?php esc_html_e( 'Try Essential Blocks Today!', 'essential-addons-for-elementor-lite' ); ?></h3>
                     <p><?php printf( __( 'Want to get started with Essential Blocks now? Check out %s complete guides for each blocks %s to learn more about this ultimate block library for Gutenberg.', 'essential-addons-for-elementor-lite' ), '<a href="https://essential-blocks.com/demo" target="_blank">', '</a>' ) ?></p>
-                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo wp_create_nonce( 'essential-addons-elementor' ); ?>"><?php esc_html_e( 'Try Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></button>
+                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php esc_html_e( 'Try Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></button>
+                    <button class="eael-gb-eb-never-show" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php esc_html_e( 'Never Show Again', 'essential-addons-for-elementor-lite' ); ?></button>
                 </div>
             </div>
         </script>
