@@ -212,6 +212,7 @@ class Bootstrap
 	    if ( ! class_exists( 'EssentialBlocks' ) && ( ! get_option( 'eael_eb_optin_hide' ) || ! get_option( 'eael_gb_eb_popup_hide' ) ) ) {
 		    add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_promo_enqueue_scripts' ] );
 		    add_action( 'admin_notices', [ $this, 'essential_block_optin' ] );
+		    add_action( 'eael_admin_notices', [ $this, 'essential_block_special_optin' ], 100 );
 		    add_action( 'wp_ajax_eael_eb_optin_notice_dismiss', [ $this, 'eael_eb_optin_notice_dismiss' ] );
 		    add_action( 'wp_ajax_eael_gb_eb_popup_dismiss', [ $this, 'eael_gb_eb_popup_dismiss' ] );
 	    }
@@ -252,9 +253,10 @@ class Bootstrap
             // removed activation redirection temporarily
             // add_action('admin_init', array($this, 'redirect_on_activation'));
 
-            if (!did_action('elementor/loaded')) {
-                add_action('admin_notices', array($this, 'elementor_not_loaded'));
-            }
+	        if ( ! did_action( 'elementor/loaded' ) ) {
+		        add_action( 'admin_notices', array( $this, 'elementor_not_loaded' ) );
+		        add_action( 'eael_admin_notices', array( $this, 'elementor_not_loaded' ) );
+	        }
 
 	        add_action( 'in_admin_header', [ $this, 'remove_admin_notice' ] );
 
