@@ -143,7 +143,12 @@
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    background: #2673FF;
+    background: #6200ee;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-info button.eael-gb-eb-install[disabled],
+.eael-gb-eb-popup .eael-gb-eb-content-info button.eael-gb-eb-install:hover {
+    background: #7d42e3;
 }
 
 .eael-gb-eb-popup .eael-gb-eb-content-info button.eael-gb-eb-never-show {
