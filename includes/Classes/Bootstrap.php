@@ -209,7 +209,7 @@ class Bootstrap
         }
 
 	    //Essential Blocks Promo
-	    if ( true ) {
+	    if ( ! class_exists( 'EssentialBlocks' ) && ( ! get_option( 'eael_eb_optin_hide' ) || ! get_option( 'eael_gb_eb_popup_hide' ) ) ) {
 		    add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_promo_enqueue_scripts' ] );
 		    add_action( 'admin_notices', [ $this, 'essential_block_optin' ] );
 		    add_action( 'wp_ajax_eael_eb_optin_notice_dismiss', [ $this, 'eael_eb_optin_notice_dismiss' ] );
