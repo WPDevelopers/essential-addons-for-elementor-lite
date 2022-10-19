@@ -409,6 +409,10 @@ trait Admin {
 	}
 
 	public function essential_block_special_optin() {
+		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) || get_option( 'eael_eb_optin_hide' ) ) {
+			return;
+		}
+
 		$ajax_url         = admin_url( 'admin-ajax.php' );
 		$nonce            = wp_create_nonce( 'essential-addons-elementor' );
 		$eb_not_installed = HelperClass::get_local_plugin_data( 'essential-blocks/essential-blocks.php' ) === false;
