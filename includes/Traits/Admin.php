@@ -271,7 +271,7 @@ trait Admin {
 		return ( get_option( 'eael_admin_menu_notice' ) < self::EAEL_PROMOTION_FLAG && get_option( 'eael_admin_promotion' ) < self::EAEL_ADMIN_MENU_FLAG );
 	}
 
-	public function essential_block_integration() {
+	public function essential_block_optin() {
 		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) || get_option( 'eael_eb_optin_hide' ) ) {
 			return;
 		}
