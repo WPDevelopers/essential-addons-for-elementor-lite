@@ -308,9 +308,7 @@ trait Admin {
                     ev.preventDefault();
 
                     var button = $(this),
-                        action = button.data("action"),
-                        slug = button.data("slug"),
-                        basename = button.data("basename");
+                        action = button.data("action");
 
                     if ($.active && typeof action != "undefined") {
                         button.text("Waiting...").attr("disabled", true);
@@ -382,6 +380,136 @@ trait Admin {
                         });
                     }
                 }).on('click', '.eael-eb-optin-notice button.notice-dismiss', function (e) {
+                    e.preventDefault();
+
+                    var $notice_wrapper = $(this).closest('.eael-eb-optin-notice');
+
+                    $.ajax({
+                        url: "<?php echo esc_html( $ajax_url ); ?>",
+                        type: "POST",
+                        data: {
+                            action: "eael_eb_optin_notice_dismiss",
+                            security: "<?php echo esc_html( $nonce ); ?>",
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                $notice_wrapper.remove();
+                            } else {
+                                console.log(response.data);
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err.responseText);
+                        },
+                    });
+                });
+            })(jQuery);
+        </script>
+		<?php
+	}
+
+	public function essential_block_special_optin() {
+		$ajax_url         = admin_url( 'admin-ajax.php' );
+		$nonce            = wp_create_nonce( 'essential-addons-elementor' );
+		$eb_not_installed = HelperClass::get_local_plugin_data( 'essential-blocks/essential-blocks.php' ) === false;
+		$action           = $eb_not_installed ? 'install' : 'activate';
+		$button_title     = $eb_not_installed ? esc_html__( 'Install Essential Blocks', 'essential-addons-for-elementor-lite' ) : esc_html__( 'Activate', 'essential-addons-for-elementor-lite' );
+		?>
+        <div class="wpnotice-wrapper notice  notice-info is-dismissible eael-eb-special-optin-notice">
+            <div class="wpnotice-content-wrapper">
+                <div class="eael-eb-optin-logo">
+                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eb.svg' ); ?>" alt="">
+                </div>
+                <div class="eael-eb-optin">
+                    <h3><?php esc_html_e( 'Essential Blocks for Gutenberg', 'essential-addons-for-elementor-lite' ); ?></h3>
+                    <p><?php _e( 'Howdy, there 👋 Seems like you are using Gutenberg Editor on your website. Do you know you can get access to all the <strong>Essential Addons</strong> widgets for Gutenberg as well?', 'essential-addons-for-elementor-lite' ); ?></p>
+                    <p><?php _e( 'Try <strong>Essential Blocks for Gutenberg</strong> to make your WordPress design experience even more powerful 🚀 For more info, <a href="https://essential-blocks.com/demo" target="_blank">check out the demo</a>', 'essential-addons-for-elementor-lite' ); ?></p>
+                    <p>
+                        <a href="#" class="button-primary wpdeveloper-eb-plugin-installer" data-action="<?php echo esc_attr( $action ); ?>"><?php echo esc_html( $button_title ); ?></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // install/activate plugin
+            (function ($) {
+                $(document).on("click", ".wpdeveloper-eb-plugin-installer", function (ev) {
+                    ev.preventDefault();
+
+                    var button = $(this),
+                        action = button.data("action");
+
+                    if ($.active && typeof action != "undefined") {
+                        button.text("Waiting...").attr("disabled", true);
+
+                        setInterval(function () {
+                            if (!$.active) {
+                                button.attr("disabled", false).trigger("click");
+                            }
+                        }, 1000);
+                    }
+
+                    if (action === "install" && !$.active) {
+                        button.text("Installing...").attr("disabled", true);
+
+                        $.ajax({
+                            url: "<?php echo esc_html( $ajax_url ); ?>",
+                            type: "POST",
+                            data: {
+                                action: "wpdeveloper_install_plugin",
+                                security: "<?php echo esc_html( $nonce ); ?>",
+                                slug: "essential-blocks",
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    button.text("Activated");
+                                    button.data("action", null);
+
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 1000);
+                                } else {
+                                    button.text("Install");
+                                }
+
+                                button.attr("disabled", false);
+                            },
+                            error: function (err) {
+                                console.log(err.responseJSON);
+                            },
+                        });
+                    } else if (action === "activate" && !$.active) {
+                        button.text("Activating...").attr("disabled", true);
+
+                        $.ajax({
+                            url: "<?php echo esc_html( $ajax_url ); ?>",
+                            type: "POST",
+                            data: {
+                                action: "wpdeveloper_activate_plugin",
+                                security: "<?php echo esc_html( $nonce ); ?>",
+                                basename: "essential-blocks/essential-blocks.php",
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    button.text("Activated");
+                                    button.data("action", null);
+
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 1000);
+                                } else {
+                                    button.text("Activate");
+                                }
+
+                                button.attr("disabled", false);
+                            },
+                            error: function (err) {
+                                console.log(err.responseJSON);
+                            },
+                        });
+                    }
+                }).on('click', '.eael-eb-special-optin-notice button.notice-dismiss', function (e) {
                     e.preventDefault();
 
                     var $notice_wrapper = $(this).closest('.eael-eb-optin-notice');

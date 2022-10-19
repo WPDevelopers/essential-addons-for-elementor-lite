@@ -168,4 +168,32 @@ span.coupon-code {
     display:none;
 }
 
+/* Essential Blocks Special Optin*/
+.eael-eb-special-optin-notice {
+    border-left-color: #6200ee;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
 
+.eael-eb-special-optin-notice .wpnotice-content-wrapper {
+    display: flex;
+}
+
+.eael-eb-special-optin-notice .wpnotice-content-wrapper > div {
+    padding-top: 15px;
+}
+
+.eael-eb-special-optin-notice .eael-eb-optin-logo {
+    width: 50px;
+    text-align: center;
+    background: rgba(98, 0, 238, .1);
+}
+
+.eael-eb-special-optin-notice .eael-eb-optin-logo img {
+    width: 25px;
+}
+
+.eael-eb-special-optin-notice .eael-eb-optin {
+    padding-left: 10px;
+}

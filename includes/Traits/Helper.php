@@ -482,8 +482,10 @@ trait Helper
 			remove_all_actions( 'admin_notices' );
 
 			if ( ! did_action( 'elementor/loaded' ) ) {
-				add_action( 'admin_notices', array( $this, 'elementor_not_loaded' ) );
+				add_action( 'admin_notices', [ $this, 'elementor_not_loaded' ] );
 			}
+
+			add_action( 'admin_notices', [ $this, 'essential_block_special_optin' ] );
 
 //			/*Added admin notice which is basically uses for display new promotion message*/
 //			if ( get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG ) {
