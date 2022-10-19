@@ -197,3 +197,7 @@ span.coupon-code {
 .eael-eb-special-optin-notice .eael-eb-optin {
     padding-left: 10px;
 }
+
+.eael-eb-special-optin-notice .eael-eb-optin a.wpdeveloper-eb-plugin-installer {
+    background: #5E2EFF;
+}

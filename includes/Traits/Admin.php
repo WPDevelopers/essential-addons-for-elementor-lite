@@ -425,7 +425,7 @@ trait Admin {
                     <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eb.svg' ); ?>" alt="">
                 </div>
                 <div class="eael-eb-optin">
-                    <h3><?php esc_html_e( 'Essential Blocks for Gutenberg', 'essential-addons-for-elementor-lite' ); ?></h3>
+                    <h3><?php esc_html_e( 'Try Essential Blocks for Gutenberg', 'essential-addons-for-elementor-lite' ); ?></h3>
                     <p><?php _e( 'Howdy, there 👋 Seems like you are using Gutenberg Editor on your website. Do you know you can get access to all the <strong>Essential Addons</strong> widgets for Gutenberg as well?', 'essential-addons-for-elementor-lite' ); ?></p>
                     <p><?php _e( 'Try <strong>Essential Blocks for Gutenberg</strong> to make your WordPress design experience even more powerful 🚀 For more info, <a href="https://essential-blocks.com/demo" target="_blank">check out the demo</a>', 'essential-addons-for-elementor-lite' ); ?></p>
                     <p>
