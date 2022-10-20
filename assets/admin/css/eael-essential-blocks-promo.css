@@ -9,7 +9,14 @@
 }
 
 #eael-eb-popup-button {
-    background: #2673FF;
+    background: rgba(98, 0, 238, .1);
+    color: #5E2EFF;
+    transition: .3s;
+    border: 1px solid transparent;
+}
+
+#eael-eb-popup-button:hover {
+    border-color: #5E2EFF;
 }
 
 #eael-eb-popup-button img {
