@@ -428,6 +428,16 @@ trait Admin {
                 padding-left: 0;
             }
 
+            .eael-eb-special-optin-notice h3,
+            .eael-eb-special-optin-notice p,
+            .eael-eb-special-optin-notice a {
+                font-family: -apple-system,BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            }
+
+            .eael-eb-special-optin-notice a {
+                color: #2271b1;
+            }
+
             .eael-eb-special-optin-notice .wpnotice-content-wrapper {
                 display: flex;
             }
