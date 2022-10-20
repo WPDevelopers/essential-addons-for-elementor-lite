@@ -62,13 +62,17 @@
     padding: 3px 7px;
     border-radius: 5px;
     left: 50%;
+    bottom: calc(100% + 2px);
     transform: translateX(-50%);
     opacity: 0;
-    transition: .5s;
+    visibility: hidden;
+    transition: .3s;
 }
 
 .eael-gb-eb-popup .eael-gb-eb-header:hover .eael-gb-eb-tooltip {
     opacity: 1;
+    visibility: visible;
+    transition-delay: .7s;
 }
 
 .eael-gb-eb-popup .eael-gb-eb-content-image {
