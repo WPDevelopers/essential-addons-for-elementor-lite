@@ -239,6 +239,7 @@ class Event_Calendar extends Widget_Base
             'eael_event_image_show',
             [
                 'label' => __('Show Image', 'essential-addons-for-elementor-lite'),
+                'description' => __('The image is only visible in Monthly view.', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_block' => false,
                 'return_value' => 'yes',
@@ -266,6 +267,7 @@ class Event_Calendar extends Widget_Base
             'eael_event_background_image_show',
             [
                 'label' => __('Show Background Image', 'essential-addons-for-elementor-lite'),
+                'description' => __('The background image is only visible in Monthly view.', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_block' => false,
                 'return_value' => 'yes',
@@ -1573,7 +1575,16 @@ class Event_Calendar extends Widget_Base
                 ],
             ]
         );
-        
+
+        $this->add_responsive_control(
+            'day_event_image_style_heading',
+            [
+                'label' => esc_html__('Image', 'essential-addons-for-elementor-lite'),
+                'type'  => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
         $this->add_responsive_control(
             'day_event_image_border_radius',
             [
@@ -1586,6 +1597,87 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        $this->add_responsive_control(
+            'day_event_image_width',
+            [
+                'label' => esc_html__('Image Width', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .fc-day-grid-event img.eael-event-image' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'day_event_image_height',
+            [
+                'label' => esc_html__('Image Height', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .fc-day-grid-event img.eael-event-image' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'day_event_content_alignment',
+            [
+                'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-text-align-right',
+                    ],
+                ],
+                'toggle' => true,
+                'selectors' => [
+                    '{{WRAPPER}} .fc-day-grid-event .fc-content' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .fc-day-grid-event .fc-content p' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .fc-day-grid-event .fc-content img' => 'margin: auto;',
+                ],
+                'separator' => 'before',
+            ]
+        );
+        
         $this->end_controls_section();
 
         $this->start_controls_section(

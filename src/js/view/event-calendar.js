@@ -243,7 +243,7 @@ var EventCalendar = function ($scope, $) {
 
 				// Background Image and Event Image
 				if (event.extendedProps.image) {
-					element.find("div.fc-content").prepend("<img class='eael-event-image eael-d-block' src='" + event.extendedProps.image +"' width='auto' height='auto'>");
+					element.find("div.fc-content").prepend("<p class='eael-m-0'><img class='eael-event-image' src='" + event.extendedProps.image +"' width='auto' height='auto'></p>");
 				}
 				
 				if (event.extendedProps.backgroundImage) {
