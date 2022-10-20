@@ -419,6 +419,41 @@ trait Admin {
 		$action           = $eb_not_installed ? 'install' : 'activate';
 		$button_title     = $eb_not_installed ? esc_html__( 'Install Essential Blocks', 'essential-addons-for-elementor-lite' ) : esc_html__( 'Activate', 'essential-addons-for-elementor-lite' );
 		?>
+        <style>
+            /* Essential Blocks Special Optin*/
+            .eael-eb-special-optin-notice {
+                border-left-color: #6200ee;
+                padding-top: 0;
+                padding-bottom: 0;
+                padding-left: 0;
+            }
+
+            .eael-eb-special-optin-notice .wpnotice-content-wrapper {
+                display: flex;
+            }
+
+            .eael-eb-special-optin-notice .wpnotice-content-wrapper > div {
+                padding-top: 15px;
+            }
+
+            .eael-eb-special-optin-notice .eael-eb-optin-logo {
+                width: 50px;
+                text-align: center;
+                background: rgba(98, 0, 238, .1);
+            }
+
+            .eael-eb-special-optin-notice .eael-eb-optin-logo img {
+                width: 25px;
+            }
+
+            .eael-eb-special-optin-notice .eael-eb-optin {
+                padding-left: 10px;
+            }
+
+            .eael-eb-special-optin-notice .eael-eb-optin a.wpdeveloper-eb-plugin-installer {
+                background: #5E2EFF;
+            }
+        </style>
         <div class="wpnotice-wrapper notice  notice-info is-dismissible eael-eb-special-optin-notice">
             <div class="wpnotice-content-wrapper">
                 <div class="eael-eb-optin-logo">
