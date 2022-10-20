@@ -128,7 +128,7 @@
                             location.reload();
                         }, 1000);
                     } else {
-                        button.text("Try Essential Blocks");
+                        button.text("Activate");
                     }
 
                     button.attr("disabled", false);
