@@ -94,10 +94,12 @@
                     if (response.success) {
                         button.text("Activated");
                         button.data("action", null);
+                        $('.eael-gb-eb-dismiss').trigger('click');
+                        $('#eael-eb-popup-button').remove();
 
                         setTimeout(function () {
                             location.reload();
-                        }, 1000);
+                        }, 500);
                     } else {
                         button.text("Try Essential Blocks");
                     }
@@ -123,10 +125,12 @@
                     if (response.success) {
                         button.text("Activated");
                         button.data("action", null);
+                        $('.eael-gb-eb-dismiss').trigger('click');
+                        $('#eael-eb-popup-button').remove();
 
                         setTimeout(function () {
                             location.reload();
-                        }, 1000);
+                        }, 500);
                     } else {
                         button.text("Activate");
                     }
