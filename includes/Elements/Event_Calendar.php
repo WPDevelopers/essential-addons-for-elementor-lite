@@ -1573,7 +1573,7 @@ class Event_Calendar extends Widget_Base
                 ],
             ]
         );
-        #ToDo add condition
+        
         $this->add_responsive_control(
             'day_event_image_border_radius',
             [
