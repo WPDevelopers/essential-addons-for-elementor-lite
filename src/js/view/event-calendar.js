@@ -41,12 +41,9 @@ var EventCalendar = function ($scope, $) {
 					event = info.event;
 				moment.locale(locale);
 				// when event is finished event text are cross
-				if (
-					event.extendedProps.eventHasComplete !== undefined &&
-					event.extendedProps.eventHasComplete === "yes"
-				) {
-					element.find("div.fc-content .fc-title").addClass("eael-event-completed");
-					element.find("td.fc-list-item-title").addClass("eael-event-completed");
+				// console.log(event._def.title, element.hasClass('fc-event-past'), element, event);
+				if ( element.hasClass('fc-event-past') ) {
+					element.find(".fc-event-title").addClass("eael-event-completed");
 				}
 				translate.today = info.event._context.dateEnv.locale.options.buttonText.today;
 
@@ -54,18 +51,15 @@ var EventCalendar = function ($scope, $) {
 					element.attr("href", event.url);
 					if (event._def.extendedProps.external === "on") {
 						element.attr("target", "_blank");
-						element.find("td.fc-list-item-title a").attr("target", "_blank");
 					}
 
 					if (event._def.extendedProps.nofollow === "on") {
 						element.attr("rel", "nofollow");
-						element.find("td.fc-list-item-title a").attr("rel", "nofollow");
 					}
 
 					if (event._def.extendedProps.custom_attributes != '' ) {
 						$.each(event._def.extendedProps.custom_attributes, function(index,item){
 							element.attr(item.key, item.value);
-							element.find("td.fc-list-item-title a").attr(item.key, item.value);
 						});
 					}
 
