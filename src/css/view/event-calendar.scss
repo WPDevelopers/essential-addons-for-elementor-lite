@@ -1,9 +1,14 @@
 .eael-event-calendar-wrapper {
 	font-family: Segoe UI;
-	.fc-row table {
-		margin: 0px !important;
+	.fc-event{
+		padding: 1px 5px;
 	}
-
+	.fc-timeGridWeek-view,
+	fc-timeGridDay-view{
+		.fc-event{
+			padding: 5px;
+		}
+	}
 	.fc {
 		table {
 			margin: auto;
