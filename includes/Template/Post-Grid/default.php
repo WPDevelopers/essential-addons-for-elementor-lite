@@ -116,10 +116,10 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                             if ( isset( $settings['eael_show_author_two'] ) && 'yes' === $settings['eael_show_author_two'] ) {
                                 echo '<span class="eael-posted-by style-two-footer">' . get_the_author_posts_link() . '</span>';
                             }
-                            if ($settings['eael_show_date'] === 'yes') {
+                            if ( 'yes' === $settings['eael_show_date'] ) {
                                 echo '<span class="eael-meta-posted-on"><i class="far fa-clock"></i><time datetime="' . get_the_date() . '">' . get_the_date() . '</time></span>';
                             }
-                            if ($settings['eael_show_post_terms'] === 'yes') {
+                            if ( 'yes' === $settings['eael_show_post_terms'] ) {
                                 if ($settings['eael_post_terms'] === 'category') {
                                     $terms = get_the_category();
                                 }
