@@ -83,7 +83,6 @@
 }
 
 .eael-post-grid .eael-entry-footer .eael-entry-meta {
-  padding-left: 8px;
   text-align: left;
 }
 
@@ -120,15 +119,13 @@
   display: block;
 }
 
-.eael-grid-post .eael-entry-wrapper,
-.eael-grid-post .eael-entry-footer,
-.eael-grid-post .eael-entry-header-after {
+.eael-grid-post .eael-entry-wrapper {
   padding: 15px;
 }
 
-.eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-on,
-.eael-post-grid .eael-entry-wrapper > .eael-entry-header-after .eael-entry-meta span.eael-posted-on {
-  padding-left: 5px;
+.eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-by,
+.eael-post-grid .eael-entry-wrapper > .eael-entry-header-after .eael-entry-meta span.eael-posted-by {
+  padding-right: 8px;
 }
 
 .eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-on::before,
@@ -677,7 +674,6 @@
 
 .eael-post-grid-style-two .eael-entry-meta .eael-posted-by.style-two-footer a {
   color: #929292;
-  margin-right: 7px;
 }
 
 .eael-post-grid-style-two .eael-entry-meta .post-meta-categories {
