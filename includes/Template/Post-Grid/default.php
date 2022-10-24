@@ -66,10 +66,8 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                         echo '</' . $title_tag . '></header>';
                     }
 
-                    $show_avatar_two = isset( $settings['eael_show_avatar_two'] ) && 'yes' === $settings['eael_show_avatar_two'] ? ' style-two ' : ' ';
-                    
                     if ($settings['meta_position'] == 'meta-entry-header') {
-                        echo '<div class="eael-entry-header-after ' . esc_attr( $show_avatar_two ) . '">';
+                        echo '<div class="eael-entry-header-after">';
                         if ( isset( $settings['eael_show_avatar_two'] ) && 'yes' === $settings['eael_show_avatar_two'] ) {
                             echo '<div class="eael-author-avatar"><a href="' . get_author_posts_url(get_the_author_meta('ID')) . '">' . get_avatar(get_the_author_meta('ID'), 96) . '</a></div>';
                         }
