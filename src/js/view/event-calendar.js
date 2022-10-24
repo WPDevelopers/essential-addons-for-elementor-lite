@@ -41,13 +41,15 @@ var EventCalendar = function ($scope, $) {
 					event = info.event;
 				moment.locale(locale);
 				// when event is finished event text are cross
-				// console.log(event._def.title, element.hasClass('fc-event-past'), element, event);
-				if ( element.hasClass('fc-event-past') ) {
+				if ( element.hasClass("fc-event-past") ) {
 					element.find(".fc-event-title").addClass("eael-event-completed");
 				}
 				translate.today = info.event._context.dateEnv.locale.options.buttonText.today;
 
-				if ( event._def.extendedProps.is_redirect == 'yes' ) {
+				element.attr("style", "color:"+ event.textColor +";background:"+ event.backgroundColor +";");
+				element.find(".fc-daygrid-event-dot").remove();
+
+				if ( event._def.extendedProps.is_redirect === 'yes' ) {
 					element.attr("href", event.url);
 					if (event._def.extendedProps.external === "on") {
 						element.attr("target", "_blank");
@@ -57,7 +59,7 @@ var EventCalendar = function ($scope, $) {
 						element.attr("rel", "nofollow");
 					}
 
-					if (event._def.extendedProps.custom_attributes != '' ) {
+					if (event._def.extendedProps.custom_attributes !== '' ) {
 						$.each(event._def.extendedProps.custom_attributes, function(index,item){
 							element.attr(item.key, item.value);
 						});
