@@ -94,72 +94,206 @@ class NFT_Gallery extends Widget_Base
         $this->end_controls_section();
     }
 
-    public function print_nft_gallery(){
+    public function print_nft_gallery()
+    {
         ob_start();
-        ?>
-        <div class="ep_nft_content_wrap ep_nft_grid nft_items preset-1">
-            <div class="ep_nft_item">
-                <div class="ep_nft_thumbnail"><img
-                        src="https://lh3.googleusercontent.com/z2cLJdA7S3i6y2GYHvMDhDTsmL0UtXzVaIdj7aXZ8Y2gr_2MxoPH1RIcJrUlwulmDggw4xMEcDrY_GL6eK6C9R-VvI7ZgpUm_EYn"
-                        alt="Angry Cat #3297"></div>
-                <div class="ep_nft_content">
-                    <h3 class="ep_nft_title">Angry Cat #3297</h3>
-                    <div class="ep_nft_content_body">
-                        <div class="ep_nft_owner_wrapper">
-                            <div class="ep_nft_creator"><img
-                                    src="https://i.seadn.io/gcs/files/856e56e379fcd78b5ad956a3eb2d7247.png?w=500&amp;auto=format"
-                                    alt="AngryCat_dev"><span>Created by <a target="_blank"
-                                        href="https://opensea.io/AngryCat_dev">AngryCat_dev</a></span>
+?>
+        <div class="eael-custom-css-wrapper">
+            <div class="eael-nft-gallery-wrapper">
+                <div class="eael-nft-gallery-items preset-1">
+                    <div class="columns is-multiline">
+
+                        <div class="column is-4">
+                            <div class="eael-nft-item">
+                                <!-- Thumbnail -->
+                                <div class="eael-nft-thumbnail">
+                                    <img src="https://lh3.googleusercontent.com/z2cLJdA7S3i6y2GYHvMDhDTsmL0UtXzVaIdj7aXZ8Y2gr_2MxoPH1RIcJrUlwulmDggw4xMEcDrY_GL6eK6C9R-VvI7ZgpUm_EYn" alt="Angry Cat #3297">
+                                </div>
+
+                                <!-- Content  -->
+                                <div class="eael-nft-content">
+                                    <!-- Title  -->
+                                    <h3 class="eael-nft-title">Angry Cat #3297</h3>
+
+                                    <!-- Owner -->
+                                    <div class="eael-nft-owner-wrapper">
+                                        <img src="https://i.seadn.io/gcs/files/856e56e379fcd78b5ad956a3eb2d7247.png" alt="AngryCat_dev">
+                                        <span>Owned by </span>
+                                        <a target="_blank" href="https://opensea.io/AngryCat_dev">AngryCat_dev</a>
+                                    </div>
+
+                                    <!-- Price -->
+                                    <div class="eael-nft-price-wrapper">
+                                        <span class="eael-nft-price-label">Price</span>
+                                        <span class="eael-nft-price-currency">
+                                            <svg width="1200" height="450" viewBox="0 0 256 417" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
+                                                <path fill="#343434" d="m127.961 0-2.795 9.5v275.668l2.795 2.79 127.962-75.638z"></path>
+                                                <path fill="#8C8C8C" d="M127.962 0 0 212.32l127.962 75.639V154.158z"></path>
+                                                <path fill="#3C3C3B" d="m127.961 312.187-1.575 1.92v98.199l1.575 4.6L256 236.587z">
+                                                </path>
+                                                <path fill="#8C8C8C" d="M127.962 416.905v-104.72L0 236.585z"></path>
+                                                <path fill="#141414" d="m127.961 287.958 127.96-75.637-127.96-58.162z"></path>
+                                                <path fill="#393939" d="m0 212.32 127.96 75.638v-133.8z"></path>
+                                            </svg>
+                                        </span>
+                                        <span class="eael-nft-price-amount">0</span>
+                                    </div>
+
+                                    <!-- Last Sale -->
+                                    <div class="eael-nft-last-sale-wrapper">
+                                        <span class="eael-nft-last-sale-label">Last Sale</span>
+                                        <span class="eael-nft-last-sale-currency">
+                                            <svg width="1200" height="450" viewBox="0 0 256 417" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
+                                                <path fill="#343434" d="m127.961 0-2.795 9.5v275.668l2.795 2.79 127.962-75.638z"></path>
+                                                <path fill="#8C8C8C" d="M127.962 0 0 212.32l127.962 75.639V154.158z"></path>
+                                                <path fill="#3C3C3B" d="m127.961 312.187-1.575 1.92v98.199l1.575 4.6L256 236.587z">
+                                                </path>
+                                                <path fill="#8C8C8C" d="M127.962 416.905v-104.72L0 236.585z"></path>
+                                                <path fill="#141414" d="m127.961 287.958 127.96-75.637-127.96-58.162z"></path>
+                                                <path fill="#393939" d="m0 212.32 127.96 75.638v-133.8z"></path>
+                                            </svg>
+                                        </span>
+                                        <span class="eael-nft-last-sale-amount">0.298</span>
+                                    </div>
+                                </div>
+
+                                <!-- Button -->
+                                <div class="eael-nft-button">
+                                    <a target="_blank" href="https://opensea.io/assets/ethereum/0xdcf68c8ebb18df1419c7dff17ed33505faf8a20c/9999">
+                                        View Details</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="ep_nft_price_wrapper">
 
-                            <div class="ep_nft_price ep_current_price">
-                                <span class="eb_nft_label">Price</span>
-                                <span class="eb_nft_currency">
-                                    <svg width="1200" height="450" viewBox="0 0 256 417" xmlns="http://www.w3.org/2000/svg"
-                                        preserveAspectRatio="xMidYMid">
-                                        <path fill="#343434" d="m127.961 0-2.795 9.5v275.668l2.795 2.79 127.962-75.638z"></path>
-                                        <path fill="#8C8C8C" d="M127.962 0 0 212.32l127.962 75.639V154.158z"></path>
-                                        <path fill="#3C3C3B" d="m127.961 312.187-1.575 1.92v98.199l1.575 4.6L256 236.587z">
-                                        </path>
-                                        <path fill="#8C8C8C" d="M127.962 416.905v-104.72L0 236.585z"></path>
-                                        <path fill="#141414" d="m127.961 287.958 127.96-75.637-127.96-58.162z"></path>
-                                        <path fill="#393939" d="m0 212.32 127.96 75.638v-133.8z"></path>
-                                    </svg>
-                                </span>
-                                <span class="eb_nft_price">0</span>
+                        <div class="column is-4">
+                            <div class="eael-nft-item">
+                                <!-- Thumbnail -->
+                                <div class="eael-nft-thumbnail">
+                                    <img src="https://lh3.googleusercontent.com/z2cLJdA7S3i6y2GYHvMDhDTsmL0UtXzVaIdj7aXZ8Y2gr_2MxoPH1RIcJrUlwulmDggw4xMEcDrY_GL6eK6C9R-VvI7ZgpUm_EYn" alt="Angry Cat #3297">
+                                </div>
+
+                                <!-- Content  -->
+                                <div class="eael-nft-content">
+                                    <!-- Title  -->
+                                    <h3 class="eael-nft-title">Angry Cat #3297</h3>
+
+                                    <!-- Owner -->
+                                    <div class="eael-nft-owner-wrapper">
+                                        <img src="https://i.seadn.io/gcs/files/856e56e379fcd78b5ad956a3eb2d7247.png?w=500&amp;auto=format" alt="AngryCat_dev">
+                                        <span>Created by </span>
+                                        <a target="_blank" href="https://opensea.io/AngryCat_dev">AngryCat_dev</a>
+                                    </div>
+
+                                    <!-- Price -->
+                                    <div class="eael-nft-price-wrapper">
+                                        <span class="eael-nft-price-label">Price</span>
+                                        <span class="eael-nft-price-currency">
+                                            <svg width="1200" height="450" viewBox="0 0 256 417" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
+                                                <path fill="#343434" d="m127.961 0-2.795 9.5v275.668l2.795 2.79 127.962-75.638z"></path>
+                                                <path fill="#8C8C8C" d="M127.962 0 0 212.32l127.962 75.639V154.158z"></path>
+                                                <path fill="#3C3C3B" d="m127.961 312.187-1.575 1.92v98.199l1.575 4.6L256 236.587z">
+                                                </path>
+                                                <path fill="#8C8C8C" d="M127.962 416.905v-104.72L0 236.585z"></path>
+                                                <path fill="#141414" d="m127.961 287.958 127.96-75.637-127.96-58.162z"></path>
+                                                <path fill="#393939" d="m0 212.32 127.96 75.638v-133.8z"></path>
+                                            </svg>
+                                        </span>
+                                        <span class="eael-nft-price-amount">0</span>
+                                    </div>
+
+                                    <!-- Last Sale -->
+                                    <div class="eael-nft-last-sale-wrapper">
+                                        <span class="eael-nft-last-sale-label">Last Sale</span>
+                                        <span class="eael-nft-last-sale-currency">
+                                            <svg width="1200" height="450" viewBox="0 0 256 417" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
+                                                <path fill="#343434" d="m127.961 0-2.795 9.5v275.668l2.795 2.79 127.962-75.638z"></path>
+                                                <path fill="#8C8C8C" d="M127.962 0 0 212.32l127.962 75.639V154.158z"></path>
+                                                <path fill="#3C3C3B" d="m127.961 312.187-1.575 1.92v98.199l1.575 4.6L256 236.587z">
+                                                </path>
+                                                <path fill="#8C8C8C" d="M127.962 416.905v-104.72L0 236.585z"></path>
+                                                <path fill="#141414" d="m127.961 287.958 127.96-75.637-127.96-58.162z"></path>
+                                                <path fill="#393939" d="m0 212.32 127.96 75.638v-133.8z"></path>
+                                            </svg>
+                                        </span>
+                                        <span class="eael-nft-last-sale-amount">0.298</span>
+                                    </div>
+                                </div>
+
+                                <!-- Button -->
+                                <div class="eael-nft-button">
+                                    <a target="_blank" href="https://opensea.io/assets/ethereum/0xdcf68c8ebb18df1419c7dff17ed33505faf8a20c/9999">
+                                        View Details</a>
+                                </div>
                             </div>
-
-
-                            <div class="ep_nft_price ep_nft_last_sale">
-                                <span class="eb_nft_label">Last Sale</span>
-                                <span class="eb_nft_currency">
-                                    <svg width="1200" height="450" viewBox="0 0 256 417" xmlns="http://www.w3.org/2000/svg"
-                                        preserveAspectRatio="xMidYMid">
-                                        <path fill="#343434" d="m127.961 0-2.795 9.5v275.668l2.795 2.79 127.962-75.638z"></path>
-                                        <path fill="#8C8C8C" d="M127.962 0 0 212.32l127.962 75.639V154.158z"></path>
-                                        <path fill="#3C3C3B" d="m127.961 312.187-1.575 1.92v98.199l1.575 4.6L256 236.587z">
-                                        </path>
-                                        <path fill="#8C8C8C" d="M127.962 416.905v-104.72L0 236.585z"></path>
-                                        <path fill="#141414" d="m127.961 287.958 127.96-75.637-127.96-58.162z"></path>
-                                        <path fill="#393939" d="m0 212.32 127.96 75.638v-133.8z"></path>
-                                    </svg>
-                                </span>
-                                <span class="eb_nft_price">0.298</span>
-                            </div>
-
                         </div>
-                    </div>
-                    <div class="ep_nft_button">
-                        <a target="_blank"
-                            href="https://opensea.io/assets/ethereum/0xdcf68c8ebb18df1419c7dff17ed33505faf8a20c/9999">Sea
-                            Details</a>
+
+                        <div class="column is-4">
+                            <div class="eael-nft-item">
+                                <!-- Thumbnail -->
+                                <div class="eael-nft-thumbnail">
+                                    <img src="https://lh3.googleusercontent.com/z2cLJdA7S3i6y2GYHvMDhDTsmL0UtXzVaIdj7aXZ8Y2gr_2MxoPH1RIcJrUlwulmDggw4xMEcDrY_GL6eK6C9R-VvI7ZgpUm_EYn" alt="Angry Cat #3297">
+                                </div>
+
+                                <!-- Content  -->
+                                <div class="eael-nft-content">
+                                    <!-- Title  -->
+                                    <h3 class="eael-nft-title">Angry Cat #3297</h3>
+
+                                    <!-- Owner -->
+                                    <div class="eael-nft-owner-wrapper">
+                                        <img src="https://i.seadn.io/gcs/files/856e56e379fcd78b5ad956a3eb2d7247.png?w=500&amp;auto=format" alt="AngryCat_dev">
+                                        <span>Created by </span>
+                                        <a target="_blank" href="https://opensea.io/AngryCat_dev">AngryCat_dev</a>
+                                    </div>
+
+                                    <!-- Price -->
+                                    <div class="eael-nft-price-wrapper">
+                                        <span class="eael-nft-price-label">Price</span>
+                                        <span class="eael-nft-price-currency">
+                                            <svg width="1200" height="450" viewBox="0 0 256 417" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
+                                                <path fill="#343434" d="m127.961 0-2.795 9.5v275.668l2.795 2.79 127.962-75.638z"></path>
+                                                <path fill="#8C8C8C" d="M127.962 0 0 212.32l127.962 75.639V154.158z"></path>
+                                                <path fill="#3C3C3B" d="m127.961 312.187-1.575 1.92v98.199l1.575 4.6L256 236.587z">
+                                                </path>
+                                                <path fill="#8C8C8C" d="M127.962 416.905v-104.72L0 236.585z"></path>
+                                                <path fill="#141414" d="m127.961 287.958 127.96-75.637-127.96-58.162z"></path>
+                                                <path fill="#393939" d="m0 212.32 127.96 75.638v-133.8z"></path>
+                                            </svg>
+                                        </span>
+                                        <span class="eael-nft-price-amount">0</span>
+                                    </div>
+
+                                    <!-- Last Sale -->
+                                    <div class="eael-nft-last-sale-wrapper">
+                                        <span class="eael-nft-last-sale-label">Last Sale</span>
+                                        <span class="eael-nft-last-sale-currency">
+                                            <svg width="1200" height="450" viewBox="0 0 256 417" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
+                                                <path fill="#343434" d="m127.961 0-2.795 9.5v275.668l2.795 2.79 127.962-75.638z"></path>
+                                                <path fill="#8C8C8C" d="M127.962 0 0 212.32l127.962 75.639V154.158z"></path>
+                                                <path fill="#3C3C3B" d="m127.961 312.187-1.575 1.92v98.199l1.575 4.6L256 236.587z">
+                                                </path>
+                                                <path fill="#8C8C8C" d="M127.962 416.905v-104.72L0 236.585z"></path>
+                                                <path fill="#141414" d="m127.961 287.958 127.96-75.637-127.96-58.162z"></path>
+                                                <path fill="#393939" d="m0 212.32 127.96 75.638v-133.8z"></path>
+                                            </svg>
+                                        </span>
+                                        <span class="eael-nft-last-sale-amount">0.298</span>
+                                    </div>
+                                </div>
+
+                                <!-- Button -->
+                                <div class="eael-nft-button">
+                                    <a target="_blank" href="https://opensea.io/assets/ethereum/0xdcf68c8ebb18df1419c7dff17ed33505faf8a20c/9999">
+                                        View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.column  -->
                     </div>
                 </div>
             </div>
         </div>
-        <?php 
+<?php
         echo ob_get_clean();
     }
 
