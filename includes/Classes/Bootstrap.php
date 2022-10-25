@@ -217,6 +217,15 @@ class Bootstrap
             add_action( 'wp_ajax_templately_promo_status', array($this, 'templately_promo_status'));
         }
 
+	    //Essential Blocks Promo
+	    if ( ! class_exists( 'Classic_Editor' ) && ! class_exists( 'EssentialBlocks' ) && ( ! get_option( 'eael_eb_optin_hide' ) || ! get_option( 'eael_gb_eb_popup_hide' ) ) ) {
+		    add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_promo_enqueue_scripts' ] );
+		    add_action( 'admin_notices', [ $this, 'essential_block_optin' ] );
+		    add_action( 'eael_admin_notices', [ $this, 'essential_block_special_optin' ], 100 );
+		    add_action( 'wp_ajax_eael_eb_optin_notice_dismiss', [ $this, 'eael_eb_optin_notice_dismiss' ] );
+		    add_action( 'wp_ajax_eael_gb_eb_popup_dismiss', [ $this, 'eael_gb_eb_popup_dismiss' ] );
+	    }
+
 	    if( class_exists( 'woocommerce' ) ) {
 		    // quick view
 		    add_action( 'eael_woo_single_product_image', 'woocommerce_show_product_images', 20 );
@@ -253,18 +262,15 @@ class Bootstrap
             // removed activation redirection temporarily
             // add_action('admin_init', array($this, 'redirect_on_activation'));
 
-            if (!did_action('elementor/loaded')) {
-                add_action('admin_notices', array($this, 'elementor_not_loaded'));
-            }
+	        if ( ! did_action( 'elementor/loaded' ) ) {
+		        add_action( 'admin_notices', array( $this, 'elementor_not_loaded' ) );
+		        add_action( 'eael_admin_notices', array( $this, 'elementor_not_loaded' ) );
+	        }
 
-
-
-	        //add_action( 'in_admin_header', [ $this, 'remove_admin_notice' ] );
+	        add_action( 'in_admin_header', [ $this, 'remove_admin_notice' ] );
 
 	        //handle typeform auth token
 	        add_action('admin_init', [$this, 'typeform_auth_handle']);
-
-
 
 
 	        // On Editor - Register WooCommerce frontend hooks before the Editor init.

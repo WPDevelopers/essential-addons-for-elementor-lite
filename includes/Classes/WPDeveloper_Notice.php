@@ -224,10 +224,12 @@ class WPDeveloper_Notice {
                                     return;
                                 }
                                 add_action( 'admin_notices', array( $this, 'upsale_notice' ) );
+                                add_action( 'eael_admin_notices', array( $this, 'upsale_notice' ) );
                             }
                         } else {
                             if( $this->is_ok( 'message', $current_notice ) || $current_notice === 'opt_in' ) {
                                 add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+                                add_action( 'eael_admin_notices', array( $this, 'admin_notices' ) );
                             }
                         }
                     }
