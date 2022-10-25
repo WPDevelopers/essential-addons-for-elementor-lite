@@ -1270,6 +1270,21 @@ trait Controls
                         ],
                     ]
                 );
+                
+                $wb->add_control(
+                    'eael_post_terms_on_image_hover',
+                    [
+                        'label' => esc_html__('Show Terms on Image Hover', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::SWITCHER,
+                        'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+                        'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                        'return_value' => 'yes',
+                        'default' => 'yes',
+                        'condition' => [
+                            'eael_show_post_terms' => 'yes',
+                        ],
+                    ]
+                );
             }
 
         }
