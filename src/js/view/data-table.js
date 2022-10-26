@@ -72,6 +72,10 @@ var data_table_panel = function(panel, model, view) {
 };
 
 jQuery(window).on("elementor/frontend/init", function() {
+	if (ea.elementStatusCheck('eaelDataTable')) {
+		return false;
+	}
+
 	// export table
 	if (isEditMode) {
 		elementor.hooks.addAction("panel/open_editor/widget/eael-data-table", data_table_panel);
