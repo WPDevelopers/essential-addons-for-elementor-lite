@@ -470,10 +470,9 @@ trait Helper
 
 	/**
 	 * remove_admin_notice
-     *
-     * Added admin notice which is basically uses for display new promotion message
-     *
-     * @return void
+	 *
+	 *
+	 * @return void
 	 */
 	public function remove_admin_notice() {
 		$current_screen = get_current_screen();
@@ -482,9 +481,15 @@ trait Helper
 			remove_all_actions( 'user_admin_notices' );
 			remove_all_actions( 'admin_notices' );
 
-			if ( get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG ) {
-				add_action( 'admin_notices', array( $this, 'promotion_message_on_admin_screen' ) );
-			}
+            // To showing notice in EA settings page we have to use 'eael_admin_notices' action hook
+			add_action( 'admin_notices', function () {
+				do_action( 'eael_admin_notices' );
+			} );
+
+//			/*Added admin notice which is basically uses for display new promotion message*/
+//			if ( get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG ) {
+//				add_action( 'admin_notices', array( $this, 'promotion_message_on_admin_screen' ) );
+//			}
 		}
 	}
 
@@ -508,6 +513,120 @@ trait Helper
 	 */
 	public function is_activate_elementor() {
 		return defined( 'ELEMENTOR_VERSION' ) && class_exists( 'Elementor\Plugin' );
+	}
+
+	public function essential_blocks_promo_admin_js_template() {
+		$eb_logo          = EAEL_PLUGIN_URL . 'assets/admin/images/eb.svg';
+		$eb_promo_cross   = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/cross.svg';
+		$eb_promo_img1    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img1.gif';
+		$eb_promo_img2    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img2.gif';
+		$eb_promo_img3    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img3.gif';
+		$eb_promo_img4    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img4.gif';
+		$eb_promo_img5    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img5.png';
+		$eb_not_installed = HelperClass::get_local_plugin_data( 'essential-blocks/essential-blocks.php' ) === false;
+		$action           = $eb_not_installed ? 'install' : 'activate';
+		$button_title     = $eb_not_installed ? esc_html__( 'Try Essential Blocks', 'essential-addons-for-elementor-lite' ) : esc_html__( 'Activate', 'essential-addons-for-elementor-lite' );
+		$nonce            = wp_create_nonce( 'essential-addons-elementor' );
+		?>
+        <script id="eael-gb-eb-button-template" type="text/html">
+            <button id="eael-eb-popup-button" type="button" class="components-button is-primary">
+                <img width="20" src="<?php echo esc_url( $eb_logo ); ?>" alt=""><?php esc_html_e( 'Essential Blocks', 'essential-addons-for-elementor-lite' ); ?>
+            </button>
+        </script>
+
+        <script id="eael-gb-eb-popup-template" type="text/html">
+            <div class="eael-gb-eb-popup">
+                <div class="eael-gb-eb-header">
+                    <img src="<?php echo esc_url( $eb_promo_cross ); ?>" class="eael-gb-eb-dismiss" alt="">
+                    <div class="eael-gb-eb-tooltip"><?php esc_html_e( 'Close dialog', 'essential-addons-for-elementor-lite' ); ?></div>
+                </div>
+                <div class="eael-gb-eb-popup-content --page-1">
+                    <div class="eael-gb-eb-content">
+                        <div class="eael-gb-eb-content-image">
+                            <img src="<?php echo esc_url( $eb_promo_img1 ); ?>" alt="">
+                        </div>
+                        <div class="eael-gb-eb-content-pagination">
+                            <span class="active" data-page="1"></span>
+                            <span data-page="2"></span>
+                            <span data-page="3"></span>
+                            <span data-page="4"></span>
+                            <span data-page="5"></span>
+                        </div>
+                        <div class="eael-gb-eb-content-info">
+                            <h3><?php esc_html_e( 'Supercharge Your Gutenberg Experience With Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
+                            <p><?php esc_html_e( 'If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg, and build powerful websites with ease without any coding.', 'essential-addons-for-elementor-lite' ); ?></p>
+                        </div>
+                    </div>
+                    <div class="eael-gb-eb-footer">
+                        <button class="eael-gb-eb-prev"><?php esc_html_e( 'Previous', 'essential-addons-for-elementor-lite' ); ?></button>
+                        <button class="eael-gb-eb-next"><?php esc_html_e( 'Next', 'essential-addons-for-elementor-lite' ); ?></button>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <script id="eael-gb-eb-button-template-page-1" type="text/html">
+            <div>
+                <div class="eael-gb-eb-content-image">
+                    <img src="<?php echo esc_url( $eb_promo_img1 ); ?>" alt="">
+                </div>
+                <div class="eael-gb-eb-content-info">
+                    <h3><?php esc_html_e( 'Supercharge Your Gutenberg Experience With Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
+                    <p><?php esc_html_e( 'If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg, and build powerful websites with ease without any coding.', 'essential-addons-for-elementor-lite' ) ?></p>
+                </div>
+            </div>
+        </script>
+
+        <script id="eael-gb-eb-button-template-page-2" type="text/html">
+            <div>
+                <div class="eael-gb-eb-content-image">
+                    <img src="<?php echo esc_url( $eb_promo_img2 ); ?>" alt="">
+                </div>
+                <div class="eael-gb-eb-content-info">
+                    <h3><?php esc_html_e( '35+ Amazing Gutenberg Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
+                    <p><?php esc_html_e( 'Create & design your WordPress websites just the way you want with more than 35 amazing, ready blocks from Essential Blocks for Gutenberg.', 'essential-addons-for-elementor-lite' ) ?></p>
+                </div>
+            </div>
+        </script>
+
+        <script id="eael-gb-eb-button-template-page-3" type="text/html">
+            <div>
+                <div class="eael-gb-eb-content-image">
+                    <img src="<?php echo esc_url( $eb_promo_img3 ); ?>" alt="">
+                </div>
+                <div class="eael-gb-eb-content-info">
+                    <h3><?php esc_html_e( 'Useful Block Control Option', 'essential-addons-for-elementor-lite' ); ?></h3>
+                    <p><?php esc_html_e( 'Get the fastest loading time and smoothest experience on your web page by enabling and disabling individual blocks as per your requirements.', 'essential-addons-for-elementor-lite' ) ?></p>
+                </div>
+            </div>
+        </script>
+
+        <script id="eael-gb-eb-button-template-page-4" type="text/html">
+            <div>
+                <div class="eael-gb-eb-content-image">
+                    <img src="<?php echo esc_url( $eb_promo_img4 ); ?>" alt="">
+                </div>
+                <div class="eael-gb-eb-content-info">
+                    <h3><?php esc_html_e( 'Endless Customization Options', 'essential-addons-for-elementor-lite' ); ?></h3>
+                    <p><?php esc_html_e( 'Design unique and creative layouts on your website using the endless customization of Essential Blocks with absolute ease and instantly grab attention.', 'essential-addons-for-elementor-lite' ) ?></p>
+                </div>
+            </div>
+        </script>
+
+        <script id="eael-gb-eb-button-template-page-5" type="text/html">
+            <div>
+                <div class="eael-gb-eb-content-image">
+                    <img src="<?php echo esc_url( $eb_promo_img5 ); ?>" alt="">
+                </div>
+                <div class="eael-gb-eb-content-info">
+                    <h3><?php esc_html_e( 'Try Essential Blocks Today!', 'essential-addons-for-elementor-lite' ); ?></h3>
+                    <p><?php printf( __( 'Want to get started with Essential Blocks now? Check out the %scomplete demos for each blocks%s to learn more about this ultimate block library for Gutenberg.', 'essential-addons-for-elementor-lite' ), '<a href="https://essential-blocks.com/demo" target="_blank">', '</a>' ) ?></p>
+                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
+                    <button class="eael-gb-eb-never-show" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php esc_html_e( 'Never Show Again', 'essential-addons-for-elementor-lite' ); ?></button>
+                </div>
+            </div>
+        </script>
+		<?php
 	}
 }
 

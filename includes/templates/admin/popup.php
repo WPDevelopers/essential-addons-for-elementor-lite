@@ -187,6 +187,23 @@
 
                     <div class="border__line"><span></span></div>
 
+                    <div class="eael-element__wrap eael-d-block eael-element__wrap-popup">
+                        <div class="eael-element__item">
+                            <div class="element__content">
+                                <h4><?php esc_html_e( 'Enable Custom Fields', 'essential-addons-for-elementor-lite' ); ?></h4>
+                                <div class="element__options">
+                                    <p class="element__icon">
+                                        <i class="eicon-info login-register-info-icon"></i>
+                                        <span class="tooltip-text"><?php esc_attr_e('Fields will be available on both the edit profile page and the EA Login | Register Form.', 'essential-addons-for-elementor-lite') ?></span>
+                                    </p>
+                                    <label class="eael-switch">
+                                        <input name="lr_custom_profile_fields" id="lr_custom_profile_fields" <?php if( 'on' === get_option( 'eael_custom_profile_fields' ) ) : ?> checked <?php endif; ?> class="eael-form__control eael-widget-item eael-elements-list" type="checkbox">  <span class="switch__box "></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <!-- <div class="border__line"><span></span></div> -->
                     <div class="modal__content">
                         <div class="eael__flex align__center justify__center">

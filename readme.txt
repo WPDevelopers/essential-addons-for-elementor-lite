@@ -1,10 +1,10 @@
 === Essential Addons for Elementor ===
-Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, manzurahammed, sumaiyasiddika, rudlinkon, robinwpdeveloper
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, manzurahammed, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 6.0
-Requires PHP: 5.6
-Stable tag: 5.3.2
+Tested up to: 6.1
+Requires PHP: 7.0
+Stable tag: 5.4.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -241,6 +241,26 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.4.0 - 26/10/2022 =
+
+- Improved: EA Login / Register Form | Added "Forgot Password?" form 
+- Improved:  EA Login / Register Form | Added Custom Field
+- Improved: EA Advanced Tabs & Accordion | Option to set Offset 
+- Improved: EA Data Table | loading duplicate JS when used as a template
+- Improved: EA Event Calendar | Show more than 2 events for a specific day
+- Improved: EA Twitter Feed | Added “Load More” option
+- Improved: EA Facebook Feed | Added option to change Date format
+- Fixed: EA Filterable Gallery | Loading all the gallery images when "Load More" button is hit
+- Fixed: EA Interactive Circle | Not working properly on Safari browser
+- Fixed: EA Simple Menu | Not working properly on iPhone devices
+- Fixed: EA Facebook Feed | Feed not working with the public figure type pages
+- Fixed: EA Login / Register Form | Security token did not match error
+- Fixed: EA Facebook Feed | showing wrong page name with wrong Feed
+- Fixed: EA Product Grid | Design showing broken with Buddyboss theme
+- Fixed: EA Scroll to Top | Not working when Elementor's Scroll Snap is enabled
+- Fixed: EA Sticky Video | Mute option not working
+- Few minor bug fixes & improvements
 
 = 5.3.2 - 28/09/2022 =
 
