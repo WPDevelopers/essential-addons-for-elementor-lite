@@ -1212,6 +1212,21 @@ class Helper
 	            'id'    => [],
 	            'style' => [],
             ],
+            'ul' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+            ],
+            'ol' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+            ],
+            'li' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+            ],
         ];
     }
 
