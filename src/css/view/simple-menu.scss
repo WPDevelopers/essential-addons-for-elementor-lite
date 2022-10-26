@@ -2,10 +2,11 @@
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive {
     .eael-simple-menu-container{
         min-height: 50px;
-        overflow: auto;
+        overflow: visible;
 
         .eael-simple-menu {
-            &.eael-simple-menu-horizontal {
+            &.eael-simple-menu-horizontal,
+            &.eael-simple-menu-vertical {
                 position: absolute;
                 top: 50px;
                 background-color: #54595f;
@@ -93,7 +94,8 @@
 
         &.preset-1 {
             .eael-simple-menu {
-                &.eael-simple-menu-horizontal {
+                &.eael-simple-menu-horizontal,
+                &.eael-simple-menu-vertical {
                     background-color: #4E36A3;
                 }
             }
@@ -101,7 +103,8 @@
 
         &.preset-3 {
             .eael-simple-menu {
-                &.eael-simple-menu-horizontal {
+                &.eael-simple-menu-horizontal,
+                &.eael-simple-menu-vertical {
                     background-color: #15DBD5;
                 }
             }
@@ -109,7 +112,8 @@
 
         &.preset-2 {
             .eael-simple-menu {
-                &.eael-simple-menu-horizontal {
+                &.eael-simple-menu-horizontal,
+                &.eael-simple-menu-vertical {
                     background-color: #1BC1FF;
 
                     li.current-menu-ancestor>a,

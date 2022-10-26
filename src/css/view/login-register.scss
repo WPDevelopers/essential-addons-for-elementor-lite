@@ -18,6 +18,10 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
     display: none;
 }
 
+.eael-d-none {
+    display: none !important;
+}
+
 .d-ib {
     display: inline-block;
 }
@@ -194,8 +198,10 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
             }
 
             .form-dsc {
-                flex: 0 0 auto;
+                // flex: 0 0 auto;
+                flex: 1;
                 padding-left: 15px;
+                word-break: break-word;
             }
 
         }
@@ -416,6 +422,20 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
         }
     }
 
+}
+
+.eael-lr-form-wrapper {
+    .eael-lostpassword-form {
+        .eael-lr-btn {
+            width: unset;
+        }
+    }
+
+    .eael-resetpassword-form {
+        .eael-lr-btn {
+            width: unset;
+        }
+    }
 }
 
 .has-illustration {

@@ -3952,6 +3952,40 @@ button.button__greyBg:hover:disabled {
     position: relative;
 }
 
+.eael-d-block {
+    display: block !important;
+}
+
+.eael-element__wrap-popup {
+    padding: 0 20px 0 10px;
+}
+
+.eael-element__wrap-popup .login-register-info-icon {
+	font-size: 16px;
+	margin-top: 5px;
+}
+
+.eael-element__wrap-popup .eael-element__item .element__content .element__options .element__icon .tooltip-text::before {
+    left: 5%;
+}
+
+.eael-element__wrap.eael-element__wrap-popup .eael-element__item .element__content .element__options .element__icon .tooltip-text {
+    width: 390px;
+    max-width: 390px;
+    transform: translateX(-330px);
+    bottom: 150%;
+    margin-bottom: -5px;
+}
+
+.eael-element__wrap.eael-element__wrap-popup .eael-element__item {
+    box-shadow: none;
+    padding-bottom: 0;
+}
+
+.eael-element__wrap.eael-element__wrap-popup .eael-element__item .element__content .element__options .element__icon .tooltip-text::before {
+    left: 85%;
+}
+
 @media (max-width: 1599.98px) {
     .eael-element__wrap {
         -ms-grid-columns: (1fr) [ 4 ];
@@ -4857,6 +4891,10 @@ button.button__greyBg:hover:disabled {
     top: 16px;
     right: 15px;
     color: #9FAECB;
+}
+
+.eael-pb-0 {
+    padding-bottom: 0 !important;
 }
 
 .eael-modal__wrap .eael-modal__dialogue .eael-modal .modal__content {
