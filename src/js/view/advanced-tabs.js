@@ -3,6 +3,7 @@ ea.hooks.addAction("init", "ea", () => {
 		"frontend/element_ready/eael-adv-tabs.default",
 		function ($scope, $) {
 			const $currentTab = $scope.find('.eael-advance-tabs');
+			let $customIdOffsetTab = $currentTab.data('custom-id-offset');
 			if ( !$currentTab.attr( 'id' ) ) {
 				return false;
 			}
@@ -139,6 +140,15 @@ ea.hooks.addAction("init", "ea", () => {
 					ea.hooks.doAction("eventCalendar.reinit");
 				}
 			});
+
+			// If hashTag is not null then scroll to that hashTag smoothly
+			if( typeof hashTag !== 'undefined' && hashTag ){
+				let $customIdOffsetValTab = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
+				$('html, body').animate({
+					scrollTop: $("#"+hashTag).offset().top - $customIdOffsetValTab,
+				}, 300);
+			}
+
 		}
 	);
 });
