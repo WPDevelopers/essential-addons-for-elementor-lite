@@ -102,7 +102,8 @@ function ea_conditional_logic_type_title(value) {
         post_type: eael_select2_localize.cl_post_type,
         dynamic: eael_select2_localize.cl_dynamic,
         browser: eael_select2_localize.cl_browser,
-        date_time: eael_select2_localize.cl_date_time
+        date_time: eael_select2_localize.cl_date_time,
+        recurring_day: eael_select2_localize.cl_recurring_day
     };
 
     return labelValues[value] ? labelValues[value] : '';

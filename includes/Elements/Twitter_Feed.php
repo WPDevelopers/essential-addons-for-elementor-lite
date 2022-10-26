@@ -8,10 +8,12 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
+use Essential_Addons_Elementor\Classes\Helper;
 
 class Twitter_Feed extends Widget_Base
 {
@@ -340,6 +342,144 @@ class Twitter_Feed extends Widget_Base
             ]
         );
 
+        $this->end_controls_section();
+
+        /**
+         * Content Tab: Load More Button
+         */
+        $this->start_controls_section(
+            'section_pagination',
+            [
+                'label' => __('Load More Button', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+        
+        $this->add_control(
+            'pagination',
+            [
+                'label' => __('Show Load More', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => 'false',
+                'frontend_available' => true,
+            ]
+        );
+        
+        $this->add_control(
+            'eael_twitter_feed_posts_per_page',
+            [
+                'label' => __('Posts Per Page', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
+                'default' => 6,
+                'condition' => [
+                    'pagination' => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'load_more_text',
+            [
+                'label' => __('Button Text', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
+                'default' => __('Load More', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'pagination' => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'nomore_items_text',
+            [
+                'label' => __('No More Items Text', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
+                'default' => __('No more items!', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'pagination' => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'button_size',
+            [
+                'label' => __('Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'sm',
+                'options' => [
+                    'xs' => __('Extra Small', 'essential-addons-for-elementor-lite'),
+                    'sm' => __('Small', 'essential-addons-for-elementor-lite'),
+                    'md' => __('Medium', 'essential-addons-for-elementor-lite'),
+                    'lg' => __('Large', 'essential-addons-for-elementor-lite'),
+                    'xl' => __('Extra Large', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'load_more_icon_new',
+            [
+                'label' => __('Button Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::ICONS,
+                'fa4compatibility' => 'load_more_icon',
+                'condition' => [
+                    'pagination' => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'button_icon_position',
+            [
+                'label' => __('Icon Position', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'after',
+                'options' => [
+                    'after' => __('After', 'essential-addons-for-elementor-lite'),
+                    'before' => __('Before', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+                    'pagination' => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'load_more_align',
+            [
+                'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-left',
+                    ],
+                    'center' => [
+                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-center',
+                    ],
+                    'right' => [
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-right',
+                    ],
+                ],
+                'default' => 'center',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-loadmore-wrap' => 'text-align: {{VALUE}};',
+                ],
+                'condition' => [
+                    'pagination' => 'yes',
+                ],
+            ]
+        );
+        
         $this->end_controls_section();
 
         if (!apply_filters('eael/pro_enabled', false)) {
@@ -975,6 +1115,364 @@ class Twitter_Feed extends Widget_Base
         );
 
         $this->end_controls_section();
+
+        /**
+         * Style Tab: Load More Button
+         * -------------------------------------------------
+         */
+        $this->start_controls_section(
+            'section_loadmore_button_style',
+            [
+                'label' => __('Load More Button', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'button_margin_top',
+            [
+                'label' => __('Top Spacing', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 80,
+                        'step' => 1,
+                    ],
+                ],
+                'size_units' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-load-more' => 'margin-top: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        
+        $this->start_controls_tabs('tabs_eael_load_more_button_style');
+        
+        $this->start_controls_tab(
+            'tab_load_more_button_normal',
+            [
+                'label' => __('Normal', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'load_more_button_bg_color_normal',
+            [
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#333',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-load-more' => 'background-color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'load_more_button_text_color_normal',
+            [
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#fff',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-load-more' => 'color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'load_more_button_border_normal',
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
+                'placeholder' => '1px',
+                'default' => '1px',
+                'selector' => '{{WRAPPER}} .eael-twitter-feed-load-more',
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'load_more_button_border_radius',
+            [
+                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-load-more' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'load_more_button_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
+                'selector' => '{{WRAPPER}} .eael-twitter-feed-load-more .eael-twitter-feed-load-more-text',
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'load_more_button_icon_size',
+            [
+                'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'size' => 15,
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => 20,
+                        'max' => 500,
+                        'step' => 1,
+                    ]
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-load-more .eael-twitter-feed-load-more-icon' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-twitter-feed-load-more img.eael-twitter-feed-load-more-icon' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
+                ]
+            ]
+        );
+        
+        $this->add_control(
+            'load_more_button_icon_spacing',
+            [
+                'label' => __('Icon Spacing', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 50
+                    ]
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-load-more .fg-load-more-icon-left' => 'margin-right: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-twitter-feed-load-more .fg-load-more-icon-right' => 'margin-left: {{SIZE}}{{UNIT}};',
+                ]
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'load_more_button_padding',
+            [
+                'label' => __('Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-load-more' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'load_more_button_box_shadow',
+                'selector' => '{{WRAPPER}} .eael-twitter-feed-load-more',
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'load_more_button_icon_heading',
+            [
+                'label' => __('Button Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_icon!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'load_more_button_icon_margin',
+            [
+                'label' => __('Margin', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'placeholder' => [
+                    'top' => '',
+                    'right' => '',
+                    'bottom' => '',
+                    'left' => '',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-load-more .eael-twitter-feed-load-more-icon' => 'margin-top: {{TOP}}{{UNIT}}; margin-left: {{LEFT}}{{UNIT}}; margin-right: {{RIGHT}}{{UNIT}}; margin-bottom: {{BOTTOM}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_icon!' => '',
+                ],
+            ]
+        );
+        
+        $this->end_controls_tab();
+        
+        $this->start_controls_tab(
+            'tab_button_hover',
+            [
+                'label' => __('Hover', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'button_bg_color_hover',
+            [
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-load-more:hover' => 'background-color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'button_text_color_hover',
+            [
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-load-more:hover' => 'color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'button_border_color_hover',
+            [
+                'label' => __('Border Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-twitter-feed-load-more:hover' => 'border-color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'button_box_shadow_hover',
+                'selector' => '{{WRAPPER}} .eael-twitter-feed-load-more:hover',
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
+        
+        $this->end_controls_section();
+    }
+
+    protected function render_loadmore_button()
+    {
+        $settings = $this->get_settings_for_display();
+        $icon_migrated = isset($settings['__fa4_migrated']['load_more_icon_new']);
+        $icon_is_new = empty($settings['load_more_icon']);
+
+        $post_per_page = ! empty($settings['eael_twitter_feed_posts_per_page']) ? $settings['eael_twitter_feed_posts_per_page'] : 10;
+        $post_limit = ! empty( $settings['eael_twitter_feed_post_limit'] ) ? $settings['eael_twitter_feed_post_limit'] : 10;
+        $load_more_class = $post_per_page < $post_limit ? 'eael-d-block' : 'eael-d-none';
+        
+        $this->add_render_attribute('load-more-button', 'class', [
+            'eael-twitter-feed-load-more',
+            'elementor-button',
+            'elementor-size-' . $settings['button_size'],
+        ]);
+        
+        if ($settings['pagination'] == 'yes' && self::$twitter_feed_fetched_count > $post_per_page ) { ?>
+            <div class="eael-twitter-feed-loadmore-wrap">
+                <a href="#" <?php echo $this->get_render_attribute_string('load-more-button'); ?>>
+                    <span class="eael-btn-loader"></span>
+                    <?php if ($settings['button_icon_position'] == 'before') { ?>
+                        <?php if ($icon_is_new || $icon_migrated) { ?>
+                            <?php if (isset($settings['load_more_icon_new']['value']['url'])) : ?>
+                                <img class="eael-twitter-feed-load-more-icon fg-load-more-icon-left" src="<?php echo esc_url($settings['load_more_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['load_more_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                            <?php else : ?>
+                                <span class="eael-twitter-feed-load-more-icon fg-load-more-icon-left <?php echo esc_attr($settings['load_more_icon_new']['value']); ?>" aria-hidden="true"></span>
+                            <?php endif; ?>
+                        <?php } else { ?>
+                            <span class="eael-twitter-feed-load-more-icon fg-load-more-icon-left <?php echo esc_attr($settings['load_more_icon']); ?>" aria-hidden="true"></span>
+                        <?php } ?>
+                    <?php } ?>
+                    <span class="eael-twitter-feed-load-more-text">
+                        <?php echo Helper::eael_wp_kses($settings['load_more_text']); ?>
+                    </span>
+                    <?php if ($settings['button_icon_position'] == 'after') { ?>
+                        <?php if ($icon_is_new || $icon_migrated) { ?>
+                            <?php if (isset($settings['load_more_icon_new']['value']['url'])) : ?>
+                                <img class="eael-twitter-feed-load-more-icon fg-load-more-icon-right" src="<?php echo esc_url($settings['load_more_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['load_more_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                            <?php else : ?>
+                                <span class="eael-twitter-feed-load-more-icon fg-load-more-icon-right <?php echo esc_attr($settings['load_more_icon_new']['value']); ?>" aria-hidden="true"></span>
+                            <?php endif; ?>
+                        <?php } else { ?>
+                            <span class="eael-twitter-feed-load-more-icon fg-load-more-icon-right <?php echo esc_attr($settings['load_more_icon']); ?>" aria-hidden="true"></span>
+                        <?php } ?>
+                    <?php } ?>
+                </a>
+            </div>
+        <?php }
     }
 
     protected function render()
@@ -982,10 +1480,35 @@ class Twitter_Feed extends Widget_Base
         $settings = $this->get_settings_for_display();
         $feedcolumnspacing = $this->get_settings('eael_twitter_feed_column_spacing')['size'];
 
-        echo '<div class="eael-twitter-feed eael-twitter-feed-' . $this->get_id() . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type'] . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type_col_type'] . ' clearfix" data-gutter="' . $settings['eael_twitter_feed_column_spacing']['size'] . '">
-			' . $this->twitter_feed_render_items($this->get_id(), $settings) . '
-        </div>';
+        $no_more_items_text = Helper::eael_wp_kses($settings['nomore_items_text']);
+        $post_limit = ! empty( $settings['eael_twitter_feed_post_limit'] ) ? intval( $settings['eael_twitter_feed_post_limit'] ) : 10;
+        
+        $this->add_render_attribute('twitter-feed-wrap', [
+            'class' => [
+                'eael-twitter-feed',
+                'eael-twitter-feed-' . $this->get_id(),
+                'eael-twitter-feed-' . $settings['eael_twitter_feed_type'],
+                'eael-twitter-feed-' . $settings['eael_twitter_feed_type_col_type'],
+                'clearfix',
+            ],
+            'data-gutter' => $settings['eael_twitter_feed_column_spacing']['size'],
+            'data-posts-per-page' => $settings['eael_twitter_feed_posts_per_page'],
+            'data-total-posts' => $post_limit,
+            'data-nomore-item-text' => $no_more_items_text,
+            'data-next-page' => 2,
+        ]);
 
+        ?> 
+        <div>
+            <div <?php echo $this->get_render_attribute_string('twitter-feed-wrap') ?> >
+                <?php echo $this->twitter_feed_render_items($this->get_id(), $settings) ?>
+            </div>
+            <div class="clearfix">
+                <?php echo $this->render_loadmore_button() ?>
+            </div>
+        </div>
+
+        <?php 
         echo '<style>
             .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-2 .eael-twitter-feed-item {
                 width: calc(50% - ' . ceil($feedcolumnspacing / 2) . 'px);
