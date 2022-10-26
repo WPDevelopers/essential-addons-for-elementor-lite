@@ -671,6 +671,7 @@ trait Ajax_Handler {
 						$query->the_post();
 						$html .= HelperClass::include_with_variable( $file_path, [ 'settings' => $settings ] );
 					}
+					$html .= '<div class="eael-max-page" style="display:none;">'. ceil($query->found_posts / absint( $args['posts_per_page'] ) ) . '</div>';
 					printf( '%1$s', $html );
 					wp_reset_postdata();
 				}
@@ -878,6 +879,12 @@ trait Ajax_Handler {
 		}
 		if ( isset( $settings['lr_recaptcha_language_v3'] ) ) {
 			update_option( 'eael_recaptcha_language_v3', sanitize_text_field( $settings['lr_recaptcha_language_v3'] ) );
+		}
+
+		if ( isset( $settings['lr_custom_profile_fields'] ) ) {
+			update_option( 'eael_custom_profile_fields', sanitize_text_field( $settings['lr_custom_profile_fields'] ) );
+		} else {
+			update_option( 'eael_custom_profile_fields', '' );
 		}
 
 		//pro settings

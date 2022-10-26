@@ -1,4 +1,10 @@
 var TwitterFeedHandler = function($scope, $) {
+    let $eael_twitter_feed = $(".eael-twitter-feed", $scope);
+    let $posts_per_page = $eael_twitter_feed.data("posts-per-page");
+    let $total_posts = $eael_twitter_feed.data("total-posts");
+    let $nomore_item_text = $eael_twitter_feed.data("nomore-item-text");
+    let $next_page = $eael_twitter_feed.data("next-page");
+
     if (!isEditMode) {
         $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
         $settings = {
@@ -54,6 +60,21 @@ var TwitterFeedHandler = function($scope, $) {
             }
         });
     }
+
+    $scope.on("click", ".eael-twitter-feed-load-more", function (e) {
+        e.preventDefault();
+        $('.eael-twitter-feed-item.page-' + $next_page, $scope).removeClass('eael-d-none').addClass('eael-d-block');
+        $eael_twitter_feed.attr("data-next-page", $next_page + 1);
+
+        $(".eael-twitter-feed-masonry", $scope).isotope("layout");
+        
+        if( $('.eael-twitter-feed-item.page-' + $next_page, $scope).hasClass('eael-last-twitter-feed-item') ) {
+            $(".eael-twitter-feed-load-more", $scope).html( $nomore_item_text ).fadeOut('1500');
+        }
+
+        $next_page++;
+    });
+
 };
 
 jQuery(window).on("elementor/frontend/init", function() {

@@ -1212,6 +1212,21 @@ class Helper
 	            'id'    => [],
 	            'style' => [],
             ],
+            'ul' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+            ],
+            'ol' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+            ],
+            'li' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+            ],
         ];
     }
 
@@ -1264,6 +1279,32 @@ class Helper
 
 		return $output;
 	}
+    
+    /**
+     * Get product image src and Product gallery's first image src
+     * 
+     * @since 5.1.9
+     * @return array 
+     */
+    public static function eael_get_woo_product_gallery_image_srcs( $product, $image_size ){
+        $image_id = $product->get_image_id();
+        $image_gallery_ids = $product->get_gallery_image_ids();
+
+        $src = function_exists('wc_placeholder_img_src') ? wc_placeholder_img_src() : '';
+
+        if ( $image_id ) {
+            $src = wp_get_attachment_image_src( $image_id, $image_size );
+            $src = is_array($src) ? $src[0] : $src;
+        }
+
+        $src_hover = count( $image_gallery_ids ) ? wp_get_attachment_image_src( $image_gallery_ids[0], $image_size ) : '';
+        $src_hover = is_array($src_hover) ? $src_hover[0] : $src_hover;
+        
+        return [
+            'src' => $src,
+            'src_hover' => $src_hover,
+        ];
+    }
 
 	/**
 	 * Sanitize a 'relation' operator.
