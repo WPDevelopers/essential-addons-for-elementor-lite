@@ -193,7 +193,7 @@
                                 <h4><?php esc_html_e( 'Enable Custom Fields', 'essential-addons-for-elementor-lite' ); ?></h4>
                                 <div class="element__options">
                                     <p class="element__icon">
-                                        <i class="ea-admin-icon icon-doc"></i>
+                                        <i class="eicon-info login-register-info-icon"></i>
                                         <span class="tooltip-text"><?php esc_attr_e('Fields will be available on both the edit profile page and the EA Login | Register Form.', 'essential-addons-for-elementor-lite') ?></span>
                                     </p>
                                     <label class="eael-switch">
