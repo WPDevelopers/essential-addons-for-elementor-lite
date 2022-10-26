@@ -60,25 +60,25 @@ class Caldera_Forms extends Widget_Base
         /*-----------------------------------------------------------------------------------*/
         /*    Content Tab
         /*-----------------------------------------------------------------------------------*/
-        if (!class_exists('\Caldera_Forms')) {
-            $this->start_controls_section(
-                'eael_global_warning',
-                [
-                    'label' => __('Warning!', 'essential-addons-for-elementor-lite'),
-                ]
-            );
+	    if ( ! class_exists( '\Caldera_Forms' ) ) {
+		    $this->start_controls_section(
+			    'eael_global_warning',
+			    [
+				    'label'             => __( 'Warning!', 'essential-addons-for-elementor-lite'),
+			    ]
+		    );
 
-            $this->add_control(
-                'eael_global_warning_text',
-                [
-                    'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('<strong>Caldera Forms</strong> is not installed/activated on your site. Please install and activate <strong>Caldera Forms</strong> first.', 'essential-addons-for-elementor-lite'),
-                    'content_classes' => 'eael-warning',
-                ]
-            );
+		    $this->add_control(
+			    'eael_global_warning_text',
+			    [
+				    'type' => Controls_Manager::RAW_HTML,
+				    'raw' => __( '<strong>Caldera Forms</strong> has been closed as of April 5, 2022 and is not available for download. You can try the other Form plugins instead', 'essential-addons-for-elementor-lite'),
+				    'content_classes' => 'eael-warning',
+			    ]
+		    );
 
-            $this->end_controls_section();
-        } else {
+		    $this->end_controls_section();
+	    } else {
             /**
              * Content Tab: Caldera Forms
              * -------------------------------------------------
@@ -1478,9 +1478,11 @@ class Caldera_Forms extends Widget_Base
 
     protected function render()
     {
-        if (!class_exists('\Caldera_Forms')) {
-            return;
-        }
+	    if ( ! class_exists( '\Caldera_Forms' ) ) {
+		    printf( '<center>%s</center>', __( '<strong>Caldera Forms</strong> has been closed as of April 5, 2022 and is not available for download. You can try the other Form plugins instead', 'essential-addons-for-elementor-lite' ) );
+
+		    return;
+	    }
 
         $settings = $this->get_settings_for_display();
 
