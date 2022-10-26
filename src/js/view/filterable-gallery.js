@@ -94,7 +94,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 					let item_found = initData;
 					let index_list = $items =  [];
 
-					if (item_found === 0) {
+					if (item_found < $images_per_page) {
 						for (const [index, item] of fg_items.entries()) {
 							if (buttonFilter !== '' && buttonFilter !== '*') {
 								let element = $($(item)[0]);

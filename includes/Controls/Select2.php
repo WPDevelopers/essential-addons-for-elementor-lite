@@ -18,7 +18,7 @@ class Select2 extends Base_Data_Control
 
 	public function enqueue() {
 		wp_register_script( 'eael-select2', EAEL_PLUGIN_URL . 'assets/front-end/js/edit/ea-select2.js',
-			[ 'jquery-elementor-select2' ], '1.0.1', true );
+			[ 'jquery-elementor-select2' ], EAEL_PLUGIN_VERSION, true );
 		wp_localize_script(
 			'eael-select2',
 			'eael_select2_localize',
