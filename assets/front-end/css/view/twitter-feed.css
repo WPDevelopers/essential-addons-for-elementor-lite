@@ -25,6 +25,10 @@
   }
 }
 
+.eael-twitter-feed-item .page-1 {
+  display: block;
+}
+
 .eael-twitter-feed-item .eael-twitter-feed-item-inner {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -167,4 +171,12 @@
 .eael-twitter-feed-carousel.swiper-container .swiper-button-prev:after,
 .eael-twitter-feed-carousel.swiper-container .swiper-button-next:after {
   content: none;
+}
+
+.eael-d-block {
+  display: block;
+}
+
+.eael-d-none {
+  display: none;
 }

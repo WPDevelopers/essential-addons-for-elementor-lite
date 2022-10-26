@@ -8,7 +8,8 @@ ea.hooks.addAction("init", "ea", () => {
 			var $advanceAccordion = $scope.find(".eael-adv-accordion"),
 				$accordionHeader = $scope.find(".eael-accordion-header"),
 				$accordionType = $advanceAccordion.data("accordion-type"),
-				$accordionSpeed = $advanceAccordion.data("toogle-speed");
+				$accordionSpeed = $advanceAccordion.data("toogle-speed"),
+				$customIdOffset = $advanceAccordion.data("custom-id-offset");
 
 			// Open default actived tab
 			if (hashTag) {
@@ -70,6 +71,14 @@ ea.hooks.addAction("init", "ea", () => {
 				ea.hooks.doAction("widgets.reinit",$this.parent());
 				ea.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
 			});
+
+			// If hashTag is not null then scroll to that hashTag smoothly
+			if( typeof hashTag !== 'undefined' && hashTag ){
+				let $customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
+				$('html, body').animate({
+					scrollTop: $("#"+hashTag).offset().top - $customIdOffsetVal,
+				}, 300);
+			}
 		}
 	);
 });

@@ -50,6 +50,9 @@
 .eael-lr-d-none {
   display: none;
 }
+.eael-d-none {
+  display: none !important;
+}
 .d-ib {
   display: inline-block;
 }
@@ -231,10 +234,11 @@
           flex: 0 0 auto;
 }
 .eael-lr-form-wrapper .lr-form-header.header-inline .form-dsc {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 auto;
-          flex: 0 0 auto;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   padding-left: 15px;
+  word-break: break-word;
 }
 .eael-lr-form-wrapper .lr-form-header img {
   width: 100px;
@@ -430,6 +434,12 @@
   .eael-lr-form-wrapper input[type=checkbox].lr-toggle:disabled:not(:checked):after {
     opacity: 0.6;
   }
+}
+.eael-lr-form-wrapper .eael-lostpassword-form .eael-lr-btn {
+  width: unset;
+}
+.eael-lr-form-wrapper .eael-resetpassword-form .eael-lr-btn {
+  width: unset;
 }
 .has-illustration .eael-lr-form-wrapper.style-2 {
   width: 100%;

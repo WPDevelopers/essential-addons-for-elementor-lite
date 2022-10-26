@@ -187,6 +187,18 @@ class Adv_Accordion extends Widget_Base
         );
 
         $this->add_control(
+            'eael_adv_accordion_custom_id_offset',
+            [
+                'label'       => esc_html__('Custom ID offset', 'essential-addons-for-elementor-lite'),
+                'description' => esc_html__('Use offset to set the custom ID target scrolling position.', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::NUMBER,
+                'label_block' => false,
+                'default'     => 0,
+                'min'         => 0,
+            ]
+        );
+
+        $this->add_control(
             'eael_adv_accordion_faq_schema_show',
             [
                 'label'        => esc_html__('Enable FAQ Schema', 'essential-addons-for-elementor-lite'),
@@ -1091,6 +1103,10 @@ class Adv_Accordion extends Widget_Base
 
         $this->add_render_attribute('eael-adv-accordion', 'class', 'eael-adv-accordion');
         $this->add_render_attribute('eael-adv-accordion', 'id', 'eael-adv-accordion-' . esc_attr($this->get_id()));
+        
+        if( !empty($settings['eael_adv_accordion_custom_id_offset']) ){
+            $this->add_render_attribute('eael-adv-accordion', 'data-custom-id-offset', esc_attr( $settings['eael_adv_accordion_custom_id_offset'] ) );
+        }
 ?>
         <div <?php echo $this->get_render_attribute_string('eael-adv-accordion'); ?> <?php echo 'data-accordion-id="' . esc_attr($this->get_id()) . '"'; ?> <?php echo !empty($settings['eael_adv_accordion_type']) ? 'data-accordion-type="' . esc_attr($settings['eael_adv_accordion_type']) . '"' : 'accordion'; ?> <?php echo !empty($settings['eael_adv_accordion_toggle_speed']) ? 'data-toogle-speed="' . esc_attr($settings['eael_adv_accordion_toggle_speed']) . '"' : '300'; ?>>
     <?php foreach ($settings['eael_adv_accordion_tab'] as $index => $tab) {
