@@ -327,7 +327,7 @@ class WPDeveloper_Setup_Wizard {
                      alt="<?php _e( 'Logo', 'essential-addons-for-elementor-lite' ) ?>">
             </div>
             <div class="eael-quick-setup-title">
-				<?php printf( __( '%s <span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), 'Unlock', '2000+', 'Ready Templates Built With Elementor & Essential Addons From
+				<?php printf( __( '%s <span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), 'Unlock', '2500+', 'Ready Templates Built With Elementor & Essential Addons From
                     Templately.' ); ?>
             </div>
             <div class="eael-quick-setup-text">
@@ -477,6 +477,13 @@ class WPDeveloper_Setup_Wizard {
 				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/btl.svg',
 				'title'    => __( 'BetterLinks', 'essential-addons-for-elementor-lite' ),
 				'desc'     => __( 'Best Link Shortening tool to create, shorten and manage any URL to help you cross-promote your brands & products. Gather analytics reports, run successfully marketing campaigns easily & many more.', 'essential-addons-for-elementor-lite' ),
+			],
+			[
+				'slug'     => 'essential-blocks',
+				'basename' => 'essential-blocks/essential-blocks.php',
+				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/eb.svg',
+				'title'    => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
+				'desc'     => __( 'Enhance your Gutenberg experience with 35+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or posts design easier and prettier than ever before.', 'essential-addons-for-elementor-lite' ),
 			],
 		];
 	}
