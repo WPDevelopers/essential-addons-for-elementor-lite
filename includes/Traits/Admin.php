@@ -292,7 +292,7 @@ trait Admin {
             <div class="wpnotice-content-wrapper">
                 <div class="eael-eb-optin">
                     <p><?php _e( 'Howdy 👋 Seems like you are using Gutenberg Editor on your website. Do you know you can get access to all the <strong>Essential Addons</strong> widgets for Gutenberg as well?', 'essential-addons-for-elementor-lite' ); ?></p>
-                    <p><?php _e( 'Try <strong>Essential Blocks for Gutenberg</strong> to make your WordPress design experience even more powerful 🚀. For more info, <a href="https://essential-blocks.com/demo" target="_blank">check out the demo</a>.', 'essential-addons-for-elementor-lite' ); ?></p>
+                    <p><?php _e( 'Try <strong>Essential Blocks for Gutenberg</strong> to make your WordPress design experience even more powerful 🚀 For more info, <a href="https://essential-blocks.com/demo" target="_blank">check out the demo</a>.', 'essential-addons-for-elementor-lite' ); ?></p>
                     <p>
                         <a href="#" class="button-primary wpdeveloper-eb-plugin-installer"
                            data-action="<?php echo esc_attr( $action ); ?>"><?php echo esc_html( $button_title ); ?></a>
@@ -472,7 +472,7 @@ trait Admin {
                 <div class="eael-eb-optin">
                     <h3><?php esc_html_e( 'Try Essential Blocks for Gutenberg', 'essential-addons-for-elementor-lite' ); ?></h3>
                     <p><?php _e( 'Howdy 👋 Seems like you are using Gutenberg Editor on your website. Do you know you can get access to all the <strong>Essential Addons</strong> widgets for Gutenberg as well?', 'essential-addons-for-elementor-lite' ); ?></p>
-                    <p><?php _e( 'Try <strong>Essential Blocks for Gutenberg</strong> to make your WordPress design experience even more powerful 🚀. For more info, <a href="https://essential-blocks.com/demo" target="_blank">check out the demo</a>.', 'essential-addons-for-elementor-lite' ); ?></p>
+                    <p><?php _e( 'Try <strong>Essential Blocks for Gutenberg</strong> to make your WordPress design experience even more powerful 🚀 For more info, <a href="https://essential-blocks.com/demo" target="_blank">check out the demo</a>.', 'essential-addons-for-elementor-lite' ); ?></p>
                     <p>
                         <a href="#" class="button-primary wpdeveloper-eb-plugin-installer" data-action="<?php echo esc_attr( $action ); ?>"><?php echo esc_html( $button_title ); ?></a>
                     </p>
