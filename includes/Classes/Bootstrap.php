@@ -267,7 +267,7 @@ class Bootstrap
 		        add_action( 'eael_admin_notices', array( $this, 'elementor_not_loaded' ) );
 	        }
 
-	        add_action( 'in_admin_header', [ $this, 'remove_admin_notice' ] );
+	        add_action( 'in_admin_header', [ $this, 'remove_admin_notice' ], 99 );
 
 	        //handle typeform auth token
 	        add_action('admin_init', [$this, 'typeform_auth_handle']);
