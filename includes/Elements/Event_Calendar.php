@@ -1606,7 +1606,7 @@ class Event_Calendar extends Widget_Base
                 'range' => [
                     'px' => [
                         'min' => 0,
-                        'max' => 100,
+                        'max' => 500,
                     ],
                     'em' => [
                         'min' => 0,
@@ -1628,20 +1628,16 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => esc_html__('Image Height', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', 'em', '%'],
+                'size_units' => ['px', 'em'],
                 'range' => [
                     'px' => [
                         'min' => 0,
-                        'max' => 100,
+                        'max' => 500,
                     ],
                     'em' => [
                         'min' => 0,
                         'max' => 100,
-                    ],
-                    '%' => [
-                        'min' => 0,
-                        'max' => 100,
-                    ],
+                    ]
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .fc-day-grid-event img.eael-event-image' => 'height: {{SIZE}}{{UNIT}};',
