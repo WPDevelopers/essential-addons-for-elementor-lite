@@ -18,7 +18,7 @@ class Select2 extends Base_Data_Control
 
 	public function enqueue() {
 		wp_register_script( 'eael-select2', EAEL_PLUGIN_URL . 'assets/front-end/js/edit/ea-select2.js',
-			[ 'jquery-elementor-select2' ], '1.0.1', true );
+			[ 'jquery-elementor-select2' ], EAEL_PLUGIN_VERSION, true );
 		wp_localize_script(
 			'eael-select2',
 			'eael_select2_localize',
@@ -35,6 +35,7 @@ class Select2 extends Base_Data_Control
 				'cl_post_type'    => __( 'Post Type', 'essential-addons-for-elementor-lite' ),
 				'cl_browser'      => __( 'Browser', 'essential-addons-for-elementor-lite' ),
 				'cl_date_time'    => __( 'Date & Time', 'essential-addons-for-elementor-lite' ),
+				'cl_recurring_day'=> __( 'Recurring Day', 'essential-addons-for-elementor-lite' ),
 				'cl_dynamic'      => __( 'Dynamic Field', 'essential-addons-for-elementor-lite' ),
 			]
 		);
