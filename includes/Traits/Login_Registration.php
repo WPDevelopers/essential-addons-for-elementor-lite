@@ -100,8 +100,9 @@ trait Login_Registration {
                 exit();
             }
 		}
-
-		if ( ! wp_verify_nonce( $_POST['eael-login-nonce'], 'essential-addons-elementor' ) ) {
+		$form_type = 'login';
+		$nonce_action_name = $ajax ? 'essential-addons-elementor' : "eael-{$form_type}-action";
+		if ( ! wp_verify_nonce( $_POST['eael-login-nonce'], $nonce_action_name ) ) {
 			$err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
@@ -232,7 +233,9 @@ trait Login_Registration {
                 exit();
             }
 		}
-		if ( ! wp_verify_nonce( $_POST['eael-register-nonce'], 'essential-addons-elementor' ) ) {
+		$form_type = 'register';
+		$nonce_action_name = $ajax ? 'essential-addons-elementor' : "eael-{$form_type}-action";
+		if ( ! wp_verify_nonce( $_POST['eael-register-nonce'], $nonce_action_name ) ) {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'Security token did not match', 'essential-addons-for-elementor-lite' ) );
 			}
@@ -630,8 +633,9 @@ trait Login_Registration {
                 exit();
             }
 		}
-
-		if ( ! wp_verify_nonce( $_POST['eael-lostpassword-nonce'], 'eael-lostpassword-action' ) ) {
+		$form_type = 'lostpassword';
+		$nonce_action_name = $ajax ? 'essential-addons-elementor' : "eael-{$form_type}-action";
+		if ( ! wp_verify_nonce( $_POST['eael-lostpassword-nonce'], $nonce_action_name ) ) {
 			$err_msg = esc_html__( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
@@ -805,8 +809,9 @@ trait Login_Registration {
                 exit();
             }
 		}
-
-		if ( ! wp_verify_nonce( $_POST['eael-resetpassword-nonce'], 'eael-resetpassword-action' ) ) {
+		$form_type = 'resetpassword';
+		$nonce_action_name = $ajax ? 'essential-addons-elementor' : "eael-{$form_type}-action";
+		if ( ! wp_verify_nonce( $_POST['eael-resetpassword-nonce'], $nonce_action_name ) ) {
 			$err_msg = esc_html__( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
