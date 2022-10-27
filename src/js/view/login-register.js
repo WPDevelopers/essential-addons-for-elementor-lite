@@ -138,26 +138,21 @@ ea.hooks.addAction("init", "ea", () => {
             }
         });
 
-        $( document ).ready(function() {
-            let eaelGetTokenPromise = new Promise(function(eaelGetTokenResolve, eaelGetTokenReject) {
+        $(document).ready(function () {
+            let eaelGetTokenPromise = new Promise(function (eaelGetTokenResolve, eaelGetTokenReject) {
                 ea.getToken();
-                eaelGetTokenResolve();
-                eaelGetTokenReject();
+
+                let interval = setInterval(function () {
+                    if (ea.noncegenerated === true && typeof localize.nonce !== 'undefined') {
+                        eaelGetTokenResolve(localize.nonce);
+                        clearInterval(interval);
+                    }
+                }, 100);
             });
-            
-            eaelGetTokenPromise.then(
-              function(value) { 
-                if( typeof localize.nonce !== 'undefined' ) {
-                    $('#eael-login-nonce').val(localize.nonce);
-                    $('#eael-register-nonce').val(localize.nonce);
-                    $('#eael-lostpassword-nonce').val(localize.nonce);
-                    $('#eael-resetpassword-nonce').val(localize.nonce);
-                }
-               },
-              function(error) { 
-                // do nothing
-               }
-            );
+
+            eaelGetTokenPromise.then(function (updatedNonce) {
+                $('#eael-login-nonce, #eael-register-nonce, #eael-lostpassword-nonce, #eael-resetpassword-nonce').val(updatedNonce);
+            });
         });
 
         // reCAPTCHA
