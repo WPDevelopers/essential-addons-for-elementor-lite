@@ -149,6 +149,18 @@ class Adv_Tabs extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_adv_tabs_custom_id_offset',
+            [
+                'label'       => esc_html__('Custom ID offset', 'essential-addons-for-elementor-lite'),
+                'description' => esc_html__('Use offset to set the custom ID target scrolling position.', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::NUMBER,
+                'label_block' => false,
+                'default'     => 0,
+                'min'         => 0,
+            ]
+        );
+
         $this->end_controls_section();
 
         /**
@@ -955,6 +967,10 @@ class Adv_Tabs extends Widget_Base
 
         if ($settings['responsive_vertical_layout'] != 'yes') {
             $this->add_render_attribute('eael_tab_wrapper', 'class', 'responsive-vertical-layout');
+        }
+
+        if( !empty($settings['eael_adv_tabs_custom_id_offset']) ){
+            $this->add_render_attribute('eael_tab_wrapper', 'data-custom-id-offset', esc_attr( $settings['eael_adv_tabs_custom_id_offset'] ) );
         }
 
         $this->add_render_attribute('eael_tab_icon_position', 'class', esc_attr($settings['eael_adv_tab_icon_position'])); ?>
