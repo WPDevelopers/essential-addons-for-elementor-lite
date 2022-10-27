@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.1
 Requires PHP: 7.0
-Stable tag: 5.4.0
+Stable tag: 5.4.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -241,6 +241,10 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.4.1 - 27/10/2022 =
+
+- Fixed: EA Login / Register Form | Security token did not match error
 
 = 5.4.0 - 26/10/2022 =
 
