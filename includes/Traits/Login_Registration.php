@@ -100,7 +100,6 @@ trait Login_Registration {
                 exit();
             }
 		}
-
 		if ( ! wp_verify_nonce( $_POST['eael-login-nonce'], 'essential-addons-elementor' ) ) {
 			$err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
@@ -630,8 +629,7 @@ trait Login_Registration {
                 exit();
             }
 		}
-
-		if ( ! wp_verify_nonce( $_POST['eael-lostpassword-nonce'], 'eael-lostpassword-action' ) ) {
+		if ( ! wp_verify_nonce( $_POST['eael-lostpassword-nonce'], 'essential-addons-elementor' ) ) {
 			$err_msg = esc_html__( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
@@ -805,8 +803,7 @@ trait Login_Registration {
                 exit();
             }
 		}
-
-		if ( ! wp_verify_nonce( $_POST['eael-resetpassword-nonce'], 'eael-resetpassword-action' ) ) {
+		if ( ! wp_verify_nonce( $_POST['eael-resetpassword-nonce'], 'essential-addons-elementor' ) ) {
 			$err_msg = esc_html__( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
