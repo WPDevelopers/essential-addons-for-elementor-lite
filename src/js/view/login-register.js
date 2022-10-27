@@ -138,6 +138,28 @@ ea.hooks.addAction("init", "ea", () => {
             }
         });
 
+        $( document ).ready(function() {
+            let eaelGetTokenPromise = new Promise(function(eaelGetTokenResolve, eaelGetTokenReject) {
+                ea.getToken();
+                eaelGetTokenResolve();
+                eaelGetTokenReject();
+            });
+            
+            eaelGetTokenPromise.then(
+              function(value) { 
+                if( typeof localize.nonce !== 'undefined' ) {
+                    $('#eael-login-nonce').val(localize.nonce);
+                    $('#eael-register-nonce').val(localize.nonce);
+                    $('#eael-lostpassword-nonce').val(localize.nonce);
+                    $('#eael-resetpassword-nonce').val(localize.nonce);
+                }
+               },
+              function(error) { 
+                // do nothing
+               }
+            );
+        });
+
         // reCAPTCHA
         function onloadLRcb() {
             if(typeof grecaptcha.render !="function"){
