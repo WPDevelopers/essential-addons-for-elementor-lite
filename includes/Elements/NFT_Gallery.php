@@ -76,6 +76,69 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_nft_gallery_items_layout',
+            [
+                'label'   => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'grid',
+                'options' => [
+                    'grid'    => esc_html__('Grid', 'essential-addons-for-elementor-lite'),
+                    'list' => esc_html__('List', 'essential-addons-for-elementor-lite'),
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_nft_gallery_style_preset',
+            [
+                'label'   => esc_html__('Style Preset', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'preset-1',
+                'options' => [
+                    'preset-1' => esc_html__('Preset 1', 'essential-addons-for-elementor-lite'),
+                    'preset-2' => esc_html__('Preset 2', 'essential-addons-for-elementor-lite'),
+                    'preset-3' => esc_html__('Preset 3', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+                    'eael_nft_gallery_items_layout' => 'grid'
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_nft_gallery_list_style_preset',
+            [
+                'label'   => esc_html__('Style Preset', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'preset-2',
+                'options' => [
+                    'preset-2' => esc_html__('Preset 1', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+                    'eael_nft_gallery_items_layout' => 'list'
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_nft_gallery_column',
+            [
+                'label'        => esc_html__('Columns', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SELECT,
+                'default'      => '3',
+                'options'      => [
+                    '1' => esc_html__('1', 'essential-addons-for-elementor-lite'),
+                    '2' => esc_html__('2', 'essential-addons-for-elementor-lite'),
+                    '3' => esc_html__('3', 'essential-addons-for-elementor-lite'),
+                    '4' => esc_html__('4', 'essential-addons-for-elementor-lite'),
+                    '5' => esc_html__('5', 'essential-addons-for-elementor-lite'),
+                    '6' => esc_html__('6', 'essential-addons-for-elementor-lite'),
+                ],
+                'toggle'       => true,
+            ]
+        );
+
         $this->end_controls_section();
 
         /**
@@ -96,10 +159,29 @@ class NFT_Gallery extends Widget_Base
 
     public function print_nft_gallery()
     {
+        $settings = $this->get_settings();
         ob_start();
+
+        $nft_gallery_settings = [];
+        $nft_gallery['layout'] = ! empty( $settings['eael_nft_gallery_items_layout'] ) ? $settings['eael_nft_gallery_items_layout'] : 'grid';
+        $nft_gallery['preset'] = ! empty( $settings['eael_nft_gallery_style_preset'] ) ? $settings['eael_nft_gallery_style_preset'] : 'preset-2';
+        $nft_gallery['preset'] = 'list' === $nft_gallery['layout'] && ! empty( $settings['eael_nft_gallery_list_style_preset'] ) ? $settings['eael_nft_gallery_list_style_preset'] : $nft_gallery['preset'];
+
+
+        $this->add_render_attribute(
+            'eael-nft-gallery-items',
+            [
+                'id' => 'eael-nft-gallery-' . esc_attr($this->get_id()),
+                'class' => [
+                    'eael-nft-gallery-items',
+                    'eael-nft-' . esc_attr( $nft_gallery['layout'] ),
+                    esc_attr( $nft_gallery['preset'] ),
+                ],
+            ]
+        );
 ?>
         <div class="eael-nft-gallery-wrapper">
-            <div class="eael-nft-gallery-items eael-nft-list preset-2">
+            <div <?php echo $this->get_render_attribute_string('eael-nft-gallery-items'); ?>>
                 <?php for ($i = 0; $i < 5; $i++) : ?>
                     <div class="eael-nft-item">
                         <!-- Thumbnail -->
