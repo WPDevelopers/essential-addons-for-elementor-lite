@@ -99,7 +99,7 @@ class NFT_Gallery extends Widget_Base
         ob_start();
 ?>
         <div class="eael-nft-gallery-wrapper">
-            <div class="eael-nft-gallery-items eael-nft-grid preset-3">
+            <div class="eael-nft-gallery-items eael-nft-list preset-2">
                 <?php for ($i = 0; $i < 5; $i++) : ?>
                     <div class="eael-nft-item">
                         <!-- Thumbnail -->
