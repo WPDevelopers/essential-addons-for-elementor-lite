@@ -12,6 +12,33 @@
   grid-row-gap: 15px;
   display: grid;
 }
+.eael-nft-gallery-wrapper .eael-nft-list {
+  grid-template-columns: repeat(1, 1fr);
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+  display: grid;
+}
+.eael-nft-gallery-wrapper .eael-nft-list .eael-nft-item {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 15px;
+}
+.eael-nft-gallery-wrapper .eael-nft-list .eael-nft-item .eael-nft-thumbnail {
+  margin-bottom: 0;
+}
+.eael-nft-gallery-wrapper .eael-nft-list .eael-nft-item .eael-nft-thumbnail img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: auto;
+  height: 300px;
+}
 .eael-nft-gallery-wrapper .eael-nft-item {
   position: relative;
   padding: 15px;
