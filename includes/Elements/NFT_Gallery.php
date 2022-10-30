@@ -117,12 +117,23 @@ class NFT_Gallery extends Widget_Base
                                             <!-- Title  -->
                                             <h3 class="eael-nft-title">Angry Cat #3297</h3>
 
-                                            <!-- Owner -->
-                                            <div class="eael-nft-owner-wrapper">
-                                                <div class="eael-nft-owner-creator-img">
+                                            <!-- Creator -->
+                                            <div class="eael-nft-creator-wrapper">
+                                                <div class="eael-nft-creator-img">
                                                     <img src="https://i.seadn.io/gcs/files/856e56e379fcd78b5ad956a3eb2d7247.png?w=500&amp;auto=format" alt="AngryCat_dev">
                                                 </div>
-                                                <div class="eael-nft-owner-created-by">
+                                                <div class="eael-nft-created-by">
+                                                    <span>Owned by </span>
+                                                    <a target="_blank" href="https://opensea.io/AngryCat_dev">AngryCat_dev</a>
+                                                </div>
+                                            </div>
+
+                                            <!-- Owner -->
+                                            <div class="eael-nft-owner-wrapper">
+                                                <div class="eael-nft-owner-img">
+                                                    <img src="https://i.seadn.io/gcs/files/856e56e379fcd78b5ad956a3eb2d7247.png?w=500&amp;auto=format" alt="AngryCat_dev">
+                                                </div>
+                                                <div class="eael-nft-owned-by">
                                                     <span>Created by </span>
                                                     <a target="_blank" href="https://opensea.io/AngryCat_dev">AngryCat_dev</a>
                                                 </div>
