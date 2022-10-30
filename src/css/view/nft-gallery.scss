@@ -10,6 +10,30 @@
     grid-row-gap: 15px;
     display: grid;
   }
+  
+  .eael-nft-list {
+    grid-template-columns: repeat(1, 1fr);
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    display: grid;
+
+    .eael-nft-item {
+      justify-content: flex-start;
+      align-items: flex-start;
+      display: flex;
+      gap: 15px;
+
+      .eael-nft-thumbnail {
+        img {
+          object-fit: cover;
+          width: auto;
+          height: 300px;
+        }
+
+        margin-bottom: 0;
+      }
+    }
+  }
 
   .eael-nft-item {
     position: relative;
