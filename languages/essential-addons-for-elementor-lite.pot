@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-10-30 10:51+0000\n"
+"POT-Creation-Date: 2022-10-30 12:21+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -417,7 +417,7 @@ msgstr ""
 msgid "Content Ticker"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:690, ../includes/Elements/NFT_Gallery.php:30, ../includes/Elements/NFT_Gallery.php:75, ../includes/Elements/NFT_Gallery.php:180, ../includes/templates/admin/elements.php:228
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:690, ../includes/Elements/NFT_Gallery.php:30, ../includes/Elements/NFT_Gallery.php:221, ../includes/templates/admin/elements.php:228
 msgid "NFT Gallery"
 msgstr ""
 
@@ -1001,7 +1001,7 @@ msgstr ""
 msgid "Content Type"
 msgstr ""
 
-#: ../includes/Elements/Adv_Accordion.php:339, ../includes/Elements/Adv_Tabs.php:172, ../includes/Elements/Adv_Tabs.php:281, ../includes/Elements/Adv_Tabs.php:764, ../includes/Elements/Cta_Box.php:253, ../includes/Elements/Cta_Box.php:274, ../includes/Elements/Data_Table.php:256, ../includes/Elements/Data_Table.php:371, ../includes/Elements/Data_Table.php:385, ../includes/Elements/Event_Calendar.php:272, ../includes/Elements/Event_Calendar.php:1641, ../includes/Elements/Facebook_Feed.php:1023, ../includes/Elements/Feature_List.php:192, ../includes/Elements/Feature_List.php:696, ../includes/Elements/Flip_Box.php:157, ../includes/Elements/Image_Accordion.php:97, ../includes/Elements/Image_Accordion.php:208, ../includes/Elements/Image_Accordion.php:516, ../includes/Elements/Info_Box.php:252, ../includes/Elements/Interactive_Circle.php:120, ../includes/Elements/Interactive_Circle.php:161, ../includes/Elements/Interactive_Circle.php:678, ../includes/Elements/Post_Timeline.php:208, ../includes/Elements/Product_Grid.php:2500, ../includes/Elements/Tooltip.php:143, ../includes/Elements/Tooltip.php:276, ../includes/Elements/Woo_Product_Carousel.php:1596, ../includes/Elements/Woo_Product_Gallery.php:1848
+#: ../includes/Elements/Adv_Accordion.php:339, ../includes/Elements/Adv_Tabs.php:172, ../includes/Elements/Adv_Tabs.php:281, ../includes/Elements/Adv_Tabs.php:764, ../includes/Elements/Cta_Box.php:253, ../includes/Elements/Cta_Box.php:274, ../includes/Elements/Data_Table.php:256, ../includes/Elements/Data_Table.php:371, ../includes/Elements/Data_Table.php:385, ../includes/Elements/Event_Calendar.php:272, ../includes/Elements/Event_Calendar.php:1641, ../includes/Elements/Facebook_Feed.php:1023, ../includes/Elements/Feature_List.php:192, ../includes/Elements/Feature_List.php:696, ../includes/Elements/Flip_Box.php:157, ../includes/Elements/Image_Accordion.php:97, ../includes/Elements/Image_Accordion.php:208, ../includes/Elements/Image_Accordion.php:516, ../includes/Elements/Info_Box.php:252, ../includes/Elements/Interactive_Circle.php:120, ../includes/Elements/Interactive_Circle.php:161, ../includes/Elements/Interactive_Circle.php:678, ../includes/Elements/NFT_Gallery.php:178, ../includes/Elements/Post_Timeline.php:208, ../includes/Elements/Product_Grid.php:2500, ../includes/Elements/Tooltip.php:143, ../includes/Elements/Tooltip.php:276, ../includes/Elements/Woo_Product_Carousel.php:1596, ../includes/Elements/Woo_Product_Gallery.php:1848
 msgid "Content"
 msgstr ""
 
@@ -3349,7 +3349,7 @@ msgstr ""
 msgid "Title Bottom Space"
 msgstr ""
 
-#: ../includes/Elements/Filterable_Gallery.php:94, ../includes/Elements/Flip_Box.php:77, ../includes/Elements/Pricing_Table.php:79, ../includes/Traits/Core.php:44
+#: ../includes/Elements/Filterable_Gallery.php:94, ../includes/Elements/Flip_Box.php:77, ../includes/Elements/NFT_Gallery.php:75, ../includes/Elements/Pricing_Table.php:79, ../includes/Traits/Core.php:44
 msgid "Settings"
 msgstr ""
 
@@ -5555,6 +5555,38 @@ msgstr ""
 
 #: ../includes/Elements/NFT_Gallery.php:95, ../includes/Elements/NFT_Gallery.php:112, ../includes/Elements/Product_Grid.php:246, ../includes/Elements/Product_Grid.php:268, ../includes/Elements/Product_Grid.php:1692, ../includes/Elements/Product_Grid.php:1813, ../includes/Elements/Team_Member.php:280, ../includes/Elements/Woo_Product_Carousel.php:810, ../includes/Elements/Woo_Product_Gallery.php:323, ../includes/Elements/Woo_Product_Gallery.php:1511
 msgid "Style Preset"
+msgstr ""
+
+#: ../includes/Elements/NFT_Gallery.php:191
+msgid "Owned By Text"
+msgstr ""
+
+#: ../includes/Elements/NFT_Gallery.php:194, ../includes/Elements/NFT_Gallery.php:240, ../includes/Elements/NFT_Gallery.php:241
+msgid "Owned By"
+msgstr ""
+
+#: ../includes/Elements/NFT_Gallery.php:198
+msgid "Created By Text"
+msgstr ""
+
+#: ../includes/Elements/NFT_Gallery.php:201
+msgid "Created By"
+msgstr ""
+
+#: ../includes/Elements/NFT_Gallery.php:205
+msgid "View Details Text"
+msgstr ""
+
+#: ../includes/Elements/NFT_Gallery.php:208, ../includes/Elements/NFT_Gallery.php:242
+msgid "View Details"
+msgstr ""
+
+#: ../includes/Elements/NFT_Gallery.php:298
+msgid "EA NFT Creator Thumbnail"
+msgstr ""
+
+#: ../includes/Elements/NFT_Gallery.php:315
+msgid "EA NFT Owner Thumbnail"
 msgstr ""
 
 #: ../includes/Elements/NinjaForms.php:27, ../includes/Elements/NinjaForms.php:94
