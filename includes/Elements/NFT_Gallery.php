@@ -200,6 +200,13 @@ class NFT_Gallery extends Widget_Base
             'label_block' => false,
             'default' => esc_html__('Created By', 'essential-addons-for-elementor-lite'),
         ]);
+        
+        $this->add_control('eael_nft_gallery_content_view_details_label', [
+            'label' => esc_html__('View Details Text', 'essential-addons-for-elementor-lite'),
+            'type' => Controls_Manager::TEXT,
+            'label_block' => false,
+            'default' => esc_html__('View Details', 'essential-addons-for-elementor-lite'),
+        ]);
 
         $this->end_controls_section();
 
@@ -232,7 +239,7 @@ class NFT_Gallery extends Widget_Base
         $nft_gallery['preset'] = 'list' === $nft_gallery['layout'] && !empty($settings['eael_nft_gallery_list_style_preset']) ? $settings['eael_nft_gallery_list_style_preset'] : $nft_gallery['preset'];
         $nft_gallery['owned_by_label'] = ! empty( $settings['eael_nft_gallery_content_owned_by_label'] ) ? $settings['eael_nft_gallery_content_owned_by_label'] : __('Owned By', 'essential-addons-for-elementor-lite');
         $nft_gallery['created_by_label'] = ! empty( $settings['eael_nft_gallery_content_created_by_label'] ) ? $settings['eael_nft_gallery_content_created_by_label'] : __('Owned By', 'essential-addons-for-elementor-lite');
-        
+        $nft_gallery['view_details_text'] =  ! empty( $settings['eael_nft_gallery_content_view_details_label'] ) ? $settings['eael_nft_gallery_content_view_details_label'] : __('View Details', 'essential-addons-for-elementor-lite');       
 
 
         $this->add_render_attribute(
@@ -254,7 +261,14 @@ class NFT_Gallery extends Widget_Base
                         <?php
                         $item_formatted['thumbnail'] = 'https://lh3.googleusercontent.com/z2cLJdA7S3i6y2GYHvMDhDTsmL0UtXzVaIdj7aXZ8Y2gr_2MxoPH1RIcJrUlwulmDggw4xMEcDrY_GL6eK6C9R-VvI7ZgpUm_EYn';
                         $item_formatted['creator_thumbnail'] = 'https://i.seadn.io/gcs/files/856e56e379fcd78b5ad956a3eb2d7247.png?w=500&amp;auto=format';
+                        $item_formatted['owner_thumbnail'] = 'https://i.seadn.io/gcs/files/856e56e379fcd78b5ad956a3eb2d7247.png?w=500&amp;auto=format';
                         $item_formatted['title'] = 'Angry Cat #3297';
+                        $item_formatted['created_by_link'] = 'https://opensea.io/AngryCat_dev';
+                        $item_formatted['created_by_link_text'] = 'AngryCat_dev';
+                        $item_formatted['owned_by_link'] = 'https://opensea.io/AngryCat_dev';
+                        $item_formatted['owned_by_link_text'] = 'AngryCat_dev';
+                        $item_formatted['view_details_link'] = 'https://opensea.io/assets/ethereum/0xdcf68c8ebb18df1419c7dff17ed33505faf8a20c/9999';
+                        
                         ?>
                         <div class="eael-nft-item">
                             <!-- Thumbnail -->
@@ -289,61 +303,42 @@ class NFT_Gallery extends Widget_Base
                                         </div>
                                         <div class="eael-nft-created-by">
                                             <span><?php printf('%s', esc_html( $nft_gallery['created_by_label'] ) ); ?> </span>
-                                            <a target="_blank" href="https://opensea.io/AngryCat_dev">AngryCat_dev</a>
+                                            <?php printf('<a target="_blank" href="%s">%s</a>', esc_attr( $item_formatted['created_by_link'] ), esc_html( $item_formatted['created_by_link_text'] ) ); ?>
                                         </div>
                                     </div>
 
                                     <!-- Owner -->
                                     <div class="eael-nft-owner-wrapper">
                                         <div class="eael-nft-owner-img">
-                                            <img src="https://i.seadn.io/gcs/files/856e56e379fcd78b5ad956a3eb2d7247.png?w=500&amp;auto=format" alt="AngryCat_dev">
+                                            <?php
+                                            if (!empty($item_formatted['owner_thumbnail'])) {
+                                                printf('<img src="%s" alt="%s">', esc_attr($item_formatted['owner_thumbnail']), esc_attr__('EA NFT Owner Thumbnail', 'essential-addons-for-elementor-lite'));
+                                            } else {
+                                                // default owner svg
+                                            }
+                                            ?>
                                         </div>
                                         <div class="eael-nft-owned-by">
                                             <span><?php printf('%s', esc_html( $nft_gallery['owned_by_label'] ) ); ?> </span>
-                                            <a target="_blank" href="https://opensea.io/AngryCat_dev">AngryCat_dev</a>
+                                            <?php printf('<a target="_blank" href="%s">%s</a>', esc_attr( $item_formatted['owned_by_link'] ), esc_html( $item_formatted['owned_by_link_text'] ) ); ?>
                                         </div>
                                     </div>
 
                                     <!-- Price -->
                                     <div class="eael-nft-price-wrapper">
-                                        <span class="eael-nft-price-label eael-d-none">Price</span>
-                                        <span class="eael-nft-price-currency eael-d-none">
-                                            <svg width="1200" height="450" viewBox="0 0 256 417" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
-                                                <path fill="#343434" d="m127.961 0-2.795 9.5v275.668l2.795 2.79 127.962-75.638z"></path>
-                                                <path fill="#8C8C8C" d="M127.962 0 0 212.32l127.962 75.639V154.158z"></path>
-                                                <path fill="#3C3C3B" d="m127.961 312.187-1.575 1.92v98.199l1.575 4.6L256 236.587z">
-                                                </path>
-                                                <path fill="#8C8C8C" d="M127.962 416.905v-104.72L0 236.585z"></path>
-                                                <path fill="#141414" d="m127.961 287.958 127.96-75.637-127.96-58.162z"></path>
-                                                <path fill="#393939" d="m0 212.32 127.96 75.638v-133.8z"></path>
-                                            </svg>
-                                        </span>
-                                        <span class="eael-nft-price-amount eael-d-none">0</span>
+                                        
                                     </div>
 
                                     <!-- Last Sale -->
                                     <div class="eael-nft-last-sale-wrapper eael-d-none">
-                                        <span class="eael-nft-last-sale-label">Last Sale</span>
-                                        <span class="eael-nft-last-sale-currency">
-                                            <svg width="1200" height="450" viewBox="0 0 256 417" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
-                                                <path fill="#343434" d="m127.961 0-2.795 9.5v275.668l2.795 2.79 127.962-75.638z"></path>
-                                                <path fill="#8C8C8C" d="M127.962 0 0 212.32l127.962 75.639V154.158z"></path>
-                                                <path fill="#3C3C3B" d="m127.961 312.187-1.575 1.92v98.199l1.575 4.6L256 236.587z">
-                                                </path>
-                                                <path fill="#8C8C8C" d="M127.962 416.905v-104.72L0 236.585z"></path>
-                                                <path fill="#141414" d="m127.961 287.958 127.96-75.637-127.96-58.162z"></path>
-                                                <path fill="#393939" d="m0 212.32 127.96 75.638v-133.8z"></path>
-                                            </svg>
-                                        </span>
-                                        <span class="eael-nft-last-sale-amount">0.298</span>
+                                        
                                     </div>
                                 </div>
 
                                 <!-- Button -->
                                 <div class="eael-nft-button">
                                     <button>
-                                        <a target="_blank" href="https://opensea.io/assets/ethereum/0xdcf68c8ebb18df1419c7dff17ed33505faf8a20c/9999">
-                                            View Details</a>
+                                        <?php printf('<a target="_blank" href="%s">%s</a>', esc_attr( $item_formatted['view_details_link'] ), esc_html__( $nft_gallery['view_details_text'] ) ) ?>
                                     </button>
                                 </div>
                             </div>
