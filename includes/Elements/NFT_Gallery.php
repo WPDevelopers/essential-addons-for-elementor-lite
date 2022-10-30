@@ -70,16 +70,67 @@ class NFT_Gallery extends Widget_Base
          * NFT Settings
          */
         $this->start_controls_section(
+            'eael_section_nft_gallery_general_settings',
+            [
+                'label' => esc_html__('General', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $this->add_control(
+            'eael_nft_gallery_sources',
+            [
+                'label' => __('Source', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => apply_filters('eael/controls/event-calendar/source', [
+                    'opensea' => __('OpenSea', 'essential-addons-for-elementor-lite'),
+                ]),
+                'default' => 'opensea',
+            ]
+        );
+
+        $this->add_control(
+            'eael_nft_gallery_source_key',
+            [
+                'label' => __('APi Key', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'label_block' => true,
+                'description' => sprintf(__('<a href="https://docs.opensea.io/reference/request-an-api-key" class="eael-btn" target="_blank">%s</a>',
+                    'essential-addons-for-elementor-lite'), 'Get API Key'),
+            ]
+        );
+
+        $this->add_control(
+            'eael_nft_gallery_opensea_type',
+            [
+                'label'   => esc_html__('Type', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'items',
+                'options' => [
+                    'items'    => esc_html__('Items', 'essential-addons-for-elementor-lite'),
+                    'collection' => esc_html__('Collections', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+                    'eael_nft_gallery_sources' => 'opensea'
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /**
+         * NFT Settings
+         */
+        $this->start_controls_section(
             'eael_section_nft_gallery_settings',
             [
-                'label' => esc_html__('Settings', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'eael_nft_gallery_items_layout',
             [
-                'label'   => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+                'label'   => esc_html__('Layout Type', 'essential-addons-for-elementor-lite'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'grid',
                 'options' => [
