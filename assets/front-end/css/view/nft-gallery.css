@@ -195,3 +195,10 @@
           transform: translate(0);
   visibility: visible;
 }
+.eael-nft-gallery-wrapper .preset-3 .eael-nft-button button a {
+  border-radius: 4px;
+}
+.eael-nft-gallery-wrapper .preset-3 .eael-nft-button button:hover a {
+  background-color: #5c4bd9;
+  color: #ffffff;
+}
