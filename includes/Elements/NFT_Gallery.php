@@ -135,7 +135,35 @@ class NFT_Gallery extends Widget_Base
                     '5' => esc_html__('5', 'essential-addons-for-elementor-lite'),
                     '6' => esc_html__('6', 'essential-addons-for-elementor-lite'),
                 ],
-                'toggle'       => true,
+                'condition' => [
+                    'eael_nft_gallery_items_layout' => 'grid'
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-grid' => 'grid-template-columns: repeat( {{VALUE}}, 1fr);',
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_nft_list_gallery_column',
+            [
+                'label'        => esc_html__('Columns', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SELECT,
+                'default'      => '1',
+                'options'      => [
+                    '1' => esc_html__('1', 'essential-addons-for-elementor-lite'),
+                    '2' => esc_html__('2', 'essential-addons-for-elementor-lite'),
+                    '3' => esc_html__('3', 'essential-addons-for-elementor-lite'),
+                    '4' => esc_html__('4', 'essential-addons-for-elementor-lite'),
+                    '5' => esc_html__('5', 'essential-addons-for-elementor-lite'),
+                    '6' => esc_html__('6', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+                    'eael_nft_gallery_items_layout' => 'list'
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-list' => 'grid-template-columns: repeat( {{VALUE}}, 1fr);'
+                ]
             ]
         );
 
