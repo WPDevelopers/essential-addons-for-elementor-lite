@@ -100,11 +100,11 @@ class NFT_Gallery extends Widget_Base
 ?>
         <div class="eael-custom-css-wrapper">
             <div class="eael-nft-gallery-wrapper">
-                <div class="eael-nft-gallery-items preset-1">
-                    <div class="columns is-multiline">
+                <div class="eael-nft-gallery-items eael-nft-grid preset-1">
+                    <!-- <div class="columns is-multiline"> -->
 
-                        <?php for ($i = 0; $i < 3; $i++) : ?>
-                            <div class="column is-4">
+                        <?php for ($i = 0; $i < 5; $i++) : ?>
+                            <!-- <div class="column is-4"> -->
                                 <div class="eael-nft-item">
                                     <!-- Thumbnail -->
                                     <div class="eael-nft-thumbnail">
@@ -141,8 +141,8 @@ class NFT_Gallery extends Widget_Base
 
                                             <!-- Price -->
                                             <div class="eael-nft-price-wrapper">
-                                                <span class="eael-nft-price-label is-hidden">Price</span>
-                                                <span class="eael-nft-price-currency is-hidden">
+                                                <span class="eael-nft-price-label eael-is-hidden">Price</span>
+                                                <span class="eael-nft-price-currency eael-is-hidden">
                                                     <svg width="1200" height="450" viewBox="0 0 256 417" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
                                                         <path fill="#343434" d="m127.961 0-2.795 9.5v275.668l2.795 2.79 127.962-75.638z"></path>
                                                         <path fill="#8C8C8C" d="M127.962 0 0 212.32l127.962 75.639V154.158z"></path>
@@ -153,11 +153,11 @@ class NFT_Gallery extends Widget_Base
                                                         <path fill="#393939" d="m0 212.32 127.96 75.638v-133.8z"></path>
                                                     </svg>
                                                 </span>
-                                                <span class="eael-nft-price-amount is-hidden">0</span>
+                                                <span class="eael-nft-price-amount eael-is-hidden">0</span>
                                             </div>
 
                                             <!-- Last Sale -->
-                                            <div class="eael-nft-last-sale-wrapper is-hidden">
+                                            <div class="eael-nft-last-sale-wrapper eael-is-hidden">
                                                 <span class="eael-nft-last-sale-label">Last Sale</span>
                                                 <span class="eael-nft-last-sale-currency">
                                                     <svg width="1200" height="450" viewBox="0 0 256 417" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
@@ -183,10 +183,10 @@ class NFT_Gallery extends Widget_Base
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <!-- </div> -->
                         <?php endfor; ?>
                         <!-- /.column  -->
-                    </div>
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
