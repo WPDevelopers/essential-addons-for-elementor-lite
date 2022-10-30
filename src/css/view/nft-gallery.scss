@@ -19,7 +19,7 @@
     box-shadow: 0 4px 15px rgb(0 0 0 / 9%);
     overflow: hidden;
     transition: 0.5s ease-in-out;
-
+    
     .eael-nft-thumbnail {
       line-height: 0;
       text-align: center;
@@ -144,6 +144,7 @@
   .preset-3 {
     .eael-nft-item {
       padding: 0 !important;
+      min-height: 320px;
 
       .eael-nft-thumbnail {
         margin-bottom: 0;
@@ -174,8 +175,3 @@
     }
   }
 }
-
-// .eael-nft-gallery-wrapper:hover {
-//   overflow: hidden;
-//   position: relative;
-// }
