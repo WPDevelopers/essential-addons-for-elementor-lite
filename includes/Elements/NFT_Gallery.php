@@ -115,6 +115,8 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
+        // #ToDo: Filter By, Limit, Order By
+
         $this->end_controls_section();
 
         /**
@@ -218,6 +220,8 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
+        // #ToDo Show NFT Image, Show Title, Show Current Owner, Show Creator, Show Price, Show Last Sale, Show Button
+
         $this->end_controls_section();
 
         /**
@@ -273,6 +277,16 @@ class NFT_Gallery extends Widget_Base
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
+
+        // #ToDo Section Layout Styles: Column Gap, Row Gap
+        // #ToDo Section Item Box Styles: Background (Normal, Hover: Classic, Gradient), Overlay Color, Border and Shadow, Padding
+        // #ToDo Section Image Styles: Height, Width, Margin, Border Radius
+        // #ToDo Section Title: Typography, Color, Margin
+        // #ToDo Section Creator/Owner: Show Name, Show Image, Typography, Label Color, Link Color, Image Height, Image Width, Image Border Radius, Margin
+        // #ToDo Section Price Style: Typography, Color, Margin
+        // #ToDo Section Button Style: Typography, Text Color, Background Color, Hover Text Color, Hover Background Color, Margin, Padding
+        // #ToDo Section Border & Shadow Style: Border (including box shadow) (Normal and Hover), Border Radius Transition on hover
+
 
         $this->end_controls_section();
     }
