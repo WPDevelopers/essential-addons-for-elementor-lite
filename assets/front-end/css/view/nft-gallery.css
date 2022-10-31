@@ -113,7 +113,7 @@
   background-color: #7967ff;
   color: #ffffff;
   font-size: 14px;
-  padding: 15px 20px;
+  padding: 12px 15px;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
@@ -150,12 +150,22 @@
 .eael-nft-gallery-wrapper .preset-1 .eael-nft-button button {
   width: 100%;
 }
+.eael-nft-gallery-wrapper .preset-1 .eael-nft-thumbnail img {
+  -webkit-transition-duration: 0.4s;
+       -o-transition-duration: 0.4s;
+          transition-duration: 0.4s;
+}
 .eael-nft-gallery-wrapper .preset-1 .eael-nft-item:hover .eael-nft-button {
   opacity: 1;
   visibility: visible;
   -webkit-transform: translate(0);
       -ms-transform: translate(0);
           transform: translate(0);
+}
+.eael-nft-gallery-wrapper .preset-1 .eael-nft-item:hover .eael-nft-thumbnail img {
+  -webkit-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+          transform: scale(1.1);
 }
 .eael-nft-gallery-wrapper .preset-2 .eael-nft-price-wrapper {
   margin-bottom: 15px;
