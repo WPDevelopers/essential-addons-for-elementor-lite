@@ -56,6 +56,7 @@
   text-align: center;
   margin: 0 0 15px;
   border-radius: 5px;
+  overflow: hidden;
 }
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-thumbnail img {
   border-radius: 5px;

@@ -290,7 +290,60 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
-        // #ToDo Show NFT Image, Show Title, Show Current Owner, Show Creator, Show Price, Show Last Sale, Show Button
+        $this->add_control(
+			'eael_nft_gallery_show_image',
+			[
+				'label' => __( 'Show NFT Image', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+        $this->add_control(
+			'eael_nft_gallery_show_title',
+			[
+				'label' => __( 'Show Title', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+        $this->add_control(
+			'eael_nft_gallery_show_owner',
+			[
+				'label' => __( 'Show Current Owner', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+        $this->add_control(
+			'eael_nft_gallery_show_creator',
+			[
+				'label' => __( 'Show Creator', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+        $this->add_control(
+			'eael_nft_gallery_show_button',
+			[
+				'label' => __( 'Show Button', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
 
         $this->end_controls_section();
 
