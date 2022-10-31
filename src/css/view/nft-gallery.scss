@@ -138,11 +138,23 @@
       }
     }
 
+    .eael-nft-thumbnail {
+      img {
+        transition-duration: .4s;
+      }
+    }
+
     .eael-nft-item:hover {
       .eael-nft-button {
         opacity: 1;
         visibility: visible;
         transform: translate(0);
+      }
+
+      .eael-nft-thumbnail {
+        img {
+          transform: scale(1.1);
+        }
       }
     }
   }
