@@ -66,6 +66,7 @@
       .eael-nft-owner-wrapper {
         display: flex;
         align-items: center;
+        align-items: flex-start;
         gap: 10px;
         justify-content: flex-start;
         margin-bottom: 10px;
@@ -183,7 +184,7 @@
   .preset-3 {
     .eael-nft-item {
       padding: 0 !important;
-      min-height: 320px;
+      min-height: 300px;
 
       .eael-nft-thumbnail {
         margin-bottom: 0;
