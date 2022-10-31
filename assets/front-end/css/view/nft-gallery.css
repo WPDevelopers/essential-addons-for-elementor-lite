@@ -59,6 +59,10 @@
 }
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-thumbnail img {
   border-radius: 5px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: auto;
+  height: 300px;
 }
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-title {
   font-size: 22px;
@@ -76,7 +80,7 @@
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-creator-wrapper img,
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper img {
