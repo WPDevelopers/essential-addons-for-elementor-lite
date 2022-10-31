@@ -10,7 +10,7 @@
     grid-row-gap: 15px;
     display: grid;
   }
-  
+
   .eael-nft-list {
     grid-template-columns: repeat(1, 1fr);
     grid-column-gap: 15px;
@@ -43,7 +43,7 @@
     box-shadow: 0 4px 15px rgb(0 0 0 / 9%);
     overflow: hidden;
     transition: 0.5s ease-in-out;
-    
+
     .eael-nft-thumbnail {
       line-height: 0;
       text-align: center;
@@ -51,6 +51,9 @@
       border-radius: 5px;
       img {
         border-radius: 5px;
+        object-fit: cover;
+        width: auto;
+        height: 300px;
       }
     }
     .eael-nft-content {
@@ -65,7 +68,7 @@
         align-items: center;
         gap: 10px;
         justify-content: flex-start;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         img {
           height: 30px;
           width: 30px;
