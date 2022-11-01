@@ -657,25 +657,45 @@ class NFT_Gallery extends Widget_Base
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name' => 'eael_section_nft_gallery_button_typography',
-                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button a',
+                'name' => 'eael_nft_gallery_button_typography',
+                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button',
             ]
         );
 
         $this->add_responsive_control(
-            'eael_creative_button_padding',
+            'eael_nft_gallery_button_padding',
             [
                 'label' => esc_html__('Button Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-infobox .infobox-button a.eael-infobox-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
 
         $this->add_control(
-            'eael_infobox_button_border_radius',
+            'eael_nft_gallery_button_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'size' => 4,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .preset-2 .eael-nft-button button a' => 'border-radius: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .preset-3 .eael-nft-button button a' => 'border-radius: {{SIZE}}px;',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_nft_gallery_button_border_radius_preset_1',
             [
                 'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
@@ -685,38 +705,40 @@ class NFT_Gallery extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-infobox .infobox-button a.eael-infobox-button' => 'border-radius: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .preset-1 .eael-nft-button button a' => 'border-radius: {{SIZE}}px;',
+                ],
+                'condition' => [
+                    'eael_nft_gallery_style_preset' => 'preset-1'
                 ],
             ]
         );
 
-        $this->start_controls_tabs('infobox_button_styles_controls_tabs');
+        $this->start_controls_tabs('eael_nft_gallery_button_controls_tabs');
 
-        $this->start_controls_tab('infobox_button_normal', [
+        $this->start_controls_tab('eael_nft_gallery_button_control_normal', [
             'label' => esc_html__('Normal', 'essential-addons-for-elementor-lite'),
         ]);
 
         $this->add_control(
-            'eael_infobox_button_text_color',
+            'eael_nft_gallery_button_normal_text_color',
             [
                 'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-infobox .eael-infobox-button' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-infobox .eael-infobox-button svg' => 'fill: {{VALUE}};',
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button' => 'color: {{VALUE}};',
                 ],
             ]
         );
 
         $this->add_control(
-            'eael_infobox_button_background_color',
+            'eael_nft_gallery_button_normal_background_color',
             [
                 'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#333333',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-infobox .eael-infobox-button' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button' => 'background: {{VALUE}};',
                 ],
             ]
         );
@@ -724,27 +746,27 @@ class NFT_Gallery extends Widget_Base
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
-                'name' => 'eael_infobox_button_border',
-                'selector' => '{{WRAPPER}} .eael-infobox .eael-infobox-button',
+                'name' => 'eael_nft_gallery_button_normal_border',
+                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button',
             ]
         );
 
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
-                'name' => 'button_box_shadow',
+                'name' => 'eael_nft_gallery_button_normal_box_shadow',
                 'selector' => '{{WRAPPER}} .eael-infobox .eael-infobox-button',
             ]
         );
 
         $this->end_controls_tab();
 
-        $this->start_controls_tab('infobox_button_hover', [
+        $this->start_controls_tab('eael_nft_gallery_button_control_hover', [
             'label' => esc_html__('Hover', 'essential-addons-for-elementor-lite'),
         ]);
 
         $this->add_control(
-            'eael_infobox_button_hover_text_color',
+            'eael_nft_gallery_button_hover_text_color',
             [
                 'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
@@ -757,7 +779,7 @@ class NFT_Gallery extends Widget_Base
         );
 
         $this->add_control(
-            'eael_infobox_button_hover_background_color',
+            'eael_nft_gallery_button_hover_background_color',
             [
                 'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
@@ -771,7 +793,7 @@ class NFT_Gallery extends Widget_Base
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
-                'name' => 'eael_infobox_button_hover_border',
+                'name' => 'eael_nft_gallery_button_hover_border',
                 'selector' => '{{WRAPPER}} .eael-infobox .eael-infobox-button:hover',
             ]
         );
@@ -779,7 +801,7 @@ class NFT_Gallery extends Widget_Base
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
-                'name' => 'button_hover_box_shadow',
+                'name' => 'eael_nft_gallery_button_hover_box_shadow',
                 'selector' => '{{WRAPPER}} .eael-infobox .eael-infobox-button:hover',
             ]
         );
