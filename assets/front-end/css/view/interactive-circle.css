@@ -6977,197 +6977,149 @@
     -webkit-animation: eael-a1p2di7dv-item-6-animation 2s;
             animation: eael-a1p2di7dv-item-6-animation 2s;
   }
-  @-webkit-keyframes eael-a1p2di8-item-1-animation {
+  @-webkit-keyframes eael-a1p2di8dv-item-2-animation {
     0% {
       top: 50%;
       left: 50%;
     }
     100% {
-      top: 72%;
+      top: 40%;
       left: 2%;
     }
   }
-  @keyframes eael-a1p2di8-item-1-animation {
+  @keyframes eael-a1p2di8dv-item-2-animation {
     0% {
       top: 50%;
       left: 50%;
     }
     100% {
-      top: 72%;
+      top: 40%;
       left: 2%;
     }
   }
-  @-webkit-keyframes eael-a1p2di8-item-2-animation {
-    0% {
-      top: 50%;
-      left: 50%;
-    }
-    100% {
-      top: 40%;
-      left: 10%;
-    }
-  }
-  @keyframes eael-a1p2di8-item-2-animation {
-    0% {
-      top: 50%;
-      left: 50%;
-    }
-    100% {
-      top: 40%;
-      left: 10%;
-    }
-  }
-  @-webkit-keyframes eael-a1p2di8-item-3-animation {
+  @-webkit-keyframes eael-a1p2di8dv-item-3-animation {
     0% {
       top: 50%;
       left: 50%;
     }
     100% {
       top: 16%;
-      left: 22.9%;
+      left: 6.9%;
     }
   }
-  @keyframes eael-a1p2di8-item-3-animation {
+  @keyframes eael-a1p2di8dv-item-3-animation {
     0% {
       top: 50%;
       left: 50%;
     }
     100% {
       top: 16%;
-      left: 22.9%;
+      left: 6.9%;
     }
   }
-  @-webkit-keyframes eael-a1p2di8-item-4-animation {
+  @-webkit-keyframes eael-a1p2di8dv-item-4-animation {
     0% {
       top: 50%;
       left: 50%;
     }
     100% {
-      top: 1.9%;
-      left: 40.6%;
+      top: 2.9%;
+      left: 33.6%;
     }
   }
-  @keyframes eael-a1p2di8-item-4-animation {
+  @keyframes eael-a1p2di8dv-item-4-animation {
     0% {
       top: 50%;
       left: 50%;
     }
     100% {
-      top: 1.9%;
-      left: 40.6%;
+      top: 2.9%;
+      left: 33.6%;
     }
   }
-  @-webkit-keyframes eael-a1p2di8-item-5-animation {
+  @-webkit-keyframes eael-a1p2di8dv-item-5-animation {
     0% {
       top: 50%;
       left: 50%;
     }
     100% {
-      top: 1.9%;
-      left: 59.4%;
+      top: 3%;
+      left: 65.4%;
     }
   }
-  @keyframes eael-a1p2di8-item-5-animation {
+  @keyframes eael-a1p2di8dv-item-5-animation {
     0% {
       top: 50%;
       left: 50%;
     }
     100% {
-      top: 1.9%;
-      left: 59.4%;
+      top: 3%;
+      left: 65.4%;
     }
   }
-  @-webkit-keyframes eael-a1p2di8-item-6-animation {
-    0% {
-      top: 50%;
-      left: 50%;
-    }
-    100% {
-      top: 16%;
-      left: 77.1%;
-    }
-  }
-  @keyframes eael-a1p2di8-item-6-animation {
+  @-webkit-keyframes eael-a1p2di8dv-item-6-animation {
     0% {
       top: 50%;
       left: 50%;
     }
     100% {
       top: 16%;
-      left: 77.1%;
+      left: 93.1%;
     }
   }
-  @-webkit-keyframes eael-a1p2di8-item-7-animation {
+  @keyframes eael-a1p2di8dv-item-6-animation {
+    0% {
+      top: 50%;
+      left: 50%;
+    }
+    100% {
+      top: 16%;
+      left: 93.1%;
+    }
+  }
+  @-webkit-keyframes eael-a1p2di8dv-item-7-animation {
     0% {
       top: 50%;
       left: 50%;
     }
     100% {
       top: 40%;
-      left: 90%;
+      left: 97%;
     }
   }
-  @keyframes eael-a1p2di8-item-7-animation {
+  @keyframes eael-a1p2di8dv-item-7-animation {
     0% {
       top: 50%;
       left: 50%;
     }
     100% {
       top: 40%;
-      left: 90%;
+      left: 97%;
     }
-  }
-  @-webkit-keyframes eael-a1p2di8-item-8-animation {
-    0% {
-      top: 50%;
-      left: 50%;
-    }
-    100% {
-      top: 72%;
-      left: 98%;
-    }
-  }
-  @keyframes eael-a1p2di8-item-8-animation {
-    0% {
-      top: 50%;
-      left: 50%;
-    }
-    100% {
-      top: 72%;
-      left: 98%;
-    }
-  }
-  .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-interactive-circle-animation-1 [data-items="8"] .eael-circle-item #eael-circle-item-1 {
-    -webkit-animation: eael-a1p2di8-item-1-animation 2s;
-            animation: eael-a1p2di8-item-1-animation 2s;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-interactive-circle-animation-1 [data-items="8"] .eael-circle-item #eael-circle-item-2 {
-    -webkit-animation: eael-a1p2di8-item-2-animation 2s;
-            animation: eael-a1p2di8-item-2-animation 2s;
+    -webkit-animation: eael-a1p2di8dv-item-2-animation 2s;
+            animation: eael-a1p2di8dv-item-2-animation 2s;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-interactive-circle-animation-1 [data-items="8"] .eael-circle-item #eael-circle-item-3 {
-    -webkit-animation: eael-a1p2di8-item-3-animation 2s;
-            animation: eael-a1p2di8-item-3-animation 2s;
+    -webkit-animation: eael-a1p2di8dv-item-3-animation 2s;
+            animation: eael-a1p2di8dv-item-3-animation 2s;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-interactive-circle-animation-1 [data-items="8"] .eael-circle-item #eael-circle-item-4 {
-    -webkit-animation: eael-a1p2di8-item-4-animation 2s;
-            animation: eael-a1p2di8-item-4-animation 2s;
+    -webkit-animation: eael-a1p2di8dv-item-4-animation 2s;
+            animation: eael-a1p2di8dv-item-4-animation 2s;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-interactive-circle-animation-1 [data-items="8"] .eael-circle-item #eael-circle-item-5 {
-    -webkit-animation: eael-a1p2di8-item-5-animation 2s;
-            animation: eael-a1p2di8-item-5-animation 2s;
+    -webkit-animation: eael-a1p2di8dv-item-5-animation 2s;
+            animation: eael-a1p2di8dv-item-5-animation 2s;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-interactive-circle-animation-1 [data-items="8"] .eael-circle-item #eael-circle-item-6 {
-    -webkit-animation: eael-a1p2di8-item-6-animation 2s;
-            animation: eael-a1p2di8-item-6-animation 2s;
+    -webkit-animation: eael-a1p2di8dv-item-6-animation 2s;
+            animation: eael-a1p2di8dv-item-6-animation 2s;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-interactive-circle-animation-1 [data-items="8"] .eael-circle-item #eael-circle-item-7 {
-    -webkit-animation: eael-a1p2di8-item-7-animation 2s;
-            animation: eael-a1p2di8-item-7-animation 2s;
-  }
-  .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-interactive-circle-animation-1 [data-items="8"] .eael-circle-item #eael-circle-item-8 {
-    -webkit-animation: eael-a1p2di8-item-8-animation 2s;
-            animation: eael-a1p2di8-item-8-animation 2s;
+    -webkit-animation: eael-a1p2di8dv-item-7-animation 2s;
+            animation: eael-a1p2di8dv-item-7-animation 2s;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-2 .eael-circle-info {
     width: 100%;
@@ -7234,14 +7186,18 @@
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-circle-desktop-view .eael-circle-info .eael-circle-inner[data-items="8"] .eael-circle-item #eael-circle-item-3 {
     top: 16%;
-    left: 11.9%;
+    left: 6.9%;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-circle-desktop-view .eael-circle-info .eael-circle-inner[data-items="8"] .eael-circle-item #eael-circle-item-4 {
     top: 2.9%;
     left: 33.6%;
   }
+  .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-circle-desktop-view .eael-circle-info .eael-circle-inner[data-items="8"] .eael-circle-item #eael-circle-item-5 {
+    top: 3%;
+    left: 65.4%;
+  }
   .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-circle-desktop-view .eael-circle-info .eael-circle-inner[data-items="8"] .eael-circle-item #eael-circle-item-6 {
-    left: 85.1%;
+    left: 93.1%;
   }
   .eael-circle-wrapper.eael-interactive-circle-preset-2.eael-circle-desktop-view .eael-circle-info .eael-circle-inner[data-items="8"] .eael-circle-item #eael-circle-item-7 {
     left: 97%;

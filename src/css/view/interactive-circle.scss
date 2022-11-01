@@ -4682,118 +4682,85 @@
                     }
                 }
                 [data-items="8"] {
-                    @keyframes eael-a1p2di8-item-1-animation {
+                    @keyframes eael-a1p2di8dv-item-2-animation {
                         0% {
                             top: 50%;
                             left: 50%;
                         }
                         100% {
-                            top: 72%;
+                            top: 40%;
                             left: 2%;
                         }
                     }
-                    @keyframes eael-a1p2di8-item-2-animation {
-                        0% {
-                            top: 50%;
-                            left: 50%;
-                        }
-                        100% {
-                            top: 40%;
-                            left: 10%;
-                        }
-                    }
-                    @keyframes eael-a1p2di8-item-3-animation {
+                    @keyframes eael-a1p2di8dv-item-3-animation {
                         0% {
                             top: 50%;
                             left: 50%;
                         }
                         100% {
                             top: 16%;
-                            left: 22.9%;
+                            left: 6.9%;
                         }
                     }
-                    @keyframes eael-a1p2di8-item-4-animation {
+                    @keyframes eael-a1p2di8dv-item-4-animation {
                         0% {
                             top: 50%;
                             left: 50%;
                         }
                         100% {
-                            top: 1.9%;
-                            left: 40.6%;
+                            top: 2.9%;
+                            left: 33.6%;
                         }
                     }
-                    @keyframes eael-a1p2di8-item-5-animation {
+                    @keyframes eael-a1p2di8dv-item-5-animation {
                         0% {
                             top: 50%;
                             left: 50%;
                         }
                         100% {
-                            top: 1.9%;
-                            left: 59.4%;
+                            top: 3%;
+                            left: 65.4%;
                         }
                     }
-                    @keyframes eael-a1p2di8-item-6-animation {
+                    @keyframes eael-a1p2di8dv-item-6-animation {
                         0% {
                             top: 50%;
                             left: 50%;
                         }
                         100% {
                             top: 16%;
-                            left: 77.1%;
+                            left: 93.1%;
                         }
                     }
-                    @keyframes eael-a1p2di8-item-7-animation {
+                    @keyframes eael-a1p2di8dv-item-7-animation {
                         0% {
                             top: 50%;
                             left: 50%;
                         }
                         100% {
                             top: 40%;
-                            left: 90%;
-                        }
-                    }
-                    @keyframes eael-a1p2di8-item-8-animation {
-                        0% {
-                            top: 50%;
-                            left: 50%;
-                        }
-                        100% {
-                            top: 72%;
-                            left: 98%;
+                            left: 97%;
                         }
                     }
 
                     .eael-circle-item {
-                        #eael-circle-item-1 {
-                            animation: eael-a1p2di8-item-1-animation $animation-duration;
-                        }
-
                         #eael-circle-item-2 {
-                            animation: eael-a1p2di8-item-2-animation $animation-duration;
+                            animation: eael-a1p2di8dv-item-2-animation $animation-duration;
                         }
-
                         #eael-circle-item-3 {
-                            animation: eael-a1p2di8-item-3-animation $animation-duration;
+                            animation: eael-a1p2di8dv-item-3-animation $animation-duration;
                         }
-
                         #eael-circle-item-4 {
-                            animation: eael-a1p2di8-item-4-animation $animation-duration;
+                            animation: eael-a1p2di8dv-item-4-animation $animation-duration;
                         }
-
                         #eael-circle-item-5 {
-                            animation: eael-a1p2di8-item-5-animation $animation-duration;
+                            animation: eael-a1p2di8dv-item-5-animation $animation-duration;
                         }
-
                         #eael-circle-item-6 {
-                            animation: eael-a1p2di8-item-6-animation $animation-duration;
+                            animation: eael-a1p2di8dv-item-6-animation $animation-duration;
                         }
-
                         #eael-circle-item-7 {
-                            animation: eael-a1p2di8-item-7-animation $animation-duration;
-                        }
-
-                        #eael-circle-item-8 {
-                            animation: eael-a1p2di8-item-8-animation $animation-duration;
+                            animation: eael-a1p2di8dv-item-7-animation $animation-duration;
                         }
                     }
                 }
@@ -4867,14 +4834,18 @@
                                 }
                                 #eael-circle-item-3 {
                                     top: 16%;
-                                    left: 11.9%;
+                                    left: 6.9%;
                                 }
                                 #eael-circle-item-4 {
                                     top: 2.9%;
                                     left: 33.6%;
                                 }
+                                #eael-circle-item-5 {
+                                    top: 3%;
+                                    left: 65.4%;
+                                }
                                 #eael-circle-item-6 {
-                                    left: 85.1%;
+                                    left: 93.1%;
                                 }
                                 #eael-circle-item-7 {
                                     left: 97%;
