@@ -9,7 +9,7 @@
             $('.eael-ext-scroll-to-top-wrap').removeClass('scroll-to-top-hide');
         }
 
-        if( elementorFrontend ){
+        if( typeof elementorFrontend !== 'undefined' && elementorFrontend ){
             elementorFrontend.elements.$body[0].addEventListener('scroll', eaelScrollToTop);
         }
 
