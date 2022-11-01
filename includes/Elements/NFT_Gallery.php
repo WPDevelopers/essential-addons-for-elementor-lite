@@ -628,12 +628,12 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
-        $this->add_control( 'eael_nft_gallery_owned_by_image', [
+        $this->add_control( 'eael_nft_gallery_created_by_image', [
 			'label'     => __( 'Image', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
 		] );
 
-        $this->add_responsive_control( "eael_nft_gallery_owned_by_image_width", [
+        $this->add_responsive_control( "eael_nft_gallery_created_by_image_width", [
 			'label'           => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
 			'type'            => Controls_Manager::SLIDER,
 			'size_units'      => [
@@ -658,11 +658,11 @@ class NFT_Gallery extends Widget_Base
 				],
 			],
 			'selectors'       => [
-				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper img" => 'width: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-creator-wrapper img" => 'width: {{SIZE}}{{UNIT}};',
 			],
 		] );
         
-        $this->add_responsive_control( "eael_nft_gallery_owned_by_image_height", [
+        $this->add_responsive_control( "eael_nft_gallery_created_by_image_height", [
 			'label'           => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
 			'type'            => Controls_Manager::SLIDER,
 			'size_units'      => [
@@ -687,11 +687,11 @@ class NFT_Gallery extends Widget_Base
 				],
 			],
 			'selectors'       => [
-				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper img" => 'height: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-creator-wrapper img" => 'height: {{SIZE}}{{UNIT}};',
 			],
 		] );
 
-		$this->add_responsive_control( "eael_nft_gallery_owned_by_image_margin", [
+		$this->add_responsive_control( "eael_nft_gallery_created_by_image_margin", [
 			'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -700,10 +700,11 @@ class NFT_Gallery extends Widget_Base
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper img" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-creator-wrapper img" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
-		$this->add_responsive_control( "eael_form_wrap_padding", [
+
+		$this->add_responsive_control( "eael_nft_gallery_created_by_image_padding", [
 			'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -712,15 +713,17 @@ class NFT_Gallery extends Widget_Base
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper img" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-creator-wrapper img" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
+
 		$this->add_group_control( Group_Control_Border::get_type(), [
-			'name'      => "eael_nft_gallery_owned_by_image_border",
-			'selector'  => "{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper img",
+			'name'      => "eael_nft_gallery_created_by_image_border",
+			'selector'  => "{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-creator-wrapper img",
 		] );
+
         $this->add_control(
-            'eael_nft_gallery_owned_by_image_border_radius',
+            'eael_nft_gallery_created_by_image_border_radius',
             [
                 'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
@@ -730,18 +733,18 @@ class NFT_Gallery extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper img' => 'border-radius: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-creator-wrapper img' => 'border-radius: {{SIZE}}px;',
                 ],
             ]
         );
 
-        $this->add_control( 'eael_nft_gallery_owned_by_label', [
+        $this->add_control( 'eael_nft_gallery_created_by_label', [
 			'label'     => __( 'Label', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
 		] );
 
-        $this->add_control( 'eael_nft_gallery_owned_by_link', [
+        $this->add_control( 'eael_nft_gallery_created_by_link', [
 			'label'     => __( 'Link', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
@@ -840,7 +843,8 @@ class NFT_Gallery extends Widget_Base
 				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper img" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
-		$this->add_responsive_control( "eael_form_wrap_padding", [
+
+		$this->add_responsive_control( "eael_nft_gallery_owned_by_image_padding", [
 			'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -852,10 +856,12 @@ class NFT_Gallery extends Widget_Base
 				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper img" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
+
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'      => "eael_nft_gallery_owned_by_image_border",
 			'selector'  => "{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper img",
 		] );
+
         $this->add_control(
             'eael_nft_gallery_owned_by_image_border_radius',
             [
