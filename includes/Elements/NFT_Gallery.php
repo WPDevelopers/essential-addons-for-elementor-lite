@@ -406,186 +406,118 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
-        // #ToDo Section Layout Styles: Column Gap, Row Gap
-        // #ToDo Section Item Box Styles: Background (Normal, Hover: Classic, Gradient), Overlay Color, Border and Shadow, Padding
-        // #ToDo Section Image Styles: Height, Width, Margin, Border Radius
-        // #ToDo Section Title: Typography, Color, Margin
-        // #ToDo Section Creator/Owner: Show Name, Show Image, Typography, Label Color, Link Color, Image Height, Image Width, Image Border Radius, Margin
-        // #ToDo Section Price Style: Typography, Color, Margin
-        // #ToDo Section Button Style: Typography, Text Color, Background Color, Hover Text Color, Hover Background Color, Margin, Padding
-        // #ToDo Section Border & Shadow Style: Border (including box shadow) (Normal and Hover), Border Radius Transition on hover
+        $this->add_responsive_control(
+            'eael_nft_gallery_wrap_margin',
+            [
+                'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
 
-        /**
-         * -------------------------------------------
-         * Tab Style (Info Box Image)
-         * -------------------------------------------
-         */
+        $this->add_responsive_control(
+            'eael_nft_gallery_wrap_padding',
+            [
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
 
-        // $this->start_controls_tabs('eael_infobox_image_style');
+        $this->add_control(
+            'eael_nft_gallery_wrap_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'size' => 4,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items' => 'border-radius: {{SIZE}}px;',
+                ],
+            ]
+        );
 
-        // $this->start_controls_tab(
-        //     'eael_infobox_image_icon_normal',
-        //     [
-        //         'label' => __('Normal', 'essential-addons-for-elementor-lite'),
-        //     ]
-        // );
+        $this->start_controls_tabs('eael_nft_gallery_wrap_controls_tabs');
 
-        // $this->add_control(
-        //     'eael_infobox_image_icon_bg_color',
-        //     [
-        //         'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-        //         'type' => Controls_Manager::COLOR,
-        //         'default' => '',
-        //         'selectors' => [
-        //             '{{WRAPPER}} .eael-infobox .infobox-icon img' => 'background-color: {{VALUE}};',
-        //         ],
-        //     ]
-        // );
+        $this->start_controls_tab('eael_nft_gallery_wrap_control_normal', [
+            'label' => esc_html__('Normal', 'essential-addons-for-elementor-lite'),
+        ]);
 
-        // $this->add_responsive_control(
-        //     'eael_infobox_image_icon_padding',
-        //     [
-        //         'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
-        //         'type' => Controls_Manager::DIMENSIONS,
-        //         'size_units' => ['px', 'em', '%'],
-        //         'selectors' => [
-        //             '{{WRAPPER}} .eael-infobox .infobox-icon img' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-        //         ],
-        //     ]
-        // );
+        $this->add_control(
+            'eael_nft_gallery_wrap_normal_background_color',
+            [
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items' => 'background: {{VALUE}};',
+                ],
+            ]
+        );
 
-        // $this->add_group_control(
-        //     Group_Control_Border::get_type(),
-        //     [
-        //         'name' => 'eael_infobox_image_border',
-        //         'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-        //         'selector' => '{{WRAPPER}} .eael-infobox .infobox-icon img',
-        //     ]
-        // );
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'eael_nft_gallery_wrap_normal_border',
+                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items',
+            ]
+        );
 
-        // $this->add_control(
-        //     'eael_infobox_img_shape',
-        //     [
-        //         'label' => esc_html__('Image Shape', 'essential-addons-for-elementor-lite'),
-        //         'type' => Controls_Manager::SELECT,
-        //         'default' => 'square',
-        //         'label_block' => false,
-        //         'options' => [
-        //             'square' => esc_html__('Square', 'essential-addons-for-elementor-lite'),
-        //             'circle' => esc_html__('Circle', 'essential-addons-for-elementor-lite'),
-        //             'radius' => esc_html__('Radius', 'essential-addons-for-elementor-lite'),
-        //         ],
-        //         'prefix_class' => 'eael-infobox-shape-',
-        //         'condition' => [
-        //             'eael_infobox_img_or_icon' => 'img',
-        //         ],
-        //     ]
-        // );
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'eael_nft_gallery_wrap_normal_box_shadow',
+                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items',
+            ]
+        );
 
-        // $this->end_controls_tab();
+        $this->end_controls_tab();
 
-        // $this->start_controls_tab(
-        //     'eael_infobox_image_icon_hover',
-        //     [
-        //         'label' => __('Hover', 'essential-addons-for-elementor-lite'),
-        //     ]
-        // );
+        $this->start_controls_tab('eael_nft_gallery_wrap_control_hover', [
+            'label' => esc_html__('Hover', 'essential-addons-for-elementor-lite'),
+        ]);
 
-        // $this->add_group_control(
-        //     Group_Control_Box_Shadow::get_type(),
-        //     [
-        //         'name' => 'eael_infobox_image_icon_hover_shadow',
-        //         'selectors' => [
-        //             '{{WRAPPER}} .eael-infobox .infobox-icon:hover img' => 'background-color: {{VALUE}};',
-        //         ],
-        //     ]
-        // );
+        $this->add_control(
+            'eael_nft_gallery_wrap_hover_background_color',
+            [
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items:hover' => 'background: {{VALUE}};',
+                ],
+            ]
+        );
 
-        // $this->add_control(
-        //     'eael_infobox_image_icon_hover_animation',
-        //     [
-        //         'label' => esc_html__('Animation', 'essential-addons-for-elementor-lite'),
-        //         'type' => Controls_Manager::HOVER_ANIMATION,
-        //     ]
-        // );
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'eael_nft_gallery_wrap_hover_border',
+                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items:hover',
+            ]
+        );
 
-        // $this->add_group_control(
-        //     Group_Control_Border::get_type(),
-        //     [
-        //         'name' => 'eael_infobox_hover_image_border',
-        //         'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-        //         'selector' => '{{WRAPPER}} .eael-infobox:hover .infobox-icon img',
-        //     ]
-        // );
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'eael_nft_gallery_wrap_hover_box_shadow',
+                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items:hover',
+            ]
+        );
 
-        // $this->add_control(
-        //     'eael_infobox_hover_img_shape',
-        //     [
-        //         'label' => esc_html__('Image Shape', 'essential-addons-for-elementor-lite'),
-        //         'type' => Controls_Manager::SELECT,
-        //         'default' => 'square',
-        //         'label_block' => false,
-        //         'options' => [
-        //             'square' => esc_html__('Square', 'essential-addons-for-elementor-lite'),
-        //             'circle' => esc_html__('Circle', 'essential-addons-for-elementor-lite'),
-        //             'radius' => esc_html__('Radius', 'essential-addons-for-elementor-lite'),
-        //         ],
-        //         'prefix_class' => 'eael-infobox-hover-img-shape-',
-        //         'condition' => [
-        //             'eael_infobox_img_or_icon' => 'img',
-        //         ],
-        //     ]
-        // );
+        $this->end_controls_tab();
 
-        // $this->end_controls_tab();
-
-        // $this->end_controls_tabs();
-
-        // $this->add_control(
-        //     'eael_infobox_image_resizer',
-        //     [
-        //         'label' => esc_html__('Image Resizer', 'essential-addons-for-elementor-lite'),
-        //         'type' => Controls_Manager::SLIDER,
-        //         'default' => [
-        //             'size' => 100,
-        //         ],
-        //         'range' => [
-        //             'px' => [
-        //                 'max' => 500,
-        //             ],
-        //         ],
-        //         'selectors' => [
-        //             '{{WRAPPER}} .eael-infobox .infobox-icon img' => 'width: {{SIZE}}px;',
-        //             '{{WRAPPER}} .eael-infobox.icon-on-left .infobox-icon' => 'width: {{SIZE}}px;',
-        //             '{{WRAPPER}} .eael-infobox.icon-on-right .infobox-icon' => 'width: {{SIZE}}px;',
-        //         ],
-        //     ]
-        // );
-
-        // $this->add_group_control(
-        //     Group_Control_Image_Size::get_type(),
-        //     [
-        //         'name' => 'thumbnail',
-        //         'default' => 'full',
-        //         'condition' => [
-        //             'eael_infobox_image[url]!' => '',
-        //             'eael_infobox_img_or_icon' => 'img',
-        //         ],
-
-        //     ]
-        // );
-
-        // $this->add_responsive_control(
-        //     'eael_infobox_img_margin',
-        //     [
-        //         'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
-        //         'type' => Controls_Manager::DIMENSIONS,
-        //         'size_units' => ['px', 'em', '%'],
-        //         'selectors' => [
-        //             '{{WRAPPER}} .eael-infobox .infobox-icon' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-        //         ],
-        //     ]
-        // );
+        $this->end_controls_tabs();
 
         $this->end_controls_section();
 
@@ -603,7 +535,7 @@ class NFT_Gallery extends Widget_Base
         );
 
         $this->add_responsive_control(
-            'eael_nft_gallery_item_padding',
+            'eael_nft_gallery_item_margin',
             [
                 'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
