@@ -73,7 +73,7 @@ class NFT_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_nft_gallery_general_settings',
             [
-                'label' => esc_html__('General', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Query', 'essential-addons-for-elementor-lite'),
             ]
         );
 
