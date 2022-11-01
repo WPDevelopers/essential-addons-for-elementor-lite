@@ -625,6 +625,11 @@ class NFT_Gallery extends Widget_Base
 
         $this->end_controls_section();
 
+        /**
+         * -------------------------------------------
+         * Tab Style ( Owned By Style )
+         * -------------------------------------------
+         */
         $this->start_controls_section(
             'eael_section_nft_gallery_owned_by_style',
             [
@@ -635,6 +640,121 @@ class NFT_Gallery extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control( 'eael_nft_gallery_owned_by_image', [
+			'label'     => __( 'Image', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+		] );
+
+        $this->add_responsive_control( "eael_nft_gallery_owned_by_image_width", [
+			'label'           => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+			'type'            => Controls_Manager::SLIDER,
+			'size_units'      => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'           => [
+				'px'  => [
+					'min'  => 0,
+					'max'  => 1000,
+					'step' => 5,
+				],
+				'rem' => [
+					'min'  => 0,
+					'max'  => 10,
+					'step' => .5,
+				],
+				'%'   => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'selectors'       => [
+				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper img" => 'width: {{SIZE}}{{UNIT}};',
+			],
+		] );
+        
+        $this->add_responsive_control( "eael_nft_gallery_owned_by_image_height", [
+			'label'           => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
+			'type'            => Controls_Manager::SLIDER,
+			'size_units'      => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'           => [
+				'px'  => [
+					'min'  => 0,
+					'max'  => 1000,
+					'step' => 5,
+				],
+				'rem' => [
+					'min'  => 0,
+					'max'  => 10,
+					'step' => .5,
+				],
+				'%'   => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'selectors'       => [
+				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper img" => 'height: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_responsive_control( "eael_nft_gallery_owned_by_image_margin", [
+			'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper img" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_wrap_padding", [
+			'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper img" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'      => "eael_nft_gallery_owned_by_image_border",
+			'selector'  => "{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper img",
+		] );
+		$this->add_control( "eael_nft_gallery_owned_by_image_border_radius", [
+			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper img" => 'border-radius: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+        $this->add_control( 'eael_nft_gallery_owned_by_label', [
+			'label'     => __( 'Label', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+
+        $this->add_control( 'eael_nft_gallery_owned_by_link', [
+			'label'     => __( 'Link', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
 
         $this->end_controls_section();
 
