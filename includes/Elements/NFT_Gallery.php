@@ -801,8 +801,14 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
+        $this->start_controls_tabs('eael_nft_gallery_created_by_controls_tabs');
+
+        $this->start_controls_tab('eael_nft_gallery_created_by_control_normal', [
+            'label' => esc_html__('Normal', 'essential-addons-for-elementor-lite'),
+        ]);
+
         $this->add_control(
-            'eael_nft_gallery_created_by_link_text_color',
+            'eael_nft_gallery_created_by_link_normal_text_color',
             [
                 'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
@@ -811,6 +817,27 @@ class NFT_Gallery extends Widget_Base
                 ],
             ]
         );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab('eael_nft_gallery_created_by_control_hover', [
+            'label' => esc_html__('Hover', 'essential-addons-for-elementor-lite'),
+        ]);
+
+        $this->add_control(
+            'eael_nft_gallery_created_by_link_hover_text_color',
+            [
+                'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-creator-wrapper a:hover' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
 
         $this->add_responsive_control(
             'eael_nft_gallery_created_by_link_margin',
@@ -1027,8 +1054,14 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
+        $this->start_controls_tabs('eael_nft_gallery_owned_by_controls_tabs');
+
+        $this->start_controls_tab('eael_nft_gallery_owned_by_control_normal', [
+            'label' => esc_html__('Normal', 'essential-addons-for-elementor-lite'),
+        ]);
+
         $this->add_control(
-            'eael_nft_gallery_owned_by_link_text_color',
+            'eael_nft_gallery_owned_by_link_normal_text_color',
             [
                 'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
@@ -1037,6 +1070,27 @@ class NFT_Gallery extends Widget_Base
                 ],
             ]
         );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab('eael_nft_gallery_owned_by_control_hover', [
+            'label' => esc_html__('Hover', 'essential-addons-for-elementor-lite'),
+        ]);
+
+        $this->add_control(
+            'eael_nft_gallery_owned_by_link_hover_text_color',
+            [
+                'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper a:hover' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
 
         $this->add_responsive_control(
             'eael_nft_gallery_owned_by_link_margin',
