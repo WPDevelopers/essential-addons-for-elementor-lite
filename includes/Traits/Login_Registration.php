@@ -100,7 +100,6 @@ trait Login_Registration {
                 exit();
             }
 		}
-
 		if ( ! wp_verify_nonce( $_POST['eael-login-nonce'], 'essential-addons-elementor' ) ) {
 			$err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
@@ -452,7 +451,7 @@ trait Login_Registration {
 				self::$email_options['subject'] = wp_strip_all_tags( $settings['reg_email_subject'] );
 			}
 			if ( isset( $settings['reg_email_message'] ) ) {
-				self::$email_options['message'] = wp_strip_all_tags( $settings['reg_email_message'] );
+				self::$email_options['message'] = Helper::eael_wp_kses( $settings['reg_email_message'] );
 			}
 			if ( isset( $settings['reg_email_content_type'] ) ) {
 				self::$email_options['headers'] = 'Content-Type: text/' . wp_strip_all_tags( $settings['reg_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
@@ -465,7 +464,7 @@ trait Login_Registration {
 				self::$email_options['admin_subject'] = wp_strip_all_tags( $settings['reg_admin_email_subject'] );
 			}
 			if ( isset( $settings['reg_admin_email_message'] ) ) {
-				self::$email_options['admin_message'] = wp_strip_all_tags( $settings['reg_admin_email_message'] );
+				self::$email_options['admin_message'] = Helper::eael_wp_kses( $settings['reg_admin_email_message'] );
 			}
 			if ( isset( $settings['reg_admin_email_content_type'] ) ) {
 				self::$email_options['admin_headers'] = 'Content-Type: text/' . wp_strip_all_tags( $settings['reg_admin_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
@@ -630,8 +629,7 @@ trait Login_Registration {
                 exit();
             }
 		}
-
-		if ( ! wp_verify_nonce( $_POST['eael-lostpassword-nonce'], 'eael-lostpassword-action' ) ) {
+		if ( ! wp_verify_nonce( $_POST['eael-lostpassword-nonce'], 'essential-addons-elementor' ) ) {
 			$err_msg = esc_html__( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
@@ -805,8 +803,7 @@ trait Login_Registration {
                 exit();
             }
 		}
-
-		if ( ! wp_verify_nonce( $_POST['eael-resetpassword-nonce'], 'eael-resetpassword-action' ) ) {
+		if ( ! wp_verify_nonce( $_POST['eael-resetpassword-nonce'], 'essential-addons-elementor' ) ) {
 			$err_msg = esc_html__( 'Security token did not match', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
