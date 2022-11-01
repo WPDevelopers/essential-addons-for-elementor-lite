@@ -658,7 +658,7 @@ class NFT_Gallery extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'eael_nft_gallery_button_typography',
-                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button',
+                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button a',
             ]
         );
 
@@ -669,7 +669,7 @@ class NFT_Gallery extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -724,9 +724,8 @@ class NFT_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#ffffff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button a' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -736,9 +735,8 @@ class NFT_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#333333',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button a' => 'background: {{VALUE}};',
                 ],
             ]
         );
@@ -747,7 +745,7 @@ class NFT_Gallery extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'eael_nft_gallery_button_normal_border',
-                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button',
+                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button a',
             ]
         );
 
@@ -755,7 +753,7 @@ class NFT_Gallery extends Widget_Base
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'eael_nft_gallery_button_normal_box_shadow',
-                'selector' => '{{WRAPPER}} .eael-infobox .eael-infobox-button',
+                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button a',
             ]
         );
 
@@ -770,10 +768,8 @@ class NFT_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#ffffff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-infobox .eael-infobox-button:hover' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-infobox .eael-infobox-button:hover svg' => 'fill: {{VALUE}};',
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button a:hover' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -783,9 +779,8 @@ class NFT_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#333333',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-infobox .eael-infobox-button:hover' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button a:hover' => 'background: {{VALUE}};',
                 ],
             ]
         );
@@ -794,7 +789,7 @@ class NFT_Gallery extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'eael_nft_gallery_button_hover_border',
-                'selector' => '{{WRAPPER}} .eael-infobox .eael-infobox-button:hover',
+                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button a:hover',
             ]
         );
 
@@ -802,7 +797,7 @@ class NFT_Gallery extends Widget_Base
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'eael_nft_gallery_button_hover_box_shadow',
-                'selector' => '{{WRAPPER}} .eael-infobox .eael-infobox-button:hover',
+                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button a:hover',
             ]
         );
 
