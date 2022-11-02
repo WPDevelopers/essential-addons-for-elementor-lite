@@ -93,7 +93,6 @@ jQuery(window).on("elementor/frontend/init", function () {
 (function ($) {
 	ea.getToken = () => {
 		if (localize.nonce && !ea.noncegenerated) {
-			ea.noncegenerated = true;
 			$.ajax({
 				url: localize.ajaxurl,
 				type: "post",
@@ -103,6 +102,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				success: function (response) {
 					if (response.success) {
 						localize.nonce = response.data.nonce
+						ea.noncegenerated = true;
 					}
 				}
 			});
