@@ -136,6 +136,7 @@ class NFT_Gallery extends Widget_Base
                 'type' => Controls_Manager::TEXT,
 			    'placeholder'   => 'cryptopunks',
                 'condition' => [
+                    'eael_nft_gallery_opensea_type' => 'items',
                     'eael_nft_gallery_opensea_filterby' => 'slug'
                 ],
             ]
@@ -148,6 +149,7 @@ class NFT_Gallery extends Widget_Base
                 'type' => Controls_Manager::TEXT,
 			    'placeholder'   => '0x1......',
                 'condition' => [
+                    'eael_nft_gallery_opensea_type' => 'items',
                     'eael_nft_gallery_opensea_filterby' => 'wallet'
                 ],
             ]
