@@ -138,6 +138,23 @@ ea.hooks.addAction("init", "ea", () => {
             }
         });
 
+        $(document).ready(function () {
+            let eaelGetTokenPromise = new Promise(function (eaelGetTokenResolve, eaelGetTokenReject) {
+                ea.getToken();
+
+                let interval = setInterval(function () {
+                    if (ea.noncegenerated === true && typeof localize.nonce !== 'undefined') {
+                        eaelGetTokenResolve(localize.nonce);
+                        clearInterval(interval);
+                    }
+                }, 100);
+            });
+
+            eaelGetTokenPromise.then(function (updatedNonce) {
+                $('#eael-login-nonce, #eael-register-nonce, #eael-lostpassword-nonce, #eael-resetpassword-nonce').val(updatedNonce);
+            });
+        });
+
         // reCAPTCHA
         function onloadLRcb() {
             if(typeof grecaptcha.render !="function"){
