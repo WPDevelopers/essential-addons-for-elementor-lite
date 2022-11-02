@@ -71,16 +71,18 @@
   height: 100%;
 }
 
-.eael-entry-footer .eael-author-avatar {
+.eael-entry-footer .eael-author-avatar,
+.eael-entry-header-after .eael-author-avatar {
   width: 50px;
+  padding-right: 8px;
 }
 
-.eael-entry-footer .eael-author-avatar .avatar {
+.eael-entry-footer .eael-author-avatar .avatar,
+.eael-entry-header-after .eael-author-avatar .avatar {
   border-radius: 50%;
 }
 
 .eael-post-grid .eael-entry-footer .eael-entry-meta {
-  padding-left: 8px;
   text-align: left;
 }
 
@@ -117,16 +119,17 @@
   display: block;
 }
 
-.eael-grid-post .eael-entry-wrapper,
-.eael-grid-post .eael-entry-footer {
+.eael-grid-post .eael-entry-wrapper {
   padding: 15px;
 }
 
-.eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-on {
-  padding-left: 5px;
+.eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-by,
+.eael-post-grid .eael-entry-wrapper > .eael-entry-header-after .eael-entry-meta span.eael-posted-by {
+  padding-right: 8px;
 }
 
-.eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-on::before {
+.eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-on::before,
+.eael-post-grid .eael-entry-wrapper > .eael-entry-header-after .eael-entry-meta span.eael-posted-on::before {
   content: "\f111";
   font-family: "Font Awesome 5 Free";
   font-weight: 700;
@@ -565,14 +568,16 @@
   display: block;
 }
 
-.eael-entry-footer {
+.eael-entry-footer,
+.eael-entry-header-after {
   overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.eael-entry-footer > div {
+.eael-entry-footer > div,
+.eael-entry-header-after > div {
   display: inline-block;
   float: left;
 }
@@ -660,6 +665,15 @@
 
 .eael-post-grid-style-two .eael-entry-meta .eael-meta-posted-on i {
   margin-right: 7px;
+}
+
+.eael-post-grid-style-two .eael-entry-meta .eael-posted-by.style-two-footer {
+  padding: 0;
+  font-size: 12px;
+}
+
+.eael-post-grid-style-two .eael-entry-meta .eael-posted-by.style-two-footer a {
+  color: #929292;
 }
 
 .eael-post-grid-style-two .eael-entry-meta .post-meta-categories {

@@ -498,7 +498,8 @@ class Post_Grid extends Widget_Base
                 ],
                 'default' => 'flex-start',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-grid-post .eael-entry-footer, {{WRAPPER}} .eael-grid-post .eael-entry-meta' => 'justify-content: {{VALUE}}',
+                    '{{WRAPPER}} .eael-grid-post .eael-entry-footer' => 'justify-content: {{VALUE}};',
+                    '{{WRAPPER}} .eael-grid-post .eael-entry-header-after' => 'justify-content: {{VALUE}}; align-items: center;',
                 ],
             ]
         );
@@ -535,7 +536,7 @@ class Post_Grid extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-entry-meta' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-entry-header-after' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'condition' => [
                     'meta_position' => 'meta-entry-header',
@@ -551,6 +552,7 @@ class Post_Grid extends Widget_Base
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
                     '{{WRAPPER}} .eael-entry-footer' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-entry-header-after' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'condition' => [
                     'meta_position' => 'meta-entry-footer',
@@ -578,11 +580,10 @@ class Post_Grid extends Widget_Base
             $this,
             'eael_meta_header_',
             __('Meta Position', 'essential-addons-for-elementor-lite'),
-            '.eael-grid-post .eael-entry-meta',
+            '.eael-grid-post .eael-entry-header-after',
             [
                 'eael_show_meta' => 'yes',
                 'meta_position' => ['meta-entry-header'],
-                'eael_post_grid_preset_style!' => 'three',
             ]
         );
 
