@@ -4604,6 +4604,7 @@
                 align-items: center;
                 padding: 20px;
             }
+
             &.eael-circle-desktop-view {
                 margin: 20px 20px 0px 20px;
                 .eael-circle-info {
@@ -4809,7 +4810,656 @@
                         }
                     }
                 }
-
+                &.eael-interactive-circle-animation-3 {
+                    .eael-circle-info {
+                        .eael-circle-inner {
+                            [data-items="1"] {
+                                @keyframes eael-a3p2di1dv-item-1-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 0%;
+                                        left: 50%;
+                                    }
+                                }
+                                .eael-circle-item {
+                                    #eael-circle-item-1 {
+                                        animation: eael-a3p2di1dv-item-1-animation $animation-duration;
+                                    }
+                                }
+                            }
+                            [data-items="2"] {
+                                @keyframes eael-a3p2di2dv-item-1-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 40%;
+                                        left: 10%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di2dv-item-2-animation{
+                                    0% {
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 40%;
+                                        left: 90%;
+                                    }
+                                }
+                                .eael-circle-item {
+                                    #eael-circle-item-1 {
+                                        animation: eael-a3p2di2dv-item-1-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-2 {
+                                        animation: eael-a3p2di2dv-item-2-animation $animation-duration;
+                                    }
+                                }
+                            }
+                            [data-items="3"] {
+                                @keyframes eael-a3p2di3dv-item-1-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 72%;
+                                        left: 2%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di3dv-item-2-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 0%;
+                                        left: 50%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di3dv-item-3-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 72%;
+                                        left: 98%;
+                                    }
+                                }
+                                .eael-circle-item {
+                                    #eael-circle-item-1 {
+                                        animation: eael-a3p2di3dv-item-1-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-2 {
+                                        animation: eael-a3p2di3dv-item-2-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-3 {
+                                        animation: eael-a3p2di3dv-item-3-animation $animation-duration;
+                                    }
+                                }
+                            }
+                            [data-items="4"] {
+                                @keyframes eael-a3p2di4dv-item-1-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 72%;
+                                        left: 2%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di4dv-item-2-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 10.6%;
+                                        left: 27.6%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di4dv-item-3-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 10.6%;
+                                        left: 72.4%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di4dv-item-4-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 72%;
+                                        left: 98%;
+                                    }
+                                }
+                                .eael-circle-item {
+                                    #eael-circle-item-1 {
+                                        animation: eael-a3p2di4dv-item-1-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-2 {
+                                        animation: eael-a3p2di4dv-item-2-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-3 {
+                                        animation: eael-a3p2di4dv-item-3-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-4 {
+                                        animation: eael-a3p2di4dv-item-4-animation $animation-duration;
+                                    }
+                                }
+                            }
+                            [data-items="5"] {
+                                @keyframes eael-a3p2di5dv-item-1-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 72%;
+                                        left: 2%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di5dv-item-2-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 20%;
+                                        left: 20%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di5dv-item-3-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 0%;
+                                        left: 50%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di5dv-item-4-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 20%;
+                                        left: 80%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di5dv-item-5-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 72%;
+                                        left: 98%;
+                                    }
+                                }
+                                .eael-circle-item {
+                                    #eael-circle-item-1 {
+                                        animation: eael-a3p2di5dv-item-1-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-2 {
+                                        animation: eael-a3p2di5dv-item-2-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-3 {
+                                        animation: eael-a3p2di5dv-item-3-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-4 {
+                                        animation: eael-a3p2di5dv-item-4-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-5 {
+                                        animation: eael-a3p2di5dv-item-5-animation $animation-duration;
+                                    }
+                                }
+                            }
+                            [data-items="6"] {
+                                @keyframes eael-a3p2di6dv-item-1-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 72%;
+                                        left: 2%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di6dv-item-2-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 28.4%;
+                                        left: 2%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di6dv-item-3-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 3.6%;
+                                        left: 36.6%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di6dv-item-4-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 3.6%;
+                                        left: 63.4%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di6dv-item-5-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 28.4%;
+                                        left: 98%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di6dv-item-6-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 72%;
+                                        left: 98%;
+                                    }
+                                }
+                                .eael-circle-item {
+                                    #eael-circle-item-1 {
+                                        animation: eael-a3p2di6dv-item-1-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-2 {
+                                        animation: eael-a3p2di6dv-item-2-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-3 {
+                                        animation: eael-a3p2di6dv-item-3-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-4 {
+                                        animation: eael-a3p2di6dv-item-4-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-5 {
+                                        animation: eael-a3p2di6dv-item-5-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-6 {
+                                        animation: eael-a3p2di6dv-item-6-animation $animation-duration;
+                                    }
+                                }
+                            }
+                            [data-items="7"] {
+                                @keyframes eael-a3p2di7dv-item-1-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 72%;
+                                        left: 2%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di7dv-item-2-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 37.5%;
+                                        left: 2%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di7dv-item-3-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 10.9%;
+                                        left: 13.3%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di7dv-item-4-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 0;
+                                        left: 50%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di7dv-item-5-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 10.9%;
+                                        left: 85.7%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di7dv-item-6-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 37.5%;
+                                        left: 96%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di7dv-item-7-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 72%;
+                                        left: 98%;
+                                    }
+                                }
+                                .eael-circle-item {
+                                    #eael-circle-item-1 {
+                                        animation: eael-a3p2di7dv-item-1-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-2 {
+                                        animation: eael-a3p2di7dv-item-2-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-3 {
+                                        animation: eael-a3p2di7dv-item-3-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-4 {
+                                        animation: eael-a3p2di7dv-item-4-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-5 {
+                                        animation: eael-a3p2di7dv-item-5-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-6 {
+                                        animation: eael-a3p2di7dv-item-6-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-7 {
+                                        animation: eael-a3p2di7dv-item-7-animation $animation-duration;
+                                    }
+                                }
+                            }
+                            [data-items="8"] {
+                                @keyframes eael-a3p2di8dv-item-1-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 72%;
+                                        left: 2%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di8dv-item-2-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 40%;
+                                        left: 2%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di8dv-item-3-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 16%;
+                                        left: 6.9%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di8dv-item-4-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 1.9%;
+                                        left: 33.6%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di8dv-item-5-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 1.9%;
+                                        left: 65.4%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di8dv-item-6-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 16%;
+                                        left: 93.1%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di8dv-item-7-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 40%;
+                                        left: 90%;
+                                    }
+                                }
+                                @keyframes eael-a3p2di8dv-item-8-animation{
+                                    0%{
+                                        top: 50%;
+                                        left: 50%;
+                                    }
+                                    20% {
+                                        top: 30%;
+                                        left: 50%;
+                                    }
+                                    100%{
+                                        top: 72%;
+                                        left: 97%;
+                                    }
+                                }
+                                .eael-circle-item {
+                                    #eael-circle-item-1 {
+                                        animation: eael-a3p2di8dv-item-1-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-2 {
+                                        animation: eael-a3p2di8dv-item-2-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-3 {
+                                        animation: eael-a3p2di8dv-item-3-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-4 {
+                                        animation: eael-a3p2di8dv-item-4-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-5 {
+                                        animation: eael-a3p2di8dv-item-5-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-6 {
+                                        animation: eael-a3p2di8dv-item-6-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-7 {
+                                        animation: eael-a3p2di8dv-item-7-animation $animation-duration;
+                                    }
+                                    #eael-circle-item-8 {
+                                        animation: eael-a3p2di8dv-item-8-animation $animation-duration;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             &.eael-circle-responsive-view {
