@@ -451,7 +451,7 @@ trait Login_Registration {
 				self::$email_options['subject'] = wp_strip_all_tags( $settings['reg_email_subject'] );
 			}
 			if ( isset( $settings['reg_email_message'] ) ) {
-				self::$email_options['message'] = wp_strip_all_tags( $settings['reg_email_message'] );
+				self::$email_options['message'] = Helper::eael_wp_kses( $settings['reg_email_message'] );
 			}
 			if ( isset( $settings['reg_email_content_type'] ) ) {
 				self::$email_options['headers'] = 'Content-Type: text/' . wp_strip_all_tags( $settings['reg_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
@@ -464,7 +464,7 @@ trait Login_Registration {
 				self::$email_options['admin_subject'] = wp_strip_all_tags( $settings['reg_admin_email_subject'] );
 			}
 			if ( isset( $settings['reg_admin_email_message'] ) ) {
-				self::$email_options['admin_message'] = wp_strip_all_tags( $settings['reg_admin_email_message'] );
+				self::$email_options['admin_message'] = Helper::eael_wp_kses( $settings['reg_admin_email_message'] );
 			}
 			if ( isset( $settings['reg_admin_email_content_type'] ) ) {
 				self::$email_options['admin_headers'] = 'Content-Type: text/' . wp_strip_all_tags( $settings['reg_admin_email_content_type'] ) . '; charset=UTF-8' . "\r\n";
