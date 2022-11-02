@@ -5838,7 +5838,7 @@
             }
         }
 
-        @media only screen and (min-width: $breakpoint + 1) {
+        //@media only screen and (min-width: $breakpoint + 1) {
             &.eael-interactive-circle-animation-1 {
                 @keyframes eael-a1p3di8-item-1-animation{
                     0%{
@@ -6158,7 +6158,7 @@
                     }
                 }
             }
-        }
+        //}
 
         @media only screen and (max-width: $breakpoint) {
             .eael-circle-info {
