@@ -250,7 +250,6 @@ var EventCalendar = function ($scope, $) {
 				}
 				if (event.extendedProps.backgroundImage && monthlyView) {
 					element.css({"background": "url(" + event.extendedProps.backgroundImage + ")", "background-repeat": "none", "background-size": "cover"});
-					calendar.render();
 				}			
 			},
 		});
