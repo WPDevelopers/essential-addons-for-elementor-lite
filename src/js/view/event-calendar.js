@@ -270,6 +270,7 @@ var EventCalendar = function ($scope, $) {
 	});
 	
 	calendar.render();
+	setTimeout(calendar.render(),100);
 	
 	ea.hooks.addAction("eventCalendar.reinit", "ea", () => {
 		calendar.today();
