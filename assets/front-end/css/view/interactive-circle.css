@@ -49,6 +49,12 @@
 .eael-circle-wrapper .eael-circle-content h1, .eael-circle-wrapper .eael-circle-content h2, .eael-circle-wrapper .eael-circle-content h3, .eael-circle-wrapper .eael-circle-content h4, .eael-circle-wrapper .eael-circle-content h5, .eael-circle-wrapper .eael-circle-content h6, .eael-circle-wrapper .eael-circle-content p, .eael-circle-wrapper .eael-circle-content span, .eael-circle-wrapper .eael-circle-content div {
   margin: 0;
 }
+@media only screen and (max-width: 600px) {
+  .eael-circle-wrapper.eael-circle-responsive-view .eael-circle-info * {
+    -webkit-animation: none !important;
+            animation: none !important;
+  }
+}
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info {
   margin: 45px 0;
 }
