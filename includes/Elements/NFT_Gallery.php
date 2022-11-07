@@ -1496,7 +1496,6 @@ class NFT_Gallery extends Widget_Base
                         <?php
                         $item_formatted['thumbnail'] = ! empty( $item->image_url ) ? $item->image_url : '';
                         $item_formatted['title'] = ! empty( $item->name ) ? $item->name : '';
-
                         $item_formatted['creator_thumbnail'] = ! empty( $item->creator ) && ! empty( $item->creator->profile_img_url ) ? $item->creator->profile_img_url : '';
                         $item_formatted['created_by_link'] = ! empty( $item->creator ) && ! empty( $item->creator->address ) ? esc_url( $nft_gallery['api_url'] . '/' . $item->creator->address ) : '#';
                         $item_formatted['created_by_link_text'] = ! empty( $item->creator ) && ! empty( $item->creator->user ) && ! empty( $item->creator->user->username ) ? esc_html( $item->creator->user->username ) : '';
@@ -1531,7 +1530,7 @@ class NFT_Gallery extends Widget_Base
                                 <div class="eael-nft-content">
                                     <!-- Title  -->
                                     <?php if( $nft_gallery['show_title'] ) : ?>
-                                    <h3 class="eael-nft-title"><?php print_r('%s', esc_html( $item_formatted['title'] ) ); ?></h3>
+                                    <h3 class="eael-nft-title"><?php printf('%s', esc_html( $item_formatted['title'] ) ); ?></h3>
                                     <?php endif; ?>
 
                                     <!-- Creator -->
