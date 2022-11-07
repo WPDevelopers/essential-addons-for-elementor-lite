@@ -1496,18 +1496,16 @@ class NFT_Gallery extends Widget_Base
                         <?php
                         $item_formatted['thumbnail'] = ! empty( $item->image_url ) ? $item->image_url : '';
                         $item_formatted['title'] = ! empty( $item->name ) ? $item->name : '';
-                        
-                        if( ! empty( $item->creator ) ){
-                            $item_formatted['creator_thumbnail'] = ! empty( $item->creator->profile_img_url ) ? $item->creator->profile_img_url : '';
-                            $item_formatted['created_by_link'] = ! empty( $item->creator->address ) ? esc_url( $nft_gallery['api_url'] . '/' . $item->creator->address ) : '#';
-                            $item_formatted['created_by_link_text'] = ! empty( $item->creator->user ) && ! empty( $item->creator->user->username ) ? esc_html( $item->creator->user->username ) : '';
-                        }
 
-                        if( ! empty( $item->owner ) ){
-                            $item_formatted['owner_thumbnail'] = ! empty( $item->owner->profile_img_url ) ? $item->owner->profile_img_url : '';
-                            $item_formatted['owned_by_link'] = ! empty( $item->owner->address ) ? esc_url( $nft_gallery['api_url'] . '/' . $item->owner->address ) : '#';
-                            $item_formatted['owned_by_link_text'] = ! empty( $item->owner->user ) && ! empty( $item->owner->user->username ) ? esc_html( $item->owner->user->username ) : '';
-                        }
+                        $item_formatted['creator_thumbnail'] = ! empty( $item->creator ) && ! empty( $item->creator->profile_img_url ) ? $item->creator->profile_img_url : '';
+                        $item_formatted['created_by_link'] = ! empty( $item->creator ) && ! empty( $item->creator->address ) ? esc_url( $nft_gallery['api_url'] . '/' . $item->creator->address ) : '#';
+                        $item_formatted['created_by_link_text'] = ! empty( $item->creator ) && ! empty( $item->creator->user ) && ! empty( $item->creator->user->username ) ? esc_html( $item->creator->user->username ) : '';
+                        $item_formatted['show_created_by_content'] = ! empty( $item_formatted['created_by_link_text'] ) && 'NullAddress' !== $item_formatted['created_by_link_text'];
+
+                        $item_formatted['owner_thumbnail'] = ! empty( $item->owner ) && ! empty( $item->owner->profile_img_url ) ? $item->owner->profile_img_url : '';
+                        $item_formatted['owned_by_link'] = ! empty( $item->owner ) && ! empty( $item->owner->address ) ? esc_url( $nft_gallery['api_url'] . '/' . $item->owner->address ) : '#';
+                        $item_formatted['owned_by_link_text'] = ! empty( $item->owner ) && ! empty( $item->owner->user ) && ! empty( $item->owner->user->username ) ? esc_html( $item->owner->user->username ) : '';
+                        $item_formatted['show_owned_by_content'] = ! empty( $item_formatted['owned_by_link_text'] ) && 'NullAddress' !== $item_formatted['owned_by_link_text'];
 
                         $item_formatted['view_details_link'] = ! empty( $item->permalink ) ? $item->permalink : '#';
                         
@@ -1537,7 +1535,7 @@ class NFT_Gallery extends Widget_Base
                                     <?php endif; ?>
 
                                     <!-- Creator -->
-                                    <?php if( $nft_gallery['show_creator'] ) : ?>
+                                    <?php if( $nft_gallery['show_creator'] && $item_formatted['show_created_by_content'] ) : ?>
                                     <div class="eael-nft-creator-wrapper">
                                         <div class="eael-nft-creator-img">
                                             <?php
@@ -1556,7 +1554,7 @@ class NFT_Gallery extends Widget_Base
                                     <?php endif; ?>
 
                                     <!-- Owner -->
-                                    <?php if( $nft_gallery['show_owner'] ) : ?>
+                                    <?php if( $nft_gallery['show_owner'] && $item_formatted['show_owned_by_content'] ) : ?>
                                     <div class="eael-nft-owner-wrapper">
                                         <div class="eael-nft-owner-img">
                                             <?php
