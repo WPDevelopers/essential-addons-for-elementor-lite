@@ -59,7 +59,11 @@
             margin: 0;
         }
     }
-
+    @media only screen and (max-width: $breakpoint) {
+        &.eael-circle-responsive-view .eael-circle-info * {
+            animation: none !important;
+        }
+    }
     &.eael-interactive-circle-preset-1 {
         .eael-circle-info {
             $nav-item-border-color: #fff;
