@@ -702,7 +702,6 @@ class NFT_Gallery extends Widget_Base
 			'size_units'      => [
 				'px',
 				'rem',
-				'%',
 			],
 			'range'           => [
 				'px'  => [
@@ -714,10 +713,6 @@ class NFT_Gallery extends Widget_Base
 					'min'  => 0,
 					'max'  => 100,
 					'step' => .5,
-				],
-				'%'   => [
-					'min' => 0,
-					'max' => 100,
 				],
 			],
 			'selectors'       => [
@@ -830,7 +825,6 @@ class NFT_Gallery extends Widget_Base
 			'size_units'      => [
 				'px',
 				'rem',
-				'%',
 			],
 			'range'           => [
 				'px'  => [
@@ -842,10 +836,6 @@ class NFT_Gallery extends Widget_Base
 					'min'  => 0,
 					'max'  => 100,
 					'step' => .5,
-				],
-				'%'   => [
-					'min' => 0,
-					'max' => 100,
 				],
 			],
 			'selectors'       => [
