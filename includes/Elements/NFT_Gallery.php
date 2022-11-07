@@ -531,7 +531,7 @@ class NFT_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_nft_gallery_gallery_item_style',
             [
-                'label' => esc_html__('Gallery Item', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Items', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -659,7 +659,7 @@ class NFT_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_nft_gallery_nft_image_style',
             [
-                'label' => esc_html__('NFT Image', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Image', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_nft_gallery_show_image' => 'yes',
@@ -782,7 +782,7 @@ class NFT_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_nft_gallery_created_by_style',
             [
-                'label' => esc_html__('Created By', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Creator', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_nft_gallery_show_creator' => 'yes',
@@ -1035,7 +1035,7 @@ class NFT_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_nft_gallery_owned_by_style',
             [
-                'label' => esc_html__('Owned By', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Owner', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_nft_gallery_show_owner' => 'yes',
