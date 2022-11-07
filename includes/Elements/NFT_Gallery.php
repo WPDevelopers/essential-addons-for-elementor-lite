@@ -231,20 +231,20 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_nft_gallery_list_style_preset',
-            [
-                'label'   => esc_html__('Style Preset', 'essential-addons-for-elementor-lite'),
-                'type'    => Controls_Manager::SELECT,
-                'default' => 'preset-2',
-                'options' => [
-                    'preset-2' => esc_html__('Preset 1', 'essential-addons-for-elementor-lite'),
-                ],
-                'condition' => [
-                    'eael_nft_gallery_items_layout' => 'list'
-                ],
-            ]
-        );
+        // $this->add_control(
+        //     'eael_nft_gallery_list_style_preset',
+        //     [
+        //         'label'   => esc_html__('Style Preset', 'essential-addons-for-elementor-lite'),
+        //         'type'    => Controls_Manager::SELECT,
+        //         'default' => 'preset-2',
+        //         'options' => [
+        //             'preset-2' => esc_html__('Preset 1', 'essential-addons-for-elementor-lite'),
+        //         ],
+        //         'condition' => [
+        //             'eael_nft_gallery_items_layout' => 'list'
+        //         ],
+        //     ]
+        // );
 
         $this->add_responsive_control(
             'eael_nft_gallery_column',
