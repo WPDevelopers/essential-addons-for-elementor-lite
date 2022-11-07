@@ -367,27 +367,27 @@ class NFT_Gallery extends Widget_Base
         $this->add_control(
             'eael_section_nft_gallery_content_label',
             [
-                'label' => esc_html__('Label Text'),
+                'label' => esc_html__('Label'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
 
         $this->add_control('eael_nft_gallery_content_owned_by_label', [
-            'label' => esc_html__('Owned By Text', 'essential-addons-for-elementor-lite'),
+            'label' => esc_html__('Owned By', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::TEXT,
             'label_block' => false,
             'default' => esc_html__('Owned By', 'essential-addons-for-elementor-lite'),
         ]);
 
         $this->add_control('eael_nft_gallery_content_created_by_label', [
-            'label' => esc_html__('Created By Text', 'essential-addons-for-elementor-lite'),
+            'label' => esc_html__('Created By', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::TEXT,
             'label_block' => false,
             'default' => esc_html__('Created By', 'essential-addons-for-elementor-lite'),
         ]);
         
         $this->add_control('eael_nft_gallery_content_view_details_label', [
-            'label' => esc_html__('View Details Text', 'essential-addons-for-elementor-lite'),
+            'label' => esc_html__('View Details', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::TEXT,
             'label_block' => false,
             'default' => esc_html__('View Details', 'essential-addons-for-elementor-lite'),
