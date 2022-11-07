@@ -683,7 +683,7 @@ class NFT_Gallery extends Widget_Base
 				],
 				'rem' => [
 					'min'  => 0,
-					'max'  => 10,
+					'max'  => 100,
 					'step' => .5,
 				],
 				'%'   => [
@@ -712,7 +712,7 @@ class NFT_Gallery extends Widget_Base
 				],
 				'rem' => [
 					'min'  => 0,
-					'max'  => 10,
+					'max'  => 100,
 					'step' => .5,
 				],
 				'%'   => [
@@ -811,7 +811,7 @@ class NFT_Gallery extends Widget_Base
 				],
 				'rem' => [
 					'min'  => 0,
-					'max'  => 10,
+					'max'  => 100,
 					'step' => .5,
 				],
 				'%'   => [
@@ -840,7 +840,7 @@ class NFT_Gallery extends Widget_Base
 				],
 				'rem' => [
 					'min'  => 0,
-					'max'  => 10,
+					'max'  => 100,
 					'step' => .5,
 				],
 				'%'   => [
@@ -1064,7 +1064,7 @@ class NFT_Gallery extends Widget_Base
 				],
 				'rem' => [
 					'min'  => 0,
-					'max'  => 10,
+					'max'  => 100,
 					'step' => .5,
 				],
 				'%'   => [
@@ -1093,7 +1093,7 @@ class NFT_Gallery extends Widget_Base
 				],
 				'rem' => [
 					'min'  => 0,
-					'max'  => 10,
+					'max'  => 100,
 					'step' => .5,
 				],
 				'%'   => [
