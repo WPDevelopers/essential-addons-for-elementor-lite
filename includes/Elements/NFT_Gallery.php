@@ -190,18 +190,6 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
-        $this->add_control(
-		    'eael_nft_gallery_opensea_auto_cache_clear',
-		    [
-			    'label'        => esc_html__( 'Auto Cache Clear', 'essential-addons-for-elementor-lite' ),
-			    'type'         => Controls_Manager::SWITCHER,
-			    'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-			    'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
-			    'default'      => 'yes',
-			    'return_value' => 'yes',
-		    ]
-	    );
-
 	    $this->add_control(
 		    'eael_nft_gallery_opensea_data_cache_time',
 		    [
@@ -1726,7 +1714,7 @@ class NFT_Gallery extends Widget_Base
         $nft_gallery['order'] = ! empty( $settings['eael_nft_gallery_opensea_order'] ) ? esc_html( $settings['eael_nft_gallery_opensea_order'] ) : 'desc';
         $nft_gallery['posts_per_page'] = ! empty( $settings['eael_nft_gallery_opensea_posts_per_page'] ) ? esc_html( $settings['eael_nft_gallery_opensea_posts_per_page'] ) : 6;
 
-	    $expiration = ! empty( $settings['eael_nft_gallery_opensea_auto_cache_clear'] ) && ! empty( $settings['eael_nft_gallery_opensea_data_cache_time'] ) ? absint( $settings['eael_nft_gallery_opensea_data_cache_time'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
+	    $expiration = ! empty( $settings['eael_nft_gallery_opensea_data_cache_time'] ) ? absint( $settings['eael_nft_gallery_opensea_data_cache_time'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
 	    $cache_key = 'eael_nft_gallery_' . $this->get_id() . '_items_cache';
         $items = get_transient( $cache_key );
 
@@ -1789,6 +1777,7 @@ class NFT_Gallery extends Widget_Base
             return $response;
         }
 
+        $response = $items ? $items : $response;
         return $response;
     }
 
