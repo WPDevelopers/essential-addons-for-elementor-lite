@@ -412,7 +412,7 @@ class NFT_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_nft_gallery_section_pagination',
             [
-                'label' => __('Load More', 'essential-addons-for-elementor-lite'),
+                'label' => __('Load More Button', 'essential-addons-for-elementor-lite'),
             ]
         );
         
@@ -443,7 +443,7 @@ class NFT_Gallery extends Widget_Base
         $this->add_control(
             'eael_nft_gallery_load_more_text',
             [
-                'label' => __('Load More', 'essential-addons-for-elementor-lite'),
+                'label' => __('Button Text', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic'   => ['active' => true],
                 'default' => __('Load More', 'essential-addons-for-elementor-lite'),
@@ -456,7 +456,7 @@ class NFT_Gallery extends Widget_Base
         $this->add_control(
             'eael_nft_gallery_nomore_items_text',
             [
-                'label' => __('No More Items', 'essential-addons-for-elementor-lite'),
+                'label' => __('No More Items Text', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic'   => ['active' => true],
                 'default' => __('No more items!', 'essential-addons-for-elementor-lite'),
@@ -1666,10 +1666,10 @@ class NFT_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_nft_gallery_load_more_style',
             [
-                'label' => __('Load More', 'essential-addons-for-elementor-lite'),
+                'label' => __('Load More Button', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'eael_nft_gallery_section_pagination' => 'yes',
+                    'eael_nft_gallery_pagination' => 'yes',
                     'eael_nft_gallery_load_more_text!' => '',
                 ],
             ]
@@ -1701,7 +1701,7 @@ class NFT_Gallery extends Widget_Base
             [
                 'label' => __('Normal', 'essential-addons-for-elementor-lite'),
                 'condition' => [
-                    'eael_nft_gallery_section_pagination' => 'yes',
+                    'eael_nft_gallery_pagination' => 'yes',
                     'eael_nft_gallery_load_more_text!' => '',
                 ],
             ]
@@ -1717,7 +1717,7 @@ class NFT_Gallery extends Widget_Base
                     '{{WRAPPER}} .eael-nft-gallery-load-more' => 'background-color: {{VALUE}}',
                 ],
                 'condition' => [
-                    'eael_nft_gallery_section_pagination' => 'yes',
+                    'eael_nft_gallery_pagination' => 'yes',
                     'eael_nft_gallery_load_more_text!' => '',
                 ],
             ]
@@ -1733,7 +1733,7 @@ class NFT_Gallery extends Widget_Base
                     '{{WRAPPER}} .eael-nft-gallery-load-more' => 'color: {{VALUE}}',
                 ],
                 'condition' => [
-                    'eael_nft_gallery_section_pagination' => 'yes',
+                    'eael_nft_gallery_pagination' => 'yes',
                     'eael_nft_gallery_load_more_text!' => '',
                 ],
             ]
@@ -1748,7 +1748,7 @@ class NFT_Gallery extends Widget_Base
                 'default' => '1px',
                 'selector' => '{{WRAPPER}} .eael-nft-gallery-load-more',
                 'condition' => [
-                    'eael_nft_gallery_section_pagination' => 'yes',
+                    'eael_nft_gallery_pagination' => 'yes',
                     'eael_nft_gallery_load_more_text!' => '',
                 ],
             ]
@@ -1764,7 +1764,7 @@ class NFT_Gallery extends Widget_Base
                     '{{WRAPPER}} .eael-nft-gallery-load-more' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'condition' => [
-                    'eael_nft_gallery_section_pagination' => 'yes',
+                    'eael_nft_gallery_pagination' => 'yes',
                     'eael_nft_gallery_load_more_text!' => '',
                 ],
             ]
@@ -1780,7 +1780,7 @@ class NFT_Gallery extends Widget_Base
 				],
                 'selector' => '{{WRAPPER}} .eael-nft-gallery-load-more .eael-nft-gallery-load-more-text',
                 'condition' => [
-                    'eael_nft_gallery_section_pagination' => 'yes',
+                    'eael_nft_gallery_pagination' => 'yes',
                     'eael_nft_gallery_load_more_text!' => '',
                 ],
             ]
@@ -1836,7 +1836,7 @@ class NFT_Gallery extends Widget_Base
                     '{{WRAPPER}} .eael-nft-gallery-load-more' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'condition' => [
-                    'eael_nft_gallery_section_pagination' => 'yes',
+                    'eael_nft_gallery_pagination' => 'yes',
                     'eael_nft_gallery_load_more_text!' => '',
                 ],
             ]
@@ -1848,7 +1848,7 @@ class NFT_Gallery extends Widget_Base
                 'name' => 'eael_nft_gallery_load_more_box_shadow',
                 'selector' => '{{WRAPPER}} .eael-nft-gallery-load-more',
                 'condition' => [
-                    'eael_nft_gallery_section_pagination' => 'yes',
+                    'eael_nft_gallery_pagination' => 'yes',
                     'eael_nft_gallery_load_more_text!' => '',
                 ],
             ]
@@ -1861,8 +1861,8 @@ class NFT_Gallery extends Widget_Base
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
                 'condition' => [
-                    'eael_nft_gallery_section_pagination' => 'yes',
-                    'eael_nft_gallery_load_more_icon!' => '',
+                    'eael_nft_gallery_pagination' => 'yes',
+                    'eael_nft_gallery_load_more_icon_new!' => '',
                 ],
             ]
         );
@@ -1883,8 +1883,8 @@ class NFT_Gallery extends Widget_Base
                     '{{WRAPPER}} .eael-nft-gallery-load-more .eael-nft-gallery-load-more-icon' => 'margin-top: {{TOP}}{{UNIT}}; margin-left: {{LEFT}}{{UNIT}}; margin-right: {{RIGHT}}{{UNIT}}; margin-bottom: {{BOTTOM}}{{UNIT}};',
                 ],
                 'condition' => [
-                    'eael_nft_gallery_section_pagination' => 'yes',
-                    'eael_nft_gallery_load_more_icon!' => '',
+                    'eael_nft_gallery_pagination' => 'yes',
+                    'eael_nft_gallery_load_more_icon_new!' => '',
                 ],
             ]
         );
@@ -1896,7 +1896,7 @@ class NFT_Gallery extends Widget_Base
             [
                 'label' => __('Hover', 'essential-addons-for-elementor-lite'),
                 'condition' => [
-                    'eael_nft_gallery_section_pagination' => 'yes',
+                    'eael_nft_gallery_pagination' => 'yes',
                     'eael_nft_gallery_load_more_text!' => '',
                 ],
             ]
@@ -1912,7 +1912,7 @@ class NFT_Gallery extends Widget_Base
                     '{{WRAPPER}} .eael-nft-gallery-load-more:hover' => 'background-color: {{VALUE}}',
                 ],
                 'condition' => [
-                    'eael_nft_gallery_section_pagination' => 'yes',
+                    'eael_nft_gallery_pagination' => 'yes',
                     'eael_nft_gallery_load_more_text!' => '',
                 ],
             ]
@@ -1928,7 +1928,7 @@ class NFT_Gallery extends Widget_Base
                     '{{WRAPPER}} .eael-nft-gallery-load-more:hover' => 'color: {{VALUE}}',
                 ],
                 'condition' => [
-                    'eael_nft_gallery_section_pagination' => 'yes',
+                    'eael_nft_gallery_pagination' => 'yes',
                     'eael_nft_gallery_load_more_text!' => '',
                 ],
             ]
@@ -1944,7 +1944,7 @@ class NFT_Gallery extends Widget_Base
                     '{{WRAPPER}} .eael-nft-gallery-load-more:hover' => 'border-color: {{VALUE}}',
                 ],
                 'condition' => [
-                    'eael_nft_gallery_section_pagination' => 'yes',
+                    'eael_nft_gallery_pagination' => 'yes',
                     'eael_nft_gallery_load_more_text!' => '',
                 ],
             ]
@@ -1956,7 +1956,7 @@ class NFT_Gallery extends Widget_Base
                 'name' => 'nft_gallery_load_more_box_shadow_hover',
                 'selector' => '{{WRAPPER}} .eael-nft-gallery-load-more:hover',
                 'condition' => [
-                    'eael_nft_gallery_section_pagination' => 'yes',
+                    'eael_nft_gallery_pagination' => 'yes',
                     'eael_nft_gallery_load_more_text!' => '',
                 ],
             ]
