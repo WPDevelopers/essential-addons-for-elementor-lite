@@ -305,6 +305,18 @@ class NFT_Gallery extends Widget_Base
 		);
 
         $this->add_control(
+			'eael_nft_gallery_image_clickable',
+			[
+				'label' => __( 'Image Clickable?', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+                'default' => 'yes',
+			]
+		);
+
+        $this->add_control(
 			'eael_nft_gallery_show_title',
 			[
 				'label' => __( 'Title', 'essential-addons-for-elementor-lite' ),
@@ -1520,7 +1532,7 @@ class NFT_Gallery extends Widget_Base
 
         $nft_gallery['source'] = ! empty( $settings['eael_nft_gallery_sources'] ) ? esc_html( $settings['eael_nft_gallery_sources'] ) : 'opensea';
         $nft_gallery['layout'] = !empty($settings['eael_nft_gallery_items_layout']) ? $settings['eael_nft_gallery_items_layout'] : 'grid';
-        $nft_gallery['preset'] = !empty($settings['eael_nft_gallery_style_preset']) ? $settings['eael_nft_gallery_style_preset'] : 'preset-2';
+        $nft_gallery['preset'] = !empty($settings['eael_nft_gallery_style_preset']) && 'grid' === $nft_gallery['layout'] ? $settings['eael_nft_gallery_style_preset'] : 'preset-2';
         $nft_gallery['preset'] = 'list' === $nft_gallery['layout'] && !empty($settings['eael_nft_gallery_list_style_preset']) ? $settings['eael_nft_gallery_list_style_preset'] : $nft_gallery['preset'];
         $nft_gallery['owned_by_label'] = ! empty( $settings['eael_nft_gallery_content_owned_by_label'] ) ? $settings['eael_nft_gallery_content_owned_by_label'] : __('Owned By', 'essential-addons-for-elementor-lite');
         $nft_gallery['created_by_label'] = ! empty( $settings['eael_nft_gallery_content_created_by_label'] ) ? $settings['eael_nft_gallery_content_created_by_label'] : __('Owned By', 'essential-addons-for-elementor-lite');
@@ -1529,6 +1541,7 @@ class NFT_Gallery extends Widget_Base
         $nft_gallery['api_url'] = '';
         $nft_gallery['api_url'] = 'opensea' === $nft_gallery['source'] ? 'https://opensea.io/' : ''; 
         $nft_gallery['show_thumbnail'] = ! empty( $settings['eael_nft_gallery_show_image'] ) && 'yes' === $settings['eael_nft_gallery_show_image'] ? true : false; 
+        $nft_gallery['thumbnail_clickable'] = ! empty( $settings['eael_nft_gallery_image_clickable'] ) && 'yes' === $settings['eael_nft_gallery_image_clickable'] ? true : false; 
         $nft_gallery['show_title'] = ! empty( $settings['eael_nft_gallery_show_title'] ) && 'yes' === $settings['eael_nft_gallery_show_title'] ? true : false; 
         $nft_gallery['show_owner'] = ! empty( $settings['eael_nft_gallery_show_owner'] ) && 'yes' === $settings['eael_nft_gallery_show_owner'] ? true : false; 
         $nft_gallery['show_creator'] = ! empty( $settings['eael_nft_gallery_show_creator'] ) && 'yes' === $settings['eael_nft_gallery_show_creator'] ? true : false; 
@@ -1582,7 +1595,13 @@ class NFT_Gallery extends Widget_Base
                                 <?php
                                 if( $nft_gallery['show_thumbnail'] ) {
                                     if ( ! empty( $item_formatted['thumbnail'] ) ) {
+                                        if ( $nft_gallery['thumbnail_clickable'] ) {
+                                            printf('<a href="%s">', esc_url( $item_formatted['view_details_link'] ));
+                                        }
                                         printf('<img src="%s" alt="%s">', esc_attr($item_formatted['thumbnail']), esc_attr('NFT Gallery'));
+                                        if ( $nft_gallery['thumbnail_clickable'] ) {
+                                            printf('</a>');
+                                        }
                                     }
                                 }
                                 ?>
@@ -1621,7 +1640,7 @@ class NFT_Gallery extends Widget_Base
                                         <div class="eael-nft-owner-img">
                                             <?php
                                             if (!empty($item_formatted['owner_thumbnail'])) {
-                                                printf('<img src="%s" alt="%s">', esc_attr($item_formatted['owner_thumbnail']), esc_attr__('EA NFT Owner Thumbnail', 'essential-addons-for-elementor-lite'));
+                                                printf('<img src="%s" alt="%s">', esc_url( $item_formatted['owner_thumbnail'] ), esc_attr__('EA NFT Owner Thumbnail', 'essential-addons-for-elementor-lite') );
                                             } else {
                                                 // default owner svg
                                             }
@@ -1629,7 +1648,7 @@ class NFT_Gallery extends Widget_Base
                                         </div>
                                         <div class="eael-nft-owned-by">
                                             <span><?php printf('%s', esc_html( $nft_gallery['owned_by_label'] ) ); ?> </span>
-                                            <?php printf('<a target="_blank" href="%s">%s</a>', esc_attr( $item_formatted['owned_by_link'] ), esc_html( $item_formatted['owned_by_link_text'] ) ); ?>
+                                            <?php printf('<a target="_blank" href="%s">%s</a>', esc_url( $item_formatted['owned_by_link'] ), esc_html( $item_formatted['owned_by_link_text'] ) ); ?>
                                         </div>
                                     </div>
                                     <?php endif; ?>
