@@ -1357,7 +1357,7 @@ class NFT_Gallery extends Widget_Base
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
-                'default' => 'center',
+                'default' => 'left',
             ]
         );
 
