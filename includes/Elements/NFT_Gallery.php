@@ -190,6 +190,46 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
+        $this->add_control(
+		    'eael_nft_gallery_opensea_auto_cache_clear',
+		    [
+			    'label'        => esc_html__( 'Auto Cache Clear', 'essential-addons-for-elementor-lite' ),
+			    'type'         => Controls_Manager::SWITCHER,
+			    'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			    'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+			    'default'      => 'yes',
+			    'return_value' => 'yes',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_nft_gallery_opensea_data_cache_time',
+		    [
+			    'label'       => __( 'Data Cache Time', 'essential-addons-for-elementor-lite' ),
+			    'type'        => Controls_Manager::NUMBER,
+			    'min'         => 1,
+			    'default'     => 60,
+			    'description' => __( 'Cache expiration time (Minutes)', 'essential-addons-for-elementor-lite' ),
+			    'condition'   => [
+				    'eael_nft_gallery_opensea_auto_cache_clear' => 'yes'
+			    ]
+		    ]
+	    );
+
+	    // $this->add_control(
+		//     'eael_nft_gallery_opensea_clear_cache',
+		//     [
+		// 	    'label'       => __( 'Clear Cache', 'essential-addons-for-elementor-lite' ),
+		// 	    'type'        => Controls_Manager::BUTTON,
+		// 	    'text'        => __( 'Clear', 'essential-addons-for-elementor-lite' ),
+		// 	    'event'       => 'ea:nft_gallery:cache:clear',
+		// 	    'description' => esc_html__( 'Note: This will refresh your feed and fetch the latest data from OpenSea', 'essential-addons-for-elementor-lite' ),
+		// 	    'condition'   => [
+		// 		    'eael_nft_gallery_opensea_auto_cache_clear' => ''
+		// 	    ]
+		//     ]
+	    // );
+
         $this->end_controls_section();
 
         /**
@@ -1699,6 +1739,12 @@ class NFT_Gallery extends Widget_Base
         $nft_gallery['filterby'] = ! empty( $settings['eael_nft_gallery_opensea_filterby'] ) ? esc_html( $settings['eael_nft_gallery_opensea_filterby'] ) : '';
         $nft_gallery['order'] = ! empty( $settings['eael_nft_gallery_opensea_order'] ) ? esc_html( $settings['eael_nft_gallery_opensea_order'] ) : 'desc';
         $nft_gallery['posts_per_page'] = ! empty( $settings['eael_nft_gallery_opensea_posts_per_page'] ) ? esc_html( $settings['eael_nft_gallery_opensea_posts_per_page'] ) : 6;
+
+        $token = get_option($this->get_id() . '_nft_gallery_token');
+	    $expiration = ! empty( $settings['eael_auto_clear_cache'] ) && ! empty( $settings['eael_twitter_feed_cache_limit'] ) ? absint( $settings['eael_twitter_feed_cache_limit'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
+	    $cache_key = $settings['eael_twitter_feed_ac_name'] . '_' . $expiration . '_' . md5( $settings['eael_twitter_feed_hashtag_name'] . $settings['eael_twitter_feed_consumer_key'] . $settings['eael_twitter_feed_consumer_secret'] ) . '_tf_cache';
+        $items = get_transient( $cache_key );
+        $html = '';
 
         if ( 'opensea' === $nft_gallery['source'] ) {
             $nft_gallery['api_key'] = $nft_gallery['api_key'] ? $nft_gallery['api_key'] :  'b61c8a54123d4dcb9acc1b9c26a01cd1';
