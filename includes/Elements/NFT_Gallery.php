@@ -198,9 +198,6 @@ class NFT_Gallery extends Widget_Base
 			    'min'         => 1,
 			    'default'     => 60,
 			    'description' => __( 'Cache expiration time (Minutes)', 'essential-addons-for-elementor-lite' ),
-			    'condition'   => [
-				    'eael_nft_gallery_opensea_auto_cache_clear' => 'yes'
-			    ]
 		    ]
 	    );
 
