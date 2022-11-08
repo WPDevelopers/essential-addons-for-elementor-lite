@@ -167,6 +167,15 @@ trait Twitter_Feed
                                 }
                                 $content = str_replace( array_keys($hashtags), $hashtags, $content );
                             }
+                            if ( $settings['eael_twitter_feed_mention_linked'] && $item['entities']['user_mentions'] ){
+                                $mentions = [];
+                                foreach ( $item['entities']['user_mentions'] as $mention ){
+                                    if ( $mention['screen_name'] ){
+                                        $mentions['@'.$mention['screen_name']] = "<a href='https://twitter.com/{$mention['screen_name']}'>@{$mention['screen_name']}</a>";
+                                    }
+                                }
+                                $content = str_replace( array_keys($mentions), $mentions, $content );
+                            }
                             $html .= '<p>' . $content . '</p>';
 
                             if ($settings['eael_twitter_feed_show_read_more'] == 'true') {

@@ -345,10 +345,22 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_hash_linked',
             [
-                'label' => esc_html__('Enable Hash Name Hyperlink', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Hash Name Hyperlink', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('no', 'essential-addons-for-elementor-lite'),
+                'label_on' => __('Enable', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('Disable', 'essential-addons-for-elementor-lite'),
+                'default' => 'false',
+                'return_value' => 'true',
+            ]
+        );
+
+        $this->add_control(
+            'eael_twitter_feed_mention_linked',
+            [
+                'label' => esc_html__('Mention Hyperlink', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Enable', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('Disable', 'essential-addons-for-elementor-lite'),
                 'default' => 'false',
                 'return_value' => 'true',
             ]
