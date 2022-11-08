@@ -403,41 +403,6 @@ class NFT_Gallery extends Widget_Base
             'default' => esc_html__('View Details', 'essential-addons-for-elementor-lite'),
         ]);
 
-        $this->add_control(
-            'eael_section_nft_gallery_content_load_more',
-            [
-                'label' => esc_html__('Load More'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
-            ]
-        );
-
-        $this->add_control(
-            'eael_nft_gallery_load_more_text',
-            [
-                'label' => __('Load More', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'dynamic'   => ['active' => true],
-                'default' => __('Load More', 'essential-addons-for-elementor-lite'),
-                'condition' => [
-                    'eael_nft_gallery_pagination' => 'yes',
-                ],
-            ]
-        );
-        
-        $this->add_control(
-            'eael_nft_gallery_nomore_items_text',
-            [
-                'label' => __('No More Items', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'dynamic'   => ['active' => true],
-                'default' => __('No more items!', 'essential-addons-for-elementor-lite'),
-                'condition' => [
-                    'eael_nft_gallery_pagination' => 'yes',
-                ],
-            ]
-        );
-
         $this->end_controls_section();
 
         /**
@@ -468,6 +433,32 @@ class NFT_Gallery extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'dynamic'   => ['active' => true],
                 'default' => 6,
+                'condition' => [
+                    'eael_nft_gallery_pagination' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_nft_gallery_load_more_text',
+            [
+                'label' => __('Load More', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
+                'default' => __('Load More', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'eael_nft_gallery_pagination' => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'eael_nft_gallery_nomore_items_text',
+            [
+                'label' => __('No More Items', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true],
+                'default' => __('No more items!', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'eael_nft_gallery_pagination' => 'yes',
                 ],
