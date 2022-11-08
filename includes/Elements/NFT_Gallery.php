@@ -1309,6 +1309,59 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
+        $this->add_responsive_control( "eael_nft_gallery_button_width", [
+			'label'           => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+			'type'            => Controls_Manager::SLIDER,
+			'size_units'      => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'           => [
+				'px'  => [
+					'min'  => 0,
+					'max'  => 1000,
+					'step' => 5,
+				],
+				'rem' => [
+					'min'  => 0,
+					'max'  => 100,
+					'step' => .5,
+				],
+				'%'   => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'selectors'       => [
+				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-button button" => 'width: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+        $this->add_responsive_control(
+            'eael_nft_gallery_button_alignment',
+            [
+                'label' => esc_html__('Alignment', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-text-align-right',
+                    ],
+                ],
+                'default' => 'center',
+                'prefix_class' => 'eael-nft-gallery-button-align-',
+            ]
+        );
+
         $this->add_responsive_control(
             'eael_nft_gallery_button_padding',
             [
@@ -1481,6 +1534,7 @@ class NFT_Gallery extends Widget_Base
         $nft_gallery['show_owner'] = ! empty( $settings['eael_nft_gallery_show_owner'] ) && 'yes' === $settings['eael_nft_gallery_show_owner'] ? true : false; 
         $nft_gallery['show_creator'] = ! empty( $settings['eael_nft_gallery_show_creator'] ) && 'yes' === $settings['eael_nft_gallery_show_creator'] ? true : false; 
         $nft_gallery['show_button'] = ! empty( $settings['eael_nft_gallery_show_button'] ) && 'yes' === $settings['eael_nft_gallery_show_button'] ? true : false; 
+        $nft_gallery['button_alignment_class'] = ! empty( $settings['eael_nft_gallery_button_alignment'] ) ? $settings['eael_nft_gallery_button_alignment'] : ' '; 
 
         $this->add_render_attribute(
             'eael-nft-gallery-items',
@@ -1490,6 +1544,16 @@ class NFT_Gallery extends Widget_Base
                     'eael-nft-gallery-items',
                     'eael-nft-' . esc_attr($nft_gallery['layout']),
                     esc_attr($nft_gallery['preset']),
+                ],
+            ]
+        );
+
+        $this->add_render_attribute(
+            'eael-nft-gallery-button',
+            [
+                'class' => [
+                    'eael-nft-button',
+                    esc_attr( $nft_gallery['button_alignment_class'] ),
                 ],
             ]
         );
@@ -1588,7 +1652,7 @@ class NFT_Gallery extends Widget_Base
                                 </div>
 
                                 <!-- Button -->
-                                <div class="eael-nft-button">
+                                <div <?php echo $this->get_render_attribute_string('eael-nft-gallery-button'); ?> >
                                     <?php if( $nft_gallery['show_button'] ) : ?>
                                     <button>
                                         <?php printf('<a target="_blank" href="%s">%s</a>', esc_attr( $item_formatted['view_details_link'] ), esc_html__( $nft_gallery['view_details_text'] ) ) ?>
