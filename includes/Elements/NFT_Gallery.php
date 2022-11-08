@@ -216,20 +216,6 @@ class NFT_Gallery extends Widget_Base
 		    ]
 	    );
 
-	    // $this->add_control(
-		//     'eael_nft_gallery_opensea_clear_cache',
-		//     [
-		// 	    'label'       => __( 'Clear Cache', 'essential-addons-for-elementor-lite' ),
-		// 	    'type'        => Controls_Manager::BUTTON,
-		// 	    'text'        => __( 'Clear', 'essential-addons-for-elementor-lite' ),
-		// 	    'event'       => 'ea:nft_gallery:cache:clear',
-		// 	    'description' => esc_html__( 'Note: This will refresh your feed and fetch the latest data from OpenSea', 'essential-addons-for-elementor-lite' ),
-		// 	    'condition'   => [
-		// 		    'eael_nft_gallery_opensea_auto_cache_clear' => ''
-		// 	    ]
-		//     ]
-	    // );
-
         $this->end_controls_section();
 
         /**
@@ -1740,12 +1726,11 @@ class NFT_Gallery extends Widget_Base
         $nft_gallery['order'] = ! empty( $settings['eael_nft_gallery_opensea_order'] ) ? esc_html( $settings['eael_nft_gallery_opensea_order'] ) : 'desc';
         $nft_gallery['posts_per_page'] = ! empty( $settings['eael_nft_gallery_opensea_posts_per_page'] ) ? esc_html( $settings['eael_nft_gallery_opensea_posts_per_page'] ) : 6;
 
-        // $token = get_option($this->get_id() . '_nft_gallery_token');
 	    $expiration = ! empty( $settings['eael_nft_gallery_opensea_auto_cache_clear'] ) && ! empty( $settings['eael_nft_gallery_opensea_data_cache_time'] ) ? absint( $settings['eael_nft_gallery_opensea_data_cache_time'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
 	    $cache_key = 'eael_nft_gallery_' . $this->get_id() . '_items_cache';
         $items = get_transient( $cache_key );
 
-        if ( 'opensea' === $nft_gallery['source'] ) {
+        if ( false === $items && 'opensea' === $nft_gallery['source'] ) {
             $nft_gallery['api_key'] = $nft_gallery['api_key'] ? $nft_gallery['api_key'] :  'b61c8a54123d4dcb9acc1b9c26a01cd1';
             
             $url = "https://api.opensea.io/api/v1";
@@ -1799,6 +1784,8 @@ class NFT_Gallery extends Widget_Base
 
             $body = json_decode( wp_remote_retrieve_body( $response ) );
             $response = ! empty( $body->assets ) ? $body->assets : [];
+
+		    set_transient( $cache_key, $response, $expiration );
             return $response;
         }
 
