@@ -1629,8 +1629,8 @@ class NFT_Gallery extends Widget_Base
                                             ?>
                                         </div>
                                         <div class="eael-nft-created-by">
-                                            <span><?php printf('%s', esc_html( $nft_gallery['created_by_label'] ) ); ?> </span>
-                                            <?php printf('<a target="_blank" href="%s">%s</a>', esc_attr( $item_formatted['created_by_link'] ), esc_html( $item_formatted['created_by_link_text'] ) ); ?>
+                                            <div><span><?php printf('%s', esc_html( $nft_gallery['created_by_label'] ) ); ?> </span></div>
+                                            <div><?php printf('<a target="_blank" href="%s">%s</a>', esc_attr( $item_formatted['created_by_link'] ), esc_html( $item_formatted['created_by_link_text'] ) ); ?></div>
                                         </div>
                                     </div>
                                     <?php endif; ?>
@@ -1648,8 +1648,8 @@ class NFT_Gallery extends Widget_Base
                                             ?>
                                         </div>
                                         <div class="eael-nft-owned-by">
-                                            <span><?php printf('%s', esc_html( $nft_gallery['owned_by_label'] ) ); ?> </span>
-                                            <?php printf('<a target="_blank" href="%s">%s</a>', esc_url( $item_formatted['owned_by_link'] ), esc_html( $item_formatted['owned_by_link_text'] ) ); ?>
+                                            <div><span><?php printf('%s', esc_html( $nft_gallery['owned_by_label'] ) ); ?> </span></div>
+                                            <div><?php printf('<a target="_blank" href="%s">%s</a>', esc_url( $item_formatted['owned_by_link'] ), esc_html( $item_formatted['owned_by_link_text'] ) ); ?></div>
                                         </div>
                                     </div>
                                     <?php endif; ?>
