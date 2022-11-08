@@ -1358,7 +1358,6 @@ class NFT_Gallery extends Widget_Base
                     ],
                 ],
                 'default' => 'center',
-                'prefix_class' => 'eael-nft-gallery-button-align-',
             ]
         );
 
@@ -1534,7 +1533,7 @@ class NFT_Gallery extends Widget_Base
         $nft_gallery['show_owner'] = ! empty( $settings['eael_nft_gallery_show_owner'] ) && 'yes' === $settings['eael_nft_gallery_show_owner'] ? true : false; 
         $nft_gallery['show_creator'] = ! empty( $settings['eael_nft_gallery_show_creator'] ) && 'yes' === $settings['eael_nft_gallery_show_creator'] ? true : false; 
         $nft_gallery['show_button'] = ! empty( $settings['eael_nft_gallery_show_button'] ) && 'yes' === $settings['eael_nft_gallery_show_button'] ? true : false; 
-        $nft_gallery['button_alignment_class'] = ! empty( $settings['eael_nft_gallery_button_alignment'] ) ? $settings['eael_nft_gallery_button_alignment'] : ' '; 
+        $nft_gallery['button_alignment_class'] = ! empty( $settings['eael_nft_gallery_button_alignment'] ) ? 'eael-nft-gallery-button-align-' . $settings['eael_nft_gallery_button_alignment'] : ' '; 
 
         $this->add_render_attribute(
             'eael-nft-gallery-items',
@@ -1552,7 +1551,6 @@ class NFT_Gallery extends Widget_Base
             'eael-nft-gallery-button',
             [
                 'class' => [
-                    'eael-nft-button',
                     esc_attr( $nft_gallery['button_alignment_class'] ),
                 ],
             ]
@@ -1652,9 +1650,9 @@ class NFT_Gallery extends Widget_Base
                                 </div>
 
                                 <!-- Button -->
-                                <div <?php echo $this->get_render_attribute_string('eael-nft-gallery-button'); ?> >
+                                <div class="eael-nft-button">
                                     <?php if( $nft_gallery['show_button'] ) : ?>
-                                    <button>
+                                    <button <?php echo $this->get_render_attribute_string('eael-nft-gallery-button'); ?>>
                                         <?php printf('<a target="_blank" href="%s">%s</a>', esc_attr( $item_formatted['view_details_link'] ), esc_html__( $nft_gallery['view_details_text'] ) ) ?>
                                     </button>
                                     <?php endif; ?>
