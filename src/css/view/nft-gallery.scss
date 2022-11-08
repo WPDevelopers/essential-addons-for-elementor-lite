@@ -44,6 +44,11 @@
     overflow: hidden;
     transition: 0.5s ease-in-out;
 
+    .eael-nft-created-by,
+    .eael-nft-owned-by {
+      display: flex;
+      column-gap: 5px;
+    }
     .eael-nft-thumbnail {
       line-height: 0;
       text-align: center;
@@ -101,7 +106,7 @@
       .eael-nft-gallery-button-align-right {
         margin-left: auto;
       }
-      
+
       button {
         background-color: transparent;
         border: 0;
