@@ -579,6 +579,21 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_nft_gallery_item_overlay_color',
+            [
+                'label' => esc_html__('Overlay Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .preset-3 .eael-nft-item .eael-nft-main-content' => 'background: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_nft_gallery_items_layout' => 'grid',
+                    'eael_nft_gallery_style_preset' => 'preset-3',
+                ],
+            ]
+        );
+
         $this->start_controls_tabs('eael_nft_gallery_item_controls_tabs');
 
         $this->start_controls_tab('eael_nft_gallery_item_control_normal', [
