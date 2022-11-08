@@ -89,19 +89,19 @@
       }
     }
 
-    .eael-nft-gallery-button-align-left {
-      margin-right: auto;
-    }
-
-    .eael-nft-gallery-button-align-center {
-      margin: auto;
-    }
-
-    .eael-nft-gallery-button-align-right {
-      margin-left: auto;
-    }
-
     .eael-nft-button {
+      .eael-nft-gallery-button-align-left {
+        margin-right: auto;
+      }
+  
+      .eael-nft-gallery-button-align-center {
+        margin: auto;
+      }
+  
+      .eael-nft-gallery-button-align-right {
+        margin-left: auto;
+      }
+      
       button {
         background-color: transparent;
         border: 0;
