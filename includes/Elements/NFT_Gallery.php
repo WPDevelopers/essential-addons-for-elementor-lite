@@ -2192,6 +2192,9 @@ class NFT_Gallery extends Widget_Base
 	    $cache_key = 'eael_nft_gallery_' . $this->get_id() . '_items_cache';
         $items = get_transient( $cache_key );
 
+        $expires = (int) get_option( '_transient_timeout_eael_nft_gallery_5fade82_items_cache', 0 );
+        $time_left = $expires - time();
+
         if ( false === $items && 'opensea' === $nft_gallery['source'] ) {
             $nft_gallery['api_key'] = $nft_gallery['api_key'] ? $nft_gallery['api_key'] :  'b61c8a54123d4dcb9acc1b9c26a01cd1';
             
