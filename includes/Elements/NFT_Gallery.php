@@ -1979,6 +1979,9 @@ class NFT_Gallery extends Widget_Base
         $opensea_item_formatted = [];
 
         $post_per_page = ! empty($settings['eael_nft_gallery_posts_per_page']) ? absint( $settings['eael_nft_gallery_posts_per_page'] ) : 6;
+        $post_limit = ! empty( $settings['eael_nft_gallery_opensea_item_limit'] ) ? $settings['eael_nft_gallery_opensea_item_limit'] : 9;
+        $no_more_items_text = Helper::eael_wp_kses($settings['eael_nft_gallery_nomore_items_text']);
+        
         $counter = 0;
         $current_page = 1;
 
@@ -1999,6 +2002,18 @@ class NFT_Gallery extends Widget_Base
         $nft_gallery['show_creator'] = ! empty( $settings['eael_nft_gallery_show_creator'] ) && 'yes' === $settings['eael_nft_gallery_show_creator'] ? true : false; 
         $nft_gallery['show_button'] = ! empty( $settings['eael_nft_gallery_show_button'] ) && 'yes' === $settings['eael_nft_gallery_show_button'] ? true : false; 
         $nft_gallery['button_alignment_class'] = ! empty( $settings['eael_nft_gallery_button_alignment'] ) ? 'eael-nft-gallery-button-align-' . $settings['eael_nft_gallery_button_alignment'] : ' '; 
+
+        $this->add_render_attribute('eael-nft-gallery-wrapper', [
+            'class' => [
+                'eael-nft-gallery-wrapper',
+                'eael-nft-gallery-' . $this->get_id(),
+                'clearfix',
+            ],
+            'data-posts-per-page' => $post_per_page,
+            'data-total-posts' => $post_limit,
+            'data-nomore-item-text' => $no_more_items_text,
+            'data-next-page' => 2,
+        ]);
 
         $this->add_render_attribute(
             'eael-nft-gallery-items',
@@ -2021,7 +2036,7 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 ?>
-        <div class="eael-nft-gallery-wrapper">
+        <div <?php echo $this->get_render_attribute_string('eael-nft-gallery-wrapper') ?> >
             <div <?php echo $this->get_render_attribute_string('eael-nft-gallery-items'); ?> >
                 <?php if ( is_array( $opensea_items ) && count( $opensea_items ) ) : ?>
                     <?php foreach ($opensea_items as $item) : ?>
@@ -2148,6 +2163,10 @@ class NFT_Gallery extends Widget_Base
                 <?php endif; ?>
                 <!-- /.column  -->
             </div>
+        </div>
+
+        <div class="clearfix">
+            <?php echo $this->render_loadmore_button() ?>
         </div>
 <?php
         echo ob_get_clean();

@@ -1099,6 +1099,13 @@ $config = [
                         'context' => 'view',
                     ],
                 ],
+                'js' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/twitter-feed.min.js',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
             ],
         ],
     ],
