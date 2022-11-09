@@ -1823,7 +1823,7 @@ class NFT_Gallery extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-nft-gallery-load-more .nft-gallery-load-more-icon-left' => 'margin-right: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-nft-gallery-load-more .fg-load-more-icon-right' => 'margin-left: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-nft-gallery-load-more .nft-gallery-load-more-icon-right' => 'margin-left: {{SIZE}}{{UNIT}};',
                 ]
             ]
         );
@@ -2254,12 +2254,12 @@ class NFT_Gallery extends Widget_Base
                     <?php if ($settings['eael_nft_gallery_button_icon_position'] == 'after') { ?>
                         <?php if ($icon_is_new || $icon_migrated) { ?>
                             <?php if (isset($settings['eael_nft_gallery_load_more_icon_new']['value']['url'])) : ?>
-                                <img class="eael-nft-gallery-load-more-icon fg-load-more-icon-right" src="<?php echo esc_url($settings['eael_nft_gallery_load_more_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_nft_gallery_load_more_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                                <img class="eael-nft-gallery-load-more-icon nft-gallery-load-more-icon-right" src="<?php echo esc_url($settings['eael_nft_gallery_load_more_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_nft_gallery_load_more_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
                             <?php else : ?>
-                                <span class="eael-nft-gallery-load-more-icon fg-load-more-icon-right <?php echo esc_attr($settings['eael_nft_gallery_load_more_icon_new']['value']); ?>" aria-hidden="true"></span>
+                                <span class="eael-nft-gallery-load-more-icon nft-gallery-load-more-icon-right <?php echo esc_attr($settings['eael_nft_gallery_load_more_icon_new']['value']); ?>" aria-hidden="true"></span>
                             <?php endif; ?>
                         <?php } else { ?>
-                            <span class="eael-nft-gallery-load-more-icon fg-load-more-icon-right <?php echo esc_attr($settings['load_more_icon']); ?>" aria-hidden="true"></span>
+                            <span class="eael-nft-gallery-load-more-icon nft-gallery-load-more-icon-right <?php echo esc_attr($settings['load_more_icon']); ?>" aria-hidden="true"></span>
                         <?php } ?>
                     <?php } ?>
                 </a>
