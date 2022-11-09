@@ -1,4 +1,5 @@
 var NFTGalleryHandler = function($scope, $) {
+    console.log('okay');
     let $eael_nft_gallery = $(".eael-nft-gallery-wrapper", $scope);
     let $posts_per_page = $eael_nft_gallery.data("posts-per-page");
     let $total_posts = $eael_nft_gallery.data("total-posts");

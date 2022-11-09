@@ -1101,7 +1101,7 @@ $config = [
                 ],
                 'js' => [
                     [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/twitter-feed.min.js',
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/nft-gallery.min.js',
                         'type' => 'self',
                         'context' => 'view',
                     ],
