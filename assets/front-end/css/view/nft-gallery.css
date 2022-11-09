@@ -51,6 +51,9 @@
   -o-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
 }
+.eael-nft-gallery-wrapper .eael-nft-item .page-1 {
+  display: block;
+}
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-created-by,
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-owned-by {
   display: -webkit-box;

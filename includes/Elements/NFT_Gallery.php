@@ -1978,6 +1978,10 @@ class NFT_Gallery extends Widget_Base
         $nft_gallery = [];
         $opensea_item_formatted = [];
 
+        $post_per_page = ! empty($settings['eael_nft_gallery_posts_per_page']) ? absint( $settings['eael_nft_gallery_posts_per_page'] ) : 6;
+        $counter = 0;
+        $current_page = 1;
+
         $nft_gallery['source'] = ! empty( $settings['eael_nft_gallery_sources'] ) ? esc_html( $settings['eael_nft_gallery_sources'] ) : 'opensea';
         $nft_gallery['layout'] = !empty($settings['eael_nft_gallery_items_layout']) ? $settings['eael_nft_gallery_items_layout'] : 'grid';
         $nft_gallery['preset'] = !empty($settings['eael_nft_gallery_style_preset']) && 'grid' === $nft_gallery['layout'] ? $settings['eael_nft_gallery_style_preset'] : 'preset-2';
@@ -2022,6 +2026,24 @@ class NFT_Gallery extends Widget_Base
                 <?php if ( is_array( $opensea_items ) && count( $opensea_items ) ) : ?>
                     <?php foreach ($opensea_items as $item) : ?>
                         <?php
+                        $counter++;
+                        if ($post_per_page > 0) {
+                            $current_page = ceil($counter / $post_per_page);
+                        }
+
+                        $show_pagination = ! empty($settings['eael_nft_gallery_pagination']) && 'yes' === $settings['eael_nft_gallery_pagination'] ? true : false;
+            
+                        if($show_pagination){
+                            $pagination_class = ' page-' . $current_page;
+                            $pagination_class .= 1 === intval( $current_page ) ? ' eael-d-block' : ' eael-d-none';
+                        } else {
+                            $pagination_class = 'page-1 eael-d-block';
+                        }
+
+                        if ($counter == count($opensea_items)) {
+                            $pagination_class .= ' eael-last-nft-gallery-item';
+                        }
+
                         $item_formatted['thumbnail'] = ! empty( $item->image_url ) ? $item->image_url : EAEL_PLUGIN_URL . '/assets/front-end/img/flexia-preview.jpg';
                         $item_formatted['title'] = ! empty( $item->name ) ? $item->name : '';
                         $item_formatted['creator_thumbnail'] = ! empty( $item->creator ) && ! empty( $item->creator->profile_img_url ) ? $item->creator->profile_img_url : '';
@@ -2037,7 +2059,7 @@ class NFT_Gallery extends Widget_Base
                         $item_formatted['view_details_link'] = ! empty( $item->permalink ) ? $item->permalink : '#';
                         
                         ?>
-                        <div class="eael-nft-item">
+                        <div class="eael-nft-item <?php echo esc_attr( $pagination_class ); ?> ">
                             <!-- Thumbnail -->
                             <div class="eael-nft-thumbnail">
                                 <?php
@@ -2205,9 +2227,11 @@ class NFT_Gallery extends Widget_Base
 
             $body = json_decode( wp_remote_retrieve_body( $response ) );
             $response = ! empty( $body->assets ) ? $body->assets : [];
+
+            $response = array_splice($response, 0, absint( $settings['eael_nft_gallery_opensea_item_limit'] ));
+		    set_transient( $cache_key, $response, $expiration );
             $this->nft_gallery_items_count = count($response);
 
-		    set_transient( $cache_key, $response, $expiration );
             return $response;
         }
 
@@ -2233,7 +2257,7 @@ class NFT_Gallery extends Widget_Base
             'elementor-size-' . esc_attr( $settings['eael_nft_gallery_button_size'] ),
         ]);
         
-        if ($settings['eael_nft_gallery_pagination'] == 'yes' && $this->nft_gallery_items_count > $post_per_page ) { ?>
+        if ( 'yes' === $settings['eael_nft_gallery_pagination'] && $this->nft_gallery_items_count > $post_per_page ) { ?>
             <div class="eael-nft-gallery-loadmore-wrap">
                 <a href="#" <?php echo $this->get_render_attribute_string('nft-gallery-load-more-button'); ?>>
                     <span class="eael-btn-loader"></span>
