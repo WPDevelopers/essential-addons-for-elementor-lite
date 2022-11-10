@@ -194,6 +194,18 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
+        $this->add_control(
+			'eael_nft_gallery_opensea_data_cache_enable',
+			[
+				'label' => __( 'Cache API Response', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+                'default' => 'yes',
+			]
+		);
+
 	    $this->add_control(
 		    'eael_nft_gallery_opensea_data_cache_time',
 		    [
@@ -202,6 +214,9 @@ class NFT_Gallery extends Widget_Base
 			    'min'         => 1,
 			    'default'     => 60,
 			    'description' => __( 'Cache expiration time (Minutes)', 'essential-addons-for-elementor-lite' ),
+                'condition'   => [
+                    'eael_nft_gallery_opensea_data_cache_enable' => 'yes',
+                ],
 		    ]
 	    );
 
@@ -2195,6 +2210,10 @@ class NFT_Gallery extends Widget_Base
         $expires = (int) get_option( '_transient_timeout_eael_nft_gallery_5fade82_items_cache', 0 );
         $time_left = $expires - time();
 
+        if( empty( $settings['eael_nft_gallery_opensea_data_cache_enable'] ) ){
+            $items = false;
+        }
+        
         if ( false === $items && 'opensea' === $nft_gallery['source'] ) {
             $nft_gallery['api_key'] = $nft_gallery['api_key'] ? $nft_gallery['api_key'] :  'b61c8a54123d4dcb9acc1b9c26a01cd1';
             
