@@ -111,7 +111,7 @@ class NFT_Gallery extends Widget_Base
                 'default' => 'items',
                 'options' => [
                     'items'    => esc_html__('Items', 'essential-addons-for-elementor-lite'),
-                    'collection' => esc_html__('Collections', 'essential-addons-for-elementor-lite'),
+                    'collections' => esc_html__('Collections', 'essential-addons-for-elementor-lite'),
                 ],
                 'condition' => [
                     'eael_nft_gallery_sources' => 'opensea'
@@ -129,7 +129,7 @@ class NFT_Gallery extends Widget_Base
                 'wallet' => __( 'Wallet Address', 'essential-addons-for-elementor-lite' ),
             ],
             'condition' => [
-                'eael_nft_gallery_opensea_type!' => 'collection'
+                'eael_nft_gallery_opensea_type!' => 'collections'
             ],
         ]);
 
@@ -165,7 +165,7 @@ class NFT_Gallery extends Widget_Base
                 'label' => __('Wallet Address', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'condition' => [
-                    'eael_nft_gallery_opensea_type' => 'collection'
+                    'eael_nft_gallery_opensea_type' => 'collections'
                 ],
             ]
         );
@@ -179,7 +179,7 @@ class NFT_Gallery extends Widget_Base
             ],
             'default' => 'desc',
             'condition' => [
-                'eael_nft_gallery_opensea_type!' => 'collection'
+                'eael_nft_gallery_opensea_type!' => 'collections'
             ],
         ]);
 
@@ -2267,8 +2267,7 @@ class NFT_Gallery extends Widget_Base
             );
 
             $body = json_decode( wp_remote_retrieve_body( $response ) );
-            $response = ! empty( $body->assets ) ? $body->assets : [];
-
+            $response = 'assets' === $nft_gallery['opensea_type'] && ! empty( $body->assets ) ? $body->assets : $body;
             $response = array_splice($response, 0, absint( $settings['eael_nft_gallery_opensea_item_limit'] ));
 		    set_transient( $cache_key, $response, $expiration );
             $this->nft_gallery_items_count = count($response);
