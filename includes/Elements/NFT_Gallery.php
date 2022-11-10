@@ -2013,6 +2013,64 @@ class NFT_Gallery extends Widget_Base
         $this->end_controls_tabs();
         
         $this->end_controls_section();
+
+        /**
+         * -------------------------------------------
+         * Tab Style ( Error Message Style )
+         * -------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_section_nft_gallery_error_message_style',
+            [
+                'label' => esc_html__('Error Message', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_nft_gallery_error_message_label_typography',
+                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-error-message',
+            ]
+        );
+
+        $this->add_control(
+            'eael_nft_gallery_error_message_label_text_color',
+            [
+                'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-error-message' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_nft_gallery_error_message_label_margin',
+            [
+                'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-error-message' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_nft_gallery_error_message_label_padding',
+            [
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-error-message' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
     public function print_nft_gallery( $opensea_items )
@@ -2209,7 +2267,7 @@ class NFT_Gallery extends Widget_Base
                     <?php endforeach; ?>
                 <?php else: ?>
                     <div <?php echo $this->get_render_attribute_string('eael-nft-gallery-wrapper') ?> >
-                        <?php printf( '<div class="eael-nft-gallery-error-message">%s</div>', esc_html_e($error_message, 'essential-addons-for-elementor-lite') ); ?>
+                        <?php printf( '<div class="eael-nft-gallery-error-message">%s</div>', esc_html__($error_message, 'essential-addons-for-elementor-lite') ); ?>
                     </div>
                 <?php endif; ?>
                 <!-- /.column  -->
@@ -2304,15 +2362,16 @@ class NFT_Gallery extends Widget_Base
             );
 
             $options = array_merge($headers, $options);
-            $response = wp_remote_get(
-                esc_url_raw( add_query_arg( $param, $url ) ), 
-                $options
-            );
-
-            $body = json_decode( wp_remote_retrieve_body( $response ) );
-            $response = 'assets' === $nft_gallery['opensea_type'] && ! empty( $body->assets ) ? $body->assets : $body;
             
             if( empty($error_message) ){
+                $response = wp_remote_get(
+                    esc_url_raw( add_query_arg( $param, $url ) ), 
+                    $options
+                );
+    
+                $body = json_decode( wp_remote_retrieve_body( $response ) );
+                $response = 'assets' === $nft_gallery['opensea_type'] && ! empty( $body->assets ) ? $body->assets : $body;
+                
                 $response = array_splice($response, 0, absint( $settings['eael_nft_gallery_opensea_item_limit'] ));
                 set_transient( $cache_key, $response, $expiration );
                 $this->nft_gallery_items_count = count($response);
