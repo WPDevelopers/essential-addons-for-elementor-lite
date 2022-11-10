@@ -2022,6 +2022,8 @@ class NFT_Gallery extends Widget_Base
 
         $nft_gallery = [];
         $opensea_item_formatted = [];
+        $items = isset( $opensea_items['items'] ) ? $opensea_items['items'] : false;
+        $error_message = ! empty( $opensea_items['error_message'] ) ? $opensea_items['error_message'] : "";
 
         $post_per_page = ! empty($settings['eael_nft_gallery_posts_per_page']) ? absint( $settings['eael_nft_gallery_posts_per_page'] ) : 6;
         $post_limit = ! empty( $settings['eael_nft_gallery_opensea_item_limit'] ) ? $settings['eael_nft_gallery_opensea_item_limit'] : 9;
@@ -2083,8 +2085,8 @@ class NFT_Gallery extends Widget_Base
 ?>
         <div <?php echo $this->get_render_attribute_string('eael-nft-gallery-wrapper') ?> >
             <div <?php echo $this->get_render_attribute_string('eael-nft-gallery-items'); ?> >
-                <?php if ( is_array( $opensea_items ) && count( $opensea_items ) ) : ?>
-                    <?php foreach ($opensea_items as $item) : ?>
+                <?php if ( is_array( $items ) && count( $items ) ) : ?>
+                    <?php foreach ($items as $item) : ?>
                         <?php
                         $counter++;
                         if ($post_per_page > 0) {
@@ -2205,6 +2207,10 @@ class NFT_Gallery extends Widget_Base
                             </div>
                         </div>
                     <?php endforeach; ?>
+                <?php else: ?>
+                    <div <?php echo $this->get_render_attribute_string('eael-nft-gallery-wrapper') ?> >
+                        <?php printf( '<div class="eael-nft-gallery-error-message">%s</div>', esc_html_e($error_message, 'essential-addons-for-elementor-lite') ); ?>
+                    </div>
                 <?php endif; ?>
                 <!-- /.column  -->
             </div>
@@ -2305,11 +2311,19 @@ class NFT_Gallery extends Widget_Base
 
             $body = json_decode( wp_remote_retrieve_body( $response ) );
             $response = 'assets' === $nft_gallery['opensea_type'] && ! empty( $body->assets ) ? $body->assets : $body;
-            $response = array_splice($response, 0, absint( $settings['eael_nft_gallery_opensea_item_limit'] ));
-		    set_transient( $cache_key, $response, $expiration );
-            $this->nft_gallery_items_count = count($response);
+            
+            if( empty($error_message) ){
+                $response = array_splice($response, 0, absint( $settings['eael_nft_gallery_opensea_item_limit'] ));
+                set_transient( $cache_key, $response, $expiration );
+                $this->nft_gallery_items_count = count($response);
+            }
+            
+            $data = [
+                'items' => $response,
+                'error_message' => $error_message,
+            ];
 
-            return $response;
+            return $data;
         }
 
         $response = $items ? $items : $response;
@@ -2317,7 +2331,7 @@ class NFT_Gallery extends Widget_Base
 
         $data = [
             'items' => $response,
-            'message' => $error_message,
+            'error_message' => $error_message,
         ];
         return $data;
     }
