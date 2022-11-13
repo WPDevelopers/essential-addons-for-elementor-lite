@@ -97,8 +97,32 @@ var WooCheckout = function ($scope, $) {
 		}); 
 
     });
+
 };
 
 jQuery(window).on("elementor/frontend/init", function () {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-woo-checkout.default", WooCheckout);
+});
+
+jQuery(document.body).on('country_to_state_changing', function(event, country, wrapper) {
+	let $ = jQuery, checkout_keys = $('.ea-woo-checkout').data('checkout_ids');
+	let reorder_fields = function( type ){
+		let $selector = $(`.woocommerce-${type}-fields__field-wrapper`);
+		$.each(checkout_keys[type], function (index, field){
+			let $fieldHtml = wrapper.find(`#${field}_field`);
+			$(`#eael-wc-${type}-reordered-fields .eael-woo-${type}-fields`).append($fieldHtml);
+		});
+		$selector.replaceWith($(`#eael-wc-${type}-reordered-fields`).contents());
+		$(`.eael-woo-${type}-fields`).toggleClass(`eael-woo-${type}-fields woocommerce-${type}-fields__field-wrapper`);
+		$(`#eael-wc-${type}-reordered-fields`).html(`<div class="eael-woo-${type}-fields"></div>`);
+	};
+	setTimeout(function() {
+		console.log(event,country,wrapper);
+		if (wrapper.hasClass(`woocommerce-billing-fields`)){
+			reorder_fields( 'billing' );
+		}
+		if (wrapper.hasClass(`woocommerce-shipping-fields`)){
+			reorder_fields( 'shipping' );
+		}
+	}, 500);
 });
