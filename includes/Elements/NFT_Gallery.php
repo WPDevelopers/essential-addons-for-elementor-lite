@@ -2132,8 +2132,8 @@ class NFT_Gallery extends Widget_Base
                         } else {
                             $pagination_class = 'page-1 eael-d-block';
                         }
-
-                        if ($counter == count($opensea_items)) {
+                        
+                        if ($counter == count($items)) {
                             $pagination_class .= ' eael-last-nft-gallery-item';
                         }
 
@@ -2378,7 +2378,7 @@ class NFT_Gallery extends Widget_Base
 
         $post_per_page = ! empty($settings['eael_nft_gallery_posts_per_page']) ? intval( $settings['eael_nft_gallery_posts_per_page'] ) : 6;
         $post_limit = ! empty( $settings['eael_nft_gallery_opensea_item_limit'] ) ? $settings['eael_nft_gallery_opensea_item_limit'] : 9;
-        $load_more_class = $post_per_page < $post_limit ? 'eael-d-block' : 'eael-d-none';
+        // $load_more_class = $post_per_page < $post_limit ? 'eael-d-block' : 'eael-d-none';
         
         $this->add_render_attribute('nft-gallery-load-more-button', 'class', [
             'eael-nft-gallery-load-more',
