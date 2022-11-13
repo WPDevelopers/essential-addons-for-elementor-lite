@@ -1,5 +1,4 @@
 var EventCalendar = function ($scope, $) {
-
 	var Calendar = FullCalendar.Calendar;
 	var element = $(".eael-event-calendar-cls", $scope),
 		CloseButton = $(".eaelec-modal-close", $scope).eq(0),
@@ -11,6 +10,7 @@ var EventCalendar = function ($scope, $) {
 		translate = element.data("translate"),
 		defaultView = element.data("defaultview"),
 		defaultDate = element.data("defaultdate"),
+		eventLimit = element.data("event_limit"),
 		time_format = element.data("time_format") == "yes" ? true : false;
 
 	var calendar = new Calendar(
@@ -31,12 +31,12 @@ var EventCalendar = function ($scope, $) {
 			},
 			events: eventAll,
 			locale: locale,
-			dayMaxEventRows: 3,
+			dayMaxEventRows: typeof eventLimit !== "undefined" && eventLimit > 0 ? parseInt( eventLimit ) : 3,
 			initialView: defaultView,
 			initialDate: defaultDate,
 			eventClassNames: function(info) {},
 			eventContent: function(info) {},
-			eventDidMount: function(info) {
+			eventDidMount: function (info) {
 				var element = $(info.el),
 					event = info.event;
 				moment.locale(locale);
@@ -194,7 +194,7 @@ var EventCalendar = function ($scope, $) {
 						startSelector.html('<i class="eicon-calendar"></i> ' + startView);
 
 						$(".eaelec-modal-header h2").html(event.title);
-						$(".eaelec-modal-body p").html(event.extendedProps.description);
+						$(".eaelec-modal-body").html(event.extendedProps.description);
 						if (event.extendedProps.description.length < 1) {
 							$(".eaelec-modal-body").css("height", "auto");
 						} else {
