@@ -2153,6 +2153,9 @@ class NFT_Gallery extends Widget_Base
                         if( 'collections' === $nft_gallery['opensea_type'] ){
                             $item_formatted['view_details_link'] = ! empty( $item->slug ) ? esc_url( "{$nft_gallery['api_url']}/collection/{$item->slug}" ) : '#'; 
                         }
+
+                        $item_formatted['current_price'] = ! empty( $item->seaport_sell_orders[0]->current_price ) ? $item->seaport_sell_orders[0]->current_price : 0;
+                        $item_formatted['last_sale'] = ! empty( $item->last_sale->total_price ) ? $item->last_sale->total_price : 0;
                         ?>
                         <div class="eael-nft-item <?php echo esc_attr( $pagination_class ); ?> ">
                             <!-- Thumbnail -->
@@ -2223,9 +2226,18 @@ class NFT_Gallery extends Widget_Base
                                         
                                     </div>
 
+                                    <!-- Current Price -->
+                                    <div class="eael-nft-current-price-wrapper">
+                                        <?php if( intval($item_formatted['current_price']) > 0 ): ?>
+                                        <p><?php printf('%s: %d ETH', esc_html__('Current Price', 'essential-addons-for-elementor-lite'), intval( $item_formatted['current_price'] / 1000000000000000000 ) ); ?></p>
+                                        <?php endif; ?>
+                                    </div>
+
                                     <!-- Last Sale -->
-                                    <div class="eael-nft-last-sale-wrapper eael-d-none">
-                                        
+                                    <div class="eael-nft-last-sale-wrapper">
+                                        <?php if( intval($item_formatted['last_sale']) > 0 ): ?>
+                                        <p><?php printf('%s: %d ETH', esc_html__('Last Sale', 'essential-addons-for-elementor-lite'), intval($item_formatted['last_sale'] / 10000000000000000)); ?></p>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
 
