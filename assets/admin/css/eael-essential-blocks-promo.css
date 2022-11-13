@@ -1,0 +1,214 @@
+#eael-gb-eb-popup-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .35);
+    z-index: 100000;
+}
+
+#eael-eb-popup-button {
+    background: rgba(98, 0, 238, .1);
+    color: #5E2EFF;
+    transition: .3s;
+    border: 1px solid transparent;
+}
+
+#eael-eb-popup-button:hover {
+    border-color: #5E2EFF;
+}
+
+#eael-eb-popup-button img {
+    margin-right: 5px;
+}
+
+.eael-gb-eb-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 312px;
+    height: 80vh;
+    max-height: 575px;
+    background: #fff;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, .25);
+    transform: translate(-50%, -50%);
+    border-radius: 3px;
+    z-index: 100001;
+}
+
+.eael-gb-eb-popup img {
+    max-width: 100%;
+    display: block;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-popup-content {
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-header {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 9;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-header img {
+    cursor: pointer;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-header .eael-gb-eb-tooltip {
+    background: #000;
+    color: #fff;
+    position: absolute;
+    white-space: nowrap;
+    padding: 3px 7px;
+    border-radius: 5px;
+    left: 50%;
+    bottom: calc(100% + 2px);
+    transform: translateX(-50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-header:hover .eael-gb-eb-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: .7s;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-image {
+    display: flex;
+    align-items: center;
+    height: 240px;
+    padding: 0;
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+}
+
+.eael-gb-eb-popup .--page-1 .eael-gb-eb-content-image {
+    background: linear-gradient(206.26deg, #A181F7 -16.35%, #1C3AA7 102.55%);
+}
+
+.eael-gb-eb-popup .--page-2 .eael-gb-eb-content-image {
+    background: linear-gradient(212.59deg, #AF7381 -13.93%, #435193 30.64%, #4E328D 72.14%, #A24485 122.52%, #AA7082 160.1%);
+}
+
+.eael-gb-eb-popup .--page-3 .eael-gb-eb-content-image {
+    background: linear-gradient(218.13deg, #5737A8 -11.9%, #2F2F91 107.64%);
+}
+
+.eael-gb-eb-popup .--page-4 .eael-gb-eb-content-image {
+    background: linear-gradient(223.65deg, #2673FF -9.93%, #A383F8 107.17%);
+}
+
+.eael-gb-eb-popup .--page-5 .eael-gb-eb-content-image {
+    background: linear-gradient(223.71deg, #8437A8 -9.91%, #2673FF 127.03%);
+    padding: 0 35px;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-pagination {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-pagination span {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #2673FF;
+    cursor: pointer;
+    opacity: .4;
+    margin: 0 6px;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-pagination span.active {
+    opacity: 1;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-info {
+    padding: 0 30px;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-info h3 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 16px 0;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-info p {
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-info button {
+    display: block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #6200ee;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-info button.eael-gb-eb-install[disabled],
+.eael-gb-eb-popup .eael-gb-eb-content-info button.eael-gb-eb-install:hover {
+    background: #7d42e3;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-content-info button.eael-gb-eb-never-show {
+    background: transparent;
+    border: transparent;
+    font-size: 13px;
+    color: #6A72A5;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-footer {
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.eael-gb-eb-popup .--page-1 .eael-gb-eb-footer {
+    justify-content: flex-end;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-footer button {
+    background: transparent;
+    border: transparent;
+    font-size: 13px;
+    color: #6A72A5;
+    cursor: pointer;
+    padding: 0;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-footer button.eael-gb-eb-next,
+.eael-gb-eb-popup .eael-gb-eb-footer button.eael-gb-eb-install {
+    color: #2673FF;
+    font-weight: 700;
+
+}
+
+.eael-gb-eb-popup .eael-gb-eb-footer button:hover {
+    text-decoration: underline;
+}
+
+.eael-gb-eb-popup .eael-gb-eb-footer button.eael-gb-eb-install,
+.eael-gb-eb-popup .--page-1 .eael-gb-eb-footer button.eael-gb-eb-prev,
+.eael-gb-eb-popup .--page-5 .eael-gb-eb-footer button.eael-gb-eb-prev,
+.eael-gb-eb-popup .--page-5 .eael-gb-eb-footer button.eael-gb-eb-next {
+    display: none;
+}
+
+.eael-gb-eb-popup .--page-5 .eael-gb-eb-footer button.eael-gb-eb-install {
+    display: block;
+}
