@@ -612,7 +612,7 @@ class NFT_Gallery extends Widget_Base
                     ],
                 ],
                 'default' => [
-                    'size' => 4,
+                    'size' => 10,
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items' => 'border-radius: {{SIZE}}px;',
@@ -2153,7 +2153,7 @@ class NFT_Gallery extends Widget_Base
                         if( 'collections' === $nft_gallery['opensea_type'] ){
                             $item_formatted['view_details_link'] = ! empty( $item->slug ) ? esc_url( "{$nft_gallery['api_url']}/collection/{$item->slug}" ) : '#'; 
                         }
-
+                        $unit_convert = 1000000000000000000;
                         $item_formatted['current_price'] = ! empty( $item->seaport_sell_orders[0]->current_price ) ? $item->seaport_sell_orders[0]->current_price : 0;
                         $item_formatted['last_sale'] = ! empty( $item->last_sale->total_price ) ? $item->last_sale->total_price : 0;
                         ?>
@@ -2229,14 +2229,14 @@ class NFT_Gallery extends Widget_Base
                                     <!-- Current Price -->
                                     <div class="eael-nft-current-price-wrapper">
                                         <?php if( intval($item_formatted['current_price']) > 0 ): ?>
-                                        <p><?php printf('%s: %d ETH', esc_html__('Current Price', 'essential-addons-for-elementor-lite'), intval( $item_formatted['current_price'] / 1000000000000000000 ) ); ?></p>
+                                        <p><?php printf('%s: %d ETH', esc_html__('Current Price', 'essential-addons-for-elementor-lite'), intval( $item_formatted['current_price'] / $unit_convert ) ); ?></p>
                                         <?php endif; ?>
                                     </div>
 
                                     <!-- Last Sale -->
                                     <div class="eael-nft-last-sale-wrapper">
                                         <?php if( intval($item_formatted['last_sale']) > 0 ): ?>
-                                        <p><?php printf('%s: %d ETH', esc_html__('Last Sale', 'essential-addons-for-elementor-lite'), intval($item_formatted['last_sale'] / 10000000000000000)); ?></p>
+                                        <p><?php printf('%s: %d ETH', esc_html__('Last Sale', 'essential-addons-for-elementor-lite'), intval($item_formatted['last_sale'] / $unit_convert )); ?></p>
                                         <?php endif; ?>
                                     </div>
                                 </div>
