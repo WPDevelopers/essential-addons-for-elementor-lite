@@ -158,20 +158,20 @@ trait Twitter_Feed
                     <div class="eael-twitter-feed-item-content">';
                             $content = isset($item['entities']['urls'][0]['url'])?str_replace($item['entities']['urls'][0]['url'], '', $item['full_text']):$item['full_text'];
                             $content = substr( $content, 0, $settings['eael_twitter_feed_content_length']) . $delimeter;
-                            if ( $settings['eael_twitter_feed_hash_linked'] && $item['entities']['hashtags'] ){
+                            if ( $settings['eael_twitter_feed_hash_linked'] === 'yes' && $item['entities']['hashtags'] ){
                                 $hashtags = [];
                                 foreach ( $item['entities']['hashtags'] as $hashtag ){
                                     if ( $hashtag['text'] ){
-                                        $hashtags['#'.$hashtag['text']] = "<a href='https://twitter.com/hashtag/{$hashtag['text']}?src=hashtag_click'>#{$hashtag['text']}</a>";
+                                        $hashtags['#'.$hashtag['text']] = "<a href='https://twitter.com/hashtag/{$hashtag['text']}?src=hashtag_click' target='_blank'>#{$hashtag['text']}</a>";
                                     }
                                 }
                                 $content = str_replace( array_keys($hashtags), $hashtags, $content );
                             }
-                            if ( $settings['eael_twitter_feed_mention_linked'] && $item['entities']['user_mentions'] ){
+                            if ( $settings['eael_twitter_feed_mention_linked'] === 'yes' && $item['entities']['user_mentions'] ){
                                 $mentions = [];
                                 foreach ( $item['entities']['user_mentions'] as $mention ){
                                     if ( $mention['screen_name'] ){
-                                        $mentions['@'.$mention['screen_name']] = "<a href='https://twitter.com/{$mention['screen_name']}'>@{$mention['screen_name']}</a>";
+                                        $mentions['@'.$mention['screen_name']] = "<a href='https://twitter.com/{$mention['screen_name']}' target='_blank'>@{$mention['screen_name']}</a>";
                                     }
                                 }
                                 $content = str_replace( array_keys($mentions), $mentions, $content );
