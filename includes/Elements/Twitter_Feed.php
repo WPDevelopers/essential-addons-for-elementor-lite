@@ -349,8 +349,8 @@ class Twitter_Feed extends Widget_Base
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Enable', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('Disable', 'essential-addons-for-elementor-lite'),
-                'default' => 'false',
-                'return_value' => 'true',
+                'default' => '',
+                'return_value' => 'yes',
             ]
         );
 
@@ -361,8 +361,8 @@ class Twitter_Feed extends Widget_Base
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Enable', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('Disable', 'essential-addons-for-elementor-lite'),
-                'default' => 'false',
-                'return_value' => 'true',
+                'default' => '',
+                'return_value' => 'yes',
             ]
         );
 
