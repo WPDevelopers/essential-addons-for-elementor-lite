@@ -106,10 +106,11 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 jQuery(document.body).on('country_to_state_changing', function(event, country, wrapper) {
 	let $ = jQuery, checkout_keys = $('.ea-woo-checkout').data('checkout_ids');
-	let reorder_fields = function( type ){
+	let reorder_fields = function( type, _wrapper ){
 		let $selector = $(`.woocommerce-${type}-fields__field-wrapper`);
+		_wrapper = typeof _wrapper !== 'undefined' ? _wrapper : wrapper;
 		$.each(checkout_keys[type], function (index, field){
-			let $fieldHtml = wrapper.find(`#${field}_field`);
+			let $fieldHtml = _wrapper.find(`#${field}_field`);
 			$(`#eael-wc-${type}-reordered-fields .eael-woo-${type}-fields`).append($fieldHtml);
 		});
 		$selector.replaceWith($(`#eael-wc-${type}-reordered-fields`).contents());
@@ -117,12 +118,13 @@ jQuery(document.body).on('country_to_state_changing', function(event, country, w
 		$(`#eael-wc-${type}-reordered-fields`).html(`<div class="eael-woo-${type}-fields"></div>`);
 	};
 	setTimeout(function() {
-		console.log(event,country,wrapper);
 		if (wrapper.hasClass(`woocommerce-billing-fields`)){
 			reorder_fields( 'billing' );
+			reorder_fields( 'shipping', $('.woocommerce-shipping-fields') );
 		}
 		if (wrapper.hasClass(`woocommerce-shipping-fields`)){
 			reorder_fields( 'shipping' );
+			reorder_fields( 'billing', $('.woocommerce-billing-fields') );
 		}
 	}, 500);
 });
