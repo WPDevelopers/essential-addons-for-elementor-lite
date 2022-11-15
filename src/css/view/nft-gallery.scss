@@ -82,14 +82,17 @@
         margin: 0 0 10px;
       }
 
-      .eael-nft-last-sale {
+      .eael-nft-last-sale,
+      .eael-nft-ends-in {
         margin: 0 0 10px;
-        .eael-nft-last-sale-text {
+        .eael-nft-last-sale-text,
+        .eael-nft-ends-in-text {
           font-size: 14px;
           color: rgb(112, 122, 131);
         }
 
-        .eael-nft-last-sale-price {
+        .eael-nft-last-sale-price,
+        .eael-nft-ends-in-time {
           font-size: 15px;
           color: rgb(112, 122, 131);
         }
