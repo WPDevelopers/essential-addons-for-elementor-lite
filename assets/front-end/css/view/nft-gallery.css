@@ -41,9 +41,7 @@
 }
 .eael-nft-gallery-wrapper .eael-nft-item {
   position: relative;
-  padding: 15px;
   background-color: #ffffff;
-  border-radius: 10px;
   -webkit-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.09);
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.09);
   overflow: hidden;
@@ -51,8 +49,8 @@
   -o-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
 }
-.eael-nft-gallery-wrapper .eael-nft-item .page-1 {
-  display: block;
+.eael-nft-gallery-wrapper .eael-nft-item .eael-nft-main-content {
+  padding: 15px;
 }
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-created-by,
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-owned-by {
@@ -66,20 +64,34 @@
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-thumbnail {
   line-height: 0;
   text-align: center;
-  margin: 0 0 15px;
-  border-radius: 5px;
   overflow: hidden;
 }
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-thumbnail img {
-  border-radius: 5px;
   -o-object-fit: cover;
      object-fit: cover;
   width: auto;
   height: 300px;
 }
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-title {
-  font-size: 22px;
-  margin: 0 0 15px;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 0 10px;
+}
+.eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-current-price {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 10px;
+}
+.eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-last-sale {
+  margin: 0 0 10px;
+}
+.eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-last-sale .eael-nft-last-sale-text {
+  font-size: 14px;
+  color: rgb(112, 122, 131);
+}
+.eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-last-sale .eael-nft-last-sale-price {
+  font-size: 15px;
+  color: rgb(112, 122, 131);
 }
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-creator-wrapper,
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-owner-wrapper {
@@ -135,7 +147,6 @@
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-button button a {
   display: block;
   text-decoration: none;
-  background-color: #7967ff;
   color: #ffffff;
   font-size: 14px;
   padding: 12px 15px;
@@ -199,7 +210,6 @@
   border-radius: 4px;
 }
 .eael-nft-gallery-wrapper .preset-2 .eael-nft-button button:hover a {
-  background-color: #5c4bd9;
   color: #ffffff;
 }
 .eael-nft-gallery-wrapper .preset-3 .eael-nft-item {
@@ -238,6 +248,5 @@
   border-radius: 4px;
 }
 .eael-nft-gallery-wrapper .preset-3 .eael-nft-button button:hover a {
-  background-color: #5c4bd9;
   color: #ffffff;
 }
