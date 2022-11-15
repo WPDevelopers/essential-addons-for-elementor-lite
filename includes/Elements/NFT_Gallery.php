@@ -375,6 +375,18 @@ class NFT_Gallery extends Widget_Base
                 'default' => 'yes',
 			]
 		);
+        
+        $this->add_control(
+			'eael_nft_gallery_show_chain',
+			[
+				'label' => __( 'Chain', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+                'default' => 'yes',
+			]
+		);
 
         $this->end_controls_section();
 
@@ -2121,6 +2133,7 @@ class NFT_Gallery extends Widget_Base
         $nft_gallery['show_current_price'] = ! empty( $settings['eael_nft_gallery_show_current_price'] ) && 'yes' === $settings['eael_nft_gallery_show_current_price'] ? true : false; 
         $nft_gallery['show_last_sale_ends_in'] = ! empty( $settings['eael_nft_gallery_show_last_sale_ends_in'] ) && 'yes' === $settings['eael_nft_gallery_show_last_sale_ends_in'] ? true : false; 
         $nft_gallery['show_button'] = ! empty( $settings['eael_nft_gallery_show_button'] ) && 'yes' === $settings['eael_nft_gallery_show_button'] ? true : false; 
+        $nft_gallery['show_chain'] = ! empty( $settings['eael_nft_gallery_show_chain'] ) && 'yes' === $settings['eael_nft_gallery_show_chain'] ? true : false; 
         $nft_gallery['button_alignment_class'] = ! empty( $settings['eael_nft_gallery_button_alignment'] ) ? 'eael-nft-gallery-button-align-' . $settings['eael_nft_gallery_button_alignment'] : ' '; 
         $nft_gallery['last_sale_label'] = ! empty( $settings['eael_nft_gallery_content_last_sale_label'] ) ? $settings['eael_nft_gallery_content_last_sale_label'] : 'Last sale:'; 
         $nft_gallery['ends_in_label'] = ! empty( $settings['eael_nft_gallery_content_ends_in_label'] ) ? $settings['eael_nft_gallery_content_ends_in_label'] : 'Ends in:'; 
@@ -2163,6 +2176,8 @@ class NFT_Gallery extends Widget_Base
             <div <?php echo $this->get_render_attribute_string('eael-nft-gallery-items'); ?> >
                     <?php foreach ($items as $item) : ?>
                         <?php
+                        echo "<pre>";
+                        print_r($item);
                         $counter++;
                         if ($post_per_page > 0) {
                             $current_page = ceil($counter / $post_per_page);
@@ -2219,10 +2234,18 @@ class NFT_Gallery extends Widget_Base
                         }
                         ?>
                         <div class="eael-nft-item <?php echo esc_attr( $pagination_class ); ?> ">
+                            <!-- Chain : #ToDo OpenSea API doesn't provide chain info yet -->
+                            <?php if( $nft_gallery['show_chain'] ) : ?>
+                            <div class="eael-nft-chain">
+                                <button class="eael-nft-chain-button">
+                                    <svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 20px;"><path d="M18.527 12.2062L12 16.1938L5.46875 12.2062L12 1L18.527 12.2062ZM12 17.4742L5.46875 13.4867L12 23L18.5312 13.4867L12 17.4742V17.4742Z" fill="white"></path></svg>
+                                </button>
+                            </div>
+                            <?php endif; ?>
+
                             <!-- Thumbnail -->
                             <div class="eael-nft-thumbnail">
                                 <?php
-
                                 if( $nft_gallery['show_thumbnail'] ) {
                                     if ( ! empty( $item_formatted['thumbnail'] ) ) {
                                         if ( $nft_gallery['thumbnail_clickable'] ) {

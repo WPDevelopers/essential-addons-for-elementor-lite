@@ -36,6 +36,43 @@
   }
 
   .eael-nft-item {
+    .eael-nft-chain {
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out 0s;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(159, 159, 159, 0.4);
+      backdrop-filter: blur(10px);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      z-index: 160;
+      cursor: pointer;
+      display: flex;
+
+      .eael-nft-chain-button {
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 0s ease 0s, opacity 0.4s ease-in-out 0s;
+        background: transparent;
+        display: inline-flex;
+        align-items: center;
+        font-size: 100%;
+        border: 0px;
+        padding: 0;
+        margin: 0;
+
+        svg {
+          width: 24px;
+          height: 20px;
+          fill: #fff;
+        }
+      }
+    }
 
     .eael-nft-main-content {
       padding: 15px;
@@ -159,6 +196,10 @@
   }
   .eael-nft-item:hover {
     box-shadow: 0 4px 15px #d6d6d6;
+
+    .eael-nft-chain {
+      opacity: 1;
+    }
 
     .eael-nft-button {
       opacity: 1;
