@@ -13,31 +13,30 @@
   display: grid;
 }
 .eael-nft-gallery-wrapper .eael-nft-list {
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: auto;
   grid-column-gap: 15px;
   grid-row-gap: 15px;
   display: grid;
 }
-.eael-nft-gallery-wrapper .eael-nft-list .eael-nft-item {
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 15px;
+.eael-nft-gallery-wrapper .eael-nft-list .eael-nft-list-thumbnail {
+  overflow: hidden;
 }
-.eael-nft-gallery-wrapper .eael-nft-list .eael-nft-item .eael-nft-thumbnail {
-  margin-bottom: 0;
-}
-.eael-nft-gallery-wrapper .eael-nft-list .eael-nft-item .eael-nft-thumbnail img {
+.eael-nft-gallery-wrapper .eael-nft-list .eael-nft-list-thumbnail img {
   -o-object-fit: cover;
      object-fit: cover;
   width: auto;
-  height: 300px;
+  height: 100px;
+  border-radius: 10px;
+}
+.eael-nft-gallery-wrapper .eael-nft-list .eael-nft-grid-container {
+  display: grid;
+  grid-template-columns: 15% 30% 15% 20% 20%;
+}
+.eael-nft-gallery-wrapper .eael-nft-list .eael-nft-grid-item {
+  display: inline-grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .eael-nft-gallery-wrapper .eael-nft-item {
   position: relative;
@@ -134,7 +133,7 @@
 }
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-last-sale,
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-ends-in {
-  margin: 0 0 10px;
+  margin: 0;
 }
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-last-sale .eael-nft-last-sale-text,
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-last-sale .eael-nft-ends-in-text,
@@ -158,13 +157,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
   gap: 10px;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
   margin-bottom: 10px;
 }
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-creator-wrapper img,
@@ -264,49 +257,59 @@
           transform: scale(1.1);
 }
 .eael-nft-gallery-wrapper .preset-2 .eael-nft-price-wrapper {
-  margin-bottom: 15px;
+  min-height: 20px;
 }
-.eael-nft-gallery-wrapper .preset-2 .eael-nft-button button a {
-  border-radius: 4px;
+.eael-nft-gallery-wrapper .preset-2 .eael-nft-creator-wrapper,
+.eael-nft-gallery-wrapper .preset-2 .eael-nft-owner-wrapper,
+.eael-nft-gallery-wrapper .preset-2 .eael-nft-last-sale-wrapper,
+.eael-nft-gallery-wrapper .preset-2 .eael-nft-button {
+  display: none;
 }
-.eael-nft-gallery-wrapper .preset-2 .eael-nft-button button:hover a {
-  color: #ffffff;
-}
-.eael-nft-gallery-wrapper .preset-3 .eael-nft-item {
+.eael-nft-gallery-wrapper .preset-2 .eael-nft-item {
   padding: 0 !important;
   min-height: 300px;
 }
-.eael-nft-gallery-wrapper .preset-3 .eael-nft-item .eael-nft-thumbnail {
+.eael-nft-gallery-wrapper .preset-2 .eael-nft-item .eael-nft-thumbnail {
   margin-bottom: 0;
 }
-.eael-nft-gallery-wrapper .preset-3 .eael-nft-item .eael-nft-main-content {
-  background-color: rgba(237, 236, 246, 0.9);
+.eael-nft-gallery-wrapper .preset-2 .eael-nft-item .eael-nft-thumbnail img {
+  -webkit-transition-duration: 0.4s;
+       -o-transition-duration: 0.4s;
+          transition-duration: 0.4s;
+}
+.eael-nft-gallery-wrapper .preset-2 .eael-nft-item .eael-nft-thumbnail::before {
+  content: " ";
+  z-index: 10;
+  display: block;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.eael-nft-gallery-wrapper .preset-2 .eael-nft-item .eael-nft-main-content {
+  background-color: transparent;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0;
   padding: 15px;
-  -webkit-transform: translateY(100%);
-      -ms-transform: translateY(100%);
-          transform: translateY(100%);
   -webkit-transition: 0.3s ease-in-out;
   -o-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
-  visibility: hidden;
   z-index: 999;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  color: #fff;
 }
-.eael-nft-gallery-wrapper .preset-3 .eael-nft-item:hover .eael-nft-main-content {
-  opacity: 1;
-  -webkit-transform: translate(0);
-      -ms-transform: translate(0);
-          transform: translate(0);
-  visibility: visible;
-}
-.eael-nft-gallery-wrapper .preset-3 .eael-nft-button button a {
-  border-radius: 4px;
-}
-.eael-nft-gallery-wrapper .preset-3 .eael-nft-button button:hover a {
-  color: #ffffff;
+.eael-nft-gallery-wrapper .preset-2 .eael-nft-item:hover .eael-nft-thumbnail img {
+  -webkit-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+          transform: scale(1.1);
 }

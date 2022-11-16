@@ -256,25 +256,25 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
-        $this->add_responsive_control(
-            'eael_nft_list_gallery_column',
-            [
-                'label'        => esc_html__('Columns', 'essential-addons-for-elementor-lite'),
-                'type'         => Controls_Manager::SELECT,
-                'default'      => '1',
-                'options'      => [
-                    '1' => esc_html__('1', 'essential-addons-for-elementor-lite'),
-                    '2' => esc_html__('2', 'essential-addons-for-elementor-lite'),
-                    '3' => esc_html__('3', 'essential-addons-for-elementor-lite'),
-                    '4' => esc_html__('4', 'essential-addons-for-elementor-lite'),
-                    '5' => esc_html__('5', 'essential-addons-for-elementor-lite'),
-                    '6' => esc_html__('6', 'essential-addons-for-elementor-lite'),
-                ],
-                'condition' => [
-                    'eael_nft_gallery_items_layout' => 'list'
-                ],
-            ]
-        );
+        // $this->add_responsive_control(
+        //     'eael_nft_list_gallery_column',
+        //     [
+        //         'label'        => esc_html__('Columns', 'essential-addons-for-elementor-lite'),
+        //         'type'         => Controls_Manager::SELECT,
+        //         'default'      => '1',
+        //         'options'      => [
+        //             '1' => esc_html__('1', 'essential-addons-for-elementor-lite'),
+        //             '2' => esc_html__('2', 'essential-addons-for-elementor-lite'),
+        //             '3' => esc_html__('3', 'essential-addons-for-elementor-lite'),
+        //             '4' => esc_html__('4', 'essential-addons-for-elementor-lite'),
+        //             '5' => esc_html__('5', 'essential-addons-for-elementor-lite'),
+        //             '6' => esc_html__('6', 'essential-addons-for-elementor-lite'),
+        //         ],
+        //         'condition' => [
+        //             'eael_nft_gallery_items_layout' => 'list'
+        //         ],
+        //     ]
+        // );
 
         $this->add_control(
 			'eael_nft_gallery_show_image',
@@ -333,8 +333,28 @@ class NFT_Gallery extends Widget_Base
 				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
                 'default' => '',
-                'condition' => [
-                    'eael_nft_gallery_style_preset' => 'preset-1'
+                'conditions' => [
+                    'relation' => 'or',
+                    'terms' => [
+                        [
+                            'relation' => 'and',
+                            'terms' => [
+                                [
+                                    'name'  => 'eael_nft_gallery_items_layout',
+                                    'value' => 'grid',
+                                ],
+                                [
+                                    'name'  => 'eael_nft_gallery_style_preset',
+                                    'value' => 'preset-1',
+                                ],
+                            ]
+                        ],
+                        [
+                            'name'  => 'eael_nft_gallery_items_layout',
+                            'value' => 'list',
+                        ],
+                        
+                    ],
                 ],
 			]
 		);
@@ -348,8 +368,28 @@ class NFT_Gallery extends Widget_Base
 				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
                 'default' => '',
-                'condition' => [
-                    'eael_nft_gallery_style_preset' => 'preset-1'
+                'conditions' => [
+                    'relation' => 'or',
+                    'terms' => [
+                        [
+                            'relation' => 'and',
+                            'terms' => [
+                                [
+                                    'name'  => 'eael_nft_gallery_items_layout',
+                                    'value' => 'grid',
+                                ],
+                                [
+                                    'name'  => 'eael_nft_gallery_style_preset',
+                                    'value' => 'preset-1',
+                                ],
+                            ]
+                        ],
+                        [
+                            'name'  => 'eael_nft_gallery_items_layout',
+                            'value' => 'list',
+                        ],
+                        
+                    ],
                 ],
 			]
 		);
@@ -363,8 +403,28 @@ class NFT_Gallery extends Widget_Base
 				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
                 'default' => 'yes',
-                'condition' => [
-                    'eael_nft_gallery_style_preset' => 'preset-1'
+                'conditions' => [
+                    'relation' => 'or',
+                    'terms' => [
+                        [
+                            'relation' => 'and',
+                            'terms' => [
+                                [
+                                    'name'  => 'eael_nft_gallery_items_layout',
+                                    'value' => 'grid',
+                                ],
+                                [
+                                    'name'  => 'eael_nft_gallery_style_preset',
+                                    'value' => 'preset-1',
+                                ],
+                            ]
+                        ],
+                        [
+                            'name'  => 'eael_nft_gallery_items_layout',
+                            'value' => 'list',
+                        ],
+                        
+                    ],
                 ],
 			]
 		);
@@ -378,8 +438,23 @@ class NFT_Gallery extends Widget_Base
 				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
                 'default' => 'yes',
-                'condition' => [
-                    'eael_nft_gallery_style_preset' => 'preset-1'
+                'conditions' => [
+                    'relation' => 'or',
+                    'terms' => [
+                        [
+                            'relation' => 'and',
+                            'terms' => [
+                                [
+                                    'name'  => 'eael_nft_gallery_items_layout',
+                                    'value' => 'grid',
+                                ],
+                                [
+                                    'name'  => 'eael_nft_gallery_style_preset',
+                                    'value' => 'preset-1',
+                                ],
+                            ]
+                        ],
+                    ],
                 ],
 			]
 		);
@@ -393,6 +468,9 @@ class NFT_Gallery extends Widget_Base
 				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
                 'default' => 'yes',
+                'condition' => [
+                    'eael_nft_gallery_items_layout' => 'grid'
+                ],
 			]
 		);
 
@@ -2105,13 +2183,229 @@ class NFT_Gallery extends Widget_Base
         $this->end_controls_section();
     }
 
+    public function print_nft_gallery_item_grid($nft_gallery, $item){
+        $item_formatted = $item;
+        $pagination_class = ! empty( $item_formatted['pagination_class'] ) ? $item_formatted['pagination_class'] : '';
+        $unit_convert = ! empty( $item_formatted['unit_convert'] ) ? $item_formatted['unit_convert'] : 1;
+        ?>
+        <div class="eael-nft-item <?php echo esc_attr( $pagination_class ); ?> ">
+            <!-- Chain -->
+            <?php if( $nft_gallery['show_chain'] ) : ?>
+            <div class="eael-nft-chain">
+                <button class="eael-nft-chain-button">
+                    <svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 20px;"><path d="M18.527 12.2062L12 16.1938L5.46875 12.2062L12 1L18.527 12.2062ZM12 17.4742L5.46875 13.4867L12 23L18.5312 13.4867L12 17.4742V17.4742Z" fill="white"></path></svg>
+                </button>
+            </div>
+            <?php endif; ?>
+
+            <!-- Thumbnail -->
+            <div class="eael-nft-thumbnail">
+                <?php
+                if( $nft_gallery['show_thumbnail'] ) {
+                    if ( ! empty( $item_formatted['thumbnail'] ) ) {
+                        if ( $nft_gallery['thumbnail_clickable'] ) {
+                            printf('<a href="%s">', esc_url( $item_formatted['view_details_link'] ));
+                        }
+                        printf('<img src="%s" alt="%s">', esc_attr($item_formatted['thumbnail']), esc_attr('NFT Gallery'));
+                        if ( $nft_gallery['thumbnail_clickable'] ) {
+                            printf('</a>');
+                        }
+                    }
+                }
+                ?>
+            </div>
+
+            <div class="eael-nft-main-content">
+                <!-- Content  -->
+                <div class="eael-nft-content">
+                    <!-- Title  -->
+                    <?php if( $nft_gallery['show_title'] ) : ?>
+                    <h3 class="eael-nft-title"><?php printf('%s', esc_html( $item_formatted['title'] ) ); ?></h3>
+                    <?php endif; ?>
+
+                    <!-- Current Price -->
+                    <?php if( ! empty( $nft_gallery['show_current_price'] ) ) : ?>
+                    <div class="eael-nft-current-price-wrapper">
+                        <?php if( floatval($item_formatted['current_price']) > 0 ): ?>
+                        <p class="eael-nft-current-price"><?php printf('%s %s', floatval( $item_formatted['current_price'] / $unit_convert ), esc_html( $item_formatted['currency'] ) ); ?></p>
+                        <?php endif; ?>
+                    </div>
+                    <?php endif; ?>
+
+                    <!-- Creator -->
+                    <?php if( $nft_gallery['show_creator'] && $item_formatted['show_created_by_content'] ) : ?>
+                    <div class="eael-nft-creator-wrapper">
+                        <div class="eael-nft-creator-img">
+                            <?php
+                            if (!empty($item_formatted['creator_thumbnail'])) {
+                                printf('<img src="%s" alt="%s">', esc_url($item_formatted['creator_thumbnail']), esc_attr__('EA NFT Creator Thumbnail', 'essential-addons-for-elementor-lite'));
+                                
+                                if($item_formatted['creator_verified']) {
+                                    printf('<a class="%s" href="%s" target="_blank"><svg aria-label="verified-icon" class="sc-9c65691d-0 ghqJwW sc-3bcbbab4-0 iuhSVk" fill="none" viewBox="0 0 30 30"><path d="M13.474 2.80108C14.2729 1.85822 15.7271 1.85822 16.526 2.80108L17.4886 3.9373C17.9785 4.51548 18.753 4.76715 19.4892 4.58733L20.9358 4.23394C22.1363 3.94069 23.3128 4.79547 23.4049 6.0278L23.5158 7.51286C23.5723 8.26854 24.051 8.92742 24.7522 9.21463L26.1303 9.77906C27.2739 10.2474 27.7233 11.6305 27.0734 12.6816L26.2903 13.9482C25.8918 14.5928 25.8918 15.4072 26.2903 16.0518L27.0734 17.3184C27.7233 18.3695 27.2739 19.7526 26.1303 20.2209L24.7522 20.7854C24.051 21.0726 23.5723 21.7315 23.5158 22.4871L23.4049 23.9722C23.3128 25.2045 22.1363 26.0593 20.9358 25.7661L19.4892 25.4127C18.753 25.2328 17.9785 25.4845 17.4886 26.0627L16.526 27.1989C15.7271 28.1418 14.2729 28.1418 13.474 27.1989L12.5114 26.0627C12.0215 25.4845 11.247 25.2328 10.5108 25.4127L9.06418 25.7661C7.86371 26.0593 6.6872 25.2045 6.59513 23.9722L6.48419 22.4871C6.42773 21.7315 5.94903 21.0726 5.24777 20.7854L3.86969 20.2209C2.72612 19.7526 2.27673 18.3695 2.9266 17.3184L3.70973 16.0518C4.10824 15.4072 4.10824 14.5928 3.70973 13.9482L2.9266 12.6816C2.27673 11.6305 2.72612 10.2474 3.86969 9.77906L5.24777 9.21463C5.94903 8.92742 6.42773 8.26854 6.48419 7.51286L6.59513 6.0278C6.6872 4.79547 7.86371 3.94069 9.06418 4.23394L10.5108 4.58733C11.247 4.76715 12.0215 4.51548 12.5114 3.9373L13.474 2.80108Z" class="sc-9c65691d-1 jiZrqV"></path><path d="M13.5 17.625L10.875 15L10 15.875L13.5 19.375L21 11.875L20.125 11L13.5 17.625Z" fill="white" stroke="white"></path></svg></a>', 
+                                            esc_attr('creator-verified-icon'), esc_url($item_formatted['creator_thumbnail']));
+                                }
+                            } else {
+                                // default creator svg
+                            }
+                            ?>
+                        </div>
+                        <div class="eael-nft-created-by">
+                            <div><span><?php printf('%s', esc_html( $nft_gallery['created_by_label'] ) ); ?> </span></div>
+                            <div><?php printf('<a target="_blank" href="%s">%s</a>', esc_attr( $item_formatted['created_by_link'] ), esc_html( $item_formatted['created_by_link_text'] ) ); ?></div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
+                    <!-- Owner -->
+                    <?php if( $nft_gallery['show_owner'] && $item_formatted['show_owned_by_content'] ) : ?>
+                    <div class="eael-nft-owner-wrapper">
+                        <div class="eael-nft-owner-img">
+                            <?php
+                            if (!empty($item_formatted['owner_thumbnail'])) {
+                                printf('<img src="%s" alt="%s">', esc_url( $item_formatted['owner_thumbnail'] ), esc_attr__('EA NFT Owner Thumbnail', 'essential-addons-for-elementor-lite') );
+                                
+                                if($item_formatted['owner_verified']) {
+                                    printf('<a class="%s" href="%s" target="_blank"><svg aria-label="verified-icon" class="sc-9c65691d-0 ghqJwW sc-3bcbbab4-0 iuhSVk" fill="none" viewBox="0 0 30 30"><path d="M13.474 2.80108C14.2729 1.85822 15.7271 1.85822 16.526 2.80108L17.4886 3.9373C17.9785 4.51548 18.753 4.76715 19.4892 4.58733L20.9358 4.23394C22.1363 3.94069 23.3128 4.79547 23.4049 6.0278L23.5158 7.51286C23.5723 8.26854 24.051 8.92742 24.7522 9.21463L26.1303 9.77906C27.2739 10.2474 27.7233 11.6305 27.0734 12.6816L26.2903 13.9482C25.8918 14.5928 25.8918 15.4072 26.2903 16.0518L27.0734 17.3184C27.7233 18.3695 27.2739 19.7526 26.1303 20.2209L24.7522 20.7854C24.051 21.0726 23.5723 21.7315 23.5158 22.4871L23.4049 23.9722C23.3128 25.2045 22.1363 26.0593 20.9358 25.7661L19.4892 25.4127C18.753 25.2328 17.9785 25.4845 17.4886 26.0627L16.526 27.1989C15.7271 28.1418 14.2729 28.1418 13.474 27.1989L12.5114 26.0627C12.0215 25.4845 11.247 25.2328 10.5108 25.4127L9.06418 25.7661C7.86371 26.0593 6.6872 25.2045 6.59513 23.9722L6.48419 22.4871C6.42773 21.7315 5.94903 21.0726 5.24777 20.7854L3.86969 20.2209C2.72612 19.7526 2.27673 18.3695 2.9266 17.3184L3.70973 16.0518C4.10824 15.4072 4.10824 14.5928 3.70973 13.9482L2.9266 12.6816C2.27673 11.6305 2.72612 10.2474 3.86969 9.77906L5.24777 9.21463C5.94903 8.92742 6.42773 8.26854 6.48419 7.51286L6.59513 6.0278C6.6872 4.79547 7.86371 3.94069 9.06418 4.23394L10.5108 4.58733C11.247 4.76715 12.0215 4.51548 12.5114 3.9373L13.474 2.80108Z" class="sc-9c65691d-1 jiZrqV"></path><path d="M13.5 17.625L10.875 15L10 15.875L13.5 19.375L21 11.875L20.125 11L13.5 17.625Z" fill="white" stroke="white"></path></svg></a>', 
+                                            esc_attr('owner-verified-icon'), esc_url($item_formatted['owner_thumbnail']));
+                                }
+                            } else {
+                                // default owner svg
+                            }
+                            ?>
+                        </div>
+                        <div class="eael-nft-owned-by">
+                            <div><span><?php printf('%s', esc_html( $nft_gallery['owned_by_label'] ) ); ?> </span></div>
+                            <div><?php printf('<a target="_blank" href="%s">%s</a>', esc_url( $item_formatted['owned_by_link'] ), esc_html( $item_formatted['owned_by_link_text'] ) ); ?></div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
+                    <!-- Last Sale / Ends In -->
+                    <?php if( ! empty( $nft_gallery['show_last_sale_ends_in'] ) ) : ?>
+                    <div class="eael-nft-last-sale-wrapper">
+                        <?php if( intval($item_formatted['last_sale']) > 0 ): ?>
+                            <p class="eael-nft-last-sale"><?php printf('<span class="%s">%s</span> <span class="%s">%s %s</span>', esc_attr('eael-nft-last-sale-text') , esc_html__($nft_gallery['last_sale_label'], 'essential-addons-for-elementor-lite'), esc_attr('eael-nft-last-sale-price'), floatval($item_formatted['last_sale'] / $unit_convert ), esc_html( $item_formatted['currency'] )); ?></p>
+                        <?php elseif( ! empty($item_formatted['ends_in']) ): ?>
+                            <p class="eael-nft-ends-in"><?php printf('<span class="%s">%s</span> <span class="%s">%s</span>', esc_attr('eael-nft-ends-in-text') , esc_html__($nft_gallery['ends_in_label'], 'essential-addons-for-elementor-lite'), esc_attr('eael-nft-ends-in-time'), $item_formatted['ends_in'] ); ?></p>
+                        <?php endif; ?>
+                    </div>
+                    <?php endif; ?>
+                </div>
+
+                <!-- Button -->
+                <div class="eael-nft-button">
+                    <?php if( $nft_gallery['show_button'] ) : ?>
+                    <button <?php echo $this->get_render_attribute_string('eael-nft-gallery-button'); ?>>
+                        <?php printf('<a target="_blank" href="%s">%s</a>', esc_attr( $item_formatted['view_details_link'] ), esc_html__( $nft_gallery['view_details_text'] ) ) ?>
+                    </button>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+        <?php 
+    }
+    
+    public function print_nft_gallery_item_list($nft_gallery, $item){
+        $item_formatted = $item;
+        $pagination_class = ! empty( $item_formatted['pagination_class'] ) ? $item_formatted['pagination_class'] : '';
+        $unit_convert = ! empty( $item_formatted['unit_convert'] ) ? $item_formatted['unit_convert'] : 1;
+        ?>
+        <div class="eael-nft-item <?php echo esc_attr( $pagination_class ); ?> ">
+            <div class="eael-nft-main-content">
+                <!-- Content  -->
+                <div class="eael-nft-content eael-nft-grid-container">
+                    <!-- Thumbnail -->
+                    <div class="eael-nft-list-thumbnail eael-nft-grid-item">
+                        <?php
+                        if( $nft_gallery['show_thumbnail'] ) {
+                            if ( ! empty( $item_formatted['thumbnail'] ) ) {
+                                if ( $nft_gallery['thumbnail_clickable'] ) {
+                                    printf('<a href="%s">', esc_url( $item_formatted['view_details_link'] ));
+                                }
+                                printf('<img src="%s" alt="%s">', esc_attr($item_formatted['thumbnail']), esc_attr('NFT Gallery'));
+                                if ( $nft_gallery['thumbnail_clickable'] ) {
+                                    printf('</a>');
+                                }
+                            }
+                        }
+                        ?>
+                    </div>
+                    
+                    <!-- Title  -->
+                    <?php if( $nft_gallery['show_title'] ) : ?>
+                    <div class="eael-nft-title-wrapper eael-nft-grid-item">
+                        <h3 class="eael-nft-title"><?php printf('%s', esc_html( $item_formatted['title'] ) ); ?></h3>
+                    </div>
+                    <?php endif; ?>
+
+                    <!-- Current Price -->
+                    <?php if( ! empty( $nft_gallery['show_current_price'] ) ) : ?>
+                    <div class="eael-nft-current-price-wrapper eael-nft-grid-item">
+                        <?php if( floatval($item_formatted['current_price']) > 0 ): ?>
+                        <p class="eael-nft-current-price"><?php printf('%s %s', floatval( $item_formatted['current_price'] / $unit_convert ), esc_html( $item_formatted['currency'] ) ); ?></p>
+                        <?php endif; ?>
+                    </div>
+                    <?php endif; ?>
+
+                    <!-- Creator -->
+                    <?php if( $nft_gallery['show_creator'] && $item_formatted['show_created_by_content'] ) : ?>
+                    <div class="eael-nft-creator-wrapper eael-nft-grid-item">
+                        <div class="eael-nft-creator-img">
+                            <?php
+                            if (!empty($item_formatted['creator_thumbnail'])) {
+                                printf('<img src="%s" alt="%s">', esc_url($item_formatted['creator_thumbnail']), esc_attr__('EA NFT Creator Thumbnail', 'essential-addons-for-elementor-lite'));
+                                
+                                if($item_formatted['creator_verified']) {
+                                    printf('<a class="%s" href="%s" target="_blank"><svg aria-label="verified-icon" class="sc-9c65691d-0 ghqJwW sc-3bcbbab4-0 iuhSVk" fill="none" viewBox="0 0 30 30"><path d="M13.474 2.80108C14.2729 1.85822 15.7271 1.85822 16.526 2.80108L17.4886 3.9373C17.9785 4.51548 18.753 4.76715 19.4892 4.58733L20.9358 4.23394C22.1363 3.94069 23.3128 4.79547 23.4049 6.0278L23.5158 7.51286C23.5723 8.26854 24.051 8.92742 24.7522 9.21463L26.1303 9.77906C27.2739 10.2474 27.7233 11.6305 27.0734 12.6816L26.2903 13.9482C25.8918 14.5928 25.8918 15.4072 26.2903 16.0518L27.0734 17.3184C27.7233 18.3695 27.2739 19.7526 26.1303 20.2209L24.7522 20.7854C24.051 21.0726 23.5723 21.7315 23.5158 22.4871L23.4049 23.9722C23.3128 25.2045 22.1363 26.0593 20.9358 25.7661L19.4892 25.4127C18.753 25.2328 17.9785 25.4845 17.4886 26.0627L16.526 27.1989C15.7271 28.1418 14.2729 28.1418 13.474 27.1989L12.5114 26.0627C12.0215 25.4845 11.247 25.2328 10.5108 25.4127L9.06418 25.7661C7.86371 26.0593 6.6872 25.2045 6.59513 23.9722L6.48419 22.4871C6.42773 21.7315 5.94903 21.0726 5.24777 20.7854L3.86969 20.2209C2.72612 19.7526 2.27673 18.3695 2.9266 17.3184L3.70973 16.0518C4.10824 15.4072 4.10824 14.5928 3.70973 13.9482L2.9266 12.6816C2.27673 11.6305 2.72612 10.2474 3.86969 9.77906L5.24777 9.21463C5.94903 8.92742 6.42773 8.26854 6.48419 7.51286L6.59513 6.0278C6.6872 4.79547 7.86371 3.94069 9.06418 4.23394L10.5108 4.58733C11.247 4.76715 12.0215 4.51548 12.5114 3.9373L13.474 2.80108Z" class="sc-9c65691d-1 jiZrqV"></path><path d="M13.5 17.625L10.875 15L10 15.875L13.5 19.375L21 11.875L20.125 11L13.5 17.625Z" fill="white" stroke="white"></path></svg></a>', 
+                                            esc_attr('creator-verified-icon'), esc_url($item_formatted['creator_thumbnail']));
+                                }
+                            } else {
+                                // default creator svg
+                            }
+                            ?>
+                        </div>
+                        <div class="eael-nft-created-by">
+                            <div><span><?php printf('%s', esc_html( $nft_gallery['created_by_label'] ) ); ?> </span></div>
+                            <div><?php printf('<a target="_blank" href="%s">%s</a>', esc_attr( $item_formatted['created_by_link'] ), esc_html( $item_formatted['created_by_link_text'] ) ); ?></div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
+                    <!-- Owner -->
+                    <?php if( $nft_gallery['show_owner'] && $item_formatted['show_owned_by_content'] ) : ?>
+                    <div class="eael-nft-owner-wrapper eael-nft-grid-item">
+                        <div class="eael-nft-owner-img">
+                            <?php
+                            if (!empty($item_formatted['owner_thumbnail'])) {
+                                printf('<img src="%s" alt="%s">', esc_url( $item_formatted['owner_thumbnail'] ), esc_attr__('EA NFT Owner Thumbnail', 'essential-addons-for-elementor-lite') );
+                                
+                                if($item_formatted['owner_verified']) {
+                                    printf('<a class="%s" href="%s" target="_blank"><svg aria-label="verified-icon" class="sc-9c65691d-0 ghqJwW sc-3bcbbab4-0 iuhSVk" fill="none" viewBox="0 0 30 30"><path d="M13.474 2.80108C14.2729 1.85822 15.7271 1.85822 16.526 2.80108L17.4886 3.9373C17.9785 4.51548 18.753 4.76715 19.4892 4.58733L20.9358 4.23394C22.1363 3.94069 23.3128 4.79547 23.4049 6.0278L23.5158 7.51286C23.5723 8.26854 24.051 8.92742 24.7522 9.21463L26.1303 9.77906C27.2739 10.2474 27.7233 11.6305 27.0734 12.6816L26.2903 13.9482C25.8918 14.5928 25.8918 15.4072 26.2903 16.0518L27.0734 17.3184C27.7233 18.3695 27.2739 19.7526 26.1303 20.2209L24.7522 20.7854C24.051 21.0726 23.5723 21.7315 23.5158 22.4871L23.4049 23.9722C23.3128 25.2045 22.1363 26.0593 20.9358 25.7661L19.4892 25.4127C18.753 25.2328 17.9785 25.4845 17.4886 26.0627L16.526 27.1989C15.7271 28.1418 14.2729 28.1418 13.474 27.1989L12.5114 26.0627C12.0215 25.4845 11.247 25.2328 10.5108 25.4127L9.06418 25.7661C7.86371 26.0593 6.6872 25.2045 6.59513 23.9722L6.48419 22.4871C6.42773 21.7315 5.94903 21.0726 5.24777 20.7854L3.86969 20.2209C2.72612 19.7526 2.27673 18.3695 2.9266 17.3184L3.70973 16.0518C4.10824 15.4072 4.10824 14.5928 3.70973 13.9482L2.9266 12.6816C2.27673 11.6305 2.72612 10.2474 3.86969 9.77906L5.24777 9.21463C5.94903 8.92742 6.42773 8.26854 6.48419 7.51286L6.59513 6.0278C6.6872 4.79547 7.86371 3.94069 9.06418 4.23394L10.5108 4.58733C11.247 4.76715 12.0215 4.51548 12.5114 3.9373L13.474 2.80108Z" class="sc-9c65691d-1 jiZrqV"></path><path d="M13.5 17.625L10.875 15L10 15.875L13.5 19.375L21 11.875L20.125 11L13.5 17.625Z" fill="white" stroke="white"></path></svg></a>', 
+                                            esc_attr('owner-verified-icon'), esc_url($item_formatted['owner_thumbnail']));
+                                }
+                            } else {
+                                // default owner svg
+                            }
+                            ?>
+                        </div>
+                        <div class="eael-nft-owned-by">
+                            <div><span><?php printf('%s', esc_html( $nft_gallery['owned_by_label'] ) ); ?> </span></div>
+                            <div><?php printf('<a target="_blank" href="%s">%s</a>', esc_url( $item_formatted['owned_by_link'] ), esc_html( $item_formatted['owned_by_link_text'] ) ); ?></div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+        <?php 
+    }
+
     public function print_nft_gallery( $opensea_items )
     {
         $settings = $this->get_settings();
         ob_start();
 
         $nft_gallery = [];
-        $opensea_item_formatted = [];
         $items = isset( $opensea_items['items'] ) ? $opensea_items['items'] : false;
         $error_message = ! empty( $opensea_items['error_message'] ) ? $opensea_items['error_message'] : "";
 
@@ -2126,7 +2420,6 @@ class NFT_Gallery extends Widget_Base
         $nft_gallery['layout'] = !empty($settings['eael_nft_gallery_items_layout']) ? $settings['eael_nft_gallery_items_layout'] : 'grid';
         $nft_gallery['opensea_type'] = ! empty( $settings['eael_nft_gallery_opensea_type'] ) ? esc_html( $settings['eael_nft_gallery_opensea_type'] ) : 'assets';
         $nft_gallery['preset'] = !empty($settings['eael_nft_gallery_style_preset']) && 'grid' === $nft_gallery['layout'] ? $settings['eael_nft_gallery_style_preset'] : 'preset-1';
-        $nft_gallery['preset'] = 'list' === $nft_gallery['layout'] && !empty($settings['eael_nft_gallery_list_style_preset']) ? $settings['eael_nft_gallery_list_style_preset'] : $nft_gallery['preset'];
         $nft_gallery['owned_by_label'] = ! empty( $settings['eael_nft_gallery_content_owned_by_label'] ) ? $settings['eael_nft_gallery_content_owned_by_label'] : __('Owned By', 'essential-addons-for-elementor-lite');
         $nft_gallery['created_by_label'] = ! empty( $settings['eael_nft_gallery_content_created_by_label'] ) ? $settings['eael_nft_gallery_content_created_by_label'] : __('Owned By', 'essential-addons-for-elementor-lite');
         $nft_gallery['view_details_text'] =  ! empty( $settings['eael_nft_gallery_content_view_details_label'] ) ? $settings['eael_nft_gallery_content_view_details_label'] : __('View Details', 'essential-addons-for-elementor-lite');       
@@ -2220,10 +2513,11 @@ class NFT_Gallery extends Widget_Base
                         if( 'collections' === $nft_gallery['opensea_type'] ){
                             $item_formatted['view_details_link'] = ! empty( $item->slug ) ? esc_url( "{$nft_gallery['api_url']}/collection/{$item->slug}" ) : '#'; 
                         }
-                        $unit_convert = 1000000000000000000;
                         $item_formatted['current_price'] = ! empty( $item->seaport_sell_orders[0]->current_price ) ? $item->seaport_sell_orders[0]->current_price : 0;
                         $item_formatted['last_sale'] = ! empty( $item->last_sale->total_price ) ? $item->last_sale->total_price : 0;
                         $item_formatted['currency'] = 'ETH';
+                        $item_formatted['pagination_class'] = $pagination_class;
+                        $item_formatted['unit_convert'] = 1000000000000000000;
                         
                         $datediff_in_days = $datediff_in_hours = 0;
                         $item_formatted['ends_in'] = '';
@@ -2241,120 +2535,7 @@ class NFT_Gallery extends Widget_Base
                             $item_formatted['ends_in'] = $datediff_in_days < 1 ? $datediff_in_hours . __(' hours', 'essential-addons-for-elementor-lite') : $item_formatted['ends_in'];
                         }
                         ?>
-                        <div class="eael-nft-item <?php echo esc_attr( $pagination_class ); ?> ">
-                            <!-- Chain -->
-                            <?php if( $nft_gallery['show_chain'] ) : ?>
-                            <div class="eael-nft-chain">
-                                <button class="eael-nft-chain-button">
-                                    <svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 20px;"><path d="M18.527 12.2062L12 16.1938L5.46875 12.2062L12 1L18.527 12.2062ZM12 17.4742L5.46875 13.4867L12 23L18.5312 13.4867L12 17.4742V17.4742Z" fill="white"></path></svg>
-                                </button>
-                            </div>
-                            <?php endif; ?>
-
-                            <!-- Thumbnail -->
-                            <div class="eael-nft-thumbnail">
-                                <?php
-                                if( $nft_gallery['show_thumbnail'] ) {
-                                    if ( ! empty( $item_formatted['thumbnail'] ) ) {
-                                        if ( $nft_gallery['thumbnail_clickable'] ) {
-                                            printf('<a href="%s">', esc_url( $item_formatted['view_details_link'] ));
-                                        }
-                                        printf('<img src="%s" alt="%s">', esc_attr($item_formatted['thumbnail']), esc_attr('NFT Gallery'));
-                                        if ( $nft_gallery['thumbnail_clickable'] ) {
-                                            printf('</a>');
-                                        }
-                                    }
-                                }
-                                ?>
-                            </div>
-
-                            <div class="eael-nft-main-content">
-                                <!-- Content  -->
-                                <div class="eael-nft-content">
-                                    <!-- Title  -->
-                                    <?php if( $nft_gallery['show_title'] ) : ?>
-                                    <h3 class="eael-nft-title"><?php printf('%s', esc_html( $item_formatted['title'] ) ); ?></h3>
-                                    <?php endif; ?>
-
-                                    <!-- Current Price -->
-                                    <?php if( ! empty( $nft_gallery['show_current_price'] ) ) : ?>
-                                    <div class="eael-nft-current-price-wrapper">
-                                        <?php if( floatval($item_formatted['current_price']) > 0 ): ?>
-                                        <p class="eael-nft-current-price"><?php printf('%s %s', floatval( $item_formatted['current_price'] / $unit_convert ), esc_html( $item_formatted['currency'] ) ); ?></p>
-                                        <?php endif; ?>
-                                    </div>
-                                    <?php endif; ?>
-
-                                    <!-- Creator -->
-                                    <?php if( $nft_gallery['show_creator'] && $item_formatted['show_created_by_content'] ) : ?>
-                                    <div class="eael-nft-creator-wrapper">
-                                        <div class="eael-nft-creator-img">
-                                            <?php
-                                            if (!empty($item_formatted['creator_thumbnail'])) {
-                                                printf('<img src="%s" alt="%s">', esc_url($item_formatted['creator_thumbnail']), esc_attr__('EA NFT Creator Thumbnail', 'essential-addons-for-elementor-lite'));
-                                                
-                                                if($item_formatted['creator_verified']) {
-                                                    printf('<a class="%s" href="%s" target="_blank"><svg aria-label="verified-icon" class="sc-9c65691d-0 ghqJwW sc-3bcbbab4-0 iuhSVk" fill="none" viewBox="0 0 30 30"><path d="M13.474 2.80108C14.2729 1.85822 15.7271 1.85822 16.526 2.80108L17.4886 3.9373C17.9785 4.51548 18.753 4.76715 19.4892 4.58733L20.9358 4.23394C22.1363 3.94069 23.3128 4.79547 23.4049 6.0278L23.5158 7.51286C23.5723 8.26854 24.051 8.92742 24.7522 9.21463L26.1303 9.77906C27.2739 10.2474 27.7233 11.6305 27.0734 12.6816L26.2903 13.9482C25.8918 14.5928 25.8918 15.4072 26.2903 16.0518L27.0734 17.3184C27.7233 18.3695 27.2739 19.7526 26.1303 20.2209L24.7522 20.7854C24.051 21.0726 23.5723 21.7315 23.5158 22.4871L23.4049 23.9722C23.3128 25.2045 22.1363 26.0593 20.9358 25.7661L19.4892 25.4127C18.753 25.2328 17.9785 25.4845 17.4886 26.0627L16.526 27.1989C15.7271 28.1418 14.2729 28.1418 13.474 27.1989L12.5114 26.0627C12.0215 25.4845 11.247 25.2328 10.5108 25.4127L9.06418 25.7661C7.86371 26.0593 6.6872 25.2045 6.59513 23.9722L6.48419 22.4871C6.42773 21.7315 5.94903 21.0726 5.24777 20.7854L3.86969 20.2209C2.72612 19.7526 2.27673 18.3695 2.9266 17.3184L3.70973 16.0518C4.10824 15.4072 4.10824 14.5928 3.70973 13.9482L2.9266 12.6816C2.27673 11.6305 2.72612 10.2474 3.86969 9.77906L5.24777 9.21463C5.94903 8.92742 6.42773 8.26854 6.48419 7.51286L6.59513 6.0278C6.6872 4.79547 7.86371 3.94069 9.06418 4.23394L10.5108 4.58733C11.247 4.76715 12.0215 4.51548 12.5114 3.9373L13.474 2.80108Z" class="sc-9c65691d-1 jiZrqV"></path><path d="M13.5 17.625L10.875 15L10 15.875L13.5 19.375L21 11.875L20.125 11L13.5 17.625Z" fill="white" stroke="white"></path></svg></a>', 
-                                                            esc_attr('creator-verified-icon'), esc_url($item_formatted['creator_thumbnail']));
-                                                }
-                                            } else {
-                                                // default creator svg
-                                            }
-                                            ?>
-                                        </div>
-                                        <div class="eael-nft-created-by">
-                                            <div><span><?php printf('%s', esc_html( $nft_gallery['created_by_label'] ) ); ?> </span></div>
-                                            <div><?php printf('<a target="_blank" href="%s">%s</a>', esc_attr( $item_formatted['created_by_link'] ), esc_html( $item_formatted['created_by_link_text'] ) ); ?></div>
-                                        </div>
-                                    </div>
-                                    <?php endif; ?>
-
-                                    <!-- Owner -->
-                                    <?php if( $nft_gallery['show_owner'] && $item_formatted['show_owned_by_content'] ) : ?>
-                                    <div class="eael-nft-owner-wrapper">
-                                        <div class="eael-nft-owner-img">
-                                            <?php
-                                            if (!empty($item_formatted['owner_thumbnail'])) {
-                                                printf('<img src="%s" alt="%s">', esc_url( $item_formatted['owner_thumbnail'] ), esc_attr__('EA NFT Owner Thumbnail', 'essential-addons-for-elementor-lite') );
-                                                
-                                                if($item_formatted['owner_verified']) {
-                                                    printf('<a class="%s" href="%s" target="_blank"><svg aria-label="verified-icon" class="sc-9c65691d-0 ghqJwW sc-3bcbbab4-0 iuhSVk" fill="none" viewBox="0 0 30 30"><path d="M13.474 2.80108C14.2729 1.85822 15.7271 1.85822 16.526 2.80108L17.4886 3.9373C17.9785 4.51548 18.753 4.76715 19.4892 4.58733L20.9358 4.23394C22.1363 3.94069 23.3128 4.79547 23.4049 6.0278L23.5158 7.51286C23.5723 8.26854 24.051 8.92742 24.7522 9.21463L26.1303 9.77906C27.2739 10.2474 27.7233 11.6305 27.0734 12.6816L26.2903 13.9482C25.8918 14.5928 25.8918 15.4072 26.2903 16.0518L27.0734 17.3184C27.7233 18.3695 27.2739 19.7526 26.1303 20.2209L24.7522 20.7854C24.051 21.0726 23.5723 21.7315 23.5158 22.4871L23.4049 23.9722C23.3128 25.2045 22.1363 26.0593 20.9358 25.7661L19.4892 25.4127C18.753 25.2328 17.9785 25.4845 17.4886 26.0627L16.526 27.1989C15.7271 28.1418 14.2729 28.1418 13.474 27.1989L12.5114 26.0627C12.0215 25.4845 11.247 25.2328 10.5108 25.4127L9.06418 25.7661C7.86371 26.0593 6.6872 25.2045 6.59513 23.9722L6.48419 22.4871C6.42773 21.7315 5.94903 21.0726 5.24777 20.7854L3.86969 20.2209C2.72612 19.7526 2.27673 18.3695 2.9266 17.3184L3.70973 16.0518C4.10824 15.4072 4.10824 14.5928 3.70973 13.9482L2.9266 12.6816C2.27673 11.6305 2.72612 10.2474 3.86969 9.77906L5.24777 9.21463C5.94903 8.92742 6.42773 8.26854 6.48419 7.51286L6.59513 6.0278C6.6872 4.79547 7.86371 3.94069 9.06418 4.23394L10.5108 4.58733C11.247 4.76715 12.0215 4.51548 12.5114 3.9373L13.474 2.80108Z" class="sc-9c65691d-1 jiZrqV"></path><path d="M13.5 17.625L10.875 15L10 15.875L13.5 19.375L21 11.875L20.125 11L13.5 17.625Z" fill="white" stroke="white"></path></svg></a>', 
-                                                            esc_attr('owner-verified-icon'), esc_url($item_formatted['owner_thumbnail']));
-                                                }
-                                            } else {
-                                                // default owner svg
-                                            }
-                                            ?>
-                                        </div>
-                                        <div class="eael-nft-owned-by">
-                                            <div><span><?php printf('%s', esc_html( $nft_gallery['owned_by_label'] ) ); ?> </span></div>
-                                            <div><?php printf('<a target="_blank" href="%s">%s</a>', esc_url( $item_formatted['owned_by_link'] ), esc_html( $item_formatted['owned_by_link_text'] ) ); ?></div>
-                                        </div>
-                                    </div>
-                                    <?php endif; ?>
-
-                                    <!-- Last Sale / Ends In -->
-                                    <?php if( ! empty( $nft_gallery['show_last_sale_ends_in'] ) ) : ?>
-                                    <div class="eael-nft-last-sale-wrapper">
-                                        <?php if( intval($item_formatted['last_sale']) > 0 ): ?>
-                                            <p class="eael-nft-last-sale"><?php printf('<span class="%s">%s</span> <span class="%s">%s %s</span>', esc_attr('eael-nft-last-sale-text') , esc_html__($nft_gallery['last_sale_label'], 'essential-addons-for-elementor-lite'), esc_attr('eael-nft-last-sale-price'), floatval($item_formatted['last_sale'] / $unit_convert ), esc_html( $item_formatted['currency'] )); ?></p>
-                                        <?php elseif( ! empty($item_formatted['ends_in']) ): ?>
-                                            <p class="eael-nft-ends-in"><?php printf('<span class="%s">%s</span> <span class="%s">%s</span>', esc_attr('eael-nft-ends-in-text') , esc_html__($nft_gallery['ends_in_label'], 'essential-addons-for-elementor-lite'), esc_attr('eael-nft-ends-in-time'), $item_formatted['ends_in'] ); ?></p>
-                                        <?php endif; ?>
-                                    </div>
-                                    <?php endif; ?>
-                                </div>
-
-                                <!-- Button -->
-                                <div class="eael-nft-button">
-                                    <?php if( $nft_gallery['show_button'] ) : ?>
-                                    <button <?php echo $this->get_render_attribute_string('eael-nft-gallery-button'); ?>>
-                                        <?php printf('<a target="_blank" href="%s">%s</a>', esc_attr( $item_formatted['view_details_link'] ), esc_html__( $nft_gallery['view_details_text'] ) ) ?>
-                                    </button>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        </div>
+                        <?php 'grid' === $nft_gallery['layout'] ? $this->print_nft_gallery_item_grid($nft_gallery, $item_formatted) : $this->print_nft_gallery_item_list($nft_gallery, $item_formatted); ?>
                     <?php endforeach; ?>
                 <!-- /.column  -->
             </div>

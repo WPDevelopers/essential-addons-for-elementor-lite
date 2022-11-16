@@ -11,29 +11,33 @@
     display: grid;
   }
 
-  // .eael-nft-list {
-  //   grid-template-columns: repeat(1, 1fr);
-  //   grid-column-gap: 15px;
-  //   grid-row-gap: 15px;
-  //   display: grid;
+  .eael-nft-list {
+    grid-template-columns: auto;
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    display: grid;
 
-  //   .eael-nft-item {
-  //     justify-content: flex-start;
-  //     align-items: flex-start;
-  //     display: flex;
-  //     gap: 15px;
+    .eael-nft-list-thumbnail {
+      overflow: hidden;
 
-  //     .eael-nft-thumbnail {
-  //       margin-bottom: 0;
+      img {
+        object-fit: cover;
+        width: auto;
+        height: 100px;
+        border-radius: 10px;
+      }
+    }
 
-  //       img {
-  //         object-fit: cover;
-  //         width: auto;
-  //         height: 300px;
-  //       }
-  //     }
-  //   }
-  // }
+    .eael-nft-grid-container {
+      display: grid;
+      grid-template-columns: 15% 30% 15% 20% 20%;
+    }
+
+    .eael-nft-grid-item {
+      display: inline-grid;
+      align-items: center;
+    }
+  }
 
   .eael-nft-item {
     .eael-nft-chain {
@@ -79,9 +83,7 @@
     }
 
     position: relative;
-    // padding: 15px;
     background-color: #ffffff;
-    // border-radius: 10px;
     box-shadow: 0 4px 15px rgb(0 0 0 / 9%);
     overflow: hidden;
     transition: 0.5s ease-in-out;
@@ -94,12 +96,9 @@
     .eael-nft-thumbnail {
       line-height: 0;
       text-align: center;
-      // margin: 0 0 15px;
-      // border-radius: 5px;
       overflow: hidden;
 
       img {
-        // border-radius: 5px;
         object-fit: cover;
         width: auto;
         height: 300px;
@@ -139,9 +138,9 @@
       .eael-nft-owner-wrapper {
         display: flex;
         align-items: center;
-        align-items: flex-start;
+        // align-items: flex-start;
         gap: 10px;
-        justify-content: flex-start;
+        // justify-content: flex-start;
         margin-bottom: 10px;
         img {
           height: 30px;
@@ -184,7 +183,6 @@
         a {
           display: block;
           text-decoration: none;
-          // background-color: #7967ff;
           color: #ffffff;
           font-size: 14px;
           padding: 12px 15px;
