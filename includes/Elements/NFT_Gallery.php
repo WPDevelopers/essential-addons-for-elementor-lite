@@ -226,7 +226,6 @@ class NFT_Gallery extends Widget_Base
                 'options' => [
                     'preset-1' => esc_html__('Preset 1', 'essential-addons-for-elementor-lite'),
                     'preset-2' => esc_html__('Preset 2', 'essential-addons-for-elementor-lite'),
-                    'preset-3' => esc_html__('Preset 3', 'essential-addons-for-elementor-lite'),
                 ],
                 'condition' => [
                     'eael_nft_gallery_items_layout' => 'grid'
@@ -274,9 +273,6 @@ class NFT_Gallery extends Widget_Base
                 'condition' => [
                     'eael_nft_gallery_items_layout' => 'list'
                 ],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-list' => 'grid-template-columns: repeat( {{VALUE}}, 1fr);'
-                ]
             ]
         );
 
@@ -337,6 +333,9 @@ class NFT_Gallery extends Widget_Base
 				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
                 'default' => '',
+                'condition' => [
+                    'eael_nft_gallery_style_preset' => 'preset-1'
+                ],
 			]
 		);
 
@@ -349,6 +348,9 @@ class NFT_Gallery extends Widget_Base
 				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
                 'default' => '',
+                'condition' => [
+                    'eael_nft_gallery_style_preset' => 'preset-1'
+                ],
 			]
 		);
 
@@ -361,6 +363,9 @@ class NFT_Gallery extends Widget_Base
 				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
                 'default' => 'yes',
+                'condition' => [
+                    'eael_nft_gallery_style_preset' => 'preset-1'
+                ],
 			]
 		);
 
@@ -373,6 +378,9 @@ class NFT_Gallery extends Widget_Base
 				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
                 'default' => 'yes',
+                'condition' => [
+                    'eael_nft_gallery_style_preset' => 'preset-1'
+                ],
 			]
 		);
         
@@ -804,7 +812,7 @@ class NFT_Gallery extends Widget_Base
                 'label' => esc_html__('Overlay Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .eael-nft-gallery-wrapper .preset-3 .eael-nft-item .eael-nft-main-content' => 'background: {{VALUE}};',
+                    // '{{WRAPPER}} .eael-nft-gallery-wrapper .preset-3 .eael-nft-item .eael-nft-main-content' => 'background: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_nft_gallery_items_layout' => 'grid',
@@ -1606,8 +1614,8 @@ class NFT_Gallery extends Widget_Base
                     'size' => 4,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-nft-gallery-wrapper .preset-2 .eael-nft-button button a' => 'border-radius: {{SIZE}}px;',
-                    '{{WRAPPER}} .eael-nft-gallery-wrapper .preset-3 .eael-nft-button button a' => 'border-radius: {{SIZE}}px;',
+                    // '{{WRAPPER}} .eael-nft-gallery-wrapper .preset-2 .eael-nft-button button a' => 'border-radius: {{SIZE}}px;',
+                    // '{{WRAPPER}} .eael-nft-gallery-wrapper .preset-3 .eael-nft-button button a' => 'border-radius: {{SIZE}}px;',
                 ],
                 'condition' => [
                     'eael_nft_gallery_style_preset!' => 'preset-1'
@@ -2117,7 +2125,7 @@ class NFT_Gallery extends Widget_Base
         $nft_gallery['source'] = ! empty( $settings['eael_nft_gallery_sources'] ) ? esc_html( $settings['eael_nft_gallery_sources'] ) : 'opensea';
         $nft_gallery['layout'] = !empty($settings['eael_nft_gallery_items_layout']) ? $settings['eael_nft_gallery_items_layout'] : 'grid';
         $nft_gallery['opensea_type'] = ! empty( $settings['eael_nft_gallery_opensea_type'] ) ? esc_html( $settings['eael_nft_gallery_opensea_type'] ) : 'assets';
-        $nft_gallery['preset'] = !empty($settings['eael_nft_gallery_style_preset']) && 'grid' === $nft_gallery['layout'] ? $settings['eael_nft_gallery_style_preset'] : 'preset-2';
+        $nft_gallery['preset'] = !empty($settings['eael_nft_gallery_style_preset']) && 'grid' === $nft_gallery['layout'] ? $settings['eael_nft_gallery_style_preset'] : 'preset-1';
         $nft_gallery['preset'] = 'list' === $nft_gallery['layout'] && !empty($settings['eael_nft_gallery_list_style_preset']) ? $settings['eael_nft_gallery_list_style_preset'] : $nft_gallery['preset'];
         $nft_gallery['owned_by_label'] = ! empty( $settings['eael_nft_gallery_content_owned_by_label'] ) ? $settings['eael_nft_gallery_content_owned_by_label'] : __('Owned By', 'essential-addons-for-elementor-lite');
         $nft_gallery['created_by_label'] = ! empty( $settings['eael_nft_gallery_content_created_by_label'] ) ? $settings['eael_nft_gallery_content_created_by_label'] : __('Owned By', 'essential-addons-for-elementor-lite');
