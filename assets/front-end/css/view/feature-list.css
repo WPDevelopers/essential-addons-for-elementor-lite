@@ -92,7 +92,6 @@
   -webkit-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
-  font-size: 30px;
   line-height: 1;
   color: #37368e;
   text-align: center;
@@ -135,7 +134,6 @@
   max-width: inherit;
   -ms-interpolation-mode: nearest-neighbor;
       image-rendering: -webkit-optimize-contrast;
-      image-rendering: -moz-crisp-edges;
       image-rendering: -o-pixelated;
       image-rendering: pixelated;
 }
