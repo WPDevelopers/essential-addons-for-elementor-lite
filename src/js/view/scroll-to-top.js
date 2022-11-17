@@ -10,7 +10,9 @@
         }
 
         if( typeof elementorFrontend !== 'undefined' && elementorFrontend ){
-            elementorFrontend.elements.$body[0].addEventListener('scroll', eaelScrollToTop);
+            elementorFrontend.elements.$body[0].addEventListener('scroll', function(){
+                eaelScrollToTop(this);
+            });
         }
 
         $(window).scroll(function () {
