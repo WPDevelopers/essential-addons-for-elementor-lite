@@ -343,9 +343,18 @@ class Twitter_Feed extends Widget_Base
         );
 
         $this->add_control(
+            'eael_twitter_feed_hyperlinks_header',
+            [
+                'label' => esc_html__('Hyperlinks', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+        $this->add_control(
             'eael_twitter_feed_hash_linked',
             [
-                'label' => esc_html__('Hash Name Hyperlink', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Hash Names', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Enable', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('Disable', 'essential-addons-for-elementor-lite'),
@@ -357,7 +366,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_mention_linked',
             [
-                'label' => esc_html__('Mention Hyperlink', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Mentions', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Enable', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('Disable', 'essential-addons-for-elementor-lite'),
