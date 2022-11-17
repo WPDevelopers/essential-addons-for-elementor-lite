@@ -14,11 +14,11 @@
         }
 
         $(window).scroll(function () {
-            eaelScrollToTop();
+            eaelScrollToTop(this);
         });
 
-        function eaelScrollToTop(){
-            if ($(this).scrollTop() < offset) {
+        function eaelScrollToTop($currentObj){
+            if ($($currentObj).scrollTop() < offset) {
                 $('.eael-ext-scroll-to-top-wrap').fadeOut(duration);
             } else {
                 $('.eael-ext-scroll-to-top-wrap').fadeIn(duration);
