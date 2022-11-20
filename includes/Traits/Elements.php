@@ -370,9 +370,8 @@ trait Elements {
 			}
 
 			if ( $reading_progress_status ) {
-				if ( $global_reading_progress ) {
-					// $this->progress_bar_global_css( $global_settings, $document->get_settings() );
-				}
+				$this->progress_bar_local_css( $document->get_settings() );
+
 				$this->extensions_data = $settings_data;
 				$progress_height       = ! empty( $settings_data['eael_ext_reading_progress_height']['size'] ) ? $settings_data['eael_ext_reading_progress_height']['size'] : '';
 				$animation_speed       = ! empty( $settings_data['eael_ext_reading_progress_animation_speed']['size'] ) ? $settings_data['eael_ext_reading_progress_animation_speed']['size'] : '';
@@ -767,35 +766,25 @@ trait Elements {
 
 		wp_add_inline_style( 'eael-table-of-content', $toc_global_css );
 	}
-
+	
 	/**
-	 * @param $global_settings
 	 * @param $document_settings
 	 *
 	 * @return string|void
 	 */
-	public function progress_bar_global_css( $global_settings, $document_settings ) {
-		if ( ! is_array( $global_settings ) ) {
-			return false;
-		}
+	public function progress_bar_local_css( $document_settings ) {
+		$eael_reading_progress_fill_color = isset( $document_settings['eael_ext_reading_progress_fill_color'] ) ? $document_settings['eael_ext_reading_progress_fill_color'] : '';
 
-		if ( empty( $global_settings['eael_ext_reading_progress'] ) ) {
-			return false;
-		}
-
-		$eael_reading_progress            = $global_settings['eael_ext_reading_progress'];
-		$eael_reading_progress_fill_color = isset( $eael_reading_progress['eael_ext_reading_progress_fill_color'] ) ? $eael_reading_progress['eael_ext_reading_progress_fill_color'] : '';
-
-		$reading_progress_global_css = '';
+		$reading_progress_local_css = '';
 		$eael_reading_progress_id_selector = '#eael-reading-progress-' . get_the_ID();
 		if( ! empty( $eael_reading_progress_fill_color ) ){
-			$reading_progress_global_css .= "
-				{$eael_reading_progress_id_selector} div.eael-reading-progress-wrap div.eael-reading-progress div.eael-reading-progress-fill {
+			$reading_progress_local_css .= "
+				div{$eael_reading_progress_id_selector} div.eael-reading-progress div.eael-reading-progress-fill {
 					background-color: {$eael_reading_progress_fill_color} !important;	
 				}
 			";
 		}
-		wp_add_inline_style( 'eael-reading-progress', $reading_progress_global_css );
+		wp_add_inline_style( 'eael-reading-progress', $reading_progress_local_css );
 	}
 
 	/**
