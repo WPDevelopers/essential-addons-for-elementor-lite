@@ -130,7 +130,7 @@ class Elements_Manager {
 			return false;
 		}
 
-		$document  = Plugin::$instance->documents->get( $post_id );
+		$document  = is_object( Plugin::$instance->documents ) ? Plugin::$instance->documents->get( $post_id ) : [];
 		$data      = is_object( $document ) ? $document->get_elements_data() : [];
 		$data      = $this->get_widget_list( $data );
 		$custom_js = is_object( $document ) ? $document->get_settings( 'eael_custom_js' ) : '';
