@@ -173,8 +173,7 @@ class Reading_Progress
                 'type' => Controls_Manager::COLOR,
                 'default' => '#1fd18e',
                 'selectors' => [
-                    // 'div.eael-reading-progress-wrap div.eael-reading-progress div.eael-reading-progress-fill' => 'background-color: {{VALUE}} !important',
-                    '#eael-reading-progress-' . get_the_ID() . ' div.eael-reading-progress div.eael-reading-progress-fill' => 'background-color: {{VALUE}} !important',
+                    'div.eael-reading-progress-wrap div.eael-reading-progress div.eael-reading-progress-fill' => 'background-color: {{VALUE}} !important',
                 ],
                 'separator' => 'before',
                 'condition' => [
