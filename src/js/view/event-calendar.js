@@ -273,7 +273,7 @@ var EventCalendar = function ($scope, $) {
 
 	setTimeout(function(){
 		calendar.changeView(calendar.view.type);
-	}, 1000);
+	}, 100);
 	
 	ea.hooks.addAction("eventCalendar.reinit", "ea", () => {
 		calendar.today();
