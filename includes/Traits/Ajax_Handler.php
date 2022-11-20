@@ -973,6 +973,9 @@ trait Ajax_Handler {
 		// Purge All LS Cache
 		do_action( 'litespeed_purge_all', '3rd Essential Addons for Elementor' );
 
+		// After clear the cache hook
+		do_action( 'eael_after_clear_cache_files' );
+
 		wp_send_json( true );
 	}
 
