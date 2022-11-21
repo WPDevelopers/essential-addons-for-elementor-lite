@@ -612,10 +612,6 @@ trait Admin {
 	public function eael_black_friday_optin_dismiss() {
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
 
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
-		}
-
 		update_option( 'eael_black_friday_optin_hide', true );
 		wp_send_json_success();
 	}
