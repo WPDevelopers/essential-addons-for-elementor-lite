@@ -608,4 +608,23 @@ trait Admin {
 		update_option( 'eael_gb_eb_popup_hide', true );
 		wp_send_json_success();
 	}
+
+	public function black_friday_optin() {
+		$time     = current_time( 'U' );
+		if ( $time > 1669831199 ) {
+			return;
+		}
+		?>
+        <div class="wpnotice-wrapper notice  notice-info is-dismissible eael-eb-optin-notice">
+            <div class="wpnotice-content-wrapper">
+                <div class="eael-eb-optin">
+                    <p><?php _e( 'Black Friday Exclusive: SAVE up to 40% & access to Essential Addons Pro features', 'essential-addons-for-elementor-lite' ); ?>
+                        <a href="https://essential-addons.com/elementor/#pricing" target="_blank"
+                           class="button-primary wpdeveloper-eb-plugin-installer"><?php _e( 'Grab The Offer', 'essential-addons-for-elementor-lite' ); ?></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+		<?php
+	}
 }
