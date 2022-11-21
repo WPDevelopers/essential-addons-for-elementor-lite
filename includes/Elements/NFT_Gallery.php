@@ -495,17 +495,17 @@ class NFT_Gallery extends Widget_Base
         );
 
         $this->add_control('eael_nft_gallery_content_owned_by_label', [
-            'label' => esc_html__('Owned By', 'essential-addons-for-elementor-lite'),
+            'label' => esc_html__('Owner', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::TEXT,
             'label_block' => false,
-            'default' => esc_html__('Owned By', 'essential-addons-for-elementor-lite'),
+            'default' => esc_html__('Owner', 'essential-addons-for-elementor-lite'),
         ]);
 
         $this->add_control('eael_nft_gallery_content_created_by_label', [
-            'label' => esc_html__('Created By', 'essential-addons-for-elementor-lite'),
+            'label' => esc_html__('Creator', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::TEXT,
             'label_block' => false,
-            'default' => esc_html__('Created By', 'essential-addons-for-elementor-lite'),
+            'default' => esc_html__('Creator', 'essential-addons-for-elementor-lite'),
         ]);
         
         $this->add_control('eael_nft_gallery_content_view_details_label', [
@@ -1091,7 +1091,7 @@ class NFT_Gallery extends Widget_Base
 
         /**
          * -------------------------------------------
-         * Tab Style ( Created By Style )
+         * Tab Style ( Creator Style )
          * -------------------------------------------
          */
         $this->start_controls_section(
@@ -1339,7 +1339,7 @@ class NFT_Gallery extends Widget_Base
 
         /**
          * -------------------------------------------
-         * Tab Style ( Owned By Style )
+         * Tab Style ( Owner Style )
          * -------------------------------------------
          */
         $this->start_controls_section(
@@ -2420,8 +2420,8 @@ class NFT_Gallery extends Widget_Base
         $nft_gallery['layout'] = !empty($settings['eael_nft_gallery_items_layout']) ? $settings['eael_nft_gallery_items_layout'] : 'grid';
         $nft_gallery['opensea_type'] = ! empty( $settings['eael_nft_gallery_opensea_type'] ) ? esc_html( $settings['eael_nft_gallery_opensea_type'] ) : 'assets';
         $nft_gallery['preset'] = !empty($settings['eael_nft_gallery_style_preset']) && 'grid' === $nft_gallery['layout'] ? $settings['eael_nft_gallery_style_preset'] : 'preset-1';
-        $nft_gallery['owned_by_label'] = ! empty( $settings['eael_nft_gallery_content_owned_by_label'] ) ? $settings['eael_nft_gallery_content_owned_by_label'] : __('Owned By', 'essential-addons-for-elementor-lite');
-        $nft_gallery['created_by_label'] = ! empty( $settings['eael_nft_gallery_content_created_by_label'] ) ? $settings['eael_nft_gallery_content_created_by_label'] : __('Owned By', 'essential-addons-for-elementor-lite');
+        $nft_gallery['owned_by_label'] = ! empty( $settings['eael_nft_gallery_content_owned_by_label'] ) ? $settings['eael_nft_gallery_content_owned_by_label'] : __('Owner', 'essential-addons-for-elementor-lite');
+        $nft_gallery['created_by_label'] = ! empty( $settings['eael_nft_gallery_content_created_by_label'] ) ? $settings['eael_nft_gallery_content_created_by_label'] : __('Owner', 'essential-addons-for-elementor-lite');
         $nft_gallery['view_details_text'] =  ! empty( $settings['eael_nft_gallery_content_view_details_label'] ) ? $settings['eael_nft_gallery_content_view_details_label'] : __('View Details', 'essential-addons-for-elementor-lite');       
         
         $nft_gallery['api_url'] = '';
