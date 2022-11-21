@@ -628,6 +628,12 @@ trait Admin {
 			return;
 		}
 		?>
+        <style>
+            .eael-black-friday-notice,
+            .eael-black-friday-notice * {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            }
+        </style>
         <div class="wpnotice-wrapper notice notice-info is-dismissible eael-black-friday-notice">
             <div class="wpnotice-content-wrapper">
                 <div class="eael-black-friday-optin">
