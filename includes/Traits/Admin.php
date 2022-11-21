@@ -624,7 +624,7 @@ trait Admin {
 		$time     = time();
 		$ajax_url = admin_url( 'admin-ajax.php' );
 		$nonce    = wp_create_nonce( 'essential-addons-elementor' );
-		if ( $time > 1669852799 || get_option( 'eael_black_friday_optin_hide' ) ) {
+		if ( $time > 1669852799 || get_option( 'eael_black_friday_optin_hide' ) || defined( 'EAEL_PRO_PLUGIN_VERSION' ) ) {
 			return;
 		}
 		?>
