@@ -88,6 +88,10 @@
     overflow: hidden;
     transition: 0.5s ease-in-out;
 
+    .eael-nft-creator-img {
+      display: flex;
+    }
+
     .eael-nft-created-by,
     .eael-nft-owned-by {
       display: flex;

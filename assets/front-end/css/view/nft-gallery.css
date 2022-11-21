@@ -101,6 +101,11 @@
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-main-content {
   padding: 15px;
 }
+.eael-nft-gallery-wrapper .eael-nft-item .eael-nft-creator-img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-created-by,
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-owned-by {
   display: -webkit-box;
