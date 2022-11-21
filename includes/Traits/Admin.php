@@ -609,9 +609,22 @@ trait Admin {
 		wp_send_json_success();
 	}
 
-	public function black_friday_optin() {
+	public function eael_black_friday_optin_dismiss() {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		update_option( 'eael_black_friday_optin_hide', true );
+		wp_send_json_success();
+	}
+
+	public function eael_black_friday_optin() {
 		$time     = current_time( 'U' );
-		if ( $time > 1669831199 ) {
+		$ajax_url = admin_url( 'admin-ajax.php' );
+		$nonce    = wp_create_nonce( 'essential-addons-elementor' );
+		if ( $time > 1669831199 || get_option( 'eael_black_friday_optin_hide' ) ) {
 			return;
 		}
 		?>
@@ -625,6 +638,35 @@ trait Admin {
                 </div>
             </div>
         </div>
+
+        <script>
+            (function ($) {
+                $(document).on('click', '.eael-black-friday-notice button.notice-dismiss', function (e) {
+                    e.preventDefault();
+
+                    var $notice_wrapper = $(this).closest('.eael-black-friday-notice');
+
+                    $.ajax({
+                        url: "<?php echo esc_html( $ajax_url ); ?>",
+                        type: "POST",
+                        data: {
+                            action: "eael_black_friday_optin_dismiss",
+                            security: "<?php echo esc_html( $nonce ); ?>",
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                $notice_wrapper.remove();
+                            } else {
+                                console.log(response.data);
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err.responseText);
+                        },
+                    });
+                });
+            })(jQuery);
+        </script>
 		<?php
 	}
 }
