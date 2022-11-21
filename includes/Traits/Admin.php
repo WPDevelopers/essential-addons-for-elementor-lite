@@ -218,7 +218,7 @@ trait Admin {
 
         $notice->options_args = array(
             'notice_will_show' => [
-                'opt_in' => $notice->timestamp,
+                // 'opt_in' => $notice->timestamp,
                 'review' => $notice->makeTime( $notice->timestamp, '7 Day' ), // after 3 days
             ],
         );
