@@ -280,7 +280,8 @@ class Bootstrap
 	        }
 
 	        //add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
-
+	        add_action( 'admin_notices', [ $this, 'black_friday_optin' ] );
+	        add_action( 'eael_admin_notices', [ $this, 'black_friday_optin' ] );
         }
 
 	    // beehive theme compatibility
