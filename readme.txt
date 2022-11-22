@@ -248,7 +248,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Fixed: EA Advanced Accordion | Not scrolling to the accordion title when custom ID is used
 - Improved: EA Duplicator | Added ' - Copy' text after the original title when a post/page is duplicated 
 - Improved: EA Login/Register Form | Added HTML tag support for form label
-- Improved: EA Simple Menu | Improved Compatiability with custom ID links on menu items
+- Improved: EA Simple Menu | Improved Compatibility with custom ID links on menu items
 - Few minor bug fixes & improvements
 
 = 5.4.2 - 31/10/2022 =
