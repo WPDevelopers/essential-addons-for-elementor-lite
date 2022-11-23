@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.1
 Requires PHP: 7.0
-Stable tag: 5.4.2
+Stable tag: 5.4.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -241,6 +241,15 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.4.3 - 22/11/2022 =
+
+- Fixed: EA Post Grid | HTML Tags not working in excerpt view
+- Fixed: EA Advanced Accordion | Not scrolling to the accordion title when custom ID is used
+- Improved: EA Duplicator | Added ' - Copy' text after the original title when a post/page is duplicated 
+- Improved: EA Login/Register Form | Added HTML tag support for form label
+- Improved: EA Simple Menu | Improved Compatibility with custom ID links on menu items
+- Few minor bug fixes & improvements
 
 = 5.4.2 - 31/10/2022 =
 

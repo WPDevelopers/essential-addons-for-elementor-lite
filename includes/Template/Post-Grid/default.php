@@ -93,7 +93,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                             if (empty($settings['eael_excerpt_length'])) {
                                 echo '<p>' . strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()) . '</p>';
                             } else {
-                                echo '<p>' . wp_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']) . '</p>';
+                                echo '<p>' . wp_kses_post( Helper::eael_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']) ) . '</p>';
                             }
                         }
 
@@ -235,7 +235,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                 if (empty($settings['eael_excerpt_length'])) {
                     echo '<p>' . strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()) . '</p>';
                 } else {
-                    echo '<p>' . wp_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']) . '</p>';
+                    echo '<p>' . wp_kses_post( Helper::eael_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']) ) . '</p>';
                 }
             }
 
@@ -329,7 +329,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                 if (empty($settings['eael_excerpt_length'])) {
                     echo '<p>' . strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()) . '</p>';
                 } else {
-                    echo '<p>' . wp_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']) . '</p>';
+                    echo '<p>' . wp_kses_post( Helper::eael_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']) ) . '</p>';
                 }
             }
 
