@@ -2247,7 +2247,7 @@ class NFT_Gallery extends Widget_Base
                 if( $nft_gallery['show_thumbnail'] ) {
                     if ( ! empty( $item_formatted['thumbnail'] ) ) {
                         if ( $nft_gallery['thumbnail_clickable'] ) {
-                            printf('<a href="%s">', esc_url( $item_formatted['view_details_link'] ));
+                            printf('<a href="%s" target="_blank" >', esc_url( $item_formatted['view_details_link'] ));
                         }
                         printf('<img src="%s" alt="%s">', esc_attr($item_formatted['thumbnail']), esc_attr('NFT Gallery'));
                         if ( $nft_gallery['thumbnail_clickable'] ) {
@@ -2363,7 +2363,7 @@ class NFT_Gallery extends Widget_Base
                         if( $nft_gallery['show_thumbnail'] ) {
                             if ( ! empty( $item_formatted['thumbnail'] ) ) {
                                 if ( $nft_gallery['thumbnail_clickable'] ) {
-                                    printf('<a href="%s">', esc_url( $item_formatted['view_details_link'] ));
+                                    printf('<a href="%s" target="_blank" >', esc_url( $item_formatted['view_details_link'] ));
                                 }
                                 printf('<img src="%s" alt="%s">', esc_attr($item_formatted['thumbnail']), esc_attr('NFT Gallery'));
                                 if ( $nft_gallery['thumbnail_clickable'] ) {
