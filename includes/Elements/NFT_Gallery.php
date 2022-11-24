@@ -129,6 +129,7 @@ class NFT_Gallery extends Widget_Base
 			    'placeholder'   => 'Collection slug',
                 'condition' => [
                     'eael_nft_gallery_opensea_type' => 'assets',
+                    'eael_nft_gallery_opensea_filterby_wallet' => '',
                 ],
             ]
         );
@@ -140,6 +141,37 @@ class NFT_Gallery extends Widget_Base
                 'description' => sprintf( __('Checkout this <a target="_blank" href="%s">document</a> to learn how to obtain a wallet address.', 'essential-addons-for-elementor-lite'), esc_url($this->nft_documentation_url) ),
                 'type' => Controls_Manager::TEXT,
 			    'placeholder'   => '0x1......',
+                'condition' => [
+                    'eael_nft_gallery_opensea_filterby_slug' => '',
+                ],
+                'conditions' => [
+                    'relation' => 'or',
+                    'terms' => [
+                        [
+                            'relation' => 'and',
+                            'terms' => [
+                                [
+                                    'name'  => 'eael_nft_gallery_opensea_type',
+                                    'value' => 'assets',
+                                ],
+                                [
+                                    'name'  => 'eael_nft_gallery_opensea_filterby_slug',
+                                    'value' => '',
+                                ],
+                            ]
+                        ],
+                        [
+                            'relation' => 'and',
+                            'terms' => [
+                                [
+                                    'name'  => 'eael_nft_gallery_opensea_type',
+                                    'value' => 'collections',
+                                ],
+                            ]
+                        ],
+                        
+                    ],
+                ],
             ]
         );
 
