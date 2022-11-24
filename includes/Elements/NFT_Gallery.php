@@ -588,11 +588,11 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
-        $this->add_control('eael_nft_gallery_content_invalid_type', [
+        $this->add_control('eael_nft_gallery_content_invalid_collection_slug', [
             'label' => esc_html__('Invalid Type', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::TEXT,
             'label_block' => false,
-            'default' => esc_html__('Please provide a valid Type!', 'essential-addons-for-elementor-lite'),
+            'default' => esc_html__('Please provide a valid collection slug!', 'essential-addons-for-elementor-lite'),
         ]);
 
         $this->add_control('eael_nft_gallery_content_invalid_wallet_address', [
@@ -2660,7 +2660,7 @@ class NFT_Gallery extends Widget_Base
 
                 $param = array_merge( $param, $args );
             } else {
-                $error_message = ! empty( $settings['eael_nft_gallery_content_invalid_type'] ) ? esc_html__( $settings['eael_nft_gallery_content_invalid_type'], 'essential-addons-for-elementor-lite' ) : esc_html__('Please provide a valid Type!', 'essential-addons-for-elementor-lite');
+                $error_message = esc_html__('Please provide a valid Type!', 'essential-addons-for-elementor-lite');
             }
 
             $headers = array(
@@ -2692,6 +2692,18 @@ class NFT_Gallery extends Widget_Base
                         set_transient( $cache_key, $response, $expiration );
                     }
                     $this->nft_gallery_items_count = count($response);
+                } else {
+                    if( ! empty( $body->asset_owner ) && isset($body->asset_owner[0]) ){
+                        $error_message_text = ! empty( $settings['eael_nft_gallery_content_invalid_wallet_address'] ) ? $settings['eael_nft_gallery_content_invalid_wallet_address'] : $body->asset_owner[0];
+                    } else if( ! empty( $body->owner ) && isset($body->owner[0]) ){
+                        $error_message_text = ! empty( $settings['eael_nft_gallery_content_invalid_wallet_address'] ) ? $settings['eael_nft_gallery_content_invalid_wallet_address'] : $body->owner[0];
+                    } else if( isset( $body->assets ) && is_array($body->assets) && 0 === count($body->assets) ){
+                        $error_message_text = ! empty( $settings['eael_nft_gallery_content_no_items_label'] ) ? $settings['eael_nft_gallery_content_no_items_label'] : 'No items Found!';
+                    }
+
+                    if( ! empty($error_message_text) ){
+                        $error_message = esc_html( __( $error_message_text, 'essential-addons-for-elementor-lite' ) );
+                    }
                 }
             }
             
