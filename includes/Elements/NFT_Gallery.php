@@ -1055,6 +1055,7 @@ class NFT_Gallery extends Widget_Base
 			],
 			'selectors'       => [
 				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-thumbnail img" => 'width: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-list .eael-nft-list-thumbnail img" => 'width: {{SIZE}}{{UNIT}};',
 			],
 		] );
         
@@ -1079,6 +1080,7 @@ class NFT_Gallery extends Widget_Base
 			],
 			'selectors'       => [
 				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-thumbnail img" => 'height: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-list .eael-nft-list-thumbnail img" => 'height: {{SIZE}}{{UNIT}};',
 			],
 		] );
 
@@ -1092,6 +1094,7 @@ class NFT_Gallery extends Widget_Base
 			],
 			'selectors'  => [
 				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-thumbnail" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-list .eael-nft-list-thumbnail" => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
 
@@ -1105,12 +1108,13 @@ class NFT_Gallery extends Widget_Base
 			],
 			'selectors'  => [
 				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-thumbnail" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				"{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-list .eael-nft-list-thumbnail" => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 		] );
 
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'      => "eael_nft_gallery_nft_image_border",
-			'selector'  => "{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-thumbnail img",
+			'selector'  => "{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-thumbnail img, {{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-list .eael-nft-list-thumbnail img",
 		] );
 
         $this->add_control(
@@ -1125,6 +1129,7 @@ class NFT_Gallery extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-thumbnail img' => 'border-radius: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-list .eael-nft-list-thumbnail img' => 'border-radius: {{SIZE}}px;',
                 ],
             ]
         );
