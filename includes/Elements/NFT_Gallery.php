@@ -23,6 +23,7 @@ use ParagonIE\Sodium\Core\Curve25519\Ge\P2;
 class NFT_Gallery extends Widget_Base
 {
     private $nft_gallery_items_count = 0;
+    private $nft_documentation_url = 'https://essential-addons.com/elementor/nft-gallery/';
 
     public function get_name()
     {
@@ -97,8 +98,9 @@ class NFT_Gallery extends Widget_Base
             [
                 'label' => __('API Key', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
-                'description' => sprintf( __('<a href="https://docs.opensea.io/reference/request-an-api-key" class="eael-btn" target="_blank">%s</a> API key is required to fetch data from OpenSea.',
-                    'essential-addons-for-elementor-lite'), esc_html( 'Get API Key ' ) ),
+			    'placeholder'   => 'Enter API key',
+                'description' => sprintf( __('Get your API key from <a href="https://docs.opensea.io/reference/request-an-api-key" class="eael-btn" target="_blank">%s</a>',
+                    'essential-addons-for-elementor-lite'), esc_html( 'here' ) ),
             ]
         );
 
@@ -122,9 +124,9 @@ class NFT_Gallery extends Widget_Base
             'eael_nft_gallery_opensea_filterby_slug',
             [
                 'label' => __('Collection Slug', 'essential-addons-for-elementor-lite'),
-                'description' => sprintf( __('Sample collection: <a target="_blank" href="%s">cryptopunks</a>', 'essential-addons-for-elementor-lite'), esc_url('https://opensea.io/collection/cryptopunks') ),
+                'description' => sprintf( __('Checkout this <a target="_blank" href="%s">document</a> to learn how to obtain a collection slug.', 'essential-addons-for-elementor-lite'), esc_url($this->nft_documentation_url) ),
                 'type' => Controls_Manager::TEXT,
-			    'placeholder'   => 'cryptopunks',
+			    'placeholder'   => 'Collection slug',
                 'condition' => [
                     'eael_nft_gallery_opensea_type' => 'assets',
                 ],
@@ -135,7 +137,7 @@ class NFT_Gallery extends Widget_Base
             'eael_nft_gallery_opensea_filterby_wallet',
             [
                 'label' => __('Wallet Address', 'essential-addons-for-elementor-lite'),
-                'description' => sprintf( __('Go to user profile and you will find the address code below the username. Sample wallet address: <a target="_blank" href="%s">0xC352B534e8b987e036A93539Fd6897F53488e56a</a>', 'essential-addons-for-elementor-lite'), esc_url('https://opensea.io/0xC352B534e8b987e036A93539Fd6897F53488e56a') ),
+                'description' => sprintf( __('Checkout this <a target="_blank" href="%s">document</a> to learn how to obtain a wallet address.', 'essential-addons-for-elementor-lite'), esc_url($this->nft_documentation_url) ),
                 'type' => Controls_Manager::TEXT,
 			    'placeholder'   => '0x1......',
             ]
@@ -158,7 +160,7 @@ class NFT_Gallery extends Widget_Base
             'eael_nft_gallery_opensea_item_limit',
             [
                 'label' => __('Item Limit', 'essential-addons-for-elementor-lite'),
-                'description' => __( 'Total number of items to fetch and cache at a time', 'essential-addons-for-elementor-lite'),
+                'description' => __( 'Total number of items to show', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '12',
                 'min' => '1',
