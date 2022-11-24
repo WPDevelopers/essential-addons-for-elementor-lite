@@ -95,9 +95,8 @@ class NFT_Gallery extends Widget_Base
         $this->add_control(
             'eael_nft_gallery_source_key',
             [
-                'label' => __('APi Key', 'essential-addons-for-elementor-lite'),
+                'label' => __('API Key', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
-                'default' => esc_html( 'b61c8a54123d4dcb9acc1b9c26a01cd1' ),
                 'description' => sprintf( __('<a href="https://docs.opensea.io/reference/request-an-api-key" class="eael-btn" target="_blank">%s</a> API key is required to fetch data from OpenSea.',
                     'essential-addons-for-elementor-lite'), esc_html( 'Get API Key ' ) ),
             ]
