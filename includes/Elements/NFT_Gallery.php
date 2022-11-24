@@ -2698,7 +2698,7 @@ class NFT_Gallery extends Widget_Base
                     } else if( ! empty( $body->owner ) && isset($body->owner[0]) ){
                         $error_message_text = ! empty( $settings['eael_nft_gallery_content_invalid_wallet_address'] ) ? $settings['eael_nft_gallery_content_invalid_wallet_address'] : $body->owner[0];
                     } else if( isset( $body->assets ) && is_array($body->assets) && 0 === count($body->assets) ){
-                        $error_message_text = ! empty( $settings['eael_nft_gallery_content_no_items_label'] ) ? $settings['eael_nft_gallery_content_no_items_label'] : 'No items Found!';
+                        $error_message_text = ! empty( $settings['eael_nft_gallery_content_invalid_collection_slug'] ) ? $settings['eael_nft_gallery_content_invalid_collection_slug'] : 'Please provide a valid collection slug!';
                     }
 
                     if( ! empty($error_message_text) ){
