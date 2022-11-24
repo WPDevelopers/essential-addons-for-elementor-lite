@@ -932,11 +932,11 @@ class NFT_Gallery extends Widget_Base
                 'label' => esc_html__('Overlay Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    // '{{WRAPPER}} .eael-nft-gallery-wrapper .preset-3 .eael-nft-item .eael-nft-main-content' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .preset-2 .eael-nft-item .eael-nft-thumbnail::before' => 'background: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_nft_gallery_items_layout' => 'grid',
-                    'eael_nft_gallery_style_preset' => 'preset-3',
+                    'eael_nft_gallery_style_preset' => 'preset-2',
                 ],
             ]
         );
