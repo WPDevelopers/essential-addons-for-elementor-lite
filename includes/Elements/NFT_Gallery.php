@@ -628,9 +628,8 @@ class NFT_Gallery extends Widget_Base
             'eael_nft_gallery_posts_per_page',
             [
                 'label' => __('Items Per Page', 'essential-addons-for-elementor-lite'),
-                'description' => __('Make sure this value is less than <b>Query >> Post Limit</b>', ''),
+                'description' => __('Make sure this value is less than <b>Post Limit</b>', ''),
                 'type' => Controls_Manager::TEXT,
-                'dynamic'   => ['active' => true],
                 'default' => 8,
                 'condition' => [
                     'eael_nft_gallery_pagination' => 'yes',
@@ -2682,6 +2681,7 @@ class NFT_Gallery extends Widget_Base
                 );
     
                 $body = json_decode( wp_remote_retrieve_body( $response ) );
+                // print_r($body);
                 $response = 'assets' === $nft_gallery['opensea_type'] && ! empty( $body->assets ) ? $body->assets : $body;
                 $response = 'collections' === $nft_gallery['opensea_type'] && ! empty( $response->collections ) ? $response->collections : $response;
 
