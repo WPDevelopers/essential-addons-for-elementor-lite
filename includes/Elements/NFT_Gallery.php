@@ -2243,7 +2243,7 @@ class NFT_Gallery extends Widget_Base
                     <?php endif; ?>
 
                     <!-- Creator -->
-                    <?php if( $nft_gallery['show_creator'] && $item_formatted['show_created_by_content'] ) : ?>
+                    <?php if( 'grid' === $nft_gallery['layout'] && 'preset-1' === $nft_gallery['preset'] && $nft_gallery['show_creator'] && $item_formatted['show_created_by_content'] ) : ?>
                     <div class="eael-nft-creator-wrapper">
                         <div class="eael-nft-creator-img">
                             <?php
