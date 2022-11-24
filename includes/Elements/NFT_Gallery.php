@@ -298,9 +298,42 @@ class NFT_Gallery extends Widget_Base
 				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
                 'default' => 'yes',
-                'condition' => [
-                    'eael_nft_gallery_show_image' => 'yes',
-                ]
+                'conditions' => [
+                    'relation' => 'or',
+                    'terms' => [
+                        [
+                            'relation' => 'and',
+                            'terms' => [
+                                [
+                                    'name'  => 'eael_nft_gallery_items_layout',
+                                    'value' => 'grid',
+                                ],
+                                [
+                                    'name'  => 'eael_nft_gallery_style_preset',
+                                    'value' => 'preset-1',
+                                ],
+                                [
+                                    'name'  => 'eael_nft_gallery_show_image',
+                                    'value' => 'yes',
+                                ],
+                            ]
+                        ],
+                        [
+                            'relation' => 'and',
+                            'terms' => [
+                                [
+                                    'name'  => 'eael_nft_gallery_items_layout',
+                                    'value' => 'list',
+                                ],
+                                [
+                                    'name'  => 'eael_nft_gallery_show_image',
+                                    'value' => 'yes',
+                                ],
+                            ]
+                        ],
+                        
+                    ],
+                ],
 			]
 		);
 
