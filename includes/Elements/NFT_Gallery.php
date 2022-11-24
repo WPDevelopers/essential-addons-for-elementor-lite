@@ -327,7 +327,7 @@ class NFT_Gallery extends Widget_Base
 			'eael_nft_gallery_show_owner',
 			[
 				'label' => __( 'Current Owner', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::SWITCHER,
+				'type' => Controls_Manager::HIDDEN,
 				'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
@@ -498,6 +498,9 @@ class NFT_Gallery extends Widget_Base
             'type' => Controls_Manager::TEXT,
             'label_block' => false,
             'default' => esc_html__('Owner', 'essential-addons-for-elementor-lite'),
+            'condition' => [
+                'eael_nft_gallery_show_owner' => 'yes'
+            ],
         ]);
 
         $this->add_control('eael_nft_gallery_content_created_by_label', [
@@ -505,6 +508,9 @@ class NFT_Gallery extends Widget_Base
             'type' => Controls_Manager::TEXT,
             'label_block' => false,
             'default' => esc_html__('Creator', 'essential-addons-for-elementor-lite'),
+            'condition' => [
+                'eael_nft_gallery_show_creator' => 'yes'
+            ],
         ]);
         
         $this->add_control('eael_nft_gallery_content_view_details_label', [
@@ -545,7 +551,7 @@ class NFT_Gallery extends Widget_Base
         );
 
         $this->add_control('eael_nft_gallery_content_invalid_type', [
-            'label' => esc_html__('Invalid Wallet Address', 'essential-addons-for-elementor-lite'),
+            'label' => esc_html__('Invalid Type', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::TEXT,
             'label_block' => false,
             'default' => esc_html__('Please provide a valid Type!', 'essential-addons-for-elementor-lite'),
@@ -2560,7 +2566,7 @@ class NFT_Gallery extends Widget_Base
         $response = [];
         $nft_gallery = [];
         $nft_gallery['source'] = ! empty( $settings['eael_nft_gallery_sources'] ) ? esc_html( $settings['eael_nft_gallery_sources'] ) : 'opensea';
-        $nft_gallery['api_key'] = ! empty( $settings['eael_nft_gallery_source_key'] ) ? esc_html( $settings['eael_nft_gallery_source_key'] ) : '';
+        $nft_gallery['api_key'] = ! empty( $settings['eael_nft_gallery_source_key'] ) ? esc_html( $settings['eael_nft_gallery_source_key'] ) : 'b61c8a54123d4dcb9acc1b9c26a01cd1';
         $nft_gallery['opensea_type'] = ! empty( $settings['eael_nft_gallery_opensea_type'] ) ? esc_html( $settings['eael_nft_gallery_opensea_type'] ) : 'assets';
         $nft_gallery['order'] = ! empty( $settings['eael_nft_gallery_opensea_order'] ) ? esc_html( $settings['eael_nft_gallery_opensea_order'] ) : 'desc';
         $nft_gallery['item_limit'] = ! empty( $settings['eael_nft_gallery_opensea_item_limit'] ) ? esc_html( $settings['eael_nft_gallery_opensea_item_limit'] ) : 9;
