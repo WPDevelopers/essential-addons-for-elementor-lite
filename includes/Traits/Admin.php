@@ -652,7 +652,7 @@ trait Admin {
                     <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-logo.svg' ); ?>" width="25" alt="">
                 </div>
                 <div class="eael-black-friday-optin">
-                    <p><?php _e( '<strong>🎉 Black Friday Exclusive:</strong> SAVE up to 40% & access to Essential Addons Pro features', 'essential-addons-for-elementor-lite' ); ?>
+                    <p><?php _e( '<strong>🎉 Black Friday Exclusive:</strong> SAVE up to 40% & access to Essential Addons Pro features.', 'essential-addons-for-elementor-lite' ); ?>
                         <a href="https://essential-addons.com/elementor/#pricing" target="_blank"
                            class="button-primary"><?php _e( 'Grab The Offer', 'essential-addons-for-elementor-lite' ); ?></a>
                     </p>
