@@ -327,7 +327,7 @@ class WPDeveloper_Setup_Wizard {
                      alt="<?php _e( 'Logo', 'essential-addons-for-elementor-lite' ) ?>">
             </div>
             <div class="eael-quick-setup-title">
-				<?php printf( __( '%s <span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), 'Unlock', '2500+', 'Ready Templates Built With Elementor & Essential Addons From
+				<?php printf( __( '%s <span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), 'Unlock', '3000+', 'Ready Templates Built With Elementor & Essential Addons From
                     Templately.' ); ?>
             </div>
             <div class="eael-quick-setup-text">
