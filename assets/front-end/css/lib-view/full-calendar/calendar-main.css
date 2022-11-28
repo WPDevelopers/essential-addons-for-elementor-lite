@@ -355,18 +355,18 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
 .fc .fc-scrollgrid-liquid {
 	height: 100%;
 }
-.fc .fc-scrollgrid-section { /* a <tr> */
-	height: 1px /* better than 0, for firefox */
+/*.fc .fc-scrollgrid-section { !* a <tr> *!*/
+/*	height: 1px !* better than 0, for firefox *!*/
 
-}
-.fc .fc-scrollgrid-section > td {
-	height: 1px; /* needs a height so inner div within grow. better than 0, for firefox */
-}
-.fc .fc-scrollgrid-section table {
-	height: 1px;
-	/* for most browsers, if a height isn't set on the table, can't do liquid-height within cells */
-	/* serves as a min-height. harmless */
-}
+/*}*/
+/*.fc .fc-scrollgrid-section > td {*/
+/*	height: 1px; !* needs a height so inner div within grow. better than 0, for firefox *!*/
+/*}*/
+/*.fc .fc-scrollgrid-section table {*/
+/*	height: 1px;*/
+/*	!* for most browsers, if a height isn't set on the table, can't do liquid-height within cells *!*/
+/*	!* serves as a min-height. harmless *!*/
+/*}*/
 .fc .fc-scrollgrid-section-liquid > td {
 	height: 100%; /* better than `auto`, for firefox */
 }
@@ -1415,10 +1415,6 @@ A VERTICAL event
 .fc-direction-rtl .fc-list-table .fc-list-event-graphic { padding-left: 0 }
 .fc .fc-list-event.fc-event-forced-url {
 	cursor: pointer; /* whole row will seem clickable */
-}
-.fc .fc-list-event:hover td {
-	background-color: #f5f5f5;
-	background-color: var(--fc-list-event-hover-bg-color, #f5f5f5);
 }
 .fc {
 

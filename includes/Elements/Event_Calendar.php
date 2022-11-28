@@ -1410,8 +1410,7 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-listWeek-view .fc-list-table .fc-widget-header span' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-listMonth-view .fc-list-table .fc-widget-header span' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-list .fc-list-table .fc-list-day .fc-list-day-cushion a' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1423,8 +1422,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#f1edf8',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-heading td.fc-widget-header' => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listMonth-view .fc-list-table tr.fc-list-heading td.fc-widget-header' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-list .fc-list-table .fc-list-day .fc-list-day-cushion' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -1442,9 +1440,10 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
+                'default' => '#000',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-listWeek-view .fc-list-table .fc-list-item' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-listMonth-view .fc-list-table .fc-list-item' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-list-event .fc-list-event-time' => 'color: {{VALUE}} !important;',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-list-event .fc-list-event-title a' => 'color: {{VALUE}} !important;',
                 ],
             ]
         );
@@ -1456,8 +1455,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-item:nth-child(even) td' => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listMonth-view .fc-list-table tr.fc-list-item:nth-child(even) td' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-list-event:nth-child(even)' => 'background-color: {{VALUE}} !important;',
                 ],
             ]
         );
@@ -1468,8 +1466,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-item:nth-child(odd) td' => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listMonth-view .fc-list-table tr.fc-list-item:nth-child(odd) td' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-list-event:nth-child(odd) td' => 'background-color: {{VALUE}} !important;',
 
                 ],
             ]
