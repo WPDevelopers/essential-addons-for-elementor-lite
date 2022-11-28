@@ -1322,28 +1322,4 @@ class Helper
 			return 'AND';
 		}
 	}
-
-    /**
-	 * Remove words as per given length from a sentence.
-	 *
-	 * @param string  $text
-	 * @param integer $length
-	 *
-	 * @return string
-	 */
-	public static function eael_trim_words( $text, $length, $more = null ) {
-        if ( null === $more ) {
-            $more = __( '&hellip;' );
-        }
-
-		if ( $length && str_word_count( $text ) > $length ) {
-			$text = explode( ' ', $text, $length + 1 );
-			unset( $text[ $length ] );
-			$text = implode( ' ', $text );
-
-            $text = $text . $more;
-		}
-
-		return $text;
-	}
 }

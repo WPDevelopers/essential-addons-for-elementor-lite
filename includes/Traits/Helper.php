@@ -292,7 +292,7 @@ trait Helper
                             <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg' ); ?>" alt="">
                         </div>
                         <ul class="eael-promo-temp__feature__list">
-                            <li><?php _e('2,500+ Stunning Templates','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php _e('3,000+ Stunning Templates','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php _e('Supports Elementor & Gutenberg','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php _e('Powering up 200,000+ Websites','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php _e('Cloud Collaboration with Team','essential-addons-for-elementor-lite'); ?></li>
@@ -583,7 +583,7 @@ trait Helper
                     <img src="<?php echo esc_url( $eb_promo_img2 ); ?>" alt="">
                 </div>
                 <div class="eael-gb-eb-content-info">
-                    <h3><?php esc_html_e( '35+ Amazing Gutenberg Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
+                    <h3><?php esc_html_e( '40+ Amazing Gutenberg Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
                     <p><?php esc_html_e( 'Create & design your WordPress websites just the way you want with more than 35 amazing, ready blocks from Essential Blocks for Gutenberg.', 'essential-addons-for-elementor-lite' ) ?></p>
                 </div>
             </div>
