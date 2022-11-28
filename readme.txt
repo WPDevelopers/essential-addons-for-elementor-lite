@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.1
 Requires PHP: 7.0
-Stable tag: 5.4.3
+Stable tag: 5.4.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -202,7 +202,7 @@ Note : This plugin works with Elementor. Make sure you have [Elementor](https://
 
 1. Upload the plugin folder to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
-3. You can type "EA" on your element tabs within Elementor editor and all the avialable elements will appear.
+3. You can type "EA" on your element tabs within Elementor editor and all the available elements will appear.
 4. Also you can see them under the category "Essential Addons for Elementor" on your element/widget list.
 
 == Frequently Asked Questions ==
@@ -241,6 +241,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.4.4 - 24/11/2022 =
+
+- Fixed: EA Post Grid | Excerpt length change not working properly
+- Few minor bug fixes & improvements
 
 = 5.4.3 - 22/11/2022 =
 
@@ -597,19 +602,19 @@ Your existing elements/content will work with premium version. So you won't lose
 - Fixed: EA Gravity Forms | Form label styling not properly
 - Fixed: EA Event Calendar | Events colors not changing with global color
 - Fixed: EA Call to Action | Button URL Custom Attributes not working correctly
-- Fixed: Missing Control icons inside Elemenetor panel
+- Fixed: Missing Control icons inside Elementor panel
 - Fixed: EA Simple Menu | Hamburger menu center option not working
 - Fixed: EA Simple Menu | Active Page being shown on Responsive Devices despite being disabled
 - Few minor bug fix & improvements
 
 = 4.9.3 - 29/09/2021 =
 
-- Fixed: EA Fliterable Gallery | Video Gallery popup not working
+- Fixed: EA Filterable Gallery | Video Gallery popup not working
 - Few minor bug fix & improvements
 
 = 4.9.2 - 26/09/2021 =
 
-- Fixed: EA Fliterable Gallery | Images not displaying under each filter until Load More button is hit
+- Fixed: EA Filterable Gallery | Images not displaying under each filter until Load More button is hit
 - Fixed: EA Post Grid | Load More button not working with Random sorting
 - Fixed: EA Advanced Data Table | removed data reappearing
 - Fixed: EA Feature List | showing warning in browser console
@@ -1213,7 +1218,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 3.3.3 - 08/10/2019 =
 - Added: Team Member content card height control
-- Added: Tootip icon size control
+- Added: Tooltip icon size control
 - Fixed: SVG upload issue on all icon manager
 - Fixed: Post Elements exclude control missing
 - Fixed: Data Table header icon top position issue
@@ -1226,7 +1231,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Added : Filterable Gallery new layout (Search & Filter) 
 - Added: Post elements excerpt expanison indicator option field
 - Fixed: Post Grid hover not working
-- Fixed: Createive Button options not showing
+- Fixed: Creative Button options not showing
 - Few minor bugfix and improvements
 
 = 3.3.1 - 18/09/2019 =
@@ -1235,7 +1240,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 3.3.0 - 15/09/2019 =
 - Improved : All post queries optimized to improve the load time and memory usage
-- Improved : Icon Manager optmized for better performance
+- Improved : Icon Manager optimized for better performance
 - Added : Content Timeline left and right layout
 - Fixed : Load More button overlapping issue
 - Fixed : Team Member icon issue
@@ -1307,7 +1312,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Few minor bugfix and improvements
 
 = 3.0.0 - 22/05/2019 =
-- Refractored code for better performance
+- Refactored code for better performance
 - Minimized dependencies to keep the plugin lighter
 - Lots of bugfix and improvements
 
@@ -1318,7 +1323,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 2.10.2 - 04/04/2019 =
 - Feature List element improved
-- Dynamic file regenrating tools added
+- Dynamic file regenerating tools added
 - Nexted dynamic templates design issue fixed
 - Few minor bugfix and improvements
 
@@ -1330,7 +1335,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 2.10.0 - 27/03/2019 =
 
-- Refractored plugin structure for improved performance
+- Refactored plugin structure for improved performance
 - Only one minified JS and one CSS file (if required for the widget) will be used on the page where EA element is being used
 - No extra asset will be loaded if you don't use EA on any page
 - Massive performance improved minimizing the dependencies
@@ -1379,7 +1384,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Added : Section Particles effect
 - Added: Filterable gallery capability to remove All label
 - Enhancement : Product Grid element with more features
-- Fixed: invalid calc funciton in progressbar
+- Fixed: invalid calc function in progressbar
 - Few minor bugfix and improvements
 
 = 2.8.7 - 24/12/2018 =
@@ -1417,7 +1422,7 @@ Your existing elements/content will work with premium version. So you won't lose
 = 2.8.2 - 23/10/2018 =
 
 - Filterable Gallery card hover effect issue fixed
-- Flibox image styling issue fixed
+- Flipbox image styling issue fixed
 - Few minor bugfix and improvements
 
 = 2.8.1 - 18/10/2018 =
@@ -1483,7 +1488,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 2.7.4 - 23/07/2018 =
 
-- (Make sure to clear cache nad hrad refresh the page after update)
+- (Make sure to clear cache and hard refresh the page after update)
 - Button elements improved
 - Fancy Text element improved
 - Image Accordion improved
@@ -1653,7 +1658,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 1.0.0 - 20/07/2017 =
 
-Initial stable realese
+Initial stable release
 
 
 == Upgrade Notice ==
