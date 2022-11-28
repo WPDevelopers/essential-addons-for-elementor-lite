@@ -121,6 +121,23 @@ class NFT_Gallery extends Widget_Base
         );
 
         $this->add_control(
+            'eael_nft_gallery_opensea_filterby',
+            [
+                'label'   => esc_html__('Filter By', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none'    => esc_html__('None', 'essential-addons-for-elementor-lite'),
+                    'collection-slug' => esc_html__('Collection Slug', 'essential-addons-for-elementor-lite'),
+                    'wallet-address'  => esc_html__('Wallet Address', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+                    'eael_nft_gallery_opensea_type' => 'assets',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'eael_nft_gallery_opensea_filterby_slug',
             [
                 'label' => __('Collection Slug', 'essential-addons-for-elementor-lite'),
@@ -129,7 +146,7 @@ class NFT_Gallery extends Widget_Base
 			    'placeholder'   => 'Collection slug',
                 'condition' => [
                     'eael_nft_gallery_opensea_type' => 'assets',
-                    'eael_nft_gallery_opensea_filterby_wallet' => '',
+                    'eael_nft_gallery_opensea_filterby' => 'collection-slug',
                 ],
             ]
         );
@@ -141,9 +158,6 @@ class NFT_Gallery extends Widget_Base
                 'description' => sprintf( __('Checkout this <a target="_blank" href="%s">document</a> to learn how to obtain a wallet address.', 'essential-addons-for-elementor-lite'), esc_url($this->nft_documentation_url) ),
                 'type' => Controls_Manager::TEXT,
 			    'placeholder'   => '0x1......',
-                'condition' => [
-                    'eael_nft_gallery_opensea_filterby_slug' => '',
-                ],
                 'conditions' => [
                     'relation' => 'or',
                     'terms' => [
@@ -155,8 +169,8 @@ class NFT_Gallery extends Widget_Base
                                     'value' => 'assets',
                                 ],
                                 [
-                                    'name'  => 'eael_nft_gallery_opensea_filterby_slug',
-                                    'value' => '',
+                                    'name'  => 'eael_nft_gallery_opensea_filterby',
+                                    'value' => 'wallet-address',
                                 ],
                             ]
                         ],
@@ -621,7 +635,7 @@ class NFT_Gallery extends Widget_Base
         );
 
         $this->add_control('eael_nft_gallery_content_invalid_collection_slug', [
-            'label' => esc_html__('Invalid Type', 'essential-addons-for-elementor-lite'),
+            'label' => esc_html__('Invalid Collection Slug', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::TEXT,
             'label_block' => false,
             'default' => esc_html__('Please provide a valid collection slug!', 'essential-addons-for-elementor-lite'),
@@ -2630,6 +2644,7 @@ class NFT_Gallery extends Widget_Base
         $nft_gallery['source'] = ! empty( $settings['eael_nft_gallery_sources'] ) ? esc_html( $settings['eael_nft_gallery_sources'] ) : 'opensea';
         $nft_gallery['api_key'] = ! empty( $settings['eael_nft_gallery_source_key'] ) ? esc_html( $settings['eael_nft_gallery_source_key'] ) : 'b61c8a54123d4dcb9acc1b9c26a01cd1';
         $nft_gallery['opensea_type'] = ! empty( $settings['eael_nft_gallery_opensea_type'] ) ? esc_html( $settings['eael_nft_gallery_opensea_type'] ) : 'assets';
+        $nft_gallery['opensea_filterby'] = ! empty( $settings['eael_nft_gallery_opensea_filterby'] ) ? esc_html( $settings['eael_nft_gallery_opensea_filterby'] ) : 'none';
         $nft_gallery['order'] = ! empty( $settings['eael_nft_gallery_opensea_order'] ) ? esc_html( $settings['eael_nft_gallery_opensea_order'] ) : 'desc';
         $nft_gallery['item_limit'] = ! empty( $settings['eael_nft_gallery_opensea_item_limit'] ) ? esc_html( $settings['eael_nft_gallery_opensea_item_limit'] ) : 9;
 
@@ -2674,11 +2689,11 @@ class NFT_Gallery extends Widget_Base
                     'order_direction' => $nft_gallery['order'],
                 );
                 
-                if( ! empty( $nft_gallery['filterby_slug'] ) ) {
+                if( ! empty( $nft_gallery['filterby_slug'] ) && 'collection-slug' === $nft_gallery['opensea_filterby'] ) {
                     $args['collection_slug'] = sanitize_text_field( $nft_gallery['filterby_slug'] );
                 }
                 
-                if( ! empty( $nft_gallery['filterby_wallet'] ) ) {
+                if( ! empty( $nft_gallery['filterby_wallet'] ) && 'wallet-address' === $nft_gallery['opensea_filterby'] ) {
                     $args['owner'] = sanitize_text_field( $nft_gallery['filterby_wallet'] );                
                 }
 
@@ -2706,7 +2721,6 @@ class NFT_Gallery extends Widget_Base
                 );
     
                 $body = json_decode( wp_remote_retrieve_body( $response ) );
-                // print_r($body);
                 $response = 'assets' === $nft_gallery['opensea_type'] && ! empty( $body->assets ) ? $body->assets : $body;
                 $response = 'collections' === $nft_gallery['opensea_type'] && ! empty( $response->collections ) ? $response->collections : $response;
 
@@ -2718,12 +2732,24 @@ class NFT_Gallery extends Widget_Base
                     }
                     $this->nft_gallery_items_count = count($response);
                 } else {
+                    $error_message_text_wallet = $error_message_text_slug = '';
+                    
+                    if( isset( $body->assets ) && is_array($body->assets) && 0 === count($body->assets) ){
+                        $error_message_text_slug = ! empty( $settings['eael_nft_gallery_content_invalid_collection_slug'] ) ? $settings['eael_nft_gallery_content_invalid_collection_slug'] : 'Please provide a valid collection slug!';
+                    }
+
                     if( ! empty( $body->asset_owner ) && isset($body->asset_owner[0]) ){
-                        $error_message_text = ! empty( $settings['eael_nft_gallery_content_invalid_wallet_address'] ) ? $settings['eael_nft_gallery_content_invalid_wallet_address'] : $body->asset_owner[0];
+                        $error_message_text_wallet = ! empty( $settings['eael_nft_gallery_content_invalid_wallet_address'] ) ? $settings['eael_nft_gallery_content_invalid_wallet_address'] : $body->asset_owner[0];
                     } else if( ! empty( $body->owner ) && isset($body->owner[0]) ){
-                        $error_message_text = ! empty( $settings['eael_nft_gallery_content_invalid_wallet_address'] ) ? $settings['eael_nft_gallery_content_invalid_wallet_address'] : $body->owner[0];
-                    } else if( isset( $body->assets ) && is_array($body->assets) && 0 === count($body->assets) ){
-                        $error_message_text = ! empty( $settings['eael_nft_gallery_content_invalid_collection_slug'] ) ? $settings['eael_nft_gallery_content_invalid_collection_slug'] : 'Please provide a valid collection slug!';
+                        $error_message_text_wallet = ! empty( $settings['eael_nft_gallery_content_invalid_wallet_address'] ) ? $settings['eael_nft_gallery_content_invalid_wallet_address'] : $body->owner[0];
+                    }
+
+                    if( 'assets' === $nft_gallery['opensea_type'] &&  'collection-slug' === $nft_gallery['opensea_filterby'] ){
+                        $error_message_text = $error_message_text_slug;
+                    }
+
+                    if( 'collections' === $nft_gallery['opensea_type'] || ( 'assets' === $nft_gallery['opensea_type'] &&  'wallet-address' === $nft_gallery['opensea_filterby'] ) ){
+                        $error_message_text = $error_message_text_wallet;
                     }
 
                     if( ! empty($error_message_text) ){
