@@ -37,7 +37,7 @@ class NFT_Gallery extends Widget_Base
 
     public function get_icon()
     {
-        return 'eaicon-info-box';
+        return 'eaicon-nft-gallery';
     }
 
     public function get_categories()
