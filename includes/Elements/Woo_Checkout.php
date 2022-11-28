@@ -2961,8 +2961,9 @@ class Woo_Checkout extends Widget_Base {
 			'layout-'. $settings['ea_woo_checkout_layout']
 		] );
 
-        $checkout_field_keys['billing'] = wp_list_pluck( $settings[ 'ea_billing_fields_list' ], 'field_key' );
-        $checkout_field_keys['shipping'] = wp_list_pluck( $settings[ 'ea_shipping_fields_list' ], 'field_key' );
+        $checkout_field_keys['billing'] = wp_list_pluck( $settings[ 'ea_billing_fields_list' ], 'field_class', 'field_key' );
+        $checkout_field_keys['shipping'] = wp_list_pluck( $settings[ 'ea_shipping_fields_list' ], 'field_class', 'field_key' );
+
         $button_texts = [
                 'place_order' => $settings['ea_woo_checkout_place_order_text']
         ];
