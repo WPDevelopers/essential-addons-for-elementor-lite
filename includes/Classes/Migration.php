@@ -44,15 +44,14 @@ class Migration
      *
      * @since 3.0.0
      */
-    public function plugin_upgrade_hook($upgrader_object, $options)
-    {
-        if ($options['action'] == 'update' && $options['type'] == 'plugin') {
-            if (isset($options['plugins'][EAEL_PLUGIN_BASENAME])) {
-                // remove old cache files
-                $this->empty_dir(EAEL_ASSET_PATH);
-            }
-        }
-    }
+	public function plugin_upgrade_hook( $upgrader_object, $options ) {
+		if ( $options['action'] === 'update' && $options['type'] === 'plugin' ) {
+			if ( ( isset( $options['plugins'] ) && in_array( EAEL_PLUGIN_BASENAME, $options['plugins'] ) ) || ( isset( $options['plugin'] ) && $options['plugin'] === EAEL_PLUGIN_BASENAME ) ) {
+				// remove old cache files
+				$this->empty_dir( EAEL_ASSET_PATH );
+			}
+		}
+	}
 
     /**
      * Plugin migrator
