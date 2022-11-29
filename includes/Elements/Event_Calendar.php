@@ -1483,7 +1483,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'eael_event_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .fc-content .fc-title,{{WRAPPER}} .fc-content .fc-time,{{WRAPPER}} .eael-event-calendar-wrapper .fc-list-table .fc-list-item td',
+                'selector' => '{{WRAPPER}} .fc-event .fc-event-title,{{WRAPPER}} .fc-event .fc-event-time,{{WRAPPER}} .fc-list-event-time,{{WRAPPER}} .fc-list-event-title',
             ]
         );
 
@@ -1494,7 +1494,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .fc-day-grid-event' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .fc-event' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1506,7 +1506,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px' . 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .fc-day-grid-event' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .fc-event' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1518,7 +1518,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px' . 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .fc-day-grid-event' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .fc-event' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
