@@ -261,6 +261,19 @@ var EventCalendar = function ($scope, $) {
 	});
 	
 	$(document).on("click", function (event) {
+		let reloadCalendarClasses = [
+			'fc-next-button',
+			'fc-prev-button',
+			'fc-today-button',
+			'fc-dayGridMonth-button'
+		];
+
+		for(let i = 0; i < reloadCalendarClasses.length; i++) {
+			if( $(event.target).hasClass(reloadCalendarClasses[i]) ){
+				calendar.changeView(calendar.view.type);
+			}
+		} 
+
 		if (event.target.closest(".eaelec-modal-content")) return;
 		if (ecModal.hasClass("eael-ec-popup-ready")) {
 			ecModal
