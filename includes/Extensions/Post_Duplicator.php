@@ -86,7 +86,7 @@ class Post_Duplicator {
 		$current_user        = wp_get_current_user();
 		$duplicate_post_args = array(
 			'post_author'    => $current_user->ID,
-			'post_title'     => $post->post_title,
+			'post_title'     => $post->post_title . ' - Copy',
 			'post_content'   => $post->post_content,
 			'post_excerpt'   => $post->post_excerpt,
 			'post_parent'    => $post->post_parent,
