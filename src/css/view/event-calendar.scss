@@ -174,8 +174,7 @@
 
 	@media (max-width: 575px) {
 		.fc-toolbar {
-			margin: 0 !important;
-			padding: 0 !important;
+			margin: 10px !important;
 		}
 		.fc-toolbar .fc-center {
 			width: 100% !important;
@@ -530,16 +529,15 @@ span.fc-day-number {
 		}
 		padding: 8px 0px 8px 0px !important;
 	}
-	.fc-right,
-	.fc-left {
-		width: 100%;
-		text-align: center;
-	}
-	.fc-left {
-		text-align: center;
-	}
-	.fc-right {
+	.fc .fc-toolbar.fc-header-toolbar {
 		margin-bottom: 10px;
+	}
+	.fc-toolbar-chunk {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 5px;
+		text-align: center;
+		width: 100%;
 
 		.fc-button-group {
 			.fc-button.fc-button-primary {
@@ -557,8 +555,10 @@ span.fc-day-number {
 	}
 
 	.fc-toolbar.fc-header-toolbar {
-		display: inline-block;
+		display: grid;
 		width: 100%;
+		justify-content: center;
+		grid-row-gap: 5px;
 
 		.fc-button-group button.fc-button.fc-button-primary {
 			margin-left: 5px;

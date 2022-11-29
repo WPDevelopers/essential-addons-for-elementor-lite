@@ -166,8 +166,7 @@
 }
 @media (max-width: 575px) {
   .eael-event-calendar-wrapper .fc-toolbar {
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 10px !important;
   }
   .eael-event-calendar-wrapper .fc-toolbar .fc-center {
     width: 100% !important;
@@ -440,21 +439,24 @@ span.fc-day-number {
   .eael-event-calendar-wrapper .fc-dayGridMonth-view .fc-day-grid-event .fc-content {
     font-size: 12px;
   }
-  .fc-right,
-.fc-left {
-    width: 100%;
-    text-align: center;
-  }
-  .fc-left {
-    text-align: center;
-  }
-  .fc-right {
+  .fc .fc-toolbar.fc-header-toolbar {
     margin-bottom: 10px;
   }
-  .fc-right .fc-button-group .fc-button.fc-button-primary {
+  .fc-toolbar-chunk {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin-bottom: 5px;
+    text-align: center;
+    width: 100%;
+  }
+  .fc-toolbar-chunk .fc-button-group .fc-button.fc-button-primary {
     font-size: 11px;
   }
-  .fc-right .fc-button-group .fc-button.fc-button-primary:before {
+  .fc-toolbar-chunk .fc-button-group .fc-button.fc-button-primary:before {
     font-size: 11px;
     padding-left: 0;
   }
@@ -462,8 +464,12 @@ span.fc-day-number {
     text-align: center;
   }
   .fc-toolbar.fc-header-toolbar {
-    display: inline-block;
+    display: grid;
     width: 100%;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    grid-row-gap: 5px;
   }
   .fc-toolbar.fc-header-toolbar .fc-button-group button.fc-button.fc-button-primary {
     margin-left: 5px;
