@@ -1138,7 +1138,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'days_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th > span,{{WRAPPER}} .fc-listWeek-view .fc-list-table .fc-widget-header span,{{WRAPPER}} .fc-listMonth-view .fc-list-table .fc-widget-header span',
+                'selector' => '{{WRAPPER}} .fc-col-header-cell a',
             ]
         );
 
@@ -1148,7 +1148,7 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th > span' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .fc-col-header-cell a' => 'color: {{VALUE}};',
 
                 ],
             ]
@@ -1176,7 +1176,7 @@ class Event_Calendar extends Widget_Base
                 'default' => 'center',
                 'toggle' => true,
                 'selectors' => [
-                    '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .fc-col-header-cell' => 'text-align: {{VALUE}};',
                 ],
             ]
         );
@@ -1187,7 +1187,7 @@ class Event_Calendar extends Widget_Base
                 'name' => 'days_background',
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th',
+                'selector' => '{{WRAPPER}} .fc-col-header-cell',
                 'exclude' => [
                     'image',
                 ],
@@ -1213,7 +1213,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'time_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .fc-unthemed .fc-timeGridDay-view .fc-bg table tbody tr>td span, {{WRAPPER}} .fc-unthemed .fc-timeGridWeek-view .fc-bg table tbody tr>td span ,{{WRAPPER}} .fc-unthemed .fc-timeGridDay-view .fc-slats table tbody tr>td span ,{{WRAPPER}} .fc-unthemed .fc-timeGridWeek-view .fc-slats table tbody tr>td span',
+                'selector' => '{{WRAPPER}} .fc-timegrid-slot,{{WRAPPER}} .fc-timegrid-axis',
             ]
         );
 
@@ -1223,11 +1223,8 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .fc-unthemed .fc-timeGridDay-view .fc-bg table tbody tr>td span' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .fc-unthemed .fc-timeGridWeek-view .fc-bg table tbody tr>td span' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .fc-unthemed .fc-timeGridWeek-view .fc-slats table tbody tr>td span' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .fc-unthemed .fc-timeGridDay-view .fc-slats table tbody tr>td span' => 'color: {{VALUE}};',
-
+                    '{{WRAPPER}} .fc-timegrid-slot' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .fc-timegrid-axis' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1247,7 +1244,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'date_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .fc-day-number',
+                'selector' => '{{WRAPPER}} .fc-daygrid-day-number',
             ]
         );
 
@@ -1257,7 +1254,7 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .fc-day-number' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .fc-daygrid-day-number' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -1268,7 +1265,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'label' => __('Number Background', 'essential-addons-for-elementor-lite'),
                 'selectors' => [
-                    '{{WRAPPER}} .fc-day-number' => 'background: {{VALUE}}',
+                    '{{WRAPPER}} .fc-daygrid-day-top' => 'background: {{VALUE}}',
                 ],
             ]
         );
@@ -1308,8 +1305,7 @@ class Event_Calendar extends Widget_Base
                 'default' => 'center',
                 'toggle' => true,
                 'selectors' => [
-                    '{{WRAPPER}} .fc-day-number' => 'float: unset',
-                    '{{WRAPPER}} .fc-view table thead:first-child tr:first-child td' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .fc-daygrid-day-top' => 'display: block;text-align: {{VALUE}};',
                 ],
             ]
         );
@@ -1321,7 +1317,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .fc-day-number' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .fc-daygrid-day-top' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1333,7 +1329,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .fc-day-number' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .fc-daygrid-day-top' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1345,7 +1341,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .fc-day-number' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .fc-daygrid-day-top' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1366,7 +1362,7 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'default' => '#1111e1',
                 'selectors' => [
-                    '{{WRAPPER}} .fc-today .fc-day-number' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .fc-day-today .fc-daygrid-day-top a' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -1377,7 +1373,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'selectors' => [
-                    '{{WRAPPER}} .fc-unthemed td.fc-today' => 'background: {{VALUE}} !important',
+                    '{{WRAPPER}} .fc-day-today' => 'background: {{VALUE}} !important',
                 ],
             ]
         );
