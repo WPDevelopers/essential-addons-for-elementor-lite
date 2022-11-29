@@ -125,9 +125,8 @@ class NFT_Gallery extends Widget_Base
             [
                 'label'   => esc_html__('Filter By', 'essential-addons-for-elementor-lite'),
                 'type'    => Controls_Manager::SELECT,
-                'default' => 'none',
+                'default' => 'collection-slug',
                 'options' => [
-                    'none'    => esc_html__('None', 'essential-addons-for-elementor-lite'),
                     'collection-slug' => esc_html__('Collection Slug', 'essential-addons-for-elementor-lite'),
                     'wallet-address'  => esc_html__('Wallet Address', 'essential-addons-for-elementor-lite'),
                 ],
@@ -980,6 +979,7 @@ class NFT_Gallery extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-nft-gallery-wrapper .preset-2 .eael-nft-item .eael-nft-thumbnail::before' => 'background: {{VALUE}};',
                 ],
+                'default' => 'rgba(0, 0, 0, 0.5)',
                 'condition' => [
                     'eael_nft_gallery_items_layout' => 'grid',
                     'eael_nft_gallery_style_preset' => 'preset-2',
