@@ -19,8 +19,8 @@ trait Admin {
      */
     public function admin_menu() {
 
-	    //$menu_notice = ( $this->menu_notice_should_show() ) ?'<span class="eael-menu-notice">1</span>':'';
 	    $menu_notice = '';
+	    $menu_notice = ( $this->menu_notice_should_show() ) ?'<span class="eael-menu-notice">1</span>':'';
         add_menu_page(
             __( 'Essential Addons a', 'essential-addons-for-elementor-lite' ),
             sprintf(__( 'Essential Addons %s', 'essential-addons-for-elementor-lite' ), $menu_notice ),
@@ -89,7 +89,7 @@ trait Admin {
             ) );
         }
 
-        //$this->eael_admin_inline_css();
+        $this->eael_admin_inline_css();
     }
 
     /**
