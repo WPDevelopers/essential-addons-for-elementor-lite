@@ -228,6 +228,7 @@ $elements = [
 				'title'     => __( 'NFT Gallery', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/nft-gallery/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/nft-gallery/',
+				'promotion' => 'new',
 			],
 		]
 	],
