@@ -47,6 +47,7 @@ var EventCalendar = function ($scope, $) {
 				translate.today = info.event._context.dateEnv.locale.options.buttonText.today;
 
 				element.attr("style", "color:"+ event.textColor +";background:"+ event.backgroundColor +";");
+				element.find(".fc-list-event-dot").attr("style", "border-color:"+ event.backgroundColor +";");
 				element.find(".fc-daygrid-event-dot").remove();
 
 				if ( event._def.extendedProps.is_redirect === 'yes' ) {
