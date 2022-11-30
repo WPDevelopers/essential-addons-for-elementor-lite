@@ -72,8 +72,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 2;
-    const EAEL_ADMIN_MENU_FLAG = 2;
+    const EAEL_PROMOTION_FLAG = 3;
+    const EAEL_ADMIN_MENU_FLAG = 3;
     /**
      * Singleton instance
      *
@@ -279,7 +279,8 @@ class Bootstrap
 		        add_action( 'init', [ $this, 'register_wc_hooks' ], 5 );
 	        }
 
-	        //add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
+			// update admin menu notice flag once visit EA settings page
+	        add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
 
 	        // Black Friday Optin
 	        add_action( 'admin_notices', [ $this, 'eael_black_friday_optin' ] );
