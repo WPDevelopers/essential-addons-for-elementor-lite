@@ -568,13 +568,13 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_section_nft_gallery_content_label',
-            [
-                'label' => esc_html__('Label'),
-                'type' => Controls_Manager::HEADING,
-            ]
-        );
+	    $this->add_control(
+		    'eael_section_nft_gallery_content_label',
+		    [
+			    'label' => esc_html__( 'Label', 'essential-addons-for-elementor-lite' ),
+			    'type'  => Controls_Manager::HEADING,
+		    ]
+	    );
 
         $this->add_control('eael_nft_gallery_content_owned_by_label', [
             'label' => esc_html__('Owner', 'essential-addons-for-elementor-lite'),
@@ -645,19 +645,19 @@ class NFT_Gallery extends Widget_Base
                 'frontend_available' => true,
             ]
         );
-        
-        $this->add_control(
-            'eael_nft_gallery_posts_per_page',
-            [
-                'label' => __('Items Per Page', 'essential-addons-for-elementor-lite'),
-                'description' => __('Make sure this value is less than <b>Post Limit</b>', ''),
-                'type' => Controls_Manager::TEXT,
-                'default' => 8,
-                'condition' => [
-                    'eael_nft_gallery_pagination' => 'yes',
-                ],
-            ]
-        );
+
+	    $this->add_control(
+		    'eael_nft_gallery_posts_per_page',
+		    [
+			    'label'       => __( 'Items Per Page', 'essential-addons-for-elementor-lite' ),
+			    'description' => __( 'Make sure this value is less than <b>Post Limit</b>', 'essential-addons-for-elementor-lite' ),
+			    'type'        => Controls_Manager::TEXT,
+			    'default'     => 8,
+			    'condition'   => [
+				    'eael_nft_gallery_pagination' => 'yes',
+			    ],
+		    ]
+	    );
 
         $this->add_control(
             'eael_nft_gallery_load_more_text',
