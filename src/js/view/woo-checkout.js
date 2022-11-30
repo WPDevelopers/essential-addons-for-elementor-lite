@@ -105,7 +105,9 @@ jQuery(window).on("elementor/frontend/init", function () {
 });
 
 jQuery(document.body).on('country_to_state_changing', function(event, country, wrapper) {
-	let $ = jQuery, checkout_keys = $('.ea-woo-checkout').data('checkout_ids');
+	let $ = jQuery, checkout_keys = $('.ea-woo-checkout').data('checkout_ids'),
+		field_wrapper = $('.ea-woo-checkout .woocommerce-billing-fields__field-wrapper, .ea-woo-checkout .woocommerce-shipping-fields__field-wrapper');
+	field_wrapper.addClass('eael-reordering');
 	let reorder_fields = function( type, _wrapper ){
 		let $selector = $(`.woocommerce-${type}-fields__field-wrapper`);
 		_wrapper = typeof _wrapper !== 'undefined' ? _wrapper : wrapper;
@@ -127,6 +129,7 @@ jQuery(document.body).on('country_to_state_changing', function(event, country, w
 			reorder_fields( 'shipping' );
 			reorder_fields( 'billing', $('.woocommerce-billing-fields') );
 		}
+		field_wrapper.removeClass('eael-reordering');
 	}, 500);
 });
 
