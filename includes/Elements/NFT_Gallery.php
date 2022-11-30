@@ -23,7 +23,7 @@ use ParagonIE\Sodium\Core\Curve25519\Ge\P2;
 class NFT_Gallery extends Widget_Base
 {
     private $nft_gallery_items_count = 0;
-    private $nft_documentation_url = 'https://essential-addons.com/elementor/nft-gallery/';
+    private $nft_documentation_url = 'https://essential-addons.com/elementor/docs/ea-nft-gallery/';
 
     public function get_name()
     {
