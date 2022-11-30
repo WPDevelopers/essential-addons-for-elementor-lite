@@ -2308,7 +2308,7 @@ class NFT_Gallery extends Widget_Base
                 <div class="eael-nft-button">
                     <?php if( $nft_gallery['show_button'] ) : ?>
                     <button <?php echo $this->get_render_attribute_string('eael-nft-gallery-button'); ?>>
-                        <?php printf('<a target="_blank" href="%s">%s</a>', esc_attr( $item_formatted['view_details_link'] ), esc_html__( $nft_gallery['view_details_text'] ) ) ?>
+                        <?php printf('<a target="_blank" href="%s">%s</a>', esc_attr( $item_formatted['view_details_link'] ), esc_html( $nft_gallery['view_details_text'] ) ) ?>
                     </button>
                     <?php endif; ?>
                 </div>

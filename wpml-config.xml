@@ -466,6 +466,7 @@
                 <condition key="widgetType">eael-nft-gallery</condition>
             </conditions>
             <fields>
+                <field type="NFT Gallery: Label | View Details" editor_type="LINE">eael_nft_gallery_content_view_details_label</field>
             </fields>
         </widget>
     </elementor-widgets>
