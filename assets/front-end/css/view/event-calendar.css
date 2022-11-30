@@ -249,7 +249,7 @@
   padding: 8px 12px;
   border: none;
 }
-.fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary.fc-state-active, .fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary:hover, .fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary:visited, .fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary:focus {
+.fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary.fc-state-active, .fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary:hover, .fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary:visited {
   background: #5725ff;
   color: #fff;
   -webkit-box-shadow: none;
