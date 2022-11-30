@@ -624,29 +624,6 @@ class NFT_Gallery extends Widget_Base
             'default' => esc_html__('Ends in:', 'essential-addons-for-elementor-lite'),
         ]);
 
-        $this->add_control(
-            'eael_section_nft_gallery_content_error_messages',
-            [
-                'label' => esc_html__('Error Messages'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
-            ]
-        );
-
-        $this->add_control('eael_nft_gallery_content_invalid_collection_slug', [
-            'label' => esc_html__('Invalid Collection Slug', 'essential-addons-for-elementor-lite'),
-            'type' => Controls_Manager::TEXT,
-            'label_block' => false,
-            'default' => esc_html__('Please provide a valid collection slug!', 'essential-addons-for-elementor-lite'),
-        ]);
-
-        $this->add_control('eael_nft_gallery_content_invalid_wallet_address', [
-            'label' => esc_html__('Invalid Wallet Address', 'essential-addons-for-elementor-lite'),
-            'type' => Controls_Manager::TEXT,
-            'label_block' => false,
-            'default' => esc_html__('Please provide a valid Wallet Address!', 'essential-addons-for-elementor-lite'),
-        ]);
-
         $this->end_controls_section();
 
         /**
@@ -2216,64 +2193,6 @@ class NFT_Gallery extends Widget_Base
         $this->end_controls_tabs();
         
         $this->end_controls_section();
-
-        /**
-         * -------------------------------------------
-         * Tab Style ( Error Message Style )
-         * -------------------------------------------
-         */
-        $this->start_controls_section(
-            'eael_section_nft_gallery_error_message_style',
-            [
-                'label' => esc_html__('Error Message', 'essential-addons-for-elementor-lite'),
-                'tab' => Controls_Manager::TAB_STYLE,
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name' => 'eael_nft_gallery_error_message_label_typography',
-                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-error-message',
-            ]
-        );
-
-        $this->add_control(
-            'eael_nft_gallery_error_message_label_text_color',
-            [
-                'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-error-message' => 'color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_responsive_control(
-            'eael_nft_gallery_error_message_label_margin',
-            [
-                'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em'],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-error-message' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        $this->add_responsive_control(
-            'eael_nft_gallery_error_message_label_padding',
-            [
-                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em'],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-error-message' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        $this->end_controls_section();
     }
 
     public function print_nft_gallery_item_grid($nft_gallery, $item){
@@ -2735,13 +2654,13 @@ class NFT_Gallery extends Widget_Base
                     $error_message_text_wallet = $error_message_text_slug = '';
                     
                     if( isset( $body->assets ) && is_array($body->assets) && 0 === count($body->assets) ){
-                        $error_message_text_slug = ! empty( $settings['eael_nft_gallery_content_invalid_collection_slug'] ) ? $settings['eael_nft_gallery_content_invalid_collection_slug'] : 'Please provide a valid collection slug!';
+                        $error_message_text_slug = 'Please provide a valid collection slug!';
                     }
 
                     if( ! empty( $body->asset_owner ) && isset($body->asset_owner[0]) ){
-                        $error_message_text_wallet = ! empty( $settings['eael_nft_gallery_content_invalid_wallet_address'] ) ? $settings['eael_nft_gallery_content_invalid_wallet_address'] : $body->asset_owner[0];
+                        $error_message_text_wallet = ! empty( $body->asset_owner[0] ) ? $body->asset_owner[0] : 'Please provide a valid wallet address!';
                     } else if( ! empty( $body->owner ) && isset($body->owner[0]) ){
-                        $error_message_text_wallet = ! empty( $settings['eael_nft_gallery_content_invalid_wallet_address'] ) ? $settings['eael_nft_gallery_content_invalid_wallet_address'] : $body->owner[0];
+                        $error_message_text_wallet = ! empty( $body->owner[0] ) ? $body->owner[0] : 'Please provide a valid wallet address!';
                     }
 
                     if( 'assets' === $nft_gallery['opensea_type'] &&  'collection-slug' === $nft_gallery['opensea_filterby'] ){
