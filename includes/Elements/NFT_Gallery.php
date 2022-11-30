@@ -1239,7 +1239,7 @@ class NFT_Gallery extends Widget_Base
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name' => 'eael_nft_gallery_current_proce_typography',
+                'name' => 'eael_nft_gallery_current_price_typography',
                 'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-current-price',
             ]
         );
@@ -1275,6 +1275,70 @@ class NFT_Gallery extends Widget_Base
                 'size_units' => ['px', 'em'],
                 'selectors' => [
                     '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-current-price' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /**
+         * -------------------------------------------
+         * Tab Style ( Last Sale / Ends In Style )
+         * -------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_section_nft_gallery_last_sale_ends_in_style',
+            [
+                'label' => esc_html__('Last Sale / Ends In', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_nft_gallery_show_last_sale_ends_in' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_nft_gallery_last_sale_ends_in_typography',
+                'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-ends-in span, {{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-last-sale span',
+            ]
+        );
+
+        $this->add_control(
+            'eael_nft_gallery_last_sale_ends_in_text_color',
+            [
+                'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-ends-in span' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-last-sale span' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_nft_gallery_last_sale_ends_in_margin',
+            [
+                'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-ends-in' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-last-sale' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_nft_gallery_last_sale_ends_in_padding',
+            [
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-ends-in' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-last-sale' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
