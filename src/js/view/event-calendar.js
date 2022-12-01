@@ -245,7 +245,6 @@ var EventCalendar = function ($scope, $) {
 				// Background Image and Event Image
 				let monthlyView = $(element).attr('class').indexOf('fc-day-grid-event') >= 0;
 				if (event.extendedProps.image && monthlyView) {
-					// element.find("div.fc-content").prepend("<p class='eael-m-0'><img class='eael-event-image' src='" + event.extendedProps.image +"' width='auto' height='auto'></p>");
 					$(element).find("div.fc-content").prepend("<p class='eael-m-0'><img class='eael-event-image' src='" + event.extendedProps.image +"'></p>");
 					console.log(element);
 					console.log($(element));
@@ -271,9 +270,13 @@ var EventCalendar = function ($scope, $) {
 			'fc-dayGridMonth-button'
 		];
 
+		calendar.changeView(calendar.view.type);
+
 		for(let i = 0; i < reloadCalendarClasses.length; i++) {
 			if( $(event.target).hasClass(reloadCalendarClasses[i]) ){
-				calendar.changeView(calendar.view.type);
+				setTimeout(function(){
+					calendar.changeView(calendar.view.type);
+				}, 100);
 			}
 		} 
 
