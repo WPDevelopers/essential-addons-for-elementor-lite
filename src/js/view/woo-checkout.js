@@ -133,11 +133,16 @@ jQuery(document.body).on('country_to_state_changing', function(event, country, w
 	}, 500);
 });
 
-jQuery(document.body).on('update_checkout', function(event) {
+let change_button_text = function (){
 	let $ = jQuery, button_texts = $('.ea-woo-checkout').data('button_texts');
 	setTimeout(function() {
 		if (button_texts.place_order !== ''){
 			$('#place_order').text(button_texts.place_order);
 		}
 	}, 500);
+}
+jQuery(document.body).on('update_checkout payment_method_selected', function(event) {
+	change_button_text();
+}).on('click', '.woocommerce-checkout-payment li label', function (){
+	change_button_text();
 });
