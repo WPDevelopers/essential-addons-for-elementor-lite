@@ -2719,7 +2719,7 @@ class NFT_Gallery extends Widget_Base
         </div>
 
         <div class="clearfix">
-            <?php echo $this->render_loadmore_button() ?>
+            <?php $this->render_loadmore_button() ?>
         </div>
 <?php
         echo ob_get_clean();
