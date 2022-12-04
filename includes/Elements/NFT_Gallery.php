@@ -2758,8 +2758,6 @@ class NFT_Gallery extends Widget_Base
 	    $cache_key  = "{$nft_gallery['source']}_{$expiration}_{$md5}_nftg_cache";
 	    $items      = get_transient( $cache_key );
 
-        $expires = (int) get_option( '_transient_timeout_eael_nft_gallery_5fade82_items_cache', 0 );
-        $time_left = $expires - time();
         $error_message = '';
         
         if( empty( $settings['eael_nft_gallery_opensea_data_cache_enable'] ) ){
