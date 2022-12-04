@@ -239,12 +239,21 @@ class Event_Calendar extends Widget_Base
             'eael_event_image_show',
             [
                 'label' => __('Show Image', 'essential-addons-for-elementor-lite'),
-                'description' => __('The image is only visible in Monthly view.', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_block' => false,
                 'return_value' => 'yes',
             ]
         );
+
+        $repeater->add_control( 'eael_event_image_show_notice', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( 'The image is only visible in Monthly view.', 'essential-addons-for-elementor-lite' ),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+            'condition' => [
+                'eael_event_image_show' => 'yes',
+                'eael_event_all_day!' => 'yes'
+            ]
+		] );
 
         $repeater->add_control( 'eael_event_image', [
 			'label'   => __( 'Event Image', 'essential-addons-for-elementor-lite' ),
@@ -267,12 +276,21 @@ class Event_Calendar extends Widget_Base
             'eael_event_background_image_show',
             [
                 'label' => __('Show Background Image', 'essential-addons-for-elementor-lite'),
-                'description' => __('The background image is only visible in Monthly view.', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_block' => false,
                 'return_value' => 'yes',
             ]
         );
+
+        $repeater->add_control( 'eael_event_background_image_show_notice', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( 'The background image is only visible in Monthly view.', 'essential-addons-for-elementor-lite' ),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+            'condition' => [
+                'eael_event_background_image_show' => 'yes',
+                'eael_event_all_day!' => 'yes'
+            ]
+		] );
 
         $repeater->add_control( 'eael_event_background_image', [
 			'label'   => __( 'Event Background Image', 'essential-addons-for-elementor-lite' ),
