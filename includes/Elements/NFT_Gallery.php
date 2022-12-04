@@ -212,29 +212,14 @@ class NFT_Gallery extends Widget_Base
             ]
         );
 
-        $this->add_control(
-			'eael_nft_gallery_opensea_data_cache_enable',
-			[
-				'label' => __( 'Cache API Response', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-				'label_off' => __( 'No', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
-                'default' => '',
-			]
-		);
-
 	    $this->add_control(
 		    'eael_nft_gallery_opensea_data_cache_time',
 		    [
 			    'label'       => __( 'Data Cache Time', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::NUMBER,
-			    'min'         => 1,
+			    'min'         => 0,
 			    'default'     => 60,
-			    'description' => __( 'Cache expiration time (Minutes)', 'essential-addons-for-elementor-lite' ),
-                'condition'   => [
-                    'eael_nft_gallery_opensea_data_cache_enable' => 'yes',
-                ],
+			    'description' => __( 'Cache expiration time (Minutes). 0 or empty means 1 day', 'essential-addons-for-elementor-lite' ),
 		    ]
 	    );
 
@@ -2760,10 +2745,6 @@ class NFT_Gallery extends Widget_Base
 
         $error_message = '';
         
-        if( empty( $settings['eael_nft_gallery_opensea_data_cache_enable'] ) ){
-            $items = false;
-        }
-        
         if ( false === $items && 'opensea' === $nft_gallery['source'] ) {
             $nft_gallery['api_key'] = $nft_gallery['api_key'] ? $nft_gallery['api_key'] :  'b61c8a54123d4dcb9acc1b9c26a01cd1';
             $nft_gallery['filterby_slug'] = ! empty( $settings['eael_nft_gallery_opensea_filterby_slug'] ) ? $settings['eael_nft_gallery_opensea_filterby_slug'] : '';
@@ -2828,14 +2809,11 @@ class NFT_Gallery extends Widget_Base
                 $response = 'assets' === $nft_gallery['opensea_type'] && ! empty( $body->assets ) ? $body->assets : $body;
                 $response = 'collections' === $nft_gallery['opensea_type'] && ! empty( $response->collections ) ? $response->collections : $response;
 
-                if(is_array($response)){
-                    $response = array_splice($response, 0, absint( $settings['eael_nft_gallery_opensea_item_limit'] ));
-                    
-                    if( ! empty( $settings['eael_nft_gallery_opensea_data_cache_enable'] ) ){
-                        set_transient( $cache_key, $response, $expiration );
-                    }
-                    $this->nft_gallery_items_count = count($response);
-                } else {
+	            if ( is_array( $response ) ) {
+		            $response = array_splice( $response, 0, absint( $settings['eael_nft_gallery_opensea_item_limit'] ) );
+		            set_transient( $cache_key, $response, $expiration );
+		            $this->nft_gallery_items_count = count( $response );
+	            } else {
                     $error_message_text_wallet = $error_message_text_slug = '';
                     
                     if( isset( $body->assets ) && is_array($body->assets) && 0 === count($body->assets) ){
