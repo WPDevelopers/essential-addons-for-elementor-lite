@@ -684,7 +684,12 @@ class WPDeveloper_Setup_Wizard {
 						'key'         => 'content-ticker',
 						'title'       => __( 'Content Ticker', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
-					]
+					],
+					[
+						'key'         => 'nft-gallery',
+						'title'       => __( 'NFT Gallery', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'basic',
+					],
 				]
 			],
 			'creative-elements'        => [
