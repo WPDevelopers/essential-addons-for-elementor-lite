@@ -2746,7 +2746,6 @@ class NFT_Gallery extends Widget_Base
         $error_message = '';
         
         if ( false === $items && 'opensea' === $nft_gallery['source'] ) {
-            $nft_gallery['api_key'] = $nft_gallery['api_key'] ? $nft_gallery['api_key'] :  'b61c8a54123d4dcb9acc1b9c26a01cd1';
             $nft_gallery['filterby_slug'] = ! empty( $settings['eael_nft_gallery_opensea_filterby_slug'] ) ? $settings['eael_nft_gallery_opensea_filterby_slug'] : '';
             $nft_gallery['filterby_wallet'] = ! empty( $settings['eael_nft_gallery_opensea_filterby_wallet'] ) ? $settings['eael_nft_gallery_opensea_filterby_wallet'] : '';
                 
