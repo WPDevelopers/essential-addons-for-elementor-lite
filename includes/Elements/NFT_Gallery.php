@@ -2595,17 +2595,17 @@ class NFT_Gallery extends Widget_Base
         $nft_gallery['created_by_label'] = ! empty( $settings['eael_nft_gallery_content_created_by_label'] ) ? $settings['eael_nft_gallery_content_created_by_label'] : __('Owner', 'essential-addons-for-elementor-lite');
         $nft_gallery['view_details_text'] =  ! empty( $settings['eael_nft_gallery_content_view_details_label'] ) ? $settings['eael_nft_gallery_content_view_details_label'] : __('View Details', 'essential-addons-for-elementor-lite');       
         
-        $nft_gallery['api_url'] = '';
+
         $nft_gallery['api_url'] = 'opensea' === $nft_gallery['source'] ? 'https://opensea.io' : ''; 
-        $nft_gallery['show_thumbnail'] = ! empty( $settings['eael_nft_gallery_show_image'] ) && 'yes' === $settings['eael_nft_gallery_show_image'] ? true : false; 
-        $nft_gallery['thumbnail_clickable'] = ! empty( $settings['eael_nft_gallery_image_clickable'] ) && 'yes' === $settings['eael_nft_gallery_image_clickable'] ? true : false; 
-        $nft_gallery['show_title'] = ! empty( $settings['eael_nft_gallery_show_title'] ) && 'yes' === $settings['eael_nft_gallery_show_title'] ? true : false; 
-        $nft_gallery['show_owner'] = ! empty( $settings['eael_nft_gallery_show_owner'] ) && 'yes' === $settings['eael_nft_gallery_show_owner'] ? true : false; 
-        $nft_gallery['show_creator'] = ! empty( $settings['eael_nft_gallery_show_creator'] ) && 'yes' === $settings['eael_nft_gallery_show_creator'] ? true : false; 
-        $nft_gallery['show_current_price'] = ! empty( $settings['eael_nft_gallery_show_current_price'] ) && 'yes' === $settings['eael_nft_gallery_show_current_price'] ? true : false; 
-        $nft_gallery['show_last_sale_ends_in'] = ! empty( $settings['eael_nft_gallery_show_last_sale_ends_in'] ) && 'yes' === $settings['eael_nft_gallery_show_last_sale_ends_in'] ? true : false; 
-        $nft_gallery['show_button'] = ! empty( $settings['eael_nft_gallery_show_button'] ) && 'yes' === $settings['eael_nft_gallery_show_button'] ? true : false; 
-        $nft_gallery['show_chain'] = ! empty( $settings['eael_nft_gallery_show_chain'] ) && 'yes' === $settings['eael_nft_gallery_show_chain'] ? true : false; 
+        $nft_gallery['show_thumbnail'] = ! empty( $settings['eael_nft_gallery_show_image'] ) && 'yes' === $settings['eael_nft_gallery_show_image'];
+        $nft_gallery['thumbnail_clickable'] = ! empty( $settings['eael_nft_gallery_image_clickable'] ) && 'yes' === $settings['eael_nft_gallery_image_clickable'];
+        $nft_gallery['show_title'] = ! empty( $settings['eael_nft_gallery_show_title'] ) && 'yes' === $settings['eael_nft_gallery_show_title'];
+        $nft_gallery['show_owner'] = ! empty( $settings['eael_nft_gallery_show_owner'] ) && 'yes' === $settings['eael_nft_gallery_show_owner'];
+        $nft_gallery['show_creator'] = ! empty( $settings['eael_nft_gallery_show_creator'] ) && 'yes' === $settings['eael_nft_gallery_show_creator'];
+        $nft_gallery['show_current_price'] = ! empty( $settings['eael_nft_gallery_show_current_price'] ) && 'yes' === $settings['eael_nft_gallery_show_current_price'];
+        $nft_gallery['show_last_sale_ends_in'] = ! empty( $settings['eael_nft_gallery_show_last_sale_ends_in'] ) && 'yes' === $settings['eael_nft_gallery_show_last_sale_ends_in'];
+        $nft_gallery['show_button'] = ! empty( $settings['eael_nft_gallery_show_button'] ) && 'yes' === $settings['eael_nft_gallery_show_button'];
+        $nft_gallery['show_chain'] = ! empty( $settings['eael_nft_gallery_show_chain'] ) && 'yes' === $settings['eael_nft_gallery_show_chain'];
         $nft_gallery['button_alignment_class'] = ! empty( $settings['eael_nft_gallery_button_alignment'] ) ? 'eael-nft-gallery-button-align-' . $settings['eael_nft_gallery_button_alignment'] : ' '; 
         $nft_gallery['last_sale_label'] = ! empty( $settings['eael_nft_gallery_content_last_sale_label'] ) ? $settings['eael_nft_gallery_content_last_sale_label'] : 'Last sale:'; 
         $nft_gallery['ends_in_label'] = ! empty( $settings['eael_nft_gallery_content_ends_in_label'] ) ? $settings['eael_nft_gallery_content_ends_in_label'] : 'Ends in:'; 
