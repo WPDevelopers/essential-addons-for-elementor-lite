@@ -210,7 +210,7 @@ class NFT_Gallery extends Widget_Base {
 				'type'        => Controls_Manager::NUMBER,
 				'min'         => 0,
 				'default'     => 60,
-				'description' => __( 'Cache expiration time (Minutes). 0 or empty means 1 day', 'essential-addons-for-elementor-lite' ),
+				'description' => __( 'Cache expiration time (in Minutes), 0 or empty sets 1 day.', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
