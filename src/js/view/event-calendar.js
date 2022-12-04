@@ -246,8 +246,6 @@ var EventCalendar = function ($scope, $) {
 				let monthlyView = $(element).attr('class').indexOf('fc-day-grid-event') >= 0;
 				if (event.extendedProps.image && monthlyView) {
 					$(element).find("div.fc-content").prepend("<p class='eael-m-0'><img class='eael-event-image' src='" + event.extendedProps.image +"'></p>");
-					console.log(element);
-					console.log($(element));
 				}
 				if (event.extendedProps.backgroundImage && monthlyView) {
 					element.css({"background": "url(" + event.extendedProps.backgroundImage + ")", "background-repeat": "none", "background-size": "cover"});
