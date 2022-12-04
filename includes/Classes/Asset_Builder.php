@@ -145,6 +145,7 @@ class Asset_Builder {
 			do_action( 'eael/before_enqueue_scripts', $elements );
 
 			$this->enqueue_asset( null, $elements, 'edit' );
+			$this->load_custom_js( $this->post_id );
 		}
 
 		wp_localize_script( $handle, 'localize', $this->localize_objects );
