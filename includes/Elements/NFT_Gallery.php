@@ -2814,10 +2814,10 @@ class NFT_Gallery extends Widget_Base
 		            $this->nft_gallery_items_count = count( $response );
 	            } else {
                     $error_message_text_wallet = $error_message_text_slug = '';
-                    
-                    if( isset( $body->assets ) && is_array($body->assets) && 0 === count($body->assets) ){
-                        $error_message_text_slug = 'Please provide a valid collection slug!';
-                    }
+
+		            if ( isset( $body->assets ) && is_array( $body->assets ) && 0 === count( $body->assets ) ) {
+			            $error_message_text_slug = __( 'Please provide a valid collection slug!', 'essential-addons-for-elementor-lite' );
+		            }
 
                     if( ! empty( $body->asset_owner ) && isset($body->asset_owner[0]) ){
                         $error_message_text_wallet = ! empty( $body->asset_owner[0] ) ? $body->asset_owner[0] : 'Please provide a valid wallet address!';
