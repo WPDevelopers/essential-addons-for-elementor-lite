@@ -2813,30 +2813,30 @@ class NFT_Gallery extends Widget_Base
 		            set_transient( $cache_key, $response, $expiration );
 		            $this->nft_gallery_items_count = count( $response );
 	            } else {
-                    $error_message_text_wallet = $error_message_text_slug = '';
+		            $error_message_text_wallet = $error_message_text_slug = '';
 
 		            if ( isset( $body->assets ) && is_array( $body->assets ) && 0 === count( $body->assets ) ) {
 			            $error_message_text_slug = __( 'Please provide a valid collection slug!', 'essential-addons-for-elementor-lite' );
 		            }
 
-                    if( ! empty( $body->asset_owner ) && isset($body->asset_owner[0]) ){
-                        $error_message_text_wallet = ! empty( $body->asset_owner[0] ) ? $body->asset_owner[0] : 'Please provide a valid wallet address!';
-                    } else if( ! empty( $body->owner ) && isset($body->owner[0]) ){
-                        $error_message_text_wallet = ! empty( $body->owner[0] ) ? $body->owner[0] : 'Please provide a valid wallet address!';
-                    }
+		            if ( ! empty( $body->asset_owner ) && isset( $body->asset_owner[0] ) ) {
+			            $error_message_text_wallet = ! empty( $body->asset_owner[0] ) ? $body->asset_owner[0] : __( 'Please provide a valid wallet address!', 'essential-addons-for-elementor-lite' );
+		            } else if ( ! empty( $body->owner ) && isset( $body->owner[0] ) ) {
+			            $error_message_text_wallet = ! empty( $body->owner[0] ) ? $body->owner[0] : __( 'Please provide a valid wallet address!', 'essential-addons-for-elementor-lite' );
+		            }
 
-                    if( 'assets' === $nft_gallery['opensea_type'] &&  'collection-slug' === $nft_gallery['opensea_filterby'] ){
-                        $error_message_text = $error_message_text_slug;
-                    }
+		            if ( 'assets' === $nft_gallery['opensea_type'] && 'collection-slug' === $nft_gallery['opensea_filterby'] ) {
+			            $error_message_text = $error_message_text_slug;
+		            }
 
-                    if( 'collections' === $nft_gallery['opensea_type'] || ( 'assets' === $nft_gallery['opensea_type'] &&  'wallet-address' === $nft_gallery['opensea_filterby'] ) ){
-                        $error_message_text = $error_message_text_wallet;
-                    }
+		            if ( 'collections' === $nft_gallery['opensea_type'] || ( 'assets' === $nft_gallery['opensea_type'] && 'wallet-address' === $nft_gallery['opensea_filterby'] ) ) {
+			            $error_message_text = $error_message_text_wallet;
+		            }
 
-                    if( ! empty($error_message_text) ){
-                        $error_message = esc_html( __( $error_message_text, 'essential-addons-for-elementor-lite' ) );
-                    }
-                }
+		            if ( ! empty( $error_message_text ) ) {
+			            $error_message = esc_html( $error_message_text );
+		            }
+	            }
             }
             
             $data = [
