@@ -1,10 +1,9 @@
 <?php
-
 namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 use \Elementor\Controls_Manager;
@@ -20,53 +19,46 @@ use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 use ParagonIE\Sodium\Core\Curve25519\Ge\P2;
 
-class NFT_Gallery extends Widget_Base
-{
-    private $nft_gallery_items_count = 0;
-    private $nft_documentation_url = 'https://essential-addons.com/elementor/docs/ea-nft-gallery/';
+class NFT_Gallery extends Widget_Base {
+	private $nft_gallery_items_count = 0;
+	private $nft_documentation_url = 'https://essential-addons.com/elementor/docs/ea-nft-gallery/';
 
-    public function get_name()
-    {
-        return 'eael-nft-gallery';
-    }
+	public function get_name() {
+		return 'eael-nft-gallery';
+	}
 
-    public function get_title()
-    {
-        return esc_html__('NFT Gallery', 'essential-addons-for-elementor-lite');
-    }
+	public function get_title() {
+		return esc_html__( 'NFT Gallery', 'essential-addons-for-elementor-lite' );
+	}
 
-    public function get_icon()
-    {
-        return 'eaicon-nft-gallery';
-    }
+	public function get_icon() {
+		return 'eaicon-nft-gallery';
+	}
 
-    public function get_categories()
-    {
-        return ['essential-addons-elementor'];
-    }
+	public function get_categories() {
+		return [ 'essential-addons-elementor' ];
+	}
 
-    public function get_keywords()
-    {
-        return [
-            'gallery',
-            'nft gallery',
-            'ea nft gallery',
-            'image gallery',
-            'photo gallery',
-            'portfolio',
-            'ea portfolio',
-            'image grid',
-            'photo grid',
-            'responsive gallery',
-            'ea',
-            'essential addons'
-        ];
-    }
+	public function get_keywords() {
+		return [
+			'gallery',
+			'nft gallery',
+			'ea nft gallery',
+			'image gallery',
+			'photo gallery',
+			'portfolio',
+			'ea portfolio',
+			'image grid',
+			'photo grid',
+			'responsive gallery',
+			'ea',
+			'essential addons'
+		];
+	}
 
-    public function get_custom_help_url()
-    {
-        return 'https://essential-addons.com/elementor/docs/nft-gallery/';
-    }
+	public function get_custom_help_url() {
+		return 'https://essential-addons.com/elementor/docs/nft-gallery/';
+	}
 
     protected function register_controls()
     {
@@ -2910,9 +2902,8 @@ class NFT_Gallery extends Widget_Base
         <?php }
     }
 
-    protected function render()
-    {
-        $nft_gallery_items = $this->fetch_nft_gallery_from_api();
-        $this->print_nft_gallery( $nft_gallery_items );
-    }
+	protected function render() {
+		$nft_gallery_items = $this->fetch_nft_gallery_from_api();
+		$this->print_nft_gallery( $nft_gallery_items );
+	}
 }
