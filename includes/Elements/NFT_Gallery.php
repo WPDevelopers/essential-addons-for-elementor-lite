@@ -310,10 +310,6 @@ class NFT_Gallery extends Widget_Base {
 									'value' => 'grid',
 								],
 								[
-									'name'  => 'eael_nft_gallery_style_preset',
-									'value' => 'preset-1',
-								],
-								[
 									'name'  => 'eael_nft_gallery_show_image',
 									'value' => 'yes',
 								],
@@ -332,7 +328,6 @@ class NFT_Gallery extends Widget_Base {
 								],
 							]
 						],
-
 					],
 				],
 			]
