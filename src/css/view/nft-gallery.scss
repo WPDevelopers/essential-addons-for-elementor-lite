@@ -300,6 +300,16 @@
         align-items: flex-end;
         color: #fff;
       }
+
+      > a {
+        position: absolute;
+        border-radius: 10px;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1000;
+      }
     }
 
     .eael-nft-item:hover {

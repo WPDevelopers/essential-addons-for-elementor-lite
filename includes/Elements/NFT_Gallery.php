@@ -2457,6 +2457,12 @@ class NFT_Gallery extends Widget_Base {
                     <?php endif; ?>
                 </div>
             </div>
+
+	        <?php
+	        if ( $nft_gallery['thumbnail_clickable'] && 'preset-2' === $nft_gallery['preset'] ) {
+		        printf( '<a href="%s" target="_blank" ></a>', esc_url( $item_formatted['view_details_link'] ) );
+	        }
+	        ?>
         </div>
         <?php 
     }
