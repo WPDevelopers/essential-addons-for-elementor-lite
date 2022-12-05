@@ -2624,8 +2624,7 @@ class NFT_Gallery extends Widget_Base {
         <div <?php echo $this->get_render_attribute_string('eael-nft-gallery-wrapper') ?> >
             <?php if ( is_array( $items ) && count( $items ) ) : ?>
             <div <?php echo $this->get_render_attribute_string('eael-nft-gallery-items'); ?> >
-                    <?php foreach ($items as $item) : ?>
-                        <?php
+                    <?php foreach ($items as $item) :
                         $counter++;
                         if ($post_per_page > 0) {
                             $current_page = ceil($counter / $post_per_page);
@@ -2683,13 +2682,13 @@ class NFT_Gallery extends Widget_Base {
                             $item_formatted['ends_in'] = $datediff_in_days . __(' days', 'essential-addons-for-elementor-lite');
                             $item_formatted['ends_in'] = $datediff_in_days < 1 ? $datediff_in_hours . __(' hours', 'essential-addons-for-elementor-lite') : $item_formatted['ends_in'];
                         }
-                        ?>
-                        <?php 'grid' === $nft_gallery['layout'] ? $this->print_nft_gallery_item_grid($nft_gallery, $item_formatted) : $this->print_nft_gallery_item_list($nft_gallery, $item_formatted); ?>
-                    <?php endforeach; ?>
+
+	                    'grid' === $nft_gallery['layout'] ? $this->print_nft_gallery_item_grid( $nft_gallery, $item_formatted ) : $this->print_nft_gallery_item_list( $nft_gallery, $item_formatted );
+                    endforeach; ?>
                 <!-- /.column  -->
             </div>
             <?php else: ?>
-                <?php printf( '<div class="eael-nft-gallery-error-message">%s</div>', esc_html__($error_message, 'essential-addons-for-elementor-lite') ); ?>
+	            <?php printf( '<div class="eael-nft-gallery-error-message">%s</div>', esc_html( $error_message ) ); ?>
             <?php endif; ?>
         </div>
 
