@@ -1142,6 +1142,7 @@ class NFT_Gallery extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-content .eael-nft-title' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-list .eael-nft-content .eael-nft-title a' => 'color: {{VALUE}};',
 				],
 			]
 		);
