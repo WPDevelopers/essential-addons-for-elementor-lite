@@ -2355,21 +2355,21 @@ class NFT_Gallery extends Widget_Base {
 
             <!-- Thumbnail -->
             <div class="eael-nft-thumbnail">
-                <?php
-                if ( $nft_gallery['show_thumbnail'] ) {
-	                if ( ! empty( $item_formatted['thumbnail'] ) ) {
-		                if ( $nft_gallery['thumbnail_clickable'] ) {
-			                printf( '<a href="%s" target="_blank" >', esc_url( $item_formatted['view_details_link'] ) );
-		                }
+		        <?php
+		        if ( $nft_gallery['show_thumbnail'] ) {
+			        if ( ! empty( $item_formatted['thumbnail'] ) ) {
+				        if ( $nft_gallery['thumbnail_clickable'] && 'preset-1' === $nft_gallery['preset'] ) {
+					        printf( '<a href="%s" target="_blank" >', esc_url( $item_formatted['view_details_link'] ) );
+				        }
 
-		                printf( '<img src="%s" alt="%s">', esc_attr( $item_formatted['thumbnail'] ), esc_attr__( 'NFT Gallery', 'essential-addons-for-elementor-lite' ) );
+				        printf( '<img src="%s" alt="%s">', esc_attr( $item_formatted['thumbnail'] ), esc_attr__( 'NFT Gallery', 'essential-addons-for-elementor-lite' ) );
 
-		                if ( $nft_gallery['thumbnail_clickable'] ) {
-			                printf( '</a>' );
-		                }
-	                }
-                }
-                ?>
+				        if ( $nft_gallery['thumbnail_clickable'] && 'preset-1' === $nft_gallery['preset'] ) {
+					        printf( '</a>' );
+				        }
+			        }
+		        }
+		        ?>
             </div>
 
             <div class="eael-nft-main-content">
