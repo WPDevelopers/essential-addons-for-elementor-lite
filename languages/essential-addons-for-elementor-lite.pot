@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-12-04 11:16+0000\n"
+"POT-Creation-Date: 2022-12-05 05:55+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -417,7 +417,7 @@ msgstr ""
 msgid "Content Ticker"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:690, ../includes/Elements/NFT_Gallery.php:31, ../includes/Elements/NFT_Gallery.php:2364, ../includes/Elements/NFT_Gallery.php:2482, ../includes/templates/admin/elements.php:228
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:690, ../includes/Elements/NFT_Gallery.php:31, ../includes/Elements/NFT_Gallery.php:2364, ../includes/Elements/NFT_Gallery.php:2488, ../includes/templates/admin/elements.php:228
 msgid "NFT Gallery"
 msgstr ""
 
@@ -5653,11 +5653,11 @@ msgstr ""
 msgid "Chain"
 msgstr ""
 
-#: ../includes/Elements/NFT_Gallery.php:536, ../includes/Elements/NFT_Gallery.php:539, ../includes/Elements/NFT_Gallery.php:1560, ../includes/Elements/NFT_Gallery.php:2568, ../includes/Elements/NFT_Gallery.php:2569
+#: ../includes/Elements/NFT_Gallery.php:536, ../includes/Elements/NFT_Gallery.php:539, ../includes/Elements/NFT_Gallery.php:1560, ../includes/Elements/NFT_Gallery.php:2574, ../includes/Elements/NFT_Gallery.php:2575
 msgid "Owner"
 msgstr ""
 
-#: ../includes/Elements/NFT_Gallery.php:556, ../includes/Elements/NFT_Gallery.php:559, ../includes/Elements/NFT_Gallery.php:2570
+#: ../includes/Elements/NFT_Gallery.php:556, ../includes/Elements/NFT_Gallery.php:559, ../includes/Elements/NFT_Gallery.php:2576
 msgid "View Details"
 msgstr ""
 
@@ -5701,7 +5701,7 @@ msgstr ""
 msgid "Items"
 msgstr ""
 
-#: ../includes/Elements/NFT_Gallery.php:2397, ../includes/Elements/NFT_Gallery.php:2525
+#: ../includes/Elements/NFT_Gallery.php:2397, ../includes/Elements/NFT_Gallery.php:2531
 msgid "EA NFT Creator Thumbnail"
 msgstr ""
 
@@ -5709,23 +5709,23 @@ msgstr ""
 msgid "EA NFT Owner Thumbnail"
 msgstr ""
 
-#: ../includes/Elements/NFT_Gallery.php:2679
+#: ../includes/Elements/NFT_Gallery.php:2685
 msgid " days"
 msgstr ""
 
-#: ../includes/Elements/NFT_Gallery.php:2680
+#: ../includes/Elements/NFT_Gallery.php:2686
 msgid " hours"
 msgstr ""
 
-#: ../includes/Elements/NFT_Gallery.php:2759
+#: ../includes/Elements/NFT_Gallery.php:2765
 msgid "Please provide a valid Type!"
 msgstr ""
 
-#: ../includes/Elements/NFT_Gallery.php:2792
+#: ../includes/Elements/NFT_Gallery.php:2798
 msgid "Please provide a valid collection slug!"
 msgstr ""
 
-#: ../includes/Elements/NFT_Gallery.php:2798, ../includes/Elements/NFT_Gallery.php:2796
+#: ../includes/Elements/NFT_Gallery.php:2804, ../includes/Elements/NFT_Gallery.php:2802
 msgid "Please provide a valid wallet address!"
 msgstr ""
 

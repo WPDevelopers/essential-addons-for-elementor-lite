@@ -312,6 +312,15 @@
           align-items: flex-end;
   color: #fff;
 }
+.eael-nft-gallery-wrapper .preset-2 .eael-nft-item > a {
+  position: absolute;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+}
 .eael-nft-gallery-wrapper .preset-2 .eael-nft-item:hover .eael-nft-thumbnail img {
   -webkit-transform: scale(1.1);
       -ms-transform: scale(1.1);
