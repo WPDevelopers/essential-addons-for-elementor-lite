@@ -321,6 +321,9 @@
   width: 100%;
   z-index: 1000;
 }
+.eael-nft-gallery-wrapper .preset-2 .eael-nft-item .eael-nft-chain {
+  z-index: 1001;
+}
 .eael-nft-gallery-wrapper .preset-2 .eael-nft-item:hover .eael-nft-thumbnail img {
   -webkit-transform: scale(1.1);
       -ms-transform: scale(1.1);
