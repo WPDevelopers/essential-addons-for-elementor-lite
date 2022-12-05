@@ -2467,6 +2467,7 @@ class NFT_Gallery extends Widget_Base {
         $item_formatted = $item;
         $pagination_class = ! empty( $item_formatted['pagination_class'] ) ? $item_formatted['pagination_class'] : '';
         $unit_convert = ! empty( $item_formatted['unit_convert'] ) ? $item_formatted['unit_convert'] : 1;
+		$item_formatted['view_details_link'] = ! empty( $item_formatted['view_details_link'] ) ? $item_formatted['view_details_link'] : '#';
         ?>
         <div class="eael-nft-item <?php echo esc_attr( $pagination_class ); ?> ">
             <div class="eael-nft-main-content">
