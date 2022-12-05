@@ -2082,7 +2082,7 @@ class NFT_Gallery extends Widget_Base {
 			[
 				'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#333',
+				'default'   => '#29D8D8',
 				'selectors' => [
 					'{{WRAPPER}} .eael-nft-gallery-load-more' => 'background-color: {{VALUE}}',
 				],
