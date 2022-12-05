@@ -899,7 +899,8 @@ class NFT_Gallery extends Widget_Base {
 					'size' => 10,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-item' => 'border-radius: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-item,
+					{{WRAPPER}} .eael-nft-gallery-wrapper .preset-2 .eael-nft-item > a' => 'border-radius: {{SIZE}}px;',
 				],
 			]
 		);
