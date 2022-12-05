@@ -2494,7 +2494,7 @@ class NFT_Gallery extends Widget_Base {
                     <!-- Title  -->
                     <?php if( $nft_gallery['show_title'] ) : ?>
                     <div class="eael-nft-title-wrapper eael-nft-grid-item">
-                        <h3 class="eael-nft-title"><?php printf('%s', esc_html( $item_formatted['title'] ) ); ?></h3>
+                        <h3 class="eael-nft-title"><?php printf('<a href="%s" target="_blank">%s</a>', esc_url( $item_formatted['view_details_link'] ), esc_html( $item_formatted['title'] ) ); ?></h3>
                     </div>
                     <?php endif; ?>
 
