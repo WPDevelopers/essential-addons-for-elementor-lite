@@ -2689,7 +2689,7 @@ class NFT_Gallery extends Widget_Base {
                 <!-- /.column  -->
             </div>
             <?php else: ?>
-                <?php printf( '<div class="eael-nft-gallery-error-message">%s</div>', esc_html__($error_message, 'essential-addons-for-elementor-lite') ); ?>
+	            <?php printf( '<div class="eael-nft-gallery-error-message">%s</div>', esc_html( $error_message ) ); ?>
             <?php endif; ?>
         </div>
 
