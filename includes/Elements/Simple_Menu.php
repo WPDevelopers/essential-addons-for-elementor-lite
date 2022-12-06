@@ -1510,6 +1510,7 @@ class Simple_Menu extends Widget_Base
 //            'data-dropdown-indicator-class' => $settings['eael_simple_menu_dropdown_item_indicator'],
             'data-hamburger-breakpoints' => wp_json_encode( $this->get_dropdown_options() ),
             'data-hamburger-device' => $hamburger_device,
+            'style' => esc_attr( apply_filters('eael-simple-menu-container-inline-style', '') ),
         ]);
         
         if ($settings['eael_simple_menu_menu']) {
