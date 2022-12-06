@@ -145,6 +145,14 @@
   display: none !important;
 }
 
+.eael-d-none {
+  display: none !important;
+}
+
+.eael-d-block {
+  display: block !important;
+}
+
 .theme-martfury .elementor-wc-products .woocommerce ul.products li.product .product-inner .mf-rating .eael-star-rating.star-rating {
   display: none;
 }
