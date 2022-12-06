@@ -3,6 +3,7 @@
     .eael-simple-menu-container{
         min-height: 50px;
         overflow: visible;
+        opacity: 1 !important;
 
         .eael-simple-menu {
             &.eael-simple-menu-horizontal,
@@ -155,6 +156,7 @@
 .elementor-widget-eael-simple-menu.eael-hamburger--none, 
 .elementor-widget-eael-simple-menu.eael-hamburger--not-responsive {
     .eael-simple-menu-container {
+        opacity: 1 !important;
         .eael-simple-menu-toggle {
             display: none;
         }

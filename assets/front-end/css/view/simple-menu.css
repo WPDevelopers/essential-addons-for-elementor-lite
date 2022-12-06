@@ -2,6 +2,7 @@
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container {
   min-height: 50px;
   overflow: visible;
+  opacity: 1 !important;
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal,
@@ -125,6 +126,10 @@
   -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
+}
+.elementor-widget-eael-simple-menu.eael-hamburger--none .eael-simple-menu-container,
+.elementor-widget-eael-simple-menu.eael-hamburger--not-responsive .eael-simple-menu-container {
+  opacity: 1 !important;
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--none .eael-simple-menu-container .eael-simple-menu-toggle,
 .elementor-widget-eael-simple-menu.eael-hamburger--not-responsive .eael-simple-menu-container .eael-simple-menu-toggle {
