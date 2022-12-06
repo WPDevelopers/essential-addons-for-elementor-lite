@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.1
 Requires PHP: 7.0
-Stable tag: 5.4.4
+Stable tag: 5.5.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -12,9 +12,9 @@ The Essential plugin you install after Elementor! Packed with 40+ stunning free 
 
 == Description ==
 
-Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 80+ creative elements and extensions. Add powers to your page builder using our easy-to-use elements those were designed to make your next WordPress page and posts design easier and prettier than ever before.
+Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 90+ creative elements and extensions. Add powers to your page builder using our easy-to-use elements those were designed to make your next WordPress page and posts design easier and prettier than ever before.
 
-##Essential Addons For Elementor - Best Elements Library For Elementor With 1 Million Active Installations & 80+ Elements And Extensions##
+##Essential Addons For Elementor - Best Elements Library For Elementor With 1 Million Active Installations & 90+ Elements And Extensions##
 
 [Check the Demos](https://essential-addons.com/elementor/demos)
 
@@ -28,7 +28,7 @@ No extra resources or messy codes to slow down your website. Optimized for super
 Enable and disable individual elements to make your page loading faster and smoother. You can deactivate unnecessary widgets to keep the site lite.
 
 
-### 2500+ Ready Blocks and Templates through **Templately**
+### 3000+ Ready Blocks and Templates through **Templately**
 Use pre-made templates and sections which come with Essential Addons and design your website to stand out from the crowd.
 
 [Install Templately to get the premade blocks and templates](https://wordpress.org/plugins/templately/)
@@ -93,6 +93,7 @@ We have designed more than 50 of the most useful widgets to enhance your Element
 45. [Woo Product Gallery](https://essential-addons.com/elementor/woo-product-gallery/)- Show your products in a filterable gallery
 46. [Woo Cart](https://essential-addons.com/elementor/woo-cart/)- Use WooCommerce Cart page to boost online sales
 47. [Interactive Circle](https://essential-addons.com/elementor/interactive-circle/)- Display content with engaging circular layouts
+48. [NFT Gallery](https://essential-addons.com/elementor/nft-gallery/)- Add and showcase NFT collections effortlessly in Elementor
 
 Extensions (Free): 
 
@@ -241,6 +242,16 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.5.0 - 06/12/2022 =
+
+- Added: New Widget | EA NFT Gallery
+- Improved: EA Login/Register Form | Added arguments to action hook
+- Improved: EA Custom JS | Allow Custom JS to run in the Elementor Editor
+- Fixed: EA Interactive Circle | Animation not working in Mobile View
+- Fixed: EA Filterable Gallery | extra margin when 6 columns are used
+- Fixed: EA Filterable Gallery | Filter not working in different languages
+- Few minor bug fixes & improvements
 
 = 5.4.4 - 24/11/2022 =
 
