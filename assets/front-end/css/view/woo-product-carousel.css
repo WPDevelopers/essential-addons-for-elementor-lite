@@ -1198,3 +1198,7 @@
   letter-spacing: 14px;
   font-size: 14px;
 }
+.theme-buddyboss-theme #content .elementor-widget-container .preset-1 .eael-woo-product-carousel li.product .button, .theme-buddyboss-theme #content .elementor-widget-container .preset-2 .eael-woo-product-carousel li.product .button, .theme-buddyboss-theme #content .elementor-widget-container .preset-4 .eael-woo-product-carousel li.product .button {
+  width: 35px;
+  border-radius: 3px;
+}
