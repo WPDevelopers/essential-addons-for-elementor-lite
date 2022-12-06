@@ -2,7 +2,7 @@
   font-family: Segoe UI;
 }
 .eael-event-calendar-wrapper .fc-event {
-  padding: 1px 5px;
+  padding: 5px 10px;
 }
 .eael-event-calendar-wrapper .fc-timeGridWeek-view .fc-event,
 .eael-event-calendar-wrapper fc-timeGridDay-view .fc-event {
