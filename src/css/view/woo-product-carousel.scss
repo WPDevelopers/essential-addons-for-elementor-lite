@@ -2129,3 +2129,24 @@ $theme-preset4: #ec3b75;
 
     }
 }
+
+//theme Buddyboss
+.theme-buddyboss-theme{
+    #content .elementor-widget-container {
+        .preset-1,.preset-2,.preset-4{
+            .eael-woo-product-carousel{
+                li.product{
+                    .button{
+                        width: 35px;
+                        border-radius: 3px;
+                    }
+                }
+            }
+        }
+    }
+    .preset-1,.preset-2,.preset-4{
+        li.product{
+
+        }
+    }
+}
