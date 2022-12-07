@@ -350,9 +350,9 @@ trait Login_Registration {
 		if ( isset( $_POST['user_name'] ) ) {
 			$username = sanitize_user( $_POST['user_name'] );
 			if ( ! validate_username( $username ) || mb_strlen( $username ) > 60 ) {
-				$errors['user_name'] = isset( $settings['err_username'] ) ? wp_strip_all_tags( $settings['err_username'] ) : __( 'Invalid username provided.', 'essential-addons-for-elementor-lite' );
+				$errors['user_name'] = isset( $settings['err_username'] ) ? Helper::eael_wp_kses( $settings['err_username'] ) : __( 'Invalid username provided.', 'essential-addons-for-elementor-lite' );
 			}elseif(username_exists( $username )){
-				$errors['user_name'] = isset( $settings['err_username_used'] ) ? wp_strip_all_tags( $settings['err_username_used'] ) : __( 'The username already registered.', 'essential-addons-for-elementor-lite' );
+				$errors['user_name'] = isset( $settings['err_username_used'] ) ? Helper::eael_wp_kses( $settings['err_username_used'] ) : __( 'The username already registered.', 'essential-addons-for-elementor-lite' );
 
 			}
 		} else {
