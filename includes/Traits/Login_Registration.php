@@ -127,7 +127,7 @@ trait Login_Registration {
             }
 		}
 
-		do_action( 'eael/login-register/before-login' );
+		do_action( 'eael/login-register/before-login', $_POST, $settings, $this );
 
 		$widget_id = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( $_POST['widget_id'] ) : '';
 		//v2 or v3 
