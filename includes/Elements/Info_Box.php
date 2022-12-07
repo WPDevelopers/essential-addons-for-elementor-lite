@@ -1520,12 +1520,13 @@ class Info_Box extends Widget_Base
             $this->add_render_attribute('eael_infobox_inner', 'class', 'icon-on-right');
         }
 
-        $target = !empty($settings['eael_show_infobox_clickable_link']['is_external']) ? 'target="_blank"' : '';
-        $nofollow = !empty($settings['eael_show_infobox_clickable_link']['nofollow']) ? 'rel="nofollow"' : '';
+	    if ( $settings['eael_show_infobox_clickable_link']['url'] ) {
+		    $this->add_link_attributes( 'infobox_clickable_link', $settings['eael_show_infobox_clickable_link'] );
+	    }
 
         ob_start();
         ?>
-        <?php if ('yes' == $settings['eael_show_infobox_clickable']): ?><a href="<?php echo esc_url($settings['eael_show_infobox_clickable_link']['url']) ?>" <?php echo $target; ?> <?php echo $nofollow; ?>><?php endif;?>
+	    <?php if ( 'yes' == $settings['eael_show_infobox_clickable'] ): ?><a <?php echo $this->get_render_attribute_string( 'infobox_clickable_link' ); ?>><?php endif; ?>
             <div <?php echo $this->get_render_attribute_string('eael_infobox_inner'); ?>>
             <?php
         echo ob_get_clean();
