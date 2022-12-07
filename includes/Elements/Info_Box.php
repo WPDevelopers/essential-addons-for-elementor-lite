@@ -1674,17 +1674,9 @@ if ('yes' == $settings['eael_show_infobox_clickable']): ?></a><?php endif;
 
         $this->add_render_attribute('infobox_button', 'class', 'eael-infobox-button');
 
-        if ($settings['infobox_button_link_url']['url']) {
-            $this->add_render_attribute('infobox_button', 'href', esc_url($settings['infobox_button_link_url']['url']));
-        }
-
-        if ('on' == $settings['infobox_button_link_url']['is_external']) {
-            $this->add_render_attribute('infobox_button', 'target', '_blank');
-        }
-
-        if ('on' == $settings['infobox_button_link_url']['nofollow']) {
-            $this->add_render_attribute('infobox_button', 'rel', 'nofollow');
-        }
+	    if ( $settings['infobox_button_link_url']['url'] ) {
+		    $this->add_link_attributes( 'infobox_button', $settings['infobox_button_link_url'] );
+	    }
 
         ob_start();
         ?>
