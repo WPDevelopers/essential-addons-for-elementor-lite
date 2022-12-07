@@ -726,7 +726,7 @@ trait Login_Registration {
 			}
 			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
 		} else {
-			$lostpassword_success_message = ! empty( $settings['success_lostpassword'] ) ? wp_strip_all_tags( $settings['success_lostpassword'] ) : wp_strip_all_tags( 'Check your email for the confirmation link.' ); 
+			$lostpassword_success_message = ! empty( $settings['success_lostpassword'] ) ? Helper::eael_wp_kses( $settings['success_lostpassword'] ) : Helper::eael_wp_kses( 'Check your email for the confirmation link.' ); 
 			$data = [
 				'message' => esc_html__( $lostpassword_success_message, 'essential-addons-for-elementor-lite' ),
 			];
@@ -818,7 +818,7 @@ trait Login_Registration {
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
 		if ( is_user_logged_in() ) {
-			$err_msg = isset( $settings['err_loggedin'] ) ? __( wp_strip_all_tags( $settings['err_loggedin'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'You are already logged in', 'essential-addons-for-elementor-lite' );
+			$err_msg = isset( $settings['err_loggedin'] ) ? __( Helper::eael_wp_kses( $settings['err_loggedin'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'You are already logged in', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
