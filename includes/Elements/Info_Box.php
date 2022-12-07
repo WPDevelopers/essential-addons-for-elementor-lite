@@ -1524,25 +1524,32 @@ class Info_Box extends Widget_Base
 		    $this->add_link_attributes( 'infobox_clickable_link', $settings['eael_show_infobox_clickable_link'] );
 	    }
 
-        ob_start();
-        ?>
-	    <?php if ( 'yes' == $settings['eael_show_infobox_clickable'] ): ?><a <?php echo $this->get_render_attribute_string( 'infobox_clickable_link' ); ?>><?php endif; ?>
-            <div <?php echo $this->get_render_attribute_string('eael_infobox_inner'); ?>>
-            <?php
-        echo ob_get_clean();
+	    ob_start();
+
+	    if ( 'yes' == $settings['eael_show_infobox_clickable'] ) { ?>
+            <a <?php echo $this->get_render_attribute_string( 'infobox_clickable_link' ); ?>>
+	    <?php } ?>
+        <div <?php echo $this->get_render_attribute_string( 'eael_infobox_inner' ); ?>>
+	    <?php
+	    echo ob_get_clean();
     }
 
 	/**
 	 * This function is rendering closing divs and tags
 	 * of before partial for infobox.
 	 */
-    protected function eael_infobox_after()
-    {
-        $settings = $this->get_settings_for_display();
-        ob_start(); ?></div><?php
-if ('yes' == $settings['eael_show_infobox_clickable']): ?></a><?php endif;
-        echo ob_get_clean();
-    }
+	protected function eael_infobox_after() {
+		$settings = $this->get_settings_for_display();
+		ob_start(); ?>
+        </div>
+
+		<?php
+		if ( 'yes' == $settings['eael_show_infobox_clickable'] ) { ?>
+            </a>
+		<?php }
+
+		echo ob_get_clean();
+	}
 
 	/**
 	 * This function is rendering appropriate icon for infobox.
