@@ -166,12 +166,12 @@ trait Login_Registration {
 		if ( is_wp_error( $user_data ) ) {
 			$err_msg = '';
 			if ( isset( $user_data->errors['invalid_email'][0] ) ) {
-				$err_msg = isset( $settings['err_email'] ) ? wp_strip_all_tags( $settings['err_email'] ) : __( 'Invalid Email. Please check your email or try again with your username.', 'essential-addons-for-elementor-lite' );
+				$err_msg = isset( $settings['err_email'] ) ? Helper::eael_wp_kses( $settings['err_email'] ) : __( 'Invalid Email. Please check your email or try again with your username.', 'essential-addons-for-elementor-lite' );
 			} elseif ( isset( $user_data->errors['invalid_username'][0] )) {
-				$err_msg = isset( $settings['err_username'] ) ? wp_strip_all_tags( $settings['err_username'] ) : __( 'Invalid Username. Please check your username or try again with your email.', 'essential-addons-for-elementor-lite' );
+				$err_msg = isset( $settings['err_username'] ) ? Helper::eael_wp_kses( $settings['err_username'] ) : __( 'Invalid Username. Please check your username or try again with your email.', 'essential-addons-for-elementor-lite' );
 
 			} elseif ( isset( $user_data->errors['incorrect_password'][0] ) || isset( $user_data->errors['empty_password'][0] ) ) {
-				$err_msg = isset( $settings['err_pass'] ) ? wp_strip_all_tags( $settings['err_pass'] ) : __( 'Invalid Password', 'essential-addons-for-elementor-lite' );
+				$err_msg = isset( $settings['err_pass'] ) ? Helper::eael_wp_kses( $settings['err_pass'] ) : __( 'Invalid Password', 'essential-addons-for-elementor-lite' );
 			} else {
 				if( ! empty( $user_data->errors ) ){
 					foreach( $user_data->errors as $error ) {
