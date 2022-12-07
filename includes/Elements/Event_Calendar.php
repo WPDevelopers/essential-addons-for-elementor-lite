@@ -1137,7 +1137,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'days_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .fc-col-header-cell a',
+                'selector' => '{{WRAPPER}} .fc-col-header-cell a, {{WRAPPER}} .fc-list-sticky .fc-list-day th a',
             ]
         );
 
