@@ -340,10 +340,10 @@ trait Login_Registration {
 		if ( ! empty( $_POST['email'] ) && is_email( $_POST['email'] ) ) {
 			$email = sanitize_email( $_POST['email'] );
 			if ( email_exists( $email ) ) {
-				$errors['email'] = isset( $settings['err_email_used'] ) ? wp_strip_all_tags( $settings['err_email_used'] ) : __( 'The provided email is already registered with other account. Please login or reset password or use another email.', 'essential-addons-for-elementor-lite' );
+				$errors['email'] = isset( $settings['err_email_used'] ) ? Helper::eael_wp_kses( $settings['err_email_used'] ) : __( 'The provided email is already registered with other account. Please login or reset password or use another email.', 'essential-addons-for-elementor-lite' );
 			}
 		} else {
-			$errors['email'] = isset( $settings['err_email_missing'] ) ? wp_strip_all_tags( $settings['err_email_missing'] ) : __( 'Email is missing or Invalid', 'essential-addons-for-elementor-lite' );
+			$errors['email'] = isset( $settings['err_email_missing'] ) ? Helper::eael_wp_kses( $settings['err_email_missing'] ) : __( 'Email is missing or Invalid', 'essential-addons-for-elementor-lite' );
 		}
 
 		// if user provided user name, validate & sanitize it
