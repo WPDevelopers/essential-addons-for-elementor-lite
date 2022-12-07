@@ -824,7 +824,6 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-event-calendar-wrapper' => 'background: {{VALUE}}',
-                    '{{WRAPPER}} .eael-event-calendar-wrapper table tbody > tr > td' => 'background: {{VALUE}}',
                 ],
             ]
         );
@@ -1148,7 +1147,7 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .fc-col-header-cell a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .fc-col-header-cell a' => 'col-cellor: {{VALUE}};',
 
                 ],
             ]
@@ -1187,7 +1186,7 @@ class Event_Calendar extends Widget_Base
                 'name' => 'days_background',
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .fc-col-header-cell',
+                'selector' => '{{WRAPPER}} .fc-col-header-cell, {{WRAPPER}} table thead .fc-timegrid-axis',
                 'exclude' => [
                     'image',
                 ],
@@ -1276,7 +1275,9 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'selectors' => [
-                    '{{WRAPPER}} .fc-day' => 'background: {{VALUE}} !important',
+                    '{{WRAPPER}} table tbody .fc-day' => 'background: {{VALUE}} !important',
+                    '{{WRAPPER}} table tbody .fc-timegrid-axis' => 'background: {{VALUE}} !important',
+                    '{{WRAPPER}} table tbody .fc-timegrid-slot' => 'background: {{VALUE}} !important',
                     '{{WRAPPER}} .fc-unthemed td.fc-today' => 'background: {{VALUE}} !important',
                 ],
             ]
@@ -1372,7 +1373,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'selectors' => [
-                    '{{WRAPPER}} .fc-day-today' => 'background: {{VALUE}} !important',
+                    '{{WRAPPER}} table tbody tr .fc-day-today' => 'background: {{VALUE}} !important',
                 ],
             ]
         );
