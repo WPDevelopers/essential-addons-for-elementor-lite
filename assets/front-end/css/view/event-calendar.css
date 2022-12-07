@@ -194,6 +194,9 @@
 .eael-event-calendar-wrapper .fc-toolbar.fc-header-toolbar .fc-left .fc-button .fc-icon {
   font-size: 13px;
 }
+.elementor-page .entry-content .eael-event-calendar-wrapper a {
+  text-decoration: none;
+}
 .fc-toolbar.fc-header-toolbar .fc-button-group button:not(:first-child) {
   margin-left: 5px;
 }
