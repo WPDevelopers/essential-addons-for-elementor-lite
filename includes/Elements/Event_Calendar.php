@@ -851,7 +851,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'eael_calendar_box_shadow',
                 'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view-container .fc-view > table',
+                'selector' => '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view-harness',
             ]
         );
 
