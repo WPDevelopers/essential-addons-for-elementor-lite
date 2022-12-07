@@ -35,6 +35,9 @@
   font-size: 14px;
   float: center !important;
 }
+.eael-event-calendar-wrapper .fc-col-header-cell-cushion {
+  padding: 10px;
+}
 .eael-event-calendar-wrapper .eaelec-modal {
   position: fixed;
   left: 0;
@@ -483,7 +486,7 @@ span.fc-day-number {
     font-size: 14px;
   }
   .fc-basic-view .fc-day-number,
-.fc-basic-view .fc-week-number {
+  .fc-basic-view .fc-week-number {
     padding: 0;
     margin: 0;
     font-size: 10px;
