@@ -1,0 +1,371 @@
+.eael-nft-gallery-wrapper {
+  padding: 15px 0;
+  transition: 0.5s;
+  overflow: hidden;
+  position: relative;
+
+  .eael-nft-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    display: grid;
+  }
+
+  .eael-nft-list {
+    grid-template-columns: auto;
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    display: grid;
+
+    .eael-nft-list-thumbnail {
+      overflow: hidden;
+
+      img {
+        object-fit: cover;
+        width: auto;
+        height: 100px;
+        border-radius: 10px;
+      }
+    }
+
+    .eael-nft-grid-container {
+      display: grid;
+      grid-template-columns: 15% 30% 15% 20% 20%;
+    }
+
+    .eael-nft-grid-item {
+      display: inline-grid;
+      align-items: center;
+    }
+  }
+
+  .eael-nft-item {
+    .eael-nft-chain {
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out 0s;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(159, 159, 159, 0.4);
+      backdrop-filter: blur(10px);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      z-index: 160;
+      cursor: pointer;
+      display: flex;
+
+      .eael-nft-chain-button {
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 0s ease 0s, opacity 0.4s ease-in-out 0s;
+        background: transparent;
+        display: inline-flex;
+        align-items: center;
+        font-size: 100%;
+        border: 0px;
+        padding: 0;
+        margin: 0;
+
+        svg {
+          width: 24px;
+          height: 20px;
+          fill: #fff;
+        }
+      }
+    }
+
+    .eael-nft-main-content {
+      padding: 15px;
+    }
+
+    position: relative;
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgb(0 0 0 / 9%);
+    overflow: hidden;
+    transition: 0.5s ease-in-out;
+
+    .eael-nft-creator-img {
+      display: flex;
+    }
+
+    .eael-nft-created-by,
+    .eael-nft-owned-by {
+      display: flex;
+      column-gap: 5px;
+    }
+    .eael-nft-thumbnail {
+      line-height: 0;
+      text-align: center;
+      overflow: hidden;
+
+      img {
+        object-fit: cover;
+        width: auto;
+        height: 300px;
+      }
+    }
+
+    .eael-nft-content {
+      .eael-nft-title {
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0 0 10px;
+      }
+
+      .eael-nft-current-price {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0 0 10px;
+      }
+
+      .eael-nft-last-sale,
+      .eael-nft-ends-in {
+        margin: 0;
+        .eael-nft-last-sale-text,
+        .eael-nft-ends-in-text {
+          font-size: 14px;
+          color: rgb(112, 122, 131);
+        }
+
+        .eael-nft-last-sale-price,
+        .eael-nft-ends-in-time {
+          font-size: 15px;
+          color: rgb(112, 122, 131);
+        }
+      }
+
+      .eael-nft-creator-wrapper,
+      .eael-nft-owner-wrapper {
+        display: flex;
+        align-items: center;
+        // align-items: flex-start;
+        gap: 10px;
+        // justify-content: flex-start;
+        margin-bottom: 10px;
+        img {
+          height: 30px;
+          width: 30px;
+          border-radius: 50%;
+        }
+        span {
+          color: #333333;
+          font-size: 14px;
+        }
+
+        a {
+          color: #7967ff;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .eael-nft-button {
+      .eael-nft-gallery-button-align-left {
+        margin-right: auto;
+      }
+  
+      .eael-nft-gallery-button-align-center {
+        margin: auto;
+      }
+  
+      .eael-nft-gallery-button-align-right {
+        margin-left: auto;
+      }
+
+      button {
+        background-color: transparent;
+        border: 0;
+        box-shadow: unset;
+        display: block;
+        padding: 0;
+        margin: 0;
+
+        a {
+          display: block;
+          text-decoration: none;
+          color: #ffffff;
+          font-size: 14px;
+          padding: 12px 15px;
+          transition: 0.5s;
+          text-align: center;
+        }
+      }
+    }
+  }
+  .eael-nft-item:hover {
+    box-shadow: 0 4px 15px #d6d6d6;
+
+    .eael-nft-chain {
+      opacity: 1;
+    }
+
+    .eael-nft-button {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(0);
+    }
+  }
+
+  .preset-1 {
+    .eael-nft-price-wrapper {
+      min-height: 20px;
+    }
+
+    .eael-nft-button {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: 0.3s ease-in-out;
+      visibility: hidden;
+      width: 100%;
+
+      button {
+        width: 100%;
+      }
+    }
+
+    .eael-nft-thumbnail {
+      img {
+        transition-duration: .4s;
+      }
+    }
+
+    .eael-nft-item:hover {
+      .eael-nft-button {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(0);
+      }
+
+      .eael-nft-thumbnail {
+        img {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  .preset-2 {
+    .eael-nft-price-wrapper {
+      min-height: 20px;
+    }
+
+    .eael-nft-creator-wrapper,
+    .eael-nft-owner-wrapper,
+    .eael-nft-last-sale-wrapper,
+    .eael-nft-button {
+      display: none;
+    }
+
+    .eael-nft-item {
+      padding: 0 !important;
+      min-height: 300px;
+
+      .eael-nft-thumbnail {
+        margin-bottom: 0;
+
+        img {
+          transition-duration: .4s;
+        }
+      }
+
+      .eael-nft-thumbnail::before {
+        content: " ";
+        z-index: 10;
+        display: block;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .eael-nft-main-content {
+        background-color: transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 15px;
+        transition: 0.3s ease-in-out;
+        z-index: 999;
+        display: flex;
+        align-items: flex-end;
+        color: #fff;
+      }
+
+      > a {
+        position: absolute;
+        border-radius: 10px;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .eael-nft-chain {
+        z-index: 1001;
+      }
+    }
+
+    .eael-nft-item:hover {
+      .eael-nft-thumbnail {
+        img {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+  }
+}
+
+.eael-nft-gallery-load-more.elementor-button.elementor-size-xl {
+  font-size: 20px;  
+  padding: 15px 50px;
+  border-radius: 6px;
+}
+
+.eael-nft-gallery-load-more.elementor-button.elementor-size-lg {
+  font-size: 18px;  
+  padding: 20px 40px;
+  border-radius: 5px;
+}
+
+.eael-nft-gallery-load-more.elementor-button.elementor-size-md {
+  font-size: 16px;  
+  padding: 15px 30px;
+  border-radius: 4px;
+}
+
+.eael-nft-gallery-load-more.elementor-button.elementor-size-sm {
+  font-size: 15px;  
+  padding: 12px 24px;
+  border-radius: 3px;
+}
+
+.eael-nft-gallery-load-more.elementor-button.elementor-size-xs {
+  font-size: 13px;  
+  padding: 10px 20px;
+  border-radius: 2px;
+}
+ 
+@media only screen and (max-width: 767px) {
+  .eael-nft-gallery-wrapper {
+    .eael-nft-list .eael-nft-grid-container {
+      grid-template-columns: 28% 43% 23%;
+      column-gap: 3%;
+    }
+    .eael-nft-last-sale-wrapper,
+    .eael-nft-creator-wrapper {
+      display: none !important;
+    }
+  }
+}
