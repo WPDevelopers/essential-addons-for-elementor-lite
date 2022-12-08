@@ -357,8 +357,6 @@
   text-transform: capitalize;
   border: none;
   letter-spacing: normal;
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 .eael-product-gallery .woocommerce ul.products li.product .button:hover, .eael-product-gallery .woocommerce ul.products li.product .button:visited {
   text-decoration: none;
@@ -1126,4 +1124,13 @@
 }
 .theme-buddyboss-theme .eael-product-gallery .woocommerce li.product {
   max-width: 100%;
+}
+.theme-buddyboss-theme .eael-product-gallery .woocommerce li.product a.added_to_cart {
+  width: 42px;
+  line-height: 0;
+  font-size: 0;
+  margin-right: 3px;
+}
+.theme-buddyboss-theme .eael-product-gallery .woocommerce li.product a.button.add_to_cart_button {
+  margin-bottom: 0;
 }
