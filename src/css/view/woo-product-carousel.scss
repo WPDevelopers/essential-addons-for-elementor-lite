@@ -1566,6 +1566,11 @@ $theme-preset4: #ec3b75;
                         width: 35px;
                         border-radius: 3px;
                     }
+                    a.added_to_cart{
+                        width: 35px;
+                        line-height: 0;
+                        font-size: 0;
+                    }
                 }
             }
         }
