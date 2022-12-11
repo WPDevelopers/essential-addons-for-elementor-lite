@@ -1089,6 +1089,25 @@ $config = [
                 true,
             ],
         ],
+        'nft-gallery' => [
+            'class' => '\Essential_Addons_Elementor\Elements\NFT_Gallery',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/nft-gallery.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+                'js' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/nft-gallery.min.js',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
     ],
     'extensions' => [
         'promotion' => [
