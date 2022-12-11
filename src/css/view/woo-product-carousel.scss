@@ -1580,4 +1580,7 @@ $theme-preset4: #ec3b75;
 
         }
     }
+    .woocommerce.eael-woo-product-carousel ul.products li.product:first-of-type{
+        flex: 1 0 100%;
+    }
 }
