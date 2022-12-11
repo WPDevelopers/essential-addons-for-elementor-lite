@@ -222,7 +222,14 @@ $elements = [
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/dynamic-filterable-gallery/',
 				'promotion' => 'popular',
 				'is_pro'    => true
-			]
+			],
+			[
+				'key'       => 'nft-gallery',
+				'title'     => __( 'NFT Gallery', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/nft-gallery/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-nft-gallery/',
+				'promotion' => 'new',
+			],
 		]
 	],
 	'creative-elements'        => [
