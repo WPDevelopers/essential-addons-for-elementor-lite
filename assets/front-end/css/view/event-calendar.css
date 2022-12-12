@@ -41,6 +41,10 @@
 .eael-event-calendar-wrapper .fc-col-header-cell-cushion {
   padding: 10px;
 }
+.eael-event-calendar-wrapper .fc-daygrid-block-event .fc-event-time,
+.eael-event-calendar-wrapper .fc-daygrid-dot-event .fc-event-title {
+  font-weight: 400;
+}
 .eael-event-calendar-wrapper .eaelec-modal {
   position: fixed;
   left: 0;
