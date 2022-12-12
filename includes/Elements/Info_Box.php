@@ -1682,7 +1682,7 @@ class Info_Box extends Widget_Base
 
         $this->add_render_attribute('infobox_button', 'class', 'eael-infobox-button');
 
-	    if ( $settings['infobox_button_link_url']['url'] ) {
+	    if ( ! empty( $settings['infobox_button_link_url']['url'] ) ) {
 		    $this->add_link_attributes( 'infobox_button', $settings['infobox_button_link_url'] );
 	    }
 
