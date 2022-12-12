@@ -1520,7 +1520,7 @@ class Info_Box extends Widget_Base
             $this->add_render_attribute('eael_infobox_inner', 'class', 'icon-on-right');
         }
 
-	    if ( $settings['eael_show_infobox_clickable_link']['url'] ) {
+	    if ( ! empty( $settings['eael_show_infobox_clickable_link']['url'] ) ) {
 		    $this->add_link_attributes( 'infobox_clickable_link', $settings['eael_show_infobox_clickable_link'] );
 	    }
 
