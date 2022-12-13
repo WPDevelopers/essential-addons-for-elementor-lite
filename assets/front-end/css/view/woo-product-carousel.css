@@ -1198,6 +1198,16 @@
   letter-spacing: 14px;
   font-size: 14px;
 }
+.theme-buddyboss-theme #content .elementor-widget-container .eael-woo-product-carousel li.product {
+  background: transparent;
+  border-radius: 20px;
+}
+.theme-buddyboss-theme #content .elementor-widget-container .eael-woo-product-carousel li.product.type-product {
+  margin: 0 12px 20px;
+}
+.theme-buddyboss-theme #content .elementor-widget-container .eael-woo-product-carousel li.product .eael-product-carousel {
+  margin: 0;
+}
 .theme-buddyboss-theme #content .elementor-widget-container .preset-1 .eael-woo-product-carousel li.product .button, .theme-buddyboss-theme #content .elementor-widget-container .preset-2 .eael-woo-product-carousel li.product .button, .theme-buddyboss-theme #content .elementor-widget-container .preset-4 .eael-woo-product-carousel li.product .button {
   width: 35px;
   border-radius: 3px;
