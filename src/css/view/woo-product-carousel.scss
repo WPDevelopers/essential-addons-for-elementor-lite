@@ -1569,6 +1569,9 @@ $theme-preset4: #ec3b75;
                 .eael-product-carousel{
                     margin: 0;
                 }
+                .star-rating{
+                    min-width: 100px;
+                }
             }
         }
         .preset-1,.preset-2,.preset-4{
@@ -1582,14 +1585,26 @@ $theme-preset4: #ec3b75;
                         width: 35px;
                         line-height: 0;
                         font-size: 0;
+                        border: none;
+                        margin-right: 3px;
                     }
                 }
             }
         }
-    }
-    .preset-1,.preset-2,.preset-4{
-        li.product{
 
+        .preset-3{
+            li.product{
+                a.added_to_cart{
+                    line-height: 0;
+                    font-size: 0;
+                    width: 100%;
+                    color: inherit;
+                    border: none;
+                }
+                .eael-star-rating.star-rating{
+                    min-width: 100px;
+                }
+            }
         }
     }
     .woocommerce.eael-woo-product-carousel ul.products li.product:first-of-type{
