@@ -13,6 +13,9 @@
 		}
 	}
 	.fc {
+		.fc-timegrid .fc-daygrid-day-events{
+			position: relative;
+		}
 		.fc-daygrid-day-events{
 			position: absolute;
 			width: 100%;
