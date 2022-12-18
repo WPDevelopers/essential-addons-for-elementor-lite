@@ -123,67 +123,38 @@ class Business_Reviews extends Widget_Base {
 		$settings = $this->get_settings();
 		$settings['eael_business_reviews_source_key'] = get_option( 'eael_br_google_place_api_key' );
 
-		$response                        = [];
+		$response                        	  = [];
 		$business_reviews                     = [];
 		$business_reviews['source']           = ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'google-reviews';
 		$business_reviews['api_key']          = ! empty( $settings['eael_business_reviews_source_key'] ) ? esc_html( $settings['eael_business_reviews_source_key'] ) : '';
-		$business_reviews['opensea_type']     = ! empty( $settings['eael_business_reviews_opensea_type'] ) ? esc_html( $settings['eael_business_reviews_opensea_type'] ) : 'assets';
-		$business_reviews['opensea_filterby'] = ! empty( $settings['eael_business_reviews_opensea_filterby'] ) ? esc_html( $settings['eael_business_reviews_opensea_filterby'] ) : 'none';
-		$business_reviews['order']            = ! empty( $settings['eael_business_reviews_opensea_order'] ) ? esc_html( $settings['eael_business_reviews_opensea_order'] ) : 'desc';
-		$business_reviews['item_limit']       = ! empty( $settings['eael_business_reviews_opensea_item_limit'] ) ? esc_html( $settings['eael_business_reviews_opensea_item_limit'] ) : 9;
+		$business_reviews['reviews_sort']	  = sanitize_text_field( 'most_relevant' );
 
-		$expiration = ! empty( $settings['eael_business_reviews_opensea_data_cache_time'] ) ? absint( $settings['eael_business_reviews_opensea_data_cache_time'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
-		$md5        = md5( $business_reviews['api_key'] . $business_reviews['opensea_type'] . $business_reviews['opensea_filterby'] . $settings['eael_business_reviews_opensea_filterby_slug'] . $settings['eael_business_reviews_opensea_filterby_wallet'] . $business_reviews['item_limit'] . $business_reviews['order'] . $this->get_id() );
-		$cache_key  = "{$business_reviews['source']}_{$expiration}_{$md5}_nftg_cache";
+		$expiration = DAY_IN_SECONDS;
+		$md5        = md5( $business_reviews['api_key'] . $this->get_id() );
+		$cache_key  = "eael_{$business_reviews['source']}_{$expiration}_{$md5}_brev_cache";
 		$items      = get_transient( $cache_key );
 
 		$error_message = '';
 
-		if ( false === $items && 'opensea' === $business_reviews['source'] ) {
-			$business_reviews['filterby_slug']   = ! empty( $settings['eael_business_reviews_opensea_filterby_slug'] ) ? $settings['eael_business_reviews_opensea_filterby_slug'] : '';
-			$business_reviews['filterby_wallet'] = ! empty( $settings['eael_business_reviews_opensea_filterby_wallet'] ) ? $settings['eael_business_reviews_opensea_filterby_wallet'] : '';
-
-			$url   = "https://api.opensea.io/api/v1";
+		if ( false === $items && 'google-reviews' === $business_reviews['source'] ) {
+			$url   = "https://maps.googleapis.com/maps/api/place/details/json";
 			$param = array();
 
-			if ( 'collections' === $business_reviews['opensea_type'] ) {
-				$url .= "/collections";
+			$args = array(
+				'key' 	  => sanitize_text_field( 'API key value' ),
+				'placeid' => sanitize_text_field( 'ChIJ0cpDbNvBVTcRGX9JNhhpC8I' ),
+				'fields'  => sanitize_text_field( 'formatted_address,international_phone_number,name,rating,reviews,url,user_ratings_total,website,photos' ),
+			);
 
-				$args = array(
-					'limit'  => $business_reviews['item_limit'],
-					'offset' => 0,
-				);
-
-				if ( ! empty( $business_reviews['filterby_wallet'] ) ) {
-					$args['asset_owner'] = sanitize_text_field( $business_reviews['filterby_wallet'] );
-				}
-
-				$param = array_merge( $param, $args );
-			} elseif ( 'assets' === $business_reviews['opensea_type'] ) {
-				$url  .= "/assets";
-				$args = array(
-					'include_orders'  => true,
-					'limit'           => $business_reviews['item_limit'],
-					'order_direction' => $business_reviews['order'],
-				);
-
-				if ( ! empty( $business_reviews['filterby_slug'] ) && 'collection-slug' === $business_reviews['opensea_filterby'] ) {
-					$args['collection_slug'] = sanitize_text_field( $business_reviews['filterby_slug'] );
-				}
-
-				if ( ! empty( $business_reviews['filterby_wallet'] ) && 'wallet-address' === $business_reviews['opensea_filterby'] ) {
-					$args['owner'] = sanitize_text_field( $business_reviews['filterby_wallet'] );
-				}
-
-				$param = array_merge( $param, $args );
-			} else {
-				$error_message = esc_html__( 'Please provide a valid Type!', 'essential-addons-for-elementor-lite' );
+			if( ! empty( $business_reviews['reviews_sort'] ) ){
+				$args['reviews_sort'] = $business_reviews['reviews_sort'];
 			}
+			
+			$param = array_merge( $param, $args );
 
 			$headers = array(
 				'headers' => array(
 					'Content-Type' => 'application/json',
-					'X-API-KEY'    => $business_reviews['api_key'],
 				)
 			);
 			$options = array(
@@ -199,37 +170,12 @@ class Business_Reviews extends Widget_Base {
 				);
 
 				$body     = json_decode( wp_remote_retrieve_body( $response ) );
-				$response = 'assets' === $business_reviews['opensea_type'] && ! empty( $body->assets ) ? $body->assets : $body;
-				$response = 'collections' === $business_reviews['opensea_type'] && ! empty( $response->collections ) ? $response->collections : $response;
+				$response = 'OK' === $body->status ? $body->result : false;				
 
-				if ( is_array( $response ) ) {
-					$response = array_splice( $response, 0, absint( $settings['eael_business_reviews_opensea_item_limit'] ) );
+				if ( ! empty( $response ) ) {
 					set_transient( $cache_key, $response, $expiration );
-					$this->business_reviews_items_count = count( $response );
 				} else {
-					$error_message_text_wallet = $error_message_text_slug = '';
-
-					if ( isset( $body->assets ) && is_array( $body->assets ) && 0 === count( $body->assets ) ) {
-						$error_message_text_slug = __( 'Please provide a valid collection slug!', 'essential-addons-for-elementor-lite' );
-					}
-
-					if ( ! empty( $body->asset_owner ) && isset( $body->asset_owner[0] ) ) {
-						$error_message_text_wallet = ! empty( $body->asset_owner[0] ) ? $body->asset_owner[0] : __( 'Please provide a valid wallet address!', 'essential-addons-for-elementor-lite' );
-					} else if ( ! empty( $body->owner ) && isset( $body->owner[0] ) ) {
-						$error_message_text_wallet = ! empty( $body->owner[0] ) ? $body->owner[0] : __( 'Please provide a valid wallet address!', 'essential-addons-for-elementor-lite' );
-					}
-
-					if ( 'assets' === $business_reviews['opensea_type'] && 'collection-slug' === $business_reviews['opensea_filterby'] ) {
-						$error_message_text = $error_message_text_slug;
-					}
-
-					if ( 'collections' === $business_reviews['opensea_type'] || ( 'assets' === $business_reviews['opensea_type'] && 'wallet-address' === $business_reviews['opensea_filterby'] ) ) {
-						$error_message_text = $error_message_text_wallet;
-					}
-
-					if ( ! empty( $error_message_text ) ) {
-						$error_message = esc_html( $error_message_text );
-					}
+					$error_message = $this->fetch_api_response_error_message($body->status);
 				}
 			}
 
@@ -241,8 +187,7 @@ class Business_Reviews extends Widget_Base {
 			return $data;
 		}
 
-		$response                      = $items ? $items : $response;
-		$this->business_reviews_items_count = count( $response );
+		$response = $items ? $items : $response;
 
 		$data = [
 			'items'         => $response,
@@ -252,8 +197,50 @@ class Business_Reviews extends Widget_Base {
 		return $data;
 	}
 
+	public function fetch_api_response_error_message( $status = 'OK' ){
+		$error_message = '';
+
+		switch( $status ){
+			case 'OK':
+				break;
+
+			case 'ZERO_RESULTS':
+				$error_message = esc_html__( 'The referenced location, place_id, was valid but no longer refers to a valid result. This may occur if the establishment is no longer in business.', 'essential-addons-for-elementor-lite' );
+				break;
+
+			case 'NOT_FOUND':
+				$error_message = esc_html__( 'The referenced location, place_id, was not found in the Places database.', 'essential-addons-for-elementor-lite' );
+				break;
+
+			case 'INVALID_REQUEST':
+				$error_message = esc_html__( 'The API request was malformed.', 'essential-addons-for-elementor-lite' );
+				break;
+
+			case 'OVER_QUERY_LIMIT':
+				$error_message = esc_html__( 'You have exceeded the QPS limits. Or, Billing has not been enabled on your account. Or, The monthly $200 credit, or a self-imposed usage cap, has been exceeded. Or, The provided method of payment is no longer valid (for example, a credit card has expired).', 'essential-addons-for-elementor-lite' );
+				break;
+
+			case 'REQUEST_DENIED':
+				$error_message = esc_html__( 'The request is missing an API key. Or, The key parameter is invalid.', 'essential-addons-for-elementor-lite' );
+				break;
+
+			case 'UNKNOWN_ERROR':
+				$error_message = esc_html__( 'An unknown error occurred.', 'essential-addons-for-elementor-lite' );
+				break;
+
+			default:
+				break;								
+		}
+
+		return $error_message;
+	}
+
+	public function print_business_reviews( $business_review_items ){
+		
+	}
+
 	protected function render() {
-		echo "Business Reviews";
-		$api_data = $this->fetch_business_reviews_from_api(); 
+		$business_review_items = $this->fetch_business_reviews_from_api(); 
+		$this->print_business_reviews( $business_review_items );
 	}
 }
