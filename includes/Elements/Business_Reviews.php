@@ -30,7 +30,7 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eaicon-nft-gallery';
+		return 'eaicon-business-reviews';
 	}
 
 	public function get_categories() {
@@ -236,7 +236,55 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function print_business_reviews( $business_review_items ){
+		$settings = $this->get_settings();
+		ob_start();
+
+		$business_reviews   = [];
+		$items         = isset( $business_review_items['items'] ) ? $business_review_items['items'] : false;
+		$error_message = ! empty( $business_review_items['error_message'] ) ? $business_review_items['error_message'] : "";
+
+		$business_reviews['source']            = ! empty( $settings['eael_busines$business_reviews_sources'] ) ? esc_html( $settings['eael_busines$business_reviews_sources'] ) : 'opensea';
+		$business_reviews['layout']            = ! empty( $settings['eael_busines$business_reviews_items_layout'] ) ? $settings['eael_busines$business_reviews_items_layout'] : 'grid';
+		$business_reviews['preset']            = ! empty( $settings['eael_busines$business_reviews_style_preset'] ) && 'grid' === $business_reviews['layout'] ? $settings['eael_busines$business_reviews_style_preset'] : 'preset-1';
 		
+		$this->add_render_attribute( 'eael-business-reviews-wrapper', [
+			'class'                 => [
+				'eael-business-reviews-wrapper',
+				'eael-business-reviews-' . $this->get_id(),
+				'clearfix',
+			],
+		] );
+
+		$this->add_render_attribute(
+			'eael-business-reviews-items',
+			[
+				'id'    => 'eael-business-reviews-' . esc_attr( $this->get_id() ),
+				'class' => [
+					'eael-business-reviews-items',
+					'eael-reviews-' . esc_attr( $business_reviews['layout'] ),
+					esc_attr( $business_reviews['preset'] ),
+				],
+			]
+		);
+		?>
+
+		<div <?php echo $this->get_render_attribute_string('eael-business-reviews-wrapper') ?> >
+			<?php if ( is_object( $items ) && ! is_null( $items ) ) : ?>
+			<div <?php echo $this->get_render_attribute_string('eael-business-reviews-items'); ?> >
+					<?php foreach ($items as $item) :
+						
+						$item_formatted['title'] = ! empty( $item->name ) ? $item->name : '';
+						
+					endforeach; ?>
+				<!-- /.column  -->
+			</div>
+			<?php else: ?>
+				<?php printf( '<div class="eael-business-reviews-error-message">%s</div>', esc_html( $error_message ) ); ?>
+			<?php endif; ?>
+		</div>
+
+		<?php
+		echo ob_get_clean();
 	}
 
 	protected function render() {
