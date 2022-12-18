@@ -81,7 +81,7 @@ class Business_Reviews extends Widget_Base {
         if (empty(get_option('eael_br_google_place_api_key'))) {
             $this->add_control('eael_br_google_place_api_key_missing', [
                 'type' => Controls_Manager::RAW_HTML,
-                'raw' => sprintf(__('Google Place API key is missing. Please add it from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-elementor'), '<strong>', '</strong>'),
+                'raw' => sprintf(__('Google Place API key is missing. Please add it from %sDashboard >> Essential Addons >> Elements >> Business Reviews %sSettings', 'essential-addons-elementor'), '<strong>', '</strong>'),
                 'content_classes' => 'eael-warning',
                 'condition' => [
                     'eael_business_reviews_sources' => 'google-reviews',
