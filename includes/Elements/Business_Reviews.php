@@ -284,12 +284,12 @@ class Business_Reviews extends Widget_Base {
 						
 						if( is_array( $item_formatted['reviews'] ) && count( $item_formatted['reviews'] ) ){
 							foreach( $item_formatted['reviews'] as $single_review ){
-								$item_formatted['review_author_name'] = ! empty( $single_review->author_name ) ? $business_review_obj->author_name : '';
-								$item_formatted['review_author_url'] = ! empty( $single_review->author_url ) ? $business_review_obj->author_url : '';
-								$item_formatted['review_profile_photo_url'] = ! empty( $single_review->profile_photo_url ) ? $business_review_obj->profile_photo_url : '';
-								$item_formatted['review_rating'] = ! empty( $single_review->rating ) ? $business_review_obj->rating : '';
-								$item_formatted['review_relative_time_description'] = ! empty( $single_review->relative_time_description ) ? $business_review_obj->relative_time_description : '';
-								$item_formatted['review_text'] = ! empty( $single_review->text ) ? $business_review_obj->text : '';
+								$item_formatted['review_author_name'] = ! empty( $single_review->author_name ) ? $single_review->author_name : '';
+								$item_formatted['review_author_url'] = ! empty( $single_review->author_url ) ? $single_review->author_url : '';
+								$item_formatted['review_profile_photo_url'] = ! empty( $single_review->profile_photo_url ) ? $single_review->profile_photo_url : '';
+								$item_formatted['review_rating'] = ! empty( $single_review->rating ) ? $single_review->rating : '';
+								$item_formatted['review_relative_time_description'] = ! empty( $single_review->relative_time_description ) ? $single_review->relative_time_description : '';
+								$item_formatted['review_text'] = ! empty( $single_review->text ) ? $single_review->text : '';
 							}
 						}
 					?>
