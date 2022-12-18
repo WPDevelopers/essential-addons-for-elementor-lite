@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div id="eael-business-reviews-popup" class="modal__content__popup">
                     <div class="modal__head">
                         <p><?php _e( 'Business Reviews Settings', 'essential-addons-for-elementor-lite' ); ?></p>
@@ -64,7 +64,7 @@
                             <button class="eael-button button__white eael-admin-popup-close"><?php _e( 'Cancel', 'essential-addons-for-elementor-lite' ); ?></button>
                         </div>
                         <div class="config__api mt15">
-                            <a target="_blank" href="https://essential-addons.com/elementor/docs/social-login-recaptcha"
+                            <a target="_blank" href="#"
                                class="config__api"> <?php _e( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ); ?></a>
                         </div>
                     </div>
