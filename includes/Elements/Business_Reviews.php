@@ -40,6 +40,7 @@ class Business_Reviews extends Widget_Base {
 	public function get_keywords() {
 		return [
 			'reviews',
+			'ea reviews',
 			'business reviews',
 			'ea business reviews',
 			'google reviews',
@@ -104,7 +105,15 @@ class Business_Reviews extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+     * API Call to Get Business Reviews
+     */
+	public function fetch_business_reviews_from_api(){
+		return [];
+	}
+
 	protected function render() {
 		echo "Business Reviews";
+		$api_data = $this->fetch_business_reviews_from_api(); 
 	}
 }
