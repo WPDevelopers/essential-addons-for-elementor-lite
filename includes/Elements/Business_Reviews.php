@@ -141,7 +141,7 @@ class Business_Reviews extends Widget_Base {
 			$param = array();
 
 			$args = array(
-				'key' 	  => sanitize_text_field( 'API key value' ),
+				'key' 	  => sanitize_text_field( $business_reviews['api_key'] ),
 				'placeid' => sanitize_text_field( 'ChIJ0cpDbNvBVTcRGX9JNhhpC8I' ),
 				'fields'  => sanitize_text_field( 'formatted_address,international_phone_number,name,rating,reviews,url,user_ratings_total,website,photos' ),
 			);
