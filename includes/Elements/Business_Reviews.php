@@ -105,6 +105,6 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	protected function render() {
-		printf('%', esc_html('Hello Business Reviews'));
+		echo "Business Reviews";
 	}
 }
