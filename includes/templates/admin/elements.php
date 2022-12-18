@@ -235,6 +235,7 @@ $elements = [
 				'title'     => __( 'Business Reviews', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/business-reviews/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-business-reviews/',
+				'setting'   => [ 'id' => 'eael-business-reviews-setting' ],
 				'promotion' => 'new',
 			],
 		]
