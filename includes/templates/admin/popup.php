@@ -50,7 +50,7 @@
                             <div class="eael-input__inline">
                                 <label><?php _e( 'Google Place API Key:', 'essential-addons-for-elementor-lite' ); ?></label>
                                 <input name="br_google_place_api_key" id="br_google_place_api_key"
-                                        value="<?php echo esc_attr( get_option( 'br_google_place_api_key' ) ); ?>"
+                                        value="<?php echo esc_attr( get_option( 'eael_br_google_place_api_key' ) ); ?>"
                                         class="eael-form__control" type="text" placeholder="Google Place API Key">
                             </div>
                         </div>
