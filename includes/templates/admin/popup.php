@@ -64,7 +64,7 @@
                             <button class="eael-button button__white eael-admin-popup-close"><?php _e( 'Cancel', 'essential-addons-for-elementor-lite' ); ?></button>
                         </div>
                         <div class="config__api mt15">
-                            <a target="_blank" href="#"
+                            <a target="_blank" href="https://developers.google.com/maps/documentation/places/web-service/get-api-key"
                                class="config__api"> <?php _e( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ); ?></a>
                         </div>
                     </div>
