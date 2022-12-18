@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("var beeHiveSwiper = function beeHiveSwiper($scope, $) {\n  var bhSwiper;\n\n  if ('undefined' === typeof Swiper) {\n    bhSwiper = elementorFrontend.utils.swiper;\n  } else {\n    bhSwiper = Swiper;\n  } // Init swiper slider\n\n\n  new bhSwiper('.swiper-slider-container', {\n    effect: 'fade',\n    autoplay: {\n      delay: 5000,\n      disableOnInteraction: false\n    },\n    navigation: {\n      nextEl: '.swiper-button-next',\n      prevEl: '.swiper-button-prev'\n    }\n  });\n};\n\njQuery(window).on(\"elementor/frontend/init\", function () {\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/beehive-image-slider.default\", beeHiveSwiper);\n});\n\n//# sourceURL=webpack:///./src/js/view/beehive-elements.js?");
+eval("var beeHiveSwiper = function beeHiveSwiper($scope, $) {\n  var bhSwiper;\n  if ('undefined' === typeof Swiper) {\n    bhSwiper = elementorFrontend.utils.swiper;\n  } else {\n    bhSwiper = Swiper;\n  }\n\n  // Init swiper slider\n  new bhSwiper('.swiper-slider-container', {\n    effect: 'fade',\n    autoplay: {\n      delay: 5000,\n      disableOnInteraction: false\n    },\n    navigation: {\n      nextEl: '.swiper-button-next',\n      prevEl: '.swiper-button-prev'\n    }\n  });\n};\njQuery(window).on(\"elementor/frontend/init\", function () {\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/beehive-image-slider.default\", beeHiveSwiper);\n});\n\n//# sourceURL=webpack:///./src/js/view/beehive-elements.js?");
 
 /***/ })
 

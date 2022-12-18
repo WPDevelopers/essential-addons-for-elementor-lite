@@ -57,7 +57,7 @@
 
 @media all and (min-width: 1025px) {
   .eael-countdown-label-block .eael-countdown-digits,
-.eael-countdown-label-block .eael-countdown-label {
+  .eael-countdown-label-block .eael-countdown-label {
     display: block;
     text-align: center;
   }
@@ -65,22 +65,22 @@
 
 @media all and (max-width: 1025px) {
   .eael-countdown-label-inline-tablet .eael-countdown-digits,
-.eael-countdown-label-inline-tablet .eael-countdown-label {
+  .eael-countdown-label-inline-tablet .eael-countdown-label {
     display: inline-block !important;
   }
   .eael-countdown-label-block-tablet .eael-countdown-digits,
-.eael-countdown-label-block-tablet .eael-countdown-label {
+  .eael-countdown-label-block-tablet .eael-countdown-label {
     display: block !important;
   }
 }
 
 @media all and (max-width: 767px) {
   .eael-countdown-label-inline-mobile .eael-countdown-digits,
-.eael-countdown-label-inline-mobile .eael-countdown-label {
+  .eael-countdown-label-inline-mobile .eael-countdown-label {
     display: inline-block !important;
   }
   .eael-countdown-label-block-mobile .eael-countdown-digits,
-.eael-countdown-label-block-mobile .eael-countdown-label {
+  .eael-countdown-label-block-mobile .eael-countdown-label {
     display: block !important;
   }
   .eael-countdown-container .eael-countdown-item > div {
