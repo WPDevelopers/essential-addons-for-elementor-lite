@@ -7,17 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use \Elementor\Controls_Manager;
-use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
-use \Elementor\Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Image_Size;
-use \Elementor\Group_Control_Typography;
-use Elementor\Icons_Manager;
-use \Elementor\Plugin;
-use \Elementor\Utils;
 use \Elementor\Widget_Base;
-use \Essential_Addons_Elementor\Classes\Helper;
-use ParagonIE\Sodium\Core\Curve25519\Ge\P2;
 
 class Business_Reviews extends Widget_Base {
 	
