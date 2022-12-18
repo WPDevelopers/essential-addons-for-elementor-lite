@@ -898,6 +898,11 @@ trait Ajax_Handler {
 			update_option( 'eael_fb_app_secret', sanitize_text_field( $settings['lr_fb_app_secret'] ) );
 		}
 
+		// Business Reviews : Saving Google Place Api Key
+		if ( isset( $settings['br_google_place_api_key'] ) ) {
+			update_option( 'eael_br_google_place_api_key', sanitize_text_field( $settings['br_google_place_api_key'] ) );
+		}
+
 		// Saving Google Map Api Key
 		if ( isset( $settings['google-map-api'] ) ) {
 			update_option( 'eael_save_google_map_api', sanitize_text_field( $settings['google-map-api'] ) );
