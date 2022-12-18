@@ -240,7 +240,7 @@ class Business_Reviews extends Widget_Base {
 		ob_start();
 
 		$business_reviews   = [];
-		$items         = isset( $business_review_items['items'] ) ? $business_review_items['items'] : false;
+		$business_review_obj         = isset( $business_review_items['items'] ) ? $business_review_items['items'] : false;
 		$error_message = ! empty( $business_review_items['error_message'] ) ? $business_review_items['error_message'] : "";
 
 		$business_reviews['source']            = ! empty( $settings['eael_busines$business_reviews_sources'] ) ? esc_html( $settings['eael_busines$business_reviews_sources'] ) : 'opensea';
@@ -269,13 +269,13 @@ class Business_Reviews extends Widget_Base {
 		?>
 
 		<div <?php echo $this->get_render_attribute_string('eael-business-reviews-wrapper') ?> >
-			<?php if ( is_object( $items ) && ! is_null( $items ) ) : ?>
+			<?php if ( is_object( $business_review_obj ) && ! is_null( $business_review_obj ) ) : ?>
 			<div <?php echo $this->get_render_attribute_string('eael-business-reviews-items'); ?> >
-					<?php foreach ($items as $item) :
-						
-						$item_formatted['title'] = ! empty( $item->name ) ? $item->name : '';
-						
-					endforeach; ?>
+					<?php 
+						echo "<pre>";
+						print_r($business_review_obj);
+						$item_formatted['title'] = ! empty( $business_review_obj->name ) ? $business_review_obj->name : '';
+					?>
 				<!-- /.column  -->
 			</div>
 			<?php else: ?>
