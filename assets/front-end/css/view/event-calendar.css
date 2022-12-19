@@ -440,7 +440,7 @@ span.fc-day-number {
     font-size: 12px;
   }
   .fc-right,
-  .fc-left {
+.fc-left {
     width: 100%;
     text-align: center;
   }
@@ -473,7 +473,7 @@ span.fc-day-number {
     font-size: 14px;
   }
   .fc-basic-view .fc-day-number,
-  .fc-basic-view .fc-week-number {
+.fc-basic-view .fc-week-number {
     padding: 0;
     margin: 0;
     font-size: 10px;

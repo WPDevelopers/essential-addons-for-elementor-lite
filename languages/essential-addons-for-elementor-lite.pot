@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-12-18 17:27+0000\n"
+"POT-Creation-Date: 2022-12-19 06:55+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -74,7 +74,7 @@ msgstr ""
 msgid "Install Now!"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:188, ../includes/Classes/WPDeveloper_Setup_Wizard.php:524, ../includes/Classes/WPDeveloper_Setup_Wizard.php:550, ../includes/Traits/Ajax_Handler.php:817, ../includes/Traits/Ajax_Handler.php:956, ../includes/Traits/Ajax_Handler.php:986, ../includes/Traits/Ajax_Handler.php:1003, ../includes/Traits/Helper.php:337
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:188, ../includes/Classes/WPDeveloper_Setup_Wizard.php:524, ../includes/Classes/WPDeveloper_Setup_Wizard.php:550, ../includes/Traits/Ajax_Handler.php:817, ../includes/Traits/Ajax_Handler.php:961, ../includes/Traits/Ajax_Handler.php:991, ../includes/Traits/Ajax_Handler.php:1008, ../includes/Traits/Helper.php:337
 msgid "you are not allowed to do this action"
 msgstr ""
 
@@ -645,7 +645,7 @@ msgstr ""
 msgid "Data Source"
 msgstr ""
 
-#: ../includes/Elements/Advanced_Data_Table.php:80, ../includes/Elements/Business_Reviews.php:72, ../includes/Elements/Event_Calendar.php:93, ../includes/Elements/Facebook_Feed.php:120, ../includes/Elements/NFT_Gallery.php:78, ../includes/Elements/Product_Grid.php:335, ../includes/Elements/Sticky_Video.php:144, ../includes/Elements/Woo_Product_Gallery.php:365, ../includes/Traits/Controls.php:67
+#: ../includes/Elements/Advanced_Data_Table.php:80, ../includes/Elements/Business_Reviews.php:62, ../includes/Elements/Event_Calendar.php:93, ../includes/Elements/Facebook_Feed.php:120, ../includes/Elements/NFT_Gallery.php:78, ../includes/Elements/Product_Grid.php:335, ../includes/Elements/Sticky_Video.php:144, ../includes/Elements/Woo_Product_Gallery.php:365, ../includes/Traits/Controls.php:67
 msgid "Source"
 msgstr ""
 
@@ -1001,7 +1001,7 @@ msgstr ""
 msgid "Content Type"
 msgstr ""
 
-#: ../includes/Elements/Adv_Accordion.php:339, ../includes/Elements/Adv_Tabs.php:172, ../includes/Elements/Adv_Tabs.php:281, ../includes/Elements/Adv_Tabs.php:764, ../includes/Elements/Business_Reviews.php:101, ../includes/Elements/Cta_Box.php:253, ../includes/Elements/Cta_Box.php:274, ../includes/Elements/Data_Table.php:256, ../includes/Elements/Data_Table.php:371, ../includes/Elements/Data_Table.php:385, ../includes/Elements/Event_Calendar.php:272, ../includes/Elements/Event_Calendar.php:1641, ../includes/Elements/Facebook_Feed.php:1023, ../includes/Elements/Feature_List.php:192, ../includes/Elements/Feature_List.php:696, ../includes/Elements/Flip_Box.php:157, ../includes/Elements/Image_Accordion.php:97, ../includes/Elements/Image_Accordion.php:208, ../includes/Elements/Image_Accordion.php:516, ../includes/Elements/Info_Box.php:252, ../includes/Elements/Interactive_Circle.php:120, ../includes/Elements/Interactive_Circle.php:161, ../includes/Elements/Interactive_Circle.php:678, ../includes/Elements/NFT_Gallery.php:518, ../includes/Elements/Post_Timeline.php:208, ../includes/Elements/Product_Grid.php:2500, ../includes/Elements/Tooltip.php:143, ../includes/Elements/Tooltip.php:276, ../includes/Elements/Woo_Product_Carousel.php:1596, ../includes/Elements/Woo_Product_Gallery.php:1848
+#: ../includes/Elements/Adv_Accordion.php:339, ../includes/Elements/Adv_Tabs.php:172, ../includes/Elements/Adv_Tabs.php:281, ../includes/Elements/Adv_Tabs.php:764, ../includes/Elements/Business_Reviews.php:102, ../includes/Elements/Cta_Box.php:253, ../includes/Elements/Cta_Box.php:274, ../includes/Elements/Data_Table.php:256, ../includes/Elements/Data_Table.php:371, ../includes/Elements/Data_Table.php:385, ../includes/Elements/Event_Calendar.php:272, ../includes/Elements/Event_Calendar.php:1641, ../includes/Elements/Facebook_Feed.php:1023, ../includes/Elements/Feature_List.php:192, ../includes/Elements/Feature_List.php:696, ../includes/Elements/Flip_Box.php:157, ../includes/Elements/Image_Accordion.php:97, ../includes/Elements/Image_Accordion.php:208, ../includes/Elements/Image_Accordion.php:516, ../includes/Elements/Info_Box.php:252, ../includes/Elements/Interactive_Circle.php:120, ../includes/Elements/Interactive_Circle.php:161, ../includes/Elements/Interactive_Circle.php:678, ../includes/Elements/NFT_Gallery.php:518, ../includes/Elements/Post_Timeline.php:208, ../includes/Elements/Product_Grid.php:2500, ../includes/Elements/Tooltip.php:143, ../includes/Elements/Tooltip.php:276, ../includes/Elements/Woo_Product_Carousel.php:1596, ../includes/Elements/Woo_Product_Gallery.php:1848
 msgid "Content"
 msgstr ""
 
@@ -1089,7 +1089,7 @@ msgstr ""
 msgid "Caret Color"
 msgstr ""
 
-#: ../includes/Elements/Adv_Tabs.php:80, ../includes/Elements/Business_Reviews.php:89, ../includes/Elements/Countdown.php:232, ../includes/Elements/Facebook_Feed.php:253, ../includes/Elements/Filterable_Gallery.php:171, ../includes/Elements/NFT_Gallery.php:225, ../includes/Elements/Product_Grid.php:232, ../includes/Elements/Product_Grid.php:426, ../includes/Elements/Progress_Bar.php:75, ../includes/Elements/Progress_Bar.php:101, ../includes/Elements/Simple_Menu.php:155, ../includes/Elements/Woo_Cart.php:146, ../includes/Elements/Woo_Checkout.php:124, ../includes/Elements/Woo_Product_Carousel.php:209, ../includes/Elements/Woo_Product_Gallery.php:310, ../includes/Elements/Woo_Product_Gallery.php:445, ../includes/Traits/Controls.php:431, ../includes/Traits/Controls.php:560
+#: ../includes/Elements/Adv_Tabs.php:80, ../includes/Elements/Business_Reviews.php:90, ../includes/Elements/Countdown.php:232, ../includes/Elements/Facebook_Feed.php:253, ../includes/Elements/Filterable_Gallery.php:171, ../includes/Elements/NFT_Gallery.php:225, ../includes/Elements/Product_Grid.php:232, ../includes/Elements/Product_Grid.php:426, ../includes/Elements/Progress_Bar.php:75, ../includes/Elements/Progress_Bar.php:101, ../includes/Elements/Simple_Menu.php:155, ../includes/Elements/Woo_Cart.php:146, ../includes/Elements/Woo_Checkout.php:124, ../includes/Elements/Woo_Product_Carousel.php:209, ../includes/Elements/Woo_Product_Gallery.php:310, ../includes/Elements/Woo_Product_Gallery.php:445, ../includes/Traits/Controls.php:431, ../includes/Traits/Controls.php:560
 msgid "Layout"
 msgstr ""
 
@@ -1169,7 +1169,7 @@ msgstr ""
 msgid "Tab Title 3"
 msgstr ""
 
-#: ../includes/Elements/Adv_Tabs.php:376, ../includes/Elements/Event_Calendar.php:141, ../includes/Elements/Image_Accordion.php:61, ../includes/Elements/Image_Accordion.php:296, ../includes/Elements/Interactive_Circle.php:62, ../includes/Elements/Interactive_Circle.php:304, ../includes/Elements/Login_Register.php:282, ../includes/Elements/Login_Register.php:2151, ../includes/Elements/Progress_Bar.php:306, ../includes/Elements/Progress_Bar.php:517, ../includes/Elements/Simple_Menu.php:109, ../includes/Elements/Woo_Cart.php:1141, ../includes/Traits/Admin.php:107
+#: ../includes/Elements/Adv_Tabs.php:376, ../includes/Elements/Business_Reviews.php:55, ../includes/Elements/Event_Calendar.php:141, ../includes/Elements/Image_Accordion.php:61, ../includes/Elements/Image_Accordion.php:296, ../includes/Elements/Interactive_Circle.php:62, ../includes/Elements/Interactive_Circle.php:304, ../includes/Elements/Login_Register.php:282, ../includes/Elements/Login_Register.php:2151, ../includes/Elements/Progress_Bar.php:306, ../includes/Elements/Progress_Bar.php:517, ../includes/Elements/Simple_Menu.php:109, ../includes/Elements/Woo_Cart.php:1141, ../includes/Traits/Admin.php:107
 msgid "General"
 msgstr ""
 
@@ -1445,16 +1445,36 @@ msgstr ""
 msgid "<strong>Better Payment</strong> is not installed/activated on your site. Please install and activate <a href=\"plugin-install.php?s=better-payment&tab=search&type=tag\" target=\"_blank\">Better Payment</a> first."
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:29, ../includes/templates/admin/elements.php:235
+#: ../includes/Elements/Business_Reviews.php:19, ../includes/templates/admin/elements.php:235
 msgid "Business Reviews"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:65, ../includes/Elements/NFT_Gallery.php:71, ../includes/Elements/Woo_Product_Carousel.php:729, ../includes/Traits/Controls.php:59, ../includes/Traits/Controls.php:233
-msgid "Query"
+#: ../includes/Elements/Business_Reviews.php:66, ../includes/templates/admin/popup.php:48
+msgid "Google Reviews"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:76, ../includes/templates/admin/popup.php:48
-msgid "Google Reviews"
+#: ../includes/Elements/Business_Reviews.php:198
+msgid "The referenced location, place_id, was valid but no longer refers to a valid result. This may occur if the establishment is no longer in business."
+msgstr ""
+
+#: ../includes/Elements/Business_Reviews.php:202
+msgid "The referenced location, place_id, was not found in the Places database."
+msgstr ""
+
+#: ../includes/Elements/Business_Reviews.php:206
+msgid "The API request was malformed."
+msgstr ""
+
+#: ../includes/Elements/Business_Reviews.php:210
+msgid "You have exceeded the QPS limits. Or, Billing has not been enabled on your account. Or, The monthly $200 credit, or a self-imposed usage cap, has been exceeded. Or, The provided method of payment is no longer valid (for example, a credit card has expired)."
+msgstr ""
+
+#: ../includes/Elements/Business_Reviews.php:214
+msgid "The request is missing an API key. Or, The key parameter is invalid."
+msgstr ""
+
+#: ../includes/Elements/Business_Reviews.php:218
+msgid "An unknown error occurred."
 msgstr ""
 
 #: ../includes/Elements/Caldera_Forms.php:27, ../includes/Elements/Caldera_Forms.php:89
@@ -5563,6 +5583,10 @@ msgstr ""
 #. translators: %s: Error String
 #: ../includes/Elements/Login_Register.php:6053
 msgid "Error! It is required to use %s field with %s Field."
+msgstr ""
+
+#: ../includes/Elements/NFT_Gallery.php:71, ../includes/Elements/Woo_Product_Carousel.php:729, ../includes/Traits/Controls.php:59, ../includes/Traits/Controls.php:233
+msgid "Query"
 msgstr ""
 
 #: ../includes/Elements/NFT_Gallery.php:82
