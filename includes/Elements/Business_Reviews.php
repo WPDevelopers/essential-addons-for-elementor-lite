@@ -294,19 +294,19 @@ class Business_Reviews extends Widget_Base {
 
 		// Testimonial Slider
 		$testimonial_classes = " eael-testimonial-align-left ";
-		$this->add_render_attribute('testimonial-slider-wrap', 'class', 'swiper-container-wrap');
-		$this->add_render_attribute('testimonial-slider-wrap', 'class', 'eael-arrow-box');
-		$this->add_render_attribute('testimonial-slider-wrap', 'class', 'swiper-container-wrap-dots-outside');
+		$this->add_render_attribute('business-reviews-wrap', 'class', 'swiper-container-wrap');
+		$this->add_render_attribute('business-reviews-wrap', 'class', 'eael-arrow-box');
+		$this->add_render_attribute('business-reviews-wrap', 'class', 'swiper-container-wrap-dots-outside');
 
-		$this->add_render_attribute('testimonial-slider-wrap', [
-			'class' => ['eael-testimonial-slider', 'default-style'],
+		$this->add_render_attribute('business-reviews-wrap', [
+			'class' => ['eael-business-reviews', 'default-style'],
 			'id'    => 'eael-testimonial-' . esc_attr($this->get_id()),
 		]);
 
-		$this->add_render_attribute('testimonial-slider', [
+		$this->add_render_attribute('business-reviews', [
 			'class' => [
 				'swiper-container',
-				'eael-testimonial-slider-main',
+				'eael-business-reviews-main',
 				'swiper-container-' . esc_attr($this->get_id())
 			],
 			'data-pagination'   => '.swiper-pagination-' . esc_attr($this->get_id()),
@@ -314,27 +314,27 @@ class Business_Reviews extends Widget_Base {
 			'data-arrow-prev'   => '.swiper-button-prev-' . esc_attr($this->get_id())
 		]);
 
-		$this->add_render_attribute('testimonial-slider', 'data-items', 1);
-		$this->add_render_attribute('testimonial-slider', 'data-items-tablet', 1);
-		$this->add_render_attribute('testimonial-slider', 'data-items-mobile', 1);
-		$this->add_render_attribute('testimonial-slider', 'data-margin', 10);
-		$this->add_render_attribute('testimonial-slider', 'data-margin-tablet', 10);
-		$this->add_render_attribute('testimonial-slider', 'data-margin-mobile', 10);
-		$this->add_render_attribute('testimonial-slider', 'data-effect', 'slide');
-		$this->add_render_attribute('testimonial-slider', 'data-speed', 1000);
-		$this->add_render_attribute('testimonial-slider', 'data-loop', 1);
-		$this->add_render_attribute('testimonial-slider', 'data-grab-cursor', 1);
-		$this->add_render_attribute('testimonial-slider', 'data-arrows', 1);
-		$this->add_render_attribute('testimonial-slider', 'data-dots', 1);
-		$this->add_render_attribute('testimonial-slider', 'data-autoplay_speed', 2000);
-		$this->add_render_attribute('testimonial-slider', 'data-pause-on-hover', 'true');
+		$this->add_render_attribute('business-reviews', 'data-items', 1);
+		$this->add_render_attribute('business-reviews', 'data-items-tablet', 1);
+		$this->add_render_attribute('business-reviews', 'data-items-mobile', 1);
+		$this->add_render_attribute('business-reviews', 'data-margin', 10);
+		$this->add_render_attribute('business-reviews', 'data-margin-tablet', 10);
+		$this->add_render_attribute('business-reviews', 'data-margin-mobile', 10);
+		$this->add_render_attribute('business-reviews', 'data-effect', 'slide');
+		$this->add_render_attribute('business-reviews', 'data-speed', 1000);
+		$this->add_render_attribute('business-reviews', 'data-loop', 1);
+		$this->add_render_attribute('business-reviews', 'data-grab-cursor', 1);
+		$this->add_render_attribute('business-reviews', 'data-arrows', 1);
+		$this->add_render_attribute('business-reviews', 'data-dots', 1);
+		$this->add_render_attribute('business-reviews', 'data-autoplay_speed', 2000);
+		$this->add_render_attribute('business-reviews', 'data-pause-on-hover', 'true');
 		?>
 
-        <div <?php echo $this->get_render_attribute_string('testimonial-slider-wrap'); ?>>
+        <div <?php echo $this->get_render_attribute_string('business-reviews-wrap'); ?>>
 			<?php
 			//$this->render_arrows();
 			?>
-            <div <?php echo $this->get_render_attribute_string('testimonial-slider'); ?>>
+            <div <?php echo $this->get_render_attribute_string('business-reviews'); ?>>
 
                 <div class="swiper-wrapper">
 					<?php
@@ -361,7 +361,7 @@ class Business_Reviews extends Widget_Base {
 										//$this->_render_user_description($item, $settings);
 										//$this->_render_user_ratings($item);
 										//$this->_render_user_meta($item);
-										echo $item_formatted['website'];
+										echo $item_formatted['website'] . ' ' . $i;
 										?>
                                     </div>
                                 </div>
