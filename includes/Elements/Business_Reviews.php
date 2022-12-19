@@ -261,28 +261,28 @@ class Business_Reviews extends Widget_Base {
 		<div <?php echo $this->get_render_attribute_string('eael-business-reviews-wrapper') ?> >
 			<?php if ( is_object( $business_review_obj ) && ! is_null( $business_review_obj ) ) : ?>
 			<div <?php echo $this->get_render_attribute_string('eael-business-reviews-items'); ?> >
-            <?php 
-						$item_formatted['formatted_address'] = ! empty( $business_review_obj->formatted_address ) ? $business_review_obj->formatted_address : '';
-						$item_formatted['international_phone_number'] = ! empty( $business_review_obj->international_phone_number ) ? $business_review_obj->international_phone_number : '';
-						$item_formatted['name'] = ! empty( $business_review_obj->name ) ? $business_review_obj->name : '';
-						$item_formatted['photos'] = ! empty( $business_review_obj->photos ) ? $business_review_obj->photos : [];
-						$item_formatted['rating'] = ! empty( $business_review_obj->rating ) ? $business_review_obj->rating : '';
-						$item_formatted['reviews'] = ! empty( $business_review_obj->reviews ) ? $business_review_obj->reviews : [];
-						$item_formatted['url'] = ! empty( $business_review_obj->url ) ? $business_review_obj->url : '#';
-						$item_formatted['user_ratings_total'] = ! empty( $business_review_obj->user_ratings_total ) ? $business_review_obj->user_ratings_total : 0;
-						$item_formatted['website'] = ! empty( $business_review_obj->website ) ? $business_review_obj->website : '#';
-						
-						if( is_array( $item_formatted['reviews'] ) && count( $item_formatted['reviews'] ) ){
-							foreach( $item_formatted['reviews'] as $single_review ){
-								$item_formatted['review_author_name'] = ! empty( $single_review->author_name ) ? $single_review->author_name : '';
-								$item_formatted['review_author_url'] = ! empty( $single_review->author_url ) ? $single_review->author_url : '';
-								$item_formatted['review_profile_photo_url'] = ! empty( $single_review->profile_photo_url ) ? $single_review->profile_photo_url : '';
-								$item_formatted['review_rating'] = ! empty( $single_review->rating ) ? $single_review->rating : '';
-								$item_formatted['review_relative_time_description'] = ! empty( $single_review->relative_time_description ) ? $single_review->relative_time_description : '';
-								$item_formatted['review_text'] = ! empty( $single_review->text ) ? $single_review->text : '';
-							}
+				<?php 
+					$item_formatted['formatted_address'] = ! empty( $business_review_obj->formatted_address ) ? $business_review_obj->formatted_address : '';
+					$item_formatted['international_phone_number'] = ! empty( $business_review_obj->international_phone_number ) ? $business_review_obj->international_phone_number : '';
+					$item_formatted['name'] = ! empty( $business_review_obj->name ) ? $business_review_obj->name : '';
+					$item_formatted['photos'] = ! empty( $business_review_obj->photos ) ? $business_review_obj->photos : [];
+					$item_formatted['rating'] = ! empty( $business_review_obj->rating ) ? $business_review_obj->rating : '';
+					$item_formatted['reviews'] = ! empty( $business_review_obj->reviews ) ? $business_review_obj->reviews : [];
+					$item_formatted['url'] = ! empty( $business_review_obj->url ) ? $business_review_obj->url : '#';
+					$item_formatted['user_ratings_total'] = ! empty( $business_review_obj->user_ratings_total ) ? $business_review_obj->user_ratings_total : 0;
+					$item_formatted['website'] = ! empty( $business_review_obj->website ) ? $business_review_obj->website : '#';
+					
+					if( is_array( $item_formatted['reviews'] ) && count( $item_formatted['reviews'] ) ){
+						foreach( $item_formatted['reviews'] as $single_review ){
+							$item_formatted['review_author_name'] = ! empty( $single_review->author_name ) ? $single_review->author_name : '';
+							$item_formatted['review_author_url'] = ! empty( $single_review->author_url ) ? $single_review->author_url : '';
+							$item_formatted['review_profile_photo_url'] = ! empty( $single_review->profile_photo_url ) ? $single_review->profile_photo_url : '';
+							$item_formatted['review_rating'] = ! empty( $single_review->rating ) ? $single_review->rating : '';
+							$item_formatted['review_relative_time_description'] = ! empty( $single_review->relative_time_description ) ? $single_review->relative_time_description : '';
+							$item_formatted['review_text'] = ! empty( $single_review->text ) ? $single_review->text : '';
 						}
-					?>
+					}
+				?>
 				<!-- /.column  -->
 			</div>
 			<?php else: ?>
