@@ -1,24 +1,24 @@
-var NFTGalleryHandler = function ($scope, $) {
-    let $eael_nft_gallery = $(".eael-nft-gallery-wrapper", $scope);
-    let $posts_per_page = $eael_nft_gallery.data("posts-per-page");
-    let $total_posts = $eael_nft_gallery.data("total-posts");
-    let $nomore_item_text = $eael_nft_gallery.data("nomore-item-text");
-    let $next_page = $eael_nft_gallery.data("next-page");
+var BusinessReviewsHandler = function ($scope, $) {
+    let $eael_business_reviews = $(".eael-business-reviews-wrapper", $scope);
+    let $posts_per_page = $eael_business_reviews.data("posts-per-page");
+    let $total_posts = $eael_business_reviews.data("total-posts");
+    let $nomore_item_text = $eael_business_reviews.data("nomore-item-text");
+    let $next_page = $eael_business_reviews.data("next-page");
 
-    $scope.on("click", ".eael-nft-gallery-load-more", function (e) {
+    $scope.on("click", ".eael-business-reviews-load-more", function (e) {
         e.preventDefault();
         $('.eael-nft-item.page-' + $next_page, $scope).removeClass('eael-d-none').addClass('eael-d-block');
-        $eael_nft_gallery.attr("data-next-page", $next_page + 1);
+        $eael_business_reviews.attr("data-next-page", $next_page + 1);
 
-        if ($('.eael-nft-item.page-' + $next_page, $scope).hasClass('eael-last-nft-gallery-item')) {
-            $(".eael-nft-gallery-load-more", $scope).html($nomore_item_text).fadeOut('1500');
+        if ($('.eael-nft-item.page-' + $next_page, $scope).hasClass('eael-last-business-reviews-item')) {
+            $(".eael-business-reviews-load-more", $scope).html($nomore_item_text).fadeOut('1500');
         }
 
         $next_page++;
     });
 
     // Slider js
-	var $testimonialSlider = $scope.find('.eael-business-reviews-main').eq(0),
+	var $businessReviewsSlider = $scope.find('.eael-business-reviews-main').eq(0),
 		$pagination = '.swiper-pagination',
 		$arrow_next = '.swiper-button-next',
 		$arrow_prev = '.swiper-button-prev',
@@ -35,7 +35,7 @@ var NFTGalleryHandler = function ($scope, $) {
 		$grab_cursor = 0,
 		$centeredSlides = true;
 
-	var $testimonialSliderOptions = {
+	var $businessReviewsSliderOptions = {
 		direction: 'horizontal',
 		speed: $speed,
 		effect: $effect,
@@ -57,21 +57,21 @@ var NFTGalleryHandler = function ($scope, $) {
 		},
 	}
 
-	$testimonialSliderOptions.items = 1
+	$businessReviewsSliderOptions.items = 1
 
-	var $testimonialSliderObj = swiperLoader(
-		$testimonialSlider,
-		$testimonialSliderOptions
+	var $businessReviewsSliderObj = swiperLoader(
+		$businessReviewsSlider,
+		$businessReviewsSliderOptions
 	)
-	$testimonialSliderObj.then( ( $testimonialSliderObj ) => {
-		$testimonialSliderObj.update()
+	$businessReviewsSliderObj.then( ( $businessReviewsSliderObj ) => {
+		$businessReviewsSliderObj.update()
 	} );
 
 };
 
 jQuery(window).on("elementor/frontend/init", function () {
     elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-nft-gallery.default",
-        NFTGalleryHandler
+        "frontend/element_ready/eael-business-reviews.default",
+        BusinessReviewsHandler
     );
 });
