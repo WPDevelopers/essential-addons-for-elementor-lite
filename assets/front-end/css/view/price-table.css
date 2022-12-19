@@ -480,8 +480,8 @@
     display: block;
   }
   .eael-pricing .eael-pricing-item,
-  .eael-pricing.style-2 .eael-pricing-item,
-  .eael-pricing.style-4 .eael-pricing-item {
+.eael-pricing.style-2 .eael-pricing-item,
+.eael-pricing.style-4 .eael-pricing-item {
     width: 100%;
     margin: 0 auto 30px auto;
   }
@@ -495,8 +495,8 @@
     width: 100%;
   }
   .eael-pricing .eael-pricing-item,
-  .eael-pricing.style-2 .eael-pricing-item,
-  .eael-pricing.style-4 .eael-pricing-item {
+.eael-pricing.style-2 .eael-pricing-item,
+.eael-pricing.style-4 .eael-pricing-item {
     margin: 0 auto 30px auto;
   }
 }
