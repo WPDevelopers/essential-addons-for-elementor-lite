@@ -18,7 +18,7 @@ var NFTGalleryHandler = function ($scope, $) {
     });
 
     // Slider js
-	var $testimonialSlider = $scope.find('.eael-testimonial-slider-main').eq(0),
+	var $testimonialSlider = $scope.find('.eael-business-reviews-main').eq(0),
 		$pagination = '.swiper-pagination',
 		$arrow_next = '.swiper-button-next',
 		$arrow_prev = '.swiper-button-prev',
