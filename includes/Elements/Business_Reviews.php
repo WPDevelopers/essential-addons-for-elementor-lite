@@ -291,6 +291,96 @@ class Business_Reviews extends Widget_Base {
 		</div>
 
 		<?php
+
+		// Testimonial Slider
+		$testimonial_classes = " eael-testimonial-align-left ";
+		$this->add_render_attribute('testimonial-slider-wrap', 'class', 'swiper-container-wrap');
+		$this->add_render_attribute('testimonial-slider-wrap', 'class', 'eael-arrow-box');
+		$this->add_render_attribute('testimonial-slider-wrap', 'class', 'swiper-container-wrap-dots-outside');
+
+		$this->add_render_attribute('testimonial-slider-wrap', [
+			'class' => ['eael-testimonial-slider', 'default-style'],
+			'id'    => 'eael-testimonial-' . esc_attr($this->get_id()),
+		]);
+
+		$this->add_render_attribute('testimonial-slider', [
+			'class' => [
+				'swiper-container',
+				'eael-testimonial-slider-main',
+				'swiper-container-' . esc_attr($this->get_id())
+			],
+			'data-pagination'   => '.swiper-pagination-' . esc_attr($this->get_id()),
+			'data-arrow-next'   => '.swiper-button-next-' . esc_attr($this->get_id()),
+			'data-arrow-prev'   => '.swiper-button-prev-' . esc_attr($this->get_id())
+		]);
+
+		$this->add_render_attribute('testimonial-slider', 'data-items', 1);
+		$this->add_render_attribute('testimonial-slider', 'data-items-tablet', 1);
+		$this->add_render_attribute('testimonial-slider', 'data-items-mobile', 1);
+		$this->add_render_attribute('testimonial-slider', 'data-margin', 10);
+		$this->add_render_attribute('testimonial-slider', 'data-margin-tablet', 10);
+		$this->add_render_attribute('testimonial-slider', 'data-margin-mobile', 10);
+		$this->add_render_attribute('testimonial-slider', 'data-effect', 'slide');
+		$this->add_render_attribute('testimonial-slider', 'data-speed', 1000);
+		$this->add_render_attribute('testimonial-slider', 'data-loop', 1);
+		$this->add_render_attribute('testimonial-slider', 'data-grab-cursor', 1);
+		$this->add_render_attribute('testimonial-slider', 'data-arrows', 1);
+		$this->add_render_attribute('testimonial-slider', 'data-dots', 1);
+		$this->add_render_attribute('testimonial-slider', 'data-autoplay_speed', 2000);
+		$this->add_render_attribute('testimonial-slider', 'data-pause-on-hover', 'true');
+		?>
+
+        <div <?php echo $this->get_render_attribute_string('testimonial-slider-wrap'); ?>>
+			<?php
+			//$this->render_arrows();
+			?>
+            <div <?php echo $this->get_render_attribute_string('testimonial-slider'); ?>>
+
+                <div class="swiper-wrapper">
+					<?php
+					$i = 0;
+					$items = [1, 2, 3];
+					foreach ($items as $item) :
+						$this->add_render_attribute('testimonial-content-wrapper' . $i, [
+							'class' => ['eael-testimonial-content', 'rating-five'],
+						]);
+
+						$this->add_render_attribute('testimonial-slide' . $i, [
+							'class' => ['eael-testimonial-item', 'clearfix', 'swiper-slide', $testimonial_classes]
+						]);
+						?>
+
+                        <div <?php echo $this->get_render_attribute_string('testimonial-slide' . $i); ?>>
+                            <div class="eael-testimonial-item-inner clearfix">
+								<?php //$this->_render_user_avatar($item); ?>
+                                <div <?php echo $this->get_render_attribute_string('testimonial-content-wrapper' . $i); ?>>
+									<?php //$this->_render_quote();
+									?>
+                                    <div class="default-style-testimonial-content">
+										<?php
+										//$this->_render_user_description($item, $settings);
+										//$this->_render_user_ratings($item);
+										//$this->_render_user_meta($item);
+										echo $item_formatted['website'];
+										?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+						<?php $i++;
+					endforeach; ?>
+                </div>
+				<?php
+				//$this->render_dots();
+				?>
+            </div>
+			<?php
+			//$this->render_image_dots();
+			?>
+        </div>
+
+		<?php
 		echo ob_get_clean();
 	}
 
