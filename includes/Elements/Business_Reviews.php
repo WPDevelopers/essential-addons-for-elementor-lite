@@ -292,15 +292,14 @@ class Business_Reviews extends Widget_Base {
 
 		<?php
 
-		// Testimonial Slider
-		$testimonial_classes = " eael-testimonial-align-left ";
+		// Slider
 		$this->add_render_attribute('business-reviews-wrap', 'class', 'swiper-container-wrap');
 		$this->add_render_attribute('business-reviews-wrap', 'class', 'eael-arrow-box');
 		$this->add_render_attribute('business-reviews-wrap', 'class', 'swiper-container-wrap-dots-outside');
 
 		$this->add_render_attribute('business-reviews-wrap', [
 			'class' => ['eael-business-reviews', 'default-style'],
-			'id'    => 'eael-testimonial-' . esc_attr($this->get_id()),
+			'id'    => 'eael-business-reviews-' . esc_attr($this->get_id()),
 		]);
 
 		$this->add_render_attribute('business-reviews', [
@@ -341,22 +340,22 @@ class Business_Reviews extends Widget_Base {
 					$i = 0;
 					$items = [1, 2, 3];
 					foreach ($items as $item) :
-						$this->add_render_attribute('testimonial-content-wrapper' . $i, [
-							'class' => ['eael-testimonial-content', 'rating-five'],
+						$this->add_render_attribute('business-reviews-content-wrapper' . $i, [
+							'class' => ['eael-business-reviews-content', 'rating-five'],
 						]);
 
-						$this->add_render_attribute('testimonial-slide' . $i, [
-							'class' => ['eael-testimonial-item', 'clearfix', 'swiper-slide', $testimonial_classes]
+						$this->add_render_attribute('business-reviews-slide' . $i, [
+							'class' => ['eael-business-reviews-item', 'clearfix', 'swiper-slide']
 						]);
 						?>
 
-                        <div <?php echo $this->get_render_attribute_string('testimonial-slide' . $i); ?>>
-                            <div class="eael-testimonial-item-inner clearfix">
+                        <div <?php echo $this->get_render_attribute_string('business-reviews-slide' . $i); ?>>
+                            <div class="eael-business-reviews-item-inner clearfix">
 								<?php //$this->_render_user_avatar($item); ?>
-                                <div <?php echo $this->get_render_attribute_string('testimonial-content-wrapper' . $i); ?>>
+                                <div <?php echo $this->get_render_attribute_string('business-reviews-content-wrapper' . $i); ?>>
 									<?php //$this->_render_quote();
 									?>
-                                    <div class="default-style-testimonial-content">
+                                    <div class="default-style-business-reviews-content">
 										<?php
 										//$this->_render_user_description($item, $settings);
 										//$this->_render_user_ratings($item);

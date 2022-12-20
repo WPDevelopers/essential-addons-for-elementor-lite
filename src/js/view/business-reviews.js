@@ -1,21 +1,5 @@
 var BusinessReviewsHandler = function ($scope, $) {
     let $eael_business_reviews = $(".eael-business-reviews-wrapper", $scope);
-    let $posts_per_page = $eael_business_reviews.data("posts-per-page");
-    let $total_posts = $eael_business_reviews.data("total-posts");
-    let $nomore_item_text = $eael_business_reviews.data("nomore-item-text");
-    let $next_page = $eael_business_reviews.data("next-page");
-
-    $scope.on("click", ".eael-business-reviews-load-more", function (e) {
-        e.preventDefault();
-        $('.eael-nft-item.page-' + $next_page, $scope).removeClass('eael-d-none').addClass('eael-d-block');
-        $eael_business_reviews.attr("data-next-page", $next_page + 1);
-
-        if ($('.eael-nft-item.page-' + $next_page, $scope).hasClass('eael-last-business-reviews-item')) {
-            $(".eael-business-reviews-load-more", $scope).html($nomore_item_text).fadeOut('1500');
-        }
-
-        $next_page++;
-    });
 
     // Slider js
 	var $businessReviewsSlider = $scope.find('.eael-business-reviews-main').eq(0),
@@ -59,9 +43,11 @@ var BusinessReviewsHandler = function ($scope, $) {
 
 	$businessReviewsSliderOptions.items = 1
 
+	console.log($businessReviewsSlider);
+	console.log($businessReviewsSliderOptions);
 	var $businessReviewsSliderObj = swiperLoader(
 		$businessReviewsSlider,
-		$businessReviewsSliderOptions
+		{}
 	)
 	$businessReviewsSliderObj.then( ( $businessReviewsSliderObj ) => {
 		$businessReviewsSliderObj.update()
