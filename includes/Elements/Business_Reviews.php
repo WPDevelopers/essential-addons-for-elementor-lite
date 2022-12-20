@@ -44,6 +44,21 @@ class Business_Reviews extends Widget_Base {
 		return 'https://essential-addons.com/elementor/docs/business-reviews/';
 	}
 
+	public function get_style_depends()
+	{
+		return [
+			'font-awesome-5-all',
+			'font-awesome-4-shim',
+		];
+	}
+
+	public function get_script_depends()
+	{
+		return [
+			'font-awesome-4-shim'
+		];
+	}
+
 	protected function register_controls() {
 
 		/**
@@ -331,7 +346,7 @@ class Business_Reviews extends Widget_Base {
 
         <div <?php echo $this->get_render_attribute_string('business-reviews-wrap'); ?>>
 			<?php
-			//$this->render_arrows();
+			$this->render_arrows();
 			?>
             <div <?php echo $this->get_render_attribute_string('business-reviews'); ?>>
 
@@ -371,16 +386,45 @@ class Business_Reviews extends Widget_Base {
 					endforeach; ?>
                 </div>
 				<?php
-				//$this->render_dots();
+				$this->render_dots();
 				?>
             </div>
-			<?php
-			//$this->render_image_dots();
-			?>
         </div>
 
 		<?php
 		echo ob_get_clean();
+	}
+
+	/**
+	 * Render logo carousel dots output on the frontend.
+	 */
+	protected function render_dots()
+	{
+		$settings = $this->get_settings_for_display();
+			?>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination swiper-pagination-<?php echo esc_attr($this->get_id()); ?>"></div>
+			<?php 
+	}
+
+	/**
+	 * Render logo carousel arrows output on the frontend.
+	 */
+	protected function render_arrows()
+	{
+		$settings = $this->get_settings_for_display();
+
+		$pa_next_arrow = 'fa fa-angle-right';
+		$pa_prev_arrow = 'fa fa-angle-left';
+		?>
+		<!-- Add Arrows -->
+		<div class="swiper-button-next swiper-button-next-<?php echo esc_attr($this->get_id()); ?>">
+			<i class="<?php echo esc_attr($pa_next_arrow); ?>"></i>
+		</div>
+		<div class="swiper-button-prev swiper-button-prev-<?php echo esc_attr($this->get_id()); ?>">
+			<i class="<?php echo esc_attr($pa_prev_arrow); ?>"></i>
+		</div>
+		<?php 
 	}
 
 	protected function render() {
