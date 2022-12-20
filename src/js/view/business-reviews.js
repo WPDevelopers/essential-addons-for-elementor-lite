@@ -6,12 +6,6 @@ var BusinessReviewsHandler = function ($scope, $) {
 		$pagination = '.swiper-pagination',
 		$arrow_next = '.swiper-button-next',
 		$arrow_prev = '.swiper-button-prev',
-		$items = 3,
-		$items_tablet = 3,
-		$items_mobile = 3,
-		$margin = 10,
-		$margin_tablet = 10,
-		$margin_mobile = 10,
 		$effect = 'slide',
 		$speed = 400,
 		$autoplay = 999999,
@@ -47,7 +41,7 @@ var BusinessReviewsHandler = function ($scope, $) {
 	console.log($businessReviewsSliderOptions);
 	var $businessReviewsSliderObj = swiperLoader(
 		$businessReviewsSlider,
-		{}
+		$businessReviewsSliderOptions
 	)
 	$businessReviewsSliderObj.then( ( $businessReviewsSliderObj ) => {
 		$businessReviewsSliderObj.update()
@@ -59,9 +53,13 @@ const swiperLoader = (swiperElement, swiperConfig) => {
 	if ( 'undefined' === typeof Swiper ) {
 		const asyncSwiper = elementorFrontend.utils.swiper;
 		return new asyncSwiper( swiperElement, swiperConfig ).then( ( newSwiperInstance ) => {
+			console.log( 'New Swiper instance is ready: ', newSwiperInstance );
+			
 			return  newSwiperInstance;
 		} );
 	} else {
+		console.log( 'Swiper global variable is ready, create a new instance: ', Swiper );
+
 		return swiperPromise( swiperElement, swiperConfig );
 	}
 }
