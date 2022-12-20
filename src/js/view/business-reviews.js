@@ -69,6 +69,24 @@ var BusinessReviewsHandler = function ($scope, $) {
 
 };
 
+const swiperLoader = (swiperElement, swiperConfig) => {
+	if ( 'undefined' === typeof Swiper ) {
+		const asyncSwiper = elementorFrontend.utils.swiper;
+		return new asyncSwiper( swiperElement, swiperConfig ).then( ( newSwiperInstance ) => {
+			return  newSwiperInstance;
+		} );
+	} else {
+		return swiperPromise( swiperElement, swiperConfig );
+	}
+}
+
+const swiperPromise =  (swiperElement, swiperConfig) => {
+	return new Promise((resolve, reject) => {
+		const swiperInstance =  new Swiper( swiperElement, swiperConfig );
+		resolve( swiperInstance );
+	});
+}
+
 jQuery(window).on("elementor/frontend/init", function () {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-business-reviews.default",
