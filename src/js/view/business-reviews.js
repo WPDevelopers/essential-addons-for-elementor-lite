@@ -77,13 +77,9 @@ const swiperLoader = (swiperElement, swiperConfig) => {
 	if ( 'undefined' === typeof Swiper ) {
 		const asyncSwiper = elementorFrontend.utils.swiper;
 		return new asyncSwiper( swiperElement, swiperConfig ).then( ( newSwiperInstance ) => {
-			console.log( 'New Swiper instance is ready: ', newSwiperInstance );
-			
 			return  newSwiperInstance;
 		} );
 	} else {
-		console.log( 'Swiper global variable is ready, create a new instance: ', Swiper );
-
 		return swiperPromise( swiperElement, swiperConfig );
 	}
 }
