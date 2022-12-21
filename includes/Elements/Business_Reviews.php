@@ -240,6 +240,16 @@ class Business_Reviews extends Widget_Base {
 		return $error_message;
 	}
 
+	public function print_google_reviews_slider( $item_formatted ){
+		if ( ! is_array( $item_formatted ) ){
+			return false;
+		}
+
+		if ( count( $item_formatted ) ){
+			// print items
+		}
+	}
+
 	public function print_business_reviews( $business_review_items ){
 		$settings = $this->get_settings();
 		ob_start();
@@ -295,6 +305,9 @@ class Business_Reviews extends Widget_Base {
 							$item_formatted['review_rating'] = ! empty( $single_review->rating ) ? $single_review->rating : '';
 							$item_formatted['review_relative_time_description'] = ! empty( $single_review->relative_time_description ) ? $single_review->relative_time_description : '';
 							$item_formatted['review_text'] = ! empty( $single_review->text ) ? $single_review->text : '';
+
+							$this->print_google_reviews_slider($item_formatted);
+							// $this->print_google_reviews_grid($item_formatted);
 						}
 					}
 				?>
