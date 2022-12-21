@@ -1,371 +1,649 @@
-.eael-nft-gallery-wrapper {
-    padding: 15px 0;
-    transition: 0.5s;
-    overflow: hidden;
-    position: relative;
-  
-    .eael-nft-grid {
-      grid-template-columns: repeat(3, 1fr);
-      grid-column-gap: 15px;
-      grid-row-gap: 15px;
-      display: grid;
-    }
-  
-    .eael-nft-list {
-      grid-template-columns: auto;
-      grid-column-gap: 15px;
-      grid-row-gap: 15px;
-      display: grid;
-  
-      .eael-nft-list-thumbnail {
-        overflow: hidden;
-  
-        img {
-          object-fit: cover;
-          width: auto;
-          height: 100px;
-          border-radius: 10px;
-        }
-      }
-  
-      .eael-nft-grid-container {
-        display: grid;
-        grid-template-columns: 15% 30% 15% 20% 20%;
-      }
-  
-      .eael-nft-grid-item {
-        display: inline-grid;
-        align-items: center;
-      }
-    }
-  
-    .eael-nft-item {
-      .eael-nft-chain {
-        opacity: 0;
-        transition: opacity 0.4s ease-in-out 0s;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        background-color: rgba(159, 159, 159, 0.4);
-        backdrop-filter: blur(10px);
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        position: absolute;
-        left: 8px;
-        top: 8px;
-        z-index: 160;
-        cursor: pointer;
-        display: flex;
-  
-        .eael-nft-chain-button {
-          visibility: visible;
-          opacity: 1;
-          transition: visibility 0s ease 0s, opacity 0.4s ease-in-out 0s;
-          background: transparent;
-          display: inline-flex;
-          align-items: center;
-          font-size: 100%;
-          border: 0px;
-          padding: 0;
-          margin: 0;
-  
-          svg {
-            width: 24px;
-            height: 20px;
-            fill: #fff;
-          }
-        }
-      }
-  
-      .eael-nft-main-content {
-        padding: 15px;
-      }
-  
+// Slider Style
+.elementor-widget-eael-business-reviews {
+  .eael-business-reviews {
       position: relative;
-      background-color: #ffffff;
-      box-shadow: 0 4px 15px rgb(0 0 0 / 9%);
-      overflow: hidden;
-      transition: 0.5s ease-in-out;
-  
-      .eael-nft-creator-img {
-        display: flex;
+
+      .swiper-container-3d .swiper-slide {
+          backface-visibility: hidden;
       }
-  
-      .eael-nft-created-by,
-      .eael-nft-owned-by {
-        display: flex;
-        column-gap: 5px;
+
+      .swiper-container {
+          width: 100%;
+
+          .swiper-button-prev:after,
+          .swiper-button-next:after {
+              content: none;
+          }
       }
-      .eael-nft-thumbnail {
-        line-height: 0;
-        text-align: center;
-        overflow: hidden;
-  
-        img {
-          object-fit: cover;
-          width: auto;
-          height: 300px;
-        }
-      }
-  
-      .eael-nft-content {
-        .eael-nft-title {
-          font-size: 14px;
-          font-weight: bold;
-          margin: 0 0 10px;
-        }
-  
-        .eael-nft-current-price {
-          font-size: 16px;
-          font-weight: bold;
-          margin: 0 0 10px;
-        }
-  
-        .eael-nft-last-sale,
-        .eael-nft-ends-in {
-          margin: 0;
-          .eael-nft-last-sale-text,
-          .eael-nft-ends-in-text {
-            font-size: 14px;
-            color: rgb(112, 122, 131);
-          }
-  
-          .eael-nft-last-sale-price,
-          .eael-nft-ends-in-time {
-            font-size: 15px;
-            color: rgb(112, 122, 131);
-          }
-        }
-  
-        .eael-nft-creator-wrapper,
-        .eael-nft-owner-wrapper {
-          display: flex;
-          align-items: center;
-          // align-items: flex-start;
-          gap: 10px;
-          // justify-content: flex-start;
-          margin-bottom: 10px;
-          img {
-            height: 30px;
-            width: 30px;
-            border-radius: 50%;
-          }
-          span {
-            color: #333333;
-            font-size: 14px;
-          }
-  
-          a {
-            color: #7967ff;
-            font-size: 14px;
-          }
-        }
-      }
-  
-      .eael-nft-button {
-        .eael-nft-gallery-button-align-left {
-          margin-right: auto;
-        }
-    
-        .eael-nft-gallery-button-align-center {
-          margin: auto;
-        }
-    
-        .eael-nft-gallery-button-align-right {
-          margin-left: auto;
-        }
-  
-        button {
-          background-color: transparent;
-          border: 0;
-          box-shadow: unset;
-          display: block;
+  }
+  // rating
+  .business-reviews-star-rating {
+      padding: 0;
+      margin: 0;
+  }
+
+  .business-reviews-star-rating li {
+      list-style: none;
+      display: inline-block;
+  }
+
+  .business-reviews-star-rating li i {
+      color: #d8d8d8;
+  }
+
+  .rating-five .business-reviews-star-rating li i {
+      color: #f2b01e;
+  }
+
+  .rating-one .business-reviews-star-rating li:first-child i {
+      color: #f2b01e;
+  }
+
+  .rating-two .business-reviews-star-rating li:nth-child(1) i,
+  .rating-two .business-reviews-star-rating li:nth-child(2) i {
+      color: #f2b01e;
+  }
+
+  .rating-three .business-reviews-star-rating li:nth-child(1) i,
+  .rating-three .business-reviews-star-rating li:nth-child(2) i,
+  .rating-three .business-reviews-star-rating li:nth-child(3) i {
+      color: #f2b01e;
+  }
+
+  .rating-four .business-reviews-star-rating li:nth-child(1) i,
+  .rating-four .business-reviews-star-rating li:nth-child(2) i,
+  .rating-four .business-reviews-star-rating li:nth-child(3) i,
+  .rating-four .business-reviews-star-rating li:nth-child(4) i {
+      color: #f2b01e;
+  }
+
+  //read more
+  .eael-business-reviews-text-full-text {
+      display: none;
+  }
+  .eael-business-reviews-text-excerpt {
+      .eael-business-reviews-read-more-btn {
+          border: none;
+          background: transparent;
+          color: #333dcc;
           padding: 0;
           margin: 0;
-  
-          a {
-            display: block;
-            text-decoration: none;
-            color: #ffffff;
-            font-size: 14px;
-            padding: 12px 15px;
-            transition: 0.5s;
-            text-align: center;
+
+          &:hover {
+              color: #333dcc;
           }
-        }
       }
-    }
-    .eael-nft-item:hover {
-      box-shadow: 0 4px 15px #d6d6d6;
-  
-      .eael-nft-chain {
-        opacity: 1;
+  }
+
+  /*--- Default styles ---*/
+  .eael-business-reviews-image img {
+      max-width: 100%;
+  }
+
+  .eael-business-reviews-image {
+      padding: 10px 0px 0px 0px;
+  }
+
+  .eael-business-reviews-image > figure {
+      display: block;
+      margin: 0;
+  }
+
+  .business-reviews-avatar-rounded figure img {
+      border-radius: 50%;
+      height: auto;
+  }
+
+  .eael-business-reviews-content {
+      margin: 0;
+      padding: 10px;
+  }
+
+  .eael-business-reviews-item > figure {
+      margin: 0 auto;
+      padding: 0 20px;
+  }
+
+  .eael-business-reviews-item .center-text {
+      text-align: center;
+  }
+
+  .eael-business-reviews-item .right-text {
+      text-align: right;
+  }
+
+  .eael-business-reviews-item .left-text {
+      text-align: left;
+  }
+
+  .eael-business-reviews-item .justify-text {
+      text-align: justify;
+  }
+
+  /*--- Default Style ---*/
+  .eael-business-reviews-content .eael-business-reviews-text {
+      font-size: 100%;
+      font-style: italic;
+      line-height: 1.5;
+      margin-top: 0px;
+      margin-bottom: 10px;
+      word-wrap: break-word;
+  }
+
+  .eael-business-reviews-content .eael-business-reviews-user {
+      display: inline-block;
+      font-family: inherit;
+      font-size: 105%;
+      font-style: italic;
+      font-weight: normal;
+      line-height: 1.5;
+      margin-top: 0;
+      margin-bottom: 0;
+      margin-right: 5px;
+  }
+
+  .eael-business-reviews-content .eael-business-reviews-user-company {
+      display: inline-block;
+      font-family: inherit;
+      font-size: 90%;
+      font-style: italic;
+      font-weight: lighter;
+      line-height: 1.75;
+      margin-bottom: 0;
+      margin-top: 1px;
+  }
+
+  .eael-business-reviews-image {
+      position: relative;
+  }
+
+  .eael-business-reviews-item .eael-business-reviews-quote::after {
+      color: inherit !important;
+      content: '\f10e';
+      font-family: 'Font Awesome 5 Free';
+      font-size: 200%;
+      font-weight: 900;
+  }
+
+  .eael-business-reviews.default-style
+  .eael-business-reviews-align-left
+  .eael-business-reviews-image
+  figure
+  img,
+  .eael-business-reviews.default-style
+  .eael-business-reviews-align-right
+  .eael-business-reviews-image
+  figure
+  img,
+  .eael-business-reviews.classic-style
+  .eael-business-reviews-align-left
+  .eael-business-reviews-image
+  figure
+  img,
+  .eael-business-reviews.classic-style
+  .eael-business-reviews-align-right
+  .eael-business-reviews-image
+  figure
+  img,
+  .eael-business-reviews.middle-style
+  .eael-business-reviews-align-left
+  .eael-business-reviews-image
+  figure
+  img,
+  .eael-business-reviews.middle-style
+  .eael-business-reviews-align-right
+  .eael-business-reviews-image
+  figure
+  img {
+      margin: 0;
+  }
+
+  .eael-business-reviews.default-style
+  .eael-business-reviews-align-right
+  .eael-business-reviews-image
+  figure,
+  .eael-business-reviews.classic-style
+  .eael-business-reviews-align-right
+  .eael-business-reviews-image
+  figure,
+  .eael-business-reviews.middle-style
+  .eael-business-reviews-align-right
+  .eael-business-reviews-image
+  figure {
+      text-align: right;
+  }
+
+  .eael-business-reviews.default-style
+  .eael-business-reviews-align-left
+  .eael-business-reviews-image
+  figure,
+  .eael-business-reviews.classic-style
+  .eael-business-reviews-align-left
+  .eael-business-reviews-image
+  figure,
+  .eael-business-reviews.middle-style
+  .eael-business-reviews-align-left
+  .eael-business-reviews-image
+  figure {
+      text-align: left;
+  }
+
+  .eael-business-reviews.default-style
+  .eael-business-reviews-align-right
+  .default-style-business-reviews-content,
+  .eael-business-reviews.classic-style
+  .eael-business-reviews-align-right
+  .business-reviews-classic-style-content,
+  .eael-business-reviews.middle-style
+  .eael-business-reviews-align-right
+  .middle-style-content,
+  .eael-business-reviews.middle-style
+  .eael-business-reviews-align-right
+  .eael-business-reviews-text {
+      text-align: right;
+  }
+
+  .eael-business-reviews.default-style
+  .eael-business-reviews-align-center
+  .default-style-business-reviews-content,
+  .eael-business-reviews.classic-style
+  .eael-business-reviews-align-center
+  .business-reviews-classic-style-content,
+  .eael-business-reviews.middle-style
+  .eael-business-reviews-align-center
+  .middle-style-content,
+  .eael-business-reviews.middle-style
+  .eael-business-reviews-align-center
+  .eael-business-reviews-text {
+      text-align: center;
+  }
+
+  .eael-business-reviews.default-style
+  .eael-business-reviews-align-left
+  .default-style-business-reviews-content,
+  .eael-business-reviews.classic-style
+  .eael-business-reviews-align-left
+  .business-reviews-classic-style-content,
+  .eael-business-reviews.middle-style
+  .eael-business-reviews-align-left
+  .middle-style-content,
+  .eael-business-reviews.middle-style
+  .eael-business-reviews-align-left
+  .eael-business-reviews-text {
+      text-align: left;
+  }
+
+  .eael-business-reviews.icon-img-left-content .eael-business-reviews-text > p,
+  .eael-business-reviews.icon-img-right-content .eael-business-reviews-text > p {
+      margin: 0px;
+  }
+
+  /*--- Left align ---*/
+  .icon-img-left-content .eael-business-reviews-image {
+      float: left;
+      width: 30%;
+  }
+
+  .icon-img-left-content .eael-business-reviews-content {
+      float: left;
+      width: 70%;
+  }
+  .icon-img-left-content
+  .eael-business-reviews-align-left
+  .eael-business-reviews-content {
+      text-align: left;
+  }
+  .icon-img-left-content
+  .eael-business-reviews-align-center
+  .eael-business-reviews-content {
+      text-align: center;
+  }
+  .icon-img-left-content
+  .eael-business-reviews-align-right
+  .eael-business-reviews-content {
+      text-align: right;
+  }
+
+  .icon-img-left-content.eael-business-reviews-item {
+      overflow: hidden;
+      position: relative;
+  }
+
+  .icon-img-left-content .eael-business-reviews-quote {
+      position: absolute;
+      right: 0;
+  }
+
+  .icon-img-left-content .eael-business-reviews-text {
+      margin-top: 0;
+  }
+
+  /*--- Center align ---*/
+  .eael-business-reviews-align-center .eael-business-reviews-user,
+  .eael-business-reviews-align-center .eael-business-reviews-user-company {
+      float: none;
+      text-align: center;
+  }
+
+  .default-style .eael-business-reviews-item.eael-business-reviews-align-center,
+  .classic-style .eael-business-reviews-item.eael-business-reviews-align-center,
+  .middle-style .eael-business-reviews-item.eael-business-reviews-align-center {
+      text-align: center;
+  }
+
+  .eael-business-reviews-image,
+  .eael-business-reviews-align-center .eael-business-reviews-image,
+  .eael-business-reviews-align-center .business-reviews-inline-style {
+      margin: 0 auto;
+  }
+
+  .eael-business-reviews-align-center .eael-business-reviews-image {
+      display: block;
+  }
+
+  .eael-business-reviews-align-right .eael-business-reviews-image,
+  .eael-business-reviews-align-right .business-reviews-inline-style {
+      margin: 0 0 0 auto;
+  }
+  .eael-business-reviews-align-center .eael-business-reviews-image,
+  .eael-business-reviews-align-center .business-reviews-inline-style {
+      margin: 0 auto;
+  }
+  .eael-business-reviews-align-left .eael-business-reviews-image,
+  .eael-business-reviews-align-left .business-reviews-inline-style {
+      margin: 0 auto 0 0;
+  }
+
+  /*--- Right align ---*/
+  .icon-img-right-content .eael-business-reviews-image {
+      float: right;
+      width: 30%;
+  }
+
+  .icon-img-right-content .eael-business-reviews-content {
+      float: left;
+      width: 70%;
+  }
+  .icon-img-right-content
+  .eael-business-reviews-align-left
+  .eael-business-reviews-content {
+      text-align: left;
+  }
+  .icon-img-right-content
+  .eael-business-reviews-align-right
+  .eael-business-reviews-content {
+      text-align: right;
+  }
+  .icon-img-right-content
+  .eael-business-reviews-align-center
+  .eael-business-reviews-content {
+      text-align: center;
+  }
+
+  .icon-img-right-content.eael-business-reviews-item {
+      overflow: hidden;
+      position: relative;
+  }
+
+  .icon-img-right-content .eael-business-reviews-quote {
+      position: absolute;
+  }
+
+  .icon-img-right-content .eael-business-reviews-text {
+      margin-top: 0;
+  }
+
+  .eael-business-reviews-item {
+      position: relative;
+  }
+
+  .classic-style.business-reviews-alignment-center .eael-business-reviews-image,
+  .default-style.business-reviews-alignment-center .eael-business-reviews-image {
+      text-align: center;
+  }
+
+  .classic-style.business-reviews-alignment-right .eael-business-reviews-image,
+  .default-style.business-reviews-alignment-right .eael-business-reviews-image {
+      text-align: right;
+  }
+
+  .classic-style.business-reviews-alignment-center
+  .eael-business-reviews-image
+  > figure,
+  .default-style.business-reviews-alignment-center
+  .eael-business-reviews-image
+  > figure {
+      text-align: center;
+  }
+
+  .eael-business-reviews.icon-img-left-content
+  .eael-business-reviews-align-center
+  .eael-business-reviews-content {
+      text-align: center;
+  }
+
+  .eael-business-reviews.icon-img-left-content
+  .eael-business-reviews-align-left
+  .eael-business-reviews-content {
+      text-align: left;
+  }
+
+  .eael-business-reviews.icon-img-left-content
+  .eael-business-reviews-align-right
+  .eael-business-reviews-content {
+      text-align: right;
+  }
+
+  .eael-business-reviews.icon-img-right-content
+  .eael-business-reviews-align-center
+  .eael-business-reviews-content {
+      text-align: center;
+  }
+
+  .eael-business-reviews.icon-img-right-content
+  .eael-business-reviews-align-left
+  .eael-business-reviews-content {
+      text-align: left;
+  }
+
+  .eael-business-reviews.icon-img-right-content
+  .eael-business-reviews-align-right
+  .eael-business-reviews-content {
+      text-align: right;
+  }
+
+  span.eael-business-reviews-quote {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+  }
+
+  /**
+*  Thumbnail Aliginment
+*/
+  .eael-business-reviews-item.left .eael-business-reviews-image {
+      text-align: left;
+  }
+  .eael-business-reviews-item.center .eael-business-reviews-image {
+      text-align: center;
+  }
+  .eael-business-reviews-item.right .eael-business-reviews-image {
+      text-align: right;
+  }
+
+  /**
+* General Style For Floating Thumbnail, meta name and rating
+*/
+  .eael-business-reviews-inline-bio .eael-business-reviews-image {
+      float: left;
+  }
+
+  .eael-business-reviews-inline-bio .bio-text {
+      padding-top: 10px;
+  }
+
+  .eael-business-reviews-content.eael-business-reviews-inline-bio {
+      overflow: hidden;
+      margin-bottom: 0;
+      padding-bottom: 0;
+  }
+
+  .eael-business-reviews-inline-bio .business-reviews-star-rating,
+  .eael-business-reviews-inline-bio .bio-text {
+      float: left;
+      width: 65%;
+  }
+
+  .eael-business-reviews-content.eael-business-reviews-inline-bio {
+      text-align: left !important;
+  }
+
+  .business-reviews-inline-style .eael-business-reviews-image {
+      float: left;
+      max-width: 100%;
+      padding: 0;
+      margin-right: 15px;
+  }
+
+  .business-reviews-inline-style {
+      overflow: hidden;
+      text-align: left;
+      width: 40%;
+  }
+
+  /**
+* Layout: Content Top Icon Title inline
+*/
+  .content-top-icon-title-inline .eael-business-reviews-text,
+  .content-top-icon-title-inline
+  .eael-business-reviews-align-left
+  .eael-business-reviews-text {
+      text-align: left;
+  }
+  .content-top-icon-title-inline
+  .eael-business-reviews-align-center
+  .eael-business-reviews-text {
+      text-align: center;
+  }
+  .content-top-icon-title-inline
+  .eael-business-reviews-align-right
+  .eael-business-reviews-text {
+      text-align: right;
+  }
+
+  /**
+* Layout: Content Bottom Icon Title inline
+*/
+  .content-bottom-icon-title-inline
+  .eael-business-reviews-align-left
+  .eael-business-reviews-text {
+      text-align: left;
+  }
+  .content-bottom-icon-title-inline
+  .eael-business-reviews-align-center
+  .eael-business-reviews-text {
+      text-align: center;
+  }
+  .content-bottom-icon-title-inline
+  .eael-business-reviews-align-right
+  .eael-business-reviews-text {
+      text-align: right;
+  }
+
+  /**
+*	Slider Button For all layout
+*/
+  .eael-business-reviews-main.swiper-container {
+      .swiper-button-next,
+      .swiper-button-prev {
+          background-image: none;
+          outline: none;
       }
-  
-      .eael-nft-button {
-        opacity: 1;
-        visibility: visible;
-        transform: translate(0);
-      }
-    }
-  
-    .preset-1 {
-      .eael-nft-price-wrapper {
-        min-height: 20px;
-      }
-  
-      .eael-nft-button {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        opacity: 0;
-        transform: translateY(30px);
-        transition: 0.3s ease-in-out;
-        visibility: hidden;
-        width: 100%;
-  
-        button {
-          width: 100%;
-        }
-      }
-  
-      .eael-nft-thumbnail {
-        img {
-          transition-duration: .4s;
-        }
-      }
-  
-      .eael-nft-item:hover {
-        .eael-nft-button {
-          opacity: 1;
-          visibility: visible;
-          transform: translate(0);
-        }
-  
-        .eael-nft-thumbnail {
-          img {
-            transform: scale(1.1);
-          }
-        }
-      }
-    }
-  
-    .preset-2 {
-      .eael-nft-price-wrapper {
-        min-height: 20px;
-      }
-  
-      .eael-nft-creator-wrapper,
-      .eael-nft-owner-wrapper,
-      .eael-nft-last-sale-wrapper,
-      .eael-nft-button {
-        display: none;
-      }
-  
-      .eael-nft-item {
-        padding: 0 !important;
-        min-height: 300px;
-  
-        .eael-nft-thumbnail {
-          margin-bottom: 0;
-  
-          img {
-            transition-duration: .4s;
-          }
-        }
-  
-        .eael-nft-thumbnail::before {
-          content: " ";
-          z-index: 10;
-          display: block;
-          position: absolute;
-          height: 100%;
-          top: 0;
-          left: 0;
-          right: 0;
-        }
-  
-        .eael-nft-main-content {
-          background-color: transparent;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          padding: 15px;
-          transition: 0.3s ease-in-out;
-          z-index: 999;
+  }
+  .eael-business-reviews-main.swiper-container-cube .swiper-slide-active {
+      background: #ffffff;
+  }
+  // slider arrow make display flex
+  .swiper-container-wrap .swiper-button-next,
+  .swiper-container-wrap .swiper-button-prev {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  // gallery pagination style
+  .eael-business-reviews-gallary-pagination {
+      width: 350px !important;
+      height: 100px !important;
+      box-sizing: border-box;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      .swiper-slide {
+          width: 100px !important;
+          opacity: 0.4;
           display: flex;
-          align-items: flex-end;
-          color: #fff;
-        }
-  
-        > a {
-          position: absolute;
-          border-radius: 10px;
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: 100%;
-          z-index: 1000;
-        }
-  
-        .eael-nft-chain {
-          z-index: 1001;
-        }
-      }
-  
-      .eael-nft-item:hover {
-        .eael-nft-thumbnail {
-          img {
-            transform: scale(1.1);
+          justify-content: center;
+          align-items: center;
+          .eael-pagination-thumb {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              .eael-thumbnail {
+                  width: 60px;
+                  height: 60px;
+                  -webkit-transition: all 0.3s ease;
+                  -moz-transition: all 0.3s ease;
+                  transition: all 0.3s ease;
+              }
           }
-        }
       }
-  
-    }
-  }
-  
-  .eael-nft-gallery-load-more.elementor-button.elementor-size-xl {
-    font-size: 20px;  
-    padding: 15px 50px;
-    border-radius: 6px;
-  }
-  
-  .eael-nft-gallery-load-more.elementor-button.elementor-size-lg {
-    font-size: 18px;  
-    padding: 20px 40px;
-    border-radius: 5px;
-  }
-  
-  .eael-nft-gallery-load-more.elementor-button.elementor-size-md {
-    font-size: 16px;  
-    padding: 15px 30px;
-    border-radius: 4px;
-  }
-  
-  .eael-nft-gallery-load-more.elementor-button.elementor-size-sm {
-    font-size: 15px;  
-    padding: 12px 24px;
-    border-radius: 3px;
-  }
-  
-  .eael-nft-gallery-load-more.elementor-button.elementor-size-xs {
-    font-size: 13px;  
-    padding: 10px 20px;
-    border-radius: 2px;
-  }
-   
-  @media only screen and (max-width: 767px) {
-    .eael-nft-gallery-wrapper {
-      .eael-nft-list .eael-nft-grid-container {
-        grid-template-columns: 28% 43% 23%;
-        column-gap: 3%;
+      .swiper-slide-active {
+          opacity: 1;
+          .eael-pagination-thumb {
+              .eael-thumbnail {
+                  transform: scale(1.5);
+              }
+          }
       }
-      .eael-nft-last-sale-wrapper,
-      .eael-nft-creator-wrapper {
-        display: none !important;
+      // pagination visibility
+      @media all and (min-width: 1024px) {
+          &.eael_gallery_pagination_hide_on_desktop {
+              display: none !important;
+          }
       }
-    }
+      @media all and (min-width: 768px) and (max-width: 1024px) {
+          &.eael_gallery_pagination_hide_on_tablet {
+              display: none !important;
+          }
+      }
+      @media all and (max-width: 767px) {
+          &.eael_gallery_pagination_hide_on_mobile {
+              display: none !important;
+          }
+      }
   }
+  .eael-arrow-box {
+
+      .swiper-button-prev {
+          background-image: none !important;
+          left: -20px;
+          right: auto;
+          cursor: pointer;
+      }
+      .swiper-button-next:focus,
+      .swiper-button-prev:focus{
+          outline: none;
+      }
+
+      .swiper-button-next {
+          background-image: none !important;
+          right: -20px;
+          left: auto;
+          cursor: pointer;
+      }
+
+  }
+  .swiper-container-wrap-dots-outside .swiper-pagination {
+      position: static;
+  }
+}
