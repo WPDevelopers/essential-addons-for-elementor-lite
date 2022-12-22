@@ -1520,28 +1520,36 @@ class Info_Box extends Widget_Base
             $this->add_render_attribute('eael_infobox_inner', 'class', 'icon-on-right');
         }
 
-        $target = !empty($settings['eael_show_infobox_clickable_link']['is_external']) ? 'target="_blank"' : '';
-        $nofollow = !empty($settings['eael_show_infobox_clickable_link']['nofollow']) ? 'rel="nofollow"' : '';
+	    if ( ! empty( $settings['eael_show_infobox_clickable_link']['url'] ) ) {
+		    $this->add_link_attributes( 'infobox_clickable_link', $settings['eael_show_infobox_clickable_link'] );
+	    }
 
-        ob_start();
-        ?>
-        <?php if ('yes' == $settings['eael_show_infobox_clickable']): ?><a href="<?php echo esc_url($settings['eael_show_infobox_clickable_link']['url']) ?>" <?php echo $target; ?> <?php echo $nofollow; ?>><?php endif;?>
-            <div <?php echo $this->get_render_attribute_string('eael_infobox_inner'); ?>>
-            <?php
-        echo ob_get_clean();
+	    ob_start();
+
+	    if ( 'yes' == $settings['eael_show_infobox_clickable'] ) { ?>
+            <a <?php echo $this->get_render_attribute_string( 'infobox_clickable_link' ); ?>>
+	    <?php } ?>
+        <div <?php echo $this->get_render_attribute_string( 'eael_infobox_inner' ); ?>>
+	    <?php
+	    echo ob_get_clean();
     }
 
 	/**
 	 * This function is rendering closing divs and tags
 	 * of before partial for infobox.
 	 */
-    protected function eael_infobox_after()
-    {
-        $settings = $this->get_settings_for_display();
-        ob_start(); ?></div><?php
-if ('yes' == $settings['eael_show_infobox_clickable']): ?></a><?php endif;
-        echo ob_get_clean();
-    }
+	protected function eael_infobox_after() {
+		$settings = $this->get_settings_for_display();
+		ob_start(); ?>
+        </div>
+
+		<?php
+		if ( 'yes' == $settings['eael_show_infobox_clickable'] ) { ?>
+            </a>
+		<?php }
+
+		echo ob_get_clean();
+	}
 
 	/**
 	 * This function is rendering appropriate icon for infobox.
@@ -1674,17 +1682,9 @@ if ('yes' == $settings['eael_show_infobox_clickable']): ?></a><?php endif;
 
         $this->add_render_attribute('infobox_button', 'class', 'eael-infobox-button');
 
-        if ($settings['infobox_button_link_url']['url']) {
-            $this->add_render_attribute('infobox_button', 'href', esc_url($settings['infobox_button_link_url']['url']));
-        }
-
-        if ('on' == $settings['infobox_button_link_url']['is_external']) {
-            $this->add_render_attribute('infobox_button', 'target', '_blank');
-        }
-
-        if ('on' == $settings['infobox_button_link_url']['nofollow']) {
-            $this->add_render_attribute('infobox_button', 'rel', 'nofollow');
-        }
+	    if ( ! empty( $settings['infobox_button_link_url']['url'] ) ) {
+		    $this->add_link_attributes( 'infobox_button', $settings['infobox_button_link_url'] );
+	    }
 
         ob_start();
         ?>
