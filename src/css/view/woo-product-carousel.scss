@@ -2129,3 +2129,47 @@ $theme-preset4: #ec3b75;
 
     }
 }
+
+//shoptimizer savoy
+.theme-shoptimizer{
+    .site-main ul.products li.product:before,
+    .site-main ul.products li.product:hover:before{
+        display: none;
+    }
+    .eael-woo-product-carousel-container{
+        .preset-3{
+            .woocommerce{
+                li.product{
+                    .add_to_cart_button{
+                        width: 100%;
+                        background: transparent;
+                    }
+                }
+            }
+        }
+        &.preset-1 {
+            .woocommerce {
+                li.product {
+                    .add-to-cart{
+                        a.added_to_cart,
+                        a.button{
+                            height: 35px;
+                            width: 35px;
+                            position: relative;
+                        }
+                        a.added_to_cart{
+                            bottom: 0;
+                            &:after{
+                                content: '\f217';
+                                font-weight: 900;
+                                font-family: 'Font Awesome 5 Free';
+                                font-size: 16px;
+                                display: initial;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
