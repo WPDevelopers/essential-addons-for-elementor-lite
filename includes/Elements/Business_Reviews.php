@@ -306,11 +306,104 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function print_google_reviews_slider( $business_reviews, $google_reviews_data ){
-		if ( is_array( $google_reviews_data ) && count( $google_reviews_data ) ){
+		if ( ! empty( $google_reviews_data['reviews'] ) && count( $google_reviews_data['reviews'] ) ){
 			//$photo_obj = ! empty( $google_reviews_data['photos'] ) && ! empty( $google_reviews_data['photos'][5] ) ? $google_reviews_data['photos'][5] : $google_reviews_data['photos'][0];
 			//$photo_response = $this->fetch_google_reviews_business_photo($photo_obj);
+
+			// echo "<pre>";
+			// print_r($google_reviews_data);
+			// Slider
+			$this->add_render_attribute('business-reviews-wrap', 'class', 'swiper-container-wrap');
+			$this->add_render_attribute('business-reviews-wrap', 'class', 'eael-arrow-box');
+			$this->add_render_attribute('business-reviews-wrap', 'class', 'swiper-container-wrap-dots-outside');
+
+			$this->add_render_attribute('business-reviews-wrap', [
+				'class' => ['eael-business-reviews', 'default-style'],
+				'id'    => 'eael-business-reviews-' . esc_attr($this->get_id()),
+			]);
+
+			$this->add_render_attribute('business-reviews', [
+				'class' => [
+					'swiper-container',
+					'eael-business-reviews-main',
+					'swiper-container-' . esc_attr($this->get_id())
+				],
+				'data-pagination'   => '.swiper-pagination-' . esc_attr($this->get_id()),
+				'data-arrow-next'   => '.swiper-button-next-' . esc_attr($this->get_id()),
+				'data-arrow-prev'   => '.swiper-button-prev-' . esc_attr($this->get_id())
+			]);
+
+			$this->add_render_attribute('business-reviews', 'data-items', 1);
+			$this->add_render_attribute('business-reviews', 'data-items-tablet', 1);
+			$this->add_render_attribute('business-reviews', 'data-items-mobile', 1);
+			$this->add_render_attribute('business-reviews', 'data-margin', 10);
+			$this->add_render_attribute('business-reviews', 'data-margin-tablet', 10);
+			$this->add_render_attribute('business-reviews', 'data-margin-mobile', 10);
+			$this->add_render_attribute('business-reviews', 'data-effect', 'slide');
+			$this->add_render_attribute('business-reviews', 'data-speed', 1000);
+			$this->add_render_attribute('business-reviews', 'data-loop', 1);
+			$this->add_render_attribute('business-reviews', 'data-grab-cursor', 1);
+			$this->add_render_attribute('business-reviews', 'data-arrows', 1);
+			$this->add_render_attribute('business-reviews', 'data-dots', 1);
+			$this->add_render_attribute('business-reviews', 'data-autoplay_speed', 2000);
+			$this->add_render_attribute('business-reviews', 'data-pause-on-hover', 'true');
 			?>
-			<div class="eael-business-reviews-content-main">
+
+			<div <?php echo $this->get_render_attribute_string('business-reviews-wrap'); ?>>
+				<?php
+				$this->render_arrows();
+				?>
+				<div <?php echo $this->get_render_attribute_string('business-reviews'); ?>>
+
+					<div class="swiper-wrapper">
+						<?php
+						$i = 0;
+						
+						foreach ( $google_reviews_data['reviews'] as $google_review) :
+							// $google_review->author_name
+							// $google_review->author_url
+							// $google_review->profile_photo_url
+							// $google_review->rating
+							// $google_review->relative_time_description
+							// $google_review->text
+							$this->add_render_attribute('business-reviews-content-wrapper' . $i, [
+								'class' => ['eael-business-reviews-content', 'rating-five'],
+							]);
+
+							$this->add_render_attribute('business-reviews-slide' . $i, [
+								'class' => ['eael-business-reviews-item', 'clearfix', 'swiper-slide']
+							]);
+							?>
+
+							<div <?php echo $this->get_render_attribute_string('business-reviews-slide' . $i); ?>>
+								<div class="eael-business-reviews-item-inner clearfix">
+									<?php //$this->_render_user_avatar($item); ?>
+									<div <?php echo $this->get_render_attribute_string('business-reviews-content-wrapper' . $i); ?>>
+										<?php //$this->_render_quote();
+										?>
+										<div class="default-style-business-reviews-content">
+											<?php
+											//$this->_render_user_description($item, $settings);
+											//$this->_render_user_ratings($item);
+											//$this->_render_user_meta($item);
+											//echo $item_formatted['website'] . ' ' . $i;
+											echo $i;
+											?>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<?php $i++;
+						endforeach; ?>
+					</div>
+					<?php
+					$this->render_dots();
+					?>
+				</div>
+			</div>
+
+			<!-- <div class="eael-business-reviews-content-main">
 				<div class="eael-business-reviews-header">
 					Header section 
 					<?php 
@@ -324,7 +417,7 @@ class Business_Reviews extends Widget_Base {
 
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<?php 
 			if( is_array( $google_reviews_data['reviews'] ) && count( $google_reviews_data['reviews'] ) ){
 				$item_formatted = [];
@@ -398,92 +491,6 @@ class Business_Reviews extends Widget_Base {
 				<?php printf( '<div class="eael-business-reviews-error-message">%s</div>', esc_html( $error_message ) ); ?>
 			<?php endif; ?>
 		</div>
-
-		<?php
-
-		// Slider
-		$this->add_render_attribute('business-reviews-wrap', 'class', 'swiper-container-wrap');
-		$this->add_render_attribute('business-reviews-wrap', 'class', 'eael-arrow-box');
-		$this->add_render_attribute('business-reviews-wrap', 'class', 'swiper-container-wrap-dots-outside');
-
-		$this->add_render_attribute('business-reviews-wrap', [
-			'class' => ['eael-business-reviews', 'default-style'],
-			'id'    => 'eael-business-reviews-' . esc_attr($this->get_id()),
-		]);
-
-		$this->add_render_attribute('business-reviews', [
-			'class' => [
-				'swiper-container',
-				'eael-business-reviews-main',
-				'swiper-container-' . esc_attr($this->get_id())
-			],
-			'data-pagination'   => '.swiper-pagination-' . esc_attr($this->get_id()),
-			'data-arrow-next'   => '.swiper-button-next-' . esc_attr($this->get_id()),
-			'data-arrow-prev'   => '.swiper-button-prev-' . esc_attr($this->get_id())
-		]);
-
-		$this->add_render_attribute('business-reviews', 'data-items', 1);
-		$this->add_render_attribute('business-reviews', 'data-items-tablet', 1);
-		$this->add_render_attribute('business-reviews', 'data-items-mobile', 1);
-		$this->add_render_attribute('business-reviews', 'data-margin', 10);
-		$this->add_render_attribute('business-reviews', 'data-margin-tablet', 10);
-		$this->add_render_attribute('business-reviews', 'data-margin-mobile', 10);
-		$this->add_render_attribute('business-reviews', 'data-effect', 'slide');
-		$this->add_render_attribute('business-reviews', 'data-speed', 1000);
-		$this->add_render_attribute('business-reviews', 'data-loop', 1);
-		$this->add_render_attribute('business-reviews', 'data-grab-cursor', 1);
-		$this->add_render_attribute('business-reviews', 'data-arrows', 1);
-		$this->add_render_attribute('business-reviews', 'data-dots', 1);
-		$this->add_render_attribute('business-reviews', 'data-autoplay_speed', 2000);
-		$this->add_render_attribute('business-reviews', 'data-pause-on-hover', 'true');
-		?>
-
-        <div <?php echo $this->get_render_attribute_string('business-reviews-wrap'); ?>>
-			<?php
-			$this->render_arrows();
-			?>
-            <div <?php echo $this->get_render_attribute_string('business-reviews'); ?>>
-
-                <div class="swiper-wrapper">
-					<?php
-					$i = 0;
-					$items = [1, 2, 3];
-					foreach ($items as $item) :
-						$this->add_render_attribute('business-reviews-content-wrapper' . $i, [
-							'class' => ['eael-business-reviews-content', 'rating-five'],
-						]);
-
-						$this->add_render_attribute('business-reviews-slide' . $i, [
-							'class' => ['eael-business-reviews-item', 'clearfix', 'swiper-slide']
-						]);
-						?>
-
-                        <div <?php echo $this->get_render_attribute_string('business-reviews-slide' . $i); ?>>
-                            <div class="eael-business-reviews-item-inner clearfix">
-								<?php //$this->_render_user_avatar($item); ?>
-                                <div <?php echo $this->get_render_attribute_string('business-reviews-content-wrapper' . $i); ?>>
-									<?php //$this->_render_quote();
-									?>
-                                    <div class="default-style-business-reviews-content">
-										<?php
-										//$this->_render_user_description($item, $settings);
-										//$this->_render_user_ratings($item);
-										//$this->_render_user_meta($item);
-										echo $item_formatted['website'] . ' ' . $i;
-										?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-						<?php $i++;
-					endforeach; ?>
-                </div>
-				<?php
-				$this->render_dots();
-				?>
-            </div>
-        </div>
 
 		<?php
 		echo ob_get_clean();
