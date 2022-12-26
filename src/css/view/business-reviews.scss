@@ -1,3 +1,30 @@
+.eael-business-reviews-wrapper {
+    .eael-google-review-reviewer-photo {
+        text-align: center;
+        width: 50px;
+        margin: auto;
+    }
+
+    .eael-google-review-reviewer-name {
+        color: #292844;
+        font-size: 16px;
+        text-align: center;
+        font-weight: 500;
+    }
+    
+    .eael-google-review-text {
+        color: #000000;
+        font-size: 14px;
+        text-align: center;
+        font-weight: 400;
+        margin-top: 10px;
+    }
+
+    .eael-google-review-rating {
+        text-align: center;
+        margin-top: 20px;
+    }
+}
 // Slider Style
 .elementor-widget-eael-business-reviews {
   .eael-business-reviews {

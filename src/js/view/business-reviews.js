@@ -14,8 +14,8 @@ var BusinessReviewsHandler = function ($scope, $) {
 	$margin_mobile = 10,
 	$effect = 'slide',
 	$speed = 400,
-	$autoplay = 999999,
-	$loop = 1,
+	$autoplay = 3000,
+	$loop = 0,
 	$grab_cursor = 0,
 	$centeredSlides = false,
 	$pause_on_hover = '';
@@ -40,6 +40,8 @@ var BusinessReviewsHandler = function ($scope, $) {
 			nextEl: $arrow_next,
 			prevEl: $arrow_prev,
 		},
+		slidesPerView: 3,
+		spaceBetween: 30
 	}
 
 	$businessReviewsSliderOptions.items = 4

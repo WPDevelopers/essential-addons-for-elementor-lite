@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use \Elementor\Controls_Manager;
 use \Elementor\Widget_Base;
+use Wpmet\Libs\Rating;
 
 class Business_Reviews extends Widget_Base {
 	
@@ -331,7 +332,10 @@ class Business_Reviews extends Widget_Base {
 												</div>
 												
 												<div class="eael-google-review-rating">
-													<?php echo esc_html( $google_review->rating ); ?>
+													<?php 
+														//echo esc_html( $google_review->rating ); 
+														$this->print_business_reviews_ratings($google_review->rating);
+													?>
 												</div>
 											</div>
 										</div>
@@ -439,6 +443,41 @@ class Business_Reviews extends Widget_Base {
 
 		<?php
 		echo ob_get_clean();
+	}
+
+	public function print_business_reviews_ratings($rating){
+		// $rating = intval($rating);
+
+		if( empty( $rating ) || intval( $rating ) > 5 ){
+			return false;
+		}
+
+		// $rating = is_int($rating) ? $rating : floor($rating) + 0.5;
+		$rating_svg = '<svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M7.37499 10.6517L3.26074 12.9547L4.17949 8.33008L0.717407 5.12875L5.39982 4.57341L7.37499 0.291748L9.35016 4.57341L14.0326 5.12875L10.5705 8.33008L11.4892 12.9547L7.37499 10.6517Z" fill="#F4BB4C"/>
+		</svg>';
+
+		$rating_svg_half = '<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<g clip-path="url(#clip0_51_21)">
+		<path d="M7.88891 9.31475L10.3663 10.7013L9.81274 7.91708L11.897 5.98916L9.07774 5.65491L7.88891 3.07716V9.31475ZM7.88891 10.6517L3.77466 12.9547L4.69341 8.33008L1.23132 5.12875L5.91374 4.57341L7.88891 0.291748L9.86407 4.57341L14.5465 5.12875L11.0844 8.33008L12.0032 12.9547L7.88891 10.6517Z" fill="#F4BB4C"/>
+		</g>
+		<defs>
+		<clipPath id="clip0_51_21">
+		<rect width="14" height="14" fill="white" transform="translate(0.888916)"/>
+		</clipPath>
+		</defs>
+		</svg>
+		';
+		
+		for( $i = 1; $i <= floor( $rating ); $i++){
+			printf("%s", $rating_svg);
+		}
+
+		if( ! is_int( $rating ) ){
+			printf("%s", $rating_svg_half);
+		}
+
+		return true;
 	}
 
 	/**
