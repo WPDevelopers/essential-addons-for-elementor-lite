@@ -324,7 +324,11 @@ class Business_Reviews extends Widget_Base {
 												</div>
 
 												<div class="eael-google-review-reviewer-name">
-													<?php echo esc_html( $google_review->author_name ); ?>
+													<a href="<?php echo ! empty ( $google_review->author_url ) ? esc_url_raw($google_review->author_url) : '#'; ?>" target="_blank"><?php echo esc_html( $google_review->author_name ); ?></a>
+												</div>
+												
+												<div class="eael-google-review-time">
+													<?php echo esc_html( $google_review->relative_time_description ); ?>
 												</div>
 
 												<div class="eael-google-review-text">
