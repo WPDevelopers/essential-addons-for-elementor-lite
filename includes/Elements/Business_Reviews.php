@@ -382,13 +382,23 @@ class Business_Reviews extends Widget_Base {
 										<?php //$this->_render_quote();
 										?>
 										<div class="default-style-business-reviews-content">
-											<?php
-											//$this->_render_user_description($item, $settings);
-											//$this->_render_user_ratings($item);
-											//$this->_render_user_meta($item);
-											//echo $item_formatted['website'] . ' ' . $i;
-											echo $i;
-											?>
+											<div class="eael-google-review-reviewer">
+												<div class="eael-google-review-reviewer-photo">
+													<img src="<?php echo esc_url_raw($google_review->profile_photo_url); ?>" alt="">
+												</div>
+
+												<div class="eael-google-review-reviewer-name">
+													<?php echo esc_html( $google_review->author_name ); ?>
+												</div>
+
+												<div class="eael-google-review-text">
+													<?php echo esc_html( $google_review->text ); ?>
+												</div>
+												
+												<div class="eael-google-review-rating">
+													<?php echo esc_html( $google_review->rating ); ?>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>

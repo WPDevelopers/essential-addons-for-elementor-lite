@@ -42,7 +42,7 @@ var BusinessReviewsHandler = function ($scope, $) {
 		},
 	}
 
-	$businessReviewsSliderOptions.items = 1
+	$businessReviewsSliderOptions.items = 4
 
 	var $businessReviewsSliderObj = swiperLoader(
 		$businessReviewsSlider,
