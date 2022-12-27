@@ -1202,6 +1202,18 @@
 .theme-shoptimizer .site-main ul.products li.product:hover:before {
   display: none;
 }
+.theme-shoptimizer li.product:not(.product-category):hover img {
+  -webkit-transform: inherit;
+      -ms-transform: inherit;
+          transform: inherit;
+}
+.theme-shoptimizer ul.products li.product .button {
+  position: relative;
+}
+.theme-shoptimizer .preset-2 ul.products li.product .button {
+  height: 35px;
+  width: 35px;
+}
 .theme-shoptimizer .eael-woo-product-carousel-container .preset-3 .woocommerce li.product .add_to_cart_button {
   width: 100%;
   background: transparent;
@@ -1210,7 +1222,6 @@
 .theme-shoptimizer .eael-woo-product-carousel-container.preset-1 .woocommerce li.product .add-to-cart a.button {
   height: 35px;
   width: 35px;
-  position: relative;
 }
 .theme-shoptimizer .eael-woo-product-carousel-container.preset-1 .woocommerce li.product .add-to-cart a.added_to_cart {
   bottom: 0;
