@@ -2142,11 +2142,44 @@ $theme-preset4: #ec3b75;
     ul.products li.product .button{
         position: relative;
     }
-    .preset-2 ul.products li.product .button{
-        height: 35px;
-        width: 35px;
+    .preset-2,
+    .preset-4{
+        ul.products li.product .button{
+            height: 35px;
+            width: 35px;
+        }
     }
     .eael-woo-product-carousel-container{
+        &.preset-1,&.preset-3,&.preset-4{
+            .woocommerce{
+                li.product{
+                    a.added_to_cart{
+                        bottom: 0;
+                        &:after{
+                            content: '\f217';
+                            font-weight: 900;
+                            font-family: 'Font Awesome 5 Free';
+                            font-size: 16px;
+                            display: initial;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.preset-1{
+            .woocommerce {
+                li.product {
+                    .add-to-cart{
+                        a.added_to_cart,
+                        a.button{
+                            height: 35px;
+                            width: 35px;
+                        }
+                    }
+                }
+            }
+        }
         &.preset-3{
             .woocommerce{
                 li.product{
@@ -2161,37 +2194,17 @@ $theme-preset4: #ec3b75;
                         display: inline-block;
                         width: 100%;
                         position: relative;
-                        bottom: 0;
-                        &:after{
-                            content: '\f217';
-                            font-weight: 900;
-                            font-family: 'Font Awesome 5 Free';
-                            font-size: 16px;
-                            display: initial;
-                        }
                     }
                 }
             }
         }
-        &.preset-1{
-            .woocommerce {
-                li.product {
-                    .add-to-cart{
-                        a.added_to_cart,
-                        a.button{
-                            height: 35px;
-                            width: 35px;
-                        }
-                        a.added_to_cart{
-                            bottom: 0;
-                            &:after{
-                                content: '\f217';
-                                font-weight: 900;
-                                font-family: 'Font Awesome 5 Free';
-                                font-size: 16px;
-                                display: initial;
-                            }
-                        }
+        &.preset-4{
+            .woocommerce{
+                li.product{
+                    a.added_to_cart{
+                        width: 35px;
+                        height: 35px;
+                        position: relative;
                     }
                 }
             }
