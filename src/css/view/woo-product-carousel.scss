@@ -2147,12 +2147,25 @@ $theme-preset4: #ec3b75;
         width: 35px;
     }
     .eael-woo-product-carousel-container{
-        .preset-3{
+        &.preset-3{
             .woocommerce{
                 li.product{
                     .add_to_cart_button{
                         width: 100%;
                         background: transparent;
+                    }
+                    a.added_to_cart{
+                        display: inline-block;
+                        width: 100%;
+                        position: relative;
+                        bottom: 0;
+                        &:after{
+                            content: '\f217';
+                            font-weight: 900;
+                            font-family: 'Font Awesome 5 Free';
+                            font-size: 16px;
+                            display: initial;
+                        }
                     }
                 }
             }
