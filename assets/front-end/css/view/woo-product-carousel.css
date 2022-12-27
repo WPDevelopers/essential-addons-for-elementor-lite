@@ -1210,7 +1210,23 @@
 .theme-shoptimizer ul.products li.product .button {
   position: relative;
 }
-.theme-shoptimizer .preset-2 ul.products li.product .button {
+.theme-shoptimizer .preset-2 ul.products li.product .button,
+.theme-shoptimizer .preset-4 ul.products li.product .button {
+  height: 35px;
+  width: 35px;
+}
+.theme-shoptimizer .eael-woo-product-carousel-container.preset-1 .woocommerce li.product a.added_to_cart, .theme-shoptimizer .eael-woo-product-carousel-container.preset-3 .woocommerce li.product a.added_to_cart, .theme-shoptimizer .eael-woo-product-carousel-container.preset-4 .woocommerce li.product a.added_to_cart {
+  bottom: 0;
+}
+.theme-shoptimizer .eael-woo-product-carousel-container.preset-1 .woocommerce li.product a.added_to_cart:after, .theme-shoptimizer .eael-woo-product-carousel-container.preset-3 .woocommerce li.product a.added_to_cart:after, .theme-shoptimizer .eael-woo-product-carousel-container.preset-4 .woocommerce li.product a.added_to_cart:after {
+  content: "\f217";
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  font-size: 16px;
+  display: initial;
+}
+.theme-shoptimizer .eael-woo-product-carousel-container.preset-1 .woocommerce li.product .add-to-cart a.added_to_cart,
+.theme-shoptimizer .eael-woo-product-carousel-container.preset-1 .woocommerce li.product .add-to-cart a.button {
   height: 35px;
   width: 35px;
 }
@@ -1225,27 +1241,9 @@
   display: inline-block;
   width: 100%;
   position: relative;
-  bottom: 0;
 }
-.theme-shoptimizer .eael-woo-product-carousel-container.preset-3 .woocommerce li.product a.added_to_cart:after {
-  content: "\f217";
-  font-weight: 900;
-  font-family: "Font Awesome 5 Free";
-  font-size: 16px;
-  display: initial;
-}
-.theme-shoptimizer .eael-woo-product-carousel-container.preset-1 .woocommerce li.product .add-to-cart a.added_to_cart,
-.theme-shoptimizer .eael-woo-product-carousel-container.preset-1 .woocommerce li.product .add-to-cart a.button {
-  height: 35px;
+.theme-shoptimizer .eael-woo-product-carousel-container.preset-4 .woocommerce li.product a.added_to_cart {
   width: 35px;
-}
-.theme-shoptimizer .eael-woo-product-carousel-container.preset-1 .woocommerce li.product .add-to-cart a.added_to_cart {
-  bottom: 0;
-}
-.theme-shoptimizer .eael-woo-product-carousel-container.preset-1 .woocommerce li.product .add-to-cart a.added_to_cart:after {
-  content: "\f217";
-  font-weight: 900;
-  font-family: "Font Awesome 5 Free";
-  font-size: 16px;
-  display: initial;
+  height: 35px;
+  position: relative;
 }
