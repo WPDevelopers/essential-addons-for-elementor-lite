@@ -2132,9 +2132,11 @@ $theme-preset4: #ec3b75;
 
 //shoptimizer savoy
 .theme-shoptimizer{
-    .site-main ul.products li.product:before,
-    .site-main ul.products li.product:hover:before{
-        display: none;
+    .site-main ul.products{
+        li.product:before,
+        li.product:hover:before{
+            display: none;
+        }
     }
     li.product:not(.product-category):hover img {
         transform: inherit;
