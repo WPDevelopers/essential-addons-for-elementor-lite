@@ -107,6 +107,70 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_business_reviews_items_layout',
+			[
+				'label'   => esc_html__( 'Layout Type', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'slider',
+				'options' => [
+					'slider' => esc_html__( 'Slider', 'essential-addons-for-elementor-lite' ),
+					'grid' => esc_html__( 'Grid', 'essential-addons-for-elementor-lite' ),
+				]
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_style_preset_slider',
+			[
+				'label'     => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'preset-1',
+				'options'   => [
+					'preset-1' => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
+					'preset-2' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
+					'preset-3' => esc_html__( 'Preset 3', 'essential-addons-for-elementor-lite' ),
+				],
+				'condition' => [
+					'eael_business_reviews_items_layout' => 'slider'
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_style_preset_grid',
+			[
+				'label'     => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'preset-1',
+				'options'   => [
+					'preset-1' => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
+					'preset-2' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
+				],
+				'condition' => [
+					'eael_business_reviews_items_layout' => 'grid'
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_column',
+			[
+				'label'     => esc_html__( 'Columns', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '3',
+				'options'   => [
+					'1' => esc_html__( '1', 'essential-addons-for-elementor-lite' ),
+					'2' => esc_html__( '2', 'essential-addons-for-elementor-lite' ),
+					'3' => esc_html__( '3', 'essential-addons-for-elementor-lite' ),
+					'4' => esc_html__( '4', 'essential-addons-for-elementor-lite' ),
+				],
+				'condition' => [
+					'eael_business_reviews_items_layout' => 'slider'
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**
@@ -134,8 +198,9 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['md5']        	= md5( $business_reviews['api_key'] . $this->get_id() );
 		$business_reviews['cache_key']  	= "eael_{$business_reviews['source']}_{$business_reviews['expiration']}_{$business_reviews['md5']}_brev_cache";
 
-		// $business_reviews['layout']        	= ! empty( $settings['eael_business_reviews_items_layout'] ) ? $settings['eael_business_reviews_items_layout'] : 'slider';
-		// $business_reviews['preset']        	= ! empty( $settings['eael_business_reviews_style_preset'] ) && 'slider' === $business_reviews['layout'] ? $settings['eael_busines$business_reviews_style_preset'] : 'preset-1';
+		$business_reviews['layout']        	= ! empty( $settings['eael_business_reviews_items_layout'] ) ? $settings['eael_business_reviews_items_layout'] : 'slider';
+		$business_reviews['preset']        	= ! empty( $settings['eael_business_reviews_style_preset_slider'] ) && 'slider' === $business_reviews['layout'] ? $settings['eael_business_reviews_style_preset_slider'] : 'preset-1';
+		$business_reviews['preset']        	= ! empty( $settings['eael_business_reviews_style_preset_grid'] ) && 'grid' === $business_reviews['layout'] ? $settings['eael_business_reviews_style_preset_grid'] : $business_reviews['preset'];
 		
 		return $business_reviews;
 	}
