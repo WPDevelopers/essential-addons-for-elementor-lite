@@ -402,14 +402,32 @@ class Business_Reviews extends Widget_Base {
 		}
 	}
 
-	public function print_business_reviews_google( $business_review_items ){
+	public function print_business_reviews( $business_reviews_items ){
 		$settings = $this->get_settings();
+		$business_reviews					= [];
+		$business_reviews['source']         = ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'google-reviews';
+
 		ob_start();
+
+		switch( $business_reviews['source'] ){
+			case 'google-reviews':
+				$this->print_business_reviews_google($business_reviews_items);
+				break;
+			default:
+				$this->print_business_reviews_google($business_reviews_items);
+				break;
+		}
+
+		echo ob_get_clean();
+	}
+
+	public function print_business_reviews_google( $business_reviews_items ){
+		$settings = $this->get_settings();
 
 		$business_reviews     					= [];
 		$google_reviews_data  					= [];
-		$business_review_obj  					= isset( $business_review_items['items'] ) ? $business_review_items['items'] : false;
-		$error_message 		  					= ! empty( $business_review_items['error_message'] ) ? $business_review_items['error_message'] : "";
+		$business_review_obj  					= isset( $business_reviews_items['items'] ) ? $business_reviews_items['items'] : false;
+		$error_message 		  					= ! empty( $business_reviews_items['error_message'] ) ? $business_reviews_items['error_message'] : "";
 
 		$business_reviews['source']            	= ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'opensea';
 		$business_reviews['layout']            	= ! empty( $settings['eael_business_reviews_items_layout'] ) ? $settings['eael_business_reviews_items_layout'] : 'slider';
@@ -461,7 +479,6 @@ class Business_Reviews extends Widget_Base {
 		</div>
 
 		<?php
-		echo ob_get_clean();
 	}
 
 	public function print_business_reviews_ratings($rating){
@@ -532,7 +549,7 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	protected function render() {
-		$business_review_items = $this->fetch_business_reviews_from_api(); 
-		$this->print_business_reviews_google( $business_review_items );
+		$business_reviews_items = $this->fetch_business_reviews_from_api(); 
+		$this->print_business_reviews( $business_reviews_items );
 	}
 }
