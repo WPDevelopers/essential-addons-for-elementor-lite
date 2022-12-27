@@ -256,6 +256,85 @@ class Business_Reviews extends Widget_Base {
 		return $error_message;
 	}
 
+	public function print_business_reviews( $business_reviews_items ){
+		$settings = $this->get_settings();
+		$business_reviews					= [];
+		$business_reviews['source']         = ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'google-reviews';
+
+		ob_start();
+
+		switch( $business_reviews['source'] ){
+			case 'google-reviews':
+				$this->print_business_reviews_google($business_reviews_items);
+				break;
+			default:
+				$this->print_business_reviews_google($business_reviews_items);
+				break;
+		}
+
+		echo ob_get_clean();
+	}
+
+	public function print_business_reviews_google( $business_reviews_items ){
+		$settings = $this->get_settings();
+
+		$business_reviews     					= [];
+		$google_reviews_data  					= [];
+		$business_review_obj  					= isset( $business_reviews_items['items'] ) ? $business_reviews_items['items'] : false;
+		$error_message 		  					= ! empty( $business_reviews_items['error_message'] ) ? $business_reviews_items['error_message'] : "";
+
+		$business_reviews['source']            	= ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'opensea';
+		$business_reviews['layout']            	= ! empty( $settings['eael_business_reviews_items_layout'] ) ? $settings['eael_business_reviews_items_layout'] : 'slider';
+		$business_reviews['preset']            	= ! empty( $settings['eael_business_reviews_style_preset'] ) && 'grid' === $business_reviews['layout'] ? $settings['eael_busines$business_reviews_style_preset'] : 'preset-1';
+		
+		$this->add_render_attribute( 'eael-business-reviews-wrapper', [
+			'class'                 => [
+				'eael-business-reviews-wrapper',
+				'eael-business-reviews-' . $this->get_id(),
+				'clearfix',
+			],
+		] );
+
+		$this->add_render_attribute(
+			'eael-business-reviews-items',
+			[
+				'id'    => 'eael-business-reviews-' . esc_attr( $this->get_id() ),
+				'class' => [
+					'eael-business-reviews-items',
+					'eael-business-reviews-' . esc_attr( $business_reviews['layout'] ),
+					esc_attr( $business_reviews['preset'] ),
+				],
+			]
+		);
+		?>
+
+		<div <?php echo $this->get_render_attribute_string('eael-business-reviews-wrapper') ?> >
+			<?php if ( is_object( $business_review_obj ) && ! is_null( $business_review_obj ) ) : ?>
+			<div <?php echo $this->get_render_attribute_string('eael-business-reviews-items'); ?> >
+				<?php 
+					$google_reviews_data['formatted_address'] 			= ! empty( $business_review_obj->formatted_address ) ? $business_review_obj->formatted_address : '';
+					$google_reviews_data['international_phone_number'] 	= ! empty( $business_review_obj->international_phone_number ) ? $business_review_obj->international_phone_number : '';
+					$google_reviews_data['name'] 						= ! empty( $business_review_obj->name ) ? $business_review_obj->name : '';
+					$google_reviews_data['photos'] 						= ! empty( $business_review_obj->photos ) ? $business_review_obj->photos : [];
+					$google_reviews_data['rating'] 						= ! empty( $business_review_obj->rating ) ? $business_review_obj->rating : '';
+					$google_reviews_data['reviews'] 					= ! empty( $business_review_obj->reviews ) ? $business_review_obj->reviews : [];
+					$google_reviews_data['url'] 						= ! empty( $business_review_obj->url ) ? $business_review_obj->url : '#';
+					$google_reviews_data['user_ratings_total'] 			= ! empty( $business_review_obj->user_ratings_total ) ? $business_review_obj->user_ratings_total : 0;
+					$google_reviews_data['website'] 					= ! empty( $business_review_obj->website ) ? $business_review_obj->website : '#';
+					
+					$this->print_google_reviews_slider($business_reviews, $google_reviews_data);
+					//$this->print_google_reviews_grid($business_reviews, $google_reviews_data);
+				?>
+				<!-- /.column  -->
+			</div>
+			<?php else: ?>
+				<?php printf( '<div class="eael-business-reviews-error-message">%s</div>', esc_html( $error_message ) ); ?>
+			<?php endif; ?>
+		</div>
+
+		<?php
+	}
+
 	public function print_google_reviews_slider( $business_reviews, $google_reviews_data ){
 		if ( ! empty( $google_reviews_data['reviews'] ) && count( $google_reviews_data['reviews'] ) ){
 			//$photo_obj = ! empty( $google_reviews_data['photos'] ) && ! empty( $google_reviews_data['photos'][5] ) ? $google_reviews_data['photos'][5] : $google_reviews_data['photos'][0];
@@ -402,83 +481,36 @@ class Business_Reviews extends Widget_Base {
 		}
 	}
 
-	public function print_business_reviews( $business_reviews_items ){
-		$settings = $this->get_settings();
-		$business_reviews					= [];
-		$business_reviews['source']         = ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'google-reviews';
-
-		ob_start();
-
-		switch( $business_reviews['source'] ){
-			case 'google-reviews':
-				$this->print_business_reviews_google($business_reviews_items);
-				break;
-			default:
-				$this->print_business_reviews_google($business_reviews_items);
-				break;
-		}
-
-		echo ob_get_clean();
+	/**
+	 * Render logo carousel dots output on the frontend.
+	 */
+	protected function render_dots()
+	{
+		$settings = $this->get_settings_for_display();
+			?>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination swiper-pagination-<?php echo esc_attr($this->get_id()); ?>"></div>
+			<?php 
 	}
 
-	public function print_business_reviews_google( $business_reviews_items ){
-		$settings = $this->get_settings();
+	/**
+	 * Render logo carousel arrows output on the frontend.
+	 */
+	protected function render_arrows()
+	{
+		$settings = $this->get_settings_for_display();
 
-		$business_reviews     					= [];
-		$google_reviews_data  					= [];
-		$business_review_obj  					= isset( $business_reviews_items['items'] ) ? $business_reviews_items['items'] : false;
-		$error_message 		  					= ! empty( $business_reviews_items['error_message'] ) ? $business_reviews_items['error_message'] : "";
-
-		$business_reviews['source']            	= ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'opensea';
-		$business_reviews['layout']            	= ! empty( $settings['eael_business_reviews_items_layout'] ) ? $settings['eael_business_reviews_items_layout'] : 'slider';
-		$business_reviews['preset']            	= ! empty( $settings['eael_business_reviews_style_preset'] ) && 'grid' === $business_reviews['layout'] ? $settings['eael_busines$business_reviews_style_preset'] : 'preset-1';
-		
-		$this->add_render_attribute( 'eael-business-reviews-wrapper', [
-			'class'                 => [
-				'eael-business-reviews-wrapper',
-				'eael-business-reviews-' . $this->get_id(),
-				'clearfix',
-			],
-		] );
-
-		$this->add_render_attribute(
-			'eael-business-reviews-items',
-			[
-				'id'    => 'eael-business-reviews-' . esc_attr( $this->get_id() ),
-				'class' => [
-					'eael-business-reviews-items',
-					'eael-business-reviews-' . esc_attr( $business_reviews['layout'] ),
-					esc_attr( $business_reviews['preset'] ),
-				],
-			]
-		);
+		$pa_next_arrow = 'fa fa-angle-right';
+		$pa_prev_arrow = 'fa fa-angle-left';
 		?>
-
-		<div <?php echo $this->get_render_attribute_string('eael-business-reviews-wrapper') ?> >
-			<?php if ( is_object( $business_review_obj ) && ! is_null( $business_review_obj ) ) : ?>
-			<div <?php echo $this->get_render_attribute_string('eael-business-reviews-items'); ?> >
-				<?php 
-					$google_reviews_data['formatted_address'] 			= ! empty( $business_review_obj->formatted_address ) ? $business_review_obj->formatted_address : '';
-					$google_reviews_data['international_phone_number'] 	= ! empty( $business_review_obj->international_phone_number ) ? $business_review_obj->international_phone_number : '';
-					$google_reviews_data['name'] 						= ! empty( $business_review_obj->name ) ? $business_review_obj->name : '';
-					$google_reviews_data['photos'] 						= ! empty( $business_review_obj->photos ) ? $business_review_obj->photos : [];
-					$google_reviews_data['rating'] 						= ! empty( $business_review_obj->rating ) ? $business_review_obj->rating : '';
-					$google_reviews_data['reviews'] 					= ! empty( $business_review_obj->reviews ) ? $business_review_obj->reviews : [];
-					$google_reviews_data['url'] 						= ! empty( $business_review_obj->url ) ? $business_review_obj->url : '#';
-					$google_reviews_data['user_ratings_total'] 			= ! empty( $business_review_obj->user_ratings_total ) ? $business_review_obj->user_ratings_total : 0;
-					$google_reviews_data['website'] 					= ! empty( $business_review_obj->website ) ? $business_review_obj->website : '#';
-					
-					$this->print_google_reviews_slider($business_reviews, $google_reviews_data);
-					//$this->print_google_reviews_grid($business_reviews, $google_reviews_data);
-				?>
-				<!-- /.column  -->
-			</div>
-			<?php else: ?>
-				<?php printf( '<div class="eael-business-reviews-error-message">%s</div>', esc_html( $error_message ) ); ?>
-			<?php endif; ?>
+		<!-- Add Arrows -->
+		<div class="swiper-button-next swiper-button-next-<?php echo esc_attr($this->get_id()); ?>">
+			<i class="<?php echo esc_attr($pa_next_arrow); ?>"></i>
 		</div>
-
-		<?php
+		<div class="swiper-button-prev swiper-button-prev-<?php echo esc_attr($this->get_id()); ?>">
+			<i class="<?php echo esc_attr($pa_prev_arrow); ?>"></i>
+		</div>
+		<?php 
 	}
 
 	public function print_business_reviews_ratings($rating){
@@ -514,38 +546,6 @@ class Business_Reviews extends Widget_Base {
 		}
 
 		return true;
-	}
-
-	/**
-	 * Render logo carousel dots output on the frontend.
-	 */
-	protected function render_dots()
-	{
-		$settings = $this->get_settings_for_display();
-			?>
-            <!-- Add Pagination -->
-            <div class="swiper-pagination swiper-pagination-<?php echo esc_attr($this->get_id()); ?>"></div>
-			<?php 
-	}
-
-	/**
-	 * Render logo carousel arrows output on the frontend.
-	 */
-	protected function render_arrows()
-	{
-		$settings = $this->get_settings_for_display();
-
-		$pa_next_arrow = 'fa fa-angle-right';
-		$pa_prev_arrow = 'fa fa-angle-left';
-		?>
-		<!-- Add Arrows -->
-		<div class="swiper-button-next swiper-button-next-<?php echo esc_attr($this->get_id()); ?>">
-			<i class="<?php echo esc_attr($pa_next_arrow); ?>"></i>
-		</div>
-		<div class="swiper-button-prev swiper-button-prev-<?php echo esc_attr($this->get_id()); ?>">
-			<i class="<?php echo esc_attr($pa_prev_arrow); ?>"></i>
-		</div>
-		<?php 
 	}
 
 	protected function render() {
