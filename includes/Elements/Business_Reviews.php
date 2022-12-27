@@ -129,66 +129,28 @@ class Business_Reviews extends Widget_Base {
 		$settings = $this->get_settings();
 		$settings['eael_business_reviews_source_key'] = get_option( 'eael_br_google_place_api_key' );
 
-		$response                        	  = [];
-		$business_reviews                     = [];
-		$business_reviews['source']           = ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'google-reviews';
-		$business_reviews['api_key']          = ! empty( $settings['eael_business_reviews_source_key'] ) ? esc_html( $settings['eael_business_reviews_source_key'] ) : '';
-		$business_reviews['reviews_sort']	  = sanitize_text_field( 'most_relevant' );
+		$response                        	= [];
+		$business_reviews                  	= [];
+		$business_reviews['source']         = ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'google-reviews';
+		$business_reviews['api_key']        = ! empty( $settings['eael_business_reviews_source_key'] ) ? esc_html( $settings['eael_business_reviews_source_key'] ) : '';
+		$business_reviews['reviews_sort']	= sanitize_text_field( 'most_relevant' );
 
-		$expiration 	= DAY_IN_SECONDS;
-		$md5        	= md5( $business_reviews['api_key'] . $this->get_id() );
-		$cache_key  	= "eael_{$business_reviews['source']}_{$expiration}_{$md5}_brev_cache";
-		$items      	= get_transient( $cache_key );
+		$business_reviews['expiration'] 	= DAY_IN_SECONDS;
+		$business_reviews['md5']        	= md5( $business_reviews['api_key'] . $this->get_id() );
+		$business_reviews['cache_key']  	= "eael_{$business_reviews['source']}_{$business_reviews['expiration']}_{$business_reviews['md5']}_brev_cache";
+		$items      						= get_transient( $business_reviews['cache_key'] );
 
 		$error_message 	= '';
 
-		if ( false === $items && 'google-reviews' === $business_reviews['source'] ) {
-			$url   = "https://maps.googleapis.com/maps/api/place/details/json";
-			$param = array();
-
-			$args = array(
-				'key' 	  => sanitize_text_field( $business_reviews['api_key'] ),
-				'placeid' => sanitize_text_field( 'ChIJ0cpDbNvBVTcRGX9JNhhpC8I' ),
-				'fields'  => sanitize_text_field( 'formatted_address,international_phone_number,name,rating,reviews,url,user_ratings_total,website,photos' ),
-			);
-
-			if( ! empty( $business_reviews['reviews_sort'] ) ){
-				$args['reviews_sort'] = $business_reviews['reviews_sort'];
+		if ( false === $items ) {
+			switch( $business_reviews['source'] ){
+				case 'google-reviews':
+					$data = $this->fetch_google_reviews_from_api($business_reviews);
+					break;
+				default:
+					$data = $this->fetch_google_reviews_from_api($business_reviews);
+					break;
 			}
-			
-			$param = array_merge( $param, $args );
-
-			$headers = array(
-				'headers' => array(
-					'Content-Type' => 'application/json',
-				)
-			);
-			$options = array(
-				'timeout' => 240
-			);
-
-			$options = array_merge( $headers, $options );
-
-			if ( empty( $error_message ) ) {
-				$response = wp_remote_get(
-					esc_url_raw( add_query_arg( $param, $url ) ),
-					$options
-				);
-
-				$body     = json_decode( wp_remote_retrieve_body( $response ) );
-				$response = 'OK' === $body->status ? $body->result : false;				
-
-				if ( ! empty( $response ) ) {
-					set_transient( $cache_key, $response, $expiration );
-				} else {
-					$error_message = $this->fetch_api_response_error_message($body->status);
-				}
-			}
-
-			$data = [
-				'items'         => $response,
-				'error_message' => $error_message,
-			];
 
 			return $data;
 		}
@@ -203,7 +165,60 @@ class Business_Reviews extends Widget_Base {
 		return $data;
 	}
 
-	public function fetch_api_response_error_message( $status = 'OK' ){
+	public function fetch_google_reviews_from_api( $business_reviews_settings ){
+		$business_reviews = $business_reviews_settings;
+		
+		$url   = "https://maps.googleapis.com/maps/api/place/details/json";
+		$param = array();
+
+		$args = array(
+			'key' 	  => sanitize_text_field( $business_reviews['api_key'] ),
+			'placeid' => sanitize_text_field( 'ChIJ0cpDbNvBVTcRGX9JNhhpC8I' ),
+			'fields'  => sanitize_text_field( 'formatted_address,international_phone_number,name,rating,reviews,url,user_ratings_total,website,photos' ),
+		);
+
+		if( ! empty( $business_reviews['reviews_sort'] ) ){
+			$args['reviews_sort'] = $business_reviews['reviews_sort'];
+		}
+		
+		$param = array_merge( $param, $args );
+
+		$headers = array(
+			'headers' => array(
+				'Content-Type' => 'application/json',
+			)
+		);
+		$options = array(
+			'timeout' => 240
+		);
+
+		$options = array_merge( $headers, $options );
+
+		if ( empty( $error_message ) ) {
+			$response = wp_remote_get(
+				esc_url_raw( add_query_arg( $param, $url ) ),
+				$options
+			);
+
+			$body     = json_decode( wp_remote_retrieve_body( $response ) );
+			$response = 'OK' === $body->status ? $body->result : false;				
+
+			if ( ! empty( $response ) ) {
+				set_transient( $business_reviews['cache_key'], $response, $business_reviews['expiration'] );
+			} else {
+				$error_message = $this->fetch_google_place_response_error_message($body->status);
+			}
+		}
+
+		$data = [
+			'items'         => $response,
+			'error_message' => $error_message,
+		];
+
+		return $data;
+	}
+
+	public function fetch_google_place_response_error_message( $status = 'OK' ){
 		$error_message = '';
 
 		switch( $status ){
@@ -397,7 +412,7 @@ class Business_Reviews extends Widget_Base {
 		$error_message 		  					= ! empty( $business_review_items['error_message'] ) ? $business_review_items['error_message'] : "";
 
 		$business_reviews['source']            	= ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'opensea';
-		$business_reviews['layout']            	= ! empty( $settings['eael_business_reviews_items_layout'] ) ? $settings['eael_business_reviews_items_layout'] : 'grid';
+		$business_reviews['layout']            	= ! empty( $settings['eael_business_reviews_items_layout'] ) ? $settings['eael_business_reviews_items_layout'] : 'slider';
 		$business_reviews['preset']            	= ! empty( $settings['eael_business_reviews_style_preset'] ) && 'grid' === $business_reviews['layout'] ? $settings['eael_busines$business_reviews_style_preset'] : 'preset-1';
 		
 		$this->add_render_attribute( 'eael-business-reviews-wrapper', [
@@ -414,7 +429,7 @@ class Business_Reviews extends Widget_Base {
 				'id'    => 'eael-business-reviews-' . esc_attr( $this->get_id() ),
 				'class' => [
 					'eael-business-reviews-items',
-					'eael-reviews-' . esc_attr( $business_reviews['layout'] ),
+					'eael-business-reviews-' . esc_attr( $business_reviews['layout'] ),
 					esc_attr( $business_reviews['preset'] ),
 				],
 			]
