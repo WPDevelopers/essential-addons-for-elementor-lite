@@ -2150,6 +2150,9 @@ $theme-preset4: #ec3b75;
         &.preset-3{
             .woocommerce{
                 li.product{
+                    .star-rating span{
+                        display: block;
+                    }
                     .add_to_cart_button{
                         width: 100%;
                         background: transparent;
