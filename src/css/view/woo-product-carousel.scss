@@ -2136,6 +2136,16 @@ $theme-preset4: #ec3b75;
     .site-main ul.products li.product:hover:before{
         display: none;
     }
+    li.product:not(.product-category):hover img {
+        transform: inherit;
+    }
+    ul.products li.product .button{
+        position: relative;
+    }
+    .preset-2 ul.products li.product .button{
+        height: 35px;
+        width: 35px;
+    }
     .eael-woo-product-carousel-container{
         .preset-3{
             .woocommerce{
@@ -2147,7 +2157,7 @@ $theme-preset4: #ec3b75;
                 }
             }
         }
-        &.preset-1 {
+        &.preset-1{
             .woocommerce {
                 li.product {
                     .add-to-cart{
@@ -2155,7 +2165,6 @@ $theme-preset4: #ec3b75;
                         a.button{
                             height: 35px;
                             width: 35px;
-                            position: relative;
                         }
                         a.added_to_cart{
                             bottom: 0;
