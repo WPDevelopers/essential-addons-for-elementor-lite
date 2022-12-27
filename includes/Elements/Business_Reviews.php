@@ -240,13 +240,13 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function fetch_google_reviews_from_api( $business_reviews_settings ){
-		$business_reviews = $business_reviews_settings;
+		$business_reviews 					= $business_reviews_settings;
 		$business_reviews['reviews_sort']	= sanitize_text_field( 'most_relevant' );
 		
-		$url   = "https://maps.googleapis.com/maps/api/place/details/json";
-		$param = array();
+		$url   	= "https://maps.googleapis.com/maps/api/place/details/json";
+		$param 	= array();
 
-		$args = array(
+		$args 	= array(
 			'key' 	  => sanitize_text_field( $business_reviews['api_key'] ),
 			'placeid' => sanitize_text_field( 'ChIJ0cpDbNvBVTcRGX9JNhhpC8I' ),
 			'fields'  => sanitize_text_field( 'formatted_address,international_phone_number,name,rating,reviews,url,user_ratings_total,website,photos' ),
@@ -256,18 +256,18 @@ class Business_Reviews extends Widget_Base {
 			$args['reviews_sort'] = $business_reviews['reviews_sort'];
 		}
 		
-		$param = array_merge( $param, $args );
-
-		$headers = array(
+		$param 		= array_merge( $param, $args );
+		
+		$headers	= array(
 			'headers' => array(
 				'Content-Type' => 'application/json',
 			)
 		);
-		$options = array(
+		$options 	= array(
 			'timeout' => 240
 		);
 
-		$options = array_merge( $headers, $options );
+		$options 	= array_merge( $headers, $options );
 
 		if ( empty( $error_message ) ) {
 			$response = wp_remote_get(
@@ -336,26 +336,6 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews		= $this->get_business_reviews_settings();
 
 		ob_start();
-
-		switch( $business_reviews['source'] ){
-			case 'google-reviews':
-				$this->print_business_reviews_google($business_reviews_items);
-				break;
-			default:
-				$this->print_business_reviews_google($business_reviews_items);
-				break;
-		}
-
-		echo ob_get_clean();
-	}
-
-	public function print_business_reviews_google( $business_reviews_items ){
-		$settings 						= $this->get_settings();
-		$business_reviews				= $this->get_business_reviews_settings();
-
-		$google_reviews_data  			= [];
-		$business_review_obj  			= isset( $business_reviews_items['items'] ) ? $business_reviews_items['items'] : false;
-		$error_message 		  			= ! empty( $business_reviews_items['error_message'] ) ? $business_reviews_items['error_message'] : "";
 		
 		$this->add_render_attribute( 'eael-business-reviews-wrapper', [
 			'class'                 => [
@@ -379,30 +359,57 @@ class Business_Reviews extends Widget_Base {
 		?>
 
 		<div <?php echo $this->get_render_attribute_string('eael-business-reviews-wrapper') ?> >
-			<?php if ( is_object( $business_review_obj ) && ! is_null( $business_review_obj ) ) : ?>
 			<div <?php echo $this->get_render_attribute_string('eael-business-reviews-items'); ?> >
 				<?php 
-					$google_reviews_data['formatted_address'] 			= ! empty( $business_review_obj->formatted_address ) ? $business_review_obj->formatted_address : '';
-					$google_reviews_data['international_phone_number'] 	= ! empty( $business_review_obj->international_phone_number ) ? $business_review_obj->international_phone_number : '';
-					$google_reviews_data['name'] 						= ! empty( $business_review_obj->name ) ? $business_review_obj->name : '';
-					$google_reviews_data['photos'] 						= ! empty( $business_review_obj->photos ) ? $business_review_obj->photos : [];
-					$google_reviews_data['rating'] 						= ! empty( $business_review_obj->rating ) ? $business_review_obj->rating : '';
-					$google_reviews_data['reviews'] 					= ! empty( $business_review_obj->reviews ) ? $business_review_obj->reviews : [];
-					$google_reviews_data['url'] 						= ! empty( $business_review_obj->url ) ? $business_review_obj->url : '#';
-					$google_reviews_data['user_ratings_total'] 			= ! empty( $business_review_obj->user_ratings_total ) ? $business_review_obj->user_ratings_total : 0;
-					$google_reviews_data['website'] 					= ! empty( $business_review_obj->website ) ? $business_review_obj->website : '#';
-					
-					$this->print_google_reviews_slider($business_reviews, $google_reviews_data);
-					//$this->print_google_reviews_grid($business_reviews, $google_reviews_data);
+				switch( $business_reviews['source'] ){
+					case 'google-reviews':
+						$this->print_business_reviews_google($business_reviews_items);
+						break;
+					default:
+						$this->print_business_reviews_google($business_reviews_items);
+						break;
+				}
 				?>
-				<!-- /.column  -->
 			</div>
-			<?php else: ?>
-				<?php printf( '<div class="eael-business-reviews-error-message">%s</div>', esc_html( $error_message ) ); ?>
-			<?php endif; ?>
 		</div>
 
-		<?php
+		<?php 
+		echo ob_get_clean();
+	}
+
+	public function print_business_reviews_google( $business_reviews_items ){
+		$settings 						= $this->get_settings();
+		$business_reviews				= $this->get_business_reviews_settings();
+
+		$google_reviews_data  			= [];
+		$business_review_obj  			= isset( $business_reviews_items['items'] ) ? $business_reviews_items['items'] : false;
+		$error_message 		  			= ! empty( $business_reviews_items['error_message'] ) ? $business_reviews_items['error_message'] : "";
+		
+		if ( is_object( $business_review_obj ) && ! is_null( $business_review_obj ) ) {
+			$google_reviews_data['formatted_address'] 			= ! empty( $business_review_obj->formatted_address ) ? $business_review_obj->formatted_address : '';
+			$google_reviews_data['international_phone_number'] 	= ! empty( $business_review_obj->international_phone_number ) ? $business_review_obj->international_phone_number : '';
+			$google_reviews_data['name'] 						= ! empty( $business_review_obj->name ) ? $business_review_obj->name : '';
+			$google_reviews_data['photos'] 						= ! empty( $business_review_obj->photos ) ? $business_review_obj->photos : [];
+			$google_reviews_data['rating'] 						= ! empty( $business_review_obj->rating ) ? $business_review_obj->rating : '';
+			$google_reviews_data['reviews'] 					= ! empty( $business_review_obj->reviews ) ? $business_review_obj->reviews : [];
+			$google_reviews_data['url'] 						= ! empty( $business_review_obj->url ) ? $business_review_obj->url : '#';
+			$google_reviews_data['user_ratings_total'] 			= ! empty( $business_review_obj->user_ratings_total ) ? $business_review_obj->user_ratings_total : 0;
+			$google_reviews_data['website'] 					= ! empty( $business_review_obj->website ) ? $business_review_obj->website : '#';
+			
+			switch( $business_reviews['layout'] ){
+				case 'slider':
+					$this->print_google_reviews_slider($business_reviews, $google_reviews_data);
+					break;
+				case 'grid':
+					// $this->print_google_reviews_grid($business_reviews, $google_reviews_data);
+					break;
+				default:
+					$this->print_google_reviews_slider($business_reviews, $google_reviews_data);
+					break;
+			}
+		} else {
+			printf( '<div class="eael-business-reviews-error-message">%s</div>', esc_html( $error_message ) );
+		}
 	}
 
 	public function print_google_reviews_slider( $business_reviews, $google_reviews_data ){
