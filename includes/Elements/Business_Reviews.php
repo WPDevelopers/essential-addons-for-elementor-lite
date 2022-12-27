@@ -356,8 +356,6 @@ class Business_Reviews extends Widget_Base {
 		$google_reviews_data  			= [];
 		$business_review_obj  			= isset( $business_reviews_items['items'] ) ? $business_reviews_items['items'] : false;
 		$error_message 		  			= ! empty( $business_reviews_items['error_message'] ) ? $business_reviews_items['error_message'] : "";
-
-		$business_reviews['source']            	= ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'opensea';
 		
 		$this->add_render_attribute( 'eael-business-reviews-wrapper', [
 			'class'                 => [
@@ -373,8 +371,8 @@ class Business_Reviews extends Widget_Base {
 				'id'    => 'eael-business-reviews-' . esc_attr( $this->get_id() ),
 				'class' => [
 					'eael-business-reviews-items',
-					// 'eael-business-reviews-' . esc_attr( $business_reviews['layout'] ),
-					// esc_attr( $business_reviews['preset'] ),
+					'eael-business-reviews-' . esc_attr( $business_reviews['layout'] ),
+					esc_attr( $business_reviews['preset'] ),
 				],
 			]
 		);
