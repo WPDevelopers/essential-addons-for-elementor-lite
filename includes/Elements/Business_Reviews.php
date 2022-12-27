@@ -122,25 +122,34 @@ class Business_Reviews extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	/**
-     * API Call to Get Business Reviews
-     */
-	public function fetch_business_reviews_from_api(){
+	public function get_business_reviews_settings(){
 		$settings = $this->get_settings();
 		$settings['eael_business_reviews_source_key'] = get_option( 'eael_br_google_place_api_key' );
 
-		$response                        	= [];
 		$business_reviews                  	= [];
 		$business_reviews['source']         = ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'google-reviews';
 		$business_reviews['api_key']        = ! empty( $settings['eael_business_reviews_source_key'] ) ? esc_html( $settings['eael_business_reviews_source_key'] ) : '';
-		$business_reviews['reviews_sort']	= sanitize_text_field( 'most_relevant' );
 
 		$business_reviews['expiration'] 	= DAY_IN_SECONDS;
 		$business_reviews['md5']        	= md5( $business_reviews['api_key'] . $this->get_id() );
 		$business_reviews['cache_key']  	= "eael_{$business_reviews['source']}_{$business_reviews['expiration']}_{$business_reviews['md5']}_brev_cache";
-		$items      						= get_transient( $business_reviews['cache_key'] );
 
-		$error_message 	= '';
+		// $business_reviews['layout']        	= ! empty( $settings['eael_business_reviews_items_layout'] ) ? $settings['eael_business_reviews_items_layout'] : 'slider';
+		// $business_reviews['preset']        	= ! empty( $settings['eael_business_reviews_style_preset'] ) && 'slider' === $business_reviews['layout'] ? $settings['eael_busines$business_reviews_style_preset'] : 'preset-1';
+		
+		return $business_reviews;
+	}
+
+	/**
+     * API Call to Get Business Reviews
+     */
+	public function fetch_business_reviews_from_api(){
+		$settings					= $this->get_settings();
+		$response					= [];
+		$error_message 				= '';
+
+		$business_reviews			= $this->get_business_reviews_settings();
+		$items      				= get_transient( $business_reviews['cache_key'] );
 
 		if ( false === $items ) {
 			switch( $business_reviews['source'] ){
@@ -167,6 +176,7 @@ class Business_Reviews extends Widget_Base {
 
 	public function fetch_google_reviews_from_api( $business_reviews_settings ){
 		$business_reviews = $business_reviews_settings;
+		$business_reviews['reviews_sort']	= sanitize_text_field( 'most_relevant' );
 		
 		$url   = "https://maps.googleapis.com/maps/api/place/details/json";
 		$param = array();
@@ -257,9 +267,8 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function print_business_reviews( $business_reviews_items ){
-		$settings = $this->get_settings();
-		$business_reviews					= [];
-		$business_reviews['source']         = ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'google-reviews';
+		$settings 				= $this->get_settings();
+		$business_reviews		= $this->get_business_reviews_settings();
 
 		ob_start();
 
@@ -276,16 +285,14 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function print_business_reviews_google( $business_reviews_items ){
-		$settings = $this->get_settings();
+		$settings 						= $this->get_settings();
+		$business_reviews				= $this->get_business_reviews_settings();
 
-		$business_reviews     					= [];
-		$google_reviews_data  					= [];
-		$business_review_obj  					= isset( $business_reviews_items['items'] ) ? $business_reviews_items['items'] : false;
-		$error_message 		  					= ! empty( $business_reviews_items['error_message'] ) ? $business_reviews_items['error_message'] : "";
+		$google_reviews_data  			= [];
+		$business_review_obj  			= isset( $business_reviews_items['items'] ) ? $business_reviews_items['items'] : false;
+		$error_message 		  			= ! empty( $business_reviews_items['error_message'] ) ? $business_reviews_items['error_message'] : "";
 
 		$business_reviews['source']            	= ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'opensea';
-		$business_reviews['layout']            	= ! empty( $settings['eael_business_reviews_items_layout'] ) ? $settings['eael_business_reviews_items_layout'] : 'slider';
-		$business_reviews['preset']            	= ! empty( $settings['eael_business_reviews_style_preset'] ) && 'grid' === $business_reviews['layout'] ? $settings['eael_busines$business_reviews_style_preset'] : 'preset-1';
 		
 		$this->add_render_attribute( 'eael-business-reviews-wrapper', [
 			'class'                 => [
@@ -301,8 +308,8 @@ class Business_Reviews extends Widget_Base {
 				'id'    => 'eael-business-reviews-' . esc_attr( $this->get_id() ),
 				'class' => [
 					'eael-business-reviews-items',
-					'eael-business-reviews-' . esc_attr( $business_reviews['layout'] ),
-					esc_attr( $business_reviews['preset'] ),
+					// 'eael-business-reviews-' . esc_attr( $business_reviews['layout'] ),
+					// esc_attr( $business_reviews['preset'] ),
 				],
 			]
 		);
