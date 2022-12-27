@@ -1,3 +1,32 @@
+.eael-business-reviews-wrapper .eael-google-review-reviewer-photo {
+  text-align: center;
+  width: 50px;
+  margin: auto;
+}
+.eael-business-reviews-wrapper .eael-google-review-reviewer-name,
+.eael-business-reviews-wrapper .eael-google-review-reviewer-name a {
+  color: #292844;
+  font-size: 16px;
+  text-align: center;
+  font-weight: 500;
+}
+.eael-business-reviews-wrapper .eael-google-review-time {
+  color: #8A8EAA;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 400;
+}
+.eael-business-reviews-wrapper .eael-google-review-text {
+  color: #000000;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 400;
+  margin-top: 10px;
+}
+.eael-business-reviews-wrapper .eael-google-review-rating {
+  text-align: center;
+  margin-top: 20px;
+}
 .elementor-widget-eael-business-reviews {
   /*--- Default styles ---*/
   /*--- Default Style ---*/
