@@ -247,9 +247,9 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['preset']        	= ! empty( $settings['eael_business_reviews_style_preset_slider'] ) && 'slider' === $business_reviews['layout'] ? $settings['eael_business_reviews_style_preset_slider'] : 'preset-1';
 		$business_reviews['preset']        	= ! empty( $settings['eael_business_reviews_style_preset_grid'] ) && 'grid' === $business_reviews['layout'] ? $settings['eael_business_reviews_style_preset_grid'] : $business_reviews['preset'];
 		$business_reviews['columns']        = ! empty( $settings['eael_business_reviews_column'] ) ? $settings['eael_business_reviews_column'] : 3;
-		$business_reviews['loop']        	= ! empty( $settings['eael_business_reviews_loop'] ) && 'yes' === ! empty( $settings['eael_business_reviews_loop'] ) ? $settings['eael_business_reviews_loop'] : 1;
-		$business_reviews['arrows']        	= ! empty( $settings['eael_business_reviews_arrows'] ) && 'yes' === ! empty( $settings['eael_business_reviews_arrows'] ) ? $settings['eael_business_reviews_arrows'] : 1;
-		$business_reviews['dots']        	= ! empty( $settings['eael_business_reviews_dots'] ) && 'yes' === ! empty( $settings['eael_business_reviews_dots'] ) ? $settings['eael_business_reviews_dots'] : 1;
+		$business_reviews['loop']        	= ! empty( $settings['eael_business_reviews_loop'] ) && 'yes' === $settings['eael_business_reviews_loop'] ? 1 : 0;
+		$business_reviews['arrows']        	= ! empty( $settings['eael_business_reviews_arrows'] ) && 'yes' === $settings['eael_business_reviews_arrows'] ? 1 : 0;
+		$business_reviews['dots']        	= ! empty( $settings['eael_business_reviews_dots'] ) && 'yes' === $settings['eael_business_reviews_dots'] ? 1 : 0;
 		
 		return $business_reviews;
 	}
@@ -476,9 +476,7 @@ class Business_Reviews extends Widget_Base {
 			'data-arrow-prev'    	=> '.swiper-button-prev-' . esc_attr($this->get_id()),
 			'data-effect'    		=> 'slide',
 			'data-items'    		=> esc_attr( $business_reviews['columns'] ),
-			'data-loop'    			=> esc_attr( $business_reviews['columns'] ),
-			'data-arrows'    		=> esc_attr( $business_reviews['arrows'] ),
-			'data-dots'    			=> esc_attr( $business_reviews['dots'] ),
+			'data-loop'    			=> esc_attr( $business_reviews['loop'] ),
 			'data-speed'    		=> 1000,
 		]);
 		
@@ -489,7 +487,11 @@ class Business_Reviews extends Widget_Base {
 
 				<div class="eael-google-reviews-items eael-google-reviews-slider">
 					<div class="eael-google-reviews-arrows eael-google-reviews-arrows-outside">
-						<?php $this->render_arrows(); ?>
+						<?php 
+						if( ! empty( $business_reviews['arrows'] ) ) {
+							$this->render_arrows(); 
+						}
+						?>
 					</div>
 
 					<div class="eael-google-reviews-dots eael-google-reviews-dots-outside">
@@ -546,8 +548,11 @@ class Business_Reviews extends Widget_Base {
 							}	
 							?>
 						</div>
-
-						<?php $this->render_dots(); ?>
+						<?php 
+						if( ! empty( $business_reviews['dots'] ) ) {
+							$this->render_dots();
+						}
+						?>
 					</div>
 				</div>
 			</div>
