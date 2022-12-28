@@ -392,6 +392,8 @@ class Business_Reviews extends Widget_Base {
 				'eael-business-reviews-' . $this->get_id(),
 				'clearfix',
 			],
+			'data-source'			=> esc_attr( $business_reviews['source'] ),
+			'data-layout'			=> esc_attr( $business_reviews['layout'] ),
 		] );
 
 		$this->add_render_attribute(
