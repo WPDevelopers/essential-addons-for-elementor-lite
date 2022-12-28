@@ -14,13 +14,13 @@ var BusinessReviewsHandler = function ($scope, $) {
 				items 		= businessReviewsSlider.attr('data-items'),
 				loop 		= businessReviewsSlider.attr('data-loop'),
 				speed 		= businessReviewsSlider.attr('data-speed');
-		
+				console.log(speed);
 			let businessReviewsSliderOptions = {
 				direction: 'horizontal',
 				effect: effect,
 				slidesPerView: items,
 				loop: loop,
-				speed: speed,
+				speed: parseInt(speed),
 				pagination: {
 					el: pagination,
 					clickable: true,
@@ -34,39 +34,13 @@ var BusinessReviewsHandler = function ($scope, $) {
 					disableOnInteraction: false
 				},
 				autoHeight: true,
-				spaceBetween: 30
+				spaceBetween: 30,
 			}
 
-			businessReviewsSliderOptions.items = 4;
-		
 			let businessReviewsSliderObj = swiperLoader(
 				businessReviewsSlider,
 				businessReviewsSliderOptions
 			)
-
-			businessReviewsSliderObj.then( ( businessReviewsSliderObj ) => {
-				businessReviewsSliderObj.update()
-				
-				//gallery pagination
-				var paginationGallerySelector = $scope
-					.find('.eael-business-reviews .eael-business-reviews-gallary-pagination')
-					.eq(0)
-				if (paginationGallerySelector.length > 0) {
-					swiperLoader(paginationGallerySelector, {
-						spaceBetween: 20,
-						centeredSlides: true,
-						touchRatio: 0.2,
-						slideToClickedSlide: true,
-						loop: true,
-						slidesPerGroup: 1,
-						loopedSlides: items,
-						slidesPerView: 3,
-					}).then(( $paginationGallerySlider) => {
-						businessReviewsSliderObj.controller.control = $paginationGallerySlider
-						$paginationGallerySlider.controller.control = businessReviewsSliderObj
-					})
-				}
-			} );
 		}
 	}
 };
