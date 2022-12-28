@@ -6,74 +6,64 @@ var BusinessReviewsHandler = function ($scope, $) {
 	if(	source === 'google-reviews' ){
 		// Slider or Grid
 		if( layout === 'slider' ){
-			let $businessReviewsSlider = $scope.find('.eael-google-reviews-content').eq(0),
-			$pagination = '.swiper-pagination',
-			$arrow_next = '.swiper-button-next',
-			$arrow_prev = '.swiper-button-prev',
-			$items = 3,
-			$items_tablet = 3,
-			$items_mobile = 3,
-			$margin = 10,
-			$margin_tablet = 10,
-			$margin_mobile = 10,
-			$effect = 'slide',
-			$speed = 400,
-			$autoplay = 3000,
-			$loop = 0,
-			$grab_cursor = 0,
-			$centeredSlides = false,
-			$pause_on_hover = '';
+			let businessReviewsSlider = $scope.find('.eael-google-reviews-content').eq(0),
+				pagination	= businessReviewsSlider.attr('data-pagination'),
+				arrowNext	= businessReviewsSlider.attr('data-arrow-next'),
+				arrowPrev	= businessReviewsSlider.attr('data-arrow-prev'),
+				effect 		= businessReviewsSlider.attr('data-effect'),
+				items 		= businessReviewsSlider.attr('data-items'),
+				loop 		= businessReviewsSlider.attr('data-loop'),
+				speed 		= businessReviewsSlider.attr('data-speed');
 		
-			var $businessReviewsSliderOptions = {
+			let businessReviewsSliderOptions = {
 				direction: 'horizontal',
-				speed: $speed,
-				effect: $effect,
-				centeredSlides: $centeredSlides,
-				grabCursor: $grab_cursor,
-				autoHeight: true,
-				loop: $loop,
-				autoplay: {
-					delay: $autoplay,
-					disableOnInteraction: false
-				},
+				effect: effect,
+				slidesPerView: items,
+				loop: loop,
+				speed: speed,
 				pagination: {
-					el: $pagination,
+					el: pagination,
 					clickable: true,
 				},
 				navigation: {
-					nextEl: $arrow_next,
-					prevEl: $arrow_prev,
+					nextEl: arrowNext,
+					prevEl: arrowPrev,
 				},
-				slidesPerView: 3,
+				autoplay: {
+					delay: 3000,
+					disableOnInteraction: false
+				},
+				autoHeight: true,
 				spaceBetween: 30
 			}
+
+			businessReviewsSliderOptions.items = 4;
 		
-			$businessReviewsSliderOptions.items = 4
-		
-			var $businessReviewsSliderObj = swiperLoader(
-				$businessReviewsSlider,
-				$businessReviewsSliderOptions
+			let businessReviewsSliderObj = swiperLoader(
+				businessReviewsSlider,
+				businessReviewsSliderOptions
 			)
-			$businessReviewsSliderObj.then( ( $businessReviewsSliderObj ) => {
-				$businessReviewsSliderObj.update()
+
+			businessReviewsSliderObj.then( ( businessReviewsSliderObj ) => {
+				businessReviewsSliderObj.update()
 				
 				//gallery pagination
-				var $paginationGallerySelector = $scope
+				var paginationGallerySelector = $scope
 					.find('.eael-business-reviews .eael-business-reviews-gallary-pagination')
 					.eq(0)
-				if ($paginationGallerySelector.length > 0) {
-					swiperLoader($paginationGallerySelector, {
+				if (paginationGallerySelector.length > 0) {
+					swiperLoader(paginationGallerySelector, {
 						spaceBetween: 20,
 						centeredSlides: true,
 						touchRatio: 0.2,
 						slideToClickedSlide: true,
 						loop: true,
 						slidesPerGroup: 1,
-						loopedSlides: $items,
+						loopedSlides: items,
 						slidesPerView: 3,
 					}).then(( $paginationGallerySlider) => {
-						$businessReviewsSliderObj.controller.control = $paginationGallerySlider
-						$paginationGallerySlider.controller.control = $businessReviewsSliderObj
+						businessReviewsSliderObj.controller.control = $paginationGallerySlider
+						$paginationGallerySlider.controller.control = businessReviewsSliderObj
 					})
 				}
 			} );
