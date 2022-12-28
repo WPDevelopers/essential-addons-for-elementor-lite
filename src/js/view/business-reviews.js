@@ -2,7 +2,7 @@ var BusinessReviewsHandler = function ($scope, $) {
     let $eael_business_reviews = $(".eael-business-reviews-wrapper", $scope);
 
     // Slider js
-	var $businessReviewsSlider = $scope.find('.eael-business-reviews-main').eq(0),
+	var $businessReviewsSlider = $scope.find('.eael-google-reviews-content').eq(0),
 	$pagination = '.swiper-pagination',
 	$arrow_next = '.swiper-button-next',
 	$arrow_prev = '.swiper-button-prev',
