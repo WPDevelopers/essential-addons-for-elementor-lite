@@ -171,6 +171,51 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_business_reviews_autoplay',
+			[
+				'label'        => __( 'Loop', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'condition' => [
+					'eael_business_reviews_items_layout' => 'slider'
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_arrows',
+			[
+				'label'        => __( 'Arrows', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'condition' => [
+					'eael_business_reviews_items_layout' => 'slider'
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_dots',
+			[
+				'label'        => __( 'Dots', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'condition' => [
+					'eael_business_reviews_items_layout' => 'slider'
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**
@@ -197,10 +242,14 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['expiration'] 	= DAY_IN_SECONDS;
 		$business_reviews['md5']        	= md5( $business_reviews['api_key'] . $this->get_id() );
 		$business_reviews['cache_key']  	= "eael_{$business_reviews['source']}_{$business_reviews['expiration']}_{$business_reviews['md5']}_brev_cache";
-
+		
 		$business_reviews['layout']        	= ! empty( $settings['eael_business_reviews_items_layout'] ) ? $settings['eael_business_reviews_items_layout'] : 'slider';
 		$business_reviews['preset']        	= ! empty( $settings['eael_business_reviews_style_preset_slider'] ) && 'slider' === $business_reviews['layout'] ? $settings['eael_business_reviews_style_preset_slider'] : 'preset-1';
 		$business_reviews['preset']        	= ! empty( $settings['eael_business_reviews_style_preset_grid'] ) && 'grid' === $business_reviews['layout'] ? $settings['eael_business_reviews_style_preset_grid'] : $business_reviews['preset'];
+		$business_reviews['columns']        = ! empty( $settings['eael_business_reviews_column'] ) ? $settings['eael_business_reviews_column'] : 3;
+		$business_reviews['loop']        	= ! empty( $settings['eael_business_reviews_loop'] ) && 'yes' === ! empty( $settings['eael_business_reviews_loop'] ) ? $settings['eael_business_reviews_loop'] : 1;
+		$business_reviews['arrows']        	= ! empty( $settings['eael_business_reviews_arrows'] ) && 'yes' === ! empty( $settings['eael_business_reviews_arrows'] ) ? $settings['eael_business_reviews_arrows'] : 1;
+		$business_reviews['dots']        	= ! empty( $settings['eael_business_reviews_dots'] ) && 'yes' === ! empty( $settings['eael_business_reviews_dots'] ) ? $settings['eael_business_reviews_dots'] : 1;
 		
 		return $business_reviews;
 	}
@@ -422,18 +471,15 @@ class Business_Reviews extends Widget_Base {
 
 		$this->add_render_attribute('eael-google-reviews-content', [
 			'class' => ['eael-google-reviews-content', 'swiper-container', 'swiper-container-' . esc_attr($this->get_id())],
-			'data-pagination'    => '.swiper-pagination-' . esc_attr($this->get_id()),
-			'data-arrow-next'    => '.swiper-button-next-' . esc_attr($this->get_id()),
-			'data-arrow-prev'    => '.swiper-button-prev-' . esc_attr($this->get_id()),
-			'data-pagination'    => '.swiper-pagination-' . esc_attr($this->get_id()),
-			'data-pagination'    => '.swiper-pagination-' . esc_attr($this->get_id()),
-			'data-pagination'    => '.swiper-pagination-' . esc_attr($this->get_id()),
-			'data-effect'    => 'slide',
-			'data-items'    => 1,
-			'data-loop'    => 1,
-			'data-arrows'    => 1,
-			'data-dots'    => 1,
-			'data-speed'    => 1000,
+			'data-pagination'    	=> '.swiper-pagination-' . esc_attr($this->get_id()),
+			'data-arrow-next'    	=> '.swiper-button-next-' . esc_attr($this->get_id()),
+			'data-arrow-prev'    	=> '.swiper-button-prev-' . esc_attr($this->get_id()),
+			'data-effect'    		=> 'slide',
+			'data-items'    		=> esc_attr( $business_reviews['columns'] ),
+			'data-loop'    			=> esc_attr( $business_reviews['columns'] ),
+			'data-arrows'    		=> esc_attr( $business_reviews['arrows'] ),
+			'data-dots'    			=> esc_attr( $business_reviews['dots'] ),
+			'data-speed'    		=> 1000,
 		]);
 		
 		if( ! empty( $google_reviews_data['reviews'] ) && count( $google_reviews_data['reviews'] ) ){
