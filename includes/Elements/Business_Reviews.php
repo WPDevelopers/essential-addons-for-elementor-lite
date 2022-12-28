@@ -186,7 +186,7 @@ class Business_Reviews extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	public function get_business_reviews_settings(){
+	public function get_business_reviews_settings() {
 		$settings = $this->get_settings();
 		$settings['eael_business_reviews_source_key'] = get_option( 'eael_br_google_place_api_key' );
 
@@ -208,7 +208,7 @@ class Business_Reviews extends Widget_Base {
 	/**
      * API Call to Get Business Reviews
      */
-	public function fetch_business_reviews_from_api(){
+	public function fetch_business_reviews_from_api() {
 		$settings					= $this->get_settings();
 		$response					= [];
 		$error_message 				= '';
@@ -239,7 +239,7 @@ class Business_Reviews extends Widget_Base {
 		return $data;
 	}
 
-	public function fetch_google_reviews_from_api( $business_reviews_settings ){
+	public function fetch_google_reviews_from_api( $business_reviews_settings ) {
 		$business_reviews 					= $business_reviews_settings;
 		$business_reviews['reviews_sort']	= sanitize_text_field( 'most_relevant' );
 		
@@ -293,7 +293,7 @@ class Business_Reviews extends Widget_Base {
 		return $data;
 	}
 
-	public function fetch_google_place_response_error_message( $status = 'OK' ){
+	public function fetch_google_place_response_error_message( $status = 'OK' ) {
 		$error_message = '';
 
 		switch( $status ){
@@ -331,7 +331,7 @@ class Business_Reviews extends Widget_Base {
 		return $error_message;
 	}
 
-	public function print_business_reviews( $business_reviews_items ){
+	public function print_business_reviews( $business_reviews_items ) {
 		$settings 				= $this->get_settings();
 		$business_reviews		= $this->get_business_reviews_settings();
 
@@ -377,7 +377,7 @@ class Business_Reviews extends Widget_Base {
 		echo ob_get_clean();
 	}
 
-	public function print_business_reviews_google( $business_reviews_items ){
+	public function print_business_reviews_google( $business_reviews_items ) {
 		$settings 						= $this->get_settings();
 		$business_reviews				= $this->get_business_reviews_settings();
 
@@ -412,7 +412,7 @@ class Business_Reviews extends Widget_Base {
 		}
 	}
 
-	public function print_google_reviews_slider( $google_reviews_data ){
+	public function print_google_reviews_slider( $google_reviews_data ) {
 		$business_reviews				= $this->get_business_reviews_settings();
 
 		$this->add_render_attribute('eael-google-reviews-wrapper', [
@@ -509,29 +509,18 @@ class Business_Reviews extends Widget_Base {
 		}
 	}
 
-	public function print_google_reviews_grid( $google_reviews_data ){
-		$business_reviews				= $this->get_business_reviews_settings();
+	public function print_google_reviews_grid( $google_reviews_data ) {
+		$business_reviews		= $this->get_business_reviews_settings();
 	}
 
-	/**
-	 * Render logo carousel dots output on the frontend.
-	 */
-	protected function render_dots()
-	{
-		$settings = $this->get_settings_for_display();
-			?>
-            <!-- Add Pagination -->
-            <div class="swiper-pagination swiper-pagination-<?php echo esc_attr($this->get_id()); ?>"></div>
-			<?php 
+	protected function render_dots() {
+		?>
+		<!-- Add Pagination -->
+		<div class="swiper-pagination swiper-pagination-<?php echo esc_attr($this->get_id()); ?>"></div>
+		<?php 
 	}
 
-	/**
-	 * Render logo carousel arrows output on the frontend.
-	 */
-	protected function render_arrows()
-	{
-		$settings = $this->get_settings_for_display();
-
+	protected function render_arrows() {
 		$pa_next_arrow = 'fa fa-angle-right';
 		$pa_prev_arrow = 'fa fa-angle-left';
 		?>
@@ -545,14 +534,11 @@ class Business_Reviews extends Widget_Base {
 		<?php 
 	}
 
-	public function print_business_reviews_ratings($rating){
-		// $rating = intval($rating);
-
+	public function print_business_reviews_ratings( $rating ) {
 		if( empty( $rating ) || intval( $rating ) > 5 ){
 			return false;
 		}
 
-		// $rating = is_int($rating) ? $rating : floor($rating) + 0.5;
 		$rating_svg = '<svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path d="M7.37499 10.6517L3.26074 12.9547L4.17949 8.33008L0.717407 5.12875L5.39982 4.57341L7.37499 0.291748L9.35016 4.57341L14.0326 5.12875L10.5705 8.33008L11.4892 12.9547L7.37499 10.6517Z" fill="#F4BB4C"/>
 		</svg>';

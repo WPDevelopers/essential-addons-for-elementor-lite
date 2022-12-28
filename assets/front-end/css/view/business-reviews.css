@@ -402,12 +402,12 @@
 .elementor-widget-eael-business-reviews .content-bottom-icon-title-inline .eael-business-reviews-align-right .eael-business-reviews-text {
   text-align: right;
 }
-.elementor-widget-eael-business-reviews .eael-business-reviews-main.swiper-container .swiper-button-next,
-.elementor-widget-eael-business-reviews .eael-business-reviews-main.swiper-container .swiper-button-prev {
+.elementor-widget-eael-business-reviews .eael-google-reviews-content.swiper-container .swiper-button-next,
+.elementor-widget-eael-business-reviews .eael-google-reviews-content.swiper-container .swiper-button-prev {
   background-image: none;
   outline: none;
 }
-.elementor-widget-eael-business-reviews .eael-business-reviews-main.swiper-container-cube .swiper-slide-active {
+.elementor-widget-eael-business-reviews .eael-google-reviews-content.swiper-container-cube .swiper-slide-active {
   background: #ffffff;
 }
 .elementor-widget-eael-business-reviews .swiper-container-wrap .swiper-button-next,
