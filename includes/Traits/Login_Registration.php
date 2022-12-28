@@ -397,7 +397,7 @@ trait Login_Registration {
 				wp_send_json_error( $err_msg );
 			}
 			update_option( 'eael_register_errors_' . $widget_id, $errors, false );
-			wp_safe_redirect( esc_url( $url ) );
+			wp_safe_redirect( esc_url_raw( $url ) );
 			exit();
 		}
 
@@ -500,7 +500,7 @@ trait Login_Registration {
 				wp_send_json_error( $errors['user_create'] );
 			}
 			update_option( 'eael_register_errors_' . $widget_id, $errors, false );
-			wp_safe_redirect( esc_url( $url ) );
+			wp_safe_redirect( esc_url_raw( $url ) );
 			exit();
 		}
 
@@ -559,7 +559,7 @@ trait Login_Registration {
 
 			// if custom redirect not available then refresh the current page to show admin bar
 			if ( ! in_array( 'redirect', $register_actions ) ) {
-				wp_safe_redirect( esc_url( $url ) );
+				wp_safe_redirect( esc_url_raw( $url ) );
 				exit();
 			}
 		}
