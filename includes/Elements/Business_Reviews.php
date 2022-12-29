@@ -335,7 +335,12 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['loop']        	= ! empty( $settings['eael_business_reviews_loop'] ) && 'yes' === $settings['eael_business_reviews_loop'] ? 1 : 0;
 		$business_reviews['arrows']        	= ! empty( $settings['eael_business_reviews_arrows'] ) && 'yes' === $settings['eael_business_reviews_arrows'] ? 1 : 0;
 		$business_reviews['dots']        	= ! empty( $settings['eael_business_reviews_dots'] ) && 'yes' === $settings['eael_business_reviews_dots'] ? 1 : 0;
-		
+		$business_reviews['effect']        	= ! empty( $settings['eael_business_reviews_transition_effect'] ) ? $settings['eael_business_reviews_transition_effect'] : 'slide';
+		$business_reviews['autoplay']       = ! empty( $settings['eael_business_reviews_autoplay'] ) && 'yes' === $settings['eael_business_reviews_autoplay'] ? 1 : 0;
+		$business_reviews['pause_on_hover'] = ! empty( $settings['eael_business_reviews_pause_on_hover'] ) && 'yes' === $settings['eael_business_reviews_pause_on_hover'] ? 1 : 0;
+		$business_reviews['grab_cursor']    = ! empty( $settings['eael_business_reviews_grab_cursor'] ) && 'yes' === $settings['eael_business_reviews_grab_cursor'] ? 1 : 0;
+		$business_reviews['speed']        	= ! empty( $settings['eael_business_reviews_slider_speed'] ) && 'yes' === $settings['eael_business_reviews_slider_speed'] ? 1 : 0;
+
 		return $business_reviews;
 	}
 
@@ -561,10 +566,13 @@ class Business_Reviews extends Widget_Base {
 			'data-pagination'    	=> '.swiper-pagination-' . esc_attr($this->get_id()),
 			'data-arrow-next'    	=> '.swiper-button-next-' . esc_attr($this->get_id()),
 			'data-arrow-prev'    	=> '.swiper-button-prev-' . esc_attr($this->get_id()),
-			'data-effect'    		=> 'slide',
+			'data-effect'    		=> esc_attr( $business_reviews['effect'] ),
 			'data-items'    		=> esc_attr( $business_reviews['columns'] ),
 			'data-loop'    			=> esc_attr( $business_reviews['loop'] ),
-			'data-speed'    		=> 1000,
+			'data-autoplay'    		=> esc_attr( $business_reviews['autoplay'] ),
+			'data-pause_on_hover'   => esc_attr( $business_reviews['pause_on_hover'] ),
+			'data-grab_cursor'    	=> esc_attr( $business_reviews['grab_cursor'] ),
+			'data-speed'    		=> esc_attr( $business_reviews['speed'] ),
 		]);
 		
 		if( ! empty( $google_reviews_data['reviews'] ) && count( $google_reviews_data['reviews'] ) ){
