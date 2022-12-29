@@ -7,20 +7,24 @@ var BusinessReviewsHandler = function ($scope, $) {
 		// Slider or Grid
 		if( layout === 'slider' ){
 			let businessReviewsSlider = $scope.find('.eael-google-reviews-content').eq(0),
-				pagination	= businessReviewsSlider.attr('data-pagination'),
-				arrowNext	= businessReviewsSlider.attr('data-arrow-next'),
-				arrowPrev	= businessReviewsSlider.attr('data-arrow-prev'),
-				effect 		= businessReviewsSlider.attr('data-effect'),
-				items 		= businessReviewsSlider.attr('data-items'),
-				loop 		= businessReviewsSlider.attr('data-loop'),
-				speed 		= businessReviewsSlider.attr('data-speed');
-				console.log(speed);
+				pagination		= businessReviewsSlider.attr('data-pagination'),
+				arrowNext		= businessReviewsSlider.attr('data-arrow-next'),
+				arrowPrev		= businessReviewsSlider.attr('data-arrow-prev'),
+				effect 			= businessReviewsSlider.attr('data-effect'),
+				items 			= businessReviewsSlider.attr('data-items'),
+				loop 			= businessReviewsSlider.attr('data-loop'),
+				speed 			= businessReviewsSlider.attr('data-speed');
+				autoplay 		= businessReviewsSlider.attr('data-autoplay');
+				pauseOnHover	= businessReviewsSlider.attr('data-pause_on_hover');
+				grabCursor 	= businessReviewsSlider.attr('data-grab_cursor');
+
 			let businessReviewsSliderOptions = {
 				direction: 'horizontal',
 				effect: effect,
 				slidesPerView: items,
 				loop: loop,
 				speed: parseInt(speed),
+				grabCursor: grabCursor,
 				pagination: {
 					el: pagination,
 					clickable: true,
@@ -30,7 +34,7 @@ var BusinessReviewsHandler = function ($scope, $) {
 					prevEl: arrowPrev,
 				},
 				autoplay: {
-					delay: 3000,
+					delay: autoplay ? 3000 : 999999,
 					disableOnInteraction: false
 				},
 				autoHeight: true,
@@ -41,6 +45,22 @@ var BusinessReviewsHandler = function ($scope, $) {
 				businessReviewsSlider,
 				businessReviewsSliderOptions
 			)
+
+			businessReviewsSliderObj.then( ( businessReviewsSliderObj ) => {
+				if (autoplay === 0) {
+					businessReviewsSliderObj.autoplay.stop()
+				}
+		
+				if (pauseOnHover && autoplay !== 0) {
+					businessReviewsSlider.on('mouseenter', function () {
+						businessReviewsSliderObj.autoplay.stop()
+					})
+					businessReviewsSlider.on('mouseleave', function () {
+						businessReviewsSliderObj.autoplay.start()
+					})
+				}
+				businessReviewsSliderObj.update()
+			} );
 		}
 	}
 };
