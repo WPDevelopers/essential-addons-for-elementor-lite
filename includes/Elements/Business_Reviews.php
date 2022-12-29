@@ -179,10 +179,7 @@ class Business_Reviews extends Widget_Base {
 				'default'     => 'slide',
 				'options'     => [
 					'slide'     => __( 'Slide', 'essential-addons-for-elementor-lite' ),
-					'fade'      => __( 'Fade', 'essential-addons-for-elementor-lite' ),
-					'cube'      => __( 'Cube', 'essential-addons-for-elementor-lite' ),
 					'coverflow' => __( 'Coverflow', 'essential-addons-for-elementor-lite' ),
-					'flip'      => __( 'Flip', 'essential-addons-for-elementor-lite' ),
 				],
 				'condition' => [
 					'eael_business_reviews_items_layout' => 'slider'
@@ -296,7 +293,8 @@ class Business_Reviews extends Widget_Base {
 				],
 				'size_units'  => '',
 				'condition' => [
-					'eael_business_reviews_items_layout' => 'slider'
+					'eael_business_reviews_items_layout' => 'slider',
+					'eael_business_reviews_autoplay' => 'yes',
 				],
 			]
 		);
@@ -339,7 +337,7 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['autoplay']       = ! empty( $settings['eael_business_reviews_autoplay'] ) && 'yes' === $settings['eael_business_reviews_autoplay'] ? 1 : 0;
 		$business_reviews['pause_on_hover'] = ! empty( $settings['eael_business_reviews_pause_on_hover'] ) && 'yes' === $settings['eael_business_reviews_pause_on_hover'] ? 1 : 0;
 		$business_reviews['grab_cursor']    = ! empty( $settings['eael_business_reviews_grab_cursor'] ) && 'yes' === $settings['eael_business_reviews_grab_cursor'] ? 1 : 0;
-		$business_reviews['speed']        	= ! empty( $settings['eael_business_reviews_slider_speed'] ) && 'yes' === $settings['eael_business_reviews_slider_speed'] ? 1 : 0;
+		$business_reviews['speed']        	= $business_reviews['autoplay'] && ! empty( $settings['eael_business_reviews_slider_speed']['size'] ) ? $settings['eael_business_reviews_slider_speed']['size'] : 1000;
 
 		return $business_reviews;
 	}
