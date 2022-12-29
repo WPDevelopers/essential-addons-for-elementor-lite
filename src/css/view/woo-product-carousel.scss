@@ -2132,6 +2132,44 @@ $theme-preset4: #ec3b75;
 
 //shoptimizer savoy
 .theme-shoptimizer{
+    .eael-woo-slider-popup{
+        .woocommerce-product-gallery{
+            position: relative;
+            .woocommerce-product-gallery__trigger {
+                position: absolute;
+                top: 0.5em;
+                right: 0.5em;
+                font-size: 2em;
+                z-index: 9;
+                width: 36px;
+                height: 36px;
+                background: #fff;
+                text-indent: -9999px;
+                border-radius: 100%;
+                box-sizing: content-box;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img.emoji{
+                    display: block !important;
+                    height: 25px !important;
+                    width: 25px !important;
+                }
+            }
+            .flex-control-nav{
+                margin: 0;
+                list-style: none;
+                display: flex;
+                flex-wrap: wrap;
+            }
+            .flex-direction-nav{
+                list-style: none;
+                display: flex;
+                margin: 0;
+                justify-content: space-between;
+            }
+        }
+    }
     .site-main ul.products{
         li.product:before,
         li.product:hover:before{
