@@ -13,10 +13,10 @@ var BusinessReviewsHandler = function ($scope, $) {
 				effect 			= businessReviewsSlider.attr('data-effect'),
 				items 			= businessReviewsSlider.attr('data-items'),
 				loop 			= businessReviewsSlider.attr('data-loop'),
-				speed 			= businessReviewsSlider.attr('data-speed');
-				autoplay 		= businessReviewsSlider.attr('data-autoplay');
-				pauseOnHover	= businessReviewsSlider.attr('data-pause_on_hover');
-				grabCursor 	= businessReviewsSlider.attr('data-grab_cursor');
+				speed 			= businessReviewsSlider.attr('data-speed'),
+				autoplay 		= businessReviewsSlider.attr('data-autoplay'),
+				pauseOnHover	= businessReviewsSlider.attr('data-pause_on_hover'),
+				grabCursor 		= businessReviewsSlider.attr('data-grab_cursor');
 
 			let businessReviewsSliderOptions = {
 				direction: 'horizontal',
