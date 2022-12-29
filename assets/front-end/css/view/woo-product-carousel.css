@@ -1248,6 +1248,13 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
+.theme-shoptimizer .eael-woo-slider-popup form.cart.variations_form .variations td select {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #d4d5d9;
+  border-radius: 4px;
+  font-size: 15px;
+}
 .theme-shoptimizer .site-main ul.products li.product:before,
 .theme-shoptimizer .site-main ul.products li.product:hover:before {
   display: none;

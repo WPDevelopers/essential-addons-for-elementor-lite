@@ -2169,6 +2169,13 @@ $theme-preset4: #ec3b75;
                 justify-content: space-between;
             }
         }
+        form.cart.variations_form .variations td select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #d4d5d9;
+            border-radius: 4px;
+            font-size: 15px;
+        }
     }
     .site-main ul.products{
         li.product:before,
