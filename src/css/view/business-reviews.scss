@@ -62,4 +62,13 @@
     .swiper-button-next:focus{
         outline: none;
     }
+
+    .swiper-pagination {
+        cursor: pointer;
+
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+        }
+    }
 }
