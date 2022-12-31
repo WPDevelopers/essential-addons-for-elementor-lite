@@ -555,7 +555,7 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews				= $this->get_business_reviews_settings();
 
 		$this->add_render_attribute('eael-google-reviews-wrapper', [
-			'class' => ['eael-google-reviews-wrapper', 'swiper-container-wrap', 'eael-arrow-box', 'swiper-container-wrap-dots-outside'],
+			'class' => ['eael-google-reviews-wrapper', 'swiper-container-wrap', 'swiper-container-wrap-dots-outside'],
 			'id'    => 'eael-google-reviews-' . esc_attr($this->get_id()),
 		]);
 
