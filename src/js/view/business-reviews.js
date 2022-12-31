@@ -22,7 +22,7 @@ var BusinessReviewsHandler = function ($scope, $) {
 				direction: 'horizontal',
 				effect: effect,
 				slidesPerView: items,
-				loop: loop,
+				loop: parseInt(loop),
 				speed: parseInt(speed),
 				grabCursor: grabCursor,
 				pagination: {
@@ -34,7 +34,7 @@ var BusinessReviewsHandler = function ($scope, $) {
 					prevEl: arrowPrev,
 				},
 				autoplay: {
-					delay: autoplay ? 3000 : 999999,
+					delay: parseInt(autoplay) ? 3000 : 999999,
 					disableOnInteraction: false
 				},
 				autoHeight: true,
