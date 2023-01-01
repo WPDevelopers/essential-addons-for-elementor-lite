@@ -1,9 +1,26 @@
 .eael-business-reviews-wrapper {
-    .eael-google-reviews-business-rating {
-        p {
-            display: flex;
+    .eael-google-reviews-slider-header {
+        text-align: center;
+
+        .eael-google-reviews-business-name,
+        .eael-google-reviews-business-name a {
+            color: #292844;
+            font-size: 36px;
+        }
+
+        .eael-google-reviews-business-rating {
+            color: #8A8EAA;
+            font-size: 12px;
         }
     }
+
+    .eael-google-reviews-business-rating {
+        display: flex;
+        column-gap: 5px;
+        align-items: center;
+        justify-content: center;
+    }
+
     .eael-google-review-reviewer-photo {
         text-align: center;
         width: 50px;
