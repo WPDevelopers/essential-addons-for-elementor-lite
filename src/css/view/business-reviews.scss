@@ -1,4 +1,9 @@
 .eael-business-reviews-wrapper {
+    .eael-google-reviews-business-rating {
+        p {
+            display: flex;
+        }
+    }
     .eael-google-review-reviewer-photo {
         text-align: center;
         width: 50px;
