@@ -759,6 +759,112 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_business_reviews_header_business_rating_label',
+			[
+				'label' => esc_html__( 'Business Rating', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::HEADING,
+				'separator'	=> 'before',
+				'condition' => [
+					'eael_business_reviews_business_rating' => 'yes',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_business_reviews_header_business_rating_typography',
+				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating, {{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating a',
+				'condition' => [
+					'eael_business_reviews_business_rating' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_header_business_rating_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating a' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_business_reviews_business_rating' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_header_business_rating_star_color',
+			[
+				'label'     => esc_html__( 'Star Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating svg path' => 'fill: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_business_reviews_business_rating' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_header_business_rating_star_size',
+			[
+				'label'      => esc_html__( 'Star Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'range'                 => [
+					'px' => [
+						'min'   => 15,
+						'max'   => 200,
+						'step'  => 1,
+					],
+				],
+				'size_units'            => ['px'],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating svg path' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_business_reviews_business_rating' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_header_business_rating_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_business_reviews_business_rating' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_header_business_rating_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_business_reviews_business_rating' => 'yes',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**
