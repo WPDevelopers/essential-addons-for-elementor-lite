@@ -593,7 +593,21 @@ class Business_Reviews extends Widget_Base {
 
 					<div <?php echo $this->get_render_attribute_string('eael-google-reviews-content'); ?> >
 						<div class="eael-google-reviews-slider-header">
+							<div class="eael-google-reviews-business-name">
+								<a href="<?php esc_url( $google_reviews_data['website'] ); ?>"><?php echo esc_html( $google_reviews_data['name'] ); ?></a>
+							</div>
+							<div class="eael-google-reviews-business-rating">
+								<p><?php echo esc_html( $google_reviews_data['rating'] ); ?></p>
+								<p><?php $this->print_business_reviews_ratings( $google_reviews_data['rating'] ); ?></p>
+								<p><a href="<?php esc_url( $google_reviews_data['url'] ); ?>"><?php echo esc_html( $google_reviews_data['user_ratings_total'] . ' Google Reviews' ); ?></a></p>
+							</div>
 
+							<div class="eael-google-reviews-business-address">
+								<?php 
+									printf( '<p><span>%s</span> %s</p>', esc_html('Address:'), esc_html( $google_reviews_data['formatted_address'] ) );
+									printf( '<p><span>%s</span> <a href="tel:%s">%s</a></p>', esc_attr('Phone:'), esc_attr( $google_reviews_data['phone'] ), esc_attr( $google_reviews_data['phone'] ) );
+								?>
+							</div>
 						</div>
 						
 						<div class="eael-google-reviews-slider-body swiper-wrapper">

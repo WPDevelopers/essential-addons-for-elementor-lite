@@ -49,12 +49,12 @@
     }
 
     .swiper-button-prev {
-        left: -20px;
+        left: -40px;
         right: auto;
     }
 
     .swiper-button-next {
-        right: -20px;
+        right: -40px;
         left: auto;
     }
 
@@ -65,10 +65,5 @@
 
     .swiper-pagination {
         cursor: pointer;
-
-        .swiper-pagination-bullet {
-            width: 10px;
-            height: 10px;
-        }
     }
 }
