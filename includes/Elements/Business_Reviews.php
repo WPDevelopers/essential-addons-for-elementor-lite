@@ -711,10 +711,12 @@ class Business_Reviews extends Widget_Base {
 							</div>
 							<?php endif; ?>
 
+							<?php if( $business_reviews['business_address'] ): ?>
 							<div class="eael-google-reviews-business-address">
 								<p><?php printf( '<span>%s</span> %s', esc_html(''), esc_html( $google_reviews_data['formatted_address'] ) ); ?></p>
 								<p><?php printf( '<span>%s</span> <a href="tel:%s">%s</a>', esc_attr(''), esc_html( $google_reviews_data['international_phone_number'] ), esc_attr( $google_reviews_data['international_phone_number'] ) ); ?></p>
 							</div>
+							<?php endif; ?>
 						</div>
 						
 						<div class="eael-google-reviews-slider-body swiper-wrapper">
@@ -736,25 +738,35 @@ class Business_Reviews extends Widget_Base {
 
 								<div <?php echo $this->get_render_attribute_string('eael-google-reviews-slider-item-' . $i); ?> >
 									<div class="eael-google-review-reviewer">
+										<?php if( $business_reviews['reviewer_photo'] ): ?>
 										<div class="eael-google-review-reviewer-photo">
 											<img src="<?php echo esc_url_raw( $single_review_data['profile_photo_url'] ); ?>" alt="">
 										</div>
+										<?php endif; ?>
 
+										<?php if( $business_reviews['reviewer_name'] ): ?>
 										<div class="eael-google-review-reviewer-name">
 											<a href="<?php echo ! empty ( $single_review_data['author_url'] ) ? esc_url_raw( $single_review_data['author_url'] ) : '#'; ?>" target="_blank"><?php echo esc_html( $single_review_data['author_name'] ); ?></a>
 										</div>
+										<?php endif; ?>
 										
+										<?php if( $business_reviews['review_time'] ): ?>
 										<div class="eael-google-review-time">
 											<?php echo esc_html( $single_review_data['relative_time_description'] ); ?>
 										</div>
+										<?php endif; ?>
 
+										<?php if( $business_reviews['review_text'] ): ?>
 										<div class="eael-google-review-text">
 											<?php echo esc_html( $single_review_data['text'] ); ?>
 										</div>
-										
+										<?php endif; ?>
+			
+										<?php if( $business_reviews['review_rating'] ): ?>
 										<div class="eael-google-review-rating">
 											<?php $this->print_business_reviews_ratings($single_review_data['rating']); ?>
 										</div>
+										<?php endif; ?>
 									</div>
 								</div>
 								<?php
