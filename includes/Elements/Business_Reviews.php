@@ -745,10 +745,252 @@ class Business_Reviews extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_business_reviews_header_style',
 			[
-				'label' => esc_html__( 'Arrows', 'essential-addons-for-elementor-lite' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
+				'label' 	=> esc_html__( 'Arrows', 'essential-addons-for-elementor-lite' ),
+				'tab'   	=> Controls_Manager::TAB_STYLE,
+				'condition'	=> [
+					'eael_business_reviews_arrows'	=> 'yes',
+				],
 			]
 		);
+
+		// $this->add_control(
+		// 	'arrow',
+		// 	[
+		// 		'label'                 => __('Choose Arrow', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::SELECT,
+		// 		'label_block'           => true,
+		// 		'default'               => 'fa fa-angle-right',
+		// 		'options'               => [
+		// 			'fa fa-angle-right'             => __('Angle', 'essential-addons-elementor'),
+		// 			'fa fa-angle-double-right'      => __('Double Angle', 'essential-addons-elementor'),
+		// 			'fa fa-chevron-right'           => __('Chevron', 'essential-addons-elementor'),
+		// 			'fa fa-chevron-circle-right'    => __('Chevron Circle', 'essential-addons-elementor'),
+		// 			'fa fa-arrow-right'             => __('Arrow', 'essential-addons-elementor'),
+		// 			'fa fa-long-arrow-right'        => __('Long Arrow', 'essential-addons-elementor'),
+		// 			'fa fa-caret-right'             => __('Caret', 'essential-addons-elementor'),
+		// 			'fa fa-caret-square-o-right'    => __('Caret Square', 'essential-addons-elementor'),
+		// 			'fa fa-arrow-circle-right'      => __('Arrow Circle', 'essential-addons-elementor'),
+		// 			'fa fa-arrow-circle-o-right'    => __('Arrow Circle O', 'essential-addons-elementor'),
+		// 			'fa fa-toggle-right'            => __('Toggle', 'essential-addons-elementor'),
+		// 			'fa fa-hand-o-right'            => __('Hand', 'essential-addons-elementor'),
+		// 		],
+		// 	]
+		// );
+
+		// $this->add_responsive_control(
+		// 	'arrows_width',
+		// 	[
+		// 		'label'                 => __('Arrows Width', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::SLIDER,
+		// 		'default'               => ['size' => '27'],
+		// 		'range'                 => [
+		// 			'px' => [
+		// 				'min'   => 15,
+		// 				'max'   => 200,
+		// 				'step'  => 1,
+		// 			],
+		// 		],
+		// 		'size_units'            => ['px'],
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'width: {{SIZE}}{{UNIT}};',
+		// 		],
+		// 	]
+		// );
+		// $this->add_responsive_control(
+		// 	'arrows_height',
+		// 	[
+		// 		'label'                 => __('Arrows Height', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::SLIDER,
+		// 		'default'               => ['size' => '44'],
+		// 		'range'                 => [
+		// 			'px' => [
+		// 				'min'   => 15,
+		// 				'max'   => 200,
+		// 				'step'  => 1,
+		// 			],
+		// 		],
+		// 		'size_units'            => ['px'],
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'height: {{SIZE}}{{UNIT}};',
+		// 		],
+		// 	]
+		// );
+
+		// $this->add_responsive_control(
+		// 	'arrows_size',
+		// 	[
+		// 		'label'                 => __('Arrows Font Size', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::SLIDER,
+		// 		'default'               => ['size' => '22'],
+		// 		'range'                 => [
+		// 			'px' => [
+		// 				'min'   => 15,
+		// 				'max'   => 100,
+		// 				'step'  => 1,
+		// 			],
+		// 		],
+		// 		'size_units'            => ['px'],
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'font-size: {{SIZE}}{{UNIT}};',
+		// 		],
+		// 	]
+		// );
+
+		// $this->add_responsive_control(
+		// 	'left_arrow_position',
+		// 	[
+		// 		'label'                 => __('Align Left Arrow', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::SLIDER,
+		// 		'range'                 => [
+		// 			'px' => [
+		// 				'min'   => -100,
+		// 				'max'   => 40,
+		// 				'step'  => 1,
+		// 			],
+		// 		],
+		// 		'size_units'            => ['px'],
+		// 		'selectors'         => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'left: {{SIZE}}{{UNIT}};',
+		// 		],
+		// 	]
+		// );
+
+		// $this->add_responsive_control(
+		// 	'right_arrow_position',
+		// 	[
+		// 		'label'                 => __('Align Right Arrow', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::SLIDER,
+		// 		'range'                 => [
+		// 			'px' => [
+		// 				'min'   => -100,
+		// 				'max'   => 40,
+		// 				'step'  => 1,
+		// 			],
+		// 		],
+		// 		'size_units'            => ['px'],
+		// 		'selectors'         => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next' => 'right: {{SIZE}}{{UNIT}};',
+		// 		],
+		// 	]
+		// );
+
+		// $this->start_controls_tabs('tabs_arrows_style');
+
+		// $this->start_controls_tab(
+		// 	'tab_arrows_normal',
+		// 	[
+		// 		'label'                 => __('Normal', 'essential-addons-elementor'),
+		// 	]
+		// );
+
+		// $this->add_control(
+		// 	'arrows_bg_color_normal',
+		// 	[
+		// 		'label'                 => __('Background Color', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::COLOR,
+		// 		'default'               => '',
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'background-color: {{VALUE}};',
+		// 		],
+		// 	]
+		// );
+
+		// $this->add_control(
+		// 	'arrows_color_normal',
+		// 	[
+		// 		'label'                 => __('Color', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::COLOR,
+		// 		'default'               => '',
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'color: {{VALUE}};',
+		// 		],
+		// 	]
+		// );
+
+		// $this->add_group_control(
+		// 	Group_Control_Border::get_type(),
+		// 	[
+		// 		'name'                  => 'arrows_border_normal',
+		// 		'label'                 => __('Border', 'essential-addons-elementor'),
+		// 		'placeholder'           => '1px',
+		// 		'default'               => '1px',
+		// 		'selector'              => '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev'
+		// 	]
+		// );
+
+		// $this->add_control(
+		// 	'arrows_border_radius_normal',
+		// 	[
+		// 		'label'                 => __('Border Radius', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::DIMENSIONS,
+		// 		'size_units'            => ['px', '%'],
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+		// 		],
+		// 	]
+		// );
+
+		// $this->end_controls_tab();
+
+		// $this->start_controls_tab(
+		// 	'tab_arrows_hover',
+		// 	[
+		// 		'label'                 => __('Hover', 'essential-addons-elementor'),
+		// 	]
+		// );
+
+		// $this->add_control(
+		// 	'arrows_bg_color_hover',
+		// 	[
+		// 		'label'                 => __('Background Color', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::COLOR,
+		// 		'default'               => '',
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'background-color: {{VALUE}};',
+		// 		],
+		// 	]
+		// );
+
+		// $this->add_control(
+		// 	'arrows_color_hover',
+		// 	[
+		// 		'label'                 => __('Color', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::COLOR,
+		// 		'default'               => '',
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'color: {{VALUE}};',
+		// 		],
+		// 	]
+		// );
+
+		// $this->add_control(
+		// 	'arrows_border_color_hover',
+		// 	[
+		// 		'label'                 => __('Border Color', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::COLOR,
+		// 		'default'               => '',
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'border-color: {{VALUE}};',
+		// 		],
+		// 	]
+		// );
+
+		// $this->end_controls_tab();
+
+		// $this->end_controls_tabs();
+
+		// $this->add_responsive_control(
+		// 	'arrows_padding',
+		// 	[
+		// 		'label'                 => __('Padding', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::DIMENSIONS,
+		// 		'size_units'            => ['px', '%'],
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+		// 		],
+		// 		'separator'             => 'before',
+		// 	]
+		// );
 
 		$this->end_controls_section();
 
@@ -760,10 +1002,176 @@ class Business_Reviews extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_business_reviews_header_style',
 			[
-				'label' => esc_html__( 'Dots', 'essential-addons-for-elementor-lite' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
+				'label' 	=> esc_html__( 'Dots', 'essential-addons-for-elementor-lite' ),
+				'tab'   	=> Controls_Manager::TAB_STYLE,
+				'condition'	=> [
+					'eael_business_reviews_dots'	=> 'yes',
+				],
 			]
 		);
+
+		// $this->add_control(
+		// 	'dots_position',
+		// 	[
+		// 		'label'                 => __('Position', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::SELECT,
+		// 		'options'               => [
+		// 			'inside'     => __('Inside', 'essential-addons-elementor'),
+		// 			'outside'    => __('Outside', 'essential-addons-elementor'),
+		// 		],
+		// 		'default'               => 'outside',
+		// 	]
+		// );
+
+		// $this->add_responsive_control(
+		// 	'dots_size',
+		// 	[
+		// 		'label'                 => __('Size', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::SLIDER,
+		// 		'range'                 => [
+		// 			'px' => [
+		// 				'min'   => 2,
+		// 				'max'   => 40,
+		// 				'step'  => 1,
+		// 			],
+		// 		],
+		// 		'size_units'            => '',
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
+		// 		],
+		// 	]
+		// );
+
+		// $this->add_responsive_control(
+		// 	'dots_spacing',
+		// 	[
+		// 		'label'                 => __('Spacing', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::SLIDER,
+		// 		'range'                 => [
+		// 			'px' => [
+		// 				'min'   => 1,
+		// 				'max'   => 30,
+		// 				'step'  => 1,
+		// 			],
+		// 		],
+		// 		'size_units'            => '',
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'margin-left: {{SIZE}}{{UNIT}}; margin-right: {{SIZE}}{{UNIT}}',
+		// 		],
+		// 	]
+		// );
+
+		// $this->start_controls_tabs('tabs_dots_style');
+
+		// $this->start_controls_tab(
+		// 	'tab_dots_normal',
+		// 	[
+		// 		'label'                 => __('Normal', 'essential-addons-elementor'),
+		// 	]
+		// );
+
+		// $this->add_control(
+		// 	'dots_color_normal',
+		// 	[
+		// 		'label'                 => __('Color', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::COLOR,
+		// 		'default'               => '',
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'background: {{VALUE}};',
+		// 		],
+		// 	]
+		// );
+
+		// $this->add_control(
+		// 	'active_dot_color_normal',
+		// 	[
+		// 		'label'                 => __('Active Color', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::COLOR,
+		// 		'default'               => '',
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet-active' => 'background: {{VALUE}};',
+		// 		],
+		// 	]
+		// );
+
+		// $this->add_group_control(
+		// 	Group_Control_Border::get_type(),
+		// 	[
+		// 		'name'                  => 'dots_border_normal',
+		// 		'label'                 => __('Border', 'essential-addons-elementor'),
+		// 		'placeholder'           => '1px',
+		// 		'default'               => '1px',
+		// 		'selector'              => '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet',
+		// 	]
+		// );
+
+		// $this->add_control(
+		// 	'dots_border_radius_normal',
+		// 	[
+		// 		'label'                 => __('Border Radius', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::DIMENSIONS,
+		// 		'size_units'            => ['px', '%'],
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+		// 		],
+		// 	]
+		// );
+
+		// $this->add_responsive_control(
+		// 	'dots_padding',
+		// 	[
+		// 		'label'                 => __('Padding', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::DIMENSIONS,
+		// 		'size_units'            => ['px', 'em', '%'],
+		// 		'allowed_dimensions'    => 'vertical',
+		// 		'placeholder'           => [
+		// 			'top'      => '',
+		// 			'right'    => 'auto',
+		// 			'bottom'   => '',
+		// 			'left'     => 'auto',
+		// 		],
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullets' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+		// 		],
+		// 	]
+		// );
+
+		// $this->end_controls_tab();
+
+		// $this->start_controls_tab(
+		// 	'tab_dots_hover',
+		// 	[
+		// 		'label'                 => __('Hover', 'essential-addons-elementor'),
+		// 	]
+		// );
+
+		// $this->add_control(
+		// 	'dots_color_hover',
+		// 	[
+		// 		'label'                 => __('Color', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::COLOR,
+		// 		'default'               => '',
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet:hover' => 'background: {{VALUE}};',
+		// 		],
+		// 	]
+		// );
+
+		// $this->add_control(
+		// 	'dots_border_color_hover',
+		// 	[
+		// 		'label'                 => __('Border Color', 'essential-addons-elementor'),
+		// 		'type'                  => Controls_Manager::COLOR,
+		// 		'default'               => '',
+		// 		'selectors'             => [
+		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet:hover' => 'border-color: {{VALUE}};',
+		// 		],
+		// 	]
+		// );
+
+		// $this->end_controls_tab();
+
+		// $this->end_controls_tabs();
 
 		$this->end_controls_section();
 	}
