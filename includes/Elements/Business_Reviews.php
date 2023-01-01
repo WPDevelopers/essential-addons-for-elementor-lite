@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use \Elementor\Controls_Manager;
+use Elementor\Group_Control_Border;
 use \Elementor\Widget_Base;
 use Wpmet\Libs\Rating;
 
@@ -25,7 +26,7 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'essential-addons-elementor' ];
+		return [ 'essential-addons-for-elementor-lite' ];
 	}
 
 	public function get_keywords() {
@@ -87,7 +88,7 @@ class Business_Reviews extends Widget_Base {
         if (empty(get_option('eael_br_google_place_api_key'))) {
             $this->add_control('eael_br_google_place_api_key_missing', [
                 'type' => Controls_Manager::RAW_HTML,
-                'raw' => sprintf(__('Google Place API key is missing. Please add it from EA Dashboard » Elements » <a href="%s" target="_blank">Business Reviews Settings</a>', 'essential-addons-elementor'), esc_attr( site_url('/wp-admin/admin.php?page=eael-settings') )),
+                'raw' => sprintf(__('Google Place API key is missing. Please add it from EA Dashboard » Elements » <a href="%s" target="_blank">Business Reviews Settings</a>', 'essential-addons-for-elementor-lite'), esc_attr( site_url('/wp-admin/admin.php?page=eael-settings') )),
                 'content_classes' => 'eael-warning',
                 'condition' => [
                     'eael_business_reviews_sources' => 'google-reviews',
@@ -280,8 +281,8 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_slider_speed',
 			[
-				'label'       => __( 'Slider Speed', 'essential-addons-elementor' ),
-				'description' => __( 'Duration of transition between slides (in ms)', 'essential-addons-elementor' ),
+				'label'       => __( 'Slider Speed', 'essential-addons-for-elementor-lite' ),
+				'description' => __( 'Duration of transition between slides (in ms)', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::SLIDER,
 				'default'     => [ 'size' => 1000 ],
 				'range'       => [
@@ -713,7 +714,7 @@ class Business_Reviews extends Widget_Base {
 		 * -------------------------------------------
 		 */
 		$this->start_controls_section(
-			'eael_section_business_reviews_header_style',
+			'eael_section_business_reviews_content_style',
 			[
 				'label' => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
@@ -728,7 +729,7 @@ class Business_Reviews extends Widget_Base {
 		 * -------------------------------------------
 		 */
 		$this->start_controls_section(
-			'eael_section_business_reviews_header_style',
+			'eael_section_business_reviews_reviews_style',
 			[
 				'label' => esc_html__( 'Reviews', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
@@ -743,7 +744,7 @@ class Business_Reviews extends Widget_Base {
 		 * -------------------------------------------
 		 */
 		$this->start_controls_section(
-			'eael_section_business_reviews_header_style',
+			'eael_section_business_reviews_arrows_style',
 			[
 				'label' 	=> esc_html__( 'Arrows', 'essential-addons-for-elementor-lite' ),
 				'tab'   	=> Controls_Manager::TAB_STYLE,
@@ -753,244 +754,244 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
-		// $this->add_control(
-		// 	'arrow',
-		// 	[
-		// 		'label'                 => __('Choose Arrow', 'essential-addons-elementor'),
-		// 		'type'                  => Controls_Manager::SELECT,
-		// 		'label_block'           => true,
-		// 		'default'               => 'fa fa-angle-right',
-		// 		'options'               => [
-		// 			'fa fa-angle-right'             => __('Angle', 'essential-addons-elementor'),
-		// 			'fa fa-angle-double-right'      => __('Double Angle', 'essential-addons-elementor'),
-		// 			'fa fa-chevron-right'           => __('Chevron', 'essential-addons-elementor'),
-		// 			'fa fa-chevron-circle-right'    => __('Chevron Circle', 'essential-addons-elementor'),
-		// 			'fa fa-arrow-right'             => __('Arrow', 'essential-addons-elementor'),
-		// 			'fa fa-long-arrow-right'        => __('Long Arrow', 'essential-addons-elementor'),
-		// 			'fa fa-caret-right'             => __('Caret', 'essential-addons-elementor'),
-		// 			'fa fa-caret-square-o-right'    => __('Caret Square', 'essential-addons-elementor'),
-		// 			'fa fa-arrow-circle-right'      => __('Arrow Circle', 'essential-addons-elementor'),
-		// 			'fa fa-arrow-circle-o-right'    => __('Arrow Circle O', 'essential-addons-elementor'),
-		// 			'fa fa-toggle-right'            => __('Toggle', 'essential-addons-elementor'),
-		// 			'fa fa-hand-o-right'            => __('Hand', 'essential-addons-elementor'),
-		// 		],
-		// 	]
-		// );
+		$this->add_control(
+			'eael_business_reviews_arrows_type',
+			[
+				'label'                 => __('Choose Arrow', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::SELECT,
+				'label_block'           => true,
+				'default'               => 'fa fa-angle-right',
+				'options'               => [
+					'fa fa-angle-right'             => __('Angle', 'essential-addons-for-elementor-lite'),
+					'fa fa-angle-double-right'      => __('Double Angle', 'essential-addons-for-elementor-lite'),
+					'fa fa-chevron-right'           => __('Chevron', 'essential-addons-for-elementor-lite'),
+					'fa fa-chevron-circle-right'    => __('Chevron Circle', 'essential-addons-for-elementor-lite'),
+					'fa fa-arrow-right'             => __('Arrow', 'essential-addons-for-elementor-lite'),
+					'fa fa-long-arrow-right'        => __('Long Arrow', 'essential-addons-for-elementor-lite'),
+					'fa fa-caret-right'             => __('Caret', 'essential-addons-for-elementor-lite'),
+					'fa fa-caret-square-o-right'    => __('Caret Square', 'essential-addons-for-elementor-lite'),
+					'fa fa-arrow-circle-right'      => __('Arrow Circle', 'essential-addons-for-elementor-lite'),
+					'fa fa-arrow-circle-o-right'    => __('Arrow Circle O', 'essential-addons-for-elementor-lite'),
+					'fa fa-toggle-right'            => __('Toggle', 'essential-addons-for-elementor-lite'),
+					'fa fa-hand-o-right'            => __('Hand', 'essential-addons-for-elementor-lite'),
+				],
+			]
+		);
 
-		// $this->add_responsive_control(
-		// 	'arrows_width',
-		// 	[
-		// 		'label'                 => __('Arrows Width', 'essential-addons-elementor'),
-		// 		'type'                  => Controls_Manager::SLIDER,
-		// 		'default'               => ['size' => '27'],
-		// 		'range'                 => [
-		// 			'px' => [
-		// 				'min'   => 15,
-		// 				'max'   => 200,
-		// 				'step'  => 1,
-		// 			],
-		// 		],
-		// 		'size_units'            => ['px'],
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'width: {{SIZE}}{{UNIT}};',
-		// 		],
-		// 	]
-		// );
-		// $this->add_responsive_control(
-		// 	'arrows_height',
-		// 	[
-		// 		'label'                 => __('Arrows Height', 'essential-addons-elementor'),
-		// 		'type'                  => Controls_Manager::SLIDER,
-		// 		'default'               => ['size' => '44'],
-		// 		'range'                 => [
-		// 			'px' => [
-		// 				'min'   => 15,
-		// 				'max'   => 200,
-		// 				'step'  => 1,
-		// 			],
-		// 		],
-		// 		'size_units'            => ['px'],
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'height: {{SIZE}}{{UNIT}};',
-		// 		],
-		// 	]
-		// );
+		$this->add_responsive_control(
+			'eael_business_reviews_arrows_width',
+			[
+				'label'                 => __('Arrows Width', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::SLIDER,
+				'default'               => ['size' => '27'],
+				'range'                 => [
+					'px' => [
+						'min'   => 15,
+						'max'   => 200,
+						'step'  => 1,
+					],
+				],
+				'size_units'            => ['px'],
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'eael_business_reviews_arrows_height',
+			[
+				'label'                 => __('Arrows Height', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::SLIDER,
+				'default'               => ['size' => '44'],
+				'range'                 => [
+					'px' => [
+						'min'   => 15,
+						'max'   => 200,
+						'step'  => 1,
+					],
+				],
+				'size_units'            => ['px'],
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
 
-		// $this->add_responsive_control(
-		// 	'arrows_size',
-		// 	[
-		// 		'label'                 => __('Arrows Font Size', 'essential-addons-elementor'),
-		// 		'type'                  => Controls_Manager::SLIDER,
-		// 		'default'               => ['size' => '22'],
-		// 		'range'                 => [
-		// 			'px' => [
-		// 				'min'   => 15,
-		// 				'max'   => 100,
-		// 				'step'  => 1,
-		// 			],
-		// 		],
-		// 		'size_units'            => ['px'],
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'font-size: {{SIZE}}{{UNIT}};',
-		// 		],
-		// 	]
-		// );
+		$this->add_responsive_control(
+			'eael_business_reviews_arrows_size',
+			[
+				'label'                 => __('Arrows Font Size', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::SLIDER,
+				'default'               => ['size' => '22'],
+				'range'                 => [
+					'px' => [
+						'min'   => 15,
+						'max'   => 100,
+						'step'  => 1,
+					],
+				],
+				'size_units'            => ['px'],
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
 
-		// $this->add_responsive_control(
-		// 	'left_arrow_position',
-		// 	[
-		// 		'label'                 => __('Align Left Arrow', 'essential-addons-elementor'),
-		// 		'type'                  => Controls_Manager::SLIDER,
-		// 		'range'                 => [
-		// 			'px' => [
-		// 				'min'   => -100,
-		// 				'max'   => 40,
-		// 				'step'  => 1,
-		// 			],
-		// 		],
-		// 		'size_units'            => ['px'],
-		// 		'selectors'         => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'left: {{SIZE}}{{UNIT}};',
-		// 		],
-		// 	]
-		// );
+		$this->add_responsive_control(
+			'eael_business_reviews_arrows_left_position',
+			[
+				'label'                 => __('Align Left Arrow', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::SLIDER,
+				'range'                 => [
+					'px' => [
+						'min'   => -100,
+						'max'   => 40,
+						'step'  => 1,
+					],
+				],
+				'size_units'            => ['px'],
+				'selectors'         => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'left: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
 
-		// $this->add_responsive_control(
-		// 	'right_arrow_position',
-		// 	[
-		// 		'label'                 => __('Align Right Arrow', 'essential-addons-elementor'),
-		// 		'type'                  => Controls_Manager::SLIDER,
-		// 		'range'                 => [
-		// 			'px' => [
-		// 				'min'   => -100,
-		// 				'max'   => 40,
-		// 				'step'  => 1,
-		// 			],
-		// 		],
-		// 		'size_units'            => ['px'],
-		// 		'selectors'         => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next' => 'right: {{SIZE}}{{UNIT}};',
-		// 		],
-		// 	]
-		// );
+		$this->add_responsive_control(
+			'eael_business_reviews_arrows_right_position',
+			[
+				'label'                 => __('Align Right Arrow', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::SLIDER,
+				'range'                 => [
+					'px' => [
+						'min'   => -100,
+						'max'   => 40,
+						'step'  => 1,
+					],
+				],
+				'size_units'            => ['px'],
+				'selectors'         => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next' => 'right: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
 
-		// $this->start_controls_tabs('tabs_arrows_style');
+		$this->start_controls_tabs('eael_business_reviews_arrows_tabs_style');
 
-		// $this->start_controls_tab(
-		// 	'tab_arrows_normal',
-		// 	[
-		// 		'label'                 => __('Normal', 'essential-addons-elementor'),
-		// 	]
-		// );
+		$this->start_controls_tab(
+			'eael_business_reviews_arrows_tab_normal',
+			[
+				'label'                 => __('Normal', 'essential-addons-for-elementor-lite'),
+			]
+		);
 
-		// $this->add_control(
-		// 	'arrows_bg_color_normal',
-		// 	[
-		// 		'label'                 => __('Background Color', 'essential-addons-elementor'),
-		// 		'type'                  => Controls_Manager::COLOR,
-		// 		'default'               => '',
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'background-color: {{VALUE}};',
-		// 		],
-		// 	]
-		// );
+		$this->add_control(
+			'eael_business_reviews_arrows_bg_color_normal',
+			[
+				'label'                 => __('Background Color', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::COLOR,
+				'default'               => '',
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
 
-		// $this->add_control(
-		// 	'arrows_color_normal',
-		// 	[
-		// 		'label'                 => __('Color', 'essential-addons-elementor'),
-		// 		'type'                  => Controls_Manager::COLOR,
-		// 		'default'               => '',
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'color: {{VALUE}};',
-		// 		],
-		// 	]
-		// );
+		$this->add_control(
+			'eael_business_reviews_arrows_color_normal',
+			[
+				'label'                 => __('Color', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::COLOR,
+				'default'               => '',
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'color: {{VALUE}};',
+				],
+			]
+		);
 
-		// $this->add_group_control(
-		// 	Group_Control_Border::get_type(),
-		// 	[
-		// 		'name'                  => 'arrows_border_normal',
-		// 		'label'                 => __('Border', 'essential-addons-elementor'),
-		// 		'placeholder'           => '1px',
-		// 		'default'               => '1px',
-		// 		'selector'              => '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev'
-		// 	]
-		// );
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'                  => 'eael_business_reviews_arrows_border_normal',
+				'label'                 => __('Border', 'essential-addons-for-elementor-lite'),
+				'placeholder'           => '1px',
+				'default'               => '1px',
+				'selector'              => '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev'
+			]
+		);
 
-		// $this->add_control(
-		// 	'arrows_border_radius_normal',
-		// 	[
-		// 		'label'                 => __('Border Radius', 'essential-addons-elementor'),
-		// 		'type'                  => Controls_Manager::DIMENSIONS,
-		// 		'size_units'            => ['px', '%'],
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-		// 		],
-		// 	]
-		// );
+		$this->add_control(
+			'eael_business_reviews_arrows_border_radius_normal',
+			[
+				'label'                 => __('Border Radius', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::DIMENSIONS,
+				'size_units'            => ['px', '%'],
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 
-		// $this->end_controls_tab();
+		$this->end_controls_tab();
 
-		// $this->start_controls_tab(
-		// 	'tab_arrows_hover',
-		// 	[
-		// 		'label'                 => __('Hover', 'essential-addons-elementor'),
-		// 	]
-		// );
+		$this->start_controls_tab(
+			'eael_business_reviews_arrows_tab_hover',
+			[
+				'label'                 => __('Hover', 'essential-addons-for-elementor-lite'),
+			]
+		);
 
-		// $this->add_control(
-		// 	'arrows_bg_color_hover',
-		// 	[
-		// 		'label'                 => __('Background Color', 'essential-addons-elementor'),
-		// 		'type'                  => Controls_Manager::COLOR,
-		// 		'default'               => '',
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'background-color: {{VALUE}};',
-		// 		],
-		// 	]
-		// );
+		$this->add_control(
+			'eael_business_reviews_arrows_bg_color_hover',
+			[
+				'label'                 => __('Background Color', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::COLOR,
+				'default'               => '',
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
 
-		// $this->add_control(
-		// 	'arrows_color_hover',
-		// 	[
-		// 		'label'                 => __('Color', 'essential-addons-elementor'),
-		// 		'type'                  => Controls_Manager::COLOR,
-		// 		'default'               => '',
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'color: {{VALUE}};',
-		// 		],
-		// 	]
-		// );
+		$this->add_control(
+			'eael_business_reviews_arrows_color_hover',
+			[
+				'label'                 => __('Color', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::COLOR,
+				'default'               => '',
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
 
-		// $this->add_control(
-		// 	'arrows_border_color_hover',
-		// 	[
-		// 		'label'                 => __('Border Color', 'essential-addons-elementor'),
-		// 		'type'                  => Controls_Manager::COLOR,
-		// 		'default'               => '',
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'border-color: {{VALUE}};',
-		// 		],
-		// 	]
-		// );
+		$this->add_control(
+			'eael_business_reviews_arrows_border_color_hover',
+			[
+				'label'                 => __('Border Color', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::COLOR,
+				'default'               => '',
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'border-color: {{VALUE}};',
+				],
+			]
+		);
 
-		// $this->end_controls_tab();
+		$this->end_controls_tab();
 
-		// $this->end_controls_tabs();
+		$this->end_controls_tabs();
 
-		// $this->add_responsive_control(
-		// 	'arrows_padding',
-		// 	[
-		// 		'label'                 => __('Padding', 'essential-addons-elementor'),
-		// 		'type'                  => Controls_Manager::DIMENSIONS,
-		// 		'size_units'            => ['px', '%'],
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-		// 		],
-		// 		'separator'             => 'before',
-		// 	]
-		// );
+		$this->add_responsive_control(
+			'eael_business_reviews_arrows_padding',
+			[
+				'label'                 => __('Padding', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::DIMENSIONS,
+				'size_units'            => ['px', '%'],
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'separator'             => 'before',
+			]
+		);
 
 		$this->end_controls_section();
 
@@ -1000,7 +1001,7 @@ class Business_Reviews extends Widget_Base {
 		 * -------------------------------------------
 		 */
 		$this->start_controls_section(
-			'eael_section_business_reviews_header_style',
+			'eael_section_business_reviews_dots_style',
 			[
 				'label' 	=> esc_html__( 'Dots', 'essential-addons-for-elementor-lite' ),
 				'tab'   	=> Controls_Manager::TAB_STYLE,
@@ -1013,11 +1014,11 @@ class Business_Reviews extends Widget_Base {
 		// $this->add_control(
 		// 	'dots_position',
 		// 	[
-		// 		'label'                 => __('Position', 'essential-addons-elementor'),
+		// 		'label'                 => __('Position', 'essential-addons-for-elementor-lite'),
 		// 		'type'                  => Controls_Manager::SELECT,
 		// 		'options'               => [
-		// 			'inside'     => __('Inside', 'essential-addons-elementor'),
-		// 			'outside'    => __('Outside', 'essential-addons-elementor'),
+		// 			'inside'     => __('Inside', 'essential-addons-for-elementor-lite'),
+		// 			'outside'    => __('Outside', 'essential-addons-for-elementor-lite'),
 		// 		],
 		// 		'default'               => 'outside',
 		// 	]
@@ -1026,7 +1027,7 @@ class Business_Reviews extends Widget_Base {
 		// $this->add_responsive_control(
 		// 	'dots_size',
 		// 	[
-		// 		'label'                 => __('Size', 'essential-addons-elementor'),
+		// 		'label'                 => __('Size', 'essential-addons-for-elementor-lite'),
 		// 		'type'                  => Controls_Manager::SLIDER,
 		// 		'range'                 => [
 		// 			'px' => [
@@ -1045,7 +1046,7 @@ class Business_Reviews extends Widget_Base {
 		// $this->add_responsive_control(
 		// 	'dots_spacing',
 		// 	[
-		// 		'label'                 => __('Spacing', 'essential-addons-elementor'),
+		// 		'label'                 => __('Spacing', 'essential-addons-for-elementor-lite'),
 		// 		'type'                  => Controls_Manager::SLIDER,
 		// 		'range'                 => [
 		// 			'px' => [
@@ -1066,14 +1067,14 @@ class Business_Reviews extends Widget_Base {
 		// $this->start_controls_tab(
 		// 	'tab_dots_normal',
 		// 	[
-		// 		'label'                 => __('Normal', 'essential-addons-elementor'),
+		// 		'label'                 => __('Normal', 'essential-addons-for-elementor-lite'),
 		// 	]
 		// );
 
 		// $this->add_control(
 		// 	'dots_color_normal',
 		// 	[
-		// 		'label'                 => __('Color', 'essential-addons-elementor'),
+		// 		'label'                 => __('Color', 'essential-addons-for-elementor-lite'),
 		// 		'type'                  => Controls_Manager::COLOR,
 		// 		'default'               => '',
 		// 		'selectors'             => [
@@ -1085,7 +1086,7 @@ class Business_Reviews extends Widget_Base {
 		// $this->add_control(
 		// 	'active_dot_color_normal',
 		// 	[
-		// 		'label'                 => __('Active Color', 'essential-addons-elementor'),
+		// 		'label'                 => __('Active Color', 'essential-addons-for-elementor-lite'),
 		// 		'type'                  => Controls_Manager::COLOR,
 		// 		'default'               => '',
 		// 		'selectors'             => [
@@ -1098,7 +1099,7 @@ class Business_Reviews extends Widget_Base {
 		// 	Group_Control_Border::get_type(),
 		// 	[
 		// 		'name'                  => 'dots_border_normal',
-		// 		'label'                 => __('Border', 'essential-addons-elementor'),
+		// 		'label'                 => __('Border', 'essential-addons-for-elementor-lite'),
 		// 		'placeholder'           => '1px',
 		// 		'default'               => '1px',
 		// 		'selector'              => '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet',
@@ -1108,7 +1109,7 @@ class Business_Reviews extends Widget_Base {
 		// $this->add_control(
 		// 	'dots_border_radius_normal',
 		// 	[
-		// 		'label'                 => __('Border Radius', 'essential-addons-elementor'),
+		// 		'label'                 => __('Border Radius', 'essential-addons-for-elementor-lite'),
 		// 		'type'                  => Controls_Manager::DIMENSIONS,
 		// 		'size_units'            => ['px', '%'],
 		// 		'selectors'             => [
@@ -1120,7 +1121,7 @@ class Business_Reviews extends Widget_Base {
 		// $this->add_responsive_control(
 		// 	'dots_padding',
 		// 	[
-		// 		'label'                 => __('Padding', 'essential-addons-elementor'),
+		// 		'label'                 => __('Padding', 'essential-addons-for-elementor-lite'),
 		// 		'type'                  => Controls_Manager::DIMENSIONS,
 		// 		'size_units'            => ['px', 'em', '%'],
 		// 		'allowed_dimensions'    => 'vertical',
@@ -1141,14 +1142,14 @@ class Business_Reviews extends Widget_Base {
 		// $this->start_controls_tab(
 		// 	'tab_dots_hover',
 		// 	[
-		// 		'label'                 => __('Hover', 'essential-addons-elementor'),
+		// 		'label'                 => __('Hover', 'essential-addons-for-elementor-lite'),
 		// 	]
 		// );
 
 		// $this->add_control(
 		// 	'dots_color_hover',
 		// 	[
-		// 		'label'                 => __('Color', 'essential-addons-elementor'),
+		// 		'label'                 => __('Color', 'essential-addons-for-elementor-lite'),
 		// 		'type'                  => Controls_Manager::COLOR,
 		// 		'default'               => '',
 		// 		'selectors'             => [
@@ -1160,7 +1161,7 @@ class Business_Reviews extends Widget_Base {
 		// $this->add_control(
 		// 	'dots_border_color_hover',
 		// 	[
-		// 		'label'                 => __('Border Color', 'essential-addons-elementor'),
+		// 		'label'                 => __('Border Color', 'essential-addons-for-elementor-lite'),
 		// 		'type'                  => Controls_Manager::COLOR,
 		// 		'default'               => '',
 		// 		'selectors'             => [
@@ -1211,6 +1212,7 @@ class Business_Reviews extends Widget_Base {
 		
 		$business_reviews['business_name_label']	= ! empty( $settings['eael_business_reviews_business_name_label'] ) ? $settings['eael_business_reviews_business_name_label'] : '';
 		$business_reviews['google_reviews_label']	= ! empty( $settings['eael_business_reviews_google_reviews_label'] ) ? $settings['eael_business_reviews_google_reviews_label'] : '';
+		$business_reviews['arrows_type']			= ! empty( $settings['eael_business_reviews_arrows_type'] ) ? $settings['eael_business_reviews_arrows_type'] : 'fa fa-angle-right';
 
 		return $business_reviews;
 	}
@@ -1569,8 +1571,15 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	protected function render_arrows() {
-		$pa_next_arrow = 'fa fa-angle-right';
-		$pa_prev_arrow = 'fa fa-angle-left';
+		$business_reviews	= $this->get_business_reviews_settings();
+
+		if( ! empty( $business_reviews['arrows_type'] ) ){
+			$pa_next_arrow = $business_reviews['arrows_type'];
+			$pa_prev_arrow = str_replace("right", "left", $business_reviews['arrows_type']);
+		} else {
+			$pa_next_arrow = 'fa fa-angle-right';
+			$pa_prev_arrow = 'fa fa-angle-left';
+		}
 		?>
 		<!-- Add Arrows -->
 		<div class="swiper-button-next swiper-button-next-<?php echo esc_attr($this->get_id()); ?>">
