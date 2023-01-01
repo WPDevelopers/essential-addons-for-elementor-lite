@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.1
 Requires PHP: 7.0
-Stable tag: 5.5.1
+Stable tag: 5.5.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -242,6 +242,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.5.2 - 22/12/2022 =
+
+- Fixed: EA Event Calendar | URL parameters not working inside manual calendar event link
+- Fixed: EA Info Box | Custom Attribute not working
+- Few minor bug fixes & improvements
 
 = 5.5.1 - 11/12/2022 =
 
