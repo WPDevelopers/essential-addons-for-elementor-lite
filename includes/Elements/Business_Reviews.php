@@ -1076,6 +1076,119 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'eael_business_reviews_reviews_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_reviews_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_reviews_border_radius',
+			[
+				'label'     => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+					'px' => [
+						'max' => 100,
+					],
+				],
+				'default'   => [
+					'size' => 10,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item' => 'border-radius: {{SIZE}}px;',
+				],
+			]
+		);
+
+		$this->start_controls_tabs( 'eael_business_reviews_reviews_controls_tabs' );
+
+		$this->start_controls_tab( 'eael_business_reviews_reviews_control_normal', [
+			'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ),
+		] );
+
+		$this->add_control(
+			'eael_business_reviews_reviews_normal_background_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item' => 'background: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'eael_business_reviews_reviews_normal_border',
+				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'eael_business_reviews_reviews_normal_box_shadow',
+				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab( 'eael_business_reviews_reviews_control_hover', [
+			'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
+		] );
+
+		$this->add_control(
+			'eael_business_reviews_reviews_hover_background_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item:hover' => 'background: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'eael_business_reviews_reviews_hover_border',
+				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item:hover',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'eael_business_reviews_reviews_hover_box_shadow',
+				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item:hover',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
 		$this->end_controls_section();
 
 		/**
