@@ -1243,11 +1243,11 @@ class Business_Reviews extends Widget_Base {
 						'step'  => 1,
 					],
 				],
-				'size_units'            => ['px'],
-				'selectors'  => [
+				'size_units'	=> ['px'],
+				'selectors'  	=> [
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-photo img' => 'width: {{SIZE}}{{UNIT}};',
 				],
-				'condition'  => [
+				'condition'  	=> [
 					'eael_business_reviews_reviewer_photo' => 'yes',
 				],
 			]
