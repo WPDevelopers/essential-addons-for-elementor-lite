@@ -584,7 +584,7 @@ class Business_Reviews extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-item' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -596,7 +596,7 @@ class Business_Reviews extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -615,8 +615,7 @@ class Business_Reviews extends Widget_Base {
 					'size' => 10,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-item,
-					{{WRAPPER}} .eael-nft-gallery-wrapper .preset-2 .eael-nft-item > a' => 'border-radius: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header' => 'border-radius: {{SIZE}}px;',
 				],
 			]
 		);
@@ -633,7 +632,7 @@ class Business_Reviews extends Widget_Base {
 				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-item' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header' => 'background: {{VALUE}};',
 				],
 			]
 		);
@@ -642,7 +641,7 @@ class Business_Reviews extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'eael_business_reviews_header_normal_border',
-				'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-item',
+				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header',
 			]
 		);
 
@@ -650,7 +649,7 @@ class Business_Reviews extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'eael_business_reviews_header_normal_box_shadow',
-				'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-item',
+				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header',
 			]
 		);
 
@@ -666,7 +665,7 @@ class Business_Reviews extends Widget_Base {
 				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-item:hover' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header:hover' => 'background: {{VALUE}};',
 				],
 			]
 		);
@@ -675,7 +674,7 @@ class Business_Reviews extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'eael_business_reviews_header_hover_border',
-				'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-item:hover',
+				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header:hover',
 			]
 		);
 
@@ -683,7 +682,7 @@ class Business_Reviews extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'eael_business_reviews_header_hover_box_shadow',
-				'selector' => '{{WRAPPER}} .eael-nft-gallery-wrapper .eael-nft-gallery-items .eael-nft-item:hover',
+				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header:hover',
 			]
 		);
 
