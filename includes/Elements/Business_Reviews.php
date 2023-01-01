@@ -1190,6 +1190,70 @@ class Business_Reviews extends Widget_Base {
 		$this->end_controls_tabs();
 
 		$this->add_control(
+			'eael_business_reviews_reviewer_photo_label',
+			[
+				'label' => esc_html__( 'Reviewer Photo', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::HEADING,
+				'separator'	=> 'before',
+				'condition' => [
+					'eael_business_reviews_reviewer_photo' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_reviewer_photo_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-photo' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_business_reviews_reviewer_photo' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_reviewer_photo_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-photo' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_business_reviews_reviewer_photo' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_reviewer_photo_size',
+			[
+				'label'      => esc_html__( 'Photo Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'range'                 => [
+					'px' => [
+						'min'   => 15,
+						'max'   => 100,
+						'step'  => 1,
+					],
+				],
+				'size_units'            => ['px'],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-photo img' => 'width: {{SIZE}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_business_reviews_reviewer_photo' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_business_reviews_reviewer_name_label',
 			[
 				'label' => esc_html__( 'Reviewer Name', 'essential-addons-for-elementor-lite' ),
@@ -1389,6 +1453,56 @@ class Business_Reviews extends Widget_Base {
 				],
 				'condition'  => [
 					'eael_business_reviews_review_text' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_review_rating_label',
+			[
+				'label' => esc_html__( 'Review Rating', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::HEADING,
+				'separator'	=> 'before',
+				'condition' => [
+					'eael_business_reviews_review_rating' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_review_rating_star_color',
+			[
+				'label'     => esc_html__( 'Star Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-rating svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-rating svg path' => 'fill: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_business_reviews_review_rating' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_review_rating_star_size',
+			[
+				'label'      => esc_html__( 'Star Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'range'                 => [
+					'px' => [
+						'min'   => 15,
+						'max'   => 200,
+						'step'  => 1,
+					],
+				],
+				'size_units'            => ['px'],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-rating svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-rating svg path' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_business_reviews_review_rating' => 'yes',
 				],
 			]
 		);
