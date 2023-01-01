@@ -1189,6 +1189,210 @@ class Business_Reviews extends Widget_Base {
 
 		$this->end_controls_tabs();
 
+		$this->add_control(
+			'eael_business_reviews_reviewer_name_label',
+			[
+				'label' => esc_html__( 'Reviewer Name', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::HEADING,
+				'separator'	=> 'before',
+				'condition' => [
+					'eael_business_reviews_reviewer_name' => 'yes',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_business_reviews_reviewer_name_typography',
+				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-name a',
+				'condition' => [
+					'eael_business_reviews_reviewer_name' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_reviewer_name_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-name' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-name a' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_business_reviews_reviewer_name' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_reviewer_name_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-name' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_business_reviews_reviewer_name' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_reviewer_name_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-name' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_business_reviews_reviewer_name' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_review_time_label',
+			[
+				'label' => esc_html__( 'Review Time', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::HEADING,
+				'separator'	=> 'before',
+				'condition' => [
+					'eael_business_reviews_review_time' => 'yes',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_business_reviews_review_time_typography',
+				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-time, {{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-time a',
+				'condition' => [
+					'eael_business_reviews_review_time' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_review_time_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-time' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-time a' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_business_reviews_review_time' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_review_time_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-time' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_business_reviews_review_time' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_review_time_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-time' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_business_reviews_review_time' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_review_text_label',
+			[
+				'label' => esc_html__( 'Review Text', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::HEADING,
+				'separator'	=> 'before',
+				'condition' => [
+					'eael_business_reviews_review_text' => 'yes',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_business_reviews_review_text_typography',
+				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text, {{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text a',
+				'condition' => [
+					'eael_business_reviews_review_text' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_review_text_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text a' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_business_reviews_review_text' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_review_text_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_business_reviews_review_text' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_review_text_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_business_reviews_review_text' => 'yes',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**
