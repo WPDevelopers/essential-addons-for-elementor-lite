@@ -603,8 +603,8 @@ class Business_Reviews extends Widget_Base {
 							</div>
 
 							<div class="eael-google-reviews-business-address">
-								<p><?php printf( '<span>%s</span> %s', esc_html('Address:'), esc_html( $google_reviews_data['formatted_address'] ) ); ?></p>
-								<p><?php printf( '<span>%s</span> <a href="tel:%s">%s</a>', esc_attr('Phone:'), esc_html( $google_reviews_data['international_phone_number'] ), esc_attr( $google_reviews_data['international_phone_number'] ) ); ?></p>
+								<p><?php printf( '<span>%s</span> %s', esc_html(''), esc_html( $google_reviews_data['formatted_address'] ) ); ?></p>
+								<p><?php printf( '<span>%s</span> <a href="tel:%s">%s</a>', esc_attr(''), esc_html( $google_reviews_data['international_phone_number'] ), esc_attr( $google_reviews_data['international_phone_number'] ) ); ?></p>
 							</div>
 						</div>
 						

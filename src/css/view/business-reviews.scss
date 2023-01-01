@@ -1,6 +1,8 @@
 .eael-business-reviews-wrapper {
     .eael-google-reviews-slider-header {
         text-align: center;
+        margin-bottom: 40px;
+        cursor: pointer;
 
         .eael-google-reviews-business-name,
         .eael-google-reviews-business-name a {
@@ -8,9 +10,25 @@
             font-size: 36px;
         }
 
-        .eael-google-reviews-business-rating {
+        .eael-google-reviews-business-rating,
+        .eael-google-reviews-business-rating a {
             color: #8A8EAA;
             font-size: 12px;
+        }
+
+        .eael-google-reviews-business-address,
+        .eael-google-reviews-business-address a {
+            color: #8A8EAA;
+            font-size: 13px;
+        }
+
+        .eael-google-reviews-business-address p,
+        .eael-google-reviews-business-rating p {
+            margin: 5px 0 0;
+        }
+
+        .eael-google-reviews-business-address {
+            margin-top: 10px;
         }
     }
 
