@@ -594,7 +594,7 @@ class Business_Reviews extends Widget_Base {
 					<div <?php echo $this->get_render_attribute_string('eael-google-reviews-content'); ?> >
 						<div class="eael-google-reviews-slider-header">
 							<div class="eael-google-reviews-business-name">
-								<a href="<?php esc_url( $google_reviews_data['website'] ); ?>"><?php echo esc_html( $google_reviews_data['name'] ); ?></a>
+								<a href="<?php echo esc_url( $google_reviews_data['website'] ); ?>"><?php echo esc_html( $google_reviews_data['name'] ); ?></a>
 							</div>
 							<div class="eael-google-reviews-business-rating">
 								<p><?php echo esc_html( $google_reviews_data['rating'] ); ?></p>
