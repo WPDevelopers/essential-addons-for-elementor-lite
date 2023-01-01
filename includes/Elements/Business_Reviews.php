@@ -998,168 +998,155 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
-		// $this->add_control(
-		// 	'dots_position',
-		// 	[
-		// 		'label'                 => __('Position', 'essential-addons-for-elementor-lite'),
-		// 		'type'                  => Controls_Manager::SELECT,
-		// 		'options'               => [
-		// 			'inside'     => __('Inside', 'essential-addons-for-elementor-lite'),
-		// 			'outside'    => __('Outside', 'essential-addons-for-elementor-lite'),
-		// 		],
-		// 		'default'               => 'outside',
-		// 	]
-		// );
+		$this->add_responsive_control(
+			'eael_business_reviews_dots_size',
+			[
+				'label'                 => __('Size', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::SLIDER,
+				'range'                 => [
+					'px' => [
+						'min'   => 2,
+						'max'   => 40,
+						'step'  => 1,
+					],
+				],
+				'size_units'            => '',
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
+				],
+			]
+		);
 
-		// $this->add_responsive_control(
-		// 	'dots_size',
-		// 	[
-		// 		'label'                 => __('Size', 'essential-addons-for-elementor-lite'),
-		// 		'type'                  => Controls_Manager::SLIDER,
-		// 		'range'                 => [
-		// 			'px' => [
-		// 				'min'   => 2,
-		// 				'max'   => 40,
-		// 				'step'  => 1,
-		// 			],
-		// 		],
-		// 		'size_units'            => '',
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
-		// 		],
-		// 	]
-		// );
+		$this->add_responsive_control(
+			'eael_business_reviews_dots_spacing',
+			[
+				'label'                 => __('Spacing', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::SLIDER,
+				'range'                 => [
+					'px' => [
+						'min'   => 1,
+						'max'   => 30,
+						'step'  => 1,
+					],
+				],
+				'size_units'            => '',
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'margin-left: {{SIZE}}{{UNIT}}; margin-right: {{SIZE}}{{UNIT}}',
+				],
+			]
+		);
 
-		// $this->add_responsive_control(
-		// 	'dots_spacing',
-		// 	[
-		// 		'label'                 => __('Spacing', 'essential-addons-for-elementor-lite'),
-		// 		'type'                  => Controls_Manager::SLIDER,
-		// 		'range'                 => [
-		// 			'px' => [
-		// 				'min'   => 1,
-		// 				'max'   => 30,
-		// 				'step'  => 1,
-		// 			],
-		// 		],
-		// 		'size_units'            => '',
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'margin-left: {{SIZE}}{{UNIT}}; margin-right: {{SIZE}}{{UNIT}}',
-		// 		],
-		// 	]
-		// );
+		$this->start_controls_tabs('eael_business_reviews_dots_tabs_style');
 
-		// $this->start_controls_tabs('tabs_dots_style');
+		$this->start_controls_tab(
+			'eael_business_reviews_dots_tab_normal',
+			[
+				'label'                 => __('Normal', 'essential-addons-for-elementor-lite'),
+			]
+		);
 
-		// $this->start_controls_tab(
-		// 	'tab_dots_normal',
-		// 	[
-		// 		'label'                 => __('Normal', 'essential-addons-for-elementor-lite'),
-		// 	]
-		// );
+		$this->add_control(
+			'eael_business_reviews_dots_color_normal',
+			[
+				'label'                 => __('Color', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::COLOR,
+				'default'               => '',
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'background: {{VALUE}};',
+				],
+			]
+		);
 
-		// $this->add_control(
-		// 	'dots_color_normal',
-		// 	[
-		// 		'label'                 => __('Color', 'essential-addons-for-elementor-lite'),
-		// 		'type'                  => Controls_Manager::COLOR,
-		// 		'default'               => '',
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'background: {{VALUE}};',
-		// 		],
-		// 	]
-		// );
+		$this->add_control(
+			'eael_business_reviews_active_dot_color_normal',
+			[
+				'label'                 => __('Active Color', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::COLOR,
+				'default'               => '',
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet-active' => 'background: {{VALUE}};',
+				],
+			]
+		);
 
-		// $this->add_control(
-		// 	'active_dot_color_normal',
-		// 	[
-		// 		'label'                 => __('Active Color', 'essential-addons-for-elementor-lite'),
-		// 		'type'                  => Controls_Manager::COLOR,
-		// 		'default'               => '',
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet-active' => 'background: {{VALUE}};',
-		// 		],
-		// 	]
-		// );
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'                  => 'eael_business_reviews_dots_border_normal',
+				'label'                 => __('Border', 'essential-addons-for-elementor-lite'),
+				'placeholder'           => '1px',
+				'default'               => '1px',
+				'selector'              => '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet',
+			]
+		);
 
-		// $this->add_group_control(
-		// 	Group_Control_Border::get_type(),
-		// 	[
-		// 		'name'                  => 'dots_border_normal',
-		// 		'label'                 => __('Border', 'essential-addons-for-elementor-lite'),
-		// 		'placeholder'           => '1px',
-		// 		'default'               => '1px',
-		// 		'selector'              => '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet',
-		// 	]
-		// );
+		$this->add_control(
+			'eael_business_reviews_dots_border_radius_normal',
+			[
+				'label'                 => __('Border Radius', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::DIMENSIONS,
+				'size_units'            => ['px', '%'],
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 
-		// $this->add_control(
-		// 	'dots_border_radius_normal',
-		// 	[
-		// 		'label'                 => __('Border Radius', 'essential-addons-for-elementor-lite'),
-		// 		'type'                  => Controls_Manager::DIMENSIONS,
-		// 		'size_units'            => ['px', '%'],
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-		// 		],
-		// 	]
-		// );
+		$this->end_controls_tab();
 
-		// $this->add_responsive_control(
-		// 	'dots_padding',
-		// 	[
-		// 		'label'                 => __('Padding', 'essential-addons-for-elementor-lite'),
-		// 		'type'                  => Controls_Manager::DIMENSIONS,
-		// 		'size_units'            => ['px', 'em', '%'],
-		// 		'allowed_dimensions'    => 'vertical',
-		// 		'placeholder'           => [
-		// 			'top'      => '',
-		// 			'right'    => 'auto',
-		// 			'bottom'   => '',
-		// 			'left'     => 'auto',
-		// 		],
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullets' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-		// 		],
-		// 	]
-		// );
+		$this->start_controls_tab(
+			'eael_business_reviews_dots_tab_hover',
+			[
+				'label'                 => __('Hover', 'essential-addons-for-elementor-lite'),
+			]
+		);
 
-		// $this->end_controls_tab();
+		$this->add_control(
+			'eael_business_reviews_dots_color_hover',
+			[
+				'label'                 => __('Color', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::COLOR,
+				'default'               => '',
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet:hover' => 'background: {{VALUE}};',
+				],
+			]
+		);
 
-		// $this->start_controls_tab(
-		// 	'tab_dots_hover',
-		// 	[
-		// 		'label'                 => __('Hover', 'essential-addons-for-elementor-lite'),
-		// 	]
-		// );
+		$this->add_control(
+			'eael_business_reviews_dots_border_color_hover',
+			[
+				'label'                 => __('Border Color', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::COLOR,
+				'default'               => '',
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet:hover' => 'border-color: {{VALUE}};',
+				],
+			]
+		);
 
-		// $this->add_control(
-		// 	'dots_color_hover',
-		// 	[
-		// 		'label'                 => __('Color', 'essential-addons-for-elementor-lite'),
-		// 		'type'                  => Controls_Manager::COLOR,
-		// 		'default'               => '',
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet:hover' => 'background: {{VALUE}};',
-		// 		],
-		// 	]
-		// );
+		$this->end_controls_tab();
 
-		// $this->add_control(
-		// 	'dots_border_color_hover',
-		// 	[
-		// 		'label'                 => __('Border Color', 'essential-addons-for-elementor-lite'),
-		// 		'type'                  => Controls_Manager::COLOR,
-		// 		'default'               => '',
-		// 		'selectors'             => [
-		// 			'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet:hover' => 'border-color: {{VALUE}};',
-		// 		],
-		// 	]
-		// );
+		$this->end_controls_tabs();
 
-		// $this->end_controls_tab();
-
-		// $this->end_controls_tabs();
+		$this->add_responsive_control(
+			'eael_business_reviews_dots_padding',
+			[
+				'label'                 => __('Padding', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::DIMENSIONS,
+				'size_units'            => ['px', 'em', '%'],
+				'allowed_dimensions'    => 'vertical',
+				'placeholder'           => [
+					'top'      => '',
+					'right'    => 'auto',
+					'bottom'   => '',
+					'left'     => 'auto',
+				],
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullets' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 
 		$this->end_controls_section();
 	}
