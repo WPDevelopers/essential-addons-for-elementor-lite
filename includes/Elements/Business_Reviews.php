@@ -980,19 +980,6 @@ class Business_Reviews extends Widget_Base {
 
 		$this->end_controls_tabs();
 
-		$this->add_responsive_control(
-			'eael_business_reviews_arrows_padding',
-			[
-				'label'                 => __('Padding', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::DIMENSIONS,
-				'size_units'            => ['px', '%'],
-				'selectors'             => [
-					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'separator'             => 'before',
-			]
-		);
-
 		$this->end_controls_section();
 
 		/**
