@@ -1559,6 +1559,14 @@ $theme-preset4: #ec3b75;
 //theme Buddyboss
 .theme-buddyboss-theme{
     #content .elementor-widget-container {
+        .star-rating{
+            margin: 0px;
+        }
+        .eael-product-price{
+            ins{
+                text-decoration: none;
+            }
+        }
         .eael-woo-product-carousel{
             li.product{
                 background: transparent;
@@ -1588,6 +1596,8 @@ $theme-preset4: #ec3b75;
                         font-size: 0;
                         border: none;
                         margin-right: 3px;
+                        margin-bottom: 4px;
+                        color: inherit;
                     }
                 }
             }
@@ -1601,6 +1611,7 @@ $theme-preset4: #ec3b75;
                     width: 100%;
                     color: inherit;
                     border: none;
+                    background: transparent;
                 }
                 .eael-star-rating.star-rating{
                     min-width: 100px;
