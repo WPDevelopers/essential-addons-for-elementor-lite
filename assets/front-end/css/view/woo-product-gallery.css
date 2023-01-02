@@ -1131,6 +1131,9 @@
   width: 92%;
   border-radius: 4px;
 }
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-4.eael-product-gallery li.product .star-rating {
+  display: inline-block;
+}
 .theme-buddyboss-theme #content .elementor-widget-container .eael-product-gallery li.product .star-rating {
   min-width: 110px;
 }
@@ -1145,4 +1148,7 @@
 }
 .theme-buddyboss-theme .eael-product-gallery .woocommerce li.product a.button.add_to_cart_button {
   margin-bottom: 0;
+}
+.theme-buddyboss-theme .eael-product-gallery .woocommerce li.product .eael-product-price ins {
+  text-decoration: none;
 }

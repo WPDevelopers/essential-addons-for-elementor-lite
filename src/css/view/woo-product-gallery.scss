@@ -1376,9 +1376,14 @@
             }
         }
         .eael-product-preset-4{
-            &.eael-product-gallery li.product .button{
-                width: 92%;
-                border-radius: 4px;
+            &.eael-product-gallery li.product{
+                .button{
+                    width: 92%;
+                    border-radius: 4px;
+                }
+                .star-rating{
+                    display: inline-block;
+                }
             }
         }
         .eael-product-gallery li.product{
@@ -1398,6 +1403,11 @@
             }
             a.button.add_to_cart_button{
                 margin-bottom: 0;
+            }
+            .eael-product-price{
+                ins{
+                    text-decoration: none;
+                }
             }
         }
     }
