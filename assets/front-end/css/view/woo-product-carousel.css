@@ -1198,6 +1198,12 @@
   letter-spacing: 14px;
   font-size: 14px;
 }
+.theme-buddyboss-theme #content .elementor-widget-container .star-rating {
+  margin: 0px;
+}
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-price ins {
+  text-decoration: none;
+}
 .theme-buddyboss-theme #content .elementor-widget-container .eael-woo-product-carousel li.product {
   background: transparent;
   border-radius: 20px;
@@ -1222,6 +1228,8 @@
   font-size: 0;
   border: none;
   margin-right: 3px;
+  margin-bottom: 4px;
+  color: inherit;
 }
 .theme-buddyboss-theme #content .elementor-widget-container .preset-3 li.product a.added_to_cart {
   line-height: 0;
@@ -1229,6 +1237,7 @@
   width: 100%;
   color: inherit;
   border: none;
+  background: transparent;
 }
 .theme-buddyboss-theme #content .elementor-widget-container .preset-3 li.product .eael-star-rating.star-rating {
   min-width: 100px;
