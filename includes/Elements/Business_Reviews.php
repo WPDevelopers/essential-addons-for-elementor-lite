@@ -2292,17 +2292,18 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function print_google_reviews_slider_preset_1( $business_reviews, $single_review_data ){
-		if( $business_reviews['reviewer_photo'] ): ?>
-		<div class="eael-google-review-reviewer-photo">
-			<img src="<?php echo esc_url_raw( $single_review_data['profile_photo_url'] ); ?>" alt="">
-		</div>
-		<?php endif; ?>
-
-		<?php if( $business_reviews['reviewer_name'] ): ?>
-		<div class="eael-google-review-reviewer-name">
-			<a href="<?php echo ! empty ( $single_review_data['author_url'] ) ? esc_url_raw( $single_review_data['author_url'] ) : '#'; ?>" target="_blank"><?php echo esc_html( $single_review_data['author_name'] ); ?></a>
-		</div>
-		<?php endif; ?>
+		if( $business_reviews['reviewer_photo'] ){
+			printf('<div class="eael-google-review-reviewer-photo">');
+			printf('<img src="%s" alt="">', esc_url_raw( $single_review_data['profile_photo_url'] ) );
+			printf('</div>');
+		}
+		
+		if( $business_reviews['reviewer_name'] ) {
+			printf('<div class="eael-google-review-reviewer-name">');
+			printf('<a href="%s" target="_blank">%s</a>', ! empty ( $single_review_data['author_url'] ) ? esc_url_raw( $single_review_data['author_url'] ) : '#', esc_html( $single_review_data['author_name'] ));
+			printf('</div>');
+		}
+		?>
 		
 		<?php if( $business_reviews['review_time'] ): ?>
 		<div class="eael-google-review-time">
@@ -2374,15 +2375,15 @@ class Business_Reviews extends Widget_Base {
 		</div>
 		<?php endif; ?>
 
-		<?php if( $business_reviews['review_text'] ): ?>
-		<div class="eael-google-review-text">
-			<?php echo esc_html( $single_review_data['text'] ); ?>
-		</div>
-		<?php endif; ?>
-
 		<?php if( $business_reviews['review_rating'] ): ?>
 		<div class="eael-google-review-rating">
 			<?php $this->print_business_reviews_ratings($single_review_data['rating']); ?>
+		</div>
+		<?php endif; ?>
+
+		<?php if( $business_reviews['review_text'] ): ?>
+		<div class="eael-google-review-text">
+			<?php echo esc_html( $single_review_data['text'] ); ?>
 		</div>
 		<?php endif;
 	}
