@@ -2255,36 +2255,23 @@ class Business_Reviews extends Widget_Base {
 								?>
 
 								<div <?php echo $this->get_render_attribute_string('eael-google-reviews-slider-item-' . $i); ?> >
-									<div class="eael-google-review-reviewer">
-										<?php if( $business_reviews['reviewer_photo'] ): ?>
-										<div class="eael-google-review-reviewer-photo">
-											<img src="<?php echo esc_url_raw( $single_review_data['profile_photo_url'] ); ?>" alt="">
-										</div>
-										<?php endif; ?>
-
-										<?php if( $business_reviews['reviewer_name'] ): ?>
-										<div class="eael-google-review-reviewer-name">
-											<a href="<?php echo ! empty ( $single_review_data['author_url'] ) ? esc_url_raw( $single_review_data['author_url'] ) : '#'; ?>" target="_blank"><?php echo esc_html( $single_review_data['author_name'] ); ?></a>
-										</div>
-										<?php endif; ?>
-										
-										<?php if( $business_reviews['review_time'] ): ?>
-										<div class="eael-google-review-time">
-											<?php echo esc_html( $single_review_data['relative_time_description'] ); ?>
-										</div>
-										<?php endif; ?>
-
-										<?php if( $business_reviews['review_text'] ): ?>
-										<div class="eael-google-review-text">
-											<?php echo esc_html( $single_review_data['text'] ); ?>
-										</div>
-										<?php endif; ?>
-			
-										<?php if( $business_reviews['review_rating'] ): ?>
-										<div class="eael-google-review-rating">
-											<?php $this->print_business_reviews_ratings($single_review_data['rating']); ?>
-										</div>
-										<?php endif; ?>
+									<div class="eael-google-review-reviewer-with-text">
+										<?php 
+										switch( $business_reviews['preset'] ){
+											case 'preset-1':
+												$this->print_google_reviews_slider_preset_1( $business_reviews, $single_review_data );
+												break;
+											case 'preset-2':
+												$this->print_google_reviews_slider_preset_2( $business_reviews, $single_review_data );
+												break;
+											case 'preset-3':
+												$this->print_google_reviews_slider_preset_3( $business_reviews, $single_review_data );
+												break;
+											default:
+												$this->print_google_reviews_slider_preset_1( $business_reviews, $single_review_data );
+												break;
+										}
+										?>
 									</div>
 								</div>
 								<?php
@@ -2302,6 +2289,102 @@ class Business_Reviews extends Widget_Base {
 			</div>
 			<?php
 		}
+	}
+
+	public function print_google_reviews_slider_preset_1( $business_reviews, $single_review_data ){
+		if( $business_reviews['reviewer_photo'] ): ?>
+		<div class="eael-google-review-reviewer-photo">
+			<img src="<?php echo esc_url_raw( $single_review_data['profile_photo_url'] ); ?>" alt="">
+		</div>
+		<?php endif; ?>
+
+		<?php if( $business_reviews['reviewer_name'] ): ?>
+		<div class="eael-google-review-reviewer-name">
+			<a href="<?php echo ! empty ( $single_review_data['author_url'] ) ? esc_url_raw( $single_review_data['author_url'] ) : '#'; ?>" target="_blank"><?php echo esc_html( $single_review_data['author_name'] ); ?></a>
+		</div>
+		<?php endif; ?>
+		
+		<?php if( $business_reviews['review_time'] ): ?>
+		<div class="eael-google-review-time">
+			<?php echo esc_html( $single_review_data['relative_time_description'] ); ?>
+		</div>
+		<?php endif; ?>
+
+		<?php if( $business_reviews['review_text'] ): ?>
+		<div class="eael-google-review-text">
+			<?php echo esc_html( $single_review_data['text'] ); ?>
+		</div>
+		<?php endif; ?>
+
+		<?php if( $business_reviews['review_rating'] ): ?>
+		<div class="eael-google-review-rating">
+			<?php $this->print_business_reviews_ratings($single_review_data['rating']); ?>
+		</div>
+		<?php endif;
+	}
+
+	public function print_google_reviews_slider_preset_2( $business_reviews, $single_review_data ){
+		if( $business_reviews['reviewer_photo'] ): ?>
+		<div class="eael-google-review-reviewer-photo">
+			<img src="<?php echo esc_url_raw( $single_review_data['profile_photo_url'] ); ?>" alt="">
+		</div>
+		<?php endif; ?>
+
+		<?php if( $business_reviews['reviewer_name'] ): ?>
+		<div class="eael-google-review-reviewer-name">
+			<a href="<?php echo ! empty ( $single_review_data['author_url'] ) ? esc_url_raw( $single_review_data['author_url'] ) : '#'; ?>" target="_blank"><?php echo esc_html( $single_review_data['author_name'] ); ?></a>
+		</div>
+		<?php endif; ?>
+		
+		<?php if( $business_reviews['review_time'] ): ?>
+		<div class="eael-google-review-time">
+			<?php echo esc_html( $single_review_data['relative_time_description'] ); ?>
+		</div>
+		<?php endif; ?>
+
+		<?php if( $business_reviews['review_text'] ): ?>
+		<div class="eael-google-review-text">
+			<?php echo esc_html( $single_review_data['text'] ); ?>
+		</div>
+		<?php endif; ?>
+
+		<?php if( $business_reviews['review_rating'] ): ?>
+		<div class="eael-google-review-rating">
+			<?php $this->print_business_reviews_ratings($single_review_data['rating']); ?>
+		</div>
+		<?php endif;
+	}
+
+	public function print_google_reviews_slider_preset_3( $business_reviews, $single_review_data ){
+		if( $business_reviews['reviewer_photo'] ): ?>
+		<div class="eael-google-review-reviewer-photo">
+			<img src="<?php echo esc_url_raw( $single_review_data['profile_photo_url'] ); ?>" alt="">
+		</div>
+		<?php endif; ?>
+
+		<?php if( $business_reviews['reviewer_name'] ): ?>
+		<div class="eael-google-review-reviewer-name">
+			<a href="<?php echo ! empty ( $single_review_data['author_url'] ) ? esc_url_raw( $single_review_data['author_url'] ) : '#'; ?>" target="_blank"><?php echo esc_html( $single_review_data['author_name'] ); ?></a>
+		</div>
+		<?php endif; ?>
+		
+		<?php if( $business_reviews['review_time'] ): ?>
+		<div class="eael-google-review-time">
+			<?php echo esc_html( $single_review_data['relative_time_description'] ); ?>
+		</div>
+		<?php endif; ?>
+
+		<?php if( $business_reviews['review_text'] ): ?>
+		<div class="eael-google-review-text">
+			<?php echo esc_html( $single_review_data['text'] ); ?>
+		</div>
+		<?php endif; ?>
+
+		<?php if( $business_reviews['review_rating'] ): ?>
+		<div class="eael-google-review-rating">
+			<?php $this->print_business_reviews_ratings($single_review_data['rating']); ?>
+		</div>
+		<?php endif;
 	}
 
 	public function print_google_reviews_grid( $google_reviews_data ) {
