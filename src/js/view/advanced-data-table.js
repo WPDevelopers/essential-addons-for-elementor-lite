@@ -29,6 +29,11 @@ class advancedDataTable {
       // woocommerce
       this.initWooFeatures(table);
     }
+    if ($(table).hasClass('ea-advanced-data-table-static')){
+        $(table).find('th, td').each(function (){
+          $(this).html($(this).text());
+        })
+    }
   }
 
   // frontend - search
