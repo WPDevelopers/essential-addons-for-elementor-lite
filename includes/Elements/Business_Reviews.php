@@ -114,7 +114,7 @@ class Business_Reviews extends Widget_Base {
 			'eael_business_reviews_items_layout',
 			[
 				'label'   => esc_html__( 'Layout Type', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SELECT,
+				'type'    => Controls_Manager::HIDDEN,
 				'default' => 'slider',
 				'options' => [
 					'slider' => esc_html__( 'Slider', 'essential-addons-for-elementor-lite' ),
