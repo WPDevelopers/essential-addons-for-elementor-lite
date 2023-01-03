@@ -169,7 +169,27 @@ class Business_Reviews extends Widget_Base {
 					'4' => esc_html__( '4', 'essential-addons-for-elementor-lite' ),
 				],
 				'condition' => [
-					'eael_business_reviews_items_layout' => 'slider'
+					'eael_business_reviews_items_layout' => 'slider',
+					'eael_business_reviews_style_preset_slider!' => 'preset-2'
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_column_preset_2',
+			[
+				'label'     => esc_html__( 'Columns', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '1',
+				'options'   => [
+					'1' => esc_html__( '1', 'essential-addons-for-elementor-lite' ),
+					'2' => esc_html__( '2', 'essential-addons-for-elementor-lite' ),
+					'3' => esc_html__( '3', 'essential-addons-for-elementor-lite' ),
+					'4' => esc_html__( '4', 'essential-addons-for-elementor-lite' ),
+				],
+				'condition' => [
+					'eael_business_reviews_items_layout' => 'slider',
+					'eael_business_reviews_style_preset_slider' => 'preset-2'
 				],
 			]
 		);
@@ -1959,6 +1979,9 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['google_reviews_label']	= ! empty( $settings['eael_business_reviews_google_reviews_label'] ) ? $settings['eael_business_reviews_google_reviews_label'] : '';
 		$business_reviews['arrows_type']			= ! empty( $settings['eael_business_reviews_arrows_type'] ) ? $settings['eael_business_reviews_arrows_type'] : 'fa fa-angle-right';
 
+		if('slider' === $business_reviews['layout'] && 'preset-2' === $business_reviews['preset'] ){
+			$business_reviews['columns']        	= ! empty( $settings['eael_business_reviews_column_preset_2'] ) ? $settings['eael_business_reviews_column_preset_2'] : $business_reviews['columns'];
+		}
 		return $business_reviews;
 	}
 
@@ -2324,43 +2347,53 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function print_google_reviews_slider_preset_2( $business_reviews, $single_review_data ){
-		if( $business_reviews['reviewer_photo'] ): ?>
-		<div class="eael-google-review-reviewer-photo">
-			<img src="<?php echo esc_url_raw( $single_review_data['profile_photo_url'] ); ?>" alt="">
-		</div>
-		<?php endif;
+		?>
+		<div class="preset-content-wrap">
+			<div class="preset-content-body">
+				<?php if( $business_reviews['review_text'] ): ?>
+				<div class="eael-google-review-text">
+					<?php echo esc_html( $single_review_data['text'] ); ?>
+				</div>
+				<?php endif; ?>
+			</div>
 
-		if( $business_reviews['reviewer_name'] ): ?>
-		<div class="eael-google-review-reviewer-name">
-			<a href="<?php echo ! empty ( $single_review_data['author_url'] ) ? esc_url_raw( $single_review_data['author_url'] ) : '#'; ?>" target="_blank"><?php echo esc_html( $single_review_data['author_name'] ); ?></a>
-		</div>
-		<?php endif;
-		
-		if( $business_reviews['review_time'] ): ?>
-		<div class="eael-google-review-time">
-			<?php echo esc_html( $single_review_data['relative_time_description'] ); ?>
-		</div>
-		<?php endif;
+			<div class="preset-content-footer">
+				<div class="preset-content-footer-photo">
+					<?php if( $business_reviews['reviewer_photo'] ): ?>
+					<div class="eael-google-review-reviewer-photo">
+						<img src="<?php echo esc_url_raw( $single_review_data['profile_photo_url'] ); ?>" alt="">
+					</div>
+					<?php endif; ?> 
+				</div>
 
-		if( $business_reviews['review_text'] ): ?>
-		<div class="eael-google-review-text">
-			<?php echo esc_html( $single_review_data['text'] ); ?>
+				<div class="preset-content-footer-reviewer-name">
+					<?php if( $business_reviews['reviewer_name'] ): ?>
+					<div class="eael-google-review-reviewer-name">
+						<a href="<?php echo ! empty ( $single_review_data['author_url'] ) ? esc_url_raw( $single_review_data['author_url'] ) : '#'; ?>" target="_blank"><?php echo esc_html( $single_review_data['author_name'] ); ?></a>
+					</div>
+					<?php endif;
+					
+					if( $business_reviews['review_time'] ): ?>
+					<div class="eael-google-review-time">
+						<?php echo esc_html( $single_review_data['relative_time_description'] ); ?>
+					</div>
+					<?php endif; ?>
+				</div>
+				
+				<div class="preset-content-footer-rating">
+					<?php if( $business_reviews['review_rating'] ): ?>
+					<div class="eael-google-review-rating">
+						<?php $this->print_business_reviews_ratings($single_review_data['rating']); ?>
+					</div>
+					<?php endif; ?>
+				</div>
+			</div>
 		</div>
-		<?php endif;
-
-		if( $business_reviews['review_rating'] ): ?>
-		<div class="eael-google-review-rating">
-			<?php $this->print_business_reviews_ratings($single_review_data['rating']); ?>
-		</div>
-		<?php endif;
+		<?php 
 	}
 
 	public function print_google_reviews_slider_preset_3( $business_reviews, $single_review_data ){
 		?>
-		<div class="preset-content-header">
-
-		</div>
-
 		<div class="preset-content-body">
 			<?php if( $business_reviews['review_rating'] ): ?>
 			<div class="eael-google-review-rating">

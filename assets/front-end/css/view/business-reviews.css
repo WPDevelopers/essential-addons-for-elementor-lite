@@ -1,3 +1,30 @@
+.eael-business-reviews-wrapper .preset-2 .preset-content-wrap {
+  border: 1px solid #f5f5f5;
+  border-radius: 10px;
+  padding: 30px;
+  margin: 5px;
+  -webkit-box-shadow: 0px 10px 25px rgba(19, 26, 64, 0.1);
+          box-shadow: 0px 10px 25px rgba(19, 26, 64, 0.1);
+}
+.eael-business-reviews-wrapper .preset-2 .preset-content-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 20px;
+     -moz-column-gap: 20px;
+          column-gap: 20px;
+  margin-top: 35px;
+  padding-top: 20px;
+  border-top: 1px solid #f5f5f5;
+}
+.eael-business-reviews-wrapper .preset-2 .preset-content-footer-rating {
+  margin-left: auto;
+}
+.eael-business-reviews-wrapper .preset-2 .eael-google-review-text,
+.eael-business-reviews-wrapper .preset-2 .eael-google-review-reviewer-name,
+.eael-business-reviews-wrapper .preset-2 .eael-google-review-time {
+  text-align: left;
+}
 .eael-business-reviews-wrapper .preset-3 .preset-content-body {
   border: 1px solid #f5f5f5;
   border-radius: 10px;
