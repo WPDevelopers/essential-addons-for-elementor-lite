@@ -1213,6 +1213,7 @@
 }
 .theme-buddyboss-theme #content .elementor-widget-container .eael-woo-product-carousel li.product .eael-product-carousel {
   margin: 0;
+  width: 100%;
 }
 .theme-buddyboss-theme #content .elementor-widget-container .eael-woo-product-carousel li.product .star-rating {
   min-width: 100px;
