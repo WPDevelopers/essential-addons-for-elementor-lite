@@ -1386,27 +1386,29 @@
                 }
             }
         }
-        .eael-product-gallery li.product{
-            .star-rating{
-                min-width: 110px;
+        .eael-product-gallery .woocommerce{
+            ul.products:not(.elementor-grid){
+                display: grid;
             }
-        }
-    }
-    .eael-product-gallery .woocommerce{
-        li.product{
-            max-width: 100%;
-            a.added_to_cart{
-                width: 42px;
-                line-height: 0;
-                font-size: 0;
-                margin-right: 3px;
-            }
-            a.button.add_to_cart_button{
-                margin-bottom: 0;
-            }
-            .eael-product-price{
-                ins{
-                    text-decoration: none;
+            li.product{
+                max-width: 100%;
+                display: block;
+                .star-rating{
+                    min-width: 110px;
+                }
+                a.added_to_cart{
+                    width: 42px;
+                    line-height: 0;
+                    font-size: 0;
+                    margin-right: 3px;
+                }
+                a.button.add_to_cart_button{
+                    margin-bottom: 0;
+                }
+                .eael-product-price{
+                    ins{
+                        text-decoration: none;
+                    }
                 }
             }
         }
