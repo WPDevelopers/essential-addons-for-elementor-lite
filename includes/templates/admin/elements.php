@@ -362,7 +362,14 @@ $elements = [
 				'demo_link' => 'https://essential-addons.com/elementor/interactive-circle/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/interactive-circle/',
 				'promotion' => 'new'
-			]
+			],
+            [
+                'key'       => 'svg-draw',
+                'title'     => __( 'SVG Draw', 'essential-addons-for-elementor-lite' ),
+                'demo_link' => 'https://essential-addons.com/elementor/svg-draw/',
+                'doc_link'  => 'https://essential-addons.com/elementor/docs/svg-draw/',
+                'promotion' => 'new'
+            ]
 		]
 	],
 	'marketing-elements'       => [
