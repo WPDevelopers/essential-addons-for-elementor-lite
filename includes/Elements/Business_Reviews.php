@@ -317,7 +317,6 @@ class Business_Reviews extends Widget_Base {
 				'size_units'  => '',
 				'condition' => [
 					'eael_business_reviews_items_layout' => 'slider',
-					'eael_business_reviews_autoplay' => 'yes',
 				],
 			]
 		);
@@ -1965,7 +1964,7 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['autoplay']       	= ! empty( $settings['eael_business_reviews_autoplay'] ) && 'yes' === $settings['eael_business_reviews_autoplay'] ? 1 : 0;
 		$business_reviews['pause_on_hover'] 	= ! empty( $settings['eael_business_reviews_pause_on_hover'] ) && 'yes' === $settings['eael_business_reviews_pause_on_hover'] ? 1 : 0;
 		$business_reviews['grab_cursor']    	= ! empty( $settings['eael_business_reviews_grab_cursor'] ) && 'yes' === $settings['eael_business_reviews_grab_cursor'] ? 1 : 0;
-		$business_reviews['speed']        		= $business_reviews['autoplay'] && ! empty( $settings['eael_business_reviews_slider_speed']['size'] ) ? $settings['eael_business_reviews_slider_speed']['size'] : 1000;
+		$business_reviews['speed']        		= ! empty( $settings['eael_business_reviews_slider_speed']['size'] ) ? $settings['eael_business_reviews_slider_speed']['size'] : 1000;
 		$business_reviews['business_name']  	= ! empty( $settings['eael_business_reviews_business_name'] ) && 'yes' === $settings['eael_business_reviews_business_name'] ? 1 : 0;
 		$business_reviews['business_rating']   	= ! empty( $settings['eael_business_reviews_business_rating'] ) && 'yes' === $settings['eael_business_reviews_business_rating'] ? 1 : 0;
 		$business_reviews['business_address']  	= ! empty( $settings['eael_business_reviews_business_address'] ) && 'yes' === $settings['eael_business_reviews_business_address'] ? 1 : 0;
@@ -2025,7 +2024,8 @@ class Business_Reviews extends Widget_Base {
 		
 		$url   	= "https://maps.googleapis.com/maps/api/place/details/json";
 		$param 	= array();
-
+		$error_message = '';
+		
 		$args 	= array(
 			'key' 	  => sanitize_text_field( $business_reviews['api_key'] ),
 			'placeid' => sanitize_text_field( 'ChIJ0cpDbNvBVTcRGX9JNhhpC8I' ),
