@@ -449,6 +449,7 @@ class Business_Reviews extends Widget_Base {
 			'type'        => Controls_Manager::TEXT,
 			'label_block' => false,
 			'default'     => esc_html__( 'Google Reviews', 'essential-addons-for-elementor-lite' ),
+			'placeholder'     => esc_html__( 'Google Reviews', 'essential-addons-for-elementor-lite' ),
 			'condition'   => [
 				'eael_business_reviews_sources' => 'google-reviews'
 			],
@@ -1227,10 +1228,35 @@ class Business_Reviews extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-photo' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .preset-2 .eael-google-review-reviewer-photo' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .preset-3 .eael-google-review-reviewer-photo' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition'  => [
 					'eael_business_reviews_reviewer_photo' => 'yes',
+					'eael_business_reviews_style_preset_slider!' => 'preset-1'
+				],
+			]
+		);
+		
+		$this->add_responsive_control(
+			'eael_business_reviews_reviewer_photo_margin_preset_1',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'allowed_dimensions'    => 'vertical',
+				'placeholder'           => [
+					'top'      => '',
+					'right'    => 'auto',
+					'bottom'   => '',
+					'left'     => 'auto',
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .preset-1 .eael-google-review-reviewer-photo img' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_business_reviews_reviewer_photo' => 'yes',
+					'eael_business_reviews_style_preset_slider' => 'preset-1'
 				],
 			]
 		);
@@ -2245,7 +2271,6 @@ class Business_Reviews extends Widget_Base {
 
 							<?php if( $business_reviews['business_rating'] ): ?>
 							<div class="eael-google-reviews-business-rating">
-								<?php $business_reviews['google_reviews_label'] = $business_reviews['google_reviews_label'] ? $business_reviews['google_reviews_label'] : 'Google Reviews'; ?>
 								<p><?php echo esc_html( $google_reviews_data['rating'] ); ?></p>
 								<p><?php $this->print_business_reviews_ratings( $google_reviews_data['rating'] ); ?></p>
 								<p><a href="<?php esc_url( $google_reviews_data['url'] ); ?>"><?php echo esc_html( $google_reviews_data['user_ratings_total'] . ' ' . $business_reviews['google_reviews_label'] ); ?></a></p>
