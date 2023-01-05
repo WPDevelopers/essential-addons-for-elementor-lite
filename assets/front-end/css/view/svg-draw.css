@@ -1,0 +1,9 @@
+.eael-svg-draw-container svg {
+  height: 200px;
+  width: 200px;
+}
+.eael-svg-draw-container svg path {
+  stroke: #c36;
+  stroke-width: 1px;
+  fill: transparent;
+}
