@@ -1228,35 +1228,10 @@ class Business_Reviews extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .eael-business-reviews-wrapper .preset-2 .eael-google-review-reviewer-photo' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .eael-business-reviews-wrapper .preset-3 .eael-google-review-reviewer-photo' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-photo' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition'  => [
 					'eael_business_reviews_reviewer_photo' => 'yes',
-					'eael_business_reviews_style_preset_slider!' => 'preset-1'
-				],
-			]
-		);
-		
-		$this->add_responsive_control(
-			'eael_business_reviews_reviewer_photo_margin_preset_1',
-			[
-				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em' ],
-				'allowed_dimensions'    => 'vertical',
-				'placeholder'           => [
-					'top'      => '',
-					'right'    => 'auto',
-					'bottom'   => '',
-					'left'     => 'auto',
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .eael-business-reviews-wrapper .preset-1 .eael-google-review-reviewer-photo img' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition'  => [
-					'eael_business_reviews_reviewer_photo' => 'yes',
-					'eael_business_reviews_style_preset_slider' => 'preset-1'
 				],
 			]
 		);
@@ -1288,6 +1263,7 @@ class Business_Reviews extends Widget_Base {
 						'step'  => 1,
 					],
 				],
+				'default'      	=> ['size' => '50'],
 				'size_units'	=> ['px'],
 				'selectors'  	=> [
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-photo img' => 'width: {{SIZE}}{{UNIT}};',
