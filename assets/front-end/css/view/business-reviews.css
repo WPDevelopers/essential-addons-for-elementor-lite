@@ -3,8 +3,8 @@
   border-radius: 10px;
   padding: 30px;
   margin: 5px;
-  -webkit-box-shadow: 0px 10px 25px rgba(19, 26, 64, 0.1);
-          box-shadow: 0px 10px 25px rgba(19, 26, 64, 0.1);
+  -webkit-box-shadow: 0px 0 5px rgba(19, 26, 64, 0.1);
+          box-shadow: 0px 0 5px rgba(19, 26, 64, 0.1);
 }
 .eael-business-reviews-wrapper .preset-2 .preset-content-footer {
   display: -webkit-box;
@@ -29,8 +29,9 @@
   border: 1px solid #f5f5f5;
   border-radius: 10px;
   padding: 10px;
-  -webkit-box-shadow: 0px 10px 25px rgba(19, 26, 64, 0.1);
-          box-shadow: 0px 10px 25px rgba(19, 26, 64, 0.1);
+  margin: 5px;
+  -webkit-box-shadow: 0px 0px 5px rgba(19, 26, 64, 0.1);
+          box-shadow: 0px 0px 5px rgba(19, 26, 64, 0.1);
   position: relative;
 }
 .eael-business-reviews-wrapper .preset-3 .preset-extra-shadow {
@@ -96,8 +97,6 @@
 }
 .eael-business-reviews-wrapper .eael-google-review-reviewer-photo {
   text-align: center;
-  width: 50px;
-  margin: auto;
 }
 .eael-business-reviews-wrapper .eael-google-review-reviewer-name,
 .eael-business-reviews-wrapper .eael-google-review-reviewer-name a {
