@@ -50,8 +50,8 @@ var BusinessReviewsHandler = function ($scope, $) {
 				if (autoplay === 0) {
 					businessReviewsSliderObj.autoplay.stop()
 				}
-		
-				if (pauseOnHover && autoplay !== 0) {
+
+				if ( parseInt( pauseOnHover ) && autoplay !== 0 ) {
 					businessReviewsSlider.on('mouseenter', function () {
 						businessReviewsSliderObj.autoplay.stop()
 					})
