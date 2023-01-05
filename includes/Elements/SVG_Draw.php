@@ -63,11 +63,32 @@ class SVG_Draw Extends Widget_Base
 
     protected function register_controls()
     {
+        $this->start_controls_section(
+            'eael_section_svg_content_settings',
+            [
+                'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_CONTENT,
+            ]
+        );
 
+        $this->add_control(
+            'svg_html',
+            [
+                'label' => esc_html__( 'SVG html', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::TEXTAREA,
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
     protected function render()
     {
-        echo "Hello SVG";
+        $settings = $this->get_settings_for_display();
+        $svg_html = isset( $settings['svg_html'] ) ? $settings['svg_html'] : '';
+        $this->add_render_attribute('eael-svg-drow-wrapper', [
+            'class'           => 'eael-svg-draw-container',
+        ]);
+        echo '<div '. $this->get_render_attribute_string('eael-svg-drow-wrapper') .'>'. $svg_html . ' </div>';
     }
 }
