@@ -24,7 +24,7 @@ var BusinessReviewsHandler = function ($scope, $) {
 				slidesPerView: items,
 				loop: parseInt(loop),
 				speed: parseInt(speed),
-				grabCursor: grabCursor,
+				grabCursor: parseInt(grabCursor),
 				pagination: {
 					el: pagination,
 					clickable: true,
