@@ -470,6 +470,7 @@ class Post_Grid extends Widget_Base
                 'default' => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-entry-meta .eael-posted-on' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-post-grid-style-two .eael-entry-meta .eael-meta-posted-on' => 'color: {{VALUE}};',
                 ],
                 'condition' => [
 	                'eael_show_date' => 'yes',
