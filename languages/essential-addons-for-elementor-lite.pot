@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-12-06 07:46+0000\n"
+"POT-Creation-Date: 2022-12-06 09:53+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -7550,7 +7550,7 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
-#: ../includes/Elements/Woo_Cart.php:404, ../includes/Elements/Woo_Cart.php:1096, ../includes/Elements/Woo_Checkout.php:280, ../includes/Elements/Woo_Checkout.php:1170, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:320, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:532
+#: ../includes/Elements/Woo_Cart.php:404, ../includes/Elements/Woo_Cart.php:1096, ../includes/Elements/Woo_Checkout.php:280, ../includes/Elements/Woo_Checkout.php:1170, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:320, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:535
 msgid "Total"
 msgstr ""
 
@@ -9921,14 +9921,14 @@ msgstr ""
 msgid "Lost your password?"
 msgstr ""
 
-#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:561
+#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:564
 msgid "You must be logged in to checkout."
 msgstr ""
 
-#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:607
+#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:610
 msgid "Billing &amp; Shipping"
 msgstr ""
 
-#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:636
+#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:639
 msgid "Create an account?"
 msgstr ""
