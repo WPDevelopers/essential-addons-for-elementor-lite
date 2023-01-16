@@ -357,8 +357,6 @@
   text-transform: capitalize;
   border: none;
   letter-spacing: normal;
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 .eael-product-gallery .woocommerce ul.products li.product .button:hover, .eael-product-gallery .woocommerce ul.products li.product .button:visited {
   text-decoration: none;
@@ -1119,4 +1117,42 @@
   letter-spacing: 2px;
   left: 9px;
   line-height: 18px;
+}
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-1.eael-product-gallery li.product .button,
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-2.eael-product-gallery li.product .button,
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-3.eael-product-gallery li.product .button {
+  width: 42px;
+  border-radius: 4px;
+}
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-2.eael-product-gallery li.product .button {
+  margin-top: 10px;
+}
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-4.eael-product-gallery li.product .button {
+  width: 92%;
+  border-radius: 4px;
+}
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-4.eael-product-gallery li.product .star-rating {
+  display: inline-block;
+}
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-gallery .woocommerce ul.products:not(.elementor-grid) {
+  display: grid;
+}
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-gallery .woocommerce li.product {
+  max-width: 100%;
+  display: block;
+}
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-gallery .woocommerce li.product .star-rating {
+  min-width: 110px;
+}
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-gallery .woocommerce li.product a.added_to_cart {
+  width: 42px;
+  line-height: 0;
+  font-size: 0;
+  margin-right: 3px;
+}
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-gallery .woocommerce li.product a.button.add_to_cart_button {
+  margin-bottom: 0;
+}
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-gallery .woocommerce li.product .eael-product-price ins {
+  text-decoration: none;
 }
