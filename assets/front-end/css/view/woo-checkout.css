@@ -451,6 +451,9 @@
 .eael-woo-checkout .woocommerce form.checkout_coupon {
   border: 1px solid #404040;
 }
+.eael-woo-checkout .woocommerce .eael-reordering {
+  opacity: 0.1;
+}
 .eael-woo-checkout .woocommerce .woo-checkout-login.woo-checkout-login-editor {
   display: none;
 }
