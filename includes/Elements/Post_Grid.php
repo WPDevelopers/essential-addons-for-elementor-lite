@@ -1088,6 +1088,8 @@ class Post_Grid extends Widget_Base
 	    $dir_name = $this->get_temp_dir_name($settings['loadable_file_name']);
 	    $found_posts = 0;
         $posts_per_page = isset($args['posts_per_page']) && $args['posts_per_page'] > 0 ? $args['posts_per_page'] : -1 ;
+        $settings['read_more_button_text'] = $this->get_settings_for_display('read_more_button_text');
+        $settings['excerpt_expanison_indicator'] = $this->get_settings_for_display('excerpt_expanison_indicator');
 
         if(file_exists($template)){
             $query = new \WP_Query( $args );
