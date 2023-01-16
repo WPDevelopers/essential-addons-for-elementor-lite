@@ -372,6 +372,12 @@ class Asset_Builder {
 				'compare' => __( 'Compare', 'essential-addons-for-elementor-lite' ),
 				'loading' => esc_html__( 'Loading...', 'essential-addons-for-elementor-lite' )
 			],
+			'eael_translate_text' => [
+				'required_text' => esc_html__( 'is a required field', 'essential-addons-for-elementor-lite' ),
+				'invalid_text'  => esc_html__( 'Invalid', 'essential-addons-for-elementor-lite' ),
+				'billing_text'  => esc_html__( 'Billing', 'essential-addons-for-elementor-lite' ),
+				'shipping_text' => esc_html__( 'Shipping', 'essential-addons-for-elementor-lite' ),
+			],
 			'page_permalink'     => get_the_permalink(),
 			'cart_redirectition' => get_option( 'woocommerce_cart_redirect_after_add' ),
 			'cart_page_url'      => function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '',
