@@ -1152,6 +1152,8 @@ class Business_Reviews extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item .preset-content-body svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item .preset-content-body svg path' => 'fill: {{VALUE}}; display:none',
 				],
 			]
 		);
