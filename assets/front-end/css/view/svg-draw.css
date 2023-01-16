@@ -4,6 +4,8 @@
 }
 .eael-svg-draw-container svg path {
   stroke: #c36;
-  stroke-width: 1px;
+  stroke-width: 3;
   fill: transparent;
+  stroke-dashoffset: 0;
+  stroke-dasharray: 0, 9999px;
 }
