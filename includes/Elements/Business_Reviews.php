@@ -169,8 +169,9 @@ class Business_Reviews extends Widget_Base {
 					'4' => esc_html__( '4', 'essential-addons-for-elementor-lite' ),
 				],
 				'condition' => [
-					'eael_business_reviews_items_layout' => 'slider',
-					'eael_business_reviews_style_preset_slider!' => 'preset-2'
+					'eael_business_reviews_items_layout' 			=> 'slider',
+					'eael_business_reviews_style_preset_slider!'	=> 'preset-2',
+					'eael_business_reviews_transition_effect!' 		=> 'coverflow'
 				],
 			]
 		);
@@ -188,8 +189,9 @@ class Business_Reviews extends Widget_Base {
 					'4' => esc_html__( '4', 'essential-addons-for-elementor-lite' ),
 				],
 				'condition' => [
-					'eael_business_reviews_items_layout' => 'slider',
-					'eael_business_reviews_style_preset_slider' => 'preset-2'
+					'eael_business_reviews_items_layout' 		=> 'slider',
+					'eael_business_reviews_style_preset_slider' => 'preset-2',
+					'eael_business_reviews_transition_effect!' 	=> 'coverflow'
 				],
 			]
 		);
@@ -2040,8 +2042,12 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['google_reviews_label']	= ! empty( $settings['eael_business_reviews_google_reviews_label'] ) ? $settings['eael_business_reviews_google_reviews_label'] : '';
 		$business_reviews['arrows_type']			= ! empty( $settings['eael_business_reviews_arrows_type'] ) ? $settings['eael_business_reviews_arrows_type'] : 'fa fa-angle-right';
 
-		if('slider' === $business_reviews['layout'] && 'preset-2' === $business_reviews['preset'] ){
+		if( 'slider' === $business_reviews['layout'] && 'preset-2' === $business_reviews['preset'] ){
 			$business_reviews['columns']        	= ! empty( $settings['eael_business_reviews_column_preset_2'] ) ? $settings['eael_business_reviews_column_preset_2'] : $business_reviews['columns'];
+		}
+		
+		if( 'coverflow' === $business_reviews['effect'] ){
+			$business_reviews['columns']        	= 3;
 		}
 		return $business_reviews;
 	}
