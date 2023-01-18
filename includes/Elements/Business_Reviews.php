@@ -336,9 +336,17 @@ class Business_Reviews extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_business_reviews_business_content',
+			[
+				'label' => esc_html__( 'Business', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::HEADING,
+			]
+		);
+
+		$this->add_control(
 			'eael_business_reviews_business_name',
 			[
-				'label'        => __( 'Business Name', 'essential-addons-for-elementor-lite' ),
+				'label'        => __( 'Name', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -346,11 +354,22 @@ class Business_Reviews extends Widget_Base {
 				'default'      => 'yes',
 			]
 		);
+
+		$this->add_control( 'eael_business_reviews_business_name_label', [
+			'label'       => esc_html__( 'Custom Text', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'placeholder' => esc_html__( 'Business Name', 'essential-addons-for-elementor-lite' ),
+			'label_block' => false,
+			'default'     => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+			'condition' => [
+				'eael_business_reviews_business_name' => 'yes'
+			]
+		] );
 
 		$this->add_control(
 			'eael_business_reviews_business_rating',
 			[
-				'label'        => __( 'Business Rating', 'essential-addons-for-elementor-lite' ),
+				'label'        => __( 'Rating', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -359,10 +378,22 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
+		$this->add_control( 'eael_business_reviews_google_reviews_label', [
+			'label'       => esc_html__( 'Custom Text', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => false,
+			'default'     => esc_html__( 'Google Reviews', 'essential-addons-for-elementor-lite' ),
+			'placeholder'     => esc_html__( 'Google Reviews', 'essential-addons-for-elementor-lite' ),
+			'condition'   => [
+				'eael_business_reviews_sources' => 'google-reviews',
+				'eael_business_reviews_business_rating' => 'yes'
+			],
+		] );
+
 		$this->add_control(
 			'eael_business_reviews_business_address',
 			[
-				'label'        => __( 'Business Address', 'essential-addons-for-elementor-lite' ),
+				'label'        => __( 'Address', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -372,33 +403,18 @@ class Business_Reviews extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_business_reviews_reviewer_photo',
+			'eael_business_reviews_review_content',
 			[
-				'label'        => __( 'Reviewer Photo', 'essential-addons-for-elementor-lite' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
-			]
-		);
-
-		$this->add_control(
-			'eael_business_reviews_reviewer_name',
-			[
-				'label'        => __( 'Reviewer Name', 'essential-addons-for-elementor-lite' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
+				'label' => esc_html__( 'Review', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::HEADING,
+				'separator'	=> 'before',
 			]
 		);
 
 		$this->add_control(
 			'eael_business_reviews_review_time',
 			[
-				'label'        => __( 'Review Time', 'essential-addons-for-elementor-lite' ),
+				'label'        => __( 'Time', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -410,7 +426,7 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_review_text',
 			[
-				'label'        => __( 'Review Text', 'essential-addons-for-elementor-lite' ),
+				'label'        => __( 'Text', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -422,7 +438,7 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_review_rating',
 			[
-				'label'        => __( 'Review Rating', 'essential-addons-for-elementor-lite' ),
+				'label'        => __( 'Rating', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -432,30 +448,37 @@ class Business_Reviews extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_business_reviews_content_label',
+			'eael_business_reviews_reviewer_content',
 			[
-				'label' => esc_html__( 'Label', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Reviewer', 'essential-addons-for-elementor-lite' ),
 				'type'  => Controls_Manager::HEADING,
+				'separator'	=> 'before',
 			]
 		);
 
-		$this->add_control( 'eael_business_reviews_business_name_label', [
-			'label'       => esc_html__( 'Business Name', 'essential-addons-for-elementor-lite' ),
-			'type'        => Controls_Manager::TEXT,
-			'label_block' => false,
-			'default'     => esc_html__( '', 'essential-addons-for-elementor-lite' ),
-		] );
+		$this->add_control(
+			'eael_business_reviews_reviewer_photo',
+			[
+				'label'        => __( 'Avatar', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
 
-		$this->add_control( 'eael_business_reviews_google_reviews_label', [
-			'label'       => esc_html__( 'Google Reviews', 'essential-addons-for-elementor-lite' ),
-			'type'        => Controls_Manager::TEXT,
-			'label_block' => false,
-			'default'     => esc_html__( 'Google Reviews', 'essential-addons-for-elementor-lite' ),
-			'placeholder'     => esc_html__( 'Google Reviews', 'essential-addons-for-elementor-lite' ),
-			'condition'   => [
-				'eael_business_reviews_sources' => 'google-reviews'
-			],
-		] );
+		$this->add_control(
+			'eael_business_reviews_reviewer_name',
+			[
+				'label'        => __( 'Name', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
 
 		$this->end_controls_section();
 
@@ -1216,7 +1239,7 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_reviewer_photo_label',
 			[
-				'label' => esc_html__( 'Reviewer Photo', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Reviewer Avatar', 'essential-addons-for-elementor-lite' ),
 				'type'  => Controls_Manager::HEADING,
 				'separator'	=> 'before',
 				'condition' => [
