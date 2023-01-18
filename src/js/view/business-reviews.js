@@ -12,9 +12,11 @@ var BusinessReviewsHandler = function ($scope, $) {
 				arrowPrev		= businessReviewsSlider.attr('data-arrow-prev'),
 				effect 			= businessReviewsSlider.attr('data-effect'),
 				items 			= businessReviewsSlider.attr('data-items'),
+				itemGap 		= businessReviewsSlider.attr('data-item_gap'),
 				loop 			= businessReviewsSlider.attr('data-loop'),
 				speed 			= businessReviewsSlider.attr('data-speed'),
 				autoplay 		= businessReviewsSlider.attr('data-autoplay'),
+				autoplayDelay 	= businessReviewsSlider.attr('data-autoplay_delay'),
 				pauseOnHover	= businessReviewsSlider.attr('data-pause_on_hover'),
 				grabCursor 		= businessReviewsSlider.attr('data-grab_cursor');
 
@@ -34,11 +36,11 @@ var BusinessReviewsHandler = function ($scope, $) {
 					prevEl: arrowPrev,
 				},
 				autoplay: {
-					delay: parseInt(autoplay) ? 3000 : 999999,
+					delay: parseInt(autoplay) ? parseInt(autoplayDelay) : 999999,
 					disableOnInteraction: false
 				},
 				autoHeight: true,
-				spaceBetween: 30,
+				spaceBetween: itemGap,
 			}
 
 			let businessReviewsSliderObj = swiperLoader(
