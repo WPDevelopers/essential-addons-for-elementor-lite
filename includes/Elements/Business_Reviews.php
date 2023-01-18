@@ -98,6 +98,19 @@ class Business_Reviews extends Widget_Base {
             ]);
         }
 
+		$this->add_control(
+			'eael_business_reviews_sort_by',
+			[
+				'label'   => __( 'Sort By', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'most_relevant',
+				'options' => [
+					'most_relevant' => __( 'Most Relevant', 'essential-addons-for-elementor-lite' ),
+					'newest' => __( 'Newest', 'essential-addons-for-elementor-lite' ),
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**
@@ -213,6 +226,44 @@ class Business_Reviews extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_business_reviews_item_gap',
+			[
+				'label'       => __( 'Item Gap', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::SLIDER,
+				'default'     => [ 'size' => 30 ],
+				'range'       => [
+					'px' => [
+						'min'  => 10,
+						'max'  => 300,
+						'step' => 5,
+					],
+				],
+				'size_units'  => '',
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_slider_speed',
+			[
+				'label'       => __( 'Sliding Speed', 'essential-addons-for-elementor-lite' ),
+				'description' => __( 'Duration of transition between slides (in ms)', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::SLIDER,
+				'default'     => [ 'size' => 1000 ],
+				'range'       => [
+					'px' => [
+						'min'  => 100,
+						'max'  => 3000,
+						'step' => 1,
+					],
+				],
+				'size_units'  => '',
+				'condition' => [
+					'eael_business_reviews_items_layout' => 'slider',
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_business_reviews_autoplay',
 			[
 				'label'        => __( 'Autoplay', 'essential-addons-for-elementor-lite' ),
@@ -223,6 +274,27 @@ class Business_Reviews extends Widget_Base {
 				'default'      => 'yes',
 				'condition' => [
 					'eael_business_reviews_items_layout' => 'slider'
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_autoplay_delay',
+			[
+				'label'       => __( 'Autoplay Delay', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::SLIDER,
+				'default'     => [ 'size' => 3000 ],
+				'range'       => [
+					'px' => [
+						'min'  => 1000,
+						'max'  => 10000,
+						'step' => 100,
+					],
+				],
+				'size_units'  => '',
+				'condition' => [
+					'eael_business_reviews_items_layout' 	=> 'slider',
+					'eael_business_reviews_autoplay'		=> 'yes'
 				],
 			]
 		);
@@ -266,9 +338,19 @@ class Business_Reviews extends Widget_Base {
 				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
+				'description'  => __( 'Shows grab cursor when you hover over the slider', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
 					'eael_business_reviews_items_layout' => 'slider'
 				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_navigation',
+			[
+				'label' 	=> esc_html__( 'Navigation', 'essential-addons-for-elementor-lite' ),
+				'type'  	=> Controls_Manager::HEADING,
+				'separator' => 'before',
 			]
 		);
 
@@ -298,27 +380,6 @@ class Business_Reviews extends Widget_Base {
 				'default'      => 'yes',
 				'condition' => [
 					'eael_business_reviews_items_layout' => 'slider'
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_business_reviews_slider_speed',
-			[
-				'label'       => __( 'Slider Speed', 'essential-addons-for-elementor-lite' ),
-				'description' => __( 'Duration of transition between slides (in ms)', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::SLIDER,
-				'default'     => [ 'size' => 1000 ],
-				'range'       => [
-					'px' => [
-						'min'  => 100,
-						'max'  => 3000,
-						'step' => 1,
-					],
-				],
-				'size_units'  => '',
-				'condition' => [
-					'eael_business_reviews_items_layout' => 'slider',
 				],
 			]
 		);
@@ -2059,8 +2120,9 @@ class Business_Reviews extends Widget_Base {
 		$settings['eael_business_reviews_source_key'] = get_option( 'eael_br_google_place_api_key' );
 
 		$business_reviews                  		= [];
-		$business_reviews['source']         	= ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'google-reviews';
-		$business_reviews['api_key']        	= ! empty( $settings['eael_business_reviews_source_key'] ) ? esc_html( $settings['eael_business_reviews_source_key'] ) : '';
+		$business_reviews['source']         	= ! empty( $settings['eael_business_reviews_sources'] ) 	? esc_html( $settings['eael_business_reviews_sources'] ) 	: 'google-reviews';
+		$business_reviews['api_key']        	= ! empty( $settings['eael_business_reviews_source_key'] ) 	? esc_html( $settings['eael_business_reviews_source_key'] ) : '';
+		$business_reviews['reviews_sort']		= ! empty( $settings['eael_business_reviews_sort_by'] ) 	? esc_html( $settings['eael_business_reviews_sort_by'] ) 	: 'most_relevant';
 
 		$business_reviews['expiration'] 		= DAY_IN_SECONDS;
 		$business_reviews['md5']        		= md5( $business_reviews['api_key'] . $this->get_id() );
@@ -2074,7 +2136,9 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['arrows']        		= ! empty( $settings['eael_business_reviews_arrows'] ) && 'yes' === $settings['eael_business_reviews_arrows'] ? 1 : 0;
 		$business_reviews['dots']        		= ! empty( $settings['eael_business_reviews_dots'] ) && 'yes' === $settings['eael_business_reviews_dots'] ? 1 : 0;
 		$business_reviews['effect']        		= ! empty( $settings['eael_business_reviews_transition_effect'] ) ? $settings['eael_business_reviews_transition_effect'] : 'slide';
+		$business_reviews['item_gap']        	= ! empty( $settings['eael_business_reviews_item_gap']['size'] ) ? $settings['eael_business_reviews_item_gap']['size'] : 30;
 		$business_reviews['autoplay']       	= ! empty( $settings['eael_business_reviews_autoplay'] ) && 'yes' === $settings['eael_business_reviews_autoplay'] ? 1 : 0;
+		$business_reviews['autoplay_delay']     = ! empty( $settings['eael_business_reviews_autoplay_delay']['size'] ) ? $settings['eael_business_reviews_autoplay_delay']['size'] : 3000;
 		$business_reviews['pause_on_hover'] 	= ! empty( $settings['eael_business_reviews_pause_on_hover'] ) && 'yes' === $settings['eael_business_reviews_pause_on_hover'] ? 1 : 0;
 		$business_reviews['grab_cursor']    	= ! empty( $settings['eael_business_reviews_grab_cursor'] ) && 'yes' === $settings['eael_business_reviews_grab_cursor'] ? 1 : 0;
 		$business_reviews['speed']        		= ! empty( $settings['eael_business_reviews_slider_speed']['size'] ) ? $settings['eael_business_reviews_slider_speed']['size'] : 1000;
@@ -2137,7 +2201,6 @@ class Business_Reviews extends Widget_Base {
 
 	public function fetch_google_reviews_from_api( $business_reviews_settings ) {
 		$business_reviews 					= $business_reviews_settings;
-		$business_reviews['reviews_sort']	= sanitize_text_field( 'most_relevant' );
 		
 		$url   	= "https://maps.googleapis.com/maps/api/place/details/json";
 		$param 	= array();
@@ -2326,8 +2389,10 @@ class Business_Reviews extends Widget_Base {
 			'data-arrow-prev'    	=> '.swiper-button-prev-' . esc_attr($this->get_id()),
 			'data-effect'    		=> esc_attr( $business_reviews['effect'] ),
 			'data-items'    		=> esc_attr( $business_reviews['columns'] ),
+			'data-item_gap'    		=> esc_attr( $business_reviews['item_gap'] ),
 			'data-loop'    			=> esc_attr( $business_reviews['loop'] ),
 			'data-autoplay'    		=> esc_attr( $business_reviews['autoplay'] ),
+			'data-autoplay_delay'   => esc_attr( $business_reviews['autoplay_delay'] ),
 			'data-pause_on_hover'   => esc_attr( $business_reviews['pause_on_hover'] ),
 			'data-grab_cursor'    	=> esc_attr( $business_reviews['grab_cursor'] ),
 			'data-speed'    		=> esc_attr( $business_reviews['speed'] ),
