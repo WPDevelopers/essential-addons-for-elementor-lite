@@ -1376,13 +1376,33 @@
             }
         }
         .eael-product-preset-4{
-            &.eael-product-gallery li.product{
+            &.eael-product-gallery .woocommerce li.product{
                 .button{
                     width: 92%;
                     border-radius: 4px;
                 }
                 .star-rating{
                     display: inline-block;
+                }
+                a.added_to_cart{
+                    height: 55px;
+                    width: 92%;
+                    margin: auto;
+                    float: initial;
+                    border-radius: 4px;
+                    line-height: 50px;
+                }
+            }
+        }
+        .eael-product-gallery {
+            .eael-product-preset-1,
+            .eael-product-preset-2,
+            .eael-product-preset-3{
+                li.product a.added_to_cart{
+                    width: 42px;
+                    line-height: 0;
+                    font-size: 0;
+                    margin-right: 3px;
                 }
             }
         }
@@ -1395,12 +1415,6 @@
                 display: block;
                 .star-rating{
                     min-width: 110px;
-                }
-                a.added_to_cart{
-                    width: 42px;
-                    line-height: 0;
-                    font-size: 0;
-                    margin-right: 3px;
                 }
                 a.button.add_to_cart_button{
                     margin-bottom: 0;
