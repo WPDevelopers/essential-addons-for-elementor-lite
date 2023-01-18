@@ -102,9 +102,9 @@ var EventCalendar = function ($scope, $) {
 							.removeClass("eael-ec-modal-removing");
 
 						if (
-							event.allDay === "yes" &&
+							event.allDay &&
 							moment(startDate).format("MM-DD-YYYY") ===
-							moment(endDate).format("MM-DD-YYYY")
+							moment(endDate.setMinutes(endDate.getMinutes() - 1)).format("MM-DD-YYYY")
 						) {
 							startView = moment(startDate).format("MMM Do");
 							if (moment(startDate).isSame(Date.now(), "day") === true) {
