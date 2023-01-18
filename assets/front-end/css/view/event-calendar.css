@@ -26,6 +26,9 @@
   border-top: 1px solid #ddd !important;
   border-bottom: none !important;
 }
+.eael-event-calendar-wrapper .fc-daygrid-event-dot {
+  display: none !important;
+}
 .eael-event-calendar-wrapper .fc-day-grid-event {
   margin-top: 2px;
   padding: 8px;
@@ -500,7 +503,7 @@ span.fc-day-number {
     font-size: 14px;
   }
   .fc-basic-view .fc-day-number,
-.fc-basic-view .fc-week-number {
+  .fc-basic-view .fc-week-number {
     padding: 0;
     margin: 0;
     font-size: 10px;

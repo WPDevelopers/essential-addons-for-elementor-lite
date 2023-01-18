@@ -30,7 +30,9 @@
 		border-top: 1px solid #ddd !important;
 		border-bottom: none !important;
 	}
-
+	.fc-daygrid-event-dot{
+		display: none !important;
+	}
 	.fc-day-grid-event {
 		margin-top: 2px;
 		padding: 8px;
