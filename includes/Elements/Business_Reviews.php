@@ -1590,6 +1590,32 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+            'eael_business_reviews_review_rating_star_alignment',
+            [
+                'label' => esc_html__('Alignment', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-text-align-right',
+                    ],
+                ],
+                'default' => 'center',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-rating' => 'text-align: {{VALUE}};',
+                ],
+            ]
+        );
+
 		$this->end_controls_section();
 
 		/**
@@ -1635,7 +1661,7 @@ class Business_Reviews extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_business_reviews_arrows_width',
 			[
-				'label'                 => __('Arrows Width', 'essential-addons-for-elementor-lite'),
+				'label'                 => __('Width', 'essential-addons-for-elementor-lite'),
 				'type'                  => Controls_Manager::SLIDER,
 				'default'               => ['size' => '27'],
 				'range'                 => [
@@ -1654,7 +1680,7 @@ class Business_Reviews extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_business_reviews_arrows_height',
 			[
-				'label'                 => __('Arrows Height', 'essential-addons-for-elementor-lite'),
+				'label'                 => __('Height', 'essential-addons-for-elementor-lite'),
 				'type'                  => Controls_Manager::SLIDER,
 				'default'               => ['size' => '44'],
 				'range'                 => [
@@ -1674,7 +1700,7 @@ class Business_Reviews extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_business_reviews_arrows_size',
 			[
-				'label'                 => __('Arrows Font Size', 'essential-addons-for-elementor-lite'),
+				'label'                 => __('Font Size', 'essential-addons-for-elementor-lite'),
 				'type'                  => Controls_Manager::SLIDER,
 				'default'               => ['size' => '22'],
 				'range'                 => [
