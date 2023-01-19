@@ -12,6 +12,8 @@ var BusinessReviewsHandler = function ($scope, $) {
 				arrowPrev		= businessReviewsSlider.attr('data-arrow-prev'),
 				effect 			= businessReviewsSlider.attr('data-effect'),
 				items 			= businessReviewsSlider.attr('data-items'),
+				itemsTablet 			= businessReviewsSlider.attr('data-items_tablet'),
+				itemsMobile 			= businessReviewsSlider.attr('data-items_mobile'),
 				itemGap 		= businessReviewsSlider.attr('data-item_gap'),
 				loop 			= businessReviewsSlider.attr('data-loop'),
 				speed 			= businessReviewsSlider.attr('data-speed'),
@@ -40,7 +42,26 @@ var BusinessReviewsHandler = function ($scope, $) {
 					disableOnInteraction: false
 				},
 				autoHeight: true,
-				spaceBetween: itemGap,
+				spaceBetween: parseInt(itemGap),
+			}
+
+			if ( effect === 'slide' || effect === 'coverflow' ) {
+				businessReviewsSliderOptions.breakpoints = {
+					1024: {
+						slidesPerView: items,
+						spaceBetween: parseInt(itemGap),
+					},
+					768: {
+						slidesPerView: itemsTablet,
+						spaceBetween: parseInt(itemGap),
+					},
+					320: {
+						slidesPerView: itemsMobile,
+						spaceBetween: parseInt(itemGap),
+					},
+				}
+			} else {
+				businessReviewsSliderOptions.items = 1
 			}
 
 			let businessReviewsSliderObj = swiperLoader(

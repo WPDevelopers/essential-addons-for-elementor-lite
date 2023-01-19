@@ -183,15 +183,18 @@ class Business_Reviews extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_business_reviews_column',
 			[
-				'label'     => esc_html__( 'Columns', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => '3',
+				'label'     		=> esc_html__( 'Columns', 'essential-addons-for-elementor-lite' ),
+				'type'      		=> Controls_Manager::SELECT,
+				'default'   		=> '3',
+				'tablet_default'   	=> '3',
+				'mobile_default'   	=> '3',
 				'options'   => [
 					'1' => esc_html__( '1', 'essential-addons-for-elementor-lite' ),
 					'2' => esc_html__( '2', 'essential-addons-for-elementor-lite' ),
 					'3' => esc_html__( '3', 'essential-addons-for-elementor-lite' ),
 					'4' => esc_html__( '4', 'essential-addons-for-elementor-lite' ),
 				],
+				'frontend_available' => true,
 				'condition' => [
 					'eael_business_reviews_items_layout' 			=> 'slider',
 					'eael_business_reviews_style_preset_slider!'	=> 'preset-2',
@@ -206,12 +209,15 @@ class Business_Reviews extends Widget_Base {
 				'label'     => esc_html__( 'Columns', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => '1',
+				'tablet_default'   	=> '1',
+				'mobile_default'   	=> '1',
 				'options'   => [
 					'1' => esc_html__( '1', 'essential-addons-for-elementor-lite' ),
 					'2' => esc_html__( '2', 'essential-addons-for-elementor-lite' ),
 					'3' => esc_html__( '3', 'essential-addons-for-elementor-lite' ),
 					'4' => esc_html__( '4', 'essential-addons-for-elementor-lite' ),
 				],
+				'frontend_available' => true,
 				'condition' => [
 					'eael_business_reviews_items_layout' 		=> 'slider',
 					'eael_business_reviews_style_preset_slider' => 'preset-2',
@@ -2261,6 +2267,8 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['preset']        		= ! empty( $settings['eael_business_reviews_style_preset_slider'] ) && 'slider' === $business_reviews['layout'] ? $settings['eael_business_reviews_style_preset_slider'] : 'preset-1';
 		$business_reviews['preset']        		= ! empty( $settings['eael_business_reviews_style_preset_grid'] ) && 'grid' === $business_reviews['layout'] ? $settings['eael_business_reviews_style_preset_grid'] : $business_reviews['preset'];
 		$business_reviews['columns']        	= ! empty( $settings['eael_business_reviews_column'] ) ? $settings['eael_business_reviews_column'] : 3;
+		$business_reviews['columns_tablet']     = ! empty( $settings['eael_business_reviews_column_tablet'] ) ? $settings['eael_business_reviews_column_tablet'] : 3;
+		$business_reviews['columns_mobile']     = ! empty( $settings['eael_business_reviews_column_mobile'] ) ? $settings['eael_business_reviews_column_mobile'] : 3;
 		$business_reviews['loop']        		= ! empty( $settings['eael_business_reviews_loop'] ) && 'yes' === $settings['eael_business_reviews_loop'] ? 1 : 0;
 		$business_reviews['arrows']        		= ! empty( $settings['eael_business_reviews_arrows'] ) && 'yes' === $settings['eael_business_reviews_arrows'] ? 1 : 0;
 		$business_reviews['dots']        		= ! empty( $settings['eael_business_reviews_dots'] ) && 'yes' === $settings['eael_business_reviews_dots'] ? 1 : 0;
@@ -2291,10 +2299,12 @@ class Business_Reviews extends Widget_Base {
 
 		if( 'slider' === $business_reviews['layout'] && 'preset-2' === $business_reviews['preset'] ){
 			$business_reviews['columns']        	= ! empty( $settings['eael_business_reviews_column_preset_2'] ) ? $settings['eael_business_reviews_column_preset_2'] : $business_reviews['columns'];
+			$business_reviews['columns_tablet']     = ! empty( $settings['eael_business_reviews_column_preset_2_tablet'] ) ? $settings['eael_business_reviews_column_preset_2_tablet'] : $business_reviews['columns'];
+			$business_reviews['columns_mobile']     = ! empty( $settings['eael_business_reviews_column_preset_2_mobile'] ) ? $settings['eael_business_reviews_column_preset_2_mobile'] : $business_reviews['columns'];
 		}
 		
 		if( 'coverflow' === $business_reviews['effect'] ){
-			$business_reviews['columns']        	= 3;
+			$business_reviews['columns']        		= 3;
 		}
 		return $business_reviews;
 	}
@@ -2523,6 +2533,8 @@ class Business_Reviews extends Widget_Base {
 			'data-arrow-prev'    	=> '.swiper-button-prev-' . esc_attr($this->get_id()),
 			'data-effect'    		=> esc_attr( $business_reviews['effect'] ),
 			'data-items'    		=> esc_attr( $business_reviews['columns'] ),
+			'data-items_tablet'    		=> esc_attr( $business_reviews['columns_tablet'] ),
+			'data-items_mobile'    		=> esc_attr( $business_reviews['columns_mobile'] ),
 			'data-item_gap'    		=> esc_attr( $business_reviews['item_gap'] ),
 			'data-loop'    			=> esc_attr( $business_reviews['loop'] ),
 			'data-autoplay'    		=> esc_attr( $business_reviews['autoplay'] ),
