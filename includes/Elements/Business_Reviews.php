@@ -798,6 +798,33 @@ class Business_Reviews extends Widget_Base {
 		$this->end_controls_tabs();
 
 		$this->add_control(
+            'eael_business_reviews_header_alignment',
+            [
+                'label' => esc_html__('Alignment', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-text-align-right',
+                    ],
+                ],
+                'default' => 'center',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating' => 'justify-content: {{VALUE}};',
+                ],
+            ]
+        );
+
+		$this->add_control(
 			'eael_business_reviews_header_business_name_label',
 			[
 				'label' => esc_html__( 'Business Name', 'essential-addons-for-elementor-lite' ),
