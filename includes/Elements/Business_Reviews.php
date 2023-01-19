@@ -111,6 +111,17 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_business_reviews_data_cache_time',
+			[
+				'label'       => __( 'Data Cache Time', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::NUMBER,
+				'min'         => 0,
+				'default'     => 0,
+				'description' => __( 'Cache expiration time (in Minutes), 0 or empty sets 1 day.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**
@@ -2242,8 +2253,8 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['api_key']        	= ! empty( $settings['eael_business_reviews_source_key'] ) 	? esc_html( $settings['eael_business_reviews_source_key'] ) : '';
 		$business_reviews['reviews_sort']		= ! empty( $settings['eael_business_reviews_sort_by'] ) 	? esc_html( $settings['eael_business_reviews_sort_by'] ) 	: 'most_relevant';
 
-		$business_reviews['expiration'] 		= DAY_IN_SECONDS;
-		$business_reviews['md5']        		= md5( $business_reviews['api_key'] . $this->get_id() );
+		$business_reviews['expiration'] 		= ! empty( $settings['eael_business_reviews_data_cache_time'] ) ? absint( $settings['eael_business_reviews_data_cache_time'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
+		$business_reviews['md5']        		= md5( $business_reviews['api_key'] . $business_reviews['reviews_sort'] . $this->get_id() );
 		$business_reviews['cache_key']  		= "eael_{$business_reviews['source']}_{$business_reviews['expiration']}_{$business_reviews['md5']}_brev_cache";
 		
 		$business_reviews['layout']        		= ! empty( $settings['eael_business_reviews_items_layout'] ) ? $settings['eael_business_reviews_items_layout'] : 'slider';
