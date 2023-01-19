@@ -405,6 +405,30 @@ class Business_Reviews extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_business_reviews_business_logo',
+			[
+				'label'        => __( 'Logo', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_business_logo_icon_new',
+			[
+				'label'            => __( 'Custom Logo', 'essential-addons-for-elementor-lite' ),
+				'type'             => Controls_Manager::ICONS,
+				'fa4compatibility' => 'eael_business_reviews_business_logo_icon',
+				'condition'        => [
+					'eael_business_reviews_business_logo' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_business_reviews_business_name',
 			[
 				'label'        => __( 'Name', 'essential-addons-for-elementor-lite' ),
@@ -824,6 +848,73 @@ class Business_Reviews extends Widget_Base {
             ]
         );
 
+		$this->add_control(
+			'eael_business_reviews_header_business_logo_label',
+			[
+				'label' => esc_html__( 'Business Logo', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::HEADING,
+				'separator'	=> 'before',
+				'condition' => [
+					'eael_business_reviews_business_logo' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_header_business_logo_size',
+			[
+				'label'     => __( 'Logo Size', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => [
+					'size' => 15,
+				],
+				'range'     => [
+					'px' => [
+						'min'  => 20,
+						'max'  => 500,
+						'step' => 1,
+					]
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo span'    => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
+				],
+				'condition' => [
+					'eael_business_reviews_business_logo' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_header_business_logo_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_business_reviews_business_logo' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_business_reviews_header_business_logo_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_business_reviews_business_logo' => 'yes',
+				],
+			]
+		);
+		
 		$this->add_control(
 			'eael_business_reviews_header_business_name_label',
 			[
@@ -2169,6 +2260,7 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['pause_on_hover'] 	= ! empty( $settings['eael_business_reviews_pause_on_hover'] ) && 'yes' === $settings['eael_business_reviews_pause_on_hover'] ? 1 : 0;
 		$business_reviews['grab_cursor']    	= ! empty( $settings['eael_business_reviews_grab_cursor'] ) && 'yes' === $settings['eael_business_reviews_grab_cursor'] ? 1 : 0;
 		$business_reviews['speed']        		= ! empty( $settings['eael_business_reviews_slider_speed']['size'] ) ? $settings['eael_business_reviews_slider_speed']['size'] : 1000;
+		$business_reviews['business_logo']  	= ! empty( $settings['eael_business_reviews_business_logo'] ) && 'yes' === $settings['eael_business_reviews_business_logo'] ? 1 : 0;
 		$business_reviews['business_name']  	= ! empty( $settings['eael_business_reviews_business_name'] ) && 'yes' === $settings['eael_business_reviews_business_name'] ? 1 : 0;
 		$business_reviews['business_rating']   	= ! empty( $settings['eael_business_reviews_business_rating'] ) && 'yes' === $settings['eael_business_reviews_business_rating'] ? 1 : 0;
 		$business_reviews['business_address']  	= ! empty( $settings['eael_business_reviews_business_address'] ) && 'yes' === $settings['eael_business_reviews_business_address'] ? 1 : 0;
@@ -2178,9 +2270,13 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['review_text']       	= ! empty( $settings['eael_business_reviews_review_text'] ) && 'yes' === $settings['eael_business_reviews_review_text'] ? 1 : 0;
 		$business_reviews['review_rating']     	= ! empty( $settings['eael_business_reviews_review_rating'] ) && 'yes' === $settings['eael_business_reviews_review_rating'] ? 1 : 0;
 		
-		$business_reviews['business_name_label']	= ! empty( $settings['eael_business_reviews_business_name_label'] ) ? $settings['eael_business_reviews_business_name_label'] : '';
-		$business_reviews['google_reviews_label']	= ! empty( $settings['eael_business_reviews_google_reviews_label'] ) ? $settings['eael_business_reviews_google_reviews_label'] : '';
-		$business_reviews['arrows_type']			= ! empty( $settings['eael_business_reviews_arrows_type'] ) ? $settings['eael_business_reviews_arrows_type'] : 'fa fa-angle-right';
+		$business_reviews['business_logo_icon_migrated'] 	= isset($settings['__fa4_migrated']['eael_business_reviews_business_logo_icon_new']);
+		$business_reviews['business_logo_icon_new'] 		= empty($settings['eael_business_reviews_business_logo_icon']);
+		$business_reviews['business_logo_icon_new_data'] 	= ! empty( $settings['eael_business_reviews_business_logo_icon_new'] ) 	? $settings['eael_business_reviews_business_logo_icon_new'] 	: [];
+		$business_reviews['business_logo_icon_data'] 		= ! empty( $settings['eael_business_reviews_business_logo_icon'] ) 		? $settings['eael_business_reviews_business_logo_icon'] 		: [];
+		$business_reviews['business_name_label']			= ! empty( $settings['eael_business_reviews_business_name_label'] ) 	? $settings['eael_business_reviews_business_name_label'] 		: '';
+		$business_reviews['google_reviews_label']			= ! empty( $settings['eael_business_reviews_google_reviews_label'] ) 	? $settings['eael_business_reviews_google_reviews_label'] 		: '';
+		$business_reviews['arrows_type']					= ! empty( $settings['eael_business_reviews_arrows_type'] ) 			? $settings['eael_business_reviews_arrows_type'] 				: 'fa fa-angle-right';
 
 		if( 'slider' === $business_reviews['layout'] && 'preset-2' === $business_reviews['preset'] ){
 			$business_reviews['columns']        	= ! empty( $settings['eael_business_reviews_column_preset_2'] ) ? $settings['eael_business_reviews_column_preset_2'] : $business_reviews['columns'];
@@ -2445,6 +2541,20 @@ class Business_Reviews extends Widget_Base {
 
 					<div <?php echo $this->get_render_attribute_string('eael-google-reviews-content'); ?> >
 						<div class="eael-google-reviews-slider-header">
+							<?php if( $business_reviews['business_logo'] ): ?>
+							<div class="eael-google-reviews-business-logo">
+								<?php if ( $business_reviews['business_logo_icon_migrated'] || $business_reviews['business_logo_icon_new'] ) { ?>
+									<?php if ( isset($business_reviews['business_logo_icon_new_data']['value']['url'])) : ?>
+										<img class="eael-google-reviews-business-logo-icon" src="<?php echo esc_url( $business_reviews['business_logo_icon_new_data']['value']['url'] ); ?>" alt="<?php echo esc_attr( get_post_meta( $business_reviews['business_logo_icon_new_data']['value']['id'], '_wp_attachment_image_alt', true ) ); ?>" />
+									<?php elseif ( isset($business_reviews['business_logo_icon_new_data']['value'])) : ?>
+										<span class="eael-google-reviews-business-logo-icon <?php echo esc_attr( $business_reviews['business_logo_icon_new_data']['value'] ); ?>" aria-hidden="true"></span>
+									<?php endif; ?>
+								<?php } else { ?>
+									<span class="eael-google-reviews-business-logo-icon <?php echo esc_attr( $business_reviews['business_logo_icon_data'] ); ?>" aria-hidden="true"></span>
+								<?php } ?>
+							</div>
+							<?php endif; ?>
+							
 							<?php if( $business_reviews['business_name'] ): ?>
 							<div class="eael-google-reviews-business-name">
 								<?php $business_reviews['business_name_label'] = $business_reviews['business_name_label'] ? $business_reviews['business_name_label'] : $google_reviews_data['name']; ?>
