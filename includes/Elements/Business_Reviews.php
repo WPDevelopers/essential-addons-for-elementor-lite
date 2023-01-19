@@ -98,6 +98,18 @@ class Business_Reviews extends Widget_Base {
             ]);
         }
 
+		$this->add_control( 'eael_business_reviews_business_place_id', [
+			'label'       => esc_html__( 'Place ID', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'description' => sprintf( __('Get Place ID from <a href="%s" target="_blank">here</a>', 'essential-addons-for-elementor-lite'), esc_url( 'https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder' ) ),
+			'placeholder' => esc_html__( 'Place ID', 'essential-addons-for-elementor-lite' ),
+			'label_block' => false,
+			'default'     => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+			'condition' => [
+				'eael_business_reviews_sources' => 'google-reviews',
+			]
+		] );
+
 		$this->add_control(
 			'eael_business_reviews_sort_by',
 			[
@@ -2255,9 +2267,10 @@ class Business_Reviews extends Widget_Base {
 		$settings['eael_business_reviews_source_key'] = get_option( 'eael_br_google_place_api_key' );
 
 		$business_reviews                  		= [];
-		$business_reviews['source']         	= ! empty( $settings['eael_business_reviews_sources'] ) 	? esc_html( $settings['eael_business_reviews_sources'] ) 	: 'google-reviews';
-		$business_reviews['api_key']        	= ! empty( $settings['eael_business_reviews_source_key'] ) 	? esc_html( $settings['eael_business_reviews_source_key'] ) : '';
-		$business_reviews['reviews_sort']		= ! empty( $settings['eael_business_reviews_sort_by'] ) 	? esc_html( $settings['eael_business_reviews_sort_by'] ) 	: 'most_relevant';
+		$business_reviews['source']         	= ! empty( $settings['eael_business_reviews_sources'] ) 			? esc_html( $settings['eael_business_reviews_sources'] ) 			: 'google-reviews';
+		$business_reviews['place_id']         	= ! empty( $settings['eael_business_reviews_business_place_id'] ) 	? esc_html( $settings['eael_business_reviews_business_place_id'] ) 	: 'ChIJ0cpDbNvBVTcRGX9JNhhpC8I';
+		$business_reviews['api_key']        	= ! empty( $settings['eael_business_reviews_source_key'] ) 			? esc_html( $settings['eael_business_reviews_source_key'] ) 		: '';
+		$business_reviews['reviews_sort']		= ! empty( $settings['eael_business_reviews_sort_by'] ) 			? esc_html( $settings['eael_business_reviews_sort_by'] ) 			: 'most_relevant';
 
 		$business_reviews['expiration'] 		= ! empty( $settings['eael_business_reviews_data_cache_time'] ) ? absint( $settings['eael_business_reviews_data_cache_time'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
 		$business_reviews['md5']        		= md5( $business_reviews['api_key'] . $business_reviews['reviews_sort'] . $this->get_id() );
@@ -2352,7 +2365,7 @@ class Business_Reviews extends Widget_Base {
 		
 		$args 	= array(
 			'key' 	  => sanitize_text_field( $business_reviews['api_key'] ),
-			'placeid' => sanitize_text_field( 'ChIJ0cpDbNvBVTcRGX9JNhhpC8I' ),
+			'placeid' => sanitize_text_field( $business_reviews['place_id'] ),
 			'fields'  => sanitize_text_field( 'formatted_address,international_phone_number,name,rating,reviews,url,user_ratings_total,website,photos' ),
 		);
 
