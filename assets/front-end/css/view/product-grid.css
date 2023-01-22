@@ -2770,8 +2770,8 @@
 .buddyboss-theme .eael-product-popup.woocommerce div.product .button {
   line-height: 0;
 }
-.buddyboss-theme #content .elementor-widget-container .eael-product-grid .woocommerce ul.products,
-.buddyboss-theme #content .elementor-widget-container .eael-post-grid .woocommerce ul.products {
+.buddyboss-theme #content .elementor-widget-container .eael-product-grid.grid .woocommerce ul.products,
+.buddyboss-theme #content .elementor-widget-container .eael-post-grid.grid .woocommerce ul.products {
   display: grid;
 }
 .buddyboss-theme #content .elementor-widget-container .eael-product-grid li.product,
