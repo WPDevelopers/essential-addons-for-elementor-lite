@@ -83,7 +83,7 @@ var EventCalendar = function ($scope, $) {
 							startSelector = $("span.eaelec-event-date-start"),
 							endSelector = $("span.eaelec-event-date-end");
 
-						if (event.allDay === "yes") {
+						if (event.allDay) {
 							var newEnd = moment(endDate).subtract(1, "days");
 							endDate = newEnd._d;
 							timeFormate = " ";
@@ -104,7 +104,7 @@ var EventCalendar = function ($scope, $) {
 						if (
 							event.allDay &&
 							moment(startDate).format("MM-DD-YYYY") ===
-							moment(endDate.setMinutes(endDate.getMinutes() - 1)).format("MM-DD-YYYY")
+							moment(endDate).format("MM-DD-YYYY")
 						) {
 							startView = moment(startDate).format("MMM Do");
 							if (moment(startDate).isSame(Date.now(), "day") === true) {
