@@ -3126,6 +3126,10 @@
                 &.grid,&.list{
                     .woocommerce ul.products{
                         display: grid;
+                        margin: 0;
+                        li.product{
+                            margin: 0;
+                        }
                     }
                 }
                 li.product{
@@ -3204,11 +3208,7 @@
                     }
                 }
                 &.list{
-                    ul.products{
-                        margin: 0;
-                    }
                     li.product{
-                        margin: 0;
                         .details-block-style{
                             .add-to-cart{
                                 .add_to_cart_button{
