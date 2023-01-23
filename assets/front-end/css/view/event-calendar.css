@@ -503,7 +503,7 @@ span.fc-day-number {
     font-size: 14px;
   }
   .fc-basic-view .fc-day-number,
-  .fc-basic-view .fc-week-number {
+.fc-basic-view .fc-week-number {
     padding: 0;
     margin: 0;
     font-size: 10px;
