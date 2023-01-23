@@ -1118,11 +1118,16 @@
   left: 9px;
   line-height: 18px;
 }
-.theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-1.eael-product-gallery li.product .button,
-.theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-2.eael-product-gallery li.product .button,
-.theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-3.eael-product-gallery li.product .button {
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-1.eael-product-gallery .woocommerce li.product .button,
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-2.eael-product-gallery .woocommerce li.product .button,
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-3.eael-product-gallery .woocommerce li.product .button {
   width: 42px;
   border-radius: 4px;
+}
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-1.eael-product-gallery .woocommerce li.product a.added_to_cart,
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-2.eael-product-gallery .woocommerce li.product a.added_to_cart,
+.theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-3.eael-product-gallery .woocommerce li.product a.added_to_cart {
+  width: 42px;
 }
 .theme-buddyboss-theme #content .elementor-widget-container .eael-product-preset-2.eael-product-gallery li.product .button {
   margin-top: 10px;
