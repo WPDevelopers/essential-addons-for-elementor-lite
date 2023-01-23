@@ -1365,9 +1365,14 @@
         .eael-product-preset-1,
         .eael-product-preset-2,
         .eael-product-preset-3{
-            &.eael-product-gallery li.product .button{
-                width: 42px;
-                border-radius: 4px;
+            &.eael-product-gallery .woocommerce li.product {
+                .button{
+                    width: 42px;
+                    border-radius: 4px;
+                }
+                a.added_to_cart{
+                    width: 42px;
+                }
             }
         }
         .eael-product-preset-2{
