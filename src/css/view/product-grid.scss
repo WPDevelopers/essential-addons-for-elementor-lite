@@ -3123,8 +3123,10 @@
         .elementor-widget-container{
             .eael-product-grid,
             .eael-post-grid{
-                &.grid .woocommerce ul.products{
-                    display: grid;
+                &.grid,&.list{
+                    .woocommerce ul.products{
+                        display: grid;
+                    }
                 }
                 li.product{
                     max-width: 100%;
@@ -3202,7 +3204,11 @@
                     }
                 }
                 &.list{
+                    ul.products{
+                        margin: 0;
+                    }
                     li.product{
+                        margin: 0;
                         .details-block-style{
                             .add-to-cart{
                                 .add_to_cart_button{
