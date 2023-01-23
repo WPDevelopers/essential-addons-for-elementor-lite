@@ -1975,22 +1975,22 @@ class Event_Calendar extends Widget_Base
                     }
                 }
 
-                $data[] = [
-                    'id' => $i,
-                    'title' => !empty($event["eael_event_title"]) ? $event["eael_event_title"] : 'No Title',
-                    'description' => $event["eael_event_description"],
-                    'start' => $start,
-                    'end' => $end,
-                    'borderColor' => !empty($settings_eael_event_global_popup_ribbon_color) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
-                    'textColor' => $settings_eael_event_global_text_color,
-                    'color' => $settings_eael_event_global_bg_color,
-                    'url' => ($settings['eael_event_details_link_hide'] !== 'yes') ? esc_url($event["eael_event_link"]["url"]) : '',
-                    'allDay' => $event['eael_event_all_day'],
-                    'external' => $event['eael_event_link']['is_external'],
-                    'nofollow' => $event['eael_event_link']['nofollow'],
-                    'is_redirect' => $event['eael_event_redirection'],
-                    'custom_attributes' => $custom_attributes,
-                ];
+	            $data[] = [
+		            'id'                => $i,
+		            'title'             => ! empty( $event["eael_event_title"] ) ? $event["eael_event_title"] : 'No Title',
+		            'description'       => $event["eael_event_description"],
+		            'start'             => $start,
+		            'end'               => $end,
+		            'borderColor'       => ! empty( $settings_eael_event_global_popup_ribbon_color ) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
+		            'textColor'         => $settings_eael_event_global_text_color,
+		            'color'             => $settings_eael_event_global_bg_color,
+		            'url'               => ( $settings['eael_event_details_link_hide'] !== 'yes' ) ? esc_url_raw( $event["eael_event_link"]["url"] ) : '',
+		            'allDay'            => $event['eael_event_all_day'],
+		            'external'          => $event['eael_event_link']['is_external'],
+		            'nofollow'          => $event['eael_event_link']['nofollow'],
+		            'is_redirect'       => $event['eael_event_redirection'],
+		            'custom_attributes' => $custom_attributes,
+	            ];
 
                 $i++;
             }
