@@ -1072,8 +1072,14 @@
   position: unset;
   display: unset;
 }
-.woocommerce ul.products li.product .ast-shop-product-out-of-stock, .woocommerce-page ul.products li.product .ast-shop-product-out-of-stock {
+.woocommerce ul.products li.product .ast-shop-product-out-of-stock,
+.woocommerce-page ul.products li.product .ast-shop-product-out-of-stock {
   display: none;
+}
+.theme-astra .eael-product-gallery.eael-product-preset-4 .woocommerce ul.products li.product a.added_to_cart {
+  line-height: 38px;
+  width: 90%;
+  margin: 12px auto;
 }
 .theme-blocksy .button:before {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)";
