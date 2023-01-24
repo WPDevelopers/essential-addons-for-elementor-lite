@@ -255,6 +255,15 @@ var EventCalendar = function ($scope, $) {
 	});
 	
 	calendar.render();
+	const observer = new IntersectionObserver((entries) => {
+		for (const entry of entries) {
+			window.dispatchEvent(new Event('resize'));
+			setTimeout(function (){
+				window.dispatchEvent(new Event('resize'));
+			},200)
+		}
+	});
+	observer.observe(element[0]);
 	
 	ea.hooks.addAction("eventCalendar.reinit", "ea", () => {
 		calendar.today();
