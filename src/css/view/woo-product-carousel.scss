@@ -1504,9 +1504,15 @@ $theme-preset4: #ec3b75;
     //}
 }
 
-.theme-astra .woocommerce.eael-woo-product-carousel ul.products, .woocommerce-page .eael-woo-product-carousel ul.products {
-    display: flex;
-    column-gap: 0;
+.theme-astra {
+    .woocommerce.eael-woo-product-carousel ul.products, .woocommerce-page .eael-woo-product-carousel ul.products {
+        display: flex;
+        column-gap: 0;
+    }
+    .woocommerce ul.products li.product a.added_to_cart.wc-forward {
+        flex-direction: row;
+        align-items: center;
+    }
 }
 
 // blocksy theme conflicts
