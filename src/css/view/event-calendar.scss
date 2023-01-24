@@ -1,5 +1,9 @@
 .eael-event-calendar-wrapper {
 	font-family: Segoe UI;
+	.eael-event-calendar-cls{
+		min-height: 800px;
+		min-width: 100%;
+	}
 	.fc-event{
 		padding: 5px 10px;
 	}
