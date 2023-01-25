@@ -69,6 +69,8 @@ trait Ajax_Handler {
 
 		add_action( 'wp_ajax_eael_get_token', [ $this, 'eael_get_token' ] );
 		add_action( 'wp_ajax_nopriv_eael_get_token', [ $this, 'eael_get_token' ] );
+
+		add_action( 'eael_before_woo_pagination_product_ajax_start', [ $this, 'eael_yith_wcwl_ajax_disable' ] );
 	}
 
 	/**
@@ -287,6 +289,8 @@ trait Ajax_Handler {
 	public function eael_woo_pagination_product_ajax() {
 
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		do_action( 'eael_before_woo_pagination_product_ajax_start', $_REQUEST );
 
 		if ( ! empty( $_POST['page_id'] ) ) {
 			$page_id = intval( $_POST['page_id'], 10 );
@@ -1003,5 +1007,11 @@ trait Ajax_Handler {
 			wp_send_json_success( [ 'nonce' => $nonce ] );
 		}
 		wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+	}
+
+	public function eael_yith_wcwl_ajax_disable( $request ) {
+		add_filter( 'option_yith_wcwl_ajax_enable', function ( $data ) {
+			return 'no';
+		} );
 	}
 }
