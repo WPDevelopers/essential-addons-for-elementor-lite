@@ -158,7 +158,7 @@ trait Twitter_Feed
                     <div class="eael-twitter-feed-item-content">';
                             $content = isset($item['entities']['urls'][0]['url'])?str_replace($item['entities']['urls'][0]['url'], '', $item['full_text']):$item['full_text'];
                             $content = substr( $content, 0, $settings['eael_twitter_feed_content_length']) . $delimeter;
-                            if ( $settings['eael_twitter_feed_hash_linked'] === 'yes' && $item['entities']['hashtags'] ){
+                            if ( ! empty( $settings['eael_twitter_feed_hash_linked'] ) && $settings['eael_twitter_feed_hash_linked'] === 'yes' && $item['entities']['hashtags'] ) {
                                 $hashtags = [];
                                 foreach ( $item['entities']['hashtags'] as $hashtag ){
                                     if ( $hashtag['text'] ){
@@ -167,7 +167,7 @@ trait Twitter_Feed
                                 }
                                 $content = str_replace( array_keys($hashtags), $hashtags, $content );
                             }
-                            if ( $settings['eael_twitter_feed_mention_linked'] === 'yes' && $item['entities']['user_mentions'] ){
+                            if ( ! empty( $settings['eael_twitter_feed_mention_linked'] ) && $settings['eael_twitter_feed_mention_linked'] === 'yes' && $item['entities']['user_mentions'] ) {
                                 $mentions = [];
                                 foreach ( $item['entities']['user_mentions'] as $mention ){
                                     if ( $mention['screen_name'] ){
