@@ -68,6 +68,7 @@ trait Ajax_Handler {
 		add_action( 'wp_ajax_nopriv_eael_get_token', [ $this, 'eael_get_token' ] );
 
 		add_action( 'eael_before_woo_pagination_product_ajax_start', [ $this, 'eael_yith_wcwl_ajax_disable' ] );
+		add_action( 'eael_before_ajax_load_more', [ $this, 'eael_yith_wcwl_ajax_disable' ] );
 	}
 
 	/**
@@ -82,6 +83,8 @@ trait Ajax_Handler {
 	 */
 	public function ajax_load_more() {
 		$ajax = wp_doing_ajax();
+
+		do_action( 'eael_before_ajax_load_more', $_REQUEST );
 
 		wp_parse_str( $_POST['args'], $args );
 
