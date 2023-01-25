@@ -35,10 +35,7 @@ trait Ajax_Handler {
 		add_action( 'wp_ajax_nopriv_load_more', array( $this, 'ajax_load_more' ) );
 
 		add_action( 'wp_ajax_woo_product_pagination_product', array( $this, 'eael_woo_pagination_product_ajax' ) );
-		add_action( 'wp_ajax_nopriv_woo_product_pagination_product', array(
-			$this,
-			'eael_woo_pagination_product_ajax'
-		) );
+		add_action( 'wp_ajax_nopriv_woo_product_pagination_product', array( $this, 'eael_woo_pagination_product_ajax' ) );
 
 		add_action( 'wp_ajax_woo_product_pagination', array( $this, 'eael_woo_pagination_ajax' ) );
 		add_action( 'wp_ajax_nopriv_woo_product_pagination', array( $this, 'eael_woo_pagination_ajax' ) );
