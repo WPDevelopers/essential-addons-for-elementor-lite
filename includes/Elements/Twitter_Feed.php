@@ -354,7 +354,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_hash_linked',
             [
-                'label' => esc_html__('Hash Names', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Hashtag', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Enable', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('Disable', 'essential-addons-for-elementor-lite'),
