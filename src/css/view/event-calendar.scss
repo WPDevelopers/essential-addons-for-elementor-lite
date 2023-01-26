@@ -1,10 +1,29 @@
 .eael-event-calendar-wrapper {
 	font-family: Segoe UI;
-	.fc-row table {
-		margin: 0px !important;
+	.eael-event-calendar-cls{
+		min-height: 800px;
+		min-width: 100%;
 	}
-
+	.fc-event{
+		padding: 5px 10px;
+	}
+	a{
+		color: #181818;
+	}
+	.fc-timeGridWeek-view,
+	fc-timeGridDay-view{
+		.fc-event{
+			padding: 5px;
+		}
+	}
 	.fc {
+		.fc-timegrid .fc-daygrid-day-events{
+			position: relative;
+		}
+		.fc-daygrid-day-events{
+			position: absolute;
+			width: 100%;
+		}
 		table {
 			margin: auto;
 			overflow: auto;
@@ -15,7 +34,9 @@
 		border-top: 1px solid #ddd !important;
 		border-bottom: none !important;
 	}
-
+	.fc-daygrid-event-dot{
+		display: none !important;
+	}
 	.fc-day-grid-event {
 		margin-top: 2px;
 		padding: 8px;
@@ -38,6 +59,13 @@
 	.fc-day-number {
 		font-size: 14px;
 		float: center !important;
+	}
+	.fc-col-header-cell-cushion{
+		padding: 10px;
+	}
+	.fc-daygrid-block-event .fc-event-time,
+	.fc-daygrid-dot-event .fc-event-title{
+		font-weight: 400;
 	}
 
 	.eaelec-modal {
@@ -169,8 +197,7 @@
 
 	@media (max-width: 575px) {
 		.fc-toolbar {
-			margin: 0 !important;
-			padding: 0 !important;
+			margin: 10px !important;
 		}
 		.fc-toolbar .fc-center {
 			width: 100% !important;
@@ -206,11 +233,10 @@
 			}
 		}
 	}
-	.eael-event-completed {
-		text-decoration: line-through;
-	}
 }
-
+.elementor-page .entry-content .eael-event-calendar-wrapper a{
+	text-decoration: none;
+}
 // Calendar Header
 .fc-toolbar.fc-header-toolbar {
 	.fc-button-group {
@@ -274,8 +300,7 @@
 
 		&.fc-state-active,
 		&:hover,
-		&:visited,
-		&:focus {
+		&:visited{
 			background: #5725ff;
 			color: #fff;
 			box-shadow: none;
@@ -528,16 +553,15 @@ span.fc-day-number {
 		}
 		padding: 8px 0px 8px 0px !important;
 	}
-	.fc-right,
-	.fc-left {
-		width: 100%;
-		text-align: center;
-	}
-	.fc-left {
-		text-align: center;
-	}
-	.fc-right {
+	.fc .fc-toolbar.fc-header-toolbar {
 		margin-bottom: 10px;
+	}
+	.fc-toolbar-chunk {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 5px;
+		text-align: center;
+		width: 100%;
 
 		.fc-button-group {
 			.fc-button.fc-button-primary {
@@ -555,8 +579,10 @@ span.fc-day-number {
 	}
 
 	.fc-toolbar.fc-header-toolbar {
-		display: inline-block;
+		display: grid;
 		width: 100%;
+		justify-content: center;
+		grid-row-gap: 5px;
 
 		.fc-button-group button.fc-button.fc-button-primary {
 			margin-left: 5px;

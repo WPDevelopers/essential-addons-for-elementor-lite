@@ -136,6 +136,8 @@ trait Ajax_Handler {
 			wp_send_json_error( [ 'message' => __( 'Widget settings are not found. Did you save the widget before using load more??', 'essential-addons-for-elementor-lite' ) ] );
 		}
 
+        $settings['read_more_button_text'] = get_transient('eael_post_grid_read_more_button_text_'. $widget_id);
+        $settings['excerpt_expanison_indicator'] = get_transient('eael_post_grid_excerpt_expanison_indicator_'. $widget_id);
 		$settings['eael_widget_id'] = $widget_id;
 		$settings['eael_page_id']   = $page_id;
 		$html                       = '';
