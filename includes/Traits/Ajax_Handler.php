@@ -149,12 +149,13 @@ trait Ajax_Handler {
 		}
 
 		if ( $class == '\Essential_Addons_Elementor\Elements\Post_Grid' ) {
-            $settings['read_more_button_text'] = get_transient('eael_post_grid_read_more_button_text_'. $widget_id);
-            $settings['excerpt_expanison_indicator'] = get_transient('eael_post_grid_excerpt_expanison_indicator_'. $widget_id);
-            if ( $settings['orderby'] === 'rand' ){
-                $args['post__not_in'] = array_map( 'intval', array_unique( $_REQUEST['post__not_in'] ) );
-                unset( $args['offset'] );
-            }
+			$settings['read_more_button_text']       = get_transient( 'eael_post_grid_read_more_button_text_' . $widget_id );
+			$settings['excerpt_expanison_indicator'] = get_transient( 'eael_post_grid_excerpt_expanison_indicator_' . $widget_id );
+
+			if ( $settings['orderby'] === 'rand' ) {
+				$args['post__not_in'] = array_map( 'intval', array_unique( $_REQUEST['post__not_in'] ) );
+				unset( $args['offset'] );
+			}
 		}
 
 		// ensure control name compatibility to old code if it is post block
