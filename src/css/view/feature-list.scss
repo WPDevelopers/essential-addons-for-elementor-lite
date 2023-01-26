@@ -119,7 +119,6 @@ $enable-prefers-reduced-motion-media-query: true !default;
                 .eael-feature-list-icon {
                     padding: 0.5em;
                     @include transition(all 0.5s);
-                    font-size: 30px;
                     line-height: 1;
                     color: #37368e;
                     text-align: center;
