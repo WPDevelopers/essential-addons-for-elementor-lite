@@ -663,3 +663,10 @@
         }
     }
 }
+
+//Buddyboss theme conflicts
+.theme-buddyboss-theme{
+    .eael-product-popup.woocommerce div.product form.cart .button.single_add_to_cart_button {
+        padding: 5px 36px;
+    }
+}
