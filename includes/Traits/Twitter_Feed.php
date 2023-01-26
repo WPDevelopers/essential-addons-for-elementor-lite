@@ -156,9 +156,29 @@ trait Twitter_Feed
                     $html .= '</div>
 
                     <div class="eael-twitter-feed-item-content">';
-                            $link_free_text = isset($item['entities']['urls'][0]['url'])?str_replace($item['entities']['urls'][0]['url'], '', $item['full_text']):$item['full_text'];
-                            $html .= '<p>' . substr( $link_free_text, 0, $settings['eael_twitter_feed_content_length']) . $delimeter . '</p>';
-                        if ($settings['eael_twitter_feed_show_read_more'] == 'true') {
+                            $content = isset($item['entities']['urls'][0]['url'])?str_replace($item['entities']['urls'][0]['url'], '', $item['full_text']):$item['full_text'];
+                            $content = substr( $content, 0, $settings['eael_twitter_feed_content_length']) . $delimeter;
+                            if ( ! empty( $settings['eael_twitter_feed_hash_linked'] ) && $settings['eael_twitter_feed_hash_linked'] === 'yes' && $item['entities']['hashtags'] ) {
+                                $hashtags = [];
+                                foreach ( $item['entities']['hashtags'] as $hashtag ){
+                                    if ( $hashtag['text'] ){
+                                        $hashtags['#'.$hashtag['text']] = "<a href='https://twitter.com/hashtag/{$hashtag['text']}?src=hashtag_click' target='_blank'>#{$hashtag['text']}</a>";
+                                    }
+                                }
+                                $content = str_replace( array_keys($hashtags), $hashtags, $content );
+                            }
+                            if ( ! empty( $settings['eael_twitter_feed_mention_linked'] ) && $settings['eael_twitter_feed_mention_linked'] === 'yes' && $item['entities']['user_mentions'] ) {
+                                $mentions = [];
+                                foreach ( $item['entities']['user_mentions'] as $mention ){
+                                    if ( $mention['screen_name'] ){
+                                        $mentions['@'.$mention['screen_name']] = "<a href='https://twitter.com/{$mention['screen_name']}' target='_blank'>@{$mention['screen_name']}</a>";
+                                    }
+                                }
+                                $content = str_replace( array_keys($mentions), $mentions, $content );
+                            }
+                            $html .= '<p>' . $content . '</p>';
+
+                            if ($settings['eael_twitter_feed_show_read_more'] == 'true') {
 	                        $read_more = !empty( $settings[ 'eael_twitter_feed_show_read_more_text' ] ) ? $settings[ 'eael_twitter_feed_show_read_more_text' ] : __( 'Read More', 'essential-addons-for-elementor-lite' );
                             $html .= '<a href="//twitter.com/' . $item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">'.$read_more.' <i class="fas fa-angle-double-right"></i></a>';
                         }

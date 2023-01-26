@@ -288,6 +288,10 @@ class Asset_Builder {
 			array_unshift( $css_deps, 'astra-theme-css' );
 		}
 
+		if ( class_exists( 'Cartflows_Loader' ) && wcf()->utils->is_step_post_type() ) {
+			$css_deps = [ 'elementor-frontend' ];
+		}
+
 		wp_register_script( 'eael-general', EAEL_PLUGIN_URL . 'assets/front-end/js/view/general.min.js', [ 'jquery' ], EAEL_PLUGIN_VERSION, true );
 		wp_register_style( 'eael-general', EAEL_PLUGIN_URL . "assets/front-end/css/view/general.min.css", $css_deps, EAEL_PLUGIN_VERSION );
 	}
@@ -371,6 +375,12 @@ class Asset_Builder {
 				'added'   => __( 'Added ', 'essential-addons-for-elementor-lite' ),
 				'compare' => __( 'Compare', 'essential-addons-for-elementor-lite' ),
 				'loading' => esc_html__( 'Loading...', 'essential-addons-for-elementor-lite' )
+			],
+			'eael_translate_text' => [
+				'required_text' => esc_html__( 'is a required field', 'essential-addons-for-elementor-lite' ),
+				'invalid_text'  => esc_html__( 'Invalid', 'essential-addons-for-elementor-lite' ),
+				'billing_text'  => esc_html__( 'Billing', 'essential-addons-for-elementor-lite' ),
+				'shipping_text' => esc_html__( 'Shipping', 'essential-addons-for-elementor-lite' ),
 			],
 			'page_permalink'     => get_the_permalink(),
 			'cart_redirectition' => get_option( 'woocommerce_cart_redirect_after_add' ),
