@@ -555,6 +555,7 @@ trait Helper
                         <div class="eael-gb-eb-content-info">
                             <h3><?php esc_html_e( 'Supercharge Your Gutenberg Experience With Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
                             <p><?php esc_html_e( 'If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg that is trusted by more than 50,000+ web creators.', 'essential-addons-for-elementor-lite' ); ?></p>
+                            <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
                         </div>
                     </div>
                     <div class="eael-gb-eb-footer">
@@ -573,6 +574,7 @@ trait Helper
                 <div class="eael-gb-eb-content-info">
                     <h3><?php esc_html_e( 'Supercharge Your Gutenberg Experience With Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
                     <p><?php esc_html_e( 'If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg that is trusted by more than 50,000+ web creators.', 'essential-addons-for-elementor-lite' ) ?></p>
+                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
                 </div>
             </div>
         </script>
@@ -585,6 +587,7 @@ trait Helper
                 <div class="eael-gb-eb-content-info">
                     <h3><?php esc_html_e( '40+ Amazing Gutenberg Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
                     <p><?php esc_html_e( 'Create & design your WordPress websites just the way you want with more than 40 amazing, ready blocks from Essential Blocks for Gutenberg.', 'essential-addons-for-elementor-lite' ) ?></p>
+                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
                 </div>
             </div>
         </script>
@@ -597,6 +600,7 @@ trait Helper
                 <div class="eael-gb-eb-content-info">
                     <h3><?php esc_html_e( 'Useful Block Control Option', 'essential-addons-for-elementor-lite' ); ?></h3>
                     <p><?php esc_html_e( 'Get the fastest loading time and smoothest experience on your web page by enabling and disabling individual blocks as per your requirements.', 'essential-addons-for-elementor-lite' ) ?></p>
+                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
                 </div>
             </div>
         </script>
@@ -609,6 +613,7 @@ trait Helper
                 <div class="eael-gb-eb-content-info">
                     <h3><?php esc_html_e( 'Access To Thousands Of Ready Gutenberg Templates', 'essential-addons-for-elementor-lite' ); ?></h3>
                     <p><?php esc_html_e( 'Design unique websites using ready Gutenberg templates from Templately with absolute ease and instantly grab attention.', 'essential-addons-for-elementor-lite' ) ?></p>
+                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
                 </div>
             </div>
         </script>
