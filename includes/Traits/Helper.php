@@ -584,7 +584,7 @@ trait Helper
                 </div>
                 <div class="eael-gb-eb-content-info">
                     <h3><?php esc_html_e( '40+ Amazing Gutenberg Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
-                    <p><?php esc_html_e( 'Create & design your WordPress websites just the way you want with more than 35 amazing, ready blocks from Essential Blocks for Gutenberg.', 'essential-addons-for-elementor-lite' ) ?></p>
+                    <p><?php esc_html_e( 'Create & design your WordPress websites just the way you want with more than 40 amazing, ready blocks from Essential Blocks for Gutenberg.', 'essential-addons-for-elementor-lite' ) ?></p>
                 </div>
             </div>
         </script>
