@@ -620,7 +620,7 @@ trait Helper
                 </div>
                 <div class="eael-gb-eb-content-info">
                     <h3><?php esc_html_e( 'Try Essential Blocks Today!', 'essential-addons-for-elementor-lite' ); ?></h3>
-                    <p><?php printf( __( 'Want to get started with Essential Blocks now? Check out the %scomplete demos for each blocks%s to learn more about this ultimate block library for Gutenberg.', 'essential-addons-for-elementor-lite' ), '<a href="https://essential-blocks.com/demo" target="_blank">', '</a>' ) ?></p>
+                    <p><?php printf( __( 'Want to get started with Essential Blocks now? Check out %scomplete guides for each blocks%s to learn more about this ultimate block library for Gutenberg.', 'essential-addons-for-elementor-lite' ), '<a href="https://essential-blocks.com/demo" target="_blank">', '</a>' ) ?></p>
                     <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
                     <button class="eael-gb-eb-never-show" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php esc_html_e( 'Never Show Again', 'essential-addons-for-elementor-lite' ); ?></button>
                 </div>
