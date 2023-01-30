@@ -521,7 +521,7 @@ trait Helper
 		$eb_promo_img1    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img1.gif';
 		$eb_promo_img2    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img2.gif';
 		$eb_promo_img3    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img3.gif';
-		$eb_promo_img4    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img4.gif';
+		$eb_promo_img4    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img4.jpg';
 		$eb_promo_img5    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img5.png';
 		$eb_not_installed = HelperClass::get_local_plugin_data( 'essential-blocks/essential-blocks.php' ) === false;
 		$action           = $eb_not_installed ? 'install' : 'activate';
@@ -607,8 +607,8 @@ trait Helper
                     <img src="<?php echo esc_url( $eb_promo_img4 ); ?>" alt="">
                 </div>
                 <div class="eael-gb-eb-content-info">
-                    <h3><?php esc_html_e( 'Endless Customization Options', 'essential-addons-for-elementor-lite' ); ?></h3>
-                    <p><?php esc_html_e( 'Design unique and creative layouts on your website using the endless customization of Essential Blocks with absolute ease and instantly grab attention.', 'essential-addons-for-elementor-lite' ) ?></p>
+                    <h3><?php esc_html_e( 'Access To Thousands Of Ready Gutenberg Templates', 'essential-addons-for-elementor-lite' ); ?></h3>
+                    <p><?php esc_html_e( 'Design unique websites using ready Gutenberg templates from Templately with absolute ease and instantly grab attention.', 'essential-addons-for-elementor-lite' ) ?></p>
                 </div>
             </div>
         </script>
