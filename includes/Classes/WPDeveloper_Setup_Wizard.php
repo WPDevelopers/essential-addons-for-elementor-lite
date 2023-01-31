@@ -316,38 +316,47 @@ class WPDeveloper_Setup_Wizard {
 		}
 
 		?>
-        <div id="templately" class="eael-quick-setup-tab-content templately setup-content"
-             style="display: none;background-image: url('<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/mask-group.png' ) ?>')">
+        <div id="templately" class="eael-quick-setup-tab-content templately setup-content" style="display: none;">
             <div class="eael-quick-setup-logo">
-                <button data-action="install" data-slug="templately"
-                        class="button eael-quick-setup-templately-button wpdeveloper-plugin-installer">
-					<?php _e( 'Install Templately', 'essential-addons-for-elementor-lite' ); ?>
-                </button>
-                <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-logo.svg' ); ?>"
-                     alt="<?php _e( 'Logo', 'essential-addons-for-elementor-lite' ) ?>">
+                <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-logo.svg' ); ?>" alt="<?php _e( 'Logo', 'essential-addons-for-elementor-lite' ) ?>">
             </div>
             <div class="eael-quick-setup-title">
-				<?php printf( __( '%s <span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), 'Unlock', '3000+', 'Ready Templates Built With Elementor & Essential Addons From
-                    Templately.' ); ?>
+				<?php printf( __( '%s <span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), 'Get access to', '3000+', 'Elementor Templates with Templately! 🚀' ); ?>
             </div>
             <div class="eael-quick-setup-text">
-				<?php _e( 'Get Access to amazing features and boost your Elementor page
-                    building experience with Templately 👇', 'essential-addons-for-elementor-lite' ); ?>
+				<?php _e( 'Want to create websites faster than ever? Check out Templately, the ultimate templates cloud that comes with thousands of ready Elementor templates for every niche!', 'essential-addons-for-elementor-lite' ); ?>
             </div>
-            <ul class="eael-quick-setup-list">
-                <li class="eael-quick-setup-list-item">
-                    <span class="eael-quick-setup-icon">🌟</span>
-					<?php _e( 'Access Thousands Of Stunning, Ready Website Templates', 'essential-addons-for-elementor-lite' ); ?>
-                </li>
-                <li class="eael-quick-setup-list-item">
-                    <span class="eael-quick-setup-icon">🔥</span>
-					<?php _e( 'Save Your Design Anywhere With MyCloud Storage Space', 'essential-addons-for-elementor-lite' ); ?>
-                </li>
-                <li class="eael-quick-setup-list-item">
-                    <span class="eael-quick-setup-icon">🚀</span>
-					<?php _e( 'Add Team Members & Collaborate On Cloud With Templately WorkSpace', 'essential-addons-for-elementor-lite' ); ?>
-                </li>
-            </ul>
+            <div class="eael-quick-setup-list-and-video">
+                <ul class="eael-quick-setup-list">
+                    <li class="eael-quick-setup-list-item">
+                        <span class="eael-quick-setup-icon">🌟</span>
+			            <?php _e( 'Access Thousands Of Stunning, Ready Website Templates', 'essential-addons-for-elementor-lite' ); ?>
+                    </li>
+                    <li class="eael-quick-setup-list-item">
+                        <span class="eael-quick-setup-icon">🔥</span>
+			            <?php _e( 'Save Your Design Anywhere With MyCloud Storage Space', 'essential-addons-for-elementor-lite' ); ?>
+                    </li>
+                    <li class="eael-quick-setup-list-item">
+                        <span class="eael-quick-setup-icon">🚀</span>
+			            <?php _e( 'Add Team Members & Collaborate On Cloud With Templately WorkSpace', 'essential-addons-for-elementor-lite' ); ?>
+                    </li>
+                </ul>
+                <div class="eael-video__block">
+                    <div class="thumb">
+                        <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/youtube-promo.jpg' ) ?>"
+                             alt="">
+                    </div>
+                    <a target="_blank" href="https://www.youtube.com/watch?v=KIrB_-0gZXI" class="play__btn">
+                        <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/play-btn.png' ); ?>"
+                             alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="eael-quick-setup-install-btn">
+                <button data-action="install" data-slug="templately" class="button eael-quick-setup-templately-button wpdeveloper-plugin-installer">
+		            <?php _e( 'Install Templately', 'essential-addons-for-elementor-lite' ); ?>
+                </button>
+            </div>
         </div>
 		<?php
 	}
