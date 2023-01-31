@@ -1067,10 +1067,11 @@
     }
 }
 
+.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-install-btn {
+    margin-top: 20px;
+}
+
 .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-templately-button {
-    position: absolute;
-    top: 30px;
-    right: 30px;
     min-height: 45px;
     padding: 2px 30px;
     border-radius: 3px;
@@ -1112,9 +1113,7 @@
 .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-logo {
     min-height: 50px;
     height: 50px;
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
+    text-align: center;
 }
 
 .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-logo svg,
@@ -1138,6 +1137,7 @@
     font-weight: 600;
     color: #041137;
     line-height: 1.4;
+    text-align: center;
 }
 
 @media (max-width: 1400.98px) {
@@ -1168,6 +1168,8 @@
     font-size: 20px;
     line-height: 1.4;
     color: #727272;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 @media (max-width: 1400.98px) {
@@ -1176,9 +1178,19 @@
     }
 }
 
+.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list-and-video {
+    display: flex;
+    justify-content: space-between;
+}
+
+.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-video__block {
+    width: 35%;
+}
+
 .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list {
     list-style: none;
     padding-left: 0;
+    width: 60%;
 }
 
 .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list .eael-quick-setup-list-item {
