@@ -1247,6 +1247,7 @@
 .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.integrations .eael-quick-setup-intro .eael-quick-setup-text {
     font-size: 16px;
     line-height: 1;
+    color: #5a5a5a;
 }
 
 .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.integrations .eael-quick-setup-admin-block-wrapper {
