@@ -1200,6 +1200,13 @@
     color: #041137;
 }
 
+@media (max-width: 991px) {
+    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list,
+    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-video__block {
+        width: 49%;
+    }
+}
+
 @media (max-width: 1400.98px) {
     .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list .eael-quick-setup-list-item {
         font-size: 16px;
