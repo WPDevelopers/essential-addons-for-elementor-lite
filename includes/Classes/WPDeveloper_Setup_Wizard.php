@@ -367,6 +367,14 @@ class WPDeveloper_Setup_Wizard {
 	public function eael_integrations() {
 		?>
         <div id="integrations" class="eael-quick-setup-tab-content integrations setup-content" style="display: none">
+            <div class="eael-quick-setup-intro">
+                <h2 class="eael-quick-setup-title">
+			        <?php _e( 'Skyrocket Conversions For Your Elementor Website With This Advanced Solutions', 'essential-addons-for-elementor-lite' ); ?>
+                </h2>
+                <p class="eael-quick-setup-text">
+			        <?php _e( 'Boost engagement and conversions for your Elementor website by exploring these powerful, advanced WordPress plugins and solutions', 'essential-addons-for-elementor-lite' ); ?>
+                </p>
+            </div>
             <div class="eael-quick-setup-admin-block-wrapper">
 				<?php foreach ( $this->get_plugin_list() as $plugin ) { ?>
                     <div class=" eael-quick-setup-admin-block eael-quick-setup-admin-block-integrations">
