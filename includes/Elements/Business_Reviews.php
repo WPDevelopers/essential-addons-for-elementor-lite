@@ -2292,7 +2292,7 @@ class Business_Reviews extends Widget_Base {
 
 		$business_reviews['expiration'] 		= ! empty( $settings['eael_business_reviews_data_cache_time'] ) ? absint( $settings['eael_business_reviews_data_cache_time'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
 		$business_reviews['md5']        		= md5( $business_reviews['api_key'] . $business_reviews['reviews_sort'] . $this->get_id() );
-		$business_reviews['cache_key']  		= "eael_{$business_reviews['source']}_{$business_reviews['expiration']}_{$business_reviews['md5']}_brev_cache";
+		$business_reviews['cache_key']  		= "eael_{$business_reviews['source']}_{$business_reviews['place_id']}_{$business_reviews['expiration']}_{$business_reviews['md5']}_brev_cache";
 		
 		$business_reviews['layout']        		= ! empty( $settings['eael_business_reviews_items_layout'] ) ? $settings['eael_business_reviews_items_layout'] : 'slider';
 		$business_reviews['preset']        		= ! empty( $settings['eael_business_reviews_style_preset_slider'] ) && 'slider' === $business_reviews['layout'] ? $settings['eael_business_reviews_style_preset_slider'] : 'preset-1';
