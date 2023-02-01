@@ -10,6 +10,7 @@ use \Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
+use Elementor\Icons_Manager;
 use \Elementor\Widget_Base;
 use Wpmet\Libs\Rating;
 
@@ -906,13 +907,30 @@ class Business_Reviews extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo span'    => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
 				],
 				'condition' => [
 					'eael_business_reviews_business_logo' => 'yes',
 				],
 			]
 		);
+
+		$this->add_control(
+            'eael_business_reviews_header_business_logo_color',
+            [
+                'label'            => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type'             => Controls_Manager::COLOR,
+                'selectors' => [
+                    "{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo span" => 'color: {{VALUE}};',
+                    "{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo svg" => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
+                    "{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo svg path" => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
+                ],
+				'condition' => [
+					'eael_business_reviews_business_logo' => 'yes',
+				],
+            ]
+        );
 
 		$this->add_responsive_control(
 			'eael_business_reviews_header_business_logo_margin',
@@ -2581,7 +2599,9 @@ class Business_Reviews extends Widget_Base {
 							<div class="eael-google-reviews-business-logo">
 								<?php if ( $business_reviews['business_logo_icon_migrated'] || $business_reviews['business_logo_icon_new'] ) { ?>
 									<?php if ( isset($business_reviews['business_logo_icon_new_data']['value']['url'])) : ?>
-										<img class="eael-google-reviews-business-logo-icon" src="<?php echo esc_url( $business_reviews['business_logo_icon_new_data']['value']['url'] ); ?>" alt="<?php echo esc_attr( get_post_meta( $business_reviews['business_logo_icon_new_data']['value']['id'], '_wp_attachment_image_alt', true ) ); ?>" />
+										<!-- <img class="eael-google-reviews-business-logo-icon" src="<?php //echo esc_url( $business_reviews['business_logo_icon_new_data']['value']['url'] ); ?>" alt="<?php //echo esc_attr( get_post_meta( $business_reviews['business_logo_icon_new_data']['value']['id'], '_wp_attachment_image_alt', true ) ); ?>" /> -->
+
+										<?php Icons_Manager::render_icon( $business_reviews['business_logo_icon_new_data'], [ 'aria-hidden' => 'true' ] ); ?>
 									<?php elseif ( isset($business_reviews['business_logo_icon_new_data']['value'])) : ?>
 										<span class="eael-google-reviews-business-logo-icon <?php echo esc_attr( $business_reviews['business_logo_icon_new_data']['value'] ); ?>" aria-hidden="true"></span>
 									<?php endif; ?>
