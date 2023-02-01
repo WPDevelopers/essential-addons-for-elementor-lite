@@ -1720,7 +1720,7 @@ class Business_Reviews extends Widget_Base {
 				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item .preset-content-body',
 				'fields_options' => [
                     'border' => [
-                        'default' => 'solid',
+                        'default' => 'none',
                     ],
                     'width' => [
                         'default'      => [
