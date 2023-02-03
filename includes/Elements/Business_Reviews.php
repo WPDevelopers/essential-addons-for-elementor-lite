@@ -2781,7 +2781,7 @@ class Business_Reviews extends Widget_Base {
 			</div>
 			<?php endif; ?>
 
-			<div class="preset-extra-shadow">
+			<div class="preset-extra-shadow eael-d-none">
 				<svg width="85" height="74" viewBox="0 0 85 74" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g filter="url(#filter0_d_67_255)">
 				<path d="M25 31.3423V12C25 10.8954 25.8954 10 27 10H57.174C59.1715 10 59.9349 12.6058 58.2533 13.6838L28.0793 33.0261C26.7482 33.8794 25 32.9235 25 31.3423Z" fill="white"/>
