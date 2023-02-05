@@ -1,3 +1,6 @@
+.eael-svg-draw-container.none path {
+  stroke-dasharray: none;
+}
 .eael-svg-draw-container svg {
   height: 200px;
   width: 200px;
@@ -6,6 +9,5 @@
   stroke: #c36;
   stroke-width: 3;
   fill: transparent;
-  stroke-dashoffset: 0;
   stroke-dasharray: 0, 9999px;
 }
