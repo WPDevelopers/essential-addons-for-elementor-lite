@@ -204,9 +204,9 @@ class Bootstrap
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'toc_rank_math_support']);
 
-        if(defined('WPML_TM_VERSION')){
-	        add_filter( 'elementor/documents/get/post_id',[$this, 'eael_wpml_template_translation']);
-        }
+//        if(defined('WPML_TM_VERSION')){
+//	        add_filter( 'elementor/documents/get/post_id',[$this, 'eael_wpml_template_translation']);
+//        }
 
 
         //templately plugin support
