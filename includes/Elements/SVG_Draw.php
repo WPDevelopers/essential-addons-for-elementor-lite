@@ -66,7 +66,7 @@ class SVG_Draw Extends Widget_Base
         $this->start_controls_section(
             'eael_section_svg_content_settings',
             [
-                'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('General', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -110,16 +110,6 @@ class SVG_Draw Extends Widget_Base
             ]
         );
 
-        $this->end_controls_section();
-
-        $this->start_controls_section(
-            'eael_section_svg_style_settings',
-            [
-                'label' => esc_html__('Style', 'essential-addons-for-elementor-lite'),
-                'tab' => Controls_Manager::TAB_STYLE,
-            ]
-        );
-
         $this->add_control(
             'eael_svg_animation_on',
             [
@@ -134,6 +124,187 @@ class SVG_Draw Extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_svg_fill',
+            [
+                'label' => esc_html__( 'Fill After Draw', 'textdomain' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Yes', 'textdomain' ),
+                'label_off' => esc_html__( 'No', 'textdomain' ),
+                'return_value' => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'eael_svg_alignment',
+            [
+                'label' => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+                        'icon' => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+                        'icon' => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                        'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+                        'icon' => 'eicon-text-align-right',
+                    ],
+                ],
+                'default' => 'center',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-svg-draw-container' => 'text-align: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_svg_size',
+            [
+                'label' => esc_html__( 'Size', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 500,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 200,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} svg' => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_svg_draw_speed',
+            [
+                'label' => esc_html__( 'Speed', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::NUMBER,
+                'min' => .5,
+                'max' => 100,
+                'step' => .5,
+                'default' => 5,
+            ]
+        );
+
+        $this->add_control(
+            'eael_svg_link',
+            [
+                'label' => esc_html__( 'Link', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::URL,
+                'placeholder' => esc_html__( 'https://your-link.com', 'essential-addons-for-elementor-lite' ),
+                'options' => [ 'url' ],
+                'label_block' => true,
+            ]
+        );
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'eael_section_svg_style_settings',
+            [
+                'label' => esc_html__('Style', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_svg_path_thickness',
+            [
+                'label' => esc_html__( 'Path Thickness', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 50,
+                        'step' => .1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 3,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} svg path' => 'stroke-width: {{SIZE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_svg_color',
+            [
+                'type' => Controls_Manager::COLOR,
+                'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+                'selectors' => [
+                    '{{WRAPPER}} svg path' => 'stroke:{{VALUE}};',
+                    '{{WRAPPER}} .none svg path' => 'fill:{{VALUE}};',
+                    '{{WRAPPER}} .fill-svg svg path' => 'fill:{{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'eael_svg_border',
+                'selector' => '{{WRAPPER}} .eael-svg-draw-container svg',
+            ]
+        );
+
+        $this->add_control(
+            'eael_svg_border_radius',
+            [
+                'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-svg-draw-container svg' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_svg_padding',
+            [
+                'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-svg-draw-container svg' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_svg_margin',
+            [
+                'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-svg-draw-container svg' => 'Margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'box_shadow',
+                'selector' => '{{WRAPPER}} .eael-svg-draw-container svg',
+            ]
+        );
+
         $this->end_controls_section();
     }
 
@@ -145,16 +316,29 @@ class SVG_Draw Extends Widget_Base
             'class'           => [
                 'eael-svg-draw-container',
                 esc_attr( $settings['eael_svg_animation_on'] )
-                ]
+                ],
+            'data-fill' => $settings['eael_svg_fill'] === 'yes' ? 'fill-svg' : '',
+            'data-speed' => esc_attr( $settings['eael_svg_draw_speed'] )
         ]);
 
-        echo '<div '. $this->get_render_attribute_string('eael-svg-drow-wrapper') .'>';
+        if ( ! empty( $settings['eael_svg_link']['url'] ) ) {
+            $this->add_link_attributes( 'eael_svg_link', $settings['eael_svg_link'] );
+            echo '<a ' . $this->get_render_attribute_string( 'eael_svg_link' ) . '>';
+        }
+
+        echo '<div ' . $this->get_render_attribute_string('eael-svg-drow-wrapper') . '>';
+
         if ( $settings['eael_svg_src'] === 'icon' ):
             Icons_Manager::render_icon( $settings['eael_svg_icon'], [ 'aria-hidden' => 'true', 'class' => [ 'eael-svg-drow-wrapper' ] ] );
         else:
             echo $svg_html;
         endif;
+
         echo ' </div>';
+
+        if ( ! empty( $settings['eael_svg_link']['url'] ) ) {
+            echo "</a>";
+        }
 
     }
 }

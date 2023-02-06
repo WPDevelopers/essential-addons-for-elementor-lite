@@ -1,6 +1,8 @@
-var SVGDraw_old = function ($scope, $) {
-    let svg_icon = $('svg', $scope),
+var SVGDraw = function ($scope, $) {
+    let wrapper = $('.eael-svg-draw-container', $scope),
+        svg_icon = $('svg', wrapper),
         paths = $('path', svg_icon),
+        speed = wrapper.data('speed'),
             count = 50,
         path_count = 0,
         draw_interval;
@@ -13,6 +15,7 @@ var SVGDraw_old = function ($scope, $) {
         }
         else if (path_count===paths.length){
             clearInterval(draw_interval);
+            wrapper.addClass( wrapper.data('fill') );
             return;
         }
         if ( typeof paths[path_count] !== undefined ){
@@ -23,25 +26,24 @@ var SVGDraw_old = function ($scope, $) {
         count-= step;
     }
 
-    console.log(svg_icon.parent());
     if ( svg_icon.parent().hasClass('hover') ){
         svg_icon.hover(function (){
-            draw_interval = window.setInterval(draw_line, .001);
+            draw_interval = window.setInterval(draw_line, speed);
         },function (){
             window.clearInterval(draw_interval);
         });
     }else if ( svg_icon.parent().hasClass('page-load') ){
-        window.setInterval(draw_line, .001);
+        window.setInterval(draw_line, speed);
     }
 }
 jQuery(window).on("elementor/frontend/init", function () {
 
-    if (ea.elementStatusCheck('eaelSVGDraw')) {
+    if (ea.elementStatusCheck('eaelDrawSVG')) {
         return false;
     }
 
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-svg-draw.default",
-        SVGDraw_old
+        SVGDraw
     );
 });
