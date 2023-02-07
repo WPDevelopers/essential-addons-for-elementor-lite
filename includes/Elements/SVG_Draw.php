@@ -247,7 +247,7 @@ class SVG_Draw Extends Widget_Base
                 'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
                 'selectors' => [
                     '{{WRAPPER}} svg path' => 'stroke:{{VALUE}};',
-                    '{{WRAPPER}} .none svg path' => 'fill:{{VALUE}};',
+                    '{{WRAPPER}} .none[data-fill="fill-svg"] svg path' => 'fill:{{VALUE}};',
                     '{{WRAPPER}} .fill-svg svg path' => 'fill:{{VALUE}};'
                 ]
             ]
