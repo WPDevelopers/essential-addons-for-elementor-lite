@@ -329,7 +329,13 @@ class SVG_Draw Extends Widget_Base
         echo '<div ' . $this->get_render_attribute_string('eael-svg-drow-wrapper') . '>';
 
         if ( $settings['eael_svg_src'] === 'icon' ):
-            Icons_Manager::render_icon( $settings['eael_svg_icon'], [ 'aria-hidden' => 'true', 'class' => [ 'eael-svg-drow-wrapper' ] ] );
+
+            if ( $settings['eael_svg_icon']['library'] === 'svg' ):
+                Icons_Manager::render_icon($settings['eael_svg_icon'], ['aria-hidden' => 'true', 'class' => ['eael-svg-drow-wrapper']]);
+            else:
+               echo Helper::get_svg_by_icon( $settings['eael_svg_icon'] );
+            endif;
+
         else:
             echo $svg_html;
         endif;
