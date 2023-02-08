@@ -2602,8 +2602,12 @@ class Business_Reviews extends Widget_Base {
 										<!-- <img class="eael-google-reviews-business-logo-icon" src="<?php //echo esc_url( $business_reviews['business_logo_icon_new_data']['value']['url'] ); ?>" alt="<?php //echo esc_attr( get_post_meta( $business_reviews['business_logo_icon_new_data']['value']['id'], '_wp_attachment_image_alt', true ) ); ?>" /> -->
 
 										<?php Icons_Manager::render_icon( $business_reviews['business_logo_icon_new_data'], [ 'aria-hidden' => 'true' ] ); ?>
-									<?php elseif ( isset($business_reviews['business_logo_icon_new_data']['value'])) : ?>
-										<span class="eael-google-reviews-business-logo-icon <?php echo esc_attr( $business_reviews['business_logo_icon_new_data']['value'] ); ?>" aria-hidden="true"></span>
+									<?php elseif ( isset($business_reviews['business_logo_icon_new_data']['value'])) : 
+											if( empty( $business_reviews['business_logo_icon_new_data']['value'] ) ){
+												?> <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100"><rect width="100" height="100" fill="#fff" rx="15%"/><path fill="#4285f4" d="M386 400c45-42 65-112 53-179H260v74h102c-4 24-18 44-38 57z"/><path fill="#34a853" d="M90 341a192 192 0 0 0 296 59l-62-48c-53 35-141 22-171-60z"/><path fill="#fbbc02" d="M153 292c-8-25-8-48 0-73l-63-49c-23 46-30 111 0 171z"/><path fill="#ea4335" d="M153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55z"/></svg>	<?php 
+											}
+											?>
+											<span class="eael-google-reviews-business-logo-icon <?php echo esc_attr( $business_reviews['business_logo_icon_new_data']['value'] ); ?>" aria-hidden="true"></span>
 									<?php endif; ?>
 								<?php } else { ?>
 									<span class="eael-google-reviews-business-logo-icon <?php echo esc_attr( $business_reviews['business_logo_icon_data'] ); ?>" aria-hidden="true"></span>
