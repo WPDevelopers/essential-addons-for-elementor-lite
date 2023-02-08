@@ -2622,7 +2622,7 @@ class Business_Reviews extends Widget_Base {
 							<div class="eael-google-reviews-business-rating">
 								<p><?php echo esc_html( $google_reviews_data['rating'] ); ?></p>
 								<p><?php $this->print_business_reviews_ratings( $google_reviews_data['rating'] ); ?></p>
-								<p><a href="<?php esc_url( $google_reviews_data['url'] ); ?>"><?php echo esc_html( $google_reviews_data['user_ratings_total'] . ' ' . $business_reviews['google_reviews_label'] ); ?></a></p>
+								<p><a href="<?php echo esc_url( $google_reviews_data['url'] ); ?>" target="_blank" ><?php echo esc_html( $google_reviews_data['user_ratings_total'] . ' ' . $business_reviews['google_reviews_label'] ); ?></a></p>
 							</div>
 							<?php endif; ?>
 
