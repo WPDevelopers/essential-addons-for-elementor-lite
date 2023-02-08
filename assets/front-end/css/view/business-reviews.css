@@ -1,3 +1,6 @@
+.eael-business-reviews-wrapper .eael-business-reviews-items {
+  padding: 0 15px;
+}
 .eael-business-reviews-wrapper .preset-2 .preset-content-wrap {
   border: 1px solid #f5f5f5;
   border-radius: 10px;
@@ -62,6 +65,7 @@
 .eael-business-reviews-wrapper .eael-google-reviews-slider-header .eael-google-reviews-business-name a {
   color: #292844;
   font-size: 36px;
+  line-height: 1.5em;
 }
 .eael-business-reviews-wrapper .eael-google-reviews-slider-header .eael-google-reviews-business-rating,
 .eael-business-reviews-wrapper .eael-google-reviews-slider-header .eael-google-reviews-business-rating a {
