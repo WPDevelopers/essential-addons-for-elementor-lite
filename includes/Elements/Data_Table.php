@@ -304,7 +304,7 @@ class Data_Table extends Widget_Base {
 					],
 					'editor'       => [
 						'title'   => esc_html__( 'Editor', 'essential-addons-for-elementor-lite'),
-						'icon'    => 'fa fa-pencil',
+						'icon'    => 'eicon-pencil',
 					],
 					'template'        => [
 						'title'   => esc_html__( 'Templates', 'essential-addons-for-elementor-lite'),
