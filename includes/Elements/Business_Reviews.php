@@ -2614,7 +2614,7 @@ class Business_Reviews extends Widget_Base {
 							<?php if( $business_reviews['business_name'] ): ?>
 							<div class="eael-google-reviews-business-name">
 								<?php $business_reviews['business_name_label'] = $business_reviews['business_name_label'] ? $business_reviews['business_name_label'] : $google_reviews_data['name']; ?>
-								<a href="<?php echo esc_url( $google_reviews_data['website'] ); ?>"><?php echo esc_html( $business_reviews['business_name_label'] ); ?></a>
+								<a href="<?php echo esc_url( $google_reviews_data['website'] ); ?>" target="_blank" ><?php echo esc_html( $business_reviews['business_name_label'] ); ?></a>
 							</div>
 							<?php endif; ?>
 
