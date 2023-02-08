@@ -398,6 +398,23 @@ class Filterable_Gallery extends Widget_Base
                         'label_block' => true,
                         'default' => esc_html__('Gallery Item', 'essential-addons-for-elementor-lite'),
                     ],
+                    [
+                        'name' => 'eael_fg_custom_label',
+                        'label' => __('Custom Label', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::SWITCHER,
+                        'return' => 'yes',
+                        'default' => '',
+                    ],
+                    [
+                        'name' => 'eael_fg_control_label',
+                        'label' => esc_html__('Item Label', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::TEXT,
+                        'dynamic'   => ['active' => true],
+                        'label_block' => true,
+                        'condition' => [
+                            'eael_fg_custom_label' => 'yes',
+                        ],
+                    ],
                 ],
                 'title_field' => '{{eael_fg_control}}',
             ]
@@ -2808,9 +2825,10 @@ class Filterable_Gallery extends Widget_Base
 
                     foreach ($settings['eael_fg_controls'] as $key => $control) :
                         $sorter_filter = $this->sorter_class($control['eael_fg_control']);
+                        $sorter_label  = $control['eael_fg_control_label'] != '' ? $control['eael_fg_control_label'] : $control['eael_fg_control'];
                     ?><li data-load-more-status="0" data-first-init="0" class="control <?php if ($key == 0 && empty($settings['eael_fg_all_label_text'])) {
                             echo 'active';
-                        } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html( $control['eael_fg_control'] ); ?></li><?php
+                        } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html( $sorter_label ); ?></li><?php
                     endforeach;
                 ?></ul>
             </div>
