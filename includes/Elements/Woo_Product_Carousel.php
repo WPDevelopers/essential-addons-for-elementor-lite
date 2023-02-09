@@ -2982,13 +2982,15 @@ class Woo_Product_Carousel extends Widget_Base {
 		$settings = $this->get_settings_for_display();
 
 		$visibility = '';
-		if ($settings['image_dots_visibility'] !== 'yes') {
+		if ( $settings['image_dots_visibility'] !== 'yes' ) {
 			$visibility .= ' eael_gallery_pagination_hide_on_desktop';
 		}
-		if ($settings['image_dots_visibility_mobile'] !== 'yes') {
+
+		if ( empty( $settings['image_dots_visibility_mobile'] ) || $settings['image_dots_visibility_mobile'] !== 'yes' ) {
 			$visibility .= ' eael_gallery_pagination_hide_on_mobile';
 		}
-		if ($settings['image_dots_visibility_tablet'] !== 'yes') {
+
+		if ( empty( $settings['image_dots_visibility_tablet'] ) || $settings['image_dots_visibility_tablet'] !== 'yes' ) {
 			$visibility .= ' eael_gallery_pagination_hide_on_tablet';
 		}
 
