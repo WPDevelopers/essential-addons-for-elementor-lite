@@ -771,7 +771,8 @@ class Post_Timeline extends Widget_Base
                     $query = new \WP_Query($args);
                     if ($query->have_posts()) {
 	                    $found_posts      = $query->found_posts;
-	                    $max_page         = ceil( $found_posts / absint( $args['posts_per_page'] ) );
+	                    $ppp              = empty( $args['posts_per_page'] ) ? get_option( 'posts_per_page' ) : $args['posts_per_page'];
+	                    $max_page         = ceil( $found_posts / absint( $ppp ) );
 	                    $args['max_page'] = $max_page;
                         while ($query->have_posts()) {
                             $query->the_post();
