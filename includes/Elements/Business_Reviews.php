@@ -108,7 +108,7 @@ class Business_Reviews extends Widget_Base {
 			'description' => sprintf( __('Get Place ID from <a href="%s" target="_blank">here</a>', 'essential-addons-for-elementor-lite'), esc_url( 'https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder' ) ),
 			'placeholder' => esc_html__( 'Place ID', 'essential-addons-for-elementor-lite' ),
 			'label_block' => false,
-			'default'     => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+			'default'     => '',
 			'condition' => [
 				'eael_business_reviews_sources' => 'google-reviews',
 			]
@@ -478,7 +478,7 @@ class Business_Reviews extends Widget_Base {
 			'type'        => Controls_Manager::TEXT,
 			'placeholder' => esc_html__( 'Business Name', 'essential-addons-for-elementor-lite' ),
 			'label_block' => false,
-			'default'     => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+			'default'     => '',
 			'condition' => [
 				'eael_business_reviews_business_name' => 'yes'
 			]
