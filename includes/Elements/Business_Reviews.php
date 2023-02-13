@@ -2499,8 +2499,8 @@ class Business_Reviews extends Widget_Base {
 		);
 		?>
 
-		<div <?php echo $this->get_render_attribute_string('eael-business-reviews-wrapper') ?> >
-			<div <?php echo $this->get_render_attribute_string('eael-business-reviews-items'); ?> >
+		<div <?php echo $this->get_render_attribute_string( 'eael-business-reviews-wrapper' ); ?>>
+			<div <?php echo $this->get_render_attribute_string( 'eael-business-reviews-items' ); ?>>
 				<?php 
 				switch( $business_reviews['source'] ){
 					case 'google-reviews':
@@ -2582,7 +2582,7 @@ class Business_Reviews extends Widget_Base {
 		if( ! empty( $google_reviews_data['reviews'] ) && count( $google_reviews_data['reviews'] ) ){
 			$single_review_data = [];
 			?>
-			<div <?php echo $this->get_render_attribute_string('eael-google-reviews-wrapper'); ?> >
+            <div <?php echo $this->get_render_attribute_string( 'eael-google-reviews-wrapper' ); ?>>
 
 				<div class="eael-google-reviews-items eael-google-reviews-slider">
 					<div class="eael-google-reviews-arrows eael-google-reviews-arrows-outside">
@@ -2597,7 +2597,7 @@ class Business_Reviews extends Widget_Base {
 					
 					</div>
 
-					<div <?php echo $this->get_render_attribute_string('eael-google-reviews-content'); ?> >
+                    <div <?php echo $this->get_render_attribute_string( 'eael-google-reviews-content' ); ?>>
 						<div class="eael-google-reviews-slider-header">
 							<?php if( $business_reviews['business_logo'] ): ?>
 							<div class="eael-google-reviews-business-logo">
@@ -2659,7 +2659,7 @@ class Business_Reviews extends Widget_Base {
 								]);
 								?>
 
-								<div <?php echo $this->get_render_attribute_string('eael-google-reviews-slider-item-' . $i); ?> >
+								<div <?php echo $this->get_render_attribute_string( 'eael-google-reviews-slider-item-' . $i ); ?>>
 									<div class="eael-google-review-reviewer-with-text">
 										<?php 
 										switch( $business_reviews['preset'] ){
@@ -2843,7 +2843,7 @@ class Business_Reviews extends Widget_Base {
 	protected function render_dots() {
 		?>
 		<!-- Add Pagination -->
-		<div class="swiper-pagination swiper-pagination-<?php echo esc_attr($this->get_id()); ?>"></div>
+		<div class="swiper-pagination swiper-pagination-<?php echo esc_attr( $this->get_id() ); ?>"></div>
 		<?php 
 	}
 
@@ -2859,11 +2859,11 @@ class Business_Reviews extends Widget_Base {
 		}
 		?>
 		<!-- Add Arrows -->
-		<div class="swiper-button-next swiper-button-next-<?php echo esc_attr($this->get_id()); ?>">
-			<i class="<?php echo esc_attr($pa_next_arrow); ?>"></i>
+		<div class="swiper-button-next swiper-button-next-<?php echo esc_attr( $this->get_id() ); ?>">
+			<i class="<?php echo esc_attr( $pa_next_arrow ); ?>"></i>
 		</div>
-		<div class="swiper-button-prev swiper-button-prev-<?php echo esc_attr($this->get_id()); ?>">
-			<i class="<?php echo esc_attr($pa_prev_arrow); ?>"></i>
+		<div class="swiper-button-prev swiper-button-prev-<?php echo esc_attr( $this->get_id() ); ?>">
+			<i class="<?php echo esc_attr( $pa_prev_arrow ); ?>"></i>
 		</div>
 		<?php 
 	}
