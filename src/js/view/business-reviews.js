@@ -106,9 +106,13 @@ const swiperPromise =  (swiperElement, swiperConfig) => {
 	});
 }
 
-jQuery(window).on("elementor/frontend/init", function () {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-business-reviews.default",
-        BusinessReviewsHandler
-    );
+ea.hooks.addAction("init", "ea", () => {
+	if (ea.elementStatusCheck('eaelBusinessReviews')) {
+		return false;
+	}
+
+	elementorFrontend.hooks.addAction(
+		"frontend/element_ready/eael-business-reviews.default",
+		BusinessReviewsHandler
+	);
 });
