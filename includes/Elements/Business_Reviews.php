@@ -1,4 +1,5 @@
 <?php
+
 namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
@@ -14,7 +15,7 @@ use Elementor\Icons_Manager;
 use \Elementor\Widget_Base;
 
 class Business_Reviews extends Widget_Base {
-	
+
 	public function get_name() {
 		return 'eael-business-reviews';
 	}
@@ -2347,8 +2348,8 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	/**
-     * API Call to Get Business Reviews
-     */
+	 * API Call to Get Business Reviews
+	 */
 	public function fetch_business_reviews_from_api() {
 		$settings      = $this->get_settings();
 		$response      = [];
@@ -2779,7 +2780,7 @@ class Business_Reviews extends Widget_Base {
 
 	public function print_google_reviews_slider_preset_3( $business_reviews, $single_review_data ) {
 		?>
-		<div class="preset-content-body">
+        <div class="preset-content-body">
 			<?php if ( $business_reviews['review_rating'] ): ?>
                 <div class="eael-google-review-rating">
 					<?php $this->print_business_reviews_ratings( $single_review_data['rating'] ); ?>
