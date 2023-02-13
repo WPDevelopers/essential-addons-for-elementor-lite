@@ -2350,20 +2350,20 @@ class Business_Reviews extends Widget_Base {
      * API Call to Get Business Reviews
      */
 	public function fetch_business_reviews_from_api() {
-		$settings					= $this->get_settings();
-		$response					= [];
-		$error_message 				= '';
+		$settings      = $this->get_settings();
+		$response      = [];
+		$error_message = '';
 
-		$business_reviews			= $this->get_business_reviews_settings();
-		$items      				= get_transient( $business_reviews['cache_key'] );
+		$business_reviews = $this->get_business_reviews_settings();
+		$items            = get_transient( $business_reviews['cache_key'] );
 
 		if ( false === $items ) {
-			switch( $business_reviews['source'] ){
+			switch ( $business_reviews['source'] ) {
 				case 'google-reviews':
-					$data = $this->fetch_google_reviews_from_api($business_reviews);
+					$data = $this->fetch_google_reviews_from_api( $business_reviews );
 					break;
 				default:
-					$data = $this->fetch_google_reviews_from_api($business_reviews);
+					$data = $this->fetch_google_reviews_from_api( $business_reviews );
 					break;
 			}
 
