@@ -91,25 +91,25 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
-        if (empty(get_option('eael_br_google_place_api_key'))) {
-            $this->add_control('eael_br_google_place_api_key_missing', [
-                'type' => Controls_Manager::RAW_HTML,
-                'raw' => sprintf(__('Google Place API key is missing. Please add it from EA Dashboard » Elements » <a href="%s" target="_blank">Business Reviews Settings</a>', 'essential-addons-for-elementor-lite'), esc_attr( site_url('/wp-admin/admin.php?page=eael-settings') )),
-                'content_classes' => 'eael-warning',
-                'condition' => [
-                    'eael_business_reviews_sources' => 'google-reviews',
-                ],
-            ]);
-        }
+		if ( empty( get_option( 'eael_br_google_place_api_key' ) ) ) {
+			$this->add_control( 'eael_br_google_place_api_key_missing', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => sprintf( __( 'Google Place API key is missing. Please add it from EA Dashboard » Elements » <a href="%s" target="_blank">Business Reviews Settings</a>', 'essential-addons-for-elementor-lite' ), esc_attr( site_url( '/wp-admin/admin.php?page=eael-settings' ) ) ),
+				'content_classes' => 'eael-warning',
+				'condition'       => [
+					'eael_business_reviews_sources' => 'google-reviews',
+				],
+			] );
+		}
 
 		$this->add_control( 'eael_business_reviews_business_place_id', [
 			'label'       => esc_html__( 'Place ID', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::TEXT,
-			'description' => sprintf( __('Get Place ID from <a href="%s" target="_blank">here</a>', 'essential-addons-for-elementor-lite'), esc_url( 'https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder' ) ),
+			'description' => sprintf( __( 'Get Place ID from <a href="%s" target="_blank">here</a>', 'essential-addons-for-elementor-lite' ), esc_url( 'https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder' ) ),
 			'placeholder' => esc_html__( 'Place ID', 'essential-addons-for-elementor-lite' ),
 			'label_block' => false,
 			'default'     => '',
-			'condition' => [
+			'condition'   => [
 				'eael_business_reviews_sources' => 'google-reviews',
 			]
 		] );
@@ -122,7 +122,7 @@ class Business_Reviews extends Widget_Base {
 				'default' => 'most_relevant',
 				'options' => [
 					'most_relevant' => __( 'Most Relevant', 'essential-addons-for-elementor-lite' ),
-					'newest' => __( 'Newest', 'essential-addons-for-elementor-lite' ),
+					'newest'        => __( 'Newest', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);
@@ -158,7 +158,7 @@ class Business_Reviews extends Widget_Base {
 				'default' => 'slider',
 				'options' => [
 					'slider' => esc_html__( 'Slider', 'essential-addons-for-elementor-lite' ),
-					'grid' => esc_html__( 'Grid', 'essential-addons-for-elementor-lite' ),
+					'grid'   => esc_html__( 'Grid', 'essential-addons-for-elementor-lite' ),
 				]
 			]
 		);
@@ -199,22 +199,22 @@ class Business_Reviews extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_business_reviews_column',
 			[
-				'label'     		=> esc_html__( 'Columns', 'essential-addons-for-elementor-lite' ),
-				'type'      		=> Controls_Manager::SELECT,
-				'default'   		=> '3',
-				'tablet_default'   	=> '3',
-				'mobile_default'   	=> '3',
-				'options'   => [
+				'label'              => esc_html__( 'Columns', 'essential-addons-for-elementor-lite' ),
+				'type'               => Controls_Manager::SELECT,
+				'default'            => '3',
+				'tablet_default'     => '3',
+				'mobile_default'     => '3',
+				'options'            => [
 					'1' => esc_html__( '1', 'essential-addons-for-elementor-lite' ),
 					'2' => esc_html__( '2', 'essential-addons-for-elementor-lite' ),
 					'3' => esc_html__( '3', 'essential-addons-for-elementor-lite' ),
 					'4' => esc_html__( '4', 'essential-addons-for-elementor-lite' ),
 				],
 				'frontend_available' => true,
-				'condition' => [
-					'eael_business_reviews_items_layout' 			=> 'slider',
-					'eael_business_reviews_style_preset_slider!'	=> 'preset-2',
-					'eael_business_reviews_transition_effect!' 		=> 'coverflow'
+				'condition'          => [
+					'eael_business_reviews_items_layout'         => 'slider',
+					'eael_business_reviews_style_preset_slider!' => 'preset-2',
+					'eael_business_reviews_transition_effect!'   => 'coverflow'
 				],
 			]
 		);
@@ -222,22 +222,22 @@ class Business_Reviews extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_business_reviews_column_preset_2',
 			[
-				'label'     => esc_html__( 'Columns', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => '1',
-				'tablet_default'   	=> '1',
-				'mobile_default'   	=> '1',
-				'options'   => [
+				'label'              => esc_html__( 'Columns', 'essential-addons-for-elementor-lite' ),
+				'type'               => Controls_Manager::SELECT,
+				'default'            => '1',
+				'tablet_default'     => '1',
+				'mobile_default'     => '1',
+				'options'            => [
 					'1' => esc_html__( '1', 'essential-addons-for-elementor-lite' ),
 					'2' => esc_html__( '2', 'essential-addons-for-elementor-lite' ),
 					'3' => esc_html__( '3', 'essential-addons-for-elementor-lite' ),
 					'4' => esc_html__( '4', 'essential-addons-for-elementor-lite' ),
 				],
 				'frontend_available' => true,
-				'condition' => [
-					'eael_business_reviews_items_layout' 		=> 'slider',
+				'condition'          => [
+					'eael_business_reviews_items_layout'        => 'slider',
 					'eael_business_reviews_style_preset_slider' => 'preset-2',
-					'eael_business_reviews_transition_effect!' 	=> 'coverflow'
+					'eael_business_reviews_transition_effect!'  => 'coverflow'
 				],
 			]
 		);
@@ -245,10 +245,10 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_transition_effect',
 			[
-				'label'       => __( 'Effect', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::SELECT,
-				'default'     => 'slide',
-				'options'     => [
+				'label'     => __( 'Effect', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'slide',
+				'options'   => [
 					'slide'     => __( 'Slide', 'essential-addons-for-elementor-lite' ),
 					'coverflow' => __( 'Coverflow', 'essential-addons-for-elementor-lite' ),
 				],
@@ -261,17 +261,17 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_item_gap',
 			[
-				'label'       => __( 'Item Gap', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::SLIDER,
-				'default'     => [ 'size' => 30 ],
-				'range'       => [
+				'label'      => __( 'Item Gap', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'default'    => [ 'size' => 30 ],
+				'range'      => [
 					'px' => [
 						'min'  => 10,
 						'max'  => 300,
 						'step' => 5,
 					],
 				],
-				'size_units'  => '',
+				'size_units' => '',
 			]
 		);
 
@@ -290,7 +290,7 @@ class Business_Reviews extends Widget_Base {
 					],
 				],
 				'size_units'  => '',
-				'condition' => [
+				'condition'   => [
 					'eael_business_reviews_items_layout' => 'slider',
 				],
 			]
@@ -305,7 +305,7 @@ class Business_Reviews extends Widget_Base {
 				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
-				'condition' => [
+				'condition'    => [
 					'eael_business_reviews_items_layout' => 'slider'
 				],
 			]
@@ -314,20 +314,20 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_autoplay_delay',
 			[
-				'label'       => __( 'Autoplay Delay', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::SLIDER,
-				'default'     => [ 'size' => 3000 ],
-				'range'       => [
+				'label'      => __( 'Autoplay Delay', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'default'    => [ 'size' => 3000 ],
+				'range'      => [
 					'px' => [
 						'min'  => 1000,
 						'max'  => 10000,
 						'step' => 100,
 					],
 				],
-				'size_units'  => '',
-				'condition' => [
-					'eael_business_reviews_items_layout' 	=> 'slider',
-					'eael_business_reviews_autoplay'		=> 'yes'
+				'size_units' => '',
+				'condition'  => [
+					'eael_business_reviews_items_layout' => 'slider',
+					'eael_business_reviews_autoplay'     => 'yes'
 				],
 			]
 		);
@@ -341,7 +341,7 @@ class Business_Reviews extends Widget_Base {
 				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
-				'condition' => [
+				'condition'    => [
 					'eael_business_reviews_items_layout' => 'slider'
 				],
 			]
@@ -356,7 +356,7 @@ class Business_Reviews extends Widget_Base {
 				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
-				'condition' => [
+				'condition'    => [
 					'eael_business_reviews_items_layout' => 'slider'
 				],
 			]
@@ -372,7 +372,7 @@ class Business_Reviews extends Widget_Base {
 				'return_value' => 'yes',
 				'default'      => 'yes',
 				'description'  => __( 'Shows grab cursor when you hover over the slider', 'essential-addons-for-elementor-lite' ),
-				'condition' => [
+				'condition'    => [
 					'eael_business_reviews_items_layout' => 'slider'
 				],
 			]
@@ -381,8 +381,8 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_navigation',
 			[
-				'label' 	=> esc_html__( 'Navigation', 'essential-addons-for-elementor-lite' ),
-				'type'  	=> Controls_Manager::HEADING,
+				'label'     => esc_html__( 'Navigation', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
 		);
@@ -396,7 +396,7 @@ class Business_Reviews extends Widget_Base {
 				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
-				'condition' => [
+				'condition'    => [
 					'eael_business_reviews_items_layout' => 'slider'
 				],
 			]
@@ -411,7 +411,7 @@ class Business_Reviews extends Widget_Base {
 				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
-				'condition' => [
+				'condition'    => [
 					'eael_business_reviews_items_layout' => 'slider'
 				],
 			]
@@ -479,7 +479,7 @@ class Business_Reviews extends Widget_Base {
 			'placeholder' => esc_html__( 'Business Name', 'essential-addons-for-elementor-lite' ),
 			'label_block' => false,
 			'default'     => '',
-			'condition' => [
+			'condition'   => [
 				'eael_business_reviews_business_name' => 'yes'
 			]
 		] );
@@ -501,9 +501,9 @@ class Business_Reviews extends Widget_Base {
 			'type'        => Controls_Manager::TEXT,
 			'label_block' => false,
 			'default'     => esc_html__( 'Google Reviews', 'essential-addons-for-elementor-lite' ),
-			'placeholder'     => esc_html__( 'Google Reviews', 'essential-addons-for-elementor-lite' ),
+			'placeholder' => esc_html__( 'Google Reviews', 'essential-addons-for-elementor-lite' ),
 			'condition'   => [
-				'eael_business_reviews_sources' => 'google-reviews',
+				'eael_business_reviews_sources'         => 'google-reviews',
 				'eael_business_reviews_business_rating' => 'yes'
 			],
 		] );
@@ -523,9 +523,9 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_review_content',
 			[
-				'label' => esc_html__( 'Review', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::HEADING,
-				'separator'	=> 'before',
+				'label'     => esc_html__( 'Review', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 			]
 		);
 
@@ -568,9 +568,9 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_reviewer_content',
 			[
-				'label' => esc_html__( 'Reviewer', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::HEADING,
-				'separator'	=> 'before',
+				'label'     => esc_html__( 'Reviewer', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 			]
 		);
 
@@ -631,7 +631,7 @@ class Business_Reviews extends Widget_Base {
 				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em' ],
-				'default'     => [ 'size' => 15 ],
+				'default'    => [ 'size' => 15 ],
 				'selectors'  => [
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-business-reviews-items' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -856,38 +856,38 @@ class Business_Reviews extends Widget_Base {
 		$this->end_controls_tabs();
 
 		$this->add_control(
-            'eael_business_reviews_header_alignment',
-            [
-                'label' => esc_html__('Alignment', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-                    'left' => [
-                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'eicon-text-align-left',
-                    ],
-                    'center' => [
-                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'eicon-text-align-center',
-                    ],
-                    'right' => [
-                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'eicon-text-align-right',
-                    ],
-                ],
-                'default' => 'center',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header' => 'text-align: {{VALUE}};',
-                    '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating' => 'justify-content: {{VALUE}};',
-                ],
-            ]
-        );
+			'eael_business_reviews_header_alignment',
+			[
+				'label'     => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => [
+					'left'   => [
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'default'   => 'center',
+				'selectors' => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header'   => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating' => 'justify-content: {{VALUE}};',
+				],
+			]
+		);
 
 		$this->add_control(
 			'eael_business_reviews_header_business_logo_label',
 			[
-				'label' => esc_html__( 'Business Logo', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::HEADING,
-				'separator'	=> 'before',
+				'label'     => esc_html__( 'Business Logo', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 				'condition' => [
 					'eael_business_reviews_business_logo' => 'yes',
 				],
@@ -910,9 +910,9 @@ class Business_Reviews extends Widget_Base {
 					]
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo span'    => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo span' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo img'  => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo svg'  => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
 				],
 				'condition' => [
 					'eael_business_reviews_business_logo' => 'yes',
@@ -921,20 +921,20 @@ class Business_Reviews extends Widget_Base {
 		);
 
 		$this->add_control(
-            'eael_business_reviews_header_business_logo_color',
-            [
-                'label'            => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
-                'type'             => Controls_Manager::COLOR,
-                'selectors' => [
-                    "{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo span" => 'color: {{VALUE}};',
-                    "{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo svg" => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
-                    "{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo svg path" => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
-                ],
+			'eael_business_reviews_header_business_logo_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					"{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo span"     => 'color: {{VALUE}};',
+					"{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo svg"      => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
+					"{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-logo svg path" => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
+				],
 				'condition' => [
 					'eael_business_reviews_business_logo' => 'yes',
 				],
-            ]
-        );
+			]
+		);
 
 		$this->add_responsive_control(
 			'eael_business_reviews_header_business_logo_margin',
@@ -965,13 +965,13 @@ class Business_Reviews extends Widget_Base {
 				],
 			]
 		);
-		
+
 		$this->add_control(
 			'eael_business_reviews_header_business_name_label',
 			[
-				'label' => esc_html__( 'Business Name', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::HEADING,
-				'separator'	=> 'before',
+				'label'     => esc_html__( 'Business Name', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 				'condition' => [
 					'eael_business_reviews_business_name' => 'yes',
 				],
@@ -981,8 +981,8 @@ class Business_Reviews extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name'     => 'eael_business_reviews_header_business_name_typography',
-				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-name a',
+				'name'      => 'eael_business_reviews_header_business_name_typography',
+				'selector'  => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-name a',
 				'condition' => [
 					'eael_business_reviews_business_name' => 'yes',
 				],
@@ -995,7 +995,7 @@ class Business_Reviews extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-name' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-name'   => 'color: {{VALUE}};',
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-name a' => 'color: {{VALUE}};',
 				],
 				'condition' => [
@@ -1037,9 +1037,9 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_header_business_rating_label',
 			[
-				'label' => esc_html__( 'Business Rating', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::HEADING,
-				'separator'	=> 'before',
+				'label'     => esc_html__( 'Business Rating', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 				'condition' => [
 					'eael_business_reviews_business_rating' => 'yes',
 				],
@@ -1049,8 +1049,8 @@ class Business_Reviews extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name'     => 'eael_business_reviews_header_business_rating_typography',
-				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating, {{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating a',
+				'name'      => 'eael_business_reviews_header_business_rating_typography',
+				'selector'  => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating, {{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating a',
 				'condition' => [
 					'eael_business_reviews_business_rating' => 'yes',
 				],
@@ -1063,7 +1063,7 @@ class Business_Reviews extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating'   => 'color: {{VALUE}};',
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating a' => 'color: {{VALUE}};',
 				],
 				'condition' => [
@@ -1078,7 +1078,7 @@ class Business_Reviews extends Widget_Base {
 				'label'     => esc_html__( 'Star Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating svg'      => 'fill: {{VALUE}};',
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating svg path' => 'fill: {{VALUE}};',
 				],
 				'condition' => [
@@ -1092,16 +1092,16 @@ class Business_Reviews extends Widget_Base {
 			[
 				'label'      => esc_html__( 'Star Size', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
-				'range'                 => [
+				'range'      => [
 					'px' => [
-						'min'   => 15,
-						'max'   => 200,
-						'step'  => 1,
+						'min'  => 15,
+						'max'  => 200,
+						'step' => 1,
 					],
 				],
-				'size_units'            => ['px'],
+				'size_units' => [ 'px' ],
 				'selectors'  => [
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating svg'      => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating svg path' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
@@ -1143,9 +1143,9 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_header_business_address_label',
 			[
-				'label' => esc_html__( 'Business Address', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::HEADING,
-				'separator'	=> 'before',
+				'label'     => esc_html__( 'Business Address', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 				'condition' => [
 					'eael_business_reviews_business_address' => 'yes',
 				],
@@ -1155,8 +1155,8 @@ class Business_Reviews extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name'     => 'eael_business_reviews_header_business_address_typography',
-				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-address, {{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-address a',
+				'name'      => 'eael_business_reviews_header_business_address_typography',
+				'selector'  => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-address, {{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-address a',
 				'condition' => [
 					'eael_business_reviews_business_address' => 'yes',
 				],
@@ -1169,7 +1169,7 @@ class Business_Reviews extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-address' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-address'   => 'color: {{VALUE}};',
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-address a' => 'color: {{VALUE}};',
 				],
 				'condition' => [
@@ -1406,8 +1406,8 @@ class Business_Reviews extends Widget_Base {
 				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item' => 'background: {{VALUE}};',
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item .preset-extra-shadow svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item'                               => 'background: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item .preset-extra-shadow svg'      => 'fill: {{VALUE}};',
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item .preset-extra-shadow svg path' => 'fill: {{VALUE}}; display:none',
 				],
 			]
@@ -1469,9 +1469,9 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_reviewer_photo_label',
 			[
-				'label' => esc_html__( 'Reviewer Avatar', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::HEADING,
-				'separator'	=> 'before',
+				'label'     => esc_html__( 'Reviewer Avatar', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 				'condition' => [
 					'eael_business_reviews_reviewer_photo' => 'yes',
 				],
@@ -1513,19 +1513,19 @@ class Business_Reviews extends Widget_Base {
 			[
 				'label'      => esc_html__( 'Photo Size', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
-				'range'                 => [
+				'range'      => [
 					'px' => [
-						'min'   => 15,
-						'max'   => 100,
-						'step'  => 1,
+						'min'  => 15,
+						'max'  => 100,
+						'step' => 1,
 					],
 				],
-				'default'      	=> ['size' => '50'],
-				'size_units'	=> ['px'],
-				'selectors'  	=> [
+				'default'    => [ 'size' => '50' ],
+				'size_units' => [ 'px' ],
+				'selectors'  => [
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-photo img' => 'width: {{SIZE}}{{UNIT}};',
 				],
-				'condition'  	=> [
+				'condition'  => [
 					'eael_business_reviews_reviewer_photo' => 'yes',
 				],
 			]
@@ -1534,9 +1534,9 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_reviewer_name_label',
 			[
-				'label' => esc_html__( 'Reviewer Name', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::HEADING,
-				'separator'	=> 'before',
+				'label'     => esc_html__( 'Reviewer Name', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 				'condition' => [
 					'eael_business_reviews_reviewer_name' => 'yes',
 				],
@@ -1546,8 +1546,8 @@ class Business_Reviews extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name'     => 'eael_business_reviews_reviewer_name_typography',
-				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-name a',
+				'name'      => 'eael_business_reviews_reviewer_name_typography',
+				'selector'  => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-name a',
 				'condition' => [
 					'eael_business_reviews_reviewer_name' => 'yes',
 				],
@@ -1560,7 +1560,7 @@ class Business_Reviews extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-name' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-name'   => 'color: {{VALUE}};',
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-reviewer-name a' => 'color: {{VALUE}};',
 				],
 				'condition' => [
@@ -1602,9 +1602,9 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_review_time_label',
 			[
-				'label' => esc_html__( 'Review Time', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::HEADING,
-				'separator'	=> 'before',
+				'label'     => esc_html__( 'Review Time', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 				'condition' => [
 					'eael_business_reviews_review_time' => 'yes',
 				],
@@ -1614,8 +1614,8 @@ class Business_Reviews extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name'     => 'eael_business_reviews_review_time_typography',
-				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-time, {{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-time a',
+				'name'      => 'eael_business_reviews_review_time_typography',
+				'selector'  => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-time, {{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-time a',
 				'condition' => [
 					'eael_business_reviews_review_time' => 'yes',
 				],
@@ -1628,7 +1628,7 @@ class Business_Reviews extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-time' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-time'   => 'color: {{VALUE}};',
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-time a' => 'color: {{VALUE}};',
 				],
 				'condition' => [
@@ -1670,9 +1670,9 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_review_text_label',
 			[
-				'label' => esc_html__( 'Review Text', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::HEADING,
-				'separator'	=> 'before',
+				'label'     => esc_html__( 'Review Text', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 				'condition' => [
 					'eael_business_reviews_review_text' => 'yes',
 				],
@@ -1682,8 +1682,8 @@ class Business_Reviews extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name'     => 'eael_business_reviews_review_text_typography',
-				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text, {{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text a',
+				'name'      => 'eael_business_reviews_review_text_typography',
+				'selector'  => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text, {{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text a',
 				'condition' => [
 					'eael_business_reviews_review_text' => 'yes',
 				],
@@ -1696,7 +1696,7 @@ class Business_Reviews extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text'   => 'color: {{VALUE}};',
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text a' => 'color: {{VALUE}};',
 				],
 				'condition' => [
@@ -1738,26 +1738,26 @@ class Business_Reviews extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
-				'name'     => 'eael_business_reviews_review_text_outer_border',
-				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item .preset-content-body',
+				'name'           => 'eael_business_reviews_review_text_outer_border',
+				'selector'       => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-item .preset-content-body',
 				'fields_options' => [
-                    'border' => [
-                        'default' => 'none',
-                    ],
-                    'width' => [
-                        'default'      => [
-                            'top'      => '1',
-                            'right'    => '1',
-                            'bottom'   => '1',
-                            'left'     => '1',
-                            'isLinked' => false,
-                        ],
-                    ],
-                    'color' => [
-                        'default' => '#f5f5f5',
-                    ],
-                ],
-				'condition'  => [
+					'border' => [
+						'default' => 'none',
+					],
+					'width'  => [
+						'default' => [
+							'top'      => '1',
+							'right'    => '1',
+							'bottom'   => '1',
+							'left'     => '1',
+							'isLinked' => false,
+						],
+					],
+					'color'  => [
+						'default' => '#f5f5f5',
+					],
+				],
+				'condition'      => [
 					'eael_business_reviews_style_preset_slider' => 'preset-3',
 				],
 			]
@@ -1766,9 +1766,9 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_review_rating_label',
 			[
-				'label' => esc_html__( 'Review Rating', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::HEADING,
-				'separator'	=> 'before',
+				'label'     => esc_html__( 'Review Rating', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 				'condition' => [
 					'eael_business_reviews_review_rating' => 'yes',
 				],
@@ -1781,7 +1781,7 @@ class Business_Reviews extends Widget_Base {
 				'label'     => esc_html__( 'Star Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-rating svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-rating svg'      => 'fill: {{VALUE}};',
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-rating svg path' => 'fill: {{VALUE}};',
 				],
 				'condition' => [
@@ -1795,16 +1795,16 @@ class Business_Reviews extends Widget_Base {
 			[
 				'label'      => esc_html__( 'Star Size', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
-				'range'                 => [
+				'range'      => [
 					'px' => [
-						'min'   => 15,
-						'max'   => 200,
-						'step'  => 1,
+						'min'  => 15,
+						'max'  => 200,
+						'step' => 1,
 					],
 				],
-				'size_units'            => ['px'],
+				'size_units' => [ 'px' ],
 				'selectors'  => [
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-rating svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-rating svg'      => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-rating svg path' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
@@ -1844,30 +1844,30 @@ class Business_Reviews extends Widget_Base {
 		);
 
 		$this->add_control(
-            'eael_business_reviews_review_rating_star_alignment',
-            [
-                'label' => esc_html__('Alignment', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-                    'left' => [
-                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'eicon-text-align-left',
-                    ],
-                    'center' => [
-                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'eicon-text-align-center',
-                    ],
-                    'right' => [
-                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'eicon-text-align-right',
-                    ],
-                ],
-                'default' => 'center',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-rating' => 'text-align: {{VALUE}};',
-                ],
-            ]
-        );
+			'eael_business_reviews_review_rating_star_alignment',
+			[
+				'label'     => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => [
+					'left'   => [
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'  => [
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'default'   => 'center',
+				'selectors' => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-rating' => 'text-align: {{VALUE}};',
+				],
+			]
+		);
 
 		$this->end_controls_section();
 
@@ -1879,10 +1879,10 @@ class Business_Reviews extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_business_reviews_arrows_style',
 			[
-				'label' 	=> esc_html__( 'Arrows', 'essential-addons-for-elementor-lite' ),
-				'tab'   	=> Controls_Manager::TAB_STYLE,
-				'condition'	=> [
-					'eael_business_reviews_arrows'	=> 'yes',
+				'label'     => esc_html__( 'Arrows', 'essential-addons-for-elementor-lite' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'eael_business_reviews_arrows' => 'yes',
 				],
 			]
 		);
@@ -1890,23 +1890,23 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_arrows_type',
 			[
-				'label'                 => __('Choose Arrow', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::SELECT,
-				'label_block'           => true,
-				'default'               => 'fa fa-angle-right',
-				'options'               => [
-					'fa fa-angle-right'             => __('Angle', 'essential-addons-for-elementor-lite'),
-					'fa fa-angle-double-right'      => __('Double Angle', 'essential-addons-for-elementor-lite'),
-					'fa fa-chevron-right'           => __('Chevron', 'essential-addons-for-elementor-lite'),
-					'fa fa-chevron-circle-right'    => __('Chevron Circle', 'essential-addons-for-elementor-lite'),
-					'fa fa-arrow-right'             => __('Arrow', 'essential-addons-for-elementor-lite'),
-					'fa fa-long-arrow-right'        => __('Long Arrow', 'essential-addons-for-elementor-lite'),
-					'fa fa-caret-right'             => __('Caret', 'essential-addons-for-elementor-lite'),
-					'fa fa-caret-square-o-right'    => __('Caret Square', 'essential-addons-for-elementor-lite'),
-					'fa fa-arrow-circle-right'      => __('Arrow Circle', 'essential-addons-for-elementor-lite'),
-					'fa fa-arrow-circle-o-right'    => __('Arrow Circle O', 'essential-addons-for-elementor-lite'),
-					'fa fa-toggle-right'            => __('Toggle', 'essential-addons-for-elementor-lite'),
-					'fa fa-hand-o-right'            => __('Hand', 'essential-addons-for-elementor-lite'),
+				'label'       => __( 'Choose Arrow', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::SELECT,
+				'label_block' => true,
+				'default'     => 'fa fa-angle-right',
+				'options'     => [
+					'fa fa-angle-right'          => __( 'Angle', 'essential-addons-for-elementor-lite' ),
+					'fa fa-angle-double-right'   => __( 'Double Angle', 'essential-addons-for-elementor-lite' ),
+					'fa fa-chevron-right'        => __( 'Chevron', 'essential-addons-for-elementor-lite' ),
+					'fa fa-chevron-circle-right' => __( 'Chevron Circle', 'essential-addons-for-elementor-lite' ),
+					'fa fa-arrow-right'          => __( 'Arrow', 'essential-addons-for-elementor-lite' ),
+					'fa fa-long-arrow-right'     => __( 'Long Arrow', 'essential-addons-for-elementor-lite' ),
+					'fa fa-caret-right'          => __( 'Caret', 'essential-addons-for-elementor-lite' ),
+					'fa fa-caret-square-o-right' => __( 'Caret Square', 'essential-addons-for-elementor-lite' ),
+					'fa fa-arrow-circle-right'   => __( 'Arrow Circle', 'essential-addons-for-elementor-lite' ),
+					'fa fa-arrow-circle-o-right' => __( 'Arrow Circle O', 'essential-addons-for-elementor-lite' ),
+					'fa fa-toggle-right'         => __( 'Toggle', 'essential-addons-for-elementor-lite' ),
+					'fa fa-hand-o-right'         => __( 'Hand', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);
@@ -1914,37 +1914,38 @@ class Business_Reviews extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_business_reviews_arrows_width',
 			[
-				'label'                 => __('Width', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::SLIDER,
-				'default'               => ['size' => '27'],
-				'range'                 => [
+				'label'      => __( 'Width', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'default'    => [ 'size' => '27' ],
+				'range'      => [
 					'px' => [
-						'min'   => 15,
-						'max'   => 200,
-						'step'  => 1,
+						'min'  => 15,
+						'max'  => 200,
+						'step' => 1,
 					],
 				],
-				'size_units'            => ['px'],
-				'selectors'             => [
+				'size_units' => [ 'px' ],
+				'selectors'  => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
+
 		$this->add_responsive_control(
 			'eael_business_reviews_arrows_height',
 			[
-				'label'                 => __('Height', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::SLIDER,
-				'default'               => ['size' => '44'],
-				'range'                 => [
+				'label'      => __( 'Height', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'default'    => [ 'size' => '44' ],
+				'range'      => [
 					'px' => [
-						'min'   => 15,
-						'max'   => 200,
-						'step'  => 1,
+						'min'  => 15,
+						'max'  => 200,
+						'step' => 1,
 					],
 				],
-				'size_units'            => ['px'],
-				'selectors'             => [
+				'size_units' => [ 'px' ],
+				'selectors'  => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'height: {{SIZE}}{{UNIT}};',
 				],
 			]
@@ -1953,18 +1954,18 @@ class Business_Reviews extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_business_reviews_arrows_size',
 			[
-				'label'                 => __('Font Size', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::SLIDER,
-				'default'               => ['size' => '22'],
-				'range'                 => [
+				'label'      => __( 'Font Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'default'    => [ 'size' => '22' ],
+				'range'      => [
 					'px' => [
-						'min'   => 15,
-						'max'   => 100,
-						'step'  => 1,
+						'min'  => 15,
+						'max'  => 100,
+						'step' => 1,
 					],
 				],
-				'size_units'            => ['px'],
-				'selectors'             => [
+				'size_units' => [ 'px' ],
+				'selectors'  => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
 			]
@@ -1973,17 +1974,17 @@ class Business_Reviews extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_business_reviews_arrows_left_position',
 			[
-				'label'                 => __('Align Left Arrow', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::SLIDER,
-				'range'                 => [
+				'label'      => __( 'Align Left Arrow', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'range'      => [
 					'px' => [
-						'min'   => -100,
-						'max'   => 40,
-						'step'  => 1,
+						'min'  => - 100,
+						'max'  => 40,
+						'step' => 1,
 					],
 				],
-				'size_units'            => ['px'],
-				'selectors'         => [
+				'size_units' => [ 'px' ],
+				'selectors'  => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'left: {{SIZE}}{{UNIT}};',
 				],
 			]
@@ -1992,38 +1993,38 @@ class Business_Reviews extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_business_reviews_arrows_right_position',
 			[
-				'label'                 => __('Align Right Arrow', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::SLIDER,
-				'range'                 => [
+				'label'      => __( 'Align Right Arrow', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'range'      => [
 					'px' => [
-						'min'   => -100,
-						'max'   => 40,
-						'step'  => 1,
+						'min'  => - 100,
+						'max'  => 40,
+						'step' => 1,
 					],
 				],
-				'size_units'            => ['px'],
-				'selectors'         => [
+				'size_units' => [ 'px' ],
+				'selectors'  => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next' => 'right: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
 
-		$this->start_controls_tabs('eael_business_reviews_arrows_tabs_style');
+		$this->start_controls_tabs( 'eael_business_reviews_arrows_tabs_style' );
 
 		$this->start_controls_tab(
 			'eael_business_reviews_arrows_tab_normal',
 			[
-				'label'                 => __('Normal', 'essential-addons-for-elementor-lite'),
+				'label' => __( 'Normal', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'eael_business_reviews_arrows_bg_color_normal',
 			[
-				'label'                 => __('Background Color', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::COLOR,
-				'default'               => '',
-				'selectors'             => [
+				'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'background-color: {{VALUE}};',
 				],
 			]
@@ -2032,10 +2033,10 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_arrows_color_normal',
 			[
-				'label'                 => __('Color', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::COLOR,
-				'default'               => '',
-				'selectors'             => [
+				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'color: {{VALUE}};',
 				],
 			]
@@ -2044,21 +2045,21 @@ class Business_Reviews extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
-				'name'                  => 'eael_business_reviews_arrows_border_normal',
-				'label'                 => __('Border', 'essential-addons-for-elementor-lite'),
-				'placeholder'           => '1px',
-				'default'               => '1px',
-				'selector'              => '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev'
+				'name'        => 'eael_business_reviews_arrows_border_normal',
+				'label'       => __( 'Border', 'essential-addons-for-elementor-lite' ),
+				'placeholder' => '1px',
+				'default'     => '1px',
+				'selector'    => '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev'
 			]
 		);
 
 		$this->add_control(
 			'eael_business_reviews_arrows_border_radius_normal',
 			[
-				'label'                 => __('Border Radius', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::DIMENSIONS,
-				'size_units'            => ['px', '%'],
-				'selectors'             => [
+				'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
@@ -2069,17 +2070,17 @@ class Business_Reviews extends Widget_Base {
 		$this->start_controls_tab(
 			'eael_business_reviews_arrows_tab_hover',
 			[
-				'label'                 => __('Hover', 'essential-addons-for-elementor-lite'),
+				'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'eael_business_reviews_arrows_bg_color_hover',
 			[
-				'label'                 => __('Background Color', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::COLOR,
-				'default'               => '',
-				'selectors'             => [
+				'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'background-color: {{VALUE}};',
 				],
 			]
@@ -2088,10 +2089,10 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_arrows_color_hover',
 			[
-				'label'                 => __('Color', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::COLOR,
-				'default'               => '',
-				'selectors'             => [
+				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'color: {{VALUE}};',
 				],
 			]
@@ -2100,10 +2101,10 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_arrows_border_color_hover',
 			[
-				'label'                 => __('Border Color', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::COLOR,
-				'default'               => '',
-				'selectors'             => [
+				'label'     => __( 'Border Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'border-color: {{VALUE}};',
 				],
 			]
@@ -2123,10 +2124,10 @@ class Business_Reviews extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_business_reviews_dots_style',
 			[
-				'label' 	=> esc_html__( 'Dots', 'essential-addons-for-elementor-lite' ),
-				'tab'   	=> Controls_Manager::TAB_STYLE,
-				'condition'	=> [
-					'eael_business_reviews_dots'	=> 'yes',
+				'label'     => esc_html__( 'Dots', 'essential-addons-for-elementor-lite' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'eael_business_reviews_dots' => 'yes',
 				],
 			]
 		);
@@ -2134,17 +2135,17 @@ class Business_Reviews extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_business_reviews_dots_size',
 			[
-				'label'                 => __('Size', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::SLIDER,
-				'range'                 => [
+				'label'      => __( 'Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'range'      => [
 					'px' => [
-						'min'   => 2,
-						'max'   => 40,
-						'step'  => 1,
+						'min'  => 2,
+						'max'  => 40,
+						'step' => 1,
 					],
 				],
-				'size_units'            => '',
-				'selectors'             => [
+				'size_units' => '',
+				'selectors'  => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
 				],
 			]
@@ -2153,38 +2154,38 @@ class Business_Reviews extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_business_reviews_dots_spacing',
 			[
-				'label'                 => __('Spacing', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::SLIDER,
-				'range'                 => [
+				'label'      => __( 'Spacing', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'range'      => [
 					'px' => [
-						'min'   => 1,
-						'max'   => 30,
-						'step'  => 1,
+						'min'  => 1,
+						'max'  => 30,
+						'step' => 1,
 					],
 				],
-				'size_units'            => '',
-				'selectors'             => [
+				'size_units' => '',
+				'selectors'  => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'margin-left: {{SIZE}}{{UNIT}}; margin-right: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
 
-		$this->start_controls_tabs('eael_business_reviews_dots_tabs_style');
+		$this->start_controls_tabs( 'eael_business_reviews_dots_tabs_style' );
 
 		$this->start_controls_tab(
 			'eael_business_reviews_dots_tab_normal',
 			[
-				'label'                 => __('Normal', 'essential-addons-for-elementor-lite'),
+				'label' => __( 'Normal', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'eael_business_reviews_dots_color_normal',
 			[
-				'label'                 => __('Color', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::COLOR,
-				'default'               => '',
-				'selectors'             => [
+				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'background: {{VALUE}};',
 				],
 			]
@@ -2193,10 +2194,10 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_active_dot_color_normal',
 			[
-				'label'                 => __('Active Color', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::COLOR,
-				'default'               => '',
-				'selectors'             => [
+				'label'     => __( 'Active Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet-active' => 'background: {{VALUE}};',
 				],
 			]
@@ -2205,21 +2206,21 @@ class Business_Reviews extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
-				'name'                  => 'eael_business_reviews_dots_border_normal',
-				'label'                 => __('Border', 'essential-addons-for-elementor-lite'),
-				'placeholder'           => '1px',
-				'default'               => '1px',
-				'selector'              => '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet',
+				'name'        => 'eael_business_reviews_dots_border_normal',
+				'label'       => __( 'Border', 'essential-addons-for-elementor-lite' ),
+				'placeholder' => '1px',
+				'default'     => '1px',
+				'selector'    => '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet',
 			]
 		);
 
 		$this->add_control(
 			'eael_business_reviews_dots_border_radius_normal',
 			[
-				'label'                 => __('Border Radius', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::DIMENSIONS,
-				'size_units'            => ['px', '%'],
-				'selectors'             => [
+				'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
@@ -2230,17 +2231,17 @@ class Business_Reviews extends Widget_Base {
 		$this->start_controls_tab(
 			'eael_business_reviews_dots_tab_hover',
 			[
-				'label'                 => __('Hover', 'essential-addons-for-elementor-lite'),
+				'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'eael_business_reviews_dots_color_hover',
 			[
-				'label'                 => __('Color', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::COLOR,
-				'default'               => '',
-				'selectors'             => [
+				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet:hover' => 'background: {{VALUE}};',
 				],
 			]
@@ -2249,10 +2250,10 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_dots_border_color_hover',
 			[
-				'label'                 => __('Border Color', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::COLOR,
-				'default'               => '',
-				'selectors'             => [
+				'label'     => __( 'Border Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet:hover' => 'border-color: {{VALUE}};',
 				],
 			]
@@ -2265,17 +2266,17 @@ class Business_Reviews extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_business_reviews_dots_padding',
 			[
-				'label'                 => __('Padding', 'essential-addons-for-elementor-lite'),
-				'type'                  => Controls_Manager::DIMENSIONS,
-				'size_units'            => ['px', 'em', '%'],
-				'allowed_dimensions'    => 'vertical',
-				'placeholder'           => [
-					'top'      => '',
-					'right'    => 'auto',
-					'bottom'   => '',
-					'left'     => 'auto',
+				'label'              => __( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'               => Controls_Manager::DIMENSIONS,
+				'size_units'         => [ 'px', 'em', '%' ],
+				'allowed_dimensions' => 'vertical',
+				'placeholder'        => [
+					'top'    => '',
+					'right'  => 'auto',
+					'bottom' => '',
+					'left'   => 'auto',
 				],
-				'selectors'             => [
+				'selectors'          => [
 					'{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullets' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
@@ -2901,7 +2902,7 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	protected function render() {
-		$business_reviews_items = $this->fetch_business_reviews_from_api(); 
+		$business_reviews_items = $this->fetch_business_reviews_from_api();
 		$this->print_business_reviews( $business_reviews_items );
 	}
 }
