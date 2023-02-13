@@ -2381,34 +2381,34 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function fetch_google_reviews_from_api( $business_reviews_settings ) {
-		$business_reviews 					= $business_reviews_settings;
-		
-		$url   	= "https://maps.googleapis.com/maps/api/place/details/json";
-		$param 	= array();
+		$business_reviews = $business_reviews_settings;
+
+		$url           = "https://maps.googleapis.com/maps/api/place/details/json";
+		$param         = array();
 		$error_message = '';
-		
-		$args 	= array(
-			'key' 	  => sanitize_text_field( $business_reviews['api_key'] ),
+
+		$args = array(
+			'key'     => sanitize_text_field( $business_reviews['api_key'] ),
 			'placeid' => sanitize_text_field( $business_reviews['place_id'] ),
 			'fields'  => sanitize_text_field( 'formatted_address,international_phone_number,name,rating,reviews,url,user_ratings_total,website,photos' ),
 		);
 
-		if( ! empty( $business_reviews['reviews_sort'] ) ){
+		if ( ! empty( $business_reviews['reviews_sort'] ) ) {
 			$args['reviews_sort'] = $business_reviews['reviews_sort'];
 		}
-		
-		$param 		= array_merge( $param, $args );
-		
-		$headers	= array(
+
+		$param = array_merge( $param, $args );
+
+		$headers = array(
 			'headers' => array(
 				'Content-Type' => 'application/json',
 			)
 		);
-		$options 	= array(
+		$options = array(
 			'timeout' => 240
 		);
 
-		$options 	= array_merge( $headers, $options );
+		$options = array_merge( $headers, $options );
 
 		if ( empty( $error_message ) ) {
 			$response = wp_remote_get(
@@ -2417,12 +2417,12 @@ class Business_Reviews extends Widget_Base {
 			);
 
 			$body     = json_decode( wp_remote_retrieve_body( $response ) );
-			$response = 'OK' === $body->status ? $body->result : false;				
+			$response = 'OK' === $body->status ? $body->result : false;
 
 			if ( ! empty( $response ) ) {
 				set_transient( $business_reviews['cache_key'], $response, $business_reviews['expiration'] );
 			} else {
-				$error_message = $this->fetch_google_place_response_error_message($body->status);
+				$error_message = $this->fetch_google_place_response_error_message( $body->status );
 			}
 		}
 
