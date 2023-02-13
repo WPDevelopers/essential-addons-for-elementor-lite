@@ -40,7 +40,13 @@ class Business_Reviews extends Widget_Base {
 			'google reviews',
 			'ea google reviews',
 			'ea',
-			'essential addons'
+			'essential addons',
+			'testimonial',
+			'google testimonial',
+			'reviews carousel',
+			'reviews slider',
+			'carousel',
+			'slider'
 		];
 	}
 
