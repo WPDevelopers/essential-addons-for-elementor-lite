@@ -2840,39 +2840,39 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function print_google_reviews_grid( $google_reviews_data ) {
-		$business_reviews		= $this->get_business_reviews_settings();
+		$business_reviews = $this->get_business_reviews_settings();
 	}
 
 	protected function render_dots() {
 		?>
-		<!-- Add Pagination -->
-		<div class="swiper-pagination swiper-pagination-<?php echo esc_attr( $this->get_id() ); ?>"></div>
-		<?php 
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-<?php echo esc_attr( $this->get_id() ); ?>"></div>
+		<?php
 	}
 
 	protected function render_arrows() {
-		$business_reviews	= $this->get_business_reviews_settings();
+		$business_reviews = $this->get_business_reviews_settings();
 
-		if( ! empty( $business_reviews['arrows_type'] ) ){
+		if ( ! empty( $business_reviews['arrows_type'] ) ) {
 			$pa_next_arrow = $business_reviews['arrows_type'];
-			$pa_prev_arrow = str_replace("right", "left", $business_reviews['arrows_type']);
+			$pa_prev_arrow = str_replace( "right", "left", $business_reviews['arrows_type'] );
 		} else {
 			$pa_next_arrow = 'fa fa-angle-right';
 			$pa_prev_arrow = 'fa fa-angle-left';
 		}
 		?>
-		<!-- Add Arrows -->
-		<div class="swiper-button-next swiper-button-next-<?php echo esc_attr( $this->get_id() ); ?>">
-			<i class="<?php echo esc_attr( $pa_next_arrow ); ?>"></i>
-		</div>
-		<div class="swiper-button-prev swiper-button-prev-<?php echo esc_attr( $this->get_id() ); ?>">
-			<i class="<?php echo esc_attr( $pa_prev_arrow ); ?>"></i>
-		</div>
-		<?php 
+        <!-- Add Arrows -->
+        <div class="swiper-button-next swiper-button-next-<?php echo esc_attr( $this->get_id() ); ?>">
+            <i class="<?php echo esc_attr( $pa_next_arrow ); ?>"></i>
+        </div>
+        <div class="swiper-button-prev swiper-button-prev-<?php echo esc_attr( $this->get_id() ); ?>">
+            <i class="<?php echo esc_attr( $pa_prev_arrow ); ?>"></i>
+        </div>
+		<?php
 	}
 
 	public function print_business_reviews_ratings( $rating ) {
-		if( empty( $rating ) || intval( $rating ) > 5 ){
+		if ( empty( $rating ) || intval( $rating ) > 5 ) {
 			return false;
 		}
 
@@ -2891,13 +2891,13 @@ class Business_Reviews extends Widget_Base {
 		</defs>
 		</svg>
 		';
-		
-		for( $i = 1; $i <= floor( $rating ); $i++){
-			printf("%s", $rating_svg);
+
+		for ( $i = 1; $i <= floor( $rating ); $i ++ ) {
+			printf( "%s", $rating_svg );
 		}
 
-		if( ! is_int( $rating ) ){
-			printf("%s", $rating_svg_half);
+		if ( ! is_int( $rating ) ) {
+			printf( "%s", $rating_svg_half );
 		}
 
 		return true;
