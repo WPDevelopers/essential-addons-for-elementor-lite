@@ -404,7 +404,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	    $this->add_control(
 		    'eael_product_carousel_quick_view',
 		    [
-			    'label'        => esc_html__( 'Show Quick view?', 'essential-addons-for-elementor-lite' ),
+			    'label'        => esc_html__( 'Show Quick View?', 'essential-addons-for-elementor-lite' ),
 			    'type'         => Controls_Manager::SWITCHER,
 			    'return_value' => 'yes',
 			    'default'      => 'yes',
@@ -414,10 +414,9 @@ class Woo_Product_Carousel extends Widget_Base {
         $this->add_control(
             'eael_product_quick_view_title_tag',
             [
-                'label' => __('Quick view Title Tag', 'essential-addons-for-elementor-lite'),
+                'label' => __('Quick View Title Tag', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'h1',
-                'separator' => 'after',
                 'options' => [
                     'h1' => __('H1', 'essential-addons-for-elementor-lite'),
                     'h2' => __('H2', 'essential-addons-for-elementor-lite'),
@@ -442,6 +441,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			    'type' => Controls_Manager::SWITCHER,
 			    'return_value' => 'yes',
 			    'default' => 'no',
+                'separator' => 'before',
 		    ]
 	    );
 

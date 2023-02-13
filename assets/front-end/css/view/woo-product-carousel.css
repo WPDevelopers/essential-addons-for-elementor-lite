@@ -1208,6 +1208,12 @@
       -ms-flex-align: center;
           align-items: center;
 }
+.theme-astra .eael-woo-product-carousel-container.preset-2 .eael-product-carousel .carousel-overlay, .theme-astra .eael-woo-product-carousel-container.preset-4 .eael-product-carousel .carousel-overlay {
+  z-index: 1;
+}
+.theme-astra .eael-woo-product-carousel-container.preset-2 .eael-product-carousel .product-overlay-content, .theme-astra .eael-woo-product-carousel-container.preset-4 .eael-product-carousel .product-overlay-content {
+  z-index: 2;
+}
 .theme-blocksy .button:before {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)";
   -webkit-filter: none !important;
