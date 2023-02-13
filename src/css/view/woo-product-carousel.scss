@@ -1584,6 +1584,19 @@ $theme-preset4: #ec3b75;
         flex-direction: row;
         align-items: center;
     }
+    .eael-woo-product-carousel-container{
+        &.preset-2,
+        &.preset-4{
+            .eael-product-carousel{
+                .carousel-overlay{
+                    z-index: 1;
+                }
+                .product-overlay-content{
+                    z-index: 2;
+                }
+            }
+        }
+    }
 }
 
 // blocksy theme conflicts
