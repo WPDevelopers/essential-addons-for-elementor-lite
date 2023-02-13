@@ -2437,7 +2437,7 @@ class Business_Reviews extends Widget_Base {
 	public function fetch_google_place_response_error_message( $status = 'OK' ) {
 		$error_message = '';
 
-		switch( $status ){
+		switch ( $status ) {
 			case 'OK':
 				break;
 
@@ -2466,26 +2466,26 @@ class Business_Reviews extends Widget_Base {
 				break;
 
 			default:
-				break;								
+				break;
 		}
 
 		return $error_message;
 	}
 
 	public function print_business_reviews( $business_reviews_items ) {
-		$settings 				= $this->get_settings();
-		$business_reviews		= $this->get_business_reviews_settings();
+		$settings         = $this->get_settings();
+		$business_reviews = $this->get_business_reviews_settings();
 
 		ob_start();
-		
+
 		$this->add_render_attribute( 'eael-business-reviews-wrapper', [
-			'class'                 => [
+			'class'       => [
 				'eael-business-reviews-wrapper',
 				'eael-business-reviews-' . $this->get_id(),
 				'clearfix',
 			],
-			'data-source'			=> esc_attr( $business_reviews['source'] ),
-			'data-layout'			=> esc_attr( $business_reviews['layout'] ),
+			'data-source' => esc_attr( $business_reviews['source'] ),
+			'data-layout' => esc_attr( $business_reviews['layout'] ),
 		] );
 
 		$this->add_render_attribute(
@@ -2501,22 +2501,22 @@ class Business_Reviews extends Widget_Base {
 		);
 		?>
 
-		<div <?php echo $this->get_render_attribute_string( 'eael-business-reviews-wrapper' ); ?>>
-			<div <?php echo $this->get_render_attribute_string( 'eael-business-reviews-items' ); ?>>
-				<?php 
-				switch( $business_reviews['source'] ){
+        <div <?php echo $this->get_render_attribute_string( 'eael-business-reviews-wrapper' ); ?>>
+            <div <?php echo $this->get_render_attribute_string( 'eael-business-reviews-items' ); ?>>
+				<?php
+				switch ( $business_reviews['source'] ) {
 					case 'google-reviews':
-						$this->print_business_reviews_google($business_reviews_items);
+						$this->print_business_reviews_google( $business_reviews_items );
 						break;
 					default:
-						$this->print_business_reviews_google($business_reviews_items);
+						$this->print_business_reviews_google( $business_reviews_items );
 						break;
 				}
 				?>
-			</div>
-		</div>
+            </div>
+        </div>
 
-		<?php 
+		<?php
 		echo ob_get_clean();
 	}
 
