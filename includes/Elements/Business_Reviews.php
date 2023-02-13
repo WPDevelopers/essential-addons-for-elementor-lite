@@ -54,16 +54,14 @@ class Business_Reviews extends Widget_Base {
 		return 'https://essential-addons.com/elementor/docs/business-reviews/';
 	}
 
-	public function get_style_depends()
-	{
+	public function get_style_depends() {
 		return [
 			'font-awesome-5-all',
-			'font-awesome-4-shim',
+			'font-awesome-4-shim'
 		];
 	}
 
-	public function get_script_depends()
-	{
+	public function get_script_depends() {
 		return [
 			'font-awesome-4-shim'
 		];
