@@ -499,8 +499,11 @@ trait Woo_Checkout_Helper {
 						</div>
 						<?php do_action( 'woocommerce_review_order_after_shipping' ); ?>
 					<?php endif; ?>
-
-					<?php foreach ( WC()->cart->get_fees() as $fee ) : ?>
+					
+					<?php do_action('eael_woo_checkout_before_cart_get_fees', WC()); ?>
+					
+					<?php foreach ( WC()->cart->get_fees() as $fee ) : ?> 
+						<?php apply_filters('eael_woo_checkout_cart_fee', $fee); ?>
 						<div class="fee">
 							<div><?php echo esc_html( $fee->name ); ?></div>
 							<div><?php wc_cart_totals_fee_html( $fee ); ?></div>

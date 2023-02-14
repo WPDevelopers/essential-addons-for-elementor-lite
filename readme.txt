@@ -1,10 +1,10 @@
 === Essential Addons for Elementor ===
-Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, manzurahammed, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
 Tested up to: 6.1
 Requires PHP: 7.0
-Stable tag: 5.5.2
+Stable tag: 5.5.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -242,6 +242,33 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.5.4 - 07/02/2023 =
+
+- Fixed: Uncaught Error: Call to a member function iterate_data() on null
+- Fixed: EA Post Timeline | Uncaught DivisionByZeroError
+- Fixed: EA Advanced Tabs | Page getting stuck when trying to visit a tab with unique ID
+- Fixed: EA Product Carousel | Broken Layout in Shoptimizer theme
+- Few minor bug fixes & improvements
+
+
+= 5.5.3 - 25/01/2023 =
+
+- Fixed: Assets not loading inside CartFlows Steps when Astra Theme is activated
+- Fixed: EA Twitter Feed | HashTag '#' and '@' links not working
+- Fixed: EA Scroll to Top | Not hiding on the hero section after scrolling to top
+- Fixed: EA Post Grid | Meta styling not working
+- Fixed: EA Login/Register Form | Some text not supporting HTML anchor markup
+- Fixed: EA Product Gallery | Styles not working in BuddyBoss Theme
+- Fixed: EA Woo Cart | After updating the cart, the Price and checkout button goes missing
+- Fixed: EA Flip Box | After adding a link to the content text that creates a block element
+- Fixed: EA Feature List | Icon design broken when using two templates on a same page
+- Fixed: EA Woo Product Carousel| Displaying pending review or unpublished products
+- Improved: EA Event Calendar | Added the Armenian Language in the Language List
+- Fixed: EA Post Grid | Dynamic Tags not working in Layout Settings
+- Fixed: EA Login/Register Form | Adding redundant string after making registration
+- Fixed: EA Data Table | Content type 'Editor icon' missing
+- Few minor bug fixes & improvements
 
 = 5.5.2 - 22/12/2022 =
 

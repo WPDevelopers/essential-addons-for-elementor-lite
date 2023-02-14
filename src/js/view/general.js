@@ -168,6 +168,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 (function ($) {
 	$.fn.isInViewport = function() {
+		if ($(this).length < 1 ) return false;
 		var elementTop = $(this).offset().top;
 		var elementBottom = elementTop + $(this).outerHeight() / 2;
 		var viewportTop = $(window).scrollTop();
