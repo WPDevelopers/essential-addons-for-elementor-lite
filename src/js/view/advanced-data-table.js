@@ -31,7 +31,7 @@ class advancedDataTable {
     }
     if ($(table).hasClass('ea-advanced-data-table-static')){
         $(table).find('th, td').each(function (){
-          let text = $(this).text().replace("<script>", "").replace("</script>", "");
+          let text = $(this).text().replace("<script>", "").replace("</script>", "").replace("script", "");
           $(this).html(text);
         })
     }
