@@ -100,6 +100,13 @@ ea.hooks.addAction("init", "ea", () => {
 				prevEl: $arrow_prev
 			},
 			slidesPerView: $items,
+			on: {
+				init: function () {
+					setTimeout(function (){
+						window.dispatchEvent(new Event('resize'));
+					}, 200);
+				},
+			},
 		};
 
 		if ($effect === 'slide') {

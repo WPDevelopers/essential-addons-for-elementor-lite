@@ -382,7 +382,7 @@ $base-font-size: 14px;
 					}
 				}
 
-				.order-total, .cart-subtotal, .cart-discount, .tax-rate {
+				.order-total, .cart-subtotal, .cart-discount, .tax-rate, .fee {
 					display: flex;
 					justify-content: space-between;
 					border-top: 1px solid inherit;
@@ -518,6 +518,9 @@ $base-font-size: 14px;
 
 		form.checkout_coupon {
 			border: 1px solid #404040;
+		}
+		.eael-reordering{
+			opacity: 0.1;
 		}
 
 		// Login

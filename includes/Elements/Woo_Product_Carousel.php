@@ -141,6 +141,15 @@ class Woo_Product_Carousel extends Widget_Base {
         ] );
     }
 
+    protected function eael_get_product_statuses() {
+        return apply_filters( 'eael/woo-product-carousel/product-statuses', [
+            'publish'       => esc_html__( 'Publish', 'essential-addons-for-elementor-lite' ),
+            'draft'         => esc_html__( 'Draft', 'essential-addons-for-elementor-lite' ),
+            'pending'       => esc_html__( 'Pending Review', 'essential-addons-for-elementor-lite' ),
+            'future'        => esc_html__( 'Schedule', 'essential-addons-for-elementor-lite' ),
+        ] );
+    }
+
 	/**
      * Register Woo Product carousel widget controls.
      *
@@ -770,6 +779,17 @@ class Woo_Product_Carousel extends Widget_Base {
             'default' => 0,
         ] );
 
+        $this->add_control(
+            'eael_product_carousel_products_status',
+            [
+                'label' => __( 'Product Status', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SELECT2,
+                'label_block' => true,
+                'multiple' => true,
+                'default' => [ 'publish', 'pending', 'future' ],
+                'options' => $this->eael_get_product_statuses(),
+            ]
+        );
 	    $taxonomies = get_taxonomies(['object_type' => ['product']], 'objects');
 	    foreach ($taxonomies as $taxonomy => $object) {
 		    if (!isset($object->object_type[0])) {
@@ -2962,13 +2982,15 @@ class Woo_Product_Carousel extends Widget_Base {
 		$settings = $this->get_settings_for_display();
 
 		$visibility = '';
-		if ($settings['image_dots_visibility'] !== 'yes') {
+		if ( $settings['image_dots_visibility'] !== 'yes' ) {
 			$visibility .= ' eael_gallery_pagination_hide_on_desktop';
 		}
-		if ($settings['image_dots_visibility_mobile'] !== 'yes') {
+
+		if ( empty( $settings['image_dots_visibility_mobile'] ) || $settings['image_dots_visibility_mobile'] !== 'yes' ) {
 			$visibility .= ' eael_gallery_pagination_hide_on_mobile';
 		}
-		if ($settings['image_dots_visibility_tablet'] !== 'yes') {
+
+		if ( empty( $settings['image_dots_visibility_tablet'] ) || $settings['image_dots_visibility_tablet'] !== 'yes' ) {
 			$visibility .= ' eael_gallery_pagination_hide_on_tablet';
 		}
 
@@ -3052,7 +3074,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	    $filter                        = $settings[ 'eael_product_carousel_product_filter' ];
 	    $args                         = [
 		    'post_type'      => 'product',
-		    'post_status'    => array( 'publish', 'pending', 'future' ),
+		    'post_status'    => !empty( $settings['eael_product_carousel_products_status'] ) ? $settings['eael_product_carousel_products_status'] : ['publish'],
 		    'posts_per_page' => $settings[ 'eael_product_carousel_products_count' ] ?: 4,
 		    'order'          => $settings[ 'order' ],
 		    'offset'         => $settings[ 'product_offset' ],
