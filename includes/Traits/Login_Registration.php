@@ -591,8 +591,10 @@ trait Login_Registration {
 		$ajax   = wp_doing_ajax();
 		// before even thinking about sending mail, check security and exit early if something is not right.
 		$page_id = 0;
+		$page_id_for_popup = 0;
 		if ( ! empty( $_POST['page_id'] ) ) {
 			$page_id = intval( $_POST['page_id'], 10 );
+			$page_id_for_popup = ! empty( $_POST['page_id_for_popup'] ) ? intval( $_POST['page_id_for_popup'], 10 ) : $page_id;
 		} else {
 			$err_msg = esc_html__( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
 		}
@@ -703,6 +705,10 @@ trait Login_Registration {
 		
 		if ( isset($page_id) ) {
 			self::$email_options_lostpassword['page_id'] = sanitize_text_field( $page_id );
+		}
+
+		if ( ! empty( $page_id_for_popup ) ) {
+			self::$email_options_lostpassword['page_id'] = sanitize_text_field( $page_id_for_popup );
 		}
 		
 		if ( isset($widget_id) ) {
