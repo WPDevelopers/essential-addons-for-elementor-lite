@@ -73,6 +73,10 @@ class Login_Register extends Widget_Base {
 	 */
 	protected $page_id;
 	/**
+	 * @var bool|false|int
+	 */
+	protected $page_id_for_popup;
+	/**
 	 * @var bool|string
 	 */
 	protected $form_illustration_url;
@@ -4892,6 +4896,8 @@ class Login_Register extends Widget_Base {
 			$this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
 		}
 
+		$this->page_id_for_popup = get_queried_object_id();
+
 		//handle form illustration
 		$form_image_id               = ! empty( $this->ds['lr_form_image']['id'] ) ? $this->ds['lr_form_image']['id'] : '';
 		$this->form_illustration_pos = ! empty( $this->ds['lr_form_image_position'] ) ? $this->ds['lr_form_image_position'] : 'left';
@@ -5586,7 +5592,7 @@ class Login_Register extends Widget_Base {
 	protected function print_resetpassword_form(){
 		$default_hide_class = ( 'register' === $this->default_form || 'login' === $this->default_form || 'lostpassword' === $this->default_form || isset($_GET['eael-register']) || isset($_GET['eael-lostpassword']) ) && !isset($_GET['eael-resetpassword']) ? 'eael-lr-d-none' : '';
 		$default_hide_class = $this->should_print_resetpassword_form_editor ? '' : $default_hide_class;
-		$rp_page_url = get_permalink( $this->page_id ); 
+		$rp_page_url = ! empty( $this->page_id_for_popup ) ? get_permalink( $this->page_id_for_popup ) : get_permalink( $this->page_id ); 
 
 		if ( $this->should_print_resetpassword_form_editor || ( ! empty( $_GET['eael-resetpassword'] ) ) ) {
 			$rp_data = get_option('eael_resetpassword_rp_data_' . $this->get_id());
@@ -5858,6 +5864,9 @@ class Login_Register extends Widget_Base {
         <input type="hidden"
                name="page_id"
                value="<?php echo esc_attr( $this->page_id ); ?>">
+		<input type="hidden"
+               name="page_id_for_popup"
+               value="<?php echo esc_attr( ! empty( $this->page_id_for_popup ) ? $this->page_id_for_popup : $this->page_id ); ?>">
         <input type="hidden"
                name="widget_id"
                value="<?php echo esc_attr( $this->get_id() ); ?>">
