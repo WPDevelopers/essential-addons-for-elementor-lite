@@ -59,6 +59,11 @@ class Login_Register extends Widget_Base {
 	 */
 	protected $should_print_resetpassword_form;
 	/**
+	 * Should reset password form be printed in editor?
+	 * @var bool
+	 */
+	protected $should_print_resetpassword_form_editor;
+	/**
 	 * It contains an array of settings for the display
 	 * @var array
 	 */
