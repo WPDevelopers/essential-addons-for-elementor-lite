@@ -943,6 +943,7 @@ trait Login_Registration {
 
 		$this->page_id = isset( $_GET['page_id'] ) ? intval( $_GET['page_id'] ) : 0;
 		$this->widget_id = isset( $_GET['widget_id'] ) ? sanitize_text_field( $_GET['widget_id'] ) : '';
+		$this->resetpassword_in_popup_selector = isset( $_GET['popup-selector'] ) ? sanitize_text_field( $_GET['popup-selector'] ) : '';
 		$rp_page_url = get_permalink( $this->page_id ); 
 		
 		list( $rp_path ) = explode( '?', wp_unslash( $_SERVER['REQUEST_URI'] ) );
@@ -994,7 +995,12 @@ trait Login_Registration {
 		update_option( 'eael_resetpassword_rp_data_' . esc_attr( $this->widget_id ), maybe_serialize( $rp_data ), false );
 		setcookie( $rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
 
-		wp_redirect( $rp_page_url . '?eael-resetpassword=1' );
+		if( $this->resetpassword_in_popup_selector ){
+			wp_redirect( $rp_page_url . '?eael-resetpassword=1&popup-selector=' . $this->resetpassword_in_popup_selector );
+		} else {
+			wp_redirect( $rp_page_url . '?eael-resetpassword=1' );
+		}
+
 		exit;
 	}
 
@@ -1009,7 +1015,7 @@ trait Login_Registration {
 
 		$page_id = self::$email_options_lostpassword['page_id'] ? self::$email_options_lostpassword['page_id'] : 0;
 		$widget_id = self::$email_options_lostpassword['widget_id'] ? self::$email_options_lostpassword['widget_id'] : '';
-		$resetpassword_in_popup_selector = self::$email_options_lostpassword['resetpassword_in_popup_selector'] ? str_replace(' ', '', self::$email_options_lostpassword['resetpassword_in_popup_selector']) : '';
+		$resetpassword_in_popup_selector = self::$email_options_lostpassword['resetpassword_in_popup_selector'] ? str_replace(' ', '_', self::$email_options_lostpassword['resetpassword_in_popup_selector']) : '';
 		
 		if ( ! empty( self::$email_options_lostpassword['message'] ) ) {
 			if ( ! empty( $key ) ) {

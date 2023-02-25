@@ -2155,7 +2155,7 @@ class Login_Register extends Widget_Base {
 		$this->add_control( 'lostpassword_email_message_reset_link_popup_selector', [
 			'label'       => __( 'Popup Button Selector', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::TEXT,
-			'placeholder' => '#my-custom-id',
+			'placeholder' => '.parent .child',
 			'description' => __( 'Add class or id of the popup button which can be auto clicked after page load.', 'essential-addons-for-elementor-lite' ),
 			'condition'       => [
 				'lostpassword_email_message_reset_link_in_popup' => 'yes',
