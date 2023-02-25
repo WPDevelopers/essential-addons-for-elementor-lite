@@ -4928,12 +4928,18 @@ class Login_Register extends Widget_Base {
 		$this->form_logo_pos = ! empty( $this->ds['lr_form_logo_position'] ) ? $this->ds['lr_form_logo_position'] : 'inline';
 		$login_redirect_url = '';
 		$resetpassword_redirect_url = '';
+		$resetpassword_in_popup_selector = '';
+
 		if ( ! empty( $this->ds['redirect_after_login'] ) && 'yes' === $this->ds['redirect_after_login'] ) {
 			$login_redirect_url = !empty( $this->ds[ 'redirect_url' ][ 'url' ] ) ? esc_url( $this->ds[ 'redirect_url' ][ 'url' ] ) : '';
 		}
 		
 		if ( ! empty( $this->ds['redirect_after_resetpassword'] ) && 'yes' === $this->ds['redirect_after_resetpassword'] ) {
 			$resetpassword_redirect_url = !empty( $this->ds[ 'redirect_url_resetpassword' ][ 'url' ] ) ? esc_url( $this->ds[ 'redirect_url_resetpassword' ][ 'url' ] ) : '';
+		}
+
+		if ( ! empty( $this->ds['lostpassword_email_message_reset_link_in_popup'] ) && 'yes' === $this->ds['lostpassword_email_message_reset_link_in_popup'] ) {
+			$resetpassword_in_popup_selector = ! empty( $this->ds[ 'lostpassword_email_message_reset_link_popup_selector' ] ) ? sanitize_text_field( $this->ds[ 'lostpassword_email_message_reset_link_popup_selector' ] ) : '';
 		}
 
 		$login_recaptcha_version = $register_recaptcha_version = ! empty( $this->ds['login_register_recaptcha_version'] ) ? $this->ds['login_register_recaptcha_version'] : 'v2';
@@ -4964,6 +4970,7 @@ class Login_Register extends Widget_Base {
 			 data-register-recaptcha-version="<?php echo esc_attr( $register_recaptcha_version ); ?>"
              data-redirect-to="<?php echo esc_attr( $login_redirect_url ); ?>"
              data-resetpassword-redirect-to="<?php echo esc_attr( $resetpassword_redirect_url ); ?>"
+			 data-resetpassword-in-popup-selector="<?php echo esc_attr( $resetpassword_in_popup_selector ); ?>"
         >
 			<?php
 			$this->print_resetpassword_form(); // set a new password; user will land on this form via email reset password link.
