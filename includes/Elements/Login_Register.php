@@ -2138,6 +2138,26 @@ class Login_Register extends Widget_Base {
 			'render_type' => 'none',
 		] );
 
+		$this->add_control( 'lostpassword_email_message_reset_link_in_popup', [
+			'label'        => __( 'Reset Link in Popup', 'essential-addons-for-elementor-lite' ),
+			'description'  => __( 'Open reset link in popup automatically.', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'default'      => '',
+		] );
+
+		$this->add_control( 'lostpassword_email_message_reset_link_popup_selector', [
+			'label'       => __( 'Popup Button Selector', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'placeholder' => '.parent .child',
+			'description' => __( 'Add class or id of the popup button which can be auto clicked after page load.', 'essential-addons-for-elementor-lite' ),
+			'condition'       => [
+				'lostpassword_email_message_reset_link_in_popup' => 'yes',
+			],
+		] );
+
 		$this->add_control( 'lostpassword_email_content_type', [
 			'label'       => __( 'Email Content Type', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::SELECT,
