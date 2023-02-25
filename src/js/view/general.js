@@ -182,6 +182,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 		if ( resetPasswordParams.has('popup-selector') && ( resetPasswordParams.has('eael-lostpassword') || resetPasswordParams.has('eael-resetpassword') ) ){
 			let popupSelector = resetPasswordParams.get('popup-selector');
 			if(popupSelector.length){
+				popupSelector = popupSelector.replace(/_/g," ");
 				setTimeout(function(){
 					jQuery(popupSelector).trigger('click');
 				}, 300);
