@@ -2153,7 +2153,7 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'lostpassword_email_message_reset_link_in_popup_warning', [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => __( 'Enable this feature if your form is displayed in a popup.', 'essential-addons-for-elementor-lite' ),
+			'raw'             => __( 'Enable "Reset Link in Popup" feature if your form is displayed in a popup.', 'essential-addons-for-elementor-lite' ),
 			'content_classes' => 'eael-warning',
 		] );
 
