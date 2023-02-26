@@ -1,10 +1,10 @@
 === Essential Addons for Elementor ===
-Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, manzurahammed, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
 Tested up to: 6.1
 Requires PHP: 7.0
-Stable tag: 5.5.3
+Stable tag: 5.5.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -242,6 +242,15 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.5.4 - 07/02/2023 =
+
+- Fixed: Uncaught Error: Call to a member function iterate_data() on null
+- Fixed: EA Post Timeline | Uncaught DivisionByZeroError
+- Fixed: EA Advanced Tabs | Page getting stuck when trying to visit a tab with unique ID
+- Fixed: EA Product Carousel | Broken Layout in Shoptimizer theme
+- Few minor bug fixes & improvements
+
 
 = 5.5.3 - 25/01/2023 =
 
