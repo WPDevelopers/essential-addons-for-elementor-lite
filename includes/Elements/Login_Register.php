@@ -2161,7 +2161,7 @@ class Login_Register extends Widget_Base {
 			'label'       => __( 'Popup Button Selector', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::TEXT,
 			'placeholder' => '.parent .child',
-			'description' => __( 'Specify the class or id for the popup button that can be automatically triggered upon the page\'s loading.', 'essential-addons-for-elementor-lite' ),
+			'description' => __( 'Specify the class for the popup button that can be automatically triggered upon the page\'s loading.', 'essential-addons-for-elementor-lite' ),
 			'condition'       => [
 				'lostpassword_email_message_reset_link_in_popup' => 'yes',
 			],
