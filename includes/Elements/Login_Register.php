@@ -2144,7 +2144,6 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'lostpassword_email_message_reset_link_in_popup', [
 			'label'        => __( 'Reset Link in Popup', 'essential-addons-for-elementor-lite' ),
-			'description'  => __( 'Open reset link in popup automatically.', 'essential-addons-for-elementor-lite' ),
 			'type'         => Controls_Manager::SWITCHER,
 			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
 			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
@@ -2152,11 +2151,20 @@ class Login_Register extends Widget_Base {
 			'default'      => '',
 		] );
 
+		$this->add_control( 'lostpassword_email_message_reset_link_in_popup_warning', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( 'Enable this feature if your form is displayed in a popup.', 'essential-addons-for-elementor-lite' ),
+			'content_classes' => 'eael-warning',
+			'condition'       => [
+				'lostpassword_email_message_reset_link_in_popup' => 'yes',
+			],
+		] );
+
 		$this->add_control( 'lostpassword_email_message_reset_link_popup_selector', [
 			'label'       => __( 'Popup Button Selector', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::TEXT,
 			'placeholder' => '.parent .child',
-			'description' => __( 'Add class or id of the popup button which can be auto clicked after page load.', 'essential-addons-for-elementor-lite' ),
+			'description' => __( 'Specify the class or id for the popup button that can be automatically triggered upon the page\'s loading.', 'essential-addons-for-elementor-lite' ),
 			'condition'       => [
 				'lostpassword_email_message_reset_link_in_popup' => 'yes',
 			],
