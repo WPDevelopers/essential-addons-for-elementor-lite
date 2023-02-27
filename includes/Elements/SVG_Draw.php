@@ -132,6 +132,9 @@ class SVG_Draw Extends Widget_Base
                 'label_on' => esc_html__( 'Yes', 'textdomain' ),
                 'label_off' => esc_html__( 'No', 'textdomain' ),
                 'return_value' => 'yes',
+                'condition' => [
+                    'eael_svg_animation_on!' => 'none'
+                ]
             ]
         );
 
@@ -162,9 +165,32 @@ class SVG_Draw Extends Widget_Base
         );
 
         $this->add_control(
-            'eael_svg_size',
+            'eael_svg_width',
             [
-                'label' => esc_html__( 'Size', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range' => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 500,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 200,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} svg' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_svg_height',
+            [
+                'label' => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range' => [
@@ -179,7 +205,7 @@ class SVG_Draw Extends Widget_Base
                     'size' => 200,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} svg' => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} svg' => 'height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -249,7 +275,8 @@ class SVG_Draw Extends Widget_Base
                     '{{WRAPPER}} svg path' => 'stroke:{{VALUE}};',
                     '{{WRAPPER}} .none[data-fill="fill-svg"] svg path' => 'fill:{{VALUE}};',
                     '{{WRAPPER}} .fill-svg svg path' => 'fill:{{VALUE}};'
-                ]
+                ],
+                'default' => '#c36'
             ]
         );
 
@@ -311,7 +338,7 @@ class SVG_Draw Extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $svg_html = isset( $settings['svg_html'] ) ? $settings['svg_html'] : '';
+        $svg_html = isset( $settings['svg_html'] ) ? preg_replace('#<script(.*?)>(.*?)</script>#is', '', $settings['svg_html'] ) : '';
         $this->add_render_attribute('eael-svg-drow-wrapper', [
             'class'           => [
                 'eael-svg-draw-container',

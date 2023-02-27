@@ -4,6 +4,7 @@
 .eael-svg-draw-container svg {
   height: 200px;
   width: 200px;
+  overflow: visible;
 }
 .eael-svg-draw-container svg path {
   stroke: #c36;
