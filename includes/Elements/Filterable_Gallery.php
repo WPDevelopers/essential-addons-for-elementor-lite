@@ -2810,7 +2810,7 @@ class Filterable_Gallery extends Widget_Base
                         $sorter_filter = $this->sorter_class($control['eael_fg_control']);
                     ?><li data-load-more-status="0" data-first-init="0" class="control <?php if ($key == 0 && empty($settings['eael_fg_all_label_text'])) {
                             echo 'active';
-                        } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html__($control['eael_fg_control']); ?></li><?php
+                        } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html( $control['eael_fg_control'] ); ?></li><?php
                     endforeach;
                 ?></ul>
             </div>

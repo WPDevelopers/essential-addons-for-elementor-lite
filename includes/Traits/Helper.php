@@ -292,7 +292,7 @@ trait Helper
                             <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg' ); ?>" alt="">
                         </div>
                         <ul class="eael-promo-temp__feature__list">
-                            <li><?php _e('2,500+ Stunning Templates','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php _e('3,000+ Stunning Templates','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php _e('Supports Elementor & Gutenberg','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php _e('Powering up 200,000+ Websites','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php _e('Cloud Collaboration with Team','essential-addons-for-elementor-lite'); ?></li>
@@ -459,13 +459,13 @@ trait Helper
 		wp_send_json_success();
 	}
 
-    public function promotion_message_on_admin_screen() {
-        ?>
-            <div id="eael-admin-promotion-message" class="eael-admin-promotion-message">
-                <i class="e-notice__dismiss eael-admin-promotion-close" role="button" aria-label="Dismiss" tabindex="0"></i>
-	            <?php printf( __( "<p> <i>📣</i> NEW: Essential Addons 5.1 is here, with new '<a target='_blank' href='%s'>EA Conditional Display</a>' extension, <b>'FAQ Schema'</b> for EA Advanced Accordion & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/conditional-display/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
-            </div>
-        <?php
+	public function promotion_message_on_admin_screen() {
+		?>
+        <div id="eael-admin-promotion-message" class="eael-admin-promotion-message">
+            <i class="e-notice__dismiss eael-admin-promotion-close" role="button" aria-label="Dismiss" tabindex="0"></i>
+			<?php printf( __( "<p> <i>📣</i> NEW: Essential Addons 5.5 is here, with new '<a target='_blank' href='%s'>NFT Gallery</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/nft-gallery/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
+        </div>
+		<?php
 	}
 
 	/**
@@ -486,10 +486,10 @@ trait Helper
 				do_action( 'eael_admin_notices' );
 			} );
 
-//			/*Added admin notice which is basically uses for display new promotion message*/
-//			if ( get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG ) {
-//				add_action( 'admin_notices', array( $this, 'promotion_message_on_admin_screen' ) );
-//			}
+			/*Added admin notice which is basically uses for display new promotion message*/
+			if ( get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG ) {
+				add_action( 'eael_admin_notices', array( $this, 'promotion_message_on_admin_screen' ) );
+			}
 		}
 	}
 
@@ -583,7 +583,7 @@ trait Helper
                     <img src="<?php echo esc_url( $eb_promo_img2 ); ?>" alt="">
                 </div>
                 <div class="eael-gb-eb-content-info">
-                    <h3><?php esc_html_e( '35+ Amazing Gutenberg Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
+                    <h3><?php esc_html_e( '40+ Amazing Gutenberg Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
                     <p><?php esc_html_e( 'Create & design your WordPress websites just the way you want with more than 35 amazing, ready blocks from Essential Blocks for Gutenberg.', 'essential-addons-for-elementor-lite' ) ?></p>
                 </div>
             </div>

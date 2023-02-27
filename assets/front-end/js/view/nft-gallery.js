@@ -81,19 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/view/scroll-to-top.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/view/nft-gallery.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/js/view/scroll-to-top.js":
-/*!**************************************!*\
-  !*** ./src/js/view/scroll-to-top.js ***!
-  \**************************************/
+/***/ "./src/js/view/nft-gallery.js":
+/*!************************************!*\
+  !*** ./src/js/view/nft-gallery.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("(function ($) {\n  \"use strict\";\n\n  $(function () {\n    var offset = 100;\n    var speed = 300;\n    var duration = 300;\n\n    if ($(this).scrollTop() > offset) {\n      $('.eael-ext-scroll-to-top-wrap').removeClass('scroll-to-top-hide');\n    }\n\n    if (typeof elementorFrontend !== 'undefined' && elementorFrontend) {\n      elementorFrontend.elements.$body[0].addEventListener('scroll', function () {\n        eaelScrollToTop(this);\n      });\n    }\n\n    $(window).scroll(function () {\n      eaelScrollToTop(this);\n    });\n\n    function eaelScrollToTop($currentObj) {\n      if ($($currentObj).scrollTop() < offset) {\n        $('.eael-ext-scroll-to-top-wrap').fadeOut(duration);\n      } else {\n        $('.eael-ext-scroll-to-top-wrap').fadeIn(duration);\n      }\n    }\n\n    $('.eael-ext-scroll-to-top-wrap').on('click', function () {\n      $('html, body').animate({\n        scrollTop: 0\n      }, speed);\n      return false;\n    });\n  });\n})(jQuery);\n\n//# sourceURL=webpack:///./src/js/view/scroll-to-top.js?");
+eval("var NFTGalleryHandler = function NFTGalleryHandler($scope, $) {\n  var $eael_nft_gallery = $(\".eael-nft-gallery-wrapper\", $scope);\n  var $posts_per_page = $eael_nft_gallery.data(\"posts-per-page\");\n  var $total_posts = $eael_nft_gallery.data(\"total-posts\");\n  var $nomore_item_text = $eael_nft_gallery.data(\"nomore-item-text\");\n  var $next_page = $eael_nft_gallery.data(\"next-page\");\n  $scope.on(\"click\", \".eael-nft-gallery-load-more\", function (e) {\n    e.preventDefault();\n    $('.eael-nft-item.page-' + $next_page, $scope).removeClass('eael-d-none').addClass('eael-d-block');\n    $eael_nft_gallery.attr(\"data-next-page\", $next_page + 1);\n\n    if ($('.eael-nft-item.page-' + $next_page, $scope).hasClass('eael-last-nft-gallery-item')) {\n      $(\".eael-nft-gallery-load-more\", $scope).html($nomore_item_text).fadeOut('1500');\n    }\n\n    $next_page++;\n  });\n};\n\njQuery(window).on(\"elementor/frontend/init\", function () {\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/eael-nft-gallery.default\", NFTGalleryHandler);\n});\n\n//# sourceURL=webpack:///./src/js/view/nft-gallery.js?");
 
 /***/ })
 

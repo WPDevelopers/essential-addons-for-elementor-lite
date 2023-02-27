@@ -461,5 +461,16 @@
                 <field type="Woo Checkout: Tab Button Previous Text" editor_type="LINE">ea_woo_checkout_tabs_btn_prev_text</field>
             </fields>
         </widget>
+        <widget name="eael-nft-gallery">
+            <conditions>
+                <condition key="widgetType">eael-nft-gallery</condition>
+            </conditions>
+            <fields>
+                <field type="NFT Gallery: Label | View Details" editor_type="LINE">eael_nft_gallery_content_view_details_label</field>
+                <field type="NFT Gallery: Label | No Items" editor_type="LINE">eael_nft_gallery_content_no_items_label</field>
+                <field type="NFT Gallery: Label | Last Sale" editor_type="LINE">eael_nft_gallery_content_last_sale_label</field>
+                <field type="NFT Gallery: Label | Ends In" editor_type="LINE">eael_nft_gallery_content_ends_in_label</field>
+            </fields>
+        </widget>
     </elementor-widgets>
 </wpml-config>

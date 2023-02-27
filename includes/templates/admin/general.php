@@ -17,7 +17,7 @@
                         <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-logo.svg' ); ?>"
                              alt="">
                     </div>
-                    <h2>Unlock <span class="color__secondary">2500+</span> <?php _e('Ready Templates Built With Elementor &
+                    <h2>Unlock <span class="color__secondary">3000+</span> <?php _e('Ready Templates Built With Elementor &
                         Essential
                         Addons From Templately.','essential-addons-for-elementor-lite'); ?></h2>
                     <p><?php _e('Get Access to amazing features and boost your Elementor page building experience with Templately','essential-addons-for-elementor-lite'); ?>
@@ -36,7 +36,7 @@
                         <div class="eael-col-md-6">
                             <div class="template__block">
                                 <h2>🚀 <?php _e('Get Started with Essential Addons for Elementor','essential-addons-for-elementor-lite'); ?></h2>
-                                <p> <?php _e('Thank you for choosing Essential Addons for Elementor. Get ready to enhance your Elementor site building experience by using 80+ Essential Addons elements & extensions.','essential-addons-for-elementor-lite'); ?></p>
+                                <p> <?php _e('Thank you for choosing Essential Addons for Elementor. Get ready to enhance your Elementor site building experience by using 90+ Essential Addons elements & extensions.','essential-addons-for-elementor-lite'); ?></p>
                                 <a target="_blank" href="https://www.youtube.com/playlist?list=PLWHp1xKHCfxC7JeWSg31vtVbLHGzfxDvh"
                                    class="eael-button button__secondary hover__shadow"><?php _e('YouTube Tutorials','essential-addons-for-elementor-lite'); ?></a>
                             </div>

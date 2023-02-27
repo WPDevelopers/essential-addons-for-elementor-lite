@@ -583,3 +583,6 @@
 .theme-savoy .eael-product-popup .eael-product-popup-ready ~ #elementor-lightbox-slideshow-single-img {
   display: none !important;
 }
+.theme-buddyboss-theme .eael-product-popup.woocommerce div.product form.cart .button.single_add_to_cart_button {
+  padding: 5px 36px;
+}
