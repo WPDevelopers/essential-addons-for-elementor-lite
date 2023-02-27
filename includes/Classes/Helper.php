@@ -1297,12 +1297,13 @@ class Helper
         $library    = str_replace( 'fa-', '', $icon['library'] );
         $svg_object = file_get_contents( EAEL_PLUGIN_PATH . "assets/front-end/js/lib-view/icons/{$library}.json" );
         $svg_object = json_decode( $svg_object, true );
+        $i_class    = str_replace(' ', '-', $icon['value']);
 
         if ( empty( $svg_object['icons'][$icon_name] ) ) return $svg_html;
 
         $icon       = $svg_object['icons'][$icon_name];
         $view_box   = "0 0 {$icon[0]} {$icon[1]}";
-        $svg_html  .= "<svg class='svg-inline--". $icon['value'] ."'  eael-svg-icon' aria-hidden='true' data-icon='store' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='{$view_box}' >";
+        $svg_html  .= "<svg class='svg-inline--". $i_class ."  eael-svg-icon' aria-hidden='true' data-icon='store' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='{$view_box}' >";
         $svg_html  .= "<path d='{$icon[4]}'></path>";
         $svg_html  .= "</svg>";
 
