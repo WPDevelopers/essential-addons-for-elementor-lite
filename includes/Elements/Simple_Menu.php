@@ -1421,8 +1421,8 @@ class Simple_Menu extends Widget_Base
 
         $dropdown_options = [];
         $excluded_breakpoints = [
-            'laptop',
-            'widescreen',
+            // 'laptop',
+            // 'widescreen',
         ];
 
         foreach ( $breakpoints as $breakpoint_key => $breakpoint_instance ) {
