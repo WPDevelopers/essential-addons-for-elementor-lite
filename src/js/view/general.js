@@ -165,3 +165,14 @@ jQuery(window).on("elementor/frontend/init", function () {
 		}
 	});
 })(jQuery);
+
+(function ($) {
+	$.fn.isInViewport = function() {
+		if ($(this).length < 1 ) return false;
+		var elementTop = $(this).offset().top;
+		var elementBottom = elementTop + $(this).outerHeight() / 2;
+		var viewportTop = $(window).scrollTop();
+		var viewportHalf = viewportTop + $(window).height() / 2;
+		return elementBottom > viewportTop && elementTop < viewportHalf;
+	};
+})(jQuery);

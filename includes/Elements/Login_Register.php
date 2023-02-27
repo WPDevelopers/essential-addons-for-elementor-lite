@@ -5048,7 +5048,7 @@ class Login_Register extends Widget_Base {
 								<?php do_action( 'eael/login-register/after-login-form-open', $this ); ?>
                                 <div class="eael-lr-form-group">
 									<?php if ( $display_label && $u_label ) {
-										printf( '<label for="eael-user-login" class="eael-field-label">%s</label>', esc_html__( $u_label, 'essential-addons-for-elementor-lite' ) );
+										printf( '<label for="eael-user-login" class="eael-field-label">%s</label>', HelperCLass::eael_wp_kses( $u_label ) );
 									} ?>
                                     <input type="text"
                                            name="eael-user-login"
@@ -5367,7 +5367,7 @@ class Login_Register extends Widget_Base {
                                 <div <?php $this->print_render_attribute_string( $field_group_key ) ?>>
 									<?php
 									if ( 'yes' === $this->ds['show_labels'] && ! empty( $field['field_label'] ) ) {
-										echo '<label ' . $this->get_render_attribute_string( $label_key ) . '>' . esc_attr( $field['field_label'] ) . '</label>';
+										echo '<label ' . $this->get_render_attribute_string( $label_key ) . '>' . HelperCLass::eael_wp_kses( $field['field_label'] ) . '</label>';
 									}
 									echo '<input ' . $this->get_render_attribute_string( $input_key ) . '>';
 									if ( $show_icon && ! empty( $field['icon'] ) ) {

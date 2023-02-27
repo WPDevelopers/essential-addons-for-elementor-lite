@@ -29,8 +29,40 @@ var SimpleMenu = function ($scope, $) {
 
     let selectorByType = $horizontal ? '.eael-simple-menu-horizontal' : '.eael-simple-menu-vertical';
     let $hamburger_max_width = getHamburgerMaxWidth($hamburger_breakpoints, $hamburger_device)
-    var $fullWidth = $('.eael-simple-menu--stretch');
-    
+    var $fullWidth = $('.eael-simple-menu--stretch'), all_ids = [];
+
+    // add menu active class
+    $('.eael-simple-menu li a', $scope).each(function () {
+        let $this = $(this),
+            hashURL = $this.attr('href'),
+            thisURL = hashURL,
+            isStartWithHash,
+            splitURL = thisURL !== undefined ? thisURL.split('#') : [];
+
+        hashURL = hashURL === undefined ? '' : hashURL;
+        isStartWithHash = hashURL.startsWith('#');
+
+        if ( hashURL !== '#' && splitURL.length > 1 && localize.page_permalink === splitURL[0] && splitURL[1] ){
+            all_ids.push(splitURL[1]);
+        }
+        if ( !isStartWithHash && localize.page_permalink === thisURL ) {
+            $this.addClass('eael-item-active');
+        }
+    });
+
+    $(window).on('load resize scroll', function() {
+        if ( all_ids.length > 0 ){
+            $.each(all_ids,function (index, item){
+                if ($('#'+item).isInViewport()) {
+                    $('a[href="'+localize.page_permalink+'#'+item+'"]', $scope).addClass('eael-menu-'+item+' eael-item-active');
+                } else {
+                    $('.eael-menu-'+item).removeClass('eael-menu-'+item+' eael-item-active');
+                }
+            });
+        }
+
+    });
+
     if($horizontal){
         // insert indicator
         if($indicator_icon == 'svg') {

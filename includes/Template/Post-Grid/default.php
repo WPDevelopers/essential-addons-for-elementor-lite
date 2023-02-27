@@ -93,14 +93,14 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                             if (empty($settings['eael_excerpt_length'])) {
                                 echo '<p>' . strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()) . '</p>';
                             } else {
-                                echo '<p>' . wp_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']) . '</p>';
+                                echo '<p>' . wp_trim_words( strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator'] ) . '</p>';
                             }
                         }
 
                         if ($settings['eael_show_read_more_button']) {
                             echo '<a
                                         href="' . get_the_permalink() . '"
-                                        class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . esc_attr($settings['read_more_button_text']) . '</a>';
+                                        class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . Helper::eael_wp_kses($settings['read_more_button_text']) . '</a>';
                         }
                         echo '</div>
                                 </div>';
@@ -235,14 +235,14 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                 if (empty($settings['eael_excerpt_length'])) {
                     echo '<p>' . strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()) . '</p>';
                 } else {
-                    echo '<p>' . wp_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']) . '</p>';
+                    echo '<p>' . wp_trim_words( strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']) . '</p>';
                 }
             }
 
             if ($settings['eael_show_read_more_button']) {
                 echo '<a
                             href="' . get_the_permalink() . '"
-                            class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . esc_attr($settings['read_more_button_text']) . '</a>';
+                            class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . Helper::eael_wp_kses($settings['read_more_button_text']) . '</a>';
             }
             echo '</div>
                     </div>';
@@ -329,14 +329,14 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                 if (empty($settings['eael_excerpt_length'])) {
                     echo '<p>' . strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()) . '</p>';
                 } else {
-                    echo '<p>' . wp_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']) . '</p>';
+                    echo '<p>' . wp_trim_words( strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']) . '</p>';
                 }
             }
 
             if ($settings['eael_show_read_more_button']) {
                 echo '<a
                             href="' . get_the_permalink() . '"
-                            class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . esc_attr($settings['read_more_button_text']) . '</a>';
+                            class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . Helper::eael_wp_kses($settings['read_more_button_text']) . '</a>';
             }
             echo '</div>
                     </div>';

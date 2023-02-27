@@ -1,10 +1,10 @@
 === Essential Addons for Elementor ===
-Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, manzurahammed, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
 Tested up to: 6.1
 Requires PHP: 7.0
-Stable tag: 5.4.2
+Stable tag: 5.5.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -12,9 +12,9 @@ The Essential plugin you install after Elementor! Packed with 40+ stunning free 
 
 == Description ==
 
-Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 80+ creative elements and extensions. Add powers to your page builder using our easy-to-use elements those were designed to make your next WordPress page and posts design easier and prettier than ever before.
+Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 90+ creative elements and extensions. Add powers to your page builder using our easy-to-use elements those were designed to make your next WordPress page and posts design easier and prettier than ever before.
 
-##Essential Addons For Elementor - Best Elements Library For Elementor With 1 Million Active Installations & 80+ Elements And Extensions##
+##Essential Addons For Elementor - Best Elements Library For Elementor With 1 Million Active Installations & 90+ Elements And Extensions##
 
 [Check the Demos](https://essential-addons.com/elementor/demos)
 
@@ -28,7 +28,7 @@ No extra resources or messy codes to slow down your website. Optimized for super
 Enable and disable individual elements to make your page loading faster and smoother. You can deactivate unnecessary widgets to keep the site lite.
 
 
-### 2500+ Ready Blocks and Templates through **Templately**
+### 3000+ Ready Blocks and Templates through **Templately**
 Use pre-made templates and sections which come with Essential Addons and design your website to stand out from the crowd.
 
 [Install Templately to get the premade blocks and templates](https://wordpress.org/plugins/templately/)
@@ -93,6 +93,7 @@ We have designed more than 50 of the most useful widgets to enhance your Element
 45. [Woo Product Gallery](https://essential-addons.com/elementor/woo-product-gallery/)- Show your products in a filterable gallery
 46. [Woo Cart](https://essential-addons.com/elementor/woo-cart/)- Use WooCommerce Cart page to boost online sales
 47. [Interactive Circle](https://essential-addons.com/elementor/interactive-circle/)- Display content with engaging circular layouts
+48. [NFT Gallery](https://essential-addons.com/elementor/nft-gallery/)- Add and showcase NFT collections effortlessly in Elementor
 
 Extensions (Free): 
 
@@ -202,7 +203,7 @@ Note : This plugin works with Elementor. Make sure you have [Elementor](https://
 
 1. Upload the plugin folder to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
-3. You can type "EA" on your element tabs within Elementor editor and all the avialable elements will appear.
+3. You can type "EA" on your element tabs within Elementor editor and all the available elements will appear.
 4. Also you can see them under the category "Essential Addons for Elementor" on your element/widget list.
 
 == Frequently Asked Questions ==
@@ -241,6 +242,68 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.5.4 - 07/02/2023 =
+
+- Fixed: Uncaught Error: Call to a member function iterate_data() on null
+- Fixed: EA Post Timeline | Uncaught DivisionByZeroError
+- Fixed: EA Advanced Tabs | Page getting stuck when trying to visit a tab with unique ID
+- Fixed: EA Product Carousel | Broken Layout in Shoptimizer theme
+- Few minor bug fixes & improvements
+
+
+= 5.5.3 - 25/01/2023 =
+
+- Fixed: Assets not loading inside CartFlows Steps when Astra Theme is activated
+- Fixed: EA Twitter Feed | HashTag '#' and '@' links not working
+- Fixed: EA Scroll to Top | Not hiding on the hero section after scrolling to top
+- Fixed: EA Post Grid | Meta styling not working
+- Fixed: EA Login/Register Form | Some text not supporting HTML anchor markup
+- Fixed: EA Product Gallery | Styles not working in BuddyBoss Theme
+- Fixed: EA Woo Cart | After updating the cart, the Price and checkout button goes missing
+- Fixed: EA Flip Box | After adding a link to the content text that creates a block element
+- Fixed: EA Feature List | Icon design broken when using two templates on a same page
+- Fixed: EA Woo Product Carousel| Displaying pending review or unpublished products
+- Improved: EA Event Calendar | Added the Armenian Language in the Language List
+- Fixed: EA Post Grid | Dynamic Tags not working in Layout Settings
+- Fixed: EA Login/Register Form | Adding redundant string after making registration
+- Fixed: EA Data Table | Content type 'Editor icon' missing
+- Few minor bug fixes & improvements
+
+= 5.5.2 - 22/12/2022 =
+
+- Fixed: EA Event Calendar | URL parameters not working inside manual calendar event link
+- Fixed: EA Info Box | Custom Attribute not working
+- Few minor bug fixes & improvements
+
+= 5.5.1 - 11/12/2022 =
+
+- Fixed: EA Filterable Gallery | Gallery Item name showing default value
+- Few minor bug fixes & improvements
+
+= 5.5.0 - 06/12/2022 =
+
+- Added: New Widget | EA NFT Gallery
+- Improved: EA Login/Register Form | Added arguments to action hook
+- Improved: EA Custom JS | Allow Custom JS to run in the Elementor Editor
+- Fixed: EA Interactive Circle | Animation not working in Mobile View
+- Fixed: EA Filterable Gallery | extra margin when 6 columns are used
+- Fixed: EA Filterable Gallery | Filter not working in different languages
+- Few minor bug fixes & improvements
+
+= 5.4.4 - 24/11/2022 =
+
+- Fixed: EA Post Grid | Excerpt length change not working properly
+- Few minor bug fixes & improvements
+
+= 5.4.3 - 22/11/2022 =
+
+- Fixed: EA Post Grid | HTML Tags not working in excerpt view
+- Fixed: EA Advanced Accordion | Not scrolling to the accordion title when custom ID is used
+- Improved: EA Duplicator | Added ' - Copy' text after the original title when a post/page is duplicated 
+- Improved: EA Login/Register Form | Added HTML tag support for form label
+- Improved: EA Simple Menu | Improved Compatibility with custom ID links on menu items
+- Few minor bug fixes & improvements
 
 = 5.4.2 - 31/10/2022 =
 
@@ -588,19 +651,19 @@ Your existing elements/content will work with premium version. So you won't lose
 - Fixed: EA Gravity Forms | Form label styling not properly
 - Fixed: EA Event Calendar | Events colors not changing with global color
 - Fixed: EA Call to Action | Button URL Custom Attributes not working correctly
-- Fixed: Missing Control icons inside Elemenetor panel
+- Fixed: Missing Control icons inside Elementor panel
 - Fixed: EA Simple Menu | Hamburger menu center option not working
 - Fixed: EA Simple Menu | Active Page being shown on Responsive Devices despite being disabled
 - Few minor bug fix & improvements
 
 = 4.9.3 - 29/09/2021 =
 
-- Fixed: EA Fliterable Gallery | Video Gallery popup not working
+- Fixed: EA Filterable Gallery | Video Gallery popup not working
 - Few minor bug fix & improvements
 
 = 4.9.2 - 26/09/2021 =
 
-- Fixed: EA Fliterable Gallery | Images not displaying under each filter until Load More button is hit
+- Fixed: EA Filterable Gallery | Images not displaying under each filter until Load More button is hit
 - Fixed: EA Post Grid | Load More button not working with Random sorting
 - Fixed: EA Advanced Data Table | removed data reappearing
 - Fixed: EA Feature List | showing warning in browser console
@@ -1204,7 +1267,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 3.3.3 - 08/10/2019 =
 - Added: Team Member content card height control
-- Added: Tootip icon size control
+- Added: Tooltip icon size control
 - Fixed: SVG upload issue on all icon manager
 - Fixed: Post Elements exclude control missing
 - Fixed: Data Table header icon top position issue
@@ -1217,7 +1280,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Added : Filterable Gallery new layout (Search & Filter) 
 - Added: Post elements excerpt expanison indicator option field
 - Fixed: Post Grid hover not working
-- Fixed: Createive Button options not showing
+- Fixed: Creative Button options not showing
 - Few minor bugfix and improvements
 
 = 3.3.1 - 18/09/2019 =
@@ -1226,7 +1289,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 3.3.0 - 15/09/2019 =
 - Improved : All post queries optimized to improve the load time and memory usage
-- Improved : Icon Manager optmized for better performance
+- Improved : Icon Manager optimized for better performance
 - Added : Content Timeline left and right layout
 - Fixed : Load More button overlapping issue
 - Fixed : Team Member icon issue
@@ -1298,7 +1361,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Few minor bugfix and improvements
 
 = 3.0.0 - 22/05/2019 =
-- Refractored code for better performance
+- Refactored code for better performance
 - Minimized dependencies to keep the plugin lighter
 - Lots of bugfix and improvements
 
@@ -1309,7 +1372,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 2.10.2 - 04/04/2019 =
 - Feature List element improved
-- Dynamic file regenrating tools added
+- Dynamic file regenerating tools added
 - Nexted dynamic templates design issue fixed
 - Few minor bugfix and improvements
 
@@ -1321,7 +1384,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 2.10.0 - 27/03/2019 =
 
-- Refractored plugin structure for improved performance
+- Refactored plugin structure for improved performance
 - Only one minified JS and one CSS file (if required for the widget) will be used on the page where EA element is being used
 - No extra asset will be loaded if you don't use EA on any page
 - Massive performance improved minimizing the dependencies
@@ -1370,7 +1433,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Added : Section Particles effect
 - Added: Filterable gallery capability to remove All label
 - Enhancement : Product Grid element with more features
-- Fixed: invalid calc funciton in progressbar
+- Fixed: invalid calc function in progressbar
 - Few minor bugfix and improvements
 
 = 2.8.7 - 24/12/2018 =
@@ -1408,7 +1471,7 @@ Your existing elements/content will work with premium version. So you won't lose
 = 2.8.2 - 23/10/2018 =
 
 - Filterable Gallery card hover effect issue fixed
-- Flibox image styling issue fixed
+- Flipbox image styling issue fixed
 - Few minor bugfix and improvements
 
 = 2.8.1 - 18/10/2018 =
@@ -1474,7 +1537,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 2.7.4 - 23/07/2018 =
 
-- (Make sure to clear cache nad hrad refresh the page after update)
+- (Make sure to clear cache and hard refresh the page after update)
 - Button elements improved
 - Fancy Text element improved
 - Image Accordion improved
@@ -1644,7 +1707,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 1.0.0 - 20/07/2017 =
 
-Initial stable realese
+Initial stable release
 
 
 == Upgrade Notice ==

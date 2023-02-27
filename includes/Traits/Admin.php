@@ -19,8 +19,8 @@ trait Admin {
      */
     public function admin_menu() {
 
-	    //$menu_notice = ( $this->menu_notice_should_show() ) ?'<span class="eael-menu-notice">1</span>':'';
 	    $menu_notice = '';
+	    $menu_notice = ( $this->menu_notice_should_show() ) ?'<span class="eael-menu-notice">1</span>':'';
         add_menu_page(
             __( 'Essential Addons a', 'essential-addons-for-elementor-lite' ),
             sprintf(__( 'Essential Addons %s', 'essential-addons-for-elementor-lite' ), $menu_notice ),
@@ -89,7 +89,7 @@ trait Admin {
             ) );
         }
 
-        //$this->eael_admin_inline_css();
+        $this->eael_admin_inline_css();
     }
 
     /**
@@ -218,7 +218,7 @@ trait Admin {
 
         $notice->options_args = array(
             'notice_will_show' => [
-                'opt_in' => $notice->timestamp,
+                // 'opt_in' => $notice->timestamp,
                 'review' => $notice->makeTime( $notice->timestamp, '7 Day' ), // after 3 days
             ],
         );
@@ -607,5 +607,87 @@ trait Admin {
 
 		update_option( 'eael_gb_eb_popup_hide', true );
 		wp_send_json_success();
+	}
+
+	public function eael_black_friday_optin_dismiss() {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		update_option( 'eael_black_friday_optin_hide', true );
+		wp_send_json_success();
+	}
+
+	public function eael_black_friday_optin() {
+		$time     = time();
+		$ajax_url = admin_url( 'admin-ajax.php' );
+		$nonce    = wp_create_nonce( 'essential-addons-elementor' );
+		if ( $time > 1669852799 || get_option( 'eael_black_friday_optin_hide' ) || defined( 'EAEL_PRO_PLUGIN_VERSION' ) ) {
+			return;
+		}
+		?>
+        <style>
+            .eael-black-friday-notice,
+            .eael-black-friday-notice * {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            }
+            .eael-black-friday-notice {
+                padding: 0;
+                border-left-color: #6200ee;
+            }
+            .eael-black-friday-notice .wpnotice-content-wrapper {
+                display: flex;
+            }
+            .eael-black-friday-notice .wpnotice-content-wrapper .eael-black-friday-optin-logo {
+                width: 50px;
+                padding: 10px 0 0;
+                text-align: center;
+                background: rgba(98, 0, 238, .1);
+            }
+            .eael-black-friday-notice .wpnotice-content-wrapper .eael-black-friday-optin {
+                padding-left: 10px;
+            }
+        </style>
+        <div class="wpnotice-wrapper notice notice-info is-dismissible eael-black-friday-notice">
+            <div class="wpnotice-content-wrapper">
+                <div class="eael-black-friday-optin-logo">
+                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-logo.svg' ); ?>" width="25" alt="">
+                </div>
+                <div class="eael-black-friday-optin">
+                    <p><?php _e( '<strong>🎉 Black Friday Exclusive:</strong> SAVE up to 40% & access to Essential Addons Pro features.', 'essential-addons-for-elementor-lite' ); ?>
+                        <a href="https://essential-addons.com/elementor/#pricing" target="_blank"
+                           class="button-primary"><?php _e( 'Grab The Offer', 'essential-addons-for-elementor-lite' ); ?></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            (function ($) {
+                $(document).on('click', '.eael-black-friday-notice button.notice-dismiss', function (e) {
+                    e.preventDefault();
+
+                    var $notice_wrapper = $(this).closest('.eael-black-friday-notice');
+
+                    $.ajax({
+                        url: "<?php echo esc_html( $ajax_url ); ?>",
+                        type: "POST",
+                        data: {
+                            action: "eael_black_friday_optin_dismiss",
+                            security: "<?php echo esc_html( $nonce ); ?>",
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                $notice_wrapper.remove();
+                            } else {
+                                console.log(response.data);
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err.responseText);
+                        },
+                    });
+                });
+            })(jQuery);
+        </script>
+		<?php
 	}
 }

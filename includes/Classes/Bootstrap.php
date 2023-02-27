@@ -72,8 +72,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 2;
-    const EAEL_ADMIN_MENU_FLAG = 2;
+    const EAEL_PROMOTION_FLAG = 3;
+    const EAEL_ADMIN_MENU_FLAG = 3;
     /**
      * Singleton instance
      *
@@ -112,7 +112,7 @@ class Bootstrap
 
         // start plugin tracking
         if (!$this->pro_enabled) {
-            $this->start_plugin_tracking();
+            // $this->start_plugin_tracking();
         }
 
         // register extensions
@@ -192,7 +192,7 @@ class Bootstrap
         add_filter('wp_new_user_notification_email', array($this, 'new_user_notification_email'), 10, 3);
         add_filter('wp_new_user_notification_email_admin', array($this, 'new_user_notification_email_admin'), 10, 3);
         add_action( 'login_init', [$this, 'eael_redirect_to_reset_password'] );
-        
+
         if( 'on' === get_option( 'eael_custom_profile_fields' ) ){
             add_action( 'show_user_profile', [ $this, 'eael_extra_user_profile_fields' ] );
             add_action( 'edit_user_profile', [ $this, 'eael_extra_user_profile_fields' ] );
@@ -200,7 +200,7 @@ class Bootstrap
             add_action( 'personal_options_update', [ $this, 'eael_save_extra_user_profile_fields' ] );
             add_action( 'edit_user_profile_update', [ $this, 'eael_save_extra_user_profile_fields' ] );
         }
-        
+
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'toc_rank_math_support']);
 
@@ -279,8 +279,13 @@ class Bootstrap
 		        add_action( 'init', [ $this, 'register_wc_hooks' ], 5 );
 	        }
 
-	        //add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
+			// update admin menu notice flag once visit EA settings page
+	        add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
 
+	        // Black Friday Optin
+	        add_action( 'admin_notices', [ $this, 'eael_black_friday_optin' ] );
+	        add_action( 'eael_admin_notices', [ $this, 'eael_black_friday_optin' ] );
+	        add_action( 'wp_ajax_eael_black_friday_optin_dismiss', [ $this, 'eael_black_friday_optin_dismiss' ] );
         }
 
 	    // beehive theme compatibility

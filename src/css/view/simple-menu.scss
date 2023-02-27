@@ -116,9 +116,9 @@
                 &.eael-simple-menu-vertical {
                     background-color: #1BC1FF;
 
-                    li.current-menu-ancestor>a,
+                    li.current-menu-ancestor>a.eael-item-active,
                     li:hover > a,
-                    li.current-menu-item > a {
+                    li.current-menu-item > a.eael-item-active {
                         color: #fff;
                     }
                 }
@@ -569,18 +569,18 @@
                 color: #fff;
             }
             
-            li.current-menu-ancestor>a,
+            li.current-menu-ancestor>a.eael-item-active,
             li:hover > a,
-            li.current-menu-item > a {
+            li.current-menu-item > a.eael-item-active {
                 background-color: #743EFF;
             }
 
             li ul {
                 background-color: #743EFF;
 
-                li.current-menu-ancestor>a,
+                li.current-menu-ancestor>a.eael-item-active,
                 li:hover > a,
-                li.current-menu-item > a {
+                li.current-menu-item > a.eael-item-active {
                     background-color: #4E36A3;
                 }
             }
@@ -596,9 +596,9 @@
                 color: #2A1A6C;
             }
 
-            li.current-menu-ancestor>a,
+            li.current-menu-ancestor>a.eael-item-active,
             li:hover > a,
-            li.current-menu-item > a {
+            li.current-menu-item > a.eael-item-active {
                 color: #fff;
                 background-color: #F72C8A;
             }
@@ -611,9 +611,9 @@
                     border-bottom: 1px solid #F72C8A;
                 }
 
-                li.current-menu-ancestor>a,
+                li.current-menu-ancestor>a.eael-item-active,
                 li:hover > a,
-                li.current-menu-item > a {
+                li.current-menu-item > a.eael-item-active {
                     background-color: #f30875;
                 }
             }
@@ -638,9 +638,9 @@
                 border-right: 1px solid #1BC1FF;
             }
 
-            li.current-menu-ancestor>a,
+            li.current-menu-ancestor>a.eael-item-active,
             li:hover > a,
-            li.current-menu-item > a {
+            li.current-menu-item > a.eael-item-active {
                 color: #1BC1FF;
             }
 
@@ -653,9 +653,9 @@
                     border-bottom: 1px solid #1BC1FF;
                 }
 
-                li.current-menu-ancestor>a,
+                li.current-menu-ancestor>a.eael-item-active,
                 li:hover > a,
-                li.current-menu-item > a {
+                li.current-menu-item > a.eael-item-active {
                     color: #1BC1FF;
                 }
             }
