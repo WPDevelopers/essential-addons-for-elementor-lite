@@ -72,8 +72,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 3;
-    const EAEL_ADMIN_MENU_FLAG = 3;
+    const EAEL_PROMOTION_FLAG = 4;
+    const EAEL_ADMIN_MENU_FLAG = 4;
     /**
      * Singleton instance
      *
