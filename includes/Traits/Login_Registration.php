@@ -298,7 +298,14 @@ trait Login_Registration {
 			}
 
             //update_option( 'eael_register_errors_' . $widget_id, $errors, false );// if we redirect to other page, we dont need to save value
-            wp_safe_redirect( site_url( 'wp-login.php?registration=disabled' ) );
+            wp_safe_redirect( 
+				add_query_arg(
+					array(
+						'registration'      => 'disabled',
+					),
+					wp_login_url()
+				) 
+			);
 			exit();
 		}
 		// prepare vars and flag errors
@@ -512,7 +519,15 @@ trait Login_Registration {
 			$user = get_user_by( 'id', $user_id );
 			$key  = get_password_reset_key( $user );
 			if ( ! is_wp_error( $key ) ) {
-				self::$email_options['password_reset_link'] = network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user->user_login ), 'login' ) . "\r\n\r\n";
+				self::$email_options['password_reset_link'] = add_query_arg(
+																array(
+																	'action'	=> 'rp',
+																	'key'		=> $key,
+																	'login'		=> rawurlencode( $user->user_login ),
+																),
+																wp_login_url()
+															);
+				self::$email_options['password_reset_link'] = self::$email_options['password_reset_link'] . "\r\n\r\n";
 			}
 		}
 
@@ -1001,7 +1016,16 @@ trait Login_Registration {
 		if ( ! empty( self::$email_options_lostpassword['message'] ) ) {
 			if ( ! empty( $key ) ) {
 				$locale = get_user_locale( $user_data );
-				self::$email_options_lostpassword['password_reset_link'] = network_site_url( "wp-login.php?action=rp&eael-resetpassword=1&key=$key&login=" . rawurlencode( $user_login ), 'login' ) . '&page_id='. $page_id . '&widget_id='. $widget_id .'&wp_lang=' . $locale . "\r\n\r\n";
+				self::$email_options_lostpassword['password_reset_link'] = add_query_arg(
+					array(
+						'action'				=> 'rp',
+						'eael-resetpassword'	=> 1,
+						'key'					=> $key,
+						'login'					=> rawurlencode( $user_login ),
+					),
+					wp_login_url()
+				);
+				self::$email_options_lostpassword['password_reset_link'] = self::$email_options_lostpassword['password_reset_link'] . '&page_id='. $page_id . '&widget_id='. $widget_id .'&wp_lang=' . $locale . "\r\n\r\n";
 			}
 
 			if( is_object($user_data) ) {
@@ -1146,7 +1170,15 @@ trait Login_Registration {
 				$_message = substr( $_message, strpos( $_message, $start ) + strlen( $start ) );
 				$key      = substr( $_message, 0, strpos( $_message, $end ) );
 				if ( ! empty( $key ) ) {
-					self::$email_options['password_reset_link'] = network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user->user_login ), 'login' ) . "\r\n\r\n";
+					self::$email_options_lostpassword['password_reset_link'] = add_query_arg(
+						array(
+							'action'				=> 'rp',
+							'key'					=> $key,
+							'login'					=> rawurlencode( $user->user_login ),
+						),
+						wp_login_url()
+					);
+					self::$email_options['password_reset_link'] = self::$email_options['password_reset_link'] . "\r\n\r\n";
 				}
 			}
 			$email_data['message'] = $this->replace_placeholders( self::$email_options['message'], 'user' );
