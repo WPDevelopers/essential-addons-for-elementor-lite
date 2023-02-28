@@ -1,10 +1,10 @@
 === Essential Addons for Elementor ===
-Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, manzurahammed, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
 Tested up to: 6.1
 Requires PHP: 7.0
-Stable tag: 5.5.0
+Stable tag: 5.6.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -94,6 +94,7 @@ We have designed more than 50 of the most useful widgets to enhance your Element
 46. [Woo Cart](https://essential-addons.com/elementor/woo-cart/)- Use WooCommerce Cart page to boost online sales
 47. [Interactive Circle](https://essential-addons.com/elementor/interactive-circle/)- Display content with engaging circular layouts
 48. [NFT Gallery](https://essential-addons.com/elementor/nft-gallery/)- Add and showcase NFT collections effortlessly in Elementor
+49. [Business Reviews]( https://essential-addons.com/elementor/business-reviews/)- Display Google Customer Review to increase your online reputation
 
 Extensions (Free): 
 
@@ -242,6 +243,49 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.6.0 - 28/02/2023 =
+
+- Added: EA Business Reviews | New Widget
+- Few minor bug fixes & improvements
+
+= 5.5.4 - 07/02/2023 =
+
+- Fixed: Uncaught Error: Call to a member function iterate_data() on null
+- Fixed: EA Post Timeline | Uncaught DivisionByZeroError
+- Fixed: EA Advanced Tabs | Page getting stuck when trying to visit a tab with unique ID
+- Fixed: EA Product Carousel | Broken Layout in Shoptimizer theme
+- Few minor bug fixes & improvements
+
+
+= 5.5.3 - 25/01/2023 =
+
+- Fixed: Assets not loading inside CartFlows Steps when Astra Theme is activated
+- Fixed: EA Twitter Feed | HashTag '#' and '@' links not working
+- Fixed: EA Scroll to Top | Not hiding on the hero section after scrolling to top
+- Fixed: EA Post Grid | Meta styling not working
+- Fixed: EA Login/Register Form | Some text not supporting HTML anchor markup
+- Fixed: EA Product Gallery | Styles not working in BuddyBoss Theme
+- Fixed: EA Woo Cart | After updating the cart, the Price and checkout button goes missing
+- Fixed: EA Flip Box | After adding a link to the content text that creates a block element
+- Fixed: EA Feature List | Icon design broken when using two templates on a same page
+- Fixed: EA Woo Product Carousel| Displaying pending review or unpublished products
+- Improved: EA Event Calendar | Added the Armenian Language in the Language List
+- Fixed: EA Post Grid | Dynamic Tags not working in Layout Settings
+- Fixed: EA Login/Register Form | Adding redundant string after making registration
+- Fixed: EA Data Table | Content type 'Editor icon' missing
+- Few minor bug fixes & improvements
+
+= 5.5.2 - 22/12/2022 =
+
+- Fixed: EA Event Calendar | URL parameters not working inside manual calendar event link
+- Fixed: EA Info Box | Custom Attribute not working
+- Few minor bug fixes & improvements
+
+= 5.5.1 - 11/12/2022 =
+
+- Fixed: EA Filterable Gallery | Gallery Item name showing default value
+- Few minor bug fixes & improvements
 
 = 5.5.0 - 06/12/2022 =
 

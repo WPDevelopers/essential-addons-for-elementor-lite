@@ -1,4 +1,7 @@
 ea.hooks.addAction("init", "ea", () => {
+	if (ea.elementStatusCheck('eaelAdvancedTabs')) {
+		return false;
+	}
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eael-adv-tabs.default",
 		function ($scope, $) {
@@ -142,11 +145,11 @@ ea.hooks.addAction("init", "ea", () => {
 			});
 
 			// If hashTag is not null then scroll to that hashTag smoothly
-			if( typeof hashTag !== 'undefined' && hashTag ){
+			if( typeof hashTag !== 'undefined' && hashTag && !ea.elementStatusCheck('eaelAdvancedTabScroll')){
 				let $customIdOffsetValTab = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
-				$('html, body').animate({
-					scrollTop: $("#"+hashTag).offset().top - $customIdOffsetValTab,
-				}, 300);
+					$('html, body').animate({
+						scrollTop: $("#"+hashTag).offset().top - $customIdOffsetValTab,
+					}, 300);
 			}
 
 		}

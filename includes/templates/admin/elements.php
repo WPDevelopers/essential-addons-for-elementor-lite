@@ -230,6 +230,14 @@ $elements = [
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-nft-gallery/',
 				'promotion' => 'new',
 			],
+			[
+				'key'       => 'business-reviews',
+				'title'     => __( 'Business Reviews', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/business-reviews/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-business-reviews/',
+				'setting'   => [ 'id' => 'eael-business-reviews-setting' ],
+				'promotion' => 'new',
+			],
 		]
 	],
 	'creative-elements'        => [

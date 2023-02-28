@@ -37,7 +37,7 @@ var SimpleMenu = function ($scope, $) {
             hashURL = $this.attr('href'),
             thisURL = hashURL,
             isStartWithHash,
-            splitURL = thisURL.split('#');
+            splitURL = thisURL !== undefined ? thisURL.split('#') : [];
 
         hashURL = hashURL === undefined ? '' : hashURL;
         isStartWithHash = hashURL.startsWith('#');
