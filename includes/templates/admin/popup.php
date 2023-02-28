@@ -35,6 +35,41 @@
                     </div>
                 </div>
 
+                <div id="eael-business-reviews-popup" class="modal__content__popup">
+                    <div class="modal__head">
+                        <p><?php _e( 'Business Reviews Settings', 'essential-addons-for-elementor-lite' ); ?></p>
+                    </div>
+
+                    <div class="modal__content">
+                        <div class="eael-business_reviews__setup">
+                            <span class="business_reviews__setup__header">
+                                <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/google.svg' ); ?>"
+                                        alt="">
+                                <?php _e( 'Google Reviews', 'essential-addons-for-elementor-lite' ); ?>
+                            </span>
+                            <div class="eael-input__inline">
+                                <label><?php _e( 'Google Place API Key:', 'essential-addons-for-elementor-lite' ); ?></label>
+                                <input name="br_google_place_api_key" id="br_google_place_api_key"
+                                        value="<?php echo esc_attr( get_option( 'eael_br_google_place_api_key' ) ); ?>"
+                                        class="eael-form__control" type="text" placeholder="Google Place API Key">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal__content">
+                        <div class="eael__flex align__center justify__center">
+                            <button class="eael-button button__themeColor mr15 eael-save-trigger eael-admin-popup-close">
+                                <?php _e( 'Save', 'essential-addons-for-elementor-lite' ); ?>
+                            </button>
+                            <button class="eael-button button__white eael-admin-popup-close"><?php _e( 'Cancel', 'essential-addons-for-elementor-lite' ); ?></button>
+                        </div>
+                        <div class="config__api mt15">
+                            <a target="_blank" href="https://developers.google.com/maps/documentation/places/web-service/get-api-key"
+                               class="config__api"> <?php _e( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ); ?></a>
+                        </div>
+                    </div>
+                </div>
+
                 <div id="eael-mailchimp-popup" class="modal__content modal__content__popup">
                     <div class="modal__card">
                         <div class="icon">
