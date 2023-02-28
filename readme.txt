@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.1
 Requires PHP: 7.0
-Stable tag: 5.5.4
+Stable tag: 5.6.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -94,6 +94,7 @@ We have designed more than 50 of the most useful widgets to enhance your Element
 46. [Woo Cart](https://essential-addons.com/elementor/woo-cart/)- Use WooCommerce Cart page to boost online sales
 47. [Interactive Circle](https://essential-addons.com/elementor/interactive-circle/)- Display content with engaging circular layouts
 48. [NFT Gallery](https://essential-addons.com/elementor/nft-gallery/)- Add and showcase NFT collections effortlessly in Elementor
+49. [Business Reviews]( https://essential-addons.com/elementor/business-reviews/)- Display Google Customer Review to increase your online reputation
 
 Extensions (Free): 
 
@@ -242,6 +243,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.6.0 - 28/02/2023 =
+
+- Added: EA Business Reviews | New Widget
+- Few minor bug fixes & improvements
 
 = 5.5.4 - 07/02/2023 =
 
