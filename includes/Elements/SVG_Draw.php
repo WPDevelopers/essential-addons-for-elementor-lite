@@ -74,7 +74,7 @@ class SVG_Draw Extends Widget_Base
         $this->add_control(
             'eael_svg_src',
             [
-                'label' => esc_html__( 'SVG Source Type', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Source', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'icon',
                 'options' => [
@@ -102,39 +102,59 @@ class SVG_Draw Extends Widget_Base
         $this->add_control(
             'svg_html',
             [
-                'label' => esc_html__( 'SVG html', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'SVG Code', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::TEXTAREA,
                 'condition' => [
                     'eael_svg_src' => 'custom'
-                ]
+                ],
+                'description' => esc_html__( 'SVG code needs path elements to draw.', 'essential-addons-for-elementor-lite' ),
             ]
         );
 
-        $this->add_control(
-            'eael_svg_animation_on',
+        $this->add_responsive_control(
+            'eael_svg_width',
             [
-                'label' => esc_html__( 'Animation Action', 'essential-addons-for-elementor-lite' ),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'none',
-                'options' => [
-                    'none' => esc_html__( 'No Animation', 'essential-addons-for-elementor-lite' ),
-                    'page-load' => esc_html__( 'On page load', 'essential-addons-for-elementor-lite' ),
-                    'hover'  => esc_html__( 'Mouse Hover', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%' ],
+                'range' => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 500,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 200,
+                ],
+                'separator' => 'before',
+                'selectors' => [
+                    '{{WRAPPER}} svg' => 'width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
 
-        $this->add_control(
-            'eael_svg_fill',
+        $this->add_responsive_control(
+            'eael_svg_height',
             [
-                'label' => esc_html__( 'Fill After Draw', 'textdomain' ),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => esc_html__( 'Yes', 'textdomain' ),
-                'label_off' => esc_html__( 'No', 'textdomain' ),
-                'return_value' => 'yes',
-                'condition' => [
-                    'eael_svg_animation_on!' => 'none'
-                ]
+                'label' => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 500,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 200,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} svg' => 'height: {{SIZE}}{{UNIT}};',
+                ],
             ]
         );
 
@@ -165,48 +185,31 @@ class SVG_Draw Extends Widget_Base
         );
 
         $this->add_control(
-            'eael_svg_width',
+            'eael_svg_animation_on',
             [
-                'label' => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px' ],
-                'range' => [
-                    'px' => [
-                        'min' => 1,
-                        'max' => 500,
-                        'step' => 1,
-                    ],
+                'label' => esc_html__( 'Animation', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
+                    'page-load' => esc_html__( 'On Page Load', 'essential-addons-for-elementor-lite' ),
+                    'hover'  => esc_html__( 'Mouse Hover', 'essential-addons-for-elementor-lite' ),
                 ],
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 200,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} svg' => 'width: {{SIZE}}{{UNIT}};',
-                ],
+                'separator' => 'before'
             ]
         );
 
         $this->add_control(
-            'eael_svg_height',
+            'eael_svg_fill',
             [
-                'label' => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px' ],
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 500,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 200,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} svg' => 'height: {{SIZE}}{{UNIT}};',
-                ],
+                'label' => esc_html__( 'Fill After Draw', 'textdomain' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Yes', 'textdomain' ),
+                'label_off' => esc_html__( 'No', 'textdomain' ),
+                'return_value' => 'yes',
+                'condition' => [
+                    'eael_svg_animation_on!' => 'none'
+                ]
             ]
         );
 
@@ -219,6 +222,7 @@ class SVG_Draw Extends Widget_Base
                 'max' => 100,
                 'step' => .5,
                 'default' => 5,
+                'description' => esc_html__( 'Duration on SVG draws (in ms)', 'essential-addons-for-elementor-lite' )
             ]
         );
 
@@ -230,6 +234,7 @@ class SVG_Draw Extends Widget_Base
                 'placeholder' => esc_html__( 'https://your-link.com', 'essential-addons-for-elementor-lite' ),
                 'options' => [ 'url' ],
                 'label_block' => true,
+                'separator' => 'before'
             ]
         );
 
@@ -280,11 +285,36 @@ class SVG_Draw Extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_svg_fill_color',
+            [
+                'type' => Controls_Manager::COLOR,
+                'label' => esc_html__( 'Fill Color', 'essential-addons-for-elementor-lite' ),
+                'selectors' => [
+                    '{{WRAPPER}} .elementor-widget-container .fill-svg svg path' => 'fill:{{VALUE}};'
+                ],
+                'default' => '#c36',
+                'condition' => [
+                    'eael_svg_fill' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'eael_svg_background',
+                'types' => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .eael-svg-draw-container',
+            ]
+        );
+
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
                 'name' => 'eael_svg_border',
                 'selector' => '{{WRAPPER}} .eael-svg-draw-container svg',
+                'separator' => 'before'
             ]
         );
 
