@@ -1078,6 +1078,25 @@ $config = [
                 ],
             ],
         ],
+        'business-reviews' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Business_Reviews',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/business-reviews.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+                'js' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/business-reviews.min.js',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
         'svg-draw' => [
             'class' => '\Essential_Addons_Elementor\Elements\SVG_Draw',
             'dependency' => [
