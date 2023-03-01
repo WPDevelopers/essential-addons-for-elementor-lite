@@ -1440,8 +1440,8 @@ class Simple_Menu extends Widget_Base
             );
         }
 
-        $dropdown_options['desktop'] = esc_html__( 'Desktop (> 2400px)', 'essential-addons-for-elementor-lite' );
-        $dropdown_options['none'] = esc_html__( 'None', 'essential-addons-for-elementor-lite' );
+        $dropdown_options['desktop']    = esc_html__( 'Desktop (> 2400px)', 'essential-addons-for-elementor-lite' );
+        $dropdown_options['none']       = esc_html__( 'None', 'essential-addons-for-elementor-lite' );
         
         return $dropdown_options;
     }
