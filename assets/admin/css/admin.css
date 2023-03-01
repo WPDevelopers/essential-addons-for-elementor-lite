@@ -4948,7 +4948,8 @@ button.button__greyBg:hover:disabled {
     text-decoration: underline;
 }
 
-.eael-login__setup .login__setup__header {
+.eael-login__setup .login__setup__header,
+.eael-business_reviews__setup .business_reviews__setup__header {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -4958,15 +4959,18 @@ button.button__greyBg:hover:disabled {
     margin-bottom: 20px;
 }
 
-.eael-login__setup .login__setup__header img {
+.eael-login__setup .login__setup__header img,
+.eael-business_reviews__setup .business_reviews__setup__header img {
     margin-right: 14px;
 }
 
 @media all and (max-width: 575px) {
-    .eael-login__setup .eael-input__inline {
+    .eael-login__setup .eael-input__inline,
+    .eael-business_reviews__setup .eael-input__inline {
         display: block;
     }
-    .eael-login__setup .eael-input__inline label {
+    .eael-login__setup .eael-input__inline label,
+    .eael-business_reviews__setup .eael-input__inline label {
         margin-bottom: 5px;
         display: inline-block;
     }
