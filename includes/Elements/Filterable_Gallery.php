@@ -402,9 +402,12 @@ class Filterable_Gallery extends Widget_Base
                         'name' => 'eael_fg_control_custom_id',
                         'label' => esc_html__('Custom ID', 'essential-addons-for-elementor-lite'),
                         'description' => esc_html__('Adding a custom ID will function as an anchor tag. For instance, if you input "test" as your custom ID, the link will change to "https://www.example.com/#test" and it will immediately open the corresponding tab.', 'essential-addons-for-elementor-lite'),
-                        'label_block' => true,
                         'type' => Controls_Manager::TEXT,
+                        'dynamic'   => ['active' => true],
+                        'label_block' => true,
+                        'default' => esc_html__('Gallery Item', 'essential-addons-for-elementor-lite'),
                     ],
+                    
                 ],
                 'title_field' => '{{eael_fg_control}}',
             ]
