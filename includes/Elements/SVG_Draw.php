@@ -140,7 +140,7 @@ class SVG_Draw Extends Widget_Base
             [
                 'label' => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px', '%' ],
+                'size_units' => [ 'px' ],
                 'range' => [
                     'px' => [
                         'min' => 0,
