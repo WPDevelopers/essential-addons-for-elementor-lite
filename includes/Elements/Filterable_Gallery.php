@@ -405,7 +405,7 @@ class Filterable_Gallery extends Widget_Base
                         'type' => Controls_Manager::TEXT,
                         'dynamic'   => ['active' => true],
                         'label_block' => true,
-                        'default' => esc_html__('Gallery Item', 'essential-addons-for-elementor-lite'),
+                        'default' => esc_html__('', 'essential-addons-for-elementor-lite'),
                     ],
                     
                 ],
