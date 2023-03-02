@@ -891,4 +891,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 				});
 			</script>
 		<?php }
+
+		public function get_used_elements_count() {
+			global $wpdb;
+
+			$sql      = "SELECT `post_id`
+            FROM  $wpdb->postmeta
+            WHERE `meta_key` = '_eael_widget_elements'";
+			$post_ids = $wpdb->get_col( $sql );
+
+			foreach ( $post_ids as $post_id ) {
+				$elements = get_post_meta( (int) $post_id, '_eael_widget_elements', true );
+			}
+
+		}
 	}
