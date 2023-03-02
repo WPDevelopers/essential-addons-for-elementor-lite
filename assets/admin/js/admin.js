@@ -37,6 +37,12 @@
 		$( "#eael-google-map-popup" ).show();
 	} )
 	
+	$( document ).on( 'click', '#eael-business-reviews-setting', function ( event ) {
+		event.preventDefault();
+		eaelPopupBox.show();
+		$( "#eael-business-reviews-popup" ).show();
+	} )
+	
 	$( document ).on( 'click', '#eael-mailchimp-setting', function ( event ) {
 		event.preventDefault();
 		eaelPopupBox.show();

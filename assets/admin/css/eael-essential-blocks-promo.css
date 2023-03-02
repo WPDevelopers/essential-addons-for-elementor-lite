@@ -29,7 +29,7 @@
     left: 50%;
     width: 312px;
     height: 80vh;
-    max-height: 575px;
+    max-height: 595px;
     background: #fff;
     box-shadow: 0 10px 10px rgba(0, 0, 0, .25);
     transform: translate(-50%, -50%);
@@ -173,7 +173,7 @@
 }
 
 .eael-gb-eb-popup .eael-gb-eb-footer {
-    padding: 25px 30px;
+    padding: 10px 30px 20px;
     display: flex;
     justify-content: space-between;
 }

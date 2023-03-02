@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      # node version
+      - uses: actions/setup-node@v2
+        with:
+            node-version: '14'
       - name: Running NPM Install & Build For Gutenberg
         run: |
           npm install --silent && npm run build

@@ -5,7 +5,7 @@
                 <div class="eael-block p30 eael-welcome__card mb30">
                     <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/go-pro.svg' ); ?>"
                          alt="">
-                    <h4><?php _e('Unlock 30+ Advanced PRO Elements to Enhance Your Elementor Site Building Experience','essential-addons-for-elementor-lite'); ?></h4>
+                    <h4><?php _e('Enhance Your Elementor Experience By Unlocking 30+ Advanced PRO Elements','essential-addons-for-elementor-lite'); ?></h4>
                 </div>
             </div>
         </div>
