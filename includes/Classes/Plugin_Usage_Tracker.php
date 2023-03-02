@@ -892,17 +892,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</script>
 		<?php }
 
+		/**
+         * Get Used Elements Count
+         * Get eael all used elements from all pages
+		 * @return array
+         *
+         * @since 3.7.0
+		 */
 		public function get_used_elements_count() {
 			global $wpdb;
 
-			$sql      = "SELECT `post_id`
+			$sql           = "SELECT `post_id`
             FROM  $wpdb->postmeta
             WHERE `meta_key` = '_eael_widget_elements'";
-			$post_ids = $wpdb->get_col( $sql );
+			$post_ids      = $wpdb->get_col( $sql );
+			$used_elements = [];
 
 			foreach ( $post_ids as $post_id ) {
 				$elements = get_post_meta( (int) $post_id, '_eael_widget_elements', true );
+				if ( empty( $elements ) || ! is_array( $elements ) ) {
+					continue;
+				}
+
+				foreach ( $elements as $element ) {
+					$used_elements[ $element ] = isset( $used_elements[ $element ] ) ? $used_elements[ $element ] + 1 : 1;
+				}
 			}
 
+			return $used_elements;
 		}
 	}
