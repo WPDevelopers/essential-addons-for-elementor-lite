@@ -109,7 +109,7 @@ class Helper
             'single',
             'post',
             'page',
-            'archive',
+            // 'archive',
             'search-results',
             'error-404',
             'product',
