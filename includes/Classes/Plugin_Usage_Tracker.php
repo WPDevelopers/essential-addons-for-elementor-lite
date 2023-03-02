@@ -404,6 +404,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			if( $theme->Version ) {
 				$body['theme_version'] = sanitize_text_field( $theme->Version );
 			}
+
+			if ( ! empty( $this->get_used_elements_count() ) ) {
+				$body['optional_data'] = $this->get_used_elements_count();
+			}
+
 			return $body;
 		}
 
