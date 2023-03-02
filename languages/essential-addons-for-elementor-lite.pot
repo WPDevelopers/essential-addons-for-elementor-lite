@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-02-27 11:38+0000\n"
+"POT-Creation-Date: 2023-03-02 06:34+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -40,6 +40,10 @@ msgstr ""
 
 #: ../includes/Classes/Asset_Builder.php:383, ../includes/Elements/Woo_Cart.php:1051, ../includes/Elements/Woo_Checkout.php:266, ../includes/Elements/Woo_Checkout.php:621, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:263
 msgid "Shipping"
+msgstr ""
+
+#: ../includes/Classes/Asset_Builder.php:384
+msgid "of"
 msgstr ""
 
 #: ../includes/Classes/Helper.php:240, ../includes/Elements/Adv_Accordion.php:409, ../includes/Elements/Adv_Tabs.php:345, ../includes/Elements/Contact_Form_7.php:270, ../includes/Elements/Content_Ticker.php:306, ../includes/Elements/Countdown.php:551, ../includes/Elements/Creative_Button.php:188, ../includes/Elements/Cta_Box.php:397, ../includes/Elements/Data_Table.php:482, ../includes/Elements/Dual_Color_Header.php:214, ../includes/Elements/Fancy_Text.php:269, ../includes/Elements/Filterable_Gallery.php:799, ../includes/Elements/Flip_Box.php:733, ../includes/Elements/Info_Box.php:493, ../includes/Elements/Login_Register.php:1638, ../includes/Elements/Pricing_Table.php:719, ../includes/Elements/Progress_Bar.php:271, ../includes/Elements/Team_Member.php:237, ../includes/Elements/Testimonial.php:214, ../includes/Elements/Tooltip.php:518, ../includes/Elements/Twitter_Feed.php:522, ../includes/Elements/WeForms.php:110
