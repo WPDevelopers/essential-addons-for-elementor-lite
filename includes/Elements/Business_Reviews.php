@@ -2976,11 +2976,6 @@ class Business_Reviews extends Widget_Base {
 
 		$this->add_render_attribute( 'eael-google-reviews-content', [
 			'class'               => [ 'eael-google-reviews-content' ],
-			'data-effect'         => esc_attr( $business_reviews['effect'] ),
-			'data-items'          => esc_attr( $business_reviews['columns'] ),
-			'data-items_tablet'   => esc_attr( $business_reviews['columns_tablet'] ),
-			'data-items_mobile'   => esc_attr( $business_reviews['columns_mobile'] ),
-			'data-item_gap'       => esc_attr( $business_reviews['item_gap'] ),
 		] );
 		
 		$this->add_render_attribute( 'eael-google-reviews-grid-body', [
