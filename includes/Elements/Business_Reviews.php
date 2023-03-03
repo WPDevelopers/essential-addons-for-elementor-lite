@@ -293,6 +293,9 @@ class Business_Reviews extends Widget_Base {
 					],
 				],
 				'size_units' => '',
+				'condition' => [
+					'eael_business_reviews_items_layout' => 'slider'
+				],
 			]
 		);
 
