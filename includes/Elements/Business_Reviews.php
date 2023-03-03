@@ -2367,7 +2367,7 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['columns_tablet']   = ! empty( $settings['eael_business_reviews_column_tablet'] ) ? $settings['eael_business_reviews_column_tablet'] : 3;
 		$business_reviews['columns_mobile']   = ! empty( $settings['eael_business_reviews_column_mobile'] ) ? $settings['eael_business_reviews_column_mobile'] : 3;
 		$business_reviews['columns']     	  = ! empty( $settings['eael_business_reviews_column_grid'] ) && 'grid' === $business_reviews['layout'] ? $settings['eael_business_reviews_column_grid'] : $business_reviews['columns'];
-		$business_reviews['columns_class']    = ! empty( $settings['eael_business_reviews_column_grid'] ) && 'grid' === $business_reviews['layout'] ? 'eael-google-reviews-grid-column-' . $settings['eael_business_reviews_column'] : 'eael-google-reviews-grid-column-3';
+		$business_reviews['columns_class']    = ! empty( $settings['eael_business_reviews_column_grid'] ) && 'grid' === $business_reviews['layout'] ? 'eael-google-reviews-grid-column-' . $business_reviews['columns'] : 'eael-google-reviews-grid-column-3';
 		
 		$business_reviews['loop']             = ! empty( $settings['eael_business_reviews_loop'] ) && 'yes' === $settings['eael_business_reviews_loop'] ? 1 : 0;
 		$business_reviews['arrows']           = ! empty( $settings['eael_business_reviews_arrows'] ) && 'yes' === $settings['eael_business_reviews_arrows'] ? 1 : 0;
