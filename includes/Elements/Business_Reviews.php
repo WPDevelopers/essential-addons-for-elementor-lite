@@ -300,6 +300,52 @@ class Business_Reviews extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_business_reviews_grid_row_gap',
+			[
+				'label'      => __( 'Row Gap', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'default'    => [ 'size' => 30 ],
+				'range'      => [
+					'px' => [
+						'min'  => 10,
+						'max'  => 300,
+						'step' => 5,
+					],
+				],
+				'size_units' => '',
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-grid-body' => 'row-gap: {{SIZE}}px;',
+				],
+				'condition' => [
+					'eael_business_reviews_items_layout' => 'grid'
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_grid_column_gap',
+			[
+				'label'      => __( 'Column Gap', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'default'    => [ 'size' => 30 ],
+				'range'      => [
+					'px' => [
+						'min'  => 10,
+						'max'  => 300,
+						'step' => 5,
+					],
+				],
+				'size_units' => '',
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-grid-body' => 'column-gap: {{SIZE}}px;',
+				],
+				'condition' => [
+					'eael_business_reviews_items_layout' => 'grid'
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_business_reviews_slider_speed',
 			[
 				'label'       => __( 'Sliding Speed', 'essential-addons-for-elementor-lite' ),
