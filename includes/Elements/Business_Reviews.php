@@ -567,6 +567,18 @@ class Business_Reviews extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_business_reviews_review_1_star',
+			[
+				'label'        => __( '1 Star', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
 			'eael_business_reviews_reviewer_content',
 			[
 				'label'     => esc_html__( 'Reviewer', 'essential-addons-for-elementor-lite' ),
@@ -2347,6 +2359,7 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['review_time']      = ! empty( $settings['eael_business_reviews_review_time'] ) && 'yes' === $settings['eael_business_reviews_review_time'] ? 1 : 0;
 		$business_reviews['review_text']      = ! empty( $settings['eael_business_reviews_review_text'] ) && 'yes' === $settings['eael_business_reviews_review_text'] ? 1 : 0;
 		$business_reviews['review_rating']    = ! empty( $settings['eael_business_reviews_review_rating'] ) && 'yes' === $settings['eael_business_reviews_review_rating'] ? 1 : 0;
+		$business_reviews['review_1_star']    = ! empty( $settings['eael_business_reviews_review_1_star'] ) && 'yes' === $settings['eael_business_reviews_review_1_star'] ? 1 : 0;
 
 		$business_reviews['business_logo_icon_migrated'] = isset( $settings['__fa4_migrated']['eael_business_reviews_business_logo_icon_new'] );
 		$business_reviews['business_logo_icon_new']      = empty( $settings['eael_business_reviews_business_logo_icon'] );
@@ -2679,6 +2692,12 @@ class Business_Reviews extends Widget_Base {
 								$single_review_data['rating']                    = ! empty( $single_review->rating ) ? $single_review->rating : '';
 								$single_review_data['relative_time_description'] = ! empty( $single_review->relative_time_description ) ? $single_review->relative_time_description : '';
 								$single_review_data['text']                      = ! empty( $single_review->text ) ? $single_review->text : '';
+
+								if( ! $business_reviews['review_1_star'] ){
+									if ( $single_review_data['rating'] === 1 ) {
+										continue;
+									} 
+								}
 
 								$this->add_render_attribute( 'eael-google-reviews-slider-item-' . $i, [
 									'class' => [ 'eael-google-reviews-slider-item', 'clearfix', 'swiper-slide' ]
