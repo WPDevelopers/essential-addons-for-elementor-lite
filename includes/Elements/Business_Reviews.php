@@ -190,6 +190,7 @@ class Business_Reviews extends Widget_Base {
 				'options'   => [
 					'preset-1' => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
 					'preset-2' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
+					'preset-3' => esc_html__( 'Preset 3', 'essential-addons-for-elementor-lite' ),
 				],
 				'condition' => [
 					'eael_business_reviews_items_layout' => 'grid'
