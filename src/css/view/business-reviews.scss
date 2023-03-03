@@ -164,4 +164,26 @@
     .swiper-pagination {
         cursor: pointer;
     }
+
+    .eael-google-reviews-grid-body {
+        display: grid;
+    }
+
+    .eael-google-reviews-grid-column {
+        &-1 {
+            grid-template-columns: auto;
+        }
+
+        &-2 {
+            grid-template-columns: auto auto;
+        }
+
+        &-3 {
+            grid-template-columns: auto auto auto;
+        }
+
+        &-4 {
+            grid-template-columns: auto auto auto auto;
+        }
+    }
 }
