@@ -155,7 +155,7 @@ class Business_Reviews extends Widget_Base {
 			'eael_business_reviews_items_layout',
 			[
 				'label'   => esc_html__( 'Layout Type', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::HIDDEN,
+				'type'    => Controls_Manager::SELECT,
 				'default' => 'slider',
 				'options' => [
 					'slider' => esc_html__( 'Slider', 'essential-addons-for-elementor-lite' ),
@@ -2883,6 +2883,127 @@ class Business_Reviews extends Widget_Base {
 
 	public function print_google_reviews_grid( $google_reviews_data ) {
 		$business_reviews = $this->get_business_reviews_settings();
+
+		$this->add_render_attribute( 'eael-google-reviews-wrapper', [
+			'class' => [ 'eael-google-reviews-wrapper', esc_attr( $business_reviews['preset'] ) ],
+			'id'    => 'eael-google-reviews-' . esc_attr( $this->get_id() ),
+		] );
+
+		$this->add_render_attribute( 'eael-google-reviews-content', [
+			'class'               => [ 'eael-google-reviews-content' ],
+			'data-effect'         => esc_attr( $business_reviews['effect'] ),
+			'data-items'          => esc_attr( $business_reviews['columns'] ),
+			'data-items_tablet'   => esc_attr( $business_reviews['columns_tablet'] ),
+			'data-items_mobile'   => esc_attr( $business_reviews['columns_mobile'] ),
+			'data-item_gap'       => esc_attr( $business_reviews['item_gap'] ),
+		] );
+
+		if ( ! empty( $google_reviews_data['reviews'] ) && count( $google_reviews_data['reviews'] ) ) {
+			$single_review_data = [];
+			?>
+            <div <?php echo $this->get_render_attribute_string( 'eael-google-reviews-wrapper' ); ?>>
+
+                <div class="eael-google-reviews-items eael-google-reviews-grid">
+
+                    <div <?php echo $this->get_render_attribute_string( 'eael-google-reviews-content' ); ?>>
+                        <div class="eael-google-reviews-grid-header">
+							<?php if ( $business_reviews['business_logo'] ): ?>
+                                <div class="eael-google-reviews-business-logo">
+									<?php
+									if ( $business_reviews['business_logo_icon_migrated'] || $business_reviews['business_logo_icon_new'] ) {
+										if ( isset( $business_reviews['business_logo_icon_new_data']['value']['url'] ) ) {
+											Icons_Manager::render_icon( $business_reviews['business_logo_icon_new_data'], [ 'aria-hidden' => 'true' ] );
+										} elseif ( isset( $business_reviews['business_logo_icon_new_data']['value'] ) ) {
+											if ( empty( $business_reviews['business_logo_icon_new_data']['value'] ) ) {
+												?>
+                                                <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="480px" height="480px"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg> <?php
+											} else {
+												printf( '<span class="eael-google-reviews-business-logo-icon %s" aria-hidden="true"></span>', esc_attr( $business_reviews['business_logo_icon_new_data']['value'] ) );
+											}
+										}
+									} else {
+										printf( '<span class="eael-google-reviews-business-logo-icon %s" aria-hidden="true"></span>', esc_attr( $business_reviews['business_logo_icon_data'] ) );
+									}
+									?>
+                                </div>
+							<?php endif; ?>
+
+							<?php if ( $business_reviews['business_name'] ): ?>
+                                <div class="eael-google-reviews-business-name">
+									<?php $business_reviews['business_name_label'] = $business_reviews['business_name_label'] ? $business_reviews['business_name_label'] : $google_reviews_data['name']; ?>
+                                    <a href="<?php echo esc_url( $google_reviews_data['website'] ); ?>" target="_blank"><?php echo esc_html( $business_reviews['business_name_label'] ); ?></a>
+                                </div>
+							<?php endif; ?>
+
+							<?php if ( $business_reviews['business_rating'] ): ?>
+                                <div class="eael-google-reviews-business-rating">
+                                    <p><?php echo esc_html( $google_reviews_data['rating'] ); ?></p>
+                                    <p><?php $this->print_business_reviews_ratings( $google_reviews_data['rating'] ); ?></p>
+                                    <p><a href="<?php echo esc_url( $google_reviews_data['url'] ); ?>" target="_blank"><?php echo esc_html( number_format( $google_reviews_data['user_ratings_total'] ) . ' ' . $business_reviews['google_reviews_label'] ); ?></a></p>
+                                </div>
+							<?php endif; ?>
+
+							<?php if ( $business_reviews['business_address'] ): ?>
+                                <div class="eael-google-reviews-business-address">
+                                    <p><?php printf( '<span>%s</span> %s', esc_html( '' ), esc_html( $google_reviews_data['formatted_address'] ) ); ?></p>
+                                    <p><?php printf( '<span>%s</span> <a href="tel:%s">%s</a>', esc_attr( '' ), esc_html( $google_reviews_data['international_phone_number'] ), esc_attr( $google_reviews_data['international_phone_number'] ) ); ?></p>
+                                </div>
+							<?php endif; ?>
+                        </div>
+
+                        <div class="eael-google-reviews-grid-body">
+							<?php
+							$i = 0;
+
+							foreach ( $google_reviews_data['reviews'] as $single_review ) {
+								$single_review_data['author_name']               = ! empty( $single_review->author_name ) ? $single_review->author_name : '';
+								$single_review_data['author_url']                = ! empty( $single_review->author_url ) ? $single_review->author_url : '';
+								$single_review_data['profile_photo_url']         = ! empty( $single_review->profile_photo_url ) ? $single_review->profile_photo_url : '';
+								$single_review_data['rating']                    = ! empty( $single_review->rating ) ? $single_review->rating : '';
+								$single_review_data['relative_time_description'] = ! empty( $single_review->relative_time_description ) ? $single_review->relative_time_description : '';
+								$single_review_data['text']                      = ! empty( $single_review->text ) ? $single_review->text : '';
+
+								if( ! $business_reviews['review_1_star'] ){
+									if ( $single_review_data['rating'] === 1 ) {
+										continue;
+									} 
+								}
+
+								$this->add_render_attribute( 'eael-google-reviews-grid-item-' . $i, [
+									'class' => [ 'eael-google-reviews-grid-item', 'clearfix' ]
+								] );
+								?>
+
+                                <div <?php echo $this->get_render_attribute_string( 'eael-google-reviews-grid-item-' . $i ); ?>>
+                                    <div class="eael-google-review-reviewer-with-text">
+										<?php
+										switch ( $business_reviews['preset'] ) {
+											case 'preset-1':
+												$this->print_google_reviews_slider_preset_1( $business_reviews, $single_review_data );
+												break;
+											case 'preset-2':
+												$this->print_google_reviews_slider_preset_2( $business_reviews, $single_review_data );
+												break;
+											case 'preset-3':
+												$this->print_google_reviews_slider_preset_3( $business_reviews, $single_review_data );
+												break;
+											default:
+												$this->print_google_reviews_slider_preset_1( $business_reviews, $single_review_data );
+												break;
+										}
+										?>
+                                    </div>
+                                </div>
+								<?php
+								$i ++;
+							}
+							?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<?php
+		}
 	}
 
 	protected function render_dots() {
