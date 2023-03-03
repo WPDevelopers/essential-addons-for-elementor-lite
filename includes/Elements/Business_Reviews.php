@@ -242,6 +242,26 @@ class Business_Reviews extends Widget_Base {
 				],
 			]
 		);
+		
+		$this->add_responsive_control(
+			'eael_business_reviews_column_grid',
+			[
+				'label'              => esc_html__( 'Columns', 'essential-addons-for-elementor-lite' ),
+				'type'               => Controls_Manager::SELECT,
+				'default'            => '3',
+				'tablet_default'     => '2',
+				'mobile_default'     => '1',
+				'options'            => [
+					'1' => esc_html__( '1', 'essential-addons-for-elementor-lite' ),
+					'2' => esc_html__( '2', 'essential-addons-for-elementor-lite' ),
+					'3' => esc_html__( '3', 'essential-addons-for-elementor-lite' ),
+					'4' => esc_html__( '4', 'essential-addons-for-elementor-lite' ),
+				],
+				'frontend_available' => true,
+                'condition'          => [
+					'eael_business_reviews_items_layout'        => 'grid',				],
+			]
+		);
 
 		$this->add_control(
 			'eael_business_reviews_transition_effect',
@@ -2342,9 +2362,13 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['layout']           = ! empty( $settings['eael_business_reviews_items_layout'] ) ? $settings['eael_business_reviews_items_layout'] : 'slider';
 		$business_reviews['preset']           = ! empty( $settings['eael_business_reviews_style_preset_slider'] ) && 'slider' === $business_reviews['layout'] ? $settings['eael_business_reviews_style_preset_slider'] : 'preset-1';
 		$business_reviews['preset']           = ! empty( $settings['eael_business_reviews_style_preset_grid'] ) && 'grid' === $business_reviews['layout'] ? $settings['eael_business_reviews_style_preset_grid'] : $business_reviews['preset'];
+		
 		$business_reviews['columns']          = ! empty( $settings['eael_business_reviews_column'] ) ? $settings['eael_business_reviews_column'] : 3;
 		$business_reviews['columns_tablet']   = ! empty( $settings['eael_business_reviews_column_tablet'] ) ? $settings['eael_business_reviews_column_tablet'] : 3;
 		$business_reviews['columns_mobile']   = ! empty( $settings['eael_business_reviews_column_mobile'] ) ? $settings['eael_business_reviews_column_mobile'] : 3;
+		$business_reviews['columns']     	  = ! empty( $settings['eael_business_reviews_column_grid'] ) && 'grid' === $business_reviews['layout'] ? $settings['eael_business_reviews_column_grid'] : $business_reviews['columns'];
+		$business_reviews['columns_class']    = ! empty( $settings['eael_business_reviews_column_grid'] ) && 'grid' === $business_reviews['layout'] ? 'eael-google-reviews-grid-column-' . $settings['eael_business_reviews_column'] : 'eael-google-reviews-grid-column-3';
+		
 		$business_reviews['loop']             = ! empty( $settings['eael_business_reviews_loop'] ) && 'yes' === $settings['eael_business_reviews_loop'] ? 1 : 0;
 		$business_reviews['arrows']           = ! empty( $settings['eael_business_reviews_arrows'] ) && 'yes' === $settings['eael_business_reviews_arrows'] ? 1 : 0;
 		$business_reviews['dots']             = ! empty( $settings['eael_business_reviews_dots'] ) && 'yes' === $settings['eael_business_reviews_dots'] ? 1 : 0;
@@ -2902,6 +2926,10 @@ class Business_Reviews extends Widget_Base {
 			'data-items_mobile'   => esc_attr( $business_reviews['columns_mobile'] ),
 			'data-item_gap'       => esc_attr( $business_reviews['item_gap'] ),
 		] );
+		
+		$this->add_render_attribute( 'eael-google-reviews-grid-body', [
+			'class'               => [ 'eael-google-reviews-grid-body', esc_attr( $business_reviews['columns_class'] ) ],
+		] );
 
 		if ( ! empty( $google_reviews_data['reviews'] ) && count( $google_reviews_data['reviews'] ) ) {
 			$single_review_data = [];
@@ -2956,7 +2984,7 @@ class Business_Reviews extends Widget_Base {
 							<?php endif; ?>
                         </div>
 
-                        <div class="eael-google-reviews-grid-body">
+                        <div <?php echo $this->get_render_attribute_string( 'eael-google-reviews-grid-body' ); ?> >
 							<?php
 							$i = 0;
 
@@ -2975,7 +3003,7 @@ class Business_Reviews extends Widget_Base {
 								}
 
 								$this->add_render_attribute( 'eael-google-reviews-grid-item-' . $i, [
-									'class' => [ 'eael-google-reviews-grid-item', 'clearfix' ]
+									'class' => [ 'eael-google-reviews-grid-item' ]
 								] );
 								?>
 
