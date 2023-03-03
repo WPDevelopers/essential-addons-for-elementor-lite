@@ -786,6 +786,7 @@ class Business_Reviews extends Widget_Base {
 				'size_units' => [ 'px', 'em' ],
 				'selectors'  => [
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-grid-header' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -798,6 +799,7 @@ class Business_Reviews extends Widget_Base {
 				'size_units' => [ 'px', 'em' ],
 				'selectors'  => [
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-grid-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -817,6 +819,7 @@ class Business_Reviews extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header' => 'border-radius: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-grid-header' => 'border-radius: {{SIZE}}px;',
 				],
 			]
 		);
@@ -834,6 +837,7 @@ class Business_Reviews extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-grid-header' => 'background: {{VALUE}};',
 				],
 			]
 		);
@@ -842,7 +846,7 @@ class Business_Reviews extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'eael_business_reviews_header_normal_border',
-				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header',
+				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header, {{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-grid-header',
 			]
 		);
 
@@ -850,7 +854,7 @@ class Business_Reviews extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'eael_business_reviews_header_normal_box_shadow',
-				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header',
+				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header, {{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-grid-header',
 			]
 		);
 
@@ -867,6 +871,7 @@ class Business_Reviews extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header:hover' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-grid-header:hover' => 'background: {{VALUE}};',
 				],
 			]
 		);
@@ -875,7 +880,7 @@ class Business_Reviews extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'eael_business_reviews_header_hover_border',
-				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header:hover',
+				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header:hover, {{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-grid-header:hover',
 			]
 		);
 
@@ -883,7 +888,7 @@ class Business_Reviews extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'eael_business_reviews_header_hover_box_shadow',
-				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header:hover',
+				'selector' => '{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header:hover, {{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-grid-header:hover',
 			]
 		);
 
@@ -913,6 +918,7 @@ class Business_Reviews extends Widget_Base {
 				'default'   => 'center',
 				'selectors' => [
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-slider-header'   => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-grid-header'   => 'text-align: {{VALUE}};',
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating' => 'justify-content: {{VALUE}};',
 				],
 			]
