@@ -1764,6 +1764,28 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'eael_business_reviews_review_text_height',
+			[
+				'label'      => __( 'Height', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'range'      => [
+					'px' => [
+						'min'  => 15,
+						'max'  => 200,
+						'step' => 1,
+					],
+				],
+				'size_units' => [ 'px' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text' => 'height: {{SIZE}}{{UNIT}}; overflow-y: auto;',
+				],
+				'condition'  => [
+					'eael_business_reviews_review_text' => 'yes',
+				],
+			]
+		);
+
 		$this->add_control(
 			'eael_business_reviews_review_rating_label',
 			[
