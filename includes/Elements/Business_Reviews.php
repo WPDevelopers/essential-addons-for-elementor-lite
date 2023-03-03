@@ -1920,6 +1920,7 @@ class Business_Reviews extends Widget_Base {
 				'label'     => esc_html__( 'Arrows', 'essential-addons-for-elementor-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
+					'eael_business_reviews_items_layout' => 'slider',
 					'eael_business_reviews_arrows' => 'yes',
 				],
 			]
@@ -2165,6 +2166,7 @@ class Business_Reviews extends Widget_Base {
 				'label'     => esc_html__( 'Dots', 'essential-addons-for-elementor-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
+					'eael_business_reviews_items_layout' => 'slider',
 					'eael_business_reviews_dots' => 'yes',
 				],
 			]
