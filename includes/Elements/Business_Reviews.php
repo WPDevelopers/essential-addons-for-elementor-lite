@@ -385,6 +385,9 @@ class Business_Reviews extends Widget_Base {
 				'label'     => esc_html__( 'Navigation', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
+				'condition'    => [
+					'eael_business_reviews_items_layout' => 'slider'
+				],
 			]
 		);
 
