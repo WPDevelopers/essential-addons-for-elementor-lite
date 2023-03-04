@@ -170,15 +170,43 @@
 .eael-business-reviews-wrapper .eael-google-reviews-grid-body {
   display: grid;
 }
-.eael-business-reviews-wrapper .eael-google-reviews-grid-column-1 {
+.eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-1 {
   grid-template-columns: auto;
 }
-.eael-business-reviews-wrapper .eael-google-reviews-grid-column-2 {
+.eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-2 {
   grid-template-columns: auto auto;
 }
-.eael-business-reviews-wrapper .eael-google-reviews-grid-column-3 {
+.eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-3 {
   grid-template-columns: auto auto auto;
 }
-.eael-business-reviews-wrapper .eael-google-reviews-grid-column-4 {
+.eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-4 {
   grid-template-columns: auto auto auto auto;
+}
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-tablet-1 {
+    grid-template-columns: auto;
+  }
+  .eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-tablet-2 {
+    grid-template-columns: auto auto;
+  }
+  .eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-tablet-3 {
+    grid-template-columns: auto auto auto;
+  }
+  .eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-tablet-4 {
+    grid-template-columns: auto auto auto auto;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-mobile-1 {
+    grid-template-columns: auto;
+  }
+  .eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-mobile-2 {
+    grid-template-columns: auto auto;
+  }
+  .eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-mobile-3 {
+    grid-template-columns: auto auto auto;
+  }
+  .eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-mobile-4 {
+    grid-template-columns: auto auto auto auto;
+  }
 }
