@@ -168,23 +168,67 @@
 
     .eael-google-reviews-grid-body {
         display: grid;
+
+        &.eael-column {
+            &-1 {
+                grid-template-columns: auto;
+            }
+    
+            &-2 {
+                grid-template-columns: auto auto;
+            }
+    
+            &-3 {
+                grid-template-columns: auto auto auto;
+            }
+    
+            &-4 {
+                grid-template-columns: auto auto auto auto;
+            }
+        }
     }
 
-    .eael-google-reviews-grid-column {
-        &-1 {
-            grid-template-columns: auto;
+    @media only screen and (min-width: 768px) and (max-width: 1023px) {
+        .eael-google-reviews-grid-body {
+            &.eael-column-tablet {
+                &-1 {
+                    grid-template-columns: auto;
+                }
+        
+                &-2 {
+                    grid-template-columns: auto auto;
+                }
+        
+                &-3 {
+                    grid-template-columns: auto auto auto;
+                }
+        
+                &-4 {
+                    grid-template-columns: auto auto auto auto;
+                }
+            }
         }
+    }
 
-        &-2 {
-            grid-template-columns: auto auto;
-        }
-
-        &-3 {
-            grid-template-columns: auto auto auto;
-        }
-
-        &-4 {
-            grid-template-columns: auto auto auto auto;
+    @media only screen and (max-width: 767px) {
+        .eael-google-reviews-grid-body {
+            &.eael-column-mobile {
+                &-1 {
+                    grid-template-columns: auto;
+                }
+        
+                &-2 {
+                    grid-template-columns: auto auto;
+                }
+        
+                &-3 {
+                    grid-template-columns: auto auto auto;
+                }
+        
+                &-4 {
+                    grid-template-columns: auto auto auto auto;
+                }
+            }
         }
     }
 }

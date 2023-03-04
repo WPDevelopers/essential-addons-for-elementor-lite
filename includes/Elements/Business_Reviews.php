@@ -2454,12 +2454,12 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['arrows_type']               		= ! empty( $settings['eael_business_reviews_arrows_type'] ) 			? $settings['eael_business_reviews_arrows_type'] 			: 'fa fa-angle-right';
 
 		if( 'grid' === $business_reviews['layout'] ){
-			$business_reviews['columns']     	  			= ! empty( $settings['eael_business_reviews_column_grid'] ) 		? $settings['eael_business_reviews_column_grid'] 		: 3;
-			$business_reviews['columns_tablet']   			= ! empty( $settings['eael_business_reviews_column_grid_tablet'] ) 	? $settings['eael_business_reviews_column_grid_tablet'] : 2;
-			$business_reviews['columns_mobile']   			= ! empty( $settings['eael_business_reviews_column_grid_mobile'] ) 	? $settings['eael_business_reviews_column_grid_mobile'] : 1;
-			$business_reviews['columns_class']    			= ! empty( $settings['eael_business_reviews_column_grid'] ) 		? 'eael-column-' . $business_reviews['columns'] 		: 'eael-column-3';
-			$business_reviews['columns_tablet_class']  		= ! empty( $settings['eael_business_reviews_column_grid_tablet'] ) 	? 'eael-column-tablet-' . $business_reviews['columns'] 	: 'eael-column-tablet-2';
-			$business_reviews['columns_mobile_class'] 		= ! empty( $settings['eael_business_reviews_column_grid_mobile'] ) 	? 'eael-column-mobile-' . $business_reviews['columns'] 	: 'eael-column-mobile-1';	
+			$business_reviews['columns']     	  			= ! empty( $settings['eael_business_reviews_column_grid'] ) 		? $settings['eael_business_reviews_column_grid'] 				: 3;
+			$business_reviews['columns_tablet']   			= ! empty( $settings['eael_business_reviews_column_grid_tablet'] ) 	? $settings['eael_business_reviews_column_grid_tablet'] 		: 2;
+			$business_reviews['columns_mobile']   			= ! empty( $settings['eael_business_reviews_column_grid_mobile'] ) 	? $settings['eael_business_reviews_column_grid_mobile'] 		: 1;
+			$business_reviews['columns_class']    			= ! empty( $settings['eael_business_reviews_column_grid'] ) 		? 'eael-column-' . $business_reviews['columns'] 				: 'eael-column-3';
+			$business_reviews['columns_tablet_class']  		= ! empty( $settings['eael_business_reviews_column_grid_tablet'] ) 	? 'eael-column-tablet-' . $business_reviews['columns_tablet'] 	: 'eael-column-tablet-2';
+			$business_reviews['columns_mobile_class'] 		= ! empty( $settings['eael_business_reviews_column_grid_mobile'] ) 	? 'eael-column-mobile-' . $business_reviews['columns_mobile'] 	: 'eael-column-mobile-1';	
 		}
 
 		if ( 'slider' === $business_reviews['layout'] && 'preset-2' === $business_reviews['preset'] ) {
@@ -2983,11 +2983,16 @@ class Business_Reviews extends Widget_Base {
 		] );
 
 		$this->add_render_attribute( 'eael-google-reviews-content', [
-			'class'               => [ 'eael-google-reviews-content' ],
+			'class'	=> [ 'eael-google-reviews-content' ],
 		] );
 		
 		$this->add_render_attribute( 'eael-google-reviews-grid-body', [
-			'class'               => [ 'eael-google-reviews-grid-body', esc_attr( $business_reviews['columns_class'] ) ],
+			'class'	=> [ 
+						'eael-google-reviews-grid-body', 
+						esc_attr( $business_reviews['columns_class'] ), 
+						esc_attr( $business_reviews['columns_tablet_class'] ), 
+						esc_attr( $business_reviews['columns_mobile_class'] ) 
+			],
 		] );
 
 		if ( ! empty( $google_reviews_data['reviews'] ) && count( $google_reviews_data['reviews'] ) ) {
