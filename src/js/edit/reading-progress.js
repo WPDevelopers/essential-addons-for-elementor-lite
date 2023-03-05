@@ -29,7 +29,8 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 	elementor.settings.page.addChangeCallback(
 		"eael_ext_reading_progress_fill_color",
 		function (newValue) {
-			jQuery('.eael-reading-progress-wrap .eael-reading-progress-fill').addClass('fill-color-overwrite');
+			let idSelector = jQuery('.eael-reading-progress-wrap').attr('id');
+			jQuery(`#${idSelector}  .eael-reading-progress .eael-reading-progress-fill`).css('background-color', newValue);
 		}
 	);
 });
