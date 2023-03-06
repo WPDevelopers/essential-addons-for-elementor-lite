@@ -594,7 +594,7 @@ $config = [
                 ],
             ],
         ],
-        'ninja-form' => [
+        'ninja' => [
             'class' => '\Essential_Addons_Elementor\Elements\NinjaForms',
             'dependency' => [
                 'css' => [
