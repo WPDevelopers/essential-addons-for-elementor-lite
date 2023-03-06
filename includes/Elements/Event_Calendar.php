@@ -1656,7 +1656,7 @@ class Event_Calendar extends Widget_Base
                     '{{WRAPPER}} .eaelec-modal-body' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eaelec-modal-body *' => 'color: {{VALUE}};',
                 ],
-                'default' => '#000'
+                'default' => '#555'
             ]
         );
 
