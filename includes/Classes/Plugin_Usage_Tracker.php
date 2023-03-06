@@ -915,12 +915,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			foreach ( $post_ids as $post_id ) {
 				$ea_elements = get_post_meta( (int) $post_id, '_eael_widget_elements', true );
+				$el_controls = get_post_meta( (int) $post_id, '_elementor_controls_usage', true );
 				if ( empty( $ea_elements ) || ! is_array( $ea_elements ) ) {
 					continue;
 				}
 
 				foreach ( $ea_elements as $element ) {
-					$used_elements[ $element ] = isset( $used_elements[ $element ] ) ? $used_elements[ $element ] + 1 : 1;
+					$used_elements[ $element ] = isset( $used_elements[ $element ] ) ? $used_elements[ $element ] + $el_controls[ "eael-{$element}" ]['count'] : $el_controls[ "eael-{$element}" ]['count'];
 				}
 			}
 
