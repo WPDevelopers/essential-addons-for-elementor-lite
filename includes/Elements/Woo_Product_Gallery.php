@@ -2469,7 +2469,10 @@ class Woo_Product_Gallery extends Widget_Base {
 	 */
 	public function build_product_query( $settings ) {
 		$get_product_cats = $settings[ 'eael_product_gallery_categories' ];
+		$get_product_tags = $settings[ 'eael_product_gallery_tags' ];
 		$product_cats     = str_replace( ' ', '', $get_product_cats );
+		$product_tags_items = str_replace( ' ', '', $get_product_tags );
+
 		// Category retrieve
 		$cat_args            = array(
 			'order'      => 'ASC',
@@ -2478,6 +2481,15 @@ class Woo_Product_Gallery extends Widget_Base {
 			'orderby'    => 'include',
 		);
 		$product_categories = get_terms( 'product_cat', $cat_args );
+
+		// Tag retrieve
+		$tag_args            = array(
+			'order'      => 'ASC',
+			'hide_empty' => false,
+			'include'    => $product_tags_items,
+			'orderby'    => 'include',
+		);
+		$product_tags = get_terms( 'product_tag', $tag_args );
 
 		$args = [
 			'post_type'      => 'product',
@@ -2530,6 +2542,30 @@ class Woo_Product_Gallery extends Widget_Base {
 			}
 		}
 
+		if ( ! empty( $settings[ 'eael_product_gallery_tags' ] ) ) {
+			if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == '' ) {
+				if ( ! empty( $product_tags_items ) && count( $product_tags ) > 0 ) {
+					$args[ 'tax_query' ] = [
+						[
+							'taxonomy' => 'product_tag',
+							'field'    => 'term_id',
+							'terms'    => $product_tags[ 0 ]->term_id,
+							'operator' => 'IN',
+						],
+					];
+				}
+			} else {
+				$args[ 'tax_query' ] = [
+					[
+						'taxonomy' => 'product_tag',
+						'field'    => 'term_id',
+						'terms'    => $settings[ 'eael_product_gallery_tags' ],
+						'operator' => 'IN',
+					],
+				];
+			}
+		}
+
 		$args[ 'meta_query' ] = [ 'relation' => 'AND' ];
 
 		if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' ) {
@@ -2560,6 +2596,14 @@ class Woo_Product_Gallery extends Widget_Base {
 					'taxonomy' => 'product_cat',
 					'field'    => 'term_id',
 					'terms'    => $settings[ 'eael_product_gallery_categories' ],
+				];
+			}
+
+			if ( $settings[ 'eael_product_gallery_tags' ] ) {
+				$args[ 'tax_query' ][] = [
+					'taxonomy' => 'product_tag',
+					'field'    => 'term_id',
+					'terms'    => $settings[ 'eael_product_gallery_tags' ],
 				];
 			}
 		} else if ( $settings[ 'eael_product_gallery_product_filter' ] == 'best-selling-products' ) {
