@@ -440,6 +440,17 @@ class Woo_Product_Gallery extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_product_gallery_tags', [
+				'label'       => __( 'Product Tags', 'essential-addons-for-elementor-lite' ),
+				'type'        => 'eael-select2',
+				'source_name' => 'taxonomy',
+				'source_type' => 'product_tag',
+				'label_block' => true,
+				'multiple'    => true,
+			]
+		);
+
+		$this->add_control(
 			'eael_product_gallery_dynamic_template',
 			[
 				'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
