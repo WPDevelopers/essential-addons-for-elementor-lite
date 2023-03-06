@@ -1643,7 +1643,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'event_popup_content_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .eaelec-modal-body',
+                'selector' => '{{WRAPPER}} .eaelec-modal-body, {{WRAPPER}} .eaelec-modal-body *',
             ]
         );
 
@@ -1654,7 +1654,9 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eaelec-modal-body' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eaelec-modal-body *' => 'color: {{VALUE}};',
                 ],
+                'default' => '#000'
             ]
         );
 
