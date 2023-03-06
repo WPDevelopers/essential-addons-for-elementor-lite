@@ -914,12 +914,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$used_elements = [];
 
 			foreach ( $post_ids as $post_id ) {
-				$elements = get_post_meta( (int) $post_id, '_eael_widget_elements', true );
-				if ( empty( $elements ) || ! is_array( $elements ) ) {
+				$ea_elements = get_post_meta( (int) $post_id, '_eael_widget_elements', true );
+				if ( empty( $ea_elements ) || ! is_array( $ea_elements ) ) {
 					continue;
 				}
 
-				foreach ( $elements as $element ) {
+				foreach ( $ea_elements as $element ) {
 					$used_elements[ $element ] = isset( $used_elements[ $element ] ) ? $used_elements[ $element ] + 1 : 1;
 				}
 			}
