@@ -202,7 +202,11 @@ var EventCalendar = function ($scope, $) {
 							$(".eaelec-modal-body").css("height", "300px");
 						}
 
-						$(".eaelec-modal-footer a").attr("href", event.url);
+						if (event.extendedProps.hide_details_link !== 'yes' ){
+							$(".eaelec-modal-footer a").attr("href", event.url).css("display", "block");
+						}else {
+							$(".eaelec-modal-footer a").css("display", "none");
+						}
 
 						if (event.extendedProps.external === "on") {
 							$(".eaelec-modal-footer a").attr("target", "_blank");
@@ -214,11 +218,6 @@ var EventCalendar = function ($scope, $) {
 							$.each(event.extendedProps.custom_attributes, function(index,item){
 								$(".eaelec-modal-footer a").attr(item.key, item.value);
 							});
-						}
-						if (event.url == "") {
-							$(".eaelec-modal-footer a").css("display", "none");
-						} else {
-							$(".eaelec-modal-footer a").css("display", "block");
 						}
 
 						// Popup color
