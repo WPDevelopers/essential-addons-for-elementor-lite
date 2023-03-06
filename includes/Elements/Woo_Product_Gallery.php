@@ -2469,8 +2469,9 @@ class Woo_Product_Gallery extends Widget_Base {
 	 */
 	public function build_product_query( $settings ) {
 		$get_product_cats = $settings[ 'eael_product_gallery_categories' ];
-		$get_product_tags = $settings[ 'eael_product_gallery_tags' ];
 		$product_cats     = str_replace( ' ', '', $get_product_cats );
+
+		$get_product_tags = $settings[ 'eael_product_gallery_tags' ];
 		$product_tags_items = str_replace( ' ', '', $get_product_tags );
 
 		// Category retrieve
