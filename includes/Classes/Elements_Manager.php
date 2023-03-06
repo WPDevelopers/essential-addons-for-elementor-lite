@@ -174,7 +174,7 @@ class Elements_Manager {
 	 * replace_widget_name
 	 * Added backward compatibility
 	 */
-	public function replace_widget_name() {
+	public static function replace_widget_name() {
 		return [
 			'eicon-woocommerce'               => 'eael-product-grid',
 			'eael-countdown'                  => 'eael-count-down',
