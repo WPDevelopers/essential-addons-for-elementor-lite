@@ -567,6 +567,22 @@ class Business_Reviews extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_business_reviews_review_text_translation',
+			[
+				'label'        => __( 'Text', 'essential-addons-for-elementor-lite' ),
+				'description'  => __('Reviews will be translated into English.', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+				'condition'	   => [
+					'eael_business_reviews_review_text' => 'yes',
+				]
+			]
+		);
+
+		$this->add_control(
 			'eael_business_reviews_reviewer_content',
 			[
 				'label'     => esc_html__( 'Reviewer', 'essential-addons-for-elementor-lite' ),
