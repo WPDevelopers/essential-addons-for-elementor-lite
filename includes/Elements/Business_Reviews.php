@@ -569,7 +569,7 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_review_text_translation',
 			[
-				'label'        => __( 'Text', 'essential-addons-for-elementor-lite' ),
+				'label'        => __( 'Translation', 'essential-addons-for-elementor-lite' ),
 				'description'  => __('Reviews will be translated into English.', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
@@ -2408,7 +2408,7 @@ class Business_Reviews extends Widget_Base {
 		$args = array(
 			'key'     => sanitize_text_field( $business_reviews['api_key'] ),
 			'placeid' => sanitize_text_field( $business_reviews['place_id'] ),
-			'reviews_no_translations' => sanitize_text_field( $business_reviews['review_text_translation'] ),
+			'reviews_no_translations' => intval( $business_reviews['review_text_translation'] ) ? false : true,
 			'fields'  => sanitize_text_field( 'formatted_address,international_phone_number,name,rating,reviews,url,user_ratings_total,website,photos' ),
 		);
 
