@@ -129,6 +129,18 @@ class Business_Reviews extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_business_reviews_max_reviews',
+			[
+				'label'       => __( 'Reviews to Show', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::NUMBER,
+				'min'         => 0,
+				'max'         => 5,
+				'default'     => 5,
+				'description' => __( 'Max 5 reviews, please specify amount.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
 			'eael_business_reviews_data_cache_time',
 			[
 				'label'       => __( 'Data Cache Time', 'essential-addons-for-elementor-lite' ),
@@ -641,14 +653,14 @@ class Business_Reviews extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_business_reviews_review_1_star',
+			'eael_business_reviews_review_1_star_hide',
 			[
-				'label'        => __( '1 Star', 'essential-addons-for-elementor-lite' ),
+				'label'        => __( 'Hide 1 Star Reviews', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
-				'default'      => 'yes',
+				'default'      => '',
 			]
 		);
 
@@ -2443,7 +2455,7 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['review_time']  		= ! empty( $settings['eael_business_reviews_review_time'] ) && 'yes' === $settings['eael_business_reviews_review_time'] ? 1 : 0;
 		$business_reviews['review_text']   		= ! empty( $settings['eael_business_reviews_review_text'] ) && 'yes' === $settings['eael_business_reviews_review_text'] ? 1 : 0;
 		$business_reviews['review_rating'] 		= ! empty( $settings['eael_business_reviews_review_rating'] ) && 'yes' === $settings['eael_business_reviews_review_rating'] ? 1 : 0;
-		$business_reviews['review_1_star']		= ! empty( $settings['eael_business_reviews_review_1_star'] ) && 'yes' === $settings['eael_business_reviews_review_1_star'] ? 1 : 0;
+		$business_reviews['review_1_star']		= empty( $settings['eael_business_reviews_review_1_star_hide'] ) ? 1 : 0;
 
 		$business_reviews['business_logo_icon_migrated'] 	= isset( $settings['__fa4_migrated']['eael_business_reviews_business_logo_icon_new'] );
 		$business_reviews['business_logo_icon_new']      	= empty( $settings['eael_business_reviews_business_logo_icon'] );
