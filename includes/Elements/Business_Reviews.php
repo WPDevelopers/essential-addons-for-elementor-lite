@@ -2456,6 +2456,7 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['review_text']   		= ! empty( $settings['eael_business_reviews_review_text'] ) && 'yes' === $settings['eael_business_reviews_review_text'] ? 1 : 0;
 		$business_reviews['review_rating'] 		= ! empty( $settings['eael_business_reviews_review_rating'] ) && 'yes' === $settings['eael_business_reviews_review_rating'] ? 1 : 0;
 		$business_reviews['review_1_star']		= empty( $settings['eael_business_reviews_review_1_star_hide'] ) ? 1 : 0;
+		$business_reviews['reviews_max_count']	= ! empty( $settings['eael_business_reviews_max_reviews'] ) ? intval( $settings['eael_business_reviews_max_reviews'] ) : 5;
 
 		$business_reviews['business_logo_icon_migrated'] 	= isset( $settings['__fa4_migrated']['eael_business_reviews_business_logo_icon_new'] );
 		$business_reviews['business_logo_icon_new']      	= empty( $settings['eael_business_reviews_business_logo_icon'] );
@@ -2791,6 +2792,10 @@ class Business_Reviews extends Widget_Base {
 							$i = 0;
 
 							foreach ( $google_reviews_data['reviews'] as $single_review ) {
+								if ( $i >= $business_reviews['reviews_max_count'] ){
+									break;
+								}
+								
 								$single_review_data['author_name']               = ! empty( $single_review->author_name ) ? $single_review->author_name : '';
 								$single_review_data['author_url']                = ! empty( $single_review->author_url ) ? $single_review->author_url : '';
 								$single_review_data['profile_photo_url']         = ! empty( $single_review->profile_photo_url ) ? $single_review->profile_photo_url : '';
@@ -3065,6 +3070,10 @@ class Business_Reviews extends Widget_Base {
 							$i = 0;
 
 							foreach ( $google_reviews_data['reviews'] as $single_review ) {
+								if ( $i >= $business_reviews['reviews_max_count'] ){
+									break;
+								}
+
 								$single_review_data['author_name']               = ! empty( $single_review->author_name ) ? $single_review->author_name : '';
 								$single_review_data['author_url']                = ! empty( $single_review->author_url ) ? $single_review->author_url : '';
 								$single_review_data['profile_photo_url']         = ! empty( $single_review->profile_photo_url ) ? $single_review->profile_photo_url : '';
