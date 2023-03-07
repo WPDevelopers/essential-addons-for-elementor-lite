@@ -904,7 +904,7 @@ if ( ! defined( 'ABSPATH' ) ) {
          *
          * @since 3.7.0
 		 */
-		public function get_used_elements_count() {
+		public static function get_used_elements_count() {
 			global $wpdb;
 
 			$sql           = "SELECT `post_id`
@@ -923,17 +923,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 				foreach ( $ea_elements as $element ) {
 					$element_name        = "eael-{$element}";
 					$replace_widget_name = array_flip( Elements_Manager::replace_widget_name() );
-					$count               = 1;
+					$count               = 0;
 
 					if ( isset( $replace_widget_name[ $element_name ] ) ) {
 						$element_name = $replace_widget_name[ $element_name ];
+					}
+
+					if ( $element_name == 'eael-section-parallax' ) {
+						array_walk_recursive( $el_controls, function ( $value, $key ) use ( &$used_elements, $element_name ) {
+							if ( $key === 'eael_parallax_switcher' ) {
+								$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] ) ? $used_elements[ $element_name ] + $value : $value;
+							}
+						} );
 					}
 
 					if ( ! empty( $el_controls[ $element_name ] ) && is_array( $el_controls[ $element_name ] ) ) {
 						$count = $el_controls[ $element_name ]['count'];
 					}
 
-					$used_elements[ $element ] = isset( $used_elements[ $element ] ) ? $used_elements[ $element ] + $count : $count;
+					$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] ) ? $used_elements[ $element_name ] + $count : $count;
 				}
 			}
 
