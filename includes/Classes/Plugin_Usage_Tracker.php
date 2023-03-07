@@ -923,12 +923,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 				foreach ( $ea_elements as $element ) {
 					$element_name        = "eael-{$element}";
 					$replace_widget_name = array_flip( Elements_Manager::replace_widget_name() );
+					$count               = 1;
 
 					if ( isset( $replace_widget_name[ $element_name ] ) ) {
 						$element_name = $replace_widget_name[ $element_name ];
 					}
 
-					$count                     = $el_controls[ $element_name ]['count'];
+					if ( ! empty( $el_controls[ $element_name ] ) && is_array( $el_controls[ $element_name ] ) ) {
+						$count = $el_controls[ $element_name ]['count'];
+					}
+
 					$used_elements[ $element ] = isset( $used_elements[ $element ] ) ? $used_elements[ $element ] + $count : $count;
 				}
 			}
