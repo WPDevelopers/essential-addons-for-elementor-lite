@@ -929,9 +929,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$element_name = $replace_widget_name[ $element_name ];
 					}
 
-					if ( $element_name == 'eael-section-parallax' ) {
-						array_walk_recursive( $el_controls, function ( $value, $key ) use ( &$used_elements, $element_name ) {
-							if ( $key === 'eael_parallax_switcher' ) {
+					if ( in_array( $element_name, [
+						'eael-reading-progress',
+						'eael-table-of-content',
+						'eael-scroll-to-top',
+						'eael-section-particles',
+						'eael-section-parallax',
+						'eael-tooltip-section',
+						'eael-content-protection',
+						'eael-conditional-display'
+					] ) ) {
+						array_walk_recursive( $el_controls, function ( $value, $key ) use ( &$used_elements ) {
+							$element_name = '';
+
+							if ( $key === 'eael_particle_switch' ) {
+								$element_name = 'eael-section-particles';
+							} elseif ( $key === 'eael_parallax_switcher' ) {
+								$element_name = 'eael-section-parallax';
+							} elseif ( $key === 'eael_tooltip_section_enable' ) {
+								$element_name = 'eael-tooltip-section';
+							} elseif ( $key === 'eael_ext_content_protection' ) {
+								$element_name = 'eael-content-protection';
+							} elseif ( $key === 'eael_cl_enable' ) {
+								$element_name = 'eael-conditional-display';
+							}
+
+							if ( ! empty( $element_name ) ) {
 								$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] ) ? $used_elements[ $element_name ] + $value : $value;
 							}
 						} );
