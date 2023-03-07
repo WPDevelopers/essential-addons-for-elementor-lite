@@ -193,6 +193,7 @@ class SVG_Draw Extends Widget_Base
                 'options' => [
                     'none' => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
                     'page-load' => esc_html__( 'On Page Load', 'essential-addons-for-elementor-lite' ),
+                    'page-scroll' => esc_html__( 'On Page Scroll', 'essential-addons-for-elementor-lite' ),
                     'hover'  => esc_html__( 'Mouse Hover', 'essential-addons-for-elementor-lite' ),
                 ],
                 'separator' => 'before'
@@ -200,15 +201,31 @@ class SVG_Draw Extends Widget_Base
         );
 
         $this->add_control(
+            'eael_svg_loop',
+            [
+                'label' => esc_html__( 'Reverse & Draw Loop', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+                'label_off' => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+                'default' => 'no',
+                'condition' => [
+                    'eael_svg_animation_on!' => [ 'page-scroll', 'none'],
+                ]
+            ]
+        );
+
+        $this->add_control(
             'eael_svg_fill',
             [
-                'label' => esc_html__( 'Fill After Draw', 'textdomain' ),
+                'label' => esc_html__( 'Fill After Draw', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => esc_html__( 'Yes', 'textdomain' ),
-                'label_off' => esc_html__( 'No', 'textdomain' ),
+                'label_on' => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+                'label_off' => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
                 'condition' => [
-                    'eael_svg_animation_on!' => 'none'
+                    'eael_svg_animation_on!' => [ 'page-scroll', 'none'],
+                    'eael_svg_loop' => ''
                 ]
             ]
         );
@@ -218,10 +235,10 @@ class SVG_Draw Extends Widget_Base
             [
                 'label' => esc_html__( 'Speed', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::NUMBER,
-                'min' => .5,
-                'max' => 100,
-                'step' => .5,
-                'default' => 5,
+                'min' => 1,
+                'max' => 300,
+                'step' => 1,
+                'default' => 20,
                 'description' => esc_html__( 'Duration on SVG draws (in ms)', 'essential-addons-for-elementor-lite' )
             ]
         );
@@ -375,7 +392,8 @@ class SVG_Draw Extends Widget_Base
                 esc_attr( $settings['eael_svg_animation_on'] )
                 ],
             'data-fill' => $settings['eael_svg_fill'] === 'yes' ? 'fill-svg' : '',
-            'data-speed' => esc_attr( $settings['eael_svg_draw_speed'] )
+            'data-speed' => esc_attr( $settings['eael_svg_draw_speed'] ),
+            'data-loop' => $settings['eael_svg_loop'] ? esc_attr( $settings['eael_svg_loop'] ) : 'no'
         ]);
 
         if ( ! empty( $settings['eael_svg_link']['url'] ) ) {

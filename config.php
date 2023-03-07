@@ -1109,6 +1109,11 @@ $config = [
                 ],
                 'js' => [
                     [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/drawsvg/drawsvg.min.js',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/svg-draw.min.js',
                         'type' => 'self',
                         'context' => 'view',

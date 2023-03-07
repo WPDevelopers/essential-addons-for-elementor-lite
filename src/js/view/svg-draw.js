@@ -1,4 +1,4 @@
-var SVGDraw = function ($scope, $) {
+var _SVGDraw = function ($scope, $) {
     let wrapper = $('.eael-svg-draw-container', $scope),
         svg_icon = $('svg', wrapper),
         paths = $('path', svg_icon),
@@ -34,6 +34,66 @@ var SVGDraw = function ($scope, $) {
         });
     }else if ( svg_icon.parent().hasClass('page-load') ){
         window.setInterval(draw_line, speed);
+    }
+}
+
+var SVGDraw = function ($scope, $) {
+    let wrapper = $('.eael-svg-draw-container', $scope),
+        svg_icon = $('svg', wrapper),
+        speed = wrapper.data('speed'),
+        is_repeat = wrapper.data('loop'),
+        drawSvg,
+        addOrSubtract,
+        stepCount = 0,
+        $doc = $(document),
+        $win = $(window),
+        max = $doc.height() - $win.height();
+
+    function stepManager() {
+        if (addOrSubtract) {
+            stepCount += 0.01;
+            if (stepCount >= 1) {
+                addOrSubtract = false;
+            }
+        } else {
+            stepCount -= 0.01;
+            if (stepCount <= 0) {
+                addOrSubtract = true;
+            }
+        }
+
+        return stepCount;
+    }
+
+    function drawSVG(){
+        let lastSvg = '';
+        let  drawSvg = setInterval(function() {
+            let currentSvg = svg_icon.html();
+            svg_icon.drawsvg('progress', stepManager());
+
+            if (  currentSvg === lastSvg && is_repeat === 'no'){
+                wrapper.addClass( wrapper.data('fill') )
+                clearInterval(drawSvg);
+            }
+            lastSvg = currentSvg;
+        }, speed);
+    }
+
+    if (svg_icon.parent().hasClass('page-scroll')){
+        $win.on('scroll', function() {
+            let step =( $win.scrollTop() / max );
+            svg_icon.drawsvg('progress', step);
+        });
+    }
+    else if ( svg_icon.parent().hasClass('page-load') ){
+        drawSVG();
+    }
+    else if ( svg_icon.parent().hasClass('hover') ){
+        svg_icon.hover(function (){
+            drawSVG();
+        },function (){
+            window.clearInterval(drawSvg);
+        });
     }
 }
 jQuery(window).on("elementor/frontend/init", function () {
