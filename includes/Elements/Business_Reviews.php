@@ -2341,6 +2341,7 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['review_time']      = ! empty( $settings['eael_business_reviews_review_time'] ) && 'yes' === $settings['eael_business_reviews_review_time'] ? 1 : 0;
 		$business_reviews['review_text']      = ! empty( $settings['eael_business_reviews_review_text'] ) && 'yes' === $settings['eael_business_reviews_review_text'] ? 1 : 0;
 		$business_reviews['review_rating']    = ! empty( $settings['eael_business_reviews_review_rating'] ) && 'yes' === $settings['eael_business_reviews_review_rating'] ? 1 : 0;
+		$business_reviews['review_text_translation']     = ! empty( $settings['eael_business_reviews_review_text_translation'] ) && 'yes' === $settings['eael_business_reviews_review_text_translation'] ? 1 : 0;
 
 		$business_reviews['business_logo_icon_migrated'] = isset( $settings['__fa4_migrated']['eael_business_reviews_business_logo_icon_new'] );
 		$business_reviews['business_logo_icon_new']      = empty( $settings['eael_business_reviews_business_logo_icon'] );
@@ -2407,7 +2408,7 @@ class Business_Reviews extends Widget_Base {
 		$args = array(
 			'key'     => sanitize_text_field( $business_reviews['api_key'] ),
 			'placeid' => sanitize_text_field( $business_reviews['place_id'] ),
-			'reviews_no_translations' => true,
+			'reviews_no_translations' => sanitize_text_field( $business_reviews['review_text_translation'] ),
 			'fields'  => sanitize_text_field( 'formatted_address,international_phone_number,name,rating,reviews,url,user_ratings_total,website,photos' ),
 		);
 
