@@ -1864,7 +1864,7 @@ class Business_Reviews extends Widget_Base {
 				'range'      => [
 					'px' => [
 						'min'  => 15,
-						'max'  => 200,
+						'max'  => 500,
 						'step' => 1,
 					],
 				],
