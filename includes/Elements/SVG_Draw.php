@@ -201,6 +201,21 @@ class SVG_Draw Extends Widget_Base
         );
 
         $this->add_control(
+            'eael_svg_pause_on_hover',
+            [
+                'label' => esc_html__( 'Pause on Hover Off', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+                'label_off' => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+                'default' => 'yes',
+                'condition' => [
+                    'eael_svg_animation_on' => 'hover',
+                ],
+                'description' => esc_html__( 'Pause SVG drawing on mouse leave', 'essential-addons-for-elementor-lite' )
+            ]
+        );
+
+        $this->add_control(
             'eael_svg_loop',
             [
                 'label' => esc_html__( 'Reverse & Draw Loop', 'essential-addons-for-elementor-lite' ),
@@ -393,7 +408,8 @@ class SVG_Draw Extends Widget_Base
                 ],
             'data-fill' => $settings['eael_svg_fill'] === 'yes' ? 'fill-svg' : '',
             'data-speed' => esc_attr( $settings['eael_svg_draw_speed'] ),
-            'data-loop' => $settings['eael_svg_loop'] ? esc_attr( $settings['eael_svg_loop'] ) : 'no'
+            'data-loop' => $settings['eael_svg_loop'] ? esc_attr( $settings['eael_svg_loop'] ) : 'no',
+            'data-pause' => $settings['eael_svg_pause_on_hover'] ? esc_attr( $settings['eael_svg_pause_on_hover'] ) : 'no'
         ]);
 
         if ( ! empty( $settings['eael_svg_link']['url'] ) ) {
