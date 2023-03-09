@@ -133,10 +133,10 @@ class Elements_Manager {
 			return false;
 		}
 
-		$document  = is_object( Plugin::$instance->documents ) ? Plugin::$instance->documents->get( $post_id ) : [];
-		$data      = is_object( $document ) ? $document->get_elements_data() : [];
-		$data      = $this->get_widget_list( $data );
-		$this->save_widgets_list( $post_id, $data, null );
+		$document = is_object( Plugin::$instance->documents ) ? Plugin::$instance->documents->get( $post_id ) : [];
+		$data     = is_object( $document ) ? $document->get_elements_data() : [];
+		$data     = $this->get_widget_list( $data );
+		$this->save_widgets_list( $post_id, $data, false );
 
 		return true;
 	}
@@ -219,7 +219,7 @@ class Elements_Manager {
 			return false;
 		}
 
-		if ( $custom_js !== null ) {
+		if ( $custom_js !== false ) {
 			update_post_meta( $post_id, '_eael_custom_js', $custom_js );
 		}
 
