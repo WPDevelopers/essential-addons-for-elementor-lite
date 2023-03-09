@@ -683,3 +683,22 @@
   text-align: right;
   padding-right: 45px;
 }
+.theme-dt-the7.popup-message-style .ea-woo-checkout .woocommerce-info {
+  position: relative !important;
+  -webkit-transform: none !important;
+      -ms-transform: none !important;
+          transform: none !important;
+  top: 0 !important;
+  left: 0 !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  width: auto !important;
+  -webkit-animation: none !important;
+          animation: none !important;
+}
+.theme-dt-the7.popup-message-style .ea-woo-checkout .woocommerce-info:before {
+  display: none !important;
+}
+.theme-dt-the7.popup-message-style .ea-woo-checkout .woocommerce-info .close-message:before {
+  display: none !important;
+}
