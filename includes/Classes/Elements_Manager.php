@@ -307,18 +307,23 @@ class Elements_Manager {
 		} else if ( $type == 'css' && ! $this->is_edit_mode() ) {
 			$self['view'][] = EAEL_PLUGIN_PATH . "assets/front-end/css/view/general.min.css";
 		}
+
 		foreach ( $elements as $element ) {
 
 			if ( isset( $this->registered_elements[ $element ] ) ) {
 				if ( ! empty( $this->registered_elements[ $element ]['dependency'][ $type ] ) ) {
 					foreach ( $this->registered_elements[ $element ]['dependency'][ $type ] as $file ) {
-						${$file['type']}[ $file['context'] ][] = $file['file'];
+						if ( ! empty( $file['type'] ) && ! empty( $file['context'] ) && ! empty( $file['file'] ) ) {
+							${$file['type']}[ $file['context'] ][] = $file['file'];
+						}
 					}
 				}
 			} elseif ( isset( $this->registered_extensions[ $element ] ) ) {
 				if ( ! empty( $this->registered_extensions[ $element ]['dependency'][ $type ] ) ) {
 					foreach ( $this->registered_extensions[ $element ]['dependency'][ $type ] as $file ) {
-						${$file['type']}[ $file['context'] ][] = $file['file'];
+						if ( ! empty( $file['type'] ) && ! empty( $file['context'] ) && ! empty( $file['file'] ) ) {
+							${$file['type']}[ $file['context'] ][] = $file['file'];
+						}
 					}
 				}
 			}
