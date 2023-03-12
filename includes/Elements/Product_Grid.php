@@ -394,18 +394,6 @@ class Product_Grid extends Widget_Base
 
         ]);
 
-        $this->add_control(
-            'eael_product_grid_products_status',
-            [
-                'label' => __( 'Product Status', 'essential-addons-for-elementor-lite' ),
-                'type' => Controls_Manager::SELECT2,
-                'label_block' => true,
-                'multiple' => true,
-                'default' => [ 'publish', 'pending', 'future' ],
-                'options' => $this->eael_get_product_statuses(),
-            ]
-        );
-
         $this->add_control('eael_product_grid_products_count', [
             'label' => __('Products Count', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::NUMBER,
@@ -420,6 +408,18 @@ class Product_Grid extends Widget_Base
             'type' => Controls_Manager::NUMBER,
             'default' => 0,
         ]);
+
+        $this->add_control(
+            'eael_product_grid_products_status',
+            [
+                'label' => __( 'Product Status', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SELECT2,
+                'label_block' => true,
+                'multiple' => true,
+                'default' => [ 'publish', 'pending', 'future' ],
+                'options' => $this->eael_get_product_statuses(),
+            ]
+        );
 
         $this->add_control('eael_product_grid_categories', [
             'label' => esc_html__('Product Categories', 'essential-addons-for-elementor-lite'),
