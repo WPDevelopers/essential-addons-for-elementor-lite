@@ -1,9 +1,12 @@
 var SVGDraw = function ($scope, $) {
     let wrapper = $('.eael-svg-draw-container', $scope),
         svg_icon = $('svg', wrapper),
-        speed = wrapper.data('speed'),
-        is_repeat = wrapper.data('loop'),
-        pauseOnHover = wrapper.data('pause'),
+        settings = wrapper.data('settings'),
+        speed = settings.speed,
+        is_repeat = settings.loop,
+        pauseOnHover = settings.pause,
+        direction = settings.direction,
+        offset = settings.offset,
         draw_interval,
         addOrSubtract,
         stepCount = 0,
@@ -11,13 +14,43 @@ var SVGDraw = function ($scope, $) {
         $win = $(window),
         max = $doc.height() - $win.height();
 
+    function dashArrayReset(){
+        let largestDashArray = 0, largestPath = '';
+        $('path', svg_icon).each(function() {
+            let dashArray = $(this).css('stroke-dasharray');
+            let dashArrayValue = parseInt(dashArray);
+            if (dashArrayValue > largestDashArray) {
+                largestDashArray = dashArrayValue;
+                largestPath = $(this);
+            }
+        });
+
+        if ( largestDashArray > 500 && settings.fill === 'fill-svg' ){
+            let offset = largestPath.css('stroke-dashoffset');
+            offset = parseInt(offset);
+
+            if ( offset < largestDashArray/2 ){
+                wrapper.addClass(settings.fill);
+            }
+        }
+    }
+
     function stepManager() {
+        dashArrayReset();
         if (addOrSubtract) {
             stepCount += 0.01;
             if (stepCount >= 1) {
                 addOrSubtract = false;
+                if ( settings.fill === 'fill-svg' ){
+                    wrapper.removeClass('fillout-svg').addClass(settings.fill);
+                }
             }
-        } else {
+        }
+        else if ( direction === 'restart' ){
+            stepCount = 0;
+            addOrSubtract = true;
+        }
+        else {
             stepCount -= 0.01;
             if (stepCount <= 0) {
                 addOrSubtract = true;
@@ -29,8 +62,9 @@ var SVGDraw = function ($scope, $) {
 
     if (svg_icon.parent().hasClass('page-scroll')){
         $win.on('scroll', function() {
-            let step =( $win.scrollTop() / max );
+            let step =( ($win.scrollTop()-offset) / max );
             svg_icon.drawsvg('progress', step);
+            dashArrayReset();
         });
     }
     else if ( svg_icon.parent().hasClass('page-load') ){
@@ -40,7 +74,7 @@ var SVGDraw = function ($scope, $) {
             svg_icon.drawsvg('progress', stepManager());
 
             if (  currentSvg === lastSvg && is_repeat === 'no'){
-                wrapper.addClass( wrapper.data('fill') )
+                wrapper.addClass( settings.fill );
                 clearInterval(drawSvg);
             }
             lastSvg = currentSvg;
@@ -49,18 +83,19 @@ var SVGDraw = function ($scope, $) {
     else if ( svg_icon.parent().hasClass('hover') ){
         let lastSvg = '';
         svg_icon.hover(function (){
-            draw_interval = window.setInterval(function (){
-                let currentSvg = svg_icon.html();
-                svg_icon.drawsvg('progress', stepManager());
+            if ( pauseOnHover === 'yes' || typeof draw_interval === 'undefined' ) {
+                draw_interval = window.setInterval(function (){
+                    let currentSvg = svg_icon.html();
+                    svg_icon.drawsvg('progress', stepManager());
 
-                if (  currentSvg === lastSvg && is_repeat === 'no'){
-                    wrapper.addClass( wrapper.data('fill') )
-                    window.clearInterval(draw_interval);
-                }
+                    if (  currentSvg === lastSvg && is_repeat === 'no' ){
+                        wrapper.addClass( settings.fill );
+                        window.clearInterval(draw_interval);
+                    }
 
-                lastSvg = currentSvg;
-            }, speed);
-
+                    lastSvg = currentSvg;
+                }, speed);
+            }
         },function (){
             if ( pauseOnHover === 'yes' ) {
                 window.clearInterval(draw_interval);

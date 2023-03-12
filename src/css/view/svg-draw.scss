@@ -15,7 +15,22 @@
        stroke: #c36;
        stroke-width: 3;
        fill: transparent;
-      stroke-dasharray: 0,9999px;
+       stroke-dasharray: 0,9999px;
+      fill-opacity: 0;
     }
+  }
+
+  &.fill-svg{
+    svg{
+      path{
+        animation-name: FillIn;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+
+  @keyframes FillIn {
+    0% { fill-opacity: 0; }
+    100% { fill-opacity: 1; }
   }
 }
