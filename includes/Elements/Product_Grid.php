@@ -409,6 +409,18 @@ class Product_Grid extends Widget_Base
             'default' => 0,
         ]);
 
+        $this->add_control(
+            'eael_product_grid_products_status',
+            [
+                'label' => __( 'Product Status', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SELECT2,
+                'label_block' => true,
+                'multiple' => true,
+                'default' => [ 'publish', 'pending', 'future' ],
+                'options' => $this->eael_get_product_statuses(),
+            ]
+        );
+
         $this->add_control('eael_product_grid_categories', [
             'label' => esc_html__('Product Categories', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::SELECT2,
@@ -3127,7 +3139,7 @@ class Product_Grid extends Widget_Base
     public function build_product_query( $settings ){
         $args = [
             'post_type' => 'product',
-            'post_status'    => array( 'publish', 'pending', 'future' ),
+            'post_status'    => ! empty( $settings['eael_product_grid_products_status'] ) ? $settings['eael_product_grid_products_status'] : [ 'publish', 'pending', 'future' ],
             'posts_per_page' => $settings['eael_product_grid_products_count'] ?: 4,
             'order' => (isset($settings['order']) ? $settings['order'] : 'desc'),
             'offset' => $settings['product_offset'],
@@ -3207,6 +3219,15 @@ class Product_Grid extends Widget_Base
             $args['order'] = 'DESC';
         }
         return $args;
+    }
+
+    protected function eael_get_product_statuses() {
+        return apply_filters( 'eael/woo-product-grid/product-statuses', [
+            'publish'       => esc_html__( 'Publish', 'essential-addons-for-elementor-lite' ),
+            'draft'         => esc_html__( 'Draft', 'essential-addons-for-elementor-lite' ),
+            'pending'       => esc_html__( 'Pending Review', 'essential-addons-for-elementor-lite' ),
+            'future'        => esc_html__( 'Schedule', 'essential-addons-for-elementor-lite' ),
+        ] );
     }
 
     public function load_quick_view_asset(){
