@@ -302,6 +302,7 @@ class Post_Timeline extends Widget_Base
                 'default'   => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-timeline-post-title .eael-timeline-post-title-text' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .timeline-layout-card .eael-timeline-post-title .eael-timeline-post-title-text-card' => 'color: {{VALUE}};',
                 ],
 
             ]
