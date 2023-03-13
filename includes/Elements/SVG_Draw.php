@@ -111,6 +111,20 @@ class SVG_Draw Extends Widget_Base
             ]
         );
 
+
+
+        $this->add_control(
+            'eael_svg_exclude_color',
+            [
+                'label' => esc_html__( 'Exclude Color', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+                'label_off' => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+                'default' => 'yes',
+                'description' => esc_html__( 'Exclude color from SVG Source (If any).', 'essential-addons-for-elementor-lite' )
+            ]
+        );
+
         $this->add_responsive_control(
             'eael_svg_width',
             [
@@ -254,7 +268,7 @@ class SVG_Draw Extends Widget_Base
         $this->add_control(
             'eael_svg_draw_offset',
             [
-                'label' => esc_html__( 'Offset (px)', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Drawing Start Point', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::NUMBER,
                 'min' => 1,
                 'max' => 1000,
@@ -263,7 +277,7 @@ class SVG_Draw Extends Widget_Base
                 'condition' => [
                     'eael_svg_animation_on' => [ 'page-scroll'],
                 ],
-                'description' => esc_html__( 'From where the draw starts.', 'essential-addons-for-elementor-lite' )
+                'description' => esc_html__( 'The point at which the drawing begins to animate as scrolls down (in pixels).', 'essential-addons-for-elementor-lite' )
             ]
         );
 
@@ -285,7 +299,7 @@ class SVG_Draw Extends Widget_Base
         $this->add_control(
             'eael_svg_loop',
             [
-                'label' => esc_html__( 'Loop', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Repeat Drawing', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
                 'label_off' => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
@@ -474,7 +488,8 @@ class SVG_Draw Extends Widget_Base
             'offset' => esc_attr( $settings['eael_svg_draw_offset'] ),
             'loop' => $settings['eael_svg_loop'] ? esc_attr( $settings['eael_svg_loop'] ) : 'no',
             'pause' => $settings['eael_svg_pause_on_hover'] ? esc_attr( $settings['eael_svg_pause_on_hover'] ) : 'no',
-            'direction' => esc_attr( $settings['eael_svg_animation_direction'] )
+            'direction' => esc_attr( $settings['eael_svg_animation_direction'] ),
+            'excludeFill' => esc_attr( $settings['eael_svg_exclude_color'] )
         ];
 
         $this->add_render_attribute('eael-svg-drow-wrapper', [

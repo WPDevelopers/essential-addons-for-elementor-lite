@@ -14,6 +14,10 @@ var SVGDraw = function ($scope, $) {
         $win = $(window),
         max = $doc.height() - $win.height();
 
+    if ( settings.excludeFill === 'yes' ){
+        $('path', svg_icon).css('fill', '');
+    }
+
     function dashArrayReset(){
         let largestDashArray = 0, largestPath = '';
         $('path', svg_icon).each(function() {
@@ -25,7 +29,7 @@ var SVGDraw = function ($scope, $) {
             }
         });
 
-        if ( largestDashArray > 500 && settings.fill === 'fill-svg' ){
+        if ( largestDashArray < 3999 && largestDashArray/2 > 600 && settings.fill === 'fill-svg' ){
             let offset = largestPath.css('stroke-dashoffset');
             offset = parseInt(offset);
 
@@ -38,7 +42,7 @@ var SVGDraw = function ($scope, $) {
     function stepManager() {
         dashArrayReset();
         if (addOrSubtract) {
-            stepCount += 0.01;
+            stepCount += 0.001;
             if (stepCount >= 1) {
                 addOrSubtract = false;
                 if ( settings.fill === 'fill-svg' ){
@@ -51,7 +55,7 @@ var SVGDraw = function ($scope, $) {
             addOrSubtract = true;
         }
         else {
-            stepCount -= 0.01;
+            stepCount -= 0.001;
             if (stepCount <= 0) {
                 addOrSubtract = true;
             }
