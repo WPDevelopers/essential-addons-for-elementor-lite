@@ -863,4 +863,7 @@ body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper .cart-totals-inner {
   .theme-dt-the7.eael-woo-cart .eael-woo-cart-wrapper .eael-woo-cart-table-warp table.eael-woo-cart-table {
     width: auto;
   }
+  .theme-dt-the7.eael-woo-cart .eael-woo-cart-wrapper .eael-woo-cart-table-warp table.eael-woo-cart-table td {
+    width: auto !important;
+  }
 }
