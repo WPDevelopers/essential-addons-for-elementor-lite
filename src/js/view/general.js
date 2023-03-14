@@ -78,6 +78,8 @@ ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 });
 
 ea.hooks.addAction("ea-lightbox-triggered", "ea", (src_id) => {
+	window.dispatchEvent(new Event('resize'));
+
 	jQuery(src_id).find('.swiper-wrapper').each(function () {
 		let transform = jQuery(this).css('transform');
 		jQuery(this).css('transform', transform);
