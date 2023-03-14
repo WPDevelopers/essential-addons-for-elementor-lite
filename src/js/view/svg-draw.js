@@ -42,7 +42,7 @@ var SVGDraw = function ($scope, $) {
     function stepManager() {
         dashArrayReset();
         if (addOrSubtract) {
-            stepCount += 0.001;
+            stepCount += 0.01;
             if (stepCount >= 1) {
                 addOrSubtract = false;
                 if ( settings.fill === 'fill-svg' ){
@@ -55,7 +55,7 @@ var SVGDraw = function ($scope, $) {
             addOrSubtract = true;
         }
         else {
-            stepCount -= 0.001;
+            stepCount -= 0.01;
             if (stepCount <= 0) {
                 addOrSubtract = true;
             }
