@@ -386,7 +386,7 @@ class SVG_Draw Extends Widget_Base
                     '{{WRAPPER}} svg path' => 'stroke:{{VALUE}};',
                     '{{WRAPPER}} .eael-svg-draw-container .fill-svg svg path' => 'fill:{{VALUE}};'
                 ],
-                'default' => '#c36'
+                'default' => '#000000'
             ]
         );
 
@@ -398,7 +398,7 @@ class SVG_Draw Extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .elementor-widget-container .fill-svg svg path' => 'fill:{{VALUE}};'
                 ],
-                'default' => '#c36',
+                'default' => '#FF677D',
                 'condition' => [
                     'eael_svg_fill!' => 'none'
                 ]
