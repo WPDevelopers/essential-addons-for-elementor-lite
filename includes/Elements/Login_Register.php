@@ -856,6 +856,20 @@ class Login_Register extends Widget_Base {
 		] );
 		do_action( 'eael/login-register/after-pass-visibility-controls', $this );
 
+		/*--Login Fields Button--*/
+		$this->add_control( 'login_form_fields_remember_me_heading', [
+			'label'     => esc_html__( 'Remember Me', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+
+		$this->add_control( 'login_form_fields_remember_me_checked', [
+			'label'     => __( 'Checked By Default', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::SWITCHER,
+			'label_off' => __( 'No', 'essential-addons-for-elementor-lite' ),
+			'label_on'  => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			'default'   => '',
+		] );
 
 		/*--Login Fields Button--*/
 		$this->add_control( 'login_button_heading', [
@@ -4994,7 +5008,8 @@ class Login_Register extends Widget_Base {
 			$btn_text         = ! empty( $this->ds['login_button_text'] ) ? $this->ds['login_button_text'] : '';
 			$show_logout_link = ( ! empty( $this->ds['show_log_out_message'] ) && 'yes' === $this->ds['show_log_out_message'] );
 			$show_rememberme  = ( ! empty( $this->ds['login_show_remember_me'] ) && 'yes' === $this->ds['login_show_remember_me'] );
-			$remember_text         = isset( $this->ds['remember_text'] ) ? $this->ds['remember_text'] : esc_html__( 'Remember Me', 'essential-addons-for-elementor-lite');
+			$remember_text    = isset( $this->ds['remember_text'] ) ? $this->ds['remember_text'] : esc_html__( 'Remember Me', 'essential-addons-for-elementor-lite');
+			$remember_checked = ( ! empty( $this->ds['login_form_fields_remember_me_checked'] ) && 'yes' === $this->ds['login_form_fields_remember_me_checked'] );
 			$rm_type          = ! empty( $this->ds['remember_me_style'] ) ? $this->ds['remember_me_style'] : '';
 			$show_pv_icon     = ( ! empty( $this->ds['password_toggle'] ) && 'yes' === $this->ds['password_toggle'] );
 
@@ -5098,6 +5113,9 @@ class Login_Register extends Widget_Base {
                                             <input name="eael-rememberme"
                                                    type="checkbox"
                                                    id="rememberme"
+												   <?php if ( $remember_checked ) : ?>
+												   checked 
+												   <?php endif; ?>
                                                    class="remember-me <?php echo esc_attr( $rm_type ); ?>"
                                                    value="forever">
                                             <label for="rememberme"
