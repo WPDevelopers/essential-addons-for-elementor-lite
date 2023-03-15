@@ -77,6 +77,16 @@ ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	}
 });
 
+let ea_swiper_slider_init_inside_template = (content) => {
+	window.dispatchEvent(new Event('resize'));
+
+	content = typeof content === 'object' ? content : jQuery(content);
+	content.find('.swiper-wrapper').each(function () {
+		let transform = jQuery(this).css('transform');
+		jQuery(this).css('transform', transform);
+	});
+}
+
 jQuery(window).on("elementor/frontend/init", function () {
 	window.isEditMode = elementorFrontend.isEditMode();
 	window.ea.isEditMode = elementorFrontend.isEditMode();
