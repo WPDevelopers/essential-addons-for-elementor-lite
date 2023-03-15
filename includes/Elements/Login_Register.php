@@ -3932,6 +3932,22 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
+		$this->add_responsive_control( "eael_form_rm_checkbox_margin", [
+			'label'      => __( 'Checkbox Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-menot input" => $this->apply_dim( 'margin' ),
+			],
+			'condition'  => [
+				'remember_me_style_pot' => 'yes',
+			],
+		] );
+
 		$this->add_control( 'eael_rm_label_color', [
 			'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
