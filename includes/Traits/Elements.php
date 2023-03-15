@@ -394,7 +394,7 @@ trait Elements {
 				}
 			}
 
-			$document        = Plugin::$instance->documents->get( $post_id, false );
+			$document = Plugin::$instance->documents->get( $post_id, false );
 
 			if ( is_object( $document ) ) {
 				$settings_data = $document->get_settings();
